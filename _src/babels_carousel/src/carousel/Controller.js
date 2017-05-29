@@ -106,6 +106,7 @@ export default class Controller extends EventDispatcher {
     if (this.moving) {
       return;
     }
+    console.log('Controller.next', this.nextEvents);
     this.dispatch(this.nextEvents);
   }
   /**
@@ -123,9 +124,9 @@ export default class Controller extends EventDispatcher {
    */
   jump(slideIndex) {
     const index = parseInt(slideIndex, 10);
-    if (this.moving) {
-      return;
-    }
+    // if (this.moving) {
+    //   return;
+    // }
     // 同じ時は処理しない
     if (this.index === index) {
       return;
@@ -133,19 +134,30 @@ export default class Controller extends EventDispatcher {
     this.index = index;
     const jumpEvents = this.jumpEvents;
     jumpEvents.index = index;
+    // fire
     this.dispatch(jumpEvents);
   }
   // motion - begin / complete
   // ----------------------------------------
+  /**
+   * CSS animation 開始を通知します
+   */
   begin() {
     clearTimeout(this.timer);
     this.moving = true;
     this.dispatch(this.beginEvents);
   }
+  /**
+   * CSS animation complete を通知します
+   */
   complete() {
     this.dispatch(this.completeEvents);
     this.moving = false;
   }
+  /**
+   * 遅延し `complete` を実行します
+   * @param {number} [delay=0] 遅延時間
+   */
   delayComplete(delay = 0) {
     this.timer = setTimeout(() => {
       this.complete();
@@ -153,9 +165,15 @@ export default class Controller extends EventDispatcher {
   }
   // when dragging - pause polling
   // ----------------------------------------
+  /**
+   * polling pause を通知します
+   */
   pause() {
     this.dispatch(this.pauseEvents);
   }
+  /**
+   * polling resume を通知します
+   */
   resume() {
     this.dispatch(this.resumeEvents);
   }

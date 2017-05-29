@@ -33,7 +33,7 @@ $pickup_response_articles_length = count($pickup_response_articles);
 ?>
 <div id="pickup-container">
   <div class="hero-sec">
-    <div class="hero-slider">
+    <div class="hero-slider pickup-container">
       <?php
       // slideshow
       // --------------------------------------------------------------

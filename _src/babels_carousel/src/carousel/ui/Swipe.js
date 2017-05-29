@@ -36,6 +36,7 @@ export default class Swipe {
   //  METHOD
   // ---------------------------------------------------
   start() {
+    console.log('Swipe.start', this.started, this.touching);
     if (this.started) {
       return;
     }
@@ -47,7 +48,9 @@ export default class Swipe {
     controller.on(Controller.COMPLETE, this.onComplete);
     // -------------------------
     // touching event
-    this.touching.on(Touching.DRAG_START, this.onStart);
+    const touching = this.touching;
+    touching.on(Touching.DRAG_START, this.onStart);
+    touching.start();
   }
   // ---------------------------------------------------
   // event handler
@@ -66,9 +69,10 @@ export default class Swipe {
     const touching = this.touching;
     touching.off(Touching.DRAGGING, this.onDragging);
     touching.off(Touching.DRAG_END, this.onEnd);
-    touching.off(Touching.DRAG_CANACEL, this.onCancel);
+    touching.off(Touching.DRAG_CANCEL, this.onCancel);
   }
   onStart() {
+    console.log('Swipe.onStart', this.enable);
     if (!this.enable) {
       return;
     }
@@ -76,11 +80,12 @@ export default class Swipe {
     const touching = this.touching;
     touching.on(Touching.DRAGGING, this.onDragging);
     touching.on(Touching.DRAG_END, this.onEnd);
-    touching.on(Touching.DRAG_CANACEL, this.onCancel);
+    touching.on(Touching.DRAG_CANCEL, this.onCancel);
     // polling - pause
     this.controller.pause();
   }
   onDragging(events) {
+    console.log('Swipe.onDragging', this.enable, events);
     if (!this.enable) {
       return true;
     }
@@ -102,6 +107,7 @@ export default class Swipe {
     this.dispose();
     this.reset();
     this.left(0);
+    console.log('');
     if (events.swipe.swipeLeft) {
       this.controller.next();
     } else {
@@ -126,6 +132,7 @@ export default class Swipe {
     this.setState({ style: { left: `${x}px` } });
   }
   drag(x) {
+    console.log('Swipe.drag ============= ', x);
     // motion なし
     const style = { left: `${x}px`, transitionDuration: '0s' };
     this.setState({ style });

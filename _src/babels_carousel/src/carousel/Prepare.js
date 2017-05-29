@@ -84,6 +84,23 @@ const width = sp ? 280 : 640;
  *  - {@link Carousel}
  */
 export default class Prepare {
+  /**
+   * 各パーツを作成します
+   * - Prepare
+   *  - {@link Controller}
+   *  - {@link Nav}
+   *  - {@link Pagers}
+   *    - {@link Pager}
+   *  - {@link Articles}
+   *    - {@link Article}
+   *  - {@link Carousel}
+   * @param {number} length スライド数
+   * @param {Element} wrapper div#js-pickup-slider-wrapper
+   * @param {Array.<Element>} pagers li.pager-item - current 対象のみ
+   * @param {Element} prev a.direction-prev
+   * @param {Element} next a.direction-next
+   * @param {Element} element ul#js-pickup-slider
+   */
   static start(length, wrapper, pagers, prev, next, element) {
     // prev / next
     const nav = new Nav(prev, next);

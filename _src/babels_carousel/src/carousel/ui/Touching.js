@@ -33,7 +33,7 @@ export default class Touching extends EventDispatcher {
   static get DRAG_END() {
     return 'controllerDragEnd';
   }
-  static get DRAG_CANACEL() {
+  static get DRAG_CANCEL() {
     return 'controllerDragCancel';
   }
   // // prev
@@ -112,7 +112,7 @@ export default class Touching extends EventDispatcher {
     dragging.between = 0;
     dragging.scrolling = false;
     // drag end
-    const end = new Events(Controller.DRAG_END, this, this);
+    const end = new Events(Touching.DRAG_END, this, this);
     end.swipe = {
       move: false,
       left: false,
@@ -121,18 +121,24 @@ export default class Touching extends EventDispatcher {
     this.draggEvents = {
       dragging,
       end,
-      start: new Events(Controller.DRAG_START, this, this),
-      cancel: new Events(Controller.DRAG_Canacel, this, this),
+      start: new Events(Touching.DRAG_START, this, this),
+      cancel: new Events(Touching.DRAG_CANCEL, this, this),
     };
     // this.swipeEvents = {
     //   left: new Events(Controller.SWIPE_LEFT, this, this),
     //   right: new Events(Controller.SWIPE_RIGHT, this, this),
     // };
+    this.started = false;
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  init() {
+  start() {
+    console.log('Touching.start', this.started);
+    if (this.started) {
+      return;
+    }
+    this.started = true;
     this.element.addEventListener('touchstart', this.onStart, false);
     window.addEventListener('blur', this.onBlur, false);
   }
@@ -141,9 +147,9 @@ export default class Touching extends EventDispatcher {
    */
   dispose() {
     const body = this.body;
-    body.removeEventListener('touchend', this.boundEnd);
-    body.removeEventListener('touchmove', this.boundMove);
-    body.removeEventListener('touchcancel', this.boundCancel);
+    body.removeEventListener('touchend', this.onEnd);
+    body.removeEventListener('touchmove', this.onMove);
+    body.removeEventListener('touchcancel', this.onCancel);
   }
   /**
    * 移動監視に使用した vectors instance を全て reset します
@@ -160,6 +166,7 @@ export default class Touching extends EventDispatcher {
   }
   // ---------------------------------------------------
   onStart(event) {
+    console.log('Touching.onStart', event);
     // event unbind <- 二重 bind にならないように
     this.dispose();
     // vectors を初期化
@@ -171,13 +178,14 @@ export default class Touching extends EventDispatcher {
     vectors.moving.push(vectors.start);
     // キャンセル event 監視を開始
     const body = this.body;
-    body.addEventListener('touchend', this.boundEnd, false);
-    body.addEventListener('touchmove', this.boundMove, false);
-    body.addEventListener('touchcancel', this.boundCancel, false);
+    body.addEventListener('touchend', this.onEnd, false);
+    body.addEventListener('touchmove', this.onMove, false);
+    body.addEventListener('touchcancel', this.onCancel, false);
     // controller 通知
     this.dragStart();
   }
   onMove(event) {
+    // console.log('Touching.onMove', event);
     const vectors = this.vectors;
     const movingArray = vectors.moving;
     // 現在 position
@@ -196,6 +204,7 @@ export default class Touching extends EventDispatcher {
     this.dragging({ position, between, scrolling });
   }
   onEnd(event) {
+    console.log('Touching.onEnd', event);
     // console.log('Touching.onEnd', event);
     const vectors = this.vectors;
 
@@ -209,11 +218,11 @@ export default class Touching extends EventDispatcher {
     position.scrolling = scrolling;
     // 移動量
     const between = position.between(previous);
-    const move = Math.abs(between) >= 10;
+    const move = Math.abs(between.x) >= 10;
     let swipeRight = false;
     let swipeLeft = false;
     if (move) {
-      if (between > 0) {
+      if (between.x > 0) {
         swipeRight = true;
       } else {
         swipeLeft = true;
@@ -221,8 +230,14 @@ export default class Touching extends EventDispatcher {
     }
     // controller 通知
     this.dragEnd({ position, between, scrolling, move, swipeRight, swipeLeft });
+    // event ignore
+    if (!scrolling || move) {
+      return false;
+    }
+    return true;
   }
   onCancel() {
+    console.log('Touching.onCancel');
     this.dispose();
     this.reset();
     this.dragCancel();
@@ -233,6 +248,7 @@ export default class Touching extends EventDispatcher {
   // ---------------------------------------------------
   // drag
   dragStart() {
+    console.log('Touching.dragStart -----------------', this.draggEvents.start);
     this.dispatch(this.draggEvents.start);
   }
   dragging({ position, between, scrolling, move, swipeRight, swipeLeft }) {
@@ -245,9 +261,19 @@ export default class Touching extends EventDispatcher {
       swipeRight,
       swipeLeft,
     };
-    this.dispatch(this.dragging);
+    this.dispatch(dragging);
   }
-  dragEnd() {
+  dragEnd({ position, between, scrolling, move, swipeRight, swipeLeft }) {
+    console.log('Touching.dragEnd -----------------', this.draggEvents.end);
+    const dragging = this.draggEvents.end;
+    dragging.position = position;
+    dragging.between = between;
+    dragging.scrolling = scrolling;
+    dragging.swipe = {
+      move,
+      swipeRight,
+      swipeLeft,
+    };
     this.dispatch(this.draggEvents.end);
   }
   dragCancel() {

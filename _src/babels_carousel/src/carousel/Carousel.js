@@ -106,6 +106,8 @@ export default class Carousel {
      * @type {function}
      */
     this.onJump = this.onJump.bind(this);
+    this.onPause = this.onPause.bind(this);
+    this.onResume = this.onResume.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -140,9 +142,22 @@ export default class Carousel {
     controller.on(Controller.NEXT, this.onNext);
     controller.on(Controller.PREV, this.onPrev);
     controller.on(Controller.JUMP, this.onJump);
+    // swipe
+    controller.on(Controller.PAUSE, this.onPause);
+    controller.on(Controller.RESUME, this.onResume);
     // animation start
     // TODO: test mode - comment 外す
     // this.play();
+  }
+  // --------------------------
+  // from swipe events
+  onPause() {
+    console.log('Carousel.onPause');
+    this.pause();
+  }
+  onResume() {
+    console.log('Carousel.onResume');
+    this.play();
   }
   // --------------------------
   /**
@@ -202,12 +217,12 @@ export default class Carousel {
     // count up します
     let index = this.position + 1;
     console.log('Carousel.next', this.position, index);
-    // last を超えたら 0 に戻す
+    // // last を超えたら 0 に戻す
     if (index > this.last) {
       index = 0;
     }
-    // event fire
-    this.controller.next();
+    // // event fire
+    // this.controller.next();
     // change slide
     this.jump(index);
   }
@@ -221,8 +236,8 @@ export default class Carousel {
     if (index < 0) {
       index = this.last;
     }
-    // event fire
-    this.controller.prev();
+    // // event fire
+    // this.controller.prev();
     // change slide
     this.jump(index);
   }
@@ -309,8 +324,8 @@ export default class Carousel {
   setStyle(css) {
     let style = '';
     console.log('Carousel.setStyle ===============================');
-    const cssKeys = Object.keys(css);
-    let hasTransition = cssKeys.indexOf('transition');
+    // const cssKeys = Object.keys(css);
+    // let hasTransition = cssKeys.indexOf('transition');
     // {property: value} 形式 object から 'property: value;' string へ cast する
     Object.keys(css).map((prop) => {
       style += `${prop}: ${css[prop]};`;
@@ -318,11 +333,11 @@ export default class Carousel {
     console.log('Carousel.setStyle style', style);
     this.wrapper.style.cssText = style;
     console.log('Carousel.setStyle ++++++++++++++++++++++++++++++++');
-    if (hasTransition) {
-      const controller = this.controller;
-      controller.begin();
-      controller.delayComplete(0.5);
-    }
+    // if (hasTransition) {
+    //   const controller = this.controller;
+    //   controller.begin();
+    //   controller.delayComplete(0.5);
+    // }
   }
   // --------------------------
   /**
