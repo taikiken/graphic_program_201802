@@ -30,7 +30,7 @@ export default class Carousel {
   // ---------------------------------------------------
   /**
    * プロパティを初期化します
-   * @param {number} width スライド幅
+   * @param {number} width スライド幅 - sp / pc 幅違います（固定値）
    * @param {number} length スライド数
    * @param {Element} wrapper div#js-pickup-slider-wrapper - transform target
    */
