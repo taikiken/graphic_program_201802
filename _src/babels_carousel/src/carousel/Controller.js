@@ -14,7 +14,17 @@
 import EventDispatcher from '../moku/event/EventDispatcher';
 import Events from '../moku/event/Events';
 
+/**
+ * singleton を保証するための inner Symbol
+ * @private
+ * @type {Symbol}
+ */
 const singletonSymbol = Symbol('Controller singleton instance');
+/**
+ * singleton instance
+ * @private
+ * @type {?Controller}
+ */
 let instance = null;
 
 export default class Controller extends EventDispatcher {

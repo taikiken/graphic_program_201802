@@ -14,7 +14,7 @@
 import Vectors from '../../moku/util/Vectors';
 
 // moku/events
-import EventDispatcher from '../moku/event/EventDispatcher';
+import EventDispatcher from '../../moku/event/EventDispatcher';
 import Events from '../../moku/event/Events';
 
 // controller
