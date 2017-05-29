@@ -20,17 +20,16 @@ if(strlen($f["name"])>0){
 	$categoriesinfo=set_categoriesinfo($f);
 
 	/*
-	
+
 	https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
 	カテゴリーにpickup, hedlineの記事を追加
-	
+
 	pickupとheadlineが同じ場合は、CMS「記事選択」から新規登録で、該当カテゴリーslugにカテゴリー名を入力する。
 	例）クライミング 'climbing'
-	
+
 	pickupとheadlineを分離して管理する場合、CMS「記事選択」から新規登録で、該当カテゴリーslugに '_headline'を付加する。
 	例）クライミング 'climbing_headline'
-	
-	
+
 	*/
 
 	$sql=sprintf("select id from repo where t1='%s'",$category);
@@ -38,7 +37,7 @@ if(strlen($f["name"])>0){
 	$c=$o->fetch_array();
 
 	$uid=auth();
-		
+
 	if(strlen($c["id"])>0){
 
 		$sql=sprintf("select rt1.title as modtitle,rt2.* from (select d2,title,n as sort from u_headline where cid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort",$c["id"],sprintf($articletable,set_isbookmark($uid),""));
@@ -75,7 +74,7 @@ if(strlen($f["name"])>0){
 
 	unset($c);
 	unset($p);
-	
+
 	$sql=sprintf("select id from repo where t1='%s_headline'",$category);
 	$o->query($sql);
 	$c=$o->fetch_array();
@@ -100,7 +99,7 @@ if(strlen($f["name"])>0){
 
 			$categoriesinfo["headline"]["articles"]=$s;
 		}
-		
+
 	}else{
 		$categoriesinfo["headline"]["articles"]=$s;
 	}
@@ -120,7 +119,12 @@ if(strlen($f["name"])>0){
 
   if ( $category === 'big6tv' ) :
 
-    $categoriesinfo['live']          = '/api/big6tv/live';
+    if ( preg_match("/com\.sportsbull\.test/", $_SERVER['HTTP_USER_AGENT'] ) || preg_match("/com\.limret\.undotsushin/", $_SERVER['HTTP_USER_AGENT'] ) ) :
+      // $categoriesinfo['live']          = '';
+    else :
+      $categoriesinfo['live']          = '/api/big6tv/live';
+    endif;
+
     $categoriesinfo['live_interval'] = 10;
     $categoriesinfo['webviews']      = array(
       '/big6tv/webview/',
