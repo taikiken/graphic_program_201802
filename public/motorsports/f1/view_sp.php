@@ -80,17 +80,17 @@
 // -------------------------------------------------------------------------------
 ?>
   <div class="body-sec">
-    <?php
-    // pickup-container - carousel
-    // ===========================================
-    include_once dirname(__DIR__) . '/_include/_pickup_container.php';
-    // ===========================================
-    ?>
     <div class="body-sec-inner">
+      <?php
+      // pickup-container - carousel
+      // ===========================================
+      include_once dirname(__DIR__) . '/_include/_pickup_container.php';
+      // ===========================================
+      ?>
+      <?php
+      // TODO: Powered area 必要か確認 - #ref template/mobile/_category-heading.php
+      ?>
       <section class="main-sec">
-        <div class="sponsor-link mt30">
-          <a href="hoge"><img src="/assets/images/motorsports/bnr-sponsor1.png" alt="xxxxx"></a>
-        </div><!-- /.sponsor-link -->
         <?php
         // headline-container
         // ===========================================
