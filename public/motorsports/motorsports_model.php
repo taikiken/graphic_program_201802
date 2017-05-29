@@ -132,9 +132,11 @@ if (isset($_GET['app'])) {
 // render
 // ==============================
 // $model->property('ua_device') = mobile | tablet | desktop
+$mobile_device = false;
 if ( $model->property('ua_device') === 'mobile' ) :
 
-  // TODO SP:
+  // SP:
+  $mobile_device = true;
   include_once __DIR__ . '/' . $option_directory . '/view_sp.php';
 
 else :

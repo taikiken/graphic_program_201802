@@ -13,7 +13,7 @@
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=1280">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
   <title>XXX | SPORTS BULL</title>
   <meta name="description" content="XXX">
@@ -28,6 +28,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
   <!-- favicon -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
 
   <link rel="canonical" href="https://sportsbull.jp/motorsports/<?php echo $option_directory; ?>/">
@@ -88,7 +94,7 @@
         <?php
         // headline-container
         // ===========================================
-        include_once dirname(__DIR__) . '/_include/_headline_container.php';
+        include_once dirname(__DIR__) . '/_include/_headline_container_sp.php';
         // ===========================================
         ?>
       </section>
