@@ -21,6 +21,10 @@ export default class Pagers {
    * @param {Array<Element>} pagers ul > li.pager-item list
    */
   constructor(pagers) {
+    /**
+     * pagers ul > li.pager-item list
+     * @type {Array.<Element>}
+     */
     this.pagers = pagers;
   }
   /**

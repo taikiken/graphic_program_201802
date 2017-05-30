@@ -23,8 +23,10 @@ import Events from '../../moku/event/Events';
 /**
  * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ
  * # TouchEvent#Using with addEventListener() and preventDefault()
- * > It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.
- * > The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.
+ * <pre>
+ * It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.
+ * The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.
+ * </pre>
  * @private
  * @type {boolean}
  * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
@@ -130,7 +132,7 @@ export default class Touching extends EventDispatcher {
     const y = pointA.betweenY(pointB);
     // 正数値にし閾値と比較
     return Math.abs(y) >= threshold;
-  }とめる
+  }
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
@@ -225,6 +227,10 @@ export default class Touching extends EventDispatcher {
     //   left: new Events(Controller.SWIPE_LEFT, this, this),
     //   right: new Events(Controller.SWIPE_RIGHT, this, this),
     // };
+    /**
+     * start flag
+     * @type {boolean}
+     */
     this.started = false;
   }
   // ---------------------------------------------------
@@ -333,7 +339,7 @@ export default class Touching extends EventDispatcher {
     // 移動量
     const between = position.between(previous);
     // event 通知
-    this.dragging({ position, between, scrolling });
+    this.dragging(position, between, scrolling);
   }
   /**
    * touchend event handler
@@ -373,7 +379,7 @@ export default class Touching extends EventDispatcher {
       }
     }
     // event 通知
-    this.dragEnd({ position, between, scrolling, move, swipeRight, swipeLeft });
+    this.dragEnd(position, between, scrolling, move, swipeRight, swipeLeft);
   }
   /**
    * touchcancel event handler
@@ -410,20 +416,17 @@ export default class Touching extends EventDispatcher {
    * @param {{x: number, y: number}} position 座標情報
    * @param {Vectors} between 移動量
    * @param {boolean} scrolling Y 方向閾値を超えたフラッグ
-   * @param {boolean} move X 方向閾値を超えたフラッグ
-   * @param {boolean} swipeRight - direction: right
-   * @param {boolean} swipeLeft - direction: left
    */
-  dragging({ position, between, scrolling, move, swipeRight, swipeLeft }) {
+  dragging(position, between, scrolling) {
     const dragging = this.draggEvents.dragging;
     dragging.position = position;
     dragging.between = between;
     dragging.scrolling = scrolling;
-    dragging.swipe = {
-      move,
-      swipeRight,
-      swipeLeft,
-    };
+    // dragging.swipe = {
+    //   move,
+    //   swipeRight,
+    //   swipeLeft,
+    // };
     this.dispatch(dragging);
   }
   /**
@@ -436,7 +439,7 @@ export default class Touching extends EventDispatcher {
    * @param {boolean} swipeRight - direction: right
    * @param {boolean} swipeLeft - direction: left
    */
-  dragEnd({ position, between, scrolling, move, swipeRight, swipeLeft }) {
+  dragEnd(position, between, scrolling, move, swipeRight, swipeLeft) {
     console.log('Touching.dragEnd -----------------', this.draggEvents.end);
     const dragging = this.draggEvents.end;
     dragging.position = position;

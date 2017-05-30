@@ -106,7 +106,15 @@ export default class Carousel {
      * @type {function}
      */
     this.onJump = this.onJump.bind(this);
+    /**
+     * bind onPause
+     * @type {function}
+     */
     this.onPause = this.onPause.bind(this);
+    /**
+     * bind onResume
+     * @type {function}
+     */
     this.onResume = this.onResume.bind(this);
   }
   // ---------------------------------------------------
@@ -150,10 +158,16 @@ export default class Carousel {
   }
   // --------------------------
   // from swipe events
+  /**
+   * Controller.PAUSE event handler - polling 一時停止させます
+   */
   onPause() {
     console.log('Carousel.onPause');
     this.pause();
   }
+  /**
+   * Controller.RESUME event handler - polling 再開させます
+   */
   onResume() {
     console.log('Carousel.onResume');
     // animation start
