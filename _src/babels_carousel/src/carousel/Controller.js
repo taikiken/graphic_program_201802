@@ -31,24 +31,59 @@ export default class Controller extends EventDispatcher {
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
+  /**
+   * carousel - next event: from [next button] | [swipe right]
+   * @event NEXT
+   * @returns {string} controllerNext
+   */
   static get NEXT() {
     return 'controllerNext';
   }
+  /**
+   * carousel - prev event: from [prev button] | [swipe left]
+   * @event PREV
+   * @returns {string} controllerPrev
+   */
   static get PREV() {
     return 'controllerPrev';
   }
+  /**
+   * carousel - jump event: from pager
+   * @event JUMP
+   * @returns {string} controllerJump
+   */
   static get JUMP() {
     return 'controllerJump';
   }
+  /**
+   * carousel - begin event: motion start
+   * @event BEGIN
+   * @returns {string} controllerBegin
+   */
   static get BEGIN() {
     return 'controllerBegin';
   }
+  /**
+   * carousel - complete event: motion end
+   * @event COMPLETE
+   * @returns {string} controllerComplete
+   */
   static get COMPLETE() {
     return 'controllerComplete';
   }
+  /**
+   * carousel - pause event
+   * @event PAUSE
+   * @returns {string} controllerPause
+   */
   static get PAUSE() {
     return 'controllerPause';
   }
+  /**
+   * carousel - resume event
+   * @event RESUME
+   * @returns {string} controllerResume
+   */
   static get RESUME() {
     return 'controllerResume';
   }
@@ -68,6 +103,11 @@ export default class Controller extends EventDispatcher {
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
+  /**
+   * singleton
+   * @param {Symbol} checkSymbol - singleton 生成のためのインナー Symbol
+   * @returns {*} singleton instance を返します
+   */
   constructor(checkSymbol) {
     // checkSymbol と singleton が等価かをチェックします
     if (checkSymbol !== singletonSymbol) {
@@ -82,15 +122,55 @@ export default class Controller extends EventDispatcher {
     // onetime setting
     const jumpEvents = new Events(Controller.JUMP, this, this);
     jumpEvents.index = -1;
+    /**
+     * Controller.JUMP: Events instance
+     * @type {Events}
+     */
     this.jumpEvents = jumpEvents;
+    /**
+     * Controller.NEXT: Events instance
+     * @type {Events}
+     */
     this.nextEvents = new Events(Controller.NEXT, this, this);
+    /**
+     * Controller.PREV: Events instance
+     * @type {Events}
+     */
     this.prevEvents = new Events(Controller.PREV, this, this);
+    /**
+     * Controller.BEGIN: Events instance
+     * @type {Events}
+     */
     this.beginEvents = new Events(Controller.BEGIN, this, this);
+    /**
+     * Controller.COMPLETE: Events instance
+     * @type {Events}
+     */
     this.completeEvents = new Events(Controller.COMPLETE, this, this);
+    /**
+     * Controller.PAUSE: Events instance
+     * @type {Events}
+     */
     this.pauseEvents = new Events(Controller.PAUSE, this, this);
+    /**
+     * Controller.RESUME: Events instance
+     * @type {Events}
+     */
     this.resumeEvents = new Events(Controller.RESUME, this, this);
+    /**
+     * in motion flag
+     * @type {boolean}
+     */
     this.moving = false;
+    /**
+     * 現在のスライドナンバー
+     * @type {number}
+     */
     this.index = -1;
+    /**
+     * timeout id
+     * @type {number}
+     */
     this.timer = 0;
     return this;
   }

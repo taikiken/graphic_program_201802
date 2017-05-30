@@ -146,8 +146,7 @@ export default class Carousel {
     controller.on(Controller.PAUSE, this.onPause);
     controller.on(Controller.RESUME, this.onResume);
     // animation start
-    // TODO: test mode - comment 外す
-    // this.play();
+    this.play();
   }
   // --------------------------
   // from swipe events
@@ -157,6 +156,7 @@ export default class Carousel {
   }
   onResume() {
     console.log('Carousel.onResume');
+    // animation start
     this.play();
   }
   // --------------------------
@@ -196,6 +196,7 @@ export default class Carousel {
    * {@link Polling.UPDATE} 監視を開始します
    */
   play() {
+    // test 時には以下をコメントする
     this.pause();
     const polling = this.polling;
     polling.on(Polling.UPDATE, this.onUpdate);
@@ -305,8 +306,7 @@ export default class Carousel {
     // jump event
     this.controller.jump(index);
     // polling 再開
-    // TODO: test mode - comment 外す
-    // this.play();
+    this.play();
   }
   // --------------------------
   /**

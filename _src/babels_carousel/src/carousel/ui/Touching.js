@@ -17,33 +17,81 @@ import Vectors from '../../moku/util/Vectors';
 import EventDispatcher from '../../moku/event/EventDispatcher';
 import Events from '../../moku/event/Events';
 
-// controller
-import Controller from '../Controller';
+// // controller
+// import Controller from '../Controller';
 
+/**
+ * addEventListener 第三引数 - { passive: true } : false するためのブラウザテスト・フラッグ
+ * # TouchEvent#Using with addEventListener() and preventDefault()
+ * > It's important to note that in many cases, both touch and mouse events get sent (in order to let non-touch-specific code still interact with the user). If you use touch events, you should call preventDefault() to keep the mouse event from being sent as well.
+ * > The exception to this is Chrome, starting with version 56 (desktop, Chrome for android, and android webview), where the default value for touchstart and touchmove is true and calls to preventDefault() are not needed. To override this behavior, you simply set the passive option to false as shown in the example below. This change prevents the listener from blocking page rendering while a user is scrolling. A demo is available on the Google Developer site.
+ * @private
+ * @type {boolean}
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent
+ * @see https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
+ * @see https://blog.jxck.io/entries/2016-06-09/passive-event-listeners.html
+ */
+let supportsPassive = false;
+try {
+  const opts = Object.defineProperty({}, 'passive', {
+    get: function() {
+      supportsPassive = true;
+    }
+  });
+  window.addEventListener('test', null, opts);
+} catch (e) {
+  supportsPassive = false;
+  // console.warn('passive test', e);
+}
+/**
+ * addEventListener 第三引数 - { passive: true } : false
+ * @private
+ * @type {*}
+ */
+const event3rd = supportsPassive ? { passive: true } : false;
+
+/**
+ * touch device, 対象 Element の touch: start | move | end | cancel を管理します
+ * - drag を実現する
+ * - scroll 可能にする
+ * - window.onblur で touchCancel 同等の処理を行う
+ */
 export default class Touching extends EventDispatcher {
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
+  /**
+   * touchStart event type
+   * @event DRAG_START
+   * @returns {string} touchingDragStart
+   */
   static get DRAG_START() {
-    return 'controllerDragStart';
+    return 'touchingDragStart';
   }
+  /**
+   * touchMove event type
+   * @event DRAGGING
+   * @returns {string} touchingDragging
+   */
   static get DRAGGING() {
-    return 'controllerDragging';
+    return 'touchingDragging';
   }
+  /**
+   * touchEnd event type
+   * @event DRAG_END
+   * @returns {string} touchingDragEnd
+   */
   static get DRAG_END() {
-    return 'controllerDragEnd';
+    return 'touchingDragEnd';
   }
+  /**
+   * touchCancel event type
+   * @event DRAG_CANCEL
+   * @returns {string} touchingCancel
+   */
   static get DRAG_CANCEL() {
-    return 'controllerDragCancel';
+    return 'touchingCancel';
   }
-  // // prev
-  // static get SWIPE_LEFT() {
-  //   return 'controllerSwipeLeft';
-  // }
-  // // next
-  // static get SWIPE_RIGHT() {
-  //   return 'controllerSwipeRight';
-  // }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -82,21 +130,63 @@ export default class Touching extends EventDispatcher {
     const y = pointA.betweenY(pointB);
     // 正数値にし閾値と比較
     return Math.abs(y) >= threshold;
-  }
+  }とめる
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
-  constructor(element, threshold = 10) {
+  /**
+   * touch event 管理を行います
+   * @param {Element} element touch target Element
+   * @param {number} [threshold=10] 閾値 Y 方向
+   * @param {number} [marginal=10] 閾値 X 方向
+   */
+  constructor(element, threshold = 10, marginal = 10) {
     super();
     // properties
+    /**
+     * touch target Element
+     * @type {Element}
+     */
     this.element = element;
+    /**
+     * 閾値 Y 方向
+     * @type {number}
+     */
     this.threshold = threshold;
-    this.controller = Controller.factory();
+    /**
+     * 閾値 X 方向
+     * @type {number}
+     */
+    this.marginal = marginal;
+    /**
+     * bind onStart - event handler: touchstart
+     * @type {function}
+     */
     this.onStart = this.onStart.bind(this);
+    /**
+     * bind onMove - event handler: touchmove
+     * @type {function}
+     */
     this.onMove = this.onMove.bind(this);
+    /**
+     * bind onEnd - event handler: touchend
+     * @type {function}
+     */
     this.onEnd = this.onEnd.bind(this);
+    /**
+     * bind onCancel - event handler: touchcancel
+     * @type {function}
+     */
     this.onCancel = this.onCancel.bind(this);
+    /**
+     * bind onBlur - event handler: window.onblur
+     * @type {function}
+     */
     this.onBlur = this.onBlur.bind(this);
+    /**
+     * [native code] - document.body
+     * @type {Element}
+     */
     this.body = document.body;
     /**
      * 位置管理を行う Vectors instance を管理します
@@ -107,9 +197,10 @@ export default class Touching extends EventDispatcher {
       end: new Vectors(),
       moving: [].slice(0)
     };
+    // dragging event
     const dragging = new Events(Touching.DRAGGING, this, this);
-    dragging.position = 0;
-    dragging.between = 0;
+    dragging.position = new Vectors();
+    dragging.between = new Vectors();
     dragging.scrolling = false;
     // drag end
     const end = new Events(Touching.DRAG_END, this, this);
@@ -118,6 +209,12 @@ export default class Touching extends EventDispatcher {
       left: false,
       right: false,
     };
+    /**
+     * touch 関連イベント {@link Events} instance
+     * - dragging: {{position: Vectors, between: Vectors, scrolling: boolean}}
+     * - end: {{swipe: {move: boolean, left: boolean: right: boolean}}}
+     * @type {{dragging: Events, end: Events, start: Events, cancel: Events}}
+     */
     this.draggEvents = {
       dragging,
       end,
@@ -133,17 +230,25 @@ export default class Touching extends EventDispatcher {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * event watch 開始します - onetime 保証のために `started` flag を使用します
+   * - touchstart
+   * - blur
+   */
   start() {
     console.log('Touching.start', this.started);
     if (this.started) {
       return;
     }
     this.started = true;
-    this.element.addEventListener('touchstart', this.onStart, false);
+    this.element.addEventListener('touchstart', this.onStart, event3rd);
     window.addEventListener('blur', this.onBlur, false);
   }
   /**
    * bind した event を unbind します
+   * - touchend
+   * - touchmove
+   * - touchcancel
    */
   dispose() {
     const body = this.body;
@@ -153,6 +258,10 @@ export default class Touching extends EventDispatcher {
   }
   /**
    * 移動監視に使用した vectors instance を全て reset します
+   * - vectors property
+   *   - start {Vectors}
+   *   - end {Vectors}
+   *   - moving {Array.<number>}
    * @return {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
    * reset 後の vectors instance を返します
    */
@@ -165,6 +274,18 @@ export default class Touching extends EventDispatcher {
     return vectors;
   }
   // ---------------------------------------------------
+  /**
+   * touchstart event handler
+   *
+   * - `reset` を実行し移動量変数を初期化します
+   * - touch 関連イベント監視を始めます
+   *   - touchend
+   *   - touchmove
+   *   - touchcancel
+   * - 現在座標を `event` から取り出し `vectors.start` `vectors.moving` へセットします
+   * - `dragStart` を実行し `DRAG_START` event を発火します
+   * @param {TouchEvent} event touchstart Event
+   */
   onStart(event) {
     console.log('Touching.onStart', event);
     // event unbind <- 二重 bind にならないように
@@ -178,12 +299,22 @@ export default class Touching extends EventDispatcher {
     vectors.moving.push(vectors.start);
     // キャンセル event 監視を開始
     const body = this.body;
-    body.addEventListener('touchend', this.onEnd, false);
-    body.addEventListener('touchmove', this.onMove, false);
-    body.addEventListener('touchcancel', this.onCancel, false);
+    body.addEventListener('touchend', this.onEnd, event3rd);
+    body.addEventListener('touchmove', this.onMove, event3rd);
+    body.addEventListener('touchcancel', this.onCancel, event3rd);
     // controller 通知
     this.dragStart();
   }
+  /**
+   * touchmove event handler
+   * - 現在座標を `event` から取り出し `vectors.start` `vectors.moving` へセットします
+   * - 移動距離を前回値から計算します
+   * - `dragging` を実行し `DRAGGING` event を発火します
+   *   - position {{x: number, y: number}} - 現在位置
+   *   - between {number} - X 移動距離(px)
+   *   - scrolling {boolean} - スクロール閾値 `threshold` を超えて Y 方向に動いたか?
+   * @param {TouchEvent} event touchmove Event
+   */
   onMove(event) {
     // console.log('Touching.onMove', event);
     const vectors = this.vectors;
@@ -192,7 +323,8 @@ export default class Touching extends EventDispatcher {
     const point = Touching.point(event);
     const position = new Vectors(point.x, point.y, Date.now());
     // 前回 position <- moving 配列最後
-    const previous = movingArray[movingArray.length - 1];
+    const length = movingArray.length;
+    const previous = length > 0 ? movingArray[length - 1] : new Vectors();
     // scroll checked
     const scrolling = Touching.scrolling(position, previous, this.threshold);
     position.scrolling = scrolling;
@@ -200,25 +332,37 @@ export default class Touching extends EventDispatcher {
     movingArray.push(position);
     // 移動量
     const between = position.between(previous);
-    // controller 通知
+    // event 通知
     this.dragging({ position, between, scrolling });
   }
+  /**
+   * touchend event handler
+   * - 現在座標を `event` から取り出し `vectors.start` `vectors.moving` へセットします
+   * - 移動距離を前回値から計算します
+   * - `dragEnd` を実行し `DRAG_END` event を発火します
+   *   - position {{x: number, y: number}} - 現在位置
+   *   - between {number} - X 移動距離(px)
+   *   - scrolling {boolean} - スクロール閾値 `threshold` を超えて Y 方向に動いたか?
+   *   - move {boolean} - X 方向閾値 `marginal` を超えて移動したか
+   *   - swipeRight {boolean} - move: true の時に方向をセットする right
+   *   - swipeLeft {boolean} - move: true の時に方向をセットする left
+   * @param {TouchEvent} event touchend Event
+   */
   onEnd(event) {
     console.log('Touching.onEnd', event);
     // console.log('Touching.onEnd', event);
     const vectors = this.vectors;
-
     // 現在 position
     const point = Touching.point(event);
     const position = new Vectors(point.x, point.y, Date.now());
-
     // 前回 position を touchstart 位置としチェックします
     const previous = vectors.start;
     const scrolling = Touching.scrolling(position, previous, this.threshold);
     position.scrolling = scrolling;
     // 移動量
     const between = position.between(previous);
-    const move = Math.abs(between.x) >= 10;
+    const move = Math.abs(between.x) >= this.marginal;
+    // swipe
     let swipeRight = false;
     let swipeLeft = false;
     if (move) {
@@ -228,29 +372,48 @@ export default class Touching extends EventDispatcher {
         swipeLeft = true;
       }
     }
-    // controller 通知
+    // event 通知
     this.dragEnd({ position, between, scrolling, move, swipeRight, swipeLeft });
-    // event ignore
-    if (!scrolling || move) {
-      return false;
-    }
-    return true;
   }
+  /**
+   * touchcancel event handler
+   * - {@link Touching.dispose} を実行します
+   * - {@link Touching.reset} を実行します
+   * - {@link Touching.dragCancel} を実行します
+   */
   onCancel() {
     console.log('Touching.onCancel');
     this.dispose();
     this.reset();
     this.dragCancel();
   }
+  /**
+   * window.onblur event handler
+   * - {@link Touching.onCancel} を実行します
+   */
   onBlur() {
     this.onCancel();
   }
   // ---------------------------------------------------
   // drag
+  /**
+   * touchstart event handler `onStart` から呼び出されます
+   * - DRAG_START event を発火します
+   */
   dragStart() {
-    console.log('Touching.dragStart -----------------', this.draggEvents.start);
+    // console.log('Touching.dragStart -----------------', this.draggEvents.start);
     this.dispatch(this.draggEvents.start);
   }
+  /**
+   * touchmove event handler `onMove` から呼び出されます
+   * - DRAGGING event を発火します
+   * @param {{x: number, y: number}} position 座標情報
+   * @param {Vectors} between 移動量
+   * @param {boolean} scrolling Y 方向閾値を超えたフラッグ
+   * @param {boolean} move X 方向閾値を超えたフラッグ
+   * @param {boolean} swipeRight - direction: right
+   * @param {boolean} swipeLeft - direction: left
+   */
   dragging({ position, between, scrolling, move, swipeRight, swipeLeft }) {
     const dragging = this.draggEvents.dragging;
     dragging.position = position;
@@ -263,6 +426,16 @@ export default class Touching extends EventDispatcher {
     };
     this.dispatch(dragging);
   }
+  /**
+   * touchend event handler `onEnd` から呼び出されます
+   * - DRAG_END event を発火します
+   * @param {{x: number, y: number}} position 座標情報
+   * @param {Vectors} between 移動量
+   * @param {boolean} scrolling Y 方向閾値を超えたフラッグ
+   * @param {boolean} move X 方向閾値を超えたフラッグ
+   * @param {boolean} swipeRight - direction: right
+   * @param {boolean} swipeLeft - direction: left
+   */
   dragEnd({ position, between, scrolling, move, swipeRight, swipeLeft }) {
     console.log('Touching.dragEnd -----------------', this.draggEvents.end);
     const dragging = this.draggEvents.end;
@@ -276,6 +449,10 @@ export default class Touching extends EventDispatcher {
     };
     this.dispatch(this.draggEvents.end);
   }
+  /**
+   * window.onblur, touchcancel で呼び出されます
+   * - DRAG_CANCEL event を発火します
+   */
   dragCancel() {
     this.dispatch(this.draggEvents.cancel);
   }
