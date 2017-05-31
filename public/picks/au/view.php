@@ -123,7 +123,7 @@
   </nav><!-- /.category-nav -->
 
   <aside class="banner__upper">
-    <div class="ratio380_110" id='div-gpt-ad-1495692694051-0'>
+    <div id='div-gpt-ad-1495692694051-0'>
     <script>
       googletag.cmd.push(function() { googletag.display('div-gpt-ad-1495692694051-0'); });
     </script>
