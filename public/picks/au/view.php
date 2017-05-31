@@ -64,7 +64,7 @@
       googletag.defineSlot('/531683568/au_servicetop_header', [320, 100], 'div-gpt-ad-1495692694051-0').defineSizeMapping(mapping).addService(googletag.pubads());
       googletag.defineSlot('/531683568/au_servicetop_footer', [320, 100], 'div-gpt-ad-1495692509848-0').addService(googletag.pubads());
       googletag.pubads().enableSingleRequest();
-      // googletag.pubads().collapseEmptyDivs(); // プレビュー用にコメントアウト
+      googletag.pubads().collapseEmptyDivs();
       googletag.enableServices();
     });
   </script>
@@ -190,7 +190,7 @@
 <?php endforeach; ?>
 
         <div class="banner__app">
-          <div class="ratio380_110" id='div-gpt-ad-1495692509848-0'>
+          <div id='div-gpt-ad-1495692509848-0'>
           <script>
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-1495692509848-0'); });
           </script>

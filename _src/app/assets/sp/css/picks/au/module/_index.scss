@@ -403,35 +403,10 @@ $highlight-color-au: #eb5505;
   // .banner__app
   .banner__app {
     margin-top: (30/2)+px;
-    padding: (40/2)+px perCalc(30, 750);
+    // padding: (40/2)+px perCalc(30, 750);
     border-top: 1px solid #ccc;
 
-    // padding-top: (40/2)+px;
-    // text-align: center;
-  }
-
-  .ratio380_110 {
-    position: relative;
-
-    &:before {
-      display: block;
-      content: "";
-      width: 100%;
-      padding-top: (110 / 380) * 100%;
-    }
-
-    > div {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-
-    iframe {
-      width: 100% !important;
-      height: 100% !important;
-    }
-
+    padding-top: (40/2)+px;
+    text-align: center;
   }
 }
