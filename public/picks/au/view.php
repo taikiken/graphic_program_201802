@@ -123,7 +123,7 @@
   </nav><!-- /.category-nav -->
 
   <aside class="banner__upper">
-    <div id='div-gpt-ad-1495692694051-0'>
+    <div class="ratio380_110" id='div-gpt-ad-1495692694051-0'>
     <script>
       googletag.cmd.push(function() { googletag.display('div-gpt-ad-1495692694051-0'); });
     </script>
@@ -192,7 +192,7 @@
 <?php endforeach; ?>
 
         <div class="banner__app">
-          <div id='div-gpt-ad-1495692509848-0'>
+          <div class="ratio380_110" id='div-gpt-ad-1495692509848-0'>
           <script>
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-1495692509848-0'); });
           </script>
