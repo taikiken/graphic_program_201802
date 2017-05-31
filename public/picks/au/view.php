@@ -58,13 +58,11 @@
 
     googletag.cmd.push(function() {
       var mapping = googletag.sizeMapping().
-        addSize([768, 1024], [690, 200]).
-        addSize([414, 736], [380, 110]).
-        addSize([320, 568], [280, 80]).
+        addSize([0, 0], [320, 100]).
         build();
 
-      googletag.defineSlot('/531683568/au_servicetop_header', [690, 200], 'div-gpt-ad-1495692694051-0').defineSizeMapping(mapping).addService(googletag.pubads());
-      googletag.defineSlot('/531683568/au_servicetop_footer', [690, 200], 'div-gpt-ad-1495692509848-0').addService(googletag.pubads());
+      googletag.defineSlot('/531683568/au_servicetop_header', [320, 100], 'div-gpt-ad-1495692694051-0').defineSizeMapping(mapping).addService(googletag.pubads());
+      googletag.defineSlot('/531683568/au_servicetop_footer', [320, 100], 'div-gpt-ad-1495692509848-0').addService(googletag.pubads());
       googletag.pubads().enableSingleRequest();
       // googletag.pubads().collapseEmptyDivs(); // プレビュー用にコメントアウト
       googletag.enableServices();
