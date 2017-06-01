@@ -1,27 +1,33 @@
 # auth1. 特定のIPを許可
-# logram
-SetEnvIf Remote_Addr "120\.143\.11\.141" allowed_ip_addresses
+
+# limret
+SetEnvIf Remote_Addr "153\.156\.72\.223" allowed_ip_addresses
+
 # parachute
 SetEnvIf Remote_Addr "183\.76\.75\.12" allowed_ip_addresses
+SetEnvIf Remote_Addr "124\.155\.123\.66" allowed_ip_addresses
+SetEnvIf Remote_Addr "153\.124\.179\.59" allowed_ip_addresses
+
 # axesor
 SetEnvIf Remote_Addr "124\.219\.166\.154" allowed_ip_addresses
-# grandbase - 1
+
+# grandbase
 SetEnvIf Remote_Addr "202\.248\.219\.58" allowed_ip_addresses
-# grandbase - 2
 SetEnvIf Remote_Addr "124\.155\.55\.235" allowed_ip_addresses
+
 # kiito
 SetEnvIf Remote_Addr "120\.51\.210\.154" allowed_ip_addresses
 SetEnvIf Remote_Addr "120\.143\.4\.92" allowed_ip_addresses
-# popin - 1
+
+# popin
 SetEnvIf Remote_Addr "54\.248\.85\.239" allowed_ip_addresses
-# popin - 2
 SetEnvIf Remote_Addr "175\.41\.247\.44" allowed_ip_addresses
-# cloudpack - 1
+
+# cloudpack
 SetEnvIf Remote_Addr "210\.227\.234\.114" allowed_ip_addresses
-# cloudpack - 2
 SetEnvIf Remote_Addr "54\.64\.137\.251" allowed_ip_addresses
-# limret
-SetEnvIf Remote_Addr "153\.156\.72\.223" allowed_ip_addresses
+
+
 
 Order Deny,Allow
 Deny from All
