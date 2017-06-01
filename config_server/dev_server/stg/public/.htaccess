@@ -1,26 +1,34 @@
 # auth1. 特定のIPを許可
-# logram
-SetEnvIf Remote_Addr "120\.143\.11\.141" allowed_ip_addresses
-# parachute
-SetEnvIf Remote_Addr "183\.76\.75\.12" allowed_ip_addresses
-# axesor
-SetEnvIf Remote_Addr "124\.219\.166\.154" allowed_ip_addresses
-# grandbase - 1
-SetEnvIf Remote_Addr "202\.248\.219\.58" allowed_ip_addresses
-# grandbase - 2
-SetEnvIf Remote_Addr "61\.125\.228\.110" allowed_ip_addresses
-# kiito
-SetEnvIf Remote_Addr "120\.51\.210\.154" allowed_ip_addresses
-# popin - 1
-SetEnvIf Remote_Addr "54\.248\.85\.239" allowed_ip_addresses
-# popin - 2
-SetEnvIf Remote_Addr "175\.41\.247\.44" allowed_ip_addresses
-# cloudpack - 1
-SetEnvIf Remote_Addr "210\.227\.234\.114" allowed_ip_addresses
-# cloudpack - 2
-SetEnvIf Remote_Addr "54\.64\.137\.251" allowed_ip_addresses
+
 # limret
 SetEnvIf Remote_Addr "153\.156\.72\.223" allowed_ip_addresses
+
+# parachute
+SetEnvIf Remote_Addr "183\.76\.75\.12" allowed_ip_addresses
+SetEnvIf Remote_Addr "124\.155\.123\.66" allowed_ip_addresses
+SetEnvIf Remote_Addr "153\.124\.179\.59" allowed_ip_addresses
+
+# axesor
+SetEnvIf Remote_Addr "124\.219\.166\.154" allowed_ip_addresses
+
+# grandbase
+SetEnvIf Remote_Addr "202\.248\.219\.58" allowed_ip_addresses
+SetEnvIf Remote_Addr "124\.155\.55\.235" allowed_ip_addresses
+
+# kiito
+SetEnvIf Remote_Addr "120\.51\.210\.154" allowed_ip_addresses
+SetEnvIf Remote_Addr "120\.143\.4\.92" allowed_ip_addresses
+
+# popin
+SetEnvIf Remote_Addr "54\.248\.85\.239" allowed_ip_addresses
+SetEnvIf Remote_Addr "175\.41\.247\.44" allowed_ip_addresses
+
+# cloudpack
+SetEnvIf Remote_Addr "210\.227\.234\.114" allowed_ip_addresses
+SetEnvIf Remote_Addr "54\.64\.137\.251" allowed_ip_addresses
+
+# CCI
+SetEnvIf Remote_Addr "210\.254\.134\.36" allowed_ip_addresses
 
 Order Deny,Allow
 Deny from All
@@ -29,7 +37,7 @@ Allow from env=allowed_ip_addresses
 
 # auth2. 上記以外はベーシック認証
 AuthType Basic
-AuthUserFile /var/www/undotsushin.com/stg/.htpasswd
+AuthUserFile /var/www/sportsbull.jp/.htpasswd
 AuthGroupFile /dev/null
 AuthName "Put user name and password."
 require valid-user
@@ -37,13 +45,8 @@ require valid-user
 # auth1, auth2 いずれかOKなら
 Satisfy Any
 
-
-<IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin https://imasdk.googleapis.com
-    Header set Access-Control-Allow-Credentials true
-</IfModule>
-
-
+redirect /prg_img/ https://img.sportsbull.jp/
+redirect /users/ https://img.sportsbull.jp/users/
 
 php_flag magic_quotes_gpc off
 php_flag register_global off
@@ -54,7 +57,7 @@ php_value session.use_cookies 1
 php_value session.cookie_lifetime 2592000
 php_value session.gc_maxlifetime 2592000
 php_value session.save_path '/tmp'
-php_value include_path '/var/www/undotsushin.com/stg/include'
+php_value include_path '/var/www/sportsbull.jp/stg/include'
 php_value auto_prepend_file 'prependfile/inc.php'
 php_value mbstring.language Japanese
 php_value mbstring.internal_encoding UTF-8

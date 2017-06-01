@@ -55,3 +55,75 @@
   }
 
 }
+
+
+// 記事一覧
+// 2017-05-18 20:13:01 時点で崩れているので上書き
+// ref. https://github.com/undotsushin/undotsushin/issues/1874
+.news-ad .adgAd_17038 {
+  .adsWrapper {
+    position: relative;
+    padding: (20/2)+px 0;
+
+    .adsImgContainer {
+      float: left;
+      width: (280/2)+px;
+      height: (158/2)+px;
+      margin-right: (20/2)+px;
+      border-radius: (6/2)+px;
+
+      .adsImg {
+        width: (280/2)+px;
+        height: auto;
+      }
+    }
+
+    .adsTitle {
+      width: auto;
+      line-height: lh(36, 24);
+      margin-bottom: 0.25em;
+      overflow: hidden;
+      font-weight: bold;
+      font-size: fz(26/2);
+    }
+
+    .adsSponsored {
+      display: inline-block;
+      width: auto;
+      line-height: 1em;
+      overflow: hidden;
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: fz(20/2);
+    }
+
+    .adsDescription {
+      width: auto;
+      margin-top: .25em;
+      overflow: hidden;
+      color: #666;
+      font-size: fz(20/2);
+    }
+
+    .adsButton {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .adsButtonText {
+      float: none;
+      display: block;
+      width: 100%;
+      height: 100%;
+      margin-top: 0;
+      padding: 0;
+      background: transparent;
+      color: #fff;
+      font-size: 0;
+      vertical-align: top;
+    }
+  }
+}

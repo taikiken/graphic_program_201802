@@ -42,6 +42,33 @@
   <link rel="stylesheet" href="/assets/sp/css/picks/au/ui.css?v=<?php echo $page['version']; ?>">
   <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
 
+  <script type='text/javascript'>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function() {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+    })();
+
+    googletag.cmd.push(function() {
+      var mapping = googletag.sizeMapping().
+        addSize([0, 0], [320, 100]).
+        build();
+
+      googletag.defineSlot('/531683568/au_servicetop_header', [320, 100], 'div-gpt-ad-1495692694051-0').defineSizeMapping(mapping).addService(googletag.pubads());
+      googletag.defineSlot('/531683568/au_servicetop_footer', [320, 100], 'div-gpt-ad-1495692509848-0').addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.pubads().collapseEmptyDivs();
+      googletag.enableServices();
+    });
+  </script>
+
   <script>
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -93,9 +120,12 @@
     </dl><!-- /.category-nav--sub -->
   </nav><!-- /.category-nav -->
 
-  <aside id="js-banner__upper" class="banner__upper">
-    <a id="js-banner__upper__link-for-iOS" style="display: none;" class="banner__upper__link for-iOS" href="https://sportsbull.jp/category/big6tv/?utm_source=aust&utm_campaign=big6tv&utm_medium=banner_ios&utm_content=20170330"><img src="/assets/sp/images/picks/au/banner-live_big6tv.png" alt="東京六大学野球をLIVE中継！"></a>
-    <a id="js-banner__upper__link-for-Android" style="display: none;" class="banner__upper__link for-Android" href="https://sportsbull.jp/category/big6tv/?utm_source=aust&utm_campaign=big6tv&utm_medium=banner_android&utm_content=20170330"><img src="/assets/sp/images/picks/au/banner-live_big6tv.png" alt="東京六大学野球をLIVE中継！"></a>
+  <aside class="banner__upper">
+    <div id='div-gpt-ad-1495692694051-0'>
+    <script>
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1495692694051-0'); });
+    </script>
+    </div>
   </aside><!-- /.banner__upper -->
 
   <div class="body-sec">
@@ -159,14 +189,12 @@
   <?php endforeach; ?>
 <?php endforeach; ?>
 
-        <div id="js-banner__app" class="banner__app">
-          <a id="js-banner__app__link-for-iOS" style="display: none;" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
-          <a id="js-banner__app__link-for-Android" style="display: none;" href="https://play.google.com/store/apps/details?id=com.undotsushin"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
-          <?php
-          // 2017/05/18 ref: https://github.com/undotsushin/undotsushin/issues/1927
-          // <a id="js-banner__app__link-for-iOS" style="display: none;" href="https://app.adjust.com/gahlmm"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
-          // <a id="js-banner__app__link-for-Android" style="display: none;" href="https://app.adjust.com/rzqavj"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
-          ?>
+        <div class="banner__app">
+          <div id='div-gpt-ad-1495692509848-0'>
+          <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1495692509848-0'); });
+          </script>
+          </div>
         </div><!-- /.link_recent -->
 
       </section><!-- /.main-sec -->

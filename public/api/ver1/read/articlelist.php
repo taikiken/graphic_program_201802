@@ -16,16 +16,16 @@ if(strlen($api)>0){
 	
 	$limit=sprintf(" limit %s offset %s",$length,$offset);
 	$orderby=set_orderby();
-
+	
 	if($api==="category"){
 		
 		$category=bind($_REQUEST["category"]);
 		$type=bind($_REQUEST["type"]);
 		$c=set_category2($category,$type);
-				
+
 		if($type===""){
 
-			$sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$orderby,$limit),$orderby);
+			$sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
 			$nsql=sprintf("select num as n from u_latestpost where m1=%s",$c[0]);
 
 /*						
@@ -186,7 +186,7 @@ if(strlen($api)>0){
 					$ex=sprintf("select id from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1",$uid);
 					$sql=sprintf("select %s,1 as recommend from %s union select %s,0 as recommend from %s order by recommend desc,m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid),sprintf(" and id in(%s) and m_time > now() - interval '3 day'",$ex)),$articlefield,sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m_time > now() - interval '3 day'",$ex)),$length,$offset);
 */
-					$sql=sprintf("select t2.pageid from (select categoryid from u_category where userid=%s and flag=1) as t1,u_latestpost as t2 where t1.categoryid=t2.m1",$uid);
+					$sql=sprintf("select t2.pageid from (select categoryid from u_category where userid=%s and categoryid!=152 and flag=1) as t1,u_latestpost as t2 where t1.categoryid=t2.m1",$uid);
 					$o->query($sql);
 					while($f=$o->fetch_array()){
 						$category[]=$f["pageid"];
@@ -195,15 +195,15 @@ if(strlen($api)>0){
 					if($_REQUEST["offset"]<count($category)){
 						$category=implode(",",$category);
 						$sql=sprintf("select *,1 as recommend from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id in(%s)",$category)));
-						$sql.=sprintf(" union all select *,0 as recommend from %s order by recommend desc, m_time desc,id%s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m_time > now() - interval '3 day'",$category)),$limit);
+						$sql.=sprintf(" union all select *,0 as recommend from %s order by recommend desc, m_time desc,id%s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m1!=152 and m_time > now() - interval '3 day'",$category)),$limit);
 					}else{
-						$sql=sprintf("select * from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '3 day'"),$length,$offset);
+						$sql=sprintf("select * from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m1!=152 and m_time > now() - interval '3 day'"),$length,$offset);
 					}
 					
 				}else{
-					$sql=sprintf("select %s from %s order by m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '3 day'"),$length,$offset);
+					$sql=sprintf("select %s from %s order by m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid)," and m1!=152 and m_time > now() - interval '3 day'"),$length,$offset);
 				}
-				$nsql="select count(id) as n from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day'";
+				$nsql="select count(id) as n from repo_n where cid=1 and flag=1 and m1!=152 and m_time < now() and m_time > now() - interval '3 day'";
 			
 			}elseif($cx==="headline"){
 				
@@ -248,7 +248,7 @@ if($y["status"]["code"]===200){
 	$o->query($nsql);
 	$f=$o->fetch_array();
 	$count=$f["n"];
-	
+
 	if($count>0){
 	
 		$o->query($sql);

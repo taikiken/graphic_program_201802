@@ -67,8 +67,23 @@ endif;
 // --------------------------------
 ?>
 
-          <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="SPORTS BULLアプリ版(iPhone/Android対応) アプリでサクサク楽しむ！"></a></div>
-
+          <div class="app-bnr">
+            <!-- /531683568/pc_sidebar_top_2nd -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/pc_sidebar_top_2nd', [300, 120], 'div-gpt-ad-1494939250039-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1494939250039-0' style='height:120px; width:300px;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939250039-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/pc_sidebar_top_2nd -->
+          </div>
 
 <?php
 // not big6tv の時のみ広告を表示する

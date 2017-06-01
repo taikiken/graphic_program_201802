@@ -61,6 +61,21 @@ endif;
   ?>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
+  <script type='text/javascript'>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function() {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+    })();
+  </script>
+
   <script>
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -68,6 +83,7 @@ endif;
    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
    ga('create', 'UA-74679267-1', 'auto');
+   ga('require', 'GTM-KJ33JM9');
    ga('require', 'linkid');
    ga('require', 'displayfeatures');
    ga('send', 'pageview');
@@ -176,7 +192,27 @@ endif;
 // header 表示条件 start
 if ( $page_has_header ) :
 ?>
-<div id="js-header-appbnr-container"></div>
+<div id="js-header-appbnr-container">
+  <div class="header-appbnr">
+    <div class="header-appbnr-btn-close"><span>閉じる</span></div>
+    <div class="header-appbnr-link">
+      <!-- /531683568/sp_header_app -->
+      <script>
+        googletag.cmd.push(function() {
+          googletag.defineSlot('/531683568/sp_header_app', [270, 70], 'div-gpt-ad-1494939700357-0').addService(googletag.pubads());
+          googletag.pubads().enableSingleRequest();
+          googletag.enableServices();
+        });
+      </script>
+      <div id='div-gpt-ad-1494939700357-0' style='height:70px; width:270px;'>
+      <script>
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939700357-0'); });
+      </script>
+      </div>
+      <!-- // /531683568/sp_header_app -->
+    </div><!-- /.header-appbnr-link -->
+  </div><!-- /.header-appbnr -->
+</div>
 <div class="header-sticky">
   <header class="head-sec">
     <div class="head-sec-inner">

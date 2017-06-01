@@ -30,7 +30,13 @@ if(preg_match("/undotsushin/",$servername)){
 		$rurl='https://www.undotsushin.com/api/ver1/auth/facebook_callback.php';
 	}
 }else{
-	if(preg_match("/dev/",$servername)){
+
+	if(preg_match("/dev2/",$servername)){
+		$appid='810943972391267';
+		$appsc='a64f7dd09c276bd9e4d9539497bf17fc';
+		$rurl='https://dev2.sportsbull.jp/api/ver1/auth/facebook_callback.php';
+
+	}elseif(preg_match("/dev/",$servername)){
 		$appid='181476675566915';
 		$appsc='4440f20c11cc8c3a4a32bc2148d81478';
 		$rurl='https://dev.sportsbull.jp/api/ver1/auth/facebook_callback.php';
