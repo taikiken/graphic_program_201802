@@ -110,6 +110,10 @@ export class IFrameStatus extends EventDispatcher {
       this.update(parseInt(data.id, 10), data.height);
     }
   }
+  /**
+   * iframe mount を通知します
+   * @param {number} id マウントされた記事 ID
+   */
   mount(id) {
     this.dispatch({ id, type: IFrameStatus.DID_MOUNT });
   }

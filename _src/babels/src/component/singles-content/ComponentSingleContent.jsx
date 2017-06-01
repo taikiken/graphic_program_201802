@@ -88,6 +88,10 @@ export class ComponentSingleContent extends React.Component {
       sign: props.sign,
       index: props.index
     };
+    /**
+     * 記事ID - 識別子として使用します
+     * @type {Number}
+     */
     this.id = parseInt(props.single.id, 10);
   }
   // ---------------------------------------------------
