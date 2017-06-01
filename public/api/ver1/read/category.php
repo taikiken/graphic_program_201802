@@ -119,16 +119,9 @@ if(strlen($f["name"])>0){
 
   if ( $category === 'big6tv' ) :
 
-    if ( preg_match("/com\.sportsbull\.test/", $_SERVER['HTTP_USER_AGENT'] ) || preg_match("/com\.limret\.undotsushin/", $_SERVER['HTTP_USER_AGENT'] ) ) :
-      // $categoriesinfo['live']          = '';
-    else :
-      $categoriesinfo['live']          = '/api/big6tv/live';
-    endif;
-
-    $categoriesinfo['live_interval'] = 10;
-    $categoriesinfo['webviews']      = array(
-      '/big6tv/webview/',
-    );
+    $categoriesinfo['live']          = '/api/big6tv/live';
+    $categoriesinfo['live_interval'] = 60;
+    $categoriesinfo['webviews']      = array();
 
   endif;
 
