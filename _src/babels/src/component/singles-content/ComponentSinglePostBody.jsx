@@ -76,6 +76,10 @@ export class ComponentSinglePostBody extends React.Component {
      * @default false;
      */
     this.didMount = false;
+    /**
+     * `location.search` - iframe src へ追加するために使用します
+     * @type {string}
+     */
     this.query = location.search;
   }
   // ---------------------------------------------------
