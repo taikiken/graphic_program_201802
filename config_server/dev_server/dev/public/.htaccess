@@ -27,6 +27,8 @@ SetEnvIf Remote_Addr "175\.41\.247\.44" allowed_ip_addresses
 SetEnvIf Remote_Addr "210\.227\.234\.114" allowed_ip_addresses
 SetEnvIf Remote_Addr "54\.64\.137\.251" allowed_ip_addresses
 
+# CCI
+SetEnvIf Remote_Addr "210\.254\.134\.36" allowed_ip_addresses
 
 
 Order Deny,Allow
