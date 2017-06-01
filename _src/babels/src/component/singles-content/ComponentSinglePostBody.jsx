@@ -76,6 +76,7 @@ export class ComponentSinglePostBody extends React.Component {
      * @default false;
      */
     this.didMount = false;
+    this.query = location.search;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -139,10 +140,16 @@ export class ComponentSinglePostBody extends React.Component {
    */
   render() {
     const id = this.props.single.id;
+    let query = this.query;
+    if (query) {
+      query += `&page=${id}`;
+    } else {
+      query = `?page=${id}`;
+    }
     return (
       <iframe
         id={`single-iframe-${id}`}
-        src={`/single_content/?page=${id}`}
+        src={`/single_content/${query}`}
         frameBorder="0"
         width="100%"
         scrolling="no"
