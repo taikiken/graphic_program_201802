@@ -21,16 +21,10 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         endif;
       endif;
 
-      // 続きを読む設定フラグの判定を行っておく
-      if ( isset($post['readmore']) && $post['readmore']['is_readmore'] && $post['readmore']['url'] ) :
-        $post['is_readmore'] = true;
-      else :
-        $post['is_readmore'] = false;
-      endif;
 
       // #782 カノニカル判定
-      if ( isset($post['canonical']) && $post['canonical']['is_canonical'] && $post['canonical']['url'] ) :
-        $canonical = $post['canonical']['url'];
+      if ( $post['canonical'] ) :
+        $canonical = $post['canonical'];
       else :
         $canonical = '';
       endif;

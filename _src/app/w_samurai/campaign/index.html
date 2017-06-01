@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://sportsbull.jp/w_samurai/campaign/">
   <meta property="og:description" content="スポーツブルで日本代表を応援。サッカー &amp; 野球賞品 プレゼントキャンペーン。">
   <!-- twitter card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
   <!-- favicon -->
   <link rel="shortcut icon" href="/favicon.ico">

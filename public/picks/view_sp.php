@@ -21,7 +21,7 @@
   <meta property="og:url" content="https://sportsbull.jp/picks/">
   <meta property="og:description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
   <!-- twitter card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,8 +155,6 @@
         <div class="fb-page-plugin">
           <div class="fb-page" data-href="https://www.facebook.com/sportsbull/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sportsbull/"><a href="https://www.facebook.com/sportsbull/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
         </div>
-
-        <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
       </div><!-- /.foot-pr -->
 
       <div id="js-page_top" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>

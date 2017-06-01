@@ -47,6 +47,7 @@ for($i=0;$i<count($p);$i++){
 
 	$l="";
 	if(in_array($p[$i]["d2"],$RELATEDLINK_ALLOWED)){
+		$ulink=array();
 		$sql=sprintf("select title,link from u_link where pid=%s order by n",$p[$i]["id"]);
 		$o->query($sql);
 		while($ee=$o->fetch_array())$ulink[]=$ee;

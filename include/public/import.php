@@ -1,8 +1,6 @@
-<audio controls></audio>
 <?php
 
-$s3active=preg_match("#/apache/htdocs/#",$SERVERPATH)?0:1;
-if($s3active)include $INCLUDEPATH."aws.php";
+include $INCLUDEPATH."aws.php";
 
 $excategory=array(129,130,133);
 
@@ -77,14 +75,68 @@ function relatedlink($link,$id=0){
 		$title=bind($link["li"][$i]["@attributes"]["url"]);
 		$url=bind(str_replace("]>","]",$link["li"][$i]["@attributes"]["title"]));
 		
-		//var_dump(array($title,$url));
-		
 		if($id==0){
 			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
 		}else{	
 			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s where not exists (select*from u_link where pid=%s and n=%s);",$id,$title,$url,($i+1),$id,($i+1));
-			$s[]=sprintf("update u_link set title='%s',url='%s' where not exists (select * from u_link where title='%s' and url='%s') and cid=%s and n=%s;",$title,$url,$title,$url,$id,($i+1));
+			$s[]=sprintf("update u_link set title='%s',link='%s' where not exists (select * from u_link where title='%s' and link='%s') and pid=%s and n=%s;",$title,$url,$title,$url,$id,($i+1));
 		}
+	}
+		
+	return implode("\n",$s);
+}
+
+function relatedlink2($links,$id=0){
+	
+	$s=array();
+	$n=count($links);
+
+	if($n==1){
+		$link[0]=$links;
+	}else{
+		$link=$links;
+	}
+	
+	for($i=0;$i<$n;$i++){
+		
+		$title=bind($link[$i]["@attributes"]["url"]);
+		$url=bind($link[$i]["@attributes"]["title"]);
+		
+		if($id==0){
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
+		}else{	
+			if($i==0)$s[]=sprintf("delete from u_link where pid=%s;",$id);
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s;",$id,$title,$url,($i+1));
+		}
+	}
+	return implode("\n",$s);
+}
+
+function relatedlink3($links,$id=0){
+	
+	if(!$links)return;
+	
+	$s=array();
+	
+	if($links["link"]){
+		$link[0]=$links;
+	}else{
+		$link=$links;
+	}
+	
+	for($i=0;$i<count($link);$i++){
+		
+		$title=bind($link[$i]["link"]["@attributes"]["url"]);
+		$url=bind($link[$i]["link"]["@attributes"]["title"]);
+		
+		if($id==0){
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
+		}else{	
+			if($i==0)$s[]=sprintf("delete from u_link where pid=%s;",$id);
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s;",$id,$title,$url,($i+1));
+		}
+		
+		if($i==4)break;
 	}
 	
 	return implode("\n",$s);
@@ -98,28 +150,6 @@ function removeimg($img){
 	for($i=0;$i<count($e);$i++){
 		unlink(sprintf(str_replace("tmp",$e[$i],$IMGP),$img));
 	}
-}
-
-function relatedlink2($link,$id=0){
-	
-	$s=array();
-	$n=count($link);
-	
-	for($i=0;$i<$n;$i++){
-		
-		$title=bind($link[$i]["@attributes"]["url"]);
-		$url=bind($link[$i]["@attributes"]["title"]);
-		
-		//var_dump(array($title,$url));
-		
-		if($id==0){
-			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
-		}else{	
-			if($i==0)$s[]=sprintf("delete from u_link where pid=%s;",$id);
-			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s;",$id,$title,$url,($i+1));
-		}
-	}
-	return implode("\n",$s);
 }
 
 function is_tag($a,$b){
@@ -214,7 +244,6 @@ function eximg($img1,$img2){
 	global $SERVERPATH;
 	
 	$img1=str_replace(sprintf("%s/prg_img",$SERVERPATH),preg_match("#/dev/#",$SERVERPATH)?"https://dev-img.sportsbull.jp":"https://img.sportsbull.jp",$img1);
-	var_dump(array($img1,$img2));
 	
 	$a=(binary)get_imgs($img1);
 	$b=(binary)get_imgs($img2);
@@ -224,21 +253,14 @@ function eximg($img1,$img2){
 
 function imgResize($img_name,$n_img,$re_size,$p="jpg"){
 	
-	global $s3active,$SERVERPATH;
+	global $SERVERPATH;
 	
 	$ww=$re_size;
 	$size=getimagesize($img_name);
 	
 	if($ww>$size[0]){
 		copy($img_name,$n_img);
-		if($s3active){
-			
-			$s3i=new S3Module;
-			$s3i->upload($img_name,str_replace($SERVERPATH."/prg_img/","",$n_img));
-			unlink($img_name);
-			/* sportsbull移行後消す */
-			//copy($img_name,str_replace(array("sportsbull.jp","tmp"),array("undotsushin.com","raw"),$img_name));
-		}
+		s3upload($img_name,str_replace($SERVERPATH."/prg_img/","",$n_img));
 	}else{
 		$s=$ww/$size[0];
 		$ptage_w=round($size[0]*$s);
@@ -317,7 +339,7 @@ function makeDefaultImg($filename,$type){
 }
 function outputImg($res,$filename,$type){
 	
-	global $s3active,$SERVERPATH;
+	global $SERVERPATH;
 	
 	if($type=="jpg"){
 		$e=imagejpeg($res,$filename,85);
@@ -334,14 +356,7 @@ function outputImg($res,$filename,$type){
 		echo "画像の出力に失敗しました。もう一度アップロードしてください。";
 	}
 	
-	if($s3active){
-		$s3i=new S3Module;
-		$s3i->upload($filename,str_replace($SERVERPATH."/prg_img/","",$filename));
-		unlink($filename);
-		/* sportsbull移行後消す */
-		//echo str_replace("sportsbull.jp","undotsushin.com",$filename);
-		//copy($filename,str_replace("sportsbull.jp","undotsushin.com",$filename));
-	}
+	s3upload($filename,str_replace($SERVERPATH."/prg_img/","",$filename));
 	
 	return $e;
 }
@@ -380,7 +395,7 @@ function outimg($oimg,$tumb=1){
 		imgDresize($file,sprintf("%simg/%s.%s",$imgp,$fl[0],$p),array(640,400),$p);
 		imgDresize($file,sprintf("%sthumbnail1/%s.%s",$imgp,$fl[0],$p),array(320,180),$p);
 		imgDresize($file,sprintf("%sthumbnail2/%s.%s",$imgp,$fl[0],$p),array(150,150),$p);
-	}	
+	}
 	imgResize($file,sprintf("%sraw/%s.%s",$imgp,$fl[0],$p),980,$p);
 	
 	/* sportsbull移行後EC2のファイルは削除を有効にする */

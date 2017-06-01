@@ -38,7 +38,7 @@ if($q->get_dir()==3){
 <script src="/shared/cms/js/base.js"></script>
 <script src="/shared/cms/ckeditor/ckeditor.js" type="text/javascript"></script>
 <?php if($q->get_file()==0||$q->get_file()==1){ ?>
-<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script src="//maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 <script src="/shared/cms/js/<?=$CMSJS?>.php" type="text/javascript"></script>
 <script src="/shared/cms/js/<?=$CMSJS?>.js" type="text/javascript"></script>
 <?php } ?>

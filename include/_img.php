@@ -31,8 +31,14 @@ if(($q->get_dir()==0||$q->get_dir()==1)&&$q->get_file()==0){
 	
 	echo sprintf("<tr class=\"%s\"><td class=\"confTitle\">%s</td><td class=\"confFields\">",$f_name,$d_name);
 	if(($q->get_dir()==0||$q->get_dir()==1)&&$q->get_file()!=2){
+			
+		if($_POST["p_youtube"]&&!$_FILES["img1"]["name"]&&$_POST["d_".$f_name]!=1){		
+			${$f_name}=chk_img(array("type"=>"image/jpeg","tmp_name"=>get_youtubeimg($_POST["p_youtube"])),$SIZE,"","","");
+			echo sprintf("<input type=\"hidden\" name=\"%s\" value=\"%s\">",$f_name,${$f_name});
+		}else{
+			${$f_name}=chk_img($_FILES[$f_name],$SIZE,$sv["p_".$f_name."copy"],$_POST['o'.$f_name],$_POST["d_".$f_name]);
+		}
 		
-		${$f_name}=chk_img($_FILES[$f_name],$SIZE,$sv["p_".$f_name."copy"],$_POST['o'.$f_name],$_POST["d_".$f_name]);
 		if(strlen(${$f_name})>0){
 			echo rtimg($_OPTION,${$f_name},$IMG,${$f_name},$f_name,$p[$f_name."copy"],$SizeOption,$tugh);
 		}elseif(strlen($_POST[$f_name])>0){

@@ -123,15 +123,6 @@ if ($template_name == 'category' || $template_name == 'p') {
 // @see https://github.com/undotsushin/undotsushin/issues/1546#issuecomment-290283445
 // @since 2017-03-29
 ?>
-      <?php
-      if (!$in_big6tv) :
-      ?>
-      <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
-      <?php
-      endif;
-      // not big6tv 時にバナー
-      // --------------------------------
-      ?>
     </div><!-- /.foot-pr -->
 
     <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>

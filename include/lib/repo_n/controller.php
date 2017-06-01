@@ -84,7 +84,7 @@ if($q->get_dir()===0){
 		$p=$o->fetch_array();
 
 		if($TABLE=="repo_n"){
-			$sql=sprintf("select title,link,n from u_link where pid=%s order by n",$g->f("nid"));
+			$sql=sprintf("select title,link,(n+1) as n from u_link where pid=%s order by n",$g->f("nid"));
 			$o->query($sql);
 			while($f=$o->fetch_array()){
 				$p["t".$f["n"]]=$f["link"];
