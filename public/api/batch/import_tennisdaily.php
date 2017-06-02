@@ -4,15 +4,18 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=8;
+$MEDIANAME="テニスデイリー";
 
 function modhtmltag($s){
-	$s=str_replace(array("</br>","<br/>","<br />"),"<br>",$s);
+	$s=preg_replace("/(\n)/m","",$s);
+	$s=str_replace(array("</br>","<br/>","<br />","</p><p>"),"<br>",$s);
 	$s=strip_tags($s,"<br>");
-	$s=sprintf("<p>%s</p>",str_replace("<br>","</p><p>",$s));
+	$s=sprintf(preg_match("/^<p>/",$s)?"%s":"<p>%s</p>",str_replace("<br>","</p><p>",$s));
+	$s=preg_replace("#<p>*.</p>#m","",$s);
 	return $s;
 }
 
-$rssfile="http://www.thetennisdaily.jp/rss/rss_undo.asp";
+$rssfile="https://www.thetennisdaily.jp/news/sportsbull.xml";
 $mtype=131;
 
 $o=new db;
@@ -68,7 +71,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
-			if($s["a_time"]!=$f["a_time"]){
+			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
 					$s["img1"]=outimg($s["t30"]);
 				}else{
@@ -85,7 +88,9 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}else{
 		if($data["channel"]["item"][$i]["status"]==1){
-			
+
+			$TITLE[]=pg_escape_string($s["title"]);
+
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
 			$s["m1"]=117; // テニス
@@ -107,5 +112,6 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	}
 }
 
+include $INCLUDEPATH."public/display.php";
 
 ?>

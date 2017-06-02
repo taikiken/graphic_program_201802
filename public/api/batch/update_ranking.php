@@ -24,6 +24,12 @@ insert into u_ranking select nextval('u_ranking_id_seq'),et1.* from (select ot2.
 where t1.commentid=t2.commentid) as ot1,(select id,pageid from u_comment) as ot2 where ot1.commentid=ot2.id) as et1 where not exists (select * from u_ranking where commentid=et1.commentid and pageid=et1.pageid);";
 */
 
+$psql[]="update u_ranking set userflag=t2.uf from (select * from (select id,userflag,(select flag from u_member where id=u_ranking.userid) as uf from u_ranking) as t where t.userflag!=t.uf) as t2 where u_ranking.id=t2.id;";
+$psql[]="update u_ranking set flag=0 where flag=1 and userflag=0;";
+$psql[]="update u_comment set flag=0 where flag=1 and (select flag from u_member where id=u_comment.userid)=0;";
+$psql=implode("\n",$psql);
+$o->query($psql);
+
 $sql="select 
 	id,
 	pageid,
@@ -47,7 +53,5 @@ while($f=$o->fetch_array()){
 
 $in=implode("\n",$in);
 $o->query($in);
-
-echo $in;
 
 ?>

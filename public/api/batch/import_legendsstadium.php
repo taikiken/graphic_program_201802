@@ -5,7 +5,7 @@ include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=28;
 $rssfile="ut_rss_all.xml";
-//$rssfile="https://www.legendsstadium.com/rss/ut/";
+$rssfile="https://www.legendsstadium.com/rss/ut/";
 
 $o=new db;
 $o->connect();
@@ -15,7 +15,6 @@ function mod_bodyhtml($s,$brightcove){
 	global $domain,$ImgPath;
 	
 	$s=str_replace("〜","～",$s);
-	
 	preg_match_all("#<img[^>]+>#",$s,$u);
 	
 	for($i=0;$i<count($u[0]);$i++){
@@ -41,6 +40,11 @@ $xml=str_replace("\x08","",$xml);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 
+if($data["channel"]["item"]["guid"]){
+	$entry=$data["channel"]["item"];
+	unset($data);
+	$data["channel"]["item"][]=$entry;
+}
 
 for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
@@ -48,8 +52,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	$s["title"]=$data["channel"]["item"][$i]["title"];
 	$s["t9"]=$data["channel"]["item"][$i]["link"];
-	$s["t7"]=$data["channel"]["item"][$i]["guid"];
-	
+	$s["t7"]=$data["channel"]["item"][$i]["guid"];	
 	$active[]=$s["t7"];
 	
 	$body=is_string($data["channel"]["item"][$i]["description"])?html_entity_decode($data["channel"]["item"][$i]["description"]):"";
@@ -81,7 +84,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
-			if($s["a_time"]!=$f["a_time"]){
+			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
 					if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"])){
 						$oimg=outimg($s["t30"]);
@@ -96,6 +99,11 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 					$s["img1"]="";
 					$s["t1"]="";
 				}
+				
+				$s["flag"]=1;
+				$s["bodyflag"]=170;
+				$s["imgflag"]=168;
+				//$s["videoflag"]=172;
 				unset($s["m1"]);
 				splittime($s["m_time"],$s["a_time"]);
 				$modbody=mod_bodyhtml($body,$data["channel"]["item"][$i]["movie"]);
@@ -117,6 +125,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$s["cid"]=1;
 			$s["bodyflag"]=170;
 			$s["imgflag"]=168;
+			//$s["videoflag"]=172;
 			$s["n"]="(select max(n)+1 from repo_n where cid=1)";
 			
 			if(strlen($s["t30"])>0){

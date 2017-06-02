@@ -8,7 +8,7 @@ $o->connect();
 
 $category=bind($_REQUEST["category"]);
 
-$sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e from u_categories where name_e='%s'",$category);
+$sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e,og_image,no_image from u_categories where name_e='%s'",$category);
 $o->query($sql);
 $f=$o->fetch_array();
 
@@ -24,15 +24,21 @@ if(strlen($f["name"])>0){
 	https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
 	カテゴリーにpickup, hedlineの記事を追加
 
+	pickupとheadlineが同じ場合は、CMS「記事選択」から新規登録で、該当カテゴリーslugにカテゴリー名を入力する。
+	例）クライミング 'climbing'
+
+	pickupとheadlineを分離して管理する場合、CMS「記事選択」から新規登録で、該当カテゴリーslugに '_headline'を付加する。
+	例）クライミング 'climbing_headline'
+
 	*/
 
 	$sql=sprintf("select id from repo where t1='%s'",$category);
 	$o->query($sql);
 	$c=$o->fetch_array();
 
-	if(strlen($c["id"])>0){
+	$uid=auth();
 
-		$uid=auth();
+	if(strlen($c["id"])>0){
 
 		$sql=sprintf("select rt1.title as modtitle,rt2.* from (select d2,title,n as sort from u_headline where cid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort",$c["id"],sprintf($articletable,set_isbookmark($uid),""));
 		$nsql=sprintf("select count(id) as n from u_headline where cid=%s and flag=1",$c["id"]);
@@ -66,11 +72,45 @@ if(strlen($f["name"])>0){
 	}
 	//ここまで
 
+	unset($c);
+	unset($p);
+
+	$sql=sprintf("select id from repo where t1='%s_headline'",$category);
+	$o->query($sql);
+	$c=$o->fetch_array();
+
+	if(strlen($c["id"])>0){
+
+		$sql=sprintf("select rt1.title as modtitle,rt2.* from (select d2,title,n as sort from u_headline where cid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort",$c["id"],sprintf($articletable,set_isbookmark($uid),""));
+		$nsql=sprintf("select count(id) as n from u_headline where cid=%s and flag=1",$c["id"]);
+
+		$o->query($nsql);
+		$f=$o->fetch_array();
+		$count=$f["n"];
+
+		if($count>0){
+
+			$o->query($sql);
+			while($f=$o->fetch_array())$p[]=$f;
+
+			//カテゴリー一覧でも使うのでファイルに出す
+			$s=array();
+			include "public/articlecomments.php";
+
+			$categoriesinfo["headline"]["articles"]=$s;
+		}
+
+	}else{
+		$categoriesinfo["headline"]["articles"]=$s;
+	}
+
+
 	$y["status"]["code"]=200;
 	$y["status"]["user_message"]="";
 	$y["status"]["developer_message"]="";
 
 }else{
+
 	$y["status"]["code"]=404;
 	$y["status"]["user_message"]="指定されたカテゴリーは存在しません。";
 	$y["status"]["developer_message"]="指定されたカテゴリーは存在しません。";
@@ -79,7 +119,12 @@ if(strlen($f["name"])>0){
 
   if ( $category === 'big6tv' ) :
 
-    $categoriesinfo['live']          = '/api/big6tv/live';
+    if ( preg_match("/com\.sportsbull\.test/", $_SERVER['HTTP_USER_AGENT'] ) || preg_match("/com\.limret\.undotsushin/", $_SERVER['HTTP_USER_AGENT'] ) ) :
+      // $categoriesinfo['live']          = '';
+    else :
+      $categoriesinfo['live']          = '/api/big6tv/live';
+    endif;
+
     $categoriesinfo['live_interval'] = 10;
     $categoriesinfo['webviews']      = array(
       '/big6tv/webview/',

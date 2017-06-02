@@ -4,6 +4,7 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=18;
+$MEDIANAME="ゴルフネットワーク";
 
 $o=new db;
 $o->connect();
@@ -38,6 +39,12 @@ while(list($k,$v)=each($data)){
 	unset($s);
 	$d=$v["channel"]["item"];
 	
+	if($v["channel"]["item"]["title"]){
+		$entry=$v["channel"]["item"];
+		unset($d);
+		$d[]=$entry;
+	}
+
 	for($i=0;$i<count($d);$i++){
 		
 		$s["m1"]=$k;
@@ -65,7 +72,7 @@ while(list($k,$v)=each($data)){
 		unset($sqla);
 		
 		if(strlen($f["id"])>0){
-			if($s["a_time"]!=$f["a_time"]){
+			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
 					$s["img1"]=outimg($s["t30"]);
 				}else{
@@ -76,7 +83,10 @@ while(list($k,$v)=each($data)){
 				$sqla[]=makesql($s,$f["id"]);
 				$sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);
 			}
-		}else{	
+		}else{
+
+			$TITLE[]=pg_escape_string($s["title"]);
+
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
 			$s["flag"]=1;
@@ -113,5 +123,7 @@ while(list($k,$v)=each($data)){
 	}
 }
 
+
+include $INCLUDEPATH."public/display.php";
 
 ?>

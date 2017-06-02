@@ -13,6 +13,7 @@ function modhtmltag($s){
 }
 
 $MEDIAID=6;
+$MEDIANAME="ハドルウェブ";
 $rssfile="https://huddlemagazine.jp/rss_for_undo/";
 $mtype=131;
 
@@ -32,6 +33,12 @@ while($f=$o->fetch_array()){
 $xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
+
+if($data["channel"]["item"]["guid"]){
+	$entry=$data["channel"]["item"];
+	unset($data);
+	$data["channel"]["item"][]=$entry;
+}
 
 for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
@@ -70,7 +77,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
-			if($s["a_time"]!=$f["a_time"]){
+			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
 					$s["img1"]=outimg($s["t30"]);
 				}else{
@@ -87,6 +94,8 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}else{
 		if($data["channel"]["item"][$i]["status"]==1){
+
+			$TITLE[]=pg_escape_string($s["title"]);
 			
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
@@ -108,5 +117,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		$o->query($sqla);
 	}
 }
+
+include $INCLUDEPATH."public/display.php";
 
 ?>

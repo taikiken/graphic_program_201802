@@ -139,21 +139,16 @@ export class ComponentSinglePostBody extends React.Component {
   }
   /**
    * iframe.post-content-iframe をレンダリングします
-   * - src - `/single_content/`
+   * - src - `/p/${id}/content/`
    * @returns {XML} iframe を返します
    */
   render() {
     const id = this.props.single.id;
     let query = this.query;
-    if (query) {
-      query += `&page=${id}`;
-    } else {
-      query = `?page=${id}`;
-    }
     return (
       <iframe
         id={`single-iframe-${id}`}
-        src={`/single_content/${query}`}
+        src={`/p/${id}/content/${query}`}
         frameBorder="0"
         width="100%"
         scrolling="no"

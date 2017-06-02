@@ -266,7 +266,7 @@ function makeTextAreaCell($a,$b,$c,$d,$e,$f){
 	global $q,$p,$f_name,$CONTENTS_EDITED;
 	echo sprintf("<tr class=\"%s\"><td%s class=\"inputTitle\">%s</td><td class=\"inputFields\"><div class=\"ckbox\">",$b,strlen($e)>0?" rowspan=\"2\"":"",$a);
 	if($f==0){
-		echo sprintf("<textarea name=\"p_%s\" id=\"p_%s\" rows=\"%s\"%s>%s</textarea>",$b,$b,$c,$d==82?" class=\"ckeditor\"":"",stripslashes($p[$b]));
+		echo sprintf("<textarea name=\"p_%s\" id=\"p_%s\" rows=\"%s\"%s>%s</textarea>",$b,$b,$c,$d==82?" class=\"ckeditor\"":"",$p[$b]);
 	}else{
 		global $LANG;
 		for($i=0;$i<count($LANG);$i++){

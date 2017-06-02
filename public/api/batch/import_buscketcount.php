@@ -4,6 +4,7 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=25;
+$MEDIANAME="バスケットカウント";
 $rssfile="http://basket-count.com/feed";
 
 function modifyhtml($s){
@@ -55,6 +56,12 @@ $xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 
+if($data["channel"]["item"]["guid"]){
+	$entry=$data["channel"]["item"];
+	unset($data);
+	$data["channel"]["item"][]=$entry;
+}
+
 for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	unset($s);
@@ -62,9 +69,6 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$s["title"]=$data["channel"]["item"][$i]["title"];
 	$s["t9"]=$data["channel"]["item"][$i]["link"];
 	$s["t7"]=$data["channel"]["item"][$i]["guid"];
-	
-	$body=modifyhtml($data["channel"]["item"][$i]["description"]);
-	$modbody=str_replace("\'","''",preg_replace("/(\r|\n|\t)/","",$body[0]));
 	
 	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
 	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
@@ -94,7 +98,11 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
-			if($s["a_time"]!=$f["a_time"]){
+			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
+
+				$body=modifyhtml($data["channel"]["item"][$i]["description"]);
+				$modbody=str_replace("\'","''",preg_replace("/(\r|\n|\t)/","",$body[0]));
+
 				if(strlen($s["t30"])>0){
 					if(!eximg(sprintf("%s/raw/%s",$ImgPath,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
 				}else{
@@ -113,7 +121,11 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}else{
 		if($data["channel"]["item"][$i]["status"]==1){
-			
+
+			$body=modifyhtml($data["channel"]["item"][$i]["description"]);
+			$modbody=str_replace("\'","''",preg_replace("/(\r|\n|\t)/","",$body[0]));
+			$TITLE[]=pg_escape_string($s["title"]);
+
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
 			$s["m1"]=115;
@@ -139,5 +151,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	}
 
 }
+
+include $INCLUDEPATH."public/display.php";
 
 ?>

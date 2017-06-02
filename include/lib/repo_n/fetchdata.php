@@ -26,12 +26,17 @@ if($TABLE=="repo_n"){
 	$title="";
 	$title.=mod_HTML($p[$i]["title"]);
 	
-	if($p[$i]["id"]==33)$title.="（WBCハイライト動画）";
+	if($p[$i]["id"]==33)$title.="（WBC関連記事）";
 	
 }elseif($TABLE=="u_categories"){
 
 	$title="";
 	$title.=mod_HTML($p[$i]["name"]);
+
+}elseif($TABLE=="u_epg"){
+
+	$title=sprintf("[%s] ",$p[$i]["pid"]);
+	$title.=mod_HTML($p[$i]["title"]);
 
 }elseif($TABLE=="u_headline"){
 	
