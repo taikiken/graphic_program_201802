@@ -26,6 +26,7 @@
         div.current-post
       */?>
       <div id="js-current-post" class="current-post">
+
         <?php if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
           // #1602 - VK brightcove
           include_once __DIR__."/../specific/_vk_brightcove_2017.php";
@@ -68,6 +69,26 @@
             </ul>
           </div>
 
+
+<?php // #1999 - AppVador CHILLOUT
+if ( $page['template'] == 'p' || $page['template'] == 'comment') :
+  if ( $page['post']['is_sponserd'] === false ) :
+    echo <<<__EOL__
+<div style="margin: 0px -3.125% 0;" id="apvad">
+  <div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
+</div>
+<script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
+<script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
+<script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
+__EOL__;
+/*
+<style>
+#apvad iframe { position: sticky !important }
+</style>
+*/
+  endif;
+endif;
+?>
 
           <?php if ( $page['post']['is_readmore'] ) : ?>
 
