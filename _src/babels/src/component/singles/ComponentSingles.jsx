@@ -86,28 +86,30 @@ export class ComponentSingles extends React.Component {
       offset: props.offset,
       length: props.length
     };
-
     /**
      * SinglesManager instance
      * @type {SinglesManager}
      */
     this.manager = SinglesManager.factory(props.single);
+    // ---
+    /**
+     * request offset 値 - 更新を行うかを決定する基準値として使用します
+     * @type {number}
+     * @default 0
+     * @since 2017-04-17
+     */
+    this.offset = 0;
+    /**
+     * `this.props.boundMore` を遅延して実行するための timer id
+     * @type {number}
+     * @default 0
+     * @since 2017-04-17
+     */
+    this.timer = 0;
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * delegate, mount 後に呼び出されます<r>
-   * View.DID_MOUNT を発火し、infinite scrollのために moreButton へ続きがあるかを通知します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
-    // hasNext を元に More View button の表示非表示を決める
-    this.props.boundMore(this.props.action.hasNext());
-    // @since 2016-11-04
-    // Facebook like
-    Fb.init();
-  }
   // ---------------------------------------------------
   // 3件以下
   /**
@@ -234,20 +236,72 @@ export class ComponentSingles extends React.Component {
     );
   }
   // ---------------------------------------------------
+  // /**
+  //  * 次の読み込みから表示を更新します
+  //  * @param {Array} list 表示リスト
+  //  * @param {number} offset 読み込み開始位置
+  //  * @param {number} length 読み込み数
+  //  */
+  // updateList(list, offset, length) {
+  //   // state を変更し appendChild + isotope を行う
+  //   this.setState({ list, offset, length });
+  //   // hasNext を元に More View button の表示非表示を決める
+  //   this.props.boundMore(this.props.action.hasNext());
+  //   // @since 2016-11-04
+  //   Fb.delay();
+  // }
   /**
-   * 次の読み込みから表示を更新します
-   * @param {Array} list 表示リスト
-   * @param {number} offset 読み込み開始位置
-   * @param {number} length 読み込み数
+   * 遅延させて `action.hasNext` を元に [More View button] の表示非表示を決める
+   * @param {number} [waitSeconds=0.5] 遅延秒数
+   * @since 2017-04-17
    */
-  updateList(list, offset, length) {
-    // state を変更し appendChild + isotope を行う
-    this.setState({ list, offset, length });
+  delayMore(waitSeconds = 0.5) {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.props.boundMore(this.props.action.hasNext());
+    }, waitSeconds * 1000);
+  }
+  // ---------------------------------------------------
+  // delegate
+  /**
+   * delegate, mount 後に呼び出されます<r>
+   * View.DID_MOUNT を発火し、infinite scrollのために       moreButton へ続きがあるかを通知します
+   */
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
     // hasNext を元に More View button の表示非表示を決める
     this.props.boundMore(this.props.action.hasNext());
     // @since 2016-11-04
-    Fb.delay();
+    // Facebook like
+    // Fb.init();
+    this.offset = this.props.offset;
   }
+  /**
+   * プロパティ `offset` と `nextProps.offset` を比較し処理を行うかを決定します
+   * @param {{offset: number, length: number, list: Array<SingleDae>}} nextProps 更新された props
+   * @since 2017-04-17
+   */
+  componentWillReceiveProps(nextProps) {
+    // console.log('ComponentSingles.componentWillReceiveProps ------------------------------', nextProps.offset, this.offset);
+    if (nextProps.offset !== this.offset) {
+      this.offset = nextProps.offset;
+      // state を変更し appendChild + isotope を行う
+      this.setState({ offset: nextProps.offset, list: nextProps.list, length: nextProps.length });
+      // hasNext を元にMore View button の表示非表示を決める
+      // console.log('ComponentSingles.componentWillReceiveProps', nextProps.offset, this.offset, this.props.action.hasNext());
+      // this.props.boundMore(this.props.action.hasNext());
+      this.delayMore();
+      // @since 2016-11-04
+      Fb.delay();
+    }
+  }
+  // componentWillUnmount() {
+  //   console.log('ComponentSingles.componentWillUnmount ------------------------------', this.props.single.id);
+  // }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('ComponentSingles.shouldComponentUpdate ------------------------------', nextProps, nextState);
+  //   return true;
+  // }
   /**
    * desktop: 記事詳細「次の記事一覧」を出力します
    * @return {XML} div.singles-root を返します

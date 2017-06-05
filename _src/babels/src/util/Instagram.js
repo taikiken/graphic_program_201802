@@ -33,7 +33,7 @@ export class Instagram {
   }
   /**
    * instagram global object を取得し `Embeds.process` 活性化関数をキックします
-   * @return {boolean} キックに成功すると tyrue を返します
+   * @return {boolean} キックに成功すると true を返します
    */
   static process() {
     const instgrm = Instagram.instgrm();

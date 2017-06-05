@@ -256,13 +256,16 @@ export class SPViewArchive extends View {
    * @param {Error} error Error instance
    */
   fail( error:Error ):void {
-
     this.executeSafely( View.RESPONSE_ERROR, error );
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
     // @since 2016-09-28, error で button を非表示へ
-    this.moreButton(false);
-
+    // this.moreButton(false);
+    // button exist 判定追加
+    // @since 2017-06-01
+    if (this.moreButton) {
+      this.moreButton(false);
+    }
   }
   // /**
   //  * ViewError でエラーコンテナを作成します

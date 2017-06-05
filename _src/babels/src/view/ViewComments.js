@@ -632,12 +632,16 @@ export class ViewComments extends View {
    * @param {Object} events 記事 ID を含んだ event object
    */
   onComplete(events):void {
+    // console.log('ViewComment.onComplete', this.articleId, events);
+    // @since 2016-11-05
+    // 記事IDをチェックし同じ時のみリロードします
+    // page 内に複数の記事詳細が存在するようになるため
+    // 記事IDを識別子として加える
     if (parseInt(events.articleId, 10) === this.articleId) {
-      // @since 2016-11-05
-      // 記事IDをチェックし同じ時のみリロードします
-      // page 内に複数の記事詳細が存在するようになるため
-      // 記事IDを識別子として加える
       //
+      // // @since 2017-04-17
+      // // comments delete は articleId を持たないので従来通り再更新する
+      // if (events.type === CommentStatus.COMMENT_DELETE || parseInt(events.articleId, 10) === this.articleId) {
       // とにかくreloadが良さそう
       this.reload();
     }
