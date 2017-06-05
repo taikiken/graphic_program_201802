@@ -75,7 +75,7 @@ export class SPComponentSinglesArticle extends React.Component {
      * @type {boolean}
      * @default false
      */
-    this.sended = false;
+    this.sendGa = false;
   }
   /**
    * `div.loaded-post` を出力します
@@ -176,7 +176,7 @@ export class SPComponentSinglesArticle extends React.Component {
    * @param {Object} events Hit.COLLISION event object
    */
   onHit(events) {
-    if (this.sended) {
+    if (this.sendGa) {
       return;
     }
 
@@ -184,18 +184,18 @@ export class SPComponentSinglesArticle extends React.Component {
     const top = rect.top;
 
     if (Math.abs(top) <= 50) {
-      this.sended = true;
+      this.sendGa = true;
       // ViewSingle.ga(this.state.single);
       // @since 2016-10-05
       const single = this.state.single;
       // 遅延実行させるために第三引数 delay: true 追加します
       // @since 2016-11-14
-      Ga.single(single, 'SPComponentSinglesArticle.onHit');
+      Ga.single(single, `SPComponentSinglesArticle.onHit single: ${single.id}`);
       // ---------------------
       // https://github.com/undotsushin/undotsushin/issues/1151
       // @since  2016-11-15 title added
       const page = new PageTitle(single.title, single.categories.label);
-      Ga.addPage(single.id, 'SPComponentSinglesArticle.onHit', page.title());
+      Ga.addPage(single.id, `SPComponentSinglesArticle.onHit addPage: ${single.id}`, page.title());
       // ---------------------
       this.dispose();
     }

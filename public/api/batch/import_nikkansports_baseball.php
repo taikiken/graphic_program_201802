@@ -38,7 +38,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
 	$s["a_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["lastUpdate"]));
 	if($data["channel"]["item"][$i]["enclosure"]){
-		$s["t30"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["url"];
+		$s["t30"]=str_replace("http://","https://",$data["channel"]["item"][$i]["enclosure"]["@attributes"]["url"]);
 		$s["t1"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["caption"];
 	}
 
@@ -58,7 +58,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$f=$o->fetch_array();
 	
 	unset($sqla);
-		
+	
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
 			if(strtotime($s["a_time"])>strtotime($f["a_time"])){

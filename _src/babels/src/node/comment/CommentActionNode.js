@@ -212,7 +212,9 @@ export let CommentActionNode = React.createClass( {
     // ----------------------------------------------
 
     // event 通知
-    this.comment.remove( this.props.commentId );
+    // this.comment.remove( this.props.commentId );
+    // @since 2017-04-17, 記事id 加える
+    this.comment.remove(this.props.commentId, this.props.articleId);
   },
   deleteFail: function(/* error */) {
     // console.log( 'deleteFail', error );

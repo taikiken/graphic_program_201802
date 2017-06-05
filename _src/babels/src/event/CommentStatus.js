@@ -110,12 +110,22 @@ export class CommentStatus extends EventDispatcher {
   fire( type:string, commentId:string ):void {
     this.dispatch( { type: type, commentId: commentId } );
   }
+  // /**
+  //  * コメント削除
+  //  * @param {string|Number} commentId コメント Id
+  //  */
+  // remove( commentId:string ):void {
+  //   this.fire( CommentStatus.COMMENT_DELETE, commentId );
+  // }
   /**
    * コメント削除
    * @param {string|Number} commentId コメント Id
+   * @param {string|Number} articleId 記事 Id
+   * @since 2017-04-17, 記事id 加える
    */
-  remove( commentId:string ):void {
-    this.fire( CommentStatus.COMMENT_DELETE, commentId );
+  remove(commentId, articleId) {
+    // this.fire( CommentStatus.COMMENT_DELETE, commentId );
+    this.dispatch({ commentId, articleId, type: CommentStatus.COMMENT_DELETE });
   }
   /**
    * 通報
