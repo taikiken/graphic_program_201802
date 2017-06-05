@@ -74,18 +74,14 @@
 if ( $page['template'] == 'p' || $page['template'] == 'comment') :
   if ( $page['post']['is_sponserd'] === false ) :
     echo <<<__EOL__
-<div style="margin: 0px -3.125% 0;" id="apvad">
+<div style="margin: 0px -3.15%;" id="apvad">
   <div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
 </div>
 <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-<script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
+<script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load(console.log(this));})();</script>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
+<style>#apvad iframe { }</style>
 __EOL__;
-/*
-<style>
-#apvad iframe { position: sticky !important }
-</style>
-*/
   endif;
 endif;
 ?>
