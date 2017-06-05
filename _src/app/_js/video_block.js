@@ -31,28 +31,46 @@
 
 })();
 
+// シングル二つはポスグレのエスケープで使用していて、表示の際に戻す際にシングルひとつに戻ってしまいます。
+// シングルクォート二つ連続で使用するときだけ、ダブルクォートで代用
+
 (function(window) {
   'use strict';
   var document = window.document;
+  var videojs = window.videojs;
   var web = document.getElementById('web-article');
   var app = document.getElementById('app-article');
   var videos, video;
-  if (
-    web && app &&
-    location.href.match(/\\?debug/) &&
-    !navigator.userAgent.match(/undotsushin-(android|ios)/)
-  ) {
-    videos = app.getElementsByTag('video');
-    if (videos && videos.length > 0) {
-      video = videos[0];
-      video.pause();
-      video.src = '';
+
+  function dispose() {
+    if (!videojs) {
+      setTimeout(dispose, 25);
+      return;
     }
-    app.innerHtml = '';
+    videojs(video).dispose();
+  }
+  function onLoad() {
+    dispose();
+    if (video) {
+      dispose();
+    }
+    app.innerHtml = "";
     web.style.display = 'block';
-  } else {
-    web.innerHTML = '';
-    app.style.display = 'block';
+  }
+  if (web && app) {
+    if (
+      !location.href.match(/\\?debug/) &&
+      !navigator.userAgent.match(/undotsushin-(android|ios)/)
+    ) {
+      videos = app.getElementsByTagName('video');
+      if (videos && videos.length > 0) {
+        video = videos[0];
+      }
+      setTimeout(onLoad, 500);
+    } else {
+      web.innerHTML = "";
+      app.style.display = 'block';
+    }
   }
 }(window));
 
