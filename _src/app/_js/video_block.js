@@ -33,6 +33,8 @@
 
 // シングル二つはポスグレのエスケープで使用していて、表示の際に戻す際にシングルひとつに戻ってしまいます。
 // シングルクォート二つ連続で使用するときだけ、ダブルクォートで代用
+// @see https://github.com/undotsushin/undotsushin/issues/2004
+// @see https://github.com/undotsushin/undotsushin/pull/2009
 
 (function(window) {
   'use strict';
@@ -50,11 +52,10 @@
     videojs(video).dispose();
   }
   function onLoad() {
-    dispose();
     if (video) {
       dispose();
     }
-    app.innerHtml = "";
+    app.innerHTML = "";
     web.style.display = 'block';
   }
   if (web && app) {
