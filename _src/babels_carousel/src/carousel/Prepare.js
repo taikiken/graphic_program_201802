@@ -233,6 +233,7 @@ export default class Prepare {
     const fragment = document.createDocumentFragment();
     // first element へ `current` class 追加するフラッグ
     let isCurrent = true;
+    // TODO: Array.map へ変更する
     for (const article of articles) {
       const clone = article.cloneNode(true);
       // 表示するコンテンツのみ
