@@ -117,6 +117,23 @@ endif;
               <?php print_r($page['post']['body']); ?>
             </div><!-- /.post-content -->
 
+            <?php // ref. #1876 ?>
+            <!-- /531683568/mobile/mobile_detail_body_bottom -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/mobile/mobile_detail_body_bottom', [300, 50], 'div-gpt-ad-1496897689545-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1496897689545-0' style='height:50px; width:300px; text-align: center; margin: 20px auto;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496897689545-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/mobile/mobile_detail_body_bottom -->
+
           <?php endif; ?>
 
           <?php
