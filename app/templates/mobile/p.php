@@ -127,7 +127,7 @@ endif;
                 googletag.enableServices();
               });
             </script>
-            <div id='div-gpt-ad-1496897689545-0' style='height:50px; width:300px; text-align: center; margin: 20px 0;'>
+            <div id='div-gpt-ad-1496897689545-0' style='height:50px; width:300px; text-align: center; margin: 20px auto;'>
             <script>
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496897689545-0'); });
             </script>
