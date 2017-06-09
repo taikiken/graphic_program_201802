@@ -13,7 +13,7 @@ if($_GET["rid"]==2){
 
 }elseif($_GET["cid"]==10){
 	$a[]=array("head","テーマ設定");
-	$a[]=array("textfield","ベース","base","20","","","","＠dark\ncrazy\ntheme_big6\ntheme_newdark\ntheme_dark");
+	$a[]=array("textfield","ベース","base","20","","","","＠dark");
 	$a[]=array("textfield","背景色 *16進数","bgcolor","20","","","","#000000\n#FFFFFF");
 	$a[]=array("img","PC一覧ヘッダ画像","pc_headerimglist","2000-300-0-0-0-0","","",$BILLINGUAL);
 	$a[]=array("img","PC詳細ページヘッダ画像","pc_headerimgdetail","2000-150-0-0-0-0","","",$BILLINGUAL);
