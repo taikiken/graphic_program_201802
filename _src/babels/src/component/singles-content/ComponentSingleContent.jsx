@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/11/11 - 22:03
+ * @date 2016/11/02 - 22:45
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -10,51 +10,52 @@
  *
  */
 
-// sp/component/singles-content
-import { SPComponentSinglesSNSAbove } from './SPComponentSinglesSNSAbove';
-import { SPComponentSinglesSNSBelow } from './SPComponentSinglesSNSBelow';
-import { SPComponentSingleComments } from './SPComponentSingleComments';
-
-
 // component/singles-content
-import { ComponentSinglePost } from '../../../component/singles-content/ComponentSinglePost';
-// import { ComponentSingleAd } from '../../../component/singles-content/ComponentSingleAd';
-import { ComponentSingleProvider } from '../../../component/singles-content/ComponentSingleProvider';
+import { ComponentSinglePost } from './ComponentSinglePost';
+import { ComponentSingleSNS } from './ComponentSingleSNS';
+import { ComponentSingleAd } from './ComponentSingleAd';
+import { ComponentSingleComments } from './ComponentSingleComments';
+import { ComponentSingleProvider } from './ComponentSingleProvider';
 
 // component/singles
-import { ComponentSingleFooter } from '../../../component/singles/ComponentSingleFooter';
+import { ComponentSingleFooter } from '../singles/ComponentSingleFooter';
 
 // util
-import { Fb } from '../../../util/Fb';
+// import { Fb } from '../../util/Fb';
 
 // React
 const React = self.React;
 
 /**
- * mobile: div.singles-content を出力します
+ * 次の記事一覧の本文を表示します
  *
- * 記事詳細・次の記事一覧の「記事」を出力します
  * ```
- * <SPComponentSingleContent/>
- *  <SPComponentSinglesSNSAbove/>
- *  <ComponentSinglePost/>
- *  <ComponentSingleProvider/>
- *  <ComponentSingleFooter/>
- *  <SPComponentSinglesSNSBelow/>
- *  <SPComponentSingleComments/>
- *    SPViewComments
- *    <SPComponentSinglesAdBelow/>
+ * <ComponentSinglesArticleMagnet/>
+ *  <ComponentSinglesArticleSwitch/>
+ *    // this class
+ *    <ComponentSingleContent/>
+ *      <ComponentSingleSNS/>
+ *      <ComponentSinglePost/>
+ *      <ComponentSingleProvider/>
+ *      <ComponentSingleFooter/>
+ *      <ComponentSingleSNS/>
+ *      <ComponentSingleAd/>
+ *      <ComponentSingleComments/>
+ *        ViewComments
+ *        ViewCommentForm
  * ```
- * {@link SPComponentSinglesSNSAbove},
+ * {@link ComponentSingleContent},
+ * {@link ComponentSingleSNS},
  * {@link ComponentSinglePost},
  * {@link ComponentSingleProvider},
  * {@link ComponentSingleFooter},
- * {@link SPComponentSinglesSNSBelow},
- * {@link SPComponentSingleComments},
- * {@link SPComponentSinglesAdBelow},
- * {@link SPViewComments},
+ * {@link ComponentSingleAd},
+ * {@link ComponentSingleComments},
+ * {@link ViewComments},
+ * {@link ViewCommentForm},
+ * @since 2016-11-04
  */
-export class SPComponentSingleContent extends React.Component {
+export class ComponentSingleContent extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -74,7 +75,7 @@ export class SPComponentSingleContent extends React.Component {
   // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link SPComponentSingleContent.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentSingleContent.propTypes}
    */
   constructor(props) {
     super(props);
@@ -87,30 +88,38 @@ export class SPComponentSingleContent extends React.Component {
       sign: props.sign,
       index: props.index
     };
+    /**
+     * 記事ID - 識別子として使用します
+     * @type {Number}
+     */
+    this.id = parseInt(props.single.id, 10);
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  // /**
+  //  * マウント後に Facebook like button を活性化するために `FB.init` を行います
+  //  */
+  // componentDidMount() {
+  //   Fb.init();
+  // }
+  // /**
+  //  * state.single 情報を更新し再描画します
+  //  * @param {SingleDae} single state.single
+  //  */
+  // updateSingle(single) {
+  //   this.setState({ single });
+  // }
+  // componentWillUnmount() {
+  //   console.log('ComponentSingleContent.componentWillUnmount ========', this.id);
+  // }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('ComponentSingleContent.shouldComponentUpdate ========', this.id, this.state.index, nextState.index);
+  //   // return this.state.height !== nextState.height;
+  //   return true;
+  // }
   /**
-   * マウント後に Facebook like button を活性化するために `FB.init` を行います
-   */
-  componentDidMount() {
-    // Fb.init();
-    // Fb.delay(500);
-    // default 1000 へ
-    // @see https://github.com/undotsushin/undotsushin/issues/1458
-    // @since 2017-01-10
-    Fb.delay();
-  }
-  /**
-   * state.single 情報を更新し再描画します
-   * @param {SingleDae} single state.single
-   */
-  updateSingle(single) {
-    this.setState({ single });
-  }
-  /**
-   * div.singles-content, 本文を出力します
+   * div.singles-content, 本文を
    * @return {XML} div.singles-content
    */
   render() {
@@ -118,14 +127,13 @@ export class SPComponentSingleContent extends React.Component {
     const index = this.state.index;
     return (
       <div className={`singles-content singles-content-${index}`}>
-        <SPComponentSinglesSNSAbove
+        <ComponentSingleSNS
           single={single}
           index={index}
         />
         <ComponentSinglePost
           single={single}
           index={index}
-          sp={true}
         />
         <ComponentSingleProvider
           single={single}
@@ -135,17 +143,15 @@ export class SPComponentSingleContent extends React.Component {
           single={single}
           callback={() => {}}
         />
-        <SPComponentSinglesSNSBelow
+        <ComponentSingleSNS
           single={single}
           index={index}
         />
-        {/*
         <ComponentSingleAd
           ad={single.ad.pc}
           index={index}
         />
-       */}
-        <SPComponentSingleComments
+        <ComponentSingleComments
           single={single}
           index={index}
           sign={this.state.sign}

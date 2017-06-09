@@ -355,10 +355,15 @@ export class ViewArchiveMasonryInfinite extends View {
 
     this.executeSafely( View.RESPONSE_ERROR, error );
     // @since 2016-09-28, error で button を非表示へ
-    this.moreButton(false);
+    // this.moreButton(false);
+    // button exist 判定追加
+    // @since 2017-06-01
+    if (this.moreButton) {
+      this.moreButton(false);
+    }
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-    console.warn('error', error);
+    // console.warn('error', error);
   }
   /**
    * ViewError でエラーコンテナを作成します
@@ -452,22 +457,24 @@ export class ViewArchiveMasonryInfinite extends View {
     // Element 型を保証する
     // moreRendered が null の時のみ instance を作成し
     // instance があれば state を update する
-    if (this.moreRendered === null) {
-      this.moreRendered = ReactDOM.render(
-        <ComponentMoreButton
-          show={show}
-          action={this.action}
-          element={moreElement}
-          home={this.home}
-          slug={this.slug}
-          afterClick={this.afterClick}
-        />,
-        moreElement
-      );
-    } else {
-      this.moreRendered.updateShow(show);
+    // @since 2017-06-01 - show: true の時のみ button 有効化
+    if (show) {
+      if (this.moreRendered === null) {
+        this.moreRendered = ReactDOM.render(
+          <ComponentMoreButton
+            show={show}
+            action={this.action}
+            element={moreElement}
+            home={this.home}
+            slug={this.slug}
+            afterClick={this.afterClick}
+          />,
+          moreElement
+        );
+      } else {
+        this.moreRendered.updateShow(show);
+      }
+      this.scroll.fire();
     }
-
-    this.scroll.fire();
   }
 }// class

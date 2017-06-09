@@ -150,10 +150,10 @@ export let CommentNode = React.createClass( {
       </div>
     );
   },
-  componentDidMount: function() {
-
-  },
-  componentWillUnmount: function() {
-
-  }
+  // componentDidMount: function() {
+  //
+  // },
+  // componentWillUnmount: function() {
+  //
+  // }
 } );

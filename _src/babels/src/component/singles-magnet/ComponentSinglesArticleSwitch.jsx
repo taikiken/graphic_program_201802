@@ -19,6 +19,8 @@ import { ComponentSinglesArticleExcerpt } from './ComponentSinglesArticleExcerpt
 // component/singles-content
 import { ComponentSingleContent } from '../singles-content/ComponentSingleContent';
 import { ComponentSingleSNS } from '../singles-content/ComponentSingleSNS';
+// state record
+import { RecordSingleState } from '../singles-content/RecordSingleState';
 
 // // util
 import { Scroll } from '../../util/Scroll';
@@ -113,6 +115,19 @@ export class ComponentSinglesArticleSwitch extends React.Component {
      * @since 2017-03-05
      */
     this.external = Validate.include(props.single.body, '<video data-video-id="');
+    // ---
+    // below 2017-04-17 - 「続きを読む」iframe 対応
+    // recovery state
+    /**
+     * 情報を保持するための unique id - class name + 記事id
+     * @type {string}
+     * @since 2017-04-17
+     */
+    this.id = `ComponentSinglesArticleSwitch-${props.single.id}`;
+    const record = RecordSingleState.restore(this.id);
+    if (record) {
+      this.state = record;
+    }
   }
   // componentDidMount() {
   //   // -----------------------
@@ -131,77 +146,82 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    * @see https://undo-tsushin.slack.com/archives/product-web/p1488690961000019
    */
   validateClick(event) {
-    if (!this.external) {
-      // 記事詳細を開くための処理に移動
-      this.anchorClick(event);
-    }
-  }
-  /**
-   * category: wbc で keywords に TBS が含まれているかを判定します
-   * @return {boolean} true: wbc && TBS
-   * @since 2017-03-05 - wbc && TBS 遷移する
-   * @see https://github.com/undotsushin/undotsushin/issues/1468
-   */
-  wbcTbs() {
-    const single = this.state.single;
-    // @type {Array<SlugDae>} - SlugDae: {{label: string, slug: string}}
-    const categories = single.categories.all;
-    let result = categories.some(category => category.slug === 'wbc');
-    if (!result) {
-      // false - not wbc
-      return result;
-    }
-    const keywords = single.keywords;
-    return keywords.some(keyword => keyword === 'TBS');
-  }
-  /**
-   * 記事提供元がバーチャル高校野球 && 第89回選抜高等学校野球大会 のタグがついた記事 - id: '26'
-   *
-   * > 記事詳細APIのuser.idが"26"の記事が対象になります。
-   * @return {boolean} true: 対象記事
-   * @since 2017-03-15 - 記事提供元がバーチャル高校野球
-   * @see https://undo-tsushin.slack.com/archives/product-web/p1489556150487078
-   * @see https://github.com/undotsushin/undotsushin/issues/1699
-   */
-  vk89Baseball() {
-    // 記事提供元がバーチャル高校野球 && 第89回選抜高等学校野球大会 のタグがついた記事 - id: '26'
-    // @type {SingleDae}
-    const single = this.state.single;
-    // @type {UserDae}
-    const user = single.user;
-    return user && parseInt(user.id, 10) === 26;
-    // let result = user && parseInt(user.id, 10) === 26;
-    // if (!result) {
-    //   return false;
+    // iframe するので処理しない
+    // @since 2017-04-12
+    // if (!this.external) {
+    //   // 記事詳細を開くための処理に移動
+    //   this.anchorClick(event);
     // }
-    // const keywords = single.keywords;
-    // return keywords.some(keyword => keyword === '第89回選抜高等学校野球大会');
+    this.anchorClick(event);
   }
-  /**
-   * 「続きを読む」でその場で開いて良いかの判定を行います
-   * @return {boolean} true: その場で開く, false: 何もしない - 遷移する
-   * @since 2017-03-05 - wbc && TBS 遷移する
-   * @see https://github.com/undotsushin/undotsushin/issues/1468
-   */
-  canContinue() {
-    let can = true;
-    // since 2017-02-22 `103250` を外部リンクにする
-    if (this.state.single.id === 103250) {
-      can = false;
-    }
-    // check wbc && tbs
-    if (can) {
-      // wbc && tbs の時 true が返るので「続きを読む」可能な時は反転させて使います
-      // return !this.wbcTbs();
-      can = !this.wbcTbs();
-    }
-    // check 記事提供元がバーチャル高校野球
-    if (can) {
-      // true が返るので「続きを読む」可能な時は反転させて使います
-      can = !this.vk89Baseball();
-    }
-    return can;
-  }
+  // /**
+  //  * category: wbc で keywords に TBS が含まれているかを判定します
+  //  * @return {boolean} true: wbc && TBS
+  //  * @since 2017-03-05 - wbc && TBS 遷移する
+  //  * @see https://github.com/undotsushin/undotsushin/issues/1468
+  //  */
+  // wbcTbs() {
+  //   const single = this.state.single;
+  //   // @type {Array<SlugDae>} - SlugDae: {{label: string, slug: string}}
+  //   const categories = single.categories.all;
+  //   let result = categories.some(category => category.slug === 'wbc');
+  //   if (!result) {
+  //     // false - not wbc
+  //     return result;
+  //   }
+  //   const keywords = single.keywords;
+  //   return keywords.some(keyword => keyword === 'TBS');
+  // }
+  // /**
+  //  * 記事提供元がバーチャル高校野球 && 第89回選抜高等学校野球大会 のタグがついた記事 - id: '26'
+  //  *
+  //  * > 記事詳細APIのuser.idが"26"の記事が対象になります。
+  //  * @return {boolean} true: 対象記事
+  //  * @since 2017-03-15 - 記事提供元がバーチャル高校野球
+  //  * @see https://undo-tsushin.slack.com/archives/product-web/p1489556150487078
+  //  * @see https://github.com/undotsushin/undotsushin/issues/1699
+  //  */
+  // vk89Baseball() {
+  //   // 記事提供元がバーチャル高校野球 && 第89回選抜高等学校野球大会 のタグがついた記事 - id: '26'
+  //   // @type {SingleDae}
+  //   const single = this.state.single;
+  //   // @type {UserDae}
+  //   const user = single.user;
+  //   return user && parseInt(user.id, 10) === 26;
+  //   // let result = user && parseInt(user.id, 10) === 26;
+  //   // if (!result) {
+  //   //   return false;
+  //   // }
+  //   // const keywords = single.keywords;
+  //   // return keywords.some(keyword => keyword === '第89回選抜高等学校野球大会');
+  // }
+  // iframe するので処理しない
+  // @since 2017-04-12
+  // /**
+  //  * 「続きを読む」でその場で開いて良いかの判定を行います
+  //  * @return {boolean} true: その場で開く, false: 何もしない - 遷移する
+  //  * @since 2017-03-05 - wbc && TBS 遷移する
+  //  * @see https://github.com/undotsushin/undotsushin/issues/1468
+  //  */
+  // canContinue() {
+  //   let can = true;
+  //   // since 2017-02-22 `103250` を外部リンクにする
+  //   if (this.state.single.id === 103250) {
+  //     can = false;
+  //   }
+  //   // check wbc && tbs
+  //   if (can) {
+  //     // wbc && tbs の時 true が返るので「続きを読む」可能な時は反転させて使います
+  //     // return !this.wbcTbs();
+  //     can = !this.wbcTbs();
+  //   }
+  //   // check 記事提供元がバーチャル高校野球
+  //   if (can) {
+  //     // true が返るので「続きを読む」可能な時は反転させて使います
+  //     can = !this.vk89Baseball();
+  //   }
+  //   return can;
+  // }
   /**
    * a.onclick event handler<br>
    * 本文を表示しボタンを隠します
@@ -210,17 +230,29 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    * @see https://github.com/undotsushin/undotsushin/issues/1593
    * */
   anchorClick(event) {
-    if (this.canContinue()) {
-    // if (this.state.single.id !== 103250) {
-      event.preventDefault();
-      // this.y = Scroll.y;
-      const y = Scroll.y;
-      // contents 詳細切り替え
-      this.setState({ excerpt: !this.state.excerpt });
-      // クリック後遅延してscroll移動
-      // @since 2017-01-17
-      Scroll.motion(y, 0.1, 0.25);
-    }
+    // iframe するので処理しない
+    // @since 2017-04-12
+    // if (this.canContinue()) {
+    // // if (this.state.single.id !== 103250) {
+    //   event.preventDefault();
+    //   // this.y = Scroll.y;
+    //   const y = Scroll.y;
+    //   // contents 詳細切り替え
+    //   this.setState({ excerpt: !this.state.excerpt });
+    //   // クリック後遅延してscroll移動
+    //   // @since 2017-01-17
+    //   Scroll.motion(y, 0.1, 0.25);
+    // }
+    event.preventDefault();
+    // this.y = Scroll.y;
+    const y = Scroll.y;
+    // contents 詳細切り替え
+    // this.setState({ excerpt: !this.state.excerpt });
+    // @since 2017-04-17 - false にしかならないので変更する
+    this.setState({ excerpt: false });
+    // クリック後遅延してscroll移動
+    // @since 2017-01-17
+    Scroll.motion(y, 0.1, 0.25);
   }
   /**
    * 省略文章を表示します
@@ -271,11 +303,22 @@ export class ComponentSinglesArticleSwitch extends React.Component {
       />
     );
   }
+  // ------
+  // delegate
+  /**
+   * unmount 時に state を保存します
+   * @since 2017-04-17
+   */
+  componentWillUnmount() {
+    // console.log('ComponentSinglesArticleSwitch.componentWillUnmount =====', this.id, this.state.excerpt);
+    RecordSingleState.store(this.id, this.state);
+  }
   /**
    * excerpt / 本文 のどちらかを表示します
    * @return {XML} excerpt / content を実行し出力します
    */
   render() {
+    // console.log('ComponentSinglesArticleSwitch.render', this.id, this.state);
     const output = this.state.excerpt ? this.excerpt : this.content;
     return (
       <div
@@ -284,10 +327,5 @@ export class ComponentSinglesArticleSwitch extends React.Component {
         {output()}
       </div>
     );
-    // if (this.state.excerpt) {
-    //   return this.excerpt();
-    // } else {
-    //   return this.content();
-    // }
   }
 }
