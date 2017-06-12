@@ -1,0 +1,656 @@
+@import "../../../../scss/asset";
+
+// sprite 不要の時はコメントに
+/*
+  sprite
+* *********************************** */
+@import "../sprite";
+
+//  1. global header
+//  2. global navigation
+//  3. global footer
+
+
+// 1. global header
+// ----------------------------------------------------------------------------------------------------------------------------------------
+%head-sec {
+  .head-sec-inner {
+    @include clearfix;
+    position: relative;
+    width: $global-inner-width;
+    height: 50px;
+    margin: 0 auto;
+
+    h1 {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      a {
+        @extend .sprite-header;
+        @include sprite( $header-logo );
+        @include hide-text;
+      }
+    }
+  }
+
+  #head-search-container {
+    float: left;
+    width: 300px;
+  }
+
+  .head-search {
+    @include clearfix;
+    // float: left;
+    // width: 300px;
+    margin-top: 10px;
+    padding: 0 14px;
+    background-color: #eee;
+    border-radius: 15px;
+
+    input {
+      border: none;
+      background: transparent;
+      outline: none;
+    }
+
+    input[type="text"] {
+      float: left;
+      width: 250px;
+      padding: 5px 0;
+      vertical-align: middle;
+      font-weight: bold;
+      font-size: fz(12);
+    }
+
+    input[type="submit"] {
+      float: right;
+      @extend .sprite-header;
+      @include sprite( $header-icon-search, inline-block );
+      @include hide-text;
+      margin-top: 8px;
+    }
+
+    &.error {
+      border: #e14343 1px solid;
+    }
+  }
+
+
+
+  #user-profile-container {
+    float: left;
+  }
+
+  .user {
+    @include clearfix;
+    float: left;
+    margin-top: 8px;
+
+    .btn-signup {
+      @include link-decoration($highlight-color, $highlight-color, none, none);
+      display: table-cell;
+      height: 35px;
+      font-weight: bold;
+      font-size: fz(12);
+      vertical-align: middle;
+
+      &:before {
+        content: '';
+        @extend .sprite-header;
+        @include sprite( $header-icon-signup, inline-block );
+        @include hide-text;
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+
+
+  .notice-container {
+    float: left;
+    margin-top: 6px;
+  }
+
+  .notice {
+    position: relative;
+    float: left;
+
+    &-opener {
+      @include link-decoration(null, null, none, none);
+    }
+
+    &-icon {
+      @extend .sprite-common;
+      @include sprite( $common-icon-notice );
+    }
+
+    &-num {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      display: block;
+      width: 20px;
+      height: 20px;
+      padding-top: 4px;
+      line-height: 1;
+      background-color: $highlight-secondary-color;
+      border-radius: 100%;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(10);
+      text-align: center;
+    }
+
+    &-menu {
+      z-index: 9999;
+      display: block;
+      position: absolute;
+      top: 51px;
+      left: -331px;
+
+      .dropMenu {
+        width: 360px;
+        @extend %dropMenu;
+
+        opacity: 0;
+        transition-property: opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: linear;
+      }
+    }
+
+    .info {
+      margin-top: 0;
+
+      @at-root {
+        &-heading {
+          float: left;
+          padding: 10px 15px;
+          font-weight: bold;
+          font-size: fz(12);
+        }
+
+        &-btn-readAll {
+          margin-bottom: 0;
+          padding: 10px 15px;
+          font-size: fz(12);
+        }
+
+        &-link {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          padding-left: 60px;
+        }
+
+        &-user-thumb {
+          left: 15px;
+          width: 35px;
+          height: 35px;
+          border-radius: 100%;
+          background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
+          background-size: 35px;
+
+          img {
+            width: 35px;
+          }
+
+          &.user-logged-in {
+            background: none;
+          }
+        }
+
+        &-content {
+          font-size: fz(12);
+        }
+
+        &-date {
+          font-size: fz(10);
+        }
+      }
+
+      .btn-viewmore {
+        @at-root {
+          &-link {
+            display: block;
+            padding: 12px 0;
+            background-color: $bg-primary-color;
+            border-radius: 0 0 3px 3px;
+            font-weight: bold;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+  } //.notice
+
+
+
+  .preference {
+    position: relative;
+    float: left;
+    margin-left: 20px;
+
+    @at-root {
+      &-opener {
+        position: relative;
+        display: block;
+        width: 35px;
+        height: 35px;
+        overflow: hidden;
+        border-radius: 100%;
+        background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
+        background-size: 35px;
+      }
+
+      &-avatar {
+        display: block;
+
+        img {
+          width: 35px;
+          height: 35px;
+          border-radius: 100%;
+        }
+
+        &.user-logged-in {
+          background-color: #fff;
+        }
+      }
+
+      &-menu {
+        z-index: 9999;
+        display: block;
+        position: absolute;
+        top: 57px;
+        left: -125px;
+
+        .dropMenu {
+          width: 160px;
+          @extend %dropMenu;
+
+          opacity: 0;
+          transition-property: opacity;
+          transition-duration: 0.3s;
+          transition-timing-function: linear;
+
+
+          @at-root {
+            &-item {
+              border-bottom: 1px solid $border-primary-color;
+
+              &:last-child {
+                border-bottom: none;
+              }
+            }
+
+            &-link {
+              @include link-decoration(#333, #333, none, underline);
+              display: block;
+              padding: 14px 20px;
+              font-size: fz(13);
+            }
+          }
+
+        }
+      }
+    }
+  } //.preference
+
+
+  .close {
+    .notice-menu {
+      overflow: hidden;
+      width: 0;
+      height: 0;
+    }
+
+    .preference-menu {
+      overflow: hidden;
+      height: 0;
+      width: 0;
+
+      transition-property: width, height;
+      transition-duration: 0.001s;
+      transition-delay: 0.05s;
+    }
+
+    .dropMenu {
+      opacity: 0;
+      transition-duration: 0.05s;
+    }
+  }
+
+  .open {
+    .notice-menu {
+      overflow: visible;
+      width: 360px;
+      height: auto;
+    }
+
+    .preference-menu {
+      overflow: visible;
+      width: 160px;
+      height: 162px;
+    }
+
+    .dropMenu {
+      opacity: 1;
+    }
+  }
+
+}
+// global header
+
+
+
+
+
+// 2. global navigation
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+// global navigation
+%gnav-sec {
+  background: #111 url(/assets/images/common/gnav-bg.png) 0 0 repeat-x;
+
+  ul {
+    width: $global-inner-width;
+    margin: 0 auto;
+    letter-spacing: ls( inline-block );
+  }
+
+  li {
+    display: inline-block;
+    padding: 0 10px 0 0;
+    text-align: center;
+    vertical-align: middle;
+    letter-spacing: normal;
+
+    // &:last-child {
+    //   padding-right: 0;
+    //   background: none;
+    // }
+  }
+
+  a {
+    display: block;
+    max-height: 40px;
+    // line-height: 40px;
+    padding: 10px 0 12px;
+    // padding: 10px 8px 12px;
+    @include link-decoration(#ccc, $highlight-secondary-color, none, none);
+    font-weight: bold;
+    // font-size: fz(12);
+    white-space: nowrap;
+
+    &:hover {
+      padding-bottom: 10px;
+      border-bottom: 2px solid $highlight-secondary-color;
+      color: $highlight-secondary-color;
+    }
+  }
+
+  .current {
+    a {
+      padding-bottom: 10px;
+      border-bottom: 2px solid $highlight-secondary-color;
+      color: $highlight-secondary-color;
+    }
+  }
+}
+
+
+
+
+
+// 3. global footer
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+// global footer
+%foot-sec {
+  position: relative;
+  padding-top: 20px;
+  background-color: #f5f5f5;
+
+  .foot-sec-inner {
+    background: #061533 url(/assets/images/common/footer-bg.png) no-repeat center bottom;
+  }
+
+  .foot-breadCrumb {
+    background-color: #030b1a;
+    // border-bottom: 1px solid #333;
+
+    ol {
+      list-style: none;
+      width: $global-inner-width;
+      margin: 0 auto;
+      padding: 20px 0;
+      line-height: 18px;
+
+      li {
+        display: inline-block;
+        letter-spacing: ls(inline-block);
+
+        a {
+          display: inline-block;
+          @include link-decoration(#666, #fff, none, none);
+          font-size: fz(12);
+          letter-spacing: normal;
+
+          &:after {
+            content: '';
+            @extend .sprite-common;
+            @include sprite( $common-breadcrumb-arrow );
+            display: inline-block;
+            margin-right: 5px;
+            margin-left: 8px;
+            font-size: 0;
+            vertical-align: middle;
+          }
+        }
+      }
+
+      li:first-child a {
+        position: relative;
+        padding-left: 25px;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          @extend .sprite-common;
+          @include sprite( $common-breadcrumb-home );
+          line-height: 18px;
+          font-size: 0;
+        }
+      }
+
+      li:last-child a {
+        color: #fff;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .foot-pr {
+    background-color: #030b1a;
+
+    &-inner {
+      @include clearfix;
+      width: $global-inner-width;
+      margin: 0 auto;
+      padding-bottom: 32px;
+    }
+
+    figure {
+      float: left;
+    }
+
+    .text-block {
+      @include clearfix;
+      float: left;
+      width: 470px;
+      margin-left: 17px;
+    }
+
+    &-logo {
+      float: left;
+    }
+
+    &-btn {
+      @include clearfix;
+      float: left;
+      margin: 13px 0 0 14px;
+
+      li {
+        float: left;
+
+        + li {
+          margin-left: 10px;
+        }
+      }
+
+      a:hover {
+        @include hover-opacity;
+      }
+    }
+
+    &-text {
+      clear: both;
+      line-height: lh(22,14);
+      padding-top: 20px;
+      color: #fff;
+    }
+
+    .fb-page-plugin {
+      float: right;
+      width: 400px;
+    }
+  } // foot-pr
+
+  .pagetop {
+    position: absolute;
+    right: 30px;
+    top: -60px;
+
+    a {
+      display: block;
+
+      &:hover {
+        @include hover-opacity;
+      }
+    }
+
+    span {
+      @extend .sprite-footer;
+      @include sprite( $footer-pagetop );
+      @include hide-text;
+      margin: 0 auto;
+    }
+
+    &.fixed {
+      position: fixed;
+      top: auto;
+      right: 30px;
+      bottom: 30px;
+    }
+
+    // @since 2016-09-01
+    // 非表示にするためのクラス
+    &.blind {
+      display: none;
+    }
+  } // pagetop
+
+  .fnav-block {
+    @include clearfix;
+    width: $global-inner-width;
+    height: 134px;
+    margin: 0 auto;
+  }
+
+  .fnav {
+    float: left;
+    margin-top: 30px;
+
+    &-logo {
+      line-height: 0;
+    }
+
+    ul {
+      margin-top: 16px;
+      letter-spacing: ls(inline-block);
+
+      li {
+        display: inline-block;
+        letter-spacing: normal;
+
+        + li {
+          margin-left: 24px;
+        }
+      }
+
+      a {
+        @include link-decoration(#fff, #666, none, underline);
+        font-weight: bold;
+        font-size: fz(12);
+      }
+    }
+  } // fnav
+
+  .sns-block {
+    float: right;
+    margin: 50px 100px 0 0;
+
+    ul {
+      text-align: center;
+      letter-spacing: ls(inline-block);
+
+      li {
+        display: inline-block;
+        vertical-align: middle;
+        letter-spacing: normal;
+
+        + li {
+          margin-left: 10px;
+        }
+      }
+
+      a {
+        @extend .sprite-footer;
+        @include hide-text;
+
+        &:hover {
+          @include hover-opacity;
+        }
+      }
+
+      .sns-tw a {
+        @include sprite( $footer-icon-sns-tw );
+      }
+
+      .sns-fb a {
+        @include sprite( $footer-icon-sns-fb );
+      }
+
+      .sns-yt a {
+        @include sprite( $footer-icon-sns-yt );
+      }
+
+    }
+  } //.sns-block
+
+  .copyright {
+    clear: both;
+    padding-top: 16px;
+    color: #ccc;
+    font-weight: bold;
+    font-size: fz(10);
+  } //.copyright
+}
