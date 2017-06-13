@@ -1,5 +1,5 @@
 <div style="text-align:center; margin: 0 auto; border:1px solid #ccc;">
-  <img src="https://user-images.githubusercontent.com/971124/27073330-6a8bb4ae-505e-11e7-9a89-2f3f38f02177.png" style="height: auto; max-width:80%;"/>
+  <img src="//user-images.githubusercontent.com/971124/27073330-6a8bb4ae-505e-11e7-9a89-2f3f38f02177.png" style="height: auto; max-width:80%;"/>
 </div>
 
 <?php
@@ -27,21 +27,21 @@
 <?php
 /*
 
-# `sj_Tennistour.instance.render( option );`
+# `*.instance.render( option );`
 
 initスクリプト。以下のオプションがとれる
 
 option = {
-  'sj_page' : 'ranking_21', // 表示するページ
+  'page'    : 'ranking_21', // 表示するページ
   'hideBcl' : true | false, // SJヘッダーの表示非表示 - trueで隠す
 };
 
-# `sj_Tennistour.instance.callbackPage`
+# `*.instance.callbackPage`
 
 callback。ウィジェットinit後に処理を行いたい場合
 
 ```
-sj_Tennistour.instance.callbackPage = function() {
+*.instance.callbackPage = function() {
   // callback - do something
 };
 ```
