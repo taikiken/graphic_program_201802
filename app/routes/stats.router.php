@@ -26,7 +26,10 @@ $app->group('/stats/{category:tennis|golf}', function () use($app) {
       'path'               => $args,
     ));
 
-    return $this->renderer->render($response, 'stats/default.php', $args);
+    if ( UT_ENV !== 'production' ) :
+      return $this->renderer->render($response, 'stats/default.php', $args);
+    endif;
+
   });
 
 });
