@@ -12,12 +12,45 @@
 //
 // Styleguide 2.2.0
 
-//  1. global header
-//  2. global navigation
-//  3. global footer
+//  1. global layout base
+//  2. global header
+//  3. global navigation
+//  4. global footer
 
 
-// 1. global header
+// 1. global layout base
+// ----------------------------------------------------------------------------------------------------------------------------------------
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  @include link-decoration($highlight-color, $highlight-color, none, underline);
+}
+
+input,
+textarea,
+select,
+button {
+  outline: none;
+}
+
+input,
+textarea {
+  color: #333;
+}
+
+.whole {
+  overflow: hidden;
+  min-width: $global-width;
+}
+
+
+
+
+
+// 2. global header
 // ----------------------------------------------------------------------------------------------------------------------------------------
 %head-sec {
   .head-sec-inner {
@@ -354,7 +387,7 @@
 
 
 
-// 2. global navigation
+// 3. global navigation
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 // global navigation
@@ -411,7 +444,7 @@
 
 
 
-// 3. global footer
+// 4. global footer
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 // global footer

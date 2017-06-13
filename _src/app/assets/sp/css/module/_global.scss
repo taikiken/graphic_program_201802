@@ -13,12 +13,67 @@
 // Styleguide 2.2.0
 
 
-//  1. global header
-//  2. global navigation
-//  3. global footer
+//  1. global layout base
+//  2. global header
+//  3. global navigation
+//  4. global footer
 
 
-// 1. global header
+// 1. global layout base
+// ----------------------------------------------------------------------------------------------------------------------------------------
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+input,
+textarea,
+select,
+button {
+  outline: none;
+}
+
+fieldset {
+  input,
+  textarea {
+    color: #333;
+  }
+}
+
+input::-webkit-input-placeholder {
+  font-size: fz(24/2);
+}
+
+.whole {
+  overflow-x: hidden;
+
+  img {
+    @include fluid-img(100%);
+  }
+
+  input {
+    font-size: 16px;
+  }
+}
+
+a {
+  @include link-decoration($highlight-color, $highlight-color, none, none);
+}
+
+img {
+  touch-callout: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select:none;
+  -moz-touch-callout: none;
+  -moz-user-select:none;
+}
+
+
+
+
+
+// 2. global header
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 // アプリダウンロードバナー
@@ -440,7 +495,7 @@
 
 
 
-// 2. global navigation
+// 3. global navigation
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 %gnav-sec {
@@ -493,7 +548,7 @@
 
 
 
-// 3. global footer
+// 4. global footer
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 %foot-sec {
@@ -607,6 +662,8 @@
       margin-top: (20/2)+px;
       padding-right: perCalc(20);
       padding-left: perCalc(20);
+
+      text-align: center;
     }
 
     .fb-page {
@@ -713,5 +770,3 @@
     text-align: center;
   } //.copyright
 } //.foot-sec
-
-

@@ -12,56 +12,18 @@
 //
 // Styleguide 3.0.0
 
-//  1. layout Base
-//  2. head section
-//  3. gnav section
-//  4. foot section
-//  5. main contents
-//  6. side contents
-
-
-// base
-//
-// Styleguide 3.1.0
-
-// 1. layout Base
-// ----------------------------------------------------------------------------------------------------------------------------------------
-
-html, body {
-  width: 100%;
-  height: 100%;
-}
-
-a {
-  @include link-decoration($highlight-color, $highlight-color, none, underline);
-}
-
-input,
-textarea,
-select,
-button {
-  outline: none;
-}
-
-input,
-textarea {
-  color: #333;
-}
-
-.whole {
-  overflow: hidden;
-  min-width: $global-width;
-}
-
-
-
+//  1. head section
+//  2. gnav section
+//  3. foot section
+//  4. main contents
+//  5. side contents
 
 
 // head
 //
-// Styleguide 3.2.0
+// Styleguide 3.1.0
 
-// 2. head section
+// 1. head section
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 .head-sec {
@@ -74,9 +36,9 @@ textarea {
 
 // gnav
 //
-// Styleguide 3.3.0
+// Styleguide 3.2.0
 
-// 3. gnav section
+// 2. gnav section
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 .gnav-sec {
@@ -89,9 +51,9 @@ textarea {
 
 // foot
 //
-// Styleguide 3.4.0
+// Styleguide 3.3.0
 
-// 4. foot section
+// 3. foot section
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 .foot-sec {
@@ -103,9 +65,9 @@ textarea {
 
 // main
 //
-// Styleguide 3.5.0
+// Styleguide 3.4.0
 
-// 5. main contents
+// 4. main contents
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 .body-sec {
@@ -179,9 +141,9 @@ textarea {
 
 // side
 //
-// Styleguide 3.6.0
+// Styleguide 3.5.0
 
-// 6. side contents
+// 5. side contents
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 .side-sec {
