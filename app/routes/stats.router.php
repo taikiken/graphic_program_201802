@@ -8,13 +8,13 @@ $app->group('/stats/{category:tennis|golf}', function () use($app) {
 
     if ( $args['category'] === 'tennis' ) :
       $category = array(
-        'ttile' => 'テニス | スタッツ情報',
+        'title' => 'テニス | スタッツ情報',
       );
     endif;
 
     if ( $args['category'] === 'golf' ) :
       $category = array(
-        'ttile' => 'ゴルフ | スタッツ情報',
+        'title' => 'ゴルフ | スタッツ情報',
       );
     endif;
 
