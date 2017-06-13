@@ -4,7 +4,7 @@
 //
 // design module signup
 //
-// Styleguide 2.7.0
+// Styleguide 2.8.0
 
 // signup
 // bodyの背景に画像
@@ -129,73 +129,93 @@
 .signup-step {
   padding: (30/2)+px perCalc(30) 0;
 
-  @at-root {
-    &-list {
-      letter-spacing: ls( inline-block );
-      background-color: #f5f5f5;
-      border-radius: 3px;
+  &-list {
+    letter-spacing: ls( inline-block );
+    background-color: #f5f5f5;
+    border-radius: 3px;
+  }
+
+  &-item {
+    position: relative;
+    display: inline-block;
+    width: 33.3%;
+    letter-spacing: normal;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -(10/2)+px;
+      @extend .sp-sprite-setting;
+      @include sprite( $setting-step-bg, inline-block );
+      @include hide-text;
     }
 
-    &-item {
-      position: relative;
-      display: inline-block;
-      width: 33.3%;
-      letter-spacing: normal;
+    span {
+      display: block;
+      line-height: (50/2)+px;
+      font-size: fz(20/2);
+      text-align: center;
+    }
+
+    &.current {
+      background-color: $highlight-color;
 
       &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: -(10/2)+px;
-        @extend .sp-sprite-setting;
-        @include sprite( $setting-step-bg, inline-block );
-        @include hide-text;
+        @include sprite( $setting-step-bg_o, inline-block );
       }
 
       span {
-        display: block;
-        line-height: (50/2)+px;
-        font-size: fz(20/2);
-        text-align: center;
-      }
-
-      &.current {
-        background-color: $highlight-color;
-
-        &:after {
-          @include sprite( $setting-step-bg_o, inline-block );
-        }
-
-        span {
-          color: #fff;
-          font-weight: bold;
-        }
-      }
-    }
-
-    &-step1,
-    &-step2 {
-      background-color: #e5e5e5;
-    }
-
-    &-step1 {
-      z-index: 3;
-      border-radius: 3px 0 0 3px;
-    }
-
-    &-step2 {
-      z-index: 2;
-    }
-
-    &-step3 {
-      z-index: 1;
-
-      &:after {
-        display: none;
+        color: #fff;
+        font-weight: bold;
       }
     }
   }
+
+  &-step1,
+  &-step2 {
+    background-color: #e5e5e5;
+  }
+
+  &-step1 {
+    z-index: 3;
+    border-radius: 3px 0 0 3px;
+  }
+
+  &-step2 {
+    z-index: 2;
+  }
+
+  &-step3 {
+    z-index: 1;
+
+    &:after {
+      display: none;
+    }
+  }
 } //.signup-step
+
+// 表示 / 非表示
+.signup-1 {
+  .fieldset-container-2,
+  .fieldset-container-3 {
+    display: none;
+  }
+}
+
+.signup-2 {
+  .fieldset-container-1,
+  .fieldset-container-3 {
+    display: none;
+  }
+}
+
+.signup-3 {
+  .fieldset-container-1,
+  .fieldset-container-2 {
+    display: none;
+  }
+}
 
 
 
@@ -206,134 +226,273 @@
   padding-right: perCalc(30);
   padding-left: perCalc(30);
 
-  @at-root {
-    &-or {
-      z-index: 1;
-      position: relative;
-      margin-top: (48/2)+px;
-      color: #666;
-      font-weight: bold;
-      font-size: fz(20/2);
-      text-align: center;
+  &-or {
+    z-index: 1;
+    position: relative;
+    margin-top: (48/2)+px;
+    color: #666;
+    font-weight: bold;
+    font-size: fz(20/2);
+    text-align: center;
 
-      &::before, &::after {
-        z-index: -1;
-        position: absolute;
-        font-size: 0;
-      }
+    &::before, &::after {
+      z-index: -1;
+      position: absolute;
+      font-size: 0;
+    }
 
-      &::before {
-        content: '';
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        width: 100%;
-        border-top: 1px solid #999;
-      }
-
-      &::after {
-        content: '';
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: (120/2)+px;
-        height: (30/2)+px;
-        background-color: #fff;
-      }
-    } //.register-or
-
-    &-mail {
-      @include clearfix;
+    &::before {
+      content: '';
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
       width: 100%;
-      margin-top: (48/2)+px;
+      border-top: 1px solid #999;
+    }
 
-      .setting-form-mail,
-      .setting-form-submit {
-        margin-top: 0;
-      }
+    &::after {
+      content: '';
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: (120/2)+px;
+      height: (30/2)+px;
+      background-color: #fff;
+    }
+  } //.register-or
 
-      // .setting-form-mail {
-      //   float: left;
-      //   width: perCalc(320, 520);
+  &-mail {
+    @include clearfix;
+    width: 100%;
+    margin-top: (48/2)+px;
 
-      //   input {
-      //     width: 86%;
-      //   }
-      // }
+    .setting-form-mail,
+    .setting-form-submit {
+      margin-top: 0;
+    }
 
-      .setting-form-mail {
+    // .setting-form-mail {
+    //   float: left;
+    //   width: perCalc(320, 520);
+
+    //   input {
+    //     width: 86%;
+    //   }
+    // }
+
+    .setting-form-mail {
+      width: 100%;
+    }
+
+    // .setting-form-submit {
+    //   float: right;
+    //   width: perCalc(190, 520);
+
+    //   input {
+    //     width: 100%;
+    //     min-width: initial !important;
+    //     min-width: auto !important;
+    //   }
+    // }
+
+    .setting-form-submit {
+      width: 100%;
+      margin-top: (20/2)+px;
+
+      input {
         width: 100%;
-      }
-
-      // .setting-form-submit {
-      //   float: right;
-      //   width: perCalc(190, 520);
-
-      //   input {
-      //     width: 100%;
-      //     min-width: initial !important;
-      //     min-width: auto !important;
-      //   }
-      // }
-
-      .setting-form-submit {
-        width: 100%;
-        margin-top: (20/2)+px;
-
-        input {
-          width: 100%;
-          min-width: initial !important;
-          min-width: auto !important;
-        }
+        min-width: initial !important;
+        min-width: auto !important;
       }
     }
+  } //.register-mail
 
-    .login-email {
-      margin-top: (48/2)+px;
+  .login-email {
+    margin-top: (48/2)+px;
 
-      .setting-form-mail,
-      .setting-form-pw {
-        input {
-          // width: 92%;
-        }
-      }
-
-    }
-
-    &-link-home {
-      margin-top: (30/2)+px;
-      text-align: center;
-
-      a {
-        @include link-decoration(null, null, underline, underline);
-        font-size: fz(24/2);
+    .setting-form-mail,
+    .setting-form-pw {
+      input {
+        // width: 92%;
       }
     }
-  } //at-root
+  }
+
+  &-link-home {
+    margin-top: (30/2)+px;
+    text-align: center;
+
+    a {
+      @include link-decoration(null, null, underline, underline);
+      font-size: fz(24/2);
+    }
+  } //.register-link-home
 
   .linkage-sns {
     margin-top: (30/2)+px;
 
-    @at-root {
-      &-list {
+    &-list {
+    }
+
+    &-item {
+
+      & + .linkage-sns-item {
+        margin-top: (20/2)+px;
       }
 
-      &-item {
-
-        & + .linkage-sns-item {
-          margin-top: (20/2)+px;
-        }
-
-        &:nth-child(2) {
-        }
+      &:nth-child(2) {
       }
+    }
 
-      &-link {
-        // width: 250px;
-      }
-    } //at-root
+    &-link {
+      // width: 250px;
+    }
   }
 } //.register
+
+
+
+// step 1~3
+.fieldset-step-1 {
+  width: 100%;
+}
+.fieldset-step-2 {
+  width: 100%;
+
+  .form-parts {
+    display: block;
+  }
+}
+
+
+
+// step 2
+// drag / drop
+
+// step2 avatar size
+.setting-form-avatar-dropArea {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+  background: #fff;
+
+  position: relative;
+
+  &.entered {
+    border: 3px solid #ccc;
+    background-color: #FFEEAC;
+    border-radius: 10px;
+
+    .should-change-avatar,
+    .avatar-container {
+      opacity: 0;
+    }
+  }
+} //.setting-form-avatar-dropArea
+
+.avatar-stage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX( -50% );
+  display: table-row;
+  vertical-align: middle;
+
+  .avatar-container {
+    overflow: hidden;
+    //display: inline-block;
+    display: table-cell;
+    width: 90px;
+    height: 90px;
+    //border-radius: 100%;
+    //border: 3px solid #e1438b;
+    //background: #fff url(/assets/images/setting/thumb-avatar.png) center center no-repeat;
+
+    border-radius: 0;
+
+    &.user-logged-in {
+      //background: #fff;
+
+      .avatar-block {
+        background: none;
+      }
+    }
+    .avatar-block {
+      overflow: hidden;
+      display: inline-block;
+      width: 90px;
+      height: 90px;
+      border-radius: 100%;
+      border: 3px solid $highlight-color;
+      background: #fff url(/assets/images/setting/thumb-avatar.png) center center no-repeat;
+      //background-size: cover;
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .should-change-avatar {
+    display: table-cell;
+    //margin-top: -45px;
+    height: 90px;
+    width: 90px;
+    vertical-align: middle;
+
+    a {
+      padding-left: 5px;
+      white-space: nowrap;
+    }
+  }
+} // .avatar-stage
+
+
+
+// thumbnail が見えてる時は input tag を見えなくする
+.show-thumbnail {
+  // input type: file
+  .setting-form-picture {
+    display: none;
+  }
+}
+
+
+
+// input type file を非表示にし
+// drop area 全体に広げる
+.setting-form-picture {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 510px;
+  height: 120px;
+  opacity: 0;
+}
+
+
+
+// 非表示 submit
+.submit-hidden-container {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  input[type="submit"] {
+    position: absolute;
+    left: -100%;
+    top: -100%;
+    width: 0;
+    height: 0;
+  }
+}
+
+
+
+// setting interest
+.interest-setting-lead {
+  margin-bottom: 15px;
+}
 
 
 
@@ -405,4 +564,4 @@
 
 // -------------------------------------------------
 // override
-@import "signup_override";
+// @import "signup_override";
