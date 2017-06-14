@@ -1,13 +1,16 @@
-@import "../../../../../scss/asset";
-@import "../../sprite";
+@import "../../../../scss/asset";
+@import "../sprite";
 
-// Theme New Dark
+// Theme Crazy
 //
-// design module new dark theme
+// design module Crazy theme
+//
+// Styleguide 2.15.0
 
-$key-color: #cc141d;
+$key-color: #e1438b;
 
-.whole.theme_newdark {
+.whole.crazy {
+
   .body-sec {
     background-color: #000;
 
@@ -25,7 +28,7 @@ $key-color: #cc141d;
   .widget-recommend {
     &-heading,
     .post {
-      border-bottom-color: $key-color;
+      border-bottom-color: #333;
     }
 
     .board-item:before {
@@ -35,15 +38,15 @@ $key-color: #cc141d;
 
   .widget-ranking-heading-ruby,
   .widget-recommend-heading-ruby {
-    color: #bcb8ad;
+    color: $key-color;
   }
 
   .widget-ranking-heading-title {
-    @include sprite( $common-side-ranking-heading_newdark );
+    @include sprite( $common-side-ranking-heading_dark );
   }
 
   .widget-recommend-heading-title {
-    @include sprite( $common-side-recommend-heading_newdark );
+    @include sprite( $common-side-recommend-heading_dark );
   }
 
   .widget-ranking-heading-title,
@@ -59,8 +62,21 @@ $key-color: #cc141d;
     }
   }
 
-  // [ class^="board-" ] {
-  .board-small {
+  // .related-post {
+  //   .post {
+  //     .post-category {
+  //       color: $key-color;
+  //     }
+
+  //     &:hover {
+  //       .post-heading {
+  //         color: $key-color !important;
+  //       }
+  //     }
+  //   }
+  // }
+
+  [ class^="board-" ] {
     .post {
       @include link-decoration(#fff, #fff, none, none);
 
@@ -73,7 +89,7 @@ $key-color: #cc141d;
       }
 
       &-category {
-        color: #bcb8ad;
+        color: $key-color;
       }
 
       &:hover {
@@ -86,8 +102,48 @@ $key-color: #cc141d;
 
   .board-large {
     .board-item {
-      // border-bottom-color: #1b1b1b;
-      // background-color: #111;
+      border-bottom-color: #1b1b1b;
+      background-color: #111;
+    }
+
+    .post-data {
+      .post-excerpt-text {
+        color: #ccc;
+      }
+    }
+
+    .feature-user {
+      &.comment-item {
+        background-color: #222;
+      }
+
+      .comment-user {
+        &-name {
+          color: #fff;
+        }
+
+        &-job {
+          color: #999;
+        }
+      }
+
+      .comment-content {
+        color: #ccc;
+      }
+    } //.feature-user
+
+    .commented-user-andmore {
+      color: #999;
+    }
+
+    .comment-reaction {
+      .comment-reaction-btn {
+        color: #fff;
+
+        &.active {
+          color: $key-color;
+        }
+      }
     }
   }
 
@@ -143,14 +199,14 @@ $key-color: #cc141d;
     }
   }
 
-} //.theme_newdark
+} //.theme_crazy
 
 
 
 
 
-// post-single
-.whole.theme_newdark {
+// theme_crazy_list
+.whole.crazy {
   &.post-single {
     .body-sec {
       background-color: #000;
@@ -167,7 +223,7 @@ $key-color: #cc141d;
 
 
 // related-post
-.whole.theme_newdark {
+.whole.crazy {
   .related-post {
     .post {
       @include link-decoration(#333, #333, none, none);
@@ -176,15 +232,5 @@ $key-color: #cc141d;
     .post-date {
       color: #666;
     }
-  }
-}
-
-
-
-
-// .live-streaming
-.whole.theme_newdark {
-  .live-streaming {
-    margin-top: 30px;
   }
 }

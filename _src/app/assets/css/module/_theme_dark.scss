@@ -5,12 +5,11 @@
 //
 // design module Dark theme
 //
-// Styleguide 2.13.0
+// Styleguide 2.17.0
 
-$key-color: #e1438b;
+$key-color: #cc141d;
 
 .whole.dark {
-
   .body-sec {
     background-color: #000;
 
@@ -24,11 +23,53 @@ $key-color: #e1438b;
     }
   }
 
+  .headline {
+    // ref. /_src/app/assets/css/module/_index.scss line: 205
+    &-heading {
+      &-title {
+        width: 178px;
+        height: 20px;
+        background: url(/assets/images/common/headline-heading_dark.png) 0 0 no-repeat;
+        @include hide-text;
+        vertical-align: middle;
+      }
+
+      &-ruby {
+        color: #fff;
+      }
+    }
+  }
+
+  .headline-outer .sponsor-link,
+  .sponsor-link-ranking,
+  .sponsor-link-recommend {
+    // ref. /_src/app/assets/css/module/_index.scss line: 254
+    // ref. /_src/app/assets/css/_layout.scss line: 973
+    .adgLink {
+      .adsDescription {
+        color: #fff;
+      }
+
+      &:hover {
+        .adsDescription {
+          color: $key-color !important;
+        }
+      }
+    }
+
+    .adsTitle {
+      &,
+      .adsSponsored {
+        color: #bcb8ad !important;
+      }
+    }
+  }
+
   .widget-ranking,
   .widget-recommend {
     &-heading,
     .post {
-      border-bottom-color: #333;
+      border-bottom-color: $key-color;
     }
 
     .board-item:before {
@@ -38,15 +79,15 @@ $key-color: #e1438b;
 
   .widget-ranking-heading-ruby,
   .widget-recommend-heading-ruby {
-    color: $key-color;
+    color: #bcb8ad;
   }
 
   .widget-ranking-heading-title {
-    @include sprite( $common-side-ranking-heading_dark );
+    @include sprite( $common-side-ranking-heading_newdark );
   }
 
   .widget-recommend-heading-title {
-    @include sprite( $common-side-recommend-heading_dark );
+    @include sprite( $common-side-recommend-heading_newdark );
   }
 
   .widget-ranking-heading-title,
@@ -62,21 +103,8 @@ $key-color: #e1438b;
     }
   }
 
-  // .related-post {
-  //   .post {
-  //     .post-category {
-  //       color: $key-color;
-  //     }
-
-  //     &:hover {
-  //       .post-heading {
-  //         color: $key-color !important;
-  //       }
-  //     }
-  //   }
-  // }
-
-  [ class^="board-" ] {
+  // [ class^="board-" ] {
+  .board-small {
     .post {
       @include link-decoration(#fff, #fff, none, none);
 
@@ -89,7 +117,7 @@ $key-color: #e1438b;
       }
 
       &-category {
-        color: $key-color;
+        color: #bcb8ad;
       }
 
       &:hover {
@@ -102,72 +130,32 @@ $key-color: #e1438b;
 
   .board-large {
     .board-item {
-      border-bottom-color: #1b1b1b;
-      background-color: #111;
-    }
-
-    .post-data {
-      .post-excerpt-text {
-        color: #ccc;
-      }
-    }
-
-    .feature-user {
-      &.comment-item {
-        background-color: #222;
-      }
-
-      .comment-user {
-        &-name {
-          color: #fff;
-        }
-
-        &-job {
-          color: #999;
-        }
-      }
-
-      .comment-content {
-        color: #ccc;
-      }
-    } //.feature-user
-
-    .commented-user-andmore {
-      color: #999;
-    }
-
-    .comment-reaction {
-      .comment-reaction-btn {
-        color: #fff;
-
-        &.active {
-          color: $key-color;
-        }
-      }
+      // border-bottom-color: #1b1b1b;
+      // background-color: #111;
     }
   }
 
-  .sponsor-link-ranking,
-  .sponsor-link-recommend {
-    .adgLink {
-      .adsDescription {
-        color: #fff !important;
-      }
+  // .sponsor-link-ranking,
+  // .sponsor-link-recommend {
+  //   .adgLink {
+  //     .adsDescription {
+  //       color: #fff !important;
+  //     }
 
-      &:hover {
-        .adsDescription {
-          color: $key-color !important;
-        }
-      }
-    }
+  //     &:hover {
+  //       .adsDescription {
+  //         color: $key-color !important;
+  //       }
+  //     }
+  //   }
 
-    .adsTitle {
-      &,
-      .adsSponsored {
-        color: $key-color !important;
-      }
-    }
-  }
+  //   .adsTitle {
+  //     &,
+  //     .adsSponsored {
+  //       color: $key-color !important;
+  //     }
+  //   }
+  // }
 
   .widget-postList {
     .post {
@@ -199,13 +187,13 @@ $key-color: #e1438b;
     }
   }
 
-} //.theme_dark
+} //.dark
 
 
 
 
 
-// theme_dark_list
+// post-single
 .whole.dark {
   &.post-single {
     .body-sec {

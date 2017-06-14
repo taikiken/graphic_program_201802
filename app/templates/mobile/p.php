@@ -69,23 +69,6 @@
             </ul>
           </div>
 
-
-<?php // #1999 - AppVador CHILLOUT
-if ( $page['template'] == 'p' || $page['template'] == 'comment') :
-  if ( $page['post']['is_sponserd'] === false ) :
-    echo <<<__EOL__
-<div style="margin: 0px -3.15%;" id="apvad">
-  <div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
-</div>
-<script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-<script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load(console.log(this));})();</script>
-<script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
-<style>#apvad iframe { }</style>
-__EOL__;
-  endif;
-endif;
-?>
-
           <?php if ( $page['post']['is_readmore'] ) : ?>
 
             <div id="post-content-container" class="post-content">
@@ -116,6 +99,23 @@ endif;
             <div id="post-content-container" class="post-content">
               <?php print_r($page['post']['body']); ?>
             </div><!-- /.post-content -->
+
+            <?php // ref. #1876 ?>
+            <!-- /531683568/mobile/mobile_detail_body_bottom -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/mobile/mobile_detail_body_bottom', [300, 50], 'div-gpt-ad-1496897689545-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1496897689545-0' style='height:50px; width:300px; text-align: center; margin: 20px auto;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496897689545-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/mobile/mobile_detail_body_bottom -->
 
           <?php endif; ?>
 

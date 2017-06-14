@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss_sp/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss_sp/style/reset";
+@import "../../../../../scss_sp/dependencies/style";
