@@ -87,9 +87,19 @@ __EOL__;
 <body>
 <div class="stats">
 
+<header style="text-align:center;">
+  <h1>
+    <a href="/">
+      SPORTS BULL (簡易ヘッダー)
+    </a>
+  </h1>
+</header>
 
 <?php include_once __DIR__.'/'.$page['template']; ?>
 
+<footer style="text-align:center;">
+  <p>フッター</p>
+</footer>
 
 </div>
 </body>
