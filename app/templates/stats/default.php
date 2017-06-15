@@ -85,7 +85,7 @@ __EOL__;
 
 </head>
 <body>
-<div class="whole stats">
+<div class="stats">
 
 
 <?php include_once __DIR__.'/'.$page['template']; ?>
