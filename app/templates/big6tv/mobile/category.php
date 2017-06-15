@@ -31,7 +31,7 @@ endif;
   </table><!-- /.matches-list -->
 
   <div class="matches-btn-allmatches">
-    <a href="/big6tv/" id="js-matches-btn-link">全試合日程を見る</a>
+    <a href="/big6tv/" id="js-matches-btn-link">2017年春季リーグ ハイライト動画を見る</a>
   </div>
 </section><!-- /.matches -->
 
