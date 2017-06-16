@@ -78,10 +78,12 @@ if ( isset($_GET['source']) ) :
   $url    = explode('source=', $_SERVER['QUERY_STRING']);
   $url    = $url[1];
 
-  // [timestamp] : brightcove / cci 用の乱数
+  // [timestamp] - brightcove / cci 用の乱数
   $url    = str_replace('[timestamp]', $timestamp, $url);
 
-  // [referer] : リファラの置き換え
+  // [referer] - リファラの置き換え
+  $url    = str_replace('[description_url]', $referer, $url);
+  $url    = str_replace('[referrer_url]', $referer, $url);
   $url    = str_replace('[referer]', $referer, $url);
 
   $ad_url = "<![CDATA[{$url}]]>";
