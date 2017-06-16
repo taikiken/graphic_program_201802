@@ -492,8 +492,8 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	//$s["media"]["video"]["time"]=s2h($f["d3"]);
 	if($type==1){
 		$s["media"]["video"]["vast"]=$ad["vast"];
-		$s["media"]["video"]["ad_url"]["pc"]=$ad["ad_urlpc"];
-		$s["media"]["video"]["ad_url"]["sp"]=$ad["ad_urlsp"];
+		$s["media"]["video"]["ad_url"]["pc"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlpc"]);
+		$s["media"]["video"]["ad_url"]["sp"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlsp"]);
 	}
 	
 	$s["user"]=set_userinfo($f,0);
