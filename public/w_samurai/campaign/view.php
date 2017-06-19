@@ -54,7 +54,7 @@
   </script>
 </head>
 <body>
-<div id="whole" class="whole theme_newdark w_samurai">
+<div id="whole" class="whole dark w_samurai">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
