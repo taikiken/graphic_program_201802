@@ -14,10 +14,10 @@ sudo apt-get -y upgrade
 # install apache 2.5 and php 5.5
 sudo apt-get install -y apache2
 sudo apt-get install -y php5
+sudo apt-get install -y php5-curl
 
 # postgres
 sudo apt-get install -y postgresql postgresql-contrib php5-pgsql
-
 
 POSTGRE_VERSION=9.3
 
