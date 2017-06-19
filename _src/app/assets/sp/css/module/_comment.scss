@@ -4,7 +4,7 @@
 //
 // design module comment
 //
-// Styleguide 2.9.0
+// Styleguide 2.10.0
 
 // comment
 .comment {
@@ -12,11 +12,19 @@
   background-color: #eee;
 }
 
+.comment-self,
 .comment-yours,
 .comment-official,
-.comment-all {
+.comment-all,
+.comment-normal {
   background-color: #fff;
 
+  .comment-heading {
+    margin-top: 0;
+  }
+}
+
+.comment-self {
   .comment-heading {
     margin-top: 0;
   }
@@ -128,6 +136,8 @@
   }
 } //.comment-form
 
+
+
 .comment-form-opener {
   padding: (20/2)+px perCalc(20);
 
@@ -159,6 +169,27 @@
 }
 
 
+.form-open {
+  display: block;
+}
+
+.form-close {
+  display: none;
+}
+
+.form-root {
+  clear: both;
+}
+
+.comment-respond {
+  .form-root {
+    padding-top: (20/2)+px;
+    padding-bottom: (20/2)+px;
+  }
+}
+
+
+
 
 
 // comment-menu
@@ -166,15 +197,25 @@
   position: relative;
   float: right;
 
-  @at-root {
-    &-btn {
-      @extend .sp-sprite-detail;
-      @include sprite( $detail-btn-comment-menu );
-      @include hide-text;
-      margin-right: (12/2)+px;
+  &-btn {
+    @extend .sp-sprite-detail;
+    @include sprite( $detail-btn-comment-menu );
+    @include hide-text;
+    margin-right: (12/2)+px;
 
-      &.disable  + .dropMenu {
-        display: none;
+    &.disable  + .dropMenu {
+      display: none;
+    }
+  }
+
+  .dropMenu-container {
+    .dropMenu {
+      overflow: hidden;
+
+      .dropMenu-item {
+        transition-property: opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: linear;
       }
     }
   }
@@ -195,13 +236,13 @@
       @include sprite( $common-icon-user-menu_shadow );
     }
 
-    @at-root {
-      &-item {
-        & + .dropMenu-item {
-          border-top: 1px solid $border-primary-color;
-        }
+    &-item {
+      & + .dropMenu-item {
+        border-top: 1px solid $border-primary-color;
       }
+    }
 
+    @at-root {
       [ class^="dropMenu-link-" ] {
         @include link-decoration(#333, #333, none, underline);
         display: block;
@@ -221,11 +262,46 @@
           }
         }
       }
+    } // @at-root
 
-      &-link-delete {
-        span:before {
-          @include sprite( $detail-icon-comment-delete, inline-block );
+    &-link-delete {
+      span:before {
+        @include sprite( $detail-icon-comment-delete, inline-block );
+      }
+    }
+  } // .dropMenu
+
+  &.close {
+    .dropMenu {
+      height: 0;
+
+      &:before {
+        visibility: hidden;
+      }
+
+      .dropMenu-item {
+        overflow: hidden;
+        height: 0;
+        opacity: 0;
+
+        .dropMenu-link-report,
+        .dropMenu-link-delete {
+          overflow: hidden;
+          display: block;
+          height: 0;
+          font-size: 0;
+          line-height: 0;
+          padding: 0;
         }
+      }
+    }
+  }
+
+  &.open {
+    .dropMenu {
+      height: auto;
+      .dropMenu-item {
+        opacity: 1;
       }
     }
   }
@@ -252,14 +328,21 @@
     }
   }
 
+  // .comment-user-thumb
   &-thumb {
     width: (80/2)+px;
     height: (80/2)+px;
     background: url(/assets/sp/images/common/thumb-user-feature.png) 0 0 no-repeat;
     background-size: (80/2)+px;
+    overflow: hidden;
 
     &.user-logged-in {
       background: none;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
     }
   }
 
@@ -532,4 +615,4 @@
 
 // -------------------------------------------------
 // override
-@import "comment_override";
+// @import "comment_override";

@@ -33,6 +33,7 @@ function modifytag($s){
 	
 	$s=preg_replace('# alt=""#','',$s);
 	preg_match_all("#<img[^>]+>#",$s,$u);
+	
 	for($i=0;$i<count($u[0]);$i++){
 		preg_match('#src="([^"]+)"#',$u[0][$i],$r);
 		if(preg_match("#://#",$r[1])){
@@ -43,8 +44,15 @@ function modifytag($s){
 		}
 	}
 	
+	$s=str_replace("<br /><br />","</p><p>",$s);
 	$s=preg_replace("#\n#","",$s);
+	
 	$s=str_replace("詳細はこちら＞","",$s);
+	$s=str_replace("前回の記事はこちら＞＞","",$s);
+	$s=str_replace("前回の記事を読む＞＞","",$s);
+	$s=str_replace("（前編はこちらから＞＞）","",$s);
+	$s=str_replace("（前編から読む＞＞）","",$s);
+	
 	$s=preg_replace("/■.+＞＞/m","",$s);
 	$s=preg_replace("/■.+＞/m","",$s);
 	$s=preg_replace("/◆.+＞＞/m","",$s);
@@ -52,6 +60,30 @@ function modifytag($s){
 	$s=str_replace(array("<p><br>","<br><br><br>","<p></p>","<br></p>"),array("<p>","<br><br>","","</p>"),$s);
 	$s=str_replace("> <","><",$s);
 	$s=str_replace("<br></p>","</p>",$s);
+	
+	preg_match_all("#<br><br>.+?　#",$s,$RED);
+	for($i=0;$i<count($RED[0]);$i++){
+		if(!preg_match("/<p>/",$RED[0][$i])){
+			$e=str_replace(array("<br><br>","　"),array("<br>","</p><p>　"),$RED[0][$i]);
+			$s=str_replace($RED[0][$i],$e,$s);
+		}
+	}
+
+	preg_match_all("#<br><br>.+?──#",$s,$RED);
+	for($i=0;$i<count($RED[0]);$i++){
+		if(!preg_match("/<p>/",$RED[0][$i])){
+			$e=str_replace(array("<br><br>","──"),array("<br>","</p><p>──"),$RED[0][$i]);
+			$s=str_replace($RED[0][$i],$e,$s);
+		}
+	}
+
+	preg_match_all("#<br><br>.+?「#",$s,$RED);
+	for($i=0;$i<count($RED[0]);$i++){
+		if(!preg_match("/<p>/",$RED[0][$i])){
+			$e=str_replace(array("<br><br>","　"),array("<br>","</p><p>「"),$RED[0][$i]);
+			$s=str_replace($RED[0][$i],$e,$s);
+		}
+	}
 	
 	return $s;
 }

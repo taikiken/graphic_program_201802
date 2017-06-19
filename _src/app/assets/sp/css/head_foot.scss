@@ -1,0 +1,79 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../scss_sp/asset";
+
+// sprite 不要の時はコメントに
+/*
+  sprite
+* *********************************** */
+@import "sprite";
+
+@import "module/utility";
+@import "module/global";
+
+// Header & Footer
+//
+// ヘッダー・フッター専用
+
+//  1. head section
+//  2. gnav section
+//  3. foot section
+
+
+// 1. head section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+// アプリダウンロードバナー
+.header-appbnr {
+  @extend %header-appbnr;
+}
+
+// アプリダウンロードバナー 表示
+// bodyに .appbnr-enable
+.appbnr-enable {
+  @extend %appbnr-enable;
+}
+
+// 検索ボックスが表示された状態
+// bodyに .search-form-open
+.search-form-open {
+  @extend %search-form-open;
+}
+
+// header を fixed にする
+.header-sticky {
+  @extend %header-sticky;
+}
+
+// .head-sec
+.head-sec {
+  @extend %head-sec;
+}
+
+// .head-search
+.head-search {
+  @extend %head-search;
+}
+
+
+
+
+
+// 2. gnav section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+.gnav-sec {
+  @extend %gnav-sec;
+}
+
+
+
+
+
+// 3. foot section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+.foot-sec {
+  @extend %foot-sec;
+}
