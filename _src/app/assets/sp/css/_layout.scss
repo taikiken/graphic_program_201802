@@ -454,17 +454,3 @@ div.synapse_logo {
   font-size: 10px;
   text-align: center;
 }
-
-
-
-
-
-// ---------------------------------------------------------
-// hotfix
-// ref. https://github.com/undotsushin/undotsushin/issues/2024
-
-.headline .sponsor-link,
-#sponsor-link-ranking,
-#sponsor-link-recommend {
-  display: none !important;
-}
