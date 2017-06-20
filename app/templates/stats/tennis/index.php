@@ -1,44 +1,62 @@
-<div class="stats__tennis__header">
-  <a href="./" class="stats__tennis__header__title">
-    <figure>
-      <img src="//user-images.githubusercontent.com/971124/27073330-6a8bb4ae-505e-11e7-9a89-2f3f38f02177.png" style="height: auto; max-width:80%;"/>
-    </figure>
-    <h1>
-      最新テニス情報(仮)
-    </h1>
-  </a>
-</div>
+<div class="body-sec">
+  <div class="body-sec-inner">
 
-<div class="stats__tennis__banner">
-  <a href="./?sj_page=tournament_2017001_men_singles_today" style="background:url(http://media.istockphoto.com/photos/kei-nishikori-backhand-in-melbourne-picture-id505340344?s=2048x2048);">
-    <h2>ウインブルドン / 7/3～16</h2>
-    <small>( 特定の大会への誘導 ) </small>
-  </a>
-</div>
+    <section class="main-sec">
+      <div class="stats__tennis__header">
+        <a href="./" class="stats__tennis__header__title">
+          <h1>
+            <img src="/assets/images/stats/tennis/heading.png" alt="テニス 速報&スタッツ" />
+          </h1>
+        </a>
+      </div><!-- /.stats__tennis__header -->
 
+      <div class="stats__tennis__banner">
+        <a href="./?sj_page=tournament_2017001_men_singles_today">
+          <img src="/assets/images/stats/tennis/bnr_hero.png" alt="xxxxx">
+        </a>
+      </div>
 
-<div class="stats__nav">
-  <ul>
-    <li><a href="./">トップ</a></li>
-    <li><a href="./?sj_page=schedule_men_top">日程・結果</a></li>
-    <li><a href="./?sj_page=ranking_21">ランキング</a></li>
-    <li><a href="./?sj_page=players_men_a">選手情報</a></li>
-    <li><a href="./?sj_page=player_395610_result">錦織 圭 最新結果</a></li>
-  </ul>
-</div>
+      <div class="stats__nav">
+        <ul>
+          <li class="stats__nav__item_1"><a href="./">トップ</a></li>
+          <li class="stats__nav__item_2"><a href="./?sj_page=schedule_men_top">日程・結果</a></li>
+          <li class="stats__nav__item_3"><a href="./?sj_page=ranking_21">ランキング</a></li>
+          <li class="stats__nav__item_4"><a href="./?sj_page=players_men_a">選手情報</a></li>
+          <li class="stats__nav__item_5"><a href="./?sj_page=player_395610_result">錦織 圭 最新結果</a></li>
+        </ul>
+      </div>
 
+      <?php
+      /*
+        <?php if ( $page['ua'] === 'desktop' ) : ?>
+        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/common.css" />
+        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sportsbull/css/fonts/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/sj-tennis.css" />
+        <?php else : ?>
+        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/common-sp.css" />
+        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sportsbull/css/fonts/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/sj-tennis-sp.css" />
+        <?php endif; ?>
+      */
+      ?>
 
-<?php if ( $page['ua'] === 'desktop' ) : ?>
-<link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/common.css" />
-<link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sportsbull/css/fonts/css/font-awesome.min.css"/>
-<link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/sj-tennis.css" />
-<?php else : ?>
-<link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/common-sp.css" />
-<link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sportsbull/css/fonts/css/font-awesome.min.css"/>
-<link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/sj-tennis-sp.css" />
-<?php endif; ?>
-<script src="http://sports.stats-japan.jp/tennis/sjparts/js/main/tennis.js"></script>
+      <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/common-sp.css" />
+      <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sportsbull/css/fonts/css/font-awesome.min.css"/>
+      <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/sj-tennis-sp.css" />
 
+      <script src="http://sports.stats-japan.jp/tennis/sjparts/js/main/tennis.js"></script>
+      <script>
+        sj_Tennistour.instance.render({
+          'hideBcl' : true
+        });
+      </script>
+    </section><!-- /.main-sec -->
+
+    <section class="side-sec show-for-large">
+      side section - PC版サイドカラム
+    </section>
+  </div>
+</div><!-- /.body-sec -->
 
 <?php
 /*
@@ -63,11 +81,8 @@ callback。ウィジェットinit後に処理を行いたい場合
 ```
 
 */
-?><script>
-sj_Tennistour.instance.render({
-  'hideBcl' : true
-});
-</script>
+?>
+
 
 <style>
 .stats {
@@ -75,7 +90,7 @@ sj_Tennistour.instance.render({
 }
 
 /*  header  */
-.stats__tennis__header__title {
+/*.stats__tennis__header__title {
   text-align:center; margin: 0 auto; border:1px solid #ccc;
   display: table;
   width: 100%;
@@ -93,10 +108,10 @@ sj_Tennistour.instance.render({
   vertical-align: middle;
   padding: 20px;
   font-size: 6vw;
-}
+}*/
 
 
-.stats__tennis__banner {
+/*.stats__tennis__banner {
   margin: 1em 0;
   text-align: center;
   position: relative;
@@ -112,7 +127,7 @@ sj_Tennistour.instance.render({
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-}
+}*/
 
 .stats__nav {
   margin: 1em 0;
