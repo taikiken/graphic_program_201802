@@ -392,7 +392,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     const singlesArticle = this.singlesArticle;
     if (this.hit === null && singlesArticle !== null) {
       // snap
-      const snap = new Snap(this.singlesArticle, false, this.page);
+      const snap = new Snap(this.singlesArticle, false, this.page, true);
       this.snap = snap;
       // snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       // snap.on(Snap.BEAT_UP, this.onBeat.bind(this));

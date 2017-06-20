@@ -20,11 +20,13 @@
     // ---------------------------------------------------- ?>
 
     <section class="main-sec">
-      <?php/*
-        // @since 2016-11-10
+      <?php
+      /*
+        @since 2016-11-10
         History API + snap scroll するために現在記事をすべてラップするコンテナ追加
         div.current-post
-      */?>
+      */
+      ?>
       <div id="js-current-post" class="current-post">
 
         <?php if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
