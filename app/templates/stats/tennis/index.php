@@ -12,7 +12,7 @@
 
       <div class="stats__tennis__banner">
         <a href="./?sj_page=tournament_2017001_men_singles_today">
-          <img src="/assets/images/stats/tennis/bnr_hero.png" alt="xxxxx">
+          <img class="responsive" src="/assets/images/stats/tennis/bnr_hero@2x.png" alt="xxxxx">
         </a>
       </div>
 
@@ -82,77 +82,3 @@ callback。ウィジェットinit後に処理を行いたい場合
 
 */
 ?>
-
-
-<style>
-.stats {
-  padding-bottom: 100px;
-}
-
-/*  header  */
-/*.stats__tennis__header__title {
-  text-align:center; margin: 0 auto; border:1px solid #ccc;
-  display: table;
-  width: 100%;
-}
-
-.stats__tennis__header__title figure {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  width: 30%;
-}
-
-.stats__tennis__header__title h1 {
-  display: table-cell;
-  vertical-align: middle;
-  padding: 20px;
-  font-size: 6vw;
-}*/
-
-
-/*.stats__tennis__banner {
-  margin: 1em 0;
-  text-align: center;
-  position: relative;
-  background: #fff;
-}
-
-.stats__tennis__banner a {
-  display: block;
-  padding: 20px;
-  font-size: 5vw;
-  font-weight: 700;
-  color: #fff;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-}
-
-.stats__nav {
-  margin: 1em 0;
-}
-
-.stats__nav ul {
-  display: flex;
-  justify-content: center;
-  border-bottom: 3px solid #0e357f;
-  line-height: 1;
-}
-
-.stats__nav ul li {
-  width: 20%;
-  padding: 5px 5px 0;
-}
-
-.stats__nav ul li a {
-  display: block;
-  padding: 10px;
-  font-size: 15px;
-  border: 2px solid #0e357f;
-  border-bottom: none;
-  text-align: center;
-}
-*/
-
-</style>
