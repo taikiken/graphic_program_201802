@@ -1,0 +1,250 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../scss/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../bower_exports/modularized/normalize";
+@import "../../../../scss/style/reset";
+@import "../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/utility";
+@import "../module/global";
+@import "../layout";
+
+
+// print
+// @import "print";
+
+// common override
+.stats .body-sec-inner {
+  background: #f5f5f5 none;
+}
+
+footer.foot-sec {
+  margin-top: 0;
+  text-align: left;
+  font-size: inherit;
+}
+
+
+// tennis
+
+// stats__tennis__header
+
+.stats__tennis__header {
+  padding-top: 30px;
+}
+
+.stats__tennis__banner {
+  margin-top: 20px;
+}
+
+//.stats__nav
+.stats__nav {
+  margin-top: 40px;
+  margin-bottom: 30px;
+
+  //.stats__nav__list
+  &__list {
+    width: 100%;
+    display: table;
+    border: 2px solid #cc141d;
+    border-radius: 4px;
+  }
+
+  [class^="stats__nav__item"] {
+    display: table-cell;
+
+    &:last-child {
+      a {
+        border-right: none;
+      }
+    }
+  }
+
+  a {
+    @include link-decoration(#cc141d, #fff, none, none);
+    display: block;
+    line-height: 1;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    border-right: 1px solid #efefef;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+
+    &:hover {
+      border-right-color: #cc141d;
+      background-color: #cc141d;
+    }
+  }
+}
+
+
+
+
+
+#sj_contents_div {
+  font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', Arial, verdana, sans-serif
+}
+
+#sj_contents_div,
+#sj_contents_div.SJ_color-blue,
+#sj_contents_div .SJ_color-sky {
+  background-color: transparent;
+
+  a {
+    @include link-decoration(#0e357f, #0e357f, none, underline);
+  }
+
+  // ボーダーカラー
+  .SJ_h2-pole,
+  .SJ_h3-pole,
+  .SJ_h4-pole,
+  .SJ_h5-pole,
+  .SJ_h3-upper,
+  .SJ_h4-upper,
+  .SJ_h3-under,
+  .SJ_h4-under,
+  ul.SJ_tabs,
+  ul.SJ_tabs a,
+  dl.SJ_tabs-year {
+    border-color: #033583;
+  }
+
+  // ウィジェットのページトップを非表示
+  .SJ_to-top {
+    display: none;
+  }
+
+  //ウィジェットのコピーライト
+  footer {
+    font-size: 10px;
+  }
+
+  //#SJ_container
+  #SJ_container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  // heading title
+  .SJ_h2 {
+    color: #033583;
+    font-weight: bold;
+  }
+
+  .SJ_h2-pole {
+    margin: 0 0 20px;
+    padding: 5px 0;
+    border-width: 0 0 3px 0;
+  }
+
+  .SJ_h2-solid {
+    margin: 0 0 20px;
+    padding: 5px 0;
+    background-color: transparent;
+  }
+
+  .SJ_h2-pole.SJ_h2-solid {
+    padding: 5px 0 !important;
+  }
+
+  //.SJ_update
+  h2 + .SJ_update,
+  .SJ_switch-ttl + .SJ_update {
+    margin: -10px 0 16px 0;
+    font-size: 10px;
+  }
+
+
+
+  // table
+  table.SJ_table-solid.SJ_table-color thead th:first-child {
+    border-color: transparent;
+    border-right-color: #fff;
+  }
+
+  table.SJ_table-solid.SJ_table-color thead th {
+    background-color: #0e357f;
+    border-color: transparent #fff;
+  }
+
+  table.SJ_table-solid thead th,
+  table.SJ_table-solid tbody th {
+    padding: 10px 1%;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  table.SJ_table-solid tbody td {
+    padding: 8px 1%;
+    font-size: 13px;
+  }
+
+  table.SJ_table-solid tbody td:first-child {
+    border-left: none;
+  }
+
+  table.SJ_table-solid tbody td:last-child {
+    border-right: none;
+  }
+
+  table.SJ_table-stripe tbody tr:nth-child(odd) td {
+    background-color: #e6e6e6;
+  }
+
+
+
+  // table caption
+  table.SJ_table-solid caption {
+    padding: 0 0 5px;
+  }
+
+  table.SJ_table-solid caption .SJ_float-l {
+    color: #033583;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  table.SJ_table-solid caption .SJ_float-r {
+    display: inline-block;
+    padding-right: 20px;
+    overflow: hidden;
+    text-indent: -1em;
+
+    a {
+      @include link-decoration(#cc141d, #cc141d, none, none);
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      margin-right: -20px;
+      text-indent: 20px;
+      font-size: 16px;
+      font-weight: bold;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        right: 0;
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
+        background-size: 16px;
+      }
+    }
+  } // table caption
+
+
+} //#sj_contents_div.SJ_color-blue
+
+
