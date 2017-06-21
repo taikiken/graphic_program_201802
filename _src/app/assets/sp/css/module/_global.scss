@@ -49,6 +49,10 @@ input::-webkit-input-placeholder {
 
   img {
     @include fluid-img(100%);
+
+    &.responsive {
+      display: none;
+    }
   }
 
   input {

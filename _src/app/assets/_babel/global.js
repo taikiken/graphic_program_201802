@@ -113,7 +113,7 @@ class Responsive {
     if (src.match(reg)) {
       img.src = src.replace('@2x', '');
     }
-    // いる？
+    // 初期設定で非表示されているので表示
     img.style.display = 'block';
   }
   /**
@@ -131,6 +131,8 @@ class Responsive {
     if (!src.match(reg)) {
       img.src = src.replace(/(\.gif|\.jpg|\.png)/g, '@2x$1');
     }
+    // 初期設定で非表示されているので表示
+    img.style.display = 'block';
   }
   /**
    * 置換え処理を行います

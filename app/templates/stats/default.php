@@ -34,8 +34,6 @@
 
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
-  <link rel="stylesheet" href="/assets/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
-  <link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
   <?php // #1876 - Google Optimize ?>
   <style>.async-hide { opacity: 0 !important} </style>
@@ -105,7 +103,7 @@ __EOL__;
       <nav class="foot-breadCrumb">
         <ol itemscope itemtype="http://schema.org/breadCrumbList">
           <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">ページタイトル</span><meta itemprop="position" content="2" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name"><?php echo strip_tags($page['title']); ?></span><meta itemprop="position" content="2" /></a></li>
         </ol>
       </nav><!-- /.foot-breadCrumb -->
 
@@ -217,6 +215,9 @@ __EOL__;
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
+
+<link rel="stylesheet" href="/assets/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
+<link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
 <script src="/assets/js/global.bundle.js"></script>
 </body>

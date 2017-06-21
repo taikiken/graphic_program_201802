@@ -5,7 +5,7 @@
       <div class="stats__tennis__header">
         <a href="./" class="stats__tennis__header__title">
           <h1>
-            <img src="/assets/images/stats/tennis/heading.png" alt="テニス 速報&スタッツ" />
+            <img class="responsive" src="/assets/images/stats/tennis/heading@2x.png" alt="テニス 速報&スタッツ" />
           </h1>
         </a>
       </div><!-- /.stats__tennis__header -->
@@ -17,7 +17,7 @@
       </div>
 
       <div class="stats__nav">
-        <ul>
+        <ul class="stats__nav__list">
           <li class="stats__nav__item_1"><a href="./">トップ</a></li>
           <li class="stats__nav__item_2"><a href="./?sj_page=schedule_men_top">日程・結果</a></li>
           <li class="stats__nav__item_3"><a href="./?sj_page=ranking_21">ランキング</a></li>
@@ -127,7 +127,7 @@ callback。ウィジェットinit後に処理を行いたい場合
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-}*/
+}
 
 .stats__nav {
   margin: 1em 0;
@@ -153,5 +153,6 @@ callback。ウィジェットinit後に処理を行いたい場合
   border-bottom: none;
   text-align: center;
 }
+*/
 
 </style>
