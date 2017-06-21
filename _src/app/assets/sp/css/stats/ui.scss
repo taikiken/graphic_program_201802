@@ -21,3 +21,149 @@
 // print
 // @import "print";
 
+// common override
+
+footer.foot-sec {
+  margin-top: 0;
+  text-align: left;
+  font-size: inherit;
+}
+
+
+// tennis
+
+// stats__tennis__header
+.stats__tennis__header {}
+
+// stats__tennis__banner
+.stats__tennis__banner {
+  padding: (20/2)+px perCalc(55, 750);
+  background-color: #dbdbdb;
+}
+
+//.stats__nav
+.stats__nav {
+  padding: (40/2)+px perCalc(20, 750);
+
+  //.stats__nav__list
+  &__list {
+    letter-spacing: ls(inline-block);
+  }
+
+  [class^="stats__nav__item"] {
+    display: inline-block;
+    width: 25%;
+    border-top: (4/2)+px solid #cc141d;
+    border-bottom: (4/2)+px solid #cc141d;
+    letter-spacing: normal;
+    box-sizing: border-box;
+  }
+
+  &__item_1 {
+    border-left: (4/2)+px solid #cc141d;
+    border-radius: 4px 0 0 4px;
+  }
+
+  &__item_4 {
+    border-right: (4/2)+px solid #cc141d;
+    border-radius: 0 4px 4px 0;
+
+    a {
+      border-right: none;
+    }
+  }
+
+  a {
+    @include link-decoration(#cc141d, #cc141d, none, none);
+    display: block;
+    line-height: 1;
+    padding-top: (24/2)+px;
+    padding-bottom: (24/2)+px;
+    border-right: 1px solid #efefef;
+    background-color: #fff;
+    font-weight: bold;
+    text-align: center;
+
+    .current {
+      border-right-color: #cc141d;
+      background-color: #cc141d;
+      color: #fff;
+    }
+  }
+
+  &__item_5 {
+    width: 100% !important;
+    margin-top: (20/2)+px;
+    border-right: (4/2)+px solid #cc141d;
+    border-left: (4/2)+px solid #cc141d;
+    border-radius: 4px;
+  }
+}
+
+
+
+
+
+#sj_contents_div {
+  font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', Arial, verdana, sans-serif
+}
+
+#sj_contents_div,
+#sj_contents_div.SJ_color-blue,
+#sj_contents_div .SJ_color-sky {
+  padding-right: perCalc(20, 750);
+  padding-left: perCalc(20, 750);
+
+  a {
+    @include link-decoration(#0e357f, #0e357f, none, none);
+  }
+
+  // ボーダーカラー
+  .SJ_h2-pole,
+  .SJ_h3-pole,
+  .SJ_h4-pole,
+  .SJ_h5-pole,
+  .SJ_h3-upper,
+  .SJ_h4-upper,
+  .SJ_h3-under,
+  .SJ_h4-under,
+  ul.SJ_tabs,
+  ul.SJ_tabs a,
+  dl.SJ_tabs-year {
+    border-color: #033583;
+  }
+
+  // ウィジェットのページトップを非表示
+  .SJ_to-top {
+    display: none;
+  }
+
+  //ウィジェットのコピーライト
+  footer {
+    padding-bottom: 10px;
+    font-size: 10px;
+  }
+
+  // heading title
+  .SJ_h2 {
+    color: #033583;
+    font-weight: bold;
+  }
+
+  .SJ_h2-pole {
+    margin: 0 0 20px;
+    padding: 5px 0;
+    border-width: 0 0 3px 0;
+  }
+
+  .SJ_h2-solid {
+    margin: 0 0 20px;
+    padding: 5px 0;
+    background-color: transparent;
+  }
+
+  .SJ_h2-pole.SJ_h2-solid {
+    padding: 5px 0 !important;
+  }
+
+} //#sj_contents_div.SJ_color-blue
