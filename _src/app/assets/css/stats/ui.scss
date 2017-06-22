@@ -35,6 +35,11 @@ footer.foot-sec {
 
 // tennis
 
+$link-color: #0e357f;
+$bg-color_gray: #e6e6e6;
+$bg-color_blue: #0e357f;
+$highlight-color: #033583;
+
 // stats__tennis__header
 
 .stats__tennis__header {
@@ -79,13 +84,13 @@ footer.foot-sec {
     font-weight: bold;
     font-size: 14px;
     text-align: center;
+  }
 
-    .current,
-    &:hover {
-      border-right-color: #cc141d;
-      background-color: #cc141d;
-      color: #fff;
-    }
+  .current a,
+  a:hover {
+    border-right-color: #cc141d;
+    background-color: #cc141d;
+    color: #fff;
   }
 }
 
@@ -103,14 +108,14 @@ footer.foot-sec {
   background-color: transparent;
 
   a {
-    @include link-decoration(#0e357f, #0e357f, none, underline);
+    @include link-decoration($link-color, $link-color, none, underline);
   }
 
   h2 a:hover,
   h3 a:hover,
   h4 a:hover {
     text-decoration: none !important;
-    border-bottom: 1px solid #0e357f !important;
+    border-bottom: 1px solid $link-color !important;
   }
 
   // ボーダーカラー
@@ -125,7 +130,7 @@ footer.foot-sec {
   ul.SJ_tabs,
   ul.SJ_tabs a,
   dl.SJ_tabs-year {
-    border-color: #033583;
+    border-color: $highlight-color;
   }
 
   // ウィジェットのページトップを非表示
@@ -146,7 +151,7 @@ footer.foot-sec {
 
   // heading title
   .SJ_h2 {
-    color: #033583;
+    color: $highlight-color;
     font-weight: bold;
   }
 
@@ -176,7 +181,7 @@ footer.foot-sec {
   //.SJ_h3-under
   .SJ_h3-under {
     h3 {
-      color: #033583;
+      color: $highlight-color;
       font-weight: bold;
       font-size: 16px;
     }
@@ -222,6 +227,7 @@ footer.foot-sec {
     }
   }
 
+  //.SJ_h4-plain
   .SJ_h4-plain .SJ_float-r {
     display: inline-block;
     padding-right: 20px;
@@ -270,7 +276,7 @@ footer.foot-sec {
   }
 
   table.SJ_table-solid.SJ_table-color thead th {
-    background-color: #033583;
+    background-color: $bg-color_blue;
     border-color: transparent #fff;
   }
 
@@ -300,7 +306,7 @@ footer.foot-sec {
   }
 
   table.SJ_table-stripe tbody tr:nth-child(odd) td {
-    background-color: #e6e6e6;
+    background-color: $bg-color_gray;
   }
 
 
@@ -311,7 +317,7 @@ footer.foot-sec {
   }
 
   table.SJ_table-solid caption .SJ_float-l {
-    color: #033583;
+    color: $highlight-color;
     font-size: 16px;
     font-weight: bold;
   }
@@ -382,8 +388,8 @@ footer.foot-sec {
     margin: 0;
     padding: 12px 0;
     border-left: 1px solid #f5f5f5;
-    background-color: #e6e6e6;
-    color: #033583;
+    background-color: $bg-color_gray;
+    color: $highlight-color;
     position: relative;
     display: block;
     line-height: 1.2;
@@ -436,7 +442,7 @@ footer.foot-sec {
   dl.SJ_tabs-year dd ul > li.SJ_current a,
   dl.SJ_tabs-year dd ul > li.SJ_current a:hover,
   ul.SJ_tabs.SJ_tabs-focus > li.SJ_current a {
-    background-color: #033583;
+    background-color: $highlight-color;
     color: #fff;
   }
 
@@ -446,7 +452,7 @@ footer.foot-sec {
     border-width: 0;
     border-style: none;
     border-color: transparent;
-    background-color: #033583;
+    background-color: $highlight-color;
     color: #fff;
   }
 
