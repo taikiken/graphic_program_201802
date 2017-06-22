@@ -35,6 +35,11 @@ footer.foot-sec {
 
 // tennis
 
+$link-color: #0e357f;
+$bg-color_gray: #e6e6e6;
+$bg-color_blue: #0e357f;
+$highlight-color: #033583;
+
 // stats__tennis__header
 
 .stats__tennis__header {
@@ -79,13 +84,13 @@ footer.foot-sec {
     font-weight: bold;
     font-size: 14px;
     text-align: center;
+  }
 
-    .current,
-    &:hover {
-      border-right-color: #cc141d;
-      background-color: #cc141d;
-      color: #fff;
-    }
+  .current a,
+  a:hover {
+    border-right-color: #cc141d;
+    background-color: #cc141d;
+    color: #fff;
   }
 }
 
@@ -103,7 +108,14 @@ footer.foot-sec {
   background-color: transparent;
 
   a {
-    @include link-decoration(#0e357f, #0e357f, none, underline);
+    @include link-decoration($link-color, $link-color, none, underline);
+  }
+
+  h2 a:hover,
+  h3 a:hover,
+  h4 a:hover {
+    text-decoration: none !important;
+    border-bottom: 1px solid $link-color !important;
   }
 
   // ボーダーカラー
@@ -118,7 +130,7 @@ footer.foot-sec {
   ul.SJ_tabs,
   ul.SJ_tabs a,
   dl.SJ_tabs-year {
-    border-color: #033583;
+    border-color: $highlight-color;
   }
 
   // ウィジェットのページトップを非表示
@@ -139,7 +151,7 @@ footer.foot-sec {
 
   // heading title
   .SJ_h2 {
-    color: #033583;
+    color: $highlight-color;
     font-weight: bold;
   }
 
@@ -166,16 +178,105 @@ footer.foot-sec {
     font-size: 10px;
   }
 
+  //.SJ_h3-under
+  .SJ_h3-under {
+    h3 {
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .SJ_float-r {
+      display: inline-block;
+      padding-right: 20px;
+      overflow: hidden;
+      text-indent: -1em;
+
+      a {
+        @include link-decoration(#cc141d, #cc141d, none, none);
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        margin-right: -20px;
+        text-indent: 20px;
+        font-size: 16px;
+        font-weight: bold;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 4px;
+          right: 0;
+          display: block;
+          width: 16px;
+          height: 16px;
+          background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
+          background-size: 16px;
+        }
+      }
+    }
+  }
+
+  //.SJ_h4-upper
+  .SJ_h4-upper {
+    padding: 10px 0;
+
+    a {
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+
+  //.SJ_h4-plain
+  .SJ_h4-plain .SJ_float-r {
+    display: inline-block;
+    padding-right: 20px;
+    overflow: hidden;
+    text-indent: -1em;
+
+    a {
+      @include link-decoration(#cc141d, #cc141d, none, none);
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      margin-right: -20px;
+      text-indent: 20px;
+      font-size: 16px;
+      font-weight: bold;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        right: 0;
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
+        background-size: 16px;
+      }
+    }
+  }
+
 
 
   // table
+  table {
+    margin-bottom: 30px;
+  }
+
+  ul.SJ_tabs + table,
+  ul.SJ_tabs + .SJ_schedule-match ul {
+    margin-top: 5px;
+  }
+
   table.SJ_table-solid.SJ_table-color thead th:first-child {
     border-color: transparent;
     border-right-color: #fff;
   }
 
   table.SJ_table-solid.SJ_table-color thead th {
-    background-color: #0e357f;
+    background-color: $bg-color_blue;
     border-color: transparent #fff;
   }
 
@@ -184,6 +285,10 @@ footer.foot-sec {
     padding: 10px 1%;
     font-size: 14px;
     font-weight: bold;
+
+    a {
+      @include link-decoration(#fff, #fff, underline, none);
+    }
   }
 
   table.SJ_table-solid tbody td {
@@ -191,6 +296,7 @@ footer.foot-sec {
     font-size: 13px;
   }
 
+  table.SJ_table-solid tbody th:first-child,
   table.SJ_table-solid tbody td:first-child {
     border-left: none;
   }
@@ -200,7 +306,7 @@ footer.foot-sec {
   }
 
   table.SJ_table-stripe tbody tr:nth-child(odd) td {
-    background-color: #e6e6e6;
+    background-color: $bg-color_gray;
   }
 
 
@@ -211,7 +317,7 @@ footer.foot-sec {
   }
 
   table.SJ_table-solid caption .SJ_float-l {
-    color: #033583;
+    color: $highlight-color;
     font-size: 16px;
     font-weight: bold;
   }
@@ -245,6 +351,122 @@ footer.foot-sec {
       }
     }
   } // table caption
+
+
+
+  // tab
+  ul.SJ_tabs {}
+
+  ul.SJ_tabs + ul.SJ_tabs {
+    margin-top: 5px !important;
+  }
+
+  ul.SJ_tabs-focus {}
+
+  ul.SJ_tabs.SJ_tabs-under,
+  ul.SJ_tabs.SJ_tabs-focus {
+    border-width: 0 0 2px;
+  }
+
+  ul.SJ_tabs-medium {}
+
+  ul.SJ_ul-ratio-2 {}
+
+  ul.SJ_tabs > li {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    float: left;
+    zoom: 1;
+    border-right: none;
+    border-top: none;
+    box-sizing: border-box;
+  }
+
+  ul.SJ_tabs > li a,
+  ul.SJ_tabs > li span {
+    margin: 0;
+    padding: 12px 0;
+    border-left: 1px solid #f5f5f5;
+    background-color: $bg-color_gray;
+    color: $highlight-color;
+    position: relative;
+    display: block;
+    line-height: 1.2;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  ul.SJ_tabs > li.SJ_disuse span {
+    color: #aaa;
+  }
+
+  ul.SJ_tabs > li a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #ccc;
+    color: #fff;
+  }
+
+  ul.SJ_tabs > li:first-child a,
+  ul.SJ_tabs > li:first-child span,
+  ul.SJ_tabs > li.SJ_current a,
+  ul.SJ_tabs > li.SJ_current span,
+  ul.SJ_tabs > li.SJ_current + li a,
+  ul.SJ_tabs > li.SJ_current + li span {
+    border-left: none;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus > li a,
+  ul.SJ_tabs.SJ_tabs-focus > li span {
+    padding: 12px 2px;
+    top: 0;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus > li a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #c1c1c1;
+    color: #fff;
+  }
+
+  ul.SJ_tabs li.SJ_current > a,
+  ul.SJ_tabs li.SJ_current > a:hover,
+  dl.SJ_tabs-year dd ul > li.SJ_current a,
+  dl.SJ_tabs-year dd ul > li.SJ_current a:hover,
+  ul.SJ_tabs.SJ_tabs-focus > li.SJ_current a {
+    background-color: $highlight-color;
+    color: #fff;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus > li.SJ_current a {
+    padding: 12px 2px;
+    top: 0;
+    border-width: 0;
+    border-style: none;
+    border-color: transparent;
+    background-color: $highlight-color;
+    color: #fff;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus > li.SJ_current a {
+    border-color: transparent;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li a,
+  ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li span,
+    ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li.SJ_current a {
+    padding: 12px 2px !important;
+  }
+
+
 
 
 } //#sj_contents_div.SJ_color-blue
