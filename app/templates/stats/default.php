@@ -6,6 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <?php
+  // app in webview 時に head内不要なタグを非表示にする
+  if (!$from_webview) :
+  ?>
   <title><?php echo strip_tags($page['title']).' | '.$page['site_name']; ?></title>
   <meta name="keywords" content="<?php echo $page['keywords']; ?>">
   <meta name="description" content="<?php echo $page['og_description']; ?>">
@@ -35,6 +39,11 @@
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
 
+  <?php
+  endif;
+  // -----------------------------------------
+  ?>
+
   <?php // #1876 - Google Optimize ?>
   <style>.async-hide { opacity: 0 !important} </style>
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
@@ -43,7 +52,6 @@
   })(window,document.documentElement,'async-hide','dataLayer',4000,
   {'GTM-KJ33JM9':true});</script>
   <?php // Google Optimize ?>
-
 
   <script type='text/javascript'>
     var googletag = googletag || {};
@@ -71,7 +79,15 @@
    ga('require', 'linkid');
    ga('require', 'displayfeatures');
    ga('send', 'pageview');
+  </script>
 
+  <script>
+    googletag.cmd.push(function() {
+      googletag.defineSlot('/531683568/npb-pc-rectangle', [300, 250], 'div-gpt-ad-1492577512561-0').addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.pubads().collapseEmptyDivs();
+      googletag.enableServices();
+    });
   </script>
 
 <?php // #1860 記事詳細アンカー広告
@@ -93,16 +109,28 @@ __EOL__;
 <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
 <script>;(function(){new APV.VASTAdUnit({s:"e19b363d86662f1fbcac19f61f89faa2", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
 
-<div class="whole stats">
+<div id="whole" class="whole stats">
 
+  <?php
+  // app in webview 時に .head-sec を非表示にする
+  if (!$from_webview) :
+  ?>
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
+  <?php
+  endif;
+  // -----------------------------------------
+  ?>
 
 <?php include_once __DIR__.'/'.$page['template']; ?>
 
+  <?php
+  // app in webview 時に .foot-sec を非表示にする
+  if (!$from_webview) :
+  ?>
   <footer id="footer-container" class="foot-sec show-for-large">
     <div class="foot-sec-inner">
       <nav class="foot-breadCrumb">
@@ -199,6 +227,10 @@ __EOL__;
       <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
+  <?php
+  // -----------------------------------------
+  endif;
+  ?>
 
 </div><!-- /.whole -->
 
@@ -224,7 +256,7 @@ __EOL__;
 <link rel="stylesheet" href="/assets/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
 <link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
-<script src="/assets/js/global.bundle.js"></script>
+<script src="/assets/js/global.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
 </body>
 </html>
