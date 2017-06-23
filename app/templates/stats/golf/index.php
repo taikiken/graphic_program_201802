@@ -2,20 +2,19 @@
   <div class="body-sec-inner">
 
     <section class="main-sec">
-      <a href="./" class="stats__tennis__header__title">
-        <div style="text-align:center; margin: 0 auto; border:1px solid #ccc;">
-          <img src="//user-images.githubusercontent.com/971124/27073646-79e184a0-505f-11e7-8145-71f4a4237659.png" style="height: auto; max-width:80%;"/>
-        </div>
-      </a>
+      <div class="stats__header stats__header--golf">
+        <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/images/stats/golf/heading@2x.png" alt="ゴルフ 速報&スタッツ" /></a></h1>
+      </div><!-- /.stats__header -->
 
-      <div class="stats__nav">
-        <ul>
-          <li><a href="./?sj_PageID=pc_2017_schedule_21">国内ゴルフ</a></li>
-          <li><a href="./?sj_PageID=pc_2017_schedule_11">海外ゴルフ(海外男子)</a></li>
-          <li><a href="./?sj_PageID=pc_2017_schedule_13">海外ゴルフ(海外女子)</a></li>
+      <div class="stats__nav stats__nav--golf">
+        <ul class="stats__nav__list">
+          <li class="stats__nav__item_1"><a href="./?sj_PageID=pc_2017_schedule_21">国内ゴルフ</a></li>
+          <li class="stats__nav__item_2"><a href="./?sj_PageID=pc_2017_schedule_11">海外ゴルフ(海外男子)</a></li>
+          <li class="stats__nav__item_3"><a href="./?sj_PageID=pc_2017_schedule_13">海外ゴルフ(海外女子)</a></li>
         </ul>
       </div>
 
+      <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/common-sp.css" />
       <link rel="stylesheet" href="http://golf.stats-japan.jp/contents/css/sportsbull/sj-golf-sp.css" />
 
       <?php
