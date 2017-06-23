@@ -55,7 +55,7 @@
           <!-- /531683568/npb-pc-rectangle -->
           <div id='div-gpt-ad-1492577512561-0' style='height:250px; width:300px;'>
           <script>
-          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1492577512561-0'); });
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1492577512561-0'); });
           </script>
           </div>
         </div>
@@ -97,8 +97,7 @@
   </div>
 </div><!-- /.body-sec -->
 
-<script src="/assets/js/stats_tennis.bundle.js"></script>
-
+<script src="/assets/js/stats_tennis.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 /*
