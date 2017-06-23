@@ -30,18 +30,19 @@ footer.foot-sec {
 }
 
 
-// tennis
+
+
 
 $link-color: #0e357f;
 $bg-color_gray: #e6e6e6;
 $bg-color_blue: #0e357f;
 $highlight-color: #033583;
 
-// stats__tennis__header
-.stats__tennis__header {}
+// stats__header
+.stats__header {}
 
-// stats__tennis__banner
-.stats__tennis__banner {
+// stats___banner
+.stats__banner {
   padding: (20/2)+px perCalc(55, 750);
   background-color: #dbdbdb;
 }
@@ -64,20 +65,6 @@ $highlight-color: #033583;
     box-sizing: border-box;
   }
 
-  &__item_1 {
-    border-left: (4/2)+px solid #cc141d;
-    border-radius: 4px 0 0 4px;
-  }
-
-  &__item_4 {
-    border-right: (4/2)+px solid #cc141d;
-    border-radius: 0 4px 4px 0;
-
-    a {
-      border-right: none;
-    }
-  }
-
   a {
     @include link-decoration(#cc141d, #cc141d, none, none);
     display: block;
@@ -97,8 +84,25 @@ $highlight-color: #033583;
       color: #fff;
     }
   }
+}
 
-  &__item_5 {
+// .stats__nav--tennis
+.stats__nav--tennis {
+  .stats__nav__item_1 {
+    border-left: (4/2)+px solid #cc141d;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .stats__nav__item_4 {
+    border-right: (4/2)+px solid #cc141d;
+    border-radius: 0 4px 4px 0;
+
+    a {
+      border-right: none;
+    }
+  }
+
+  .stats__nav__item_5 {
     width: 100% !important;
     margin-top: (20/2)+px;
     border-right: (4/2)+px solid #cc141d;
@@ -156,9 +160,13 @@ $highlight-color: #033583;
   }
 
   // heading title
-  .SJ_h2 {
+  [class^="SJ_h2"],
+  [class^="SJ_h3"], {
     color: $highlight-color;
     font-weight: bold;
+  }
+
+  .SJ_h2 {
     font-size: (32/2)+px;
   }
 
@@ -178,6 +186,19 @@ $highlight-color: #033583;
     padding: 5px 0 !important;
   }
 
+  //.SJ_h3-plain
+  .SJ_h3-plain {
+    margin-right: 0;
+    margin-left: 0;
+    vertical-align: middle;
+
+    // ex. https://sportsbull.jp/stats/golf/ テーブル上のタイトル右側のテキスト
+    span {
+      color: #333;
+      font-weight: normal;
+    }
+  }
+
   //.SJ_update
   h2 + .SJ_update,
   .SJ_switch-ttl + .SJ_update {
@@ -191,36 +212,6 @@ $highlight-color: #033583;
       font-weight: bold;
       font-size: (28/2)+px;
     }
-
-    .SJ_float-r {
-      display: inline-block;
-      padding-right: (20/2)+px;
-      overflow: hidden;
-      text-indent: -1em;
-
-      a {
-        @include link-decoration(#cc141d, #cc141d, none, none);
-        position: relative;
-        display: inline-block;
-        overflow: hidden;
-        margin-right: -(20/2)+px;
-        text-indent: (20/2)+px;
-        font-size: (24/2)+px;
-        font-weight: bold;
-
-        &:after {
-          content: "";
-          position: absolute;
-          top: 4px;
-          right: 0;
-          display: block;
-          width: (20/2)+px;
-          height: (20/2)+px;
-          background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
-          background-size: (20/2)+px;
-        }
-      }
-    }
   }
 
   //.SJ_h4-upper
@@ -232,27 +223,30 @@ $highlight-color: #033583;
     }
   }
 
-  //.SJ_h4-plain
-  .SJ_h4-plain .SJ_float-r {
-    display: inline-block;
-    padding-right: (20/2)+px;
-    overflow: hidden;
-    text-indent: -1em;
-
+  // 矢印付きリンク
+  // ex. https://sportsbull.jp/stats/tennis/ タイトル横 / テーブル右上の赤いリンク
+  .SJ_h3-plain .SJ_float-r,
+  .SJ_h4-plain .SJ_float-r,
+  .SJ_h3-under .SJ_float-r,
+  .SJ_h4-under .SJ_float-r {
     a {
       @include link-decoration(#cc141d, #cc141d, none, none);
       position: relative;
+      left: -(20/2)+px;
       display: inline-block;
+      margin-right: -(16/2)+px;
+      padding-left: (16/2)+px;
       overflow: hidden;
-      margin-right: -(20/2)+px;
-      text-indent: (20/2)+px;
+      background-color: #fff;
+      text-indent: -(16/2)+px;
       font-size: (24/2)+px;
       font-weight: bold;
+      vertical-align: middle;
 
       &:after {
         content: "";
         position: absolute;
-        top: 4px;
+        top: 5px;
         right: 0;
         display: block;
         width: (20/2)+px;
@@ -327,25 +321,24 @@ $highlight-color: #033583;
   }
 
   table.SJ_table-solid caption .SJ_float-r {
-    display: inline-block;
-    padding-right: (20/2)+px;
-    overflow: hidden;
-    text-indent: -1em;
-
     a {
       @include link-decoration(#cc141d, #cc141d, none, none);
       position: relative;
+      left: -(20/2)+px;
       display: inline-block;
+      margin-right: -(16/2)+px;
+      padding-left: (16/2)+px;
       overflow: hidden;
-      margin-right: -(20/2)+px;
-      text-indent: (20/2)+px;
+      background-color: #fff;
+      text-indent: -(16/2)+px;
       font-size: (24/2)+px;
       font-weight: bold;
+      vertical-align: middle;
 
       &:after {
         content: "";
         position: absolute;
-        top: 4px;
+        top: 5px;
         right: 0;
         display: block;
         width: (20/2)+px;

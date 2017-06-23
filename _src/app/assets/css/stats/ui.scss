@@ -33,26 +33,26 @@ footer.foot-sec {
 }
 
 
-// tennis
+
+
 
 $link-color: #0e357f;
 $bg-color_gray: #e6e6e6;
 $bg-color_blue: #0e357f;
 $highlight-color: #033583;
 
-// stats__tennis__header
-
-.stats__tennis__header {
+// stats__header
+.stats__header {
   padding-top: 30px;
 }
 
-.stats__tennis__banner {
-  margin-top: 20px;
+.stats__banner {
+  margin-top: 30px;
 }
 
 //.stats__nav
 .stats__nav {
-  margin-top: 40px;
+  margin-top: 30px;
   margin-bottom: 30px;
 
   //.stats__nav__list
@@ -149,8 +149,63 @@ $highlight-color: #033583;
     padding-left: 0;
   }
 
+  //サブナビゲーション .SJ_switch-subnav
+  // ex. https://sportsbull.jp/stats/golf/ 日程・ランキング のナビ部
+  .SJ_switch-subnav {
+
+    .SJ_bg-none {
+      background-color: transparent !important;
+    }
+
+    ul#SJ_ul-sub-cat {
+      padding: 0;
+      margin: 0 0 30px;
+      font-size: 14px;
+    }
+
+    + #SJ_container {
+      margin-top: 30px;
+    }
+
+    .SJ_ul-sub-arrow {
+      li {
+        margin-right: 10px;
+        padding-left: 0;
+        background: none;
+      }
+
+      a {
+        @include link-decoration(#cc141d, #fff, none, none);
+        position: relative;
+        display: inline-block;
+        min-width: 150px;
+        padding: 12px 36px 12px 6px;
+        border: 1px solid #cc141d;
+        background-color: #fff;
+        font-weight: bold;
+        text-align: center;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 30px;
+          height: 100%;
+          background: #cc141d url(/assets/images/stats/icon-link_arrow.png) center center no-repeat;
+          background-size: 30px;
+        }
+
+        &:hover {
+          background-color: #cc141d;
+        }
+      }
+    }
+  }
+
   // heading title
-  .SJ_h2 {
+  [class^="SJ_h2"],
+  [class^="SJ_h3"], {
     color: $highlight-color;
     font-weight: bold;
   }
@@ -171,6 +226,19 @@ $highlight-color: #033583;
     padding: 5px 0 !important;
   }
 
+  //.SJ_h3-plain
+  .SJ_h3-plain {
+    margin-right: 0;
+    margin-left: 0;
+    vertical-align: middle;
+
+    // ex. https://sportsbull.jp/stats/golf/ テーブル上のタイトル右側のテキスト
+    span {
+      color: #333;
+      font-weight: normal;
+    }
+  }
+
   //.SJ_update
   h2 + .SJ_update,
   .SJ_switch-ttl + .SJ_update {
@@ -185,36 +253,6 @@ $highlight-color: #033583;
       font-weight: bold;
       font-size: 16px;
     }
-
-    .SJ_float-r {
-      display: inline-block;
-      padding-right: 20px;
-      overflow: hidden;
-      text-indent: -1em;
-
-      a {
-        @include link-decoration(#cc141d, #cc141d, none, none);
-        position: relative;
-        display: inline-block;
-        overflow: hidden;
-        margin-right: -20px;
-        text-indent: 20px;
-        font-size: 16px;
-        font-weight: bold;
-
-        &:after {
-          content: "";
-          position: absolute;
-          top: 4px;
-          right: 0;
-          display: block;
-          width: 16px;
-          height: 16px;
-          background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
-          background-size: 16px;
-        }
-      }
-    }
   }
 
   //.SJ_h4-upper
@@ -227,33 +265,41 @@ $highlight-color: #033583;
     }
   }
 
-  //.SJ_h4-plain
-  .SJ_h4-plain .SJ_float-r {
-    display: inline-block;
-    padding-right: 20px;
-    overflow: hidden;
-    text-indent: -1em;
-
+  // 矢印付きリンク
+  // ex. https://sportsbull.jp/stats/tennis/ タイトル横 / テーブル右上の赤いリンク
+  .SJ_h3-plain .SJ_float-r,
+  .SJ_h4-plain .SJ_float-r,
+  .SJ_h3-under .SJ_float-r,
+  .SJ_h4-under .SJ_float-r {
     a {
       @include link-decoration(#cc141d, #cc141d, none, none);
       position: relative;
+      left: -20px;
       display: inline-block;
-      overflow: hidden;
       margin-right: -20px;
-      text-indent: 20px;
-      font-size: 16px;
+      padding-left: 20px;
+      overflow: hidden;
+      background-color: #f5f5f5;
+      text-indent: -20px;
+      font-size: 14px;
       font-weight: bold;
+      vertical-align: middle;
 
       &:after {
         content: "";
         position: absolute;
-        top: 4px;
+        top: 3px;
         right: 0;
         display: block;
         width: 16px;
         height: 16px;
         background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
         background-size: 16px;
+      }
+
+      &:hover {
+        border-bottom: none !important;
+        text-decoration: none !important;
       }
     }
   }
@@ -275,6 +321,7 @@ $highlight-color: #033583;
     border-right-color: #fff;
   }
 
+  table.SJ_table-solid thead th,
   table.SJ_table-solid.SJ_table-color thead th {
     background-color: $bg-color_blue;
     border-color: transparent #fff;
@@ -323,25 +370,24 @@ $highlight-color: #033583;
   }
 
   table.SJ_table-solid caption .SJ_float-r {
-    display: inline-block;
-    padding-right: 20px;
-    overflow: hidden;
-    text-indent: -1em;
-
     a {
       @include link-decoration(#cc141d, #cc141d, none, none);
       position: relative;
+      left: -20px;
       display: inline-block;
-      overflow: hidden;
       margin-right: -20px;
-      text-indent: 20px;
-      font-size: 16px;
+      padding-left: 20px;
+      overflow: hidden;
+      background-color: #f5f5f5;
+      text-indent: -20px;
+      font-size: 14px;
       font-weight: bold;
+      vertical-align: middle;
 
       &:after {
         content: "";
         position: absolute;
-        top: 4px;
+        top: 3px;
         right: 0;
         display: block;
         width: 16px;
@@ -466,6 +512,45 @@ $highlight-color: #033583;
     padding: 12px 2px !important;
   }
 
+
+  // イベント ex. https://sportsbull.jp/stats/golf/?sj_PageID=pc_2017_round_13_1496_4
+  // 優勝選手や大会概要のボックス
+  .SJ_box-event {
+    padding: 20px;
+    border: none;
+    background-color: $bg-color_gray;
+
+    .SJ_box-head {
+      padding: 0 0 16px 0;
+      border-bottom: 1px solid #aaa;
+      background-color: transparent;
+
+      .SJ_float-l {
+        color: $highlight-color;
+        font-weight: bold;
+      }
+
+      a {
+        position: relative;
+        display: inline-block;
+        @include link-decoration(#cc141d, #cc141d, none, none);
+        padding-right: 20px;
+        font-weight: bold;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 1px;
+          right: 0;
+          display: block;
+          width: 16px;
+          height: 16px;
+          background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
+          background-size: 16px;
+        }
+      }
+    }
+  }
 
 
 
