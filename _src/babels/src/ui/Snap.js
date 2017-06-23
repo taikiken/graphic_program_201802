@@ -35,9 +35,10 @@ export class Snap extends EventDispatcher {
    * hit instance を作成し event handler を設定します
    * @param {Element} element 対象 element
    * @param {boolean} [noMotion=false] scroll animation を行わず `scroll up` だけを監視する
-   * @param {Page} page element page instance
+   * @param {Page} [page={}] element page instance
+   * @param {boolean} [sp=false] SP 端末フラッグ - since 2017-06-19
    */
-  constructor(element, noMotion = false, page = {}) {
+  constructor(element, noMotion = false, page = {}, sp = false) {
     super();
     /**
      * snap 対象 element
@@ -130,6 +131,12 @@ export class Snap extends EventDispatcher {
      * @since 2017-04-17
      */
     this.hit = null;
+    /**
+     * SP 端末 flag - snap offset を付与有無判定に使用します
+     * @type {boolean}
+     * @since 2017-06-19
+     */
+    this.sp = sp;
   }
   // ---------------------------------------------------
   //  EVENT
@@ -350,10 +357,21 @@ export class Snap extends EventDispatcher {
   }
   /**
    * top 位置に + するオフセット値
-   * @return {number} top 位置に + するオフセット値
+   *
+   * sp 構造が変更され offset 80 必要になる - on 2017-06-19,
+   * header-sticky: height - loaded-post: border-top する
+   * ```
+   * .header-sticky { height: 100px; }
+   * .loaded-post { border-top: 20px; }
+   * ```
+   * @return {number} top 位置に + するオフセット値 - SP: 80 | PC: 0
+   * @since 2017-06-19 - hotfix
+   * @see https://github.com/undotsushin/undotsushin/issues/2078
    */
   scrollOffset() {
-    return 0;
+    // return 0;
+    // sp 構造が変更され offset 80 必要になる - on 2017-06-19
+    return this.sp ? 80 : 0;
   }
   /**
    * scroll animation 完了 callback<br>

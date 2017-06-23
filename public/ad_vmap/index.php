@@ -13,14 +13,15 @@ https://sportsbull.jp/ad_vmap/?position={$position}&timeOffset=10&source={$ad_ur
 - {$timeOffset} : mid-roll の場合の再生開始秒数 max 60秒
 - {$ad_url}     : 広告タグURL
   - [timestamp] : 乱数に置き換わる部分
-  - [referer]   : https://sportsbull.jp/?ad_vmap='.$timestamp に置き換わる
+  - [referrer_url] : 未指定であれば https://sportsbull.jp/?ad_vmap='.$timestamp に置き換わる
+    - ※ 基本API側で置き換え
 
 ※ timestampに該当する部分は必ずURL末のパラメータに指定する
 NG : https://sportsbull.jp/ad_vmap/?〜rand=[timestamp]&REFURL=http://dev.sportsbull.jp/p/129693/
 OK : https://sportsbull.jp/ad_vmap/?〜&REFURL=http://dev.sportsbull.jp/p/129693/&rand=[timestamp]
 
 ex. Advantage - post-roll
-https://sportsbull.jp/ad_vmap/?position=post-roll&source=https://web-jp.ad-v.jp/adam/inline?CE=0&cat=undo.SP.CRAZY_vol_8_4&format=post-roll&page=[timestamp]&REFURL=[referer]
+https://sportsbull.jp/ad_vmap/?position=post-roll&source=https://web-jp.ad-v.jp/adam/inline?CE=0&cat=undo.SP.CRAZY_vol_8_4&format=post-roll&page=[timestamp]&REFURL=[referrer_url]
 
 ex. DFP - preroll
 https://sportsbull.jp/ad_vmap/?https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=[timestamp]
@@ -40,7 +41,7 @@ $timestamp = time();
 
 // リファラデフォルト設定
 // ==============================
-$referer = 'https://sportsbull.jp/?ad_vmap='.$timestamp;
+$referrer = 'https://sportsbull.jp/?ad_vmap='.$timestamp;
 
 
 // フォーマット設定
@@ -78,11 +79,13 @@ if ( isset($_GET['source']) ) :
   $url    = explode('source=', $_SERVER['QUERY_STRING']);
   $url    = $url[1];
 
-  // [timestamp] : brightcove / cci 用の乱数
+  // [timestamp] - brightcove / cci 用の乱数
   $url    = str_replace('[timestamp]', $timestamp, $url);
 
-  // [referer] : リファラの置き換え
-  $url    = str_replace('[referer]', $referer, $url);
+  // [referrer] - リファラの置き換え
+  $url    = str_replace('[description_url]', $referrer, $url);
+  $url    = str_replace('[referrer_url]', $referrer, $url);
+  $url    = str_replace('[referrer]', $referrer, $url);
 
   $ad_url = "<![CDATA[{$url}]]>";
 

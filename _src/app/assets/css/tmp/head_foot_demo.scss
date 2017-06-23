@@ -1,0 +1,78 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../scss/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../bower_exports/modularized/normalize";
+@import "../../../../scss/style/reset";
+@import "../../../../scss/dependencies/style";
+
+// main contents
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+.body-sec {
+  position: relative;
+  // background-color: #fff;
+  background-color: #f5f5f5;
+
+  // &:before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 50%;
+  //   width: 50%;
+  //   height: 100%;
+  //   background-color: $bg-primary-color;
+  // }
+
+  &-inner {
+    @include clearfix;
+    position: relative;
+    width: $global-inner-width;
+    margin: 0 auto;
+    background: #fff url(/assets/images/common/bg-bodysec.png) repeat-y center 0;
+  }
+
+  .main-sec {
+    float: left;
+    // width: 710px;
+    width: 728px;
+    // padding-top: 30px;
+  }
+
+  .side-sec {
+    float: right;
+    width: 330px;
+    padding-top: 30px;
+    padding-left: 30px;
+    // background-color: #f5f5f5;
+  }
+}
+
+.home .body-sec,
+.layout-list .body-sec {
+  background-color: #f5f5f5;
+
+  &-inner {
+    background: none;
+  }
+}
+
+.layout-detail .body-sec {
+  background-color: #f5f5f5;
+
+  &-inner {
+    background: none;
+  }
+
+  .main-sec {
+    width: 788px;
+    margin-left: -30px;
+  }
+
+  .side-sec {
+    width: 300px;
+    padding-left: 0;
+  }
+}

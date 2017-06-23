@@ -59,16 +59,9 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
 
 
-
-    // クライミングタブのog:image対応
-    if ( $args['category_slug'] === 'climbing' ) :
-      $args['page']['og_image'] = 'https://sportsbull.jp/_/climbing/og_image/og_image.jpg';
-    endif;
-
     // big6tv対応
     // ==============================
     if ( $args['category_slug'] === 'big6tv' ) :
-      $args['page']['og_image'] = 'https://sportsbull.jp/_/big6tv/og_image/og_image.png';
 
       // 直近のスケジュール表を取得する
       $big6tvSchedule = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/schedule');
