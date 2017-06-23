@@ -7,5 +7,6 @@ include $INCLUDEPATH.$DB.".php";
 include $INCLUDEPATH."func.php";
 include $INCLUDEPATH."switch.php";
 include $INCLUDEPATH."public/ut.php";
+include $INCLUDEPATH."aws.php";
 
 ?>
