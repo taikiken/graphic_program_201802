@@ -9,3 +9,33 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
+import Env from './banner/app/Env';
+import Api from './banner/app/Api';
+
+import Top from './banner/view/Top';
+import Stats from './banner/view/Stats';
+
+const sp = self.Sagen.Browser.Mobile.is();
+
+const Ajax = self.UT.net.Ajax;
+
+const topBanners = () => {
+  const element = document.getElementById('js-top-banners');
+  const ajax = new Ajax();
+  const top = new Top(ajax, sp, element);
+  top.start(Api.path());
+};
+
+const statsBanners = () => {
+  const element = document.getElementById('js-stats-banners');
+  const ajax = new Ajax();
+  const stats = new Stats(ajax, sp, element);
+  stats.start(Api.path());
+};
+
+if (Env.home()) {
+  topBanners();
+} else if (Env.stats()) {
+  statsBanners();
+}
