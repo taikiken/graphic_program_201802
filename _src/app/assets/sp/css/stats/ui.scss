@@ -23,6 +23,14 @@
 
 // common override
 
+.undotsushin-ios,
+.undotsushin-android {
+  // .head-sec,
+  // .foot-sec {
+  //   display: none !important;
+  // }
+}
+
 footer.foot-sec {
   margin-top: 0;
   text-align: left;
@@ -40,15 +48,15 @@ $highlight-color: #033583;
 
 // stats
 .stats {
-  padding-bottom: 100px;
+  padding-bottom: 55px;
 
   .foot-sec:after {
     content: "";
     position: absolute;
-    bottom: -100px;
+    bottom: -55px;
     display: block;
     width: 100%;
-    height: 100px;
+    height: 55px;
     background-color: #030b1a;
   }
 }

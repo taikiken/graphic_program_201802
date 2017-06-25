@@ -111,32 +111,3 @@ callback。ウィジェットinit後に処理を行いたい場合
 
 */
 ?>
-
-<style>
-/*
-.stats {
-  padding-bottom: 100px;
-}
-
-.stats__nav ul {
-  display: flex;
-  justify-content: center;
-  border-bottom: 3px solid #0e357f;
-  line-height: 1;
-}
-
-.stats__nav ul li {
-  width: 20%;
-  padding: 5px 5px 0;
-}
-
-.stats__nav ul li a {
-  display: block;
-  padding: 10px;
-  font-size: 15px;
-  border: 2px solid #0e357f;
-  border-bottom: none;
-  text-align: center;
-}
-*/
-</style>
