@@ -35,9 +35,10 @@ export class Snap extends EventDispatcher {
    * hit instance を作成し event handler を設定します
    * @param {Element} element 対象 element
    * @param {boolean} [noMotion=false] scroll animation を行わず `scroll up` だけを監視する
-   * @param {Page} page element page instance
+   * @param {Page} [page={}] element page instance
+   * @param {boolean} [sp=false] SP 端末フラッグ - since 2017-06-19
    */
-  constructor(element, noMotion = false, page = {}) {
+  constructor(element, noMotion = false, page = {}, sp = false) {
     super();
     /**
      * snap 対象 element
@@ -91,6 +92,51 @@ export class Snap extends EventDispatcher {
      * @type {Page}
      */
     this.page = page;
+    // -------------------------------
+    // --- --- ---
+    // below 2017-04-17 - 「続きを読む」iframe 対応
+    /**
+     * bound buttonStart - TopButton.START event handler
+     * @type {Function}
+     * @since 2017-04-17
+     */
+    this.boundButtonStart = this.buttonStart.bind(this);
+    /**
+     * bound buttonComplete - TopButton.COMPLETE event handler
+     * @type {Function}
+     * @since 2017-04-17
+     */
+    this.boundButtonComplete = this.buttonComplete.bind(this);
+    /**
+     * bound onHit - Hit.COLLISION event handler
+     * @type {Function}
+     * @since 2017-04-17
+     */
+    this.boundHit = this.onHit.bind(this);
+    /**
+     * bound onHit - Hit.NO_COLLISION event handler
+     * @type {Function}
+     * @since 2017-04-17
+     */
+    this.boundNoHit = this.noHit.bind(this);
+    /**
+     * TopButton instance
+     * @type {?TopButton}
+     * @since 2017-04-17
+     */
+    this.topButton = null;
+    /**
+     * Hit instance
+     * @type {?Hit}
+     * @since 2017-04-17
+     */
+    this.hit = null;
+    /**
+     * SP 端末 flag - snap offset を付与有無判定に使用します
+     * @type {boolean}
+     * @since 2017-06-19
+     */
+    this.sp = sp;
   }
   // ---------------------------------------------------
   //  EVENT
@@ -114,20 +160,54 @@ export class Snap extends EventDispatcher {
   //  METHOD
   // ---------------------------------------------------
   /**
+   * @deprecated instead use `this.start` - 2017-04-17
    * 初期処理, event 監視
    */
   init() {
+    // // page top click listener
+    // // page top animation 中に snap しないようにします
+    // const topButton = TopButton.factory();
+    // topButton.on(TopButton.START, this.buttonStart.bind(this));
+    // topButton.on(TopButton.COMPLETE, this.buttonComplete.bind(this));
+    //
+    // // hit listener
+    // const hit = new Hit(this.element);
+    // hit.on(Hit.COLLISION, this.onHit.bind(this));
+    // hit.on(Hit.NO_COLLISION, this.noHit.bind(this));
+    // hit.start();
+    this.start();
+  }
+  /**
+   * 監視を始めます
+   * @since 2017-04-17
+   */
+  start() {
     // page top click listener
     // page top animation 中に snap しないようにします
     const topButton = TopButton.factory();
-    topButton.on(TopButton.START, this.buttonStart.bind(this));
-    topButton.on(TopButton.COMPLETE, this.buttonComplete.bind(this));
+    this.topButton = topButton;
+    topButton.on(TopButton.START, this.boundButtonStart);
+    topButton.on(TopButton.COMPLETE, this.boundButtonComplete);
 
     // hit listener
     const hit = new Hit(this.element);
-    hit.on(Hit.COLLISION, this.onHit.bind(this));
-    hit.on(Hit.NO_COLLISION, this.noHit.bind(this));
+    this.hit = hit;
+    hit.on(Hit.COLLISION, this.boundHit);
+    hit.on(Hit.NO_COLLISION, this.boundNoHit);
     hit.start();
+  }
+  /**
+   * 監視を止めます
+   * @since 2017-04-17
+   */
+  stop() {
+    const topButton = this.topButton;
+    topButton.off(TopButton.START, this.boundButtonStart);
+    topButton.off(TopButton.COMPLETE, this.boundButtonComplete);
+    const hit = this.hit;
+    hit.off(Hit.COLLISION, this.boundHit);
+    hit.off(Hit.NO_COLLISION, this.boundNoHit);
+    hit.stop();
   }
   /**
    * Hit.COLLISION event handler<br>
@@ -277,10 +357,21 @@ export class Snap extends EventDispatcher {
   }
   /**
    * top 位置に + するオフセット値
-   * @return {number} top 位置に + するオフセット値
+   *
+   * sp 構造が変更され offset 80 必要になる - on 2017-06-19,
+   * header-sticky: height - loaded-post: border-top する
+   * ```
+   * .header-sticky { height: 100px; }
+   * .loaded-post { border-top: 20px; }
+   * ```
+   * @return {number} top 位置に + するオフセット値 - SP: 80 | PC: 0
+   * @since 2017-06-19 - hotfix
+   * @see https://github.com/undotsushin/undotsushin/issues/2078
    */
   scrollOffset() {
-    return 0;
+    // return 0;
+    // sp 構造が変更され offset 80 必要になる - on 2017-06-19
+    return this.sp ? 80 : 0;
   }
   /**
    * scroll animation 完了 callback<br>

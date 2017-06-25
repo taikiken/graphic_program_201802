@@ -29,8 +29,12 @@ import { SingleDae } from '../../dae/SingleDae';
 // component
 import { ComponentSingles } from '../../component/singles/ComponentSingles';
 
+// import { ComponentMoreButton } from '../../component/articles/ComponentMoreButton';
+
 // React
 const ReactDOM = self.ReactDOM;
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
 
 /**
  * 記事詳細・次の記事一覧を出力します
@@ -116,6 +120,8 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
      * @type {?Object}
      */
     this.articleRendered = null;
+    // this.firstRendered = false;
+    // this.secondRendered = false;
   }
   /**
    * Ajax response success
@@ -140,6 +146,7 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
         request.length = this.action.length;
       }
       this.request = request;
+      // this.render([]);
       this.render(articles);
     }
   }
@@ -149,50 +156,65 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
    */
   render(articles:Array):void {
     // 既存データ用のglobal配列
+    // @type {Array<SingleDae>} - 参照渡し `this.articles`
     const articlesList = this.articles;
 
     // 前回までの配列length
     // sequence な index のために必要
+    // @type {number}
     const prevLast = this.articles.length;
 
     // ------------------------------------------------
     // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
-    articles.forEach((article, i) => {
+    // articles.forEach((article, i) => {
+    //   const dae = new SingleDae(article);
+    //   dae.index = prevLast + i;
+    //   articlesList.push(dae);
+    // } );
+
+    articles.map((article, index) => {
       const dae = new SingleDae(article);
-      dae.index = prevLast + i;
+      dae.index = prevLast + index;
       articlesList.push(dae);
-    } );
-    // console.log('ViewSingles.render ++++++++++++++++++++++++++++++++++', this.request.offset, articlesList);
-    // this._articleRendered が null の時だけ ReactDOM.render する
-    if (this.articleRendered === null ) {
-      this.articleRendered = ReactDOM.render(
-        <ComponentSingles
-          list={articlesList}
-          offset={this.request.offset}
-          length={this.request.length}
-          action={this.action}
-          callback={this.boundSafely}
-          boundMore={this.boundMore}
-          single={this.single}
-          home={false}
-          sign={User.sign}
-        />,
-        this.element
-      );
-    } else {
-      // instance が存在するので
-      // state update でコンテナを追加する
-      this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
-    }
-  }
-  /**
-   * 外部クラスから呼び出されます、既存のリストを使い再描画を行います
-   * */
-  update() {
-    if (this.articleRendered !== null ) {
-      // instance が存在するので
-      // state update でコンテナを追加する
-      this.articleRendered.updateList(this.articles, this.request.offset, this.request.length);
-    }
+      return article;
+    });
+    // // this._articleRendered が null の時だけ ReactDOM.render する
+    // if (this.articleRendered === null ) {
+    //   this.articleRendered = ReactDOM.render(
+    //     <ComponentSingles
+    //       list={articlesList}
+    //       offset={this.request.offset}
+    //       length={this.request.length}
+    //       action={this.action}
+    //       callback={this.boundSafely}
+    //       boundMore={this.boundMore}
+    //       single={this.single}
+    //       home={false}
+    //       sign={User.sign}
+    //     />,
+    //     this.element
+    //   );
+    // } else {
+    //   // instance が存在するので
+    //   // state update でコンテナを追加する
+    //   this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
+    // }
+    const offset = this.request.offset;
+    const length = this.request.length;
+    // console.log('ViewSingle.render ++++++++++++++++++++++++++++++++++', articlesList, offset, length);
+    ReactDOM.render(
+      <ComponentSingles
+        list={articlesList}
+        offset={offset}
+        length={length}
+        action={this.action}
+        callback={this.boundSafely}
+        boundMore={this.boundMore}
+        single={this.single}
+        home={false}
+        sign={User.sign}
+      />,
+      this.element
+    );
   }
 }

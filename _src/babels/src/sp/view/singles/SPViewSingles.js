@@ -37,6 +37,8 @@ import { SPComponentSingles } from '../../component/singles/SPComponentSingles';
 
 // React
 const ReactDOM = self.ReactDOM;
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
 
 /**
  * 記事詳細・次の記事一覧を出力します
@@ -177,31 +179,45 @@ export class SPViewSingles extends SPViewArchiveInfinite {
       articlesList.push(dae);
     } );
 
-    // this._articleRendered が null の時だけ ReactDOM.render する
-    if (this.articleRendered === null) {
-      const request = this.request;
-      // console.log('SPViewSingles.render', articlesList, this.element);
-
-      this.articleRendered = ReactDOM.render(
-        <SPComponentSingles
-          list={articlesList}
-          home={false}
-          offset={request.offset}
-          length={request.length}
-          action={this.action}
-          callback={this.boundSafely}
-          boundMore={this.boundMore}
-          single={this.single}
-          sign={User.sign}
-        />,
-        this.element
-      );
-      // console.log('******************************');
-    } else {
-      // instance が存在するので
-      // state update でコンテナを追加する
-      this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
-    }
+    // // this._articleRendered が null の時だけ ReactDOM.render する
+    // if (this.articleRendered === null) {
+    //   const request = this.request;
+    //   // console.log('SPViewSingles.render', articlesList, this.element);
+    //
+    //   this.articleRendered = ReactDOM.render(
+    //     <SPComponentSingles
+    //       list={articlesList}
+    //       home={false}
+    //       offset={request.offset}
+    //       length={request.length}
+    //       action={this.action}
+    //       callback={this.boundSafely}
+    //       boundMore={this.boundMore}
+    //       single={this.single}
+    //       sign={User.sign}
+    //     />,
+    //     this.element
+    //   );
+    //   // console.log('******************************');
+    // } else {
+    //   // instance が存在するので
+    //   // state update でコンテナを追加する
+    //   this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
+    // }
+    ReactDOM.render(
+      <SPComponentSingles
+        list={articlesList}
+        home={false}
+        offset={this.request.offset}
+        length={this.request.length}
+        action={this.action}
+        callback={this.boundSafely}
+        boundMore={this.boundMore}
+        single={this.single}
+        sign={User.sign}
+      />,
+      this.element
+    );
   }
 }
 

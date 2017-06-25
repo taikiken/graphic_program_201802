@@ -5,7 +5,7 @@
 //
 // design module detail
 //
-// Styleguide 2.4.0
+// Styleguide 2.5.0
 
 
 // post-kv
@@ -680,3 +680,78 @@
     }
   }
 } //.loaded-post
+
+
+// 記事詳細 続きを読むを表示する iframe
+// @since 2017-04-12
+// @see https://github.com/undotsushin/undotsushin/issues/1818
+// @see https://github.com/undotsushin/undotsushin/issues/1475#issuecomment-293174913
+// ---------------------------------------------------
+// ------------------------------
+// div.post-content
+//    iframe.post-content-iframe
+//    /* --------[iframe]-------- */
+//    body
+//      div#whole
+//        div.post-detail
+//          div.post-content.post-content-in_iframe
+//            div.single-iframe
+//              /* [output article] */
+
+// 高さ再設定時にアニメーションする
+// iframe
+iframe.post-content-iframe {
+  transition: height 0.3s linear;
+}
+
+// iframe .single-iframe
+// 最初の p margin-top 余白が大きくなる
+.single-iframe {
+  p:first-child {
+    margin-top: 0;
+  }
+}
+
+// fadein
+// .post-content > iframe.single-iframe > div.post-content-in_iframe
+.post-content-in_iframe {
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  opacity: 1;
+  background-color: #fff;
+}
+
+// iframe body.iframe-loading の `iframe-loading` が取れると fade始する
+body {
+  &.iframe-loading {
+    // iframe wrapper tag (.post-content) へ移動させる
+    //background: url("/assets/images/common/preloader.gif") no-repeat center center;
+    // iframe 内 - 記事詳細本文
+    .post-content-in_iframe {
+      opacity: 0;
+    }
+  }
+}
+
+// 親側に spinner を設定
+.post-content.iframe-loading {
+  background: url("/assets/images/common/preloader.gif") no-repeat center center;
+}
+
+// iframe img margin
+.single-iframe {
+  // h1 ~
+  h1:first-child,
+  h2:first-child,
+  h3:first-child,
+  h4:first-child,
+  h5:first-child,
+  h6:first-child {
+    margin-top: 0;
+    // widget
+    .cms_widget {
+      margin-top: 0;
+    }
+  }
+}

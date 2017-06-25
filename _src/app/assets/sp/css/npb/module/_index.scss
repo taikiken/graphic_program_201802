@@ -48,4 +48,12 @@
     margin-top: (40/2)+px;
     line-height: 0;
   }
+
+  .sponsor-link.column2 {
+    margin-top: (40/2)+px;
+
+    .sponsor-link-item > div {
+      margin: 0 auto;
+    }
+  }
 }

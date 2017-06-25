@@ -29,7 +29,7 @@ for($i=0;$i<count($d);$i++){
 */
 
 //ビューの無い記事を閲覧数0でランキングテーブルへ追加
-$sql[]="insert into u_view(m1,m2,pageid,video,regitime,n) select m1,m2,id,0,m_time,0 from repo_n where id not in (select pageid from u_view);";
+$sql[]="insert into u_view(m1,m2,pageid,video,regitime,n) select m1,m2,id,0,m_time,0 from repo_n where id in (select id from (select id from repo_n) as t1 left join (select pageid from u_view) as t2 on t1.id=t2.pageid where pageid is null);";
 
 while(list($k,$v)=each($s)){
 	$k=explode("|",$k);

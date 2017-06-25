@@ -120,6 +120,37 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
   });
 
 
+  // 記事詳細 - 本文のみiframe - /p/:article_id/content/
+  // ==============================
+  $this->get('/content[/]', function ($request, $response, $args) use ($app) {
+
+    $post = $app->model->get_post($args['article_id']);
+
+    if ( $post && !empty($post['id']) ) :
+
+      $args['page'] = $app->model->set(array(
+        'title'          => $post['title'].' | '.$category['label'],
+        'og_title'       => $post['title'].' | '.$app->model->property('title_short'),
+        'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/',
+        'og_image'       => $post['media']['images']['original'],
+        'og_description' => $post['description'],
+        'theme'          => $post['theme'],
+        'template'       => 'p',
+        'path'           => $args,
+        'post'           => $post,
+      ));
+
+      return $this->renderer->render($response, "content_iframe.php", $args);
+
+    else :
+
+      return $response->withStatus(404);
+
+    endif;
+
+  });
+
+
   // 記事詳細/コメントパーマリンク - /p/:article_id/comment/:comment_id
   // ==============================
   $this->get('/comment/{commend_id:[0-9]+}[/]', function ($request, $response, $args) use ($app) {

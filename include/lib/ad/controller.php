@@ -1,7 +1,6 @@
 <?php
 
 $TABLE="advertise";
-$s3active=preg_match("#/apache/htdocs/#",$SERVERPATH)?0:1;
 
 if($_GET["rid"]==2){
 	$a[]=array("head","システム設定");
@@ -13,7 +12,7 @@ if($_GET["rid"]==2){
 
 }elseif($_GET["cid"]==10){
 	$a[]=array("head","テーマ設定");
-	$a[]=array("textfield","ベース","base","20","","","","＠dark\ncrazy\ntheme_big6\ntheme_newdark\ntheme_dark");
+	$a[]=array("textfield","ベース","base","20","","","","＠dark");
 	$a[]=array("textfield","背景色 *16進数","bgcolor","20","","","","#000000\n#FFFFFF");
 	$a[]=array("img","PC一覧ヘッダ画像","pc_headerimglist","2000-300-0-0-0-0","","",$BILLINGUAL);
 	$a[]=array("img","PC詳細ページヘッダ画像","pc_headerimgdetail","2000-150-0-0-0-0","","",$BILLINGUAL);
@@ -27,17 +26,32 @@ if($_GET["rid"]==2){
 }
 
 if($_GET["cid"]!=0){
-	$a[]=array("head","記事一覧上・記事本文下バナー画像設定：（親＞子）カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
-	$a[]=array("inputradio","バナー表示","bannerflag",array("親の表示設定を継承する","個別にバナーを設定する","バナーを表示しない"));
-	$a[]=array("textfield","ALTテキスト（共通）","bannertext","70","","","");
-	$a[]=array("img","PCバナー画像","pc_bannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
-	$a[]=array("textfield","PCリンク先","pc_bannerlink","100","","","");
-	$a[]=array("img","スマホバナー画像","sp_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
-	$a[]=array("textfield","スマホリンク先","sp_bannerlink","100","","","");
-	$a[]=array("img","iOSバナー画像","ios_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
-	$a[]=array("textfield","iOSリンク先","ios_bannerlink","100","","","");
-	$a[]=array("img","Androidバナー画像","android_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
-	$a[]=array("textfield","Androidリンク先","android_bannerlink","100","","","");
+	
+	if($_GET["cid"]!=1){
+		$a[]=array("head","記事一覧上バナー画像設定：（親＞子）カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
+		$a[]=array("inputradio","バナー表示","bannerflag",array("親の表示設定を継承する","個別にバナーを設定する","バナーを表示しない"));
+		$a[]=array("textfield","ALTテキスト（共通）","bannertext","70","","","");
+		$a[]=array("img","PCバナー画像","pc_bannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
+		$a[]=array("textfield","PCリンク先","pc_bannerlink","100","","","");
+		$a[]=array("img","スマホバナー画像","sp_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+		$a[]=array("textfield","スマホリンク先","sp_bannerlink","100","","","");
+		$a[]=array("img","iOSバナー画像","ios_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+		$a[]=array("textfield","iOSリンク先","ios_bannerlink","100","","","");
+		$a[]=array("img","Androidバナー画像","android_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+		$a[]=array("textfield","Androidリンク先","android_bannerlink","100","","","");
+	}
+	
+	$a[]=array("head","記事本文下バナー画像設定：（親＞子）カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
+	$a[]=array("inputradio","バナー表示","abodybannerflag",array("親の表示設定を継承する","個別にバナーを設定する","バナーを表示しない"));
+	$a[]=array("textfield","ALTテキスト（共通）","abodybannertext","70","","","");
+	$a[]=array("img","PCバナー画像","pc_abodybannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("textfield","PCリンク先","pc_abodybannerlink","100","","","");
+	$a[]=array("img","スマホバナー画像","sp_abodybannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("textfield","スマホリンク先","sp_abodybannerlink","100","","","");
+	$a[]=array("img","iOSバナー画像","ios_abodybannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("textfield","iOSリンク先","ios_abodybannerlink","100","","","");
+	$a[]=array("img","Androidバナー画像","android_abodybannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("textfield","Androidリンク先","android_abodybannerlink","100","","","");
 }
 
 $a[]=array("head","動画広告設定：（親＞子）デフォルト ＞ カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
@@ -96,15 +110,17 @@ $a[]=array("textfield","オススメ記事広告ID","ad_android_recommendid","20
 
 function output(){	
 
-	global $o,$ImgPath,$SERVERPATH,$s3active;
+	global $o,$staticfilepath;
 	
 	$sql="select id from u_media";
 	$o->query($sql);
 	$r=array();
 	while($f=$o->fetch_array()){
 		
-		$file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$f["id"]);
-		$s=unserialize(get_contents($file));
+		$file=sprintf("%s/static/ad/2-%s.dat",$staticfilepath,$f["id"]);
+		if(file_exists($file)){
+			$s=unserialize(get_contents($file));
+		}
 		
 		$y=is_array($s["cmdtypes"])?$s["cmdtypes"]:array();
 		
@@ -115,25 +131,26 @@ function output(){
 		$op[$f["id"]]["readmore"]=isset($s["readmore"])?$s["readmore"]:0;
 		$op[$f["id"]]["canonical"]=isset($s["canonical"])?$s["canonical"]:0;
 		$op[$f["id"]]["bucket"]=isset($s["bucket"])?$s["bucket"]:"";
-		$op[$f["id"]]["geoblock"]=isset($s["geoblock"])?$s["geoblock"]:0;		
+		$op[$f["id"]]["geoblock"]=isset($s["geoblock"])?$s["geoblock"]:0;
 	}
 	
-	$file=sprintf("%s/api/ver1/static/cms.dat",$SERVERPATH);
+	$file=sprintf("%s/static/cms.dat",$staticfilepath);
 	file_put_contents($file,serialize($r));
-	s3upload($file,"static/cms.dat");
+	s3upload($file,sprintf("static/cms.datt",$id));
 	
-	$file=sprintf("%s/api/ver1/static/media.dat",$SERVERPATH);
+	$file=sprintf("%s/static/media.dat",$staticfilepath);
 	file_put_contents($file,serialize($op));
-	s3upload($file,"static/media.dat");
+	s3upload($file,sprintf("static/media.dat",$id));
+	
 }
 
-$file=sprintf("%s/api/ver1/static/ad/%s-%s.dat",$SERVERPATH,isset($_GET["rid"])?$_GET["rid"]:$_GET["cid"],$_GET["nid"]);
-$s3file=sprintf("%s/static/ad/%s-%s.dat",$ImgPath,isset($_GET["rid"])?$_GET["rid"]:$_GET["cid"],$_GET["nid"]);
+$file=sprintf("%s/static/ad/%s-%s.dat",$staticfilepath,isset($_GET["rid"])?$_GET["rid"]:$_GET["cid"],$_GET["nid"]);
 
 if($q->get_dir()===1){
 	if($q->get_file()===0){
 		$flag=array("親の広告表示設定を継承する","広告を設定する","広告を表示しない");
-		if($data=get_contents($file)){
+		if(file_exists($file)){
+			$data=get_contents($file);
 			unset($p);
 			$data=unserialize($data);
 			for($i=0;$i<count($a);$i++){
@@ -156,7 +173,6 @@ if($q->get_dir()===1){
 		$data=serialize($data);
 		$e=file_put_contents($file,$data);
 		s3upload($file,sprintf("static/ad/%s-%s.dat",isset($_GET["rid"])?$_GET["rid"]:$_GET["cid"],$_GET["nid"]));
-		
 		output();
 	}
 }

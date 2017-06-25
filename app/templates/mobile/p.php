@@ -20,12 +20,15 @@
     // ---------------------------------------------------- ?>
 
     <section class="main-sec">
-      <?php/*
-        // @since 2016-11-10
+      <?php
+      /*
+        @since 2016-11-10
         History API + snap scroll するために現在記事をすべてラップするコンテナ追加
         div.current-post
-      */?>
+      */
+      ?>
       <div id="js-current-post" class="current-post">
+
         <?php if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
           // #1602 - VK brightcove
           include_once __DIR__."/../specific/_vk_brightcove_2017.php";
@@ -68,7 +71,6 @@
             </ul>
           </div>
 
-
           <?php if ( $page['post']['is_readmore'] ) : ?>
 
             <div id="post-content-container" class="post-content">
@@ -99,6 +101,23 @@
             <div id="post-content-container" class="post-content">
               <?php print_r($page['post']['body']); ?>
             </div><!-- /.post-content -->
+
+            <?php // ref. #1876 ?>
+            <!-- /531683568/mobile/mobile_detail_body_bottom -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/mobile/mobile_detail_body_bottom', [300, 50], 'div-gpt-ad-1496897689545-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1496897689545-0' style='height:50px; width:300px; text-align: center; margin: 20px auto;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496897689545-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/mobile/mobile_detail_body_bottom -->
 
           <?php endif; ?>
 

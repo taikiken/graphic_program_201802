@@ -45,7 +45,7 @@ import { Page } from '../../../singles/head/Page';
 import { Snap } from '../../../ui/Snap';
 
 // sp/ui
-import { SPSnap } from '../../ui/SPSnap';
+// import { SPSnap } from '../../ui/SPSnap';
 
 // --------------------
 
@@ -57,6 +57,10 @@ import { SPComponentSinglesArticleSwitch } from './SPComponentSinglesArticleSwit
 
 // util
 import { PageTitle } from '../../../util/PageTitle';
+
+
+// component/singles-content record
+import { RecordSingleState } from '../../../component/singles-content/RecordSingleState';
 
 // React
 const React = self.React;
@@ -133,7 +137,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
      * @type {boolean}
      * @default false
      */
-    this.sended = false;
+    this.sendGa = false;
     // ---
     // @see https://github.com/undotsushin/undotsushin/issues/1274
     // 2秒以上見た記事だけ、計測イベントを送信したい
@@ -180,28 +184,47 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
      * @since 2016-10-28
      */
     this.singlesArticle = null;
+    // --- --- ---
+    // below 2017-04-17 - 「続きを読む」iframe 対応で見つかった不具合に対応
+    // - Ga が複数回送信される
+    // - unMount 時に event unbind されずメモリーリークの恐れがある
+    /**
+     * 情報を保持するための unique id - class name + 記事id
+     * @type {string}
+     * @since 2017-04-17
+     */
+    this.id = `SPComponentSinglesArticleMagnet-${props.single.id}`;
+    /**
+     * sendGa flag を保持データから取得します
+     * @type {boolean}
+     * @since 2017-04-17
+     */
+    const record = RecordSingleState.restore(this.id);
+    if (record) {
+      this.sendGa = record;
+    }
+    /**
+     * Snap instance - マグネットな動きを実装します
+     * @type {?Snap}
+     * @since 2017-04-17
+     */
+    this.snap = null;
+    /**
+     * Snap.SNAPPED event handler
+     * @type {Function}
+     * @since 2017-04-17
+     */
+    this.boundSnap = this.onSnap.bind(this);
+    /**
+     * Snap.BEAT_UP event handler
+     * @type {Function}
+     * @since 2017-04-17
+     */
+    this.boundBeat = this.onBeat.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
-   * */
-  componentDidMount() {
-    if (this.hit === null && this.singlesArticle !== null) {
-      // snap
-      const snap = new SPSnap(this.singlesArticle, false, this.page);
-      snap.on(Snap.SNAPPED, this.onSnap.bind(this));
-      snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
-      snap.init();
-      // -- [hit]
-      const hit = new Hit(this.singlesArticle);
-      this.hit = hit;
-      hit.on(Hit.COLLISION, this.boundIn);
-      hit.on(Hit.NO_COLLISION, this.boundOut);
-      hit.start();
-    }
-  }
   /**
    * state.single 情報を更新し再描画します
    * @param {SingleDae} single state.single
@@ -252,7 +275,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
    * @since 2016-11-14
    */
   reserve() {
-    if (this.sended || this.waiting) {
+    if (this.sendGa || this.waiting) {
       return;
     }
     this.waiting = true;
@@ -266,7 +289,10 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
    * @since 2016-11-14
    */
   cancel() {
-    if (this.sended || !this.waiting) {
+    // if (this.sendGa || !this.waiting) {
+    //   return;
+    // }
+    if (!this.waiting) {
       return;
     }
     clearTimeout(this.timer);
@@ -278,26 +304,27 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
    * @since 2016-10-28 関数を分ける
    */
   ga() {
-    if (this.sended) {
+    if (this.sendGa) {
       return;
     }
     // @since 2016-10-05
-    this.sended = true;
+    this.sendGa = true;
     // send
     const single = this.state.single;
-    Ga.single(single, 'SPComponentSinglesArticle.ga');
+    Ga.single(single, `SPComponentSinglesArticleMagnet.ga single: ${single.id}`);
     // ---------------------
     // https://github.com/undotsushin/undotsushin/issues/1151
     // @since  2016-11-15 title added
     const page = new PageTitle(single.title, single.categories.label);
-    Ga.addPage(single.id, 'SPComponentSinglesArticle.ga', page.title());
+    Ga.addPage(single.id, `SPComponentSinglesArticleMagnet.ga addPage: ${single.id}`, page.title());
     // ---------------------
-    this.dispose();
+    this.cancelHit();
   }
   /**
    * Hit.COLLISION event handler を unbind します
+   * @since 2017-04-17 function name changed from `cancel`
    */
-  dispose() {
+  cancelHit() {
     const hit = this.hit;
     if (hit !== null) {
       hit.off(Hit.COLLISION, this.boundIn);
@@ -323,7 +350,74 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }
+  /**
+   * {@link Hit}, {@link Snap} event を unbind し停止します
+   * @since 2017-04-17
+   */
+  dispose() {
+    const snap = this.snap;
+    if (snap) {
+      snap.off(Snap.SNAPPED, this.boundSnap);
+      snap.off(Snap.BEAT_UP, this.boundBeat);
+      snap.stop();
+    }
+    const hit = this.hit;
+    if (hit) {
+      hit.off(Hit.COLLISION, this.boundIn);
+      hit.off(Hit.NO_COLLISION, this.boundOut);
+      hit.stop();
+    }
+    this.cancel();
+  }
   // --------------------------------------------------
+  // delegate
+  /**
+   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
+   * */
+  componentDidMount() {
+    // if (this.hit === null && this.singlesArticle !== null) {
+    //   // snap
+    //   const snap = new SPSnap(this.singlesArticle, false, this.page);
+    //   snap.on(Snap.SNAPPED, this.onSnap.bind(this));
+    //   snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
+    //   snap.init();
+    //   // -- [hit]
+    //   const hit = new Hit(this.singlesArticle);
+    //   this.hit = hit;
+    //   hit.on(Hit.COLLISION, this.boundIn);
+    //   hit.on(Hit.NO_COLLISION, this.boundOut);
+    //   hit.start();
+    // }
+    // Hit instance を作成し監視を開始します
+    const singlesArticle = this.singlesArticle;
+    if (this.hit === null && singlesArticle !== null) {
+      // snap
+      const snap = new Snap(this.singlesArticle, false, this.page, true);
+      this.snap = snap;
+      // snap.on(Snap.SNAPPED, this.onSnap.bind(this));
+      // snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
+      snap.on(Snap.SNAPPED, this.boundSnap);
+      snap.on(Snap.BEAT_UP, this.boundBeat);
+      // snap.init();
+      snap.start();
+      // -- [hit]
+      if (!this.sendGa) {
+        const hit = new Hit(singlesArticle);
+        this.hit = hit;
+        hit.on(Hit.COLLISION, this.boundIn);
+        hit.on(Hit.NO_COLLISION, this.boundOut);
+        hit.start();
+      }
+    }
+  }
+  /**
+   * unmount 時に sendGa を保存し event handler を unbind します
+   * @since 2017-04-17
+   */
+  componentWillUnmount() {
+    RecordSingleState.store(this.id, this.sendGa);
+    this.dispose();
+  }
   // render
   /**
    * `div.loaded-post` を出力します

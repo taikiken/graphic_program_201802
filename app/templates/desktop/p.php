@@ -132,7 +132,6 @@
             print_r($page['post']['body']);
           endif;
           ?>
-
           </div><!-- /.post-content -->
 
           <?php

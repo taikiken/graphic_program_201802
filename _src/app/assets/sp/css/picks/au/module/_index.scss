@@ -209,8 +209,10 @@ $highlight-color-au: #eb5505;
 
   .banner__upper {
     margin-top: (20/2)+px;
-    padding-right: perCalc(30, 750);
-    padding-left: perCalc(30, 750);
+    // padding-right: perCalc(30, 750);
+    // padding-left: perCalc(30, 750);
+
+    text-align: center;
   }
 
 
@@ -401,7 +403,10 @@ $highlight-color-au: #eb5505;
   // .banner__app
   .banner__app {
     margin-top: (30/2)+px;
-    padding: (40/2)+px perCalc(30, 750);
+    // padding: (40/2)+px perCalc(30, 750);
     border-top: 1px solid #ccc;
+
+    padding-top: (40/2)+px;
+    text-align: center;
   }
 }

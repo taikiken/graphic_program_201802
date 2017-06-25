@@ -57,8 +57,25 @@ let _instance = null;
  * };
  * snap.on(Snap.SNAPPED, onSnap);
  * snap.on(Snap.BEAT_UP, onSnap);
+ * @since 2017-06-01 location query 残す
  */
 export class SinglesHistory extends EventDispatcher {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * instance を生成します
+   * @return {SinglesHistory} SinglesHistory instance を返します
+   */
+  static factory():SinglesHistory {
+    if (_instance === null) {
+      _instance = new SinglesHistory( _symbol );
+    }
+    return _instance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * 記事詳細・次の記事一覧 History API 使用を管理します
    * @param {Symbol} target singleton を実現するための private symbol
@@ -89,10 +106,10 @@ export class SinglesHistory extends EventDispatcher {
 
     const pages = NextPages.factory();
     /**
-     * 記事一覧を管理します
-     * @return {NextPages} NextPages instance
+     * 記事一覧を管理します - NextPages instance
+     * @type {NextPages}
      */
-    this.pages = () => pages;
+    this.pages = pages;
 
     let base = '';
     /**
@@ -101,11 +118,29 @@ export class SinglesHistory extends EventDispatcher {
      */
     this.base = () => base;
     /**
+     * url query が消える問題に対応する
+     * @see https://github.com/undotsushin/undotsushin/issues/1982#issuecomment-305401475
+     * @since 2017-06-01
+     */
+    this.extra = '';
+    /**
+     * url hash が消える問題に対応する
+     * @type {string}
+     * @since 2017-06-01
+     */
+    this.hash = '';
+    /**
      * 基点 url を設定します
      * @param {string} baseUrl 基点 url
      */
     this.setBase = (baseUrl) => {
       base = baseUrl;
+      const query = location.href.split(baseUrl).pop();
+      const extra = query && query.substr(0, 1) === '?' ? query : '';
+      // console.log('extra', extra, href, baseUrl);
+      // this.hasQuery = !!extra;
+      this.extra = !!extra ? extra : '';
+      this.hash = location.hash;
     };
     // popstate 監視
     // window.addEventListener('popstate', this.onPop.bind(this), false);
@@ -134,7 +169,11 @@ export class SinglesHistory extends EventDispatcher {
    */
   replace(page) {
     // console.log('replace ******', page.info());
-    history.replaceState(page.info(), page.title(), page.url());
+    const url = page.url();
+    // 書換えURLが初期(base)URLなら `hash` を復元する
+    // @since 2017-06-01
+    const hash = url === this.base() ? this.hash : '';
+    history.replaceState(page.info(), page.title(), `${url}${hash}${this.extra}`);
     this.head().replace(page);
   }
 
@@ -160,7 +199,7 @@ export class SinglesHistory extends EventDispatcher {
   pop(url) {
     // this.pages().pop();
     // history.back();
-    const page = this.pages().get(url);
+    const page = this.pages.get(url);
     this.replace(page);
   }
   /**
@@ -176,7 +215,7 @@ export class SinglesHistory extends EventDispatcher {
     if (url === location.pathname) {
       return;
     }
-    const pages = this.pages().pages();
+    const pages = this.pages.pages();
     // this.setCurrent(url);
     // ---
     // 存在チェック
@@ -185,25 +224,12 @@ export class SinglesHistory extends EventDispatcher {
       this.pop(url);
     } else {
       // 存在しない
-      this.pages().add(page);
+      this.pages.add(page);
       if (this.base() !== url) {
         // 初期アクセス URL と異なっていたら pushstate します
         this.push(pushSymbol, page);
       }
     }
-  }
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {SinglesHistory} SinglesHistory instance を返します
-   */
-  static factory():SinglesHistory {
-    if (_instance === null) {
-      _instance = new SinglesHistory( _symbol );
-    }
-    return _instance;
   }
 }
 
