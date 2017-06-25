@@ -197,6 +197,7 @@ function ut_init(){
 		switchbody(n);
 
 		if(dir===1&&fil===0){
+			/*
 			d1d2flag=0;
 			$(".d1d2 td:eq(1)").append("<span class=\"nonedit\"> ※編集できません。</span>");
 			$("[name='p_d1'],[name='p_d2']").css({
@@ -204,6 +205,7 @@ function ut_init(){
 				"backgroundColor":"#efefef",
 				"cursor":"default"
 			});
+			*/
 			//$("[name='p_bodyflag']").prop("disabled","disabled");
 			//$(".bodyflag .inputFields label").css("color","#AAA");
 			$(".bodyflag .inputFields").append("<span class=\"nonedit\"> ※一度選択したページ仕様を変更すると入力したデータが消去されますのでご注意ください。</span>");
@@ -211,6 +213,15 @@ function ut_init(){
 		}
 		selectedmedia(ni);
 
+
+	}else if(cd=="u_epg"){
+		
+		$(".newEntry").hide();
+		$(".edit").each(function(){
+			$(this).css("color","#000").fadeTo(1,0.2);
+			$(this).parent("a").attr("href","javascript://");
+		});	
+	
 	}else if(cd=="u_headline"){
 		
 		/*
@@ -222,12 +233,27 @@ function ut_init(){
 			$(".title").hide();
 		}
 		*/
-		
+
+		if(cid==9||cid==13||cid==14||cid==15){
+			/*
+			$(".newEntry").hide();
+			$(".delete").each(function(){
+				$(this).css("color","#000").fadeTo(1,0.2);
+				$(this).parent("a").attr("href","javascript://");
+			});
+			*/
+		}
+
 		if(dir==3){
-			$(".delete").parent("a").attr({"href":"javascript://"}).fadeTo(1,0.5);
+			//$(".delete").parent("a").attr({"href":"javascript://"}).fadeTo(1,0.5);
 		}
 		
 		if((dir==0||dir==1)&&fil===0){
+			
+			if(location.href.match(/cid=12&rid=7/)){
+				$("[name='p_d1']").val("114:サッカー");
+			}
+			
 			if($("[name='p_d2']").val().match(/^[0-9]+$/)){
 				
 				var url="/editdm/repo_n/edit/?nid="+$("[name='p_d2']").val()+"&cid=1";
@@ -258,6 +284,36 @@ function ut_init(){
 				$("[name='p_title']").val(t);
 			});
 		}
+
+	}else if(cd=="repo"){
+
+		if(rid==7){
+			
+			$(".display,.t_display").hide();
+		
+			if(cid==0&&dir==3){			
+				$(".blockds:eq(3) td:eq(3) a,.blockds:eq(3) td:eq(4) a").attr("href","javascript://").css({"color":"#999"});
+				$(".blockds:eq(3) .colname .j2").append("　※LS CMSに遷移します(スポーツブルCMSから編集はできません)。");
+				$(".blockds:eq(3) .colname a").attr("href",sprintf("http://input.sportsbull.jp/legendsstadium%s/",location.href.match(/cms/)?"":"2"));
+				
+				$(".colname,.t_title").css({"borderLeft":"1px solid #ccc"});
+				
+				$(".numbering,.display,.t_numbering,.t_display").hide();
+				$("td").css({"paddingTop":"8px","paddingBottom":"8px"});
+			}
+			
+		}else if(rid==48){
+			
+			$(".newEntry").hide();
+			$(".delete,.edit").each(function(){
+				$(this).css("color","#000").fadeTo(1,0.2);
+				$(this).parent("a").attr("href","javascript://");
+			});
+			
+		}else{
+			
+		}
+		
 	}else if(cd=="u_member"){
 		
 		$(".t_display,.display").css({"borderLeft":"3px solid #ccc"});
@@ -268,8 +324,10 @@ function ut_init(){
 		}
 		
 	}else if(cd=="advertise"){
+		
 		$("#cmdtypes9").before("<br>");
 		$("[name$='flag']").each(function(){
+			console.log([$(this).attr("name"),$(this).prop("checked")])
 			if($(this).prop("checked"))toggleflag($(this).attr("name"),$(this).val());
 		});
 		$("[name$='flag']").change(function(){
@@ -287,8 +345,11 @@ function ut_init(){
 			}else if(key.match(/^(sidebar|single)_/)){
 				key="."+key.replace(/flag/,"");
 			}else if(key.match(/^banner/)){
-				key=".bannertext,.pc_bannerimg,.pc_bannerlink,.sp_bannerimg,.sp_bannerlink";		
+				key=".bannertext,.pc_bannerimg,.pc_bannerlink,.sp_bannerimg,.sp_bannerlink,.android_bannerimg,.android_bannerlink,.ios_bannerimg,.ios_bannerlink";	
+			}else if(key.match(/^abodybanner/)){
+				key=".abodybannertext,.pc_abodybannerimg,.pc_abodybannerlink,.sp_abodybannerimg,.sp_abodybannerlink,.android_abodybannerimg,.android_abodybannerlink,.ios_abodybannerimg,.ios_abodybannerlink";
 			}
+			
 			if(value==1){
 				$(key).show();
 				$(name1).css({"color":"blue","fontWeight":"bold"});
@@ -307,24 +368,26 @@ function ut_init(){
 		$("[name='pc_headerimglist'],[name='sp_headerimglist'],[name='pc_headerimgdetail'],[name='sp_headerimgdetail']").siblings("a").hide();
 	}else if(cd=="repo_e"){
 		if(location.href.match(/types=5/)){
+			
 			$(".title .inputFields").append("<div class=\"containerbox\"></div>");
 			function whresize(){
 				var t=$("textarea").val();
 				t=t.replace(/width="[0-9]+"/,"width=\"728\"").replace(/height="[0-9]+"/,"height=\"410\"").replace(/max-width:[0-9]+px/,"max-width:728px");
 				$("textarea").val(t);
-				$(".containerbox").html("").append(sprintf("<div class=\"cms_widget\">%s</div>",t)).show();
+				if(!t.match(/location\.href/))$(".containerbox").html("").append(sprintf("<div class=\"cms_widget\">%s</div>",t)).show();
 			}
 			$("textarea").on("change",function(){
 				whresize();
 			});
 			if($("textarea").val())whresize();
+			
 		}
 	}
 	
 	if(location.href.match(/repo_s\/\?rid=2/)){
 		$(".newEntry").hide();
 	}
-	if(cid==8)$(".newEntry").hide();
+	if(cid==12)$(".newEntry").hide();
 	
 }
 function settime(field){

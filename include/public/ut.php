@@ -201,15 +201,17 @@ function set_advertise($ad,$type){
 	$s["theme"]["background_color"]=strlen($ad["bgcolor"])>0?$ad["bgcolor"]:"";
 	$s["is_show_filter"]=!$ad["sp_showfilter"]?true:false;
 	
+	$listordetail=$type=="detail"?"abody":"";
 	$bannertype=array("pc","sp","ios","android");
+	
 	for($i=0;$i<count($bannertype);$i++){
 		if($i<=1){
 			$s["ad_url".$bannertype[$i]]=$ad["ad_url".$bannertype[$i]];
 			$s["theme"]["images"][$bannertype[$i]]=strlen($ad[$bannertype[$i]."_headerimg".$type])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i]."_headerimg".$type]):"";
 		}
-		$s["banner"][$bannertype[$i]]["text"]=strlen($ad[$bannertype[$i]."_bannerimg"])>0?checkstr($ad["bannertext"]):"";
-		$s["banner"][$bannertype[$i]]["image"]=strlen($ad[$bannertype[$i]."_bannerimg"])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i]."_bannerimg"]):"";
-		$s["banner"][$bannertype[$i]]["link"]=checkstr($ad[$bannertype[$i]."_bannerlink"]);		
+		$s["banner"][$bannertype[$i]]["text"]=strlen($ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)])>0?checkstr($ad[sprintf("%sbannertext",$listordetail)]):"";
+		$s["banner"][$bannertype[$i]]["image"]=strlen($ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)]):"";
+		$s["banner"][$bannertype[$i]]["link"]=checkstr($ad[$bannertype[$i].sprintf("_%sbannerlink",$listordetail)]);		
 		if($i==0){
 			$s["ad"][$bannertype[$i]]["sidebar_top"]=$ad["sidebar_top"];
 			$s["ad"][$bannertype[$i]]["sidebar_bottom"]=$ad["sidebar_bottom"];
@@ -233,31 +235,35 @@ function set_advertise($ad,$type){
 
 function get_advertise($categoryid="",$userid="",$pageid=""){
 	
-	global $SERVERPATH;
+	global $staticfilepath;
 	
-	$ad[]=unserialize(get_contents(sprintf("%s/api/ver1/static/ad/0-0.dat",$SERVERPATH)));
+	$ad[]=unserialize(get_contents(sprintf("%s/static/ad/0-0.dat",$staticfilepath)));
 	if($categoryid!=""){
 		unset($v);
-		$file=sprintf("%s/api/ver1/static/ad/10-%s.dat",$SERVERPATH,$categoryid);
-		if($v=get_contents($file)){
+		$file=sprintf("%s/static/ad/10-%s.dat",$staticfilepath,$categoryid);
+		if(file_exists($file)){
+			$v=get_contents($file);
 			$ad[]=unserialize($v);
 		}
 	}
 	if($pageid!=""){
 		unset($v);
-		$file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$userid);
-		if($v=get_contents($file)){
+		$file=sprintf("%s/static/ad/2-%s.dat",$staticfilepath,$userid);
+		if(file_exists($file)){
+			$v=get_contents($file);
 			$ad[]=unserialize($v);
 		}
 		unset($v);
-		$file=sprintf("%s/api/ver1/static/ad/1-%s.dat",$SERVERPATH,$pageid);
-		if($v=get_contents($file)){
+		$file=sprintf("%s/static/ad/1-%s.dat",$staticfilepath,$pageid);
+		if(file_exists($file)){
+			$v=get_contents($file);
 			$ad[]=unserialize($v);
 		}
 	}
 	$_adpc=array("sidebar_top","sidebar_bottom","single_top","single_bottom_left","single_bottom_right");
 	$_adsp=array("sp_list","sp_detail","sp_headline","sp_popular","sp_recommend","ios_list","ios_detail","ios_headline","ios_popular","ios_recommend","android_list","android_detail","android_headline","android_popular","android_recommend");
 	$_banner=array("bannertext","pc_bannerimg","pc_bannerlink","sp_bannerimg","sp_bannerlink","ios_bannerimg","ios_bannerlink","android_bannerimg","android_bannerlink");
+	$_abodybanner=array("abodybannertext","pc_abodybannerimg","pc_abodybannerlink","sp_abodybannerimg","sp_abodybannerlink","ios_abodybannerimg","ios_abodybannerlink","android_abodybannerimg","android_abodybannerlink");
 	$_theme=array("base","bgcolor","pc_headerimglist","sp_headerimglist","pc_headerimgdetail","sp_headerimgdetail","sp_showfilter");
 	$s=array();
 	
@@ -308,6 +314,12 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 			if($i!=0){
 				if($ad[$i]["bannerflag"]==1&&strlen($ad[$i][$_banner[$j]])>0)$s[$_banner[$j]]=$ad[$i][$_banner[$j]];
 				elseif($ad[$i]["bannerflag"]==2)$s[$_banner[$j]]="";
+			}
+		}
+		for($j=0;$j<count($_abodybanner);$j++){
+			if($i!=0){
+				if($ad[$i]["abodybannerflag"]==1&&strlen($ad[$i][$_abodybanner[$j]])>0)$s[$_abodybanner[$j]]=$ad[$i][$_abodybanner[$j]];
+				elseif($ad[$i]["abodybannerflag"]==2)$s[$_abodybanner[$j]]="";
 			}
 		}
 	}
@@ -379,12 +391,12 @@ function urlmodify($body){
 }
 
 function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
-
+	
 	/*
 		$type:0 記事一覧　$type:1 記事詳細
 	*/
 	
-	global $ImgPath,$domain,$ad,$mediaoption,$videopath,$apidetails,$SERVERPATH;
+	global $ImgPath,$domain,$ad,$mediaoption,$videopath,$apidetails,$staticfilepath;
 	
 	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
 	$datetime=get_date(sprintf("%s-%s-%s %s:%s:%s",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["a6"]));
@@ -405,46 +417,38 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["body"]=urlmodify($body);
 		$s["body_escape"]=stripbr($f["body"]);
 		if($apidetails!=1)$s["media_vk_refid"]=strlen($f["brightcove"])>0?$f["brightcove"]:"";
+		
+		#1013 続きを読む
+		$file=sprintf("%s/static/ad/2-%s.dat",$staticfilepath,$f["userid"]);
+		if(file_exists($file)){
+			$v=unserialize(get_contents($file));
+			$readmoreflag=$v["readmore"];
+			$canonicalflag=$v["canonical"];
+		}	
+		$file=sprintf("%s/static/ad/1-%s.dat",$staticfilepath,$f["id"]);
+		if(file_exists($file)){
+		   $v=get_contents($file);
+		   $v=unserialize($v);
+		   $readmoreflag=$v["readmore"];
+		}
+		if($readmoreflag){
+			$s["readmore"]["is_readmore"]=true;
+			$s["readmore"]["url"]=$f["t9"];
+		}else{
+			$s["readmore"]["is_readmore"]=false;
+			$s["readmore"]["url"]="";
+		}
+		 
+		if($canonicalflag){
+			$s["canonical"]["is_canonical"]=true;
+			$s["canonical"]["url"]=$f["t9"];
+		}else{
+			$s["canonical"]["is_canonical"]=false;
+			$s["canonical"]["url"]="";
+		}
+		#1013 続きを読む ここまで
 	}
-	
-	#1013 続きを読む
-	/*
-	if($canonical==1){
-		$s["canonical"]["is_canonical"]=$f["canonical"]?true:false;
-		$s["canonical"]["url"]=$f["t9"];
-	}
-	if($readmore==1){
-		$s["readmore"]["is_readmore"]=$f["readmore"]?true:false;
-		$s["readmore"]["url"]=$f["t9"];
-	}
-	*/
 
-    $file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$f["userid"]);
-    $v=unserialize(get_contents($file));
-    $readmoreflag=$v["readmore"];
-	$canonicalflag=$v["canonical"];
-	
-    $file=sprintf("%s/api/ver1/static/ad/1-%s.dat",$SERVERPATH,$f["id"]);
-	if($v=get_contents($file)){
-	   $v=unserialize($v);
-       $readmoreflag=$v["readmore"];
-    }
-	if($readmoreflag){
-		$s["readmore"]["is_readmore"]=true;
-		$s["readmore"]["url"]=$f["t9"];
-	}else{
-		$s["readmore"]["is_readmore"]=false;
-		$s["readmore"]["url"]="";
-	}
-	
-	if($canonicalflag){
-		$s["canonical"]["is_canonical"]=true;
-		$s["canonical"]["url"]=$f["t9"];
-	}else{
-		$s["canonical"]["is_canonical"]=false;
-		$s["canonical"]["url"]="";
-	}
-	#1013 続きを読む ここまで
 	$s["url"]=sprintf("%s/%s/%s/",$domain,"p",$f["id"]);
 	
 	//カテゴリー期を見て配列のみに変更する

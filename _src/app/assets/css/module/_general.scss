@@ -52,8 +52,6 @@
 
 // board-
 // boadr-large, board-small 共用
-
-
 [ class^="board-" ] {
   .post {
     [ class^="post-label_" ] {
@@ -236,6 +234,9 @@
 }
 
 
+
+
+
 // board-small
 // 汎用 ニュース一覧
 .board-small {
@@ -326,6 +327,8 @@
     margin-left: 10px;
   }
 }
+
+
 
 
 
@@ -433,6 +436,8 @@
 
 
 
+
+
 // not isotope
 #board-container {
   .board-stacks {
@@ -441,6 +446,8 @@
     width: 100%;
   }
 }
+
+
 
 
 
@@ -699,6 +706,7 @@
 
 
 
+
 // mod-btnA01
 .mod-btnA01 {
   input[ type="submit" ],
@@ -823,6 +831,36 @@
     transform: translateX(-50%);
   }
 } //.special-summary
+
+
+
+
+
+// サイドナビ広告
+.sponsor-link-ranking,
+.sponsor-link-recommend {
+  @extend %board-small-sponsor-link;
+
+  .adgLink {
+    height: auto !important;
+    margin-top: 20px;
+    border-top: none;
+  }
+}
+
+.sponsor-link-recommend {
+  .adsImgContainer {
+    width: 135px !important;
+    height: auto !important;
+    padding: 0 10px 0 0 !important;
+  }
+}
+
+// sidebar sponsor-link を非表示に
+.sponsor-link-ranking,
+.sponsor-link-recommend {
+  display: none;
+}
 
 
 

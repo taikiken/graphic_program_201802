@@ -143,6 +143,12 @@ class S3Module {
 	}
 }
 
+$client = new Aws\S3\S3Client([
+	'region' => 'ap-northeast-1',
+	'version' => 'latest',
+]);
+$client->registerStreamWrapper();
+
 function s3upload($from,$to){
 	global $domain;	
 	if($domain=="http://ut")return;
