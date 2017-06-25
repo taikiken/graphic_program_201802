@@ -73,11 +73,11 @@ $highlight-color: #033583;
 
   [class^="stats__nav__item"] {
     display: inline-block;
-    width: 25%;
     border-top: (4/2)+px solid #cc141d;
     border-bottom: (4/2)+px solid #cc141d;
     letter-spacing: normal;
     box-sizing: border-box;
+    vertical-align: top;
   }
 
   a {
@@ -103,6 +103,10 @@ $highlight-color: #033583;
 
 // .stats__nav--tennis
 .stats__nav--tennis {
+  [class^="stats__nav__item"] {
+    width: 25%;
+  }
+
   .stats__nav__item_1 {
     border-left: (4/2)+px solid #cc141d;
     border-radius: 4px 0 0 4px;
@@ -126,19 +130,64 @@ $highlight-color: #033583;
   }
 }
 
+// .stats__nav--golf
+.stats__nav--golf {
+  &__list {
+    display: table;
+    letter-spacing: normal;
+  }
+
+  [class^="stats__nav__item"] {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  a {
+    height: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-right: none;
+  }
+
+  .stats__nav__item_1 {
+    width: 34%;
+    border-right: 1px solid #efefef;
+    border-left: (4/2)+px solid #cc141d;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .stats__nav__item_2 {
+    width: 33%;
+    border-right: 1px solid #efefef;
+  }
+
+  .stats__nav__item_3 {
+    width: 33%;
+    border-right: (4/2)+px solid #cc141d;
+    border-radius: 0 4px 4px 0;
+
+    a {
+      border-right: none;
+    }
+  }
+}
 
 
 
 
 #sj_contents_div {
+  padding-right: perCalc(20, 750);
+  padding-left: perCalc(20, 750);
   font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', Arial, verdana, sans-serif
 }
 
 #sj_contents_div,
 #sj_contents_div.SJ_color-blue,
 #sj_contents_div .SJ_color-sky {
-  padding-right: perCalc(20, 750);
-  padding-left: perCalc(20, 750);
+  #SJ_container {
+    padding-right: 0;
+    padding-left: 0;
+  }
 
   img {
     width: auto;
@@ -174,6 +223,57 @@ $highlight-color: #033583;
     font-size: 10px;
   }
 
+  //サブナビゲーション .SJ_switch-subnav
+  // ex. https://sportsbull.jp/stats/golf/ 日程・ランキング のナビ部
+  .SJ_switch-subnav {
+    position: relative;
+
+    .SJ_bg-none {
+      background-color: transparent !important;
+    }
+
+    ul#SJ_ul-sub-cat {
+      padding: 0;
+      margin: 0 0 (40/2)+px;
+      font-size: (24/2)+px;
+    }
+
+    + #SJ_container {
+      margin-top: (40/2)+px;
+    }
+
+    .SJ_ul-sub-arrow {
+      li {
+        margin-right: (40/2)+px;
+        padding-left: 0;
+        background: none;
+      }
+
+      a {
+        @include link-decoration(#cc141d, #cc141d, none, none);
+        position: relative;
+        display: inline-block;
+        min-width: (220/2)+px;
+        padding: (20/2)+px 29px (20/2)+px 4px;
+        border: 1px solid #cc141d;
+        background-color: #fff;
+        font-weight: bold;
+        text-align: center;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: (50/2)+px;
+          height: 100%;
+          background: #cc141d url(/assets/images/stats/icon-link_arrow.png) center center no-repeat;
+          background-size: (50/2)+px;
+        }
+      }
+    }
+  }
+
   // heading title
   [class^="SJ_h2"],
   [class^="SJ_h3"], {
@@ -205,12 +305,18 @@ $highlight-color: #033583;
   .SJ_h3-plain {
     margin-right: 0;
     margin-left: 0;
+    font-size: (24/2)+px;
     vertical-align: middle;
 
     // ex. https://sportsbull.jp/stats/golf/ テーブル上のタイトル右側のテキスト
     span {
       color: #333;
       font-weight: normal;
+      font-size: (20/2)+px;
+    }
+
+    + .SJ_table-solid {
+      margin-top: (10/2)+px;
     }
   }
 
@@ -288,6 +394,7 @@ $highlight-color: #033583;
     border-right-color: #fff;
   }
 
+  table.SJ_table-solid thead th,
   table.SJ_table-solid.SJ_table-color thead th {
     background-color: $bg-color_blue;
     border-color: transparent #fff;
@@ -320,6 +427,15 @@ $highlight-color: #033583;
 
   table.SJ_table-stripe tbody tr:nth-child(odd) td {
     background-color: $bg-color_gray;
+  }
+
+
+
+  // 矢印付きリンクのあるテーブル
+  .SJ_table-mark {
+    a {
+      display: inline-block;
+    }
   }
 
 
@@ -363,6 +479,8 @@ $highlight-color: #033583;
       }
     }
   } // table caption
+
+
 
 
 
@@ -477,4 +595,64 @@ $highlight-color: #033583;
     ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li.SJ_current a {
     padding: 12px 2px !important;
   }
+
+
+
+
+
+  // イベント ex. https://sportsbull.jp/stats/golf/?sj_PageID=pc_2017_round_13_1496_4
+  // 優勝選手や大会概要のボックス
+  .SJ_box-event {
+    padding: (30/2)+px (20/2)+px;
+    border: none;
+    background-color: $bg-color_gray;
+
+    .SJ_box-head {
+      padding: 0 0 (20/2)+px 0;
+      border-bottom: 1px solid #aaa;
+      background-color: transparent;
+
+      .SJ_float-l {
+        color: $highlight-color;
+        font-weight: bold;
+      }
+
+      a {
+        position: relative;
+        display: inline-block;
+        @include link-decoration(#cc141d, #cc141d, none, none);
+        padding-right: (28/2)+px;
+        font-weight: bold;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 4px;
+          right: 0;
+          display: block;
+          width: (20/2)+px;
+          height: (20/2)+px;
+          background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
+          background-size: (20/2)+px;
+        }
+      }
+
+      .SJ_flag-mini {
+        font-weight: bold;
+      }
+    }
+
+    .SJ_box-body {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .SJ_dl-round,
+    .SJ_dl-winner {
+      dt {
+        font-weight: bold;
+      }
+    }
+  }
+
 } //#sj_contents_div.SJ_color-blue
