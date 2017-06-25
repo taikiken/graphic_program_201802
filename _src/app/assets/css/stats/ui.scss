@@ -359,6 +359,15 @@ $highlight-color: #033583;
 
 
 
+  // 矢印付きリンクのあるテーブル
+  .SJ_table-mark {
+    a {
+      display: inline-block;
+    }
+  }
+
+
+
   // table caption
   table.SJ_table-solid caption {
     padding: 0 0 5px;
@@ -398,6 +407,8 @@ $highlight-color: #033583;
       }
     }
   } // table caption
+
+
 
 
 
@@ -514,6 +525,9 @@ $highlight-color: #033583;
   }
 
 
+
+
+
   // イベント ex. https://sportsbull.jp/stats/golf/?sj_PageID=pc_2017_round_13_1496_4
   // 優勝選手や大会概要のボックス
   .SJ_box-event {
@@ -550,10 +564,20 @@ $highlight-color: #033583;
           background-size: 16px;
         }
       }
+
+      .SJ_flag-mini {
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
+
+    .SJ_dl-round,
+    .SJ_dl-winner {
+      dt {
+        font-weight: bold;
+      }
     }
   }
-
-
 
 } //#sj_contents_div.SJ_color-blue
 
