@@ -38,6 +38,7 @@ import {Scroll} from './util/Scroll';
 // -------------------------------------
 // net
 import {Cookie} from './net/Cookie';
+import {Ajax} from './net/Ajax';
 
 // -------------------------------------
 // model
@@ -181,7 +182,8 @@ let UT = {
     }
   },
   net: {
-    Cookie
+    Cookie,
+    Ajax,
   },
   model: {
     Model
