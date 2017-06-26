@@ -2,7 +2,7 @@
 
 // stats
 // ==============================
-$app->group('/stats/{category:tennis}', function () use($app) {
+$app->group('/stats/{category:tennis|golf}', function () use($app) {
 
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
 
