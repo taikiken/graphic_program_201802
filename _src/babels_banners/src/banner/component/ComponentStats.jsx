@@ -62,6 +62,7 @@ export default class ComponentStats extends React.Component {
             sp: React.PropTypes.string.isRequired,
           }),
           url: React.PropTypes.string.isRequired,
+          alt: React.PropTypes.string,
         })).isRequired,
       })).isRequired,
       sp: React.PropTypes.bool.isRequired,
@@ -78,8 +79,9 @@ export default class ComponentStats extends React.Component {
   // ---------------------------------------------------
   render() {
     return (
-      this.props.map(banners => (
+      this.props.map((banners, index) => (
         <ComponentList
+          key={`banners-${index}`}
           top={banners.top}
           banners={banners.banners}
           sp={this.props.sp}
