@@ -133,6 +133,7 @@ _src/app/assets/sp/css/_sprite.scss
 _src/babels/compile
 _src/babels_exe/compile
 _src/babels_exe_sp/compile
+_src/babels_banners/compile
 
 
 # project files
