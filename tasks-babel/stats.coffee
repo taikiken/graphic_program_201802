@@ -129,7 +129,7 @@ gulp.task 'stats:pack:build', ( cb ) ->
     new webpack.optimize.DedupePlugin()
     new webpack.optimize.UglifyJsPlugin compress: warnings: false
   ]
-  conf.entry = conf.entry + '/_src/babels_banners/banners_with_json/exe.js'
+  conf.entry = conf.entry + '/_src/babels_banners/banners_with_json/banners_with_json.js'
   conf.output.filename = 'banners_with_json.bundle.js'
 
   webpack conf, ( err, stats ) ->
@@ -141,13 +141,22 @@ gulp.task 'stats:pack:build', ( cb ) ->
   return
 
 # --------------------------------------------
+# copy
+gulp.task 'stats:copy', (cb) ->
+  return gulp.src [dir.app + '/**/banners_with_json.bundle.js']
+    .pipe $.debug title: '[STATS:COPY]'
+    .pipe gulp.dest htdocs
+    .pipe $.size title: '*** stats:copy ***'
+
+# --------------------------------------------
 # sequence
 
 # dev
-gulp.task 'stats:make', ( cb ) ->
+gulp.task 'stats:dev', ( cb ) ->
   runSequence(
     'stats:babel'
     'stats:pack:dev'
+    'stats:copy'
     cb
   )
   return
@@ -158,6 +167,7 @@ gulp.task 'stats:dev:lint', ( cb ) ->
     'stats:eslint'
     'stats:babel'
     'stats:pack:dev'
+    'stats:copy'
     cb
   )
   return
@@ -168,6 +178,7 @@ gulp.task 'stats:build', ( cb ) ->
   runSequence(
     'stats:babel'
     'stats:pack:build'
+    'stats:copy'
     cb
   )
   return
