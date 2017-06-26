@@ -84,16 +84,6 @@ function relatedlink($link,$id=0){
 	return implode("\n",$s);
 }
 
-function removeimg($img){
-	global $IMGP;
-	echo $IMGP;
-	$path=array();
-	$e=array("raw","img","thumbnail1","thumbnail2");
-	for($i=0;$i<count($e);$i++){
-		unlink(sprintf(str_replace("tmp",$e[$i],$IMGP),$img));
-	}
-}
-
 function relatedlink2($links,$id=0){
 	
 	$s=array();
@@ -150,6 +140,43 @@ function relatedlink3($links,$id=0){
 	return implode("\n",$s);
 }
 
+/**
+ * 関連記事をSQL文にする
+ * パターン４
+ * @param $links
+ * @param int $id
+ * @return string
+ */
+function relatedlink4($links,$id=0)
+{
+	for($i=0;$i<count($links["link"]);$i++){
+
+		$title=bind($links["link"][$i]["@attributes"]["url"]);
+		$url=bind($links["link"][$i]["@attributes"]["title"]);
+
+		if($id==0){
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
+		}else{
+			if($i==0)$s[]=sprintf("delete from u_link where pid=%s;",$id);
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s;",$id,$title,$url,($i+1));
+		}
+
+		if($i==4)break;
+	}
+
+	return implode("\n",$s);
+}
+
+
+function removeimg($img){
+	global $IMGP;
+	echo $IMGP;
+	$path=array();
+	$e=array("raw","img","thumbnail1","thumbnail2");
+	for($i=0;$i<count($e);$i++){
+		unlink(sprintf(str_replace("tmp",$e[$i],$IMGP),$img));
+	}
+}
 
 function is_tag($a,$b){
 	$e=0;
@@ -240,14 +267,14 @@ function get_imgs($img){
 
 function eximg($img1,$img2){
 	
-	global $ImgPath;
+	global $SERVERPATH;
 	
-	$i=explode("/raw/",$img1);
-	$img1=sprintf("%s/raw/%s",$ImgPath,$i[1]);
-	$a=get_lastmod($img1);
-	$b=get_lastmod($img2);
+	$img1=str_replace(sprintf("%s/prg_img",$SERVERPATH),preg_match("#/dev/#",$SERVERPATH)?"https://dev-img.sportsbull.jp":"https://img.sportsbull.jp",$img1);
 	
-	return $a>$b?true:false;
+	$a=(binary)get_imgs($img1);
+	$b=(binary)get_imgs($img2);
+	
+	return $a===$b?true:false;
 }
 
 function imgResize($img_name,$n_img,$re_size,$p="jpg"){
@@ -437,13 +464,5 @@ function makesql($a,$f,$mediaid){
 	}
 }
 
-function get_lastmod($file){
-	$c=get_headers($file);
-	for($i=0;$i<count($c);$i++){
-		if(preg_match("/Last-Modified: /",$c[$i])){
-			return strtotime(str_replace("Last-Modified: ","",$c[$i]));
-		}
-	}
-}
 
 ?>

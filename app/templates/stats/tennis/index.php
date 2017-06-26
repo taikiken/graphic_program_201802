@@ -6,9 +6,9 @@
         <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/images/stats/tennis/heading@2x.png" alt="テニス 速報&スタッツ" /></a></h1>
       </div><!-- /.stats__header -->
 
-      <div class="stats__banner stats__banner--tennis">
+      <div class="stats__banner stats__banner--tennis" style="display: none;">
         <a href="./?sj_page=tournament_2017001_men_singles_today">
-          <img class="responsive" src="/assets/images/stats/tennis/bnr_hero@2x.png" alt="xxxxx">
+          <img class="responsive" src="/assets/images/stats/tennis/bnr_hero@2x.png" alt="ウィンブルドンテニス2017 7/3 - 7/16 日程・結果">
         </a>
       </div><!-- /.stats__banner -->
 
