@@ -18,6 +18,40 @@ export default class ComponentStats extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * JSON: bannerLists {{Array.<object>}}
+   * ```
+   * [
+   * {
+   *   "title": "サッカー",
+   *   "banners": [
+   *     {
+   *       "image": "PCバナー画像URL",
+   *       "url": "リンクURL"
+   *     },
+   *     {
+   *     "image": "PCバナー画像URL",
+   *     "url": "リンクURL"
+   *     }
+   *   ]
+   * },
+   *  {
+   *   "title": "野球",
+   *   "banners": [
+   *     {
+   *       "image": "PCバナー画像URL",
+   *       "url": "リンクURL"
+   *     },
+   *     {
+   *     "image": "PCバナー画像URL",
+   *     "url": "リンクURL"
+   *     }
+   *   ]
+   * }
+   ]
+   * ```
+   * @returns {{banners: *, sp: *}} PropTypes を返します
+   */
   static get propTypes() {
     return {
       banners: React.PropTypes.arrayOf(React.PropTypes.shape({

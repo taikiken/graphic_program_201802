@@ -16,6 +16,25 @@ export default class ComponentList extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * JSON: bannerLists {{Array.<object>}}
+   * ```
+   * {
+   *   "title": "サッカー",
+   *   "banners": [
+   *     {
+   *       "image": "PCバナー画像URL",
+   *       "url": "リンクURL"
+   *     },
+   *     {
+   *     "image": "PCバナー画像URL",
+   *     "url": "リンクURL"
+   *     }
+   *   ]
+   * },
+   * ```
+   * @returns {{title: *, banners: *, sp: *}} PropTypes を返します
+   */
   static get propTypes() {
     return {
       title: React.PropTypes.string.isRequired,

@@ -12,6 +12,7 @@
 
 const React = self.React;
 
+
 export default class ComponentTop extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
