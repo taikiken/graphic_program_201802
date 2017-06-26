@@ -123,7 +123,7 @@ __EOL__;
 <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
 <script>;(function(){new APV.VASTAdUnit({s:"e19b363d86662f1fbcac19f61f89faa2", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
 
-<div id="whole" class="whole">
+<div id="whole" class="whole stats stats_banners">
 
   <?php
   // app in webview 時に .head-sec を非表示にする
@@ -139,7 +139,93 @@ __EOL__;
   // -----------------------------------------
   ?>
 
-  contents
+  <div class="body-sec">
+    <div class="body-sec-inner">
+
+      <section class="main-sec">
+
+        <h1 class="stats_banners__heading">速報データ一覧</h1>
+
+        <section class="stats_banners__catgory">
+          <h2 class="stats_banners__catgory__heading">サッカー</h2>
+          <ul class="stats_banners__catgory__list">
+            <li class="stats_banners__catgory__item"><a href="/jleague/match/"><img src="/assets/images/stats/banners/bnrs-soccer_jleague.jpg" alt="Jリーグ 速報&amp;データを見る"></a></li>
+            <li class="stats_banners__catgory__item"><a href="/sokuhou/"><img src="/assets/images/stats/banners/bnrs-soccer_samurai.jpg" alt="サッカー日本代表リアルタイム速報"></a></li>
+          </ul>
+        </section><!-- /.stats_banners__section -->
+
+        <section class="stats_banners__catgory">
+          <h2 class="stats_banners__catgory__heading">野球</h2>
+          <ul class="stats_banners__catgory__list">
+            <li class="stats_banners__catgory__item"><a href="/stats/npb/"><img src="/assets/images/stats/banners/bnrs-baseball_pro.jpg" alt="プロ野球 セ・パ12球団 公式戦試合速報"></a></li>
+            <li class="stats_banners__catgory__item"><a href="/stats/mlb/"><img src="/assets/images/stats/banners/bnrs-baseball_mlb.jpg" alt="MLB 速報&amp;データを見る"></a></li>
+          </ul>
+        </section><!-- /.stats_banners__section -->
+
+        <section class="stats_banners__catgory">
+          <h2 class="stats_banners__catgory__heading">テニス</h2>
+          <ul class="stats_banners__catgory__list">
+            <li class="stats_banners__catgory__item"><a href="http://sportsbull.jp/stats/tennis/"><img src="/assets/images/stats/banners/bnrs-tennis.jpg" alt="テニス 速報&amp;データを見る"></a></li>
+          </ul>
+        </section><!-- /.stats_banners__section -->
+
+        <section class="stats_banners__catgory">
+          <h2 class="stats_banners__catgory__heading">ゴルフ</h2>
+          <ul class="stats_banners__catgory__list">
+            <li class="stats_banners__catgory__item"><a href="http://sportsbull.jp/stats/golf/"><img src="/assets/images/stats/banners/bnrs-golf.jpg" alt="ゴルフ 速報&amp;データを見る"></a></li>
+          </ul>
+        </section><!-- /.stats_banners__section -->
+
+      </section><!-- /.main-sec -->
+
+      <section class="side-sec show-for-large">
+        <div id="sidebar-moving-container">
+
+          <div class="sponsor-link">
+            <!-- /531683568/npb-pc-rectangle -->
+            <div id='div-gpt-ad-1492577512561-0' style='height:250px; width:300px;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1492577512561-0'); });
+            </script>
+            </div>
+          </div>
+
+          <div class="app-bnr">
+            <!-- /531683568/pc_sidebar_top_2nd -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/pc_sidebar_top_2nd', [300, 120], 'div-gpt-ad-1494939250039-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1494939250039-0' style='height:120px; width:300px;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939250039-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/pc_sidebar_top_2nd -->
+          </div>
+
+          <!-- sidebar recommend, オススメ記事 -->
+          <div id="widget-recommend-list-container"></div><!--/recommend-->
+
+          <div id="widget-ranking-container"></div><!--/ranking-->
+
+          <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
+            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+          </div>
+
+          <div id="widget-recommend-container"></div><!--/videos-->
+          <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
+            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+          </div>
+
+        </div><!--/#sidebar-moving-->
+      </section><!-- /.side-sec -->
+    </div>
+  </div><!-- /.body-sec -->
 
   <?php
   // app in webview 時に .foot-sec を非表示にする
@@ -267,7 +353,7 @@ __EOL__;
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script src="/assets/js/global.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/stats_banners.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
 </body>
 </html>

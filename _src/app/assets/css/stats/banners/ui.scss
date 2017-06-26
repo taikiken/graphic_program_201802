@@ -1,0 +1,64 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss/style/reset";
+@import "../../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../../module/utility";
+@import "../../module/global";
+@import "../../module/general";
+@import "../../layout";
+
+
+// print
+// @import "print";
+
+// common override
+.stats .body-sec-inner {
+  background: #f5f5f5 none;
+}
+
+
+// stats_banners
+
+//.stats_banners__heading
+.stats_banners__heading {
+  line-height: 60px;
+  margin-top: 30px;
+  padding-right: 16px;
+  padding-left: 16px;
+  background-color: $highlight-color;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+//.stats_banners__catgory
+.stats_banners__catgory {
+  margin-top: 30px;
+
+  //.stats_banners__catgory__heading
+  &__heading {
+    border-bottom: 2px solid $highlight-color;
+    color: $highlight-color;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  //.stats_banners__catgory__list
+  &__list {}
+
+  //.//.stats_banners__catgory__item
+  &__item {
+    margin-top: 20px;
+  }
+}
