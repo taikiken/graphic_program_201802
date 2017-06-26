@@ -73,7 +73,13 @@ img {
   -moz-user-select:none;
 }
 
-
+.undotsushin-ios,
+.undotsushin-android {
+  .head-sec,
+  .foot-sec {
+    display: none !important;
+  }
+}
 
 
 
