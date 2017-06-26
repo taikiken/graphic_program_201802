@@ -10,18 +10,47 @@
  *
  */
 
+// app
 import Env from './Env';
 
+/**
+ * API path を取得します,
+ * {@link Env} により取得パスを変更します
+ *
+ * - dev: `https://dev-img-sportsbull-jp.s3.amazonaws.com/json/bnr-sokuhou.json`
+ * - stg: `https://img-sportsbull-jp.s3.amazonaws.com/json/bnr-sokuhou_stg.json`
+ * - www: `https://img-sportsbull-jp.s3.amazonaws.com/json/bnr-sokuhou.json`
+ * - local: dev を使用する
+ *
+ * @example
+ * const path = Api.path();
+ */
 export default class Api {
+  /**
+   * dev API path を返します
+   * @returns {string} https://dev-img-sportsbull-jp.s3.amazonaws.com/json/bnr-sokuhou.json
+   */
   static dev() {
     return 'https://dev-img-sportsbull-jp.s3.amazonaws.com/json/bnr-sokuhou.json';
   }
+  /**
+   * stg API path を返します
+   * @returns {string} https://img-sportsbull-jp.s3.amazonaws.com/json/bnr-sokuhou_stg.json
+   */
   static stg() {
     return 'https://img-sportsbull-jp.s3.amazonaws.com/json/bnr-sokuhou_stg.json';
   }
+  /**
+   * 本番 API path を返します
+   * @returns {string} 'https://img-sportsbull-jp.s3.amazonaws.com/json/bnr-sokuhou.json'
+   */
   static www() {
     return 'https://img-sportsbull-jp.s3.amazonaws.com/json/bnr-sokuhou.json';
   }
+  /**
+   * {@link Env.mode} により Api path を変更します
+   * @returns {string} Api path を返します
+   */
   static path() {
     switch (Env.mode()) {
       case Env.WWW: {

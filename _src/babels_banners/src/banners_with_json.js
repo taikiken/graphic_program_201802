@@ -16,10 +16,25 @@ import Api from './banner/app/Api';
 import Top from './banner/view/Top';
 import Stats from './banner/view/Stats';
 
-const sp = self.Sagen.Browser.Mobile.is();
-
+// ---
+/**
+ * UT.net.Ajax
+ * @private
+ * @type {UT.net.Ajax}
+ */
 const Ajax = self.UT.net.Ajax;
 
+/**
+ * sp flag - Sagen.Browser.Mobile.is
+ * @private
+ * @type {boolean}
+ */
+const sp = self.Sagen.Browser.Mobile.is();
+
+/**
+ * top 車種コンテナ出力
+ * @private
+ */
 const topBanners = () => {
   const element = document.getElementById('js-top-banners');
   const ajax = new Ajax();
@@ -27,6 +42,10 @@ const topBanners = () => {
   top.start(Api.path());
 };
 
+/**
+ * `/stats` バナー一覧
+ * @private
+ */
 const statsBanners = () => {
   const element = document.getElementById('js-stats-banners');
   const ajax = new Ajax();
@@ -34,6 +53,7 @@ const statsBanners = () => {
   stats.start(Api.path());
 };
 
+// 動作モード statsBanners || topBanners
 if (Env.home()) {
   topBanners();
 } else if (Env.stats()) {
