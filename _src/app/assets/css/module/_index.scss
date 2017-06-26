@@ -205,19 +205,24 @@
 .headline {
   margin-top: 30px;
 
+  //.headline-heading
   &-heading {
     padding-bottom: 10px;
     border-bottom: 3px solid #0e357f;
 
+    //.headline-title
+    //.headline-ruby
     &-title, &-ruby {
       display: inline-block;
       line-height: 1;
     }
 
+    //.headline-title
     &-title img {
       vertical-align: middle;
     }
 
+    //.headline-ruby
     &-ruby {
       margin-left: 8px;
       color: #333;
@@ -353,3 +358,97 @@
   //   }
   // }
 }
+
+
+
+
+
+// stats_banner
+// トップページ 速報&データ
+.stats_banner {
+  margin-top: 30px;
+
+  //.stats_banner-heading
+  &-heading {
+    padding-bottom: 10px;
+    border-bottom: 3px solid #0e357f;
+
+    //.stats_banner-title
+    //.stats_banner-ruby
+    &-title, &-ruby {
+      display: inline-block;
+      line-height: 1;
+    }
+
+    //.stats_banner-title
+    &-title {
+
+      img {
+        vertical-align: middle;
+      }
+
+      &:before {
+        content: url("/assets/images/index/icon-stats_bnr-title.png");
+        display: inline-block;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+    }
+
+    //.stats_banner-ruby
+    &-ruby {
+      margin-left: 8px;
+      color: #333;
+      font-weight: bold;
+      font-size: fz(12);
+    }
+  } //.stats_banner-heading
+
+  //.stats_banner-list
+  &-list {
+    margin-top: 20px - 8;
+    overflow: hidden;
+
+  }
+
+  //.stats_banner-item
+  &-item {
+    float: left;
+    margin-top: 8px;
+
+    &:nth-child(2n) {
+      float: right;
+    }
+
+    a:hover {
+      @include over-opacity;
+    }
+  }
+
+  //.stats_banner-btn
+  &-btn {
+    margin-top: 8px;
+
+    //.stats_banner-btn-link
+    &-link {
+      display: block;
+      line-height: 1;
+      padding: 20px 0;
+      background-color: $highlight-color;
+      border-radius: 6px;
+      text-align: center;
+
+      span {
+        display: inline-block;
+        width: 219px;
+        height: 15px;
+        background: url(/assets/images/index/icon-stats_bnr-btn.png) 0 0 no-repeat;
+        @include hide-text;
+      }
+
+      &:hover {
+        @include over-opacity;
+      }
+    }
+  }
+} // stats_banner
