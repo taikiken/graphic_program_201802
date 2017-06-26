@@ -8,19 +8,19 @@ $app->group('/stats/{category:tennis}', function () use($app) {
 
     if ( $args['category'] === 'tennis' ) :
       $category = array(
-        'title' => 'テニス | 速報 & データ',
+        'title' => 'テニス | 速報 &amp; データ',
       );
     endif;
 
     if ( $args['category'] === 'golf' ) :
       $category = array(
-        'title' => 'ゴルフ | 速報 & データ',
+        'title' => 'ゴルフ | 速報 &amp; データ',
       );
     endif;
 
     $args['page'] = $app->model->set(array(
       'title'              => $category['title'],
-      'og_title'           => $category['title'].' | '.$app->model->property('title'),
+      'og_title'           => $category['title'].' | '.$app->model->property('title_short'),
       'og_url'             => $app->model->property('site_url').'stats/'.$args['category'].'/',
       'template'           => $args['category'].'/index.php',
       'path'               => $args,
