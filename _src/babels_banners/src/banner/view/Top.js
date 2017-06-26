@@ -51,6 +51,7 @@ export default class Top extends View {
    * @param {object} data JSON data
    */
   resolve(data) {
+    console.log('[BANNERS] Top.resolve', data, data.topBanners);
     if (data.topBanners) {
       this.render(data.topBanners);
     }

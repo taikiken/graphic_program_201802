@@ -1,28 +1,26 @@
-/**
+/*!
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
  * @date 2017/06/23 - 20:09
- *
+ * @license @taikiken
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- *
+ * @build @@buildTime
  */
+'use strict';
 
+// app
 import Env from './banner/app/Env';
 import Api from './banner/app/Api';
 
+// view
 import Top from './banner/view/Top';
 import Stats from './banner/view/Stats';
 
-// ---
-/**
- * UT.net.Ajax
- * @private
- * @type {UT.net.Ajax}
- */
-const Ajax = self.UT.net.Ajax;
+// net
+import Ajax from './banner/net/Ajax';
 
 /**
  * sp flag - Sagen.Browser.Mobile.is
@@ -36,7 +34,8 @@ const sp = self.Sagen.Browser.Mobile.is();
  * @private
  */
 const topBanners = () => {
-  const element = document.getElementById('js-top-banners');
+  const element = document.getElementById('js-stats_banner-list');
+  console.log('[BANNERS] topBanners', element);
   const ajax = new Ajax();
   const top = new Top(ajax, sp, element);
   top.start(Api.path());

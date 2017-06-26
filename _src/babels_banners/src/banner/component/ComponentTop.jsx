@@ -41,6 +41,7 @@ export default class ComponentTop extends React.Component {
           sp: React.PropTypes.string.isRequired,
         }),
         url: React.PropTypes.string.isRequired,
+        alt: React.PropTypes.string,
       })).isRequired,
       sp: React.PropTypes.bool.isRequired,
     };
@@ -57,13 +58,17 @@ export default class ComponentTop extends React.Component {
   render() {
     const sp = this.props.sp;
     return (
-      this.props.banners.map(banner => (
-        <div className="banner">
-          <a href={banner.url} className="banner-link">
-            <img src={sp ? banner.sp : banner.pc} alt="" className="banner-img"/>
-          </a>
-        </div>
-      ))
+      <ul className="stats_banner-list">
+        {
+          this.props.banners.map((banner, index) => (
+            <li className="stats_banner-item" key={`banners-top-${index}`}>
+              <a href={banner.url} className="banner-link">
+                <img src={sp ? banner.image.sp : banner.image.pc} alt={banner.alt ? banner.alt : ''} className="banner-img"/>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     );
   }
 }

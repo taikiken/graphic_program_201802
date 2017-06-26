@@ -45,6 +45,7 @@ export default class ComponentList extends React.Component {
           sp: React.PropTypes.string.isRequired,
         }),
         url: React.PropTypes.string.isRequired,
+        alt: React.PropTypes.string,
       })).isRequired,
       sp: React.PropTypes.bool.isRequired,
     };
@@ -64,15 +65,17 @@ export default class ComponentList extends React.Component {
     return (
       <div className="stats-list-container">
         <h3 className="stats-title">{props.title}</h3>
-        {
-          props.banners.map(banner => (
-            <div className="stats">
-              <a href={banner.url} className="stats-link">
-                <img src={sp ? banner.sp : banner.pc} alt="" className="stats-img"/>
-              </a>
-            </div>
-          ))
-        }
+        <ul className="stats_banner-list">
+          {
+            props.banners.map((banner, index) => (
+              <li className="stats_banner-item" key={`banners-top-${index}`}>
+                <a href={banner.url} className="stats-link">
+                  <img src={sp ? banner.image.sp : banner.image.pc} alt={banner.alt ? banner.alt : ''} className="banner-img"/>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
     );
   }
