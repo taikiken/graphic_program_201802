@@ -106,9 +106,10 @@ __EOL__;
 </head>
 <body>
 
-<div id="apvad-e19b363d86662f1fbcac19f61f89faa2"></div>
+<div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
 <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-<script>;(function(){new APV.VASTAdUnit({s:"e19b363d86662f1fbcac19f61f89faa2", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
+<script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
+<script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
 
 <div id="whole" class="whole stats">
 
@@ -118,7 +119,7 @@ __EOL__;
   ?>
   <header class="head-sec">
     <div class="head-sec-inner">
-      <h1><a href="/">SPORTS BULL</a></h1>
+      <h1><a href="https://sportsbull.jp/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
   <?php
@@ -166,10 +167,10 @@ __EOL__;
         <nav class="fnav">
           <h3 class="fnav-logo"><img src="/assets/images/common/footer-fnav-logo.png" alt="SPORTS BULL"></h3>
           <ul>
-            <li><a href="/about/">サービス紹介</a></li>
-            <li><a href="/about/company/">会社概要</a></li>
-            <li><a href="/about/privacy/">プライバシーポリシー</a></li>
-            <li><a href="/about/terms/">利用規約</a></li>
+            <li><a href="https://sportsbull.jp/about/">サービス紹介</a></li>
+            <li><a href="https://sportsbull.jp/about/company/">会社概要</a></li>
+            <li><a href="https://sportsbull.jp/about/privacy/">プライバシーポリシー</a></li>
+            <li><a href="https://sportsbull.jp/about/terms/">利用規約</a></li>
           </ul>
         </nav><!-- /.fnav -->
 
@@ -210,10 +211,10 @@ __EOL__;
 
       <nav class="fnav">
         <ul>
-          <li><a href="/about/">サービス紹介</a></li>
-          <li><a href="/about/privacy/">プライバシーポリシー</a></li>
-          <li><a href="/about/company/">会社概要</a></li>
-          <li><a href="/about/terms/">利用規約</a></li>
+          <li><a href="https://sportsbull.jp/about/">サービス紹介</a></li>
+          <li><a href="https://sportsbull.jp/about/privacy/">プライバシーポリシー</a></li>
+          <li><a href="https://sportsbull.jp/about/company/">会社概要</a></li>
+          <li><a href="https://sportsbull.jp/about/terms/">利用規約</a></li>
         </ul>
       </nav><!-- /.fnav -->
 
@@ -258,6 +259,5 @@ __EOL__;
 <link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
 <script src="/assets/js/global.bundle.js?v=<?php echo $page['version']; ?>"></script>
-<script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
 </body>
 </html>
