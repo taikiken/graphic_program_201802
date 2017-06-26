@@ -1,0 +1,585 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../scss/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../bower_exports/modularized/normalize";
+@import "../../../../scss/style/reset";
+@import "../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/utility";
+@import "../module/global";
+@import "../module/general";
+@import "../layout";
+
+
+// print
+// @import "print";
+
+// common override
+.stats .body-sec-inner {
+  background: #f5f5f5 none;
+}
+
+footer.foot-sec {
+  margin-top: 0;
+  text-align: left;
+  font-size: inherit;
+}
+
+
+
+
+
+$link-color: #0e357f;
+$bg-color_gray: #e6e6e6;
+$bg-color_blue: #0e357f;
+$highlight-color: #033583;
+
+// stats__header
+.stats__header {
+  padding-top: 30px;
+}
+
+.stats__banner {
+  margin-top: 30px;
+}
+
+//.stats__nav
+.stats__nav {
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  //.stats__nav__list
+  &__list {
+    width: 100%;
+    display: table;
+    border: 2px solid #cc141d;
+    border-radius: 4px;
+  }
+
+  [class^="stats__nav__item"] {
+    display: table-cell;
+
+    &:last-child {
+      a {
+        border-right: none;
+      }
+    }
+  }
+
+  a {
+    @include link-decoration(#cc141d, #fff, none, none);
+    display: block;
+    line-height: 1;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-right: 1px solid #efefef;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .current a,
+  a:hover {
+    border-right-color: #cc141d;
+    background-color: #cc141d;
+    color: #fff;
+  }
+}
+
+
+
+
+
+#sj_contents_div {
+  font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', Arial, verdana, sans-serif
+}
+
+#sj_contents_div,
+#sj_contents_div.SJ_color-blue,
+#sj_contents_div .SJ_color-sky {
+  background-color: transparent;
+
+  a {
+    @include link-decoration($link-color, $link-color, none, underline);
+  }
+
+  h2 a:hover,
+  h3 a:hover,
+  h4 a:hover {
+    text-decoration: none !important;
+    border-bottom: 1px solid $link-color !important;
+  }
+
+  // ボーダーカラー
+  .SJ_h2-pole,
+  .SJ_h3-pole,
+  .SJ_h4-pole,
+  .SJ_h5-pole,
+  .SJ_h3-upper,
+  .SJ_h4-upper,
+  .SJ_h3-under,
+  .SJ_h4-under,
+  ul.SJ_tabs,
+  ul.SJ_tabs a,
+  dl.SJ_tabs-year {
+    border-color: $highlight-color;
+  }
+
+  // ウィジェットのページトップを非表示
+  .SJ_to-top {
+    display: none;
+  }
+
+  //ウィジェットのコピーライト
+  footer {
+    font-size: 10px;
+  }
+
+  //#SJ_container
+  #SJ_container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  //サブナビゲーション .SJ_switch-subnav
+  // ex. https://sportsbull.jp/stats/golf/ 日程・ランキング のナビ部
+  .SJ_switch-subnav {
+
+    .SJ_bg-none {
+      background-color: transparent !important;
+    }
+
+    ul#SJ_ul-sub-cat {
+      padding: 0;
+      margin: 0 0 30px;
+      font-size: 14px;
+    }
+
+    + #SJ_container {
+      margin-top: 30px;
+    }
+
+    .SJ_ul-sub-arrow {
+      li {
+        margin-right: 10px;
+        padding-left: 0;
+        background: none;
+      }
+
+      a {
+        @include link-decoration(#cc141d, #fff, none, none);
+        position: relative;
+        display: inline-block;
+        min-width: 150px;
+        padding: 12px 36px 12px 6px;
+        border: 1px solid #cc141d;
+        background-color: #fff;
+        font-weight: bold;
+        text-align: center;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 30px;
+          height: 100%;
+          background: #cc141d url(/assets/images/stats/icon-link_arrow.png) center center no-repeat;
+          background-size: 30px;
+        }
+
+        &:hover {
+          background-color: #cc141d;
+        }
+      }
+    }
+  }
+
+  // heading title
+  [class^="SJ_h2"],
+  [class^="SJ_h3"], {
+    color: $highlight-color;
+    font-weight: bold;
+  }
+
+  .SJ_h2-pole {
+    margin: 0 0 20px;
+    padding: 5px 0;
+    border-width: 0 0 3px 0;
+  }
+
+  .SJ_h2-solid {
+    margin: 0 0 20px;
+    padding: 5px 0;
+    background-color: transparent;
+  }
+
+  .SJ_h2-pole.SJ_h2-solid {
+    padding: 5px 0 !important;
+  }
+
+  //.SJ_h3-plain
+  .SJ_h3-plain {
+    margin-right: 0;
+    margin-left: 0;
+    vertical-align: middle;
+
+    // ex. https://sportsbull.jp/stats/golf/ テーブル上のタイトル右側のテキスト
+    span {
+      color: #333;
+      font-weight: normal;
+    }
+  }
+
+  //.SJ_update
+  h2 + .SJ_update,
+  .SJ_switch-ttl + .SJ_update {
+    margin: -10px 0 16px 0;
+    font-size: 10px;
+  }
+
+  //.SJ_h3-under
+  .SJ_h3-under {
+    h3 {
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+
+  //.SJ_h4-upper
+  .SJ_h4-upper {
+    padding: 10px 0;
+
+    a {
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+
+  // 矢印付きリンク
+  // ex. https://sportsbull.jp/stats/tennis/ タイトル横 / テーブル右上の赤いリンク
+  .SJ_h3-plain .SJ_float-r,
+  .SJ_h4-plain .SJ_float-r,
+  .SJ_h3-under .SJ_float-r,
+  .SJ_h4-under .SJ_float-r {
+    a {
+      @include link-decoration(#cc141d, #cc141d, none, none);
+      position: relative;
+      left: -20px;
+      display: inline-block;
+      margin-right: -20px;
+      padding-left: 20px;
+      overflow: hidden;
+      background-color: #f5f5f5;
+      text-indent: -20px;
+      font-size: 14px;
+      font-weight: bold;
+      vertical-align: middle;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        right: 0;
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
+        background-size: 16px;
+      }
+
+      &:hover {
+        border-bottom: none !important;
+        text-decoration: none !important;
+      }
+    }
+  }
+
+
+
+  // table
+  table {
+    margin-bottom: 30px;
+  }
+
+  ul.SJ_tabs + table,
+  ul.SJ_tabs + .SJ_schedule-match ul {
+    margin-top: 5px;
+  }
+
+  table.SJ_table-solid.SJ_table-color thead th:first-child {
+    border-color: transparent;
+    border-right-color: #fff;
+  }
+
+  table.SJ_table-solid thead th,
+  table.SJ_table-solid.SJ_table-color thead th {
+    background-color: $bg-color_blue;
+    border-color: transparent #fff;
+    color: #fff;
+  }
+
+  table.SJ_table-solid thead th,
+  table.SJ_table-solid tbody th {
+    padding: 10px 1%;
+    font-size: 14px;
+    font-weight: bold;
+
+    a {
+      @include link-decoration(#fff, #fff, underline, none);
+    }
+  }
+
+  table.SJ_table-solid tbody td {
+    padding: 8px 1%;
+    font-size: 13px;
+  }
+
+  table.SJ_table-solid tbody th:first-child,
+  table.SJ_table-solid tbody td:first-child {
+    border-left: none;
+  }
+
+  table.SJ_table-solid tbody td:last-child {
+    border-right: none;
+  }
+
+  table.SJ_table-stripe tbody tr:nth-child(odd) td {
+    background-color: $bg-color_gray;
+  }
+
+
+
+  // 矢印付きリンクのあるテーブル
+  .SJ_table-mark {
+    a {
+      display: inline-block;
+    }
+  }
+
+
+
+  // table caption
+  table.SJ_table-solid caption {
+    padding: 0 0 5px;
+  }
+
+  table.SJ_table-solid caption .SJ_float-l {
+    color: $highlight-color;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  table.SJ_table-solid caption .SJ_float-r {
+    a {
+      @include link-decoration(#cc141d, #cc141d, none, none);
+      position: relative;
+      left: -20px;
+      display: inline-block;
+      margin-right: -20px;
+      padding-left: 20px;
+      overflow: hidden;
+      background-color: #f5f5f5;
+      text-indent: -20px;
+      font-size: 14px;
+      font-weight: bold;
+      vertical-align: middle;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        right: 0;
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
+        background-size: 16px;
+      }
+    }
+  } // table caption
+
+
+
+
+
+  // tab
+  ul.SJ_tabs {}
+
+  ul.SJ_tabs + ul.SJ_tabs {
+    margin-top: 5px !important;
+  }
+
+  ul.SJ_tabs-focus {}
+
+  ul.SJ_tabs.SJ_tabs-under,
+  ul.SJ_tabs.SJ_tabs-focus {
+    border-width: 0 0 2px;
+  }
+
+  ul.SJ_tabs-medium {}
+
+  ul.SJ_ul-ratio-2 {}
+
+  ul.SJ_tabs > li {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    float: left;
+    zoom: 1;
+    border-right: none;
+    border-top: none;
+    box-sizing: border-box;
+  }
+
+  ul.SJ_tabs > li a,
+  ul.SJ_tabs > li span {
+    margin: 0;
+    padding: 12px 0;
+    border-left: 1px solid #f5f5f5;
+    background-color: $bg-color_gray;
+    color: $highlight-color;
+    position: relative;
+    display: block;
+    line-height: 1.2;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  ul.SJ_tabs > li.SJ_disuse span {
+    color: #aaa;
+  }
+
+  ul.SJ_tabs > li a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #ccc;
+    color: #fff;
+  }
+
+  ul.SJ_tabs > li:first-child a,
+  ul.SJ_tabs > li:first-child span,
+  ul.SJ_tabs > li.SJ_current a,
+  ul.SJ_tabs > li.SJ_current span,
+  ul.SJ_tabs > li.SJ_current + li a,
+  ul.SJ_tabs > li.SJ_current + li span {
+    border-left: none;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus > li a,
+  ul.SJ_tabs.SJ_tabs-focus > li span {
+    padding: 12px 2px;
+    top: 0;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus > li a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #c1c1c1;
+    color: #fff;
+  }
+
+  ul.SJ_tabs li.SJ_current > a,
+  ul.SJ_tabs li.SJ_current > a:hover,
+  dl.SJ_tabs-year dd ul > li.SJ_current a,
+  dl.SJ_tabs-year dd ul > li.SJ_current a:hover,
+  ul.SJ_tabs.SJ_tabs-focus > li.SJ_current a {
+    background-color: $highlight-color;
+    color: #fff;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus > li.SJ_current a {
+    padding: 12px 2px;
+    top: 0;
+    border-width: 0;
+    border-style: none;
+    border-color: transparent;
+    background-color: $highlight-color;
+    color: #fff;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus > li.SJ_current a {
+    border-color: transparent;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li a,
+  ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li span,
+    ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li.SJ_current a {
+    padding: 12px 2px !important;
+  }
+
+
+
+
+
+  // イベント ex. https://sportsbull.jp/stats/golf/?sj_PageID=pc_2017_round_13_1496_4
+  // 優勝選手や大会概要のボックス
+  .SJ_box-event {
+    padding: 20px;
+    border: none;
+    background-color: $bg-color_gray;
+
+    .SJ_box-head {
+      padding: 0 0 16px 0;
+      border-bottom: 1px solid #aaa;
+      background-color: transparent;
+
+      .SJ_float-l {
+        color: $highlight-color;
+        font-weight: bold;
+      }
+
+      a {
+        position: relative;
+        display: inline-block;
+        @include link-decoration(#cc141d, #cc141d, none, none);
+        padding-right: 20px;
+        font-weight: bold;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 1px;
+          right: 0;
+          display: block;
+          width: 16px;
+          height: 16px;
+          background: url(/assets/images/stats/icon-link_arrow.png) 0 0 no-repeat;
+          background-size: 16px;
+        }
+      }
+
+      .SJ_flag-mini {
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
+
+    .SJ_dl-round,
+    .SJ_dl-winner {
+      dt {
+        font-weight: bold;
+      }
+    }
+  }
+
+} //#sj_contents_div.SJ_color-blue
+
+
