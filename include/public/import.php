@@ -1,7 +1,5 @@
 <?php
 
-include $INCLUDEPATH."aws.php";
-
 $excategory=array(129,130,133);
 
 $exword=array();
