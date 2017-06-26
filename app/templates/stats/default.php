@@ -119,7 +119,7 @@ __EOL__;
   ?>
   <header class="head-sec">
     <div class="head-sec-inner">
-      <h1><a href="/">SPORTS BULL</a></h1>
+      <h1><a href="https://sportsbull.jp/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
   <?php
@@ -167,10 +167,10 @@ __EOL__;
         <nav class="fnav">
           <h3 class="fnav-logo"><img src="/assets/images/common/footer-fnav-logo.png" alt="SPORTS BULL"></h3>
           <ul>
-            <li><a href="/about/">サービス紹介</a></li>
-            <li><a href="/about/company/">会社概要</a></li>
-            <li><a href="/about/privacy/">プライバシーポリシー</a></li>
-            <li><a href="/about/terms/">利用規約</a></li>
+            <li><a href="https://sportsbull.jp/about/">サービス紹介</a></li>
+            <li><a href="https://sportsbull.jp/about/company/">会社概要</a></li>
+            <li><a href="https://sportsbull.jp/about/privacy/">プライバシーポリシー</a></li>
+            <li><a href="https://sportsbull.jp/about/terms/">利用規約</a></li>
           </ul>
         </nav><!-- /.fnav -->
 
@@ -211,10 +211,10 @@ __EOL__;
 
       <nav class="fnav">
         <ul>
-          <li><a href="/about/">サービス紹介</a></li>
-          <li><a href="/about/privacy/">プライバシーポリシー</a></li>
-          <li><a href="/about/company/">会社概要</a></li>
-          <li><a href="/about/terms/">利用規約</a></li>
+          <li><a href="https://sportsbull.jp/about/">サービス紹介</a></li>
+          <li><a href="https://sportsbull.jp/about/privacy/">プライバシーポリシー</a></li>
+          <li><a href="https://sportsbull.jp/about/company/">会社概要</a></li>
+          <li><a href="https://sportsbull.jp/about/terms/">利用規約</a></li>
         </ul>
       </nav><!-- /.fnav -->
 
