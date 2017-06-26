@@ -161,7 +161,7 @@ if(preg_match("/undotsushin/",$servername)){
 	$CMSLOG="d:/log/ut/ut_cmslog.txt";
 
 	$domain="http://ut";
-	$ImgPath="http://ut";
+	$ImgPath="http://ut/prg_img";
 	$UserImgPath=$ImgPath;
 	$LOGIN="d:/log/ut/ut_login.txt";
 	$RSS="d:/log/ut/rss/";
@@ -200,5 +200,7 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
   $RSS="/vagrant/.tmp/rss/";
 endif;
 
+//$staticfilepath=preg_match("/sportsbull.jp/",$domain)?sprintf("s3://%s",$bucket):sprintf("%s/api/ver1",$SERVERPATH);
+$staticfilepath=sprintf("%s/api/ver1",$SERVERPATH);
 
 ?>
