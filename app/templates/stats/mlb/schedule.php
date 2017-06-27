@@ -15,11 +15,16 @@
         </ul>
       </div>
 
-      <link rel="stylesheet" href="//test-sports-digican.appspot.com/statics/css/common-sp.css" />
-      <link rel="stylesheet" href="//test-sports-digican.appspot.com/statics/C00037/css/sdc-parts.css" />
+      <link rel="stylesheet" href="//front.sports-digican.com/statics/css/common-sp.css" />
+      <link rel="stylesheet" href="//front.sports-digican.com/statics/C00037/css/sdc-parts.css" />
 
-      <script src="//test-sports-digican.appspot.com/statics/js/jquery-3.1.0.min.js"></script>
-      <script src="//test-sports-digican.appspot.com/statics/js/sdcSports.js"></script>
+      <div class="sdc_contents">
+        <div class="live-container"></div>
+        <div class="live-ga"></div>
+      </div><!-- /.sdc_contents -->
+
+      <script src="//front.sports-digican.com/statics/js/jquery-3.1.0.min.js"></script>
+      <script src="//front.sports-digican.com/statics/js/sdcSports.js"></script>
       <script>
         $(document).ready(function () {
           $('.sdc_contents .live-container').sportsController({
