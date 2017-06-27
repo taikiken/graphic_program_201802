@@ -12,6 +12,9 @@
 
 const React = self.React;
 
+/**
+ * `/stats/` - バナー一覧 1 カテゴリ分を出力します
+ */
 export default class ComponentList extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
@@ -51,21 +54,25 @@ export default class ComponentList extends React.Component {
       index: React.PropTypes.number.isRequired,
     };
   }
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  constructor(props) {
-    super(props);
-  }
+  // // ---------------------------------------------------
+  // //  CONSTRUCTOR
+  // // ---------------------------------------------------
+  // constructor(props) {
+  //   super(props);
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * section.stats_banners__category > ul > li
+   * @returns {XML} section.stats_banners__category > ul > li
+   */
   render() {
     const props = this.props;
     const sp = this.props.sp;
     return (
       <section className="stats_banners__category">
-        <h2 className="stats_banners__category__heading-title">{props.title}</h2>
+        <h2 className="stats_banners__category__heading">{props.title}</h2>
         <ul className="stats_banners__category__list">
           {
             props.banners.map((banner, index) => (

@@ -147,35 +147,7 @@ __EOL__;
 
         <h1 class="stats_banners__heading">速報データ一覧</h1>
 
-        <section class="stats_banners__category">
-          <h2 class="stats_banners__category__heading">サッカー</h2>
-          <ul class="stats_banners__category__list">
-            <li class="stats_banners__category__item"><a href="/jleague/match/"><img src="/assets/images/stats/banners/bnrs-soccer_jleague.jpg" alt="Jリーグ 速報&amp;データを見る"></a></li>
-            <li class="stats_banners__category__item"><a href="/sokuhou/"><img src="/assets/images/stats/banners/bnrs-soccer_samurai.jpg" alt="サッカー日本代表リアルタイム速報"></a></li>
-          </ul>
-        </section><!-- /.stats_banners__section -->
-
-        <section class="stats_banners__category">
-          <h2 class="stats_banners__category__heading">野球</h2>
-          <ul class="stats_banners__category__list">
-            <li class="stats_banners__category__item"><a href="/stats/npb/"><img src="/assets/images/stats/banners/bnrs-baseball_pro.jpg" alt="プロ野球 セ・パ12球団 公式戦試合速報"></a></li>
-            <li class="stats_banners__category__item"><a href="/stats/mlb/"><img src="/assets/images/stats/banners/bnrs-baseball_mlb.jpg" alt="MLB 速報&amp;データを見る"></a></li>
-          </ul>
-        </section><!-- /.stats_banners__section -->
-
-        <section class="stats_banners__category">
-          <h2 class="stats_banners__category__heading">テニス</h2>
-          <ul class="stats_banners__category__list">
-            <li class="stats_banners__category__item"><a href="http://sportsbull.jp/stats/tennis/"><img src="/assets/images/stats/banners/bnrs-tennis.jpg" alt="テニス 速報&amp;データを見る"></a></li>
-          </ul>
-        </section><!-- /.stats_banners__section -->
-
-        <section class="stats_banners__category">
-          <h2 class="stats_banners__category__heading">ゴルフ</h2>
-          <ul class="stats_banners__category__list">
-            <li class="stats_banners__category__item"><a href="http://sportsbull.jp/stats/golf/"><img src="/assets/images/stats/banners/bnrs-golf.jpg" alt="ゴルフ 速報&amp;データを見る"></a></li>
-          </ul>
-        </section><!-- /.stats_banners__section -->
+        <div id="js-stats_banners__categories"></div>
 
       </section><!-- /.main-sec -->
 

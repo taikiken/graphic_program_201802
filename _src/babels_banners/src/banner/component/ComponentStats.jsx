@@ -10,10 +10,16 @@
  *
  */
 
+// stats
 import ComponentList from './stats/ComponentList';
 
 const React = self.React;
 
+/**
+ * バナー一覧出力親
+ * - ComponentStats
+ *   - {@link ComponentList}
+ */
 export default class ComponentStats extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
@@ -68,27 +74,39 @@ export default class ComponentStats extends React.Component {
       sp: React.PropTypes.bool.isRequired,
     };
   }
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  constructor(props) {
-    super(props);
-  }
+  // // ---------------------------------------------------
+  // //  CONSTRUCTOR
+  // // ---------------------------------------------------
+  // constructor(props) {
+  //   super(props);
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * div.js-banners-root > {@link ComponentList}
+   * @returns {XML} {@link ComponentList}
+   */
   render() {
-    console.log('ComponentStats.render props', this.props);
-    return (
-      this.props.banners.map((banners, index) => (
+    // {Array.<ComponentList>} - 出力 component list
+    const components = [];
+    // props.banners から ComponentList を出力リストへ追加します
+    this.props.banners.map((banners, index) => (
+      components.push(
         <ComponentList
           key={`banners-${index}`}
-          top={banners.top}
+          title={banners.title}
           banners={banners.banners}
           sp={this.props.sp}
           index={index}
         />
-      ))
+      )
+    ));
+    // ダミー親コンテナ + 出力リスト
+    return (
+      <div className="js-banners-root">
+        {components}
+      </div>
     );
   }
 }

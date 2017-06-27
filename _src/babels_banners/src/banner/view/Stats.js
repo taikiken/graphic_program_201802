@@ -60,6 +60,7 @@ export default class Stats extends View {
    * @param {*} banners 出力にしようする JSON 由来データ
    */
   render(banners) {
+    console.log('Stats.render banners', banners);
     ReactDOM.render(
       <ComponentStats
         banners={banners}
