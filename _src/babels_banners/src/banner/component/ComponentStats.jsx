@@ -78,8 +78,9 @@ export default class ComponentStats extends React.Component {
   //  METHOD
   // ---------------------------------------------------
   render() {
+    console.log('ComponentStats.render props', this.props);
     return (
-      this.props.map((banners, index) => (
+      this.props.banners.map((banners, index) => (
         <ComponentList
           key={`banners-${index}`}
           top={banners.top}

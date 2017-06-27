@@ -35,7 +35,9 @@ const sp = self.Sagen.Browser.Mobile.is();
  */
 const topBanners = () => {
   const element = document.getElementById('js-stats_banner-list');
-  console.log('[BANNERS] topBanners', element);
+  if (!element) {
+    return;
+  }
   const ajax = new Ajax();
   const top = new Top(ajax, sp, element);
   top.start(Api.path());
@@ -46,7 +48,10 @@ const topBanners = () => {
  * @private
  */
 const statsBanners = () => {
-  const element = document.getElementById('js-stats-banners');
+  const element = document.getElementById('js-stats_banners__categories');
+  if (!element) {
+    return;
+  }
   const ajax = new Ajax();
   const stats = new Stats(ajax, sp, element);
   stats.start(Api.path());
