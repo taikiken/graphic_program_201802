@@ -322,6 +322,6 @@ __EOL__;
 </script>
 
 <script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
-<script src="/assets/js/bundle/stats_banners.babel.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/stats_banners.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>
