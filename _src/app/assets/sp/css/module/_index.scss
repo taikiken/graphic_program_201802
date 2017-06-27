@@ -285,6 +285,7 @@
 
   //.stats_banner-list
   &-list {
+    padding-bottom: 2px;
     overflow: hidden;
     background-color: #030b1a;
   }
@@ -293,10 +294,12 @@
   &-item {
     float: left;
     width: 50%;
-    padding-top: 1px;
+    padding-top: 2px;
+    border-right: 1px solid #030b1a;
 
     &:nth-child(2n) {
       float: right;
+      border-right: none;
       border-left: 1px solid #030b1a;
     }
   }
