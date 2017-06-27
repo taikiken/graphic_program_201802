@@ -23,7 +23,7 @@ $app->group('/stats', function () use($app) {
   });
 
 
-  $this->get('/{category:webview|tennis}[/]', function ($request, $response, $args) use ( $app ) {
+  $this->get('/{category:webview|tennis|golf}[/]', function ($request, $response, $args) use ( $app ) {
 
     if ( $args['category'] === 'webview' ) :
 
