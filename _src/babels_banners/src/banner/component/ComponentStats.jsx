@@ -85,6 +85,7 @@ export default class ComponentStats extends React.Component {
           top={banners.top}
           banners={banners.banners}
           sp={this.props.sp}
+          index={index}
         />
       ))
     );
