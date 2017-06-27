@@ -129,7 +129,7 @@ gulp.task 'stats:pack:build', ( cb ) ->
     new webpack.optimize.DedupePlugin()
     new webpack.optimize.UglifyJsPlugin compress: warnings: false
   ]
-  conf.entry = conf.entry + '/_src/babels_banners/banners_with_json/banners_with_json.js'
+  conf.entry = conf.entry + '/_src/babels_banners/compile/banners_with_json.js'
   conf.output.filename = 'banners_with_json.bundle.js'
 
   webpack conf, ( err, stats ) ->
