@@ -12,7 +12,9 @@
 
 const React = self.React;
 
-
+/**
+ * top(home) stats banner x 4 出力します
+ */
 export default class ComponentTop extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
@@ -46,15 +48,19 @@ export default class ComponentTop extends React.Component {
       sp: React.PropTypes.bool.isRequired,
     };
   }
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  constructor(props) {
-    super(props);
-  }
+  // // ---------------------------------------------------
+  // //  CONSTRUCTOR
+  // // ---------------------------------------------------
+  // constructor(props) {
+  //   super(props);
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * ul.stats_banner-list > li.stats_banner-item
+   * @returns {XML} ul.stats_banner-list > li.stats_banner-item
+   */
   render() {
     const sp = this.props.sp;
     return (

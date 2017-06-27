@@ -1,8 +1,8 @@
-# Project library UT を実行します
+# `/stats` `/stas/webview` `index` - banner
 
-for desktop / tablet
+for desktop / tablet / mobile / app
 
-**exe.bundle.js**
+**banners_with_json.bundle.js**
 
 読み込むだけです
 
