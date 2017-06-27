@@ -354,6 +354,6 @@ __EOL__;
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script src="/assets/js/stats_banners.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>
