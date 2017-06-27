@@ -119,11 +119,6 @@ __EOL__;
 </head>
 <body>
 
-<div id="apvad-e19b363d86662f1fbcac19f61f89faa2"></div>
-<script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-<script>;(function(){new APV.VASTAdUnit({s:"e19b363d86662f1fbcac19f61f89faa2", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
-<script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
-
 <div id="whole" class="whole stats stats_banners">
 
   <?php
@@ -327,5 +322,6 @@ __EOL__;
 </script>
 
 <script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/bundle/stats_banners.babel.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>
