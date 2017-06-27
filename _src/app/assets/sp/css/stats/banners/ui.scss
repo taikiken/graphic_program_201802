@@ -53,13 +53,13 @@
   text-align: center;
 }
 
-//.stats_banners__catgory
-.stats_banners__catgory {
+//.stats_banners__category
+.stats_banners__category {
   margin-top: (36/2)+px;
   padding-right: perCalc(55, 750);
   padding-left: perCalc(55, 750);
 
-  //.stats_banners__catgory__heading
+  //.stats_banners__category__heading
   &__heading {
     border-bottom: (6/2)+px solid $highlight-color;
     color: $highlight-color;
@@ -67,10 +67,10 @@
     font-size: (32/2)+px;
   }
 
-  //.stats_banners__catgory__list
+  //.stats_banners__category__list
   &__list {}
 
-  //.//.stats_banners__catgory__item
+  //.//.stats_banners__category__item
   &__item {
     margin-top: (30/2)+px;
   }
