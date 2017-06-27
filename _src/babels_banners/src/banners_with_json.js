@@ -27,18 +27,37 @@ import Ajax from './banner/net/Ajax';
  * @private
  * @type {boolean}
  */
-const sp = self.Sagen.Browser.Mobile.is();
+let sp = self.Sagen.Browser.Mobile.is();
+
 
 /**
  * top 車種コンテナ出力
  * @private
+ * @param {?Element} [bannerList=null] div#js-stats_banner-list
  */
-const topBanners = () => {
-  const element = document.getElementById('js-stats_banner-list');
-  console.log('[BANNERS] topBanners', element);
+const topBanners = (bannerList = null) => {
+  const element = bannerList || document.getElementById('js-stats_banner-list');
+  // console.log('topBanners', bannerList);
+  if (!element) {
+    return;
+  }
   const ajax = new Ajax();
   const top = new Top(ajax, sp, element);
   top.start(Api.path());
+};
+
+
+// webview
+/**
+ * アプリ専用 - top banner x 4
+ */
+const appWebview = () => {
+  const bannerList = document.getElementById('js-stats_banner-list');
+  // console.log('appWebview', bannerList);
+  if (bannerList) {
+    sp = true;
+    topBanners(bannerList);
+  }
 };
 
 /**
@@ -46,7 +65,10 @@ const topBanners = () => {
  * @private
  */
 const statsBanners = () => {
-  const element = document.getElementById('js-stats-banners');
+  const element = document.getElementById('js-stats_banners__categories');
+  if (!element) {
+    return;
+  }
   const ajax = new Ajax();
   const stats = new Stats(ajax, sp, element);
   stats.start(Api.path());
@@ -57,4 +79,6 @@ if (Env.home()) {
   topBanners();
 } else if (Env.stats()) {
   statsBanners();
+} else {
+  appWebview();
 }

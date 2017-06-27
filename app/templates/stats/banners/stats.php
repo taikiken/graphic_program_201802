@@ -50,8 +50,8 @@
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
 
-  <link rel="stylesheet" href="/assets/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
-  <link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
+  <link rel="stylesheet" href="/assets/css/stats/banners/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
+  <link rel="stylesheet" href="/assets/sp/css/stats/banners/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
   <?php
   endif;
@@ -119,10 +119,6 @@ __EOL__;
 </head>
 <body>
 
-<div id="apvad-e19b363d86662f1fbcac19f61f89faa2"></div>
-<script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-<script>;(function(){new APV.VASTAdUnit({s:"e19b363d86662f1fbcac19f61f89faa2", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
-
 <div id="whole" class="whole stats stats_banners">
 
   <?php
@@ -146,35 +142,7 @@ __EOL__;
 
         <h1 class="stats_banners__heading">速報データ一覧</h1>
 
-        <section class="stats_banners__catgory">
-          <h2 class="stats_banners__catgory__heading">サッカー</h2>
-          <ul class="stats_banners__catgory__list">
-            <li class="stats_banners__catgory__item"><a href="/jleague/match/"><img src="/assets/images/stats/banners/bnrs-soccer_jleague.jpg" alt="Jリーグ 速報&amp;データを見る"></a></li>
-            <li class="stats_banners__catgory__item"><a href="/sokuhou/"><img src="/assets/images/stats/banners/bnrs-soccer_samurai.jpg" alt="サッカー日本代表リアルタイム速報"></a></li>
-          </ul>
-        </section><!-- /.stats_banners__section -->
-
-        <section class="stats_banners__catgory">
-          <h2 class="stats_banners__catgory__heading">野球</h2>
-          <ul class="stats_banners__catgory__list">
-            <li class="stats_banners__catgory__item"><a href="/stats/npb/"><img src="/assets/images/stats/banners/bnrs-baseball_pro.jpg" alt="プロ野球 セ・パ12球団 公式戦試合速報"></a></li>
-            <li class="stats_banners__catgory__item"><a href="/stats/mlb/"><img src="/assets/images/stats/banners/bnrs-baseball_mlb.jpg" alt="MLB 速報&amp;データを見る"></a></li>
-          </ul>
-        </section><!-- /.stats_banners__section -->
-
-        <section class="stats_banners__catgory">
-          <h2 class="stats_banners__catgory__heading">テニス</h2>
-          <ul class="stats_banners__catgory__list">
-            <li class="stats_banners__catgory__item"><a href="http://sportsbull.jp/stats/tennis/"><img src="/assets/images/stats/banners/bnrs-tennis.jpg" alt="テニス 速報&amp;データを見る"></a></li>
-          </ul>
-        </section><!-- /.stats_banners__section -->
-
-        <section class="stats_banners__catgory">
-          <h2 class="stats_banners__catgory__heading">ゴルフ</h2>
-          <ul class="stats_banners__catgory__list">
-            <li class="stats_banners__catgory__item"><a href="http://sportsbull.jp/stats/golf/"><img src="/assets/images/stats/banners/bnrs-golf.jpg" alt="ゴルフ 速報&amp;データを見る"></a></li>
-          </ul>
-        </section><!-- /.stats_banners__section -->
+        <div id="js-stats_banners__categories"></div>
 
       </section><!-- /.main-sec -->
 
@@ -353,7 +321,7 @@ __EOL__;
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script src="/assets/js/stats_banners.bundle.js?v=<?php echo $page['version']; ?>"></script>
-<script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
+<script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/bundle/stats_banners.babel.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>

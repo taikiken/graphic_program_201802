@@ -12,6 +12,9 @@
 
 const React = self.React;
 
+/**
+ * `/stats/` - バナー一覧 1 カテゴリ分を出力します
+ */
 export default class ComponentList extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
@@ -48,27 +51,32 @@ export default class ComponentList extends React.Component {
         alt: React.PropTypes.string,
       })).isRequired,
       sp: React.PropTypes.bool.isRequired,
+      index: React.PropTypes.number.isRequired,
     };
   }
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  constructor(props) {
-    super(props);
-  }
+  // // ---------------------------------------------------
+  // //  CONSTRUCTOR
+  // // ---------------------------------------------------
+  // constructor(props) {
+  //   super(props);
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * section.stats_banners__category > ul > li
+   * @returns {XML} section.stats_banners__category > ul > li
+   */
   render() {
     const props = this.props;
     const sp = this.props.sp;
     return (
-      <div className="stats-list-container">
-        <h3 className="stats-title">{props.title}</h3>
-        <ul className="stats_banner-list">
+      <section className="stats_banners__category">
+        <h2 className="stats_banners__category__heading">{props.title}</h2>
+        <ul className="stats_banners__category__list">
           {
             props.banners.map((banner, index) => (
-              <li className="stats_banner-item" key={`banners-top-${index}`}>
+              <li className="stats_banners__category__item" key={`banners-stats-${props.index}-${index}`}>
                 <a href={banner.url} className="stats-link">
                   <img src={sp ? banner.image.sp : banner.image.pc} alt={banner.alt ? banner.alt : ''} className="banner-img"/>
                 </a>
@@ -76,7 +84,7 @@ export default class ComponentList extends React.Component {
             ))
           }
         </ul>
-      </div>
+      </section>
     );
   }
 }

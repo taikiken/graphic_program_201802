@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script>
+  (function () {
+    if ( window.location.protocol == 'https:' ) {
+      window.location.replace(window.location.href.replace(/https:/, 'http:'));
+    }
+  }());
+  </script>
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
