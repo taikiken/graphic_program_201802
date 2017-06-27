@@ -138,6 +138,6 @@ export default class Env {
    * @returns {boolean} true: stats 配下
    */
   static stats(path = pathname) {
-    return path.indexOf('/stats') === 0;
+    return path.indexOf('/stats') === 0 && path.indexOf('/stats/webview') === -1;
   }
 }
