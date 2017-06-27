@@ -8,10 +8,10 @@
 
       <div class="stats__nav stats__nav--mlb">
         <ul class="stats__nav__list">
-          <li class="stats__nav__item_1"><a href="./schedule/">日程・結果</a></li>
-          <li class="stats__nav__item_2"><a href="./standing/">順位表</a></li>
-          <li class="stats__nav__item_3"><a href="./leaders/">個人成績</a></li>
-          <li class="stats__nav__item_4"><a href="./playerlist/">日本人成績</a></li>
+          <li class="stats__nav__item_1"><a href="/stats/mlb/schedule/">日程・結果</a></li>
+          <li class="stats__nav__item_2"><a href="/stats/mlb/standing/">順位表</a></li>
+          <li class="stats__nav__item_3"><a href="/stats/mlb/leaders/">個人成績</a></li>
+          <li class="stats__nav__item_4"><a href="/stats/mlb/playerlist/">日本人成績</a></li>
         </ul>
       </div>
 
