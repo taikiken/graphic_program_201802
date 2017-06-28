@@ -100,6 +100,7 @@ $highlight-color: #033583;
 
 
 #sj_contents_div {
+  padding: 0; // ex. MLB
   font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', Arial, verdana, sans-serif
 }
 
@@ -346,15 +347,25 @@ $highlight-color: #033583;
   }
 
   table.SJ_table-solid tbody th:first-child,
-  table.SJ_table-solid tbody td:first-child {
+  table.SJ_table-solid tbody td:first-child,
+  table.SJ_table-plain tbody th:first-child,
+  table.SJ_table-plain tbody td:first-child {
     border-left: none;
   }
 
-  table.SJ_table-solid tbody td:last-child {
+  table.SJ_table-solid tbody td:last-child,
+  table.SJ_table-plain tbody td:last-child {
     border-right: none;
   }
 
   table.SJ_table-stripe tbody tr:nth-child(odd) td {
+    background-color: $bg-color_gray;
+  }
+
+  table.SJ_table-plain tbody tr.SJ_odd th,
+  table.SJ_table-plain tbody tr.SJ_odd td,
+  table.SJ_table-solid tbody tr.SJ_odd th,
+  table.SJ_table-solid tbody tr.SJ_odd td {
     background-color: $bg-color_gray;
   }
 
@@ -370,17 +381,26 @@ $highlight-color: #033583;
 
 
   // table caption
-  table.SJ_table-solid caption {
+  // .SJ_table-solid ex. テニストップ https://sportsbull.jp/stats/tennis/
+  // .SJ_table-plain ex MLBスケジュールトップ https://sportsbull.jp/stats/mlb/schedule/
+  table.SJ_table-solid caption,
+  table.SJ_table-plain caption {
     padding: 0 0 5px;
-  }
-
-  table.SJ_table-solid caption .SJ_float-l {
     color: $highlight-color;
     font-size: 16px;
     font-weight: bold;
   }
 
-  table.SJ_table-solid caption .SJ_float-r {
+  table.SJ_table-plain caption {
+    border-left: none;
+  }
+
+  table.SJ_table-solid caption .SJ_float-r,
+  table.SJ_table-plain caption .SJ_float-r {
+    color: #333;
+    font-size: 14px;
+    font-weight: normal;
+
     a {
       @include link-decoration(#cc141d, #cc141d, none, none);
       position: relative;
@@ -407,7 +427,8 @@ $highlight-color: #033583;
         background-size: 16px;
       }
     }
-  } // table caption
+  }
+  // table caption
 
 
 
@@ -583,3 +604,10 @@ $highlight-color: #033583;
 } //#sj_contents_div.SJ_color-blue
 
 
+
+
+
+// for MLB
+#SJ_mlb-list > #SJ_tabs-area {
+  display: none;
+}

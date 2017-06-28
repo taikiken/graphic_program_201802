@@ -10,7 +10,7 @@
         <ul class="stats__nav__list">
           <li class="stats__nav__item_1"><a href="/stats/mlb/schedule/">日程・結果</a></li>
           <li class="stats__nav__item_2"><a href="/stats/mlb/standing/">順位表</a></li>
-          <li class="stats__nav__item_3"><a href="/stats/mlb/leaders/">個人成績</a></li>
+          <li class="stats__nav__item_3 current"><a href="/stats/mlb/leaders/">個人成績</a></li>
           <li class="stats__nav__item_4"><a href="/stats/mlb/playerlist/">日本人成績</a></li>
         </ul>
       </div>
@@ -18,7 +18,7 @@
       <link rel="stylesheet" href="//front.sports-digican.com/statics/css/common-sp.css" />
       <link rel="stylesheet" href="//front.sports-digican.com/statics/C00037/css/sdc-parts.css" />
 
-      <div class="sdc_contents">
+      <div id="stats--mlb" class="sdc_contents">
         <div class="live-container"></div>
         <div class="live-ga"></div>
       </div><!-- /.sdc_contents -->

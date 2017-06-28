@@ -180,12 +180,33 @@ $highlight-color: #033583;
   }
 }
 
+// .stats__nav--mlb
+.stats__nav--mlb {
+  [class^="stats__nav__item"] {
+    width: 25%;
+  }
+
+  .stats__nav__item_1 {
+    border-left: (4/2)+px solid #cc141d;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .stats__nav__item_4 {
+    border-right: (4/2)+px solid #cc141d;
+    border-radius: 0 4px 4px 0;
+
+    a {
+      border-right: none;
+    }
+  }
+}
+
 
 
 
 #sj_contents_div {
-  padding-right: perCalc(20, 750);
-  padding-left: perCalc(20, 750);
+  padding-right: perCalc(20, 750) !important; // !important は MLBで必須
+  padding-left: perCalc(20, 750) !important;
   font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', Arial, verdana, sans-serif
 }
 
@@ -438,6 +459,13 @@ $highlight-color: #033583;
     background-color: $bg-color_gray;
   }
 
+  table.SJ_table-plain tbody tr.SJ_odd th,
+  table.SJ_table-plain tbody tr.SJ_odd td,
+  table.SJ_table-solid tbody tr.SJ_odd th,
+  table.SJ_table-solid tbody tr.SJ_odd td {
+    background-color: $bg-color_gray;
+  }
+
 
 
   // 矢印付きリンクのあるテーブル
@@ -450,17 +478,26 @@ $highlight-color: #033583;
 
 
   // table caption
-  table.SJ_table-solid caption {
+  // .SJ_table-solid ex. テニストップ https://sportsbull.jp/stats/tennis/
+  // .SJ_table-plain ex MLBスケジュールトップ https://sportsbull.jp/stats/mlb/schedule/
+  table.SJ_table-solid caption,
+  table.SJ_table-plain caption {
     padding: 0 0 5px;
-  }
-
-  table.SJ_table-solid caption .SJ_float-l {
     color: $highlight-color;
     font-size: (28/2)+px;
     font-weight: bold;
   }
 
-  table.SJ_table-solid caption .SJ_float-r {
+  table.SJ_table-plain caption {
+    border-left: none;
+  }
+
+  table.SJ_table-solid caption .SJ_float-r,
+  table.SJ_table-plain caption .SJ_float-r {
+    color: #333;
+    font-size: 14px;
+    font-weight: normal;
+
     a {
       @include link-decoration(#cc141d, #cc141d, none, none);
       position: relative;
@@ -665,3 +702,12 @@ $highlight-color: #033583;
   }
 
 } //#sj_contents_div.SJ_color-blue
+
+
+
+
+
+// for MLB
+#SJ_mlb-list > #SJ_tabs-area {
+  display: none;
+}
