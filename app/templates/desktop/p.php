@@ -239,13 +239,33 @@
 
               <?php if ( $page['ad']['pc']['single_bottom_right'] ) : ?>
               <div class="sponsor-link-item">
+
+                <!-- 531683568/syn_marketplace/viewable -->
+                <script>
+                  googletag.cmd.push(function() {
+                    googletag.defineSlot('/531683568/syn_marketplace/viewable', [300, 250], 'div-gpt-ad-1498628891915-0').addService(googletag.pubads());
+                    googletag.pubads().enableSingleRequest();
+                    googletag.pubads().collapseEmptyDivs();
+                    googletag.enableServices();
+                  });
+                </script>
+                <div id='div-gpt-ad-1498628891915-0' style='height:250px; width:300px;'>
+                <script>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498628891915-0'); });
+                </script>
+                </div>
+                <!-- //531683568/syn_marketplace/viewable -->
+
                 <?php
                 /*
                 # 保険のために original を残します
                 # ToDo: いつか削除
                 <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35120&targetID=adg_35120&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
                 */ ?>
+                <?php /*
+                #2058 のため一旦非表示に
                 <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_right']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_right']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+                */ ?>
               </div>
               <?php endif; ?>
 
