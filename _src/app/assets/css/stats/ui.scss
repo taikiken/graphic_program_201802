@@ -85,6 +85,10 @@ $highlight-color: #033583;
     font-weight: bold;
     font-size: 14px;
     text-align: center;
+
+    &.show-for-large {
+      display: block !important;
+    }
   }
 
   .current a,
