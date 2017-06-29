@@ -8,7 +8,7 @@
       </div><!-- /.stats__header -->
 
 
-      <div class="stats__banner stats__banner--tennis show-for-large">
+      <div class="stats__banner stats__banner--golf show-for-large">
         <!-- /531683568/golf-stats-ad/golf-stats-under-header-PC -->
         <script>
           googletag.cmd.push(function() {
@@ -25,7 +25,7 @@
         <!-- // /531683568/golf-stats-ad/golf-stats-under-header-PC -->
       </div><!-- /.stats__banner -->
 
-      <div class="stats__banner stats__banner--tennis show-for-small">
+      <div class="stats__banner stats__banner--golf show-for-small">
         <!-- /531683568/golf-stats-ad/golf-stats-under-header-SP -->
         <script>
           googletag.cmd.push(function() {

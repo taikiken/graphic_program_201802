@@ -64,10 +64,19 @@ $highlight-color: #033583;
 // stats__header
 .stats__header {}
 
-// stats___banner
+//.stats__banner
 .stats__banner {
-  padding: (20/2)+px perCalc(55, 750);
-  background-color: #dbdbdb;
+  text-align: center;
+
+  > div {
+    padding: (20/2)+px perCalc(20, 750);
+    background-color: #dbdbdb;
+  }
+
+  div {
+    width: 100% !important;
+    height: auto !important;
+  }
 }
 
 //.stats__nav
