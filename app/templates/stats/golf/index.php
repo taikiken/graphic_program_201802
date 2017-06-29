@@ -28,11 +28,48 @@
       ?>
 
       <script src="http://golf.stats-japan.jp/parts/sportsbull/main.js"></script>
+      <?php
+      /*
+      //--------------------------------
+      ?>
       <script>
         sj_golf.instance.render({
           'hideBcl' : true,
           'page'    :'pc_2017_schedule_21'
         });
+      </script>
+      <?php
+      //--------------------------------
+      // ウインドウサイズ `769px 以上` なら `pc_2017_schedule_21`
+      // ウインドウサイズ `768px 以下` なら `sp_2017_schedule_21`
+      // UAが `other` もしくは `tablet` なら `pc_2017_schedule_21`
+      // UAが `ios` `android` `undotsushin-ios` `undotsushin-android` を含むなら `pc_2017_schedule_21`
+      // @since 2017-06-29
+      */
+      ?>
+      <script>
+        (function(window, sj_golf) {
+          'use strict';
+          var document = window.document;
+          var html = document.documentElement;
+          var Sagen = window.Sagen;
+          // pc detect
+          var pc = Sagen.Dom.hasClass(html, 'other') || Sagen.Dom.hasClass(html, 'tablet');
+          // window width detect
+          if (window.innerWidth <= 768) {
+            pc = false;
+          }
+          // app detect
+          var app = window.navigator.userAgent.match(/undotsushin-ios|undotsushin-android/i);
+          if (app) {
+            pc = false;
+          }
+          var page = pc ? 'pc_2017_schedule_21' : 'sp_2017_schedule_21';
+          sj_golf.instance.render({
+            'hideBcl' : true,
+            'page'    : page
+          });
+        }(window, window.sj_golf));
       </script>
     </section><!-- /.main-sec -->
 
