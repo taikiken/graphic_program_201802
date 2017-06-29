@@ -7,23 +7,24 @@
       </div><!-- /.stats__header -->
 
 
-      <div class="stats__banner stats__banner--tennis">
-        <?php if ( $page['ua'] === 'desktop' ) : ?>
-          <!-- /531683568/tennis-stats-ad/tennis-stats-under-header-PC -->
-          <script>
-            googletag.cmd.push(function() {
-              googletag.defineSlot('/531683568/tennis-stats-ad/tennis-stats-under-header-PC', [728, 90], 'div-gpt-ad-1498734681486-0').addService(googletag.pubads());
-              googletag.pubads().enableSingleRequest();
-              googletag.enableServices();
-            });
-          </script>
-          <div id='div-gpt-ad-1498734681486-0' style='height:90px; width:728px;'>
-          <script>
-          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498734681486-0'); });
-          </script>
-          </div>
-          <!-- // /531683568/tennis-stats-ad/tennis-stats-under-header-PC -->
-        <?php else : ?>
+      <div class="stats__banner stats__banner--tennis show-for-large">
+        <!-- /531683568/tennis-stats-ad/tennis-stats-under-header-PC -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/tennis-stats-ad/tennis-stats-under-header-PC', [728, 90], 'div-gpt-ad-1498734681486-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1498734681486-0' style='height:90px; width:728px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498734681486-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/tennis-stats-ad/tennis-stats-under-header-PC -->
+      </div><!-- /.stats__banner -->
+
+      <div class="stats__banner stats__banner--tennis show-for-small">
         <!-- /531683568/tennis-stats-ad/golf-stats-under-header-SP -->
         <script>
           googletag.cmd.push(function() {
@@ -38,7 +39,6 @@
         </script>
         </div>
         <!-- // /531683568/tennis-stats-ad/golf-stats-under-header-SP -->
-        <?php endif; ?>
       </div><!-- /.stats__banner -->
 
 

@@ -8,8 +8,7 @@
       </div><!-- /.stats__header -->
 
 
-      <div class="stats__banner stats__banner--tennis">
-        <?php if ( $page['ua'] === 'desktop' ) : ?>
+      <div class="stats__banner stats__banner--tennis show-for-large">
         <!-- /531683568/golf-stats-ad/golf-stats-under-header-PC -->
         <script>
           googletag.cmd.push(function() {
@@ -24,7 +23,9 @@
         </script>
         </div>
         <!-- // /531683568/golf-stats-ad/golf-stats-under-header-PC -->
-        <?php else : ?>
+      </div><!-- /.stats__banner -->
+
+      <div class="stats__banner stats__banner--tennis show-for-small">
         <!-- /531683568/golf-stats-ad/golf-stats-under-header-SP -->
         <script>
           googletag.cmd.push(function() {
@@ -39,7 +40,6 @@
         </script>
         </div>
         <!-- // /531683568/golf-stats-ad/golf-stats-under-header-SP -->
-        <?php endif; ?>
       </div><!-- /.stats__banner -->
 
 
