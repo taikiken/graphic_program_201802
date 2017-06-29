@@ -8,25 +8,59 @@
 
 // background override
 // ブルくんの背景
-.home .body-sec {
-  background-repeat: no-repeat;
-  background-position: center 325px;
-  background-image: url(/assets/images/index/bull-bg.png);
+$z-map: (
+  board-large,
+  sns-pr,
+  headline,
+  focus-bnr,
+  stats_banner
+);
+
+// z-index
+@function z($name) {
+  @return index($z-map, $name);
 }
+// @debug z(header); // 1
 
-.home .main-sec {
-  position: relative;
+.home {
+  .board-large,
+  .sns-pr,
+  .headline,
+  .focus-bnr,
+  .stats_banner {
+    position: relative;
+  }
 
-  &::after {
-    content: '';
-    position: absolute;
-    // top: 195px;
-    top: 650px;
-    left: -30px;
-    width: 49px;
-    height: 41px;
-    background: url(/assets/images/index/bull-hand.png) 0 0 no-repeat;
-    @include hide-text;
+  .board-large { z-index: z(board-large);}
+  .sns-pr { z-index: z(sns-pr);}
+  .headline { z-index: z(headline);}
+  .focus-bnr { z-index: z(focus-bnr);}
+  .stats_banner { z-index: z(stats_banner);}
+
+  .board-large {
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      @include hide-text;
+    }
+
+    &:before {
+      z-index: -1;
+      top: -214px;
+      left: -135px;
+      width: 394px;
+      height: 537px;
+      background: url(/assets/images/index/bull-bg.png) 0 0 no-repeat;
+    }
+
+    &:after {
+      top: 111px;
+      left: -30px;
+      width: 49px;
+      height: 41px;
+      background: url(/assets/images/index/bull-hand.png) 0 0 no-repeat;
+    }
   }
 }
 
@@ -205,19 +239,24 @@
 .headline {
   margin-top: 30px;
 
+  //.headline-heading
   &-heading {
     padding-bottom: 10px;
     border-bottom: 3px solid #0e357f;
 
+    //.headline-title
+    //.headline-ruby
     &-title, &-ruby {
       display: inline-block;
       line-height: 1;
     }
 
+    //.headline-title
     &-title img {
       vertical-align: middle;
     }
 
+    //.headline-ruby
     &-ruby {
       margin-left: 8px;
       color: #333;
@@ -353,3 +392,97 @@
   //   }
   // }
 }
+
+
+
+
+
+// stats_banner
+// トップページ 速報&データ
+.stats_banner {
+  margin-top: 30px;
+
+  //.stats_banner-heading
+  &-heading {
+    padding-bottom: 10px;
+    border-bottom: 3px solid #0e357f;
+
+    //.stats_banner-title
+    //.stats_banner-ruby
+    &-title, &-ruby {
+      display: inline-block;
+      line-height: 1;
+    }
+
+    //.stats_banner-title
+    &-title {
+
+      img {
+        vertical-align: middle;
+      }
+
+      &:before {
+        content: url("/assets/images/index/icon-stats_bnr-title.png");
+        display: inline-block;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+    }
+
+    //.stats_banner-ruby
+    &-ruby {
+      margin-left: 8px;
+      color: #333;
+      font-weight: bold;
+      font-size: fz(12);
+    }
+  } //.stats_banner-heading
+
+  //.stats_banner-list
+  &-list {
+    margin-top: 20px - 8;
+    overflow: hidden;
+
+  }
+
+  //.stats_banner-item
+  &-item {
+    float: left;
+    margin-top: 8px;
+
+    &:nth-child(2n) {
+      float: right;
+    }
+
+    a:hover {
+      @include over-opacity;
+    }
+  }
+
+  //.stats_banner-btn
+  &-btn {
+    margin-top: 8px;
+
+    //.stats_banner-btn-link
+    &-link {
+      display: block;
+      line-height: 1;
+      padding: 20px 0;
+      background-color: $highlight-color;
+      border-radius: 6px;
+      text-align: center;
+
+      span {
+        display: inline-block;
+        width: 219px;
+        height: 15px;
+        background: url(/assets/images/index/icon-stats_bnr-btn.png) 0 0 no-repeat;
+        @include hide-text;
+      }
+
+      &:hover {
+        @include over-opacity;
+      }
+    }
+  }
+} // stats_banner
