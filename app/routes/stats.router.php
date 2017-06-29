@@ -2,34 +2,68 @@
 
 // stats
 // ==============================
-$app->group('/stats/{category:tennis|golf}', function () use($app) {
+$app->group('/stats', function () use($app) {
 
+
+  // スタットトップ
+  // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
 
-    if ( $args['category'] === 'tennis' ) :
-      $category = array(
-        'title' => 'テニス | 速報 &amp; データ',
-      );
-      $og_image = 'https://sportsbull.jp/_/stats/tennis/ogp_tennis.jpg';
-    endif;
-
-    if ( $args['category'] === 'golf' ) :
-      $category = array(
-        'title' => 'ゴルフ | 速報 &amp; データ',
-      );
-      $og_image = 'https://sportsbull.jp/_/stats/golf/ogp_golf.jpg';
-    endif;
+    $title = '速報 &amp; データ';
 
     $args['page'] = $app->model->set(array(
-      'title'              => $category['title'],
-      'og_title'           => $category['title'].' | '.$app->model->property('title_short'),
-      'og_url'             => $app->model->property('site_url').'stats/'.$args['category'].'/',
-      'og_image'           => $og_image,
-      'template'           => $args['category'].'/index.php',
-      'path'               => $args,
+      'title'    => $title,
+      'og_title' => $title.' | '.$app->model->property('title_short'),
+      'og_url'   => $app->model->property('site_url').'stats/',
+      'path'     => $args,
     ));
 
-    return $this->renderer->render($response, 'stats/default.php', $args);
+    return $this->renderer->render($response, 'stats/banners/stats.php', $args);
+
+  });
+
+
+  $this->get('/{category:webview|tennis|golf}[/]', function ($request, $response, $args) use ( $app ) {
+
+    if ( $args['category'] === 'webview' ) :
+
+      $title = '速報 &amp; データ';
+
+      $args['page'] = $app->model->set(array(
+        'title'              => $title,
+        'og_title'           => $title.' | '.$app->model->property('title_short'),
+        'og_url'             => $app->model->property('site_url').'stats/',
+        'path'               => $args,
+      ));
+
+      return $this->renderer->render($response, 'stats/banners/top/webview.php', $args);
+
+    else :
+
+      if ( $args['category'] === 'tennis' ) :
+        $category = array(
+          'title' => 'テニス | 速報 &amp; データ',
+        );
+      endif;
+
+      if ( $args['category'] === 'golf' ) :
+        $category = array(
+          'title' => 'ゴルフ | 速報 &amp; データ',
+        );
+      endif;
+
+      $args['page'] = $app->model->set(array(
+        'title'              => $category['title'],
+        'og_title'           => $category['title'].' | '.$app->model->property('title_short'),
+        'og_url'             => $app->model->property('site_url').'stats/'.$args['category'].'/',
+        'template'           => $args['category'].'/index.php',
+        'path'               => $args,
+      ));
+
+
+      return $this->renderer->render($response, 'stats/default.php', $args);
+
+    endif;
 
   });
 
