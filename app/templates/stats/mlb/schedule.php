@@ -3,12 +3,12 @@
 
     <section class="main-sec">
       <div class="stats__header stats__header--mlb">
-        <h1 class="stats__header__title"><a href="./">MLB速報&amp;データ</a></h1>
+        <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/images/stats/mlb/heading@2x.png" alt="MLB速報&amp;データ" /></a></h1>
       </div><!-- /.stats__header -->
 
       <div class="stats__nav stats__nav--mlb">
         <ul class="stats__nav__list">
-          <li class="stats__nav__item_1 current"><a href="/stats/mlb/schedule/">日程・結果</a></li>
+          <li class="stats__nav__item_1"><a href="/stats/mlb/schedule/">日程・結果</a></li>
           <li class="stats__nav__item_2"><a href="/stats/mlb/standing/">順位表</a></li>
           <li class="stats__nav__item_3"><a href="/stats/mlb/leaders/">個人成績</a></li>
           <li class="stats__nav__item_4"><a href="/stats/mlb/playerlist/">日本人成績</a></li>
