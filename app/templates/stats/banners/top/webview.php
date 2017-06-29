@@ -21,7 +21,18 @@
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </head>
 <body>
-<div class="whole">
+<?php
+//.wholeに記入するmin-heightの値
+/*
+バナー部分以外は 94px
+バナー1行あたり 53px
+ex.
+  バナー1〜2つ(1行) -> 53*1 + 94 = 147px
+  バナー3〜4つ(2行) -> 53*2 + 94 = 200px
+  バナー5〜6つ(3行) -> 53*3 + 94 = 253px
+*/
+?>
+<div class="whole webview" style="min-height: 200px;">
 <?php
 // 一面タブからの導線を増やす #2080
 // @see https://github.com/undotsushin/undotsushin/issues/2080
