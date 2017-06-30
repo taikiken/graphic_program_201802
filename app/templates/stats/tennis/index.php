@@ -25,20 +25,20 @@
       </div><!-- /.stats__banner -->
 
       <div class="stats__banner stats__banner--tennis show-for-small">
-        <!-- /531683568/tennis-stats-ad/golf-stats-under-header-SP -->
+        <!-- /531683568/tennis-stats-ad/tennis-stats-under-header-SP -->
         <script>
           googletag.cmd.push(function() {
-            googletag.defineSlot('/531683568/tennis-stats-ad/golf-stats-under-header-SP', [320, 50], 'div-gpt-ad-1498734649068-0').addService(googletag.pubads());
+            googletag.defineSlot('/531683568/tennis-stats-ad/tennis-stats-under-header-SP', [320, 50], 'div-gpt-ad-1498786497519-0').addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.enableServices();
           });
         </script>
-        <div id='div-gpt-ad-1498734649068-0' style='height:50px; width:320px;'>
+        <div id='div-gpt-ad-1498786497519-0' style='height:50px; width:320px;'>
         <script>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498734649068-0'); });
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498786497519-0'); });
         </script>
         </div>
-        <!-- // /531683568/tennis-stats-ad/golf-stats-under-header-SP -->
+        <!-- // /531683568/tennis-stats-ad/tennis-stats-under-header-SP -->
       </div><!-- /.stats__banner -->
 
 
