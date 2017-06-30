@@ -6,11 +6,41 @@
         <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/images/stats/tennis/heading@2x.png" alt="テニス 速報&スタッツ" /></a></h1>
       </div><!-- /.stats__header -->
 
-      <div class="stats__banner stats__banner--tennis" style="display: none;">
-        <a href="./?sj_page=tournament_2017001_men_singles_today">
-          <img class="responsive" src="/assets/images/stats/tennis/bnr_hero@2x.png" alt="ウィンブルドンテニス2017 7/3 - 7/16 日程・結果">
-        </a>
+
+      <div class="stats__banner stats__banner--tennis show-for-large">
+        <!-- /531683568/tennis-stats-ad/tennis-stats-under-header-PC -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/tennis-stats-ad/tennis-stats-under-header-PC', [728, 90], 'div-gpt-ad-1498734681486-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1498734681486-0' style='height:90px; width:728px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498734681486-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/tennis-stats-ad/tennis-stats-under-header-PC -->
       </div><!-- /.stats__banner -->
+
+      <div class="stats__banner stats__banner--tennis show-for-small">
+        <!-- /531683568/tennis-stats-ad/tennis-stats-under-header-SP -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/tennis-stats-ad/tennis-stats-under-header-SP', [320, 50], 'div-gpt-ad-1498786497519-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1498786497519-0' style='height:50px; width:320px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498786497519-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/tennis-stats-ad/tennis-stats-under-header-SP -->
+      </div><!-- /.stats__banner -->
+
 
       <div class="stats__nav stats__nav--tennis">
         <ul class="stats__nav__list">
