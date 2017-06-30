@@ -11,18 +11,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="robots" content="noindex,nofollow" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>"></script>
   <title><?php echo $page['title']; ?></title>
-  <style type="text/css">
-    * {
-      background : #000;
-      padding : 0;
-      margin  : 0;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
 </head>
-
 <body>
-<!-- motorsports -->
+<div class="motorsports__category-btns">
+  <ul class="motorsports__category-btns__list">
+    <li class="motorsports__category-btns__item">
+      <a class="motorsports__category-btns__link" href="/motorsports/f1/"><img src="/assets/sp/images/motorsports/btn-category_f1.png" alt="F1 / FORMULA 1 レース日程・結果"></a>
+    </li>
+    <li class="motorsports__category-btns__item">
+      <a class="motorsports__category-btns__link" href="/motorsports/sgt/"><img src="/assets/sp/images/motorsports/btn-category_sgt.png" alt="SGT / Super GT レース日程・結果"></a>
+    </li>
+    <li class="motorsports__category-btns__item">
+      <a class="motorsports__category-btns__link" href="/motorsports/wec/"><img src="/assets/sp/images/motorsports/btn-category_wec.png" alt="WEC / FIA WORLD ENDURANCE CHAMPIONSHIP レース日程・結果"></a>
+    </li>
+    <li class="motorsports__category-btns__item">
+      <a class="motorsports__category-btns__link" href="/motorsports/wrc/"><img src="/assets/sp/images/motorsports/btn-category_wrc.png" alt="WRC / FIA WORLD RALLY CHAMPIONSHIP レース日程・結果"></a>
+    </li>
+  </ul><!-- /.motorsports__category-btns__list -->
+</div><!-- /.motorsports__category-btns -->
 </body>
 </html>
