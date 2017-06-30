@@ -134,7 +134,12 @@ if(strlen($f["name"])>0){
     );
   endif;
 
-
+  // #2080
+  if ( $category === 'top' ) :
+    $categoriesinfo['webviews'] = array(
+      '/stats/webview/',
+    );
+  endif;
 $y["response"]=$categoriesinfo;
 
 print_json($y,$_SERVER['HTTP_REFERER']);

@@ -45,6 +45,12 @@ textarea {
 .whole {
   overflow: hidden;
   min-width: $global-width;
+
+  img {
+    &.responsive {
+      display: none;
+    }
+  }
 }
 
 

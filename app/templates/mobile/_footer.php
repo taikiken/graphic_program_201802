@@ -200,6 +200,15 @@ if ( $page['apiRoot'] != '' ) :
 <?php endif; ?>
 <script src="/assets/sp/js/bundle/sp-exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <?php
+// 一面タブからの導線を増やす #2080
+// @see https://github.com/undotsushin/undotsushin/issues/2080
+// @since 2017-06-26
+?>
+<script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<?php
+// ------------------------------------------------------------
+?>
+<?php
 // 遅延読み込みにするために fb-video.js へ変更する on 2016-03-14
 // 実機で FB Video 生成が空振りする
 // Dom 構築が FB sdk 走査に間に合っていない様子

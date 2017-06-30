@@ -1,0 +1,77 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../../scss_sp/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../../../bower_exports/modularized/normalize";
+@import "../../../../../../scss_sp/style/reset";
+@import "../../../../../../scss_sp/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../../module/utility";
+@import "../../module/global";
+@import "../../layout";
+
+
+// print
+// @import "print";
+
+// common override
+
+.undotsushin-ios,
+.undotsushin-android {
+  .head-sec,
+  .foot-sec {
+    display: none !important;
+  }
+}
+
+
+// stats_banners
+
+.stats_banners {
+  .main-sec {
+    background-color: #f5f5f5;
+    padding-bottom: (100/2)+px;
+  }
+}
+
+//.stats_banners__heading
+.stats_banners__heading {
+  line-height: (100/2)+px;
+  padding-right: perCalc(20, 750);
+  padding-left: perCalc(20, 750);
+  background-color: $highlight-color;
+  color: #fff;
+  font-weight: bold;
+  font-size: (32/2)+px;
+  text-align: center;
+}
+
+//.stats_banners__category
+.stats_banners__category {
+  margin-top: (36/2)+px;
+  padding-right: perCalc(55, 750);
+  padding-left: perCalc(55, 750);
+
+  //.stats_banners__category__heading
+  &__heading {
+    border-bottom: (6/2)+px solid $highlight-color;
+    color: $highlight-color;
+    font-weight: bold;
+    font-size: (32/2)+px;
+  }
+
+  //.stats_banners__category__list
+  &__list {}
+
+  //.//.stats_banners__category__item
+  &__item {
+    margin-top: (30/2)+px;
+  }
+}
