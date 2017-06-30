@@ -149,13 +149,15 @@ $highlight-color: #033583;
 
 // .stats__nav--golf
 .stats__nav--golf {
-  &__list {
+  .stats__nav__list {
     display: table;
+    width: 100%;
     letter-spacing: normal;
   }
 
   [class^="stats__nav__item"] {
     display: table-cell;
+    width: 25%;
     vertical-align: middle;
   }
 
@@ -171,19 +173,17 @@ $highlight-color: #033583;
   }
 
   .stats__nav__item_1 {
-    width: 34%;
     border-right: 1px solid #efefef;
     border-left: (4/2)+px solid #cc141d;
     border-radius: 4px 0 0 4px;
   }
 
-  .stats__nav__item_2 {
-    width: 33%;
+  .stats__nav__item_2,
+  .stats__nav__item_3 {
     border-right: 1px solid #efefef;
   }
 
-  .stats__nav__item_3 {
-    width: 33%;
+  .stats__nav__item_4 {
     border-right: (4/2)+px solid #cc141d;
     border-radius: 0 4px 4px 0;
 
