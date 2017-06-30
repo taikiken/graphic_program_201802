@@ -317,12 +317,14 @@ $highlight-color: #033583;
   }
 
   // heading title
+  [class^="SJ_h1"],
   [class^="SJ_h2"],
   [class^="SJ_h3"], {
     color: $highlight-color;
     font-weight: bold;
   }
 
+  .SJ_h1,
   .SJ_h2 {
     font-size: (32/2)+px;
   }
@@ -714,13 +716,117 @@ $highlight-color: #033583;
     }
   }
 
-} //#sj_contents_div.SJ_color-blue
 
 
 
 
+  // for MLB
+  #SJ_mlb-list {
+    // MLBグローバルメニュー
+    .SJ_for-sp .SJ_sub-header {
+      > dl > dt {
+        display: none;
+      }
 
-// for MLB
-#SJ_mlb-list > #SJ_tabs-area {
-  // display: none;
+      a, span {
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      a {
+        background-color: $bg-color_gray;
+        color: $highlight-color;
+        font-weight: bold;
+        font-size: 10px;
+      }
+
+      .SJ_current a {
+        background: $highlight-color;
+        color: #fff;
+      }
+
+      span {
+        background-color: $bg-color_gray;
+        color: #aaa;
+        font-size: 10px;
+      }
+
+      ul.SJ_sub-wrap {
+        li {
+          border-color: #fff;
+        }
+
+        li:nth-child(2),
+        li:nth-child(4) {
+          position: relative;
+          // border: none;
+
+          a,
+          span {
+            position: absolute;
+            top: -(12*2+10+1)+px;
+            right: 0;
+            display: block;
+            width: 33.3333%;
+          }
+        }
+
+        li:nth-child(5) {
+          dd.SJ_per25 {
+            width: 33.3333% !important;
+          }
+        }
+      }
+
+      dl.SJ_sub-in {
+        display: block;
+        background-color: $bg-color_gray;
+        text-align: left;
+        letter-spacing: ls(inline-block);
+
+        dt, dd {
+          display: inline-block;
+          text-align: center;
+          letter-spacing: normal;
+        }
+
+        dt {
+          width: 100% !important;
+          // border: 1px solid #fff;
+          // border-width: 1px 0;
+
+          span {
+            display: block;
+            background-color: #ccc;
+            color: #000;
+            font-weight: bold;
+            font-size: 12px;
+          }
+        }
+
+        dd {
+          border-color: #fff;
+
+          &:last-child {
+            border-right: 1px solid #fff;
+          }
+        }
+      }
+    }
+
+    // MLBグローバルメニュー タイトル
+    .SJ_for-sp .SJ_h1 {
+      margin-top: (40/2)+px;
+      padding: (10/2)+px 0;
+      background-color: transparent;
+      border-bottom: 3px solid $highlight-color;
+      text-align: left;
+    }
+
+  } // for MLB
+
+
 }
+// #sj_contents_div
+// #sj_contents_div.SJ_color-blue
+// #sj_contents_div .SJ_color-sky
