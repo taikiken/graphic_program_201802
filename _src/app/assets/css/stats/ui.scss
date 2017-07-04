@@ -934,8 +934,9 @@ $highlight-color: #033583;
 
     ul.SJ_ul-games {
       > li {
-        padding-bottom: 32767px;
         margin-bottom: -32767px;
+        padding-bottom: 32767px;
+        border-top: 1px solid #f5f5f5;
 
         &:nth-child(3n+2) .SJ_games-report {
           margin-right: 1px;
