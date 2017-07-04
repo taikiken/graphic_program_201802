@@ -6,8 +6,38 @@
         <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/images/stats/mlb/heading@2x.png" alt="MLB速報&amp;データ" /></a></h1>
       </div><!-- /.stats__header -->
 
-      <div class="stats__banner stats__banner--mlb">
-        <div><img class="responsive" src="/assets/images/stats/tennis/bnr_hero@2x.png" alt=""></div>
+      <div class="stats__banner stats__banner--mlb show-for-large">
+        <!-- /531683568/mlb-stats-ad/mlb-stats-under-header-PC -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/mlb-stats-ad/mlb-stats-under-header-PC', [728, 90], 'div-gpt-ad-1499151607828-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1499151607828-0' style='height:90px; width:728px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1499151607828-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-PC -->
+      </div><!-- /.stats__banner -->
+
+      <div class="stats__banner stats__banner--mlb show-for-small">
+        <!-- /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/mlb-stats-ad/mlb-stats-under-header-SP', [320, 50], 'div-gpt-ad-1499151685008-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1499151685008-0' style='height:50px; width:320px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1499151685008-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
       </div><!-- /.stats__banner -->
 
       <div class="stats__nav stats__nav--mlb show-for-large">

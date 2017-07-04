@@ -934,7 +934,9 @@ $highlight-color: #033583;
       }
 
       + #SJ_tabs-area-3 {
-        padding-top: (20/2)+px;
+        #SJ_tabs-personal.SJ_tabs {
+          margin-top: -10px;
+        }
       }
     }// MLBローカルメニュー #SJ_tabs-area
 
