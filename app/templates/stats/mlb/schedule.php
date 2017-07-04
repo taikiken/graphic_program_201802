@@ -40,7 +40,7 @@
         <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
       </div><!-- /.stats__banner -->
 
-      <div class="stats__nav stats__nav--mlb show-for-large">
+      <div class="stats__nav stats__nav--mlb">
         <ul class="stats__nav__list">
           <li class="stats__nav__item_1"><a href="/stats/mlb/schedule/">日程・結果</a></li>
           <li class="stats__nav__item_2"><a href="/stats/mlb/standing/">順位表</a></li>

@@ -404,6 +404,15 @@ $highlight-color: #033583;
     }
   }
 
+  //.SJ_h3-upper
+  .SJ_h3-upper {
+    padding: 5px 0;
+    border-width: 0 0 3px;
+    border-style: solid;
+    background-color: transparent;
+    font-style: (28/2)+px;
+  }
+
   //.SJ_h4-upper
   .SJ_h4-upper {
     padding: 10px 0;
@@ -535,7 +544,25 @@ $highlight-color: #033583;
         }
       }
     }
+  }
+
+
+
+  // 「もっと見る ▼」ボタンクリック後表示されるテーブル ex. https://sportsbull.jp/stats/mlb/schedule/?sdc_page_code=Ranking&sdc_subpage_code=&game_type_id=1&league_code=2&leaders_code=BattingHitAll&sports_code=sbmlb&operation_mode=
+  table.SJ_table-ranking-all {
+    margin-top: -31px;
+  }
+
+
+
+  // 日本人選手一覧ページテーブル ex. https://sportsbull.jp/stats/mlb/playerlist/
+  table.SJ_table-prof {
+    tbody {
+      th {
+        background-color: $bg-color_gray;
+      }
     }
+  }
 
 
 
@@ -830,11 +857,12 @@ $highlight-color: #033583;
   // for MLB
   #SJ_mlb-list,
   #SJ_mlb-result,
+  #SJ_mlb-ranking,
   #SJ_mlb-players,
   #SJ_mlb-player {
     // MLBグローバルメニュー
     .SJ_for-sp .SJ_sub-header {
-      margin-top: (40/2)+px;
+      // margin-top: (40/2)+px;
 
       > dl > dt {
         display: none;
@@ -971,6 +999,7 @@ $highlight-color: #033583;
   }
   // #SJ_mlb-list
   // #SJ_mlb-result
+  // #SJ_mlb-ranking
   // #SJ_mlb-players
   // #SJ_mlb-player
 
@@ -984,6 +1013,17 @@ $highlight-color: #033583;
       }
     } // #SJ_tabs-area
   } // #SJ_mlb-player
+
+  // 個人成績 ex.https://sportsbull.jp/stats/mlb/schedule/?sdc_page_code=Ranking&sdc_subpage_code=&game_type_id=1&league_code=2&leaders_code=BattingAverageAll&sports_code=sbmlb&operation_mode=
+  #SJ_mlb-ranking {
+    #SJ_tabs-area {
+      display: none;
+
+      &.SJ_ul-ratio-1 li {
+        width: 100%;
+      }
+    } // #SJ_tabs-area
+  } // #SJ_mlb-ranking
 
   // 試合結果 ex.https://sportsbull.jp/stats/mlb/schedule/?sdc_page_code=GameResult&sdc_subpage_code=&game_global_id=1704294&sports_code=sbmlb&operation_mode=
   #SJ_mlb-result {
@@ -1120,8 +1160,143 @@ $highlight-color: #033583;
   } // .SJ_list-games
   // 日本人選手所属チームの試合
 
-  // for MLB
 
+
+  // テーブル下の「詳細」ボタン ex. https://sportsbull.jp/stats/mlb/leaders/
+  table + .SJ_more {
+    margin-top: -15px;
+
+    a {
+      padding: 8px;
+      border: 2px solid $highlight-color;
+      border-radius: 4px;
+      background-color: #fff;
+      font-weight: bold;
+    }
+  } // table + .SJ_more
+  // テーブル下の「詳細」ボタン
+
+
+
+  // 日本人選手一覧ページ ex.https://sportsbull.jp/stats/mlb/playerlist/
+  // 選手詳細 ex. https://sportsbull.jp/stats/mlb/playerlist/?sdc_page_code=PlayerProf&sdc_subpage_code=&player_global_id=8711&sports_code=sbmlb&operation_mode=
+  #SJ_mlb-players,
+  #SJ_mlb-player {
+    .SJ_h3-upper + .SJ_ul-player {
+      margin-top: -8px;
+    }
+
+    .SJ_ul-player {
+      border: none;
+
+      li {
+        width: perCalc(235, 710);
+        margin: 1px 1px 0 0;
+        // margin-bottom: -32767px;
+        // padding-bottom: 32767px;
+        background: $bg-color_gray none;
+
+        &:nth-child(3n) {
+          margin-right: 0;
+        }
+
+        .SJ_player-box {
+          height: 100%;
+          padding-top: 0;
+          border: none;
+
+          img {
+            width: 100%;
+            height: auto;
+            padding: (30/2)+px (40/2)+px 0;
+          }
+
+          .SJ_name {
+            margin-top: 6px;
+            font-size: (24/2)+px;
+          }
+
+          .SJ_team {
+            font-size: (20/2)+px;
+          }
+        }
+      }
+    } // .SJ_ul-player
+
+    .SJ_player-card {
+      table.SJ_table-prof {
+        tbody {
+          th {
+            background-color: $bg-color_gray;
+            border-left-width: 1px !important;
+          }
+
+          td {
+            border-right-width: 1px !important;
+          }
+        }
+      } // table.SJ_table-prof
+    } // .SJ_player-prof
+  }
+  // #SJ_mlb-players
+  // #SJ_mlb-player
+  // 日本人選手一覧ページ
+  // 選手詳細
+
+
+
+  // 日本人選手一覧ページ ex.https://sportsbull.jp/stats/mlb/playerlist/
+  #SJ_mlb-players {
+    .SJ_h2-pole {
+      &#batter, &#pitcher {
+        margin-bottom: 6px;
+        padding: 0;
+        font-size: (24/2)+px;
+      }
+    } // .SJ_h2-pole
+
+
+    .SJ_player-card {
+      > div {
+        float: right;
+        margin-left: -100px;
+        padding-left: 100px;
+      }
+
+      img {
+        float: left;
+        margin-left: 0;
+        padding: 0;
+        border: none;
+      }
+    }
+
+  } // #SJ_mlb-players
+  // 日本人選手一覧ページ
+
+
+
+  // 選手詳細 ex. https://sportsbull.jp/stats/mlb/playerlist/?sdc_page_code=PlayerProf&sdc_subpage_code=&player_global_id=8711&sports_code=sbmlb&operation_mode=
+  #SJ_mlb-player {
+    .SJ_player-prof {
+      img {
+        margin-bottom: (40/2)+px;
+        padding: 0;
+      }
+
+      table.SJ_table-prof {
+        margin-bottom: 15px;
+      } // table.SJ_table-prof
+
+      // .SJ_table-plain
+      table.SJ_table-plain {
+        margin-bottom: (30/2)+px;
+      }
+    } // .SJ_player-prof
+  } // .SJ_mlb-player
+  // 選手詳細
+
+  // for MLB
 
 }
 // #sj_contents_div
