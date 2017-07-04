@@ -329,6 +329,7 @@ $highlight-color: #033583;
   }
 
   table.SJ_table-solid thead th,
+  table.SJ_table-plain thead th,
   table.SJ_table-solid.SJ_table-color thead th {
     background-color: $bg-color_blue;
     border-color: transparent #fff;
@@ -336,7 +337,9 @@ $highlight-color: #033583;
   }
 
   table.SJ_table-solid thead th,
-  table.SJ_table-solid tbody th {
+  table.SJ_table-solid tbody th,
+  table.SJ_table-plain thead th,
+  table.SJ_table-plain tbody th {
     padding: 10px 1%;
     font-size: 14px;
     font-weight: bold;
@@ -346,7 +349,8 @@ $highlight-color: #033583;
     }
   }
 
-  table.SJ_table-solid tbody td {
+  table.SJ_table-solid tbody td,
+  table.SJ_table-plain tbody td {
     padding: 8px 1%;
     font-size: 13px;
   }
@@ -380,6 +384,20 @@ $highlight-color: #033583;
   .SJ_table-mark {
     a {
       display: inline-block;
+    }
+  }
+
+
+
+  //.SJ_table-score 試合結果 ex. MLBスケジュールトップ https://sportsbull.jp/stats/mlb/schedule/
+  table.SJ_table-score {
+    tbody {
+      td.SJ_team {
+        .SJ_win {
+          background-color: transparent;
+          color: $highlight-color;
+        }
+      }
     }
   }
 
@@ -448,14 +466,28 @@ $highlight-color: #033583;
 
   ul.SJ_tabs-focus {}
 
+  ul.SJ_tabs-select {
+    border-style: solid;
+    background-image: none;
+  }
+
   ul.SJ_tabs.SJ_tabs-under,
-  ul.SJ_tabs.SJ_tabs-focus {
+  ul.SJ_tabs.SJ_tabs-focus,
+  ul.SJ_tabs.SJ_tabs-select {
     border-width: 0 0 2px;
   }
 
   ul.SJ_tabs-medium {}
 
   ul.SJ_ul-ratio-2 {}
+  ul.SJ_ul-ratio-3 {}
+
+  // ex. MLBスタッツ メインメニュー
+  ul#SJ_tabs-area.SJ_tabs-select.SJ_ul-ratio-1 li,
+  ul#SJ_tabs-area.SJ_tabs-select.SJ_ul-ratio-2 li,
+  ul#SJ_tabs-area.SJ_tabs-select.SJ_ul-ratio-3 li {
+    width: 33.3333%;
+  }
 
   ul.SJ_tabs > li {
     margin: 0;
@@ -507,6 +539,11 @@ $highlight-color: #033583;
     font-size: 16px;
   }
 
+  ul.SJ_tabs.SJ_tabs-select > li a {
+    border-right: none;
+    font-weight: bold;
+  }
+
   ul.SJ_tabs.SJ_tabs-focus > li a,
   ul.SJ_tabs.SJ_tabs-focus > li span {
     padding: 12px 2px;
@@ -531,7 +568,13 @@ $highlight-color: #033583;
     color: #fff;
   }
 
-  ul.SJ_tabs.SJ_tabs-focus > li.SJ_current a {
+  // ex. MLBスタッツ メインメニュー
+  ul#SJ_tabs-area.SJ_tabs.SJ_tabs-select > li.SJ_current {
+    border-width: 0;
+  }
+
+  ul.SJ_tabs.SJ_tabs-focus > li.SJ_current a,
+  ul.SJ_tabs.SJ_tabs-select > li.SJ_current span {
     padding: 12px 2px;
     top: 0;
     border-width: 0;
@@ -549,6 +592,46 @@ $highlight-color: #033583;
   ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li span,
     ul.SJ_tabs.SJ_tabs-focus.SJ_tabs-medium > li.SJ_current a {
     padding: 12px 2px !important;
+  }
+
+
+
+
+
+  //ページャー
+  .SJ_pagenation {
+    &.SJ_for-pc {}
+
+    ul {
+      letter-spacing: ls(inline-block);
+
+      li {
+        letter-spacing: normal;
+        font-size: 12px;
+
+        a {
+          padding: 12px 14px;
+          background: $bg-color_gray;
+          border: $bg-color_gray;
+          color: $highlight-color;
+          font-weight: bold;
+
+          &:hover {
+            background: $highlight-color;
+            color: #fff;
+          }
+        }
+
+        span.SJ_here {
+          cursor: default;
+          padding: 12px 14px;
+          background: $highlight-color none;
+          border: none;
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+    }
   }
 
 
