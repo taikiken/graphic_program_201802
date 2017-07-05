@@ -3,7 +3,7 @@
 
     <section class="main-sec">
       <div class="stats__header stats__header--mlb">
-        <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/images/stats/mlb/heading@2x.png" alt="MLB速報&amp;データ" /></a></h1>
+        <h1 class="stats__header__title"><a href="/stats/mlb/"><img class="responsive" src="/assets/images/stats/mlb/heading@2x.png" alt="MLB速報&amp;データ" /></a></h1>
       </div><!-- /.stats__header -->
 
       <div class="stats__banner stats__banner--mlb show-for-large">
