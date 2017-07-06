@@ -249,9 +249,11 @@ export class ViewRanking extends View {
           // @since 2016-08-09 category label は script#js-exe data-label の値を使用する
           // https://github.com/undotsushin/undotsushin/issues/914
           categoryLabel = Dom.categoryLabel();
-          if ( categoryLabel !== '' ) {
+          // @since 2017-07-06 `categoryLabel &&` 追加 motorsports で undefined になるので
+          if (categoryLabel && categoryLabel !== '') {
             // category.label が空でなかったら '/' と一緒に加える
-            categoryTitle = ' / ' + categoryLabel;
+            // categoryTitle = ' / ' + categoryLabel;
+            categoryTitle = <span className="widget-ranking-heading-ruby-label"> / {categoryLabel}</span>;
           }
         }
 
