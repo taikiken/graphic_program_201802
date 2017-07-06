@@ -159,6 +159,17 @@ gulp.task 'carousel:dev', ( cb ) ->
   )
   return
 
+# dev
+gulp.task 'carousel:make', ( cb ) ->
+  runSequence(
+#    'carousel:eslint'
+    'carousel:babel'
+    'carousel:pack:dev'
+    'carousel:concat:dev'
+    cb
+  )
+  return
+
 # build
 gulp.task 'carousel:build', ( cb ) ->
   runSequence(

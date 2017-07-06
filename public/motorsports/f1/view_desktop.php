@@ -131,10 +131,11 @@
 
 <?php
 
-// テンプレートの種類を挿入
-$page = array(
-  'template' => 'category',
-);
+// model へ移動
+//// テンプレートの種類を挿入
+//$page = array(
+//  'template' => 'category',
+//);
 
 include_once __DIR__."/../../../app/templates/desktop/_footer.php";
 include_once __DIR__."/../../../app/templates/_debug.php";

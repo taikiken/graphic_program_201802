@@ -33,6 +33,9 @@
   <link rel="canonical" href="https://sportsbull.jp/motorsports/<?php echo $option_directory; ?>/">
   <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
 
+  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
   <script type='text/javascript'>
     var googletag = googletag || {};
     googletag.cmd = googletag.cmd || [];
@@ -105,6 +108,9 @@
 // -------------------------------------------------------------------------------
 ?>
 
-</div><!-- /.whole -->
-</body>
-</html>
+<?php
+
+include_once __DIR__."/../../../app/templates/desktop/_footer.php";
+include_once __DIR__."/../../../app/templates/_debug.php";
+
+?>

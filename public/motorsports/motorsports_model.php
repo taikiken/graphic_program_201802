@@ -99,6 +99,7 @@ if ($app_host_name == '') {
 
 // JSON 取得
 // ==============================
+// postfix `$option_directory` は各 f1 / sgt / wec / wrc view で
 $pickup_path = $app_host_name . '/api/v1/articles/static/pickup_' . $option_directory;
 $headline_path = $app_host_name . '/api/v1/articles/static/headline_' . $option_directory;
 
@@ -128,6 +129,18 @@ if (isset($_GET['app'])) {
     $from_webview = true;
   }
 }
+
+// template - テンプレート条件をハードコード
+// ==============================
+if ($page['template'] == '') {
+  $page['template'] = 'motorsports';
+}
+
+// url 情報
+$page["motorsports"] = array(
+  'url' => $option_directory,
+);
+
 
 // render
 // ==============================
