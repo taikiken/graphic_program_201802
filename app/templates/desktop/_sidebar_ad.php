@@ -116,7 +116,9 @@ endif;
           if (
             $page['template'] == 'category' ||
             $page['template'] == 'search' ||
-            $page['template'] == 'p'
+            $page['template'] == 'p' ||
+            // mortorsports 条件を追加 - `/public/motorsports/motorsports_model.php` on 2017-07-06
+            $page['template'] == 'motorsports'
           ) : ?>
             <div id="widget-recommend-list-container"></div><!--/recommend-->
           <?php endif; ?>

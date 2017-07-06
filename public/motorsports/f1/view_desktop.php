@@ -45,7 +45,6 @@
 
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
-  <script src="/assets/js/motorsports.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
   <?php // #1876 - Google Optimize ?>
   <style>.async-hide { opacity: 0 !important} </style>
@@ -178,6 +177,8 @@
 <?php
 // -------------------------------------------------------------------------------
 ?>
+
+<script src="/assets/js/motorsports.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 include_once __DIR__."/../../../app/templates/desktop/_footer.php";
