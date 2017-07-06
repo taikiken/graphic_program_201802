@@ -1,0 +1,199 @@
+@import "../../../../scss/asset";
+@import "../sprite";
+
+// Theme Motorsports
+//
+// design module Motorsports theme
+//
+// Styleguide 2.16.0
+
+.whole.motorsports {
+
+  //.headline-heading
+  .headline-heading {
+    border-bottom-color: #cc141d;
+  }
+
+  //.motorsports__category-nav
+  .motorsports__category-nav {
+    position: relative;
+    width: 1088px;
+    margin: 30px auto;
+
+
+    //.motorsports__category-nav__list
+    &__list {
+      letter-spacing: ls(inline-block);
+    }
+
+    //.motorsports__category-nav__item
+    &__item {
+      display: inline-block;
+      padding: 0 25px;
+      border-left: 1px solid #45484b;
+      letter-spacing: normal;
+
+      &:first-child {
+        border-left: none;
+        padding-left: 0;
+      }
+    }
+
+    //.motorsports__category-nav__link
+    &__link {
+      display: block;
+      height: 23px;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      @include hide-text;
+
+      &:hover {
+        background-position: 0 -23px;
+      }
+
+      &--top {
+        width: 116px;
+        background-image: url(/assets/images/motorsports/nav_top.png);
+      }
+
+      &--f1 {
+        width: 121px;
+        background-image: url(/assets/images/motorsports/nav_f1.png);
+      }
+
+      &--sgt {
+        width: 132px;
+        background-image: url(/assets/images/motorsports/nav_sgt.png);
+      }
+
+      &--wec {
+        width: 132px;
+        background-image: url(/assets/images/motorsports/nav_wec.png);
+      }
+
+      &--wrc {
+        width: 135px;
+        background-image: url(/assets/images/motorsports/nav_wrc.png);
+      }
+    } //.motorsports__category-nav__link
+  } //.motorsports__category-nav
+
+  &.motorsports--f1 .motorsports__category-nav__link--f1,
+  &.motorsports--stg .motorsports__category-nav__link--sgt,
+  &.motorsports--wec .motorsports__category-nav__link--wec,
+  &.motorsports--wrc .motorsports__category-nav__link--wrc {
+    background-position: 0 -23px;
+  }
+
+  //.motorsports__category-btns
+  .motorsports__category-btns {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    //.motorsports__category-btns__list
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    //.motorsports__category-btns__item
+    &__item {
+      margin-top: 30px;
+    }
+
+    //.motorsports__category-btns__link
+    &__link {
+      position: relative;
+      display: block;
+      width: 350px;
+      height: 160px;
+      backface-visibility: hidden;
+
+      span {
+        position: absolute;
+      }
+
+      //.motorsports__category-btns__link__bg
+      &__bg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        overflow: hidden;
+
+        img {
+          filter: sepia(0);
+        }
+
+        &:before {
+          position: absolute;
+          top: 0;
+          left: -75%;
+          z-index: 2;
+          display: block;
+          content: '';
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+          transform: skewX(-25deg);
+        }
+      }
+
+      //.motorsports__category-btns__link__text
+      &__text {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      //.motorsports__category-btns__link__arrow
+      &__arrow {
+        right: 0;
+        bottom: 0;
+      }
+
+      &:hover {
+        //.motorsports__category-btns__link__bg
+        .motorsports__category-btns__link__bg {
+          img {
+            opacity: 0.85;
+            filter: sepia(100%);
+            transition: 0.5s ease-in;
+          }
+
+          &:before {
+            animation: shine 0.6s;
+          }
+        }
+
+        @keyframes shine {
+          100% {
+            left: 125%;
+          }
+        }
+
+        //.motorsports__category-btns__link__text
+        .motorsports__category-btns__link__text {
+          animation: flash 0.4s ease-in;
+        }
+
+        @keyframes flash {
+          0% {
+            opacity: 0;
+          }
+          30% {
+            opacity: 0.5;
+          }
+          60% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+      } //:hover
+    } //.motorsports__category-btns__link
+  } //.motorsports__category-btns
+
+}

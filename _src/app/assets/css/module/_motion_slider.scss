@@ -842,6 +842,14 @@
   }
 }
 
+// 静的ファイルブラウジング時にスライダーを表示にさせる
+#pickup-container.debug {
+  .overlay,
+  .post-overview {
+    opacity: 1;
+  }
+}
+
 .pickup-slider-wrapper {
   position: absolute;
 }

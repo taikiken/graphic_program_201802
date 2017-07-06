@@ -1,0 +1,99 @@
+@import "../../../../../scss_sp/asset";
+@import "../sprite";
+
+// Theme Motorsports
+//
+// design module Motorsports theme
+//
+// Styleguide 2.15.0
+
+.whole.motorsports {
+  //.motorsports__category-nav
+  .motorsports__category-nav {
+    padding: (20/2)+px 0;
+    background-color: #000;
+
+    //.motorsports__category-nav__list
+    &__list {
+      display: table;
+      width: 100%;
+    }
+
+    //.motorsports__category-nav__item
+    &__item {
+      display: table-cell;
+      width: 25%;
+      border-left: 1px solid #454545;
+
+      &:first-child {
+        border-left: none;
+      }
+    }
+
+    //.motorsports__category-nav__link
+    &__link {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+
+      span {
+        display: inline-block;
+        width: (46/2)+px;
+        height: (20/2)+px;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: auto (40/2)+px;
+        @include hide-text;
+      }
+
+      &--f1 span {
+        background-image: url(/assets/sp/images/motorsports/nav_f1.png);
+      }
+
+      &--sgt span {
+        background-image: url(/assets/sp/images/motorsports/nav_sgt.png);
+      }
+
+      &--wec span {
+        background-image: url(/assets/sp/images/motorsports/nav_wec.png);
+      }
+
+      &--wrc span {
+        background-image: url(/assets/sp/images/motorsports/nav_wrc.png);
+      }
+    }
+  }
+
+  &.motorsports--f1 .motorsports__category-nav__link--f1 span,
+  &.motorsports--stg .motorsports__category-nav__link--sgt span,
+  &.motorsports--wec .motorsports__category-nav__link--wec span,
+  &.motorsports--wrc .motorsports__category-nav__link--wrc span {
+    background-position: 0 -10px;
+  }
+
+  //.motorsports__category-btns
+  .motorsports__category-btns {
+    padding-bottom: (20/2)+px;
+    background-color: #000;
+
+    //.motorsports__category-btns__list
+    &__list {
+      width: perCalc(710, 750);
+      margin: 0 auto;
+      overflow: hidden;
+
+    }
+
+    //.motorsports__category-btns__item
+    &__item {
+      float: left;
+      width: perCalc(345, 710);
+      margin-top: (20/2)+px;
+
+      &:nth-child(2n) {
+        float: right;
+      }
+    }
+  }
+}
