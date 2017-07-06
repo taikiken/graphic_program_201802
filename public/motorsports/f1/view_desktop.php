@@ -121,9 +121,19 @@
     ?>
     <div class="body-sec-inner">
       <section class="main-sec">
-        <div class="sponsor-link mt30">
-          <a href="hoge"><img src="/assets/images/motorsports/bnr-sponsor1.png" alt="xxxxx"></a>
-        </div><!-- /.sponsor-link -->
+
+        <?php
+        // ----------------------------------------------------
+        // 記事一覧: pc banner
+        if ( !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
+          ?>
+          <div class="sponsor-link mt30">
+            <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['pc']['link']; ?>', true);"><img src="<?php echo $page['category']['banner']['pc']['image']; ?>" alt="<?php echo $page['category']['banner']['pc']['text'] ? $page['category']['banner']['pc']['text'] : '' ?>"></a>
+          </div>
+          <?php
+        endif;
+        // eof: 記事一覧: pc banner
+        // ---------------------------------------------------- ?>
 
         <?php
         // headline-container

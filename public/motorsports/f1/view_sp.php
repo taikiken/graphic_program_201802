@@ -12,32 +12,53 @@
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
-  <title>XXX | SPORTS BULL</title>
-  <meta name="description" content="XXX">
-  <meta name="keywords" content="XXX">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <?php
+  // app in webview 時に .head-sec を非表示にする
+  if (!$from_webview) :
+  ?>
+  <title><?php echo strip_tags($page['motorsports']['title']).' | '.$page['site_name']; ?></title>
+  <meta name="keywords" content="<?php echo $page['keywords']; ?>">
+  <meta name="description" content="<?php echo $page["motorsports"]['og_description']; ?>">
   <!-- sns ogp -->
-  <meta property="og:title" content="XXX | SPORTS BULL">
+  <meta property="fb:app_id" content="<?php echo $page['app_id']; ?>">
+  <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
   <meta property="og:type" content="<?php echo $page['og_type']; ?>">
-  <meta property="og:image" content="XXX">
-  <meta property="og:url" content="https://sportsbull.jp/motorsports/<?php echo $option_directory; ?>/">
-  <meta property="og:description" content="XXX">
+  <meta property="og:title" content="<?php echo $page['motorsports']['og_title']; ?>">
+  <meta property="og:image" content="<?php echo $page["motorsports"]['og_image']; ?>">
+  <meta property="og:url" content="<?php echo $page["motorsports"]['og_url']; ?>">
+  <meta property="og:description" content="<?php echo $page["motorsports"]['og_description']; ?>">
+  <meta property="og:locale" content="ja_JP" />
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@sportsbull_jp">
+  <meta name="twitter:site" content="@<?php echo $page['sns']['twitter']; ?>">
+  <meta name="twitter:title" content="<?php echo $page['motorsports']['og_title']; ?>">
+  <meta name="twitter:image" content="<?php echo $page["motorsports"]['og_image']; ?>">
+  <meta name="twitter:url" content="<?php echo $page["motorsports"]['og_url']; ?>">
+  <meta name="twitter:description" content="<?php echo $page["motorsports"]['og_description']; ?>">
   <!-- favicon -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
-
   <link rel="canonical" href="https://sportsbull.jp/motorsports/<?php echo $option_directory; ?>/">
+
+  <?php
+  endif;
+  // -----------------------------------------
+  ?>
+
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+
+  <?php // #1876 - Google Optimize ?>
+  <style>.async-hide { opacity: 0 !important} </style>
+  <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+  h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+  (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+  })(window,document.documentElement,'async-hide','dataLayer',4000,
+  {'GTM-KJ33JM9':true});</script>
+  <?php // Google Optimize ?>
 
   <script type='text/javascript'>
     var googletag = googletag || {};
@@ -55,25 +76,34 @@
   </script>
 
   <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-74679267-1', 'auto');
-    ga('require', 'linkid');
-    ga('require', 'displayfeatures');
-    ga('send', 'pageview');
+   ga('create', 'UA-74679267-1', 'auto');
+   ga('require', 'GTM-KJ33JM9');
+   ga('require', 'linkid');
+   ga('require', 'displayfeatures');
+   ga('send', 'pageview');
 
   </script>
 </head>
 <body class="appbnr-disable">
-<div id="whole" class="whole dark motorsports motorsports-<?php echo $option_directory; ?>">
+<div id="whole" class="whole dark motorsports motorsports--<?php echo $option_directory; ?>">
+  <?php
+  // app in webview 時に .head-sec を非表示にする
+  if (!$from_webview) :
+  ?>
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
+  <?php
+  endif;
+  // -----------------------------------------
+  ?>
 
 <?php
 // body section
@@ -81,6 +111,20 @@
 ?>
   <div class="body-sec">
     <div class="body-sec-inner">
+
+      <div class="special-summary">
+        <h1 class="special-summary-heading"><img src="/assets/sp/images/motorsports/summary-heading_<?php echo $option_directory; ?>.png" alt="<?php echo strtoupper($page['motorsports']['url']) ?>(FORMULA1) レース日程・結果"></h1>
+      </div><!-- /.special-summary -->
+
+      <nav class="motorsports__category-nav">
+        <ul class="motorsports__category-nav__list">
+          <li class="motorsports__category-nav__item"><a class="motorsports__category-nav__link motorsports__category-nav__link--f1" href="/motorsports/f1/"><span>F1 レース日程・結果</span></a></li>
+          <li class="motorsports__category-nav__item"><a class="motorsports__category-nav__link motorsports__category-nav__link--sgt" href="/motorsports/sgt/"><span>SGT レース日程・結果</span></a></li>
+          <li class="motorsports__category-nav__item"><a class="motorsports__category-nav__link motorsports__category-nav__link--wec" href="/motorsports/wec/"><span>WEC レース日程・結果</span></a></li>
+          <li class="motorsports__category-nav__item"><a class="motorsports__category-nav__link motorsports__category-nav__link--wrc" href="/motorsports/wrc/"><span>WRC レース日程・結果</span></a></li>
+        </ul><!-- /.motorsports__category-nav__list -->
+      </nav><!-- /.motorsports__category-nav -->
+
       <?php
       // pickup-container - carousel
       // ===========================================
@@ -90,13 +134,45 @@
       <?php
       // TODO: Powered area 必要か確認 - #ref template/mobile/_category-heading.php
       ?>
+
       <section class="main-sec">
+
+        <?php
+        // ----------------------------------------------------
+        // 記事一覧: sp banner
+        if ( !empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']) ) :
+          ?>
+          <div class="sponsor-link">
+            <a href="<?php echo $page['category']['banner']['sp']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['sp']['link']; ?>', true);"><img src="<?php echo $page['category']['banner']['sp']['image']; ?>" alt="<?php echo $page['category']['banner']['sp']['text'] ? $page['category']['banner']['sp']['text'] : '' ?>"></a>
+          </div>
+          <?php
+        endif;
+        // eof: 記事一覧: sp banner
+        // ---------------------------------------------------- ?>
+
         <?php
         // headline-container
         // ===========================================
         include_once dirname(__DIR__) . '/_include/_headline_container_sp.php';
         // ===========================================
         ?>
+
+        <div class="motorsports__category-btns">
+          <ul class="motorsports__category-btns__list">
+            <li class="motorsports__category-btns__item">
+              <a class="motorsports__category-btns__link" href="/motorsports/f1/"><img src="/assets/sp/images/motorsports/btn-category_f1.png" alt="F1 / FORMULA 1 レース日程・結果"></a>
+            </li>
+            <li class="motorsports__category-btns__item">
+              <a class="motorsports__category-btns__link" href="/motorsports/sgt/"><img src="/assets/sp/images/motorsports/btn-category_sgt.png" alt="SGT / Super GT レース日程・結果"></a>
+            </li>
+            <li class="motorsports__category-btns__item">
+              <a class="motorsports__category-btns__link" href="/motorsports/wec/"><img src="/assets/sp/images/motorsports/btn-category_wec.png" alt="WEC / FIA WORLD ENDURANCE CHAMPIONSHIP レース日程・結果"></a>
+            </li>
+            <li class="motorsports__category-btns__item">
+              <a class="motorsports__category-btns__link" href="/motorsports/wrc/"><img src="/assets/sp/images/motorsports/btn-category_wrc.png" alt="WRC / FIA WORLD RALLY CHAMPIONSHIP レース日程・結果"></a>
+            </li>
+          </ul><!-- /.motorsports__category-btns__list -->
+        </div><!-- /.motorsports__category-btns -->
       </section>
 
       <section class="side-sec">
@@ -111,6 +187,7 @@
 // -------------------------------------------------------------------------------
 ?>
 
-</div><!-- /.whole -->
-</body>
-</html>
+<?php
+include_once __DIR__."/../../../app/templates/mobile/_footer.php";
+include_once __DIR__."/../../../app/templates/_debug.php";
+?>
