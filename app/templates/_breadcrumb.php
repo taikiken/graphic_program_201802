@@ -19,7 +19,7 @@
 
     <?php elseif ($page['template'] == 'motorsports') :
     // motorsports - @since 2017-07-06 ?>
-      <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/category/motorsports/"><span itemprop="name">motorsports</span><meta itemprop="position" content="2" /></a></li>
+      <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/category/motorsports/"><span itemprop="name"><?php echo $page['motorsports']['label'] ?></span><meta itemprop="position" content="2" /></a></li>
       <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/motorsports/<?php echo $page['motorsports']['url']; ?>"><span itemprop="name"><?php echo strtoupper($page['motorsports']['url']) ?></span><meta itemprop="position" content="3" /></a></li>
 
     <?php endif; ?>

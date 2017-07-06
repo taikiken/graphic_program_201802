@@ -139,6 +139,7 @@ if ($page['template'] == '') {
 // url 情報
 $page["motorsports"] = array(
   'url' => $option_directory,
+  'label' => 'モータースポーツ',
 );
 
 
