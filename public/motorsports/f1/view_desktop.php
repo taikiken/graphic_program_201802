@@ -45,6 +45,7 @@
 
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/motorsports.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
   <?php // #1876 - Google Optimize ?>
   <style>.async-hide { opacity: 0 !important} </style>
@@ -179,18 +180,6 @@
 ?>
 
 <?php
-
-// model へ移動
-//// テンプレートの種類を挿入
-//$page = array(
-//  'template' => 'category',
-//);
-
 include_once __DIR__."/../../../app/templates/desktop/_footer.php";
 include_once __DIR__."/../../../app/templates/_debug.php";
-
-?>
-
-<?php
-// var_dump($page);
 ?>
