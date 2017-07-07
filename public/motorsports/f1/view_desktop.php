@@ -1,9 +1,9 @@
 <?php
 /**
- * モータースポーツ - カルーセル・ヘッドライン
+ * モータースポーツ
  * User: @taikiken
- * Date: 2017/05/25
- * Time: 14:35
+ * Date: 2017/07/07
+ * Time: 13:24
  * @see https://github.com/undotsushin/undotsushin/issues/1914
  * @see https://github.com/undotsushin/undotsushin/issues/1915
  */
