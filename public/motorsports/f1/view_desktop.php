@@ -16,7 +16,7 @@
   <meta name="viewport" content="width=1280">
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
   <title><?php echo strip_tags($page['motorsports']['title']).' | '.$page['site_name']; ?></title>
-  <meta name="keywords" content="<?php echo $page['keywords']; ?>">
+  <meta name="keywords" content="<?php echo $page['motorsports']['keywords']; ?>">
   <meta name="description" content="<?php echo $page["motorsports"]['og_description']; ?>">
   <!-- sns ogp -->
   <meta property="fb:app_id" content="<?php echo $page['app_id']; ?>">
