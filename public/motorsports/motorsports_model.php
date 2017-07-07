@@ -122,7 +122,6 @@ $page = $model->set(array(
 
 // app webview かを `?app=(ios|android)` から判定します
 // ==============================
-
 $from_webview = false;
 if (isset($_GET['app'])) {
   if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
@@ -136,13 +135,21 @@ if ($page['template'] == '') {
   $page['template'] = 'motorsports';
 }
 
+// タイトル情報
+$option_title = strtoupper($option_directory);
+if ( $option_title == 'SGT' ) {
+  $option_title = 'SuperGT';
+}
+
 // url 情報
+// =============
 $page["motorsports"] = array(
   'url'                => $option_directory,
   'label'              => 'モータースポーツ',
-  'title'              => strtoupper($option_directory).' / レース日程・結果',
-  'og_title'           => strtoupper($option_directory).' / レース日程・結果'.' | '.$page['site_name'],
-  'og_description'     => 'スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
+  'title'              => $option_title.' - モータースポーツ',
+  'og_title'           => $option_title.' - モータースポーツ'.' | '.$page['site_name'],
+  'keywords'           => $option_title.',モータースポーツ,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
+  'og_description'     => $option_title.' - モータースポーツ情報見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
   'og_url'             => $page['og_url'].'motorsports/'.$option_directory.'/',
   'og_image'           => $page['og_url'].'assets/images/motorsports/og_image_'.$option_directory.'.jpg',
 );
