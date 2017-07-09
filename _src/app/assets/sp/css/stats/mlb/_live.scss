@@ -1,0 +1,55 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../../scss_sp/asset";
+
+// --------------------------------------------
+// import ファイル
+// --------------------------------------------
+
+// page layout
+@import "../../module/utility";
+
+
+
+// MLB live
+// MLB速報コンテンツ
+.mlb_live {
+  background-color: #111;
+
+  //.stats__header
+  .stats__header {
+    display: table;
+
+    &__title,
+    &__btn {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    //.stats__header__title
+    &__title {
+      width: perCalc(540, 750);
+      padding: (20/2)+px;
+    }
+
+    //.stats__header__btn
+    &__btn {
+      width: perCalc(210, 750);
+
+       a {
+         display: block;
+         height: 100%;
+         padding-top: (36/2)+px;
+         padding-bottom: (36/2)+px;
+         background-color: #222;
+         text-align: center;
+
+         img {
+           margin: auto;
+           width: perCalc(170, 210);
+         }
+       }
+    }
+  }
+} //.mlb_live
