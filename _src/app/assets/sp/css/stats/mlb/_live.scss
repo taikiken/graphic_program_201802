@@ -62,7 +62,7 @@ $visitor-color: #ed7524;
 
   //タイトル
   //.mlb_live__heading--h2
-  .mlb_live__heading--h2 {
+  &__heading--h2 {
     line-height: 1.2;
     padding: (20/2)+px perCalc(20, 750);
     border: solid #222;
@@ -76,8 +76,9 @@ $visitor-color: #ed7524;
 
 
 
+  //試合概況
   //.mlb_live__overview
-  .mlb_live__overview {
+  &__overview {
     position: relative;
     display: table;
     width: 100%;
@@ -194,8 +195,10 @@ $visitor-color: #ed7524;
 
 
 
+
+  //スコアボード
   //.mlb_live__scoreboard
-  .mlb_live__scoreboard {
+  &__scoreboard {
     //.mlb_live__scoreboard__section
     &__section {
       margin-top: (20/2)+px;
@@ -243,8 +246,9 @@ $visitor-color: #ed7524;
 
 
 
+  //ナビ - 自動更新選択 / リロードボタン
   //.mlb_live__reload
-  .mlb_live__reload {
+  &__reload {
     position: relative;
     margin-top: (30/2)+px;
     margin-right: perCalc(20, 750);
@@ -324,6 +328,7 @@ $visitor-color: #ed7524;
 
 
 
+  //バナーエリア
   //.stats__banner
   .stats__banner {
     margin-top: (30/2)+px;
@@ -336,8 +341,10 @@ $visitor-color: #ed7524;
 
 
 
+
+  //ナビゲーション
   //.mlb_live__nav
-  .mlb_live__nav {
+  &__nav {
     margin: (30/2)+px perCalc(20, 750);
 
     //.mlb_live__nav__list
@@ -395,8 +402,10 @@ $visitor-color: #ed7524;
 
 
 
+
+  //試合の見どころ
   //.mlb_live__preview
-  .mlb_live__preview {
+  &__preview {
     padding: 0 perCalc(20, 750);
 
     p {
@@ -406,4 +415,157 @@ $visitor-color: #ed7524;
       font-size: (24/2)+px;
     }
   } //.mlb_live__preview
+
+
+
+
+
+  //スターティングメンバー
+  //.mlb_live__starting
+  &__starting {
+
+    //予告先発投手
+    //.mlb_live__starting--pitcher
+    &--pitcher {
+      width: 100%;
+
+      th, td {
+        padding: (20/2)+px;
+        border-right: 1px solid #222;
+        color: #fff;
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+
+      [class^="mlb_live__starting--pitcher__th--"] {
+        width: 50%;
+        line-height: 1.2;
+        padding-right: 5px;
+        padding-left: 5px;
+        background-color: #1a1a1a;
+        font-size: (24/2)+px;
+        text-align: center;
+      }
+
+      &__th--home {
+        border-bottom: 2px solid $home-color;
+      }
+
+      &__th--visitor {
+        border-bottom: 2px solid $visitor-color;
+      }
+
+      //.mlb_live__starting--pitcher__position
+      //.mlb_live__starting--pitcher__uniform_num
+      &__position,
+      &__uniform_num {
+        display: inline-block;
+        margin-right: 1em;
+        font-size: (20/2)+px;
+      }
+
+      //.mlb_live__starting--pitcher__name
+      .mlb_live__starting--pitcher__name {
+        font-size: (30/2)+px;
+      }
+
+      //.mlb_live__starting--pitcher__handed--right
+      //.mlb_live__starting--pitcher__handed--left
+      [class^="mlb_live__starting--pitcher__handed--"] {
+        display: inline-block;
+        line-height: 1;
+        margin-left: 4px;
+        padding: 5px;
+        font-size: (20/2)+px;
+        vertical-align: top;
+
+        &.mlb_live__starting--pitcher__handed--right {
+          background-color: #cc141d;
+        }
+
+        &.mlb_live__starting--pitcher__handed--left {
+          background-color: $highlight-color;
+        }
+      }
+    } //.mlb_live__starting--pitcher
+
+
+
+    //予告先発投手 成績
+    //.mlb_live__starting--pitcher_record
+    &--pitcher_record {
+      width: 100%;
+
+      th, td {
+        padding: (12/2)+px;
+        border-top: 1px solid #222;
+        border-bottom: 1px solid #222;
+        color: #fff;
+        font-size: (20/2)+px;
+        text-align: center;
+
+        &:nth-child(5) {
+          border-right: 1px solid #222;
+          border-left: 1px solid #222;
+        }
+      }
+
+      //.mlb_live__starting--pitcher_record__th
+      &__th {
+        background-color: #1a1a1a;
+      }
+    } //.mlb_live__starting--pitcher_record
+  } //.mlb_live__starting
+
+
+
+
+
+  //チーム対戦成績
+  //.mlb_live__win_loss_stangings
+  &__win_loss_stangings {
+    width: 100%;
+
+    th, td {
+      padding: (12/2)+px;
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+      color: #fff;
+      font-size: (20/2)+px;
+      text-align: center;
+
+      &:nth-child(2) {
+        border-right: 1px solid #222;
+        border-left: 1px solid #222;
+      }
+    }
+
+    //mlb_live__win_loss_stangings__th
+    //.mlb_live__win_loss_stangings__th--home
+    //.mlb_live__win_loss_stangings__th--visitor
+    [class^="mlb_live__win_loss_stangings__th"] {
+      background-color: #1a1a1a;
+    }
+
+    //.mlb_live__win_loss_stangings__th--home
+    //.mlb_live__win_loss_stangings__th--visitor
+    [class^="mlb_live__win_loss_stangings__th--"] {
+      line-height: 1.2;
+      padding: (20/2)+px 5px;
+      font-size: (24/2)+px;
+    }
+
+    //.mlb_live__win_loss_stangings__th--home
+    &__th--home {
+      border-bottom: 2px solid $home-color !important;
+    }
+
+    //.mlb_live__win_loss_stangings__th--visitor
+    &__th--visitor {
+      border-bottom: 2px solid $visitor-color !important;
+    }
+
+  } //.mlb_live__win_loss_stangings
 } //.mlb_live
