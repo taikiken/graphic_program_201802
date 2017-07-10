@@ -12,16 +12,22 @@
  */
 'use strict';
 
-
-// @see https://github.com/undotsushin/wiki/blob/master/%E4%BB%95%E6%A7%98/webview.md
-// - iOS : undotsushin-ios
-// - Android : undotsushin-android
-// = ではなく、含まれる、になります。match で判定してください
-
+/**
+ * app アクセスの時に特別な className を html tag に追加します
+ * - ios - undotsushin-ios
+ * - android - undotsushin-android
+ *
+ *  = ではなく、含まれる、になります。match で判定してください
+ * - iOS : undotsushin-ios
+ * - Android : undotsushin-android
+ * @see https://github.com/undotsushin/undotsushin/issues/2031
+ * @see https://github.com/undotsushin/wiki/blob/master/%E4%BB%95%E6%A7%98/webview.md
+ * @since 2017-07-10 BULL'S PICKS の表示切り替えをUA判定に切り替える #2031
+ */
 const detector = () => {
   // html 取得
   const tags = document.getElementsByTagName('html');
-  console.log('tags', tags, tags.length);
+  // console.log('tags', tags, tags.length);
   if (!tags || !tags.length) {
     return;
   }
