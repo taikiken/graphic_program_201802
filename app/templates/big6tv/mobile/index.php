@@ -1,12 +1,12 @@
 <?php
 // app webview かを `?app=(ios|android)` から判定します
 // ==============================
-$from_webview = false;
-if (isset($_GET['app'])) {
-  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
-    $from_webview = true;
-  }
-}
+//$from_webview = false;
+//if (isset($_GET['app'])) {
+//  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
+//    $from_webview = true;
+//  }
+//}
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
@@ -16,7 +16,7 @@ if (isset($_GET['app'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <?php
   // app in webview 時に .head-sec を非表示にする
-  if (!$from_webview) :
+//  if (!$from_webview) :
   ?>
   <title>東京六大学野球 BIG6.TV | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
@@ -44,7 +44,7 @@ if (isset($_GET['app'])) {
   <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
 
   <?php
-  endif;
+//  endif;
   // -----------------------------------------
   ?>
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
@@ -91,15 +91,15 @@ if (isset($_GET['app'])) {
 <div class="whole theme_big6">
   <?php
   // app in webview 時に .head-sec を非表示にする
-  if (!$from_webview) :
+//  if (!$from_webview) :
   ?>
-  <header class="head-sec">
+  <header class="head-sec for-web">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
   <?php
-  endif;
+//  endif;
   // -----------------------------------------
   ?>
 
@@ -169,9 +169,9 @@ if (isset($_GET['app'])) {
 
   <?php
   // app in webview 時に .foot-sec を非表示にする
-  if (!$from_webview) :
+//  if (!$from_webview) :
   ?>
-  <footer class="foot-sec">
+  <footer class="foot-sec for-web">
     <div class="foot-sec-inner">
 
       <div class="foot-pr">
@@ -229,14 +229,14 @@ endif;
   </footer><!-- /.foot-sec -->
   <?php
   // -----------------------------------------
-  endif;
+//  endif;
   ?>
 
 </div><!-- /.whole -->
 
 <?php
 // app in webview 時に .foot-sec を非表示にするので FB いらない
-if (!$from_webview) :
+//if (!$from_webview) :
 ?>
 <script>
   window.fbAsyncInit = function() {
@@ -256,11 +256,12 @@ if (!$from_webview) :
   }(document, 'script', 'facebook-jssdk'));
 </script>
 <?php
-endif;
+//endif;
 // -----------------------------------------
 ?>
 
 <script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/app_divide.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 </body>
 </html>

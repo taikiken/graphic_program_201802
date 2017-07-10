@@ -1,0 +1,13 @@
+// -------------------------------------------------
+// app webview access 時の表示・非表示管理
+// sp-exe.bundle.js で html へ undotsuhin-ios | undotsusin-android
+// が追加される
+// -------------------------------------------------
+
+// app webview は for-web 非表示
+.undotsushin-ios,
+.undotsushin-android {
+  .for-web {
+    display: none;
+  }
+}
