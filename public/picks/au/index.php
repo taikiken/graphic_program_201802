@@ -167,12 +167,12 @@ $page = $model->set(array(
 // app webview かを `?app=(ios|android)` から判定します
 // ==============================
 
-$from_webview = false;
-if (isset($_GET['app'])) {
-  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
-    $from_webview = true;
-  }
-}
+//$from_webview = false;
+//if (isset($_GET['app'])) {
+//  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
+//    $from_webview = true;
+//  }
+//}
 
 
 //// render
