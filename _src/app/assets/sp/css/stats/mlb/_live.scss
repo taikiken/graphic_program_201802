@@ -442,8 +442,7 @@ $visitor-color: #ed7524;
       [class^="mlb_live__starting--pitcher__th--"] {
         width: 50%;
         line-height: 1.2;
-        padding-right: 5px;
-        padding-left: 5px;
+        padding: (12/2)+px 5px;
         background-color: #1a1a1a;
         font-size: (24/2)+px;
         text-align: center;
@@ -553,7 +552,8 @@ $visitor-color: #ed7524;
     //.mlb_live__win_loss_stangings__th--visitor
     [class^="mlb_live__win_loss_stangings__th--"] {
       line-height: 1.2;
-      padding: (20/2)+px 5px;
+      padding-right: 5px;
+      padding-left: 5px;
       font-size: (24/2)+px;
     }
 
