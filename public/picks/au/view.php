@@ -10,7 +10,7 @@
   <title>【スポーツ】Today’s ピックアップ</title>
   <?php
   // app in webview 時に .head-sec を非表示にする
-  // if (!$from_webview) :
+//   if (!$from_webview) :
   if (0) :
   ?>
   <meta name="apple-itunes-app" content="app-id=1086719653">

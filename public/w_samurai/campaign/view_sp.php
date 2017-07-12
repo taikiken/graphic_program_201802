@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <?php
   // app in webview 時に .head-sec を非表示にする
-//  if (!$from_webview) :
+  if (!$from_webview) :
   ?>
   <title>W侍 プレゼントキャンペーン | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
@@ -34,7 +34,7 @@
   <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
 
   <?php
-//  endif;
+  endif;
   // -----------------------------------------
   ?>
   <link rel="stylesheet" href="/assets/sp/css/w_samurai/campaign/ui.css?v=<?php echo $page['version']; ?>">
@@ -71,7 +71,7 @@
 <div class="whole w_samurai">
   <?php
   // app in webview 時に .head-sec を非表示にする
-//  if (!$from_webview) :
+  if (!$from_webview) :
   ?>
   <header class="head-sec for-web">
     <div class="head-sec-inner">
@@ -79,7 +79,7 @@
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
   <?php
-//  endif;
+  endif;
   // -----------------------------------------
   ?>
 
@@ -173,7 +173,7 @@
 
   <?php
   // app in webview 時に .foot-sec を非表示にする
-//  if (!$from_webview) :
+  if (!$from_webview) :
   ?>
   <footer class="foot-sec for-web">
     <div class="foot-sec-inner">
@@ -219,14 +219,14 @@
   </footer><!-- /.foot-sec -->
   <?php
   // -----------------------------------------
-//  endif;
+  endif;
   ?>
 
 </div><!-- /.whole -->
 
 <?php
 // app in webview 時に .foot-sec を非表示にするので FB いらない
-//if (!$from_webview) :
+if (!$from_webview) :
 ?>
 <script>
   window.fbAsyncInit = function() {
@@ -246,7 +246,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 <?php
-//endif;
+endif;
 // -----------------------------------------
 ?>
 <script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
