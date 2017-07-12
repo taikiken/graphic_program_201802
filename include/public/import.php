@@ -421,6 +421,9 @@ function outimg($oimg,$tumb=1){
 		imgDresize($file,sprintf("%simg/%s.%s",$imgp,$fl[0],$p),array(640,400),$p);
 		imgDresize($file,sprintf("%sthumbnail1/%s.%s",$imgp,$fl[0],$p),array(320,180),$p);
 		imgDresize($file,sprintf("%sthumbnail2/%s.%s",$imgp,$fl[0],$p),array(150,150),$p);
+		//2140 repro出力画像サイズ追加
+		imgDresize($file,sprintf("%sthumbnail3/%s.%s",$imgp,$fl[0],$p),array(480,240),$p);
+		imgDresize($file,sprintf("%sthumbnail4/%s.%s",$imgp,$fl[0],$p),array(480,480),$p);
 	}
 	imgResize($file,sprintf("%sraw/%s.%s",$imgp,$fl[0],$p),980,$p);
 	
