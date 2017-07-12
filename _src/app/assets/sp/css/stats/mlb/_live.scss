@@ -178,8 +178,20 @@ $visitor-color: #ed7524;
         font-weight: bold;
         font-size: (20/2)+px;
 
+        &--before {
+          background-color: $highlight-color;
+        }
+
         &--live {
           background-color: #cc141d;
+        }
+
+        &--end {
+          background-color: #444;
+        }
+
+        &--cancel {
+          background-color: #444;
         }
       }
 
@@ -472,23 +484,46 @@ $visitor-color: #ed7524;
 
       //.mlb_live__starting--pitcher__handed--right
       //.mlb_live__starting--pitcher__handed--left
+      // [class^="mlb_live__starting--pitcher__handed--"] {
+      //   display: inline-block;
+      //   line-height: 1;
+      //   margin-left: 4px;
+      //   padding: 5px;
+      //   font-size: (20/2)+px;
+      //   vertical-align: top;
+
+      //   &.mlb_live__starting--pitcher__handed--right {
+      //     background-color: #cc141d;
+      //   }
+
+      //   &.mlb_live__starting--pitcher__handed--left {
+      //     background-color: $highlight-color;
+      //   }
+      // }
       [class^="mlb_live__starting--pitcher__handed--"] {
         display: inline-block;
         line-height: 1;
         margin-left: 4px;
-        padding: 5px;
-        font-size: (20/2)+px;
-        vertical-align: top;
+        vertical-align: middle;
 
-        &.mlb_live__starting--pitcher__handed--right {
+        &:before {
+          padding: 5px;
+          font-size: (20/2)+px;
+        }
+
+        &.mlb_live__starting--pitcher__handed--right:before {
+          content: '\53F3';
           background-color: #cc141d;
         }
 
-        &.mlb_live__starting--pitcher__handed--left {
+        &.mlb_live__starting--pitcher__handed--left:before {
+          content: '\5DE6';
           background-color: $highlight-color;
         }
       }
     } //.mlb_live__starting--pitcher
+
+
 
 
 
@@ -516,6 +551,221 @@ $visitor-color: #ed7524;
         background-color: #1a1a1a;
       }
     } //.mlb_live__starting--pitcher_record
+
+
+
+
+
+    //スターティングメンバー
+    //.mlb_live__starting--member
+    &--member {
+      //.mlb_live__starting--member__section
+      &__section {
+        overflow: hidden;
+      } //.mlb_live__starting--member__section
+
+      float: left;
+      width: 50%;
+
+      &:first-child {
+        .mlb_live__starting--member__heading {
+          border-right: 1px solid #222;
+        }
+      }
+
+      &:last-child {
+        float: right;
+      }
+
+      //.mlb_live__starting--member__caption
+      &__caption {
+        line-height: 1.2;
+        padding: (12/2)+px 5px;
+        background-color: #1a1a1a;
+        color: #fff;
+        font-size: (24/2)+px;
+        text-align: center;
+      }
+
+      &--home .mlb_live__starting--member__caption {
+        border-bottom: 2px solid $home-color;
+      }
+
+      &--visitor .mlb_live__starting--member__caption {
+        border-bottom: 2px solid $visitor-color;
+      }
+      //.mlb_live__starting--member__caption
+
+      th,
+      td {
+        padding: (12/2)+px;
+        border-right: 1px solid #222;
+        border-bottom: 1px solid #222;
+      }
+
+      &:last-child {
+        th:last-child,
+        td:last-child {
+          border-right: none;
+        }
+      }
+
+      //.mlb_live__starting--member__th--lineup
+      &__th--lineup {
+        background-color: #1a1a1a;
+        color: #fff;
+        font-size: (20/2)+px;
+        text-align: center;
+      }
+
+      //.mlb_live__starting--member__td--position
+      &__td--position {
+        color: #fff;
+        font-size: (20/2)+px;
+        text-align: center;
+      }
+
+      //.mlb_live__starting--member__td--player
+      &__td--player {
+        color: #fff;
+        font-size: (20/2)+px;
+      }
+
+      //.mlb_live__starting--member__td--player__handed--right
+      //.mlb_live__starting--member__td--player__handed--left
+      [class^="mlb_live__starting--member__td--player__handed--"] {
+        display: inline-block;
+        line-height: 1;
+        margin-right: 4px;
+        vertical-align: middle;
+
+        &:before {
+          padding: 3px 3px;
+          font-size: (20/2)+px;
+        }
+
+        &.mlb_live__starting--member__td--player__handed--right:before {
+          content: '\53F3\6253';
+          background-color: #cc141d;
+        }
+
+        &.mlb_live__starting--member__td--player__handed--left:before {
+          content: '\5DE6\6253';
+          background-color: $highlight-color;
+        }
+      }
+    } //.mlb_live__starting--member
+
+
+
+
+    //控え選手
+    //.mlb_live__starting--bench
+    &--bench {
+      //.mlb_live__starting--bench__section
+      &__section {
+        overflow: hidden;
+      } //.mlb_live__starting--bench__section
+
+      float: left;
+      width: 50%;
+
+      &:first-child {
+        .mlb_live__starting--bench__heading {
+          border-right: 1px solid #222;
+        }
+      }
+
+      &:last-child {
+        float: right;
+      }
+
+      //.mlb_live__starting--bench__caption
+      &__caption {
+        line-height: 1.2;
+        padding: (12/2)+px 5px;
+        background-color: #1a1a1a;
+        color: #fff;
+        font-size: (24/2)+px;
+        text-align: center;
+      }
+
+      &--home .mlb_live__starting--bench__caption {
+        border-bottom: 2px solid $home-color;
+      }
+
+      &--visitor .mlb_live__starting--bench__caption {
+        border-bottom: 2px solid $visitor-color;
+      }
+      //.mlb_live__starting--bench__caption
+
+      th,
+      td {
+        padding: (12/2)+px;
+        border-right: 1px solid #222;
+        border-bottom: 1px solid #222;
+      }
+
+      &:last-child {
+        th:last-child,
+        td:last-child {
+          border-right: none;
+        }
+      }
+
+      //.mlb_live__starting--bench__th__heading
+      &__th__heading {
+        // padding-top: (16/2)+px !important;
+        // padding-bottom: (16/2)+px !important;
+        background-color: #1a1a1a;
+        color: #fff;
+        font-size: (20/2)+px;
+      }
+
+      //.mlb_live__starting--bench__td--player
+      &__td--player {
+        color: #fff;
+        font-size: (20/2)+px;
+      }
+
+      //.mlb_live__starting--bench__td--player__handed--right
+      //.mlb_live__starting--bench__td--player__handed--left
+      [class^="mlb_live__starting--bench__td--player__handed--"] {
+        display: inline-block;
+        line-height: 1;
+        margin-right: 4px;
+        vertical-align: middle;
+
+        &:before {
+          padding: 3px 3px;
+          font-size: (20/2)+px;
+        }
+
+        &.mlb_live__starting--bench__td--player__handed--right:before {
+          content: '\53F3\6253';
+          background-color: #cc141d;
+        }
+
+        &.mlb_live__starting--bench__td--player__handed--left:before {
+          content: '\5DE6\6253';
+          background-color: $highlight-color;
+        }
+      }
+
+      //.mlb_live__starting--bench--pitcher
+      &--pitcher {
+        [class^="mlb_live__starting--bench__td--player__handed--"] {
+          &.mlb_live__starting--bench__td--player__handed--right:before {
+            content: '\53F3\6295';
+          }
+
+          &.mlb_live__starting--bench__td--player__handed--left:before {
+            content: '\5DE6\6295';
+          }
+        }
+      }
+    } //.mlb_live__starting--bench
+
   } //.mlb_live__starting
 
 
