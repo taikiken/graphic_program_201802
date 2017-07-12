@@ -128,6 +128,8 @@ function ut_init(){
 	
 	if(cd=="repo_n"){
 		
+		$(".imglist li:eq(3)").css({"clear":"both"});
+		
 		var ni=$("[name='p_d2']").val();
 		if(ni&&!ni.match(/^[0-9]+$/)){
 			var s=ni.match(/^([0-9]+):/);
