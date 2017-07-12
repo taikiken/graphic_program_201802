@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <?php
   // app in webview 時に head内不要なタグを非表示にする
-//  if (!$from_webview) :
+  if (!$from_webview) :
   ?>
   <title><?php echo strip_tags($page['title']).' | '.$page['site_name']; ?></title>
   <meta name="keywords" content="<?php echo $page['keywords']; ?>">
@@ -54,7 +54,7 @@
   <link rel="stylesheet" href="/assets/sp/css/stats/banners/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
   <?php
-//  endif;
+  endif;
   // -----------------------------------------
   ?>
 
@@ -123,7 +123,7 @@ __EOL__;
 
   <?php
   // app in webview 時に .head-sec を非表示にする
-//  if (!$from_webview) :
+  if (!$from_webview) :
   ?>
   <header class="head-sec for-web">
     <div class="head-sec-inner">
@@ -131,7 +131,7 @@ __EOL__;
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
   <?php
-//  endif;
+  endif;
   // -----------------------------------------
   ?>
 
@@ -197,7 +197,7 @@ __EOL__;
 
   <?php
   // app in webview 時に .foot-sec を非表示にする
-//  if (!$from_webview) :
+  if (!$from_webview) :
   ?>
   <footer id="footer-container" class="foot-sec show-for-large for-web">
     <div class="foot-sec-inner">
@@ -297,7 +297,7 @@ __EOL__;
   </footer><!-- /.foot-sec -->
   <?php
   // -----------------------------------------
-//  endif;
+  endif;
   ?>
 
 </div><!-- /.whole -->
