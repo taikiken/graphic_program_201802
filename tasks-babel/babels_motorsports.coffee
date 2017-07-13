@@ -143,6 +143,7 @@ gulp.task 'motorsports:concat:build', ->
 
   return gulp.src clone
     .pipe $.concat 'motorsports_app.bundle.js'
+    .pipe $.debug title: '[MOTORSPORTS:CONCAT]'
     .pipe gulp.dest dir.app + '/assets/js'
     .pipe gulp.dest './public/assets/js'
     .pipe $.size title: '*** motorsports:concat:build ***'
