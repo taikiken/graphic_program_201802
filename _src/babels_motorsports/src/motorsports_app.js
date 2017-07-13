@@ -12,3 +12,18 @@
  */
 'use strict';
 
+import Tabs from './ms/ui/Tabs';
+
+const settingTab = () => {
+  const elements = Tabs.init();
+  elements.map((element) => {
+    const tab = new Tabs(element);
+    tab.start();
+  });
+};
+
+// ----------------------------------------
+// DOMContentLoaded - body bottom 記述なので event 使用しない
+
+// tab setting
+settingTab();

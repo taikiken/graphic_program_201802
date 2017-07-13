@@ -59,7 +59,9 @@ files = [
 
 # eslint
 gulp.task 'motorsports:eslint', ->
-  return gulp.src files
+  copy = files.slice(0)
+  copy.push '!' + dir.src + '/babels_motorsports/src/**/gsap/**/*.{js,jsx}'
+  return gulp.src copy
     .pipe $.eslint useEslintrc: true
     .pipe $.eslint.format()
     .pipe $.eslint.failAfterError()
