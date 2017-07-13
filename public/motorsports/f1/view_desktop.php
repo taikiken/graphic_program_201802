@@ -187,8 +187,8 @@
 
             <nav class="point_rank__nav">
               <ul class="point_rank__nav__list" id="js-point_rank__nav__list">
-                <li class="point_rank__nav__item"><a class="point_rank__nav--driver js-point_rank__nav--link selected" href="#point_rank--driver">ドライバーランキング</a></li>
-                <li class="point_rank__nav__item"><a class="point_rank__nav--team  js-point_rank__nav--link" href="#point_rank--team">チームランキング</a></li>
+                <li class="point_rank__nav__item"><a class="point_rank__nav--driver js-tab-link selected" href="#point_rank--driver">ドライバーランキング</a></li>
+                <li class="point_rank__nav__item"><a class="point_rank__nav--team  js-tab-link" href="#point_rank--team">チームランキング</a></li>
               </ul>
             </nav><!-- /.point_rank__nav -->
 
@@ -1353,6 +1353,7 @@
 ?>
 
 <script src="/assets/js/motorsports.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/motorsports_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 include_once __DIR__."/../../../app/templates/desktop/_footer.php";
