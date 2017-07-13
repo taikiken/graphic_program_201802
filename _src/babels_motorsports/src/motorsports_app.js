@@ -1,8 +1,7 @@
-/*!
+/**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/05/24 - 20:01
- * @license
+ * @date 2017/07/13 - 15:49
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -13,7 +12,3 @@
  */
 'use strict';
 
-import Prepare from './carousel/Prepare';
-
-// ---init
-Prepare.init();
