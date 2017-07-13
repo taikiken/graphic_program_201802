@@ -96,4 +96,372 @@
       }
     }
   }
+
+
+
+
+
+  //motorsports_stats
+  .motorsports_stats {
+    padding-bottom: (60/2)+px;
+    background-color: #000;
+  }
+
+
+
+
+
+  //タイトル
+  .mod-headingA {
+    padding: (24/2)+px 0;
+    border-top: 2px solid $key-color;
+    border-bottom: 1px solid $border-color;
+    color: #fff;
+    font-weight: bold;
+    font-size: (32/2)+px;
+    text-align: center;
+  }
+
+
+
+
+
+  //テーブル共通
+  [class*="mod-table"] {
+    width: perCalc(710, 750);
+    margin-right: auto;
+    margin-left: auto;
+
+    thead {
+      border-bottom: 1px solid $border-color;
+
+      th {
+        padding: (16/2)+px;
+        color: #fff;
+        font-weight: bold;
+        font-size: (20/2)+px;
+        text-align: center;
+        white-space: nowrap;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid $border-color;
+      }
+
+      td {
+        padding: (12/2)+px;
+        background-image: url(/assets/images/big6/bgline-table.png);
+        background-position: 0 center;
+        background-repeat: no-repeat;
+        background-size: 1px 60%;
+        color: #fff;
+        font-size: (20/2)+px;
+
+        &:first-child {
+          background-image: none;
+        }
+      }
+    }
+  }
+
+
+
+  //日程・結果
+  //.matches
+  .matches {
+
+    //.matches__table
+    &__table {
+      tbody {
+        td {
+          text-align: center;
+        }
+
+        // td:nth-child(2),
+        // td:nth-child(3),
+        // td:nth-child(4) {
+        //   text-align: center;
+        // }
+
+        // td:nth-child(4) {
+        //   width: 40%;
+        // }
+      }
+    } //.matches__table
+  } //.matches
+
+
+
+
+
+  //ポイントランキング
+  //.point_rank
+  .point_rank {
+    margin-top: (60/2)+px;
+
+    //.point_rank__nav
+    &__nav {
+      margin-top: (20/2)+px;
+
+      //.point_rank__nav__list
+      &__list {
+        display: table;
+        width: perCalc(710, 750);
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      //.point_rank__nav__item
+      &__item {
+        display: table-cell;
+        width: 50%;
+        vertical-align: middle;
+
+        a {
+          @include link-decoration(#999, #fff, none, none);
+          display: block;
+          padding: (20/2)+px 4px;
+          background-color: #585959;
+          font-weight: bold;
+          font-size: (24/2)+px;
+          text-align: center;
+
+          &.selected,
+          &:hover {
+            background-color: $key-color;
+            color: #fff;
+          }
+        }
+      } //.point_rank__nav__item
+    }
+
+    //.point_rank__table
+    &__table {
+      display: none;
+
+      tbody {
+        td {
+          text-align: center;
+
+          &:first-child {
+            font-weight: bold;
+          }
+        }
+      }
+
+      &.selected {
+        display: table;
+      }
+    } //.point_rank__table
+  } //.point_rank
+
+
+
+
+
+  //グランプリ情報・ラウンド情報
+  //.race_info
+  .race_info {
+    margin-top: (60/2)+px;
+
+    //.race_info__accordion--trigger
+    &__accordion--trigger {
+      cursor: pointer;
+      position: relative;
+      display: table;
+      width: perCalc(710, 750);
+      margin-right: auto;
+      margin-left: auto;
+      border-bottom: 1px solid $border-color;
+
+      &:after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: inline-block;
+        width: (40/2)+px;
+        height: (40/2)+px;
+        background-image: url(/assets/images/motorsports/icon-plus.png);
+        background-position: 0 center;
+        background-repeat: no-repeat;
+        background-size: (40/2)+px;
+        @include hide-text;
+      }
+
+      dt, dd {
+        display: table-cell;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        color: #fff;
+        font-size: (20/2)+px;
+        vertical-align: middle;
+      }
+
+      dt {
+        width: perCalc(250, 710);
+        padding-right: 5px;
+      }
+
+      dd {
+        padding-right: 40px;
+        padding-left: (28/2)+px;
+        background-image: url(/assets/images/big6/bgline-table.png);
+        background-position: 0 center;
+        background-repeat: no-repeat;
+        background-size: 1px 60%;
+      }
+
+      &:hover {
+        dt, dd {
+          background-color: #111;
+        }
+
+        &:after {
+          @include opacity(0.8);
+        }
+      }
+
+      &.selected {
+        &:after {
+          background-image: url(/assets/images/motorsports/icon-minus.png);
+        }
+      }
+    } //.race_info__accordion--trigger
+
+    //.race_info__accordion--body
+    &__accordion--body {}
+
+    //.race_info__table
+    &__table {
+      th, td {
+        background-color: #111;
+      }
+
+      tbody {
+        td {
+          text-align: center;
+        }
+
+        // td:nth-child(2),
+        // td:nth-child(3),
+        // td:nth-child(4) {
+        //   text-align: center;
+        // }
+
+        // td:nth-child(4) {
+        //   width: 40%;
+        // }
+      }
+    } //.race_info__table
+
+    //テーブルを非表示
+    .race_info__accordion--trigger + .race_info__accordion--body {
+      // height: 0;
+      max-height: 0;
+      @include opacity(0);
+    }
+
+    //triggerにselectedがあれば表示
+    .race_info__accordion--trigger.selected + .race_info__accordion--body {
+      // height: auto;
+      max-height: 20000px;
+      @include opacity(1);
+      transition: opacity 0.5s;
+    }
+  } //.race_info
+
+  //WRCのグランプリ情報・ラウンド情報はイレギュラーレイアウト
+  //.motorsports--wrc
+  &.motorsports--wrc .race_info__table {
+    tbody {
+      td:first-child {
+        width: 10%;
+      }
+    }
+  }
+
+
+
+
+
+  //チーム&amp;ドライバー
+  //.team_driver
+  .team_driver {
+    margin-top: (60/2)+px;
+    width: perCalc(710, 750);
+    margin-right: auto;
+    margin-left: auto;
+
+    //.team_driver__heading
+    &__heading {
+      padding: (24/2)+px perCalc(30, 710);
+      background-color: #232323;
+      color: #fff;
+      font-weight: bold;
+      font-size: (22/2)+px;
+    }
+
+    //.team_driver__body
+    &__body {
+      // overflow: hidden;
+      padding: (24/2)+px perCalc(30, 710);
+      background-color: #151515;
+
+      //.team_driver__body__heading
+      &__heading {
+        color: #cc141d;
+        font-weight: bold;
+        font-size: (24/2)+px;
+      } //.team_driver__body__heading
+
+      p {
+        line-height: 1.2;
+        margin: 1em 0;
+        color: #fff;
+        font-size: (20/2)+px;
+      }
+
+      //.team_driver__body__small
+      &__small {
+        font-size: (20/2)+px;
+      } //.team_driver__body__small
+
+      //.team_driver__body__table--team
+      &__table--team {
+        margin-top: 1em;
+
+        th,
+        td {
+          color: #fff;
+          padding-bottom: 0.25em;
+          font-size: (20/2)+px;
+        }
+
+        th + td {
+          padding-left: 36px;
+        }
+      } //.team_driver__body__table--team
+
+      .column + .column {
+        margin-top: (40/2)+px;
+      }
+
+
+      //.team_driver__body--ratio2
+      &--ratio2 {
+        .column {
+          // width: 50%;
+          // float: left;
+
+          &:nth-child(2) {
+            // float: right;
+          }
+        }
+      } //.team_driver__body--ratio2
+    } //.team_driver__body
+  } //.team_driver
 }

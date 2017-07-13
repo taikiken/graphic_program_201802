@@ -137,7 +137,7 @@ gulp.task 'carousel:concat:dev', ->
 gulp.task 'carousel:concat:build', ->
   clone = dependencies.slice(0)
 #  clone.push dir.src + '/_src/babels_carousel/dependencies/moku/moku.min.js'
-  clone.push dir.src + '/_src/babels_carousel/dest/carousel_app.bundle.js'
+  clone.push dir.src + '/babels_carousel/dest/carousel_app.bundle.js'
 
   return gulp.src clone
     .pipe $.concat 'carousel_app.bundle.js'

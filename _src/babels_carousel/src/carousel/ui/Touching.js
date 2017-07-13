@@ -242,7 +242,7 @@ export default class Touching extends EventDispatcher {
    * - blur
    */
   start() {
-    console.log('Touching.start', this.started);
+    // console.log('Touching.start', this.started);
     if (this.started) {
       return;
     }
@@ -293,7 +293,7 @@ export default class Touching extends EventDispatcher {
    * @param {TouchEvent} event touchstart Event
    */
   onStart(event) {
-    console.log('Touching.onStart', event);
+    // console.log('Touching.onStart', event);
     // event unbind <- 二重 bind にならないように
     this.dispose();
     // vectors を初期化
@@ -355,7 +355,7 @@ export default class Touching extends EventDispatcher {
    * @param {TouchEvent} event touchend Event
    */
   onEnd(event) {
-    console.log('Touching.onEnd', event);
+    // console.log('Touching.onEnd', event);
     // console.log('Touching.onEnd', event);
     const vectors = this.vectors;
     // 現在 position
@@ -388,7 +388,7 @@ export default class Touching extends EventDispatcher {
    * - {@link Touching.dragCancel} を実行します
    */
   onCancel() {
-    console.log('Touching.onCancel');
+    // console.log('Touching.onCancel');
     this.dispose();
     this.reset();
     this.dragCancel();
@@ -440,7 +440,7 @@ export default class Touching extends EventDispatcher {
    * @param {boolean} swipeLeft - direction: left
    */
   dragEnd(position, between, scrolling, move, swipeRight, swipeLeft) {
-    console.log('Touching.dragEnd -----------------', this.draggEvents.end);
+    // console.log('Touching.dragEnd -----------------', this.draggEvents.end);
     const dragging = this.draggEvents.end;
     dragging.position = position;
     dragging.between = between;

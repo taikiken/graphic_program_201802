@@ -153,6 +153,687 @@
         // eof: 記事一覧: sp banner
         // ---------------------------------------------------- ?>
 
+        <div class="motorsports_stats">
+
+          <section class="matches">
+            <h2 class="matches__heading mod-headingA">ラリー・ポーランド - 最終結果（7月2日）</h2>
+            <table class="matches__table mod-table">
+              <thead>
+                <tr>
+                  <th class="matches__table__th">順位</th>
+                  <th class="matches__table__th">レーサー / チーム</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>ティエリー・ヌービル（ヒュンダイ）</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>ヘイデン・パッドン（ヒュンダイ）</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>セバスチャン・オジェ（M-スポーツ／フォード）</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>ダニ・ソルド（ヒュンダイ）</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>ステファン・ルフェーブル（シトロエン）</td>
+                </tr>
+              </tbody>
+            </table><!-- /.matches__table -->
+          </section><!-- /.matches -->
+
+          <section class="point_rank">
+            <h2 class="point_rank__heading mod-headingA">ポイントランキング</h2>
+
+            <nav class="point_rank__nav">
+              <ul class="point_rank__nav__list" id="js-point_rank__nav__list">
+                <li class="point_rank__nav__item"><a class="point_rank__nav--driver js-tab-link selected" href="#point_rank--driver">ドライバーランキング</a></li>
+                <li class="point_rank__nav__item"><a class="point_rank__nav--team  js-tab-link" href="#point_rank--team">チームランキング</a></li>
+              </ul>
+            </nav><!-- /.point_rank__nav -->
+
+            <table id="point_rank--driver" class="point_rank__table mod-table selected">
+              <thead>
+                <tr>
+                  <th class="point_rank__table__th">順位</th>
+                  <th class="point_rank__table__th">ドライバー</th>
+                  <th class="point_rank__table__th">チーム</th>
+                  <th class="point_rank__table__th">ポイント</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>セバスチャン・オジェ</td>
+                  <td>M-スポーツ／フォード</td>
+                  <td>160</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>ティエリー・ヌービル</td>
+                  <td>ヒュンダイ</td>
+                  <td>149</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>ヤリ-マティ・ラトバラ</td>
+                  <td>トヨタ</td>
+                  <td>112</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>オット・タナク</td>
+                  <td>M-スポーツ／フォード</td>
+                  <td>108</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>ダニ・ソルド</td>
+                  <td>ヒュンダイ</td>
+                  <td>82</td>
+                </tr>
+              </tbody>
+            </table><!-- /.point_rank__table -->
+
+            <table id="point_rank--team" class="point_rank__table mod-table">
+              <thead>
+                <tr>
+                  <th class="point_rank__table__th">順位</th>
+                  <th class="point_rank__table__th">チーム</th>
+                  <th class="point_rank__table__th">ポイント</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>M-スポーツ</td>
+                  <td>259</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>ヒュンダイ</td>
+                  <td>237</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>トヨタ</td>
+                  <td>153</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>シトロエン</td>
+                  <td>117</td>
+                </tr>
+              </tbody>
+            </table><!-- /.point_rank__table -->
+          </section><!-- /.point_rank -->
+
+          <section class="race_info" id="js-race_info">
+            <h2 class="race_info__heading mod-headingA">レース日程・結果</h2>
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・モンテカルロ</dt>
+                <dd>1月20日-22日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>セバスチャン・オジェ（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>ヤリ-マティ・ラトバラ（トヨタ）</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>オット・タナク（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>ダニ・ソルド（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>クレイグ・ブリーン（シトロエン）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・スウェーデン</dt>
+                <dd>2月10日-12日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>ヤリ-マティ・ラトバラ（トヨタ）</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>オット・タナク（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>セバスチャン・オジェ（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>ダニ・ソルド（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>クレイグ・ブリーン（シトロエン）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・メキシコ</dt>
+                <dd>3月10日-12日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>クリス・ミーク（シトロエン）</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>セバスチャン・オジェ（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>ティエリー・ヌービル（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>オット・タナク（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>ヘイデン・パッドン（ヒュンダイ）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・フランス</dt>
+                <dd>4月7日-4月9日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>ティエリー・ヌービル（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>セバスチャン・オジェ（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>ダニ・ソルド（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>ヤリ-マティ・ラトバラ（トヨタ）</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>クレイグ・ブリーン（シトロエン）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・アルゼンチン</dt>
+                <dd>4月28日-4月30日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>ティエリー・ヌービル（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>エルフィン・エバンス（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>オット・タナク（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>セバスチャン・オジェ（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>ヤリ-マティ・ラトバラ（トヨタ）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・ポルトガル</dt>
+                <dd>5月19日-21日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>セバスチャン・オジェ（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>ティエリー・ヌービル（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>ダニ・ソルド（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>オット・タナク（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>クレイグ・ブリーン（シトロエン）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・イタリア</dt>
+                <dd>6月9日-11日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>オット・タナク（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>ヤリ-マティ・ラトバラ（トヨタ）</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>ティエリー・ヌービル（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>エサペッカ・ラッピ（トヨタ）</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>セバスチャン・オジェ（M-スポーツ／フォード）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・ポーランド</dt>
+                <dd>6月29日-7月2日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>ティエリー・ヌービル（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>ヘイデン・パッドン（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>セバスチャン・オジェ（M-スポーツ／フォード）</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>ダニ・ソルド（ヒュンダイ）</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>ステファン・ルフェーブル（シトロエン）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・フィンランド</dt>
+                <dd>7月27日-7月30日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・ドイツ</dt>
+                <dd>8月17日-20日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・スペイン</dt>
+                <dd>10月5日-8日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・イギリス</dt>
+                <dd>10月26日-29日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ラリー・オーストラリア</dt>
+                <dd>11月16日-19日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">順位</th>
+                      <th class="race_info__table__th">レーサー/チーム名</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
+          </section><!-- /.race_info -->
+
+          <section class="team_driver">
+            <h2 class="team_driver__heading">TOYOTA GAZOO Racing WRC 2017年 チーム&amp;ドライバー</h2>
+            <div class="team_driver__body team_driver__body--ratio2">
+              <div class="column">
+                <h3 class="team_driver__body__heading">チーム概要</h3>
+                <table class="team_driver__body__table--team">
+                  <tbody>
+                    <tr>
+                      <th>拠点</th>
+                      <td>日本</td>
+                    </tr>
+                    <tr>
+                      <th>設立</th>
+                      <td>2017年</td>
+                    </tr>
+                    <tr>
+                      <th>使用タイヤ</th>
+                      <td>ミシュラン</td>
+                    </tr>
+                    <tr>
+                      <th>チーム総代表</th>
+                      <td>豊田 章男</td>
+                    </tr>
+                    <tr>
+                      <th>チーム代表</th>
+                      <td>トミ・マキネン</td>
+                    </tr>
+                    <tr>
+                      <th>チーム副代表</th>
+                      <td>嵯峨 宏英</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div><!-- /.column -->
+
+              <div class="column">
+                <h3 class="team_driver__body__heading">ドライバー</h3>
+                <p>ヤリマティ・ラトバラ（フィンランド）<br />
+                <span class="team_driver__body__small">コ・ドライバー　ミイカ・アンティラ</span></p>
+                <p>ユホ・ハンニネン（フィンランド）<br />
+                <span class="team_driver__body__small">コ・ドライバー　カイ・リンドストローム</span></p>
+                <p>エサペッカ・ラッピ（フィンランド）<br />
+                <span class="team_driver__body__small">コ・ドライバー　ヤンネ・フェルム</span></p>
+              </div><!-- /.column -->
+            </div><!-- /.team_driver__body -->
+          </section><!-- /.team_driver -->
+        </div><!-- /.motorsports_stats -->
+
         <?php
         // headline-container
         // ===========================================
@@ -270,6 +951,8 @@ if (!$from_webview) :
 endif;
 // -----------------------------------------
 ?>
+
+<script src="/assets/js/motorsports_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 </body>
 </html>

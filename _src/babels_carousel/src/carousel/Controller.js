@@ -186,7 +186,7 @@ export default class Controller extends EventDispatcher {
     if (this.moving) {
       return;
     }
-    console.log('Controller.next', this.nextEvents);
+    // console.log('Controller.next', this.nextEvents);
     this.dispatch(this.nextEvents);
   }
   /**
