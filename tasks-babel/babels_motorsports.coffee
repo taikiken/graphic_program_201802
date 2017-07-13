@@ -12,7 +12,7 @@
 
 ###
   汎用カルーセル開発
-  target: babels_carousel
+  target: babels_motorsports
 ###
 
 setting = require '../setting'
@@ -54,24 +54,24 @@ htdocs = dir.htdocs
 # --------------------------------------------
 
 files = [
-  dir.src + '/babels_carousel/src/**/*.{js,jsx}'
+  dir.src + '/babels_motorsports/src/**/*.{js,jsx}'
 ]
 
 # eslint
-gulp.task 'carousel:eslint', ->
+gulp.task 'motorsports:eslint', ->
   return gulp.src files
     .pipe $.eslint useEslintrc: true
     .pipe $.eslint.format()
     .pipe $.eslint.failAfterError()
-    .pipe $.size title: '*** carousel:eslint ***'
+    .pipe $.size title: '*** motorsports:eslint ***'
 
 # babel
-gulp.task 'carousel:babel', ->
+gulp.task 'motorsports:babel', ->
   return gulp.src files
   .pipe $.babel()
   .pipe $.replaceTask patterns: patterns
-  .pipe gulp.dest dir.src + '/babels_carousel/compile'
-  .pipe $.size title: '*** carousel:babel ***'
+  .pipe gulp.dest dir.src + '/babels_motorsports/compile'
+  .pipe $.size title: '*** motorsports:babel ***'
 
 # webpack
 webpack = $$.webpack
@@ -79,15 +79,15 @@ webpack = $$.webpack
 config = setting.webpackConfig
 
 # dev
-gulp.task 'carousel:pack:dev', ( cb ) ->
+gulp.task 'motorsports:pack:dev', ( cb ) ->
   conf = Object.create config
 
   conf.plugins = [
     new webpack.optimize.DedupePlugin()
   ]
-  conf.entry = conf.entry + '/_src/babels_carousel/compile/carousel_app.js'
-  conf.output.path = '_src/babels_carousel/dest';
-  conf.output.filename = 'carousel_app.bundle.js'
+  conf.entry = conf.entry + '/_src/babels_motorsports/compile/motorsports_app.js'
+  conf.output.path = '_src/babels_motorsports/dest';
+  conf.output.filename = 'motorsports_app.bundle.js'
 
   webpack conf, ( err, stats ) ->
     if ( err )
@@ -98,16 +98,16 @@ gulp.task 'carousel:pack:dev', ( cb ) ->
   return
 
 # dev build
-gulp.task 'carousel:pack:build', ( cb ) ->
+gulp.task 'motorsports:pack:build', ( cb ) ->
   conf = Object.create config
 
   conf.plugins = [
     new webpack.optimize.DedupePlugin()
     new webpack.optimize.UglifyJsPlugin compress: warnings: false
   ]
-  conf.entry = conf.entry + '/_src/babels_carousel/compile/carousel_app.js'
-  conf.output.path = '_src/babels_carousel/dest';
-  conf.output.filename = 'carousel_app.bundle.js'
+  conf.entry = conf.entry + '/_src/babels_motorsports/compile/motorsports_app.js'
+  conf.output.path = '_src/babels_motorsports/dest';
+  conf.output.filename = 'motorsports_app.bundle.js'
 
   webpack conf, ( err, stats ) ->
     if ( err )
@@ -120,62 +120,62 @@ gulp.task 'carousel:pack:build', ( cb ) ->
 # concat dependencies
 # 依存ライブラリ
 dependencies = []
-#dependencies.push dir.src + '/babels_carousel/dependencies/gsap/src/minified/TweenMax.min.js'
+#dependencies.push dir.src + '/babels_motorsports/dependencies/gsap/src/minified/TweenMax.min.js'
 
-gulp.task 'carousel:concat:dev', ->
+gulp.task 'motorsports:concat:dev', ->
   clone = dependencies.slice(0)
-#  clone.push dir.src + '/babels_carousel/dependencies/moku/moku.js'
-  clone.push dir.src + '/babels_carousel/dest/carousel_app.bundle.js'
+#  clone.push dir.src + '/babels_motorsports/dependencies/moku/moku.js'
+  clone.push dir.src + '/babels_motorsports/dest/motorsports_app.bundle.js'
 
   return gulp.src clone
-    .pipe $.concat 'carousel_app.bundle.js'
+    .pipe $.concat 'motorsports_app.bundle.js'
     .pipe gulp.dest dir.app + '/assets/js'
     .pipe gulp.dest './public/assets/js'
-    .pipe $.size title: '*** carousel:concat:dev ***'
+    .pipe $.size title: '*** motorsports:concat:dev ***'
 
 # concat build
-gulp.task 'carousel:concat:build', ->
+gulp.task 'motorsports:concat:build', ->
   clone = dependencies.slice(0)
-#  clone.push dir.src + '/_src/babels_carousel/dependencies/moku/moku.min.js'
-  clone.push dir.src + '/_src/babels_carousel/dest/carousel_app.bundle.js'
+#  clone.push dir.src + '/_src/babels_motorsports/dependencies/moku/moku.min.js'
+  clone.push dir.src + '/_src/babels_motorsports/dest/motorsports_app.bundle.js'
 
   return gulp.src clone
-    .pipe $.concat 'carousel_app.bundle.js'
+    .pipe $.concat 'motorsports_app.bundle.js'
     .pipe gulp.dest dir.app + '/assets/js'
     .pipe gulp.dest './public/assets/js'
-    .pipe $.size title: '*** carousel:concat:build ***'
+    .pipe $.size title: '*** motorsports:concat:build ***'
 
 # --------------------------------------------
 # exe 実行 file
 # --------------------------------------------
 # dev
-gulp.task 'carousel:dev', ( cb ) ->
+gulp.task 'motorsports:dev', ( cb ) ->
   runSequence(
-    'carousel:eslint'
-    'carousel:babel'
-    'carousel:pack:dev'
-    'carousel:concat:dev'
+    'motorsports:eslint'
+    'motorsports:babel'
+    'motorsports:pack:dev'
+    'motorsports:concat:dev'
     cb
   )
   return
 
 # dev
-gulp.task 'carousel:make', ( cb ) ->
+gulp.task 'motorsports:make', ( cb ) ->
   runSequence(
-#    'carousel:eslint'
-    'carousel:babel'
-    'carousel:pack:dev'
-    'carousel:concat:dev'
+#    'motorsports:eslint'
+    'motorsports:babel'
+    'motorsports:pack:dev'
+    'motorsports:concat:dev'
     cb
   )
   return
 
 # build
-gulp.task 'carousel:build', ( cb ) ->
+gulp.task 'motorsports:build', ( cb ) ->
   runSequence(
-    'carousel:babel'
-    'carousel:pack:build'
-    'carousel:concat:build'
+    'motorsports:babel'
+    'motorsports:pack:build'
+    'motorsports:concat:build'
     cb
   )
   return
