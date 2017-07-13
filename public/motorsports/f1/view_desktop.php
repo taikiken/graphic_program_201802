@@ -186,9 +186,9 @@
             <h2 class="point_rank__heading mod-headingA">ポイントランキング</h2>
 
             <nav class="point_rank__nav">
-              <ul class="point_rank__nav__list">
-                <li class="point_rank__nav__item"><a class="point_rank__nav--driver selected" href="#">ドライバーランキング</a></li>
-                <li class="point_rank__nav__item"><a class="point_rank__nav--team" href="#">チームランキング</a></li>
+              <ul class="point_rank__nav__list" id="js-point_rank__nav__list">
+                <li class="point_rank__nav__item"><a class="point_rank__nav--driver js-point_rank__nav--link selected" href="#point_rank--driver">ドライバーランキング</a></li>
+                <li class="point_rank__nav__item"><a class="point_rank__nav--team  js-point_rank__nav--link" href="#point_rank--team">チームランキング</a></li>
               </ul>
             </nav><!-- /.point_rank__nav -->
 
@@ -273,112 +273,117 @@
             </table><!-- /.point_rank__table -->
           </section><!-- /.point_rank -->
 
-          <section class="race_info">
+          <section class="race_info" id="js-race_info">
             <h2 class="race_info__heading mod-headingA">グランプリ情報</h2>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>オーストラリアGP</dt>
-              <dd>3月24日-26日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>フリー走行1</td>
-                    <td>3月24日（金）</td>
-                    <td>10:00 ~</td>
-                    <td>ルイス・ハミルトン（メルセデス）</td>
-                  </tr>
-                  <tr>
-                    <td>フリー走行2</td>
-                    <td>3月24日（金）</td>
-                    <td>14:00 ~</td>
-                    <td>ルイス・ハミルトン（メルセデス）</td>
-                  </tr>
-                  <tr>
-                    <td>フリー走行3</td>
-                    <td>3月25日（土）</td>
-                    <td>12:00 ~</td>
-                    <td>セバスチャン・ベッテル（フェラーリ）</td>
-                  </tr>
-                  <tr>
-                    <td>予選</td>
-                    <td>3月25日（土）</td>
-                    <td>15:00 ~</td>
-                    <td>ルイス・ハミルトン（メルセデス）</td>
-                  </tr>
-                  <tr>
-                    <td>決勝</td>
-                    <td>3月26日（日）</td>
-                    <td>14:00 ~</td>
-                    <td>セバスチャン・ベッテル（フェラーリ）</td>
-                  </tr>
-                </tbody>
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__body -->
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>オーストラリアGP</dt>
+                <dd>3月24日-26日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>フリー走行1</td>
+                      <td>3月24日（金）</td>
+                      <td>10:00 ~</td>
+                      <td>ルイス・ハミルトン（メルセデス）</td>
+                    </tr>
+                    <tr>
+                      <td>フリー走行2</td>
+                      <td>3月24日（金）</td>
+                      <td>14:00 ~</td>
+                      <td>ルイス・ハミルトン（メルセデス）</td>
+                    </tr>
+                    <tr>
+                      <td>フリー走行3</td>
+                      <td>3月25日（土）</td>
+                      <td>12:00 ~</td>
+                      <td>セバスチャン・ベッテル（フェラーリ）</td>
+                    </tr>
+                    <tr>
+                      <td>予選</td>
+                      <td>3月25日（土）</td>
+                      <td>15:00 ~</td>
+                      <td>ルイス・ハミルトン（メルセデス）</td>
+                    </tr>
+                    <tr>
+                      <td>決勝</td>
+                      <td>3月26日（日）</td>
+                      <td>14:00 ~</td>
+                      <td>セバスチャン・ベッテル（フェラーリ）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger selected">
-              <dt>中国GP</dt>
-              <dd>4月7日-9日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>フリー走行1</td>
-                    <td>4月7日（金）</td>
-                    <td>11:00 ~</td>
-                    <td>マックス・フェルスタッペン（レッドブル）</td>
-                  </tr>
-                  <tr>
-                    <td>フリー走行2</td>
-                    <td>4月7日（金）</td>
-                    <td>15:00 ~</td>
-                    <td>中止</td>
-                  </tr>
-                  <tr>
-                    <td>フリー走行3</td>
-                    <td>4月8日（土）</td>
-                    <td>13:00 ~</td>
-                    <td>セバスチャン・ベッテル（フェラーリ）</td>
-                  </tr>
-                  <tr>
-                    <td>予選</td>
-                    <td>4月8日（土）</td>
-                    <td>16:00 ~</td>
-                    <td>ルイス・ハミルトン（メルセデス）</td>
-                  </tr>
-                  <tr>
-                    <td>決勝</td>
-                    <td>4月9日（日）</td>
-                    <td>15:00 ~</td>
-                    <td>ルイス・ハミルトン（メルセデス）</td>
-                  </tr>
-                </tbody>
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger selected">
+                <dt>中国GP</dt>
+                <dd>4月7日-9日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>フリー走行1</td>
+                      <td>4月7日（金）</td>
+                      <td>11:00 ~</td>
+                      <td>マックス・フェルスタッペン（レッドブル）</td>
+                    </tr>
+                    <tr>
+                      <td>フリー走行2</td>
+                      <td>4月7日（金）</td>
+                      <td>15:00 ~</td>
+                      <td>中止</td>
+                    </tr>
+                    <tr>
+                      <td>フリー走行3</td>
+                      <td>4月8日（土）</td>
+                      <td>13:00 ~</td>
+                      <td>セバスチャン・ベッテル（フェラーリ）</td>
+                    </tr>
+                    <tr>
+                      <td>予選</td>
+                      <td>4月8日（土）</td>
+                      <td>16:00 ~</td>
+                      <td>ルイス・ハミルトン（メルセデス）</td>
+                    </tr>
+                    <tr>
+                      <td>決勝</td>
+                      <td>4月9日（日）</td>
+                      <td>15:00 ~</td>
+                      <td>ルイス・ハミルトン（メルセデス）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>バーレーンGP</dt>
-              <dd>4月14日-16日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>バーレーンGP</dt>
+                <dd>4月14日-16日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -422,12 +427,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>ロシアGP</dt>
-              <dd>4月28日-30日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ロシアGP</dt>
+                <dd>4月28日-30日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -471,12 +478,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>スペインGP</dt>
-              <dd>5月12日-14日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>スペインGP</dt>
+                <dd>5月12日-14日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -520,12 +529,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>モナコGP</dt>
-              <dd>5月25日-28日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>モナコGP</dt>
+                <dd>5月25日-28日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -569,12 +580,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>カナダGP</dt>
-              <dd>6月9日-11日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>カナダGP</dt>
+                <dd>6月9日-11日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -618,12 +631,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>アゼルバイジャンGP</dt>
-              <dd>6月23日-25日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>アゼルバイジャンGP</dt>
+                <dd>6月23日-25日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -667,12 +682,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>オーストリアGP</dt>
-              <dd>7月7日-9日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>オーストリアGP</dt>
+                <dd>7月7日-9日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -716,12 +733,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>イギリスGP</dt>
-              <dd>7月14日-16日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>イギリスGP</dt>
+                <dd>7月14日-16日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -765,12 +784,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>ハンガリーGP</dt>
-              <dd>7月28日-30日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ハンガリーGP</dt>
+                <dd>7月28日-30日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -814,12 +835,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>ベルギーGP</dt>
-              <dd>8月25日-27日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ベルギーGP</dt>
+                <dd>8月25日-27日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -863,12 +886,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>イタリアGP</dt>
-              <dd>9月1日-3日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>イタリアGP</dt>
+                <dd>9月1日-3日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -912,12 +937,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>シンガポールGP</dt>
-              <dd>9月15日-17日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>シンガポールGP</dt>
+                <dd>9月15日-17日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -961,12 +988,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>マレーシアGP</dt>
-              <dd>9月29日-10月1日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>マレーシアGP</dt>
+                <dd>9月29日-10月1日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -1010,12 +1039,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>日本GP</dt>
-              <dd>10月6日-8日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>日本GP</dt>
+                <dd>10月6日-8日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -1059,12 +1090,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>アメリカGP</dt>
-              <dd>10月20日-22日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>アメリカGP</dt>
+                <dd>10月20日-22日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -1108,12 +1141,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>メキシコGP</dt>
-              <dd>10月27日-29日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>メキシコGP</dt>
+                <dd>10月27日-29日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -1157,12 +1192,14 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>ブラジルGP</dt>
-              <dd>11月10日-12日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>ブラジルGP</dt>
+                <dd>11月10日-12日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
               <table class="race_info__table mod-table">
                 <thead>
                   <tr>
@@ -1206,55 +1243,58 @@
                 </tbody>
               </table><!-- /.race_info__table -->
             </div><!-- /.race_info__accordion--body -->
+            </div>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>アブダビGP</dt>
-              <dd>11月24日-26日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>フリー走行1</td>
-                    <td>11月24日（金）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>フリー走行2</td>
-                    <td>11月24日（金）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>フリー走行3</td>
-                    <td>11月25日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選</td>
-                    <td>11月25日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝</td>
-                    <td>11月26日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                </tbody>
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>アブダビGP</dt>
+                <dd>11月24日-26日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>フリー走行1</td>
+                      <td>11月24日（金）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>フリー走行2</td>
+                      <td>11月24日（金）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>フリー走行3</td>
+                      <td>11月25日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選</td>
+                      <td>11月25日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝</td>
+                      <td>11月26日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div>
           </section><!-- /.race_info -->
 
         </div><!-- /.motorsports_stats -->
