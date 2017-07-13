@@ -37,6 +37,11 @@ export default class Tabs {
   // ----------------------------------------
   // STATIC CONST
   // ----------------------------------------
+  /**
+   * activate 時に付与する className - selected
+   * @const SELECTED
+   * @returns {string} activate 時に付与する className - selected を返します
+   */
   static get SELECTED() {
     return 'selected';
   }

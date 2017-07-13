@@ -13,12 +13,27 @@
 'use strict';
 
 import Tabs from './ms/ui/Tabs';
+import Accordions from './ms/ui/Accordions';
 
-const settingTab = () => {
+// ----------------------------------------
+/**
+ * tab menu を実装します
+ */
+const initTab = () => {
   const elements = Tabs.init();
   elements.map((element) => {
     const tab = new Tabs(element);
     tab.start();
+    return tab;
+  });
+};
+
+const initAccordion = () => {
+  const { triggers, bodies } = Accordions.init();
+  triggers.map((trigger, index) => {
+    const accordion = new Accordions(trigger, bodies[index]);
+    accordion.start();
+    return accordion;
   });
 };
 
@@ -26,4 +41,6 @@ const settingTab = () => {
 // DOMContentLoaded - body bottom 記述なので event 使用しない
 
 // tab setting
-settingTab();
+initTab();
+
+initAccordion();
