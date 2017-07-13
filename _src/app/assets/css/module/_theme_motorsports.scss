@@ -315,6 +315,8 @@
 
     //.point_rank__table
     &__table {
+      display: none;
+
       tbody {
         td {
           text-align: center;
@@ -323,6 +325,10 @@
             font-weight: bold;
           }
         }
+      }
+
+      &.selected {
+        display: table;
       }
     } //.point_rank__table
   } //.point_rank
