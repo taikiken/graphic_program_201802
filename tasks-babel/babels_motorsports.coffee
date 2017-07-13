@@ -131,6 +131,7 @@ gulp.task 'motorsports:concat:dev', ->
 
   return gulp.src clone
     .pipe $.concat 'motorsports_app.bundle.js'
+    .pipe $.debug title: '[MOTORSPORTS:CONCAT]'
     .pipe gulp.dest dir.app + '/assets/js'
     .pipe gulp.dest './public/assets/js'
     .pipe $.size title: '*** motorsports:concat:dev ***'
@@ -139,13 +140,13 @@ gulp.task 'motorsports:concat:dev', ->
 gulp.task 'motorsports:concat:build', ->
   clone = dependencies.slice(0)
 #  clone.push dir.src + '/_src/babels_motorsports/dependencies/moku/moku.min.js'
-  clone.push dir.src + '/_src/babels_motorsports/dest/motorsports_app.bundle.js'
-
+  clone.push dir.src + '/babels_motorsports/dest/motorsports_app.bundle.js'
+#  console.log clone
   return gulp.src clone
     .pipe $.concat 'motorsports_app.bundle.js'
-    .pipe $.debug title: '[MOTORSPORTS:CONCAT]'
     .pipe gulp.dest dir.app + '/assets/js'
     .pipe gulp.dest './public/assets/js'
+    .pipe $.debug title: '[MOTORSPORTS:CONCAT]'
     .pipe $.size title: '*** motorsports:concat:build ***'
 
 # --------------------------------------------
