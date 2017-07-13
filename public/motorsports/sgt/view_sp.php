@@ -160,48 +160,36 @@
             <table class="matches__table mod-table">
               <thead>
                 <tr>
-                  <th class="matches__table__th">イベント</th>
-                  <th class="matches__table__th">開催日</th>
-                  <th class="matches__table__th">日本時間</th>
-                  <th class="matches__table__th">1位</th>
+                  <th class="matches__table__th">順位</th>
+                  <th class="matches__table__th">ドライバー</th>
+                  <th class="matches__table__th">チーム</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>公式練習（GT500）</td>
-                  <td>5月20日（土）</td>
-                  <td>09:00 ~</td>
-                  <td>山本尚貴／伊沢拓也（#100 RAYBRIG NSX-GT）</td>
+                  <td>1</td>
+                  <td>中嶋一貴／ジェームス・ロシター</td>
+                  <td>#36 au TOM'S LC500</td>
                 </tr>
                 <tr>
-                  <td>公式練習（GT300）</td>
-                  <td>5月20日（土）</td>
-                  <td>09:00 ~</td>
-                  <td>中山友貴／川端伸太朗（#18 UPGARAGE BANDOH 86）</td>
+                  <td>2</td>
+                  <td>塚越広大／小暮卓史</td>
+                  <td>#17 KEIHIN NSX-GT</td>
                 </tr>
                 <tr>
-                  <td>予選（GT500）</td>
-                  <td>5月20日（土）</td>
-                  <td>13:30 ~</td>
-                  <td>山本尚貴／伊沢拓也（#100 RAYBRIG NSX-GT）</td>
+                  <td>3</td>
+                  <td>山本尚貴／伊沢拓也</td>
+                  <td>#100 RAYBRIG NSX-GT</td>
                 </tr>
                 <tr>
-                  <td>予選（GT300）</td>
-                  <td>5月20日（土）</td>
-                  <td>13:30 ~</td>
-                  <td>松井孝允／山下健太（#25 VivaC 86 MC）</td>
+                  <td>4</td>
+                  <td>本山哲／千代勝正</td>
+                  <td>#46 S Road CRAFTSPORTS GT-R</td>
                 </tr>
                 <tr>
-                  <td>決勝（GT500）</td>
-                  <td>5月21日（日）</td>
-                  <td>14:00 ~</td>
-                  <td>中嶋一貴／ジェームス・ロシター（#36 au TOM'S LC500）</td>
-                </tr>
-                <tr>
-                  <td>決勝（GT300）</td>
-                  <td>5月21日（日）</td>
-                  <td>14:00 ~</td>
-                  <td>松井孝允／山下健太（#25 VivaC 86 MC）</td>
+                  <td>5</td>
+                  <td>松田次生／ロニー・クインタレッリ</td>
+                  <td>#23 MOTUL AUTECH GT-R</td>
                 </tr>
               </tbody>
             </table><!-- /.matches__table -->
@@ -212,8 +200,8 @@
 
             <nav class="point_rank__nav">
               <ul class="point_rank__nav__list" id="js-point_rank__nav__list">
-                <li class="point_rank__nav__item"><a class="point_rank__nav--driver js-point_rank__nav--link selected" href="#point_rank--driver">ドライバーランキング</a></li>
-                <li class="point_rank__nav__item"><a class="point_rank__nav--team  js-point_rank__nav--link" href="#point_rank--team">チームランキング</a></li>
+                <li class="point_rank__nav__item"><a class="point_rank__nav--driver js-tab-link selected" href="#point_rank--driver">ドライバーランキング</a></li>
+                <li class="point_rank__nav__item"><a class="point_rank__nav--team  js-tab-link" href="#point_rank--team">チームランキング</a></li>
               </ul>
             </nav><!-- /.point_rank__nav -->
 
@@ -299,7 +287,7 @@
           </section><!-- /.point_rank -->
 
           <section class="race_info" id="js-race_info">
-            <h2 class="race_info__heading mod-headingA">グランプリ情報</h2>
+            <h2 class="race_info__heading mod-headingA">レース日程・結果</h2>
 
             <div class="js-race_info__container">
               <dl class="race_info__accordion--trigger">

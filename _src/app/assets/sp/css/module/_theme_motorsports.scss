@@ -175,18 +175,24 @@
     //.matches__table
     &__table {
       tbody {
-        td:nth-child(2),
-        td:nth-child(3),
-        td:nth-child(4) {
+        td {
           text-align: center;
         }
 
-        td:nth-child(4) {
-          // width: 40%;
-        }
+        // td:nth-child(2),
+        // td:nth-child(3),
+        // td:nth-child(4) {
+        //   text-align: center;
+        // }
+
+        // td:nth-child(4) {
+        //   width: 40%;
+        // }
       }
     } //.matches__table
   } //.matches
+
+
 
 
 
@@ -246,10 +252,12 @@
       }
 
       &.selected {
-        display: block;
+        display: table;
       }
     } //.point_rank__table
   } //.point_rank
+
+
 
 
 
@@ -334,15 +342,19 @@
       }
 
       tbody {
-        td:nth-child(2),
-        td:nth-child(3),
-        td:nth-child(4) {
+        td {
           text-align: center;
         }
 
-        td:nth-child(4) {
-          // width: 40%;
-        }
+        // td:nth-child(2),
+        // td:nth-child(3),
+        // td:nth-child(4) {
+        //   text-align: center;
+        // }
+
+        // td:nth-child(4) {
+        //   width: 40%;
+        // }
       }
     } //.race_info__table
 
@@ -361,6 +373,19 @@
       transition: opacity 0.5s;
     }
   } //.race_info
+
+  //WRCのグランプリ情報・ラウンド情報はイレギュラーレイアウト
+  //.motorsports--wrc
+  &.motorsports--wrc .race_info__table {
+    tbody {
+      td:first-child {
+        width: 10%;
+      }
+    }
+  }
+
+
+
 
 
   //チーム&amp;ドライバー

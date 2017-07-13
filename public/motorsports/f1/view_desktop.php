@@ -141,42 +141,36 @@
             <table class="matches__table mod-table">
               <thead>
                 <tr>
-                  <th class="matches__table__th">イベント</th>
-                  <th class="matches__table__th">開催日</th>
-                  <th class="matches__table__th">日本時間</th>
-                  <th class="matches__table__th">1位</th>
+                  <th class="matches__table__th">順位</th>
+                  <th class="matches__table__th">ドライバー</th>
+                  <th class="matches__table__th">チーム</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>フリー走行1</td>
-                  <td>7月7日（金）</td>
-                  <td>17:00 ~</td>
-                  <td>ルイス・ハミルトン（メルセデス）</td>
+                  <td>1</td>
+                  <td>バルテリ・ボッタス</td>
+                  <td>メルセデス</td>
                 </tr>
                 <tr>
-                  <td>フリー走行2</td>
-                  <td>7月7日（金）</td>
-                  <td>21:00 ~</td>
-                  <td>ルイス・ハミルトン（メルセデス）</td>
+                  <td>2</td>
+                  <td>セバスチャン・ベッテル</td>
+                  <td>フェラーリ</td>
                 </tr>
                 <tr>
-                  <td>フリー走行3</td>
-                  <td>7月8日（土）</td>
-                  <td>18:00 ~</td>
-                  <td>セバスチャン・ベッテル（フェラーリ）</td>
+                  <td>3</td>
+                  <td>ダニエル・リカルド</td>
+                  <td>レッドブル</td>
                 </tr>
                 <tr>
-                  <td>予選</td>
-                  <td>7月8日（土）</td>
-                  <td>21:00 ~</td>
-                  <td>バルテリ・ボッタス（メルセデス）</td>
+                  <td>4</td>
+                  <td>ルイス・ハミルトン</td>
+                  <td>メルセデス</td>
                 </tr>
                 <tr>
-                  <td>決勝</td>
-                  <td>7月9日（日）</td>
-                  <td>21:00 ~</td>
-                  <td>バルテリ・ボッタス（メルセデス）</td>
+                  <td>5</td>
+                  <td>キミ・ライコネン</td>
+                  <td>フェラーリ</td>
                 </tr>
               </tbody>
             </table><!-- /.matches__table -->
@@ -274,7 +268,7 @@
           </section><!-- /.point_rank -->
 
           <section class="race_info" id="js-race_info">
-            <h2 class="race_info__heading mod-headingA">グランプリ情報</h2>
+            <h2 class="race_info__heading mod-headingA">レース日程・結果</h2>
 
             <div class="js-race_info__container">
               <dl class="race_info__accordion--trigger">
@@ -328,7 +322,7 @@
             </div><!-- /.js-race_info__container -->
 
             <div class="js-race_info__container">
-              <dl class="race_info__accordion--trigger selected">
+              <dl class="race_info__accordion--trigger">
                 <dt>中国GP</dt>
                 <dd>4月7日-9日</dd>
               </dl><!-- /.race_info__accordion--trigger -->
