@@ -271,6 +271,8 @@ endif;
 // -----------------------------------------
 ?>
 
+<script src="/assets/js/motorsports_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
 </body>
 </html>
 <?php

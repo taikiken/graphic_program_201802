@@ -193,9 +193,9 @@
             <h2 class="point_rank__heading mod-headingA">ポイントランキング</h2>
 
             <nav class="point_rank__nav">
-              <ul class="point_rank__nav__list">
-                <li class="point_rank__nav__item"><a class="point_rank__nav--driver selected" href="#">ドライバーランキング</a></li>
-                <li class="point_rank__nav__item"><a class="point_rank__nav--team" href="#">チームランキング</a></li>
+              <ul class="point_rank__nav__list" id="js-point_rank__nav__list">
+                <li class="point_rank__nav__item"><a class="point_rank__nav--driver js-point_rank__nav--link selected" href="#point_rank--driver">ドライバーランキング</a></li>
+                <li class="point_rank__nav__item"><a class="point_rank__nav--team  js-point_rank__nav--link" href="#point_rank--team">チームランキング</a></li>
               </ul>
             </nav><!-- /.point_rank__nav -->
 
@@ -280,456 +280,464 @@
             </table><!-- /.point_rank__table -->
           </section><!-- /.point_rank -->
 
-          <section class="race_info">
+          <section class="race_info" id="js-race_info">
             <h2 class="race_info__heading mod-headingA">グランプリ情報</h2>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>岡山</dt>
-              <dd>4月8日-9日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>公式練習（GT500）</td>
-                    <td>4月8日（土）</td>
-                    <td>09:00 ~</td>
-                    <td>立川祐路／石浦宏明（#38 ZENT CERUMO LC500）</td>
-                  </tr>
-                  <tr>
-                    <td>公式練習（GT300）</td>
-                    <td>4月8日（土）</td>
-                    <td>09:00 ~</td>
-                    <td>谷口信輝／片岡龍也（#4 グッドスマイル 初音ミク AMG）</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT500）</td>
-                    <td>4月8日（土）</td>
-                    <td>14:45 ~</td>
-                    <td>野尻智紀／小林崇志（#8 ARTA NSX-GT）</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT300）</td>
-                    <td>4月8日（土）</td>
-                    <td>14:45 ~</td>
-                    <td>黒澤治樹／蒲生尚弥（#65 LEON CVSTOS AMG-GT）</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT500）</td>
-                    <td>4月9日（日）</td>
-                    <td>14:30 ~</td>
-                    <td>平川亮／ニック・キャシディ（#37 KeePer TOM'S LC500）</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT300）</td>
-                    <td>4月9日（日）</td>
-                    <td>14:30 ~</td>
-                    <td>谷口信輝／片岡龍也（#4 グッドスマイル 初音ミク AMG）</td>
-                  </tr>
-                </tbody>
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>岡山</dt>
+                <dd>4月8日-9日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>公式練習（GT500）</td>
+                      <td>4月8日（土）</td>
+                      <td>09:00 ~</td>
+                      <td>立川祐路／石浦宏明（#38 ZENT CERUMO LC500）</td>
+                    </tr>
+                    <tr>
+                      <td>公式練習（GT300）</td>
+                      <td>4月8日（土）</td>
+                      <td>09:00 ~</td>
+                      <td>谷口信輝／片岡龍也（#4 グッドスマイル 初音ミク AMG）</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT500）</td>
+                      <td>4月8日（土）</td>
+                      <td>14:45 ~</td>
+                      <td>野尻智紀／小林崇志（#8 ARTA NSX-GT）</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT300）</td>
+                      <td>4月8日（土）</td>
+                      <td>14:45 ~</td>
+                      <td>黒澤治樹／蒲生尚弥（#65 LEON CVSTOS AMG-GT）</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT500）</td>
+                      <td>4月9日（日）</td>
+                      <td>14:30 ~</td>
+                      <td>平川亮／ニック・キャシディ（#37 KeePer TOM'S LC500）</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT300）</td>
+                      <td>4月9日（日）</td>
+                      <td>14:30 ~</td>
+                      <td>谷口信輝／片岡龍也（#4 グッドスマイル 初音ミク AMG）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
 
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>富士</dt>
+                <dd>5月3日-4日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>公式練習（GT500）</td>
+                      <td>5月3日（水）</td>
+                      <td>09:00 ~</td>
+                      <td>立川祐路／石浦宏明（#38 ZENT CERUMO LC500）</td>
+                    </tr>
+                    <tr>
+                      <td>公式練習（GT300）</td>
+                      <td>5月3日（水）</td>
+                      <td>09:00 ~</td>
+                      <td>藤井誠暢／スヴェン・ミューラー（#33 D'station Porsche）</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT500）</td>
+                      <td>5月3日（水）</td>
+                      <td>14:40 ~</td>
+                      <td>立川祐路／石浦宏明（#38 ZENT CERUMO LC500）</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT300）</td>
+                      <td>5月3日（水）</td>
+                      <td>14:40 ~</td>
+                      <td>谷口信輝／片岡龍也（#4 グッドスマイル 初音ミク AMG）</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT500）</td>
+                      <td>5月4日（木）</td>
+                      <td>14:10 ~</td>
+                      <td>立川祐路／石浦宏明（#38 ZENT CERUMO LC500）</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT300）</td>
+                      <td>5月4日（木）</td>
+                      <td>14:10 ~</td>
+                      <td>中山雄一／坪井翔（#51 JMS Lmcorsa RC F GT3）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
 
-            <dl class="race_info__accordion--trigger">
-              <dt>富士</dt>
-              <dd>5月3日-4日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>公式練習（GT500）</td>
-                    <td>5月3日（水）</td>
-                    <td>09:00 ~</td>
-                    <td>立川祐路／石浦宏明（#38 ZENT CERUMO LC500）</td>
-                  </tr>
-                  <tr>
-                    <td>公式練習（GT300）</td>
-                    <td>5月3日（水）</td>
-                    <td>09:00 ~</td>
-                    <td>藤井誠暢／スヴェン・ミューラー（#33 D'station Porsche）</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT500）</td>
-                    <td>5月3日（水）</td>
-                    <td>14:40 ~</td>
-                    <td>立川祐路／石浦宏明（#38 ZENT CERUMO LC500）</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT300）</td>
-                    <td>5月3日（水）</td>
-                    <td>14:40 ~</td>
-                    <td>谷口信輝／片岡龍也（#4 グッドスマイル 初音ミク AMG）</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT500）</td>
-                    <td>5月4日（木）</td>
-                    <td>14:10 ~</td>
-                    <td>立川祐路／石浦宏明（#38 ZENT CERUMO LC500）</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT300）</td>
-                    <td>5月4日（木）</td>
-                    <td>14:10 ~</td>
-                    <td>中山雄一／坪井翔（#51 JMS Lmcorsa RC F GT3）</td>
-                  </tr>
-                </tbody>
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>オートポリス</dt>
+                <dd>5月20日-21日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>公式練習（GT500）</td>
+                      <td>5月20日（土）</td>
+                      <td>09:00 ~</td>
+                      <td>山本尚貴／伊沢拓也（#100 RAYBRIG NSX-GT）</td>
+                    </tr>
+                    <tr>
+                      <td>公式練習（GT300）</td>
+                      <td>5月20日（土）</td>
+                      <td>09:00 ~</td>
+                      <td>中山友貴／川端伸太朗（#18 UPGARAGE BANDOH 86）</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT500）</td>
+                      <td>5月20日（土）</td>
+                      <td>13:30 ~</td>
+                      <td>山本尚貴／伊沢拓也（#100 RAYBRIG NSX-GT）</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT300）</td>
+                      <td>5月20日（土）</td>
+                      <td>13:30 ~</td>
+                      <td>松井孝允／山下健太（#25 VivaC 86 MC）</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT500）</td>
+                      <td>5月21日（日）</td>
+                      <td>14:00 ~</td>
+                      <td>中嶋一貴／ジェームス・ロシター（#36 au TOM'S LC500）</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT300）</td>
+                      <td>5月21日（日）</td>
+                      <td>14:00 ~</td>
+                      <td>松井孝允／山下健太（#25 VivaC 86 MC）</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
 
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>SUGO</dt>
+                <dd>7月22日-23日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>公式練習（GT500）</td>
+                      <td>7月22日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>公式練習（GT300）</td>
+                      <td>7月22日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT500）</td>
+                      <td>7月22日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT300）</td>
+                      <td>7月22日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT500）</td>
+                      <td>7月23日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT300）</td>
+                      <td>7月23日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
 
-            <dl class="race_info__accordion--trigger">
-              <dt>オートポリス</dt>
-              <dd>5月20日-21日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>公式練習（GT500）</td>
-                    <td>5月20日（土）</td>
-                    <td>09:00 ~</td>
-                    <td>山本尚貴／伊沢拓也（#100 RAYBRIG NSX-GT）</td>
-                  </tr>
-                  <tr>
-                    <td>公式練習（GT300）</td>
-                    <td>5月20日（土）</td>
-                    <td>09:00 ~</td>
-                    <td>中山友貴／川端伸太朗（#18 UPGARAGE BANDOH 86）</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT500）</td>
-                    <td>5月20日（土）</td>
-                    <td>13:30 ~</td>
-                    <td>山本尚貴／伊沢拓也（#100 RAYBRIG NSX-GT）</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT300）</td>
-                    <td>5月20日（土）</td>
-                    <td>13:30 ~</td>
-                    <td>松井孝允／山下健太（#25 VivaC 86 MC）</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT500）</td>
-                    <td>5月21日（日）</td>
-                    <td>14:00 ~</td>
-                    <td>中嶋一貴／ジェームス・ロシター（#36 au TOM'S LC500）</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT300）</td>
-                    <td>5月21日（日）</td>
-                    <td>14:00 ~</td>
-                    <td>松井孝允／山下健太（#25 VivaC 86 MC）</td>
-                  </tr>
-                </tbody>
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>富士</dt>
+                <dd>8月5日-6日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>公式練習（GT500）</td>
+                      <td>8月5日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>公式練習（GT300）</td>
+                      <td>8月5日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT500）</td>
+                      <td>8月5日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT300）</td>
+                      <td>8月5日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT500）</td>
+                      <td>8月6日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT300）</td>
+                      <td>8月6日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
 
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>鈴鹿</dt>
+                <dd>8月26日-27日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>公式練習（GT500）</td>
+                      <td>8月26日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>公式練習（GT300）</td>
+                      <td>8月26日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT500）</td>
+                      <td>8月26日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT300）</td>
+                      <td>8月26日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT500）</td>
+                      <td>8月27日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT300）</td>
+                      <td>8月27日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
 
-            <dl class="race_info__accordion--trigger">
-              <dt>SUGO</dt>
-              <dd>7月22日-23日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>公式練習（GT500）</td>
-                    <td>7月22日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>公式練習（GT300）</td>
-                    <td>7月22日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT500）</td>
-                    <td>7月22日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT300）</td>
-                    <td>7月22日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT500）</td>
-                    <td>7月23日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT300）</td>
-                    <td>7月23日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                </tbody>
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>タイ</dt>
+                <dd>10月7日-9日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>公式練習（GT500）</td>
+                      <td>10月8日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>公式練習（GT300）</td>
+                      <td>10月8日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT500）</td>
+                      <td>10月8日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT300）</td>
+                      <td>10月8日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT500）</td>
+                      <td>10月9日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT300）</td>
+                      <td>10月9日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
 
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
-
-            <dl class="race_info__accordion--trigger">
-              <dt>富士</dt>
-              <dd>8月5日-6日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>公式練習（GT500）</td>
-                    <td>8月5日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>公式練習（GT300）</td>
-                    <td>8月5日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT500）</td>
-                    <td>8月5日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT300）</td>
-                    <td>8月5日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT500）</td>
-                    <td>8月6日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT300）</td>
-                    <td>8月6日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                </tbody>
-
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
-
-            <dl class="race_info__accordion--trigger">
-              <dt>鈴鹿</dt>
-              <dd>8月26日-27日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>公式練習（GT500）</td>
-                    <td>8月26日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>公式練習（GT300）</td>
-                    <td>8月26日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT500）</td>
-                    <td>8月26日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT300）</td>
-                    <td>8月26日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT500）</td>
-                    <td>8月27日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT300）</td>
-                    <td>8月27日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                </tbody>
-
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
-
-            <dl class="race_info__accordion--trigger">
-              <dt>タイ</dt>
-              <dd>10月7日-9日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>公式練習（GT500）</td>
-                    <td>10月8日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>公式練習（GT300）</td>
-                    <td>10月8日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT500）</td>
-                    <td>10月8日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT300）</td>
-                    <td>10月8日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT500）</td>
-                    <td>10月9日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT300）</td>
-                    <td>10月9日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                </tbody>
-
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
-
-            <dl class="race_info__accordion--trigger">
-              <dt>もてぎ</dt>
-              <dd>11月11日-12日</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>公式練習（GT500）</td>
-                    <td>11月11日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>公式練習（GT300）</td>
-                    <td>11月11日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT500）</td>
-                    <td>11月11日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>予選（GT300）</td>
-                    <td>11月11日（土）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT500）</td>
-                    <td>11月12日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>決勝（GT300）</td>
-                    <td>11月12日（日）</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                </tbody>
-
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>もてぎ</dt>
+                <dd>11月11日-12日</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>公式練習（GT500）</td>
+                      <td>11月11日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>公式練習（GT300）</td>
+                      <td>11月11日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT500）</td>
+                      <td>11月11日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>予選（GT300）</td>
+                      <td>11月11日（土）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT500）</td>
+                      <td>11月12日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>決勝（GT300）</td>
+                      <td>11月12日（日）</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
           </section><!-- /.race_info -->
         </div><!-- /.motorsports_stats -->
 
@@ -787,6 +795,7 @@
 ?>
 
 <script src="/assets/js/motorsports.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/motorsports_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 include_once __DIR__."/../../../app/templates/desktop/_footer.php";

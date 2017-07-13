@@ -203,9 +203,9 @@
             <h2 class="point_rank__heading mod-headingA">ポイントランキング</h2>
 
             <nav class="point_rank__nav">
-              <ul class="point_rank__nav__list">
-                <li class="point_rank__nav__item"><a class="point_rank__nav--driver selected" href="#">ドライバーランキング</a></li>
-                <li class="point_rank__nav__item"><a class="point_rank__nav--team" href="#">チームランキング</a></li>
+              <ul class="point_rank__nav__list" id="js-point_rank__nav__list">
+                <li class="point_rank__nav__item"><a class="point_rank__nav--driver js-point_rank__nav--link selected" href="#point_rank--driver">ドライバーランキング</a></li>
+                <li class="point_rank__nav__item"><a class="point_rank__nav--team  js-point_rank__nav--link" href="#point_rank--team">チームランキング</a></li>
               </ul>
             </nav><!-- /.point_rank__nav -->
 
@@ -290,58 +290,60 @@
             </table><!-- /.point_rank__table -->
           </section><!-- /.point_rank -->
 
-          <section class="race_info">
+          <section class="race_info" id="js-race_info">
             <h2 class="race_info__heading mod-headingA">グランプリ情報</h2>
 
-            <dl class="race_info__accordion--trigger">
-              <dt>グランプリ名</dt>
-              <dd>グランプリ日程</dd>
-            </dl><!-- /.race_info__accordion--trigger -->
-            <div class="race_info__accordion--body">
-              <table class="race_info__table mod-table">
-                <thead>
-                  <tr>
-                    <th class="race_info__table__th">イベント</th>
-                    <th class="race_info__table__th">開催日</th>
-                    <th class="race_info__table__th">日本時間</th>
-                    <th class="race_info__table__th">1位</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>フリー走行1</td>
-                    <td>race_info日程</td>
-                    <td>race_info時間</td>
-                    <td>race_infoドライバー・チーム名</td>
-                  </tr>
-                  <tr>
-                    <td>フリー走行2</td>
-                    <td>race_info日程</td>
-                    <td>race_info時間</td>
-                    <td>race_infoドライバー・チーム名</td>
-                  </tr>
-                  <tr>
-                    <td>フリー走行3</td>
-                    <td>race_info日程</td>
-                    <td>race_info時間</td>
-                    <td>race_infoドライバー・チーム名</td>
-                  </tr>
-                  <tr>
-                    <td>予選</td>
-                    <td>race_info日程</td>
-                    <td>race_info時間</td>
-                    <td>race_infoドライバー・チーム名</td>
-                  </tr>
-                  <tr>
-                    <td>決勝</td>
-                    <td>race_info日程</td>
-                    <td>race_info時間</td>
-                    <td>race_infoドライバー・チーム名</td>
-                  </tr>
-                </tbody>
+            <div class="js-race_info__container">
+              <dl class="race_info__accordion--trigger">
+                <dt>グランプリ名</dt>
+                <dd>グランプリ日程</dd>
+              </dl><!-- /.race_info__accordion--trigger -->
+              <div class="race_info__accordion--body">
+                <table class="race_info__table mod-table">
+                  <thead>
+                    <tr>
+                      <th class="race_info__table__th">イベント</th>
+                      <th class="race_info__table__th">開催日</th>
+                      <th class="race_info__table__th">日本時間</th>
+                      <th class="race_info__table__th">1位</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>フリー走行1</td>
+                      <td>race_info日程</td>
+                      <td>race_info時間</td>
+                      <td>race_infoドライバー・チーム名</td>
+                    </tr>
+                    <tr>
+                      <td>フリー走行2</td>
+                      <td>race_info日程</td>
+                      <td>race_info時間</td>
+                      <td>race_infoドライバー・チーム名</td>
+                    </tr>
+                    <tr>
+                      <td>フリー走行3</td>
+                      <td>race_info日程</td>
+                      <td>race_info時間</td>
+                      <td>race_infoドライバー・チーム名</td>
+                    </tr>
+                    <tr>
+                      <td>予選</td>
+                      <td>race_info日程</td>
+                      <td>race_info時間</td>
+                      <td>race_infoドライバー・チーム名</td>
+                    </tr>
+                    <tr>
+                      <td>決勝</td>
+                      <td>race_info日程</td>
+                      <td>race_info時間</td>
+                      <td>race_infoドライバー・チーム名</td>
+                    </tr>
+                  </tbody>
 
-              </table><!-- /.race_info__table -->
-            </div><!-- /.race_info__accordion--body -->
+                </table><!-- /.race_info__table -->
+              </div><!-- /.race_info__accordion--body -->
+            </div><!-- /.js-race_info__container -->
           </section><!-- /.race_info -->
 
           <section class="team_driver">

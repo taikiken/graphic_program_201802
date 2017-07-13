@@ -189,6 +189,7 @@
 ?>
 
 <script src="/assets/js/motorsports.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/motorsports_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 include_once __DIR__."/../../../app/templates/desktop/_footer.php";
