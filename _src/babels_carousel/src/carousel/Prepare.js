@@ -165,7 +165,7 @@ export default class Prepare {
     }
     // li.js-pickup 数
     const { length, count } = Prepare.articles(element);
-    console.log('Prepare.start length', length);
+    // console.log('Prepare.start length', length);
     if (!length) {
       // li が 0 の時は実装しない
       return false;

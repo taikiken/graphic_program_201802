@@ -162,14 +162,14 @@ export default class Carousel {
    * Controller.PAUSE event handler - polling 一時停止させます
    */
   onPause() {
-    console.log('Carousel.onPause');
+    // console.log('Carousel.onPause');
     this.pause();
   }
   /**
    * Controller.RESUME event handler - polling 再開させます
    */
   onResume() {
-    console.log('Carousel.onResume');
+    // console.log('Carousel.onResume');
     // animation start
     this.play();
   }
@@ -231,7 +231,7 @@ export default class Carousel {
   next() {
     // count up します
     let index = this.position + 1;
-    console.log('Carousel.next', this.position, index);
+    // console.log('Carousel.next', this.position, index);
     // // last を超えたら 0 に戻す
     if (index > this.last) {
       index = 0;
@@ -261,7 +261,7 @@ export default class Carousel {
    * @param {number} index スライド番号
    */
   jump(index) {
-    console.log('Carousel.jump index', index);
+    // console.log('Carousel.jump index', index);
     // polling 一時停止
     this.pause();
 
@@ -337,16 +337,16 @@ export default class Carousel {
    */
   setStyle(css) {
     let style = '';
-    console.log('Carousel.setStyle ===============================');
+    // console.log('Carousel.setStyle ===============================');
     // const cssKeys = Object.keys(css);
     // let hasTransition = cssKeys.indexOf('transition');
     // {property: value} 形式 object から 'property: value;' string へ cast する
     Object.keys(css).map((prop) => {
       style += `${prop}: ${css[prop]};`;
     });
-    console.log('Carousel.setStyle style', style);
+    // console.log('Carousel.setStyle style', style);
     this.wrapper.style.cssText = style;
-    console.log('Carousel.setStyle ++++++++++++++++++++++++++++++++');
+    // console.log('Carousel.setStyle ++++++++++++++++++++++++++++++++');
     // if (hasTransition) {
     //   const controller = this.controller;
     //   controller.begin();

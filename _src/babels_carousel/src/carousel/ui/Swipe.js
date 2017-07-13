@@ -102,7 +102,7 @@ export default class Swipe {
    * - Touching,DRAG_START
    */
   start() {
-    console.log('Swipe.start', this.started, this.touching);
+    // console.log('Swipe.start', this.started, this.touching);
     if (this.started) {
       return;
     }
@@ -160,7 +160,7 @@ export default class Swipe {
    * {@link Controller.pause} を実行し `PAUSE` eevnt を発火させます
    */
   onStart() {
-    console.log('Swipe.onStart', this.enable);
+    // console.log('Swipe.onStart', this.enable);
     if (!this.enable) {
       return;
     }
@@ -179,7 +179,7 @@ export default class Swipe {
    * @param {Events|object} events dragging 情報
    */
   onDragging(events) {
-    console.log('Swipe.onDragging', this.enable, events);
+    // console.log('Swipe.onDragging', this.enable, events);
     // 移動量を累積する
     this.dragging += events.between.x;
     this.drag(this.dragging);
@@ -202,7 +202,7 @@ export default class Swipe {
     this.dispose();
     this.reset();
     this.left(0);
-    console.log('');
+    // console.log('');
     if (events.swipe.swipeLeft) {
       this.controller.next();
     } else {
@@ -244,7 +244,7 @@ export default class Swipe {
    * @param {number} x X 移動量 - left 設定値
    */
   drag(x) {
-    console.log('Swipe.drag ============= ', x);
+    // console.log('Swipe.drag ============= ', x);
     // motion なし
     const style = { left: `${x}px`, transitionDuration: '0s' };
     this.setState({ style });
@@ -262,13 +262,13 @@ export default class Swipe {
    */
   setStyle(css) {
     let style = '';
-    console.log('Swipe.setStyle ===============================');
+    // console.log('Swipe.setStyle ===============================');
     // {property: value} 形式 object から 'property: value;' string へ cast する
     Object.keys(css).map((prop) => {
       style += `${prop}: ${css[prop]};`;
     });
-    console.log('Swipe.setStyle style', style);
+    // console.log('Swipe.setStyle style', style);
     this.element.style.cssText = style;
-    console.log('Swipe.setStyle ++++++++++++++++++++++++++++++++');
+    // console.log('Swipe.setStyle ++++++++++++++++++++++++++++++++');
   }
 }
