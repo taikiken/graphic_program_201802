@@ -261,6 +261,53 @@
             </table><!-- /.point_rank__table -->
           </section><!-- /.point_rank -->
 
+          <section class="team_driver">
+            <h2 class="team_driver__heading">TOYOTA GAZOO Racing WRC 2017年 チーム&amp;ドライバー</h2>
+            <div class="team_driver__body team_driver__body--ratio2">
+              <div class="column">
+                <h3 class="team_driver__body__heading">チーム概要</h3>
+                <table class="team_driver__body__table--team">
+                  <tbody>
+                    <tr>
+                      <th>拠点</th>
+                      <td>日本</td>
+                    </tr>
+                    <tr>
+                      <th>設立</th>
+                      <td>2017年</td>
+                    </tr>
+                    <tr>
+                      <th>使用タイヤ</th>
+                      <td>ミシュラン</td>
+                    </tr>
+                    <tr>
+                      <th>チーム総代表</th>
+                      <td>豊田 章男</td>
+                    </tr>
+                    <tr>
+                      <th>チーム代表</th>
+                      <td>トミ・マキネン</td>
+                    </tr>
+                    <tr>
+                      <th>チーム副代表</th>
+                      <td>嵯峨 宏英</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div><!-- /.column -->
+
+              <div class="column">
+                <h3 class="team_driver__body__heading">ドライバー</h3>
+                <p>ヤリマティ・ラトバラ（フィンランド）<br />
+                <span class="team_driver__body__small">コ・ドライバー　ミイカ・アンティラ</span></p>
+                <p>ユホ・ハンニネン（フィンランド）<br />
+                <span class="team_driver__body__small">コ・ドライバー　カイ・リンドストローム</span></p>
+                <p>エサペッカ・ラッピ（フィンランド）<br />
+                <span class="team_driver__body__small">コ・ドライバー　ヤンネ・フェルム</span></p>
+              </div><!-- /.column -->
+            </div><!-- /.team_driver__body -->
+          </section><!-- /.team_driver -->
+
           <section class="race_info" id="js-race_info">
             <h2 class="race_info__heading mod-headingA">レース日程・結果</h2>
 
@@ -771,53 +818,6 @@
               </div><!-- /.race_info__accordion--body -->
             </div><!-- /.js-race_info__container -->
           </section><!-- /.race_info -->
-
-          <section class="team_driver">
-            <h2 class="team_driver__heading">TOYOTA GAZOO Racing WRC 2017年 チーム&amp;ドライバー</h2>
-            <div class="team_driver__body team_driver__body--ratio2">
-              <div class="column">
-                <h3 class="team_driver__body__heading">チーム概要</h3>
-                <table class="team_driver__body__table--team">
-                  <tbody>
-                    <tr>
-                      <th>拠点</th>
-                      <td>日本</td>
-                    </tr>
-                    <tr>
-                      <th>設立</th>
-                      <td>2017年</td>
-                    </tr>
-                    <tr>
-                      <th>使用タイヤ</th>
-                      <td>ミシュラン</td>
-                    </tr>
-                    <tr>
-                      <th>チーム総代表</th>
-                      <td>豊田 章男</td>
-                    </tr>
-                    <tr>
-                      <th>チーム代表</th>
-                      <td>トミ・マキネン</td>
-                    </tr>
-                    <tr>
-                      <th>チーム副代表</th>
-                      <td>嵯峨 宏英</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div><!-- /.column -->
-
-              <div class="column">
-                <h3 class="team_driver__body__heading">ドライバー</h3>
-                <p>ヤリマティ・ラトバラ（フィンランド）<br />
-                <span class="team_driver__body__small">コ・ドライバー　ミイカ・アンティラ</span></p>
-                <p>ユホ・ハンニネン（フィンランド）<br />
-                <span class="team_driver__body__small">コ・ドライバー　カイ・リンドストローム</span></p>
-                <p>エサペッカ・ラッピ（フィンランド）<br />
-                <span class="team_driver__body__small">コ・ドライバー　ヤンネ・フェルム</span></p>
-              </div><!-- /.column -->
-            </div><!-- /.team_driver__body -->
-          </section><!-- /.team_driver -->
         </div><!-- /.motorsports_stats -->
 
         <?php
@@ -863,7 +863,7 @@
 
       <section class="side-sec">
         <?php
-       include_once __DIR__."/../../../app/templates/desktop/_sidebar_ad.php";
+        include_once __DIR__."/../../../app/templates/desktop/_sidebar_ad.php";
         ?>
       </section><!-- /.side-sec -->
 
