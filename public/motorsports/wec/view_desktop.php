@@ -257,6 +257,21 @@
             </table><!-- /.point_rank__table -->
           </section><!-- /.point_rank -->
 
+          <section class="team_driver">
+            <h2 class="team_driver__heading">TOYOTA GAZOO Racing WEC 2017年 チーム&amp;ドライバー</h2>
+            <div class="team_driver__body team_driver__body--ratio1">
+              <div class="column">
+                <h3 class="team_driver__body__heading">ドライバー</h3>
+                <p>TS050 HYBRID 7号車<br />
+                マイク・コンウェイ / 小林 可夢偉 / ホセ・マリア・ロペス</p>
+                <p>TS050 HYBRID 8号車<br />
+                セバスチャン・ブエミ / 小林 可夢偉 / 中嶋 一貴</p>
+                <p>TS050 HYBRID 9号車<br />
+                ステファン・サラザン / 国本 雄資 / ニコラス・ラピエール</p>
+              </div><!-- /.column -->
+            </div><!-- /.team_driver__body -->
+          </section><!-- /.team_driver -->
+
           <section class="race_info" id="js-race_info">
             <h2 class="race_info__heading mod-headingA">レース日程・結果</h2>
 
@@ -725,21 +740,6 @@
               </div><!-- /.race_info__accordion--body -->
             </div><!-- /.js-race_info__container -->
           </section><!-- /.race_info -->
-
-          <section class="team_driver">
-            <h2 class="team_driver__heading">TOYOTA GAZOO Racing WEC 2017年 チーム&amp;ドライバー</h2>
-            <div class="team_driver__body team_driver__body--ratio1">
-              <div class="column">
-                <h3 class="team_driver__body__heading">ドライバー</h3>
-                <p>TS050 HYBRID 7号車<br />
-                マイク・コンウェイ / 小林 可夢偉 / ホセ・マリア・ロペス</p>
-                <p>TS050 HYBRID 8号車<br />
-                セバスチャン・ブエミ / 小林 可夢偉 / 中嶋 一貴</p>
-                <p>TS050 HYBRID 9号車<br />
-                ステファン・サラザン / 国本 雄資 / ニコラス・ラピエール</p>
-              </div><!-- /.column -->
-            </div><!-- /.team_driver__body -->
-          </section><!-- /.team_driver -->
         </div><!-- /.motorsports_stats -->
 
         <?php
@@ -785,7 +785,7 @@
 
       <section class="side-sec">
         <?php
-       include_once __DIR__."/../../../app/templates/desktop/_sidebar_ad.php";
+        include_once __DIR__."/../../../app/templates/desktop/_sidebar_ad.php";
         ?>
       </section><!-- /.side-sec -->
 

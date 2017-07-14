@@ -1340,7 +1340,7 @@
 
       <section class="side-sec">
         <?php
-       include_once __DIR__."/../../../app/templates/desktop/_sidebar_ad.php";
+        include_once __DIR__."/../../../app/templates/desktop/_sidebar_ad.php";
         ?>
       </section><!-- /.side-sec -->
 
