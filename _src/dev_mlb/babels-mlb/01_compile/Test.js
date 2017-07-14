@@ -45,7 +45,9 @@ var Test = function () {
         events: option.events,
         today: option.today,
         selected: option.selected,
-        slot: option.slot
+        slot: option.slot,
+        view: option.view,
+        navigate: option.navigate
       }), element);
     }
   }]);

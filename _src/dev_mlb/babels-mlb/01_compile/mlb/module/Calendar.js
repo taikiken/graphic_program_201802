@@ -88,7 +88,9 @@ function Calendar(props) {
       startAccessor: 'start',
       endAccessor: 'end',
       onSelectEvent: props.selected,
-      onSelectSlot: props.slot
+      onSelectSlot: props.slot,
+      onView: props.view,
+      onNavigate: props.navigate
     })
   );
 }
@@ -97,7 +99,9 @@ Calendar.propTypes = {
   events: _propTypes2.default.arrayOf(_propTypes2.default.shape).isRequired,
   today: _propTypes2.default.instanceOf(Date).isRequired,
   selected: _propTypes2.default.func.isRequired,
-  slot: _propTypes2.default.func.isRequired
+  slot: _propTypes2.default.func.isRequired,
+  view: _propTypes2.default.func.isRequired,
+  navigate: _propTypes2.default.func.isRequired
 };
 
 exports.default = Calendar;

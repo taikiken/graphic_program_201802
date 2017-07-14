@@ -24,6 +24,8 @@ export default class Test {
         today={option.today}
         selected={option.selected}
         slot={option.slot}
+        view={option.view}
+        navigate={option.navigate}
       />,
       element,
     );

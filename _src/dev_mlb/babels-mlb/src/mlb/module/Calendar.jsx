@@ -100,6 +100,8 @@ function Calendar(props) {
         endAccessor="end"
         onSelectEvent={props.selected}
         onSelectSlot={props.slot}
+        onView={props.view}
+        onNavigate={props.navigate}
       />
     </div>
   );
@@ -110,6 +112,8 @@ Calendar.propTypes = {
   today: PropTypes.instanceOf(Date).isRequired,
   selected: PropTypes.func.isRequired,
   slot: PropTypes.func.isRequired,
+  view: PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired,
 };
 
 export default Calendar;

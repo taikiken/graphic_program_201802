@@ -101,11 +101,24 @@ const selected = (event) => {
 const slot = (info) => {
   console.log('Calender.slot', info);
 };
+
+// month / week / day
+const view = (event) => {
+  console.log('Calender.view', event);
+};
+
+// next / prev / today
+const navigate = (event) => {
+  console.log('Calender.navigate', event);
+};
+
 const option = {
   events,
   today,
   selected,
   slot,
+  view,
+  navigate,
 };
 MLB.Test.make(container, option);
 

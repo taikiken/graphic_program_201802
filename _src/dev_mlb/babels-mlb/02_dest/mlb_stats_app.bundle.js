@@ -34231,7 +34231,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-14 22:35:47
+ * 2017-7-14 22:58:13
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -38617,7 +38617,9 @@ var Test = function () {
         events: option.events,
         today: option.today,
         selected: option.selected,
-        slot: option.slot
+        slot: option.slot,
+        view: option.view,
+        navigate: option.navigate
       }), element);
     }
   }]);
@@ -50818,7 +50820,9 @@ function Calendar(props) {
       startAccessor: 'start',
       endAccessor: 'end',
       onSelectEvent: props.selected,
-      onSelectSlot: props.slot
+      onSelectSlot: props.slot,
+      onView: props.view,
+      onNavigate: props.navigate
     })
   );
 }
@@ -50827,7 +50831,9 @@ Calendar.propTypes = {
   events: _propTypes2.default.arrayOf(_propTypes2.default.shape).isRequired,
   today: _propTypes2.default.instanceOf(Date).isRequired,
   selected: _propTypes2.default.func.isRequired,
-  slot: _propTypes2.default.func.isRequired
+  slot: _propTypes2.default.func.isRequired,
+  view: _propTypes2.default.func.isRequired,
+  navigate: _propTypes2.default.func.isRequired
 };
 
 exports.default = Calendar;
