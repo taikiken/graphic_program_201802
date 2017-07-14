@@ -39,10 +39,13 @@ var Test = function () {
 
   _createClass(Test, null, [{
     key: 'make',
-    value: function make(element, events, today) {
+    value: function make(element, option) {
+      console.log('Test.make option', option);
       _reactDom2.default.render(_react2.default.createElement(_Calendar2.default, {
-        events: events,
-        today: today
+        events: option.events,
+        today: option.today,
+        selected: option.selected,
+        slot: option.slot
       }), element);
     }
   }]);

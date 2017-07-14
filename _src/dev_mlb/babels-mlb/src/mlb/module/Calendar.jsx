@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 
+// @see http://momentjs.com/docs/ search `longDateFormat`
 moment.locale('ja', {
   longDateFormat: {
     LT: 'HH:mm',
@@ -86,33 +87,19 @@ moment.locale('ja', {
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
 BigCalendar.momentLocalizer(moment);
-//
-// export default class Calendar extends Component {
-//   // static propTypes = {
-//   //   events: PropTypes.arrayOf(PropTypes.string).isRequired,
-//   // }
-//   constructor() {
-//     super();
-//     this.id = 1;
-//   }
-//   render() {
-//     return (
-//       <div className="calendar-conatiner">
-//         <BigCalendar
-//           startAccessor="startDate"
-//           endAccessor="endDate"
-//         />
-//       </div>
-//     );
-//   }
-// }
+
 
 function Calendar(props) {
   return (
     <div className="calendar-container">
       <BigCalendar
+        selectable
         events={props.events}
         defaultDate={props.today}
+        startAccessor="start"
+        endAccessor="end"
+        onSelectEvent={props.selected}
+        onSelectSlot={props.slot}
       />
     </div>
   );
@@ -121,101 +108,8 @@ function Calendar(props) {
 Calendar.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape).isRequired,
   today: PropTypes.instanceOf(Date).isRequired,
+  selected: PropTypes.func.isRequired,
+  slot: PropTypes.func.isRequired,
 };
 
-// function Calendar() {
-//   return (
-//     <div className="calendar-conatiner">
-//       <BigCalendar
-//         startAccessor="startDate"
-//         endAccessor="endDate"
-//       />
-//     </div>
-//   );
-// }
-
-
 export default Calendar;
-
-
-// import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-//
-// /**
-//  * input type: button を作成します
-//  */
-// export default class Button extends Component {
-//   /**
-//    * - maker - PropTypes.func.isRequired
-//    * @returns {{maker: Function}} default props
-//    */
-//   static get propTypes() {
-//     return {
-//       maker: PropTypes.func.isRequired,
-//       loading: PropTypes.string,
-//     };
-//   }
-//   /**
-//    * default props.loading - empty
-//    * @returns {{loading: string}} react default props.loading を設定します
-//    */
-//   static get defaultProps() {
-//     return {
-//       loading: '',
-//     };
-//   }
-//   /**
-//    * onClick を bind します
-//    * @param {Object} props {maker}
-//    */
-//   constructor(props) {
-//     super(props);
-//     console.log('Button.constructor', props);
-//     /**
-//      * bound this.onClick
-//      * @type {function}
-//      */
-//     this.onClick = this.onClick.bind(this);
-//   }
-//   /**
-//    * delegate - render するかを判断します, props.loading が違っていたら render します
-//    * @override
-//    * @param {?Object} nextProps 更新される props
-//    * @param {?Object} nextState 更新される state
-//    * @returns {boolean} true: will be render
-//    */
-//   shouldComponentUpdate(nextProps, nextState) {
-//     const { loading } = this.props;
-//     const needUpdate = nextProps.loading !== loading;
-//     console.log('Button.shouldComponentUpdate', needUpdate, loading, nextProps, nextState);
-//     return needUpdate;
-//   }
-//   // componentWillUnmount() {
-//   //   console.log('Button.componentWillUnmount');
-//   // }
-//   /**
-//    * input.onclick event handler
-//    * @param {Event} event input.onclick Event object
-//    */
-//   onClick(event) {
-//     event.preventDefault();
-//     console.log('Button.onClick', event);
-//     this.props.maker();
-//   }
-//   /**
-//    * input
-//    * @returns {XML} input type: button
-//    */
-//   render() {
-//     console.log('Button.render style', this.props.loading);
-//     return (
-//       <div className={`input-container ${this.props.loading}`}>
-//         <input
-//           type="button"
-//           onClick={this.onClick}
-//           value="CLICK ME!"
-//         />
-//       </div>
-//     );
-//   }
-// }

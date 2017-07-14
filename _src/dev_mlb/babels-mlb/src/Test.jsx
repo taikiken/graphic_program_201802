@@ -16,11 +16,14 @@ import ReactDOM from 'react-dom';
 import Calendar from './mlb/module/Calendar';
 
 export default class Test {
-  static make(element, events, today) {
+  static make(element, option) {
+    console.log('Test.make option', option);
     ReactDOM.render(
       <Calendar
-        events={events}
-        today={today}
+        events={option.events}
+        today={option.today}
+        selected={option.selected}
+        slot={option.slot}
       />,
       element,
     );

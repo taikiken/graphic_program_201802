@@ -12,7 +12,7 @@
   </style>
 </head>
 <body>
-<div id="js-calendar"></div>
+<div id="js-calendar" class="calendar-container"></div>
 <script src="assets/js/mlb_stats_app.bundle.js"></script>
 <script type="text/babel">
 const MLB = self.MLB;
@@ -22,8 +22,8 @@ const events = [
   {
     'title': 'All Day Event',
     'allDay': true,
-    'start': new Date(2017, 3, 0),
-    'end': new Date(2017, 3, 1)
+    'start': new Date(2017, 6, 15),
+    'end': new Date(2017, 6, 15)
   },
   {
     'title': 'Long Event',
@@ -90,11 +90,27 @@ const events = [
   {
     'title': 'AAAAAAAAAAA',
     'start':new Date(2017, 6, 15, 7, 0, 0),
-    'end': new Date(2017, 6, 15, 10, 30, 0)
+    'end': new Date(2017, 6, 15, 11, 59, 0)
   },
 ];
 const today = new Date();
-MLB.Test.make(container, events, today);
+
+const selected = (event) => {
+  console.log('Calender.selected', event);
+};
+const slot = (info) => {
+  console.log('Calender.slot', info);
+};
+const option = {
+  events,
+  today,
+  selected,
+  slot,
+};
+MLB.Test.make(container, option);
+
+// https://stackoverflow.com/questions/34587067/change-color-of-react-big-calendar-events
+// Change color of react-big-calendar events
 </script>
 </body>
 </html>

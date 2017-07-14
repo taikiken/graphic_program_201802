@@ -22,6 +22,7 @@ var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// @see http://momentjs.com/docs/ search `longDateFormat`
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
@@ -75,135 +76,28 @@ _moment2.default.locale('ja', {
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
 _reactBigCalendar2.default.momentLocalizer(_moment2.default);
-//
-// export default class Calendar extends Component {
-//   // static propTypes = {
-//   //   events: PropTypes.arrayOf(PropTypes.string).isRequired,
-//   // }
-//   constructor() {
-//     super();
-//     this.id = 1;
-//   }
-//   render() {
-//     return (
-//       <div className="calendar-conatiner">
-//         <BigCalendar
-//           startAccessor="startDate"
-//           endAccessor="endDate"
-//         />
-//       </div>
-//     );
-//   }
-// }
 
 function Calendar(props) {
   return _react2.default.createElement(
     'div',
     { className: 'calendar-container' },
     _react2.default.createElement(_reactBigCalendar2.default, {
+      selectable: true,
       events: props.events,
-      defaultDate: props.today
+      defaultDate: props.today,
+      startAccessor: 'start',
+      endAccessor: 'end',
+      onSelectEvent: props.selected,
+      onSelectSlot: props.slot
     })
   );
 }
 
 Calendar.propTypes = {
   events: _propTypes2.default.arrayOf(_propTypes2.default.shape).isRequired,
-  today: _propTypes2.default.instanceOf(Date).isRequired
+  today: _propTypes2.default.instanceOf(Date).isRequired,
+  selected: _propTypes2.default.func.isRequired,
+  slot: _propTypes2.default.func.isRequired
 };
 
-// function Calendar() {
-//   return (
-//     <div className="calendar-conatiner">
-//       <BigCalendar
-//         startAccessor="startDate"
-//         endAccessor="endDate"
-//       />
-//     </div>
-//   );
-// }
-
-
 exports.default = Calendar;
-
-// import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-//
-// /**
-//  * input type: button を作成します
-//  */
-// export default class Button extends Component {
-//   /**
-//    * - maker - PropTypes.func.isRequired
-//    * @returns {{maker: Function}} default props
-//    */
-//   static get propTypes() {
-//     return {
-//       maker: PropTypes.func.isRequired,
-//       loading: PropTypes.string,
-//     };
-//   }
-//   /**
-//    * default props.loading - empty
-//    * @returns {{loading: string}} react default props.loading を設定します
-//    */
-//   static get defaultProps() {
-//     return {
-//       loading: '',
-//     };
-//   }
-//   /**
-//    * onClick を bind します
-//    * @param {Object} props {maker}
-//    */
-//   constructor(props) {
-//     super(props);
-//     console.log('Button.constructor', props);
-//     /**
-//      * bound this.onClick
-//      * @type {function}
-//      */
-//     this.onClick = this.onClick.bind(this);
-//   }
-//   /**
-//    * delegate - render するかを判断します, props.loading が違っていたら render します
-//    * @override
-//    * @param {?Object} nextProps 更新される props
-//    * @param {?Object} nextState 更新される state
-//    * @returns {boolean} true: will be render
-//    */
-//   shouldComponentUpdate(nextProps, nextState) {
-//     const { loading } = this.props;
-//     const needUpdate = nextProps.loading !== loading;
-//     console.log('Button.shouldComponentUpdate', needUpdate, loading, nextProps, nextState);
-//     return needUpdate;
-//   }
-//   // componentWillUnmount() {
-//   //   console.log('Button.componentWillUnmount');
-//   // }
-//   /**
-//    * input.onclick event handler
-//    * @param {Event} event input.onclick Event object
-//    */
-//   onClick(event) {
-//     event.preventDefault();
-//     console.log('Button.onClick', event);
-//     this.props.maker();
-//   }
-//   /**
-//    * input
-//    * @returns {XML} input type: button
-//    */
-//   render() {
-//     console.log('Button.render style', this.props.loading);
-//     return (
-//       <div className={`input-container ${this.props.loading}`}>
-//         <input
-//           type="button"
-//           onClick={this.onClick}
-//           value="CLICK ME!"
-//         />
-//       </div>
-//     );
-//   }
-// }
