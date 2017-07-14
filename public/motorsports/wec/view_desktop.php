@@ -279,31 +279,31 @@
                     <tr>
                       <td>フリー走行1</td>
                       <td>4月14日（金）</td>
-                      <td>xxxxx</td>
+                      <td>19:45 ~</td>
                       <td>アンソニー・デビッドソン／中嶋一貴／セバスチャン・ブエミ（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>フリー走行2</td>
                       <td>4月14日（金）</td>
-                      <td>xxxxx</td>
+                      <td>24:45 ~</td>
                       <td>アンソニー・デビッドソン／中嶋一貴／セバスチャン・ブエミ（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>フリー走行3</td>
                       <td>4月15日（土）</td>
-                      <td>xxxxx</td>
+                      <td>17:40 ~</td>
                       <td>アンソニー・デビッドソン／中嶋一貴／セバスチャン・ブエミ（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>予選</td>
                       <td>4月15日（土）</td>
-                      <td>xxxxx</td>
+                      <td>21:00 ~</td>
                       <td>小林可夢偉／マイク・コンウェイ／ホセ・マリア・ロペス（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>決勝</td>
                       <td>4月16日（日）</td>
-                      <td>xxxxx</td>
+                      <td>20:00 ~</td>
                       <td>アンソニー・デビッドソン／中嶋一貴／セバスチャン・ブエミ（トヨタ）</td>
                     </tr>
                   </tbody>
@@ -330,31 +330,31 @@
                     <tr>
                       <td>フリー走行1</td>
                       <td>5月4日（金）</td>
-                      <td>xxxxx</td>
+                      <td>18:45 ~</td>
                       <td>小林可夢偉／マイク・コンウェイ／ホセ・マリア・ロペス（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>フリー走行2</td>
                       <td>5月4日（金）</td>
-                      <td>xxxxx</td>
+                      <td>24:30 ~</td>
                       <td>小林可夢偉／マイク・コンウェイ／ホセ・マリア・ロペス（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>フリー走行3</td>
                       <td>5月5日（土）</td>
-                      <td>xxxxx</td>
+                      <td>17:25 ~</td>
                       <td>アンソニー・デビッドソン／中嶋一貴／セバスチャン・ブエミ（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>予選</td>
                       <td>5月5日（土）</td>
-                      <td>xxxxx</td>
+                      <td>21:50 ~</td>
                       <td>アンドレ・ロッテラー／ニール・ジャニ／ニック・タンディ（ポルシェ）</td>
                     </tr>
                     <tr>
                       <td>決勝</td>
                       <td>5月6日（日）</td>
-                      <td>xxxxx</td>
+                      <td>21:30 ~</td>
                       <td>アンソニー・デビッドソン／中嶋一貴／セバスチャン・ブエミ（トヨタ）</td>
                     </tr>
                   </tbody>
@@ -381,37 +381,37 @@
                     <tr>
                       <td>フリー走行</td>
                       <td>6月14日（水）</td>
-                      <td>xxxxx</td>
+                      <td>23:00 ~</td>
                       <td>ニール・ジャニ／アンドレ・ロッテラー／ニック・タンディ（ポルシェ）</td>
                     </tr>
                     <tr>
                       <td>予選1回目</td>
                       <td>6月15日（木）</td>
-                      <td>xxxxx</td>
+                      <td>29:00 ~</td>
                       <td>マイク・コンウェイ／小林可夢偉／ステファン・サラザン（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>予選2回目</td>
                       <td>6月15日（木）</td>
-                      <td>xxxxx</td>
+                      <td>26:00 ~</td>
                       <td>マイク・コンウェイ／小林可夢偉／ステファン・サラザン（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>予選3回目</td>
                       <td>6月16日（金）</td>
-                      <td>xxxxx</td>
+                      <td>29:00 ~</td>
                       <td>マイク・コンウェイ／小林可夢偉／ステファン・サラザン（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>ウォームアップ</td>
                       <td>6月17日（土）</td>
-                      <td>xxxxx</td>
+                      <td>16:00 ~</td>
                       <td>セバスチャン・ブエミ／アンソニー・デビッドソン／中嶋一貴（トヨタ）</td>
                     </tr>
                     <tr>
                       <td>決勝レース</td>
                       <td>6月17日（土）〜6月18日（日）</td>
-                      <td>xxxxx</td>
+                      <td>22:00 ~</td>
                       <td>ティモ・ベルンハルト／アール・バンバー／ブレンドン・ハートレー（ポルシェ）</td>
                     </tr>
                   </tbody>
@@ -438,31 +438,31 @@
                     <tr>
                       <td>フリー走行1</td>
                       <td>7月14日（金）</td>
-                      <td>xxxxx</td>
+                      <td>18:35 ~</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行2</td>
                       <td>7月14日（金）</td>
-                      <td>xxxxx</td>
+                      <td>23:15 ~</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行3</td>
                       <td>7月15日（土）</td>
-                      <td>xxxxx</td>
+                      <td>16:45 ~</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>予選</td>
                       <td>7月15日（土）</td>
-                      <td>xxxxx</td>
+                      <td>21:55 ~</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>決勝</td>
                       <td>7月16日（日）</td>
-                      <td>xxxxx</td>
+                      <td>20:00 ~</td>
                       <td>-</td>
                     </tr>
                   </tbody>
@@ -489,31 +489,31 @@
                     <tr>
                       <td>フリー走行1</td>
                       <td>9月1日（金）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行2</td>
                       <td>9月1日（金）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行3</td>
                       <td>9月2日（土）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>予選</td>
                       <td>9月2日（土）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>決勝</td>
                       <td>9月3日（日）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                   </tbody>
@@ -540,31 +540,31 @@
                     <tr>
                       <td>フリー走行1</td>
                       <td>9月14日（金）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行2</td>
                       <td>9月14日（金）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行3</td>
                       <td>9月15日（土）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>予選</td>
                       <td>9月15日（土）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>決勝</td>
                       <td>9月16日（日）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                   </tbody>
@@ -591,31 +591,31 @@
                     <tr>
                       <td>フリー走行1</td>
                       <td>10月13日（金）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行2</td>
                       <td>10月13日（金）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行3</td>
                       <td>10月14日（土）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>予選</td>
                       <td>10月14日（土）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>決勝</td>
                       <td>10月15日（日）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                   </tbody>
@@ -642,31 +642,31 @@
                     <tr>
                       <td>フリー走行1</td>
                       <td>11月3日（金）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行2</td>
                       <td>11月3日（金）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行3</td>
                       <td>11月4日（土）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>予選</td>
                       <td>11月4日（土）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>決勝</td>
                       <td>11月5日（日）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                   </tbody>
@@ -693,31 +693,31 @@
                     <tr>
                       <td>フリー走行1</td>
                       <td>11月16日（金）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行2</td>
                       <td>11月16日（金）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>フリー走行3</td>
                       <td>11月17日（土）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>予選</td>
                       <td>11月17日（土）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                     <tr>
                       <td>決勝</td>
                       <td>11月18日（日）</td>
-                      <td>xxxxx</td>
+                      <td>-</td>
                       <td>-</td>
                     </tr>
                   </tbody>
