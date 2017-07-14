@@ -140,18 +140,22 @@
 
       <section class="main-sec">
 
-        <?php
-        // ----------------------------------------------------
-        // 記事一覧: sp banner
-        if ( !empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']) ) :
-          ?>
-          <div class="sponsor-link">
-            <a href="<?php echo $page['category']['banner']['sp']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['sp']['link']; ?>', true);"><img src="<?php echo $page['category']['banner']['sp']['image']; ?>" alt="<?php echo $page['category']['banner']['sp']['text'] ? $page['category']['banner']['sp']['text'] : '' ?>"></a>
+        <div class="sponsor-link">
+          <!-- /531683568/motor_sport/motor_sport_subcat_sp -->
+          <script>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/motor_sport/motor_sport_subcat_sp', [320, 96], 'div-gpt-ad-1500001270788-0').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-1500001270788-0' style='height:96px; width:320px;'>
+          <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500001270788-0'); });
+          </script>
           </div>
-          <?php
-        endif;
-        // eof: 記事一覧: sp banner
-        // ---------------------------------------------------- ?>
+          <!-- // /531683568/motor_sport/motor_sport_subcat_sp -->
+        </div><!-- /.sponsor-link -->
 
         <div class="motorsports_stats">
 

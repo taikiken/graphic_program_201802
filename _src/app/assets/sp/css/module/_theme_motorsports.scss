@@ -100,6 +100,19 @@
 
 
 
+  .main-sec > .sponsor-link {
+    background-color: #000;
+    padding: (30/2)+px 0;
+
+    > div {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+
+
+
+
 
   //motorsports_stats
   .motorsports_stats {
@@ -171,7 +184,7 @@
   //日程・結果
   //.matches
   .matches {
-    margin-top: (60/2)+px;
+    // margin-top: (60/2)+px;
 
     //.matches__table
     &__table {
