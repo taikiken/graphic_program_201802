@@ -12,7 +12,7 @@
               // #1602 - VK brightcove
               if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
                 echo '<br />';
-                include_once __DIR__."/specific/_vk_brightcove_2017.php";
+                include_once __DIR__."/specific/_player.php";
               endif;
             ?>
 

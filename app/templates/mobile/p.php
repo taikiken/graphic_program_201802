@@ -31,7 +31,7 @@
 
         <?php if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
           // #1602 - VK brightcove
-          include_once __DIR__."/../specific/_vk_brightcove_2017.php";
+          include_once __DIR__."/../specific/_player.php";
         else :
           // 通常画像 or 動画 ?>
           <div id="single-visual-container"></div>
