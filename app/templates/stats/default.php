@@ -123,8 +123,7 @@ __EOL__;
 <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
 <script>
 ;(function(){
-  var ua = window.navigator.userAgent.toLowerCase();
-  if ( ua.indexOf('gunosy') < 0 || ua.indexOf('newspass') < 0 ) {
+  if ( !(/gunosy|newspass/i.test(window.navigator.userAgent)) ) {
     new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();
   }
 })();
