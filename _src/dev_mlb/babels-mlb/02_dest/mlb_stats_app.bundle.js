@@ -5666,7 +5666,7 @@ exports.default = exp;
 
 
 function error() {
-  throw new Error('You have not selected a localization strategy for Big Calendar. ' + 'Please use either of the two included.');
+  throw new Error('You have not selected a localization strategy for Big ComCalendar. ' + 'Please use either of the two included.');
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
@@ -22297,7 +22297,7 @@ function moveDate(action, date, View) {
     case _constants.navigate.DATE:
       break;
     default:
-      !(View && typeof View.navigate === 'function') ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, 'Calendar View components must implement a static `.navigate(date, action)` method.s') : (0, _invariant2.default)(false) : void 0;
+      !(View && typeof View.navigate === 'function') ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, 'ComCalendar View components must implement a static `.navigate(date, action)` method.s') : (0, _invariant2.default)(false) : void 0;
       date = View.navigate(date, action);
   }
   return date;
@@ -34231,7 +34231,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-15 17:29:14
+ * 2017-7-16 13:57:06
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -50805,7 +50805,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // react-big-calendar API says
 // @see http://intljusticemission.github.io/react-big-calendar/examples/index.html#api
 // culture
-// Specify a specific culture code for the Calendar.
+// Specify a specific culture code for the ComCalendar.
 // Note: it's generally better to handle this globally via your i18n library.
 
 // import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -51238,12 +51238,12 @@ function isValidView(view, _ref) {
 var now = new Date();
 
 /**
- * react-big-calendar is full featured Calendar component for managing events and dates. It uses
+ * react-big-calendar is full featured ComCalendar component for managing events and dates. It uses
  * modern `flexbox` for layout making it super responsive and performant. Leaving most of the layout heavy lifting
  * to the browser. __note:__ The default styles use `height: 100%` which means your container must set an explicit
  * height (feel free to adjust the styles to suit your specific needs).
  *
- * Big Calendar is unopiniated about editing and moving events, prefering to let you implement it in a way that makes
+ * Big ComCalendar is unopiniated about editing and moving events, prefering to let you implement it in a way that makes
  * the most sense to your app. It also tries not to be prescriptive about your event data structures, just tell it
  * how to find the start and end datetimes and you can pass it whatever you want.
  *
@@ -51584,14 +51584,14 @@ Calendar.propTypes = {
   scrollToTime: _propTypes2.default.instanceOf(Date),
 
   /**
-   * Specify a specific culture code for the Calendar.
+   * Specify a specific culture code for the ComCalendar.
    *
    * **Note: it's generally better to handle this globally via your i18n library.**
    */
   culture: _propTypes2.default.string,
 
   /**
-   * Localizer specific formats, tell the Calendar how to format and display dates.
+   * Localizer specific formats, tell the ComCalendar how to format and display dates.
    *
    * `format` types are dependent on the configured localizer; both Moment and Globalize
    * accept strings of tokens according to their own specification, such as: `'DD mm yyyy'`.
@@ -51608,7 +51608,7 @@ Calendar.propTypes = {
    *     local.format(end, { date: 'short' }, culture)
    * }
    *
-   * <Calendar formats={formats} />
+   * <ComCalendar formats={formats} />
    * ```
    *
    * All localizers accept a function of
@@ -51689,7 +51689,7 @@ Calendar.propTypes = {
    *   	 event: MyAgendaEvent // with the agenda view use a different component to render events
    *   }
    * }
-   * <Calendar components={components} />
+   * <ComCalendar components={components} />
    * ```
    */
   components: _propTypes2.default.shape({
@@ -56163,7 +56163,7 @@ var getYStyles = function getYStyles(idx, _ref6) {
 /**
  * Takes an array of unsorted events, and returns a sorted array
  * containing the same events, but with an additional style property.
- * These styles will position the events similarly to Google Calendar.
+ * These styles will position the events similarly to Google ComCalendar.
  *
  * The algorithm will start by sorting the array, and then iterating over it.
  * Starting at the first event, each of its siblings and children, placed in
