@@ -13,39 +13,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Calendar from './mlb/component/calendar/Calendar';
+import ComCalendar from './mlb/component/calendar/ComCalendar';
 
 export default class Test {
-  static toolbar() {
-    // @see https://github.com/intljusticemission/react-big-calendar/issues/191
-    // toolbar を custom する
-    // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
-    // div.onClick warning
-    return (toolbar) => {
-      const goToBack = () => { toolbar.onNavigate('PREV'); };
-      const goToNext = () => { toolbar.onNavigate('NEXT'); };
-      const goToCurrent = () => { toolbar.onNavigate('TODAY'); };
-      return (
-        <div className="toolbar-container">
-          <div className="navigation-buttons">
-            <button className="btn btn-back" onClick={goToBack}>
-              <p className="prev-icon" />
-            </button>
-            <div className="label-date" onClick={goToCurrent} role="button" tabIndex="0">
-              {this.state.monthLabel}
-            </div>
-            <button className="btn btn-next" onClick={goToNext}>
-              <p className="next-icon" />
-            </button>
-          </div>
-        </div >
-      );
-    };
-  }
   static make(element, option) {
     console.log('Test.make option', option);
     ReactDOM.render(
-      <Calendar
+      <ComCalendar
         events={option.events}
         today={option.today}
         selected={option.selected}

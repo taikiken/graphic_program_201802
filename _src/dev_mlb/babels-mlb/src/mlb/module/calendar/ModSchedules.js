@@ -32,7 +32,7 @@ class Events {
   }
 }
 
-export default class Schedules {
+export default class ModSchedules {
   constructor(date, games, season, league = '') {
     // this.games = games;
     // this.season = season;

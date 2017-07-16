@@ -24,7 +24,7 @@ import 'moment/locale/ja';
 // react-big-calendar API says
 // @see http://intljusticemission.github.io/react-big-calendar/examples/index.html#api
 // culture
-// Specify a specific culture code for the Calendar.
+// Specify a specific culture code for the ComCalendar.
 // Note: it's generally better to handle this globally via your i18n library.
 moment.locale('ja');
 
@@ -148,7 +148,7 @@ const customHeader = (month) => {
  * @returns {XML} div.calendar-container > BigCalendar
  * @see http://intljusticemission.github.io/react-big-calendar/
  */
-function Calendar(props) {
+function ComCalendar(props) {
   return (
     <div className="calendar-container">
       <BigCalendar
@@ -175,7 +175,7 @@ function Calendar(props) {
   );
 }
 
-Calendar.propTypes = {
+ComCalendar.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape).isRequired,
   today: PropTypes.instanceOf(Date).isRequired,
   selected: PropTypes.func.isRequired,
@@ -184,4 +184,4 @@ Calendar.propTypes = {
   navigate: PropTypes.func.isRequired,
 };
 
-export default Calendar;
+export default ComCalendar;
