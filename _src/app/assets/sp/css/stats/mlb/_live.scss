@@ -892,4 +892,187 @@
     } //.mlb_live__record table
   } //.mlb_live__record
 
+
+
+
+
+  //イニング速報
+  //.mlb_live__inning
+  &__inning {
+    //.mlb_live__inning__section
+    &__section {
+      border-top: 1px solid #222;
+    } //.mlb_live__inning__section
+
+    //.mlb_live__inning__container
+    &__container {} //.mlb_live__inning__container
+
+    //.mlb_live__inning__heading
+    &__heading {
+      padding: (16/2)+px perCalc(20, 750);
+      background-color: #1a1a1a;
+      border-width: 0 0 1px;
+      border-style: solid;
+      border-color: #222;
+      color: #fff;
+      font-weight: bold;
+      font-size: (26/2)+px;
+    } //.mlb_live__inning_heading
+
+    &--home {
+      //タイトルの下線の色
+      .mlb_live__inning__heading {
+        border-bottom-color: $home-color;
+      }
+
+      //打順の下線の色
+      .mlb_live__inning tbody td:first-child span {
+        border-bottom-color: $home-color;
+      }
+    }
+
+    &--visitor {
+      //タイトルの下線の色
+      .mlb_live__inning__heading {
+        border-bottom-color: $visitor-color;
+      }
+
+      //打順の下線の色
+      .mlb_live__inning tbody td:first-child span {
+        border-bottom-color: $visitor-color;
+      }
+    }
+
+    //mlb_live__inning table
+    & {
+      width: 100%;
+
+      th,
+      td {
+        padding: (12/2)+px;
+        border-right: 1px solid $live-border-color;
+        border-bottom: 1px solid $live-border-color;
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      &:last-child {
+        th:last-child,
+        td:last-child {
+          border-right: none;
+        }
+      }
+
+      //テーブルタイトル行
+      thead {
+        th {
+          background-color: $live-table_th-color;
+          font-size: (20/2)+px;
+        }
+
+        //ピッチャー
+        //.mlb_live__inning__th--pitcher
+        // th:first-child {
+        .mlb_live__inning__th--pitcher {
+          background-color: transparent;
+          text-align: left;
+
+          //ピッチャーの名前
+          .mlb_live__inning__pitcher_name {
+            margin-left: 1em;
+          }
+        }
+
+        //スコア
+        //.mlb_live__inning__th--score
+        .mlb_live__inning__th--score {
+          border-bottom: none;
+        }
+      } // thead テーブルタイトル行
+
+      //テーブル実況
+      tbody {
+        td {
+          font-size: (22/2)+px;
+        }
+
+        //打順
+        //.mlb_live__inning__td--lineup
+        // td:first-child {
+        .mlb_live__inning__td--lineup {
+          width: (36/2)+px;
+          border-right: none;
+
+          span {
+            display: inline-block;
+            width: (36/2)+px;
+            height: (40/2)+px;
+            line-height: (40/2)+px;
+            background-color: #222;
+            border-width: 0 0 1px;
+            border-style: solid;
+            font-size: (20/2)+px;
+          }
+        }
+
+        //選手名とプレー内容
+        //.mlb_live__inning__td--play
+        // td:nth-child(2) {
+        .mlb_live__inning__td--play {
+          text-align: left;
+          letter-spacing: ls(inline-block);
+
+          span {
+            display: inline-block;
+            margin-right: 1em;
+            letter-spacing: normal;
+
+            + span {
+              margin-left: 0;
+            }
+          }
+        }
+
+        //スコアの下線の色を変える
+        //.mlb_live__inning__td--score--home
+        //.mlb_live__inning__td--score--visitor
+        tr:first-child {
+          // td:nth-child(4),
+          // td:nth-child(5) {
+          .mlb_live__inning__td--score--home,
+          .mlb_live__inning__td--score--visitor {
+            position: relative;
+
+            &:before {
+              content: "";
+              position: absolute;
+              top: -1px;
+              left: 0;
+              width: 100%;
+              height: 1px;
+              @include hide-text;
+            }
+          }
+
+          //.mlb_live__inning__td--score--home
+          // td:nth-child(4) {
+          .mlb_live__inning__td--score--home {
+            &:before {
+              background-color: $home-color;
+            }
+          }
+
+          //..mlb_live__inning__td--score--visitor
+          // td:nth-child(5) {
+          .mlb_live__inning__td--score--visitor {
+            &:before {
+              background-color: $visitor-color;
+            }
+          }
+        }
+
+      } // tbody テーブル実況
+    } //.mlb_live__inning table
+  } //.mlb_live__inning
 } //.mlb_live
