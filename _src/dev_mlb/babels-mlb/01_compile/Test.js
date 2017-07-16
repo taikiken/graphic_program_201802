@@ -24,7 +24,7 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Calendar = require('./mlb/module/Calendar');
+var _Calendar = require('./mlb/component/calendar/Calendar');
 
 var _Calendar2 = _interopRequireDefault(_Calendar);
 
@@ -38,6 +38,50 @@ var Test = function () {
   }
 
   _createClass(Test, null, [{
+    key: 'toolbar',
+    value: function toolbar() {
+      var _this = this;
+
+      // @see https://github.com/intljusticemission/react-big-calendar/issues/191
+      // toolbar を custom する
+      // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
+      // div.onClick warning
+      return function (toolbar) {
+        var goToBack = function goToBack() {
+          toolbar.onNavigate('PREV');
+        };
+        var goToNext = function goToNext() {
+          toolbar.onNavigate('NEXT');
+        };
+        var goToCurrent = function goToCurrent() {
+          toolbar.onNavigate('TODAY');
+        };
+        return _react2.default.createElement(
+          'div',
+          { className: 'toolbar-container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'navigation-buttons' },
+            _react2.default.createElement(
+              'button',
+              { className: 'btn btn-back', onClick: goToBack },
+              _react2.default.createElement('p', { className: 'prev-icon' })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'label-date', onClick: goToCurrent, role: 'button', tabIndex: '0' },
+              _this.state.monthLabel
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'btn btn-next', onClick: goToNext },
+              _react2.default.createElement('p', { className: 'next-icon' })
+            )
+          )
+        );
+      };
+    }
+  }, {
     key: 'make',
     value: function make(element, option) {
       console.log('Test.make option', option);
