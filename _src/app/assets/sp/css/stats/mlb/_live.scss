@@ -3,18 +3,13 @@
 // import mixin / function
 @import "../../../../../../scss_sp/asset";
 
-// --------------------------------------------
-// import ファイル
-// --------------------------------------------
-
+// import
 // page layout
-@import "../../module/utility";
-
-$home-color: #00275e;
-$visitor-color: #ed7524;
+@import "setting";
 
 
 // MLB live
+
 // MLB速報コンテンツ
 .mlb_live {
   padding-bottom: 1px;
@@ -168,12 +163,12 @@ $visitor-color: #ed7524;
           font-size: (24/2)+px;
           vertical-align: middle;
         }
-      }
+      } //.mlb_live__overview__info__score
 
       //.mlb_live__overview__info__status
       &__status {
         display: inline-block;
-        padding: (6/2)+px (8/2)+px;
+        padding: (6/2)+px (12/2)+px;
         background-color: $highlight-color;
         font-weight: bold;
         font-size: (20/2)+px;
@@ -183,7 +178,7 @@ $visitor-color: #ed7524;
         }
 
         &--live {
-          background-color: #cc141d;
+          background-color: $highlight-secondary-color;
         }
 
         &--end {
@@ -193,7 +188,7 @@ $visitor-color: #ed7524;
         &--cancel {
           background-color: #444;
         }
-      }
+      } //.mlb_live__overview__info__status
 
       //.mlb_live__overview__info__place
       &__place {
@@ -493,7 +488,7 @@ $visitor-color: #ed7524;
       //   vertical-align: top;
 
       //   &.mlb_live__starting--pitcher__handed--right {
-      //     background-color: #cc141d;
+      //     background-color: $highlight-secondary-color;
       //   }
 
       //   &.mlb_live__starting--pitcher__handed--left {
@@ -513,7 +508,7 @@ $visitor-color: #ed7524;
 
         &.mlb_live__starting--pitcher__handed--right:before {
           content: '\53F3';
-          background-color: #cc141d;
+          background-color: $highlight-secondary-color;
         }
 
         &.mlb_live__starting--pitcher__handed--left:before {
@@ -646,7 +641,7 @@ $visitor-color: #ed7524;
 
         &.mlb_live__starting--member__td--player__handed--right:before {
           content: '\53F3\6253';
-          background-color: #cc141d;
+          background-color: $highlight-secondary-color;
         }
 
         &.mlb_live__starting--member__td--player__handed--left:before {
@@ -743,7 +738,7 @@ $visitor-color: #ed7524;
 
         &.mlb_live__starting--bench__td--player__handed--right:before {
           content: '\53F3\6253';
-          background-color: #cc141d;
+          background-color: $highlight-secondary-color;
         }
 
         &.mlb_live__starting--bench__td--player__handed--left:before {
