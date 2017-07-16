@@ -14,8 +14,8 @@ class DaeTeam {
   constructor(team) {
     const origin = team || {};
     this.origin = origin;
-    this.score = Number.isInteger(origin.score) ? origin.score : 0;
-    this.id = Number.isInteger(origin.score) ? origin.score : 0;
+    this.score = Number.isInteger(origin.score) ? origin.score : -1;
+    this.id = Number.isInteger(origin.score) ? origin.score : -1;
     this.team = origin.team_name || '';
   }
 }

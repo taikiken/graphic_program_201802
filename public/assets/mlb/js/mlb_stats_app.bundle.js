@@ -34231,7 +34231,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-16 13:57:06
+ * 2017-7-16 15:17:40
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -38596,9 +38596,9 @@ var _reactDom = __webpack_require__(25);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Calendar = __webpack_require__(611);
+var _ComCalendar = __webpack_require__(611);
 
-var _Calendar2 = _interopRequireDefault(_Calendar);
+var _ComCalendar2 = _interopRequireDefault(_ComCalendar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38610,54 +38610,10 @@ var Test = function () {
   }
 
   _createClass(Test, null, [{
-    key: 'toolbar',
-    value: function toolbar() {
-      var _this = this;
-
-      // @see https://github.com/intljusticemission/react-big-calendar/issues/191
-      // toolbar を custom する
-      // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
-      // div.onClick warning
-      return function (toolbar) {
-        var goToBack = function goToBack() {
-          toolbar.onNavigate('PREV');
-        };
-        var goToNext = function goToNext() {
-          toolbar.onNavigate('NEXT');
-        };
-        var goToCurrent = function goToCurrent() {
-          toolbar.onNavigate('TODAY');
-        };
-        return _react2.default.createElement(
-          'div',
-          { className: 'toolbar-container' },
-          _react2.default.createElement(
-            'div',
-            { className: 'navigation-buttons' },
-            _react2.default.createElement(
-              'button',
-              { className: 'btn btn-back', onClick: goToBack },
-              _react2.default.createElement('p', { className: 'prev-icon' })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'label-date', onClick: goToCurrent, role: 'button', tabIndex: '0' },
-              _this.state.monthLabel
-            ),
-            _react2.default.createElement(
-              'button',
-              { className: 'btn btn-next', onClick: goToNext },
-              _react2.default.createElement('p', { className: 'next-icon' })
-            )
-          )
-        );
-      };
-    }
-  }, {
     key: 'make',
     value: function make(element, option) {
       console.log('Test.make option', option);
-      _reactDom2.default.render(_react2.default.createElement(_Calendar2.default, {
+      _reactDom2.default.render(_react2.default.createElement(_ComCalendar2.default, {
         events: option.events,
         today: option.today,
         selected: option.selected,
@@ -50805,7 +50761,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // react-big-calendar API says
 // @see http://intljusticemission.github.io/react-big-calendar/examples/index.html#api
 // culture
-// Specify a specific culture code for the Calendar.
+// Specify a specific culture code for the ComCalendar.
 // Note: it's generally better to handle this globally via your i18n library.
 
 // import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -50970,7 +50926,7 @@ var customHeader = function customHeader(month) {
  * @returns {XML} div.calendar-container > BigCalendar
  * @see http://intljusticemission.github.io/react-big-calendar/
  */
-function Calendar(props) {
+function ComCalendar(props) {
   return _react2.default.createElement(
     'div',
     { className: 'calendar-container' },
@@ -50997,7 +50953,7 @@ function Calendar(props) {
   );
 }
 
-Calendar.propTypes = {
+ComCalendar.propTypes = {
   events: _propTypes2.default.arrayOf(_propTypes2.default.shape).isRequired,
   today: _propTypes2.default.instanceOf(Date).isRequired,
   selected: _propTypes2.default.func.isRequired,
@@ -51006,7 +50962,7 @@ Calendar.propTypes = {
   navigate: _propTypes2.default.func.isRequired
 };
 
-exports.default = Calendar;
+exports.default = ComCalendar;
 
 /***/ }),
 /* 612 */

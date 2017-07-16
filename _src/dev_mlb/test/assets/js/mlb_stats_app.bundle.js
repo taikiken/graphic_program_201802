@@ -5666,7 +5666,7 @@ exports.default = exp;
 
 
 function error() {
-  throw new Error('You have not selected a localization strategy for Big ComCalendar. ' + 'Please use either of the two included.');
+  throw new Error('You have not selected a localization strategy for Big Calendar. ' + 'Please use either of the two included.');
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
@@ -22297,7 +22297,7 @@ function moveDate(action, date, View) {
     case _constants.navigate.DATE:
       break;
     default:
-      !(View && typeof View.navigate === 'function') ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, 'ComCalendar View components must implement a static `.navigate(date, action)` method.s') : (0, _invariant2.default)(false) : void 0;
+      !(View && typeof View.navigate === 'function') ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, 'Calendar View components must implement a static `.navigate(date, action)` method.s') : (0, _invariant2.default)(false) : void 0;
       date = View.navigate(date, action);
   }
   return date;
@@ -34231,7 +34231,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-16 13:57:06
+ * 2017-7-16 15:17:40
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -38596,9 +38596,9 @@ var _reactDom = __webpack_require__(25);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Calendar = __webpack_require__(611);
+var _ComCalendar = __webpack_require__(611);
 
-var _Calendar2 = _interopRequireDefault(_Calendar);
+var _ComCalendar2 = _interopRequireDefault(_ComCalendar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38610,54 +38610,10 @@ var Test = function () {
   }
 
   _createClass(Test, null, [{
-    key: 'toolbar',
-    value: function toolbar() {
-      var _this = this;
-
-      // @see https://github.com/intljusticemission/react-big-calendar/issues/191
-      // toolbar を custom する
-      // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
-      // div.onClick warning
-      return function (toolbar) {
-        var goToBack = function goToBack() {
-          toolbar.onNavigate('PREV');
-        };
-        var goToNext = function goToNext() {
-          toolbar.onNavigate('NEXT');
-        };
-        var goToCurrent = function goToCurrent() {
-          toolbar.onNavigate('TODAY');
-        };
-        return _react2.default.createElement(
-          'div',
-          { className: 'toolbar-container' },
-          _react2.default.createElement(
-            'div',
-            { className: 'navigation-buttons' },
-            _react2.default.createElement(
-              'button',
-              { className: 'btn btn-back', onClick: goToBack },
-              _react2.default.createElement('p', { className: 'prev-icon' })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'label-date', onClick: goToCurrent, role: 'button', tabIndex: '0' },
-              _this.state.monthLabel
-            ),
-            _react2.default.createElement(
-              'button',
-              { className: 'btn btn-next', onClick: goToNext },
-              _react2.default.createElement('p', { className: 'next-icon' })
-            )
-          )
-        );
-      };
-    }
-  }, {
     key: 'make',
     value: function make(element, option) {
       console.log('Test.make option', option);
-      _reactDom2.default.render(_react2.default.createElement(_Calendar2.default, {
+      _reactDom2.default.render(_react2.default.createElement(_ComCalendar2.default, {
         events: option.events,
         today: option.today,
         selected: option.selected,
@@ -50970,7 +50926,7 @@ var customHeader = function customHeader(month) {
  * @returns {XML} div.calendar-container > BigCalendar
  * @see http://intljusticemission.github.io/react-big-calendar/
  */
-function Calendar(props) {
+function ComCalendar(props) {
   return _react2.default.createElement(
     'div',
     { className: 'calendar-container' },
@@ -50997,7 +50953,7 @@ function Calendar(props) {
   );
 }
 
-Calendar.propTypes = {
+ComCalendar.propTypes = {
   events: _propTypes2.default.arrayOf(_propTypes2.default.shape).isRequired,
   today: _propTypes2.default.instanceOf(Date).isRequired,
   selected: _propTypes2.default.func.isRequired,
@@ -51006,7 +50962,7 @@ Calendar.propTypes = {
   navigate: _propTypes2.default.func.isRequired
 };
 
-exports.default = Calendar;
+exports.default = ComCalendar;
 
 /***/ }),
 /* 612 */
@@ -51238,12 +51194,12 @@ function isValidView(view, _ref) {
 var now = new Date();
 
 /**
- * react-big-calendar is full featured ComCalendar component for managing events and dates. It uses
+ * react-big-calendar is full featured Calendar component for managing events and dates. It uses
  * modern `flexbox` for layout making it super responsive and performant. Leaving most of the layout heavy lifting
  * to the browser. __note:__ The default styles use `height: 100%` which means your container must set an explicit
  * height (feel free to adjust the styles to suit your specific needs).
  *
- * Big ComCalendar is unopiniated about editing and moving events, prefering to let you implement it in a way that makes
+ * Big Calendar is unopiniated about editing and moving events, prefering to let you implement it in a way that makes
  * the most sense to your app. It also tries not to be prescriptive about your event data structures, just tell it
  * how to find the start and end datetimes and you can pass it whatever you want.
  *
@@ -51584,14 +51540,14 @@ Calendar.propTypes = {
   scrollToTime: _propTypes2.default.instanceOf(Date),
 
   /**
-   * Specify a specific culture code for the ComCalendar.
+   * Specify a specific culture code for the Calendar.
    *
    * **Note: it's generally better to handle this globally via your i18n library.**
    */
   culture: _propTypes2.default.string,
 
   /**
-   * Localizer specific formats, tell the ComCalendar how to format and display dates.
+   * Localizer specific formats, tell the Calendar how to format and display dates.
    *
    * `format` types are dependent on the configured localizer; both Moment and Globalize
    * accept strings of tokens according to their own specification, such as: `'DD mm yyyy'`.
@@ -51608,7 +51564,7 @@ Calendar.propTypes = {
    *     local.format(end, { date: 'short' }, culture)
    * }
    *
-   * <ComCalendar formats={formats} />
+   * <Calendar formats={formats} />
    * ```
    *
    * All localizers accept a function of
@@ -51689,7 +51645,7 @@ Calendar.propTypes = {
    *   	 event: MyAgendaEvent // with the agenda view use a different component to render events
    *   }
    * }
-   * <ComCalendar components={components} />
+   * <Calendar components={components} />
    * ```
    */
   components: _propTypes2.default.shape({
@@ -56163,7 +56119,7 @@ var getYStyles = function getYStyles(idx, _ref6) {
 /**
  * Takes an array of unsorted events, and returns a sorted array
  * containing the same events, but with an additional style property.
- * These styles will position the events similarly to Google ComCalendar.
+ * These styles will position the events similarly to Google Calendar.
  *
  * The algorithm will start by sorting the array, and then iterating over it.
  * Starting at the first event, each of its siblings and children, placed in

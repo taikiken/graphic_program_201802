@@ -111,26 +111,27 @@ const style = () => (
 
 /**
  * 週の名称の短いバージョンリスト
- * @type {{Mon: string, Tue: string, Wed: string, Thu: string, Fri: string, Sat: string, Sun: string}}
+ * @type {{mon: string, tue: string, wed: string, thu: string, fri: string, sat: string, sun: string}}
  */
 const weeks = {
-  Mon: '月',
-  Tue: '火',
-  Wed: '水',
-  Thu: '木',
-  Fri: '金',
-  Sat: '土',
-  Sun: '日',
+  mon: '月',
+  tue: '火',
+  wed: '水',
+  thu: '木',
+  fri: '金',
+  sat: '土',
+  sun: '日',
 };
 
 /**
+ * 月曜スタートにするために `culture="en-GB"` にしたために英語表記に変わった曜日を
  * カレンダー上部週表示を日本語表記にする
  * @param {*} month react-big-calendar month object
  * @returns {XML} 週日本語表記を返します
  */
 const customHeader = (month) => {
-  const short = weeks[month.label];
   const label = month.label.toLowerCase();
+  const short = weeks[label];
   return (
     <div className={`weeks-header weeks-header-${label}`}>
       <span className="weeks-header-label">{short}</span>
@@ -175,6 +176,15 @@ function ComCalendar(props) {
   );
 }
 
+/**
+ * - events {Array.<ModSchedules>} - 表示する予定・イベント
+ * - today {Date} - デフォルト位置（今日）
+ * - selected {function} - 予定・イベントを選択した callback
+ * - slot {function} - 日付を選択した callback
+ * - view {function} - month / week / day を変更した callback
+ * - navigate {function} - 前月 / 翌月 を変更した callback
+ * @type {{events: Array.<ModSchedules>, today: Date, selected: function, slot: function, view: function, navigate: function}}
+ */
 ComCalendar.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape).isRequired,
   today: PropTypes.instanceOf(Date).isRequired,
