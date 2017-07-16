@@ -59,6 +59,8 @@ $app->group('/stats', function () use($app) {
         'og_url'             => $app->model->property('site_url').'stats/'.$args['category'].'/',
         'template'           => $args['category'].'/index.php',
         'path'               => $args,
+        // @since 2017-07016 - .whole へ className 追加するために追加する
+        'prop_category'      => $args['category'],
       ));
 
       return $this->renderer->render($response, 'stats/default.php', $args);
@@ -84,6 +86,8 @@ $app->group('/stats', function () use($app) {
         'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
         'template'           => 'mlb/schedule.php',
         'path'               => $args,
+        // @since 2017-07016 - .whole へ className 追加するために追加する
+        'prop_base'          => 'mlb',
       ));
 
       return $this->renderer->render($response, 'stats/default.php', $args);
@@ -105,6 +109,9 @@ $app->group('/stats', function () use($app) {
         'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
         'template'           => 'mlb/'.$args['category'].'.php',
         'path'               => $args,
+        // @since 2017-07016 - .whole へ className 追加するために追加する
+        'prop_base'          => 'mlb',
+        'prop_category'      => $args['category'],
       ));
 
       return $this->renderer->render($response, 'stats/default.php', $args);
