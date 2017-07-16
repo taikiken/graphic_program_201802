@@ -86,29 +86,33 @@ class DaeBoard {
   }
 }
 
+// 試合情報json
 export default class DaeGameInfo {
   constructor(info) {
     const origin = info || {};
+    const board = new DaeBoard(origin.score_board);
+    const starting = new DaeStarting(origin.starting_pitcher);
+    const record = new DaeRecord(origin.team_record);
+    // property
     this.origin = origin;
     this.date = origin.play_date || '';
     this.status = Type.int(origin.status_id) ? origin.status_id : -1;
-    const board = new DaeBoard(origin.score_board);
     this.win = origin.win || '';
     this.lose = origin.lose || '';
     this.save = origin.save || '';
     this.batteries = origin.batteries || [];
     this.hr = origin.hr || [];
-    const starting = new DaeStarting(origin.starting_pitcher);
-    const record = new DaeRecord(origin.team_record);
     this.board = board;
     this.starting = starting;
     this.record = record;
     this.home = {
+      id: board.home.id,
       board: board.home,
       starting: starting.home,
       record: record.home,
     };
     this.visitor = {
+      id: board.visitor.id,
       board: board.visitor,
       starting: starting.visitor,
       record: record.visitor,
