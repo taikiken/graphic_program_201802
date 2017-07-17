@@ -1,2 +1,5 @@
-Header set Access-Control-Allow-Origin "*"
-Header append Access-Control-Allow-Credentials true
+## CORS対応 - Originの許可
+RewriteCond %{HTTP:Origin} (.+)
+RewriteRule . - [E=CORS_ORIGIN:%1]
+Header set Access-Control-Allow-Origin %{CORS_ORIGIN}e env=CORS_ORIGIN
+Header set Access-Control-Allow-Credentials true env=CORS_ORIGIN
