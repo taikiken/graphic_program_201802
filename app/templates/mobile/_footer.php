@@ -249,5 +249,23 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
 <?php
 endif;
 ?>
+
+<?php // #1992 - Teads
+if ( $page['template'] == 'p' || $page['template'] == 'comment') :
+  if ( $page['post']['is_sponserd'] === false ) :
+    echo <<<__EOL__
+<script type="text/javascript">
+    var amp_med = '2000801';
+    var amp_site = '100000667';
+    var amp_frame = '100004185';
+    var amp_rurl = document.referrer;
+    var amp_send = location.protocol + '//afs.adjust-net.jp/adserver/sp/ads_v.js?' + Math.random();
+    document.write("<scr" + "ipt type='text/javascript' src='" + amp_send + "'></scr" + "ipt>");
+</script>
+__EOL__;
+  endif;
+endif;
+?>
+
 </body>
 </html>
