@@ -1,0 +1,9 @@
+# bundle
+*.bundle.js
+
+# compile
+babels-infinite/01_compile
+babels-infinite/02_dest
+
+# docs
+babels-infinite/_docs

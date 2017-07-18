@@ -117,8 +117,22 @@ __EOL__;
 <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
 <script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
-
-<div id="whole" class="whole stats">
+<?php
+// @since 2017-07-16
+// .whole へ tennis|golf|mlb 追加する
+$whole_classes = array();
+$whole_classes[] = 'whole';
+$whole_classes[] = 'stats';
+// tennis|golf|mlb
+if (isset($page['prop_category'])) {
+  $whole_classes[] = $page['prop_category'];
+}
+// mlb: schedule|standing|leaders|playerlist|game
+if (isset($page['prop_identity'])) {
+  $whole_classes[] = $page['prop_identity'];
+}
+?>
+<div id="whole" class="<?php echo join( ' ', $whole_classes);?>">
 
   <?php
   // app in webview 時に .head-sec を非表示にする
