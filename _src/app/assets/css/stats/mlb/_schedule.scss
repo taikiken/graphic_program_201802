@@ -1,0 +1,430 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss/asset";
+
+// import
+// page layout
+@import "setting";
+
+
+// MLB トップ(日程・スケジュール)
+
+//共通パーツ
+//試合概況
+.mlb__game__overview {
+  display: table;
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: $bg-color_gray;
+  border-bottom: 2px solid $border-primary-color;
+  letter-spacing: ls(inline-block);
+
+  * {
+    letter-spacing: normal;
+  }
+
+  &__team,
+  &__info {
+    display: table-cell;
+    // width: perCalc(250, 750);
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  //.mlb__game__overview__team
+  &__team {
+    width: 33%;
+    padding-right: 101px;
+    padding-left: 10px;
+    font-weight: bold;
+    font-size: 20px;
+
+    //.color: $highlight-color;
+    &.mlb__game__result--win {
+      color: $highlight-color;
+    }
+  }
+
+  //.mlb__game__overview__info
+  &__info {
+    width: 34%;
+
+    //.mlb__game__overview__info__place
+    &__place {
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    //.mlb__game__overview__info__score
+    &__score {
+      display: table;
+      width: 100%;
+
+      &--home,
+      &--visitor,
+      &--vs {
+        display: table-cell;
+        // line-height: 1.2;
+      }
+
+      //.mlb__game__overview__info__score--home
+      //.mlb__game__overview__info__score--visitor
+      &--home,
+      &--visitor {
+        width: 40%;
+        font-weight: bold;
+        font-size: 32px;
+
+        //.color: $highlight-color;
+        &.mlb__game__result--win {
+          color: $highlight-color;
+        }
+      }
+
+      span:nth-child(1) {
+        text-align: right;
+      }
+
+      span:nth-child(3) {
+        text-align: left;
+      }
+
+      //.mlb__game__overview__info__score--vs
+      &--vs {
+        width: 20%;
+        font-weight: bold;
+        font-size: 32px;
+        vertical-align: middle;
+      }
+    } //.mlb__game__overview__info__score
+
+    //.mlb__game__overview__info__status
+    &__status {
+      display: inline-block;
+      padding: 6px 12px;
+      background-color: $highlight-color;
+      color: #fff;
+      font-weight: bold;
+      font-size: 12px;
+
+      &--before {
+        background-color: $highlight-color;
+      }
+
+      &--live {
+        background-color: $highlight-secondary-color;
+      }
+
+      &--end {
+        background-color: #444;
+      }
+
+      &--cancel {
+        background-color: #444;
+      }
+    } //.mlb__game__overview__info__status
+  } //.mlb__game__overview__info
+}
+
+
+
+
+
+// 出場した日本人選手
+//.mlb__today_jp
+.mlb__today_jp {
+  //.mlb__today_jp__heading
+  &__heading {
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    background-color: $highlight-color;
+    color: #fff;
+    font-weight: bold;
+    font-size: 22px;
+  } //.mlb__today_jp__heading
+
+
+
+  //.mlb__today_jp__container
+  &__container {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dbdbdb;
+  } //.mlb__today_jp__container
+
+
+
+  //.mlb__today_jp__player
+  &__player {
+    margin-top: 20px;
+    margin-bottom: 16px;
+    overflow: hidden;
+
+    //.mlb__today_jp__player__name
+    &__name {
+      float: left;
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    //.mlb__today_jp__player__profile
+    &__profile {
+      float: right;
+      display: table;
+      border: 1px solid $highlight-color;
+
+      dt, dd {
+        display: table-cell;
+        padding: 4px 6px;
+        white-space: nowrap;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      //.mlb__today_jp__player__profile__team
+      &__team {
+        color: $highlight-color;
+      }
+
+      //.mlb__today_jp__player__profile__uniform_num
+      &__uniform_num {
+        background-color: $highlight-color;
+        color: #fff;
+      }
+    } //.mlb__today_jp__player__profile
+  } //.mlb__today_jp__player
+
+
+
+  //.mlb__today_jp__record
+  &__record {
+    //.mlb__today_jp__record__container
+    &__container {
+      margin-top: 12px;
+    }
+
+    width: 100%;
+    background-color: $bg-color_gray;
+
+    &__th,
+    &__td {
+      padding: 12px 8px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    //.mlb__today_jp__record__th
+    &__th {
+      background-color: $highlight-color;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    //.mlb__today_jp__record__td
+    &__td {
+      border-right: 1px solid $border-primary-color;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  } //.mlb__today_jp__record
+
+
+
+  //.mlb__today_jp__btn
+  &__btn {
+    // margin-right: perCalc(20, 750);
+    // margin-left: perCalc(20, 750);
+
+    a {
+      @include link-decoration($highlight-color, #fff, none, none);
+      display: block;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border: 2px solid $highlight-color;
+      border-radius: 4px;
+      background-color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+
+      &:hover {
+        background-color: $highlight-color;
+      }
+    }
+  }
+} //.mlb__today_jp
+
+
+
+
+
+//日程・結果
+//.mlb__schedule
+.mlb__schedule {
+  margin-top: 40px;
+
+  //.mlb__schedule__heading
+  &__heading {
+    //.mlb__schedule__heading__container
+    &__container {
+      display: table;
+      width: 100%;
+      background-color: $highlight-color;
+    }
+
+
+    &,
+    &__btn {
+      display: table-cell;
+    }
+
+    & {
+      width: 568px;
+      padding: 12px 20px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 22px;
+    }
+
+    //.mlb__schedule__heading__btn
+    &__btn {
+      background-color: #0a275d;
+      text-align: center;
+
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+
+        span {
+          display: inline-block;
+          color: #fff;
+          font-weight: bold;
+          font-size: 14px;
+
+          &:before {
+            content: "";
+            position: relative;
+            top: -1px;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 2px;
+            background: url(/assets/images/stats/mlb/icon-calender@2x.png) 0 0 no-repeat;
+            background-size: 24px;
+            vertical-align: middle;
+            @include hide-text;
+          }
+        }
+      }
+    }
+  } //.mlb__schedule__heading
+
+
+
+  //絞り込み検索
+  //.mlb__schedule__limit_search
+  &__limit_search {
+    letter-spacing: ls(inline-block);
+
+    //.mlb__schedule__limit_search--team
+    //.mlb__schedule__limit_search--game
+    &--team,
+    &--game {
+      display: inline-block;
+      // display: inline-table;
+      width: 50%;
+      padding: (28/2)+px (10/2)+px;
+      // letter-spacing: normal;
+      text-align: center;
+    }
+
+    //.mlb__schedule__limit_search--team
+    &--team {
+      background-color: $bg-color_gray;
+    } //.mlb__schedule__limit_search--team
+
+    //.mlb__schedule__limit_search--game
+    &--game {
+      background-color: #d9d9d9;
+    } //.mlb__schedule__limit_search--game
+
+    //.mlb__schedule__limit_search__heading
+    //.mlb__schedule__limit_search__select
+    &__heading,
+    &__select {
+      display: inline-block;
+      letter-spacing: normal;
+    }
+
+    //.mlb__schedule__limit_search__heading
+    &__heading {
+      margin-right: 1em;
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    //.mlb__schedule__limit_search__select
+    &__select {
+      margin-top: (16/2)+px;
+      text-align: center;
+    } //.mlb__schedule__limit_search__select
+  } //.mlb__schedule__limit_search
+
+
+
+  //絞り込み検索結果
+  //.mlb__schedule__result
+  &__result {
+    //.mlb__schedule__result__section
+    &__section {
+      // padding-right: perCalc(20, 750);
+      // padding-left: perCalc(20, 750);
+
+      .mlb__game__overview + .mlb__game__overview {
+        margin-top: 12px;
+      }
+    }
+
+    //.mlb__schedule__result__container
+    &__container {
+      margin-top: 24px;
+    }
+
+    //.mlb__schedule__result__heading
+    &__heading {
+      padding: 2px 0;
+      margin-bottom: 16px;
+      border-bottom: 3px solid $highlight-color;
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  } //.mlb__schedule__result
+
+
+
+  //.mlb__schedule__calendar
+  &__calendar {
+    margin-top: 30px;
+    padding: 0 0 40px;
+
+    //.mlb__schedule__calendar__heading
+    &__heading {
+      padding: 5px 0;
+      margin-bottom: 16px;
+      border-bottom: 3px solid $highlight-color;
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  } //.mlb__schedule__calendar
+} //.mlb__schedule
