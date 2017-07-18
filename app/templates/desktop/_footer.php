@@ -145,5 +145,24 @@ if ( $page['apiRoot'] != '' ) :
   }(document, 'script', 'facebook-jssdk'));
 </script>
 <script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
+
+
+<?php // #1992 - Teads
+if ( $page['template'] == 'p' || $page['template'] == 'comment') :
+  if ( $page['post']['is_sponserd'] === false ) :
+    echo <<<__EOL__
+<script type="text/javascript">
+    var amp_med = '2000801';
+    var amp_site = '2001028';
+    var amp_frame = '2009107';
+    var amp_rurl = document.referrer;
+    var amp_send = location.protocol + '//ads.adjust-net.jp/adserver/ad/ads_v.js?' + Math.random();
+    document.write("<scr" + "ipt type='text/javascript' src='" + amp_send + "'></scr" + "ipt>");
+</script>
+__EOL__;
+  endif;
+endif;
+?>
+
 </body>
 </html>

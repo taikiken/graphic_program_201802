@@ -115,7 +115,6 @@
 
           <?php endif; ?>
 
-
           <div class="post-content">
           <?php if ( $page['post']['is_readmore'] ) : ?>
 
