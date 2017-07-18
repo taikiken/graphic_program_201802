@@ -87,4 +87,17 @@ export default class Text {
   static and(targetText) {
     return Text.replace(targetText, '&amp;', '&');
   }
+  /**
+   * 頭 `0` 詰文字を作成します
+   * @param {string} targetText 操作対象文字列
+   * @param {number} [length=2] 必要な桁数
+   * @returns {string} `0` 詰文字を返します
+   */
+  static zero(targetText, length = 2) {
+    let str = String(targetText);
+    while (str.length <= length) {
+      str = `0${str}`;
+    }
+    return str;
+  }
 }

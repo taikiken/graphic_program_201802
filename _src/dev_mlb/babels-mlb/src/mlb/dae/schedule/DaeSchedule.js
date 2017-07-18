@@ -10,73 +10,220 @@
  *
  */
 
-import Type from '../../../moku/util/Type';
+// dae
+import Normalize from '../../util/Normalize';
 
-// game 毎の選手情報
-class DaePlayer {
+/**
+ * game 毎の日本人選手情報
+ */
+class DaeJapanesesPlayer {
+  /**
+   * 日本人選手情報
+   * @param {object} player JSON
+   */
   constructor(player) {
-    const origin = player || {};
+    const origin = Normalize.obj(player);
+    // ---
+    /**
+     * original JSON
+     * @type {Object}
+     */
     this.origin = origin;
-    this.player = origin.name || '';
-    this.team = origin.team_name || '';
-    this.number = Type.int(origin.number) ? origin.number : -1;
-    this.average = origin.average || '';
-    this.bats = Type.int(origin.bats) ? origin.bats : -1;
-    this.hits = Type.int(origin.hits) ? origin.hits : -1;
-    this.runs = Type.int(origin.runs) ? origin.runs : -1;
+    /**
+     * 選手名称
+     * @type {string}
+     */
+    this.player = Normalize.str(origin.name);
+    /**
+     * 所属チーム
+     * @type {string}
+     */
+    this.team = Normalize.str(origin.team_name);
+    /**
+     * 背番号
+     * @type {number}
+     */
+    this.number = Normalize.int(origin.number);
+    /**
+     * 打率・防御率?
+     * @type {string}
+     */
+    this.average = Normalize.str(origin.average);
+    /**
+     * 打席数
+     * @type {number}
+     */
+    this.bats = Normalize.int(origin.bats);
+    /**
+     * 安打数
+     * @type {number}
+     */
+    this.hits = Normalize.int(origin.hits);
+    /**
+     * 打点数
+     * @type {number}
+     */
+    this.runs = Normalize.int(origin.runs);
   }
 }
 
-// game 毎の選手情報 -> DaePlayer
-class DaePlayers {
+/**
+ * 日本人選手リスト
+ * game 毎の選手情報 -> DaeJapanesesPlayer - 日本人選手
+ */
+class DaeJapanesesPlayers {
+  /**
+   * 日本人選手リスト
+   * @param {Array} players JSON
+   */
   constructor(players) {
-    const origin = players || [];
+    const origin = Normalize.arr(players);
+    // ---
+    /**
+     * original JSON
+     * @type {Array.<*>}
+     */
     this.origin = origin;
-    this.games = origin.map(player => (new DaePlayer(player)));
+    /**
+     * 日本人選手リスト
+     * @type {Array.<DaeJapanesesPlayer>}
+     */
+    this.games = origin.map(player => (new DaeJapanesesPlayer(player)));
   }
 }
 
-// game 毎の対戦チーム情報
-class DaeTeam {
+/**
+ * game 毎の対戦チーム情報
+ */
+class DaeGameTeam {
+  /**
+   * game 毎の対戦チーム情報
+   * @param {obj} team JSON
+   */
   constructor(team) {
-    const origin = team || {};
+    const origin = Normalize.obj(team);
+    // ---
+    /**
+     * original JSON
+     * @type {Object}
+     */
     this.origin = origin;
-    this.score = Type.int(origin.score) ? origin.score : 0;
-    this.id = Type.int(origin.score) ? origin.score : 0;
-    this.team = origin.team_name || '';
+    /**
+     * 得点
+     * @type {number}
+     */
+    this.score = Normalize.int(origin.score);
+    /**
+     * チーム ID
+     * @type {number}
+     */
+    this.id = Normalize.int(origin.team_id);
+    /**
+     * チーム名称
+     * @type {string}
+     */
+    this.team = Normalize.str(origin.team_name);
   }
 }
 
-// game 毎の対戦情報
+/**
+ * game 毎の対戦情報
+ */
 class DaeGame {
+  /**
+   * game 毎の対戦情報
+   * @param {object} game JSON
+   */
   constructor(game) {
-    const origin = game || {};
+    const origin = Normalize.obj(game);
+    const home = Normalize.obj(origin.home);
+    const visitor = Normalize.obj(origin.visitor);
+    // ----
+    /**
+     * original JSON
+     * @type {Object}
+     */
     this.origin = origin;
-    const home = origin.home || {};
-    const visitor = origin.visitor || {};
-    this.id = Type.int(origin.game_id) ? origin.game_id : -1;
-    this.studium = origin.studium || '';
-    this.status = Type.int(origin.status_id) ? origin.status_id : -1;
-    this.home = new DaeTeam(home);
-    this.visitor = new DaeTeam(visitor);
-    this.players = new DaePlayers(origin.player);
+    /**
+     * game ID
+     * @type {number}
+     */
+    this.id = Normalize.int(origin.game_id);
+    /**
+     * 球場名
+     * @type {string}
+     */
+    this.studium = Normalize.str(origin.studium);
+    /**
+     * ゲーム status {@link Status}
+     * @type {number}
+     */
+    this.status = Normalize.int(origin.status_id);
+    /**
+     * ホームチーム
+     * @type {DaeGameTeam}
+     */
+    this.home = new DaeGameTeam(home);
+    /**
+     * ビジターチーム
+     * @type {DaeGameTeam}
+     */
+    this.visitor = new DaeGameTeam(visitor);
+    /**
+     * ゲーム毎の選手情報
+     * @type {DaeJapanesesPlayers}
+     */
+    this.players = new DaeJapanesesPlayers(origin.player);
   }
 }
 
-// game 毎の対戦情報 -> DaeGame
+/**
+ * game 毎の対戦情報 -> DaeGame
+ * - DaeGames
+ *   - {@link DaeGame}
+ *     - {@link DaeGameTeam}
+ *     - {@link DaeJapanesesPlayers}
+ *       - {@link DaeJapanesesPlayer}
+ */
 class DaeGames {
+  /**
+   * game 毎の対戦情報
+   * @param {Array} games JSON
+   */
   constructor(games) {
-    const origin = games || [];
+    const origin = Normalize.arr(games);
+    /**
+     * original JSON
+     * @type {Array.<*>}
+     */
     this.origin = origin;
+    /**
+     * 対戦情報リスト
+     * @type {Array.<DaeGame>}
+     */
     this.games = origin.map(game => (new DaeGame(game)));
   }
 }
 
-// japanese
+/**
+ * 日本人選手成績リストを作成します
+ */
 class DaeJapanese {
+  /**
+   * 日本人選手成績リスト
+   * @param {Array} japanese JSON
+   */
   constructor(japanese) {
-    const origin = japanese || [];
+    const origin = Normalize.arr(japanese);
+    /**
+     * original JSON
+     * @type {Array.<*>}
+     */
     this.origin = origin;
+    /**
+     * 日本人選手成績リスト
+     * @type {Array.<DaeGame>}
+     */
     this.games = origin.map(game => (new DaeGame(game)));
   }
 }
@@ -104,12 +251,9 @@ export default class DaeSchedule {
    * @param {object} schedules `master/schedule/YYYYMMDD.json` - スケジュール JSON
    */
   constructor(schedules) {
-    const origin = schedules || {};
-    const schedule = origin.schedule || {};
-    const inter = schedule.inter_league;
-    const regular = schedule.regular_season || {};
-    const american = regular.american;
-    const national = regular.national;
+    const origin = Normalize.obj(schedules);
+    const schedule = Normalize.obj(origin.schedule);
+    const regular = Normalize.obj(schedule.regular_season);
     // schedule
     /**
      * スケジュール JSON original
@@ -120,24 +264,25 @@ export default class DaeSchedule {
      * 試合日 YYYYMMDD
      * @type {*}
      */
-    this.date = origin.play_date || '';
+    this.date = Normalize.str(origin.play_date);
     // 試合種別毎
     /**
      * ゲーム情報 -  inter league
      * @type {DaeGames}
      */
-    this.inter = new DaeGames(inter);
+    this.inter = new DaeGames(schedule.inter_league);
     /**
      * ゲーム情報 -  american league
      * @type {DaeGames}
      */
-    this.american = new DaeGames(american);
+    this.american = new DaeGames(regular.american);
     /**
      * ゲーム情報 -  national league
      * @type {DaeGames}
      */
-    this.national = new DaeGames(national);
+    this.national = new DaeGames(regular.national);
     // 日本人選手
+    // TODO: batter pitcher に別れるらしい
     /**
      * 試合に出場した日本人選手
      * @type {DaeJapanese}

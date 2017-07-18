@@ -10,40 +10,41 @@
  *
  */
 
-import Type from '../../../moku/util/Type';
+// dae
+import Normalize from '../../util/Normalize';
 
 class DaeRecord {
   constructor(info) {
-    const origin = info || {};
+    const origin = Normalize.obj(info);
     this.origin = origin;
-    this.win = Type.int(origin.win) ? origin.win : -1;
-    this.lose = Type.int(origin.lose) ? origin.lose : -1;
-    this.tie = Type.int(origin.tie) ? origin.tie : -1;
+    this.win = Normalize.int(origin.win);
+    this.lose = Normalize.int(origin.lose);
+    this.tie = Normalize.int(origin.tie);
   }
 }
 
 class DaePitcher {
   constructor(info) {
-    const origin = info || {};
+    const origin = Normalize.obj(info);
     this.origin = origin;
-    this.average = origin.average || '';
-    this.gamesPitched = origin.games_pitched || '';
-    this.inningsPitched = origin.innings_pitched || '';
-    this.hits = Type.int(origin.hits) ? origin.hits : -1;
-    this.holds = Type.int(origin.holds) ? origin.holds : -1;
-    this.lose = Type.int(origin.lose) ? origin.lose : -1;
-    this.runs = Type.int(origin.runs) ? origin.runs : -1;
-    this.saves = Type.int(origin.saves) ? origin.saves : -1;
-    this.seasonHits = Type.int(origin.season_hits) ? origin.season_hits : -1;
-    this.seasonRuns = Type.int(origin.season_runs) ? origin.season_runs : -1;
-    this.sequence = Type.int(origin.sequence) ? origin.sequence : -1;
-    this.wins = Type.int(origin.wins) ? origin.wins : -1;
+    this.average = Normalize.str(origin.average);
+    this.gamesPitched = Normalize.str(origin.games_pitched);
+    this.inningsPitched = Normalize.str(origin.innings_pitched);
+    this.hits = Normalize.int(origin.hits);
+    this.holds = Normalize.int(origin.holds);
+    this.lose = Normalize.int(origin.lose);
+    this.runs = Normalize.int(origin.runs);
+    this.saves = Normalize.int(origin.saves);
+    this.seasonHits = Normalize.int(origin.season_hits);
+    this.seasonRuns = Normalize.int(origin.season_runs);
+    this.sequence = Normalize.int(origin.sequence);
+    this.wins = Normalize.int(origin.wins);
   }
 }
 
 class DaeStarting {
   constructor(info) {
-    const origin = info || {};
+    const origin = Normalize.obj(info);
     this.origin = origin;
     this.home = DaePitcher(origin.home);
     this.visitor = DaePitcher(origin.visitor);
@@ -52,7 +53,7 @@ class DaeStarting {
 
 class DaeScores {
   constructor(info) {
-    const origin = info || {};
+    const origin = Normalize.obj(info);
     this.origin = origin;
     const scores = {};
     const innings = Object.keys(origin).map((inning) => {
@@ -67,41 +68,47 @@ class DaeScores {
 
 class DaeInnings {
   constructor(info) {
-    const origin = info || {};
+    const origin = Normalize.obj(info);
     this.origin = origin;
-    this.errors = Type.int(origin.errors) ? origin.errors : -1;
-    this.hits = Type.int(origin.errors) ? origin.errors : -1;
-    this.id = Type.int(origin.team_id) ? origin.team_id : -1;
-    this.team = origin.team_name || '';
+    this.errors = Normalize.int(origin.errors);
+    this.hits = Normalize.int(origin.errors);
+    this.id = Normalize.int(origin.team_id);
+    this.team = Normalize.str(origin.team_name);
     this.sccores = new DaeScores(origin.scores);
   }
 }
 
 class DaeBoard {
   constructor(info) {
-    const origin = info || {};
+    const origin = Normalize.obj(info);
     this.origin = origin;
     this.home = new DaeInnings(origin.home);
     this.visitor = new DaeInnings(origin.visitor);
   }
 }
 
-// 試合情報json
+/**
+ * 試合情報json - game_info.json
+ */
 export default class DaeGameInfo {
+  /**
+   * 各試合除法
+   * @param {object} info JSON
+   */
   constructor(info) {
-    const origin = info || {};
+    const origin = Normalize.obj(info);
     const board = new DaeBoard(origin.score_board);
     const starting = new DaeStarting(origin.starting_pitcher);
     const record = new DaeRecord(origin.team_record);
     // property
     this.origin = origin;
-    this.date = origin.play_date || '';
-    this.status = Type.int(origin.status_id) ? origin.status_id : -1;
-    this.win = origin.win || '';
-    this.lose = origin.lose || '';
-    this.save = origin.save || '';
-    this.batteries = origin.batteries || [];
-    this.hr = origin.hr || [];
+    this.date = Normalize.str(origin.play_date);
+    this.status = Normalize.int(origin.status_id);
+    this.win = Normalize.str(origin.win);
+    this.lose = Normalize.str(origin.lose);
+    this.save = Normalize.str(origin.save);
+    this.batteries = Normalize.arr(origin.batteries);
+    this.hr = Normalize.arr(origin.hr);
     this.board = board;
     this.starting = starting;
     this.record = record;

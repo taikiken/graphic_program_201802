@@ -10,7 +10,16 @@
  *
  */
 
+import Normalize from '../util/Normalize';
+
+/**
+ * game status 定数
+ */
 export default class Status {
+  /**
+   * game status key: value - 日本語名称 object
+   * @type {{1: string, 2: string, 4: string, 5: string, 6: string, 9: string, 10: string, 23: string}}
+   */
   static games = {
     1: '試合前 ',
     2: '試合中 ',
@@ -21,7 +30,12 @@ export default class Status {
     10: '没収  ',
     23: '遅延/中断',
   };
-  static id(num) {
-    return Status.games[num] || '';
+  /**
+   * status 名称を取得します
+   * @param {number} id status ID
+   * @returns {string} status 日本語名称 を返します
+   */
+  static state(id) {
+    return Normalize.str(Status.games[id]);
   }
 }
