@@ -70,7 +70,7 @@ $headline_response_articles_length = count($headline_response_articles);
               ?>
                 <figure class="post-thumb post-thumb-image" style="<?php echo $media_background; ?>">
                   <img class="image-hd" src="/assets/images/common/thumb-16x9.png" alt="">
-                    <img src="/assets/images/common/thumb-1x1-play-s.png" alt="" class="post-thumb-overlay-movie type-movie"/>
+                  <img src="/assets/images/common/thumb-16x9-play-s.png" alt="" class="post-thumb-overlay-movie type-movie"/>
                 </figure>
               <?php
               endif;

@@ -159,7 +159,7 @@
 
         <div class="motorsports_stats">
           <section class="matches">
-            <h2 class="matches__heading mod-headingA">オーストリアGP</h2>
+            <h2 class="matches__heading mod-headingA">イギリスGP</h2>
             <table class="matches__table mod-table">
               <thead>
                 <tr>
@@ -171,28 +171,28 @@
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>バルテリ・ボッタス</td>
-                  <td>メルセデス</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>セバスチャン・ベッテル</td>
-                  <td>フェラーリ</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>ダニエル・リカルド</td>
-                  <td>レッドブル</td>
-                </tr>
-                <tr>
-                  <td>4</td>
                   <td>ルイス・ハミルトン</td>
                   <td>メルセデス</td>
                 </tr>
                 <tr>
-                  <td>5</td>
+                  <td>2</td>
+                  <td>バルテリ・ボッタス</td>
+                  <td>メルセデス</td>
+                </tr>
+                <tr>
+                  <td>3</td>
                   <td>キミ・ライコネン</td>
                   <td>フェラーリ</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>マックス・フェルスタッペン</td>
+                  <td>レッドブル</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>ダニエル・リカルド</td>
+                  <td>レッドブル</td>
                 </tr>
               </tbody>
             </table><!-- /.matches__table -->
@@ -222,31 +222,31 @@
                   <td>1</td>
                   <td>セバスチャン・ベッテル</td>
                   <td>フェラーリ</td>
-                  <td>171</td>
+                  <td>177</td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>ルイス・ハミルトン</td>
                   <td>メルセデス</td>
-                  <td>151</td>
+                  <td>176</td>
                 </tr>
                 <tr>
                   <td>3</td>
                   <td>バルテリ・ボッタス</td>
                   <td>メルセデス</td>
-                  <td>136</td>
+                  <td>154</td>
                 </tr>
                 <tr>
                   <td>4</td>
                   <td>ダニエル・リカルド</td>
                   <td>レッドブル</td>
-                  <td>107</td>
+                  <td>117</td>
                 </tr>
                 <tr>
                   <td>5</td>
                   <td>キミ・ライコネン</td>
                   <td>フェラーリ</td>
-                  <td>83</td>
+                  <td>98</td>
                 </tr>
               </tbody>
             </table><!-- /.point_rank__table -->
@@ -263,27 +263,27 @@
                 <tr>
                   <td>1</td>
                   <td>メルセデス</td>
-                  <td>287</td>
+                  <td>330</td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>フェラーリ</td>
-                  <td>254</td>
+                  <td>275</td>
                 </tr>
                 <tr>
                   <td>3</td>
                   <td>レッドブル</td>
-                  <td>152</td>
+                  <td>174</td>
                 </tr>
                 <tr>
                   <td>4</td>
                   <td>フォースインディア</td>
-                  <td>89</td>
+                  <td>95</td>
                 </tr>
                 <tr>
                   <td>5</td>
                   <td>ウイリアムズ</td>
-                  <td>40</td>
+                  <td>41</td>
                 </tr>
               </tbody>
             </table><!-- /.point_rank__table -->
@@ -771,31 +771,31 @@
                       <td>フリー走行1</td>
                       <td>7月14日（金）</td>
                       <td>17:00 ~</td>
-                      <td>-</td>
+                      <td>バルテリ・ボッタス（メルセデス）</td>
                     </tr>
                     <tr>
                       <td>フリー走行2</td>
                       <td>7月14日（金）</td>
                       <td>21:00 ~</td>
-                      <td>-</td>
+                      <td>バルテリ・ボッタス（メルセデス）</td>
                     </tr>
                     <tr>
                       <td>フリー走行3</td>
                       <td>7月15日（土）</td>
                       <td>18:00 ~</td>
-                      <td>-</td>
+                      <td>ルイス・ハミルトン（メルセデス）</td>
                     </tr>
                     <tr>
                       <td>予選</td>
                       <td>7月15日（土）</td>
                       <td>21:00 ~</td>
-                      <td>-</td>
+                      <td>ルイス・ハミルトン（メルセデス）</td>
                     </tr>
                     <tr>
                       <td>決勝</td>
                       <td>7月16日（日）</td>
                       <td>21:00 ~</td>
-                      <td>-</td>
+                      <td>ルイス・ハミルトン（メルセデス）</td>
                     </tr>
                   </tbody>
                 </table><!-- /.race_info__table -->
