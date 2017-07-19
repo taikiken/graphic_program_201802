@@ -13,10 +13,26 @@
 // dae
 import Normalize from '../../util/Normalize';
 
+/**
+ * 打撃成績
+ */
 export default class DaeBatting {
+  /**
+   * 打撃成績
+   * @param {object} info JSON
+   */
   constructor(info) {
     const origin = Normalize.obj(info);
+    /**
+     * original JSON
+     * @type {Object}
+     */
     this.origin = origin;
+    /**
+     * data が null で無い - 存在 flag
+     * @type {boolean}
+     */
+    this.has = info !== null;
     /**
      * 打率・防御率?
      * @type {string}

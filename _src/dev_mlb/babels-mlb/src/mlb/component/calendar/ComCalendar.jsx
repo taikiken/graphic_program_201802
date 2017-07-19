@@ -79,17 +79,22 @@ const customToolbar = (toolbar) => {
   // component を返します
   return (
     <div className="calendar-toolbar-container">
+      {/* header */}
       <header className="calendar-navigation-header">
         <button className="calendar-btn calendar-btn-prev" onClick={goToBack}>
-          <p className="calendar-icon calendar-prev-icon">&#8249;</p>
+          <span className="calendar-icon calendar-prev-icon">&#8249;</span>
         </button>
-        <div className="calendar-label-date" onClick={goToCurrent} role="button" tabIndex="0">
-          {label()}
-        </div>
+        <div className="calendar-label-date">{label()}</div>
         <button className="calendar-btn calendar-btn-next" onClick={goToNext}>
-          <p className="calendar-icon calendar-next-icon">&#8250;</p>
+          <span className="calendar-icon calendar-next-icon">&#8250;</span>
         </button>
       </header>
+      {/* footer */}
+      <footer className="calendar-navigation-footer">
+        <button className="calendar-btn calendar-btn-today" onClick={goToCurrent}>
+          <span className="calendar-btn-txt calendar-btn-txt-today">今日</span>
+        </button>
+      </footer>
     </div >
   );
 };

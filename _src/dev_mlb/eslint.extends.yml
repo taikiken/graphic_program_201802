@@ -45,6 +45,9 @@ rules:
     - allow:
       - warn
       - error
+      - group
+      - groupEnd
+      - info
 #  # https://www.npmjs.com/package/eslint-plugin-import
 #  # `{ default as XXX  }` の書き方がまずい
 #  # babel compile は default as がないと動作できない

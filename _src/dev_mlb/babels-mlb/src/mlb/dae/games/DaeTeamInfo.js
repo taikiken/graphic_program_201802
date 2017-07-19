@@ -96,7 +96,7 @@ class DaePlayers {
      * 試合出場選手
      * @type {Array.<DaePlayer>}
      */
-    this.players = origin.map(player => (new DaePlayer(player)));
+    this.list = origin.map(player => (new DaePlayer(player)));
   }
 }
 

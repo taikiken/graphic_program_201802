@@ -58,6 +58,10 @@ class DaeJapanesePlayer {
      * @type {DaeBatting}
      */
     this.batting = new DaeBatting(origin.batting);
+    /**
+     * 投球成績
+     * @type {DaePitching}
+     */
     this.pitching = new DaePitching(origin.pitching);
   }
 }
@@ -196,7 +200,7 @@ class DaeGames {
      * 対戦情報リスト
      * @type {Array.<DaeGame>}
      */
-    this.games = origin.map(game => (new DaeGame(game)));
+    this.list = origin.map(game => (new DaeGame(game)));
   }
 }
 
@@ -219,7 +223,7 @@ class DaeJapanese {
      * 日本人選手成績リスト
      * @type {Array.<DaeGame>}
      */
-    this.games = origin.map(game => (new DaeGame(game)));
+    this.list = origin.map(game => (new DaeGame(game)));
   }
 }
 
