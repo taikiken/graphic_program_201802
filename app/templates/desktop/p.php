@@ -104,7 +104,7 @@
 
           <div class="post-content">
             <div class="cms_widget">
-              <?php include_once __DIR__."/../specific/_vk_brightcove_2017.php"; ?>
+              <?php include_once __DIR__."/../specific/_player.php"; ?>
             </div>
           </div>
 
@@ -114,7 +114,6 @@
           <div id="single-visual-container"></div>
 
           <?php endif; ?>
-
 
           <div class="post-content">
           <?php if ( $page['post']['is_readmore'] ) : ?>

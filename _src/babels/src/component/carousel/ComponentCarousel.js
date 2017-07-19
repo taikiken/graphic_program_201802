@@ -285,7 +285,7 @@ export class ComponentCarousel extends React.Component {
    */
   updateLength(length) {
     const style = document.createElement('style');
-    const rule = document.createTextNode(`#js-pickup-slider{width: ${length * this.left}${this.unit};`);
+    const rule = document.createTextNode(`#js-pickup-slider{width: ${length * this.left}${this.unit};}`);
     style.media = 'screen';
     style.type = 'text/css';
     if (style.styleSheet) {

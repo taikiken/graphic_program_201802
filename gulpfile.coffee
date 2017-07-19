@@ -544,6 +544,10 @@ gulp.task 'develop', (cb) ->
     'vendor:dev'
     'libs:synapse:dev'
     'js:dev'
+    # motorsports - carousel from 2017-07-06
+    'carousel:make'
+    # motorsports - tab / accordion 2017-07-13
+    'motorsports:make'
     'image:copy'
     'font:copy'
     'sp:image:copy'
@@ -568,6 +572,10 @@ gulp.task 'deploy', (cb) ->
     'vendor:init'
     'libs:synapse:build'
     'js:build'
+    # motorsports - carousel from 2017-07-06
+    'carousel:build'
+    # motorsports - tab / accordion 2017-07-13
+    'motorsports:build'
     'image:build'
     'font:copy'
     'sp:image:build'

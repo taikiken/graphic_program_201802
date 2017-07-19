@@ -2,13 +2,6 @@
 
 #1602 バーチャル高校野球2017用 brightcove埋め込みコード
 
-// webview本文取得時はautoplayしない
-if ( isset($_GET['get']) && $_GET['get'] == 'body' ) :
-  $is_autoplay = 'false';
-else :
-  $is_autoplay = 'true';
-endif;
-
 ?>
 <link href="/assets/vk_brightcove_2017/css/Player.css" rel="stylesheet"/>
 
@@ -53,23 +46,3 @@ endif;
   }
 
 </script>
-
-<?php
-/*
-
-```html
-<div id="single-visual-container"></div>
-```
-
-がDOM上にないとSPで
-
-```html
-# 本文下部バナー
-<div id="post-content-banner"></div>
-```
-
-が表示されないようなので追加
-
-*/
-?>
-<div id="single-visual-container" style="display:none !important;"></div>

@@ -46,6 +46,8 @@ RewriteRule ^v1/articles/self/([a-z]+) /api/ver1/read/articlelist.php?api=self&c
 RewriteRule ^v1/articles/self /api/ver1/read/articlelist.php?api=self [L,QSA]
 RewriteRule ^v1/articles/home/([a-z]+) /api/ver1/read/articlelist.php?api=home&c=$1 [L,QSA]
 RewriteRule ^v1/articles/home /api/ver1/read/articlelist.php?api=home [L,QSA]
+RewriteRule ^v1/articles/static/([a-z0-9_-]+) /api/ver1/read/articlelist.php?api=static&subcategory=$1 [L,QSA]
+
 
 #USER
 RewriteRule ^v1/users/self/settings/account /api/ver1/write/useraccount.php [L]
@@ -88,3 +90,5 @@ RewriteRule ^v1/sessions /api/ver1/read/logout.php [L]
 RewriteRule ^v1/auth/facebook /api/ver1/auth/facebook.php [L]
 RewriteRule ^v1/auth/twitter /api/ver1/auth/twitter.php [L]
 
+#DOWNLOAD
+RewriteRule ^download/([0-9]+)/([rawx0-9]+) /api/tool/img_download.php?id=$1&size=$2 [L]

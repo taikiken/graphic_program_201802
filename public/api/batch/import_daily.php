@@ -27,6 +27,7 @@ function get_index()
 		113, 113, 113, 113, 114, 129, 116, 129, 129, 129
 	];
 	$dailyVal = [
+
 		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_bas.rss",
 		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_tig.rss",
 		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_car.rss",
@@ -36,6 +37,7 @@ function get_index()
 		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_gol.rss",
 		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_rin.rss",
 		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_rac.rss",
+
 		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_oly.rss"
 	];
 	$u = [];
@@ -146,7 +148,10 @@ for($i=0;$i<count($data);$i++){
 			splittime($s["m_time"],$s["a_time"]);
 			$sqla[]=makesql($s,$f["id"]);
 			$sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);
+
+			$sqla[]=relatedlink4($data[$i]["relatedLink"],$f["id"]);
 		}
+
 
 	}else{
 
@@ -168,12 +173,16 @@ for($i=0;$i<count($data);$i++){
 		$sqla[]=makesql($s,0);
 		$sqla[]=sprintf("insert into repo_body(pid,body) values(currval('repo_n_id_seq'),'%s');",$modbody);
 
+		$sqla[]=relatedlink4($data[$i]["relatedLink"]);
 	}
 
 	if($sqla){
+
 		$sqla=implode("\n",$sqla);
 		$o->query($sqla);
+
 	}
+
 }
 
 die(count($data) ." articles are fetched");
