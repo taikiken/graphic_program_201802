@@ -42,8 +42,7 @@ $pickup_response_articles_length = count($pickup_response_articles);
         <div class="pickup-slider-wrapper" id="js-pickup-slider-wrapper">
           <ul class="pickup-slider" id="js-pickup-slider">
 <?php
-// current mark
-$is_current = true;
+$count_pickup_response_articles = count($pickup_response_articles);
 // output slider container
 foreach ($pickup_response_articles as $pickup_response_article) :
   // {string} - image | video
@@ -58,12 +57,10 @@ foreach ($pickup_response_articles as $pickup_response_article) :
   $categories = $pickup_response_article->categories;
 ?>
   <li class="js-pickup pickup<?php
-  // JS で設定するためにコメントする
-//  // first article -> current
-//  if ($is_current) {
-//    echo ' current';
-//    $is_current  = false;
-//  }
+  // 1件の時はテンプレで `current` つける
+  if ($count_pickup_response_articles == 1) {
+    echo ' current';
+  }
   ?>">
     <a href="<?php echo $pickup_response_article->url; ?>" style="<?php echo $media_background; ?>">
       <img src="/assets/images/index/kv-overlay.png" alt="" class="overlay">
