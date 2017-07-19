@@ -10,34 +10,13 @@
  *
  */
 
-// dae
+// util
 import Normalize from '../../util/Normalize';
 
-class DaePitching {
-  constructor(info) {
-    const origin = Normalize.obj(info);
-    this.origin = origin;
-    this.average = Normalize.str(origin.average, '-');
-    this.innings = Normalize.int(origin.innings);
-    this.pitched = Normalize.int(origin.pitched);
-    this.strikes = Normalize.int(origin.strikes);
-    this.outs = Normalize.int(origin.strike_outs);
-    this.dead = Normalize.int(origin.walking_dead);
-    this.ra = Normalize.int(origin.ra);
-    this.hits = Normalize.int(origin.hits);
-  }
-}
+// player
+import DaeBatting from '../player/DaeBatting';
+import DaePitching from '../player/DaePitching';
 
-class DaeBatting {
-  constructor(info) {
-    const origin = Normalize.obj(info);
-    this.origin = origin;
-    this.average = Normalize.str(origin.average, '-');
-    this.hits = Normalize.int(origin.hits);
-    this.runs = Normalize.int(origin.runs);
-    this.stolen = Normalize.int(origin.stolen_bases);
-  }
-}
 
 class DaePlayer {
   constructor(info) {

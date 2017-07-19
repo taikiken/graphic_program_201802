@@ -16,7 +16,7 @@ import Normalize from '../../util/Normalize';
 /**
  * game 毎の日本人選手情報
  */
-class DaeJapanesesPlayer {
+class DaeJapanesePlayer {
   /**
    * 日本人選手情報
    * @param {object} player JSON
@@ -29,6 +29,11 @@ class DaeJapanesesPlayer {
      * @type {Object}
      */
     this.origin = origin;
+    /**
+     * 選手 ID
+     * @type {number}
+     */
+    this.id = Normalize.int(origin.id);
     /**
      * 選手名称
      * @type {string}
@@ -44,6 +49,7 @@ class DaeJapanesesPlayer {
      * @type {number}
      */
     this.number = Normalize.int(origin.number);
+
     /**
      * 打率・防御率?
      * @type {string}
@@ -69,9 +75,9 @@ class DaeJapanesesPlayer {
 
 /**
  * 日本人選手リスト
- * game 毎の選手情報 -> DaeJapanesesPlayer - 日本人選手
+ * game 毎の選手情報 -> DaeJapanesePlayer - 日本人選手
  */
-class DaeJapanesesPlayers {
+class DaeJapanesePlayers {
   /**
    * 日本人選手リスト
    * @param {Array} players JSON
@@ -86,9 +92,9 @@ class DaeJapanesesPlayers {
     this.origin = origin;
     /**
      * 日本人選手リスト
-     * @type {Array.<DaeJapanesesPlayer>}
+     * @type {Array.<DaeJapanesePlayer>}
      */
-    this.games = origin.map(player => (new DaeJapanesesPlayer(player)));
+    this.list = origin.map(player => (new DaeJapanesePlayer(player)));
   }
 }
 
@@ -98,7 +104,7 @@ class DaeJapanesesPlayers {
 class DaeGameTeam {
   /**
    * game 毎の対戦チーム情報
-   * @param {obj} team JSON
+   * @param {object} team JSON
    */
   constructor(team) {
     const origin = Normalize.obj(team);
@@ -171,9 +177,9 @@ class DaeGame {
     this.visitor = new DaeGameTeam(visitor);
     /**
      * ゲーム毎の選手情報
-     * @type {DaeJapanesesPlayers}
+     * @type {DaeJapanesePlayers}
      */
-    this.players = new DaeJapanesesPlayers(origin.player);
+    this.players = new DaeJapanesePlayers(origin.player);
   }
 }
 
@@ -182,8 +188,8 @@ class DaeGame {
  * - DaeGames
  *   - {@link DaeGame}
  *     - {@link DaeGameTeam}
- *     - {@link DaeJapanesesPlayers}
- *       - {@link DaeJapanesesPlayer}
+ *     - {@link DaeJapanesePlayers}
+ *       - {@link DaeJapanesePlayer}
  */
 class DaeGames {
   /**
