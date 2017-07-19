@@ -113,10 +113,23 @@ __EOL__;
 </head>
 <body>
 
+<?php
+/*
+# appvaoder
+- グノシー / ニュースパスからのアクセスならappvador実行しない
+*/
+?>
 <div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
 <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-<script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
+<script>
+;(function(){
+  if ( !(/gunosy|newspass/i.test(window.navigator.userAgent)) ) {
+    new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();
+  }
+})();
+</script>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
+<?php /* // appvaoder */ ?>
 
 <div id="whole" class="whole stats">
 
