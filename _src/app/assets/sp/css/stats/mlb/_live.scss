@@ -972,6 +972,10 @@
         vertical-align: middle;
       }
 
+      td:last-child {
+        border-right: none;
+      }
+
       &:last-child {
         th:last-child,
         td:last-child {
