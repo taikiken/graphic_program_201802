@@ -313,32 +313,34 @@
     }
   }
 
-  .webview & {
-    //#js-stats_banner-list
-    #js-stats_banner-list {
-      background-color: #030b1a;
-    }
+  // 2017-07-19 不要
+  // ref. https://github.com/undotsushin/undotsushin/issues/2149
+  // .webview & {
+  //   //#js-stats_banner-list
+  //   #js-stats_banner-list {
+  //     background-color: #030b1a;
+  //   }
 
-    //.stats_banner-list
-    .stats_banner-list {
-      width: (640/2)+px;
-      margin-right: auto;
-      margin-left: auto;
-    }
+  //   //.stats_banner-list
+  //   .stats_banner-list {
+  //     width: (640/2)+px;
+  //     margin-right: auto;
+  //     margin-left: auto;
+  //   }
 
-    //.stats_banner-item
-    .stats_banner-item {
-      // border-right: none;
+  //   //.stats_banner-item
+  //   .stats_banner-item {
+  //     // border-right: none;
 
-      &:nth-child(2n) {
-        // border-left: none;
-      }
+  //     &:nth-child(2n) {
+  //       // border-left: none;
+  //     }
 
-      img {
-        width: 159px;
-      }
-    }
-  }
+  //     img {
+  //       width: 159px;
+  //     }
+  //   }
+  // }
 
   //.stats_banner-btn
   &-btn {
