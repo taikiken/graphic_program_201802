@@ -16,11 +16,11 @@
 
 'use strict';
 
-// fetch polyfill
+// fetch / Promise polyfill
 import 'whatwg-fetch';
 import Promise from 'promise-polyfill';
 
-// for IE polyfill
+// for IE ES 2015 / 2016 / 2017 polyfill
 import 'babel-polyfill';
 
 // -----------------------------------------------

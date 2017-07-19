@@ -156,7 +156,8 @@ const customHeader = (month) => {
  */
 function ComCalendar(props) {
   return (
-    <div className="calendar-container">
+    <div className="mlb__schedule__calendar">
+      <h3 className="mlb__schedule__calendar__heading">試合カレンダー</h3>
       <BigCalendar
         selectable
         events={props.events}
