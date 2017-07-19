@@ -153,7 +153,19 @@ if(strlen($api)>0){
 			
 			
 		}
-
+	
+	}elseif($api==="static"){
+	
+		$sql=sprintf("select id from repo where t1='%s'",bind($_REQUEST["subcategory"]));
+		$o->query($sql);
+		$f=$o->fetch_array();
+		$subcategoryid=$f["id"];
+		
+		if(strlen($subcategoryid)>0){
+			$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort",str_replace(",",",rt2.",$articlefield),$subcategoryid,sprintf($articletable,set_isbookmark($uid),""));
+			$nsql=sprintf("select count(id) as n from u_headline where cid=%s and flag=1",$subcategoryid);
+		}
+	
 	}elseif($api==="next"){
 		
 		$targetid=$_REQUEST["id"];

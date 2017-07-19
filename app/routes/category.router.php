@@ -201,6 +201,44 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
   });
 
 
+
+  // webviews - /category/:category_slug/webviews/:slug  ref. #1918
+  // ==============================
+  $this->get('/webviews/{filename}[/]', function ($request, $response, $args) use ($app) {
+
+    # `templates/` 内の表示するテンプレート
+    $template_path = $args['category_slug'].'/'.$args['filename'].'.php';
+
+    # ファイルがあるなら表示
+    if ( file_exists( __DIR__.'/../templates/'.$template_path) ) :
+
+      $category = $app->model->get_category_by_slug($args['category_slug']);
+      $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
+
+      $args['page'] = $app->model->set(array(
+        'title'              => $category['label'],
+        'og_title'           => $category['label'],
+        'og_url'             => $app->model->property('site_url').'category/'.$category['slug'],
+
+        'category'           => $category,
+        'ad'                 => $category['ad'],
+        'theme'              => $category['theme'],
+        'template'           => 'webview',
+        'template_classname' => $template_classname,
+        'path'               => $args,
+      ));
+
+      return $this->renderer->render($response, $template_path, $args);
+
+    else :
+      # ないなら404ステータスのみ返す
+      return $response->withStatus(404);
+
+    endif;
+
+  });
+
+
 });
 
 

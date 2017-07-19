@@ -219,6 +219,7 @@ indexes = false
 
 module.exports =
   dir:
+    src: './_src'
     app: app
     scss: scss
     tmp: tmp

@@ -46,6 +46,8 @@ RewriteRule ^v1/articles/self/([a-z]+) /api/ver1/read/articlelist.php?api=self&c
 RewriteRule ^v1/articles/self /api/ver1/read/articlelist.php?api=self [L,QSA]
 RewriteRule ^v1/articles/home/([a-z]+) /api/ver1/read/articlelist.php?api=home&c=$1 [L,QSA]
 RewriteRule ^v1/articles/home /api/ver1/read/articlelist.php?api=home [L,QSA]
+RewriteRule ^v1/articles/static/([a-z0-9_-]+) /api/ver1/read/articlelist.php?api=static&subcategory=$1 [L,QSA]
+
 
 #USER
 RewriteRule ^v1/users/self/settings/account /api/ver1/write/useraccount.php [L]

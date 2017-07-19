@@ -1,4 +1,34 @@
 <?php
+//2017/7/14追加
+//ref. https://github.com/undotsushin/undotsushin/issues/1914
+//モータースポーツ専用のレクタングル広告
+if ($page['template'] == 'motorsports') :
+?>
+
+          <div class="sponsor-link">
+            <!-- /531683568/motor_sport/motor_sport_sidebar_rectngle -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/motor_sport/motor_sport_sidebar_rectngle', [300, 250], 'div-gpt-ad-1500012606988-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1500012606988-0' style='height:250px; width:300px;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500012606988-0'); });
+            </script>
+            </div>
+            <!-- //  /531683568/motor_sport/motor_sport_sidebar_rectngle -->
+          </div><!-- /.sponsor-link -->
+
+<?php
+endif;
+// $page['template'] == 'motorsports' 以外の時に広告を表示する
+// --------------------------------
+?>
+
+<?php
 // 六大学 / 広告表示 調整（Web） #1546
 // > アドネットワーク関連の広告（ネイティブアド？）を消したい
 // @see https://github.com/undotsushin/undotsushin/issues/1546
@@ -34,7 +64,10 @@ if ($template_name == 'category' || $template_name == 'p') {
 <?php
 // `/big6tv`
 // 記事詳細 + big6tv - 広告トル
-if (!$single_big6tv) :
+if (
+    !$single_big6tv &&
+    $page['template'] != 'motorsports'
+  ) :
 ?>
           <?php
           /*
@@ -59,7 +92,7 @@ if (!$single_big6tv) :
             </script>
             </div>
 
-          </div>
+          </div><!-- /.sponsor-link -->
           <?php endif; ?>
 <?php
 endif;
@@ -83,7 +116,7 @@ endif;
             </script>
             </div>
             <!-- // /531683568/pc_sidebar_top_2nd -->
-          </div>
+          </div><!-- /.app-bnr -->
 
 <?php
 // not big6tv の時のみ広告を表示する
@@ -116,7 +149,9 @@ endif;
           if (
             $page['template'] == 'category' ||
             $page['template'] == 'search' ||
-            $page['template'] == 'p'
+            $page['template'] == 'p' ||
+            // mortorsports 条件を追加 - `/public/motorsports/motorsports_model.php` on 2017-07-06
+            $page['template'] == 'motorsports'
           ) : ?>
             <div id="widget-recommend-list-container"></div><!--/recommend-->
           <?php endif; ?>
