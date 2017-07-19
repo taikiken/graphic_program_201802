@@ -42,5 +42,6 @@ gulp.task('calendar:css', () =>
     .pipe($.if(module.compress.css, $.cssnano({ zindex: false })))
     .pipe(gulp.dest(`${dir.dist.assets.mlb}/css`))
     .pipe(gulp.dest(`${dir.root}/test/assets/css`))
+    .pipe(gulp.dest(`${dir.root}/app/assets/css`))
     .pipe($.size({ title: '*** calendar:css ***' })),
 );
