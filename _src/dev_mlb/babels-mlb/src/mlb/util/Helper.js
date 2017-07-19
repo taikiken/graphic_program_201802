@@ -11,7 +11,7 @@
  */
 
 export default class Helper {
-  date() {
+  static date() {
     const current = new Date();
     return {
       year: current.getFullYear(),

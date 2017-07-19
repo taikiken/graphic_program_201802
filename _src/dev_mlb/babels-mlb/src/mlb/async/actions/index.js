@@ -11,7 +11,9 @@
  */
 
 import calendar from './assets/calendar';
+import schedule from './assets/schedule';
 
 export default {
   calendar,
+  schedule,
 };

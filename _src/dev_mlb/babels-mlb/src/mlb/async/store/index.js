@@ -18,6 +18,8 @@ import reducers from '../reducers';
 // middleware
 import middleware from './middleware';
 
+// console.log('reducers', reducers);
+
 /**
  * redux - createStore します
  * - reducers

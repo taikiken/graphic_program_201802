@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ASYNC</title>
+  <link rel="stylesheet" href="assets/css/react-big-calendar.css">
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <style>
+    .calendar-container {
+      height: 800px;
+    }
+  </style>
+</head>
+<body>
+<div id="js-calendar" class="calendar-container"></div>
+<script src="assets/js/mlb_stats_app.bundle.js"></script>
+<script type="text/babel">
+  const MLB = self.MLB;
+  console.log('MLB', MLB);
+  const container = document.getElementById('js-calendar');
+  MLB.Test.view(container);
+
+  // https://stackoverflow.com/questions/34587067/change-color-of-react-big-calendar-events
+  // Change color of react-big-calendar events
+</script>
+</body>
+</html>

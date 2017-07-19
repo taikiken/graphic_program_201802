@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 
 import ComCalendar from './ComCalendar';
 
+// TODO: props maker, json 2つにする
 export default class ComCalendarMam extends Component {
   static propTypes = {
     events: PropTypes.arrayOf(PropTypes.shape),
@@ -35,9 +36,11 @@ export default class ComCalendarMam extends Component {
     navigate: () => {},
   };
   componentDidMount() {
+    // console.log('ComCalendarMam.componentDidMount', this.props.maker);
     this.props.maker();
   }
   render() {
+    console.log('ComCalendarMam.render ============', this.props);
     if (this.props.events.length === 0) {
       return null;
     }

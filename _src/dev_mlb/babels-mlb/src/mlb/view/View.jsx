@@ -23,6 +23,8 @@ import store from '../async/store/';
 // connect
 import ConCalendar from '../async/connects/ConCalendar';
 
+console.log('store', store);
+
 export default class View {
   static make(element) {
     ReactDOM.render(

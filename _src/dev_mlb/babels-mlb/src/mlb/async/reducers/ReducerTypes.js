@@ -20,8 +20,8 @@ export default class ReducerTypes {
   // ----------------------------------------
   static CALENDAR_COMPLETE = 'calendarComplete';
   static CALENDAR_ERROR = 'calendarError';
-  static SCHDULE_COMPLETE = 'scheduleComplete';
-  static SCHDULE_ERROR = 'scheduleComplete';
+  static SCHEDULE_COMPLETE = 'scheduleComplete';
+  static SCHEDULE_ERROR = 'scheduleComplete';
   // ----------------------------------------
   // UI
   // ----------------------------------------

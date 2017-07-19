@@ -47,8 +47,8 @@ import ReducerTypes from '../../reducers/ReducerTypes';
 
 // calendar
 // YYYY.json
-async function asyncCalendar(year) {
-  const path = Api.calendar(year);
+async function asyncSchedule(year, month, day) {
+  const path = Api.schedule(year, month, day);
   const json = await ajax(path);
   return json;
 }
@@ -64,11 +64,11 @@ const requestError = error => ({
 });
 
 
-const calendar = (requestYear = null) => (dispatch) => {
-  const year = requestYear || Helper.date().year;
-  return asyncCalendar(year)
+const schedule = (requestDate = null) => (dispatch) => {
+  const date = requestDate || Helper.date();
+  return asyncSchedule(date.year, date.month, date.day)
     .then(json => dispatch(requestComplete(json)))
     .catch(error => dispatch(requestError(error)));
 };
 
-export default calendar;
+export default schedule;

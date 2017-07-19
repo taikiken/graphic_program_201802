@@ -31,6 +31,7 @@ import actions from '../actions';
  */
 const mapStateToProps = ({ calendar }) => (calendar);
 
+// TODO: この構造だとダメ ViewCalendar 作る
 const calendarMam = ({ dispatch }) => (
   <ComCalendarMam
     maker={() => (dispatch(actions.calendar()))}
@@ -41,6 +42,6 @@ calendarMam.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const ConCalendar = connect(mapStateToProps)(ComCalendarMam);
+const ConCalendar = connect(mapStateToProps)(calendarMam);
 
 export default ConCalendar;

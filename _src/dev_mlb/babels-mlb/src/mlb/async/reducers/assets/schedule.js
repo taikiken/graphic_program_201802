@@ -20,16 +20,16 @@ const initialState = {
 
 // let result = null;
 
-const calendar = (requestState = initialState, action) => {
+const schedule = (requestState = initialState, action) => {
   const state = Object.assign({}, requestState);
   // switch-case
   switch (action.type) {
-    case ReducerTypes.CALENDAR_COMPLETE: {
+    case ReducerTypes.SCHEDULE_COMPLETE: {
       state.json = action.json;
       // result = action.json;
       return state;
     }
-    case ReducerTypes.CALENDAR_ERROR: {
+    case ReducerTypes.SCHEDULE_ERROR: {
       state.error = action.error;
       return state;
     }
@@ -43,4 +43,4 @@ const calendar = (requestState = initialState, action) => {
   }
 };
 
-export default calendar;
+export default schedule;
