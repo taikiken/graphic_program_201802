@@ -10,8 +10,12 @@
  *
  */
 
-// dae
+// util
 import Normalize from '../../util/Normalize';
+
+// dae/player
+import DaePitching from '../player/DaePitching';
+import DaeBatting from '../player/DaeBatting';
 
 /**
  * game 毎の日本人選手情報
@@ -49,27 +53,12 @@ class DaeJapanesePlayer {
      * @type {number}
      */
     this.number = Normalize.int(origin.number);
-
     /**
-     * 打率・防御率?
-     * @type {string}
+     * 打撃成績
+     * @type {DaeBatting}
      */
-    this.average = Normalize.str(origin.average);
-    /**
-     * 打席数
-     * @type {number}
-     */
-    this.bats = Normalize.int(origin.bats);
-    /**
-     * 安打数
-     * @type {number}
-     */
-    this.hits = Normalize.int(origin.hits);
-    /**
-     * 打点数
-     * @type {number}
-     */
-    this.runs = Normalize.int(origin.runs);
+    this.batting = new DaeBatting(origin.batting);
+    this.pitching = new DaePitching(origin.pitching);
   }
 }
 

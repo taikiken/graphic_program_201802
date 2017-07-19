@@ -17,9 +17,30 @@ export default class DaeBatting {
   constructor(info) {
     const origin = Normalize.obj(info);
     this.origin = origin;
+    /**
+     * 打率・防御率?
+     * @type {string}
+     */
     this.average = Normalize.str(origin.average, '-');
+    /**
+     * 安打数
+     * @type {number}
+     */
     this.hits = Normalize.int(origin.hits);
+    /**
+     * 打点数
+     * @type {number}
+     */
     this.runs = Normalize.int(origin.runs);
+    /**
+     * 盗塁数
+     * @type {number}
+     */
     this.stolen = Normalize.int(origin.stolen_bases);
+    /**
+     * 打席数
+     * @type {number}
+     */
+    this.bats = Normalize.int(origin.bats);
   }
 }
