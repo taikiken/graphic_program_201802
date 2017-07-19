@@ -11,13 +11,21 @@
 // MLB live
 
 // MLB速報コンテンツ
-.mlb_live {
-  padding-bottom: (60/2)+px;
-  background-color: #111;
+.mlb.game {
+  .main-sec {
+    padding-bottom: (60/2)+px;
+    background-color: #111;
+  }
+
+
+
+
 
   //.stats__header
   .stats__header {
     display: table;
+    width: 100%;
+    background-color: #111;
 
     &__title,
     &__btn {
@@ -55,6 +63,22 @@
 
 
 
+  //バナーエリア
+  //.stats__banner
+  .stats__banner {
+    margin-top: (30/2)+px;
+
+    > div {
+      background-color: #1a1a1a;
+    }
+  } //.stats__banner
+}
+
+
+
+
+
+.mlb_live {
   //タイトル
   //.mlb_live__heading--h2
   &__heading--h2 {
@@ -75,18 +99,21 @@
   //.mlb_live__overview
   &__overview {
     position: relative;
-    display: table;
-    width: 100%;
     margin-bottom: (6/2)+px;
-    min-height: (260/2)+px;
-    padding-top: (36/2)+px;
-    padding-bottom: (24/2)+px;
-    background: url(/assets/images/stats/mlb/live-bg@2x.png) center center no-repeat;
+    background: #111 url(/assets/images/stats/mlb/live-bg@2x.png) center center no-repeat;
     background-size: cover;
-    letter-spacing: ls(inline-block);
 
-    * {
-      letter-spacing: normal;
+    &__inner {
+      display: table;
+      width: 100%;
+      min-height: (260/2)+px;
+      padding-top: (36/2)+px;
+      padding-bottom: (24/2)+px;
+      letter-spacing: ls(inline-block);
+
+      * {
+        letter-spacing: normal;
+      }
     }
 
     &:before,
@@ -121,6 +148,7 @@
     //.mlb_live__overview__team
     &__team {
       padding-right: (10/2)+px;
+      padding-bottom: 1.75em;
       padding-left: (10/2)+px;
       font-weight: bold;
       font-size: (28/2)+px;
@@ -208,7 +236,7 @@
   &__scoreboard {
     //.mlb_live__scoreboard__section
     &__section {
-      margin-top: (20/2)+px;
+      padding-top: (20/2)+px;
       margin-right: perCalc(20, 750);
       margin-left: perCalc(20, 750);
     }
@@ -335,23 +363,10 @@
 
 
 
-  //バナーエリア
-  //.stats__banner
-  .stats__banner {
-    margin-top: (30/2)+px;
-
-    > div {
-      background-color: #1a1a1a;
-    }
-  } //.stats__banner
-
-
-
-
-
   //ナビゲーション共通
   //.mlb_live__nav
   &__nav {
+
     //.mlb_live__nav__list
     &__list {
       display: table;

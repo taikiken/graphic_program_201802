@@ -11,13 +11,21 @@
 // MLB live
 
 // MLB速報コンテンツ
-.mlb_live {
-  padding-bottom: (60/2)+px;
-  background-color: #111;
+.mlb.game {
+  .main-sec {
+    padding-bottom: 40px;
+  }
+
+
+
+
 
   //.stats__header
   .stats__header {
     display: table;
+    width: 100%;
+    height: 62px;
+    padding-top: 0;
 
     &__title,
     &__btn {
@@ -27,25 +35,29 @@
 
     //.stats__header__title
     &__title {
-      width: perCalc(540, 750);
-      padding: (20/2)+px;
+      width: 936px;
+      // padding: (20/2)+px;
     }
 
     //.stats__header__btn
     &__btn {
-      width: perCalc(210, 750);
+      width: auto;
 
        a {
          display: block;
          height: 100%;
-         padding-top: (36/2)+px;
-         padding-bottom: (36/2)+px;
+         padding-top: 24px;
+         padding-bottom: 24px;
          background-color: #222;
          text-align: center;
 
          img {
            margin: auto;
-           width: perCalc(170, 210);
+           width: 105px;
+         }
+
+         &:hover {
+           background-color: lighten( #222, 15% );
          }
        }
     }
@@ -55,16 +67,30 @@
 
 
 
+  //バナーエリア
+  //.stats__banner
+  .stats__banner {
+    margin-top: 40px;
+  } //.stats__banner
+}
+
+
+
+
+
+.mlb_live {
   //タイトル
   //.mlb_live__heading--h2
   &__heading--h2 {
     line-height: 1.2;
-    padding: (20/2)+px perCalc(20, 750);
-    border: solid $live-border-color;
-    border-width: 1px 0;
+    padding: 16px 0;
+    border-style: solid;
+    border-top-color: #fff;
+    border-bottom-color: $live-border-color;
+    border-width: 2px 0 1px;
     color: #fff;
     font-weight: bold;
-    font-size: (28/2)+px;
+    font-size: 18px;
   }
 
 
@@ -75,15 +101,22 @@
   //.mlb_live__overview
   &__overview {
     position: relative;
-    display: table;
-    width: 100%;
-    margin-bottom: (6/2)+px;
-    min-height: (260/2)+px;
-    padding-top: (36/2)+px;
-    padding-bottom: (24/2)+px;
-    background: url(/assets/images/stats/mlb/live-bg@2x.png) center center no-repeat;
-    background-size: cover;
+    margin-bottom: 6px;
+    margin-right: -195px;
+    margin-left: -195px;
+    padding-right: 195px;
+    padding-left: 195px;
+    background: url(/assets/images/stats/mlb/live-bg.png) center center no-repeat;
     letter-spacing: ls(inline-block);
+
+    //.mlb_live__overview__inner
+    &__inner {
+      display: table;
+      width: 100%;
+      min-height: 334px;
+      padding-top: 64px;
+      padding-bottom: 56px;
+    }
 
     * {
       letter-spacing: normal;
@@ -93,9 +126,9 @@
     &:after {
       content: "";
       position: absolute;
-      bottom: -(6/2)+px;
+      bottom: -6px;
       width: 50%;
-      height: (6/2)+px;
+      height: 6px;
       @include hide-text;
     }
 
@@ -112,55 +145,73 @@
     &__team,
     &__info {
       display: table-cell;
-      width: perCalc(250, 750);
       color: #fff;
-      text-align: center;
       vertical-align: middle;
     }
 
     //.mlb_live__overview__team
     &__team {
-      padding-right: (10/2)+px;
-      padding-left: (10/2)+px;
+      width: 420px;
+      padding-bottom: 1.5em;
       font-weight: bold;
-      font-size: (28/2)+px;
+      font-size: 28px;
+
+      &:first-child {
+        padding-right: 20px;
+        text-align: right;
+      }
+
+      &:last-child {
+        padding-left: 20px;
+        text-align: left;
+      }
     }
 
     //.mlb_live__overview__info
     &__info {
+      text-align: center;
+
       //.mlb_live__overview__info__date
       &__date {
         font-weight: bold;
-        font-size: (24/2)+px;
+        font-size: 24px;
       }
 
       //.mlb_live__overview__info__score
       &__score {
         display: table;
         width: 100%;
+        // margin-top: 16px;
 
         &--home,
         &--visitor,
         &--vs {
           display: table-cell;
-          // line-height: 1.2;
         }
 
         //.mlb_live__overview__info__score--home
         //.mlb_live__overview__info__score--visitor
         &--home,
         &--visitor {
-          width: 45%;
+          width: 38%;
           font-weight: bold;
-          font-size: (60/2)+px;
+          font-size: 60px;
+
+          &:first-child {
+            text-align: right;
+          }
+
+          &:last-child {
+            text-align: left;
+          }
         }
 
         //.mlb_live__overview__info__score--vs
         &--vs {
-          width: 10%;
-          line-height: (60/2)+px;
+          width: 24%;
+          line-height: 60px;
           font-weight: bold;
-          font-size: (24/2)+px;
+          font-size: 24px;
           vertical-align: middle;
         }
       } //.mlb_live__overview__info__score
@@ -168,10 +219,10 @@
       //.mlb_live__overview__info__status
       &__status {
         display: inline-block;
-        padding: (6/2)+px (12/2)+px;
+        padding: 3px 12px;
         background-color: $highlight-color;
         font-weight: bold;
-        font-size: (20/2)+px;
+        font-size: 20px;
 
         &--before {
           background-color: $highlight-color;
@@ -192,8 +243,8 @@
 
       //.mlb_live__overview__info__place
       &__place {
-        margin-top: 0.75em;
-        font-size: (20/2)+px;
+        margin-top: 0.5em;
+        font-size: 20px;
         white-space: nowrap;
       }
     } //.mlb_live__overview__info
@@ -208,7 +259,7 @@
   &__scoreboard {
     //.mlb_live__scoreboard__section
     &__section {
-      margin-top: (20/2)+px;
+      margin-top: 30px;
       margin-right: perCalc(20, 750);
       margin-left: perCalc(20, 750);
     }
@@ -330,20 +381,6 @@
       }
     }
   } //.mlb_live__reload
-
-
-
-
-
-  //バナーエリア
-  //.stats__banner
-  .stats__banner {
-    margin-top: (30/2)+px;
-
-    > div {
-      background-color: #1a1a1a;
-    }
-  } //.stats__banner
 
 
 

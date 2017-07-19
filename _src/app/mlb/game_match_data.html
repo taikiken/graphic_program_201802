@@ -90,7 +90,7 @@
 <script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
 
-<div id="whole" class="whole stats dark">
+<div id="whole" class="whole stats dark mlb game">
 
   <header class="head-sec">
     <div class="head-sec-inner">
@@ -101,492 +101,491 @@
   <div class="body-sec">
     <div class="body-sec-inner">
 
+      <div class="stats__header stats__header--mlb_live">
+        <h1 class="stats__header__title"><a href="/stats/mlb/"><img class="responsive" src="/assets/images/stats/mlb/live-heading@2x.png" alt="MLB速報&amp;データ" /></a></h1>
+        <div class="stats__header__btn"><a href="/stats/mlb/"><img class="responsive" src="/assets/images/stats/mlb/live-heading-btn@2x.png" alt="日程・結果に戻る" /></a></div><!-- /.stats__header__btn -->
+      </div><!-- /.stats__header -->
+
+      <div class="mlb_live__overview">
+        <div class="mlb_live__overview__inner">
+          <p class="mlb_live__overview__team mlb_live__overview__team--home">
+            タイガース
+          </p><!-- /.mlb_live__overview__team--home -->
+
+          <div class="mlb_live__overview__info">
+            <p class="mlb_live__overview__info__date">
+              7月5日（水）
+            </p><!-- /.mlb_live__overview__info__date -->
+
+            <p class="mlb_live__overview__info__score">
+              <span class="mlb_live__overview__info__score--home">0</span>
+              <span class="mlb_live__overview__info__score--vs">vs</span>
+              <span class="mlb_live__overview__info__score--visitor">4</span>
+            </p><!-- /.mlb_live__overview__info__score -->
+
+            <!--
+            試合前 -> .mlb_live__overview__info__status--end
+            試合中 -> mlb_live__overview__info__status--live
+            試合終了 -> mlb_live__overview__info__status--end
+            試合中止 -> mlb_live__overview__info__status--cancel
+            -->
+            <p class="mlb_live__overview__info__status mlb_live__overview__info__status--before">
+              試合前
+            </p><!-- /.mlb_live__overview__info__status -->
+
+            <p class="mlb_live__overview__info__place">
+              マーリンズパーク
+            </p><!-- /.mlb_live__overview__info__place -->
+          </div><!-- /.mlb_live__overview__info -->
+
+          <p class="mlb_live__overview__team mlb_live__overview__team--visitor">
+            インディアンス
+          </p><!-- /.mlb_live__overview__team--visitor -->
+        </div><!-- /.mlb_live__overview__inner -->
+      </div><!-- /.mlb_live__overview -->
+
       <section class="main-sec">
-        <div class="mlb_live">
-          <div class="stats__header stats__header--mlb_live">
-            <h1 class="stats__header__title"><a href="/stats/mlb/"><img class="responsive" src="/assets/images/stats/mlb/live-heading@2x.png" alt="MLB速報&amp;データ" /></a></h1>
-            <div class="stats__header__btn"><a href="/stats/mlb/"><img class="responsive" src="/assets/images/stats/mlb/live-heading-btn@2x.png" alt="日程・結果に戻る" /></a></div><!-- /.stats__header__btn -->
-          </div><!-- /.stats__header -->
-
-          <div class="mlb_live__overview">
-            <p class="mlb_live__overview__team mlb_live__overview__team--home">
-              タイガース
-            </p><!-- /.mlb_live__overview__team--home -->
-
-            <div class="mlb_live__overview__info">
-              <p class="mlb_live__overview__info__date">
-                7月5日（水）
-              </p><!-- /.mlb_live__overview__info__date -->
-
-              <p class="mlb_live__overview__info__score">
-                <span class="mlb_live__overview__info__score--home">0</span>
-                <span class="mlb_live__overview__info__score--vs">vs</span>
-                <span class="mlb_live__overview__info__score--visitor">4</span>
-              </p><!-- /.mlb_live__overview__info__score -->
-
-              <!--
-              試合前 -> .mlb_live__overview__info__status--end
-              試合中 -> mlb_live__overview__info__status--live
-              試合終了 -> mlb_live__overview__info__status--end
-              試合中止 -> mlb_live__overview__info__status--cancel
-              -->
-              <p class="mlb_live__overview__info__status mlb_live__overview__info__status--before">
-                試合前
-              </p><!-- /.mlb_live__overview__info__status -->
-
-              <p class="mlb_live__overview__info__place">
-                マーリンズパーク
-              </p><!-- /.mlb_live__overview__info__place -->
-            </div><!-- /.mlb_live__overview__info -->
-
-            <p class="mlb_live__overview__team mlb_live__overview__team--visitor">
-              インディアンス
-            </p><!-- /.mlb_live__overview__team--visitor -->
-          </div><!-- /.mlb_live__overview -->
-
-          <section class="mlb_live__scoreboard__section">
-            <div class="mlb_live__scoreboard__outer">
-              <table class="mlb_live__scoreboard">
-                <thead>
-                  <tr>
-                    <th class="mlb_live__scoreboard__th--team">&nbsp;</th>
-                    <th class="mlb_live__scoreboard__th--inning">1</th>
-                    <th class="mlb_live__scoreboard__th--inning">2</th>
-                    <th class="mlb_live__scoreboard__th--inning">3</th>
-                    <th class="mlb_live__scoreboard__th--inning">4</th>
-                    <th class="mlb_live__scoreboard__th--inning">5</th>
-                    <th class="mlb_live__scoreboard__th--inning">6</th>
-                    <th class="mlb_live__scoreboard__th--inning">7</th>
-                    <th class="mlb_live__scoreboard__th--inning">8</th>
-                    <th class="mlb_live__scoreboard__th--inning">9</th>
-                    <th class="mlb_live__scoreboard__th--sum">計</th>
-                    <th class="mlb_live__scoreboard__th--hit">安</th>
-                    <th class="mlb_live__scoreboard__th--error">失</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th class="mlb_live__scoreboard__th--team mlb_live__scoreboard__th--team--home">T</th>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td class="mlb_live__scoreboard__td--sum">0</td>
-                    <td class="mlb_live__scoreboard__td--hit">4</td>
-                    <td class="mlb_live__scoreboard__td--error">1</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__scoreboard__th--team mlb_live__scoreboard__th--team--visitor">I</th>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>3</td>
-                    <td>X</td>
-                    <td class="mlb_live__scoreboard__td--sum">4</td>
-                    <td class="mlb_live__scoreboard__td--hit">9</td>
-                    <td class="mlb_live__scoreboard__td--error">0</td>
-                  </tr>
-                </tbody>
-              </table><!-- /.mlb_live__scoreboard -->
-            </div><!-- /.mlb_live__scoreboard__outer -->
-          </section><!-- /.mlb_live__scoreboard__section -->
-
-          <nav class="mlb_live__reload">
-            <div class="mlb_live__reload__btn--auto"><a class="selected" href="#"><span>自動更新(30秒ごと)</span></a></div>
-            <div class="mlb_live__reload__btn--manual"><a href="#"><span>手動更新</span></a></div>
-            <div class="mlb_live__reload__btn--reload"><a href="#"><span>更新</span></a></div>
-          </nav><!-- /.mlb_live__reload -->
-
-          <div class="stats__banner stats__banner--mlb show-for-large">
-            <div><a href="hoge"><img src="/assets/images/stats/tennis/bnr_hero.png" alt=""></a></div>
-          </div><!-- /.stats__banner -->
-
-          <div class="stats__banner stats__banner--mlb show-for-small">
-            <div><a href="hoge"><img src="/assets/images/stats/tennis/bnr_hero@2x.png" alt=""></a></div>
-          </div><!-- /.stats__banner -->
-
-          <nav class="mlb_live__nav">
-            <ul class="mlb_live__nav__list">
-              <li class="mlb_live__nav__item current"><a href="hoge">試合情報</a></li>
-              <li class="mlb_live__nav__item"><a href="hoge">出場成績</a></li>
-              <li class="mlb_live__nav__item"><a href="hoge">イニング速報</a></li>
-              <li class="mlb_live__nav__item"><a href="hoge">一球速報</a></li>
-            </ul><!-- /.mlb_live__nav__list -->
-          </nav><!-- /.mlb_live__nav -->
-
-          <section class="mlb_live__preview__section">
-            <h2 class="mlb_live__heading--h2">試合の見どころ</h2>
-
-            <div class="mlb_live__preview">
-              <p>テキストが入りますテキストが入りますテキストが入ります。テキストが入りますテキストが入りますテキストが入ります。テキストが入りますテキストが入りますテキストが入ります。テキストが入りますテキストが入りますテキストが入ります。テキストが入りますテキストが入りますテキストが入ります。</p>
-            </div><!-- /.mlb_live__preview -->
-          </section><!-- /.mlb_live__preview__section -->
-
-          <section class="mlb_live__starting">
-            <h2 class="mlb_live__heading--h2">予告先発投手</h2>
-
-            <table class="mlb_live__starting--pitcher">
+        <section class="mlb_live__scoreboard__section">
+          <div class="mlb_live__scoreboard__outer">
+            <table class="mlb_live__scoreboard">
               <thead>
                 <tr>
-                  <th class="mlb_live__starting--pitcher__th--home">タイガース</th>
-                  <th class="mlb_live__starting--pitcher__th--visitor">インディアンス</th>
+                  <th class="mlb_live__scoreboard__th--team">&nbsp;</th>
+                  <th class="mlb_live__scoreboard__th--inning">1</th>
+                  <th class="mlb_live__scoreboard__th--inning">2</th>
+                  <th class="mlb_live__scoreboard__th--inning">3</th>
+                  <th class="mlb_live__scoreboard__th--inning">4</th>
+                  <th class="mlb_live__scoreboard__th--inning">5</th>
+                  <th class="mlb_live__scoreboard__th--inning">6</th>
+                  <th class="mlb_live__scoreboard__th--inning">7</th>
+                  <th class="mlb_live__scoreboard__th--inning">8</th>
+                  <th class="mlb_live__scoreboard__th--inning">9</th>
+                  <th class="mlb_live__scoreboard__th--sum">計</th>
+                  <th class="mlb_live__scoreboard__th--hit">安</th>
+                  <th class="mlb_live__scoreboard__th--error">失</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td class="mlb_live__starting--pitcher__td">
-                    <p class="mlb_live__starting--pitcher__position">投手</p>
-                    <p class="mlb_live__starting--pitcher__uniform_num">32</p>
-                    <p class="mlb_live__starting--pitcher__name">フルマー<i class="mlb_live__starting--pitcher__handed--left"></i></p>
-                  </td>
-                  <td class="mlb_live__starting--pitcher__td">
-                    <p class="mlb_live__starting--pitcher__position">投手</p>
-                    <p class="mlb_live__starting--pitcher__uniform_num">44</p>
-                    <p class="mlb_live__starting--pitcher__name">グッディー<i class="mlb_live__starting--pitcher__handed--right"></i></p>
-                  </td>
+                  <th class="mlb_live__scoreboard__th--team mlb_live__scoreboard__th--team--home">T</th>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td class="mlb_live__scoreboard__td--sum">0</td>
+                  <td class="mlb_live__scoreboard__td--hit">4</td>
+                  <td class="mlb_live__scoreboard__td--error">1</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__scoreboard__th--team mlb_live__scoreboard__th--team--visitor">I</th>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>3</td>
+                  <td>X</td>
+                  <td class="mlb_live__scoreboard__td--sum">4</td>
+                  <td class="mlb_live__scoreboard__td--hit">9</td>
+                  <td class="mlb_live__scoreboard__td--error">0</td>
                 </tr>
               </tbody>
-            </table><!-- /.mlb_live__starting--pitcher -->
+            </table><!-- /.mlb_live__scoreboard -->
+          </div><!-- /.mlb_live__scoreboard__outer -->
+        </section><!-- /.mlb_live__scoreboard__section -->
 
-            <table class="mlb_live__starting--pitcher_record">
-              <thead>
-                <tr>
-                  <th class="mlb_live__starting--pitcher_record__th">試</th>
-                  <th class="mlb_live__starting--pitcher_record__th">勝</th>
-                  <th class="mlb_live__starting--pitcher_record__th">負</th>
-                  <th class="mlb_live__starting--pitcher_record__th">防御率</th>
-                  <th class="mlb_live__starting--pitcher_record__th">成績</th>
-                  <th class="mlb_live__starting--pitcher_record__th">試</th>
-                  <th class="mlb_live__starting--pitcher_record__th">勝</th>
-                  <th class="mlb_live__starting--pitcher_record__th">負</th>
-                  <th class="mlb_live__starting--pitcher_record__th">防御率</th>
-                </tr>
-              </thead>
+        <nav class="mlb_live__reload">
+          <div class="mlb_live__reload__btn--auto"><a class="selected" href="#"><span>自動更新(30秒ごと)</span></a></div>
+          <div class="mlb_live__reload__btn--manual"><a href="#"><span>手動更新</span></a></div>
+          <div class="mlb_live__reload__btn--reload"><a href="#"><span>更新</span></a></div>
+        </nav><!-- /.mlb_live__reload -->
+
+        <div class="stats__banner stats__banner--mlb show-for-large">
+          <div><a href="hoge"><img src="/assets/images/stats/tennis/bnr_hero.png" alt=""></a></div>
+        </div><!-- /.stats__banner -->
+
+        <div class="stats__banner stats__banner--mlb show-for-small">
+          <div><a href="hoge"><img src="/assets/images/stats/tennis/bnr_hero@2x.png" alt=""></a></div>
+        </div><!-- /.stats__banner -->
+
+        <nav class="mlb_live__nav mlb_live__nav--global">
+          <ul class="mlb_live__nav__list">
+            <li class="mlb_live__nav__item"><a class="current" href="hoge">試合情報</a></li>
+            <li class="mlb_live__nav__item"><a href="hoge">出場成績</a></li>
+            <li class="mlb_live__nav__item"><a href="hoge">イニング速報</a></li>
+            <li class="mlb_live__nav__item"><a href="hoge">一球速報</a></li>
+          </ul><!-- /.mlb_live__nav__list -->
+        </nav><!-- /.mlb_live__nav -->
+
+        <section class="mlb_live__preview__section">
+          <h2 class="mlb_live__heading--h2">試合の見どころ</h2>
+
+          <div class="mlb_live__preview">
+            <p>テキストが入りますテキストが入りますテキストが入ります。テキストが入りますテキストが入りますテキストが入ります。テキストが入りますテキストが入りますテキストが入ります。テキストが入りますテキストが入りますテキストが入ります。テキストが入りますテキストが入りますテキストが入ります。</p>
+          </div><!-- /.mlb_live__preview -->
+        </section><!-- /.mlb_live__preview__section -->
+
+        <section class="mlb_live__starting">
+          <h2 class="mlb_live__heading--h2">予告先発投手</h2>
+
+          <table class="mlb_live__starting--pitcher">
+            <thead>
+              <tr>
+                <th class="mlb_live__starting--pitcher__th--home">タイガース</th>
+                <th class="mlb_live__starting--pitcher__th--visitor">インディアンス</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mlb_live__starting--pitcher__td">
+                  <p class="mlb_live__starting--pitcher__position">投手</p>
+                  <p class="mlb_live__starting--pitcher__uniform_num">32</p>
+                  <p class="mlb_live__starting--pitcher__name">フルマー<i class="mlb_live__starting--pitcher__handed--left"></i></p>
+                </td>
+                <td class="mlb_live__starting--pitcher__td">
+                  <p class="mlb_live__starting--pitcher__position">投手</p>
+                  <p class="mlb_live__starting--pitcher__uniform_num">44</p>
+                  <p class="mlb_live__starting--pitcher__name">グッディー<i class="mlb_live__starting--pitcher__handed--right"></i></p>
+                </td>
+              </tr>
+            </tbody>
+          </table><!-- /.mlb_live__starting--pitcher -->
+
+          <table class="mlb_live__starting--pitcher_record">
+            <thead>
+              <tr>
+                <th class="mlb_live__starting--pitcher_record__th">試</th>
+                <th class="mlb_live__starting--pitcher_record__th">勝</th>
+                <th class="mlb_live__starting--pitcher_record__th">負</th>
+                <th class="mlb_live__starting--pitcher_record__th">防御率</th>
+                <th class="mlb_live__starting--pitcher_record__th">成績</th>
+                <th class="mlb_live__starting--pitcher_record__th">試</th>
+                <th class="mlb_live__starting--pitcher_record__th">勝</th>
+                <th class="mlb_live__starting--pitcher_record__th">負</th>
+                <th class="mlb_live__starting--pitcher_record__th">防御率</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mlb_live__starting--pitcher_record__td">18</td>
+                <td class="mlb_live__starting--pitcher_record__td">5</td>
+                <td class="mlb_live__starting--pitcher_record__td">6</td>
+                <td class="mlb_live__starting--pitcher_record__td">4.73</td>
+                <th class="mlb_live__starting--pitcher_record__th">今季</th>
+                <td class="mlb_live__starting--pitcher_record__td">7</td>
+                <td class="mlb_live__starting--pitcher_record__td">1</td>
+                <td class="mlb_live__starting--pitcher_record__td">2</td>
+                <td class="mlb_live__starting--pitcher_record__td">2.58</td>
+              </tr>
+              <tr>
+                <td class="mlb_live__starting--pitcher_record__td">12</td>
+                <td class="mlb_live__starting--pitcher_record__td">5</td>
+                <td class="mlb_live__starting--pitcher_record__td">3</td>
+                <td class="mlb_live__starting--pitcher_record__td">3.00</td>
+                <th class="mlb_live__starting--pitcher_record__th">対戦</th>
+                <td class="mlb_live__starting--pitcher_record__td">7</td>
+                <td class="mlb_live__starting--pitcher_record__td">1</td>
+                <td class="mlb_live__starting--pitcher_record__td">2</td>
+                <td class="mlb_live__starting--pitcher_record__td">2.58</td>
+              </tr>
+            </tbody>
+          </table><!-- /.mlb_live__starting--pitcher_record -->
+
+          <h2 class="mlb_live__heading--h2">スターティングメンバー</h2>
+          <div class="mlb_live__starting--member__section">
+            <table class="mlb_live__starting--member mlb_live__starting--member--home">
+              <caption class="mlb_live__starting--member__caption">タイガース</caption>
               <tbody>
                 <tr>
-                  <td class="mlb_live__starting--pitcher_record__td">18</td>
-                  <td class="mlb_live__starting--pitcher_record__td">5</td>
-                  <td class="mlb_live__starting--pitcher_record__td">6</td>
-                  <td class="mlb_live__starting--pitcher_record__td">4.73</td>
-                  <th class="mlb_live__starting--pitcher_record__th">今季</th>
-                  <td class="mlb_live__starting--pitcher_record__td">7</td>
-                  <td class="mlb_live__starting--pitcher_record__td">1</td>
-                  <td class="mlb_live__starting--pitcher_record__td">2</td>
-                  <td class="mlb_live__starting--pitcher_record__td">2.58</td>
+                  <th class="mlb_live__starting--member__th--lineup">1</th>
+                  <td class="mlb_live__starting--member__td--position">二</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--right"></i>キンズラー</td>
                 </tr>
                 <tr>
-                  <td class="mlb_live__starting--pitcher_record__td">12</td>
-                  <td class="mlb_live__starting--pitcher_record__td">5</td>
-                  <td class="mlb_live__starting--pitcher_record__td">3</td>
-                  <td class="mlb_live__starting--pitcher_record__td">3.00</td>
-                  <th class="mlb_live__starting--pitcher_record__th">対戦</th>
-                  <td class="mlb_live__starting--pitcher_record__td">7</td>
-                  <td class="mlb_live__starting--pitcher_record__td">1</td>
-                  <td class="mlb_live__starting--pitcher_record__td">2</td>
-                  <td class="mlb_live__starting--pitcher_record__td">2.58</td>
+                  <th class="mlb_live__starting--member__th--lineup">2</th>
+                  <td class="mlb_live__starting--member__td--position">捕</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>アビラ</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__starting--member__th--lineup">3</th>
+                  <td class="mlb_live__starting--member__td--position">左</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>アップトン</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__starting--member__th--lineup">4</th>
+                  <td class="mlb_live__starting--member__td--position">一</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>カブレラ</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__starting--member__th--lineup">5</th>
+                  <td class="mlb_live__starting--member__td--position">右</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--right"></i>Jマルティネス</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__starting--member__th--lineup">6</th>
+                  <td class="mlb_live__starting--member__td--position">指</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>Vマルティネス</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__starting--member__th--lineup">7</th>
+                  <td class="mlb_live__starting--member__td--position">三</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>カステラノス</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__starting--member__th--lineup">8</th>
+                  <td class="mlb_live__starting--member__td--position">中</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>マトゥック</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__starting--member__th--lineup">9</th>
+                  <td class="mlb_live__starting--member__td--position">遊</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>イグレシアス</td>
                 </tr>
               </tbody>
-            </table><!-- /.mlb_live__starting--pitcher_record -->
+            </table><!-- /.mlb_live__starting--member -->
 
-            <h2 class="mlb_live__heading--h2">スターティングメンバー</h2>
-            <div class="mlb_live__starting--member__section">
-              <table class="mlb_live__starting--member mlb_live__starting--member--home">
-                <caption class="mlb_live__starting--member__heading">タイガース</caption>
-                <tbody>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">1</th>
-                    <td class="mlb_live__starting--member__td--position">二</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--right"></i>キンズラー</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">2</th>
-                    <td class="mlb_live__starting--member__td--position">捕</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>アビラ</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">3</th>
-                    <td class="mlb_live__starting--member__td--position">左</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>アップトン</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">4</th>
-                    <td class="mlb_live__starting--member__td--position">一</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>カブレラ</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">5</th>
-                    <td class="mlb_live__starting--member__td--position">右</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--right"></i>Jマルティネス</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">6</th>
-                    <td class="mlb_live__starting--member__td--position">指</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>Vマルティネス</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">7</th>
-                    <td class="mlb_live__starting--member__td--position">三</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>カステラノス</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">8</th>
-                    <td class="mlb_live__starting--member__td--position">中</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>マトゥック</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">9</th>
-                    <td class="mlb_live__starting--member__td--position">遊</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>イグレシアス</td>
-                  </tr>
-                </tbody>
-              </table><!-- /.mlb_live__starting--member -->
-
-              <table class="mlb_live__starting--member mlb_live__starting--member--visitor">
-                <caption class="mlb_live__starting--member__caption">ジャイアンツ</caption>
-                <tbody>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">1</th>
-                    <td class="mlb_live__starting--member__td--position">二</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--right"></i>ゴンザレス</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">2</th>
-                    <td class="mlb_live__starting--member__td--position">遊</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>リンドア</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">3</th>
-                    <td class="mlb_live__starting--member__td--position">左</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>ブラントリー</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">4</th>
-                    <td class="mlb_live__starting--member__td--position">指</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>エンカーナシオン</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">5</th>
-                    <td class="mlb_live__starting--member__td--position">三</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>ラミレス</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">6</th>
-                    <td class="mlb_live__starting--member__td--position">右</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>チゼンホール</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">7</th>
-                    <td class="mlb_live__starting--member__td--position">一</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>サンタナ</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">8</th>
-                    <td class="mlb_live__starting--member__td--position">中</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>ジマー</td>
-                  </tr>
-                  <tr>
-                    <th class="mlb_live__starting--member__th--lineup">9</th>
-                    <td class="mlb_live__starting--member__td--position">捕</td>
-                    <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>ゴームズ</td>
-                  </tr>
-                </tbody>
-              </table><!-- /.mlb_live__starting--member -->
-            </div><!-- /.mlb_live__starting--member__section -->
-
-            <h2 class="mlb_live__heading--h2">控え選手</h2>
-            <div class="mlb_live__starting--bench__section">
-              <table class="mlb_live__starting--bench mlb_live__starting--bench--home">
-                <caption class="mlb_live__starting--bench__caption">タイガース</caption>
-                <tbody class="mlb_live__starting--bench--pitcher">
-                  <tr>
-                    <th class="mlb_live__starting--bench__th__heading">投手</th>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>グリーン</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>Jウィルソン</td>
-                  </tr>
-                </tbody><!-- /.mlb_live__starting--bench--pitcher -->
-                <tbody class="mlb_live__starting--bench--backstop">
-                  <tr>
-                    <th class="mlb_live__starting--bench__th__heading">捕手</th>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>アビラ</td>
-                  </tr>
-                </tbody><!-- /.mlb_live__starting--bench--backstop -->
-                <tbody class="mlb_live__starting--bench--infielder">
-                  <tr>
-                    <th class="mlb_live__starting--bench__th__heading">内野手</th>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>キンズラー</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>カブレラ</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>カステラノス</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>イグレシアス</td>
-                  </tr>
-                </tbody><!-- /.mlb_live__starting--bench--infielder -->
-                <tbody class="mlb_live__starting--bench--outfielder">
-                  <tr>
-                    <th class="mlb_live__starting--bench__th__heading">外野手</th>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>アップトン</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>Jマルティネス</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>プレスリー</td>
-                  </tr>
-                </tbody><!-- /.mlb_live__starting--bench--outfielder -->
-                <tbody class="mlb_live__starting--bench--designated_hitter">
-                  <tr>
-                    <th class="mlb_live__starting--bench__th__heading">指名打者</th>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>Vマルティネス</td>
-                  </tr>
-                </tbody><!-- /.mlb_live__starting--bench--designated_hitter -->
-              </table><!-- /.mlb_live__starting--bench -->
-
-              <table class="mlb_live__starting--bench mlb_live__starting--bench--visitor">
-                <caption class="mlb_live__starting--bench__caption">ジャイアンツ</caption>
-                <tbody class="mlb_live__starting--bench--pitcher">
-                  <tr>
-                    <th class="mlb_live__starting--bench__th__heading">投手</th>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>クルバー</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>オテロ</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>マカリスター</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>ショー</td>
-                  </tr>
-                </tbody><!-- /.mlb_live__starting--bench--pitcher -->
-                <tbody class="mlb_live__starting--bench--backstop">
-                  <tr>
-                    <th class="mlb_live__starting--bench__th__heading">捕手</th>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>ゴームズ</td>
-                  </tr>
-                </tbody><!-- /.mlb_live__starting--bench--backstop -->
-                <tbody class="mlb_live__starting--bench--infielder">
-                  <tr>
-                    <th class="mlb_live__starting--bench__th__heading">内野手</th>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>リンドア</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>サンタナ</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>ゴンザレス</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>ラミレス</td>
-                  </tr>
-                </tbody><!-- /.mlb_live__starting--bench--infielder -->
-                <tbody class="mlb_live__starting--bench--outfielder">
-                  <tr>
-                    <th class="mlb_live__starting--bench__th__heading">外野手</th>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>ジマー</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>ブラントリー</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>チゼンホール</td>
-                  </tr>
-                </tbody><!-- /.mlb_live__starting--bench--outfielder -->
-                <tbody class="mlb_live__starting--bench--designated_hitter">
-                  <tr>
-                    <th class="mlb_live__starting--bench__th__heading">指名打者</th>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>エンカーナシオン</td>
-                  </tr>
-                  <tr>
-                    <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>アルモンテ</td>
-                  </tr>
-                </tbody><!-- /.mlb_live__starting--bench--designated_hitter -->
-              </table><!-- /.mlb_live__starting--bench -->
-            </div><!-- /.mlb_live__starting--bench__section -->
-          </section><!-- /.mlb_live__starting -->
-
-          <section class="mlb_live__win_loss_stangings-section">
-            <h2 class="mlb_live__heading--h2">チーム対戦成績</h2>
-
-            <table class="mlb_live__win_loss_stangings">
-              <thead>
-                <tr>
-                  <th class="mlb_live__win_loss_stangings__th--home">タイガース</th>
-                  <th class="mlb_live__win_loss_stangings__th">成績</th>
-                  <th class="mlb_live__win_loss_stangings__th--visitor">ジャイアンツ</th>
-                </tr>
-              </thead>
+            <table class="mlb_live__starting--member mlb_live__starting--member--visitor">
+              <caption class="mlb_live__starting--member__caption">ジャイアンツ</caption>
               <tbody>
                 <tr>
-                  <td class="mlb_live__win_loss_stangings__td">2勝1敗1分</td>
-                  <th class="mlb_live__win_loss_stangings__th">勝敗</th>
-                  <td class="mlb_live__win_loss_stangings__td">2勝1敗1分</td>
+                  <th class="mlb_live__starting--member__th--lineup">1</th>
+                  <td class="mlb_live__starting--member__td--position">二</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--right"></i>ゴンザレス</td>
                 </tr>
                 <tr>
-                  <td class="mlb_live__win_loss_stangings__td">2.30</td>
-                  <th class="mlb_live__win_loss_stangings__th">防御率</th>
-                  <td class="mlb_live__win_loss_stangings__td">2.30</td>
+                  <th class="mlb_live__starting--member__th--lineup">2</th>
+                  <td class="mlb_live__starting--member__td--position">遊</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>リンドア</td>
                 </tr>
                 <tr>
-                  <td class="mlb_live__win_loss_stangings__td">2.30</td>
-                  <th class="mlb_live__win_loss_stangings__th">打率</th>
-                  <td class="mlb_live__win_loss_stangings__td">2.30</td>
+                  <th class="mlb_live__starting--member__th--lineup">3</th>
+                  <td class="mlb_live__starting--member__td--position">左</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>ブラントリー</td>
                 </tr>
                 <tr>
-                  <td class="mlb_live__win_loss_stangings__td">12</td>
-                  <th class="mlb_live__win_loss_stangings__th">得点</th>
-                  <td class="mlb_live__win_loss_stangings__td">12</td>
+                  <th class="mlb_live__starting--member__th--lineup">4</th>
+                  <td class="mlb_live__starting--member__td--position">指</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>エンカーナシオン</td>
                 </tr>
                 <tr>
-                  <td class="mlb_live__win_loss_stangings__td">22</td>
-                  <th class="mlb_live__win_loss_stangings__th">安打</th>
-                  <td class="mlb_live__win_loss_stangings__td">22</td>
+                  <th class="mlb_live__starting--member__th--lineup">5</th>
+                  <td class="mlb_live__starting--member__td--position">三</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>ラミレス</td>
                 </tr>
                 <tr>
-                  <td class="mlb_live__win_loss_stangings__td">6</td>
-                  <th class="mlb_live__win_loss_stangings__th">本塁打</th>
-                  <td class="mlb_live__win_loss_stangings__td">6</td>
+                  <th class="mlb_live__starting--member__th--lineup">6</th>
+                  <td class="mlb_live__starting--member__td--position">右</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>チゼンホール</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__starting--member__th--lineup">7</th>
+                  <td class="mlb_live__starting--member__td--position">一</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>サンタナ</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__starting--member__th--lineup">8</th>
+                  <td class="mlb_live__starting--member__td--position">中</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>ジマー</td>
+                </tr>
+                <tr>
+                  <th class="mlb_live__starting--member__th--lineup">9</th>
+                  <td class="mlb_live__starting--member__td--position">捕</td>
+                  <td class="mlb_live__starting--member__td--player"><i class="mlb_live__starting--member__td--player__handed--left"></i>ゴームズ</td>
                 </tr>
               </tbody>
-            </table><!-- /.mlb_live__win_loss_stangings -->
-          </section><!-- /.mlb_live__win_loss_stangings-section -->
+            </table><!-- /.mlb_live__starting--member -->
+          </div><!-- /.mlb_live__starting--member__section -->
 
+          <h2 class="mlb_live__heading--h2">控え選手</h2>
+          <div class="mlb_live__starting--bench__section">
+            <table class="mlb_live__starting--bench mlb_live__starting--bench--home">
+              <caption class="mlb_live__starting--bench__caption">タイガース</caption>
+              <tbody class="mlb_live__starting--bench--pitcher">
+                <tr>
+                  <th class="mlb_live__starting--bench__th__heading">投手</th>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>グリーン</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>Jウィルソン</td>
+                </tr>
+              </tbody><!-- /.mlb_live__starting--bench--pitcher -->
+              <tbody class="mlb_live__starting--bench--backstop">
+                <tr>
+                  <th class="mlb_live__starting--bench__th__heading">捕手</th>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>アビラ</td>
+                </tr>
+              </tbody><!-- /.mlb_live__starting--bench--backstop -->
+              <tbody class="mlb_live__starting--bench--infielder">
+                <tr>
+                  <th class="mlb_live__starting--bench__th__heading">内野手</th>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>キンズラー</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>カブレラ</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>カステラノス</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>イグレシアス</td>
+                </tr>
+              </tbody><!-- /.mlb_live__starting--bench--infielder -->
+              <tbody class="mlb_live__starting--bench--outfielder">
+                <tr>
+                  <th class="mlb_live__starting--bench__th__heading">外野手</th>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>アップトン</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>Jマルティネス</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>プレスリー</td>
+                </tr>
+              </tbody><!-- /.mlb_live__starting--bench--outfielder -->
+              <tbody class="mlb_live__starting--bench--designated_hitter">
+                <tr>
+                  <th class="mlb_live__starting--bench__th__heading">指名打者</th>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>Vマルティネス</td>
+                </tr>
+              </tbody><!-- /.mlb_live__starting--bench--designated_hitter -->
+            </table><!-- /.mlb_live__starting--bench -->
 
-        </div><!-- /.mlb_live -->
+            <table class="mlb_live__starting--bench mlb_live__starting--bench--visitor">
+              <caption class="mlb_live__starting--bench__caption">ジャイアンツ</caption>
+              <tbody class="mlb_live__starting--bench--pitcher">
+                <tr>
+                  <th class="mlb_live__starting--bench__th__heading">投手</th>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>クルバー</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>オテロ</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>マカリスター</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>ショー</td>
+                </tr>
+              </tbody><!-- /.mlb_live__starting--bench--pitcher -->
+              <tbody class="mlb_live__starting--bench--backstop">
+                <tr>
+                  <th class="mlb_live__starting--bench__th__heading">捕手</th>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>ゴームズ</td>
+                </tr>
+              </tbody><!-- /.mlb_live__starting--bench--backstop -->
+              <tbody class="mlb_live__starting--bench--infielder">
+                <tr>
+                  <th class="mlb_live__starting--bench__th__heading">内野手</th>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>リンドア</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>サンタナ</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>ゴンザレス</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>ラミレス</td>
+                </tr>
+              </tbody><!-- /.mlb_live__starting--bench--infielder -->
+              <tbody class="mlb_live__starting--bench--outfielder">
+                <tr>
+                  <th class="mlb_live__starting--bench__th__heading">外野手</th>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>ジマー</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>ブラントリー</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>チゼンホール</td>
+                </tr>
+              </tbody><!-- /.mlb_live__starting--bench--outfielder -->
+              <tbody class="mlb_live__starting--bench--designated_hitter">
+                <tr>
+                  <th class="mlb_live__starting--bench__th__heading">指名打者</th>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--right"></i>エンカーナシオン</td>
+                </tr>
+                <tr>
+                  <td class="mlb_live__starting--bench__td--player"><i class="mlb_live__starting--bench__td--player__handed--left"></i>アルモンテ</td>
+                </tr>
+              </tbody><!-- /.mlb_live__starting--bench--designated_hitter -->
+            </table><!-- /.mlb_live__starting--bench -->
+          </div><!-- /.mlb_live__starting--bench__section -->
+        </section><!-- /.mlb_live__starting -->
+
+        <section class="mlb_live__win_loss_stangings-section">
+          <h2 class="mlb_live__heading--h2">チーム対戦成績</h2>
+
+          <table class="mlb_live__win_loss_stangings">
+            <thead>
+              <tr>
+                <th class="mlb_live__win_loss_stangings__th--home">タイガース</th>
+                <th class="mlb_live__win_loss_stangings__th">成績</th>
+                <th class="mlb_live__win_loss_stangings__th--visitor">ジャイアンツ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mlb_live__win_loss_stangings__td">2勝1敗1分</td>
+                <th class="mlb_live__win_loss_stangings__th">勝敗</th>
+                <td class="mlb_live__win_loss_stangings__td">2勝1敗1分</td>
+              </tr>
+              <tr>
+                <td class="mlb_live__win_loss_stangings__td">2.30</td>
+                <th class="mlb_live__win_loss_stangings__th">防御率</th>
+                <td class="mlb_live__win_loss_stangings__td">2.30</td>
+              </tr>
+              <tr>
+                <td class="mlb_live__win_loss_stangings__td">2.30</td>
+                <th class="mlb_live__win_loss_stangings__th">打率</th>
+                <td class="mlb_live__win_loss_stangings__td">2.30</td>
+              </tr>
+              <tr>
+                <td class="mlb_live__win_loss_stangings__td">12</td>
+                <th class="mlb_live__win_loss_stangings__th">得点</th>
+                <td class="mlb_live__win_loss_stangings__td">12</td>
+              </tr>
+              <tr>
+                <td class="mlb_live__win_loss_stangings__td">22</td>
+                <th class="mlb_live__win_loss_stangings__th">安打</th>
+                <td class="mlb_live__win_loss_stangings__td">22</td>
+              </tr>
+              <tr>
+                <td class="mlb_live__win_loss_stangings__td">6</td>
+                <th class="mlb_live__win_loss_stangings__th">本塁打</th>
+                <td class="mlb_live__win_loss_stangings__td">6</td>
+              </tr>
+            </tbody>
+          </table><!-- /.mlb_live__win_loss_stangings -->
+        </section><!-- /.mlb_live__win_loss_stangings-section -->
+
       </section><!-- /.main-sec -->
 
       <section class="side-sec show-for-large">
