@@ -160,7 +160,6 @@
           include_once dirname(__DIR__) . '/_include/_schedule_info.php';
           // ===========================================
           ?>
-
         </div><!-- /.motorsports_stats -->
 
         <?php
