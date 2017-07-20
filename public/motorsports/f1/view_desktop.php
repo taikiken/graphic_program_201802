@@ -140,45 +140,12 @@
         </div><!-- /.sponsor-link -->
 
         <div class="motorsports_stats">
-          <section class="matches">
-            <h2 class="matches__heading mod-headingA">イギリスGP</h2>
-            <table class="matches__table mod-table">
-              <thead>
-                <tr>
-                  <th class="matches__table__th">順位</th>
-                  <th class="matches__table__th">ドライバー</th>
-                  <th class="matches__table__th">チーム</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>ルイス・ハミルトン</td>
-                  <td>メルセデス</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>バルテリ・ボッタス</td>
-                  <td>メルセデス</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>キミ・ライコネン</td>
-                  <td>フェラーリ</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>マックス・フェルスタッペン</td>
-                  <td>レッドブル</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>ダニエル・リカルド</td>
-                  <td>レッドブル</td>
-                </tr>
-              </tbody>
-            </table><!-- /.matches__table -->
-          </section><!-- /.matches -->
+          <?php
+          // matches
+          // ===========================================
+          include_once dirname(__DIR__) . '/_include/_schedule_match.php';
+          // ===========================================
+          ?>
 
           <section class="point_rank">
             <h2 class="point_rank__heading mod-headingA">ポイントランキング</h2>
