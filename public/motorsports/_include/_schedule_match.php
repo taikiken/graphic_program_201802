@@ -1,7 +1,7 @@
 <?php
 /**
  * 日程結果: <section class="matches">
- * User: taikiken
+ * Author: @taikiken
  * Date: 2017/07/20
  * Time: 17:34
  * モータースポーツ / Phase2 : 日程結果・ランキング / データ連携 #1916
@@ -45,9 +45,10 @@ if (!isset($schedule_now) && !isset($schedule_post)) {
 $schedule_stats = $schedule_post ? $schedule_post : $schedule_now;
 $schedule_competition = $schedule_result->competition;
 
+
 // ===========================================
+// ---------------------
 if ($schedule_post) :
-  // ---------------------
   // post
 ?>
   <section class="matches">
@@ -78,7 +79,7 @@ if ($schedule_post) :
           <td><?php echo $stats->team ?></td>
         </tr>
         <?php
-      endforeach;;
+      endforeach;
       ?>
       </tbody>
     </table>
