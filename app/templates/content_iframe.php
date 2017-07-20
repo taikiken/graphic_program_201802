@@ -57,7 +57,7 @@ endif;
 $categories = $page['post']['categories'];
 $in_soccer = false;
 foreach ($categories as $category) {
-  if ($category['slug'] == 'soccer') {
+  if ($category['slug'] == 'soccer' || ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) ) {
     $in_soccer = true;
   }
 }
