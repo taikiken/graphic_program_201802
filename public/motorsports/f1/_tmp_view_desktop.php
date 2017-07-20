@@ -140,6 +140,63 @@
         </div><!-- /.sponsor-link -->
 
         <div class="motorsports_stats">
+
+          <!--
+          モータースポーツJSON連携
+          ref. https://github.com/undotsushin/undotsushin/issues/1916
+          nowの方です
+          -->
+          <section class="matches">
+            <h2 class="matches__heading mod-headingA">第5戦　スペインGP</h2>
+            <table class="matches__table mod-table">
+              <thead>
+                <tr>
+                  <th class="matches__table__th">イベント</th>
+                  <th class="matches__table__th">開催日</th>
+                  <th class="matches__table__th">日本時間</th>
+                  <th class="matches__table__th">1位</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>フリー走行1</td>
+                  <td>5/12（金）</td>
+                  <td>17：00～</td>
+                  <td>L.ハミルトン / メルセデスAMG</td>
+                </tr>
+                <tr>
+                  <td>フリー走行2</td>
+                  <td>5/12（金）</td>
+                  <td>17：00～</td>
+                  <td>L.ハミルトン / メルセデスAMG</td>
+                </tr>
+                <tr>
+                  <td>フリー走行3</td>
+                  <td>5/12（金）</td>
+                  <td>17：00～</td>
+                  <td>L.ハミルトン / メルセデスAMG</td>
+                </tr>
+                <tr>
+                  <td>予選</td>
+                  <td>5/12（金）</td>
+                  <td>17：00～</td>
+                  <td>L.ハミルトン / メルセデスAMG</td>
+                </tr>
+                <tr>
+                  <td>決勝</td>
+                  <td>5/12（金）</td>
+                  <td>17：00～</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table><!-- /.matches__table -->
+          </section><!-- /.matches -->
+
+          <!--
+          モータースポーツJSON連携
+          ref. https://github.com/undotsushin/undotsushin/issues/1916
+          postの方です
+          -->
           <section class="matches">
             <h2 class="matches__heading mod-headingA">イギリスGP</h2>
             <table class="matches__table mod-table">
