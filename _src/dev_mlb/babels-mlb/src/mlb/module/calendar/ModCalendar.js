@@ -10,6 +10,9 @@
  *
  */
 
+// moku/util
+import Text from '../../../moku/util/Text';
+
 /**
  * react-big-calendar - events 情報を作成します
  * - {@link DaeCalendar}
@@ -21,7 +24,7 @@ class ModCalendarEvents {
    * @param {DaeDate} game JSON 加工済み
    */
   constructor(game) {
-    const day = new Date(game.year, game.month, game.day);
+    const day = new Date(game.year, game.month - 1, game.day);
     // ---- react-big-calendar property
     /**
      * 開始日
@@ -42,7 +45,7 @@ class ModCalendarEvents {
      * 表示タイトル - ○○年○○月○○日
      * @type {string}
      */
-    this.title = `${game.year}年${game.month}月${game.month}日`;
+    this.title = `${game.year}年${game.month}月${game.day}日`;
     // ------ custom property
     /**
      * 年
@@ -59,6 +62,7 @@ class ModCalendarEvents {
      * @type {number}
      */
     this.day = game.day;
+    this.full = `${game.year}${Text.zero(game.month)}${Text.zero(game.day)}`;
   }
 }
 
@@ -74,11 +78,15 @@ export default class ModCalendar {
    * @param {Array.<DaeDate>} schedules 表示させるリスト
    */
   constructor(schedules) {
+    const games = schedules.map(game => (new ModCalendarEvents(game)));
+    const calendar = {};
+    games.map(event => (calendar[event.start] = event));
     /**
      *
      * @type {Array.<ModCalendarEvents>}
      */
-    this.games = schedules.map(game => (new ModCalendarEvents(game)));
+    this.games = games;
+    this.calendar = calendar;
   }
   /**
    * this.games を取得します
@@ -86,5 +94,9 @@ export default class ModCalendar {
    */
   events() {
     return this.games;
+  }
+  game(date) {
+    console.log('ModCalendarEvents.game', date);
+    return this.calendar[date];
   }
 }

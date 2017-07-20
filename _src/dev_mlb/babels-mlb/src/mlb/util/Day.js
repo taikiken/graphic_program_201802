@@ -10,13 +10,28 @@
  *
  */
 
-export default class Helper {
-  static date() {
-    const current = new Date();
+// moku/util
+import Text from '../../moku/util/Text';
+
+export default class Day {
+  static current() {
+    return new Date();
+  }
+  static today() {
+    const current = Day.current();
     return {
       year: current.getFullYear(),
       month: current.getMonth() + 1,
       day: current.getDate(),
     };
+  }
+  static thisYear() {
+    return Day.today().year;
+  }
+  static nextYear() {
+    return Day.thisYear() + 1;
+  }
+  static full(date = Day.current()) {
+    return `${date.getFullYear()}${Text.zero(date.getMonth() + 1)}${Text.zero(date.getDate())}`;
   }
 }

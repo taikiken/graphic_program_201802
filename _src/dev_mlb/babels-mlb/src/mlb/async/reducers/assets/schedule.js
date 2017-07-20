@@ -14,7 +14,7 @@ import ReducerTypes from '../ReducerTypes';
 
 const initialState = {
   type: ReducerTypes.INITIAL,
-  json: {},
+  data: {},
   error: null,
 };
 

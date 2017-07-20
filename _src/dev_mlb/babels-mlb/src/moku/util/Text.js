@@ -95,7 +95,7 @@ export default class Text {
    */
   static zero(targetText, length = 2) {
     let str = String(targetText);
-    while (str.length <= length) {
+    while (str.length < length) {
       str = `0${str}`;
     }
     return str;

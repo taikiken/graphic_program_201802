@@ -14,23 +14,29 @@ import ReducerTypes from '../ReducerTypes';
 
 const initialState = {
   type: ReducerTypes.INITIAL,
-  json: {},
+  data: null,
   error: null,
+  year: null,
 };
 
 // let result = null;
 
 const calendar = (requestState = initialState, action) => {
   const state = Object.assign({}, requestState);
+  console.log('reducers.calendar', state, action);
   // switch-case
   switch (action.type) {
     case ReducerTypes.CALENDAR_COMPLETE: {
-      state.json = action.json;
+      state.type = action.type;
+      state.data = action.data;
+      state.year = action.year;
       // result = action.json;
       return state;
     }
     case ReducerTypes.CALENDAR_ERROR: {
+      state.type = action.type;
       state.error = action.error;
+      state.year = action.year;
       return state;
     }
     case ReducerTypes.INITIAL:

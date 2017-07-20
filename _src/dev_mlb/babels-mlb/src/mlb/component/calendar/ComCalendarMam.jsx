@@ -10,48 +10,83 @@
  *
  */
 
-
+// react
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// rect-big-calendar component
 import ComCalendar from './ComCalendar';
+
+// dae
+import DaeCalendar from '../../dae/schedule/DaeCalendar';
+
+// util
+import Day from '../../util/Day';
 
 // TODO: props maker, json 2つにする
 export default class ComCalendarMam extends Component {
   static propTypes = {
-    events: PropTypes.arrayOf(PropTypes.shape),
-    today: PropTypes.instanceOf(Date),
-    selected: PropTypes.func,
-    slot: PropTypes.func,
-    view: PropTypes.func,
-    navigate: PropTypes.func,
+    data: PropTypes.instanceOf(DaeCalendar),
     maker: PropTypes.func.isRequired,
   };
   static defaultProps = {
-    events: [],
-    today: new Date(),
-    selected: () => {},
-    slot: () => {},
-    view: () => {},
-    navigate: () => {},
+    data: null,
   };
+  static onSelected(event) {
+    console.log('ComCalendarMam.onSelected', event);
+  }
+  // static onSlot(event) {
+  //   console.log('ComCalendarMam.onSlot', event);
+  // }
+  static onView(event) {
+    console.log('ComCalendarMam.onView', event);
+  }
+  // static onNavigate(event) {
+  //   console.log('ComCalendarMam.onNavigate', event);
+  // }
+  constructor(props) {
+    super(props);
+    this.onNavigate = this.onNavigate.bind(this);
+    this.onSlot = this.onSlot.bind(this);
+  }
   componentDidMount() {
     // console.log('ComCalendarMam.componentDidMount', this.props.maker);
     this.props.maker();
   }
+  shouldComponentUpdate(nextProps) {
+    const { data } = this.props;
+    console.log('ComCalendarMam.shouldComponentUpdate nextState', nextProps);
+    return nextProps && data !== nextProps.data;
+  }
+  onNavigate(event) {
+    console.log('ComCalendarMam.onNavigate', event);
+    this.transition(event);
+  }
+  onSlot(event) {
+    console.log('ComCalendarMam.onSlot', event);
+    this.transition(event.start);
+  }
+  transition(date) {
+    const game = this.props.data.events.game(date);
+    console.log('ComCalendarMam.transition', date, game);
+    if (game) {
+      console.log('ComCalendarMam.transition', game.full);
+    }
+  }
   render() {
     console.log('ComCalendarMam.render ============', this.props);
-    if (this.props.events.length === 0) {
+    const data = this.props.data;
+    if (!data) {
       return null;
     }
     return (
       <ComCalendar
-        events={this.props.events}
-        today={this.props.today}
-        selected={this.props.selected}
-        slot={this.props.slot}
-        view={this.props.view}
-        navigate={this.props.navigate}
+        events={data.events.games}
+        today={Day.current()}
+        selected={ComCalendarMam.onSelected}
+        slot={this.onSlot}
+        view={ComCalendarMam.onView}
+        navigate={this.onNavigate}
       />
     );
   }

@@ -14,13 +14,16 @@
 import Api from '../../../app/Api';
 
 // util
-import Helper from '../../../util/Helper';
+import Day from '../../../util/Day';
 
 // net
 import ajax from '../../../net/ajax';
 
 // reducer
 import ReducerTypes from '../../reducers/ReducerTypes';
+
+// dae
+import DaeCalendar from '../../../dae/schedule/DaeCalendar';
 
 // const ajax = (path) => {
 //   const request = new Request(
@@ -53,22 +56,27 @@ async function asyncCalendar(year) {
   return json;
 }
 
-const requestComplete = json => ({
-  json,
-  type: ReducerTypes.CALENDAR_COMPLETE,
-});
+const requestComplete = (json, year) => {
+  const data = new DaeCalendar(json, year);
+  return {
+    data,
+    year,
+    type: ReducerTypes.CALENDAR_COMPLETE,
+  };
+};
 
-const requestError = error => ({
+const requestError = (error, year) => ({
   error,
+  year,
   type: ReducerTypes.CALENDAR_ERROR,
 });
 
 
 const calendar = (requestYear = null) => (dispatch) => {
-  const year = requestYear || Helper.date().year;
+  const year = requestYear || Day.thisYear();
   return asyncCalendar(year)
-    .then(json => dispatch(requestComplete(json)))
-    .catch(error => dispatch(requestError(error)));
+    .then(json => dispatch(requestComplete(json, year)))
+    .catch(error => dispatch(requestError(error, year)));
 };
 
 export default calendar;

@@ -20,9 +20,11 @@ import { connect } from 'react-redux';
 // component
 import ComCalendarMam from '../../component/calendar/ComCalendarMam';
 
-
 // actions
 import actions from '../actions';
+
+// dae
+import DaeCalendar from '../../dae/schedule/DaeCalendar';
 
 /**
  * state を redux 経由し props 変換します
@@ -32,14 +34,31 @@ import actions from '../actions';
 const mapStateToProps = ({ calendar }) => (calendar);
 
 // TODO: この構造だとダメ ViewCalendar 作る
-const calendarMam = ({ dispatch }) => (
-  <ComCalendarMam
-    maker={() => (dispatch(actions.calendar()))}
-  />
-);
+const calendarMam = ({ dispatch, data }) => {
+  console.log('calendarMam', data);
+  return (
+    <ComCalendarMam
+      maker={() => (dispatch(actions.calendar()))}
+      data={data}
+    />
+  );
+};
+
+// // TODO: この構造だとダメ ViewCalendar 作る
+// const calendarMam = ({ dispatch, data }) => (
+//   <ComCalendarMam
+//     maker={() => (dispatch(actions.calendar()))}
+//     data={data}
+//   />
+// );
 
 calendarMam.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  data: PropTypes.instanceOf(DaeCalendar),
+};
+
+calendarMam.defaultProps = {
+  data: null,
 };
 
 const ConCalendar = connect(mapStateToProps)(calendarMam);

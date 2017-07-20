@@ -13,6 +13,9 @@
 // dae
 import Normalize from '../../util/Normalize';
 
+// module
+import ModCalendar from '../../module/calendar/ModCalendar';
+
 /**
  * [native code] - parseInt
  * @type {function}
@@ -150,5 +153,10 @@ export default class DaeCalendar {
      * @type {Array.<DaeDate>}
      */
     this.schedules = schedules;
+    /**
+     * カレンダーに表示するイベント一覧
+     * @type {ModCalendar}
+     */
+    this.events = new ModCalendar(schedules);
   }
 }
