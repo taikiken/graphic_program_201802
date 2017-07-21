@@ -12,7 +12,7 @@
 
 import ReducerTypes from '../ReducerTypes';
 
-const initialState = {
+const initial = {
   type: ReducerTypes.INITIAL,
   data: null,
   error: null,
@@ -21,7 +21,7 @@ const initialState = {
 
 // let result = null;
 
-const calendar = (requestState = initialState, action) => {
+const calendar = (requestState = initial, action) => {
   const state = Object.assign({}, requestState);
   console.log('reducers.calendar', state, action);
   // switch-case

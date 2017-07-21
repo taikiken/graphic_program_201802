@@ -26,21 +26,23 @@ import Day from '../../util/Day';
 // TODO: props maker, json 2つにする
 export default class ComCalendarMam extends Component {
   static propTypes = {
-    data: PropTypes.instanceOf(DaeCalendar),
     maker: PropTypes.func.isRequired,
+    data: PropTypes.instanceOf(DaeCalendar),
+    year: PropTypes.number,
   };
   static defaultProps = {
     data: null,
+    year: null,
   };
-  static onSelected(event) {
-    console.log('ComCalendarMam.onSelected', event);
-  }
+  // static onSelected(event) {
+  //   console.log('ComCalendarMam.onSelected', event);
+  // }
   // static onSlot(event) {
   //   console.log('ComCalendarMam.onSlot', event);
   // }
-  static onView(event) {
-    console.log('ComCalendarMam.onView', event);
-  }
+  // static onView(event) {
+  //   console.log('ComCalendarMam.onView', event);
+  // }
   // static onNavigate(event) {
   //   console.log('ComCalendarMam.onNavigate', event);
   // }
@@ -48,22 +50,47 @@ export default class ComCalendarMam extends Component {
     super(props);
     this.onNavigate = this.onNavigate.bind(this);
     this.onSlot = this.onSlot.bind(this);
+    this.onSelected = this.onSelected.bind(this);
   }
   componentDidMount() {
-    // console.log('ComCalendarMam.componentDidMount', this.props.maker);
+    // async request start
+    // {@link ConCalendar}.calendarMam
+    // `dispatch(actions.calendar())`
     this.props.maker();
   }
   shouldComponentUpdate(nextProps) {
-    const { data } = this.props;
+    const { year } = this.props;
     console.log('ComCalendarMam.shouldComponentUpdate nextState', nextProps);
-    return nextProps && data !== nextProps.data;
+    return nextProps && year !== nextProps.year;
   }
+  /**
+   * 日付 click callback
+   * @param {Date} event カレンダー日付 Date instance
+   */
   onNavigate(event) {
     console.log('ComCalendarMam.onNavigate', event);
     this.transition(event);
   }
+  /**
+   * 日付枠内 click callback
+   * @param {?object} event event が存在しない時は null
+   * ```
+   * Object {slots: Array(1), start: Wed Jul 12 2017 00:00:00 GMT+0900 (JST), end: Wed Jul 12 2017 00:00:00 GMT+0900 (JST), action: "click"}
+   * ```
+   */
   onSlot(event) {
-    console.log('ComCalendarMam.onSlot', event);
+    // console.log('ComCalendarMam.onSlot', event);
+    this.transition(event.start);
+  }
+  /**
+   * event 表示エリア click callback
+   * @param {ModCalendarEvents} event
+   * ```
+   *  {start: Tue Jul 11 2017 00:00:00 GMT+0900 (JST), end: Tue Jul 11 2017 00:00:00 GMT+0900 (JST), allDay: true, title: "2017年7月11日", year: 2017…}
+   * ```
+   */
+  onSelected(event) {
+    console.log('ComCalendarMam.onSelected', event);
     this.transition(event.start);
   }
   transition(date) {
@@ -83,9 +110,8 @@ export default class ComCalendarMam extends Component {
       <ComCalendar
         events={data.events.games}
         today={Day.current()}
-        selected={ComCalendarMam.onSelected}
+        selected={this.onSelected}
         slot={this.onSlot}
-        view={ComCalendarMam.onView}
         navigate={this.onNavigate}
       />
     );

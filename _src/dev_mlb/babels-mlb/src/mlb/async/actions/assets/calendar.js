@@ -25,32 +25,9 @@ import ReducerTypes from '../../reducers/ReducerTypes';
 // dae
 import DaeCalendar from '../../../dae/schedule/DaeCalendar';
 
-// const ajax = (path) => {
-//   const request = new Request(
-//     path,
-//     {
-//       cache: 'no-cache',
-//       credentials: 'same-origin',
-//       method: 'GET',
-//     },
-//   );
-//   return fetch(request)
-//     .then((response) => {
-//       console.log('fetch', path, Date.now());
-//       if (response.status !== 200) {
-//         throw new Error(`ajax status error: (${response.status})`);
-//       }
-//       try {
-//         return response.json();
-//       } catch (error) {
-//         throw new Error(`ajax JSON parse error: (${error})`);
-//       }
-//     });
-// };
-
 // calendar
 // YYYY.json
-async function asyncCalendar(year) {
+async function asyncCall(year) {
   const path = Api.calendar(year);
   const json = await ajax(path);
   return json;
@@ -74,7 +51,7 @@ const requestError = (error, year) => ({
 
 const calendar = (requestYear = null) => (dispatch) => {
   const year = requestYear || Day.thisYear();
-  return asyncCalendar(year)
+  return asyncCall(year)
     .then(json => dispatch(requestComplete(json, year)))
     .catch(error => dispatch(requestError(error, year)));
 };

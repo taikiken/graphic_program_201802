@@ -12,32 +12,30 @@
 
 import ReducerTypes from '../ReducerTypes';
 
-const initialState = {
+const initial = {
   type: ReducerTypes.INITIAL,
-  data: {},
+  data: null,
   error: null,
 };
 
 // let result = null;
 
-const schedule = (requestState = initialState, action) => {
+const schedule = (requestState = initial, action) => {
   const state = Object.assign({}, requestState);
   // switch-case
   switch (action.type) {
     case ReducerTypes.SCHEDULE_COMPLETE: {
-      state.json = action.json;
-      // result = action.json;
+      state.type = action.type;
+      state.data = action.data;
       return state;
     }
     case ReducerTypes.SCHEDULE_ERROR: {
+      state.type = action.type;
       state.error = action.error;
       return state;
     }
     case ReducerTypes.INITIAL:
     default: {
-      // if (result !== null) {
-      //   state.json = result;
-      // }
       return state;
     }
   }

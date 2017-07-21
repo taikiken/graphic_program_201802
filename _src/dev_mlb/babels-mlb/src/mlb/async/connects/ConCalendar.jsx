@@ -34,12 +34,13 @@ import DaeCalendar from '../../dae/schedule/DaeCalendar';
 const mapStateToProps = ({ calendar }) => (calendar);
 
 // TODO: この構造だとダメ ViewCalendar 作る
-const calendarMam = ({ dispatch, data }) => {
-  console.log('calendarMam', data);
+const calendarMam = ({ dispatch, data, year }) => {
+  console.log('calendarMam', data, year);
   return (
     <ComCalendarMam
       maker={() => (dispatch(actions.calendar()))}
       data={data}
+      year={year}
     />
   );
 };
@@ -55,10 +56,12 @@ const calendarMam = ({ dispatch, data }) => {
 calendarMam.propTypes = {
   dispatch: PropTypes.func.isRequired,
   data: PropTypes.instanceOf(DaeCalendar),
+  year: PropTypes.number,
 };
 
 calendarMam.defaultProps = {
   data: null,
+  year: null,
 };
 
 const ConCalendar = connect(mapStateToProps)(calendarMam);

@@ -34,8 +34,6 @@ BigCalendar.momentLocalizer(moment);
 
 // @see https://github.com/intljusticemission/react-big-calendar/issues/191
 // toolbar を custom する
-// https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
-// div.onClick warning
 /**
  * calendar toolbar をカスタマイズします
  * - prev
@@ -196,8 +194,12 @@ ComCalendar.propTypes = {
   today: PropTypes.instanceOf(Date).isRequired,
   selected: PropTypes.func.isRequired,
   slot: PropTypes.func.isRequired,
-  view: PropTypes.func.isRequired,
+  view: PropTypes.func,
   navigate: PropTypes.func.isRequired,
+};
+
+ComCalendar.defaultProps = {
+  view: () => {},
 };
 
 export default ComCalendar;

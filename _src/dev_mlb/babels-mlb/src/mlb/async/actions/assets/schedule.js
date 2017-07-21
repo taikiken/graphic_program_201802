@@ -14,7 +14,7 @@
 import Api from '../../../app/Api';
 
 // util
-import Helper from '../../../util/Day';
+import Day from '../../../util/Day';
 
 // net
 import ajax from '../../../net/ajax';
@@ -22,32 +22,9 @@ import ajax from '../../../net/ajax';
 // reducer
 import ReducerTypes from '../../reducers/ReducerTypes';
 
-// const ajax = (path) => {
-//   const request = new Request(
-//     path,
-//     {
-//       cache: 'no-cache',
-//       credentials: 'same-origin',
-//       method: 'GET',
-//     },
-//   );
-//   return fetch(request)
-//     .then((response) => {
-//       console.log('fetch', path, Date.now());
-//       if (response.status !== 200) {
-//         throw new Error(`ajax status error: (${response.status})`);
-//       }
-//       try {
-//         return response.json();
-//       } catch (error) {
-//         throw new Error(`ajax JSON parse error: (${error})`);
-//       }
-//     });
-// };
-
-// calendar
+// schedule
 // YYYY.json
-async function asyncSchedule(year, month, day) {
+async function asyncCall(year, month, day) {
   const path = Api.schedule(year, month, day);
   const json = await ajax(path);
   return json;
@@ -65,8 +42,8 @@ const requestError = error => ({
 
 
 const schedule = (requestDate = null) => (dispatch) => {
-  const date = requestDate || Helper.date();
-  return asyncSchedule(date.year, date.month, date.day)
+  const date = requestDate || Day.date();
+  return asyncCall(date.year, date.month, date.day)
     .then(json => dispatch(requestComplete(json)))
     .catch(error => dispatch(requestError(error)));
 };

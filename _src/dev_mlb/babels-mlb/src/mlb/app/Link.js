@@ -12,11 +12,23 @@
 
 const location = self.location;
 
+/**
+ * `location.href` で遷移します
+ */
 export default class Link {
+  /**
+   * mlb base path - `/stats/mlb`
+   * @const BASE
+   * @type {string}
+   */
   static BASE = '/stats/mlb';
   // ---------------------------------------------------
   //  master/schedule
   // ---------------------------------------------------
+  /**
+   * 動的: 日程結果パス `/stats/mlb/YYYYMMDD` へ遷移します
+   * @param {string} yyyymmdd YYYYMMDD 形式の年月日
+   */
   static schedule(yyyymmdd) {
     location.href = `${Link.BASE}/${yyyymmdd}/`;
   }
