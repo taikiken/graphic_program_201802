@@ -270,10 +270,10 @@
                   <tbody>
                     <tr>
                       <th>拠点</th>
-                      <td>日本</td>
+                      <td>フィンランド</td>
                     </tr>
                     <tr>
-                      <th>設立</th>
+                      <th>参戦</th>
                       <td>2017年</td>
                     </tr>
                     <tr>
@@ -298,8 +298,8 @@
 
               <div class="column">
                 <h3 class="team_driver__body__heading">ドライバー</h3>
-                <p>ヤリマティ・ラトバラ（フィンランド）<br />
-                <span class="team_driver__body__small">コ・ドライバー　ミイカ・アンティラ</span></p>
+                <p>ヤリ-マティ・ラトバラ（フィンランド）<br />
+                <span class="team_driver__body__small">コ・ドライバー　ミーカ・アンティラ</span></p>
                 <p>ユホ・ハンニネン（フィンランド）<br />
                 <span class="team_driver__body__small">コ・ドライバー　カイ・リンドストローム</span></p>
                 <p>エサペッカ・ラッピ（フィンランド）<br />
