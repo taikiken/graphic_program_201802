@@ -7,16 +7,32 @@
         <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
         <script src="/assets/js/app_divide.bundle.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>meta仮インターハイ　動画特集 | SPORTS BULL</title>
+        <title>インターハイ　動画特集 | スポーツブル / SPORTS BULL</title>
+        <meta name="description" content="インターハイ 動画特集見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
+        <meta name="keywords" content="インターハイ,全国大会,ハイライト動画,動画特集,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
+        <!-- sns ogp -->
+        <meta property="og:title" content="インターハイ 動画特集 | スポーツブル / SPORTS BULL">
+        <meta property="og:type" content="article">
+        <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
+        <meta property="og:url" content="https://sportsbull.jp/inhigh/photo/">
+        <meta property="og:description" content="インターハイ 動画特集見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
+        <!-- twitter card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@sportsbull_jp">
+        <meta name="twitter:title" content="インターハイ 動画特集 | スポーツブル / SPORTS BULL">
+        <meta name="twitter:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
+        <meta name="twitter:url" content="https://sportsbull.jp/inhigh/photo/">
+        <meta name="twitter:description" content="インターハイ 動画特集見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
+        <!-- favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
+        <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
+        <link rel="shortcut icon" href="/favicon.ico">
+
         <script src="/assets/js/libs/vendor.react.js"></script>
         <script src="/assets/js/bundle/main.bundle.js"></script>
-        <!-- 表示確認用 / -->
-        <link rel="stylesheet" href="/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
-        <link rel="stylesheet" href="/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
-        <!-- / 表示確認用 -->
         <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
         <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
-
         <!-- インターハイ css -->
         <link rel="stylesheet" href="/assets/css/inhigh/interhigh.css" media="only screen and (min-width: 769px)">
         <link rel="stylesheet" href="/assets/css/inhigh/sp_interhigh.css" media="only screen and (max-width: 768px)">
@@ -78,7 +94,7 @@
 
 <!-- インターハイ メイン画像 ---------------------------------------------------------->
             <div class="special-summary">
-                <a href="/category/interhigh"><h1 class="special-summary-heading"><img src="img/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="img/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
+                <a href="/category/interhigh"><h1 class="special-summary-heading"><img src="/assets/images/inhigh/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="/assets/images/inhigh/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
             </div>
 <!-- / インターハイ メイン画像 ---------------------------------------------------------->
 
@@ -98,22 +114,22 @@
                                 
                                 <ul class="thumb_area">
                                     <li><a href="">
-                                            <div class="img"><img src="img/thumb_01.png" alt=""></div>
+                                            <div class="img"><img src="/assets/images/inhigh/thumb_01.png" alt=""></div>
                                             <div class="txt_area"><p>7/31 ハイライト総集編</p></div>
                                         </a></li>
                                     
                                     <li><a href="">
-                                            <div class="img"><img src="img/thumb_02.png" alt=""></div>
+                                            <div class="img"><img src="/assets/images/inhigh/thumb_02.png" alt=""></div>
                                             <div class="txt_area"><p>7/31 バスケットボール</p></div>
                                         </a></li>
 
                                     <li><a href="">
-                                            <div class="img"><img src="img/thumb_03.png" alt=""></div>
+                                            <div class="img"><img src="/assets/images/inhigh/thumb_03.png" alt=""></div>
                                             <div class="txt_area"><p>7/31 ハイライト総集編</p></div>
                                         </a></li>
                                     
                                     <li><a href="">
-                                            <div class="img"><img src="img/thumb_04.png" alt=""></div>
+                                            <div class="img"><img src="/assets/images/inhigh/thumb_04.png" alt=""></div>
                                             <div class="txt_area"><p>7/31 ハイライト</p></div>
                                         </a></li>
                                 </ul>
@@ -124,27 +140,27 @@
 
                                 <ul class="thumb_area">
                                     <li><a href="">
-                                            <div class="img"><img src="img/thumb_02.png" alt=""></div>
+                                            <div class="img"><img src="/assets/images/inhigh/thumb_02.png" alt=""></div>
                                             <div class="txt_area"><p>7/31 長文テキスト7/31 長文テキスト7/31 長文テキスト7/31 </p></div>
                                         </a></li>
                                     <li><a href="">
-                                        <div class="img"><img src="img/thumb_02.png" alt=""></div>
+                                        <div class="img"><img src="/assets/images/inhigh/thumb_02.png" alt=""></div>
                                         <div class="txt_area"><p>7/31 バスケットボール</p></div>
                                         </a></li>
                                     <li><a href="">
-                                        <div class="img"><img src="img/thumb_02.png" alt=""></div>
+                                        <div class="img"><img src="/assets/images/inhigh/thumb_02.png" alt=""></div>
                                         <div class="txt_area"><p>7/31 バスケットボール</p></div>
                                         </a></li>
                                     <li><a href="">
-                                        <div class="img"><img src="img/thumb_02.png" alt=""></div>
+                                        <div class="img"><img src="/assets/images/inhigh/thumb_02.png" alt=""></div>
                                         <div class="txt_area"><p>7/31 バスケットボール</p></div>
                                         </a></li>
                                     <li><a href="">
-                                        <div class="img"><img src="img/thumb_02.png" alt=""></div>
+                                        <div class="img"><img src="/assets/images/inhigh/thumb_02.png" alt=""></div>
                                         <div class="txt_area"><p>7/31 バスケットボール</p></div>
                                         </a></li>
                                     <li><a href="">
-                                            <div class="img"><img src="img/thumb_02.png" alt=""></div>
+                                            <div class="img"><img src="/assets/images/inhigh/thumb_02.png" alt=""></div>
                                             <div class="txt_area"><p>7/31 バスケットボール</p></div>
                                         </a></li>
                                 </ul>
@@ -155,31 +171,31 @@
 
                                 <ul class="thumb_area">
                                     <li><a href="">
-                                        <div class="img"><img src="img/thumb_03.png" alt=""></div>
+                                        <div class="img"><img src="/assets/images/inhigh/thumb_03.png" alt=""></div>
                                         <div class="txt_area"><p>7/31 ハイライト総集編</p></div>
                                         </a></li>
                                     <li><a href="">
-                                        <div class="img"><img src="img/thumb_03.png" alt=""></div>
+                                        <div class="img"><img src="/assets/images/inhigh/thumb_03.png" alt=""></div>
                                         <div class="txt_area"><p>7/31 ハイライト総集編</p></div>
                                         </a></li>
                                     <li><a href="">
-                                            <div class="img"><img src="img/thumb_03.png" alt=""></div>
+                                            <div class="img"><img src="/assets/images/inhigh/thumb_03.png" alt=""></div>
                                             <div class="txt_area"><p>7/31 長文テキスト7/31 長文テキスト7/31 長文テキスト7/31 長文テキスト</p></div>
                                         </a></li>
                                     <li><a href="">
-                                        <div class="img"><img src="img/thumb_03.png" alt=""></div>
+                                        <div class="img"><img src="/assets/images/inhigh/thumb_03.png" alt=""></div>
                                         <div class="txt_area"><p>7/31 ハイライト総集編</p></div>
                                         </a></li>
                                     <li><a href="">
-                                        <div class="img"><img src="img/thumb_03.png" alt=""></div>
+                                        <div class="img"><img src="/assets/images/inhigh/thumb_03.png" alt=""></div>
                                         <div class="txt_area"><p>7/31 ハイライト総集編</p></div>
                                         </a></li>
                                     <li><a href="">
-                                        <div class="img"><img src="img/thumb_03.png" alt=""></div>
+                                        <div class="img"><img src="/assets/images/inhigh/thumb_03.png" alt=""></div>
                                         <div class="txt_area"><p>7/31 ハイライト総集編</p></div>
                                         </a></li>
                                     <li><a href="">
-                                            <div class="img"><img src="img/thumb_03.png" alt=""></div>
+                                            <div class="img"><img src="/assets/images/inhigh/thumb_03.png" alt=""></div>
                                             <div class="txt_area"><p>7/31 ハイライト総集編</p></div>
                                         </a></li>
                                 </ul>
@@ -190,7 +206,7 @@
 
                                 <ul class="thumb_area">
                                     <li><a href="">
-                                            <div class="img"><img src="img/thumb_04.png" alt=""></div>
+                                            <div class="img"><img src="/assets/images/inhigh/thumb_04.png" alt=""></div>
                                             <div class="txt_area"><p>7/31 ハイライト総集編</p></div>
                                         </a></li>
                                 </ul>
@@ -202,7 +218,7 @@
                             <div class="btn btn_back"><a href="">インターハイトップへ戻る</a></div>
                         </div>
                         
-                        <div class="content_bottom_bnr"><a href=""><img src="img/bnr_728x90.png" alt="" class="sp_hide"><img src="img/bnr_640x100.png" alt="" class="pc_hide"></a></div>
+                        <div class="content_bottom_bnr"><a href=""><img src="/assets/images/inhigh/bnr_728x90.png" alt="" class="sp_hide"><img src="/assets/images/inhigh/bnr_640x100.png" alt="" class="pc_hide"></a></div>
                         
 
 <!-- / インターハイ メインコンテンツ ---------------------------------------------------------->
