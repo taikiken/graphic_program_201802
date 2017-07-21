@@ -207,8 +207,8 @@
                         </div>
                         
                         <div class="btn_area">
-                            <div class="btn btn_another"><a href="highlight.html"><i class="icon_movie"></i>動画特集を見る</a></div>
-                            <div class="btn btn_back"><a href="">インターハイトップへ戻る</a></div>
+                            <div class="btn btn_another"><a href="/inhigh/highlight"><i class="icon_movie"></i>動画特集を見る</a></div>
+                            <div class="btn btn_back"><a href="/category/inhigh">インターハイトップへ戻る</a></div>
                         </div>
                         
                         <div class="content_bottom_bnr">

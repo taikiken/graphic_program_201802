@@ -98,7 +98,7 @@
 
 <!-- インターハイ メイン画像 ---------------------------------------------------------->
             <div class="special-summary">
-                <a href="/category/interhigh"><h1 class="special-summary-heading"><img src="/assets/images/inhigh/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="/assets/images/inhigh/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
+                <a href="/category/inhigh"><h1 class="special-summary-heading"><img src="/assets/images/inhigh/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="/assets/images/inhigh/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
             </div>
 <!-- / インターハイ メイン画像 ---------------------------------------------------------->
 
@@ -218,8 +218,8 @@
                         </div>
                         
                         <div class="btn_area">
-                            <div class="btn btn_another"><a href="photo.html"><i class="icon_camera"></i>フォトギャラリーを見る</a></div>
-                            <div class="btn btn_back"><a href="">インターハイトップへ戻る</a></div>
+                            <div class="btn btn_another"><a href="/inhigh/photo/"><i class="icon_camera"></i>フォトギャラリーを見る</a></div>
+                            <div class="btn btn_back"><a href="/category/inhigh/">インターハイトップへ戻る</a></div>
                         </div>
                         
                         <div class="content_bottom_bnr">

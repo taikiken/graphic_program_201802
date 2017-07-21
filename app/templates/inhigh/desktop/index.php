@@ -7,7 +7,7 @@
         <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
         <script src="/assets/js/app_divide.bundle.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>meta仮インターハイ　トップ　パーツ | SPORTS BULL</title>
+        <title>インターハイ　トップ　パーツ | SPORTS BULL</title>
         <script src="/assets/js/libs/vendor.react.js"></script>
         <script src="/assets/js/bundle/main.bundle.js"></script>
         <!-- 表示確認用 / -->
@@ -64,7 +64,7 @@
                         <section class="section_interhigh_highlight">
                             <div class="ttl-wrapper">
                                 <h2 class="ttl highlight"><i></i>動画特集</h2>
-                                <p class="ttl_link"><a href="highlight.html">すべての動画を見る</a></p>
+                                <p class="ttl_link"><a href="/inhigh/highlight/">すべての動画を見る</a></p>
                             </div>
 
                             <div class="article_list">
@@ -102,7 +102,7 @@
                         <section class="section_interhigh_photo">
                             <div class="ttl-wrapper">
                                 <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
-                                <p class="ttl_link"><a href="photo.html">すべてのフォトギャラリーを見る</a></p>
+                                <p class="ttl_link"><a href="/inhigh/photo/">すべてのフォトギャラリーを見る</a></p>
                             </div>
                             
                             <div id="js-current-post" class="current-post photo_gallery">

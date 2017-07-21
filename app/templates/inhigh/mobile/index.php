@@ -92,7 +92,7 @@
                                 </article>
                             </div>
 
-                            <p class="section_btn"><a href=""><i></i>すべての動画を見る</a></p>
+                            <p class="section_btn"><a href="/inhigh/highlight/"><i></i>すべての動画を見る</a></p>
                         </section>
                        
                        
@@ -116,7 +116,7 @@
                                         </a></li>
                                 </ul>
                             </div>
-                            <p class="section_btn"><a href=""><i></i>すべてのフォトギャラリーを見る</a></p>
+                            <p class="section_btn"><a href="/inhigh/photo/"><i></i>すべてのフォトギャラリーを見る</a></p>
                             
                         </section>
 
