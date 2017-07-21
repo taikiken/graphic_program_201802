@@ -89,7 +89,8 @@ $app->group('/stats', function () use($app) {
         'template'           => 'mlb/index.php',
         'path'               => $args,
         // @since 2017-07016 - .whole へ className 追加するために追加する
-        'prop_category'          => 'mlb',
+        'prop_identity'      => 'index',
+        'prop_category'      => 'mlb',
       ));
 
       return $this->renderer->render($response, 'stats/default.php', $args);
@@ -97,11 +98,22 @@ $app->group('/stats', function () use($app) {
     });
 
     // ヒットする文字列だけ
-    $this->get('/{category:schedule|standing|leaders|playerlist|game}[/]', function ($request, $response, $args) use ($app) {
+    $this->get('/{category:schedule|standing|leaders|playerlist|game|\d{8}}[/]', function ($request, $response, $args) use ($app) {
 
       $category = array(
         'title' => 'MLB | 速報 &amp; データ',
       );
+
+      // 追加 - on 20170721
+      // /stats/mlb/20170715/
+      // 日付文字の時に index へアクセスする
+      $template = $args['category'];
+      $prop_identity =  $args['category'];
+      if (preg_match('/\d{8}/', $template)) {
+        $prop_identity = 'index index-' . $args['category'];
+        $template = 'index';
+      }
+      // --------
 
       $args['page'] = $app->model->set(array(
         'title'              => $category['title'],
@@ -109,10 +121,11 @@ $app->group('/stats', function () use($app) {
         'og_description'     => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
         'og_url'             => $app->model->property('site_url').'stats/mlb/',
         'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
-        'template'           => 'mlb/'.$args['category'].'.php',
+//        'template'           => 'mlb/'.$args['category'].'.php',
+        'template'           => 'mlb/'.$template.'.php',
         'path'               => $args,
         // @since 2017-07016 - .whole へ className 追加するために追加する
-        'prop_identity'          => $args['category'],
+        'prop_identity'      => $prop_identity,
         'prop_category'      => 'mlb',
       ));
 
