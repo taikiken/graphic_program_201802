@@ -21,7 +21,10 @@ import { connect } from 'react-redux';
 import ComCalendarMam from '../../component/calendar/ComCalendarMam';
 
 // actions
-import actions from '../actions';
+// import actions from '../actions';
+
+//
+import Creator from '../Creator';
 
 // dae
 import DaeCalendar from '../../dae/schedule/DaeCalendar';
@@ -35,13 +38,14 @@ import DaeCalendar from '../../dae/schedule/DaeCalendar';
 const mapStateToProps = ({ calendar }) => (calendar);
 
 // TODO: この構造だとダメ ViewCalendar 作る
-const calendarMam = ({ dispatch, data, year }) => {
-  console.log('calendarMam', data, year);
+const calendarMam = ({ data, year, today }) => {
+  console.log('calendarMam', data, year, today);
   return (
     <ComCalendarMam
-      maker={(target = year) => (dispatch(actions.calendar(target)))}
+      maker={Creator.calendar}
       data={data}
       year={year}
+      today={today}
     />
   );
 };
@@ -55,14 +59,16 @@ const calendarMam = ({ dispatch, data, year }) => {
 // );
 
 calendarMam.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  // dispatch: PropTypes.func.isRequired,
   data: PropTypes.instanceOf(DaeCalendar),
   year: PropTypes.number,
+  today: PropTypes.instanceOf(Date),
 };
 
 calendarMam.defaultProps = {
   data: null,
   year: null,
+  today: null,
 };
 
 const ConCalendar = connect(mapStateToProps)(calendarMam);

@@ -10,6 +10,13 @@
  *
  */
 
+/**
+ * redux.store.dispatch を bind した関数群を管理します
+ */
 export default class Creator {
+  /**
+   * actions.calendar を redux.store.dispatch で bind します
+   * @type {?function}
+   */
   static calendar = null;
 }

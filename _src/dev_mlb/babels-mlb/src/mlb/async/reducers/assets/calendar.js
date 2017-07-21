@@ -17,28 +17,38 @@ const initial = {
   data: null,
   error: null,
   year: null,
+  today: null,
 };
 
-// let result = null;
-
+/**
+ * reducers.calendar 定義
+ * @param {object} [requestState=initial] 通知 state
+ * @param {*} action action state - 変化してるかも
+ * @returns {*} action.type により state を変え返します
+ */
 const calendar = (requestState = initial, action) => {
   const state = Object.assign({}, requestState);
   console.log('reducers.calendar', state, action);
   // switch-case
   switch (action.type) {
+    // calendar complete
     case ReducerTypes.CALENDAR_COMPLETE: {
       state.type = action.type;
       state.data = action.data;
       state.year = action.year;
+      state.today = action.today;
       // result = action.json;
       return state;
     }
+    // calendar error
     case ReducerTypes.CALENDAR_ERROR: {
       state.type = action.type;
       state.error = action.error;
       state.year = action.year;
+      state.today = action.today;
       return state;
     }
+    // default
     case ReducerTypes.INITIAL:
     default: {
       // if (result !== null) {

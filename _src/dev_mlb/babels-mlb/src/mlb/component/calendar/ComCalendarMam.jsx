@@ -23,35 +23,67 @@ import DaeCalendar from '../../dae/schedule/DaeCalendar';
 // util
 import Day from '../../util/Day';
 
-// TODO: props maker, json 2つにする
+// app
+import Link from '../../app/Link';
+
+/**
+ * カレンダー親コンポーネント
+ * - {@link ConCalendar}
+ *   - {@link ComCalendarMam}
+ *     - {@link ComCalendar}
+ */
 export default class ComCalendarMam extends Component {
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * propTypes
+   * @type {{data: ?DaeCalendar, year: ?number, today: ?Date}}
+   */
   static propTypes = {
     // maker: PropTypes.func.isRequired,
     data: PropTypes.instanceOf(DaeCalendar),
     year: PropTypes.number,
+    today: PropTypes.instanceOf(Date),
   };
+  /**
+   * defaultProps
+   * @type {{data: ?DaeCalendar, year: ?number, today: ?Date}}
+   */
   static defaultProps = {
     data: null,
     year: null,
+    today: null,
   };
-  // static onSelected(event) {
-  //   console.log('ComCalendarMam.onSelected', event);
-  // }
-  // static onSlot(event) {
-  //   console.log('ComCalendarMam.onSlot', event);
-  // }
-  // static onView(event) {
-  //   console.log('ComCalendarMam.onView', event);
-  // }
-  // static onNavigate(event) {
-  //   console.log('ComCalendarMam.onNavigate', event);
-  // }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * calendar callback を準備します
+   * @param {{data: ?DaeCalendar, year: ?number, today: ?Date}} props component 初期値
+   */
   constructor(props) {
     super(props);
+    // ----
+    /**
+     * bind onNavigate
+     * @type {function}
+     */
     this.onNavigate = this.onNavigate.bind(this);
+    /**
+     * bind onSlot
+     * @type {function}
+     */
     this.onSlot = this.onSlot.bind(this);
+    /**
+     * bind onSelected
+     * @type {function}
+     */
     this.onSelected = this.onSelected.bind(this);
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
   // componentDidMount() {
   //   // async request start
   //   // {@link ConCalendar}.calendarMam
@@ -59,10 +91,15 @@ export default class ComCalendarMam extends Component {
   //   console.log('ComCalendarMam.componentDidMount', this.props.year);
   //   this.props.maker(2018);
   // }
+  /**
+   * props 変更 update 可否を判断します
+   * @param {*} nextProps 次の props
+   * @returns {boolean} true - render します
+   */
   shouldComponentUpdate(nextProps) {
-    const { year } = this.props;
+    const { year, today } = this.props;
     console.log('ComCalendarMam.shouldComponentUpdate nextState', nextProps);
-    return nextProps && year !== nextProps.year;
+    return nextProps && (year !== nextProps.year || today !== nextProps.today);
   }
   /**
    * 日付 click callback
@@ -94,13 +131,22 @@ export default class ComCalendarMam extends Component {
     console.log('ComCalendarMam.onSelected', event);
     this.transition(event.start);
   }
+  /**
+   * calendar click 遷移を行います
+   * @param {Date} date 遷移パス取得するための Date instance
+   */
   transition(date) {
+    // ゲーム開催日チェック
     const game = this.props.data.events.game(date);
     console.log('ComCalendarMam.transition', date, game);
     if (game) {
-      console.log('ComCalendarMam.transition', game.full);
+      console.log('ComCalendarMam.transition', game.full, Link.schedule(game.full));
     }
   }
+  /**
+   * data が存在する時に{@link ComCalendar} を出力します
+   * @returns {?ComCalendar} data が存在する時に{@link ComCalendar} を返します
+   */
   render() {
     console.log('ComCalendarMam.render ============', this.props);
     const data = this.props.data;
@@ -110,7 +156,7 @@ export default class ComCalendarMam extends Component {
     return (
       <ComCalendar
         events={data.events.games}
-        today={Day.current()}
+        today={this.props.today || Day.current()}
         selected={this.onSelected}
         slot={this.onSlot}
         navigate={this.onNavigate}

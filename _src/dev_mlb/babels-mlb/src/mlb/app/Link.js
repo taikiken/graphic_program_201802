@@ -10,10 +10,8 @@
  *
  */
 
-const location = self.location;
-
 /**
- * `location.href` で遷移します
+ * 遷移パスを取得します
  */
 export default class Link {
   /**
@@ -28,8 +26,9 @@ export default class Link {
   /**
    * 動的: 日程結果パス `/stats/mlb/YYYYMMDD` へ遷移します
    * @param {string} yyyymmdd YYYYMMDD 形式の年月日
+   * @returns {string} 日程パスを返します
    */
   static schedule(yyyymmdd) {
-    location.href = `${Link.BASE}/${yyyymmdd}/`;
+    return `${Link.BASE}/${yyyymmdd}/`;
   }
 }

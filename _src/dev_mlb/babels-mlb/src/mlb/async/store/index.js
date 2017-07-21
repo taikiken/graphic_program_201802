@@ -23,6 +23,8 @@ import middleware from './middleware';
 /**
  * redux - createStore します
  * - reducers
+ *   - calendar
+ *   - schedule
  * - middleware
  *  - thunk
  *  - logger

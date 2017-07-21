@@ -26,16 +26,14 @@ import actions from '../async/actions';
 // async/connect
 import ConCalendar from '../async/connects/ConCalendar';
 
-// app
-import Creator from '../app/Creator';
-
-// util
-import Day from '../util/Day';
+// async/
+import Creator from '../async/Creator';
 
 console.log('store', store);
+Creator.calendar = (target, current) => (store.dispatch(actions.calendar(target, current)));
 
 export default class ViewIndex {
-  static make(element, year = Day.thisYear()) {
+  static make(element, year = null, today = null) {
     ReactDOM.render(
       <Provider store={store}>
         {/* [TODAY JAPANESE] */}
@@ -45,7 +43,8 @@ export default class ViewIndex {
       element,
     );
     // -----
-    Creator.calendar = target => (store.dispatch(actions.calendar(target)));
-    Creator.calendar(year);
+    // Creator.calendar(year, today);
+    Creator.calendar(year, new Date(2017, 8, 15));
+    console.log('ViewIndex.make', year, today);
   }
 }

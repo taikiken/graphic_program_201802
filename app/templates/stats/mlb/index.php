@@ -42,6 +42,10 @@
   .calendar-container {
     height: 800px;
   }
+  .rbc-current {
+    /* current day - today 以外 */
+    background-color: orangered;
+  }
 </style>
 <?php
 // ------------------------------------------------------------------------

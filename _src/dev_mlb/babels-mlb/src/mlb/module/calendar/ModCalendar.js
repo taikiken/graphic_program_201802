@@ -11,7 +11,10 @@
  */
 
 // moku/util
-import Text from '../../../moku/util/Text';
+// import Text from '../../../moku/util/Text';
+
+// util
+import Day from '../../util/Day';
 
 /**
  * react-big-calendar - events 情報を作成します
@@ -19,6 +22,9 @@ import Text from '../../../moku/util/Text';
  *   - {@link DaeDate}
  */
 class ModCalendarEvents {
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * カレンダーに表示するイベント情報を作成します
    * @param {DaeDate} game JSON 加工済み
@@ -62,7 +68,12 @@ class ModCalendarEvents {
      * @type {number}
      */
     this.day = game.day;
-    this.full = `${game.year}${Text.zero(game.month)}${Text.zero(game.day)}`;
+    /**
+     * YYYYMMDD 文字列
+     * @type {string}
+     */
+    this.full = Day.full(day);
+    // this.full = `${game.year}${Text.zero(game.month)}${Text.zero(game.day)}`;
   }
 }
 
@@ -73,6 +84,9 @@ class ModCalendarEvents {
  *   - {@link DaeDate}
  */
 export default class ModCalendar {
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * 1年分のカレンダーを作成します
    * @param {Array.<DaeDate>} schedules 表示させるリスト
@@ -88,6 +102,9 @@ export default class ModCalendar {
     this.games = games;
     this.calendar = calendar;
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
   /**
    * this.games を取得します
    * @returns {Array.<ModCalendarEvents>} this.games を返します
@@ -95,6 +112,11 @@ export default class ModCalendar {
   events() {
     return this.games;
   }
+  /**
+   * 該当日付のイベント情報を取得します
+   * @param {Date} date 探索 Date instance
+   * @returns {?ModCalendarEvents} 該当日のイベント情報を返します
+   */
   game(date) {
     console.log('ModCalendarEvents.game', date);
     return this.calendar[date];

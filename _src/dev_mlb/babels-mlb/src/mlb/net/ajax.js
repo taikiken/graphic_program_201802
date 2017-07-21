@@ -10,7 +10,13 @@
  *
  */
 
+/**
+ * fetch を使用し JSON 取得を行います
+ * @param {string} path JSON path
+ * @returns {Promise} ajax.then | catch Promise を返します
+ */
 const ajax = (path) => {
+  // {Request}
   const request = new Request(
     path,
     {
@@ -19,12 +25,14 @@ const ajax = (path) => {
       method: 'GET',
     },
   );
+  // fetch 開始
   return fetch(request)
     .then((response) => {
-      console.log('fetch', path, Date.now());
+      // console.log('fetch', path, Date.now());
       if (response.status !== 200) {
         throw new Error(`ajax status error: (${response.status})`);
       }
+      // JSON 不正もあり得るので try...catch します
       try {
         return response.json();
       } catch (error) {

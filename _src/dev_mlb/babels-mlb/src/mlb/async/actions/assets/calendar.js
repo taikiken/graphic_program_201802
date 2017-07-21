@@ -29,34 +29,46 @@ const parseInt = self.parseInt;
 
 // calendar
 // YYYY.json
+/**
+ * async method - {@link ajax} を await 実行します
+ * @param {number} year 取得年
+ * @returns {Promise} 実行もとへ Promise を返します
+ */
 async function asyncCall(year) {
   const path = Api.calendar(year);
   const json = await ajax(path);
   return json;
 }
 
-const requestComplete = (json, year) => {
+const requestComplete = (json, year, today) => {
   const data = new DaeCalendar(json, year);
   return {
     data,
     year,
+    today,
     type: ReducerTypes.CALENDAR_COMPLETE,
   };
 };
 
-const requestError = (error, year) => ({
+const requestError = (error, year, today) => ({
   error,
   year,
+  today,
   type: ReducerTypes.CALENDAR_ERROR,
 });
 
-
-const calendar = (requestYear = null) => (dispatch) => {
+/**
+ * calendar 表示用 JSON を取得します
+ * @param {?string} [requestYear=null] 取得年
+ * @param {?Date} [requestToday=null] current にする Date instance
+ */
+const calendar = (requestYear = null, requestToday = null) => (dispatch) => {
   console.log('actions.calendar requestYear', requestYear, typeof requestYear);
   const year = parseInt(requestYear, 10) || Day.thisYear();
+  const today = requestToday || Day.current();
   return asyncCall(year)
-    .then(json => dispatch(requestComplete(json, year)))
-    .catch(error => dispatch(requestError(error, year)));
+    .then(json => dispatch(requestComplete(json, year, today)))
+    .catch(error => dispatch(requestError(error, year, today)));
 };
 
 export default calendar;

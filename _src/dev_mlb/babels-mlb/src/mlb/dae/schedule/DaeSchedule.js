@@ -269,7 +269,7 @@ export default class DaeSchedule {
      * ゲーム情報 -  inter league
      * @type {DaeGames}
      */
-    this.inter = new DaeGames(schedule.inter_league);
+    this.inter = new DaeGames(regular.inter_league);
     /**
      * ゲーム情報 -  american league
      * @type {DaeGames}
