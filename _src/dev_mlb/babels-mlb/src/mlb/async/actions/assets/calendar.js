@@ -25,6 +25,8 @@ import ReducerTypes from '../../reducers/ReducerTypes';
 // dae
 import DaeCalendar from '../../../dae/schedule/DaeCalendar';
 
+const parseInt = self.parseInt;
+
 // calendar
 // YYYY.json
 async function asyncCall(year) {
@@ -50,7 +52,8 @@ const requestError = (error, year) => ({
 
 
 const calendar = (requestYear = null) => (dispatch) => {
-  const year = requestYear || Day.thisYear();
+  console.log('actions.calendar requestYear', requestYear, typeof requestYear);
+  const year = parseInt(requestYear, 10) || Day.thisYear();
   return asyncCall(year)
     .then(json => dispatch(requestComplete(json, year)))
     .catch(error => dispatch(requestError(error, year)));

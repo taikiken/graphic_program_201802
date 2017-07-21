@@ -26,7 +26,7 @@ import Day from '../../util/Day';
 // TODO: props maker, json 2つにする
 export default class ComCalendarMam extends Component {
   static propTypes = {
-    maker: PropTypes.func.isRequired,
+    // maker: PropTypes.func.isRequired,
     data: PropTypes.instanceOf(DaeCalendar),
     year: PropTypes.number,
   };
@@ -52,12 +52,13 @@ export default class ComCalendarMam extends Component {
     this.onSlot = this.onSlot.bind(this);
     this.onSelected = this.onSelected.bind(this);
   }
-  componentDidMount() {
-    // async request start
-    // {@link ConCalendar}.calendarMam
-    // `dispatch(actions.calendar())`
-    this.props.maker();
-  }
+  // componentDidMount() {
+  //   // async request start
+  //   // {@link ConCalendar}.calendarMam
+  //   // `dispatch(actions.calendar())`
+  //   console.log('ComCalendarMam.componentDidMount', this.props.year);
+  //   this.props.maker(2018);
+  // }
   shouldComponentUpdate(nextProps) {
     const { year } = this.props;
     console.log('ComCalendarMam.shouldComponentUpdate nextState', nextProps);

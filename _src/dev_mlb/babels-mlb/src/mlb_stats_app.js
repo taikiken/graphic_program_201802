@@ -24,6 +24,10 @@ import Promise from 'promise-polyfill';
 import 'babel-polyfill';
 
 // -----------------------------------------------
+// main
+import Main from './Main';
+
+// -----------------------------------------------
 import Test from './Test';
 // -----------------------------------------------
 
@@ -32,6 +36,10 @@ if (!window.Promise) {
   window.Promise = Promise;
 }
 
+// main execute
+Main.init();
+
+// TODO: remove test code below
 const MLB = {
   Test,
 };

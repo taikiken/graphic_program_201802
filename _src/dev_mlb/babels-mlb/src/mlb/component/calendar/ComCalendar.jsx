@@ -97,20 +97,20 @@ const customToolbar = (toolbar) => {
   );
 };
 
-// event style custom
-// @see https://github.com/intljusticemission/react-big-calendar/issues/419
-/**
- * event のカラーを変更します
- * @returns {Object} style object を返します
- */
-const style = () => (
-  {
-    style: {
-      backgroundColor: '#89C540',
-      borderColor: '#777',
-    },
-  }
-);
+// // event style custom
+// // @see https://github.com/intljusticemission/react-big-calendar/issues/419
+// /**
+//  * event のカラーを変更します
+//  * @returns {Object} style object を返します
+//  */
+// const style = () => (
+//   {
+//     style: {
+//       backgroundColor: '#89C540',
+//       borderColor: '#777',
+//     },
+//   }
+// );
 
 /**
  * 週の名称の短いバージョンリスト
@@ -172,7 +172,7 @@ function ComCalendar(props) {
             header: customHeader,
           },
         }}
-        eventPropGetter={style}
+        // eventPropGetter={style}
         views={['month']}
         culture="en-GB"
       />

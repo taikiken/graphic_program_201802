@@ -17,21 +17,35 @@ import ReactDOM from 'react-dom';
 // redux
 import { Provider } from 'react-redux';
 
-// store
+// async/store
 import store from '../async/store/';
 
-// connect
+// async/actions
+import actions from '../async/actions';
+
+// async/connect
 import ConCalendar from '../async/connects/ConCalendar';
+
+// app
+import Creator from '../app/Creator';
+
+// util
+import Day from '../util/Day';
 
 console.log('store', store);
 
-export default class View {
-  static make(element) {
+export default class ViewIndex {
+  static make(element, year = Day.thisYear()) {
     ReactDOM.render(
       <Provider store={store}>
+        {/* [TODAY JAPANESE] */}
+        {/* [SCHEDULE] */}
         <ConCalendar />
       </Provider>,
       element,
     );
+    // -----
+    Creator.calendar = target => (store.dispatch(actions.calendar(target)));
+    Creator.calendar(year);
   }
 }

@@ -26,6 +26,7 @@ import actions from '../actions';
 // dae
 import DaeCalendar from '../../dae/schedule/DaeCalendar';
 
+
 /**
  * state を redux 経由し props 変換します
  * @param {*} request 更新される state {button, request}
@@ -38,7 +39,7 @@ const calendarMam = ({ dispatch, data, year }) => {
   console.log('calendarMam', data, year);
   return (
     <ComCalendarMam
-      maker={() => (dispatch(actions.calendar()))}
+      maker={(target = year) => (dispatch(actions.calendar(target)))}
       data={data}
       year={year}
     />

@@ -35,7 +35,14 @@
 // ------------------------------------------------------------------------
 // 日程・動的出力
 ?>
-      <div id="js-mlb-container"></div>
+<div id="js-mlb-index-container"></div>
+<script src="/assets/mlb/js/mlb_stats_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<style>
+  .mlb__schedule__calendar,
+  .calendar-container {
+    height: 800px;
+  }
+</style>
 <?php
 // ------------------------------------------------------------------------
 ?>

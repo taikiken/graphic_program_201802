@@ -10,11 +10,43 @@
  *
  */
 
+// app
+import Router from './mlb/app/Router';
+
+// view
+import ViewIndex from './mlb/view/ViewIndex';
+
+const document = self.document;
+
 /**
  * 実行ファイル
  */
 export default class Main {
-  static init() {}
-  static ready() {}
-  static load() {}
+  static game(page) {
+    console.log('Main.game', page);
+  }
+  static index(page) {
+    console.log('Main.index', page);
+    const element = document.getElementById('js-mlb-index-container');
+    if (!element) {
+      return;
+    }
+    ViewIndex.make(element);
+  }
+  static init() {
+    const page = Router.search();
+    // ---------------------------
+    // 処理開始
+    switch (page.path) {
+      case 'index': {
+        return Main.index(page);
+      }
+      case 'game': {
+        return Main.game(page);
+      }
+      default: {
+        return null;
+      }
+    }
+  }
 }

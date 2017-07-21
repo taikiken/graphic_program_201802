@@ -44,8 +44,8 @@
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
 
-<!--  <script src="/assets/js/libs/vendor.react.js"></script>-->
-<!--  <script src="/assets/js/bundle/main.bundle.js"></script>-->
+  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
   <?php
   endif;
@@ -109,9 +109,6 @@ echo <<<__EOL__
 </script>
 __EOL__;
 ?>
-
-<link rel="stylesheet" href="/assets/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
-<link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
 <?php
 // MLB calendar library CSS
@@ -286,6 +283,13 @@ if (isset($page['prop_identity'])) {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
+<?php
+// ----------------------------------------------------
+// tennis / golf が動的に CSS を読み込みしているのを override するために CSS を最下部でリンクする
+// ----------------------------------------------------
+?>
+<link rel="stylesheet" href="/assets/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
+<link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
 <script src="/assets/js/global.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
