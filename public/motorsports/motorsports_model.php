@@ -119,8 +119,9 @@ $headline_data = json_decode($headline_json);
 // @see https://github.com/undotsushin/undotsushin/issues/1916 - モータースポーツ / Phase2 : 日程結果・ランキング / データ連携 #1916
 // @since 2017-07-20
 // =============
-$s3_host = 'https://dev-img.sportsbull.jp';
+$s3_host = $app_host_name == 'https://dev.sportsbull.jp/' || $app_host_name == 'https://dev.sportsbull.jp' ? 'https://dev-img.sportsbull.jp' : 'https://img.sportsbull.jp';
 $schedule_path = $s3_host . '/static/motorsports/' . $option_directory . '.json';
+//var_dump($app_host_name);
 //var_dump($schedule_path);
 
 $schedule_json = file_get_contents($schedule_path);
@@ -186,4 +187,4 @@ endif;
 
 // 確認用dumpデータ - テンプレ組み込みおわったら削除
 // =======================================================================
-//print_r($page['schedule']);
+//print_r($schedule_path);
