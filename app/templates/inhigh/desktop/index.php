@@ -44,14 +44,6 @@
             ga('require', 'displayfeatures');
             ga('send', 'pageview');
         </script>
-        <script>
-            googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/npb-pc-rectangle', [300, 250], 'div-gpt-ad-1492577512561-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
-            });
-        </script>
         <!-- ad/npb-sp-anchor -->
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <script>
@@ -63,9 +55,6 @@
         <!-- // ad/npb-sp-anchor -->
     </head>
     <body style="background-color: #f5f5f5;">
-        <div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
-        <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-        <script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
 
              <div style="width: 728px; margin: 0 auto;">     
 <!--  インターハイ トップ　パーツ ---------------------------------------------------------->
@@ -139,7 +128,22 @@
                         </section>
 
 
-                        <div class="interhigh_bnr"><a href=""><img src="/assets/images/inhigh/bnr_728x90.png" alt="" class="sp_hide"></a></div>
+                        <div class="interhigh_bnr">
+                            <!-- /531683568/inhigh-ad/inhigh_pc_big_banner -->
+                            <script>
+                                googletag.cmd.push(function() {
+                                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_pc_big_banner', [728, 90], 'div-gpt-ad-1500594913073-0').addService(googletag.pubads());
+                                    googletag.pubads().enableSingleRequest();
+                                    googletag.enableServices();
+                                });
+                            </script>
+                            <div id='div-gpt-ad-1500594913073-0' style='height:90px; width:728px;'>
+                                <script>
+                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500594913073-0'); });
+                                </script>
+                            </div>
+                            <!-- // /531683568/inhigh-ad/inhigh_pc_big_banner -->
+                        </div>
 
 <!-- / インターハイ トップ　パーツ ---------------------------------------------------------->
         </div>

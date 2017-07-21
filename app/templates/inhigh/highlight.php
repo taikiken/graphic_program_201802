@@ -221,21 +221,20 @@
                                 </div>
                             </div>
                             <div class="app-bnr">
-                                <!-- /531683568/pc_sidebar_top_2nd -->
+                                <!-- /531683568/inhigh-ad/inhigh_rectangle -->
                                 <script>
                                     googletag.cmd.push(function() {
-                                        googletag.defineSlot('/531683568/pc_sidebar_top_2nd', [300, 120], 'div-gpt-ad-1494939250039-0').addService(googletag.pubads());
+                                        googletag.defineSlot('/531683568/inhigh-ad/inhigh_rectangle', [300, 250], 'div-gpt-ad-1500595632509-0').addService(googletag.pubads());
                                         googletag.pubads().enableSingleRequest();
-                                        googletag.pubads().collapseEmptyDivs();
                                         googletag.enableServices();
                                     });
                                 </script>
-                                <div id='div-gpt-ad-1494939250039-0' style='height:120px; width:300px;'>
+                                <div id='div-gpt-ad-1500595632509-0' style='height:250px; width:300px;'>
                                     <script>
-                                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939250039-0'); });
+                                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500595632509-0'); });
                                     </script>
                                 </div>
-                                <!-- // /531683568/pc_sidebar_top_2nd -->
+                                <!-- // /531683568/inhigh-ad/inhigh_rectangle -->
                             </div>
                             <!-- sidebar recommend, オススメ記事 -->
                             <div id="widget-recommend-list-container"></div><!--/recommend-->
