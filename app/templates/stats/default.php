@@ -11,8 +11,8 @@
     }
   }());
   </script>
-  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <script src="/assets/js/app_divide.bundle.js"></script>
+  <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true"></script>
+  <script src="/assets/js/app_divide.bundle.js?v=<?php echo $page['version']; ?>"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <?php
   // app in webview 時に head内不要なタグを非表示にする
@@ -44,8 +44,8 @@
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <script src="/assets/js/libs/vendor.react.js"></script>
-  <script src="/assets/js/bundle/main.bundle.js"></script>
+<!--  <script src="/assets/js/libs/vendor.react.js"></script>-->
+<!--  <script src="/assets/js/bundle/main.bundle.js"></script>-->
 
   <?php
   endif;
@@ -110,6 +110,17 @@ echo <<<__EOL__
 __EOL__;
 ?>
 
+<link rel="stylesheet" href="/assets/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
+<link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
+
+<?php
+// MLB calendar library CSS
+if ($page['prop_category'] == 'mlb') :
+?>
+  <link rel="stylesheet" href="/assets/mlb/css/react-big-calendar.css?v=<?php echo $page['version']; ?>">
+<?php
+endif;
+?>
 </head>
 <body>
 
@@ -275,9 +286,6 @@ if (isset($page['prop_identity'])) {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
-
-<link rel="stylesheet" href="/assets/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
-<link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
 <script src="/assets/js/global.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
