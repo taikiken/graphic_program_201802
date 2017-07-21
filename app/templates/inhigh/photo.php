@@ -13,14 +13,14 @@
         <!-- sns ogp -->
         <meta property="og:title" content="インターハイ フォトギャラリー | スポーツブル / SPORTS BULL">
         <meta property="og:type" content="article">
-        <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
+        <meta property="og:image" content="https://sportsbull.jp/assets/images/inhigh/ogp_interhigh.jpg">
         <meta property="og:url" content="https://sportsbull.jp/inhigh/photo/">
         <meta property="og:description" content="インターハイ フォトギャラリー見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <!-- twitter card -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@sportsbull_jp">
         <meta name="twitter:title" content="インターハイ フォトギャラリー | スポーツブル / SPORTS BULL">
-        <meta name="twitter:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
+        <meta name="twitter:image" content="https://sportsbull.jp/assets/images/inhigh/ogp_interhigh.jpg">
         <meta name="twitter:url" content="https://sportsbull.jp/inhigh/photo/">
         <meta name="twitter:description" content="インターハイ フォトギャラリー見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <!-- favicon -->
@@ -31,6 +31,10 @@
 
         <script src="/assets/js/libs/vendor.react.js"></script>
         <script src="/assets/js/bundle/main.bundle.js"></script>
+        <!-- 表示確認用 / -->
+        <link rel="stylesheet" href="/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
+        <link rel="stylesheet" href="/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
+        <!-- / 表示確認用 -->
         <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
         <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
         <!-- インターハイ css & js -->
@@ -207,7 +211,39 @@
                             <div class="btn btn_back"><a href="">インターハイトップへ戻る</a></div>
                         </div>
                         
-                        <div class="content_bottom_bnr"><a href=""><img src="/assets/images/inhigh/bnr_728x90.png" alt="" class="sp_hide"><img src="/assets/images/inhigh/bnr_640x100.png" alt="" class="pc_hide"></a></div>
+                        <div class="content_bottom_bnr">
+
+                            <!-- /531683568/inhigh-ad/inhigh_pc_big_banner -->
+                            <script>
+                                googletag.cmd.push(function() {
+                                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_pc_big_banner', [728, 90], 'div-gpt-ad-1500594913073-0').addService(googletag.pubads());
+                                    googletag.pubads().enableSingleRequest();
+                                    googletag.enableServices();
+                                });
+                            </script>
+                            <div  class="show-for-large" id='div-gpt-ad-1500594913073-0' style='height:90px; width:728px;'>
+                                <script>
+                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500594913073-0'); });
+                                </script>
+                            </div>
+                            <!-- // /531683568/inhigh-ad/inhigh_pc_big_banner -->
+
+                            <!-- /531683568/inhigh-ad/inhigh_sp -->
+                            <script>
+                                googletag.cmd.push(function() {
+                                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_sp', [320, 50], 'div-gpt-ad-1500595161892-0').addService(googletag.pubads());
+                                    googletag.pubads().enableSingleRequest();
+                                    googletag.enableServices();
+                                });
+                            </script>
+                            <div class="show-for-small" id='div-gpt-ad-1500595161892-0' style="height:50px; width:100%;">
+                                <script>
+                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500595161892-0'); });
+                                </script>
+                            </div>
+                            <!-- // /531683568/inhigh-ad/inhigh_sp -->
+
+                        </div>
                         
 
 <!-- / インターハイ メインコンテンツ ---------------------------------------------------------->
@@ -218,15 +254,7 @@
                     <section class="side-sec show-for-large">
                         <div id="sidebar-moving-container">
                             <div class="sponsor-link">
-                                <!-- /531683568/npb-pc-rectangle -->
-                                <div id='div-gpt-ad-1492577512561-0' style='height:250px; width:300px;'>
-                                    <script>
-                                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1492577512561-0'); });
-                                    </script>
-                                </div>
-                            </div>
-                            <div class="app-bnr">
-                                <!-- /531683568/inhigh-ad/inhigh_rectangle -->
+                               <!-- /531683568/inhigh-ad/inhigh_rectangle -->
                                 <script>
                                     googletag.cmd.push(function() {
                                         googletag.defineSlot('/531683568/inhigh-ad/inhigh_rectangle', [300, 250], 'div-gpt-ad-1500595632509-0').addService(googletag.pubads());
@@ -241,6 +269,23 @@
                                 </div>
                                 <!-- // /531683568/inhigh-ad/inhigh_rectangle -->
                             </div>
+                            <div class="app-bnr">
+                                <!-- /531683568/pc_sidebar_top_2nd -->
+                                <script>
+                                    googletag.cmd.push(function() {
+                                        googletag.defineSlot('/531683568/pc_sidebar_top_2nd', [300, 120], 'div-gpt-ad-1494939250039-0').addService(googletag.pubads());
+                                        googletag.pubads().enableSingleRequest();
+                                        googletag.pubads().collapseEmptyDivs();
+                                        googletag.enableServices();
+                                    });
+                                </script>
+                                <div id='div-gpt-ad-1494939250039-0' style='height:120px; width:300px;'>
+                                <script>
+                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939250039-0'); });
+                                </script>
+                                </div>
+                                <!-- // /531683568/pc_sidebar_top_2nd -->
+                            </div><!-- /.app-bnr -->
                             <!-- sidebar recommend, オススメ記事 -->
                             <div id="widget-recommend-list-container"></div><!--/recommend-->
                             <div id="widget-ranking-container"></div><!--/ranking-->

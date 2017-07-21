@@ -129,7 +129,7 @@
                                     googletag.enableServices();
                                 });
                             </script>
-                            <div id='div-gpt-ad-1500595161892-0' style='display:inline-block; height:50px; width:320px;'>
+                            <div id='div-gpt-ad-1500595161892-0' style='display:inline-block; height:50px; width:100%;'>
                                 <script>
                                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500595161892-0'); });
                                 </script>
