@@ -112,7 +112,7 @@ gulp.task 'stats:pack:dev', ( cb ) ->
   ]
   conf.entry = conf.entry + '/_src/babels_banners/compile/banners_with_json.js'
   conf.output.filename = 'banners_with_json.bundle.js'
-
+  console.log('[STATS:DEV]', conf);
   webpack conf, ( err, stats ) ->
     if ( err )
       throw new $.util.PluginError( 'webpack', err )
@@ -131,7 +131,7 @@ gulp.task 'stats:pack:build', ( cb ) ->
   ]
   conf.entry = conf.entry + '/_src/babels_banners/compile/banners_with_json.js'
   conf.output.filename = 'banners_with_json.bundle.js'
-
+  console.log('[STATS:BUILD]', conf.output);
   webpack conf, ( err, stats ) ->
     if ( err )
       throw new $.util.PluginError( 'webpack', err )
