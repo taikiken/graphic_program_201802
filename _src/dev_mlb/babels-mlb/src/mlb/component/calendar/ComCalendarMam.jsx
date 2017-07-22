@@ -97,9 +97,14 @@ export default class ComCalendarMam extends Component {
    * @returns {boolean} true - render します
    */
   shouldComponentUpdate(nextProps) {
-    const { year, today } = this.props;
+    const { year, today, data } = this.props;
     console.log('ComCalendarMam.shouldComponentUpdate nextState', nextProps);
-    return nextProps && (year !== nextProps.year || today !== nextProps.today);
+    return nextProps &&
+      (
+        (nextProps.year && year !== nextProps.year) ||
+        (nextProps.today && today !== nextProps.today) ||
+        (nextProps.data && data !== nextProps.data)
+      );
   }
   /**
    * 日付 click callback

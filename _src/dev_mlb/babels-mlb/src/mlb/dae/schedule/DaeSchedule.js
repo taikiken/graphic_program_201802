@@ -20,7 +20,7 @@ import DaeBatting from '../player/DaeBatting';
 /**
  * game 毎の日本人選手情報
  */
-class DaeJapanesePlayer {
+export class DaeJapanesePlayer {
   /**
    * 日本人選手情報
    * @param {object} player JSON
@@ -63,6 +63,7 @@ class DaeJapanesePlayer {
      * @type {DaePitching}
      */
     this.pitching = new DaePitching(origin.pitching);
+    this.type = this.batting.has ? 'batting' : 'pitching';
   }
 }
 
@@ -70,7 +71,7 @@ class DaeJapanesePlayer {
  * 日本人選手リスト
  * game 毎の選手情報 -> DaeJapanesePlayer - 日本人選手
  */
-class DaeJapanesePlayers {
+export class DaeJapanesePlayers {
   /**
    * 日本人選手リスト
    * @param {Array} players JSON
@@ -89,10 +90,13 @@ class DaeJapanesePlayers {
      */
     this.list = origin.map(player => (new DaeJapanesePlayer(player)));
   }
+  has() {
+    return this.list.length > 0;
+  }
 }
 
 /**
- * game 毎の対戦チーム情報
+ * game 毎のチーム別対戦チーム情報
  */
 class DaeGameTeam {
   /**
@@ -128,7 +132,7 @@ class DaeGameTeam {
 /**
  * game 毎の対戦情報
  */
-class DaeGame {
+export class DaeGame {
   /**
    * game 毎の対戦情報
    * @param {object} game JSON
@@ -207,7 +211,7 @@ class DaeGames {
 /**
  * 日本人選手成績リストを作成します
  */
-class DaeJapanese {
+export class DaeJapanese {
   /**
    * 日本人選手成績リスト
    * @param {Array} japanese JSON
@@ -224,6 +228,9 @@ class DaeJapanese {
      * @type {Array.<DaeGame>}
      */
     this.list = origin.map(game => (new DaeGame(game)));
+  }
+  has() {
+    return this.list.length > 0;
   }
 }
 

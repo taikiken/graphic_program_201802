@@ -35,9 +35,9 @@ const parallel = (year, month, day) => {
   // schedule
   paths.push(Api.schedule(year, month, day));
   // master/game type
-  paths.push(Api.type);
+  paths.push(Api.type());
   // master/team
-  paths.push(Api.team);
+  paths.push(Api.teams());
   // parallel call
   return paths.map(path => (ajax(path)));
 };
@@ -63,12 +63,12 @@ const requestComplete = (results, date) => {
 const requestError = (error, date) => ({
   error,
   date,
-  type: ReducerTypes.CALENDAR_ERROR,
+  type: ReducerTypes.SCHEDULE_ERROR,
 });
 
 
 const schedule = (requestDate = null) => (dispatch) => {
-  const date = requestDate || Day.date();
+  const date = requestDate || Day.today();
   return asyncCall(date.year, date.month, date.day)
     .then(results => dispatch(requestComplete(results, date)))
     .catch(error => dispatch(requestError(error, date)));

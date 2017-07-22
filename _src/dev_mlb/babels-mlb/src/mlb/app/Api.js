@@ -31,7 +31,7 @@ export default class Api {
    * @returns {string} チーム一覧 JSON パスを返します
    */
   static teams() {
-    return `${S3.host()}/master/team.json`;
+    return `${S3.host()}/master/team/list.json`;
   }
   // ---------------------------------------------------
   //  master/schedule

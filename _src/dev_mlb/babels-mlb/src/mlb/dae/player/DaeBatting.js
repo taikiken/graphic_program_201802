@@ -39,11 +39,6 @@ export default class DaeBatting {
      */
     this.average = Normalize.str(origin.average, '-');
     /**
-     * 安打数
-     * @type {number}
-     */
-    this.hits = Normalize.int(origin.hits);
-    /**
      * 打点数
      * @type {number}
      */
@@ -53,6 +48,11 @@ export default class DaeBatting {
      * @type {number}
      */
     this.stolen = Normalize.int(origin.stolen_bases);
+    /**
+     * 安打数
+     * @type {number}
+     */
+    this.hits = Normalize.int(origin.hits);
     /**
      * 打席数
      * @type {number}

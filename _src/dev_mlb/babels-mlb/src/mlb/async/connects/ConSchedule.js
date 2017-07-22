@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/07/19 - 20:59
+ * @date 2017/07/22 - 15:54
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,14 +11,13 @@
  */
 
 // redux
-import { combineReducers } from 'redux';
+import { connect } from 'react-redux';
 
-import calendar from './assets/calendar';
-import schedule from './assets/schedule';
+// component
+import ComScheduleMam from '../../component/schedule/ComScheduleMam';
 
-const reducers = combineReducers({
-  calendar,
-  schedule,
-});
+const mapStateToProps = ({ schedule }) => (schedule);
 
-export default reducers;
+const ConSchedule = connect(mapStateToProps)(ComScheduleMam);
+
+export default ConSchedule;

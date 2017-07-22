@@ -14,7 +14,7 @@
 import ReducerTypes from '../ReducerTypes';
 
 // async
-import Creator from '../../Creator';
+// import Creator from '../../Creator';
 
 const initial = {
   type: ReducerTypes.INITIAL,
@@ -38,10 +38,10 @@ const schedule = (requestState = initial, action) => {
       const today = action.today;
       const game = data.events.game(today);
       if (!game) {
-        // TODO: no events state 返却
+        // TODO: no events state 返却 - 試合はありません
         return state;
       }
-      Creator.schedule();
+      // Creator.schedule();
       state.type = ReducerTypes.SCHEDULE_START;
       return state;
     }

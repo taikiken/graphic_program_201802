@@ -25,6 +25,7 @@ import actions from '../async/actions';
 
 // async/connect
 import ConCalendar from '../async/connects/ConCalendar';
+import ConSchedule from '../async/connects/ConSchedule';
 
 // async/
 import Creator from '../async/Creator';
@@ -35,17 +36,22 @@ Creator.schedule = date => (store.dispatch(actions.schedule(date)));
 
 export default class View {
   static index(element, year = null, today = null) {
+    // console.log('ConSchedule', ConSchedule);
     ReactDOM.render(
-      <Provider store={store}>
-        {/* [TODAY JAPANESE] */}
-        {/* [SCHEDULE] */}
-        <ConCalendar />
-      </Provider>,
+      <div className="provider-root">
+        <Provider store={store}>
+          <ConSchedule />
+        </Provider>
+        <Provider store={store}>
+          <ConCalendar />
+        </Provider>
+      </div>,
       element,
     );
     // -----
     // Creator.calendar(year, today);
-    Creator.calendar(year, new Date(2017, 8, 15));
+    // Creator.calendar(year, new Date(2017, 8, 15));
+    Creator.schedule();
     console.log('ViewIndex.make', year, today);
   }
 }

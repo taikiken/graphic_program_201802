@@ -16,6 +16,9 @@ import Normalize from '../../util/Normalize';
 // module
 import ModCalendar from '../../module/calendar/ModCalendar';
 
+// util
+import Day from '../../util/Day';
+
 /**
  * [native code] - parseInt
  * @type {function}
@@ -26,15 +29,7 @@ const parseInt = self.parseInt;
  * 曜日リスト 0: 日曜
  * @type {Array.<string>}
  */
-const weeks = [
-  '日',
-  '月',
-  '火',
-  '水',
-  '木',
-  '金',
-  '土',
-];
+const weeks = Day.weeks;
 
 /**
  * 日付情報を管理します

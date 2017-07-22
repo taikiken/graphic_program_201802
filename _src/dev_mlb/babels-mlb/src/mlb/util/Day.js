@@ -17,6 +17,7 @@ import Text from '../../moku/util/Text';
  * 日付に関する Helper
  */
 export default class Day {
+  static weeks = ['日', '月', '火', '水', '木', '金', '土'];
   /**
    * 今日の Date instance を作成します
    * @returns {Date} 今日の Date instance を返します
@@ -57,5 +58,11 @@ export default class Day {
    */
   static full(date = Day.current()) {
     return `${date.getFullYear()}${Text.zero(date.getMonth() + 1)}${Text.zero(date.getDate())}`;
+  }
+  static day(index) {
+    return Day.weeks[index];
+  }
+  static title(date = Day.current()) {
+    return `${date.getMonth() + 1}月${date.getDate()}日（${Day.day(date.getDay())}）`;
   }
 }
