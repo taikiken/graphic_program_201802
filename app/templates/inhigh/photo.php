@@ -108,101 +108,39 @@
                     <section class="main-sec">
                        
 <!--  インターハイ メインコンテンツ ---------------------------------------------------------->
+<?php
+
+$db=new db;
+$db->connect();
+
+$photo="";
+$subdomain=preg_match("/dev/",$_SERVER["SERVER_NAME"])?"dev-img":"img";
+$i=0;
+
+$sql="select id,img1,title,a1,a2,a3 from repo_n where d2=54 and flag=1 and swf is null order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc";
+$db->query($sql);
+while($f=$db->fetch_array()){
+	$v=array(
+		"title"=>htmlspecialchars($f["title"]),
+		"date"=>sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]),
+		"img"=>sprintf("https://%s.sportsbull.jp/img/%s",$subdomain,$f["img1"]),
+		"url"=>sprintf("/p/%s/",$f["id"])
+	);
+	$photo.=sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><p class="txt">%s</p></a></li>',$v["url"],$v["img"],$v["title"],$v["date"]);
+	if($i==0)$end=sprintf("%s.%s",$f["a2"],$f["a3"]);
+	$start=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
+	$i++;
+}
+
+?>
                         <div class="ttl-wrapper">
                             <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
-                            <p class="ttl_date">2017.07.28 - 08.20</p>
+                            <p class="ttl_date"><?php echo $start; ?> - <?php echo $end; ?></p>
                         </div>
                         
                         <div id="js-current-post" class="current-post photo_gallery">
                             <ul class="photo_list">
-                                <li><a href="">
-                                   <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_01.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_02.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/thumb_01.png" alt=""></div>
-                                    <p class="txt">長文テキスト長文テキスト長文テキスト長文テキスト</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_03.jpg" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_02.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_04.jpg" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_05.jpg" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_01.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_02.png" alt=""></div>
-                                    <p class="txt">長文テキスト長文テキスト長文テキスト長文テキスト長文テキスト長文テキスト長文テキスト長文テキスト</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/thumb_01.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_01.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_01.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_02.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/thumb_01.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_03.jpg" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_02.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_04.jpg" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_05.jpg" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_01.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_02.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/thumb_01.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
-                                <li><a href="">
-                                    <div class="img"><img class="lazyload" data-src="/assets/images/inhigh/photo_01.png" alt=""></div>
-                                    <p class="txt">2017.07.28</p>
-                                    </a></li>
+<?php echo $photo; ?>
                             </ul>
                         </div>
                         
