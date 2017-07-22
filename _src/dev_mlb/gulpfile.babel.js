@@ -110,7 +110,7 @@ requireDir('tasks');
 gulp.task('dev', callback =>
   $$.runSequence(
     // 'sprite:build',
-    'infinite:dev',
+    'mlb:dev',
     // 'scripts:dev',
     // 'css:dev',
     callback,
@@ -130,7 +130,7 @@ gulp.task('default', callback =>
     // js ---
     // or not use vendor 'vendor:libs:build',
     // 'vendor:build',
-    'infinite:build',
+    'mlb:build',
     // 'babel:build',
     // 'scripts:build',
     // 'js:build',

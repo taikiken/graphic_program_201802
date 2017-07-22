@@ -22,21 +22,47 @@ import ajax from '../../../net/ajax';
 // reducer
 import ReducerTypes from '../../reducers/ReducerTypes';
 
-// schedule
-// YYYY.json
+// dae/schedule
+import DaeSchedule from '../../../dae/schedule/DaeSchedule';
+
+// dae/master
+import DaeGameTypes from '../../../dae/master/DaeGameTypes';
+import DaeTeamTypes from '../../../dae/master/DaeTeamTypes';
+
+// game info
+const parallel = (year, month, day) => {
+  const paths = [];
+  // schedule
+  paths.push(Api.schedule(year, month, day));
+  // master/game type
+  paths.push(Api.type);
+  // master/team
+  paths.push(Api.team);
+  // parallel call
+  return paths.map(path => (ajax(path)));
+};
+
 async function asyncCall(year, month, day) {
-  const path = Api.schedule(year, month, day);
-  const json = await ajax(path);
-  return json;
+  const results = await Promise.all(parallel(year, month, day));
+  return results;
 }
 
-const requestComplete = json => ({
-  json,
-  type: ReducerTypes.CALENDAR_COMPLETE,
-});
+const requestComplete = (results, date) => {
+  const schedule = new DaeSchedule(results.shift());
+  const types = new DaeGameTypes(results.shift());
+  const teams = new DaeTeamTypes(results.shift());
+  return {
+    schedule,
+    types,
+    teams,
+    date,
+    type: ReducerTypes.SCHEDULE_COMPLETE,
+  };
+};
 
-const requestError = error => ({
+const requestError = (error, date) => ({
   error,
+  date,
   type: ReducerTypes.CALENDAR_ERROR,
 });
 
@@ -44,8 +70,8 @@ const requestError = error => ({
 const schedule = (requestDate = null) => (dispatch) => {
   const date = requestDate || Day.date();
   return asyncCall(date.year, date.month, date.day)
-    .then(json => dispatch(requestComplete(json)))
-    .catch(error => dispatch(requestError(error)));
+    .then(results => dispatch(requestComplete(results, date)))
+    .catch(error => dispatch(requestError(error, date)));
 };
 
 export default schedule;

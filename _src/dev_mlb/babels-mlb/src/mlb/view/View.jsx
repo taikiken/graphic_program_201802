@@ -30,10 +30,11 @@ import ConCalendar from '../async/connects/ConCalendar';
 import Creator from '../async/Creator';
 
 console.log('store', store);
-Creator.calendar = (target, current) => (store.dispatch(actions.calendar(target, current)));
+Creator.calendar = (year, today) => (store.dispatch(actions.calendar(year, today)));
+Creator.schedule = date => (store.dispatch(actions.schedule(date)));
 
-export default class ViewIndex {
-  static make(element, year = null, today = null) {
+export default class View {
+  static index(element, year = null, today = null) {
     ReactDOM.render(
       <Provider store={store}>
         {/* [TODAY JAPANESE] */}

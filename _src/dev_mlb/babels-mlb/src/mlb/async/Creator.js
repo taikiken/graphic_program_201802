@@ -15,8 +15,13 @@
  */
 export default class Creator {
   /**
-   * actions.calendar を redux.store.dispatch で bind します
+   * actions.calendar を redux.store.dispatch で bind します - {@link View}
    * @type {?function}
    */
   static calendar = null;
+  /**
+   * actions.schedule を redux.store.dispatch で bind します - {@link View}
+   * @type {?function}
+   */
+  static schedule = null;
 }

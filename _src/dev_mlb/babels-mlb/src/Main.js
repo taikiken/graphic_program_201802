@@ -14,7 +14,7 @@
 import Router from './mlb/app/Router';
 
 // view
-import ViewIndex from './mlb/view/ViewIndex';
+import View from './mlb/view/View';
 
 const document = self.document;
 
@@ -31,7 +31,7 @@ export default class Main {
     if (!element) {
       return;
     }
-    ViewIndex.make(element);
+    View.index(element);
   }
   static init() {
     const page = Router.search();

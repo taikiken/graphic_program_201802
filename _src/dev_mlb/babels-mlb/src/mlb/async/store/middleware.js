@@ -12,6 +12,9 @@
 
 import thunk from 'redux-thunk';
 
+// app
+import Env from '../../app/Env';
+
 // @see http://redux.js.org/docs/advanced/AsyncActions.html#indexjs
 // @see http://redux.js.org/docs/api/applyMiddleware.html#example-custom-logger-middleware
 
@@ -25,11 +28,14 @@ import thunk from 'redux-thunk';
  * @see http://redux.js.org/docs/api/applyMiddleware.html#example-custom-logger-middleware
  */
 const logger = store => next => (action = { type: 'undefined' }) => {
-  console.group(action.type);
-  console.info('dispatching', action);
-  const result = next(action);
-  console.warn('next state', store.getState());
-  console.groupEnd(action.type);
+  let result;
+  if (Env.node() === 'development') {
+    console.group(action.type);
+    console.info('dispatching', action);
+    result = next(action);
+    console.warn('next state', store.getState());
+    console.groupEnd(action.type);
+  }
   return result;
 };
 

@@ -42,6 +42,7 @@ export default class ReducerTypes {
    * @type {string}
    */
   static SCHEDULE_ERROR = 'scheduleComplete';
+  static SCHEDULE_START = 'scheduleStart';
   // ----------------------------------------
   // UI
   // ----------------------------------------

@@ -15,7 +15,7 @@ import ReactDOM from 'react-dom';
 
 import ComCalendar from './mlb/component/calendar/ComCalendar';
 
-import ViewIndex from './mlb/view/ViewIndex';
+import View from './mlb/view/View';
 
 export default class Test {
   static make(element, option) {
@@ -33,6 +33,6 @@ export default class Test {
     );
   }
   static view(element) {
-    ViewIndex.make(element);
+    View.index(element);
   }
 }

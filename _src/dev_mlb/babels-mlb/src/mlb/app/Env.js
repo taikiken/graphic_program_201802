@@ -111,4 +111,7 @@ export default class Env {
     }
     return Env.DEV;
   }
+  static node() {
+    return '@@nodeEnv';
+  }
 }

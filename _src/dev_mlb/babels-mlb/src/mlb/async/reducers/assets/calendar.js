@@ -37,7 +37,6 @@ const calendar = (requestState = initial, action) => {
       state.data = action.data;
       state.year = action.year;
       state.today = action.today;
-      // result = action.json;
       return state;
     }
     // calendar error
@@ -51,9 +50,6 @@ const calendar = (requestState = initial, action) => {
     // default
     case ReducerTypes.INITIAL:
     default: {
-      // if (result !== null) {
-      //   state.json = result;
-      // }
       return state;
     }
   }

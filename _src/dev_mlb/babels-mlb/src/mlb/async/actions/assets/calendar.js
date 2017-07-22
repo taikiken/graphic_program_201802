@@ -25,6 +25,10 @@ import ReducerTypes from '../../reducers/ReducerTypes';
 // dae
 import DaeCalendar from '../../../dae/schedule/DaeCalendar';
 
+/**
+ * [native code] - parseInt
+ * @type {function}
+ */
 const parseInt = self.parseInt;
 
 // calendar

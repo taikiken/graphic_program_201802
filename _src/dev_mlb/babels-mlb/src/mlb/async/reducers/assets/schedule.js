@@ -10,28 +10,53 @@
  *
  */
 
+// async/reducers
 import ReducerTypes from '../ReducerTypes';
+
+// async
+import Creator from '../../Creator';
 
 const initial = {
   type: ReducerTypes.INITIAL,
-  data: null,
+  schedule: null,
+  types: null,
+  teams: null,
   error: null,
+  date: null,
 };
 
 // let result = null;
 
 const schedule = (requestState = initial, action) => {
   const state = Object.assign({}, requestState);
+  console.log('reducers.schedule', state, action);
   // switch-case
   switch (action.type) {
+    case ReducerTypes.CALENDAR_COMPLETE: {
+      // {DaeCalendar}
+      const data = action.data;
+      const today = action.today;
+      const game = data.events.game(today);
+      if (!game) {
+        // TODO: no events state 返却
+        return state;
+      }
+      Creator.schedule();
+      state.type = ReducerTypes.SCHEDULE_START;
+      return state;
+    }
     case ReducerTypes.SCHEDULE_COMPLETE: {
       state.type = action.type;
-      state.data = action.data;
+      state.schedule = action.schedule;
+      state.types = action.types;
+      state.teams = action.teams;
+      state.date = action.date;
       return state;
     }
     case ReducerTypes.SCHEDULE_ERROR: {
       state.type = action.type;
       state.error = action.error;
+      state.date = action.date;
       return state;
     }
     case ReducerTypes.INITIAL:
