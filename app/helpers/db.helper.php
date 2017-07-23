@@ -77,6 +77,31 @@ class dbForTemplate extends db {
 
   }
 
+  public function get_photo($id)
+  {
+    global $ImgPath;
+      $list = [];
+      $sqlstr = <<<END_DOC
+SELECT
+    *
+FROM
+    photo
+WHERE
+    nid = {$id}
+ORDER BY n
+END_DOC;
+      $this->query($sqlstr);
+
+      while ($o = $this->fetch_array())
+      {
+        $o['main'] = sprintf('%s/photo/main/%s', $ImgPath, $o["img1"]);
+        $o['thumb'] = sprintf('%s/photo/thumb/%s', $ImgPath, $o["img2"]);
+        $o['sp_main'] = sprintf('%s/photo/sp_main/%s', $ImgPath, $o["img3"]);
+        $o['sp_thumb'] = sprintf('%s/photo/sp_thumb/%s', $ImgPath, $o["img4"]);
+        $list[$o['n']] = $o;
+      }
+      return $list;
+  }
 
   /**
   * カテゴリー一覧を取得する = /api/v1/category

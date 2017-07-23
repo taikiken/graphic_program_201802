@@ -21,12 +21,18 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         endif;
       endif;
 
-
+      $category_secondary = $post['categories'][1];
+      $category2 = $app->model->get_category_by_slug($category_secondary['slug']);
       // #782 カノニカル判定
       if ( $post['canonical'] ) :
         $canonical = $post['canonical'];
       else :
         $canonical = '';
+      endif;
+        $photo = [];
+      if($category['slug'] == 'photo' || $category2['slug'] == 'photo') :
+          $photo = $app->model->get_photo($post['id']);
+
       endif;
 
       // #1179 Syn.extension 判定
@@ -47,7 +53,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         $syn_extension = 'selfonly';
       endif;
 
-
       $args['page'] = $app->model->set(array(
         'title'          => $post['title'].' | '.$category['label'],
         'og_title'       => $post['title'].' | '.$app->model->property('title_short'),
@@ -67,6 +72,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
         'category'       => $category,
         'post'           => $post,
+        'photo'          => $photo
       ));
 
 
@@ -89,6 +95,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         endif;
 
       // アプリ以外のデスクトップ/スマホなら通常
+
       else :
 
         return $this->renderer->render($response, "default.php", $args);
