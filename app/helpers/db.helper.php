@@ -88,6 +88,7 @@ FROM
     photo
 WHERE
     nid = {$id}
+ AND flag = 1
 ORDER BY n
 END_DOC;
       $this->query($sqlstr);

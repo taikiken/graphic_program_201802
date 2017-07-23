@@ -15,11 +15,11 @@ use Guzzle\Http\EntityBody;
 
 class S3Module {
 	
-	private $bucket = "";
+	private $bucket = "dev-img-sportsbull-jp";
 	// AWSのキー名
-	private $keyId = "";
+	private $keyId = "AKIAJQ3WTOVR2PKCYZ4A";
 	// シークレットキー
-	private $secretKey = "";
+	private $secretKey = "l7PMVg3y2OnJRrkOEsQZebzcZ003KYIWswamJIT0";
 	// region 東京region指定
 	private $region = 'ap-northeast-1';
 
@@ -126,12 +126,12 @@ class S3Module {
 		
 		// 設定配列を作っています。S3オブジェクト生成用のオプションです。
 		$s3Setting = [
-/*
+
 			'credentials' => [
 				'key' => $keyId,
 				'secret' => $secretKey,
 			],
-*/
+
 			'region' => $region,
 			'version' => $sdkVersion,
 		];
