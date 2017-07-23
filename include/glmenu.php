@@ -4,6 +4,7 @@
 <li><a href="/editdm/repo_n/?cid=9&rid=7">TOPピックアップ</a></li>
 <li><a href="/editdm/repo_s/?rid=7">TOP以外ピックアップ</a></li>
 <li><a href="/editdm/repo_n/?cid=1">記事</a></li>
+<li><a href="/editdm/photo/">フォトアルバム</a></li>
 <li><a href="/editdm/repo_n/?cid=10">カテゴリー</a></li>
 <li><a href="/editdm/repo_s/?rid=2">メディア</a></li>
 <li><a href="/editdm/repo_n/?cid=6">会員</a></li>
