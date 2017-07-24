@@ -70,503 +70,503 @@ if(!e)return b.build();g=g.path.substring(e.length).replace(/[^\/]*$/,"").replac
 g)){if(!k(b[g])){if(b[g]!==f[g])return!1}else if(!E(b[g],f[g]))return!1;a[g]=!0}for(g in f)if(n.call(f,g)&&!a[g])return!1;return!0};f.duplicateQueryParameters=function(a){this._parts.duplicateQueryParameters=!!a;return this};f.escapeQuerySpace=function(a){this._parts.escapeQuerySpace=!!a;return this};return d});
 
 
-	var _player;
-
-	/* --------------------------------------------------
-		Config
-	-------------------------------------------------- */
-	var _bcConfig = {
-		jsBaseURL: '//players.brightcove.net/',
-		playbackApiBaseURL: 'https://edge.api.brightcove.com/playback/v1/accounts/',
-		getPlaylistLimitSize: 100,
-		accountId: '5289441680001',
-		policyKey: 'BCpkADawqM2t1x6444jcjVA_l_3dbRc3dlovdhKX9pmHaBrHJrDJcDCcmQNGxlpqx9U_2lfKvngjJJ9Yt8PNw6zeYwjT3t6kUzHFqo6Lip2zFXdDyAfL19bYPvqkg4y-z2jiput8gKwET_bZ'
-	};
-
-	// 公開時設定
-	var _bcPlayerConfig = {
-		id: 'bcPlayer',
-		playerId: 'rklFbYBVHb',
-		embed: 'default',
-		applicationId: '',
-		class: 'video-js',
-		playsinline: true,
-		controls: true,
-		autoPlay: true,
-		autoNext: true
-	}
-
-	var _bcPlayerState = {
-		firstPlay: true,
-		muted: false
-	}
-
-	// Primetimeあり
-	var _vastUrlConfig = {
-		baseUrl: 'https://ad.auditude.com/adserver/vast3?',
-		queries: {
-			pc: {
-				sportsbull: 'u=d39b0dbdbe70265ab7912a48d706bfbd&z=268135&tl=c:l,d:120,l:1,p:p&l={YYYYMMDDHHMMSS}'
-			},
-			sp: {
-				sportsbull: 'u=d39b0dbdbe70265ab7912a48d706bfbd&z=268133&tl=c:l,d:120,l:1,p:p&l={YYYYMMDDHHMMSS}'
-			}
-		}
-	}
-
-	var _isSpTab = false;
-
-	var _adConfig = {
-		frequency: 3
-	}
-	var _bcPlayerPlayCount = 0;
-
-	var _cuePointList;
-
-	document.write('<style type="text/css">.vjs-captions-button {display: none;}</style>');
-
-	/* --------------------------------------------------
-		Public Functions
-	-------------------------------------------------- */
-	function init() {
-		if ($('[data-auto-play]').length > 0 && $('[data-auto-play]').attr('data-auto-play') === 'false') {
-			_bcPlayerConfig.autoPlay = false;
-		}
-		if (_getDeviceType() !== 'pc') {
-			_isSpTab = true;
-			_bcPlayerConfig.autoPlay = false;
-		}
-		if ($('[data-auto-next]').length > 0 && $('[data-auto-next]').attr('data-auto-next') === 'false') {
-			_bcPlayerConfig.autoNext = false;
-		}
-
-
-		var $target;
-		if ($('[data-playlist-id]').length > 0) {
-			_bcPlayerConfig.playlistId = $('[data-playlist-id]').attr('data-playlist-id');	
-			$target = $('[data-playlist-id]');
-		} else {
-			var uri = new URI();
-			var query = uri.search(true);
-			if ('vid' in query && query.vid) _bcPlayerConfig.videoId = query.vid;
-			else _bcPlayerConfig.videoId = $('[data-video-id]').attr('data-video-id');
-			$target = $('[data-video-id]');
-		}
-
-		var bcVideoTag = _createBcVideoTag();
-		$target.html(bcVideoTag);
-
-		var bcJsUrl = _createBcPlayerJsUrl();
-		$.getScript(bcJsUrl, _setVideoJsEvents);
-	}
-
-	/* --------------------------------------------------
-		Internal Functions
-	-------------------------------------------------- */
-	function _createBcPlayerJsUrl() {
-		var url = ''
-		url += _bcConfig.jsBaseURL;
-		url += _bcConfig.accountId + '/';
-		url += _bcPlayerConfig.playerId + '_' + _bcPlayerConfig.embed + '/';
-		url += 'index.min.js';
-		return url;
-	}
-
-	function _createBcVideoTag() {
-		var tag = ''
-		tag += '<div style="position: relative;">';
-		tag += '<div style="padding-top: 56.25%;">';
-		tag += '<video ';
-		tag += 'id="' + _bcPlayerConfig.id + '" ';
-		tag += 'data-account="' + _bcConfig.accountId + '" ';
-		tag += 'data-player="' + _bcPlayerConfig.playerId + '" ';
-		tag += 'data-embed="' + _bcPlayerConfig.embed + '" ';
-		tag += 'data-application-id="' + _bcPlayerConfig.applicationId + '" ';
-		tag += 'class="' + _bcPlayerConfig.class + '" ';
-		tag += 'style="width:100%;height:100%;position:absolute;top:0;bottom:0;right:0;left:0;" ';
-		if (_bcPlayerConfig.playsinline) {
-			tag += 'playsinline ';
-		}
-		if (_bcPlayerConfig.autoPlay) {
-			tag += 'autoplay ';
-		}
-		if (_bcPlayerConfig.controls) {
-			tag += 'controls ';
-		}
-		tag += '>';
-		tag += '</video>';
-		tag += '</div>';
-		tag += '</div>';
-		return tag;
-	}
-
-	function _setVideoJsEvents() {
-		videojs(_bcPlayerConfig.id).ready(function() {
-			_player = this;
-
-			// 広告
-			_setCompanionAds();
-
-			// プレイリスト
-			if ('playlistId' in _bcPlayerConfig) _setPlaylistData();
-			else _setVideoData(_bcPlayerConfig.videoId);
-
-			// 初回再生記録
-			_player.one('firstplay', function() {
-				_bcPlayerState.firstPlay = false;
-			});
-		});
-	}
-
-	function _setPlaylistData() {
-		var offset = 0;
-		var limit = _bcConfig.getPlaylistLimitSize;
-		_getPlaylistData(_bcPlayerConfig.playlistId, offset, limit).done(function(mediaData) {
-			$.each(mediaData.videos, function(i, val) {
-				mediaData.videos[i].duration = mediaData.videos[i].duration / 1000;
-			});
-
-			_getVideoData(mediaData.videos[0].id).done(function(video) {
-				_setAdRequest(_bcPlayerConfig.autoPlay);
-
-				_player.catalog.load(video);
-				
-				_setOnCuePoint(video);
-
-				_writePlaylist(mediaData.videos);
-			})
-		});
-	}
-
-	function _getPlaylistData(playlistId, offset, limit) {
-		var dfd = $.Deferred();
-
-		var requestUrl = '';
-		requestUrl += _bcConfig.playbackApiBaseURL + _bcConfig.accountId + '/playlists/' + playlistId;
-		requestUrl += '?offset=' + offset;
-		requestUrl += '&limit=' + limit;
-
-		var ajaxParams = {
-			type: 'GET',
-			url: requestUrl,
-			dataType: 'json',
-			timeout: 60000,
-			cache: false,
-			headers: {
-				'Accept': 'application/json;pk=' + _bcConfig.policyKey
-			}
-		};
-
-		$.ajax(ajaxParams).done(function(mediaData) {
-			dfd.resolve(mediaData);
-		}).fail(function(xhr, status, error) {
-			console.error('ajax failed');
-			console.dir(xhr);
-
-			dfd.reject(xhr);
-		});
-
-		return dfd.promise();
-	}
-
-	function _writePlaylist(videos) {
-		var $playlistArea = $('[data-playlist-area]');
-		$playlistArea.addClass('notAvailable');
-
-		var listHtml = '';
-		$.each(videos, function(index, video) {
-			var thumbUrl = video.thumbnail;
-			thumbUrl = thumbUrl.replace(/^(http|https):/, '');
-
-			listHtml += '<div class="item">';
-			listHtml += '<a href="javascript:void(0);" data-playlist-index="' + index + '" data-video-id="' + video.id + '">';
-			listHtml += '<div class="imgBlock">';
-			listHtml += '<img class="thumb" src="' + thumbUrl + '">';
-			listHtml += '</div>';
-			listHtml += '<div class="textBlock">';
-			listHtml += '<span class="title">' + video.name + '</span>';
-			listHtml += '</div>';
-			listHtml += '</a>';
-			listHtml += '</div>';
-		});
-
-		$playlistArea.html(listHtml);
-
-		// クリックイベント
-		$playlistArea.find('a').on('click', function() {
-			if ($playlistArea.hasClass('notAvailable') === false && $(this).parent().hasClass('current') === false) {
-
-				var videoId = $(this).attr('data-video-id');
-				_player.catalog.getVideo(videoId, function(error, videoData) {
-					_setAdRequest(!_isSpTab || !_bcPlayerState.firstPlay);
-
-					_player.catalog.load(videoData);
-
-					_setOnCuePoint(videoData);
-
-					if (_isSpTab === true && _bcPlayerState.firstPlay === true) {
-						_player.one('loadedmetadata', function() {
-							if (_player.ads.state != 'ad-playback') {
-								$playlistArea.removeClass('notAvailable');
-							}
-						});
-					} else {
-						_player.play();
-					}
-				});
-			}
-		});
-
-		// プレイリスト制御
-		if (_bcPlayerConfig.autoPlay === false) {
-			_player.one('loadedmetadata', function() {
-				if (_player.ads.state != 'ad-playback') {
-					$playlistArea.removeClass('notAvailable');
-				}
-			});
-		}
-		_player.on('ads-request', function() {
-			$playlistArea.addClass('notAvailable');
-		});
-		_player.on(['ads-ad-ended', 'adserror', 'adscanceled'], function(event) {
-			$playlistArea.removeClass('notAvailable');
-		});
-
-		// カレント表示
-		_player.on('loadstart', function() {
-			var currentVideoId = _player.mediainfo.id;
-			$playlistArea.find('.item').removeClass('current');
-			$playlistArea.find('a[data-video-id="' + currentVideoId + '"]').parent().addClass('current');
-		});
-
-		// 次の動画
-		if (_bcPlayerConfig.autoNext === true) {
-			_player.on('ended', function() {
-				var currentVideoId = _player.mediainfo.id;
-				var currentIndex = parseInt($playlistArea.find('a[data-video-id="' + currentVideoId + '"]').attr('data-playlist-index'));
-
-				if ($playlistArea.find('a[data-playlist-index="' + (currentIndex + 1) + '"]').length > 0) {
-					$playlistArea.find('a[data-playlist-index="' + (currentIndex + 1) + '"]').click();
-				} else {
-					$playlistArea.find('a[data-playlist-index="0"]').click();
-				}
-			});
-		}
-	}
-
-	function _setCompanionAds() {
-		if (!_player.ima3) {
-			return false
-		};
-
-		// VAST XML URLを設定
-		_setVastUrl();
-
-		// バナー設定
-		if ($('[data-companion-ad-img-width][data-companion-ad-img-height]').length > 0) {
-			_player.on('ads-load', function() {
-				var adsMangager = _player.ima3.adsManager;
-				adsMangager.addEventListener(google.ima.AdEvent.Type.STARTED, onAdEvent);
-
-				function onAdEvent(adEvent) {
-					switch (adEvent.type) {
-						case google.ima.AdEvent.Type.STARTED:
-							var ad = adEvent.getAd();
-							var selectionCriteria = new google.ima.CompanionAdSelectionSettings();
-							selectionCriteria.resourceType = google.ima.CompanionAdSelectionSettings.ResourceType.STATIC;
-							selectionCriteria.creativeType = google.ima.CompanionAdSelectionSettings.CreativeType.IMAGE;
-							selectionCriteria.sizeCriteria = google.ima.CompanionAdSelectionSettings.SizeCriteria.SELECT_EXACT_MATCH;
-
-							$('[data-companion-ad-img-width][data-companion-ad-img-height]').each(function() {
-								var width = $(this).attr('data-companion-ad-img-width');
-								var height = $(this).attr('data-companion-ad-img-height');
-
-								var companionAds = ad.getCompanionAds(width, height, selectionCriteria);
-								if (companionAds.length > 0) {
-									var companionAd = companionAds[0];
-
-									$(this).html(companionAd.getContent());
-								} else {
-									$(this).html('');
-								}
-							});
-					}
-				}
-			});
-		}
-	}
-
-	function _setVastUrl() {
-		var url = '';
-
-		var deviceType = _getDeviceType() === 'sp' ? 'sp' : 'pc';
-		var vastType = $('[data-vast-type]').attr('data-vast-type');
-
-		if (_vastUrlConfig.queries[deviceType] && _vastUrlConfig.queries[deviceType][vastType]) {
-			url = _vastUrlConfig.baseUrl + _vastUrlConfig.queries[deviceType][vastType];
-		}
-
-		_player.ima3.settings.serverUrl = url;
-
-		_player.ima3.adMacroReplacement = function(url) {
-			var _url = url;
-			if (_url) {
-				var parameters = {
-					'{YYYYMMDDHHMMSS}': _getNowDateTimeString()
-				};
-				for (var i in parameters) {
-					_url = _url.split(i).join(parameters[i]);
-				}
-			}
-			return _url;
-		}
-	}
-
-	function _getDeviceType() {
-		var deviceType = 'pc';
-		var ua = navigator.userAgent.toLowerCase();
-		if ((ua.indexOf('android') !== -1 && ua.indexOf('mobile') === -1) || ua.indexOf('ipad') !== -1) {
-			deviceType = 'tab';
-		} else if ((ua.indexOf('android') !== -1 && ua.indexOf('mobile') !== -1) || ua.indexOf('iphone') !== -1) {
-			deviceType = 'sp';
-		}
-		return deviceType;
-	}
-
-	function _getNowDateTimeString() {
-		var now = new Date();
-		var year = now.getFullYear();
-		var month = ('00' + (now.getMonth() + 1)).slice(-2);
-		var day = ('00' + now.getDate()).slice(-2);
-		var hour = ('00' + now.getHours()).slice(-2);
-		var minute = ('00' + now.getMinutes()).slice(-2);
-		var second = ('00' + now.getSeconds()).slice(-2);
-
-		return year + month + day + hour + minute + second;
-	}
-
-	function _hideVideoContent() {
-		$(".vjs-tech").hide();
-		$(".vjs-poster").hide();
-		$(".vjs-dock-text").hide();
-	}
-	function _showVideoContent() {
-		$(".vjs-tech").show();
-		$(".vjs-dock-text").show();
-	}
-
-	function _setAdRequest(isHide) {
-		if (isHide) {
-			_hideVideoContent();
-		}
-		
-		_bcPlayerState.muted = _player.muted();
-		_player.muted(true);
-
-		_player.off('play', _hideVideoContent);
-		_player.one('play', _hideVideoContent);
-
-		if (navigator.userAgent.toLowerCase().indexOf('iphone') !== -1) {
-			_player.off('ads-ad-started', _onAdStart_requestAd);
-			_player.one('ads-ad-started', _onAdStart_requestAd);
-			_player.off('play', _requestAd);
-			_player.one('play', _requestAd);
-		} else {
-			_player.off('playing', _requestAd);
-			_player.one('playing', _requestAd);
-		}
-	}
-	function _onAdStart_requestAd() {
-		$(".vjs-tech").show();
-	}
-	function _requestAd() {
-		if (_bcPlayerPlayCount == 0) {
-			_player.pause();
-			_player.muted(_bcPlayerState.muted);
-			_player.ima3.adrequest();
-
-			_player.one(["adend", "adserror"], function (event) {
-				_showVideoContent();
-				_player.play();
-			});
-		} else {
-			_player.muted(_bcPlayerState.muted);
-			_showVideoContent();
-		}
-
-		_bcPlayerPlayCount = (_bcPlayerPlayCount + 1) % _adConfig.frequency;
-	}
-
-	function _setVideoData(videoId) {
-		_getVideoData(videoId).done(function(video) {
-			_setAdRequest(_bcPlayerConfig.autoPlay);
-
-			_player.catalog.load(video);
-
-			_setOnCuePoint(video);
-		});
-	}
-
-	function _getVideoData(videoId) {
-		var dfd = $.Deferred();
-
-		_player.catalog.getVideo(videoId, function(error, video) {
-			if (error === null) dfd.resolve(video);
-			else dfd.reject(error);
-		});
-
-		return dfd.promise();
-	}
-
-	function _setOnCuePoint(video) {
-		$('[data-cuepoint]').html('');
-
-		if (video.cue_points) _cuePointList = video.cue_points;
-		else _cuePointList = null;
-
-		_player.off('timeupdate', _onCuePoint);
-		_player.one('firstplay', function() {
-			_player.on('timeupdate', _onCuePoint);
-		});
-	}
-
-	function _onCuePoint() {
-		var activeCues = _getActiveCues();
-
-		if (activeCues.length > 0 && activeCues[0] && activeCues[0].type == 'CODE') {
-			$('[data-cuepoint]').html(activeCues[0].metadata);
-		} else {
-			$('[data-cuepoint]').html('');
-		}
-	}
-
-	function _getActiveCues() {
-		var ct = _player.currentTime();
-		var active = [];
-		var cue;
-		for (var i = 0, l = _cuePointList.length; i < l; i++) {
-			cue = _cuePointList[i];
-
-			if (cue.startTime <= ct && cue.endTime >= ct) {
-				active.push(cue);
-			} else if (cue.startTime === cue.endTime &&
-				cue.startTime <= ct &&
-				cue.startTime + 0.5 >= ct) {
-				active.push(cue);
-			}
-		}
-
-		return active;
-	}
-
-	return {
-		init: init
-	};
+  var _player;
+
+  /* --------------------------------------------------
+    Config
+  -------------------------------------------------- */
+  var _bcConfig = {
+    jsBaseURL: '//players.brightcove.net/',
+    playbackApiBaseURL: 'https://edge.api.brightcove.com/playback/v1/accounts/',
+    getPlaylistLimitSize: 100,
+    accountId: '5289441680001',
+    policyKey: 'BCpkADawqM2t1x6444jcjVA_l_3dbRc3dlovdhKX9pmHaBrHJrDJcDCcmQNGxlpqx9U_2lfKvngjJJ9Yt8PNw6zeYwjT3t6kUzHFqo6Lip2zFXdDyAfL19bYPvqkg4y-z2jiput8gKwET_bZ'
+  };
+
+  // 公開時設定
+  var _bcPlayerConfig = {
+    id: 'bcPlayer',
+    playerId: 'rklFbYBVHb',
+    embed: 'default',
+    applicationId: '',
+    class: 'video-js',
+    playsinline: true,
+    controls: true,
+    autoPlay: true,
+    autoNext: true
+  }
+
+  var _bcPlayerState = {
+    firstPlay: true,
+    muted: false
+  }
+
+  // Primetimeあり
+  var _vastUrlConfig = {
+    baseUrl: 'https://ad.auditude.com/adserver/vast3?',
+    queries: {
+      pc: {
+        sportsbull: 'u=d39b0dbdbe70265ab7912a48d706bfbd&z=268135&tl=c:l,d:120,l:1,p:p&l={YYYYMMDDHHMMSS}'
+      },
+      sp: {
+        sportsbull: 'u=d39b0dbdbe70265ab7912a48d706bfbd&z=268133&tl=c:l,d:120,l:1,p:p&l={YYYYMMDDHHMMSS}'
+      }
+    }
+  }
+
+  var _isSpTab = false;
+
+  var _adConfig = {
+    frequency: 3
+  }
+  var _bcPlayerPlayCount = 0;
+
+  var _cuePointList;
+
+  document.write('<style type="text/css">.vjs-captions-button {display: none;}</style>');
+
+  /* --------------------------------------------------
+    Public Functions
+  -------------------------------------------------- */
+  function init() {
+    if ($('[data-auto-play]').length > 0 && $('[data-auto-play]').attr('data-auto-play') === 'false') {
+      _bcPlayerConfig.autoPlay = false;
+    }
+    if (_getDeviceType() !== 'pc') {
+      _isSpTab = true;
+      _bcPlayerConfig.autoPlay = false;
+    }
+    if ($('[data-auto-next]').length > 0 && $('[data-auto-next]').attr('data-auto-next') === 'false') {
+      _bcPlayerConfig.autoNext = false;
+    }
+
+
+    var $target;
+    if ($('[data-playlist-id]').length > 0) {
+      _bcPlayerConfig.playlistId = $('[data-playlist-id]').attr('data-playlist-id');
+      $target = $('[data-playlist-id]');
+    } else {
+      var uri = new URI();
+      var query = uri.search(true);
+      if ('vid' in query && query.vid) _bcPlayerConfig.videoId = query.vid;
+      else _bcPlayerConfig.videoId = $('[data-video-id]').attr('data-video-id');
+      $target = $('[data-video-id]');
+    }
+
+    var bcVideoTag = _createBcVideoTag();
+    $target.html(bcVideoTag);
+
+    var bcJsUrl = _createBcPlayerJsUrl();
+    $.getScript(bcJsUrl, _setVideoJsEvents);
+  }
+
+  /* --------------------------------------------------
+    Internal Functions
+  -------------------------------------------------- */
+  function _createBcPlayerJsUrl() {
+    var url = ''
+    url += _bcConfig.jsBaseURL;
+    url += _bcConfig.accountId + '/';
+    url += _bcPlayerConfig.playerId + '_' + _bcPlayerConfig.embed + '/';
+    url += 'index.min.js';
+    return url;
+  }
+
+  function _createBcVideoTag() {
+    var tag = ''
+    tag += '<div style="position: relative;">';
+    tag += '<div style="padding-top: 56.25%;">';
+    tag += '<video ';
+    tag += 'id="' + _bcPlayerConfig.id + '" ';
+    tag += 'data-account="' + _bcConfig.accountId + '" ';
+    tag += 'data-player="' + _bcPlayerConfig.playerId + '" ';
+    tag += 'data-embed="' + _bcPlayerConfig.embed + '" ';
+    tag += 'data-application-id="' + _bcPlayerConfig.applicationId + '" ';
+    tag += 'class="' + _bcPlayerConfig.class + '" ';
+    tag += 'style="width:100%;height:100%;position:absolute;top:0;bottom:0;right:0;left:0;" ';
+    if (_bcPlayerConfig.playsinline) {
+      tag += 'playsinline ';
+    }
+    if (_bcPlayerConfig.autoPlay) {
+      tag += 'autoplay ';
+    }
+    if (_bcPlayerConfig.controls) {
+      tag += 'controls ';
+    }
+    tag += '>';
+    tag += '</video>';
+    tag += '</div>';
+    tag += '</div>';
+    return tag;
+  }
+
+  function _setVideoJsEvents() {
+    videojs(_bcPlayerConfig.id).ready(function() {
+      _player = this;
+
+      // 広告
+      _setCompanionAds();
+
+      // プレイリスト
+      if ('playlistId' in _bcPlayerConfig) _setPlaylistData();
+      else _setVideoData(_bcPlayerConfig.videoId);
+
+      // 初回再生記録
+      _player.one('firstplay', function() {
+        _bcPlayerState.firstPlay = false;
+      });
+    });
+  }
+
+  function _setPlaylistData() {
+    var offset = 0;
+    var limit = _bcConfig.getPlaylistLimitSize;
+    _getPlaylistData(_bcPlayerConfig.playlistId, offset, limit).done(function(mediaData) {
+      $.each(mediaData.videos, function(i, val) {
+        mediaData.videos[i].duration = mediaData.videos[i].duration / 1000;
+      });
+
+      _getVideoData(mediaData.videos[0].id).done(function(video) {
+        _setAdRequest(_bcPlayerConfig.autoPlay);
+
+        _player.catalog.load(video);
+
+        _setOnCuePoint(video);
+
+        _writePlaylist(mediaData.videos);
+      })
+    });
+  }
+
+  function _getPlaylistData(playlistId, offset, limit) {
+    var dfd = $.Deferred();
+
+    var requestUrl = '';
+    requestUrl += _bcConfig.playbackApiBaseURL + _bcConfig.accountId + '/playlists/' + playlistId;
+    requestUrl += '?offset=' + offset;
+    requestUrl += '&limit=' + limit;
+
+    var ajaxParams = {
+      type: 'GET',
+      url: requestUrl,
+      dataType: 'json',
+      timeout: 60000,
+      cache: false,
+      headers: {
+        'Accept': 'application/json;pk=' + _bcConfig.policyKey
+      }
+    };
+
+    $.ajax(ajaxParams).done(function(mediaData) {
+      dfd.resolve(mediaData);
+    }).fail(function(xhr, status, error) {
+      console.error('ajax failed');
+      console.dir(xhr);
+
+      dfd.reject(xhr);
+    });
+
+    return dfd.promise();
+  }
+
+  function _writePlaylist(videos) {
+    var $playlistArea = $('[data-playlist-area]');
+    $playlistArea.addClass('notAvailable');
+
+    var listHtml = '';
+    $.each(videos, function(index, video) {
+      var thumbUrl = video.thumbnail;
+      thumbUrl = thumbUrl.replace(/^(http|https):/, '');
+
+      listHtml += '<div class="item">';
+      listHtml += '<a href="javascript:void(0);" data-playlist-index="' + index + '" data-video-id="' + video.id + '">';
+      listHtml += '<div class="imgBlock">';
+      listHtml += '<img class="thumb" src="' + thumbUrl + '">';
+      listHtml += '</div>';
+      listHtml += '<div class="textBlock">';
+      listHtml += '<span class="title">' + video.name + '</span>';
+      listHtml += '</div>';
+      listHtml += '</a>';
+      listHtml += '</div>';
+    });
+
+    $playlistArea.html(listHtml);
+
+    // クリックイベント
+    $playlistArea.find('a').on('click', function() {
+      if ($playlistArea.hasClass('notAvailable') === false && $(this).parent().hasClass('current') === false) {
+
+        var videoId = $(this).attr('data-video-id');
+        _player.catalog.getVideo(videoId, function(error, videoData) {
+          _setAdRequest(!_isSpTab || !_bcPlayerState.firstPlay);
+
+          _player.catalog.load(videoData);
+
+          _setOnCuePoint(videoData);
+
+          if (_isSpTab === true && _bcPlayerState.firstPlay === true) {
+            _player.one('loadedmetadata', function() {
+              if (_player.ads.state != 'ad-playback') {
+                $playlistArea.removeClass('notAvailable');
+              }
+            });
+          } else {
+            _player.play();
+          }
+        });
+      }
+    });
+
+    // プレイリスト制御
+    if (_bcPlayerConfig.autoPlay === false) {
+      _player.one('loadedmetadata', function() {
+        if (_player.ads.state != 'ad-playback') {
+          $playlistArea.removeClass('notAvailable');
+        }
+      });
+    }
+    _player.on('ads-request', function() {
+      $playlistArea.addClass('notAvailable');
+    });
+    _player.on(['ads-ad-ended', 'adserror', 'adscanceled'], function(event) {
+      $playlistArea.removeClass('notAvailable');
+    });
+
+    // カレント表示
+    _player.on('loadstart', function() {
+      var currentVideoId = _player.mediainfo.id;
+      $playlistArea.find('.item').removeClass('current');
+      $playlistArea.find('a[data-video-id="' + currentVideoId + '"]').parent().addClass('current');
+    });
+
+    // 次の動画
+    if (_bcPlayerConfig.autoNext === true) {
+      _player.on('ended', function() {
+        var currentVideoId = _player.mediainfo.id;
+        var currentIndex = parseInt($playlistArea.find('a[data-video-id="' + currentVideoId + '"]').attr('data-playlist-index'));
+
+        if ($playlistArea.find('a[data-playlist-index="' + (currentIndex + 1) + '"]').length > 0) {
+          $playlistArea.find('a[data-playlist-index="' + (currentIndex + 1) + '"]').click();
+        } else {
+          $playlistArea.find('a[data-playlist-index="0"]').click();
+        }
+      });
+    }
+  }
+
+  function _setCompanionAds() {
+    if (!_player.ima3) {
+      return false
+    };
+
+    // VAST XML URLを設定
+    _setVastUrl();
+
+    // バナー設定
+    if ($('[data-companion-ad-img-width][data-companion-ad-img-height]').length > 0) {
+      _player.on('ads-load', function() {
+        var adsMangager = _player.ima3.adsManager;
+        adsMangager.addEventListener(google.ima.AdEvent.Type.STARTED, onAdEvent);
+
+        function onAdEvent(adEvent) {
+          switch (adEvent.type) {
+            case google.ima.AdEvent.Type.STARTED:
+              var ad = adEvent.getAd();
+              var selectionCriteria = new google.ima.CompanionAdSelectionSettings();
+              selectionCriteria.resourceType = google.ima.CompanionAdSelectionSettings.ResourceType.STATIC;
+              selectionCriteria.creativeType = google.ima.CompanionAdSelectionSettings.CreativeType.IMAGE;
+              selectionCriteria.sizeCriteria = google.ima.CompanionAdSelectionSettings.SizeCriteria.SELECT_EXACT_MATCH;
+
+              $('[data-companion-ad-img-width][data-companion-ad-img-height]').each(function() {
+                var width = $(this).attr('data-companion-ad-img-width');
+                var height = $(this).attr('data-companion-ad-img-height');
+
+                var companionAds = ad.getCompanionAds(width, height, selectionCriteria);
+                if (companionAds.length > 0) {
+                  var companionAd = companionAds[0];
+
+                  $(this).html(companionAd.getContent());
+                } else {
+                  $(this).html('');
+                }
+              });
+          }
+        }
+      });
+    }
+  }
+
+  function _setVastUrl() {
+    var url = '';
+
+    var deviceType = _getDeviceType() === 'sp' ? 'sp' : 'pc';
+    var vastType = $('[data-vast-type]').attr('data-vast-type');
+
+    if (_vastUrlConfig.queries[deviceType] && _vastUrlConfig.queries[deviceType][vastType]) {
+      url = _vastUrlConfig.baseUrl + _vastUrlConfig.queries[deviceType][vastType];
+    }
+
+    _player.ima3.settings.serverUrl = url;
+
+    _player.ima3.adMacroReplacement = function(url) {
+      var _url = url;
+      if (_url) {
+        var parameters = {
+          '{YYYYMMDDHHMMSS}': _getNowDateTimeString()
+        };
+        for (var i in parameters) {
+          _url = _url.split(i).join(parameters[i]);
+        }
+      }
+      return _url;
+    }
+  }
+
+  function _getDeviceType() {
+    var deviceType = 'pc';
+    var ua = navigator.userAgent.toLowerCase();
+    if ((ua.indexOf('android') !== -1 && ua.indexOf('mobile') === -1) || ua.indexOf('ipad') !== -1) {
+      deviceType = 'tab';
+    } else if ((ua.indexOf('android') !== -1 && ua.indexOf('mobile') !== -1) || ua.indexOf('iphone') !== -1) {
+      deviceType = 'sp';
+    }
+    return deviceType;
+  }
+
+  function _getNowDateTimeString() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = ('00' + (now.getMonth() + 1)).slice(-2);
+    var day = ('00' + now.getDate()).slice(-2);
+    var hour = ('00' + now.getHours()).slice(-2);
+    var minute = ('00' + now.getMinutes()).slice(-2);
+    var second = ('00' + now.getSeconds()).slice(-2);
+
+    return year + month + day + hour + minute + second;
+  }
+
+  function _hideVideoContent() {
+    $(".vjs-tech").hide();
+    $(".vjs-poster").hide();
+    $(".vjs-dock-text").hide();
+  }
+  function _showVideoContent() {
+    $(".vjs-tech").show();
+    $(".vjs-dock-text").show();
+  }
+
+  function _setAdRequest(isHide) {
+    if (isHide) {
+      _hideVideoContent();
+    }
+
+    _bcPlayerState.muted = _player.muted();
+    _player.muted(true);
+
+    _player.off('play', _hideVideoContent);
+    _player.one('play', _hideVideoContent);
+
+    if (navigator.userAgent.toLowerCase().indexOf('iphone') !== -1) {
+      _player.off('ads-ad-started', _onAdStart_requestAd);
+      _player.one('ads-ad-started', _onAdStart_requestAd);
+      _player.off('play', _requestAd);
+      _player.one('play', _requestAd);
+    } else {
+      _player.off('playing', _requestAd);
+      _player.one('playing', _requestAd);
+    }
+  }
+  function _onAdStart_requestAd() {
+    $(".vjs-tech").show();
+  }
+  function _requestAd() {
+    if (_bcPlayerPlayCount == 0) {
+      _player.pause();
+      _player.muted(_bcPlayerState.muted);
+      _player.ima3.adrequest();
+
+      _player.one(["adend", "adserror"], function (event) {
+        _showVideoContent();
+        _player.play();
+      });
+    } else {
+      _player.muted(_bcPlayerState.muted);
+      _showVideoContent();
+    }
+
+    _bcPlayerPlayCount = (_bcPlayerPlayCount + 1) % _adConfig.frequency;
+  }
+
+  function _setVideoData(videoId) {
+    _getVideoData(videoId).done(function(video) {
+      _setAdRequest(_bcPlayerConfig.autoPlay);
+
+      _player.catalog.load(video);
+
+      _setOnCuePoint(video);
+    });
+  }
+
+  function _getVideoData(videoId) {
+    var dfd = $.Deferred();
+
+    _player.catalog.getVideo(videoId, function(error, video) {
+      if (error === null) dfd.resolve(video);
+      else dfd.reject(error);
+    });
+
+    return dfd.promise();
+  }
+
+  function _setOnCuePoint(video) {
+    $('[data-cuepoint]').html('');
+
+    if (video.cue_points) _cuePointList = video.cue_points;
+    else _cuePointList = null;
+
+    _player.off('timeupdate', _onCuePoint);
+    _player.one('firstplay', function() {
+      _player.on('timeupdate', _onCuePoint);
+    });
+  }
+
+  function _onCuePoint() {
+    var activeCues = _getActiveCues();
+
+    if (activeCues.length > 0 && activeCues[0] && activeCues[0].type == 'CODE') {
+      $('[data-cuepoint]').html(activeCues[0].metadata);
+    } else {
+      $('[data-cuepoint]').html('');
+    }
+  }
+
+  function _getActiveCues() {
+    var ct = _player.currentTime();
+    var active = [];
+    var cue;
+    for (var i = 0, l = _cuePointList.length; i < l; i++) {
+      cue = _cuePointList[i];
+
+      if (cue.startTime <= ct && cue.endTime >= ct) {
+        active.push(cue);
+      } else if (cue.startTime === cue.endTime &&
+        cue.startTime <= ct &&
+        cue.startTime + 0.5 >= ct) {
+        active.push(cue);
+      }
+    }
+
+    return active;
+  }
+
+  return {
+    init: init
+  };
 }());
 
 /* --------------------------------------------------
-	Document Ready
+  Document Ready
 -------------------------------------------------- */
 $(function() {
-	BCP.init();
+  BCP.init();
 });

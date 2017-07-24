@@ -11,8 +11,8 @@
     }
   }());
   </script>
-  <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true"></script>
-  <script src="/assets/js/app_divide.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <?php
   // app in webview 時に head内不要なタグを非表示にする
@@ -44,8 +44,8 @@
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
-  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/libs/vendor.react.js"></script>
+  <script src="/assets/js/bundle/main.bundle.js"></script>
 
   <?php
   endif;
@@ -110,37 +110,28 @@ echo <<<__EOL__
 __EOL__;
 ?>
 
-<?php
-// MLB calendar library CSS
-if ($page['prop_category'] == 'mlb') :
-?>
-  <link rel="stylesheet" href="/assets/mlb/css/react-big-calendar.css?v=<?php echo $page['version']; ?>">
-<?php
-endif;
-?>
 </head>
 <body>
 
+<?php
+/*
+# appvaoder
+- グノシー / ニュースパスからのアクセスならappvador実行しない
+*/
+?>
 <div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
 <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-<script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
+<script>
+;(function(){
+  if ( !(/gunosy|newspass/i.test(window.navigator.userAgent)) ) {
+    new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();
+  }
+})();
+</script>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
-<?php
-// @since 2017-07-16
-// .whole へ tennis|golf|mlb 追加する
-$whole_classes = array();
-$whole_classes[] = 'whole';
-$whole_classes[] = 'stats';
-// tennis|golf|mlb
-if (isset($page['prop_category'])) {
-  $whole_classes[] = $page['prop_category'];
-}
-// mlb: schedule|standing|leaders|playerlist|game
-if (isset($page['prop_identity'])) {
-  $whole_classes[] = $page['prop_identity'];
-}
-?>
-<div id="whole" class="<?php echo join( ' ', $whole_classes);?>">
+<?php /* // appvaoder */ ?>
+
+<div id="whole" class="whole stats">
 
   <?php
   // app in webview 時に .head-sec を非表示にする
@@ -283,11 +274,7 @@ if (isset($page['prop_identity'])) {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
-<?php
-// ----------------------------------------------------
-// tennis / golf が動的に CSS を読み込みしているのを override するために CSS を最下部でリンクする
-// ----------------------------------------------------
-?>
+
 <link rel="stylesheet" href="/assets/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
 <link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
