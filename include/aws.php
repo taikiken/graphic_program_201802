@@ -126,12 +126,12 @@ class S3Module {
 		
 		// 設定配列を作っています。S3オブジェクト生成用のオプションです。
 		$s3Setting = [
-
+/*
 			'credentials' => [
 				'key' => $keyId,
 				'secret' => $secretKey,
 			],
-
+*/
 			'region' => $region,
 			'version' => $sdkVersion,
 		];
