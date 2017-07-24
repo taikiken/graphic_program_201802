@@ -17,20 +17,20 @@ define('MAX_HEIGHT', 480);
 
 $maps = [
     'main' => [
-        'width' => MAX_WIDTH,
-        'height' => MAX_HEIGHT
+        'width' => 642,
+        'height' => 1000
     ],
     'thumb' => [
-        'width' => MAX_WIDTH,
-        'height' => MAX_HEIGHT
+        'width' => 159,
+        'height' => 159
     ],
     'sp_main' => [
-        'width' => MAX_WIDTH,
-        'height' => MAX_HEIGHT
+        'width' => 704,
+        'height' => 1000
     ],
     'sp_thumb' => [
-        'width' => MAX_WIDTH,
-        'height' => MAX_HEIGHT
+        'width' => 204,
+        'height' => 204
     ],
 ];
 $mes = '';

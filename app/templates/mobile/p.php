@@ -106,9 +106,9 @@
                   <div id="list-photoalbum">
                       <p class="lead"><?php echo $page['post']['description'];?></p>
                       <ul>
-                          <?php foreach($page['photo'] as $photo) :?>
+                          <?php foreach($page['photo'] as $id => $photo) :?>
                           <li>
-                              <a href="?id=<?php echo $photo['n']?>">
+                              <a href="?id=<?php echo $id?>">
                                   <img class="lazyload" data-src="<?php echo $photo['sp_thumb']?>"> </a>
                           </li>
                           <?php endforeach;?>
@@ -180,7 +180,7 @@
                                 elseif($_GET['id'] < 3):
                                     $start = 1;
                                 elseif((count($page['photo']) - $_GET['id']) < 2):
-                                    $start = count($page['photo']) - 5;
+                                    $start = count($page['photo']) - 4;
                                 endif;
                                 for($i = $start; $i < $start + 5; $i++):
                                     $current = '';
