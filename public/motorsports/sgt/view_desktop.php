@@ -142,7 +142,7 @@
         <div class="motorsports_stats">
 
           <section class="matches">
-            <h2 class="matches__heading mod-headingA">オートポリス</h2>
+            <h2 class="matches__heading mod-headingA">SUGO (GT500)</h2>
             <table class="matches__table mod-table">
               <thead>
                 <tr>
@@ -154,35 +154,35 @@
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>中嶋一貴／ジェームス・ロシター</td>
-                  <td>#36 au TOM'S LC500</td>
+                  <td>ヘイキ・コバライネン／平手晃平</td>
+                  <td>#1 DENSO KOBELCO SARD LC500</td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>塚越広大／小暮卓史</td>
-                  <td>#17 KEIHIN NSX-GT</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>山本尚貴／伊沢拓也</td>
-                  <td>#100 RAYBRIG NSX-GT</td>
-                </tr>
-                <tr>
-                  <td>4</td>
                   <td>本山哲／千代勝正</td>
                   <td>#46 S Road CRAFTSPORTS GT-R</td>
                 </tr>
                 <tr>
-                  <td>5</td>
+                  <td>3</td>
+                  <td>大嶋和也／アンドレア・カルダレッリ</td>
+                  <td>#6 WAKO'S 4CR LC500</td>
+                </tr>
+                <tr>
+                  <td>4</td>
                   <td>松田次生／ロニー・クインタレッリ</td>
                   <td>#23 MOTUL AUTECH GT-R</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>野尻智紀／小林崇志</td>
+                  <td>#8 ARTA NSX-GT</td>
                 </tr>
               </tbody>
             </table><!-- /.matches__table -->
           </section><!-- /.matches -->
 
           <section class="point_rank">
-            <h2 class="point_rank__heading mod-headingA">ポイントランキング</h2>
+            <h2 class="point_rank__heading mod-headingA">ポイントランキング (GT500)</h2>
 
             <nav class="point_rank__nav">
               <ul class="point_rank__nav__list" id="js-point_rank__nav__list">
@@ -203,33 +203,33 @@
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>平川亮／ニック・キャシディ</td>
-                  <td>#37 KeePer TOM'S LC500</td>
-                  <td>36</td>
+                  <td>大島和也／アンドレア・カルダレッリ</td>
+                  <td>#6 WAKO'S 4CR LC500</td>
+                  <td>41</td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>ジェームス・ロシター</td>
-                  <td>#36 au TOM'S LC500</td>
-                  <td>32</td>
+                  <td>平川亮／ニック・キャシディ</td>
+                  <td>#37 KeePer TOM'S LC500</td>
+                  <td>37</td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>立川祐路／石浦宏明</td>
-                  <td>#38 ZENT CERUMO LC500</td>
-                  <td>30</td>
+                  <td>ジェームス・ロシター</td>
+                  <td>#36 au TOM'S LC500</td>
+                  <td>36</td>
                 </tr>
                 <tr>
                   <td>4</td>
-                  <td>大島和也／アンドレア・カルダレッリ</td>
-                  <td>#6 WAKO'S 4CR LC500</td>
-                  <td>30</td>
+                  <td>ヘイキ・コバライネン／平手晃平</td>
+                  <td>#1 DENSO KOBELCO SARD LC500</td>
+                  <td>35</td>
                 </tr>
                 <tr>
                   <td>5</td>
-                  <td>中嶋一貴</td>
-                  <td>#36 au TOM'S LC500</td>
-                  <td>26</td>
+                  <td>立川祐路／石浦宏明</td>
+                  <td>#38 ZENT CERUMO LC500</td>
+                  <td>30</td>
                 </tr>
               </tbody>
             </table><!-- /.point_rank__table -->
@@ -245,28 +245,28 @@
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>#37 KeePer TOM'S LC500</td>
-                  <td>45</td>
+                  <td>#6 LEXUS TEAM LEMANS WAKO'S</td>
+                  <td>50</td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>#36 au TOM'S LC500</td>
-                  <td>41</td>
+                  <td>#37 LEXUS TEAM KeePer TOM'S</td>
+                  <td>47</td>
                 </tr>
                 <tr>
-                  <td>3</td>
-                  <td>#38 ZENT CERUMO LC500</td>
-                  <td>38</td>
+                  <td>2</td>
+                  <td>#36 LEXUS TEAM au TOM'S</td>
+                  <td>47</td>
                 </tr>
                 <tr>
                   <td>4</td>
-                  <td>#6 WAKO'S 4CR LC500</td>
-                  <td>37</td>
+                  <td>#1 LEXUS TEAM SARD</td>
+                  <td>45</td>
                 </tr>
                 <tr>
                   <td>5</td>
-                  <td>#23 MOTUL AUTECH GT-R</td>
-                  <td>27</td>
+                  <td>#38 LEXUS TEAM ZENT CERUMO</td>
+                  <td>39</td>
                 </tr>
               </tbody>
             </table><!-- /.point_rank__table -->
@@ -465,38 +465,38 @@
                     <tr>
                       <td>公式練習（GT500）</td>
                       <td>7月22日（土）</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td>09:00 ~</td>
+                      <td>大嶋和也／アンドレア・カルダレッリ（#6 WAKO'S 4CR LC500）</td>
                     </tr>
                     <tr>
                       <td>公式練習（GT300）</td>
                       <td>7月22日（土）</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td>09:00 ~</td>
+                      <td>飯田章／吉本大樹（#60 SYNTIUM Lmcorsa RC F GT3）</td>
                     </tr>
                     <tr>
                       <td>予選（GT500）</td>
                       <td>7月22日（土）</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td>14:30 ~</td>
+                      <td>野尻智紀／小林崇志（#8 ARTA NSX-GT）</td>
                     </tr>
                     <tr>
                       <td>予選（GT300）</td>
                       <td>7月22日（土）</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td>14:10 ~</td>
+                      <td>松井孝允／山下健太（#25 VivaC 86 MC）</td>
                     </tr>
                     <tr>
                       <td>決勝（GT500）</td>
                       <td>7月23日（日）</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td>14:30 ~</td>
+                      <td>ヘイキ・コバライネン／平手晃平（#1 DENSO KOBELCO SARD LC500）</td>
                     </tr>
                     <tr>
                       <td>決勝（GT300）</td>
                       <td>7月23日（日）</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td>14:30 ~</td>
+                      <td>平中克幸／ビヨン・ビルドハイム（#11 GAINER TANAX AMG GT3）</td>
                     </tr>
                   </tbody>
                 </table><!-- /.race_info__table -->
