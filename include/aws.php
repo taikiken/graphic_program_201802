@@ -15,11 +15,11 @@ use Guzzle\Http\EntityBody;
 
 class S3Module {
 	
-	private $bucket = "dev-img-sportsbull-jp";
+	private $bucket = "";
 	// AWSのキー名
-	private $keyId = "AKIAJQ3WTOVR2PKCYZ4A";
+	private $keyId = "";
 	// シークレットキー
-	private $secretKey = "l7PMVg3y2OnJRrkOEsQZebzcZ003KYIWswamJIT0";
+	private $secretKey = "";
 	// region 東京region指定
 	private $region = 'ap-northeast-1';
 

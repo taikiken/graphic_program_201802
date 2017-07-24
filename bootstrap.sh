@@ -15,7 +15,6 @@ sudo apt-get -y upgrade
 sudo apt-get install -y apache2
 sudo apt-get install -y php5
 sudo apt-get install -y php5-curl
-sudo apt-get install -y php5-gd
 
 # postgres
 sudo apt-get install -y postgresql postgresql-contrib php5-pgsql

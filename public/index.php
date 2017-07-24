@@ -31,10 +31,6 @@ if ( $_SERVER['SERVER_PORT'] == '8080' ) :
 elseif ( $_SERVER['SERVER_PORT'] == '8888' ) :
   define('UT_ENV', 'LOCAL_DB');
 
-
-elseif ( $_SERVER['SERVER_PORT'] == '18080' ) :
-    define('UT_ENV', 'DEVELOP');
-
 else :
 
   switch( $_SERVER['SERVER_NAME'] ) :
