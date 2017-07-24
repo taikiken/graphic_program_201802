@@ -15,7 +15,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // dae/schedule
-import DaeSchedule, { DaeJapanese, DaeJapanesePlayer } from '../../dae/schedule/DaeSchedule';
+import DaeSchedule, { DaeJapanese, DaeJapanesePlayer, DaeGame } from '../../dae/schedule/DaeSchedule';
 import DaeBatting from '../../dae/player/DaeBatting';
 import DaePitching from '../../dae/player/DaePitching';
 
@@ -51,36 +51,40 @@ ComPitching.propTypes = {
   player: PropTypes.instanceOf(DaePitching).isRequired,
 };
 
-const ComJaPlayer = ({ player }) => {
-  const batting = player.type === 'batting';
-  const ComType = batting ? ComBatting : ComPitching;
-  const comStats = batting ? player.batting : player.pitching;
+const ComPlayer = ({ player }) => {
+  console.log('ComJaPlayer player', player);
+  // const batting = player.type === 'batting';
+  // const ComType = batting ? ComBatting : ComPitching;
+  // const comStats = batting ? player.batting : player.pitching;
+  // return (
+  //   <div className="mlb_jp_stats">
+  //     <div className="mlb__today_jp__player">
+  //       <h3 className="mlb__today_jp__player__name">{player.player}</h3>
+  //       <dl className="mlb__today_jp__player__profile">
+  //         <dt className="mlb__today_jp__player__profile">{player.team}</dt>
+  //         <dd className="mlb__today_jp__player__profile__uniform_num">
+  //           背番号<span>{player.number}</span>
+  //         </dd>
+  //       </dl>
+  //     </div>
+  //     {/* 成績 */}
+  //     <div className="mlb__today_jp__record__container">
+  //       <table className="mlb__today_jp__record">
+  //         <tbody>
+  //           <ComType
+  //             player={comStats}
+  //           />
+  //         </tbody>
+  //       </table>
+  //     </div>
+  //   </div>
+  // );
   return (
-    <div className="mlb_jp_stats">
-      <div className="mlb__today_jp__player">
-        <h3 className="mlb__today_jp__player__name">{player.player}</h3>
-        <dl className="mlb__today_jp__player__profile">
-          <dt className="mlb__today_jp__player__profile">{player.team}</dt>
-          <dd className="mlb__today_jp__player__profile__uniform_num">
-            背番号<span>{player.number}</span>
-          </dd>
-        </dl>
-      </div>
-      {/* 成績 */}
-      <div className="mlb__today_jp__record__container">
-        <table className="mlb__today_jp__record">
-          <tbody>
-            <ComType
-              player={comStats}
-            />
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <p className="xxx">abc</p>
   );
 };
 
-ComJaPlayer.propTypes = {
+ComPlayer.propTypes = {
   player: PropTypes.instanceOf(DaeJapanesePlayer).isRequired,
 };
 
@@ -88,14 +92,34 @@ const ComGame = ({ game }) => {
   if (!game.players.has()) {
     return null;
   }
-  return (
-    game.players.list.map(player => (
-      <ComJaPlayer
+  console.log('ComGame game', game);
+  const elements = game.players.list.map((player) => {
+    console.log('ComGame player', player);
+    return (
+      <ComPlayer
         key={player.id}
         player={player}
       />
-    ))
-  );
+    );
+  });
+  console.log('ComGame elements', elements);
+  return elements;
+  // return null;
+  // return (
+  //   game.players.list.map((player) => {
+  //     console.log('ComGame player', player);
+  //     return (
+  //       <ComPlayer
+  //         key={player.id}
+  //         player={player}
+  //       />
+  //     );
+  //   })
+  // );
+};
+
+ComGame.propTypes = {
+  game: PropTypes.instanceOf(DaeGame).isRequired,
 };
 
 
@@ -120,7 +144,11 @@ const ComJapanese = ({ japanese, date }) => {
 
 ComJapanese.propTypes = {
   japanese: PropTypes.instanceOf(DaeJapanese).isRequired,
-  date: PropTypes.instanceOf(Date).isRequired,
+  date: PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default class ComScheduleMam extends Component {

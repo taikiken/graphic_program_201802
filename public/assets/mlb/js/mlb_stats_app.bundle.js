@@ -9180,11 +9180,13 @@ var Day = function () {
     key: 'today',
     value: function today() {
       var current = Day.current();
-      return {
-        year: current.getFullYear(),
-        month: current.getMonth() + 1,
-        day: current.getDate()
-      };
+      // return {
+      //   year: current.getFullYear(),
+      //   month: current.getMonth() + 1,
+      //   day: current.getDate(),
+      //   date: current,
+      // };
+      return Day.date(current);
     }
     /**
      * 今年の年を取得します
@@ -9229,7 +9231,18 @@ var Day = function () {
     value: function title() {
       var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Day.current();
 
-      return date.getMonth() + 1 + '\u6708' + date.getDate() + '\u65E5\uFF08' + Day.day(date.getDay()) + '\uFF09';
+      return date.month + '\u6708' + date.day + '\u65E5\uFF08' + date.week + '\uFF09';
+    }
+  }, {
+    key: 'date',
+    value: function date(_date) {
+      return {
+        date: _date,
+        year: _date.getFullYear(),
+        month: _date.getMonth() + 1,
+        day: _date.getDate(),
+        week: Day.day(_date.getDay())
+      };
     }
   }]);
 
@@ -9328,7 +9341,7 @@ var Normalize = function () {
   }, {
     key: 'obj',
     value: function obj(object) {
-      return (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' ? object : Object.create({});
+      return object && (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' ? object : Object.create({});
     }
   }]);
 
@@ -22926,6 +22939,7 @@ function DaeBatting(info) {
   _classCallCheck(this, DaeBatting);
 
   var origin = _Normalize2.default.obj(info);
+  console.log('DaeBatting', origin);
   /**
    * original JSON
    * @type {Object}
@@ -36917,7 +36931,7 @@ exports.default = Creator;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-22 17:18:57
+ * 2017-7-24 23:02:43
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -67194,62 +67208,44 @@ ComPitching.propTypes = {
   player: _propTypes2.default.instanceOf(_DaePitching2.default).isRequired
 };
 
-var ComJaPlayer = function ComJaPlayer(_ref3) {
+var ComPlayer = function ComPlayer(_ref3) {
   var player = _ref3.player;
 
-  var batting = player.type === 'batting';
-  var ComType = batting ? ComBatting : ComPitching;
-  var comStats = batting ? player.batting : player.pitching;
+  console.log('ComJaPlayer player', player);
+  // const batting = player.type === 'batting';
+  // const ComType = batting ? ComBatting : ComPitching;
+  // const comStats = batting ? player.batting : player.pitching;
+  // return (
+  //   <div className="mlb_jp_stats">
+  //     <div className="mlb__today_jp__player">
+  //       <h3 className="mlb__today_jp__player__name">{player.player}</h3>
+  //       <dl className="mlb__today_jp__player__profile">
+  //         <dt className="mlb__today_jp__player__profile">{player.team}</dt>
+  //         <dd className="mlb__today_jp__player__profile__uniform_num">
+  //           背番号<span>{player.number}</span>
+  //         </dd>
+  //       </dl>
+  //     </div>
+  //     {/* 成績 */}
+  //     <div className="mlb__today_jp__record__container">
+  //       <table className="mlb__today_jp__record">
+  //         <tbody>
+  //           <ComType
+  //             player={comStats}
+  //           />
+  //         </tbody>
+  //       </table>
+  //     </div>
+  //   </div>
+  // );
   return _react2.default.createElement(
-    'div',
-    { className: 'mlb_jp_stats' },
-    _react2.default.createElement(
-      'div',
-      { className: 'mlb__today_jp__player' },
-      _react2.default.createElement(
-        'h3',
-        { className: 'mlb__today_jp__player__name' },
-        player.player
-      ),
-      _react2.default.createElement(
-        'dl',
-        { className: 'mlb__today_jp__player__profile' },
-        _react2.default.createElement(
-          'dt',
-          { className: 'mlb__today_jp__player__profile' },
-          player.team
-        ),
-        _react2.default.createElement(
-          'dd',
-          { className: 'mlb__today_jp__player__profile__uniform_num' },
-          '\u80CC\u756A\u53F7',
-          _react2.default.createElement(
-            'span',
-            null,
-            player.number
-          )
-        )
-      )
-    ),
-    _react2.default.createElement(
-      'div',
-      { className: 'mlb__today_jp__record__container' },
-      _react2.default.createElement(
-        'table',
-        { className: 'mlb__today_jp__record' },
-        _react2.default.createElement(
-          'tbody',
-          null,
-          _react2.default.createElement(ComType, {
-            player: comStats
-          })
-        )
-      )
-    )
+    'p',
+    { className: 'xxx' },
+    'abc'
   );
 };
 
-ComJaPlayer.propTypes = {
+ComPlayer.propTypes = {
   player: _propTypes2.default.instanceOf(_DaeSchedule.DaeJapanesePlayer).isRequired
 };
 
@@ -67259,12 +67255,32 @@ var ComGame = function ComGame(_ref4) {
   if (!game.players.has()) {
     return null;
   }
-  return game.players.list.map(function (player) {
-    return _react2.default.createElement(ComJaPlayer, {
+  console.log('ComGame game', game);
+  var elements = game.players.list.map(function (player) {
+    console.log('ComGame player', player);
+    return _react2.default.createElement(ComPlayer, {
       key: player.id,
       player: player
     });
   });
+  console.log('ComGame elements', elements);
+  return elements;
+  // return null;
+  // return (
+  //   game.players.list.map((player) => {
+  //     console.log('ComGame player', player);
+  //     return (
+  //       <ComPlayer
+  //         key={player.id}
+  //         player={player}
+  //       />
+  //     );
+  //   })
+  // );
+};
+
+ComGame.propTypes = {
+  game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired
 };
 
 var ComJapanese = function ComJapanese(_ref5) {
@@ -67294,7 +67310,11 @@ var ComJapanese = function ComJapanese(_ref5) {
 
 ComJapanese.propTypes = {
   japanese: _propTypes2.default.instanceOf(_DaeSchedule.DaeJapanese).isRequired,
-  date: _propTypes2.default.instanceOf(Date).isRequired
+  date: _propTypes2.default.shape({
+    year: _propTypes2.default.number.isRequired,
+    month: _propTypes2.default.number.isRequired,
+    day: _propTypes2.default.number.isRequired
+  }).isRequired
 };
 
 var ComScheduleMam = function (_Component) {

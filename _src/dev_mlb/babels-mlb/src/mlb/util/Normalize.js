@@ -48,6 +48,6 @@ export default class Normalize {
    * @returns {Object} 不正値の時は空 object clone を返します
    */
   static obj(object) {
-    return typeof object === 'object' ? object : Object.create({});
+    return object && typeof object === 'object' ? object : Object.create({});
   }
 }

@@ -31,11 +31,13 @@ export default class Day {
    */
   static today() {
     const current = Day.current();
-    return {
-      year: current.getFullYear(),
-      month: current.getMonth() + 1,
-      day: current.getDate(),
-    };
+    // return {
+    //   year: current.getFullYear(),
+    //   month: current.getMonth() + 1,
+    //   day: current.getDate(),
+    //   date: current,
+    // };
+    return Day.date(current);
   }
   /**
    * 今年の年を取得します
@@ -63,6 +65,15 @@ export default class Day {
     return Day.weeks[index];
   }
   static title(date = Day.current()) {
-    return `${date.getMonth() + 1}月${date.getDate()}日（${Day.day(date.getDay())}）`;
+    return `${date.month}月${date.day}日（${date.week}）`;
+  }
+  static date(date) {
+    return {
+      date,
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate(),
+      week: Day.day(date.getDay()),
+    };
   }
 }
