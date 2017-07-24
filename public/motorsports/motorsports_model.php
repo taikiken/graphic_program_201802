@@ -115,9 +115,23 @@ $headline_json = file_get_contents($headline_path);
 $headline_json = mb_convert_encoding($headline_json, 'UTF8', 'UTF-8,ASCII,JIS,EUC-JP,SJIS-WIN');
 $headline_data = json_decode($headline_json);
 
+// 日程結果・ランキング
+// @see https://github.com/undotsushin/undotsushin/issues/1916 - モータースポーツ / Phase2 : 日程結果・ランキング / データ連携 #1916
+// @since 2017-07-20
+// =============
+$s3_host = $app_host_name == 'https://dev.sportsbull.jp/' || $app_host_name == 'https://dev.sportsbull.jp' ? 'https://dev-img.sportsbull.jp' : 'https://img.sportsbull.jp';
+$schedule_path = $s3_host . '/static/motorsports/' . $option_directory . '.json';
+//var_dump($app_host_name);
+//var_dump($schedule_path);
+
+$schedule_json = file_get_contents($schedule_path);
+$schedule_json = mb_convert_encoding($schedule_json, 'UTF8', 'UTF-8,ASCII,JIS,EUC-JP,SJIS-WIN');
+$schedule_data = json_decode($schedule_json);
+
 $page = $model->set(array(
   'pickup'    => $pickup_data,
   'headline'  => $headline_data,
+  'schedule'  => $schedule_data,
 ));
 
 // app webview かを `?app=(ios|android)` から判定します
@@ -173,4 +187,4 @@ endif;
 
 // 確認用dumpデータ - テンプレ組み込みおわったら削除
 // =======================================================================
-//print_r($page);
+//print_r($schedule_path);
