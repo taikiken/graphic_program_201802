@@ -58,7 +58,7 @@
 
              <div style="width: 728px; margin: 0 auto;">     
 <!--  インターハイ トップ　パーツ ---------------------------------------------------------->
-<?php include __DIR__."./inc.php"; ?>
+<?php include __DIR__."/inc.php"; ?>
                         <section class="section_interhigh_highlight">
                             <div class="ttl-wrapper">
                                 <h2 class="ttl highlight"><i></i>動画特集</h2>

@@ -19,7 +19,13 @@
     <body>
                        
         <!--  インターハイ トップ　パーツ ---------------------------------------------------------->
-<?php include __DIR__."./inc.php"; ?>
+<?php
+
+include __DIR__."/inc.php";
+
+var_dump(__DIR__);
+
+?>
         <section class="section_interhigh_highlight">
             <div class="ttl-wrapper">
                 <h2 class="ttl highlight"><i></i>動画特集</h2>
