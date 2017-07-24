@@ -17,7 +17,7 @@ endif;
 
 // user.id : 26 - バーチャル広告野球
 if ( $page['post']['user']['id'] == '26' ) :
-  include_once __DIR__.'/_vk_brightcove_2017.php';
+  include_once __DIR__.'/_vk_brightcove_2017-07.php';
 endif;
 
 ?>
