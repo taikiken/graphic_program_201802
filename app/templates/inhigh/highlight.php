@@ -345,7 +345,7 @@ for($i=0;$i<count($v);$i++){
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-        <script src="/assets/js/global.bundle.js"></script>
+        <script src="/assets/js/inhigh.bundle.js"></script>
         <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
     </body>
 </html>
