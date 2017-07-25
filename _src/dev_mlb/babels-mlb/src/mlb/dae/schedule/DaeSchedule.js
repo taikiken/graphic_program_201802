@@ -17,6 +17,9 @@ import Normalize from '../../util/Normalize';
 import DaePitching from '../player/DaePitching';
 import DaeBatting from '../player/DaeBatting';
 
+// define
+import Status from '../../define/Status';
+
 /**
  * game 毎の日本人選手情報
  */
@@ -126,6 +129,7 @@ class DaeGameTeam {
      * @type {string}
      */
     this.team = Normalize.str(origin.team_name);
+    this.win = false;
   }
 }
 
@@ -141,6 +145,7 @@ export class DaeGame {
     const origin = Normalize.obj(game);
     const home = Normalize.obj(origin.home);
     const visitor = Normalize.obj(origin.visitor);
+    const status = Normalize.int(origin.status_id);
     // ----
     /**
      * original JSON
@@ -156,12 +161,12 @@ export class DaeGame {
      * 球場名
      * @type {string}
      */
-    this.studium = Normalize.str(origin.studium);
+    this.stadium = Normalize.str(origin.stadium);
     /**
      * ゲーム status {@link Status}
      * @type {number}
      */
-    this.status = Normalize.int(origin.status_id);
+    this.status = status;
     /**
      * ホームチーム
      * @type {DaeGameTeam}
@@ -177,6 +182,16 @@ export class DaeGame {
      * @type {DaeJapanesePlayers}
      */
     this.players = new DaeJapanesePlayers(origin.player);
+    // game status label
+    this.label = Normalize.str(Status.state(status));
+    // ゲーム勝敗をscoreから - 4: 試合終了 のみ
+    if (status === 4) {
+      if (home.score > visitor.score) {
+        home.win = true;
+      } else {
+        visitor.win = true;
+      }
+    }
   }
 }
 
