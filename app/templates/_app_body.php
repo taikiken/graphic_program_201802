@@ -25,8 +25,8 @@
                           <ul>
                               <?php foreach($page['photo'] as $id => $photo) :?>
                                   <li>
-                                      <a href="?id=<?php echo $id?>">
-                                          <img class="lazyload" data-src="<?php echo $photo['sp_thumb']?>"> </a>
+                                      <a href="<?php echo $page['og_url']?>?id=<?php echo $id?>" onclick="ga('send', 'event', 'provider_link', 'click', '<?php echo $page['og_url']?>?id=<?php echo $id?>', 0, {nonInteraction: true});">
+                                          <img data-src="<?php echo $photo['sp_thumb']?>" src="<?php echo $photo['sp_thumb']?>"> </a>
                                   </li>
                               <?php endforeach;?>
                           </ul>
@@ -108,7 +108,7 @@
 
                                   <li <?php echo $current?>>
                                       <a href="?id=<?php echo $i?>">
-                                          <img class="lazyload" data-src="<?php echo $page['photo'][$i]['thumb']?>"> </a>
+                                          <img data-src="<?php echo $page['photo'][$i]['sp_thumb']?>" src="<?php echo $page['photo'][$i]['sp_thumb']?>"> </a>
                                   </li>
                                   <?php
                               endfor;
