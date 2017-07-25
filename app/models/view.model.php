@@ -177,7 +177,6 @@ class ViewModel {
   }
 
 
-
   /**
   * site - サイトURLを取得する
   *
@@ -364,6 +363,10 @@ class ViewModel {
 
     return $post;
 
+  }
+
+  public function get_photo($id) {
+      return $this->db->get_photo($id);
   }
 
 
