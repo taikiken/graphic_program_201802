@@ -19,7 +19,13 @@
     <body>
                        
         <!--  インターハイ トップ　パーツ ---------------------------------------------------------->
-                       
+<?php
+
+include __DIR__."/inc.php";
+
+var_dump(__DIR__);
+
+?>
         <section class="section_interhigh_highlight">
             <div class="ttl-wrapper">
                 <h2 class="ttl highlight"><i></i>動画特集</h2>
@@ -29,25 +35,7 @@
                 <article class="highlight_article">
 
                     <ul class="thumb_area">
-                        <li><a href="">
-                            <div class="img"><img src="/assets/images/inhigh/thumb_01.png" alt=""></div>
-                            <div class="txt_area"><p>7/31 長文テキスト7/31 長文テキスト7/31 長文テキスト7/31</p></div>
-                            </a></li>
-
-                        <li><a href="">
-                            <div class="img"><img src="/assets/images/inhigh/thumb_02.png" alt=""></div>
-                            <div class="txt_area"><p>7/31 バスケットボール</p></div>
-                            </a></li>
-
-                        <li><a href="">
-                            <div class="img"><img src="/assets/images/inhigh/thumb_03.png" alt=""></div>
-                            <div class="txt_area"><p>7/31 ハイライト総集編</p></div>
-                            </a></li>
-
-                        <li><a href="">
-                            <div class="img"><img src="/assets/images/inhigh/thumb_04.png" alt=""></div>
-                            <div class="txt_area"><p>7/31 ハイライト</p></div>
-                            </a></li>
+<?php echo $movie; ?>
                     </ul>
                 </article>
             </div>
@@ -63,14 +51,7 @@
             
             <div id="js-current-post" class="current-post photo_gallery">
                 <ul class="photo_list">
-                    <li><a href="">
-                        <div class="img"><img src="/assets/images/inhigh/thumb_01.png" alt=""></div>
-                        <p class="txt">長文テキスト長文テキスト長文テキスト長文テキスト</p>
-                        </a></li>
-                    <li><a href="">
-                        <div class="img"><img src="/assets/images/inhigh/photo_03.jpg" alt=""></div>
-                        <p class="txt">2017.07.28</p>
-                        </a></li>
+<?php echo $photo; ?>
                 </ul>
             </div>
             <p class="section_btn"><a href="/inhigh/photo/"><i></i>すべてのフォトギャラリーを見る</a></p>
