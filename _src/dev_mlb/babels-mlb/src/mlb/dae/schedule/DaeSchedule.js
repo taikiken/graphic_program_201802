@@ -183,7 +183,8 @@ export class DaeGame {
      */
     this.players = new DaeJapanesePlayers(origin.player);
     // game status label
-    this.label = Normalize.str(Status.state(status));
+    this.label = Normalize.str(Status.label(status));
+    this.className = Normalize.str(Status.className(status));
     // ゲーム勝敗をscoreから - 4: 試合終了 のみ
     if (status === 4) {
       if (home.score > visitor.score) {

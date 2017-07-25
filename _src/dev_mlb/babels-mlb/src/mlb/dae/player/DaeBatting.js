@@ -23,7 +23,7 @@ export default class DaeBatting {
    */
   constructor(info) {
     const origin = Normalize.obj(info);
-    console.log('DaeBatting', origin);
+    // console.log('DaeBatting', origin);
     /**
      * original JSON
      * @type {Object}

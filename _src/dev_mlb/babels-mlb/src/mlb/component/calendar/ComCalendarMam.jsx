@@ -153,7 +153,7 @@ export default class ComCalendarMam extends Component {
    * @returns {?ComCalendar} data が存在する時に{@link ComCalendar} を返します
    */
   render() {
-    console.log('ComCalendarMam.render ============', this.props);
+    // console.log('ComCalendarMam.render ============', this.props);
     const data = this.props.data;
     if (!data) {
       return null;

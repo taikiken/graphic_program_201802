@@ -10,8 +10,6 @@
  *
  */
 
-import Normalize from '../util/Normalize';
-
 /**
  * game status 定数
  */
@@ -21,21 +19,30 @@ export default class Status {
    * @type {{1: string, 2: string, 4: string, 5: string, 6: string, 9: string, 10: string, 23: string}}
    */
   static games = {
-    1: '試合前 ',
-    2: '試合中 ',
-    4: '試合終了 ',
-    5: '延期 ',
-    6: 'サスペンド ',
-    9: 'キャンセル  ',
-    10: '没収  ',
+    1: '試合前',
+    2: '試合中',
+    4: '試合終了',
+    5: '延期',
+    6: 'サスペンド',
+    9: 'キャンセル',
+    10: '没収',
     23: '遅延/中断',
+  };
+  static classes = {
+    1: 'mlb__game__overview__info__status--before',
+    2: 'mlb__game__overview__info__status--live',
+    4: 'mlb__game__overview__info__status--end',
+    9: 'mlb__game__overview__info__status--cancel',
   };
   /**
    * status 名称を取得します
    * @param {number} id status ID
    * @returns {string} status 日本語名称 を返します
    */
-  static state(id) {
-    return Normalize.str(Status.games[id]);
+  static label(id) {
+    return Status.games[id];
+  }
+  static className(id) {
+    return Status.classes[id];
   }
 }

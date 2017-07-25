@@ -35,6 +35,17 @@ Creator.calendar = (year, today) => (store.dispatch(actions.calendar(year, today
 Creator.schedule = date => (store.dispatch(actions.schedule(date)));
 
 export default class View {
+  // static calendar() {
+  //   const heads = document.getElementsByTagName('head');
+  //   if (!heads || heads.length) {
+  //     return;
+  //   }
+  //   const head = heads[0];
+  //   const link = document.createElement('link');
+  //   link.rel = 'stylesheet';
+  //   link.href = '/assets/mlb/css/react-big-calendar.css';
+  //   head.appendChild(link);
+  // }
   static index(element, year = null, today = null) {
     // console.log('ConSchedule', ConSchedule);
     ReactDOM.render(
@@ -49,7 +60,7 @@ export default class View {
       element,
     );
     // -----
-    // Creator.calendar(year, today);
+    Creator.calendar(year, today);
     // Creator.calendar(year, new Date(2017, 8, 15));
     Creator.schedule();
     console.log('ViewIndex.make', year, today);

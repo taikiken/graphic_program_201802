@@ -4840,7 +4840,7 @@ module.exports = invariant;
 "use strict";
 
 
-module.exports = __webpack_require__(63);
+module.exports = __webpack_require__(62);
 
 
 /***/ }),
@@ -5579,7 +5579,7 @@ var _propTypes = __webpack_require__(6);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _invariant = __webpack_require__(67);
+var _invariant = __webpack_require__(66);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -5684,7 +5684,7 @@ module.exports = function(it, key){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
-var toInteger = __webpack_require__(56)
+var toInteger = __webpack_require__(55)
   , min       = Math.min;
 module.exports = function(it){
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
@@ -5708,7 +5708,7 @@ module.exports = function(it){
 
 
 
-var _prodInvariant = __webpack_require__(64);
+var _prodInvariant = __webpack_require__(63);
 
 var ReactCurrentOwner = __webpack_require__(32);
 
@@ -6460,7 +6460,7 @@ var _prodInvariant = __webpack_require__(7),
 var CallbackQueue = __webpack_require__(229);
 var PooledClass = __webpack_require__(49);
 var ReactFeatureFlags = __webpack_require__(230);
-var ReactReconciler = __webpack_require__(65);
+var ReactReconciler = __webpack_require__(64);
 var Transaction = __webpack_require__(105);
 
 var invariant = __webpack_require__(3);
@@ -6741,20 +6741,20 @@ module.exports = function(fn, that, length){
 "use strict";
 
 if(__webpack_require__(24)){
-  var LIBRARY             = __webpack_require__(53)
+  var LIBRARY             = __webpack_require__(52)
     , global              = __webpack_require__(8)
     , fails               = __webpack_require__(16)
     , $export             = __webpack_require__(2)
     , $typed              = __webpack_require__(125)
     , $buffer             = __webpack_require__(197)
     , ctx                 = __webpack_require__(35)
-    , anInstance          = __webpack_require__(55)
+    , anInstance          = __webpack_require__(54)
     , propertyDesc        = __webpack_require__(39)
     , hide                = __webpack_require__(27)
-    , redefineAll         = __webpack_require__(54)
-    , toInteger           = __webpack_require__(56)
+    , redefineAll         = __webpack_require__(53)
+    , toInteger           = __webpack_require__(55)
     , toLength            = __webpack_require__(20)
-    , toIndex             = __webpack_require__(58)
+    , toIndex             = __webpack_require__(57)
     , toPrimitive         = __webpack_require__(76)
     , has                 = __webpack_require__(19)
     , same                = __webpack_require__(199)
@@ -6772,7 +6772,7 @@ if(__webpack_require__(24)){
     , createArrayIncludes = __webpack_require__(127)
     , speciesConstructor  = __webpack_require__(132)
     , ArrayIterators      = __webpack_require__(136)
-    , Iterators           = __webpack_require__(60)
+    , Iterators           = __webpack_require__(59)
     , $iterDetect         = __webpack_require__(96)
     , setSpecies          = __webpack_require__(95)
     , arrayFill           = __webpack_require__(131)
@@ -8338,104 +8338,6 @@ module.exports = PooledClass;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/07/18 - 12:17
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-var _Type = __webpack_require__(672);
-
-var _Type2 = _interopRequireDefault(_Type);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * JSON data value を正規化します
- */
-var Normalize = function () {
-  function Normalize() {
-    _classCallCheck(this, Normalize);
-  }
-
-  _createClass(Normalize, null, [{
-    key: 'int',
-
-    /**
-     * 整数値 正規化します
-     * @param {number} num 処理対象
-     * @param {number} [alt=-1] 代替数値
-     * @returns {number} 正規化数値を返します
-     */
-    value: function int(num) {
-      var alt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
-
-      return _Type2.default.int(num) ? num : alt;
-    }
-    /**
-     * 文字正規化します
-     * @param {string} txt 処理対象
-     * @param {string} [alt=''] 代替文字列
-     * @returns {string} 正規化文字列を返します
-     */
-
-  }, {
-    key: 'str',
-    value: function str(txt) {
-      var alt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-      return txt || alt;
-    }
-    /**
-     * 配列 正規化します
-     * @param {Array} array 処理対象
-     * @returns {Array.<*>} 不正値の時は配列複製を返します
-     */
-
-  }, {
-    key: 'arr',
-    value: function arr(array) {
-      return Array.isArray(array) ? array : [].slice(0);
-    }
-    /**
-     * object 正規化します
-     * @param {object} object 処理対象
-     * @returns {Object} 不正値の時は空 object clone を返します
-     */
-
-  }, {
-    key: 'obj',
-    value: function obj(object) {
-      return object && (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' ? object : Object.create({});
-    }
-  }]);
-
-  return Normalize;
-}();
-
-exports.default = Normalize;
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 exports.__esModule = true;
 exports.endOfRange = endOfRange;
 exports.eventSegments = eventSegments;
@@ -8558,7 +8460,7 @@ function sortEvents(evtA, evtB, _ref3) {
 }
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsNative = __webpack_require__(744),
@@ -8581,13 +8483,13 @@ module.exports = getNative;
 
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports) {
 
 module.exports = false;
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var redefine = __webpack_require__(40);
@@ -8597,7 +8499,7 @@ module.exports = function(target, src, safe){
 };
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, exports) {
 
 module.exports = function(it, Constructor, name, forbiddenField){
@@ -8607,7 +8509,7 @@ module.exports = function(it, Constructor, name, forbiddenField){
 };
 
 /***/ }),
-/* 56 */
+/* 55 */
 /***/ (function(module, exports) {
 
 // 7.1.4 ToInteger
@@ -8618,7 +8520,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 57 */
+/* 56 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -8628,10 +8530,10 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 58 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(56)
+var toInteger = __webpack_require__(55)
   , max       = Math.max
   , min       = Math.min;
 module.exports = function(index, length){
@@ -8640,7 +8542,7 @@ module.exports = function(index, length){
 };
 
 /***/ }),
-/* 59 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var def = __webpack_require__(17).f
@@ -8652,13 +8554,13 @@ module.exports = function(it, tag, stat){
 };
 
 /***/ }),
-/* 60 */
+/* 59 */
 /***/ (function(module, exports) {
 
 module.exports = {};
 
 /***/ }),
-/* 61 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
@@ -8670,7 +8572,7 @@ module.exports = Object.keys || function keys(O){
 };
 
 /***/ }),
-/* 62 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.3.31 Array.prototype[@@unscopables]
@@ -8682,7 +8584,7 @@ module.exports = function(key){
 };
 
 /***/ }),
-/* 63 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8820,7 +8722,7 @@ module.exports = React;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 64 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8864,7 +8766,7 @@ function reactProdInvariant(code) {
 module.exports = reactProdInvariant;
 
 /***/ }),
-/* 65 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9036,7 +8938,7 @@ module.exports = ReactReconciler;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 66 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9159,7 +9061,7 @@ DOMLazyTree.queueText = queueText;
 module.exports = DOMLazyTree;
 
 /***/ }),
-/* 67 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9218,7 +9120,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 68 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9349,6 +9251,104 @@ var Day = function () {
 
 Day.weeks = ['日', '月', '火', '水', '木', '金', '土'];
 exports.default = Day;
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/07/18 - 12:17
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _Type = __webpack_require__(672);
+
+var _Type2 = _interopRequireDefault(_Type);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * JSON data value を正規化します
+ */
+var Normalize = function () {
+  function Normalize() {
+    _classCallCheck(this, Normalize);
+  }
+
+  _createClass(Normalize, null, [{
+    key: 'int',
+
+    /**
+     * 整数値 正規化します
+     * @param {number} num 処理対象
+     * @param {number} [alt=-1] 代替数値
+     * @returns {number} 正規化数値を返します
+     */
+    value: function int(num) {
+      var alt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+
+      return _Type2.default.int(num) ? num : alt;
+    }
+    /**
+     * 文字正規化します
+     * @param {string} txt 処理対象
+     * @param {string} [alt=''] 代替文字列
+     * @returns {string} 正規化文字列を返します
+     */
+
+  }, {
+    key: 'str',
+    value: function str(txt) {
+      var alt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+      return txt || alt;
+    }
+    /**
+     * 配列 正規化します
+     * @param {Array} array 処理対象
+     * @returns {Array.<*>} 不正値の時は配列複製を返します
+     */
+
+  }, {
+    key: 'arr',
+    value: function arr(array) {
+      return Array.isArray(array) ? array : [].slice(0);
+    }
+    /**
+     * object 正規化します
+     * @param {object} object 処理対象
+     * @returns {Object} 不正値の時は空 object clone を返します
+     */
+
+  }, {
+    key: 'obj',
+    value: function obj(object) {
+      return object && (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' ? object : Object.create({});
+    }
+  }]);
+
+  return Normalize;
+}();
+
+exports.default = Normalize;
 
 /***/ }),
 /* 69 */
@@ -10674,14 +10674,14 @@ exports.RETURN = RETURN;
 var global            = __webpack_require__(8)
   , $export           = __webpack_require__(2)
   , redefine          = __webpack_require__(40)
-  , redefineAll       = __webpack_require__(54)
+  , redefineAll       = __webpack_require__(53)
   , meta              = __webpack_require__(82)
   , forOf             = __webpack_require__(97)
-  , anInstance        = __webpack_require__(55)
+  , anInstance        = __webpack_require__(54)
   , isObject          = __webpack_require__(12)
   , fails             = __webpack_require__(16)
   , $iterDetect       = __webpack_require__(96)
-  , setToStringTag    = __webpack_require__(59)
+  , setToStringTag    = __webpack_require__(58)
   , inheritIfRequired = __webpack_require__(451);
 
 module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
@@ -12299,7 +12299,7 @@ exports.set = set;
 exports.result = result;
 exports.default = messages;
 
-var _invariant = __webpack_require__(67);
+var _invariant = __webpack_require__(66);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -12414,7 +12414,7 @@ module.exports = assocIndexOf;
 /* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(52);
+var getNative = __webpack_require__(51);
 
 /* Built-in method references that are verified to be native. */
 var nativeCreate = getNative(Object, 'create');
@@ -12578,7 +12578,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(57);
+var cof = __webpack_require__(56);
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
@@ -12591,7 +12591,7 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 // true  -> Array#includes
 var toIObject = __webpack_require__(31)
   , toLength  = __webpack_require__(20)
-  , toIndex   = __webpack_require__(58);
+  , toIndex   = __webpack_require__(57);
 module.exports = function(IS_INCLUDES){
   return function($this, el, fromIndex){
     var O      = toIObject($this)
@@ -12647,7 +12647,7 @@ module.exports = (
 // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
 
 var toObject = __webpack_require__(47)
-  , toIndex  = __webpack_require__(58)
+  , toIndex  = __webpack_require__(57)
   , toLength = __webpack_require__(20);
 module.exports = function fill(value /*, start = 0, end = @length */){
   var O      = toObject(this)
@@ -12678,7 +12678,7 @@ module.exports = function(O, D){
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__(57)
+var cof = __webpack_require__(56)
   , TAG = __webpack_require__(13)('toStringTag')
   // ES3 wrong here
   , ARG = cof(function(){ return arguments; }()) == 'Arguments';
@@ -12706,7 +12706,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // check on default Array iterator
-var Iterators  = __webpack_require__(60)
+var Iterators  = __webpack_require__(59)
   , ITERATOR   = __webpack_require__(13)('iterator')
   , ArrayProto = Array.prototype;
 
@@ -12720,7 +12720,7 @@ module.exports = function(it){
 
 var classof   = __webpack_require__(133)
   , ITERATOR  = __webpack_require__(13)('iterator')
-  , Iterators = __webpack_require__(60);
+  , Iterators = __webpack_require__(59);
 module.exports = __webpack_require__(75).getIteratorMethod = function(it){
   if(it != undefined)return it[ITERATOR]
     || it['@@iterator']
@@ -12733,9 +12733,9 @@ module.exports = __webpack_require__(75).getIteratorMethod = function(it){
 
 "use strict";
 
-var addToUnscopables = __webpack_require__(62)
+var addToUnscopables = __webpack_require__(61)
   , step             = __webpack_require__(202)
-  , Iterators        = __webpack_require__(60)
+  , Iterators        = __webpack_require__(59)
   , toIObject        = __webpack_require__(31);
 
 // 22.1.3.4 Array.prototype.entries()
@@ -12840,7 +12840,7 @@ if(!setTask || !clearTask){
     delete queue[id];
   };
   // Node.js 0.8-
-  if(__webpack_require__(57)(process) == 'process'){
+  if(__webpack_require__(56)(process) == 'process'){
     defer = function(id){
       process.nextTick(ctx(run, id, 1));
     };
@@ -13521,7 +13521,7 @@ module.exports = getEventModifierState;
 
 
 
-var DOMLazyTree = __webpack_require__(66);
+var DOMLazyTree = __webpack_require__(65);
 var Danger = __webpack_require__(571);
 var ReactDOMComponentTree = __webpack_require__(11);
 var ReactInstrumentation = __webpack_require__(26);
@@ -13820,7 +13820,7 @@ var _prodInvariant = __webpack_require__(7);
 var ReactPropTypesSecret = __webpack_require__(238);
 var propTypesFactory = __webpack_require__(223);
 
-var React = __webpack_require__(63);
+var React = __webpack_require__(62);
 var PropTypes = propTypesFactory(React.isValidElement);
 
 var invariant = __webpack_require__(3);
@@ -15015,7 +15015,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Normalize = __webpack_require__(50);
+var _Normalize = __webpack_require__(68);
 
 var _Normalize2 = _interopRequireDefault(_Normalize);
 
@@ -15023,7 +15023,7 @@ var _ModCalendar = __webpack_require__(673);
 
 var _ModCalendar2 = _interopRequireDefault(_ModCalendar);
 
-var _Day = __webpack_require__(68);
+var _Day = __webpack_require__(67);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -15208,7 +15208,7 @@ exports.DaeJapanese = exports.DaeGame = exports.DaeJapanesePlayers = exports.Dae
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Normalize = __webpack_require__(50);
+var _Normalize = __webpack_require__(68);
 
 var _Normalize2 = _interopRequireDefault(_Normalize);
 
@@ -15430,7 +15430,8 @@ exports.DaeGame = function DaeGame(game) {
    */
   this.players = new DaeJapanesePlayers(origin.player);
   // game status label
-  this.label = _Normalize2.default.str(_Status2.default.state(status));
+  this.label = _Normalize2.default.str(_Status2.default.label(status));
+  this.className = _Normalize2.default.str(_Status2.default.className(status));
   // ゲーム勝敗をscoreから - 4: 試合終了 のみ
   if (status === 4) {
     if (home.score > visitor.score) {
@@ -16023,7 +16024,7 @@ var _helpers = __webpack_require__(88);
 
 var _accessors = __webpack_require__(72);
 
-var _eventLevels = __webpack_require__(51);
+var _eventLevels = __webpack_require__(50);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16566,7 +16567,7 @@ module.exports = Stack;
 /* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(52),
+var getNative = __webpack_require__(51),
     root = __webpack_require__(34);
 
 /* Built-in method references that are verified to be native. */
@@ -17058,18 +17059,18 @@ module.exports = !__webpack_require__(24) && !__webpack_require__(16)(function()
 
 var global         = __webpack_require__(8)
   , DESCRIPTORS    = __webpack_require__(24)
-  , LIBRARY        = __webpack_require__(53)
+  , LIBRARY        = __webpack_require__(52)
   , $typed         = __webpack_require__(125)
   , hide           = __webpack_require__(27)
-  , redefineAll    = __webpack_require__(54)
+  , redefineAll    = __webpack_require__(53)
   , fails          = __webpack_require__(16)
-  , anInstance     = __webpack_require__(55)
-  , toInteger      = __webpack_require__(56)
+  , anInstance     = __webpack_require__(54)
+  , toInteger      = __webpack_require__(55)
   , toLength       = __webpack_require__(20)
   , gOPN           = __webpack_require__(77).f
   , dP             = __webpack_require__(17).f
   , arrayFill      = __webpack_require__(131)
-  , setToStringTag = __webpack_require__(59)
+  , setToStringTag = __webpack_require__(58)
   , ARRAY_BUFFER   = 'ArrayBuffer'
   , DATA_VIEW      = 'DataView'
   , PROTOTYPE      = 'prototype'
@@ -17371,7 +17372,7 @@ module.exports = __webpack_require__(8).document && document.documentElement;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
-var cof = __webpack_require__(57);
+var cof = __webpack_require__(56);
 module.exports = Array.isArray || function isArray(arg){
   return cof(arg) == 'Array';
 };
@@ -17390,14 +17391,14 @@ module.exports = function(done, value){
 
 "use strict";
 
-var LIBRARY        = __webpack_require__(53)
+var LIBRARY        = __webpack_require__(52)
   , $export        = __webpack_require__(2)
   , redefine       = __webpack_require__(40)
   , hide           = __webpack_require__(27)
   , has            = __webpack_require__(19)
-  , Iterators      = __webpack_require__(60)
+  , Iterators      = __webpack_require__(59)
   , $iterCreate    = __webpack_require__(441)
-  , setToStringTag = __webpack_require__(59)
+  , setToStringTag = __webpack_require__(58)
   , getPrototypeOf = __webpack_require__(79)
   , ITERATOR       = __webpack_require__(13)('iterator')
   , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
@@ -17468,7 +17469,7 @@ module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED
 // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
 
 var toObject = __webpack_require__(47)
-  , toIndex  = __webpack_require__(58)
+  , toIndex  = __webpack_require__(57)
   , toLength = __webpack_require__(20);
 
 module.exports = [].copyWithin || function copyWithin(target/*= 0*/, start/*= 0, end = @length*/){
@@ -17500,9 +17501,9 @@ module.exports = [].copyWithin || function copyWithin(target/*= 0*/, start/*= 0,
 
 var dP          = __webpack_require__(17).f
   , create      = __webpack_require__(78)
-  , redefineAll = __webpack_require__(54)
+  , redefineAll = __webpack_require__(53)
   , ctx         = __webpack_require__(35)
-  , anInstance  = __webpack_require__(55)
+  , anInstance  = __webpack_require__(54)
   , defined     = __webpack_require__(41)
   , forOf       = __webpack_require__(97)
   , $iterDefine = __webpack_require__(203)
@@ -17664,7 +17665,7 @@ module.exports = function(iterator, fn, value, entries){
 "use strict";
 
 // 19.1.2.1 Object.assign(target, source, ...)
-var getKeys  = __webpack_require__(61)
+var getKeys  = __webpack_require__(60)
   , gOPS     = __webpack_require__(99)
   , pIE      = __webpack_require__(81)
   , toObject = __webpack_require__(47)
@@ -17702,11 +17703,11 @@ module.exports = !$assign || __webpack_require__(16)(function(){
 
 "use strict";
 
-var redefineAll       = __webpack_require__(54)
+var redefineAll       = __webpack_require__(53)
   , getWeak           = __webpack_require__(82).getWeak
   , anObject          = __webpack_require__(9)
   , isObject          = __webpack_require__(12)
-  , anInstance        = __webpack_require__(55)
+  , anInstance        = __webpack_require__(54)
   , forOf             = __webpack_require__(97)
   , createArrayMethod = __webpack_require__(80)
   , $has              = __webpack_require__(19)
@@ -17812,7 +17813,7 @@ exports.f = __webpack_require__(13);
 
 "use strict";
 
-var toInteger = __webpack_require__(56)
+var toInteger = __webpack_require__(55)
   , defined   = __webpack_require__(41);
 
 module.exports = function repeat(count){
@@ -17830,7 +17831,7 @@ module.exports = function repeat(count){
 
 // 7.2.8 IsRegExp(argument)
 var isObject = __webpack_require__(12)
-  , cof      = __webpack_require__(57)
+  , cof      = __webpack_require__(56)
   , MATCH    = __webpack_require__(13)('match');
 module.exports = function(it){
   var isRegExp;
@@ -17861,7 +17862,7 @@ module.exports = Math.log1p || function log1p(x){
 /* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getKeys   = __webpack_require__(61)
+var getKeys   = __webpack_require__(60)
   , toIObject = __webpack_require__(31)
   , isEnum    = __webpack_require__(81).f;
 module.exports = function(isEntries){
@@ -18010,7 +18011,7 @@ var View = function () {
         )
       ), element);
       // -----
-      // Creator.calendar(year, today);
+      _Creator2.default.calendar(year, today);
       // Creator.calendar(year, new Date(2017, 8, 15));
       _Creator2.default.schedule();
       console.log('ViewIndex.make', year, today);
@@ -18039,7 +18040,7 @@ exports.default = View;
 
 
 
-var _prodInvariant = __webpack_require__(64),
+var _prodInvariant = __webpack_require__(63),
     _assign = __webpack_require__(10);
 
 var ReactNoopUpdateQueue = __webpack_require__(219);
@@ -20551,7 +20552,7 @@ module.exports = instantiateReactComponent;
 
 var _prodInvariant = __webpack_require__(7);
 
-var React = __webpack_require__(63);
+var React = __webpack_require__(62);
 
 var invariant = __webpack_require__(3);
 
@@ -21149,9 +21150,9 @@ module.exports = getActiveElement;
 
 var _prodInvariant = __webpack_require__(7);
 
-var DOMLazyTree = __webpack_require__(66);
+var DOMLazyTree = __webpack_require__(65);
 var DOMProperty = __webpack_require__(43);
-var React = __webpack_require__(63);
+var React = __webpack_require__(62);
 var ReactBrowserEventEmitter = __webpack_require__(109);
 var ReactCurrentOwner = __webpack_require__(32);
 var ReactDOMComponentTree = __webpack_require__(11);
@@ -21161,7 +21162,7 @@ var ReactFeatureFlags = __webpack_require__(230);
 var ReactInstanceMap = __webpack_require__(86);
 var ReactInstrumentation = __webpack_require__(26);
 var ReactMarkupChecksum = __webpack_require__(629);
-var ReactReconciler = __webpack_require__(65);
+var ReactReconciler = __webpack_require__(64);
 var ReactUpdateQueue = __webpack_require__(159);
 var ReactUpdates = __webpack_require__(33);
 
@@ -21741,7 +21742,7 @@ var storeShape = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics__ = __webpack_require__(639);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -22822,7 +22823,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Normalize = __webpack_require__(50);
+var _Normalize = __webpack_require__(68);
 
 var _Normalize2 = _interopRequireDefault(_Normalize);
 
@@ -22925,7 +22926,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Normalize = __webpack_require__(50);
+var _Normalize = __webpack_require__(68);
 
 var _Normalize2 = _interopRequireDefault(_Normalize);
 
@@ -23867,7 +23868,7 @@ var _dates2 = _interopRequireDefault(_dates);
 
 var _propTypes3 = __webpack_require__(23);
 
-var _eventLevels2 = __webpack_require__(51);
+var _eventLevels2 = __webpack_require__(50);
 
 var _BackgroundCells = __webpack_require__(709);
 
@@ -24514,7 +24515,7 @@ var _height2 = _interopRequireDefault(_height);
 
 var _propTypes3 = __webpack_require__(23);
 
-var _eventLevels = __webpack_require__(51);
+var _eventLevels = __webpack_require__(50);
 
 var _selection = __webpack_require__(114);
 
@@ -24958,7 +24959,7 @@ module.exports = exports["default"];
 exports.__esModule = true;
 exports.default = moveDate;
 
-var _invariant = __webpack_require__(67);
+var _invariant = __webpack_require__(66);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -25151,7 +25152,7 @@ module.exports = assignValue;
 /* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(52);
+var getNative = __webpack_require__(51);
 
 var defineProperty = (function() {
   try {
@@ -36950,7 +36951,7 @@ exports.default = Creator;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-25 14:59:53
+ * 2017-7-25 15:40:15
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -38145,7 +38146,7 @@ var $export      = __webpack_require__(2)
   , $typed       = __webpack_require__(125)
   , buffer       = __webpack_require__(197)
   , anObject     = __webpack_require__(9)
-  , toIndex      = __webpack_require__(58)
+  , toIndex      = __webpack_require__(57)
   , toLength     = __webpack_require__(20)
   , isObject     = __webpack_require__(12)
   , ArrayBuffer  = __webpack_require__(8).ArrayBuffer
@@ -38203,7 +38204,7 @@ __webpack_require__(36)('Int8', 1, function(init){
 
 var dP       = __webpack_require__(17)
   , anObject = __webpack_require__(9)
-  , getKeys  = __webpack_require__(61);
+  , getKeys  = __webpack_require__(60);
 
 module.exports = __webpack_require__(24) ? Object.defineProperties : function defineProperties(O, Properties){
   anObject(O);
@@ -38255,7 +38256,7 @@ module.exports = function(original){
 
 var create         = __webpack_require__(78)
   , descriptor     = __webpack_require__(39)
-  , setToStringTag = __webpack_require__(59)
+  , setToStringTag = __webpack_require__(58)
   , IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
@@ -38803,14 +38804,14 @@ if(setProto)$export($export.S, 'Reflect', {
 
 "use strict";
 
-var LIBRARY            = __webpack_require__(53)
+var LIBRARY            = __webpack_require__(52)
   , global             = __webpack_require__(8)
   , ctx                = __webpack_require__(35)
   , classof            = __webpack_require__(133)
   , $export            = __webpack_require__(2)
   , isObject           = __webpack_require__(12)
   , aFunction          = __webpack_require__(46)
-  , anInstance         = __webpack_require__(55)
+  , anInstance         = __webpack_require__(54)
   , forOf              = __webpack_require__(97)
   , speciesConstructor = __webpack_require__(132)
   , task               = __webpack_require__(138).set
@@ -39006,7 +39007,7 @@ if(!USE_NATIVE){
     this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
     this._n = false;          // <- notify
   };
-  Internal.prototype = __webpack_require__(54)($Promise.prototype, {
+  Internal.prototype = __webpack_require__(53)($Promise.prototype, {
     // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
     then: function then(onFulfilled, onRejected){
       var reaction    = newPromiseCapability(speciesConstructor(this, $Promise));
@@ -39032,7 +39033,7 @@ if(!USE_NATIVE){
 }
 
 $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: $Promise});
-__webpack_require__(59)($Promise, PROMISE);
+__webpack_require__(58)($Promise, PROMISE);
 __webpack_require__(95)(PROMISE);
 Wrapper = __webpack_require__(75)[PROMISE];
 
@@ -39111,7 +39112,7 @@ var global    = __webpack_require__(8)
   , Observer  = global.MutationObserver || global.WebKitMutationObserver
   , process   = global.process
   , Promise   = global.Promise
-  , isNode    = __webpack_require__(57)(process) == 'process';
+  , isNode    = __webpack_require__(56)(process) == 'process';
 
 module.exports = function(){
   var head, last, notify;
@@ -39190,7 +39191,7 @@ var global         = __webpack_require__(8)
   , META           = __webpack_require__(82).KEY
   , $fails         = __webpack_require__(16)
   , shared         = __webpack_require__(129)
-  , setToStringTag = __webpack_require__(59)
+  , setToStringTag = __webpack_require__(58)
   , uid            = __webpack_require__(45)
   , wks            = __webpack_require__(13)
   , wksExt         = __webpack_require__(210)
@@ -39206,7 +39207,7 @@ var global         = __webpack_require__(8)
   , gOPNExt        = __webpack_require__(475)
   , $GOPD          = __webpack_require__(42)
   , $DP            = __webpack_require__(17)
-  , $keys          = __webpack_require__(61)
+  , $keys          = __webpack_require__(60)
   , gOPD           = $GOPD.f
   , dP             = $DP.f
   , gOPN           = gOPNExt.f
@@ -39333,7 +39334,7 @@ if(!USE_NATIVE){
   __webpack_require__(81).f  = $propertyIsEnumerable;
   __webpack_require__(99).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(53)){
+  if(DESCRIPTORS && !__webpack_require__(52)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -39422,7 +39423,7 @@ setToStringTag(global.JSON, 'JSON', true);
 
 var global         = __webpack_require__(8)
   , core           = __webpack_require__(75)
-  , LIBRARY        = __webpack_require__(53)
+  , LIBRARY        = __webpack_require__(52)
   , wksExt         = __webpack_require__(210)
   , defineProperty = __webpack_require__(17).f;
 module.exports = function(name){
@@ -39434,7 +39435,7 @@ module.exports = function(name){
 /* 473 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getKeys   = __webpack_require__(61)
+var getKeys   = __webpack_require__(60)
   , toIObject = __webpack_require__(31);
 module.exports = function(object, el){
   var O      = toIObject(object)
@@ -39450,7 +39451,7 @@ module.exports = function(object, el){
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
-var getKeys = __webpack_require__(61)
+var getKeys = __webpack_require__(60)
   , gOPS    = __webpack_require__(99)
   , pIE     = __webpack_require__(81);
 module.exports = function(it){
@@ -39573,7 +39574,7 @@ $export($export.S, 'String', {
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export        = __webpack_require__(2)
-  , toIndex        = __webpack_require__(58)
+  , toIndex        = __webpack_require__(57)
   , fromCharCode   = String.fromCharCode
   , $fromCodePoint = String.fromCodePoint;
 
@@ -39615,7 +39616,7 @@ $export($export.P, 'String', {
 /* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(56)
+var toInteger = __webpack_require__(55)
   , defined   = __webpack_require__(41);
 // true  -> String#at
 // false -> String#codePointAt
@@ -39941,7 +39942,7 @@ var $export = __webpack_require__(2);
 
 $export($export.P, 'Array', {copyWithin: __webpack_require__(204)});
 
-__webpack_require__(62)('copyWithin');
+__webpack_require__(61)('copyWithin');
 
 /***/ }),
 /* 497 */
@@ -39961,7 +39962,7 @@ $export($export.P + $export.F * forced, 'Array', {
     return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
   }
 });
-__webpack_require__(62)(KEY);
+__webpack_require__(61)(KEY);
 
 /***/ }),
 /* 498 */
@@ -39981,7 +39982,7 @@ $export($export.P + $export.F * forced, 'Array', {
     return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
   }
 });
-__webpack_require__(62)(KEY);
+__webpack_require__(61)(KEY);
 
 /***/ }),
 /* 499 */
@@ -39992,7 +39993,7 @@ var $export = __webpack_require__(2);
 
 $export($export.P, 'Array', {fill: __webpack_require__(131)});
 
-__webpack_require__(62)('fill');
+__webpack_require__(61)('fill');
 
 /***/ }),
 /* 500 */
@@ -40369,7 +40370,7 @@ $export($export.P, 'Array', {
   }
 });
 
-__webpack_require__(62)('includes');
+__webpack_require__(61)('includes');
 
 /***/ }),
 /* 525 */
@@ -40534,7 +40535,7 @@ var $iterators    = __webpack_require__(136)
   , redefine      = __webpack_require__(40)
   , global        = __webpack_require__(8)
   , hide          = __webpack_require__(27)
-  , Iterators     = __webpack_require__(60)
+  , Iterators     = __webpack_require__(59)
   , wks           = __webpack_require__(13)
   , ITERATOR      = wks('iterator')
   , TO_STRING_TAG = wks('toStringTag')
@@ -41749,7 +41750,7 @@ module.exports = ReactChildren;
 
 
 
-var _prodInvariant = __webpack_require__(64);
+var _prodInvariant = __webpack_require__(63);
 
 var invariant = __webpack_require__(3);
 
@@ -41866,7 +41867,7 @@ module.exports = PooledClass;
 
 
 
-var _prodInvariant = __webpack_require__(64);
+var _prodInvariant = __webpack_require__(63);
 
 var ReactCurrentOwner = __webpack_require__(32);
 var REACT_ELEMENT_TYPE = __webpack_require__(220);
@@ -42287,7 +42288,7 @@ module.exports = ReactDOMFactories;
 
 
 
-var _prodInvariant = __webpack_require__(64);
+var _prodInvariant = __webpack_require__(63);
 
 var ReactPropTypeLocationNames = __webpack_require__(544);
 var ReactPropTypesSecret = __webpack_require__(545);
@@ -43452,7 +43453,7 @@ module.exports = factory;
  */
 
 
-var _prodInvariant = __webpack_require__(64);
+var _prodInvariant = __webpack_require__(63);
 
 var ReactElement = __webpack_require__(48);
 
@@ -43502,7 +43503,7 @@ module.exports = onlyChild;
 var ReactDOMComponentTree = __webpack_require__(11);
 var ReactDefaultInjection = __webpack_require__(553);
 var ReactMount = __webpack_require__(248);
-var ReactReconciler = __webpack_require__(65);
+var ReactReconciler = __webpack_require__(64);
 var ReactUpdates = __webpack_require__(33);
 var ReactVersion = __webpack_require__(631);
 
@@ -45792,7 +45793,7 @@ module.exports = ReactComponentBrowserEnvironment;
 
 var _prodInvariant = __webpack_require__(7);
 
-var DOMLazyTree = __webpack_require__(66);
+var DOMLazyTree = __webpack_require__(65);
 var ExecutionEnvironment = __webpack_require__(14);
 
 var createNodesFromMarkup = __webpack_require__(572);
@@ -46211,7 +46212,7 @@ var _prodInvariant = __webpack_require__(7),
 
 var AutoFocusUtils = __webpack_require__(577);
 var CSSPropertyOperations = __webpack_require__(578);
-var DOMLazyTree = __webpack_require__(66);
+var DOMLazyTree = __webpack_require__(65);
 var DOMNamespaces = __webpack_require__(152);
 var DOMProperty = __webpack_require__(43);
 var DOMPropertyOperations = __webpack_require__(237);
@@ -48223,7 +48224,7 @@ module.exports = ReactDOMInput;
 
 var _assign = __webpack_require__(10);
 
-var React = __webpack_require__(63);
+var React = __webpack_require__(62);
 var ReactDOMComponentTree = __webpack_require__(11);
 var ReactDOMSelect = __webpack_require__(239);
 
@@ -48522,7 +48523,7 @@ var ReactInstanceMap = __webpack_require__(86);
 var ReactInstrumentation = __webpack_require__(26);
 
 var ReactCurrentOwner = __webpack_require__(32);
-var ReactReconciler = __webpack_require__(65);
+var ReactReconciler = __webpack_require__(64);
 var ReactChildReconciler = __webpack_require__(592);
 
 var emptyFunction = __webpack_require__(25);
@@ -48967,7 +48968,7 @@ module.exports = ReactMultiChild;
 
 
 
-var ReactReconciler = __webpack_require__(65);
+var ReactReconciler = __webpack_require__(64);
 
 var instantiateReactComponent = __webpack_require__(240);
 var KeyEscapeUtils = __webpack_require__(158);
@@ -49129,14 +49130,14 @@ module.exports = ReactChildReconciler;
 var _prodInvariant = __webpack_require__(7),
     _assign = __webpack_require__(10);
 
-var React = __webpack_require__(63);
+var React = __webpack_require__(62);
 var ReactComponentEnvironment = __webpack_require__(155);
 var ReactCurrentOwner = __webpack_require__(32);
 var ReactErrorUtils = __webpack_require__(147);
 var ReactInstanceMap = __webpack_require__(86);
 var ReactInstrumentation = __webpack_require__(26);
 var ReactNodeTypes = __webpack_require__(241);
-var ReactReconciler = __webpack_require__(65);
+var ReactReconciler = __webpack_require__(64);
 
 if (process.env.NODE_ENV !== 'production') {
   var checkReactTypeSpec = __webpack_require__(594);
@@ -50578,7 +50579,7 @@ module.exports = ReactServerUpdateQueue;
 
 var _assign = __webpack_require__(10);
 
-var DOMLazyTree = __webpack_require__(66);
+var DOMLazyTree = __webpack_require__(65);
 var ReactDOMComponentTree = __webpack_require__(11);
 
 var ReactDOMEmptyComponent = function (instantiate) {
@@ -50787,7 +50788,7 @@ var _prodInvariant = __webpack_require__(7),
     _assign = __webpack_require__(10);
 
 var DOMChildrenOperations = __webpack_require__(151);
-var DOMLazyTree = __webpack_require__(66);
+var DOMLazyTree = __webpack_require__(65);
 var ReactDOMComponentTree = __webpack_require__(11);
 
 var escapeTextContentForBrowser = __webpack_require__(108);
@@ -55355,7 +55356,7 @@ var _Api = __webpack_require__(259);
 
 var _Api2 = _interopRequireDefault(_Api);
 
-var _Day = __webpack_require__(68);
+var _Day = __webpack_require__(67);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -55956,7 +55957,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Day = __webpack_require__(68);
+var _Day = __webpack_require__(67);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -56150,7 +56151,7 @@ var _Api = __webpack_require__(259);
 
 var _Api2 = _interopRequireDefault(_Api);
 
-var _Day = __webpack_require__(68);
+var _Day = __webpack_require__(67);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -56267,25 +56268,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/07/16 - 17:16
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-var _Normalize = __webpack_require__(50);
-
-var _Normalize2 = _interopRequireDefault(_Normalize);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2017/07/16 - 17:16
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
 
 /**
  * game status 定数
@@ -56296,35 +56293,46 @@ var Status = function () {
   }
 
   _createClass(Status, null, [{
-    key: 'state',
+    key: 'label',
 
     /**
      * status 名称を取得します
      * @param {number} id status ID
      * @returns {string} status 日本語名称 を返します
      */
-    value: function state(id) {
-      return _Normalize2.default.str(Status.games[id]);
-    }
+
     /**
      * game status key: value - 日本語名称 object
      * @type {{1: string, 2: string, 4: string, 5: string, 6: string, 9: string, 10: string, 23: string}}
      */
-
+    value: function label(id) {
+      return Status.games[id];
+    }
+  }, {
+    key: 'className',
+    value: function className(id) {
+      return Status.classes[id];
+    }
   }]);
 
   return Status;
 }();
 
 Status.games = {
-  1: '試合前 ',
-  2: '試合中 ',
-  4: '試合終了 ',
-  5: '延期 ',
-  6: 'サスペンド ',
-  9: 'キャンセル  ',
-  10: '没収  ',
+  1: '試合前',
+  2: '試合中',
+  4: '試合終了',
+  5: '延期',
+  6: 'サスペンド',
+  9: 'キャンセル',
+  10: '没収',
   23: '遅延/中断'
+};
+Status.classes = {
+  1: 'mlb__game__overview__info__status--before',
+  2: 'mlb__game__overview__info__status--live',
+  4: 'mlb__game__overview__info__status--end',
+  9: 'mlb__game__overview__info__status--cancel'
 };
 exports.default = Status;
 
@@ -56339,7 +56347,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Normalize = __webpack_require__(50);
+var _Normalize = __webpack_require__(68);
 
 var _Normalize2 = _interopRequireDefault(_Normalize);
 
@@ -56451,7 +56459,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Normalize = __webpack_require__(50);
+var _Normalize = __webpack_require__(68);
 
 var _Normalize2 = _interopRequireDefault(_Normalize);
 
@@ -56724,7 +56732,7 @@ var _DaeCalendar = __webpack_require__(166);
 
 var _DaeCalendar2 = _interopRequireDefault(_DaeCalendar);
 
-var _Day = __webpack_require__(68);
+var _Day = __webpack_require__(67);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -57756,7 +57764,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _invariant = __webpack_require__(67);
+var _invariant = __webpack_require__(66);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -57964,7 +57972,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _invariant = __webpack_require__(67);
+var _invariant = __webpack_require__(66);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -58406,7 +58414,7 @@ var _DateHeader2 = _interopRequireDefault(_DateHeader);
 
 var _propTypes3 = __webpack_require__(23);
 
-var _eventLevels = __webpack_require__(51);
+var _eventLevels = __webpack_require__(50);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60564,7 +60572,7 @@ var _dates = __webpack_require__(15);
 
 var _dates2 = _interopRequireDefault(_dates);
 
-var _eventLevels = __webpack_require__(51);
+var _eventLevels = __webpack_require__(50);
 
 var _helpers = __webpack_require__(88);
 
@@ -61042,7 +61050,7 @@ var _EventRowMixin = __webpack_require__(279);
 
 var _EventRowMixin2 = _interopRequireDefault(_EventRowMixin);
 
-var _eventLevels = __webpack_require__(51);
+var _eventLevels = __webpack_require__(50);
 
 var _messages = __webpack_require__(116);
 
@@ -62454,7 +62462,7 @@ var _accessors = __webpack_require__(72);
 
 var _propTypes3 = __webpack_require__(23);
 
-var _eventLevels = __webpack_require__(51);
+var _eventLevels = __webpack_require__(50);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64321,7 +64329,7 @@ module.exports = copySymbolsIn;
 /* 777 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(52),
+var getNative = __webpack_require__(51),
     root = __webpack_require__(34);
 
 /* Built-in method references that are verified to be native. */
@@ -64334,7 +64342,7 @@ module.exports = DataView;
 /* 778 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(52),
+var getNative = __webpack_require__(51),
     root = __webpack_require__(34);
 
 /* Built-in method references that are verified to be native. */
@@ -64347,7 +64355,7 @@ module.exports = Promise;
 /* 779 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(52),
+var getNative = __webpack_require__(51),
     root = __webpack_require__(34);
 
 /* Built-in method references that are verified to be native. */
@@ -64360,7 +64368,7 @@ module.exports = Set;
 /* 780 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(52),
+var getNative = __webpack_require__(51),
     root = __webpack_require__(34);
 
 /* Built-in method references that are verified to be native. */
@@ -67189,202 +67197,16 @@ var _ComJapanese2 = _interopRequireDefault(_ComJapanese);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// // dae/player
-// import DaeBatting from '../../dae/player/DaeBatting';
-// import DaePitching from '../../dae/player/DaePitching';
-//
-// // util
-// import Day from '../../util/Day';
-// import Print from '../../util/Print';
-//
-// // ----------------------------------------
-// // section.mlb__today_jp
-// // ----------------------------------------
-// const ComBatting = ({ player }) => (
-//   <tr>
-//     <th className="mlb__today_jp__record__th">成績</th>
-//     <td className="mlb__today_jp__record__td">打率：{Print.str(player.average)}</td>
-//     <td className="mlb__today_jp__record__td">{Print.int(player.bats)}打数{Print.int(player.hits)}安打</td>
-//     <td className="mlb__today_jp__record__td">{Print.int(player.run)}打点</td>
-//   </tr>
-// );
-//
-// ComBatting.propTypes = {
-//   player: PropTypes.instanceOf(DaeBatting).isRequired,
-// };
-//
-// const ComPitching = ({ player }) => (
-//   <tr>
-//     <th className="mlb__today_jp__record__th">成績</th>
-//     <td className="mlb__today_jp__record__td">防御率：{Print.str(player.average)}</td>
-//     <td className="mlb__today_jp__record__td">投球数：{Print.int(player.pitched)}</td>
-//     <td className="mlb__today_jp__record__td">失点：{Print.int(player.ra)}</td>
-//   </tr>
-// );
-//
-// ComPitching.propTypes = {
-//   player: PropTypes.instanceOf(DaePitching).isRequired,
-// };
-//
-// const ComPlayer = ({ player }) => {
-//   console.log('ComJaPlayer player', player);
-//   const batting = player.type === 'batting';
-//   const ComType = batting ? ComBatting : ComPitching;
-//   const comStats = batting ? player.batting : player.pitching;
-//   return (
-//     <div className="mlb_jp_stats">
-//       <div className="mlb__today_jp__player">
-//         <h3 className="mlb__today_jp__player__name">{Print.str(player.player)}</h3>
-//         <dl className="mlb__today_jp__player__profile">
-//           <dt className="mlb__today_jp__player__profile__team">{Print.str(player.team)}</dt>
-//           <dd className="mlb__today_jp__player__profile__uniform_num">
-//             背番号<span>{Print.int(player.number)}</span>
-//           </dd>
-//         </dl>
-//       </div>
-//       {/* 成績 */}
-//       <div className="mlb__today_jp__record__container">
-//         <table className="mlb__today_jp__record">
-//           <tbody>
-//             <ComType
-//               player={comStats}
-//             />
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// };
-//
-// ComPlayer.propTypes = {
-//   player: PropTypes.instanceOf(DaeJapanesePlayer).isRequired,
-// };
-//
-// const ComGame = ({ game }) => {
-//   if (!game.players.has()) {
-//     return null;
-//   }
-//   console.log('ComGame game', game);
-//   // const elements = game.players.list.map((player) => {
-//   //   console.log('ComGame player', player);
-//   //   return (
-//   //     <ComPlayer
-//   //       key={player.id}
-//   //       player={player}
-//   //     />
-//   //   );
-//   // });
-//   // console.log('ComGame elements', elements);
-//   // return elements;
-//   // return null;
-//   return (
-//     <div className="com-player-container">
-//       {
-//         game.players.list.map(player => (
-//           <ComPlayer
-//             key={`japanese-${player.id}`}
-//             player={player}
-//           />
-//         ))
-//       }
-//       <div className="mlb__game__overview">
-//         <p className="mlb__game__overview__team mlb__game__overview__team--home">
-//           {Print.str(game.home.team)}
-//         </p>
-//         <div className="mlb__game__overview__info">
-//           <p className="mlb__game__overview__info__place">
-//             {Print.str(game.stadium)}
-//           </p>
-//           <p className="mlb__game__overview__info__score">
-//             <span className="mlb__game__overview__info__score--home">
-//               {Print.int(game.home.score)}
-//             </span>
-//             <span className="mlb__game__overview__info__score--vs">-</span>
-//             <span className="mlb__game__overview__info__score--visitor">
-//               {Print.int(game.visitor.score)}
-//             </span>
-//           </p>
-//           <p className="mlb__game__overview__info__status">
-//             {Print.str(game.label)}
-//           </p>
-//         </div>
-//         <p className="mlb__game__overview__team mlb__game__overview__team--visitor">
-//           {Print.str(game.visitor.team)}
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-//
-// ComGame.propTypes = {
-//   game: PropTypes.instanceOf(DaeGame).isRequired,
-// };
-//
-//
-// const ComJapanese = ({ japanese, date }) => {
-//   if (!japanese.has()) {
-//     return null;
-//   }
-//   console.log('ComJapanese japanese', japanese, date);
-//   return (
-//     <section className="mlb__today_jp">
-//       <h2 className="mlb__today_jp__heading">{Day.title(date)}に出場した日本人選手</h2>
-//       {
-//         japanese.list.map(game => (
-//           <ComGame
-//             key={`${game.id}-${game.status}`}
-//             game={game}
-//           />
-//         ))
-//       }
-//     </section>
-//   );
-// };
-//
-// ComJapanese.propTypes = {
-//   japanese: PropTypes.instanceOf(DaeJapanese).isRequired,
-//   date: PropTypes.shape({
-//     year: PropTypes.number.isRequired,
-//     month: PropTypes.number.isRequired,
-//     day: PropTypes.number.isRequired,
-//   }).isRequired,
-// };
+/**
+ * 日程・結果 - `/stats/mlb/` or `/stats/mlb/YYYYMMDD`
+ * - ComScheduleMam
+ *   - {@link ComJapanese}
+ * @param {DaeSchedule} schedule JSON {@link Api.schedule} - `/master/schedule/2017/7/25.json`
+ * @param {{year: number, month: number, day: number}} date {@link Day}.today object
+ * @returns {?XML} 日本人選手一覧 or null
+ * @constructor
+ */
 
-// export default class ComScheduleMam extends Component {
-//   static propTypes = {
-//     schedule: PropTypes.instanceOf(DaeSchedule),
-//     date: PropTypes.shape({
-//       year: PropTypes.number,
-//       month: PropTypes.number,
-//       day: PropTypes.number,
-//     }),
-//   };
-//   static defaultProps = {
-//     schedule: null,
-//     date: null,
-//   };
-//
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       team: 'all',
-//       league: 'all',
-//     };
-//   }
-//   render() {
-//     if (!this.props.schedule || !this.props.date) {
-//       return null;
-//     }
-//     return (
-//       <div className="index-container">
-//         <ComJapanese
-//           japanese={this.props.schedule.japanese}
-//           date={this.props.date}
-//         />
-//       </div>
-//     );
-//   }
-// }
 
 // dae/schedule
 /**
@@ -67404,6 +67226,7 @@ var ComScheduleMam = function ComScheduleMam(_ref) {
   var schedule = _ref.schedule,
       date = _ref.date;
 
+  //  data が存在しない時は null
   if (!schedule || !date) {
     return null;
   }
@@ -67414,10 +67237,23 @@ var ComScheduleMam = function ComScheduleMam(_ref) {
     _react2.default.createElement(_ComJapanese2.default, {
       japanese: schedule.japanese,
       date: date
-    })
+    }),
+    _react2.default.createElement(
+      'div',
+      { className: 'mlb__today_jp__btn' },
+      _react2.default.createElement(
+        'a',
+        { href: '/stats/mlb/playerlist/' },
+        '\u65E5\u672C\u4EBA\u9078\u624B\u4E00\u89A7\u3078'
+      )
+    )
   );
 };
 
+/**
+ * propTypes
+ * @type {{schedule: DaeSchedule, date: {year: number, month: number, day: number}}}
+ */
 ComScheduleMam.propTypes = {
   schedule: _propTypes2.default.instanceOf(_DaeSchedule2.default),
   date: _propTypes2.default.shape({
@@ -67427,6 +67263,10 @@ ComScheduleMam.propTypes = {
   })
 };
 
+/**
+ * defaultProps
+ * @type {{schedule: null, date: null}}
+ */
 ComScheduleMam.defaultProps = {
   schedule: null,
   date: null
@@ -67463,7 +67303,7 @@ var _DaePitching = __webpack_require__(261);
 
 var _DaePitching2 = _interopRequireDefault(_DaePitching);
 
-var _Day = __webpack_require__(68);
+var _Day = __webpack_require__(67);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -67636,19 +67476,9 @@ var ComGame = function ComGame(_ref4) {
   if (!game.players.has()) {
     return null;
   }
-  console.log('ComGame game', game);
-  // const elements = game.players.list.map((player) => {
-  //   console.log('ComGame player', player);
-  //   return (
-  //     <ComPlayer
-  //       key={player.id}
-  //       player={player}
-  //     />
-  //   );
-  // });
-  // console.log('ComGame elements', elements);
-  // return elements;
-  // return null;
+  var homeClass = game.home.win ? '.mlb__game__result--win' : '';
+  var visitorClass = game.visitor.win ? '.mlb__game__result--win' : '';
+  var statusClass = game.className;
   return _react2.default.createElement(
     'div',
     { className: 'com-player-container' },
@@ -67663,7 +67493,9 @@ var ComGame = function ComGame(_ref4) {
       { className: 'mlb__game__overview' },
       _react2.default.createElement(
         'p',
-        { className: 'mlb__game__overview__team mlb__game__overview__team--home' },
+        {
+          className: 'mlb__game__overview__team mlb__game__overview__team--home ' + homeClass
+        },
         _Print2.default.str(game.home.team)
       ),
       _react2.default.createElement(
@@ -67679,7 +67511,7 @@ var ComGame = function ComGame(_ref4) {
           { className: 'mlb__game__overview__info__score' },
           _react2.default.createElement(
             'span',
-            { className: 'mlb__game__overview__info__score--home' },
+            { className: 'mlb__game__overview__info__score--home ' + homeClass },
             _Print2.default.int(game.home.score)
           ),
           _react2.default.createElement(
@@ -67689,19 +67521,21 @@ var ComGame = function ComGame(_ref4) {
           ),
           _react2.default.createElement(
             'span',
-            { className: 'mlb__game__overview__info__score--visitor' },
+            { className: 'mlb__game__overview__info__score--visitor ' + visitorClass },
             _Print2.default.int(game.visitor.score)
           )
         ),
         _react2.default.createElement(
           'p',
-          { className: 'mlb__game__overview__info__status' },
+          { className: 'mlb__game__overview__info__status ' + statusClass },
           _Print2.default.str(game.label)
         )
       ),
       _react2.default.createElement(
         'p',
-        { className: 'mlb__game__overview__team mlb__game__overview__team--visitor' },
+        {
+          className: 'mlb__game__overview__team mlb__game__overview__team--visitor ' + visitorClass
+        },
         _Print2.default.str(game.visitor.team)
       )
     )
@@ -67712,14 +67546,25 @@ ComGame.propTypes = {
   game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired
 };
 
+/**
+ * 日程・結果 - 日本人選手一覧
+ * - {@link ComScheduleMam}
+ *   - ComJapanese
+ * @param {DaeJapanese} japanese JSON `.japanese_players.[]` リスト
+ * @param {{year: number, month: number, day: number}} date {@link Day}.today object
+ * @returns {?XML} section.mlb__today_jp or null
+ * @constructor
+ */
 var ComJapanese = function ComJapanese(_ref5) {
   var japanese = _ref5.japanese,
       date = _ref5.date;
 
+  // 存在チェック
   if (!japanese.has()) {
     return null;
   }
   console.log('ComJapanese japanese', japanese, date);
+  // render
   return _react2.default.createElement(
     'section',
     { className: 'mlb__today_jp' },
@@ -67738,6 +67583,10 @@ var ComJapanese = function ComJapanese(_ref5) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{japanese: DaeJapanese, date: {year: number, month: number, day: number}}}
+ */
 ComJapanese.propTypes = {
   japanese: _propTypes2.default.instanceOf(_DaeSchedule.DaeJapanese).isRequired,
   date: _propTypes2.default.shape({

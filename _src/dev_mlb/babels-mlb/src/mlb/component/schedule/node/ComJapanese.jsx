@@ -110,19 +110,9 @@ const ComGame = ({ game }) => {
   if (!game.players.has()) {
     return null;
   }
-  console.log('ComGame game', game);
-  // const elements = game.players.list.map((player) => {
-  //   console.log('ComGame player', player);
-  //   return (
-  //     <ComPlayer
-  //       key={player.id}
-  //       player={player}
-  //     />
-  //   );
-  // });
-  // console.log('ComGame elements', elements);
-  // return elements;
-  // return null;
+  const homeClass = game.home.win ? '.mlb__game__result--win' : '';
+  const visitorClass = game.visitor.win ? '.mlb__game__result--win' : '';
+  const statusClass = game.className;
   return (
     <div className="com-player-container">
       {
@@ -134,7 +124,9 @@ const ComGame = ({ game }) => {
         ))
       }
       <div className="mlb__game__overview">
-        <p className="mlb__game__overview__team mlb__game__overview__team--home">
+        <p
+          className={`mlb__game__overview__team mlb__game__overview__team--home ${homeClass}`}
+        >
           {Print.str(game.home.team)}
         </p>
         <div className="mlb__game__overview__info">
@@ -142,19 +134,21 @@ const ComGame = ({ game }) => {
             {Print.str(game.stadium)}
           </p>
           <p className="mlb__game__overview__info__score">
-            <span className="mlb__game__overview__info__score--home">
+            <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
               {Print.int(game.home.score)}
             </span>
             <span className="mlb__game__overview__info__score--vs">-</span>
-            <span className="mlb__game__overview__info__score--visitor">
+            <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
               {Print.int(game.visitor.score)}
             </span>
           </p>
-          <p className="mlb__game__overview__info__status">
+          <p className={`mlb__game__overview__info__status ${statusClass}`}>
             {Print.str(game.label)}
           </p>
         </div>
-        <p className="mlb__game__overview__team mlb__game__overview__team--visitor">
+        <p
+          className={`mlb__game__overview__team mlb__game__overview__team--visitor ${visitorClass}`}
+        >
           {Print.str(game.visitor.team)}
         </p>
       </div>
@@ -166,12 +160,22 @@ ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
 };
 
-
+/**
+ * 日程・結果 - 日本人選手一覧
+ * - {@link ComScheduleMam}
+ *   - ComJapanese
+ * @param {DaeJapanese} japanese JSON `.japanese_players.[]` リスト
+ * @param {{year: number, month: number, day: number}} date {@link Day}.today object
+ * @returns {?XML} section.mlb__today_jp or null
+ * @constructor
+ */
 const ComJapanese = ({ japanese, date }) => {
+  // 存在チェック
   if (!japanese.has()) {
     return null;
   }
   console.log('ComJapanese japanese', japanese, date);
+  // render
   return (
     <section className="mlb__today_jp">
       <h2 className="mlb__today_jp__heading">{Day.title(date)}に出場した日本人選手</h2>
@@ -187,6 +191,10 @@ const ComJapanese = ({ japanese, date }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{japanese: DaeJapanese, date: {year: number, month: number, day: number}}}
+ */
 ComJapanese.propTypes = {
   japanese: PropTypes.instanceOf(DaeJapanese).isRequired,
   date: PropTypes.shape({
