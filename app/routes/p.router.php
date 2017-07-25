@@ -29,6 +29,11 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         $canonical = '';
       endif;
       $photo = [];
+      $photo = $app->model->get_photo($post['id']);
+      if(count($photo) > 0):
+          header('Location: ' . $app->model->property('site_url').'a/'.$post['id'].'/');
+        exit();
+      endif;
 
       // #1179 Syn.extension 判定
       // ------------------------------
