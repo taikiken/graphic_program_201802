@@ -42,11 +42,11 @@ export default class Top extends View {
    * @see https://github.com/undotsushin/undotsushin/issues/2149#issuecomment-314705310
    */
   static webkit() {
-    const webkit = self.webkit || {};
+    const webkit = window.webkit || {};
     const messageHandlers = webkit.messageHandlers || {};
     const onLoadComplete = messageHandlers.onLoadComplete || {};
     const postMessage = onLoadComplete.postMessage;
-    // console.log('postMessage', postMessage);
+    console.log('postMessage', postMessage);
     if (typeof postMessage === 'function') {
       postMessage('');
     }
@@ -84,10 +84,11 @@ export default class Top extends View {
       <ComponentTop
         banners={banners}
         sp={this.sp}
+        cb={Top.webkit}
       />,
       this.element
     );
     // delay 500ms
-    setTimeout(Top.webkit, 500);
+    // setTimeout(Top.webkit, 500);
   }
 }

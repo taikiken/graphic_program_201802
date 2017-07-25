@@ -74,7 +74,7 @@ gulp.task 'banners:eslint', ->
 # babel
 gulp.task 'banners:babel', ->
   return gulp.src files
-  .pipe $.debug title: '[STATS:BABEL]'
+  .pipe $.debug title: '[BANNERS:BABEL]'
   .pipe $.babel presets: [ 'es2015', 'react', 'stage-0' ], plugins: ['transform-runtime']
   .pipe $.replaceTask patterns: patterns
   .pipe gulp.dest '_src/babels_banners/compile'
@@ -148,7 +148,7 @@ gulp.task 'banners:pack:build', ( cb ) ->
 # copy
 gulp.task 'banners:copy', (cb) ->
   return gulp.src [dir.app + '/**/banners_with_json.bundle.js']
-    .pipe $.debug title: '[STATS:COPY]'
+    .pipe $.debug title: '[BANNERS:COPY]'
     .pipe gulp.dest htdocs
     .pipe $.size title: '*** banners:copy ***'
 
