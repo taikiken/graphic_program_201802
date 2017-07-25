@@ -540,6 +540,7 @@ gulp.task 'develop', (cb) ->
     'exe:dev'
     'sp:exe:dev'
     'single:dev'
+    'banners:dev'
     'vendor:dev'
     'libs:synapse:dev'
     'js:dev'
@@ -547,7 +548,6 @@ gulp.task 'develop', (cb) ->
     'carousel:make'
     # motorsports - tab / accordion 2017-07-13
     'motorsports:make'
-    'stats:dev'
     'image:copy'
     'font:copy'
     'sp:image:copy'
@@ -568,6 +568,7 @@ gulp.task 'deploy', (cb) ->
     'exe:build'
     'sp:exe:build'
     'single:build'
+    'banners:build'
     'vendor:init'
     'libs:synapse:build'
     'js:build'
@@ -575,7 +576,6 @@ gulp.task 'deploy', (cb) ->
     'carousel:build'
     # motorsports - tab / accordion 2017-07-13
     'motorsports:build'
-    'stats:build'
     'image:build'
     'font:copy'
     'sp:image:build'
