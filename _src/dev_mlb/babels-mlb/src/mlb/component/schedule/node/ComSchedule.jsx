@@ -41,6 +41,46 @@ const Power3 = self.Power3;
 // ----------------------------------------
 // select / option - games
 // ----------------------------------------
+const ComOptionTypes = ({ types, change }) => (
+  <div className="mlb__schedule__limit_search--game">
+    <dl>
+      <dt className="mlb__schedule__limit_search__heading">試合種別</dt>
+      <dd className="mlb__schedule__limit_search__select">
+        <select
+          name="limit_search--game"
+          id="limit_search--game"
+          className="limit_search--game"
+          onChange={change}
+        >
+          <option value="">すべての試合</option>
+          {
+            types.list.map((type) => {
+              console.log('type', type);
+              const id = Print.int(type.id);
+              const typeName = Print.str(type.type);
+              if (!id || !typeName) {
+                return null;
+              }
+              return (
+                <option
+                  key={`type-${id}`}
+                  value={id}
+                >
+                  {typeName}
+                </option>
+              );
+            })
+          }
+        </select>
+      </dd>
+    </dl>
+  </div>
+);
+
+ComOptionTypes.propTypes = {
+  types: PropTypes.instanceOf(DaeGameTypes).isRequired,
+  change: PropTypes.func.isRequired,
+};
 
 // ----------------------------------------
 // select / option - team
@@ -132,12 +172,25 @@ export default class ComSchedule extends Component {
     super(props);
     this.state = {
       team: 'all',
-      game: 'all',
+      type: 'all',
     };
     this.onChangeTeams = this.onChangeTeams.bind(this);
+    this.onChangeTypes = this.onChangeTypes.bind(this);
+  }
+  onChangeTypes(event) {
+    event.preventDefault();
+    const id = event.target.value;
+    this.setState({
+      type: id || 'all',
+    });
+    console.log('onChangeTypes event', event.target.value, event, this.state.type);
   }
   onChangeTeams(event) {
     event.preventDefault();
+    const id = event.target.value;
+    this.setState({
+      team: id || 'all',
+    });
     console.log('onChangeTeams event', event.target.value, event, this.state.team);
   }
   render() {
@@ -145,6 +198,7 @@ export default class ComSchedule extends Component {
     if (!teams || !types || !schedule) {
       return null;
     }
+    console.log('ComSchedule.render ---------------- ', types);
     // render
     return (
       <section className="mlb__schedule">
@@ -153,6 +207,10 @@ export default class ComSchedule extends Component {
           <ComOptionTeams
             teams={teams}
             change={this.onChangeTeams}
+          />
+          <ComOptionTypes
+            types={types}
+            change={this.onChangeTypes}
           />
         </nav>
       </section>

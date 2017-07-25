@@ -15472,12 +15472,12 @@ function DaeGameTypes(info) {
   _classCallCheck(this, DaeGameTypes);
 
   var origin = _Normalize2.default.obj(info);
-  var types = Object.values(function (kind) {
+  var list = Object.values(origin).map(function (kind) {
     return new DaeTypes(kind);
   });
-  var ids = {};
-  types.map(function (type) {
-    ids[type.id] = type.type;
+  var types = {};
+  list.map(function (type) {
+    types[type.id] = type.type;
     return type;
   });
   /**
@@ -15489,12 +15489,12 @@ function DaeGameTypes(info) {
    * id を key にしたゲーム種類 object
    * @type {object}
    */
-  this.ids = ids;
+  this.types = types;
   /**
    * DaeTypes list - ゲーム種類
    * @type {Array.<DaeTypes>}
    */
-  this.types = types;
+  this.list = list;
 }
 // TODO: filter 可能なように他のJSONとの名窯変換機能
 ;
@@ -39210,7 +39210,7 @@ exports.default = Print;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-25 22:12:59
+ * 2017-7-25 22:46:53
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -77847,13 +77847,69 @@ var Power3 = self.Power3;
 // ----------------------------------------
 // select / option - games
 // ----------------------------------------
+var ComOptionTypes = function ComOptionTypes(_ref) {
+  var types = _ref.types,
+      change = _ref.change;
+  return _react2.default.createElement(
+    'div',
+    { className: 'mlb__schedule__limit_search--game' },
+    _react2.default.createElement(
+      'dl',
+      null,
+      _react2.default.createElement(
+        'dt',
+        { className: 'mlb__schedule__limit_search__heading' },
+        '\u8A66\u5408\u7A2E\u5225'
+      ),
+      _react2.default.createElement(
+        'dd',
+        { className: 'mlb__schedule__limit_search__select' },
+        _react2.default.createElement(
+          'select',
+          {
+            name: 'limit_search--game',
+            id: 'limit_search--game',
+            className: 'limit_search--game',
+            onChange: change
+          },
+          _react2.default.createElement(
+            'option',
+            { value: '' },
+            '\u3059\u3079\u3066\u306E\u8A66\u5408'
+          ),
+          types.list.map(function (type) {
+            console.log('type', type);
+            var id = _Print2.default.int(type.id);
+            var typeName = _Print2.default.str(type.type);
+            if (!id || !typeName) {
+              return null;
+            }
+            return _react2.default.createElement(
+              'option',
+              {
+                key: 'type-' + id,
+                value: id
+              },
+              typeName
+            );
+          })
+        )
+      )
+    )
+  );
+};
+
+ComOptionTypes.propTypes = {
+  types: _propTypes2.default.instanceOf(_DaeGameTypes2.default).isRequired,
+  change: _propTypes2.default.func.isRequired
+};
 
 // ----------------------------------------
 // select / option - team
 // ----------------------------------------
-var ComOptionTeams = function ComOptionTeams(_ref) {
-  var teams = _ref.teams,
-      change = _ref.change;
+var ComOptionTeams = function ComOptionTeams(_ref2) {
+  var teams = _ref2.teams,
+      change = _ref2.change;
   return _react2.default.createElement(
     'div',
     { className: 'mlb__schedule__limit_search--team' },
@@ -77960,16 +78016,31 @@ var ComSchedule = function (_Component) {
 
     _this.state = {
       team: 'all',
-      game: 'all'
+      type: 'all'
     };
     _this.onChangeTeams = _this.onChangeTeams.bind(_this);
+    _this.onChangeTypes = _this.onChangeTypes.bind(_this);
     return _this;
   }
 
   _createClass(ComSchedule, [{
+    key: 'onChangeTypes',
+    value: function onChangeTypes(event) {
+      event.preventDefault();
+      var id = event.target.value;
+      this.setState({
+        type: id || 'all'
+      });
+      console.log('onChangeTypes event', event.target.value, event, this.state.type);
+    }
+  }, {
     key: 'onChangeTeams',
     value: function onChangeTeams(event) {
       event.preventDefault();
+      var id = event.target.value;
+      this.setState({
+        team: id || 'all'
+      });
       console.log('onChangeTeams event', event.target.value, event, this.state.team);
     }
   }, {
@@ -77983,6 +78054,7 @@ var ComSchedule = function (_Component) {
       if (!teams || !types || !schedule) {
         return null;
       }
+      console.log('ComSchedule.render ---------------- ', types);
       // render
       return _react2.default.createElement(
         'section',
@@ -77994,6 +78066,10 @@ var ComSchedule = function (_Component) {
           _react2.default.createElement(ComOptionTeams, {
             teams: teams,
             change: this.onChangeTeams
+          }),
+          _react2.default.createElement(ComOptionTypes, {
+            types: types,
+            change: this.onChangeTypes
           })
         )
       );

@@ -57,10 +57,10 @@ export default class DaeGameTypes {
    */
   constructor(info) {
     const origin = Normalize.obj(info);
-    const types = Object.values(kind => new DaeTypes(kind));
-    const ids = {};
-    types.map((type) => {
-      ids[type.id] = type.type;
+    const list = Object.values(origin).map(kind => new DaeTypes(kind));
+    const types = {};
+    list.map((type) => {
+      types[type.id] = type.type;
       return type;
     });
     /**
@@ -72,12 +72,12 @@ export default class DaeGameTypes {
      * id を key にしたゲーム種類 object
      * @type {object}
      */
-    this.ids = ids;
+    this.types = types;
     /**
      * DaeTypes list - ゲーム種類
      * @type {Array.<DaeTypes>}
      */
-    this.types = types;
+    this.list = list;
   }
   // TODO: filter 可能なように他のJSONとの名窯変換機能
 }
