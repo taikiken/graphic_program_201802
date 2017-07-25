@@ -37,7 +37,7 @@
                           <nav class="nav-photoalbum">
                               <p class="prev">
                                   <?php if($_GET['id'] == 1):?>
-                                  <a href="javascript:void(0);">
+                                  <a href="?id=<?php echo count($page['photo'])?>">
                                       <?php else:?>
                                       <a href="?id=<?php echo $_GET['id'] - 1?>">
                                           <?php endif;?>
@@ -49,7 +49,7 @@
                               </p>
                               <p class="next">
                                   <?php if($_GET['id'] == count($page['photo'])):?>
-                                  <a href="javascript:void(0);">
+                                  <a href="?id=1">
                                       <?php else:?>
                                       <a href="?id=<?php echo $_GET['id'] + 1?>">
                                           <?php endif;?>
@@ -68,7 +68,7 @@
                           <nav class="nav-photoalbum">
                               <p class="prev">
                                   <?php if($_GET['id'] == 1):?>
-                                  <a href="javascript:void(0);">
+                                  <a href="?id=<?php echo count($page['photo'])?>">
                                       <?php else:?>
                                       <a href="?id=<?php echo $_GET['id'] - 1?>">
                                           <?php endif;?>
@@ -80,7 +80,7 @@
                               </p>
                               <p class="next">
                                   <?php if($_GET['id'] == count($page['photo'])):?>
-                                  <a href="javascript:void(0);">
+                                  <a href="?id=1">
                                       <?php else:?>
                                       <a href="?id=<?php echo $_GET['id'] + 1?>">
                                           <?php endif;?>
