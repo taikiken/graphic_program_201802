@@ -44,6 +44,7 @@ class DaeTypes {
      * @type {string}
      */
     this.type = Normalize.str(origin.name);
+    this.key = Normalize.str(origin.key_name);
   }
 }
 
