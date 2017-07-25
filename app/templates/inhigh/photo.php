@@ -99,7 +99,7 @@
 
 <!-- インターハイ メイン画像 ---------------------------------------------------------->
             <div class="special-summary">
-                <a href="/category/interhigh"><h1 class="special-summary-heading"><img src="/assets/images/inhigh/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="/assets/images/inhigh/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
+                <a href="/category/inhigh"><h1 class="special-summary-heading"><img src="/assets/images/inhigh/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="/assets/images/inhigh/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
             </div>
 <!-- / インターハイ メイン画像 ---------------------------------------------------------->
 
