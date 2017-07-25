@@ -19,6 +19,9 @@ import moment from 'moment';
 // webpack が local file を動的 import しないので手動で読み込む
 import 'moment/locale/ja';
 
+// define
+import Style from '../../define/Style';
+
 // @see http://momentjs.com/docs/ search `longDateFormat`
 // moment を使用し日付のローカライズを行う
 // react-big-calendar API says
@@ -154,7 +157,7 @@ const customHeader = (month) => {
  */
 function ComCalendar(props) {
   return (
-    <div className="mlb__schedule__calendar">
+    <div className="mlb__schedule__calendar" id={Style.calendar.id}>
       <h3 className="mlb__schedule__calendar__heading">試合カレンダー</h3>
       <BigCalendar
         selectable

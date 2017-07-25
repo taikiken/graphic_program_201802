@@ -14,7 +14,7 @@
  * react-big-calendar css をコピーします
  */
 
-import { module } from '../gulp_setting.babel';
+import module from '../gulp_setting.babel';
 
 const gulp = module.gulp;
 /**

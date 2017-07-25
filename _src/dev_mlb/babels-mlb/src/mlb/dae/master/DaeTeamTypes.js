@@ -51,14 +51,14 @@ export default class DaeTeamTypes {
    */
   constructor(info) {
     const origin = Normalize.arr(info);
-    const teams = origin.map(team => (new DaeTeam(team)));
+    const list = origin.map(team => (new DaeTeam(team)));
     const ids = {};
-    const list = {};
-    teams.map((team) => {
+    const teams = {};
+    list.map((team) => {
       const name = team.team;
       const id = team.id;
       ids[name] = id;
-      list[id] = name;
+      teams[id] = name;
       return name;
     });
     // ---
@@ -71,7 +71,7 @@ export default class DaeTeamTypes {
      * チームリスト
      * @type {Array.<DaeTeam>}
      */
-    this.teams = teams;
+    this.list = list;
     /**
      * team name key: team id
      * @type {object}
@@ -81,7 +81,7 @@ export default class DaeTeamTypes {
      * team id key: team name
      * @type {object}
      */
-    this.list = list;
+    this.teams = teams;
   }
 
   /**

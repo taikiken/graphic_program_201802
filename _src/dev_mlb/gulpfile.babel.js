@@ -13,7 +13,7 @@
 
 import requireDir from 'require-dir';
 
-import { module } from './gulp_setting.babel';
+import module from './gulp_setting.babel';
 
 const gulp = module.gulp;
 // /**

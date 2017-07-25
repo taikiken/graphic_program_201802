@@ -23,6 +23,12 @@ import Promise from 'promise-polyfill';
 // for IE ES 2015 / 2016 / 2017 polyfill
 import 'babel-polyfill';
 
+// 何故か gsap が import で有効化されない global object は存在する ????
+// gsap
+import 'gsap';
+// eslint-disable-next-line no-unused-vars
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
+
 // -----------------------------------------------
 // main
 import Main from './Main';

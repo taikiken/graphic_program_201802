@@ -62,6 +62,7 @@ import pkg from './package.json';
 // --------------------------------------
 let port;
 try {
+  // eslint-disable-next-line global-require
   port = require('./gulp_port.babel').port;
   // import port from './gulp_port.babel';
 } catch (error) {
@@ -195,6 +196,12 @@ const wpk = {
     filename: '[name].bundle.js',
     chunkFilename: '[chunkhash].bundle.js',
   },
+  // resolve: {
+  //   alias: {
+  //     TweenLite: 'gsap/TweenLite',
+  //     // TweenMax: 'gsap/src/uncompressed/TweenMax',
+  //   },
+  // },
 };
 
 // --------------------------------------
@@ -338,7 +345,7 @@ const env = {
 // --------------------------------------
 //  EXPORT
 // --------------------------------------
-export const module = {
+const module = {
   gulp,
   $,
   $$,
@@ -350,3 +357,5 @@ export const module = {
   server,
   env,
 };
+
+export default module;

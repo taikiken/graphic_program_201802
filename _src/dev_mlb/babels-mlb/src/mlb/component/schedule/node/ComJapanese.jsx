@@ -187,6 +187,9 @@ const ComJapanese = ({ japanese, date }) => {
           />
         ))
       }
+      <div className="mlb__today_jp__btn">
+        <a href="/stats/mlb/playerlist/">日本人選手一覧へ</a>
+      </div>
     </section>
   );
 };

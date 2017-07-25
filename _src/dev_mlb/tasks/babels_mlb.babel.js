@@ -18,7 +18,7 @@
  * dir.app.babel へ出力されます
  */
 
-import { module } from '../gulp_setting.babel';
+import module from '../gulp_setting.babel';
 
 const gulp = module.gulp;
 /**

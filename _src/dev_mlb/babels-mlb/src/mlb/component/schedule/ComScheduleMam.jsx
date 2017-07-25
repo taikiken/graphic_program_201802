@@ -17,7 +17,13 @@ import PropTypes from 'prop-types';
 // dae/schedule
 import DaeSchedule from '../../dae/schedule/DaeSchedule';
 
+// dae/master
+import DaeGameTypes from '../../dae/master/DaeGameTypes';
+import DaeTeamTypes from '../../dae/master/DaeTeamTypes';
+
+// component/schedule/node
 import ComJapanese from './node/ComJapanese';
+import ComSchedule from './node/ComSchedule';
 
 /**
  * 日程・結果 - `/stats/mlb/` or `/stats/mlb/YYYYMMDD`
@@ -25,10 +31,12 @@ import ComJapanese from './node/ComJapanese';
  *   - {@link ComJapanese}
  * @param {DaeSchedule} schedule JSON {@link Api.schedule} - `/master/schedule/2017/7/25.json`
  * @param {{year: number, month: number, day: number}} date {@link Day}.today object
+ * @param {DaeGameTypes} types ゲーム種類
+ * @param {DaeTeamTypes} teams チーム一覧
  * @returns {?XML} 日本人選手一覧 or null
  * @constructor
  */
-const ComScheduleMam = ({ schedule, date }) => {
+const ComScheduleMam = ({ schedule, date, types, teams }) => {
   //  data が存在しない時は null
   if (!schedule || !date) {
     return null;
@@ -40,16 +48,23 @@ const ComScheduleMam = ({ schedule, date }) => {
         japanese={schedule.japanese}
         date={date}
       />
-      <div className="mlb__today_jp__btn">
-        <a href="/stats/mlb/playerlist/">日本人選手一覧へ</a>
-      </div>
+      <ComSchedule
+        schedule={schedule}
+        types={types}
+        teams={teams}
+      />
     </div>
   );
 };
 
 /**
  * propTypes
- * @type {{schedule: DaeSchedule, date: {year: number, month: number, day: number}}}
+ * @type {{
+ *  schedule: DaeSchedule,
+ *  date: {year: number, month: number, day: number},
+ *  types: DaeGameTypes
+ *  teams: DaeTeamTypes
+ * }}
  */
 ComScheduleMam.propTypes = {
   schedule: PropTypes.instanceOf(DaeSchedule),
@@ -58,6 +73,8 @@ ComScheduleMam.propTypes = {
     month: PropTypes.number,
     day: PropTypes.number,
   }),
+  types: PropTypes.instanceOf(DaeGameTypes),
+  teams: PropTypes.instanceOf(DaeTeamTypes),
 };
 
 /**
@@ -67,6 +84,8 @@ ComScheduleMam.propTypes = {
 ComScheduleMam.defaultProps = {
   schedule: null,
   date: null,
+  types: null,
+  teams: null,
 };
 
 export default ComScheduleMam;
