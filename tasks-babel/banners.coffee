@@ -148,7 +148,7 @@ gulp.task 'banners:pack:build', ( cb ) ->
 # copy
 gulp.task 'banners:copy', (cb) ->
   return gulp.src [dir.app + '/**/banners_with_json.bundle.js']
-    .pipe $.debug title: '[STATS:COPY]'
+    .pipe $.debug title: '[BANNERS:COPY]'
     .pipe gulp.dest htdocs
     .pipe $.size title: '*** banners:copy ***'
 
