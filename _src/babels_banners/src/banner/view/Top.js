@@ -48,7 +48,7 @@ export default class Top extends View {
     const postMessage = onLoadComplete.postMessage;
     console.log('postMessage', postMessage);
     if (typeof postMessage === 'function') {
-      postMessage('');
+      window.webkit.messageHandlers.onLoadComplete.postMessage('');
     }
   }
   /**
