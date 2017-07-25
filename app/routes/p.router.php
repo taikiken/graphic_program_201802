@@ -14,6 +14,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
       // 記事のプライマリーカテゴリーを取得
       $category = array();
+      $category2 = array();
       if ( $post['categories'] ) :
         $category_primary = $post['categories'][0];
         if ( isset($category_primary['slug']) ) :
@@ -21,19 +22,14 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         endif;
       endif;
 
-      $category_secondary = $post['categories'][1];
-      $category2 = $app->model->get_category_by_slug($category_secondary['slug']);
       // #782 カノニカル判定
       if ( $post['canonical'] ) :
         $canonical = $post['canonical'];
       else :
         $canonical = '';
       endif;
-        $photo = [];
-      if($category['slug'] == 'photo' || $category2['slug'] == 'photo') :
-          $photo = $app->model->get_photo($post['id']);
-
-      endif;
+      $photo = [];
+      $photo = $app->model->get_photo($post['id']);
 
       // #1179 Syn.extension 判定
       // ------------------------------
