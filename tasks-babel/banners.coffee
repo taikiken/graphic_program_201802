@@ -74,7 +74,7 @@ gulp.task 'banners:eslint', ->
 # babel
 gulp.task 'banners:babel', ->
   return gulp.src files
-  .pipe $.debug title: '[STATS:BABEL]'
+  .pipe $.debug title: '[BANNERS:BABEL]'
   .pipe $.babel presets: [ 'es2015', 'react', 'stage-0' ], plugins: ['transform-runtime']
   .pipe $.replaceTask patterns: patterns
   .pipe gulp.dest '_src/babels_banners/compile'

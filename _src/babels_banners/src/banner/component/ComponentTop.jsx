@@ -46,6 +46,7 @@ export default class ComponentTop extends React.Component {
         alt: React.PropTypes.string,
       })).isRequired,
       sp: React.PropTypes.bool.isRequired,
+      cb: React.PropTypes.func.isRequired,
     };
   }
   // // ---------------------------------------------------
@@ -57,6 +58,9 @@ export default class ComponentTop extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  componentDidMount() {
+    this.props.cb();
+  }
   /**
    * ul.stats_banner-list > li.stats_banner-item
    * @returns {XML} ul.stats_banner-list > li.stats_banner-item
