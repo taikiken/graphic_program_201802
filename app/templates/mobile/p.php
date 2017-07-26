@@ -108,7 +108,7 @@
                       <ul>
                           <?php foreach($page['photo'] as $id => $photo) :?>
                           <li>
-                              <a href="?id=<?php echo $id?>">
+                              <a href="<?php echo $page['og_url']?>?id=<?php echo $id?>">
                                   <img class="lazyload" data-src="<?php echo $photo['sp_thumb']?>"> </a>
                           </li>
                           <?php endforeach;?>
@@ -120,9 +120,9 @@
                             <nav class="nav-photoalbum">
                                 <p class="prev">
                                     <?php if($_GET['id'] == 1):?>
-                                    <a href="?id=<?php echo count($page['photo'])?>">
+                                    <a href="<?php echo $page['og_url']?>?id=<?php echo count($page['photo'])?>">
                                         <?php else:?>
-                                        <a href="?id=<?php echo $_GET['id'] - 1?>">
+                                        <a href="<?php echo $page['og_url']?>?id=<?php echo $_GET['id'] - 1?>">
                                             <?php endif;?>
                                         <i></i>前の写真</a>
                                 </p>
@@ -132,9 +132,9 @@
                                 </p>
                                 <p class="next">
                                     <?php if($_GET['id'] == count($page['photo'])):?>
-                                    <a href="?id=1">
+                                    <a href="<?php echo $page['og_url']?>?id=1">
                                         <?php else:?>
-                                        <a href="?id=<?php echo $_GET['id'] + 1?>">
+                                        <a href="<?php echo $page['og_url']?>?id=<?php echo $_GET['id'] + 1?>">
                                             <?php endif;?>
                                             次の写真
                                         <i></i>
@@ -151,9 +151,9 @@
                             <nav class="nav-photoalbum">
                                 <p class="prev">
                                     <?php if($_GET['id'] == 1):?>
-                                    <a href="?id=<?php echo count($page['photo'])?>">
+                                    <a href="<?php echo $page['og_url']?>?id=<?php echo count($page['photo'])?>">
                                         <?php else:?>
-                                        <a href="?id=<?php echo $_GET['id'] - 1?>">
+                                        <a href="<?php echo $page['og_url']?>?id=<?php echo $_GET['id'] - 1?>">
                                             <?php endif;?>
                                         <i></i>前の写真</a>
                                 </p>
@@ -163,9 +163,9 @@
                                 </p>
                                 <p class="next">
                                     <?php if($_GET['id'] == count($page['photo'])):?>
-                                    <a href="?id=1">
+                                    <a href="<?php echo $page['og_url']?>?id=1">
                                         <?php else:?>
-                                        <a href="?id=<?php echo $_GET['id'] + 1?>">
+                                        <a href="<?php echo $page['og_url']?>?id=<?php echo $_GET['id'] + 1?>">
                                             <?php endif;?>
                                             次の写真
                                         <i></i>
@@ -190,7 +190,7 @@
                                     ?>
 
                                     <li <?php echo $current?>>
-                                        <a href="?id=<?php echo $i?>">
+                                        <a href="<?php echo $page['og_url']?>?id=<?php echo $i?>">
                                             <img class="lazyload" data-src="<?php echo $page['photo'][$i]['thumb']?>"> </a>
                                     </li>
                                     <?php
