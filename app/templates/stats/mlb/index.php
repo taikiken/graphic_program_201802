@@ -37,16 +37,6 @@
 ?>
 <div id="js-mlb-index-container"></div>
 <script src="/assets/mlb/js/mlb_stats_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
-<style>
-  .mlb__schedule__calendar,
-  .calendar-container {
-    height: 800px;
-  }
-  .rbc-current {
-    /* current day - today 以外 */
-    background-color: orangered;
-  }
-</style>
 <?php
 // ------------------------------------------------------------------------
 ?>
