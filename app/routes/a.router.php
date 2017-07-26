@@ -134,7 +134,7 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
       $args['page'] = $app->model->set(array(
         'title'          => $post['title'].' | '.$category['label'],
         'og_title'       => $post['title'].' | '.$app->model->property('title_short'),
-        'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/',
+        'og_url'         => $app->model->property('site_url').'a/'.$post['id'].'/',
         'og_image'       => $post['media']['images']['original'],
         'og_description' => $post['description'],
         'theme'          => $post['theme'],
@@ -175,7 +175,7 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
       $args['page'] = $app->model->set(array(
         'title'          => '『'.$post['title'].'』への '.$comment_user.' さんのコメント',
         'og_title'       => '『'.$post['title'].'』への '.$comment_user.' さんのコメント | '.$app->model->property('title_short'),
-        'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/comment/'.$args['commend_id'].'/',
+        'og_url'         => $app->model->property('site_url').'a/'.$post['id'].'/comment/'.$args['commend_id'].'/',
         'og_image'       => $post['media']['images']['original'],
         'og_description' => $comment_body_escaped,
 
@@ -235,7 +235,7 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
       $args['page'] = $app->model->set(array(
         'title'          => '『'.$post['title'].'』への '.$comment_user.' さんの返信',
         'og_title'       => '『'.$post['title'].'』への '.$comment_user.' さんの返信 | '.$app->model->property('title_short'),
-        'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/comment/'.$args['commend_id'].'/'.$args['reply_id'].'/',
+        'og_url'         => $app->model->property('site_url').'a/'.$post['id'].'/comment/'.$args['commend_id'].'/'.$args['reply_id'].'/',
         'og_image'       => $post['media']['images']['original'],
         'og_description' => $comment_body_escaped,
 
