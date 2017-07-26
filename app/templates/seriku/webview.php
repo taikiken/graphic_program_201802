@@ -58,8 +58,8 @@ var_dump(__DIR__);
         </section>
 
         <div class="interhigh_bnr">
-            <a href="http://www.inter-high-school.tv/" target="_blank">
-                <img src="/assets/images/inhigh/SP_Banner_01B.jpg">
+            <a href="http://www.tbs.co.jp/seriku/" target="_blank">
+                <img src="/assets/images/seriku/SP_Banner_01B.png">
             </a>
         </div>
         <!-- / インターハイ トップ　パーツ ---------------------------------------------------------->

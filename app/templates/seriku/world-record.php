@@ -13,14 +13,14 @@
         <!-- sns ogp -->
         <meta property="og:title" content="世界陸上で生まれた世界記録 動画特集 | スポーツブル / SPORTS BULL">
         <meta property="og:type" content="article">
-        <meta property="og:image" content="https://sportsbull.jp/assets/images/inhigh/ogp_interhigh.jpg">
+        <meta property="og:image" content="https://sportsbull.jp/assets/images/seriku/og_image.png">
         <meta property="og:url" content="https://sportsbull.jp/seriku/peking">
         <meta property="og:description" content="世界陸上で生まれた世界記録 動画特集見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <!-- twitter card -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@sportsbull_jp">
         <meta name="twitter:title" content="世界陸上で生まれた世界記録 動画特集 | スポーツブル / SPORTS BULL">
-        <meta name="twitter:image" content="https://sportsbull.jp/assets/images/inhigh/ogp_interhigh.jpg">
+        <meta name="twitter:image" content="https://sportsbull.jp/assets/images/seriku/og_image.png">
         <meta name="twitter:url" content="https://sportsbull.jp/seriku/peking">
         <meta name="twitter:description" content="世界陸上で生まれた世界記録 動画特集見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <!-- favicon -->
@@ -37,10 +37,10 @@
         <!-- / 表示確認用 -->
         <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
         <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
-        <!-- インターハイ css -->
-        <link rel="stylesheet" href="/assets/css/inhigh/interhigh.css" media="only screen and (min-width: 769px)">
-        <link rel="stylesheet" href="/assets/css/inhigh/sp_interhigh.css" media="only screen and (max-width: 768px)">
-        <!-- / インターハイ css -->
+        <!-- 世界陸上 css -->
+        <link rel="stylesheet" href="/assets/css/seriku/seriku.css" media="only screen and (min-width: 769px)">
+        <link rel="stylesheet" href="/assets/css/seriku/sp_seriku.css" media="only screen and (max-width: 768px)">
+        <!-- / 世界陸上 css -->
         <script type='text/javascript'>
             var googletag = googletag || {};
             googletag.cmd = googletag.cmd || [];
@@ -87,45 +87,44 @@
         <div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
         <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
         <script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
-<!-- インターハイ class名darkを削除しました -------------------------------------------------->
+<!-- 世界陸上 class名darkを削除しました -------------------------------------------------->
         <div id="whole" class="whole">
-<!-- / インターハイ class名darkを削除しました -------------------------------------------------->
+<!-- / 世界陸上 class名darkを削除しました -------------------------------------------------->
             <header class="head-sec">
                 <div class="head-sec-inner">
                     <h1><a href="/">SPORTS BULL</a></h1>
                 </div><!-- /.head-sec-inner -->
             </header><!-- /.head-sec -->
 
-<!-- インターハイ メイン画像 ---------------------------------------------------------->
+<!-- 世界陸上 メイン画像 ---------------------------------------------------------->
             <div class="special-summary">
-                <a href="/category/inhigh"><h1 class="special-summary-heading"><img src="/assets/images/inhigh/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="/assets/images/inhigh/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
+                <a href="/category/seriku"><h1 class="special-summary-heading"><img src="/assets/images/seriku/header_img.png" alt="世界陸上 世界陸上で生まれた世界記録" class="sp_hide"><img src="/assets/images/seriku/sp_header_img.png" alt="世界陸上 世界陸上で生まれた世界記録" class="pc_hide"></h1></a>
             </div>
-<!-- / インターハイ メイン画像 ---------------------------------------------------------->
+<!-- / 世界陸上 メイン画像 ---------------------------------------------------------->
 
             <div class="body-sec">
                 <div class="body-sec-inner">
                     <section class="main-sec">
                        
-<!--  インターハイ メインコンテンツ ---------------------------------------------------------->
+<!--  北京大会ハイライト メインコンテンツ ---------------------------------------------------------->
 <?php
 
 $db=new db;
 $db->connect();
 
-$photo="";
+$movie=array();
 $subdomain=preg_match("/dev/",$_SERVER["SERVER_NAME"])?"dev-img":"img";
 $i=0;
 
-$sql="select id,img1,title,a1,a2,a3 from repo_n where d2=54 and flag=1 and swf is null order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc";
+$sql="select id,img1,title,a1,a2,a3 from repo_n where d2=54 and flag=1 and swf is not null order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc";
 $db->query($sql);
 while($f=$db->fetch_array()){
-    $v=array(
+    $movie[sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"])][]=array(
         "title"=>htmlspecialchars($f["title"]),
-        "date"=>sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]),
-        "img"=>sprintf("https://%s.sportsbull.jp/img/%s",$subdomain,$f["img1"]),
+        "date"=>sprintf("%s/%s",(int)$f["a2"],(int)$f["a3"]),
+        "img"=>sprintf("https://%s.sportsbull.jp/thumbnail1/%s",$subdomain,$f["img1"]),
         "url"=>sprintf("/p/%s/",$f["id"])
     );
-    $photo.=sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><p class="txt">%s</p></a></li>',$v["url"],$v["img"],$v["title"],$v["date"]);
     if($i==0)$end=sprintf("%s.%s",$f["a2"],$f["a3"]);
     $start=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
     $i++;
@@ -133,32 +132,42 @@ while($f=$db->fetch_array()){
 
 ?>
                         <div class="ttl-wrapper">
-                            <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
-                            <p class="ttl_date"><?php echo $start; ?> - <?php echo $end; ?></p>
+                            <h2 class="ttl highlight"><i></i>世界陸上で生まれた世界記録</h2>
+                            <p class="ttl_date">2015年</p>
                         </div>
-                        
-                        <div id="js-current-post" class="current-post photo_gallery">
-                            <ul class="photo_list">
-<?php echo $photo; ?>
-                            </ul>
+                        <div class="article_list">
+                            <article class="highlight_article">
+                                 <ul class="thumb_area">
+
+                                <?php foreach($movie as $k=>$v){ ?>
+                                
+                                    <?php
+                                        for($i=0;$i<count($v);$i++){
+                                            echo sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><div class="txt_area"><p>%s %s</p></div></a></li>',$v[$i]["url"],$v[$i]["img"],$v[$i]["title"],$v[$i]["date"],$v[$i]["title"]);
+                                        }
+                                    ?>
+
+                                <?php } ?>
+                               </ul>
+                            </article>
                         </div>
                         
                         <div class="btn_area">
-                            <div class="btn btn_another"><a href="/inhigh/highlight"><i class="icon_movie"></i>動画特集を見る</a></div>
-                            <div class="btn btn_back"><a href="/category/inhigh">インターハイトップへ戻る</a></div>
+                            <div class="btn btn_another"><a href="/seriku/peking"><i class="icon_movie"></i>北京大会ハイライト動画特集を見る</a></div>
+                            <div class="btn btn_back"><a href="/category/seriku">世界陸上へ戻る</a></div>
                         </div>
                         
                         <div class="content_bottom_bnr">
-                            <a class="show-for-large" href="http://www.inter-high-school.tv/" target="_blank">
-                                <img src="/assets/images/inhigh/PC_Banner_01B.jpg">
+                            <a class="show-for-large" href="http://www.tbs.co.jp/seriku/" target="_blank">
+                                <img src="/assets/images/seriku/PC_Banner_01B.png">
                             </a>
-                            <a class="show-for-small" href="http://www.inter-high-school.tv/" target="_blank">
-                                <img src="/assets/images/inhigh/SP_Banner_01B.jpg">
+                            <a class="show-for-small" href="http://www.tbs.co.jp/seriku/" target="_blank">
+                                <img src="/assets/images/seriku/SP_Banner_01B.png">
                             </a>
                         </div>
                         
 
-<!-- / インターハイ メインコンテンツ ---------------------------------------------------------->
+<!-- / 世界陸上 メインコンテンツ ---------------------------------------------------------->
 
 
                     </section><!-- /.main-sec -->
@@ -312,7 +321,7 @@ while($f=$db->fetch_array()){
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-        <script src="/assets/js/inhigh.bundle.js"></script>
+        <script src="/assets/js/seriku.bundle.js"></script>
         <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
     </body>
 </html>

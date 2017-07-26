@@ -60,6 +60,12 @@
       endif;
       ?>
 
+      <?php
+      if ( $page['category']['slug'] ==='seriku' ) :
+        include_once __DIR__.'/../seriku/mobile/index.php';
+      endif;
+      ?>
+
       <div id="js-headline"></div>
       <div id="category-container"></div>
       <div id="board-container-more"></div>

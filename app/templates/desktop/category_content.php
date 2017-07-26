@@ -59,6 +59,12 @@ if ($page['category']['slug'] == 'all') {
       ?>
 
       <?php
+      if ( $page['category']['slug'] === 'seriku' ) :
+        include_once __DIR__.'/../seriku/desktop/index.php';
+      endif;
+      ?>
+
+      <?php
       // ----------------------------------------------------
       // 記事一覧: pc banner
       if ( !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
