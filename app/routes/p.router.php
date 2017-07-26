@@ -30,9 +30,10 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
       endif;
       $photo = [];
       $photo = $app->model->get_photo($post['id']);
+      $id = isset($_GET['id']) ? '?id=' . $_GET['id'] : '';
       if(count($photo) > 0):
-          header('Location: ' . $app->model->property('site_url').'a/'.$post['id'].'/');
-        exit();
+          header('Location: ' . $app->model->property('site_url').'a/'.$post['id'].'/' . $id);
+          exit();
       endif;
 
       // #1179 Syn.extension 判定
