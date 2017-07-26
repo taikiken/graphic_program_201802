@@ -80,5 +80,4 @@ export default class DaeGameTypes {
      */
     this.list = list;
   }
-  // TODO: filter 可能なように他のJSONとの名窯変換機能
 }
