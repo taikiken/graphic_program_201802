@@ -126,35 +126,6 @@ ComOptionTeams.propTypes = {
 };
 
 // ----------------------------------------
-// div.mlb__schedule__heading__container
-// ----------------------------------------
-
-const onWatchClick = (event) => {
-  event.preventDefault();
-  TweenLite.to(
-    window,
-    0.05,
-    {
-      scrollTo: {
-        y: `#${Style.calendar.id}`,
-      },
-      ease: Power3.easeOut,
-    },
-  );
-};
-
-const ComHeading = () => (
-  <div className="mlb__schedule__heading__container">
-    <h2 className="mlb__schedule__heading">日程・結果</h2>
-    <div className="mlb__schedule__heading__btn">
-      <a href={`#${Style.calendar.id}`} onClick={onWatchClick}>
-        <span>カレンダーを見る</span>
-      </a>
-    </div>
-  </div>
-);
-
-// ----------------------------------------
 // ComSchedule
 // ----------------------------------------
 export default class ComSchedule extends Component {
@@ -176,6 +147,8 @@ export default class ComSchedule extends Component {
     };
     this.onChangeTeams = this.onChangeTeams.bind(this);
     this.onChangeTypes = this.onChangeTypes.bind(this);
+    this.onNavClick = this.onNavClick.bind(this);
+    this.id = Style.calendar.id;
   }
   onChangeTypes(event) {
     event.preventDefault();
@@ -193,6 +166,19 @@ export default class ComSchedule extends Component {
     });
     console.log('onChangeTeams event', event.target.value, event, this.state.team);
   }
+  onNavClick(event) {
+    event.preventDefault();
+    TweenLite.to(
+      window,
+      0.05,
+      {
+        scrollTo: {
+          y: `#${this.id}`,
+        },
+        ease: Power3.easeOut,
+      },
+    );
+  }
   render() {
     const { teams, types, schedule } = this.props;
     if (!teams || !types || !schedule) {
@@ -202,7 +188,14 @@ export default class ComSchedule extends Component {
     // render
     return (
       <section className="mlb__schedule">
-        <ComHeading />
+        <div className="mlb__schedule__heading__container">
+          <h2 className="mlb__schedule__heading">日程・結果</h2>
+          <div className="mlb__schedule__heading__btn">
+            <a href={`#${Style.calendar.id}`} onClick={this.onNavClick}>
+              <span>カレンダーを見る</span>
+            </a>
+          </div>
+        </div>
         <nav className="mlb__schedule__limit_search">
           <ComOptionTeams
             teams={teams}
@@ -217,34 +210,3 @@ export default class ComSchedule extends Component {
     );
   }
 }
-
-// const ComSchedule = ({ teams, types, schedule }) => {
-//   if (!teams || !types || !schedule) {
-//     return null;
-//   }
-//   // render
-//   return (
-//     <section className="mlb__schedule">
-//       <ComHeading />
-//       <nav className="mlb__schedule__limit_search">
-//         <ComOptionTeams
-//           teams={teams}
-//         />
-//       </nav>
-//     </section>
-//   );
-// };
-//
-// ComSchedule.propTypes = {
-//   teams: PropTypes.instanceOf(DaeTeamTypes),
-//   types: PropTypes.instanceOf(DaeGameTypes),
-//   schedule: PropTypes.instanceOf(DaeSchedule),
-// };
-//
-// ComSchedule.defaultProps = {
-//   teams: null,
-//   types: null,
-//   schedule: null,
-// };
-//
-// export default ComSchedule;
