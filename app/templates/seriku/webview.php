@@ -23,38 +23,38 @@
 
 include __DIR__."/inc.php";
 
-var_dump(__DIR__);
-
 ?>
         <section class="section_interhigh_highlight">
             <div class="ttl-wrapper">
-                <h2 class="ttl highlight"><i></i>動画特集</h2>
+                <h2 class="ttl highlight"><i></i>世界陸上で生まれた世界記録</h2>
             </div>
 
             <div class="article_list">
                 <article class="highlight_article">
 
                     <ul class="thumb_area">
-<?php echo $movie; ?>
+                        <?php echo $movie; ?>
                     </ul>
                 </article>
             </div>
-            <p class="section_btn"><a href="/inhigh/highlight/"><i></i>すべての動画を見る</a></p>
+            <p class="section_btn"><a href="/seriku/world-record/"><i></i>すべての動画を見る</a></p>
         </section>
                        
                                       
-        <!--------------  section_photogallery  -------------->
-        <section class="section_interhigh_photo">
+        <section class="section_interhigh_highlight">
             <div class="ttl-wrapper">
-                <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
+                <h2 class="ttl highlight"><i></i>北京大会ハイライト</h2>
             </div>
-            
-            <div id="js-current-post" class="current-post photo_gallery">
-                <ul class="photo_list">
-<?php echo $photo; ?>
-                </ul>
+
+            <div class="article_list">
+                <article class="highlight_article">
+
+                    <ul class="thumb_area">
+                        <?php echo $movie; ?>
+                    </ul>
+                </article>
             </div>
-            <p class="section_btn"><a href="/inhigh/photo/"><i></i>すべてのフォトギャラリーを見る</a></p>
+            <p class="section_btn"><a href="/seriku/peking"><i></i>すべての動画を見る</a></p>
         </section>
 
         <div class="interhigh_bnr">
