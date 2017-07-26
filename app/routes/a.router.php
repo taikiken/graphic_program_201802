@@ -85,7 +85,11 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
           if ( $webview_type === 'body' ) :
             return $this->renderer->render($response, "app.p.body.php", $args);
           else :
-            return $this->renderer->render($response, "app.p.php", $args);
+            if(!isset($_GET['id'])):
+              return $this->renderer->render($response, "app.p.body.php", $args);
+            else :
+              return $this->renderer->render($response, "app.p.php", $args);
+            endif;
           endif;
 
         endif;
