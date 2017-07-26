@@ -8,13 +8,13 @@
     <section class="section_interhigh_highlight">
         <div class="ttl-wrapper">
             <h2 class="ttl highlight"><i></i>世界陸上で生まれた世界記録</h2>
-            <p class="ttl_link"><a href="/seriku/world-record">すべての動画を見る</a></p>
+            <p class="ttl_link"><a href="/seriku/world-record/">すべての動画を見る</a></p>
         </div>
 
         <div class="article_list">
             <article class="highlight_article">
                 <ul class="thumb_area">
-<?php echo $movie; ?>
+<?php echo get_entries("record",4,$db); ?>
                 </ul>
             </article>
         </div>
@@ -23,13 +23,13 @@
     <section class="section_interhigh_highlight">
         <div class="ttl-wrapper">
             <h2 class="ttl highlight"><i></i>北京大会ハイライト</h2>
-            <p class="ttl_link"><a href="/seriku/world-record">すべての動画を見る</a></p>
+            <p class="ttl_link"><a href="/seriku/peking/">すべての動画を見る</a></p>
         </div>
 
         <div class="article_list">
             <article class="highlight_article">
                 <ul class="thumb_area">
-<?php echo $movie; ?>
+<?php echo get_entries("beijing",4,$db); ?>
                 </ul>
             </article>
         </div>

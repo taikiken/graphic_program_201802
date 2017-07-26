@@ -14,12 +14,12 @@
         <article class="highlight_article">
 
             <ul class="thumb_area">
-<?php echo $movie; ?>
+<?php echo get_entries("record",4,$db); ?>
             </ul>
         </article>
     </div>
 
-    <p class="section_btn"><a href="/seriku/world-record"><i></i>すべての動画を見る</a></p>
+    <p class="section_btn"><a href="/seriku/world-record/"><i></i>すべての動画を見る</a></p>
 </section>
 
 <section class="section_interhigh_highlight">
@@ -31,12 +31,12 @@
         <article class="highlight_article">
 
             <ul class="thumb_area">
-<?php echo $movie; ?>
+<?php echo get_entries("beijing",4,$db); ?>
             </ul>
         </article>
     </div>
 
-    <p class="section_btn"><a href="/seriku/world-record"><i></i>すべての動画を見る</a></p>
+    <p class="section_btn"><a href="/seriku/peking/"><i></i>すべての動画を見る</a></p>
 </section>
 
 <div class="interhigh_bnr">

@@ -19,11 +19,7 @@
     <body>
                        
         <!--  インターハイ トップ　パーツ ---------------------------------------------------------->
-<?php
-
-include __DIR__."/inc.php";
-
-?>
+<?php include __DIR__."/inc.php"; ?>
         <section class="section_interhigh_highlight">
             <div class="ttl-wrapper">
                 <h2 class="ttl highlight"><i></i>世界陸上で生まれた世界記録</h2>
@@ -33,7 +29,7 @@ include __DIR__."/inc.php";
                 <article class="highlight_article">
 
                     <ul class="thumb_area">
-                        <?php echo $movie; ?>
+<?php echo get_entries("record",4,$db); ?>
                     </ul>
                 </article>
             </div>
@@ -50,11 +46,11 @@ include __DIR__."/inc.php";
                 <article class="highlight_article">
 
                     <ul class="thumb_area">
-                        <?php echo $movie; ?>
+<?php echo get_entries("beijing",4,$db); ?>
                     </ul>
                 </article>
             </div>
-            <p class="section_btn"><a href="/seriku/peking"><i></i>すべての動画を見る</a></p>
+            <p class="section_btn"><a href="/seriku/peking/"><i></i>すべての動画を見る</a></p>
         </section>
 
         <!-- / インターハイ トップ　パーツ ---------------------------------------------------------->
