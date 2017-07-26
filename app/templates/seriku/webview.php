@@ -57,11 +57,6 @@ include __DIR__."/inc.php";
             <p class="section_btn"><a href="/seriku/peking"><i></i>すべての動画を見る</a></p>
         </section>
 
-        <div class="interhigh_bnr">
-            <a href="http://www.tbs.co.jp/seriku/" target="_blank">
-                <img src="/assets/images/seriku/SP_Banner_01B.png">
-            </a>
-        </div>
         <!-- / インターハイ トップ　パーツ ---------------------------------------------------------->
 
         <!-- for facebook -->
