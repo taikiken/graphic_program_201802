@@ -69,13 +69,14 @@ export class Router extends EventDispatcher {
     var _this = this;
     /**
      * routing ルール
-     * @type {{/: *, /category/: *, /p/: *, /search/: *, /search: *, /signup_login/: *, /signup_login: *, /signup/: *, /signup: *, /login/: *, /login: *, /logout/: *, /logout: *, /reset_password/: *, /mypage/: *, /mypage: *, /notifications/: *, /notifications: *, /settings/: *, /settings: *}}
+     * @type {{/: *, /category/: *, /p/: *, /a/: *, /search/: *, /search: *, /signup_login/: *, /signup_login: *, /signup/: *, /signup: *, /login/: *, /login: *, /logout/: *, /logout: *, /reset_password/: *, /mypage/: *, /mypage: *, /notifications/: *, /notifications: *, /settings/: *, /settings: *}}
      * @private
      */
     this._rule = {
       '/': _this.index.bind( _this ),
       '/category/': _this.category.bind( _this ),
       '/p/': _this.single.bind( _this ),
+      '/a/': _this.single.bind( _this ),
       '/search/': _this.search.bind( _this ),
       '/search': _this.search.bind( _this ),
       '/signup_login/': _this.signupLogin.bind( _this ),
@@ -213,9 +214,28 @@ export class Router extends EventDispatcher {
       }
 
     } else {
+        let [ articleId, comment, commentId, replyId ] = Loc.path.replace( '/a/', '' ).split('/');
+        if ( !!articleId && Number.isInteger( parseInt( articleId, 10 ) ) ) {
 
-      // article Id ない
-      this.page404( 'single' );
+            // article Id 存在
+            if ( comment === 'comment' ) {
+
+                // in comment
+                this.comment( articleId, commentId, replyId );
+
+            } else {
+
+                // single page
+                this.dispatch( { type: Router.SINGLE, id: articleId } );
+
+            }
+
+        } else {
+
+            // article Id ない
+            this.page404( 'single' );
+        }
+
 
     }
 
