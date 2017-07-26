@@ -46,7 +46,7 @@ export default class Top extends View {
     const messageHandlers = webkit.messageHandlers || {};
     const onLoadComplete = messageHandlers.onLoadComplete || {};
     const postMessage = onLoadComplete.postMessage;
-    console.log('postMessage', postMessage);
+    // console.log('postMessage', postMessage);
     if (typeof postMessage === 'function') {
       window.webkit.messageHandlers.onLoadComplete.postMessage('');
     }
