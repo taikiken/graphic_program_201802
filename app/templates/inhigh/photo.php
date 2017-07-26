@@ -150,37 +150,12 @@ while($f=$db->fetch_array()){
                         </div>
                         
                         <div class="content_bottom_bnr">
-
-                            <!-- /531683568/inhigh-ad/inhigh_pc_big_banner -->
-                            <script>
-                                googletag.cmd.push(function() {
-                                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_pc_big_banner', [728, 90], 'div-gpt-ad-1500594913073-0').addService(googletag.pubads());
-                                    googletag.pubads().enableSingleRequest();
-                                    googletag.enableServices();
-                                });
-                            </script>
-                            <div  class="show-for-large" id='div-gpt-ad-1500594913073-0' style='height:90px; width:728px;'>
-                                <script>
-                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500594913073-0'); });
-                                </script>
-                            </div>
-                            <!-- // /531683568/inhigh-ad/inhigh_pc_big_banner -->
-
-                            <!-- /531683568/inhigh-ad/inhigh_sp -->
-                            <script>
-                                googletag.cmd.push(function() {
-                                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_sp', [320, 50], 'div-gpt-ad-1500595161892-0').addService(googletag.pubads());
-                                    googletag.pubads().enableSingleRequest();
-                                    googletag.enableServices();
-                                });
-                            </script>
-                            <div class="show-for-small" id='div-gpt-ad-1500595161892-0' style="height:50px; width:100%;">
-                                <script>
-                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500595161892-0'); });
-                                </script>
-                            </div>
-                            <!-- // /531683568/inhigh-ad/inhigh_sp -->
-
+                            <a class="show-for-large" href="http://www.inter-high-school.tv/" target="_blank">
+                                <img src="/assets/images/inhigh/PC_Banner_01B.jpg">
+                            </a>
+                            <a class="show-for-small" href="http://www.inter-high-school.tv/" target="_blank">
+                                <img src="/assets/images/inhigh/SP_Banner_01B.jpg">
+                            </a>
                         </div>
                         
 

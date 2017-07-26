@@ -58,20 +58,9 @@ var_dump(__DIR__);
         </section>
 
         <div class="interhigh_bnr">
-         <!-- /531683568/inhigh-ad/inhigh_sp -->
-            <script>
-                googletag.cmd.push(function() {
-                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_sp', [320, 50], 'div-gpt-ad-1500595161892-0').addService(googletag.pubads());
-                    googletag.pubads().enableSingleRequest();
-                    googletag.enableServices();
-                });
-            </script>
-            <div id='div-gpt-ad-1500595161892-0' style='display:inline-block; height:50px; width:100%;'>
-                <script>
-                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500595161892-0'); });
-                </script>
-            </div>
-            <!-- // /531683568/inhigh-ad/inhigh_sp -->
+            <a href="http://www.inter-high-school.tv/" target="_blank">
+                <img src="/assets/images/inhigh/SP_Banner_01B.jpg">
+            </a>
         </div>
         <!-- / インターハイ トップ　パーツ ---------------------------------------------------------->
 
