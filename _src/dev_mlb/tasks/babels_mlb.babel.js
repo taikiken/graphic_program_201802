@@ -159,7 +159,7 @@ gulp.task('mlb:copy', () => (
     // .pipe(gulp.dest(dir.dist.root))
     // .pipe(gulp.dest(dir.app.js))
     .pipe(gulp.dest(`${dir.dist.assets.mlb}/js`))
-    // .pipe(gulp.dest(`${dir.root}/test/assets/js`))
+    .pipe(gulp.dest(`${dir.root}/test/assets/js`))
     // .pipe(gulp.dest(`${dir.root}/app/assets/js`))
     .pipe($.size({ title: '*** mlb:copy ***' }))
   ),
