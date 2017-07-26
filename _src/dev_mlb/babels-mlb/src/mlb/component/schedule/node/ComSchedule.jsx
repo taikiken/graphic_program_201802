@@ -34,6 +34,9 @@ import DaeSchedule from '../../../dae/schedule/DaeSchedule';
 // util
 import Print from '../../../util/Print';
 
+// component/schedule/node
+import ComScheduleList from './ComScheduleList';
+
 // gsap
 const TweenLite = self.TweenLite;
 const Power3 = self.Power3;
@@ -170,7 +173,7 @@ export default class ComSchedule extends Component {
     event.preventDefault();
     TweenLite.to(
       window,
-      0.05,
+      0.5,
       {
         scrollTo: {
           y: `#${this.id}`,
@@ -206,6 +209,11 @@ export default class ComSchedule extends Component {
             change={this.onChangeTypes}
           />
         </nav>
+        <ComScheduleList
+          seasons={schedule.seasons}
+          team={this.state.team}
+          type={this.state.type}
+        />
       </section>
     );
   }

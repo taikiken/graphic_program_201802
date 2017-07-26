@@ -131,6 +131,7 @@ class DaeGameTeam {
      */
     this.team = Normalize.str(origin.team_name);
     this.win = false;
+    this.className = '';
   }
 }
 
@@ -191,8 +192,10 @@ export class DaeGame {
     // ゲーム勝敗をscoreから - 4: 試合終了 のみ
     if (status === 4) {
       if (home.score > visitor.score) {
+        home.className = Status.win();
         home.win = true;
       } else {
+        visitor.className = Status.win();
         visitor.win = true;
       }
     }
@@ -209,12 +212,12 @@ export class DaeGame {
  *     - {@link DaeJapanesePlayers}
  *       - {@link DaeJapanesePlayer}
  */
-class DaeGames {
+export class DaeGames {
   /**
    * game 毎の対戦情報
    * @param {Array} games JSON
-   * @param {string} season season name
-   * @param {string} league league name
+   * @param {string} season season key name
+   * @param {string} league league key name
    */
   constructor(games, season, league) {
     const origin = Normalize.arr(games);
@@ -230,6 +233,10 @@ class DaeGames {
     this.list = origin.map(game => (new DaeGame(game, season, league)));
     this.season = season;
     this.league = league;
+    this.title = Normalize.str(Seasons.title(league));
+  }
+  has() {
+    return this.list.length > 0;
   }
 }
 
@@ -260,7 +267,7 @@ export class DaeJapanese {
 }
 
 // season 管理
-export class DaeSeason {
+export class DaeLeagues {
   constructor(key, seasons) {
     this.key = key;
     this.list = seasons;
@@ -269,6 +276,26 @@ export class DaeSeason {
   }
   has() {
     return this.list.some(games => (games.list.length));
+  }
+}
+
+export class DaeSeasons {
+  constructor(open, regular, star, post) {
+    this.season = {
+      open: new DaeLeagues('open', open),
+      regular_season: new DaeLeagues('regular_season', regular),
+      all_star: new DaeLeagues('all_star', star),
+      post_season: new DaeLeagues('post_season', post),
+    };
+    this.list = [
+      'open',
+      'regular_season',
+      'all_star',
+      'post_season',
+    ];
+  }
+  leagues(season) {
+    return this.season[season];
   }
 }
 
@@ -374,17 +401,18 @@ export default class DaeSchedule {
     //   all_star: this.star,
     //   post_season: this.post,
     // };
-    this.season = {
-      open: new DaeSeason('open', this.open),
-      regular_season: new DaeSeason('regular_season', this.regular),
-      all_star: new DaeSeason('all_star', this.star),
-      post_season: new DaeSeason('post_season', this.post),
-    };
-    this.seasons = [
-      'open',
-      'regular_season',
-      'all_star',
-      'post_season',
-    ];
+    // this.season = {
+    //   open: new DaeSeason('open', this.open),
+    //   regular_season: new DaeSeason('regular_season', this.regular),
+    //   all_star: new DaeSeason('all_star', this.star),
+    //   post_season: new DaeSeason('post_season', this.post),
+    // };
+    // this.seasons = [
+    //   'open',
+    //   'regular_season',
+    //   'all_star',
+    //   'post_season',
+    // ];
+    this.seasons = new DaeSeasons(this.open, this.regular, this.star, this.post);
   }
 }
