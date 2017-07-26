@@ -45,6 +45,21 @@ class DaeTypes {
      */
     this.type = Normalize.str(origin.name);
     this.key = Normalize.str(origin.key_name);
+    /**
+     * ゲーム種類所属のリーグリスト
+     * @type {?Array.<DaeTypes>}
+     */
+    this.league = null;
+    this.keys = null;
+  }
+  children(leagueObj) {
+    const league = Object.values(leagueObj).map(kind => new DaeTypes(kind));
+    this.keys = league.map(type => (type.key));
+    this.league = league;
+  }
+  hasLeague() {
+    const league = this.league;
+    return Array.isArray(league) && league.length;
   }
 }
 
@@ -61,6 +76,12 @@ export default class DaeGameTypes {
     const list = Object.values(origin).map(kind => new DaeTypes(kind));
     const types = {};
     list.map((type) => {
+      // league - since 2017-07-26
+      const league = type.origin.league;
+      if (league) {
+        type.children(league);
+      }
+      // ------
       types[type.id] = type.type;
       return type;
     });

@@ -19,6 +19,7 @@ import DaeBatting from '../player/DaeBatting';
 
 // define
 import Status from '../../define/Status';
+import Seasons from '../../define/Seasons';
 
 /**
  * game 毎の日本人選手情報
@@ -140,8 +141,10 @@ export class DaeGame {
   /**
    * game 毎の対戦情報
    * @param {object} game JSON
-   */
-  constructor(game) {
+   * @param {string} season season name
+   * @param {string} league league name
+   * */
+  constructor(game, season, league) {
     const origin = Normalize.obj(game);
     const home = Normalize.obj(origin.home);
     const visitor = Normalize.obj(origin.visitor);
@@ -193,6 +196,8 @@ export class DaeGame {
         visitor.win = true;
       }
     }
+    this.season = season;
+    this.league = league;
   }
 }
 
@@ -208,8 +213,10 @@ class DaeGames {
   /**
    * game 毎の対戦情報
    * @param {Array} games JSON
+   * @param {string} season season name
+   * @param {string} league league name
    */
-  constructor(games) {
+  constructor(games, season, league) {
     const origin = Normalize.arr(games);
     /**
      * original JSON
@@ -220,7 +227,9 @@ class DaeGames {
      * 対戦情報リスト
      * @type {Array.<DaeGame>}
      */
-    this.list = origin.map(game => (new DaeGame(game)));
+    this.list = origin.map(game => (new DaeGame(game, season, league)));
+    this.season = season;
+    this.league = league;
   }
 }
 
@@ -250,6 +259,19 @@ export class DaeJapanese {
   }
 }
 
+// season 管理
+export class DaeSeason {
+  constructor(key, seasons) {
+    this.key = key;
+    this.list = seasons;
+    this.title = Normalize.str(Seasons.title(key));
+    this.enable = seasons.some(games => (games.list.length));
+  }
+  has() {
+    return this.list.some(games => (games.list.length));
+  }
+}
+
 // スケジュール JSON
 /**
  * `master/schedule/YYYYMMDD.json` - スケジュール JSON
@@ -276,6 +298,22 @@ export default class DaeSchedule {
     const origin = Normalize.obj(schedules);
     const schedule = Normalize.obj(origin.schedule);
     const regular = Normalize.obj(schedule.regular_season);
+    const open = Normalize.obj(schedule.open);
+    const post = Normalize.obj(schedule.post_season);
+    // regular
+    const inter = new DaeGames(regular.inter_league, 'regular_season', 'inter_league');
+    const american = new DaeGames(regular.american, 'regular_season', 'american');
+    const national = new DaeGames(regular.national, 'regular_season', 'national');
+    // open
+    const cactus = new DaeGames(open.cactus_league, 'open', 'cactus_league');
+    const grapefruit = new DaeGames(open.grapefruit_league, 'open', 'grapefruit_league');
+    // post
+    const wild = new DaeGames(post.wild_card, 'post_season', 'wild_card');
+    const playoff = new DaeGames(post.division_playoff, 'post_season', 'division_playoff');
+    const champion = new DaeGames(post.league_champion, 'post_season', 'league_champion');
+    const world = new DaeGames(post.world_series, 'post_season', 'world_series');
+    // all star
+    const star = new DaeGames(schedule.all_star, 'all_star', 'all_star');
     // schedule
     /**
      * スケジュール JSON original
@@ -288,27 +326,65 @@ export default class DaeSchedule {
      */
     this.date = Normalize.str(origin.play_date);
     // 試合種別毎
-    /**
-     * ゲーム情報 -  inter league
-     * @type {DaeGames}
-     */
-    this.inter = new DaeGames(regular.inter_league);
-    /**
-     * ゲーム情報 -  american league
-     * @type {DaeGames}
-     */
-    this.american = new DaeGames(regular.american);
-    /**
-     * ゲーム情報 -  national league
-     * @type {DaeGames}
-     */
-    this.national = new DaeGames(regular.national);
+    // /**
+    //  * ゲーム情報 -  inter league
+    //  * @type {DaeGames}
+    //  */
+    // this.inter = inter;
+    // /**
+    //  * ゲーム情報 -  american league
+    //  * @type {DaeGames}
+    //  */
+    // this.american = american;
+    // /**
+    //  * ゲーム情報 -  national league
+    //  * @type {DaeGames}
+    //  */
+    // this.national = national;
     // 日本人選手
-    // TODO: batter pitcher に別れるらしい
     /**
      * 試合に出場した日本人選手
      * @type {DaeJapanese}
      */
     this.japanese = new DaeJapanese(origin.japanese_players);
+    // seasons
+    // this.cactus = cactus;
+    // this.grapefruit = grapefruit;
+    this.regular = [
+      american,
+      national,
+      inter,
+    ];
+    this.open = [
+      cactus,
+      grapefruit,
+    ];
+    this.post = [
+      wild,
+      playoff,
+      champion,
+      world,
+    ];
+    this.star = [
+      star,
+    ];
+    // this.season = {
+    //   open: this.open,
+    //   regular_season: this.regular,
+    //   all_star: this.star,
+    //   post_season: this.post,
+    // };
+    this.season = {
+      open: new DaeSeason('open', this.open),
+      regular_season: new DaeSeason('regular_season', this.regular),
+      all_star: new DaeSeason('all_star', this.star),
+      post_season: new DaeSeason('post_season', this.post),
+    };
+    this.seasons = [
+      'open',
+      'regular_season',
+      'all_star',
+      'post_season',
+    ];
   }
 }

@@ -122,7 +122,7 @@ export default class ComCalendarMam extends Component {
    * ```
    */
   onSlot(event) {
-    // console.log('ComCalendarMam.onSlot', event);
+    console.log('ComCalendarMam.onSlot', event);
     this.transition(event.start);
   }
   /**

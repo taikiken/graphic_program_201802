@@ -145,12 +145,18 @@ const customHeader = (month) => {
   );
 };
 
+// const customEvent = (event) => {
+//   console.log('customEvent event', event);
+//   return null;
+// };
+
 // 月曜スタートするには culture: en-GB にしないとなので...
 // 週表示が英語表記になるのは header component でカスタムする
 /**
  * react-big-calendar を使用しカレンダー component を出力します
  * - 月曜スタートにするために `culture="en-GB"` にします
  * - view month 限定にします
+ * - 週表示が英語表記になるのは header component でカスタムします {@link customHeader}
  * @param {*} props 表記に必要な引数 object
  * @returns {XML} div.calendar-container > BigCalendar
  * @see http://intljusticemission.github.io/react-big-calendar/
