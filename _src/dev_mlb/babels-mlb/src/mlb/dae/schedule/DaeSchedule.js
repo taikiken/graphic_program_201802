@@ -267,26 +267,60 @@ export class DaeJapanese {
 }
 
 // season 管理
+/**
+ * 各リーグ試合情報を管理します
+ */
 export class DaeLeagues {
+  /**
+   * 各リーグ試合情報を管理します
+   * @param {string} key JSON key name ex. `regular_season`
+   * @param {Array.<DaeGames>} seasons 各リーグ試合情報
+   */
   constructor(key, seasons) {
     this.key = key;
     this.list = seasons;
     this.title = Normalize.str(Seasons.title(key));
     this.enable = seasons.some(games => (games.list.length));
   }
+  /**
+   * 試合が存在するかを取得します
+   * @returns {boolean} true: 試合が存在する
+   */
   has() {
     return this.list.some(games => (games.list.length));
   }
 }
 
+/**
+ * シーズン情報を管理します
+ */
 export class DaeSeasons {
+  /**
+   * シーズン付属のリーグ情報を管理します
+   * @param {Array.<DaeGames>} open オープン戦
+   * @param {Array.<DaeGames>} regular レギュラーシーズン
+   * @param {Array.<DaeGames>} star オールスター
+   * @param {Array.<DaeGames>} post ポストシーズン
+   */
   constructor(open, regular, star, post) {
+    /**
+     * シーズン JSON key 毎にリーグ情報を管理します
+     * @type {{open: DaeLeagues, regular_season: DaeLeagues, all_star: DaeLeagues, post_season: DaeLeagues}}
+     */
     this.season = {
       open: new DaeLeagues('open', open),
       regular_season: new DaeLeagues('regular_season', regular),
       all_star: new DaeLeagues('all_star', star),
       post_season: new DaeLeagues('post_season', post),
     };
+    /**
+     * 表示順を管理します
+     * - open'
+     * - 'regular_season'
+     * - 'all_star'
+     * - 'post_season'
+     * @type {[string,string,string,string]}
+     */
     this.list = [
       'open',
       'regular_season',
@@ -294,6 +328,11 @@ export class DaeSeasons {
       'post_season',
     ];
   }
+  /**
+   * シーズン JSON key からリーグ情報を取得します
+   * @param {string} season シーズン JSON key
+   * @returns {?DaeGames} リーグ情報を返します
+   */
   leagues(season) {
     return this.season[season];
   }
@@ -377,21 +416,37 @@ export default class DaeSchedule {
     // seasons
     // this.cactus = cactus;
     // this.grapefruit = grapefruit;
+    /**
+     * regular season list
+     * @type {Array.<DaeGames>}
+     */
     this.regular = [
       american,
       national,
       inter,
     ];
+    /**
+     * オープン戦 list
+     * @type {Array.<DaeGames>}
+     */
     this.open = [
       cactus,
       grapefruit,
     ];
+    /**
+     * post season list
+     * @type {Array.<DaeGames>}
+     */
     this.post = [
       wild,
       playoff,
       champion,
       world,
     ];
+    /**
+     * all star list - 他と処理を合わせるために配列化しています
+     * @type {Array.<DaeGames>}
+     */
     this.star = [
       star,
     ];
@@ -413,6 +468,14 @@ export default class DaeSchedule {
     //   'all_star',
     //   'post_season',
     // ];
+    /**
+     * season 情報を管理します
+     * - regular season
+     * - post season
+     * - オープン戦
+     * - all star
+     * @type {DaeSeasons}
+     */
     this.seasons = new DaeSeasons(this.open, this.regular, this.star, this.post);
   }
 }
