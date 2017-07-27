@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+    <?php if(count($page['photo']) > 0):?>
+
+        <link rel="stylesheet" href="/assets/css/style_sp.css?v=<?php echo $page['version']; ?>">
+        <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
+    <?php endif;?>
 <?php
 /*
 
