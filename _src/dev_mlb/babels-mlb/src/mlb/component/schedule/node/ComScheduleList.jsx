@@ -20,6 +20,9 @@ import { DaeLeagues, DaeSeasons, DaeGames, DaeGame } from '../../../dae/schedule
 // util
 import Print from '../../../util/Print';
 
+// define
+import Style from '../../../define/Style';
+
 // ----------------------------------------
 // 各ゲーム
 // ----------------------------------------
@@ -42,8 +45,8 @@ const ComGame = ({ game, team }) => {
     }
   }
   // ------
-  const homeClass = game.home.win ? '.mlb__game__result--win' : '';
-  const visitorClass = game.visitor.win ? '.mlb__game__result--win' : '';
+  const homeClass = game.home.win ? Style.WIN : '';
+  const visitorClass = game.visitor.win ? Style.WIN : '';
   const statusClass = game.className;
   // render
   return (

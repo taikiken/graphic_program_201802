@@ -20,6 +20,7 @@ import DaeBatting from '../player/DaeBatting';
 // define
 import Status from '../../define/Status';
 import Seasons from '../../define/Seasons';
+import Style from '../../define/Style';
 
 /**
  * game 毎の日本人選手情報
@@ -145,7 +146,7 @@ class DaeGameTeam {
     this.win = false;
     /**
      * status: 4 の時の勝に付与される class name,
-     * {@link Status.win}
+     * {@link Style.WIN}
      * @type {string}
      */
     this.className = '';
@@ -173,10 +174,10 @@ export class DaeGame {
     // ゲーム勝敗をscoreから - 4: 試合終了 のみ
     if (status === 4) {
       if (home.score > visitor.score) {
-        home.className = Status.win();
+        home.className = Style.WIN;
         home.win = true;
       } else {
-        visitor.className = Status.win();
+        visitor.className = Style.WIN;
         visitor.win = true;
       }
     }

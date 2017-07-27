@@ -30,6 +30,9 @@ import DaePitching from '../../../dae/player/DaePitching';
 import Day from '../../../util/Day';
 import Print from '../../../util/Print';
 
+// define
+import Style from '../../../define/Style';
+
 
 // ----------------------------------------
 // section.mlb__today_jp
@@ -161,8 +164,8 @@ const ComGame = ({ game }) => {
   }
   // -----
   // render
-  const homeClass = game.home.win ? '.mlb__game__result--win' : '';
-  const visitorClass = game.visitor.win ? '.mlb__game__result--win' : '';
+  const homeClass = game.home.win ? Style.WIN : '';
+  const visitorClass = game.visitor.win ? Style.WIN : '';
   const statusClass = game.className;
   return (
     <div className="com-player-container">

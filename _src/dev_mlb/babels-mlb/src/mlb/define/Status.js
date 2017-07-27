@@ -66,11 +66,11 @@ export default class Status {
   static className(id) {
     return Status.classes[id];
   }
-  /**
-   * team が勝った時に付与する class name - mlb__game__result--win を取得します
-   * @returns {string} team が勝った時に付与する class name - mlb__game__result--win を返します
-   */
-  static win() {
-    return 'mlb__game__result--win';
-  }
+  // /**
+  //  * team が勝った時に付与する class name - mlb__game__result--win を取得します
+  //  * @returns {string} team が勝った時に付与する class name - mlb__game__result--win を返します
+  //  */
+  // static win() {
+  //   return 'mlb__game__result--win';
+  // }
 }

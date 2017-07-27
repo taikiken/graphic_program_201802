@@ -29,15 +29,20 @@ export default class Main {
   static index(page) {
     console.log('Main.index', page);
     const id = page.id;
-    if (!id.length || id.length !== 8) {
-      return;
+    if (id) {
+      // id: not null - /stats/mlb/yyyymmdd/
+      // id: null - /stats/mlb/
+      if (!id.length || id.length !== 8) {
+        return;
+      }
     }
+
     const element = document.getElementById('js-mlb-index-container');
     if (!element) {
       return;
     }
-    const year = id.substr(0, 4);
-    const date = Day.convert(id);
+    const date = id ? Day.convert(id) : Day.current();
+    const { year } = Day.date(date);
     View.index(element, year, date);
   }
   static init() {
