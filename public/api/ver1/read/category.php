@@ -134,6 +134,13 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+  # ref. #2227
+  if ( $category === 'seriku' ) :
+    $categoriesinfo['webviews']     = array(
+      '/seriku/webview/',
+    );
+  endif;
+
   // #2080
   if ( $category === 'top' ) :
     $categoriesinfo['webviews'] = array(
