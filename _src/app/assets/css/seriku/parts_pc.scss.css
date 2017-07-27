@@ -2889,7 +2889,7 @@
 
 .article_list .highlight_article .thumb_area li .img { position: relative; }
 
-.article_list .highlight_article .thumb_area li .img:after { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; background: url(../../../assets/images/inhigh/icon_play.png) no-repeat center/contain; width: 40px; height: 40px; }
+.article_list .highlight_article .thumb_area li .img:after { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; background: url(../../../assets/images/seriku/icon_play.png) no-repeat center/contain; width: 40px; height: 40px; }
 
 .article_list .highlight_article .thumb_area li .img img { -webkit-transition: .4s ease; -o-transition: .4s ease; transition: .4s ease; }
 
