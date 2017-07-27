@@ -119,15 +119,15 @@ $i=0;
 $sql="select id,img1,title,a1,a2,a3 from repo_n where d2=54 and flag=1 and swf is not null order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc";
 $db->query($sql);
 while($f=$db->fetch_array()){
-	$movie[sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"])][]=array(
-		"title"=>htmlspecialchars($f["title"]),
-		"date"=>sprintf("%s/%s",(int)$f["a2"],(int)$f["a3"]),
-		"img"=>sprintf("https://%s.sportsbull.jp/thumbnail1/%s",$subdomain,$f["img1"]),
-		"url"=>sprintf("/p/%s/",$f["id"])
-	);
-	if($i==0)$end=sprintf("%s.%s",$f["a2"],$f["a3"]);
-	$start=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
-	$i++;
+    $movie[sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"])][]=array(
+        "title"=>htmlspecialchars($f["title"]),
+        "date"=>sprintf("%s/%s",(int)$f["a2"],(int)$f["a3"]),
+        "img"=>sprintf("https://%s.sportsbull.jp/thumbnail1/%s",$subdomain,$f["img1"]),
+        "url"=>sprintf("/p/%s/",$f["id"])
+    );
+    if($i==0)$end=sprintf("%s.%s",$f["a2"],$f["a3"]);
+    $start=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
+    $i++;
 }
 
 ?>
@@ -143,7 +143,7 @@ while($f=$db->fetch_array()){
                                 <ul class="thumb_area">
 <?php
 for($i=0;$i<count($v);$i++){
-	echo sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><div class="txt_area"><p>%s %s</p></div></a></li>',$v[$i]["url"],$v[$i]["img"],$v[$i]["title"],$v[$i]["date"],$v[$i]["title"]);
+    echo sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><div class="txt_area"><p>%s %s</p></div></a></li>',$v[$i]["url"],$v[$i]["img"],$v[$i]["title"],$v[$i]["date"],$v[$i]["title"]);
 }
 ?>
                                 </ul>
@@ -157,37 +157,12 @@ for($i=0;$i<count($v);$i++){
                         </div>
                         
                         <div class="content_bottom_bnr">
-
-                            <!-- /531683568/inhigh-ad/inhigh_pc_big_banner -->
-                            <script>
-                                googletag.cmd.push(function() {
-                                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_pc_big_banner', [728, 90], 'div-gpt-ad-1500594913073-0').addService(googletag.pubads());
-                                    googletag.pubads().enableSingleRequest();
-                                    googletag.enableServices();
-                                });
-                            </script>
-                            <div  class="show-for-large" id='div-gpt-ad-1500594913073-0' style='height:90px; width:728px;'>
-                                <script>
-                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500594913073-0'); });
-                                </script>
-                            </div>
-                            <!-- // /531683568/inhigh-ad/inhigh_pc_big_banner -->
-
-                            <!-- /531683568/inhigh-ad/inhigh_sp -->
-                            <script>
-                                googletag.cmd.push(function() {
-                                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_sp', [320, 50], 'div-gpt-ad-1500595161892-0').addService(googletag.pubads());
-                                    googletag.pubads().enableSingleRequest();
-                                    googletag.enableServices();
-                                });
-                            </script>
-                            <div class="show-for-small" id='div-gpt-ad-1500595161892-0' style="height:50px; width:100%;">
-                                <script>
-                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500595161892-0'); });
-                                </script>
-                            </div>
-                            <!-- // /531683568/inhigh-ad/inhigh_sp -->
-
+                            <a class="show-for-large" href="http://www.inter-high-school.tv/" target="_blank">
+                                <img src="/assets/images/inhigh/PC_Banner_01B.jpg">
+                            </a>
+                            <a class="show-for-small" href="http://www.inter-high-school.tv/" target="_blank">
+                                <img src="/assets/images/inhigh/SP_Banner_01B.jpg">
+                            </a>
                         </div>
                         
 
@@ -345,7 +320,7 @@ for($i=0;$i<count($v);$i++){
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-        <script src="/assets/js/global.bundle.js"></script>
+        <script src="/assets/js/inhigh.bundle.js"></script>
         <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
     </body>
 </html>

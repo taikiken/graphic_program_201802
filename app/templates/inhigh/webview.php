@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="ja">
+<html dir="ltr" lang="ja" style="height: auto;">
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
         <meta charset="UTF-8">
         <meta http-equiv="pragma" content="no-cache">
@@ -16,14 +16,12 @@
             googletag.cmd = googletag.cmd || [];
         </script>
     </head>
-    <body>
+    <body style="height: auto;">
                        
         <!--  インターハイ トップ　パーツ ---------------------------------------------------------->
 <?php
 
 include __DIR__."/inc.php";
-
-var_dump(__DIR__);
 
 ?>
         <section class="section_interhigh_highlight">
@@ -57,25 +55,5 @@ var_dump(__DIR__);
             <p class="section_btn"><a href="/inhigh/photo/"><i></i>すべてのフォトギャラリーを見る</a></p>
         </section>
 
-        <div class="interhigh_bnr">
-         <!-- /531683568/inhigh-ad/inhigh_sp -->
-            <script>
-                googletag.cmd.push(function() {
-                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_sp', [320, 50], 'div-gpt-ad-1500595161892-0').addService(googletag.pubads());
-                    googletag.pubads().enableSingleRequest();
-                    googletag.enableServices();
-                });
-            </script>
-            <div id='div-gpt-ad-1500595161892-0' style='display:inline-block; height:50px; width:100%;'>
-                <script>
-                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500595161892-0'); });
-                </script>
-            </div>
-            <!-- // /531683568/inhigh-ad/inhigh_sp -->
-        </div>
-        <!-- / インターハイ トップ　パーツ ---------------------------------------------------------->
-
-        <!-- for facebook -->
-        <script src="/assets/js/global.bundle.js"></script>
     </body>
 </html>

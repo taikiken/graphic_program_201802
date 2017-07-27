@@ -99,7 +99,7 @@
 
 <!-- インターハイ メイン画像 ---------------------------------------------------------->
             <div class="special-summary">
-                <a href="/category/interhigh"><h1 class="special-summary-heading"><img src="/assets/images/inhigh/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="/assets/images/inhigh/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
+                <a href="/category/inhigh"><h1 class="special-summary-heading"><img src="/assets/images/inhigh/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="/assets/images/inhigh/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
             </div>
 <!-- / インターハイ メイン画像 ---------------------------------------------------------->
 
@@ -120,16 +120,16 @@ $i=0;
 $sql="select id,img1,title,a1,a2,a3 from repo_n where d2=54 and flag=1 and swf is null order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc";
 $db->query($sql);
 while($f=$db->fetch_array()){
-	$v=array(
-		"title"=>htmlspecialchars($f["title"]),
-		"date"=>sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]),
-		"img"=>sprintf("https://%s.sportsbull.jp/img/%s",$subdomain,$f["img1"]),
-		"url"=>sprintf("/p/%s/",$f["id"])
-	);
-	$photo.=sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><p class="txt">%s</p></a></li>',$v["url"],$v["img"],$v["title"],$v["date"]);
-	if($i==0)$end=sprintf("%s.%s",$f["a2"],$f["a3"]);
-	$start=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
-	$i++;
+    $v=array(
+        "title"=>htmlspecialchars($f["title"]),
+        "date"=>sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]),
+        "img"=>sprintf("https://%s.sportsbull.jp/img/%s",$subdomain,$f["img1"]),
+        "url"=>sprintf("/p/%s/",$f["id"])
+    );
+    $photo.=sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><p class="txt">%s</p></a></li>',$v["url"],$v["img"],$v["title"],$v["date"]);
+    if($i==0)$end=sprintf("%s.%s",$f["a2"],$f["a3"]);
+    $start=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
+    $i++;
 }
 
 ?>
@@ -150,37 +150,12 @@ while($f=$db->fetch_array()){
                         </div>
                         
                         <div class="content_bottom_bnr">
-
-                            <!-- /531683568/inhigh-ad/inhigh_pc_big_banner -->
-                            <script>
-                                googletag.cmd.push(function() {
-                                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_pc_big_banner', [728, 90], 'div-gpt-ad-1500594913073-0').addService(googletag.pubads());
-                                    googletag.pubads().enableSingleRequest();
-                                    googletag.enableServices();
-                                });
-                            </script>
-                            <div  class="show-for-large" id='div-gpt-ad-1500594913073-0' style='height:90px; width:728px;'>
-                                <script>
-                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500594913073-0'); });
-                                </script>
-                            </div>
-                            <!-- // /531683568/inhigh-ad/inhigh_pc_big_banner -->
-
-                            <!-- /531683568/inhigh-ad/inhigh_sp -->
-                            <script>
-                                googletag.cmd.push(function() {
-                                    googletag.defineSlot('/531683568/inhigh-ad/inhigh_sp', [320, 50], 'div-gpt-ad-1500595161892-0').addService(googletag.pubads());
-                                    googletag.pubads().enableSingleRequest();
-                                    googletag.enableServices();
-                                });
-                            </script>
-                            <div class="show-for-small" id='div-gpt-ad-1500595161892-0' style="height:50px; width:100%;">
-                                <script>
-                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500595161892-0'); });
-                                </script>
-                            </div>
-                            <!-- // /531683568/inhigh-ad/inhigh_sp -->
-
+                            <a class="show-for-large" href="http://www.inter-high-school.tv/" target="_blank">
+                                <img src="/assets/images/inhigh/PC_Banner_01B.jpg">
+                            </a>
+                            <a class="show-for-small" href="http://www.inter-high-school.tv/" target="_blank">
+                                <img src="/assets/images/inhigh/SP_Banner_01B.jpg">
+                            </a>
                         </div>
                         
 
@@ -338,7 +313,7 @@ while($f=$db->fetch_array()){
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-        <script src="/assets/js/global.bundle.js"></script>
+        <script src="/assets/js/inhigh.bundle.js"></script>
         <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
     </body>
 </html>
