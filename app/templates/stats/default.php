@@ -89,6 +89,17 @@
    ga('send', 'pageview');
   </script>
 
+  <!-- appvador -->
+  <script>
+    googletag.cmd.push(function() {
+      googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.pubads().collapseEmptyDivs();
+      googletag.enableServices();
+    });
+  </script>
+  <!-- //appvador -->
+
   <script>
     googletag.cmd.push(function() {
       googletag.defineSlot('/531683568/npb-pc-rectangle', [300, 250], 'div-gpt-ad-1492577512561-0').addService(googletag.pubads());
@@ -113,22 +124,14 @@ __EOL__;
 </head>
 <body>
 
-<?php
-/*
-# appvaoder
-- グノシー / ニュースパスからのアクセスならappvador実行しない
-*/
-?>
-<div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
-<script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
+<?php /* # appvaoder */ ?>
+<!-- /531683568/appvador -->
+<div id='div-gpt-ad-1501126889988-0'>
 <script>
-;(function(){
-  if ( !(/gunosy|newspass/i.test(window.navigator.userAgent)) ) {
-    new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();
-  }
-})();
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0'); });
 </script>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
+</div>
 <?php /* // appvaoder */ ?>
 
 <div id="whole" class="whole stats">
