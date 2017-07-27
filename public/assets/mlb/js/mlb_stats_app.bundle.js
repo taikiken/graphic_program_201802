@@ -7609,7 +7609,7 @@ var Day = function () {
     }
     /**
      * 「○月○日（日）」な文字列を生成します
-     * @param {Date} date Date object
+     * @param {*} date Date object - {date: Date, year: number, month: number, day: number, week: string}
      * @returns {string} 「○月○日（日）」な文字列を返します
      */
 
@@ -10974,6 +10974,8 @@ function DaeSchedule(schedules) {
   var world = new DaeGames(post.world_series, 'post_season', 'world_series');
   // all star
   var star = new DaeGames(schedule.all_star, 'all_star', 'all_star');
+  // 日付
+  var date = _Normalize2.default.str(origin.play_date);
   // schedule
   /**
    * スケジュール JSON original
@@ -10984,7 +10986,12 @@ function DaeSchedule(schedules) {
    * 試合日 YYYYMMDD
    * @type {*}
    */
-  this.date = _Normalize2.default.str(origin.play_date);
+  this.date = date;
+  /**
+   * 試合年 YYYY
+   * @type {string}
+   */
+  this.year = date.substr(0, 4);
   // 試合種別毎
   // /**
   //  * ゲーム情報 -  inter league
@@ -40248,7 +40255,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-27 22:55:09
+ * 2017-7-27 23:19:36
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -79127,7 +79134,8 @@ var ComScheduleMam = function ComScheduleMam(_ref) {
     _react2.default.createElement(_ComSchedule2.default, {
       schedule: schedule,
       types: types,
-      teams: teams
+      teams: teams,
+      date: date
     })
   );
 };
@@ -79434,7 +79442,8 @@ ComPlayer.propTypes = {
  * @constructor
  */
 var ComGame = function ComGame(_ref4) {
-  var game = _ref4.game;
+  var game = _ref4.game,
+      date = _ref4.date;
 
   if (!game.players.has()) {
     return null;
@@ -79456,7 +79465,7 @@ var ComGame = function ComGame(_ref4) {
     }),
     _react2.default.createElement(
       'a',
-      { href: '/stats/mlb/game/' + game.id + '/' },
+      { href: '/stats/mlb/game/' + date.year + '/' + game.id + '/' },
       _react2.default.createElement(
         'div',
         { className: 'mlb__game__overview' },
@@ -79513,7 +79522,12 @@ var ComGame = function ComGame(_ref4) {
  * @type {{game: DaeGame}}
  */
 ComGame.propTypes = {
-  game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired
+  game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
+  date: _propTypes2.default.shape({
+    year: _propTypes2.default.number.isRequired,
+    month: _propTypes2.default.number.isRequired,
+    day: _propTypes2.default.number.isRequired
+  }).isRequired
 };
 
 // ----------------------------------------
@@ -79550,7 +79564,8 @@ var ComJapanese = function ComJapanese(_ref5) {
     japanese.list.map(function (game) {
       return _react2.default.createElement(ComGame, {
         key: game.id + '-' + game.status,
-        game: game
+        game: game,
+        date: date
       });
     }),
     _react2.default.createElement(
@@ -79957,7 +79972,8 @@ var ComSchedule = function (_Component) {
       var _props = this.props,
           teams = _props.teams,
           types = _props.types,
-          schedule = _props.schedule;
+          schedule = _props.schedule,
+          date = _props.date;
 
       if (!teams || !types || !schedule) {
         return null;
@@ -80003,6 +80019,7 @@ var ComSchedule = function (_Component) {
         ),
         _react2.default.createElement(_ComScheduleList2.default, {
           seasons: schedule.seasons,
+          date: date,
           team: this.state.team,
           type: this.state.type
         })
@@ -80016,12 +80033,18 @@ var ComSchedule = function (_Component) {
 ComSchedule.propTypes = {
   teams: _propTypes2.default.instanceOf(_DaeTeamTypes2.default),
   types: _propTypes2.default.instanceOf(_DaeGameTypes2.default),
-  schedule: _propTypes2.default.instanceOf(_DaeSchedule2.default)
+  schedule: _propTypes2.default.instanceOf(_DaeSchedule2.default),
+  date: _propTypes2.default.shape({
+    year: _propTypes2.default.number,
+    month: _propTypes2.default.number,
+    day: _propTypes2.default.number
+  })
 };
 ComSchedule.defaultProps = {
   teams: null,
   types: null,
-  schedule: null
+  schedule: null,
+  date: null
 };
 exports.default = ComSchedule;
 
@@ -80094,12 +80117,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * - 引数 `team` が 'all' 以外の時は filter 処理を行う
  * @param {DaeGame} game ゲーム情報
  * @param {string} team team.id - 【注意】data は number なので cast して比較すること
+ * @param {*} date {{year: number, month: number, day: number}} な object
  * @returns {?XML} div.mlb__game__overview
  * @constructor
  */
 var ComGame = function ComGame(_ref) {
   var game = _ref.game,
-      team = _ref.team;
+      team = _ref.team,
+      date = _ref.date;
 
   var teamClass = 'mlb__game__overview__team';
   // team `all` 以外は filter する
@@ -80117,7 +80142,7 @@ var ComGame = function ComGame(_ref) {
   // render
   return _react2.default.createElement(
     'a',
-    { href: '/stats/mlb/game/' + game.id + '/' },
+    { href: '/stats/mlb/game/' + date.year + '/' + game.id + '/' },
     _react2.default.createElement(
       'div',
       { className: 'mlb__game__overview' },
@@ -80174,7 +80199,12 @@ var ComGame = function ComGame(_ref) {
  */
 ComGame.propTypes = {
   game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
-  team: _propTypes2.default.string.isRequired
+  team: _propTypes2.default.string.isRequired,
+  date: _propTypes2.default.shape({
+    year: _propTypes2.default.number.isRequired,
+    month: _propTypes2.default.number.isRequired,
+    day: _propTypes2.default.number.isRequired
+  }).isRequired
 };
 
 // ----------------------------------------
@@ -80187,11 +80217,13 @@ ComGame.propTypes = {
  * @param {DaeGames} games ゲーム情報リスト
  * @param {string} team team.id - 【注意】data は number なので cast して比較すること
  * @returns {?XML} div.mlb__schedule__result__heading
- * @constructor
+ * @param {*} date {{year: number, month: number, day: number}} な object
+ * @constructore
  */
 var ComGames = function ComGames(_ref2) {
   var games = _ref2.games,
-      team = _ref2.team;
+      team = _ref2.team,
+      date = _ref2.date;
 
   // game 数存在チェック
   if (!games.has()) {
@@ -80224,7 +80256,8 @@ var ComGames = function ComGames(_ref2) {
       return _react2.default.createElement(ComGame, {
         key: 'game-' + game.id,
         game: game,
-        team: team
+        team: team,
+        date: date
       });
     })
   );
@@ -80236,7 +80269,12 @@ var ComGames = function ComGames(_ref2) {
  */
 ComGames.propTypes = {
   games: _propTypes2.default.instanceOf(_DaeSchedule.DaeGames).isRequired,
-  team: _propTypes2.default.string.isRequired
+  team: _propTypes2.default.string.isRequired,
+  date: _propTypes2.default.shape({
+    year: _propTypes2.default.number.isRequired,
+    month: _propTypes2.default.number.isRequired,
+    day: _propTypes2.default.number.isRequired
+  }).isRequired
 };
 
 // ----------------------------------------
@@ -80247,11 +80285,13 @@ ComGames.propTypes = {
  * div.mlb__schedule__result__container
  * @param {DaeLeagues} leagues リーグ情報
  * @param {string} team team.id filter に使用します
+ * @param {*} date {{year: number, month: number, day: number}} な object
  * @constructor
  */
 var ComSeasons = function ComSeasons(_ref3) {
   var leagues = _ref3.leagues,
-      team = _ref3.team;
+      team = _ref3.team,
+      date = _ref3.date;
   return _react2.default.createElement(
     'div',
     { className: 'mlb__schedule__result__container' },
@@ -80259,7 +80299,8 @@ var ComSeasons = function ComSeasons(_ref3) {
       return _react2.default.createElement(ComGames, {
         key: games.season + '-' + games.league,
         games: games,
-        team: team
+        team: team,
+        date: date
       });
     })
   );
@@ -80271,7 +80312,12 @@ var ComSeasons = function ComSeasons(_ref3) {
  */
 ComSeasons.propTypes = {
   leagues: _propTypes2.default.instanceOf(_DaeSchedule.DaeLeagues).isRequired,
-  team: _propTypes2.default.string.isRequired
+  team: _propTypes2.default.string.isRequired,
+  date: _propTypes2.default.shape({
+    year: _propTypes2.default.number.isRequired,
+    month: _propTypes2.default.number.isRequired,
+    day: _propTypes2.default.number.isRequired
+  }).isRequired
 };
 
 // ----------------------------------------
@@ -80346,7 +80392,8 @@ var ComScheduleList = function (_Component) {
       // select / option の値
       var _props2 = this.props,
           team = _props2.team,
-          type = _props2.type;
+          type = _props2.type,
+          date = _props2.date;
 
       console.log('ComScheduleList.render team, type', team, type);
       return _react2.default.createElement(
@@ -80366,7 +80413,8 @@ var ComScheduleList = function (_Component) {
           return _react2.default.createElement(ComSeasons, {
             key: 'season-' + leagues.key,
             leagues: leagues,
-            team: team
+            team: team,
+            date: date
           });
         })
       );
@@ -80379,7 +80427,12 @@ var ComScheduleList = function (_Component) {
 ComScheduleList.propTypes = {
   seasons: _propTypes2.default.instanceOf(_DaeSchedule.DaeSeasons).isRequired,
   team: _propTypes2.default.string.isRequired,
-  type: _propTypes2.default.string.isRequired
+  type: _propTypes2.default.string.isRequired,
+  date: _propTypes2.default.shape({
+    year: _propTypes2.default.number.isRequired,
+    month: _propTypes2.default.number.isRequired,
+    day: _propTypes2.default.number.isRequired
+  }).isRequired
 };
 exports.default = ComScheduleList;
 

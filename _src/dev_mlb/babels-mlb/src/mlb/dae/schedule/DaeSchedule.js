@@ -456,6 +456,8 @@ export default class DaeSchedule {
     const world = new DaeGames(post.world_series, 'post_season', 'world_series');
     // all star
     const star = new DaeGames(schedule.all_star, 'all_star', 'all_star');
+    // 日付
+    const date = Normalize.str(origin.play_date);
     // schedule
     /**
      * スケジュール JSON original
@@ -466,7 +468,12 @@ export default class DaeSchedule {
      * 試合日 YYYYMMDD
      * @type {*}
      */
-    this.date = Normalize.str(origin.play_date);
+    this.date = date;
+    /**
+     * 試合年 YYYY
+     * @type {string}
+     */
+    this.year = date.substr(0, 4);
     // 試合種別毎
     // /**
     //  * ゲーム情報 -  inter league

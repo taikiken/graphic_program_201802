@@ -58,6 +58,7 @@ const ComScheduleMam = ({ schedule, date, types, teams }) => {
         schedule={schedule}
         types={types}
         teams={teams}
+        date={date}
       />
     </div>
   );

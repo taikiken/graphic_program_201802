@@ -73,7 +73,7 @@ export default class Day {
   }
   /**
    * 「○月○日（日）」な文字列を生成します
-   * @param {Date} date Date object
+   * @param {*} date Date object - {date: Date, year: number, month: number, day: number, week: string}
    * @returns {string} 「○月○日（日）」な文字列を返します
    */
   static title(date = Day.current()) {

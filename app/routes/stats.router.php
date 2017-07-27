@@ -72,7 +72,7 @@ $app->group('/stats', function () use($app) {
   // MLB/game
   // ==============================
   $this->group('/mlb/game', function ($request, $response, $args) use ( $app ) {
-    $this->get('/{category:\d{9}}[/]', function ($request, $response, $args) use ($app) {
+    $this->get('/{category:\d{4}/\d{9}}[/]', function ($request, $response, $args) use ($app) {
       
       $category = array(
         'title' => 'MLB | 速報 &amp; データ',

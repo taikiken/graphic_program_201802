@@ -158,7 +158,7 @@ ComPlayer.propTypes = {
  * @returns {?XML} div.com-player-container > div.mlb__game__overview
  * @constructor
  */
-const ComGame = ({ game }) => {
+const ComGame = ({ game, date }) => {
   if (!game.players.has()) {
     return null;
   }
@@ -178,7 +178,7 @@ const ComGame = ({ game }) => {
           />
         ))
       }
-      <a href={`/stats/mlb/game/${game.id}/`}>
+      <a href={`/stats/mlb/game/${date.year}/${game.id}/`}>
         <div className="mlb__game__overview">
           <p className={`${className} ${className}--home ${homeClass}`}>
             {Print.str(game.home.team)}
@@ -215,6 +215,11 @@ const ComGame = ({ game }) => {
  */
 ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
+  date: PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 // ----------------------------------------
@@ -244,6 +249,7 @@ const ComJapanese = ({ japanese, date }) => {
           <ComGame
             key={`${game.id}-${game.status}`}
             game={game}
+            date={date}
           />
         ))
       }

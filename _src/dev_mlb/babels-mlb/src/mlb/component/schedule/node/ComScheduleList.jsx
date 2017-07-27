@@ -31,10 +31,11 @@ import Style from '../../../define/Style';
  * - 引数 `team` が 'all' 以外の時は filter 処理を行う
  * @param {DaeGame} game ゲーム情報
  * @param {string} team team.id - 【注意】data は number なので cast して比較すること
+ * @param {*} date {{year: number, month: number, day: number}} な object
  * @returns {?XML} div.mlb__game__overview
  * @constructor
  */
-const ComGame = ({ game, team }) => {
+const ComGame = ({ game, team, date }) => {
   const teamClass = 'mlb__game__overview__team';
   // team `all` 以外は filter する
   if (team !== 'all') {
@@ -50,7 +51,7 @@ const ComGame = ({ game, team }) => {
   const statusClass = game.className;
   // render
   return (
-    <a href={`/stats/mlb/game/${game.id}/`}>
+    <a href={`/stats/mlb/game/${date.year}/${game.id}/`}>
       <div className="mlb__game__overview">
         <p className={`${teamClass} ${teamClass}--home ${Print.str(game.home.className)}`}>
           {Print.str(game.home.team)}
@@ -87,6 +88,11 @@ const ComGame = ({ game, team }) => {
 ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
   team: PropTypes.string.isRequired,
+  date: PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 // ----------------------------------------
@@ -99,9 +105,10 @@ ComGame.propTypes = {
  * @param {DaeGames} games ゲーム情報リスト
  * @param {string} team team.id - 【注意】data は number なので cast して比較すること
  * @returns {?XML} div.mlb__schedule__result__heading
- * @constructor
+ * @param {*} date {{year: number, month: number, day: number}} な object
+ * @constructore
  */
-const ComGames = ({ games, team }) => {
+const ComGames = ({ games, team, date }) => {
   // game 数存在チェック
   if (!games.has()) {
     return null;
@@ -132,6 +139,7 @@ const ComGames = ({ games, team }) => {
             key={`game-${game.id}`}
             game={game}
             team={team}
+            date={date}
           />
         ))
       }
@@ -146,6 +154,11 @@ const ComGames = ({ games, team }) => {
 ComGames.propTypes = {
   games: PropTypes.instanceOf(DaeGames).isRequired,
   team: PropTypes.string.isRequired,
+  date: PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 // ----------------------------------------
@@ -156,9 +169,10 @@ ComGames.propTypes = {
  * div.mlb__schedule__result__container
  * @param {DaeLeagues} leagues リーグ情報
  * @param {string} team team.id filter に使用します
+ * @param {*} date {{year: number, month: number, day: number}} な object
  * @constructor
  */
-const ComSeasons = ({ leagues, team }) => (
+const ComSeasons = ({ leagues, team, date }) => (
   <div className="mlb__schedule__result__container">
     {
       leagues.list.map(games => (
@@ -166,6 +180,7 @@ const ComSeasons = ({ leagues, team }) => (
           key={`${games.season}-${games.league}`}
           games={games}
           team={team}
+          date={date}
         />
       ))
     }
@@ -179,6 +194,11 @@ const ComSeasons = ({ leagues, team }) => (
 ComSeasons.propTypes = {
   leagues: PropTypes.instanceOf(DaeLeagues).isRequired,
   team: PropTypes.string.isRequired,
+  date: PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 // ----------------------------------------
@@ -203,6 +223,11 @@ export default class ComScheduleList extends Component {
     seasons: PropTypes.instanceOf(DaeSeasons).isRequired,
     team: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    date: PropTypes.shape({
+      year: PropTypes.number.isRequired,
+      month: PropTypes.number.isRequired,
+      day: PropTypes.number.isRequired,
+    }).isRequired,
   };
   // ----------------------------------------
   // METHOD
@@ -235,7 +260,7 @@ export default class ComScheduleList extends Component {
    */
   render() {
     // select / option の値
-    const { team, type } = this.props;
+    const { team, type, date } = this.props;
     console.log('ComScheduleList.render team, type', team, type);
     return (
       <div className="mlb__schedule__result__section">
@@ -256,6 +281,7 @@ export default class ComScheduleList extends Component {
                 key={`season-${leagues.key}`}
                 leagues={leagues}
                 team={team}
+                date={date}
               />
             );
           })

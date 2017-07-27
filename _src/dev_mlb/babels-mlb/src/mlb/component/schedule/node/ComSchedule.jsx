@@ -172,6 +172,11 @@ export default class ComSchedule extends Component {
     teams: PropTypes.instanceOf(DaeTeamTypes),
     types: PropTypes.instanceOf(DaeGameTypes),
     schedule: PropTypes.instanceOf(DaeSchedule),
+    date: PropTypes.shape({
+      year: PropTypes.number,
+      month: PropTypes.number,
+      day: PropTypes.number,
+    }),
   };
   /**
    * defaultProps
@@ -181,6 +186,7 @@ export default class ComSchedule extends Component {
     teams: null,
     types: null,
     schedule: null,
+    date: null,
   };
   // ----------------------------------------
   // CONSTRUCTOR
@@ -280,7 +286,7 @@ export default class ComSchedule extends Component {
    * @returns {?XML} section.mlb__schedule
    */
   render() {
-    const { teams, types, schedule } = this.props;
+    const { teams, types, schedule, date } = this.props;
     if (!teams || !types || !schedule) {
       return null;
     }
@@ -308,6 +314,7 @@ export default class ComSchedule extends Component {
         </nav>
         <ComScheduleList
           seasons={schedule.seasons}
+          date={date}
           team={this.state.team}
           type={this.state.type}
         />
