@@ -40248,7 +40248,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-27 22:24:24
+ * 2017-7-27 22:55:09
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -79444,6 +79444,7 @@ var ComGame = function ComGame(_ref4) {
   var homeClass = game.home.win ? _Style2.default.WIN : '';
   var visitorClass = game.visitor.win ? _Style2.default.WIN : '';
   var statusClass = game.className;
+  var className = 'mlb__game__overview__team';
   return _react2.default.createElement(
     'div',
     { className: 'com-player-container' },
@@ -79454,54 +79455,54 @@ var ComGame = function ComGame(_ref4) {
       });
     }),
     _react2.default.createElement(
-      'div',
-      { className: 'mlb__game__overview' },
-      _react2.default.createElement(
-        'p',
-        {
-          className: 'mlb__game__overview__team mlb__game__overview__team--home ' + homeClass
-        },
-        _Print2.default.str(game.home.team)
-      ),
+      'a',
+      { href: '/stats/mlb/game/' + game.id + '/' },
       _react2.default.createElement(
         'div',
-        { className: 'mlb__game__overview__info' },
+        { className: 'mlb__game__overview' },
         _react2.default.createElement(
           'p',
-          { className: 'mlb__game__overview__info__place' },
-          _Print2.default.str(game.stadium)
+          { className: className + ' ' + className + '--home ' + homeClass },
+          _Print2.default.str(game.home.team)
         ),
         _react2.default.createElement(
-          'p',
-          { className: 'mlb__game__overview__info__score' },
+          'div',
+          { className: 'mlb__game__overview__info' },
           _react2.default.createElement(
-            'span',
-            { className: 'mlb__game__overview__info__score--home ' + homeClass },
-            _Print2.default.int(game.home.score)
+            'p',
+            { className: 'mlb__game__overview__info__place' },
+            _Print2.default.str(game.stadium)
           ),
           _react2.default.createElement(
-            'span',
-            { className: 'mlb__game__overview__info__score--vs' },
-            '-'
+            'p',
+            { className: 'mlb__game__overview__info__score' },
+            _react2.default.createElement(
+              'span',
+              { className: 'mlb__game__overview__info__score--home ' + homeClass },
+              _Print2.default.int(game.home.score)
+            ),
+            _react2.default.createElement(
+              'span',
+              { className: 'mlb__game__overview__info__score--vs' },
+              '-'
+            ),
+            _react2.default.createElement(
+              'span',
+              { className: 'mlb__game__overview__info__score--visitor ' + visitorClass },
+              _Print2.default.int(game.visitor.score)
+            )
           ),
           _react2.default.createElement(
-            'span',
-            { className: 'mlb__game__overview__info__score--visitor ' + visitorClass },
-            _Print2.default.int(game.visitor.score)
+            'p',
+            { className: 'mlb__game__overview__info__status ' + statusClass },
+            _Print2.default.str(game.label)
           )
         ),
         _react2.default.createElement(
           'p',
-          { className: 'mlb__game__overview__info__status ' + statusClass },
-          _Print2.default.str(game.label)
+          { className: className + ' ' + className + '--visitor ' + visitorClass },
+          _Print2.default.str(game.visitor.team)
         )
-      ),
-      _react2.default.createElement(
-        'p',
-        {
-          className: 'mlb__game__overview__team mlb__game__overview__team--visitor ' + visitorClass
-        },
-        _Print2.default.str(game.visitor.team)
       )
     )
   );
@@ -80115,50 +80116,54 @@ var ComGame = function ComGame(_ref) {
   var statusClass = game.className;
   // render
   return _react2.default.createElement(
-    'div',
-    { className: 'mlb__game__overview' },
-    _react2.default.createElement(
-      'p',
-      { className: teamClass + ' ' + teamClass + '--home ' + _Print2.default.str(game.home.className) },
-      _Print2.default.str(game.home.team)
-    ),
+    'a',
+    { href: '/stats/mlb/game/' + game.id + '/' },
     _react2.default.createElement(
       'div',
-      { className: 'mlb__game__overview__info' },
+      { className: 'mlb__game__overview' },
       _react2.default.createElement(
         'p',
-        { className: 'mlb__game__overview__info__place' },
-        _Print2.default.str(game.stadium)
+        { className: teamClass + ' ' + teamClass + '--home ' + _Print2.default.str(game.home.className) },
+        _Print2.default.str(game.home.team)
       ),
       _react2.default.createElement(
-        'p',
-        { className: 'mlb__game__overview__info__score' },
+        'div',
+        { className: 'mlb__game__overview__info' },
         _react2.default.createElement(
-          'span',
-          { className: 'mlb__game__overview__info__score--home ' + homeClass },
-          _Print2.default.int(game.home.score)
+          'p',
+          { className: 'mlb__game__overview__info__place' },
+          _Print2.default.str(game.stadium)
         ),
         _react2.default.createElement(
-          'span',
-          { className: 'mlb__game__overview__info__score--vs' },
-          '-'
+          'p',
+          { className: 'mlb__game__overview__info__score' },
+          _react2.default.createElement(
+            'span',
+            { className: 'mlb__game__overview__info__score--home ' + homeClass },
+            _Print2.default.int(game.home.score)
+          ),
+          _react2.default.createElement(
+            'span',
+            { className: 'mlb__game__overview__info__score--vs' },
+            '-'
+          ),
+          _react2.default.createElement(
+            'span',
+            { className: 'mlb__game__overview__info__score--visitor ' + visitorClass },
+            _Print2.default.int(game.visitor.score)
+          )
         ),
         _react2.default.createElement(
-          'span',
-          { className: 'mlb__game__overview__info__score--visitor ' + visitorClass },
-          _Print2.default.int(game.visitor.score)
+          'p',
+          { className: 'mlb__game__overview__info__status ' + statusClass },
+          _Print2.default.str(game.label)
         )
       ),
       _react2.default.createElement(
         'p',
-        { className: 'mlb__game__overview__info__status ' + statusClass },
-        _Print2.default.str(game.label)
+        { className: teamClass + ' ' + teamClass + '--visitor ' + visitorClass },
+        _Print2.default.str(game.visitor.team)
       )
-    ),
-    _react2.default.createElement(
-      'p',
-      { className: teamClass + ' ' + teamClass + '--visitor ' + visitorClass },
-      _Print2.default.str(game.visitor.team)
     )
   );
 };

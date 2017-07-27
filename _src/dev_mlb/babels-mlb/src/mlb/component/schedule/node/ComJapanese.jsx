@@ -167,6 +167,7 @@ const ComGame = ({ game }) => {
   const homeClass = game.home.win ? Style.WIN : '';
   const visitorClass = game.visitor.win ? Style.WIN : '';
   const statusClass = game.className;
+  const className = 'mlb__game__overview__team';
   return (
     <div className="com-player-container">
       {
@@ -177,35 +178,33 @@ const ComGame = ({ game }) => {
           />
         ))
       }
-      <div className="mlb__game__overview">
-        <p
-          className={`mlb__game__overview__team mlb__game__overview__team--home ${homeClass}`}
-        >
-          {Print.str(game.home.team)}
-        </p>
-        <div className="mlb__game__overview__info">
-          <p className="mlb__game__overview__info__place">
-            {Print.str(game.stadium)}
+      <a href={`/stats/mlb/game/${game.id}/`}>
+        <div className="mlb__game__overview">
+          <p className={`${className} ${className}--home ${homeClass}`}>
+            {Print.str(game.home.team)}
           </p>
-          <p className="mlb__game__overview__info__score">
-            <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
-              {Print.int(game.home.score)}
-            </span>
-            <span className="mlb__game__overview__info__score--vs">-</span>
-            <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
-              {Print.int(game.visitor.score)}
-            </span>
-          </p>
-          <p className={`mlb__game__overview__info__status ${statusClass}`}>
-            {Print.str(game.label)}
+          <div className="mlb__game__overview__info">
+            <p className="mlb__game__overview__info__place">
+              {Print.str(game.stadium)}
+            </p>
+            <p className="mlb__game__overview__info__score">
+              <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
+                {Print.int(game.home.score)}
+              </span>
+              <span className="mlb__game__overview__info__score--vs">-</span>
+              <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
+                {Print.int(game.visitor.score)}
+              </span>
+            </p>
+            <p className={`mlb__game__overview__info__status ${statusClass}`}>
+              {Print.str(game.label)}
+            </p>
+          </div>
+          <p className={`${className} ${className}--visitor ${visitorClass}`} >
+            {Print.str(game.visitor.team)}
           </p>
         </div>
-        <p
-          className={`mlb__game__overview__team mlb__game__overview__team--visitor ${visitorClass}`}
-        >
-          {Print.str(game.visitor.team)}
-        </p>
-      </div>
+      </a>
     </div>
   );
 };

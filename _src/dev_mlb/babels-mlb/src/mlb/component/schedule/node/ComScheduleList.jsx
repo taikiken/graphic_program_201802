@@ -50,31 +50,33 @@ const ComGame = ({ game, team }) => {
   const statusClass = game.className;
   // render
   return (
-    <div className="mlb__game__overview">
-      <p className={`${teamClass} ${teamClass}--home ${Print.str(game.home.className)}`}>
-        {Print.str(game.home.team)}
-      </p>
-      <div className="mlb__game__overview__info">
-        <p className="mlb__game__overview__info__place">
-          {Print.str(game.stadium)}
+    <a href={`/stats/mlb/game/${game.id}/`}>
+      <div className="mlb__game__overview">
+        <p className={`${teamClass} ${teamClass}--home ${Print.str(game.home.className)}`}>
+          {Print.str(game.home.team)}
         </p>
-        <p className="mlb__game__overview__info__score">
-          <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
-            {Print.int(game.home.score)}
-          </span>
-          <span className="mlb__game__overview__info__score--vs">-</span>
-          <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
-            {Print.int(game.visitor.score)}
-          </span>
-        </p>
-        <p className={`mlb__game__overview__info__status ${statusClass}`}>
-          {Print.str(game.label)}
+        <div className="mlb__game__overview__info">
+          <p className="mlb__game__overview__info__place">
+            {Print.str(game.stadium)}
+          </p>
+          <p className="mlb__game__overview__info__score">
+            <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
+              {Print.int(game.home.score)}
+            </span>
+            <span className="mlb__game__overview__info__score--vs">-</span>
+            <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
+              {Print.int(game.visitor.score)}
+            </span>
+          </p>
+          <p className={`mlb__game__overview__info__status ${statusClass}`}>
+            {Print.str(game.label)}
+          </p>
+        </div>
+        <p className={`${teamClass} ${teamClass}--visitor ${visitorClass}`}>
+          {Print.str(game.visitor.team)}
         </p>
       </div>
-      <p className={`${teamClass} ${teamClass}--visitor ${visitorClass}`}>
-        {Print.str(game.visitor.team)}
-      </p>
-    </div>
+    </a>
   );
 };
 
