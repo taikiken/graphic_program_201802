@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="ja">
+<html dir="ltr" lang="ja" style="height: auto;">
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
         <meta charset="UTF-8">
         <meta http-equiv="pragma" content="no-cache">
@@ -8,7 +8,7 @@
         <title>インターハイ WebView | SPORTS BULL</title>
         <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
         <!-- インターハイ css -->
-        <link rel="stylesheet" href="/assets/css/inhigh/parts_sp.css">
+        <link rel="stylesheet" href="/assets/css/seriku/parts_sp.css">
         <!-- / インターハイ css -->
         <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
         <script>
@@ -16,7 +16,7 @@
             googletag.cmd = googletag.cmd || [];
         </script>
     </head>
-    <body>
+    <body style="height: auto;">
                        
         <!--  インターハイ トップ　パーツ ---------------------------------------------------------->
 <?php include __DIR__."/inc.php"; ?>
@@ -54,8 +54,5 @@
         </section>
 
         <!-- / インターハイ トップ　パーツ ---------------------------------------------------------->
-
-        <!-- for facebook -->
-        <script src="/assets/js/global.bundle.js"></script>
     </body>
 </html>

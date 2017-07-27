@@ -5551,7 +5551,7 @@
   [class*="section_interhigh_"] img {
     vertical-align: bottom;
     max-width: 100%;
-    max-height: 100%;
+    //max-height: 100%;
     height: auto;
     width: auto; }
     [class*="section_interhigh_"] img.sp_hide {
@@ -5590,7 +5590,7 @@
         height: 15px;
         background: url(../../../assets/images/inhigh/sp_icon_camera.png) no-repeat top left/contain; }
   [class*="section_interhigh_"] .section_btn {
-    margin: 0 10px; }
+    margin: -8px 10px 0; }
     [class*="section_interhigh_"] .section_btn a {
       height: 44px;
       border-radius: 4px;
@@ -5670,6 +5670,7 @@
         .article_list .highlight_article .thumb_area li .img {
           position: relative;
           overflow: hidden;
+          height: 85px;
           border-radius: 3px;
           margin-bottom: 5px; }
           .article_list .highlight_article .thumb_area li .img:after {
@@ -5689,21 +5690,26 @@
             transition: .4s ease;
             width: 100%; }
         .article_list .highlight_article .thumb_area li .txt_area {
-          display: -webkit-box;
-          display: -webkit-flex;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-pack: center;
-          -webkit-justify-content: center;
-          -ms-flex-pack: center;
-          justify-content: center;
+          margin-bottom: 8px;
+          height: 34px;
+          overflow: hidden;
+          // display: -webkit-box;
+          // display: -webkit-flex;
+          // display: -ms-flexbox;
+          // display: flex;
+          // -webkit-box-pack: center;
+          // -webkit-justify-content: center;
+          // -ms-flex-pack: center;
+          // justify-content: center;
           -webkit-transition: .4s ease;
           -o-transition: .4s ease;
           transition: .4s ease; }
           .article_list .highlight_article .thumb_area li .txt_area p {
             font-weight: bold;
             font-size: 11px;
-            font-size: "1.1rem"; }
+            font-size: "1.1rem";
+            height: 34px;
+            overflow: hidden; }
 
 /* interhigh layout / photo -------------- */
 .photo_gallery {

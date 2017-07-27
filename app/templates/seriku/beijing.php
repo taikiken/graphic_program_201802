@@ -109,7 +109,7 @@
 <!--  北京大会ハイライト メインコンテンツ ---------------------------------------------------------->
                         <div class="ttl-wrapper">
                             <h2 class="ttl highlight"><i></i>北京大会ハイライト動画</h2>
-                            <p class="ttl_date">2015年</p>
+                            <p class="ttl_date">2015</p>
                         </div>
                         <div class="article_list">
                             <article class="highlight_article">
@@ -125,8 +125,8 @@ echo get_entries("beijing",0,$db);
                         </div>
                         
                         <div class="btn_area">
-                            <div class="btn btn_another"><a href="/seriku/world-record/"><i class="icon_camera"></i>世界陸上で生まれた世界記録動画特集を見る</a></div>
-                            <div class="btn btn_back"><a href="/category/seriku/">世界陸上へ戻る</a></div>
+                            <div class="btn btn_another"><a href="/seriku/world-record/"><i class="icon_camera"></i>世界陸上で生まれた世界記録を見る</a></div>
+                            <div class="btn btn_back"><a href="/category/seriku/">世界陸上トップへ戻る</a></div>
                         </div>
                         
                         <div class="content_bottom_bnr">

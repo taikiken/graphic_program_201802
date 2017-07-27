@@ -34,12 +34,6 @@
             </article>
         </div>
     </section>                   
-                       
-    <div class="interhigh_bnr">
-        <a href="http://www.tbs.co.jp/seriku/" target="_blank">
-            <img src="/assets/images/seriku/PC_Banner_01B.png">
-        </a>
-    </div>
 
 <!-- / インターハイ トップ　パーツ ---------------------------------------------------------->
 <!-- </div> -->
