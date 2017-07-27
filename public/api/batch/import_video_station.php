@@ -6,8 +6,8 @@ include "public/import.php";
 $o=new db;
 $o->connect();
 
-$bucketName="wowow";
-$mediaid=11;
+$bucketName="station";
+$mediaid=51;
 $imgpath="https://video.sportsbull.jp";
 
 $sql=sprintf("select t1.id,t1.filename,t2.id as uid,t2.img1 from (select id,filename from u_encoded where bucket='%s' and flag=1) as t1 left join (select id,swf,img1 from repo_n where d2=%s) as t2 on t1.filename=t2.swf",$bucketName,$mediaid);
