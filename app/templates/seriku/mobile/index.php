@@ -36,7 +36,7 @@
         </article>
     </div>
 
-    <p class="section_btn"><a href="/seriku/peking/"><i></i>すべての動画を見る</a></p>
+    <p class="section_btn"><a href="/seriku/beijing/"><i></i>すべての動画を見る</a></p>
 </section>
 
 <div class="interhigh_bnr">

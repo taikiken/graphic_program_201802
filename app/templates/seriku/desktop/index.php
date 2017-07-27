@@ -23,7 +23,7 @@
     <section class="section_interhigh_highlight">
         <div class="ttl-wrapper">
             <h2 class="ttl highlight"><i></i>北京大会ハイライト</h2>
-            <p class="ttl_link"><a href="/seriku/peking/">すべての動画を見る</a></p>
+            <p class="ttl_link"><a href="/seriku/beijing/">すべての動画を見る</a></p>
         </div>
 
         <div class="article_list">

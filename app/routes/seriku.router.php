@@ -22,20 +22,20 @@ $app->group('/{slug:seriku}',  function () use($app) {
   });
 
 
-  // peking
+  // beijing
   // ==============================
-  $this->get('/peking[/]', function ($request, $response, $args) use ($app) {
+  $this->get('/beijing[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'              => '世界陸上 - 北京大会ハイライト',
       'og_title'           => '世界陸上 - 北京大会ハイライト |'.$app->model->property('title'),
-      'og_url'             => $app->model->property('site_url').'seriku/peking/',
+      'og_url'             => $app->model->property('site_url').'seriku/beijing/',
       'path'               => $args,
       'template'           => 'category',
       'template_classname' => '',
     ));
 
-    return $this->renderer->render($response, 'seriku/peking.php', $args);
+    return $this->renderer->render($response, 'seriku/beijing.php', $args);
 
   });
 

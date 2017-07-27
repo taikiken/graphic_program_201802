@@ -14,14 +14,14 @@
         <meta property="og:title" content="世界陸上 北京大会ハイライト 動画特集 | スポーツブル / SPORTS BULL">
         <meta property="og:type" content="article">
         <meta property="og:image" content="https://sportsbull.jp/assets/images/seriku/og_image.png">
-        <meta property="og:url" content="https://sportsbull.jp/seriku/peking">
+        <meta property="og:url" content="https://sportsbull.jp/seriku/beijing">
         <meta property="og:description" content="世界陸上 北京大会ハイライト 動画特集見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <!-- twitter card -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@sportsbull_jp">
         <meta name="twitter:title" content="世界陸上 北京大会ハイライト 動画特集 | スポーツブル / SPORTS BULL">
         <meta name="twitter:image" content="https://sportsbull.jp/assets/images/seriku/og_image.png">
-        <meta name="twitter:url" content="https://sportsbull.jp/seriku/peking">
+        <meta name="twitter:url" content="https://sportsbull.jp/seriku/beijing">
         <meta name="twitter:description" content="世界陸上 北京大会ハイライト 動画特集見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <!-- favicon -->
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
