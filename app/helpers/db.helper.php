@@ -88,17 +88,20 @@ FROM
     photo
 WHERE
     nid = {$id}
+  AND flag = 1
 ORDER BY n
 END_DOC;
       $this->query($sqlstr);
 
+      $cnt = 1;
       while ($o = $this->fetch_array())
       {
         $o['main'] = sprintf('%s/photo/main/%s', $ImgPath, $o["img1"]);
         $o['thumb'] = sprintf('%s/photo/thumb/%s', $ImgPath, $o["img2"]);
         $o['sp_main'] = sprintf('%s/photo/sp_main/%s', $ImgPath, $o["img3"]);
         $o['sp_thumb'] = sprintf('%s/photo/sp_thumb/%s', $ImgPath, $o["img4"]);
-        $list[$o['n']] = $o;
+        $list[$cnt] = $o;
+        $cnt++;
       }
       return $list;
   }
