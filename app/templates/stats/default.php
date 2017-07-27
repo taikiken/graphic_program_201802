@@ -61,19 +61,10 @@
   {'GTM-KJ33JM9':true});</script>
   <?php // Google Optimize ?>
 
-  <script type='text/javascript'>
+  <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+  <script>
     var googletag = googletag || {};
     googletag.cmd = googletag.cmd || [];
-    (function() {
-      var gads = document.createElement('script');
-      gads.async = true;
-      gads.type = 'text/javascript';
-      var useSSL = 'https:' == document.location.protocol;
-      gads.src = (useSSL ? 'https:' : 'http:') +
-        '//www.googletagservices.com/tag/js/gpt.js';
-      var node = document.getElementsByTagName('script')[0];
-      node.parentNode.insertBefore(gads, node);
-    })();
   </script>
 
   <script>
@@ -92,7 +83,7 @@
   <!-- appvador -->
   <script>
     googletag.cmd.push(function() {
-      googletag.defineOutOfPageSlot('/531683568/appvador', 'div-gpt-ad-1501153538579-0').addService(googletag.pubads());
+      googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
       googletag.pubads().enableSingleRequest();
       googletag.pubads().collapseEmptyDivs();
       googletag.enableServices();
@@ -126,12 +117,13 @@ __EOL__;
 
 <?php /* # appvaoder */ ?>
 <!-- /531683568/appvador -->
-<div id='div-gpt-ad-1501153538579-0'>
+<div id='div-gpt-ad-1501126889988-0'>
+<style>#div-gpt-ad-1501126889988-0 * { line-height:0; }</style>
 <script>
-googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501153538579-0'); });
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0'); });
 </script>
-</div>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
+</div>
 <?php /* // appvaoder */ ?>
 
 <div id="whole" class="whole stats">
