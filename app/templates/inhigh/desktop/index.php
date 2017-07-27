@@ -36,11 +36,5 @@
         </div>
     </section>
 
-    <div class="interhigh_bnr">
-        <a class="show-for-large" href="http://www.inter-high-school.tv/" target="_blank">
-            <img src="/assets/images/inhigh/PC_Banner_01B.jpg">
-        </a>
-    </div>
-
 <!-- / インターハイ トップ　パーツ ---------------------------------------------------------->
 <!-- </div> -->
