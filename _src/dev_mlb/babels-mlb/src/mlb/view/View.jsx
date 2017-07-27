@@ -27,36 +27,47 @@ import actions from '../async/actions';
 import ConCalendar from '../async/connects/ConCalendar';
 import ConSchedule from '../async/connects/ConSchedule';
 
+import games from '../async/connects/ConGames';
+
 // async/
 import Creator from '../async/Creator';
 
 // util
 import Day from '../util/Day';
 
-console.log('store', store);
-Creator.calendar = (year, today) => (store.dispatch(actions.calendar(year, today)));
-Creator.schedule = date => (store.dispatch(actions.schedule(date)));
+// console.log('store', store);
+Creator.calendar = (year, today) => (store.schedules.dispatch(actions.schedules.calendar(year, today)));
+Creator.schedule = date => (store.schedules.dispatch(actions.schedules.schedule(date)));
+
+// games
+Creator.games = (year, id) => (store.games.dispatch(actions.games.game(year, id)));
+
+class Game {
+  static overview(element) {
+    ReactDOM.render(
+      <Provider store={store}>
+        <games.ConOverview />
+      </Provider>,
+      element,
+    );
+  }
+  static score(element) {
+    console.log('Game.score', element);
+  }
+  static info(element) {
+    console.log('Game.info', element);
+  }
+}
 
 export default class View {
-  // static calendar() {
-  //   const heads = document.getElementsByTagName('head');
-  //   if (!heads || heads.length) {
-  //     return;
-  //   }
-  //   const head = heads[0];
-  //   const link = document.createElement('link');
-  //   link.rel = 'stylesheet';
-  //   link.href = '/assets/mlb/css/react-big-calendar.css';
-  //   head.appendChild(link);
-  // }
   static index(element, year = null, today = null) {
     // console.log('ConSchedule', ConSchedule);
     ReactDOM.render(
       <div className="provider-root">
-        <Provider store={store}>
+        <Provider store={store.schedules}>
           <ConSchedule />
         </Provider>
-        <Provider store={store}>
+        <Provider store={store.schedules}>
           <ConCalendar />
         </Provider>
       </div>,
@@ -68,5 +79,15 @@ export default class View {
     Creator.calendar(year, today);
     Creator.schedule(Day.date(today));
     console.log('ViewIndex.make', year, today);
+  }
+  // ---------------------------------------
+  // game
+  static game(year, id, { overview, score, info }) {
+    console.log('View.game', year, id, overview, score, info);
+    Game.overview(overview);
+    Game.score(score);
+    Game.info(info);
+    // action
+    Creator.games(year, id);
   }
 }

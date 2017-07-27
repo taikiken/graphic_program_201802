@@ -48,6 +48,14 @@ export default class ReducerTypes {
    */
   static SCHEDULE_START = 'scheduleStart';
   // ----------------------------------------
-  // UI
+  // GAME
   // ----------------------------------------
+  static GAMES_COMPLETE = 'gamesComplete';
+  static GAMES_ERROR = 'gamesError';
+  // static INFO_COMPLETE = 'infoComplete';
+  // static INFO_ERROR = 'infoError';
+  // static PLAYER_COMPLETE = 'playerComplete';
+  // static PLAYER_ERROR = 'playerError';
+  // static INNINGS_COMPLETE = 'inningsComplete';
+  // static INNINGS_ERROR = 'inningsError';
 }

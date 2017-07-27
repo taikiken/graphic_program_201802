@@ -71,9 +71,7 @@ const ComGame = ({ game, team }) => {
           {Print.str(game.label)}
         </p>
       </div>
-      <p
-        className={`mlb__game__overview__team mlb__game__overview__team--visitor ${visitorClass}`}
-      >
+      <p className={`${teamClass} ${teamClass}--visitor ${visitorClass}`}>
         {Print.str(game.visitor.team)}
       </p>
     </div>

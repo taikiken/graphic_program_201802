@@ -24,4 +24,5 @@ export default class Creator {
    * @type {?function}
    */
   static schedule = null;
+  static games = null;
 }
