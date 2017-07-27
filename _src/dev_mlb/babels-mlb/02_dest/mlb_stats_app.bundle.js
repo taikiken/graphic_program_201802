@@ -20444,9 +20444,10 @@ var View = function () {
           _react2.default.createElement(_ConCalendar2.default, null)
         )
       ), element);
-      // -----
+      // ----------------------------------------
+      // schedule 実行は calendar 取得後にゲームがあるか確認後の方が良いかと思ったけど
+      // ajax error が出ても表示に問題は無いようなのでこのままにする
       _Creator2.default.calendar(year, today);
-      // Creator.calendar(year, new Date(2017, 8, 15));
       _Creator2.default.schedule(_Day2.default.date(today));
       console.log('ViewIndex.make', year, today);
     }
@@ -39599,7 +39600,7 @@ exports.default = Style;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-27 18:13:17
+ * 2017-7-27 18:33:22
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -65777,6 +65778,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * combineReducers 済み `./assets/calendar`
  * @type {*}
  */
+
+
+// schedules
 var reducers = (0, _redux.combineReducers)({
   calendar: _calendar2.default,
   schedule: _schedule2.default
@@ -65931,20 +65935,19 @@ var schedule = function schedule() {
   console.log('reducers.schedule', state, action);
   // switch-case
   switch (action.type) {
-    case _ReducerTypes2.default.CALENDAR_COMPLETE:
-      {
-        // {DaeCalendar}
-        var data = action.data;
-        var today = action.today;
-        var game = data.events.game(today);
-        if (!game) {
-          // TODO: no events state 返却 - 試合はありません
-          return state;
-        }
-        // Creator.schedule();
-        state.type = _ReducerTypes2.default.SCHEDULE_START;
-        return state;
-      }
+    // case ReducerTypes.CALENDAR_COMPLETE: {
+    //   // {DaeCalendar}
+    //   const data = action.data;
+    //   const today = action.today;
+    //   const game = data.events.game(today);
+    //   if (!game) {
+    //     // TODO: no events state 返却 - 試合はありません
+    //     return state;
+    //   }
+    //   // Creator.schedule();
+    //   state.type = ReducerTypes.SCHEDULE_START;
+    //   return state;
+    // }
     case _ReducerTypes2.default.SCHEDULE_COMPLETE:
       {
         state.type = action.type;

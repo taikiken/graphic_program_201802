@@ -10,8 +10,8 @@
  *
  */
 
-import calendar from './assets/calendar';
-import schedule from './assets/schedule';
+import calendar from './schedules/calendar';
+import schedule from './schedules/schedule';
 
 export default {
   calendar,

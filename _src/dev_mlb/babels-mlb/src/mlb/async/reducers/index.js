@@ -13,8 +13,9 @@
 // redux
 import { combineReducers } from 'redux';
 
-import calendar from './assets/calendar';
-import schedule from './assets/schedule';
+// schedules
+import calendar from './schedules/calendar';
+import schedule from './schedules/schedule';
 
 // ----------------
 /**

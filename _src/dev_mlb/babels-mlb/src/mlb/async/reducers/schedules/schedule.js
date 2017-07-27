@@ -32,19 +32,19 @@ const schedule = (requestState = initial, action) => {
   console.log('reducers.schedule', state, action);
   // switch-case
   switch (action.type) {
-    case ReducerTypes.CALENDAR_COMPLETE: {
-      // {DaeCalendar}
-      const data = action.data;
-      const today = action.today;
-      const game = data.events.game(today);
-      if (!game) {
-        // TODO: no events state 返却 - 試合はありません
-        return state;
-      }
-      // Creator.schedule();
-      state.type = ReducerTypes.SCHEDULE_START;
-      return state;
-    }
+    // case ReducerTypes.CALENDAR_COMPLETE: {
+    //   // {DaeCalendar}
+    //   const data = action.data;
+    //   const today = action.today;
+    //   const game = data.events.game(today);
+    //   if (!game) {
+    //     // TODO: no events state 返却 - 試合はありません
+    //     return state;
+    //   }
+    //   // Creator.schedule();
+    //   state.type = ReducerTypes.SCHEDULE_START;
+    //   return state;
+    // }
     case ReducerTypes.SCHEDULE_COMPLETE: {
       state.type = action.type;
       state.schedule = action.schedule;

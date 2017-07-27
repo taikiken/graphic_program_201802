@@ -62,9 +62,10 @@ export default class View {
       </div>,
       element,
     );
-    // -----
+    // ----------------------------------------
+    // schedule 実行は calendar 取得後にゲームがあるか確認後の方が良いかと思ったけど
+    // ajax error が出ても表示に問題は無いようなのでこのままにする
     Creator.calendar(year, today);
-    // Creator.calendar(year, new Date(2017, 8, 15));
     Creator.schedule(Day.date(today));
     console.log('ViewIndex.make', year, today);
   }
