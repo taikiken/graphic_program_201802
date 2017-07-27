@@ -9248,11 +9248,23 @@ var Day = function () {
 
       return '' + date.getFullYear() + _Text2.default.zero(date.getMonth() + 1) + _Text2.default.zero(date.getDate());
     }
+    /**
+     * 曜日, '日', '月', '火', '水', '木', '金', '土' を取得します
+     * @param {number} index 0(日) ~ 6(土)
+     * @returns {string}  '日', '月', '火', '水', '木', '金', '土' のいずれかを返します
+     */
+
   }, {
     key: 'day',
     value: function day(index) {
       return Day.weeks[index];
     }
+    /**
+     * 「○月○日（日）」な文字列を生成します
+     * @param {Date} date Date object
+     * @returns {string} 「○月○日（日）」な文字列を返します
+     */
+
   }, {
     key: 'title',
     value: function title() {
@@ -9260,6 +9272,13 @@ var Day = function () {
 
       return date.month + '\u6708' + date.day + '\u65E5\uFF08' + date.week + '\uFF09';
     }
+    /**
+     * Date object を year, month, day, week へ分解します
+     * @param {Date} date 変換元 Date object
+     * @returns {{date: Date, year: number, month: number, day: number, week: string}}
+     * 変換 object を返します
+     */
+
   }, {
     key: 'date',
     value: function date(_date) {
@@ -10406,6 +10425,10 @@ exports.DaeJapanesePlayer = function DaeJapanesePlayer(player) {
    * @type {DaePitching}
    */
   this.pitching = new _DaePitching2.default(origin.pitching);
+  /**
+   * batting | pitching - 選手タイプ
+   * @type {string}
+   */
   this.type = this.batting.has ? 'batting' : 'pitching';
 };
 
@@ -10438,6 +10461,11 @@ var DaeJapanesePlayers = exports.DaeJapanesePlayers = function () {
       return new DaeJapanesePlayer(player);
     });
   }
+  /**
+   * 日本人選手リストが存在するかを確認します
+   * @returns {boolean} true: 存在する
+   */
+
 
   _createClass(DaeJapanesePlayers, [{
     key: 'has',
@@ -10484,7 +10512,16 @@ function DaeGameTeam(team) {
    * @type {string}
    */
   this.team = _Normalize2.default.str(origin.team_name);
+  /**
+   * status: 4 の時の勝敗 flag
+   * @type {boolean}
+   */
   this.win = false;
+  /**
+   * status: 4 の時の勝に付与される class name,
+   * {@link Status.win}
+   * @type {string}
+   */
   this.className = '';
 };
 
@@ -10504,9 +10541,22 @@ exports.DaeGame = function DaeGame(game, season, league) {
   _classCallCheck(this, DaeGame);
 
   var origin = _Normalize2.default.obj(game);
-  var home = _Normalize2.default.obj(origin.home);
-  var visitor = _Normalize2.default.obj(origin.visitor);
+  var originHome = _Normalize2.default.obj(origin.home);
+  var originVisitor = _Normalize2.default.obj(origin.visitor);
   var status = _Normalize2.default.int(origin.status_id);
+  var home = new DaeGameTeam(originHome);
+  var visitor = new DaeGameTeam(originVisitor);
+  // ----
+  // ゲーム勝敗をscoreから - 4: 試合終了 のみ
+  if (status === 4) {
+    if (home.score > visitor.score) {
+      home.className = _Status2.default.win();
+      home.win = true;
+    } else {
+      visitor.className = _Status2.default.win();
+      visitor.win = true;
+    }
+  }
   // ----
   /**
    * original JSON
@@ -10532,31 +10582,39 @@ exports.DaeGame = function DaeGame(game, season, league) {
    * ホームチーム
    * @type {DaeGameTeam}
    */
-  this.home = new DaeGameTeam(home);
+  this.home = home;
   /**
    * ビジターチーム
    * @type {DaeGameTeam}
    */
-  this.visitor = new DaeGameTeam(visitor);
+  this.visitor = visitor;
   /**
    * ゲーム毎の選手情報
    * @type {DaeJapanesePlayers}
    */
   this.players = new DaeJapanesePlayers(origin.player);
   // game status label
+  /**
+   * game status label - 試合中...etc
+   * {@link Status.label}
+   * @type {string}
+   */
   this.label = _Normalize2.default.str(_Status2.default.label(status));
+  /**
+   * game status によって変化する class name
+   * {@link Status.className}
+   * @type {string}
+   */
   this.className = _Normalize2.default.str(_Status2.default.className(status));
-  // ゲーム勝敗をscoreから - 4: 試合終了 のみ
-  if (status === 4) {
-    if (home.score > visitor.score) {
-      home.className = _Status2.default.win();
-      home.win = true;
-    } else {
-      visitor.className = _Status2.default.win();
-      visitor.win = true;
-    }
-  }
+  /**
+   * season key name
+   * @type {string}
+   */
   this.season = season;
+  /**
+   * league key name
+   * @type {string}
+   */
   this.league = league;
 };
 
@@ -10593,10 +10651,28 @@ var DaeGames = exports.DaeGames = function () {
     this.list = origin.map(function (game) {
       return new DaeGame(game, season, league);
     });
+    /**
+     * season key name
+     * @type {string}
+     */
     this.season = season;
+    /**
+     * league key name
+     * @type {string}
+     */
     this.league = league;
+    /**
+     * league key name から日本語出力情報をセットします
+     * {@link Seasons.title}
+     * @type {string}
+     */
     this.title = _Normalize2.default.str(_Seasons2.default.title(league));
   }
+  /**
+   * 対戦ゲームが存在するかを確認します
+   * @returns {boolean} true: 対戦ゲームが存在する
+   */
+
 
   _createClass(DaeGames, [{
     key: 'has',
@@ -10635,6 +10711,11 @@ var DaeJapanese = exports.DaeJapanese = function () {
       return new DaeGame(game);
     });
   }
+  /**
+   * 日本人選手リストが存在するかをチェックします
+   * @returns {boolean} true: 日本人選手リストが存在する
+   */
+
 
   _createClass(DaeJapanese, [{
     key: 'has',
@@ -10647,19 +10728,48 @@ var DaeJapanese = exports.DaeJapanese = function () {
 }();
 
 // season 管理
+/**
+ * 各リーグ試合情報を管理します
+ */
 
 
 var DaeLeagues = exports.DaeLeagues = function () {
+  /**
+   * 各リーグ試合情報を管理します
+   * @param {string} key JSON key name ex. `regular_season`
+   * @param {Array.<DaeGames>} seasons 各リーグ試合情報
+   */
   function DaeLeagues(key, seasons) {
     _classCallCheck(this, DaeLeagues);
 
+    /**
+     * JSON key name - regular_season...etc
+     * @type {string}
+     */
     this.key = key;
+    /**
+     * 各リーグ試合情報
+     * @type {Array.<DaeGames>}
+     */
     this.list = seasons;
+    /**
+     * key name からシーズン日本語タイトル {@link Seasons.title}
+     * @type {string}
+     */
     this.title = _Normalize2.default.str(_Seasons2.default.title(key));
+    /**
+     * 試合情報存在 flag
+     * @type {boolean}
+     */
     this.enable = seasons.some(function (games) {
-      return games.list.length;
+      return games.list.length > 0;
     });
   }
+  /**
+   * 試合が存在するかを取得します
+   * @returns {boolean} true: 試合が存在する
+   */
+
 
   _createClass(DaeLeagues, [{
     key: 'has',
@@ -10673,18 +10783,48 @@ var DaeLeagues = exports.DaeLeagues = function () {
   return DaeLeagues;
 }();
 
+/**
+ * シーズン情報を管理します
+ */
+
+
 var DaeSeasons = exports.DaeSeasons = function () {
+  /**
+   * シーズン付属のリーグ情報を管理します
+   * @param {Array.<DaeGames>} open オープン戦
+   * @param {Array.<DaeGames>} regular レギュラーシーズン
+   * @param {Array.<DaeGames>} star オールスター
+   * @param {Array.<DaeGames>} post ポストシーズン
+   */
   function DaeSeasons(open, regular, star, post) {
     _classCallCheck(this, DaeSeasons);
 
+    /**
+     * シーズン JSON key 毎にリーグ情報を管理します
+     * @type {{open: DaeLeagues, regular_season: DaeLeagues, all_star: DaeLeagues, post_season: DaeLeagues}}
+     */
     this.season = {
       open: new DaeLeagues('open', open),
       regular_season: new DaeLeagues('regular_season', regular),
       all_star: new DaeLeagues('all_star', star),
       post_season: new DaeLeagues('post_season', post)
     };
+    /**
+     * 表示順を管理します
+     * - open'
+     * - 'regular_season'
+     * - 'all_star'
+     * - 'post_season'
+     * @type {[string,string,string,string]}
+     */
     this.list = ['open', 'regular_season', 'all_star', 'post_season'];
   }
+  /**
+   * シーズン JSON key からリーグ情報を取得します
+   * @param {string} season シーズン JSON key
+   * @returns {?DaeGames} リーグ情報を返します
+   */
+
 
   _createClass(DaeSeasons, [{
     key: 'leagues',
@@ -10778,9 +10918,25 @@ function DaeSchedule(schedules) {
   // seasons
   // this.cactus = cactus;
   // this.grapefruit = grapefruit;
+  /**
+   * regular season list
+   * @type {Array.<DaeGames>}
+   */
   this.regular = [american, national, inter];
+  /**
+   * オープン戦 list
+   * @type {Array.<DaeGames>}
+   */
   this.open = [cactus, grapefruit];
+  /**
+   * post season list
+   * @type {Array.<DaeGames>}
+   */
   this.post = [wild, playoff, champion, world];
+  /**
+   * all star list - 他と処理を合わせるために配列化しています
+   * @type {Array.<DaeGames>}
+   */
   this.star = [star];
   // this.season = {
   //   open: this.open,
@@ -10800,6 +10956,14 @@ function DaeSchedule(schedules) {
   //   'all_star',
   //   'post_season',
   // ];
+  /**
+   * season 情報を管理します
+   * - regular season
+   * - post season
+   * - オープン戦
+   * - all star
+   * @type {DaeSeasons}
+   */
   this.seasons = new DaeSeasons(this.open, this.regular, this.star, this.post);
 };
 
@@ -15575,31 +15739,49 @@ var DaeTypes = function () {
      * @type {string}
      */
     this.type = _Normalize2.default.str(origin.name);
+    /**
+     * league key name
+     * @type {string}
+     */
     this.key = _Normalize2.default.str(origin.key_name);
     /**
      * ゲーム種類所属のリーグリスト
      * @type {?Array.<DaeTypes>}
      */
-    this.league = null;
+    this.leagues = null;
+    /**
+     * 所属 league type lye name list
+     * @type {?Array.<string>}
+     */
     this.keys = null;
   }
+  /**
+   * 所属 league があるかを調べプロパティをセットします
+   * @param {object} leagueObj JSON.league
+   */
+
 
   _createClass(DaeTypes, [{
     key: 'children',
     value: function children(leagueObj) {
-      var league = Object.values(leagueObj).map(function (kind) {
+      var leagues = Object.values(leagueObj).map(function (kind) {
         return new DaeTypes(kind);
       });
-      this.keys = league.map(function (type) {
+      this.keys = leagues.map(function (type) {
         return type.key;
       });
-      this.league = league;
+      this.leagues = leagues;
     }
+    /**
+     * 所属リーグが存在するかを調べます
+     * @returns {boolean} true: 存在する
+     */
+
   }, {
     key: 'hasLeague',
     value: function hasLeague() {
-      var league = this.league;
-      return Array.isArray(league) && league.length;
+      var leagues = this.leagues;
+      return Array.isArray(leagues) && leagues.length;
     }
   }]);
 
@@ -15627,6 +15809,7 @@ function DaeGameTypes(info) {
   list.map(function (type) {
     // league - since 2017-07-26
     var league = type.origin.league;
+    // JSON: 所属リーグが無い時は `null` がセットされています
     if (league) {
       type.children(league);
     }
@@ -17286,6 +17469,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *
  */
 
+/**
+ * 出力管理します
+ */
 var Print = function () {
   function Print() {
     _classCallCheck(this, Print);
@@ -17293,9 +17479,26 @@ var Print = function () {
 
   _createClass(Print, null, [{
     key: 'int',
+
+    /**
+     * int 型を文字出力します
+     * - 不正値 -1 なので負数は「""」から文字を返します
+     * @param {number} number 出力対象数値
+     * @param {string} [alternate=''] 代替文字
+     * @returns {string} 文字変換し返します
+     */
     value: function int(number) {
-      return number >= 0 ? String(number) : '';
+      var alternate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+      return number >= 0 ? String(number) : alternate;
     }
+    /**
+     * 文字型出力をします
+     * @param {string} text 出力対象文字
+     * @param {string} [alternate=''] 代替文字
+     * @returns {string} 文字変換し返します
+     */
+
   }, {
     key: 'str',
     value: function str(text) {
@@ -24815,6 +25018,11 @@ var Env = function () {
       }
       return Env.DEV;
     }
+    /**
+     * process.env.NODE_ENV
+     * @returns {string} production | development
+     */
+
   }, {
     key: 'node',
     value: function node() {
@@ -25193,7 +25401,7 @@ function DaeCalendar(info, year) {
    * @type {Object}
    */
   this.origin = origin;
-  console.log('DaeCalendar list', list);
+  // console.log('DaeCalendar list', list);
   /**
    * 配列に試合が無い日も null でリストされています
    * @type {Array}
@@ -25664,6 +25872,7 @@ function ComCalendar(props) {
 }
 
 /**
+ * propTypes
  * - events {Array.<ModSchedules>} - 表示する予定・イベント
  * - today {Date} - デフォルト位置（今日）
  * - selected {function} - 予定・イベントを選択した callback
@@ -25681,6 +25890,10 @@ ComCalendar.propTypes = {
   navigate: _propTypes2.default.func.isRequired
 };
 
+/**
+ * defaultProps
+ * @type {{view: function}}
+ */
 ComCalendar.defaultProps = {
   view: function view() {}
 };
@@ -39344,6 +39557,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *
  */
 
+/**
+ * Style に関する CONST
+ */
 var Style = function Style() {
   _classCallCheck(this, Style);
 };
@@ -39368,7 +39584,7 @@ exports.default = Style;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-26 23:08:12
+ * 2017-7-27 17:05:59
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -65525,6 +65741,11 @@ var _schedule2 = _interopRequireDefault(_schedule);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// ----------------
+/**
+ * combineReducers 済み `./assets/calendar`
+ * @type {*}
+ */
 var reducers = (0, _redux.combineReducers)({
   calendar: _calendar2.default,
   schedule: _schedule2.default
@@ -65560,6 +65781,10 @@ var _ReducerTypes2 = _interopRequireDefault(_ReducerTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * initial state
+ * @type {{type: string, data: ?object, error: ?Error, year: ?number, today: ?Date}}
+ */
 var initial = {
   type: _ReducerTypes2.default.INITIAL,
   data: null,
@@ -65905,6 +66130,16 @@ var asyncCall = function () {
   };
 }();
 
+/**
+ * calendar ajax - success callback
+ * @param {object} json 取得 JSON
+ * @param {number} year 取得年
+ * @param {Date} today current にする Date instance
+ * @returns {{data: DaeCalendar, year: number, today: Date, type: string}}
+ * complete state object
+ */
+
+
 var _Api = __webpack_require__(262);
 
 var _Api2 = _interopRequireDefault(_Api);
@@ -65958,9 +66193,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
  * [native code] - parseInt
  * @type {function}
  */
-var parseInt = self.parseInt;
-
-var requestComplete = function requestComplete(json, year, today) {
+var parseInt = self.parseInt;var requestComplete = function requestComplete(json, year, today) {
   var data = new _DaeCalendar2.default(json, year);
   return {
     data: data,
@@ -65970,6 +66203,13 @@ var requestComplete = function requestComplete(json, year, today) {
   };
 };
 
+/**
+ * calendar ajax - error callback
+ * @param {Error} error ajax error
+ * @param {number} year 取得年
+ * @param {Date} today current にする Date instance
+ * @returns {*} error state object
+ */
 var requestError = function requestError(error, year, today) {
   return {
     error: error,
@@ -65983,6 +66223,7 @@ var requestError = function requestError(error, year, today) {
  * calendar 表示用 JSON を取得します
  * @param {?string} [requestYear=null] 取得年
  * @param {?Date} [requestToday=null] current にする Date instance
+ * @returns {Promise} fetch Promise
  */
 var calendar = function calendar() {
   var requestYear = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -66673,6 +66914,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+/**
+ * 並行処理する ajax を Promise.all し await します
+ * @param {number} year 年
+ * @param {number} month 月
+ * @param {number} day 日
+ * @returns {Promise.<*>} async Promise.all
+ */
 var asyncCall = function () {
   var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(year, month, day) {
     var results;
@@ -66699,6 +66947,18 @@ var asyncCall = function () {
     return _ref.apply(this, arguments);
   };
 }();
+
+/**
+ * 日程 ajax - success callback
+ * @param {Array.<*>} results 結果セット
+ * - {@link Api.schedule}
+ * - {@link Api.type}
+ * - {@link Api.teams}
+ * @param {*} date 取得日 object {@link Day.today}
+ * @returns {{schedule: DaeSchedule, types: DaeGameTypes, teams: DaeTeamTypes, date: *, type: string}}
+ * complete state object
+ */
+
 
 var _Api = __webpack_require__(262);
 
@@ -66761,6 +67021,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 // game info
+/**
+ * 日程 ajax まとめて取得します
+ * - {@link Api.schedule}
+ * - {@link Api.type}
+ * - {@link Api.teams}
+ * @param {number} year 年
+ * @param {number} month 月
+ * @param {number} day 日
+ * @returns {Array} 結果セットを返します
+ */
 var parallel = function parallel(year, month, day) {
   var paths = [];
   // schedule
@@ -66773,9 +67043,7 @@ var parallel = function parallel(year, month, day) {
   return paths.map(function (path) {
     return (0, _ajax2.default)(path);
   });
-};
-
-var requestComplete = function requestComplete(results, date) {
+};var requestComplete = function requestComplete(results, date) {
   var schedule = new _DaeSchedule2.default(results.shift());
   var types = new _DaeGameTypes2.default(results.shift());
   var teams = new _DaeTeamTypes2.default(results.shift());
@@ -66788,6 +67056,12 @@ var requestComplete = function requestComplete(results, date) {
   };
 };
 
+/**
+ * 日程 ajax - error callback
+ * @param {Error} error ajax error
+ * @param {*} date 取得日 object {@link Day.today}
+ * @returns {*} error state object
+ */
 var requestError = function requestError(error, date) {
   return {
     error: error,
@@ -66796,6 +67070,15 @@ var requestError = function requestError(error, date) {
   };
 };
 
+/**
+ * 日程 JSON を取得します
+ * - {@link Api.schedule}
+ * - {@link Api.type}
+ * - {@link Api.teams}
+ * @param {?{date: Date, year: number, month: number, day: number, week: string}} [requestDate=Day.today]
+ * 取得日 object
+ * @returns {Promise} fetch Promise
+ */
 var schedule = function schedule() {
   var requestDate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   return function (dispatch) {
@@ -66850,6 +67133,14 @@ var Status = function () {
 
     /**
      * status 名称を取得します
+     * 1: '試合前',
+     * 2: '試合中',
+     * 4: '試合終了',
+     * 5: '延期',
+     * 6: 'サスペンド',
+     * 9: 'キャンセル',
+     * 10: '没収',
+     * 23: '遅延/中断',
      * @param {number} id status ID
      * @returns {string} status 日本語名称 を返します
      */
@@ -66861,6 +67152,21 @@ var Status = function () {
     value: function label(id) {
       return Status.games[id];
     }
+    /**
+     * status で付与する css class name を取得します
+     * 1: 'mlb__game__overview__info__status--before',
+     * 2: 'mlb__game__overview__info__status--live',
+     * 4: 'mlb__game__overview__info__status--end',
+     * 9: 'mlb__game__overview__info__status--cancel',
+     * @param {number} id game status
+     * @returns {string} status で付与する css class name を返します
+     */
+
+    /**
+     * status で付与する css class name
+     * @type {{1: string, 2: string, 4: string, 9: string}}
+     */
+
   }, {
     key: 'className',
     value: function className(id) {
@@ -66926,6 +67232,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *
  */
 
+/**
+ * 試合種類の日本語ラベル
+ */
 var Seasons = function () {
   function Seasons() {
     _classCallCheck(this, Seasons);
@@ -66933,9 +67242,20 @@ var Seasons = function () {
 
   _createClass(Seasons, null, [{
     key: 'title',
+
+    /**
+     * key name から 日本語 label を取得します
+     * @param {string} key JSON key name
+     * @returns {string} 日本語 label
+     */
     value: function title(key) {
       return Seasons.seasons[key];
     }
+    /**
+     * 試合種類の日本語 key name - japanese
+     * @type {{open: string, cactus_league: string, grapefruit_league: string, regular_season: string, american: string, national: string, inter_league: string, all_star: string, post_season: string, league_champion: string, world_series: string, division_playoff: string, wild_card: string}}
+     */
+
   }]);
 
   return Seasons;
@@ -77564,8 +77884,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * 日程・結果 - `/stats/mlb/` or `/stats/mlb/YYYYMMDD`
+ *
  * - ComScheduleMam
  *   - {@link ComJapanese}
+ *   - {@link ComSchedule}
+ *     - {@link ComOptionTeams}
+ *     - {@link ComOptionTypes}
+ *     - {@link ComScheduleList}
+ *
  * @param {DaeSchedule} schedule JSON {@link Api.schedule} - `/master/schedule/2017/7/25.json`
  * @param {{year: number, month: number, day: number}} date {@link Day}.today object
  * @param {DaeGameTypes} types ゲーム種類
@@ -77697,6 +78023,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // section.mlb__today_jp
 // ----------------------------------------
 
+// ----------------------------------------
+// ComBatting
+// ----------------------------------------
+/**
+ * ComBatting
+ * @param {DaeBatting} player 野手情報
+ * @constructor
+ */
+
 
 // util
 
@@ -77735,6 +78070,12 @@ var ComBatting = function ComBatting(_ref) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{player: DaeBatting}}
+ */
+
+
 // dae/schedule
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
@@ -77749,12 +78090,18 @@ var ComBatting = function ComBatting(_ref) {
  */
 
 // react
-
-
 ComBatting.propTypes = {
   player: _propTypes2.default.instanceOf(_DaeBatting2.default).isRequired
 };
 
+// ----------------------------------------
+// ComPitching
+// ----------------------------------------
+/**
+ * 投手成績
+ * @param {DaePitching} player 投手情報
+ * @constructor
+ */
 var ComPitching = function ComPitching(_ref2) {
   var player = _ref2.player;
   return _react2.default.createElement(
@@ -77786,10 +78133,25 @@ var ComPitching = function ComPitching(_ref2) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{player: DaePitching}}
+ */
 ComPitching.propTypes = {
   player: _propTypes2.default.instanceOf(_DaePitching2.default).isRequired
 };
 
+// ----------------------------------------
+// ComPlayer
+// ----------------------------------------
+/**
+ * 日本人選手情報
+ * - {@link ComBatting}
+ * - {@link ComPitching}
+ * @param {DaeJapanesePlayer} player 日本人選手
+ * @returns {XML} div.mlb_jp_stats
+ * @constructor
+ */
 var ComPlayer = function ComPlayer(_ref3) {
   var player = _ref3.player;
 
@@ -77846,16 +78208,31 @@ var ComPlayer = function ComPlayer(_ref3) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{player: DaeJapanesePlayer}}
+ */
 ComPlayer.propTypes = {
   player: _propTypes2.default.instanceOf(_DaeSchedule.DaeJapanesePlayer).isRequired
 };
 
+// ----------------------------------------
+// ComGame
+// ----------------------------------------
+/**
+ * 試合毎の日本人選手一覧を出力します
+ * @param {DaeGame} game japanese player game 情報
+ * @returns {?XML} div.com-player-container > div.mlb__game__overview
+ * @constructor
+ */
 var ComGame = function ComGame(_ref4) {
   var game = _ref4.game;
 
   if (!game.players.has()) {
     return null;
   }
+  // -----
+  // render
   var homeClass = game.home.win ? '.mlb__game__result--win' : '';
   var visitorClass = game.visitor.win ? '.mlb__game__result--win' : '';
   var statusClass = game.className;
@@ -77922,10 +78299,17 @@ var ComGame = function ComGame(_ref4) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{game: DaeGame}}
+ */
 ComGame.propTypes = {
   game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired
 };
 
+// ----------------------------------------
+// ComJapanese
+// ----------------------------------------
 /**
  * 日程・結果 - 日本人選手一覧
  * - {@link ComScheduleMam}
@@ -78081,6 +78465,13 @@ var Power3 = self.Power3;
 // ----------------------------------------
 // select / option - games
 // ----------------------------------------
+/**
+ * 試合種類（シーズン）を選択します,
+ * div.mlb__schedule__limit_search--game
+ * @param {DaeGameTypes} types 出力対象 JSON 変換データ
+ * @param {function} change select.onChange callback method
+ * @constructor
+ */
 var ComOptionTypes = function ComOptionTypes(_ref) {
   var types = _ref.types,
       change = _ref.change;
@@ -78093,7 +78484,11 @@ var ComOptionTypes = function ComOptionTypes(_ref) {
       _react2.default.createElement(
         'dt',
         { className: 'mlb__schedule__limit_search__heading' },
-        '\u8A66\u5408\u7A2E\u5225'
+        _react2.default.createElement(
+          'label',
+          { htmlFor: 'limit_search--game' },
+          '\u8A66\u5408\u7A2E\u5225'
+        )
       ),
       _react2.default.createElement(
         'dd',
@@ -78122,7 +78517,7 @@ var ComOptionTypes = function ComOptionTypes(_ref) {
               'option',
               {
                 key: 'type-' + id,
-                value: id
+                value: type.key
               },
               typeName
             );
@@ -78141,6 +78536,13 @@ ComOptionTypes.propTypes = {
 // ----------------------------------------
 // select / option - team
 // ----------------------------------------
+/**
+ * div.mlb__schedule__limit_search--team
+ * - team 選択 select / option を出力します
+ * @param {DaeTeamTypes} teams team master
+ * @param {function} change select.onChange callback
+ * @constructor
+ */
 var ComOptionTeams = function ComOptionTeams(_ref2) {
   var teams = _ref2.teams,
       change = _ref2.change;
@@ -78153,7 +78555,11 @@ var ComOptionTeams = function ComOptionTeams(_ref2) {
       _react2.default.createElement(
         'dt',
         { className: 'mlb__schedule__limit_search__heading' },
-        '\u30C1\u30FC\u30E0\u5225'
+        _react2.default.createElement(
+          'label',
+          { htmlFor: 'limit_search--team' },
+          '\u30C1\u30FC\u30E0\u5225'
+        )
       ),
       _react2.default.createElement(
         'dd',
@@ -78192,6 +78598,10 @@ var ComOptionTeams = function ComOptionTeams(_ref2) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{teams: DaeTeamTypes, change: function}}
+ */
 ComOptionTeams.propTypes = {
   teams: _propTypes2.default.instanceOf(_DaeTeamTypes2.default).isRequired,
   change: _propTypes2.default.func.isRequired
@@ -78200,25 +78610,88 @@ ComOptionTeams.propTypes = {
 // ----------------------------------------
 // ComSchedule
 // ----------------------------------------
+/**
+ * section.mlb__schedule
+ * - ComSchedule
+ *   - {@link ComOptionTeams}
+ *   - {@link ComOptionTypes}
+ *   - {@link ComScheduleList}
+ */
 
 var ComSchedule = function (_Component) {
   _inherits(ComSchedule, _Component);
 
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * {@link ComOptionTeams},
+   * {@link ComOptionTypes} の選択状態を state 管理します
+   * @param {object} props {@link ComSchedule.propTypes} 参照
+   */
+
+  // ----------------------------------------
+  // STATIC PROPERTY
+  // ----------------------------------------
+  /**
+   * propTypes
+   * @type {{teams: DaeTeamTypes, types: DaeGameTypes, schedule: DaeSchedule}}
+   */
   function ComSchedule(props) {
     _classCallCheck(this, ComSchedule);
 
+    // ---
+    /**
+     * state - {@link ComOptionTeams}, {@link ComOptionTypes} の選択状態を state 管理します
+     *
+     * 初期値
+     * - team: all
+     * - type: all
+     * @type {{team: string, type: string}}
+     */
     var _this = _possibleConstructorReturn(this, (ComSchedule.__proto__ || Object.getPrototypeOf(ComSchedule)).call(this, props));
 
     _this.state = {
       team: 'all',
       type: 'all'
     };
+    /**
+     * bind onChangeTeams - team select.onChange event handler
+     * @type {function}
+     */
     _this.onChangeTeams = _this.onChangeTeams.bind(_this);
+    /**
+     * bind onChangeTypes - type select.onChange event handler
+     * @type {function}
+     */
     _this.onChangeTypes = _this.onChangeTypes.bind(_this);
+    /**
+     * bind onNavClick - nav click event handler
+     * @type {function}
+     */
     _this.onNavClick = _this.onNavClick.bind(_this);
+    /**
+     * calendar id {@link Style.calendar}
+     * @type {string}
+     */
     _this.id = _Style2.default.calendar.id;
     return _this;
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * team select.onChange event handler
+   * 1. value が空の時は `all` にする
+   * 2. setState を行う
+   * @param {Event} event select.onChange event
+   */
+
+  /**
+   * defaultProps
+   * @type {{teams: ?DaeTeamTypes, types: ?DaeGameTypes, schedule: ?DaeSchedule}}
+   */
+
 
   _createClass(ComSchedule, [{
     key: 'onChangeTypes',
@@ -78230,6 +78703,13 @@ var ComSchedule = function (_Component) {
       });
       console.log('onChangeTypes event', event.target.value, event, this.state.type);
     }
+    /**
+     * type select.onChange event handler
+     * 1. value が空の時は `all` にする
+     * 2. setState を行う
+     * @param {Event} event select.onChange event
+     */
+
   }, {
     key: 'onChangeTeams',
     value: function onChangeTeams(event) {
@@ -78240,6 +78720,12 @@ var ComSchedule = function (_Component) {
       });
       console.log('onChangeTeams event', event.target.value, event, this.state.team);
     }
+    /**
+     * nav.onClick event handler
+     * 1. calendar まで smooth scroll します
+     * @param {Event} event nav.onClick event
+     */
+
   }, {
     key: 'onNavClick',
     value: function onNavClick(event) {
@@ -78251,6 +78737,11 @@ var ComSchedule = function (_Component) {
         ease: Power3.easeOut
       });
     }
+    /**
+     * section.mlb__schedule を出力します
+     * @returns {?XML} section.mlb__schedule
+     */
+
   }, {
     key: 'render',
     value: function render() {
@@ -78382,14 +78873,32 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // ----------------------------------------
 // 各ゲーム
 // ----------------------------------------
-var teamClass = 'mlb__game__overview__team';
-
+/**
+ * 各ゲーム
+ * - 引数 `team` が 'all' 以外の時は filter 処理を行う
+ * @param {DaeGame} game ゲーム情報
+ * @param {string} team team.id - 【注意】data は number なので cast して比較すること
+ * @returns {?XML} div.mlb__game__overview
+ * @constructor
+ */
 var ComGame = function ComGame(_ref) {
-  var game = _ref.game;
+  var game = _ref.game,
+      team = _ref.team;
 
+  var teamClass = 'mlb__game__overview__team';
+  // team `all` 以外は filter する
+  if (team !== 'all') {
+    var homeId = String(game.home.id);
+    var visitorId = String(game.visitor.id);
+    if (team !== homeId && team !== visitorId) {
+      return null;
+    }
+  }
+  // ------
   var homeClass = game.home.win ? '.mlb__game__result--win' : '';
   var visitorClass = game.visitor.win ? '.mlb__game__result--win' : '';
   var statusClass = game.className;
+  // render
   return _react2.default.createElement(
     'div',
     { className: 'mlb__game__overview' },
@@ -78441,79 +78950,187 @@ var ComGame = function ComGame(_ref) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{game: DaeGame, team: string}}
+ */
 ComGame.propTypes = {
-  game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired
+  game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
+  team: _propTypes2.default.string.isRequired
 };
 
 // ----------------------------------------
 // 各リーグ list 処理
 // ----------------------------------------
+/**
+ * 各リーグ list 処理
+ * - リーグタイトル出力
+ * - 引数 `team` が 'all' 以外の時は filter 処理を行う
+ * @param {DaeGames} games ゲーム情報リスト
+ * @param {string} team team.id - 【注意】data は number なので cast して比較すること
+ * @returns {?XML} div.mlb__schedule__result__heading
+ * @constructor
+ */
 var ComGames = function ComGames(_ref2) {
-  var games = _ref2.games;
+  var games = _ref2.games,
+      team = _ref2.team;
 
+  // game 数存在チェック
   if (!games.has()) {
     return null;
   }
+  // filter - by team id - all 以外
+  var has = team === 'all';
+  if (!has) {
+    has = games.list.some(function (game) {
+      var homeId = String(game.home.id);
+      var visitorId = String(game.visitor.id);
+      // どちらかに存在すれば OK
+      return team === homeId || team === visitorId;
+    });
+  }
+  if (!has) {
+    return null;
+  }
+  var title = games.title ? _react2.default.createElement(
+    'h3',
+    { className: 'mlb__schedule__result__heading' },
+    _Print2.default.str(games.title)
+  ) : '';
+  // render
   return _react2.default.createElement(
     'div',
     { className: 'game-container' },
-    _react2.default.createElement(
-      'h3',
-      { className: 'mlb__schedule__result__heading' },
-      games.title
-    ),
+    title,
     games.list.map(function (game) {
-      return _react2.default.createElement(ComGame, { key: 'game-' + game.id, game: game });
+      return _react2.default.createElement(ComGame, {
+        key: 'game-' + game.id,
+        game: game,
+        team: team
+      });
     })
   );
 };
 
+/**
+ * propTypes
+ * @type {{games: DaeGames, team: string}}
+ */
 ComGames.propTypes = {
-  games: _propTypes2.default.instanceOf(_DaeSchedule.DaeGames).isRequired
+  games: _propTypes2.default.instanceOf(_DaeSchedule.DaeGames).isRequired,
+  team: _propTypes2.default.string.isRequired
 };
 
 // ----------------------------------------
 // 各シーズン list 処理
 // ----------------------------------------
+/**
+ * 各シーズン list 処理
+ * div.mlb__schedule__result__container
+ * @param {DaeLeagues} leagues リーグ情報
+ * @param {string} team team.id filter に使用します
+ * @constructor
+ */
 var ComSeasons = function ComSeasons(_ref3) {
-  var leagues = _ref3.leagues;
+  var leagues = _ref3.leagues,
+      team = _ref3.team;
   return _react2.default.createElement(
     'div',
     { className: 'mlb__schedule__result__container' },
     leagues.list.map(function (games) {
-      return _react2.default.createElement(ComGames, { key: games.season + '-' + games.league, games: games });
+      return _react2.default.createElement(ComGames, {
+        key: games.season + '-' + games.league,
+        games: games,
+        team: team
+      });
     })
   );
 };
 
+/**
+ * propTypes
+ * @type {{leagues: DaeLeagues, team: string}}
+ */
 ComSeasons.propTypes = {
-  leagues: _propTypes2.default.instanceOf(_DaeSchedule.DaeLeagues).isRequired
+  leagues: _propTypes2.default.instanceOf(_DaeSchedule.DaeLeagues).isRequired,
+  team: _propTypes2.default.string.isRequired
 };
 
 // ----------------------------------------
 // 日程・結果
 // ----------------------------------------
+/**
+ * 日程・結果
+ * リーグ別にリスト出力します
+ */
 
 var ComScheduleList = function (_Component) {
   _inherits(ComScheduleList, _Component);
 
-  function ComScheduleList(props) {
+  function ComScheduleList() {
     _classCallCheck(this, ComScheduleList);
 
-    var _this = _possibleConstructorReturn(this, (ComScheduleList.__proto__ || Object.getPrototypeOf(ComScheduleList)).call(this, props));
-
-    _this.state = {
-      team: props.team,
-      type: props.type
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (ComScheduleList.__proto__ || Object.getPrototypeOf(ComScheduleList)).apply(this, arguments));
   }
 
   _createClass(ComScheduleList, [{
+    key: 'shouldComponentUpdate',
+
+    // ----------------------------------------
+    // METHOD
+    // ----------------------------------------
+    /**
+     * nextProps.team, nextProps.type を比較し update するかを決定します
+     * @param {{team: string, type: string}} nextProps 更新される props
+     * @returns {boolean} true: render する
+     */
+    value: function shouldComponentUpdate(nextProps) {
+      var _props = this.props,
+          team = _props.team,
+          type = _props.type;
+
+      var update = false;
+      if (team !== nextProps.team) {
+        update = true;
+      }
+      if (type !== nextProps.type) {
+        update = true;
+      }
+      console.log('ComScheduleList shouldComponentUpdate', nextProps, update);
+      return update;
+    }
+    /**
+     * div.mlb__schedule__result__section を出力します
+     * - {@link ComSchedule}
+     *   - ComScheduleList
+     *     - {@link ComSeasons}
+     *       - {@link ComGames}
+     *         - {@link ComGame}
+     * @returns {XML} div.mlb__schedule__result__section を返します
+     */
+
+    // ----------------------------------------
+    // STATIC PROPERTY
+    // ----------------------------------------
+    /**
+     * propTypes
+     * - seasons {DaeSeasons}
+     * - team {string} team.id - 【注意】data は number なので cast して比較すること
+     * - team {string} type.key - key_name を比較します
+     * @type {{seasons: DaeSeasons, team: string, type: string}}
+     */
+
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
+      // select / option の値
+      var _props2 = this.props,
+          team = _props2.team,
+          type = _props2.type;
+
+      console.log('ComScheduleList.render team, type', team, type);
       return _react2.default.createElement(
         'div',
         { className: 'mlb__schedule__result__section' },
@@ -78523,10 +79140,15 @@ var ComScheduleList = function (_Component) {
           if (!leagues.enable) {
             return null;
           }
-          console.log('ComScheduleList leagues', leagues);
+          // filter
+          if (type !== 'all' && type !== leagues.key) {
+            return null;
+          }
+          // render
           return _react2.default.createElement(ComSeasons, {
             key: 'season-' + leagues.key,
-            leagues: leagues
+            leagues: leagues,
+            team: team
           });
         })
       );

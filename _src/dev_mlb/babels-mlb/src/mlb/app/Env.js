@@ -111,6 +111,10 @@ export default class Env {
     }
     return Env.DEV;
   }
+  /**
+   * process.env.NODE_ENV
+   * @returns {string} production | development
+   */
   static node() {
     return '@@nodeEnv';
   }

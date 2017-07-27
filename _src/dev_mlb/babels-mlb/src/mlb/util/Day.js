@@ -61,12 +61,28 @@ export default class Day {
   static full(date = Day.current()) {
     return `${date.getFullYear()}${Text.zero(date.getMonth() + 1)}${Text.zero(date.getDate())}`;
   }
+  /**
+   * 曜日, '日', '月', '火', '水', '木', '金', '土' を取得します
+   * @param {number} index 0(日) ~ 6(土)
+   * @returns {string}  '日', '月', '火', '水', '木', '金', '土' のいずれかを返します
+   */
   static day(index) {
     return Day.weeks[index];
   }
+  /**
+   * 「○月○日（日）」な文字列を生成します
+   * @param {Date} date Date object
+   * @returns {string} 「○月○日（日）」な文字列を返します
+   */
   static title(date = Day.current()) {
     return `${date.month}月${date.day}日（${date.week}）`;
   }
+  /**
+   * Date object を year, month, day, week へ分解します
+   * @param {Date} date 変換元 Date object
+   * @returns {{date: Date, year: number, month: number, day: number, week: string}}
+   * 変換 object を返します
+   */
   static date(date) {
     return {
       date,

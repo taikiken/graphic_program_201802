@@ -67,6 +67,10 @@ export class DaeJapanesePlayer {
      * @type {DaePitching}
      */
     this.pitching = new DaePitching(origin.pitching);
+    /**
+     * batting | pitching - 選手タイプ
+     * @type {string}
+     */
     this.type = this.batting.has ? 'batting' : 'pitching';
   }
 }
@@ -94,6 +98,10 @@ export class DaeJapanesePlayers {
      */
     this.list = origin.map(player => (new DaeJapanesePlayer(player)));
   }
+  /**
+   * 日本人選手リストが存在するかを確認します
+   * @returns {boolean} true: 存在する
+   */
   has() {
     return this.list.length > 0;
   }
@@ -130,7 +138,16 @@ class DaeGameTeam {
      * @type {string}
      */
     this.team = Normalize.str(origin.team_name);
+    /**
+     * status: 4 の時の勝敗 flag
+     * @type {boolean}
+     */
     this.win = false;
+    /**
+     * status: 4 の時の勝に付与される class name,
+     * {@link Status.win}
+     * @type {string}
+     */
     this.className = '';
   }
 }
@@ -147,9 +164,22 @@ export class DaeGame {
    * */
   constructor(game, season, league) {
     const origin = Normalize.obj(game);
-    const home = Normalize.obj(origin.home);
-    const visitor = Normalize.obj(origin.visitor);
+    const originHome = Normalize.obj(origin.home);
+    const originVisitor = Normalize.obj(origin.visitor);
     const status = Normalize.int(origin.status_id);
+    const home = new DaeGameTeam(originHome);
+    const visitor = new DaeGameTeam(originVisitor);
+    // ----
+    // ゲーム勝敗をscoreから - 4: 試合終了 のみ
+    if (status === 4) {
+      if (home.score > visitor.score) {
+        home.className = Status.win();
+        home.win = true;
+      } else {
+        visitor.className = Status.win();
+        visitor.win = true;
+      }
+    }
     // ----
     /**
      * original JSON
@@ -175,31 +205,39 @@ export class DaeGame {
      * ホームチーム
      * @type {DaeGameTeam}
      */
-    this.home = new DaeGameTeam(home);
+    this.home = home;
     /**
      * ビジターチーム
      * @type {DaeGameTeam}
      */
-    this.visitor = new DaeGameTeam(visitor);
+    this.visitor = visitor;
     /**
      * ゲーム毎の選手情報
      * @type {DaeJapanesePlayers}
      */
     this.players = new DaeJapanesePlayers(origin.player);
     // game status label
+    /**
+     * game status label - 試合中...etc
+     * {@link Status.label}
+     * @type {string}
+     */
     this.label = Normalize.str(Status.label(status));
+    /**
+     * game status によって変化する class name
+     * {@link Status.className}
+     * @type {string}
+     */
     this.className = Normalize.str(Status.className(status));
-    // ゲーム勝敗をscoreから - 4: 試合終了 のみ
-    if (status === 4) {
-      if (home.score > visitor.score) {
-        home.className = Status.win();
-        home.win = true;
-      } else {
-        visitor.className = Status.win();
-        visitor.win = true;
-      }
-    }
+    /**
+     * season key name
+     * @type {string}
+     */
     this.season = season;
+    /**
+     * league key name
+     * @type {string}
+     */
     this.league = league;
   }
 }
@@ -231,10 +269,27 @@ export class DaeGames {
      * @type {Array.<DaeGame>}
      */
     this.list = origin.map(game => (new DaeGame(game, season, league)));
+    /**
+     * season key name
+     * @type {string}
+     */
     this.season = season;
+    /**
+     * league key name
+     * @type {string}
+     */
     this.league = league;
+    /**
+     * league key name から日本語出力情報をセットします
+     * {@link Seasons.title}
+     * @type {string}
+     */
     this.title = Normalize.str(Seasons.title(league));
   }
+  /**
+   * 対戦ゲームが存在するかを確認します
+   * @returns {boolean} true: 対戦ゲームが存在する
+   */
   has() {
     return this.list.length > 0;
   }
@@ -261,6 +316,10 @@ export class DaeJapanese {
      */
     this.list = origin.map(game => (new DaeGame(game)));
   }
+  /**
+   * 日本人選手リストが存在するかをチェックします
+   * @returns {boolean} true: 日本人選手リストが存在する
+   */
   has() {
     return this.list.length > 0;
   }
@@ -277,10 +336,26 @@ export class DaeLeagues {
    * @param {Array.<DaeGames>} seasons 各リーグ試合情報
    */
   constructor(key, seasons) {
+    /**
+     * JSON key name - regular_season...etc
+     * @type {string}
+     */
     this.key = key;
+    /**
+     * 各リーグ試合情報
+     * @type {Array.<DaeGames>}
+     */
     this.list = seasons;
+    /**
+     * key name からシーズン日本語タイトル {@link Seasons.title}
+     * @type {string}
+     */
     this.title = Normalize.str(Seasons.title(key));
-    this.enable = seasons.some(games => (games.list.length));
+    /**
+     * 試合情報存在 flag
+     * @type {boolean}
+     */
+    this.enable = seasons.some(games => (games.list.length > 0));
   }
   /**
    * 試合が存在するかを取得します

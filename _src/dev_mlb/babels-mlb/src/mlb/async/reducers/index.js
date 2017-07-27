@@ -16,6 +16,11 @@ import { combineReducers } from 'redux';
 import calendar from './assets/calendar';
 import schedule from './assets/schedule';
 
+// ----------------
+/**
+ * combineReducers 済み `./assets/calendar`
+ * @type {*}
+ */
 const reducers = combineReducers({
   calendar,
   schedule,

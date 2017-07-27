@@ -30,6 +30,16 @@ import DaeGameTypes from '../../../dae/master/DaeGameTypes';
 import DaeTeamTypes from '../../../dae/master/DaeTeamTypes';
 
 // game info
+/**
+ * 日程 ajax まとめて取得します
+ * - {@link Api.schedule}
+ * - {@link Api.type}
+ * - {@link Api.teams}
+ * @param {number} year 年
+ * @param {number} month 月
+ * @param {number} day 日
+ * @returns {Array} 結果セットを返します
+ */
 const parallel = (year, month, day) => {
   const paths = [];
   // schedule
@@ -42,11 +52,28 @@ const parallel = (year, month, day) => {
   return paths.map(path => (ajax(path)));
 };
 
+/**
+ * 並行処理する ajax を Promise.all し await します
+ * @param {number} year 年
+ * @param {number} month 月
+ * @param {number} day 日
+ * @returns {Promise.<*>} async Promise.all
+ */
 async function asyncCall(year, month, day) {
   const results = await Promise.all(parallel(year, month, day));
   return results;
 }
 
+/**
+ * 日程 ajax - success callback
+ * @param {Array.<*>} results 結果セット
+ * - {@link Api.schedule}
+ * - {@link Api.type}
+ * - {@link Api.teams}
+ * @param {*} date 取得日 object {@link Day.today}
+ * @returns {{schedule: DaeSchedule, types: DaeGameTypes, teams: DaeTeamTypes, date: *, type: string}}
+ * complete state object
+ */
 const requestComplete = (results, date) => {
   const schedule = new DaeSchedule(results.shift());
   const types = new DaeGameTypes(results.shift());
@@ -60,13 +87,27 @@ const requestComplete = (results, date) => {
   };
 };
 
+/**
+ * 日程 ajax - error callback
+ * @param {Error} error ajax error
+ * @param {*} date 取得日 object {@link Day.today}
+ * @returns {*} error state object
+ */
 const requestError = (error, date) => ({
   error,
   date,
   type: ReducerTypes.SCHEDULE_ERROR,
 });
 
-
+/**
+ * 日程 JSON を取得します
+ * - {@link Api.schedule}
+ * - {@link Api.type}
+ * - {@link Api.teams}
+ * @param {?{date: Date, year: number, month: number, day: number, week: string}} [requestDate=Day.today]
+ * 取得日 object
+ * @returns {Promise} fetch Promise
+ */
 const schedule = (requestDate = null) => (dispatch) => {
   const date = requestDate || Day.today();
   return asyncCall(date.year, date.month, date.day)

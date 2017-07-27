@@ -15,7 +15,7 @@
  */
 export default class ReducerTypes {
   /**
-   * default state
+   * default state - reducerInitial
    * @type {string}
    */
   static INITIAL = 'reducerInitial';
@@ -23,25 +23,29 @@ export default class ReducerTypes {
   // 日程・結果
   // ----------------------------------------
   /**
-   * {@link Api.calendar} ajax complete
+   * {@link Api.calendar} ajax complete - calendarComplete
    * @type {string}
    */
   static CALENDAR_COMPLETE = 'calendarComplete';
   /**
-   * {@link Api.calendar} ajax error
+   * {@link Api.calendar} ajax error - calendarError
    * @type {string}
    */
   static CALENDAR_ERROR = 'calendarError';
   /**
-   * {@link Api.schedule} ajax complete
+   * {@link Api.schedule} ajax complete - scheduleComplete
    * @type {string}
    */
   static SCHEDULE_COMPLETE = 'scheduleComplete';
   /**
-   * {@link Api.schedule} ajax error
+   * {@link Api.schedule} ajax error - scheduleComplete
    * @type {string}
    */
   static SCHEDULE_ERROR = 'scheduleComplete';
+  /**
+   * SCHEDULE_START - scheduleStart
+   * @type {string}
+   */
   static SCHEDULE_START = 'scheduleStart';
   // ----------------------------------------
   // UI

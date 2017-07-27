@@ -44,6 +44,14 @@ async function asyncCall(year) {
   return json;
 }
 
+/**
+ * calendar ajax - success callback
+ * @param {object} json 取得 JSON
+ * @param {number} year 取得年
+ * @param {Date} today current にする Date instance
+ * @returns {{data: DaeCalendar, year: number, today: Date, type: string}}
+ * complete state object
+ */
 const requestComplete = (json, year, today) => {
   const data = new DaeCalendar(json, year);
   return {
@@ -54,6 +62,13 @@ const requestComplete = (json, year, today) => {
   };
 };
 
+/**
+ * calendar ajax - error callback
+ * @param {Error} error ajax error
+ * @param {number} year 取得年
+ * @param {Date} today current にする Date instance
+ * @returns {*} error state object
+ */
 const requestError = (error, year, today) => ({
   error,
   year,
@@ -65,6 +80,7 @@ const requestError = (error, year, today) => ({
  * calendar 表示用 JSON を取得します
  * @param {?string} [requestYear=null] 取得年
  * @param {?Date} [requestToday=null] current にする Date instance
+ * @returns {Promise} fetch Promise
  */
 const calendar = (requestYear = null, requestToday = null) => (dispatch) => {
   console.log('actions.calendar requestYear', requestYear, typeof requestYear);

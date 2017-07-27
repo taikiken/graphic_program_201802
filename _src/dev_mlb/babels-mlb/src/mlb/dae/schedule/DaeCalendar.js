@@ -132,7 +132,7 @@ export default class DaeCalendar {
      * @type {Object}
      */
     this.origin = origin;
-    console.log('DaeCalendar list', list);
+    // console.log('DaeCalendar list', list);
     /**
      * 配列に試合が無い日も null でリストされています
      * @type {Array}

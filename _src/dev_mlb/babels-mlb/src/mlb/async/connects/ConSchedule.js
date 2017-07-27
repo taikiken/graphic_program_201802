@@ -18,6 +18,10 @@ import ComScheduleMam from '../../component/schedule/ComScheduleMam';
 
 const mapStateToProps = ({ schedule }) => (schedule);
 
+/**
+ * react-redux.connect {@link ComScheduleMam}
+ * @type {*}
+ */
 const ConSchedule = connect(mapStateToProps)(ComScheduleMam);
 
 export default ConSchedule;

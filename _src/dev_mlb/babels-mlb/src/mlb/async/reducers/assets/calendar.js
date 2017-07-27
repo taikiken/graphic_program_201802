@@ -12,6 +12,10 @@
 
 import ReducerTypes from '../ReducerTypes';
 
+/**
+ * initial state
+ * @type {{type: string, data: ?object, error: ?Error, year: ?number, today: ?Date}}
+ */
 const initial = {
   type: ReducerTypes.INITIAL,
   data: null,

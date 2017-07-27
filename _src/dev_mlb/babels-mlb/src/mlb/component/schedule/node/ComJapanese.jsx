@@ -34,6 +34,15 @@ import Print from '../../../util/Print';
 // ----------------------------------------
 // section.mlb__today_jp
 // ----------------------------------------
+
+// ----------------------------------------
+// ComBatting
+// ----------------------------------------
+/**
+ * ComBatting
+ * @param {DaeBatting} player 野手情報
+ * @constructor
+ */
 const ComBatting = ({ player }) => (
   <tr>
     <th className="mlb__today_jp__record__th">成績</th>
@@ -49,10 +58,22 @@ const ComBatting = ({ player }) => (
   </tr>
 );
 
+/**
+ * propTypes
+ * @type {{player: DaeBatting}}
+ */
 ComBatting.propTypes = {
   player: PropTypes.instanceOf(DaeBatting).isRequired,
 };
 
+// ----------------------------------------
+// ComPitching
+// ----------------------------------------
+/**
+ * 投手成績
+ * @param {DaePitching} player 投手情報
+ * @constructor
+ */
 const ComPitching = ({ player }) => (
   <tr>
     <th className="mlb__today_jp__record__th">成績</th>
@@ -68,10 +89,25 @@ const ComPitching = ({ player }) => (
   </tr>
 );
 
+/**
+ * propTypes
+ * @type {{player: DaePitching}}
+ */
 ComPitching.propTypes = {
   player: PropTypes.instanceOf(DaePitching).isRequired,
 };
 
+// ----------------------------------------
+// ComPlayer
+// ----------------------------------------
+/**
+ * 日本人選手情報
+ * - {@link ComBatting}
+ * - {@link ComPitching}
+ * @param {DaeJapanesePlayer} player 日本人選手
+ * @returns {XML} div.mlb_jp_stats
+ * @constructor
+ */
 const ComPlayer = ({ player }) => {
   console.log('ComJaPlayer player', player);
   const batting = player.type === 'batting';
@@ -102,14 +138,29 @@ const ComPlayer = ({ player }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{player: DaeJapanesePlayer}}
+ */
 ComPlayer.propTypes = {
   player: PropTypes.instanceOf(DaeJapanesePlayer).isRequired,
 };
 
+// ----------------------------------------
+// ComGame
+// ----------------------------------------
+/**
+ * 試合毎の日本人選手一覧を出力します
+ * @param {DaeGame} game japanese player game 情報
+ * @returns {?XML} div.com-player-container > div.mlb__game__overview
+ * @constructor
+ */
 const ComGame = ({ game }) => {
   if (!game.players.has()) {
     return null;
   }
+  // -----
+  // render
   const homeClass = game.home.win ? '.mlb__game__result--win' : '';
   const visitorClass = game.visitor.win ? '.mlb__game__result--win' : '';
   const statusClass = game.className;
@@ -156,10 +207,17 @@ const ComGame = ({ game }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{game: DaeGame}}
+ */
 ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
 };
 
+// ----------------------------------------
+// ComJapanese
+// ----------------------------------------
 /**
  * 日程・結果 - 日本人選手一覧
  * - {@link ComScheduleMam}

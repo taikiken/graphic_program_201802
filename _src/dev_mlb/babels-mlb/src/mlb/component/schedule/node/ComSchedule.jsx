@@ -44,10 +44,19 @@ const Power3 = self.Power3;
 // ----------------------------------------
 // select / option - games
 // ----------------------------------------
+/**
+ * 試合種類（シーズン）を選択します,
+ * div.mlb__schedule__limit_search--game
+ * @param {DaeGameTypes} types 出力対象 JSON 変換データ
+ * @param {function} change select.onChange callback method
+ * @constructor
+ */
 const ComOptionTypes = ({ types, change }) => (
   <div className="mlb__schedule__limit_search--game">
     <dl>
-      <dt className="mlb__schedule__limit_search__heading">試合種別</dt>
+      <dt className="mlb__schedule__limit_search__heading">
+        <label htmlFor="limit_search--game">試合種別</label>
+      </dt>
       <dd className="mlb__schedule__limit_search__select">
         <select
           name="limit_search--game"
@@ -67,7 +76,7 @@ const ComOptionTypes = ({ types, change }) => (
               return (
                 <option
                   key={`type-${id}`}
-                  value={id}
+                  value={type.key}
                 >
                   {typeName}
                 </option>
@@ -88,10 +97,19 @@ ComOptionTypes.propTypes = {
 // ----------------------------------------
 // select / option - team
 // ----------------------------------------
+/**
+ * div.mlb__schedule__limit_search--team
+ * - team 選択 select / option を出力します
+ * @param {DaeTeamTypes} teams team master
+ * @param {function} change select.onChange callback
+ * @constructor
+ */
 const ComOptionTeams = ({ teams, change }) => (
   <div className="mlb__schedule__limit_search--team">
     <dl>
-      <dt className="mlb__schedule__limit_search__heading">チーム別</dt>
+      <dt className="mlb__schedule__limit_search__heading">
+        <label htmlFor="limit_search--team">チーム別</label>
+      </dt>
       <dd className="mlb__schedule__limit_search__select">
         <select
           name="limit_search--team"
@@ -123,6 +141,10 @@ const ComOptionTeams = ({ teams, change }) => (
   </div>
 );
 
+/**
+ * propTypes
+ * @type {{teams: DaeTeamTypes, change: function}}
+ */
 ComOptionTeams.propTypes = {
   teams: PropTypes.instanceOf(DaeTeamTypes).isRequired,
   change: PropTypes.func.isRequired,
@@ -131,28 +153,88 @@ ComOptionTeams.propTypes = {
 // ----------------------------------------
 // ComSchedule
 // ----------------------------------------
+/**
+ * section.mlb__schedule
+ * - ComSchedule
+ *   - {@link ComOptionTeams}
+ *   - {@link ComOptionTypes}
+ *   - {@link ComScheduleList}
+ */
 export default class ComSchedule extends Component {
+  // ----------------------------------------
+  // STATIC PROPERTY
+  // ----------------------------------------
+  /**
+   * propTypes
+   * @type {{teams: DaeTeamTypes, types: DaeGameTypes, schedule: DaeSchedule}}
+   */
   static propTypes = {
     teams: PropTypes.instanceOf(DaeTeamTypes),
     types: PropTypes.instanceOf(DaeGameTypes),
     schedule: PropTypes.instanceOf(DaeSchedule),
   };
+  /**
+   * defaultProps
+   * @type {{teams: ?DaeTeamTypes, types: ?DaeGameTypes, schedule: ?DaeSchedule}}
+   */
   static defaultProps = {
     teams: null,
     types: null,
     schedule: null,
   };
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * {@link ComOptionTeams},
+   * {@link ComOptionTypes} の選択状態を state 管理します
+   * @param {object} props {@link ComSchedule.propTypes} 参照
+   */
   constructor(props) {
     super(props);
+    // ---
+    /**
+     * state - {@link ComOptionTeams}, {@link ComOptionTypes} の選択状態を state 管理します
+     *
+     * 初期値
+     * - team: all
+     * - type: all
+     * @type {{team: string, type: string}}
+     */
     this.state = {
       team: 'all',
       type: 'all',
     };
+    /**
+     * bind onChangeTeams - team select.onChange event handler
+     * @type {function}
+     */
     this.onChangeTeams = this.onChangeTeams.bind(this);
+    /**
+     * bind onChangeTypes - type select.onChange event handler
+     * @type {function}
+     */
     this.onChangeTypes = this.onChangeTypes.bind(this);
+    /**
+     * bind onNavClick - nav click event handler
+     * @type {function}
+     */
     this.onNavClick = this.onNavClick.bind(this);
+    /**
+     * calendar id {@link Style.calendar}
+     * @type {string}
+     */
     this.id = Style.calendar.id;
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * team select.onChange event handler
+   * 1. value が空の時は `all` にする
+   * 2. setState を行う
+   * @param {Event} event select.onChange event
+   */
   onChangeTypes(event) {
     event.preventDefault();
     const id = event.target.value;
@@ -161,6 +243,12 @@ export default class ComSchedule extends Component {
     });
     console.log('onChangeTypes event', event.target.value, event, this.state.type);
   }
+  /**
+   * type select.onChange event handler
+   * 1. value が空の時は `all` にする
+   * 2. setState を行う
+   * @param {Event} event select.onChange event
+   */
   onChangeTeams(event) {
     event.preventDefault();
     const id = event.target.value;
@@ -169,6 +257,11 @@ export default class ComSchedule extends Component {
     });
     console.log('onChangeTeams event', event.target.value, event, this.state.team);
   }
+  /**
+   * nav.onClick event handler
+   * 1. calendar まで smooth scroll します
+   * @param {Event} event nav.onClick event
+   */
   onNavClick(event) {
     event.preventDefault();
     TweenLite.to(
@@ -182,6 +275,10 @@ export default class ComSchedule extends Component {
       },
     );
   }
+  /**
+   * section.mlb__schedule を出力します
+   * @returns {?XML} section.mlb__schedule
+   */
   render() {
     const { teams, types, schedule } = this.props;
     if (!teams || !types || !schedule) {

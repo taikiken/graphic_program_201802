@@ -10,7 +10,14 @@
  *
  */
 
+/**
+ * Style に関する CONST
+ */
 export default class Style {
+  /**
+   * calendar に付与する id - js-mlb__schedule__calendar
+   * @type {{id: string}}
+   */
   static calendar = {
     id: 'js-mlb__schedule__calendar',
   };

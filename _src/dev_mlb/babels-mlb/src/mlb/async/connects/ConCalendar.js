@@ -72,6 +72,10 @@ const mapStateToProps = ({ calendar }) => (calendar);
 // };
 
 // const ConCalendar = connect(mapStateToProps)(CalendarMam);
+/**
+ * react-redux.connect {@link ComCalendarMam}
+ * @type {*}
+ */
 const ConCalendar = connect(mapStateToProps)(ComCalendarMam);
 
 export default ConCalendar;

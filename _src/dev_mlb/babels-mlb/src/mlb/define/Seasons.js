@@ -10,7 +10,14 @@
  *
  */
 
+/**
+ * 試合種類の日本語ラベル
+ */
 export default class Seasons {
+  /**
+   * 試合種類の日本語 key name - japanese
+   * @type {{open: string, cactus_league: string, grapefruit_league: string, regular_season: string, american: string, national: string, inter_league: string, all_star: string, post_season: string, league_champion: string, world_series: string, division_playoff: string, wild_card: string}}
+   */
   static seasons = {
     open: 'オープン戦',
     cactus_league: 'カクタスリーグ',
@@ -26,6 +33,11 @@ export default class Seasons {
     division_playoff: 'ディビジョンプレイオフ',
     wild_card: 'ワイルドカードゲーム',
   };
+  /**
+   * key name から 日本語 label を取得します
+   * @param {string} key JSON key name
+   * @returns {string} 日本語 label
+   */
   static title(key) {
     return Seasons.seasons[key];
   }
