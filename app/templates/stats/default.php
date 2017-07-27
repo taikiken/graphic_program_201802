@@ -92,7 +92,7 @@
   <!-- appvador -->
   <script>
     googletag.cmd.push(function() {
-      googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
+      googletag.defineOutOfPageSlot('/531683568/appvador', 'div-gpt-ad-1501153538579-0').addService(googletag.pubads());
       googletag.pubads().enableSingleRequest();
       googletag.pubads().collapseEmptyDivs();
       googletag.enableServices();
@@ -126,12 +126,12 @@ __EOL__;
 
 <?php /* # appvaoder */ ?>
 <!-- /531683568/appvador -->
-<div id='div-gpt-ad-1501126889988-0'>
+<div id='div-gpt-ad-1501153538579-0'>
 <script>
-googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0'); });
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501153538579-0'); });
 </script>
-<script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
 </div>
+<script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
 <?php /* // appvaoder */ ?>
 
 <div id="whole" class="whole stats">
