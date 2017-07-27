@@ -174,7 +174,7 @@ function ComCalendar(props) {
         onSelectEvent={props.selected}
         onSelectSlot={props.slot}
         onView={props.view}
-        onNavigate={props.navigate}
+        // onNavigate={props.navigate}
         components={{
           toolbar: customToolbar,
           month: {
@@ -205,7 +205,7 @@ ComCalendar.propTypes = {
   selected: PropTypes.func.isRequired,
   slot: PropTypes.func.isRequired,
   view: PropTypes.func,
-  navigate: PropTypes.func.isRequired,
+  // navigate: PropTypes.func.isRequired,
 };
 
 /**

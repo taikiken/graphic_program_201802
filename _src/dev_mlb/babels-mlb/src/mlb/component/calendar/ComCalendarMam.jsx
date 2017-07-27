@@ -65,11 +65,11 @@ export default class ComCalendarMam extends Component {
   constructor(props) {
     super(props);
     // ----
-    /**
-     * bind onNavigate
-     * @type {function}
-     */
-    this.onNavigate = this.onNavigate.bind(this);
+    // /**
+    //  * bind onNavigate
+    //  * @type {function}
+    //  */
+    // this.onNavigate = this.onNavigate.bind(this);
     /**
      * bind onSlot
      * @type {function}
@@ -106,14 +106,15 @@ export default class ComCalendarMam extends Component {
         (nextProps.data && data !== nextProps.data)
       );
   }
-  /**
-   * 日付 click callback
-   * @param {Date} event カレンダー日付 Date instance
-   */
-  onNavigate(event) {
-    console.log('ComCalendarMam.onNavigate', event);
-    this.transition(event);
-  }
+  // /**
+  //  * 日付 click callback
+  //  * @param {Date} event カレンダー日付 Date instance
+  //  */
+  // onNavigate(event) {
+  //   console.log('ComCalendarMam.onNavigate', event);
+  //   // this.transition(event);
+  //   return;
+  // }
   /**
    * 日付枠内 click callback
    * @param {?object} event event が存在しない時は null
@@ -146,6 +147,7 @@ export default class ComCalendarMam extends Component {
     console.log('ComCalendarMam.transition', date, game);
     if (game) {
       console.log('ComCalendarMam.transition', game.full, Link.schedule(game.full));
+      location.href = Link.schedule(game.full);
     }
   }
   /**
@@ -164,7 +166,7 @@ export default class ComCalendarMam extends Component {
         today={this.props.today || Day.current()}
         selected={this.onSelected}
         slot={this.onSlot}
-        navigate={this.onNavigate}
+        // navigate={this.onNavigate}
       />
     );
   }

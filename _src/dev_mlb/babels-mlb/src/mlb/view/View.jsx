@@ -30,6 +30,9 @@ import ConSchedule from '../async/connects/ConSchedule';
 // async/
 import Creator from '../async/Creator';
 
+// util
+import Day from '../util/Day';
+
 console.log('store', store);
 Creator.calendar = (year, today) => (store.dispatch(actions.calendar(year, today)));
 Creator.schedule = date => (store.dispatch(actions.schedule(date)));
@@ -62,7 +65,7 @@ export default class View {
     // -----
     Creator.calendar(year, today);
     // Creator.calendar(year, new Date(2017, 8, 15));
-    Creator.schedule();
+    Creator.schedule(Day.date(today));
     console.log('ViewIndex.make', year, today);
   }
 }

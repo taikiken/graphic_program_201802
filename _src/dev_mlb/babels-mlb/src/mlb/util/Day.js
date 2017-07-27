@@ -13,6 +13,8 @@
 // moku/util
 import Text from '../../moku/util/Text';
 
+const parseInt = self.parseInt;
+
 /**
  * 日付に関する Helper
  */
@@ -91,5 +93,8 @@ export default class Day {
       day: date.getDate(),
       week: Day.day(date.getDay()),
     };
+  }
+  static convert(str) {
+    return new Date(str.substr(0, 4), parseInt(str.substr(4, 2), 10) - 1, str.substr(6, 2));
   }
 }
