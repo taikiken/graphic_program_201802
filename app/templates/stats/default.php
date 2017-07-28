@@ -61,19 +61,10 @@
   {'GTM-KJ33JM9':true});</script>
   <?php // Google Optimize ?>
 
-  <script type='text/javascript'>
+  <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+  <script>
     var googletag = googletag || {};
     googletag.cmd = googletag.cmd || [];
-    (function() {
-      var gads = document.createElement('script');
-      gads.async = true;
-      gads.type = 'text/javascript';
-      var useSSL = 'https:' == document.location.protocol;
-      gads.src = (useSSL ? 'https:' : 'http:') +
-        '//www.googletagservices.com/tag/js/gpt.js';
-      var node = document.getElementsByTagName('script')[0];
-      node.parentNode.insertBefore(gads, node);
-    })();
   </script>
 
   <script>
@@ -88,6 +79,17 @@
    ga('require', 'displayfeatures');
    ga('send', 'pageview');
   </script>
+
+  <!-- appvador -->
+  <script>
+    googletag.cmd.push(function() {
+      googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.pubads().collapseEmptyDivs();
+      googletag.enableServices();
+    });
+  </script>
+  <!-- //appvador -->
 
   <script>
     googletag.cmd.push(function() {
@@ -110,49 +112,21 @@ echo <<<__EOL__
 __EOL__;
 ?>
 
-<?php
-// MLB calendar library CSS
-if ($page['prop_category'] == 'mlb') :
-?>
-  <link rel="stylesheet" href="/assets/mlb/css/react-big-calendar.css?v=<?php echo $page['version']; ?>">
-<?php
-endif;
-?>
 </head>
 <body>
 
-<?php
-/*
-# appvaoder
-- グノシー / ニュースパスからのアクセスならappvador実行しない
-*/
-?>
-<div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
-<script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
+<?php /* # appvaoder */ ?>
+<!-- /531683568/appvador -->
+<div id='div-gpt-ad-1501126889988-0'>
+<style>#div-gpt-ad-1501126889988-0 * { line-height:0; }</style>
 <script>
-;(function(){
-  if ( !(/gunosy|newspass/i.test(window.navigator.userAgent)) ) {
-    new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();
-  }
-})();
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0'); });
 </script>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
-<?php
-// @since 2017-07-16
-// .whole へ tennis|golf|mlb 追加する
-$whole_classes = array();
-$whole_classes[] = 'whole';
-$whole_classes[] = 'stats';
-// tennis|golf|mlb
-if (isset($page['prop_category'])) {
-  $whole_classes[] = $page['prop_category'];
-}
-// mlb: schedule|standing|leaders|playerlist|game
-if (isset($page['prop_identity'])) {
-  $whole_classes[] = $page['prop_identity'];
-}
-?>
-<div id="whole" class="<?php echo join( ' ', $whole_classes);?>">
+</div>
+<?php /* // appvaoder */ ?>
+
+<div id="whole" class="whole stats">
 
   <?php
   // app in webview 時に .head-sec を非表示にする
