@@ -434,5 +434,6 @@ export default class DaeGameInfo {
       total: board.visitor.sccores.total,
       win: board.visitor.sccores.total > board.home.sccores.total,
     };
+    this.stadium = Normalize.str(origin.stadium);
   }
 }

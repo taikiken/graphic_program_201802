@@ -24,10 +24,10 @@ import store from '../async/store/';
 import actions from '../async/actions';
 
 // async/connect
-import ConCalendar from '../async/connects/ConCalendar';
-import ConSchedule from '../async/connects/ConSchedule';
+import ConCalendar from '../async/connects/schedule/ConCalendar';
+import ConSchedule from '../async/connects/schedule/ConSchedule';
 
-import games from '../async/connects/ConGames';
+import games from '../async/connects/games/ConGames';
 
 // async/
 import Creator from '../async/Creator';
@@ -60,6 +60,12 @@ class Game {
   }
   static info(element) {
     console.log('Game.info', element);
+    ReactDOM.render(
+      <Provider store={store.games}>
+        <games.ConInfo />
+      </Provider>,
+      element,
+    );
   }
 }
 

@@ -23,6 +23,12 @@ import DaeGameInfo from '../../dae/games/DaeGameInfo';
 // define
 import Style from '../../define/Style';
 
+/**
+ * GAME: 上部対戦成績
+ * @param {?DaeGameInfo} info JSON - game_info.json
+ * @returns {?XML} div.mlb_live__overview
+ * @constructor
+ */
 const ComOverview = ({ info }) => {
   console.log('ComOverview info', info);
   if (!info) {
@@ -54,7 +60,7 @@ const ComOverview = ({ info }) => {
           <p className={`mlb_live__overview__info__status ${statusClass}`}>
             {Print.str(info.label)}
           </p>
-          <p className="mlb_live__overview__info__place">{Print.str(info.studium)}</p>
+          <p className="mlb_live__overview__info__place">{Print.str(info.stadium)}</p>
         </div>
         <p className={`${teamClass} ${teamClass}--visitor ${visitorClass}`}>
           {Print.str(info.visitor.team)}

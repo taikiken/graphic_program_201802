@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 
 // component
-import ComCalendarMam from '../../component/calendar/ComCalendarMam';
+import ComCalendarMam from '../../../component/calendar/ComCalendarMam';
 
 /**
  * state を redux 経由し props 変換します

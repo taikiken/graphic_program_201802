@@ -20,7 +20,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
 // define
 import Style from '../../../define/Style';
 

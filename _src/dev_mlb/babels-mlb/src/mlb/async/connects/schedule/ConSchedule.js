@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 
 // component
-import ComScheduleMam from '../../component/schedule/ComScheduleMam';
+import ComScheduleMam from '../../../component/schedule/ComScheduleMam';
 
 const mapStateToProps = ({ schedule }) => (schedule);
 

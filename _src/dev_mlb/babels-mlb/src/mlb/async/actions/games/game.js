@@ -20,8 +20,8 @@ import ajax from '../../../net/ajax';
 import ReducerTypes from '../../reducers/ReducerTypes';
 
 // dae/games
-// import DaeTeamInfo from '../../../dae/games/DaeTeamInfo';
-// import DaeMemberInfo from '../../../dae/games/DaeMemberInfo';
+import DaeTeamInfo from '../../../dae/games/DaeTeamInfo';
+import DaeMemberInfo from '../../../dae/games/DaeMemberInfo';
 import DaeGameInfo from '../../../dae/games/DaeGameInfo';
 
 const parallel = (year, id) => {
@@ -43,14 +43,14 @@ async function asyncCall(year, id) {
 
 const requestComplete = (results, year, id) => {
   console.log('actions.games.requestComplete', results, year, id);
-  // const team = new DaeTeamInfo(results[0]);
-  // const member = new DaeMemberInfo(results[1]);
+  const team = new DaeTeamInfo(results[0]);
+  const member = new DaeMemberInfo(results[1]);
   const info = new DaeGameInfo(results[2]);
   return {
     year,
     id,
-    team: null,
-    member: null,
+    team,
+    member,
     info,
     type: ReducerTypes.GAMES_COMPLETE,
   };

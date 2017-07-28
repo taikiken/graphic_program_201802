@@ -14,19 +14,22 @@
 import { connect } from 'react-redux';
 
 // component
-import ComOverview from '../../component/game/ComOverview';
+import ComOverview from '../../../component/game/ComOverview';
+import ComInfo from '../../../component/game/ComInfo';
 
 // console.log('ConGames ComOverview', ComOverview);
-// const mapStateToProps = ({ game }) => (game);
-const mapStateToProps = ({ game }) => {
-  console.log('ConGames.mapStateToProps', game);
-  return game;
-};
+const mapStateToProps = ({ game }) => (game);
+// const mapStateToProps = ({ game }) => {
+//   console.log('ConGames.mapStateToProps', game);
+//   return game;
+// };
 
 const ConOverview = connect(mapStateToProps)(ComOverview);
+const ConInfo = connect(mapStateToProps)(ComInfo);
 
 const games = {
   ConOverview,
+  ConInfo,
 };
 
 export default games;
