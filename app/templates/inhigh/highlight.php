@@ -133,7 +133,7 @@ while($f=$db->fetch_array()){
 ?>
                         <div class="ttl-wrapper">
                             <h2 class="ttl highlight"><i></i>動画特集</h2>
-                            <p class="ttl_date"><?php echo $start; ?> - <?php echo $end; ?></p>
+                            <p class="ttl_date">7.28-8.20</p>
                         </div>
 <?php foreach($movie as $k=>$v){ ?>
                         <div class="article_list">
