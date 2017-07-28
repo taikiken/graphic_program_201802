@@ -25,6 +25,14 @@ const document = self.document;
 export default class Main {
   static game(page) {
     console.log('Main.game', page);
+    const overview = document.getElementById('js-mlb-game-overview');
+    const score = document.getElementById('js-mlb-game-score');
+    const info = document.getElementById('js-mlb-game-info');
+    console.log('Main.game ', overview, score, info);
+    if (!overview || !score || !info) {
+      return;
+    }
+    View.game(page.year, page.id, { overview, score, info });
   }
   static index(page) {
     console.log('Main.index', page);

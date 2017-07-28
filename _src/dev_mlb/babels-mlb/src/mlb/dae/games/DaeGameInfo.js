@@ -180,12 +180,12 @@ class DaeStarting {
      * home team 予告登板投手情報
      * @type {DaePitcher}
      */
-    this.home = DaePitcher(origin.home);
+    this.home = new DaePitcher(origin.home);
     /**
      * visitor team 予告登板投手情報
      * @type {DaePitcher}
      */
-    this.visitor = DaePitcher(origin.visitor);
+    this.visitor = new DaePitcher(origin.visitor);
   }
 }
 
@@ -336,7 +336,7 @@ export default class DaeGameInfo {
      */
     this.playDate = playDate;
     this.date = date;
-    this.title = Day.title(date);
+    this.title = Day.title(Day.date(date));
     /**
      * 試合日を数値変換し年・月・日に分解します
      * @type {{year: number, month: number, day: number}}
@@ -353,7 +353,7 @@ export default class DaeGameInfo {
     // 試合中 -> mlb_live__overview__info__status--live
     // 試合終了 -> mlb_live__overview__info__status--end
     // 試合中止 -> mlb_live__overview__info__status--cancel
-    this.className = Status.className(status);
+    this.className = Status.liveClassName(status);
     /**
      * 勝投手
      * @type {string}

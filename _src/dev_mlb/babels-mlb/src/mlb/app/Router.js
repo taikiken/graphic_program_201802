@@ -48,25 +48,31 @@ export default class Router {
     return game;
   }
   /**
-   * `/stats/mlb/game/GAME_ID` の解析を行います
+   * `/stats/mlb/game/YYYY/GAME_ID/` の解析を行います
    * @param {Array.<string>} directories path directory list
    * @param {{path: ?string, id: *}} game return value
    * @returns {{path: ?string, id: *}} 解析結果を返します
    */
   static games(directories, game) {
-    if (directories.length !== 4) {
+    if (directories.length !== 5) {
       return game;
     }
-    const id = directories.pop();
+    const id = directories[4];
     // numeric check
     if (id.match(/[^0-9]+/)) {
       // 数値以外にマッチ
+      return game;
+    }
+    const year = directories[3];
+    if (!year.match(/\d{4}/)) {
+      // not YYYY
       return game;
     }
     // clone します
     const state = Object.assign({}, game);
     state.path = 'game';
     state.id = id;
+    state.year = year;
     return state;
   }
   /**
@@ -82,6 +88,7 @@ export default class Router {
     const game = {
       path: null,
       id: null,
+      year: null,
     };
     // /stats/mlb/ - 両端 `/` あり
     const pathname = location.pathname;

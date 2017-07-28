@@ -23,39 +23,41 @@ import DaeGameInfo from '../../dae/games/DaeGameInfo';
 // define
 import Style from '../../define/Style';
 
-const ComOverview = ({ game }) => {
-  if (!game) {
+const ComOverview = ({ info }) => {
+  console.log('ComOverview info', info);
+  if (!info) {
     return null;
   }
   // -----
-  const teamClass = 'mlb__game__overview__team';
-  const homeClass = game.home.win ? Style.WIN : '';
-  const visitorClass = game.visitor.win ? Style.WIN : '';
-  const statusClass = game.className;
+  const teamClass = 'mlb_live__overview__team';
+  const homeClass = info.home.win ? Style.WIN : '';
+  const visitorClass = info.visitor.win ? Style.WIN : '';
+  const statusClass = info.className;
   // render
   return (
     <div className="mlb_live__overview">
       <div className="mlb_live__overview__inner">
-        <p className={`${teamClass} ${teamClass}--home ${Print.str(game.home.className)}`}>
-          {Print.str(game.home.team)}
+        <p className={`${teamClass} ${teamClass}--home ${Print.str(info.home.className)}`}>
+          {Print.str(info.home.team)}
         </p>
         <div className="mlb_live__overview__info">
-          <p className="mlb_live__overview__info__date">{Print.str(game.title)}</p>
+          <p className="mlb_live__overview__info__date">{Print.str(info.title)}</p>
           <p className="mlb_live__overview__info__score">
-            <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
-              {Print.int(game.home.total)}
+            <span className={`mlb_live__overview__info__score--home ${homeClass}`}>
+              {Print.int(info.home.total)}
             </span>
             <span className="mlb_live__overview__info__score--vs">vs</span>
-            <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
-              {Print.int(game.visitor.total)}
+            <span className={`mlb_live__overview__info__score--visitor ${visitorClass}`}>
+              {Print.int(info.visitor.total)}
             </span>
           </p>
-          <p className={`mlb__game__overview__info__status ${statusClass}`}>
-            {Print.str(game.label)}
+          <p className={`mlb_live__overview__info__status ${statusClass}`}>
+            {Print.str(info.label)}
           </p>
+          <p className="mlb_live__overview__info__place">{Print.str(info.studium)}</p>
         </div>
         <p className={`${teamClass} ${teamClass}--visitor ${visitorClass}`}>
-          {Print.str(game.visitor.team)}
+          {Print.str(info.visitor.team)}
         </p>
       </div>
     </div>
@@ -63,7 +65,11 @@ const ComOverview = ({ game }) => {
 };
 
 ComOverview.propTypes = {
-  game: PropTypes.instanceOf(DaeGameInfo).isRequired,
+  info: PropTypes.instanceOf(DaeGameInfo),
+};
+
+ComOverview.defaultProps = {
+  info: null,
 };
 
 export default ComOverview;

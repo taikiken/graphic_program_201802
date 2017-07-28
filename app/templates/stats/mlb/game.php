@@ -45,7 +45,7 @@
     // ------------------------------------------------------------------------
     // 日程・動的出力
     ?>
-    <div id="js-mlb-game-information"></div>
+    <div id="js-mlb-game-info"></div>
     <script src="/assets/mlb/js/mlb_stats_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
     <?php
     // ------------------------------------------------------------------------

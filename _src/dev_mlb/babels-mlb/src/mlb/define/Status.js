@@ -38,6 +38,12 @@ export default class Status {
     4: 'mlb__game__overview__info__status--end',
     9: 'mlb__game__overview__info__status--cancel',
   };
+  static liveClasses = {
+    1: 'mlb__live__overview__info__status--before',
+    2: 'mlb__live__overview__info__status--live',
+    4: 'mlb__live__overview__info__status--end',
+    9: 'mlb__live__overview__info__status--cancel',
+  };
   /**
    * status 名称を取得します
    * 1: '試合前',
@@ -65,6 +71,9 @@ export default class Status {
    */
   static className(id) {
     return Status.classes[id];
+  }
+  static liveClassName(id) {
+    return Status.liveClasses[id];
   }
   // /**
   //  * team が勝った時に付与する class name - mlb__game__result--win を取得します

@@ -15,12 +15,11 @@ import ReducerTypes from '../ReducerTypes';
 
 const initial = {
   type: ReducerTypes.INITIAL,
-  info: null,
   year: null,
   id: null,
+  info: null,
   member: null,
   team: null,
-  game: null,
   error: null,
 };
 
@@ -36,7 +35,6 @@ const game = (requestState = initial, action) => {
       state.info = action.info;
       state.member = action.member;
       state.team = action.team;
-      state.game = action.game;
       return state;
     }
     case ReducerTypes.CALENDAR_ERROR: {

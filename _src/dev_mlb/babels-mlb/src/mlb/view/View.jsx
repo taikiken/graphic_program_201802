@@ -35,17 +35,21 @@ import Creator from '../async/Creator';
 // util
 import Day from '../util/Day';
 
-// console.log('store', store);
+// ----------------------------
 Creator.calendar = (year, today) => (store.schedules.dispatch(actions.schedules.calendar(year, today)));
 Creator.schedule = date => (store.schedules.dispatch(actions.schedules.schedule(date)));
 
 // games
 Creator.games = (year, id) => (store.games.dispatch(actions.games.game(year, id)));
+// ----------------------------
+
+console.log('connects games', games);
 
 class Game {
   static overview(element) {
+    console.log('Game.overview', element);
     ReactDOM.render(
-      <Provider store={store}>
+      <Provider store={store.games}>
         <games.ConOverview />
       </Provider>,
       element,

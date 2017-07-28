@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 // component
 import ComOverview from '../../component/game/ComOverview';
 
+// console.log('ConGames ComOverview', ComOverview);
 // const mapStateToProps = ({ game }) => (game);
 const mapStateToProps = ({ game }) => {
   console.log('ConGames.mapStateToProps', game);
