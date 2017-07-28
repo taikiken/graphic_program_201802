@@ -17,13 +17,7 @@
 -->
 </td>
 <td class="display"><?php
-
-if(getSorC("draft")==1){
     echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
-}else{
-    echo "<div class=\"dp2\"><img src=\"/shared/cms/img/cmd_active_disabled.gif\" width=\"13\" height=\"13\"></div>";
-}
-
 ?></td>
     <td class="colname"><img width="60" src="<?php echo sprintf('%s/photo/main/%s', $UserImgPath, $p[$i]["img1"])?>"></td>
 <td class="colname"><?php include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/fetchdata.php"; ?></td>

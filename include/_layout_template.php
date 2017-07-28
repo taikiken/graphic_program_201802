@@ -126,6 +126,8 @@ var ct="<?=date("Y/m/d H:i:s")?>";
 <?php if($CURRENTDIRECTORY=="mail"){ ?>
 <div class="newEntry<?php if(getSorC("formedit")!=1){ ?>_disabled<?php } ?>"><a<?php if(getSorC("formedit")==1){ ?> href="./new/?<?=$g->g_url()?>"<?php } ?>><span>新規エントリ</span></a></div>
 <?php }elseif($CURRENTDIRECTORY=="trackback"){ ?>
+<?php }elseif($CURRENTDIRECTORY=="photo"){ ?>
+<div class="newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>"><a<?php if(getSorC("new")==1){ ?> href="/editdm/repo_n/new/?cid=1<?php if($CURRENTDIRECTORY=="repo_e"){ ?>&types=0<?php } ?><?php if($CURRENTDIRECTORY=="repo_edit"){ ?>&c=textfield<?php } ?>"<?php } ?>><span>新規エントリ</span></a></div>
 <?php }else{ ?>
 <div class="newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>"><a<?php if(getSorC("new")==1){ ?> href="./new/?<?=$g->g_url()?><?php if($CURRENTDIRECTORY=="repo_e"){ ?>&types=0<?php } ?><?php if($CURRENTDIRECTORY=="repo_edit"){ ?>&c=textfield<?php } ?>"<?php } ?>><span>新規エントリ</span></a></div>
 <?php } ?>
