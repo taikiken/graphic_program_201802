@@ -84,29 +84,21 @@
         <!-- // ad/npb-sp-anchor -->
     </head>
     <body>
-        <div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
-        <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-        <script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
-<!-- 北京大会ハイライト class名darkを削除しました -------------------------------------------------->
         <div id="whole" class="whole">
-<!-- / 北京大会ハイライト class名darkを削除しました -------------------------------------------------->
             <header class="head-sec">
                 <div class="head-sec-inner">
                     <h1><a href="/">SPORTS BULL</a></h1>
                 </div><!-- /.head-sec-inner -->
             </header><!-- /.head-sec -->
 
-<!-- 北京大会ハイライト メイン画像 ---------------------------------------------------------->
             <div class="special-summary">
                 <a href="/category/seriku/"><h1 class="special-summary-heading"><img src="/assets/images/seriku/header_img.png" alt="世界陸上 北京大会ハイライト" class="sp_hide"><img src="/assets/images/seriku/sp_header_img.png" alt="世界陸上 北京大会ハイライト" class="pc_hide"></h1></a>
             </div>
-<!-- / 北京大会ハイライト メイン画像 ---------------------------------------------------------->
 
             <div class="body-sec">
                 <div class="body-sec-inner">
                     <section class="main-sec">
                        
-<!--  北京大会ハイライト メインコンテンツ ---------------------------------------------------------->
                         <div class="ttl-wrapper">
                             <h2 class="ttl highlight"><i></i>北京大会ハイライト動画</h2>
                             <p class="ttl_date">2015</p>
@@ -137,9 +129,6 @@ echo get_entries("beijing",0,$db);
                                 <img src="/assets/images/seriku/SP_Banner_01B.png">
                             </a>
                         </div>
-                        
-
-<!-- / 北京大会ハイライト メインコンテンツ ---------------------------------------------------------->
 
 
                     </section><!-- /.main-sec -->
