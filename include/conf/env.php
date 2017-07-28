@@ -6,7 +6,7 @@ $filename=$_SERVER['SCRIPT_FILENAME'].$_SERVER['REQUEST_URI'];
 
 if(!preg_match("/dev/",$servername)){
 	$DBNAME="ut0";
-	if(preg_match("/editdm|write|batch|password/",$filename)){
+	if(preg_match("/editdm|write|batch|password|image/",$filename)){
 		//マスターDB
 		$DBHOST="undo-prod.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
 	}else{
