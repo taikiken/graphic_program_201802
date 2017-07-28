@@ -1,5 +1,7 @@
 <?php
 
+include $INCLUDEPATH."local.php";
+
 $s="
 朝日新聞	 http://cms.sportsbull.jp/api/batch/import_asahi.php
 gorin.jp	 http://cms.sportsbull.jp/api/batch/import_gorinjp.php
