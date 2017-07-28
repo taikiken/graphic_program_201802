@@ -1,10 +1,38 @@
 <?php
+
+if(getSorC("usr")==="inhigh"){
+	
+	$inhighJS="$('.utilityMenu  li:eq(1)').hide();
+	$('.toe').each(function(){
+		$(this).parent('td').hide();
+	});";
+	$inhighJS.="$('.listTable th:eq(2)').width(90);";
+	
+	if($TABLE=="repo_n"){
+		if($q->get_dir()===3){			
+			$inhighJS.="$('#topicPath li:eq(1),#topicPath li:eq(2)').hide();";
+		}elseif($q->get_dir()!=3){
+			$inhighJS.="$('#topicPath li:eq(1) a').html('フォトアルバム').attr('href','/editdm/photo/');";
+			if($q->get_file()===2&&$e){
+				$inhighJS.="window.location.href='/editdm/photo/';";
+			}
+			if($q->get_file()===0||$q->get_file()===1){
+				$inhighJS.="$('.t30,.t10t11t12t13t14t15,.t1,.swf').hide();";
+			}
+		}
+	}
+	if($TABLE=="photo"){
+		$inhighJS.="$('#topicPath li:eq(1),#topicPath li:eq(2)').hide();";
+	}
+	echo sprintf("<script>$(function(){%s});</script>",$inhighJS);
+}
+
 if($q->get_file()===2&&$e){
 	//if($DEBUGMODE==0)
-	//echo sprintf("<script type=\"text/javascript\">document.location.href='%s%s/?%s';</script>",$ADPATH,$CURRENTDIRECTORY,$g->g_url("types,".$EDITDELETEINITIAL."id,c,search"));
+	echo sprintf("<script type=\"text/javascript\">document.location.href='%s%s/?%s';</script>",$ADPATH,$CURRENTDIRECTORY,$g->g_url("types,".$EDITDELETEINITIAL."id,c,search"));
 }
-?>
 
+?>
 
 <?php if($q->get_dir()===0){ ?>
 
