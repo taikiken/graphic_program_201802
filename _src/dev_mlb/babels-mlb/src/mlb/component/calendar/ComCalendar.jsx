@@ -174,7 +174,7 @@ function ComCalendar(props) {
         onSelectEvent={props.selected}
         onSelectSlot={props.slot}
         onView={props.view}
-        onNavigate={props.navigate}
+        // onNavigate={props.navigate}
         components={{
           toolbar: customToolbar,
           month: {
@@ -190,6 +190,7 @@ function ComCalendar(props) {
 }
 
 /**
+ * propTypes
  * - events {Array.<ModSchedules>} - 表示する予定・イベント
  * - today {Date} - デフォルト位置（今日）
  * - selected {function} - 予定・イベントを選択した callback
@@ -204,9 +205,13 @@ ComCalendar.propTypes = {
   selected: PropTypes.func.isRequired,
   slot: PropTypes.func.isRequired,
   view: PropTypes.func,
-  navigate: PropTypes.func.isRequired,
+  // navigate: PropTypes.func.isRequired,
 };
 
+/**
+ * defaultProps
+ * @type {{view: function}}
+ */
 ComCalendar.defaultProps = {
   view: () => {},
 };

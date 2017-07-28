@@ -88,8 +88,14 @@ class DaePlayer {
 
 /**
  * 選手一覧
+ * - DaePlayers
+ *   - {@link DaePlayer}
  */
 class DaePlayers {
+  /**
+   * 初期化します
+   * @param {object} info JSON
+   */
   constructor(info) {
     const origin = Normalize.obj(info);
     const players = {};
@@ -118,6 +124,9 @@ class DaePlayers {
 // member_info.json - 選手情報
 /**
  * メンバー情報json - member_info.json
+ * - DaeMemberInfo
+ *   - {@link DaePlayers}
+ *     - {@link DaePlayer}
  */
 export default class DaeMemberInfo {
   /**
@@ -138,8 +147,8 @@ export default class DaeMemberInfo {
      */
     this.ids = Object.keys(origin).map((teamId) => {
       const id = parseInt(teamId, 10);
-      const data = new DaePlayers(origin[teamId]);
-      players[id] = data;
+      // const data = new DaePlayers(origin[teamId]);
+      players[id] = new DaePlayers(origin[teamId]);
       return id;
     });
     /**

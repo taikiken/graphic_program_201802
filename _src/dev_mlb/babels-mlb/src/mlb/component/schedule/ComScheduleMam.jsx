@@ -27,8 +27,14 @@ import ComSchedule from './node/ComSchedule';
 
 /**
  * 日程・結果 - `/stats/mlb/` or `/stats/mlb/YYYYMMDD`
+ *
  * - ComScheduleMam
  *   - {@link ComJapanese}
+ *   - {@link ComSchedule}
+ *     - {@link ComOptionTeams}
+ *     - {@link ComOptionTypes}
+ *     - {@link ComScheduleList}
+ *
  * @param {DaeSchedule} schedule JSON {@link Api.schedule} - `/master/schedule/2017/7/25.json`
  * @param {{year: number, month: number, day: number}} date {@link Day}.today object
  * @param {DaeGameTypes} types ゲーム種類
@@ -52,6 +58,7 @@ const ComScheduleMam = ({ schedule, date, types, teams }) => {
         schedule={schedule}
         types={types}
         teams={teams}
+        date={date}
       />
     </div>
   );

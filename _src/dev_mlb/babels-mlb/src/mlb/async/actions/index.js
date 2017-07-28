@@ -10,10 +10,22 @@
  *
  */
 
-import calendar from './assets/calendar';
-import schedule from './assets/schedule';
+import calendar from './schedules/calendar';
+import schedule from './schedules/schedule';
 
-export default {
+// game
+import game from './games/game';
+
+const schedules = {
   calendar,
   schedule,
+};
+
+const games = {
+  game,
+};
+
+export default {
+  schedules,
+  games,
 };

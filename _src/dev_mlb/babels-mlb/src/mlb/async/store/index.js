@@ -18,11 +18,11 @@ import reducers from '../reducers';
 // middleware
 import middleware from './middleware';
 
-// console.log('reducers', reducers);
+console.log('reducers', reducers);
 
 /**
  * redux - createStore します
- * - reducers
+ * - reducers.schedules
  *   - calendar
  *   - schedule
  * - middleware
@@ -30,13 +30,26 @@ import middleware from './middleware';
  *  - logger
  * @type {Store<S>}
  */
-const store = createStore(
-  reducers,
+const schedules = createStore(
+  reducers.schedules,
   applyMiddleware(
     middleware.thunk,
     middleware.logger,
   ),
 );
+
+const games = createStore(
+  reducers.games,
+  applyMiddleware(
+    middleware.thunk,
+    middleware.logger,
+  ),
+);
+
+const store = {
+  schedules,
+  games,
+};
 
 /**
  * redux - createStore します

@@ -13,12 +13,28 @@
 // redux
 import { combineReducers } from 'redux';
 
-import calendar from './assets/calendar';
-import schedule from './assets/schedule';
+// schedules
+import calendar from './schedules/calendar';
+import schedule from './schedules/schedule';
 
-const reducers = combineReducers({
+// games
+import game from './games/game';
+
+// ----------------
+/**
+ * combineReducers 済み `./assets/calendar`
+ * @type {*}
+ */
+const schedules = combineReducers({
   calendar,
   schedule,
 });
 
-export default reducers;
+const games = combineReducers({
+  game,
+});
+
+export default {
+  schedules,
+  games,
+};

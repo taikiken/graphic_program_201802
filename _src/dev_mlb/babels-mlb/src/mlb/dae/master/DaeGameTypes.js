@@ -44,22 +44,38 @@ class DaeTypes {
      * @type {string}
      */
     this.type = Normalize.str(origin.name);
+    /**
+     * league key name
+     * @type {string}
+     */
     this.key = Normalize.str(origin.key_name);
     /**
      * ゲーム種類所属のリーグリスト
      * @type {?Array.<DaeTypes>}
      */
-    this.league = null;
+    this.leagues = null;
+    /**
+     * 所属 league type lye name list
+     * @type {?Array.<string>}
+     */
     this.keys = null;
   }
+  /**
+   * 所属 league があるかを調べプロパティをセットします
+   * @param {object} leagueObj JSON.league
+   */
   children(leagueObj) {
-    const league = Object.values(leagueObj).map(kind => new DaeTypes(kind));
-    this.keys = league.map(type => (type.key));
-    this.league = league;
+    const leagues = Object.values(leagueObj).map(kind => new DaeTypes(kind));
+    this.keys = leagues.map(type => (type.key));
+    this.leagues = leagues;
   }
+  /**
+   * 所属リーグが存在するかを調べます
+   * @returns {boolean} true: 存在する
+   */
   hasLeague() {
-    const league = this.league;
-    return Array.isArray(league) && league.length;
+    const leagues = this.leagues;
+    return Array.isArray(leagues) && leagues.length;
   }
 }
 
@@ -78,6 +94,7 @@ export default class DaeGameTypes {
     list.map((type) => {
       // league - since 2017-07-26
       const league = type.origin.league;
+      // JSON: 所属リーグが無い時は `null` がセットされています
       if (league) {
         type.children(league);
       }

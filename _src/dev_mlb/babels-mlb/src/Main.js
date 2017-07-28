@@ -15,6 +15,7 @@ import Router from './mlb/app/Router';
 
 // view
 import View from './mlb/view/View';
+import Day from './mlb/util/Day';
 
 const document = self.document;
 
@@ -27,14 +28,26 @@ export default class Main {
   }
   static index(page) {
     console.log('Main.index', page);
+    const id = page.id;
+    if (id) {
+      // id: not null - /stats/mlb/yyyymmdd/
+      // id: null - /stats/mlb/
+      if (!id.length || id.length !== 8) {
+        return;
+      }
+    }
+
     const element = document.getElementById('js-mlb-index-container');
     if (!element) {
       return;
     }
-    View.index(element);
+    const date = id ? Day.convert(id) : Day.current();
+    const { year } = Day.date(date);
+    View.index(element, year, date);
   }
   static init() {
     const page = Router.search();
+    console.log('Main.init page', page);
     // ---------------------------
     // 処理開始
     switch (page.path) {

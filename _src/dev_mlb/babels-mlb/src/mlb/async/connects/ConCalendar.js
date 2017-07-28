@@ -10,68 +10,22 @@
  *
  */
 
-// // react
-// import React from 'react';
-// import PropTypes from 'prop-types';
-
 // redux
 import { connect } from 'react-redux';
 
 // component
 import ComCalendarMam from '../../component/calendar/ComCalendarMam';
 
-// actions
-// import actions from '../actions';
-
-//
-// import Creator from '../Creator';
-//
-// // dae
-// import DaeCalendar from '../../dae/schedule/DaeCalendar';
-
-
 /**
  * state を redux 経由し props 変換します
- * @param {*} request 更新される state {button, request}
  * @returns {*} 引数 state を返します
  */
 const mapStateToProps = ({ calendar }) => (calendar);
 
-// // TODO: この構造だとダメ ViewCalendar 作る
-// const CalendarMam = ({ data, year, today }) => {
-//   console.log('calendarMam', data, year, today);
-//   return (
-//     <ComCalendarMam
-//       maker={Creator.calendar}
-//       data={data}
-//       year={year}
-//       today={today}
-//     />
-//   );
-// };
-//
-// // // TODO: この構造だとダメ ViewCalendar 作る
-// // const calendarMam = ({ dispatch, data }) => (
-// //   <ComCalendarMam
-// //     maker={() => (dispatch(actions.calendar()))}
-// //     data={data}
-// //   />
-// // );
-//
-// CalendarMam.propTypes = {
-//   // dispatch: PropTypes.func.isRequired,
-//   data: PropTypes.instanceOf(DaeCalendar),
-//   year: PropTypes.number,
-//   today: PropTypes.instanceOf(Date),
-// };
-//
-// CalendarMam.defaultProps = {
-//   data: null,
-//   year: null,
-//   today: null,
-// };
-
-// const ConCalendar = connect(mapStateToProps)(CalendarMam);
+/**
+ * react-redux.connect {@link ComCalendarMam}
+ * @type {*}
+ */
 const ConCalendar = connect(mapStateToProps)(ComCalendarMam);
 
 export default ConCalendar;

@@ -1,6 +1,6 @@
-# moku.js
+# mlb_stats_app.js
 
-**moku.js**
+**mlb_stats_app.js**
 
 Copyright (c) inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com

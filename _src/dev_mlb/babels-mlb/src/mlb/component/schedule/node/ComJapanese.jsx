@@ -30,10 +30,22 @@ import DaePitching from '../../../dae/player/DaePitching';
 import Day from '../../../util/Day';
 import Print from '../../../util/Print';
 
+// define
+import Style from '../../../define/Style';
+
 
 // ----------------------------------------
 // section.mlb__today_jp
 // ----------------------------------------
+
+// ----------------------------------------
+// ComBatting
+// ----------------------------------------
+/**
+ * ComBatting
+ * @param {DaeBatting} player 野手情報
+ * @constructor
+ */
 const ComBatting = ({ player }) => (
   <tr>
     <th className="mlb__today_jp__record__th">成績</th>
@@ -49,10 +61,22 @@ const ComBatting = ({ player }) => (
   </tr>
 );
 
+/**
+ * propTypes
+ * @type {{player: DaeBatting}}
+ */
 ComBatting.propTypes = {
   player: PropTypes.instanceOf(DaeBatting).isRequired,
 };
 
+// ----------------------------------------
+// ComPitching
+// ----------------------------------------
+/**
+ * 投手成績
+ * @param {DaePitching} player 投手情報
+ * @constructor
+ */
 const ComPitching = ({ player }) => (
   <tr>
     <th className="mlb__today_jp__record__th">成績</th>
@@ -68,10 +92,25 @@ const ComPitching = ({ player }) => (
   </tr>
 );
 
+/**
+ * propTypes
+ * @type {{player: DaePitching}}
+ */
 ComPitching.propTypes = {
   player: PropTypes.instanceOf(DaePitching).isRequired,
 };
 
+// ----------------------------------------
+// ComPlayer
+// ----------------------------------------
+/**
+ * 日本人選手情報
+ * - {@link ComBatting}
+ * - {@link ComPitching}
+ * @param {DaeJapanesePlayer} player 日本人選手
+ * @returns {XML} div.mlb_jp_stats
+ * @constructor
+ */
 const ComPlayer = ({ player }) => {
   console.log('ComJaPlayer player', player);
   const batting = player.type === 'batting';
@@ -102,17 +141,33 @@ const ComPlayer = ({ player }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{player: DaeJapanesePlayer}}
+ */
 ComPlayer.propTypes = {
   player: PropTypes.instanceOf(DaeJapanesePlayer).isRequired,
 };
 
-const ComGame = ({ game }) => {
+// ----------------------------------------
+// ComGame
+// ----------------------------------------
+/**
+ * 試合毎の日本人選手一覧を出力します
+ * @param {DaeGame} game japanese player game 情報
+ * @returns {?XML} div.com-player-container > div.mlb__game__overview
+ * @constructor
+ */
+const ComGame = ({ game, date }) => {
   if (!game.players.has()) {
     return null;
   }
-  const homeClass = game.home.win ? '.mlb__game__result--win' : '';
-  const visitorClass = game.visitor.win ? '.mlb__game__result--win' : '';
+  // -----
+  // render
+  const homeClass = game.home.win ? Style.WIN : '';
+  const visitorClass = game.visitor.win ? Style.WIN : '';
   const statusClass = game.className;
+  const className = 'mlb__game__overview__team';
   return (
     <div className="com-player-container">
       {
@@ -123,43 +178,53 @@ const ComGame = ({ game }) => {
           />
         ))
       }
-      <div className="mlb__game__overview">
-        <p
-          className={`mlb__game__overview__team mlb__game__overview__team--home ${homeClass}`}
-        >
-          {Print.str(game.home.team)}
-        </p>
-        <div className="mlb__game__overview__info">
-          <p className="mlb__game__overview__info__place">
-            {Print.str(game.stadium)}
+      <a href={`/stats/mlb/game/${date.year}/${game.id}/`}>
+        <div className="mlb__game__overview">
+          <p className={`${className} ${className}--home ${homeClass}`}>
+            {Print.str(game.home.team)}
           </p>
-          <p className="mlb__game__overview__info__score">
-            <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
-              {Print.int(game.home.score)}
-            </span>
-            <span className="mlb__game__overview__info__score--vs">-</span>
-            <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
-              {Print.int(game.visitor.score)}
-            </span>
-          </p>
-          <p className={`mlb__game__overview__info__status ${statusClass}`}>
-            {Print.str(game.label)}
+          <div className="mlb__game__overview__info">
+            <p className="mlb__game__overview__info__place">
+              {Print.str(game.stadium)}
+            </p>
+            <p className="mlb__game__overview__info__score">
+              <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
+                {Print.int(game.home.score)}
+              </span>
+              <span className="mlb__game__overview__info__score--vs">-</span>
+              <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
+                {Print.int(game.visitor.score)}
+              </span>
+            </p>
+            <p className={`mlb__game__overview__info__status ${statusClass}`}>
+              {Print.str(game.label)}
+            </p>
+          </div>
+          <p className={`${className} ${className}--visitor ${visitorClass}`} >
+            {Print.str(game.visitor.team)}
           </p>
         </div>
-        <p
-          className={`mlb__game__overview__team mlb__game__overview__team--visitor ${visitorClass}`}
-        >
-          {Print.str(game.visitor.team)}
-        </p>
-      </div>
+      </a>
     </div>
   );
 };
 
+/**
+ * propTypes
+ * @type {{game: DaeGame}}
+ */
 ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
+  date: PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
+// ----------------------------------------
+// ComJapanese
+// ----------------------------------------
 /**
  * 日程・結果 - 日本人選手一覧
  * - {@link ComScheduleMam}
@@ -184,6 +249,7 @@ const ComJapanese = ({ japanese, date }) => {
           <ComGame
             key={`${game.id}-${game.status}`}
             game={game}
+            date={date}
           />
         ))
       }

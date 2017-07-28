@@ -28,6 +28,10 @@ export default class Status {
     10: '没収',
     23: '遅延/中断',
   };
+  /**
+   * status で付与する css class name
+   * @type {{1: string, 2: string, 4: string, 9: string}}
+   */
   static classes = {
     1: 'mlb__game__overview__info__status--before',
     2: 'mlb__game__overview__info__status--live',
@@ -36,20 +40,37 @@ export default class Status {
   };
   /**
    * status 名称を取得します
+   * 1: '試合前',
+   * 2: '試合中',
+   * 4: '試合終了',
+   * 5: '延期',
+   * 6: 'サスペンド',
+   * 9: 'キャンセル',
+   * 10: '没収',
+   * 23: '遅延/中断',
    * @param {number} id status ID
    * @returns {string} status 日本語名称 を返します
    */
   static label(id) {
     return Status.games[id];
   }
+  /**
+   * status で付与する css class name を取得します
+   * 1: 'mlb__game__overview__info__status--before',
+   * 2: 'mlb__game__overview__info__status--live',
+   * 4: 'mlb__game__overview__info__status--end',
+   * 9: 'mlb__game__overview__info__status--cancel',
+   * @param {number} id game status
+   * @returns {string} status で付与する css class name を返します
+   */
   static className(id) {
     return Status.classes[id];
   }
-  /**
-   * team が勝った時に付与する class name - mlb__game__result--win を取得します
-   * @returns {string} team が勝った時に付与する class name - mlb__game__result--win を返します
-   */
-  static win() {
-    return 'mlb__game__result--win';
-  }
+  // /**
+  //  * team が勝った時に付与する class name - mlb__game__result--win を取得します
+  //  * @returns {string} team が勝った時に付与する class name - mlb__game__result--win を返します
+  //  */
+  // static win() {
+  //   return 'mlb__game__result--win';
+  // }
 }

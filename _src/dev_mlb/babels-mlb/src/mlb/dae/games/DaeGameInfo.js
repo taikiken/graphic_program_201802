@@ -10,8 +10,10 @@
  *
  */
 
-// dae
+// util
 import Normalize from '../../util/Normalize';
+import Day from '../../util/Day';
+import Status from '../../define/Status';
 
 /**
  * [native code] - parseInt
@@ -198,9 +200,11 @@ class DaeScores {
   constructor(info) {
     const origin = Normalize.obj(info);
     const scores = {};
+    let total = 0;
     const innings = Object.keys(origin).map((inning) => {
       const score = Normalize.int(origin[inning], 0);
       scores[parseInt(inning, 10)] = score;
+      total += score;
       return score;
     });
     /**
@@ -218,6 +222,11 @@ class DaeScores {
      * @type {Array.<number>}
      */
     this.innings = innings;
+    /**
+     * 総得点数
+     * @type {number}
+     */
+    this.total = total;
   }
 }
 
@@ -310,7 +319,11 @@ export default class DaeGameInfo {
     const board = new DaeBoard(origin.score_board);
     const starting = new DaeStarting(origin.starting_pitcher);
     const record = new DaeRecords(origin.team_record);
-    const date = Normalize.str(origin.play_date);
+    const playDate = Normalize.str(origin.play_date);
+    // @type {Date}
+    const date = playDate && playDate.length && playDate.length === 8 ?
+      Day.convert(playDate) : Day.current();
+    const status = Normalize.int(origin.status_id);
     // property
     /**
      * original JSON
@@ -321,22 +334,26 @@ export default class DaeGameInfo {
      * 試合日 - YYYYMMDD
      * @type {string}
      */
+    this.playDate = playDate;
     this.date = date;
+    this.title = Day.title(date);
     /**
      * 試合日を数値変換し年・月・日に分解します
      * @type {{year: number, month: number, day: number}}
      */
-    this.calendar = {
-      year: parseInt(date.str(0, 4), 10),
-      month: parseInt(date.str(4, 2), 10),
-      day: parseInt(date.str(6, 2), 10),
-    };
+    this.calendar = Day.date(date);
     /**
      * 試合ステータス
      * 1: 試合前 2: 試合中 4: 試合終了 5: 延期 6: サスペンド 9: キャンセル 10: 没収 23: 遅延/中断
      * @type {number}
      */
-    this.status = Normalize.int(origin.status_id);
+    this.status = status;
+    this.label = Status.label(status);
+    // 試合前 -> .mlb_live__overview__info__status--end
+    // 試合中 -> mlb_live__overview__info__status--live
+    // 試合終了 -> mlb_live__overview__info__status--end
+    // 試合中止 -> mlb_live__overview__info__status--cancel
+    this.className = Status.className(status);
     /**
      * 勝投手
      * @type {string}
@@ -381,23 +398,41 @@ export default class DaeGameInfo {
     // custom
     /**
      * home team information
-     * @type {{id: number, board: DaeInnings, starting: DaePitcher, record: DaeRecord}}
+     * @type {{
+     *   id: number,
+     *   board: DaeInnings,
+     *   starting: DaePitcher,
+     *   record: DaeRecord,
+     *   total: number,
+     *   win: boolean
+     * }}
      */
     this.home = {
       id: board.home.id,
+      team: board.home.team,
       board: board.home,
       starting: starting.home,
       record: record.home,
+      total: board.home.sccores.total,
+      win: board.home.sccores.total > board.visitor.sccores.total,
     };
     /**
      * visitor team information
-     * @type {{id: number, board: DaeInnings, starting: DaePitcher, record: DaeRecord}}
+     * @type {{
+     *   id: number,
+     *   board: DaeInnings,
+     *   starting: DaePitcher,
+     *   record: DaeRecord
+     * }}
      */
     this.visitor = {
       id: board.visitor.id,
+      team: board.visitor.team,
       board: board.visitor,
       starting: starting.visitor,
       record: record.visitor,
+      total: board.visitor.sccores.total,
+      win: board.visitor.sccores.total > board.home.sccores.total,
     };
   }
 }

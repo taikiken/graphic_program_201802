@@ -35,8 +35,9 @@ export default class Router {
       return state;
     } else if (length === 3) {
       const id = directories.pop();
+      console.log('Router.index', id, id.match(/\d{8}/));
       // YYYYMMDD check
-      if (id.match(/\d(8)/)) {
+      if (id.match(/\d{8}/)) {
         state.id = id;
         return state;
       }
@@ -73,26 +74,30 @@ export default class Router {
    * - path {?string} - index or game
    * - id
    *   - index: {string} YYYYMMDD
-   *   - game: {number} GAME ID
+   *   - game: {string} GAME ID
    * @returns {{path: ?string, id: *}} routing 情報を返します
    */
   static search() {
-    // retrun value
+    // return value
     const game = {
       path: null,
       id: null,
     };
     // /stats/mlb/ - 両端 `/` あり
     const pathname = location.pathname;
+    // /stats/mlb/ チェック
+    if (pathname.indexOf('/stats/mlb/') !== 0) {
+      return game;
+    }
     // `/` で分割します
     const parts = pathname.split('/');
     // 空要素を削除します
     const directories = parts.filter(data => (data !== ''));
     // {boolean} - stats, mlb を含んでいる flag
-    const mlb = directories.indexOf('stats') !== -1 && directories.indexOf('mlb');
-    if (!mlb) {
-      return game;
-    }
+    // const mlb = directories.indexOf('stats') !== -1 && directories.indexOf('mlb');
+    // if (!mlb) {
+    //   return game;
+    // }
     // ignore path search
     // schedule, standing, leaders, playerlist 除外します
     if (

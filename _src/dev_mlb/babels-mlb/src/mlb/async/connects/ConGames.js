@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/07/22 - 15:54
+ * @date 2017/07/27 - 21:08
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -14,14 +14,18 @@
 import { connect } from 'react-redux';
 
 // component
-import ComScheduleMam from '../../component/schedule/ComScheduleMam';
+import ComOverview from '../../component/game/ComOverview';
 
-const mapStateToProps = ({ schedule }) => (schedule);
+// const mapStateToProps = ({ game }) => (game);
+const mapStateToProps = ({ game }) => {
+  console.log('ConGames.mapStateToProps', game);
+  return game;
+};
 
-/**
- * react-redux.connect {@link ComScheduleMam}
- * @type {*}
- */
-const ConSchedule = connect(mapStateToProps)(ComScheduleMam);
+const ConOverview = connect(mapStateToProps)(ComOverview);
 
-export default ConSchedule;
+const games = {
+  ConOverview,
+};
+
+export default games;
