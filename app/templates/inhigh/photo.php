@@ -135,7 +135,7 @@ while($f=$db->fetch_array()){
 ?>
                         <div class="ttl-wrapper">
                             <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
-                            <p class="ttl_date">7.28-8.20</p>
+                            <p class="ttl_date">2017.07.25 – 08.20</p>
                         </div>
                         
                         <div id="js-current-post" class="current-post photo_gallery">

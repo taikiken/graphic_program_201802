@@ -133,7 +133,7 @@ while($f=$db->fetch_array()){
 ?>
                         <div class="ttl-wrapper">
                             <h2 class="ttl highlight"><i></i>動画特集</h2>
-                            <p class="ttl_date">7.28-8.20</p>
+                            <p class="ttl_date">2017.07.25 – 08.20</p>
                         </div>
 <?php foreach($movie as $k=>$v){ ?>
                         <div class="article_list">
@@ -143,7 +143,7 @@ while($f=$db->fetch_array()){
                                 <ul class="thumb_area">
 <?php
 for($i=0;$i<count($v);$i++){
-    echo sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><div class="txt_area"><p>%s %s</p></div></a></li>',$v[$i]["url"],$v[$i]["img"],$v[$i]["title"],$v[$i]["date"],$v[$i]["title"]);
+    echo sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><div class="txt_area"><p>%s</p></div></a></li>',$v[$i]["url"],$v[$i]["img"],$v[$i]["title"],$v[$i]["title"]);
 }
 ?>
                                 </ul>
