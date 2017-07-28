@@ -265,10 +265,30 @@
       // margin-left: perCalc(20, 750);
     }
 
-    //.mlb_live__scoreboard__outer
-    &__outer {}
+    & {
+      display: table;
+      width: 100%;
+    }
 
-    width: 100%;
+    //.mlb_live__scoreboard__column
+    &__column {
+      display: table-cell;
+
+      &--team {
+        width: 105px;
+      }
+
+      &--score {}
+
+      &--count {
+        width: 156px;
+      }
+    }
+
+    //.mlb_live__scoreboard__table
+    &__table {
+      width: 100%;
+    }
 
     th, td {
       line-height: 1;
@@ -279,28 +299,142 @@
       text-align: center;
     }
 
-    td {
-      border-top: 1px solid #111;
-      border-left: 1px solid #111;
-      background-color: #1a1a1a;
+    tbody tr:first-child {
+      td {
+        border-top: none;
+      }
     }
 
-    .mlb_live__scoreboard__td--sum,
-    .mlb_live__scoreboard__td--hit,
-    .mlb_live__scoreboard__td--error {
-      background-color: #222;
+    //.mlb_live__scoreboard__table--team
+    &__table--team {
+      td {
+        border-top: 4px solid #111;
+        background-color: #1a1a1a;
+      }
+    }
+
+    //.mlb_live__scoreboard__table--score
+    &__table--score {
+      td {
+        border-top: 4px solid #111;
+        border-left: 4px solid #111;
+        background-color: #1a1a1a;
+      }
+    }
+
+    //.mlb_live__scoreboard__table--count
+    &__table--count {
+      td {
+        border-top: 4px solid #111;
+        border-left: 4px solid #111;
+      }
+
+      .mlb_live__scoreboard__td--sum,
+      .mlb_live__scoreboard__td--hit,
+      .mlb_live__scoreboard__td--error {
+        background-color: #222;
+      }
     }
 
     //.mlb_live__scoreboard__th--team--home {
     &__th--team--home {
-      border-left: 2px solid $home-color;
+      border-left: 4px solid $home-color;
     }
 
     //.mlb_live__scoreboard__th--team--visitor {
     &__th--team--visitor {
-      border-left: 2px solid $visitor-color;
+      border-left: 4px solid $visitor-color;
     }
+
+
+
+
+    //イニングが10回を越えた時のページャー
+    //.mlb_live__scoreboard__inning_pager
+    &__inning_pager {
+      letter-spacing: ls(inline-block);
+      text-align: right;
+
+      //.mlb_live__scoreboard__inning_pager__list
+      &__list {
+        display: inline-block;
+      }
+
+      //.mlb_live__scoreboard__inning_pager__item
+      &__item {
+        display: inline-block;
+        margin-top: 4px;
+        margin-left: 4px;
+        letter-spacing: normal;
+        text-align: left;
+      }
+
+      //.mlb_live__scoreboard__inning_pager__link
+      &__link {
+        @include link-decoration(#fff, #fff, none, none);
+        display: block;
+        min-width: 102px;
+        line-height: 1;
+        padding: 8px 4px;
+        background-color: #1a1a1a;
+        border-radius: 0 0 5px 5px;
+        font-weight: bold;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      //矢印アイコン
+      &__link span {
+        &:before,
+        &:after {
+          display: inline-block;
+          content: "";
+          width: 0;
+          height: 0;
+          vertical-align: middle;
+          @include hide-text;
+        }
+      }
+
+      &__item:nth-child(1) .mlb_live__scoreboard__inning_pager__link span:before {
+        margin-right: 5px;
+        border-style: solid;
+        border-width: 3px 5.2px 3px 0;
+        border-color: transparent #fff transparent transparent;
+      }
+
+      &__item:nth-child(2) .mlb_live__scoreboard__inning_pager__link span:after {
+        margin-left: 5px;
+        border-style: solid;
+        border-width: 3px 0 3px 5.2px;
+        border-color: transparent transparent transparent #fff;
+      }
+
+      //ロールオーバー
+      &__link:hover {
+        background-color: lighten( #1a1a1a, 10% );
+      }
+
+      //機能無効
+      &__link.disable {
+        cursor: default;
+        color: darken( #fff, 70% );
+
+        span:before {
+          border-color: transparent #484848 transparent transparent !important;
+        }
+
+        span:after {
+          border-color: transparent transparent transparent #484848 !important;
+        }
+
+        &:hover {
+          background-color: #1a1a1a;
+        }
+      }
+    }//.mlb_live__scoreboard__inning_pager
   } //.mlb_live__scoreboard
+
 
 
 

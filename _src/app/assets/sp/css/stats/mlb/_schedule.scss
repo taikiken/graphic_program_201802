@@ -416,4 +416,204 @@
       padding-bottom: (60/2)+px;
     }
   } //.mlb__schedule__calendar
+
+
+
+  //カレンダーヘッダー部
+  .calendar-toolbar-container {
+
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+      appearance: none;
+    }
+
+    .calendar-navigation-header {
+      display: table;
+      width: 100%;
+      background-color: $highlight-color;
+
+      .calendar-btn,
+      > .calendar-label-date {
+        display: table-cell;
+        height: (60/2)+px;
+        color: #fff;
+        font-weight: bold;
+        vertical-align: middle;
+      }
+
+      .calendar-btn {
+        // width: perCalc(160, 710);
+        width: 100%;
+        background-color: #0a275d;
+        font-size: (24/2)+px;
+      }
+
+      .calendar-btn-prev span:after {
+        content: "\524D\6708";
+        margin-left: (16/2)+px;
+      }
+
+      .calendar-btn-next span:before {
+        content: "\7FCC\6708";
+        margin-right: (16/2)+px;
+      }
+
+      .calendar-label-date {
+        width: perCalc(390, 710);
+
+        .calendar-label {
+          font-size: 18px;
+          text-align: center;
+          // font-weight: bold;
+          font-size: 16px;
+        }
+      }
+    } //.calendar-navigation-header
+
+
+
+    //「今日」ボタン
+    //一旦非表示
+    .calendar-navigation-footer {
+      display: none;
+    }
+  } //.calendar-toolbar-container
+  //カレンダーヘッダー部
+
+
+
+  // カレンダー週(月〜金)ラベル
+  .rbc-header {
+    padding-top: (16/2)+px;
+    padding-bottom: (16/2)+px;
+
+    .weeks-header-label {
+      color: #000;
+      font-size: (24/2)+px;
+    }
+
+    // 土曜
+    .weeks-header-sat {
+      .weeks-header-label {
+        color: $highlight-color;
+      }
+    }
+
+    // 日曜
+    .weeks-header-sun {
+      .weeks-header-label {
+        color: $highlight-secondary-color;
+      }
+    }
+  } //.rbc-header
+  // カレンダー週(月〜金)ラベル
+
+
+
+  //背景用のdiv
+  .rbc-day-bg {
+    //今日の日付
+    &.rbc-today {
+      background-color: #e6e6e6;
+    }
+  } //.rbc-day-bg
+  //背景用のdiv
+
+
+
+  //日付
+  .rbc-row-content {
+    .rbc-row:nth-child(1) {
+      z-index: -1;
+      position: relative;
+
+      .rbc-date-cell {
+        position: relative;
+        width: 100%;
+        height: 45px;
+        padding-right: 0;
+
+        a {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-50%) translateX(-50%);
+          font-size: (24/2)+px;
+        }
+      }
+    }
+  }
+
+  .rbc-date-cell {
+    a {
+      cursor: default;
+      @include link-decoration(#000, #000, none, none);
+      font-size: (24/2)+px;
+    }
+
+    //土曜
+    &:nth-child(6) {
+      a {
+        color: $highlight-color;
+      }
+    }
+
+    //日曜
+    &:nth-child(7) {
+      a {
+        color: $highlight-secondary-color;
+      }
+    }
+
+    //その月じゃない日
+    &.rbc-off-range {
+      a {
+        color: #999;
+      }
+    }
+  } //.rbc-date-cell
+  //日付
+
+
+  //試合のある日
+  .rbc-row-content {
+    .rbc-row:nth-child(2) {
+      // z-index: -1;
+      margin-top: -45px;
+    }
+  }
+
+  .rbc-row-segment {
+    height: 45px;
+    padding: 0;
+
+    .rbc-event {
+      position: relative;
+      height: 100%;
+      border-radius: 0;
+      background-color: transparent;
+
+      //下線
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 1.2em;
+        height: 1px;
+        margin-top: 0.75em;
+        background-color: #000;
+      }
+    } //.rbc-event
+
+    .rbc-event-content {
+      @include hide-text;
+    }
+  } //.rbc-row-segment
+
 } //.mlb__schedule

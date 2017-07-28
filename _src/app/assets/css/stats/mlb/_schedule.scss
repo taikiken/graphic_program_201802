@@ -435,6 +435,7 @@
     }
 
 
+
     //カレンダーヘッダー部
     .calendar-toolbar-container {
 
@@ -492,6 +493,14 @@
           }
         }
       } //.calendar-navigation-header
+
+
+
+      //「今日」ボタン
+      //一旦非表示
+      .calendar-navigation-footer {
+        display: none;
+      }
     } //.calendar-toolbar-container
     //カレンダーヘッダー部
 
@@ -522,6 +531,7 @@
       }
     } //.rbc-header
     // カレンダー週(月〜金)ラベル
+
 
 
     //背景用のdiv
@@ -620,8 +630,8 @@
 
         &:hover {
           // background-color: $highlight-color;
-          background-color: lighten( $highlight-color, 30% );
-          @include opacity(0.2);
+          // background-color: lighten( $highlight-color, 30% );
+          // @include opacity(0.2);
 
           &:before {
             background-color: transparent;
@@ -633,11 +643,6 @@
         @include hide-text;
       }
     } //.rbc-row-segment
-
-    //下線土曜日
-
-    //試合のある日
-
 
   } //.mlb__schedule__calendar
 } //.mlb__schedule

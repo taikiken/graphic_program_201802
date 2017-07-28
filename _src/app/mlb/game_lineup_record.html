@@ -146,59 +146,98 @@
 
       <section class="main-sec">
         <section class="mlb_live__scoreboard__section">
-          <div class="mlb_live__scoreboard__outer">
-            <table class="mlb_live__scoreboard">
-              <thead>
-                <tr>
-                  <th class="mlb_live__scoreboard__th--team">&nbsp;</th>
-                  <th class="mlb_live__scoreboard__th--inning">1</th>
-                  <th class="mlb_live__scoreboard__th--inning">2</th>
-                  <th class="mlb_live__scoreboard__th--inning">3</th>
-                  <th class="mlb_live__scoreboard__th--inning">4</th>
-                  <th class="mlb_live__scoreboard__th--inning">5</th>
-                  <th class="mlb_live__scoreboard__th--inning">6</th>
-                  <th class="mlb_live__scoreboard__th--inning">7</th>
-                  <th class="mlb_live__scoreboard__th--inning">8</th>
-                  <th class="mlb_live__scoreboard__th--inning">9</th>
-                  <th class="mlb_live__scoreboard__th--sum">計</th>
-                  <th class="mlb_live__scoreboard__th--hit">安</th>
-                  <th class="mlb_live__scoreboard__th--error">失</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th class="mlb_live__scoreboard__th--team mlb_live__scoreboard__th--team--home">T</th>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td class="mlb_live__scoreboard__td--sum">0</td>
-                  <td class="mlb_live__scoreboard__td--hit">4</td>
-                  <td class="mlb_live__scoreboard__td--error">1</td>
-                </tr>
-                <tr>
-                  <th class="mlb_live__scoreboard__th--team mlb_live__scoreboard__th--team--visitor">I</th>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>1</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>3</td>
-                  <td>X</td>
-                  <td class="mlb_live__scoreboard__td--sum">4</td>
-                  <td class="mlb_live__scoreboard__td--hit">9</td>
-                  <td class="mlb_live__scoreboard__td--error">0</td>
-                </tr>
-              </tbody>
-            </table><!-- /.mlb_live__scoreboard -->
-          </div><!-- /.mlb_live__scoreboard__outer -->
+          <div class="mlb_live__scoreboard">
+            <div class="mlb_live__scoreboard__column mlb_live__scoreboard__column--team">
+              <table class="mlb_live__scoreboard__table mlb_live__scoreboard__table--team">
+                <thead>
+                  <tr>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="mlb_live__scoreboard__th--team mlb_live__scoreboard__th--team--home">T</td>
+                  </tr>
+                  <tr>
+                    <td class="mlb_live__scoreboard__th--team mlb_live__scoreboard__th--team--visitor">I</td>
+                  </tr>
+                </tbody>
+              </table><!-- /.mlb_live__scoreboard__table -->
+            </div><!-- /.mlb_live__scoreboard__column--team -->
+
+            <div class="mlb_live__scoreboard__column mlb_live__scoreboard__column--score">
+              <table class="mlb_live__scoreboard__table mlb_live__scoreboard__table--score">
+                <thead>
+                  <tr>
+                    <th class="mlb_live__scoreboard__th--inning">1</th>
+                    <th class="mlb_live__scoreboard__th--inning">2</th>
+                    <th class="mlb_live__scoreboard__th--inning">3</th>
+                    <th class="mlb_live__scoreboard__th--inning">4</th>
+                    <th class="mlb_live__scoreboard__th--inning">5</th>
+                    <th class="mlb_live__scoreboard__th--inning">6</th>
+                    <th class="mlb_live__scoreboard__th--inning">7</th>
+                    <th class="mlb_live__scoreboard__th--inning">8</th>
+                    <th class="mlb_live__scoreboard__th--inning">9</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>X</td>
+                  </tr>
+                </tbody>
+              </table><!-- /.mlb_live__scoreboard__table -->
+            </div><!-- /.mlb_live__scoreboard__column--score -->
+
+            <div class="mlb_live__scoreboard__column mlb_live__scoreboard__column--count">
+              <table class="mlb_live__scoreboard__table mlb_live__scoreboard__table--count">
+                <thead>
+                  <tr>
+                    <th class="mlb_live__scoreboard__th--sum">計</th>
+                    <th class="mlb_live__scoreboard__th--hit">安</th>
+                    <th class="mlb_live__scoreboard__th--error">失</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="mlb_live__scoreboard__td--sum">0</td>
+                    <td class="mlb_live__scoreboard__td--hit">4</td>
+                    <td class="mlb_live__scoreboard__td--error">1</td>
+                  </tr>
+                  <tr>
+                    <td class="mlb_live__scoreboard__td--sum">4</td>
+                    <td class="mlb_live__scoreboard__td--hit">9</td>
+                    <td class="mlb_live__scoreboard__td--error">0</td>
+                  </tr>
+                </tbody>
+              </table><!-- /.mlb_live__scoreboard__column -->
+            </div><!-- /.mlb_live__scoreboard__column--count -->
+          </div><!-- /.mlb_live__scoreboard -->
+
+          <nav class="mlb_live__scoreboard__inning_pager">
+            <ul class="mlb_live__scoreboard__inning_pager__list">
+              <li class="mlb_live__scoreboard__inning_pager__item"><a class="mlb_live__scoreboard__inning_pager__link disable" href="#"><span>前の回</span></a></li>
+              <li class="mlb_live__scoreboard__inning_pager__item"><a class="mlb_live__scoreboard__inning_pager__link" href="#"><span>次の回</span></a></li>
+            </ul>
+          </nav><!-- /.mlb_live__scoreboard__inning_pager -->
         </section><!-- /.mlb_live__scoreboard__section -->
 
         <nav class="mlb_live__reload">
