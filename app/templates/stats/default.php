@@ -126,7 +126,22 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 </div>
 <?php /* // appvaoder */ ?>
 
-<div id="whole" class="whole stats">
+<?php
+// @since 2017-07-16
+// .whole へ tennis|golf|mlb 追加する
+$whole_classes = array();
+$whole_classes[] = 'whole';
+$whole_classes[] = 'stats';
+// tennis|golf|mlb
+if (isset($page['prop_category'])) {
+  $whole_classes[] = $page['prop_category'];
+}
+// mlb: schedule|standing|leaders|playerlist|game
+if (isset($page['prop_identity'])) {
+  $whole_classes[] = $page['prop_identity'];
+}
+?>
+<div id="whole" class="<?php echo join( ' ', $whole_classes);?>">
 
   <?php
   // app in webview 時に .head-sec を非表示にする
