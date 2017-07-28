@@ -161,7 +161,7 @@
           <?php
           // matches
           // ===========================================
-          include_once dirname(__DIR__) . '/_include/_schedule_match.php';
+          include_once dirname(__DIR__) . '/_include/_schedule_match_wrc.php';
           // ===========================================
           ?>
 
