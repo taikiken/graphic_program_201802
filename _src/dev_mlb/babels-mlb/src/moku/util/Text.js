@@ -89,7 +89,7 @@ export default class Text {
   }
   /**
    * 頭 `0` 詰文字を作成します
-   * @param {string} targetText 操作対象文字列
+   * @param {string|number} targetText 操作対象文字列
    * @param {number} [length=2] 必要な桁数
    * @returns {string} `0` 詰文字を返します
    */

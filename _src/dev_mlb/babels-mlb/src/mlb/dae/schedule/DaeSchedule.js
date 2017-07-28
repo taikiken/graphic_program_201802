@@ -433,7 +433,7 @@ export class DaeSeasons {
  */
 export default class DaeSchedule {
   /**
-   * スケジュール JSON をパースし使用し易いように加工します
+   * スケジュール JSON をパースし使用しやすいように加工します
    * @param {object} schedules `master/schedule/YYYYMMDD.json` - スケジュール JSON
    */
   constructor(schedules) {
