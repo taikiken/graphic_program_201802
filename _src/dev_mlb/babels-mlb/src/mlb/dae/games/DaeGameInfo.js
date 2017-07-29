@@ -201,7 +201,7 @@ class DaeScores {
     const origin = Normalize.obj(info);
     const scores = {};
     let total = 0;
-    const innings = Object.keys(origin).map((inning) => {
+    const list = Object.keys(origin).map((inning) => {
       const score = Normalize.int(origin[inning], 0);
       scores[parseInt(inning, 10)] = score;
       total += score;
@@ -221,12 +221,13 @@ class DaeScores {
      * 得点のみリスト
      * @type {Array.<number>}
      */
-    this.innings = innings;
+    this.list = list;
     /**
      * 総得点数
      * @type {number}
      */
     this.total = total;
+    this.innings = list.length;
   }
 }
 
@@ -406,7 +407,9 @@ export default class DaeGameInfo {
      *   total: number,
      *   win: boolean,
      *   hits: number,
-     *   errors: number
+     *   errors: number,
+     *   innings: number,
+     *   scores: DaeScores,
      * }}
      */
     this.home = {
@@ -419,6 +422,8 @@ export default class DaeGameInfo {
       win: board.home.sccores.total > board.visitor.sccores.total,
       hits: board.home.hits,
       error: board.home.errors,
+      innings: board.home.sccores.innings,
+      scores: board.home.sccores,
     };
     /**
      * visitor team information
@@ -430,7 +435,9 @@ export default class DaeGameInfo {
      *   total: number,
      *   win: boolean,
      *   hits: number,
-     *   errors: number
+     *   errors: number,
+     *   innings: number,
+     *   scores: DaeScores,
      * }}
      */
     this.visitor = {
@@ -443,6 +450,8 @@ export default class DaeGameInfo {
       win: board.visitor.sccores.total > board.home.sccores.total,
       hits: board.visitor.hits,
       error: board.visitor.errors,
+      innings: board.visitor.sccores.innings,
+      scores: board.visitor.sccores,
     };
     this.stadium = Normalize.str(origin.stadium);
   }
