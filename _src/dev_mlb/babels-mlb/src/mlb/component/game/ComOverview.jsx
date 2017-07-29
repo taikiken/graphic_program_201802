@@ -60,7 +60,9 @@ const ComOverview = ({ info }) => {
           <p className={`mlb_live__overview__info__status ${statusClass}`}>
             {Print.str(info.label)}
           </p>
-          <p className="mlb_live__overview__info__place">{Print.str(info.stadium)}</p>
+          <p className="mlb_live__overview__info__place">
+            {Print.str(info.stadium)}
+          </p>
         </div>
         <p className={`${teamClass} ${teamClass}--visitor ${visitorClass}`}>
           {Print.str(info.visitor.team)}

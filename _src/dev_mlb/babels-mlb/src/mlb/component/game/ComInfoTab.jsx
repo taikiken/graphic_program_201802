@@ -14,10 +14,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * tab 切替 nav.mlb_live__nav
+ */
 export default class ComInfoTab extends Component {
+  // ----------------------------------------
+  // STATIC PROPERTY
+  // ----------------------------------------
   static propTypes = {
     change: PropTypes.func.isRequired,
   };
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   constructor(props) {
     super(props);
     this.state = {
@@ -30,6 +39,9 @@ export default class ComInfoTab extends Component {
     };
     this.onClick = this.onClick.bind(this);
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
   onClick(event) {
     event.preventDefault();
     console.log('ComNav.onClick', event);

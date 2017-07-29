@@ -57,6 +57,12 @@ class Game {
   }
   static score(element) {
     console.log('Game.score', element);
+    ReactDOM.render(
+      <Provider store={store.games}>
+        <games.ConScore />
+      </Provider>,
+      element,
+    );
   }
   static info(element) {
     console.log('Game.info', element);

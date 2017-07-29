@@ -404,7 +404,9 @@ export default class DaeGameInfo {
      *   starting: DaePitcher,
      *   record: DaeRecord,
      *   total: number,
-     *   win: boolean
+     *   win: boolean,
+     *   hits: number,
+     *   errors: number
      * }}
      */
     this.home = {
@@ -415,6 +417,8 @@ export default class DaeGameInfo {
       record: record.home,
       total: board.home.sccores.total,
       win: board.home.sccores.total > board.visitor.sccores.total,
+      hits: board.home.hits,
+      error: board.home.errors,
     };
     /**
      * visitor team information
@@ -422,7 +426,11 @@ export default class DaeGameInfo {
      *   id: number,
      *   board: DaeInnings,
      *   starting: DaePitcher,
-     *   record: DaeRecord
+     *   record: DaeRecord,
+     *   total: number,
+     *   win: boolean,
+     *   hits: number,
+     *   errors: number
      * }}
      */
     this.visitor = {
@@ -433,6 +441,8 @@ export default class DaeGameInfo {
       record: record.visitor,
       total: board.visitor.sccores.total,
       win: board.visitor.sccores.total > board.home.sccores.total,
+      hits: board.visitor.hits,
+      error: board.visitor.errors,
     };
     this.stadium = Normalize.str(origin.stadium);
   }
