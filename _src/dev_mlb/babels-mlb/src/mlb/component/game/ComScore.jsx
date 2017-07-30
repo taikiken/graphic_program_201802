@@ -24,14 +24,20 @@ import Print from '../../util/Print';
 import ComScoreRefresh from './ComScoreRefresh';
 
 // ----------------------------------------
-// スコアボード・下 切替ボタン
+// スコアボード・下 切替ボタン NEXT
 // ----------------------------------------
 const ComSwitchNext = ({ start, innings, action }) => {
   console.log('ComSwitchNext', start, innings);
   // TODO: remove test code
-  // if (start + 9 >= innings) {
-  //   return null;
-  // }
+  if (start + 9 >= innings) {
+    return (
+      <li id="innings-prev" className="mlb_live__scoreboard__inning_pager__item">
+        <span className="mlb_live__scoreboard__inning_pager__link disabled">
+          <span>次の回</span>
+        </span>
+      </li>
+    );
+  }
   // render
   return (
     <li id="innings-next" className="mlb_live__scoreboard__inning_pager__item">
@@ -52,14 +58,15 @@ ComSwitchNext.propTypes = {
   action: PropTypes.func.isRequired,
 };
 
+// ----------------------------------------
+// スコアボード・下 切替ボタン PREV
+// ----------------------------------------
 const ComSwitchPrev = ({ start, action }) => {
   console.log('ComSwitchPrev', start);
   if (start === 1) {
     return (
       <li id="innings-prev" className="mlb_live__scoreboard__inning_pager__item">
-        <span
-          className="mlb_live__scoreboard__inning_pager__link disabled"
-        >
+        <span className="mlb_live__scoreboard__inning_pager__link disabled">
           <span>前の回</span>
         </span>
       </li>
@@ -84,6 +91,18 @@ ComSwitchPrev.propTypes = {
   action: PropTypes.func.isRequired,
 };
 
+// ----------------------------------------
+// スコアボード・下 切替ボタン
+// ----------------------------------------
+/**
+ * score board 9 回以上 延長表示切替ボタン
+ * @param {number} start 表示スタート回 1, 10, 19~
+ * @param {number} innings total inning 数
+ * @param {function} prev prev callback
+ * @param {function} next next callback
+ * @return {XML} nav.mlb_live__scoreboard__inning_pager
+ * @constructor
+ */
 const ComScoreSwitch = ({ start, innings, prev, next }) => {
   console.log('ComScoreSwitch', start, innings);
   // TODO: remove test code
@@ -169,6 +188,11 @@ ComScoreRight.propTypes = {
 // ----------------------------------------
 // スコアボード・左 対戦チーム
 // ----------------------------------------
+/**
+ * スコアボード・左 対戦チーム
+ * @param {DaeGameInfo} info ゲーム情報
+ * @constructor
+ */
 const ComScoreLeft = ({ info }) => (
   <div className="mlb_live__scoreboard__column mlb_live__scoreboard__column--team">
     <table className="mlb_live__scoreboard__table mlb_live__scoreboard__table--team">
@@ -178,12 +202,12 @@ const ComScoreLeft = ({ info }) => (
       <tbody>
         <tr>
           <td className="mlb_live__scoreboard__th--team mlb_live__scoreboard__th--team--visitor">
-            {Print.str(info.visitor.team)}
+            {Print.str(info.visitor.initials)}
           </td>
         </tr>
         <tr>
           <td className="mlb_live__scoreboard__th--team mlb_live__scoreboard__th--team--home">
-            {Print.str(info.home.team)}
+            {Print.str(info.home.initials)}
           </td>
         </tr>
       </tbody>
@@ -191,6 +215,10 @@ const ComScoreLeft = ({ info }) => (
   </div>
 );
 
+/**
+ * propTypes
+ * @type {{info: DaeGameInfo}}
+ */
 ComScoreLeft.propTypes = {
   info: PropTypes.instanceOf(DaeGameInfo).isRequired,
 };
@@ -199,13 +227,27 @@ ComScoreLeft.propTypes = {
 // ----------------------------------------
 // スコアボード親
 // ----------------------------------------
+/**
+ * スコアボードを表示します
+ * - ComScore
+ *   - {@link ComScoreLeft}
+ *   - {@link ComScoreRight}
+ *   - {@link ComScoreSwitch}
+ *   - {@link ComScoreRefresh}
+ */
 export default class ComScore extends Component {
+  // ----------------------------------------
+  // STATIC PROPERTY
+  // ----------------------------------------
   static propTypes = {
     info: PropTypes.instanceOf(DaeGameInfo),
   };
   static defaultProps = {
     info: null,
   };
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
   static onAuto() {
     console.log('ComScore.onAuto');
   }
@@ -215,6 +257,9 @@ export default class ComScore extends Component {
   static onReload() {
     console.log('ComScore.onReload');
   }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   constructor(props) {
     super(props);
     this.state = {
@@ -225,6 +270,9 @@ export default class ComScore extends Component {
     this.onNext = this.onNext.bind(this);
     this.onPrev = this.onPrev.bind(this);
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
   onNext(event) {
     event.preventDefault();
     this.setState({ start: this.state.start + 9 });

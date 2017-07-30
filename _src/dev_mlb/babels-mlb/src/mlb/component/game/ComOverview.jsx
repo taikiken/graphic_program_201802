@@ -44,7 +44,7 @@ const ComOverview = ({ info }) => {
     <div className="mlb_live__overview">
       <div className="mlb_live__overview__inner">
         <p className={`${teamClass} ${teamClass}--home ${Print.str(info.home.className)}`}>
-          {Print.str(info.home.team)}
+          {Print.str(info.home.jp)}
         </p>
         <div className="mlb_live__overview__info">
           <p className="mlb_live__overview__info__date">{Print.str(info.title)}</p>
@@ -65,17 +65,25 @@ const ComOverview = ({ info }) => {
           </p>
         </div>
         <p className={`${teamClass} ${teamClass}--visitor ${visitorClass}`}>
-          {Print.str(info.visitor.team)}
+          {Print.str(info.visitor.jp)}
         </p>
       </div>
     </div>
   );
 };
 
+/**
+ * propTypes
+ * @type {{info: *}}
+ */
 ComOverview.propTypes = {
   info: PropTypes.instanceOf(DaeGameInfo),
 };
 
+/**
+ * defaultProps
+ * @type {{info: ?DaeGameInfo}}
+ */
 ComOverview.defaultProps = {
   info: null,
 };

@@ -272,6 +272,8 @@ class DaeInnings {
      * @type {DaeScores}
      */
     this.sccores = new DaeScores(origin.scores);
+    this.jp = Normalize.str(origin.team_name_jp);
+    this.initials = Normalize.str(origin.shorten);
   }
 }
 
@@ -424,6 +426,8 @@ export default class DaeGameInfo {
       error: board.home.errors,
       innings: board.home.sccores.innings,
       scores: board.home.sccores,
+      jp: board.home.jp,
+      initials: board.home.initilas,
     };
     /**
      * visitor team information
@@ -452,6 +456,8 @@ export default class DaeGameInfo {
       error: board.visitor.errors,
       innings: board.visitor.sccores.innings,
       scores: board.visitor.sccores,
+      jp: board.visitor.jp,
+      initials: board.visitor.initilas,
     };
     this.stadium = Normalize.str(origin.stadium);
   }
