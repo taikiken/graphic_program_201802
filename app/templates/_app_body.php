@@ -1,4 +1,4 @@
-        <?php if ( $page['post']['is_readmore'] ) :
+ <?php if ( $page['post']['is_readmore'] ) :
           // -------------------------- [記事本文] --------------------------
           ?>
           <div id="post-content-container" class="post-content post-content_app">
@@ -25,8 +25,9 @@
                           <ul>
                               <?php foreach($page['photo'] as $id => $photo) :?>
                                   <li>
-                                      <a href="<?php echo $page['og_url']?>?id=<?php echo $id?>" onclick="ga('send', 'event', 'provider_link', 'click', '<?php echo $page['og_url']?>?id=<?php echo $id?>', 0, {nonInteraction: true});">
-                                          <img data-src="<?php echo $photo['sp_thumb']?>" src="<?php echo $photo['sp_thumb']?>"> </a>
+                                      <a href="<?php echo $page['og_url_with_param']?>id=<?php echo $id?>&viewhead=1">
+                                          <img class="lazyload" data-src="<?php echo $photo['sp_thumb']?>" style="height:50px;">
+                                      </a>
                                   </li>
                               <?php endforeach;?>
                           </ul>
@@ -37,21 +38,22 @@
                           <nav class="nav-photoalbum">
                               <p class="prev">
                                   <?php if($_GET['id'] == 1):?>
-                                  <a href="?id=<?php echo count($page['photo'])?>">
+                                  <a href="<?php echo $page['og_url_with_param']?>id=<?php echo count($page['photo'])?>&viewhead=1">
                                       <?php else:?>
-                                      <a href="?id=<?php echo $_GET['id'] - 1?>">
+                                      <a href="<?php echo $page['og_url_with_param']?>id=<?php echo $_GET['id'] - 1?>&viewhead=1">
                                           <?php endif;?>
-                                          <i></i>前の写真</a>
+                                          <i></i>前の写真
+                                      </a>
                               </p>
                               <p class="list">
-                                  <a href="<?php echo $page['og_url']?>">
+                                  <a href="<?php echo $page['og_url_with_param']?>viewhead=1">
                                       <i></i>写真一覧</a>
                               </p>
                               <p class="next">
                                   <?php if($_GET['id'] == count($page['photo'])):?>
-                                  <a href="?id=1">
+                                  <a href="<?php echo $page['og_url_with_param']?>id=1&viewhead=1">
                                       <?php else:?>
-                                      <a href="?id=<?php echo $_GET['id'] + 1?>">
+                                      <a href="<?php echo $page['og_url_with_param']?>id=<?php echo $_GET['id'] + 1?>&viewhead=1">
                                           <?php endif;?>
                                           次の写真
                                           <i></i>
@@ -68,21 +70,21 @@
                           <nav class="nav-photoalbum">
                               <p class="prev">
                                   <?php if($_GET['id'] == 1):?>
-                                  <a href="?id=<?php echo count($page['photo'])?>">
+                                  <a href="<?php echo $page['og_url_with_param']?>id=<?php echo count($page['photo'])?>&viewhead=1">
                                       <?php else:?>
-                                      <a href="?id=<?php echo $_GET['id'] - 1?>">
+                                      <a href="<?php echo $page['og_url_with_param']?>id=<?php echo $_GET['id'] - 1?>&viewhead=1">
                                           <?php endif;?>
                                           <i></i>前の写真</a>
                               </p>
                               <p class="list">
-                                  <a href="<?php echo $page['og_url']?>">
+                                  <a href="<?php echo $page['og_url_with_param']?>viewhead=1">
                                       <i></i>写真一覧</a>
                               </p>
                               <p class="next">
                                   <?php if($_GET['id'] == count($page['photo'])):?>
-                                  <a href="?id=1">
+                                  <a href="<?php echo $page['og_url_with_param']?>id=1&viewhead=1">
                                       <?php else:?>
-                                      <a href="?id=<?php echo $_GET['id'] + 1?>">
+                                      <a href="<?php echo $page['og_url_with_param']?>id=<?php echo $_GET['id'] + 1?>&viewhead=1">
                                           <?php endif;?>
                                           次の写真
                                           <i></i>
@@ -107,8 +109,8 @@
                                   ?>
 
                                   <li <?php echo $current?>>
-                                      <a href="?id=<?php echo $i?>">
-                                          <img data-src="<?php echo $page['photo'][$i]['sp_thumb']?>" src="<?php echo $page['photo'][$i]['sp_thumb']?>"> </a>
+                                      <a href="<?php echo $page['og_url_with_param']?>id=<?php echo $i?>&viewhead=1">
+                                          <img class="lazyload" data-src="<?php echo $page['photo'][$i]['sp_thumb']?>"> </a>
                                   </li>
                                   <?php
                               endfor;

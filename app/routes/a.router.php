@@ -48,11 +48,19 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
       else :
         $syn_extension = 'selfonly';
       endif;
+      $id = '?';
+
+    foreach($_GET as $k => $v):
+        if($k == 'id') continue;
+        $id .= $k . '=' . $v . '&';
+    endforeach;
 
       $args['page'] = $app->model->set(array(
         'title'          => $post['title'].' | '.$category['label'],
         'og_title'       => $post['title'].' | '.$app->model->property('title_short'),
         'og_url'         => $app->model->property('site_url').'a/'.$post['id'].'/',
+        'og_url_with_param'         => $app->model->property('site_url').'a/'.$post['id'].'/' . $id,
+
         'og_image'       => $post['media']['images']['original'],
         'og_description' => $post['description'],
         'canonical'      => $canonical,
@@ -81,16 +89,15 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
         if ( $post['is_readmore'] ) :
           return $this->renderer->render($response, "app.p.redirect.php", $args);
         else :
-
-          if ( $webview_type === 'body' ) :
-            return $this->renderer->render($response, "app.p.body.php", $args);
-          else :
-            if(!isset($_GET['id'])):
-              return $this->renderer->render($response, "app.p.body.php", $args);
-            else :
-              return $this->renderer->render($response, "app.p.php", $args);
+            if(isset($_GET['viewhead'])):
+                return $this->renderer->render($response, "app.p.php", $args);
             endif;
-          endif;
+
+            if ( $webview_type === 'body' ) :
+                return $this->renderer->render($response, "app.p.body.php", $args);
+            else :
+                return $this->renderer->render($response, "app.p.php", $args);
+            endif;
 
         endif;
 
