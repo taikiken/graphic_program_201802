@@ -192,7 +192,7 @@ class DaeStarting {
 /**
  * スコアボード・リスト
  */
-class DaeScores {
+export class DaeScores {
   /**
    * スコアボード・リスト
    * @param {object} info JSON
@@ -203,8 +203,11 @@ class DaeScores {
     let total = 0;
     const list = Object.keys(origin).map((inning) => {
       const score = Normalize.int(origin[inning], 0);
-      scores[parseInt(inning, 10)] = score;
       total += score;
+      scores[parseInt(inning, 10)] = {
+        score,
+        total,
+      };
       return score;
     });
     /**
@@ -213,7 +216,7 @@ class DaeScores {
      */
     this.origin = origin;
     /**
-     * イニング {number} key に 得点 {number} object
+     * イニング 1 ~ {number} key に {{score: number, total: number}} object
      * @type {object}
      */
     this.score = scores;
@@ -227,6 +230,10 @@ class DaeScores {
      * @type {number}
      */
     this.total = total;
+    /**
+     * 回数
+     * @type {Number}
+     */
     this.innings = list.length;
   }
 }
@@ -234,7 +241,7 @@ class DaeScores {
 /**
  * イニング情報 - 各回の詳細情報
  */
-class DaeInnings {
+export class DaeInnings {
   /**
    * イニング情報 - 各回の詳細情報
    * @param {object} info JSON
@@ -255,7 +262,7 @@ class DaeInnings {
      * 安打数
      * @type {number}
      */
-    this.hits = Normalize.int(origin.errors);
+    this.hits = Normalize.int(origin.hits);
     /**
      * team ID
      * @type {number}
@@ -272,8 +279,16 @@ class DaeInnings {
      * @type {DaeScores}
      */
     this.sccores = new DaeScores(origin.scores);
+    /**
+     * team name - japanese
+     * @type {string}
+     */
     this.jp = Normalize.str(origin.team_name_jp);
-    this.initials = Normalize.str(origin.shorten);
+    /**
+     * team name 頭文字 - スコアボード表示に使用します
+     * @type {string}
+     */
+    this.initials = Normalize.str(origin.team_name_shorten);
   }
 }
 
@@ -412,6 +427,8 @@ export default class DaeGameInfo {
      *   errors: number,
      *   innings: number,
      *   scores: DaeScores,
+     *   jP: string,
+     *   initials: string
      * }}
      */
     this.home = {
@@ -423,11 +440,11 @@ export default class DaeGameInfo {
       total: board.home.sccores.total,
       win: board.home.sccores.total > board.visitor.sccores.total,
       hits: board.home.hits,
-      error: board.home.errors,
+      errors: board.home.errors,
       innings: board.home.sccores.innings,
       scores: board.home.sccores,
       jp: board.home.jp,
-      initials: board.home.initilas,
+      initials: board.home.initials,
     };
     /**
      * visitor team information
@@ -442,6 +459,8 @@ export default class DaeGameInfo {
      *   errors: number,
      *   innings: number,
      *   scores: DaeScores,
+     *   jP: string,
+     *   initials: string
      * }}
      */
     this.visitor = {
@@ -453,11 +472,11 @@ export default class DaeGameInfo {
       total: board.visitor.sccores.total,
       win: board.visitor.sccores.total > board.home.sccores.total,
       hits: board.visitor.hits,
-      error: board.visitor.errors,
+      errors: board.visitor.errors,
       innings: board.visitor.sccores.innings,
       scores: board.visitor.sccores,
       jp: board.visitor.jp,
-      initials: board.visitor.initilas,
+      initials: board.visitor.initials,
     };
     this.stadium = Normalize.str(origin.stadium);
   }

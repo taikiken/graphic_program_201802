@@ -15,7 +15,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // util
-import Day from '../../util/Day';
+import Day from '../../../util/Day';
 
 export default class ComScoreRefresh extends Component {
   static propTypes = {
@@ -28,7 +28,7 @@ export default class ComScoreRefresh extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      radio: 'auto',
+      radio: 'manual',
     };
     this.onClickAuto = this.onClickAuto.bind(this);
     this.onClickManual = this.onClickManual.bind(this);
