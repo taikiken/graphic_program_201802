@@ -233,7 +233,7 @@ VALUES
     '{$thumb}',
     '{$sp_main}',
     '{$sp_thumb}',
-    0,
+    1,
     {$cnt}
 );
 END_DOC;
