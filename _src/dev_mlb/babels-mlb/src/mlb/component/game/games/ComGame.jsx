@@ -407,17 +407,6 @@ const ComGamePitchers = ({ info }) => (
             {Print.str(info.visitor.pitcher.average, '0')}
           </td>
         </tr>
-        <tr>
-          <td className="mlb_live__starting--pitcher_record__td">XX</td>
-          <td className="mlb_live__starting--pitcher_record__td">XX</td>
-          <td className="mlb_live__starting--pitcher_record__td">XX</td>
-          <td className="mlb_live__starting--pitcher_record__td">XX</td>
-          <td className="mlb_live__starting--pitcher_record__td">対戦</td>
-          <td className="mlb_live__starting--pitcher_record__td">XX</td>
-          <td className="mlb_live__starting--pitcher_record__td">XX</td>
-          <td className="mlb_live__starting--pitcher_record__td">XX</td>
-          <td className="mlb_live__starting--pitcher_record__td">XX</td>
-        </tr>
       </tbody>
     </table>
   </div>
