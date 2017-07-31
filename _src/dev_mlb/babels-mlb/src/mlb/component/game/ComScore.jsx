@@ -26,11 +26,17 @@ import Print from '../../util/Print';
 // component
 import ComScoreRefresh from './score/ComScoreRefresh';
 
-console.log('DaeScores', DaeScores);
-
 // ----------------------------------------
 // スコアボード・下 切替ボタン NEXT
 // ----------------------------------------
+/**
+ * スコアボード・下 切替ボタン NEXT
+ * @param {number} start 表示開始回
+ * @param {number} innings ゲーム経過回数
+ * @param {function} action callback
+ * @returns {XML} li.mlb_live__scoreboard__inning_pager__item
+ * @constructor
+ */
 const ComSwitchNext = ({ start, innings, action }) => {
   console.log('ComSwitchNext', start, innings);
   // TODO: remove test code
@@ -59,6 +65,10 @@ const ComSwitchNext = ({ start, innings, action }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{start: number, innings: number, action: function}}
+ */
 ComSwitchNext.propTypes = {
   start: PropTypes.number.isRequired,
   innings: PropTypes.number.isRequired,
@@ -68,6 +78,14 @@ ComSwitchNext.propTypes = {
 // ----------------------------------------
 // スコアボード・下 切替ボタン PREV
 // ----------------------------------------
+/**
+ * スコアボード・下 切替ボタン PREV
+ * - active / inactive: a <-> p tag を切替えます
+ * @param {number} start 表示開始回
+ * @param {function} action callback
+ * @returns {XML} li.mlb_live__scoreboard__inning_pager__item
+ * @constructor
+ */
 const ComSwitchPrev = ({ start, action }) => {
   console.log('ComSwitchPrev', start);
   if (start === 1) {
@@ -95,6 +113,10 @@ const ComSwitchPrev = ({ start, action }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{start: number, action: function}}
+ */
 ComSwitchPrev.propTypes = {
   start: PropTypes.number.isRequired,
   action: PropTypes.func.isRequired,
@@ -136,6 +158,10 @@ const ComScoreSwitch = ({ start, innings, prev, next }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{start: number, innings: number, prev: function, next: function}}
+ */
 ComScoreSwitch.propTypes = {
   start: PropTypes.number.isRequired,
   innings: PropTypes.number.isRequired,
@@ -149,6 +175,13 @@ ComScoreSwitch.propTypes = {
 
 // スコアボード・中 イニング - title
 // ----------------------------------------
+/**
+ * スコアボード・中 イニング - title 試合回
+ * @param {number} start 表示開始回
+ * @param {Array.<number>} boards 9回分の配列
+ * @returns {XML} thead > tr > th.mlb_live__scoreboard__th--inning
+ * @constructor
+ */
 const ComScoreInningsHead = ({ start, boards }) => {
   console.log('ComScoreInningsHead', start, boards);
   const className = 'mlb_live__scoreboard__th--inning';
@@ -171,6 +204,10 @@ const ComScoreInningsHead = ({ start, boards }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{start: number, boards: Array}}
+ */
 ComScoreInningsHead.propTypes = {
   start: PropTypes.number.isRequired,
   boards: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
@@ -178,16 +215,29 @@ ComScoreInningsHead.propTypes = {
 
 // スコアボード・中 イニング - visitor
 // ----------------------------------------
-const ComScoreVisitor = ({ visitor, start, boards }) => (
+/**
+ * スコアボード・中 イニング - visitor
+ * @param {DaeScores} visitor visitor team score
+ * @param {number} start 表示開始回
+ * @param {Array.<number>} boards 9回分の配列
+ * @param {number} innings game innings - 試合経過回数
+ * @returns {XML} tr > td
+ * @constructor
+ */
+const ComScoreVisitor = ({ visitor, start, boards, innings }) => (
   <tr>
     {
       boards.map((value, index) => {
         const inning = start + index;
         const scores = visitor.score[inning];
+        let alt = '0';
+        if (inning > innings) {
+          alt = '';
+        }
         // render
         return (
           <td key={`visitor-${inning}`} className={`visitor-${inning}`}>
-            {Print.str(scores.score, '0')}
+            {Print.str(scores.score, alt)}
           </td>
         );
       })
@@ -199,24 +249,50 @@ ComScoreVisitor.propTypes = {
   visitor: PropTypes.instanceOf(DaeScores).isRequired,
   start: PropTypes.number.isRequired,
   boards: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  innings: PropTypes.number.isRequired,
 };
 
 // スコアボード・中 イニング - home
 // ----------------------------------------
-
+/**
+ * home team score X(alpha) 表示が必要な時に add します
+ * - 9 回未満はそのまま返す
+ * - visitor が勝っているときはそのまま返す
+ * - home が勝って点数が 0 の時は X を返す
+ * - home が勝って点数が 0 以外の時は 点数 + X を返す
+ * @param {{score: number, total: number}} home home team score 情報
+ * @param {{score: number, total: number}} visitor visitor team score 情報
+ * @param {number} inning 現在の回数
+ * @param {number} innings 試合の経過回数
+ * @returns {string|number} 表示点数を返します
+ */
 const scoreAlpha = (home, visitor, inning, innings) => {
+  // 9 回未満はそのまま返す
   if (inning < 9 || inning !== innings) {
     return home.score;
   }
+  // visitor が勝っているときはそのまま返す
   if (home.total <= visitor.total) {
     return home.score;
   }
+  // home が勝って点数が 0 の時は X を返す
   if (home.score <= 0) {
     return 'X';
   }
+  // home が勝って点数が 0 以外の時は 点数 + X を返す
   return `${home.score}X`;
 };
 
+/**
+ * home team スコアボード
+ * @param {DaeScores} home home score
+ * @param {DaeScores} visitor visitor score
+ * @param {number} start 表示開始回
+ * @param {Array.<number>} boards 9回分の配列
+ * @param {number} innings game innings - 試合経過回数
+ * @returns {XML} tr > td
+ * @constructor
+ */
 const ComScoreHome = ({ home, visitor, start, boards, innings }) => (
   <tr>
     {
@@ -224,10 +300,14 @@ const ComScoreHome = ({ home, visitor, start, boards, innings }) => (
         const inning = start + index;
         const score = home.score[inning];
         const visitorScore = visitor.score[inning];
+        let alt = '0';
+        if (inning > innings) {
+          alt = '';
+        }
         // render
         return (
           <td key={`home-${inning}`} className={`home-${inning}`}>
-            {Print.str(scoreAlpha(score, visitorScore, inning, innings), '0')}
+            {Print.str(scoreAlpha(score, visitorScore, inning, innings), alt)}
           </td>
         );
       })
@@ -235,6 +315,10 @@ const ComScoreHome = ({ home, visitor, start, boards, innings }) => (
   </tr>
 );
 
+/**
+ * propTypes
+ * @type {{home: DaeScores, visitor: DaeScores, start: number, boards: Array, innings: number}}
+ */
 ComScoreHome.propTypes = {
   home: PropTypes.instanceOf(DaeScores).isRequired,
   visitor: PropTypes.instanceOf(DaeScores).isRequired,
@@ -243,6 +327,16 @@ ComScoreHome.propTypes = {
   innings: PropTypes.number.isRequired,
 };
 
+// スコアボード・中 イニング - home / visitor
+// ----------------------------------------
+/**
+ * スコアボード・中 イニング - home / visitor 親コンテナ
+ * @param {DaeGameInfo} info ゲーム情報
+ * @param {number} start 表示開始回
+ * @param {number} innings 試合経過回数
+ * @returns {XML} div.mlb_live__scoreboard__column
+ * @constructor
+ */
 const ComScoreInnings = ({ info, start, innings }) => {
   const home = info.home.scores;
   const visitor = info.visitor.scores;
@@ -260,6 +354,8 @@ const ComScoreInnings = ({ info, start, innings }) => {
             visitor={visitor}
             start={start}
             boards={boards}
+            status={info.status}
+            innings={visitor.innings}
           />
           <ComScoreHome
             home={home}
@@ -267,6 +363,7 @@ const ComScoreInnings = ({ info, start, innings }) => {
             start={start}
             boards={boards}
             innings={innings}
+            status={info.status}
           />
         </tbody>
       </table>
@@ -274,24 +371,10 @@ const ComScoreInnings = ({ info, start, innings }) => {
   );
 };
 
-/*
-      <tbody>
-        <ComScoreVisitor
-          visitor={visitor}
-          start={start}
-          boards={boards}
-        />
-        <ComScoreHome
-          home={home}
-          visitor={visitor}
-          start={start}
-          boards={boards}
-          innings={innings}
-        />
-      </tbody>
-
+/**
+ * propTypes
+ * @type {{info: DaeGameInfo, start: number, innings: number}}
  */
-
 ComScoreInnings.propTypes = {
   info: PropTypes.instanceOf(DaeGameInfo).isRequired,
   start: PropTypes.number.isRequired,
@@ -301,6 +384,13 @@ ComScoreInnings.propTypes = {
 // ----------------------------------------
 // スコアボード・右 対戦結果
 // ----------------------------------------
+/**
+ * スコアボード・右 対戦結果
+ * div.mlb_live__scoreboard__column
+ * @param {DaeGameInfo} info ゲーム情報
+ * @returns {XML} div.mlb_live__scoreboard__column
+ * @constructor
+ */
 const ComScoreRight = ({ info }) => (
   <div className="mlb_live__scoreboard__column mlb_live__scoreboard__column--count">
     <table className="mlb_live__scoreboard__table mlb_live__scoreboard__table--count">
@@ -339,10 +429,13 @@ const ComScoreRight = ({ info }) => (
   </div>
 );
 
+/**
+ * propTypes
+ * @type {{info: DaeGameInfo}}
+ */
 ComScoreRight.propTypes = {
   info: PropTypes.instanceOf(DaeGameInfo).isRequired,
 };
-
 
 // ----------------------------------------
 // スコアボード・左 対戦チーム
@@ -434,25 +527,50 @@ export default class ComScore extends Component {
   constructor(props) {
     super(props);
     // ----
+    /**
+     * 表示開始回 - default: 1
+     * @type {{start: number}}
+     */
     this.state = {
-      inning: 1,
       start: 1,
-      innings: 1,
     };
+    /**
+     * 延長表示切替 - next event handler
+     * @type {function}
+     */
     this.onNext = this.onNext.bind(this);
+    /**
+     * 延長表示切替 - prev event handler
+     * @type {function}
+     */
     this.onPrev = this.onPrev.bind(this);
   }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
+  /**
+   * 延長表示切替 - next event handler
+   * - state.start +9 しアップデートします
+   * @param {Event} event click Event
+   */
   onNext(event) {
     event.preventDefault();
     this.setState({ start: this.state.start + 9 });
   }
+  /**
+   * 延長表示切替 - prev event handler
+   * - state.start -9 しアップデートします
+   * @param {Event} event click Event
+   */
   onPrev(event) {
     event.preventDefault();
     this.setState({ start: this.state.start - 9 });
   }
+  /**
+   * スコアボードを出力します
+   * section.mlb_live__scoreboard__section
+   * @returns {?XML} section.mlb_live__scoreboard__section
+   */
   render() {
     const { info } = this.props;
     if (!info) {

@@ -353,7 +353,15 @@ export default class DaeGameInfo {
      * @type {string}
      */
     this.playDate = playDate;
+    /**
+     * playDate - Date 変換
+     * @type {Date}
+     */
     this.date = date;
+    /**
+     * ○月○日（曜日）
+     * @type {string}
+     */
     this.title = Day.title(Day.date(date));
     /**
      * 試合日を数値変換し年・月・日に分解します
@@ -366,11 +374,22 @@ export default class DaeGameInfo {
      * @type {number}
      */
     this.status = status;
+    /**
+     * status - 日本語ラベル
+     * {@link Status.label}
+     * @type {string}
+     */
     this.label = Status.label(status);
-    // 試合前 -> .mlb_live__overview__info__status--end
-    // 試合中 -> mlb_live__overview__info__status--live
-    // 試合終了 -> mlb_live__overview__info__status--end
-    // 試合中止 -> mlb_live__overview__info__status--cancel
+    //
+    /**
+     * status - class name
+     * - 試合前 -> .mlb_live__overview__info__status--end
+     * - 試合中 -> mlb_live__overview__info__status--live
+     * - 試合終了 -> mlb_live__overview__info__status--end
+     * - 試合中止 -> mlb_live__overview__info__status--cancel
+     * {@link Status.liveClassName}
+     * @type {string}
+     */
     this.className = Status.liveClassName(status);
     /**
      * 勝投手
@@ -478,6 +497,10 @@ export default class DaeGameInfo {
       jp: board.visitor.jp,
       initials: board.visitor.initials,
     };
+    /**
+     * 試合会場（stadium）
+     * @type {string}
+     */
     this.stadium = Normalize.str(origin.stadium);
   }
 }

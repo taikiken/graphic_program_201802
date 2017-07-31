@@ -77,7 +77,7 @@ export default class Day {
    * @returns {string} 「○月○日（日）」な文字列を返します
    */
   static title(date = Day.current()) {
-    return `${date.month}月${date.day}日（${date.week}）`;
+    return `${date.year}年${date.month}月${date.day}日（${date.week}）`;
   }
   /**
    * Date object を year, month, day, week へ分解します
