@@ -21,14 +21,27 @@ export default class ComInfoTab extends Component {
   // ----------------------------------------
   // STATIC PROPERTY
   // ----------------------------------------
+  /**
+   * propTypes
+   * @type {{change: function}}
+   */
   static propTypes = {
     change: PropTypes.func.isRequired,
   };
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
+  /**
+   * tab 切替 nav.mlb_live__nav 準備します
+   * @param {*} props Reacr.props
+   */
   constructor(props) {
     super(props);
+    // ----
+    /**
+     * state - tab状態
+     * @type {{tab: string, current: {game: boolean, member: boolean, inning: boolean}}}
+     */
     this.state = {
       tab: 'game',
       current: {
@@ -37,16 +50,27 @@ export default class ComInfoTab extends Component {
         inning: false,
       },
     };
+    /**
+     * bind onClick - tab click event handler
+     * @type {function}
+     */
     this.onClick = this.onClick.bind(this);
   }
   // ----------------------------------------
   // METHOD
   // ----------------------------------------
+  /**
+   * tab click event handler
+   * - current 状態を変更します
+   * - props.change を call します
+   * @param {Event} event click event - event.target.href から tab name を取得します
+   */
   onClick(event) {
     event.preventDefault();
     console.log('ComNav.onClick', event);
     const target = event.target;
-    const tab = target.dataset.tab;
+    // const tab = target.dataset.tab;
+    const tab = target.href.split('#').pop();
     const current = {
       game: false,
       member: false,
@@ -56,6 +80,14 @@ export default class ComInfoTab extends Component {
     this.setState({ current });
     this.props.change(tab);
   }
+  /**
+   * タブを出力します
+   * - 試合情報
+   * - 出場成績
+   * - イニング速報
+   * nav.mlb_live__nav
+   * @returns {XML} nav.mlb_live__nav
+   */
   render() {
     const { current } = this.state;
     return (

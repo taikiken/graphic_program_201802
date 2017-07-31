@@ -586,7 +586,7 @@ export default class ComScore extends Component {
           <ComScoreInnings
             info={info}
             start={this.state.start}
-            innings={Math.max(info.home.innings, info.visitor.innings)}
+            innings={info.innings}
           />
           <ComScoreRight
             info={info}
@@ -594,7 +594,7 @@ export default class ComScore extends Component {
         </div>
         <ComScoreSwitch
           start={this.state.start}
-          innings={this.state.innings}
+          innings={info.innings}
           prev={this.onPrev}
           next={this.onNext}
         />

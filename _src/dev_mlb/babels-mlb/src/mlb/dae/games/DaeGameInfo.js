@@ -147,7 +147,7 @@ class DaePitcher {
      * 敗戦数
      * @type {number}
      */
-    this.lose = Normalize.int(origin.lose);
+    this.losses = Normalize.int(origin.losses);
     /**
      * セーブ数
      * @type {number}
@@ -158,6 +158,11 @@ class DaePitcher {
      * @type {number}
      */
     this.holds = Normalize.int(origin.holds);
+    this.player = Normalize.str(origin.name);
+    this.number = Normalize.int(origin.number);
+    this.games = Normalize.int(origin.games);
+    this.hand = Normalize.str(origin.hand);
+    this.batHand = Normalize.str(origin.bat_hand);
   }
 }
 
@@ -447,7 +452,8 @@ export default class DaeGameInfo {
      *   innings: number,
      *   scores: DaeScores,
      *   jP: string,
-     *   initials: string
+     *   initials: string,
+     *   pitcher: DaePitcher
      * }}
      */
     this.home = {
@@ -464,6 +470,7 @@ export default class DaeGameInfo {
       scores: board.home.sccores,
       jp: board.home.jp,
       initials: board.home.initials,
+      pitcher: starting.home,
     };
     /**
      * visitor team information
@@ -479,7 +486,8 @@ export default class DaeGameInfo {
      *   innings: number,
      *   scores: DaeScores,
      *   jP: string,
-     *   initials: string
+     *   initials: string,
+     *   pitcher: DaePitcher
      * }}
      */
     this.visitor = {
@@ -496,11 +504,17 @@ export default class DaeGameInfo {
       scores: board.visitor.sccores,
       jp: board.visitor.jp,
       initials: board.visitor.initials,
+      pitcher: starting.visitor,
     };
     /**
      * 試合会場（stadium）
      * @type {string}
      */
     this.stadium = Normalize.str(origin.stadium);
+    /**
+     * 試合経過回数 - visitor.innings
+     * @type {number}
+     */
+    this.innings = board.visitor.sccores.innings;
   }
 }

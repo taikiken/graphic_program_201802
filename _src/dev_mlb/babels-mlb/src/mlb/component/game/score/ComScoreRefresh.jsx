@@ -17,7 +17,17 @@ import PropTypes from 'prop-types';
 // util
 import Day from '../../../util/Day';
 
+/**
+ * 更新ボタン 3 種類
+ */
 export default class ComScoreRefresh extends Component {
+  // ----------------------------------------
+  // STATIC PROPERTY
+  // ----------------------------------------
+  /**
+   * propTypes
+   * @type {{status: number, date: Date, auto: function, manual: function, reload: function}}
+   */
   static propTypes = {
     status: PropTypes.number.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
@@ -25,15 +35,47 @@ export default class ComScoreRefresh extends Component {
     manual: PropTypes.func.isRequired,
     reload: PropTypes.func.isRequired,
   };
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * 更新ボタン 3 種類 初期処理します
+   * @param {*} props React props
+   */
   constructor(props) {
     super(props);
+    // ---
+    /**
+     * state
+     * - radio - manual / auto, default: manual
+     * @type {{radio: string}}
+     */
     this.state = {
       radio: 'manual',
     };
+    /**
+     * bind onClickAuto - auto event handler
+     * @type {function}
+     */
     this.onClickAuto = this.onClickAuto.bind(this);
+    /**
+     * bind onClickManual - manual event handler
+     * @type {function}
+     */
     this.onClickManual = this.onClickManual.bind(this);
+    /**
+     * bind onClickReload - reload event handler
+     * @type {function}
+     */
     this.onClickReload = this.onClickReload.bind(this);
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * auto click event handler - props.auto を call します
+   * @param {Event} event click event
+   */
   onClickAuto(event) {
     event.preventDefault();
     const { radio } = this.state;
@@ -42,6 +84,10 @@ export default class ComScoreRefresh extends Component {
       this.props.auto();
     }
   }
+  /**
+   * manual click event handler - props.manual を call します
+   * @param {Event} event click event
+   */
   onClickManual(event) {
     event.preventDefault();
     const { radio } = this.state;
@@ -50,10 +96,19 @@ export default class ComScoreRefresh extends Component {
       this.props.manual();
     }
   }
+  /**
+   * reload click event handler - props.reload を call します
+   * @param {Event} event click event
+   */
   onClickReload(event) {
     event.preventDefault();
     this.props.reload();
   }
+  /**
+   * 自動・手動更新ボタン
+   * @param {boolean} show 表示・非表示フラッグ
+   * @returns {XML} div.refresh-container > div.mlb_live__reload__btn--auto
+   */
   renderRefresh(show) {
     console.log('ComScoreRefresh.renderRefresh', show);
     // TODO: remove test code
@@ -85,6 +140,12 @@ export default class ComScoreRefresh extends Component {
       </div>
     );
   }
+  /**
+   * 「更新」ボタン
+   * div.mlb_live__reload__btn--reload
+   * @param {boolean} show 表示・非表示フラッグ
+   * @returns {XML} div.mlb_live__reload__btn--reload
+   */
   renderReload(show) {
     console.log('ComScoreRefresh.renderReload', show);
     // TODO: remove test code
@@ -103,6 +164,13 @@ export default class ComScoreRefresh extends Component {
       </div>
     );
   }
+  /**
+   * ボタンを出力します
+   * - reload
+   *   - renderRefresh
+   *   - renderReload
+   * @returns {XML} nav.mlb_live__reload
+   */
   render() {
     const { status, date } = this.props;
     console.log('ComScoreRefresh.render', status, date);
@@ -115,8 +183,11 @@ export default class ComScoreRefresh extends Component {
     } else if (status === 1) {
       // status: 1 - 試合前
       // 当日のみ「更新」表示させる
+      // @type {string} - YYYYMMDD
       const today = Day.full(new Date());
+      // @type {string} - YYYYMMDD
       const play = Day.full(date);
+      // 文字列比較する
       if (today === play) {
         showReload = true;
       }

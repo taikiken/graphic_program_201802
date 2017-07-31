@@ -88,7 +88,7 @@ $app->group('/stats', function () use($app) {
         'template'           => 'mlb/game.php',
         'path'               => $args,
         // @since 2017-07016 - .whole へ className 追加するために追加する
-        'prop_identity'      => 'game',
+        'prop_identity'      => 'game dark',
         'prop_category'      => 'mlb',
       ));
 

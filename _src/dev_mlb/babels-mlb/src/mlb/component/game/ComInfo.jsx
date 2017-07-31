@@ -22,20 +22,40 @@ import DaeTeamInfo from '../../dae/games/DaeTeamInfo';
 // component
 import ComInfoTab from './ComInfoTab';
 
+// component/games
+import ComGame from './games/ComGame';
+
 // ----------------------------------------
 // 親
 // ----------------------------------------
+/**
+ * `/stats/mlb/game/YYYY/GAME_ID` の tab と切替で表示するコンテナの親
+ */
 export default class ComInfo extends Component {
+  // ----------------------------------------
+  // STATIC PROPERTY
+  // ----------------------------------------
+  /**
+   * propTypes
+   * @type {{info: DaeGameInfo, member: DaeMemberInfo, team: DaeTeamInfo}}
+   */
   static propTypes = {
     info: PropTypes.instanceOf(DaeGameInfo),
     member: PropTypes.instanceOf(DaeMemberInfo),
     team: PropTypes.instanceOf(DaeTeamInfo),
   };
+  /**
+   * defaultProps
+   * @type {{info: ?DaeGameInfo, member: ?DaeMemberInfo, team: ?DaeTeamInfo}}
+   */
   static defaultProps = {
     info: null,
     member: null,
     team: null,
   };
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   constructor(props) {
     super(props);
     /**
@@ -47,17 +67,30 @@ export default class ComInfo extends Component {
     this.state = {
       tab: 'game',
     };
+    /**
+     * bind onChange event handler - tab 切替
+     * @type {function}
+     */
     this.onChange = this.onChange.bind(this);
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * tab 切替 event handler
+   * @param {string} tab tab 名称
+   */
   onChange(tab) {
     console.log('ComInfo.onChange', tab);
     this.setState({ tab });
   }
   choose(tab) {
-    console.log('ComInfo.choose tab', tab, this.props);
+    const { info, member, team } = this.props;
+    console.log('ComInfo.choose tab', tab, info, member, team);
+
     switch (tab) {
       case 'game': {
-        return null;
+        return <ComGame info={info} team={team} />;
       }
       case 'member': {
         return null;
@@ -69,6 +102,10 @@ export default class ComInfo extends Component {
         return null;
     }
   }
+  /**
+   * tab 切替親コンテナ
+   * @returns {?XML} div#js-info-container
+   */
   render() {
     const { info, member, team } = this.props;
     console.log('ComInfo.render info, member, team', info, member, team);

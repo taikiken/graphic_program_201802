@@ -13,6 +13,25 @@
 // dae
 import Normalize from '../../util/Normalize';
 
+// define
+import Positions from '../../define/Positions';
+
+export class DaeReserve {
+  constructor(players) {
+    let category = '';
+    const reserves = {};
+    this.list = players.list.map((player) => {
+      if (player.category !== category) {
+        category = player.category;
+        reserves[category] = [];
+      }
+      reserves[category].push(player);
+      return player;
+    });
+    this.reserves = reserves;
+  }
+}
+
 /**
  * 試合出場選手情報
  */
@@ -23,6 +42,7 @@ class DaePlayer {
    */
   constructor(info) {
     const origin = Normalize.obj(info);
+    const position = Normalize.str(origin.position);
     // ---
     /**
      * original JSON
@@ -68,12 +88,13 @@ class DaePlayer {
      * ポジション - 投、一、二、三、遊など
      * @type {string}
      */
-    this.position = Normalize.str(origin.position);
+    this.position = position;
     /**
      * ポジション分類 - レフトであれば「外野手」、一塁手であれば「内野手」など
      * @type {string}
      */
     this.category = Normalize.str(origin.position_category);
+    this.category = Positions.category(position);
   }
 }
 
@@ -110,6 +131,7 @@ class DaeTeam {
    */
   constructor(info) {
     const origin = Normalize.obj(info);
+    const reserve = new DaePlayers(origin.reserve);
     /**
      * original JSON
      * @type {Object}
@@ -119,7 +141,7 @@ class DaeTeam {
      * 控え選手
      * @type {DaePlayers}
      */
-    this.reserve = new DaePlayers(origin.reserve);
+    this.reserve = new DaeReserve(reserve);
     /**
      * 先発選手
      * @type {DaePlayers}

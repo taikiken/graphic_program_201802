@@ -11,6 +11,7 @@
  * https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-51
  */
 ?>
+<link rel="stylesheet" href="/assets/mlb/css/react-big-calendar.css">
 <div class="body-sec">
   <div class="body-sec-inner">
 

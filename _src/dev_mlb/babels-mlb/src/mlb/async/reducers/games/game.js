@@ -20,6 +20,7 @@ const initial = {
   info: null,
   member: null,
   team: null,
+  innings: null,
   error: null,
 };
 
@@ -35,6 +36,7 @@ const game = (requestState = initial, action) => {
       state.info = action.info;
       state.member = action.member;
       state.team = action.team;
+      state.innings = action.innings;
       return state;
     }
     case ReducerTypes.CALENDAR_ERROR: {

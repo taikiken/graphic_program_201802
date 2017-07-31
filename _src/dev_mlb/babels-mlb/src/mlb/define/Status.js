@@ -72,6 +72,11 @@ export default class Status {
   static className(id) {
     return Status.classes[id];
   }
+  /**
+   * `/stats/mlb/game/YYYY/GAME_ID` の win / lose class name
+   * @param {number} id status ID
+   * @returns {string} status で付与する css class name を返します
+   */
   static liveClassName(id) {
     return Status.liveClasses[id];
   }

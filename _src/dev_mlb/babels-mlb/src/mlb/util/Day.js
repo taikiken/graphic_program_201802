@@ -13,12 +13,20 @@
 // moku/util
 import Text from '../../moku/util/Text';
 
+/**
+ * [native code] - parseInt
+ * @type {function}
+ */
 const parseInt = self.parseInt;
 
 /**
  * 日付に関する Helper
  */
 export default class Day {
+  /**
+   * 日本語曜日リスト
+   * @type {[string,string,string,string,string,string,string]}
+   */
   static weeks = ['日', '月', '火', '水', '木', '金', '土'];
   /**
    * 今日の Date instance を作成します
@@ -94,6 +102,11 @@ export default class Day {
       week: Day.day(date.getDay()),
     };
   }
+  /**
+   * 文字列 YYYYMMDD から Date instance を返します
+   * @param {string} str YYYYMMDD
+   * @returns {Date} 引数 `str` を Date instance に変換します
+   */
   static convert(str) {
     return new Date(str.substr(0, 4), parseInt(str.substr(4, 2), 10) - 1, str.substr(6, 2));
   }
