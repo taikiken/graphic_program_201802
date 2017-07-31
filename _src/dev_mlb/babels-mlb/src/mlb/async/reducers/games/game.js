@@ -13,6 +13,10 @@
 // async/reducers
 import ReducerTypes from '../ReducerTypes';
 
+/**
+ * initial state
+ * @type {{type: string, year: null, id: null, info: null, member: null, team: null, innings: null, error: null}}
+ */
 const initial = {
   type: ReducerTypes.INITIAL,
   year: null,
@@ -24,6 +28,12 @@ const initial = {
   error: null,
 };
 
+/**
+ * redux reducers - game
+ * @param {*} [requestState=initial] state
+ * @param {*} action redux actions - game
+ * @returns {*} state を返します
+ */
 const game = (requestState = initial, action) => {
   const state = Object.assign({}, requestState);
   console.log('reducers.games', state, action);

@@ -16,10 +16,21 @@ import Normalize from '../../util/Normalize';
 // define
 import Positions from '../../define/Positions';
 
+/**
+ * 選手を守備カテゴリで分類します
+ */
 export class DaeReserve {
+  /**
+   * 選手を守備カテゴリで分類します
+   * @param {DaePlayers} players home / visitor DaePlayers instance
+   */
   constructor(players) {
     let category = '';
     const reserves = {};
+    /**
+     * 選手リスト
+     * @type {Array.<DaePlayer>}
+     */
     this.list = players.list.map((player) => {
       if (player.category !== category) {
         category = player.category;
@@ -28,6 +39,10 @@ export class DaeReserve {
       reserves[category].push(player);
       return player;
     });
+    /**
+     * カテゴリで分類された選手リスト
+     * @type {object}
+     */
     this.reserves = reserves;
   }
 }
@@ -94,6 +109,10 @@ class DaePlayer {
      * @type {string}
      */
     this.category = Normalize.str(origin.position_category);
+    /**
+     * position 正規名称
+     * @type {string}
+     */
     this.category = Positions.category(position);
   }
 }

@@ -50,7 +50,15 @@ export default class ReducerTypes {
   // ----------------------------------------
   // GAME
   // ----------------------------------------
+  /**
+   * game 関連 Ajax complete event type
+   * @type {string}
+   */
   static GAMES_COMPLETE = 'gamesComplete';
+  /**
+   * game 関連 Ajax error event type
+   * @type {string}
+   */
   static GAMES_ERROR = 'gamesError';
   // static INFO_COMPLETE = 'infoComplete';
   // static INFO_ERROR = 'infoError';

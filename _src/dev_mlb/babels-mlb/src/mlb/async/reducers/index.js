@@ -22,14 +22,18 @@ import game from './games/game';
 
 // ----------------
 /**
- * combineReducers 済み `./assets/calendar`
- * @type {*}
+ * combineReducers 済み `./schedules/*`
+ * @type {Reducer}
  */
 const schedules = combineReducers({
   calendar,
   schedule,
 });
 
+/**
+ * combineReducers 済み `./games/*`
+ * @type {Reducer}
+ */
 const games = combineReducers({
   game,
 });

@@ -16,11 +16,19 @@ import schedule from './schedules/schedule';
 // game
 import game from './games/game';
 
+/**
+ * schedule - redux actions
+ * @type {{calendar: *, schedule: *}}
+ */
 const schedules = {
   calendar,
   schedule,
 };
 
+/**
+ * games - redux actions
+ * @type {{game: *}}
+ */
 const games = {
   game,
 };

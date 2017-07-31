@@ -11347,10 +11347,30 @@ function DaePitcher(info) {
    * @type {number}
    */
   this.holds = _Normalize2.default.int(origin.holds);
+  /**
+   * 選手名称
+   * @type {string}
+   */
   this.player = _Normalize2.default.str(origin.name);
+  /**
+   * 背番号
+   * @type {number}
+   */
   this.number = _Normalize2.default.int(origin.number);
+  /**
+   * 登板試合数
+   * @type {number}
+   */
   this.games = _Normalize2.default.int(origin.games);
+  /**
+   * 投げる - 右・左・両
+   * @type {string}
+   */
   this.hand = _Normalize2.default.str(origin.hand);
+  /**
+   * 打つ - 右・左・両
+   * @type {string}
+   */
   this.batHand = _Normalize2.default.str(origin.bat_hand);
 };
 
@@ -17123,11 +17143,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // define
 
 
-var DaeReserve = exports.DaeReserve = function DaeReserve(players) {
+/**
+ * 選手を守備カテゴリで分類します
+ */
+var DaeReserve =
+/**
+ * 選手を守備カテゴリで分類します
+ * @param {DaePlayers} players home / visitor DaePlayers instance
+ */
+exports.DaeReserve = function DaeReserve(players) {
   _classCallCheck(this, DaeReserve);
 
   var category = '';
   var reserves = {};
+  /**
+   * 選手リスト
+   * @type {Array.<DaePlayer>}
+   */
   this.list = players.list.map(function (player) {
     if (player.category !== category) {
       category = player.category;
@@ -17136,6 +17168,10 @@ var DaeReserve = exports.DaeReserve = function DaeReserve(players) {
     reserves[category].push(player);
     return player;
   });
+  /**
+   * カテゴリで分類された選手リスト
+   * @type {object}
+   */
   this.reserves = reserves;
 };
 
@@ -17205,6 +17241,10 @@ function DaePlayer(info) {
    * @type {string}
    */
   this.category = _Normalize2.default.str(origin.position_category);
+  /**
+   * position 正規名称
+   * @type {string}
+   */
   this.category = _Positions2.default.category(position);
 };
 
@@ -41052,7 +41092,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-31 21:49:09
+ * 2017-7-31 22:55:59
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -81635,20 +81675,90 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // ----------------------------------------
 
 // ----------------------------------------
-// 試合情報・控え選手
+// 試合情報・チーム対戦成績
 // ----------------------------------------
+/**
+ * 試合情報・チーム対戦成績
+ * @param {DaeGameInfo} info チーム情報
+ * @returns {XML} section.mlb_live__win_loss_standings-section
+ */
 
 
 // dae
-var reserveHandType = function reserveHandType(reserve) {
-  var type = reserve.position === '投' ? reserve.hand : reserve.batHand;
-  if (type === '左') {
-    return 'mlb_live__starting--member__td--player__handed--left';
-  } else if (type === '右') {
-    return 'mlb_live__starting--member__td--player__handed--right';
-  }
-  return 'mlb_live__starting--member__td--player__handed--both';
+var ComTeamRecord = function ComTeamRecord(_ref) {
+  var info = _ref.info;
+  return _react2.default.createElement(
+    'section',
+    { className: 'mlb_live__win_loss_standings-section' },
+    _react2.default.createElement(
+      'h2',
+      { className: 'mlb_live__heading--h2' },
+      '\u30C1\u30FC\u30E0\u5BFE\u6226\u6210\u7E3E'
+    ),
+    _react2.default.createElement(
+      'table',
+      { className: 'mlb_live__win_loss_standings' },
+      _react2.default.createElement(
+        'thead',
+        null,
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'th',
+            { className: 'mlb_live__win_loss_standings__th--home' },
+            _Print2.default.str(info.home.jp)
+          ),
+          _react2.default.createElement(
+            'th',
+            { className: 'mlb_live__win_loss_standings__th' },
+            '\u6210\u7E3E'
+          ),
+          _react2.default.createElement(
+            'th',
+            { className: 'mlb_live__win_loss_standings__th--visitor' },
+            _Print2.default.str(info.visitor.jp)
+          )
+        )
+      ),
+      _react2.default.createElement(
+        'tbody',
+        null,
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'td',
+            { className: 'mlb_live__win_loss_standings__td' },
+            _Print2.default.int(info.home.record.wins, '0'),
+            '\u52DD',
+            _Print2.default.int(info.home.record.losses, '0'),
+            '\u6557'
+          ),
+          _react2.default.createElement(
+            'th',
+            { className: 'mlb_live__win_loss_standings__th' },
+            '\u52DD\u6557'
+          ),
+          _react2.default.createElement(
+            'td',
+            { className: 'mlb_live__win_loss_standings__td' },
+            _Print2.default.int(info.visitor.record.wins, '0'),
+            '\u52DD',
+            _Print2.default.int(info.visitor.record.losses, '0'),
+            '\u6557'
+          )
+        )
+      )
+    )
+  );
 };
+
+/**
+ * propTypes
+ * @type {{info: DaeGameInfo}}
+ */
+
 
 // util
 /**
@@ -81664,8 +81774,42 @@ var reserveHandType = function reserveHandType(reserve) {
  */
 
 // react
+ComTeamRecord.propTypes = {
+  info: _propTypes2.default.instanceOf(_DaeGameInfo2.default).isRequired
+};
 
+// ----------------------------------------
+// 試合情報・控え選手
+// ----------------------------------------
+/**
+ * 控え選手
+ * 左・右・両 に見合う class name を取得します
+ * - mlb_live__starting--bench__td--player__handed--left
+ * - mlb_live__starting--bench__td--player__handed--right
+ * - mlb_live__starting--bench__td--player__handed--both
+ * @param {DaePlayer} reserve 控え選手
+ * @returns {string} 左・右・両 に見合う class name
+ */
+var reserveHandType = function reserveHandType(reserve) {
+  var type = reserve.position === '投' ? reserve.hand : reserve.batHand;
+  if (type === '左') {
+    return 'mlb_live__starting--bench__td--player__handed--left';
+  } else if (type === '右') {
+    return 'mlb_live__starting--bench__td--player__handed--right';
+  }
+  return 'mlb_live__starting--bench__td--player__handed--both';
+};
 
+/**
+ * tbody へカテゴリ別に class を取得する
+ * - mlb_live__starting--bench--pitcher
+ * - mlb_live__starting--bench--backstop
+ * - mlb_live__starting--bench--designated_hitter
+ * - mlb_live__starting--bench--outfielder
+ * - mlb_live__starting--bench--infielder
+ * @param {string} position position カテゴリ名称
+ * @returns {string} body へカテゴリ別に class
+ */
 var bodyClassName = function bodyClassName(position) {
   switch (position) {
     case '投手':
@@ -81691,6 +81835,11 @@ var bodyClassName = function bodyClassName(position) {
   }
 };
 
+/**
+ * tr > td.mlb_live__starting--bench__td--player
+ * @param {Array.<DaePlayer>} list カテゴリ別選手リスト
+ * @returns {XML} tr > td.mlb_live__starting--bench__td--player
+ */
 var comReservesPlayer = function comReservesPlayer(list) {
   return list.map(function (player) {
     return _react2.default.createElement(
@@ -81710,6 +81859,12 @@ var comReservesPlayer = function comReservesPlayer(list) {
   });
 };
 
+/**
+ * カテゴリごとに `tbody` を出力します
+ * @param {DaePlayers} reserve 控え選手
+ * @param {string} type home | visitor
+ * @returns {Array.<XML>} tbody 一覧を返します
+ */
 var comReserves = function comReserves(reserve, type) {
   var reserves = reserve.reserves;
   return Object.keys(reserves).map(function (category) {
@@ -81733,14 +81888,21 @@ var comReserves = function comReserves(reserve, type) {
   });
 };
 
-// ComReserves.propTypes = {
-//   reserve: PropTypes.instanceOf(DaeReserve).isRequired,
-//   type: PropTypes.string.isRequired,
-// };
-
-var ComReserve = function ComReserve(_ref) {
-  var info = _ref.info,
-      team = _ref.team;
+/**
+ * 試合情報・控え選手
+ * - ComReserve
+ *   - comReserves
+ *     - comReservesPlayer
+ *   - comReserves
+ *     - comReservesPlayer
+ * @param {DaeGameInfo} info ゲーム情報
+ * @param {DaeTeamInfo} team チーム情報
+ * @returns {XML} div.js-reserves > div.mlb_live__starting--bench__section
+ * @constructor
+ */
+var ComReserve = function ComReserve(_ref2) {
+  var info = _ref2.info,
+      team = _ref2.team;
   return _react2.default.createElement(
     'div',
     { className: 'js-reserves' },
@@ -81776,6 +81938,10 @@ var ComReserve = function ComReserve(_ref) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{info: DaeGameInfo, team: DaeTeamInfo}}
+ */
 ComReserve.propTypes = {
   info: _propTypes2.default.instanceOf(_DaeGameInfo2.default).isRequired,
   team: _propTypes2.default.instanceOf(_DaeTeamInfo2.default).isRequired
@@ -81784,6 +81950,15 @@ ComReserve.propTypes = {
 // ----------------------------------------
 // 試合情報・スターティングメンバー
 // ----------------------------------------
+/**
+ * 試合情報・スターティングメンバー
+ * 左・右・両 に見合う class name を取得します
+ * - mlb_live__starting--member__td--player__handed--left
+ * - mlb_live__starting--member__td--player__handed--right
+ * - mlb_live__starting--member__td--player__handed--both
+ * @param {DaePlayer} starting スターティングメンバー選手情報
+ * @returns {string} 左・右・両 に見合う class name
+ */
 var batType = function batType(starting) {
   var type = starting.position === '投' ? starting.hand : starting.batHand;
   if (type === '左') {
@@ -81794,9 +81969,15 @@ var batType = function batType(starting) {
   return 'mlb_live__starting--member__td--player__handed--both';
 };
 
-var ComStarting = function ComStarting(_ref2) {
-  var info = _ref2.info,
-      team = _ref2.team;
+/**
+ * 試合情報・スターティングメンバー
+ * @param {DaeGameInfo} info ゲーム情報
+ * @param {DaeTeamInfo} team チーム情報
+ * @returns {XML} div.js-starting-fielders > div.mlb_live__starting--member__section
+ * */
+var ComStarting = function ComStarting(_ref3) {
+  var info = _ref3.info,
+      team = _ref3.team;
   return _react2.default.createElement(
     'div',
     { className: 'js-starting-fielders' },
@@ -81877,7 +82058,7 @@ var ComStarting = function ComStarting(_ref2) {
                 { className: 'mlb_live__starting--member__td--player' },
                 _react2.default.createElement(
                   'i',
-                  { className: batType(starting.batHand) },
+                  { className: batType(starting) },
                   '\xA0'
                 ),
                 _Print2.default.str(starting.player)
@@ -81890,6 +82071,10 @@ var ComStarting = function ComStarting(_ref2) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{info: DaeGameInfo, team: DaeTeamInfo}}
+ */
 ComStarting.propTypes = {
   info: _propTypes2.default.instanceOf(_DaeGameInfo2.default).isRequired,
   team: _propTypes2.default.instanceOf(_DaeTeamInfo2.default).isRequired
@@ -81898,6 +82083,15 @@ ComStarting.propTypes = {
 // ----------------------------------------
 // 試合情報・予告先発投手
 // ----------------------------------------
+/**
+ * 予告先発投手
+ * 左・右・両 に見合う class name を取得します
+ * - mlb_live__starting--pitcher__handed--left
+ * - mlb_live__starting--pitcher__handed--right
+ * - mlb_live__starting--pitcher__handed--both
+ * @param {string} type 左・右・両
+ * @returns {*} 左・右・両 に見合う class name を返します
+ */
 var pitcherHandType = function pitcherHandType(type) {
   if (type === '左') {
     return 'mlb_live__starting--pitcher__handed--left';
@@ -81907,8 +82101,14 @@ var pitcherHandType = function pitcherHandType(type) {
   return 'mlb_live__starting--pitcher__handed--both';
 };
 
-var ComGamePitchers = function ComGamePitchers(_ref3) {
-  var info = _ref3.info;
+/**
+ * 試合情報・予告先発投手
+ * @param {DaeGameInfo} info ゲーム情報
+ * @returns {XML} div.js-starting-pitchers > table.mlb_live__starting--pitcher
+ * @constructor
+ */
+var ComGamePitchers = function ComGamePitchers(_ref4) {
+  var info = _ref4.info;
   return _react2.default.createElement(
     'div',
     { className: 'js-starting-pitchers' },
@@ -82157,6 +82357,10 @@ var ComGamePitchers = function ComGamePitchers(_ref3) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{info: DaeGameInfo}}
+ */
 ComGamePitchers.propTypes = {
   info: _propTypes2.default.instanceOf(_DaeGameInfo2.default).isRequired
 };
@@ -82164,18 +82368,34 @@ ComGamePitchers.propTypes = {
 // ----------------------------------------
 // 試合情報・親
 // ----------------------------------------
-var ComGame = function ComGame(_ref4) {
-  var info = _ref4.info,
-      team = _ref4.team;
+/**
+ * 試合情報・親
+ * - ComGame - section.mlb_live__starting
+ *   - {@link ComGamePitchers}
+ *   - {@link ComStarting}
+ *   - {@link ComReserve}
+ *   - {@link ComTeamRecord}
+ * @param {DaeGameInfo} info ゲーム情報
+ * @param {DaeTeamInfo} team チーム情報・先発 / 控
+ * @returns {XML} section.mlb_live__starting
+ */
+var ComGame = function ComGame(_ref5) {
+  var info = _ref5.info,
+      team = _ref5.team;
   return _react2.default.createElement(
     'section',
     { className: 'mlb_live__starting' },
     _react2.default.createElement(ComGamePitchers, { info: info }),
     _react2.default.createElement(ComStarting, { team: team, info: info }),
-    _react2.default.createElement(ComReserve, { team: team, info: info })
+    _react2.default.createElement(ComReserve, { team: team, info: info }),
+    _react2.default.createElement(ComTeamRecord, { info: info })
   );
 };
 
+/**
+ * propTypes
+ * @type {{info: DaeGameInfo, team: DaeTeamInfo}}
+ */
 ComGame.propTypes = {
   info: _propTypes2.default.instanceOf(_DaeGameInfo2.default).isRequired,
   team: _propTypes2.default.instanceOf(_DaeTeamInfo2.default).isRequired

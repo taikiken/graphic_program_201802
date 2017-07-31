@@ -158,10 +158,30 @@ class DaePitcher {
      * @type {number}
      */
     this.holds = Normalize.int(origin.holds);
+    /**
+     * 選手名称
+     * @type {string}
+     */
     this.player = Normalize.str(origin.name);
+    /**
+     * 背番号
+     * @type {number}
+     */
     this.number = Normalize.int(origin.number);
+    /**
+     * 登板試合数
+     * @type {number}
+     */
     this.games = Normalize.int(origin.games);
+    /**
+     * 投げる - 右・左・両
+     * @type {string}
+     */
     this.hand = Normalize.str(origin.hand);
+    /**
+     * 打つ - 右・左・両
+     * @type {string}
+     */
     this.batHand = Normalize.str(origin.bat_hand);
   }
 }
