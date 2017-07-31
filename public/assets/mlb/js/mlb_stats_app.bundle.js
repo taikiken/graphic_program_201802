@@ -41092,7 +41092,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-7-31 22:55:59
+ * 2017-7-31 23:23:06
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -67299,8 +67299,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // ----------------
 /**
- * combineReducers 済み `./assets/calendar`
- * @type {*}
+ * combineReducers 済み `./schedules/*`
+ * @type {Reducer}
  */
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
@@ -67320,12 +67320,16 @@ var schedules = (0, _redux.combineReducers)({
   schedule: _schedule2.default
 });
 
+/**
+ * combineReducers 済み `./games/*`
+ * @type {Reducer}
+ */
+
+
 // games
 
 
 // schedules
-
-
 var games = (0, _redux.combineReducers)({
   game: _game2.default
 });
@@ -67527,6 +67531,10 @@ var _ReducerTypes2 = _interopRequireDefault(_ReducerTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * initial state
+ * @type {{type: string, year: null, id: null, info: null, member: null, team: null, innings: null, error: null}}
+ */
 var initial = {
   type: _ReducerTypes2.default.INITIAL,
   year: null,
@@ -67536,21 +67544,27 @@ var initial = {
   team: null,
   innings: null,
   error: null
-}; /**
-    * Copyright (c) 2011-2017 inazumatv.com, inc.
-    * @author (at)taikiken / http://inazumatv.com
-    * @date 2017/07/27 - 20:18
-    *
-    * Distributed under the terms of the MIT license.
-    * http://www.opensource.org/licenses/mit-license.html
-    *
-    * This notice shall be included in all copies or substantial portions of the Software.
-    *
-    */
+};
+
+/**
+ * redux reducers - game
+ * @param {*} [requestState=initial] state
+ * @param {*} action redux actions - game
+ * @returns {*} state を返します
+ */
+/**
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2017/07/27 - 20:18
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
 
 // async/reducers
-
-
 var game = function game() {
   var requestState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initial;
   var action = arguments[1];
@@ -67717,10 +67731,20 @@ var _game2 = _interopRequireDefault(_game);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * schedule - redux actions
+ * @type {{calendar: *, schedule: *}}
+ */
 var schedules = {
   calendar: _calendar2.default,
   schedule: _schedule2.default
 };
+
+/**
+ * games - redux actions
+ * @type {{game: *}}
+ */
+
 
 // game
 /**
@@ -81059,7 +81083,11 @@ var _ComScore2 = _interopRequireDefault(_ComScore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// console.log('ConGames ComOverview', ComOverview);
+/**
+ * redux state to props を map します
+ * @param {*} game game state
+ * @returns {*} 更新 state
+ */
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
@@ -81077,16 +81105,30 @@ var mapStateToProps = function mapStateToProps(_ref) {
   var game = _ref.game;
   return game;
 };
-// const mapStateToProps = ({ game }) => {
-//   console.log('ConGames.mapStateToProps', game);
-//   return game;
-// };
+
+/**
+ * mapStateToProps - {@link ComOverview}
+ * @type {*}
+ */
+
 
 // component
 var ConOverview = (0, _reactRedux.connect)(mapStateToProps)(_ComOverview2.default);
+/**
+ * mapStateToProps - {@link ComInfo}
+ * @type {*}
+ */
 var ConInfo = (0, _reactRedux.connect)(mapStateToProps)(_ComInfo2.default);
+/**
+ * mapStateToProps - {@link ComScore}
+ * @type {*}
+ */
 var ConScore = (0, _reactRedux.connect)(mapStateToProps)(_ComScore2.default);
 
+/**
+ * redux action - game
+ * @type {{ConOverview: *, ConInfo: *, ConScore: *}}
+ */
 var games = {
   ConOverview: ConOverview,
   ConInfo: ConInfo,
@@ -82301,55 +82343,6 @@ var ComGamePitchers = function ComGamePitchers(_ref4) {
             'td',
             { className: 'mlb_live__starting--pitcher_record__td' },
             _Print2.default.str(info.visitor.pitcher.average, '0')
-          )
-        ),
-        _react2.default.createElement(
-          'tr',
-          null,
-          _react2.default.createElement(
-            'td',
-            { className: 'mlb_live__starting--pitcher_record__td' },
-            'XX'
-          ),
-          _react2.default.createElement(
-            'td',
-            { className: 'mlb_live__starting--pitcher_record__td' },
-            'XX'
-          ),
-          _react2.default.createElement(
-            'td',
-            { className: 'mlb_live__starting--pitcher_record__td' },
-            'XX'
-          ),
-          _react2.default.createElement(
-            'td',
-            { className: 'mlb_live__starting--pitcher_record__td' },
-            'XX'
-          ),
-          _react2.default.createElement(
-            'td',
-            { className: 'mlb_live__starting--pitcher_record__td' },
-            '\u5BFE\u6226'
-          ),
-          _react2.default.createElement(
-            'td',
-            { className: 'mlb_live__starting--pitcher_record__td' },
-            'XX'
-          ),
-          _react2.default.createElement(
-            'td',
-            { className: 'mlb_live__starting--pitcher_record__td' },
-            'XX'
-          ),
-          _react2.default.createElement(
-            'td',
-            { className: 'mlb_live__starting--pitcher_record__td' },
-            'XX'
-          ),
-          _react2.default.createElement(
-            'td',
-            { className: 'mlb_live__starting--pitcher_record__td' },
-            'XX'
           )
         )
       )
