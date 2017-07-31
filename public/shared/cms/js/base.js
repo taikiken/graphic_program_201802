@@ -404,8 +404,8 @@ $(function(){
 
 	$(".q1").click(function(){
 		
-		if(d1d2flag===0)return;
-		if(cid===1&&dir==1&&fil==0)return;
+		//if(d1d2flag===0)return;
+		//if(cid===1&&dir==1&&fil==0)return;
 		
 		var n=$(this).attr("name");
 		var y=$(this).offset().top+$(this).height()+14;
