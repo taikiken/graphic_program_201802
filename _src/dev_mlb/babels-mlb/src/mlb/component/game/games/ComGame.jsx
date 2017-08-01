@@ -91,6 +91,12 @@ const reserveHandType = (reserve) => {
   return 'mlb_live__starting--bench__td--player__handed--switch';
 };
 
+/**
+ * 控え選手
+ * 左・右・両 に見合う文字列
+ * @param {DaePlayer} reserve 控え選手
+ * @returns {string} 左・右・両 に見合う文字列
+ */
 const reserveTypeStr = (reserve) => {
   if (reserve.position === '投') {
     return `${reserve.hand}投`;
@@ -238,6 +244,11 @@ const batType = (starting) => {
   return 'mlb_live__starting--member__td--player__handed--switch';
 };
 
+/**
+ * 左・右・両 に見合う文字列を取得します
+ * @param {DaePlayer} starting スターティングメンバー選手情報
+ * @returns {string} 右投 / 右打, position で出力を変えます
+ */
 const batTypeStr = (starting) => {
   if (starting.position === '投') {
     return `${starting.hand}投`;
