@@ -15,6 +15,7 @@
 .mlb__game__overview {
   display: table;
   width: 100%;
+  margin-top: 20px;
   padding-top: 12px;
   padding-bottom: 12px;
   background-color: $bg-color_gray;
@@ -23,6 +24,17 @@
 
   * {
     letter-spacing: normal;
+  }
+
+  //試合情報のリンク
+  //.mlb__game__overview__link
+  &__link {
+    @include link-decoration($highlight-color, $highlight-color, none, none);
+
+    &:hover .mlb__game__overview {
+      // background-color: darken( $bg-color_gray, 10% );
+      background-color: #ddd;
+    }
   }
 
   &__team,
