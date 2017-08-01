@@ -13,8 +13,8 @@
 // dae
 import Normalize from '../../util/Normalize';
 
-// define
-import Positions from '../../define/Positions';
+// // define
+// import Positions from '../../define/Positions';
 
 /**
  * 選手を守備カテゴリで分類します
@@ -109,11 +109,12 @@ class DaePlayer {
      * @type {string}
      */
     this.category = Normalize.str(origin.position_category);
-    /**
-     * position 正規名称
-     * @type {string}
-     */
-    this.category = Positions.category(position);
+    // いらんかった
+    // /**
+    //  * position 正規名称
+    //  * @type {string}
+    //  */
+    // this.category = Positions.category(position);
   }
 }
 

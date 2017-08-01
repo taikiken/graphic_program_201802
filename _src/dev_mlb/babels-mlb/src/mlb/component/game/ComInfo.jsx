@@ -24,6 +24,7 @@ import ComInfoTab from './ComInfoTab';
 
 // component/games
 import ComGame from './games/ComGame';
+import ComMember from './games/ComMember';
 
 // ----------------------------------------
 // 親
@@ -93,7 +94,7 @@ export default class ComInfo extends Component {
         return <ComGame info={info} team={team} />;
       }
       case 'member': {
-        return null;
+        return <ComMember info={info} member={member} />;
       }
       case 'inning': {
         return null;

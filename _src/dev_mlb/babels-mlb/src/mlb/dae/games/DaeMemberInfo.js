@@ -72,7 +72,7 @@ class DaePlayer {
      * 打順
      * @type {number}
      */
-    this.bat = Normalize.int(origin.bat_no);
+    this.no = Normalize.int(origin.bat_no);
     /**
      * 打撃成績
      * @type {DaeBatting}
@@ -83,6 +83,11 @@ class DaePlayer {
      * @type {DaePitching}
      */
     this.pitching = new DaePitching(origin.pitching);
+    /**
+     * 選手名
+     * @type {string}
+     */
+    this.player = Normalize.str(origin.name);
   }
 }
 
@@ -91,7 +96,7 @@ class DaePlayer {
  * - DaePlayers
  *   - {@link DaePlayer}
  */
-class DaePlayers {
+export class DaePlayers {
   /**
    * 初期化します
    * @param {object} info JSON
@@ -99,6 +104,10 @@ class DaePlayers {
   constructor(info) {
     const origin = Normalize.obj(info);
     const players = {};
+    const members = {
+      batters: [],
+      pitchers: [],
+    };
     /**
      * original JSON
      * @type {Object}
@@ -106,18 +115,32 @@ class DaePlayers {
     this.origin = origin;
     /**
      * 選手 ID リスト
-     * @type {Array}.<number>
+     * @type {Array}.<DaePlayer>
      */
-    this.ids = Object.keys(origin).map((playerId) => {
+    this.list = Object.keys(origin).map((playerId) => {
       const id = parseInt(playerId, 10);
-      players[id] = new DaePlayer(origin[playerId]);
-      return id;
+      const player = new DaePlayer(origin[playerId]);
+      players[id] = player;
+      // if (player.position === '投') {
+      //   members.pitchers.push(player);
+      // } else {
+      //   members.batters.push(player);
+      // }
+      // batting / pitching data が存在する時に members へ push する
+      if (player.batting.has) {
+        members.batters.push(player);
+      }
+      if (player.pitching.has) {
+        members.pitchers.push(player);
+      }
+      return player;
     });
     /**
-     * palyer id を key, value を {@link DaePlayer} した object
+     * player id を key, value を {@link DaePlayer} した object
      * @type {object}
      */
     this.players = players;
+    this.members = members;
   }
 }
 
@@ -156,5 +179,8 @@ export default class DaeMemberInfo {
      * @type {object}
      */
     this.players = players;
+  }
+  team(id) {
+    return this.players[id];
   }
 }

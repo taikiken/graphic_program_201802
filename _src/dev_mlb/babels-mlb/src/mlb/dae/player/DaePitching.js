@@ -13,6 +13,29 @@
 // dae
 import Normalize from '../../util/Normalize';
 
+const parseInt = self.parseInt;
+
+class DaePitchingInnings {
+  constructor(innings) {
+    const origin = Normalize.str(innings, '-');
+    let title = '0回';
+    if (origin !== '-') {
+      const splits = origin.split('.');
+      if (splits.length === 2) {
+        const numerator = parseInt(splits[1], 10);
+        if (numerator) {
+          title = `${splits[0]}回 ${numerator}/3`;
+        } else {
+          title = `${splits[0]}回`;
+        }
+      }
+    }
+    this.origin = innings;
+    this.title = title;
+    this.innings = origin;
+  }
+}
+
 /**
  * 投手成績
  */
@@ -30,53 +53,60 @@ export default class DaePitching {
     this.origin = origin;
     /**
      * data が null で無い - 存在 flag
+     * - undefined のこともある様子
      * @type {boolean}
      */
-    this.has = info !== null;
+    this.has = !!info;
+    // this.has = info !== null;
     /**
      * 防御率
      * @type {string}
      */
     this.average = Normalize.str(origin.average, '-');
+    // /**
+    //  * 投球イニング
+    //  * @type {string}
+    //  */
+    // this.innings = Normalize.str(origin.innings, '-');
     /**
      * 投球イニング
-     * @type {number}
+     * @type {DaePitchingInnings}
      */
-    this.innings = Normalize.int(origin.innings);
+    this.innings = new DaePitchingInnings(origin.innings);
     /**
      * 投球数
      * @type {number}
      */
-    this.pitched = Normalize.int(origin.pitched);
+    this.pitched = Normalize.int(origin.pitched, 0);
     /**
      * ストライク数
      * @type {number}
      */
-    this.strikes = Normalize.int(origin.strikes);
+    this.strikes = Normalize.int(origin.strikes, 0);
     /**
      * 三振数
      * @type {number}
      */
-    this.outs = Normalize.int(origin.strike_outs);
+    this.outs = Normalize.int(origin.strike_outs, 0);
     /**
      * 四死球
      * @type {number}
      */
-    this.dead = Normalize.int(origin.walking_dead);
+    this.dead = Normalize.int(origin.walking_dead, 0);
     /**
      * 失点
      * @type {number}
      */
-    this.ra = Normalize.int(origin.ra);
+    this.ra = Normalize.int(origin.ra, 0);
     /**
      * 被打数
      * @type {number}
      */
-    this.hits = Normalize.int(origin.hits);
-    /**
-     * ポジション分類 - レフトであれば「外野手」、一塁
-     * @type {string}
-     */
-    this.position = Normalize.str(origin.position);
+    this.hits = Normalize.int(origin.hits, 0);
+    // /**
+    //  * ポジション分類 - レフトであれば「外野手」、一塁
+    //  * @type {string}
+    //  */
+    // this.position = Normalize.str(origin.position);
   }
 }

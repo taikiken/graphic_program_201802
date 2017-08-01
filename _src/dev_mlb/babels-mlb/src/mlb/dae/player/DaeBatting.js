@@ -31,9 +31,11 @@ export default class DaeBatting {
     this.origin = origin;
     /**
      * data が null で無い - 存在 flag
+     * - undefined のこともある様子
      * @type {boolean}
      */
-    this.has = info !== null;
+    this.has = !!info;
+    // this.has = info !== null;
     /**
      * 打率・防御率?
      * @type {string}
@@ -43,21 +45,21 @@ export default class DaeBatting {
      * 打点数
      * @type {number}
      */
-    this.runs = Normalize.int(origin.runs);
+    this.runs = Normalize.int(origin.runs, 0);
     /**
      * 盗塁数
      * @type {number}
      */
-    this.stolen = Normalize.int(origin.stolen_bases);
+    this.stolen = Normalize.int(origin.stolen_bases, 0);
     /**
      * 安打数
      * @type {number}
      */
-    this.hits = Normalize.int(origin.hits);
+    this.hits = Normalize.int(origin.hits, 0);
     /**
      * 打席数
      * @type {number}
      */
-    this.bats = Normalize.int(origin.bats);
+    this.bats = Normalize.int(origin.bats, 0);
   }
 }

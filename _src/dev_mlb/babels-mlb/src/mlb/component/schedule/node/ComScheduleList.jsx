@@ -51,7 +51,10 @@ const ComGame = ({ game, team, date }) => {
   const statusClass = game.className;
   // render
   return (
-    <a href={`/stats/mlb/game/${date.year}/${game.id}/`}>
+    <a
+      href={`/stats/mlb/game/${date.year}/${game.id}/`}
+      className="mlb__game__overview__link"
+    >
       <div className="mlb__game__overview">
         <p className={`${teamClass} ${teamClass}--home ${Print.str(game.home.className)}`}>
           {Print.str(game.home.team)}
