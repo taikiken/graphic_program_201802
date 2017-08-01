@@ -41202,7 +41202,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-1 20:04:35
+ * 2017-8-1 21:53:11
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -68931,6 +68931,7 @@ exports.default = game;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.DaeInning = exports.DaeInningTeam = undefined;
 
 var _Normalize = __webpack_require__(35);
 
@@ -69012,12 +69013,15 @@ var DaeEvents =
 /**
  * 発生したイベント（事象）
  * @param {number} inning 回 1 ~
- * @param {object} info JSON
+ * @param {Array} info JSON
  */
 function DaeEvents(inning, info) {
   _classCallCheck(this, DaeEvents);
 
   var origin = _Normalize2.default.arr(info);
+  var list = origin.map(function (event) {
+    return new DaeEvent(inning, event);
+  });
   /**
    * original JSON
    * @type {Array.<*>}
@@ -69027,14 +69031,13 @@ function DaeEvents(inning, info) {
    * イベント個別情報
    * @type {Array.<DaeEvent>}
    */
-  this.list = origin.map(function (event) {
-    return new DaeEvent(inning, event);
-  });
+  this.list = list;
   /**
    * イニング
    * @type {number}
    */
   this.inning = inning;
+  this.opposite = list.slice(0).reverse();
 };
 
 /**
@@ -69048,7 +69051,7 @@ var DaeInningTeam =
  * @param {number} inning 回 1 ~
  * @param {object} info JSON
  */
-function DaeInningTeam(inning, info) {
+exports.DaeInningTeam = function DaeInningTeam(inning, info) {
   _classCallCheck(this, DaeInningTeam);
 
   var origin = _Normalize2.default.obj(info);
@@ -69085,7 +69088,7 @@ var DaeInning =
  * @param {number} inning 回 1 ~
  * @param {object} info JSON
  */
-function DaeInning(inning, info) {
+exports.DaeInning = function DaeInning(inning, info) {
   _classCallCheck(this, DaeInning);
 
   var origin = _Normalize2.default.obj(info);
@@ -69142,16 +69145,8 @@ function DaeInnings(info) {
   var visitor = {};
   var information = {};
   var board = {};
-  /**
-   * original JSON
-   * @type {Object}
-   */
-  this.origin = origin;
-  /**
-   * 回毎の情報配列
-   * @type {Array.<DaeInning>}
-   */
-  this.list = Object.keys(innings).map(function (inning) {
+  // @type {Array.<DaeInning>} - 回毎の情報配列
+  var list = Object.keys(innings).map(function (inning) {
     // inning: string なので int 型変換します
     var num = parseInt(inning, 10);
     // @type {DaeInning}
@@ -69164,8 +69159,14 @@ function DaeInnings(info) {
       home: data.home,
       visitor: data.visitor
     };
-    return data;
+    // return data;
+    return num;
   });
+  /**
+   * original JSON
+   * @type {Object}
+   */
+  this.origin = origin;
   /**
    * home team inning information
    * inning: number を key に {@link DaeInningTeam} が value
@@ -69188,6 +69189,18 @@ function DaeInnings(info) {
    * @type {object}
    */
   this.board = board;
+  // /**
+  //  * 回毎の情報配列
+  //  * @type {Array.<DaeInning>}
+  //  */
+  // this.list = list;
+  // /**
+  //  * 回毎の情報配列 `list` を逆順にしました
+  //  * @type {Array.<DaeInning>}
+  //  */
+  // this.opposite = list.slice(0).reverse();
+  this.list = list;
+  this.oppoite = list.slice(0).reverse();
 };
 
 exports.default = DaeInnings;
@@ -81881,7 +81894,7 @@ ComTeamRecord.propTypes = {
  * 左・右・両 に見合う class name を取得します
  * - mlb_live__starting--bench__td--player__handed--left
  * - mlb_live__starting--bench__td--player__handed--right
- * - mlb_live__starting--bench__td--player__handed--both
+ * - mlb_live__starting--bench__td--player__handed--switch
  * @param {DaePlayer} reserve 控え選手
  * @returns {string} 左・右・両 に見合う class name
  */
@@ -81892,7 +81905,14 @@ var reserveHandType = function reserveHandType(reserve) {
   } else if (type === '右') {
     return 'mlb_live__starting--bench__td--player__handed--right';
   }
-  return 'mlb_live__starting--bench__td--player__handed--both';
+  return 'mlb_live__starting--bench__td--player__handed--switch';
+};
+
+var reserveTypeStr = function reserveTypeStr(reserve) {
+  if (reserve.position === '投') {
+    return reserve.hand + '\u6295';
+  }
+  return reserve.batHand + '\u6253';
 };
 
 /**
@@ -81946,7 +81966,7 @@ var comReservesPlayer = function comReservesPlayer(list) {
         _react2.default.createElement(
           'i',
           { className: reserveHandType(player) },
-          '\xA0'
+          reserveTypeStr(player)
         ),
         _Print2.default.str(player.player)
       )
@@ -82050,7 +82070,7 @@ ComReserve.propTypes = {
  * 左・右・両 に見合う class name を取得します
  * - mlb_live__starting--member__td--player__handed--left
  * - mlb_live__starting--member__td--player__handed--right
- * - mlb_live__starting--member__td--player__handed--both
+ * - mlb_live__starting--member__td--player__handed--switch
  * @param {DaePlayer} starting スターティングメンバー選手情報
  * @returns {string} 左・右・両 に見合う class name
  */
@@ -82061,7 +82081,14 @@ var batType = function batType(starting) {
   } else if (type === '右') {
     return 'mlb_live__starting--member__td--player__handed--right';
   }
-  return 'mlb_live__starting--member__td--player__handed--both';
+  return 'mlb_live__starting--member__td--player__handed--switch';
+};
+
+var batTypeStr = function batTypeStr(starting) {
+  if (starting.position === '投') {
+    return starting.hand + '\u6295';
+  }
+  return starting.batHand + '\u6253';
 };
 
 /**
@@ -82115,7 +82142,7 @@ var ComStarting = function ComStarting(_ref3) {
                 _react2.default.createElement(
                   'i',
                   { className: batType(starting) },
-                  '\xA0'
+                  batTypeStr(starting)
                 ),
                 _Print2.default.str(starting.player)
               )
@@ -82154,7 +82181,7 @@ var ComStarting = function ComStarting(_ref3) {
                 _react2.default.createElement(
                   'i',
                   { className: batType(starting) },
-                  '\xA0'
+                  batTypeStr(starting)
                 ),
                 _Print2.default.str(starting.player)
               )
@@ -82183,7 +82210,7 @@ ComStarting.propTypes = {
  * 左・右・両 に見合う class name を取得します
  * - mlb_live__starting--pitcher__handed--left
  * - mlb_live__starting--pitcher__handed--right
- * - mlb_live__starting--pitcher__handed--both
+ * - mlb_live__starting--pitcher__handed--switch
  * @param {string} type 左・右・両
  * @returns {*} 左・右・両 に見合う class name を返します
  */
@@ -82193,7 +82220,7 @@ var pitcherHandType = function pitcherHandType(type) {
   } else if (type === '右') {
     return 'mlb_live__starting--pitcher__handed--right';
   }
-  return 'mlb_live__starting--pitcher__handed--both';
+  return 'mlb_live__starting--pitcher__handed--switch';
 };
 
 /**
@@ -82259,7 +82286,7 @@ var ComGamePitchers = function ComGamePitchers(_ref4) {
               _react2.default.createElement(
                 'i',
                 { className: pitcherHandType(info.home.pitcher.hand) },
-                '\xA0'
+                _Print2.default.str(info.home.pitcher.hand)
               )
             )
           ),
@@ -82283,7 +82310,7 @@ var ComGamePitchers = function ComGamePitchers(_ref4) {
               _react2.default.createElement(
                 'i',
                 { className: pitcherHandType(info.visitor.pitcher.hand) },
-                '\xA0'
+                _Print2.default.str(info.visitor.pitcher.hand)
               )
             )
           )
@@ -82534,11 +82561,11 @@ var ComPitchers = function ComPitchers(_ref) {
       team = _ref.team,
       info = _ref.info;
 
-  // console.log('ComPitchers', team, players.members.pitchers);
   // TODO: players.members.pitchers Sort - 登板順
   var win = info.win;
-  var loose = info.loose;
+  var lose = info.lose;
   var save = info.save;
+  console.log('ComPitchers', team, win, lose, save, players.members.pitchers);
   return _react2.default.createElement(
     'table',
     { className: 'mlb_live__record mlb_live__record--' + type },
@@ -82588,7 +82615,7 @@ var ComPitchers = function ComPitchers(_ref) {
         var mark = '';
         if (playerName === win) {
           mark = '○';
-        } else if (playerName === loose) {
+        } else if (playerName === lose) {
           mark = '●';
         } else if (playerName === save) {
           mark = 'S';

@@ -69,10 +69,11 @@ class DaeEvents {
   /**
    * 発生したイベント（事象）
    * @param {number} inning 回 1 ~
-   * @param {object} info JSON
+   * @param {Array} info JSON
    */
   constructor(inning, info) {
     const origin = Normalize.arr(info);
+    const list = origin.map(event => new DaeEvent(inning, event));
     /**
      * original JSON
      * @type {Array.<*>}
@@ -82,19 +83,20 @@ class DaeEvents {
      * イベント個別情報
      * @type {Array.<DaeEvent>}
      */
-    this.list = origin.map(event => new DaeEvent(inning, event));
+    this.list = list;
     /**
      * イニング
      * @type {number}
      */
     this.inning = inning;
+    this.opposite = list.slice(0).reverse();
   }
 }
 
 /**
  * イニングの情報 - チーム別
  */
-class DaeInningTeam {
+export class DaeInningTeam {
   /**
    * イニングの情報 - チーム別
    * @param {number} inning 回 1 ~
@@ -128,7 +130,7 @@ class DaeInningTeam {
 /**
  * イニングの情報
  */
-class DaeInning {
+export class DaeInning {
   /**
    * インイングの情報
    * @param {number} inning 回 1 ~
@@ -186,16 +188,8 @@ export default class DaeInnings {
     const visitor = {};
     const information = {};
     const board = {};
-    /**
-     * original JSON
-     * @type {Object}
-     */
-    this.origin = origin;
-    /**
-     * 回毎の情報配列
-     * @type {Array.<DaeInning>}
-     */
-    this.list = Object.keys(innings).map((inning) => {
+    // @type {Array.<DaeInning>} - 回毎の情報配列
+    const list = Object.keys(innings).map((inning) => {
       // inning: string なので int 型変換します
       const num = parseInt(inning, 10);
       // @type {DaeInning}
@@ -208,8 +202,14 @@ export default class DaeInnings {
         home: data.home,
         visitor: data.visitor,
       };
-      return data;
+      // return data;
+      return num;
     });
+    /**
+     * original JSON
+     * @type {Object}
+     */
+    this.origin = origin;
     /**
      * home team inning information
      * inning: number を key に {@link DaeInningTeam} が value
@@ -232,5 +232,17 @@ export default class DaeInnings {
      * @type {object}
      */
     this.board = board;
+    // /**
+    //  * 回毎の情報配列
+    //  * @type {Array.<DaeInning>}
+    //  */
+    // this.list = list;
+    // /**
+    //  * 回毎の情報配列 `list` を逆順にしました
+    //  * @type {Array.<DaeInning>}
+    //  */
+    // this.opposite = list.slice(0).reverse();
+    this.list = list;
+    this.oppoite = list.slice(0).reverse();
   }
 }

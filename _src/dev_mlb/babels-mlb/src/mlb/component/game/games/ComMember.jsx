@@ -37,11 +37,11 @@ import Print from '../../../util/Print';
  * @constructor
  */
 const ComPitchers = ({ players, type, team, info }) => {
-  // console.log('ComPitchers', team, players.members.pitchers);
   // TODO: players.members.pitchers Sort - 登板順
   const win = info.win;
-  const loose = info.loose;
+  const lose = info.lose;
   const save = info.save;
+  console.log('ComPitchers', team, win, lose, save, players.members.pitchers);
   return (
     <table className={`mlb_live__record mlb_live__record--${type}`}>
       <caption className="mlb_live__record__heading">{team}</caption>
@@ -61,7 +61,7 @@ const ComPitchers = ({ players, type, team, info }) => {
             let mark = '';
             if (playerName === win) {
               mark = '○';
-            } else if (playerName === loose) {
+            } else if (playerName === lose) {
               mark = '●';
             } else if (playerName === save) {
               mark = 'S';

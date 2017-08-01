@@ -77,7 +77,7 @@ ComTeamRecord.propTypes = {
  * 左・右・両 に見合う class name を取得します
  * - mlb_live__starting--bench__td--player__handed--left
  * - mlb_live__starting--bench__td--player__handed--right
- * - mlb_live__starting--bench__td--player__handed--both
+ * - mlb_live__starting--bench__td--player__handed--switch
  * @param {DaePlayer} reserve 控え選手
  * @returns {string} 左・右・両 に見合う class name
  */
@@ -88,7 +88,14 @@ const reserveHandType = (reserve) => {
   } else if (type === '右') {
     return 'mlb_live__starting--bench__td--player__handed--right';
   }
-  return 'mlb_live__starting--bench__td--player__handed--both';
+  return 'mlb_live__starting--bench__td--player__handed--switch';
+};
+
+const reserveTypeStr = (reserve) => {
+  if (reserve.position === '投') {
+    return `${reserve.hand}投`;
+  }
+  return `${reserve.batHand}打`;
 };
 
 /**
@@ -130,7 +137,7 @@ const comReservesPlayer = list => (
   list.map(player => (
     <tr key={`reserve-${player.id}`}>
       <td className="mlb_live__starting--bench__td--player">
-        <i className={reserveHandType(player)}>&nbsp;</i>
+        <i className={reserveHandType(player)}>{reserveTypeStr(player)}</i>
         {Print.str(player.player)}
       </td>
     </tr>
@@ -217,7 +224,7 @@ ComReserve.propTypes = {
  * 左・右・両 に見合う class name を取得します
  * - mlb_live__starting--member__td--player__handed--left
  * - mlb_live__starting--member__td--player__handed--right
- * - mlb_live__starting--member__td--player__handed--both
+ * - mlb_live__starting--member__td--player__handed--switch
  * @param {DaePlayer} starting スターティングメンバー選手情報
  * @returns {string} 左・右・両 に見合う class name
  */
@@ -228,7 +235,14 @@ const batType = (starting) => {
   } else if (type === '右') {
     return 'mlb_live__starting--member__td--player__handed--right';
   }
-  return 'mlb_live__starting--member__td--player__handed--both';
+  return 'mlb_live__starting--member__td--player__handed--switch';
+};
+
+const batTypeStr = (starting) => {
+  if (starting.position === '投') {
+    return `${starting.hand}投`;
+  }
+  return `${starting.batHand}打`;
 };
 
 /**
@@ -257,7 +271,7 @@ const ComStarting = ({ info, team }) => (
                   {Print.str(starting.position)}
                 </td>
                 <td className="mlb_live__starting--member__td--player">
-                  <i className={batType(starting)}>&nbsp;</i>
+                  <i className={batType(starting)}>{batTypeStr(starting)}</i>
                   {Print.str(starting.player)}
                 </td>
               </tr>
@@ -281,7 +295,7 @@ const ComStarting = ({ info, team }) => (
                   {Print.str(starting.position)}
                 </td>
                 <td className="mlb_live__starting--member__td--player">
-                  <i className={batType(starting)}>&nbsp;</i>
+                  <i className={batType(starting)}>{batTypeStr(starting)}</i>
                   {Print.str(starting.player)}
                 </td>
               </tr>
@@ -311,7 +325,7 @@ ComStarting.propTypes = {
  * 左・右・両 に見合う class name を取得します
  * - mlb_live__starting--pitcher__handed--left
  * - mlb_live__starting--pitcher__handed--right
- * - mlb_live__starting--pitcher__handed--both
+ * - mlb_live__starting--pitcher__handed--switch
  * @param {string} type 左・右・両
  * @returns {*} 左・右・両 に見合う class name を返します
  */
@@ -321,7 +335,7 @@ const pitcherHandType = (type) => {
   } else if (type === '右') {
     return 'mlb_live__starting--pitcher__handed--right';
   }
-  return 'mlb_live__starting--pitcher__handed--both';
+  return 'mlb_live__starting--pitcher__handed--switch';
 };
 
 /**
@@ -349,7 +363,9 @@ const ComGamePitchers = ({ info }) => (
             </p>
             <p className="mlb_live__starting--pitcher__name">
               {Print.str(info.home.pitcher.player)}
-              <i className={pitcherHandType(info.home.pitcher.hand)}>&nbsp;</i>
+              <i className={pitcherHandType(info.home.pitcher.hand)}>
+                {Print.str(info.home.pitcher.hand)}
+              </i>
             </p>
           </td>
           <td className="mlb_live__starting--pitcher__td">
@@ -359,7 +375,9 @@ const ComGamePitchers = ({ info }) => (
             </p>
             <p className="mlb_live__starting--pitcher__name">
               {Print.str(info.visitor.pitcher.player)}
-              <i className={pitcherHandType(info.visitor.pitcher.hand)}>&nbsp;</i>
+              <i className={pitcherHandType(info.visitor.pitcher.hand)}>
+                {Print.str(info.visitor.pitcher.hand)}
+              </i>
             </p>
           </td>
         </tr>
