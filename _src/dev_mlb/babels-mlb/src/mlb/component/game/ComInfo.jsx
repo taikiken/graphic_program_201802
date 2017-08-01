@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import DaeGameInfo from '../../dae/games/DaeGameInfo';
 import DaeMemberInfo from '../../dae/games/DaeMemberInfo';
 import DaeTeamInfo from '../../dae/games/DaeTeamInfo';
+import DaeInnings from '../../dae/games/DaeInnings';
 
 // component
 import ComInfoTab from './ComInfoTab';
@@ -25,6 +26,7 @@ import ComInfoTab from './ComInfoTab';
 // component/games
 import ComGame from './games/ComGame';
 import ComMember from './games/ComMember';
+import ComInning from './games/ComInning';
 
 // ----------------------------------------
 // 親
@@ -44,6 +46,7 @@ export default class ComInfo extends Component {
     info: PropTypes.instanceOf(DaeGameInfo),
     member: PropTypes.instanceOf(DaeMemberInfo),
     team: PropTypes.instanceOf(DaeTeamInfo),
+    innings: PropTypes.instanceOf(DaeInnings),
   };
   /**
    * defaultProps
@@ -53,6 +56,7 @@ export default class ComInfo extends Component {
     info: null,
     member: null,
     team: null,
+    innings: null,
   };
   // ----------------------------------------
   // CONSTRUCTOR
@@ -86,7 +90,7 @@ export default class ComInfo extends Component {
     this.setState({ tab });
   }
   choose(tab) {
-    const { info, member, team } = this.props;
+    const { info, member, team, innings } = this.props;
     console.log('ComInfo.choose tab', tab, info, member, team);
 
     switch (tab) {
@@ -97,7 +101,7 @@ export default class ComInfo extends Component {
         return <ComMember info={info} member={member} />;
       }
       case 'inning': {
-        return null;
+        return <ComInning innings={innings} />;
       }
       default:
         return null;
@@ -108,9 +112,9 @@ export default class ComInfo extends Component {
    * @returns {?XML} div#js-info-container
    */
   render() {
-    const { info, member, team } = this.props;
+    const { info, member, team, innings } = this.props;
     console.log('ComInfo.render info, member, team', info, member, team);
-    if (!info || !member || !team) {
+    if (!info || !member || !team || !innings) {
       return null;
     }
     // render

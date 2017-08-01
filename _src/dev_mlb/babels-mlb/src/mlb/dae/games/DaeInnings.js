@@ -16,7 +16,7 @@ import Normalize from '../../util/Normalize';
 /**
  * 発生したイベント（事象） - 詳細
  */
-class DaeEvent {
+export class DaeEvent {
   /**
    * 発生したイベント（事象） - 詳細
    * @param {number} inning 回 1 ~
@@ -243,6 +243,6 @@ export default class DaeInnings {
     //  */
     // this.opposite = list.slice(0).reverse();
     this.list = list;
-    this.oppoite = list.slice(0).reverse();
+    this.opposite = list.slice(0).reverse();
   }
 }
