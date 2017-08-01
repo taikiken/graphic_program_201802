@@ -41159,7 +41159,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-1 19:08:36
+ * 2017-8-1 19:30:56
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -80085,7 +80085,10 @@ var ComGame = function ComGame(_ref4) {
     }),
     _react2.default.createElement(
       'a',
-      { href: '/stats/mlb/game/' + date.year + '/' + game.id + '/' },
+      {
+        href: '/stats/mlb/game/' + date.year + '/' + game.id + '/',
+        className: 'mlb__game__overview__link'
+      },
       _react2.default.createElement(
         'div',
         { className: 'mlb__game__overview' },
@@ -80762,7 +80765,10 @@ var ComGame = function ComGame(_ref) {
   // render
   return _react2.default.createElement(
     'a',
-    { href: '/stats/mlb/game/' + date.year + '/' + game.id + '/' },
+    {
+      href: '/stats/mlb/game/' + date.year + '/' + game.id + '/',
+      className: 'mlb__game__overview__link'
+    },
     _react2.default.createElement(
       'div',
       { className: 'mlb__game__overview' },

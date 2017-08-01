@@ -178,7 +178,10 @@ const ComGame = ({ game, date }) => {
           />
         ))
       }
-      <a href={`/stats/mlb/game/${date.year}/${game.id}/`}>
+      <a
+        href={`/stats/mlb/game/${date.year}/${game.id}/`}
+        className="mlb__game__overview__link"
+      >
         <div className="mlb__game__overview">
           <p className={`${className} ${className}--home ${homeClass}`}>
             {Print.str(game.home.team)}
