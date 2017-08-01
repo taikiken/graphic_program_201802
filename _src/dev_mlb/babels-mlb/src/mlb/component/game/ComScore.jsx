@@ -43,10 +43,8 @@ const ComSwitchNext = ({ start, innings, action }) => {
   if (start + 9 >= innings) {
     return (
       <li id="innings-prev" className="mlb_live__scoreboard__inning_pager__item">
-        <p
-          className="mlb_live__scoreboard__inning_pager__link disabled"
-        >
-          <span>次の回</span>
+        <p className="mlb_live__scoreboard__inning_pager__link disabled">
+          <span className="mlb_live__scoreboard__inning_pager__link__icon">次の回</span>
         </p>
       </li>
     );
@@ -59,7 +57,7 @@ const ComSwitchNext = ({ start, innings, action }) => {
         className="mlb_live__scoreboard__inning_pager__link"
         onClick={action}
       >
-        <span>次の回</span>
+        <span className="mlb_live__scoreboard__inning_pager__link__icon">次の回</span>
       </a>
     </li>
   );
@@ -91,10 +89,8 @@ const ComSwitchPrev = ({ start, action }) => {
   if (start === 1) {
     return (
       <li id="innings-prev" className="mlb_live__scoreboard__inning_pager__item">
-        <p
-          className="mlb_live__scoreboard__inning_pager__link disabled"
-        >
-          <span>前の回</span>
+        <p className="mlb_live__scoreboard__inning_pager__link disabled">
+          <span className="mlb_live__scoreboard__inning_pager__link__icon">前の回</span>
         </p>
       </li>
     );
@@ -107,7 +103,7 @@ const ComSwitchPrev = ({ start, action }) => {
         className="mlb_live__scoreboard__inning_pager__link"
         onClick={action}
       >
-        <span>前の回</span>
+        <span className="mlb_live__scoreboard__inning_pager__link__icon">前の回</span>
       </a>
     </li>
   );

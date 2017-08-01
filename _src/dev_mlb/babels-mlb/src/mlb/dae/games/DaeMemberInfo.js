@@ -126,7 +126,7 @@ export class DaePlayers {
       // } else {
       //   members.batters.push(player);
       // }
-      // batting / pitching data が存在する時に members へ push する
+      // batting / pitching data が存在する時に members へ push
       if (player.batting.has) {
         members.batters.push(player);
       }
@@ -140,6 +140,10 @@ export class DaePlayers {
      * @type {object}
      */
     this.players = players;
+    /**
+     * 打者・投手 それぞれで {@link DaePlayer} をリストします
+     * @type {{batters: Array.<DaePlayer>, pitchers: Array.<DaePlayer>}}
+     */
     this.members = members;
   }
 }
@@ -180,6 +184,11 @@ export default class DaeMemberInfo {
      */
     this.players = players;
   }
+  /**
+   * team id で選手リスト {@link DaePlayers} を取得します
+   * @param {number} id team id
+   * @returns {DaePlayers} 選手リストを返します
+   */
   team(id) {
     return this.players[id];
   }

@@ -16640,24 +16640,57 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var parseInt = self.parseInt;
 
-var DaePitchingInnings = function DaePitchingInnings(innings) {
+/**
+ * 投球回数から出力用データを作成します
+ *
+ * 1. `-` 以外
+ * 1. `.` で分解
+ * 1. length 2
+ * 1. 分子 0 以外 - 「0回 2/3」
+ * 1. 分子 0 - 「0回」
+ */
+
+var DaePitchingInnings =
+/**
+ * 投球回数から出力用データを作成します
+ * @param {string} innings `0.0` な投球回数
+ */
+function DaePitchingInnings(innings) {
   _classCallCheck(this, DaePitchingInnings);
 
   var origin = _Normalize2.default.str(innings, '-');
   var title = '0回';
+  // `-` 以外
   if (origin !== '-') {
+    // `.` で分解します
     var splits = origin.split('.');
+    // length 2
     if (splits.length === 2) {
+      // 分子
       var numerator = parseInt(splits[1], 10);
       if (numerator) {
+        // 分子 0 以外
         title = splits[0] + '\u56DE ' + numerator + '/3';
       } else {
+        // 分子 0
         title = splits[0] + '\u56DE';
       }
     }
   }
+  /**
+   * original innings
+   * @type {string}
+   */
   this.origin = innings;
+  /**
+   * 加工済み innings
+   * @type {string}
+   */
   this.title = title;
+  /**
+   * Normalize 済み innings
+   * @type {string}
+   */
   this.innings = origin;
 };
 
@@ -17563,7 +17596,7 @@ exports.DaePlayers = function DaePlayers(info) {
     // } else {
     //   members.batters.push(player);
     // }
-    // batting / pitching data が存在する時に members へ push する
+    // batting / pitching data が存在する時に members へ push
     if (player.batting.has) {
       members.batters.push(player);
     }
@@ -17577,6 +17610,10 @@ exports.DaePlayers = function DaePlayers(info) {
    * @type {object}
    */
   this.players = players;
+  /**
+   * 打者・投手 それぞれで {@link DaePlayer} をリストします
+   * @type {{batters: Array.<DaePlayer>, pitchers: Array.<DaePlayer>}}
+   */
   this.members = members;
 };
 
@@ -17620,6 +17657,12 @@ var DaeMemberInfo = function () {
      */
     this.players = players;
   }
+  /**
+   * team id で選手リスト {@link DaePlayers} を取得します
+   * @param {number} id team id
+   * @returns {DaePlayers} 選手リストを返します
+   */
+
 
   _createClass(DaeMemberInfo, [{
     key: 'team',
@@ -41159,7 +41202,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-1 19:30:56
+ * 2017-8-1 20:04:35
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -82476,13 +82519,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // ----------------------------------------
 // 出場成績・投手
 // ----------------------------------------
+/**
+ * 出場成績・投手
+ * @param {DaePlayers} players 選手情報
+ * @param {string} type home|visitor
+ * @param {string} team チーム名（日本語）
+ * @param {DaeGameInfo} info ゲーム情報, win / lose / save を取得します
+ * @returns {XML} table.mlb_live__record
+ * @constructor
+ */
 var ComPitchers = function ComPitchers(_ref) {
   var players = _ref.players,
       type = _ref.type,
       team = _ref.team,
       info = _ref.info;
 
-  console.log('ComPitchers', team, players.members.pitchers);
+  // console.log('ComPitchers', team, players.members.pitchers);
+  // TODO: players.members.pitchers Sort - 登板順
   var win = info.win;
   var loose = info.loose;
   var save = info.save;
@@ -82577,6 +82630,10 @@ var ComPitchers = function ComPitchers(_ref) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{players: DaePlayers, type: string, team: string, info: DaeGameInfo}}
+ */
 ComPitchers.propTypes = {
   players: _propTypes2.default.instanceOf(_DaeMemberInfo.DaePlayers).isRequired,
   type: _propTypes2.default.string.isRequired,
@@ -82587,15 +82644,25 @@ ComPitchers.propTypes = {
 // ----------------------------------------
 // 出場成績・打者
 // ----------------------------------------
+/**
+ * 出場成績・打者
+ * @param {DaePlayers} players 選手情報
+ * @param {string} type home|visitor
+ * @param {string} team チーム名（日本語）
+ * @returns {XML} table.mlb_live__record
+ * @constructor
+ */
 var ComBatters = function ComBatters(_ref2) {
   var players = _ref2.players,
       type = _ref2.type,
       team = _ref2.team;
 
   // TODO: players.members.batters Sort - 打席順 + 出場順
+  // 打数, 安打, 打点 を合計します
   var bats = 0;
   var hits = 0;
   var runs = 0;
+  // render
   return _react2.default.createElement(
     'table',
     { className: 'mlb_live__record mlb_live__record--' + type },
@@ -82723,6 +82790,10 @@ var ComBatters = function ComBatters(_ref2) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{players: DaePlayers, type: string, team: string}}
+ */
 ComBatters.propTypes = {
   players: _propTypes2.default.instanceOf(_DaeMemberInfo.DaePlayers).isRequired,
   type: _propTypes2.default.string.isRequired,
@@ -82732,6 +82803,15 @@ ComBatters.propTypes = {
 // ----------------------------------------
 // 出場成績・親
 // ----------------------------------------
+/**
+ * 出場成績・親
+ * - ComMember
+ *   - {@link ComMemberTab}
+ *   - {@link ComBatters}
+ *   - {@link ComPitchers}
+ *
+ * tab で 打者 / 投手 表示切替します
+ */
 
 var ComMember = function (_Component) {
   _inherits(ComMember, _Component);
@@ -82739,6 +82819,10 @@ var ComMember = function (_Component) {
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
+  /**
+   * ComPitchers
+   * @param {*} props React.props
+   */
 
   // ----------------------------------------
   // STATIC PROPERTY
@@ -82751,6 +82835,7 @@ var ComMember = function (_Component) {
     _classCallCheck(this, ComMember);
 
     /**
+     * tab 切替 state
      * - batter
      * - pitcher
      * @type {{tab: string}}
@@ -82784,6 +82869,14 @@ var ComMember = function (_Component) {
       console.log('ComMember.onChange', tab);
       this.setState({ tab: tab });
     }
+    /**
+     * 引数 `tab` で表示切替をします
+     * - 打者成績
+     * - 投手成績
+     * @param {string} tab batter|pitcher
+     * @returns {?XML} div,mlb_live__record__container
+     */
+
   }, {
     key: 'choose',
     value: function choose(tab) {
@@ -82833,6 +82926,12 @@ var ComMember = function (_Component) {
           return null;
       }
     }
+    /**
+     * 出場成績
+     * div.js-member-container > section.mlb_live__record__section
+     * @returns {?XML} div.js-member-container > section.mlb_live__record__section
+     */
+
   }, {
     key: 'render',
     value: function render() {
@@ -82914,16 +83013,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // react
 
 
+/**
+ * 出場成績 - 打者 / 投手 切替タブ
+ */
 var ComMemberTab = function (_Component) {
   _inherits(ComMemberTab, _Component);
 
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
+  /**
+   * 出場成績 - 打者 / 投手 切替タブ
+   * @param {*} props React.props
+   */
   function ComMemberTab(props) {
     _classCallCheck(this, ComMemberTab);
 
     // ---
+    /**
+     * tab の current state
+     * @type {{current: {batter: boolean, pitcher: boolean}}}
+     */
     var _this = _possibleConstructorReturn(this, (ComMemberTab.__proto__ || Object.getPrototypeOf(ComMemberTab)).call(this, props));
 
     _this.state = {
@@ -82939,6 +83049,12 @@ var ComMemberTab = function (_Component) {
     _this.onClick = _this.onClick.bind(_this);
     return _this;
   }
+  /**
+   * tab click event handler,
+   * event.target.href から label を取得し props.change へ通知します
+   * @param {Event} event click event, event.target を取得し対象コンテナを特定します
+   */
+
   // ----------------------------------------
   // STATIC PROPERTY
   // ----------------------------------------
@@ -82955,15 +83071,23 @@ var ComMemberTab = function (_Component) {
       console.log('ComMemberTab.onClick', event);
       var target = event.target;
       var tab = target.href.split('#').pop();
-      var current = {
-        game: false,
-        member: false,
-        inning: false
-      };
+      // state.current clone + all off
+      var current = Object.assign({}, this.state.current);
+      current.batter = false;
+      current.pitcher = false;
+      // current on
       current[tab] = true;
+      // set state
       this.setState({ current: current });
+      // call props.change
       this.props.change(tab);
     }
+    /**
+     * 出場成績 - 打者 / 投手 切替タブ
+     * nav.mlb_live__nav
+     * @returns {XML} nav.mlb_live__nav
+     */
+
   }, {
     key: 'render',
     value: function render() {
@@ -83110,12 +83234,10 @@ var ComSwitchNext = function ComSwitchNext(_ref) {
       { id: 'innings-prev', className: 'mlb_live__scoreboard__inning_pager__item' },
       _react2.default.createElement(
         'p',
-        {
-          className: 'mlb_live__scoreboard__inning_pager__link disabled'
-        },
+        { className: 'mlb_live__scoreboard__inning_pager__link disabled' },
         _react2.default.createElement(
           'span',
-          null,
+          { className: 'mlb_live__scoreboard__inning_pager__link__icon' },
           '\u6B21\u306E\u56DE'
         )
       )
@@ -83134,7 +83256,7 @@ var ComSwitchNext = function ComSwitchNext(_ref) {
       },
       _react2.default.createElement(
         'span',
-        null,
+        { className: 'mlb_live__scoreboard__inning_pager__link__icon' },
         '\u6B21\u306E\u56DE'
       )
     )
@@ -83173,12 +83295,10 @@ var ComSwitchPrev = function ComSwitchPrev(_ref2) {
       { id: 'innings-prev', className: 'mlb_live__scoreboard__inning_pager__item' },
       _react2.default.createElement(
         'p',
-        {
-          className: 'mlb_live__scoreboard__inning_pager__link disabled'
-        },
+        { className: 'mlb_live__scoreboard__inning_pager__link disabled' },
         _react2.default.createElement(
           'span',
-          null,
+          { className: 'mlb_live__scoreboard__inning_pager__link__icon' },
           '\u524D\u306E\u56DE'
         )
       )
@@ -83197,7 +83317,7 @@ var ComSwitchPrev = function ComSwitchPrev(_ref2) {
       },
       _react2.default.createElement(
         'span',
-        null,
+        { className: 'mlb_live__scoreboard__inning_pager__link__icon' },
         '\u524D\u306E\u56DE'
       )
     )

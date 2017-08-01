@@ -14,6 +14,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * 出場成績 - 打者 / 投手 切替タブ
+ */
 export default class ComMemberTab extends Component {
   // ----------------------------------------
   // STATIC PROPERTY
@@ -28,9 +31,17 @@ export default class ComMemberTab extends Component {
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
+  /**
+   * 出場成績 - 打者 / 投手 切替タブ
+   * @param {*} props React.props
+   */
   constructor(props) {
     super(props);
     // ---
+    /**
+     * tab の current state
+     * @type {{current: {batter: boolean, pitcher: boolean}}}
+     */
     this.state = {
       current: {
         batter: true,
@@ -43,20 +54,32 @@ export default class ComMemberTab extends Component {
      */
     this.onClick = this.onClick.bind(this);
   }
+  /**
+   * tab click event handler,
+   * event.target.href から label を取得し props.change へ通知します
+   * @param {Event} event click event, event.target を取得し対象コンテナを特定します
+   */
   onClick(event) {
     event.preventDefault();
     console.log('ComMemberTab.onClick', event);
     const target = event.target;
     const tab = target.href.split('#').pop();
-    const current = {
-      game: false,
-      member: false,
-      inning: false,
-    };
+    // state.current clone + all off
+    const current = Object.assign({}, this.state.current);
+    current.batter = false;
+    current.pitcher = false;
+    // current on
     current[tab] = true;
+    // set state
     this.setState({ current });
+    // call props.change
     this.props.change(tab);
   }
+  /**
+   * 出場成績 - 打者 / 投手 切替タブ
+   * nav.mlb_live__nav
+   * @returns {XML} nav.mlb_live__nav
+   */
   render() {
     const { current } = this.state;
     return (

@@ -15,23 +15,54 @@ import Normalize from '../../util/Normalize';
 
 const parseInt = self.parseInt;
 
+/**
+ * 投球回数から出力用データを作成します
+ *
+ * 1. `-` 以外
+ * 1. `.` で分解
+ * 1. length 2
+ * 1. 分子 0 以外 - 「0回 2/3」
+ * 1. 分子 0 - 「0回」
+ */
 class DaePitchingInnings {
+  /**
+   * 投球回数から出力用データを作成します
+   * @param {string} innings `0.0` な投球回数
+   */
   constructor(innings) {
     const origin = Normalize.str(innings, '-');
     let title = '0回';
+    // `-` 以外
     if (origin !== '-') {
+      // `.` で分解します
       const splits = origin.split('.');
+      // length 2
       if (splits.length === 2) {
+        // 分子
         const numerator = parseInt(splits[1], 10);
         if (numerator) {
+          // 分子 0 以外
           title = `${splits[0]}回 ${numerator}/3`;
         } else {
+          // 分子 0
           title = `${splits[0]}回`;
         }
       }
     }
+    /**
+     * original innings
+     * @type {string}
+     */
     this.origin = innings;
+    /**
+     * 加工済み innings
+     * @type {string}
+     */
     this.title = title;
+    /**
+     * Normalize 済み innings
+     * @type {string}
+     */
     this.innings = origin;
   }
 }

@@ -27,8 +27,18 @@ import Print from '../../../util/Print';
 // ----------------------------------------
 // 出場成績・投手
 // ----------------------------------------
+/**
+ * 出場成績・投手
+ * @param {DaePlayers} players 選手情報
+ * @param {string} type home|visitor
+ * @param {string} team チーム名（日本語）
+ * @param {DaeGameInfo} info ゲーム情報, win / lose / save を取得します
+ * @returns {XML} table.mlb_live__record
+ * @constructor
+ */
 const ComPitchers = ({ players, type, team, info }) => {
-  console.log('ComPitchers', team, players.members.pitchers);
+  // console.log('ComPitchers', team, players.members.pitchers);
+  // TODO: players.members.pitchers Sort - 登板順
   const win = info.win;
   const loose = info.loose;
   const save = info.save;
@@ -72,7 +82,10 @@ const ComPitchers = ({ players, type, team, info }) => {
   );
 };
 
-
+/**
+ * propTypes
+ * @type {{players: DaePlayers, type: string, team: string, info: DaeGameInfo}}
+ */
 ComPitchers.propTypes = {
   players: PropTypes.instanceOf(DaePlayers).isRequired,
   type: PropTypes.string.isRequired,
@@ -83,11 +96,21 @@ ComPitchers.propTypes = {
 // ----------------------------------------
 // 出場成績・打者
 // ----------------------------------------
+/**
+ * 出場成績・打者
+ * @param {DaePlayers} players 選手情報
+ * @param {string} type home|visitor
+ * @param {string} team チーム名（日本語）
+ * @returns {XML} table.mlb_live__record
+ * @constructor
+ */
 const ComBatters = ({ players, type, team }) => {
   // TODO: players.members.batters Sort - 打席順 + 出場順
+  // 打数, 安打, 打点 を合計します
   let bats = 0;
   let hits = 0;
   let runs = 0;
+  // render
   return (
     <table className={`mlb_live__record mlb_live__record--${type}`}>
       <caption className="mlb_live__record__heading">{team}</caption>
@@ -135,6 +158,10 @@ const ComBatters = ({ players, type, team }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{players: DaePlayers, type: string, team: string}}
+ */
 ComBatters.propTypes = {
   players: PropTypes.instanceOf(DaePlayers).isRequired,
   type: PropTypes.string.isRequired,
@@ -144,6 +171,15 @@ ComBatters.propTypes = {
 // ----------------------------------------
 // 出場成績・親
 // ----------------------------------------
+/**
+ * 出場成績・親
+ * - ComMember
+ *   - {@link ComMemberTab}
+ *   - {@link ComBatters}
+ *   - {@link ComPitchers}
+ *
+ * tab で 打者 / 投手 表示切替します
+ */
 export default class ComMember extends Component {
   // ----------------------------------------
   // STATIC PROPERTY
@@ -167,9 +203,14 @@ export default class ComMember extends Component {
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
+  /**
+   * ComPitchers
+   * @param {*} props React.props
+   */
   constructor(props) {
     super(props);
     /**
+     * tab 切替 state
      * - batter
      * - pitcher
      * @type {{tab: string}}
@@ -191,6 +232,13 @@ export default class ComMember extends Component {
     console.log('ComMember.onChange', tab);
     this.setState({ tab });
   }
+  /**
+   * 引数 `tab` で表示切替をします
+   * - 打者成績
+   * - 投手成績
+   * @param {string} tab batter|pitcher
+   * @returns {?XML} div,mlb_live__record__container
+   */
   choose(tab) {
     const { info, member } = this.props;
     console.log('ComMember.choose', tab, info, member);
@@ -233,6 +281,11 @@ export default class ComMember extends Component {
         return null;
     }
   }
+  /**
+   * 出場成績
+   * div.js-member-container > section.mlb_live__record__section
+   * @returns {?XML} div.js-member-container > section.mlb_live__record__section
+   */
   render() {
     const { info, member } = this.props;
     console.log('ComMember.render info, member', info, member);
