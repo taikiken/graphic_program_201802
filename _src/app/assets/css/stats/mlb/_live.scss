@@ -398,7 +398,8 @@
       }
 
       //矢印アイコン
-      &__link span {
+      //.mlb_live__scoreboard__inning_pager__link__icon
+      &__link__icon {
         &:before,
         &:after {
           display: inline-block;
@@ -410,14 +411,14 @@
         }
       }
 
-      &__item:nth-child(1) .mlb_live__scoreboard__inning_pager__link span:before {
+      &__item:nth-child(1) .mlb_live__scoreboard__inning_pager__link__icon:before {
         margin-right: 5px;
         border-style: solid;
         border-width: 3px 5.2px 3px 0;
         border-color: transparent #fff transparent transparent;
       }
 
-      &__item:nth-child(2) .mlb_live__scoreboard__inning_pager__link span:after {
+      &__item:nth-child(2) .mlb_live__scoreboard__inning_pager__link__icon:after {
         margin-left: 5px;
         border-style: solid;
         border-width: 3px 0 3px 5.2px;
@@ -434,11 +435,11 @@
         cursor: default;
         color: darken( #fff, 70% );
 
-        span:before {
+        .mlb_live__scoreboard__inning_pager__link__icon:before {
           border-color: transparent #484848 transparent transparent !important;
         }
 
-        span:after {
+        .mlb_live__scoreboard__inning_pager__link__icon:after {
           border-color: transparent transparent transparent #484848 !important;
         }
 
