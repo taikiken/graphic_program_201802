@@ -13,9 +13,10 @@
 // async/reducers
 import ReducerTypes from '../ReducerTypes';
 
-// async
-// import Creator from '../../Creator';
-
+/**
+ * schedule: default の state
+ * @type {{type: string, schedule: null, types: null, teams: null, error: null, date: null}}
+ */
 const initial = {
   type: ReducerTypes.INITIAL,
   schedule: null,
@@ -25,26 +26,17 @@ const initial = {
   date: null,
 };
 
-// let result = null;
-
+/**
+ * schedule: redux - reducers
+ * @param {*} requestState state
+ * @param {*} action schedule: redux - actions
+ * @returns {*} 新しい state を返します
+ */
 const schedule = (requestState = initial, action) => {
   const state = Object.assign({}, requestState);
   console.log('reducers.schedule', state, action);
   // switch-case
   switch (action.type) {
-    // case ReducerTypes.CALENDAR_COMPLETE: {
-    //   // {DaeCalendar}
-    //   const data = action.data;
-    //   const today = action.today;
-    //   const game = data.events.game(today);
-    //   if (!game) {
-    //     // TODO: no events state 返却 - 試合はありません
-    //     return state;
-    //   }
-    //   // Creator.schedule();
-    //   state.type = ReducerTypes.SCHEDULE_START;
-    //   return state;
-    // }
     case ReducerTypes.SCHEDULE_COMPLETE: {
       state.type = action.type;
       state.schedule = action.schedule;

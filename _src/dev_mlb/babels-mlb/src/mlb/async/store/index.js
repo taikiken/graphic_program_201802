@@ -18,17 +18,15 @@ import reducers from '../reducers';
 // middleware
 import middleware from './middleware';
 
-console.log('reducers', reducers);
-
 /**
- * redux - createStore します
+ * schedules: redux - createStore します
  * - reducers.schedules
  *   - calendar
  *   - schedule
  * - middleware
  *  - thunk
  *  - logger
- * @type {Store<S>}
+ * @type {Store<any>}
  */
 const schedules = createStore(
   reducers.schedules,
@@ -38,6 +36,15 @@ const schedules = createStore(
   ),
 );
 
+/**
+ * games: redux - createStore します
+ * - reducers.games
+ *   - game
+ * - middleware
+ *  - thunk
+ *  - logger
+ * @type {Store<any>}
+ */
 const games = createStore(
   reducers.games,
   applyMiddleware(
@@ -46,6 +53,10 @@ const games = createStore(
   ),
 );
 
+/**
+ * schedules / games まとめます
+ * @type {{schedules: Store.<any>, games: Store.<any>}}
+ */
 const store = {
   schedules,
   games,

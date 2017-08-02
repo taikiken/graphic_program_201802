@@ -36,6 +36,7 @@ import Creator from '../async/Creator';
 import Day from '../util/Day';
 
 // ----------------------------
+// eslint-disable-next-line max-len
 Creator.calendar = (year, today) => (store.schedules.dispatch(actions.schedules.calendar(year, today)));
 Creator.schedule = date => (store.schedules.dispatch(actions.schedules.schedule(date)));
 
@@ -43,11 +44,18 @@ Creator.schedule = date => (store.schedules.dispatch(actions.schedules.schedule(
 Creator.games = (year, id) => (store.games.dispatch(actions.games.game(year, id)));
 // ----------------------------
 
-console.log('connects games', games);
+// console.log('connects games', games);
 
+/**
+ * ゲーム情報を表示します
+ */
 class Game {
+  /**
+   * 上部対戦成績を表示します
+   * @param {Element} element 親コンテナ
+   */
   static overview(element) {
-    console.log('Game.overview', element);
+    // console.log('Game.overview', element);
     ReactDOM.render(
       <Provider store={store.games}>
         <games.ConOverview />
@@ -55,8 +63,12 @@ class Game {
       element,
     );
   }
+  /**
+   * スコアボードを表示します
+   * @param {Element} element 親コンテナ
+   */
   static score(element) {
-    console.log('Game.score', element);
+    // console.log('Game.score', element);
     ReactDOM.render(
       <Provider store={store.games}>
         <games.ConScore />
@@ -64,8 +76,12 @@ class Game {
       element,
     );
   }
+  /**
+   * ゲーム情報を表示します
+   * @param {Element} element 親コンテナ
+   */
   static info(element) {
-    console.log('Game.info', element);
+    // console.log('Game.info', element);
     ReactDOM.render(
       <Provider store={store.games}>
         <games.ConInfo />
@@ -75,7 +91,26 @@ class Game {
   }
 }
 
+/**
+ * redux.Provider - component を結合し view を作成します
+ */
 export default class View {
+  /**
+   * `/stats/mlb` or `/stats/mlb/YYYYMMDD` を表示します
+   *
+   * コンテナを表示します
+   * - {@link ConSchedule}
+   *   - {@link ComScheduleMam}
+   * - {@link ConCalendar}
+   *    - {@link ComCalendarMam}
+   *
+   * redux dispatch bind した {@link Creator}.calendar | schedule を実行します,
+   * 関数実態は `async/actions/schedules` を参照します
+   * {@link calendar}, {@link schedule}
+   * @param {Element} element 出力コンテナ
+   * @param {?number} year YYYY 年
+   * @param {?Date} today 日付 Date instance
+   */
   static index(element, year = null, today = null) {
     // console.log('ConSchedule', ConSchedule);
     ReactDOM.render(
@@ -94,10 +129,21 @@ export default class View {
     // ajax error が出ても表示に問題は無いようなのでこのままにする
     Creator.calendar(year, today);
     Creator.schedule(Day.date(today));
-    console.log('ViewIndex.make', year, today);
+    console.log('ViewIndex.index', year, today);
   }
   // ---------------------------------------
   // game
+  /**
+   * `/stats/mlb/game/YYYY/GAME_ID` を表示します
+   * - {@link Game}.overvie|score|info で表示を行います
+   * - redux dispatch bind した {@link Creator}.games を実行します,
+   * 関数実態は `async/games/games` を参照します
+   * @param {number|string} year 年 YYYY形式
+   * @param {number|string} id game ID
+   * @param {Element} overview 上部対戦成績表示コンテナ
+   * @param {Element} score 中部スコアボード表示コンテナ
+   * @param {Element} info ゲーム情報表示コンテナ
+   */
   static game(year, id, { overview, score, info }) {
     console.log('View.game', year, id, overview, score, info);
     Game.overview(overview);

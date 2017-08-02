@@ -14,7 +14,7 @@
 import ReducerTypes from '../ReducerTypes';
 
 /**
- * initial state
+ * game: initial state
  * @type {{type: string, year: null, id: null, info: null, member: null, team: null, innings: null, error: null}}
  */
 const initial = {

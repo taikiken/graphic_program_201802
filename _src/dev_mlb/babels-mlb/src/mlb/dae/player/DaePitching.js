@@ -13,6 +13,10 @@
 // dae
 import Normalize from '../../util/Normalize';
 
+/**
+ * [native code] - parseInt
+ * @type {function}
+ */
 const parseInt = self.parseInt;
 
 /**

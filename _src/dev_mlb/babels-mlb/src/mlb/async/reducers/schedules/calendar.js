@@ -13,7 +13,7 @@
 import ReducerTypes from '../ReducerTypes';
 
 /**
- * initial state
+ * calendar: initial state
  * @type {{type: string, data: ?object, error: ?Error, year: ?number, today: ?Date}}
  */
 const initial = {

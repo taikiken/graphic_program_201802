@@ -31,6 +31,7 @@ import ComScoreRefresh from './score/ComScoreRefresh';
 // ----------------------------------------
 /**
  * スコアボード・下 切替ボタン NEXT
+ * - total inning 数が start + 9 以下の時は表示しません
  * @param {number} start 表示開始回
  * @param {number} innings ゲーム経過回数
  * @param {function} action callback
@@ -39,8 +40,8 @@ import ComScoreRefresh from './score/ComScoreRefresh';
  */
 const ComSwitchNext = ({ start, innings, action }) => {
   console.log('ComSwitchNext', start, innings);
-  // TODO: remove test code
-  if (start + 9 >= innings) {
+  // 表示切替します
+  if (start + 9 > innings) {
     return (
       <li id="innings-prev" className="mlb_live__scoreboard__inning_pager__item">
         <p className="mlb_live__scoreboard__inning_pager__link disabled">
@@ -79,6 +80,7 @@ ComSwitchNext.propTypes = {
 /**
  * スコアボード・下 切替ボタン PREV
  * - active / inactive: a <-> p tag を切替えます
+ * - start 1 の時は表示しません
  * @param {number} start 表示開始回
  * @param {function} action callback
  * @returns {XML} li.mlb_live__scoreboard__inning_pager__item
@@ -131,11 +133,11 @@ ComSwitchPrev.propTypes = {
  * @constructor
  */
 const ComScoreSwitch = ({ start, innings, prev, next }) => {
-  console.log('ComScoreSwitch', start, innings);
+  // console.log('ComScoreSwitch', start, innings);
   // TODO: remove test code
-  // if (innings <= 9) {
-  //   return null;
-  // }
+  if (innings <= 9) {
+    return null;
+  }
   // render
   return (
     <nav className="mlb_live__scoreboard__inning_pager">
@@ -178,8 +180,8 @@ ComScoreSwitch.propTypes = {
  * @returns {XML} thead > tr > th.mlb_live__scoreboard__th--inning
  * @constructor
  */
-const ComScoreInningsHead = ({ start, boards }) => {
-  console.log('ComScoreInningsHead', start, boards);
+const ComScoreInningsHead = ({ start, boards, innings }) => {
+  // console.log('ComScoreInningsHead', start, boards);
   const className = 'mlb_live__scoreboard__th--inning';
   return (
     <thead>
@@ -187,6 +189,13 @@ const ComScoreInningsHead = ({ start, boards }) => {
         {
           boards.map((value, index) => {
             const inning = start + index;
+            if (inning > innings) {
+              return (
+                <th key={`inning-${inning}`} className={`${className} ${className}-${inning}`}>
+                  &nbsp;
+                </th>
+              );
+            }
             // render
             return (
               <th key={`inning-${inning}`} className={`${className} ${className}-${inning}`}>
@@ -207,6 +216,7 @@ const ComScoreInningsHead = ({ start, boards }) => {
 ComScoreInningsHead.propTypes = {
   start: PropTypes.number.isRequired,
   boards: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  innings: PropTypes.number.isRequired,
 };
 
 // スコアボード・中 イニング - visitor
@@ -225,6 +235,11 @@ const ComScoreVisitor = ({ visitor, start, boards, innings }) => (
     {
       boards.map((value, index) => {
         const inning = start + index;
+        if (inning > innings) {
+          return (
+            <td key={`visitor-${inning}`} className={`visitor-${inning}`}>&nbsp;</td>
+          );
+        }
         const scores = visitor.score[inning];
         let alt = '0';
         if (inning > innings) {
@@ -294,6 +309,11 @@ const ComScoreHome = ({ home, visitor, start, boards, innings }) => (
     {
       boards.map((value, index) => {
         const inning = start + index;
+        if (inning > innings) {
+          return (
+            <td key={`home-${inning}`} className={`home-${inning}`}>&nbsp;</td>
+          );
+        }
         const score = home.score[inning];
         const visitorScore = visitor.score[inning];
         let alt = '0';
@@ -344,6 +364,7 @@ const ComScoreInnings = ({ info, start, innings }) => {
         <ComScoreInningsHead
           start={start}
           boards={boards}
+          innings={innings}
         />
         <tbody>
           <ComScoreVisitor
@@ -351,7 +372,7 @@ const ComScoreInnings = ({ info, start, innings }) => {
             start={start}
             boards={boards}
             status={info.status}
-            innings={visitor.innings}
+            innings={innings}
           />
           <ComScoreHome
             home={home}

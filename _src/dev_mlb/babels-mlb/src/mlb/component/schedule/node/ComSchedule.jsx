@@ -165,7 +165,7 @@ export default class ComSchedule extends Component {
   // ----------------------------------------
   /**
    * propTypes
-   * @type {{teams: DaeTeamTypes, types: DaeGameTypes, schedule: DaeSchedule}}
+   * @type {{teams: DaeTeamTypes, types: DaeGameTypes, schedule: DaeSchedule, date: {year: number, month: number, day: number}}}
    */
   static propTypes = {
     teams: PropTypes.instanceOf(DaeTeamTypes),
@@ -282,6 +282,10 @@ export default class ComSchedule extends Component {
   }
   /**
    * section.mlb__schedule を出力します
+   * - section.mlb__schedule
+   *   - {@link ComOptionTeams}
+   *   - {@link ComOptionTypes}
+   *   - {@link ComScheduleList}
    * @returns {?XML} section.mlb__schedule
    */
   render() {
@@ -289,7 +293,7 @@ export default class ComSchedule extends Component {
     if (!teams || !types || !schedule) {
       return null;
     }
-    console.log('ComSchedule.render ---------------- ', types);
+    // console.log('ComSchedule.render ---------------- ', types);
     // render
     return (
       <section className="mlb__schedule">

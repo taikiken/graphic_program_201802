@@ -13,13 +13,28 @@
 // dae
 import Normalize from '../../util/Normalize';
 
+/**
+ * イベント一覧・攻撃打順を表示するために 1 ~ 9 の循環ナンバリングを行います
+ */
 class Sequence {
+  /**
+   * indexes property を初期化します
+   */
   constructor() {
+    /**
+     * 循環ナンバリング - home / visitor 用
+     * @type {{home: number, visitor: number}}
+     */
     this.indexes = {
       home: 0,
       visitor: 0,
     };
   }
+  /**
+   * カウントアップします,
+   * 9 を超えると 1 に戻ります
+   * @param {string} type home|visitor
+   */
   up(type) {
     let index = this.indexes[type];
     index += 1;
@@ -28,6 +43,11 @@ class Sequence {
     }
     this.indexes[type] = index;
   }
+  /**
+   * index を取得します
+   * @param {string} type home|visitor
+   * @returns {number}  1 ~ 9 の循環ナンバリング
+   */
   index(type) {
     return this.indexes[type];
   }
@@ -47,6 +67,7 @@ export class DaeEvent {
   constructor(inning, info, sequence, type) {
     const origin = Normalize.obj(info);
     const batter = Normalize.str(origin.batter);
+    // 打者が存在する時のみカウントアップします
     if (batter) {
       sequence.up(type);
     }
@@ -86,8 +107,20 @@ export class DaeEvent {
      * @type {number}
      */
     this.inning = inning;
+    /**
+     * 1 ~ 9 ナンバー
+     * @type {number}
+     */
     this.index = index;
+    /**
+     * home|visitor
+     * @type {string}
+     */
     this.type = type;
+    /**
+     * ユニークでは無い ID
+     * @type {string}
+     */
     this.id = `${type}-${inning}-${index}`;
   }
 }
@@ -121,7 +154,16 @@ class DaeEvents {
      * @type {number}
      */
     this.inning = inning;
+    /**
+     * イベントを逆順 3 out -> 0 にします
+     * @type {Array.<DaeEvent>}
+     */
     this.opposite = list.slice(0).reverse();
+    /**
+     * home|visitor
+     * @type {string}
+     */
+    this.type = type;
   }
 }
 
@@ -158,6 +200,10 @@ export class DaeInningTeam {
      * @type {number}
      */
     this.inning = inning;
+    /**
+     * home|visitor
+     * @type {string}
+     */
     this.type = type;
   }
 }
@@ -235,6 +281,7 @@ export default class DaeInnings {
       home[num] = data.home;
       visitor[num] = data.visitor;
       information[num] = data;
+      // 回毎に home / visitor を保持します
       board[num] = {
         home: data.home,
         visitor: data.visitor,
@@ -269,17 +316,15 @@ export default class DaeInnings {
      * @type {object}
      */
     this.board = board;
-    // /**
-    //  * 回毎の情報配列
-    //  * @type {Array.<DaeInning>}
-    //  */
-    // this.list = list;
-    // /**
-    //  * 回毎の情報配列 `list` を逆順にしました
-    //  * @type {Array.<DaeInning>}
-    //  */
-    // this.opposite = list.slice(0).reverse();
+    /**
+     * 回毎の情報配列
+     * @type {Array.<DaeInning>}
+     */
     this.list = list;
+    /**
+     * 9回から1回へ逆順リストします
+     * @type {Array.<DaeInning>}
+     */
     this.opposite = list.slice(0).reverse();
   }
 }

@@ -21,8 +21,23 @@ import DaeGameInfo from '../../../dae/games/DaeGameInfo';
 // util
 import Print from '../../../util/Print';
 
+
+// ----------------------------------------
+// イニング速報・イベント一覧・攻撃リスト
+// ----------------------------------------
+/**
+ * イニング速報・イベント一覧・攻撃リスト
+ * - 相手側スコアを `info` から取得します
+ * `info.[home|visitor].board.scores.score[inning].total`
+ * - visitor 攻撃時の home スコアは 1 回前を表示します
+ * @param {DaeEvent} event イベント情報
+ * @param {string} type home|visitor
+ * @param {DaeGameInfo} info ゲーム情報
+ * @param {number} inning 表示該当回
+ * @returns {XML} tbody > tr
+ * @constructor
+ */
 const ComInningsBody = ({ event, type, info, inning }) => {
-  // TODO score, 対戦相手のスコア表示方法を考える
   let homeScore = '';
   let visitorScore = '';
   if (type === 'home') {
@@ -60,6 +75,10 @@ const ComInningsBody = ({ event, type, info, inning }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{event: DaeEvent, type: string, info: DaeGameInfo, inning: number}}
+ */
 ComInningsBody.propTypes = {
   event: PropTypes.instanceOf(DaeEvent).isRequired,
   type: PropTypes.string.isRequired,
@@ -67,6 +86,17 @@ ComInningsBody.propTypes = {
   inning: PropTypes.number.isRequired,
 };
 
+// ----------------------------------------
+// イニング速報・イベント一覧・投手名
+// ----------------------------------------
+/**
+ * イニング速報・イベント一覧・投手名 - thead
+ * @param {string} pitcher 投手名
+ * @param {string} id event id
+ * @param {DaeEvent} event イベント情報
+ * @returns {XML} thead
+ * @constructor
+ */
 const ComInningsHead = ({ pitcher, id, event }) => (
   <thead className={id} data-result={event.result}>
     <tr>
@@ -82,12 +112,28 @@ const ComInningsHead = ({ pitcher, id, event }) => (
   </thead>
 );
 
+/**
+ * propTypes
+ * @type {{pitcher: string, id: string, event: DaeEvent}}
+ */
 ComInningsHead.propTypes = {
   pitcher: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   event: PropTypes.instanceOf(DaeEvent).isRequired,
 };
 
+// ----------------------------------------
+// イニング速報・イベント一覧 thead / tbody 親
+// ----------------------------------------
+/**
+ * {@link ComInningsHead} 作成します
+ * 投手名を `thead` 作成し攻撃タイトルにします
+ * @param {number} inning 表示該当回
+ * @param {DaeEvent} event イベント情報
+ * @param {string} pitcher 投手名
+ * @param {number} count ユニークキー生成に使用する index
+ * @returns {XML} {@link ComInningsHead}
+ */
 const inningsHead = (inning, event, pitcher, count) => (
   <ComInningsHead
     key={`head-${inning}-${event.id}-${count}`}
@@ -97,6 +143,16 @@ const inningsHead = (inning, event, pitcher, count) => (
   />
 );
 
+/**
+ * {@link ComInningsBody} を作成します
+ * `tbody` 攻撃一覧を出力します
+ * @param {number} inning 表示該当回
+ * @param {DaeEvent} event イベント情報
+ * @param {string} type home|visitor
+ * @param {DaeGameInfo} info ゲーム情報 - 相手側のスコア表示に使用します
+ * @param {number} count ユニークキー生成に使用する index
+ * @returns {XML} {@link ComInningsBody}
+ */
 const inningsBody = (inning, event, type, info, count) => (
   <ComInningsBody
     key={`body-${inning}-${event.id}-${count}`}
@@ -107,8 +163,19 @@ const inningsBody = (inning, event, type, info, count) => (
   />
 );
 
+/**
+ * 回別・チーム別・投手毎にタイトル
+ * - 9回から1回
+ * - 3 out から 0 out
+ * @param {string} type home|visitor
+ * @param {DaeInningTeam} team 各チームのイベント情報
+ * @param {number} inning 表示該当回
+ * @param {DaeGameInfo} info ゲーム情報
+ * @returns {XML} div.mlb_live__inning__container > table
+ * @constructor
+ */
 const ComInningsEvent = ({ type, team, inning, info }) => {
-  // console.log('ComInningsEvent', type, inning, info.innings, info.home.win, info.home.board.scores.score[inning]);
+  // 最終回で home team の攻撃が無い時は出力しません
   if (
     type === 'home' &&
     inning === info.innings &&
@@ -117,6 +184,8 @@ const ComInningsEvent = ({ type, team, inning, info }) => {
   ) {
     return null;
   }
+  // ---------------------------------------------
+  // 出力あり
   let pitcher = '';
   return (
     <div className={`mlb_live__inning__container mlb_live__inning--${type}`}>
@@ -126,25 +195,24 @@ const ComInningsEvent = ({ type, team, inning, info }) => {
       <table className="mlb_live__inning">
         {
           team.events.opposite.map((event, index) => {
+            // unique key 生成に使用します
             const count = index + 1;
+            // @type {Array.<?XML>} 出力 component をリストします
             const elements = [];
+            // 投手名が前回と違ったら `thead` を出力します
             if (event.pitcher && event.pitcher !== pitcher) {
               pitcher = event.pitcher;
-              // return (
-              //   <ComInningsHead
-              //     key={`head-${inning}-${event.id}`}
-              //     pitcher={pitcher}
-              //     id={event.id}
-              //   />
-              // );
               elements.push(inningsHead(inning, event, pitcher, count));
             }
+            // 打者情報が無い場合あり - skip します
             if (event.batter) {
               elements.push(inningsBody(inning, event, type, info, count));
             }
+            // elements が空の時は `null` 追加します - 何か出力しないとなので
             if (!elements.length) {
               elements.push(null);
             }
+            // 出力ループを実行します
             return elements.map(element => (element));
           })
         }
@@ -153,6 +221,10 @@ const ComInningsEvent = ({ type, team, inning, info }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{type: string, team: DaeInningTeam, inning: number, info: DaeGameInfo}}
+ */
 ComInningsEvent.propTypes = {
   type: PropTypes.string.isRequired,
   team: PropTypes.instanceOf(DaeInningTeam).isRequired,
@@ -160,6 +232,19 @@ ComInningsEvent.propTypes = {
   info: PropTypes.instanceOf(DaeGameInfo).isRequired,
 };
 
+// ----------------------------------------
+// イニング速報・イベント一覧
+// ----------------------------------------
+/**
+ * イニング速報・イベント一覧
+ * - ComInningsEvents
+ *   - {@link ComInningsEvent}
+ * @param {{home: DaeInningTeam, visitor: DaeInningTeam}} events home / visitor イベント情報
+ * @param {number} inning 表示該当回
+ * @param {DaeGameInfo} info ゲーム情報
+ * @returns {XML} div > {@link ComInningsEvent}
+ * @constructor
+ */
 const ComInningsEvents = ({ events, inning, info }) => {
   // home -> visitor
   // 3out -> 0out
@@ -183,6 +268,10 @@ const ComInningsEvents = ({ events, inning, info }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{events: {home: DaeInningTeam, visitor: DaeInningTeam}, inning: number, info: DaeGameInfo}}
+ */
 ComInningsEvents.propTypes = {
   events: PropTypes.shape({
     home: PropTypes.instanceOf(DaeInningTeam).isRequired,
@@ -195,6 +284,14 @@ ComInningsEvents.propTypes = {
 // ----------------------------------------
 // イニング速報
 // ----------------------------------------
+/**
+ * インイング速報・親コンテナ
+ * - {@link ComInningsEvents}
+ * @param {DaeInnings} innings innings.json
+ * @param {DaeGameInfo} info game_info.json
+ * @returns {XML} div.mlb_live__inning__section > {@link ComInningsEvents}
+ * @constructor
+ */
 const ComInning = ({ innings, info }) => {
   const events = innings.opposite;
   console.log('ComInning events', innings, events);
@@ -215,6 +312,10 @@ const ComInning = ({ innings, info }) => {
   );
 };
 
+/**
+ * propTypes
+ * @type {{innings: DaeInnings, info: DaeGameInfo}}
+ */
 ComInning.propTypes = {
   innings: PropTypes.instanceOf(DaeInnings).isRequired,
   info: PropTypes.instanceOf(DaeGameInfo).isRequired,

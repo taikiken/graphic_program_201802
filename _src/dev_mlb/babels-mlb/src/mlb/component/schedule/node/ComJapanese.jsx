@@ -33,11 +33,6 @@ import Print from '../../../util/Print';
 // define
 import Style from '../../../define/Style';
 
-
-// ----------------------------------------
-// section.mlb__today_jp
-// ----------------------------------------
-
 // ----------------------------------------
 // ComBatting
 // ----------------------------------------
@@ -117,7 +112,7 @@ const ComPlayer = ({ player }) => {
   const ComType = batting ? ComBatting : ComPitching;
   const comStats = batting ? player.batting : player.pitching;
   return (
-    <div className="mlb_jp_stats">
+    <div className="js-mlb_jp_stats">
       <div className="mlb__today_jp__player">
         <h3 className="mlb__today_jp__player__name">{Print.str(player.player)}</h3>
         <dl className="mlb__today_jp__player__profile">
@@ -169,7 +164,7 @@ const ComGame = ({ game, date }) => {
   const statusClass = game.className;
   const className = 'mlb__game__overview__team';
   return (
-    <div className="com-player-container">
+    <div className="mlb__today_jp__container">
       {
         game.players.list.map(player => (
           <ComPlayer
@@ -212,9 +207,14 @@ const ComGame = ({ game, date }) => {
   );
 };
 
+
 /**
  * propTypes
- * @type {{game: DaeGame}}
+ * @type {{game: DaeGame, date: {
+ *  year: number,
+ *  month: number,
+ *  day: number,
+ * }}}
  */
 ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,

@@ -65,8 +65,13 @@ export default class ComInfo extends Component {
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
+  /**
+   * ゲーム情報を表示します
+   * @param {*} props React.props
+   */
   constructor(props) {
     super(props);
+    // ---
     /**
      * - game
      * - member
@@ -81,7 +86,15 @@ export default class ComInfo extends Component {
      * @type {function}
      */
     this.onChange = this.onChange.bind(this);
+    /**
+     * bind onMember - 出場成績タブ event handler
+     * @type {function}
+     */
     this.onMember = this.onMember.bind(this);
+    /**
+     * 出場成績タブ current id
+     * @type {string}
+     */
     this.member = 'batter';
   }
   // ----------------------------------------
@@ -89,16 +102,30 @@ export default class ComInfo extends Component {
   // ----------------------------------------
   /**
    * tab 切替 event handler
+   * - 試合情報
+   * - 出場成績
+   * - イニング速報
    * @param {string} tab tab 名称
    */
   onChange(tab) {
-    console.log('ComInfo.onChange', tab);
+    // console.log('ComInfo.onChange', tab);
     this.setState({ tab });
   }
+  /**
+   * 出場成績タブをキープするために切替コールバックから「タブ」id を取得し `this.member` へ保存します
+   * - 打者成績
+   * - 投手成績
+   * @param {string} tab batter|pitcher
+   */
   onMember(tab) {
-    console.log('ComInfo.onMember', tab);
+    // console.log('ComInfo.onMember', tab);
     this.member = tab;
   }
+  /**
+   * onChange tab 切替で出力するコンテナを切替ます
+   * @param {string} tab tab ID - game / member / inning
+   * @returns {?XML} {@link ComGame} / {@link ComMember}} / {@link ComInning}
+   */
   choose(tab) {
     const { info, member, team, innings } = this.props;
     console.log('ComInfo.choose tab', tab, info, member, team);
