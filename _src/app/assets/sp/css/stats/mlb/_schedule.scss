@@ -17,6 +17,7 @@
   width: 100%;
   padding-top: (20/2)+px;
   padding-bottom: (20/2)+px;
+  margin-top: (40/2)+px;
   background-color: $bg-color_gray;
   border-bottom: (6/2)+px solid $border-primary-color;
   letter-spacing: ls(inline-block);
@@ -237,6 +238,7 @@
 
   //.mlb__today_jp__btn
   &__btn {
+    margin-top: (60/2)+px;
     margin-right: perCalc(20, 750);
     margin-left: perCalc(20, 750);
 
