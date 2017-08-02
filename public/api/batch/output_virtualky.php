@@ -20,7 +20,8 @@ function put_json($file,$data){
 
 $mvtype=array("highlight","digest","slowmotion","herointerview");
 
-$json="https://dev.widget.sportsbull.jp/json/v1/2017/hsb/summer/seasonschedule.json";
+$json="https://widget.sportsbull.jp/json/v1/2017/hsb/summer/seasonschedule.json";
+if(!preg_match("/cms/",$servername))$json=str_replace("widget","dev.widget",$json);
 $schedule=json_decode(get_contents($json),TRUE);
 
 foreach($schedule as $k=>$v){
