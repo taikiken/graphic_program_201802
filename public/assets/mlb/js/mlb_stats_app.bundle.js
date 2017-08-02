@@ -4778,7 +4778,7 @@ module.exports = $export;
 "use strict";
 
 
-module.exports = __webpack_require__(66);
+module.exports = __webpack_require__(67);
 
 
 /***/ }),
@@ -5579,7 +5579,7 @@ var _propTypes = __webpack_require__(4);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _invariant = __webpack_require__(70);
+var _invariant = __webpack_require__(71);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -5684,7 +5684,7 @@ module.exports = function(it, key){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
-var toInteger = __webpack_require__(59)
+var toInteger = __webpack_require__(60)
   , min       = Math.min;
 module.exports = function(it){
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
@@ -5708,7 +5708,7 @@ module.exports = function(it){
 
 
 
-var _prodInvariant = __webpack_require__(67);
+var _prodInvariant = __webpack_require__(68);
 
 var ReactCurrentOwner = __webpack_require__(32);
 
@@ -6460,7 +6460,7 @@ var _prodInvariant = __webpack_require__(7),
 var CallbackQueue = __webpack_require__(241);
 var PooledClass = __webpack_require__(53);
 var ReactFeatureFlags = __webpack_require__(242);
-var ReactReconciler = __webpack_require__(68);
+var ReactReconciler = __webpack_require__(69);
 var Transaction = __webpack_require__(110);
 
 var invariant = __webpack_require__(5);
@@ -7014,20 +7014,20 @@ module.exports = function(fn, that, length){
 "use strict";
 
 if(__webpack_require__(24)){
-  var LIBRARY             = __webpack_require__(56)
+  var LIBRARY             = __webpack_require__(57)
     , global              = __webpack_require__(8)
     , fails               = __webpack_require__(16)
     , $export             = __webpack_require__(2)
     , $typed              = __webpack_require__(130)
     , $buffer             = __webpack_require__(208)
     , ctx                 = __webpack_require__(37)
-    , anInstance          = __webpack_require__(58)
+    , anInstance          = __webpack_require__(59)
     , propertyDesc        = __webpack_require__(42)
     , hide                = __webpack_require__(27)
-    , redefineAll         = __webpack_require__(57)
-    , toInteger           = __webpack_require__(59)
+    , redefineAll         = __webpack_require__(58)
+    , toInteger           = __webpack_require__(60)
     , toLength            = __webpack_require__(20)
-    , toIndex             = __webpack_require__(61)
+    , toIndex             = __webpack_require__(62)
     , toPrimitive         = __webpack_require__(80)
     , has                 = __webpack_require__(19)
     , same                = __webpack_require__(210)
@@ -7045,7 +7045,7 @@ if(__webpack_require__(24)){
     , createArrayIncludes = __webpack_require__(132)
     , speciesConstructor  = __webpack_require__(137)
     , ArrayIterators      = __webpack_require__(141)
-    , Iterators           = __webpack_require__(63)
+    , Iterators           = __webpack_require__(64)
     , $iterDetect         = __webpack_require__(101)
     , setSpecies          = __webpack_require__(100)
     , arrayFill           = __webpack_require__(136)
@@ -8709,874 +8709,6 @@ module.exports = PooledClass;
 "use strict";
 
 
-exports.__esModule = true;
-exports.endOfRange = endOfRange;
-exports.eventSegments = eventSegments;
-exports.segStyle = segStyle;
-exports.eventLevels = eventLevels;
-exports.inRange = inRange;
-exports.segsOverlap = segsOverlap;
-exports.sortEvents = sortEvents;
-
-var _dates = __webpack_require__(15);
-
-var _dates2 = _interopRequireDefault(_dates);
-
-var _accessors = __webpack_require__(77);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function endOfRange(dateRange) {
-  var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'day';
-
-  return {
-    first: dateRange[0],
-    last: _dates2.default.add(dateRange[dateRange.length - 1], 1, unit)
-  };
-}
-
-function eventSegments(event, first, last, _ref, range) {
-  var startAccessor = _ref.startAccessor,
-      endAccessor = _ref.endAccessor;
-
-  var slots = _dates2.default.diff(first, last, 'day');
-  var start = _dates2.default.max(_dates2.default.startOf((0, _accessors.accessor)(event, startAccessor), 'day'), first);
-  var end = _dates2.default.min(_dates2.default.ceil((0, _accessors.accessor)(event, endAccessor), 'day'), last);
-
-  var padding = range.findIndex(function (x) {
-    return _dates2.default.eq(x, start, 'day');
-  });
-  var span = _dates2.default.diff(start, end, 'day');
-
-  span = Math.min(span, slots);
-  span = Math.max(span, 1);
-
-  return {
-    event: event,
-    span: span,
-    left: padding + 1,
-    right: Math.max(padding + span, 1)
-  };
-}
-
-function segStyle(span, slots) {
-  var per = span / slots * 100 + '%';
-  return { flexBasis: per, maxWidth: per }; // IE10/11 need max-width. flex-basis doesn't respect box-sizing
-}
-
-function eventLevels(rowSegments) {
-  var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Infinity;
-
-  var i = void 0,
-      j = void 0,
-      seg = void 0,
-      levels = [],
-      extra = [];
-
-  for (i = 0; i < rowSegments.length; i++) {
-    seg = rowSegments[i];
-
-    for (j = 0; j < levels.length; j++) {
-      if (!segsOverlap(seg, levels[j])) break;
-    }if (j >= limit) {
-      extra.push(seg);
-    } else {
-      (levels[j] || (levels[j] = [])).push(seg);
-    }
-  }
-
-  for (i = 0; i < levels.length; i++) {
-    levels[i].sort(function (a, b) {
-      return a.left - b.left;
-    }); //eslint-disable-line
-  }
-
-  return { levels: levels, extra: extra };
-}
-
-function inRange(e, start, end, _ref2) {
-  var startAccessor = _ref2.startAccessor,
-      endAccessor = _ref2.endAccessor;
-
-  var eStart = _dates2.default.startOf((0, _accessors.accessor)(e, startAccessor), 'day');
-  var eEnd = (0, _accessors.accessor)(e, endAccessor);
-
-  var startsBeforeEnd = _dates2.default.lte(eStart, end, 'day');
-  var endsAfterStart = _dates2.default.gte(eEnd, start, 'day');
-
-  return startsBeforeEnd && endsAfterStart;
-}
-
-function segsOverlap(seg, otherSegs) {
-  return otherSegs.some(function (otherSeg) {
-    return otherSeg.left <= seg.right && otherSeg.right >= seg.left;
-  });
-}
-
-function sortEvents(evtA, evtB, _ref3) {
-  var startAccessor = _ref3.startAccessor,
-      endAccessor = _ref3.endAccessor,
-      allDayAccessor = _ref3.allDayAccessor;
-
-  var startSort = +_dates2.default.startOf((0, _accessors.accessor)(evtA, startAccessor), 'day') - +_dates2.default.startOf((0, _accessors.accessor)(evtB, startAccessor), 'day');
-
-  var durA = _dates2.default.diff((0, _accessors.accessor)(evtA, startAccessor), _dates2.default.ceil((0, _accessors.accessor)(evtA, endAccessor), 'day'), 'day');
-
-  var durB = _dates2.default.diff((0, _accessors.accessor)(evtB, startAccessor), _dates2.default.ceil((0, _accessors.accessor)(evtB, endAccessor), 'day'), 'day');
-
-  return startSort // sort by start Day first
-  || Math.max(durB, 1) - Math.max(durA, 1) // events spanning multiple days go first
-  || !!(0, _accessors.accessor)(evtB, allDayAccessor) - !!(0, _accessors.accessor)(evtA, allDayAccessor) // then allDay single day events
-  || +(0, _accessors.accessor)(evtA, startAccessor) - +(0, _accessors.accessor)(evtB, startAccessor); // then sort by start time
-}
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsNative = __webpack_require__(755),
-    getValue = __webpack_require__(758);
-
-/**
- * Gets the native function at `key` of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {string} key The key of the method to get.
- * @returns {*} Returns the function if it's native, else `undefined`.
- */
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : undefined;
-}
-
-module.exports = getNative;
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports) {
-
-module.exports = false;
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var redefine = __webpack_require__(43);
-module.exports = function(target, src, safe){
-  for(var key in src)redefine(target, key, src[key], safe);
-  return target;
-};
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports) {
-
-module.exports = function(it, Constructor, name, forbiddenField){
-  if(!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)){
-    throw TypeError(name + ': incorrect invocation!');
-  } return it;
-};
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports) {
-
-// 7.1.4 ToInteger
-var ceil  = Math.ceil
-  , floor = Math.floor;
-module.exports = function(it){
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = function(it){
-  return toString.call(it).slice(8, -1);
-};
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var toInteger = __webpack_require__(59)
-  , max       = Math.max
-  , min       = Math.min;
-module.exports = function(index, length){
-  index = toInteger(index);
-  return index < 0 ? max(index + length, 0) : min(index, length);
-};
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var def = __webpack_require__(17).f
-  , has = __webpack_require__(19)
-  , TAG = __webpack_require__(13)('toStringTag');
-
-module.exports = function(it, tag, stat){
-  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
-};
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports) {
-
-module.exports = {};
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys       = __webpack_require__(209)
-  , enumBugKeys = __webpack_require__(135);
-
-module.exports = Object.keys || function keys(O){
-  return $keys(O, enumBugKeys);
-};
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 22.1.3.31 Array.prototype[@@unscopables]
-var UNSCOPABLES = __webpack_require__(13)('unscopables')
-  , ArrayProto  = Array.prototype;
-if(ArrayProto[UNSCOPABLES] == undefined)__webpack_require__(27)(ArrayProto, UNSCOPABLES, {});
-module.exports = function(key){
-  ArrayProto[UNSCOPABLES][key] = true;
-};
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var _assign = __webpack_require__(10);
-
-var ReactBaseClasses = __webpack_require__(230);
-var ReactChildren = __webpack_require__(550);
-var ReactDOMFactories = __webpack_require__(554);
-var ReactElement = __webpack_require__(52);
-var ReactPropTypes = __webpack_require__(558);
-var ReactVersion = __webpack_require__(560);
-
-var createReactClass = __webpack_require__(561);
-var onlyChild = __webpack_require__(563);
-
-var createElement = ReactElement.createElement;
-var createFactory = ReactElement.createFactory;
-var cloneElement = ReactElement.cloneElement;
-
-if (process.env.NODE_ENV !== 'production') {
-  var lowPriorityWarning = __webpack_require__(149);
-  var canDefineProperty = __webpack_require__(107);
-  var ReactElementValidator = __webpack_require__(234);
-  var didWarnPropTypesDeprecated = false;
-  createElement = ReactElementValidator.createElement;
-  createFactory = ReactElementValidator.createFactory;
-  cloneElement = ReactElementValidator.cloneElement;
-}
-
-var __spread = _assign;
-var createMixin = function (mixin) {
-  return mixin;
-};
-
-if (process.env.NODE_ENV !== 'production') {
-  var warnedForSpread = false;
-  var warnedForCreateMixin = false;
-  __spread = function () {
-    lowPriorityWarning(warnedForSpread, 'React.__spread is deprecated and should not be used. Use ' + 'Object.assign directly or another helper function with similar ' + 'semantics. You may be seeing this warning due to your compiler. ' + 'See https://fb.me/react-spread-deprecation for more details.');
-    warnedForSpread = true;
-    return _assign.apply(null, arguments);
-  };
-
-  createMixin = function (mixin) {
-    lowPriorityWarning(warnedForCreateMixin, 'React.createMixin is deprecated and should not be used. ' + 'In React v16.0, it will be removed. ' + 'You can use this mixin directly instead. ' + 'See https://fb.me/createmixin-was-never-implemented for more info.');
-    warnedForCreateMixin = true;
-    return mixin;
-  };
-}
-
-var React = {
-  // Modern
-
-  Children: {
-    map: ReactChildren.map,
-    forEach: ReactChildren.forEach,
-    count: ReactChildren.count,
-    toArray: ReactChildren.toArray,
-    only: onlyChild
-  },
-
-  Component: ReactBaseClasses.Component,
-  PureComponent: ReactBaseClasses.PureComponent,
-
-  createElement: createElement,
-  cloneElement: cloneElement,
-  isValidElement: ReactElement.isValidElement,
-
-  // Classic
-
-  PropTypes: ReactPropTypes,
-  createClass: createReactClass,
-  createFactory: createFactory,
-  createMixin: createMixin,
-
-  // This looks DOM specific but these are actually isomorphic helpers
-  // since they are just generating DOM strings.
-  DOM: ReactDOMFactories,
-
-  version: ReactVersion,
-
-  // Deprecated hook for JSX spread, don't use this for anything.
-  __spread: __spread
-};
-
-if (process.env.NODE_ENV !== 'production') {
-  var warnedForCreateClass = false;
-  if (canDefineProperty) {
-    Object.defineProperty(React, 'PropTypes', {
-      get: function () {
-        lowPriorityWarning(didWarnPropTypesDeprecated, 'Accessing PropTypes via the main React package is deprecated,' + ' and will be removed in  React v16.0.' + ' Use the latest available v15.* prop-types package from npm instead.' + ' For info on usage, compatibility, migration and more, see ' + 'https://fb.me/prop-types-docs');
-        didWarnPropTypesDeprecated = true;
-        return ReactPropTypes;
-      }
-    });
-
-    Object.defineProperty(React, 'createClass', {
-      get: function () {
-        lowPriorityWarning(warnedForCreateClass, 'Accessing createClass via the main React package is deprecated,' + ' and will be removed in React v16.0.' + " Use a plain JavaScript class instead. If you're not yet " + 'ready to migrate, create-react-class v15.* is available ' + 'on npm as a temporary, drop-in replacement. ' + 'For more info see https://fb.me/react-create-class');
-        warnedForCreateClass = true;
-        return createReactClass;
-      }
-    });
-  }
-
-  // React.DOM factories are deprecated. Wrap these methods so that
-  // invocations of the React.DOM namespace and alert users to switch
-  // to the `react-dom-factories` package.
-  React.DOM = {};
-  var warnedForFactories = false;
-  Object.keys(ReactDOMFactories).forEach(function (factory) {
-    React.DOM[factory] = function () {
-      if (!warnedForFactories) {
-        lowPriorityWarning(false, 'Accessing factories like React.DOM.%s has been deprecated ' + 'and will be removed in v16.0+. Use the ' + 'react-dom-factories package instead. ' + ' Version 1.0 provides a drop-in replacement.' + ' For more info, see https://fb.me/react-dom-factories', factory);
-        warnedForFactories = true;
-      }
-      return ReactDOMFactories[factory].apply(ReactDOMFactories, arguments);
-    };
-  });
-}
-
-module.exports = React;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * 
- */
-
-
-/**
- * WARNING: DO NOT manually require this module.
- * This is a replacement for `invariant(...)` used by the error code system
- * and will _only_ be required by the corresponding babel pass.
- * It always throws.
- */
-
-function reactProdInvariant(code) {
-  var argCount = arguments.length - 1;
-
-  var message = 'Minified React error #' + code + '; visit ' + 'http://facebook.github.io/react/docs/error-decoder.html?invariant=' + code;
-
-  for (var argIdx = 0; argIdx < argCount; argIdx++) {
-    message += '&args[]=' + encodeURIComponent(arguments[argIdx + 1]);
-  }
-
-  message += ' for the full message or use the non-minified dev environment' + ' for full errors and additional helpful warnings.';
-
-  var error = new Error(message);
-  error.name = 'Invariant Violation';
-  error.framesToPop = 1; // we don't care about reactProdInvariant's own frame
-
-  throw error;
-}
-
-module.exports = reactProdInvariant;
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var ReactRef = __webpack_require__(572);
-var ReactInstrumentation = __webpack_require__(26);
-
-var warning = __webpack_require__(6);
-
-/**
- * Helper to call ReactRef.attachRefs with this composite component, split out
- * to avoid allocations in the transaction mount-ready queue.
- */
-function attachRefs() {
-  ReactRef.attachRefs(this, this._currentElement);
-}
-
-var ReactReconciler = {
-  /**
-   * Initializes the component, renders markup, and registers event listeners.
-   *
-   * @param {ReactComponent} internalInstance
-   * @param {ReactReconcileTransaction|ReactServerRenderingTransaction} transaction
-   * @param {?object} the containing host component instance
-   * @param {?object} info about the host container
-   * @return {?string} Rendered markup to be inserted into the DOM.
-   * @final
-   * @internal
-   */
-  mountComponent: function (internalInstance, transaction, hostParent, hostContainerInfo, context, parentDebugID) // 0 in production and for roots
-  {
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onBeforeMountComponent(internalInstance._debugID, internalInstance._currentElement, parentDebugID);
-      }
-    }
-    var markup = internalInstance.mountComponent(transaction, hostParent, hostContainerInfo, context, parentDebugID);
-    if (internalInstance._currentElement && internalInstance._currentElement.ref != null) {
-      transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onMountComponent(internalInstance._debugID);
-      }
-    }
-    return markup;
-  },
-
-  /**
-   * Returns a value that can be passed to
-   * ReactComponentEnvironment.replaceNodeWithMarkup.
-   */
-  getHostNode: function (internalInstance) {
-    return internalInstance.getHostNode();
-  },
-
-  /**
-   * Releases any resources allocated by `mountComponent`.
-   *
-   * @final
-   * @internal
-   */
-  unmountComponent: function (internalInstance, safely) {
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onBeforeUnmountComponent(internalInstance._debugID);
-      }
-    }
-    ReactRef.detachRefs(internalInstance, internalInstance._currentElement);
-    internalInstance.unmountComponent(safely);
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onUnmountComponent(internalInstance._debugID);
-      }
-    }
-  },
-
-  /**
-   * Update a component using a new element.
-   *
-   * @param {ReactComponent} internalInstance
-   * @param {ReactElement} nextElement
-   * @param {ReactReconcileTransaction} transaction
-   * @param {object} context
-   * @internal
-   */
-  receiveComponent: function (internalInstance, nextElement, transaction, context) {
-    var prevElement = internalInstance._currentElement;
-
-    if (nextElement === prevElement && context === internalInstance._context) {
-      // Since elements are immutable after the owner is rendered,
-      // we can do a cheap identity compare here to determine if this is a
-      // superfluous reconcile. It's possible for state to be mutable but such
-      // change should trigger an update of the owner which would recreate
-      // the element. We explicitly check for the existence of an owner since
-      // it's possible for an element created outside a composite to be
-      // deeply mutated and reused.
-
-      // TODO: Bailing out early is just a perf optimization right?
-      // TODO: Removing the return statement should affect correctness?
-      return;
-    }
-
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onBeforeUpdateComponent(internalInstance._debugID, nextElement);
-      }
-    }
-
-    var refsChanged = ReactRef.shouldUpdateRefs(prevElement, nextElement);
-
-    if (refsChanged) {
-      ReactRef.detachRefs(internalInstance, prevElement);
-    }
-
-    internalInstance.receiveComponent(nextElement, transaction, context);
-
-    if (refsChanged && internalInstance._currentElement && internalInstance._currentElement.ref != null) {
-      transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
-    }
-
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onUpdateComponent(internalInstance._debugID);
-      }
-    }
-  },
-
-  /**
-   * Flush any dirty changes in a component.
-   *
-   * @param {ReactComponent} internalInstance
-   * @param {ReactReconcileTransaction} transaction
-   * @internal
-   */
-  performUpdateIfNecessary: function (internalInstance, transaction, updateBatchNumber) {
-    if (internalInstance._updateBatchNumber !== updateBatchNumber) {
-      // The component's enqueued batch number should always be the current
-      // batch or the following one.
-      process.env.NODE_ENV !== 'production' ? warning(internalInstance._updateBatchNumber == null || internalInstance._updateBatchNumber === updateBatchNumber + 1, 'performUpdateIfNecessary: Unexpected batch number (current %s, ' + 'pending %s)', updateBatchNumber, internalInstance._updateBatchNumber) : void 0;
-      return;
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onBeforeUpdateComponent(internalInstance._debugID, internalInstance._currentElement);
-      }
-    }
-    internalInstance.performUpdateIfNecessary(transaction);
-    if (process.env.NODE_ENV !== 'production') {
-      if (internalInstance._debugID !== 0) {
-        ReactInstrumentation.debugTool.onUpdateComponent(internalInstance._debugID);
-      }
-    }
-  }
-};
-
-module.exports = ReactReconciler;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var DOMNamespaces = __webpack_require__(157);
-var setInnerHTML = __webpack_require__(112);
-
-var createMicrosoftUnsafeLocalFunction = __webpack_require__(158);
-var setTextContent = __webpack_require__(246);
-
-var ELEMENT_NODE_TYPE = 1;
-var DOCUMENT_FRAGMENT_NODE_TYPE = 11;
-
-/**
- * In IE (8-11) and Edge, appending nodes with no children is dramatically
- * faster than appending a full subtree, so we essentially queue up the
- * .appendChild calls here and apply them so each node is added to its parent
- * before any children are added.
- *
- * In other browsers, doing so is slower or neutral compared to the other order
- * (in Firefox, twice as slow) so we only do this inversion in IE.
- *
- * See https://github.com/spicyj/innerhtml-vs-createelement-vs-clonenode.
- */
-var enableLazy = typeof document !== 'undefined' && typeof document.documentMode === 'number' || typeof navigator !== 'undefined' && typeof navigator.userAgent === 'string' && /\bEdge\/\d/.test(navigator.userAgent);
-
-function insertTreeChildren(tree) {
-  if (!enableLazy) {
-    return;
-  }
-  var node = tree.node;
-  var children = tree.children;
-  if (children.length) {
-    for (var i = 0; i < children.length; i++) {
-      insertTreeBefore(node, children[i], null);
-    }
-  } else if (tree.html != null) {
-    setInnerHTML(node, tree.html);
-  } else if (tree.text != null) {
-    setTextContent(node, tree.text);
-  }
-}
-
-var insertTreeBefore = createMicrosoftUnsafeLocalFunction(function (parentNode, tree, referenceNode) {
-  // DocumentFragments aren't actually part of the DOM after insertion so
-  // appending children won't update the DOM. We need to ensure the fragment
-  // is properly populated first, breaking out of our lazy approach for just
-  // this level. Also, some <object> plugins (like Flash Player) will read
-  // <param> nodes immediately upon insertion into the DOM, so <object>
-  // must also be populated prior to insertion into the DOM.
-  if (tree.node.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE || tree.node.nodeType === ELEMENT_NODE_TYPE && tree.node.nodeName.toLowerCase() === 'object' && (tree.node.namespaceURI == null || tree.node.namespaceURI === DOMNamespaces.html)) {
-    insertTreeChildren(tree);
-    parentNode.insertBefore(tree.node, referenceNode);
-  } else {
-    parentNode.insertBefore(tree.node, referenceNode);
-    insertTreeChildren(tree);
-  }
-});
-
-function replaceChildWithTree(oldNode, newTree) {
-  oldNode.parentNode.replaceChild(newTree.node, oldNode);
-  insertTreeChildren(newTree);
-}
-
-function queueChild(parentTree, childTree) {
-  if (enableLazy) {
-    parentTree.children.push(childTree);
-  } else {
-    parentTree.node.appendChild(childTree.node);
-  }
-}
-
-function queueHTML(tree, html) {
-  if (enableLazy) {
-    tree.html = html;
-  } else {
-    setInnerHTML(tree.node, html);
-  }
-}
-
-function queueText(tree, text) {
-  if (enableLazy) {
-    tree.text = text;
-  } else {
-    setTextContent(tree.node, text);
-  }
-}
-
-function toString() {
-  return this.node.nodeName;
-}
-
-function DOMLazyTree(node) {
-  return {
-    node: node,
-    children: [],
-    html: null,
-    text: null,
-    toString: toString
-  };
-}
-
-DOMLazyTree.insertTreeBefore = insertTreeBefore;
-DOMLazyTree.replaceChildWithTree = replaceChildWithTree;
-DOMLazyTree.queueChild = queueChild;
-DOMLazyTree.queueHTML = queueHTML;
-DOMLazyTree.queueText = queueText;
-
-module.exports = DOMLazyTree;
-
-/***/ }),
-/* 70 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
-
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var invariant = function(condition, format, a, b, c, d, e, f) {
-  if (process.env.NODE_ENV !== 'production') {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  }
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error(
-        'Minified exception occurred; use the non-minified dev environment ' +
-        'for the full error message and additional helpful warnings.'
-      );
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(
-        format.replace(/%s/g, function() { return args[argIndex++]; })
-      );
-      error.name = 'Invariant Violation';
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-};
-
-module.exports = invariant;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Copyright (c) 2011-2017 inazumatv.com, inc.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2017/07/19 - 18:30
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- */
-
-/**
- * redux - reducer type を定義します
- */
-var ReducerTypes = function ReducerTypes() {
-  _classCallCheck(this, ReducerTypes);
-};
-
-ReducerTypes.INITIAL = 'reducerInitial';
-ReducerTypes.CALENDAR_COMPLETE = 'calendarComplete';
-ReducerTypes.CALENDAR_ERROR = 'calendarError';
-ReducerTypes.SCHEDULE_COMPLETE = 'scheduleComplete';
-ReducerTypes.SCHEDULE_ERROR = 'scheduleComplete';
-ReducerTypes.SCHEDULE_START = 'scheduleStart';
-ReducerTypes.GAMES_COMPLETE = 'gamesComplete';
-ReducerTypes.GAMES_ERROR = 'gamesError';
-exports.default = ReducerTypes;
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Copyright (c) 2011-2017 inazumatv.com, inc.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2017/07/25 - 19:59
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- */
-
-/**
- * Style に関する CONST
- */
-var Style = function Style() {
-  _classCallCheck(this, Style);
-};
-
-Style.calendar = {
-  id: 'js-mlb__schedule__calendar'
-};
-Style.WIN = 'mlb__game__result--win';
-exports.default = Style;
-
-/***/ }),
-/* 73 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -9917,7 +9049,7 @@ exports.DaeInnings = function DaeInnings(info) {
    * 回毎の得点が格納されます。添字が１であれば1回２であれば2回
    * @type {DaeScores}
    */
-  this.sccores = new DaeScores(origin.scores);
+  this.scores = new DaeScores(origin.scores);
   /**
    * team name - japanese
    * @type {string}
@@ -10101,12 +9233,12 @@ function DaeGameInfo(info) {
     board: board.home,
     starting: starting.home,
     record: record.home,
-    total: board.home.sccores.total,
-    win: board.home.sccores.total > board.visitor.sccores.total,
+    total: board.home.scores.total,
+    win: board.home.scores.total > board.visitor.scores.total,
     hits: board.home.hits,
     errors: board.home.errors,
-    innings: board.home.sccores.innings,
-    scores: board.home.sccores,
+    innings: board.home.scores.innings,
+    scores: board.home.scores,
     jp: board.home.jp,
     initials: board.home.initials,
     pitcher: starting.home
@@ -10135,12 +9267,12 @@ function DaeGameInfo(info) {
     board: board.visitor,
     starting: starting.visitor,
     record: record.visitor,
-    total: board.visitor.sccores.total,
-    win: board.visitor.sccores.total > board.home.sccores.total,
+    total: board.visitor.scores.total,
+    win: board.visitor.scores.total > board.home.scores.total,
     hits: board.visitor.hits,
     errors: board.visitor.errors,
-    innings: board.visitor.sccores.innings,
-    scores: board.visitor.sccores,
+    innings: board.visitor.scores.innings,
+    scores: board.visitor.scores,
     jp: board.visitor.jp,
     initials: board.visitor.initials,
     pitcher: starting.visitor
@@ -10154,10 +9286,878 @@ function DaeGameInfo(info) {
    * 試合経過回数 - visitor.innings
    * @type {number}
    */
-  this.innings = board.visitor.sccores.innings;
+  this.innings = board.visitor.scores.innings;
 };
 
 exports.default = DaeGameInfo;
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.endOfRange = endOfRange;
+exports.eventSegments = eventSegments;
+exports.segStyle = segStyle;
+exports.eventLevels = eventLevels;
+exports.inRange = inRange;
+exports.segsOverlap = segsOverlap;
+exports.sortEvents = sortEvents;
+
+var _dates = __webpack_require__(15);
+
+var _dates2 = _interopRequireDefault(_dates);
+
+var _accessors = __webpack_require__(77);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function endOfRange(dateRange) {
+  var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'day';
+
+  return {
+    first: dateRange[0],
+    last: _dates2.default.add(dateRange[dateRange.length - 1], 1, unit)
+  };
+}
+
+function eventSegments(event, first, last, _ref, range) {
+  var startAccessor = _ref.startAccessor,
+      endAccessor = _ref.endAccessor;
+
+  var slots = _dates2.default.diff(first, last, 'day');
+  var start = _dates2.default.max(_dates2.default.startOf((0, _accessors.accessor)(event, startAccessor), 'day'), first);
+  var end = _dates2.default.min(_dates2.default.ceil((0, _accessors.accessor)(event, endAccessor), 'day'), last);
+
+  var padding = range.findIndex(function (x) {
+    return _dates2.default.eq(x, start, 'day');
+  });
+  var span = _dates2.default.diff(start, end, 'day');
+
+  span = Math.min(span, slots);
+  span = Math.max(span, 1);
+
+  return {
+    event: event,
+    span: span,
+    left: padding + 1,
+    right: Math.max(padding + span, 1)
+  };
+}
+
+function segStyle(span, slots) {
+  var per = span / slots * 100 + '%';
+  return { flexBasis: per, maxWidth: per }; // IE10/11 need max-width. flex-basis doesn't respect box-sizing
+}
+
+function eventLevels(rowSegments) {
+  var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Infinity;
+
+  var i = void 0,
+      j = void 0,
+      seg = void 0,
+      levels = [],
+      extra = [];
+
+  for (i = 0; i < rowSegments.length; i++) {
+    seg = rowSegments[i];
+
+    for (j = 0; j < levels.length; j++) {
+      if (!segsOverlap(seg, levels[j])) break;
+    }if (j >= limit) {
+      extra.push(seg);
+    } else {
+      (levels[j] || (levels[j] = [])).push(seg);
+    }
+  }
+
+  for (i = 0; i < levels.length; i++) {
+    levels[i].sort(function (a, b) {
+      return a.left - b.left;
+    }); //eslint-disable-line
+  }
+
+  return { levels: levels, extra: extra };
+}
+
+function inRange(e, start, end, _ref2) {
+  var startAccessor = _ref2.startAccessor,
+      endAccessor = _ref2.endAccessor;
+
+  var eStart = _dates2.default.startOf((0, _accessors.accessor)(e, startAccessor), 'day');
+  var eEnd = (0, _accessors.accessor)(e, endAccessor);
+
+  var startsBeforeEnd = _dates2.default.lte(eStart, end, 'day');
+  var endsAfterStart = _dates2.default.gte(eEnd, start, 'day');
+
+  return startsBeforeEnd && endsAfterStart;
+}
+
+function segsOverlap(seg, otherSegs) {
+  return otherSegs.some(function (otherSeg) {
+    return otherSeg.left <= seg.right && otherSeg.right >= seg.left;
+  });
+}
+
+function sortEvents(evtA, evtB, _ref3) {
+  var startAccessor = _ref3.startAccessor,
+      endAccessor = _ref3.endAccessor,
+      allDayAccessor = _ref3.allDayAccessor;
+
+  var startSort = +_dates2.default.startOf((0, _accessors.accessor)(evtA, startAccessor), 'day') - +_dates2.default.startOf((0, _accessors.accessor)(evtB, startAccessor), 'day');
+
+  var durA = _dates2.default.diff((0, _accessors.accessor)(evtA, startAccessor), _dates2.default.ceil((0, _accessors.accessor)(evtA, endAccessor), 'day'), 'day');
+
+  var durB = _dates2.default.diff((0, _accessors.accessor)(evtB, startAccessor), _dates2.default.ceil((0, _accessors.accessor)(evtB, endAccessor), 'day'), 'day');
+
+  return startSort // sort by start Day first
+  || Math.max(durB, 1) - Math.max(durA, 1) // events spanning multiple days go first
+  || !!(0, _accessors.accessor)(evtB, allDayAccessor) - !!(0, _accessors.accessor)(evtA, allDayAccessor) // then allDay single day events
+  || +(0, _accessors.accessor)(evtA, startAccessor) - +(0, _accessors.accessor)(evtB, startAccessor); // then sort by start time
+}
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsNative = __webpack_require__(755),
+    getValue = __webpack_require__(758);
+
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
+}
+
+module.exports = getNative;
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports) {
+
+module.exports = false;
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var redefine = __webpack_require__(43);
+module.exports = function(target, src, safe){
+  for(var key in src)redefine(target, key, src[key], safe);
+  return target;
+};
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports) {
+
+module.exports = function(it, Constructor, name, forbiddenField){
+  if(!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)){
+    throw TypeError(name + ': incorrect invocation!');
+  } return it;
+};
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports) {
+
+// 7.1.4 ToInteger
+var ceil  = Math.ceil
+  , floor = Math.floor;
+module.exports = function(it){
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = function(it){
+  return toString.call(it).slice(8, -1);
+};
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toInteger = __webpack_require__(60)
+  , max       = Math.max
+  , min       = Math.min;
+module.exports = function(index, length){
+  index = toInteger(index);
+  return index < 0 ? max(index + length, 0) : min(index, length);
+};
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var def = __webpack_require__(17).f
+  , has = __webpack_require__(19)
+  , TAG = __webpack_require__(13)('toStringTag');
+
+module.exports = function(it, tag, stat){
+  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
+};
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports) {
+
+module.exports = {};
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys       = __webpack_require__(209)
+  , enumBugKeys = __webpack_require__(135);
+
+module.exports = Object.keys || function keys(O){
+  return $keys(O, enumBugKeys);
+};
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 22.1.3.31 Array.prototype[@@unscopables]
+var UNSCOPABLES = __webpack_require__(13)('unscopables')
+  , ArrayProto  = Array.prototype;
+if(ArrayProto[UNSCOPABLES] == undefined)__webpack_require__(27)(ArrayProto, UNSCOPABLES, {});
+module.exports = function(key){
+  ArrayProto[UNSCOPABLES][key] = true;
+};
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var _assign = __webpack_require__(10);
+
+var ReactBaseClasses = __webpack_require__(230);
+var ReactChildren = __webpack_require__(550);
+var ReactDOMFactories = __webpack_require__(554);
+var ReactElement = __webpack_require__(52);
+var ReactPropTypes = __webpack_require__(558);
+var ReactVersion = __webpack_require__(560);
+
+var createReactClass = __webpack_require__(561);
+var onlyChild = __webpack_require__(563);
+
+var createElement = ReactElement.createElement;
+var createFactory = ReactElement.createFactory;
+var cloneElement = ReactElement.cloneElement;
+
+if (process.env.NODE_ENV !== 'production') {
+  var lowPriorityWarning = __webpack_require__(149);
+  var canDefineProperty = __webpack_require__(107);
+  var ReactElementValidator = __webpack_require__(234);
+  var didWarnPropTypesDeprecated = false;
+  createElement = ReactElementValidator.createElement;
+  createFactory = ReactElementValidator.createFactory;
+  cloneElement = ReactElementValidator.cloneElement;
+}
+
+var __spread = _assign;
+var createMixin = function (mixin) {
+  return mixin;
+};
+
+if (process.env.NODE_ENV !== 'production') {
+  var warnedForSpread = false;
+  var warnedForCreateMixin = false;
+  __spread = function () {
+    lowPriorityWarning(warnedForSpread, 'React.__spread is deprecated and should not be used. Use ' + 'Object.assign directly or another helper function with similar ' + 'semantics. You may be seeing this warning due to your compiler. ' + 'See https://fb.me/react-spread-deprecation for more details.');
+    warnedForSpread = true;
+    return _assign.apply(null, arguments);
+  };
+
+  createMixin = function (mixin) {
+    lowPriorityWarning(warnedForCreateMixin, 'React.createMixin is deprecated and should not be used. ' + 'In React v16.0, it will be removed. ' + 'You can use this mixin directly instead. ' + 'See https://fb.me/createmixin-was-never-implemented for more info.');
+    warnedForCreateMixin = true;
+    return mixin;
+  };
+}
+
+var React = {
+  // Modern
+
+  Children: {
+    map: ReactChildren.map,
+    forEach: ReactChildren.forEach,
+    count: ReactChildren.count,
+    toArray: ReactChildren.toArray,
+    only: onlyChild
+  },
+
+  Component: ReactBaseClasses.Component,
+  PureComponent: ReactBaseClasses.PureComponent,
+
+  createElement: createElement,
+  cloneElement: cloneElement,
+  isValidElement: ReactElement.isValidElement,
+
+  // Classic
+
+  PropTypes: ReactPropTypes,
+  createClass: createReactClass,
+  createFactory: createFactory,
+  createMixin: createMixin,
+
+  // This looks DOM specific but these are actually isomorphic helpers
+  // since they are just generating DOM strings.
+  DOM: ReactDOMFactories,
+
+  version: ReactVersion,
+
+  // Deprecated hook for JSX spread, don't use this for anything.
+  __spread: __spread
+};
+
+if (process.env.NODE_ENV !== 'production') {
+  var warnedForCreateClass = false;
+  if (canDefineProperty) {
+    Object.defineProperty(React, 'PropTypes', {
+      get: function () {
+        lowPriorityWarning(didWarnPropTypesDeprecated, 'Accessing PropTypes via the main React package is deprecated,' + ' and will be removed in  React v16.0.' + ' Use the latest available v15.* prop-types package from npm instead.' + ' For info on usage, compatibility, migration and more, see ' + 'https://fb.me/prop-types-docs');
+        didWarnPropTypesDeprecated = true;
+        return ReactPropTypes;
+      }
+    });
+
+    Object.defineProperty(React, 'createClass', {
+      get: function () {
+        lowPriorityWarning(warnedForCreateClass, 'Accessing createClass via the main React package is deprecated,' + ' and will be removed in React v16.0.' + " Use a plain JavaScript class instead. If you're not yet " + 'ready to migrate, create-react-class v15.* is available ' + 'on npm as a temporary, drop-in replacement. ' + 'For more info see https://fb.me/react-create-class');
+        warnedForCreateClass = true;
+        return createReactClass;
+      }
+    });
+  }
+
+  // React.DOM factories are deprecated. Wrap these methods so that
+  // invocations of the React.DOM namespace and alert users to switch
+  // to the `react-dom-factories` package.
+  React.DOM = {};
+  var warnedForFactories = false;
+  Object.keys(ReactDOMFactories).forEach(function (factory) {
+    React.DOM[factory] = function () {
+      if (!warnedForFactories) {
+        lowPriorityWarning(false, 'Accessing factories like React.DOM.%s has been deprecated ' + 'and will be removed in v16.0+. Use the ' + 'react-dom-factories package instead. ' + ' Version 1.0 provides a drop-in replacement.' + ' For more info, see https://fb.me/react-dom-factories', factory);
+        warnedForFactories = true;
+      }
+      return ReactDOMFactories[factory].apply(ReactDOMFactories, arguments);
+    };
+  });
+}
+
+module.exports = React;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * 
+ */
+
+
+/**
+ * WARNING: DO NOT manually require this module.
+ * This is a replacement for `invariant(...)` used by the error code system
+ * and will _only_ be required by the corresponding babel pass.
+ * It always throws.
+ */
+
+function reactProdInvariant(code) {
+  var argCount = arguments.length - 1;
+
+  var message = 'Minified React error #' + code + '; visit ' + 'http://facebook.github.io/react/docs/error-decoder.html?invariant=' + code;
+
+  for (var argIdx = 0; argIdx < argCount; argIdx++) {
+    message += '&args[]=' + encodeURIComponent(arguments[argIdx + 1]);
+  }
+
+  message += ' for the full message or use the non-minified dev environment' + ' for full errors and additional helpful warnings.';
+
+  var error = new Error(message);
+  error.name = 'Invariant Violation';
+  error.framesToPop = 1; // we don't care about reactProdInvariant's own frame
+
+  throw error;
+}
+
+module.exports = reactProdInvariant;
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var ReactRef = __webpack_require__(572);
+var ReactInstrumentation = __webpack_require__(26);
+
+var warning = __webpack_require__(6);
+
+/**
+ * Helper to call ReactRef.attachRefs with this composite component, split out
+ * to avoid allocations in the transaction mount-ready queue.
+ */
+function attachRefs() {
+  ReactRef.attachRefs(this, this._currentElement);
+}
+
+var ReactReconciler = {
+  /**
+   * Initializes the component, renders markup, and registers event listeners.
+   *
+   * @param {ReactComponent} internalInstance
+   * @param {ReactReconcileTransaction|ReactServerRenderingTransaction} transaction
+   * @param {?object} the containing host component instance
+   * @param {?object} info about the host container
+   * @return {?string} Rendered markup to be inserted into the DOM.
+   * @final
+   * @internal
+   */
+  mountComponent: function (internalInstance, transaction, hostParent, hostContainerInfo, context, parentDebugID) // 0 in production and for roots
+  {
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onBeforeMountComponent(internalInstance._debugID, internalInstance._currentElement, parentDebugID);
+      }
+    }
+    var markup = internalInstance.mountComponent(transaction, hostParent, hostContainerInfo, context, parentDebugID);
+    if (internalInstance._currentElement && internalInstance._currentElement.ref != null) {
+      transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onMountComponent(internalInstance._debugID);
+      }
+    }
+    return markup;
+  },
+
+  /**
+   * Returns a value that can be passed to
+   * ReactComponentEnvironment.replaceNodeWithMarkup.
+   */
+  getHostNode: function (internalInstance) {
+    return internalInstance.getHostNode();
+  },
+
+  /**
+   * Releases any resources allocated by `mountComponent`.
+   *
+   * @final
+   * @internal
+   */
+  unmountComponent: function (internalInstance, safely) {
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onBeforeUnmountComponent(internalInstance._debugID);
+      }
+    }
+    ReactRef.detachRefs(internalInstance, internalInstance._currentElement);
+    internalInstance.unmountComponent(safely);
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onUnmountComponent(internalInstance._debugID);
+      }
+    }
+  },
+
+  /**
+   * Update a component using a new element.
+   *
+   * @param {ReactComponent} internalInstance
+   * @param {ReactElement} nextElement
+   * @param {ReactReconcileTransaction} transaction
+   * @param {object} context
+   * @internal
+   */
+  receiveComponent: function (internalInstance, nextElement, transaction, context) {
+    var prevElement = internalInstance._currentElement;
+
+    if (nextElement === prevElement && context === internalInstance._context) {
+      // Since elements are immutable after the owner is rendered,
+      // we can do a cheap identity compare here to determine if this is a
+      // superfluous reconcile. It's possible for state to be mutable but such
+      // change should trigger an update of the owner which would recreate
+      // the element. We explicitly check for the existence of an owner since
+      // it's possible for an element created outside a composite to be
+      // deeply mutated and reused.
+
+      // TODO: Bailing out early is just a perf optimization right?
+      // TODO: Removing the return statement should affect correctness?
+      return;
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onBeforeUpdateComponent(internalInstance._debugID, nextElement);
+      }
+    }
+
+    var refsChanged = ReactRef.shouldUpdateRefs(prevElement, nextElement);
+
+    if (refsChanged) {
+      ReactRef.detachRefs(internalInstance, prevElement);
+    }
+
+    internalInstance.receiveComponent(nextElement, transaction, context);
+
+    if (refsChanged && internalInstance._currentElement && internalInstance._currentElement.ref != null) {
+      transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onUpdateComponent(internalInstance._debugID);
+      }
+    }
+  },
+
+  /**
+   * Flush any dirty changes in a component.
+   *
+   * @param {ReactComponent} internalInstance
+   * @param {ReactReconcileTransaction} transaction
+   * @internal
+   */
+  performUpdateIfNecessary: function (internalInstance, transaction, updateBatchNumber) {
+    if (internalInstance._updateBatchNumber !== updateBatchNumber) {
+      // The component's enqueued batch number should always be the current
+      // batch or the following one.
+      process.env.NODE_ENV !== 'production' ? warning(internalInstance._updateBatchNumber == null || internalInstance._updateBatchNumber === updateBatchNumber + 1, 'performUpdateIfNecessary: Unexpected batch number (current %s, ' + 'pending %s)', updateBatchNumber, internalInstance._updateBatchNumber) : void 0;
+      return;
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onBeforeUpdateComponent(internalInstance._debugID, internalInstance._currentElement);
+      }
+    }
+    internalInstance.performUpdateIfNecessary(transaction);
+    if (process.env.NODE_ENV !== 'production') {
+      if (internalInstance._debugID !== 0) {
+        ReactInstrumentation.debugTool.onUpdateComponent(internalInstance._debugID);
+      }
+    }
+  }
+};
+
+module.exports = ReactReconciler;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright 2015-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var DOMNamespaces = __webpack_require__(157);
+var setInnerHTML = __webpack_require__(112);
+
+var createMicrosoftUnsafeLocalFunction = __webpack_require__(158);
+var setTextContent = __webpack_require__(246);
+
+var ELEMENT_NODE_TYPE = 1;
+var DOCUMENT_FRAGMENT_NODE_TYPE = 11;
+
+/**
+ * In IE (8-11) and Edge, appending nodes with no children is dramatically
+ * faster than appending a full subtree, so we essentially queue up the
+ * .appendChild calls here and apply them so each node is added to its parent
+ * before any children are added.
+ *
+ * In other browsers, doing so is slower or neutral compared to the other order
+ * (in Firefox, twice as slow) so we only do this inversion in IE.
+ *
+ * See https://github.com/spicyj/innerhtml-vs-createelement-vs-clonenode.
+ */
+var enableLazy = typeof document !== 'undefined' && typeof document.documentMode === 'number' || typeof navigator !== 'undefined' && typeof navigator.userAgent === 'string' && /\bEdge\/\d/.test(navigator.userAgent);
+
+function insertTreeChildren(tree) {
+  if (!enableLazy) {
+    return;
+  }
+  var node = tree.node;
+  var children = tree.children;
+  if (children.length) {
+    for (var i = 0; i < children.length; i++) {
+      insertTreeBefore(node, children[i], null);
+    }
+  } else if (tree.html != null) {
+    setInnerHTML(node, tree.html);
+  } else if (tree.text != null) {
+    setTextContent(node, tree.text);
+  }
+}
+
+var insertTreeBefore = createMicrosoftUnsafeLocalFunction(function (parentNode, tree, referenceNode) {
+  // DocumentFragments aren't actually part of the DOM after insertion so
+  // appending children won't update the DOM. We need to ensure the fragment
+  // is properly populated first, breaking out of our lazy approach for just
+  // this level. Also, some <object> plugins (like Flash Player) will read
+  // <param> nodes immediately upon insertion into the DOM, so <object>
+  // must also be populated prior to insertion into the DOM.
+  if (tree.node.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE || tree.node.nodeType === ELEMENT_NODE_TYPE && tree.node.nodeName.toLowerCase() === 'object' && (tree.node.namespaceURI == null || tree.node.namespaceURI === DOMNamespaces.html)) {
+    insertTreeChildren(tree);
+    parentNode.insertBefore(tree.node, referenceNode);
+  } else {
+    parentNode.insertBefore(tree.node, referenceNode);
+    insertTreeChildren(tree);
+  }
+});
+
+function replaceChildWithTree(oldNode, newTree) {
+  oldNode.parentNode.replaceChild(newTree.node, oldNode);
+  insertTreeChildren(newTree);
+}
+
+function queueChild(parentTree, childTree) {
+  if (enableLazy) {
+    parentTree.children.push(childTree);
+  } else {
+    parentTree.node.appendChild(childTree.node);
+  }
+}
+
+function queueHTML(tree, html) {
+  if (enableLazy) {
+    tree.html = html;
+  } else {
+    setInnerHTML(tree.node, html);
+  }
+}
+
+function queueText(tree, text) {
+  if (enableLazy) {
+    tree.text = text;
+  } else {
+    setTextContent(tree.node, text);
+  }
+}
+
+function toString() {
+  return this.node.nodeName;
+}
+
+function DOMLazyTree(node) {
+  return {
+    node: node,
+    children: [],
+    html: null,
+    text: null,
+    toString: toString
+  };
+}
+
+DOMLazyTree.insertTreeBefore = insertTreeBefore;
+DOMLazyTree.replaceChildWithTree = replaceChildWithTree;
+DOMLazyTree.queueChild = queueChild;
+DOMLazyTree.queueHTML = queueHTML;
+DOMLazyTree.queueText = queueText;
+
+module.exports = DOMLazyTree;
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2013-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+var invariant = function(condition, format, a, b, c, d, e, f) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  }
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error(
+        'Minified exception occurred; use the non-minified dev environment ' +
+        'for the full error message and additional helpful warnings.'
+      );
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(
+        format.replace(/%s/g, function() { return args[argIndex++]; })
+      );
+      error.name = 'Invariant Violation';
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+};
+
+module.exports = invariant;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2017/07/19 - 18:30
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * redux - reducer type を定義します
+ */
+var ReducerTypes = function ReducerTypes() {
+  _classCallCheck(this, ReducerTypes);
+};
+
+ReducerTypes.INITIAL = 'reducerInitial';
+ReducerTypes.CALENDAR_COMPLETE = 'calendarComplete';
+ReducerTypes.CALENDAR_ERROR = 'calendarError';
+ReducerTypes.SCHEDULE_COMPLETE = 'scheduleComplete';
+ReducerTypes.SCHEDULE_ERROR = 'scheduleComplete';
+ReducerTypes.SCHEDULE_START = 'scheduleStart';
+ReducerTypes.GAMES_COMPLETE = 'gamesComplete';
+ReducerTypes.GAMES_ERROR = 'gamesError';
+exports.default = ReducerTypes;
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2017/07/25 - 19:59
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * Style に関する CONST
+ */
+var Style = function Style() {
+  _classCallCheck(this, Style);
+};
+
+Style.calendar = {
+  id: 'js-mlb__schedule__calendar'
+};
+Style.WIN = 'mlb__game__result--win';
+exports.default = Style;
 
 /***/ }),
 /* 74 */
@@ -11117,7 +11117,7 @@ var _Seasons = __webpack_require__(687);
 
 var _Seasons2 = _interopRequireDefault(_Seasons);
 
-var _Style = __webpack_require__(72);
+var _Style = __webpack_require__(73);
 
 var _Style2 = _interopRequireDefault(_Style);
 
@@ -12116,14 +12116,14 @@ exports.RETURN = RETURN;
 var global            = __webpack_require__(8)
   , $export           = __webpack_require__(2)
   , redefine          = __webpack_require__(43)
-  , redefineAll       = __webpack_require__(57)
+  , redefineAll       = __webpack_require__(58)
   , meta              = __webpack_require__(86)
   , forOf             = __webpack_require__(102)
-  , anInstance        = __webpack_require__(58)
+  , anInstance        = __webpack_require__(59)
   , isObject          = __webpack_require__(12)
   , fails             = __webpack_require__(16)
   , $iterDetect       = __webpack_require__(101)
-  , setToStringTag    = __webpack_require__(62)
+  , setToStringTag    = __webpack_require__(63)
   , inheritIfRequired = __webpack_require__(461);
 
 module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
@@ -13720,7 +13720,7 @@ exports.set = set;
 exports.result = result;
 exports.default = messages;
 
-var _invariant = __webpack_require__(70);
+var _invariant = __webpack_require__(71);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -13835,7 +13835,7 @@ module.exports = assocIndexOf;
 /* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(55);
+var getNative = __webpack_require__(56);
 
 /* Built-in method references that are verified to be native. */
 var nativeCreate = getNative(Object, 'create');
@@ -13999,7 +13999,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(60);
+var cof = __webpack_require__(61);
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
@@ -14012,7 +14012,7 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 // true  -> Array#includes
 var toIObject = __webpack_require__(31)
   , toLength  = __webpack_require__(20)
-  , toIndex   = __webpack_require__(61);
+  , toIndex   = __webpack_require__(62);
 module.exports = function(IS_INCLUDES){
   return function($this, el, fromIndex){
     var O      = toIObject($this)
@@ -14068,7 +14068,7 @@ module.exports = (
 // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
 
 var toObject = __webpack_require__(51)
-  , toIndex  = __webpack_require__(61)
+  , toIndex  = __webpack_require__(62)
   , toLength = __webpack_require__(20);
 module.exports = function fill(value /*, start = 0, end = @length */){
   var O      = toObject(this)
@@ -14099,7 +14099,7 @@ module.exports = function(O, D){
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__(60)
+var cof = __webpack_require__(61)
   , TAG = __webpack_require__(13)('toStringTag')
   // ES3 wrong here
   , ARG = cof(function(){ return arguments; }()) == 'Arguments';
@@ -14127,7 +14127,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // check on default Array iterator
-var Iterators  = __webpack_require__(63)
+var Iterators  = __webpack_require__(64)
   , ITERATOR   = __webpack_require__(13)('iterator')
   , ArrayProto = Array.prototype;
 
@@ -14141,7 +14141,7 @@ module.exports = function(it){
 
 var classof   = __webpack_require__(138)
   , ITERATOR  = __webpack_require__(13)('iterator')
-  , Iterators = __webpack_require__(63);
+  , Iterators = __webpack_require__(64);
 module.exports = __webpack_require__(79).getIteratorMethod = function(it){
   if(it != undefined)return it[ITERATOR]
     || it['@@iterator']
@@ -14154,9 +14154,9 @@ module.exports = __webpack_require__(79).getIteratorMethod = function(it){
 
 "use strict";
 
-var addToUnscopables = __webpack_require__(65)
+var addToUnscopables = __webpack_require__(66)
   , step             = __webpack_require__(213)
-  , Iterators        = __webpack_require__(63)
+  , Iterators        = __webpack_require__(64)
   , toIObject        = __webpack_require__(31);
 
 // 22.1.3.4 Array.prototype.entries()
@@ -14261,7 +14261,7 @@ if(!setTask || !clearTask){
     delete queue[id];
   };
   // Node.js 0.8-
-  if(__webpack_require__(60)(process) == 'process'){
+  if(__webpack_require__(61)(process) == 'process'){
     defer = function(id){
       process.nextTick(ctx(run, id, 1));
     };
@@ -14942,7 +14942,7 @@ module.exports = getEventModifierState;
 
 
 
-var DOMLazyTree = __webpack_require__(69);
+var DOMLazyTree = __webpack_require__(70);
 var Danger = __webpack_require__(583);
 var ReactDOMComponentTree = __webpack_require__(11);
 var ReactInstrumentation = __webpack_require__(26);
@@ -15241,7 +15241,7 @@ var _prodInvariant = __webpack_require__(7);
 var ReactPropTypesSecret = __webpack_require__(250);
 var propTypesFactory = __webpack_require__(235);
 
-var React = __webpack_require__(66);
+var React = __webpack_require__(67);
 var PropTypes = propTypesFactory(React.isValidElement);
 
 var invariant = __webpack_require__(5);
@@ -17445,7 +17445,7 @@ exports.default = DaeTeamInfo;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DaePlayers = undefined;
+exports.DaePlayers = exports.DaePlayer = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -17496,7 +17496,7 @@ var DaePlayer =
  * 選手成績
  * @param {object} info JSON
  */
-function DaePlayer(info) {
+exports.DaePlayer = function DaePlayer(info) {
   _classCallCheck(this, DaePlayer);
 
   var origin = _Normalize2.default.obj(info);
@@ -17688,40 +17688,81 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DaeInning = exports.DaeInningTeam = exports.DaeEvent = undefined;
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/07/18 - 15:55
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+// dae
+
+
 var _Normalize = __webpack_require__(35);
 
 var _Normalize2 = _interopRequireDefault(_Normalize);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /**
-                                                                                                                                                           * Copyright (c) 2011-2017 inazumatv.com, inc.
-                                                                                                                                                           * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                           * @date 2017/07/18 - 15:55
-                                                                                                                                                           *
-                                                                                                                                                           * Distributed under the terms of the MIT license.
-                                                                                                                                                           * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                           *
-                                                                                                                                                           * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                           *
-                                                                                                                                                           */
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// dae
+var Sequence = function () {
+  function Sequence() {
+    _classCallCheck(this, Sequence);
 
+    this.indexes = {
+      home: 0,
+      visitor: 0
+    };
+  }
+
+  _createClass(Sequence, [{
+    key: 'up',
+    value: function up(type) {
+      var index = this.indexes[type];
+      index += 1;
+      if (index > 9) {
+        index = 1;
+      }
+      this.indexes[type] = index;
+    }
+  }, {
+    key: 'index',
+    value: function index(type) {
+      return this.indexes[type];
+    }
+  }]);
+
+  return Sequence;
+}();
 
 /**
  * 発生したイベント（事象） - 詳細
  */
+
+
 var DaeEvent =
 /**
  * 発生したイベント（事象） - 詳細
  * @param {number} inning 回 1 ~
  * @param {object} info JSON
+ * @param {Sequence} sequence 試合中の打順を生成します
+ * @param {string} type home|visitor
  */
-exports.DaeEvent = function DaeEvent(inning, info) {
+exports.DaeEvent = function DaeEvent(inning, info, sequence, type) {
   _classCallCheck(this, DaeEvent);
 
   var origin = _Normalize2.default.obj(info);
+  var batter = _Normalize2.default.str(origin.batter);
+  if (batter) {
+    sequence.up(type);
+  }
+  var index = sequence.index(type);
   /**
    * original JSON
    * @type {Object}
@@ -17736,7 +17777,7 @@ exports.DaeEvent = function DaeEvent(inning, info) {
    * 打者名
    * @type {string}
    */
-  this.batter = _Normalize2.default.str(origin.batter);
+  this.batter = batter;
   /**
    * 結果 - 三振, 単打
    * @type {string}
@@ -17757,6 +17798,9 @@ exports.DaeEvent = function DaeEvent(inning, info) {
    * @type {number}
    */
   this.inning = inning;
+  this.index = index;
+  this.type = type;
+  this.id = type + '-' + inning + '-' + index;
 };
 
 /**
@@ -17769,13 +17813,15 @@ var DaeEvents =
  * 発生したイベント（事象）
  * @param {number} inning 回 1 ~
  * @param {Array} info JSON
+ * @param {string} type home|visitor
+ * @param {Sequence} sequence event 添え字
  */
-function DaeEvents(inning, info) {
+function DaeEvents(inning, info, type, sequence) {
   _classCallCheck(this, DaeEvents);
 
   var origin = _Normalize2.default.arr(info);
   var list = origin.map(function (event) {
-    return new DaeEvent(inning, event);
+    return new DaeEvent(inning, event, sequence, type);
   });
   /**
    * original JSON
@@ -17805,8 +17851,10 @@ var DaeInningTeam =
  * イニングの情報 - チーム別
  * @param {number} inning 回 1 ~
  * @param {object} info JSON
+ * @param {string} type home|visitor
+ * @param {Sequence} sequence event 添え字
  */
-exports.DaeInningTeam = function DaeInningTeam(inning, info) {
+exports.DaeInningTeam = function DaeInningTeam(inning, info, type, sequence) {
   _classCallCheck(this, DaeInningTeam);
 
   var origin = _Normalize2.default.obj(info);
@@ -17824,12 +17872,13 @@ exports.DaeInningTeam = function DaeInningTeam(inning, info) {
    * 発生したイベント（事象）
    * @type {DaeEvents}
    */
-  this.events = new DaeEvents(inning, origin.events);
+  this.events = new DaeEvents(inning, origin.events, type, sequence);
   /**
    * イニング
    * @type {number}
    */
   this.inning = inning;
+  this.type = type;
 };
 
 /**
@@ -17842,8 +17891,9 @@ var DaeInning =
  * インイングの情報
  * @param {number} inning 回 1 ~
  * @param {object} info JSON
+ * @param {Sequence} sequence event 添え字
  */
-exports.DaeInning = function DaeInning(inning, info) {
+exports.DaeInning = function DaeInning(inning, info, sequence) {
   _classCallCheck(this, DaeInning);
 
   var origin = _Normalize2.default.obj(info);
@@ -17861,12 +17911,12 @@ exports.DaeInning = function DaeInning(inning, info) {
    * visitor team インイングの情報
    * @type {DaeInningTeam}
    */
-  this.visitor = new DaeInningTeam(inning, origin.visitor);
+  this.visitor = new DaeInningTeam(inning, origin.visitor, 'visitor', sequence);
   /**
    * home team インイングの情報
    * @type {DaeInningTeam}
    */
-  this.home = new DaeInningTeam(inning, origin.home);
+  this.home = new DaeInningTeam(inning, origin.home, 'home', sequence);
 };
 
 // innings.json - inning 情報
@@ -17900,12 +17950,13 @@ function DaeInnings(info) {
   var visitor = {};
   var information = {};
   var board = {};
+  var sequence = new Sequence();
   // @type {Array.<DaeInning>} - 回毎の情報配列
   var list = Object.keys(innings).map(function (inning) {
     // inning: string なので int 型変換します
     var num = parseInt(inning, 10);
     // @type {DaeInning}
-    var data = new DaeInning(num, innings[inning]);
+    var data = new DaeInning(num, innings[inning], sequence);
     // home / visitor 毎にセットします
     home[num] = data.home;
     visitor[num] = data.visitor;
@@ -18403,7 +18454,7 @@ var _helpers = __webpack_require__(93);
 
 var _accessors = __webpack_require__(77);
 
-var _eventLevels = __webpack_require__(54);
+var _eventLevels = __webpack_require__(55);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18946,7 +18997,7 @@ module.exports = Stack;
 /* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(55),
+var getNative = __webpack_require__(56),
     root = __webpack_require__(36);
 
 /* Built-in method references that are verified to be native. */
@@ -19438,18 +19489,18 @@ module.exports = !__webpack_require__(24) && !__webpack_require__(16)(function()
 
 var global         = __webpack_require__(8)
   , DESCRIPTORS    = __webpack_require__(24)
-  , LIBRARY        = __webpack_require__(56)
+  , LIBRARY        = __webpack_require__(57)
   , $typed         = __webpack_require__(130)
   , hide           = __webpack_require__(27)
-  , redefineAll    = __webpack_require__(57)
+  , redefineAll    = __webpack_require__(58)
   , fails          = __webpack_require__(16)
-  , anInstance     = __webpack_require__(58)
-  , toInteger      = __webpack_require__(59)
+  , anInstance     = __webpack_require__(59)
+  , toInteger      = __webpack_require__(60)
   , toLength       = __webpack_require__(20)
   , gOPN           = __webpack_require__(81).f
   , dP             = __webpack_require__(17).f
   , arrayFill      = __webpack_require__(136)
-  , setToStringTag = __webpack_require__(62)
+  , setToStringTag = __webpack_require__(63)
   , ARRAY_BUFFER   = 'ArrayBuffer'
   , DATA_VIEW      = 'DataView'
   , PROTOTYPE      = 'prototype'
@@ -19751,7 +19802,7 @@ module.exports = __webpack_require__(8).document && document.documentElement;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
-var cof = __webpack_require__(60);
+var cof = __webpack_require__(61);
 module.exports = Array.isArray || function isArray(arg){
   return cof(arg) == 'Array';
 };
@@ -19770,14 +19821,14 @@ module.exports = function(done, value){
 
 "use strict";
 
-var LIBRARY        = __webpack_require__(56)
+var LIBRARY        = __webpack_require__(57)
   , $export        = __webpack_require__(2)
   , redefine       = __webpack_require__(43)
   , hide           = __webpack_require__(27)
   , has            = __webpack_require__(19)
-  , Iterators      = __webpack_require__(63)
+  , Iterators      = __webpack_require__(64)
   , $iterCreate    = __webpack_require__(451)
-  , setToStringTag = __webpack_require__(62)
+  , setToStringTag = __webpack_require__(63)
   , getPrototypeOf = __webpack_require__(83)
   , ITERATOR       = __webpack_require__(13)('iterator')
   , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
@@ -19848,7 +19899,7 @@ module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED
 // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
 
 var toObject = __webpack_require__(51)
-  , toIndex  = __webpack_require__(61)
+  , toIndex  = __webpack_require__(62)
   , toLength = __webpack_require__(20);
 
 module.exports = [].copyWithin || function copyWithin(target/*= 0*/, start/*= 0, end = @length*/){
@@ -19880,9 +19931,9 @@ module.exports = [].copyWithin || function copyWithin(target/*= 0*/, start/*= 0,
 
 var dP          = __webpack_require__(17).f
   , create      = __webpack_require__(82)
-  , redefineAll = __webpack_require__(57)
+  , redefineAll = __webpack_require__(58)
   , ctx         = __webpack_require__(37)
-  , anInstance  = __webpack_require__(58)
+  , anInstance  = __webpack_require__(59)
   , defined     = __webpack_require__(44)
   , forOf       = __webpack_require__(102)
   , $iterDefine = __webpack_require__(214)
@@ -20044,7 +20095,7 @@ module.exports = function(iterator, fn, value, entries){
 "use strict";
 
 // 19.1.2.1 Object.assign(target, source, ...)
-var getKeys  = __webpack_require__(64)
+var getKeys  = __webpack_require__(65)
   , gOPS     = __webpack_require__(104)
   , pIE      = __webpack_require__(85)
   , toObject = __webpack_require__(51)
@@ -20082,11 +20133,11 @@ module.exports = !$assign || __webpack_require__(16)(function(){
 
 "use strict";
 
-var redefineAll       = __webpack_require__(57)
+var redefineAll       = __webpack_require__(58)
   , getWeak           = __webpack_require__(86).getWeak
   , anObject          = __webpack_require__(9)
   , isObject          = __webpack_require__(12)
-  , anInstance        = __webpack_require__(58)
+  , anInstance        = __webpack_require__(59)
   , forOf             = __webpack_require__(102)
   , createArrayMethod = __webpack_require__(84)
   , $has              = __webpack_require__(19)
@@ -20192,7 +20243,7 @@ exports.f = __webpack_require__(13);
 
 "use strict";
 
-var toInteger = __webpack_require__(59)
+var toInteger = __webpack_require__(60)
   , defined   = __webpack_require__(44);
 
 module.exports = function repeat(count){
@@ -20210,7 +20261,7 @@ module.exports = function repeat(count){
 
 // 7.2.8 IsRegExp(argument)
 var isObject = __webpack_require__(12)
-  , cof      = __webpack_require__(60)
+  , cof      = __webpack_require__(61)
   , MATCH    = __webpack_require__(13)('match');
 module.exports = function(it){
   var isRegExp;
@@ -20241,7 +20292,7 @@ module.exports = Math.log1p || function log1p(x){
 /* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getKeys   = __webpack_require__(64)
+var getKeys   = __webpack_require__(65)
   , toIObject = __webpack_require__(31)
   , isEnum    = __webpack_require__(85).f;
 module.exports = function(isEntries){
@@ -22291,7 +22342,7 @@ var _ConGames = __webpack_require__(858);
 
 var _ConGames2 = _interopRequireDefault(_ConGames);
 
-var _Creator = __webpack_require__(869);
+var _Creator = __webpack_require__(870);
 
 var _Creator2 = _interopRequireDefault(_Creator);
 
@@ -22433,7 +22484,7 @@ exports.default = View;
 
 
 
-var _prodInvariant = __webpack_require__(67),
+var _prodInvariant = __webpack_require__(68),
     _assign = __webpack_require__(10);
 
 var ReactNoopUpdateQueue = __webpack_require__(231);
@@ -24945,7 +24996,7 @@ module.exports = instantiateReactComponent;
 
 var _prodInvariant = __webpack_require__(7);
 
-var React = __webpack_require__(66);
+var React = __webpack_require__(67);
 
 var invariant = __webpack_require__(5);
 
@@ -25543,9 +25594,9 @@ module.exports = getActiveElement;
 
 var _prodInvariant = __webpack_require__(7);
 
-var DOMLazyTree = __webpack_require__(69);
+var DOMLazyTree = __webpack_require__(70);
 var DOMProperty = __webpack_require__(46);
-var React = __webpack_require__(66);
+var React = __webpack_require__(67);
 var ReactBrowserEventEmitter = __webpack_require__(114);
 var ReactCurrentOwner = __webpack_require__(32);
 var ReactDOMComponentTree = __webpack_require__(11);
@@ -25555,7 +25606,7 @@ var ReactFeatureFlags = __webpack_require__(242);
 var ReactInstanceMap = __webpack_require__(90);
 var ReactInstrumentation = __webpack_require__(26);
 var ReactMarkupChecksum = __webpack_require__(641);
-var ReactReconciler = __webpack_require__(68);
+var ReactReconciler = __webpack_require__(69);
 var ReactUpdateQueue = __webpack_require__(164);
 var ReactUpdates = __webpack_require__(33);
 
@@ -26135,7 +26186,7 @@ var storeShape = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics__ = __webpack_require__(651);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -27581,7 +27632,7 @@ var _moment2 = _interopRequireDefault(_moment);
 
 __webpack_require__(206);
 
-var _Style = __webpack_require__(72);
+var _Style = __webpack_require__(73);
 
 var _Style2 = _interopRequireDefault(_Style);
 
@@ -28439,7 +28490,7 @@ var _dates2 = _interopRequireDefault(_dates);
 
 var _propTypes3 = __webpack_require__(23);
 
-var _eventLevels2 = __webpack_require__(54);
+var _eventLevels2 = __webpack_require__(55);
 
 var _BackgroundCells = __webpack_require__(720);
 
@@ -29086,7 +29137,7 @@ var _height2 = _interopRequireDefault(_height);
 
 var _propTypes3 = __webpack_require__(23);
 
-var _eventLevels = __webpack_require__(54);
+var _eventLevels = __webpack_require__(55);
 
 var _selection = __webpack_require__(119);
 
@@ -29530,7 +29581,7 @@ module.exports = exports["default"];
 exports.__esModule = true;
 exports.default = moveDate;
 
-var _invariant = __webpack_require__(70);
+var _invariant = __webpack_require__(71);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -29723,7 +29774,7 @@ module.exports = assignValue;
 /* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(55);
+var getNative = __webpack_require__(56);
 
 var defineProperty = (function() {
   try {
@@ -41486,7 +41537,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-1 23:29:20
+ * 2017-8-2 17:29:01
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -41684,7 +41735,7 @@ var _Main = __webpack_require__(548);
 
 var _Main2 = _interopRequireDefault(_Main);
 
-var _Test = __webpack_require__(870);
+var _Test = __webpack_require__(871);
 
 var _Test2 = _interopRequireDefault(_Test);
 
@@ -42693,7 +42744,7 @@ var $export      = __webpack_require__(2)
   , $typed       = __webpack_require__(130)
   , buffer       = __webpack_require__(208)
   , anObject     = __webpack_require__(9)
-  , toIndex      = __webpack_require__(61)
+  , toIndex      = __webpack_require__(62)
   , toLength     = __webpack_require__(20)
   , isObject     = __webpack_require__(12)
   , ArrayBuffer  = __webpack_require__(8).ArrayBuffer
@@ -42751,7 +42802,7 @@ __webpack_require__(38)('Int8', 1, function(init){
 
 var dP       = __webpack_require__(17)
   , anObject = __webpack_require__(9)
-  , getKeys  = __webpack_require__(64);
+  , getKeys  = __webpack_require__(65);
 
 module.exports = __webpack_require__(24) ? Object.defineProperties : function defineProperties(O, Properties){
   anObject(O);
@@ -42803,7 +42854,7 @@ module.exports = function(original){
 
 var create         = __webpack_require__(82)
   , descriptor     = __webpack_require__(42)
-  , setToStringTag = __webpack_require__(62)
+  , setToStringTag = __webpack_require__(63)
   , IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
@@ -43351,14 +43402,14 @@ if(setProto)$export($export.S, 'Reflect', {
 
 "use strict";
 
-var LIBRARY            = __webpack_require__(56)
+var LIBRARY            = __webpack_require__(57)
   , global             = __webpack_require__(8)
   , ctx                = __webpack_require__(37)
   , classof            = __webpack_require__(138)
   , $export            = __webpack_require__(2)
   , isObject           = __webpack_require__(12)
   , aFunction          = __webpack_require__(50)
-  , anInstance         = __webpack_require__(58)
+  , anInstance         = __webpack_require__(59)
   , forOf              = __webpack_require__(102)
   , speciesConstructor = __webpack_require__(137)
   , task               = __webpack_require__(143).set
@@ -43554,7 +43605,7 @@ if(!USE_NATIVE){
     this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
     this._n = false;          // <- notify
   };
-  Internal.prototype = __webpack_require__(57)($Promise.prototype, {
+  Internal.prototype = __webpack_require__(58)($Promise.prototype, {
     // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
     then: function then(onFulfilled, onRejected){
       var reaction    = newPromiseCapability(speciesConstructor(this, $Promise));
@@ -43580,7 +43631,7 @@ if(!USE_NATIVE){
 }
 
 $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: $Promise});
-__webpack_require__(62)($Promise, PROMISE);
+__webpack_require__(63)($Promise, PROMISE);
 __webpack_require__(100)(PROMISE);
 Wrapper = __webpack_require__(79)[PROMISE];
 
@@ -43659,7 +43710,7 @@ var global    = __webpack_require__(8)
   , Observer  = global.MutationObserver || global.WebKitMutationObserver
   , process   = global.process
   , Promise   = global.Promise
-  , isNode    = __webpack_require__(60)(process) == 'process';
+  , isNode    = __webpack_require__(61)(process) == 'process';
 
 module.exports = function(){
   var head, last, notify;
@@ -43738,7 +43789,7 @@ var global         = __webpack_require__(8)
   , META           = __webpack_require__(86).KEY
   , $fails         = __webpack_require__(16)
   , shared         = __webpack_require__(134)
-  , setToStringTag = __webpack_require__(62)
+  , setToStringTag = __webpack_require__(63)
   , uid            = __webpack_require__(49)
   , wks            = __webpack_require__(13)
   , wksExt         = __webpack_require__(221)
@@ -43754,7 +43805,7 @@ var global         = __webpack_require__(8)
   , gOPNExt        = __webpack_require__(485)
   , $GOPD          = __webpack_require__(45)
   , $DP            = __webpack_require__(17)
-  , $keys          = __webpack_require__(64)
+  , $keys          = __webpack_require__(65)
   , gOPD           = $GOPD.f
   , dP             = $DP.f
   , gOPN           = gOPNExt.f
@@ -43881,7 +43932,7 @@ if(!USE_NATIVE){
   __webpack_require__(85).f  = $propertyIsEnumerable;
   __webpack_require__(104).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(56)){
+  if(DESCRIPTORS && !__webpack_require__(57)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -43970,7 +44021,7 @@ setToStringTag(global.JSON, 'JSON', true);
 
 var global         = __webpack_require__(8)
   , core           = __webpack_require__(79)
-  , LIBRARY        = __webpack_require__(56)
+  , LIBRARY        = __webpack_require__(57)
   , wksExt         = __webpack_require__(221)
   , defineProperty = __webpack_require__(17).f;
 module.exports = function(name){
@@ -43982,7 +44033,7 @@ module.exports = function(name){
 /* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getKeys   = __webpack_require__(64)
+var getKeys   = __webpack_require__(65)
   , toIObject = __webpack_require__(31);
 module.exports = function(object, el){
   var O      = toIObject(object)
@@ -43998,7 +44049,7 @@ module.exports = function(object, el){
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
-var getKeys = __webpack_require__(64)
+var getKeys = __webpack_require__(65)
   , gOPS    = __webpack_require__(104)
   , pIE     = __webpack_require__(85);
 module.exports = function(it){
@@ -44121,7 +44172,7 @@ $export($export.S, 'String', {
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export        = __webpack_require__(2)
-  , toIndex        = __webpack_require__(61)
+  , toIndex        = __webpack_require__(62)
   , fromCharCode   = String.fromCharCode
   , $fromCodePoint = String.fromCodePoint;
 
@@ -44163,7 +44214,7 @@ $export($export.P, 'String', {
 /* 493 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(59)
+var toInteger = __webpack_require__(60)
   , defined   = __webpack_require__(44);
 // true  -> String#at
 // false -> String#codePointAt
@@ -44489,7 +44540,7 @@ var $export = __webpack_require__(2);
 
 $export($export.P, 'Array', {copyWithin: __webpack_require__(215)});
 
-__webpack_require__(65)('copyWithin');
+__webpack_require__(66)('copyWithin');
 
 /***/ }),
 /* 507 */
@@ -44509,7 +44560,7 @@ $export($export.P + $export.F * forced, 'Array', {
     return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
   }
 });
-__webpack_require__(65)(KEY);
+__webpack_require__(66)(KEY);
 
 /***/ }),
 /* 508 */
@@ -44529,7 +44580,7 @@ $export($export.P + $export.F * forced, 'Array', {
     return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
   }
 });
-__webpack_require__(65)(KEY);
+__webpack_require__(66)(KEY);
 
 /***/ }),
 /* 509 */
@@ -44540,7 +44591,7 @@ var $export = __webpack_require__(2);
 
 $export($export.P, 'Array', {fill: __webpack_require__(136)});
 
-__webpack_require__(65)('fill');
+__webpack_require__(66)('fill');
 
 /***/ }),
 /* 510 */
@@ -44917,7 +44968,7 @@ $export($export.P, 'Array', {
   }
 });
 
-__webpack_require__(65)('includes');
+__webpack_require__(66)('includes');
 
 /***/ }),
 /* 535 */
@@ -45082,7 +45133,7 @@ var $iterators    = __webpack_require__(141)
   , redefine      = __webpack_require__(43)
   , global        = __webpack_require__(8)
   , hide          = __webpack_require__(27)
-  , Iterators     = __webpack_require__(63)
+  , Iterators     = __webpack_require__(64)
   , wks           = __webpack_require__(13)
   , ITERATOR      = wks('iterator')
   , TO_STRING_TAG = wks('toStringTag')
@@ -54460,7 +54511,7 @@ module.exports = ReactChildren;
 
 
 
-var _prodInvariant = __webpack_require__(67);
+var _prodInvariant = __webpack_require__(68);
 
 var invariant = __webpack_require__(5);
 
@@ -54577,7 +54628,7 @@ module.exports = PooledClass;
 
 
 
-var _prodInvariant = __webpack_require__(67);
+var _prodInvariant = __webpack_require__(68);
 
 var ReactCurrentOwner = __webpack_require__(32);
 var REACT_ELEMENT_TYPE = __webpack_require__(232);
@@ -54998,7 +55049,7 @@ module.exports = ReactDOMFactories;
 
 
 
-var _prodInvariant = __webpack_require__(67);
+var _prodInvariant = __webpack_require__(68);
 
 var ReactPropTypeLocationNames = __webpack_require__(556);
 var ReactPropTypesSecret = __webpack_require__(557);
@@ -56163,7 +56214,7 @@ module.exports = factory;
  */
 
 
-var _prodInvariant = __webpack_require__(67);
+var _prodInvariant = __webpack_require__(68);
 
 var ReactElement = __webpack_require__(52);
 
@@ -56213,7 +56264,7 @@ module.exports = onlyChild;
 var ReactDOMComponentTree = __webpack_require__(11);
 var ReactDefaultInjection = __webpack_require__(565);
 var ReactMount = __webpack_require__(260);
-var ReactReconciler = __webpack_require__(68);
+var ReactReconciler = __webpack_require__(69);
 var ReactUpdates = __webpack_require__(33);
 var ReactVersion = __webpack_require__(643);
 
@@ -58503,7 +58554,7 @@ module.exports = ReactComponentBrowserEnvironment;
 
 var _prodInvariant = __webpack_require__(7);
 
-var DOMLazyTree = __webpack_require__(69);
+var DOMLazyTree = __webpack_require__(70);
 var ExecutionEnvironment = __webpack_require__(14);
 
 var createNodesFromMarkup = __webpack_require__(584);
@@ -58922,7 +58973,7 @@ var _prodInvariant = __webpack_require__(7),
 
 var AutoFocusUtils = __webpack_require__(589);
 var CSSPropertyOperations = __webpack_require__(590);
-var DOMLazyTree = __webpack_require__(69);
+var DOMLazyTree = __webpack_require__(70);
 var DOMNamespaces = __webpack_require__(157);
 var DOMProperty = __webpack_require__(46);
 var DOMPropertyOperations = __webpack_require__(249);
@@ -60934,7 +60985,7 @@ module.exports = ReactDOMInput;
 
 var _assign = __webpack_require__(10);
 
-var React = __webpack_require__(66);
+var React = __webpack_require__(67);
 var ReactDOMComponentTree = __webpack_require__(11);
 var ReactDOMSelect = __webpack_require__(251);
 
@@ -61233,7 +61284,7 @@ var ReactInstanceMap = __webpack_require__(90);
 var ReactInstrumentation = __webpack_require__(26);
 
 var ReactCurrentOwner = __webpack_require__(32);
-var ReactReconciler = __webpack_require__(68);
+var ReactReconciler = __webpack_require__(69);
 var ReactChildReconciler = __webpack_require__(604);
 
 var emptyFunction = __webpack_require__(25);
@@ -61678,7 +61729,7 @@ module.exports = ReactMultiChild;
 
 
 
-var ReactReconciler = __webpack_require__(68);
+var ReactReconciler = __webpack_require__(69);
 
 var instantiateReactComponent = __webpack_require__(252);
 var KeyEscapeUtils = __webpack_require__(163);
@@ -61840,14 +61891,14 @@ module.exports = ReactChildReconciler;
 var _prodInvariant = __webpack_require__(7),
     _assign = __webpack_require__(10);
 
-var React = __webpack_require__(66);
+var React = __webpack_require__(67);
 var ReactComponentEnvironment = __webpack_require__(160);
 var ReactCurrentOwner = __webpack_require__(32);
 var ReactErrorUtils = __webpack_require__(152);
 var ReactInstanceMap = __webpack_require__(90);
 var ReactInstrumentation = __webpack_require__(26);
 var ReactNodeTypes = __webpack_require__(253);
-var ReactReconciler = __webpack_require__(68);
+var ReactReconciler = __webpack_require__(69);
 
 if (process.env.NODE_ENV !== 'production') {
   var checkReactTypeSpec = __webpack_require__(606);
@@ -63289,7 +63340,7 @@ module.exports = ReactServerUpdateQueue;
 
 var _assign = __webpack_require__(10);
 
-var DOMLazyTree = __webpack_require__(69);
+var DOMLazyTree = __webpack_require__(70);
 var ReactDOMComponentTree = __webpack_require__(11);
 
 var ReactDOMEmptyComponent = function (instantiate) {
@@ -63498,7 +63549,7 @@ var _prodInvariant = __webpack_require__(7),
     _assign = __webpack_require__(10);
 
 var DOMChildrenOperations = __webpack_require__(156);
-var DOMLazyTree = __webpack_require__(69);
+var DOMLazyTree = __webpack_require__(70);
 var ReactDOMComponentTree = __webpack_require__(11);
 
 var escapeTextContentForBrowser = __webpack_require__(113);
@@ -67744,7 +67795,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ReducerTypes = __webpack_require__(71);
+var _ReducerTypes = __webpack_require__(72);
 
 var _ReducerTypes2 = _interopRequireDefault(_ReducerTypes);
 
@@ -67828,7 +67879,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ReducerTypes = __webpack_require__(71);
+var _ReducerTypes = __webpack_require__(72);
 
 var _ReducerTypes2 = _interopRequireDefault(_ReducerTypes);
 
@@ -67919,7 +67970,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ReducerTypes = __webpack_require__(71);
+var _ReducerTypes = __webpack_require__(72);
 
 var _ReducerTypes2 = _interopRequireDefault(_ReducerTypes);
 
@@ -68232,7 +68283,7 @@ var _ajax = __webpack_require__(171);
 
 var _ajax2 = _interopRequireDefault(_ajax);
 
-var _ReducerTypes = __webpack_require__(71);
+var _ReducerTypes = __webpack_require__(72);
 
 var _ReducerTypes2 = _interopRequireDefault(_ReducerTypes);
 
@@ -68829,7 +68880,7 @@ var _ajax = __webpack_require__(171);
 
 var _ajax2 = _interopRequireDefault(_ajax);
 
-var _ReducerTypes = __webpack_require__(71);
+var _ReducerTypes = __webpack_require__(72);
 
 var _ReducerTypes2 = _interopRequireDefault(_ReducerTypes);
 
@@ -69085,7 +69136,7 @@ var _ajax = __webpack_require__(171);
 
 var _ajax2 = _interopRequireDefault(_ajax);
 
-var _ReducerTypes = __webpack_require__(71);
+var _ReducerTypes = __webpack_require__(72);
 
 var _ReducerTypes2 = _interopRequireDefault(_ReducerTypes);
 
@@ -69097,7 +69148,7 @@ var _DaeMemberInfo = __webpack_require__(177);
 
 var _DaeMemberInfo2 = _interopRequireDefault(_DaeMemberInfo);
 
-var _DaeGameInfo = __webpack_require__(73);
+var _DaeGameInfo = __webpack_require__(54);
 
 var _DaeGameInfo2 = _interopRequireDefault(_DaeGameInfo);
 
@@ -70317,7 +70368,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _invariant = __webpack_require__(70);
+var _invariant = __webpack_require__(71);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -70525,7 +70576,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _invariant = __webpack_require__(70);
+var _invariant = __webpack_require__(71);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -70967,7 +71018,7 @@ var _DateHeader2 = _interopRequireDefault(_DateHeader);
 
 var _propTypes3 = __webpack_require__(23);
 
-var _eventLevels = __webpack_require__(54);
+var _eventLevels = __webpack_require__(55);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -73125,7 +73176,7 @@ var _dates = __webpack_require__(15);
 
 var _dates2 = _interopRequireDefault(_dates);
 
-var _eventLevels = __webpack_require__(54);
+var _eventLevels = __webpack_require__(55);
 
 var _helpers = __webpack_require__(93);
 
@@ -73603,7 +73654,7 @@ var _EventRowMixin = __webpack_require__(290);
 
 var _EventRowMixin2 = _interopRequireDefault(_EventRowMixin);
 
-var _eventLevels = __webpack_require__(54);
+var _eventLevels = __webpack_require__(55);
 
 var _messages = __webpack_require__(121);
 
@@ -75015,7 +75066,7 @@ var _accessors = __webpack_require__(77);
 
 var _propTypes3 = __webpack_require__(23);
 
-var _eventLevels = __webpack_require__(54);
+var _eventLevels = __webpack_require__(55);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76882,7 +76933,7 @@ module.exports = copySymbolsIn;
 /* 788 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(55),
+var getNative = __webpack_require__(56),
     root = __webpack_require__(36);
 
 /* Built-in method references that are verified to be native. */
@@ -76895,7 +76946,7 @@ module.exports = DataView;
 /* 789 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(55),
+var getNative = __webpack_require__(56),
     root = __webpack_require__(36);
 
 /* Built-in method references that are verified to be native. */
@@ -76908,7 +76959,7 @@ module.exports = Promise;
 /* 790 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(55),
+var getNative = __webpack_require__(56),
     root = __webpack_require__(36);
 
 /* Built-in method references that are verified to be native. */
@@ -76921,7 +76972,7 @@ module.exports = Set;
 /* 791 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getNative = __webpack_require__(55),
+var getNative = __webpack_require__(56),
     root = __webpack_require__(36);
 
 /* Built-in method references that are verified to be native. */
@@ -79902,7 +79953,7 @@ var _Print = __webpack_require__(48);
 
 var _Print2 = _interopRequireDefault(_Print);
 
-var _Style = __webpack_require__(72);
+var _Style = __webpack_require__(73);
 
 var _Style2 = _interopRequireDefault(_Style);
 
@@ -80295,7 +80346,7 @@ var _propTypes = __webpack_require__(4);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Style = __webpack_require__(72);
+var _Style = __webpack_require__(73);
 
 var _Style2 = _interopRequireDefault(_Style);
 
@@ -80754,7 +80805,7 @@ var _Print = __webpack_require__(48);
 
 var _Print2 = _interopRequireDefault(_Print);
 
-var _Style = __webpack_require__(72);
+var _Style = __webpack_require__(73);
 
 var _Style2 = _interopRequireDefault(_Style);
 
@@ -81139,7 +81190,7 @@ var _ComInfo = __webpack_require__(860);
 
 var _ComInfo2 = _interopRequireDefault(_ComInfo);
 
-var _ComScore = __webpack_require__(866);
+var _ComScore = __webpack_require__(867);
 
 var _ComScore2 = _interopRequireDefault(_ComScore);
 
@@ -81222,11 +81273,11 @@ var _Print = __webpack_require__(48);
 
 var _Print2 = _interopRequireDefault(_Print);
 
-var _DaeGameInfo = __webpack_require__(73);
+var _DaeGameInfo = __webpack_require__(54);
 
 var _DaeGameInfo2 = _interopRequireDefault(_DaeGameInfo);
 
-var _Style = __webpack_require__(72);
+var _Style = __webpack_require__(73);
 
 var _Style2 = _interopRequireDefault(_Style);
 
@@ -81370,7 +81421,7 @@ var _propTypes = __webpack_require__(4);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _DaeGameInfo = __webpack_require__(73);
+var _DaeGameInfo = __webpack_require__(54);
 
 var _DaeGameInfo2 = _interopRequireDefault(_DaeGameInfo);
 
@@ -81394,11 +81445,11 @@ var _ComGame = __webpack_require__(862);
 
 var _ComGame2 = _interopRequireDefault(_ComGame);
 
-var _ComMember = __webpack_require__(863);
+var _ComMember = __webpack_require__(864);
 
 var _ComMember2 = _interopRequireDefault(_ComMember);
 
-var _ComInning = __webpack_require__(865);
+var _ComInning = __webpack_require__(866);
 
 var _ComInning2 = _interopRequireDefault(_ComInning);
 
@@ -81437,6 +81488,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // ----------------------------------------
 /**
  * `/stats/mlb/game/YYYY/GAME_ID` の tab と切替で表示するコンテナの親
+ * - {@link ComInfoTab}
+ * - {@link ComGame}
+ * - {@link ComMember}
+ * - {@link ComInning}
  */
 var ComInfo = function (_Component) {
   _inherits(ComInfo, _Component);
@@ -81515,7 +81570,7 @@ var ComInfo = function (_Component) {
           }
         case 'inning':
           {
-            return _react2.default.createElement(_ComInning2.default, { innings: innings });
+            return _react2.default.createElement(_ComInning2.default, { info: info, innings: innings });
           }
         default:
           return null;
@@ -81782,7 +81837,11 @@ var _Print = __webpack_require__(48);
 
 var _Print2 = _interopRequireDefault(_Print);
 
-var _DaeGameInfo = __webpack_require__(73);
+var _Positions = __webpack_require__(863);
+
+var _Positions2 = _interopRequireDefault(_Positions);
+
+var _DaeGameInfo = __webpack_require__(54);
 
 var _DaeGameInfo2 = _interopRequireDefault(_DaeGameInfo);
 
@@ -81805,6 +81864,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 // dae
+
+
+// util
+/**
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2017/07/28 - 22:05
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+// react
 var ComTeamRecord = function ComTeamRecord(_ref) {
   var info = _ref.info;
   return _react2.default.createElement(
@@ -81878,22 +81953,6 @@ var ComTeamRecord = function ComTeamRecord(_ref) {
  * propTypes
  * @type {{info: DaeGameInfo}}
  */
-
-
-// util
-/**
- * Copyright (c) 2011-2017 inazumatv.com, inc.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2017/07/28 - 22:05
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- */
-
-// react
 ComTeamRecord.propTypes = {
   info: _propTypes2.default.instanceOf(_DaeGameInfo2.default).isRequired
 };
@@ -81901,37 +81960,37 @@ ComTeamRecord.propTypes = {
 // ----------------------------------------
 // 試合情報・控え選手
 // ----------------------------------------
-/**
- * 控え選手
- * 左・右・両 に見合う class name を取得します
- * - mlb_live__starting--bench__td--player__handed--left
- * - mlb_live__starting--bench__td--player__handed--right
- * - mlb_live__starting--bench__td--player__handed--switch
- * @param {DaePlayer} reserve 控え選手
- * @returns {string} 左・右・両 に見合う class name
- */
-var reserveHandType = function reserveHandType(reserve) {
-  var type = reserve.position === '投' ? reserve.hand : reserve.batHand;
-  if (type === '左') {
-    return 'mlb_live__starting--bench__td--player__handed--left';
-  } else if (type === '右') {
-    return 'mlb_live__starting--bench__td--player__handed--right';
-  }
-  return 'mlb_live__starting--bench__td--player__handed--switch';
-};
+// /**
+//  * 控え選手
+//  * 左・右・両 に見合う class name を取得します
+//  * - mlb_live__starting--bench__td--player__handed--left
+//  * - mlb_live__starting--bench__td--player__handed--right
+//  * - mlb_live__starting--bench__td--player__handed--switch
+//  * @param {DaePlayer} reserve 控え選手
+//  * @returns {string} 左・右・両 に見合う class name
+//  */
+// const reserveHandType = (reserve) => {
+//   const type = reserve.position === '投' ? reserve.hand : reserve.batHand;
+//   if (type === '左') {
+//     return 'mlb_live__starting--bench__td--player__handed--left';
+//   } else if (type === '右') {
+//     return 'mlb_live__starting--bench__td--player__handed--right';
+//   }
+//   return 'mlb_live__starting--bench__td--player__handed--switch';
+// };
 
-/**
- * 控え選手
- * 左・右・両 に見合う文字列
- * @param {DaePlayer} reserve 控え選手
- * @returns {string} 左・右・両 に見合う文字列
- */
-var reserveTypeStr = function reserveTypeStr(reserve) {
-  if (reserve.position === '投') {
-    return reserve.hand + '\u6295';
-  }
-  return reserve.batHand + '\u6253';
-};
+// /**
+//  * 控え選手
+//  * 左・右・両 に見合う文字列
+//  * @param {DaePlayer} reserve 控え選手
+//  * @returns {string} 左・右・両 に見合う文字列
+//  */
+// const reserveTypeStr = (reserve) => {
+//   if (reserve.position === '投') {
+//     return `${reserve.hand}投`;
+//   }
+//   return `${reserve.batHand}打`;
+// };
 
 /**
  * tbody へカテゴリ別に class を取得する
@@ -81983,8 +82042,8 @@ var comReservesPlayer = function comReservesPlayer(list) {
         { className: 'mlb_live__starting--bench__td--player' },
         _react2.default.createElement(
           'i',
-          { className: reserveHandType(player) },
-          reserveTypeStr(player)
+          { className: _Positions2.default.handClass(player, 'bench') },
+          _Positions2.default.handStr(player)
         ),
         _Print2.default.str(player.player)
       )
@@ -82083,36 +82142,45 @@ ComReserve.propTypes = {
 // ----------------------------------------
 // 試合情報・スターティングメンバー
 // ----------------------------------------
-/**
- * 試合情報・スターティングメンバー
- * 左・右・両 に見合う class name を取得します
- * - mlb_live__starting--member__td--player__handed--left
- * - mlb_live__starting--member__td--player__handed--right
- * - mlb_live__starting--member__td--player__handed--switch
- * @param {DaePlayer} starting スターティングメンバー選手情報
- * @returns {string} 左・右・両 に見合う class name
- */
-var batType = function batType(starting) {
-  var type = starting.position === '投' ? starting.hand : starting.batHand;
-  if (type === '左') {
-    return 'mlb_live__starting--member__td--player__handed--left';
-  } else if (type === '右') {
-    return 'mlb_live__starting--member__td--player__handed--right';
-  }
-  return 'mlb_live__starting--member__td--player__handed--switch';
-};
+// /**
+//  * 試合情報・スターティングメンバー
+//  * 左・右・両 に見合う class name を取得します
+//  * - mlb_live__starting--member__td--player__handed--left
+//  * - mlb_live__starting--member__td--player__handed--right
+//  * - mlb_live__starting--member__td--player__handed--switch
+//  * @param {DaePlayer} starting スターティングメンバー選手情報
+//  * @returns {string} 左・右・両 に見合う class name
+//  */
+// const batType = (starting) => {
+//   const type = starting.position === '投' ? starting.hand : starting.batHand;
+//   if (!type) {
+//     return '';
+//   } else if (type === '左') {
+//     return 'mlb_live__starting--member__td--player__handed--left';
+//   } else if (type === '右') {
+//     return 'mlb_live__starting--member__td--player__handed--right';
+//   }
+//   return 'mlb_live__starting--member__td--player__handed--switch';
+// };
 
-/**
- * 左・右・両 に見合う文字列を取得します
- * @param {DaePlayer} starting スターティングメンバー選手情報
- * @returns {string} 右投 / 右打, position で出力を変えます
- */
-var batTypeStr = function batTypeStr(starting) {
-  if (starting.position === '投') {
-    return starting.hand + '\u6295';
-  }
-  return starting.batHand + '\u6253';
-};
+// /**
+//  * badHand / hand 空のことがある
+//  * 左・右・両 に見合う文字列を取得します
+//  * @param {DaePlayer} starting スターティングメンバー選手情報
+//  * @returns {string} 右投 / 右打, position で出力を変えます
+//  */
+// const batTypeStr = (starting) => {
+//   let postfix = '打';
+//   let prefix = starting.batHand;
+//   if (starting.position === '投') {
+//     postfix = '投';
+//     prefix = starting.hand;
+//   }
+//   if (prefix) {
+//     return `${prefix}${postfix}`;
+//   }
+//   return '';
+// };
 
 /**
  * 試合情報・スターティングメンバー
@@ -82157,15 +82225,15 @@ var ComStarting = function ComStarting(_ref3) {
               _react2.default.createElement(
                 'td',
                 { className: 'mlb_live__starting--member__td--position' },
-                _Print2.default.str(starting.position)
+                _Print2.default.str(starting.position, '-')
               ),
               _react2.default.createElement(
                 'td',
                 { className: 'mlb_live__starting--member__td--player' },
                 _react2.default.createElement(
                   'i',
-                  { className: batType(starting) },
-                  batTypeStr(starting)
+                  { className: _Positions2.default.handClass(starting, 'member') },
+                  _Positions2.default.handStr(starting)
                 ),
                 _Print2.default.str(starting.player)
               )
@@ -82196,15 +82264,15 @@ var ComStarting = function ComStarting(_ref3) {
               _react2.default.createElement(
                 'td',
                 { className: 'mlb_live__starting--member__td--position' },
-                _Print2.default.str(starting.position)
+                _Print2.default.str(starting.position, '-')
               ),
               _react2.default.createElement(
                 'td',
                 { className: 'mlb_live__starting--member__td--player' },
                 _react2.default.createElement(
                   'i',
-                  { className: batType(starting) },
-                  batTypeStr(starting)
+                  { className: _Positions2.default.handClass(starting, 'member') },
+                  _Positions2.default.handStr(starting)
                 ),
                 _Print2.default.str(starting.player)
               )
@@ -82228,23 +82296,23 @@ ComStarting.propTypes = {
 // ----------------------------------------
 // 試合情報・予告先発投手
 // ----------------------------------------
-/**
- * 予告先発投手
- * 左・右・両 に見合う class name を取得します
- * - mlb_live__starting--pitcher__handed--left
- * - mlb_live__starting--pitcher__handed--right
- * - mlb_live__starting--pitcher__handed--switch
- * @param {string} type 左・右・両
- * @returns {*} 左・右・両 に見合う class name を返します
- */
-var pitcherHandType = function pitcherHandType(type) {
-  if (type === '左') {
-    return 'mlb_live__starting--pitcher__handed--left';
-  } else if (type === '右') {
-    return 'mlb_live__starting--pitcher__handed--right';
-  }
-  return 'mlb_live__starting--pitcher__handed--switch';
-};
+// /**
+//  * 予告先発投手
+//  * 左・右・両 に見合う class name を取得します
+//  * - mlb_live__starting--pitcher__handed--left
+//  * - mlb_live__starting--pitcher__handed--right
+//  * - mlb_live__starting--pitcher__handed--switch
+//  * @param {string} type 左・右・両
+//  * @returns {*} 左・右・両 に見合う class name を返します
+//  */
+// const pitcherHandType = (type) => {
+//   if (type === '左') {
+//     return 'mlb_live__starting--pitcher__handed--left';
+//   } else if (type === '右') {
+//     return 'mlb_live__starting--pitcher__handed--right';
+//   }
+//   return 'mlb_live__starting--pitcher__handed--switch';
+// };
 
 /**
  * 試合情報・予告先発投手
@@ -82308,7 +82376,7 @@ var ComGamePitchers = function ComGamePitchers(_ref4) {
               _Print2.default.str(info.home.pitcher.player),
               _react2.default.createElement(
                 'i',
-                { className: pitcherHandType(info.home.pitcher.hand) },
+                { className: _Positions2.default.startingPitcher(info.home.pitcher.hand) },
                 _Print2.default.str(info.home.pitcher.hand)
               )
             )
@@ -82332,7 +82400,7 @@ var ComGamePitchers = function ComGamePitchers(_ref4) {
               _Print2.default.str(info.visitor.pitcher.player),
               _react2.default.createElement(
                 'i',
-                { className: pitcherHandType(info.visitor.pitcher.hand) },
+                { className: _Positions2.default.startingPitcher(info.visitor.pitcher.hand) },
                 _Print2.default.str(info.visitor.pitcher.hand)
               )
             )
@@ -82512,6 +82580,138 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2017/07/31 - 21:39
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+/**
+ * 選手情報に関する出力補助機能を提供します
+ */
+var Positions = function () {
+  function Positions() {
+    _classCallCheck(this, Positions);
+  }
+
+  _createClass(Positions, null, [{
+    key: 'handStr',
+
+    // static category(position) {
+    //   switch (position) {
+    //     case '投': {
+    //       return '投手';
+    //     }
+    //     case '捕': {
+    //       return '捕手';
+    //     }
+    //     case '指': {
+    //       return '指名打者';
+    //     }
+    //     case '左':
+    //     case '右':
+    //     case '中': {
+    //       return '外野手';
+    //     }
+    //     default: {
+    //       return '内野手';
+    //     }
+    //   }
+    // }
+    /**
+     * 左・右・両 に見合う文字列を取得します
+     * - badHand / hand 空のことがある
+     * @param {DaePlayer} player 選手情報
+     * @returns {string} 右投 / 右打, position で出力を変えます
+     */
+    value: function handStr(player) {
+      var postfix = '打';
+      var prefix = player.batHand;
+      if (player.position === '投') {
+        postfix = '投';
+        prefix = player.hand;
+      }
+      if (prefix) {
+        return '' + prefix + postfix;
+      }
+      return '';
+    }
+    /**
+     * 試合情報・スターティングメンバー / 控え選手
+     * 左・右・両 に見合う class name を取得します
+     * - mlb_live__starting--[member | bench]__td--player__handed--left
+     * - mlb_live__starting--[member | bench]__td--player__handed--right
+     * - mlb_live__starting--[member | bench]__td--player__handed--switch
+     * @param {DaePlayer} player スターティングメンバー選手情報
+     * @param {string} [mode=member] class に付与する文字列 member | bench
+     * @returns {string} 左・右・両 に見合う class name
+     */
+
+  }, {
+    key: 'handClass',
+    value: function handClass(player) {
+      var mode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'member';
+
+      var type = player.position === '投' ? player.hand : player.batHand;
+      if (!type) {
+        return '';
+      } else if (type === '左') {
+        return 'mlb_live__starting--' + mode + '__td--player__handed--left';
+      } else if (type === '右') {
+        return 'mlb_live__starting--' + mode + '__td--player__handed--right';
+      }
+      return 'mlb_live__starting--' + mode + '__td--player__handed--switch';
+    }
+    /**
+     * 予告先発投手
+     * 左・右・両 に見合う class name を取得します
+     * - mlb_live__starting--pitcher__handed--left
+     * - mlb_live__starting--pitcher__handed--right
+     * - mlb_live__starting--pitcher__handed--switch
+     * @param {string} type 左・右・両
+     * @returns {*} 左・右・両 に見合う class name を返します
+     */
+
+  }, {
+    key: 'startingPitcher',
+    value: function startingPitcher(type) {
+      if (!type) {
+        return '';
+      } else if (type === '左') {
+        return 'mlb_live__starting--pitcher__handed--left';
+      } else if (type === '右') {
+        return 'mlb_live__starting--pitcher__handed--right';
+      }
+      return 'mlb_live__starting--pitcher__handed--switch';
+    }
+  }]);
+
+  return Positions;
+}();
+
+exports.default = Positions;
+
+/***/ }),
+/* 864 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
@@ -82520,7 +82720,7 @@ var _propTypes = __webpack_require__(4);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _DaeGameInfo = __webpack_require__(73);
+var _DaeGameInfo = __webpack_require__(54);
 
 var _DaeGameInfo2 = _interopRequireDefault(_DaeGameInfo);
 
@@ -82528,7 +82728,7 @@ var _DaeMemberInfo = __webpack_require__(177);
 
 var _DaeMemberInfo2 = _interopRequireDefault(_DaeMemberInfo);
 
-var _ComMemberTab = __webpack_require__(864);
+var _ComMemberTab = __webpack_require__(865);
 
 var _ComMemberTab2 = _interopRequireDefault(_ComMemberTab);
 
@@ -83022,7 +83222,7 @@ ComMember.defaultProps = {
 exports.default = ComMember;
 
 /***/ }),
-/* 864 */
+/* 865 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -83191,7 +83391,7 @@ ComMemberTab.propTypes = {
 exports.default = ComMemberTab;
 
 /***/ }),
-/* 865 */
+/* 866 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -83213,11 +83413,86 @@ var _DaeInnings = __webpack_require__(178);
 
 var _DaeInnings2 = _interopRequireDefault(_DaeInnings);
 
+var _DaeGameInfo = __webpack_require__(54);
+
+var _DaeGameInfo2 = _interopRequireDefault(_DaeGameInfo);
+
 var _Print = __webpack_require__(48);
 
 var _Print2 = _interopRequireDefault(_Print);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ComInningsBody = function ComInningsBody(_ref) {
+  var event = _ref.event,
+      type = _ref.type,
+      info = _ref.info,
+      inning = _ref.inning;
+
+  // TODO score, 対戦相手のスコア表示方法を考える
+  var homeScore = '';
+  var visitorScore = '';
+  if (type === 'home') {
+    homeScore = _Print2.default.int(event.score);
+    visitorScore = info.visitor.board.scores.score[inning].total;
+  } else if (type === 'visitor') {
+    visitorScore = _Print2.default.int(event.score);
+    if (inning === 1) {
+      homeScore = '0';
+    } else {
+      homeScore = info.home.board.scores.score[inning - 1].total;
+    }
+  }
+  return _react2.default.createElement(
+    'tbody',
+    null,
+    _react2.default.createElement(
+      'tr',
+      { className: 'body-' + event.id },
+      _react2.default.createElement(
+        'td',
+        { className: 'mlb_live__inning__td--lineup' },
+        _react2.default.createElement(
+          'span',
+          null,
+          _Print2.default.int(event.index)
+        )
+      ),
+      _react2.default.createElement(
+        'td',
+        { className: 'mlb_live__inning__td--play' },
+        _react2.default.createElement(
+          'span',
+          { className: 'mlb_live__inning__player' },
+          _Print2.default.str(event.batter)
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'mlb_live__inning__action' },
+          _Print2.default.str(event.result)
+        )
+      ),
+      _react2.default.createElement(
+        'td',
+        { className: 'mlb_live__inning__td--out' },
+        _Print2.default.int(event.out)
+      ),
+      _react2.default.createElement(
+        'td',
+        { className: 'mlb_live__inning__td--score--home' },
+        homeScore
+      ),
+      _react2.default.createElement(
+        'td',
+        { className: 'mlb_live__inning__td--score--visitor' },
+        visitorScore
+      )
+    )
+  );
+};
+
+// util
+
 
 // dae
 /**
@@ -83233,70 +83508,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 
 // react
-var ComInningsBody = function ComInningsBody(_ref) {
-  var event = _ref.event,
-      type = _ref.type;
-
-  var homeScore = '';
-  var visitorScore = '';
-  if (type === 'home') {
-    homeScore = _Print2.default.int(event.score);
-  } else if (type === 'visitor') {
-    visitorScore = _Print2.default.int(event.score);
-  }
-  return _react2.default.createElement(
-    'tr',
-    null,
-    _react2.default.createElement(
-      'td',
-      { className: 'mlb_live__inning__td--lineup' },
-      '\xA0'
-    ),
-    _react2.default.createElement(
-      'td',
-      { className: 'mlb_live__inning__td--play' },
-      _react2.default.createElement(
-        'span',
-        { className: 'mlb_live__inning__player' },
-        _Print2.default.str(event.batter)
-      ),
-      _react2.default.createElement(
-        'span',
-        { className: 'mlb_live__inning__action' },
-        _Print2.default.str(event.result)
-      )
-    ),
-    _react2.default.createElement(
-      'td',
-      { className: 'mlb_live__inning__td--out' },
-      _Print2.default.int(event.out)
-    ),
-    _react2.default.createElement(
-      'td',
-      { className: 'mlb_live__inning__td--score--home' },
-      homeScore
-    ),
-    _react2.default.createElement(
-      'td',
-      { className: 'mlb_live__inning__td--score--visitor' },
-      visitorScore
-    )
-  );
-};
-
-// util
 
 
 ComInningsBody.propTypes = {
   event: _propTypes2.default.instanceOf(_DaeInnings.DaeEvent).isRequired,
-  type: _propTypes2.default.string.isRequired
+  type: _propTypes2.default.string.isRequired,
+  info: _propTypes2.default.instanceOf(_DaeGameInfo2.default).isRequired,
+  inning: _propTypes2.default.number.isRequired
 };
 
 var ComInningsHead = function ComInningsHead(_ref2) {
-  var pitcher = _ref2.pitcher;
+  var pitcher = _ref2.pitcher,
+      id = _ref2.id,
+      event = _ref2.event;
   return _react2.default.createElement(
     'thead',
-    null,
+    { className: id, 'data-result': event.result },
     _react2.default.createElement(
       'tr',
       null,
@@ -83325,14 +83552,40 @@ var ComInningsHead = function ComInningsHead(_ref2) {
 };
 
 ComInningsHead.propTypes = {
-  pitcher: _propTypes2.default.string.isRequired
+  pitcher: _propTypes2.default.string.isRequired,
+  id: _propTypes2.default.string.isRequired,
+  event: _propTypes2.default.instanceOf(_DaeInnings.DaeEvent).isRequired
+};
+
+var inningsHead = function inningsHead(inning, event, pitcher, count) {
+  return _react2.default.createElement(ComInningsHead, {
+    key: 'head-' + inning + '-' + event.id + '-' + count,
+    pitcher: pitcher,
+    id: event.id,
+    event: event
+  });
+};
+
+var inningsBody = function inningsBody(inning, event, type, info, count) {
+  return _react2.default.createElement(ComInningsBody, {
+    key: 'body-' + inning + '-' + event.id + '-' + count,
+    event: event,
+    type: type,
+    info: info,
+    inning: inning
+  });
 };
 
 var ComInningsEvent = function ComInningsEvent(_ref3) {
   var type = _ref3.type,
       team = _ref3.team,
-      inning = _ref3.inning;
+      inning = _ref3.inning,
+      info = _ref3.info;
 
+  // console.log('ComInningsEvent', type, inning, info.innings, info.home.win, info.home.board.scores.score[inning]);
+  if (type === 'home' && inning === info.innings && info.home.win && info.home.board.scores.score[inning].score === 0) {
+    return null;
+  }
   var pitcher = '';
   return _react2.default.createElement(
     'div',
@@ -83347,24 +83600,27 @@ var ComInningsEvent = function ComInningsEvent(_ref3) {
       { className: 'mlb_live__inning' },
       team.events.opposite.map(function (event, index) {
         var count = index + 1;
+        var elements = [];
         if (event.pitcher && event.pitcher !== pitcher) {
           pitcher = event.pitcher;
-          return _react2.default.createElement(ComInningsHead, {
-            key: type + '-' + count + '-head-' + inning + '-' + event.out + '-' + event.score,
-            pitcher: pitcher
-          });
+          // return (
+          //   <ComInningsHead
+          //     key={`head-${inning}-${event.id}`}
+          //     pitcher={pitcher}
+          //     id={event.id}
+          //   />
+          // );
+          elements.push(inningsHead(inning, event, pitcher, count));
         }
-        if (!event.batter) {
-          return null;
+        if (event.batter) {
+          elements.push(inningsBody(inning, event, type, info, count));
         }
-        return _react2.default.createElement(
-          'tbody',
-          { key: type + '-' + count + '-body-' + inning + '-' + event.out + '-' + event.score },
-          _react2.default.createElement(ComInningsBody, {
-            event: event,
-            type: type
-          })
-        );
+        if (!elements.length) {
+          elements.push(null);
+        }
+        return elements.map(function (element) {
+          return element;
+        });
       })
     )
   );
@@ -83373,12 +83629,14 @@ var ComInningsEvent = function ComInningsEvent(_ref3) {
 ComInningsEvent.propTypes = {
   type: _propTypes2.default.string.isRequired,
   team: _propTypes2.default.instanceOf(_DaeInnings.DaeInningTeam).isRequired,
-  inning: _propTypes2.default.number.isRequired
+  inning: _propTypes2.default.number.isRequired,
+  info: _propTypes2.default.instanceOf(_DaeGameInfo2.default).isRequired
 };
 
 var ComInningsEvents = function ComInningsEvents(_ref4) {
   var events = _ref4.events,
-      inning = _ref4.inning;
+      inning = _ref4.inning,
+      info = _ref4.info;
 
   // home -> visitor
   // 3out -> 0out
@@ -83390,12 +83648,14 @@ var ComInningsEvents = function ComInningsEvents(_ref4) {
     _react2.default.createElement(ComInningsEvent, {
       type: 'home',
       team: home,
-      inning: inning
+      inning: inning,
+      info: info
     }),
     _react2.default.createElement(ComInningsEvent, {
       type: 'visitor',
       team: visitor,
-      inning: inning
+      inning: inning,
+      info: info
     })
   );
 };
@@ -83405,14 +83665,16 @@ ComInningsEvents.propTypes = {
     home: _propTypes2.default.instanceOf(_DaeInnings.DaeInningTeam).isRequired,
     visitor: _propTypes2.default.instanceOf(_DaeInnings.DaeInningTeam).isRequired
   }).isRequired,
-  inning: _propTypes2.default.number.isRequired
+  inning: _propTypes2.default.number.isRequired,
+  info: _propTypes2.default.instanceOf(_DaeGameInfo2.default).isRequired
 };
 
 // ----------------------------------------
 // イニング速報
 // ----------------------------------------
 var ComInning = function ComInning(_ref5) {
-  var innings = _ref5.innings;
+  var innings = _ref5.innings,
+      info = _ref5.info;
 
   var events = innings.opposite;
   console.log('ComInning events', innings, events);
@@ -83424,20 +83686,22 @@ var ComInning = function ComInning(_ref5) {
       return _react2.default.createElement(ComInningsEvents, {
         key: 'innings-' + inning,
         events: innings.board[inning],
-        inning: inning
+        inning: inning,
+        info: info
       });
     })
   );
 };
 
 ComInning.propTypes = {
-  innings: _propTypes2.default.instanceOf(_DaeInnings2.default).isRequired
+  innings: _propTypes2.default.instanceOf(_DaeInnings2.default).isRequired,
+  info: _propTypes2.default.instanceOf(_DaeGameInfo2.default).isRequired
 };
 
 exports.default = ComInning;
 
 /***/ }),
-/* 866 */
+/* 867 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -83457,11 +83721,11 @@ var _propTypes = __webpack_require__(4);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _List = __webpack_require__(867);
+var _List = __webpack_require__(868);
 
 var _List2 = _interopRequireDefault(_List);
 
-var _DaeGameInfo = __webpack_require__(73);
+var _DaeGameInfo = __webpack_require__(54);
 
 var _DaeGameInfo2 = _interopRequireDefault(_DaeGameInfo);
 
@@ -83469,7 +83733,7 @@ var _Print = __webpack_require__(48);
 
 var _Print2 = _interopRequireDefault(_Print);
 
-var _ComScoreRefresh = __webpack_require__(868);
+var _ComScoreRefresh = __webpack_require__(869);
 
 var _ComScoreRefresh2 = _interopRequireDefault(_ComScoreRefresh);
 
@@ -83714,7 +83978,7 @@ var ComScoreInningsHead = function ComScoreInningsHead(_ref4) {
         return _react2.default.createElement(
           'th',
           { key: 'inning-' + inning, className: className + ' ' + className + '-' + inning },
-          _Print2.default.str(inning)
+          _Print2.default.int(inning)
         );
       })
     )
@@ -84245,7 +84509,7 @@ ComScore.defaultProps = {
 exports.default = ComScore;
 
 /***/ }),
-/* 867 */
+/* 868 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84329,7 +84593,7 @@ var List = function () {
 exports.default = List;
 
 /***/ }),
-/* 868 */
+/* 869 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84626,7 +84890,7 @@ ComScoreRefresh.propTypes = {
 exports.default = ComScoreRefresh;
 
 /***/ }),
-/* 869 */
+/* 870 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84663,7 +84927,7 @@ Creator.games = null;
 exports.default = Creator;
 
 /***/ }),
-/* 870 */
+/* 871 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

@@ -26,7 +26,7 @@ const parseInt = self.parseInt;
 /**
  * 選手成績
  */
-class DaePlayer {
+export class DaePlayer {
   /**
    * 選手成績
    * @param {object} info JSON

@@ -16,46 +16,59 @@ import PropTypes from 'prop-types';
 
 // dae
 import DaeInnings, { DaeEvent, DaeInningTeam } from '../../../dae/games/DaeInnings';
+import DaeGameInfo from '../../../dae/games/DaeGameInfo';
 
 // util
 import Print from '../../../util/Print';
 
-const ComInningsBody = ({ event, type }) => {
+const ComInningsBody = ({ event, type, info, inning }) => {
   // TODO score, 対戦相手のスコア表示方法を考える
   let homeScore = '';
   let visitorScore = '';
   if (type === 'home') {
     homeScore = Print.int(event.score);
+    visitorScore = info.visitor.board.scores.score[inning].total;
   } else if (type === 'visitor') {
     visitorScore = Print.int(event.score);
+    if (inning === 1) {
+      homeScore = '0';
+    } else {
+      homeScore = info.home.board.scores.score[inning - 1].total;
+    }
   }
   return (
-    <tr>
-      <td className="mlb_live__inning__td--lineup">&nbsp;</td>
-      <td className="mlb_live__inning__td--play">
-        <span className="mlb_live__inning__player">
-          {Print.str(event.batter)}
-        </span>
-        <span className="mlb_live__inning__action">
-          {Print.str(event.result)}
-        </span>
-      </td>
-      <td className="mlb_live__inning__td--out">
-        {Print.int(event.out)}
-      </td>
-      <td className="mlb_live__inning__td--score--home">{homeScore}</td>
-      <td className="mlb_live__inning__td--score--visitor">{visitorScore}</td>
-    </tr>
+    <tbody>
+      <tr className={`body-${event.id}`}>
+        <td className="mlb_live__inning__td--lineup">
+          <span>{Print.int(event.index)}</span>
+        </td>
+        <td className="mlb_live__inning__td--play">
+          <span className="mlb_live__inning__player">
+            {Print.str(event.batter)}
+          </span>
+          <span className="mlb_live__inning__action">
+            {Print.str(event.result)}
+          </span>
+        </td>
+        <td className="mlb_live__inning__td--out">
+          {Print.int(event.out)}
+        </td>
+        <td className="mlb_live__inning__td--score--home">{homeScore}</td>
+        <td className="mlb_live__inning__td--score--visitor">{visitorScore}</td>
+      </tr>
+    </tbody>
   );
 };
 
 ComInningsBody.propTypes = {
   event: PropTypes.instanceOf(DaeEvent).isRequired,
   type: PropTypes.string.isRequired,
+  info: PropTypes.instanceOf(DaeGameInfo).isRequired,
+  inning: PropTypes.number.isRequired,
 };
 
-const ComInningsHead = ({ pitcher }) => (
-  <thead>
+const ComInningsHead = ({ pitcher, id, event }) => (
+  <thead className={id} data-result={event.result}>
     <tr>
       <th className="mlb_live__inning__th--pitcher" colSpan={2}>
         ピッチャー
@@ -71,9 +84,39 @@ const ComInningsHead = ({ pitcher }) => (
 
 ComInningsHead.propTypes = {
   pitcher: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  event: PropTypes.instanceOf(DaeEvent).isRequired,
 };
 
-const ComInningsEvent = ({ type, team, inning }) => {
+const inningsHead = (inning, event, pitcher, count) => (
+  <ComInningsHead
+    key={`head-${inning}-${event.id}-${count}`}
+    pitcher={pitcher}
+    id={event.id}
+    event={event}
+  />
+);
+
+const inningsBody = (inning, event, type, info, count) => (
+  <ComInningsBody
+    key={`body-${inning}-${event.id}-${count}`}
+    event={event}
+    type={type}
+    info={info}
+    inning={inning}
+  />
+);
+
+const ComInningsEvent = ({ type, team, inning, info }) => {
+  // console.log('ComInningsEvent', type, inning, info.innings, info.home.win, info.home.board.scores.score[inning]);
+  if (
+    type === 'home' &&
+    inning === info.innings &&
+    info.home.win &&
+    info.home.board.scores.score[inning].score === 0
+  ) {
+    return null;
+  }
   let pitcher = '';
   return (
     <div className={`mlb_live__inning__container mlb_live__inning--${type}`}>
@@ -84,26 +127,25 @@ const ComInningsEvent = ({ type, team, inning }) => {
         {
           team.events.opposite.map((event, index) => {
             const count = index + 1;
+            const elements = [];
             if (event.pitcher && event.pitcher !== pitcher) {
               pitcher = event.pitcher;
-              return (
-                <ComInningsHead
-                  key={`${type}-${count}-head-${inning}-${event.out}-${event.score}`}
-                  pitcher={pitcher}
-                />
-              );
+              // return (
+              //   <ComInningsHead
+              //     key={`head-${inning}-${event.id}`}
+              //     pitcher={pitcher}
+              //     id={event.id}
+              //   />
+              // );
+              elements.push(inningsHead(inning, event, pitcher, count));
             }
-            if (!event.batter) {
-              return null;
+            if (event.batter) {
+              elements.push(inningsBody(inning, event, type, info, count));
             }
-            return (
-              <tbody key={`${type}-${count}-body-${inning}-${event.out}-${event.score}`}>
-                <ComInningsBody
-                  event={event}
-                  type={type}
-                />
-              </tbody>
-            );
+            if (!elements.length) {
+              elements.push(null);
+            }
+            return elements.map(element => (element));
           })
         }
       </table>
@@ -115,9 +157,10 @@ ComInningsEvent.propTypes = {
   type: PropTypes.string.isRequired,
   team: PropTypes.instanceOf(DaeInningTeam).isRequired,
   inning: PropTypes.number.isRequired,
+  info: PropTypes.instanceOf(DaeGameInfo).isRequired,
 };
 
-const ComInningsEvents = ({ events, inning }) => {
+const ComInningsEvents = ({ events, inning, info }) => {
   // home -> visitor
   // 3out -> 0out
   const home = events.home;
@@ -128,11 +171,13 @@ const ComInningsEvents = ({ events, inning }) => {
         type="home"
         team={home}
         inning={inning}
+        info={info}
       />
       <ComInningsEvent
         type="visitor"
         team={visitor}
         inning={inning}
+        info={info}
       />
     </div>
   );
@@ -144,12 +189,13 @@ ComInningsEvents.propTypes = {
     visitor: PropTypes.instanceOf(DaeInningTeam).isRequired,
   }).isRequired,
   inning: PropTypes.number.isRequired,
+  info: PropTypes.instanceOf(DaeGameInfo).isRequired,
 };
 
 // ----------------------------------------
 // イニング速報
 // ----------------------------------------
-const ComInning = ({ innings }) => {
+const ComInning = ({ innings, info }) => {
   const events = innings.opposite;
   console.log('ComInning events', innings, events);
   // render
@@ -161,6 +207,7 @@ const ComInning = ({ innings }) => {
             key={`innings-${inning}`}
             events={innings.board[inning]}
             inning={inning}
+            info={info}
           />
         ))
       }
@@ -170,6 +217,7 @@ const ComInning = ({ innings }) => {
 
 ComInning.propTypes = {
   innings: PropTypes.instanceOf(DaeInnings).isRequired,
+  info: PropTypes.instanceOf(DaeGameInfo).isRequired,
 };
 
 export default ComInning;

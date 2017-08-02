@@ -33,6 +33,10 @@ import ComInning from './games/ComInning';
 // ----------------------------------------
 /**
  * `/stats/mlb/game/YYYY/GAME_ID` の tab と切替で表示するコンテナの親
+ * - {@link ComInfoTab}
+ * - {@link ComGame}
+ * - {@link ComMember}
+ * - {@link ComInning}
  */
 export default class ComInfo extends Component {
   // ----------------------------------------
@@ -101,7 +105,7 @@ export default class ComInfo extends Component {
         return <ComMember info={info} member={member} />;
       }
       case 'inning': {
-        return <ComInning innings={innings} />;
+        return <ComInning info={info} innings={innings} />;
       }
       default:
         return null;

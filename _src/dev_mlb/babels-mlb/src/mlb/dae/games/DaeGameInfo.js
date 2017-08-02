@@ -303,7 +303,7 @@ export class DaeInnings {
      * 回毎の得点が格納されます。添字が１であれば1回２であれば2回
      * @type {DaeScores}
      */
-    this.sccores = new DaeScores(origin.scores);
+    this.scores = new DaeScores(origin.scores);
     /**
      * team name - japanese
      * @type {string}
@@ -482,12 +482,12 @@ export default class DaeGameInfo {
       board: board.home,
       starting: starting.home,
       record: record.home,
-      total: board.home.sccores.total,
-      win: board.home.sccores.total > board.visitor.sccores.total,
+      total: board.home.scores.total,
+      win: board.home.scores.total > board.visitor.scores.total,
       hits: board.home.hits,
       errors: board.home.errors,
-      innings: board.home.sccores.innings,
-      scores: board.home.sccores,
+      innings: board.home.scores.innings,
+      scores: board.home.scores,
       jp: board.home.jp,
       initials: board.home.initials,
       pitcher: starting.home,
@@ -516,12 +516,12 @@ export default class DaeGameInfo {
       board: board.visitor,
       starting: starting.visitor,
       record: record.visitor,
-      total: board.visitor.sccores.total,
-      win: board.visitor.sccores.total > board.home.sccores.total,
+      total: board.visitor.scores.total,
+      win: board.visitor.scores.total > board.home.scores.total,
       hits: board.visitor.hits,
       errors: board.visitor.errors,
-      innings: board.visitor.sccores.innings,
-      scores: board.visitor.sccores,
+      innings: board.visitor.scores.innings,
+      scores: board.visitor.scores,
       jp: board.visitor.jp,
       initials: board.visitor.initials,
       pitcher: starting.visitor,
@@ -535,6 +535,6 @@ export default class DaeGameInfo {
      * 試合経過回数 - visitor.innings
      * @type {number}
      */
-    this.innings = board.visitor.sccores.innings;
+    this.innings = board.visitor.scores.innings;
   }
 }

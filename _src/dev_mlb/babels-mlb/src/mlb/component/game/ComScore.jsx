@@ -190,7 +190,7 @@ const ComScoreInningsHead = ({ start, boards }) => {
             // render
             return (
               <th key={`inning-${inning}`} className={`${className} ${className}-${inning}`}>
-                {Print.str(inning)}
+                {Print.int(inning)}
               </th>
             );
           })
