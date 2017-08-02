@@ -186,15 +186,17 @@ export default class ComMember extends Component {
   // ----------------------------------------
   /**
    * propTypes
-   * @type {{info: DaeGameInfo, member: DaeMemberInfo}}
+   * @type {{info: DaeGameInfo, member: DaeMemberInfo, tab: string}}
    */
   static propTypes = {
     info: PropTypes.instanceOf(DaeGameInfo),
     member: PropTypes.instanceOf(DaeMemberInfo),
+    tab: PropTypes.string.isRequired,
+    cb: PropTypes.func.isRequired,
   };
   /**
    * defaultProps
-   * @type {{info: ?DaeGameInfo, member: ?DaeMemberInfo}}
+   * @type {{info: ?DaeGameInfo, member: ?DaeMemberInfo, tab: string}}
    */
   static defaultProps = {
     info: null,
@@ -216,7 +218,7 @@ export default class ComMember extends Component {
      * @type {{tab: string}}
      */
     this.state = {
-      tab: 'batter',
+      tab: props.tab,
     };
     /**
      * bind onChange event handler - tab 切替
@@ -231,6 +233,7 @@ export default class ComMember extends Component {
   onChange(tab) {
     console.log('ComMember.onChange', tab);
     this.setState({ tab });
+    this.props.cb(tab);
   }
   /**
    * 引数 `tab` で表示切替をします
@@ -288,7 +291,7 @@ export default class ComMember extends Component {
    */
   render() {
     const { info, member } = this.props;
-    console.log('ComMember.render info, member', info, member);
+    console.log('ComMember.render info, member', info, member, this.state);
     if (!info || !member) {
       return null;
     }
@@ -296,6 +299,7 @@ export default class ComMember extends Component {
       <div className="js-member-container">
         <ComMemberTab
           change={this.onChange}
+          tab={this.props.tab}
         />
         <section className="mlb_live__record__section">
           {

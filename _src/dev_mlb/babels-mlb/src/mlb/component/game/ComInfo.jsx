@@ -81,6 +81,8 @@ export default class ComInfo extends Component {
      * @type {function}
      */
     this.onChange = this.onChange.bind(this);
+    this.onMember = this.onMember.bind(this);
+    this.member = 'batter';
   }
   // ----------------------------------------
   // METHOD
@@ -93,6 +95,10 @@ export default class ComInfo extends Component {
     console.log('ComInfo.onChange', tab);
     this.setState({ tab });
   }
+  onMember(tab) {
+    console.log('ComInfo.onMember', tab);
+    this.member = tab;
+  }
   choose(tab) {
     const { info, member, team, innings } = this.props;
     console.log('ComInfo.choose tab', tab, info, member, team);
@@ -102,7 +108,7 @@ export default class ComInfo extends Component {
         return <ComGame info={info} team={team} />;
       }
       case 'member': {
-        return <ComMember info={info} member={member} />;
+        return <ComMember info={info} member={member} tab={this.member} cb={this.onMember} />;
       }
       case 'inning': {
         return <ComInning info={info} innings={innings} />;

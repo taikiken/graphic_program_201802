@@ -41537,7 +41537,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-2 17:29:01
+ * 2017-8-2 17:57:29
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -81526,6 +81526,8 @@ var ComInfo = function (_Component) {
      * @type {function}
      */
     _this.onChange = _this.onChange.bind(_this);
+    _this.onMember = _this.onMember.bind(_this);
+    _this.member = 'batter';
     return _this;
   }
   // ----------------------------------------
@@ -81549,6 +81551,12 @@ var ComInfo = function (_Component) {
       this.setState({ tab: tab });
     }
   }, {
+    key: 'onMember',
+    value: function onMember(tab) {
+      console.log('ComInfo.onMember', tab);
+      this.member = tab;
+    }
+  }, {
     key: 'choose',
     value: function choose(tab) {
       var _props = this.props,
@@ -81566,7 +81574,7 @@ var ComInfo = function (_Component) {
           }
         case 'member':
           {
-            return _react2.default.createElement(_ComMember2.default, { info: info, member: member });
+            return _react2.default.createElement(_ComMember2.default, { info: info, member: member, tab: this.member, cb: this.onMember });
           }
         case 'inning':
           {
@@ -83079,7 +83087,7 @@ var ComMember = function (_Component) {
   // ----------------------------------------
   /**
    * propTypes
-   * @type {{info: DaeGameInfo, member: DaeMemberInfo}}
+   * @type {{info: DaeGameInfo, member: DaeMemberInfo, tab: string}}
    */
   function ComMember(props) {
     _classCallCheck(this, ComMember);
@@ -83093,7 +83101,7 @@ var ComMember = function (_Component) {
     var _this = _possibleConstructorReturn(this, (ComMember.__proto__ || Object.getPrototypeOf(ComMember)).call(this, props));
 
     _this.state = {
-      tab: 'batter'
+      tab: props.tab
     };
     /**
      * bind onChange event handler - tab 切替
@@ -83109,7 +83117,7 @@ var ComMember = function (_Component) {
 
   /**
    * defaultProps
-   * @type {{info: ?DaeGameInfo, member: ?DaeMemberInfo}}
+   * @type {{info: ?DaeGameInfo, member: ?DaeMemberInfo, tab: string}}
    */
 
 
@@ -83118,6 +83126,7 @@ var ComMember = function (_Component) {
     value: function onChange(tab) {
       console.log('ComMember.onChange', tab);
       this.setState({ tab: tab });
+      this.props.cb(tab);
     }
     /**
      * 引数 `tab` で表示切替をします
@@ -83189,7 +83198,7 @@ var ComMember = function (_Component) {
           info = _props2.info,
           member = _props2.member;
 
-      console.log('ComMember.render info, member', info, member);
+      console.log('ComMember.render info, member', info, member, this.state);
       if (!info || !member) {
         return null;
       }
@@ -83197,7 +83206,8 @@ var ComMember = function (_Component) {
         'div',
         { className: 'js-member-container' },
         _react2.default.createElement(_ComMemberTab2.default, {
-          change: this.onChange
+          change: this.onChange,
+          tab: this.props.tab
         }),
         _react2.default.createElement(
           'section',
@@ -83213,7 +83223,9 @@ var ComMember = function (_Component) {
 
 ComMember.propTypes = {
   info: _propTypes2.default.instanceOf(_DaeGameInfo2.default),
-  member: _propTypes2.default.instanceOf(_DaeMemberInfo2.default)
+  member: _propTypes2.default.instanceOf(_DaeMemberInfo2.default),
+  tab: _propTypes2.default.string.isRequired,
+  cb: _propTypes2.default.func.isRequired
 };
 ComMember.defaultProps = {
   info: null,
@@ -83288,8 +83300,8 @@ var ComMemberTab = function (_Component) {
 
     _this.state = {
       current: {
-        batter: true,
-        pitcher: false
+        batter: props.tab === 'batter',
+        pitcher: props.tab === 'pitcher'
       }
     };
     /**
@@ -83310,7 +83322,7 @@ var ComMemberTab = function (_Component) {
   // ----------------------------------------
   /**
    * propTypes
-   * @type {{change: function}}
+   * @type {{change: function, tab: string}}
    */
 
 
@@ -83386,7 +83398,8 @@ var ComMemberTab = function (_Component) {
 }(_react.Component);
 
 ComMemberTab.propTypes = {
-  change: _propTypes2.default.func.isRequired
+  change: _propTypes2.default.func.isRequired,
+  tab: _propTypes2.default.string.isRequired
 };
 exports.default = ComMemberTab;
 

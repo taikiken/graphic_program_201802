@@ -23,10 +23,11 @@ export default class ComMemberTab extends Component {
   // ----------------------------------------
   /**
    * propTypes
-   * @type {{change: function}}
+   * @type {{change: function, tab: string}}
    */
   static propTypes = {
     change: PropTypes.func.isRequired,
+    tab: PropTypes.string.isRequired,
   };
   // ----------------------------------------
   // CONSTRUCTOR
@@ -44,8 +45,8 @@ export default class ComMemberTab extends Component {
      */
     this.state = {
       current: {
-        batter: true,
-        pitcher: false,
+        batter: props.tab === 'batter',
+        pitcher: props.tab === 'pitcher',
       },
     };
     /**
