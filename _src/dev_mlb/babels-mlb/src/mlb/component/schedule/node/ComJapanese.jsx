@@ -51,7 +51,7 @@ const ComBatting = ({ player }) => (
       {Print.int(player.bats)}打数{Print.int(player.hits)}安打
     </td>
     <td className="mlb__today_jp__record__td">
-      {Print.int(player.run)}打点
+      {Print.int(player.runs)}打点
     </td>
   </tr>
 );
@@ -108,9 +108,18 @@ ComPitching.propTypes = {
  */
 const ComPlayer = ({ player }) => {
   console.log('ComJaPlayer player', player);
-  const batting = player.type === 'batting';
-  const ComType = batting ? ComBatting : ComPitching;
-  const comStats = batting ? player.batting : player.pitching;
+  // 投手でも type が 'batting' になっている
+  // const batting = player.type === 'batting';
+  // const ComType = batting ? ComBatting : ComPitching;
+  // const comStats = batting ? player.batting : player.pitching;
+  const elements = [];
+  if (player.pitching.has) {
+    elements.push(<ComPitching player={player.pitching} key={`jp-pitcher-${player.id}`} />);
+  }
+  if (player.batting.has) {
+    elements.push(<ComBatting player={player.batting} key={`jp-batter-${player.id}`} />);
+  }
+
   return (
     <div className="js-mlb_jp_stats">
       <div className="mlb__today_jp__player">
@@ -126,9 +135,9 @@ const ComPlayer = ({ player }) => {
       <div className="mlb__today_jp__record__container">
         <table className="mlb__today_jp__record">
           <tbody>
-            <ComType
-              player={comStats}
-            />
+            {
+              elements.map(element => element)
+            }
           </tbody>
         </table>
       </div>

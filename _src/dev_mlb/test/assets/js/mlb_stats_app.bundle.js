@@ -41102,7 +41102,7 @@ return zhTw;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-2 21:24:53
+ * 2017-8-2 21:45:48
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -80158,7 +80158,7 @@ var ComBatting = function ComBatting(_ref) {
     _react2.default.createElement(
       'td',
       { className: 'mlb__today_jp__record__td' },
-      _Print2.default.int(player.run),
+      _Print2.default.int(player.runs),
       '\u6253\u70B9'
     )
   );
@@ -80243,9 +80243,18 @@ var ComPlayer = function ComPlayer(_ref3) {
   var player = _ref3.player;
 
   console.log('ComJaPlayer player', player);
-  var batting = player.type === 'batting';
-  var ComType = batting ? ComBatting : ComPitching;
-  var comStats = batting ? player.batting : player.pitching;
+  // 投手でも type が 'batting' になっている
+  // const batting = player.type === 'batting';
+  // const ComType = batting ? ComBatting : ComPitching;
+  // const comStats = batting ? player.batting : player.pitching;
+  var elements = [];
+  if (player.pitching.has) {
+    elements.push(_react2.default.createElement(ComPitching, { player: player.pitching, key: 'jp-pitcher-' + player.id }));
+  }
+  if (player.batting.has) {
+    elements.push(_react2.default.createElement(ComBatting, { player: player.batting, key: 'jp-batter-' + player.id }));
+  }
+
   return _react2.default.createElement(
     'div',
     { className: 'js-mlb_jp_stats' },
@@ -80286,8 +80295,8 @@ var ComPlayer = function ComPlayer(_ref3) {
         _react2.default.createElement(
           'tbody',
           null,
-          _react2.default.createElement(ComType, {
-            player: comStats
+          elements.map(function (element) {
+            return element;
           })
         )
       )
