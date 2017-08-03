@@ -14,9 +14,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+
 // util
 import Day from '../../../util/Day';
 
+// ----------------------------------------
+// 更新ボタン 3 種類
+// ----------------------------------------
 /**
  * 更新ボタン 3 種類
  */

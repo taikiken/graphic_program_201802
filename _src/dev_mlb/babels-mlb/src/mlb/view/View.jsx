@@ -35,6 +35,9 @@ import Creator from '../async/Creator';
 // util
 import Day from '../util/Day';
 
+// app
+import Games from '../app/Games';
+
 // ----------------------------
 // eslint-disable-next-line max-len
 Creator.calendar = (year, today) => (store.schedules.dispatch(actions.schedules.calendar(year, today)));
@@ -146,6 +149,10 @@ export default class View {
    */
   static game(year, id, { overview, score, info }) {
     console.log('View.game', year, id, overview, score, info);
+    // save
+    Games.year = year;
+    Games.id = id;
+    // component
     Game.overview(overview);
     Game.score(score);
     Game.info(info);

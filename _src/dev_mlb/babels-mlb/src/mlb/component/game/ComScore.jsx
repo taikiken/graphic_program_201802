@@ -26,6 +26,45 @@ import Print from '../../util/Print';
 // component
 import ComScoreRefresh from './score/ComScoreRefresh';
 
+
+// moku/ticks
+import Polling from '../../../moku/tick/Polling';
+
+// async
+import Creator from '../../async/Creator';
+
+// app
+import Games from '../../app/Games';
+
+// ----------------------------------------
+// Polling
+// ----------------------------------------
+class Interval {
+  constructor(year, id, interval = 30) {
+    this.interval = interval;
+    this.polling = new Polling(interval * 1000);
+    this.onUpdate = this.onUpdate.bind(this);
+    this.year = year;
+    this.id = id;
+  }
+  onUpdate() {
+    this.request();
+  }
+  resume() {
+    this.pause();
+    const polling = this.polling;
+    polling.on(Polling.UPDATE, this.onUpdate);
+    polling.start();
+    this.request();
+  }
+  pause() {
+    this.polling.off(Polling.UPDATE, this.onUpdate);
+  }
+  request() {
+    Creator.games(this.year, this.id);
+  }
+}
+
 // ----------------------------------------
 // スコアボード・下 切替ボタン NEXT
 // ----------------------------------------
@@ -525,15 +564,7 @@ export default class ComScore extends Component {
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
-  static onAuto() {
-    console.log('ComScore.onAuto');
-  }
-  static onManual() {
-    console.log('ComScore.onManual');
-  }
-  static onReload() {
-    console.log('ComScore.onReload');
-  }
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -561,6 +592,11 @@ export default class ComScore extends Component {
      * @type {function}
      */
     this.onPrev = this.onPrev.bind(this);
+    // ---
+    this.interval = new Interval(Games.year, Games.id);
+    this.onAuto = this.onAuto.bind(this);
+    this.onManual = this.onManual.bind(this);
+    this.onReload = this.onReload.bind(this);
   }
   // ----------------------------------------
   // METHOD
@@ -583,6 +619,20 @@ export default class ComScore extends Component {
     event.preventDefault();
     this.setState({ start: this.state.start - 9 });
   }
+  // ----------------------------------------
+  onAuto() {
+    console.log('ComScore.onAuto');
+    this.interval.resume();
+  }
+  onManual() {
+    console.log('ComScore.onManual');
+    this.interval.pause();
+  }
+  onReload() {
+    console.log('ComScore.onReload');
+    this.interval.request();
+  }
+  // ----------------------------------------
   /**
    * スコアボードを出力します
    * section.mlb_live__scoreboard__section
@@ -618,9 +668,9 @@ export default class ComScore extends Component {
         <ComScoreRefresh
           status={info.status}
           date={info.date}
-          auto={ComScore.onAuto}
-          manual={ComScore.onManual}
-          reload={ComScore.onReload}
+          auto={this.onAuto}
+          manual={this.onManual}
+          reload={this.onReload}
         />
       </section>
     );
