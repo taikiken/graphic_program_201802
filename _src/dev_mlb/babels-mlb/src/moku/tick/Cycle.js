@@ -145,7 +145,7 @@ export default class Cycle extends EventDispatcher {
     //   return false;
     // }
     // this.started = true;
-    this.update();
+    this.onUpdate();
     //
     // // @return
     // return true;

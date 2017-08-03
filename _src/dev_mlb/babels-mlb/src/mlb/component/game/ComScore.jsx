@@ -26,11 +26,95 @@ import Print from '../../util/Print';
 // component
 import ComScoreRefresh from './score/ComScoreRefresh';
 
+
+// moku/ticks
+import Polling from '../../../moku/tick/Polling';
+
+// async
+import Creator from '../../async/Creator';
+
+// app
+import Games from '../../app/Games';
+
+// ----------------------------------------
+// Polling
+// ----------------------------------------
+/**
+ * 自動更新管理・動的更新管理を行います
+ * - {@link Polling} を使用します
+ */
+class Interval {
+  /**
+   * ゲーム情報を保存し自動更新管理・動的更新管理を行います
+   * @param {number|strin} year 年 yyyy
+   * @param {number|string} id GAME ID
+   * @param {number} [interval=30] 間隔（秒）
+   */
+  constructor(year, id, interval = 30) {
+    /**
+     * 間隔（秒）
+     * @type {number}
+     */
+    this.interval = interval;
+    /**
+     * ポーリングを行います
+     * @type {Polling}
+     */
+    this.polling = new Polling(interval * 1000);
+    /**
+     * bind onUpdate - Polling.UPDATE event handler
+     * @type {function}
+     */
+    this.onUpdate = this.onUpdate.bind(this);
+    /**
+     * 年 yyyy
+     * @type {number|strin}
+     */
+    this.year = year;
+    /**
+     * GAME ID
+     * @type {number|string}
+     */
+    this.id = id;
+  }
+  /**
+   * Polling.UPDATE event handler
+   * - this.request を call します
+   */
+  onUpdate() {
+    this.request();
+  }
+  /**
+   * Polling.UPDATE を watch します
+   */
+  resume() {
+    this.pause();
+    const polling = this.polling;
+    polling.on(Polling.UPDATE, this.onUpdate);
+    polling.start();
+    this.request();
+  }
+  /**
+   * Polling.UPDATE を unwatch します
+   */
+  pause() {
+    this.polling.off(Polling.UPDATE, this.onUpdate);
+  }
+  /**
+   * {@link Creator.games} を実行します
+   * - ajax を行います
+   */
+  request() {
+    Creator.games(this.year, this.id);
+  }
+}
+
 // ----------------------------------------
 // スコアボード・下 切替ボタン NEXT
 // ----------------------------------------
 /**
  * スコアボード・下 切替ボタン NEXT
+ * - total inning 数が start + 9 以下の時は表示しません
  * @param {number} start 表示開始回
  * @param {number} innings ゲーム経過回数
  * @param {function} action callback
@@ -39,8 +123,8 @@ import ComScoreRefresh from './score/ComScoreRefresh';
  */
 const ComSwitchNext = ({ start, innings, action }) => {
   console.log('ComSwitchNext', start, innings);
-  // TODO: remove test code
-  if (start + 9 >= innings) {
+  // 表示切替します
+  if (start + 9 > innings) {
     return (
       <li id="innings-prev" className="mlb_live__scoreboard__inning_pager__item">
         <p className="mlb_live__scoreboard__inning_pager__link disabled">
@@ -79,6 +163,7 @@ ComSwitchNext.propTypes = {
 /**
  * スコアボード・下 切替ボタン PREV
  * - active / inactive: a <-> p tag を切替えます
+ * - start 1 の時は表示しません
  * @param {number} start 表示開始回
  * @param {function} action callback
  * @returns {XML} li.mlb_live__scoreboard__inning_pager__item
@@ -131,11 +216,11 @@ ComSwitchPrev.propTypes = {
  * @constructor
  */
 const ComScoreSwitch = ({ start, innings, prev, next }) => {
-  console.log('ComScoreSwitch', start, innings);
+  // console.log('ComScoreSwitch', start, innings);
   // TODO: remove test code
-  // if (innings <= 9) {
-  //   return null;
-  // }
+  if (innings <= 9) {
+    return null;
+  }
   // render
   return (
     <nav className="mlb_live__scoreboard__inning_pager">
@@ -178,8 +263,8 @@ ComScoreSwitch.propTypes = {
  * @returns {XML} thead > tr > th.mlb_live__scoreboard__th--inning
  * @constructor
  */
-const ComScoreInningsHead = ({ start, boards }) => {
-  console.log('ComScoreInningsHead', start, boards);
+const ComScoreInningsHead = ({ start, boards, innings }) => {
+  // console.log('ComScoreInningsHead', start, boards);
   const className = 'mlb_live__scoreboard__th--inning';
   return (
     <thead>
@@ -187,6 +272,15 @@ const ComScoreInningsHead = ({ start, boards }) => {
         {
           boards.map((value, index) => {
             const inning = start + index;
+            // 総イニング数より表示イニングが超えていたら表示しない
+            if (inning > innings) {
+              return (
+                <th key={`inning-${inning}`} className={`${className} ${className}-${inning}`}>
+                  &nbsp;
+                </th>
+              );
+            }
+            // 表示する
             // render
             return (
               <th key={`inning-${inning}`} className={`${className} ${className}-${inning}`}>
@@ -207,6 +301,7 @@ const ComScoreInningsHead = ({ start, boards }) => {
 ComScoreInningsHead.propTypes = {
   start: PropTypes.number.isRequired,
   boards: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  innings: PropTypes.number.isRequired,
 };
 
 // スコアボード・中 イニング - visitor
@@ -225,6 +320,13 @@ const ComScoreVisitor = ({ visitor, start, boards, innings }) => (
     {
       boards.map((value, index) => {
         const inning = start + index;
+        // 総イニング数より表示イニングが超えていたら表示しない
+        if (inning > innings) {
+          return (
+            <td key={`visitor-${inning}`} className={`visitor-${inning}`}>&nbsp;</td>
+          );
+        }
+        // 表示する
         const scores = visitor.score[inning];
         let alt = '0';
         if (inning > innings) {
@@ -241,6 +343,10 @@ const ComScoreVisitor = ({ visitor, start, boards, innings }) => (
   </tr>
 );
 
+/**
+ * propTypes
+ * @type {{visitor: DaeScores, start: number, boards: Array.<number>, innings: number}}
+ */
 ComScoreVisitor.propTypes = {
   visitor: PropTypes.instanceOf(DaeScores).isRequired,
   start: PropTypes.number.isRequired,
@@ -294,6 +400,13 @@ const ComScoreHome = ({ home, visitor, start, boards, innings }) => (
     {
       boards.map((value, index) => {
         const inning = start + index;
+        // 総イニング数より表示イニングが超えていたら表示しない
+        if (inning > innings) {
+          return (
+            <td key={`home-${inning}`} className={`home-${inning}`}>&nbsp;</td>
+          );
+        }
+        // 表示する
         const score = home.score[inning];
         const visitorScore = visitor.score[inning];
         let alt = '0';
@@ -344,6 +457,7 @@ const ComScoreInnings = ({ info, start, innings }) => {
         <ComScoreInningsHead
           start={start}
           boards={boards}
+          innings={innings}
         />
         <tbody>
           <ComScoreVisitor
@@ -351,7 +465,7 @@ const ComScoreInnings = ({ info, start, innings }) => {
             start={start}
             boards={boards}
             status={info.status}
-            innings={visitor.innings}
+            innings={innings}
           />
           <ComScoreHome
             home={home}
@@ -504,15 +618,7 @@ export default class ComScore extends Component {
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
-  static onAuto() {
-    console.log('ComScore.onAuto');
-  }
-  static onManual() {
-    console.log('ComScore.onManual');
-  }
-  static onReload() {
-    console.log('ComScore.onReload');
-  }
+
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -540,6 +646,27 @@ export default class ComScore extends Component {
      * @type {function}
      */
     this.onPrev = this.onPrev.bind(this);
+    // ---
+    /**
+     * 更新系 instance
+     * @type {Interval}
+     */
+    this.interval = new Interval(Games.year, Games.id);
+    /**
+     * 更新・自動 - click event handler
+     * @type {function}
+     */
+    this.onAuto = this.onAuto.bind(this);
+    /**
+     * 更新・手動 - click event handler
+     * @type {function}
+     */
+    this.onManual = this.onManual.bind(this);
+    /**
+     * 更新 - click event handler
+     * @type {function}
+     */
+    this.onReload = this.onReload.bind(this);
   }
   // ----------------------------------------
   // METHOD
@@ -562,6 +689,29 @@ export default class ComScore extends Component {
     event.preventDefault();
     this.setState({ start: this.state.start - 9 });
   }
+  // ----------------------------------------
+  /**
+   * 更新・自動 - click event handler
+   */
+  onAuto() {
+    console.log('ComScore.onAuto');
+    this.interval.resume();
+  }
+  /**
+   * 更新・手動 - click event handler
+   */
+  onManual() {
+    console.log('ComScore.onManual');
+    this.interval.pause();
+  }
+  /**
+   * 更新 - click event handler
+   */
+  onReload() {
+    console.log('ComScore.onReload');
+    this.interval.request();
+  }
+  // ----------------------------------------
   /**
    * スコアボードを出力します
    * section.mlb_live__scoreboard__section
@@ -597,9 +747,9 @@ export default class ComScore extends Component {
         <ComScoreRefresh
           status={info.status}
           date={info.date}
-          auto={ComScore.onAuto}
-          manual={ComScore.onManual}
-          reload={ComScore.onReload}
+          auto={this.onAuto}
+          manual={this.onManual}
+          reload={this.onReload}
         />
       </section>
     );

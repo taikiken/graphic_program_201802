@@ -24,14 +24,14 @@ export default class Api {
    * @returns {string} ゲーム種類一覧 JSON パスを返します
    */
   static type() {
-    return `${S3.host()}/master/game_type.json`;
+    return `${S3.host()}/master/game_type.json?t=${Date.now()}`;
   }
   /**
    * チーム一覧 JSON パスを取得します
    * @returns {string} チーム一覧 JSON パスを返します
    */
   static teams() {
-    return `${S3.host()}/master/team/list.json`;
+    return `${S3.host()}/master/team/list.json?t=${Date.now()}`;
   }
   // ---------------------------------------------------
   //  master/schedule
@@ -42,7 +42,7 @@ export default class Api {
    * @returns {string} 年別試合スケジュール JSON パスを返します
    */
   static calendar(year) {
-    return `${S3.host()}/master/schedule/${year}.json`;
+    return `${S3.host()}/master/schedule/${year}.json?t=${Date.now()}`;
   }
   /**
    * 該当日付 試合スケジュール JSON
@@ -52,7 +52,7 @@ export default class Api {
    * @returns {string} 該当日付 試合スケジュール JSON パスを返します
    */
   static schedule(year, month, day) {
-    return `${S3.host()}/master/schedule/${year}/${month}/${day}.json`;
+    return `${S3.host()}/master/schedule/${year}/${month}/${day}.json?t=${Date.now()}`;
   }
   // ---------------------------------------------------
   //  games
@@ -66,7 +66,7 @@ export default class Api {
    * @returns {string} チーム情報json パスを返します
    */
   static team(year, id) {
-    return `${S3.host()}/games/${year}/${id}/team_info.json`;
+    return `${S3.host()}/games/${year}/${id}/team_info.json?t=${Date.now()}`;
   }
   /**
    * 選手情報json
@@ -75,7 +75,7 @@ export default class Api {
    * @returns {string} 選手情報json パスを返します
    */
   static member(year, id) {
-    return `${S3.host()}/games/${year}/${id}/member_info.json`;
+    return `${S3.host()}/games/${year}/${id}/member_info.json?t=${Date.now()}`;
   }
   /**
    * 試合情報json
@@ -84,7 +84,7 @@ export default class Api {
    * @returns {string} 試合情報json パスを返します
    */
   static game(year, id) {
-    return `${S3.host()}/games/${year}/${id}/game_info.json`;
+    return `${S3.host()}/games/${year}/${id}/game_info.json?t=${Date.now()}`;
   }
   /**
    * イニング情報json
@@ -93,6 +93,6 @@ export default class Api {
    * @returns {string} イニング情報json パスを返します
    */
   static innings(year, id) {
-    return `${S3.host()}/games/${year}/${id}/innings.json`;
+    return `${S3.host()}/games/${year}/${id}/innings.json?t=${Date.now()}`;
   }
 }

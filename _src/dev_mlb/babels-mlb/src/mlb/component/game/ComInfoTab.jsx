@@ -77,7 +77,9 @@ export default class ComInfoTab extends Component {
       inning: false,
     };
     current[tab] = true;
+    // state update
     this.setState({ current });
+    // callback
     this.props.change(tab);
   }
   /**

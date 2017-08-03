@@ -34,7 +34,7 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import Main from './Main';
 
 // -----------------------------------------------
-import Test from './Test';
+// import Test from './Test';
 // -----------------------------------------------
 
 // To add to window
@@ -45,10 +45,10 @@ if (!window.Promise) {
 // main execute
 Main.init();
 
-// TODO: remove test code below
-const MLB = {
-  Test,
-};
-
-// export MLB;
-self.MLB = MLB;
+// // remove test code below
+// const MLB = {
+//   Test,
+// };
+//
+// // export MLB;
+// self.MLB = MLB;

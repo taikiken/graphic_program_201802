@@ -442,6 +442,7 @@ export default class DaeSchedule {
     const regular = Normalize.obj(schedule.regular_season);
     const open = Normalize.obj(schedule.open);
     const post = Normalize.obj(schedule.post_season);
+    const all = Normalize.obj(schedule.all_star);
     // regular
     const inter = new DaeGames(regular.inter_league, 'regular_season', 'inter_league');
     const american = new DaeGames(regular.american, 'regular_season', 'american');
@@ -455,7 +456,7 @@ export default class DaeSchedule {
     const champion = new DaeGames(post.league_champion, 'post_season', 'league_champion');
     const world = new DaeGames(post.world_series, 'post_season', 'world_series');
     // all star
-    const star = new DaeGames(schedule.all_star, 'all_star', 'all_star');
+    const star = new DaeGames(all.inter_league, 'all_star', 'all_star');
     // 日付
     const date = Normalize.str(origin.play_date);
     // schedule

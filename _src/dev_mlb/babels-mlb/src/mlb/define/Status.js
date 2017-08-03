@@ -29,7 +29,7 @@ export default class Status {
     23: '遅延/中断',
   };
   /**
-   * status で付与する css class name
+   * `mlb__game__overview`: status で付与する css class name
    * @type {{1: string, 2: string, 4: string, 9: string}}
    */
   static classes = {
@@ -38,6 +38,10 @@ export default class Status {
     4: 'mlb__game__overview__info__status--end',
     9: 'mlb__game__overview__info__status--cancel',
   };
+  /**
+   * `mlb__live__overview`: status で付与する css class name
+   * @type {{1: string, 2: string, 4: string, 9: string}}
+   */
   static liveClasses = {
     1: 'mlb__live__overview__info__status--before',
     2: 'mlb__live__overview__info__status--live',

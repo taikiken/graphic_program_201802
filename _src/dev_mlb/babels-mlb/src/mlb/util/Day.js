@@ -41,12 +41,6 @@ export default class Day {
    */
   static today() {
     const current = Day.current();
-    // return {
-    //   year: current.getFullYear(),
-    //   month: current.getMonth() + 1,
-    //   day: current.getDate(),
-    //   date: current,
-    // };
     return Day.date(current);
   }
   /**

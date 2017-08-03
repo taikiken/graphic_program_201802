@@ -23,9 +23,13 @@ const location = self.location;
 export default class Router {
   /**
    * `/stats/mlb/` | `/stats/mlb/YYYYMMDD/` の解析を行います
+   * - directories.length check - 2 or 3
+   *   - 2: 当日
+   *   - 3: 指定日
+   * - 3 の時に日付形式チェック - `/\d{8}/`
    * @param {Array.<string>} directories path directory list
-   * @param {{path: ?string, id: *}} game return value
-   * @returns {{path: ?string, id: *}} 解析結果を返します
+   * @param {{path: ?string, id: ?string, year: ?string}} game return value
+   * @returns {{path: ?string, id: ?string, year: ?string}} 解析結果を返します
    */
   static index(directories, game) {
     const length = directories.length;
@@ -49,9 +53,12 @@ export default class Router {
   }
   /**
    * `/stats/mlb/game/YYYY/GAME_ID/` の解析を行います
+   * - directories.length check - 5
+   * - directories[4] - `/[^0-9]+/` check - true は処理しない
+   * - directories[4] - `/\d{4}/` check
    * @param {Array.<string>} directories path directory list
-   * @param {{path: ?string, id: *}} game return value
-   * @returns {{path: ?string, id: *}} 解析結果を返します
+   * @param {{path: ?string, id: ?string, year: ?string}} game return value
+   * @returns {{path: ?string, id: ?string, year: ?string}} 解析結果を返します
    */
   static games(directories, game) {
     if (directories.length !== 5) {
@@ -81,7 +88,7 @@ export default class Router {
    * - id
    *   - index: {string} YYYYMMDD
    *   - game: {string} GAME ID
-   * @returns {{path: ?string, id: *}} routing 情報を返します
+   * @returns {{path: ?string, id: ?string, year: ?string}} routing 情報を返します
    */
   static search() {
     // return value
@@ -100,11 +107,6 @@ export default class Router {
     const parts = pathname.split('/');
     // 空要素を削除します
     const directories = parts.filter(data => (data !== ''));
-    // {boolean} - stats, mlb を含んでいる flag
-    // const mlb = directories.indexOf('stats') !== -1 && directories.indexOf('mlb');
-    // if (!mlb) {
-    //   return game;
-    // }
     // ignore path search
     // schedule, standing, leaders, playerlist 除外します
     if (

@@ -33,11 +33,6 @@ import Print from '../../../util/Print';
 // define
 import Style from '../../../define/Style';
 
-
-// ----------------------------------------
-// section.mlb__today_jp
-// ----------------------------------------
-
 // ----------------------------------------
 // ComBatting
 // ----------------------------------------
@@ -56,7 +51,7 @@ const ComBatting = ({ player }) => (
       {Print.int(player.bats)}打数{Print.int(player.hits)}安打
     </td>
     <td className="mlb__today_jp__record__td">
-      {Print.int(player.run)}打点
+      {Print.int(player.runs)}打点
     </td>
   </tr>
 );
@@ -113,11 +108,20 @@ ComPitching.propTypes = {
  */
 const ComPlayer = ({ player }) => {
   console.log('ComJaPlayer player', player);
-  const batting = player.type === 'batting';
-  const ComType = batting ? ComBatting : ComPitching;
-  const comStats = batting ? player.batting : player.pitching;
+  // 投手でも type が 'batting' になっている
+  // const batting = player.type === 'batting';
+  // const ComType = batting ? ComBatting : ComPitching;
+  // const comStats = batting ? player.batting : player.pitching;
+  const elements = [];
+  if (player.pitching.has) {
+    elements.push(<ComPitching player={player.pitching} key={`jp-pitcher-${player.id}`} />);
+  }
+  if (player.batting.has) {
+    elements.push(<ComBatting player={player.batting} key={`jp-batter-${player.id}`} />);
+  }
+
   return (
-    <div className="mlb_jp_stats">
+    <div className="js-mlb_jp_stats">
       <div className="mlb__today_jp__player">
         <h3 className="mlb__today_jp__player__name">{Print.str(player.player)}</h3>
         <dl className="mlb__today_jp__player__profile">
@@ -131,9 +135,9 @@ const ComPlayer = ({ player }) => {
       <div className="mlb__today_jp__record__container">
         <table className="mlb__today_jp__record">
           <tbody>
-            <ComType
-              player={comStats}
-            />
+            {
+              elements.map(element => element)
+            }
           </tbody>
         </table>
       </div>
@@ -154,6 +158,7 @@ ComPlayer.propTypes = {
 // ----------------------------------------
 /**
  * 試合毎の日本人選手一覧を出力します
+ * - {@link ComPlayer}
  * @param {DaeGame} game japanese player game 情報
  * @returns {?XML} div.com-player-container > div.mlb__game__overview
  * @constructor
@@ -169,7 +174,7 @@ const ComGame = ({ game, date }) => {
   const statusClass = game.className;
   const className = 'mlb__game__overview__team';
   return (
-    <div className="com-player-container">
+    <div className="mlb__today_jp__container">
       {
         game.players.list.map(player => (
           <ComPlayer
@@ -212,9 +217,14 @@ const ComGame = ({ game, date }) => {
   );
 };
 
+
 /**
  * propTypes
- * @type {{game: DaeGame}}
+ * @type {{game: DaeGame, date: {
+ *  year: number,
+ *  month: number,
+ *  day: number,
+ * }}}
  */
 ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,

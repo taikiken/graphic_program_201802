@@ -96,10 +96,14 @@ export default class ModCalendar {
     const calendar = {};
     games.map(event => (calendar[event.start] = event));
     /**
-     *
+     * イベントリスト
      * @type {Array.<ModCalendarEvents>}
      */
     this.games = games;
+    /**
+     * 日付をキーにし, value: ModCalendarEvents した object
+     * @type {object}
+     */
     this.calendar = calendar;
   }
   // ----------------------------------------
