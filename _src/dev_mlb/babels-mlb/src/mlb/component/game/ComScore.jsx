@@ -39,17 +39,54 @@ import Games from '../../app/Games';
 // ----------------------------------------
 // Polling
 // ----------------------------------------
+/**
+ * 自動更新管理・動的更新管理を行います
+ * - {@link Polling} を使用します
+ */
 class Interval {
+  /**
+   * ゲーム情報を保存し自動更新管理・動的更新管理を行います
+   * @param {number|strin} year 年 yyyy
+   * @param {number|string} id GAME ID
+   * @param {number} [interval=30] 間隔（秒）
+   */
   constructor(year, id, interval = 30) {
+    /**
+     * 間隔（秒）
+     * @type {number}
+     */
     this.interval = interval;
+    /**
+     * ポーリングを行います
+     * @type {Polling}
+     */
     this.polling = new Polling(interval * 1000);
+    /**
+     * bind onUpdate - Polling.UPDATE event handler
+     * @type {function}
+     */
     this.onUpdate = this.onUpdate.bind(this);
+    /**
+     * 年 yyyy
+     * @type {number|strin}
+     */
     this.year = year;
+    /**
+     * GAME ID
+     * @type {number|string}
+     */
     this.id = id;
   }
+  /**
+   * Polling.UPDATE event handler
+   * - this.request を call します
+   */
   onUpdate() {
     this.request();
   }
+  /**
+   * Polling.UPDATE を watch します
+   */
   resume() {
     this.pause();
     const polling = this.polling;
@@ -57,9 +94,16 @@ class Interval {
     polling.start();
     this.request();
   }
+  /**
+   * Polling.UPDATE を unwatch します
+   */
   pause() {
     this.polling.off(Polling.UPDATE, this.onUpdate);
   }
+  /**
+   * {@link Creator.games} を実行します
+   * - ajax を行います
+   */
   request() {
     Creator.games(this.year, this.id);
   }
@@ -228,6 +272,7 @@ const ComScoreInningsHead = ({ start, boards, innings }) => {
         {
           boards.map((value, index) => {
             const inning = start + index;
+            // 総イニング数より表示イニングが超えていたら表示しない
             if (inning > innings) {
               return (
                 <th key={`inning-${inning}`} className={`${className} ${className}-${inning}`}>
@@ -235,6 +280,7 @@ const ComScoreInningsHead = ({ start, boards, innings }) => {
                 </th>
               );
             }
+            // 表示する
             // render
             return (
               <th key={`inning-${inning}`} className={`${className} ${className}-${inning}`}>
@@ -274,11 +320,13 @@ const ComScoreVisitor = ({ visitor, start, boards, innings }) => (
     {
       boards.map((value, index) => {
         const inning = start + index;
+        // 総イニング数より表示イニングが超えていたら表示しない
         if (inning > innings) {
           return (
             <td key={`visitor-${inning}`} className={`visitor-${inning}`}>&nbsp;</td>
           );
         }
+        // 表示する
         const scores = visitor.score[inning];
         let alt = '0';
         if (inning > innings) {
@@ -295,6 +343,10 @@ const ComScoreVisitor = ({ visitor, start, boards, innings }) => (
   </tr>
 );
 
+/**
+ * propTypes
+ * @type {{visitor: DaeScores, start: number, boards: Array.<number>, innings: number}}
+ */
 ComScoreVisitor.propTypes = {
   visitor: PropTypes.instanceOf(DaeScores).isRequired,
   start: PropTypes.number.isRequired,
@@ -348,11 +400,13 @@ const ComScoreHome = ({ home, visitor, start, boards, innings }) => (
     {
       boards.map((value, index) => {
         const inning = start + index;
+        // 総イニング数より表示イニングが超えていたら表示しない
         if (inning > innings) {
           return (
             <td key={`home-${inning}`} className={`home-${inning}`}>&nbsp;</td>
           );
         }
+        // 表示する
         const score = home.score[inning];
         const visitorScore = visitor.score[inning];
         let alt = '0';
@@ -593,9 +647,25 @@ export default class ComScore extends Component {
      */
     this.onPrev = this.onPrev.bind(this);
     // ---
+    /**
+     * 更新系 instance
+     * @type {Interval}
+     */
     this.interval = new Interval(Games.year, Games.id);
+    /**
+     * 更新・自動 - click event handler
+     * @type {function}
+     */
     this.onAuto = this.onAuto.bind(this);
+    /**
+     * 更新・手動 - click event handler
+     * @type {function}
+     */
     this.onManual = this.onManual.bind(this);
+    /**
+     * 更新 - click event handler
+     * @type {function}
+     */
     this.onReload = this.onReload.bind(this);
   }
   // ----------------------------------------
@@ -620,14 +690,23 @@ export default class ComScore extends Component {
     this.setState({ start: this.state.start - 9 });
   }
   // ----------------------------------------
+  /**
+   * 更新・自動 - click event handler
+   */
   onAuto() {
     console.log('ComScore.onAuto');
     this.interval.resume();
   }
+  /**
+   * 更新・手動 - click event handler
+   */
   onManual() {
     console.log('ComScore.onManual');
     this.interval.pause();
   }
+  /**
+   * 更新 - click event handler
+   */
   onReload() {
     console.log('ComScore.onReload');
     this.interval.request();

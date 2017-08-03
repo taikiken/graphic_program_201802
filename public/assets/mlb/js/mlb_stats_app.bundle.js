@@ -41604,7 +41604,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-3 12:29:26
+ * 2017-8-3 13:47:53
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -84612,24 +84612,63 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // ----------------------------------------
 // Polling
 // ----------------------------------------
+/**
+ * 自動更新管理・動的更新管理を行います
+ * - {@link Polling} を使用します
+ */
 var Interval = function () {
+  /**
+   * ゲーム情報を保存し自動更新管理・動的更新管理を行います
+   * @param {number|strin} year 年 yyyy
+   * @param {number|string} id GAME ID
+   * @param {number} [interval=30] 間隔（秒）
+   */
   function Interval(year, id) {
     var interval = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 30;
 
     _classCallCheck(this, Interval);
 
+    /**
+     * 間隔（秒）
+     * @type {number}
+     */
     this.interval = interval;
+    /**
+     * ポーリングを行います
+     * @type {Polling}
+     */
     this.polling = new _Polling2.default(interval * 1000);
+    /**
+     * bind onUpdate - Polling.UPDATE event handler
+     * @type {function}
+     */
     this.onUpdate = this.onUpdate.bind(this);
+    /**
+     * 年 yyyy
+     * @type {number|strin}
+     */
     this.year = year;
+    /**
+     * GAME ID
+     * @type {number|string}
+     */
     this.id = id;
   }
+  /**
+   * Polling.UPDATE event handler
+   * - this.request を call します
+   */
+
 
   _createClass(Interval, [{
     key: 'onUpdate',
     value: function onUpdate() {
       this.request();
     }
+    /**
+     * Polling.UPDATE を watch します
+     */
+
   }, {
     key: 'resume',
     value: function resume() {
@@ -84639,11 +84678,20 @@ var Interval = function () {
       polling.start();
       this.request();
     }
+    /**
+     * Polling.UPDATE を unwatch します
+     */
+
   }, {
     key: 'pause',
     value: function pause() {
       this.polling.off(_Polling2.default.UPDATE, this.onUpdate);
     }
+    /**
+     * {@link Creator.games} を実行します
+     * - ajax を行います
+     */
+
   }, {
     key: 'request',
     value: function request() {
@@ -84863,6 +84911,7 @@ var ComScoreInningsHead = function ComScoreInningsHead(_ref4) {
       null,
       boards.map(function (value, index) {
         var inning = start + index;
+        // 総イニング数より表示イニングが超えていたら表示しない
         if (inning > innings) {
           return _react2.default.createElement(
             'th',
@@ -84870,6 +84919,7 @@ var ComScoreInningsHead = function ComScoreInningsHead(_ref4) {
             '\xA0'
           );
         }
+        // 表示する
         // render
         return _react2.default.createElement(
           'th',
@@ -84912,6 +84962,7 @@ var ComScoreVisitor = function ComScoreVisitor(_ref5) {
     null,
     boards.map(function (value, index) {
       var inning = start + index;
+      // 総イニング数より表示イニングが超えていたら表示しない
       if (inning > innings) {
         return _react2.default.createElement(
           'td',
@@ -84919,6 +84970,7 @@ var ComScoreVisitor = function ComScoreVisitor(_ref5) {
           '\xA0'
         );
       }
+      // 表示する
       var scores = visitor.score[inning];
       var alt = '0';
       if (inning > innings) {
@@ -84934,6 +84986,10 @@ var ComScoreVisitor = function ComScoreVisitor(_ref5) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{visitor: DaeScores, start: number, boards: Array.<number>, innings: number}}
+ */
 ComScoreVisitor.propTypes = {
   visitor: _propTypes2.default.instanceOf(_DaeGameInfo.DaeScores).isRequired,
   start: _propTypes2.default.number.isRequired,
@@ -84993,6 +85049,7 @@ var ComScoreHome = function ComScoreHome(_ref6) {
     null,
     boards.map(function (value, index) {
       var inning = start + index;
+      // 総イニング数より表示イニングが超えていたら表示しない
       if (inning > innings) {
         return _react2.default.createElement(
           'td',
@@ -85000,6 +85057,7 @@ var ComScoreHome = function ComScoreHome(_ref6) {
           '\xA0'
         );
       }
+      // 表示する
       var score = home.score[inning];
       var visitorScore = visitor.score[inning];
       var alt = '0';
@@ -85307,9 +85365,25 @@ var ComScore = function (_Component) {
      */
     _this.onPrev = _this.onPrev.bind(_this);
     // ---
+    /**
+     * 更新系 instance
+     * @type {Interval}
+     */
     _this.interval = new Interval(_Games2.default.year, _Games2.default.id);
+    /**
+     * 更新・自動 - click event handler
+     * @type {function}
+     */
     _this.onAuto = _this.onAuto.bind(_this);
+    /**
+     * 更新・手動 - click event handler
+     * @type {function}
+     */
     _this.onManual = _this.onManual.bind(_this);
+    /**
+     * 更新 - click event handler
+     * @type {function}
+     */
     _this.onReload = _this.onReload.bind(_this);
     return _this;
   }
@@ -85347,6 +85421,9 @@ var ComScore = function (_Component) {
       this.setState({ start: this.state.start - 9 });
     }
     // ----------------------------------------
+    /**
+     * 更新・自動 - click event handler
+     */
 
   }, {
     key: 'onAuto',
@@ -85354,12 +85431,20 @@ var ComScore = function (_Component) {
       console.log('ComScore.onAuto');
       this.interval.resume();
     }
+    /**
+     * 更新・手動 - click event handler
+     */
+
   }, {
     key: 'onManual',
     value: function onManual() {
       console.log('ComScore.onManual');
       this.interval.pause();
     }
+    /**
+     * 更新 - click event handler
+     */
+
   }, {
     key: 'onReload',
     value: function onReload() {

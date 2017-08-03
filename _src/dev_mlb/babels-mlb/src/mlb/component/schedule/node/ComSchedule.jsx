@@ -37,7 +37,15 @@ import Print from '../../../util/Print';
 import ComScheduleList from './ComScheduleList';
 
 // gsap
+/**
+ * gsap.TweenLite
+ * @type {TweenLite}
+ */
 const TweenLite = self.TweenLite;
+/**
+ * gsap.Power3
+ * @type {Power3}
+ */
 const Power3 = self.Power3;
 
 // ----------------------------------------

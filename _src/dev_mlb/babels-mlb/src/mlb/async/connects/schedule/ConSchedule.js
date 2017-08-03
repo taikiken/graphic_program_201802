@@ -19,6 +19,7 @@ import ComScheduleMam from '../../../component/schedule/ComScheduleMam';
 /**
  * redux - connect する schedule state コンバーター
  * @param {*} schedule redux state
+ * @returns {*} redux state
  */
 const mapStateToProps = ({ schedule }) => (schedule);
 

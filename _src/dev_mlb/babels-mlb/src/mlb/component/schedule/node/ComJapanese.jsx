@@ -158,6 +158,7 @@ ComPlayer.propTypes = {
 // ----------------------------------------
 /**
  * 試合毎の日本人選手一覧を出力します
+ * - {@link ComPlayer}
  * @param {DaeGame} game japanese player game 情報
  * @returns {?XML} div.com-player-container > div.mlb__game__overview
  * @constructor

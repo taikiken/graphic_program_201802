@@ -10,7 +10,18 @@
  *
  */
 
+/**
+ * ゲーム系情報を保持します
+ */
 export default class Games {
+  /**
+   * 試合年
+   * @type {string|number}
+   */
   static year = '';
+  /**
+   * GAME ID
+   * @type {string|number}
+   */
   static id = '';
 }
