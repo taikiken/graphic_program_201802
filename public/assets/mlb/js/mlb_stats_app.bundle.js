@@ -17784,6 +17784,14 @@ exports.DaePlayer = function DaePlayer(info) {
 // sort(function(x, y){
 // return x.line - y.line || x.column - y.column;
 // });
+/**
+ * 打席順にソートします
+ * @param {DaePlayer} base ソート項目 A
+ * @param {DaePlayer} target ソート項目 B
+ * @returns {number} +-N or 0
+ * @see https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+ * @see http://qiita.com/cocottejs/items/511f6be58efe00339498
+ */
 
 
 var orderByNo = function orderByNo(base, target) {
@@ -17840,6 +17848,7 @@ exports.DaePlayers = function DaePlayers(info) {
     }
     return player;
   });
+  // 配列クローンを作成し打席順にソートします
   members.battersOrder = members.batters.slice(0).sort(orderByNo);
   members.pitchersOrder = members.pitchers.slice(0).sort(orderByNo);
   /**
@@ -17849,7 +17858,14 @@ exports.DaePlayers = function DaePlayers(info) {
   this.players = players;
   /**
    * 打者・投手 それぞれで {@link DaePlayer} をリストします
-   * @type {{batters: Array.<DaePlayer>, pitchers: Array.<DaePlayer>}}
+   * - batters / pitchers - data 通り
+   * - battersOrder / pitchersOrder - 打席順
+   * @type {{
+   *  batters: Array.<DaePlayer>,
+   *  pitchers: Array.<DaePlayer>,
+   *  battersOrder: Array.<DaePlayer>,
+   *  pitchersOrder: Array.<DaePlayer>,
+   * }}
    */
   this.members = members;
 };
@@ -41622,7 +41638,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-4 12:25:00
+ * 2017-8-4 14:27:28
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -83532,6 +83548,7 @@ var ComPitchers = function ComPitchers(_ref) {
   var save = info.save;
   // console.log('ComPitchers', team, win, lose, save, players.members.pitchers);
   // const members = players.members.pitchers;
+  // 打席順・ソート済みデータ - 登板順がまだ無いので... on 2017-08-04
   var members = players.members.pitchersOrder;
   return _react2.default.createElement(
     'table',
@@ -83579,6 +83596,7 @@ var ComPitchers = function ComPitchers(_ref) {
       null,
       members.map(function (player) {
         var playerName = player.player;
+        // @type {string} - 勝敗Sのシンボル（文字）
         var mark = '';
         if (playerName === win) {
           mark = '○';
@@ -83658,6 +83676,7 @@ var ComBatters = function ComBatters(_ref2) {
   var hits = 0;
   var runs = 0;
   // const members = players.members.batters;
+  // 打席順・ソート済みデータ
   var members = players.members.battersOrder;
   // render
   return _react2.default.createElement(
