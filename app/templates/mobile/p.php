@@ -339,7 +339,22 @@
                # ToDo: いつか削除
               <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
               */ ?>
-              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['sp']; ?>&targetID=adg_<?php echo $page['ad']['sp']; ?>&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
+
+              <!-- /531683568/mobile/mobile_detail_comment_top -->
+              <script>
+                googletag.cmd.push(function() {
+                  googletag.defineSlot('/531683568/mobile/mobile_detail_comment_top', [300, 250], 'div-gpt-ad-1501838642824-0').addService(googletag.pubads());
+                  googletag.pubads().enableSingleRequest();
+                  googletag.pubads().collapseEmptyDivs();
+                  googletag.enableServices();
+                });
+              </script>
+              <div id='div-gpt-ad-1501838642824-0' style='height:50px; width:300px; text-align: center; margin: 20px auto;'>
+              <script>
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501838642824-0'); });
+              </script>
+              </div>
+              <!-- // /531683568/mobile/mobile_detail_comment_top -->
             </div>
           <?php endif; ?>
 
