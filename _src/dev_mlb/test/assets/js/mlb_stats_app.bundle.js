@@ -6913,10 +6913,10 @@ var Normalize = function () {
      * @param {number} [alt=-1] 代替数値
      * @returns {number} 正規化数値を返します
      */
-    value: function int(num) {
-      var alt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
-
-      return _Type2.default.int(num) ? num : alt;
+    value: function int(num, alt) {
+      // alt = -1 だと `0` 引数が -1 になる
+      var alternate = _Type2.default.int(alt) ? alt : -1;
+      return _Type2.default.int(num) ? num : alternate;
     }
     /**
      * 文字正規化します
@@ -17761,7 +17761,7 @@ exports.DaePlayer = function DaePlayer(info) {
    * 打順
    * @type {number}
    */
-  this.no = _Normalize2.default.int(origin.bat_no);
+  this.no = _Normalize2.default.int(origin.bat_no, 0);
   /**
    * 打撃成績
    * @type {DaeBatting}
@@ -17779,12 +17779,22 @@ exports.DaePlayer = function DaePlayer(info) {
   this.player = _Normalize2.default.str(origin.name);
 };
 
+// sort
+// @see http://qiita.com/cocottejs/items/511f6be58efe00339498
+// sort(function(x, y){
+// return x.line - y.line || x.column - y.column;
+// });
+
+
+var orderByNo = function orderByNo(base, target) {
+  return base.no - target.no;
+};
+
 /**
  * 選手一覧
  * - DaePlayers
  *   - {@link DaePlayer}
  */
-
 
 var DaePlayers =
 /**
@@ -17798,7 +17808,9 @@ exports.DaePlayers = function DaePlayers(info) {
   var players = {};
   var members = {
     batters: [],
-    pitchers: []
+    pitchers: [],
+    battersOrder: null,
+    pitchersOrder: null
   };
   /**
    * original JSON
@@ -17818,6 +17830,7 @@ exports.DaePlayers = function DaePlayers(info) {
     // } else {
     //   members.batters.push(player);
     // }
+    // どちらにもデータ存在可能
     // batting / pitching data が存在する時に members へ push
     if (player.batting.has) {
       members.batters.push(player);
@@ -17827,6 +17840,8 @@ exports.DaePlayers = function DaePlayers(info) {
     }
     return player;
   });
+  members.battersOrder = members.batters.slice(0).sort(orderByNo);
+  members.pitchersOrder = members.pitchers.slice(0).sort(orderByNo);
   /**
    * player id を key, value を {@link DaePlayer} した object
    * @type {object}
@@ -41581,6 +41596,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *
  */
 
+/**
+ * ゲーム系情報を保持します
+ */
 var Games = function Games() {
   _classCallCheck(this, Games);
 };
@@ -41604,7 +41622,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-3 13:47:53
+ * 2017-8-4 12:25:00
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -80407,6 +80425,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * redux - connect する schedule state コンバーター
  * @param {*} schedule redux state
+ * @returns {*} redux state
  */
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
@@ -80830,6 +80849,7 @@ ComPlayer.propTypes = {
 // ----------------------------------------
 /**
  * 試合毎の日本人選手一覧を出力します
+ * - {@link ComPlayer}
  * @param {DaeGame} game japanese player game 情報
  * @returns {?XML} div.com-player-container > div.mlb__game__overview
  * @constructor
@@ -81083,7 +81103,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 // gsap
+/**
+ * gsap.TweenLite
+ * @type {TweenLite}
+ */
 var TweenLite = self.TweenLite;
+/**
+ * gsap.Power3
+ * @type {Power3}
+ */
 var Power3 = self.Power3;
 
 // ----------------------------------------
@@ -83497,11 +83525,14 @@ var ComPitchers = function ComPitchers(_ref) {
       team = _ref.team,
       info = _ref.info;
 
+  console.log('ComPitchers players', players);
   // TODO: players.members.pitchers Sort - 登板順
   var win = info.win;
   var lose = info.lose;
   var save = info.save;
-  console.log('ComPitchers', team, win, lose, save, players.members.pitchers);
+  // console.log('ComPitchers', team, win, lose, save, players.members.pitchers);
+  // const members = players.members.pitchers;
+  var members = players.members.pitchersOrder;
   return _react2.default.createElement(
     'table',
     { className: 'mlb_live__record mlb_live__record--' + type },
@@ -83546,7 +83577,7 @@ var ComPitchers = function ComPitchers(_ref) {
     _react2.default.createElement(
       'tbody',
       null,
-      players.members.pitchers.map(function (player) {
+      members.map(function (player) {
         var playerName = player.player;
         var mark = '';
         if (playerName === win) {
@@ -83621,10 +83652,13 @@ var ComBatters = function ComBatters(_ref2) {
       team = _ref2.team;
 
   // TODO: players.members.batters Sort - 打席順 + 出場順
+  console.log('ComBatters players', players);
   // 打数, 安打, 打点 を合計します
   var bats = 0;
   var hits = 0;
   var runs = 0;
+  // const members = players.members.batters;
+  var members = players.members.battersOrder;
   // render
   return _react2.default.createElement(
     'table',
@@ -83675,7 +83709,7 @@ var ComBatters = function ComBatters(_ref2) {
     _react2.default.createElement(
       'tbody',
       null,
-      players.members.batters.map(function (player) {
+      members.map(function (player) {
         // 累積します
         bats += player.batting.bats;
         hits += player.batting.hits;

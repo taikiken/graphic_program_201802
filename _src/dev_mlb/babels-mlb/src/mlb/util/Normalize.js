@@ -22,8 +22,10 @@ export default class Normalize {
    * @param {number} [alt=-1] 代替数値
    * @returns {number} 正規化数値を返します
    */
-  static int(num, alt = -1) {
-    return Type.int(num) ? num : alt;
+  static int(num, alt) {
+    // alt = -1 だと `0` 引数が -1 になる
+    const alternate = Type.int(alt) ? alt : -1;
+    return Type.int(num) ? num : alternate;
   }
   /**
    * 文字正規化します

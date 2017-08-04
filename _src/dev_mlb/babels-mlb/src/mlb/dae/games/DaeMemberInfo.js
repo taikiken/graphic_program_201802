@@ -72,7 +72,7 @@ export class DaePlayer {
      * 打順
      * @type {number}
      */
-    this.no = Normalize.int(origin.bat_no);
+    this.no = Normalize.int(origin.bat_no, 0);
     /**
      * 打撃成績
      * @type {DaeBatting}
@@ -91,6 +91,21 @@ export class DaePlayer {
   }
 }
 
+// sort
+// @see http://qiita.com/cocottejs/items/511f6be58efe00339498
+// sort(function(x, y){
+// return x.line - y.line || x.column - y.column;
+// });
+/**
+ * 打席順にソートします
+ * @param {DaePlayer} base ソート項目 A
+ * @param {DaePlayer} target ソート項目 B
+ * @returns {number} +-N or 0
+ * @see https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+ * @see http://qiita.com/cocottejs/items/511f6be58efe00339498
+ */
+const orderByNo = (base, target) => (base.no - target.no);
+
 /**
  * 選手一覧
  * - DaePlayers
@@ -107,6 +122,8 @@ export class DaePlayers {
     const members = {
       batters: [],
       pitchers: [],
+      battersOrder: null,
+      pitchersOrder: null,
     };
     /**
      * original JSON
@@ -126,6 +143,7 @@ export class DaePlayers {
       // } else {
       //   members.batters.push(player);
       // }
+      // どちらにもデータ存在可能
       // batting / pitching data が存在する時に members へ push
       if (player.batting.has) {
         members.batters.push(player);
@@ -135,6 +153,9 @@ export class DaePlayers {
       }
       return player;
     });
+    // 配列クローンを作成し打席順にソートします
+    members.battersOrder = members.batters.slice(0).sort(orderByNo);
+    members.pitchersOrder = members.pitchers.slice(0).sort(orderByNo);
     /**
      * player id を key, value を {@link DaePlayer} した object
      * @type {object}
@@ -142,7 +163,14 @@ export class DaePlayers {
     this.players = players;
     /**
      * 打者・投手 それぞれで {@link DaePlayer} をリストします
-     * @type {{batters: Array.<DaePlayer>, pitchers: Array.<DaePlayer>}}
+     * - batters / pitchers - data 通り
+     * - battersOrder / pitchersOrder - 打席順
+     * @type {{
+     *  batters: Array.<DaePlayer>,
+     *  pitchers: Array.<DaePlayer>,
+     *  battersOrder: Array.<DaePlayer>,
+     *  pitchersOrder: Array.<DaePlayer>,
+     * }}
      */
     this.members = members;
   }

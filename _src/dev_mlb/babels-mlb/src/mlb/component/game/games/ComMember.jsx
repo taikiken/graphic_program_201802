@@ -37,11 +37,15 @@ import Print from '../../../util/Print';
  * @constructor
  */
 const ComPitchers = ({ players, type, team, info }) => {
+  console.log('ComPitchers players', players);
   // TODO: players.members.pitchers Sort - 登板順
   const win = info.win;
   const lose = info.lose;
   const save = info.save;
-  console.log('ComPitchers', team, win, lose, save, players.members.pitchers);
+  // console.log('ComPitchers', team, win, lose, save, players.members.pitchers);
+  // const members = players.members.pitchers;
+  // 打席順・ソート済みデータ - 登板順がまだ無いので... on 2017-08-04
+  const members = players.members.pitchersOrder;
   return (
     <table className={`mlb_live__record mlb_live__record--${type}`}>
       <caption className="mlb_live__record__heading">{team}</caption>
@@ -56,8 +60,9 @@ const ComPitchers = ({ players, type, team, info }) => {
       </thead>
       <tbody>
         {
-          players.members.pitchers.map((player) => {
+          members.map((player) => {
             const playerName = player.player;
+            // @type {string} - 勝敗Sのシンボル（文字）
             let mark = '';
             if (playerName === win) {
               mark = '○';
@@ -106,10 +111,14 @@ ComPitchers.propTypes = {
  */
 const ComBatters = ({ players, type, team }) => {
   // TODO: players.members.batters Sort - 打席順 + 出場順
+  console.log('ComBatters players', players);
   // 打数, 安打, 打点 を合計します
   let bats = 0;
   let hits = 0;
   let runs = 0;
+  // const members = players.members.batters;
+  // 打席順・ソート済みデータ
+  const members = players.members.battersOrder;
   // render
   return (
     <table className={`mlb_live__record mlb_live__record--${type}`}>
@@ -126,7 +135,7 @@ const ComBatters = ({ players, type, team }) => {
       </thead>
       <tbody>
         {
-          players.members.batters.map((player) => {
+          members.map((player) => {
             // 累積します
             bats += player.batting.bats;
             hits += player.batting.hits;
