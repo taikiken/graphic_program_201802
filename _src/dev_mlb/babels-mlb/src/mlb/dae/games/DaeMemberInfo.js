@@ -88,6 +88,18 @@ export class DaePlayer {
      * @type {string}
      */
     this.player = Normalize.str(origin.name);
+    /**
+     * 出場・登板順
+     * <pre>
+     *   打者投手いずれも
+     *   sequenceの項目を追加し、
+     *   その値が打者の場合、控え選手が例えば 99など固定の値を入れ、試合終了後に正しい値になるなどになると想定しています。
+     *   投手の場合は時系列毎に選手交代したときの登板順はあるようなのでそのまま登板順の値が前述のsequenceに入るかと。
+     * </pre>
+     * @type {number}
+     * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-23#comment-1173570992
+     */
+    this.sequence = Normalize.int(origin.sequence, 99);
   }
 }
 
@@ -96,15 +108,35 @@ export class DaePlayer {
 // sort(function(x, y){
 // return x.line - y.line || x.column - y.column;
 // });
+// /**
+//  * 打席順にソートします
+//  * @param {DaePlayer} base ソート項目 A
+//  * @param {DaePlayer} target ソート項目 B
+//  * @returns {number} +-N or 0
+//  * @see https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+//  * @see http://qiita.com/cocottejs/items/511f6be58efe00339498
+//  */
+// const orderByNo = (base, target) => (base.no - target.no);
+
 /**
- * 打席順にソートします
+ * 打席順と出場順でソートします
  * @param {DaePlayer} base ソート項目 A
  * @param {DaePlayer} target ソート項目 B
  * @returns {number} +-N or 0
  * @see https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
  * @see http://qiita.com/cocottejs/items/511f6be58efe00339498
  */
-const orderByNo = (base, target) => (base.no - target.no);
+const orderByNoSeq = (base, target) => (base.no - target.no || base.sequence - target.sequence);
+
+/**
+ * 出場順でソートします
+ * @param {DaePlayer} base ソート項目 A
+ * @param {DaePlayer} target ソート項目 B
+ * @returns {number} +-N or 0
+ * @see https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+ * @see http://qiita.com/cocottejs/items/511f6be58efe00339498
+ * */
+const orderBySeq = (base, target) => (base.sequence - target.sequence);
 
 /**
  * 選手一覧
@@ -154,8 +186,8 @@ export class DaePlayers {
       return player;
     });
     // 配列クローンを作成し打席順にソートします
-    members.battersOrder = members.batters.slice(0).sort(orderByNo);
-    members.pitchersOrder = members.pitchers.slice(0).sort(orderByNo);
+    members.battersOrder = members.batters.slice(0).sort(orderByNoSeq);
+    members.pitchersOrder = members.pitchers.slice(0).sort(orderBySeq);
     /**
      * player id を key, value を {@link DaePlayer} した object
      * @type {object}
