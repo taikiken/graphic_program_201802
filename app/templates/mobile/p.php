@@ -349,7 +349,7 @@
                   googletag.enableServices();
                 });
               </script>
-              <div id='div-gpt-ad-1501838642824-0' style='height:50px; width:300px; text-align: center; margin: 20px auto;'>
+              <div id='div-gpt-ad-1501838642824-0' style='text-align: center; margin: 20px auto; height:250px; width:300px;'>
               <script>
               googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501838642824-0'); });
               </script>
