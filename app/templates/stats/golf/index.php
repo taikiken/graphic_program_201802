@@ -160,7 +160,7 @@
   </div>
 </div><!-- /.body-sec -->
 
-<script src="/assets/js/stats_tennis.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/stats_golf.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 /*
