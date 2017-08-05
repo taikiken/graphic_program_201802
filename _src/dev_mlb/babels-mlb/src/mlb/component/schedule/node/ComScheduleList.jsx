@@ -22,20 +22,58 @@ import Print from '../../../util/Print';
 
 // define
 import Style from '../../../define/Style';
+import Day from '../../../util/Day';
 
 // ----------------------------------------
 // 各ゲーム
 // ----------------------------------------
+const ComGameDetail = ({ game, homeClass, visitorClass, statusClass, teamClass }) => (
+  <div className="mlb__game__overview">
+    <p className={`${teamClass} ${teamClass}--home ${Print.str(game.home.className)}`}>
+      {Print.str(game.home.team)}
+    </p>
+    <div className="mlb__game__overview__info">
+      <p className="mlb__game__overview__info__place">
+        {Print.str(game.stadium)}
+      </p>
+      <p className="mlb__game__overview__info__score">
+        <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
+          {Print.int(game.home.score)}
+        </span>
+        <span className="mlb__game__overview__info__score--vs">-</span>
+        <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
+          {Print.int(game.visitor.score)}
+        </span>
+      </p>
+      <p className={`mlb__game__overview__info__status ${statusClass}`}>
+        {Print.str(game.label)}
+      </p>
+    </div>
+    <p className={`${teamClass} ${teamClass}--visitor ${visitorClass}`}>
+      {Print.str(game.visitor.team)}
+    </p>
+  </div>
+);
+
+ComGameDetail.propTypes = {
+  game: PropTypes.instanceOf(DaeGame).isRequired,
+  homeClass: PropTypes.string.isRequired,
+  visitorClass: PropTypes.string.isRequired,
+  statusClass: PropTypes.string.isRequired,
+  teamClass: PropTypes.string.isRequired,
+};
+
 /**
  * 各ゲーム
  * - 引数 `team` が 'all' 以外の時は filter 処理を行う
  * @param {DaeGame} game ゲーム情報
  * @param {string} team team.id - 【注意】data は number なので cast して比較すること
- * @param {*} date {{year: number, month: number, day: number}} な object
+ * @param {*} date {{year: number, month: number, day: number, full: string}} な object
+ * @param {*} today {{year: number, month: number, day: number, full: string}} な object
  * @returns {?XML} div.mlb__game__overview
  * @constructor
  */
-const ComGame = ({ game, team, date }) => {
+const ComGame = ({ game, team, date, today }) => {
   const teamClass = 'mlb__game__overview__team';
   // team `all` 以外は filter する
   if (team !== 'all') {
@@ -50,43 +88,45 @@ const ComGame = ({ game, team, date }) => {
   const visitorClass = game.visitor.win ? Style.WIN : '';
   const statusClass = game.className;
   // render
+  // 未来のゲームはリンクしない
+  if (date.full > today.full) {
+    // console.log('div.mlb__game__overview__no_link');
+    return (
+      <div
+        className="mlb__game__overview__no_link"
+        data-href={`/stats/mlb/game/${date.year}/${game.id}/`}
+      >
+        <ComGameDetail
+          game={game}
+          homeClass={homeClass}
+          visitorClass={visitorClass}
+          statusClass={statusClass}
+          teamClass={teamClass}
+        />
+      </div>
+    );
+  }
+  // ----
+  // console.log('a.mlb__game__overview__link');
   return (
     <a
       href={`/stats/mlb/game/${date.year}/${game.id}/`}
       className="mlb__game__overview__link"
     >
-      <div className="mlb__game__overview">
-        <p className={`${teamClass} ${teamClass}--home ${Print.str(game.home.className)}`}>
-          {Print.str(game.home.team)}
-        </p>
-        <div className="mlb__game__overview__info">
-          <p className="mlb__game__overview__info__place">
-            {Print.str(game.stadium)}
-          </p>
-          <p className="mlb__game__overview__info__score">
-            <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
-              {Print.int(game.home.score)}
-            </span>
-            <span className="mlb__game__overview__info__score--vs">-</span>
-            <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
-              {Print.int(game.visitor.score)}
-            </span>
-          </p>
-          <p className={`mlb__game__overview__info__status ${statusClass}`}>
-            {Print.str(game.label)}
-          </p>
-        </div>
-        <p className={`${teamClass} ${teamClass}--visitor ${visitorClass}`}>
-          {Print.str(game.visitor.team)}
-        </p>
-      </div>
+      <ComGameDetail
+        game={game}
+        homeClass={homeClass}
+        visitorClass={visitorClass}
+        statusClass={statusClass}
+        teamClass={teamClass}
+      />
     </a>
   );
 };
 
 /**
  * propTypes
- * @type {{game: DaeGame, team: string}}
+ * @type {{game: DaeGame, team: string, date: *, today: *}}
  */
 ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
@@ -95,6 +135,13 @@ ComGame.propTypes = {
     year: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
     day: PropTypes.number.isRequired,
+    full: PropTypes.string.isRequired,
+  }).isRequired,
+  today: PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+    full: PropTypes.string.isRequired,
   }).isRequired,
 };
 
@@ -109,7 +156,7 @@ ComGame.propTypes = {
  * @param {string} team team.id - 【注意】data は number なので cast して比較すること
  * @returns {?XML} div.mlb__schedule__result__heading
  * @param {*} date {{year: number, month: number, day: number}} な object
- * @constructore
+ * @constructor
  */
 const ComGames = ({ games, team, date }) => {
   // game 数存在チェック
@@ -132,6 +179,7 @@ const ComGames = ({ games, team, date }) => {
   const title = games.title ?
     <h3 className="mlb__schedule__result__heading">{Print.str(games.title)}</h3> :
     '';
+  const today = Day.today();
   // render
   return (
     <div className="game-container">
@@ -143,6 +191,7 @@ const ComGames = ({ games, team, date }) => {
             game={game}
             team={team}
             date={date}
+            today={today}
           />
         ))
       }
