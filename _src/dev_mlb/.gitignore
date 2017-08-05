@@ -1,0 +1,29 @@
+# _dev_PCT_babels
+
+# Dependency directories
+node_modules
+
+### MicrosoftOffice template
+*.tmp
+
+### Sass template
+.sass-cache/
+*.css.map
+
+# ignore port setting file
+_gulp_port.babel.js
+
+# bower
+# ==============================
+# bower install で作成される
+bower_components
+
+# global ignore directory
+# ==============================
+_no
+_docs
+
+# babels
+babels-infinite/01_compile/*
+babels-infinite/02_dest/*
+babels-infinite/_not_use/*

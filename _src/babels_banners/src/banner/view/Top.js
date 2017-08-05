@@ -33,6 +33,25 @@ const ReactDOM = self.ReactDOM;
  */
 export default class Top extends View {
   /**
+   * WebView アプリ⇆ウェブ の呼び出し最適化 #2149
+   * ```
+   * window.webkit.messageHandlers.onLoadComplete.postMessage("");
+   * ```
+   * app へ通知します
+   *
+   * @see https://github.com/undotsushin/undotsushin/issues/2149#issuecomment-314705310
+   */
+  static webkit() {
+    const webkit = window.webkit || {};
+    const messageHandlers = webkit.messageHandlers || {};
+    const onLoadComplete = messageHandlers.onLoadComplete || {};
+    const postMessage = onLoadComplete.postMessage;
+    console.log('postMessage', postMessage);
+    if (typeof postMessage === 'function') {
+      window.webkit.messageHandlers.onLoadComplete.postMessage('');
+    }
+  }
+  /**
    * マウント Element を取得し処理を行います
    * @param {Ajax} ajax Ajax instance
    * @param {boolean} sp true: SP - component 出力時に使用します
@@ -65,8 +84,11 @@ export default class Top extends View {
       <ComponentTop
         banners={banners}
         sp={this.sp}
+        cb={Top.webkit}
       />,
       this.element
     );
+    // delay 500ms
+    // setTimeout(Top.webkit, 500);
   }
 }

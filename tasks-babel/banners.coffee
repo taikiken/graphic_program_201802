@@ -58,7 +58,7 @@ files = [
 ]
 
 # eslint
-gulp.task 'stats:eslint', ->
+gulp.task 'banners:eslint', ->
   lintFiles = files.slice 0
 
   return gulp.src lintFiles
@@ -66,31 +66,31 @@ gulp.task 'stats:eslint', ->
   .pipe $.eslint useEslintrc: true
   .pipe $.eslint.format()
   .pipe $.eslint.failAfterError()
-  .pipe $.size title: '*** stats:eslint ***'
+  .pipe $.size title: '*** banners:eslint ***'
 
 # --------------------------------------------
 # babel
 
 # babel
-gulp.task 'stats:babel', ->
+gulp.task 'banners:babel', ->
   return gulp.src files
-  .pipe $.debug title: '[STATS:BABEL]'
+  .pipe $.debug title: '[BANNERS:BABEL]'
   .pipe $.babel presets: [ 'es2015', 'react', 'stage-0' ], plugins: ['transform-runtime']
   .pipe $.replaceTask patterns: patterns
   .pipe gulp.dest '_src/babels_banners/compile'
-  .pipe $.size title: '*** stats:babel ***'
+  .pipe $.size title: '*** banners:babel ***'
 
 ## dev
-#gulp.task 'stats:make', ( cb ) ->
+#gulp.task 'banners:make', ( cb ) ->
 #  runSequence(
 ##    'babels:eslint'
-#    'stats:babel'
+#    'banners:babel'
 #    cb
 #  )
 #  return
 #
 ## dev with lint
-#gulp.task 'stats:make:lint', ( cb ) ->
+#gulp.task 'banners:make:lint', ( cb ) ->
 #  runSequence(
 #    'babels:eslint'
 #    'babels:babel'
@@ -103,7 +103,7 @@ gulp.task 'stats:babel', ->
 
 
 # dev
-gulp.task 'stats:pack:dev', ( cb ) ->
+gulp.task 'banners:pack:dev', ( cb ) ->
   conf = Object.create config
 
   conf.plugins = [
@@ -112,17 +112,19 @@ gulp.task 'stats:pack:dev', ( cb ) ->
   ]
   conf.entry = conf.entry + '/_src/babels_banners/compile/banners_with_json.js'
   conf.output.filename = 'banners_with_json.bundle.js'
-
+  conf.output.publicPath = 'assets/js/bundle'
+  conf.output.path = '_src/app/assets/js/bundle'
+  console.log('[BANNERS:DEV]', conf);
   webpack conf, ( err, stats ) ->
     if ( err )
       throw new $.util.PluginError( 'webpack', err )
 
-    $.util.log '[stats:webpack]', stats.toString colors: true, progress: true
+    $.util.log '[banners:webpack]', stats.toString colors: true, progress: true
     cb()
   return
 
 # deploy
-gulp.task 'stats:pack:build', ( cb ) ->
+gulp.task 'banners:pack:build', ( cb ) ->
   conf = Object.create config
 
   conf.plugins = [
@@ -131,54 +133,56 @@ gulp.task 'stats:pack:build', ( cb ) ->
   ]
   conf.entry = conf.entry + '/_src/babels_banners/compile/banners_with_json.js'
   conf.output.filename = 'banners_with_json.bundle.js'
-
+  conf.output.publicPath = 'assets/js/bundle'
+  conf.output.path = '_src/app/assets/js/bundle'
+  console.log('[BANNERS:BUILD]', conf.output);
   webpack conf, ( err, stats ) ->
     if ( err )
       throw new $.util.PluginError( 'webpack', err )
 
-    $.util.log '[stats:webpack]', stats.toString colors: true, progress: true
+    $.util.log '[banners:webpack]', stats.toString colors: true, progress: true
     cb()
   return
 
 # --------------------------------------------
 # copy
-gulp.task 'stats:copy', (cb) ->
+gulp.task 'banners:copy', (cb) ->
   return gulp.src [dir.app + '/**/banners_with_json.bundle.js']
-    .pipe $.debug title: '[STATS:COPY]'
+    .pipe $.debug title: '[BANNERS:COPY]'
     .pipe gulp.dest htdocs
-    .pipe $.size title: '*** stats:copy ***'
+    .pipe $.size title: '*** banners:copy ***'
 
 # --------------------------------------------
 # sequence
 
 # dev
-gulp.task 'stats:dev', ( cb ) ->
+gulp.task 'banners:dev', ( cb ) ->
   runSequence(
-    'stats:babel'
-    'stats:pack:dev'
-    'stats:copy'
+    'banners:babel'
+    'banners:pack:dev'
+    'banners:copy'
     cb
   )
   return
 
 # dev:lint
-gulp.task 'stats:dev:lint', ( cb ) ->
+gulp.task 'banners:dev:lint', ( cb ) ->
   runSequence(
-    'stats:eslint'
-    'stats:babel'
-    'stats:pack:dev'
-    'stats:copy'
+    'banners:eslint'
+    'banners:babel'
+    'banners:pack:dev'
+    'banners:copy'
     cb
   )
   return
 
 
 # build
-gulp.task 'stats:build', ( cb ) ->
+gulp.task 'banners:build', ( cb ) ->
   runSequence(
-    'stats:babel'
-    'stats:pack:build'
-    'stats:copy'
+    'banners:babel'
+    'banners:pack:build'
+    'banners:copy'
     cb
   )
   return
