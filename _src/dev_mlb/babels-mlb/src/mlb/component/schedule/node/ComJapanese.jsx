@@ -156,6 +156,15 @@ ComPlayer.propTypes = {
 // ----------------------------------------
 // ComGame
 // ----------------------------------------
+/**
+ * 試合結果を表示します
+ * @param {DaeGame} game game 情報
+ * @param {string} homeClass home team class
+ * @param {string} visitorClass visitor tean class
+ * @param {string} statusClass 試合 status class
+ * @param {string} teamClass チーム class
+ * @returns {XML} div.mlb__game__overview
+ */
 const ComGameDetail = ({ game, homeClass, visitorClass, statusClass, teamClass }) => (
   <div className="mlb__game__overview">
     <p className={`${teamClass} ${teamClass}--home ${homeClass}`}>
@@ -184,6 +193,10 @@ const ComGameDetail = ({ game, homeClass, visitorClass, statusClass, teamClass }
   </div>
 );
 
+/**
+ * propTypes
+ * @type {{game: DaeGame, homeClass: string, visitorClass: string, statusClass: string, teamClass: string}}
+ */
 ComGameDetail.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
   homeClass: PropTypes.string.isRequired,
@@ -192,6 +205,14 @@ ComGameDetail.propTypes = {
   teamClass: PropTypes.string.isRequired,
 };
 
+/**
+ * 試合結果にリンクをつけるか否かを判定します
+ * @param {DaeGame} game ゲーム情報
+ * @param {*} date {@link Day.date} object - 試合日
+ * @param {*} today {@link Day.date} object - 今日
+ * @returns {XML} div.mlb__game__overview__no_link > {@link ComGameDetail}
+ * @constructor
+ */
 const ComGame = ({ game, date, today }) => {
   const homeClass = game.home.win ? Style.WIN : '';
   const visitorClass = game.visitor.win ? Style.WIN : '';
@@ -235,7 +256,7 @@ const ComGame = ({ game, date, today }) => {
 
 /**
  * propTypes
- * @type {{game: DaeGame, team: string}}
+ * @type {{game: DaeGame, team: string, date: *, today: *}}
  */
 ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,

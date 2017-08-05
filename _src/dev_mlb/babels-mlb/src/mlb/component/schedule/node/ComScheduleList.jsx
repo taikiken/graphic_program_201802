@@ -27,6 +27,15 @@ import Day from '../../../util/Day';
 // ----------------------------------------
 // 各ゲーム
 // ----------------------------------------
+/**
+ * 試合結果を表示します
+ * @param {DaeGame} game game 情報
+ * @param {string} homeClass home team class
+ * @param {string} visitorClass visitor tean class
+ * @param {string} statusClass 試合 status class
+ * @param {string} teamClass チーム class
+ * @returns {XML} div.mlb__game__overview
+ */
 const ComGameDetail = ({ game, homeClass, visitorClass, statusClass, teamClass }) => (
   <div className="mlb__game__overview">
     <p className={`${teamClass} ${teamClass}--home ${Print.str(game.home.className)}`}>
@@ -55,6 +64,10 @@ const ComGameDetail = ({ game, homeClass, visitorClass, statusClass, teamClass }
   </div>
 );
 
+/**
+ * propTypes
+ * @type {{game: DaeGame, homeClass: string, visitorClass: string, statusClass: string, teamClass: string}}
+ */
 ComGameDetail.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
   homeClass: PropTypes.string.isRequired,
@@ -269,7 +282,7 @@ export default class ComScheduleList extends Component {
    * - seasons {DaeSeasons}
    * - team {string} team.id - 【注意】data は number なので cast して比較すること
    * - team {string} type.key - key_name を比較します
-   * @type {{seasons: DaeSeasons, team: string, type: string}}
+   * @type {{seasons: DaeSeasons, team: string, type: string, date: *}}
    */
   static propTypes = {
     seasons: PropTypes.instanceOf(DaeSeasons).isRequired,
