@@ -145,6 +145,13 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+  # ref. #2104
+  if ( $category === 'highschoolbaseball' ) :
+    $categoriesinfo['webviews']     = array(
+      '/stats/hsb/webview/app/',
+    );
+  endif;
+
   // #2080
   if ( $category === 'top' ) :
     $categoriesinfo['webviews'] = array(
