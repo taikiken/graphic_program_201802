@@ -49,7 +49,7 @@ const ranking = () => {
   }
   const option = {};
   option[View.DID_MOUNT] = didRanking;
-  const viewRanking = new ViewRanking(rankingElement, option, 'inhihighschoolbaseballgh');
+  const viewRanking = new ViewRanking(rankingElement, option, 'highschoolbaseball');
   viewRanking.start();
 };
 
