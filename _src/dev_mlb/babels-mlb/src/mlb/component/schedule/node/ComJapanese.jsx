@@ -156,23 +156,121 @@ ComPlayer.propTypes = {
 // ----------------------------------------
 // ComGame
 // ----------------------------------------
+const ComGameDetail = ({ game, homeClass, visitorClass, statusClass, teamClass }) => (
+  <div className="mlb__game__overview">
+    <p className={`${teamClass} ${teamClass}--home ${homeClass}`}>
+      {Print.str(game.home.team)}
+    </p>
+    <div className="mlb__game__overview__info">
+      <p className="mlb__game__overview__info__place">
+        {Print.str(game.stadium)}
+      </p>
+      <p className="mlb__game__overview__info__score">
+        <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
+          {Print.int(game.home.score)}
+        </span>
+        <span className="mlb__game__overview__info__score--vs">-</span>
+        <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
+          {Print.int(game.visitor.score)}
+        </span>
+      </p>
+      <p className={`mlb__game__overview__info__status ${statusClass}`}>
+        {Print.str(game.label)}
+      </p>
+    </div>
+    <p className={`${teamClass} ${teamClass}--visitor ${visitorClass}`} >
+      {Print.str(game.visitor.team)}
+    </p>
+  </div>
+);
+
+ComGameDetail.propTypes = {
+  game: PropTypes.instanceOf(DaeGame).isRequired,
+  homeClass: PropTypes.string.isRequired,
+  visitorClass: PropTypes.string.isRequired,
+  statusClass: PropTypes.string.isRequired,
+  teamClass: PropTypes.string.isRequired,
+};
+
+const ComGame = ({ game, date, today }) => {
+  const homeClass = game.home.win ? Style.WIN : '';
+  const visitorClass = game.visitor.win ? Style.WIN : '';
+  const statusClass = game.className;
+  const teamClass = 'mlb__game__overview__team';
+  // render
+  // 未来のゲームはリンクしない
+  if (date.full > today.full) {
+    // console.log('div.mlb__game__overview__no_link');
+    return (
+      <div
+        className="mlb__game__overview__no_link"
+        data-href={`/stats/mlb/game/${date.year}/${game.id}/`}
+      >
+        <ComGameDetail
+          game={game}
+          homeClass={homeClass}
+          visitorClass={visitorClass}
+          statusClass={statusClass}
+          teamClass={teamClass}
+        />
+      </div>
+    );
+  }
+  // a
+  return (
+    <a
+      href={`/stats/mlb/game/${date.year}/${game.id}/`}
+      className="mlb__game__overview__link"
+    >
+      <ComGameDetail
+        game={game}
+        homeClass={homeClass}
+        visitorClass={visitorClass}
+        statusClass={statusClass}
+        teamClass={teamClass}
+      />
+    </a>
+  );
+};
+
+/**
+ * propTypes
+ * @type {{game: DaeGame, team: string}}
+ */
+ComGame.propTypes = {
+  game: PropTypes.instanceOf(DaeGame).isRequired,
+  date: PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+    full: PropTypes.string.isRequired,
+  }).isRequired,
+  today: PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+    full: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+// ----------------------------------------
+// ComGame
+// ----------------------------------------
 /**
  * 試合毎の日本人選手一覧を出力します
  * - {@link ComPlayer}
  * @param {DaeGame} game japanese player game 情報
+ * @param {*} date {{year: number, month: number, day: number, full: string}} な object
+ * @param {*} today {{year: number, month: number, day: number, full: string}} な object
  * @returns {?XML} div.com-player-container > div.mlb__game__overview
  * @constructor
  */
-const ComGame = ({ game, date }) => {
+const ComGameContainer = ({ game, date, today }) => {
   if (!game.players.has()) {
     return null;
   }
   // -----
   // render
-  const homeClass = game.home.win ? Style.WIN : '';
-  const visitorClass = game.visitor.win ? Style.WIN : '';
-  const statusClass = game.className;
-  const className = 'mlb__game__overview__team';
   return (
     <div className="mlb__today_jp__container">
       {
@@ -183,36 +281,11 @@ const ComGame = ({ game, date }) => {
           />
         ))
       }
-      <a
-        href={`/stats/mlb/game/${date.year}/${game.id}/`}
-        className="mlb__game__overview__link"
-      >
-        <div className="mlb__game__overview">
-          <p className={`${className} ${className}--home ${homeClass}`}>
-            {Print.str(game.home.team)}
-          </p>
-          <div className="mlb__game__overview__info">
-            <p className="mlb__game__overview__info__place">
-              {Print.str(game.stadium)}
-            </p>
-            <p className="mlb__game__overview__info__score">
-              <span className={`mlb__game__overview__info__score--home ${homeClass}`}>
-                {Print.int(game.home.score)}
-              </span>
-              <span className="mlb__game__overview__info__score--vs">-</span>
-              <span className={`mlb__game__overview__info__score--visitor ${visitorClass}`}>
-                {Print.int(game.visitor.score)}
-              </span>
-            </p>
-            <p className={`mlb__game__overview__info__status ${statusClass}`}>
-              {Print.str(game.label)}
-            </p>
-          </div>
-          <p className={`${className} ${className}--visitor ${visitorClass}`} >
-            {Print.str(game.visitor.team)}
-          </p>
-        </div>
-      </a>
+      <ComGame
+        game={game}
+        date={date}
+        today={today}
+      />
     </div>
   );
 };
@@ -224,14 +297,21 @@ const ComGame = ({ game, date }) => {
  *  year: number,
  *  month: number,
  *  day: number,
- * }}}
+ * }}},
+ * today: *
  */
-ComGame.propTypes = {
+ComGameContainer.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
   date: PropTypes.shape({
     year: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
     day: PropTypes.number.isRequired,
+  }).isRequired,
+  today: PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+    full: PropTypes.string.isRequired,
   }).isRequired,
 };
 
@@ -253,16 +333,18 @@ const ComJapanese = ({ japanese, date }) => {
     return null;
   }
   console.log('ComJapanese japanese', japanese, date);
+  const today = Day.today();
   // render
   return (
     <section className="mlb__today_jp">
       <h2 className="mlb__today_jp__heading">{Day.title(date)}に出場した日本人選手</h2>
       {
         japanese.list.map(game => (
-          <ComGame
+          <ComGameContainer
             key={`${game.id}-${game.status}`}
             game={game}
             date={date}
+            today={today}
           />
         ))
       }

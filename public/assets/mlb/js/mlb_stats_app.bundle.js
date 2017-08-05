@@ -5710,7 +5710,7 @@ module.exports = function(it){
 
 var _prodInvariant = __webpack_require__(68);
 
-var ReactCurrentOwner = __webpack_require__(32);
+var ReactCurrentOwner = __webpack_require__(33);
 
 var invariant = __webpack_require__(5);
 var warning = __webpack_require__(6);
@@ -6101,7 +6101,7 @@ var _all = __webpack_require__(700);
 
 var _all2 = _interopRequireDefault(_all);
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 var _createChainableTypeChecker = __webpack_require__(116);
 
@@ -6286,6 +6286,176 @@ module.exports = __webpack_require__(23) ? function(object, key, value){
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/07/19 - 20:11
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+// moku/util
+
+
+var _Text = __webpack_require__(687);
+
+var _Text2 = _interopRequireDefault(_Text);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * [native code] - parseInt
+ * @type {function}
+ */
+var parseInt = self.parseInt;
+
+/**
+ * 日付に関する Helper
+ */
+
+var Day = function () {
+  function Day() {
+    _classCallCheck(this, Day);
+  }
+
+  _createClass(Day, null, [{
+    key: 'current',
+
+    /**
+     * 今日の Date instance を作成します
+     * @returns {Date} 今日の Date instance を返します
+     */
+    value: function current() {
+      return new Date();
+    }
+    /**
+     * 今日の年月日を分解し取得します
+     * @returns {{year: number, month: number, day: number}} 今日の年月日を返します
+     */
+
+    /**
+     * 日本語曜日リスト
+     * @type {[string,string,string,string,string,string,string]}
+     */
+
+  }, {
+    key: 'today',
+    value: function today() {
+      var current = Day.current();
+      return Day.date(current);
+    }
+    /**
+     * 今年の年を取得します
+     * @returns {number} 今年の年を返します
+     */
+
+  }, {
+    key: 'thisYear',
+    value: function thisYear() {
+      return Day.today().year;
+    }
+    /**
+     * 来年の年を取得します
+     * @returns {number} 来年の年を返します
+     */
+
+  }, {
+    key: 'nextYear',
+    value: function nextYear() {
+      return Day.thisYear() + 1;
+    }
+    /**
+     * YYYYMMDD 文字列を取得します
+     * @param {Date} [date=new Date()] 変換元 Date instance
+     * @returns {string} YYYYMMDD 文字列を返します
+     */
+
+  }, {
+    key: 'full',
+    value: function full() {
+      var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Day.current();
+
+      return '' + date.getFullYear() + _Text2.default.zero(date.getMonth() + 1) + _Text2.default.zero(date.getDate());
+    }
+    /**
+     * 曜日, '日', '月', '火', '水', '木', '金', '土' を取得します
+     * @param {number} index 0(日) ~ 6(土)
+     * @returns {string}  '日', '月', '火', '水', '木', '金', '土' のいずれかを返します
+     */
+
+  }, {
+    key: 'day',
+    value: function day(index) {
+      return Day.weeks[index];
+    }
+    /**
+     * 「○月○日（日）」な文字列を生成します
+     * @param {*} date Date object - {date: Date, year: number, month: number, day: number, week: string}
+     * @returns {string} 「○月○日（日）」な文字列を返します
+     */
+
+  }, {
+    key: 'title',
+    value: function title() {
+      var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Day.current();
+
+      return date.year + '\u5E74' + date.month + '\u6708' + date.day + '\u65E5\uFF08' + date.week + '\uFF09';
+    }
+    /**
+     * Date object を year, month, day, week へ分解します
+     * @param {Date} date 変換元 Date object
+     * @returns {{date: Date, year: number, month: number, day: number, week: string, full: string}}
+     * 変換 object を返します
+     */
+
+  }, {
+    key: 'date',
+    value: function date(_date) {
+      return {
+        date: _date,
+        year: _date.getFullYear(),
+        month: _date.getMonth() + 1,
+        day: _date.getDate(),
+        week: Day.day(_date.getDay()),
+        full: Day.full(_date)
+      };
+    }
+    /**
+     * 文字列 YYYYMMDD から Date instance を返します
+     * @param {string} str YYYYMMDD
+     * @returns {Date} 引数 `str` を Date instance に変換します
+     */
+
+  }, {
+    key: 'convert',
+    value: function convert(str) {
+      return new Date(str.substr(0, 4), parseInt(str.substr(4, 2), 10) - 1, str.substr(6, 2));
+    }
+  }]);
+
+  return Day;
+}();
+
+Day.weeks = ['日', '月', '火', '水', '木', '金', '土'];
+exports.default = Day;
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   Copyright (c) 2016 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -6338,7 +6508,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6361,7 +6531,7 @@ var views = exports.views = {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 /**
@@ -6393,7 +6563,7 @@ module.exports = isArray;
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
@@ -6404,7 +6574,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6438,7 +6608,7 @@ var ReactCurrentOwner = {
 module.exports = ReactCurrentOwner;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6693,175 +6863,6 @@ var ReactUpdates = {
 
 module.exports = ReactUpdates;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/07/19 - 20:11
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-// moku/util
-
-
-var _Text = __webpack_require__(687);
-
-var _Text2 = _interopRequireDefault(_Text);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * [native code] - parseInt
- * @type {function}
- */
-var parseInt = self.parseInt;
-
-/**
- * 日付に関する Helper
- */
-
-var Day = function () {
-  function Day() {
-    _classCallCheck(this, Day);
-  }
-
-  _createClass(Day, null, [{
-    key: 'current',
-
-    /**
-     * 今日の Date instance を作成します
-     * @returns {Date} 今日の Date instance を返します
-     */
-    value: function current() {
-      return new Date();
-    }
-    /**
-     * 今日の年月日を分解し取得します
-     * @returns {{year: number, month: number, day: number}} 今日の年月日を返します
-     */
-
-    /**
-     * 日本語曜日リスト
-     * @type {[string,string,string,string,string,string,string]}
-     */
-
-  }, {
-    key: 'today',
-    value: function today() {
-      var current = Day.current();
-      return Day.date(current);
-    }
-    /**
-     * 今年の年を取得します
-     * @returns {number} 今年の年を返します
-     */
-
-  }, {
-    key: 'thisYear',
-    value: function thisYear() {
-      return Day.today().year;
-    }
-    /**
-     * 来年の年を取得します
-     * @returns {number} 来年の年を返します
-     */
-
-  }, {
-    key: 'nextYear',
-    value: function nextYear() {
-      return Day.thisYear() + 1;
-    }
-    /**
-     * YYYYMMDD 文字列を取得します
-     * @param {Date} [date=new Date()] 変換元 Date instance
-     * @returns {string} YYYYMMDD 文字列を返します
-     */
-
-  }, {
-    key: 'full',
-    value: function full() {
-      var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Day.current();
-
-      return '' + date.getFullYear() + _Text2.default.zero(date.getMonth() + 1) + _Text2.default.zero(date.getDate());
-    }
-    /**
-     * 曜日, '日', '月', '火', '水', '木', '金', '土' を取得します
-     * @param {number} index 0(日) ~ 6(土)
-     * @returns {string}  '日', '月', '火', '水', '木', '金', '土' のいずれかを返します
-     */
-
-  }, {
-    key: 'day',
-    value: function day(index) {
-      return Day.weeks[index];
-    }
-    /**
-     * 「○月○日（日）」な文字列を生成します
-     * @param {*} date Date object - {date: Date, year: number, month: number, day: number, week: string}
-     * @returns {string} 「○月○日（日）」な文字列を返します
-     */
-
-  }, {
-    key: 'title',
-    value: function title() {
-      var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Day.current();
-
-      return date.year + '\u5E74' + date.month + '\u6708' + date.day + '\u65E5\uFF08' + date.week + '\uFF09';
-    }
-    /**
-     * Date object を year, month, day, week へ分解します
-     * @param {Date} date 変換元 Date object
-     * @returns {{date: Date, year: number, month: number, day: number, week: string}}
-     * 変換 object を返します
-     */
-
-  }, {
-    key: 'date',
-    value: function date(_date) {
-      return {
-        date: _date,
-        year: _date.getFullYear(),
-        month: _date.getMonth() + 1,
-        day: _date.getDate(),
-        week: Day.day(_date.getDay())
-      };
-    }
-    /**
-     * 文字列 YYYYMMDD から Date instance を返します
-     * @param {string} str YYYYMMDD
-     * @returns {Date} 引数 `str` を Date instance に変換します
-     */
-
-  }, {
-    key: 'convert',
-    value: function convert(str) {
-      return new Date(str.substr(0, 4), parseInt(str.substr(4, 2), 10) - 1, str.substr(6, 2));
-    }
-  }]);
-
-  return Day;
-}();
-
-Day.weeks = ['日', '月', '火', '水', '木', '金', '土'];
-exports.default = Day;
 
 /***/ }),
 /* 35 */
@@ -7888,7 +7889,7 @@ module.exports = function(it){
 
 var pIE            = __webpack_require__(85)
   , createDesc     = __webpack_require__(42)
-  , toIObject      = __webpack_require__(31)
+  , toIObject      = __webpack_require__(32)
   , toPrimitive    = __webpack_require__(80)
   , has            = __webpack_require__(19)
   , IE8_DOM_DEFINE = __webpack_require__(208)
@@ -8250,7 +8251,7 @@ module.exports = function(it){
 
 var _assign = __webpack_require__(10);
 
-var ReactCurrentOwner = __webpack_require__(32);
+var ReactCurrentOwner = __webpack_require__(33);
 
 var warning = __webpack_require__(6);
 var canDefineProperty = __webpack_require__(107);
@@ -8712,7 +8713,7 @@ var _Normalize = __webpack_require__(35);
 
 var _Normalize2 = _interopRequireDefault(_Normalize);
 
-var _Day = __webpack_require__(34);
+var _Day = __webpack_require__(28);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -13923,7 +13924,7 @@ module.exports = getPrototype;
 /* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArray = __webpack_require__(30),
+var isArray = __webpack_require__(31),
     isKey = __webpack_require__(204),
     stringToPath = __webpack_require__(808),
     toString = __webpack_require__(811);
@@ -14005,7 +14006,7 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = __webpack_require__(31)
+var toIObject = __webpack_require__(32)
   , toLength  = __webpack_require__(20)
   , toIndex   = __webpack_require__(62);
 module.exports = function(IS_INCLUDES){
@@ -14152,7 +14153,7 @@ module.exports = __webpack_require__(79).getIteratorMethod = function(it){
 var addToUnscopables = __webpack_require__(66)
   , step             = __webpack_require__(214)
   , Iterators        = __webpack_require__(64)
-  , toIObject        = __webpack_require__(31);
+  , toIObject        = __webpack_require__(32);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
@@ -15611,10 +15612,10 @@ module.exports = KeyEscapeUtils;
 
 var _prodInvariant = __webpack_require__(7);
 
-var ReactCurrentOwner = __webpack_require__(32);
+var ReactCurrentOwner = __webpack_require__(33);
 var ReactInstanceMap = __webpack_require__(90);
 var ReactInstrumentation = __webpack_require__(26);
-var ReactUpdates = __webpack_require__(33);
+var ReactUpdates = __webpack_require__(34);
 
 var invariant = __webpack_require__(5);
 var warning = __webpack_require__(6);
@@ -17777,6 +17778,18 @@ exports.DaePlayer = function DaePlayer(info) {
    * @type {string}
    */
   this.player = _Normalize2.default.str(origin.name);
+  /**
+   * 出場・登板順
+   * <pre>
+   *   打者投手いずれも
+   *   sequenceの項目を追加し、
+   *   その値が打者の場合、控え選手が例えば 99など固定の値を入れ、試合終了後に正しい値になるなどになると想定しています。
+   *   投手の場合は時系列毎に選手交代したときの登板順はあるようなのでそのまま登板順の値が前述のsequenceに入るかと。
+   * </pre>
+   * @type {number}
+   * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-23#comment-1173570992
+   */
+  this.sequence = _Normalize2.default.int(origin.sequence, 99);
 };
 
 // sort
@@ -17784,10 +17797,40 @@ exports.DaePlayer = function DaePlayer(info) {
 // sort(function(x, y){
 // return x.line - y.line || x.column - y.column;
 // });
+// /**
+//  * 打席順にソートします
+//  * @param {DaePlayer} base ソート項目 A
+//  * @param {DaePlayer} target ソート項目 B
+//  * @returns {number} +-N or 0
+//  * @see https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+//  * @see http://qiita.com/cocottejs/items/511f6be58efe00339498
+//  */
+// const orderByNo = (base, target) => (base.no - target.no);
+
+/**
+ * 打席順と出場順でソートします
+ * @param {DaePlayer} base ソート項目 A
+ * @param {DaePlayer} target ソート項目 B
+ * @returns {number} +-N or 0
+ * @see https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+ * @see http://qiita.com/cocottejs/items/511f6be58efe00339498
+ */
 
 
-var orderByNo = function orderByNo(base, target) {
-  return base.no - target.no;
+var orderByNoSeq = function orderByNoSeq(base, target) {
+  return base.no - target.no || base.sequence - target.sequence;
+};
+
+/**
+ * 出場順でソートします
+ * @param {DaePlayer} base ソート項目 A
+ * @param {DaePlayer} target ソート項目 B
+ * @returns {number} +-N or 0
+ * @see https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+ * @see http://qiita.com/cocottejs/items/511f6be58efe00339498
+ * */
+var orderBySeq = function orderBySeq(base, target) {
+  return base.sequence - target.sequence;
 };
 
 /**
@@ -17840,8 +17883,9 @@ exports.DaePlayers = function DaePlayers(info) {
     }
     return player;
   });
-  members.battersOrder = members.batters.slice(0).sort(orderByNo);
-  members.pitchersOrder = members.pitchers.slice(0).sort(orderByNo);
+  // 配列クローンを作成し打席順にソートします
+  members.battersOrder = members.batters.slice(0).sort(orderByNoSeq);
+  members.pitchersOrder = members.pitchers.slice(0).sort(orderBySeq);
   /**
    * player id を key, value を {@link DaePlayer} した object
    * @type {object}
@@ -17849,7 +17893,14 @@ exports.DaePlayers = function DaePlayers(info) {
   this.players = players;
   /**
    * 打者・投手 それぞれで {@link DaePlayer} をリストします
-   * @type {{batters: Array.<DaePlayer>, pitchers: Array.<DaePlayer>}}
+   * - batters / pitchers - data 通り
+   * - battersOrder / pitchersOrder - 打席順
+   * @type {{
+   *  batters: Array.<DaePlayer>,
+   *  pitchers: Array.<DaePlayer>,
+   *  battersOrder: Array.<DaePlayer>,
+   *  pitchersOrder: Array.<DaePlayer>,
+   * }}
    */
   this.members = members;
 };
@@ -18306,7 +18357,7 @@ exports.__esModule = true;
 
 var _VIEWS;
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 var _Month = __webpack_require__(702);
 
@@ -18690,7 +18741,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -19584,7 +19635,7 @@ module.exports = cloneArrayBuffer;
 /* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArray = __webpack_require__(30),
+var isArray = __webpack_require__(31),
     isSymbol = __webpack_require__(117);
 
 /** Used to match property names within property paths. */
@@ -20049,7 +20100,7 @@ exports[DATA_VIEW] = $DataView;
 /***/ (function(module, exports, __webpack_require__) {
 
 var has          = __webpack_require__(19)
-  , toIObject    = __webpack_require__(31)
+  , toIObject    = __webpack_require__(32)
   , arrayIndexOf = __webpack_require__(132)(false)
   , IE_PROTO     = __webpack_require__(133)('IE_PROTO');
 
@@ -20577,7 +20628,7 @@ module.exports = Math.log1p || function log1p(x){
 /***/ (function(module, exports, __webpack_require__) {
 
 var getKeys   = __webpack_require__(65)
-  , toIObject = __webpack_require__(31)
+  , toIObject = __webpack_require__(32)
   , isEnum    = __webpack_require__(85).f;
 module.exports = function(isEntries){
   return function(it){
@@ -22897,7 +22948,7 @@ module.exports = getIteratorFn;
 
 
 
-var ReactCurrentOwner = __webpack_require__(32);
+var ReactCurrentOwner = __webpack_require__(33);
 var ReactComponentTreeHook = __webpack_require__(21);
 var ReactElement = __webpack_require__(52);
 
@@ -24741,7 +24792,7 @@ var _assign = __webpack_require__(10);
 
 var LinkedValueUtils = __webpack_require__(159);
 var ReactDOMComponentTree = __webpack_require__(11);
-var ReactUpdates = __webpack_require__(33);
+var ReactUpdates = __webpack_require__(34);
 
 var warning = __webpack_require__(6);
 
@@ -25235,7 +25286,7 @@ module.exports = ReactHostComponent;
 
 var _prodInvariant = __webpack_require__(7);
 
-var ReactCurrentOwner = __webpack_require__(32);
+var ReactCurrentOwner = __webpack_require__(33);
 var REACT_ELEMENT_TYPE = __webpack_require__(612);
 
 var getIteratorFn = __webpack_require__(613);
@@ -25683,7 +25734,7 @@ var DOMLazyTree = __webpack_require__(70);
 var DOMProperty = __webpack_require__(46);
 var React = __webpack_require__(67);
 var ReactBrowserEventEmitter = __webpack_require__(114);
-var ReactCurrentOwner = __webpack_require__(32);
+var ReactCurrentOwner = __webpack_require__(33);
 var ReactDOMComponentTree = __webpack_require__(11);
 var ReactDOMContainerInfo = __webpack_require__(642);
 var ReactDOMFeatureFlags = __webpack_require__(643);
@@ -25693,7 +25744,7 @@ var ReactInstrumentation = __webpack_require__(26);
 var ReactMarkupChecksum = __webpack_require__(644);
 var ReactReconciler = __webpack_require__(69);
 var ReactUpdateQueue = __webpack_require__(164);
-var ReactUpdates = __webpack_require__(33);
+var ReactUpdates = __webpack_require__(34);
 
 var emptyObject = __webpack_require__(108);
 var instantiateReactComponent = __webpack_require__(252);
@@ -27167,7 +27218,7 @@ var _ModCalendar = __webpack_require__(688);
 
 var _ModCalendar2 = _interopRequireDefault(_ModCalendar);
 
-var _Day = __webpack_require__(34);
+var _Day = __webpack_require__(28);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -27521,7 +27572,7 @@ var _Formats;
 
 exports.default = viewLabel;
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 var _formats = __webpack_require__(94);
 
@@ -27861,7 +27912,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -28042,7 +28093,7 @@ exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -28845,7 +28896,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -29066,7 +29117,7 @@ var _localizer = __webpack_require__(18);
 
 var _localizer2 = _interopRequireDefault(_localizer);
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 var _TimeGrid = __webpack_require__(191);
 
@@ -29165,7 +29216,7 @@ var _invariant = __webpack_require__(71);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 var _Views = __webpack_require__(180);
 
@@ -29373,7 +29424,7 @@ module.exports = defineProperty;
 
 var baseTimes = __webpack_require__(776),
     isArguments = __webpack_require__(197),
-    isArray = __webpack_require__(30),
+    isArray = __webpack_require__(31),
     isBuffer = __webpack_require__(126),
     isIndex = __webpack_require__(185),
     isTypedArray = __webpack_require__(198);
@@ -29530,7 +29581,7 @@ module.exports = getAllKeys;
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayPush = __webpack_require__(202),
-    isArray = __webpack_require__(30);
+    isArray = __webpack_require__(31);
 
 /**
  * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
@@ -29907,7 +29958,7 @@ module.exports = baseForOwn;
 var baseMatches = __webpack_require__(831),
     baseMatchesProperty = __webpack_require__(842),
     identity = __webpack_require__(206),
-    isArray = __webpack_require__(30),
+    isArray = __webpack_require__(31),
     property = __webpack_require__(847);
 
 /**
@@ -41622,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-4 12:25:00
+ * 2017-8-5 16:42:45
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -43878,7 +43929,7 @@ var global         = __webpack_require__(8)
   , enumKeys       = __webpack_require__(486)
   , isArray        = __webpack_require__(213)
   , anObject       = __webpack_require__(9)
-  , toIObject      = __webpack_require__(31)
+  , toIObject      = __webpack_require__(32)
   , toPrimitive    = __webpack_require__(80)
   , createDesc     = __webpack_require__(42)
   , _create        = __webpack_require__(82)
@@ -44114,7 +44165,7 @@ module.exports = function(name){
 /***/ (function(module, exports, __webpack_require__) {
 
 var getKeys   = __webpack_require__(65)
-  , toIObject = __webpack_require__(31);
+  , toIObject = __webpack_require__(32);
 module.exports = function(object, el){
   var O      = toIObject(object)
     , keys   = getKeys(O)
@@ -44149,7 +44200,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = __webpack_require__(31)
+var toIObject = __webpack_require__(32)
   , gOPN      = __webpack_require__(81).f
   , toString  = {}.toString;
 
@@ -44229,7 +44280,7 @@ NAME in FProto || __webpack_require__(23) && dP(FProto, NAME, {
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export   = __webpack_require__(2)
-  , toIObject = __webpack_require__(31)
+  , toIObject = __webpack_require__(32)
   , toLength  = __webpack_require__(20);
 
 $export($export.S, 'String', {
@@ -45085,7 +45136,7 @@ $export($export.S, 'Object', {
 // https://github.com/tc39/proposal-object-getownpropertydescriptors
 var $export        = __webpack_require__(2)
   , ownKeys        = __webpack_require__(221)
-  , toIObject      = __webpack_require__(31)
+  , toIObject      = __webpack_require__(32)
   , gOPD           = __webpack_require__(45)
   , createProperty = __webpack_require__(146);
 
@@ -54136,7 +54187,7 @@ var _View = __webpack_require__(552);
 
 var _View2 = _interopRequireDefault(_View);
 
-var _Day = __webpack_require__(34);
+var _Day = __webpack_require__(28);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -54494,7 +54545,7 @@ var _Creator = __webpack_require__(441);
 
 var _Creator2 = _interopRequireDefault(_Creator);
 
-var _Day = __webpack_require__(34);
+var _Day = __webpack_require__(28);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -55009,7 +55060,7 @@ module.exports = PooledClass;
 
 var _prodInvariant = __webpack_require__(68);
 
-var ReactCurrentOwner = __webpack_require__(32);
+var ReactCurrentOwner = __webpack_require__(33);
 var REACT_ELEMENT_TYPE = __webpack_require__(232);
 
 var getIteratorFn = __webpack_require__(233);
@@ -56644,7 +56695,7 @@ var ReactDOMComponentTree = __webpack_require__(11);
 var ReactDefaultInjection = __webpack_require__(568);
 var ReactMount = __webpack_require__(260);
 var ReactReconciler = __webpack_require__(69);
-var ReactUpdates = __webpack_require__(33);
+var ReactUpdates = __webpack_require__(34);
 var ReactVersion = __webpack_require__(646);
 
 var findDOMNode = __webpack_require__(647);
@@ -57501,7 +57552,7 @@ var EventPluginHub = __webpack_require__(88);
 var EventPropagators = __webpack_require__(87);
 var ExecutionEnvironment = __webpack_require__(14);
 var ReactDOMComponentTree = __webpack_require__(11);
-var ReactUpdates = __webpack_require__(33);
+var ReactUpdates = __webpack_require__(34);
 var SyntheticEvent = __webpack_require__(39);
 
 var inputValueTracking = __webpack_require__(243);
@@ -61075,7 +61126,7 @@ var _prodInvariant = __webpack_require__(7),
 var DOMPropertyOperations = __webpack_require__(249);
 var LinkedValueUtils = __webpack_require__(159);
 var ReactDOMComponentTree = __webpack_require__(11);
-var ReactUpdates = __webpack_require__(33);
+var ReactUpdates = __webpack_require__(34);
 
 var invariant = __webpack_require__(5);
 var warning = __webpack_require__(6);
@@ -61495,7 +61546,7 @@ var _prodInvariant = __webpack_require__(7),
 
 var LinkedValueUtils = __webpack_require__(159);
 var ReactDOMComponentTree = __webpack_require__(11);
-var ReactUpdates = __webpack_require__(33);
+var ReactUpdates = __webpack_require__(34);
 
 var invariant = __webpack_require__(5);
 var warning = __webpack_require__(6);
@@ -61662,7 +61713,7 @@ var ReactComponentEnvironment = __webpack_require__(160);
 var ReactInstanceMap = __webpack_require__(90);
 var ReactInstrumentation = __webpack_require__(26);
 
-var ReactCurrentOwner = __webpack_require__(32);
+var ReactCurrentOwner = __webpack_require__(33);
 var ReactReconciler = __webpack_require__(69);
 var ReactChildReconciler = __webpack_require__(607);
 
@@ -62272,7 +62323,7 @@ var _prodInvariant = __webpack_require__(7),
 
 var React = __webpack_require__(67);
 var ReactComponentEnvironment = __webpack_require__(160);
-var ReactCurrentOwner = __webpack_require__(32);
+var ReactCurrentOwner = __webpack_require__(33);
 var ReactErrorUtils = __webpack_require__(152);
 var ReactInstanceMap = __webpack_require__(90);
 var ReactInstrumentation = __webpack_require__(26);
@@ -64094,7 +64145,7 @@ module.exports = ReactDOMTextComponent;
 
 var _assign = __webpack_require__(10);
 
-var ReactUpdates = __webpack_require__(33);
+var ReactUpdates = __webpack_require__(34);
 var Transaction = __webpack_require__(110);
 
 var emptyFunction = __webpack_require__(24);
@@ -64171,7 +64222,7 @@ var EventListener = __webpack_require__(257);
 var ExecutionEnvironment = __webpack_require__(14);
 var PooledClass = __webpack_require__(53);
 var ReactDOMComponentTree = __webpack_require__(11);
-var ReactUpdates = __webpack_require__(33);
+var ReactUpdates = __webpack_require__(34);
 
 var getEventTarget = __webpack_require__(153);
 var getUnboundedScrollPosition = __webpack_require__(622);
@@ -64376,7 +64427,7 @@ var ReactComponentEnvironment = __webpack_require__(160);
 var ReactEmptyComponent = __webpack_require__(254);
 var ReactBrowserEventEmitter = __webpack_require__(114);
 var ReactHostComponent = __webpack_require__(255);
-var ReactUpdates = __webpack_require__(33);
+var ReactUpdates = __webpack_require__(34);
 
 var ReactInjection = {
   Component: ReactComponentEnvironment.injection,
@@ -66438,7 +66489,7 @@ module.exports = '15.6.1';
 
 var _prodInvariant = __webpack_require__(7);
 
-var ReactCurrentOwner = __webpack_require__(32);
+var ReactCurrentOwner = __webpack_require__(33);
 var ReactDOMComponentTree = __webpack_require__(11);
 var ReactInstanceMap = __webpack_require__(90);
 
@@ -68659,7 +68710,7 @@ var _Api = __webpack_require__(170);
 
 var _Api2 = _interopRequireDefault(_Api);
 
-var _Day = __webpack_require__(34);
+var _Day = __webpack_require__(28);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -69043,7 +69094,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Day = __webpack_require__(34);
+var _Day = __webpack_require__(28);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -69260,7 +69311,7 @@ var _Api = __webpack_require__(170);
 
 var _Api2 = _interopRequireDefault(_Api);
 
-var _Day = __webpack_require__(34);
+var _Day = __webpack_require__(28);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -69725,7 +69776,7 @@ var _DaeCalendar = __webpack_require__(271);
 
 var _DaeCalendar2 = _interopRequireDefault(_DaeCalendar);
 
-var _Day = __webpack_require__(34);
+var _Day = __webpack_require__(28);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -70264,7 +70315,7 @@ var _move = __webpack_require__(295);
 
 var _move2 = _interopRequireDefault(_move);
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70311,7 +70362,7 @@ var _uncontrollable = __webpack_require__(697);
 
 var _uncontrollable2 = _interopRequireDefault(_uncontrollable);
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -70319,7 +70370,7 @@ var _propTypes3 = __webpack_require__(22);
 
 var _helpers = __webpack_require__(93);
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 var _formats = __webpack_require__(94);
 
@@ -71643,7 +71694,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(25);
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -71659,7 +71710,7 @@ var _chunk = __webpack_require__(703);
 
 var _chunk2 = _interopRequireDefault(_chunk);
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 var _helpers = __webpack_require__(93);
 
@@ -73270,7 +73321,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -73843,7 +73894,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(25);
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -74667,7 +74718,7 @@ var _TimeGrid = __webpack_require__(191);
 
 var _TimeGrid2 = _interopRequireDefault(_TimeGrid);
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -74746,7 +74797,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(25);
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -75556,7 +75607,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -75735,7 +75786,7 @@ var _dates = __webpack_require__(15);
 
 var _dates2 = _interopRequireDefault(_dates);
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 var _accessors = __webpack_require__(77);
 
@@ -76075,7 +76126,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = __webpack_require__(28);
+var _classnames = __webpack_require__(29);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -76083,7 +76134,7 @@ var _messages = __webpack_require__(121);
 
 var _messages2 = _interopRequireDefault(_messages);
 
-var _constants = __webpack_require__(29);
+var _constants = __webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76279,7 +76330,7 @@ var Stack = __webpack_require__(193),
     initCloneArray = __webpack_require__(796),
     initCloneByTag = __webpack_require__(797),
     initCloneObject = __webpack_require__(806),
-    isArray = __webpack_require__(30),
+    isArray = __webpack_require__(31),
     isBuffer = __webpack_require__(126),
     isObject = __webpack_require__(40),
     keys = __webpack_require__(98);
@@ -78198,7 +78249,7 @@ module.exports = toString;
 
 var Symbol = __webpack_require__(75),
     arrayMap = __webpack_require__(297),
-    isArray = __webpack_require__(30),
+    isArray = __webpack_require__(31),
     isSymbol = __webpack_require__(117);
 
 /** Used as references for various `Number` constants. */
@@ -78473,7 +78524,7 @@ module.exports = baseFlatten;
 
 var Symbol = __webpack_require__(75),
     isArguments = __webpack_require__(197),
-    isArray = __webpack_require__(30);
+    isArray = __webpack_require__(31);
 
 /** Built-in value references. */
 var spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
@@ -78765,7 +78816,7 @@ var arrayEach = __webpack_require__(299),
     baseForOwn = __webpack_require__(319),
     baseIteratee = __webpack_require__(320),
     getPrototype = __webpack_require__(127),
-    isArray = __webpack_require__(30),
+    isArray = __webpack_require__(31),
     isBuffer = __webpack_require__(126),
     isFunction = __webpack_require__(183),
     isObject = __webpack_require__(40),
@@ -78985,7 +79036,7 @@ var Stack = __webpack_require__(193),
     equalByTag = __webpack_require__(839),
     equalObjects = __webpack_require__(840),
     getTag = __webpack_require__(309),
-    isArray = __webpack_require__(30),
+    isArray = __webpack_require__(31),
     isBuffer = __webpack_require__(126),
     isTypedArray = __webpack_require__(198);
 
@@ -79577,7 +79628,7 @@ module.exports = baseHasIn;
 
 var castPath = __webpack_require__(128),
     isArguments = __webpack_require__(197),
-    isArray = __webpack_require__(30),
+    isArray = __webpack_require__(31),
     isIndex = __webpack_require__(185),
     isLength = __webpack_require__(184),
     toKey = __webpack_require__(99);
@@ -80625,7 +80676,7 @@ var _DaePitching = __webpack_require__(173);
 
 var _DaePitching2 = _interopRequireDefault(_DaePitching);
 
-var _Day = __webpack_require__(34);
+var _Day = __webpack_require__(28);
 
 var _Day2 = _interopRequireDefault(_Day);
 
@@ -80847,26 +80898,156 @@ ComPlayer.propTypes = {
 // ----------------------------------------
 // ComGame
 // ----------------------------------------
+var ComGameDetail = function ComGameDetail(_ref4) {
+  var game = _ref4.game,
+      homeClass = _ref4.homeClass,
+      visitorClass = _ref4.visitorClass,
+      statusClass = _ref4.statusClass,
+      teamClass = _ref4.teamClass;
+  return _react2.default.createElement(
+    'div',
+    { className: 'mlb__game__overview' },
+    _react2.default.createElement(
+      'p',
+      { className: teamClass + ' ' + teamClass + '--home ' + homeClass },
+      _Print2.default.str(game.home.team)
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'mlb__game__overview__info' },
+      _react2.default.createElement(
+        'p',
+        { className: 'mlb__game__overview__info__place' },
+        _Print2.default.str(game.stadium)
+      ),
+      _react2.default.createElement(
+        'p',
+        { className: 'mlb__game__overview__info__score' },
+        _react2.default.createElement(
+          'span',
+          { className: 'mlb__game__overview__info__score--home ' + homeClass },
+          _Print2.default.int(game.home.score)
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'mlb__game__overview__info__score--vs' },
+          '-'
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'mlb__game__overview__info__score--visitor ' + visitorClass },
+          _Print2.default.int(game.visitor.score)
+        )
+      ),
+      _react2.default.createElement(
+        'p',
+        { className: 'mlb__game__overview__info__status ' + statusClass },
+        _Print2.default.str(game.label)
+      )
+    ),
+    _react2.default.createElement(
+      'p',
+      { className: teamClass + ' ' + teamClass + '--visitor ' + visitorClass },
+      _Print2.default.str(game.visitor.team)
+    )
+  );
+};
+
+ComGameDetail.propTypes = {
+  game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
+  homeClass: _propTypes2.default.string.isRequired,
+  visitorClass: _propTypes2.default.string.isRequired,
+  statusClass: _propTypes2.default.string.isRequired,
+  teamClass: _propTypes2.default.string.isRequired
+};
+
+var ComGame = function ComGame(_ref5) {
+  var game = _ref5.game,
+      date = _ref5.date,
+      today = _ref5.today;
+
+  var homeClass = game.home.win ? _Style2.default.WIN : '';
+  var visitorClass = game.visitor.win ? _Style2.default.WIN : '';
+  var statusClass = game.className;
+  var teamClass = 'mlb__game__overview__team';
+  // render
+  // 未来のゲームはリンクしない
+  if (date.full > today.full) {
+    // console.log('div.mlb__game__overview__no_link');
+    return _react2.default.createElement(
+      'div',
+      {
+        className: 'mlb__game__overview__no_link',
+        'data-href': '/stats/mlb/game/' + date.year + '/' + game.id + '/'
+      },
+      _react2.default.createElement(ComGameDetail, {
+        game: game,
+        homeClass: homeClass,
+        visitorClass: visitorClass,
+        statusClass: statusClass,
+        teamClass: teamClass
+      })
+    );
+  }
+  // a
+  return _react2.default.createElement(
+    'a',
+    {
+      href: '/stats/mlb/game/' + date.year + '/' + game.id + '/',
+      className: 'mlb__game__overview__link'
+    },
+    _react2.default.createElement(ComGameDetail, {
+      game: game,
+      homeClass: homeClass,
+      visitorClass: visitorClass,
+      statusClass: statusClass,
+      teamClass: teamClass
+    })
+  );
+};
+
+/**
+ * propTypes
+ * @type {{game: DaeGame, team: string}}
+ */
+ComGame.propTypes = {
+  game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
+  date: _propTypes2.default.shape({
+    year: _propTypes2.default.number.isRequired,
+    month: _propTypes2.default.number.isRequired,
+    day: _propTypes2.default.number.isRequired,
+    full: _propTypes2.default.string.isRequired
+  }).isRequired,
+  today: _propTypes2.default.shape({
+    year: _propTypes2.default.number.isRequired,
+    month: _propTypes2.default.number.isRequired,
+    day: _propTypes2.default.number.isRequired,
+    full: _propTypes2.default.string.isRequired
+  }).isRequired
+};
+
+// ----------------------------------------
+// ComGame
+// ----------------------------------------
 /**
  * 試合毎の日本人選手一覧を出力します
  * - {@link ComPlayer}
  * @param {DaeGame} game japanese player game 情報
+ * @param {*} date {{year: number, month: number, day: number, full: string}} な object
+ * @param {*} today {{year: number, month: number, day: number, full: string}} な object
  * @returns {?XML} div.com-player-container > div.mlb__game__overview
  * @constructor
  */
-var ComGame = function ComGame(_ref4) {
-  var game = _ref4.game,
-      date = _ref4.date;
+var ComGameContainer = function ComGameContainer(_ref6) {
+  var game = _ref6.game,
+      date = _ref6.date,
+      today = _ref6.today;
 
   if (!game.players.has()) {
     return null;
   }
   // -----
   // render
-  var homeClass = game.home.win ? _Style2.default.WIN : '';
-  var visitorClass = game.visitor.win ? _Style2.default.WIN : '';
-  var statusClass = game.className;
-  var className = 'mlb__game__overview__team';
   return _react2.default.createElement(
     'div',
     { className: 'mlb__today_jp__container' },
@@ -80876,60 +81057,11 @@ var ComGame = function ComGame(_ref4) {
         player: player
       });
     }),
-    _react2.default.createElement(
-      'a',
-      {
-        href: '/stats/mlb/game/' + date.year + '/' + game.id + '/',
-        className: 'mlb__game__overview__link'
-      },
-      _react2.default.createElement(
-        'div',
-        { className: 'mlb__game__overview' },
-        _react2.default.createElement(
-          'p',
-          { className: className + ' ' + className + '--home ' + homeClass },
-          _Print2.default.str(game.home.team)
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'mlb__game__overview__info' },
-          _react2.default.createElement(
-            'p',
-            { className: 'mlb__game__overview__info__place' },
-            _Print2.default.str(game.stadium)
-          ),
-          _react2.default.createElement(
-            'p',
-            { className: 'mlb__game__overview__info__score' },
-            _react2.default.createElement(
-              'span',
-              { className: 'mlb__game__overview__info__score--home ' + homeClass },
-              _Print2.default.int(game.home.score)
-            ),
-            _react2.default.createElement(
-              'span',
-              { className: 'mlb__game__overview__info__score--vs' },
-              '-'
-            ),
-            _react2.default.createElement(
-              'span',
-              { className: 'mlb__game__overview__info__score--visitor ' + visitorClass },
-              _Print2.default.int(game.visitor.score)
-            )
-          ),
-          _react2.default.createElement(
-            'p',
-            { className: 'mlb__game__overview__info__status ' + statusClass },
-            _Print2.default.str(game.label)
-          )
-        ),
-        _react2.default.createElement(
-          'p',
-          { className: className + ' ' + className + '--visitor ' + visitorClass },
-          _Print2.default.str(game.visitor.team)
-        )
-      )
-    )
+    _react2.default.createElement(ComGame, {
+      game: game,
+      date: date,
+      today: today
+    })
   );
 };
 
@@ -80939,14 +81071,21 @@ var ComGame = function ComGame(_ref4) {
  *  year: number,
  *  month: number,
  *  day: number,
- * }}}
+ * }}},
+ * today: *
  */
-ComGame.propTypes = {
+ComGameContainer.propTypes = {
   game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
   date: _propTypes2.default.shape({
     year: _propTypes2.default.number.isRequired,
     month: _propTypes2.default.number.isRequired,
     day: _propTypes2.default.number.isRequired
+  }).isRequired,
+  today: _propTypes2.default.shape({
+    year: _propTypes2.default.number.isRequired,
+    month: _propTypes2.default.number.isRequired,
+    day: _propTypes2.default.number.isRequired,
+    full: _propTypes2.default.string.isRequired
   }).isRequired
 };
 
@@ -80962,15 +81101,16 @@ ComGame.propTypes = {
  * @returns {?XML} section.mlb__today_jp or null
  * @constructor
  */
-var ComJapanese = function ComJapanese(_ref5) {
-  var japanese = _ref5.japanese,
-      date = _ref5.date;
+var ComJapanese = function ComJapanese(_ref7) {
+  var japanese = _ref7.japanese,
+      date = _ref7.date;
 
   // 存在チェック
   if (!japanese.has()) {
     return null;
   }
   console.log('ComJapanese japanese', japanese, date);
+  var today = _Day2.default.today();
   // render
   return _react2.default.createElement(
     'section',
@@ -80982,10 +81122,11 @@ var ComJapanese = function ComJapanese(_ref5) {
       '\u306B\u51FA\u5834\u3057\u305F\u65E5\u672C\u4EBA\u9078\u624B'
     ),
     japanese.list.map(function (game) {
-      return _react2.default.createElement(ComGame, {
+      return _react2.default.createElement(ComGameContainer, {
         key: game.id + '-' + game.status,
         game: game,
-        date: date
+        date: date,
+        today: today
       });
     }),
     _react2.default.createElement(
@@ -81511,6 +81652,10 @@ var _Style = __webpack_require__(73);
 
 var _Style2 = _interopRequireDefault(_Style);
 
+var _Day = __webpack_require__(28);
+
+var _Day2 = _interopRequireDefault(_Day);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -81544,19 +81689,84 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // ----------------------------------------
 // 各ゲーム
 // ----------------------------------------
+var ComGameDetail = function ComGameDetail(_ref) {
+  var game = _ref.game,
+      homeClass = _ref.homeClass,
+      visitorClass = _ref.visitorClass,
+      statusClass = _ref.statusClass,
+      teamClass = _ref.teamClass;
+  return _react2.default.createElement(
+    'div',
+    { className: 'mlb__game__overview' },
+    _react2.default.createElement(
+      'p',
+      { className: teamClass + ' ' + teamClass + '--home ' + _Print2.default.str(game.home.className) },
+      _Print2.default.str(game.home.team)
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'mlb__game__overview__info' },
+      _react2.default.createElement(
+        'p',
+        { className: 'mlb__game__overview__info__place' },
+        _Print2.default.str(game.stadium)
+      ),
+      _react2.default.createElement(
+        'p',
+        { className: 'mlb__game__overview__info__score' },
+        _react2.default.createElement(
+          'span',
+          { className: 'mlb__game__overview__info__score--home ' + homeClass },
+          _Print2.default.int(game.home.score)
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'mlb__game__overview__info__score--vs' },
+          '-'
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'mlb__game__overview__info__score--visitor ' + visitorClass },
+          _Print2.default.int(game.visitor.score)
+        )
+      ),
+      _react2.default.createElement(
+        'p',
+        { className: 'mlb__game__overview__info__status ' + statusClass },
+        _Print2.default.str(game.label)
+      )
+    ),
+    _react2.default.createElement(
+      'p',
+      { className: teamClass + ' ' + teamClass + '--visitor ' + visitorClass },
+      _Print2.default.str(game.visitor.team)
+    )
+  );
+};
+
+ComGameDetail.propTypes = {
+  game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
+  homeClass: _propTypes2.default.string.isRequired,
+  visitorClass: _propTypes2.default.string.isRequired,
+  statusClass: _propTypes2.default.string.isRequired,
+  teamClass: _propTypes2.default.string.isRequired
+};
+
 /**
  * 各ゲーム
  * - 引数 `team` が 'all' 以外の時は filter 処理を行う
  * @param {DaeGame} game ゲーム情報
  * @param {string} team team.id - 【注意】data は number なので cast して比較すること
- * @param {*} date {{year: number, month: number, day: number}} な object
+ * @param {*} date {{year: number, month: number, day: number, full: string}} な object
+ * @param {*} today {{year: number, month: number, day: number, full: string}} な object
  * @returns {?XML} div.mlb__game__overview
  * @constructor
  */
-var ComGame = function ComGame(_ref) {
-  var game = _ref.game,
-      team = _ref.team,
-      date = _ref.date;
+var ComGame = function ComGame(_ref2) {
+  var game = _ref2.game,
+      team = _ref2.team,
+      date = _ref2.date,
+      today = _ref2.today;
 
   var teamClass = 'mlb__game__overview__team';
   // team `all` 以外は filter する
@@ -81572,65 +81782,45 @@ var ComGame = function ComGame(_ref) {
   var visitorClass = game.visitor.win ? _Style2.default.WIN : '';
   var statusClass = game.className;
   // render
+  // 未来のゲームはリンクしない
+  if (date.full > today.full) {
+    // console.log('div.mlb__game__overview__no_link');
+    return _react2.default.createElement(
+      'div',
+      {
+        className: 'mlb__game__overview__no_link',
+        'data-href': '/stats/mlb/game/' + date.year + '/' + game.id + '/'
+      },
+      _react2.default.createElement(ComGameDetail, {
+        game: game,
+        homeClass: homeClass,
+        visitorClass: visitorClass,
+        statusClass: statusClass,
+        teamClass: teamClass
+      })
+    );
+  }
+  // ----
+  // console.log('a.mlb__game__overview__link');
   return _react2.default.createElement(
     'a',
     {
       href: '/stats/mlb/game/' + date.year + '/' + game.id + '/',
       className: 'mlb__game__overview__link'
     },
-    _react2.default.createElement(
-      'div',
-      { className: 'mlb__game__overview' },
-      _react2.default.createElement(
-        'p',
-        { className: teamClass + ' ' + teamClass + '--home ' + _Print2.default.str(game.home.className) },
-        _Print2.default.str(game.home.team)
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'mlb__game__overview__info' },
-        _react2.default.createElement(
-          'p',
-          { className: 'mlb__game__overview__info__place' },
-          _Print2.default.str(game.stadium)
-        ),
-        _react2.default.createElement(
-          'p',
-          { className: 'mlb__game__overview__info__score' },
-          _react2.default.createElement(
-            'span',
-            { className: 'mlb__game__overview__info__score--home ' + homeClass },
-            _Print2.default.int(game.home.score)
-          ),
-          _react2.default.createElement(
-            'span',
-            { className: 'mlb__game__overview__info__score--vs' },
-            '-'
-          ),
-          _react2.default.createElement(
-            'span',
-            { className: 'mlb__game__overview__info__score--visitor ' + visitorClass },
-            _Print2.default.int(game.visitor.score)
-          )
-        ),
-        _react2.default.createElement(
-          'p',
-          { className: 'mlb__game__overview__info__status ' + statusClass },
-          _Print2.default.str(game.label)
-        )
-      ),
-      _react2.default.createElement(
-        'p',
-        { className: teamClass + ' ' + teamClass + '--visitor ' + visitorClass },
-        _Print2.default.str(game.visitor.team)
-      )
-    )
+    _react2.default.createElement(ComGameDetail, {
+      game: game,
+      homeClass: homeClass,
+      visitorClass: visitorClass,
+      statusClass: statusClass,
+      teamClass: teamClass
+    })
   );
 };
 
 /**
  * propTypes
- * @type {{game: DaeGame, team: string}}
+ * @type {{game: DaeGame, team: string, date: *, today: *}}
  */
 ComGame.propTypes = {
   game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
@@ -81638,7 +81828,14 @@ ComGame.propTypes = {
   date: _propTypes2.default.shape({
     year: _propTypes2.default.number.isRequired,
     month: _propTypes2.default.number.isRequired,
-    day: _propTypes2.default.number.isRequired
+    day: _propTypes2.default.number.isRequired,
+    full: _propTypes2.default.string.isRequired
+  }).isRequired,
+  today: _propTypes2.default.shape({
+    year: _propTypes2.default.number.isRequired,
+    month: _propTypes2.default.number.isRequired,
+    day: _propTypes2.default.number.isRequired,
+    full: _propTypes2.default.string.isRequired
   }).isRequired
 };
 
@@ -81653,12 +81850,12 @@ ComGame.propTypes = {
  * @param {string} team team.id - 【注意】data は number なので cast して比較すること
  * @returns {?XML} div.mlb__schedule__result__heading
  * @param {*} date {{year: number, month: number, day: number}} な object
- * @constructore
+ * @constructor
  */
-var ComGames = function ComGames(_ref2) {
-  var games = _ref2.games,
-      team = _ref2.team,
-      date = _ref2.date;
+var ComGames = function ComGames(_ref3) {
+  var games = _ref3.games,
+      team = _ref3.team,
+      date = _ref3.date;
 
   // game 数存在チェック
   if (!games.has()) {
@@ -81682,6 +81879,7 @@ var ComGames = function ComGames(_ref2) {
     { className: 'mlb__schedule__result__heading' },
     _Print2.default.str(games.title)
   ) : '';
+  var today = _Day2.default.today();
   // render
   return _react2.default.createElement(
     'div',
@@ -81692,7 +81890,8 @@ var ComGames = function ComGames(_ref2) {
         key: 'game-' + game.id,
         game: game,
         team: team,
-        date: date
+        date: date,
+        today: today
       });
     })
   );
@@ -81723,10 +81922,10 @@ ComGames.propTypes = {
  * @param {*} date {{year: number, month: number, day: number}} な object
  * @constructor
  */
-var ComSeasons = function ComSeasons(_ref3) {
-  var leagues = _ref3.leagues,
-      team = _ref3.team,
-      date = _ref3.date;
+var ComSeasons = function ComSeasons(_ref4) {
+  var leagues = _ref4.leagues,
+      team = _ref4.team,
+      date = _ref4.date;
   return _react2.default.createElement(
     'div',
     { className: 'mlb__schedule__result__container' },
@@ -83532,6 +83731,7 @@ var ComPitchers = function ComPitchers(_ref) {
   var save = info.save;
   // console.log('ComPitchers', team, win, lose, save, players.members.pitchers);
   // const members = players.members.pitchers;
+  // 打席順・ソート済みデータ - 登板順がまだ無いので... on 2017-08-04
   var members = players.members.pitchersOrder;
   return _react2.default.createElement(
     'table',
@@ -83579,6 +83779,7 @@ var ComPitchers = function ComPitchers(_ref) {
       null,
       members.map(function (player) {
         var playerName = player.player;
+        // @type {string} - 勝敗Sのシンボル（文字）
         var mark = '';
         if (playerName === win) {
           mark = '○';
@@ -83658,6 +83859,7 @@ var ComBatters = function ComBatters(_ref2) {
   var hits = 0;
   var runs = 0;
   // const members = players.members.batters;
+  // 打席順・ソート済みデータ
   var members = players.members.battersOrder;
   // render
   return _react2.default.createElement(
@@ -85652,7 +85854,7 @@ var _propTypes = __webpack_require__(4);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Day = __webpack_require__(34);
+var _Day = __webpack_require__(28);
 
 var _Day2 = _interopRequireDefault(_Day);
 

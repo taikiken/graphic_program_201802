@@ -84,7 +84,7 @@ export default class Day {
   /**
    * Date object を year, month, day, week へ分解します
    * @param {Date} date 変換元 Date object
-   * @returns {{date: Date, year: number, month: number, day: number, week: string}}
+   * @returns {{date: Date, year: number, month: number, day: number, week: string, full: string}}
    * 変換 object を返します
    */
   static date(date) {
@@ -94,6 +94,7 @@ export default class Day {
       month: date.getMonth() + 1,
       day: date.getDate(),
       week: Day.day(date.getDay()),
+      full: Day.full(date),
     };
   }
   /**
