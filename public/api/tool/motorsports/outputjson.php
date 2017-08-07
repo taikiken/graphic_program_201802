@@ -141,7 +141,7 @@ if($file=="wrc"){
 		if(strlen($tmpdata[$j][1])>0){
 			if(preg_match("/^GT(3|5)00/",$tmpdata[$j][0],$match)){
 				$n=0;
-				$type=$match[0]!="GT500"?"":"_gt300";
+				$type=$match[0]=="GT500"?"":"_gt300";
 				$tmpdata[$j][0]=preg_replace("/^GT(3|5)00 /","",$tmpdata[$j][0]);
 			}
 			$y["result"]["post".$type][$n]["no"]=(int)$tmpdata[$j][0];
@@ -156,7 +156,7 @@ if($file=="wrc"){
 		if(strlen($tmpdata[$j][1])>0){
 			if(preg_match("/^GT(3|5)00/",$tmpdata[$j][0],$match)){
 				$n=0;
-				$type=$match[0]!="GT500"?"":"_gt300";
+				$type=$match[0]=="GT500"?"":"_gt300";
 				$tmpdata[$j][0]=preg_replace("/^GT(3|5)00 /","",$tmpdata[$j][0]);
 			}
 			$y["ranking"]["driver".$type][$n]["no"]=(int)$tmpdata[$j][0];
@@ -172,7 +172,7 @@ if($file=="wrc"){
 		if(strlen($tmpdata[$j][1])>0){
 			if(preg_match("/^GT(3|5)00/",$tmpdata[$j][0],$match)){
 				$n=0;
-				$type=$match[0]!="GT500"?"":"_gt300";
+				$type=$match[0]=="GT500"?"":"_gt300";
 				$tmpdata[$j][0]=preg_replace("/^GT(3|5)00 /","",$tmpdata[$j][0]);
 			}
 			$y["ranking"]["team".$type][$n]["no"]=(int)$tmpdata[$j][0];
