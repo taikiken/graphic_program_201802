@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script>
   (function () {
-    if ( window.location.protocol == 'https:' ) {
+    if ( window.location.protocol == 'https:' && !/worldsoccer/.test(window.location.href) ) {
       window.location.replace(window.location.href.replace(/https:/, 'http:'));
     }
   }());
