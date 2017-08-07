@@ -112,6 +112,55 @@ $app->group('/stats', function () use($app) {
     });
   });
 
+
+
+  // 海外サッカー #2275
+  // ==============================
+  $this->group('/worldsoccer', function ($request, $response, $args) use ( $app ) {
+
+    $title        = '海外サッカー | 速報 &amp; データ';
+    $page = $app->model->set(array(
+      'title'              => $title,
+      'og_title'           => $title.' | '.$app->model->property('title_short'),
+      'og_description'     => '海外サッカー 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
+      'og_url'             => $app->model->property('site_url').'stats/worldsoccer/',
+      'og_image'           => $app->model->property('site_url').'assets/images/stats/worldsoccer/og_image.jpg',
+    ));
+
+
+    // トップ
+    $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
+      $args['page']             = $page;
+      $args['page']['template'] = 'worldsoccer/index.php';
+      return $this->renderer->render($response, 'stats/default.php', $args);
+    });
+
+    // ヒットする文字列だけ
+    $this->get('/{category:schedule|playerlist}[/]', function ($request, $response, $args) use ($app, $page) {
+
+      if ( $args['category'] === 'schedule' ) :
+        $category = array(
+          'title' => '試合日程',
+        );
+      endif;
+
+      if ( $args['category'] === 'playerlist' ) :
+        $category = array(
+          'title' => '選手情報',
+        );
+      endif;
+
+      $args['page']             = $page;
+      $args['page']['template'] = 'worldsoccer/'.$args['category'].'.php';
+      $args['page']['title']    = $category['title'].' | '.$page['title'];
+      $args['page']['og_title'] = $category['title'].' | '.$page['og_title'];
+      $args['page']['og_url']   = $page['og_url'].$args['category'].'/';
+
+      return $this->renderer->render($response, 'stats/default.php', $args);
+    });
+  });
+
+
 });
 
 ?>
