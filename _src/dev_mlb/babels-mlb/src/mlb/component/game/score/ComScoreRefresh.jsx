@@ -114,7 +114,7 @@ export default class ComScoreRefresh extends Component {
    * @returns {XML} div.refresh-container > div.mlb_live__reload__btn--auto
    */
   renderRefresh(show) {
-    // console.log('ComScoreRefresh.renderRefresh', show);
+    console.log('ComScoreRefresh.renderRefresh', show);
     // flag 判定
     // TODO: TEST CODE
     // if (!show) {
@@ -152,7 +152,7 @@ export default class ComScoreRefresh extends Component {
    * @returns {XML} div.mlb_live__reload__btn--reload
    */
   renderReload(show) {
-    // console.log('ComScoreRefresh.renderReload', show);
+    console.log('ComScoreRefresh.renderReload', show);
     // flag 判定
     // TODO: TEST CODE
     // if (!show) {

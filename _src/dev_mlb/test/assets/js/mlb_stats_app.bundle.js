@@ -6412,7 +6412,7 @@ var Day = function () {
     value: function title() {
       var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Day.current();
 
-      return date.year + '\u5E74' + date.month + '\u6708' + date.day + '\u65E5\uFF08' + date.week + '\uFF09';
+      return date.year + '\u5E74' + date.month + '\u6708' + date.day + '\u65E5(' + date.week + ')';
     }
     /**
      * Date object を year, month, day, week へ分解します
@@ -41673,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-8 18:25:15
+ * 2017-8-8 22:02:26
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -86031,7 +86031,8 @@ var ComScoreRefresh = function (_Component) {
     key: 'renderRefresh',
     value: function renderRefresh(show) {
       console.log('ComScoreRefresh.renderRefresh', show);
-      // TODO: remove test code
+      // flag 判定
+      // TODO: TEST CODE
       // if (!show) {
       //   return null;
       // }
@@ -86088,7 +86089,8 @@ var ComScoreRefresh = function (_Component) {
     key: 'renderReload',
     value: function renderReload(show) {
       console.log('ComScoreRefresh.renderReload', show);
-      // TODO: remove test code
+      // flag 判定
+      // TODO: TEST CODE
       // if (!show) {
       //   return null;
       // }
@@ -86124,16 +86126,17 @@ var ComScoreRefresh = function (_Component) {
       var _props = this.props,
           status = _props.status,
           date = _props.date;
+      // console.log('ComScoreRefresh.render', status, date);
 
-      console.log('ComScoreRefresh.render', status, date);
       var showRefresh = false;
       var showReload = false;
+      // 表示ステータスチェック
       if (status === 2) {
         // status:2 - 試合中のみ「自動・手動」「更新」表示させる
         showRefresh = true;
         showReload = true;
-      } else if (status === 1) {
-        // status: 1 - 試合前
+      } else if (status === 1 || status === 23) {
+        // status: 1 - 試合前,   23 - 遅延/中断
         // 当日のみ「更新」表示させる
         // @type {string} - YYYYMMDD
         var today = _Day2.default.full(new Date());
@@ -86144,7 +86147,8 @@ var ComScoreRefresh = function (_Component) {
           showReload = true;
         }
       }
-      // TODO: remove test code
+      // どちらも表示する必要がない時は null
+      // TODO: TEST CODE
       // if (!showRefresh && !showReload) {
       //   return null;
       // }
