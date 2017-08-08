@@ -41673,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-5 18:08:56
+ * 2017-8-8 18:25:15
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -85282,6 +85282,9 @@ ComScoreVisitor.propTypes = {
  * @returns {string|number} 表示点数を返します
  */
 var scoreAlpha = function scoreAlpha(home, visitor, inning, innings) {
+  if (!home || !visitor) {
+    return '';
+  }
   // 9 回未満はそのまま返す
   if (inning < 9 || inning !== innings) {
     return home.score;

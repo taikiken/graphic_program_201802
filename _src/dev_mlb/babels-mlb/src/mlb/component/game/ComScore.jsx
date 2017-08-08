@@ -369,6 +369,9 @@ ComScoreVisitor.propTypes = {
  * @returns {string|number} 表示点数を返します
  */
 const scoreAlpha = (home, visitor, inning, innings) => {
+  if (!home || !visitor) {
+    return '';
+  }
   // 9 回未満はそのまま返す
   if (inning < 9 || inning !== innings) {
     return home.score;
