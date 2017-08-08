@@ -116,9 +116,10 @@ export default class ComScoreRefresh extends Component {
   renderRefresh(show) {
     // console.log('ComScoreRefresh.renderRefresh', show);
     // flag 判定
-    if (!show) {
-      return null;
-    }
+    // TODO: TEST CODE
+    // if (!show) {
+    //   return null;
+    // }
     // render
     const { radio } = this.state;
     return (
@@ -153,9 +154,10 @@ export default class ComScoreRefresh extends Component {
   renderReload(show) {
     // console.log('ComScoreRefresh.renderReload', show);
     // flag 判定
-    if (!show) {
-      return null;
-    }
+    // TODO: TEST CODE
+    // if (!show) {
+    //   return null;
+    // }
     // render
     return (
       <div id="reload" className="mlb_live__reload__btn--reload">
@@ -197,10 +199,11 @@ export default class ComScoreRefresh extends Component {
         showReload = true;
       }
     }
-    // どちらも表示する必要がない時は null する
-    if (!showRefresh && !showReload) {
-      return null;
-    }
+    // どちらも表示する必要がない時は null
+    // TODO: TEST CODE
+    // if (!showRefresh && !showReload) {
+    //   return null;
+    // }
     // render
     return (
       <nav className="mlb_live__reload">
