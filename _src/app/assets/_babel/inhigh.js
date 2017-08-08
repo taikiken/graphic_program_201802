@@ -12,7 +12,7 @@
  */
 'use strict';
 
-// NPB sidebar ranking
+// inhigh sidebar ranking
 
 // UT
 const UT = self.UT;
