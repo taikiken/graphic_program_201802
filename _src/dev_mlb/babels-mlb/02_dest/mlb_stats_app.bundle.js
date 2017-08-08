@@ -41673,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-5 16:42:45
+ * 2017-8-8 18:25:15
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -80898,6 +80898,15 @@ ComPlayer.propTypes = {
 // ----------------------------------------
 // ComGame
 // ----------------------------------------
+/**
+ * 試合結果を表示します
+ * @param {DaeGame} game game 情報
+ * @param {string} homeClass home team class
+ * @param {string} visitorClass visitor tean class
+ * @param {string} statusClass 試合 status class
+ * @param {string} teamClass チーム class
+ * @returns {XML} div.mlb__game__overview
+ */
 var ComGameDetail = function ComGameDetail(_ref4) {
   var game = _ref4.game,
       homeClass = _ref4.homeClass,
@@ -80953,6 +80962,10 @@ var ComGameDetail = function ComGameDetail(_ref4) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{game: DaeGame, homeClass: string, visitorClass: string, statusClass: string, teamClass: string}}
+ */
 ComGameDetail.propTypes = {
   game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
   homeClass: _propTypes2.default.string.isRequired,
@@ -80961,6 +80974,14 @@ ComGameDetail.propTypes = {
   teamClass: _propTypes2.default.string.isRequired
 };
 
+/**
+ * 試合結果にリンクをつけるか否かを判定します
+ * @param {DaeGame} game ゲーム情報
+ * @param {*} date {@link Day.date} object - 試合日
+ * @param {*} today {@link Day.date} object - 今日
+ * @returns {XML} div.mlb__game__overview__no_link > {@link ComGameDetail}
+ * @constructor
+ */
 var ComGame = function ComGame(_ref5) {
   var game = _ref5.game,
       date = _ref5.date,
@@ -81008,7 +81029,7 @@ var ComGame = function ComGame(_ref5) {
 
 /**
  * propTypes
- * @type {{game: DaeGame, team: string}}
+ * @type {{game: DaeGame, team: string, date: *, today: *}}
  */
 ComGame.propTypes = {
   game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
@@ -81689,6 +81710,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // ----------------------------------------
 // 各ゲーム
 // ----------------------------------------
+/**
+ * 試合結果を表示します
+ * @param {DaeGame} game game 情報
+ * @param {string} homeClass home team class
+ * @param {string} visitorClass visitor tean class
+ * @param {string} statusClass 試合 status class
+ * @param {string} teamClass チーム class
+ * @returns {XML} div.mlb__game__overview
+ */
 var ComGameDetail = function ComGameDetail(_ref) {
   var game = _ref.game,
       homeClass = _ref.homeClass,
@@ -81744,6 +81774,10 @@ var ComGameDetail = function ComGameDetail(_ref) {
   );
 };
 
+/**
+ * propTypes
+ * @type {{game: DaeGame, homeClass: string, visitorClass: string, statusClass: string, teamClass: string}}
+ */
 ComGameDetail.propTypes = {
   game: _propTypes2.default.instanceOf(_DaeSchedule.DaeGame).isRequired,
   homeClass: _propTypes2.default.string.isRequired,
@@ -82015,7 +82049,7 @@ var ComScheduleList = function (_Component) {
      * - seasons {DaeSeasons}
      * - team {string} team.id - 【注意】data は number なので cast して比較すること
      * - team {string} type.key - key_name を比較します
-     * @type {{seasons: DaeSeasons, team: string, type: string}}
+     * @type {{seasons: DaeSeasons, team: string, type: string, date: *}}
      */
 
   }, {
@@ -85248,6 +85282,9 @@ ComScoreVisitor.propTypes = {
  * @returns {string|number} 表示点数を返します
  */
 var scoreAlpha = function scoreAlpha(home, visitor, inning, innings) {
+  if (!home || !visitor) {
+    return '';
+  }
   // 9 回未満はそのまま返す
   if (inning < 9 || inning !== innings) {
     return home.score;
