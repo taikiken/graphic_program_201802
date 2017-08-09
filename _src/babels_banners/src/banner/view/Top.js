@@ -77,6 +77,7 @@ export default class Top extends View {
   }
   /**
    * {@link ComponentTop} をマウントします
+   * - ComponentTop.componentDidMount で `cb` value - {@link Top.webkit} を実行します
    * @param {*} banners 出力にしようする JSON 由来データ
    */
   render(banners) {

@@ -58,6 +58,9 @@ export default class ComponentTop extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * props.cb - {@link Top}.webkit を実行しマウントを通知します
+   * */
   componentDidMount() {
     this.props.cb();
   }
