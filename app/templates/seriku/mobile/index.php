@@ -12,7 +12,6 @@
 
     <div class="article_list">
         <article class="highlight_article">
-
             <ul class="thumb_area">
                     <li>
                         <a href="/p/163160/">
