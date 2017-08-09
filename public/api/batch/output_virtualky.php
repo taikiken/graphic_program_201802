@@ -48,21 +48,20 @@ while($f=$o->fetch_array()){
 }
 
 foreach($games as $k=>$v){
+	
 	$y["request"]["gameid"]=$k;
+	$update=strtotime($v[0]["u_time"]);
+	$json=sprintf("%s/%s.json",$bucket,$k);
+	//if(file_exists($json)&&filemtime($json)>$update)continue;
+	
+	$y["response"]["lastupdate"]=$v[0]["u_time"];
+	$y["response"]["schedule"]["date"]=$gameid[$k]["date"];
+	$y["response"]["schedule"]["sequence"]=$gameid[$k]["sequence"];
+	for($j=0;$j<count($mvtype);$j++){
+		$y["response"]["media"][$mvtype[$j]]=array("title"=>"","img"=>"","movie"=>"");
+	}
+	
 	for($i=0;$i<count($v);$i++){
-		if($i==0){
-			
-			$update=strtotime($v[0]["u_time"]);
-			$json=sprintf("%s/%s.json",$bucket,$k);
-			if(file_exists($json)&&filemtime($json)>$update)continue;
-			
-			$y["response"]["lastupdate"]=$v[0]["u_time"];
-			$y["response"]["schedule"]["date"]=$gameid[$k]["date"];
-			$y["response"]["schedule"]["sequence"]=$gameid[$k]["sequence"];
-			for($j=0;$j<count($mvtype);$j++){
-				$y["response"]["media"][$mvtype[$j]]=array("title"=>"","img"=>"","movie"=>"");
-			}
-		}
 		$y["response"]["media"][$v[$i]["type"]]=array("title"=>$v[$i]["title"],"img"=>$v[$i]["img"],"movie"=>$v[$i]["movie"]);
 	}
 	put_json($json,$y);

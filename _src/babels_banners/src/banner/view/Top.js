@@ -46,7 +46,7 @@ export default class Top extends View {
     const messageHandlers = webkit.messageHandlers || {};
     const onLoadComplete = messageHandlers.onLoadComplete || {};
     const postMessage = onLoadComplete.postMessage;
-    console.log('postMessage', postMessage);
+    // console.log('postMessage', postMessage);
     if (typeof postMessage === 'function') {
       window.webkit.messageHandlers.onLoadComplete.postMessage('');
     }
@@ -77,6 +77,7 @@ export default class Top extends View {
   }
   /**
    * {@link ComponentTop} をマウントします
+   * - ComponentTop.componentDidMount で `cb` value - {@link Top.webkit} を実行します
    * @param {*} banners 出力にしようする JSON 由来データ
    */
   render(banners) {

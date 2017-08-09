@@ -19,7 +19,7 @@ function put_json($file,$data){
 }
 
 $file=$_GET["file"];
-if(strlen($file)==0)$file="f1";
+if(strlen($file)==0)$file="sgt";
 $tmp[]=$l;
 
 $data=get_contents(sprintf("http://input.sportsbull.jp/msuploader/file/%s.csv",$file));
@@ -76,10 +76,131 @@ while($l=fgetcsv($fp,10240)){
 	}
 }
 
-var_dump($data);
-
-if($file!="wrc"){
+if($file=="wrc"){
 	
+	$tmpdata=$data[0]["data"];
+	$y["result"]["competition"]=$tmpdata[0][0];
+	$y["result"]["post"]=array();
+	for($j=0;$j<count($tmpdata);$j++){
+		if(strlen($tmpdata[$j][1])>0){
+			$y["result"]["post"][$j]["no"]=(int)$tmpdata[$j][1];
+			$y["result"]["post"][$j]["driver"]=$tmpdata[$j][2];
+		}
+	}
+	
+	$tmpdata=$data[1]["data"];
+	for($j=0;$j<count($tmpdata);$j++){
+		if(strlen($tmpdata[$j][1])>0){
+			$y["ranking"]["driver"][$j]["no"]=(int)$tmpdata[$j][0];
+			$y["ranking"]["driver"][$j]["driver"]=$tmpdata[$j][1];
+			$y["ranking"]["driver"][$j]["team"]=$tmpdata[$j][2];
+			$y["ranking"]["driver"][$j]["point"]=$tmpdata[$j][3];
+		}
+	}
+	
+	$tmpdata=$data[2]["data"];
+	for($j=0;$j<count($tmpdata);$j++){
+		if(strlen($tmpdata[$j][1])>0){
+			$y["ranking"]["team"][$j]["no"]=(int)$tmpdata[$j][0];
+			$y["ranking"]["team"][$j]["team"]=$tmpdata[$j][1];
+			$y["ranking"]["team"][$j]["point"]=$tmpdata[$j][2];
+		}
+	}
+	
+	$tmpdata=$data[3]["data"];
+	for($j=0;$j<count($tmpdata);$j++){
+		$sddata[$tmpdata[$j][0].$tmpdata[$j][1]][]=$tmpdata[$j];
+	}
+	$n=0;
+	foreach($sddata as $k=>$v){
+		$y["schedule"][$n]["competition"]=str_replace($v[0][1],"",$v[0][0]);
+		$y["schedule"][$n]["date"]=$v[0][1];
+		for($j=0;$j<count($v);$j++){
+			$y["schedule"][$n]["result"][$j]["no"]=(int)$v[$j][2];
+			$y["schedule"][$n]["result"][$j]["driver"]=strlen($v[$j][3])>0?$v[$j][3]:"";
+		}
+		$n++;
+	}
+
+}elseif($file=="sgt"){
+	
+	$tmpdata=$data[0]["data"];
+	$y["result"]["competition"]=$tmpdata[0][0];
+	for($j=0;$j<count($tmpdata);$j++){
+		if(strlen($tmpdata[$j][1])>0){
+			$y["result"]["now"][$j]["event"]=$tmpdata[$j][1];
+			$y["result"]["now"][$j]["date"]=$tmpdata[$j][2];
+			$y["result"]["now"][$j]["jtime"]=$tmpdata[$j][3];
+			$y["result"]["now"][$j]["winner"]=$tmpdata[$j][4];
+		}
+	}
+	
+	$tmpdata=$data[1]["data"];
+	$y["result"]["post"]=array();
+	for($j=0;$j<count($tmpdata);$j++){
+		if(strlen($tmpdata[$j][1])>0){
+			if(preg_match("/^GT(3|5)00/",$tmpdata[$j][0],$match)){
+				$n=0;
+				$type=$match[0]=="GT500"?"":"_gt300";
+				$tmpdata[$j][0]=preg_replace("/^GT(3|5)00 /","",$tmpdata[$j][0]);
+			}
+			$y["result"]["post".$type][$n]["no"]=(int)$tmpdata[$j][0];
+			$y["result"]["post".$type][$n]["driver"]=$tmpdata[$j][1];
+			$y["result"]["post".$type][$n]["team"]=$tmpdata[$j][2];
+			$n++;
+		}
+	}
+	
+	$tmpdata=$data[2]["data"];
+	for($j=0;$j<count($tmpdata);$j++){
+		if(strlen($tmpdata[$j][1])>0){
+			if(preg_match("/^GT(3|5)00/",$tmpdata[$j][0],$match)){
+				$n=0;
+				$type=$match[0]=="GT500"?"":"_gt300";
+				$tmpdata[$j][0]=preg_replace("/^GT(3|5)00 /","",$tmpdata[$j][0]);
+			}
+			$y["ranking"]["driver".$type][$n]["no"]=(int)$tmpdata[$j][0];
+			$y["ranking"]["driver".$type][$n]["driver"]=$tmpdata[$j][1];
+			$y["ranking"]["driver".$type][$n]["team"]=$tmpdata[$j][2];
+			$y["ranking"]["driver".$type][$n]["point"]=$tmpdata[$j][3];
+			$n++;
+		}
+	}
+	
+	$tmpdata=$data[3]["data"];
+	for($j=0;$j<count($tmpdata);$j++){
+		if(strlen($tmpdata[$j][1])>0){
+			if(preg_match("/^GT(3|5)00/",$tmpdata[$j][0],$match)){
+				$n=0;
+				$type=$match[0]=="GT500"?"":"_gt300";
+				$tmpdata[$j][0]=preg_replace("/^GT(3|5)00 /","",$tmpdata[$j][0]);
+			}
+			$y["ranking"]["team".$type][$n]["no"]=(int)$tmpdata[$j][0];
+			$y["ranking"]["team".$type][$n]["team"]=$tmpdata[$j][1];
+			$y["ranking"]["team".$type][$n]["point"]=$tmpdata[$j][2];
+			$n++;
+		}
+	}
+	
+	$tmpdata=$data[4]["data"];
+	for($j=0;$j<count($tmpdata);$j++){
+		$sddata[$tmpdata[$j][0].$tmpdata[$j][1]][]=$tmpdata[$j];
+	}
+	$n=0;
+	foreach($sddata as $k=>$v){
+		$y["schedule"][$n]["competition"]=str_replace($v[0][1],"",$v[0][0]);
+		$y["schedule"][$n]["date"]=$v[0][1];
+		for($j=0;$j<count($v);$j++){
+			$y["schedule"][$n]["result"][$j]["event"]=$v[$j][2];
+			$y["schedule"][$n]["result"][$j]["date"]=$v[$j][3];
+			$y["schedule"][$n]["result"][$j]["jtime"]=strlen($v[$j][4])>0?$v[$j][4]:"";
+			$y["schedule"][$n]["result"][$j]["winner"]=strlen($v[$j][5])>0?$v[$j][5]:"";
+		}
+		$n++;
+	}
+
+}else{
+
 	$tmpdata=$data[0]["data"];
 	$y["result"]["competition"]=$tmpdata[0][0];
 	for($j=0;$j<count($tmpdata);$j++){
@@ -122,63 +243,17 @@ if($file!="wrc"){
 	
 	$tmpdata=$data[4]["data"];
 	for($j=0;$j<count($tmpdata);$j++){
-		$sddata[$tmpdata[$j][0]][]=$tmpdata[$j];
+		$sddata[$tmpdata[$j][0].$tmpdata[$j][1]][]=$tmpdata[$j];
 	}
 	$n=0;
 	foreach($sddata as $k=>$v){
-		$y["schedule"][$n]["competition"]=$v[0][0];
+		$y["schedule"][$n]["competition"]=str_replace($v[0][1],"",$v[0][0]);
 		$y["schedule"][$n]["date"]=$v[0][1];
 		for($j=0;$j<count($v);$j++){
 			$y["schedule"][$n]["result"][$j]["event"]=$v[$j][2];
 			$y["schedule"][$n]["result"][$j]["date"]=$v[$j][3];
 			$y["schedule"][$n]["result"][$j]["jtime"]=strlen($v[$j][4])>0?$v[$j][4]:"";
 			$y["schedule"][$n]["result"][$j]["winner"]=strlen($v[$j][5])>0?$v[$j][5]:"";
-		}
-		$n++;
-	}		
-	
-}else{
-	//WRC
-	$tmpdata=$data[0]["data"];
-	$y["result"]["competition"]=$tmpdata[0][0];
-	$y["result"]["post"]=array();
-	for($j=0;$j<count($tmpdata);$j++){
-		if(strlen($tmpdata[$j][1])>0){
-			$y["result"]["post"][$j]["no"]=(int)$tmpdata[$j][1];
-			$y["result"]["post"][$j]["driver"]=$tmpdata[$j][2];
-		}
-	}
-	
-	$tmpdata=$data[1]["data"];
-	for($j=0;$j<count($tmpdata);$j++){
-		if(strlen($tmpdata[$j][1])>0){
-			$y["ranking"]["driver"][$j]["no"]=(int)$tmpdata[$j][0];
-			$y["ranking"]["driver"][$j]["driver"]=$tmpdata[$j][1];
-			$y["ranking"]["driver"][$j]["team"]=$tmpdata[$j][2];
-			$y["ranking"]["driver"][$j]["point"]=$tmpdata[$j][3];
-		}
-	}
-	
-	$tmpdata=$data[2]["data"];
-	for($j=0;$j<count($tmpdata);$j++){
-		if(strlen($tmpdata[$j][1])>0){
-			$y["ranking"]["team"][$j]["no"]=(int)$tmpdata[$j][0];
-			$y["ranking"]["team"][$j]["team"]=$tmpdata[$j][1];
-			$y["ranking"]["team"][$j]["point"]=$tmpdata[$j][2];
-		}
-	}
-	
-	$tmpdata=$data[3]["data"];
-	for($j=0;$j<count($tmpdata);$j++){
-		$sddata[$tmpdata[$j][0]][]=$tmpdata[$j];
-	}
-	$n=0;
-	foreach($sddata as $k=>$v){
-		$y["schedule"][$n]["competition"]=$v[0][0];
-		$y["schedule"][$n]["date"]=$v[0][1];
-		for($j=0;$j<count($v);$j++){
-			$y["schedule"][$n]["result"][$j]["no"]=(int)$v[$j][2];
-			$y["schedule"][$n]["result"][$j]["driver"]=strlen($v[$j][3])>0?$v[$j][3]:"";
 		}
 		$n++;
 	}
