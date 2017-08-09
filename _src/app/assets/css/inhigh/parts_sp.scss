@@ -5779,3 +5779,6 @@
         line-height: 1.4; 
         margin-bottom: 8px;
         height: 20px;}
+
+// #2284 サイドバー ランキング レコメンド 非表示
+#sponsor-link-recommend,#sponsor-link-ranking { display: none !important; }
