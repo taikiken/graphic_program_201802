@@ -90,7 +90,12 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
           return $this->renderer->render($response, "app.p.redirect.php", $args);
         else :
             if(isset($_GET['viewhead'])):
-                return $this->renderer->render($response, "app.p.php", $args);
+                if(isset($_GET['id'])):
+                    return $this->renderer->render($response, "app.p.body.php", $args);
+                else:
+                    return $this->renderer->render($response, "app.p.php", $args);
+                endif;
+
             endif;
 
             if ( $webview_type === 'body' ) :
