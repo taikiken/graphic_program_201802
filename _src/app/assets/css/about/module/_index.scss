@@ -346,22 +346,27 @@
         margin: (56-30)+px auto 0;
 
         letter-spacing: ls(inline-block);
-        text-align: center;
+        // 最初の2つを大きく表示するのを廃止
+        // ref. https://github.com/undotsushin/undotsushin/issues/2262#issuecomment-321224397
+        // text-align: center;
+        text-align: left;
       }
 
       li {
         display: inline-block;
         margin: 30px 15px 0;
 
-        &:nth-child(1),
-        &:nth-child(2) {
-          width: 380px;
-        }
+        // 最初の2つを大きく表示するのを廃止
+        // ref. https://github.com/undotsushin/undotsushin/issues/2262#issuecomment-321224397
+        // &:nth-child(1),
+        // &:nth-child(2) {
+        //   width: 380px;
+        // }
 
-        &:nth-child(1),
-        &:nth-child(2) {
-          text-align: right;
-        }
+        // &:nth-child(1),
+        // &:nth-child(2) {
+        //   text-align: right;
+        // }
       }
 
       a:hover {
@@ -395,10 +400,12 @@
           height: (50/2)+px;
         }
 
-        &:nth-child(1),
-        &:nth-child(2) {
-          width: (294/2)+px;
-        }
+        // 最初の2つを大きく表示するのを廃止
+        // ref. https://github.com/undotsushin/undotsushin/issues/2262#issuecomment-321224397
+        // &:nth-child(1),
+        // &:nth-child(2) {
+        //   width: (294/2)+px;
+        // }
       }
     }
   }
