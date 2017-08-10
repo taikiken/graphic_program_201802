@@ -6,7 +6,7 @@ include $INCLUDEPATH."public/import.php";
 $MEDIAID=26;
 $rssfile="http://input.sportsbull.jp/vkuploader/file/asw76rgrr66d.xml";
 
-$json="https://dev.widget.sportsbull.jp/json/v1/2017/hsb/summer/seasonschedule.json";
+$json="https://widget.sportsbull.jp/json/v1/2017/hsb/summer/seasonschedule.json";
 $schedule=json_decode(get_contents($json),TRUE);
 
 $o=new db;
@@ -38,8 +38,8 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		case "感動甲子園";$movietype=0;break;
 		case "ハイライト";$movietype=1;break;
 		case "ダイジェスト";$movietype=2;break;
-		case "スローモーション";$movietype=3;break;
-		case "ヒーローインタビュー";$movietype=4;break;
+		case "ハイスピード";$movietype=3;break;
+		case "インタビュー";$movietype=4;break;
 	}
 	
 	unset($s);
@@ -50,7 +50,6 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	if($movietype===0){
 		$s["t7"]=$data["channel"]["item"][$i]["gamedate"];
 	}else{
-		var_dump(str_replace("-","",$data["channel"]["item"][$i]["gamedate"]));
 		$s["t7"]=sprintf("%s_%s",$schedule[str_replace("-","",$data["channel"]["item"][$i]["gamedate"])][$data["channel"]["item"][$i]["gamesequence"]],$movietype);
 	}
 	
@@ -60,17 +59,19 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$modbody=sprintf("<p>%s</p>",str_replace("\'","''",preg_replace("/(\r|\n|\t)/","",$body)));
 	
 	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
-	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
+	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["lastUpdate"]));
 	$s["a_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["lastUpdate"]));
 	if($data["channel"]["item"][$i]["enclosure"]){
 		$s["t30"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["url"];
 		$s["t1"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["caption"];
 	}
 	
-	$s["keyword"]=$data["channel"]["item"][$i]["keyword"];
+	$s["keyword"]=str_replace(array("第99回,2017年,全国高校野球選手権大会,本大会","99回,2017年,全国高校野球選手権大会,高校野球"),"",$data["channel"]["item"][$i]["keyword"]);
 	
 	$tag=categorymatching($exword,sprintf("第99回全国高校野球選手権大会,%s%s",$data["channel"]["item"][$i]["movietype"],!is_array($s["keyword"])?",".$s["keyword"]:""));
 	if(count($tag)>0){
+		$tag=array_unique($tag);
+		$tag=array_values($tag);
 		for($cnt=0;$cnt<count($tag);$cnt++){
 			if($cnt==6)break;
 			$s["t1".$cnt]=esc($tag[$cnt]);
@@ -107,6 +108,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		  $sqla[]=relatedlink($data["channel"]["item"][$i]["relatedLink"],$f["id"]);
 	  }
 	}else{
+		
 		if($data["channel"]["item"][$i]["status"]==1){
 			
 			$s["d1"]=3;
@@ -130,6 +132,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			
 		}
 	}
+	
 	if($sqla){
 		$sqla=implode("\n",$sqla);
 		$o->query($sqla);

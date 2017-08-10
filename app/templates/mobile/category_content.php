@@ -55,14 +55,24 @@
       // ---------------------------------------------------- ?>
 
       <?php
+      # ref. #2227
       if ( $page['category']['slug'] ==='seriku' ) :
         include_once __DIR__.'/../seriku/mobile/index.php';
       endif;
       ?>
 
       <?php
+      # ref. #2185
       if ( $page['category']['slug'] ==='inhigh' ) :
         include_once __DIR__.'/../inhigh/mobile/index.php';
+      endif;
+      ?>
+
+      <?php
+      # ref. #2104
+      if ( $page['category']['slug'] === 'highschoolbaseball' ) :
+        $hsb_parts = file_get_contents('https://sportsbull.jp/stats/hsb/webview/sp/');
+        echo $hsb_parts;
       endif;
       ?>
       
