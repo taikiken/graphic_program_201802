@@ -41673,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-8 22:02:26
+ * 2017-8-10 19:46:04
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -68919,9 +68919,9 @@ var S3 = function () {
 }();
 
 S3.AMAZON = 's3.amazonaws.com';
-S3.DEV = 'https://dev-mlive.sportsbull.jp.' + S3.AMAZON;
-S3.STG = 'https://stg-mlive.sportsbull.jp.' + S3.AMAZON;
-S3.WWW = 'https://mlive.sportsbull.jp.' + S3.AMAZON;
+S3.DEV = 'http://dev-mlive.sportsbull.jp.' + S3.AMAZON;
+S3.STG = 'http://stg-mlive.sportsbull.jp.' + S3.AMAZON;
+S3.WWW = 'http://mlive.sportsbull.jp.' + S3.AMAZON;
 S3.server = null;
 exports.default = S3;
 
