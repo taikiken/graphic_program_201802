@@ -85,22 +85,29 @@
         <!-- // ad/npb-sp-anchor -->
     </head>
     <body>
-
+        <div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
+        <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
+        <script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
+<!-- インターハイ class名darkを削除しました -------------------------------------------------->
         <div id="whole" class="whole">
+<!-- / インターハイ class名darkを削除しました -------------------------------------------------->
             <header class="head-sec">
                 <div class="head-sec-inner">
                     <h1><a href="/">SPORTS BULL</a></h1>
                 </div><!-- /.head-sec-inner -->
             </header><!-- /.head-sec -->
 
+<!-- インターハイ メイン画像 ---------------------------------------------------------->
             <div class="special-summary">
                 <a href="/category/inhigh"><h1 class="special-summary-heading"><img src="/assets/images/inhigh/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="/assets/images/inhigh/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
             </div>
+<!-- / インターハイ メイン画像 ---------------------------------------------------------->
 
             <div class="body-sec">
                 <div class="body-sec-inner">
                     <section class="main-sec">
                        
+<!--  インターハイ メインコンテンツ ---------------------------------------------------------->
 <?php
 
 $db=new db;
@@ -128,7 +135,7 @@ while($f=$db->fetch_array()){
 ?>
                         <div class="ttl-wrapper">
                             <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
-                            <p class="ttl_date">2017.7.25 – 8.20</p>
+                            <p class="ttl_date"><?php echo $start; ?> - <?php echo $end; ?></p>
                         </div>
                         
                         <div id="js-current-post" class="current-post photo_gallery">
@@ -150,6 +157,9 @@ while($f=$db->fetch_array()){
                                 <img src="/assets/images/inhigh/SP_Banner_01B.jpg">
                             </a>
                         </div>
+                        
+
+<!-- / インターハイ メインコンテンツ ---------------------------------------------------------->
 
 
                     </section><!-- /.main-sec -->
