@@ -237,6 +237,7 @@
     </div>
   </div><!-- /.body-sec -->
 
+<script src="/assets/js/red-bull-holy-ride.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 

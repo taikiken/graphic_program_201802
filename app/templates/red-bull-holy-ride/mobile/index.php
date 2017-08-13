@@ -348,7 +348,7 @@ endif;
 // -----------------------------------------
 ?>
 
-<script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/red-bull-holy-ride.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 </body>
 </html>
