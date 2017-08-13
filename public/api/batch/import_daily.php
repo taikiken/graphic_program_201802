@@ -125,7 +125,7 @@ for($i=0;$i<count($data);$i++){
 		}
 	}
 
-	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t9='%s'",$MEDIAID,$data[$i]["guid"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data[$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 
@@ -133,7 +133,7 @@ for($i=0;$i<count($data);$i++){
 
 	if(strlen($f["id"])>0){
 
-		if($s["a_time"]!=$f["a_time"]){
+		if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 			if(strlen($s["t30"])>0){
 				if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
 			}else{
