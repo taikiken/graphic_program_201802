@@ -12,7 +12,9 @@ $live = array(
 
 ?>
 
-<div class="live-streaming js-live <?php echo ( $page['ua'] == 'desktop' ) ? 'live-streaming--pc' : 'live-streaming--sp'; ?>"></div><!-- /.live-streaming -->
+<div class="live-streaming__container">
+  <div class="live-streaming js-live <?php echo ( $page['ua'] == 'desktop' ) ? 'live-streaming--pc' : 'live-streaming--sp'; ?>"></div><!-- /.live-streaming -->
+</div><!-- /.live-streaming__container -->
 
 <!-- video.js -->
 <link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video-js.min.css" rel="stylesheet" />
@@ -51,6 +53,12 @@ $live = array(
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #000;
+}
+
+.live-streaming > img {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .live-streaming #content_video {

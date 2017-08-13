@@ -57,9 +57,17 @@
 
 //.live-streaming
 .live-streaming {
-  width: 1090px;
-  margin-right: auto;
-  margin-left: auto;
+  //.live-streaming__container
+  &__container {
+    width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.live-streaming--sp
+  &--sp {
+    display: none;
+  }
 }
 
 
