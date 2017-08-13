@@ -1,15 +1,15 @@
 @charset "UTF-8";
 /*! build: @@buildTime */
 // import mixin / function
-@import "../../../../scss/asset";
+@import "../../../../../scss_sp/asset";
 
-// normalize / reset / ª˘±æ class, tag ‘O∂®
-@import "../../../../bower_exports/modularized/normalize";
-@import "../../../../scss/style/reset";
-@import "../../../../scss/dependencies/style";
+// normalize / reset / Âü∫Êú¨ class, tag Ë®≠ÂÆö
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss_sp/style/reset";
+@import "../../../../../scss_sp/dependencies/style";
 
 // --------------------------------------------
-// “‘œ¬°¢import •’•°•§•Î§ÚæéºØ
+// ‰ª•‰∏ã„ÄÅimport „Éï„Ç°„Ç§„É´„ÇíÁ∑®ÈõÜ
 // --------------------------------------------
 
 // page layout
@@ -21,9 +21,12 @@
 // common override
 .red-bull-holy-ride {
   .body-sec,
-  .body-sec-inner,
-  .foot-sec {
+  .body-sec-inner {
     background-color: #10151e !important;
+  }
+
+  .main-sec {
+    padding-bottom: (40/2)+px;
   }
 }
 
@@ -33,20 +36,18 @@
 
 //.special-summary
 .special-summary {
-  height: 180px;
-  background: url(/assets/images/red-bull-holy-ride/summry-bg.png) center 0 no-repeat;
+  background: url(/assets/sp/images/red-bull-holy-ride/summry-bg.png) center 0 no-repeat;
+  background-size: cover;
 
   //.special-summary-heading
-  &-heading {
-    padding-top: 32px;
-  }
+  &-heading {}
+
   //.special-summary-copy
   &-copy {
-    width: 1088px;
-    margin: 10px auto 0;
+    padding: perCalc(20, 640) perCalc(10, 640);
     color: #10151e;
     font-weight: bold;
-    font-size: 16px;
+    font-size: (24/2)+px;
     text-align: right;
   }
 }
@@ -56,11 +57,7 @@
 
 
 //.live-streaming
-.live-streaming {
-  width: 1090px;
-  margin-right: auto;
-  margin-left: auto;
-}
+.live-streaming {}
 
 
 
@@ -68,90 +65,65 @@
 
 //container setting
 .holyride__container {
-  margin-right: -556px;
-  margin-left: -195px;
-  padding-right: 556px;
-  padding-left: 195px;
 }
 
 .holyride__container--odd {
   position: relative;
+  padding-bottom: (70/2)+px;
+  background: url(/assets/sp/images/red-bull-holy-ride/bg-odd.png) center bottom no-repeat;
+  background-size: 100%;
 }
 
 .holyride__container--even {
   position: relative;
-  background-color: #0f1b33;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: -40px;
-    left: 0;
-    display: block;
-    margin-right: -751px;
-    margin-left: 0;
-    padding-right: 751px;
-    padding-left: 0;
-
-    border-style: solid;
-    border-width: 80px 1480px 0 0;
-    border-color: #10151e #0f1b33 transparent transparent;
-
-    transform: rotateY(180deg);
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: -40px;
-    left: 0;
-    display: block;
-    margin-right: -751px;
-    margin-left: 0;
-    padding-right: 751px;
-    padding-left: 0;
-
-    border-style: solid;
-    border-width: 80px 1480px 0 0;
-    border-color: #10151e #0f1b33 transparent transparent;
-
-    transform: rotateY(180deg) rotateX(180deg);
-  }
+  padding-bottom: (70/2)+px;
+  background: #0f1b33 url(/assets/sp/images/red-bull-holy-ride/bg-even.png) center bottom no-repeat;
+  background-size: 100%;
 }
+
 
 
 
 
 //.holyride--intro
 .holyride--intro {
-  margin-top: 30px;
+  margin-top: (32/2)+px;
 
   .intro__catch {
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+    padding-bottom: perCalc(20, 640);
+    border-bottom: 1px solid #282d35;
     color: #fff;
     font-weight: bold;
-    font-size: 20px;
+    font-size: (32/2)+px;
   }
 
   .intro__link__app {
-    margin-top: 20px;
+    margin-top: (32/2)+px;
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
 
     a {
-      @include link-decoration(#999, #fff, underline, none);
+      @include link-decoration(#fff, #fff, underline, underline);
       display: inline-block;
-      line-height: 40px;
-      padding-left: 48px;
-      background: url(/assets/images/red-bull-holy-ride/intro-app_icon.png) 0 0 no-repeat;
+      line-height: (80/2)+px;
+      padding-left: (100/2)+px;
+      background: url(/assets/sp/images/red-bull-holy-ride/intro-app_icon.png) 0 0 no-repeat;
+      background-size: (80/2)+px;
       font-weight: bold;
-      font-size: 18px;
+      font-size: (28/2)+px;
     }
   }
 
   .intro__banner {
-    margin-top: 40px;
+    margin-top: (40/2)+px;
   }
 
   .intro__widjet_twitter {
     margin-top: 40px;
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
   }
 } //.holyride--intro
 
@@ -160,11 +132,19 @@
 
 //.holyride--course
 .holyride--course {
-  margin-top: 80px;
+  padding-top: (20/2)+px;
+  padding-right: perCalc(20, 640);
+  padding-left: perCalc(20, 640);
 
   .course__heading {
     position: relative;
-    margin-bottom: 24px;
+    height: (40/2)+px;
+    margin-bottom: (40/2)+px;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
   }
 
   .course__map {
@@ -176,11 +156,12 @@
       p {
         margin-top: 1em;
         color: #fff;
+        font-size: (24/2)+px;
       }
 
       .note {
         margin-top: 0;
-        font-size: 10px;
+        font-size: (20/2)+px;
       }
     }
   }
@@ -188,14 +169,21 @@
   .course__staff {
     //.course__staff__heading
     &__heading {
-      margin-top: 32px;
+      margin-top: (40/2)+px;
+      height: (22/2)+px;
+
+      img {
+        width: auto;
+        height: 100%;
+        vertical-align: top;
+      }
     }
 
     //.course__staff__container
     &__container {
       display: table;
       width: 100%;
-      margin-top: 16px;
+      margin-top: (32/2)+px;
     }
 
     //.course__staff__thumb
@@ -203,12 +191,13 @@
     .course__staff__thumb,
     .course__staff__data {
       display: table-cell;
-      vertical-align: middle;
+      vertical-align: top;
     }
 
     //.course__staff__thumb
     .course__staff__thumb {
-      width: 140px;
+      width: perCalc(240, 600);
+      padding-right: perCalc(20, 600);
     }
 
     //.course__staff__data
@@ -217,12 +206,14 @@
       &__heading {
         color: #fff;
         font-weight: bold;
+        font-size: (24/2)+px;
       }
 
       //.course__staff__data__text
       &__text {
         color: #fff;
         margin-top: 0.5em;
+        font-size: (24/2)+px;
       }
     }
   } //.course__staff
@@ -234,11 +225,19 @@
 
 //.holyride--overview
 .holyride--overview {
-  margin-top: 80px;
+  margin-top: (40/2)+px;
+  padding-right: perCalc(20, 640);
+  padding-left: perCalc(20, 640);
 
   .overview__heading {
     position: relative;
-    margin-bottom: 24px;
+    height: (40/2)+px;
+    margin-bottom: (40/2)+px;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
   }
 
   .overview__data {
@@ -247,10 +246,11 @@
       padding-bottom: 0.5em;
       color: #fff;
       vertical-align: top;
+      font-size: (24/2)+px;
     }
 
     th {
-      padding-right: 10px;
+      padding-right: (16/2)+px;
       font-weight: bold;
     }
   }
@@ -262,13 +262,19 @@
 
 //.holyride--related
 .holyride--related {
-  margin-top: 80px;
-  margin-bottom: 80px;
-  padding-bottom: 40px;
+  padding-top: (20/2)+px;
+  padding-right: perCalc(20, 640);
+  padding-left: perCalc(20, 640);
 
   .related__heading {
     position: relative;
-    margin-bottom: 4px;
+    height: (40/2)+px;
+    margin-bottom: (40/2)+px;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
   }
 
   .related__post {
@@ -280,11 +286,10 @@
     a {
       @include link-decoration(null, null, none, none);
       display: table;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      transition: background-color 0.2s;
+      padding-top: (20/2)+px;
+      padding-bottom: (20/2)+px;
 
-      &:hover {
+      &:active {
         background-color: #10151e;
       }
     }
@@ -299,7 +304,8 @@
 
     //.related__post__thumb
     &__thumb {
-      width: 300px;
+      width: perCalc(280, 600);
+      padding-right: perCalc(20, 600);
     }
 
     //.related__post__text
@@ -309,24 +315,26 @@
       .related__post__heading {
         color: #fff;
         font-weight: bold;
-        font-size: 20px;
+        font-size: (24/2)+px;
       }
 
       .related__post__excerpt {
         margin-top: 0.75em;
         color: #fff;
+        display: none;
       }
 
       .related__post__category {
         margin-top: 0.75em;
         color: #be0940;
         font-weight: bold;
+        font-size: (20/2)+px;
       }
 
       .related__post__date {
-        margin-top: 0.25em;
+        margin-top: 0.75em;
         color: #999;
-        font-size: 12px;
+        font-size: (20/2)+px;
       }
     } //.related__post__text
 
