@@ -4070,3 +4070,6 @@
 .functional_btn.ico57:before { font-size: 57px; }
 
 .functional_btn.ico58:before { font-size: 58px; }
+
+// #2284 サイドバー ランキング レコメンド 非表示
+#sponsor-link-recommend,#sponsor-link-ranking { display: none !important; }

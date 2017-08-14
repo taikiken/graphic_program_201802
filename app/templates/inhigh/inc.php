@@ -15,7 +15,7 @@ while($f=$db->fetch_array()){
 		"img"=>sprintf("https://%s.sportsbull.jp/thumbnail1/%s",$subdomain,$f["img1"]),
 		"url"=>sprintf("/p/%s/",$f["id"])
 	);
-	$movie.=sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><div class="txt_area"><p>%s</p></div></a></li>',$v["url"],$v["img"],$v["title"],$v["title"]);
+	$movie.=sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><div class="txt_area"><p>%s %s</p></div></a></li>',$v["url"],$v["img"],$v["title"],$v["date"],$v["title"]);
 }
 
 $sql="select id,img1,title,a1,a2,a3 from repo_n where d2=54 and flag=1 and swf is null order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc limit 4 offset 0";
