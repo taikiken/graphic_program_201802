@@ -81,7 +81,7 @@ if(isset($_POST["p_usr"])){
             }
 			setSorC("repo",($f["repo"]));
 		}
-        if($f['is_external'] > 0) {
+        if(false === empty($f['is_external']) && $f['is_external'] > 0) {
             setSorC('is_external',1);
         } else {
             setSorC('is_external',0);
