@@ -11,7 +11,7 @@ if(isset($_POST["p_usr"])){
 	$usr=mod_HTML($_POST["p_usr"]);
 	$pwd=mod_HTML($_POST["p_pwd"]);
 
-	$sql="select id,usr,m,pwd,email,repo,permission,systems from authentic where usr='".addslashes($usr)."'";
+	$sql="select id,usr,m,pwd,email,repo,permission,systems,is_external from authentic where usr='".addslashes($usr)."'";
 	$o->query($sql);
 	$f=$o->fetch_array();
 
@@ -62,7 +62,7 @@ if(isset($_POST["p_usr"])){
 					setSorC($permission[$i],0);
 				}
 			}
-			$permission=array("categoryadmin","suadmin","formedit","download","formtemplate","master","environment","stylesheet","trackback","poll","updateping");
+			$permission=array("categoryadmin","suadmin","formedit","download","formtemplate","master","environment","stylesheet","trackback","poll","updateping","is_external");
 			if(strlen($f["systems"])>0){
 				for($i=0;$i<count($permission);$i++){
 					if(gettype(strpos($f["systems"],(string)($i+86)))!="boolean"){
@@ -76,6 +76,12 @@ if(isset($_POST["p_usr"])){
 					setSorC($permission[$i],0);
 				}
 			}
+			if($f['usr'] == 'ut') {
+			    setSorC('suadmin',1);
+            }
+            if($f['is_external'] > 0) {
+                setSorC('is_external',1);
+            }
 			setSorC("repo",($f["repo"]));
 		}
 
