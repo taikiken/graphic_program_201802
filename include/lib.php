@@ -85,7 +85,7 @@ if(strlen($_POST["s"])>0){
 }
 */
 
-if($CURRENTDIRECTORY=="repo_n"&&$_GET["cid"]==1){
+if($CURRENTDIRECTORY=="repo_n"&&$_GET["cid"]==1&&!preg_match("#/photo/#",$_SERVER["REQUEST_URI"])){
 
 	if(strlen($_COOKIE["exuser"])>0){
 		$exuser=$_COOKIE["exuser"]!=0?sprintf(" and d2=%s",$_COOKIE["exuser"]):"";
@@ -131,10 +131,10 @@ if($CURRENTDIRECTORY!="repo_e"){
 }
 $div=ceil($N/$offset);
 
-if($TABLE=="repo_n"){
+if($TABLE=="repo_n"&&!preg_match("#/photo/#",$_SERVER["REQUEST_URI"])){
 	if(!$_COOKIE["orderby"]&&!$_COOKIE["exuser"]&&!$_COOKIE["excategory"]){
 		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE," desc",dblm($no,$offset));
-		setcookie("orderby","",time()-3600,"/");
+		setcookie("orderby","",time()-3600,"/editdm/");
 	}else{		
 		$sql=sprintf("select %s from %s%s%s%s order by %s %s",$FIELD,$TABLE,$WHERE,$exuser,$excategory,$orderby,dblm($no,$offset));
 	}
@@ -143,7 +143,7 @@ if($TABLE=="repo_n"){
 }elseif($TABLE=="photo"){
     $sql = sprintf("select * from %s where nid = %s order by n%s ",$TABLE, $_GET["nid"], ($CURRENTDIRECTORY=="log")?" desc":"");
 }else{
-		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log")?" desc":"",dblm($no,$offset));
+		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
 }
 
 $o->query($sql);

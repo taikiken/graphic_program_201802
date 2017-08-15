@@ -2,6 +2,11 @@
 
 if(strlen(getSorC("mid"))>0){
 	header("Location:./index_s.php");
+}else{
+	foreach($_COOKIE as $k=>$v){
+		setcookie($k,"",time()-3600,"/editdm/");
+		setcookie($k,"",time()-3600,"/");
+	}	
 }
 
 $err=0;
@@ -19,9 +24,9 @@ if(isset($_POST["p_usr"])){
 	if($f['pwd']==md5($MAGIC_STRING.$pwd)){
 
 		if($ADMINUSR==0){
-			setcookie("adminusr",1,time()+60*60*24*365,"/");
+			setcookie("adminusr",1,time()+60*60*24,"/editdm/");
 		}else{
-			setcookie("adminusr","",time()-3600,"/");
+			setcookie("adminusr","",time()-3600,"/editdm/");
 		}
 
 		if($SORC==1){
