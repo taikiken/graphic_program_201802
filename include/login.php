@@ -62,7 +62,7 @@ if(isset($_POST["p_usr"])){
 					setSorC($permission[$i],0);
 				}
 			}
-			$permission=array("categoryadmin","suadmin","formedit","download","formtemplate","master","environment","stylesheet","trackback","poll","updateping","is_external");
+			$permission=array("categoryadmin","suadmin","formedit","download","formtemplate","master","environment","stylesheet","trackback","poll","updateping");
 			if(strlen($f["systems"])>0){
 				for($i=0;$i<count($permission);$i++){
 					if(gettype(strpos($f["systems"],(string)($i+86)))!="boolean"){
@@ -79,11 +79,13 @@ if(isset($_POST["p_usr"])){
 			if($f['usr'] == 'ut') {
 			    setSorC('suadmin',1);
             }
-            if($f['is_external'] > 0) {
-                setSorC('is_external',1);
-            }
 			setSorC("repo",($f["repo"]));
 		}
+        if($f['is_external'] > 0) {
+            setSorC('is_external',1);
+        } else {
+            setSorC('is_external',0);
+        }
 
 		$alv=addslashes($f["m"]);
 		$usr=addslashes($usr);

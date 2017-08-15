@@ -31,7 +31,6 @@ if($q->get_dir()===0){
 
 			$o=new dbutl("authentic",$sn,$sv);
 			$e=$o->insert();
-			var_dump($o);
 		}
 	}
 }elseif($q->get_dir()===1){
