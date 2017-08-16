@@ -12,6 +12,8 @@ $app->group('/{slug:red-bull-holy-ride}',  function () use($app) {
     'og_description'     => '[TBD]',
     'template'           => 'index',
     'template_classname' => 'theme_red-bull-holy-ride',
+    // add ua - 2017-08-16 by @taikiken - live.php l.16 判定に使用する
+    'ua'                 => $app->model->property('ua'),
   );
 
   // index
