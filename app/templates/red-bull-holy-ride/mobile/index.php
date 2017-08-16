@@ -113,14 +113,14 @@ if (isset($_GET['app'])) {
         <p class="intro__catch">一般公道を疾走する、型破りなMTBダウンヒル・レースが今年も尾道で開催！<br />
         高低差100メートル、約300段の階段を含む、過去最長約1,400メートルのコースを走り抜ける。</p>
 
-        <div class="intro__link__app"><a href="hoge">アプリでライブ配信開始の通知を受け取る</a></div>
+        <div class="intro__link__app"><a href="https://app.adjust.com/rpt1kl?deep_link=sportsbull%3A%2F%2F" target="_blank">アプリでライブ配信開始の通知を受け取る</a></div>
 
         <div class="intro__banner">
-          <a href="hoge" target="_blank"><img src="/assets/sp/images/red-bull-holy-ride/intro-banner.jpg" alt="Red Bull TV"></a>
+          <a href="https://www.redbull.com/jp-ja/events/red-bull-holy-ride-2017/" target="_blank"><img src="/assets/sp/images/red-bull-holy-ride/intro-banner.jpg" alt="Red Bull TV"></a>
         </div>
 
         <div class="intro__widjet_twitter">
-          <a class="twitter-timeline" href="https://twitter.com/redbulljapan" data-height="300" data-chrome="noheader nofooter transparent" data-link-color="#be0940" data-border-color="#282d35">Tweets by redbulljapan</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+          <a class="twitter-timeline" href="https://twitter.com/redbulljapan" data-height="300" data-chrome="noheader nofooter" data-link-color="#be0940" data-border-color="#282d35">Tweets by redbulljapan</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div><!-- /.widjet_twitter -->
       </div><!-- /.holyride--intro -->
 
