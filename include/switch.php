@@ -18,7 +18,7 @@ if(strpos($CURRENTPATH,$ADPATH)){
 		}
 	}else{
 		while(list($k,$v)=each($_COOKIE)){
-			if($k!="repeatcount")setcookie($k,$v,time()+60*60*3,"/");
+			if($k!="repeatcount")setcookie($k,$v,time()+60*60*3,"/editdm/");
 		}
 	}
 

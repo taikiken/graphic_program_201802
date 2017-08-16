@@ -113,11 +113,12 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
+			if(!preg_match("/高校野球/",$data["channel"]["item"][$i]["keyword"]))$s["m1"]=136;
 			$s["m4"]=$mtype;
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["n"]="(select max(n)+1 from repo_n where cid=1)";
-			
+					
 			if(strlen($s["t30"])>0)$s["img1"]=outimg($s["t30"]);
 			splittime($s["m_time"],$s["a_time"]);
 			$sqla[]=makesql($s,0);

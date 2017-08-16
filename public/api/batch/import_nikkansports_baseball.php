@@ -83,7 +83,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
-			$s["m1"]=!preg_match("/高校野球/")?113:136;
+			if(!preg_match("/＜全国高校野球選手権：/",$modbody))$s["m1"]=136;
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["n"]="(select max(n)+1 from repo_n where cid=1)";
