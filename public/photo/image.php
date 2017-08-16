@@ -24,7 +24,7 @@ $o->query($sqlstr2);
 
 $list = [
     'url' => $domain . '/a/' . $nid . '/',
-
+    'data' => []
 ];
 while($line = $o->fetch_array()):
     $img = [];
@@ -32,7 +32,7 @@ while($line = $o->fetch_array()):
     $img['thumb'] = sprintf('%s/photo/thumb/%s', $ImgPath, $line["img2"]);
     $img['sp_main'] = sprintf('%s/photo/sp_main/%s', $ImgPath, $line["img3"]);
     $img['sp_thumb'] = sprintf('%s/photo/sp_thumb/%s', $ImgPath, $line["img4"]);
-    $list[] = $img;
+    $list['data'][] = $img;
 endwhile;
 echo json_encode($list);
 ?>
