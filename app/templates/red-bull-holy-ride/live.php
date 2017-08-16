@@ -261,10 +261,17 @@ streampack初期化コード
 
     $embed.html( $tmpl_video );
     $embed.find('video').attr('poster', data.alt.large );
+    <?php
+    if (0) :
+    // hide comment
+    ?>
 //    $embed.find('source').attr('src', data.video.source + '?timestamp=' + timestamp );
-
     // @see https://github.com/undotsushin/undotsushin/issues/2279#issuecomment-322675588
     // #1901 desktop版はABR固定 - from `app/templates/big6tv/live.php` line. 268
+    <?php
+    // hide comment end
+    endif;
+    ?>
     <?php if ( $page['ua'] == 'desktop' && !isset($_GET['debug']) ) :?>
     $embed.find('source').attr('src', 'https://d3ujz00se92hl8.cloudfront.net/live_sb/bball.m3u8' + '?timestamp=' + timestamp );
     <?php else : ?>
