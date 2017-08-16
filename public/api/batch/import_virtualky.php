@@ -78,6 +78,8 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}
 	
+	$s["brightcove"]=$data["channel"]["item"][$i]["movie"];
+	
 	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$s["t7"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
@@ -117,7 +119,6 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["imgflag"]=168;
-			$s["brightcove"]=$data["channel"]["item"][$i]["movie"];
 			$s["n"]="(select max(n)+1 from repo_n where cid=1)";
 
 			if(strlen($s["t30"])>0){
