@@ -6,7 +6,7 @@
 */
 
 $live = array(
-  'endpoint' => "'/api/big6tv/live'", // liveAPIのエンドポイント
+  'endpoint' => "'/api/live_sb/live'", // liveAPIのエンドポイント
   'interval' => 20, // polling間隔
 );
 
