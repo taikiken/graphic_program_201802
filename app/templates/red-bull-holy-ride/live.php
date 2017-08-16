@@ -131,7 +131,7 @@ streampack初期化コード
   var $tmpl_video     = $('#live-streaming__video').html();
 
   var liveEndPoint    = <?php echo $live['endpoint']; ?>;
-  var interval        = <?php echo $live['interval']; ?> * 1000; // polling感覚
+  var interval        = <?php echo $live['interval']; ?> * 1000; // polling 間隔
 
   var video_isPlaying = null;
   var video_source    = '';
