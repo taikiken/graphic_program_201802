@@ -1,0 +1,346 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../scss/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../bower_exports/modularized/normalize";
+@import "../../../../scss/style/reset";
+@import "../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+
+
+// common override
+.red-bull-holy-ride {
+  .body-sec,
+  .body-sec-inner,
+  .foot-sec {
+    background-color: #10151e !important;
+  }
+
+  .side-sec {
+    position: relative;
+  }
+}
+
+
+
+
+
+//.special-summary
+.special-summary {
+  height: 180px;
+  background: url(/assets/images/red-bull-holy-ride/summry-bg.png) center 0 no-repeat;
+
+  //.special-summary-heading
+  &-heading {
+    padding-top: 32px;
+  }
+  //.special-summary-copy
+  &-copy {
+    width: 1088px;
+    margin: 10px auto 0;
+    color: #10151e;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: right;
+  }
+}
+
+
+
+
+
+//.live-streaming
+.live-streaming {
+  //.live-streaming__container
+  &__container {
+    width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.live-streaming--sp
+  &--sp {
+    // display: none;
+  }
+}
+
+
+
+
+
+//container setting
+.holyride__container {
+  margin-right: -556px;
+  margin-left: -195px;
+  padding-right: 556px;
+  padding-left: 195px;
+}
+
+.holyride__container--odd {
+  position: relative;
+}
+
+.holyride__container--even {
+  position: relative;
+  background-color: #0f1b33;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: 0;
+    display: block;
+    margin-right: -751px;
+    margin-left: 0;
+    padding-right: 751px;
+    padding-left: 0;
+
+    border-style: solid;
+    border-width: 80px 1480px 0 0;
+    border-color: #10151e #0f1b33 transparent transparent;
+
+    transform: rotateY(180deg);
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    display: block;
+    margin-right: -751px;
+    margin-left: 0;
+    padding-right: 751px;
+    padding-left: 0;
+
+    border-style: solid;
+    border-width: 80px 1480px 0 0;
+    border-color: #10151e #0f1b33 transparent transparent;
+
+    transform: rotateY(180deg) rotateX(180deg);
+  }
+}
+
+
+
+
+//.holyride--intro
+.holyride--intro {
+  margin-top: 30px;
+
+  .intro__catch {
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .intro__link__app {
+    margin-top: 20px;
+
+    a {
+      @include link-decoration(#999, #fff, underline, none);
+      display: inline-block;
+      line-height: 40px;
+      padding-left: 48px;
+      background: url(/assets/images/red-bull-holy-ride/intro-app_icon.png) 0 0 no-repeat;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+
+  .intro__banner {
+    margin-top: 40px;
+  }
+
+  .intro__widjet_twitter {
+    margin-top: 40px;
+  }
+} //.holyride--intro
+
+
+
+
+//.holyride--course
+.holyride--course {
+  margin-top: 80px;
+
+  .course__heading {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .course__map {
+    > img {
+      display: block;
+    }
+
+    figcaption {
+      p {
+        margin-top: 1em;
+        color: #fff;
+      }
+
+      .note {
+        margin-top: 0;
+        font-size: 10px;
+      }
+    }
+  }
+
+  .course__staff {
+    //.course__staff__heading
+    &__heading {
+      margin-top: 32px;
+    }
+
+    //.course__staff__container
+    &__container {
+      display: table;
+      width: 100%;
+      margin-top: 16px;
+    }
+
+    //.course__staff__thumb
+    //.course__staff__data
+    .course__staff__thumb,
+    .course__staff__data {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    //.course__staff__thumb
+    .course__staff__thumb {
+      width: 140px;
+    }
+
+    //.course__staff__data
+    .course__staff__data {
+      //.course__staff__data__heading
+      &__heading {
+        color: #fff;
+        font-weight: bold;
+      }
+
+      //.course__staff__data__text
+      &__text {
+        color: #fff;
+        margin-top: 0.5em;
+      }
+    }
+  } //.course__staff
+} //.holyride--course
+
+
+
+
+
+//.holyride--overview
+.holyride--overview {
+  margin-top: 80px;
+
+  .overview__heading {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .overview__data {
+    th,
+    td {
+      padding-bottom: 0.5em;
+      color: #fff;
+      vertical-align: top;
+    }
+
+    th {
+      padding-right: 10px;
+      font-weight: bold;
+    }
+  }
+} //.holyride--overview
+
+
+
+
+
+//.holyride--related
+.holyride--related {
+  margin-top: 80px;
+  margin-bottom: 80px;
+  padding-bottom: 40px;
+
+  .related__heading {
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .related__post {
+
+    + .related__post {
+      border-top: 1px solid #273248;
+    }
+
+    a {
+      @include link-decoration(null, null, none, none);
+      display: table;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #10151e;
+      }
+    }
+
+    //.related__post__thumb
+    //.related__post__text
+    &__thumb,
+    &__text {
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    //.related__post__thumb
+    &__thumb {
+      width: 300px;
+    }
+
+    //.related__post__text
+    &__text {
+      padding-right: 1em;
+
+      .related__post__heading {
+        color: #fff;
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      .related__post__excerpt {
+        margin-top: 0.75em;
+        color: #fff;
+      }
+
+      .related__post__category {
+        margin-top: 0.75em;
+        color: #be0940;
+        font-weight: bold;
+      }
+
+      .related__post__date {
+        margin-top: 0.25em;
+        color: #999;
+        font-size: 12px;
+      }
+    } //.related__post__text
+
+  } //.related__post
+} //.holyride--related
