@@ -46,7 +46,7 @@ import Games from '../../app/Games';
 class Interval {
   /**
    * ゲーム情報を保存し自動更新管理・動的更新管理を行います
-   * @param {number|strin} year 年 yyyy
+   * @param {number|string} year 年 yyyy
    * @param {number|string} id GAME ID
    * @param {number} [interval=30] 間隔（秒）
    */
@@ -68,7 +68,7 @@ class Interval {
     this.onUpdate = this.onUpdate.bind(this);
     /**
      * 年 yyyy
-     * @type {number|strin}
+     * @type {number|string}
      */
     this.year = year;
     /**
@@ -122,7 +122,7 @@ class Interval {
  * @constructor
  */
 const ComSwitchNext = ({ start, innings, action }) => {
-  console.log('ComSwitchNext', start, innings);
+  // console.log('ComSwitchNext', start, innings);
   // 表示切替します
   if (start + 9 > innings) {
     return (
@@ -170,7 +170,7 @@ ComSwitchNext.propTypes = {
  * @constructor
  */
 const ComSwitchPrev = ({ start, action }) => {
-  console.log('ComSwitchPrev', start);
+  // console.log('ComSwitchPrev', start);
   if (start === 1) {
     return (
       <li id="innings-prev" className="mlb_live__scoreboard__inning_pager__item">
@@ -217,7 +217,7 @@ ComSwitchPrev.propTypes = {
  */
 const ComScoreSwitch = ({ start, innings, prev, next }) => {
   // console.log('ComScoreSwitch', start, innings);
-  // TODO: remove test code
+  // test code
   if (innings <= 9) {
     return null;
   }
@@ -455,7 +455,7 @@ ComScoreHome.propTypes = {
 const ComScoreInnings = ({ info, start, innings }) => {
   const home = info.home.scores;
   const visitor = info.visitor.scores;
-  console.log('ComScoreInnings', home, visitor, innings);
+  // console.log('ComScoreInnings', home, visitor, innings);
   const boards = List.fill(9);
   return (
     <div className="mlb_live__scoreboard__column mlb_live__scoreboard__column--score">

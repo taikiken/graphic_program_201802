@@ -41673,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-17 15:14:00
+ * 2017-8-17 15:27:28
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -68271,7 +68271,7 @@ var calendar = function calendar() {
   var action = arguments[1];
 
   var state = Object.assign({}, requestState);
-  console.log('reducers.calendar', state, action);
+  // console.log('reducers.calendar', state, action);
   // switch-case
   switch (action.type) {
     // calendar complete
@@ -68357,7 +68357,7 @@ var schedule = function schedule() {
   var action = arguments[1];
 
   var state = Object.assign({}, requestState);
-  console.log('reducers.schedule', state, action);
+  // console.log('reducers.schedule', state, action);
   // switch-case
   switch (action.type) {
     case _ReducerTypes2.default.SCHEDULE_COMPLETE:
@@ -68442,7 +68442,7 @@ var game = function game() {
   var action = arguments[1];
 
   var state = Object.assign({}, requestState);
-  console.log('reducers.games', state, action);
+  // console.log('reducers.games', state, action);
   // switch-case
   switch (action.type) {
     case _ReducerTypes2.default.GAMES_COMPLETE:
@@ -85939,7 +85939,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Interval = function () {
   /**
    * ゲーム情報を保存し自動更新管理・動的更新管理を行います
-   * @param {number|strin} year 年 yyyy
+   * @param {number|string} year 年 yyyy
    * @param {number|string} id GAME ID
    * @param {number} [interval=30] 間隔（秒）
    */
@@ -85965,7 +85965,7 @@ var Interval = function () {
     this.onUpdate = this.onUpdate.bind(this);
     /**
      * 年 yyyy
-     * @type {number|strin}
+     * @type {number|string}
      */
     this.year = year;
     /**
@@ -86041,7 +86041,7 @@ var ComSwitchNext = function ComSwitchNext(_ref) {
       innings = _ref.innings,
       action = _ref.action;
 
-  console.log('ComSwitchNext', start, innings);
+  // console.log('ComSwitchNext', start, innings);
   // 表示切替します
   if (start + 9 > innings) {
     return _react2.default.createElement(
@@ -86104,7 +86104,7 @@ var ComSwitchPrev = function ComSwitchPrev(_ref2) {
   var start = _ref2.start,
       action = _ref2.action;
 
-  console.log('ComSwitchPrev', start);
+  // console.log('ComSwitchPrev', start);
   if (start === 1) {
     return _react2.default.createElement(
       'li',
@@ -86168,7 +86168,7 @@ var ComScoreSwitch = function ComScoreSwitch(_ref3) {
       next = _ref3.next;
 
   // console.log('ComScoreSwitch', start, innings);
-  // TODO: remove test code
+  // test code
   if (innings <= 9) {
     return null;
   }
@@ -86429,7 +86429,7 @@ var ComScoreInnings = function ComScoreInnings(_ref7) {
 
   var home = info.home.scores;
   var visitor = info.visitor.scores;
-  console.log('ComScoreInnings', home, visitor, innings);
+  // console.log('ComScoreInnings', home, visitor, innings);
   var boards = _List2.default.fill(9);
   return _react2.default.createElement(
     'div',
@@ -87390,9 +87390,9 @@ var ComScoreRefresh = function (_Component) {
   }, {
     key: 'renderRefresh',
     value: function renderRefresh(show) {
-      console.log('ComScoreRefresh.renderRefresh', show);
+      // console.log('ComScoreRefresh.renderRefresh', show);
       // flag 判定
-      // TODO: TEST CODE
+      // TEST CODE
       if (!show) {
         this.onClickManual();
         return null;
@@ -87449,9 +87449,9 @@ var ComScoreRefresh = function (_Component) {
   }, {
     key: 'renderReload',
     value: function renderReload(show) {
-      console.log('ComScoreRefresh.renderReload', show);
+      // console.log('ComScoreRefresh.renderReload', show);
       // flag 判定
-      // TODO: TEST CODE
+      // TEST CODE
       if (!show) {
         return null;
       }
@@ -87509,7 +87509,7 @@ var ComScoreRefresh = function (_Component) {
         }
       }
       // どちらも表示する必要がない時は null
-      // TODO: TEST CODE
+      // TEST CODE
       if (!showRefresh && !showReload) {
         return null;
       }

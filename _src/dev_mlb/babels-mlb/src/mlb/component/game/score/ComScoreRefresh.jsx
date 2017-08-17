@@ -116,9 +116,9 @@ export default class ComScoreRefresh extends Component {
    * @returns {XML} div.refresh-container > div.mlb_live__reload__btn--auto
    */
   renderRefresh(show) {
-    console.log('ComScoreRefresh.renderRefresh', show);
+    // console.log('ComScoreRefresh.renderRefresh', show);
     // flag 判定
-    // TODO: TEST CODE
+    // TEST CODE
     if (!show) {
       this.onClickManual();
       return null;
@@ -155,9 +155,9 @@ export default class ComScoreRefresh extends Component {
    * @returns {XML} div.mlb_live__reload__btn--reload
    */
   renderReload(show) {
-    console.log('ComScoreRefresh.renderReload', show);
+    // console.log('ComScoreRefresh.renderReload', show);
     // flag 判定
-    // TODO: TEST CODE
+    // TEST CODE
     if (!show) {
       return null;
     }
@@ -203,7 +203,7 @@ export default class ComScoreRefresh extends Component {
       }
     }
     // どちらも表示する必要がない時は null
-    // TODO: TEST CODE
+    // TEST CODE
     if (!showRefresh && !showReload) {
       return null;
     }
