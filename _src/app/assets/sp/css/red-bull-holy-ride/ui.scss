@@ -31,6 +31,18 @@
 
   .side-sec {
     padding-bottom: (80/2)+px;
+
+    .sponsor-link {
+      > div {
+        width: 100% !important;
+      }
+
+      iframe {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
   }
 }
 
