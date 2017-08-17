@@ -412,14 +412,17 @@ const ComScoreHome = ({ home, visitor, start, boards, innings }) => (
         // 表示する
         const score = home.score[inning];
         const visitorScore = visitor.score[inning];
-        let alt = '0';
-        if (inning > innings) {
-          alt = '';
-        }
+        // let alt = '0';
+        // if (inning > innings) {
+        //   alt = '';
+        // }
         // render
+        const alpha = scoreAlpha(score, visitorScore, inning, innings);
+        const point = alpha || Print.int(score.score);
+        // console.log('ComScoreHome', inning, score, alpha, point);
         return (
           <td key={`home-${inning}`} className={`home-${inning}`}>
-            {Print.str(scoreAlpha(score, visitorScore, inning, innings), alt)}
+            {point}
           </td>
         );
       })
@@ -809,21 +812,21 @@ export default class ComScore extends Component {
    * 更新・自動 - click event handler
    */
   onAuto() {
-    console.log('ComScore.onAuto');
+    // console.log('ComScore.onAuto');
     this.interval.resume();
   }
   /**
    * 更新・手動 - click event handler
    */
   onManual() {
-    console.log('ComScore.onManual');
+    // console.log('ComScore.onManual');
     this.interval.pause();
   }
   /**
    * 更新 - click event handler
    */
   onReload() {
-    console.log('ComScore.onReload');
+    // console.log('ComScore.onReload');
     this.interval.request();
   }
   // ----------------------------------------

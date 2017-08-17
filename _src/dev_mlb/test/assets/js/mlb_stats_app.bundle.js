@@ -41673,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-17 14:52:01
+ * 2017-8-17 15:14:00
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -86383,15 +86383,18 @@ var ComScoreHome = function ComScoreHome(_ref6) {
       // 表示する
       var score = home.score[inning];
       var visitorScore = visitor.score[inning];
-      var alt = '0';
-      if (inning > innings) {
-        alt = '';
-      }
+      // let alt = '0';
+      // if (inning > innings) {
+      //   alt = '';
+      // }
       // render
+      var alpha = scoreAlpha(score, visitorScore, inning, innings);
+      var point = alpha || _Print2.default.int(score.score);
+      // console.log('ComScoreHome', inning, score, alpha, point);
       return _react2.default.createElement(
         'td',
         { key: 'home-' + inning, className: 'home-' + inning },
-        _Print2.default.str(scoreAlpha(score, visitorScore, inning, innings), alt)
+        point
       );
     })
   );
@@ -87052,7 +87055,7 @@ var ComScore = function (_Component) {
   }, {
     key: 'onAuto',
     value: function onAuto() {
-      console.log('ComScore.onAuto');
+      // console.log('ComScore.onAuto');
       this.interval.resume();
     }
     /**
@@ -87062,7 +87065,7 @@ var ComScore = function (_Component) {
   }, {
     key: 'onManual',
     value: function onManual() {
-      console.log('ComScore.onManual');
+      // console.log('ComScore.onManual');
       this.interval.pause();
     }
     /**
@@ -87072,7 +87075,7 @@ var ComScore = function (_Component) {
   }, {
     key: 'onReload',
     value: function onReload() {
-      console.log('ComScore.onReload');
+      // console.log('ComScore.onReload');
       this.interval.request();
     }
     // ----------------------------------------
