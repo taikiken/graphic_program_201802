@@ -46,7 +46,7 @@ import Games from '../../app/Games';
 class Interval {
   /**
    * ゲーム情報を保存し自動更新管理・動的更新管理を行います
-   * @param {number|strin} year 年 yyyy
+   * @param {number|string} year 年 yyyy
    * @param {number|string} id GAME ID
    * @param {number} [interval=30] 間隔（秒）
    */
@@ -68,7 +68,7 @@ class Interval {
     this.onUpdate = this.onUpdate.bind(this);
     /**
      * 年 yyyy
-     * @type {number|strin}
+     * @type {number|string}
      */
     this.year = year;
     /**
@@ -122,7 +122,7 @@ class Interval {
  * @constructor
  */
 const ComSwitchNext = ({ start, innings, action }) => {
-  console.log('ComSwitchNext', start, innings);
+  // console.log('ComSwitchNext', start, innings);
   // 表示切替します
   if (start + 9 > innings) {
     return (
@@ -170,7 +170,7 @@ ComSwitchNext.propTypes = {
  * @constructor
  */
 const ComSwitchPrev = ({ start, action }) => {
-  console.log('ComSwitchPrev', start);
+  // console.log('ComSwitchPrev', start);
   if (start === 1) {
     return (
       <li id="innings-prev" className="mlb_live__scoreboard__inning_pager__item">
@@ -217,7 +217,7 @@ ComSwitchPrev.propTypes = {
  */
 const ComScoreSwitch = ({ start, innings, prev, next }) => {
   // console.log('ComScoreSwitch', start, innings);
-  // TODO: remove test code
+  // test code
   if (innings <= 9) {
     return null;
   }
@@ -412,14 +412,17 @@ const ComScoreHome = ({ home, visitor, start, boards, innings }) => (
         // 表示する
         const score = home.score[inning];
         const visitorScore = visitor.score[inning];
-        let alt = '0';
-        if (inning > innings) {
-          alt = '';
-        }
+        // let alt = '0';
+        // if (inning > innings) {
+        //   alt = '';
+        // }
         // render
+        const alpha = scoreAlpha(score, visitorScore, inning, innings);
+        const point = alpha || Print.int(score.score);
+        // console.log('ComScoreHome', inning, score, alpha, point);
         return (
           <td key={`home-${inning}`} className={`home-${inning}`}>
-            {Print.str(scoreAlpha(score, visitorScore, inning, innings), alt)}
+            {point}
           </td>
         );
       })
@@ -452,7 +455,7 @@ ComScoreHome.propTypes = {
 const ComScoreInnings = ({ info, start, innings }) => {
   const home = info.home.scores;
   const visitor = info.visitor.scores;
-  console.log('ComScoreInnings', home, visitor, innings);
+  // console.log('ComScoreInnings', home, visitor, innings);
   const boards = List.fill(9);
   return (
     <div className="mlb_live__scoreboard__column mlb_live__scoreboard__column--score">
@@ -621,7 +624,119 @@ export default class ComScore extends Component {
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
-
+  /**
+   * data 不正の時に空タグを出力します
+   * @returns {XML} section.mlb_live__scoreboard__th--team
+   * @since 2017-08-17
+   * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+   */
+  static empty() {
+    const thClass = 'mlb_live__scoreboard__th--team';
+    return (
+      <section className="mlb_live__scoreboard__section">
+        <div className="mlb_live__scoreboard">
+          {/* left */}
+          <div className="mlb_live__scoreboard__column mlb_live__scoreboard__column--team">
+            <table className="mlb_live__scoreboard__table mlb_live__scoreboard__table--team">
+              <thead>
+                <tr><th>&nbsp;</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className={`${thClass} ${thClass}--visitor`}>
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr>
+                  <td className={`${thClass} ${thClass}--home`}>
+                    &nbsp;
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          {/* center */}
+          <div className="mlb_live__scoreboard__column mlb_live__scoreboard__column--score">
+            <table className="mlb_live__scoreboard__table mlb_live__scoreboard__table--score">
+              <thead>
+                <tr>
+                  <th className="mlb_live__scoreboard__th--inning">1</th>
+                  <th className="mlb_live__scoreboard__th--inning">2</th>
+                  <th className="mlb_live__scoreboard__th--inning">3</th>
+                  <th className="mlb_live__scoreboard__th--inning">4</th>
+                  <th className="mlb_live__scoreboard__th--inning">5</th>
+                  <th className="mlb_live__scoreboard__th--inning">6</th>
+                  <th className="mlb_live__scoreboard__th--inning">7</th>
+                  <th className="mlb_live__scoreboard__th--inning">8</th>
+                  <th className="mlb_live__scoreboard__th--inning">9</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          {/* right */}
+          <div className="mlb_live__scoreboard__column mlb_live__scoreboard__column--count">
+            <table className="mlb_live__scoreboard__table mlb_live__scoreboard__table--count">
+              <thead>
+                <tr>
+                  <th className="mlb_live__scoreboard__th--sum">計</th>
+                  <th className="mlb_live__scoreboard__th--hit">安</th>
+                  <th className="mlb_live__scoreboard__th--error">失</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="mlb_live__scoreboard__td--sum">
+                    &nbsp;
+                  </td>
+                  <td className="mlb_live__scoreboard__td--hit">
+                    &nbsp;
+                  </td>
+                  <td className="mlb_live__scoreboard__td--error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr>
+                  <td className="mlb_live__scoreboard__td--sum">
+                    &nbsp;
+                  </td>
+                  <td className="mlb_live__scoreboard__td--hit">
+                    &nbsp;
+                  </td>
+                  <td className="mlb_live__scoreboard__td--error">
+                    &nbsp;
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    );
+  }
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -697,21 +812,21 @@ export default class ComScore extends Component {
    * 更新・自動 - click event handler
    */
   onAuto() {
-    console.log('ComScore.onAuto');
+    // console.log('ComScore.onAuto');
     this.interval.resume();
   }
   /**
    * 更新・手動 - click event handler
    */
   onManual() {
-    console.log('ComScore.onManual');
+    // console.log('ComScore.onManual');
     this.interval.pause();
   }
   /**
    * 更新 - click event handler
    */
   onReload() {
-    console.log('ComScore.onReload');
+    // console.log('ComScore.onReload');
     this.interval.request();
   }
   // ----------------------------------------
@@ -723,7 +838,9 @@ export default class ComScore extends Component {
   render() {
     const { info } = this.props;
     if (!info) {
-      return null;
+      // data 不正時 からタグを出力する
+      return ComScore.empty();
+      // return null;
     }
     // render
     return (

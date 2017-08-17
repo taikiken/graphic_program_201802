@@ -41673,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-17 11:26:39
+ * 2017-8-17 15:27:28
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -68271,7 +68271,7 @@ var calendar = function calendar() {
   var action = arguments[1];
 
   var state = Object.assign({}, requestState);
-  console.log('reducers.calendar', state, action);
+  // console.log('reducers.calendar', state, action);
   // switch-case
   switch (action.type) {
     // calendar complete
@@ -68357,7 +68357,7 @@ var schedule = function schedule() {
   var action = arguments[1];
 
   var state = Object.assign({}, requestState);
-  console.log('reducers.schedule', state, action);
+  // console.log('reducers.schedule', state, action);
   // switch-case
   switch (action.type) {
     case _ReducerTypes2.default.SCHEDULE_COMPLETE:
@@ -68442,7 +68442,7 @@ var game = function game() {
   var action = arguments[1];
 
   var state = Object.assign({}, requestState);
-  console.log('reducers.games', state, action);
+  // console.log('reducers.games', state, action);
   // switch-case
   switch (action.type) {
     case _ReducerTypes2.default.GAMES_COMPLETE:
@@ -82211,6 +82211,77 @@ var _Style2 = _interopRequireDefault(_Style);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * 上部スコア - data が無い時は空で出力します
+ * @returns {XML} div.mlb_live__overview
+ * @constructor
+ * @since 2017-08-17
+ * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+ */
+
+
+// dae
+var ComOverviewEmpty = function ComOverviewEmpty() {
+  var teamClass = 'mlb_live__overview__team';
+  // render
+  return _react2.default.createElement(
+    'div',
+    { className: 'mlb_live__overview' },
+    _react2.default.createElement(
+      'div',
+      { className: 'mlb_live__overview__inner' },
+      _react2.default.createElement(
+        'p',
+        { className: teamClass + ' ' + teamClass + '--home' },
+        '\xA0'
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'mlb_live__overview__info' },
+        _react2.default.createElement(
+          'p',
+          { className: 'mlb_live__overview__info__date' },
+          '\xA0'
+        ),
+        _react2.default.createElement(
+          'p',
+          { className: 'mlb_live__overview__info__score' },
+          _react2.default.createElement(
+            'span',
+            { className: 'mlb_live__overview__info__score--home' },
+            '\xA0'
+          ),
+          _react2.default.createElement(
+            'span',
+            { className: 'mlb_live__overview__info__score--vs' },
+            'vs'
+          ),
+          _react2.default.createElement(
+            'span',
+            { className: 'mlb_live__overview__info__score--visitor' },
+            '\xA0'
+          )
+        ),
+        _react2.default.createElement(
+          'p',
+          { className: 'mlb_live__overview__info__status' },
+          '\xA0'
+        ),
+        _react2.default.createElement(
+          'p',
+          { className: 'mlb_live__overview__info__place' },
+          '\xA0'
+        )
+      ),
+      _react2.default.createElement(
+        'p',
+        { className: teamClass + ' ' + teamClass + '--visitor' },
+        '\xA0'
+      )
+    )
+  );
+};
+
+/**
  * GAME: 上部対戦成績
  * @param {?DaeGameInfo} info JSON - game_info.json
  * @returns {?XML} div.mlb_live__overview
@@ -82218,13 +82289,33 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 
 
-// dae
+// define
+
+
+// util
+/**
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2017/07/27 - 21:14
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+// react
 var ComOverview = function ComOverview(_ref) {
   var info = _ref.info;
 
   // console.log('ComOverview info', info);
   if (!info) {
-    return null;
+    // 空タグを出力する
+    // @since 2017-08-17
+    // @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+    return _react2.default.createElement(ComOverviewEmpty, null);
+    // return null;
   }
   // -----
   var teamClass = 'mlb_live__overview__team';
@@ -82294,25 +82385,6 @@ var ComOverview = function ComOverview(_ref) {
  * propTypes
  * @type {{info: *}}
  */
-
-
-// define
-
-
-// util
-/**
- * Copyright (c) 2011-2017 inazumatv.com, inc.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2017/07/27 - 21:14
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- */
-
-// react
 ComOverview.propTypes = {
   info: _propTypes2.default.instanceOf(_DaeGameInfo2.default)
 };
@@ -82507,6 +82579,547 @@ var ComInfo = function (_Component) {
       this.member = tab;
     }
     /**
+     * data 不正の時に空タグを出力します
+     * - game
+     * - member
+     * - inning
+     * @returns {XML} div.mlb_live__starting
+     * @since 2017-08-17
+     * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+     */
+
+  }, {
+    key: 'emptyChoose',
+    value: function emptyChoose() {
+      var tab = this.state.tab;
+      var _props = this.props,
+          info = _props.info,
+          member = _props.member;
+
+      switch (tab) {
+        case 'game':
+          {
+            return _react2.default.createElement(
+              'section',
+              { className: 'mlb_live__starting' },
+              _react2.default.createElement(
+                'div',
+                { className: 'js-starting-pitchers' },
+                _react2.default.createElement(
+                  'h2',
+                  { className: 'mlb_live__heading--h2' },
+                  '\u4E88\u544A\u5148\u767A\u6295\u624B'
+                ),
+                _react2.default.createElement(
+                  'table',
+                  { className: 'mlb_live__starting--pitcher' },
+                  _react2.default.createElement(
+                    'thead',
+                    null,
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher__th--home' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher__th--visitor' },
+                        '\xA0'
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'tbody',
+                    null,
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher__td' },
+                        _react2.default.createElement(
+                          'p',
+                          { className: 'mlb_live__starting--pitcher__position' },
+                          '\u6295\u624B'
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          { className: 'mlb_live__starting--pitcher__uniform_num' },
+                          '\xA0'
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          { className: 'mlb_live__starting--pitcher__name' },
+                          '\xA0'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher__td' },
+                        _react2.default.createElement(
+                          'p',
+                          { className: 'mlb_live__starting--pitcher__position' },
+                          '\u6295\u624B'
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          { className: 'mlb_live__starting--pitcher__uniform_num' },
+                          '\xA0'
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          { className: 'mlb_live__starting--pitcher__name' },
+                          '\xA0'
+                        )
+                      )
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'table',
+                  { className: 'mlb_live__starting--pitcher_record' },
+                  _react2.default.createElement(
+                    'thead',
+                    null,
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher_record__th' },
+                        '\u8A66'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher_record__th' },
+                        '\u52DD'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher_record__th' },
+                        '\u8CA0'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher_record__th' },
+                        '\u9632\u5FA1\u7387'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher_record__th' },
+                        '\u6210\u7E3E'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher_record__th' },
+                        '\u8A66'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher_record__th' },
+                        '\u52DD'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher_record__th' },
+                        '\u8CA0'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--pitcher_record__th' },
+                        '\u9632\u5FA1\u7387'
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'tbody',
+                    null,
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher_record__td' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher_record__td' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher_record__td' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher_record__td' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher_record__td' },
+                        '\u4ECA\u5B63'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher_record__td' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher_record__td' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher_record__td' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--pitcher_record__td' },
+                        '\xA0'
+                      )
+                    )
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'js-starting-fielders' },
+                _react2.default.createElement(
+                  'h2',
+                  { className: 'mlb_live__heading--h2' },
+                  '\u30B9\u30BF\u30FC\u30C6\u30A3\u30F3\u30B0\u30E1\u30F3\u30D0\u30FC'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'mlb_live__starting--member__section' },
+                  _react2.default.createElement(
+                    'table',
+                    { className: 'mlb_live__starting--member mlb_live__starting--member--home' },
+                    _react2.default.createElement(
+                      'caption',
+                      { className: 'mlb_live__starting--member__caption' },
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'tbody',
+                      null,
+                      _react2.default.createElement(
+                        'tr',
+                        null,
+                        _react2.default.createElement(
+                          'th',
+                          { className: 'mlb_live__starting--member__th--lineup' },
+                          '\xA0'
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          { className: 'mlb_live__starting--member__td--position' },
+                          '\xA0'
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          { className: 'mlb_live__starting--member__td--player' },
+                          '\xA0'
+                        )
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'table',
+                    { className: 'mlb_live__starting--member mlb_live__starting--member--visitor' },
+                    _react2.default.createElement(
+                      'caption',
+                      { className: 'mlb_live__starting--member__caption' },
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'tbody',
+                      null,
+                      _react2.default.createElement(
+                        'tr',
+                        null,
+                        _react2.default.createElement(
+                          'th',
+                          { className: 'mlb_live__starting--member__th--lineup' },
+                          '\xA0'
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          { className: 'mlb_live__starting--member__td--position' },
+                          '\xA0'
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          { className: 'mlb_live__starting--member__td--player' },
+                          '\xA0'
+                        )
+                      )
+                    )
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'h2',
+                { className: 'mlb_live__heading--h2' },
+                '\u63A7\u3048\u9078\u624B'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'mlb_live__starting--bench__section' },
+                _react2.default.createElement(
+                  'table',
+                  { className: 'mlb_live__starting--bench mlb_live__starting--bench--home' },
+                  _react2.default.createElement(
+                    'caption',
+                    { className: 'mlb_live__starting--bench__caption' },
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'tbody',
+                    { className: 'mlb_live__starting--bench--pitcher' },
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--bench__th__heading' },
+                        '\xA0'
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--bench__td--player' },
+                        '\xA0'
+                      )
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'table',
+                  { className: 'mlb_live__starting--bench mlb_live__starting--bench--visitor' },
+                  _react2.default.createElement(
+                    'caption',
+                    { className: 'mlb_live__starting--bench__caption' },
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'tbody',
+                    { className: 'mlb_live__starting--bench--pitcher' },
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__starting--bench__th__heading' },
+                        '\xA0'
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__starting--bench__td--player' },
+                        '\xA0'
+                      )
+                    )
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'section',
+                { className: 'mlb_live__win_loss_standings-section' },
+                _react2.default.createElement(
+                  'h2',
+                  { className: 'mlb_live__heading--h2' },
+                  '\u30C1\u30FC\u30E0\u5BFE\u6226\u6210\u7E3E'
+                ),
+                _react2.default.createElement(
+                  'table',
+                  { className: 'mlb_live__win_loss_standings' },
+                  _react2.default.createElement(
+                    'thead',
+                    null,
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__win_loss_standings__th--home' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__win_loss_standings__th' },
+                        '\u6210\u7E3E'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__win_loss_standings__th--visitor' },
+                        '\xA0'
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'tbody',
+                    null,
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__win_loss_standings__td' },
+                        '\xA0\u52DD\xA0\u6557'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__win_loss_standings__th' },
+                        '\u52DD\u6557'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__win_loss_standings__td' },
+                        '\xA0\u52DD\xA0\u6557'
+                      )
+                    )
+                  )
+                )
+              )
+            );
+          }
+        case 'member':
+          {
+            return _react2.default.createElement(_ComMember2.default, { info: info, member: member, tab: this.member, cb: this.onMember });
+          }
+        case 'inning':
+          {
+            return _react2.default.createElement(
+              'div',
+              { className: 'mlb_live__inning__section' },
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'h2',
+                  { className: 'mlb_live__inning__heading' },
+                  '\xA0'
+                ),
+                _react2.default.createElement(
+                  'table',
+                  { className: 'mlb_live__inning' },
+                  _react2.default.createElement(
+                    'thead',
+                    { className: '' },
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__inning__th--pitcher', colSpan: 2 },
+                        '\u30D4\u30C3\u30C1\u30E3\u30FC',
+                        _react2.default.createElement(
+                          'span',
+                          { className: 'mlb_live__inning__pitcher_name' },
+                          '\xA0'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__inning__th--out' },
+                        '\u30A2\u30A6\u30C8'
+                      ),
+                      _react2.default.createElement(
+                        'th',
+                        { className: 'mlb_live__inning__th--score', colSpan: 2 },
+                        '\u30B9\u30B3\u30A2'
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'tbody',
+                    null,
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__inning__td--lineup' },
+                        _react2.default.createElement(
+                          'span',
+                          null,
+                          '\xA0'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__inning__td--play' },
+                        _react2.default.createElement(
+                          'span',
+                          { className: 'mlb_live__inning__player' },
+                          '\xA0'
+                        ),
+                        _react2.default.createElement(
+                          'span',
+                          { className: 'mlb_live__inning__action' },
+                          '\xA0'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__inning__td--out' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__inning__td--score--home' },
+                        '\xA0'
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        { className: 'mlb_live__inning__td--score--visitor' },
+                        '\xA0'
+                      )
+                    )
+                  )
+                )
+              )
+            );
+          }
+        default:
+          return null;
+      }
+    }
+    /**
+     * data 不正の時に空タグを出力します
+     * @returns {XML} div.js-info-container
+     * @since 2017-08-17
+     * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+     */
+
+  }, {
+    key: 'empty',
+    value: function empty() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'js-info-container' },
+        _react2.default.createElement(_ComInfoTab2.default, {
+          change: this.onChange
+        }),
+        this.emptyChoose()
+      );
+    }
+    /**
      * onChange tab 切替で出力するコンテナを切替ます
      * @param {string} tab tab ID - game / member / inning
      * @returns {?XML} {@link ComGame} / {@link ComMember}} / {@link ComInning}
@@ -82515,11 +83128,11 @@ var ComInfo = function (_Component) {
   }, {
     key: 'choose',
     value: function choose(tab) {
-      var _props = this.props,
-          info = _props.info,
-          member = _props.member,
-          team = _props.team,
-          innings = _props.innings;
+      var _props2 = this.props,
+          info = _props2.info,
+          member = _props2.member,
+          team = _props2.team,
+          innings = _props2.innings;
       // console.log('ComInfo.choose tab', tab, info, member, team);
 
       switch (tab) {
@@ -82547,15 +83160,16 @@ var ComInfo = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props2 = this.props,
-          info = _props2.info,
-          member = _props2.member,
-          team = _props2.team,
-          innings = _props2.innings;
+      var _props3 = this.props,
+          info = _props3.info,
+          member = _props3.member,
+          team = _props3.team,
+          innings = _props3.innings;
       // console.log('ComInfo.render info, member, team', info, member, team);
 
       if (!info || !member || !team || !innings) {
-        return null;
+        return this.empty();
+        // return null;
       }
       // render
       return _react2.default.createElement(
@@ -84095,6 +84709,446 @@ var ComMember = function (_Component) {
       this.props.cb(tab);
     }
     /**
+     * data 不正の時に空タグを出力します
+     * @returns {XML} div.mlb_live__record__container
+     * @since 2017-08-17
+     * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+     */
+
+  }, {
+    key: 'emptyChoose',
+    value: function emptyChoose() {
+      var tab = this.state.tab;
+      switch (tab) {
+        case 'batter':
+          {
+            return _react2.default.createElement(
+              'div',
+              { className: 'mlb_live__record__container mlb_live__record__container--batter' },
+              _react2.default.createElement(
+                'table',
+                { className: 'mlb_live__record mlb_live__record--home' },
+                _react2.default.createElement(
+                  'caption',
+                  { className: 'mlb_live__record__heading' },
+                  '\xA0'
+                ),
+                _react2.default.createElement(
+                  'thead',
+                  null,
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u4F4D\u7F6E'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u9078\u624B'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u901A\u7B97\u6253\u7387'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u6253\u6570'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u5B89\u6253'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u6253\u70B9'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'tbody',
+                  null,
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      { className: 't-left' },
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'tfoot',
+                  null,
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th', colSpan: 2 },
+                      '\u5408\u8A08'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    )
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'table',
+                { className: 'mlb_live__record mlb_live__record--visitor' },
+                _react2.default.createElement(
+                  'caption',
+                  { className: 'mlb_live__record__heading' },
+                  '\xA0'
+                ),
+                _react2.default.createElement(
+                  'thead',
+                  null,
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u4F4D\u7F6E'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u9078\u624B'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u901A\u7B97\u6253\u7387'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u6253\u6570'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u5B89\u6253'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u6253\u70B9'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'tbody',
+                  null,
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      { className: 't-left' },
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'tfoot',
+                  null,
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th', colSpan: 2 },
+                      '\u5408\u8A08'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    )
+                  )
+                )
+              )
+            );
+          }
+        case 'pitcher':
+          {
+            return _react2.default.createElement(
+              'div',
+              { className: 'mlb_live__record__container mlb_live__record__container--pitcher' },
+              _react2.default.createElement(
+                'table',
+                { className: 'mlb_live__record mlb_live__record--home' },
+                _react2.default.createElement(
+                  'caption',
+                  { className: 'mlb_live__record__heading' },
+                  '\xA0'
+                ),
+                _react2.default.createElement(
+                  'thead',
+                  null,
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u52DD\u6557\u30FB\u30BB\u30FC\u30D6'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u9078\u624B'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u9632\u5FA1\u7387'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u6295\u7403\u56DE\u6570'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u6295\u7403\u6570(\u30B9\u30C8\u30E9\u30A4\u30AF)'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'tbody',
+                  null,
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      { className: 't-left' },
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    )
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'table',
+                { className: 'mlb_live__record mlb_live__record--visitor' },
+                _react2.default.createElement(
+                  'caption',
+                  { className: 'mlb_live__record__heading' },
+                  '\xA0'
+                ),
+                _react2.default.createElement(
+                  'thead',
+                  null,
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u52DD\u6557\u30FB\u30BB\u30FC\u30D6'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u9078\u624B'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u9632\u5FA1\u7387'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u6295\u7403\u56DE\u6570'
+                    ),
+                    _react2.default.createElement(
+                      'th',
+                      { className: 'mlb_live__record__th' },
+                      '\u6295\u7403\u6570(\u30B9\u30C8\u30E9\u30A4\u30AF)'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'tbody',
+                  null,
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      { className: 't-left' },
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      '\xA0'
+                    )
+                  )
+                )
+              )
+            );
+          }
+        default:
+          return null;
+      }
+    }
+    /**
+     * data 不正の時に空タグを出力します
+     * @returns {XML} div.js-member-container
+     * @since 2017-08-17
+     * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+     */
+
+  }, {
+    key: 'empty',
+    value: function empty() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'js-member-container' },
+        _react2.default.createElement(_ComMemberTab2.default, {
+          change: this.onChange,
+          tab: this.props.tab
+        }),
+        _react2.default.createElement(
+          'section',
+          { className: 'mlb_live__record__section' },
+          this.emptyChoose()
+        )
+      );
+    }
+    /**
      * 引数 `tab` で表示切替をします
      * - 打者成績
      * - 投手成績
@@ -84166,7 +85220,8 @@ var ComMember = function (_Component) {
       // console.log('ComMember.render info, member', info, member, this.state);
 
       if (!info || !member) {
-        return null;
+        return this.empty();
+        // return null;
       }
       return _react2.default.createElement(
         'div',
@@ -84627,11 +85682,11 @@ var ComInningsEvent = function ComInningsEvent(_ref3) {
       inning = _ref3.inning,
       info = _ref3.info;
 
-  // 最終回で home team の攻撃が無い時は出力しません
-  // 9 回未満を足す - 207-08-17
+  // home team データチェックを追加します - 2017-08-17
   if (type === 'home' && (!info.home || !info.home.board || !info.home.board.scores || !info.home.board.scores.score || !info.home.board.scores.score[inning] || !info.home.board.scores.score[inning].score)) {
     return null;
   }
+  // 最終回で home team の攻撃が無い時は出力しません
   if (type === 'home' && inning === info.innings && info.home.win && info.home.board.scores.score[inning].score === 0) {
     return null;
   }
@@ -84884,7 +85939,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Interval = function () {
   /**
    * ゲーム情報を保存し自動更新管理・動的更新管理を行います
-   * @param {number|strin} year 年 yyyy
+   * @param {number|string} year 年 yyyy
    * @param {number|string} id GAME ID
    * @param {number} [interval=30] 間隔（秒）
    */
@@ -84910,7 +85965,7 @@ var Interval = function () {
     this.onUpdate = this.onUpdate.bind(this);
     /**
      * 年 yyyy
-     * @type {number|strin}
+     * @type {number|string}
      */
     this.year = year;
     /**
@@ -84986,7 +86041,7 @@ var ComSwitchNext = function ComSwitchNext(_ref) {
       innings = _ref.innings,
       action = _ref.action;
 
-  console.log('ComSwitchNext', start, innings);
+  // console.log('ComSwitchNext', start, innings);
   // 表示切替します
   if (start + 9 > innings) {
     return _react2.default.createElement(
@@ -85049,7 +86104,7 @@ var ComSwitchPrev = function ComSwitchPrev(_ref2) {
   var start = _ref2.start,
       action = _ref2.action;
 
-  console.log('ComSwitchPrev', start);
+  // console.log('ComSwitchPrev', start);
   if (start === 1) {
     return _react2.default.createElement(
       'li',
@@ -85113,7 +86168,7 @@ var ComScoreSwitch = function ComScoreSwitch(_ref3) {
       next = _ref3.next;
 
   // console.log('ComScoreSwitch', start, innings);
-  // TODO: remove test code
+  // test code
   if (innings <= 9) {
     return null;
   }
@@ -85328,15 +86383,18 @@ var ComScoreHome = function ComScoreHome(_ref6) {
       // 表示する
       var score = home.score[inning];
       var visitorScore = visitor.score[inning];
-      var alt = '0';
-      if (inning > innings) {
-        alt = '';
-      }
+      // let alt = '0';
+      // if (inning > innings) {
+      //   alt = '';
+      // }
       // render
+      var alpha = scoreAlpha(score, visitorScore, inning, innings);
+      var point = alpha || _Print2.default.int(score.score);
+      // console.log('ComScoreHome', inning, score, alpha, point);
       return _react2.default.createElement(
         'td',
         { key: 'home-' + inning, className: 'home-' + inning },
-        _Print2.default.str(scoreAlpha(score, visitorScore, inning, innings), alt)
+        point
       );
     })
   );
@@ -85371,7 +86429,7 @@ var ComScoreInnings = function ComScoreInnings(_ref7) {
 
   var home = info.home.scores;
   var visitor = info.visitor.scores;
-  console.log('ComScoreInnings', home, visitor, innings);
+  // console.log('ComScoreInnings', home, visitor, innings);
   var boards = _List2.default.fill(9);
   return _react2.default.createElement(
     'div',
@@ -85590,25 +86648,331 @@ ComScoreLeft.propTypes = {
 var ComScore = function (_Component) {
   _inherits(ComScore, _Component);
 
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
+  _createClass(ComScore, null, [{
+    key: 'empty',
 
-  // ----------------------------------------
-  // CONSTRUCTOR
-  // ----------------------------------------
-  /**
-   * スコアボードを表示を始めます
-   * @param {*} props {@link ComScore.propTypes}
-   */
+    // ----------------------------------------
+    // STATIC METHOD
+    // ----------------------------------------
+    /**
+     * data 不正の時に空タグを出力します
+     * @returns {XML} section.mlb_live__scoreboard__th--team
+     * @since 2017-08-17
+     * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+     */
 
-  // ----------------------------------------
-  // STATIC PROPERTY
-  // ----------------------------------------
-  /**
-   * propTypes
-   * @type {{info: DaeGameInfo}}
-   */
+    // ----------------------------------------
+    // STATIC PROPERTY
+    // ----------------------------------------
+    /**
+     * propTypes
+     * @type {{info: DaeGameInfo}}
+     */
+    value: function empty() {
+      var thClass = 'mlb_live__scoreboard__th--team';
+      return _react2.default.createElement(
+        'section',
+        { className: 'mlb_live__scoreboard__section' },
+        _react2.default.createElement(
+          'div',
+          { className: 'mlb_live__scoreboard' },
+          _react2.default.createElement(
+            'div',
+            { className: 'mlb_live__scoreboard__column mlb_live__scoreboard__column--team' },
+            _react2.default.createElement(
+              'table',
+              { className: 'mlb_live__scoreboard__table mlb_live__scoreboard__table--team' },
+              _react2.default.createElement(
+                'thead',
+                null,
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'th',
+                    null,
+                    '\xA0'
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'tbody',
+                null,
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'td',
+                    { className: thClass + ' ' + thClass + '--visitor' },
+                    '\xA0'
+                  )
+                ),
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'td',
+                    { className: thClass + ' ' + thClass + '--home' },
+                    '\xA0'
+                  )
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'mlb_live__scoreboard__column mlb_live__scoreboard__column--score' },
+            _react2.default.createElement(
+              'table',
+              { className: 'mlb_live__scoreboard__table mlb_live__scoreboard__table--score' },
+              _react2.default.createElement(
+                'thead',
+                null,
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--inning' },
+                    '1'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--inning' },
+                    '2'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--inning' },
+                    '3'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--inning' },
+                    '4'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--inning' },
+                    '5'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--inning' },
+                    '6'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--inning' },
+                    '7'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--inning' },
+                    '8'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--inning' },
+                    '9'
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'tbody',
+                null,
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  )
+                ),
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                  )
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'mlb_live__scoreboard__column mlb_live__scoreboard__column--count' },
+            _react2.default.createElement(
+              'table',
+              { className: 'mlb_live__scoreboard__table mlb_live__scoreboard__table--count' },
+              _react2.default.createElement(
+                'thead',
+                null,
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--sum' },
+                    '\u8A08'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--hit' },
+                    '\u5B89'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    { className: 'mlb_live__scoreboard__th--error' },
+                    '\u5931'
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'tbody',
+                null,
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'td',
+                    { className: 'mlb_live__scoreboard__td--sum' },
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    { className: 'mlb_live__scoreboard__td--hit' },
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    { className: 'mlb_live__scoreboard__td--error' },
+                    '\xA0'
+                  )
+                ),
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'td',
+                    { className: 'mlb_live__scoreboard__td--sum' },
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    { className: 'mlb_live__scoreboard__td--hit' },
+                    '\xA0'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    { className: 'mlb_live__scoreboard__td--error' },
+                    '\xA0'
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+    // ----------------------------------------
+    // CONSTRUCTOR
+    // ----------------------------------------
+    /**
+     * スコアボードを表示を始めます
+     * @param {*} props {@link ComScore.propTypes}
+     */
+
+    /**
+     * defaultProps
+     * @type {{info: ?DaeGameInfo}}
+     */
+
+  }]);
+
   function ComScore(props) {
     _classCallCheck(this, ComScore);
 
@@ -85664,11 +87028,6 @@ var ComScore = function (_Component) {
    * @param {Event} event click Event
    */
 
-  /**
-   * defaultProps
-   * @type {{info: ?DaeGameInfo}}
-   */
-
 
   _createClass(ComScore, [{
     key: 'onNext',
@@ -85696,7 +87055,7 @@ var ComScore = function (_Component) {
   }, {
     key: 'onAuto',
     value: function onAuto() {
-      console.log('ComScore.onAuto');
+      // console.log('ComScore.onAuto');
       this.interval.resume();
     }
     /**
@@ -85706,7 +87065,7 @@ var ComScore = function (_Component) {
   }, {
     key: 'onManual',
     value: function onManual() {
-      console.log('ComScore.onManual');
+      // console.log('ComScore.onManual');
       this.interval.pause();
     }
     /**
@@ -85716,7 +87075,7 @@ var ComScore = function (_Component) {
   }, {
     key: 'onReload',
     value: function onReload() {
-      console.log('ComScore.onReload');
+      // console.log('ComScore.onReload');
       this.interval.request();
     }
     // ----------------------------------------
@@ -85732,7 +87091,9 @@ var ComScore = function (_Component) {
       var info = this.props.info;
 
       if (!info) {
-        return null;
+        // data 不正時 からタグを出力する
+        return ComScore.empty();
+        // return null;
       }
       // render
       return _react2.default.createElement(
@@ -85991,13 +87352,17 @@ var ComScoreRefresh = function (_Component) {
     }
     /**
      * manual click event handler - props.manual を call します
-     * @param {Event} event click event
+     * @param {?Event} [event=null] click event
      */
 
   }, {
     key: 'onClickManual',
-    value: function onClickManual(event) {
-      event.preventDefault();
+    value: function onClickManual() {
+      var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (event) {
+        event.preventDefault();
+      }
       var radio = this.state.radio;
 
       if (radio !== 'manual') {
@@ -86025,12 +87390,13 @@ var ComScoreRefresh = function (_Component) {
   }, {
     key: 'renderRefresh',
     value: function renderRefresh(show) {
-      console.log('ComScoreRefresh.renderRefresh', show);
+      // console.log('ComScoreRefresh.renderRefresh', show);
       // flag 判定
-      // TODO: TEST CODE
-      // if (!show) {
-      //   return null;
-      // }
+      // TEST CODE
+      if (!show) {
+        this.onClickManual();
+        return null;
+      }
       // render
       var radio = this.state.radio;
 
@@ -86083,12 +87449,12 @@ var ComScoreRefresh = function (_Component) {
   }, {
     key: 'renderReload',
     value: function renderReload(show) {
-      console.log('ComScoreRefresh.renderReload', show);
+      // console.log('ComScoreRefresh.renderReload', show);
       // flag 判定
-      // TODO: TEST CODE
-      // if (!show) {
-      //   return null;
-      // }
+      // TEST CODE
+      if (!show) {
+        return null;
+      }
       // render
       return _react2.default.createElement(
         'div',
@@ -86133,20 +87499,20 @@ var ComScoreRefresh = function (_Component) {
       } else if (status === 1 || status === 23) {
         // status: 1 - 試合前,   23 - 遅延/中断
         // 当日のみ「更新」表示させる
-        // @type {string} - YYYYMMDD
-        var today = _Day2.default.full(new Date());
-        // @type {string} - YYYYMMDD
-        var play = _Day2.default.full(date);
+        // @type {int} - YYYYMMDD
+        var today = parseInt(_Day2.default.full(new Date()), 10);
+        // @type {int} - YYYYMMDD
+        var play = parseInt(_Day2.default.full(date), 10);
         // 文字列比較する
-        if (today === play) {
+        if (today >= play) {
           showReload = true;
         }
       }
       // どちらも表示する必要がない時は null
-      // TODO: TEST CODE
-      // if (!showRefresh && !showReload) {
-      //   return null;
-      // }
+      // TEST CODE
+      if (!showRefresh && !showReload) {
+        return null;
+      }
       // render
       return _react2.default.createElement(
         'nav',
