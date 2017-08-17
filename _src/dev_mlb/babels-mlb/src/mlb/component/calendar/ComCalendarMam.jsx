@@ -98,7 +98,7 @@ export default class ComCalendarMam extends Component {
    */
   shouldComponentUpdate(nextProps) {
     const { year, today, data } = this.props;
-    console.log('ComCalendarMam.shouldComponentUpdate nextState', nextProps);
+    // console.log('ComCalendarMam.shouldComponentUpdate nextState', nextProps);
     return nextProps &&
       (
         (nextProps.year && year !== nextProps.year) ||
@@ -123,7 +123,7 @@ export default class ComCalendarMam extends Component {
    * ```
    */
   onSlot(event) {
-    console.log('ComCalendarMam.onSlot', event);
+    // console.log('ComCalendarMam.onSlot', event);
     this.transition(event.start);
   }
   /**
@@ -134,7 +134,7 @@ export default class ComCalendarMam extends Component {
    * ```
    */
   onSelected(event) {
-    console.log('ComCalendarMam.onSelected', event);
+    // console.log('ComCalendarMam.onSelected', event);
     this.transition(event.start);
   }
   /**
@@ -144,15 +144,15 @@ export default class ComCalendarMam extends Component {
   transition(date) {
     // ゲーム開催日チェック
     const game = this.props.data.events.game(date);
-    console.log('ComCalendarMam.transition', date, game);
+    // console.log('ComCalendarMam.transition', date, game);
     if (game) {
-      console.log('ComCalendarMam.transition', game.full, Link.schedule(game.full));
+      // console.log('ComCalendarMam.transition', game.full, Link.schedule(game.full));
       location.href = Link.schedule(game.full);
     }
   }
   /**
    * data が存在する時に{@link ComCalendar} を出力します
-   * @returns {?ComCalendar} data が存在する時に{@link ComCalendar} を返します
+   * @returns {?XML} data が存在する時に{@link ComCalendar} を返します
    */
   render() {
     // console.log('ComCalendarMam.render ============', this.props);

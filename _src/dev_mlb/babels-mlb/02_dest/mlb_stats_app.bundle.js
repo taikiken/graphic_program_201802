@@ -41673,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-10 19:46:04
+ * 2017-8-17 11:26:39
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -41897,14 +41897,6 @@ if (!window.Promise) {
 
 // for IE ES 2015 / 2016 / 2017 polyfill
 _Main2.default.init();
-
-// // remove test code below
-// const MLB = {
-//   Test,
-// };
-//
-// // export MLB;
-// self.MLB = MLB;
 
 /***/ }),
 /* 444 */
@@ -54225,7 +54217,7 @@ var Main = function () {
      * @param {{path: ?string, id: ?string, year: ?string}} page {@link Router.search} 戻り値
      */
     value: function game(page) {
-      console.log('Main.game', page);
+      // console.log('Main.game', page);
       var overview = document.getElementById('js-mlb-game-overview');
       var score = document.getElementById('js-mlb-game-score');
       var info = document.getElementById('js-mlb-game-info');
@@ -54248,7 +54240,7 @@ var Main = function () {
   }, {
     key: 'index',
     value: function index(page) {
-      console.log('Main.index', page);
+      // console.log('Main.index', page);
       var id = page.id;
       if (id) {
         // id: not null - /stats/mlb/yyyymmdd/
@@ -54279,7 +54271,7 @@ var Main = function () {
     key: 'init',
     value: function init() {
       var page = _Router2.default.search();
-      console.log('Main.init page', page);
+      // console.log('Main.init page', page);
       // ---------------------------
       // 処理開始
       switch (page.path) {
@@ -54370,7 +54362,7 @@ var Router = function () {
         return state;
       } else if (length === 3) {
         var id = directories.pop();
-        console.log('Router.index', id, id.match(/\d{8}/));
+        // console.log('Router.index', id, id.match(/\d{8}/));
         // YYYYMMDD check
         if (id.match(/\d{8}/)) {
           state.id = id;
@@ -54686,7 +54678,7 @@ var View = function () {
       // ajax error が出ても表示に問題は無いようなのでこのままにする
       _Creator2.default.calendar(year, today);
       _Creator2.default.schedule(_Day2.default.date(today));
-      console.log('ViewIndex.index', year, today);
+      // console.log('ViewIndex.index', year, today);
     }
     // ---------------------------------------
     // game
@@ -54709,7 +54701,7 @@ var View = function () {
           score = _ref.score,
           info = _ref.info;
 
-      console.log('View.game', year, id, overview, score, info);
+      // console.log('View.game', year, id, overview, score, info);
       // save
       _Games2.default.year = year;
       _Games2.default.id = id;
@@ -69240,7 +69232,7 @@ var ModCalendar = function () {
   }, {
     key: 'game',
     value: function game(date) {
-      console.log('ModCalendarEvents.game', date);
+      // console.log('ModCalendarEvents.game', date);
       return this.calendar[date];
     }
   }]);
@@ -69893,8 +69885,8 @@ var ComCalendarMam = function (_Component) {
           year = _props.year,
           today = _props.today,
           data = _props.data;
+      // console.log('ComCalendarMam.shouldComponentUpdate nextState', nextProps);
 
-      console.log('ComCalendarMam.shouldComponentUpdate nextState', nextProps);
       return nextProps && (nextProps.year && year !== nextProps.year || nextProps.today && today !== nextProps.today || nextProps.data && data !== nextProps.data);
     }
     // /**
@@ -69917,7 +69909,7 @@ var ComCalendarMam = function (_Component) {
   }, {
     key: 'onSlot',
     value: function onSlot(event) {
-      console.log('ComCalendarMam.onSlot', event);
+      // console.log('ComCalendarMam.onSlot', event);
       this.transition(event.start);
     }
     /**
@@ -69931,7 +69923,7 @@ var ComCalendarMam = function (_Component) {
   }, {
     key: 'onSelected',
     value: function onSelected(event) {
-      console.log('ComCalendarMam.onSelected', event);
+      // console.log('ComCalendarMam.onSelected', event);
       this.transition(event.start);
     }
     /**
@@ -69944,15 +69936,15 @@ var ComCalendarMam = function (_Component) {
     value: function transition(date) {
       // ゲーム開催日チェック
       var game = this.props.data.events.game(date);
-      console.log('ComCalendarMam.transition', date, game);
+      // console.log('ComCalendarMam.transition', date, game);
       if (game) {
-        console.log('ComCalendarMam.transition', game.full, _Link2.default.schedule(game.full));
+        // console.log('ComCalendarMam.transition', game.full, Link.schedule(game.full));
         location.href = _Link2.default.schedule(game.full);
       }
     }
     /**
      * data が存在する時に{@link ComCalendar} を出力します
-     * @returns {?ComCalendar} data が存在する時に{@link ComCalendar} を返します
+     * @returns {?XML} data が存在する時に{@link ComCalendar} を返します
      */
 
   }, {
@@ -80825,7 +80817,7 @@ ComPitching.propTypes = {
 var ComPlayer = function ComPlayer(_ref3) {
   var player = _ref3.player;
 
-  console.log('ComJaPlayer player', player);
+  // console.log('ComJaPlayer player', player);
   // 投手でも type が 'batting' になっている
   // const batting = player.type === 'batting';
   // const ComType = batting ? ComBatting : ComPitching;
@@ -81130,7 +81122,7 @@ var ComJapanese = function ComJapanese(_ref7) {
   if (!japanese.has()) {
     return null;
   }
-  console.log('ComJapanese japanese', japanese, date);
+  // console.log('ComJapanese japanese', japanese, date);
   var today = _Day2.default.today();
   // render
   return _react2.default.createElement(
@@ -81321,7 +81313,7 @@ var ComOptionTypes = function ComOptionTypes(_ref) {
             '\u3059\u3079\u3066\u306E\u8A66\u5408'
           ),
           types.list.map(function (type) {
-            console.log('type', type);
+            // console.log('type', type);
             var id = _Print2.default.int(type.id);
             var typeName = _Print2.default.str(type.type);
             if (!id || !typeName) {
@@ -81515,7 +81507,7 @@ var ComSchedule = function (_Component) {
       this.setState({
         type: id || 'all'
       });
-      console.log('onChangeTypes event', event.target.value, event, this.state.type);
+      // console.log('onChangeTypes event', event.target.value, event, this.state.type);
     }
     /**
      * type select.onChange event handler
@@ -81532,7 +81524,7 @@ var ComSchedule = function (_Component) {
       this.setState({
         team: id || 'all'
       });
-      console.log('onChangeTeams event', event.target.value, event, this.state.team);
+      // console.log('onChangeTeams event', event.target.value, event, this.state.team);
     }
     /**
      * nav.onClick event handler
@@ -82028,7 +82020,7 @@ var ComScheduleList = function (_Component) {
       if (type !== nextProps.type) {
         update = true;
       }
-      console.log('ComScheduleList shouldComponentUpdate', nextProps, update);
+      // console.log('ComScheduleList shouldComponentUpdate', nextProps, update);
       return update;
     }
     /**
@@ -82062,8 +82054,8 @@ var ComScheduleList = function (_Component) {
           team = _props2.team,
           type = _props2.type,
           date = _props2.date;
+      // console.log('ComScheduleList.render team, type', team, type);
 
-      console.log('ComScheduleList.render team, type', team, type);
       return _react2.default.createElement(
         'div',
         { className: 'mlb__schedule__result__section' },
@@ -82230,7 +82222,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ComOverview = function ComOverview(_ref) {
   var info = _ref.info;
 
-  console.log('ComOverview info', info);
+  // console.log('ComOverview info', info);
   if (!info) {
     return null;
   }
@@ -82528,8 +82520,7 @@ var ComInfo = function (_Component) {
           member = _props.member,
           team = _props.team,
           innings = _props.innings;
-
-      console.log('ComInfo.choose tab', tab, info, member, team);
+      // console.log('ComInfo.choose tab', tab, info, member, team);
 
       switch (tab) {
         case 'game':
@@ -82561,8 +82552,8 @@ var ComInfo = function (_Component) {
           member = _props2.member,
           team = _props2.team,
           innings = _props2.innings;
+      // console.log('ComInfo.render info, member, team', info, member, team);
 
-      console.log('ComInfo.render info, member, team', info, member, team);
       if (!info || !member || !team || !innings) {
         return null;
       }
@@ -82698,7 +82689,7 @@ var ComInfoTab = function (_Component) {
     key: 'onClick',
     value: function onClick(event) {
       event.preventDefault();
-      console.log('ComNav.onClick', event);
+      // console.log('ComNav.onClick', event);
       var target = event.target;
       // const tab = target.dataset.tab;
       var tab = target.href.split('#').pop();
@@ -83887,7 +83878,7 @@ var ComBatters = function ComBatters(_ref2) {
       team = _ref2.team;
 
   // TODO: players.members.batters Sort - 打席順 + 出場順
-  console.log('ComBatters players', players);
+  // console.log('ComBatters players', players);
   // 打数, 安打, 打点 を合計します
   var bats = 0;
   var hits = 0;
@@ -84099,7 +84090,7 @@ var ComMember = function (_Component) {
   _createClass(ComMember, [{
     key: 'onChange',
     value: function onChange(tab) {
-      console.log('ComMember.onChange', tab);
+      // console.log('ComMember.onChange', tab);
       this.setState({ tab: tab });
       this.props.cb(tab);
     }
@@ -84117,8 +84108,8 @@ var ComMember = function (_Component) {
       var _props = this.props,
           info = _props.info,
           member = _props.member;
+      // console.log('ComMember.choose', tab, info, member);
 
-      console.log('ComMember.choose', tab, info, member);
       switch (tab) {
         case 'batter':
           {
@@ -84172,8 +84163,8 @@ var ComMember = function (_Component) {
       var _props2 = this.props,
           info = _props2.info,
           member = _props2.member;
+      // console.log('ComMember.render info, member', info, member, this.state);
 
-      console.log('ComMember.render info, member', info, member, this.state);
       if (!info || !member) {
         return null;
       }
@@ -84305,7 +84296,7 @@ var ComMemberTab = function (_Component) {
     key: 'onClick',
     value: function onClick(event) {
       event.preventDefault();
-      console.log('ComMemberTab.onClick', event);
+      // console.log('ComMemberTab.onClick', event);
       var target = event.target;
       var tab = target.href.split('#').pop();
       // state.current clone + all off
@@ -84637,6 +84628,10 @@ var ComInningsEvent = function ComInningsEvent(_ref3) {
       info = _ref3.info;
 
   // 最終回で home team の攻撃が無い時は出力しません
+  // 9 回未満を足す - 207-08-17
+  if (type === 'home' && (!info.home || !info.home.board || !info.home.board.scores || !info.home.board.scores.score || !info.home.board.scores.score[inning] || !info.home.board.scores.score[inning].score)) {
+    return null;
+  }
   if (type === 'home' && inning === info.innings && info.home.win && info.home.board.scores.score[inning].score === 0) {
     return null;
   }

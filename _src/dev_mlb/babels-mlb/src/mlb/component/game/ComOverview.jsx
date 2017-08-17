@@ -30,7 +30,7 @@ import Style from '../../define/Style';
  * @constructor
  */
 const ComOverview = ({ info }) => {
-  console.log('ComOverview info', info);
+  // console.log('ComOverview info', info);
   if (!info) {
     return null;
   }
