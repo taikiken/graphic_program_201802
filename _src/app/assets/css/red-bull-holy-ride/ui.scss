@@ -158,12 +158,50 @@
     }
   }
 
+  .intro__timetable {
+    margin-top: 20px;
+
+    table {
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: 8px 10px;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    th {
+      width: 120px;
+      font-style: italic;
+    }
+
+    td {
+      font-weight: bold;
+    }
+
+    tr:nth-child(odd) {
+      th, td {
+        background-color: #1c2129;
+      }
+    }
+  }
+
   .intro__banner {
-    margin-top: 40px;
+    margin-top: 20px;
+
+    a:hover {
+      @include opacity(0.8);
+    }
   }
 
   .intro__widjet_twitter {
     margin-top: 40px;
+
+    iframe {
+    width: 100% !important;
+    }
   }
 } //.holyride--intro
 

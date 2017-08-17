@@ -273,7 +273,7 @@ streampack初期化コード
     endif;
     ?>
     <?php if ( $page['ua'] == 'desktop' && !isset($_GET['debug']) ) :?>
-    $embed.find('source').attr('src', 'https://d3ujz00se92hl8.cloudfront.net/live_sb/bball.m3u8' + '?timestamp=' + timestamp );
+    $embed.find('source').attr('src', 'https://d3t6uer7w31bug.cloudfront.net/live_sb/rb.m3u8' + '?timestamp=' + timestamp );
     <?php else : ?>
     $embed.find('source').attr('src', data.video.source + '?timestamp=' + timestamp );
     <?php endif ;?>
