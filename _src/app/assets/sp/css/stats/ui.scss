@@ -918,6 +918,15 @@ $bg-color_gray: #e6e6e6;
             width: 33.3333% !important;
           }
         }
+
+        // 公式戦/プレーオフ/ワールドシリーズ/タブを非表示
+        // ref.https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-26#comment-1174357231
+        > li:nth-child(1),
+        > li:nth-child(2),
+        > li:nth-child(3),
+        > li:nth-child(4) {
+          display: none;
+        }
       }
 
       dl.SJ_sub-in {
@@ -996,6 +1005,21 @@ $bg-color_gray: #e6e6e6;
           margin-top: -10px;
         }
       }
+
+      // 試合結果タブを非表示
+      // ref.https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-26#comment-1174357231
+      > li:first-child {
+        display: none;
+      }
+
+      > li {
+        width: 50%;
+      }
+
+      > li:last-child {
+        border-right: none;
+      }
+
     }// MLBローカルメニュー #SJ_tabs-area
 
   }
