@@ -24,6 +24,48 @@ import DaeGameInfo from '../../dae/games/DaeGameInfo';
 import Style from '../../define/Style';
 
 /**
+ * 上部スコア - data が無い時は空で出力します
+ * @returns {XML} div.mlb_live__overview
+ * @constructor
+ * @since 2017-08-17
+ * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+ */
+const ComOverviewEmpty = () => {
+  const teamClass = 'mlb_live__overview__team';
+  // render
+  return (
+    <div className="mlb_live__overview">
+      <div className="mlb_live__overview__inner">
+        <p className={`${teamClass} ${teamClass}--home`}>
+          &nbsp;
+        </p>
+        <div className="mlb_live__overview__info">
+          <p className="mlb_live__overview__info__date">&nbsp;</p>
+          <p className="mlb_live__overview__info__score">
+            <span className="mlb_live__overview__info__score--home">
+              &nbsp;
+            </span>
+            <span className="mlb_live__overview__info__score--vs">vs</span>
+            <span className="mlb_live__overview__info__score--visitor">
+              &nbsp;
+            </span>
+          </p>
+          <p className="mlb_live__overview__info__status">
+            &nbsp;
+          </p>
+          <p className="mlb_live__overview__info__place">
+            &nbsp;
+          </p>
+        </div>
+        <p className={`${teamClass} ${teamClass}--visitor`}>
+          &nbsp;
+        </p>
+      </div>
+    </div>
+  );
+};
+
+/**
  * GAME: 上部対戦成績
  * @param {?DaeGameInfo} info JSON - game_info.json
  * @returns {?XML} div.mlb_live__overview
@@ -32,7 +74,11 @@ import Style from '../../define/Style';
 const ComOverview = ({ info }) => {
   // console.log('ComOverview info', info);
   if (!info) {
-    return null;
+    // 空タグを出力する
+    // @since 2017-08-17
+    // @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+    return <ComOverviewEmpty />;
+    // return null;
   }
   // -----
   const teamClass = 'mlb_live__overview__team';

@@ -621,7 +621,119 @@ export default class ComScore extends Component {
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
-
+  /**
+   * data 不正の時に空タグを出力します
+   * @returns {XML} section.mlb_live__scoreboard__th--team
+   * @since 2017-08-17
+   * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+   */
+  static empty() {
+    const thClass = 'mlb_live__scoreboard__th--team';
+    return (
+      <section className="mlb_live__scoreboard__section">
+        <div className="mlb_live__scoreboard">
+          {/* left */}
+          <div className="mlb_live__scoreboard__column mlb_live__scoreboard__column--team">
+            <table className="mlb_live__scoreboard__table mlb_live__scoreboard__table--team">
+              <thead>
+                <tr><th>&nbsp;</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className={`${thClass} ${thClass}--visitor`}>
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr>
+                  <td className={`${thClass} ${thClass}--home`}>
+                    &nbsp;
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          {/* center */}
+          <div className="mlb_live__scoreboard__column mlb_live__scoreboard__column--score">
+            <table className="mlb_live__scoreboard__table mlb_live__scoreboard__table--score">
+              <thead>
+                <tr>
+                  <th className="mlb_live__scoreboard__th--inning">1</th>
+                  <th className="mlb_live__scoreboard__th--inning">2</th>
+                  <th className="mlb_live__scoreboard__th--inning">3</th>
+                  <th className="mlb_live__scoreboard__th--inning">4</th>
+                  <th className="mlb_live__scoreboard__th--inning">5</th>
+                  <th className="mlb_live__scoreboard__th--inning">6</th>
+                  <th className="mlb_live__scoreboard__th--inning">7</th>
+                  <th className="mlb_live__scoreboard__th--inning">8</th>
+                  <th className="mlb_live__scoreboard__th--inning">9</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          {/* right */}
+          <div className="mlb_live__scoreboard__column mlb_live__scoreboard__column--count">
+            <table className="mlb_live__scoreboard__table mlb_live__scoreboard__table--count">
+              <thead>
+                <tr>
+                  <th className="mlb_live__scoreboard__th--sum">計</th>
+                  <th className="mlb_live__scoreboard__th--hit">安</th>
+                  <th className="mlb_live__scoreboard__th--error">失</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="mlb_live__scoreboard__td--sum">
+                    &nbsp;
+                  </td>
+                  <td className="mlb_live__scoreboard__td--hit">
+                    &nbsp;
+                  </td>
+                  <td className="mlb_live__scoreboard__td--error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr>
+                  <td className="mlb_live__scoreboard__td--sum">
+                    &nbsp;
+                  </td>
+                  <td className="mlb_live__scoreboard__td--hit">
+                    &nbsp;
+                  </td>
+                  <td className="mlb_live__scoreboard__td--error">
+                    &nbsp;
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    );
+  }
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------
@@ -723,7 +835,9 @@ export default class ComScore extends Component {
   render() {
     const { info } = this.props;
     if (!info) {
-      return null;
+      // data 不正時 からタグを出力する
+      return ComScore.empty();
+      // return null;
     }
     // render
     return (

@@ -245,6 +245,158 @@ export default class ComMember extends Component {
     this.props.cb(tab);
   }
   /**
+   * data 不正の時に空タグを出力します
+   * @returns {XML} div.mlb_live__record__container
+   * @since 2017-08-17
+   * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+   */
+  emptyChoose() {
+    const tab = this.state.tab;
+    switch (tab) {
+      case 'batter': {
+        return (
+          <div className="mlb_live__record__container mlb_live__record__container--batter">
+            <table className="mlb_live__record mlb_live__record--home">
+              <caption className="mlb_live__record__heading">&nbsp;</caption>
+              <thead>
+                <tr>
+                  <th className="mlb_live__record__th">位置</th>
+                  <th className="mlb_live__record__th">選手</th>
+                  <th className="mlb_live__record__th">通算打率</th>
+                  <th className="mlb_live__record__th">打数</th>
+                  <th className="mlb_live__record__th">安打</th>
+                  <th className="mlb_live__record__th">打点</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td className="t-left">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th className="mlb_live__record__th" colSpan={2}>合計</th>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tfoot>
+            </table>
+            <table className="mlb_live__record mlb_live__record--visitor">
+              <caption className="mlb_live__record__heading">&nbsp;</caption>
+              <thead>
+                <tr>
+                  <th className="mlb_live__record__th">位置</th>
+                  <th className="mlb_live__record__th">選手</th>
+                  <th className="mlb_live__record__th">通算打率</th>
+                  <th className="mlb_live__record__th">打数</th>
+                  <th className="mlb_live__record__th">安打</th>
+                  <th className="mlb_live__record__th">打点</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td className="t-left">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th className="mlb_live__record__th" colSpan={2}>合計</th>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        );
+      }
+      case 'pitcher': {
+        return (
+          <div className="mlb_live__record__container mlb_live__record__container--pitcher">
+            <table className="mlb_live__record mlb_live__record--home">
+              <caption className="mlb_live__record__heading">&nbsp;</caption>
+              <thead>
+                <tr>
+                  <th className="mlb_live__record__th">勝敗・セーブ</th>
+                  <th className="mlb_live__record__th">選手</th>
+                  <th className="mlb_live__record__th">防御率</th>
+                  <th className="mlb_live__record__th">投球回数</th>
+                  <th className="mlb_live__record__th">投球数(ストライク)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td className="t-left">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+            <table className="mlb_live__record mlb_live__record--visitor">
+              <caption className="mlb_live__record__heading">&nbsp;</caption>
+              <thead>
+                <tr>
+                  <th className="mlb_live__record__th">勝敗・セーブ</th>
+                  <th className="mlb_live__record__th">選手</th>
+                  <th className="mlb_live__record__th">防御率</th>
+                  <th className="mlb_live__record__th">投球回数</th>
+                  <th className="mlb_live__record__th">投球数(ストライク)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td className="t-left">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+      default:
+        return null;
+    }
+  }
+  /**
+   * data 不正の時に空タグを出力します
+   * @returns {XML} div.js-member-container
+   * @since 2017-08-17
+   * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+   */
+  empty() {
+    return (
+      <div className="js-member-container">
+        <ComMemberTab
+          change={this.onChange}
+          tab={this.props.tab}
+        />
+        <section className="mlb_live__record__section">
+          {
+            this.emptyChoose()
+          }
+        </section>
+      </div>
+    );
+  }
+  /**
    * 引数 `tab` で表示切替をします
    * - 打者成績
    * - 投手成績
@@ -302,7 +454,8 @@ export default class ComMember extends Component {
     const { info, member } = this.props;
     // console.log('ComMember.render info, member', info, member, this.state);
     if (!info || !member) {
-      return null;
+      return this.empty();
+      // return null;
     }
     return (
       <div className="js-member-container">
