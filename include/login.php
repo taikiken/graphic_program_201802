@@ -2,6 +2,11 @@
 
 if(strlen(getSorC("mid"))>0){
 	header("Location:./index_s.php");
+}else{
+	foreach($_COOKIE as $k=>$v){
+		setcookie($k,"",time()-3600,"/editdm/");
+		setcookie($k,"",time()-3600,"/");
+	}	
 }
 
 $err=0;
@@ -11,7 +16,7 @@ if(isset($_POST["p_usr"])){
 	$usr=mod_HTML($_POST["p_usr"]);
 	$pwd=mod_HTML($_POST["p_pwd"]);
 
-	$sql="select id,usr,m,pwd,email,repo,permission,systems from authentic where usr='".addslashes($usr)."'";
+	$sql="select id,usr,m,pwd,email,repo,permission,systems,is_external from authentic where usr='".addslashes($usr)."'";
 	$o->query($sql);
 	$f=$o->fetch_array();
 
@@ -19,9 +24,9 @@ if(isset($_POST["p_usr"])){
 	if($f['pwd']==md5($MAGIC_STRING.$pwd)){
 
 		if($ADMINUSR==0){
-			setcookie("adminusr",1,time()+60*60*24*365,"/");
+			setcookie("adminusr",1,time()+60*60*24,"/editdm/");
 		}else{
-			setcookie("adminusr","",time()-3600,"/");
+			setcookie("adminusr","",time()-3600,"/editdm/");
 		}
 
 		if($SORC==1){
@@ -76,8 +81,16 @@ if(isset($_POST["p_usr"])){
 					setSorC($permission[$i],0);
 				}
 			}
+			if($f['usr'] == 'ut') {
+			    setSorC('suadmin',1);
+            }
 			setSorC("repo",($f["repo"]));
 		}
+        if(false === empty($f['is_external']) && $f['is_external'] > 0) {
+            setSorC('is_external',1);
+        } else {
+            setSorC('is_external',0);
+        }
 
 		$alv=addslashes($f["m"]);
 		$usr=addslashes($usr);

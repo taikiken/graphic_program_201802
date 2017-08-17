@@ -30,8 +30,11 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
       endif;
       $photo = [];
       $photo = $app->model->get_photo($post['id']);
-      $id = isset($_GET['id']) ? '?id=' . $_GET['id'] : '';
+      $id = '?';
       if(count($photo) > 0):
+          foreach($_GET as $k => $v):
+              $id .= $k . '=' . $v . '&';
+          endforeach;
           header('Location: ' . $app->model->property('site_url').'a/'.$post['id'].'/' . $id);
           exit();
       endif;

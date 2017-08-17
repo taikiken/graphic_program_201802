@@ -78,8 +78,6 @@ for($i=0;$i<count($data);$i++){
 
 	$body=sprintf("<p>%s</p>",count($data[$i]["content"]["p"])>1?implode("</p><p>",$data[$i]["content"]["p"]):$data[$i]["content"]["p"]);
 
-
-
 	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data[$i]["pubDate"]));
 
 	if(strlen($data[$i]["lastUpdate"])>0){
@@ -94,10 +92,14 @@ for($i=0;$i<count($data);$i++){
 		$s["t30"]=$data[$i]["enclosure"]["@attributes"]["url"];
 		$s["t1"]=$data[$i]["title"];
 	}
+	else {
+		//画像が無ければ無視
+		continue;
+	}
 
 	$body=$data[$i]["description"];
 	$modbody=str_replace("\'","''",preg_replace("/(\r|\n|\t)/","",$body));
-
+	
 	$s["m1"]=category_mapping($r,array($keyword,$s["title"],$s["t1"],$body[0],$body[1]));
 
 	$tag=categorymatching($exword,$keyword);
@@ -115,6 +117,7 @@ for($i=0;$i<count($data);$i++){
 		}
 		if(count($e)>0&&$tag[0]!="プロ野球")array_unshift($tag,"プロ野球");
 	}
+
 	if(count($tag)>0){
 		for($cnt=0;$cnt<count($tag);$cnt++){
 			if($cnt==6)break;
@@ -122,7 +125,7 @@ for($i=0;$i<count($data);$i++){
 		}
 	}
 
-	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t9='%s'",$MEDIAID,$data[$i]["guid"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data[$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 
@@ -130,7 +133,7 @@ for($i=0;$i<count($data);$i++){
 
 	if(strlen($f["id"])>0){
 
-		if($s["a_time"]!=$f["a_time"]){
+		if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 			if(strlen($s["t30"])>0){
 				if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
 			}else{
@@ -143,6 +146,9 @@ for($i=0;$i<count($data);$i++){
 			if ($data[$i]["status"] == 0){
 				//削除フラグがあればフラグを
 				$s["flag"]=0;
+			}
+			else {
+				$s["flag"]=1;
 			}
 
 			splittime($s["m_time"],$s["a_time"]);
@@ -166,6 +172,9 @@ for($i=0;$i<count($data);$i++){
 		$s["m4"]=$data[$i]["media"]=="flash"?131:132; /* 速報 */
 		$s["flag"]=1;
 		$s["cid"]=1;
+		if(preg_match("/^<p>　「全国高校野球選手権/",$modbody)){
+			$s["m1"]=136;
+		}
 		$s["n"]="(select max(n)+1 from repo_n where cid=1)";
 		//$s["id"]="(select max(id)+1 from repo_n)";
 		if(strlen($s["t30"])>0)$s["img1"]=outimg($s["t30"]);

@@ -13,6 +13,7 @@ if($q->get_dir()===0){
 		data_sql();
 		
 		if(count($sn)>0){
+
 			if($_POST["POSITION"]!=1){
 				$sql="update authentic set n=(n+1)";
 				$o->query($sql);
@@ -27,7 +28,7 @@ if($q->get_dir()===0){
 			$sv[$sn[]="flag"]=1;
 			$sv[$sn[]="m_time"]="now()";
 			$sv[$sn[]="u_time"]="now()";
-			
+
 			$o=new dbutl("authentic",$sn,$sv);
 			$e=$o->insert();
 		}
@@ -38,7 +39,11 @@ if($q->get_dir()===0){
 		$sql="select * from authentic where id=".$g->f("id");
 		$o->query($sql);
 		$p=$o->fetch_array();
-		
+
+		if($p['is_external'] === 1) {
+		    $p[] = 174;
+            $p['external'] = 174;
+        }
 		include $INCLUDEPATH."formback.php";
 	}elseif($q->get_file()===1){
 

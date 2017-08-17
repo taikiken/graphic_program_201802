@@ -20,7 +20,8 @@ function put_json($file,$data){
 
 $mvtype=array("highlight","digest","slowmotion","herointerview");
 
-$json="https://dev.widget.sportsbull.jp/json/v1/2017/hsb/summer/seasonschedule.json";
+$json="https://widget.sportsbull.jp/json/v1/2017/hsb/summer/seasonschedule.json";
+if(!preg_match("/cms/",$servername))$json=str_replace("widget","dev.widget",$json);
 $schedule=json_decode(get_contents($json),TRUE);
 
 foreach($schedule as $k=>$v){
@@ -33,7 +34,7 @@ foreach($schedule as $k=>$v){
 $o=new db;
 $o->connect();
 
-$sql="select id,title,img1,t7,t11,u_time from repo_n where d2=26 and flag=1 and t11!='感動甲子園' order by m_time desc";
+$sql="select id,title,img1,t7,t11,u_time from repo_n where d2=26 and flag=1 and t11!='感動甲子園' order by u_time desc";
 $o->query($sql);
 while($f=$o->fetch_array()){
 	$gid=explode("_",$f["t7"]);
@@ -47,21 +48,20 @@ while($f=$o->fetch_array()){
 }
 
 foreach($games as $k=>$v){
+	
 	$y["request"]["gameid"]=$k;
+	$update=strtotime($v[0]["u_time"]);
+	$json=sprintf("%s/%s.json",$bucket,$k);
+	if(file_exists($json)&&filemtime($json)>$update)continue;
+	
+	$y["response"]["lastupdate"]=$v[0]["u_time"];
+	$y["response"]["schedule"]["date"]=$gameid[$k]["date"];
+	$y["response"]["schedule"]["sequence"]=$gameid[$k]["sequence"];
+	for($j=0;$j<count($mvtype);$j++){
+		$y["response"]["media"][$mvtype[$j]]=array("title"=>"","img"=>"","movie"=>"");
+	}
+	
 	for($i=0;$i<count($v);$i++){
-		if($i==0){
-			
-			$update=strtotime($v[0]["u_time"]);
-			$json=sprintf("%s/%s.json",$bucket,$k);
-			if(file_exists($json)&&filemtime($json)>$update)continue;
-			
-			$y["response"]["lastupdate"]=$v[0]["u_time"];
-			$y["response"]["schedule"]["date"]=$gameid[$k]["date"];
-			$y["response"]["schedule"]["sequence"]=$gameid[$k]["sequence"];
-			for($j=0;$j<count($mvtype);$j++){
-				$y["response"]["media"][$mvtype[$j]]=array("title"=>"","img"=>"","movie"=>"");
-			}
-		}
 		$y["response"]["media"][$v[$i]["type"]]=array("title"=>$v[$i]["title"],"img"=>$v[$i]["img"],"movie"=>$v[$i]["movie"]);
 	}
 	put_json($json,$y);
@@ -69,7 +69,7 @@ foreach($games as $k=>$v){
 
 unset($y);
 
-$sql="select id,title,img1,t7,t11,u_time from repo_n where d2=26 and flag=1 and t11='感動甲子園' order by m_time desc";
+$sql="select id,title,img1,t7,t11,u_time from repo_n where d2=26 and flag=1 and t11='感動甲子園' order by u_time desc";
 $o->query($sql);
 while($f=$o->fetch_array()){
 	$excite[]=array(

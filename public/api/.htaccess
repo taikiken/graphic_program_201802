@@ -48,6 +48,7 @@ RewriteRule ^v1/articles/self /api/ver1/read/articlelist.php?api=self [L,QSA]
 RewriteRule ^v1/articles/home/([a-z]+) /api/ver1/read/articlelist.php?api=home&c=$1 [L,QSA]
 RewriteRule ^v1/articles/home /api/ver1/read/articlelist.php?api=home [L,QSA]
 RewriteRule ^v1/articles/static/([a-z0-9_-]+) /api/ver1/read/articlelist.php?api=static&subcategory=$1 [L,QSA]
+RewriteRule ^v1/articles/video/([a-z0-9_-]+) /api/ver1/read/movielist.php?category=$1 [L,QSA]
 
 
 RewriteRule ^v1/articles/fast/([a-z]+)/([a-z]+) /api/ver1/read/articleFast.php?api=category&category=$1&type=$2 [L,QSA]

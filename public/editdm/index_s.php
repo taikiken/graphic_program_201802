@@ -33,7 +33,7 @@ var rid=5;
 <?php include "langswitch.php" ?>
 <ul class="utilityMenu clearfix">
 <li><a href="<?=$ADPATH?>logout/">ログアウト</a></li>
-<li><a href="<?=$ADPATH?>log/">操作履歴</a></li>
+<!--<li><a href="<?=$ADPATH?>log/">操作履歴</a></li>-->
 </ul>
 </div><form name="f">
 <div id="headerArea">
@@ -92,6 +92,13 @@ var rid=5;
 <td class="menuChild"><a href="./mailtemplate/" class="folder">フォームテンプレート</a></td>
 </tr>
 <?php } ?>
+<?php }elseif(getSorC("usr")=="ut"){ ?>
+<tr>
+    <th class="menuTitle" scope="col">総合管理ツール</th>
+</tr>
+<tr>
+    <td class="menuChild"><a href="./authentic/" class="folder">投稿者管理</a></td>
+</tr>
 <?php } ?>
 <?php if(strlen(getSorC("repo"))>0){ ?>
 <tr>
@@ -153,6 +160,14 @@ for($i=0;$i<count($p);$i++){
 <td class="menuChild"><a href="./clickenquete/">クリックアンケート管理</a></td>
 </tr>
 -->
+
+<?php if(getSorC("usr")==="inhigh"){ ?>
+<tr>
+<td class="menuChild">
+<a href="./photo/" class="folder">フォトアルバム管理</a>
+</td>
+</tr>
+<?php } ?>
 </tbody>
 </table>
 <div id="pageCommand"></div>
