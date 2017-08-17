@@ -28,6 +28,10 @@
   .main-sec {
     padding-bottom: (40/2)+px;
   }
+
+  .side-sec {
+    padding-bottom: (80/2)+px;
+  }
 }
 
 
@@ -116,8 +120,39 @@
     }
   }
 
+  .intro__timetable {
+    margin-top: (32/2)+px;
+
+    table {
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: (8/2)+px perCalc(20, 640);
+      color: #fff;
+      font-size: (24/2)+px;
+    }
+
+    th {
+      width: 30%;
+      font-style: italic;
+    }
+
+    td {
+      padding-left: 0;
+      font-weight: bold;
+    }
+
+    tr:nth-child(odd) {
+      th, td {
+        background-color: #1c2129;
+      }
+    }
+  }
+
   .intro__banner {
-    margin-top: (40/2)+px;
+    margin-top: (32/2)+px;
   }
 
   .intro__widjet_twitter {
