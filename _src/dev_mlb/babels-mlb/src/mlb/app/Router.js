@@ -39,7 +39,7 @@ export default class Router {
       return state;
     } else if (length === 3) {
       const id = directories.pop();
-      console.log('Router.index', id, id.match(/\d{8}/));
+      // console.log('Router.index', id, id.match(/\d{8}/));
       // YYYYMMDD check
       if (id.match(/\d{8}/)) {
         state.id = id;

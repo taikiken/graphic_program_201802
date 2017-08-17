@@ -74,7 +74,7 @@ const ComOptionTypes = ({ types, change }) => (
           <option value="">すべての試合</option>
           {
             types.list.map((type) => {
-              console.log('type', type);
+              // console.log('type', type);
               const id = Print.int(type.id);
               const typeName = Print.str(type.type);
               if (!id || !typeName) {
@@ -254,7 +254,7 @@ export default class ComSchedule extends Component {
     this.setState({
       type: id || 'all',
     });
-    console.log('onChangeTypes event', event.target.value, event, this.state.type);
+    // console.log('onChangeTypes event', event.target.value, event, this.state.type);
   }
   /**
    * type select.onChange event handler
@@ -268,7 +268,7 @@ export default class ComSchedule extends Component {
     this.setState({
       team: id || 'all',
     });
-    console.log('onChangeTeams event', event.target.value, event, this.state.team);
+    // console.log('onChangeTeams event', event.target.value, event, this.state.team);
   }
   /**
    * nav.onClick event handler

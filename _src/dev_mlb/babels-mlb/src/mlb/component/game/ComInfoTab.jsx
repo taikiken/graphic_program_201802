@@ -67,7 +67,7 @@ export default class ComInfoTab extends Component {
    */
   onClick(event) {
     event.preventDefault();
-    console.log('ComNav.onClick', event);
+    // console.log('ComNav.onClick', event);
     const target = event.target;
     // const tab = target.dataset.tab;
     const tab = target.href.split('#').pop();

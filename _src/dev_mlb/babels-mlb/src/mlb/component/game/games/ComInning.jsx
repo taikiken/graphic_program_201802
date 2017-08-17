@@ -176,6 +176,19 @@ const inningsBody = (inning, event, type, info, count) => (
  */
 const ComInningsEvent = ({ type, team, inning, info }) => {
   // 最終回で home team の攻撃が無い時は出力しません
+  // 9 回未満を足す - 207-08-17
+  if (
+    type === 'home' && (
+      !info.home ||
+      !info.home.board ||
+      !info.home.board.scores ||
+      !info.home.board.scores.score ||
+      !info.home.board.scores.score[inning] ||
+      !info.home.board.scores.score[inning].score
+    )
+  ) {
+    return null;
+  }
   if (
     type === 'home' &&
     inning === info.innings &&

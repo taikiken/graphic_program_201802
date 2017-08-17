@@ -44,11 +44,3 @@ if (!window.Promise) {
 
 // main execute
 Main.init();
-
-// // remove test code below
-// const MLB = {
-//   Test,
-// };
-//
-// // export MLB;
-// self.MLB = MLB;

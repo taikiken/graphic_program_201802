@@ -107,7 +107,7 @@ ComPitching.propTypes = {
  * @constructor
  */
 const ComPlayer = ({ player }) => {
-  console.log('ComJaPlayer player', player);
+  // console.log('ComJaPlayer player', player);
   // 投手でも type が 'batting' になっている
   // const batting = player.type === 'batting';
   // const ComType = batting ? ComBatting : ComPitching;
@@ -353,7 +353,7 @@ const ComJapanese = ({ japanese, date }) => {
   if (!japanese.has()) {
     return null;
   }
-  console.log('ComJapanese japanese', japanese, date);
+  // console.log('ComJapanese japanese', japanese, date);
   const today = Day.today();
   // render
   return (

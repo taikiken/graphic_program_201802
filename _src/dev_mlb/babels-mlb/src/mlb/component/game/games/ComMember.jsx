@@ -111,7 +111,7 @@ ComPitchers.propTypes = {
  */
 const ComBatters = ({ players, type, team }) => {
   // TODO: players.members.batters Sort - 打席順 + 出場順
-  console.log('ComBatters players', players);
+  // console.log('ComBatters players', players);
   // 打数, 安打, 打点 を合計します
   let bats = 0;
   let hits = 0;
@@ -240,7 +240,7 @@ export default class ComMember extends Component {
    * @param {string} tab tab 名称
    */
   onChange(tab) {
-    console.log('ComMember.onChange', tab);
+    // console.log('ComMember.onChange', tab);
     this.setState({ tab });
     this.props.cb(tab);
   }
@@ -253,7 +253,7 @@ export default class ComMember extends Component {
    */
   choose(tab) {
     const { info, member } = this.props;
-    console.log('ComMember.choose', tab, info, member);
+    // console.log('ComMember.choose', tab, info, member);
     switch (tab) {
       case 'batter': {
         return (
@@ -300,7 +300,7 @@ export default class ComMember extends Component {
    */
   render() {
     const { info, member } = this.props;
-    console.log('ComMember.render info, member', info, member, this.state);
+    // console.log('ComMember.render info, member', info, member, this.state);
     if (!info || !member) {
       return null;
     }

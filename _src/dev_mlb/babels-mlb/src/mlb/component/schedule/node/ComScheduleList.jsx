@@ -311,7 +311,7 @@ export default class ComScheduleList extends Component {
     if (type !== nextProps.type) {
       update = true;
     }
-    console.log('ComScheduleList shouldComponentUpdate', nextProps, update);
+    // console.log('ComScheduleList shouldComponentUpdate', nextProps, update);
     return update;
   }
   /**
@@ -326,7 +326,7 @@ export default class ComScheduleList extends Component {
   render() {
     // select / option の値
     const { team, type, date } = this.props;
-    console.log('ComScheduleList.render team, type', team, type);
+    // console.log('ComScheduleList.render team, type', team, type);
     return (
       <div className="mlb__schedule__result__section">
         {
