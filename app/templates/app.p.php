@@ -108,9 +108,11 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     // response.theme.images.pc
     // response.description
     if ( $page['theme']['images']['sp'] ) : ?>
-      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
-        <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
-      </div>
+      <?php if(!isset($_GET['id'])):?>
+          <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
+            <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+          </div>
+      <?php endif;?>
     <?php endif;
     // eof: 記事詳細: sp
     // ---------------------------------------------------- ?>
