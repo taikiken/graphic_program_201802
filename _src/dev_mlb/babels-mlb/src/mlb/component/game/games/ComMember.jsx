@@ -37,8 +37,8 @@ import Print from '../../../util/Print';
  * @constructor
  */
 const ComPitchers = ({ players, type, team, info }) => {
-  console.log('ComPitchers players', players);
-  // TODO: players.members.pitchers Sort - 登板順
+  // console.log('ComPitchers players', players);
+  // players.members.pitchers Sort - 登板順
   const win = info.win;
   const lose = info.lose;
   const save = info.save;
@@ -205,7 +205,7 @@ export default class ComMember extends Component {
   };
   /**
    * defaultProps
-   * @type {{info: ?DaeGameInfo, member: ?DaeMemberInfo, tab: string}}
+   * @type {{info: ?DaeGameInfo, member: ?DaeMemberInfo}}
    */
   static defaultProps = {
     info: null,
