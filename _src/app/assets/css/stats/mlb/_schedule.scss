@@ -165,6 +165,8 @@
     padding-bottom: 20px;
     border-bottom: 1px solid #dbdbdb;
 
+    // フォントサイズを下げる/レイアウト変更
+    // ref.https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-26#comment-1174357231
     //.mlb__game__overview
     .mlb__game__overview {
       //.mlb__game__overview__team
@@ -172,6 +174,7 @@
         font-size: 14px;
       }
 
+      //.mlb__game__overview__info
       &__info {
         position: relative;
 
@@ -207,8 +210,8 @@
           padding: 4px 6px;
           font-size: 10px;
         }
-      }
-    }
+      } //.mlb__game__overview__info
+    } //.mlb__game__overview
   } //.mlb__today_jp__container
 
 
@@ -455,10 +458,59 @@
     //.mlb__schedule__result__container
     &__container {
       margin-top: 24px;
+
+      // フォントサイズを下げる/レイアウト変更
+      // ref.https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-26#comment-1174357231
+      //.mlb__game__overview
+      .mlb__game__overview {
+        //.mlb__game__overview__team
+        &__team {
+          font-size: 14px;
+        }
+
+        //.mlb__game__overview__info
+        &__info {
+          position: relative;
+
+          //.mlb__game__overview__info__place
+          &__place {
+            margin-bottom: 8px;
+            font-size: 10px;
+          }
+
+          //.mlb__game__overview__info__score
+          &__score {
+            //.mlb__game__overview__info__score--home
+            //.mlb__game__overview__info__score--visitor
+            &--home,
+            &--visitor {
+              width: 18%;
+              font-size: 16px;
+            }
+
+            //.mlb__game__overview__info__score--vs
+            &--vs {
+              // font-size: 16px;
+              @include hide-text;
+            }
+          }
+
+          //.mlb__game__overview__info__status
+          &__status {
+            position: absolute;
+            top: 2.3em;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 6px;
+            font-size: 10px;
+          }
+        } //.mlb__game__overview__info
+      } //.mlb__game__overview
     }
 
     //.mlb__schedule__result__heading
     &__heading {
+      margin-top: 24px;
       padding: 2px 0;
       margin-bottom: 16px;
       border-bottom: 3px solid $highlight-color;
@@ -466,6 +518,7 @@
       font-weight: bold;
       font-size: 18px;
     }
+
   } //.mlb__schedule__result
 
 
