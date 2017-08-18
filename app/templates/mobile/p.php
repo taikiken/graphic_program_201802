@@ -12,9 +12,11 @@
     // response.theme.images.pc
     // response.description
     if ( $page['theme']['images']['sp'] ) : ?>
-      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
-        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
-      </div>
+      <?php if(!isset($_GET['id'])):?>
+        <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
+          <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
+        </div>
+      <?php endif;?>
     <?php endif;
     // eof: 記事詳細: sp
     // ---------------------------------------------------- ?>
@@ -118,7 +120,6 @@
                   </div>
                         <?php else:?>
                         <div id="detail-photoalbum">
-                            <p class="lead"><?php echo $page['post']['description'];?></p>
                             <nav class="nav-photoalbum">
                                 <p class="prev">
                                     <?php if($_GET['id'] == 1):?>
