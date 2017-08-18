@@ -175,7 +175,7 @@ const inningsBody = (inning, event, type, info, count) => (
  * @constructor
  */
 const ComInningsEvent = ({ type, team, inning, info }) => {
-  console.log('ComInningsEvent', type, team, inning, info);
+  // console.log('ComInningsEvent', type, team, inning, info);
   // home team データチェックを追加します - 2017-08-17
   // if (
   //   type === 'home' && (
@@ -331,7 +331,7 @@ ComInningsEvents.propTypes = {
  */
 const ComInning = ({ innings, info }) => {
   const events = innings.opposite;
-  console.log('ComInning events', innings, events);
+  // console.log('ComInning events', innings, events);
   // render
   return (
     <div className="mlb_live__inning__section">

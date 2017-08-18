@@ -220,27 +220,30 @@ const ComGame = ({ game, date, today }) => {
   const teamClass = 'mlb__game__overview__team';
   // render
   // 未来のゲームはリンクしない
+  let query = '';
   if (date.full > today.full) {
     // console.log('div.mlb__game__overview__no_link');
-    return (
-      <div
-        className="mlb__game__overview__no_link"
-        data-href={`/stats/mlb/game/${date.year}/${game.id}/`}
-      >
-        <ComGameDetail
-          game={game}
-          homeClass={homeClass}
-          visitorClass={visitorClass}
-          statusClass={statusClass}
-          teamClass={teamClass}
-        />
-      </div>
-    );
+    // eslint-disable-next-line max-len
+    query = `?home=${game.home.team}&visitor=${game.visitor.team}&stadium=${game.stadium}&title=${Day.title(date)}`;
+    // return (
+    //   <div
+    //     className="mlb__game__overview__no_link"
+    //     data-href={`/stats/mlb/game/${date.year}/${game.id}/`}
+    //   >
+    //     <ComGameDetail
+    //       game={game}
+    //       homeClass={homeClass}
+    //       visitorClass={visitorClass}
+    //       statusClass={statusClass}
+    //       teamClass={teamClass}
+    //     />
+    //   </div>
+    // );
   }
   // a
   return (
     <a
-      href={`/stats/mlb/game/${date.year}/${game.id}/`}
+      href={`/stats/mlb/game/${date.year}/${game.id}/${query}`}
       className="mlb__game__overview__link"
     >
       <ComGameDetail

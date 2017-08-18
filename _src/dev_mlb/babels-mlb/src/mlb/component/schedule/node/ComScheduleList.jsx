@@ -102,28 +102,33 @@ const ComGame = ({ game, team, date, today }) => {
   const statusClass = game.className;
   // render
   // 未来のゲームはリンクしない
+  // 未来のゲームはリンクしない - deprecated
+  // 未来のゲームもリンクつける - リンク先のために home / visitor / stadium / date をクエリ送信する
+  let query = '';
   if (date.full > today.full) {
     // console.log('div.mlb__game__overview__no_link');
-    return (
-      <div
-        className="mlb__game__overview__no_link"
-        data-href={`/stats/mlb/game/${date.year}/${game.id}/`}
-      >
-        <ComGameDetail
-          game={game}
-          homeClass={homeClass}
-          visitorClass={visitorClass}
-          statusClass={statusClass}
-          teamClass={teamClass}
-        />
-      </div>
-    );
+    // eslint-disable-next-line max-len
+    query = `?home=${game.home.team}&visitor=${game.visitor.team}&stadium=${game.stadium}&title=${Day.title(date)}`;
+    // return (
+    //   <a
+    //     href={`/stats/mlb/game/${date.year}/${game.id}/${query}`}
+    //     className="mlb__game__overview__link"
+    //   >
+    //     <ComGameDetail
+    //       game={game}
+    //       homeClass={homeClass}
+    //       visitorClass={visitorClass}
+    //       statusClass={statusClass}
+    //       teamClass={teamClass}
+    //     />
+    //   </a>
+    // );
   }
   // ----
   // console.log('a.mlb__game__overview__link');
   return (
     <a
-      href={`/stats/mlb/game/${date.year}/${game.id}/`}
+      href={`/stats/mlb/game/${date.year}/${game.id}/${query}`}
       className="mlb__game__overview__link"
     >
       <ComGameDetail

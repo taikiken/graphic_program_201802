@@ -14,6 +14,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// moku/net
+import Queries from '../../../moku/net/Queries';
+
 // util
 import Print from '../../util/Print';
 
@@ -25,6 +28,7 @@ import Style from '../../define/Style';
 
 /**
  * 上部スコア - data が無い時は空で出力します
+ * home / visitor /stadium / data(title) をクエリから出力します
  * @returns {XML} div.mlb_live__overview
  * @constructor
  * @since 2017-08-17
@@ -32,15 +36,21 @@ import Style from '../../define/Style';
  */
 const ComOverviewEmpty = () => {
   const teamClass = 'mlb_live__overview__team';
+  const queryList = Queries.getAll();
+  const queryListFirst = Array.isArray(queryList) ? queryList[0] : {};
+  const queries = queryListFirst || {};
+  // home / visitor /stadium / data(title) をクエリから出力します
   // render
   return (
     <div className="mlb_live__overview">
       <div className="mlb_live__overview__inner">
         <p className={`${teamClass} ${teamClass}--home`}>
-          &nbsp;
+          {decodeURIComponent(Print.str(queries.home))}
         </p>
         <div className="mlb_live__overview__info">
-          <p className="mlb_live__overview__info__date">&nbsp;</p>
+          <p className="mlb_live__overview__info__date">
+            {decodeURIComponent(Print.str(queries.title))}
+          </p>
           <p className="mlb_live__overview__info__score">
             <span className="mlb_live__overview__info__score--home">
               &nbsp;
@@ -50,15 +60,15 @@ const ComOverviewEmpty = () => {
               &nbsp;
             </span>
           </p>
-          <p className="mlb_live__overview__info__status">
-            &nbsp;
+          <p className="mlb_live__overview__info__status mlb_live__overview__info__status--before">
+            試合前
           </p>
           <p className="mlb_live__overview__info__place">
-            &nbsp;
+            {decodeURIComponent(Print.str(queries.stadium))}
           </p>
         </div>
         <p className={`${teamClass} ${teamClass}--visitor`}>
-          &nbsp;
+          {decodeURIComponent(Print.str(queries.visitor))}
         </p>
       </div>
     </div>

@@ -315,8 +315,9 @@ ComScoreInningsHead.propTypes = {
  * @returns {XML} tr > td
  * @constructor
  */
+// eslint-disable-next-line arrow-body-style
 const ComScoreVisitor = ({ visitor, start, boards, innings }) => {
-  console.log('ComScoreVisitor', visitor, start, boards, innings);
+  // console.log('ComScoreVisitor', visitor, start, boards, innings);
   return (
     <tr>
       {
@@ -401,8 +402,9 @@ const scoreAlpha = (home, visitor, inning, innings) => {
  * @returns {XML} tr > td
  * @constructor
  */
+// eslint-disable-next-line arrow-body-style
 const ComScoreHome = ({ home, visitor, start, boards, innings }) => {
-  console.log('ComScoreHome', home, visitor, start, boards, innings);
+  // console.log('ComScoreHome', home, visitor, start, boards, innings);
   return (
     <tr>
       {
