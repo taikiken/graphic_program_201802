@@ -75,9 +75,13 @@
   ?>
 
   <div class="intro__widjet_twitter">
-    <?php //<a class="twitter-timeline" href="https://twitter.com/redbulljapan" data-height="400" data-chrome="noheader nofooter" data-link-color="#be0940" data-border-color="#282d35">Tweets by redbulljapan</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> ?>
-    <a class="twitter-timeline" href="https://twitter.com/hashtag/RedBullHolyRide" data-widget-id="898165035398160384" data-chrome="noheader nofooter">#RedBullHolyRide のツイート</a>
+    <?php
+    //<a class="twitter-timeline" href="https://twitter.com/redbulljapan" data-height="400" data-chrome="noheader nofooter" data-link-color="#be0940" data-border-color="#282d35">Tweets by redbulljapan</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    /*
+    <a class="twitter-timeline" href="https://twitter.com/hashtag/RedBullHolyRide" data-widget-id="898165035398160384" data-chrome="noheader nofooter" data-dnt="true">#RedBullHolyRide のツイート</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    */
+    ?>
   </div><!-- /.widjet_twitter -->
 </div><!-- /.holyride--intro -->
 
