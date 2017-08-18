@@ -41,9 +41,7 @@
 
         <div class="post-detail">
 
-            <?php if(!isset($_GET['id'])):?>
           <div id="single-header-container"></div>
-            <?php endif;?>
 
           <div class="post-sns_upper">
             <ul class="post-sns-list">
