@@ -49,6 +49,8 @@ if (isset($_GET['app'])) {
   // -----------------------------------------
   ?>
   <link rel="stylesheet" href="/assets/sp/css/red-bull-holy-ride/ui.css?v=<?php echo $page['version']; ?>">
+  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
   <script type='text/javascript'>
     var googletag = googletag || {};
