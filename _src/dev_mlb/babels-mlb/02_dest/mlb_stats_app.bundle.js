@@ -41673,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-17 15:27:28
+ * 2017-8-18 11:02:13
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -85682,13 +85682,42 @@ var ComInningsEvent = function ComInningsEvent(_ref3) {
       inning = _ref3.inning,
       info = _ref3.info;
 
+  console.log('ComInningsEvent', type, team, inning, info);
   // home team データチェックを追加します - 2017-08-17
-  if (type === 'home' && (!info.home || !info.home.board || !info.home.board.scores || !info.home.board.scores.score || !info.home.board.scores.score[inning] || !info.home.board.scores.score[inning].score)) {
-    return null;
-  }
+  // if (
+  //   type === 'home' && (
+  //     !info.home ||
+  //     !info.home.board ||
+  //     !info.home.board.scores ||
+  //     !info.home.board.scores.score ||
+  //     !info.home.board.scores.score[inning] ||
+  //     !info.home.board.scores.score[inning].score
+  //   )
+  // ) {
+  //   console.log('ComInningsEvent - 1');
+  //   return null;
+  // }
   // 最終回で home team の攻撃が無い時は出力しません
-  if (type === 'home' && inning === info.innings && info.home.win && info.home.board.scores.score[inning].score === 0) {
-    return null;
+  // if (
+  //   type === 'home' &&
+  //   inning === info.innings &&
+  //   info.home.win &&
+  //   info.home.board.scores.score[inning].score === 0
+  // ) {
+  //   console.log('ComInningsEvent - 1');
+  //   return null;
+  // }
+  if (type === 'home') {
+    // 最終回チェック
+    if (inning === info.innings) {
+      // home team win
+      if (info.home.win) {
+        // スコア 0 ?
+        if (info.home.board.scores.score && typeof info.home.board.scores.score[inning] !== 'undefined' && info.home.board.scores.score[inning] === 0) {
+          return null;
+        }
+      }
+    }
   }
   // ---------------------------------------------
   // 出力あり
@@ -86277,13 +86306,15 @@ var ComScoreVisitor = function ComScoreVisitor(_ref5) {
       start = _ref5.start,
       boards = _ref5.boards,
       innings = _ref5.innings;
+
+  console.log('ComScoreVisitor', visitor, start, boards, innings);
   return _react2.default.createElement(
     'tr',
     null,
     boards.map(function (value, index) {
       var inning = start + index;
       // 総イニング数より表示イニングが超えていたら表示しない
-      if (inning > innings) {
+      if (inning > innings || !visitor.score || !visitor.score[inning]) {
         return _react2.default.createElement(
           'td',
           { key: 'visitor-' + inning, className: 'visitor-' + inning },
@@ -86367,13 +86398,15 @@ var ComScoreHome = function ComScoreHome(_ref6) {
       start = _ref6.start,
       boards = _ref6.boards,
       innings = _ref6.innings;
+
+  console.log('ComScoreHome', home, visitor, start, boards, innings);
   return _react2.default.createElement(
     'tr',
     null,
     boards.map(function (value, index) {
       var inning = start + index;
       // 総イニング数より表示イニングが超えていたら表示しない
-      if (inning > innings) {
+      if (inning > innings || !home.score || !home.score[inning]) {
         return _react2.default.createElement(
           'td',
           { key: 'home-' + inning, className: 'home-' + inning },
@@ -86382,7 +86415,11 @@ var ComScoreHome = function ComScoreHome(_ref6) {
       }
       // 表示する
       var score = home.score[inning];
-      var visitorScore = visitor.score[inning];
+      var visitorScore = null;
+      if (visitor.score && visitor.score[inning]) {
+        visitorScore = visitor.score[inning];
+      }
+      // const visitorScore = visitor.score[inning];
       // let alt = '0';
       // if (inning > innings) {
       //   alt = '';

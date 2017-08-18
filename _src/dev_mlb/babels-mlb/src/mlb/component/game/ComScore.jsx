@@ -315,33 +315,36 @@ ComScoreInningsHead.propTypes = {
  * @returns {XML} tr > td
  * @constructor
  */
-const ComScoreVisitor = ({ visitor, start, boards, innings }) => (
-  <tr>
-    {
-      boards.map((value, index) => {
-        const inning = start + index;
-        // 総イニング数より表示イニングが超えていたら表示しない
-        if (inning > innings) {
+const ComScoreVisitor = ({ visitor, start, boards, innings }) => {
+  console.log('ComScoreVisitor', visitor, start, boards, innings);
+  return (
+    <tr>
+      {
+        boards.map((value, index) => {
+          const inning = start + index;
+          // 総イニング数より表示イニングが超えていたら表示しない
+          if (inning > innings || !visitor.score || !visitor.score[inning]) {
+            return (
+              <td key={`visitor-${inning}`} className={`visitor-${inning}`}>&nbsp;</td>
+            );
+          }
+          // 表示する
+          const scores = visitor.score[inning];
+          let alt = '0';
+          if (inning > innings) {
+            alt = '';
+          }
+          // render
           return (
-            <td key={`visitor-${inning}`} className={`visitor-${inning}`}>&nbsp;</td>
+            <td key={`visitor-${inning}`} className={`visitor-${inning}`}>
+              {Print.str(scores.score, alt)}
+            </td>
           );
-        }
-        // 表示する
-        const scores = visitor.score[inning];
-        let alt = '0';
-        if (inning > innings) {
-          alt = '';
-        }
-        // render
-        return (
-          <td key={`visitor-${inning}`} className={`visitor-${inning}`}>
-            {Print.str(scores.score, alt)}
-          </td>
-        );
-      })
-    }
-  </tr>
-);
+        })
+      }
+    </tr>
+  );
+};
 
 /**
  * propTypes
@@ -398,37 +401,44 @@ const scoreAlpha = (home, visitor, inning, innings) => {
  * @returns {XML} tr > td
  * @constructor
  */
-const ComScoreHome = ({ home, visitor, start, boards, innings }) => (
-  <tr>
-    {
-      boards.map((value, index) => {
-        const inning = start + index;
-        // 総イニング数より表示イニングが超えていたら表示しない
-        if (inning > innings) {
+const ComScoreHome = ({ home, visitor, start, boards, innings }) => {
+  console.log('ComScoreHome', home, visitor, start, boards, innings);
+  return (
+    <tr>
+      {
+        boards.map((value, index) => {
+          const inning = start + index;
+          // 総イニング数より表示イニングが超えていたら表示しない
+          if (inning > innings || !home.score || !home.score[inning]) {
+            return (
+              <td key={`home-${inning}`} className={`home-${inning}`}>&nbsp;</td>
+            );
+          }
+          // 表示する
+          const score = home.score[inning];
+          let visitorScore = null;
+          if (visitor.score && visitor.score[inning]) {
+            visitorScore = visitor.score[inning];
+          }
+          // const visitorScore = visitor.score[inning];
+          // let alt = '0';
+          // if (inning > innings) {
+          //   alt = '';
+          // }
+          // render
+          const alpha = scoreAlpha(score, visitorScore, inning, innings);
+          const point = alpha || Print.int(score.score);
+          // console.log('ComScoreHome', inning, score, alpha, point);
           return (
-            <td key={`home-${inning}`} className={`home-${inning}`}>&nbsp;</td>
+            <td key={`home-${inning}`} className={`home-${inning}`}>
+              {point}
+            </td>
           );
-        }
-        // 表示する
-        const score = home.score[inning];
-        const visitorScore = visitor.score[inning];
-        // let alt = '0';
-        // if (inning > innings) {
-        //   alt = '';
-        // }
-        // render
-        const alpha = scoreAlpha(score, visitorScore, inning, innings);
-        const point = alpha || Print.int(score.score);
-        // console.log('ComScoreHome', inning, score, alpha, point);
-        return (
-          <td key={`home-${inning}`} className={`home-${inning}`}>
-            {point}
-          </td>
-        );
-      })
-    }
-  </tr>
-);
+        })
+      }
+    </tr>
+  );
+};
 
 /**
  * propTypes
