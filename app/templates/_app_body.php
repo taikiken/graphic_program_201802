@@ -34,7 +34,6 @@
                       </div>
                   <?php else:?>
                       <div id="detail-photoalbum">
-                          <p class="lead"><?php echo $page['post']['description'];?></p>
                           <nav class="nav-photoalbum">
                               <p class="prev">
                                   <?php if($_GET['id'] == 1):?>
