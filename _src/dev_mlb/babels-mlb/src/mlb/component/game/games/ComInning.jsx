@@ -217,6 +217,11 @@ const ComInningsEvent = ({ type, team, inning, info }) => {
     }
   }
   // ---------------------------------------------
+  // title なしは出力しない
+  if (!team.title) {
+    return null;
+  }
+  // ---------------------------------------------
   // 出力あり
   let pitcher = '';
   return (

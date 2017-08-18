@@ -41673,7 +41673,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-18 11:02:13
+ * 2017-8-18 11:16:22
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -85718,6 +85718,11 @@ var ComInningsEvent = function ComInningsEvent(_ref3) {
         }
       }
     }
+  }
+  // ---------------------------------------------
+  // title なしは出力しない
+  if (!team.title) {
+    return null;
   }
   // ---------------------------------------------
   // 出力あり
