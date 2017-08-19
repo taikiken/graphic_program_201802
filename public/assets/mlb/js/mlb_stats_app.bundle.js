@@ -17307,7 +17307,11 @@ function DaeTeam(info) {
   /**
    * team name
    */
-  this.team = origin.name;
+  this.team = _Normalize2.default.str(origin.name);
+  /**
+   * team name 日本語 - いつの間にか追加されていた
+   */
+  this.jp = _Normalize2.default.str(origin.name_jp);
 };
 
 /**
@@ -17330,7 +17334,8 @@ var DaeTeamTypes = function () {
     var ids = {};
     var teams = {};
     list.map(function (team) {
-      var name = team.team;
+      // const name = team.team;
+      var name = team.jp;
       var id = team.id;
       ids[name] = id;
       teams[id] = name;
@@ -17344,7 +17349,7 @@ var DaeTeamTypes = function () {
     this.origin = origin;
     /**
      * チームリスト
-     * @type {Array.<DaeTeam>}
+     * @type {Array.<string>}
      */
     this.list = list;
     /**
@@ -41829,7 +41834,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.1
- * 2017-8-18 14:04:37
+ * 2017-8-18 23:29:16
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -81386,7 +81391,8 @@ var ComOptionTeams = function ComOptionTeams(_ref2) {
           ),
           teams.list.map(function (team) {
             var id = _Print2.default.int(team.id);
-            var teamName = _Print2.default.str(team.team);
+            // const teamName = Print.str(team.team);
+            var teamName = _Print2.default.str(team.jp);
             if (!id || !teamName) {
               return null;
             }

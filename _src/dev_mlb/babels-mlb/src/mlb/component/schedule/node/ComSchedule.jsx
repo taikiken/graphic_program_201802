@@ -128,7 +128,8 @@ const ComOptionTeams = ({ teams, change }) => (
           {
             teams.list.map((team) => {
               const id = Print.int(team.id);
-              const teamName = Print.str(team.team);
+              // const teamName = Print.str(team.team);
+              const teamName = Print.str(team.jp);
               if (!id || !teamName) {
                 return null;
               }
