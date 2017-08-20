@@ -12,6 +12,7 @@
  */
 'use strict';
 
+// ESLint 通らないので ES5 to ES2017 へコンバートしました - on 2017-08-19 by @taikiken
 // seriku sidebar ranking
 
 // UT
