@@ -80,6 +80,12 @@ if (isset($_GET['app'])) {
    ga('send', 'pageview');
 
   </script>
+<?php
+/*
+ * @since 2017-08-19 order によりアプリ webview UA 判定する
+ */
+?>
+<script src="/assets/js/app_ua_detector.bundle.js"></script>
 </head>
 <body class="appbnr-disable">
 <div class="whole <?php echo $page['template_classname']; ?>">
