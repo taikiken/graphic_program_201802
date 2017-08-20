@@ -49,6 +49,8 @@ if (isset($_GET['app'])) {
   // -----------------------------------------
   ?>
   <link rel="stylesheet" href="/assets/sp/css/red-bull-holy-ride/ui.css?v=<?php echo $page['version']; ?>">
+  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
   <script type='text/javascript'>
     var googletag = googletag || {};
@@ -78,6 +80,12 @@ if (isset($_GET['app'])) {
    ga('send', 'pageview');
 
   </script>
+<?php
+/*
+ * @since 2017-08-19 order によりアプリ webview UA 判定する
+ */
+?>
+<script src="/assets/js/app_ua_detector.bundle.js"></script>
 </head>
 <body class="appbnr-disable">
 <div class="whole <?php echo $page['template_classname']; ?>">

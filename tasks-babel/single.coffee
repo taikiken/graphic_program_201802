@@ -172,6 +172,7 @@ gulp.task 'single:copy', ->
     app + '/**/js/**/*.bundle.js'
     '!' + app + '/**/js/**/*test*.bundle.js'
   ]
+    .pipe $.debug title: '[SINGLE:COPY]'
     .pipe gulp.dest htdocs
     .pipe $.size title: '*** single:copy ***'
 

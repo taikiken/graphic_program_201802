@@ -16,63 +16,63 @@
 
 // UT
 
-var UT = self.UT;
-var Dom = UT.app.Dom;
-var ViewRanking = UT.view.sidebar.ViewRanking;
-var ViewVideos = UT.view.sidebar.ViewVideos;
-var ViewRecommend = UT.view.sidebar.ViewRecommend;
-var View = UT.view.View;
+const UT = self.UT;
+const Dom = UT.app.Dom;
+const ViewRanking = UT.view.sidebar.ViewRanking;
+const ViewVideos = UT.view.sidebar.ViewVideos;
+const ViewRecommend = UT.view.sidebar.ViewRecommend;
+const View = UT.view.View;
 
 // init @see babels_exe Page.category
 
 // --------------------------------
 // callback
-var didRanking = function didRanking() {
-  var ad = Dom.adRanking();
+const didRanking = () => {
+  const ad = Dom.adRanking();
   if (ad) {
     ad.style.cssText = 'display: block;';
   }
 };
 
-var didVideo = function didVideo() {
-  var ad = Dom.adVideo();
+const didVideo = () => {
+  const ad = Dom.adVideo();
   if (ad) {
     ad.style.cssText = 'display: block;';
   }
 };
 
 // --------------------------------
-var ranking = function ranking() {
+const ranking = () => {
   // ranking
-  var rankingElement = Dom.ranking();
+  const rankingElement = Dom.ranking();
   if (!rankingElement) {
     return;
   }
-  var option = {};
+  const option = {};
   option[View.DID_MOUNT] = didRanking;
-  var viewRanking = new ViewRanking(rankingElement, option, 'seriku');
+  const viewRanking = new ViewRanking(rankingElement, option, 'seriku');
   viewRanking.start();
 };
 
-var video = function video() {
+const video = () => {
   // video
-  var videoElement = Dom.video();
+  const videoElement = Dom.video();
   if (!videoElement) {
     return;
   }
-  var option = {};
+  const option = {};
   option[View.DID_MOUNT] = didVideo;
-  var viewVideos = new ViewVideos(videoElement, option, 'seriku');
+  const viewVideos = new ViewVideos(videoElement, option, 'seriku');
   viewVideos.start();
 };
 
-var recommend = function recommend() {
+const recommend = () => {
   // recommend
-  var recommendElement = Dom.recommend();
+  const recommendElement = Dom.recommend();
   if (!recommendElement) {
     return;
   }
-  var viewRecommend = new ViewRecommend(recommendElement, {}, 'seriku');
+  const viewRecommend = new ViewRecommend(recommendElement, {}, 'seriku');
   viewRecommend.start();
 };
 
