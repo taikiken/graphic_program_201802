@@ -235,18 +235,23 @@ if(strlen($api)>0){
 			}
 		}
 	
-	}elseif($api=="area"){
+	}elseif($api=="area"||$api=="pref"){
 		
-		$area="";
+		$where="";
 		$region=bind($_REQUEST["region"]);
 		if(isset($region)&&strlen($region)>0){
-			$area=sprintf(" where region='%s'",$region);
+			$where=sprintf(" where region='%s'",$region);
+		}
+		
+		$pref=bind($_REQUEST["pref"]);
+		if(isset($pref)&&strlen($pref)>0){
+			$where=sprintf(" where pref='%s'",$pref);
 		}
 		
 		$sql=sprintf("select rt2.* from (select pageid from (select pageid from u_area%s) as t1,(select id,flag,m_time from repo_n) as t2 where t1.pageid=t2.id and flag=1 order by m_time desc%s) as rt1,(select * from %s) as rt2 where rt1.pageid=rt2.id order by m_time desc",
-		$area,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""));
-		$nsql=sprintf("select count(*) as n from (select pageid from u_area %s) as t1,(select id,flag,m_time from repo_n) as t2 where t1.pageid=t2.id and flag=1",$area);
-		
+		$where,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""));
+		$nsql=sprintf("select count(*) as n from (select pageid from u_area %s) as t1,(select id,flag,m_time from repo_n) as t2 where t1.pageid=t2.id and flag=1",$where);
+				
 	}elseif($api=="bookmark"){
 		
 		$uid=set_userid($uid);

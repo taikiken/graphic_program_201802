@@ -207,7 +207,7 @@ function set_comment($type,$pageid,$commentid){
 /* APIチェック */
 function set_articleapi($api){
 	
-	$apis=array("category","search","home","self","bookmark","next","static","area");
+	$apis=array("category","search","home","self","bookmark","next","static","area","pref");
 	if(!in_array($api,$apis)){
 		$status=array(
 			"code"=>400,
