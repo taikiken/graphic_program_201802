@@ -7,7 +7,7 @@
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title>xx vs xx 関西学生アメリカンフットボールリーグ | 速報 & データ | SPORTS BULL</title>
+  <title>xx vs xx 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | SPORTS BULL</title>
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
 

@@ -1,25 +1,17 @@
+<?php include __DIR__."./../inc.php"; ?>
 <link rel="stylesheet" href="/assets/css/photo/parts_pc.css">
 
 <!-- section_highlight_movie -->
 <section class="section_interhigh_highlight">
   <div class="ttl-wrapper">
     <h2 class="ttl highlight"><i></i>動画特集</h2>
-    <p class="ttl_link"><a href="">すべての動画を見る</a></p>
+    <p class="ttl_link"><a href="/stats/ur_kansai/highlight/">すべての動画を見る</a></p>
   </div>
   
   <div class="article_list">
     <article class="highlight_article">
       <ul class="thumb_area">
-        <li>
-          <a href="%s">
-            <div class="img">
-              <img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bluetears_osaka/20101220/20101220093850.jpg" alt="">
-            </div>
-            <div class="txt_area">
-              <p>タイトル</p>
-            </div>
-          </a>
-        </li>
+<?php echo $movie; ?>
       </ul>
     </article>
   </div>
@@ -29,19 +21,12 @@
 <section class="section_interhigh_photo">
   <div class="ttl-wrapper">
     <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
-    <p class="ttl_link"><a href="">すべてのフォトギャラリーを見る</a></p>
+    <p class="ttl_link"><a href="/stats/ur_kansai/photo/">すべてのフォトギャラリーを見る</a></p>
   </div>
         
   <div id="js-current-post" class="current-post photo_gallery">
     <ul class="photo_list">
-      <li>
-        <a href="%s">
-          <div class="img">
-            <img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bluetears_osaka/20101220/20101220093850.jpg" alt="">
-          </div>
-          <p class="txt">タイトル</p>
-        </a>
-      </li>
+<?php echo $photo; ?>
     </ul>
   </div>
 </section>

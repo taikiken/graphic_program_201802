@@ -1,3 +1,4 @@
+<?php include __DIR__."/inc.php"; ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja" style="height: auto;">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
@@ -26,56 +27,12 @@
   <div class="article_list">
     <article class="highlight_article">
        <ul class="thumb_area">
-
-        <li>
-          <a href="%s">
-            <div class="img">
-              <img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bluetears_osaka/20101220/20101220093850.jpg" alt="">
-            </div>
-            <div class="txt_area">
-              <p>タイトル</p>
-            </div>
-          </a>
-        </li>
-
-        <li>
-          <a href="%s">
-            <div class="img">
-              <img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bluetears_osaka/20101220/20101220093850.jpg" alt="">
-            </div>
-            <div class="txt_area">
-              <p>タイトル</p>
-            </div>
-          </a>
-        </li>
-
-        <li>
-          <a href="%s">
-            <div class="img">
-              <img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bluetears_osaka/20101220/20101220093850.jpg" alt="">
-            </div>
-            <div class="txt_area">
-              <p>タイトル</p>
-            </div>
-          </a>
-        </li>
-
-        <li>
-          <a href="%s">
-            <div class="img">
-              <img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bluetears_osaka/20101220/20101220093850.jpg" alt="">
-            </div>
-            <div class="txt_area">
-              <p>タイトル</p>
-            </div>
-          </a>
-        </li>
-
+<?php echo $movie; ?>
       </ul>
     </article>
   </div>
 
-  <p class="section_btn"><a href=""><i></i>すべての動画を見る</a></p>
+  <p class="section_btn"><a href="/stats/ur_kansai/highlight/"><i></i>すべての動画を見る</a></p>
 </section>
                                
 <!-- section_photogallery -->
@@ -86,47 +43,11 @@
     
   <div id="js-current-post" class="current-post photo_gallery">
     <ul class="photo_list">
-
-      <li>
-        <a href="%s">
-          <div class="img">
-            <img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bluetears_osaka/20101220/20101220093850.jpg" alt="">
-          </div>
-          <p class="txt">タイトル</p>
-        </a>
-      </li>
-
-      <li>
-        <a href="%s">
-          <div class="img">
-            <img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bluetears_osaka/20101220/20101220093850.jpg" alt="">
-          </div>
-          <p class="txt">タイトル</p>
-        </a>
-      </li>
-
-      <li>
-        <a href="%s">
-          <div class="img">
-            <img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bluetears_osaka/20101220/20101220093850.jpg" alt="">
-          </div>
-          <p class="txt">タイトル</p>
-        </a>
-      </li>
-
-      <li>
-        <a href="%s">
-          <div class="img">
-            <img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bluetears_osaka/20101220/20101220093850.jpg" alt="">
-          </div>
-          <p class="txt">タイトル</p>
-        </a>
-      </li>
-
+<?php echo $photo; ?>
     </ul>
   </div>
 
-  <p class="section_btn"><a href=""><i></i>すべてのフォトギャラリーを見る</a></p>  
+  <p class="section_btn"><a href="/stats/ur_kansai/photo/"><i></i>すべてのフォトギャラリーを見る</a></p>  
 </section>
 
 
