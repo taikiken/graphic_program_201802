@@ -410,7 +410,7 @@ function sessionregister($s){
 function setSorC($name,$value){
 	global $SORC;
 	if($SORC==0){
-		setcookie($name,$value,time()+60*60*3,"/");
+		setcookie($name,$value,time()+60*60*3,"/editdm/");
 	}else{
 		$_SESSION[$name]=$value;
 	}

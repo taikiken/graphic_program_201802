@@ -103,6 +103,10 @@ var ct="<?=date("Y/m/d H:i:s")?>";
 <div id="helpExp">
 <p><img src="/shared/cms/img/cmd_up.gif" alt="一つ上へ" width="13" height="13" >は並び順を一つ上に、<img src="/shared/cms/img/cmd_down.gif" alt="一つ下へ" width="13" height="13" >は一つ下に入れ替えます。</p>
 </div><!-- End helpExp -->
+    BULL'S STATION用json
+    <textarea cols="25" rows="1" readonly>
+      <?php echo sprintf("%s/json/%s", $ImgPath, $_GET['nid'] . '.json')?>
+    </textarea>
     <div id="image_upload_section">
         <div id="drop" style="width:1094px; height:150px; padding:10px; border:3px solid" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="dragLeave(event)">
             ファイルをドラッグアンドドロップしてください。複数ファイル同時も対応しています。
@@ -297,8 +301,11 @@ var where="<?=$WHERE?>";
             };
             arr.push(row);
         });
+        var vars = getUrlVars();
+        var nid = vars.nid;
         data = {
-            data: arr
+            data: arr,
+            nid: nid
         };
 
         if(confirm('キャプションを登録します。よろしいですか？')) {

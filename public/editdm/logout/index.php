@@ -11,6 +11,7 @@ if($SORC==1){
 }else{
 	$cv=array("mid","alv","usr","repo","form","new","edit","delete","order","draft","categoryadmin","suadmin","formedit","download","formtemplate","master","environment","stylesheet","trackback","poll","updateping");
 	for($i=0;$i<count($cv);$i++){
+		setcookie($cv[$i],"",time()-3600,"/editdm/");
 		setcookie($cv[$i],"",time()-3600,"/");
 	}
 }

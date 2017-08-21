@@ -30,19 +30,19 @@ export default class S3 {
    * @const DEV
    * @type {string}
    */
-  static DEV = `https://dev-mlive.sportsbull.jp.${S3.AMAZON}`;
+  static DEV = `http://dev-mlive.sportsbull.jp.${S3.AMAZON}`;
   /**
    * stg 環境サーバー - https://stg-mlive.sportsbull.jp.
    * @const DEV
    * @type {string}
    */
-  static STG = `https://stg-mlive.sportsbull.jp.${S3.AMAZON}`;
+  static STG = `http://stg-mlive.sportsbull.jp.${S3.AMAZON}`;
   /**
    * 本番 環境サーバー - https://mlive.sportsbull.jp.
    * @const WWW
    * @type {string}
    */
-  static WWW = `https://mlive.sportsbull.jp.${S3.AMAZON}`;
+  static WWW = `http://mlive.sportsbull.jp.${S3.AMAZON}`;
   // ---------------------------------------------------
   //  PROPERTY
   // ---------------------------------------------------

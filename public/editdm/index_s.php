@@ -92,6 +92,13 @@ var rid=5;
 <td class="menuChild"><a href="./mailtemplate/" class="folder">フォームテンプレート</a></td>
 </tr>
 <?php } ?>
+<?php }elseif(getSorC("usr")=="ut"){ ?>
+<tr>
+    <th class="menuTitle" scope="col">総合管理ツール</th>
+</tr>
+<tr>
+    <td class="menuChild"><a href="./authentic/" class="folder">投稿者管理</a></td>
+</tr>
 <?php } ?>
 <?php if(strlen(getSorC("repo"))>0){ ?>
 <tr>

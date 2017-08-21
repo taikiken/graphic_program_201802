@@ -35,7 +35,7 @@ echo sprintf("<option value=\"\"%s>　すべての投稿者</option>",$c==0?" se
 while($f=$o->fetch_array()){
 
 ?>
-<option value="<?=$f["id"]?>"<?=$c==$f["id"]?" selected=\"selected\"":""?>>　<?=$f["name"]."：".$f["title"]?><?=$f["id"]==33?" (WBC関連記事)":""?></option>
+<option value="<?=$f["id"]?>"<?=$c==$f["id"]?" selected=\"selected\"":""?>>　<?=$f["name"]."：".$f["title"]?></option>
 <?php } ?>
 </select>
 </li>
