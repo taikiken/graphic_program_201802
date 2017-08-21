@@ -31,8 +31,6 @@
       </ul>
     </article>
   </div>
-
-  <p class="section_btn"><a href="/stats/ur_kansai/highlight/"><i></i>すべての動画を見る</a></p>
 </section>
                                
 <!-- section_photogallery -->

@@ -5,7 +5,6 @@
 <section class="section_interhigh_highlight">
   <div class="ttl-wrapper">
     <h2 class="ttl highlight"><i></i>動画特集</h2>
-    <p class="ttl_link"><a href="/stats/ur_kansai/highlight/">すべての動画を見る</a></p>
   </div>
   
   <div class="article_list">
