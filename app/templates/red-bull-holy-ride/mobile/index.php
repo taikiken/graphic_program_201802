@@ -85,6 +85,10 @@ if (isset($_GET['app'])) {
  * @since 2017-08-19 order によりアプリ webview UA 判定する
  */
 ?>
+<?php
+// app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+// @since 2017-08-21
+?>
 <script src="/assets/js/app_ua_detector.bundle.js"></script>
 </head>
 <body class="appbnr-disable">
