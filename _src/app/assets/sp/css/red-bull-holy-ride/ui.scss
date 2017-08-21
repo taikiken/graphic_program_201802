@@ -108,8 +108,8 @@
   .intro__catch {
     margin-right: perCalc(20, 640);
     margin-left: perCalc(20, 640);
-    padding-bottom: perCalc(20, 640);
-    border-bottom: 1px solid #282d35;
+    // padding-bottom: perCalc(20, 640);
+    // border-bottom: 1px solid #282d35;
     color: #fff;
     font-weight: bold;
     font-size: (32/2)+px;
@@ -119,6 +119,14 @@
     margin-top: (32/2)+px;
     margin-right: perCalc(20, 640);
     margin-left: perCalc(20, 640);
+    padding-top:  perCalc(20, 640);
+    border-top: 1px solid #282d35;
+
+    .undotsushin-ios &,
+    .undotsushin-android & {
+      display: none;
+    }
+
 
     a {
       @include link-decoration(#fff, #fff, underline, underline);
