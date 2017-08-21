@@ -179,7 +179,7 @@ $app->group('/{slug:ur_kansai}',  function () use($app) {
       'template_classname' => '',
     ));
 
-    return $this->renderer->render($response, 'stats/ur_kansai/index.html', $args);
+    return $this->renderer->render($response, 'stats/ur_kansai/index.php', $args);
 
   });
 
@@ -196,7 +196,7 @@ $app->group('/{slug:ur_kansai}',  function () use($app) {
       'template_classname' => '',
     ));
 
-    return $this->renderer->render($response, 'stats/ur_kansai/match.html', $args);
+    return $this->renderer->render($response, 'stats/ur_kansai/match.php', $args);
 
   });
 
@@ -212,7 +212,7 @@ $app->group('/{slug:ur_kansai}',  function () use($app) {
       'template_classname' => '',
     ));
 
-    return $this->renderer->render($response, 'stats/ur_kansai/photo.html', $args);
+    return $this->renderer->render($response, 'stats/ur_kansai/photo.php', $args);
 
   });
 
@@ -228,7 +228,7 @@ $app->group('/{slug:ur_kansai}',  function () use($app) {
       'template_classname' => '',
     ));
 
-    return $this->renderer->render($response, 'stats/ur_kansai/webview.html', $args);
+    return $this->renderer->render($response, 'stats/ur_kansai/webview.php', $args);
 
   });
 
