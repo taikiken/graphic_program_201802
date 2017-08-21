@@ -8,6 +8,7 @@ if($q->get_dir==0){
 }
 $a[]=array("menu","10","cb",5,"","","","","","","","permission");
 $a[]=array("menu","13","cb",4,"","","","","","","","systems");
+$a[]=array("menu","58","cb",4,"","","","","","","","is_external");
 
 include $INCLUDEPATH."print_write.php";
 include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/auth.php";

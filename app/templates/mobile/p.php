@@ -12,9 +12,9 @@
     // response.theme.images.pc
     // response.description
     if ( $page['theme']['images']['sp'] ) : ?>
-      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
-        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
-      </div>
+        <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
+          <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
+        </div>
     <?php endif;
     // eof: 記事詳細: sp
     // ---------------------------------------------------- ?>
@@ -34,7 +34,9 @@
           include_once __DIR__."/../specific/_player.php";
         else :
           // 通常画像 or 動画 ?>
+            <?php if(!isset($_GET['id'])):?>
           <div id="single-visual-container"></div>
+                <?php endif;?>
         <?php endif; ?>
 
         <div class="post-detail">
@@ -116,8 +118,7 @@
                   </div>
                         <?php else:?>
                         <div id="detail-photoalbum">
-                            <p class="lead"><?php echo $page['post']['description'];?></p>
-                            <nav class="nav-photoalbum">
+                            <nav class="nav-photoalbum" style="margin-top: 20px;">
                                 <p class="prev">
                                     <?php if($_GET['id'] == 1):?>
                                     <a href="<?php echo $page['og_url']?>?id=<?php echo count($page['photo'])?>">
@@ -339,7 +340,22 @@
                # ToDo: いつか削除
               <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
               */ ?>
-              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['sp']; ?>&targetID=adg_<?php echo $page['ad']['sp']; ?>&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
+
+              <!-- /531683568/mobile/mobile_detail_comment_top -->
+              <script>
+                googletag.cmd.push(function() {
+                  googletag.defineSlot('/531683568/mobile/mobile_detail_comment_top', [300, 250], 'div-gpt-ad-1501838642824-0').addService(googletag.pubads());
+                  googletag.pubads().enableSingleRequest();
+                  googletag.pubads().collapseEmptyDivs();
+                  googletag.enableServices();
+                });
+              </script>
+              <div id='div-gpt-ad-1501838642824-0' style='text-align: center; margin: 20px auto; height:250px; width:300px;'>
+              <script>
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501838642824-0'); });
+              </script>
+              </div>
+              <!-- // /531683568/mobile/mobile_detail_comment_top -->
             </div>
           <?php endif; ?>
 
