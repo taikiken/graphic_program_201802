@@ -833,10 +833,10 @@ function get_summary($description,$body){
 	
 	$description=strip_tags($description);
 	$body=strip_tags($body);
-
+	
 	$description=preg_replace('/\s+/',' ',$description);
 	$body=preg_replace('/\s+/',' ',$body);
-
+	
 	if(strlen($description)>0){
 		$s=$description;
 	}else{

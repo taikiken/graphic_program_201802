@@ -138,8 +138,10 @@ if($TABLE=="repo_n"){
 	}else{		
 		$sql=sprintf("select %s from %s%s%s%s order by %s %s",$FIELD,$TABLE,$WHERE,$exuser,$excategory,$orderby,dblm($no,$offset));
 	}
-}elseif($TABLE=="u_member"){
-	$sql=sprintf("select %s from %s%s%s%s order by %s %s",$FIELD,$TABLE,$WHERE,$exuser,$excategory,"id",dblm($no,$offset));
+}elseif($TABLE=="u_member") {
+    $sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "id", dblm($no, $offset));
+}elseif($TABLE=="photo"){
+    $sql = sprintf("select * from %s where nid = %s order by n%s ",$TABLE, $_GET["nid"], ($CURRENTDIRECTORY=="log")?" desc":"");
 }else{
 		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log")?" desc":"",dblm($no,$offset));
 }

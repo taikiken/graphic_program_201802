@@ -92,6 +92,11 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     ga('send', 'pageview');
   </script>
 
+    <?php if(count($page['photo']) > 0):?>
+
+        <link rel="stylesheet" href="/assets/css/style_sp.css?v=<?php echo $page['version']; ?>">
+        <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
+    <?php endif;?>
 </head>
 <body>
 <div id="page" class="whole post-single ">

@@ -442,7 +442,6 @@ $z-map: (
   &-list {
     margin-top: 20px - 8;
     overflow: hidden;
-
   }
 
   //.stats_banner-item
@@ -456,6 +455,13 @@ $z-map: (
 
     a:hover {
       @include over-opacity;
+    }
+
+    .tablet & {
+      img {
+        width: 360px;
+        border-radius: 6px;
+      }
     }
   }
 

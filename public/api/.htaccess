@@ -38,14 +38,24 @@ RewriteRule ^v1/articles/([0-9]+)/bookmark /api/ver1/write/bookmark.php?article_
 
 #Article
 RewriteRule ^v1/users/self/bookmark /api/ver1/read/articlelist.php?api=bookmark [L,QSA]
+RewriteRule ^v1/articles/([0-9]+)/next /api/ver1/read/articledetails.php?id=$1&api=next [L,QSA]
 RewriteRule ^v1/articles/([0-9]+) /api/ver1/read/articledetails.php?id=$1 [L]
 RewriteRule ^v1/articles/search/(.*) /api/ver1/read/articlelist.php?api=search&q=$1 [L,QSA]
-RewriteRule ^v1/articles/category/([a-z]+)/([a-z]+) /api/ver1/read/articlelist.php?api=category&category=$1&type=$2 [L,QSA]
-RewriteRule ^v1/articles/category/([a-z]+) /api/ver1/read/articlelist.php?api=category&category=$1 [L,QSA]
+RewriteRule ^v1/articles/category/([a-z0-9]+)/([a-z]+) /api/ver1/read/articlelist.php?api=category&category=$1&type=$2 [L,QSA]
+RewriteRule ^v1/articles/category/([a-z0-9]+) /api/ver1/read/articlelist.php?api=category&category=$1 [L,QSA]
 RewriteRule ^v1/articles/self/([a-z]+) /api/ver1/read/articlelist.php?api=self&c=$1 [L,QSA]
 RewriteRule ^v1/articles/self /api/ver1/read/articlelist.php?api=self [L,QSA]
 RewriteRule ^v1/articles/home/([a-z]+) /api/ver1/read/articlelist.php?api=home&c=$1 [L,QSA]
 RewriteRule ^v1/articles/home /api/ver1/read/articlelist.php?api=home [L,QSA]
+RewriteRule ^v1/articles/static/([a-z0-9_-]+) /api/ver1/read/articlelist.php?api=static&subcategory=$1 [L,QSA]
+
+
+RewriteRule ^v1/articles/fast/([a-z]+)/([a-z]+) /api/ver1/read/articleFast.php?api=category&category=$1&type=$2 [L,QSA]
+RewriteRule ^v1/articles/fast/([a-z]+) /api/ver1/read/articleFast.php?api=category&category=$1 [L,QSA]
+RewriteRule ^v1/articles/fast/ /api/ver1/read/articleFast.php?api=category [L,QSA]
+
+#AU検索
+RewriteRule ^v1/articles/fast/ /api/ver1/read/articleFast.php?api=category [L,QSA]
 
 #USER
 RewriteRule ^v1/users/self/settings/account /api/ver1/write/useraccount.php [L]
@@ -88,3 +98,5 @@ RewriteRule ^v1/sessions /api/ver1/read/logout.php [L]
 RewriteRule ^v1/auth/facebook /api/ver1/auth/facebook.php [L]
 RewriteRule ^v1/auth/twitter /api/ver1/auth/twitter.php [L]
 
+#DOWNLOAD
+RewriteRule ^download/([0-9]+)/([rawx0-9]+) /api/tool/img_download.php?id=$1&size=$2 [L]

@@ -1,17 +1,13 @@
 <?php
 
-/*
-
-delete from repo_body where pid in(select id from repo_n where id>=97144 and d2=26 and flag=0);
-delete from repo_n where id>=97144 and d2=26 and flag=0;
-
-*/
-
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=26;
 $rssfile="http://input.sportsbull.jp/vkuploader/file/asw76rgrr66d.xml";
+
+$json="https://widget.sportsbull.jp/json/v1/2017/hsb/summer/seasonschedule.json";
+$schedule=json_decode(get_contents($json),TRUE);
 
 $o=new db;
 $o->connect();
@@ -37,12 +33,25 @@ if($data["channel"]["item"]["guid"]){
 }
 
 for($i=0;$i<count($data["channel"]["item"]);$i++){
+
+	switch($data["channel"]["item"][$i]["movietype"]){
+		case "感動甲子園";$movietype=0;break;
+		case "ハイライト";$movietype=1;break;
+		case "ダイジェスト";$movietype=2;break;
+		case "ハイスピード";$movietype=3;break;
+		case "インタビュー";$movietype=4;break;
+	}
 	
 	unset($s);
 	
 	$s["title"]=$data["channel"]["item"][$i]["title"];
 	$s["t9"]=$data["channel"]["item"][$i]["link"];
-	$s["t7"]=$data["channel"]["item"][$i]["guid"];
+	
+	if($movietype===0){
+		$s["t7"]=$data["channel"]["item"][$i]["gamedate"];
+	}else{
+		$s["t7"]=sprintf("%s_%s",$schedule[str_replace("-","",$data["channel"]["item"][$i]["gamedate"])][$data["channel"]["item"][$i]["gamesequence"]],$movietype);
+	}
 	
 	$active[]=$s["t7"];
 	
@@ -57,39 +66,19 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		$s["t1"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["caption"];
 	}
 	
-/*
-2016			
-	$mword=$data["channel"]["item"][$i]["keyword"];
-	$mword=str_replace("、",",",$mword);
-	$mword=explode(",",$mword);
-
-	$rword=array(get_keyword($s["title"]));
-	for($j=0;$j<count($mword);$j++){
-		if($j==4)break;
-		if(strlen($mword[$j])>0)$rword[]=$mword[$j];
-	}
-	if(preg_match("/ダイジェスト動画/",$s["title"])){
-		$rword=array(get_keyword($s["title"]),$mword[0],$mword[1],$mword[count($mword)-2],$mword[count($mword)-1]);
-	}else{
-		$rword=array(get_keyword($s["title"]));
-		for($j=0;$j<count($mword);$j++){
-			if($j==4)break;
-			if(strlen($mword[$j])>0)$rword[]=$mword[$j];
-		}
-	}
-	$tag=categorymatching($exword,implode(",",$rword));
-*/
-	$s["keyword"]=$data["channel"]["item"][$i]["keyword"];
+	$s["keyword"]=str_replace("第99回,2017年,全国高校野球選手権大会,本大会","",$data["channel"]["item"][$i]["keyword"]);
 	
-	$tag=categorymatching($exword,"第89回選抜高等学校野球大会,".$s["keyword"]);
+	$tag=categorymatching($exword,sprintf("第99回全国高校野球選手権大会,%s%s",$data["channel"]["item"][$i]["movietype"],!is_array($s["keyword"])?",".$s["keyword"]:""));
 	if(count($tag)>0){
+		$tag=array_unique($tag);
+		$tag=array_values($tag);
 		for($cnt=0;$cnt<count($tag);$cnt++){
 			if($cnt==6)break;
 			$s["t1".$cnt]=esc($tag[$cnt]);
 		}
 	}
 	
-	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$s["t7"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
@@ -119,12 +108,12 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		  $sqla[]=relatedlink($data["channel"]["item"][$i]["relatedLink"],$f["id"]);
 	  }
 	}else{
+		
 		if($data["channel"]["item"][$i]["status"]==1){
 			
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
 			$s["m1"]=136;
-			//$s["m2"]=136;
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["imgflag"]=168;
@@ -141,12 +130,9 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$sqla[]=sprintf("insert into repo_body(pid,body) values(currval('repo_n_id_seq'),'%s');",$modbody);
 			$sqla[]=relatedlink($data["channel"]["item"][$i]["relatedLink"]);
 			
-			if($i==0){
-				//カテゴリー最初のインポート
-				//$sqla[]="insert into u_latestpost(m1,pageid) select 142,currval('repo_n_id_seq');";
-			}	
 		}
 	}
+	
 	if($sqla){
 		$sqla=implode("\n",$sqla);
 		$o->query($sqla);

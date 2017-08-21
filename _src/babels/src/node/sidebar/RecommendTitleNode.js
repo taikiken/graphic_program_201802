@@ -41,7 +41,8 @@ export const RecommendTitleNode = React.createClass( {
 
     // category api slug が `all` 以外の時に category.label をタイトルに含める
     if ( this.props.slug !== 'all' ) {
-      if ( categoryLabel !== '' ) {
+      // @since 2017-07-06 `categoryLabel &&` 追加 motorsports で undefined になるので
+      if (categoryLabel && categoryLabel !== '') {
         // category.label が空でなかったら '/' と一緒に加える
         categoryTitle = ' / ' + categoryLabel;
       }

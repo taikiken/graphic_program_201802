@@ -1,0 +1,3 @@
+# babel 生成ファイルを ignore する
+compile/*
+dest/*

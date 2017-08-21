@@ -47,6 +47,7 @@ function wrapperback(){
 	$('select, object, embed').show();
 }
 function editImages(name,flags,width,height,copyright,copytype,thumno,thumpos,fname,path,op){
+	
 	var arrayPageSize=getPageSize();
 	var arrayPageScroll=getPageScroll();
 	var fTop=arrayPageScroll[1];
@@ -54,7 +55,27 @@ function editImages(name,flags,width,height,copyright,copytype,thumno,thumpos,fn
 	
 	$("#flash").css({position:"absolute",left:fLeft+"px",top:fTop+"px"}).html("");
 	$('select, object, embed,#overlay').hide();
-	var so=new SWFObject("/editdm/modimg/flash.swf?img="+name+"&amp;fname="+fname+"&amp;w="+width+"&amp;h="+height+"&amp;flags="+flags+"&amp;copyright="+encodeURI(copyright)+"&amp;copytype="+copytype+"&amp;thumno="+thumno+"&amp;thumpos="+thumpos+"&amp;path="+path+"&amp;op="+op, "topMovie", "1151", "651", "8", "#fff");
+	
+	var file;
+	var sheight;
+	if(height<590){
+		file="";
+		sheight=651;
+	}else if(height<690){
+		file="_700";
+		sheight=751;
+	}else if(height<790){
+		file="_800";
+		sheight=851;
+	}else if(height<890){
+		file="_900";
+		sheight=951;
+	}else if(height<990){
+		file="_1000";
+		sheight=1051;
+	}
+	
+	var so=new SWFObject("/editdm/modimg/flash"+file+".swf?img="+name+"&amp;fname="+fname+"&amp;w="+width+"&amp;h="+height+"&amp;flags="+flags+"&amp;copyright="+encodeURI(copyright)+"&amp;copytype="+copytype+"&amp;thumno="+thumno+"&amp;thumpos="+thumpos+"&amp;path="+path+"&amp;op="+op, "topMovie", "1151", sheight, "8", "#fff");
 	so.write("flash");
 	$("#container").height(arrayPageSize[1]).fadeIn();
 	$("#flash").delay(100).show();
@@ -383,8 +404,8 @@ $(function(){
 
 	$(".q1").click(function(){
 		
-		if(d1d2flag===0)return;
-		if(cid===1&&dir==1&&fil==0)return;
+		//if(d1d2flag===0)return;
+		//if(cid===1&&dir==1&&fil==0)return;
 		
 		var n=$(this).attr("name");
 		var y=$(this).offset().top+$(this).height()+14;

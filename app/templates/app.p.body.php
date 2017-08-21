@@ -12,12 +12,14 @@
 
 */
 ?>
+    <?php if(count($page['photo']) == 0):?>
   <script>
   window.addEventListener("load", function() {
     window.location.href = 'pageloaded:' + window.location.href;
     window.page_status   = 'loaded'
   }, false);
   </script>
+    <?php endif;?>
 </head>
 <body>
 <div id="page" class="whole post-single ">
@@ -37,5 +39,16 @@
 </div><?php //#page ?>
 
 
+<?php if(count($page['photo']) > 0):?>
+
+    <link rel="stylesheet" href="/assets/css/style_sp.css?v=<?php echo $page['version']; ?>">
+    <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
+    <script>
+        $(".main").on("scroll", function(){
+            // scrollされるたびに呼ばれる
+        });
+
+    </script>
+<?php endif;?>
 </body>
 </html>

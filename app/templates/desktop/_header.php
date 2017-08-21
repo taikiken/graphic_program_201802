@@ -6,7 +6,11 @@
 
 <?php include_once __DIR__."/../_head.php"; ?>
 
+<?php if(count($page['photo']) > 0):?>
 
+  <link rel="stylesheet" href="/assets/css/style_pc.css?v=<?php echo $page['version']; ?>">
+  <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
+<?php endif;?>
   <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
