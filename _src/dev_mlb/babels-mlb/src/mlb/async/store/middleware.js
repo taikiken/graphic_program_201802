@@ -36,7 +36,7 @@ const logger = store => next => (action = { type: 'undefined' }) => {
     console.warn('next state', store.getState());
     console.groupEnd(action.type);
   }
-  return result;
+  return result || next(action);
 };
 
 /**
