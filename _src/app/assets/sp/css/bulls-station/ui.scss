@@ -19,379 +19,482 @@
 
 
 // common override
-.red-bull-holy-ride {
-  .body-sec,
-  .body-sec-inner {
-    background-color: #10151e !important;
-  }
+.bulls-station {
+}
 
-  .main-sec {
-    padding-bottom: (40/2)+px;
-  }
 
-  .side-sec {
-    padding-bottom: (80/2)+px;
 
-    .sponsor-link {
-      > div {
-        width: 100% !important;
-      }
 
-      iframe {
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-      }
+//.bulls_station__local_navi
+.bulls_station__local_navi {
+  // border-bottom: 3px solid #dbdbde;
+  background-color: #f5f5f5;
+
+  &__inner {}
+
+  &__heading {
+    //.bulls_station__local_navi__heading__container
+    &__container {
+      padding-top: (24/2)+px;
+      padding-bottom: (24/2)+px;
+      border-bottom: 1px solid #e7e7e7;
+    }
+
+    //.bulls_station__local_navi__heading
+    & {
+      width: perCalc(462, 750);
+      margin-right: auto;
+      margin-left: auto;
     }
   }
-}
 
-
-
-
-
-//.special-summary
-.special-summary {
-  background: url(/assets/sp/images/red-bull-holy-ride/summry-bg.png) center 0 no-repeat;
-  background-size: cover;
-
-  //.special-summary-heading
-  &-heading {}
-
-  //.special-summary-copy
-  &-copy {
-    padding: perCalc(20, 640) perCalc(10, 640);
-    color: #10151e;
-    font-weight: bold;
-    font-size: (24/2)+px;
-    text-align: right;
-  }
-}
-
-
-
-
-
-//.live-streaming
-.live-streaming {}
-
-
-
-
-
-//container setting
-.holyride__container {
-}
-
-.holyride__container--odd {
-  position: relative;
-  padding-bottom: (70/2)+px;
-  background: url(/assets/sp/images/red-bull-holy-ride/bg-odd.png) center bottom no-repeat;
-  background-size: 100%;
-}
-
-.holyride__container--even {
-  position: relative;
-  padding-bottom: (70/2)+px;
-  background: #0f1b33 url(/assets/sp/images/red-bull-holy-ride/bg-even.png) center bottom no-repeat;
-  background-size: 100%;
-}
-
-
-
-
-
-//.holyride--intro
-.holyride--intro {
-  margin-top: (32/2)+px;
-
-  .intro__catch {
-    margin-right: perCalc(20, 640);
-    margin-left: perCalc(20, 640);
-    // padding-bottom: perCalc(20, 640);
-    // border-bottom: 1px solid #282d35;
-    color: #fff;
-    font-weight: bold;
-    font-size: (32/2)+px;
+  //.bulls_station__local_navi__list
+  &__list {
+    display: table;
+    width: 100%;
   }
 
-  .intro__link__app {
-    margin-top: (32/2)+px;
-    margin-right: perCalc(20, 640);
-    margin-left: perCalc(20, 640);
-    padding-top:  perCalc(20, 640);
-    border-top: 1px solid #282d35;
+  //.bulls_station__local_navi__item
+  &__item {
+    display: table-cell;
+    width: 33%;
+    vertical-align: middle;
+
+    //.bulls_station__local_navi__item--1
+    &--1 {}
+
+    //.bulls_station__local_navi__item--2
+    &--2 {
+      border-right: 1px solid #e7e7e7;
+      border-left: 1px solid #e7e7e7;
+    }
+
+    //.bulls_station__local_navi__item--3
+    &--3 {}
+  } //.bulls_station__local_navi__item
+
+  //.bulls_station__local_navi__link
+  &__link {
+    display: block;
+    height: (64/2)+px;
+    border-bottom: 2px solid #0e357f;
+    text-align: center;
+
+    img {
+      width: auto;
+      height: (18/2)+px;
+    }
+  } //.bulls_station__local_navi__link
+} //.bulls_station__local_navi
+
+
+
+
+
+//.bulls_station__overview
+.bulls_station__overview {
+  background: url(/assets/sp/images/bulls-station/overview-bg1.png) center center repeat;
+  background-size: (372/2)+px;
+
+  //.bulls_station__overview__inner
+  &__inner {
+    background: url(/assets/sp/images/bulls-station/overview-bg2.png) center 0 no-repeat;
+    background-size: 100%;
+  }
+
+  //.bulls_station__overview__heading
+  &__heading {
+    padding-top: perCalc(112, 750);
+    text-align: center;
+
+    img {
+      width: perCalc(380, 750);
+    }
+  }
+
+  //.bulls_station__overview__copy
+  &__copy {
+    margin-top: perCalc(35, 750);
+    text-align: center;
+
+    img {
+      width: perCalc(614, 750);
+    }
+  }
+
+  //.bulls_station__overview__date
+  &__date {
+    margin-top: perCalc(28, 750);
+    text-align: center;
+
+    img {
+      width: perCalc(400, 750);
+    }
+  }
+
+  //.bulls_station__overview__btn
+  &__btn {
+    margin-top: perCalc(40, 750);
+
+    //.bulls_station__overview__btn__link
+    &__link {
+      display: block;
+      width: perCalc(480, 750);
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+
+
+
+  //.bulls_station__overview__caster
+  &__caster {
+    margin-top: (20/2)+px;
+    padding-bottom: (80/2)+px;
+    background: url(/assets/sp/images/bulls-station/caster-bg.png) 0 (120/2)+px no-repeat;
+    background-size: 100%;
+
+    //.bulls_station__overview__caster__list
+    &__list {
+      width: perCalc(690, 750);
+      margin-right: auto;
+      margin-left: auto;
+      letter-spacing: ls(inline-block);
+      text-align: left;
+    }
+
+    //.bulls_station__overview__caster__item
+    &__item {
+      width: perCalc(325, 690);
+      display: inline-block;
+      letter-spacing: normal;
+      margin-top: perCalc(30, 690);
+      margin-right: perCalc(10, 690);
+      margin-left: perCalc(10, 690);
+      vertical-align: top;
+    }
+
+    //.bulls_station__overview__caster__link
+    &__link {}
+
+    //.bulls_station__overview__caster__figure
+    &__figure {
+      position: relative;
+      width: (240/2)+px;
+      margin-right: auto;
+      margin-left: auto;
+
+      //.bulls_station__overview__caster__figure__dow
+      &__dow {
+        position: absolute;
+      }
+    }
+
+    //.bulls_station__overview__caster__item--mon
+    &__item--mon {
+      .bulls_station__overview__caster__figure__dow {
+        width: (106/2)+px;
+        top: (62/2)+px;
+        left: (176/2)+px;
+      }
+    }
+
+    //.bulls_station__overview__caster__item--tue
+    &__item--tue {
+      .bulls_station__overview__caster__figure__dow {
+        width: (104/2)+px;
+        top: (64/2)+px;
+        left: (172/2)+px;
+      }
+    }
+
+    //.bulls_station__overview__caster__item--wed
+    &__item--wed {
+      .bulls_station__overview__caster__figure__dow {
+        width: (134/2)+px;
+        top: (56/2)+px;
+        left: (174/2)+px;
+      }
+    }
+
+    //.bulls_station__overview__caster__item--thu
+    &__item--thu {
+      .bulls_station__overview__caster__figure__dow {
+        width: (118/2)+px;
+        top: (60/2)+px;
+        left: (172/2)+px;
+      }
+    }
+
+    //.bulls_station__overview__caster__item--fri
+    &__item--fri {
+      .bulls_station__overview__caster__figure__dow {
+        width: (92/2)+px;
+        top: (66/2)+px;
+        left: (172/2)+px;
+      }
+    }
+
+    //.bulls_station__overview__caster__btn
+    &__btn {
+      position: relative;
+      top: -1px;
+      display: block;
+      width: (240/2)+px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    //.bulls_station__overview__caster__heading
+    &__heading {
+      margin-top: (24/2)+px;
+      color: #a18e6d;
+      font-weight: bold;
+      font-size: (24/2)+px;
+      text-align: center;
+    }
+
+    //.bulls_station__overview__caster__copy
+    &__copy {
+      margin-top: 0.5em;
+      color: #a18e6d;
+      font-size: (20/2)+px;
+    }
+
+    //.bulls_station__overview__caster__item--bull
+    &__item--bull {
+      text-align: center;
+
+      img {
+        width: (260/2)+px;
+      }
+    }
+  } //.bulls_station__overview__caster
+
+} //.bulls_station__overview
+
+
+
+
+
+//.bulls_station__follow
+.bulls_station__follow {
+
+  //.bulls_station__follow__app
+  &__app {
+    display: table;
+    padding: perCalc(40, 750) perCalc(30, 750);
+    background-color: #0e357f;
 
     .undotsushin-ios &,
     .undotsushin-android & {
-      display: none;
+      display: none !important;
     }
 
+    //.bulls_station__follow__app__figure
+    //.bulls_station__follow__app__text
+    &__figure,
+    &__text {
+      display: table-cell;
+      vertical-align: middle;
+    }
 
-    a {
-      @include link-decoration(#fff, #fff, underline, underline);
-      display: inline-block;
-      line-height: (80/2)+px;
-      padding-left: (100/2)+px;
-      background: url(/assets/sp/images/red-bull-holy-ride/intro-app_icon.png) 0 0 no-repeat;
-      background-size: (80/2)+px;
+    //.bulls_station__follow__app__figure
+    &__figure {
+      width: perCalc(174, 690);
+      padding-right: perCalc(30, 690);
+    }
+
+    //.bulls_station__follow__app__text
+    &__text {
+      //.bulls_station__follow__app__text__copy
+      &__copy {
+        color: #fff;
+        font-weight: bold;
+        font-size: (26/2)+px;
+      }
+
+      //.bulls_station__follow__app__text__btn
+      &__btn {
+        margin-top: (20/2)+px;
+
+        a {
+          position: relative;
+          display: block;
+          width: 100%;
+          height: (58/2)+px;
+          line-height: (58/2)+px;
+          padding-right: (58/2)+px;
+          background-color: #cc141d;
+          color: #fff;
+          font-weight: bold;
+          font-size: (28/2)+px;
+          text-align: center;
+
+          &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: block;
+            width: (58/2)+px;
+            height: (58/2)+px;
+            background: url(/assets/sp/images/bulls-station/follow-icon_btn.png) center center no-repeat;
+            background-size: cover;
+            // @include hide-text;
+          }
+        }
+      } //.bulls_station__follow__app__text__btn
+    } //.bulls_station__follow__app__text
+  } //.bulls_station__follow__app
+
+
+
+  //.bulls_station__follow__facebook
+  &__facebook {
+    display: table;
+    padding: perCalc(40, 750) perCalc(30, 750);
+
+    //.bulls_station__follow__facebook__likebox
+    //.bulls_station__follow__facebook__text
+    &__likebox,
+    &__text {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    //.bulls_station__follow__facebook__likebox
+    &__likebox {
+      width: perCalc(174, 690);
+      padding-right: perCalc(30, 690);
+    }
+
+    //.bulls_station__follow__facebook__text
+    &__text {
       font-weight: bold;
-      font-size: (28/2)+px;
-    }
-  }
+      font-size: (26/2)+px;
 
-  .intro__timetable {
-    margin-top: (32/2)+px;
+      //.bulls_station__follow__facebook__text__color1
+      &__color1 {
+        color: #cc141d;
+      }
 
-    table {
-      width: 100%;
-    }
-
-    th,
-    td {
-      padding: (8/2)+px perCalc(20, 640);
-      color: #fff;
-      font-size: (24/2)+px;
-    }
-
-    th {
-      width: 30%;
-      font-style: italic;
-    }
-
-    td {
-      padding-left: 0;
-      font-weight: bold;
-    }
-
-    tr:nth-child(odd) {
-      th, td {
-        background-color: #1c2129;
+      //.bulls_station__follow__facebook__text__color2
+      &__color2 {
+        color: #0e357f;
       }
     }
   }
-
-  .intro__banner {
-    margin-top: (32/2)+px;
-  }
-
-  .intro__widjet_twitter {
-    margin-top: 40px;
-    margin-right: perCalc(20, 640);
-    margin-left: perCalc(20, 640);
-  }
-} //.holyride--intro
+} //.bulls_station__follow
 
 
 
 
-//.holyride--course
-.holyride--course {
-  padding-top: (20/2)+px;
-  padding-right: perCalc(20, 640);
-  padding-left: perCalc(20, 640);
 
-  .course__heading {
-    position: relative;
-    height: (40/2)+px;
-    margin-bottom: (40/2)+px;
+//.bulls_station__photo_gallery
+//.bulls_station__offshot_movie
+.bulls_station__photo_gallery,
+.bulls_station__offshot_movie {
+  background-color: #f5f5f5;
+
+  //.bulls_station__photo_gallery__heading
+  //.bulls_station__offshot_movie__heading
+  &__heading {
+    line-height: 1;
+    padding-top: perCalc(18, 750);
+    padding-bottom: perCalc(18, 750);
+    background-color: #c2b390;
+    text-align: center;
 
     img {
       width: auto;
-      height: 100%;
-    }
-  }
-
-  .course__map {
-    > img {
-      display: block;
-    }
-
-    figcaption {
-      p {
-        margin-top: 1em;
-        color: #fff;
-        font-size: (24/2)+px;
-      }
-
-      .note {
-        margin-top: 0;
-        font-size: (20/2)+px;
-      }
-    }
-  }
-
-  .course__staff {
-    //.course__staff__heading
-    &__heading {
-      margin-top: (40/2)+px;
       height: (22/2)+px;
-
-      img {
-        width: auto;
-        height: 100%;
-        vertical-align: top;
-      }
-    }
-
-    //.course__staff__container
-    &__container {
-      display: table;
-      width: 100%;
-      margin-top: (32/2)+px;
-    }
-
-    //.course__staff__thumb
-    //.course__staff__data
-    .course__staff__thumb,
-    .course__staff__data {
-      display: table-cell;
-      vertical-align: top;
-    }
-
-    //.course__staff__thumb
-    .course__staff__thumb {
-      width: perCalc(240, 600);
-      padding-right: perCalc(20, 600);
-    }
-
-    //.course__staff__data
-    .course__staff__data {
-      //.course__staff__data__heading
-      &__heading {
-        color: #fff;
-        font-weight: bold;
-        font-size: (24/2)+px;
-      }
-
-      //.course__staff__data__text
-      &__text {
-        color: #fff;
-        margin-top: 0.5em;
-        font-size: (24/2)+px;
-      }
-    }
-  } //.course__staff
-} //.holyride--course
-
-
-
-
-
-//.holyride--overview
-.holyride--overview {
-  margin-top: (40/2)+px;
-  padding-right: perCalc(20, 640);
-  padding-left: perCalc(20, 640);
-
-  .overview__heading {
-    position: relative;
-    height: (40/2)+px;
-    margin-bottom: (40/2)+px;
-
-    img {
-      width: auto;
-      height: 100%;
     }
   }
 
-  .overview__data {
-    th,
-    td {
-      padding-bottom: 0.5em;
-      color: #fff;
-      vertical-align: top;
-      font-size: (24/2)+px;
-    }
-
-    th {
-      padding-right: (16/2)+px;
-      font-weight: bold;
-    }
-  }
-} //.holyride--overview
-
-
-
-
-
-//.holyride--related
-.holyride--related {
-  padding-top: (20/2)+px;
-  padding-right: perCalc(20, 640);
-  padding-left: perCalc(20, 640);
-
-  .related__heading {
-    position: relative;
-    height: (40/2)+px;
-    margin-bottom: (40/2)+px;
-
-    img {
-      width: auto;
-      height: 100%;
-    }
+  //.bulls_station__photo_gallery__list
+  //.bulls_station__offshot_movie__list
+  &__list {
+    margin-right: perCalc(10, 750);
+    margin-left: perCalc(10, 750);
+    letter-spacing: ls(inline-block);
   }
 
-  .related__post {
+  &__item {
+    display: inline-block;
+    width: perCalc(345, 730);
+    margin-top: perCalc(20, 730);
+    margin-right: perCalc(10, 730);
+    margin-left: perCalc(10, 730);
+    text-align: center;
+    letter-spacing: normal;
+  }
 
-    + .related__post {
-      border-top: 1px solid #273248;
-    }
+  @at-root {
+    .bulls_station__offshot_movie__item {
+      a {
+        display: block;
+        position: relative;
+
+        img {
+          border-radius: 5px;
+        }
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          width: (60/2)+px;
+          height: (60/2)+px;
+          background: url(/assets/sp/images/bulls-station/movie-icon-thumb.png) 0 0 no-repeat;
+          background-size: (60/2)+px;
+          @include hide-text;
+        }
+      }
+    } //.bulls_station__offshot_movie__item
+  } //at-root
+
+  //.bulls_station__photo_gallery__btn
+  //.bulls_station__offshot_movie__btn
+  &__btn {
+    padding: perCalc(40, 750) perCalc(20, 750);
 
     a {
-      @include link-decoration(null, null, none, none);
-      display: table;
-      padding-top: (20/2)+px;
-      padding-bottom: (20/2)+px;
+      display: block;
+      line-height: (88/2)+px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      font-size: (26/2)+px;
+      text-align: center;
 
-      &:active {
-        background-color: #10151e;
+      &:before {
+        content: "";
+        display: inline-block;
+        width: (24/2)+px;
+        height: (24/2)+px;
+        margin-right: (10/2)+px;
+        background: url(/assets/sp/images/bulls-station/gallery-icon_btn.png) 0 0 no-repeat;
+        background-size: (24/2)+px;
+        vertical-align: middle;
+        @include hide-text;
       }
     }
 
-    //.related__post__thumb
-    //.related__post__text
-    &__thumb,
-    &__text {
-      display: table-cell;
-      vertical-align: top;
+    @at-root {
+      //.bulls_station__photo_gallery__btn
+      .bulls_station__photo_gallery__btn a {
+        background-color: #0e357f;
+      }
+
+      //.bulls_station__offshot_movie__btn
+      .bulls_station__offshot_movie__btn a {
+        background-color: #cc141d;
+      }
     }
-
-    //.related__post__thumb
-    &__thumb {
-      width: perCalc(280, 600);
-      padding-right: perCalc(20, 600);
-    }
-
-    //.related__post__text
-    &__text {
-      padding-right: 1em;
-
-      .related__post__heading {
-        color: #fff;
-        font-weight: bold;
-        font-size: (24/2)+px;
-      }
-
-      .related__post__excerpt {
-        margin-top: 0.75em;
-        color: #fff;
-        display: none;
-      }
-
-      .related__post__category {
-        margin-top: 0.75em;
-        color: #be0940;
-        font-weight: bold;
-        font-size: (20/2)+px;
-      }
-
-      .related__post__date {
-        margin-top: 0.75em;
-        color: #999;
-        font-size: (20/2)+px;
-      }
-    } //.related__post__text
-
-  } //.related__post
-} //.holyride--related
+  }
+}
+//.bulls_station__photo_gallery
+//.bulls_station__offshot_movie
