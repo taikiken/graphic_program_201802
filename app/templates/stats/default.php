@@ -51,7 +51,11 @@
   endif;
   // -----------------------------------------
   ?>
-
+  <?php
+  // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+  // @since 2017-08-21
+  ?>
+  <script src="/assets/js/app_ua_detector.bundle.js"></script>
   <?php // #1876 - Google Optimize ?>
   <style>.async-hide { opacity: 0 !important} </style>
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;

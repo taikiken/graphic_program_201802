@@ -60,7 +60,7 @@
   <!-- favicon -->
 <?php
   /*
-  home screen 登録 しても web app mode だと cookie を引きつけず link click で safari に移動し使いづらい
+  home screen 登録 しても web app mode だと cookie を引きつげず link click で safari に移動し使いづらい
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   */

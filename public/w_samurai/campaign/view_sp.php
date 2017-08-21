@@ -37,6 +37,11 @@
   endif;
   // -----------------------------------------
   ?>
+  <?php
+  // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+  // @since 2017-08-21
+  ?>
+  <script src="/assets/js/app_ua_detector.bundle.js"></script>
   <link rel="stylesheet" href="/assets/sp/css/w_samurai/campaign/ui.css?v=<?php echo $page['version']; ?>">
 
   <script type='text/javascript'>
