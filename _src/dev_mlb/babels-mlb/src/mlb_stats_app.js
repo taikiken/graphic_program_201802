@@ -30,6 +30,11 @@ import 'gsap';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
 
 // -----------------------------------------------
+// polyfill extend
+// eslint-disable-next-line no-unused-vars
+import polyfill from './polyfill/';
+
+// -----------------------------------------------
 // main
 import Main from './Main';
 
