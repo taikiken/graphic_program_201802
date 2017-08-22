@@ -82,6 +82,12 @@
     <div class="body-sec-inner">
       <div class="bulls_station__overview">
         <div class="bulls_station__overview__inner">
+
+          <div id="scene" class="bulls_station__overview__parallax">
+            <div data-depth="0.05" class="layer parallax__layer parallax__layer--shadow"><img src="/assets/images/bulls-station/overview-bg2_shadow.png" alt=""></div>
+            <div data-depth="0.20" class="layer parallax__layer parallax__layer--bustle"><img src="/assets/images/bulls-station/overview-bg2.png" alt=""></div>
+          </div><!-- /#js-parallax -->
+
           <h1 class="bulls_station__overview__heading"><img src="/assets/images/bulls-station/overview-logo.png" alt="BULL'S STATION"></h1>
           <p class="bulls_station__overview__copy"><img src="/assets/images/bulls-station/overview-copy.png" alt="BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！"></p>
           <p class="bulls_station__overview__date"><img src="/assets/images/bulls-station/overview-date.png" alt="毎週平日 月-金 12:30〜 配信"></p>
@@ -225,7 +231,22 @@
     </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 
+<script src="/assets/js/bulls-station/parallax.js"></script>
+<script>
+  // Pretty simple huh?
+  var scene = document.getElementById('scene');
+  var parallax = new Parallax(scene, {
+    relativeInput: true,
+    clipRelativeInput: false,
+    hoverOnly: true
+  });
+</script>
+
+<?php
+/*
 <script src="/assets/js/<?php echo $page['dir_name']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
+*/
+?>
 
 <?php
 

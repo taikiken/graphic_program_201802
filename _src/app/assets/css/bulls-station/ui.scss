@@ -140,29 +140,50 @@
 
   //.bulls_station__overview__inner
   &__inner {
-    background: url(/assets/images/bulls-station/overview-bg2.png) center 0 no-repeat;
+    position: relative;
+  }
+
+  //.bulls_station__overview__parallax
+  &__parallax {
+    position: absolute;
+    width: 1480px;
+    height: 610px;
+    overflow: hidden;
+
+    .parallax__layer {
+      position: absolute;
+
+      img {
+        margin-top: -90px;
+        margin-left: -100px;
+      }
+    }
   }
 
   //.bulls_station__overview__heading
   &__heading {
+    width: 100%;
     padding-top: 72px;
     text-align: center;
   }
 
   //.bulls_station__overview__copy
   &__copy {
-    margin-top: (28/2)+px;
+    position: relative;
+    padding-top: 28px;
     text-align: center;
   }
 
   //.bulls_station__overview__date
   &__date {
+    position: relative;
     margin-top: 20px;
     text-align: center;
   }
 
   //.bulls_station__overview__btn
   &__btn {
+    position: relative;
     margin-top: 40px;
 
     //.bulls_station__overview__btn__link
