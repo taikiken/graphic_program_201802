@@ -209,17 +209,27 @@
       }
     }
 
-    //.bulls_station__overview__caster__link
-    &__link {
-
-      &:hover .bulls_station__overview__caster__btn {
-        background-color: #cc141d;
-      }
-    }
-
     //.bulls_station__overview__caster__figure
     &__figure {
       position: relative;
+      width: 200px;
+      height: 245px;
+      background: url(/assets/images/bulls-station/caster-figure_bg.png) 0 0 no-repeat;
+
+      //.bulls_station__overview__caster__figure__img
+      &__img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: top .2s;
+      }
+
+      //.bulls_station__overview__caster__figure__heading
+      &__heading {
+        position: absolute;
+        bottom: 0;
+        left: 20px;
+      }
 
       //.bulls_station__overview__caster__figure__dow
       &__dow {
@@ -293,6 +303,39 @@
       color: #a18e6d;
     }
   } //.bulls_station__overview__caster
+
+
+
+  //.bulls_station__overview__caster__link
+  &__caster__link {
+    &:hover {
+      .bulls_station__overview__caster__figure__img {
+        top: -5px;
+      }
+
+      .bulls_station__overview__caster__figure__dow {
+        animation: figure__dow-anime .2s ease;
+      }
+
+      .bulls_station__overview__caster__btn {
+        background-color: #cc141d;
+      }
+    }
+  }
+
+
+@at-root {
+
+@keyframes figure__dow-anime {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-2deg);
+  }
+}
+
+} //at-root
 
 } //.bulls_station__overview
 
