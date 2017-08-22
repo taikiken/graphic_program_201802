@@ -122,7 +122,7 @@ export default class ModCalendar {
    * @returns {?ModCalendarEvents} 該当日のイベント情報を返します
    */
   game(date) {
-    console.log('ModCalendarEvents.game', date);
+    // console.log('ModCalendarEvents.game', date);
     return this.calendar[date];
   }
 }

@@ -132,7 +132,7 @@ export default class View {
     // ajax error が出ても表示に問題は無いようなのでこのままにする
     Creator.calendar(year, today);
     Creator.schedule(Day.date(today));
-    console.log('ViewIndex.index', year, today);
+    // console.log('ViewIndex.index', year, today);
   }
   // ---------------------------------------
   // game
@@ -148,7 +148,7 @@ export default class View {
    * @param {Element} info ゲーム情報表示コンテナ
    */
   static game(year, id, { overview, score, info }) {
-    console.log('View.game', year, id, overview, score, info);
+    // console.log('View.game', year, id, overview, score, info);
     // save
     Games.year = year;
     Games.id = id;

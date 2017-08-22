@@ -13,12 +13,12 @@
 ?>
 <div class="body-sec">
   <div class="body-sec-inner">
-    
+
     <div class="stats__header stats__header--mlb_live">
       <h1 class="stats__header__title"><a href="/stats/mlb/"><img class="responsive" src="/assets/images/stats/mlb/live-heading@2x.png" alt="MLB速報&amp;データ" /></a></h1>
       <div class="stats__header__btn"><a href="/stats/mlb/"><img class="responsive" src="/assets/images/stats/mlb/live-heading-btn@2x.png" alt="日程・結果に戻る" /></a></div><!-- /.stats__header__btn -->
     </div><!-- /.stats__header -->
-    
+
     <?php
     // -----------------------------------------------
     // GAME: 上部 スコア
@@ -32,15 +32,41 @@
     // GAME: スコアボード + 自動更新
     ?>
     <div id="js-mlb-game-score"></div>
-    
+
     <div class="stats__banner stats__banner--mlb show-for-large">
-      <div><a href="hoge"><img src="/assets/images/stats/tennis/bnr_hero.png" alt=""></a></div>
+      <!-- /531683568/mlb-stats-ad/mlb-stats-under-header-PC -->
+      <script>
+        googletag.cmd.push(function() {
+          googletag.defineSlot('/531683568/mlb-stats-ad/mlb-stats-under-header-PC', [728, 90], 'div-gpt-ad-1499151607828-0').addService(googletag.pubads());
+          googletag.pubads().enableSingleRequest();
+          googletag.enableServices();
+        });
+      </script>
+      <div id='div-gpt-ad-1499151607828-0' style='height:90px; width:728px;'>
+      <script>
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1499151607828-0'); });
+      </script>
+      </div>
+      <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-PC -->
     </div><!-- /.stats__banner -->
 
     <div class="stats__banner stats__banner--mlb show-for-small">
-      <div><a href="hoge"><img src="/assets/images/stats/tennis/bnr_hero@2x.png" alt=""></a></div>
+      <!-- /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
+      <script>
+        googletag.cmd.push(function() {
+          googletag.defineSlot('/531683568/mlb-stats-ad/mlb-stats-under-header-SP', [320, 50], 'div-gpt-ad-1499151685008-0').addService(googletag.pubads());
+          googletag.pubads().enableSingleRequest();
+          googletag.enableServices();
+        });
+      </script>
+      <div id='div-gpt-ad-1499151685008-0' style='height:50px; width:320px;'>
+      <script>
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1499151685008-0'); });
+      </script>
+      </div>
+      <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
     </div><!-- /.stats__banner -->
-    
+
     <?php
     // ------------------------------------------------------------------------
     // 日程・動的出力
@@ -100,3 +126,5 @@
     </section>
   </div>
 </div><!-- /.body-sec -->
+
+<script src="/assets/js/stats_mlb.bundle.js?v=<?php echo $page['version']; ?>"></script>
