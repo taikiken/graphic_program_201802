@@ -1,19 +1,31 @@
+<?php
+// app webview かを `?app=(ios|android)` から判定します
+// ==============================
+$from_webview = false;
+if (isset($_GET['app'])) {
+  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
+    $from_webview = true;
+  }
+}
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <script src="/assets/js/app_ua_detector.bundle.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title>[pagetitle] | SPORTS BULL</title>
-  <meta name="description" content="説明文">
-  <meta name="keywords" content="キーワード, キーワード, キーワード">
+  <title><?php echo strip_tags($page['title']).' | '.$page['site_name']; ?></title>
+  <meta name="keywords" content="<?php echo $page['keywords']; ?>">
+  <meta name="description" content="<?php echo $page['og_description']; ?>">
   <!-- sns ogp -->
-  <meta property="og:title" content="[pagetitle] | SPORTS BULL">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://sportsbull.jp/category/motorsports/">
-  <meta property="og:description" content="説明文">
+  <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
+  <meta property="og:type" content="<?php echo $page['og_type']; ?>">
+  <meta property="og:title" content="<?php echo $page['og_title']; ?>">
+  <meta property="og:image" content="<?php echo $page['og_image']; ?>">
+  <meta property="og:url" content="<?php echo $page['og_url']; ?>">
+  <meta property="og:description" content="<?php echo $page['og_description']; ?>">
+  <meta property="og:locale" content="ja_JP" />
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
@@ -25,12 +37,13 @@
   <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/sp/css/bulls-station/ui.css">
-  <script src="/assets/sp/js/libs/synapse/synapse.js"></script>
-  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
-  <script src="/assets/sp/js/libs/synapse/extras/jquery.inview.js"></script>
-  <script src="/assets/js/libs/vendor.react.js"></script>
-  <script src="/assets/js/bundle/main.bundle.js"></script>
+
+  <link rel="canonical" href="<?php echo $page['og_url']; ?>">
+  <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
+
+  <link rel="stylesheet" href="/assets/sp/css/<?php echo $page['dir_name']; ?>/ui.css?v=<?php echo $page['version']; ?>">
+  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
   <script type='text/javascript'>
     var googletag = googletag || {};
@@ -54,21 +67,22 @@
    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
    ga('create', 'UA-74679267-1', 'auto');
+   ga('require', 'GTM-KJ33JM9');
    ga('require', 'linkid');
    ga('require', 'displayfeatures');
    ga('send', 'pageview');
 
   </script>
 </head>
-<body>
-<div class="whole bulls-station">
+<body class="appbnr-disable">
+<div class="whole <?php echo $page['template_classname']; ?>">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
 
-  <div class="body-sec">
+  <div id="body-section" class="body-sec">
     <div class="body-sec-inner">
       <nav class="bulls_station__local_navi">
         <div class="bulls_station__local_navi__inner">
@@ -219,18 +233,12 @@
 
         <div class="bulls_station__offshot_movie__btn"><a href="hoge">すべてのOFFSHOT MOVIEを見る</a></div>
       </div><!-- /.bulls_station__offshot_movie -->
-    </div><!-- /.body-sec-inner -->
+
+    </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 
   <footer class="foot-sec">
     <div class="foot-sec-inner">
-      <nav class="foot-breadCrumb">
-        <ol itemscope itemtype="http://schema.org/breadCrumbList">
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="category.php"><span itemprop="name">モータースポーツ</span><meta itemprop="position" content="2" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="p.php"><span itemprop="name">パナソニックのオリンピック・アクティベーション 「Active Learning Camp」の可能性</span><meta itemprop="position" content="3" /></a></li>
-        </ol>
-      </nav><!-- /.foot-breadCrumb -->
 
       <div class="foot-pr">
         <div class="foot-pr-inner">
@@ -249,7 +257,7 @@
         </div>
       </div><!-- /.foot-pr -->
 
-      <div class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
+      <div id="js-page_top" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
 
       <nav class="fnav">
         <ul>
@@ -272,39 +280,6 @@
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 
-  <div id="side-menu-container">
-    <div id="side-menu-bg"></div>
-    <div id='side-menu' data-role='panel' data-position='left' data-display='push'>
-      <ul id="side-menu-list">
-        <li class="ad"><img src="/assets/sp/images/dummy/side-bnr.jpg" alt=""></li>
-
-        <li id="side-menu-service">
-          <ul>
-            <!-- Service Specific Menu -->
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>スポーツブルトップへ</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-mypage" href="#"><i></i>マイページ</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-config" href="#"><i></i>設定</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#"><i></i>ログアウト</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>スポーツブルとは</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <!-- Syn. Service List -->
-          <div id='synapse-service-list-outer-box' style='display: none'>
-            <ul id='synapse-service-list'>
-              <li id="synapse-service-list-title">おすすめサービス</li>
-            </ul>
-          </div>
-
-          <!-- Syn. Logo -->
-          <div id="synapse-logo-box" class="synapse_logo" style='display: none'></div>
-        </li>
-
-      </ul>
-    </div><!--/#side-menu-->
-  </div><!--/#side-menu-container-->
-
 </div><!-- /.whole -->
 
 <script>
@@ -325,5 +300,11 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
+<script src="/assets/js/<?php echo $page['dir_name']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
 </body>
 </html>
+
+<?php
+include_once __DIR__."/../../_debug.php";
+?>
