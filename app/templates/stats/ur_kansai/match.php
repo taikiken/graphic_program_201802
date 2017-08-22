@@ -7,7 +7,7 @@
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title>xx vs xx 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | SPORTS BULL</title>
+  <title>xx vs xx 関西学生アメリカンフットボールリーグ | 速報 & データ | SPORTS BULL</title>
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
 
@@ -49,7 +49,7 @@
   <!-- 関西アメフト用css,js -->
   <link rel="stylesheet" href="/assets/stats/ur_kansai/css/ui.css">
   <link rel="stylesheet" href="/assets/stats/ur_kansai/js/demo.js">
-
+  <link rel="stylesheet" href="/assets/stats/ur_kansai/css/style.css">
   <!-- optimize -->
   <style>.async-hide { opacity: 0 !important} </style>
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
@@ -144,11 +144,499 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
   </header><!-- /.head-sec -->
 
   <div class="body-sec">
+    <div class="title">
+      <h2>
+        <a href="./"><img src="/stats/hsb/img/hsb_header.png" alt="高校野球（甲子園） 試合速報"></a>
+        <a class="btn" href="#">日程・結果へ</a>
+      </h2>
+    </div><!-- /.title -->
+    <div id="result-sec">
+      <div class="inner">
+        <div class="game-name">新入生歓迎スポーツフェスティバル</div>
+        <div class="result">
+          <div class="home-name">
+            <span class="team-120">甲南大学</span>
+          </div>
+          <div class="score">
+            0<span>vs</span>0
+          </div>
+          <div class="away-name">
+            <span class="team-120">関西大学</span>
+          </div>
+        </div>
+        <div class="state">試合前</div>
+        <div class="info">
+          2017年4月8日（土）　11:00～<br />
+          於：王子スタジアム　天候：晴れ　観衆：1,000人
+        </div>
+      </div><!-- /.inner -->
+      <span class="bulu-line"></span>
+      <span class="red-line"></span>
+    </div><!-- /#result-sec -->
     <div class="body-sec-inner">
-
       <section class="main-sec">
-        main contents
-        <div style="height: 600px"><!-- 表示確認用 --></div>
+        <nav id="game-info" class="active-0">
+          <ul>
+            <li>基本情報</li>
+            <li>得点経過</li>
+            <li>個人成績</li>
+          </ul>
+        </nav>
+        <div id="basic-info">
+          <h3>関連動画</h3>
+          <div class="movie">
+            <ul>
+              <li>
+                <a href="#">
+                  <div>
+                    <img src="https://img.sportsbull.jp/thumbnail1/2017081922130217639600.jpg" alt="前半、ゴールを決めた川崎Ｆ・ＭＦ中村（右）は小林とハイタッチ（撮影・山崎安昭）">
+                  </div>
+                  <div><p>ダイジェスト</p><p>タイトルタイトルタイトルタイトルタイトルタイトル</p></div>
+                </a>
+                <a href="#">フルバージョンの動画はこちら</a>
+              </li>
+              <li>
+                <a href="#">
+                  <div>
+                    <img src="https://img.sportsbull.jp/thumbnail1/2017081922130217639600.jpg" alt="前半、ゴールを決めた川崎Ｆ・ＭＦ中村（右）は小林とハイタッチ（撮影・山崎安昭）">
+                  </div>
+                  <div><p>ダイジェスト</p><p>タイトルタイトルタイトルタイトルタイトルタイトル</p></div>
+                </a>
+                <a href="#">フルバージョンの動画はこちら</a>
+              </li>
+            </ul>
+          </div><!-- /.movie -->
+
+          <h3>各クオーター結果</h3>
+          <div class="quarter">
+            <table>
+              <thead>
+                <tr>
+                  <th width="25%">チーム</th>
+                  <th>1Q</th>
+                  <th>2Q</th>
+                  <th>3Q</th>
+                  <th>4Q</th>
+                  <th>合計</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>甲南大学</td>
+                  <td>99</td>
+                  <td>99</td>
+                  <td>99</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td>関西大学</td>
+                  <td>99</td>
+                  <td>99</td>
+                  <td>99</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+              </tbody>
+            </table>
+          </div><!-- /.quarter -->
+
+          <h3>データ</h3>
+          <div class="data">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2"></th>
+                  <th>甲南大学</th>
+                  <th>関西大学</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="2">タッチダウン</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">PAT</td>
+                  <td>（1点）回数-成功</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td>（2点）回数-成功</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td>フィールドゴール</td>
+                  <td>回数-成功</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td colspan="2">セイフティ</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td colspan="2">1stダウン（ラン-パス-反則）</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">パス</td>
+                  <td>試投-成功-被Intercept</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td>獲得ヤード</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td>ラン</td>
+                  <td>回数-獲得ヤード</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td>攻撃</td>
+                  <td>回数-獲得ヤード</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td>反則</td>
+                  <td>回数-喪失ヤード</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td>ファンブル</td>
+                  <td>回数-喪失回数</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td colspan="2">ボール所有時間</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td colspan="2">3rd Down Conersions</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+                <tr>
+                  <td colspan="2">4rd Down Conersions</td>
+                  <td>99</td>
+                  <td>99</td>
+                </tr>
+              </tbody>
+            </table>
+          </div><!-- /.data -->
+        </div><!-- /#basic-info -->
+        <div id="score-info">
+          <ul>
+            <li>
+              <div class="blue">甲南大</div>
+              <div class="passage">1Q-03:24 #9大野翔 41yds Intercept RET.(K-G #14土井幸平)</div>
+            </li>
+            <li>
+              <div class="blue">甲南大</div>
+              <div class="passage">1Q-03:24 #9大野翔 41yds Intercept RET.(K-G #14土井幸平)</div>
+            </li>
+            <li>
+              <div class="red">関西大</div>
+              <div class="passage">1Q-03:24 #9大野翔 41yds Intercept RET.(K-G #14土井幸平)</div>
+            </li>
+            <li>
+              <div class="red">関西大</div>
+              <div class="passage">1Q-03:24 #9大野翔 41yds Intercept RET.(K-G #14土井幸平)</div>
+            </li>
+          </ul>
+        </div><!-- /#score-info -->
+
+        <div id="personal-info">
+          <nav id="team-tab" class="active-0">
+            <ul>
+              <li>甲南大学</li>
+              <li>関西大学</li>
+            </ul>
+          </nav>
+          <div class="home">
+            <h3>ラン<span>合計 33-422</span></h3>
+            <div class="run">
+              <table>
+                <thead>
+                  <tr>
+                    <th>プレイヤー</th>
+                    <th>ATT</th>
+                    <th>YDS</th>
+                    <th>TD</th>
+                    <th>LG</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div><!-- /.run -->
+
+            <h3>パス<span>合計 20-12-1-218</span></h3>
+            <div class="pass">
+              <table>
+                <thead>
+                  <tr>
+                    <th>プレイヤー</th>
+                    <th>CP/AT</th>
+                    <th>YDS</th>
+                    <th>TD</th>
+                    <th>INT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div><!-- /.pass -->
+            <h3>レシーブ<span>合計 12-218</span></h3>
+            <div class="receive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>プレイヤー</th>
+                    <th>ATT</th>
+                    <th>YDS</th>
+                    <th>TD</th>
+                    <th>LG</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>32 西村七斗</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div><!-- /.receive -->
+          </div><!-- /.home -->
+          <div class="away">
+            <h3>ラン<span>合計 33-422</span></h3>
+            <div class="run">
+              <table>
+                <thead>
+                  <tr>
+                    <th>プレイヤー</th>
+                    <th>ATT</th>
+                    <th>YDS</th>
+                    <th>TD</th>
+                    <th>LG</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div><!-- /.run -->
+
+            <h3>パス<span>合計 20-12-1-218</span></h3>
+            <div class="pass">
+              <table>
+                <thead>
+                  <tr>
+                    <th>プレイヤー</th>
+                    <th>CP/AT</th>
+                    <th>YDS</th>
+                    <th>TD</th>
+                    <th>INT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div><!-- /.pass -->
+            <h3>レシーブ<span>合計 12-218</span></h3>
+            <div class="receive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>プレイヤー</th>
+                    <th>ATT</th>
+                    <th>YDS</th>
+                    <th>TD</th>
+                    <th>LG</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                  <tr>
+                    <td>14 土井幸平</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                    <td>xx</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div><!-- /.receive -->
+          </div>
+        </div><!-- /#personal-info -->
       </section><!-- /.main-sec -->
 
       <section class="side-sec show-for-large">
@@ -316,7 +804,8 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
-
+<script src="/assets/js/libs/jquery2/jquery.min.js"></script>
 <script src="/assets/js/global.bundle.js"></script>
+<script src="/assets/stats/ur_kansai/js/match.js"></script>
 </body>
 </html>

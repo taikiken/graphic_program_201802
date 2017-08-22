@@ -155,6 +155,13 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+  # ref. #2321
+  if ( $category === 'americanfootball' ) :
+    $categoriesinfo['webviews']     = array(
+      '/stats/ur_kansai/webview/',
+    );
+  endif;
+ 
   // #2080
   if ( $category === 'top' ) :
     $categoriesinfo['webviews'] = array(

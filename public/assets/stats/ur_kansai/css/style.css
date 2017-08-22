@@ -1,7 +1,10 @@
 .body-sec-inner {
   background: none; }
 
-h2 {
+.game-category2, .game-category3, .game-category4, #score-info, #personal-info {
+  display: none; }
+
+#af-schedule h2, #af-match h2 {
   background-color: #fff;
   border-top: 4px solid #0e357f;
   margin-bottom: 20px;
@@ -10,28 +13,52 @@ h2 {
   padding: 12px 20px;
   font-size: 22px;
   position: relative; }
-  h2.calendar:before {
-    content: "";
-    display: block;
-    float: left;
-    margin: 5px;
-    width: 20px;
-    height: 20px;
-    background: url(https://sportsbull.jp/assets/images/inhigh/icon_calender.png) no-repeat 0 0; }
+.title h2 {
+  position: relative;
+  width: 1088px;
+  margin: 0 auto;
+  padding: 15px 0; }
+  .title h2 .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 0;
+    width: 170px;
+    border-bottom: 60px solid #1b1b1b;
+    border-left: 20px solid transparent;
+    color: #f6ab00;
+    font-weight: 700;
+    line-height: 4.5;
+    text-align: center; }
+h2.calendar:before {
+  content: "";
+  display: block;
+  float: left;
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  background: url(https://sportsbull.jp/assets/images/inhigh/icon_calender.png) no-repeat 0 0; }
 
-.game-category {
+#basic-info h3, #personal-info h3 {
+  display: table;
+  width: 100%;
+  color: #f5f5f5;
+  font-size: 16px;
+  font-weight: 700;
+  border-top: 2px solid #fff;
+  padding: 17px 0; }
+#personal-info h3 span {
+  float: right; }
+
+#game-category {
   width: 100%;
   border: 2px solid #cc141d;
   border-radius: 4px;
   margin-bottom: 30px; }
-  .game-category ul {
-    display: -webkit-box;
-    display: -ms-flexbox;
+  #game-category ul {
     display: flex; }
-    .game-category ul li {
-      -webkit-box-flex: 1;
-          -ms-flex-positive: 1;
-              flex-grow: 1;
+    #game-category ul li {
+      flex-grow: 1;
       text-align: center;
       color: #cc141d;
       background-color: #fff;
@@ -39,60 +66,46 @@ h2 {
       font-size: 14px;
       padding: 8px 0;
       cursor: pointer; }
-      .game-category ul li:not(:last-child) {
+      #game-category ul li:not(:last-child) {
         border-right: 1px solid #efefef; }
-  .game-category.active-0 ul li:nth-child(1) {
+  #game-category.active-0 ul li:nth-child(1) {
     background-color: #cc141d;
     color: #fff; }
-  .game-category.active-1 ul li:nth-child(2) {
+  #game-category.active-1 ul li:nth-child(2) {
     background-color: #cc141d;
     color: #fff; }
-  .game-category.active-2 ul li:nth-child(3) {
+  #game-category.active-2 ul li:nth-child(3) {
     background-color: #cc141d;
     color: #fff; }
-  .game-category.active-3 ul li:nth-child(4) {
+  #game-category.active-3 ul li:nth-child(4) {
     background-color: #cc141d;
     color: #fff; }
 
 #af-schedule {
   margin-bottom: 30px; }
   #af-schedule .list {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     border-top: 1px solid #dbdbdb;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    justify-content: center;
+    align-items: center;
     font-weight: 700; }
     #af-schedule .list p {
-      -ms-flex-preferred-size: 100px;
-          flex-basis: 100px;
+      flex-basis: 100px;
       text-align: center;
       line-height: 4; }
     #af-schedule .list ul {
-      -webkit-box-flex: 1;
-          -ms-flex-positive: 1;
-              flex-grow: 1;
-      display: -webkit-box;
-      display: -ms-flexbox;
+      flex-grow: 1;
       display: flex;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
+      flex-wrap: wrap; }
       #af-schedule .list ul li {
         width: 50%;
         margin-bottom: 5px;
         text-align: center; }
         #af-schedule .list ul li:nth-child(odd) {
-          -webkit-box-sizing: border-box;
-                  box-sizing: border-box;
+          box-sizing: border-box;
           border-right: 1px solid #f5f5f5; }
         #af-schedule .list ul li:nth-child(even) {
-          -webkit-box-sizing: border-box;
-                  box-sizing: border-box;
+          box-sizing: border-box;
           border-left: 2px solid #f5f5f5; }
         #af-schedule .list ul li a {
           display: block;
@@ -118,12 +131,8 @@ h2 {
             padding: 5px 0;
             color: #fff;
             font-size: 12px;
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                    justify-content: center; }
+            justify-content: center; }
             #af-schedule .list ul li a:last-child:before {
               content: "";
               width: 20px;
@@ -135,12 +144,8 @@ h2 {
           padding: 5px 0;
           color: #D3D3D3;
           font-size: 12px;
-          display: -webkit-box;
-          display: -ms-flexbox;
           display: flex;
-          -webkit-box-pack: center;
-              -ms-flex-pack: center;
-                  justify-content: center; }
+          justify-content: center; }
           #af-schedule .list ul li div:before {
             content: "";
             width: 20px;
@@ -152,25 +157,221 @@ h2 {
   margin-bottom: 30px; }
   #af-match table {
     width: 100%; }
-    #af-match table thead th {
-      background: #0e357f;
-      padding: 5px 0;
-      text-align: center;
-      vertical-align: middle;
-      color: #fff;
-      font-weight: 700;
-      font-size: 14px; }
-      #af-match table thead th:not(:last-child) {
-        border-right: 1px solid #DADADA; }
-    #af-match table tbody tr {
+    #af-match table tr {
       border-bottom: 1px solid #DADADA; }
-      #af-match table tbody tr td {
+      #af-match table tr th {
+        background: #0e357f;
+        padding: 5px 0;
+        text-align: center;
+        vertical-align: middle;
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px; }
+        #af-match table tr th:not(:last-child) {
+          border-right: 1px solid #DADADA; }
+      #af-match table tr td {
+        color: #000;
         padding: 5px 0;
         text-align: center;
         vertical-align: middle; }
-        #af-match table tbody tr td:not(:last-child) {
+        #af-match table tr td:not(:last-child) {
           border-right: 1px solid #DADADA; }
-        #af-match table tbody tr td.non {
+        #af-match table tr td.non {
           background: #E6E6E6; }
+
+#result-sec {
+  height: 340px;
+  color: #fff;
+  background: url(https://sportsbull.jp/stats/hsb/css/resulthead_bg.png) no-repeat center -160px;
+  background-size: 100% auto;
+  position: relative; }
+  #result-sec .inner {
+    width: 1088px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 50px; }
+    #result-sec .inner .game-name {
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 5px; }
+    #result-sec .inner .result {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 5px; }
+      #result-sec .inner .result .score {
+        width: 300px;
+        font-size: 60px; }
+        #result-sec .inner .result .score span {
+          font-size: 25px;
+          vertical-align: middle;
+          padding: 0 20px; }
+    #result-sec .inner .state {
+      background: #0e357f;
+      font-size: 20px;
+      width: 100px;
+      font-weight: 700;
+      margin: 0 auto 15px; }
+    #result-sec .inner .info {
+      font-size: 18px; }
+  #result-sec .bulu-line {
+    display: block;
+    width: 50%;
+    background: #0e357f;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px; }
+  #result-sec .red-line {
+    display: block;
+    width: 50%;
+    background: #cc141d;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 5px; }
+
+#game-info, #team-tab {
+  width: 100%;
+  margin: 30px 0; }
+  #game-info ul, #team-tab ul {
+    display: flex; }
+    #game-info ul li, #team-tab ul li {
+      flex-grow: 1;
+      text-align: center;
+      color: #fff;
+      background-color: #1A1A1A;
+      font-weight: 700;
+      font-size: 18px;
+      padding: 17px 0;
+      cursor: pointer; }
+  #game-info.active-0 ul li:nth-child(1), #team-tab.active-0 ul li:nth-child(1) {
+    background-color: #222222;
+    color: #F7AC03; }
+  #game-info.active-1 ul li:nth-child(2), #team-tab.active-1 ul li:nth-child(2) {
+    background-color: #222222;
+    color: #F7AC03; }
+  #game-info.active-2 ul li:nth-child(3), #team-tab.active-2 ul li:nth-child(3) {
+    background-color: #222222;
+    color: #F7AC03; }
+
+#team-tab li:nth-of-type(1) {
+  border-bottom: 2px solid #0e357f; }
+#team-tab li:nth-of-type(2) {
+  border-bottom: 2px solid #cc141d; }
+
+#basic-info .movie {
+  border-top: 2px solid #1B1B1B;
+  padding-top: 15px; }
+  #basic-info .movie ul li {
+    margin-bottom: 20px; }
+    #basic-info .movie ul li a:hover {
+      opacity: 0.7;
+      text-decoration: none; }
+    #basic-info .movie ul li a:nth-of-type(1) {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 4px solid #1B1B1B; }
+      #basic-info .movie ul li a:nth-of-type(1) div:nth-of-type(1) {
+        position: relative;
+        width: 178px;
+        height: 100px;
+        flex-basis: 178px; }
+        #basic-info .movie ul li a:nth-of-type(1) div:nth-of-type(1) img {
+          width: 100%; }
+        #basic-info .movie ul li a:nth-of-type(1) div:nth-of-type(1):after {
+          content: "";
+          width: 178px;
+          height: 100px;
+          position: absolute;
+          background: url(https://sportsbull.jp/stats/hsb/img/mov_thumb_icon.png) no-repeat center;
+          background-size: 170px;
+          top: 0;
+          left: 0; }
+      #basic-info .movie ul li a:nth-of-type(1) div:nth-of-type(2) {
+        flex-grow: 1;
+        font-weight: 700;
+        padding: 20px 20px 0 20px; }
+        #basic-info .movie ul li a:nth-of-type(1) div:nth-of-type(2) img {
+          width: 100%; }
+        #basic-info .movie ul li a:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(1) {
+          font-size: 12px;
+          color: #F7AC03; }
+        #basic-info .movie ul li a:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2) {
+          color: #fff;
+          font-size: 17px; }
+    #basic-info .movie ul li a:nth-of-type(2) {
+      width: 100%;
+      text-align: center;
+      padding: 15px 0;
+      border-radius: 4px;
+      font-weight: 700;
+      background: #F6AB00;
+      display: block;
+      text-decoration: none;
+      color: #000; }
+#basic-info .quarter {
+  margin-bottom: 30px; }
+  #basic-info .quarter thead tr {
+    border-left: none !important; }
+  #basic-info .quarter tr:nth-of-type(1) {
+    border-left: 2px solid #0e357f; }
+  #basic-info .quarter tr:nth-of-type(2) {
+    border-left: 2px solid #cc141d; }
+#basic-info .data {
+  margin-bottom: 30px; }
+  #basic-info .data thead th:nth-of-type(2) {
+    border-bottom: 2px solid #0e357f; }
+  #basic-info .data thead th:nth-of-type(3) {
+    border-bottom: 2px solid #cc141d; }
+
+table {
+  width: 100%;
+  border-top: 1px solid #222222;
+  color: #fff; }
+  table tr {
+    border-bottom: 1px solid #222222; }
+    table tr th {
+      background: #1A1A1A;
+      padding: 10px 0;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: 700;
+      font-size: 14px; }
+      table tr th:not(:last-child) {
+        border-right: 1px solid #222222; }
+    table tr td {
+      padding: 10px 0;
+      text-align: center;
+      vertical-align: middle; }
+      table tr td:not(:last-child) {
+        border-right: 1px solid #222222; }
+    table tr.non {
+      background: #E6E6E6; }
+
+#score-info {
+  color: #fff;
+  margin-bottom: 30px; }
+  #score-info li .blue {
+    background: #1A1A1A;
+    border-bottom: 1px solid #0e357f;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 15px; }
+  #score-info li .red {
+    background: #1A1A1A;
+    border-bottom: 1px solid #cc141d;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 15px; }
+  #score-info li .passage {
+    padding: 10px 20px;
+    font-size: 15px; }
+  #score-info .run, #score-info .pass, #score-info .receive {
+    margin-bottom: 30px; }
 
 /*# sourceMappingURL=style.css.map */

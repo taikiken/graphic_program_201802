@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <script src="https://sportsbull.jp/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <script src="https://sportsbull.jp/assets/js/app_divide.bundle.js"></script>
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title>日程・結果 - 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | SPORTS BULL</title>
-  <script src="https://sportsbull.jp/assets/js/libs/vendor.react.js"></script>
-  <script src="https://sportsbull.jp/assets/js/bundle/main.bundle.js"></script>
+  <script src="/assets/js/libs/vendor.react.js"></script>
+  <script src="/assets/js/bundle/main.bundle.js"></script>
 
   <meta name="keywords" content="">
   <meta name="description" content="">
@@ -39,15 +39,15 @@
 
 
   <!-- 表示確認用 / -->
-  <link rel="stylesheet" href="https://sportsbull.jp/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
-  <link rel="stylesheet" href="https://sportsbull.jp/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
+  <link rel="stylesheet" href="/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
+  <link rel="stylesheet" href="/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
   <!-- / 表示確認用 -->
 
-  <link rel="stylesheet" href="https://sportsbull.jp/assets/css/basic.css" media="only screen and (min-width: 769px)">
-  <link rel="stylesheet" href="https://sportsbull.jp/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
+  <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
+  <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
 
-  <link rel="stylesheet" href="https://sportsbull.jp/assets/css/stats/ur_kansai/css/ui.css">
-  <link rel="stylesheet" href="https://sportsbull.jp/assets/css/stats/ur_kansai/css/style.css">
+  <link rel="stylesheet" href="/assets/stats/ur_kansai/css/ui.css">
+  <link rel="stylesheet" href="/assets/stats/ur_kansai/css/style.css">
   <!-- optimize -->
   <style>.async-hide { opacity: 0 !important} </style>
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
@@ -147,7 +147,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
       <section class="main-sec">
 
       <div class="stats__header stats__header--golf pt30 mb30">
-        <h1 class="stats__header__title"><a href="./"><img class="responsive" src="https://sportsbull.jp/assets/images/stats/golf/heading@2x.png" alt="ゴルフ 速報&スタッツ" /></a></h1>
+        <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/images/stats/golf/heading@2x.png" alt="ゴルフ 速報&スタッツ" /></a></h1>
       </div><!-- /.stats__header -->
 
       <div class="stats__banner stats__banner--golf show-for-large mb30">
@@ -167,7 +167,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
         <!-- // /531683568/golf-stats-ad/golf-stats-under-header-PC -->
       </div><!-- /.stats__banner -->
 
-      <nav class="game-category active-0">
+      <nav id="game-category" class="active-0">
         <ul>
           <li>公式戦</li>
           <li>入替戦</li>
@@ -175,171 +175,181 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
           <li>甲子園ボール</li>
         </ul>
       </nav>
+      <div class="game-category1">
+        <div id="af-schedule">
+            <h2 class="calendar">日程結果 / Division1</h2>
+            <div class="list">
+              <p>8月18日</p>
+              <ul>
+                <li>
+                  <a href="#"><span class="team-120">京都大学1</span> 99 - 99 <span class="team-120">関西大学</span></a>
+                  <a href="#">ダイジェスト動画</a>
+                </li>
+                <li>
+                  <a href="#"><span class="team-120">京都大学2</span> 99 - 99 <span class="team-120">関西大学</span></a>
+                  <a href="#">ダイジェスト動画</a>
+                </li>
+                <li>
+                  <a href="#"><span class="team-120">京都大学3</span> 99 - 99 <span class="team-120">関西大学</span></a>
+                  <a href="#">ダイジェスト動画</a>
+                </li>
+              </ul>
+            </div>
+            <div class="list">
+              <p>8月19日</p>
+              <ul>
+                <li>
+                  <a href="#"><span class="team-120">京都大学1</span> 99 - 99 <span class="team-120">関西大学</span></a>
+                  <a href="#">ダイジェスト動画</a>
+                </li>
+                <li>
+                  <a href="#"><span class="team-120">京都大学2</span> 99 - 99 <span class="team-120">関西大学</span></a>
+                  <a href="#">ダイジェスト動画</a>
+                </li>
+              </ul>
+            </div>
+            <div class="list">
+              <p>8月20日</p>
+              <ul>
+                <li>
+                  <a href="#"><span class="team-120">京都大学1</span> - <span class="team-120">関西大学</span></a>
+                  <div>ダイジェスト動画</div>
+                </li>
+                <li>
+                  <a href="#"><span class="team-120">京都大学2</span> - <span class="team-120">関西大学</span></a>
+                  <div>ダイジェスト動画</div>
+                </li>
+              </ul>
+            </div>
+        </div><!-- af-schedule -->
 
-      <div id="af-schedule">
-        <h2 class="calendar">日程結果 / Division1</h2>
-        <div class="list">
-          <p>8月18日</p>
-          <ul>
-            <li>
-              <a href="#"><span class="team-120">京都大学1</span> 99 - 99 <span class="team-120">関西大学</span></a>
-              <a href="#">ダイジェスト動画</a>
-            </li>
-            <li>
-              <a href="#"><span class="team-120">京都大学2</span> 99 - 99 <span class="team-120">関西大学</span></a>
-              <a href="#">ダイジェスト動画</a>
-            </li>
-            <li>
-              <a href="#"><span class="team-120">京都大学3</span> 99 - 99 <span class="team-120">関西大学</span></a>
-              <a href="#">ダイジェスト動画</a>
-            </li>
-          </ul>
-        </div>
-        <div class="list">
-          <p>8月19日</p>
-          <ul>
-            <li>
-              <a href="#"><span class="team-120">京都大学1</span> 99 - 99 <span class="team-120">関西大学</span></a>
-              <a href="#">ダイジェスト動画</a>
-            </li>
-            <li>
-              <a href="#"><span class="team-120">京都大学2</span> 99 - 99 <span class="team-120">関西大学</span></a>
-              <a href="#">ダイジェスト動画</a>
-            </li>
-          </ul>
-        </div>
-        <div class="list">
-          <p>8月20日</p>
-          <ul>
-            <li>
-              <a href="#"><span class="team-120">京都大学1</span> - <span class="team-120">関西大学</span></a>
-              <div>ダイジェスト動画</div>
-            </li>
-            <li>
-              <a href="#"><span class="team-120">京都大学2</span> - <span class="team-120">関西大学</span></a>
-              <div>ダイジェスト動画</div>
-            </li>
-          </ul>
-        </div>
-      </div><!-- af-schedule -->
-
-      <div id="af-match">
-        <h2 class="calendar">星取表 / Division1</h2>
-        <table>
-          <thead>
-            <tr>
-              <th width="10%">順位</th>
-              <th>大学名<br />（勝-敗-分）</th>
-              <th>立命館</th>
-              <th>関学大</th>
-              <th>関西大</th>
-              <th>京都大</th>
-              <th>神戸大</th>
-              <th>龍谷大</th>
-              <th>同志社</th>
-              <th>甲南大</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2</td>
-              <td>立命館大学<br />（6-1-0）</td>
-              <td class="non"></td>
-              <td>●<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>関西学院大学<br />（6-1-0）</td>
-              <td>●<br />xx-xx</td>
-              <td class="non"></td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>関西大学<br />（6-1-0）</td>
-              <td>●<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td class="non"></td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-            </tr>
-            <tr>
-              <td>5-6</td>
-              <td>京都大学<br />（6-1-0）</td>
-              <td>●<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td class="non"></td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-            </tr>
-            <tr>
-              <td>7-7</td>
-              <td>神戸大学<br />（6-1-0）</td>
-              <td>●<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td class="non"></td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>龍谷大学<br />（6-1-0）</td>
-              <td>●<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td class="non"></td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-            </tr>
-            <tr>
-              <td>7-8</td>
-              <td>同志社大学<br />（6-1-0）</td>
-              <td>●<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td class="non"></td>
-              <td>○<br />xx-xx</td>
-            </tr>
-            <tr>
-              <td>5-5</td>
-              <td>甲南大学<br />（6-1-0）</td>
-              <td>●<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td>○<br />xx-xx</td>
-              <td class="non"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div><!-- af-schedule -->
+        <div id="af-match">
+          <h2 class="calendar">星取表 / Division1</h2>
+          <table>
+            <thead>
+              <tr>
+                <th width="10%">順位</th>
+                <th>大学名<br />（勝-敗-分）</th>
+                <th>立命館</th>
+                <th>関学大</th>
+                <th>関西大</th>
+                <th>京都大</th>
+                <th>神戸大</th>
+                <th>龍谷大</th>
+                <th>同志社</th>
+                <th>甲南大</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2</td>
+                <td>立命館大学<br />（6-1-0）</td>
+                <td class="non"></td>
+                <td>●<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>関西学院大学<br />（6-1-0）</td>
+                <td>●<br />xx-xx</td>
+                <td class="non"></td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>関西大学<br />（6-1-0）</td>
+                <td>●<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td class="non"></td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+              </tr>
+              <tr>
+                <td>5-6</td>
+                <td>京都大学<br />（6-1-0）</td>
+                <td>●<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td class="non"></td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+              </tr>
+              <tr>
+                <td>7-7</td>
+                <td>神戸大学<br />（6-1-0）</td>
+                <td>●<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td class="non"></td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>龍谷大学<br />（6-1-0）</td>
+                <td>●<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td class="non"></td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+              </tr>
+              <tr>
+                <td>7-8</td>
+                <td>同志社大学<br />（6-1-0）</td>
+                <td>●<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td class="non"></td>
+                <td>○<br />xx-xx</td>
+              </tr>
+              <tr>
+                <td>5-5</td>
+                <td>甲南大学<br />（6-1-0）</td>
+                <td>●<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td>○<br />xx-xx</td>
+                <td class="non"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- af-schedule -->
+      </div><!-- game-category1 -->
+      <div class="game-category2">
+        game-category2：入替戦
+      </div><!-- game-category2 -->
+      <div class="game-category3">
+        game-category3：新日本
+      </div><!-- game-category3 -->
+      <div class="game-category4">
+        game-category4：甲子園ボール
+      </div><!-- game-category4 -->
 
       <div class="stats__banner stats__banner--golf show-for-small">
         <!-- /531683568/golf-stats-ad/golf-stats-under-header-SP -->
@@ -421,13 +431,13 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 
       <div class="foot-pr">
         <div class="foot-pr-inner">
-          <figure><img src="https://sportsbull.jp/assets/images/common/footer-overview-figure.png" alt=""></figure>
+          <figure><img src="/assets/images/common/footer-overview-figure.png" alt=""></figure>
 
           <div class="text-block">
-            <h3 class="foot-pr-logo"><img src="https://sportsbull.jp/assets/images/common/footer-overview-logo.png" alt="SPORTS BULL アプリ版(iPhone/Android)"></h3>
+            <h3 class="foot-pr-logo"><img src="/assets/images/common/footer-overview-logo.png" alt="SPORTS BULL アプリ版(iPhone/Android)"></h3>
             <ul class="foot-pr-btn">
-              <li><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="https://sportsbull.jp/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
-              <li><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="https://sportsbull.jp/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
+              <li><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
+              <li><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
             </ul>
             <p class="foot-pr-text">話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「スポーツ・ブル」。高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
           </div><!-- /.text-block -->
@@ -442,7 +452,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 
       <div class="fnav-block">
         <nav class="fnav">
-          <h3 class="fnav-logo"><img src="https://sportsbull.jp/assets/images/common/footer-fnav-logo.png" alt="SPORTS BULL"></h3>
+          <h3 class="fnav-logo"><img src="/assets/images/common/footer-fnav-logo.png" alt="SPORTS BULL"></h3>
           <ul>
             <li><a href="/about/">サービス紹介</a></li>
             <li><a href="/about/company/">会社概要</a></li>
@@ -469,12 +479,12 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 
       <div class="foot-pr">
         <div class="foot-pr-inner">
-          <figure class="foot-pr-logo"><img src="https://sportsbull.jp/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
+          <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
           <div class="text-block">
             <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
             <ul class="foot-pr-list">
-              <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="https://sportsbull.jp/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
-              <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="https://sportsbull.jp/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
+              <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
+              <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
             </ul>
           </div>
         </div><!-- /.foot-pr-inner -->
@@ -526,6 +536,8 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script src="https://sportsbull.jp/assets/js/global.bundle.js"></script>
+<script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+<script src="/assets/js/global.bundle.js"></script>
+<script src="/assets/stats/ur_kansai/js/index.js"></script>
 </body>
 </html>
