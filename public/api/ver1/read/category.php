@@ -120,7 +120,7 @@ if(strlen($f["name"])>0){
   if ( $category === 'big6tv' ) :
 
     $categoriesinfo['live']          = '/api/big6tv/live';
-    $categoriesinfo['live_interval'] = 60;
+    $categoriesinfo['live_interval'] = 20;
     $categoriesinfo['webviews']      = array(
       '/big6tv/webview/',
     );
