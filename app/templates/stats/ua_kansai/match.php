@@ -670,6 +670,10 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
             <!-- // ad/531683568/pc_sidebar_top_2nd -->
           </div>
 
+          <div class="app-bnr">
+            <iframe width="100%" height="168" src="http://amefootlive.jp/kcafl_live" scrolling="no" frameborder="0" style="border: 0px none transparent;"></iframe>
+          </div>
+          
           <!-- sidebar recommend, オススメ記事 -->
           <div id="widget-recommend-list-container"></div><!--/recommend-->
 

@@ -154,7 +154,7 @@ $photo="";
 $subdomain=preg_match("/dev/",$_SERVER["SERVER_NAME"])?"dev-img":"img";
 $i=0;
 
-$sql="select id,img1,title,a1,a2,a3 from repo_n where d2=57 and flag=1 and t10='2017関西アメフトリーグフォト' order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc";
+$sql="select id,img1,title,a1,a2,a3 from repo_n where d2=57 and flag=1 and m2=159 order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc";
 $db->query($sql);
 while($f=$db->fetch_array()){
 	$v=array(
@@ -215,6 +215,10 @@ while($f=$db->fetch_array()){
             <!-- // ad/531683568/pc_sidebar_top_2nd -->
           </div>
 
+          <div class="app-bnr">
+            <iframe width="100%" height="168" src="http://amefootlive.jp/kcafl_live" scrolling="no" frameborder="0" style="border: 0px none transparent;"></iframe>
+          </div>
+          
           <!-- sidebar recommend, オススメ記事 -->
           <div id="widget-recommend-list-container"></div><!--/recommend-->
 

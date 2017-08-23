@@ -91,7 +91,7 @@ if ($page['category']['slug'] == 'all') {
       <?php
       # ref. #2321 
       if ( $page['category']['slug'] === 'americanfootball' ) :
-        include_once __DIR__.'/../stats/ur_kansai/desktop/index.php';
+        include_once __DIR__.'/../stats/ua_kansai/desktop/index.php';
       endif;
       ?>
 

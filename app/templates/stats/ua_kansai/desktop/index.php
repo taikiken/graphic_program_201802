@@ -1,6 +1,9 @@
 <?php include __DIR__."./../inc.php"; ?>
 <link rel="stylesheet" href="/assets/css/photo/parts_pc.css">
 
+<div class="sub_head_wrapper">
+  <h2 class="sub_head_title"><i></i>関西学生アメリカンフットボールリーグ</h2>  
+</div>
 <!-- section_highlight_movie -->
 <section class="section_interhigh_highlight">
   <div class="ttl-wrapper">
@@ -20,10 +23,10 @@
 <section class="section_interhigh_photo">
   <div class="ttl-wrapper">
     <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
-    <p class="ttl_link"><a href="/stats/ur_kansai/photo/">すべてのフォトギャラリーを見る</a></p>
+    <p class="ttl_link"><a href="/stats/ua_kansai/photo/">すべてのフォトギャラリーを見る</a></p>
   </div>
         
-  <div id="js-current-post" class="current-post photo_gallery">
+  <div id="js-current-post" class="photo_gallery">
     <ul class="photo_list">
 <?php echo $photo; ?>
     </ul>

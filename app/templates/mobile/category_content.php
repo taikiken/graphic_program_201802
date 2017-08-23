@@ -71,7 +71,7 @@
       <?php
       # ref. #2321 
       if ( $page['category']['slug'] === 'americanfootball' ) :
-        include_once __DIR__.'/../stats/ur_kansai/mobile/index.php';
+        include_once __DIR__.'/../stats/ua_kansai/mobile/index.php';
       endif;
       ?>
 
