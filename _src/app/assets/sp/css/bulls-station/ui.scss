@@ -98,12 +98,42 @@
 
   //.bulls_station__overview__inner
   &__inner {
-    background: url(/assets/sp/images/bulls-station/overview-bg2.png) center 0 no-repeat;
-    background-size: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  //.bulls_station__overview__parallax
+  &__parallax {
+    position: absolute;
+    width: 100%;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 0;
+      padding-top: (920/750*100)+%;
+    }
+
+    .parallax__layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+
+      img {
+        width: perCalc(950, 750);
+        max-width: initial;
+        margin-top: -(perCalc(100, 920));
+        margin-left: -(perCalc(100, 750));
+      }
+    }
   }
 
   //.bulls_station__overview__heading
   &__heading {
+    position: relative;
     padding-top: perCalc(112, 750);
     text-align: center;
 
@@ -114,6 +144,7 @@
 
   //.bulls_station__overview__copy
   &__copy {
+    position: relative;
     margin-top: perCalc(35, 750);
     text-align: center;
 
@@ -124,6 +155,7 @@
 
   //.bulls_station__overview__date
   &__date {
+    position: relative;
     margin-top: perCalc(28, 750);
     text-align: center;
 
@@ -134,6 +166,7 @@
 
   //.bulls_station__overview__btn
   &__btn {
+    position: relative;
     margin-top: perCalc(40, 750);
 
     //.bulls_station__overview__btn__link
@@ -149,13 +182,26 @@
 
   //.bulls_station__overview__caster
   &__caster {
+    position: relative;
     margin-top: (20/2)+px;
     padding-bottom: (80/2)+px;
     background: url(/assets/sp/images/bulls-station/caster-bg.png) 0 (120/2)+px no-repeat;
     background-size: 100%;
+    overflow: hidden;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: (300/2)+px;
+      width: 100%;
+      height: 5000px;
+      background-color: #f5f5f5;
+    }
 
     //.bulls_station__overview__caster__list
     &__list {
+      z-index: 1;
+      position: relative;
       width: perCalc(690, 750);
       margin-right: auto;
       margin-left: auto;
@@ -165,12 +211,12 @@
 
     //.bulls_station__overview__caster__item
     &__item {
-      width: perCalc(325, 690);
       display: inline-block;
-      letter-spacing: normal;
+      width: perCalc(325, 690);
       margin-top: perCalc(30, 690);
       margin-right: perCalc(10, 690);
       margin-left: perCalc(10, 690);
+      letter-spacing: normal;
       vertical-align: top;
     }
 

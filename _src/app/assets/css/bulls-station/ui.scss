@@ -220,10 +220,11 @@
 
     //.bulls_station__overview__caster__item
     &__item {
-      width: 200px;
       display: inline-block;
-      letter-spacing: normal;
+      width: 200px;
       margin-left: 22px;
+      letter-spacing: normal;
+      vertical-align: top;
 
       &:first-child {
         margin-left: 0;
