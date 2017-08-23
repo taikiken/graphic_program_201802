@@ -174,22 +174,22 @@ $app->group('/stats', function () use($app) {
 
 // 関西アメフト
 // ==============================
-$app->group('/{slug:ur_kansai}',  function () use($app) {
+$app->group('/{slug:ua_kansai}',  function () use($app) {
 
 
-  // /ur_kansai/
+  // /ua_kansai/
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
     $args['page'] = $app->model->set(array(
       'title'              => '関西学生アメリカンフットボールリーグ',
       'og_title'           => '関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
-      'og_url'             => $app->model->property('site_url').'ur_kansai/',
+      'og_url'             => $app->model->property('site_url').'ua_kansai/',
       'path'               => $args,
       'template'           => 'category',
       'template_classname' => '',
     ));
 
-    return $this->renderer->render($response, 'stats/ur_kansai/index.php', $args);
+    return $this->renderer->render($response, 'stats/ua_kansai/index.php', $args);
 
   });
 
@@ -200,13 +200,13 @@ $app->group('/{slug:ur_kansai}',  function () use($app) {
     $args['page'] = $app->model->set(array(
       'title'              => '試合詳細 関西学生アメリカンフットボールリーグ',
       'og_title'           => '試合詳細 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
-      'og_url'             => $app->model->property('site_url').'ur_kansai/match/',
+      'og_url'             => $app->model->property('site_url').'ua_kansai/match/',
       'path'               => $args,
       'template'           => 'category',
       'template_classname' => '',
     ));
 
-    return $this->renderer->render($response, 'stats/ur_kansai/match.php', $args);
+    return $this->renderer->render($response, 'stats/ua_kansai/match.php', $args);
 
   });
 
@@ -222,7 +222,7 @@ $app->group('/{slug:ur_kansai}',  function () use($app) {
       'template_classname' => '',
     ));
 
-    return $this->renderer->render($response, 'stats/ur_kansai/photo.php', $args);
+    return $this->renderer->render($response, 'stats/ua_kansai/photo.php', $args);
 
   });
 
@@ -238,7 +238,7 @@ $app->group('/{slug:ur_kansai}',  function () use($app) {
       'template_classname' => '',
     ));
 
-    return $this->renderer->render($response, 'stats/ur_kansai/webview.php', $args);
+    return $this->renderer->render($response, 'stats/ua_kansai/webview.php', $args);
 
   });
 
