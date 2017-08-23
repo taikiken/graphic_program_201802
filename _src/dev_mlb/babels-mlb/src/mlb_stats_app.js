@@ -30,6 +30,11 @@ import 'gsap';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
 
 // -----------------------------------------------
+// polyfill extend
+// eslint-disable-next-line no-unused-vars
+import polyfill from './polyfill/';
+
+// -----------------------------------------------
 // main
 import Main from './Main';
 
@@ -44,11 +49,3 @@ if (!window.Promise) {
 
 // main execute
 Main.init();
-
-// // remove test code below
-// const MLB = {
-//   Test,
-// };
-//
-// // export MLB;
-// self.MLB = MLB;

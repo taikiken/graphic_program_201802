@@ -107,7 +107,7 @@ ComPitching.propTypes = {
  * @constructor
  */
 const ComPlayer = ({ player }) => {
-  console.log('ComJaPlayer player', player);
+  // console.log('ComJaPlayer player', player);
   // 投手でも type が 'batting' になっている
   // const batting = player.type === 'batting';
   // const ComType = batting ? ComBatting : ComPitching;
@@ -209,38 +209,42 @@ ComGameDetail.propTypes = {
  * 試合結果にリンクをつけるか否かを判定します
  * @param {DaeGame} game ゲーム情報
  * @param {*} date {@link Day.date} object - 試合日
- * @param {*} today {@link Day.date} object - 今日
  * @returns {XML} div.mlb__game__overview__no_link > {@link ComGameDetail}
  * @constructor
  */
-const ComGame = ({ game, date, today }) => {
+const ComGame = ({ game, date }) => {
   const homeClass = game.home.win ? Style.WIN : '';
   const visitorClass = game.visitor.win ? Style.WIN : '';
   const statusClass = game.className;
   const teamClass = 'mlb__game__overview__team';
   // render
-  // 未来のゲームはリンクしない
-  if (date.full > today.full) {
-    // console.log('div.mlb__game__overview__no_link');
-    return (
-      <div
-        className="mlb__game__overview__no_link"
-        data-href={`/stats/mlb/game/${date.year}/${game.id}/`}
-      >
-        <ComGameDetail
-          game={game}
-          homeClass={homeClass}
-          visitorClass={visitorClass}
-          statusClass={statusClass}
-          teamClass={teamClass}
-        />
-      </div>
-    );
-  }
+  // // 未来のゲームはリンクしない
+  // let query = '';
+  // if (date.full > today.full) {
+  //   // console.log('div.mlb__game__overview__no_link');
+  //   // eslint-disable-next-line max-len
+  //   query = `?home=${game.home.team}&visitor=${game.visitor.team}&stadium=${game.stadium}&title=${Day.title(date)}`;
+  //   // return (
+  //   //   <div
+  //   //     className="mlb__game__overview__no_link"
+  //   //     data-href={`/stats/mlb/game/${date.year}/${game.id}/`}
+  //   //   >
+  //   //     <ComGameDetail
+  //   //       game={game}
+  //   //       homeClass={homeClass}
+  //   //       visitorClass={visitorClass}
+  //   //       statusClass={statusClass}
+  //   //       teamClass={teamClass}
+  //   //     />
+  //   //   </div>
+  //   // );
+  // }
   // a
+  // eslint-disable-next-line max-len
+  const query = `?home=${game.home.team}&visitor=${game.visitor.team}&stadium=${game.stadium}&title=${Day.title(date)}`;
   return (
     <a
-      href={`/stats/mlb/game/${date.year}/${game.id}/`}
+      href={`/stats/mlb/game/${date.year}/${game.id}/${query}`}
       className="mlb__game__overview__link"
     >
       <ComGameDetail
@@ -261,12 +265,6 @@ const ComGame = ({ game, date, today }) => {
 ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
   date: PropTypes.shape({
-    year: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    day: PropTypes.number.isRequired,
-    full: PropTypes.string.isRequired,
-  }).isRequired,
-  today: PropTypes.shape({
     year: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
     day: PropTypes.number.isRequired,
@@ -353,7 +351,7 @@ const ComJapanese = ({ japanese, date }) => {
   if (!japanese.has()) {
     return null;
   }
-  console.log('ComJapanese japanese', japanese, date);
+  // console.log('ComJapanese japanese', japanese, date);
   const today = Day.today();
   // render
   return (

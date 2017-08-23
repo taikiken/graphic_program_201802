@@ -90,10 +90,12 @@ export default class ComScoreRefresh extends Component {
   }
   /**
    * manual click event handler - props.manual を call します
-   * @param {Event} event click event
+   * @param {?Event} [event=null] click event
    */
-  onClickManual(event) {
-    event.preventDefault();
+  onClickManual(event = null) {
+    if (event) {
+      event.preventDefault();
+    }
     const { radio } = this.state;
     if (radio !== 'manual') {
       this.setState({ radio: 'manual' });
@@ -114,11 +116,13 @@ export default class ComScoreRefresh extends Component {
    * @returns {XML} div.refresh-container > div.mlb_live__reload__btn--auto
    */
   renderRefresh(show) {
-    console.log('ComScoreRefresh.renderRefresh', show);
-    // TODO: remove test code
-    // if (!show) {
-    //   return null;
-    // }
+    // console.log('ComScoreRefresh.renderRefresh', show);
+    // flag 判定
+    // TEST CODE
+    if (!show) {
+      this.onClickManual();
+      return null;
+    }
     // render
     const { radio } = this.state;
     return (
@@ -151,11 +155,12 @@ export default class ComScoreRefresh extends Component {
    * @returns {XML} div.mlb_live__reload__btn--reload
    */
   renderReload(show) {
-    console.log('ComScoreRefresh.renderReload', show);
-    // TODO: remove test code
-    // if (!show) {
-    //   return null;
-    // }
+    // console.log('ComScoreRefresh.renderReload', show);
+    // flag 判定
+    // TEST CODE
+    if (!show) {
+      return null;
+    }
     // render
     return (
       <div id="reload" className="mlb_live__reload__btn--reload">
@@ -177,29 +182,31 @@ export default class ComScoreRefresh extends Component {
    */
   render() {
     const { status, date } = this.props;
-    console.log('ComScoreRefresh.render', status, date);
+    // console.log('ComScoreRefresh.render', status, date);
     let showRefresh = false;
     let showReload = false;
+    // 表示ステータスチェック
     if (status === 2) {
       // status:2 - 試合中のみ「自動・手動」「更新」表示させる
       showRefresh = true;
       showReload = true;
-    } else if (status === 1) {
-      // status: 1 - 試合前
+    } else if (status === 1 || status === 23) {
+      // status: 1 - 試合前,   23 - 遅延/中断
       // 当日のみ「更新」表示させる
-      // @type {string} - YYYYMMDD
-      const today = Day.full(new Date());
-      // @type {string} - YYYYMMDD
-      const play = Day.full(date);
+      // @type {int} - YYYYMMDD
+      const today = parseInt(Day.full(new Date()), 10);
+      // @type {int} - YYYYMMDD
+      const play = parseInt(Day.full(date), 10);
       // 文字列比較する
-      if (today === play) {
+      if (today >= play) {
         showReload = true;
       }
     }
-    // TODO: remove test code
-    // if (!showRefresh && !showReload) {
-    //   return null;
-    // }
+    // どちらも表示する必要がない時は null
+    // TEST CODE
+    if (!showRefresh && !showReload) {
+      return null;
+    }
     // render
     return (
       <nav className="mlb_live__reload">

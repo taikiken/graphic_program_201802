@@ -540,11 +540,11 @@ $highlight-color: #033583;
   ul.SJ_ul-ratio-3 {}
 
   // ex. MLBスタッツ メインメニュー
-  ul#SJ_tabs-area.SJ_tabs-select.SJ_ul-ratio-1 li,
-  ul#SJ_tabs-area.SJ_tabs-select.SJ_ul-ratio-2 li,
-  ul#SJ_tabs-area.SJ_tabs-select.SJ_ul-ratio-3 li {
-    width: 33.3333%;
-  }
+  // ul#SJ_tabs-area.SJ_tabs-select.SJ_ul-ratio-1 li ,
+  // ul#SJ_tabs-area.SJ_tabs-select.SJ_ul-ratio-2 li,
+  // ul#SJ_tabs-area.SJ_tabs-select.SJ_ul-ratio-3 li {
+  //   width: 33.3333%;
+  // }
 
   ul.SJ_tabs > li {
     margin: 0;
@@ -627,7 +627,8 @@ $highlight-color: #033583;
 
   // ex. MLBスタッツ メインメニュー
   ul#SJ_tabs-area.SJ_tabs.SJ_tabs-select > li.SJ_current {
-    border-width: 0;
+    border-width: 0 1px 0;
+    border-color: #fff !important;
   }
 
   ul.SJ_tabs.SJ_tabs-focus > li.SJ_current a,
@@ -873,9 +874,38 @@ $highlight-color: #033583;
             border-color: #fff;
           }
         }
+
+        // 公式戦/プレーオフ/ワールドシリーズ/タブを非表示
+        // ref.https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-26#comment-1174357231
+        > li:nth-child(1),
+        > li:nth-child(2),
+        > li:nth-child(3) {
+          display: none;
+        }
       } // .SJ_list-stage
     }
   } // .SJ_sub-header-mlb
+
+
+
+  //ナビ : 試合結果/順位/個人成績
+  #SJ_mlb-list > ul#SJ_tabs-area.SJ_tabs.SJ_tabs-select.SJ_ul-ratio-3 {
+    > li:nth-child(1) {
+      display: none;
+    }
+
+    > li:nth-child(2) {
+      border-left-width: 0;
+    }
+
+    > li:nth-child(3) {
+      border-right-width: 0;
+    }
+
+    > li {
+      width: 50%;
+    }
+  }
 
 
   // 試合結果 ex.https://sportsbull.jp/stats/mlb/schedule/?sdc_page_code=GameResult&sdc_subpage_code=&game_global_id=1704294&sports_code=sbmlb&operation_mode=

@@ -17,15 +17,27 @@
 // - Android : undotsushin-android
 // = ではなく、含まれる、になります。match で判定してください
 
-const Sagen = self.Sagen;
-const ua = Sagen.Browser.ua();
+const detector = () => {
+  // html 取得
+  const tags = document.getElementsByTagName('html');
+  if (!tags || !tags.length) {
+    return;
+  }
+  const html = tags[0];
+  // global object
+  const Sagen = self.Sagen;
+  const ua = Sagen.Browser.ua();
 
-// android
-const android = ua.indexOf('undotsushin-android') !== -1;
-const ios = ua.indexOf('undotsushin-ios') !== -1;
+  // android
+  const android = ua.indexOf('undotsushin-android') !== -1;
+  // ios
+  const ios = ua.indexOf('undotsushin-ios') !== -1;
+  // add class
+  if (android) {
+    Sagen.Dom.addClass(html, 'undotsushin-android');
+  } else if (ios) {
+    Sagen.Dom.addClass(html, 'undotsushin-ios');
+  }
+};
 
-if (android) {
-  Sagen.Dom.addClass(document.documentElement, 'undotsushin-android');
-} else if (ios) {
-  Sagen.Dom.addClass(document.documentElement, 'undotsushin-ios');
-}
+detector();

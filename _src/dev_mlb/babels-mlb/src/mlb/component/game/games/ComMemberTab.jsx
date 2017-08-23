@@ -62,7 +62,7 @@ export default class ComMemberTab extends Component {
    */
   onClick(event) {
     event.preventDefault();
-    console.log('ComMemberTab.onClick', event);
+    // console.log('ComMemberTab.onClick', event);
     const target = event.target;
     const tab = target.href.split('#').pop();
     // state.current clone + all off

@@ -51,7 +51,11 @@
   endif;
   // -----------------------------------------
   ?>
-
+  <?php
+  // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+  // @since 2017-08-21
+  ?>
+  <script src="/assets/js/app_ua_detector.bundle.js"></script>
   <?php // #1876 - Google Optimize ?>
   <style>.async-hide { opacity: 0 !important} </style>
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
@@ -147,7 +151,7 @@ if (isset($page['prop_identity'])) {
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <header class="head-sec">
+  <header class="head-sec for-web">
     <div class="head-sec-inner">
       <h1><a href="https://sportsbull.jp/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
@@ -163,7 +167,7 @@ if (isset($page['prop_identity'])) {
   // app in webview 時に .foot-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <footer id="footer-container" class="foot-sec show-for-large">
+  <footer id="footer-container" class="foot-sec show-for-large for-web">
     <div class="foot-sec-inner">
       <nav class="foot-breadCrumb">
         <ol itemscope itemtype="http://schema.org/breadCrumbList">

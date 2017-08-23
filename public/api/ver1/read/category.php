@@ -120,7 +120,7 @@ if(strlen($f["name"])>0){
   if ( $category === 'big6tv' ) :
 
     $categoriesinfo['live']          = '/api/big6tv/live';
-    $categoriesinfo['live_interval'] = 60;
+    $categoriesinfo['live_interval'] = 20;
     $categoriesinfo['webviews']      = array(
       '/big6tv/webview/',
     );
@@ -152,6 +152,13 @@ if(strlen($f["name"])>0){
   if ( $category === 'highschoolbaseball' ) :
     $categoriesinfo['webviews']     = array(
       '/stats/hsb/webview/app/',
+    );
+  endif;
+
+  # ref. #2321
+  if ( $category === 'americanfootball' ) :
+    $categoriesinfo['webviews']     = array(
+      '/stats/ur_kansai/webview/',
     );
   endif;
 
