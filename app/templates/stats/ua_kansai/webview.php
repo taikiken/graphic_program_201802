@@ -17,6 +17,10 @@
 </head>
 
 <body style="height: auto;">
+
+<div class="sub_head_wrapper" style="margin-top: 0;">
+  <h2 class="sub_head_title"><i></i>関西学生アメリカンフットボールリーグ</h2>  
+</div>
                        
 <!-- section_highlight_movie -->                      
 <section class="section_interhigh_highlight">
