@@ -20,7 +20,7 @@
 <section class="section_interhigh_photo">
   <div class="ttl-wrapper">
     <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
-    <p class="ttl_link"><a href="/stats/ur_kansai/photo/">すべてのフォトギャラリーを見る</a></p>
+    <p class="ttl_link"><a href="/stats/ua_kansai/photo/">すべてのフォトギャラリーを見る</a></p>
   </div>
         
   <div id="js-current-post" class="current-post photo_gallery">

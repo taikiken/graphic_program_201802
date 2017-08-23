@@ -28,5 +28,5 @@
     </ul>
   </div>
 
-  <p class="section_btn"><a href="/stats/ur_kansai/photo/"><i></i>すべてのフォトギャラリーを見る</a></p>  
+  <p class="section_btn"><a href="/stats/ua_kansai/photo/"><i></i>すべてのフォトギャラリーを見る</a></p>  
 </section>
