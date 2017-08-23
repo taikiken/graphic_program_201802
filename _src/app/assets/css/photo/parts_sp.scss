@@ -5780,5 +5780,41 @@
         margin-bottom: 8px;
         height: 20px;}
 
-// #2284 サイドバー ランキング レコメンド 非表示
-.news-ad,.sponsor-link { display: none !important; }
+
+// 関西アメフト対応
+.sub_head_wrapper { 
+  background-color: #fff; 
+  display: -webkit-box; 
+  display: -webkit-flex; 
+  display: -ms-flexbox; 
+  display: flex; 
+  -webkit-box-pack: justify; 
+  -webkit-justify-content: space-between; 
+  -ms-flex-pack: justify; 
+  justify-content: space-between; 
+  -webkit-box-align: center; 
+  -webkit-align-items: center; 
+  -ms-flex-align: center; 
+  align-items: center; 
+  height: 50px; 
+  color: #0e357f; 
+  font-weight: bold; 
+  padding: 0 20px; 
+  margin-top: 30px;
+}
+
+.sub_head_wrapper .sub_head_title { 
+  font-size: 14px; 
+  font-size: "2.2rem"; 
+  font-weight: bold; 
+}
+
+.sub_head_wrapper .sub_head_title i { 
+  margin-right: 10px; 
+  position: relative; 
+  display: inline-block; 
+  top: 1px; 
+  width: 15px; 
+  height: 15px; 
+  background: url(../../../assets/stats/ua_kansai/images/icon_amefoot_blue.png) no-repeat top left; 
+}

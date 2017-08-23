@@ -1,6 +1,10 @@
 <?php include __DIR__."./../inc.php"; ?>
 <link rel="stylesheet" href="/assets/css/photo/parts_sp.css">
 
+<div class="sub_head_wrapper">
+  <h2 class="sub_head_title"><i></i>関西学生アメリカンフットボールリーグ</h2>  
+</div>
+
 <!-- section_highlight_movie -->                      
 <section class="section_interhigh_highlight">
   <div class="ttl-wrapper">
