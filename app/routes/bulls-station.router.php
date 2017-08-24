@@ -34,6 +34,23 @@ $app->group('/{slug:bulls-station}',  function () use($app) {
 
   });
 
+  // off-shot-movie
+  // ==============================
+  $this->get('/off-shot-movie[/]', function ($request, $response, $args) use ($app) {
+
+    $args['page'] = $app->model->set(array(
+      'title'              => 'BULL\'S STATION スポーツニュース番組 - オフショットムービー',
+      'og_title'           => 'BULL\'S STATION スポーツニュース番組 - オフショットムービー |'.$app->model->property('title'),
+      'og_url'             => $app->model->property('site_url').'bulls-station/off-shot-movie/',
+      'path'               => $args,
+      'template'           => 'category',
+      'template_classname' => '',
+    ));
+
+    return $this->renderer->render($response, 'bulls-station/off-shot-movie.php', $args);
+
+  });
+
 });
 
 ?>
