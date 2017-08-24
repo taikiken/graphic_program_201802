@@ -175,13 +175,50 @@ const inningsBody = (inning, event, type, info, count) => (
  * @constructor
  */
 const ComInningsEvent = ({ type, team, inning, info }) => {
+  // console.log('ComInningsEvent', type, team, inning, info);
+  // home team データチェックを追加します - 2017-08-17
+  // if (
+  //   type === 'home' && (
+  //     !info.home ||
+  //     !info.home.board ||
+  //     !info.home.board.scores ||
+  //     !info.home.board.scores.score ||
+  //     !info.home.board.scores.score[inning] ||
+  //     !info.home.board.scores.score[inning].score
+  //   )
+  // ) {
+  //   console.log('ComInningsEvent - 1');
+  //   return null;
+  // }
   // 最終回で home team の攻撃が無い時は出力しません
-  if (
-    type === 'home' &&
-    inning === info.innings &&
-    info.home.win &&
-    info.home.board.scores.score[inning].score === 0
-  ) {
+  // if (
+  //   type === 'home' &&
+  //   inning === info.innings &&
+  //   info.home.win &&
+  //   info.home.board.scores.score[inning].score === 0
+  // ) {
+  //   console.log('ComInningsEvent - 1');
+  //   return null;
+  // }
+  if (type === 'home') {
+    // 最終回チェック
+    if (inning === info.innings) {
+      // home team win
+      if (info.home.win) {
+        // スコア 0 ?
+        if (
+          info.home.board.scores.score &&
+          typeof info.home.board.scores.score[inning] !== 'undefined' &&
+          info.home.board.scores.score[inning] === 0
+        ) {
+          return null;
+        }
+      }
+    }
+  }
+  // ---------------------------------------------
+  // title なしは出力しない
+  if (!team.title) {
     return null;
   }
   // ---------------------------------------------
@@ -294,7 +331,7 @@ ComInningsEvents.propTypes = {
  */
 const ComInning = ({ innings, info }) => {
   const events = innings.opposite;
-  console.log('ComInning events', innings, events);
+  // console.log('ComInning events', innings, events);
   // render
   return (
     <div className="mlb_live__inning__section">

@@ -34,7 +34,7 @@ const initial = {
  */
 const schedule = (requestState = initial, action) => {
   const state = Object.assign({}, requestState);
-  console.log('reducers.schedule', state, action);
+  // console.log('reducers.schedule', state, action);
   // switch-case
   switch (action.type) {
     case ReducerTypes.SCHEDULE_COMPLETE: {

@@ -32,7 +32,7 @@ const initial = {
  */
 const calendar = (requestState = initial, action) => {
   const state = Object.assign({}, requestState);
-  console.log('reducers.calendar', state, action);
+  // console.log('reducers.calendar', state, action);
   // switch-case
   switch (action.type) {
     // calendar complete

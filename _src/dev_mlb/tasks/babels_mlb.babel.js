@@ -129,6 +129,12 @@ gulp.task('mlb:pack:build', (callback) => {
     // remove, since webpack 2.x, @see https://webpack.js.org/guides/migrating/
     // new $$.webpack.optimize.DedupePlugin(),
     new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: true } }),
+    // https://facebook.github.io/react/docs/optimizing-performance.html#use-the-production-build
+    new $$.webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
   ];
   config.entry = `${config.entry}/babels-mlb/01_compile/${fileName.raw}`;
   config.output.path = `${wpk.entry}/babels-mlb/02_dest`;
