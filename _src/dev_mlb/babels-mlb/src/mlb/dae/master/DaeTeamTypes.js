@@ -37,7 +37,11 @@ class DaeTeam {
     /**
      * team name
      */
-    this.team = origin.name;
+    this.team = Normalize.str(origin.name);
+    /**
+     * team name 日本語 - いつの間にか追加されていた
+     */
+    this.jp = Normalize.str(origin.name_jp);
   }
 }
 
@@ -55,7 +59,8 @@ export default class DaeTeamTypes {
     const ids = {};
     const teams = {};
     list.map((team) => {
-      const name = team.team;
+      // const name = team.team;
+      const name = team.jp;
       const id = team.id;
       ids[name] = id;
       teams[id] = name;
@@ -69,7 +74,7 @@ export default class DaeTeamTypes {
     this.origin = origin;
     /**
      * チームリスト
-     * @type {Array.<DaeTeam>}
+     * @type {Array.<string>}
      */
     this.list = list;
     /**
