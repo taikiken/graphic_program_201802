@@ -39,6 +39,11 @@
   endif;
   // -----------------------------------------
   ?>
+  <?php
+  // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+  // @since 2017-08-21
+  ?>
+  <script src="/assets/js/app_ua_detector.bundle.js"></script>
   <link rel="stylesheet" href="/assets/sp/css/picks/ui.css?v=<?php echo $page['version']; ?>">
 
   <script>
@@ -60,7 +65,7 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <header class="head-sec">
+  <header class="head-sec for-web">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
@@ -137,7 +142,7 @@
   // app in webview 時に .foot-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <footer class="foot-sec">
+  <footer class="foot-sec for-web">
     <div class="foot-sec-inner">
 
       <div class="foot-pr">
@@ -213,6 +218,7 @@ endif;
 ?>
 
 <script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/app_divide.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 </body>
 </html>
