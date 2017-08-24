@@ -33,14 +33,27 @@
 
 //.bulls_station__local_navi
 .bulls_station__local_navi {
+  position: relative;
   height: 80px;
   border-bottom: 3px solid #dbdbde;
   background-color: #f5f5f5;
+  overflow: hidden;
 
+  //.bulls_station__local_navi__outer
+  &__outer {
+    max-width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.bulls_station__local_navi__inner
   &__inner {
     position: relative;
     width: 1090px;
-    margin: 0 auto;
+    margin-right: -5000px;
+    margin-left: -5000px;
+    padding-right: 5000px;
+    padding-left: 5000px;
   }
 
   &__heading {
@@ -73,7 +86,7 @@
   &__list {
     position: absolute;
     top: 0;
-    left: 472px;
+    margin-left: 472px;
   }
 
   //.bulls_station__local_navi__item
@@ -130,17 +143,29 @@
 
 
 
-
+// 390
 
 //.bulls_station__overview
 .bulls_station__overview {
-  width: 1480px;
-  margin: 0 auto;
+  // width: 1480px;
+  // margin: 0 auto;
   background: url(/assets/images/bulls-station/overview-bg1.png) center center repeat;
+
+  //.bulls_station__overview__outer
+  &__outer {
+    max-width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 
   //.bulls_station__overview__inner
   &__inner {
     position: relative;
+    width: 1090px;
+    margin-right: -5000px;
+    margin-left: -5000px;
+    padding-right: 5000px;
+    padding-left: 5000px;
   }
 
   //.bulls_station__overview__parallax
@@ -148,6 +173,7 @@
     position: absolute;
     width: 1480px;
     height: 610px;
+    margin-left: -195px;
     overflow: hidden;
 
     .parallax__layer {
@@ -162,7 +188,9 @@
 
   //.bulls_station__overview__heading
   &__heading {
-    width: 100%;
+    position: relative;
+    width: 1090px;
+    margin: 0 auto;
     padding-top: 72px;
     text-align: center;
   }
@@ -170,6 +198,8 @@
   //.bulls_station__overview__copy
   &__copy {
     position: relative;
+    width: 1090px;
+    margin: 0 auto;
     padding-top: 28px;
     text-align: center;
   }
@@ -177,14 +207,16 @@
   //.bulls_station__overview__date
   &__date {
     position: relative;
-    margin-top: 20px;
+    width: 1090px;
+    margin: 20px auto 0;
     text-align: center;
   }
 
   //.bulls_station__overview__btn
   &__btn {
     position: relative;
-    margin-top: 40px;
+    width: 1090px;
+    margin: 40px auto;
 
     //.bulls_station__overview__btn__link
     &__link {
@@ -206,9 +238,12 @@
 
   //.bulls_station__overview__caster
   &__caster {
+    position: relative;
+    width: 1480px;
     margin-top: 40px;
+    margin-left: -195px;
     padding-bottom: 60px;
-    background: url(/assets/images/bulls-station/caster-bg.png) 0 30px no-repeat;
+    background: url(/assets/images/bulls-station/caster-bg.png) center 30px no-repeat;
 
     //.bulls_station__overview__caster__list
     &__list {
@@ -370,13 +405,29 @@
   padding-top: 70px;
   padding-bottom: 70px;
   background-color: #fff;
+  overflow: hidden;
+
+  //.bulls_station__follow__outer
+  &__outer {
+    max-width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 
   //.bulls_station__follow__inner
   &__inner {
+    position: relative;
+    width: 1090px;
+    margin-right: -5000px;
+    margin-left: -5000px;
+    padding-right: 5000px;
+    padding-left: 5000px;
+  }
+
+  //.bulls_station__follow__list
+  &__list {
     display: table;
     width: 1090px;
-    margin-right: auto;
-    margin-left: auto;
   }
 
   //.bulls_station__follow__item
@@ -449,15 +500,34 @@
 //.bulls_station__offshot_movie
 .bulls_station__photo_gallery,
 .bulls_station__offshot_movie {
-  width: 1090px;
-  margin-top: 70px;
-  margin-right: auto;
-  margin-left: auto;
+  margin-top: 60px;
+  overflow: hidden;
+
+  //.bulls_station__photo_gallery__outer
+  //.bulls_station__offshot_movie__outer
+  &__outer {
+    max-width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.bulls_station__photo_gallery__inner
+  //.bulls_station__offshot_movie__inner
+  &__inner {
+    position: relative;
+    width: 1090px;
+    margin-right: -5000px;
+    margin-left: -5000px;
+    padding-right: 5000px;
+    padding-left: 5000px;
+  }
 
   //.bulls_station__photo_gallery__heading
   //.bulls_station__offshot_movie__heading
   &__heading {
     position: relative;
+    width: 1090px;
+    padding-top: 10px;
 
     &__btn {
       position: absolute;
@@ -493,26 +563,37 @@
   //.bulls_station__offshot_movie__list
   &__list {
     display: table;
-    width: 100%;
+    width: 1090px;
     margin-top: 20px;
   }
 
   &__item {
     display: table-cell;
     text-align: center;
-
-    a:hover {
-      @include over-opacity(0.85);
-    }
   }
 
   @at-root {
+    .bulls_station__photo_gallery__item {
+      a:hover {
+        @include over-opacity(0.75);
+      }
+    }
+
     .bulls_station__offshot_movie__item {
       a {
-        display: block;
+        display: inline-block;
         position: relative;
 
         &:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: #000;
+          @include opacity(0.3);
+        }
+
+        &:after {
           content: "";
           position: absolute;
           top: 50%;
@@ -522,6 +603,16 @@
           height: 38px;
           background: url(/assets/images/bulls-station/movie-icon-thumb.png) 0 0 no-repeat;
           @include hide-text;
+        }
+
+        &:hover {
+          &:before {
+            @include opacity(0);
+          }
+
+          &:after {
+            @include opacity(0);
+          }
         }
       }
     } //.bulls_station__offshot_movie__item
