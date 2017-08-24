@@ -1,5 +1,5 @@
 <li class="pl0"><a href="/editdm/">TOP</a></li>
-<?php if(getSorC("usr")!="inhigh" && getSorC("usr")!="kansaifootball"){ ?>
+<?php if(getSorC("usr")!="inhigh"){ ?>
     <?php if(getSorC("is_external")!=1){ ?>
         <li><a href="/editdm/ad/?cid=0&nid=0">広告設定</a></li>
         <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
