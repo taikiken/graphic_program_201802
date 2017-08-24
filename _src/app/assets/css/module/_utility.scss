@@ -18,7 +18,9 @@
   .hide-for-sp { display: none !important;}
 }
 
-.mobile {
+.mobile,
+.undotsushin-ios,
+.undotsushin-android {
   .show-for-pc,
   .hide-for-pc { display: none !important;}
   .show-for-sp { display: block !important;}
