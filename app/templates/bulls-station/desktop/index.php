@@ -1,32 +1,29 @@
+<?php
+include_once __DIR__."/../_include/_bulls_station_func.php";
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <title>番組紹介 - BULL'S STATION | スポーツブル / SPORTS BULL</title>
-  <meta name="description" content="毎週平日 月-金 12:30~ 配信！スポーツニュース番組 BULL'S STATION。BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！">
-  <meta name="keywords" content="BULL'S STATION,ブルズ ステーション,エイミー,サヤカ,エレナ,イチカ,ライカ,動画特集,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
+  <title><?php echo strip_tags($page['title']).' | '.$page['site_name']; ?></title>
+  <meta name="keywords" content="<?php echo $page['keywords']; ?>">
+  <meta name="description" content="<?php echo $page['og_description']; ?>">
   <!-- sns ogp -->
   <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
   <meta property="og:type" content="<?php echo $page['og_type']; ?>">
-  <meta property="og:title" content="番組紹介 - BULL'S STATION | スポーツブル / SPORTS BULL">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/bulls-station/ogp.jpg">
-  <meta property="og:url" content="https://sportsbull.jp/bulls-station/">
-  <meta property="og:description" content="毎週平日 月-金 12:30~ 配信！スポーツニュース番組 BULL'S STATION。BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！">
+  <meta property="og:title" content="<?php echo $page['og_title']; ?>">
+  <meta property="og:image" content="<?php echo $page['og_image']; ?>">
+  <meta property="og:url" content="<?php echo $page['og_url']; ?>">
+  <meta property="og:description" content="<?php echo $page['og_description']; ?>">
   <meta property="og:locale" content="ja_JP" />
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
-  <meta name="twitter:title" content="番組紹介 - BULL'S STATION | スポーツブル / SPORTS BULL">
-  <meta name="twitter:image" content="https://sportsbull.jp/assets/images/bulls-station/ogp.jpg">
-  <meta name="twitter:url" content="https://sportsbull.jp/bulls-station/">
-  <meta name="twitter:description" content="毎週平日 月-金 12:30~ 配信！スポーツニュース番組 BULL'S STATION。BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！">
   <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
-    <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
-    <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
-    <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="canonical" href="<?php echo $page['og_url']; ?>">
 
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
@@ -116,7 +113,7 @@
 
                 <h4 class="bulls_station__overview__caster__heading">月曜担当キャスター</h4>
                 <p class="bulls_station__overview__caster__copy">山や海の大自然が大好きで、家の中に籠ることが苦手。<br />
-寂しがり屋でもあるのでよく外出して人とあったり、体を動かしたりと完全にアウトドア派です。動物と日本のお城巡りも好きで、最近は辛い食べ物にはまっています！</p>
+                寂しがり屋でもあるのでよく外出して人とあったり、体を動かしたりと完全にアウトドア派です。動物と日本のお城巡りも好きで、最近は辛い食べ物にはまっています！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--tue">
                 <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
@@ -206,21 +203,46 @@
         </ul><!-- /.bulls_station__follow__inner -->
       </div><!-- /.bulls_station__follow -->
 
+      <?php
+      // -----------------------------------------------
+      // photo gallery
+      $bulls_station_photos = bulls_station_json_photo();
+      $bulls_station_photos_data = $bulls_station_photos->data;
+      if (count($bulls_station_photos_data) > 0) :
+        $bulls_station_photo_url = $bulls_station_photos->url;
+      ?>
       <div class="bulls_station__photo_gallery">
         <div class="bulls_station__photo_gallery__heading">
           <h2><img src="/assets/images/bulls-station/gallery-heading.png" alt="PHOTO GALLERY"></h2>
-          <div class="bulls_station__photo_gallery__heading__btn"><a href="/p/181566">すべてのPHOTO GALLERYを見る</a></div>
+          <div class="bulls_station__photo_gallery__heading__btn"><a href="/p/181566/">すべてのPHOTO GALLERYを見る</a></div>
         </div><!-- /.bulls_station__photo_gallery__heading -->
 
         <ul class="bulls_station__photo_gallery__list">
-          <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery1.png" alt=""></a></li>
-          <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery2.png" alt=""></a></li>
-          <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery3.png" alt=""></a></li>
-          <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery4.png" alt=""></a></li>
-          <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery5.png" alt=""></a></li>
+          <?php
+          foreach ($bulls_station_photos_data as $bulls_station_photo) :
+          ?>
+          <li class="bulls_station__photo_gallery__item">
+            <a href="<?php echo $bulls_station_photo_url; ?>">
+              <img src="<?php echo $bulls_station_photo->thumb; ?>" alt="">
+            </a>
+          </li>
+          <?php
+          endforeach;
+          ?>
         </ul><!-- /.bulls_station__photo_gallery__list -->
       </div><!-- /.bulls_station__photo_gallery -->
-
+      <?php
+      endif;
+      // -----------------------------------------------
+      ?>
+      <?php
+      // -----------------------------------------------
+      // movie
+      $bulls_station_movies = bulls_station_json_movie();
+      $bulls_station_movie_response = $bulls_station_movies->response;
+      $bulls_station_movie_response_articles = $bulls_station_movie_response->articles;
+      if (count($bulls_station_movie_response_articles) > 0) :
+      ?>
       <div class="bulls_station__offshot_movie">
         <div class="bulls_station__offshot_movie__heading">
           <h2><img src="/assets/images/bulls-station/movie-heading.png" alt="OFFSHOT MOVIE"></h2>
@@ -228,13 +250,22 @@
         </div><!-- /.bulls_station__offshot_movie__heading -->
 
         <ul class="bulls_station__offshot_movie__list">
-          <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
-          <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
-          <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
-          <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
-          <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
+          <?php
+          foreach ($bulls_station_movie_response_articles as $bulls_station_movie_response_article) :
+          ?>
+            <li class="bulls_station__offshot_movie__item">
+              <a href="<?php echo $bulls_station_movie_response_article->url ?>">
+                <img src="<?php echo $bulls_station_movie_response_article->img ?>" alt="">
+              </a>
+            </li>
+          <?php
+          endforeach;
+          ?>
         </ul><!-- /.bulls_station__offshot_movie__list -->
       </div><!-- /.bulls_station__offshot_movie -->
+      <?php
+      endif;
+      ?>
     </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 

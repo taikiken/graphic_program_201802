@@ -7,7 +7,7 @@
     <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
     <script src="/assets/js/app_divide.bundle.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <title>OFF SHOT MOVIE - BULL'S STATION | スポーツブル / SPORTS BULL</title>
+    <title><?php echo strip_tags($page['title']).' | '.$page['site_name']; ?></title>
     <meta name="description" content="毎週平日 月-金 12:30~ 配信！スポーツニュース番組 BULL'S STATION。BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！">
     <meta name="keywords" content="BULL'S STATION,ブルズ ステーション,エイミー,サヤカ,エレナ,イチカ,ライカ,動画特集,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
     <!-- sns ogp -->
@@ -109,7 +109,7 @@
                             <article class="highlight_article">
 
                                 <ul class="thumb_area">
-                                
+
                                 <li>
                                     <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
                                 </li>

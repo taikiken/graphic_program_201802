@@ -1,13 +1,3 @@
-<?php
-// app webview かを `?app=(ios|android)` から判定します
-// ==============================
-$from_webview = false;
-if (isset($_GET['app'])) {
-  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
-    $from_webview = true;
-  }
-}
-?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
@@ -127,7 +117,7 @@ if (isset($_GET['app'])) {
 
                 <h4 class="bulls_station__overview__caster__heading">月曜担当キャスター</h4>
                 <p class="bulls_station__overview__caster__copy">山や海の大自然が大好きで、家の中に籠ることが苦手。<br />
-寂しがり屋でもあるのでよく外出して人とあったり、体を動かしたりと完全にアウトドア派です。動物と日本のお城巡りも好きで、最近は辛い食べ物にはまっています！</p>
+                寂しがり屋でもあるのでよく外出して人とあったり、体を動かしたりと完全にアウトドア派です。動物と日本のお城巡りも好きで、最近は辛い食べ物にはまっています！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--tue">
                 <figure class="bulls_station__overview__caster__figure">
