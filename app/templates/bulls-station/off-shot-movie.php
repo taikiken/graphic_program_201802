@@ -1,172 +1,158 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-        <meta charset="UTF-8">
-        <meta http-equiv="pragma" content="no-cache">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-        <script src="/assets/js/app_divide.bundle.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>インターハイ　動画特集 | スポーツブル / SPORTS BULL</title>
-        <meta name="description" content="インターハイ 動画特集見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
-        <meta name="keywords" content="インターハイ,全国大会,ハイライト動画,動画特集,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
-        <!-- sns ogp -->
-        <meta property="og:title" content="インターハイ 動画特集 | スポーツブル / SPORTS BULL">
-        <meta property="og:type" content="article">
-        <meta property="og:image" content="https://sportsbull.jp/assets/images/inhigh/ogp_interhigh.jpg">
-        <meta property="og:url" content="https://sportsbull.jp/inhigh/photo/">
-        <meta property="og:description" content="インターハイ 動画特集見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
-        <!-- twitter card -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@sportsbull_jp">
-        <meta name="twitter:title" content="インターハイ 動画特集 | スポーツブル / SPORTS BULL">
-        <meta name="twitter:image" content="https://sportsbull.jp/assets/images/inhigh/ogp_interhigh.jpg">
-        <meta name="twitter:url" content="https://sportsbull.jp/inhigh/photo/">
-        <meta name="twitter:description" content="インターハイ 動画特集見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
-        <!-- favicon -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
-        <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
-        <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
-        <link rel="shortcut icon" href="/favicon.ico">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+    <script src="/assets/js/app_divide.bundle.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title><?php echo strip_tags($page['title']).' | '.$page['site_name']; ?></title>
+    <meta name="keywords" content="<?php echo $page['keywords']; ?>">
+    <meta name="description" content="<?php echo $page['og_description']; ?>">
+    <!-- sns ogp -->
+    <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
+    <meta property="og:type" content="<?php echo $page['og_type']; ?>">
+    <meta property="og:title" content="<?php echo $page['og_title']; ?>">
+    <meta property="og:image" content="<?php echo $page['og_image']; ?>">
+    <meta property="og:url" content="<?php echo $page['og_url']; ?>">
+    <meta property="og:description" content="<?php echo $page['og_description']; ?>">
+    <meta property="og:locale" content="ja_JP" />
+    <!-- twitter card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@sportsbull_jp">
+    <!-- favicon -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
+    <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
+    <link rel="shortcut icon" href="/favicon.ico">
 
-        <script src="/assets/js/libs/vendor.react.js"></script>
-        <script src="/assets/js/bundle/main.bundle.js"></script>
-        <!-- 表示確認用 / -->
-        <link rel="stylesheet" href="/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
-        <link rel="stylesheet" href="/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
-        <!-- / 表示確認用 -->
-        <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
-        <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
-        <!-- インターハイ css -->
-        <link rel="stylesheet" href="/assets/css/inhigh/interhigh.css" media="only screen and (min-width: 769px)">
-        <link rel="stylesheet" href="/assets/css/inhigh/sp_interhigh.css" media="only screen and (max-width: 768px)">
-        <!-- / インターハイ css -->
-        <script type='text/javascript'>
-            var googletag = googletag || {};
-            googletag.cmd = googletag.cmd || [];
-            (function() {
-                var gads = document.createElement('script');
-                gads.async = true;
-                gads.type = 'text/javascript';
-                var useSSL = 'https:' == document.location.protocol;
-                gads.src = (useSSL ? 'https:' : 'http:') +
-                    '//www.googletagservices.com/tag/js/gpt.js';
-                var node = document.getElementsByTagName('script')[0];
-                node.parentNode.insertBefore(gads, node);
-            })();
-        </script>
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                                    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            ga('create', 'UA-74679267-1', 'auto');
-            ga('require', 'linkid');
-            ga('require', 'displayfeatures');
-            ga('send', 'pageview');
-        </script>
-        <script>
-            googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/npb-pc-rectangle', [300, 250], 'div-gpt-ad-1492577512561-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
-            });
-        </script>
-        <!-- ad/npb-sp-anchor -->
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "ca-pub-8613117509675807",
-                enable_page_level_ads: true
-            });
-        </script>
-        <!-- // ad/npb-sp-anchor -->
+    <link rel="canonical" href="<?php echo $page['og_url']; ?>">
+
+    <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+    <!-- 表示確認用 / -->
+    <link rel="stylesheet" href="/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
+    <link rel="stylesheet" href="/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
+    <!-- / 表示確認用 -->
+    <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
+    <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
+    <!-- OFF SHOT MOVIE css -->
+    <link rel="stylesheet" href="/assets/css/photo/photo.css" media="only screen and (min-width: 769px)">
+    <link rel="stylesheet" href="/assets/css/photo/sp_photo.css" media="only screen and (max-width: 768px)">
+    <!-- / OFF SHOT MOVIE css -->
+
+    <script type='text/javascript'>
+      var googletag = googletag || {};
+      googletag.cmd = googletag.cmd || [];
+      (function() {
+        var gads = document.createElement('script');
+        gads.async = true;
+        gads.type = 'text/javascript';
+        var useSSL = 'https:' == document.location.protocol;
+        gads.src = (useSSL ? 'https:' : 'http:') +
+            '//www.googletagservices.com/tag/js/gpt.js';
+        var node = document.getElementsByTagName('script')[0];
+        node.parentNode.insertBefore(gads, node);
+      })();
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-74679267-1', 'auto');
+      ga('require', 'linkid');
+      ga('require', 'displayfeatures');
+      ga('send', 'pageview');
+    </script>
+    <script>
+      googletag.cmd.push(function() {
+        googletag.defineSlot('/531683568/npb-pc-rectangle', [300, 250], 'div-gpt-ad-1492577512561-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.pubads().collapseEmptyDivs();
+        googletag.enableServices();
+      });
+    </script>
+    <!-- ad/OFF SHOT MOVIE -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-8613117509675807",
+        enable_page_level_ads: true
+      });
+    </script>
+    <!-- // ad/OFF SHOT MOVIE -->
     </head>
     <body>
-        <div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
-        <script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-        <script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
-<!-- インターハイ class名darkを削除しました -------------------------------------------------->
+
         <div id="whole" class="whole">
-<!-- / インターハイ class名darkを削除しました -------------------------------------------------->
+
             <header class="head-sec">
                 <div class="head-sec-inner">
                     <h1><a href="/">SPORTS BULL</a></h1>
                 </div><!-- /.head-sec-inner -->
             </header><!-- /.head-sec -->
 
-<!-- インターハイ メイン画像 ---------------------------------------------------------->
+
             <div class="special-summary">
-                <a href="/category/inhigh"><h1 class="special-summary-heading"><img src="/assets/images/inhigh/header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="sp_hide"><img src="/assets/images/inhigh/sp_header_img.png" alt="インターハイ INTER HIGH SCHOOL" class="pc_hide"></h1></a>
+                <a href="/category/station"><h1 class="special-summary-heading"><img src="/assets/images/bulls-station/header_img.png" alt="OFF SHOT MOVIE - BULL'S STATION" class="sp_hide"><img src="/assets/images/bulls-station/sp_header_img.png" alt="OFF SHOT MOVIE - BULL'S STATION" class="pc_hide"></h1></a>
             </div>
-<!-- / インターハイ メイン画像 ---------------------------------------------------------->
 
             <div class="body-sec">
                 <div class="body-sec-inner">
                     <section class="main-sec">
 
-<!--  インターハイ メインコンテンツ ---------------------------------------------------------->
-<?php
-
-$db=new db;
-$db->connect();
-
-$movie=array();
-$subdomain=preg_match("/dev/",$_SERVER["SERVER_NAME"])?"dev-img":"img";
-$i=0;
-
-$sql="select id,img1,title,a1,a2,a3 from repo_n where d2=54 and flag=1 and swf is not null order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc";
-$db->query($sql);
-while($f=$db->fetch_array()){
-    $movie[sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"])][]=array(
-        "title"=>htmlspecialchars($f["title"]),
-        "date"=>sprintf("%s/%s",(int)$f["a2"],(int)$f["a3"]),
-        "img"=>sprintf("https://%s.sportsbull.jp/thumbnail1/%s",$subdomain,$f["img1"]),
-        "url"=>sprintf("/p/%s/",$f["id"])
-    );
-    if($i==0)$end=sprintf("%s.%s",$f["a2"],$f["a3"]);
-    $start=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
-    $i++;
-}
-
-?>
                         <div class="ttl-wrapper">
-                            <h2 class="ttl highlight"><i></i>動画特集</h2>
-                            <p class="ttl_date"><?php echo $start; ?> - <?php echo $end; ?></p>
+                            <h2 class="ttl highlight"><i></i>OFF SHOT MOVIE</h2>
                         </div>
-<?php foreach($movie as $k=>$v){ ?>
                         <div class="article_list">
                             <article class="highlight_article">
-                                <h3 class="date"><i></i><?=$k?></h3>
 
                                 <ul class="thumb_area">
-<?php
-for($i=0;$i<count($v);$i++){
-    echo sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><div class="txt_area"><p>%s %s</p></div></a></li>',$v[$i]["url"],$v[$i]["img"],$v[$i]["title"],$v[$i]["date"],$v[$i]["title"]);
-}
-?>
+
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+                                <li>
+                                    <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
+                                </li>
+
                                 </ul>
                             </article>
-<?php } ?>
                         </div>
-
-                        <div class="btn_area">
-                            <div class="btn btn_another"><a href="/inhigh/photo/"><i class="icon_camera"></i>フォトギャラリーを見る</a></div>
-                            <div class="btn btn_back"><a href="/category/inhigh/">インターハイトップへ戻る</a></div>
-                        </div>
-
-                        <div class="content_bottom_bnr">
-                            <a class="show-for-large" href="http://www.inter-high-school.tv/" target="_blank">
-                                <img src="/assets/images/inhigh/PC_Banner_01B.jpg">
-                            </a>
-                            <a class="show-for-small" href="http://www.inter-high-school.tv/" target="_blank">
-                                <img src="/assets/images/inhigh/SP_Banner_01B.jpg">
-                            </a>
-                        </div>
-
-
-<!-- / インターハイ メインコンテンツ ---------------------------------------------------------->
 
 
                     </section><!-- /.main-sec -->
@@ -174,20 +160,17 @@ for($i=0;$i<count($v);$i++){
                     <section class="side-sec show-for-large">
                         <div id="sidebar-moving-container">
                             <div class="sponsor-link">
-                               <!-- /531683568/inhigh-ad/inhigh_rectangle -->
                                 <script>
                                     googletag.cmd.push(function() {
-                                        googletag.defineSlot('/531683568/inhigh-ad/inhigh_rectangle', [300, 250], 'div-gpt-ad-1500595632509-0').addService(googletag.pubads());
+                                        googletag.defineSlot('/531683568/motor_sport/motor_sport_sidebar_rectngle', [300, 250], 'div-gpt-ad-1500012606988-0').addService(googletag.pubads());
                                         googletag.pubads().enableSingleRequest();
                                         googletag.enableServices();
                                     });
                                 </script>
-                                <div id='div-gpt-ad-1500595632509-0' style='height:250px; width:300px;'>
-                                    <script>
-                                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500595632509-0'); });
-                                    </script>
-                                </div>
-                                <!-- // /531683568/inhigh-ad/inhigh_rectangle -->
+                                <div id='div-gpt-ad-1500012606988-0' style='height:250px; width:300px;'>
+                                <script>
+                                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1500012606988-0'); });
+                                </script>
                             </div>
                             <div class="app-bnr">
                                 <!-- /531683568/pc_sidebar_top_2nd -->
@@ -225,7 +208,8 @@ for($i=0;$i<count($v);$i++){
                     <nav class="foot-breadCrumb">
                         <ol itemscope itemtype="http://schema.org/breadCrumbList">
                             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">ページタイトル</span><meta itemprop="position" content="2" /></a></li>
+                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/bulls-station"><span itemprop="name">番組紹介 - BULL'S STATION</span><meta itemprop="position" content="2" /></a></li>
+                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/bulls-station/off-shot-movie"><span itemprop="name">OFF SHOT MOVIE - BULL'S STATION</span><meta itemprop="position" content="2" /></a></li>
                         </ol>
                     </nav><!-- /.foot-breadCrumb -->
                     <div class="foot-pr">

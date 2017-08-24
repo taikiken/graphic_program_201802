@@ -5,14 +5,14 @@
 $app->group('/{slug:bulls-station}',  function () use($app) {
 
   $page = array(
-    'title'              => 'BULL\'S STATION スポーツニュース番組',
+    'title'              => '番組紹介 - BULL\'S STATION',
     'site_name'          => $app->model->property('title'),
     'og_type'            => 'article',
-    'og_title'           => 'BULL\'S STATION スポーツニュース番組 | '.$app->model->property('title'),
+    'og_title'           => '番組紹介 - BULL\'S STATION | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'bulls-station/',
     'og_image'           => $app->model->property('site_url').'assets/images/bulls-station/og_image.png',
-    'og_description'     => 'TBD',
-    'keywords'           => 'TBD',
+    'og_description'     => '毎週平日 月-金 12:30~ 配信！スポーツニュース番組 BULL\'S STATION。BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！',
+    'keywords'           => 'BULL\'S STATION,ブルズ ステーション,エイミー,サヤカ,エレナ,イチカ,ライカ,動画特集,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
     'template'           => 'index',
     'template_classname' => 'bulls-station',
     'dir_name'           => 'bulls-station',
@@ -39,8 +39,8 @@ $app->group('/{slug:bulls-station}',  function () use($app) {
   $this->get('/off-shot-movie[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = $app->model->set(array(
-      'title'              => 'BULL\'S STATION スポーツニュース番組 - オフショットムービー',
-      'og_title'           => 'BULL\'S STATION スポーツニュース番組 - オフショットムービー |'.$app->model->property('title'),
+      'title'              => 'OFF SHOT MOVIE - BULL\'S STATION',
+      'og_title'           => 'OFF SHOT MOVIE - BULL\'S STATION - オフショットムービー |'.$app->model->property('title'),
       'og_url'             => $app->model->property('site_url').'bulls-station/off-shot-movie/',
       'path'               => $args,
       'template'           => 'category',

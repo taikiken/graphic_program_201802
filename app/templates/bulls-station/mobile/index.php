@@ -1,13 +1,3 @@
-<?php
-// app webview かを `?app=(ios|android)` から判定します
-// ==============================
-$from_webview = false;
-if (isset($_GET['app'])) {
-  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
-    $from_webview = true;
-  }
-}
-?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
@@ -91,8 +81,8 @@ if (isset($_GET['app'])) {
           </div><!-- /.local_navi__heading__container -->
 
           <ul class="bulls_station__local_navi__list">
-            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--1"><a class="bulls_station__local_navi__link" href="hoge"><img src="/assets/sp/images/bulls-station/nav-nav1.png" alt="BULL'S STATIONを見る"></a></li>
-            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--2"><a class="bulls_station__local_navi__link" href="hoge"><img src="/assets/sp/images/bulls-station/nav-nav2.png" alt="PHOTO GALLERY"></a></li>
+            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--1"><a class="bulls_station__local_navi__link" href="/category/station/"><img src="/assets/sp/images/bulls-station/nav-nav1.png" alt="BULL'S STATIONを見る"></a></li>
+            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--2"><a class="bulls_station__local_navi__link" href="/p/181566/"><img src="/assets/sp/images/bulls-station/nav-nav2.png" alt="PHOTO GALLERY"></a></li>
             <li class="bulls_station__local_navi__item bulls_station__local_navi__item--3"><a class="bulls_station__local_navi__link" href="/bulls-station/off-shot-movie/"><img src="/assets/sp/images/bulls-station/nav-nav3.png" alt="OFFSHOT MOVIE"></a></li>
           </ul><!-- /.bulls_station__local_navi__list -->
         </div><!-- /.bulls_station__local_navi__inner -->
@@ -110,7 +100,7 @@ if (isset($_GET['app'])) {
           <p class="bulls_station__overview__copy"><img src="/assets/sp/images/bulls-station/overview-copy.png" alt="BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！"></p>
           <p class="bulls_station__overview__date"><img src="/assets/sp/images/bulls-station/overview-date.png" alt="毎週平日 月-金 12:30〜 配信"></p>
           <div class="bulls_station__overview__btn">
-            <a class="bulls_station__overview__btn__link" href="hoge"><img src="/assets/sp/images/bulls-station/overview-btn.png" alt="BULL’S STATIONを見る"></a>
+            <a class="bulls_station__overview__btn__link" href="/category/station/"><img src="/assets/sp/images/bulls-station/overview-btn.png" alt="BULL’S STATIONを見る"></a>
           </div><!-- /.bulls_station__overview__btn -->
 
           <div class="bulls_station__overview__caster">
@@ -121,12 +111,13 @@ if (isset($_GET['app'])) {
                   <i class="bulls_station__overview__caster__figure__dow"><img src="/assets/sp/images/bulls-station/caster-icon_mon.png" alt="Monday"></i>
                 </figure><!-- /.bulls_station__overview__caster__figure -->
 
-                <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
+                <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182756/" target="_blank">
                   <span class="bulls_station__overview__caster__btn"><img src="/assets/sp/images/bulls-station/caster-btn.png" alt="紹介VTRを見る"></span>
                 </a><!-- /.bulls_station__overview__caster__link -->
 
                 <h4 class="bulls_station__overview__caster__heading">月曜担当キャスター</h4>
-                <p class="bulls_station__overview__caster__copy">「山や海の大自然が大好きで、家の中に籠ることが苦手。寂しがり屋でもあるのでよく外出して人とあったり、体を動かしたりと完全にアウトドア派です。動物と日本のお城巡りも好きで、最近は辛い食べ物にはまっています！</p>
+                <p class="bulls_station__overview__caster__copy">山や海の大自然が大好きで、家の中に籠ることが苦手。<br />
+                寂しがり屋でもあるのでよく外出して人とあったり、体を動かしたりと完全にアウトドア派です。動物と日本のお城巡りも好きで、最近は辛い食べ物にはまっています！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--tue">
                 <figure class="bulls_station__overview__caster__figure">
@@ -134,13 +125,12 @@ if (isset($_GET['app'])) {
                   <i class="bulls_station__overview__caster__figure__dow"><img src="/assets/sp/images/bulls-station/caster-icon_tue.png" alt="Tuesday"></i>
                 </figure><!-- /.bulls_station__overview__caster__figure -->
 
-                <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
+                <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182761/" target="_blank">
                   <span class="bulls_station__overview__caster__btn"><img src="/assets/sp/images/bulls-station/caster-btn.png" alt="紹介VTRを見る"></span>
                 </a><!-- /.bulls_station__overview__caster__link -->
 
                 <h4 class="bulls_station__overview__caster__heading">火曜担当キャスター</h4>
-                <p class="bulls_station__overview__caster__copy">特技はダンスや水泳、趣味はホットヨガ。最近はアクセサリー作りにもはまっています！<br />
-                体を動かす事が大好きです。持ち前の笑顔で頑張ります！</p>
+                <p class="bulls_station__overview__caster__copy">特技は自分の好きなアーティストさんのダンスをコピーして踊ること、バトントワリング、水泳です。最近ではボルダリングに挑戦したりと体を動かすことが大好きです。持ち前の笑顔で毎日のニュースを元気に明るくお伝えします！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--wed">
                 <figure class="bulls_station__overview__caster__figure">
@@ -148,14 +138,12 @@ if (isset($_GET['app'])) {
                   <i class="bulls_station__overview__caster__figure__dow"><img src="/assets/sp/images/bulls-station/caster-icon_wed.png" alt="Wednesday"></i>
                 </figure><!-- /.bulls_station__overview__caster__figure -->
 
-                <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
+                <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182765/" target="_blank">
                   <span class="bulls_station__overview__caster__btn"><img src="/assets/sp/images/bulls-station/caster-btn.png" alt="紹介VTRを見る"></span>
                 </a><!-- /.bulls_station__overview__caster__link -->
 
                 <h4 class="bulls_station__overview__caster__heading">水曜担当キャスター</h4>
-                <p class="bulls_station__overview__caster__copy">私のスポーツ好きは、少年野球から始まり、有りとあらゆるスポーツに携わってきた人生でした！<br />
-                今でも身体を動かす事が大好きで、ピラティスやダンス、トレッキングやキャンピングなどの趣味を持っています！<br />
-                見た目で良く落ち着きのある人と思われがちですが、全く正反対でアクティブ系です！</p>
+                <p class="bulls_station__overview__caster__copy">私はこれまでたくさんのスポーツに携わってきました！身体を動かす事が大好きで、ピラティスやダンス、トレッキングやキャンピングなどの趣味を持っています！見た目でよく落ち着きのある人と思われがちですが、正反対でアクティブ系です！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--thu">
                 <figure class="bulls_station__overview__caster__figure">
@@ -163,13 +151,12 @@ if (isset($_GET['app'])) {
                   <i class="bulls_station__overview__caster__figure__dow"><img src="/assets/sp/images/bulls-station/caster-icon_thu.png" alt="Thursday"></i>
                 </figure><!-- /.bulls_station__overview__caster__figure -->
 
-                <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
+                <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182768/" target="_blank">
                   <span class="bulls_station__overview__caster__btn"><img src="/assets/sp/images/bulls-station/caster-btn.png" alt="紹介VTRを見る"></span>
                 </a><!-- /.bulls_station__overview__caster__link -->
 
                 <h4 class="bulls_station__overview__caster__heading">木曜担当キャスター</h4>
-                <p class="bulls_station__overview__caster__copy">スポーツが好きで今はゴルフにハマっています。牛乳とコーヒーも大好きです。牛乳と紅茶も大好きです。<br />
-                スポーツブルの現場ではボケ担と早い段階でバレつつありますが東京オリンピック頃までにはしっかり者に生まれ変わりたいと思います。笑</p>
+                <p class="bulls_station__overview__caster__copy">牛乳とコーヒーも大好きです。牛乳と紅茶も大好きです。スポーツブルの現場ではボケ担と早い段階でバレつつありますが東京オリンピック頃までにはしっかり者に生まれ変わりたいと思います。笑</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--fri">
                 <figure class="bulls_station__overview__caster__figure">
@@ -177,13 +164,12 @@ if (isset($_GET['app'])) {
                   <i class="bulls_station__overview__caster__figure__dow"><img src="/assets/sp/images/bulls-station/caster-icon_fri.png" alt="Friday"></i>
                 </figure><!-- /.bulls_station__overview__caster__figure -->
 
-                <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
+                <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182770/" target="_blank">
                   <span class="bulls_station__overview__caster__btn"><img src="/assets/sp/images/bulls-station/caster-btn.png" alt="紹介VTRを見る"></span>
                 </a><!-- /.bulls_station__overview__caster__link -->
 
                 <h4 class="bulls_station__overview__caster__heading">金曜担当キャスター</h4>
-                <p class="bulls_station__overview__caster__copy">来る夏と書いて、来夏です！私は夏と海と体を動かすことが大好きでサップヨガインストラクターとしても活動しています。最近は離島に行くのが趣味です！<br />
-                スポーツを通して心と体の健康もお伝えできたらいいなと思います！いろんな挑戦をしていきたいです！</p>
+                <p class="bulls_station__overview__caster__copy">来る夏と書いて、来夏です！私は夏と海と体を動かすことが大好きでサップヨガインストラクターとしても活動しています。スポーツを通して心と体の健康もお伝えできたらいいなと思います！いろんな挑戦をしていきたいです！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--bull">
                 <img src="/assets/sp/images/bulls-station/caster-figure_bull.png" alt="毎週平日月-金 12:30〜 配信中！">
@@ -196,7 +182,7 @@ if (isset($_GET['app'])) {
       <div class="bulls_station__follow">
         <div class="bulls_station__follow__app">
           <figure class="bulls_station__follow__app__figure">
-            <a href="hoge" target="_blank"><img src="/assets/sp/images/bulls-station/follow-appicon.png" alt=""></a>
+            <a href="https://app.adjust.com/cfzxsd?deep_link=sportsbull%3A%2F%2F" target="_blank"><img src="/assets/sp/images/bulls-station/follow-appicon.png" alt=""></a>
           </figure><!-- /.bulls_station__follow__app__figure -->
 
           <div class="bulls_station__follow__app__text">
@@ -204,7 +190,7 @@ if (isset($_GET['app'])) {
             BULL’S STATIONの情報を手に入れよう</p>
 
             <div class="bulls_station__follow__app__text__btn">
-              <a href="hoge" target="_blank">ダウンロードはこちら</a>
+              <a href="https://app.adjust.com/cfzxsd?deep_link=sportsbull%3A%2F%2F" target="_blank">ダウンロードはこちら</a>
             </div><!-- /.bulls_station__follow__app__text__btn -->
           </div><!-- /.bulls_station__follow__app__text -->
         </div><!-- /.bulls_station__follow__app__app -->
@@ -229,7 +215,7 @@ if (isset($_GET['app'])) {
           <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery4.png" alt=""></a></li>
         </ul><!-- /.bulls_station__photo_gallery__list -->
 
-        <div class="bulls_station__photo_gallery__btn"><a href="hoge">すべてのPHOTO GALLERYを見る</a></div>
+        <div class="bulls_station__photo_gallery__btn"><a href="/p/181566/">すべてのPHOTO GALLERYを見る</a></div>
       </div><!-- /.bulls_station__photo_gallery -->
 
       <div class="bulls_station__offshot_movie">
@@ -242,7 +228,7 @@ if (isset($_GET['app'])) {
           <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
         </ul><!-- /.bulls_station__offshot_movie__list -->
 
-        <div class="bulls_station__offshot_movie__btn"><a href="hoge">すべてのOFFSHOT MOVIEを見る</a></div>
+        <div class="bulls_station__offshot_movie__btn"><a href="/bulls-station/off-shot-movie/">すべてのOFFSHOT MOVIEを見る</a></div>
       </div><!-- /.bulls_station__offshot_movie -->
 
     </div><!-- .body-sec-inner -->
