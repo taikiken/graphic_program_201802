@@ -8,80 +8,83 @@
     <script src="/assets/js/app_divide.bundle.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <title><?php echo strip_tags($page['title']).' | '.$page['site_name']; ?></title>
-    <meta name="description" content="毎週平日 月-金 12:30~ 配信！スポーツニュース番組 BULL'S STATION。BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！">
-    <meta name="keywords" content="BULL'S STATION,ブルズ ステーション,エイミー,サヤカ,エレナ,イチカ,ライカ,動画特集,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
+    <meta name="keywords" content="<?php echo $page['keywords']; ?>">
+    <meta name="description" content="<?php echo $page['og_description']; ?>">
     <!-- sns ogp -->
-    <meta property="og:title" content="OFF SHOT MOVIE - BULL'S STATION | スポーツブル / SPORTS BULL">
-    <meta property="og:type" content="article">
-    <meta property="og:image" content="https://sportsbull.jp/assets/images/bulls-station/ogp.jpg">
-    <meta property="og:url" content="https://sportsbull.jp/bulls-station/off-shot-movie/">
-    <meta property="og:description" content="毎週平日 月-金 12:30~ 配信！スポーツニュース番組 BULL'S STATION。BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！">
+    <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
+    <meta property="og:type" content="<?php echo $page['og_type']; ?>">
+    <meta property="og:title" content="<?php echo $page['og_title']; ?>">
+    <meta property="og:image" content="<?php echo $page['og_image']; ?>">
+    <meta property="og:url" content="<?php echo $page['og_url']; ?>">
+    <meta property="og:description" content="<?php echo $page['og_description']; ?>">
+    <meta property="og:locale" content="ja_JP" />
     <!-- twitter card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@sportsbull_jp">
-    <meta name="twitter:title" content="OFF SHOT MOVIE - BULL'S STATION | スポーツブル / SPORTS BULL">
-    <meta name="twitter:image" content="https://sportsbull.jp/assets/images/bulls-station/ogp.jpg">
-    <meta name="twitter:url" content="https://sportsbull.jp/bulls-station/off-shot-movie/">
-    <meta name="twitter:description" content="毎週平日 月-金 12:30~ 配信！スポーツニュース番組 BULL'S STATION。BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！">
     <!-- favicon -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
     <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
     <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
     <link rel="shortcut icon" href="/favicon.ico">
 
-    <script src="/assets/js/libs/vendor.react.js"></script>
-    <script src="/assets/js/bundle/main.bundle.js"></script>
+    <link rel="canonical" href="<?php echo $page['og_url']; ?>">
+
+    <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
     <!-- 表示確認用 / -->
     <link rel="stylesheet" href="/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
     <link rel="stylesheet" href="/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
     <!-- / 表示確認用 -->
     <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
     <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
-    <!-- インターハイ css -->
+    <!-- OFF SHOT MOVIE css -->
     <link rel="stylesheet" href="/assets/css/photo/photo.css" media="only screen and (min-width: 769px)">
     <link rel="stylesheet" href="/assets/css/photo/sp_photo.css" media="only screen and (max-width: 768px)">
-    <!-- / インターハイ css -->
+    <!-- / OFF SHOT MOVIE css -->
+
     <script type='text/javascript'>
-        var googletag = googletag || {};
-        googletag.cmd = googletag.cmd || [];
-        (function() {
-            var gads = document.createElement('script');
-            gads.async = true;
-            gads.type = 'text/javascript';
-            var useSSL = 'https:' == document.location.protocol;
-            gads.src = (useSSL ? 'https:' : 'http:') +
-                '//www.googletagservices.com/tag/js/gpt.js';
-            var node = document.getElementsByTagName('script')[0];
-            node.parentNode.insertBefore(gads, node);
-        })();
+      var googletag = googletag || {};
+      googletag.cmd = googletag.cmd || [];
+      (function() {
+        var gads = document.createElement('script');
+        gads.async = true;
+        gads.type = 'text/javascript';
+        var useSSL = 'https:' == document.location.protocol;
+        gads.src = (useSSL ? 'https:' : 'http:') +
+            '//www.googletagservices.com/tag/js/gpt.js';
+        var node = document.getElementsByTagName('script')[0];
+        node.parentNode.insertBefore(gads, node);
+      })();
     </script>
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                                    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            ga('create', 'UA-74679267-1', 'auto');
-            ga('require', 'linkid');
-            ga('require', 'displayfeatures');
-            ga('send', 'pageview');
-        </script>
-        <script>
-            googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/npb-pc-rectangle', [300, 250], 'div-gpt-ad-1492577512561-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
-            });
-        </script>
-        <!-- ad/npb-sp-anchor -->
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "ca-pub-8613117509675807",
-                enable_page_level_ads: true
-            });
-        </script>
-        <!-- // ad/npb-sp-anchor -->
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-74679267-1', 'auto');
+      ga('require', 'linkid');
+      ga('require', 'displayfeatures');
+      ga('send', 'pageview');
+    </script>
+    <script>
+      googletag.cmd.push(function() {
+        googletag.defineSlot('/531683568/npb-pc-rectangle', [300, 250], 'div-gpt-ad-1492577512561-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.pubads().collapseEmptyDivs();
+        googletag.enableServices();
+      });
+    </script>
+    <!-- ad/OFF SHOT MOVIE -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-8613117509675807",
+        enable_page_level_ads: true
+      });
+    </script>
+    <!-- // ad/OFF SHOT MOVIE -->
     </head>
     <body>
 
