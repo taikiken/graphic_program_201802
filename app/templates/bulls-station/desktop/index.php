@@ -78,8 +78,8 @@
         </div><!-- /.local_navi__heading__container -->
 
         <ul class="bulls_station__local_navi__list">
-          <li class="bulls_station__local_navi__item bulls_station__local_navi__item--1"><a class="bulls_station__local_navi__link" href="hoge">BULL'S STATIONを見る</a></li>
-          <li class="bulls_station__local_navi__item bulls_station__local_navi__item--2"><a class="bulls_station__local_navi__link" href="hoge">PHOTO GALLERY</a></li>
+          <li class="bulls_station__local_navi__item bulls_station__local_navi__item--1"><a class="bulls_station__local_navi__link" href="/category/station/">BULL'S STATIONを見る</a></li>
+          <li class="bulls_station__local_navi__item bulls_station__local_navi__item--2"><a class="bulls_station__local_navi__link" href="/p/181566">PHOTO GALLERY</a></li>
           <li class="bulls_station__local_navi__item bulls_station__local_navi__item--3"><a class="bulls_station__local_navi__link" href="/bulls-station/off-shot-movie/">OFFSHOT MOVIE</a></li>
         </ul><!-- /.bulls_station__local_navi__list -->
       </div><!-- /.bulls_station__local_navi__inner -->
@@ -98,7 +98,7 @@
           <p class="bulls_station__overview__copy"><img src="/assets/images/bulls-station/overview-copy.png" alt="BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！"></p>
           <p class="bulls_station__overview__date"><img src="/assets/images/bulls-station/overview-date.png" alt="毎週平日 月-金 12:30〜 配信"></p>
           <div class="bulls_station__overview__btn">
-            <a class="bulls_station__overview__btn__link" href="hoge"><img src="/assets/images/bulls-station/overview-btn.png" alt="BULL’S STATIONを見る"></a>
+            <a class="bulls_station__overview__btn__link" href="/category/station/"><img src="/assets/images/bulls-station/overview-btn.png" alt="BULL’S STATIONを見る"></a>
           </div><!-- /.bulls_station__overview__btn -->
 
           <div class="bulls_station__overview__caster">
@@ -185,14 +185,14 @@
             <p class="bulls_station__follow__text">iOSアプリをダウンロードして<br />
             <strong class="bulls_station__follow__text__color1">BULL’S</strong> <strong class="bulls_station__follow__text__color2">STATION</strong>の情報を手に入れよう</p>
             <div class="bulls_station__follow__btn">
-              <a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/bulls-station/follow-btn_ios.png" alt="App StoreからiOSアプリをダウンロード"></a>
+              <a href="https://itunes.apple.com/jp/app/%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84%E3%83%96%E3%83%AB-sports-bull/id1086719653?mt=8" target="_blank"><img src="/assets/images/bulls-station/follow-btn_ios.png" alt="App StoreからiOSアプリをダウンロード"></a>
             </div><!-- /.bulls_station__follow__btn -->
           </li><!-- /.bulls_station__follow__item -->
           <li class="bulls_station__follow__item bulls_station__follow__item--app">
             <p class="bulls_station__follow__text">Androidアプリをダウンロードして<br />
             <strong class="bulls_station__follow__text__color1">BULL’S</strong> <strong class="bulls_station__follow__text__color2">STATION</strong>の情報を手に入れよう</p>
             <div class="bulls_station__follow__btn">
-              <a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/images/bulls-station/follow-btn_android.png" alt="Google playからAndroidアプリをダウンロード"></a>
+              <a href="https://play.google.com/store/apps/details?id=com.undotsushin&hl=ja" target="_blank"><img src="/assets/images/bulls-station/follow-btn_android.png" alt="Google playからAndroidアプリをダウンロード"></a>
             </div><!-- /.bulls_station__follow__btn -->
           </li><!-- /.bulls_station__follow__item -->
           <li class="bulls_station__follow__item bulls_station__follow__item--facebook">
@@ -209,7 +209,7 @@
       <div class="bulls_station__photo_gallery">
         <div class="bulls_station__photo_gallery__heading">
           <h2><img src="/assets/images/bulls-station/gallery-heading.png" alt="PHOTO GALLERY"></h2>
-          <div class="bulls_station__photo_gallery__heading__btn"><a href="hoge">すべてのPHOTO GALLERYを見る</a></div>
+          <div class="bulls_station__photo_gallery__heading__btn"><a href="/p/181566">すべてのPHOTO GALLERYを見る</a></div>
         </div><!-- /.bulls_station__photo_gallery__heading -->
 
         <ul class="bulls_station__photo_gallery__list">
@@ -224,7 +224,7 @@
       <div class="bulls_station__offshot_movie">
         <div class="bulls_station__offshot_movie__heading">
           <h2><img src="/assets/images/bulls-station/movie-heading.png" alt="OFFSHOT MOVIE"></h2>
-          <div class="bulls_station__offshot_movie__heading__btn"><a href="hoge">すべてのOFFSHOT MOVIEを見る</a></div>
+          <div class="bulls_station__offshot_movie__heading__btn"><a href="/bulls-station/off-shot-movie/">すべてのOFFSHOT MOVIEを見る</a></div>
         </div><!-- /.bulls_station__offshot_movie__heading -->
 
         <ul class="bulls_station__offshot_movie__list">
