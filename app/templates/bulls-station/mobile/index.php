@@ -1,13 +1,3 @@
-<?php
-// app webview かを `?app=(ios|android)` から判定します
-// ==============================
-$from_webview = false;
-if (isset($_GET['app'])) {
-  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
-    $from_webview = true;
-  }
-}
-?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
@@ -126,7 +116,8 @@ if (isset($_GET['app'])) {
                 </a><!-- /.bulls_station__overview__caster__link -->
 
                 <h4 class="bulls_station__overview__caster__heading">月曜担当キャスター</h4>
-                <p class="bulls_station__overview__caster__copy">「山や海の大自然が大好きで、家の中に籠ることが苦手。寂しがり屋でもあるのでよく外出して人とあったり、体を動かしたりと完全にアウトドア派です。動物と日本のお城巡りも好きで、最近は辛い食べ物にはまっています！</p>
+                <p class="bulls_station__overview__caster__copy">山や海の大自然が大好きで、家の中に籠ることが苦手。<br />
+                寂しがり屋でもあるのでよく外出して人とあったり、体を動かしたりと完全にアウトドア派です。動物と日本のお城巡りも好きで、最近は辛い食べ物にはまっています！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--tue">
                 <figure class="bulls_station__overview__caster__figure">
@@ -139,8 +130,7 @@ if (isset($_GET['app'])) {
                 </a><!-- /.bulls_station__overview__caster__link -->
 
                 <h4 class="bulls_station__overview__caster__heading">火曜担当キャスター</h4>
-                <p class="bulls_station__overview__caster__copy">特技はダンスや水泳、趣味はホットヨガ。最近はアクセサリー作りにもはまっています！<br />
-                体を動かす事が大好きです。持ち前の笑顔で頑張ります！</p>
+                <p class="bulls_station__overview__caster__copy">特技は自分の好きなアーティストさんのダンスをコピーして踊ること、バトントワリング、水泳です。最近ではボルダリングに挑戦したりと体を動かすことが大好きです。持ち前の笑顔で毎日のニュースを元気に明るくお伝えします！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--wed">
                 <figure class="bulls_station__overview__caster__figure">
@@ -153,9 +143,7 @@ if (isset($_GET['app'])) {
                 </a><!-- /.bulls_station__overview__caster__link -->
 
                 <h4 class="bulls_station__overview__caster__heading">水曜担当キャスター</h4>
-                <p class="bulls_station__overview__caster__copy">私のスポーツ好きは、少年野球から始まり、有りとあらゆるスポーツに携わってきた人生でした！<br />
-                今でも身体を動かす事が大好きで、ピラティスやダンス、トレッキングやキャンピングなどの趣味を持っています！<br />
-                見た目で良く落ち着きのある人と思われがちですが、全く正反対でアクティブ系です！</p>
+                <p class="bulls_station__overview__caster__copy">私はこれまでたくさんのスポーツに携わってきました！身体を動かす事が大好きで、ピラティスやダンス、トレッキングやキャンピングなどの趣味を持っています！見た目でよく落ち着きのある人と思われがちですが、正反対でアクティブ系です！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--thu">
                 <figure class="bulls_station__overview__caster__figure">
@@ -168,8 +156,7 @@ if (isset($_GET['app'])) {
                 </a><!-- /.bulls_station__overview__caster__link -->
 
                 <h4 class="bulls_station__overview__caster__heading">木曜担当キャスター</h4>
-                <p class="bulls_station__overview__caster__copy">スポーツが好きで今はゴルフにハマっています。牛乳とコーヒーも大好きです。牛乳と紅茶も大好きです。<br />
-                スポーツブルの現場ではボケ担と早い段階でバレつつありますが東京オリンピック頃までにはしっかり者に生まれ変わりたいと思います。笑</p>
+                <p class="bulls_station__overview__caster__copy">牛乳とコーヒーも大好きです。牛乳と紅茶も大好きです。スポーツブルの現場ではボケ担と早い段階でバレつつありますが東京オリンピック頃までにはしっかり者に生まれ変わりたいと思います。笑</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--fri">
                 <figure class="bulls_station__overview__caster__figure">
@@ -182,8 +169,7 @@ if (isset($_GET['app'])) {
                 </a><!-- /.bulls_station__overview__caster__link -->
 
                 <h4 class="bulls_station__overview__caster__heading">金曜担当キャスター</h4>
-                <p class="bulls_station__overview__caster__copy">来る夏と書いて、来夏です！私は夏と海と体を動かすことが大好きでサップヨガインストラクターとしても活動しています。最近は離島に行くのが趣味です！<br />
-                スポーツを通して心と体の健康もお伝えできたらいいなと思います！いろんな挑戦をしていきたいです！</p>
+                <p class="bulls_station__overview__caster__copy">来る夏と書いて、来夏です！私は夏と海と体を動かすことが大好きでサップヨガインストラクターとしても活動しています。スポーツを通して心と体の健康もお伝えできたらいいなと思います！いろんな挑戦をしていきたいです！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--bull">
                 <img src="/assets/sp/images/bulls-station/caster-figure_bull.png" alt="毎週平日月-金 12:30〜 配信中！">
