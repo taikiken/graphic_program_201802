@@ -1,6 +1,6 @@
 <?php
 
-if(getSorC("usr")==="inhigh"){
+if(getSorC("usr")==="inhigh" || getSorC("usr")==="kansaifootball"){
 	
 	$inhighJS="$('.utilityMenu  li:eq(1)').hide();
 	$('.toe').each(function(){
@@ -18,6 +18,9 @@ if(getSorC("usr")==="inhigh"){
 			}
 			if($q->get_file()===0||$q->get_file()===1){
 				$inhighJS.="$('.d1d2 input:eq(0)').val('3:メディア');$('.d1d2 input:eq(1)').val('54:インハイ.tv');";
+				if(getSorC("usr")==="kansaifootball") {
+				    $inhighJS.="$('.d1d2 input:eq(0)').val('3:メディア');$('.d1d2 input:eq(1)').val('57:関西学生アメリカンフットボール');";
+                }
 				$inhighJS.="$('.t30,.t10t11t12t13t14t15,.t1,.swf').hide();";
 			}
 		}
