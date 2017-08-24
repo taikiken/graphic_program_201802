@@ -91,8 +91,8 @@ if (isset($_GET['app'])) {
           </div><!-- /.local_navi__heading__container -->
 
           <ul class="bulls_station__local_navi__list">
-            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--1"><a class="bulls_station__local_navi__link" href="hoge"><img src="/assets/sp/images/bulls-station/nav-nav1.png" alt="BULL'S STATIONを見る"></a></li>
-            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--2"><a class="bulls_station__local_navi__link" href="hoge"><img src="/assets/sp/images/bulls-station/nav-nav2.png" alt="PHOTO GALLERY"></a></li>
+            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--1"><a class="bulls_station__local_navi__link" href="/category/station/"><img src="/assets/sp/images/bulls-station/nav-nav1.png" alt="BULL'S STATIONを見る"></a></li>
+            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--2"><a class="bulls_station__local_navi__link" href="/p/181566"><img src="/assets/sp/images/bulls-station/nav-nav2.png" alt="PHOTO GALLERY"></a></li>
             <li class="bulls_station__local_navi__item bulls_station__local_navi__item--3"><a class="bulls_station__local_navi__link" href="/bulls-station/off-shot-movie/"><img src="/assets/sp/images/bulls-station/nav-nav3.png" alt="OFFSHOT MOVIE"></a></li>
           </ul><!-- /.bulls_station__local_navi__list -->
         </div><!-- /.bulls_station__local_navi__inner -->
@@ -110,7 +110,7 @@ if (isset($_GET['app'])) {
           <p class="bulls_station__overview__copy"><img src="/assets/sp/images/bulls-station/overview-copy.png" alt="BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！"></p>
           <p class="bulls_station__overview__date"><img src="/assets/sp/images/bulls-station/overview-date.png" alt="毎週平日 月-金 12:30〜 配信"></p>
           <div class="bulls_station__overview__btn">
-            <a class="bulls_station__overview__btn__link" href="hoge"><img src="/assets/sp/images/bulls-station/overview-btn.png" alt="BULL’S STATIONを見る"></a>
+            <a class="bulls_station__overview__btn__link" href="/category/station/"><img src="/assets/sp/images/bulls-station/overview-btn.png" alt="BULL’S STATIONを見る"></a>
           </div><!-- /.bulls_station__overview__btn -->
 
           <div class="bulls_station__overview__caster">
@@ -196,7 +196,7 @@ if (isset($_GET['app'])) {
       <div class="bulls_station__follow">
         <div class="bulls_station__follow__app">
           <figure class="bulls_station__follow__app__figure">
-            <a href="hoge" target="_blank"><img src="/assets/sp/images/bulls-station/follow-appicon.png" alt=""></a>
+            <a href="https://app.adjust.com/cfzxsd?deep_link=sportsbull%3A%2F%2F" target="_blank"><img src="/assets/sp/images/bulls-station/follow-appicon.png" alt=""></a>
           </figure><!-- /.bulls_station__follow__app__figure -->
 
           <div class="bulls_station__follow__app__text">
@@ -204,7 +204,7 @@ if (isset($_GET['app'])) {
             BULL’S STATIONの情報を手に入れよう</p>
 
             <div class="bulls_station__follow__app__text__btn">
-              <a href="hoge" target="_blank">ダウンロードはこちら</a>
+              <a href="https://app.adjust.com/cfzxsd?deep_link=sportsbull%3A%2F%2F" target="_blank">ダウンロードはこちら</a>
             </div><!-- /.bulls_station__follow__app__text__btn -->
           </div><!-- /.bulls_station__follow__app__text -->
         </div><!-- /.bulls_station__follow__app__app -->
@@ -229,7 +229,7 @@ if (isset($_GET['app'])) {
           <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery4.png" alt=""></a></li>
         </ul><!-- /.bulls_station__photo_gallery__list -->
 
-        <div class="bulls_station__photo_gallery__btn"><a href="hoge">すべてのPHOTO GALLERYを見る</a></div>
+        <div class="bulls_station__photo_gallery__btn"><a href="/p/181566">すべてのPHOTO GALLERYを見る</a></div>
       </div><!-- /.bulls_station__photo_gallery -->
 
       <div class="bulls_station__offshot_movie">
@@ -242,7 +242,7 @@ if (isset($_GET['app'])) {
           <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
         </ul><!-- /.bulls_station__offshot_movie__list -->
 
-        <div class="bulls_station__offshot_movie__btn"><a href="hoge">すべてのOFFSHOT MOVIEを見る</a></div>
+        <div class="bulls_station__offshot_movie__btn"><a href="/bulls-station/off-shot-movie/">すべてのOFFSHOT MOVIEを見る</a></div>
       </div><!-- /.bulls_station__offshot_movie -->
 
     </div><!-- .body-sec-inner -->
