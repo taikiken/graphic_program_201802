@@ -76,7 +76,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
 
         <ul class="bulls_station__local_navi__list">
           <li class="bulls_station__local_navi__item bulls_station__local_navi__item--1"><a class="bulls_station__local_navi__link" href="/category/station/">BULL'S STATIONを見る</a></li>
-          <li class="bulls_station__local_navi__item bulls_station__local_navi__item--2"><a class="bulls_station__local_navi__link" href="/p/181566">PHOTO GALLERY</a></li>
+          <li class="bulls_station__local_navi__item bulls_station__local_navi__item--2"><a class="bulls_station__local_navi__link" href="/p/181566/">PHOTO GALLERY</a></li>
           <li class="bulls_station__local_navi__item bulls_station__local_navi__item--3"><a class="bulls_station__local_navi__link" href="/bulls-station/off-shot-movie/">OFFSHOT MOVIE</a></li>
         </ul><!-- /.bulls_station__local_navi__list -->
       </div><!-- /.bulls_station__local_navi__inner -->
@@ -101,7 +101,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
           <div class="bulls_station__overview__caster">
             <ul class="bulls_station__overview__caster__list">
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--mon">
-                <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
+                <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182756/" target="_blank">
                   <figure class="bulls_station__overview__caster__figure">
                     <div class="bulls_station__overview__caster__figure__img"><img src="/assets/images/bulls-station/caster-figure_mon.png" alt=""></div>
                     <h3 class="bulls_station__overview__caster__figure__heading"><img src="/assets/images/bulls-station/caster-figure_mon_heading.png" alt="エイミー"></h3>
@@ -116,7 +116,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
                 寂しがり屋でもあるのでよく外出して人とあったり、体を動かしたりと完全にアウトドア派です。動物と日本のお城巡りも好きで、最近は辛い食べ物にはまっています！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--tue">
-                <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
+                <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182761/" target="_blank">
                   <figure class="bulls_station__overview__caster__figure">
                     <div class="bulls_station__overview__caster__figure__img"><img src="/assets/images/bulls-station/caster-figure_tue.png" alt=""></div>
                     <h3 class="bulls_station__overview__caster__figure__heading"><img src="/assets/images/bulls-station/caster-figure_tue_heading.png" alt="サヤカ"></h3>
@@ -130,7 +130,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
                 <p class="bulls_station__overview__caster__copy">特技は自分の好きなアーティストさんのダンスをコピーして踊ること、バトントワリング、水泳です。最近ではボルダリングに挑戦したりと体を動かすことが大好きです。持ち前の笑顔で毎日のニュースを元気に明るくお伝えします！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--wed">
-                <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
+                <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182765/" target="_blank">
                   <figure class="bulls_station__overview__caster__figure">
                     <div class="bulls_station__overview__caster__figure__img"><img src="/assets/images/bulls-station/caster-figure_wed.png" alt=""></div>
                     <h3 class="bulls_station__overview__caster__figure__heading"><img src="/assets/images/bulls-station/caster-figure_wed_heading.png" alt="エレナ"></h3>
@@ -144,7 +144,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
                 <p class="bulls_station__overview__caster__copy">私はこれまでたくさんのスポーツに携わってきました！身体を動かす事が大好きで、ピラティスやダンス、トレッキングやキャンピングなどの趣味を持っています！見た目でよく落ち着きのある人と思われがちですが、正反対でアクティブ系です！</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--thu">
-                <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
+                <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182768/" target="_blank">
                   <figure class="bulls_station__overview__caster__figure">
                     <div class="bulls_station__overview__caster__figure__img"><img src="/assets/images/bulls-station/caster-figure_thu.png" alt=""></div>
                     <h3 class="bulls_station__overview__caster__figure__heading"><img src="/assets/images/bulls-station/caster-figure_thu_heading.png" alt="イチカ"></h3>
@@ -158,7 +158,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
                 <p class="bulls_station__overview__caster__copy">牛乳とコーヒーも大好きです。牛乳と紅茶も大好きです。スポーツブルの現場ではボケ担と早い段階でバレつつありますが東京オリンピック頃までにはしっかり者に生まれ変わりたいと思います。笑</p>
               </li><!-- /.bulls_station__overview__caster__item -->
               <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--fri">
-                <a class="bulls_station__overview__caster__link" href="hoge" target="_blank">
+                <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182770/" target="_blank">
                   <figure class="bulls_station__overview__caster__figure">
                     <div class="bulls_station__overview__caster__figure__img"><img src="/assets/images/bulls-station/caster-figure_fri.png" alt=""></div>
                     <h3 class="bulls_station__overview__caster__figure__heading"><img src="/assets/images/bulls-station/caster-figure_fri_heading.png" alt="ライカ"></h3>
