@@ -1,3 +1,6 @@
+<?php
+include_once __DIR__."/_include/_bulls_station_func.php";
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
@@ -102,6 +105,16 @@
     <div class="body-sec-inner">
       <section class="main-sec">
 
+        <?php
+        // -----------------------------------------------
+        // movie
+        $bulls_station_movies = bulls_station_json_movie(1000);
+        if (isset($bulls_station_movies)) :
+          $bulls_station_movie_response = $bulls_station_movies->response;
+          if (isset($bulls_station_movie_response)) :
+            $bulls_station_movie_response_articles = $bulls_station_movie_response->articles;
+              if (is_array($bulls_station_movie_response_articles) && count($bulls_station_movie_response_articles) > 0) :
+        ?>
         <div class="ttl-wrapper">
           <h2 class="ttl highlight"><i></i>OFF SHOT MOVIE</h2>
         </div>
@@ -109,48 +122,29 @@
           <article class="highlight_article">
 
             <ul class="thumb_area">
-
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-              <li>
-                <a href="#"><div class="img"><img src="https://cdn-image.as-web.jp/2016/08/24063531/AQ0W3530-1280x854.jpg" alt=""></div><div class="txt_area"><p>タイトル</p></div></a>
-              </li>
-
+              <?php
+              foreach ($bulls_station_movie_response_articles as $bulls_station_movie_response_article) :
+              ?>
+                <li>
+                  <a href="?php echo $bulls_station_movie_response_article->url ?>">
+                    <div class="img">
+                      <img src="<?php echo $bulls_station_movie_response_article->img ?>" alt="">
+                    </div>
+                    <div class="txt_area"><p><?php echo htmlentities($bulls_station_movie_response_article->title); ?></p></div>
+                  </a>
+                </li>
+              <?php
+              endforeach;
+              ?>
             </ul>
           </article>
         </div>
-
+        <?php
+              endif;
+          endif;
+        endif;
+        // -----------------------------------------------
+        ?>
 
       </section><!-- /.main-sec -->
 

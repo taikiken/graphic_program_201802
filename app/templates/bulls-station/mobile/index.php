@@ -250,13 +250,12 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
       <?php
       // -----------------------------------------------
       // movie
-      $bulls_station_movies = bulls_station_json_movie();
+      $bulls_station_movies = bulls_station_json_movie(4);
       if (isset($bulls_station_movies)) :
         $bulls_station_movie_response = $bulls_station_movies->response;
         if (isset($bulls_station_movie_response)) :
           $bulls_station_movie_response_articles = $bulls_station_movie_response->articles;
           if (is_array($bulls_station_movie_response_articles) && count($bulls_station_movie_response_articles) > 0) :
-            $count = 0;
       ?>
       <div class="bulls_station__offshot_movie">
         <h2 class="bulls_station__offshot_movie__heading"><img src="/assets/sp/images/bulls-station/movie-heading.png" alt="OFFSHOT MOVIE"></h2>
@@ -264,10 +263,6 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
         <ul class="bulls_station__offshot_movie__list">
           <?php
           foreach ($bulls_station_movie_response_articles as $bulls_station_movie_response_article) :
-            // limit 4
-            if ($count > 3) {
-              break;
-            }
           ?>
             <li class="bulls_station__offshot_movie__item">
               <a href="<?php echo $bulls_station_movie_response_article->url ?>" title="<?php echo $bulls_station_movie_response_article->title; ?>">
@@ -275,7 +270,6 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
               </a>
             </li>
           <?php
-            $count += 1;
           endforeach;
           ?>
         </ul><!-- /.bulls_station__offshot_movie__list -->

@@ -221,6 +221,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
         $bulls_station_photos_data = $bulls_station_photos->data;
         if (is_array($bulls_station_photos_data) && count($bulls_station_photos_data) > 0) :
           $bulls_station_photo_url = $bulls_station_photos->url;
+          $count = 0;
       ?>
       <div class="bulls_station__photo_gallery">
         <div class="bulls_station__photo_gallery__outer">
