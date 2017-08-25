@@ -274,8 +274,8 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
               foreach ($bulls_station_movie_response_articles as $bulls_station_movie_response_article) :
               ?>
                 <li class="bulls_station__offshot_movie__item">
-                  <a href="<?php echo $bulls_station_movie_response_article->url ?>">
-                    <img src="<?php echo $bulls_station_movie_response_article->img ?>" alt="">
+                  <a href="<?php echo $bulls_station_movie_response_article->url ?>" title="<?php echo $bulls_station_movie_response_article->title; ?>">
+                    <img src="<?php echo $bulls_station_movie_response_article->img ?>" alt="<?php echo $bulls_station_movie_response_article->title; ?>">
                   </a>
                 </li>
               <?php
