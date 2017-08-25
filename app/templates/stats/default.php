@@ -12,7 +12,15 @@
   }());
   </script>
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <?php
+  if (0) :
+    // app_ua_detector.bundle.js を使います
+    // @since 2017-08-23
+  ?>
   <script src="/assets/js/app_divide.bundle.js"></script>
+  <?php
+  endif;
+  ?>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <?php
   // app in webview 時に head内不要なタグを非表示にする
