@@ -45,6 +45,7 @@ $app->group('/{slug:bulls-station}',  function () use($app) {
       'path'               => $args,
       'template'           => 'category',
       'template_classname' => '',
+      'dir_name'           => 'bulls-station',
     ));
 
     return $this->renderer->render($response, 'bulls-station/off-shot-movie.php', $args);
