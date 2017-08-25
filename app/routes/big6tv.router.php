@@ -90,10 +90,25 @@ $app->group('/{slug:big6tv}',  function () use($app) {
 //      $S3Module = new S3Module;
 //      $json = $S3Module->getUrl($bucket, $key);
 
-      if (!@file_get_contents($json, NULL, NULL, 0, 1)) {
+      if (!@file_get_contents($json, NULL, NULL, 0, 1)) :
           // 404飛ばしたい
-          return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
-      }
+          // ------------------------------
+          $args['page'] = $app->model->set(array(
+              'title'    => '404 Not Found',
+              'og_title' => '404 Not Found',
+              'template' => 404,
+          ));
+
+          $args['request']  = $request;
+          $args['response'] = $response;
+
+          if ( $app->model->property('ua') === 'desktop' ) :
+              return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
+          else :
+              return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
+          endif;
+      endif;
+
       $json = json_decode(file_get_contents($json));
 
       $args['page'] = $app->model->set(array(
