@@ -1,3 +1,6 @@
+<?php
+include_once __DIR__."/../_include/_bulls_station_func.php";
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
@@ -204,32 +207,86 @@
         </div><!-- /.bulls_station__follow__facebook__facebook -->
       </div><!-- /.bulls_station__follow__facebook -->
 
+      <?php
+      // -----------------------------------------------
+      // photo gallery
+      $bulls_station_photos = bulls_station_json_photo();
+      if (isset($bulls_station_photos)) :
+        $bulls_station_photos_data = $bulls_station_photos->data;
+        if (is_array($bulls_station_photos_data) && count($bulls_station_photos_data) > 0) :
+          $bulls_station_photo_url = $bulls_station_photos->url;
+          $count = 0;
+      ?>
       <div class="bulls_station__photo_gallery">
         <h2 class="bulls_station__photo_gallery__heading"><img src="/assets/sp/images/bulls-station/gallery-heading.png" alt="PHOTO GALLERY"></h2>
         <div class="">
 
         <ul class="bulls_station__photo_gallery__list">
-          <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery1.png" alt=""></a></li>
-          <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery2.png" alt=""></a></li>
-          <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery3.png" alt=""></a></li>
-          <li class="bulls_station__photo_gallery__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_gallery4.png" alt=""></a></li>
+          <?php
+          foreach ($bulls_station_photos_data as $bulls_station_photo) :
+            // limit 4
+            if ($count > 3) {
+              break;
+            }
+          ?>
+            <li class="bulls_station__photo_gallery__item">
+              <a href="<?php echo $bulls_station_photo_url; ?>">
+                <img src="<?php echo $bulls_station_photo->sp_thumb; ?>" alt="">
+              </a>
+            </li>
+          <?php
+            $count += 1;
+          endforeach;
+          ?>
         </ul><!-- /.bulls_station__photo_gallery__list -->
 
         <div class="bulls_station__photo_gallery__btn"><a href="/p/181566/">すべてのPHOTO GALLERYを見る</a></div>
       </div><!-- /.bulls_station__photo_gallery -->
-
+      <?php
+        endif;
+      endif;
+      // -----------------------------------------------
+      ?>
+      <?php
+      // -----------------------------------------------
+      // movie
+      $bulls_station_movies = bulls_station_json_movie();
+      if (isset($bulls_station_movies)) :
+        $bulls_station_movie_response = $bulls_station_movies->response;
+        if (isset($bulls_station_movie_response)) :
+          $bulls_station_movie_response_articles = $bulls_station_movie_response->articles;
+          if (is_array($bulls_station_movie_response_articles) && count($bulls_station_movie_response_articles) > 0) :
+            $count = 0;
+      ?>
       <div class="bulls_station__offshot_movie">
         <h2 class="bulls_station__offshot_movie__heading"><img src="/assets/sp/images/bulls-station/movie-heading.png" alt="OFFSHOT MOVIE"></h2>
 
         <ul class="bulls_station__offshot_movie__list">
-          <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
-          <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
-          <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
-          <li class="bulls_station__offshot_movie__item"><a href="hoge"><img src="/assets/images/bulls-station/dummy-thumb_movie.png" alt=""></a></li>
+          <?php
+          foreach ($bulls_station_movie_response_articles as $bulls_station_movie_response_article) :
+            // limit 4
+            if ($count > 3) {
+              break;
+            }
+          ?>
+            <li class="bulls_station__offshot_movie__item">
+              <a href="<?php echo $bulls_station_movie_response_article->url ?>" title="<?php echo $bulls_station_movie_response_article->title; ?>">
+                <img src="<?php echo $bulls_station_movie_response_article->img ?>" alt="<?php echo $bulls_station_movie_response_article->title; ?>">
+              </a>
+            </li>
+          <?php
+            $count += 1;
+          endforeach;
+          ?>
         </ul><!-- /.bulls_station__offshot_movie__list -->
 
         <div class="bulls_station__offshot_movie__btn"><a href="/bulls-station/off-shot-movie/">すべてのOFFSHOT MOVIEを見る</a></div>
       </div><!-- /.bulls_station__offshot_movie -->
+      <?php
+          endif;
+        endif;
+      endif;
+      ?>
 
     </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->

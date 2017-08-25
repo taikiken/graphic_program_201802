@@ -217,9 +217,10 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
       // -----------------------------------------------
       // photo gallery
       $bulls_station_photos = bulls_station_json_photo();
-      $bulls_station_photos_data = $bulls_station_photos->data;
-      if (count($bulls_station_photos_data) > 0) :
-        $bulls_station_photo_url = $bulls_station_photos->url;
+      if (isset($bulls_station_photos)) :
+        $bulls_station_photos_data = $bulls_station_photos->data;
+        if (is_array($bulls_station_photos_data) && count($bulls_station_photos_data) > 0) :
+          $bulls_station_photo_url = $bulls_station_photos->url;
       ?>
       <div class="bulls_station__photo_gallery">
         <div class="bulls_station__photo_gallery__outer">
@@ -246,6 +247,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
         </div><!-- /.bulls_station__photo_gallery__outer -->
       </div><!-- /.bulls_station__photo_gallery -->
       <?php
+        endif;
       endif;
       // -----------------------------------------------
       ?>
@@ -253,9 +255,11 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
       // -----------------------------------------------
       // movie
       $bulls_station_movies = bulls_station_json_movie();
-      $bulls_station_movie_response = $bulls_station_movies->response;
-      $bulls_station_movie_response_articles = $bulls_station_movie_response->articles;
-      if (count($bulls_station_movie_response_articles) > 0) :
+      if (isset($bulls_station_movies)) :
+        $bulls_station_movie_response = $bulls_station_movies->response;
+        if (isset($bulls_station_movie_response)) :
+          $bulls_station_movie_response_articles = $bulls_station_movie_response->articles;
+          if (is_array($bulls_station_movie_response_articles) && count($bulls_station_movie_response_articles) > 0) :
       ?>
       <div class="bulls_station__offshot_movie">
         <div class="bulls_station__offshot_movie__outer">
@@ -270,8 +274,8 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
               foreach ($bulls_station_movie_response_articles as $bulls_station_movie_response_article) :
               ?>
                 <li class="bulls_station__offshot_movie__item">
-                  <a href="<?php echo $bulls_station_movie_response_article->url ?>">
-                    <img src="<?php echo $bulls_station_movie_response_article->img ?>" alt="">
+                  <a href="<?php echo $bulls_station_movie_response_article->url ?>" title="<?php echo $bulls_station_movie_response_article->title; ?>">
+                    <img src="<?php echo $bulls_station_movie_response_article->img ?>" alt="<?php echo $bulls_station_movie_response_article->title; ?>">
                   </a>
                 </li>
               <?php
@@ -282,6 +286,8 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
         </div><!-- /.bulls_station__offshot_movie__outer -->
       </div><!-- /.bulls_station__offshot_movie -->
       <?php
+          endif;
+        endif;
       endif;
       ?>
     </div><!-- .body-sec-inner -->

@@ -60,12 +60,23 @@ if (BULLS_STATION_ENV == 'DEV') {
 
 // JSON 取得
 // ==============================
+/**
+ * photo gallery JSON を取得します
+ * - https://img.sportsbull.jp/json/181566.json
+ * @return mixed
+ */
 function bulls_station_json_photo() {
   $data = file_get_contents(JSON_PHOTO);
   $decode = mb_convert_encoding($data, 'UTF8', 'UTF-8,ASCII,JIS,EUC-JP,SJIS-WIN');
   return json_decode($decode);
 }
 
+/**
+ * offshot movie JSON を取得します
+ * - dev: https://dev.sportsbull.jp/api/v1/articles/video/station
+ * - www: https://sportsbull.jp/api/v1/articles/video/station
+ * @return mixed
+ */
 function bulls_station_json_movie() {
   $data = file_get_contents(JSON_MOVIE);
   $decode = mb_convert_encoding($data, 'UTF8', 'UTF-8,ASCII,JIS,EUC-JP,SJIS-WIN');
