@@ -7,7 +7,8 @@ $complete=0;
 
 if(isset($_POST["setting-form-mail"])){
 		
-	$email=trim($_POST["setting-form-mail"]);
+	$email = trim($_POST["setting-form-mail"]);
+	$email = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 
 	$o=new db;
 	$o->connect();
