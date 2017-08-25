@@ -221,6 +221,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
         $bulls_station_photos_data = $bulls_station_photos->data;
         if (is_array($bulls_station_photos_data) && count($bulls_station_photos_data) > 0) :
           $bulls_station_photo_url = $bulls_station_photos->url;
+          $count = 0;
       ?>
       <div class="bulls_station__photo_gallery">
         <div class="bulls_station__photo_gallery__outer">
@@ -233,6 +234,10 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
             <ul class="bulls_station__photo_gallery__list">
               <?php
               foreach ($bulls_station_photos_data as $bulls_station_photo) :
+                // limit 5
+                if ($count > 4) {
+                  break;
+                }
               ?>
               <li class="bulls_station__photo_gallery__item">
                 <a href="<?php echo $bulls_station_photo_url; ?>">
@@ -240,6 +245,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
                 </a>
               </li>
               <?php
+                $count += 1;
               endforeach;
               ?>
             </ul><!-- /.bulls_station__photo_gallery__list -->
@@ -260,6 +266,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
         if (isset($bulls_station_movie_response)) :
           $bulls_station_movie_response_articles = $bulls_station_movie_response->articles;
           if (is_array($bulls_station_movie_response_articles) && count($bulls_station_movie_response_articles) > 0) :
+            $count = 0;
       ?>
       <div class="bulls_station__offshot_movie">
         <div class="bulls_station__offshot_movie__outer">
@@ -272,6 +279,10 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
             <ul class="bulls_station__offshot_movie__list">
               <?php
               foreach ($bulls_station_movie_response_articles as $bulls_station_movie_response_article) :
+                // limit 5
+                if ($count > 4) {
+                  break;
+                }
               ?>
                 <li class="bulls_station__offshot_movie__item">
                   <a href="<?php echo $bulls_station_movie_response_article->url ?>" title="<?php echo $bulls_station_movie_response_article->title; ?>">
@@ -279,6 +290,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
                   </a>
                 </li>
               <?php
+                $count += 1;
               endforeach;
               ?>
             </ul><!-- /.bulls_station__offshot_movie__list -->
