@@ -33,6 +33,9 @@ export class Dom {
 
     }
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
   /**
    * 引数 id を使用し document.getElementById を行い element を取得します, 取得できない時は null を返します
    * @param {string} id 取得 element id
@@ -73,10 +76,12 @@ export class Dom {
   }
   /**
    * pageTop container
+   * - 2017-08-24 - `#js-page_top` を使用しているページに対応するため取得 ID を増やす
+   * - `pageTop`
    * @return {Element} pageTop element を返します
    */
   static pageTop():Element {
-    return Dom.get( 'pageTop' );
+    return Dom.get('pageTop') || Dom.get('js-page_top');
   }
   // --------------------------------------
   // header
