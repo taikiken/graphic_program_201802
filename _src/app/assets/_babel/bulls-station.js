@@ -12,7 +12,7 @@
  */
 'use strict';
 
-// NPB sidebar ranking
+// bulls-station sidebar ranking
 
 // UT
 const UT = self.UT;
