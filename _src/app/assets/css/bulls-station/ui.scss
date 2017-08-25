@@ -592,7 +592,12 @@
 
   &__item {
     display: table-cell;
+    width: 218px;
     text-align: center;
+
+    img {
+      width: 200px;
+    }
   }
 
   @at-root {
