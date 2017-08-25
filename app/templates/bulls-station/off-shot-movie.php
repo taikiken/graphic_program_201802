@@ -108,7 +108,7 @@ include_once __DIR__."/_include/_bulls_station_func.php";
         <?php
         // -----------------------------------------------
         // movie
-        $bulls_station_movies = bulls_station_json_movie();
+        $bulls_station_movies = bulls_station_json_movie(1000);
         if (isset($bulls_station_movies)) :
           $bulls_station_movie_response = $bulls_station_movies->response;
           if (isset($bulls_station_movie_response)) :

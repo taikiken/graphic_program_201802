@@ -75,10 +75,13 @@ function bulls_station_json_photo() {
  * offshot movie JSON を取得します
  * - dev: https://dev.sportsbull.jp/api/v1/articles/video/station
  * - www: https://sportsbull.jp/api/v1/articles/video/station
+ *
+ * @param int $length - API request 戻り値数
+ *
  * @return mixed
  */
-function bulls_station_json_movie() {
-  $data = file_get_contents(JSON_MOVIE);
+function bulls_station_json_movie($length = 5) {
+  $data = file_get_contents(JSON_MOVIE.'?length='.$length);
   $decode = mb_convert_encoding($data, 'UTF8', 'UTF-8,ASCII,JIS,EUC-JP,SJIS-WIN');
   return json_decode($decode);
 }
