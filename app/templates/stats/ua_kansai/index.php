@@ -46,8 +46,13 @@
   <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
   <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
 
+<<<<<<< HEAD
   <link rel="stylesheet" href="/assets/stats/ur_kansai/css/ui.css">
   <link rel="stylesheet" href="/assets/stats/ur_kansai/css/style.css">
+=======
+  <link rel="stylesheet" href="/assets/stats/ua_kansai/css/ui.css">
+  <link rel="stylesheet" href="/assets/stats/ua_kansai/css/style.css">
+>>>>>>> origin/feature/2264-amefoot-stats
   <!-- optimize -->
   <style>.async-hide { opacity: 0 !important} </style>
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
@@ -146,8 +151,13 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 
       <section class="main-sec">
 
+<<<<<<< HEAD
       <div class="stats__header stats__header--golf pt30 mb30">
         <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/images/stats/golf/heading@2x.png" alt="ゴルフ 速報&スタッツ" /></a></h1>
+=======
+      <div class="stats__header stats__header--golf mb30">
+        <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/stats/ua_kansai/images/heading.jpg" alt="ゴルフ 速報&スタッツ" /></a></h1>
+>>>>>>> origin/feature/2264-amefoot-stats
       </div><!-- /.stats__header -->
 
       <div class="stats__banner stats__banner--golf show-for-large mb30">
@@ -182,6 +192,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
               <p>8月18日</p>
               <ul>
                 <li>
+<<<<<<< HEAD
                   <a href="#"><span class="team-120">京都大学1</span> 99 - 99 <span class="team-120">関西大学</span></a>
                   <a href="#">ダイジェスト動画</a>
                 </li>
@@ -192,6 +203,18 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
                 <li>
                   <a href="#"><span class="team-120">京都大学3</span> 99 - 99 <span class="team-120">関西大学</span></a>
                   <a href="#">ダイジェスト動画</a>
+=======
+                  <a href="#"><span class="team-001">関西学院大学</span> 99 - 99 <span class="team-002">同志社大学</span></a>
+                  <a href="#">ダイジェスト<span class="sp-none">動画</span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="team-001">関西学院大学</span> 99 - 99 <span class="team-002">関西大学</span></a>
+                  <a href="#">ダイジェスト<span class="sp-none">動画</span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="team-001">京都大学</span> 99 - 99 <span class="team-002">同志社大学</span></a>
+                  <a href="#">ダイジェスト<span class="sp-none">動画</span></a>
+>>>>>>> origin/feature/2264-amefoot-stats
                 </li>
               </ul>
             </div>
@@ -199,12 +222,21 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
               <p>8月19日</p>
               <ul>
                 <li>
+<<<<<<< HEAD
                   <a href="#"><span class="team-120">京都大学1</span> 99 - 99 <span class="team-120">関西大学</span></a>
                   <a href="#">ダイジェスト動画</a>
                 </li>
                 <li>
                   <a href="#"><span class="team-120">京都大学2</span> 99 - 99 <span class="team-120">関西大学</span></a>
                   <a href="#">ダイジェスト動画</a>
+=======
+                  <a href="#"><span class="team-001">京都大学</span> 99 - 99 <span class="team-002">関西大学</span></a>
+                  <a href="#">ダイジェスト<span class="sp-none">動画</span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="team-001">京都大学</span> 99 - 99 <span class="team-002">関西大学</span></a>
+                  <a href="#">ダイジェスト<span class="sp-none">動画</span></a>
+>>>>>>> origin/feature/2264-amefoot-stats
                 </li>
               </ul>
             </div>
@@ -212,24 +244,41 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
               <p>8月20日</p>
               <ul>
                 <li>
+<<<<<<< HEAD
                   <a href="#"><span class="team-120">京都大学1</span> - <span class="team-120">関西大学</span></a>
                   <div>ダイジェスト動画</div>
                 </li>
                 <li>
                   <a href="#"><span class="team-120">京都大学2</span> - <span class="team-120">関西大学</span></a>
                   <div>ダイジェスト動画</div>
+=======
+                  <a href="#"><span class="team-001">京都大学</span> 99 - 99 <span class="team-002">関西大学</span></a>
+                  <div>ダイジェスト<span class="sp-none">動画</span></div>
+                </li>
+                <li>
+                  <a href="#"><span class="team-001">京都大学</span> 99 - 99 <span class="team-002">関西大学</span></a>
+                  <div>ダイジェスト<span class="sp-none">動画</span></div>
+>>>>>>> origin/feature/2264-amefoot-stats
                 </li>
               </ul>
             </div>
         </div><!-- af-schedule -->
 
         <div id="af-match">
+<<<<<<< HEAD
           <h2 class="calendar">星取表 / Division1</h2>
+=======
+          <h2 class="star">星取表 / Division1</h2>
+>>>>>>> origin/feature/2264-amefoot-stats
           <table>
             <thead>
               <tr>
                 <th width="10%">順位</th>
+<<<<<<< HEAD
                 <th>大学名<br />（勝-敗-分）</th>
+=======
+                <th>大学名<br class="sp-none">（勝-敗-分）</th>
+>>>>>>> origin/feature/2264-amefoot-stats
                 <th>立命館</th>
                 <th>関学大</th>
                 <th>関西大</th>
@@ -243,6 +292,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
             <tbody>
               <tr>
                 <td>2</td>
+<<<<<<< HEAD
                 <td>立命館大学<br />（6-1-0）</td>
                 <td class="non"></td>
                 <td>●<br />xx-xx</td>
@@ -335,6 +385,100 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
                 <td>○<br />xx-xx</td>
                 <td>○<br />xx-xx</td>
                 <td>○<br />xx-xx</td>
+=======
+                <td>立命館大学<br class="sp-none">（6-1-0）</td>
+                <td class="non"></td>
+                <td>●<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>関西学院大学<br class="sp-none">（6-1-0）</td>
+                <td>●<br class="sp-none">xx-xx</td>
+                <td class="non"></td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>関西大学<br class="sp-none">（6-1-0）</td>
+                <td>●<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td class="non"></td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+              </tr>
+              <tr>
+                <td>5-6</td>
+                <td>京都大学<br class="sp-none">（6-1-0）</td>
+                <td>●<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td class="non"></td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+              </tr>
+              <tr>
+                <td>7-7</td>
+                <td>神戸大学<br class="sp-none">（6-1-0）</td>
+                <td>●<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td class="non"></td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>龍谷大学<br class="sp-none">（6-1-0）</td>
+                <td>●<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td class="non"></td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+              </tr>
+              <tr>
+                <td>7-8</td>
+                <td>同志社大学<br class="sp-none">（6-1-0）</td>
+                <td>●<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td class="non"></td>
+                <td>○<br class="sp-none">xx-xx</td>
+              </tr>
+              <tr>
+                <td>5-5</td>
+                <td>甲南大学<br class="sp-none">（6-1-0）</td>
+                <td>●<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+                <td>○<br class="sp-none">xx-xx</td>
+>>>>>>> origin/feature/2264-amefoot-stats
                 <td class="non"></td>
               </tr>
             </tbody>
@@ -542,6 +686,11 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 
 <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
 <script src="/assets/js/global.bundle.js"></script>
+<<<<<<< HEAD
 <script src="/assets/stats/ur_kansai/js/index.js"></script>
+=======
+<script src="/assets/stats/ua_kansai/js/amefoot.bundle.js"></script>
+<!-- <script src="/assets/stats/ua_kansai/js/index.js"></script> -->
+>>>>>>> origin/feature/2264-amefoot-stats
 </body>
 </html>

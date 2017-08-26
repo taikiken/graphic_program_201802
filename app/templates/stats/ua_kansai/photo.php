@@ -7,7 +7,11 @@
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<<<<<<< HEAD
   <title>フォトギャラリー 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | SPORTS BULL</title>
+=======
+  <title>フォトギャラリー 関西学生アメリカンフットボールリーグ | 速報 & データ | SPORTS BULL</title>
+>>>>>>> origin/feature/2264-amefoot-stats
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
 
@@ -17,7 +21,11 @@
   <meta property="fb:app_id" content="842032129256034">
   <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
   <meta property="og:type" content="article">
+<<<<<<< HEAD
   <meta property="og:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
+=======
+  <meta property="og:title" content="フォトギャラリー 関西学生アメリカンフットボールリーグ | 速報 & データ | SPORTS BULL">
+>>>>>>> origin/feature/2264-amefoot-stats
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
   <meta property="og:url" content="">
   <meta property="og:description" content="">
@@ -26,7 +34,11 @@
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
+<<<<<<< HEAD
   <meta name="twitter:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
+=======
+  <meta name="twitter:title" content="フォトギャラリー 関西学生アメリカンフットボールリーグ | 速報 & データ | SPORTS BULL">
+>>>>>>> origin/feature/2264-amefoot-stats
   <meta name="twitter:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
   <meta name="twitter:url" content="">
   <meta name="twitter:description" content="">
@@ -145,7 +157,11 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 
       <section class="main-sec">
  
+<<<<<<< HEAD
  <?php
+=======
+<?php
+>>>>>>> origin/feature/2264-amefoot-stats
 
 $db=new db;
 $db->connect();
@@ -154,6 +170,7 @@ $photo="";
 $subdomain=preg_match("/dev/",$_SERVER["SERVER_NAME"])?"dev-img":"img";
 $i=0;
 
+<<<<<<< HEAD
 $sql="select id,img1,title,a1,a2,a3 from repo_n where d2=57 and flag=1 and m2=159 order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc";
 $db->query($sql);
 while($f=$db->fetch_array()){
@@ -167,6 +184,21 @@ while($f=$db->fetch_array()){
 	if($i==0)$end=sprintf("%s.%s",$f["a2"],$f["a3"]);
 	$start=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
 	$i++;
+=======
+$sql="select id,img1,title,a1,a2,a3 from repo_n where d2=57 and flag=1 and swf is null order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc";
+$db->query($sql);
+while($f=$db->fetch_array()){
+    $v=array(
+        "title"=>htmlspecialchars($f["title"]),
+        "date"=>sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]),
+        "img"=>sprintf("https://%s.sportsbull.jp/img/%s",$subdomain,$f["img1"]),
+        "url"=>sprintf("/p/%s/",$f["id"])
+    );
+    $photo.=sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><p class="txt">%s</p></a></li>',$v["url"],$v["img"],$v["title"],$v["date"]);
+    if($i==0)$end=sprintf("%s.%s",$f["a2"],$f["a3"]);
+    $start=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
+    $i++;
+>>>>>>> origin/feature/2264-amefoot-stats
 }
 
 ?>

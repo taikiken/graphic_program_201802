@@ -124,19 +124,9 @@ $app->group('/stats', function () use($app) {
 
     });
 
-    // 2017-08-18 schedule drop - index へ アクセスさせる
-    $this->get('/{category:schedule}[/]', function ($request, $response, $args) use ($app) {
-      // redirect させる
-      header("Location: /stats/mlb/",TRUE,302);
-      exit;
-    });
-
-
-      // ヒットする文字列だけ
-//    $this->get('/{category:schedule|standing|leaders|playerlist|\d{8}}[/]', function ($request, $response, $args) use ($app) {
-    // 2017-08-18 schedule drop - index へ アクセスさせる
-    $this->get('/{category:standing|leaders|playerlist|\d{8}}[/]', function ($request, $response, $args) use ($app) {
-
+    // ヒットする文字列だけ
+    $this->get('/{category:schedule|standing|leaders|playerlist|\d{8}}[/]', function ($request, $response, $args) use ($app) {
+      
       $category = array(
         'title' => 'MLB | 速報 &amp; データ',
       );

@@ -47,9 +47,15 @@
   <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
 
   <!-- 関西アメフト用css,js -->
+<<<<<<< HEAD
   <link rel="stylesheet" href="/assets/stats/ur_kansai/css/ui.css">
   <link rel="stylesheet" href="/assets/stats/ur_kansai/js/demo.js">
   <link rel="stylesheet" href="/assets/stats/ur_kansai/css/style.css">
+=======
+  <link rel="stylesheet" href="/assets/stats/ua_kansai/css/ui.css">
+  <link rel="stylesheet" href="/assets/stats/ua_kansai/js/demo.js">
+  <link rel="stylesheet" href="/assets/stats/ua_kansai/css/style.css">
+>>>>>>> origin/feature/2264-amefoot-stats
   <!-- optimize -->
   <style>.async-hide { opacity: 0 !important} </style>
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
@@ -146,7 +152,11 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
   <div class="body-sec">
     <div class="title">
       <h2>
+<<<<<<< HEAD
         <a href="./"><img src="/stats/hsb/img/hsb_header.png" alt="高校野球（甲子園） 試合速報"></a>
+=======
+        <a href="./"><img src="/assets/stats/ua_kansai/images/header.png" alt="関西学生アメフト 試合速報"></a>
+>>>>>>> origin/feature/2264-amefoot-stats
         <a class="btn" href="#">日程・結果へ</a>
       </h2>
     </div><!-- /.title -->
@@ -155,13 +165,21 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
         <div class="game-name">新入生歓迎スポーツフェスティバル</div>
         <div class="result">
           <div class="home-name">
+<<<<<<< HEAD
             <span class="team-120">甲南大学</span>
+=======
+            <span class="team-001">甲南大学</span>
+>>>>>>> origin/feature/2264-amefoot-stats
           </div>
           <div class="score">
             0<span>vs</span>0
           </div>
           <div class="away-name">
+<<<<<<< HEAD
             <span class="team-120">関西大学</span>
+=======
+            <span class="team-002">関西大学</span>
+>>>>>>> origin/feature/2264-amefoot-stats
           </div>
         </div>
         <div class="state">試合前</div>
@@ -810,6 +828,11 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 </script>
 <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
 <script src="/assets/js/global.bundle.js"></script>
+<<<<<<< HEAD
 <script src="/assets/stats/ur_kansai/js/match.js"></script>
+=======
+<script src="/assets/stats/ua_kansai/js/amefoot.bundle.js"></script>
+<script src="/assets/stats/ua_kansai/js/match.js"></script>
+>>>>>>> origin/feature/2264-amefoot-stats
 </body>
 </html>
