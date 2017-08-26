@@ -108,9 +108,9 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     // response.theme.images.pc
     // response.description
     if ( $page['theme']['images']['sp'] ) : ?>
-      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
-        <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
-      </div>
+          <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
+            <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+          </div>
     <?php endif;
     // eof: 記事詳細: sp
     // ---------------------------------------------------- ?>
@@ -191,7 +191,9 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
               <?php if ($post_kv_img) :
               // ========= image ?>
                 <figure class="post-single-figure">
+                    <?php if(!isset($_GET['id'])):?>
                   <img src="<?php echo $post_kv_img; ?>" class="post-single-image" />
+                    <?php endif;?>
                   <?php if ( $page['post']['media']['images']['caption'] ) : ?>
                     <figcaption class="caption">
                       <?php echo $page['post']['media']['images']['caption']; ?>

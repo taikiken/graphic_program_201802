@@ -119,20 +119,6 @@ endif;
           </div><!-- /.app-bnr -->
 
 <?php
-// #2264 対応
-if ($page['category']['slug'] == 'americanfootball') :
-?>
-
-<div class="app-bnr">
-  <iframe width="100%" height="168" src="http://amefootlive.jp/kcafl_live" scrolling="no" frameborder="0" style="border: 0px none transparent;"></iframe>
-</div>
-
-<?php
-endif;
-// // #2264 対応
-?>
-
-<?php
 // not big6tv の時のみ広告を表示する
 // --------------------------------
 if ($in_big6tv) :

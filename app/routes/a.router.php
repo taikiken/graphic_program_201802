@@ -56,7 +56,7 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
     endforeach;
 
       $args['page'] = $app->model->set(array(
-        'title'          => $post['title'].' | '.$category['label'],
+        'title'          => $post['title'],
         'og_title'       => $post['title'].' | '.$app->model->property('title_short'),
         'og_url'         => $app->model->property('site_url').'a/'.$post['id'].'/',
         'og_url_with_param'         => $app->model->property('site_url').'a/'.$post['id'].'/' . $id,
@@ -90,12 +90,7 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
           return $this->renderer->render($response, "app.p.redirect.php", $args);
         else :
             if(isset($_GET['viewhead'])):
-                if(isset($_GET['id'])):
-                    return $this->renderer->render($response, "app.p.body.php", $args);
-                else:
-                    return $this->renderer->render($response, "app.p.php", $args);
-                endif;
-
+                return $this->renderer->render($response, "app.p.php", $args);
             endif;
 
             if ( $webview_type === 'body' ) :

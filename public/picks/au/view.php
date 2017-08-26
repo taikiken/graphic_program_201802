@@ -10,7 +10,7 @@
   <title>【スポーツ】Today’s ピックアップ</title>
   <?php
   // app in webview 時に .head-sec を非表示にする
-  // if (!$from_webview) :
+//   if (!$from_webview) :
   if (0) :
   ?>
   <meta name="apple-itunes-app" content="app-id=1086719653">
@@ -39,6 +39,11 @@
   endif;
   // -----------------------------------------
   ?>
+  <?php
+  // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+  // @since 2017-08-21
+  ?>
+  <script src="/assets/js/app_ua_detector.bundle.js"></script>
   <link rel="stylesheet" href="/assets/sp/css/picks/au/ui.css?v=<?php echo $page['version']; ?>">
   <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
 

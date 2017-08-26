@@ -14,6 +14,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// moku/net
+import Queries from '../../../moku/net/Queries';
+
 // util
 import Print from '../../util/Print';
 
@@ -24,15 +27,68 @@ import DaeGameInfo from '../../dae/games/DaeGameInfo';
 import Style from '../../define/Style';
 
 /**
+ * 上部スコア - data が無い時は空で出力します
+ * home / visitor /stadium / data(title) をクエリから出力します
+ * @returns {XML} div.mlb_live__overview
+ * @constructor
+ * @since 2017-08-17
+ * @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+ */
+const ComOverviewEmpty = () => {
+  const teamClass = 'mlb_live__overview__team';
+  const queryList = Queries.getAll();
+  const queryListFirst = Array.isArray(queryList) ? queryList[0] : {};
+  const queries = queryListFirst || {};
+  // home / visitor /stadium / data(title) をクエリから出力します
+  // render
+  return (
+    <div className="mlb_live__overview">
+      <div className="mlb_live__overview__inner">
+        <p className={`${teamClass} ${teamClass}--home`}>
+          {decodeURIComponent(Print.str(queries.home))}
+        </p>
+        <div className="mlb_live__overview__info">
+          <p className="mlb_live__overview__info__date">
+            {decodeURIComponent(Print.str(queries.title))}
+          </p>
+          <p className="mlb_live__overview__info__score">
+            <span className="mlb_live__overview__info__score--home">
+              &nbsp;
+            </span>
+            <span className="mlb_live__overview__info__score--vs">vs</span>
+            <span className="mlb_live__overview__info__score--visitor">
+              &nbsp;
+            </span>
+          </p>
+          <p className="mlb_live__overview__info__status mlb_live__overview__info__status--before">
+            試合前
+          </p>
+          <p className="mlb_live__overview__info__place">
+            {decodeURIComponent(Print.str(queries.stadium))}
+          </p>
+        </div>
+        <p className={`${teamClass} ${teamClass}--visitor`}>
+          {decodeURIComponent(Print.str(queries.visitor))}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+/**
  * GAME: 上部対戦成績
  * @param {?DaeGameInfo} info JSON - game_info.json
  * @returns {?XML} div.mlb_live__overview
  * @constructor
  */
 const ComOverview = ({ info }) => {
-  console.log('ComOverview info', info);
+  // console.log('ComOverview info', info);
   if (!info) {
-    return null;
+    // 空タグを出力する
+    // @since 2017-08-17
+    // @see https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-24#comment-1174362975
+    return <ComOverviewEmpty />;
+    // return null;
   }
   // -----
   const teamClass = 'mlb_live__overview__team';

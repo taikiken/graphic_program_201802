@@ -14,9 +14,7 @@
 /** プリフィックス付与 @param  {[type]} $options:() [ content: 表示内容 indent: インデント offset: 表示内容の余白 ] @return {[type]}             [description] */
 /** ボタンジェネレータ */
 /* ------------------------------------------------------------------------
-
     vars
-
 ------------------------------------------------------------------------ */
 /** デザインパーツセット */
 /* margin padding */
@@ -2913,38 +2911,38 @@
 
 // 関西アメフト対応
 .sub_head_wrapper { 
-	background-color: #0e357f; 
-	display: -webkit-box; 
-	display: -webkit-flex; 
-	display: -ms-flexbox; 
-	display: flex; 
-	-webkit-box-pack: justify; 
-	-webkit-justify-content: space-between; 
-	-ms-flex-pack: justify; 
-	justify-content: space-between; 
-	-webkit-box-align: center; 
-	-webkit-align-items: center; 
-	-ms-flex-align: center; 
-	align-items: center; 
-	height: 60px; 
-	color: #fff; 
-	font-weight: bold; 
-	padding: 0 20px; 
-	margin-top: 30px;
+  background-color: #0e357f; 
+  display: -webkit-box; 
+  display: -webkit-flex; 
+  display: -ms-flexbox; 
+  display: flex; 
+  -webkit-box-pack: justify; 
+  -webkit-justify-content: space-between; 
+  -ms-flex-pack: justify; 
+  justify-content: space-between; 
+  -webkit-box-align: center; 
+  -webkit-align-items: center; 
+  -ms-flex-align: center; 
+  align-items: center; 
+  height: 60px; 
+  color: #fff; 
+  font-weight: bold; 
+  padding: 0 20px; 
+  margin-top: 30px;
 }
 
 .sub_head_wrapper .sub_head_title { 
-	font-size: 22px; 
-	font-size: "2.2rem"; 
-	font-weight: bold; 
+  font-size: 22px; 
+  font-size: "2.2rem"; 
+  font-weight: bold; 
 }
 
 .sub_head_wrapper .sub_head_title i { 
-	margin-right: 10px; 
-	position: relative; 
-	display: inline-block; 
-	top: 1px; 
-	width: 20px; 
-	height: 20px; 
-	background: url(../../../assets/stats/ua_kansai/images/icon_amefoot.png) no-repeat top left; 
+  margin-right: 10px; 
+  position: relative; 
+  display: inline-block; 
+  top: 1px; 
+  width: 20px; 
+  height: 20px; 
+  background: url(../../../assets/stats/ua_kansai/images/icon_amefoot.png) no-repeat top left; 
 }
