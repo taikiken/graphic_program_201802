@@ -25,7 +25,7 @@
     <table>
       <tbody>
         <tr>
-          <th>08:00 – 08:45</th>
+          <th>08:00 – 10:15</th>
           <td>コース下見・試走</td>
         </tr>
         <tr>
@@ -103,7 +103,7 @@
         <h4 class="course__staff__data__heading">Y.YANAGIHARA（YANS）</h4>
         <p class="course__staff__data__text">1972年 ７月20日生まれ。<br />
         ’93 全日本シーリズ チャンピオンを始め数々の大会で優勝。<br />
-        本大会ではコースディレクター、スポーツディレクターを兼任する。</p>
+        本大会ではコースディレクター、レースディレクターを兼任する。</p>
       </div><!-- /.course__staff__data -->
     </div><!-- /.course__staff__container -->
 
