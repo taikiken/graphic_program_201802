@@ -65,7 +65,7 @@ async function asyncCall(year, id) {
  * fetch - ajax complete state
  */
 const requestComplete = (results, year, id) => {
-  console.log('actions.games.requestComplete', results, year, id);
+  // console.log('actions.games.requestComplete', results, year, id);
   const team = new DaeTeamInfo(results[0]);
   const member = new DaeMemberInfo(results[1]);
   const info = new DaeGameInfo(results[2]);

@@ -36,7 +36,7 @@ const initial = {
  */
 const game = (requestState = initial, action) => {
   const state = Object.assign({}, requestState);
-  console.log('reducers.games', state, action);
+  // console.log('reducers.games', state, action);
   // switch-case
   switch (action.type) {
     case ReducerTypes.GAMES_COMPLETE: {

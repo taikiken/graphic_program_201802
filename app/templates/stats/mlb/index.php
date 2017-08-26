@@ -20,13 +20,43 @@
         <h1 class="stats__header__title"><a href="/stats/mlb/"><img class="responsive" src="/assets/images/stats/mlb/heading@2x.png" alt="MLB速報&amp;データ" /></a></h1>
       </div><!-- /.stats__header -->
 
-      <div class="stats__banner stats__banner--mlb">
-        <div><a href="hoge"><img class="res" src="/assets/images/stats/tennis/bnr_hero@2x.png" alt=""></a></div>
+      <div class="stats__banner stats__banner--mlb show-for-large">
+        <!-- /531683568/mlb-stats-ad/mlb-stats-under-header-PC -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/mlb-stats-ad/mlb-stats-under-header-PC', [728, 90], 'div-gpt-ad-1499151607828-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1499151607828-0' style='height:90px; width:728px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1499151607828-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-PC -->
+      </div><!-- /.stats__banner -->
+
+      <div class="stats__banner stats__banner--mlb show-for-small">
+        <!-- /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/mlb-stats-ad/mlb-stats-under-header-SP', [320, 50], 'div-gpt-ad-1499151685008-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1499151685008-0' style='height:50px; width:320px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1499151685008-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
       </div><!-- /.stats__banner -->
 
       <div class="stats__nav stats__nav--mlb">
         <ul class="stats__nav__list">
-          <li class="stats__nav__item_1"><a href="/stats/mlb/schedule/">日程・結果</a></li>
+          <li class="stats__nav__item_1"><a href="/stats/mlb/">日程・結果</a></li>
           <li class="stats__nav__item_2"><a href="/stats/mlb/standing/">順位表</a></li>
           <li class="stats__nav__item_3"><a href="/stats/mlb/leaders/">個人成績</a></li>
           <li class="stats__nav__item_4"><a href="/stats/mlb/playerlist/">日本人成績</a></li>
@@ -91,3 +121,5 @@
     </section>
   </div>
 </div><!-- /.body-sec -->
+
+<script src="/assets/js/stats_mlb.bundle.js?v=<?php echo $page['version']; ?>"></script>

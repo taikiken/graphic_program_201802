@@ -69,9 +69,12 @@
             "node": "current",
             "browsers": [
               "last 2 versions",
-              "ie >= 11",
-              "android >= 4.22",
-              "ios >= 9"
+              "Safari >= 7",
+              "Explorer >= 11",
+              "last 4 Edge versions",
+              "ChromeAndroid >= 18.0",
+              "Android >= 2",
+              "iOS >= 7.0"
             ]
           },
           "useBuiltIns": true

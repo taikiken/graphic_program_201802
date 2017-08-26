@@ -52,6 +52,11 @@ if ($page_has_header) :
 # ---------------------------------------------------------------------------
 endif;
 ?>
+<?php
+// app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+// @since 2017-08-21
+?>
+<script src="/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <?php
   /*

@@ -83,7 +83,7 @@ const requestError = (error, year, today) => ({
  * @returns {Promise} fetch Promise
  */
 const calendar = (requestYear = null, requestToday = null) => (dispatch) => {
-  console.log('actions.calendar requestYear', requestYear, typeof requestYear);
+  // console.log('actions.calendar requestYear', requestYear, typeof requestYear);
   const year = parseInt(requestYear, 10) || Day.thisYear();
   const today = requestToday || Day.current();
   return asyncCall(year)

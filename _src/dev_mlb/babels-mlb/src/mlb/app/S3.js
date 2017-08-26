@@ -62,7 +62,10 @@ export default class S3 {
     if (Env.www()) {
       return S3.WWW;
     } else if (Env.stg()) {
-      return S3.STG;
+      // return S3.STG;
+      // https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-27#comment-1174830746
+      // @since 2017-08-23 - stg www 見る
+      return S3.WWW;
     }
     return S3.DEV;
   }
