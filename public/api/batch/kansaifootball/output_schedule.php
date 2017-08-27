@@ -10,6 +10,9 @@ $lastupdate=filemtime($csv);
 
 if(!file_exists($json)||$lastupdate>filemtime($json)){
 
+	$movie=get_contents("https://img.sportsbull.jp/static/americanfootball/2017/autumn/highlight.json");
+	$movie=json_decode($movie,TRUE);
+
 	$data=get_contents($csv);
 	$data=mb_convert_encoding($data,"UTF-8","SJIS");
 	$data=preg_replace("/\r\n|\r|\n/","\n",$data);
@@ -31,6 +34,7 @@ if(!file_exists($json)||$lastupdate>filemtime($json)){
 				$game[]=array(
 					"gameid"=>$v[$i][5],
 					"time"=>$v[$i][3],
+					"highlightmovieurl"=>sprintf("https://sportsbull.jp/p/%s/",$movie["movie"][$v[$i][5]]),
 					"team"=>array(
 						array(
 							"id"=>$univ[$v[$i][6]]["id"],

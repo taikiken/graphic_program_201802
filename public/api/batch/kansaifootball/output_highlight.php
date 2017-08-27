@@ -9,7 +9,7 @@ $o->connect();
 $json=sprintf("%s/highlight.json",$bucket);
 
 $i=0;
-$sql="select id,swf,u_time from repo_n where swf like 'kfoot%' order by u_time desc";
+$sql="select id,swf,u_time from repo_n where flag=1 and swf like 'kfoot%' order by u_time desc";
 $o->query($sql);
 while($f=$o->fetch_array()){
 	preg_match("/([0-9]{8}_[0-9]{1})/",$f["swf"],$match);
