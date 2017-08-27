@@ -3,6 +3,9 @@
 include "local.php";
 include "inc.php";
 
+$o=new db;
+$o->connect();
+
 $csv =sprintf("%s/csv/schedule.csv",$bucket);
 $data=get_contents($csv);
 $data=mb_convert_encoding($data,"UTF-8","SJIS");
@@ -12,6 +15,9 @@ for($i=0;$i<count($data);$i++){
 	$d=explode(",",$data[$i]);
 	if(strtotime($d[1])<=strtotime(date("Y-m-d")))$games[]=$d[5];
 }
+
+$movie=get_contents("https://img.sportsbull.jp/static/americanfootball/2017/autumn/highlight.json");
+$movie=json_decode($movie,TRUE);
 
 for($j=0;$j<count($games);$j++){
 	
@@ -23,7 +29,7 @@ for($j=0;$j<count($games);$j++){
 	$lastupdate=filemtime($csv);
 	
 	if(!file_exists($json)||$lastupdate>filemtime($json)){
-	
+		
 		$data=get_contents($csv);
 		$data=mb_convert_encoding($data,"UTF-8","SJIS");
 		$data=preg_replace("/\r\n|\r|\n/","\n",$data);
@@ -44,6 +50,7 @@ for($j=0;$j<count($games);$j++){
 			elseif($l[0]=="##Draw First個人情報 パス")$f=8;
 			elseif($l[0]=="##Draw First個人情報 レシーブ")$f=9;
 			elseif(preg_match("/^##試合経過/",$l[0]))$f=10;
+			elseif($l[0]=="##フル尺動画")$f=11;
 			
 			if($f==1&&!preg_match("/^##/",$l[0])){
 				$y["response"]["gameinfo"][$map[$l[0]]]=$l[1];
@@ -85,10 +92,13 @@ for($j=0;$j<count($games);$j++){
 						)
 					);
 				}
+			}elseif($f==11){
+				$y["response"]["movieurl"]=$l[1];
 			}
 			
 		}
 		
+		$y["response"]["highlightmovieurl"]=$movie["movie"][$gameid]?sprintf("https://sportsbull.jp/p/%s/",$movie["movie"][$gameid]):"";
 		$y["response"]["lastupdate"]=date("Y-m-d H:i:s",$lastupdate);
 		put_json($json,$y);
 		unlink($tmpfile);
