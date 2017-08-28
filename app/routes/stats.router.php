@@ -327,39 +327,38 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
     $this->get('/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
 
       $url = explode('/', $_SERVER['REQUEST_URI']);
-      $league = $url[1];
+      $league = $url[2];
       $gameid = $args['gameid'];
 
       switch ($league) {
         case 'ub_tohto':
-          $array = [
+          $args['page'] = $app->model->set(array(
             'og_image' => 'OG_univ_touto',
-            'stats_top_image' => 'ub_tohto',
+            'stats_top_image' => 'tohto',
             'stats_top_alt' => '東都大学野球 速報&データ',
             'league' => $league,
             'game_id' => $gameid,
-          ];
+        ));
           break;
         case 'ub_kansaibig6':
-          $array = [
+          $args['page'] = $app->model->set(array(
             'og_image' => 'OG_univ_6',
             'stats_top_image' => 'kansai6',
             'stats_top_alt' => '関西六大学野球 速報&データ',
             'league' => $league,
             'game_id' => $gameid,
-          ];
+          ));
           break;
-        case 'ub_kasai':
-          $array = [
-            'og_image' => 'OG_univ_6',
+        case 'ub_kansai':
+          $args['page'] = $app->model->set(array(
+            'og_image' => 'OG_univ_kansai',
             'stats_top_image' => 'kansai',
             'stats_top_alt' => '関西大学野球 速報&データ',
             'league' => $league,
             'game_id' => $gameid,
-          ];
+          ));
           break;
       }
-      $args['page'] = $app->model->set($array);
 
       return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
 
