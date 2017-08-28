@@ -126,7 +126,7 @@ include_once __DIR__."/_include/_bulls_station_func.php";
               foreach ($bulls_station_movie_response_articles as $bulls_station_movie_response_article) :
               ?>
                 <li>
-                  <a href="?php echo $bulls_station_movie_response_article->url ?>">
+                  <a href="<?php echo $bulls_station_movie_response_article->url ?>">
                     <div class="img">
                       <img src="<?php echo $bulls_station_movie_response_article->img ?>" alt="">
                     </div>
