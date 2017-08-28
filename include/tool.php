@@ -132,6 +132,10 @@ function makeTextfieldAddOption($a,$b,$c,$d,$e,$f,$g,$h,$x){
 					
 					$o->query(str_replace("{LANG}",$h,$OPv));
 					while($f=$o->fetch_array()){
+                        if(false === empty(getSorC('is_external')) && false === empty(getSorC('u_media'))) {
+                            // 外部ユーザーはメディアのみ表示
+                            if($f["id"] != 3) continue;
+                        }
 						$sa[]=sprintf("<li>%s:%s</li>",$f["id"],$f["title"]);
 						if($p[$f_name[$U].$pv]==$f["id"]){
 							echo sprintf("<script type='text/javascript'>$(function(){\$('[name=\"p_%s%s\"]').val('%s:%s');})</script>",$f_name[$U],$pv,$f["id"],addslashes($f["title"]));
@@ -146,9 +150,16 @@ function makeTextfieldAddOption($a,$b,$c,$d,$e,$f,$g,$h,$x){
 						$f=$o->fetch_array();
 						echo sprintf("<script type='text/javascript'>$(function(){\$('[name=\"p_%s%s\"]').val('%s:%s');})</script>",$f_name[$U],$pv,$f["id"],addslashes($f["title"]));
 					}
+
+                    if(false === empty(getSorC('is_external')) && false === empty(getSorC('u_media'))) {
+					    // 外部ユーザーは力技でクエリを書き換える
+                        // より良い方法は後々考える
+                        $OPv = str_replace('where ', 'where id in (' . getSorC('u_media') . ') and ', $OPv);
+                    }
 					$ll.=sprintf("<span class=\"m_%s\" style=\"display:none\">%s</span>",$f_name[$U],str_replace("{LANG}",$_COOKIE["lang"],$OPv));
 				}
 			}elseif(!preg_match('/{p_/',$OPv)){
+
 				unset($sa);
 				$o->query(str_replace("{LANG}",$h,$OPv));
 				//$o->query($OPv);
