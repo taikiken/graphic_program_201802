@@ -227,71 +227,123 @@ $app->group('/stats', function () use($app) {
     // トップ
     $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
 
-      $title = 'MLB | 速報 &amp; データ';
+      $url = explode('/', $_SERVER['REQUEST_URI']);
+      $league = $url[1];
 
-      $args['page'] = $app->model->set(array(
-        'title' => $title,
-        'og_title' => $title . ' | ' . $app->model->property('title_short'),
-        'og_description' => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
-        'og_url' => $app->model->property('site_url') . 'stats/mlb/',
-        'og_image' => $app->model->property('site_url') . 'assets/images/stats/mlb/og_image.jpg',
-//        'template'           => 'mlb/schedule.php',
-        // @since 2017-07016 - /stats/mlb/ 表示ファイルをindex.phpへ変更する
-        'template' => 'mlb/index.php',
-        'path' => $args,
-        // @since 2017-07016 - .whole へ className 追加するために追加する
-        'prop_identity' => 'index',
-        'prop_category' => 'mlb',
-      ));
+      switch ($league) {
+        case 'ub_tohto':
+          $array = [
+            'og_image' => 'OG_univ_touto',
+            'stats_top_image' => 'ub_tohto',
+            'league' => 'ub_tohto',
+            'stats_top_alt' => '東都大学野球 速報&データ',
+          ];
+          break;
+        case 'ub_kansaibig6':
+          $array = [
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai6',
+            'league' => 'ub_kansaibig6',
+            'stats_top_alt' => '関西六大学野球 速報&データ',
+          ];
+          break;
+        case 'ub_kasai':
+          $array = [
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai',
+            'league' => 'ub_kansai',
+            'stats_top_alt' => '関西大学野球 速報&データ',
+            'whole' => 'whole',
+          ];
+          break;
+      }
+      $args['page'] = $app->model->set($array);
 
-      return $this->renderer->render($response, 'stats/default.php', $args);
+      return $this->renderer->render($response, 'stats/baseball_univ/index.php', $args);
 
     });
 
     $this->get('/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
 
-      $category = array(
-        'title' => 'MLB | 速報 &amp; データ',
-      );
+      $url = explode('/', $_SERVER['REQUEST_URI']);
+      $league = $url[1];
+      $gameid = $args['gameid'];
 
-      $args['page'] = $app->model->set(array(
-        'title' => $category['title'],
-        'og_title' => $category['title'] . ' | ' . $app->model->property('title_short'),
-        'og_description' => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
-        'og_url' => $app->model->property('site_url') . 'stats/mlb/',
-        'og_image' => $app->model->property('site_url') . 'assets/images/stats/mlb/og_image.jpg',
-//        'template'           => 'mlb/'.$args['category'].'.php',
-        'template' => 'mlb/game.php',
-        'path' => $args,
-        // @since 2017-07016 - .whole へ className 追加するために追加する
-        'prop_identity' => 'game dark',
-        'prop_category' => 'mlb',
-      ));
+      switch ($league) {
+        case 'ub_tohto':
+          $array = [
+            'og_image' => 'OG_univ_touto',
+            'stats_top_image' => 'ub_tohto',
+            'stats_top_alt' => '東都大学野球 速報&データ',
+            'whole' => 'whole dark',
+            'widget' => 'widget2',
+            'widget_js' => 'Widget_univbb_2.js',
+            'data_id' => 'data-id="' . $gameid . '"'
+          ];
+          break;
+        case 'ub_kansaibig6':
+          $array = [
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai6',
+            'stats_top_alt' => '関西六大学野球 速報&データ',
+            'whole' => 'whole',
+            'widget' => 'widget3',
+            'widget_js' => 'Widget_univbb_3.js',
+            'data_id' => '',
+          ];
+          break;
+        case 'ub_kasai':
+          $array = [
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai',
+            'stats_top_alt' => '関西大学野球 速報&データ',
+            'whole' => 'whole',
+            'widget' => 'widget3',
+            'widget_js' => 'Widget_univbb_3.js',
+            'data_id' => '',
+            ];
+          break;
+      }
+      $args['page'] = $app->model->set($array);
 
-      return $this->renderer->render($response, 'stats/default.php', $args);
+      return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
 
     });
     $this->get('/standing[/]', function ($request, $response, $args) use ($app) {
 
-      $category = array(
-        'title' => 'MLB | 速報 &amp; データ',
-      );
+      $url = explode('/', $_SERVER['REQUEST_URI']);
+      $league = $url[1];
 
-      $args['page'] = $app->model->set(array(
-        'title' => $category['title'],
-        'og_title' => $category['title'] . ' | ' . $app->model->property('title_short'),
-        'og_description' => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
-        'og_url' => $app->model->property('site_url') . 'stats/mlb/',
-        'og_image' => $app->model->property('site_url') . 'assets/images/stats/mlb/og_image.jpg',
-//        'template'           => 'mlb/'.$args['category'].'.php',
-        'template' => 'mlb/game.php',
-        'path' => $args,
-        // @since 2017-07016 - .whole へ className 追加するために追加する
-        'prop_identity' => 'game dark',
-        'prop_category' => 'mlb',
-      ));
+      switch ($league) {
+        case 'ub_tohto':
+          $array = [
+            'og_image' => 'OG_univ_touto',
+            'stats_top_image' => 'ub_tohto',
+            'league' => 'ub_tohto',
+            'stats_top_alt' => '東都大学野球 速報&データ',
+          ];
+          break;
+        case 'ub_kansaibig6':
+          $array = [
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai6',
+            'league' => 'ub_kansaibig6',
+            'stats_top_alt' => '関西六大学野球 速報&データ',
+          ];
+          break;
+        case 'ub_kasai':
+          $array = [
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai',
+            'league' => 'ub_kansai',
+            'stats_top_alt' => '関西大学野球 速報&データ',
+            'whole' => 'whole',
+          ];
+          break;
+      }
+      $args['page'] = $app->model->set($array);
 
-      return $this->renderer->render($response, 'stats/default.php', $args);
+      return $this->renderer->render($response, 'stats/baseball_univ/standing.php', $args);
 
     });
   });
