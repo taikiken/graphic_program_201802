@@ -32,14 +32,13 @@
         <link rel="apple-touch-icon-precomposed" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
         <link rel="icon" sizes="192x192" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
         <link rel="shortcut icon" href="/favicon.ico">
-        <link rel="stylesheet" href="https://sportsbull.jp/assets/css/basic.css" media="only screen and (min-width: 769px)">
-        <link rel="stylesheet" href="https://sportsbull.jp/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
-        <link rel="stylesheet" href="/big6tv/css/style.css">
         <!-- 表示確認用 / -->
         <link rel="stylesheet" href="https://sportsbull.jp/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
         <link rel="stylesheet" href="https://sportsbull.jp/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
         <!-- / 表示確認用 -->
-        <link rel="stylesheet" href="/big6tv/css/othersStyle.css">
+        <link rel="stylesheet" href="https://sportsbull.jp/assets/css/basic.css" media="only screen and (min-width: 769px)">
+        <link rel="stylesheet" href="https://sportsbull.jp/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
+        <link rel="stylesheet" href="/big6tv/css/style.css">
         <!-- optimize -->
         <style>
             .async-hide {
@@ -157,7 +156,7 @@
             <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
         </div>
         <!-- ad/531683568/appvador -->
-        <div id="whole" class="<?php echo $page['whole']; ?>">
+        <div id="whole" class="whole dark">
             <header class="head-sec">
                 <div class="head-sec-inner">
                     <h1>
@@ -172,20 +171,19 @@
                     <section class="main-sec">
                         <div class="stats-top-image">
                             <picture>
-                                <source media="(max-width: 768px)" srcset="/big6tv/img/SP_stats_mlb_heading_kansai6.jpg ">
+                                <source media="(max-width: 768px)" srcset="/big6tv/img/SP_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg">
                                 <img src="/big6tv/img/PC_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg" alt="<?php echo $page['stats_top_alt']; ?>"> </picture>
                         </div>
                         <ul class="stats-module-header">
-                            <li class="active">
-                                <a href="/stats/ub_kansaibig6/">試合結果</a>
-                            </li>
                             <li>
-                                <a href="/stats/ub_kansaibig6/standing/">順位表</a>
+                                <a href="/stats/<?php echo $page['league']; ?>/">試合結果</a>
+                            </li>
+                            <li class="active">
+                                <a href="/stats/<?php echo $page['league']; ?>/standing/">順位表</a>
                             </li>
                         </ul>
-                        <div id="univbb-<?php echo $page['widget']; ?>" data-type="others" data-league="big6tv" data-season="2017s" <?php echo $page['data_id']; ?>></div>
-                        <script src="/stats/assets/univbb/js/Widget_univbb_3.js"></script>
-                        <div style="height:50px"></div>
+                        <div id="univbb-widget2" data-type="others" data-league="<?php echo $page['league']; ?>" data-season="2017s" data-id="<?php echo $page['game_id']; ?>"></div>
+                        <script src="/stats/assets/univbb/js/Widget_univbb_2.js"></script>
                     </section>
                     <!-- /.main-sec -->
                     <section class="side-sec show-for-large">

@@ -336,10 +336,8 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
             'og_image' => 'OG_univ_touto',
             'stats_top_image' => 'ub_tohto',
             'stats_top_alt' => '東都大学野球 速報&データ',
-            'whole' => 'whole dark',
-            'widget' => 'widget2',
-            'widget_js' => 'Widget_univbb_2.js',
-            'data_id' => 'data-id="' . $gameid . '"'
+            'league' => $league,
+            'game_id' => $gameid,
           ];
           break;
         case 'ub_kansaibig6':
@@ -347,10 +345,8 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
             'og_image' => 'OG_univ_6',
             'stats_top_image' => 'kansai6',
             'stats_top_alt' => '関西六大学野球 速報&データ',
-            'whole' => 'whole',
-            'widget' => 'widget3',
-            'widget_js' => 'Widget_univbb_3.js',
-            'data_id' => '',
+            'league' => $league,
+            'game_id' => $gameid,
           ];
           break;
         case 'ub_kasai':
@@ -358,11 +354,9 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
             'og_image' => 'OG_univ_6',
             'stats_top_image' => 'kansai',
             'stats_top_alt' => '関西大学野球 速報&データ',
-            'whole' => 'whole',
-            'widget' => 'widget3',
-            'widget_js' => 'Widget_univbb_3.js',
-            'data_id' => '',
-            ];
+            'league' => $league,
+            'game_id' => $gameid,
+          ];
           break;
       }
       $args['page'] = $app->model->set($array);
