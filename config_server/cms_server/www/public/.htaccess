@@ -56,20 +56,3 @@ require valid-user
 
 # auth1, auth2 ‚¢‚¸‚ê‚©OK‚È‚ç
 Satisfy Any
-
-# for Slim - /app/Slim
-# ==============================
-#RewriteEngine On
-#RewriteBase /
-#DirectorySlash On
-
-#RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
-#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
-
-#RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC,OR]
-#RewriteCond %{HTTP_HOST} ^undotsushin.com$
-#RewriteRule ^(.*)$ https://www.undotsushin.com/$1 [R,L]
-
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteRule ^ index.php [QSA,L]
