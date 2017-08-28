@@ -10,7 +10,7 @@ $app->group('/{slug:bulls-station}',  function () use($app) {
     'og_type'            => 'article',
     'og_title'           => '番組紹介 - BULL\'S STATION | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'bulls-station/',
-    'og_image'           => $app->model->property('site_url').'assets/images/bulls-station/og_image.png',
+    'og_image'           => $app->model->property('site_url').'assets/images/bulls-station/ogp.jpg',
     'og_description'     => '毎週平日 月-金 12:30~ 配信！スポーツニュース番組 BULL\'S STATION。BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！',
     'keywords'           => 'BULL\'S STATION,ブルズ ステーション,エイミー,サヤカ,エレナ,イチカ,ライカ,動画特集,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
     'template'           => 'index',
