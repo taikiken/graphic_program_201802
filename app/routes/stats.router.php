@@ -219,6 +219,82 @@ $app->group('/stats', function () use($app) {
     });
   });
 
+    // 大学野球
+    // ==============================
+    // ヒットする文字列だけ
+    $this->group('/{league:ub_kansai|ub_kansaibig6|ub_tohto}', function ($request, $response, $args) use ( $app ) {
+
+        // トップ
+        $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+
+            $title = 'MLB | 速報 &amp; データ';
+
+            $args['page'] = $app->model->set(array(
+                'title'              => $title,
+                'og_title'           => $title.' | '.$app->model->property('title_short'),
+                'og_description'     => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
+                'og_url'             => $app->model->property('site_url').'stats/mlb/',
+                'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
+//        'template'           => 'mlb/schedule.php',
+                // @since 2017-07016 - /stats/mlb/ 表示ファイルをindex.phpへ変更する
+                'template'           => 'mlb/index.php',
+                'path'               => $args,
+                // @since 2017-07016 - .whole へ className 追加するために追加する
+                'prop_identity'      => 'index',
+                'prop_category'      => 'mlb',
+            ));
+
+            return $this->renderer->render($response, 'stats/default.php', $args);
+
+        });
+
+        $this->get('/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
+
+            $category = array(
+                'title' => 'MLB | 速報 &amp; データ',
+            );
+
+            $args['page'] = $app->model->set(array(
+                'title'              => $category['title'],
+                'og_title'           => $category['title'].' | '.$app->model->property('title_short'),
+                'og_description'     => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
+                'og_url'             => $app->model->property('site_url').'stats/mlb/',
+                'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
+//        'template'           => 'mlb/'.$args['category'].'.php',
+                'template'           => 'mlb/game.php',
+                'path'               => $args,
+                // @since 2017-07016 - .whole へ className 追加するために追加する
+                'prop_identity'      => 'game dark',
+                'prop_category'      => 'mlb',
+            ));
+
+            return $this->renderer->render($response, 'stats/default.php', $args);
+
+        });
+        $this->get('/standing[/]', function ($request, $response, $args) use ($app) {
+
+            $category = array(
+                'title' => 'MLB | 速報 &amp; データ',
+            );
+
+            $args['page'] = $app->model->set(array(
+                'title'              => $category['title'],
+                'og_title'           => $category['title'].' | '.$app->model->property('title_short'),
+                'og_description'     => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
+                'og_url'             => $app->model->property('site_url').'stats/mlb/',
+                'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
+//        'template'           => 'mlb/'.$args['category'].'.php',
+                'template'           => 'mlb/game.php',
+                'path'               => $args,
+                // @since 2017-07016 - .whole へ className 追加するために追加する
+                'prop_identity'      => 'game dark',
+                'prop_category'      => 'mlb',
+            ));
+
+            return $this->renderer->render($response, 'stats/default.php', $args);
+
+        });
+    });
 
 });
 

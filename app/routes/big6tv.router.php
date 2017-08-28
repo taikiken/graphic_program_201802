@@ -63,7 +63,7 @@ $app->group('/{slug:big6tv}',  function () use($app) {
           '2017s', // 今はシーズン固定にしちゃってる
           'game_info_' . $gameid . '.json',
       ];
-      $key = implode('/', $arr);
+      $s3key = implode('/', $arr);
 
       // AWSのキー名
       $keyId = 'AKIAJ7OMTZRU6PGV6GZA';
@@ -76,7 +76,7 @@ $app->group('/{slug:big6tv}',  function () use($app) {
 //
       $s3Setting = [
           'credentials' => [
-              'key' => $keyId,
+              's3key' => $keyId,
               'secret' => $secretKey,
           ],
           'region' => $region,
@@ -84,11 +84,11 @@ $app->group('/{slug:big6tv}',  function () use($app) {
       ];
 
       $s3Object = S3Client::factory($s3Setting);
-      $json = $s3Object->getObjectUrl($bucket, $key);
+      $json = $s3Object->getObjectUrl($bucket, $s3key);
 
       // こっち使えないかなー
 //      $S3Module = new S3Module;
-//      $json = $S3Module->getUrl($bucket, $key);
+//      $json = $S3Module->getUrl($bucket, $s3key);
 
       if (!@file_get_contents($json, NULL, NULL, 0, 1)) :
           // 404飛ばしたい
@@ -109,7 +109,7 @@ $app->group('/{slug:big6tv}',  function () use($app) {
           endif;
       endif;
 
-      $json = json_decode(file_get_contents($json));
+//      $json = json_decode(file_get_contents($json));
 
       $args['page'] = $app->model->set(array(
           'title'              => '東京六大学野球 BIG6.TV',
@@ -118,7 +118,7 @@ $app->group('/{slug:big6tv}',  function () use($app) {
           'path'               => $args,
           'template'           => 'category',
           'template_classname' => '',
-          'metatag'            => 'metatag metatag metatag metatag',
+          'metatag'            => $json,
       ));
 
       if ( $app->model->property('ua') === 'desktop' ) :
