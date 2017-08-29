@@ -72,14 +72,18 @@ php_value mbstring.http_output UTF-8
 php_value error_reporting 6133
 
 
-#RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
-#RewriteRule ^(.*)$ https://dev.sportsbull.jp/$1 [R,L]
-
 # for Slim - /app/Slim
 # ==============================
 RewriteEngine On
 RewriteBase /
 DirectorySlash On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.html !-f
+RewriteCond %{REQUEST_FILENAME}/index.php !-f
+RewriteRule ^ index.php [QSA,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
