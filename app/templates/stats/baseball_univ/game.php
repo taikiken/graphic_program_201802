@@ -7,7 +7,7 @@
         <script src="https://sportsbull.jp/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
         <script src="https://sportsbull.jp/assets/js/app_divide.bundle.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>ヘッダー・フッターテンプレート | SPORTS BULL</title>
+        <title><?php echo $page['title']; ?> | 速報 & データ | スポーツブル / SPORTS BULL</title>
         <script src="https://sportsbull.jp/assets/js/libs/vendor.react.js"></script>
         <script src="https://sportsbull.jp/assets/js/bundle/main.bundle.js"></script>
         <meta name="keywords" content="">

@@ -2,6 +2,8 @@
 
 // stats
 // ==============================
+use Aws\S3\S3Client;
+
 $app->group('/stats', function () use($app) {
 
 
@@ -290,10 +292,42 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
       $url = explode('/', $_SERVER['REQUEST_URI']);
       $league = $url[2];
       $gameid = $args['gameid'];
+      $arr = [
+        'json',
+        $league,
+        '2017s', // 今はシーズン固定にしちゃってる
+        'game_info_' . $gameid . '.json',
+      ];
+      $s3key = implode('/', $arr);
+      $bucketName = "dev-ublive.sportsbull.jp";
+
+      $S3Module = new S3Module;
+      $json = $S3Module->getUrl($s3key, $bucketName);
+
+      $team_names = [];
+      $visitor = '';
+      $home = '';
+      $dateY = '';
+      $dateM = '';
+      $dateD = '';
+      $weekday = '';
+      if (!empty(file_get_contents($json, false, null, 0, 1))){
+        $json = json_decode(file_get_contents($json));
+        foreach ($json->team as $team) {
+          $team_names[] = $team->teaminfo->name;
+        }
+        $visitor = $team_names[0];
+        $home = $team_names[1];
+        $dateY = $json->gameinfo->dateY;
+        $dateM = $json->gameinfo->dateM;
+        $dateD = $json->gameinfo->dateD;
+        $weekday = $json->gameinfo->weekday;
+      }
 
       switch ($league) {
         case 'ub_tohto':
           $args['page'] = $app->model->set(array(
+            'title' => "{$visitor} vs {$home} - {$dateY}年{$dateM}月{$dateD}日（{$weekday}）",
             'og_image' => 'OG_univ_touto',
             'stats_top_image' => 'tohto',
             'stats_top_alt' => '東都大学野球 速報&データ',
@@ -304,6 +338,7 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
 
         case 'ub_kansaibig6':
           $args['page'] = $app->model->set(array(
+            'title' => "{$visitor} vs {$home} - {$dateY}年{$dateM}月{$dateD}日（{$weekday}）",
             'og_image' => 'OG_univ_6',
             'stats_top_image' => 'kansai6',
             'stats_top_alt' => '関西六大学野球 速報&データ',
@@ -314,6 +349,7 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
 
         case 'ub_kansai':
           $args['page'] = $app->model->set(array(
+            'title' => "{$visitor} vs {$home} - {$dateY}年{$dateM}月{$dateD}日（{$weekday}）",
             'og_image' => 'OG_univ_kansai',
             'stats_top_image' => 'kansai',
             'stats_top_alt' => '関西大学野球 速報&データ',

@@ -1,6 +1,7 @@
 <?php
 
 $servername=$_SERVER["SERVER_NAME"];
+$requesturi=$_SERVER['REQUEST_URI'];
 $staticfileimport=0;
 $filename=$_SERVER['SCRIPT_FILENAME'].$_SERVER['REQUEST_URI'];
 
@@ -29,10 +30,18 @@ if(preg_match("/undotsushin/",$servername)){
 		$domain="http://dev.undotsushin.com";
 		$ImgPath="https://dev-img.sportsbull.jp";
 		$UserImgPath="https://dev-img.sportsbull.jp";
-		
+
 		$LSCMS="legendsstadium2";
-		
-		$bucket="dev-img-sportsbull-jp";
+
+    // 大学野球
+    if (preg_match("/big6tv/", $requesturi) ||
+      preg_match("/ub_kansai/",$requesturi) ||
+      preg_match("/ub_kansaibig6/",$requesturi) ||
+      preg_match("/ub_tohto/",$requesturi)) {
+      $bucket="dev-ublive.sportsbull.jp";
+    }else{
+      $bucket="dev-img-sportsbull-jp";
+    }
 
 	}elseif(preg_match("/stg/",$servername)){
 
@@ -42,10 +51,18 @@ if(preg_match("/undotsushin/",$servername)){
 		$domain="http://stg.undotsushin.com";
 		$ImgPath="https://www.undotsushin.com";
 		$UserImgPath="https://www.undotsushin.com";
-		
+
 		$LSCMS="legendsstadium";
-		
-		$bucket="img-sportsbull-jp";
+
+    // 大学野球
+    if (preg_match("/big6tv/", $requesturi) ||
+      preg_match("/ub_kansai/",$requesturi) ||
+      preg_match("/ub_kansaibig6/",$requesturi) ||
+      preg_match("/ub_tohto/",$requesturi)) {
+      $bucket="stg-ublive.sportsbull.jp";
+    }else{
+      $bucket="img-sportsbull-jp";
+    }
 
 	}else{
 
@@ -57,8 +74,16 @@ if(preg_match("/undotsushin/",$servername)){
 		$domain="https://www.undotsushin.com";
 		$ImgPath="https://www.undotsushin.com";
 		$UserImgPath="https://www.undotsushin.com";
-		
-		$bucket="img-sportsbull-jp";
+
+    // 大学野球
+    if (preg_match("/big6tv/", $requesturi) ||
+      preg_match("/ub_kansai/",$requesturi) ||
+      preg_match("/ub_kansaibig6/",$requesturi) ||
+      preg_match("/ub_tohto/",$requesturi)) {
+      $bucket="ublive.sportsbull.jp";
+    }else{
+      $bucket="img-sportsbull-jp";
+    }
 	}
 
 	$SQLLOG="/var/www/data/log/ut_sqllog.txt";
@@ -68,7 +93,7 @@ if(preg_match("/undotsushin/",$servername)){
 	$ACLOGTXT="/var/www/data/log/ut_article_access.txt";
 	$IMGP="/var/www/data/img/";
 	$RSS="/var/www/data/rss/";
-	
+
 	$MEDIADATA="http://input.undotsushin.com/api";
 	$videopath="https://video.sportsbull.jp";
 
@@ -82,9 +107,9 @@ if(preg_match("/undotsushin/",$servername)){
 		$domain="https://dev.sportsbull.jp";
 		$ImgPath="https://dev-img.sportsbull.jp";
 		$UserImgPath="https://dev-img.sportsbull.jp";
-		
+
 		$LSCMS="legendsstadium2";
-		
+
 		$bucket="dev-img-sportsbull-jp";
 
 	}elseif(preg_match("/stg/",$servername)){
@@ -198,6 +223,13 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
   $ACLOGTXT="/vagrant/.tmp/log/ut_article_access.txt";
   $IMGP="/vagrant/.tmp/img/";
   $RSS="/vagrant/.tmp/rss/";
+  // 大学野球
+  if (preg_match("/big6tv/", $requesturi) ||
+    preg_match("/ub_kansai/",$requesturi) ||
+    preg_match("/ub_kansaibig6/",$requesturi) ||
+    preg_match("/ub_tohto/",$requesturi)) {
+    $bucket="dev-ublive.sportsbull.jp";
+  }
 endif;
 
 //$staticfilepath=preg_match("/sportsbull.jp/",$domain)?sprintf("s3://%s",$bucket):sprintf("%s/api/ver1",$SERVERPATH);
