@@ -15,6 +15,7 @@ for($i=0;$i<count($data);$i++){
 	$d=explode(",",$data[$i]);
 	if(strtotime($d[1])<=strtotime(date("Y-m-d")))$games[]=$d[5];
 }
+$pord=array();
 
 $movie=get_contents("https://img.sportsbull.jp/static/americanfootball/2017/autumn/highlight.json");
 $movie=json_decode($movie,TRUE);
@@ -56,6 +57,7 @@ for($j=0;$j<count($games);$j++){
 				$y["response"]["gameinfo"][$map[$l[0]]]=$l[1];
 			}elseif($f==10&&!preg_match("/^##/",$l[0])&&!preg_match("/^■/",$l[0])){
 				$y["response"]["events"][]=array(
+					"pord"=>$pord[$l[0]],
 					"team"=>$l[0],
 					"time"=>sprintf("%s-%s",$l[1],$l[2]),
 					"play"=>$l[3]
@@ -98,7 +100,7 @@ for($j=0;$j<count($games);$j++){
 			
 		}
 		
-		$y["response"]["highlightmovieurl"]=$movie["movie"][$gameid]?sprintf("https://sportsbull.jp/p/%s/",$movie["movie"][$gameid]):"";
+		$y["response"]["highlightmovieurl"]=$movie["movie"][$gameid]?$movie["movie"][$gameid]:array("movie"=>"","title"=>"","img"=>"");
 		$y["response"]["lastupdate"]=date("Y-m-d H:i:s",$lastupdate);
 		put_json($json,$y);
 		unlink($tmpfile);
