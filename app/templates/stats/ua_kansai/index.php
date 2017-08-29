@@ -1,3 +1,7 @@
+<?php
+include __DIR__."/getData.php";
+$dataArray = getData::getSchedule();
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
@@ -186,8 +190,9 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
         </ul>
       </nav>
       <div class="game-category1">
-        <div id="af-schedule">
+        <div class="af-schedule">
             <h2 class="calendar">日程結果 / Division1</h2>
+<<<<<<< HEAD
             <div class="list">
               <p>8月18日</p>
               <ul>
@@ -483,18 +488,33 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
               </tr>
             </tbody>
           </table>
+=======
+            <?=$dataArray["game-category1"]["schedule"]?>
         </div><!-- af-schedule -->
-      </div><!-- game-category1 -->
+
+        <div class="af-match">
+          <?=$dataArray["game-category1"]["standing"]?>
+>>>>>>> b855344b4143b4510e955fc0eddbd556f4e47a56
+        </div><!-- af-schedule -->
+      </div><!-- game-category -->
       <div class="game-category2">
-        game-category2：入替戦
+        <div class="af-schedule">
+            <h2 class="calendar">日程結果 / 入替戦</h2>
+            <?=$dataArray["game-category2"]["schedule"]?>
+        </div>
       </div><!-- game-category2 -->
       <div class="game-category3">
-        game-category3：新日本
+        <div class="af-schedule">
+            <h2 class="calendar">日程結果 / 新日本</h2>
+            <?=$dataArray["game-category3"]["schedule"]?>
+        </div>
       </div><!-- game-category3 -->
       <div class="game-category4">
-        game-category4：甲子園ボール
+        <div class="af-schedule">
+            <h2 class="calendar">日程結果 / 甲子園ボール</h2>
+            <?=$dataArray["game-category4"]["schedule"]?>
+        </div>
       </div><!-- game-category4 -->
-
       <div class="stats__banner stats__banner--golf show-for-small">
         <!-- /531683568/golf-stats-ad/golf-stats-under-header-SP -->
         <script>
@@ -573,7 +593,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
       <nav class="foot-breadCrumb">
         <ol itemscope itemtype="http://schema.org/breadCrumbList">
           <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">ページタイトル</span><meta itemprop="position" content="2" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/stats/ua_kansai/"><span itemprop="name">関西アメフト 日程・結果</span><meta itemprop="position" content="2" /></a></li>
         </ol>
       </nav><!-- /.foot-breadCrumb -->
 
@@ -690,7 +710,11 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 <script src="/assets/stats/ur_kansai/js/index.js"></script>
 =======
 <script src="/assets/stats/ua_kansai/js/amefoot.bundle.js"></script>
+<<<<<<< HEAD
 <!-- <script src="/assets/stats/ua_kansai/js/index.js"></script> -->
 >>>>>>> origin/feature/2264-amefoot-stats
+=======
+<script src="/assets/stats/ua_kansai/js/index.js"></script>
+>>>>>>> b855344b4143b4510e955fc0eddbd556f4e47a56
 </body>
 </html>
