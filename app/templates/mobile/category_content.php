@@ -35,13 +35,6 @@
     <section class="main-sec">
 
       <?php
-      if ( $page['category']['slug'] ==='big6' || $page['category']['slug'] ==='big6tv') :
-        include_once __DIR__.'/../big6tv/live.php';
-        include_once __DIR__.'/../big6tv/mobile/category.php';
-      endif;
-      ?>
-
-      <?php
       // ----------------------------------------------------
       // 記事一覧: sp banner
       if ( !empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']) ) :
@@ -53,6 +46,12 @@
       endif;
       // eof: 記事一覧: sp banner
       // ---------------------------------------------------- ?>
+
+
+      <?php if ( $page['category']['slug'] === 'big6tv' ) : ?>
+        <?php include_once __DIR__.'/../../../public/big6tv/category/big6tv/_index.html'; ?>
+      <?php endif; ?>
+
 
       <?php
       # ref. #2227
@@ -75,7 +74,7 @@
         echo $hsb_parts;
       endif;
       ?>
-      
+
       <div id="js-headline"></div>
       <div id="category-container"></div>
       <div id="board-container-more"></div>

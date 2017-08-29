@@ -44,14 +44,6 @@ if ($page['category']['slug'] == 'all') {
 
   <div class="body-sec-inner">
     <section class="main-sec">
-
-      <?php
-      if ( $page['category']['slug'] === 'big6' || $page['category']['slug'] === 'big6tv' ) :
-        include_once __DIR__.'/../big6tv/live.php';
-        include_once __DIR__.'/../big6tv/desktop/category.php';
-      endif;
-      ?>
-
       <?php
       // ----------------------------------------------------
       // 記事一覧: pc banner
@@ -74,6 +66,16 @@ if ($page['category']['slug'] == 'all') {
       <div id="js-headline"></div>
       <div id="js-headline"></div>
 
+
+      <?php if ( $page['category']['slug'] === 'big6tv' ) : ?>
+        <?php include_once __DIR__.'/../../../public/big6tv/category/big6tv/_index.html'; ?>
+        <div class="headline-heading">
+          <h2 class="headline-heading-title"><img src="/assets/images/common/headline-heading_big6.png" alt="HEADLINE NEWS"></h2>
+          <span class="headline-heading-ruby">新着記事</span>
+        </div>
+      <?php endif; ?>
+
+
       <?php
       # ref. #2227
       if ( $page['category']['slug'] === 'seriku' ) :
@@ -82,7 +84,7 @@ if ($page['category']['slug'] == 'all') {
       ?>
 
       <?php
-      # ref. #2185 
+      # ref. #2185
       if ( $page['category']['slug'] === 'inhigh' ) :
         include_once __DIR__.'/../inhigh/desktop/index.php';
       endif;
