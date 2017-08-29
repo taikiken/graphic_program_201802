@@ -1,3 +1,7 @@
+<?php
+include __DIR__."/getData.php";
+$dataArray = getData::getSchedule();
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
@@ -176,181 +180,33 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
         </ul>
       </nav>
       <div class="game-category1">
-        <div id="af-schedule">
+        <div class="af-schedule">
             <h2 class="calendar">日程結果 / Division1</h2>
-            <div class="list">
-              <p>8月18日</p>
-              <ul>
-                <li>
-                  <a href="#"><span class="team-001">関西学院大学</span> 99 - 99 <span class="team-002">同志社大学</span></a>
-                  <a href="#">ダイジェスト<span class="sp-none">動画</span></a>
-                </li>
-                <li>
-                  <a href="#"><span class="team-001">関西学院大学</span> 99 - 99 <span class="team-002">関西大学</span></a>
-                  <a href="#">ダイジェスト<span class="sp-none">動画</span></a>
-                </li>
-                <li>
-                  <a href="#"><span class="team-001">京都大学</span> 99 - 99 <span class="team-002">同志社大学</span></a>
-                  <a href="#">ダイジェスト<span class="sp-none">動画</span></a>
-                </li>
-              </ul>
-            </div>
-            <div class="list">
-              <p>8月19日</p>
-              <ul>
-                <li>
-                  <a href="#"><span class="team-001">京都大学</span> 99 - 99 <span class="team-002">関西大学</span></a>
-                  <a href="#">ダイジェスト<span class="sp-none">動画</span></a>
-                </li>
-                <li>
-                  <a href="#"><span class="team-001">京都大学</span> 99 - 99 <span class="team-002">関西大学</span></a>
-                  <a href="#">ダイジェスト<span class="sp-none">動画</span></a>
-                </li>
-              </ul>
-            </div>
-            <div class="list">
-              <p>8月20日</p>
-              <ul>
-                <li>
-                  <a href="#"><span class="team-001">京都大学</span> 99 - 99 <span class="team-002">関西大学</span></a>
-                  <div>ダイジェスト<span class="sp-none">動画</span></div>
-                </li>
-                <li>
-                  <a href="#"><span class="team-001">京都大学</span> 99 - 99 <span class="team-002">関西大学</span></a>
-                  <div>ダイジェスト<span class="sp-none">動画</span></div>
-                </li>
-              </ul>
-            </div>
+            <?=$dataArray["game-category1"]["schedule"]?>
         </div><!-- af-schedule -->
 
-        <div id="af-match">
-          <h2 class="star">星取表 / Division1</h2>
-          <table>
-            <thead>
-              <tr>
-                <th width="10%">順位</th>
-                <th>大学名<br class="sp-none">（勝-敗-分）</th>
-                <th>立命館</th>
-                <th>関学大</th>
-                <th>関西大</th>
-                <th>京都大</th>
-                <th>神戸大</th>
-                <th>龍谷大</th>
-                <th>同志社</th>
-                <th>甲南大</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>2</td>
-                <td>立命館大学<br class="sp-none">（6-1-0）</td>
-                <td class="non"></td>
-                <td>●<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>関西学院大学<br class="sp-none">（6-1-0）</td>
-                <td>●<br class="sp-none">xx-xx</td>
-                <td class="non"></td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>関西大学<br class="sp-none">（6-1-0）</td>
-                <td>●<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td class="non"></td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-              </tr>
-              <tr>
-                <td>5-6</td>
-                <td>京都大学<br class="sp-none">（6-1-0）</td>
-                <td>●<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td class="non"></td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-              </tr>
-              <tr>
-                <td>7-7</td>
-                <td>神戸大学<br class="sp-none">（6-1-0）</td>
-                <td>●<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td class="non"></td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>龍谷大学<br class="sp-none">（6-1-0）</td>
-                <td>●<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td class="non"></td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-              </tr>
-              <tr>
-                <td>7-8</td>
-                <td>同志社大学<br class="sp-none">（6-1-0）</td>
-                <td>●<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td class="non"></td>
-                <td>○<br class="sp-none">xx-xx</td>
-              </tr>
-              <tr>
-                <td>5-5</td>
-                <td>甲南大学<br class="sp-none">（6-1-0）</td>
-                <td>●<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td>○<br class="sp-none">xx-xx</td>
-                <td class="non"></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="af-match">
+          <?=$dataArray["game-category1"]["standing"]?>
         </div><!-- af-schedule -->
-      </div><!-- game-category1 -->
+      </div><!-- game-category -->
       <div class="game-category2">
-        game-category2：入替戦
+        <div class="af-schedule">
+            <h2 class="calendar">日程結果 / 入替戦</h2>
+            <?=$dataArray["game-category2"]["schedule"]?>
+        </div>
       </div><!-- game-category2 -->
       <div class="game-category3">
-        game-category3：新日本
+        <div class="af-schedule">
+            <h2 class="calendar">日程結果 / 新日本</h2>
+            <?=$dataArray["game-category3"]["schedule"]?>
+        </div>
       </div><!-- game-category3 -->
       <div class="game-category4">
-        game-category4：甲子園ボール
+        <div class="af-schedule">
+            <h2 class="calendar">日程結果 / 甲子園ボール</h2>
+            <?=$dataArray["game-category4"]["schedule"]?>
+        </div>
       </div><!-- game-category4 -->
-
       <div class="stats__banner stats__banner--golf show-for-small">
         <!-- /531683568/golf-stats-ad/golf-stats-under-header-SP -->
         <script>
@@ -429,7 +285,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
       <nav class="foot-breadCrumb">
         <ol itemscope itemtype="http://schema.org/breadCrumbList">
           <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">ページタイトル</span><meta itemprop="position" content="2" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/stats/ua_kansai/"><span itemprop="name">関西アメフト 日程・結果</span><meta itemprop="position" content="2" /></a></li>
         </ol>
       </nav><!-- /.foot-breadCrumb -->
 
@@ -543,6 +399,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
 <script src="/assets/js/global.bundle.js"></script>
 <script src="/assets/stats/ua_kansai/js/amefoot.bundle.js"></script>
-<!-- <script src="/assets/stats/ua_kansai/js/index.js"></script> -->
+<script src="/assets/stats/ua_kansai/js/index.js"></script>
 </body>
 </html>
