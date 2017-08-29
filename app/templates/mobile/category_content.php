@@ -75,6 +75,13 @@
         echo $hsb_parts;
       endif;
       ?>
+
+      <?php
+      # ref. #2264 
+      if ( $page['category']['slug'] === 'americanfootball' ) :
+        include_once __DIR__.'/../stats/ua_kansai/mobile/index.php';
+      endif;
+      ?>
       
       <div id="js-headline"></div>
       <div id="category-container"></div>
