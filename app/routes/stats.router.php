@@ -339,7 +339,8 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
             'league' => $league,
             'game_id' => $gameid,
         ));
-          break;
+          return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
+
         case 'ub_kansaibig6':
           $args['page'] = $app->model->set(array(
             'og_image' => 'OG_univ_6',
@@ -348,7 +349,9 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
             'league' => $league,
             'game_id' => $gameid,
           ));
-          break;
+          return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
+
+
         case 'ub_kansai':
           $args['page'] = $app->model->set(array(
             'og_image' => 'OG_univ_kansai',
@@ -357,12 +360,12 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
             'league' => $league,
             'game_id' => $gameid,
           ));
-          break;
+          return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
+
       }
-
-      return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
-
     });
+
+
     $this->get('/standing[/]', function ($request, $response, $args) use ($app) {
 
       $url = explode('/', $_SERVER['REQUEST_URI']);
