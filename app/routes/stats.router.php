@@ -126,7 +126,7 @@ $app->group('/stats', function () use($app) {
 
     // ヒットする文字列だけ
     $this->get('/{category:schedule|standing|leaders|playerlist|\d{8}}[/]', function ($request, $response, $args) use ($app) {
-      
+
       $category = array(
         'title' => 'MLB | 速報 &amp; データ',
       );
@@ -280,6 +280,127 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
   //   });
   // });
 
+  // 大学野球
+  // ==============================
+  // ヒットする文字列だけ
+  $this->group('/{league:ub_kansai|ub_kansaibig6|ub_tohto}', function ($request, $response, $args) use ($app) {
+
+    // トップ
+    $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+
+      $url = explode('/', $_SERVER['REQUEST_URI']);
+      $league = $url[1];
+
+      switch ($league) {
+        case 'ub_tohto':
+          $array = [
+            'og_image' => 'OG_univ_touto',
+            'stats_top_image' => 'ub_tohto',
+            'league' => 'ub_tohto',
+            'stats_top_alt' => '東都大学野球 速報&データ',
+          ];
+          break;
+        case 'ub_kansaibig6':
+          $array = [
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai6',
+            'league' => 'ub_kansaibig6',
+            'stats_top_alt' => '関西六大学野球 速報&データ',
+          ];
+          break;
+        case 'ub_kasai':
+          $array = [
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai',
+            'league' => 'ub_kansai',
+            'stats_top_alt' => '関西大学野球 速報&データ',
+            'whole' => 'whole',
+          ];
+          break;
+      }
+      $args['page'] = $app->model->set($array);
+
+      return $this->renderer->render($response, 'stats/baseball_univ/index.php', $args);
+
+    });
+
+    $this->get('/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
+
+      $url = explode('/', $_SERVER['REQUEST_URI']);
+      $league = $url[2];
+      $gameid = $args['gameid'];
+
+      switch ($league) {
+        case 'ub_tohto':
+          $args['page'] = $app->model->set(array(
+            'og_image' => 'OG_univ_touto',
+            'stats_top_image' => 'tohto',
+            'stats_top_alt' => '東都大学野球 速報&データ',
+            'league' => $league,
+            'game_id' => $gameid,
+        ));
+          break;
+        case 'ub_kansaibig6':
+          $args['page'] = $app->model->set(array(
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai6',
+            'stats_top_alt' => '関西六大学野球 速報&データ',
+            'league' => $league,
+            'game_id' => $gameid,
+          ));
+          break;
+        case 'ub_kansai':
+          $args['page'] = $app->model->set(array(
+            'og_image' => 'OG_univ_kansai',
+            'stats_top_image' => 'kansai',
+            'stats_top_alt' => '関西大学野球 速報&データ',
+            'league' => $league,
+            'game_id' => $gameid,
+          ));
+          break;
+      }
+
+      return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
+
+    });
+    $this->get('/standing[/]', function ($request, $response, $args) use ($app) {
+
+      $url = explode('/', $_SERVER['REQUEST_URI']);
+      $league = $url[1];
+
+      switch ($league) {
+        case 'ub_tohto':
+          $array = [
+            'og_image' => 'OG_univ_touto',
+            'stats_top_image' => 'ub_tohto',
+            'league' => 'ub_tohto',
+            'stats_top_alt' => '東都大学野球 速報&データ',
+          ];
+          break;
+        case 'ub_kansaibig6':
+          $array = [
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai6',
+            'league' => 'ub_kansaibig6',
+            'stats_top_alt' => '関西六大学野球 速報&データ',
+          ];
+          break;
+        case 'ub_kasai':
+          $array = [
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai',
+            'league' => 'ub_kansai',
+            'stats_top_alt' => '関西大学野球 速報&データ',
+            'whole' => 'whole',
+          ];
+          break;
+      }
+      $args['page'] = $app->model->set($array);
+
+      return $this->renderer->render($response, 'stats/baseball_univ/standing.php', $args);
+
+    });
+  });
 
 });
 
