@@ -15,7 +15,18 @@ import {EventDispatcher} from '../event/EventDispatcher';
 // import {User} from './User';
 import {Loc} from '../util/Loc';
 
-let _symbol = Symbol();
+/**
+ * single ton instance - inner Symbol
+ * @type {Symbol}
+ * @private
+ */
+const _symbol = Symbol('Router instance symbol');
+
+/**
+ * Router singleton instance
+ * @type {?Router}
+ * @private
+ */
 let _instance = null;
 
 /**
@@ -34,469 +45,8 @@ let _instance = null;
  *
  */
 export class Router extends EventDispatcher {
-  /**
-   * <p>singleton class です。<br>
-   * **routing** を管理します</p>
-   *
-   * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {Router} Router instance を返します
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Router is static Class. not use new Router(). instead Router.factory()' );
-
-    }
-
-    if ( _instance === null ) {
-      super();
-      this.init( _symbol );
-      _instance = this;
-    }
-    return _instance;
-  }
-  /**
-   * inner methodです。呼び出しできません
-   * @param {Symbol} target private を担保する Symbol
-   */
-  init( target ):void {
-
-    if ( _symbol !== target ) {
-      throw new Error( 'init is private method.' );
-    }
-
-    var _this = this;
-    /**
-     * routing ルール
-     * @type {{/: *, /category/: *, /p/: *, /a/: *, /search/: *, /search: *, /signup_login/: *, /signup_login: *, /signup/: *, /signup: *, /login/: *, /login: *, /logout/: *, /logout: *, /reset_password/: *, /mypage/: *, /mypage: *, /notifications/: *, /notifications: *, /settings/: *, /settings: *}}
-     * @private
-     */
-    this._rule = {
-      '/': _this.index.bind( _this ),
-      '/category/': _this.category.bind( _this ),
-      '/p/': _this.single.bind( _this ),
-      '/a/': _this.single.bind( _this ),
-      '/search/': _this.search.bind( _this ),
-      '/search': _this.search.bind( _this ),
-      '/signup_login/': _this.signupLogin.bind( _this ),
-      '/signup_login': _this.signupLogin.bind( _this ),
-      '/signup/': _this.signup.bind( _this ),
-      '/signup': _this.signup.bind( _this ),
-      '/login/': _this.login.bind( _this ),
-      '/login': _this.login.bind( _this ),
-      '/logout/': _this.logout.bind( _this ),
-      '/logout': _this.logout.bind( _this ),
-      '/reset_password/': _this.password.bind( _this ),
-      // '/reset_password/resetting': _this.passwordResetting,
-      '/mypage/': _this.mypage.bind( _this ),
-      '/mypage': _this.mypage.bind( _this ),
-      // '/mypage/activities': _this.activities,
-      '/notifications/': _this.notifications.bind( _this ),
-      '/notifications': _this.notifications.bind( _this ),
-      '/settings/': _this.settings.bind( _this ),
-      '/settings': _this.settings.bind( _this )
-      // '/settings/interest': _this.interest,
-      // '/settings/social': _this.social,
-      // '/settings/deactivate': _this.deactivate
-    };
-  }
-  /**
-   * <code>location.pathname</code> から経路探索を行います
-   */
-  route():void {
-    let rule = this._rule;
-    let path = Loc.path;
-    let pathLength = path.length;
-    let found = false;
-
-    // console.log( 'route path, pathLength ', path, pathLength );
-
-    if ( pathLength !== 1 ) {
-
-      for ( var key in rule ) {
-
-        if ( rule.hasOwnProperty( key ) ) {
-
-          var keyLength = key.length;
-
-          if ( keyLength !== 1 ) {
-
-            // not kyeLength 1,
-            // 通常 key
-            if ( path.substr( 0, keyLength ) === key ) {
-              // console.log( 'path substr ', path.substr( 0, keyLength ), key );
-              rule[ key ]();
-              found = true;
-              break;
-            }
-          }// keyLength
-
-        }// hasOwnProperty
-
-      }// for
-
-    } else {
-
-      // pathname length が 1 '/'
-      this.index();
-      found = true;
-
-    }
-    // console.log( 'Router found', found, path );
-    if ( !found ) {
-      // path pattern に該当しない
-      this.page404( path );
-    }
-
-  }
-  /**
-   * 404 not found event fire
-   * @param {string} [where=''] 発火場所
-   */
-  page404( where:string = '' ):void {
-    // console.log( '404 ', where );
-    this.dispatch( { type: Router.NOT_FOUND, where: where } );
-
-  }
-  /**
-   * 403 forbidden event fire
-   * @param {string} [where=''] 発火場所
-   */
-  authorityError( where:string = '' ):void {
-    // console.warn( 'authority error ', where );
-    this.dispatch( { type: Router.AUTHORITY_ERROR, where: where } );
-
-  }
-  /**
-   * index (home) page
-   */
-  index():void {
-    this.dispatch( { type: Router.INDEX } );
-  }
-  /**
-   * category page
-   */
-  category():void {
-
-    let [ slug, slugType ] = Loc.path.replace( /\/category\/|\/category/ig, '' ).split('/');
-
-    if ( slug.indexOf( '.html' ) !== -1 ) {
-      slug = '';
-    }
-
-    if ( slug === '' ) {
-      slug = 'all';
-    }
-
-    this.dispatch( { type: Router.CATEGORY, slug: slug, slugType: slugType } );
-  }
-  /**
-   * single detail page
-   */
-  single():void {
-    // comment, comment reply 振り分け
-    let [ articleId, comment, commentId, replyId ] = Loc.path.replace( '/p/', '' ).split('/');
-
-    if ( !!articleId && Number.isInteger( parseInt( articleId, 10 ) ) ) {
-
-      // article Id 存在
-      if ( comment === 'comment' ) {
-
-        // in comment
-        this.comment( articleId, commentId, replyId );
-
-      } else {
-
-        // single page
-        this.dispatch( { type: Router.SINGLE, id: articleId } );
-
-      }
-
-    } else {
-        let [ articleId, comment, commentId, replyId ] = Loc.path.replace( '/a/', '' ).split('/');
-        if ( !!articleId && Number.isInteger( parseInt( articleId, 10 ) ) ) {
-
-            // article Id 存在
-            if ( comment === 'comment' ) {
-
-                // in comment
-                this.comment( articleId, commentId, replyId );
-
-            } else {
-
-                // single page
-                this.dispatch( { type: Router.SINGLE, id: articleId } );
-
-            }
-
-        } else {
-
-            // article Id ない
-            this.page404( 'single' );
-        }
-
-
-    }
-
-  }
-  /**
-   * comment / comment reply page
-   * @param {string} articleId article Id 記事 Id
-   * @param {string} commentId comment Id
-   * @param {string} [replyId=undefined] comment reply Id
-   */
-  comment( articleId:string, commentId:string, replyId:string ):void {
-
-    // articleId 存在チェック済み
-    if ( !!commentId && Number.isInteger( parseInt( commentId, 10 ) ) ) {
-
-      if ( !!replyId && Number.isInteger( parseInt( replyId, 10 ) ) ) {
-
-        // reply Id あり, comment reply page
-        this.dispatch( { type: Router.COMMENT_REPLY, article: articleId, comment: commentId, reply: replyId } );
-
-      } else {
-
-        // reply Id なし, comment page
-        this.dispatch( { type: Router.COMMENT, article: articleId, comment: commentId, reply: replyId } );
-
-      }
-
-    } else {
-
-      // comment Id がない
-      this.page404( 'comment' );
-
-    }
-
-  }
-  /**
-   * search 検索 page
-   */
-  search():void {
-
-    let [ keyword ] = Loc.path.replace( /\/search\/|\/search/ig, '' ).split('/');
-
-    if ( !!keyword ) {
-
-      this.dispatch( { type: Router.SEARCH, keyword: keyword } );
-
-    } else {
-
-      // keyword がない
-      this.dispatch( { type: Router.SEARCH, keyword: '' } );
-      // this.page404( 'search' );
-
-    }
-
-  }
-  /**
-   * signup / signup interest / signup account page
-   */
-  signup():void {
-
-    /*
-    let [ option ] = Loc.path.replace( '/signup/', '' ).split('/');
-
-    if ( option === 'account' ) {
-
-      // /signup/account/
-      this.dispatch( { type: Router.SIGNUP_ACCOUNT } );
-
-    } else if ( option === 'interest' ) {
-
-      // /signup/interest/
-      this.dispatch( { type: Router.SIGNUP_INTEREST } );
-
-    } else {
-
-      // /signup/
-      this.dispatch( { type: Router.SIGNUP } );
-
-    }
-    */
-
-    // console.log( 'signup page in fired' );
-    // URL 遷移しない
-    // 1 page コンテンツ
-    this.dispatch( { type: Router.SIGNUP } );
-
-  }
-  /**
-   * signup_login URL
-   */
-  signupLogin():void {
-    this.dispatch( { type: Router.SIGNUP_LOGIN } );
-  }
-  /**
-   * login page
-   */
-  login():void {
-    this.dispatch( { type: Router.LOGIN } );
-  }
-
-  /**
-   * logout page
-   */
-  logout():void {
-    this.dispatch( { type: Router.LOGOUT } );
-  }
-  /**
-   * reset_password page
-   */
-  password():void {
-
-    let [ option ] = Loc.path.replace( /\/reset_password\/|\/reset_password/ig, '' ).split('/');
-
-    if ( option === 'resetting' ) {
-
-      this.passwordResetting();
-
-    } else {
-
-      this.dispatch( { type: Router.RESET_PASSWORD } );
-
-    }
-  }
-  /**
-   * reset_password resetting page
-   */
-  passwordResetting():void {
-
-    this.dispatch( { type: Router.RESET_PASSWORD_RESETTING } );
-
-  }
-  /**
-   * mypage
-   */
-  mypage():void {
-
-    let [ activities ] = Loc.path.replace( /\/mypage\/|\/mypage/ig, '' ).split('/');
-
-    if ( activities === 'activities' ) {
-
-      this.activities();
-
-    } else {
-
-      this.dispatch( { type: Router.MYPAGE } );
-
-    }
-
-  }
-  /**
-   * mypage activities page
-   */
-  activities():void {
-
-    this.dispatch( { type: Router.MYPAGE_ACTIVITIES } );
-    /*
-    if ( User.sign ) {
-
-      this.dispatch( { type: Router.MYPAGE_ACTIVITIES } );
-
-    } else {
-
-      this.authorityError( 'activities' );
-
-    }
-    */
-
-  }
-  /**
-   * notifications page
-   */
-  notifications():void {
-
-    this.dispatch( { type: Router.NOTIFICATIONS } );
-    /*
-    if ( User.sign ) {
-
-      this.dispatch( { type: Router.NOTIFICATIONS } );
-
-    } else {
-
-      this.authorityError( 'notifications' );
-
-    }*/
-
-  }
-  /**
-   * settings page
-   */
-  settings():void {
-
-    let [ option ] = Loc.path.replace( /\/settings\/|\/settings/ig, '' ).split('/');
-    // console.log( 'settings option ', option );
-    switch ( option ) {
-
-      case 'interest':
-        this.interest();
-        break;
-
-      case 'social':
-        this.social();
-        break;
-
-      case 'deactivate':
-        this.deactivate();
-        break;
-
-      default:
-        /*
-        if ( User.sign ) {
-          this.dispatch( { type: Router.SETTING } );
-        } else {
-          this.authorityError( 'setting' );
-        }
-        */
-        this.dispatch( { type: Router.SETTING } );
-        break;
-
-    }
-
-  }
-  /**
-   * settings interest page
-   */
-  interest():void {
-    this.dispatch( { type: Router.SETTING_INTEREST } );
-    /*
-    if ( User.sign ) {
-      this.dispatch( { type: Router.SETTING_INTEREST } );
-    } else {
-      this.authorityError( 'interest' );
-    }*/
-  }
-  /**
-   * settings social page
-   */
-  social():void {
-    this.dispatch( { type: Router.SETTING_SOCIAL } );
-    /*
-    if ( User.sign ) {
-      this.dispatch( { type: Router.SETTING_SOCIAL } );
-    } else {
-      this.authorityError( 'social' );
-    }*/
-  }
-  /**
-   * settings deactivate page
-   */
-  deactivate():void {
-    this.dispatch( { type: Router.SETTING_DEACTIVATE } );
-
-    /*
-    if ( User.sign ) {
-      this.dispatch( { type: Router.SETTING_DEACTIVATE } );
-    } else {
-      this.authorityError( 'deactivate' );
-    }
-    */
-  }
   // ---------------------------------------------------
-  //  const
+  //  STATIC CONST
   // ---------------------------------------------------
   /**
    * event type NOT_FOUND
@@ -525,6 +75,20 @@ export class Router extends EventDispatcher {
    */
   static get CATEGORY():string {
     return 'routeCategory';
+  }
+  /**
+   * event type CATEGORY_AREA
+   * @return {string} CATEGORY_AREA を返します
+   */
+  static get CATEGORY_AREA() {
+    return 'routeCategoryArea';
+  }
+  /**
+   * event type CATEGORY_PREF
+   * @return {string} CATEGORY_PREF を返します
+   */
+  static get CATEGORY_PREF() {
+    return 'routeCategoryPref';
   }
   /**
    * event type SINGLE
@@ -660,21 +224,560 @@ export class Router extends EventDispatcher {
     return 'routeSettingDeactivate';
   }
   // ---------------------------------------------------
-  //  static method
+  //  STATIC METHOD
   // ---------------------------------------------------
   /**
    * instance を生成します
    * @return {Router} Router instance を返します
    */
   static factory():Router {
-
-    if ( _instance === null ) {
-
-      _instance = new Router( _symbol );
-
+    if (_instance === null) {
+      _instance = new Router(_symbol);
     }
-
     return _instance;
   }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * <p>singleton class です。<br>
+   * **routing** を管理します</p>
+   *
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {Router} Router instance を返します
+   */
+  constructor( target ) {
+    if ( _symbol !== target ) {
+      throw new Error( 'Router is static Class. not use new Router(). instead Router.factory()' );
+    }
+    if (_instance) {
+      return _instance;
+    }
+    // -------------
+    super();
+    // if ( _instance === null ) {
+    //
+    //   this.init( _symbol );
+    //   _instance = this;
+    // }
+    this.index = this.index.bind(this);
+    this.single = this.single.bind(this);
+    this.singleA = this.singleA.bind(this);
+    this.search = this.search.bind(this);
+    this.signupLogin = this.signupLogin.bind(this);
+    this.signup = this.signup.bind(this);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.password = this.password.bind(this);
+    this.mypage = this.mypage.bind(this);
+    this.notifications = this.notifications.bind(this);
+    this.settings = this.settings.bind(this);
+    // -------------
+    this._rule = {
+      '/': this.index,
+      '/category/': this.category,
+      '/area/': this.category,
+      '/p/': this.single,
+      '/a/': this.single,
+      '/search/': this.search,
+      // '/search': this.search,
+      '/signup_login/': this.signupLogin,
+      // '/signup_login': this.signupLogin,
+      '/signup/': this.signup,
+      // '/signup': this.signup,
+      '/login/': this.login,
+      // '/login': this.login,
+      '/logout/': this.logout,
+      // '/logout': this.logout,
+      '/reset_password/': this.password,
+      '/mypage/': this.mypage,
+      // '/mypage': this.mypage,
+      '/notifications/': this.notifications,
+      // '/notifications': this.notifications,
+      '/settings/': this.settings,
+      // '/settings': this.settings,
+    };
+    // -------------
+    return this;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  // init() {
+  //   this._rule = {
+  //     '/': this.index,
+  //     '/category/': this.category,
+  //     '/p/': this.single,
+  //     '/a/': this.single,
+  //     '/search/': this.search,
+  //     // '/search': this.search,
+  //     '/signup_login/': this.signupLogin,
+  //     // '/signup_login': this.signupLogin,
+  //     '/signup/': this.signup,
+  //     // '/signup': this.signup,
+  //     '/login/': this.login,
+  //     // '/login': this.login,
+  //     '/logout/': this.logout,
+  //     // '/logout': this.logout,
+  //     '/reset_password/': this.password,
+  //     '/mypage/': this.mypage,
+  //     // '/mypage': this.mypage,
+  //     '/notifications/': this.notifications,
+  //     // '/notifications': this.notifications,
+  //     '/settings/': this.settings,
+  //     // '/settings': this.settings,
+  //   };
+  // }
+  // /**
+  //  * inner methodです。呼び出しできません
+  //  * @param {Symbol} target private を担保する Symbol
+  //  */
+  // init( target ):void {
+  //
+  //   if ( _symbol !== target ) {
+  //     throw new Error( 'init is private method.' );
+  //   }
+  //
+  //   const _this = this;
+  //   /**
+  //    * routing ルール
+  //    * @type {{/: *, /category/: *, /p/: *, /a/: *, /search/: *, /search: *, /signup_login/: *, /signup_login: *, /signup/: *, /signup: *, /login/: *, /login: *, /logout/: *, /logout: *, /reset_password/: *, /mypage/: *, /mypage: *, /notifications/: *, /notifications: *, /settings/: *, /settings: *}}
+  //    * @private
+  //    */
+  //   this._rule = {
+  //     '/': _this.index.bind( _this ),
+  //     '/category/': _this.category.bind( _this ),
+  //     '/p/': _this.single.bind( _this ),
+  //     '/a/': _this.single.bind( _this ),
+  //     '/search/': _this.search.bind( _this ),
+  //     '/search': _this.search.bind( _this ),
+  //     '/signup_login/': _this.signupLogin.bind( _this ),
+  //     '/signup_login': _this.signupLogin.bind( _this ),
+  //     '/signup/': _this.signup.bind( _this ),
+  //     '/signup': _this.signup.bind( _this ),
+  //     '/login/': _this.login.bind( _this ),
+  //     '/login': _this.login.bind( _this ),
+  //     '/logout/': _this.logout.bind( _this ),
+  //     '/logout': _this.logout.bind( _this ),
+  //     '/reset_password/': _this.password.bind( _this ),
+  //     // '/reset_password/resetting': _this.passwordResetting,
+  //     '/mypage/': _this.mypage.bind( _this ),
+  //     '/mypage': _this.mypage.bind( _this ),
+  //     // '/mypage/activities': _this.activities,
+  //     '/notifications/': _this.notifications.bind( _this ),
+  //     '/notifications': _this.notifications.bind( _this ),
+  //     '/settings/': _this.settings.bind( _this ),
+  //     '/settings': _this.settings.bind( _this )
+  //     // '/settings/interest': _this.interest,
+  //     // '/settings/social': _this.social,
+  //     // '/settings/deactivate': _this.deactivate
+  //   };
+  // }
+  /**
+   * <code>location.pathname</code> から経路探索を行います
+   */
+  route() {
+    const rule = this._rule;
+    const path = Loc.path;
+    const pathLength = path.length;
+    // let found = false;
 
+    // console.log( 'route path, pathLength ', path, pathLength );
+    if (pathLength === 1) {
+      // pathname length が 1 '/'
+      this.index();
+      return;
+    }
+
+    // rule.key
+    const result = Object.keys(rule).some((key) => {
+      const keyLength = key.length;
+      if (keyLength !== 1 && path.substr(0, keyLength) === key) {
+        console.log('Router.route found', key, path);
+        rule[key].call(this);
+        return true;
+      }
+      return false;
+    });
+    // result check
+    if (!result) {
+      this.page404(path);
+    }
+    //
+    // if ( pathLength !== 1 ) {
+    //
+    //   for ( var key in rule ) {
+    //
+    //     if ( rule.hasOwnProperty( key ) ) {
+    //
+    //       var keyLength = key.length;
+    //
+    //       if ( keyLength !== 1 ) {
+    //
+    //         // not kyeLength 1,
+    //         // 通常 key
+    //         if ( path.substr( 0, keyLength ) === key ) {
+    //           // console.log( 'path substr ', path.substr( 0, keyLength ), key );
+    //           rule[ key ]();
+    //           found = true;
+    //           break;
+    //         }
+    //       }// keyLength
+    //
+    //     }// hasOwnProperty
+    //
+    //   }// for
+    //
+    // } else {
+    //
+    //   // pathname length が 1 '/'
+    //   this.index();
+    //   found = true;
+    //
+    // }
+    // // console.log( 'Router found', found, path );
+    // if ( !found ) {
+    //   // path pattern に該当しない
+    //   this.page404( path );
+    // }
+  }
+  /**
+   * 404 not found event fire
+   * @param {string} [where=''] 発火場所
+   */
+  page404(where = '') {
+    // console.log( '404 ', where );
+    this.dispatch( { type: Router.NOT_FOUND, where: where } );
+  }
+  /**
+   * 403 forbidden event fire
+   * @param {string} [where=''] 発火場所
+   */
+  authorityError(where = '') {
+    // console.warn( 'authority error ', where );
+    this.dispatch( { type: Router.AUTHORITY_ERROR, where: where } );
+  }
+  /**
+   * index (home) page
+   */
+  index() {
+    this.dispatch({ type: Router.INDEX });
+  }
+  /**
+   * category page
+   */
+  category() {
+    let [slug, slugType] = Loc.path.replace(/\/category\/|\/category/ig, '').split('/');
+    // console.log('Router.category', slug, slugType === 'area', slugType);
+    if (slugType === 'area') {
+      this.area(slugType);
+      return;
+    }
+    if (slug.indexOf('.html') !== -1) {
+      slug = '';
+    }
+    if (slug === '') {
+      slug = 'all';
+    }
+    this.dispatch({ type: Router.CATEGORY, slug, slugType });
+  }
+  area(slugType) {
+    const [encoded] = Loc.path.replace(/\/area\/|\/area/ig, '').split('/');
+    const mode = decodeURIComponent(encoded);
+    const areas = [
+      '北海道',
+      '東北',
+      '関東',
+      '北陸・甲信越',
+      '東海',
+      '関西',
+      '中国',
+      '四国',
+      '九州・沖縄',
+    ];
+    const index = areas.indexOf(encoded);
+    console.log('Router.area type', encoded, index, mode);
+    if (index === -1) {
+      // 地域
+      this.dispatch({ type: Router.CATEGORY_AREA, slugType, mode });
+    } else {
+      // 都道府県
+      this.dispatch({ type: Router.CATEGORY_PREF, slugType, mode });
+    }
+  }
+  /**
+   * single detail page
+   */
+  single():void {
+    // comment, comment reply 振り分け
+    const [articleId, comment, commentId, replyId] = Loc.path.replace('/p/', '').split('/');
+    if (!!articleId && Number.isInteger(parseInt(articleId, 10))) {
+      // article Id 存在
+      if (comment === 'comment') {
+        // in comment
+        this.comment( articleId, commentId, replyId );
+      } else {
+        // single page
+        this.dispatch( { type: Router.SINGLE, id: articleId } );
+      }
+    } else {
+      // article Id ない
+      this.page404('single');
+    }
+    // else {
+    //     let [ articleId, comment, commentId, replyId ] = Loc.path.replace( '/a/', '' ).split('/');
+    //     if ( !!articleId && Number.isInteger( parseInt( articleId, 10 ) ) ) {
+    //
+    //         // article Id 存在
+    //         if ( comment === 'comment' ) {
+    //
+    //             // in comment
+    //             this.comment( articleId, commentId, replyId );
+    //
+    //         } else {
+    //
+    //             // single page
+    //             this.dispatch( { type: Router.SINGLE, id: articleId } );
+    //
+    //         }
+    //
+    //     } else {
+    //
+    //         // article Id ない
+    //         this.page404( 'single' );
+    //     }
+    //
+    //
+    // }
+  }
+  singleA() {
+    const [articleId, comment, commentId, replyId] = Loc.path.replace( '/a/', '' ).split('/');
+    if (!!articleId && Number.isInteger(parseInt(articleId, 10))) {
+      // article Id 存在
+      if (comment === 'comment') {
+        // in comment
+        this.comment( articleId, commentId, replyId );
+      } else {
+        // single page
+        this.dispatch( { type: Router.SINGLE, id: articleId } );
+      }
+    } else {
+      // article Id ない
+      this.page404('single');
+    }
+  }
+  /**
+   * comment / comment reply page
+   * @param {string} articleId article Id 記事 Id
+   * @param {string} commentId comment Id
+   * @param {string} [replyId=undefined] comment reply Id
+   */
+  comment(articleId, commentId, replyId) {
+    // articleId 存在チェック済み
+    if (!!commentId && Number.isInteger(parseInt(commentId, 10))) {
+      if (!!replyId && Number.isInteger(parseInt(replyId, 10))) {
+        // reply Id あり, comment reply page
+        this.dispatch( { type: Router.COMMENT_REPLY, article: articleId, comment: commentId, reply: replyId } );
+      } else {
+        // reply Id なし, comment page
+        this.dispatch( { type: Router.COMMENT, article: articleId, comment: commentId, reply: replyId } );
+      }
+    } else {
+      // comment Id がない
+      this.page404( 'comment' );
+    }
+  }
+  /**
+   * search 検索 page
+   */
+  search():void {
+    const [keyword] = Loc.path.replace( /\/search\/|\/search/ig, '' ).split('/');
+
+    if (!!keyword) {
+      this.dispatch( { type: Router.SEARCH, keyword: keyword } );
+    } else {
+      // keyword がない
+      this.dispatch( { type: Router.SEARCH, keyword: '' } );
+      // this.page404( 'search' );
+    }
+  }
+  /**
+   * signup / signup interest / signup account page
+   */
+  signup() {
+    /*
+    let [ option ] = Loc.path.replace( '/signup/', '' ).split('/');
+
+    if ( option === 'account' ) {
+
+      // /signup/account/
+      this.dispatch( { type: Router.SIGNUP_ACCOUNT } );
+
+    } else if ( option === 'interest' ) {
+
+      // /signup/interest/
+      this.dispatch( { type: Router.SIGNUP_INTEREST } );
+
+    } else {
+
+      // /signup/
+      this.dispatch( { type: Router.SIGNUP } );
+
+    }
+    */
+
+    // console.log( 'signup page in fired' );
+    // URL 遷移しない
+    // 1 page コンテンツ
+    this.dispatch( { type: Router.SIGNUP } );
+
+  }
+  /**
+   * signup_login URL
+   */
+  signupLogin() {
+    this.dispatch({ type: Router.SIGNUP_LOGIN });
+  }
+  /**
+   * login page
+   */
+  login() {
+    this.dispatch({ type: Router.LOGIN });
+  }
+  /**
+   * logout page
+   */
+  logout() {
+    this.dispatch({ type: Router.LOGOUT });
+  }
+  /**
+   * reset_password page
+   */
+  password() {
+    const [option] = Loc.path.replace( /\/reset_password\/|\/reset_password/ig, '' ).split('/');
+
+    if (option === 'resetting') {
+      this.passwordResetting();
+    } else {
+      this.dispatch({ type: Router.RESET_PASSWORD });
+    }
+  }
+  /**
+   * reset_password resetting page
+   */
+  passwordResetting() {
+    this.dispatch({ type: Router.RESET_PASSWORD_RESETTING });
+  }
+  /**
+   * mypage
+   */
+  mypage() {
+    const [activities] = Loc.path.replace( /\/mypage\/|\/mypage/ig, '' ).split('/');
+    if ( activities === 'activities' ) {
+      this.activities();
+    } else {
+      this.dispatch( { type: Router.MYPAGE } );
+    }
+  }
+  /**
+   * mypage activities page
+   */
+  activities() {
+    this.dispatch({ type: Router.MYPAGE_ACTIVITIES });
+    /*
+    if ( User.sign ) {
+
+      this.dispatch( { type: Router.MYPAGE_ACTIVITIES } );
+
+    } else {
+
+      this.authorityError( 'activities' );
+
+    }
+    */
+  }
+  /**
+   * notifications page
+   */
+  notifications() {
+    this.dispatch( { type: Router.NOTIFICATIONS } );
+    /*
+    if ( User.sign ) {
+
+      this.dispatch( { type: Router.NOTIFICATIONS } );
+
+    } else {
+
+      this.authorityError( 'notifications' );
+
+    }*/
+  }
+  /**
+   * settings page
+   */
+  settings() {
+    const [option] = Loc.path.replace( /\/settings\/|\/settings/ig, '' ).split('/');
+    // console.log( 'settings option ', option );
+    switch (option) {
+      case 'interest':
+        this.interest();
+        break;
+
+      case 'social':
+        this.social();
+        break;
+
+      case 'deactivate':
+        this.deactivate();
+        break;
+
+      default:
+        /*
+        if ( User.sign ) {
+          this.dispatch( { type: Router.SETTING } );
+        } else {
+          this.authorityError( 'setting' );
+        }
+        */
+        this.dispatch({ type: Router.SETTING });
+        break;
+    }
+  }
+  /**
+   * settings interest page
+   */
+  interest() {
+    this.dispatch({ type: Router.SETTING_INTEREST });
+    /*
+    if ( User.sign ) {
+      this.dispatch( { type: Router.SETTING_INTEREST } );
+    } else {
+      this.authorityError( 'interest' );
+    }*/
+  }
+  /**
+   * settings social page
+   */
+  social() {
+    this.dispatch({ type: Router.SETTING_SOCIAL });
+    /*
+    if ( User.sign ) {
+      this.dispatch( { type: Router.SETTING_SOCIAL } );
+    } else {
+      this.authorityError( 'social' );
+    }*/
+  }
+  /**
+   * settings deactivate page
+   */
+  deactivate() {
+    this.dispatch({ type: Router.SETTING_DEACTIVATE });
+    /*
+    if ( User.sign ) {
+      this.dispatch( { type: Router.SETTING_DEACTIVATE } );
+    } else {
+      this.authorityError( 'deactivate' );
+    }
+    */
+  }
 }

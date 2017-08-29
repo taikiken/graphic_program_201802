@@ -15,27 +15,27 @@ import {Types} from './Types';
 import {User} from './../app/User';
 import {ApiDae} from './../app/ApiDae';
 
-let _symbol = Symbol();
+// const _symbol = Symbol('');
 
 /**
  * <h3>サーバーリクエストAPIを管理します</h3>
  * 全て static
  */
 export class Api {
-  /**
-   * サーバーリクエストAPI
-   * static class です、instance を作成できません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Api is static Class. not use new Api().' );
-
-    }
-
-  }
+  // /**
+  //  * サーバーリクエストAPI
+  //  * static class です、instance を作成できません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Api is static Class. not use new Api().' );
+  //
+  //   }
+  //
+  // }
   /**
    * <p>/api/ 前 domain を再生成します<br>
    * test, develop 切り替えに使用します</p>
@@ -182,6 +182,24 @@ export class Api {
 
     return ApiDae.api( 'category' );
 
+  }
+  // ----------------------------------
+  // 地域別記事
+  /**
+   * 地域別記事: 地域 API を取得します
+   * @returns {Types} 地域 API を Types instance で取得します
+   * @since 2017-08-29
+   */
+  static area() {
+    return ApiDae.api('area');
+  }
+  /**
+   * 地域別記事: 都道府県 API を取得します
+   * @returns {Types} 都道府県 API を Types instance で取得します
+   * @since 2017-08-29
+   */
+  static pref() {
+    return ApiDae.api('pref');
   }
   // ----------------------------------
   // 検索
