@@ -9,3 +9,18 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+import { OffsetAuth } from '../OffsetAuth';
+import { Length } from '../../app/const/Length';
+import { Api } from '../../net/Api';
+import { User } from '../../app/User';
+
+
+export class AreaAuth extends OffsetAuth {
+  constructor(area = '', resolve = null, reject = null, offset = 0, length = Length.archive) {
+    super(User.token, Api.area(), resolve, reject, offset, length);
+    this.area = area;
+  }
+  get url() {
+    return `${this._url}/${this.area}?offset=${this.offset}&length=${this.length}`;
+  }
+}

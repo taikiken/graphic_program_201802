@@ -9,3 +9,16 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+import { Offset } from '../Offset';
+import { Length } from '../../app/const/Length';
+import { Api } from '../../net/Api';
+
+export class Pref extends Offset {
+  constructor(area = '', resolve = null, reject = null, offset = 0, length = Length.archive) {
+    super(Api.pref(), resolve, reject, offset, length);
+    this.area = area;
+  }
+  get url() {
+    return `${this._url}/${this.area}?offset=${this.offset}&length=${this.length}`;
+  }
+}
