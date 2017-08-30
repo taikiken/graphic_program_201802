@@ -35,6 +35,7 @@ SetEnvIf Remote_Addr "210\.254\.134\.36" allowed_ip_addresses
 SetEnvIf Remote_Addr "153\.156\.28\.183" allowed_ip_addresses
 SetEnvIf Remote_Addr "153\.142\.158\.5" allowed_ip_addresses
 SetEnvIf Remote_Addr "118\.238\.224\.106" allowed_ip_addresses
+SetEnvIf Remote_Addr "118\.240\.191\.245" allowed_ip_addresses
 
 Order Deny,Allow
 Deny from All
