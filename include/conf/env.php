@@ -110,7 +110,15 @@ if(preg_match("/undotsushin/",$servername)){
 
 		$LSCMS="legendsstadium2";
 
-		$bucket="dev-img-sportsbull-jp";
+    // 大学野球
+    if (preg_match("/big6tv/", $requesturi) ||
+      preg_match("/ub_kansai/",$requesturi) ||
+      preg_match("/ub_kansaibig6/",$requesturi) ||
+      preg_match("/ub_tohto/",$requesturi)) {
+      $bucket="dev-ublive.sportsbull.jp";
+    }else{
+      $bucket="dev-img-sportsbull-jp";
+    }
 
 	}elseif(preg_match("/stg/",$servername)){
 
