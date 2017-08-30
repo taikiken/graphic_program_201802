@@ -43,24 +43,26 @@ $app->group('/{slug:big6tv}', function () use ($app) {
 
   // game
   // ==============================
-  $this->get('/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
+  $this->get('/2017a/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
 
     // パスからjson決めるソン
     $url = explode('/', $_SERVER['REQUEST_URI']);
     $league = $url[1];
+    $season = $url[2];
     $gameid = $args['gameid'];
     $arr = [
       'json',
       $league,
-      '2017s', // 今はシーズン固定にしちゃってる
+      $season,
       'game_info_' . $gameid . '.json',
     ];
     $s3key = implode('/', $arr);
-    $bucketName = "dev-ublive.sportsbull.jp";
 
     $S3Module = new S3Module;
-    $json = $S3Module->getUrl($s3key, $bucketName);
+    global $bucket;
+    $json = $S3Module->getUrl($s3key, $bucket);
 
+    // jsonからタイトルつくる
     $team_names = [];
     $visitor = '';
     $home = '';
@@ -80,10 +82,15 @@ $app->group('/{slug:big6tv}', function () use ($app) {
       $dateD = $json->gameinfo->dateD;
       $weekday = $json->gameinfo->weekday;
     }
+    // シーズン日本語化
+    $season_array = str_split($season, 4);
+    $year = $season_array[0];
+    $season_jp = $season_array[1] == 's' ? '春' : '秋';
 
     $args['page'] = $app->model->set(array(
       'title' => "{$visitor} vs {$home} - {$dateY}年{$dateM}月{$dateD}日（{$weekday}）",
       'gameid' => $gameid,
+      'season' => $year . $season_jp,
     ));
 
     return $this->renderer->render($response, 'big6tv/game.php', $args);
