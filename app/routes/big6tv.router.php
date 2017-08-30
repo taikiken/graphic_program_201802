@@ -60,7 +60,7 @@ $app->group('/{slug:big6tv}', function () use ($app) {
 
     $S3Module = new S3Module;
     global $bucket;
-    $json = $S3Module->getUrl($s3key, $bucket);
+    $json = $S3Module->getUrl($s3key);
 
     // jsonからタイトルつくる
     $team_names = [];
