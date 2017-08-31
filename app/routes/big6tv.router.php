@@ -1,7 +1,5 @@
 <?php
 
-use Aws\S3\S3Client;
-
 // big6tv
 // ==============================
 $app->group('/{slug:big6tv}', function () use ($app) {

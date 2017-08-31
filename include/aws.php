@@ -142,7 +142,6 @@ class S3Module {
 	private function getS3ClientInstance($keyId, $secretKey, $region, $sdkVersion = 'latest') {
 		
 		global $bucket;
-		global $app_env;
 
 		// 設定配列を作っています。S3オブジェクト生成用のオプションです。
 		$s3Setting = [
@@ -155,7 +154,7 @@ class S3Module {
 			'region' => $region,
 			'version' => $sdkVersion,
 		];
-    if (@$app_env == 'local') {
+    if ( UT_ENV == 'LOCAL') {
       $s3Setting['credentials'] = [
         'key' => $keyId,
         'secret' => $secretKey,

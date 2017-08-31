@@ -2,8 +2,6 @@
 
 // stats
 // ==============================
-use Aws\S3\S3Client;
-
 $app->group('/stats', function () use($app) {
 
 
