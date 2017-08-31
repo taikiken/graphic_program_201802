@@ -16,7 +16,7 @@ if(isset($_POST["p_usr"])){
 	$usr=mod_HTML($_POST["p_usr"]);
 	$pwd=mod_HTML($_POST["p_pwd"]);
 
-	$sql="select id,usr,m,pwd,email,repo,permission,systems,is_external from authentic where usr='".addslashes($usr)."'";
+	$sql="select id,usr,m,pwd,email,repo,permission,systems,is_external,u_media from authentic where usr='".addslashes($usr)."'";
 	$o->query($sql);
 	$f=$o->fetch_array();
 
@@ -89,6 +89,14 @@ if(isset($_POST["p_usr"])){
         if(false === empty($f['is_external']) && $f['is_external'] > 0) {
             setSorC('is_external',1);
         } else {
+            setSorC('is_external',0);
+        }
+        if(false === empty($f['u_media']))
+        {
+            setSorC('u_media', $f['u_media']);
+        }
+        else
+        {
             setSorC('is_external',0);
         }
 
