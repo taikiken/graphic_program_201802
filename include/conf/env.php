@@ -59,7 +59,7 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_kansai/",$requesturi) ||
       preg_match("/ub_kansaibig6/",$requesturi) ||
       preg_match("/ub_tohto/",$requesturi)) {
-      $bucket="stg-ublive.sportsbull.jp";
+      $bucket="dev-ublive.sportsbull.jp";
     }else{
       $bucket="img-sportsbull-jp";
     }
@@ -237,6 +237,7 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
     preg_match("/ub_kansaibig6/",$requesturi) ||
     preg_match("/ub_tohto/",$requesturi)) {
     $bucket="dev-ublive.sportsbull.jp";
+    $app_env='local';
   }
 endif;
 
