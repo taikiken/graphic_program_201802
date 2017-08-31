@@ -49,7 +49,7 @@
 
 
       <?php if ( $page['category']['slug'] === 'big6tv' ) : ?>
-        <?php include_once __DIR__.'/../../../public/big6tv/category/big6tv/_index.html'; ?>
+        <?php include_once __DIR__.'/../../../public/big6tv/category/index.html'; ?>
       <?php endif; ?>
 
 
