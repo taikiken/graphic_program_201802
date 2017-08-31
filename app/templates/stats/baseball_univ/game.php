@@ -11,13 +11,13 @@
         <script src="https://sportsbull.jp/assets/js/libs/vendor.react.js"></script>
         <script src="https://sportsbull.jp/assets/js/bundle/main.bundle.js"></script>
         <meta name="keywords" content="">
-        <meta name="description" content="">
+        <meta name="description" content="<?php echo $page['title']; ?>季リーグ　速報 & データ　見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <meta property="fb:app_id" content="842032129256034">
         <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
         <meta property="og:type" content="article">
         <meta property="og:title" content="<?php echo $page['title']; ?>季リーグ | 速報 & データ | SPORTS BULL">
         <meta property="og:image" content="/stats/assets/univbb/img/<?php echo $page['og_image']; ?>.jpg">
-        <meta property="og:url" content="https://sportsbull.jp/<?php echo $page['request_uri']; ?>">
+        <meta property="og:url" content="https://sportsbull.jp<?php echo $page['request_uri']; ?>">
         <meta property="og:description" content="<?php echo $page['title']; ?>季リーグ　速報 & データ　見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <meta property="og:locale" content="ja_JP" />
         <!-- twitter card -->
@@ -25,9 +25,9 @@
         <meta name="twitter:site" content="@sportsbull_jp">
         <meta name="twitter:title" content="<?php echo $page['title']; ?>季リーグ | 速報 & データ | SPORTS BULL">
         <meta name="twitter:image" content="/stats/assets/univbb/img/<?php echo $page['og_image']; ?>.jpg">
-        <meta name="twitter:url" content="https://sportsbull.jp/<?php echo $page['request_uri']; ?>">
+        <meta name="twitter:url" content="https://sportsbull.jp<?php echo $page['request_uri']; ?>">
         <meta name="twitter:description" content="<?php echo $page['title']; ?>季リーグ　速報 & データ　見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
-        <link rel="canonical" href="https://sportsbull.jp/<?php echo $page['request_uri']; ?>">
+        <link rel="canonical" href="https://sportsbull.jp<?php echo $page['request_uri']; ?>">
         <link rel="apple-touch-icon" sizes="180x180" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
         <link rel="apple-touch-icon-precomposed" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
         <link rel="icon" sizes="192x192" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
