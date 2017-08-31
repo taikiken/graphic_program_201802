@@ -1,0 +1,125 @@
+@import "../../../../../scss_sp/asset";
+@import "../sprite";
+
+// Theme Area
+//
+// design module Motorsports theme
+//
+// Styleguide 2.17.0
+
+.whole.area {
+  //.special-summary
+  .special-summary {
+    padding: perCalc(40, 750) 0;
+
+    //.special-summary-heading
+    &-heading {
+      text-align: center;
+      font-weight: bold;
+      font-size: (32/2)+px;
+
+      &:before {
+        content: "";
+        display: inline-block;
+        width: (24/2)+px;
+        height: (32/2)+px;
+        margin-right: (12/2)+px;
+        background: url(/assets/sp/images/area/icon-heading.png) 0 0 no-repeat;
+        background-size: (24/2)+px;
+        @include hide-text;
+      }
+    }
+  }
+
+
+
+  //.guideboard-heading
+  .guideboard-heading {
+    background-color: #cc141d;
+    text-align: center;
+
+    //.guideboard-heading-title
+    &-title {
+      display: inline-block;
+      line-height: 30px;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(24/2);
+
+      &:before {
+        content: "";
+        display: inline-block;
+        width: (30/2)+px;
+        height: (30/2)+px;
+        margin-right: (12/2)+px;
+        background: url(/assets/sp/images/area/icon-heading_category.png) 0 0 no-repeat;
+        background-size: (30/2)+px;
+        vertical-align: middle;
+        @include hide-text;
+      }
+    }
+  } //.guideboard-heading
+
+
+
+
+  //.guideboard__list
+  .guideboard__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+
+    //.guideboard__list__item
+    &__item {
+      width: 50%;
+      border-top: 1px solid #fff;
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        border-top: none;
+      }
+
+      &:nth-child(2n) {
+        border-left: 1px solid #fff;
+      }
+    }
+
+    [class^="guideboard__list__link--"] {
+      position: relative;
+      // display: flex;
+      // align-items: center;
+      // flex-direction: column;
+      display: block;
+      height: 100%;
+      background-color: #f5f5f5;
+      padding: (16/2)+px (40/2)+px (16/2)+px (16/2)+px;
+      vertical-align: middle;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: (30/2)+px;
+        width: (12/2)+px;
+        height: (12/2)+px;
+        border-top: 2px solid $highlight-color;
+        border-right: 2px solid $highlight-color;
+        transform: rotate(45deg) translateY(-50%);
+      }
+
+      h3 {
+        color: $highlight-color;
+        font-weight: bold;
+        font-size: (28/2)+px;
+      }
+
+      p {
+        color: #333;
+        font-size: (20/2)+px;
+      }
+    }
+  } //.guideboard__list
+
+
+} //.whole.area
