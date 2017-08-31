@@ -31,13 +31,15 @@ SetEnvIf Remote_Addr "153\.156\.83\.31" allowed_ip_addresses
 # CCI
 SetEnvIf Remote_Addr "210\.254\.134\.36" allowed_ip_addresses
 
+# HC
+SetEnvIf Remote_Addr "153\.156\.28\.183" allowed_ip_addresses
+SetEnvIf Remote_Addr "153\.142\.158\.5" allowed_ip_addresses
+SetEnvIf Remote_Addr "118\.238\.224\.106" allowed_ip_addresses
+SetEnvIf Remote_Addr "118\.240\.191\.245" allowed_ip_addresses
 
 Order Deny,Allow
 Deny from All
 Allow from env=allowed_ip_addresses
-
-redirect /prg_img/ https://dev-img.sportsbull.jp/
-redirect /users/ https://dev-img.sportsbull.jp/users/
 
 # auth2. 上記以外はベーシック認証
 AuthType Basic
@@ -53,6 +55,10 @@ Satisfy Any
     Header set Access-Control-Allow-Origin https://imasdk.googleapis.com
     Header set Access-Control-Allow-Credentials true
 </IfModule>
+
+
+redirect /prg_img/ https://dev-img.sportsbull.jp/
+redirect /users/ https://dev-img.sportsbull.jp/users/
 
 
 php_flag magic_quotes_gpc off

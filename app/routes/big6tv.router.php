@@ -43,68 +43,54 @@ $app->group('/{slug:big6tv}', function () use ($app) {
 
   // game
   // ==============================
-  $this->get('/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
+  $this->get('/2017a/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
 
     // パスからjson決めるソン
     $url = explode('/', $_SERVER['REQUEST_URI']);
     $league = $url[1];
+    $season = $url[2];
     $gameid = $args['gameid'];
-//    $arr = [
-//      'json',
-//      $league,
-//      '2017s', // 今はシーズン固定にしちゃってる
-//      'game_info_' . $gameid . '.json',
-//    ];
-//    $s3key = implode('/', $arr);
-//
-//    // AWSのキー名
-//    $keyId = 'AKIAJ7OMTZRU6PGV6GZA';
-//    // シークレットキー
-//    $secretKey = 'T5fLQ2MKuHLaC+5FSK2iCQWB7MDHqthnBlOMs6U5';
-//    // region 東京region指定
-//    $region = 'ap-northeast-1';
-//    $version = 'latest';
-//    $bucket = 'dev-ublive.sportsbull.jp';
-////
-//    $s3Setting = [
-//      'credentials' => [
-//        's3key' => $keyId,
-//        'secret' => $secretKey,
-//      ],
-//      'region' => $region,
-//      'version' => $version,
-//    ];
-//
-//    $s3Object = S3Client::factory($s3Setting);
-//    $json = $s3Object->getObjectUrl($bucket, $s3key);
+    $arr = [
+      'json',
+      $league,
+      $season,
+      'game_info_' . $gameid . '.json',
+    ];
+    $s3key = implode('/', $arr);
 
-    // こっち使えないかなー
-//      $S3Module = new S3Module;
-//      $json = $S3Module->getUrl($bucket, $s3key);
+    $S3Module = new S3Module;
+    global $bucket;
+    $json = $S3Module->getUrl($s3key);
 
-//    if (!@file_get_contents($json, NULL, NULL, 0, 1)) :
-//      // 404飛ばしたい
-//      // ------------------------------
-//      $args['page'] = $app->model->set(array(
-//        'title' => '404 Not Found',
-//        'og_title' => '404 Not Found',
-//        'template' => 404,
-//      ));
-
-//      $args['request'] = $request;
-//      $args['response'] = $response;
-//
-//      if ($app->model->property('ua') === 'desktop') :
-//        return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
-//      else :
-//        return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
-//      endif;
-//    endif;
-
-//      $json = json_decode(file_get_contents($json));
+    // jsonからタイトルつくる
+    $team_names = [];
+    $visitor = '';
+    $home = '';
+    $dateY = '';
+    $dateM = '';
+    $dateD = '';
+    $weekday = '';
+    if (!empty(file_get_contents($json, false, null, 0, 1))){
+      $json = json_decode(file_get_contents($json));
+      foreach ($json->team as $team) {
+        $team_names[] = $team->teaminfo->name;
+      }
+      $visitor = $team_names[0];
+      $home = $team_names[1];
+      $dateY = $json->gameinfo->dateY;
+      $dateM = $json->gameinfo->dateM;
+      $dateD = $json->gameinfo->dateD;
+      $weekday = $json->gameinfo->weekday;
+    }
+    // シーズン日本語化
+    $season_array = str_split($season, 4);
+    $year = $season_array[0];
+    $season_jp = $season_array[1] == 's' ? '春' : '秋';
 
     $args['page'] = $app->model->set(array(
+      'title' => "{$visitor} vs {$home} - {$dateY}年{$dateM}月{$dateD}日（{$weekday}）",
       'gameid' => $gameid,
+      'season' => $year . $season_jp,
     ));
 
     return $this->renderer->render($response, 'big6tv/game.php', $args);

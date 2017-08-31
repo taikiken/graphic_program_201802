@@ -114,25 +114,25 @@ class S3Module {
 		$result = $s3Object->getObject($dispInfo);
 		return $result;
 	}
-//
-//	/**
-//	* S3からデータを取得します。
-//	* 引数にはファイル名を設定してください。
-//	*/
-//	public function getUrl($s3FileName) {
-//
-//		// パスのチェック　ファイルパスが空ではないか？
-//		if (empty($s3FileName)) {
-//			throw new Exception('ファイル削除::S3ファイル名が見つかりません。');
-//		}
-//
-//		// s3オブジェクト生成
-//		$s3Object = $this->getS3ClientInstance($this->keyId, $this->secretKey, $this->region);
-//
-//		// urlを取得する。
-//		$result = $s3Object->getObjectUrl($this->bucketName, $s3FileName);
-//		return $result;
-//	}
+
+	/**
+	* S3からURLを取得します。
+	* 引数にはファイル名を設定してください。
+	*/
+	public function getUrl($s3FileName) {
+
+		// パスのチェック　ファイルパスが空ではないか？
+		if (empty($s3FileName)) {
+			throw new Exception('ファイル削除::S3ファイル名が見つかりません。');
+		}
+
+		// s3オブジェクト生成
+		$s3Object = $this->getS3ClientInstance($this->keyId, $this->secretKey, $this->region);
+
+		// urlを取得する。
+		$result = $s3Object->getObjectUrl($this->bucketName, $s3FileName);
+		return $result;
+	}
 
 	/**
 	* インスタンスを取得する。
@@ -142,7 +142,8 @@ class S3Module {
 	private function getS3ClientInstance($keyId, $secretKey, $region, $sdkVersion = 'latest') {
 		
 		global $bucket;
-		
+		global $app_env;
+
 		// 設定配列を作っています。S3オブジェクト生成用のオプションです。
 		$s3Setting = [
 /*
@@ -154,6 +155,12 @@ class S3Module {
 			'region' => $region,
 			'version' => $sdkVersion,
 		];
+    if (@$app_env == 'local') {
+      $s3Setting['credentials'] = [
+        'key' => $keyId,
+        'secret' => $secretKey,
+      ];
+    }
 		$this->bucketName=$bucket;
 
 		// オブジェクト生成して戻す。もし、設定が間違っていたら例外がでます。

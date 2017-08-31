@@ -7,7 +7,7 @@
         <script src="https://sportsbull.jp/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
         <script src="https://sportsbull.jp/assets/js/app_divide.bundle.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>ヘッダー・フッターテンプレート | SPORTS BULL</title>
+        <title><?php echo $page['title']; ?>季リーグ | 速報 & データ | スポーツブル / SPORTS BULL</title>
         <script src="https://sportsbull.jp/assets/js/libs/vendor.react.js"></script>
         <script src="https://sportsbull.jp/assets/js/bundle/main.bundle.js"></script>
         <meta name="keywords" content="">
@@ -15,19 +15,19 @@
         <meta property="fb:app_id" content="842032129256034">
         <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
         <meta property="og:type" content="article">
-        <meta property="og:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-        <meta property="og:image" content="/big6tv/img/<?php echo $page['og_image']; ?>.jpg">
-        <meta property="og:url" content="">
-        <meta property="og:description" content="">
+        <meta property="og:title" content="<?php echo $page['title']; ?>季リーグ | 速報 & データ | SPORTS BULL">
+        <meta property="og:image" content="/stats/assets/univbb/img/<?php echo $page['og_image']; ?>.jpg">
+        <meta property="og:url" content="https://sportsbull.jp/<?php echo $page['request_uri']; ?>">
+        <meta property="og:description" content="<?php echo $page['title']; ?>季リーグ　速報 & データ　見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <meta property="og:locale" content="ja_JP" />
         <!-- twitter card -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@sportsbull_jp">
-        <meta name="twitter:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-        <meta name="twitter:image" content="/big6tv/img/<?php echo $page['og_image']; ?>.jpg">
-        <meta name="twitter:url" content="">
-        <meta name="twitter:description" content="">
-        <link rel="canonical" href="">
+        <meta name="twitter:title" content="<?php echo $page['title']; ?>季リーグ | 速報 & データ | SPORTS BULL">
+        <meta name="twitter:image" content="/stats/assets/univbb/img/<?php echo $page['og_image']; ?>.jpg">
+        <meta name="twitter:url" content="https://sportsbull.jp/<?php echo $page['request_uri']; ?>">
+        <meta name="twitter:description" content="<?php echo $page['title']; ?>季リーグ　速報 & データ　見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
+        <link rel="canonical" href="https://sportsbull.jp/<?php echo $page['request_uri']; ?>">
         <link rel="apple-touch-icon" sizes="180x180" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
         <link rel="apple-touch-icon-precomposed" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
         <link rel="icon" sizes="192x192" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
@@ -38,7 +38,7 @@
         <!-- / 表示確認用 -->
         <link rel="stylesheet" href="https://sportsbull.jp/assets/css/basic.css" media="only screen and (min-width: 769px)">
         <link rel="stylesheet" href="https://sportsbull.jp/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
-        <link rel="stylesheet" href="/big6tv/css/style.css">
+        <link rel="stylesheet" href="/stats/assets/univbb/css/style.css">
         <!-- optimize -->
         <style>
             .async-hide {
@@ -172,17 +172,17 @@
                         <div class="stats-top-image">
                             <picture>
                                 <source media="(max-width: 768px)" srcset="/big6tv/img/SP_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg">
-                                <img src="/big6tv/img/PC_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg" alt="<?php echo $page['stats_top_alt']; ?>"> </picture>
+                                <img src="/stats/assets/univbb/img/PC_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg" alt="<?php echo $page['league_name']; ?> 速報&データ"> </picture>
                         </div>
                         <ul class="stats-module-header">
-                            <li>
-                                <a href="/stats/<?php echo $page['league']; ?>/">試合結果</a>
-                            </li>
                             <li class="active">
-                                <a href="/stats/<?php echo $page['league']; ?>/standing/">順位表</a>
+                                <a href="/stats/<?php echo $page['league']; ?>/<?php echo $page['season']; ?>/">'<?php echo $page['short_season']; ?> 試合結果</a>
+                            </li>
+                            <li>
+                                <a href="/stats/<?php echo $page['league']; ?>/<?php echo $page['season']; ?>/standing/">'<?php echo $page['short_season']; ?> 順位表</a>
                             </li>
                         </ul>
-                        <div id="univbb-widget2" data-type="others" data-league="<?php echo $page['league']; ?>" data-season="2017s" data-id="<?php echo $page['game_id']; ?>"></div>
+                        <div id="univbb-widget2" data-type="others" data-league="<?php echo $page['league']; ?>" data-season="<?php echo $page['season']; ?>" data-id="<?php echo $page['game_id']; ?>"></div>
                         <script src="/stats/assets/univbb/js/Widget_univbb_2.js"></script>
                     </section>
                     <!-- /.main-sec -->
@@ -243,17 +243,35 @@
             <footer id="footer-container" class="foot-sec show-for-large">
                 <div class="foot-sec-inner">
                     <nav class="foot-breadCrumb">
-                        <ol itemscope itemtype="http://schema.org/breadCrumbList">
-                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                        <ol itemscope="" itemtype="http://schema.org/breadCrumbList">
+                            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                                 <a itemprop="item" href="/">
                                     <span itemprop="name">TOP</span>
-                                    <meta itemprop="position" content="1" />
+                                    <meta itemprop="position" content="1">
                                 </a>
                             </li>
-                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="./">
-                                    <span itemprop="name">ページタイトル</span>
-                                    <meta itemprop="position" content="2" />
+                            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="/stats/">
+                                    <span itemprop="name">速報&amp;データ</span>
+                                    <meta itemprop="position" content="2">
+                                </a>
+                            </li>
+                            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="/stats/<?php echo $page['league']; ?>/">
+                                    <span itemprop="name"><?php echo $page['league_name']; ?></span>
+                                    <meta itemprop="position" content="3">
+                                </a>
+                            </li>
+                            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="/stats/<?php echo $page['league']; ?>/<?php echo $page['season']; ?>/">
+                                    <span itemprop="name"><?php echo $page['season_name']; ?>季リーグ</span>
+                                    <meta itemprop="position" content="4">
+                                </a>
+                            </li>
+                            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="">
+                                    <span itemprop="name"><?php echo $page['team_and_date']; ?></span>
+                                    <meta itemprop="position" content="5">
                                 </a>
                             </li>
                         </ol>
