@@ -171,9 +171,57 @@
                     <section class="main-sec">
                         <div class="stats-top-image">
                             <picture>
-                                <source media="(max-width: 768px)" srcset="/big6tv/img/SP_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg">
+                                <source media="(max-width: 768px)" srcset="/stats/assets/univbb/img/SP_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg">
                                 <img src="/stats/assets/univbb/img/PC_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg" alt="<?php echo $page['league_name']; ?> 速報&データ"> </picture>
                         </div>
+
+                        <div class="ub-ad-banner ub-ad-innerTop-banner">
+                            <!-- /531683568/u-baseball-ad/ub-pc-big-banner -->
+                            <script>
+                            googletag.cmd.push(function() {
+                                googletag.defineSlot('/531683568/u-baseball-ad/ub-pc-big-banner', [728, 90], 'div-gpt-ad-1504175244500-0').addService(googletag.pubads());
+                                googletag.pubads().enableSingleRequest();
+                                googletag.enableServices();
+                            });
+                            </script>
+                            <div id='div-gpt-ad-1504175244500-0' style='height:90px; width:728px;' class="pc-only">
+                            <script>
+                            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504175244500-0'); });
+                            </script>
+                            </div>
+                            <!-- // /531683568/u-baseball-ad/ub-pc-big-banner -->
+
+                            <!-- /531683568/u-baseball-ad/ub-sp-big-banner -->
+                            <script>
+                            googletag.cmd.push(function() {
+                                googletag.defineSlot('/531683568/u-baseball-ad/ub-sp-big-banner', [320, 50], 'div-gpt-ad-1504175310066-0').addService(googletag.pubads());
+                                googletag.pubads().enableSingleRequest();
+                                googletag.enableServices();
+                            });
+                            </script>
+                            <div id='div-gpt-ad-1504175310066-0' class="sp-only">
+                            <script>
+                            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504175310066-0'); });
+                            </script>
+                            </div>
+                            <!-- // /531683568/u-baseball-ad/ub-sp-big-banner -->
+
+                            <!-- /531683568/u-baseball-ad/ub-app-big-banner -->
+                            <script>
+                            googletag.cmd.push(function() {
+                                googletag.defineSlot('/531683568/u-baseball-ad/ub-app-big-banner', [320, 50], 'div-gpt-ad-1504175422074-0').addService(googletag.pubads());
+                                googletag.pubads().enableSingleRequest();
+                                googletag.enableServices();
+                            });
+                            </script>
+                            <div id='div-gpt-ad-1504175422074-0' class="app-only">
+                            <script>
+                            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504175422074-0'); });
+                            </script>
+                            </div>
+                            <!-- // /531683568/u-baseball-ad/ub-app-big-banner -->
+                        </div>
+
                         <ul class="stats-module-header">
                             <li class="active">
                                 <a href="/stats/<?php echo $page['league']; ?>/<?php echo $page['season']; ?>/">'<?php echo $page['short_season']; ?> 試合結果</a>
@@ -184,6 +232,39 @@
                         </ul>
                         <div id="univbb-widget2" data-type="others" data-league="<?php echo $page['league']; ?>" data-season="<?php echo $page['season']; ?>" data-id="<?php echo $page['game_id']; ?>"></div>
                         <script src="/stats/assets/univbb/js/Widget_univbb_2.js"></script>
+
+                        <div class="ub-ad-banner ub-ad-footer-banner">
+                            <!-- /531683568/u-baseball-ad/ub-footer-rectangle1 -->
+                            <script>
+                            googletag.cmd.push(function() {
+                                googletag.defineSlot('/531683568/u-baseball-ad/ub-footer-rectangle1', [300, 250], 'div-gpt-ad-1504175532818-0').addService(googletag.pubads());
+                                googletag.pubads().enableSingleRequest();
+                                googletag.enableServices();
+                            });
+                            </script>
+                            <div id='div-gpt-ad-1504175532818-0' class="pc-only">
+                            <script>
+                            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504175532818-0'); });
+                            </script>
+                            </div>
+                            <!-- // /531683568/u-baseball-ad/ub-footer-rectangle1 -->
+
+                            <!-- /531683568/u-baseball-ad/ub-footer-rectangle2 -->
+                            <script>
+                            googletag.cmd.push(function() {
+                                googletag.defineSlot('/531683568/u-baseball-ad/ub-footer-rectangle2', [300, 250], 'div-gpt-ad-1504175735044-0').addService(googletag.pubads());
+                                googletag.pubads().enableSingleRequest();
+                                googletag.enableServices();
+                            });
+                            </script>
+                            <div id='div-gpt-ad-1504175735044-0' class="pc-only">
+                            <script>
+                            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504175735044-0'); });
+                            </script>
+                            </div>
+                            <!-- // /531683568/u-baseball-ad/ub-footer-rectangle2 -->
+                        </div>
+
                     </section>
                     <!-- /.main-sec -->
                     <section class="side-sec show-for-large">
@@ -463,6 +544,21 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-        <script src="https://sportsbull.jp/assets/js/global.bundle.js"></script>
+        <script src="https://sportsbull.jp/assets/js/baseball.bundle.js?v=<?php echo $page['version']; ?>"></script>
+        <script src="https://sportsbull.jp/assets/js/global.bundle.js?v=<?php echo $page['version']; ?>"></script>
+        <script src="https://code.jquery.com/jquery-git.min.js"></script>
+        <script>
+            $(function()
+            {
+                if ((/undotsushin-(ios|android)/i.test(window.navigator.userAgent)))
+                {
+                    $('.ub-ad-banner.ub-ad-innerTop-banner .sp-only').css('display', 'none');
+                }
+                else
+                {
+                    return;
+                }
+            });
+        </script>
     </body>
 </html>

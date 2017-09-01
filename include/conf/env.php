@@ -130,9 +130,16 @@ if(preg_match("/undotsushin/",$servername)){
 		$UserImgPath="https://img.sportsbull.jp";
 		
 		$LSCMS="legendsstadium";
-		
-		$bucket="img-sportsbull-jp";
 
+    // 大学野球
+    if (preg_match("/big6tv/", $requesturi) ||
+      preg_match("/ub_kansai/",$requesturi) ||
+      preg_match("/ub_kansaibig6/",$requesturi) ||
+      preg_match("/ub_tohto/",$requesturi)) {
+      $bucket="ublive.sportsbull.jp";
+    }else{
+      $bucket="img-sportsbull-jp";
+    }
 
 	}elseif(preg_match("/cms/",$servername)){
 
@@ -146,9 +153,16 @@ if(preg_match("/undotsushin/",$servername)){
 		$domain="https://sportsbull.jp";
 		$ImgPath="https://img.sportsbull.jp";
 		$UserImgPath="https://img.sportsbull.jp";
-		
-		$bucket="img-sportsbull-jp";
-		
+
+    // 大学野球
+    if (preg_match("/big6tv/", $requesturi) ||
+      preg_match("/ub_kansai/",$requesturi) ||
+      preg_match("/ub_kansaibig6/",$requesturi) ||
+      preg_match("/ub_tohto/",$requesturi)) {
+      $bucket="ublive.sportsbull.jp";
+    }else{
+      $bucket="img-sportsbull-jp";
+    }
 	}else{
 
 		$staticfileimport=1;
@@ -160,8 +174,16 @@ if(preg_match("/undotsushin/",$servername)){
 		$domain="https://sportsbull.jp";
 		$ImgPath="https://img.sportsbull.jp";
 		$UserImgPath="https://img.sportsbull.jp";
-		
-		$bucket="img-sportsbull-jp";
+
+    // 大学野球
+    if (preg_match("/big6tv/", $requesturi) ||
+      preg_match("/ub_kansai/",$requesturi) ||
+      preg_match("/ub_kansaibig6/",$requesturi) ||
+      preg_match("/ub_tohto/",$requesturi)) {
+      $bucket="ublive.sportsbull.jp";
+    }else{
+      $bucket="img-sportsbull-jp";
+    }
 	}
 
 	$SQLLOG="/var/www/data/log/ut_sqllog.txt";
