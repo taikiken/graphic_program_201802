@@ -5,38 +5,36 @@
 $app->group('/{slug:big6tv}', function () use ($app) {
 
 
-//  // /big6tv/
-//  // ==============================
-//  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
-//
-//
-//
-//    // LIVEデータを取得する
-//    $big6tvLive = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/live');
-//    $args['page']['big6tv']['liveData'] = json_decode($big6tvLive, true)['response'];
-//
-//    // スケジュール表を取得する
-//    $big6tvSchedule = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/schedule');
-//    $args['page']['big6tv']['scheduleData'] = json_decode($big6tvSchedule, true)['response'];
-//
-//    // ランキングデータを取得する
-//    $big6tvRanking = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/ranking');
-//    $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
-//
-//
-//
-//    // #1546 /big6tv/ の PC版右上レクタングルのID固定
-//    $args['page']['ad']['pc']['sidebar_top'] = 'big6-pc-rectangle';
-//
-//
-//
-//    if ( $app->model->property('ua') === 'desktop' ) :
-//      return $this->renderer->render($response, 'big6tv/desktop/index.php', $args);
-//    else :
-//      return $this->renderer->render($response, 'big6tv/mobile/index.php', $args);
-//    endif;
-//
-//  });
+  // /big6tv/
+  // ==============================
+  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+
+
+    // LIVEデータを取得する
+    $big6tvLive = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/live');
+    $args['page']['big6tv']['liveData'] = json_decode($big6tvLive, true)['response'];
+
+    // スケジュール表を取得する
+    $big6tvSchedule = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/schedule');
+    $args['page']['big6tv']['scheduleData'] = json_decode($big6tvSchedule, true)['response'];
+
+    // ランキングデータを取得する
+    $big6tvRanking = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/ranking');
+    $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
+
+
+
+    // #1546 /big6tv/ の PC版右上レクタングルのID固定
+    $args['page']['ad']['pc']['sidebar_top'] = 'big6-pc-rectangle';
+
+
+    if ( $app->model->property('ua') === 'desktop' ) :
+      return $this->renderer->render($response, 'big6tv/desktop/index.php', $args);
+    else :
+      return $this->renderer->render($response, 'big6tv/mobile/index.php', $args);
+    endif;
+
+  });
 
 
   // game
