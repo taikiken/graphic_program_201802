@@ -68,20 +68,11 @@ if ($page['category']['slug'] == 'all') {
 
 
       <?php if ( $page['category']['slug'] === 'big6tv' ) : ?>
-        <?php
-          # 春用
-          include_once __DIR__.'/../big6tv/live.php';
-          include_once __DIR__.'/../big6tv/desktop/category.php';
-
-          # 秋用
-          //include_once __DIR__.'/../../../public/big6tv/category/index.html';
-          /*
-          <div class="headline-heading">
-            <h2 class="headline-heading-title"><img src="/assets/images/common/headline-heading_big6.png" alt="HEADLINE NEWS"></h2>
-            <span class="headline-heading-ruby">新着記事</span>
-          </div>
-          */
-        ?>
+        <?php include_once __DIR__.'/../../../public/big6tv/category/index.html'; ?>
+        <div class="headline-heading">
+          <h2 class="headline-heading-title"><img src="/assets/images/common/headline-heading_big6.png" alt="HEADLINE NEWS"></h2>
+          <span class="headline-heading-ruby">新着記事</span>
+        </div>
       <?php endif; ?>
 
 
@@ -100,7 +91,7 @@ if ($page['category']['slug'] == 'all') {
       ?>
 
       <?php
-      # ref. #2321
+      # ref. #2321 
       if ( $page['category']['slug'] === 'americanfootball' ) :
         include_once __DIR__.'/../stats/ua_kansai/desktop/index.php';
       endif;

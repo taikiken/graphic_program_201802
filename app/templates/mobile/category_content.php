@@ -49,14 +49,7 @@
 
 
       <?php if ( $page['category']['slug'] === 'big6tv' ) : ?>
-        <?php
-          # 春用
-          include_once __DIR__.'/../big6tv/live.php';
-          include_once __DIR__.'/../big6tv/mobile/category.php';
-
-          # 秋用
-          //include_once __DIR__.'/../../../public/big6tv/category/index.html';
-        ?>
+        <?php include_once __DIR__.'/../../../public/big6tv/category/index.html'; ?>
       <?php endif; ?>
 
 
@@ -75,7 +68,7 @@
       ?>
 
       <?php
-      # ref. #2321
+      # ref. #2321 
       if ( $page['category']['slug'] === 'americanfootball' ) :
         include_once __DIR__.'/../stats/ua_kansai/mobile/index.php';
       endif;
