@@ -544,7 +544,8 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-        <script src="https://sportsbull.jp/assets/js/global.bundle.js"></script>
+        <script src="https://sportsbull.jp/assets/js/baseball.bundle.js?v=<?php echo $page['version']; ?>"></script>
+        <script src="https://sportsbull.jp/assets/js/global.bundle.js?v=<?php echo $page['version']; ?>"></script>
         <script src="https://code.jquery.com/jquery-git.min.js"></script>
         <script>
             $(function()
