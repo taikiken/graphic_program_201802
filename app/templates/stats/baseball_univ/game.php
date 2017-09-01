@@ -171,7 +171,7 @@
                     <section class="main-sec">
                         <div class="stats-top-image">
                             <picture>
-                                <source media="(max-width: 768px)" srcset="/big6tv/img/SP_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg">
+                                <source media="(max-width: 768px)" srcset="/stats/assets/univbb/img/SP_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg">
                                 <img src="/stats/assets/univbb/img/PC_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg" alt="<?php echo $page['league_name']; ?> 速報&データ"> </picture>
                         </div>
 
