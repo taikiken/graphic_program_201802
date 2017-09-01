@@ -176,12 +176,13 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
           <li>公式戦</li>
           <li>入替戦</li>
           <li>新日本</li>
-          <li>甲子園ボール</li>
+          <li>甲子園ボウル</li>
         </ul>
       </nav>
       <div class="game-category1">
         <div class="af-schedule">
             <h2 class="calendar">日程結果 / Division1</h2>
+            <div class="lastupdate">最終更新日：<?=$dataArray["lastupdate"]?></div>
             <?=$dataArray["game-category1"]["schedule"]?>
         </div><!-- af-schedule -->
 
