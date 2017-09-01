@@ -41,24 +41,6 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     ));
 
 
-	// OFG:ImageとNoImageの実装を追加 @axesor
-	if (strlen($category["og_image"]) > 0) {
-		$args['page']['og_image'] = $category["og_image"];
-	}
-	if (strlen($category["no_image"]) > 0) {
-		$args['page']['no_image'] = $category["no_image"];
-	}
-
-	//カテゴリ毎のキーワードとdescriptionを取得
-	if (strlen($category["seo_desc"]) > 0) {
-		$args['page']['og_description'] = $category["seo_desc"];
-	}
-	if (strlen($category["seo_key"]) > 0) {
-		$args['page']['keywords'] = $category["seo_key"];
-	}
-
-
-
     // big6tv対応
     // ==============================
     if ( $args['category_slug'] === 'big6tv' ) :
@@ -142,8 +124,24 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     endif;
 
 
-    return $this->renderer->render($response, "default.php", $args);
+    // OFG:ImageとNoImageの実装を追加 @axesor
+    if (strlen($category["og_image"]) > 0) {
+      $args['page']['og_image'] = $category["og_image"];
+    }
+    if (strlen($category["no_image"]) > 0) {
+      $args['page']['no_image'] = $category["no_image"];
+    }
 
+    //カテゴリ毎のキーワードとdescriptionを取得
+    if (strlen($category["seo_desc"]) > 0) {
+      $args['page']['og_description'] = $category["seo_desc"];
+    }
+    if (strlen($category["seo_key"]) > 0) {
+      $args['page']['keywords'] = $category["seo_key"];
+    }
+
+
+    return $this->renderer->render($response, "default.php", $args);
   });
 
 
