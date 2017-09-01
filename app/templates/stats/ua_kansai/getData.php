@@ -9,7 +9,8 @@ class getData {
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
 		$gameArray = array("公式戦"=>"game-category1","入替戦"=>"game-category2","新日本"=>"game-category3","甲子園ボール"=>"game-category4");
-		$result = array("game-category1"=>"","game-category2"=>"","game-category3"=>"","game-category4"=>"");
+		$result = array("lastupdate"=>"","game-category1"=>"","game-category2"=>"","game-category3"=>"","game-category4"=>"");
+		$result["lastupdate"] = date("Y年n月j日 H:i:s",strtotime($json["response"]["lastupdate"]));
 		foreach ($json["response"]["schedule"] as $key => $value) {
 			$tmp = "";
 			foreach ($value["league"] as $oneDay) {
@@ -18,16 +19,30 @@ class getData {
 				$li = "";
 				foreach ($oneDay["games"] as $game) {
 					if (empty($game['highlightmovieurl'])) {
-						$movie = "<div>ダイジェスト動画</div>";
+						$movie = "<div class='digest'>ダイジェスト動画</div>";
 					}else{
-						$movie = "<a href='".$game['highlightmovieurl']."'>ダイジェスト動画</a>";
+						$movie = "<a class='digest active' href='".$game['highlightmovieurl']."'>ダイジェスト動画</a>";
+					}
+					if (empty($game['json'])) {
+						$gameLink = <<< EOM
+							<div class="match">
+								<span class="team-{$game['team'][0]['id']}">{$game['team'][0]['name']}</span>
+								{$game['team'][0]['score']} - {$game['team'][1]['score']}
+								<span class="team-{$game['team'][1]['id']}">{$game['team'][1]['name']}</span>
+							</div>
+EOM;
+					}else{
+						$gameLink = <<< EOM
+							<a class="match active" href="/stats/ua_kansai/match/?gameId={$game['gameid']}">
+								<span class="team-{$game['team'][0]['id']}">{$game['team'][0]['name']}</span>
+								{$game['team'][0]['score']} - {$game['team'][1]['score']}
+								<span class="team-{$game['team'][1]['id']}">{$game['team'][1]['name']}</span>
+							</a>
+EOM;
 					}
 					$li .= <<< EOM
 						<li>
-							<a href="/stats/ua_kansai/match/?gameId={$game['gameid']}">
-								<span class="team-{$game['team'][0]['id']}">{$game['team'][0]['name']}</span>
-								{$game['team'][0]['score']} - {$game['team'][1]['score']}
-								<span class="team-{$game['team'][1]['id']}">{$game['team'][1]['name']}</span></a>
+							{$gameLink}
 							{$movie}
 						</li>
 EOM;
@@ -61,9 +76,12 @@ EOM;
 		$ranking = $json["response"]["team"];
 		$rankingTable = $json["response"]["tournament"];
 		$result = array("win" => "○","lose" => "●" );
+		$lastupdate = date("Y年n月j日 H:i:s",strtotime($json["response"]["lastupdate"]));
 		$html = "";
-		$html = "<h2 class='star'>星取表 / Division1</h2><table>";
+		$html = "<h2 class='star'>星取表 / Division1</h2>";
+		$html .= "<div class='lastupdate'>最終更新日：".$lastupdate."</div>";
 		$html .= <<< EOM
+		<table>
 			<thead>
 				<tr>
 					<th width="10%">順位</th>

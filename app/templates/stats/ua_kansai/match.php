@@ -9,6 +9,7 @@ $dataArray = getData::getMatch($gameId);
   <meta charset="UTF-8">
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -155,6 +156,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
   </header><!-- /.head-sec -->
 
   <div class="body-sec">
+<<<<<<< HEAD
     <div class="title">
 <<<<<<< HEAD
       <h2>
@@ -172,6 +174,17 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 >>>>>>> b855344b4143b4510e955fc0eddbd556f4e47a56
         <a class="btn" href="#">日程・結果へ</a>
     </div><!-- /.title -->
+=======
+    <div class="nav-heade-area">
+      <div class="nav-heade">
+        <h2><img src="/assets/stats/ua_kansai/images/header.png" alt="関西学生アメフト 試合速報"></h2>
+        <div class="btnbox">
+          <a href="/stats/ua_kansai/">日程・結果へ</a>
+        </div>
+      </div>
+    </div>
+
+>>>>>>> 2986a4a4b4d6468a3314e052365488103a63dff8
     <div id="result-sec">
       <div class="inner">
 <<<<<<< HEAD

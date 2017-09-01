@@ -47,11 +47,12 @@ function get_lastmod($file){
 }
 
 function setarray($key,$val,$n){
-	global $y,$univ;
+	global $y,$univ,$pord;
 	$key=explode(".",$key);
 	if(count($key)==1){
 		$y["response"]["team"][$n][$key[0]]=$val;
 		if($key[0]=="name"){
+			$pord[$val]=$n;
 			$y["response"]["team"][$n]["name"]=$univ[$val]["name"];
 			$y["response"]["team"][$n]["id"]=$univ[$val]["id"];
 		}
@@ -62,6 +63,8 @@ function setarray($key,$val,$n){
 	}
 }
 
+
+$map["#リーグ"]="league";
 $map["#日付け"]="date";
 $map["#曜日"]="weekday";
 $map["#試合ID"]="gameid";
