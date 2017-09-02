@@ -68,6 +68,8 @@ if ($page['category']['slug'] == 'all') {
 
 
         <?php
+          if ( $page['category']['slug'] === 'big6tv' ) :
+
           # 春用
           include_once __DIR__.'/../big6tv/live.php';
           include_once __DIR__.'/../big6tv/desktop/category.php';
@@ -80,6 +82,7 @@ if ($page['category']['slug'] == 'all') {
             <span class="headline-heading-ruby">新着記事</span>
           </div>
           */
+          endif;
         ?>
 
 

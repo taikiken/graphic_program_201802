@@ -49,12 +49,15 @@
 
 
         <?php
-          # 春用
-          include_once __DIR__.'/../big6tv/live.php';
-          include_once __DIR__.'/../big6tv/mobile/category.php';
+          if ( $page['category']['slug'] === 'big6tv' ) :
 
-          # 秋用
-          //include_once __DIR__.'/../../../public/big6tv/category/index.html';
+            # 春用
+            include_once __DIR__.'/../big6tv/live.php';
+            include_once __DIR__.'/../big6tv/mobile/category.php';
+
+            # 秋用
+            //include_once __DIR__.'/../../../public/big6tv/category/index.html';
+          endif;
         ?>
 
 

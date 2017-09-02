@@ -1,2 +1,169 @@
-"use strict";var options={autoplay:!1,controls:!0,fluid:!1,plugins:{videoJsResolutionSwitcher:{"default":0}},nativeControlsForTouch:!1},isFirstPlay=!0,ua=window.navigator.userAgent.toLowerCase(),isIE=ua.indexOf("msie")>=0||ua.indexOf("trident")>=0;isIE&&(options.techOrder=["flash"]);var viewtype=function(){var e;return e=ua.indexOf("iPhone")>0||ua.indexOf("iPod")>0||ua.indexOf("Android")>0&&ua.indexOf("Mobile")>0||ua.indexOf("Windows Phone")>0?"sp":"pc"}(),player=videojs("content_video",options),firstLoad=!1,superagent=window.superagent,videoLoad=function e(){superagent.get("https://dev.sportsbull.jp/api/big6tv/live/2017a").end(function(a,t){var i=t.body.response.live.video,n=t.body.response.live.isPlaying,o={id:"content_video",adLabel:"広告",adTagUrl:"pc"===viewtype?i.ad_url.pc:i.ad_url.sp,timeout:3e3},r=i.sources.map(function(e,a){return{src:e.url,type:"application/x-mpegURL",label:e.label,res:e.res}});if(!$(".video_alt").html()){var s=$("<img/>",{src:t.body.response.live.alt.large,alt:""});$(".video_alt").append(s)}n?(firstLoad||(player.src({src:i.source,type:"application/x-mpegURL"}),firstLoad=!0,player.updateSrc(r),"function"==typeof player.ima&&player.ima(o),player.ga(),player.videoJsResolutionSwitcher()),$(".video__wrapper").show(),$(".video_alt").hide()):($(".video__wrapper").hide(),$(".video_alt").show()),setTimeout(function(){e()},1e3*t.body.response.live.interval)})};videoLoad();var contentPlayer=document.getElementById("content_video_html5_api");(navigator.userAgent.match(/iPad/i)||navigator.userAgent.match(/Android/i))&&contentPlayer.hasAttribute("controls")&&contentPlayer.removeAttribute("controls");var startEvent="click";(navigator.userAgent.match(/iPhone/i)||navigator.userAgent.match(/iPad/i)||navigator.userAgent.match(/Android/i))&&(startEvent="touchend"),player.one(startEvent,function(){isFirstPlay=!1,navigator.userAgent.match(/iPhone/i)||navigator.userAgent.match(/iPad/i)?player.play():(player.ima.initializeAdDisplayContainer(),player.ima.requestAds(),player.play()),document.getElementsByClassName("vjs-captions-button")[0].style.display="none"}),player.one("ready",function(){(navigator.userAgent.match(/iPhone/i)||navigator.userAgent.match(/iPad/i))&&(player.ima.initializeAdDisplayContainer(),player.ima.requestAds(),player.loadingSpinner.hide())}),player.on(["contentupdate"],function(){navigator.userAgent.match(/Android/i)||isFirstPlay||player.play()}),player.on(["loadedmetadata"],function(){navigator.userAgent.match(/android/i)&&player.play()}),player.on(["canplay"],function(){(navigator.userAgent.match(/iPhone/i)||navigator.userAgent.match(/iPad/i))&&player.play()}),player.on(["adend"],function(){isIE&&player.updateSrc(sources),player.play(),document.getElementsByClassName("vjs-captions-button")[0].style.display="none"});
+'use strict';
+
+var options = {
+  autoplay: false,
+  controls: true,
+  fluid: false, //[NOTE] This option is for responsive http://blog.videojs.com/Video-js-5-s-fluid-mode-and-playlist-picker/
+  plugins: {
+    videoJsResolutionSwitcher: {
+      default: 1
+    }
+  },
+  nativeControlsForTouch: false
+};
+var isFirstPlay = true;
+var sources;
+
+//IE10 & IE11 detection
+var ua = window.navigator.userAgent.toLowerCase();
+var isIE = ua.indexOf('msie') >= 0 || ua.indexOf('trident') >= 0;
+if (isIE) {
+  options['techOrder'] = ["flash"]; //-> IE 11
+}
+
+var viewtype = function () {
+  var type;
+  if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0 || ua.indexOf('Windows Phone') > 0) {
+    type = 'sp';
+  } else {
+    type = 'pc';
+  }
+  return type;
+}();
+
+var player;
+var superagent = window.superagent;
+var firstLoad = false;
+
+// Remove controls from the player on iPad to stop native controls from stealing
+// our click
+var contentPlayer;
+
+//Container Initialization, called only once.
+var startEvent;
+
+var setPlayerEvent = function setPlayerEvent() {
+  $('.content_video_ima-ad-container video[title=\'Advertisement\']').css({ top: 0, left: 0 });
+  $('.content_video_ima-ad-container div:eq(0)').css({ pointerEvents: 'none' });
+  contentPlayer = document.getElementById('content_video_html5_api');
+  if ((navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)) && contentPlayer.hasAttribute('controls')) {
+    contentPlayer.removeAttribute('controls');
+  }
+  startEvent = 'click';
+  if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)) {
+    startEvent = 'touchend';
+  }
+  //Handling first user click/touch
+  player.one(startEvent, function () {
+    isFirstPlay = false;
+    $('.content_video_ima-ad-container div:eq(0)').css({ pointerEvents: 'auto' });
+    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+      //iPhone & iPads
+      player.play();
+    } else {
+      //Desktop & Android
+      player.ima.initializeAdDisplayContainer();
+      player.ima.requestAds();
+      player.play();
+    }
+
+    // Disabled subtitles/closed caption for Safari.
+    document.getElementsByClassName("vjs-captions-button")[0].style.display = "none";
+  });
+
+  //For playing after resolution has been changed, for Chrome and Firefox
+  player.on(['contentupdate'], function () {
+    if (!navigator.userAgent.match(/Android/i)) {
+      if (!isFirstPlay) {
+        player.play();
+      }
+    }
+  });
+
+  player.on(['loadedmetadata'], function () {
+    if (navigator.userAgent.match(/android/i)) {
+      player.play();
+    }
+  });
+
+  //iPhone
+  player.on(['canplay'], function () {
+    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+      player.play();
+    }
+  });
+
+  //Deskop Safari : if autoplay == false, the video doesn't start after ad ended.
+  player.on(['adend'], function () {
+    //For flash tech only
+    if (isIE) {
+      player.updateSrc(sources);
+    }
+    //Desktop Safari
+    player.play();
+
+    // Disabled subtitles/closed caption for Safari.
+    document.getElementsByClassName("vjs-captions-button")[0].style.display = "none";
+  });
+};
+
+//PLayer Initialization
+var videoLoad = function videoLoad() {
+  superagent.get('https://dev.sportsbull.jp/api/big6tv/live/2017a').end(function (err, res) {
+    var video = res.body.response.live.video;
+    var isPlaying = res.body.response.live.isPlaying;
+    var ads_options = {
+      id: 'content_video',
+      adLabel: '広告',
+      adTagUrl: viewtype === 'pc' ? video.ad_url.pc : video.ad_url.sp,
+      timeout: 3000
+    };
+    sources = video.sources.map(function (element, index) {
+      return {
+        src: element.url,
+        type: 'application/x-mpegURL',
+        label: element.label,
+        res: element.res
+      };
+    });
+    if (isPlaying) {
+      if (!firstLoad) {
+        firstLoad = true;
+        $('#content_video').attr('poster', res.body.response.live.alt.large);
+        player = videojs('content_video', options);
+        player.src({
+          src: video.source,
+          type: 'application/x-mpegURL'
+        });
+
+        player.updateSrc(sources);
+        player.ima(ads_options);
+        player.ga(); // Google Analytics Integration
+        player.videoJsResolutionSwitcher();
+        player.one('ready', function () {
+          if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+            player.ima.initializeAdDisplayContainer();
+            player.ima.requestAds();
+            // Hide loading spinner during playing ads due to google-IMA bug?
+            player.loadingSpinner.hide();
+          }
+        });
+        setPlayerEvent();
+      }
+      $('.video__wrapper').show();
+      $('.video_alt').hide();
+    } else {
+      player.stop();
+      var img = $('<img/>', { src: res.body.response.live.alt.large, alt: '' });
+      $('.video_alt').empty();
+      $('.video_alt').append(img);
+      $('.video__wrapper').hide();
+      $('.video_alt').show();
+    }
+    setTimeout(function () {
+      videoLoad();
+    }, res.body.response.live.interval * 1000);
+  });
+};
+videoLoad();
 //# sourceMappingURL=vplayer.js.map

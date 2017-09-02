@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+    
+
+<head>
+        <title>Big6 Player</title>
+        <meta charset="UTF-8">
+        <!-- CSS -->
+        <!-- Player original CSS-->
+        <link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video-js.css" rel="stylesheet">
+        <!-- Video switcher CSS -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-resolution-switcher/0.4.2/videojs-resolution-switcher.css">
+        <!-- Google IMA CSS -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.css" />
+        <!-- Player skin custom CSS -->
+        <link href="https://s3-ap-northeast-1.amazonaws.com/iplay-demo/samples/big6p/videojs.custom.css" rel="stylesheet">
+        <!-- Player skin custom CSS for Ads -->
+        <link rel="stylesheet" href="https://s3-ap-northeast-1.amazonaws.com/iplay-demo/samples/big6p/videojs.ima.css" />
+        <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.css" /> -->
+
+        <script src="/big6tv/js/libs.js"></script>
+        <!-- Javascript -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.5.0/videojs-contrib-hls.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-resolution-switcher/0.4.2/videojs-resolution-switcher.js"></script>
+        <!-- Google IMA  -->
+        <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.js"></script>
+        <!-- Google IMA custom for Ads -->
+        <script src="https://s3-ap-northeast-1.amazonaws.com/iplay-demo/samples/big6p/videojs.ima.js"></script>
+        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.js"></script> -->
+        <!-- Google Analytics -->
+        <script src="https://s3-ap-northeast-1.amazonaws.com/iplay-demo/samples/big6p/videojs.ga.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      
+          ga('create', 'UA-xxxxxxxx-x', 'auto');
+          ga('send', 'pageview');
+        </script>
+      </head>
+      
+      <body>
+        <h1>Big6 Player</h1>
+        <!-- <video id="content_video" class="video-js vjs-default-skin" width="854" height="480" preload="none" playsinline controls></video>
+        <script src="vplayer.js"></script> -->
+        <div id="liveVideo">
+                <p class="video_alt"></p>
+                <div class="video__wrapper">
+                    <video id="content_video" class="video-js vjs-default-skin" preload="none" controls></video>
+                </div>
+                <script src="/big6tv/js/vplayer.js"></script>
+            </div>
+      </body>
+      
+</html>
