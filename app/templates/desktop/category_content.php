@@ -72,7 +72,6 @@ if ($page['category']['slug'] == 'all') {
       // {@link ViewCategory.js}, {@link ComponentCategoryOption.js}
       ?>
       <div id="js-headline"></div>
-      <div id="js-headline"></div>
 
       <?php
       # ref. #2227
