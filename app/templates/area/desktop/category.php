@@ -9,7 +9,7 @@
  */
 
 // PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
-include_once __DIR__.'/../desktop/_category-heading.php';
+include_once __DIR__.'/../../desktop/_category-heading.php';
 
 ?>
 
@@ -134,7 +134,7 @@ include_once __DIR__.'/../desktop/_category-heading.php';
 
     <section class="side-sec">
 
-      <?php include_once __DIR__."/../desktop/_sidebar_ad.php"; ?>
+      <?php include_once __DIR__."/../../desktop/_sidebar_ad.php"; ?>
 
     </section><!-- /.side-sec -->
 

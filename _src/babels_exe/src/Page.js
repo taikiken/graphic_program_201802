@@ -138,6 +138,9 @@ export class Page {
     // 404
     router.on( Router.NOT_FOUND, Page.notFound );
 
+    // area - from 2017-09-04
+    router.on(Router.CATEGORY_AREA, Page.area);
+    // parse
     router.route();
   }
   /**
@@ -263,6 +266,9 @@ export class Page {
 
     // settings/deactivate
     router.off( Router.SETTING_DEACTIVATE, Page.deactivate );
+
+    // area
+    router.off(Router.CATEGORY_AREA, Page.area);
 
     // 404
     router.off( Router.NOT_FOUND, Page.notFound );
@@ -597,5 +603,30 @@ export class Page {
 
     // event unbind
     Page.dispose();
+  }
+  /**
+   * 地域別記事 - category like 表示
+   * @param {Object} event Router event object
+   * @since 2017-09-04
+   */
+  static area(event) {
+    // like category
+    const { mode } = event;
+    const slug = 'area';
+    console.log('Page.area', mode, slug, event);
+    // page top
+    PageTop.start();
+    // search from
+    SearchForm.start();
+    // category
+    Category.start(slug, mode);
+    // nav
+    Nav.start(slug);
+
+    // event unbind
+    Page.dispose();
+
+    // first
+    FirstVisit.start();
   }
 }

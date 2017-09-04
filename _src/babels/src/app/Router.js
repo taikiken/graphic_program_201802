@@ -495,9 +495,9 @@ export class Router extends EventDispatcher {
       '四国',
       '九州・沖縄',
     ];
-    const index = areas.indexOf(encoded);
+    const index = areas.indexOf(mode);
     console.log('Router.area type', encoded, index, mode);
-    if (index === -1) {
+    if (index !== -1) {
       // 地域
       this.dispatch({ type: Router.CATEGORY_AREA, slugType, mode });
     } else {
