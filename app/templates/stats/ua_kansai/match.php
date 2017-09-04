@@ -168,6 +168,60 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
     </div><!-- /#result-sec -->
     <div class="body-sec-inner">
       <section class="main-sec">
+
+        <div class="stats__banner mt30">
+          <div id="ua-pc-big-banner" style='height:90px; width:728px;'>
+            <!-- /531683568/kansai-amefoot-ad/ua-pc-big-banner -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-pc-big-banner', [728, 90], 'div-gpt-ad-1504503001230-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1504503001230-0'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503001230-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/kansai-amefoot-ad/ua-pc-big-banner -->
+          </div>
+
+          <div id="ua-sp-big-banner" style='height:50px; width:320px;'>
+            <!-- /531683568/kansai-amefoot-ad/ua-sp-big-banner -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-sp-big-banner', [320, 50], 'div-gpt-ad-1504503049105-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1504503049105-0'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503049105-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/kansai-amefoot-ad/ua-sp-big-banner -->
+          </div>
+
+          <div id="ua-app-big-banner" style='height:50px; width:320px;'>
+            <!-- /531683568/kansai-amefoot-ad/ua-app-big-banner -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-app-big-banner', [320, 50], 'div-gpt-ad-1504503090397-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1504503090397-0'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503090397-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/kansai-amefoot-ad/ua-app-big-banner -->
+          </div>
+        </div><!-- /.stats__banner -->
+
         <nav id="game-info" class="active-0">
           <ul>
             <li>基本情報</li>
@@ -361,10 +415,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
             </div>
             <!-- // ad/531683568/pc_sidebar_top_2nd -->
           </div>
-
-          <div class="app-bnr">
-            <iframe width="100%" height="168" src="http://amefootlive.jp/kcafl_live" scrolling="no" frameborder="0" style="border: 0px none transparent;"></iframe>
-          </div>
           
           <!-- sidebar recommend, オススメ記事 -->
           <div id="widget-recommend-list-container"></div><!--/recommend-->
@@ -502,6 +552,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
   }(document, 'script', 'facebook-jssdk'));
 </script>
 <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+<script src="/assets/stats/ua_kansai/js/userAgent.js"></script>
 <script src="/assets/js/global.bundle.js"></script>
 <script src="/assets/stats/ua_kansai/js/amefoot.bundle.js"></script>
 <script src="/assets/stats/ua_kansai/js/match.js"></script>

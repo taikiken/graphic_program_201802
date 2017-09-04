@@ -8,7 +8,7 @@ class getData {
 		$json = file_get_contents(self::$scheduleUrl);
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
-		$gameArray = array("公式戦"=>"game-category1","入替戦"=>"game-category2","新日本"=>"game-category3","甲子園ボール"=>"game-category4");
+		$gameArray = array("公式戦"=>"game-category1","入替戦"=>"game-category2","全日本"=>"game-category3","甲子園ボウル"=>"game-category4");
 		$result = array("lastupdate"=>"","game-category1"=>"","game-category2"=>"","game-category3"=>"","game-category4"=>"");
 		$result["lastupdate"] = date("Y年n月j日 H:i:s",strtotime($json["response"]["lastupdate"]));
 		foreach ($json["response"]["schedule"] as $key => $value) {
@@ -63,7 +63,7 @@ EOM;
 		}
 		foreach ($result as $key => $value) {
 			if (empty($value)) {
-				$result[$key]["schedule"] = "<div>対象の日程はございません</div>";
+				$result[$key]["schedule"] = "<div class='non-data'>対象の日程はございません</div>";
 			}
 		}
 		return $result;
@@ -78,7 +78,7 @@ EOM;
 		$result = array("win" => "○","lose" => "●" );
 		$lastupdate = date("Y年n月j日 H:i:s",strtotime($json["response"]["lastupdate"]));
 		$html = "";
-		$html = "<h2 class='star'>星取表 / Division1</h2>";
+		$html = "<h2 class='star'><span class='sp-none'>星取表</span><span class='pc-none'>順位表</span> / Division1</h2>";
 		$html .= "<div class='lastupdate'>最終更新日：".$lastupdate."</div>";
 		$html .= <<< EOM
 		<table>
@@ -161,7 +161,7 @@ EOM;
 				<li>
 					<a href="{$json['highlightmovieurl']['movie']}">
 						<div>
-							<img src="{$json['highlightmovieurl']['img']}" alt="前半、ゴールを決めた川崎Ｆ・ＭＦ中村（右）は小林とハイタッチ（撮影・山崎安昭）">
+							<img src="{$json['highlightmovieurl']['img']}" alt="{$json['highlightmovieurl']['title']}">
 						</div>
 						<div><p>ダイジェスト</p><p>{$json['highlightmovieurl']['title']}</p></div>
 					</a>
@@ -242,8 +242,8 @@ EOM;
                 </tr>
                 <tr>
                   <td>獲得ヤード</td>
-                  <td>{$playData['pass']['yard']}</td>
-                  <td>{$drawData['pass']['yard']}</td>
+                  <td>{$playData['pass']['yds']}</td>
+                  <td>{$drawData['pass']['yds']}</td>
                 </tr>
                 <tr>
                   <td>ラン</td>
@@ -275,12 +275,12 @@ EOM;
                   <td>{$drawData['possession']}</td>
                 </tr>
                 <tr>
-                  <td colspan="2">3rd Down Conersions</td>
+                  <td colspan="2">3rd Down Conversions</td>
                   <td>{$playData['3rdDownConversions']}</td>
                   <td>{$drawData['3rdDownConversions']}</td>
                 </tr>
                 <tr>
-                  <td colspan="2">4rd Down Conersions</td>
+                  <td colspan="2">4rd Down Conversions</td>
                   <td>{$playData['4thDownConversions']}</td>
                   <td>{$drawData['4thDownConversions']}</td>
                 </tr>
@@ -361,6 +361,108 @@ EOM;
 					$result["personalInfo"][$keyName][$key]["data"] = $noneData;
 				}
 			}
+		}
+		return $result;
+	}
+	//直近日程取得
+	public static function getScheduleRecent() {
+		$json = file_get_contents(self::$scheduleUrl);
+		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
+		$json = json_decode($json,true);
+		$endArray = array();
+		$recentArray = array();
+		$result = "";
+		//全日程から終了した1日分を取得
+		foreach ($json["response"]["schedule"] as $key => $value) {
+			$keyDate = "";
+			//大会ごとにまわす
+			foreach ($value["league"] as $oneDay) {
+				//一番最後の試合詳細がある（jsonがある）試合を残す
+				foreach ($oneDay["games"] as $game) {
+					if (!empty($game['json'])) {
+						$keyDate = $oneDay["date"];
+						$tmp = $oneDay;
+						break;
+					}
+				}
+			}
+			if (!empty($keyDate)) $endArray[$keyDate][] = $tmp;
+		}
+		//全日程から予定1日分を取得
+		foreach ($json["response"]["schedule"] as $key => $value) {
+			$cnt = 0;
+			//大会ごとにまわす
+			foreach ($value["league"] as $oneDay) {
+				//一番最初の試合詳細がない（jsonがない）試合を残す
+				foreach ($oneDay["games"] as $game) {
+					if (empty($game['json'])) {
+						$recentArray[$oneDay["date"]][] = $oneDay;
+						$cnt++;
+						break;
+					}
+				}
+				if ($cnt == 1) break;
+			}
+		}
+		
+		//終了日程、予定日程から1日づつでHTMLを生成
+		krsort($endArray);//降順
+		ksort($recentArray);//昇順
+		$keyArray = array($endArray,$recentArray);
+		for ($i=0; $i < 2; $i++) { 
+			$cnt = 0;
+			foreach ($keyArray[$i] as $key => $value) {
+				$date = date("n月j日",strtotime($key));
+				$week = "";
+				$li = "";
+				foreach ($value as $key2 => $value2) {
+					$week = "(".$value2['weekday'].")";
+					foreach ($value2["games"] as $game) {
+						if (empty($game['highlightmovieurl'])) {
+							$movie = "<div class='digest'>ダイジェスト動画</div>";
+						}else{
+							$movie = "<a class='digest active' href='".$game['highlightmovieurl']."'>ダイジェスト動画</a>";
+						}
+						if (empty($game['json'])) {
+							$gameLink = <<< EOM
+								<div class="match">
+									<span class="team-{$game['team'][0]['id']}">{$game['team'][0]['name']}</span>
+									{$game['team'][0]['score']} - {$game['team'][1]['score']}
+									<span class="team-{$game['team'][1]['id']}">{$game['team'][1]['name']}</span>
+								</div>
+EOM;
+						}else{
+							$gameLink = <<< EOM
+								<a class="match active" href="/stats/ua_kansai/match/?gameId={$game['gameid']}">
+									<span class="team-{$game['team'][0]['id']}">{$game['team'][0]['name']}</span>
+									{$game['team'][0]['score']} - {$game['team'][1]['score']}
+									<span class="team-{$game['team'][1]['id']}">{$game['team'][1]['name']}</span>
+								</a>
+EOM;
+						}
+						$li .= <<< EOM
+							<li>
+								{$gameLink}
+								{$movie}
+							</li>
+EOM;
+					}
+				}
+				$date = $date.$week;
+				$result .= <<< EOM
+					<div class="list">
+						<p>{$date}</p>
+						<ul>
+							{$li}
+						</ul>
+					</div>
+EOM;
+				$cnt++;
+				if ($cnt == 1) break;
+			}
+		}
+		if (empty($result)) {
+			$result = "<div class='non-data mt20 mb30'>直近の日程はございません</div>";
 		}
 		return $result;
 	}
