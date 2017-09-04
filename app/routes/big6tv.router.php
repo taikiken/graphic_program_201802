@@ -85,10 +85,44 @@ $app->group('/{slug:big6tv}', function () use ($app) {
     $year = $season_array[0];
     $season_jp = $season_array[1] == 's' ? '春' : '秋';
 
+    $request_uri = $_SERVER['REQUEST_URI'];
+    $season_name = $year . $season_jp;
+    $short_season_name = substr($season_name, 2);
+
+    $league_name = '東京六大学野球';
+    $team_and_date = implode('', [
+      $visitor,
+      ' vs ',
+      $home,
+      ' - ',
+      $dateY,
+      '年',
+      $dateM,
+      '月',
+      $dateD,
+      '日（',
+      $weekday,
+      '）',
+    ]);
+
+    $title = implode('', [
+      $team_and_date,
+      '- ',
+      $league_name,
+      ' ',
+      $season_name
+    ]);
+
     $args['page'] = $app->model->set(array(
-      'title' => "{$visitor} vs {$home} - {$dateY}年{$dateM}月{$dateD}日（{$weekday}）",
-      'gameid' => $gameid,
-      'season' => $year . $season_jp,
+      'request_uri' => $request_uri,
+      'title' => $title,
+      'league' => $league,
+      'league_name' => $league_name,
+      'game_id' => $gameid,
+      'season' => $season,
+      'season_name' => $season_name,
+      'short_season' => $short_season_name,
+      'team_and_date' => $team_and_date,
     ));
 
     return $this->renderer->render($response, 'big6tv/game.php', $args);
