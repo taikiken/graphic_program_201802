@@ -1,0 +1,180 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../scss/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../bower_exports/modularized/normalize";
+@import "../../../../scss/style/reset";
+@import "../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+
+
+// common override
+.id-sports-2017 {
+  .body-sec {
+    overflow: hidden;
+  }
+
+  .body-sec-inner {
+    width: 100%;
+    padding-bottom: 70px;
+    background-color: transparent;
+    background-image: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//.id_sports2017__photo_gallery
+//.id_sports2017__offshot_movie
+.id_sports2017__photo_gallery,
+.id_sports2017__offshot_movie {
+  margin-top: 60px;
+  overflow: hidden;
+
+  //.id_sports2017__photo_gallery__outer
+  //.id_sports2017__offshot_movie__outer
+  &__outer {
+    max-width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.id_sports2017__photo_gallery__inner
+  //.id_sports2017__offshot_movie__inner
+  &__inner {
+    position: relative;
+    width: 1090px;
+    margin-right: -5000px;
+    margin-left: -5000px;
+    padding-right: 5000px;
+    padding-left: 5000px;
+  }
+
+  //.id_sports2017__photo_gallery__heading
+  //.id_sports2017__offshot_movie__heading
+  &__heading {
+    position: relative;
+    width: 1090px;
+    padding-top: 10px;
+
+    &__btn {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+
+      a {
+        display: block;
+        width: 341px;
+        height: 60px;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        @include hide-text;
+
+        &:hover {
+          background-position: 0 -60px;
+        }
+      }
+    }
+  }
+
+  @at-root {
+    .id_sports2017__photo_gallery__heading__btn a {
+      background-image: url(/assets/images/bulls-station/gallery-btn.png);
+    }
+
+    .id_sports2017__offshot_movie__heading__btn a {
+      background-image: url(/assets/images/bulls-station/movie-btn.png);
+    }
+  } //at-root
+
+  //.id_sports2017__photo_gallery__list
+  //.id_sports2017__offshot_movie__list
+  &__list {
+    display: table;
+    width: 1090px;
+    margin-top: 20px;
+  }
+
+  &__item {
+    display: table-cell;
+    width: 218px;
+    text-align: center;
+
+    img {
+      width: 200px;
+    }
+  }
+
+  @at-root {
+    .id_sports2017__photo_gallery__item {
+      a:hover {
+        @include over-opacity(0.75);
+      }
+    }
+
+    .id_sports2017__offshot_movie__item {
+      a {
+        display: inline-block;
+        position: relative;
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: #000;
+          @include opacity(0.3);
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          width: 38px;
+          height: 38px;
+          background: url(/assets/images/bulls-station/movie-icon-thumb.png) 0 0 no-repeat;
+          @include hide-text;
+        }
+
+        &:hover {
+          &:before {
+            @include opacity(0);
+          }
+
+          &:after {
+            @include opacity(0);
+          }
+        }
+      }
+    } //.id_sports2017__offshot_movie__item
+  } //at-root
+}
+//.id_sports2017__photo_gallery
+//.id_sports2017__offshot_movie
