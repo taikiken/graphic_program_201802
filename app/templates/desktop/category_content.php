@@ -75,7 +75,6 @@ if ($page['category']['slug'] == 'all') {
         </div>
       <?php endif; ?>
 
-
       <?php
       # ref. #2227
       if ( $page['category']['slug'] === 'seriku' ) :
