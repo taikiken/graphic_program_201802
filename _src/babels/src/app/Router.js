@@ -502,7 +502,8 @@ export class Router extends EventDispatcher {
       this.dispatch({ type: Router.CATEGORY_AREA, slugType, mode });
     } else {
       // 都道府県
-      this.dispatch({ type: Router.CATEGORY_PREF, slugType, mode });
+      // this.dispatch({ type: Router.CATEGORY_PREF, slugType, mode });
+      this.page404('area');
     }
   }
   /**
@@ -550,6 +551,9 @@ export class Router extends EventDispatcher {
     //
     // }
   }
+  /**
+   * `/a/` な個別ページ
+   */
   singleA() {
     const [articleId, comment, commentId, replyId] = Loc.path.replace( '/a/', '' ).split('/');
     if (!!articleId && Number.isInteger(parseInt(articleId, 10))) {
