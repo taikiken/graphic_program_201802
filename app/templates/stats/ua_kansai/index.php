@@ -156,41 +156,83 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
       <section class="main-sec">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       <div class="stats__header stats__header--golf pt30 mb30">
         <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/images/stats/golf/heading@2x.png" alt="ゴルフ 速報&スタッツ" /></a></h1>
 =======
       <div class="stats__header stats__header--golf mb30">
         <h1 class="stats__header__title"><a href="./"><img class="responsive" src="/assets/stats/ua_kansai/images/heading.jpg" alt="ゴルフ 速報&スタッツ" /></a></h1>
 >>>>>>> origin/feature/2264-amefoot-stats
+=======
+      <div class="stats__header mb30">
+        <h1 class="stats__header__title"><img class="responsive" src="/assets/stats/ua_kansai/images/heading.jpg" alt="関西アメフト 速報&スタッツ" /></h1>
+>>>>>>> origin/feature/2264-amefoot-stats
       </div><!-- /.stats__header -->
 
-      <div class="stats__banner stats__banner--golf show-for-large mb30">
-        <!-- /531683568/golf-stats-ad/golf-stats-under-header-PC -->
-        <script>
-          googletag.cmd.push(function() {
-            googletag.defineSlot('/531683568/golf-stats-ad/golf-stats-under-header-PC', [728, 90], 'div-gpt-ad-1498734753639-0').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-          });
-        </script>
-        <div id='div-gpt-ad-1498734753639-0' style='height:90px; width:728px;'>
-        <script>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498734753639-0'); });
-        </script>
+      <div class="stats__banner mb30">
+        <div id="ua-pc-big-banner" style='height:90px; width:728px;'>
+          <!-- /531683568/kansai-amefoot-ad/ua-pc-big-banner -->
+          <script>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-pc-big-banner', [728, 90], 'div-gpt-ad-1504503001230-0').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-1504503001230-0'>
+          <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503001230-0'); });
+          </script>
+          </div>
+          <!-- // /531683568/kansai-amefoot-ad/ua-pc-big-banner -->
         </div>
-        <!-- // /531683568/golf-stats-ad/golf-stats-under-header-PC -->
+
+        <div id="ua-sp-big-banner" style='height:50px; width:320px;'>
+          <!-- /531683568/kansai-amefoot-ad/ua-sp-big-banner -->
+          <script>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-sp-big-banner', [320, 50], 'div-gpt-ad-1504503049105-0').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-1504503049105-0'>
+          <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503049105-0'); });
+          </script>
+          </div>
+          <!-- // /531683568/kansai-amefoot-ad/ua-sp-big-banner -->
+        </div>
+
+        <div id="ua-app-big-banner" style='height:50px; width:320px;'>
+          <!-- /531683568/kansai-amefoot-ad/ua-app-big-banner -->
+          <script>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-app-big-banner', [320, 50], 'div-gpt-ad-1504503090397-0').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-1504503090397-0'>
+          <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503090397-0'); });
+          </script>
+          </div>
+          <!-- // /531683568/kansai-amefoot-ad/ua-app-big-banner -->
+        </div>
       </div><!-- /.stats__banner -->
 
       <nav id="game-category" class="active-0">
         <ul>
           <li>公式戦</li>
           <li>入替戦</li>
-          <li>新日本</li>
+          <li>全日本</li>
           <li>甲子園ボウル</li>
         </ul>
       </nav>
       <div class="game-category1">
         <div class="af-schedule">
+<<<<<<< HEAD
             <h2 class="calendar">日程結果 / Division1</h2>
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -491,6 +533,9 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
           </table>
 =======
 =======
+=======
+            <h2 class="calendar">日程・結果 / Division1</h2>
+>>>>>>> origin/feature/2264-amefoot-stats
             <div class="lastupdate">最終更新日：<?=$dataArray["lastupdate"]?></div>
 >>>>>>> 2986a4a4b4d6468a3314e052365488103a63dff8
             <?=$dataArray["game-category1"]["schedule"]?>
@@ -503,38 +548,23 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
       </div><!-- game-category -->
       <div class="game-category2">
         <div class="af-schedule">
-            <h2 class="calendar">日程結果 / 入替戦</h2>
+            <h2 class="calendar">日程・結果 / 入替戦</h2>
             <?=$dataArray["game-category2"]["schedule"]?>
         </div>
       </div><!-- game-category2 -->
       <div class="game-category3">
         <div class="af-schedule">
-            <h2 class="calendar">日程結果 / 新日本</h2>
+            <h2 class="calendar">日程・結果 / 全日本</h2>
             <?=$dataArray["game-category3"]["schedule"]?>
         </div>
       </div><!-- game-category3 -->
       <div class="game-category4">
         <div class="af-schedule">
-            <h2 class="calendar">日程結果 / 甲子園ボール</h2>
+            <h2 class="calendar">日程・結果 / 甲子園ボウル</h2>
             <?=$dataArray["game-category4"]["schedule"]?>
         </div>
       </div><!-- game-category4 -->
-      <div class="stats__banner stats__banner--golf show-for-small">
-        <!-- /531683568/golf-stats-ad/golf-stats-under-header-SP -->
-        <script>
-          googletag.cmd.push(function() {
-            googletag.defineSlot('/531683568/golf-stats-ad/golf-stats-under-header-SP', [320, 50], 'div-gpt-ad-1498734782114-0').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-          });
-        </script>
-        <div id='div-gpt-ad-1498734782114-0' style='height:50px; width:320px;'>
-        <script>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498734782114-0'); });
-        </script>
-        </div>
-        <!-- // /531683568/golf-stats-ad/golf-stats-under-header-SP -->
-      </div><!-- /.stats__banner -->
+
 
       </section><!-- /.main-sec -->
 
@@ -567,10 +597,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
             </script>
             </div>
             <!-- // ad/531683568/pc_sidebar_top_2nd -->
-          </div>
-
-          <div class="app-bnr">
-            <iframe width="100%" height="168" src="http://amefootlive.jp/kcafl_live" scrolling="no" frameborder="0" style="border: 0px none transparent;"></iframe>
           </div>
           
           <!-- sidebar recommend, オススメ記事 -->
@@ -709,6 +735,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 </script>
 
 <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+<script src="/assets/stats/ua_kansai/js/userAgent.js"></script>
 <script src="/assets/js/global.bundle.js"></script>
 <<<<<<< HEAD
 <script src="/assets/stats/ur_kansai/js/index.js"></script>
