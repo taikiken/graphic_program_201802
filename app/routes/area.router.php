@@ -120,7 +120,12 @@ $app->group('/area', function () use($app) {
       'template_classname' => $template_classname,
     ));
 
-    return $this->renderer->render($response, "default.php", $args);
+    return $this->renderer->render($response, "area/default.php", $args);
+//    if ( $app->model->property('ua') === 'desktop' ) :
+//      return $this->renderer->render($response, 'area/desktop/category.php', $args);
+//    else :
+//      return $this->renderer->render($response, 'area/mobile/category.php', $args);
+//    endif;
 
   });
 });
