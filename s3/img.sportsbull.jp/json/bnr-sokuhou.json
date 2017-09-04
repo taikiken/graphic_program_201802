@@ -85,6 +85,27 @@
       ]
     },
     {
+      "title": "大学野球",
+      "banners": [
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-baseball_univ_6.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-baseball_univ_6.jpg"
+          },
+          "url": "/stats/ub_kansaibig6/",
+          "alt": "関西六大学野球 速報&amp;データを見る"
+        },
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-baseball_univ_kansai.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-baseball_univ_kansai.jpg"
+          },
+          "url": "/stats/ub_kansai/",
+          "alt": "関西大学野球 速報&amp;データを見る"
+        }
+      ]
+    },
+    {
       "title": "テニス",
       "banners": [
         {
