@@ -5,11 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=1280">
   <script src="/assets/js/libs/sagen/sagen.min.js?v=d56cb17f" id="sagen" data-browser="true" data-orientation="true"></script>
-  <title>東京六大学野球 BIG6.TV | SPORTS BULL</title>
+  <title>2017春季リーグ | BIG6.TV (東京六大学野球) | SPORTS BULL</title>
   <meta name="description" content="東京六大学野球 LIVE配信・ハイライト動画をスポーツブルで。">
   <meta name="keywords" content="東京六大学野球, 法政大学, 立教大学, 東京大学, 早稲田大学, 慶應大学, 明治大学, LIVE配信, ハイライト動画, スポーツ, メディア, ニュース, 動画, sports, media">
   <!-- sns ogp -->
-  <meta property="og:title" content="東京六大学野球 BIG6.TV | SPORTS BULL">
+  <meta property="og:title" content="2017春季リーグ | BIG6.TV (東京六大学野球) | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/_/big6tv/og_image/og_image.png">
   <meta property="og:url" content="https://sportsbull.jp/big6tv/">
@@ -1417,8 +1417,8 @@
       <nav class="foot-breadCrumb">
   <ol itemscope itemtype="http://schema.org/breadCrumbList">
     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/category/"><span itemprop="name"></span><meta itemprop="position" content="2" /></a></li>
-
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/category/big6tv/"><span itemprop="name">BIG6.TV (東京六大学野球)</span><meta itemprop="position" content="2" /></a></li>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/big6tv/2017s/"><span itemprop="name">2017春季リーグ</span><meta itemprop="position" content="2" /></a></li>
       </ol>
 </nav>
       <div class="foot-pr">

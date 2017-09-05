@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <title>東京六大学野球 BIG6.TV | SPORTS BULL</title>
+    <title>2017春季リーグ | BIG6.TV (東京六大学野球) | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
   <meta name="description" content="東京六大学野球 LIVE配信・ハイライト動画をスポーツブルで。">
   <meta name="keywords" content="東京六大学野球, 法政大学, 立教大学, 東京大学, 早稲田大学, 慶應大学, 明治大学, LIVE配信, ハイライト動画, スポーツ, メディア, ニュース, 動画, sports, media">
   <!-- sns ogp -->
-  <meta property="og:title" content="東京六大学野球 BIG6.TV | SPORTS BULL">
+  <meta property="og:title" content="2017春季リーグ | BIG6.TV (東京六大学野球) | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/_/big6tv/og_image/og_image.png">
   <meta property="og:url" content="https://sportsbull.jp/big6tv/">
