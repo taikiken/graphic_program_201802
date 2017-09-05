@@ -132,6 +132,9 @@ import { SPViewCategory } from './sp/view/category/SPViewCategory';
 // SPViewCategoryWithSlug が多分正解
 import { SPViewCategoryWithSlug } from './sp/view/category/SPViewCategoryWithSlug';
 
+// 2017-09-04 - area
+import SPViewArea from './sp/view/category/SPViewArea';
+
 // search
 import {SPViewSearch} from './sp/view/SPViewSearch';
 
@@ -271,7 +274,8 @@ let UT = {
       },
       category: {
         SPViewCategory,
-        SPViewCategoryWithSlug
+        SPViewCategoryWithSlug,
+        SPViewArea,
       },
       header: {
         SPViewHeaderUser,

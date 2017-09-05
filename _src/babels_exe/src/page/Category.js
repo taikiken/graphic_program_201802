@@ -16,8 +16,8 @@ import {Sidebar} from './Sidebar';
 // let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * <p>category 一覧</p>
@@ -63,6 +63,7 @@ export class Category {
    * @param {string} slug `area` 固定
    * @param {string} area 地域名称
    * @param {boolean} pref 都道府県フラッグ true: 都道府県
+   * @since 2017-09-04
    */
   static area(slug, area, pref) {
     // header
