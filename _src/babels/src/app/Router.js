@@ -496,10 +496,12 @@ export class Router extends EventDispatcher {
       '九州・沖縄',
     ];
     const index = areas.indexOf(mode);
+    let pref = true;
     console.log('Router.area type', encoded, index, mode);
     if (index !== -1) {
       // 地域
-      this.dispatch({ type: Router.CATEGORY_AREA, slugType, mode });
+      pref = false;
+      this.dispatch({ type: Router.CATEGORY_AREA, slug: 'area', slugType, mode, pref });
     } else {
       // 都道府県
       // this.dispatch({ type: Router.CATEGORY_PREF, slugType, mode });

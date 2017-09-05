@@ -164,14 +164,14 @@ let buildPath = ( root = '' ) => {
     // /area/地域/
     // @since 2017-08-29
     'area': new Types(
-      new Type( `${API_PATH}/area` ),
+      new Type( `${API_PATH}/articles/area` ),
       new Permalink(),
       new Queries()
     ),
     // /area/地域/
     // @since 2017-08-29
     'pref': new Types(
-      new Type( `${API_PATH}/pref` ),
+      new Type( `${API_PATH}/articles/pref` ),
       new Permalink(),
       new Queries()
     ),

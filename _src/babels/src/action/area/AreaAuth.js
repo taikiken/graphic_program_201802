@@ -31,7 +31,7 @@ import { User } from '../../app/User';
  * ```
  * @since 2017-09-04
  */
-export class AreaAuth extends OffsetAuth {
+export default class AreaAuth extends OffsetAuth {
   /**
    * 地域 - Ajax - 処理を行います
    * @param {string} [area=''] 地域名称

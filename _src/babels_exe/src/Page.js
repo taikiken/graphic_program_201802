@@ -611,7 +611,7 @@ export class Page {
    */
   static area(event) {
     // like category
-    const { mode } = event;
+    const { mode, pref } = event;
     const slug = 'area';
     console.log('Page.area', mode, slug, event);
     // page top
@@ -619,7 +619,7 @@ export class Page {
     // search from
     SearchForm.start();
     // category
-    Category.start(slug, mode);
+    Category.area(slug, mode, pref);
     // nav
     Nav.start(slug);
 

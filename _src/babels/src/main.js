@@ -82,6 +82,11 @@ import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
 import {ViewLogoutModal} from './view/modal/ViewLogoutModal';
 import {ViewFlushModal} from './view/modal/ViewFlushModal';
 
+// area
+// @since 2017-09-04
+import ViewArea from './view/ViewArea';
+
+
 // ----------- users
 // signup
 import {SignupWizard} from './view/signup/SignupWizard';
@@ -196,6 +201,7 @@ let UT = {
     ViewSearch,
     ViewCommentSingle,
     ViewFirstVisit,
+    ViewArea,
     comment: {
       ViewCommentForm
     },

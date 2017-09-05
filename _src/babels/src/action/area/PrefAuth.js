@@ -68,7 +68,7 @@ import { User } from '../../app/User';
  * ```
  * @since 2017-09-04
  */
-export class PrefAuth extends OffsetAuth {
+export default class PrefAuth extends OffsetAuth {
   /**
    * 都道府県 - Ajax - 処理を行います
    * @param {string} [area=''] 都道府県名称

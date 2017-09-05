@@ -30,7 +30,7 @@ import { Api } from '../../net/Api';
  * ```
  * @since 2017-09-04
  */
-export class Area extends Offset {
+export default class Area extends Offset {
   /**
    * 地域 - Ajax - 処理を行います
    * @param {string} [area=''] 地域名称
