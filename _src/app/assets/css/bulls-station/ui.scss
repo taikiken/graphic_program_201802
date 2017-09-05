@@ -590,24 +590,43 @@
     margin-top: 20px;
   }
 
-  &__item {
-    display: table-cell;
-    width: 218px;
-    text-align: center;
-
-    img {
-      width: 200px;
-    }
-  }
-
   @at-root {
     .bulls_station__photo_gallery__item {
-      a:hover {
-        @include over-opacity(0.75);
+      display: table-cell;
+      width: 200px;
+      height: 200px;
+      padding-right: 9px;
+      padding-left: 9px;
+      text-align: center;
+      vertical-align: middle;
+
+      a {
+        display: table-cell;
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+        text-align: center;
+        vertical-align: middle;
+
+        img {
+          max-width: 200px;
+          max-height: 200px;
+        }
+
+        &:hover {
+          @include over-opacity(0.75);
+        }
       }
     }
 
     .bulls_station__offshot_movie__item {
+      display: table-cell;
+      width: 200px;
+      padding-right: 9px;
+      padding-left: 9px;
+      text-align: center;
+      vertical-align: middle;
+
       a {
         display: inline-block;
         position: relative;
