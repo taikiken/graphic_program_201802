@@ -1,0 +1,424 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss_sp/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss_sp/style/reset";
+@import "../../../../../scss_sp/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+
+
+// common override
+.id-sports-2017 {
+  .body-sec-inner {}
+}
+
+
+
+
+//.id_sports2017__nav
+.id_sports2017__nav {
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  top: 0;
+
+  //.id_sports2017__nav__inner
+  &__inner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: (80/2)+px;
+    padding-right: (30/2)+px;
+    padding-left: (40/2)+px;
+    background: url(/assets/sp/images/id-sports-2017/nav-bg.png) 0 0 no-repeat;
+    background-size: auto (80/2)+px;
+    letter-spacing: ls(inline-block);
+  }
+
+
+
+  //.id_sports2017__nav__item
+  &__item {
+    display: inline-block;
+    line-height: 1;
+    letter-spacing: normal;
+  }
+
+
+
+  //.id_sports2017__nav--nav
+  &--nav {
+    display: inline-block;
+    margin-top: (20/2)+px;
+
+    .id_sports2017__nav__item {
+      line-height: 1;
+      margin-left: (30/2)+px;
+      vertical-align: middle;
+    }
+
+    a {
+      @include link-decoration(#fff, #fff, none, none);
+      font-weight: bold;
+      font-size: (20/2)+px;
+    }
+  }
+
+
+
+  //.id_sports2017__nav--sns
+  &--sns {
+    display: inline-block;
+    margin-top: (20/2)+px;
+    margin-left: (30/2)+px;
+    border-left: 1px solid #fff;
+
+    .id_sports2017__nav__item {
+      line-height: 1;
+      margin-left: (30/2)+px;
+
+      img {
+        width: (30/2)+px;
+        vertical-align: middle;
+      }
+
+      &:first-child {
+        margin-left: (30/2)+px;
+
+        img {
+          width: (64/2)+px;
+        }
+      }
+    }
+  }
+
+
+
+  .teaser & {
+    .id_sports2017__nav--nav {
+      display: none;
+    }
+
+    .id_sports2017__nav--sns {
+      margin-left: 0;
+      padding-left: 10px;
+      border-left: none;
+
+      .id_sports2017__nav__item:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+} //.id_sports2017__nav
+
+
+
+
+
+//.id_sports2017__summary
+.id_sports2017__summary {
+  z-index: 10;
+  position: relative;
+  width: 100%;
+  min-height: (730/2)+px;
+  background-color: #0f1d37;
+  text-align: center;
+  -webkit-clip-path: polygon(0 95%, 0 0, 100% 0, 100% 95%, 50% 100%);
+          clip-path: polygon(0 95%, 0 0, 100% 0, 100% 95%, 50% 100%);
+
+  //.id_sports2017__summary__text
+  &__text {
+    max-width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+
+    //.id_sports2017__summary__text--1
+    &--1 {
+      padding-top: (184/2)+px;
+
+      img {
+        width: (528/2)+px;
+      }
+    }
+
+    //.id_sports2017__summary__text--2
+    &--2 {
+      margin-top: (28/2)+px;
+
+      img {
+        width: (652/2)+px;
+      }
+    }
+
+    //.id_sports2017__summary__text--3
+    &--3 {
+      margin-top: (18/2)+px;
+
+      img {
+        width: (342/2)+px;
+      }
+    }
+
+    //.id_sports2017__summary__text--4
+    &--4 {
+      margin-top: (12/2)+px;
+
+      img {
+        width: (206/2)+px;
+      }
+    }
+  }
+
+} //.id_sports2017__summary
+
+
+
+
+
+//.id_sports2017__intro
+.id_sports2017__intro {
+  position: relative;
+  margin-top: -(64/2)+px;
+  padding-top: (132/2)+px;
+  padding-bottom: (60/2)+px;
+  background: #cc141d url(/assets/sp/images/id-sports-2017/intro-bg.png) center 0 repeat;
+  background-size: contain;
+
+  //.id_sports2017__intro__inner
+  &__inner {
+    width: perCalc(710, 750);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.id_sports2017__intro__heading
+  &__heading {
+    line-height: lh(52, 40);
+    color: #fff;
+    font-weight: bold;
+    font-size: (40/2)+px;
+    text-align: center;
+  }
+
+  //.id_sports2017__intro__copy
+  &__copy {
+    line-height: lh(40, 28);
+    margin-top: (40/2)+px;
+    color: #fff;
+    font-size: (28/2)+px;
+  }
+
+  //.id_sports2017__intro__hilight_movie
+  &__hilight_movie {
+    position: relative;
+    width: 100%;
+    margin-top: (76/2)+px;
+
+    //.id_sports2017__intro__hilight_movie__heading
+    &__heading {
+      position: absolute;
+      top: -10px;
+
+      img {
+        width: (290/2)+px;
+      }
+    }
+  }
+} //.id_sports2017__intro
+
+
+
+
+
+//.id_sports2017__overview
+.id_sports2017__overview {
+  padding-top: (60/2)+px;
+  padding-bottom: (70/2)+px;
+  background-color: #8e0f15;
+
+  //.id_sports2017__overview__inner
+  &__inner {
+    width: perCalc(710, 750);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.id_sports2017__overview__heading
+  &__heading {
+    color: #fff;
+    font-weight: bold;
+    font-size: (40/2)+px;
+    text-align: center;
+  }
+
+  //.id_sports2017__overview__data
+  &__data {
+    display: block;
+    margin-top: (32/2)+px;
+
+    th, td {
+      display: block;
+      color: #fff;
+      font-size: (28/2)+px;
+    }
+
+    th {
+      padding-top: 1em;
+      padding-bottom: 0.25em;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    td {
+      padding-bottom: 1em;
+      border-bottom: 1px solid #68090d;
+    }
+
+    tr:last-child {
+      td {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+    }
+  }
+} //.id_sports2017__overview
+
+
+
+
+
+//.id_sports2017__gallery_container
+.id_sports2017__gallery_container {
+  .teaser & {
+    display: none;
+  }
+}
+
+//.id_sports2017__photo_gallery
+//.id_sports2017__offshot_movie
+.id_sports2017__photo_gallery,
+.id_sports2017__offshot_movie {
+  background-color: #f5f5f5;
+
+  //.id_sports2017__photo_gallery__heading
+  //.id_sports2017__offshot_movie__heading
+  &__heading {
+    line-height: 1;
+    padding-top: perCalc(18, 750);
+    padding-bottom: perCalc(18, 750);
+    background-color: #0e357f;
+    text-align: center;
+
+    img {
+      width: auto;
+      height: (28/2)+px;
+    }
+  }
+
+  //.id_sports2017__photo_gallery__list
+  //.id_sports2017__offshot_movie__list
+  &__list {
+    margin-right: perCalc(10, 750);
+    margin-left: perCalc(10, 750);
+    letter-spacing: ls(inline-block);
+  }
+
+  &__item {
+    display: inline-block;
+    width: perCalc(345, 730);
+    margin-top: perCalc(20, 730);
+    margin-right: perCalc(10, 730);
+    margin-left: perCalc(10, 730);
+    text-align: center;
+    letter-spacing: normal;
+  }
+
+  @at-root {
+    .id_sports2017__offshot_movie__item {
+      a {
+        display: inline-block;
+        position: relative;
+
+        img {
+          border-radius: 5px;
+        }
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+          background-color: #000;
+          @include opacity(0.3);
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          width: (60/2)+px;
+          height: (60/2)+px;
+          background: url(/assets/sp/images/id-sports-2017/movie-icon-thumb.png) 0 0 no-repeat;
+          background-size: (60/2)+px;
+          @include hide-text;
+        }
+      }
+    } //.id_sports2017__offshot_movie__item
+  } //at-root
+
+  //.id_sports2017__photo_gallery__btn
+  //.id_sports2017__offshot_movie__btn
+  &__btn {
+    padding: perCalc(40, 750) perCalc(20, 750);
+
+    a {
+      display: block;
+      line-height: (88/2)+px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      font-size: (26/2)+px;
+      text-align: center;
+
+      &:before {
+        content: "";
+        display: inline-block;
+        width: (24/2)+px;
+        height: (24/2)+px;
+        margin-right: (10/2)+px;
+        background: url(/assets/sp/images/id-sports-2017/gallery-icon_btn.png) 0 0 no-repeat;
+        background-size: (24/2)+px;
+        vertical-align: middle;
+        @include hide-text;
+      }
+    }
+
+    @at-root {
+      //.id_sports2017__photo_gallery__btn
+      .id_sports2017__photo_gallery__btn a {
+        background-color: #cc141d;
+      }
+
+      //.id_sports2017__offshot_movie__btn
+      .id_sports2017__offshot_movie__btn a {
+        background-color: #cc141d;
+      }
+    }
+  }
+}
+//.bulls_station__photo_gallery
+//.bulls_station__offshot_movie

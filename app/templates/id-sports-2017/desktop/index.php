@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__."/../_include/_bulls_station_func.php";
+// include_once __DIR__."/../_include/_bulls_station_func.php";
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
@@ -59,7 +59,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
   </script>
 </head>
 <body>
-<div id="whole" class="whole <?php echo $page['template_classname']; ?>">
+<div id="whole" class="whole <?php echo $page['template_classname']; ?> teaser">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
@@ -67,243 +67,153 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
   </header><!-- /.head-sec -->
 
   <div class="body-sec">
-    <nav class="bulls_station__local_navi">
-      <div class="bulls_station__local_navi__outer">
-        <div class="bulls_station__local_navi__inner">
-          <div class="bulls_station__local_navi__heading__container">
-            <h2 class="bulls_station__local_navi__heading"><img src="/assets/images/bulls-station/nav-heading.png" alt="スポーツニュース番組 BULL'S STATION"></h2>
-            <div class="bulls_station__local_navi__heading__date"><img src="/assets/images/bulls-station/nav-date.png" alt="毎週平日 月-金 12:30〜 配信"></div>
-          </div><!-- /.local_navi__heading__container -->
-
-          <ul class="bulls_station__local_navi__list">
-            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--1"><a class="bulls_station__local_navi__link" href="/category/station/">BULL'S STATIONを見る</a></li>
-            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--2"><a class="bulls_station__local_navi__link" href="/p/181566/">PHOTO GALLERY</a></li>
-            <li class="bulls_station__local_navi__item bulls_station__local_navi__item--3"><a class="bulls_station__local_navi__link" href="/bulls-station/off-shot-movie/">OFFSHOT MOVIE</a></li>
-          </ul><!-- /.bulls_station__local_navi__list -->
-        </div><!-- /.bulls_station__local_navi__inner -->
-      </div><!-- /.bulls_station__local_navi__outer -->
-    </nav><!-- /.bulls_station__local_navi -->
-
     <div class="body-sec-inner">
-      <div class="bulls_station__overview">
-        <div class="bulls_station__overview__outer">
-          <div class="bulls_station__overview__inner">
 
-            <div id="scene" class="bulls_station__overview__parallax">
-              <div data-depth="-0.05" class="layer parallax__layer parallax__layer--shadow1"><img src="/assets/images/bulls-station/overview-bg1_shadow.png" alt=""></div>
-              <div data-depth="0.10" class="layer parallax__layer parallax__layer--shadow2"><img src="/assets/images/bulls-station/overview-bg2_shadow.png" alt=""></div>
-              <div data-depth="-0.07" class="layer parallax__layer parallax__layer--bustle1"><img src="/assets/images/bulls-station/overview-bg1.png" alt=""></div>
-              <div data-depth="0.15" class="layer parallax__layer parallax__layer--bustle2"><img src="/assets/images/bulls-station/overview-bg2.png" alt=""></div>
-            </div><!-- /#js-parallax -->
+      <nav class="id_sports2017__nav">
+        <div class="id_sports2017__nav__inner">
+          <ul class="id_sports2017__nav--nav">
+            <li class="id_sports2017__nav__item"><a href="#anchor-1">大会映像</a></li>
+            <li class="id_sports2017__nav__item"><a href="hoge">大会写真</a></li>
+            <li class="id_sports2017__nav__item"><a href="hoge">記録映像</a></li>
+          </ul><!-- /.id_sports2017__nav--nav1 -->
 
-            <h1 class="bulls_station__overview__heading"><img src="/assets/images/bulls-station/overview-logo.png" alt="BULL'S STATION"></h1>
-            <p class="bulls_station__overview__copy"><img src="/assets/images/bulls-station/overview-copy.png" alt="BULL’S STATIONは最新ニュースを個性あふれるキャスターが真心込めてお届けするスポーツニュース番組です。毎日のランチのお供にぜひ御覧ください！"></p>
-            <p class="bulls_station__overview__date"><img src="/assets/images/bulls-station/overview-date.png" alt="毎週平日 月-金 12:30〜 配信"></p>
-            <div class="bulls_station__overview__btn">
-              <a class="bulls_station__overview__btn__link" href="/category/station/"><img src="/assets/images/bulls-station/overview-btn.png" alt="BULL’S STATIONを見る"></a>
-            </div><!-- /.bulls_station__overview__btn -->
+          <dl class="id_sports2017__nav--sns">
+            <dt class="id_sports2017__nav__item"><img src="/assets/images/id-sports-2017/nav-sns-heading.png" alt="SHARE"></dt>
+            <dd class="id_sports2017__nav__item"><a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=554, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow"><img src="/assets/images/id-sports-2017/nav-sns-facebook.png" alt="facebookでシェアする"></a></dd>
+            <dd class="id_sports2017__nav__item"><a class="twitter btn" href="http://twitter.com/share?url=<?php echo $page['og_url']; ?>&text=<?php echo $page['og_description']; ?>" target="_blank"><img src="/assets/images/id-sports-2017/nav-sns-twitter.png" alt="twitterでシェアする"></a></dd>
+          </dl><!-- /.id_sports2017__nav--nav2 -->
+        </div><!-- /.id_sports2017__nav__inner -->
+      </nav><!-- .id_sports2017__nav -->
 
-            <div class="bulls_station__overview__caster">
-              <ul class="bulls_station__overview__caster__list">
-                <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--mon">
-                  <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182756/" target="_blank">
-                    <figure class="bulls_station__overview__caster__figure">
-                      <div class="bulls_station__overview__caster__figure__img"><img src="/assets/images/bulls-station/caster-figure_mon.png" alt=""></div>
-                      <h3 class="bulls_station__overview__caster__figure__heading"><img src="/assets/images/bulls-station/caster-figure_mon_heading.png" alt="エイミー"></h3>
-                      <i class="bulls_station__overview__caster__figure__dow"><img src="/assets/images/bulls-station/caster-icon_mon.png" alt="Monday"></i>
-                    </figure><!-- /.bulls_station__overview__caster__figure -->
+      <div class="id_sports2017__summary">
+        <div class="id_sports2017__summary__movie"></div><!-- /.id_sports2017__summary__movie -->
 
-                    <span class="bulls_station__overview__caster__btn"><img src="/assets/images/bulls-station/caster-btn.png" alt="紹介VTRを見る"></span>
-                  </a><!-- /.bulls_station__overview__caster__link -->
+        <div class="id_sports2017__summary__text">
+          <h1 class="id_sports2017__summary__text--1 js-animation"><img src="/assets/images/id-sports-2017/summary-text1.png" alt="xxxxx"></h1>
+          <p class="id_sports2017__summary__text--2 js-animation"><img src="/assets/images/id-sports-2017/summary-text2.png" alt="xxxxx"></p>
+          <p class="id_sports2017__summary__text--3 js-animation"><img src="/assets/images/id-sports-2017/summary-text3.png" alt="xxxxx"></p>
+          <div class="id_sports2017__summary__text--4 js-animation"><img src="/assets/images/id-sports-2017/summary-flag.png" alt=""></div>
+        </div><!-- /.id_sports2017__summary__text -->
+      </div><!-- /.id_sports2017__summary -->
 
-                  <h4 class="bulls_station__overview__caster__heading">月曜担当キャスター</h4>
-                  <p class="bulls_station__overview__caster__copy">山や海の大自然が大好きで、家の中に籠ることが苦手。<br />
-                  寂しがり屋でもあるのでよく外出して人とあったり、体を動かしたりと完全にアウトドア派です。動物と日本のお城巡りも好きで、最近は辛い食べ物にはまっています！</p>
-                </li><!-- /.bulls_station__overview__caster__item -->
-                <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--tue">
-                  <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182761/" target="_blank">
-                    <figure class="bulls_station__overview__caster__figure">
-                      <div class="bulls_station__overview__caster__figure__img"><img src="/assets/images/bulls-station/caster-figure_tue.png" alt=""></div>
-                      <h3 class="bulls_station__overview__caster__figure__heading"><img src="/assets/images/bulls-station/caster-figure_tue_heading.png" alt="サヤカ"></h3>
-                      <i class="bulls_station__overview__caster__figure__dow"><img src="/assets/images/bulls-station/caster-icon_tue.png" alt="Tuesday"></i>
-                    </figure><!-- /.bulls_station__overview__caster__figure -->
+      <div class="id_sports2017__intro">
+        <div class="id_sports2017__intro__inner">
+          <p class="id_sports2017__intro__scroll"><img src="/assets/images/id-sports-2017/intro-scroll.png" alt="SCROLL"></p>
+          <h2 class="id_sports2017__intro__heading">第一回知的障がい者日韓スポーツ交流プログラム</h2>
+          <p class="id_sports2017__intro__copy">エクアドル2015 グローバルゲームスに参加した有志により当プログラムは構成され、<br />
+          アジア地域における知的障がい者スポーツの発展に日韓が協力して推進し、スポーツを通じた国際協力及び交流を目的に行われるものである。<br />
+          また、これらの草の根的活動は、日本政府が進める Sport for Tomorrow の精神に準拠したスポーツ国際貢献事業である。</p>
 
-                    <span class="bulls_station__overview__caster__btn"><img src="/assets/images/bulls-station/caster-btn.png" alt="紹介VTRを見る"></span>
-                  </a><!-- /.bulls_station__overview__caster__link -->
+          <div id="anchor-1" class="id_sports2017__intro__hilight_movie">
+            <h3 class="id_sports2017__intro__hilight_movie__heading"><img src="/assets/images/id-sports-2017/intro-highlight-label.png" alt="ハイライト動画"></h3>
+            <div class="id_sports2017__intro__hilight_movie__video">
+              <img src="/assets/images/id-sports-2017/intro-highlight-movie_cs.png" alt="COMING SOON : 配信までお待ち下さい">
+            </div><!-- /.id_sports2017__intro__hilight_movie__video -->
+          </div><!-- /.id_sports2017__intro__hilight_movie -->
+        </div><!-- /.id_sports2017__intro__inner -->
+      </div><!-- /.id_sports2017__intro -->
 
-                  <h4 class="bulls_station__overview__caster__heading">火曜担当キャスター</h4>
-                  <p class="bulls_station__overview__caster__copy">特技は自分の好きなアーティストさんのダンスをコピーして踊ること、バトントワリング、水泳です。最近ではボルダリングに挑戦したりと体を動かすことが大好きです。持ち前の笑顔で毎日のニュースを元気に明るくお伝えします！</p>
-                </li><!-- /.bulls_station__overview__caster__item -->
-                <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--wed">
-                  <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182765/" target="_blank">
-                    <figure class="bulls_station__overview__caster__figure">
-                      <div class="bulls_station__overview__caster__figure__img"><img src="/assets/images/bulls-station/caster-figure_wed.png" alt=""></div>
-                      <h3 class="bulls_station__overview__caster__figure__heading"><img src="/assets/images/bulls-station/caster-figure_wed_heading.png" alt="エレナ"></h3>
-                      <i class="bulls_station__overview__caster__figure__dow"><img src="/assets/images/bulls-station/caster-icon_wed.png" alt="Wednesday"></i>
-                    </figure><!-- /.bulls_station__overview__caster__figure -->
+      <div class="id_sports2017__overview">
+        <div class="id_sports2017__overview__inner">
+          <h2 class="id_sports2017__overview__heading">大会開催概要</h2>
+          <table class="id_sports2017__overview__data">
+            <tbody>
+              <tr>
+                <th>大会名</th>
+                <td>第1回 知的障がい者日韓スポーツ交流プログラム</td>
+              </tr>
+              <tr>
+                <th>主催</th>
+                <td>知的障がい者日韓スポーツ交流プログラム実行委員会</td>
+              </tr>
+              <tr>
+                <th>協力</th>
+                <td>スペシャルオリンピックス日本 / 学校法人日本体育大学</td>
+              </tr>
+              <tr>
+                <th>協賛（予定）</th>
+                <td>JTB</td>
+              </tr>
+              <tr>
+                <th>後援（予定）</th>
+                <td>（公財）日本障がい者スポーツ協会 日本パラリンピック委員会 / 全国特別支援学校知的障害教育校長会 / 東京都教育委員会</td>
+              </tr>
+              <tr>
+                <th>実施日</th>
+                <td>2017年 9月8日（金）　〜 10日（日）<br />
+                ＜9月8日＞ 午前：移動 / 午後：コンディショニング及びトレーニング / 夜：レセプション<br />
+                ＜9月9日＞ 終日：スポーツプログラム（日本選手側合流）<br />
+                ＜9月10日＞午前：指導者交流会 / 午後：文化交流 / 夜：移動</td>
+              </tr>
+              <tr>
+                <th>会場</th>
+                <td>学校法人日本体育大学内各施設<br />
+                〒227-0033 神奈川県横浜市青葉区鴨志田町1212-1<br />
+                TEL. 03-5706-0900</td>
+              </tr>
+              <tr>
+                <th>参加資格</th>
+                <td>知的障害のある者（療育手帳取得者。あるいはその「条件」に合致する者）その程度は問わない。<br />
+                医師の診断を受け、スポーツに支障がないと認められた者。</td>
+              </tr>
+              <tr>
+                <th>競技規定</th>
+                <td>国際大会における各IFの規定に準ず</td>
+              </tr>
+              <tr>
+                <th>参加チーム数（人数）</th>
+                <td>＜韓国側（予定）＞<br />
+                4競技（以下32名＋α）。陸上競技6名（選手男女各2名・コーチ2名） / 水泳6名（選手男女各2名・コーチ2名） / 卓球6名（選手男女各2名・コーチ2名） / バスケットボール10名（選手男子8名・コーチ2名） / 選手団長1名 / チームリーダー1名 / チームスタッフ2名<br />
+                ＜日本側（予定）＞<br />
+                上記競技に準拠して同等数（45名＋α） / 運営スタッフ（50名＋α）</td>
+              </tr>
+            </tbody>
+          </table><!-- /.id_sports2017__overview__data -->
+        </div><!-- /.id_sports2017__overview__inner -->
+      </div><!-- /.id_sports2017__overview -->
 
-                    <span class="bulls_station__overview__caster__btn"><img src="/assets/images/bulls-station/caster-btn.png" alt="紹介VTRを見る"></span>
-                  </a><!-- /.bulls_station__overview__caster__link -->
+      <div class="id_sports2017__gallery_container">
+        <div class="id_sports2017__photo_gallery">
+          <div class="id_sports2017__photo_gallery__outer">
+            <div class="id_sports2017__photo_gallery__inner">
+              <div class="id_sports2017__photo_gallery__heading">
+                <h2><img src="/assets/images/id-sports-2017/gallery-heading.png" alt="大会写真"></h2>
+                <div class="id_sports2017__photo_gallery__heading__btn"><a href="/p/181566/">すべての大会写真を見る</a></div>
+              </div><!-- /.id_sports2017__photo_gallery__heading -->
 
-                  <h4 class="bulls_station__overview__caster__heading">水曜担当キャスター</h4>
-                  <p class="bulls_station__overview__caster__copy">私はこれまでたくさんのスポーツに携わってきました！身体を動かす事が大好きで、ピラティスやダンス、トレッキングやキャンピングなどの趣味を持っています！見た目でよく落ち着きのある人と思われがちですが、正反対でアクティブ系です！</p>
-                </li><!-- /.bulls_station__overview__caster__item -->
-                <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--thu">
-                  <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182768/" target="_blank">
-                    <figure class="bulls_station__overview__caster__figure">
-                      <div class="bulls_station__overview__caster__figure__img"><img src="/assets/images/bulls-station/caster-figure_thu.png" alt=""></div>
-                      <h3 class="bulls_station__overview__caster__figure__heading"><img src="/assets/images/bulls-station/caster-figure_thu_heading.png" alt="イチカ"></h3>
-                      <i class="bulls_station__overview__caster__figure__dow"><img src="/assets/images/bulls-station/caster-icon_thu.png" alt="Thursday"></i>
-                    </figure><!-- /.bulls_station__overview__caster__figure -->
+              <ul class="id_sports2017__photo_gallery__list">
+                <li class="id_sports2017__photo_gallery__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_gallery1.png" alt=""></a></li>
+                <li class="id_sports2017__photo_gallery__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_gallery2.png" alt=""></a></li>
+                <li class="id_sports2017__photo_gallery__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_gallery3.png" alt=""></a></li>
+                <li class="id_sports2017__photo_gallery__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_gallery4.png" alt=""></a></li>
+                <li class="id_sports2017__photo_gallery__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_gallery5.png" alt=""></a></li>
+              </ul><!-- /.id_sports2017__photo_gallery__list -->
+            </div><!-- /.id_sports2017__photo_gallery__inner -->
+          </div><!-- .id_sports2017__photo_gallery__outer -->
+        </div><!-- /.id_sports2017__photo_gallery -->
 
-                    <span class="bulls_station__overview__caster__btn"><img src="/assets/images/bulls-station/caster-btn.png" alt="紹介VTRを見る"></span>
-                  </a><!-- /.bulls_station__overview__caster__link -->
+        <div class="id_sports2017__offshot_movie">
+          <div class="id_sports2017__offshot_movie__outer">
+            <div class="id_sports2017__offshot_movie__inner">
+              <div class="id_sports2017__offshot_movie__heading">
+                <h2><img src="/assets/images/id-sports-2017/movie-heading.png" alt="記録映像"></h2>
+                <div class="id_sports2017__offshot_movie__heading__btn"><a href="/bulls-station/off-shot-movie/">すべての記録映像を見る</a></div>
+              </div><!-- /.id_sports2017__offshot_movie__heading -->
 
-                  <h4 class="bulls_station__overview__caster__heading">木曜担当キャスター</h4>
-                  <p class="bulls_station__overview__caster__copy">牛乳とコーヒーも大好きです。牛乳と紅茶も大好きです。スポーツブルの現場ではボケ担と早い段階でバレつつありますが東京オリンピック頃までにはしっかり者に生まれ変わりたいと思います。笑</p>
-                </li><!-- /.bulls_station__overview__caster__item -->
-                <li class="bulls_station__overview__caster__item bulls_station__overview__caster__item--fri">
-                  <a class="bulls_station__overview__caster__link" href="https://sportsbull.jp/p/182770/" target="_blank">
-                    <figure class="bulls_station__overview__caster__figure">
-                      <div class="bulls_station__overview__caster__figure__img"><img src="/assets/images/bulls-station/caster-figure_fri.png" alt=""></div>
-                      <h3 class="bulls_station__overview__caster__figure__heading"><img src="/assets/images/bulls-station/caster-figure_fri_heading.png" alt="ライカ"></h3>
-                      <i class="bulls_station__overview__caster__figure__dow"><img src="/assets/images/bulls-station/caster-icon_fri.png" alt="Friday"></i>
-                    </figure><!-- /.bulls_station__overview__caster__figure -->
+              <ul class="id_sports2017__offshot_movie__list">
+                <li class="id_sports2017__offshot_movie__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_movie.png" alt=""></a></li>
+                <li class="id_sports2017__offshot_movie__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_movie.png" alt=""></a></li>
+                <li class="id_sports2017__offshot_movie__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_movie.png" alt=""></a></li>
+                <li class="id_sports2017__offshot_movie__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_movie.png" alt=""></a></li>
+                <li class="id_sports2017__offshot_movie__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_movie.png" alt=""></a></li>
+              </ul><!-- /.id_sports2017__offshot_movie__list -->
+            </div><!-- /.id_sports2017__offshot_movie__inner -->
+          </div><!-- /.id_sports2017__offshot_movie__outer -->
+        </div><!-- /.id_sports2017__offshot_movie -->
+      </div><!-- /.id_sports2017__gallery_container -->
 
-                    <span class="bulls_station__overview__caster__btn"><img src="/assets/images/bulls-station/caster-btn.png" alt="紹介VTRを見る"></span>
-                  </a><!-- /.bulls_station__overview__caster__link -->
-
-                  <h4 class="bulls_station__overview__caster__heading">金曜担当キャスター</h4>
-                  <p class="bulls_station__overview__caster__copy">来る夏と書いて、来夏です！私は夏と海と体を動かすことが大好きでサップヨガインストラクターとしても活動しています。スポーツを通して心と体の健康もお伝えできたらいいなと思います！いろんな挑戦をしていきたいです！</p>
-                </li><!-- /.bulls_station__overview__caster__item -->
-              </ul><!-- /.bulls_station__overview__caster__list -->
-            </div><!-- /.bulls_station__overview__caster -->
-          </div><!-- /.bulls_station__overview__inner -->
-        </div><!-- /.bulls_station__overview__outer -->
-      </div><!-- /.bulls_station__overview -->
-
-      <div class="bulls_station__follow">
-        <div class="bulls_station__follow__outer">
-          <div class="bulls_station__follow__inner">
-            <ul class="bulls_station__follow__list">
-              <li class="bulls_station__follow__item bulls_station__follow__item--app">
-                <p class="bulls_station__follow__text">iOSアプリをダウンロードして<br />
-                <strong class="bulls_station__follow__text__color1">BULL’S</strong> <strong class="bulls_station__follow__text__color2">STATION</strong>の情報を手に入れよう</p>
-                <div class="bulls_station__follow__btn">
-                  <a href="https://itunes.apple.com/jp/app/%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84%E3%83%96%E3%83%AB-sports-bull/id1086719653?mt=8" target="_blank"><img src="/assets/images/bulls-station/follow-btn_ios.png" alt="App StoreからiOSアプリをダウンロード"></a>
-                </div><!-- /.bulls_station__follow__btn -->
-              </li><!-- /.bulls_station__follow__item -->
-              <li class="bulls_station__follow__item bulls_station__follow__item--app">
-                <p class="bulls_station__follow__text">Androidアプリをダウンロードして<br />
-                <strong class="bulls_station__follow__text__color1">BULL’S</strong> <strong class="bulls_station__follow__text__color2">STATION</strong>の情報を手に入れよう</p>
-                <div class="bulls_station__follow__btn">
-                  <a href="https://play.google.com/store/apps/details?id=com.undotsushin&hl=ja" target="_blank"><img src="/assets/images/bulls-station/follow-btn_android.png" alt="Google playからAndroidアプリをダウンロード"></a>
-                </div><!-- /.bulls_station__follow__btn -->
-              </li><!-- /.bulls_station__follow__item -->
-              <li class="bulls_station__follow__item bulls_station__follow__item--facebook">
-                <div class="bulls_station__follow__likebox">
-                  <div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="box_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
-                </div><!-- /.bulls_station__follow__likebox -->
-                <p class="bulls_station__follow__text">Facebookをいいね！して<br />
-                <strong class="bulls_station__follow__text__color1">BULL’S</strong> <strong class="bulls_station__follow__text__color2">STATION</strong>の情報を<br />
-                手に入れよう</p>
-              </li><!-- /.bulls_station__follow__item -->
-            </ul><!-- /.bulls_station__follow__list -->
-          </div><!-- /.bulls_station__follow__inner -->
-        </div><!-- /.bulls_station__follow__outer -->
-      </div><!-- /.bulls_station__follow -->
-
-      <?php
-      // -----------------------------------------------
-      // photo gallery
-      $bulls_station_photos = bulls_station_json_photo();
-      if (isset($bulls_station_photos)) :
-        $bulls_station_photos_data = $bulls_station_photos->data;
-        if (is_array($bulls_station_photos_data) && count($bulls_station_photos_data) > 0) :
-          $bulls_station_photo_url = $bulls_station_photos->url;
-          $count = 0;
-      ?>
-      <div class="bulls_station__photo_gallery">
-        <div class="bulls_station__photo_gallery__outer">
-          <div class="bulls_station__photo_gallery__inner">
-            <div class="bulls_station__photo_gallery__heading">
-              <h2><img src="/assets/images/bulls-station/gallery-heading.png" alt="PHOTO GALLERY"></h2>
-              <div class="bulls_station__photo_gallery__heading__btn"><a href="/p/181566/">すべてのPHOTO GALLERYを見る</a></div>
-            </div><!-- /.bulls_station__photo_gallery__heading -->
-
-            <ul class="bulls_station__photo_gallery__list">
-              <?php
-              foreach ($bulls_station_photos_data as $bulls_station_photo) :
-              ?>
-              <li class="bulls_station__photo_gallery__item">
-                <a href="<?php echo $bulls_station_photo_url; ?>">
-                  <img src="<?php echo $bulls_station_photo->thumb; ?>" alt="">
-                </a>
-              </li>
-              <?php
-              endforeach;
-              ?>
-            </ul><!-- /.bulls_station__photo_gallery__list -->
-          </div><!-- /.bulls_station__photo_gallery__inner -->
-        </div><!-- /.bulls_station__photo_gallery__outer -->
-      </div><!-- /.bulls_station__photo_gallery -->
-      <?php
-        endif;
-      endif;
-      // -----------------------------------------------
-      ?>
-      <?php
-      // -----------------------------------------------
-      // movie
-      $bulls_station_movies = bulls_station_json_movie();
-      if (isset($bulls_station_movies)) :
-        $bulls_station_movie_response = $bulls_station_movies->response;
-        if (isset($bulls_station_movie_response)) :
-          $bulls_station_movie_response_articles = $bulls_station_movie_response->articles;
-          if (is_array($bulls_station_movie_response_articles) && count($bulls_station_movie_response_articles) > 0) :
-      ?>
-      <div class="bulls_station__offshot_movie">
-        <div class="bulls_station__offshot_movie__outer">
-          <div class="bulls_station__offshot_movie__inner">
-            <div class="bulls_station__offshot_movie__heading">
-              <h2><img src="/assets/images/bulls-station/movie-heading.png" alt="OFFSHOT MOVIE"></h2>
-              <div class="bulls_station__offshot_movie__heading__btn"><a href="/bulls-station/off-shot-movie/">すべてのOFFSHOT MOVIEを見る</a></div>
-            </div><!-- /.bulls_station__offshot_movie__heading -->
-
-            <ul class="bulls_station__offshot_movie__list">
-              <?php
-              foreach ($bulls_station_movie_response_articles as $bulls_station_movie_response_article) :
-              ?>
-                <li class="bulls_station__offshot_movie__item">
-                  <a href="<?php echo $bulls_station_movie_response_article->url ?>" title="<?php echo $bulls_station_movie_response_article->title; ?>">
-                    <img src="<?php echo $bulls_station_movie_response_article->img ?>" alt="<?php echo $bulls_station_movie_response_article->title; ?>">
-                  </a>
-                </li>
-              <?php
-              endforeach;
-              ?>
-            </ul><!-- /.bulls_station__offshot_movie__list -->
-          </div><!-- /.bulls_station__offshot_movie__inner -->
-        </div><!-- /.bulls_station__offshot_movie__outer -->
-      </div><!-- /.bulls_station__offshot_movie -->
-      <?php
-          endif;
-        endif;
-      endif;
-      ?>
     </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
-
-<script src="/assets/js/bulls-station/parallax.js"></script>
-<script>
-  // Pretty simple huh?
-  var scene = document.getElementById('scene');
-  var parallax = new Parallax(scene, {
-    relativeInput: true,
-    clipRelativeInput: false,
-    hoverOnly: true
-  });
-</script>
 
 <?php
 /*
