@@ -32,12 +32,13 @@ $app->group('/area', function () use($app) {
     '東北',
     '関東',
     '北陸・甲信越',
+//    '中部',
     '東海',
     '関西',
     '中国',
     '四国',
     '九州・沖縄',
-    // 都道府県
+    // 都道府県 - phase 1 使用しない
 //    '北海道',
 //    '青森',
 //    '岩手',
@@ -87,9 +88,12 @@ $app->group('/area', function () use($app) {
   );
 
   $encoded_areas = array();
+  $encoded_key_areas = array();
 
   foreach ($areas as $area) {
-    $encoded_areas[] = urlencode($area);
+    $encoded = urlencode($area);
+    $encoded_areas[] = $encoded;
+    $encoded_key_areas[$encoded] = $area;
   }
 
   // area トップ
@@ -110,6 +114,10 @@ $app->group('/area', function () use($app) {
     $category = $app->model->get_category_by_slug('area');
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
     $template_classname .= ' area';
+    $category = array(
+      'label' => '地域',
+      'label_area' => $args['category'],
+    );
 
     $args['page'] = $app->model->set(array(
       'title'              => $category['title'],
@@ -118,6 +126,7 @@ $app->group('/area', function () use($app) {
       'template'           => 'category',
       'path'               => $args,
       'template_classname' => $template_classname,
+      'category' => $category,
     ));
 
     return $this->renderer->render($response, "area/default.php", $args);

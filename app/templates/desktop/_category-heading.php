@@ -42,7 +42,15 @@ endif;
 if ( !$page['theme']['images']['pc'] ) :
   ?>
 <div class="category-heading">
-  <h1><?php echo $page['category']['label']; ?>
+  <h1><?php echo $page['category']['label']; ?><?php
+    // イレギュラーリンクが追加されたので対応する
+    // `/area/地域名/`
+    // @see https://github.com/undotsushin/undotsushin/issues/2318
+    // @since 2017-09-05
+    if (isset($page['category']['label_area'])) {
+      echo '：' . $page['category']['label_area'];
+    }
+    ?>
 <?php
   $title_banner = $page['category']['title_banner']['pc'];
   if (!empty($title_banner['image'])) :
