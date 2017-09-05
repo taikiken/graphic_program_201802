@@ -484,6 +484,7 @@ export class Router extends EventDispatcher {
   area(slugType) {
     const [encoded] = Loc.path.replace(/\/area\/|\/area/ig, '').split('/');
     const mode = decodeURIComponent(encoded);
+    // TODO: 区分が揺れている - 要確認
     const areas = [
       '北海道',
       '東北',

@@ -39,6 +39,7 @@ export class Category {
    * rendering 開始
    * @param {string} slug category slug
    * @param {string} [type=''] ranking | video \ '' の 3つ
+   * @since 2017-09-04
    */
   static start(slug, type = '' ) {
     // header
@@ -57,7 +58,12 @@ export class Category {
       // console.log( 'type', slug, type );
     }
   }
-
+  /**
+   * 地域別記事 - category 一覧
+   * @param {string} slug `area` 固定
+   * @param {string} area 地域名称
+   * @param {boolean} pref 都道府県フラッグ true: 都道府県
+   */
   static area(slug, area, pref) {
     // header
     Header.start();
