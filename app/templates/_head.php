@@ -9,7 +9,7 @@
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
   <title><?php
     if ( $page['template'] == 'index' ) :
-      echo $page['site_name'].' | '.$page['site_tagline'];
+      echo $page['site_name'];
     else :
       echo strip_tags($page['title']).' | '.$page['site_name'];
     endif;
