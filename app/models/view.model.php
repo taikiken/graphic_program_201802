@@ -6,15 +6,16 @@ class ViewModel {
 
     // site
     // ==============================
-    'site_name'          => 'スポーツブル（スポブル）| 3分でスポーツ語れる無料アプリ',
+    'site_name'          => 'スポーツブル（スポブル）',
+    'site_tagline'       => '3分でスポーツ語れる無料アプリ'
     'site_url'           => '', // サイトURL - サーバから取得
     'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
 
     'site_categories'    => '', // ナビ用サイトカテゴリー DBから取得
 
     // page
-    'title'              => 'スポーツブル（スポブル）',
-    'title_short'        => 'スポーツブル（スポブル）',
+    'title'              => 'スポーツブル（スポブル）', // デフォルトタイトル
+    'title_short'        => 'スポーツブル（スポブル）', // og_titleの場合などの省略表記タイトル
     'keywords'           => 'スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
 
     // og
