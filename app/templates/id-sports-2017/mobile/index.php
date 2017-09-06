@@ -266,17 +266,6 @@
 
 </div><!-- /.whole -->
 
-<script src="/assets/js/bulls-station/parallax.js"></script>
-<script>
-  // Pretty simple huh?
-  var scene = document.getElementById('scene');
-  var parallax = new Parallax(scene, {
-    relativeInput: true,
-    clipRelativeInput: false,
-    hoverOnly: true
-  });
-</script>
-
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -295,7 +284,11 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
+<?php
+/*
 <script src="/assets/js/<?php echo $page['dir_name']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
+*/
+?>
 
 </body>
 </html>

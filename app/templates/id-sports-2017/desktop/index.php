@@ -223,11 +223,7 @@
     </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 
-<?php
-/*
 <script src="/assets/js/<?php echo $page['dir_name']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
-*/
-?>
 
 <?php
 
