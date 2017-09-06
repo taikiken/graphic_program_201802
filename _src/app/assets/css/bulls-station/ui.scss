@@ -631,6 +631,10 @@
         display: inline-block;
         position: relative;
 
+        img {
+          max-width: 100%;
+        }
+
         &:before {
           content: "";
           position: absolute;
