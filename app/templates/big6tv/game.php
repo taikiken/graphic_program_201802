@@ -7,27 +7,27 @@
         <script src="https://sportsbull.jp/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
         <script src="https://sportsbull.jp/assets/js/app_divide.bundle.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title><?php echo $page['title']; ?> | 速報 & データ | スポーツブル / SPORTS BULL</title>
+        <title><?php echo $page['title']; ?>季リーグ | 速報 & データ | スポーツブル / SPORTS BULL</title>
         <script src="https://sportsbull.jp/assets/js/libs/vendor.react.js"></script>
         <script src="https://sportsbull.jp/assets/js/bundle/main.bundle.js"></script>
         <meta name="keywords" content="">
-        <meta name="description" content="">
+        <meta name="description" content="<?php echo $page['title']; ?>季リーグ　速報 & データ　見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <meta property="fb:app_id" content="842032129256034">
         <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
         <meta property="og:type" content="article">
-        <meta property="og:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-        <meta property="og:image" content="https://sportsbull.jp/stats/assets/univbb/img/OG_univ_big6.jpg">
-        <meta property="og:url" content="">
-        <meta property="og:description" content="">
+        <meta property="og:title" content="<?php echo $page['title']; ?>季リーグ | 速報 & データ | SPORTS BULL">
+        <meta property="og:image" content="/stats/assets/univbb/img/<?php echo $page['og_image']; ?>.jpg">
+        <meta property="og:url" content="https://sportsbull.jp<?php echo $page['request_uri']; ?>">
+        <meta property="og:description" content="<?php echo $page['title']; ?>季リーグ　速報 & データ　見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
         <meta property="og:locale" content="ja_JP" />
         <!-- twitter card -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@sportsbull_jp">
-        <meta name="twitter:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-        <meta name="twitter:image" content="https://sportsbull.jp/stats/assets/univbb/img/OG_univ_big6.jpg">
-        <meta name="twitter:url" content="">
-        <meta name="twitter:description" content="東京六大学野球 日程・結果見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。">
-        <link rel="canonical" href="">
+        <meta name="twitter:title" content="<?php echo $page['title']; ?>季リーグ | 速報 & データ | SPORTS BULL">
+        <meta name="twitter:image" content="/stats/assets/univbb/img/<?php echo $page['og_image']; ?>.jpg">
+        <meta name="twitter:url" content="https://sportsbull.jp<?php echo $page['request_uri']; ?>">
+        <meta name="twitter:description" content="<?php echo $page['title']; ?>季リーグ　速報 & データ　見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
+        <link rel="canonical" href="https://sportsbull.jp<?php echo $page['request_uri']; ?>">
         <link rel="apple-touch-icon" sizes="180x180" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
         <link rel="apple-touch-icon-precomposed" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
         <link rel="icon" sizes="192x192" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
@@ -205,7 +205,7 @@
                                     <img src="/big6tv/img/icon-schedule_on.png" alt="日程・結果">日程・結果</a>
                             </li>
                         </ul>
-                        <div id="univbb-widget2" data-type="big6" data-league="big6tv" data-season="2017s" data-id="<?php echo $page['gameid']; ?>"></div>
+                        <div id="univbb-widget2" data-type="big6" data-league="big6tv" data-season="<?php echo $page['season']; ?>" data-id="<?php echo $page['gameid']; ?>"></div>
                         <script src="/stats/assets/univbb/js/Widget_univbb_2.js"></script>
                         <!--<div id="univbb-widget1" data-type="big6"></div>
         <script src="./Widget_univbb_1.js"></script> -->
