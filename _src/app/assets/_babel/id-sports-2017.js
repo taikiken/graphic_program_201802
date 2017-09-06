@@ -81,3 +81,27 @@ const recommend = () => {
 ranking();
 video();
 recommend();
+
+// ----------------------------------------
+// window.onload `.js-animation` add `.fadein`
+
+/**
+ * `.js-animation` element へ `fadein` classname 追加します
+ */
+const fadein = () => {
+  const elements = document.getElementsByClassName('js-animation');
+  if (elements) {
+    Array.from(elements).map((element) => (element.className += ' fadein'));
+  }
+};
+
+/**
+ * window.onload event handler
+ * - fadein 実行
+ */
+const onLoad = () => {
+  window.removeEventListener('load', onLoad);
+  fadein();
+};
+
+window.addEventListener('load', onLoad, false);
