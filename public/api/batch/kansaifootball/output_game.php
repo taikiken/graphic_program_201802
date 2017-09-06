@@ -22,6 +22,7 @@ $movie=json_decode($movie,TRUE);
 
 for($j=0;$j<count($games);$j++){
 	
+	unset($y);
 	$gameid=$games[$j];
 	$csv =sprintf("%s/csv/%s.csv",$bucket,$gameid);
 	$json=sprintf("%s/%s.json",$bucket,$gameid);
