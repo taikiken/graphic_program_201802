@@ -118,7 +118,7 @@ $app->group('/{slug:big6tv}', function () use ($app) {
       'title' => $title,
       'league' => $league,
       'league_name' => $league_name,
-      'game_id' => $gameid,
+      'gameid' => $gameid,
       'season' => $season,
       'season_name' => $season_name,
       'short_season' => $short_season_name,

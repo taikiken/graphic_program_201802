@@ -16,7 +16,7 @@
         <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
         <meta property="og:type" content="article">
         <meta property="og:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-        <meta property="og:image" content="/big6tv/img/OG_univ_big6.jpg">
+        <meta property="og:image" content="https://sportsbull.jp/stats/assets/univbb/img/OG_univ_big6.jpg">
         <meta property="og:url" content="">
         <meta property="og:description" content="">
         <meta property="og:locale" content="ja_JP" />
@@ -24,9 +24,9 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@sportsbull_jp">
         <meta name="twitter:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-        <meta name="twitter:image" content="/big6tv/img/OG_univ_big6.jpg">
+        <meta name="twitter:image" content="https://sportsbull.jp/stats/assets/univbb/img/OG_univ_big6.jpg">
         <meta name="twitter:url" content="">
-        <meta name="twitter:description" content="">
+        <meta name="twitter:description" content="東京六大学野球 日程・結果見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。">
         <link rel="canonical" href="">
         <link rel="apple-touch-icon" sizes="180x180" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
         <link rel="apple-touch-icon-precomposed" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
@@ -38,7 +38,7 @@
         <!-- / 表示確認用 -->
         <link rel="stylesheet" href="https://sportsbull.jp/assets/css/basic.css" media="only screen and (min-width: 769px)">
         <link rel="stylesheet" href="https://sportsbull.jp/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
-        <link rel="stylesheet" href="/big6tv/css/style.css">
+        <link rel="stylesheet" href="/stats/assets/univbb/css/style.css">
         <!-- optimize -->
         <style>
             .async-hide {
@@ -169,16 +169,32 @@
             <div class="body-sec">
                 <div class="top-image">
                     <picture>
-                        <source media="(max-width: 768px)" srcset="/big6tv/img/sp_big6tv_toppage_01.jpg">
+                        <source media="(max-width: 768px)" srcset="/stats/assets/univbb/img/sp_big6_top.jpg">
                         <img src="https://img.sportsbull.jp/img/img2017040512174280522200.png" alt="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
                     </picture>
+                </div>
+                <div class="ub-ad-banner ub-ad-innerTop-banner">
+                    <!-- /531683568/big6/big6-sp-big-banner -->
+                    <script>
+                    googletag.cmd.push(function() {
+                        googletag.defineSlot('/531683568/big6/big6-sp-big-banner', [320, 50], 'div-gpt-ad-1504176384639-0').addService(googletag.pubads());
+                        googletag.pubads().enableSingleRequest();
+                        googletag.enableServices();
+                    });
+                    </script>
+                    <div id='div-gpt-ad-1504176384639-0' style='height:50px; width:320px;'>
+                    <script>
+                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504176384639-0'); });
+                    </script>
+                    </div>
+                    <!-- // /531683568/big6/big6-sp-big-banner -->
                 </div>
                 <div class="body-sec-inner">
                     <section class="main-sec">
                         <ul class="module-header">
                             <li>
                                 <a href="/category/big6tv/">
-                                    <img src="/big6tv/img/icon-ball.png" alt="TOP">TOP</a>
+                                    <img src="/big6tv/img/icon-ball.png" alt="TOP">TOP</a>1
                             </li>
                             <li>
                                 <a href="/big6tv/live/2017a/">
@@ -189,63 +205,66 @@
                                     <img src="/big6tv/img/icon-schedule_on.png" alt="日程・結果">日程・結果</a>
                             </li>
                         </ul>
-                        <div id="univbb-widget2" data-type="big6" data-league="big6tv" data-season="2017s" data-id="<?php echo $page['gameid'] ?>"></div>
+                        <div id="univbb-widget2" data-type="big6" data-league="big6tv" data-season="2017s" data-id="<?php echo $page['gameid']; ?>"></div>
                         <script src="/stats/assets/univbb/js/Widget_univbb_2.js"></script>
                         <!--<div id="univbb-widget1" data-type="big6"></div>
         <script src="./Widget_univbb_1.js"></script> -->
                     </section>
                     <!-- /.main-sec -->
                     <section class="side-sec show-for-large">
-                        <div id="sidebar-moving-container">
-                            <div class="sponsor-link">
-                                <!-- ad/531683568/npb-pc-rectangle -->
-                                <div id='div-gpt-ad-1492577512561-0' style='height:250px; width:300px;'>
-                                    <script>
-                                        googletag.cmd.push(function()
-                                        {
-                                            googletag.display('div-gpt-ad-1492577512561-0');
-                                        });
-                                    </script>
+                            <div class="sponsor-link"> 
+                                <script type='text/javascript'>
+                                                                    googletag.cmd.push(function() {
+                                                                    googletag.defineSlot('/531683568/big6-pc-rectangle', [300, 250], 'div-gpt-ad-pc_sidebar_top').addService(googletag.pubads());
+                                                                    googletag.pubads().enableSingleRequest();
+                                                                    googletag.pubads().collapseEmptyDivs();
+                                                                    googletag.enableServices();
+                                                                    });
+                                                                </script>
+                                <div id='div-gpt-ad-pc_sidebar_top' style='height:250px; width:300px;'> 
+                                    <script type='text/javascript'>
+                                                                googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_sidebar_top'); });
+                                                                </script> 
                                 </div>
-                                <!-- // ad/531683568/npb-pc-rectangle -->
                             </div>
-                            <div class="app-bnr">
-                                <!-- ad/531683568/pc_sidebar_top_2nd -->
+                            <!-- /.sponsor-link -->
+                            
+                            <div class="app-bnr"> 
+                                <!-- /531683568/pc_sidebar_top_2nd --> 
                                 <script>
-                                    googletag.cmd.push(function()
-                                    {
-                                        googletag.defineSlot('/531683568/pc_sidebar_top_2nd', [300, 120], 'div-gpt-ad-1494939250039-0').addService(googletag.pubads());
-                                        googletag.pubads().enableSingleRequest();
-                                        googletag.pubads().collapseEmptyDivs();
-                                        googletag.enableServices();
-                                    });
-                                </script>
-                                <div id='div-gpt-ad-1494939250039-0' style='height:120px; width:300px;'>
+                                                                    googletag.cmd.push(function() {
+                                                                    googletag.defineSlot('/531683568/pc_sidebar_top_2nd', [300, 120], 'div-gpt-ad-1494939250039-0').addService(googletag.pubads());
+                                                                    googletag.pubads().enableSingleRequest();
+                                                                    googletag.pubads().collapseEmptyDivs();
+                                                                    googletag.enableServices();
+                                                                    });
+                                                                </script>
+                                <div id='div-gpt-ad-1494939250039-0' style='height:120px; width:300px;'> 
                                     <script>
-                                        googletag.cmd.push(function()
-                                        {
-                                            googletag.display('div-gpt-ad-1494939250039-0');
-                                        });
-                                    </script>
+                                                                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939250039-0'); });
+                                                                </script> 
                                 </div>
-                                <!-- // ad/531683568/pc_sidebar_top_2nd -->
+                                <!-- // /531683568/pc_sidebar_top_2nd --> 
                             </div>
-                            <!-- sidebar recommend, オススメ記事 -->
+                            <!-- /.app-bnr -->
+                            
+                            <div class="side-bnr_big6">
+                                <ul class="side-bnr_big6-list">
+                                    <li class="side-bnr_big6-item"> <a href="https://teams.one/?utm_source=big6tv&utm_campaign=teamstop&utm_medium=banner" target="_blank"><img src="/assets/images/big6/bnr-side-teams.png" alt="teams「野球チーム、集合。」全国3,000チーム以上が利用する野球チーム専用マネジメントツール"></a> </li>
+                                    <li class="side-bnr_big6-item"> <a href="http://big6.gr.jp" target="_blank"><img src="/assets/images/big6/bnr-side-big6.png" alt="一般財団法人 東京六大学野球連盟"></a> </li>
+                                    <li class="side-bnr_big6-item"> <a href="http://bit.ly/2nLew2c" target="_blank"><img src="/assets/images/big6/bnr-side-ec.png" alt="ここでしか買えないスマホグッズ販売中。"></a> </li>
+                                </ul>
+                            </div>
                             <div id="widget-recommend-list-container"></div>
                             <!--/recommend-->
                             <div id="widget-ranking-container"></div>
                             <!--/ranking-->
-                            <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
-                                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-                            </div>
+                            
                             <div id="widget-recommend-container"></div>
-                            <!--/videos-->
-                            <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
-                                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-                            </div>
-                        </div>
-                        <!--/#sidebar-moving-->
-                    </section>
+                            <!--/videos--> 
+                            
+                        </section>
+                        <!-- /.side-sec -->
                 </div>
             </div>
             <!-- /.body-sec -->
@@ -455,5 +474,6 @@
             }(document, 'script', 'facebook-jssdk'));
         </script>
         <script src="https://sportsbull.jp/assets/js/global.bundle.js"></script>
+        <script src="https://sportsbull.jp/assets/js/big6tv.bundle.js"></script>
     </body>
 </html>
