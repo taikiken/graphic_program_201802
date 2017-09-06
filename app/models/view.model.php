@@ -7,7 +7,7 @@ class ViewModel {
     // site
     // ==============================
     'site_name'          => 'スポーツブル（スポブル）',
-    'site_tagline'       => '3分でスポーツ語れる無料アプリ'
+    'site_tagline'       => '3分でスポーツ語れる無料アプリ',
     'site_url'           => '', // サイトURL - サーバから取得
     'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
 
