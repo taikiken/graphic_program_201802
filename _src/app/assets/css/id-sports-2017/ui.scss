@@ -142,7 +142,7 @@
 .id_sports2017__summary {
   width: 100%;
   min-height: 780px;
-  background-color: #0f1d37;
+  background-color: #182745;
   text-align: center;
 
 
@@ -155,45 +155,37 @@
 
     //.id_sports2017__summary__text--1
     &--1 {
-      // opacity: 0;
       padding-top: 156px;
 
       &.fadein {
-        opacity: 1;
-        animation: fadein_left .5s ease;
+        animation: fadein_left 0.5s ease both;
       }
     }
 
     //.id_sports2017__summary__text--2
     &--2 {
-      // opacity: 0;
       margin-top: 32px;
 
       &.fadein {
-        opacity: 1;
-        animation: fadein_left .7s ease .2s;
+        animation: fadein_left 0.7s ease 0.2s both;
       }
     }
 
     //.id_sports2017__summary__text--3
     &--3 {
-      // opacity: 0;
       margin-top: 24px;
 
       &.fadein {
-        opacity: 1;
-        animation: fadein_left 1.0s ease .5s;
+        animation: fadein_left 1.0s ease 0.5s both;
       }
     }
 
     //.id_sports2017__summary__text--4
     &--4 {
-      // opacity: 0;
-      margin-top: 16px;
+      margin-top: 30px;
 
       &.fadein {
-        opacity: 1;
-        animation: fadein_left 1.2s ease .7s;
+        animation: fadein_left 1.2s ease 0.7s both;
       }
     }
   }
@@ -201,17 +193,11 @@
 @at-root {
 
 @keyframes fadein_left {
-  0% {
-    display: none;
-    transform: translateX(-50px);
-  }
-  1% {
-    display: block;
+  from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-40px);
   }
-  100% {
-    display: block;
+  to {
     opacity: 1;
     transform: translateX(0);
   }
@@ -408,24 +394,43 @@
     margin-top: 20px;
   }
 
-  &__item {
-    display: table-cell;
-    width: 218px;
-    text-align: center;
-
-    img {
-      width: 200px;
-    }
-  }
-
   @at-root {
     .id_sports2017__photo_gallery__item {
-      a:hover {
-        @include over-opacity(0.75);
+      display: table-cell;
+      width: 200px;
+      height: 200px;
+      padding-right: 9px;
+      padding-left: 9px;
+      text-align: center;
+      vertical-align: middle;
+
+      a {
+        display: table-cell;
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+        text-align: center;
+        vertical-align: middle;
+
+        img {
+          max-width: 200px;
+          max-height: 200px;
+        }
+
+        &:hover {
+          @include over-opacity(0.75);
+        }
       }
     }
 
     .id_sports2017__offshot_movie__item {
+      display: table-cell;
+      width: 200px;
+      padding-right: 9px;
+      padding-left: 9px;
+      text-align: center;
+      vertical-align: middle;
+
       a {
         display: inline-block;
         position: relative;

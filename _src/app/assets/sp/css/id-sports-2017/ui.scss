@@ -40,7 +40,7 @@
     right: 0;
     height: (80/2)+px;
     padding-right: (30/2)+px;
-    padding-left: (40/2)+px;
+    padding-left: (36/2)+px;
     background: url(/assets/sp/images/id-sports-2017/nav-bg.png) 0 0 no-repeat;
     background-size: auto (80/2)+px;
     letter-spacing: ls(inline-block);
@@ -64,7 +64,7 @@
 
     .id_sports2017__nav__item {
       line-height: 1;
-      margin-left: (30/2)+px;
+      margin-left: (28/2)+px;
       vertical-align: middle;
     }
 
@@ -81,12 +81,12 @@
   &--sns {
     display: inline-block;
     margin-top: (20/2)+px;
-    margin-left: (30/2)+px;
+    margin-left: (28/2)+px;
     border-left: 1px solid #fff;
 
     .id_sports2017__nav__item {
       line-height: 1;
-      margin-left: (30/2)+px;
+      margin-left: (28/2)+px;
 
       img {
         width: (30/2)+px;
@@ -94,8 +94,6 @@
       }
 
       &:first-child {
-        margin-left: (30/2)+px;
-
         img {
           width: (64/2)+px;
         }
@@ -132,7 +130,7 @@
   position: relative;
   width: 100%;
   min-height: (730/2)+px;
-  background-color: #0f1d37;
+  background-color: #182745;
   text-align: center;
   -webkit-clip-path: polygon(0 95%, 0 0, 100% 0, 100% 95%, 50% 100%);
           clip-path: polygon(0 95%, 0 0, 100% 0, 100% 95%, 50% 100%);
@@ -172,10 +170,10 @@
 
     //.id_sports2017__summary__text--4
     &--4 {
-      margin-top: (12/2)+px;
+      margin-top: (24/2)+px;
 
       img {
-        width: (206/2)+px;
+        width: (268/2)+px;
       }
     }
   }
@@ -341,10 +339,27 @@
     margin-right: perCalc(10, 730);
     margin-left: perCalc(10, 730);
     text-align: center;
+    vertical-align: middle;
     letter-spacing: normal;
   }
 
   @at-root {
+    .id_sports2017__photo_gallery__item {
+      a {
+        display: table-cell;
+        width: (345/2)+px;
+        height: (345/2)+px;
+        background-color: #fff;
+        text-align: center;
+        vertical-align: middle;
+
+        img {
+          width: auto;
+          max-height: 100%;
+        }
+      }
+    }
+
     .id_sports2017__offshot_movie__item {
       a {
         display: inline-block;

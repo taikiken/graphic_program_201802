@@ -10,7 +10,7 @@ $app->group('/{slug:id-sports-2017}',  function () use($app) {
     'og_type'            => 'article',
     'og_title'           => '第1回知的障がい者スポーツ交流プログラム | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'id-sports-2017/',
-    'og_image'           => $app->model->property('site_url').'assets/images/id-sports-2017/ogp.jpg',
+    'og_image'           => $app->model->property('site_url').'assets/images/id-sports-2017/og_image.png',
     'og_description'     => '「第1回知的障がい者スポーツ交流プログラム」は、エクアドル 2015 グローバルゲームスに参加した有志により構成され、アジア地域における知的障がい者スポーツの発展に日韓が協力して推進し、スポーツを通じた国際協力及び交流を目的に行われるものである。',
     'keywords'           => '第1回知的障がい者スポーツ交流プログラム,JAPAN-KOREA ID SPORTS Exchange Program 2017,スポーツ,メディア,アスリート,ニュース,動画,sports,media',
     'template'           => 'index',

@@ -80,7 +80,7 @@
           <dl class="id_sports2017__nav--sns">
             <dt class="id_sports2017__nav__item"><img src="/assets/images/id-sports-2017/nav-sns-heading.png" alt="SHARE"></dt>
             <dd class="id_sports2017__nav__item"><a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=554, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow"><img src="/assets/images/id-sports-2017/nav-sns-facebook.png" alt="facebookでシェアする"></a></dd>
-            <dd class="id_sports2017__nav__item"><a class="twitter btn" href="http://twitter.com/share?url=<?php echo $page['og_url']; ?>&text=<?php echo $page['og_description']; ?>" target="_blank"><img src="/assets/images/id-sports-2017/nav-sns-twitter.png" alt="twitterでシェアする"></a></dd>
+            <dd class="id_sports2017__nav__item"><a class="twitter btn" href="http://twitter.com/share?url=<?php echo $page['og_url']; ?>&text=「第1回知的障がい者スポーツ交流プログラム」は、アジア地域における知的障がい者スポーツの発展に日韓が協力して推進し、スポーツを通じた国際協力及び交流を目的に行われています。 http://sportsbull.jp/id-sports-2017/" target="_blank"><img src="/assets/images/id-sports-2017/nav-sns-twitter.png" alt="twitterでシェアする"></a></dd>
           </dl><!-- /.id_sports2017__nav--nav2 -->
         </div><!-- /.id_sports2017__nav__inner -->
       </nav><!-- .id_sports2017__nav -->
@@ -89,9 +89,9 @@
         <div class="id_sports2017__summary__movie"></div><!-- /.id_sports2017__summary__movie -->
 
         <div class="id_sports2017__summary__text">
-          <h1 class="id_sports2017__summary__text--1 js-animation"><img src="/assets/images/id-sports-2017/summary-text1.png" alt="xxxxx"></h1>
-          <p class="id_sports2017__summary__text--2 js-animation"><img src="/assets/images/id-sports-2017/summary-text2.png" alt="xxxxx"></p>
-          <p class="id_sports2017__summary__text--3 js-animation"><img src="/assets/images/id-sports-2017/summary-text3.png" alt="xxxxx"></p>
+          <h1 class="id_sports2017__summary__text--1 js-animation"><img src="/assets/images/id-sports-2017/summary-text1.png" alt="第一回知的障がい者日韓スポーツ交流プログラム"></h1>
+          <p class="id_sports2017__summary__text--2 js-animation"><img src="/assets/images/id-sports-2017/summary-text2.png" alt="JAPAN - KOREA ID SPORTS 2017"></p>
+          <p class="id_sports2017__summary__text--3 js-animation"><img src="/assets/images/id-sports-2017/summary-text3.png" alt="Exchange Program"></p>
           <div class="id_sports2017__summary__text--4 js-animation"><img src="/assets/images/id-sports-2017/summary-flag.png" alt=""></div>
         </div><!-- /.id_sports2017__summary__text -->
       </div><!-- /.id_sports2017__summary -->
@@ -128,32 +128,32 @@
               </tr>
               <tr>
                 <th>協力</th>
-                <td>スペシャルオリンピックス日本 / 学校法人日本体育大学</td>
+                <td>(公財)スペシャルオリンピックス日本 / 日本体育大学</td>
               </tr>
               <tr>
-                <th>協賛（予定）</th>
-                <td>JTB</td>
+                <th>協賛</th>
+                <td>(株)JTBコーポレートセールス / (株)グロリアツアーズ / (株)運動通信社(スポーツブル) / (株)カンタベリーオブニュージーランドジャパン</td>
               </tr>
               <tr>
-                <th>後援（予定）</th>
-                <td>（公財）日本障がい者スポーツ協会 日本パラリンピック委員会 / 全国特別支援学校知的障害教育校長会 / 東京都教育委員会</td>
+                <th>後援</th>
+                <td>(公財)日本障がい者スポーツ協会 日本パラリンピック委員会 / 全国特別支援学校知的障害教育校長会</td>
               </tr>
               <tr>
                 <th>実施日</th>
-                <td>2017年 9月8日（金）　〜 10日（日）<br />
+                <td>2017年 9月8日(金) 〜 10日(日)<br />
                 ＜9月8日＞ 午前：移動 / 午後：コンディショニング及びトレーニング / 夜：レセプション<br />
                 ＜9月9日＞ 終日：スポーツプログラム（日本選手側合流）<br />
-                ＜9月10日＞午前：指導者交流会 / 午後：文化交流 / 夜：移動</td>
+                ＜9月10日＞終日：文化交流／夜：移動</td>
               </tr>
               <tr>
                 <th>会場</th>
-                <td>学校法人日本体育大学内各施設<br />
+                <td>日本体育大学内各施設（健志台キャンパス）<br />
                 〒227-0033 神奈川県横浜市青葉区鴨志田町1212-1<br />
-                TEL. 03-5706-0900</td>
+                TEL. 045-963-7910</td>
               </tr>
               <tr>
                 <th>参加資格</th>
-                <td>知的障害のある者（療育手帳取得者。あるいはその「条件」に合致する者）その程度は問わない。<br />
+                <td>知的障害のある者(療育手帳取得者。あるいはその「条件」に合致する者)その程度は問わない。<br />
                 医師の診断を受け、スポーツに支障がないと認められた者。</td>
               </tr>
               <tr>
@@ -162,10 +162,18 @@
               </tr>
               <tr>
                 <th>参加チーム数（人数）</th>
-                <td>＜韓国側（予定）＞<br />
-                4競技（以下32名＋α）。陸上競技6名（選手男女各2名・コーチ2名） / 水泳6名（選手男女各2名・コーチ2名） / 卓球6名（選手男女各2名・コーチ2名） / バスケットボール10名（選手男子8名・コーチ2名） / 選手団長1名 / チームリーダー1名 / チームスタッフ2名<br />
-                ＜日本側（予定）＞<br />
-                上記競技に準拠して同等数（45名＋α） / 運営スタッフ（50名＋α）</td>
+                <td>＜韓国側＞<br />
+                4競技(以下32名の予定)。陸上競技6名(選手男女各2名・コーチ2名) / 水泳6名(選手男女各2名・コーチ2名) / 卓球6名(選手男女各2名・コーチ2名) / バスケットボール10名(選手男子8名・コーチ2名) / 選手団長1名 / チームリーダー1名 / チームスタッフ2名<br />
+                ＜日本側＞<br />
+                韓国側と同数に調整</td>
+              </tr>
+              <tr>
+                <th>表彰・参加料</th>
+                <td>なし</td>
+              </tr>
+              <tr>
+                <th>宿舎・食事</th>
+                <td>宿舎：学校法人日本体育大学健志台ゲストハウス / 食事：健志台キャンパス学生食堂等</td>
               </tr>
             </tbody>
           </table><!-- /.id_sports2017__overview__data -->
@@ -215,11 +223,7 @@
     </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 
-<?php
-/*
 <script src="/assets/js/<?php echo $page['dir_name']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
-*/
-?>
 
 <?php
 
