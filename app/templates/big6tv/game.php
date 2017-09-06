@@ -173,7 +173,7 @@
                         <img src="https://img.sportsbull.jp/img/img2017040512174280522200.png" alt="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
                     </picture>
                 </div>
-                <div class="ub-ad-banner ub-ad-innerTop-banner">
+                <div class="ub-ad-banner ub-ad-innerTop-banner ub-ad-banner-sp">
                     <!-- /531683568/big6/big6-sp-big-banner -->
                     <script>
                     googletag.cmd.push(function() {
@@ -191,18 +191,26 @@
                 </div>
                 <div class="body-sec-inner">
                     <section class="main-sec">
-                        <ul class="module-header">
+                        <ul class="module-header pc-only">
                             <li>
-                                <a href="/category/big6tv/">
-                                    <img src="/big6tv/img/icon-ball.png" alt="TOP">TOP</a>1
+                                <a href="/category/big6tv/">TOP</a>
                             </li>
                             <li>
-                                <a href="/big6tv/live/2017a/">
-                                    <img src="/big6tv/img/icon-live.png" alt="ライブ配信">ライブ配信</a>
+                                <a href="/big6tv/live/2017a/">ライブ配信</a>
+                            </li>
+                            <li class="active">
+                                <a href="/big6tv/2017a/">日程・結果</a>
+                            </li>
+                        </ul>
+                        <ul class="module-header sp-only">
+                            <li>
+                                <a href="/category/big6tv/">TOP</a>
                             </li>
                             <li>
-                                <a href="/big6tv/" class="active">
-                                    <img src="/big6tv/img/icon-schedule_on.png" alt="日程・結果">日程・結果</a>
+                                <a href="/big6tv/live/2017a/">ライブ配信</a>
+                            </li>
+                            <li class="active">
+                                <a href="/big6tv/">日程・結果</a>
                             </li>
                         </ul>
                         <div id="univbb-widget2" data-type="big6" data-league="big6tv" data-season="<?php echo $page['season']; ?>" data-id="<?php echo $page['gameid']; ?>"></div>
