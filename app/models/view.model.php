@@ -23,6 +23,10 @@ class ViewModel {
     'og_title'           => '',
     'og_description'     => 'スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
     'og_image'           => 'assets/images/common/og_image.png',
+    'fb_pages'           => array(
+      '1667524780195522', // https://facebook.com/sportsbull
+      '211790478849971',  // https://www.facebook.com/fnavigation/
+    ),
 
     // sns
     'sns'                => array(
