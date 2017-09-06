@@ -142,7 +142,7 @@
 .id_sports2017__summary {
   width: 100%;
   min-height: 780px;
-  background-color: #0f1d37;
+  background-color: #182745;
   text-align: center;
 
 
@@ -189,7 +189,7 @@
     //.id_sports2017__summary__text--4
     &--4 {
       // opacity: 0;
-      margin-top: 16px;
+      margin-top: 30px;
 
       &.fadein {
         opacity: 1;
@@ -408,24 +408,43 @@
     margin-top: 20px;
   }
 
-  &__item {
-    display: table-cell;
-    width: 218px;
-    text-align: center;
-
-    img {
-      width: 200px;
-    }
-  }
-
   @at-root {
     .id_sports2017__photo_gallery__item {
-      a:hover {
-        @include over-opacity(0.75);
+      display: table-cell;
+      width: 200px;
+      height: 200px;
+      padding-right: 9px;
+      padding-left: 9px;
+      text-align: center;
+      vertical-align: middle;
+
+      a {
+        display: table-cell;
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+        text-align: center;
+        vertical-align: middle;
+
+        img {
+          max-width: 200px;
+          max-height: 200px;
+        }
+
+        &:hover {
+          @include over-opacity(0.75);
+        }
       }
     }
 
     .id_sports2017__offshot_movie__item {
+      display: table-cell;
+      width: 200px;
+      padding-right: 9px;
+      padding-left: 9px;
+      text-align: center;
+      vertical-align: middle;
+
       a {
         display: inline-block;
         position: relative;
