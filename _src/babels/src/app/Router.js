@@ -393,7 +393,7 @@ export class Router extends EventDispatcher {
     const result = Object.keys(rule).some((key) => {
       const keyLength = key.length;
       if (keyLength !== 1 && path.substr(0, keyLength) === key) {
-        console.log('Router.route found', key, path);
+        // console.log('Router.route found', key, path);
         rule[key].call(this);
         return true;
       }
@@ -481,6 +481,10 @@ export class Router extends EventDispatcher {
     }
     this.dispatch({ type: Router.CATEGORY, slug, slugType });
   }
+  /**
+   * 地域 - category/area
+   * @param {string} slugType 多分 `area`
+   */
   area(slugType) {
     const [encoded] = Loc.path.replace(/\/area\/|\/area/ig, '').split('/');
     const mode = decodeURIComponent(encoded);
@@ -498,7 +502,7 @@ export class Router extends EventDispatcher {
     ];
     const index = areas.indexOf(mode);
     let pref = true;
-    console.log('Router.area type', encoded, index, mode);
+    // console.log('Router.area type', encoded, index, mode);
     if (index !== -1) {
       // 地域
       pref = false;
