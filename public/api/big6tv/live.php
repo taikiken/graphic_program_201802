@@ -24,15 +24,16 @@ if ( !empty(file_get_contents($json, false, null, 0, 1)) ) :
   $json   = json_decode(file_get_contents($json), true);
   $result = $json;
 
+  $sp_labels = array('自動', '480x270', '640x360');
+  $sp_count  = 0;
   foreach( $json['response']['live']['video']['sources'] as $key => $value ) :
-    if ( $value['res'] > 2 ) break;
-
-    $souces[$key] = $value;
-
-    if ( $value['default'] ) :
-      $souces[$key]['url'] = $result['response']['live']['video']['source'];
+    if ( in_array($value['label'],  $sp_labels ) ) :
+      $souces[$sp_count] = $value;
+      if ( $value['default'] ) :
+        $souces[$sp_count]['url'] = $result['response']['live']['video']['source'];
+      endif;
+      $sp_count++;
     endif;
-
   endforeach;
 
   $result['response']['live']['video']['sources_sp'] = $souces;
