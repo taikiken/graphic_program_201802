@@ -28,14 +28,14 @@
     <?php
     // SP版 Powered by エリアの追加
     // https://github.com/undotsushin/undotsushin/issues/1211
-    include_once __DIR__.'/../mobile/_category-heading.php';
+    include_once __DIR__.'/_category-heading.php';
     ?>
     <?php
     // https://github.com/undotsushin/undotsushin/issues/1210
     // CMS から一面・すべてのバナーを設定できるようにする #1210
     // @since 2016-11-02
     if ($page['category']['slug'] == 'all') {
-      include_once __DIR__ . '/../mobile/_cms_banner.php';
+      include_once __DIR__ . '/_cms_banner.php';
     }
     ?>
     <section class="main-sec">
