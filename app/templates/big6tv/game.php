@@ -38,6 +38,7 @@
         <!-- / 表示確認用 -->
         <link rel="stylesheet" href="https://sportsbull.jp/assets/css/basic.css" media="only screen and (min-width: 769px)">
         <link rel="stylesheet" href="https://sportsbull.jp/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
+        <link rel="stylesheet" href="/assets/css/ui.css?v=5b38cb37" media="only screen and (min-width: 769px)">
         <link rel="stylesheet" href="/stats/assets/univbb/css/style.css">
         <!-- optimize -->
         <style>
