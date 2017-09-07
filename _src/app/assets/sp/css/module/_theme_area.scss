@@ -67,8 +67,10 @@
   .guideboard__list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
     width: 100%;
+    background: url(/assets/sp/images/area/guideboard-bg.png) right bottom no-repeat;
+    background-size: 100%;
 
     //.guideboard__list__item
     &__item {

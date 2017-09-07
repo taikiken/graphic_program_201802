@@ -38,15 +38,15 @@
       position: relative;
       display: table-cell;
       width: 478px;
-      height: 455px;
+      height: 505px;
       background: url(/assets/images/area/guideboard-map-bg.png) 0 0 no-repeat;
       vertical-align: top;
 
       //.guideboard__map__heading
       &__heading {
         position: absolute;
-        top: 30px;
-        left: 30px;
+        top: 10px;
+        left: 10px;
         width: 140px;
         height: 140px;
         background: url(/assets/images/area/guideboard-heading.png) 0 0 no-repeat;
@@ -69,11 +69,11 @@
 
       //.guideboard__map__button--hokkaido
       &__button--hokkaido {
-        top: 40px;
-        left: 238px;
+        top: 79px;
+        left: 228px;
 
         .guideboard__map__button__link {
-          width: 86px;
+          width: 87px;
           height: 42px;
           background-image: url(/assets/images/area/guideboard-map-btn_hokkaido.png);
 
@@ -85,8 +85,8 @@
 
       //.guideboard__map__button--tohoku
       &__button--tohoku {
-        top: 169px;
-        left: 363px;
+        top: 209px;
+        left: 353px;
 
         .guideboard__map__button__link {
           width: 87px;
@@ -101,8 +101,8 @@
 
       //.guideboard__map__button--kanto
       &__button--kanto {
-        top: 277px;
-        left: 333px;
+        top: 283px;
+        left: 329px;
 
         .guideboard__map__button__link {
           width: 87px;
@@ -115,15 +115,31 @@
         }
       }
 
-      //.guideboard__map__button--chubu
-      &__button--chubu {
-        top: 171px;
+      //.guideboard__map__button--hokuriku
+      &__button--hokuriku {
+        top: 188px;
         left: 200px;
+
+        .guideboard__map__button__link {
+          width: 110px;
+          height: 50px;
+          background-image: url(/assets/images/area/guideboard-map-btn_hokuriku.png);
+
+          &:hover {
+            background-position: 0 -50px;
+          }
+        }
+      }
+
+      //.guideboard__map__button--tokai
+      &__button--tokai {
+        top: 345px;
+        left: 231px;
 
         .guideboard__map__button__link {
           width: 80px;
           height: 50px;
-          background-image: url(/assets/images/area/guideboard-map-btn_chubu.png);
+          background-image: url(/assets/images/area/guideboard-map-btn_tokai.png);
 
           &:hover {
             background-position: 0 -50px;
@@ -133,8 +149,8 @@
 
       //.guideboard__map__button--kansai
       &__button--kansai {
-        top: 330px;
-        left: 216px;
+        top: 246px;
+        left: 173px;
 
         .guideboard__map__button__link {
           width: 80px;
@@ -149,8 +165,8 @@
 
       //.guideboard__map__button--chugoku
       &__button--chugoku {
-        top: 226px;
-        left: 110px;
+        top: 265px;
+        left: 80px;
 
         .guideboard__map__button__link {
           width: 80px;
@@ -165,8 +181,8 @@
 
       //.guideboard__map__button--shikoku
       &__button--shikoku {
-        top: 352px;
-        left: 125px;
+        top: 392px;
+        left: 97px;
 
         .guideboard__map__button__link {
           width: 80px;
@@ -181,7 +197,7 @@
 
       //.guideboard__map__button--kyushu
       &__button--kyushu {
-        top: 278px;
+        top: 318px;
         left: 0;
 
         .guideboard__map__button__link {
