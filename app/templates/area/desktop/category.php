@@ -42,7 +42,8 @@ include_once __DIR__.'/../../desktop/_category-heading.php';
             <li class="guideboard__map__button--hokkaido"><a class="guideboard__map__button__link" href="/area/北海道/">北海道</a></li>
             <li class="guideboard__map__button--tohoku"><a class="guideboard__map__button__link" href="/area/東北/">東北</a></li>
             <li class="guideboard__map__button--kanto"><a class="guideboard__map__button__link" href="/area/関東/">関東</a></li>
-            <li class="guideboard__map__button--chubu"><a class="guideboard__map__button__link" href="/area/中部/">中部</a></li>
+            <li class="guideboard__map__button--hokuriku"><a class="guideboard__map__button__link" href="/area/北陸・甲信越/">北陸・甲信越</a></li>
+            <li class="guideboard__map__button--tokai"><a class="guideboard__map__button__link" href="/area/東海/">東海</a></li>
             <li class="guideboard__map__button--kansai"><a class="guideboard__map__button__link" href="/area/関西/">関西</a></li>
             <li class="guideboard__map__button--chugoku"><a class="guideboard__map__button__link" href="/area/中国/">中国</a></li>
             <li class="guideboard__map__button--shikoku"><a class="guideboard__map__button__link" href="/area/四国/">四国</a></li>
@@ -69,9 +70,15 @@ include_once __DIR__.'/../../desktop/_category-heading.php';
             </a>
           </li><!-- /.guideboard__list__item -->
           <li class="guideboard__list__item">
-            <a class="guideboard__list__link--chubu" href="/area/中部/">
-              <h3>中部</h3>
-              <p>新潟県・富山県・石川県・福井県・山梨県・長野県・岐阜県・静岡県・愛知県</p>
+            <a class="guideboard__list__link--hokuriku" href="/area/北陸・甲信越/">
+              <h3>北陸・甲信越</h3>
+              <p>山梨県・長野県・新潟県・富山県・石川県・福井県</p>
+            </a>
+          </li><!-- /.guideboard__list__item -->
+          <li class="guideboard__list__item">
+            <a class="guideboard__list__link--tokai" href="/area/東海/">
+              <h3>東海</h3>
+              <p>愛知県・岐阜県・三重県・静岡県</p>
             </a>
           </li><!-- /.guideboard__list__item -->
           <li class="guideboard__list__item">

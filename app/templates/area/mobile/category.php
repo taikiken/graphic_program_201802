@@ -77,9 +77,15 @@
             </a>
           </li><!-- /.guideboard__list__item -->
           <li class="guideboard__list__item">
-            <a class="guideboard__list__link--chubu" href="/area/中部/">
-              <h3>中部</h3>
-              <p>新潟県・富山県・石川県・福井県・山梨県・長野県・岐阜県・静岡県・愛知県</p>
+            <a class="guideboard__list__link--hokuriku" href="/area/北陸・甲信越/">
+              <h3>北陸・甲信越</h3>
+              <p>山梨県・長野県・新潟県・富山県・石川県・福井県</p>
+            </a>
+          </li><!-- /.guideboard__list__item -->
+          <li class="guideboard__list__item">
+            <a class="guideboard__list__link--tokai" href="/area/東海/">
+              <h3>東海</h3>
+              <p>愛知県・岐阜県・三重県・静岡県</p>
             </a>
           </li><!-- /.guideboard__list__item -->
           <li class="guideboard__list__item">
@@ -107,7 +113,7 @@
             </a>
           </li><!-- /.guideboard__list__item -->
         </ul><!-- /.guideboard__list -->
-      </div>
+      </div><!-- /.guideboard -->
 
       <div id="js-headline"></div>
       <div id="category-container"></div>
