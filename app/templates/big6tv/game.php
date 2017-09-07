@@ -481,7 +481,7 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-        <script src="https://sportsbull.jp/assets/js/global.bundle.js"></script>
         <script src="https://sportsbull.jp/assets/js/big6tv.bundle.js"></script>
+        <script src="https://sportsbull.jp/assets/js/global.bundle.js"></script>
     </body>
 </html>
