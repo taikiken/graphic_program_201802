@@ -116,7 +116,8 @@ $app->group('/area', function () use($app) {
     $template_classname .= ' area';
     $category = array(
       'label' => '地域',
-      'label_area' => $args['category'],
+      'label_area' => ' | ' . $args['category'] . 'の記事',
+      'title' => $args['category'] . 'の記事',
     );
 
     $args['page'] = $app->model->set(array(
