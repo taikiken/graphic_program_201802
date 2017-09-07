@@ -16,7 +16,8 @@ while($f=$o->fetch_array()){
 	$movie[$match[1]]=array(
 		"title"=>$f["title"],
 		"movie"=>sprintf("https://sportsbull.jp/p/%s/",$f["id"]),
-		"img"=>sprintf("https://img.sportsbull.jp/thumbnail1/%s",$f["img1"])
+		"img"=>sprintf("https://img.sportsbull.jp/thumbnail1/%s",$f["img1"]),
+		"lastupdate"=>date("Y-m-d H:i:s",strtotime($f["u_time"]))
 	);
 	if($i==0)$lastupdate=date("Y-m-d H:i:s",strtotime($f["u_time"]));
 	$i++;

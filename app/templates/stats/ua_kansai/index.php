@@ -598,7 +598,9 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
             </div>
             <!-- // ad/531683568/pc_sidebar_top_2nd -->
           </div>
-          
+          <div class="mt30">
+            <a href="http://amefootlive.jp/kcafl" target="_blank"><img src="/assets/stats/ua_kansai/images/amefootlive_bnr.jpg" alt="関西学生 アメリカンフットボールリーグLIVE!!" width="300px"></a>
+          </div>
           <!-- sidebar recommend, オススメ記事 -->
           <div id="widget-recommend-list-container"></div><!--/recommend-->
 
