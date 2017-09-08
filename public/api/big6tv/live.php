@@ -41,7 +41,8 @@ if ( !empty(file_get_contents($json, false, null, 0, 1)) ) :
   if (
     preg_match("/com.sportsbull.test/", $_SERVER['HTTP_USER_AGENT'] ) ||
     preg_match("/com.limret.undotsushin/", $_SERVER['HTTP_USER_AGENT'] ) ||
-    preg_match("okhttp", $_SERVER['HTTP_USER_AGENT']
+    preg_match("/com.undotsushin/", $_SERVER['HTTP_USER_AGENT'] ) ||
+    preg_match("okhttp", $_SERVER['HTTP_USER_AGENT'])
   ) :
     $is_app = true;
   else :
