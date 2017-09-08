@@ -6,7 +6,7 @@ var options = {
   fluid: false, //[NOTE] This option is for responsive http://blog.videojs.com/Video-js-5-s-fluid-mode-and-playlist-picker/
   plugins: {
     videoJsResolutionSwitcher: {
-      default: 1
+      default: 0
     }
   },
   nativeControlsForTouch: false
