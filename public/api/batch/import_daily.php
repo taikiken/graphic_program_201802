@@ -128,36 +128,33 @@ for($i=0;$i<count($data);$i++){
 	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data[$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
-
+	
 	unset($sqla);
 
 	if(strlen($f["id"])>0){
-
+		
 		if(strtotime($s["a_time"])>strtotime($f["a_time"])){
-			if(strlen($s["t30"])>0){
-				if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
-			}else{
-				$s["img1"]="";
-				$s["t1"]="";
-			}
-			unset($s["m1"]);
-
-
-			if ($data[$i]["status"] == 0){
-				//削除フラグがあればフラグを
-				$s["flag"]=0;
-			}
-			else {
+			
+			if ($data[$i]["status"]==1){
+			
+				if(strlen($s["t30"])>0){
+					if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
+				}else{
+					$s["img1"]="";
+					$s["t1"]="";
+				}
+				unset($s["m1"]);
 				$s["flag"]=1;
+	
+				splittime($s["m_time"],$s["a_time"]);
+				$sqla[]=makesql($s,$f["id"]);
+				$sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);
+				$sqla[]=relatedlink4($data[$i]["relatedLink"],$f["id"]);
+						
+			}else{
+				$sqla[]=sprintf("update repo_n set flag=0 where id=%s;",$f["id"]);
 			}
-
-			splittime($s["m_time"],$s["a_time"]);
-			$sqla[]=makesql($s,$f["id"]);
-			$sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);
-
-			$sqla[]=relatedlink4($data[$i]["relatedLink"],$f["id"]);
 		}
-
 
 	}else{
 
