@@ -38,7 +38,9 @@ if ( !empty(file_get_contents($json, false, null, 0, 1)) ) :
 
   $result['response']['live']['video']['sources_sp'] = $souces;
 
-  if( $ua === 'mobile' ) :
+  $is_app = ( preg_match("/com.sportsbull.test/", $_SERVER['HTTP_USER_AGENT'] ) || preg_match("/com.limret.undotsushin/", $_SERVER['HTTP_USER_AGENT'] ) ) ? true : false;
+
+  if( $ua === 'mobile' || $is_app ) :
     $result['response']['live']['video']['sources'] = $souces;
   endif;
 
