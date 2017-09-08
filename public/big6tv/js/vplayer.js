@@ -120,7 +120,7 @@ var setPlayerEvent = function setPlayerEvent() {
 var count = 0;
 //PLayer Initialization
 var videoLoad = function videoLoad() {
-  superagent.get('https://sportsbull.jp/api/big6tv/live/2017a').end(function (err, res) {
+  superagent.get('/api/big6tv/live/2017a').end(function (err, res) {
     var video = res.body.response.live.video;
     var isPlaying = res.body.response.live.isPlaying;
     var ads_options = {
