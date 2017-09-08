@@ -259,6 +259,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
             <table>
               <?=$dataArray["data"]?>
             </table>
+            <div class="digestbtn"><?=$dataArray["digest"]?></div>
           </div><!-- /.data -->
         </div><!-- /#basic-info -->
         <div id="score-info">

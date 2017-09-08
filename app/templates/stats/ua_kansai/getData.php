@@ -135,7 +135,7 @@ EOM;
 		$scoreInfo = $json["events"];
 		$date = date("n月j日",strtotime($gameinfo["date"]));
 
-		$result = array("date"=>$date,"playFirstName"=>$playFirst['name'],"drawFirstName"=>$drawFirst['name'],"headInner"=>"","movie"=>"","quarter"=>"","data"=>"","scoreInfo"=>"","personalInfo"=>"");
+		$result = array("date"=>$date,"playFirstName"=>$playFirst['name'],"drawFirstName"=>$drawFirst['name'],"headInner"=>"","movie"=>"","digest"=>"","quarter"=>"","data"=>"","scoreInfo"=>"","personalInfo"=>"");
 
 		//ヘッダーインナー
 		$result["headInner"] = <<< EOM
@@ -168,11 +168,13 @@ EOM;
 						</div>
 						<div><p>ダイジェスト</p><p>{$json['highlightmovieurl']['title']}</p></div>
 					</a>
-					<a href="{$json['movieurl']}" target="_blank">フルバージョンの動画はこちら</a>
+					<!-- <a href="{$json['movieurl']}" target="_blank">フルバージョンの動画はこちら</a> -->
 				</li>
 			</ul>
 EOM;
-		
+		//ダイジェスト動画
+		$result["digest"] = '<a href="'.$json['movieurl'].'" target="_blank">フルバージョンの動画はこちら</a>';
+
 		//各クオーター結果
 		$result["quarter"] = <<< EOM
 			<tr>
