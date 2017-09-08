@@ -32,6 +32,38 @@ $urev["京都大学"]=array("id"=>6,"name"=>"京都大学");
 $urev["桃山学院大学"]=array("id"=>7,"name"=>"桃山学院大学");
 $urev["同志社大学"]=array("id"=>8,"name"=>"同志社大学");
 
+$map["#リーグ"]="league";
+$map["#日付け"]="date";
+$map["#曜日"]="weekday";
+$map["#試合ID"]="gameid";
+$map["#開始時間"]="kickoff";
+$map["#スタジアム"]="stadium";
+$map["#天候"]="weather";
+$map["#観衆"]="spectators";
+$map["#試合状態"]="status";
+$map["#チーム名"]="name";
+$map["#チームID"]="id";
+$map["#得点1Q"]="score.1q";
+$map["#得点2Q"]="score.2q";
+$map["#得点3Q"]="score.3q";
+$map["#得点4Q"]="score.4q";
+$map["#得点合計"]="score.total";
+$map["#タッチダウン"]="stats.touchdown";
+$map["#PAT(1点)回数-成功"]="stats.pat.1point";
+$map["#PAT(2点)回数-成功"]="stats.pat.2point";
+$map["#フィールドゴール"]="stats.fieldgoal";
+$map["#セイフティ"]="stats.safety";
+$map["#1stダウン(ラン-パス-反則)"]="stats.1stdown";
+$map["#パス 試投-成功-被Intercept"]="stats.pass.throw";
+$map["#獲得ヤード"]="stats.pass.yard";
+$map["#ラン(回数-獲得ヤード)"]="stats.run";
+$map["#攻撃(回数-獲得ヤード)"]="stats.attack";
+$map["#反則(回数-喪失ヤード)"]="stats.penalty";
+$map["#ファンブル(回数-喪失回数)"]="stats.fumble";
+$map["#ボール所有時間"]="stats.possession";
+$map["#3rd Down Conversions"]="stats.3rdDownConversions";
+$map["#4th Down Conversions"]="stats.4thDownConversions";
+
 function put_json($file,$data){
 	$data=json_encode($data,JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 	file_put_contents($file,$data);
@@ -71,38 +103,5 @@ function setarray($key,$val,$n){
 		$y["response"]["team"][$n][$key[0]][$key[1]][$key[2]]=$val;
 	}
 }
-
-
-$map["#リーグ"]="league";
-$map["#日付け"]="date";
-$map["#曜日"]="weekday";
-$map["#試合ID"]="gameid";
-$map["#開始時間"]="kickoff";
-$map["#スタジアム"]="stadium";
-$map["#天候"]="weather";
-$map["#観衆"]="spectators";
-$map["#試合状態"]="status";
-$map["#チーム名"]="name";
-$map["#チームID"]="id";
-$map["#得点1Q"]="score.1q";
-$map["#得点2Q"]="score.2q";
-$map["#得点3Q"]="score.3q";
-$map["#得点4Q"]="score.4q";
-$map["#得点合計"]="score.total";
-$map["#タッチダウン"]="stats.touchdown";
-$map["#PAT(1点)回数-成功"]="stats.pat.1point";
-$map["#PAT(2点)回数-成功"]="stats.pat.2point";
-$map["#フィールドゴール"]="stats.fieldgoal";
-$map["#セイフティ"]="stats.safety";
-$map["#1stダウン(ラン-パス-反則)"]="stats.1stdown";
-$map["#パス 試投-成功-被Intercept"]="stats.pass.throw";
-$map["#獲得ヤード"]="stats.pass.yard";
-$map["#ラン(回数-獲得ヤード)"]="stats.run";
-$map["#攻撃(回数-獲得ヤード)"]="stats.attack";
-$map["#反則(回数-喪失ヤード)"]="stats.penalty";
-$map["#ファンブル(回数-喪失回数)"]="stats.fumble";
-$map["#ボール所有時間"]="stats.possession";
-$map["#3rd Down Conversions"]="stats.3rdDownConversions";
-$map["#4th Down Conversions"]="stats.4thDownConversions";
 
 ?>

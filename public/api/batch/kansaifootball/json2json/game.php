@@ -3,6 +3,15 @@
 include "local.php";
 include "../inc.php";
 
+
+function hms($sec){
+	$ss=$sec%60;
+	$mm=(int)($sec/60)%60;
+	$hh=(int)($sec/(60*60));
+	return $hh>0?sprintf("%d:%02d:%02d",$hh,$mm,$ss):sprintf("%02d:%02d",$mm,$ss);
+}
+
+
 //関西アメリカンフットボールJSONパス
 $path="https://dev-img.sportsbull.jp/static/americanfootball/2017/autumn/json";
 
@@ -35,8 +44,6 @@ for($i=0;$i<count($gameid);$i++){
 	$data1=json_decode($data1,true);
 	
 	$jsonfile2=sprintf("%s/%s.json",$bucket,$gameid[$i]);
-	$data2=get_contents($jsonfile2);
-	$data2=json_decode($data2,true);
 	
 	$flag=0;
 	if(!file_exists($jsonfile2)){
@@ -52,10 +59,19 @@ for($i=0;$i<count($gameid);$i++){
 		}
 	}
 	
+	if(file_exists($jsonfile2)){
+		$data2=get_contents($jsonfile2);
+		$data2=json_decode($data2,true);
+	}
+	
 	if($flag==1){
 		$data1["response"]["gameinfo"]["weekday"]=get_weekday(date("w",$data1["response"]["gameinfo"]["date"]));
 		$data1["response"]["highlightmovieurl"]=$movie["movie"][$gameid[$i]];
 		$data1["response"]["movieurl"]=$fullmovieurl[$gameid[$i]];
+		
+		$data1["response"]["team"][0]["stats"]["possession"]=hms($data1["response"]["team"][0]["stats"]["possession"]);
+		$data1["response"]["team"][1]["stats"]["possession"]=hms($data1["response"]["team"][1]["stats"]["possession"]);
+		
 		$data1["response"]["team"][0]["id"]=$urev[$data1["response"]["team"][0]["name"]]["id"];
 		$data1["response"]["team"][1]["id"]=$urev[$data1["response"]["team"][1]["name"]]["id"];
 		put_json($jsonfile2,$data1);
