@@ -1,15 +1,11 @@
 <?php
 
-$season="2017s";
-
 include $INCLUDEPATH."local.php";
-	
-$o=new db;
-$o->connect();
+include "inc.php";
 
 $s=array();
 
-$sql=sprintf("select id,swf,u_time from repo_n where swf like 'big6tv%s_%s' and flag=1 order by u_time desc;",$season,"%");
+$sql=sprintf("select id,swf,u_time from repo_n where swf like 'big6tv%s_%s' and flag=1 order by u_time desc;",$target,"%");
 $o->query($sql);
 $i=0;
 while($f=$o->fetch_array()){
