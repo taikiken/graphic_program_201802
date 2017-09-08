@@ -1,8 +1,8 @@
 <?php
 class getData {
-	public static $scheduleUrl = "https://dev-img.sportsbull.jp/static/americanfootball/2017/autumn/schedule.json";
-	public static $standingUrl = "https://dev-img.sportsbull.jp/static/americanfootball/2017/autumn/standing.json";
-	public static $gameUrl = "https://dev-img.sportsbull.jp/static/americanfootball/2017/autumn/%s.json";
+	public static $scheduleUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/schedule.json";
+	public static $standingUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/standing.json";
+	public static $gameUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/%s.json";
 
 	public static function getSchedule() {
 		$json = file_get_contents(self::$scheduleUrl);
@@ -125,14 +125,17 @@ EOM;
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
 		$json = $json["response"];
-
+		if (empty($gameId) || empty($json)) {
+			header('Location: https://sportsbull.jp/stats/ua_kansai/');
+			exit;
+		}
 		$gameinfo = $json["gameinfo"];
 		$playFirst = $json["team"][0];
 		$drawFirst = $json["team"][1];
 		$scoreInfo = $json["events"];
 		$date = date("n月j日",strtotime($gameinfo["date"]));
 
-		$result = array("date"=>$date,"playFirstName"=>$playFirst['name'],"drawFirstName"=>$drawFirst['name'],"headInner"=>"","movie"=>"","quarter"=>"","data"=>"","scoreInfo"=>"","personalInfo"=>"");
+		$result = array("date"=>$date,"playFirstName"=>$playFirst['name'],"drawFirstName"=>$drawFirst['name'],"headInner"=>"","movie"=>"","digest"=>"","quarter"=>"","data"=>"","scoreInfo"=>"","personalInfo"=>"");
 
 		//ヘッダーインナー
 		$result["headInner"] = <<< EOM
@@ -165,11 +168,13 @@ EOM;
 						</div>
 						<div><p>ダイジェスト</p><p>{$json['highlightmovieurl']['title']}</p></div>
 					</a>
-					<a href="{$json['movieurl']}" target="_blank">フルバージョンの動画はこちら</a>
+					<!-- <a href="{$json['movieurl']}" target="_blank">フルバージョンの動画はこちら</a> -->
 				</li>
 			</ul>
 EOM;
-		
+		//ダイジェスト動画
+		$result["digest"] = '<a href="'.$json['movieurl'].'" target="_blank">フルバージョンの動画はこちら</a>';
+
 		//各クオーター結果
 		$result["quarter"] = <<< EOM
 			<tr>

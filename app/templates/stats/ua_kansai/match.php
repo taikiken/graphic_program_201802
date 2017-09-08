@@ -13,29 +13,29 @@ $dataArray = getData::getMatch($gameId);
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title><?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?> 関西学生アメリカンフットボールリーグ | 速報 & データ | SPORTS BULL</title>
+  <title><?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?> - 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | スポーツブル (スポブル)</title>
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
 
-  <meta name="keywords" content="">
-  <meta name="description" content="">
+  <meta name="keywords" content="関西学生アメリカンフットボールリーグ, 関西アメフト, 日程結果, スポーツ, メディア, ニュース, 動画, sports, media,<?=$dataArray["playFirstName"]?>,<?=$dataArray["drawFirstName"]?>">
+  <meta name="description" content="<?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?>。関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
 
   <meta property="fb:app_id" content="842032129256034">
   <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="">
-  <meta property="og:description" content="">
+  <meta property="og:title" content="<?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?> - 関西学生アメリカンフットボールリーグ | 速報 & データ | スポーツブル (スポブル)">
+  <meta property="og:image" content="https://sportsbull.jp/assets/stats/ua_kansai/images/ogp.jpg">
+  <meta property="og:url" content="https://sportsbull.jp/stats/ua_kansai/match/?gameId=<?=$gameId?>">
+  <meta property="og:description" content="<?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?>。関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
   <meta property="og:locale" content="ja_JP" />
 
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
-  <meta name="twitter:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-  <meta name="twitter:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta name="twitter:url" content="">
-  <meta name="twitter:description" content="">
+  <meta name="twitter:title" content="<?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?> - 関西学生アメリカンフットボールリーグ | 速報 & データ | スポーツブル (スポブル)">
+  <meta name="twitter:image" content="https://sportsbull.jp/assets/stats/ua_kansai/images/ogp.jpg">
+  <meta name="twitter:url" content="https://sportsbull.jp/stats/ua_kansai/match/?gameId=<?=$gameId?>">
+  <meta name="twitter:description" content="<?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?>。関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
 
   <link rel="canonical" href="">
   <link rel="apple-touch-icon" sizes="180x180" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
@@ -59,7 +59,7 @@ $dataArray = getData::getMatch($gameId);
   <link rel="stylesheet" href="/assets/stats/ur_kansai/css/style.css">
 =======
   <link rel="stylesheet" href="/assets/stats/ua_kansai/css/ui.css">
-  <link rel="stylesheet" href="/assets/stats/ua_kansai/js/demo.js">
+  <!-- <link rel="stylesheet" href="/assets/stats/ua_kansai/js/demo.js"> -->
   <link rel="stylesheet" href="/assets/stats/ua_kansai/css/style.css">
 >>>>>>> origin/feature/2264-amefoot-stats
   <!-- optimize -->
@@ -313,6 +313,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
             <table>
               <?=$dataArray["data"]?>
             </table>
+            <div class="digestbtn"><?=$dataArray["digest"]?></div>
           </div><!-- /.data -->
         </div><!-- /#basic-info -->
         <div id="score-info">
