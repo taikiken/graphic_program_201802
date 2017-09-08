@@ -1,26 +1,16 @@
 <?php
 /**
- * desktop: 汎用 category template, exclude `motorsports`
- * motorsports category だけ表示が変わるので分岐する
- * User: @taikiken
- * Date: 2017/05/25
- * Time: 16:31
- * @see https://github.com/undotsushin/undotsushin/issues/1914
- * @see https://github.com/undotsushin/undotsushin/issues/1915
+ * [DESKTOP]
+ * 地域別記事機能 / 概要 #2318
+ * @see https://github.com/undotsushin/undotsushin/issues/2318
+ * author: @taikiken
+ * Date: 2017/09/04
+ * Time: 19:30
  */
-?>
-<?php
-// PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
-include_once __DIR__.'/_category-heading.php';
 
-?>
-<?php
-// https://github.com/undotsushin/undotsushin/issues/1210
-// CMS から一面・すべてのバナーを設定できるようにする #1210
-// @since 2016-11-02
-if ($page['category']['slug'] == 'all') {
-  include_once __DIR__ . '/_cms_banner.php';
-}
+// PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
+include_once __DIR__.'/../../desktop/_category-heading.php';
+
 ?>
 
 <div class="body-sec">
@@ -44,6 +34,7 @@ if ($page['category']['slug'] == 'all') {
 
   <div class="body-sec-inner">
     <section class="main-sec">
+
       <?php
       // ----------------------------------------------------
       // 記事一覧: pc banner
@@ -65,51 +56,6 @@ if ($page['category']['slug'] == 'all') {
       ?>
       <div id="js-headline"></div>
 
-
-      <?php if ( $page['category']['slug'] === 'big6tv' ) : ?>
-        <?php include_once __DIR__.'/../../../public/big6tv/category/index.html'; ?>
-        <div class="headline-heading">
-          <h2 class="headline-heading-title"><img src="/assets/images/common/headline-heading_big6.png" alt="HEADLINE NEWS"></h2>
-          <span class="headline-heading-ruby">新着記事</span>
-        </div>
-      <?php endif; ?>
-
-      <?php
-      # ref. #2227
-      if ( $page['category']['slug'] === 'seriku' ) :
-        include_once __DIR__.'/../seriku/desktop/index.php';
-      endif;
-      ?>
-
-      <?php
-      # ref. #2185
-      if ( $page['category']['slug'] === 'inhigh' ) :
-        include_once __DIR__.'/../inhigh/desktop/index.php';
-      endif;
-      ?>
-
-      <?php
-      # ref. #2321 
-      if ( $page['category']['slug'] === 'americanfootball' ) :
-        include_once __DIR__.'/../stats/ua_kansai/desktop/index.php';
-      endif;
-      ?>
-
-      <?php
-      # ref. #2104
-      if ( $page['category']['slug'] === 'highschoolbaseball' ) :
-        $hsb_parts = file_get_contents('https://sportsbull.jp/stats/hsb/webview/pc/');
-        echo $hsb_parts;
-      endif;
-      ?>
-
-      <?php
-      # ref. #2264
-      if ( $page['category']['slug'] === 'americanfootball' ) :
-        include_once __DIR__.'/../stats/ua_kansai/desktop/index.php';
-      endif;
-      ?>
-
       <div class="board-large">
 
         <div id="board-container"></div><!--/archive-->
@@ -117,11 +63,12 @@ if ($page['category']['slug'] == 'all') {
         <div id="board-container-more"></div><!--/archive-more-->
 
       </div><!-- /.board-large -->
+
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
 
-      <?php include_once __DIR__."/_sidebar_ad.php"; ?>
+      <?php include_once __DIR__."/../../desktop/_sidebar_ad.php"; ?>
 
     </section><!-- /.side-sec -->
 
