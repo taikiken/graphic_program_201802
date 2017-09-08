@@ -34,6 +34,10 @@
   <meta property="og:description" content="<?php echo $page['og_description']; ?>">
   <meta property="og:locale" content="ja_JP" />
 
+<?php if ( $page['fb_pages'] && is_array($page['fb_pages']) ) : foreach( $page['fb_pages'] as $key => $value ) : ?>
+  <meta property="fb:pages" content="<?php echo $value; ?>" />
+<?php endforeach; endif; ?>
+
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@<?php echo $page['sns']['twitter']; ?>">
