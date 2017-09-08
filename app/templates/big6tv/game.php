@@ -85,17 +85,6 @@
             })();
         </script>
         <!-- ad/dfp -->
-        <!-- ad/appvador -->
-        <script>
-            googletag.cmd.push(function()
-            {
-                googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
-            });
-        </script>
-        <!-- //ad/appvador -->
         <!-- ad/dfp - pc/rectangle -->
         <script>
             googletag.cmd.push(function()
@@ -107,16 +96,6 @@
             });
         </script>
         <!-- //ad/dfp - pc/rectangle -->
-        <!-- ad/npb-sp-anchor -->
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push(
-            {
-                google_ad_client: "ca-pub-8613117509675807",
-                enable_page_level_ads: true
-            });
-        </script>
-        <!-- // ad/npb-sp-anchor -->
         <!-- ga -->
         <script>
             (function(i, s, o, g, r, a, m)
@@ -141,22 +120,6 @@
         <!-- //ga -->
     </head>
     <body>
-        <!-- ad/531683568/appvador -->
-        <div id='div-gpt-ad-1501126889988-0'>
-            <style>
-                #div-gpt-ad-1501126889988-0 * {
-                    line-height: 0;
-                }
-            </style>
-            <script>
-                googletag.cmd.push(function()
-                {
-                    googletag.display('div-gpt-ad-1501126889988-0');
-                });
-            </script>
-            <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
-        </div>
-        <!-- ad/531683568/appvador -->
         <div id="whole" class="whole dark">
             <header class="head-sec">
                 <div class="head-sec-inner">
@@ -221,7 +184,7 @@
                     </section>
                     <!-- /.main-sec -->
                     <section class="side-sec show-for-large">
-                            <div class="sponsor-link"> 
+                            <div class="sponsor-link">
                                 <script type='text/javascript'>
                                                                     googletag.cmd.push(function() {
                                                                     googletag.defineSlot('/531683568/big6-pc-rectangle', [300, 250], 'div-gpt-ad-pc_sidebar_top').addService(googletag.pubads());
@@ -230,16 +193,16 @@
                                                                     googletag.enableServices();
                                                                     });
                                                                 </script>
-                                <div id='div-gpt-ad-pc_sidebar_top' style='height:250px; width:300px;'> 
+                                <div id='div-gpt-ad-pc_sidebar_top' style='height:250px; width:300px;'>
                                     <script type='text/javascript'>
                                                                 googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_sidebar_top'); });
-                                                                </script> 
+                                                                </script>
                                 </div>
                             </div>
                             <!-- /.sponsor-link -->
-                            
-                            <div class="app-bnr"> 
-                                <!-- /531683568/pc_sidebar_top_2nd --> 
+
+                            <div class="app-bnr">
+                                <!-- /531683568/pc_sidebar_top_2nd -->
                                 <script>
                                                                     googletag.cmd.push(function() {
                                                                     googletag.defineSlot('/531683568/pc_sidebar_top_2nd', [300, 120], 'div-gpt-ad-1494939250039-0').addService(googletag.pubads());
@@ -248,15 +211,15 @@
                                                                     googletag.enableServices();
                                                                     });
                                                                 </script>
-                                <div id='div-gpt-ad-1494939250039-0' style='height:120px; width:300px;'> 
+                                <div id='div-gpt-ad-1494939250039-0' style='height:120px; width:300px;'>
                                     <script>
                                                                 googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939250039-0'); });
-                                                                </script> 
+                                                                </script>
                                 </div>
-                                <!-- // /531683568/pc_sidebar_top_2nd --> 
+                                <!-- // /531683568/pc_sidebar_top_2nd -->
                             </div>
                             <!-- /.app-bnr -->
-                            
+
                             <div class="side-bnr_big6">
                                 <ul class="side-bnr_big6-list">
                                     <li class="side-bnr_big6-item"> <a href="https://teams.one/?utm_source=big6tv&utm_campaign=teamstop&utm_medium=banner" target="_blank"><img src="/assets/images/big6/bnr-side-teams.png" alt="teams「野球チーム、集合。」全国3,000チーム以上が利用する野球チーム専用マネジメントツール"></a> </li>
@@ -268,10 +231,10 @@
                             <!--/recommend-->
                             <div id="widget-ranking-container"></div>
                             <!--/ranking-->
-                            
+
                             <div id="widget-recommend-container"></div>
-                            <!--/videos--> 
-                            
+                            <!--/videos-->
+
                         </section>
                         <!-- /.side-sec -->
                 </div>
