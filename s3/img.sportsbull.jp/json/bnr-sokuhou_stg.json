@@ -89,6 +89,14 @@
       "banners": [
         {
           "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-baseball_univ_touto.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-baseball_univ_touto.jpg"
+          },
+          "url": "/stats/ub_tohto/",
+          "alt": "東都大学野球 速報&amp;データを見る"
+        },
+        {
+          "image": {
             "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-baseball_univ_6.jpg",
             "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-baseball_univ_6.jpg"
           },
