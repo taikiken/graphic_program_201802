@@ -88,17 +88,14 @@ if(strlen($f["name"])>0){
 		$f=$o->fetch_array();
 		$count=$f["n"];
 
-		if($count>0){
+		$o->query($sql);
+		while($f=$o->fetch_array())$p[]=$f;
 
-			$o->query($sql);
-			while($f=$o->fetch_array())$p[]=$f;
+		//カテゴリー一覧でも使うのでファイルに出す
+		$s=array();
+		include "public/articlecomments.php";
 
-			//カテゴリー一覧でも使うのでファイルに出す
-			$s=array();
-			include "public/articlecomments.php";
-
-			$categoriesinfo["headline"]["articles"]=$s;
-		}
+		$categoriesinfo["headline"]["articles"]=$s;
 
 	}else{
 		$categoriesinfo["headline"]["articles"]=$s;
@@ -134,13 +131,6 @@ if(strlen($f["name"])>0){
     );
   endif;
 
-  # ref. #2185
-  if ( $category === 'inhigh' ) :
-    $categoriesinfo['webviews']     = array(
-      '/inhigh/webview/',
-    );
-  endif;
-
   # ref. #2227
   if ( $category === 'seriku' ) :
     $categoriesinfo['webviews']     = array(
@@ -148,10 +138,24 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+  # ref. #2185
+  if ( $category === 'inhigh' ) :
+    $categoriesinfo['webviews']     = array(
+      '/inhigh/webview/',
+    );
+  endif;
+
   # ref. #2104
   if ( $category === 'highschoolbaseball' ) :
     $categoriesinfo['webviews']     = array(
       '/stats/hsb/webview/app/',
+    );
+  endif;
+
+  # ref. #2264
+  if ( $category === 'americanfootball' ) :
+    $categoriesinfo['webviews']     = array(
+      '/stats/ua_kansai/webview/',
     );
   endif;
 

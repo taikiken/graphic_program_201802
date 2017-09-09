@@ -1,0 +1,673 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../scss/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../bower_exports/modularized/normalize";
+@import "../../../../scss/style/reset";
+@import "../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+
+
+// common override
+.bulls-station {
+  .body-sec-inner {
+    width: 100%;
+    padding-bottom: 70px;
+    background-color: transparent;
+    background-image: none;
+  }
+}
+
+
+
+
+//.bulls_station__local_navi
+.bulls_station__local_navi {
+  position: relative;
+  height: 80px;
+  border-bottom: 3px solid #dbdbde;
+  background-color: #f5f5f5;
+  overflow: hidden;
+
+  //.bulls_station__local_navi__outer
+  &__outer {
+    max-width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.bulls_station__local_navi__inner
+  &__inner {
+    position: relative;
+    width: 1090px;
+    margin-right: -5000px;
+    margin-left: -5000px;
+    padding-right: 5000px;
+    padding-left: 5000px;
+  }
+
+  &__heading {
+    //.bulls_station__local_navi__heading__container
+    &__container {
+      display: table;
+    }
+
+    //.bulls_station__local_navi__heading
+    //.bulls_station__local_navi__heading__date
+    &,
+    &__date {
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    //.bulls_station__local_navi__heading
+    & {
+      padding-top: 17px;
+    }
+
+    //.bulls_station__local_navi__heading__date
+    &__date {
+      padding-top: 34px;
+      padding-left: 13px;
+    }
+  }
+
+  //.bulls_station__local_navi__list
+  &__list {
+    position: absolute;
+    top: 0;
+    margin-left: 472px;
+  }
+
+  //.bulls_station__local_navi__item
+  &__item {
+    position: absolute;
+    top: 0;
+
+    //.bulls_station__local_navi__item--1
+    &--1 {
+      left: 0;
+
+      //.bulls_station__local_navi__link
+      .bulls_station__local_navi__link {
+        width: 254px;
+        background-image: url(/assets/images/bulls-station/nav-nav1.png);
+      }
+    }
+
+    //.bulls_station__local_navi__item--2
+    &--2 {
+      left: 202px;
+
+      //.bulls_station__local_navi__link
+      .bulls_station__local_navi__link {
+        background-image: url(/assets/images/bulls-station/nav-nav2.png);
+      }
+    }
+
+    //.bulls_station__local_navi__item--3
+    &--3 {
+      left: 384px;
+
+      //.bulls_station__local_navi__link
+      .bulls_station__local_navi__link {
+        background-image: url(/assets/images/bulls-station/nav-nav3.png);
+      }
+    }
+  } //.bulls_station__local_navi__item
+
+  //.bulls_station__local_navi__link
+  &__link {
+    display: block;
+    width: 234px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    @include hide-text;
+
+    &:hover {
+      background-position: 0 -80px;
+    }
+  } //.bulls_station__local_navi__link
+} //.bulls_station__local_navi
+
+
+
+// 390
+
+//.bulls_station__overview
+.bulls_station__overview {
+  // width: 1480px;
+  // margin: 0 auto;
+  position: relative;
+  background: url(/assets/images/bulls-station/overview-base.png) center center repeat;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    margin-left: -740px;
+    background-color: #f5f5f5;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    margin-left: 740px;
+    background-color: #f5f5f5;
+  }
+
+  //.bulls_station__overview__outer
+  &__outer {
+    max-width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.bulls_station__overview__inner
+  &__inner {
+    position: relative;
+    width: 1090px;
+    margin-right: -5000px;
+    margin-left: -5000px;
+    padding-right: 5000px;
+    padding-left: 5000px;
+  }
+
+  //.bulls_station__overview__parallax
+  &__parallax {
+    position: absolute;
+    width: 1480px;
+    height: 610px;
+    margin-left: -195px;
+    overflow: hidden;
+
+    .parallax__layer {
+      position: absolute;
+
+      img {
+        margin-top: -90px;
+        margin-left: -100px;
+      }
+    }
+  }
+
+  //.bulls_station__overview__heading
+  &__heading {
+    position: relative;
+    width: 1090px;
+    margin: 0 auto;
+    padding-top: 72px;
+    text-align: center;
+  }
+
+  //.bulls_station__overview__copy
+  &__copy {
+    position: relative;
+    width: 1090px;
+    margin: 0 auto;
+    padding-top: 28px;
+    text-align: center;
+  }
+
+  //.bulls_station__overview__date
+  &__date {
+    position: relative;
+    width: 1090px;
+    margin: 20px auto 0;
+    text-align: center;
+  }
+
+  //.bulls_station__overview__btn
+  &__btn {
+    position: relative;
+    width: 1090px;
+    margin: 40px auto;
+
+    //.bulls_station__overview__btn__link
+    &__link {
+      display: block;
+      width: 360px;
+      line-height: 1;
+      margin-right: auto;
+      margin-left: auto;
+      background-color: #cc141d;
+      text-align: center;
+
+      &:hover {
+        background-color: #b8131c;
+      }
+    }
+  }
+
+
+
+  //.bulls_station__overview__caster
+  &__caster {
+    position: relative;
+    width: 1480px;
+    margin-top: 40px;
+    margin-left: -195px;
+    padding-bottom: 60px;
+    background: url(/assets/images/bulls-station/caster-bg.png) center 30px no-repeat;
+
+    //.bulls_station__overview__caster__list
+    &__list {
+      width: 1090px;
+      margin-right: auto;
+      margin-left: auto;
+      letter-spacing: ls(inline-block);
+    }
+
+    //.bulls_station__overview__caster__item
+    &__item {
+      display: inline-block;
+      width: 200px;
+      margin-left: 22px;
+      letter-spacing: normal;
+      vertical-align: top;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    //.bulls_station__overview__caster__figure
+    &__figure {
+      position: relative;
+      width: 200px;
+      height: 245px;
+      background: url(/assets/images/bulls-station/caster-figure_bg.png) 0 0 no-repeat;
+
+      //.bulls_station__overview__caster__figure__img
+      &__img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: top .2s;
+      }
+
+      //.bulls_station__overview__caster__figure__heading
+      &__heading {
+        position: absolute;
+        bottom: 0;
+        left: 20px;
+      }
+
+      //.bulls_station__overview__caster__figure__dow
+      &__dow {
+        position: absolute;
+      }
+    }
+
+    //.bulls_station__overview__caster__item--mon
+    &__item--mon {
+      .bulls_station__overview__caster__figure__dow {
+        top: 11px;
+        left: 135px;
+      }
+    }
+
+    //.bulls_station__overview__caster__item--tue
+    &__item--tue {
+      .bulls_station__overview__caster__figure__dow {
+        top: 12px;
+        left: 142px;
+      }
+    }
+
+    //.bulls_station__overview__caster__item--wed
+    &__item--wed {
+      .bulls_station__overview__caster__figure__dow {
+        top: 7px;
+        left: 140px;
+      }
+    }
+
+    //.bulls_station__overview__caster__item--thu
+    &__item--thu {
+      .bulls_station__overview__caster__figure__dow {
+        top: 10px;
+        left: 131px;
+      }
+    }
+
+    //.bulls_station__overview__caster__item--fri
+    &__item--fri {
+      .bulls_station__overview__caster__figure__dow {
+        top: 15px;
+        left: 146px;
+      }
+    }
+
+    //.bulls_station__overview__caster__btn
+    &__btn {
+      display: block;
+      width: 160px;
+      height: 30px;
+      margin-right: auto;
+      margin-left: auto;
+      padding-left: 30px;
+      background: #af9f80 url(/assets/images/bulls-station/caster-btn-icon.png) 0 0 no-repeat;
+    }
+
+    //.bulls_station__overview__caster__heading
+    &__heading {
+      margin-top: 12px;
+      color: #a18e6d;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    //.bulls_station__overview__caster__copy
+    &__copy {
+      margin-top: 0.25em;
+      color: #a18e6d;
+    }
+  } //.bulls_station__overview__caster
+
+
+
+  //.bulls_station__overview__caster__link
+  &__caster__link {
+    &:hover {
+      .bulls_station__overview__caster__figure__img {
+        top: -5px;
+      }
+
+      .bulls_station__overview__caster__figure__dow {
+        animation: figure__dow-anime .2s ease;
+      }
+
+      .bulls_station__overview__caster__btn {
+        background-color: #cc141d;
+      }
+    }
+  }
+
+
+@at-root {
+
+@keyframes figure__dow-anime {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-2deg);
+  }
+}
+
+} //at-root
+
+} //.bulls_station__overview
+
+
+
+
+
+//.bulls_station__follow
+.bulls_station__follow {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  background-color: #fff;
+  overflow: hidden;
+
+  //.bulls_station__follow__outer
+  &__outer {
+    max-width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.bulls_station__follow__inner
+  &__inner {
+    position: relative;
+    width: 1090px;
+    margin-right: -5000px;
+    margin-left: -5000px;
+    padding-right: 5000px;
+    padding-left: 5000px;
+  }
+
+  //.bulls_station__follow__list
+  &__list {
+    display: table;
+    width: 1090px;
+  }
+
+  //.bulls_station__follow__item
+  &__item {
+    display: table-cell;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-left: 1px solid #dbdbdb;
+    text-align: center;
+    vertical-align: middle;
+
+    &:first-child {
+      border-left: none;
+    }
+  }
+
+  //.bulls_station__follow__text
+  &__text {
+    font-weight: bold;
+
+    //.bulls_station__follow__text__color1
+    &__color1 {
+      color: #cc141d;
+    }
+
+    //.bulls_station__follow__text__color2
+    &__color2 {
+      color: #0e357f;
+    }
+  }
+
+  //.bulls_station__follow__btn
+  &__btn {
+    margin-top: 16px;
+
+    a {
+      display: inline-block;
+      padding-left: 50px;
+      background: url(/assets/images/bulls-station/follow-appicon.png) 0 0 no-repeat;
+
+      &:hover img {
+        @include over-opacity(0.85);
+      }
+    }
+  }
+
+  //.bulls_station__follow__item--facebook
+  &__item--facebook {
+    letter-spacing: ls(inline-block);
+
+    .bulls_station__follow__likebox,
+    .bulls_station__follow__text {
+      display: inline-block;
+      letter-spacing: normal;
+      vertical-align: middle;
+    }
+
+    .bulls_station__follow__text {
+      margin-left: 20px;
+      text-align: left;
+    }
+  }
+} //.bulls_station__follow
+
+
+
+
+
+//.bulls_station__photo_gallery
+//.bulls_station__offshot_movie
+.bulls_station__photo_gallery,
+.bulls_station__offshot_movie {
+  margin-top: 60px;
+  overflow: hidden;
+
+  //.bulls_station__photo_gallery__outer
+  //.bulls_station__offshot_movie__outer
+  &__outer {
+    max-width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.bulls_station__photo_gallery__inner
+  //.bulls_station__offshot_movie__inner
+  &__inner {
+    position: relative;
+    width: 1090px;
+    margin-right: -5000px;
+    margin-left: -5000px;
+    padding-right: 5000px;
+    padding-left: 5000px;
+  }
+
+  //.bulls_station__photo_gallery__heading
+  //.bulls_station__offshot_movie__heading
+  &__heading {
+    position: relative;
+    width: 1090px;
+    padding-top: 10px;
+
+    &__btn {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+
+      a {
+        display: block;
+        width: 341px;
+        height: 60px;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        @include hide-text;
+
+        &:hover {
+          background-position: 0 -60px;
+        }
+      }
+    }
+  }
+
+  @at-root {
+    .bulls_station__photo_gallery__heading__btn a {
+      background-image: url(/assets/images/bulls-station/gallery-btn.png);
+    }
+
+    .bulls_station__offshot_movie__heading__btn a {
+      background-image: url(/assets/images/bulls-station/movie-btn.png);
+    }
+  } //at-root
+
+  //.bulls_station__photo_gallery__list
+  //.bulls_station__offshot_movie__list
+  &__list {
+    display: table;
+    width: 1090px;
+    margin-top: 20px;
+  }
+
+  @at-root {
+    .bulls_station__photo_gallery__item {
+      display: table-cell;
+      width: 200px;
+      height: 200px;
+      padding-right: 9px;
+      padding-left: 9px;
+      text-align: center;
+      vertical-align: middle;
+
+      a {
+        display: table-cell;
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+        text-align: center;
+        vertical-align: middle;
+
+        img {
+          max-width: 200px;
+          max-height: 200px;
+        }
+
+        &:hover {
+          @include over-opacity(0.75);
+        }
+      }
+    }
+
+    .bulls_station__offshot_movie__item {
+      display: table-cell;
+      width: 200px;
+      padding-right: 9px;
+      padding-left: 9px;
+      text-align: center;
+      vertical-align: middle;
+
+      a {
+        display: inline-block;
+        position: relative;
+
+        img {
+          max-width: 100%;
+        }
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: #000;
+          @include opacity(0.3);
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          width: 38px;
+          height: 38px;
+          background: url(/assets/images/bulls-station/movie-icon-thumb.png) 0 0 no-repeat;
+          @include hide-text;
+        }
+
+        &:hover {
+          &:before {
+            @include opacity(0);
+          }
+
+          &:after {
+            @include opacity(0);
+          }
+        }
+      }
+    } //.bulls_station__offshot_movie__item
+  } //at-root
+}
+//.bulls_station__photo_gallery
+//.bulls_station__offshot_movie
