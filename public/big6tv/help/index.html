@@ -143,7 +143,23 @@
             ga('send', 'pageview');
         </script>
         <!-- //ga -->
-        <link rel="stylesheet" href="/assets/css/ui.css?v=5b38cb37" media="only screen and (min-width: 769px)"> </head>
+        <link rel="stylesheet" href="/assets/css/ui.css?v=5b38cb37" media="only screen and (min-width: 769px)">
+
+        <!-- overwrite - 2017-09-09 -->
+        <style>
+          @media only screen and (max-width: 768px) {
+            .module-header li {
+              height: 35px;
+              line-height: 35px;
+            }
+          }
+          .live-help {
+            font-size: 12px !important;
+          }
+        </style>
+        <!-- //overwrite - 2017-09-09 -->
+
+    </head>
     <body>
         <div id="whole" class="whole normal theme_big6 layout-list big6tv">
             <header class="head-sec">
