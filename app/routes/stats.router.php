@@ -73,7 +73,7 @@ $app->group('/stats', function () use($app) {
   // ==============================
   $this->group('/mlb/game', function ($request, $response, $args) use ( $app ) {
     $this->get('/{category:\d{4}/\d{9}}[/]', function ($request, $response, $args) use ($app) {
-      
+
       $category = array(
         'title' => 'MLB | 速報 &amp; データ',
       );
@@ -362,7 +362,7 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
           $args['page'] = $app->model->set(array(
             'request_uri' => $request_uri,
             'title' => $title,
-            'og_image' => 'OG_univ_touto',
+            'og_image' => 'OG_univ_tohto',
             'stats_top_image' => 'tohto',
             'league' => $league,
             'league_name' => $league_name,
