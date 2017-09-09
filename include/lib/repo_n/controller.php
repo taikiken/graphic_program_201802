@@ -210,6 +210,11 @@ if($q->get_dir()===0){
 	$gBILL=getBill();
 	$FIELD="*";
 	$WHERE=" where cid=".$g->f("cid");
+
+    if(false === empty(getSorC('is_external')) && false === empty(getSorC('u_media')))
+    {
+        $WHERE .= ' AND d1 = 3 AND d2 IN (' . getSorC('u_media') . ')';
+    }
 }
 
 $EDITDELETEINITIAL="n";

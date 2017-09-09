@@ -10,7 +10,7 @@ $(function(){
 		$("#"+target[index]).show();
 	});
 	$('#team-tab li').on('click',function(){
-		var index,target = ["home","away"];
+		var index,target = ["play-first","draw-first"];
 		index = $('#team-tab li').index(this);
 		$('#team-tab').removeClass( );
 		$('#team-tab').addClass("active-"+index);

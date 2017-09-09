@@ -8,42 +8,8 @@ $app->group('/{slug:big6tv}', function () use ($app) {
   // /big6tv/
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
-
-    $args['page'] = $app->model->set(array(
-      'title'              => '東京六大学野球 BIG6.TV',
-      'og_title'           => '東京六大学野球 BIG6.TV | '.$app->model->property('title'),
-      'og_url'             => $app->model->property('site_url').'big6tv/',
-      'path'               => $args,
-      'template'           => 'category',
-      'template_classname' => '',
-    ));
-
-    // LIVEデータを取得する
-    $big6tvLive = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/live');
-    $args['page']['big6tv']['liveData'] = json_decode($big6tvLive, true)['response'];
-
-    // スケジュール表を取得する
-    $big6tvSchedule = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/schedule');
-    $args['page']['big6tv']['scheduleData'] = json_decode($big6tvSchedule, true)['response'];
-
-    // ランキングデータを取得する
-    $big6tvRanking = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/ranking');
-    $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
-
-
-
-    // #1546 /big6tv/ の PC版右上レクタングルのID固定
-    $args['page']['ad']['pc']['sidebar_top'] = 'big6-pc-rectangle';
-
-
-    if ( $app->model->property('ua') === 'desktop' ) :
-      return $this->renderer->render($response, 'big6tv/desktop/index.php', $args);
-    else :
-      return $this->renderer->render($response, 'big6tv/mobile/index.php', $args);
-    endif;
-
+    return $response->withRedirect('/category/big6tv/', 301);
   });
-
 
   // game
   // ==============================
@@ -91,10 +57,44 @@ $app->group('/{slug:big6tv}', function () use ($app) {
     $year = $season_array[0];
     $season_jp = $season_array[1] == 's' ? '春' : '秋';
 
+    $request_uri = $_SERVER['REQUEST_URI'];
+    $season_name = $year . $season_jp;
+    $short_season_name = substr($season_name, 2);
+
+    $league_name = '東京六大学野球';
+    $team_and_date = implode('', [
+      $visitor,
+      ' vs ',
+      $home,
+      ' - ',
+      $dateY,
+      '年',
+      $dateM,
+      '月',
+      $dateD,
+      '日（',
+      $weekday,
+      '）',
+    ]);
+
+    $title = implode('', [
+      $team_and_date,
+      '- ',
+      $league_name,
+      ' ',
+      $season_name
+    ]);
+
     $args['page'] = $app->model->set(array(
-      'title' => "{$visitor} vs {$home} - {$dateY}年{$dateM}月{$dateD}日（{$weekday}）",
+      'request_uri' => $request_uri,
+      'title' => $title,
+      'league' => $league,
+      'league_name' => $league_name,
       'gameid' => $gameid,
-      'season' => $year . $season_jp,
+      'season' => $season,
+      'season_name' => $season_name,
+      'short_season' => $short_season_name,
+      'team_and_date' => $team_and_date,
     ));
 
     return $this->renderer->render($response, 'big6tv/game.php', $args);
