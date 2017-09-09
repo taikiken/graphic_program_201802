@@ -7,7 +7,7 @@ $o=new db;
 $o->connect();
 
 $uid=auth();
-$f=set_user($uid,$_REQUEST["userid"]);
+$f=set_user($uid,'');
 
 if($y["status"]["code"]===200){
 	

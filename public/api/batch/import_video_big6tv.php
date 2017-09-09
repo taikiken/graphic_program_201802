@@ -153,12 +153,16 @@ while(list($k,$v)=each($data)){
 			file_put_contents(sprintf("%s/prg_img/img/%s",$SERVERPATH,$img),get_contents(sprintf("%s/img/%s",$path,$img)));
 			file_put_contents(sprintf("%s/prg_img/thumbnail1/%s",$SERVERPATH,$img),get_contents(sprintf("%s/thumbnail1/%s",$path,$img)));
 			file_put_contents(sprintf("%s/prg_img/thumbnail2/%s",$SERVERPATH,$img),get_contents(sprintf("%s/thumbnail2/%s",$path,$img)));
-
+			file_put_contents(sprintf("%s/prg_img/thumbnail3/%s",$SERVERPATH,$img),get_contents(sprintf("%s/thumbnail3/%s",$path,$img)));
+			file_put_contents(sprintf("%s/prg_img/thumbnail4/%s",$SERVERPATH,$img),get_contents(sprintf("%s/thumbnail4/%s",$path,$img)));
+			
 			$s3i=new S3Module;
 			$s3i->upload(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$img),"raw/".$img);
 			$s3i->upload(sprintf("%s/prg_img/img/%s",$SERVERPATH,$img),"img/".$img);
 			$s3i->upload(sprintf("%s/prg_img/thumbnail1/%s",$SERVERPATH,$img),"thumbnail1/".$img);
 			$s3i->upload(sprintf("%s/prg_img/thumbnail2/%s",$SERVERPATH,$img),"thumbnail2/".$img);
+			$s3i->upload(sprintf("%s/prg_img/thumbnail3/%s",$SERVERPATH,$img),"thumbnail3/".$img);
+			$s3i->upload(sprintf("%s/prg_img/thumbnail4/%s",$SERVERPATH,$img),"thumbnail4/".$img);
 		}
 	}
 
