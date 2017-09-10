@@ -1,5 +1,8 @@
 <?php
 
+//関西アメリカンフットボールJSONパス
+$ka_path="http://stats_pr:KansaiL@www.kansai.football-statistics.jp/div1/sportsbull";
+
 $dir="americanfootball/2017/autumn";
 $path=preg_match("/cms/",$servername)?"img":"dev-img";
 
@@ -78,13 +81,24 @@ function check_result($score){
 	return $f;
 }
 
-function get_lastmod($file){
-	$c=get_headers($file);
-	for($i=0;$i<count($c);$i++){
-		if(preg_match("/Last-Modified: /",$c[$i])){
-			return strtotime(str_replace("Last-Modified: ","",$c[$i]));
+function get_lastmod($url){
+	if(preg_match("/http/",$url)){	
+		$ch=curl_init();	
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+		curl_setopt($ch,CURLOPT_HEADER,true);
+		curl_setopt($ch,CURLOPT_NOBODY ,true);
+		if(preg_match("/https/",$url)){
+			curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+			curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
 		}
-	}	
+		$s=curl_exec($ch);
+		preg_match("/^Date\s*:\s*(.+)$/m",$s,$matche);
+		$output=strtotime($matche[1]);
+	}else{
+		$output=filemtime($url);
+	}
+	return $output;
 }
 
 function setarray($key,$val,$n){

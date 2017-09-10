@@ -3,17 +3,12 @@
 include "local.php";
 include "../inc.php";
 
-
 function hms($sec){
 	$ss=$sec%60;
 	$mm=(int)($sec/60)%60;
 	$hh=(int)($sec/(60*60));
 	return $hh>0?sprintf("%d:%02d:%02d",$hh,$mm,$ss):sprintf("%02d:%02d",$mm,$ss);
 }
-
-
-//関西アメリカンフットボールJSONパス
-$path="https://dev-img.sportsbull.jp/static/americanfootball/2017/autumn/json";
 
 $moviefile="https://img.sportsbull.jp/static/americanfootball/2017/autumn/highlight.json";
 $movie=get_contents($moviefile);
@@ -37,9 +32,9 @@ for($i=0;$i<count($schedule["response"]["schedule"]);$i++){
 
 for($i=0;$i<count($gameid);$i++){
 	
-	$jsonfile1=sprintf("%s/%s.json",$path,$gameid[$i]);
+	$jsonfile1=sprintf("%s/%s.json",$ka_path,$gameid[$i]);
 	$data1=get_contents($jsonfile1);
-	if(!$data1||preg_match("/Access Denied/",$data1))continue;
+	if($data1===NULL||preg_match("/Not Found/",$data1))continue;
 	$data1=str_replace(array('"stat"','"event"'),array('"stats"','"events"'),$data1);
 	$data1=json_decode($data1,true);
 	
