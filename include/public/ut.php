@@ -501,6 +501,10 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	}
 	
 	$s["user"]=set_userinfo($f,0);
+	if($s["user"]["id"]==61){
+		$s["user"]["id"]="";
+		$s["user"]["name"]=$f["t10"];
+	}
 
 	if (strlen($f["img1"]) === 0 && strlen($f["no_image"]) > 0)
 	{
