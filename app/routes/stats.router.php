@@ -234,51 +234,70 @@ $app->group('/stats', function () use($app) {
 
   });
 
-  // // 海外サッカー #2275
-  // // ==============================
-  // $this->group('/worldsoccer', function ($request, $response, $args) use ( $app ) {
+  // 海外サッカー #2275
+  // ==============================
+  $this->group('/worldsoccer', function ($request, $response, $args) use ( $app ) {
 
-  //   $title        = '海外サッカー | 速報 &amp; データ';
-  //   $page = $app->model->set(array(
-  //     'title'              => $title,
-  //     'og_title'           => $title.' | '.$app->model->property('title_short'),
-  //     'og_description'     => '海外サッカー 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
-  //     'og_url'             => $app->model->property('site_url').'stats/worldsoccer/',
-  //     'og_image'           => $app->model->property('site_url').'assets/images/stats/worldsoccer/og_image.jpg',
-  //   ));
+    $page = array(
+      'title' => '海外サッカー | 速報 &amp; データ',
+      'category' => array(
+        'schedule' => '日程・結果',
+        'standing' => '順位',
+        'playlist' => '選手成績',
+        'team'     => 'チーム一覧',
+      ),
+      'league' => array(
+        'premier-league' => array(
+          'title' => 'プレミアリーグ',
+        ),
+        'bundesliga' => array(
+          'title' => 'ブンデスリーガ',
+        ),
+        'champions-league' => array(
+          'title' => 'UEFAチャンピオンズリーグ',
+        ),
+        'la-liga' => array(
+          'title' => 'リーガ・エスパニョーラ',
+        ),
+        'serie-a' => array(
+          'title' => 'セリエA',
+        ),
+      ),
+    );
 
+    // トップ -> `premier-league` のスケジュールに転送
+    $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
+      return $response->withRedirect('/stats/worldsoccer/schedule/premier-league/', 301);
+    });
 
-  //   // トップ
-  //   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
-  //     $args['page']             = $page;
-  //     $args['page']['template'] = 'worldsoccer/index.php';
-  //     return $this->renderer->render($response, 'stats/default.php', $args);
-  //   });
+    // 各カテゴリー
+    foreach( array_keys($page['category']) as $key => $category ) :
 
-  //   // ヒットする文字列だけ
-  //   $this->get('/{category:schedule|playerlist}[/]', function ($request, $response, $args) use ($app, $page) {
+      $this->group('/'.$category, function ($request, $response, $args) use ($app, $page, $category) {
 
-  //     if ( $args['category'] === 'schedule' ) :
-  //       $category = array(
-  //         'title' => '試合日程',
-  //       );
-  //     endif;
+        // 各トップ
+        $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page, $category) {
+          // 各カテゴリの premier-league に転送する
+          return $response->withRedirect('/stats/worldsoccer/'.$category.'/premier-league/', 301);
+        });
 
-  //     if ( $args['category'] === 'playerlist' ) :
-  //       $category = array(
-  //         'title' => '選手情報',
-  //       );
-  //     endif;
+        // 各リーグ
+        $this->get('/{league:'.join('|',array_keys($page['league'])).'}[/]', function ($request, $response, $args) use ($app, $page, $category) {
 
-  //     $args['page']             = $page;
-  //     $args['page']['template'] = 'worldsoccer/'.$args['category'].'.php';
-  //     $args['page']['title']    = $category['title'].' | '.$page['title'];
-  //     $args['page']['og_title'] = $category['title'].' | '.$page['og_title'];
-  //     $args['page']['og_url']   = $page['og_url'].$args['category'].'/';
+          $args['page'] = $app->model->set(array(
+            'title'    => $page[$category].' | '.$page['league'][$league].' | '.$page['title'],
+            'og_title' => $page[$category].' | '.$page['league'][$league].' | '.$page['title'].' | '.$app->model->property('title'),
+            'path'     => $args,
+          ));
 
-  //     return $this->renderer->render($response, 'stats/default.php', $args);
-  //   });
-  // });
+          return $this->renderer->render($response, 'stats/worldsoccer/'.$category.'/'.$args['league'].'.php', $args);
+        });
+      });
+
+    endforeach;
+
+  });
+
 
   // 大学野球
   // ==============================
