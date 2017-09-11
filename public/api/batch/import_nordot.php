@@ -5,9 +5,23 @@ include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=61;
 $MEDIANAME="nordot";
+$bullid="262792796378236410";
 $ID=isset($_GET["id"])?$_GET["id"]:0;
 
 $area=array("北海道","東北","関東","北陸・甲信越","東海","関西","中国","四国","九州・沖縄");
+
+function get_pref($media){
+	$pref=array("北海道"=>"北海道","青森"=>"青森","岩手"=>"岩手","宮城"=>"宮城","秋田"=>"秋田","山形"=>"山形","福島"=>"福島","茨城"=>"茨城","栃木"=>"栃木","群馬"=>"群馬","埼玉"=>"埼玉","千葉"=>"千葉","東京"=>"東京","神奈川"=>"神奈川",
+	"新潟"=>"新潟","富山"=>"富山","石川"=>"石川","福井"=>"福井","山梨"=>"山梨","長野"=>"長野","岐阜"=>"岐阜","静岡"=>"静岡","愛知"=>"愛知","三重"=>"三重","滋賀"=>"滋賀","京都"=>"京都","大阪"=>"大阪","兵庫"=>"兵庫","奈良"=>"奈良",
+	"和歌山"=>"和歌山","鳥取"=>"鳥取","島根"=>"島根","岡山"=>"岡山","広島"=>"広島","山口"=>"山口","徳島"=>"徳島","香川"=>"香川","愛媛"=>"愛媛","高知"=>"高知","福岡"=>"福岡","佐賀"=>"佐賀","長崎"=>"長崎","熊本"=>"熊本","大分"=>"大分",
+	"宮崎"=>"宮崎","鹿児島"=>"鹿児島","沖縄"=>"沖縄","とく島"=>"徳島","室蘭"=>"北海道","上毛"=>"群馬","琉球"=>"沖縄");
+	foreach($pref as $k=>$v){
+		if(preg_match("/".$k."/",$media)){
+			return $v;
+		}
+	}
+	return "";
+}
 
 $rssfile[]="https://this.kiji.is/-/feed/posts/rss?source_id=264590665548414985
 https://this.kiji.is/-/feed/posts/rss?source_id=264590406780076039
@@ -75,7 +89,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	unset($s);
 	
 	$s["title"]=$data["channel"]["item"][$i]["title"];
-	$s["t9"]=$data["channel"]["item"][$i]["link"];
+	$s["t9"]=sprintf("%s?c=%s",$data["channel"]["item"][$i]["link"],$bullid);
 	$s["t7"]=$data["channel"]["item"][$i]["guid"];
 	
 	$modbody=preg_replace("/(\r|\n|\t)/","",$data["channel"]["item"][$i]["description"]);
@@ -88,6 +102,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		$s["t30"]=$data["channel"]["item"][$i]["img"]["@attributes"]["url"];
 	}
 	$s["t10"]=$data["channel"]["item"][$i]["creator"];
+	$s["t11"]=$area[$ID];
 	
 	$sql=sprintf("select id,title,(select body from repo_body where pid=repo_n.id) as body from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$s["t7"]);
 	$o->query($sql);
@@ -122,7 +137,8 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		splittime($s["m_time"],$s["a_time"]);
 		$sqla[]=makesql($s,0);
 		$sqla[]=sprintf("insert into repo_body(pid,body) values(currval('repo_n_id_seq'),'%s');",pg_escape_string($modbody));
-		$sqla[]=sprintf("insert into u_area(pageid,region) values(currval('repo_n_id_seq'),'%s');",$area[$ID]);	
+		$sqla[]=sprintf("insert into u_area(pageid,region,pref) values(currval('repo_n_id_seq'),'%s','%s');",$area[$ID],$area[$ID]!="北海道"?get_pref($data["channel"]["item"][$i]["creator"]):"北海道");	
+		
 	}
 	
 	if($sqla){
