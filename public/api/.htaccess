@@ -76,6 +76,7 @@ RewriteRule ^v1/users/ /api/ver1/write/userunregister.php [L]
 
 RewriteRule ^v1/users/([0-9]+) /api/ver1/read/userdetails.php?userid=$1 [L]
 
+RewriteRule ^v1/users/ipaddress /api/ver1/read/useripaddress.php [L]
 RewriteRule ^v1/users/email /api/ver1/read/useremail.php [L]
 RewriteRule ^v1/users /api/ver1/write/userregister.php [L]
 
