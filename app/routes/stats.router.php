@@ -73,7 +73,7 @@ $app->group('/stats', function () use($app) {
   // ==============================
   $this->group('/mlb/game', function ($request, $response, $args) use ( $app ) {
     $this->get('/{category:\d{4}/\d{9}}[/]', function ($request, $response, $args) use ($app) {
-      
+
       $category = array(
         'title' => 'MLB | 速報 &amp; データ',
       );
@@ -126,7 +126,7 @@ $app->group('/stats', function () use($app) {
 
     // ヒットする文字列だけ
     $this->get('/{category:schedule|standing|leaders|playerlist|\d{8}}[/]', function ($request, $response, $args) use ($app) {
-      
+
       $category = array(
         'title' => 'MLB | 速報 &amp; データ',
       );
@@ -280,6 +280,188 @@ $app->group('/{slug:ua_kansai}',  function () use($app) {
   //   });
   // });
 
+  // 大学野球
+  // ==============================
+  // ヒットする文字列だけ
+  $this->group('/{league:ub_kansai|ub_kansaibig6|ub_tohto}', function ($request, $response, $args) use ($app) {
+
+    $this->get('/2017a/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
+
+      // パスからjson決めるソン
+      $request_uri = $_SERVER['REQUEST_URI'];
+      $url = explode('/', $request_uri);
+      $league = $url[2];
+      $season = $url[3];
+      $gameid = $args['gameid'];
+      $arr = [
+        'json',
+        $league,
+        $season,
+        'game_info_' . $gameid . '.json',
+      ];
+      $s3key = implode('/', $arr);
+
+      $S3Module = new S3Module;
+      global $bucket;
+      $json = $S3Module->getUrl($s3key);
+
+      // jsonからタイトルつくる
+      $team_names = [];
+      $visitor = '';
+      $home = '';
+      $dateY = '';
+      $dateM = '';
+      $dateD = '';
+      $weekday = '';
+      if (!empty(file_get_contents($json, false, null, 0, 1))){
+        $json = json_decode(file_get_contents($json));
+        foreach ($json->team as $team) {
+          $team_names[] = $team->teaminfo->name;
+        }
+        $visitor = $team_names[0];
+        $home = $team_names[1];
+        $dateY = $json->gameinfo->dateY;
+        $dateM = $json->gameinfo->dateM;
+        $dateD = $json->gameinfo->dateD;
+        $weekday = $json->gameinfo->weekday;
+      }
+      // シーズン日本語化
+      $season_array = str_split($season, 4);
+      $year = $season_array[0];
+      $season_jp = $season_array[1] == 's' ? '春' : '秋';
+
+      switch ($league) {
+        case 'ub_tohto':
+          $season_name = $year . $season_jp;
+          $short_season_name = substr($season_name, 2);
+
+          $league_name = '東都大学野球';
+          $team_and_date = implode('', [
+            $visitor,
+            ' vs ',
+            $home,
+            ' - ',
+            $dateY,
+            '年',
+            $dateM,
+            '月',
+            $dateD,
+            '日（',
+            $weekday,
+            '）',
+          ]);
+
+          $title = implode('', [
+            $team_and_date,
+            '- ',
+            $league_name,
+            ' ',
+            $season_name
+          ]);
+
+          $args['page'] = $app->model->set(array(
+            'request_uri' => $request_uri,
+            'title' => $title,
+            'og_image' => 'OG_univ_tohto',
+            'stats_top_image' => 'tohto',
+            'league' => $league,
+            'league_name' => $league_name,
+            'game_id' => $gameid,
+            'season' => $season,
+            'season_name' => $season_name,
+            'short_season' => $short_season_name,
+            'team_and_date' => $team_and_date,
+          ));
+          return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
+
+        case 'ub_kansaibig6':
+          $season_name = $year . $season_jp;
+          $short_season_name = substr($season_name, 2);
+
+          $league_name = '関西六大学野球';
+          $team_and_date = implode('', [
+            $visitor,
+            ' vs ',
+            $home,
+            ' - ',
+            $dateY,
+            '年',
+            $dateM,
+            '月',
+            $dateD,
+            '日（',
+            $weekday,
+            '）',
+          ]);
+
+          $title = implode('', [
+            $team_and_date,
+            '- ',
+            $league_name,
+            ' ',
+            $season_name
+          ]);
+
+          $args['page'] = $app->model->set(array(
+            'request_uri' => $request_uri,
+            'title' => $title,
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai6',
+            'league' => $league,
+            'league_name' => $league_name,
+            'game_id' => $gameid,
+            'season' => $season,
+            'season_name' => $season_name,
+            'short_season' => $short_season_name,
+            'team_and_date' => $team_and_date,
+          ));
+          return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
+
+        case 'ub_kansai':
+          $season_name = $year . $season_jp;
+          $short_season_name = substr($season_name, 2);
+
+          $league_name = '関西大学野球';
+          $team_and_date = implode('', [
+            $visitor,
+            ' vs ',
+            $home,
+            ' - ',
+            $dateY,
+            '年',
+            $dateM,
+            '月',
+            $dateD,
+            '日（',
+            $weekday,
+            '）',
+          ]);
+
+          $title = implode('', [
+            $team_and_date,
+            '- ',
+            $league_name,
+            ' ',
+            $season_name
+          ]);
+
+          $args['page'] = $app->model->set(array(
+            'request_uri' => $request_uri,
+            'title' => $title,
+            'og_image' => 'OG_univ_kansai',
+            'stats_top_image' => 'kansai',
+            'league' => $league,
+            'league_name' => $league_name,
+            'game_id' => $gameid,
+            'season' => $season,
+            'season_name' => $season_name,
+            'short_season' => $short_season_name,
+            'team_and_date' => $team_and_date,
+          ));
+          return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
+      }
+    });
+  });
 
 });
 

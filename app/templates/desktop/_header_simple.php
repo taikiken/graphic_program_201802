@@ -198,7 +198,7 @@ if (
 ?>
   <header id="header-container" class="head-sec">
     <div class="head-sec-inner">
-      <h1><a href="/">SPORTS BULL</a></h1>
+      <h1><a href="/">スポーツブル（スポブル）</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
 

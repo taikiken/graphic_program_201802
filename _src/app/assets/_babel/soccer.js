@@ -8,70 +8,72 @@
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  *
- * @build @@buildTime
+ * @build 2017-08-31 18:34:12
  */
 'use strict';
 
 // soccer sidebar ranking
 
 // UT
-const UT = self.UT;
-const Dom = UT.app.Dom;
-const ViewRanking = UT.view.sidebar.ViewRanking;
-const ViewVideos = UT.view.sidebar.ViewVideos;
-const ViewRecommend = UT.view.sidebar.ViewRecommend;
-const View = UT.view.View;
+
+var UT = self.UT;
+var Dom = UT.app.Dom;
+var ViewRanking = UT.view.sidebar.ViewRanking;
+var ViewVideos = UT.view.sidebar.ViewVideos;
+var ViewRecommend = UT.view.sidebar.ViewRecommend;
+var View = UT.view.View;
 
 // init @see babels_exe Page.category
 
 // --------------------------------
 // callback
-const didRanking = () => {
-  const ad = Dom.adRanking();
+var didRanking = function didRanking() {
+  var ad = Dom.adRanking();
   if (ad) {
     ad.style.cssText = 'display: block;';
   }
 };
 
-const didVideo = () => {
-  const ad = Dom.adVideo();
+var didVideo = function didVideo() {
+  var ad = Dom.adVideo();
   if (ad) {
     ad.style.cssText = 'display: block;';
   }
 };
 
 // --------------------------------
-const ranking = () => {
+var ranking = function ranking() {
   // ranking
-  const rankingElement = Dom.ranking();
+  var rankingElement = Dom.ranking();
   if (!rankingElement) {
     return;
   }
-  const option = {};
+  var option = {};
   option[View.DID_MOUNT] = didRanking;
-  const viewRanking = new ViewRanking(rankingElement, option, 'soccer');
+  var viewRanking = new ViewRanking(rankingElement, option, 'soccer');
   viewRanking.start();
 };
 
-const video = () => {
+var video = function video() {
   // video
-  const videoElement = Dom.video();
+  var videoElement = Dom.video();
   if (!videoElement) {
     return;
   }
-  const option = {};
+  var option = {};
   option[View.DID_MOUNT] = didVideo;
-  const viewVideos = new ViewVideos(videoElement, option, 'soccer');
+  option[View.DID_MOUNT] = didVideo;
+  var viewVideos = new ViewVideos(videoElement, option, 'soccer');
   viewVideos.start();
 };
 
-const recommend = () => {
+var recommend = function recommend() {
   // recommend
-  const recommendElement = Dom.recommend();
+  var recommendElement = Dom.recommend();
   if (!recommendElement) {
     return;
   }
-  const viewRecommend = new ViewRecommend(recommendElement, {}, 'soccer');
+  var viewRecommend = new ViewRecommend(recommendElement, {}, 'soccer');
   viewRecommend.start();
 };
 
