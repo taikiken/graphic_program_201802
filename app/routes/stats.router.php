@@ -84,7 +84,7 @@ $app->group('/stats', function () use($app) {
         'og_description'     => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
         'og_url'             => $app->model->property('site_url').'stats/mlb/',
         'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
-//        'template'           => 'mlb/'.$args['category'].'.php',
+        // 'template'           => 'mlb/'.$args['category'].'.php',
         'template'           => 'mlb/game.php',
         'path'               => $args,
         // @since 2017-07016 - .whole へ className 追加するために追加する
@@ -111,7 +111,7 @@ $app->group('/stats', function () use($app) {
         'og_description'     => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
         'og_url'             => $app->model->property('site_url').'stats/mlb/',
         'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
-//        'template'           => 'mlb/schedule.php',
+        // 'template'           => 'mlb/schedule.php',
         // @since 2017-07016 - /stats/mlb/ 表示ファイルをindex.phpへ変更する
         'template'           => 'mlb/index.php',
         'path'               => $args,
@@ -148,7 +148,7 @@ $app->group('/stats', function () use($app) {
         'og_description'     => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
         'og_url'             => $app->model->property('site_url').'stats/mlb/',
         'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
-//        'template'           => 'mlb/'.$args['category'].'.php',
+        // 'template'           => 'mlb/'.$args['category'].'.php',
         'template'           => 'mlb/'.$template.'.php',
         'path'               => $args,
         // @since 2017-07016 - .whole へ className 追加するために追加する
@@ -162,77 +162,77 @@ $app->group('/stats', function () use($app) {
   });
 
 
-// 関西アメフト
-// ==============================
-$app->group('/{slug:ua_kansai}',  function () use($app) {
-
-
-  // /ua_kansai/
+  // 関西アメフト
   // ==============================
-  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
-    $args['page'] = $app->model->set(array(
-      'title'              => '関西学生アメリカンフットボールリーグ',
-      'og_title'           => '関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
-      'og_url'             => $app->model->property('site_url').'ua_kansai/',
-      'path'               => $args,
-      'template'           => 'category',
-      'template_classname' => '',
-    ));
+  $app->group('/{slug:ua_kansai}',  function () use($app) {
 
-    return $this->renderer->render($response, 'stats/ua_kansai/index.php', $args);
+
+    // /ua_kansai/
+    // ==============================
+    $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+      $args['page'] = $app->model->set(array(
+        'title'              => '関西学生アメリカンフットボールリーグ',
+        'og_title'           => '関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
+        'og_url'             => $app->model->property('site_url').'ua_kansai/',
+        'path'               => $args,
+        'template'           => 'category',
+        'template_classname' => '',
+      ));
+
+      return $this->renderer->render($response, 'stats/ua_kansai/index.php', $args);
+
+    });
+
+    // match
+    // ==============================
+    $this->get('/match[/]', function ($request, $response, $args) use ($app) {
+
+      $args['page'] = $app->model->set(array(
+        'title'              => '試合詳細 関西学生アメリカンフットボールリーグ',
+        'og_title'           => '試合詳細 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
+        'og_url'             => $app->model->property('site_url').'ua_kansai/match/',
+        'path'               => $args,
+        'template'           => 'category',
+        'template_classname' => '',
+      ));
+
+      return $this->renderer->render($response, 'stats/ua_kansai/match.php', $args);
+
+    });
+
+    // photo
+    // ==============================
+    $this->get('/photo[/]', function ($request, $response, $args) use ($app) {
+
+      $args['page'] = $app->model->set(array(
+        'title'              => 'フォトギャラリー 関西学生アメリカンフットボールリーグ',
+        'og_title'           => 'フォトギャラリー 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
+        'path'               => $args,
+        'template'           => 'photo',
+        'template_classname' => '',
+      ));
+
+      return $this->renderer->render($response, 'stats/ua_kansai/photo.php', $args);
+
+    });
+
+    // webview
+    // ==============================
+    $this->get('/webview[/]', function ($request, $response, $args) use ($app) {
+
+      $args['page'] = $app->model->set(array(
+        'title'              => 'WebView 関西学生アメリカンフットボールリーグ',
+        'og_title'           => 'WebView 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
+        'path'               => $args,
+        'template'           => 'webview',
+        'template_classname' => '',
+      ));
+
+      return $this->renderer->render($response, 'stats/ua_kansai/webview.php', $args);
+
+    });
 
   });
-
-  // match
-  // ==============================
-  $this->get('/match[/]', function ($request, $response, $args) use ($app) {
-
-    $args['page'] = $app->model->set(array(
-      'title'              => '試合詳細 関西学生アメリカンフットボールリーグ',
-      'og_title'           => '試合詳細 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
-      'og_url'             => $app->model->property('site_url').'ua_kansai/match/',
-      'path'               => $args,
-      'template'           => 'category',
-      'template_classname' => '',
-    ));
-
-    return $this->renderer->render($response, 'stats/ua_kansai/match.php', $args);
-
-  });
-
-  // photo
-  // ==============================
-  $this->get('/photo[/]', function ($request, $response, $args) use ($app) {
-
-    $args['page'] = $app->model->set(array(
-      'title'              => 'フォトギャラリー 関西学生アメリカンフットボールリーグ',
-      'og_title'           => 'フォトギャラリー 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
-      'path'               => $args,
-      'template'           => 'photo',
-      'template_classname' => '',
-    ));
-
-    return $this->renderer->render($response, 'stats/ua_kansai/photo.php', $args);
-
-  });
-
-  // webview
-  // ==============================
-  $this->get('/webview[/]', function ($request, $response, $args) use ($app) {
-
-    $args['page'] = $app->model->set(array(
-      'title'              => 'WebView 関西学生アメリカンフットボールリーグ',
-      'og_title'           => 'WebView 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
-      'path'               => $args,
-      'template'           => 'webview',
-      'template_classname' => '',
-    ));
-
-    return $this->renderer->render($response, 'stats/ua_kansai/webview.php', $args);
-
-  });
-
-});
 
   // // 海外サッカー #2275
   // // ==============================
