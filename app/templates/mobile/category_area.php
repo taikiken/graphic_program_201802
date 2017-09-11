@@ -108,7 +108,7 @@
           </li><!-- /.guideboard__list__item -->
           <li class="guideboard__list__item">
             <a class="guideboard__list__link--kyushu" href="/area/九州・沖縄/">
-              <h3>九州</h3>
+              <h3>九州・沖縄</h3>
               <p>福岡県・佐賀県・長崎県・熊本県・大分県・宮崎県・鹿児島県・沖縄県</p>
             </a>
           </li><!-- /.guideboard__list__item -->
