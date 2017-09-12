@@ -155,7 +155,7 @@
                 </div>
                 <div class="body-sec-inner">
                     <section class="main-sec">
-                        <ul class="module-header pc-only">
+                        <ul class="module-header">
                             <li>
                                 <a href="/category/big6tv/">TOP</a>
                             </li>
@@ -164,17 +164,6 @@
                             </li>
                             <li class="active">
                                 <a href="/big6tv/2017a/">日程・結果</a>
-                            </li>
-                        </ul>
-                        <ul class="module-header sp-only">
-                            <li>
-                                <a href="/category/big6tv/">TOP</a>
-                            </li>
-                            <li>
-                                <a href="/big6tv/live/2017a/">ライブ配信</a>
-                            </li>
-                            <li class="active">
-                                <a href="/big6tv/">日程・結果</a>
                             </li>
                         </ul>
                         <div id="univbb-widget2" data-type="big6" data-league="big6tv" data-season="<?php echo $page['season']; ?>" data-id="<?php echo $page['gameid']; ?>"></div>
@@ -261,7 +250,7 @@
                             </li>
                             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                                 <a itemprop="item" href="">
-                                    <span itemprop="name">日程・結果</span>
+                                    <span itemprop="name"><?php echo $page['team_and_date']; ?></span>
                                     <meta itemprop="position" content="4" /> </a>
                             </li>
                         </ol>
