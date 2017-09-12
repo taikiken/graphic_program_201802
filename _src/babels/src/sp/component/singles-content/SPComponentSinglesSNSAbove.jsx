@@ -77,40 +77,42 @@ export class SPComponentSinglesSNSAbove extends React.Component {
     // output
     const title = single.title;
     return (
-      <div className="post-sns">
+      <div className={`post-sns post-sns-${single.id}-${this.props.index}`}>
         <div className="post-sns-list">
           <div className="post-sns-fixed">
-            <div className="post-sns-item_fbgood">
-              <div
-                className="fb-like"
-                data-href="https://www.facebook.com/sportsbull/"
-                data-layout="box_count"
-                data-action="like"
-                data-show-faces="false"
-                data-share="false"
-              />
-            </div>
+            {/* facebook like */}
+            <div
+              className="fb-like"
+              data-href={url}
+              data-layout="box_count"
+              data-action="like"
+              data-show-faces="false"
+              data-share="false"
+            />
           </div>
-          <div className="post-sns-flex">
-            <div className="post-sns-flex-inner">
-              <ul className="post-sns-flex-list">
-                <li className="post-sns-item post-sns-item_fb">
-                  <a href={`http://www.facebook.com/share.php?u=${url}&t=${title}`} target="_blank">
-                    <span>{MessageSNS.FACEBOOK}</span>
-                  </a>
-                </li>
-                <li className="post-sns-item post-sns-item_tw">
-                  <a href={`http://twitter.com/share?text=${encodeURIComponent(title)}&url=${url}&via=${MessageSNS.VIA}`} target="_blank">
-                    <span>{MessageSNS.TWEET}</span>
-                  </a>
-                </li>
-                <li className="post-sns-item post-sns-item_line">
-                  <a href={`http://line.me/R/msg/text/?${encodeURIComponent(title + ' ' + url)}`} target="_blank">
-                    <span>{MessageSNS.SEND_LINE}</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+        </div>
+        <div className="post-sns-flex">
+          <div className="post-sns-flex-inner">
+            <ul className="post-sns-flex-list">
+              {/* facebook share */}
+              <li className="post-sns-item post-sns-item_fb">
+                <a href={`http://www.facebook.com/share.php?u=${url}&t=${title}`} target="_blank">
+                  {MessageSNS.FACEBOOK}
+                </a>
+              </li>
+              {/* Twitter */}
+              <li className="post-sns-item post-sns-item_tw">
+                <a href={`http://twitter.com/share?text=${encodeURIComponent(title)}&url=${url}&via=${MessageSNS.VIA}`} target="_blank">
+                  <span>{MessageSNS.TWEET}</span>
+                </a>
+              </li>
+              {/* LINE */}
+              <li className="post-sns-item post-sns-item_line">
+                <a href={`http://line.me/R/msg/text/?${encodeURIComponent(title + ' ' + url)}`} target="_blank">
+                  <span>{MessageSNS.SEND_LINE}</span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

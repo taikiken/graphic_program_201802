@@ -153,10 +153,16 @@ export class SPComponentSingleContent extends React.Component {
           index={index}
         />
        */}
+        {/*
         <SPComponentSingleComments
           single={single}
           index={index}
           sign={this.state.sign}
+        />
+        */}
+        <SPComponentSinglesSNSAbove
+          single={single}
+          index={index}
         />
       </div>
     );
