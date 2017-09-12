@@ -7,29 +7,29 @@
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title>ヘッダー・フッターテンプレート | SPORTS BULL</title>
+  <title><?php echo $page['title']; ?> | スポーツブル (スポブル)</title>
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
 
-  <meta name="keywords" content="">
-  <meta name="description" content="">
+  <meta name="keywords" content="<?php echo $page['keywords']; ?>">
+  <meta name="description" content="<?php echo $page['og_description']; ?>">
 
   <meta property="fb:app_id" content="842032129256034">
-  <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
+  <meta property="og:site_name" content="スポーツブル (スポブル)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
+  <meta property="og:title" content="<?php echo $page['title']; ?> | スポーツブル (スポブル)">
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="">
-  <meta property="og:description" content="">
+  <meta property="og:url" content="<?php echo $page['og_url']; ?>">
+  <meta property="og:description" content="<?php echo $page['og_description']; ?>">
   <meta property="og:locale" content="ja_JP" />
 
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
-  <meta name="twitter:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-  <meta name="twitter:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta name="twitter:url" content="">
-  <meta name="twitter:description" content="">
+  <meta name="twitter:title" content="<?php echo $page['title']; ?> | スポーツブル (スポブル)">
+  <meta name="twitter:image" content="<?php echo $page['og_image']; ?>">
+  <meta name="twitter:url" content="<?php echo $page['og_url']; ?>">
+  <meta name="twitter:description" content="<?php echo $page['og_description']; ?>">
 
   <link rel="canonical" href="">
   <link rel="apple-touch-icon" sizes="180x180" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">

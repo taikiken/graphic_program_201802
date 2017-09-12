@@ -12,7 +12,7 @@
       <?php include __DIR__.'/../_nav.php'; ?>
 
       <!-- Champions League -->
-      <div>
+      <div class="stats-worldsoccer-widget">
         <script src="//widgets.sports.gracenote.com/gns.widget.loader.js?c=1323" data-widget_id="kyodo_sportsbull-fb-teams-cl"></script>
       </div>
       <!-- //Champions League -->
