@@ -137,7 +137,13 @@ export class SPComponentSingleContent extends React.Component {
           single={single}
           callback={() => {}}
         />
+        {/*
         <SPComponentSinglesSNSBelow
+          single={single}
+          index={index}
+        />
+        */}
+        <SPComponentSinglesSNSAbove
           single={single}
           index={index}
         />
