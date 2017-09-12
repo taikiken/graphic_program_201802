@@ -116,6 +116,18 @@
 	.stats__banner {
 		margin-top: 30px;
 	}
+
+    .stats__nav a:hover {
+        background: #cc141d;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .stats__local__nav a:hover {
+        background: #0e357f;
+        color: #fff;
+        text-decoration: none;
+    }
 }
 
 /* ----- SPだけ -----*/
