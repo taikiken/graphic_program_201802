@@ -21,6 +21,11 @@
 
     <section class="main-sec">
       <?php
+      // パンくずメニュー
+      // @since 2017-09-11
+      include_once __DIR__ . '/p_breadcrumb.php';
+      // ---------------------------------------------------- ?>
+      <?php
       /*
         @since 2016-11-10
         History API + snap scroll するために現在記事をすべてラップするコンテナ追加
@@ -34,7 +39,9 @@
           include_once __DIR__."/../specific/_player.php";
         else :
           // 通常画像 or 動画 ?>
-          <?php if(!isset($_GET['id'])):?>
+          <?php if(!isset($_GET['id'])):
+            // メインイメージ
+            ?>
             <div id="single-visual-container"></div>
           <?php endif;?>
         <?php endif; ?>
@@ -43,34 +50,39 @@
 
           <div id="single-header-container"></div>
 
-          <div class="post-sns_upper">
-            <ul class="post-sns-list">
-              <li class="post-sns-item post-sns-item_fb">
-                <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" target="_blank">
-                  <span>facebook</span>
-                </a>
-              </li>
-              <?php
+          <div class="post-sns">
+            <div class="post-sns-list">
+              <div class="post-sns-fixed">
+                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+              </div>
 
-              // スマホ版はTwitter textをencodeする
+              <div class="post-sns-flex">
+                <div class="post-sns-flex-inner">
+                  <ul class="post-sns-flex-list">
+                    <li class="post-sns-item post-sns-item_fb">
+                      <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" target="_blank">
+                        <span>facebook</span>
+                      </a>
+                    </li>
+                    <?php
 
-              ?>
-              <li class="post-sns-item post-sns-item_tw">
-                <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=<?php echo $page['sns']['twitter']; ?>" target="_blank">
-                  <span>ツイート</span>
-                </a>
-              </li>
-              <li class="post-sns-item post-sns-item_gt">
-                <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" target="_blank">
-                  <span>Google+</span>
-                </a>
-              </li>
-              <li class="post-sns-item post-sns-item_line">
-                <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
-                  <span>LINEへ送る</span>
-                </a>
-              </li>
-            </ul>
+                    // スマホ版はTwitter textをencodeする
+
+                    ?>
+                    <li class="post-sns-item post-sns-item_tw">
+                      <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=<?php echo $page['sns']['twitter']; ?>" target="_blank">
+                        <span>ツイート</span>
+                      </a>
+                    </li>
+                    <li class="post-sns-item post-sns-item_line">
+                      <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                        <span>LINEへ送る</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
 
           <?php if ( $page['post']['is_readmore'] ) : ?>
@@ -139,7 +151,7 @@
 
           <div id="post-content-banner"></div>
 
-          <div class="post-sns_lower">
+          <div class="post-sns">
             <div class="post-sns-list">
               <div class="post-sns-fixed">
                 <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
@@ -163,11 +175,6 @@
                         <span>ツイート</span>
                       </a>
                     </li>
-                    <li class="post-sns-item post-sns-item_gt">
-                      <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" target="_blank">
-                        <span>Google+</span>
-                      </a>
-                    </li>
                     <li class="post-sns-item post-sns-item_line">
                       <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
                         <span>LINEへ送る</span>
@@ -177,16 +184,18 @@
                 </div>
               </div>
             </div><!-- /.post-sns-list -->
+          </div><!-- /.post-sns -->
 
-            <div class="post-sns-pr">
-              <dl class="post-sns-pr-inner">
-                <dt><span>いいねして最新ニュースをチェック！</span></dt>
-                <dd>
-                  <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-                </dd>
-              </dl><!-- /.post-sns-pr-inner -->
-            </div><!-- /.post-sns-pr -->
-          </div><!-- /.post-sns_lower -->
+          <div class="post-pr_app">
+            <div class="post-pr_app-inner">
+              <h3 class="post-pr_app-heading">毎日500記事以上の最新ニュースやスポーツ速報を完全無料で見放題!</h3>
+              <ul class="post-pr_app-list">
+                <li class="post-pr_app-item"><a class="post-pr_app-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/detail/pr_app-btn-ios.png" alt="App Store"></a></li>
+                <li class="post-pr_app-item"><a class="post-pr_app-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/detail/pr_app-btn-android.png" alt="Google play"></a></li>
+              </ul><!-- /.post-pr_app-list -->
+            </div><!-- /.post-pr_app-inner -->
+          </div><!-- /.post-pr_app -->
+
         </div><!-- /.post-detail -->
 
         <div class="comment">
