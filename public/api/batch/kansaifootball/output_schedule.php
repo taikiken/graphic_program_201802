@@ -3,16 +3,17 @@
 include "local.php";
 include "inc.php";
 
-$csv =sprintf("%s/csv/schedule.csv",$bucket);
+//$csv =sprintf("%s/csv/schedule.csv",$bucket);
+$csv ="http://www.kansai-football.jp/sportsbull/schedule.csv";
 $json=sprintf("%s/schedule.json",$bucket);
 $moviefile="https://img.sportsbull.jp/static/americanfootball/2017/autumn/highlight.json";
 
-$lastupdate1=filemtime($csv);
+$lastupdate1=get_lastmod($csv);
 $lastupdate2=get_lastmod($moviefile);
 $lastupdate=$lastupdate1>$lastupdate2?$lastupdate1:$lastupdate2;
 
 if(!file_exists($json)||$lastupdate>filemtime($json)){
-
+	
 	$movie=get_contents($moviefile);
 	$movie=json_decode($movie,TRUE);
 	
