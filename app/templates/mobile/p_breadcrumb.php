@@ -12,11 +12,11 @@
 <?php
 $content_count = 1;
 ?>
-<nav class="main-sec">
+<nav class="post-breadCrumb">
   <ol itemscope itemtype="http://schema.org/breadCrumbList">
     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="<?php echo $content_count; ?>" /></a></li>
     <?php
-    // categories 値が空の記事がある
+    // categories 値が空 or NULL の記事がある
     $post_categories = $page['post']['categories'];
     if (is_array($post_categories)) :
       $post_categories_first = $post_categories[0];

@@ -245,6 +245,32 @@
         </div><!-- /.comment -->
       </div><!-- /.current-post-->
       <?php
+      // --------------------------------------------------------------
+      // 改修 - 2017-09-11
+      // #ref https://github.com/undotsushin/undotsushin/pull/2440
+      ?>
+      <?php
+      // ------------------------------------
+      // TODO: よく読まれている記事 carousel - sidebar: ranking
+      ?>
+      <?php
+      // ------------------------------------
+      // Facebook 「いいね」
+      ?>
+      <div class="pr_fb">
+        <h4 class="pr_fb-heading"><span class="pr_fb-heading-item">毎日500本以上の最新スポーツニュースを配信 Facebookにいいね!して情報を受け取ろう!</span></h4>
+        <div class="pr_fb-btn">
+          <div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+        </div>
+      </div>
+      <?php
+      // ------------------------------------
+      // TODO: おすすめの記事 - sidebar: recommend
+      ?>
+      <?php
+      // --------------------------------------------------------------
+      ?>
+      <?php
       /*
       @since 2016-09-28
       記事詳細の次の記事

@@ -32,6 +32,7 @@ import { SinglesHistory } from '../../../singles/SinglesHistory';
 
 // component/singles-content record
 import { RecordSingleState } from '../../../component/singles-content/RecordSingleState';
+import { SPComponentSinglesSNSAbove } from '../singles-content/SPComponentSinglesSNSAbove';
 
 // React
 const React = self.React;
@@ -272,7 +273,7 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
           index={this.state.index}
         />
         {/* SNS */}
-        <SPComponentSinglesSNSBelow
+        <SPComponentSinglesSNSAbove
           single={single}
           index={this.state.index}
         />
