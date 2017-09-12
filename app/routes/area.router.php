@@ -131,11 +131,30 @@ $app->group('/area', function () use($app) {
     ));
 
     return $this->renderer->render($response, "area/default.php", $args);
-//    if ( $app->model->property('ua') === 'desktop' ) :
-//      return $this->renderer->render($response, 'area/desktop/category.php', $args);
-//    else :
-//      return $this->renderer->render($response, 'area/mobile/category.php', $args);
-//    endif;
+
+  });
+
+  // WebView
+  // ==============================
+  $this->get('/webview[/]', function ($request, $response, $args) use ($app) {
+
+    $category = array(
+      'label' => '地域',
+      'label_area' => ' | ' . $args['category'] . 'の記事',
+      'title' => $args['category'] . 'の記事',
+    );
+
+    $args['page'] = $app->model->set(array(
+      'title'              => $category['title'],
+      'og_title'           => $category['title'].' | '.$app->model->property('title_short'),
+      'og_url'             => $app->model->property('site_url').'area/'.$args['category'].'/',
+      'template'           => 'webview',
+      'path'               => $args,
+      'template_classname' => '',
+      'category' => $category,
+    ));
+
+    return $this->renderer->render($response, "area/webview.php", $args);
 
   });
 });
