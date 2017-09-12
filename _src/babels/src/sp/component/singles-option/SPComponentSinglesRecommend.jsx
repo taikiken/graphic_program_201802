@@ -23,8 +23,8 @@ const BoardAd = ({ index, categories }) => {
   if (big6) {
     return null;
   }
-  // 2件目
-  // length 2 以上
+  // 2 or 5件目
+  // |0|ad|1|2|ad|3|4|
   if (index === 1 || index === 3) {
     // output
     console.log('BoardAd', index);
