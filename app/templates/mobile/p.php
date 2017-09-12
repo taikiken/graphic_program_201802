@@ -253,6 +253,7 @@
       // ------------------------------------
       // TODO: よく読まれている記事 carousel - sidebar: ranking
       ?>
+      <div id="js-widget-post_list_ranking"></div>
       <?php
       // ------------------------------------
       // Facebook 「いいね」
@@ -267,6 +268,7 @@
       // ------------------------------------
       // TODO: おすすめの記事 - sidebar: recommend
       ?>
+      <div id="js-widget-post_list_recommend"></div>
       <?php
       // --------------------------------------------------------------
       ?>
