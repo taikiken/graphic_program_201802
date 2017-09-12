@@ -73,8 +73,11 @@ img {
   -moz-user-select:none;
 }
 
+// webview hide head, foot, app-banner
+// @since 2017-09-11 .header-appbnr-link 追加
 .undotsushin-ios,
 .undotsushin-android {
+  //.header-appbnr-link,
   .head-sec,
   .foot-sec {
     display: none !important;
