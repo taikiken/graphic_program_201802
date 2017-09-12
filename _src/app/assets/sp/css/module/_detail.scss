@@ -586,54 +586,52 @@
   }
 
   // post-sns-pr
-  // 記事ページの最適化に伴い不要
-  // ref. https://github.com/undotsushin/undotsushin/issues/2381
-  // @at-root {
-  //   .post-sns-pr {
-  //     width: 100%;
-  //     margin-top: (20/2)+px;
-  //     padding: (26/2)+px (36/2)+px;
-  //     border: (6/2)+px solid $highlight-color;
-  //     border-radius: 6px;
-  //     background-color: #fff;
+  @at-root {
+    .post-sns-pr {
+      width: 100%;
+      margin-top: (20/2)+px;
+      padding: (26/2)+px (36/2)+px;
+      border: (6/2)+px solid $highlight-color;
+      border-radius: 6px;
+      background-color: #fff;
 
-  //     &-inner {
-  //       display: table;
-  //       margin-right: auto;
-  //       margin-left: auto;
-  //     }
+      &-inner {
+        display: table;
+        margin-right: auto;
+        margin-left: auto;
+      }
 
-  //     dt, dd {
-  //       display: table-cell;
-  //       vertical-align: middle;
-  //     }
+      dt, dd {
+        display: table-cell;
+        vertical-align: middle;
+      }
 
-  //     dt {
-  //       padding-right: (24/2)+px;
+      dt {
+        padding-right: (24/2)+px;
 
-  //       // for iPhone5, 5S
-  //       @media screen and (max-width: 320px) {
-  //         padding-right: 0;
-  //       }
+        // for iPhone5, 5S
+        @media screen and (max-width: 320px) {
+          padding-right: 0;
+        }
 
-  //       span {
-  //         display: block;
-  //         line-height: 1em;
-  //         margin-top: (6/2)+px;
-  //         padding: (48/2)+px 0 0 0;
-  //         background: url(/assets/sp/images/detail/post-sns-logo.png) 0 0 no-repeat;
-  //         background-size: (356/2)+px;
-  //         font-weight: bold;
-  //         font-size: fz(22/2);
-  //         white-space: nowrap;
-  //       }
-  //     }
+        span {
+          display: block;
+          line-height: 1em;
+          margin-top: (6/2)+px;
+          padding: (48/2)+px 0 0 0;
+          background: url(/assets/sp/images/detail/post-sns-logo.png) 0 0 no-repeat;
+          background-size: (356/2)+px;
+          font-weight: bold;
+          font-size: fz(22/2);
+          white-space: nowrap;
+        }
+      }
 
-  //     dd {
-  //       width: 71px;
-  //     }
-  //   } // .post-sns-pr
-  // } // at-root
+      dd {
+        width: 71px;
+      }
+    } // .post-sns-pr
+  } // at-root
 }// post-detail
 
 //// category-label
