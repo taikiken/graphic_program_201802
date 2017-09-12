@@ -26,14 +26,14 @@ $univ["京都大"]=array("id"=>6,"name"=>"京都大学");
 $univ["桃山大"]=array("id"=>7,"name"=>"桃山学院大学");
 $univ["同志社"]=array("id"=>8,"name"=>"同志社大学");
 
-$urev["関西学院大学"]=array("id"=>1,"name"=>"関西学院大学");
-$urev["立命館大学"]=array("id"=>2,"name"=>"立命館大学");
-$urev["関西大学"]=array("id"=>3,"name"=>"関西大学");
-$urev["龍谷大学"]=array("id"=>4,"name"=>"龍谷大学");
-$urev["甲南大学"]=array("id"=>5,"name"=>"甲南大学");
-$urev["京都大学"]=array("id"=>6,"name"=>"京都大学");
-$urev["桃山学院大学"]=array("id"=>7,"name"=>"桃山学院大学");
-$urev["同志社大学"]=array("id"=>8,"name"=>"同志社大学");
+$urev["関西学院大学"]=array("id"=>1,"name"=>"関学大");
+$urev["立命館大学"]=array("id"=>2,"name"=>"立命館");
+$urev["関西大学"]=array("id"=>3,"name"=>"関西大");
+$urev["龍谷大学"]=array("id"=>4,"name"=>"龍谷大");
+$urev["甲南大学"]=array("id"=>5,"name"=>"甲南大");
+$urev["京都大学"]=array("id"=>6,"name"=>"京都大");
+$urev["桃山学院大学"]=array("id"=>7,"name"=>"桃山大");
+$urev["同志社大学"]=array("id"=>8,"name"=>"同志社");
 
 $map["#リーグ"]="league";
 $map["#日付け"]="date";
