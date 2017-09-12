@@ -18,7 +18,7 @@
   <meta property="og:site_name" content="スポーツブル (スポブル)">
   <meta property="og:type" content="article">
   <meta property="og:title" content="<?php echo $page['title']; ?> | スポーツブル (スポブル)">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
+  <meta property="og:image" content="<?php echo $page['og_image']; ?>">
   <meta property="og:url" content="<?php echo $page['og_url']; ?>">
   <meta property="og:description" content="<?php echo $page['og_description']; ?>">
   <meta property="og:locale" content="ja_JP" />
