@@ -85,17 +85,6 @@
   </script>
   <!-- //ad/appvador -->
 
-  <!-- ad/dfp - pc/rectangle -->
-  <script>
-    googletag.cmd.push(function() {
-      googletag.defineSlot('/531683568/npb-pc-rectangle', [300, 250], 'div-gpt-ad-1492577512561-0').addService(googletag.pubads());
-      googletag.pubads().enableSingleRequest();
-      googletag.pubads().collapseEmptyDivs();
-      googletag.enableServices();
-    });
-  </script>
-  <!-- //ad/dfp - pc/rectangle -->
-
   <!-- ad/npb-sp-anchor -->
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
