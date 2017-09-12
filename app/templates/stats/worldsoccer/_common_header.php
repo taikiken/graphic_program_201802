@@ -46,6 +46,8 @@
   <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
   <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
 
+  <link rel="stylesheet" href="/assets/css/stats/worldsoccer/ui.css">
+
   <!-- optimize -->
   <style>.async-hide { opacity: 0 !important} </style>
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
@@ -119,3 +121,23 @@
   <!-- //ga -->
 
 </head>
+
+<body>
+
+<!-- ad/531683568/appvador -->
+<div id='div-gpt-ad-1501126889988-0'>
+<style>#div-gpt-ad-1501126889988-0 * { line-height:0; }</style>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0'); });
+</script>
+<script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
+</div>
+<!-- ad/531683568/appvador -->
+
+<div id="whole" class="whole">
+
+  <header class="head-sec">
+    <div class="head-sec-inner">
+      <h1><a href="/">SPORTS BULL</a></h1>
+    </div><!-- /.head-sec-inner -->
+  </header><!-- /.head-sec -->

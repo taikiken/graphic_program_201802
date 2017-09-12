@@ -1,13 +1,15 @@
+<?php include __DIR__.'/../_common_header.php'; ?>
+
 <div class="body-sec">
   <div class="body-sec-inner">
 
     <section class="main-sec">
 
-      <?php include __DIR__.'/_header.php'; ?>
+      <?php include __DIR__.'/../_header.php'; ?>
 
-      <?php include __DIR__.'/_banner.php'; ?>
+      <?php include __DIR__.'/../_banner.php'; ?>
 
-      <?php include __DIR__.'/_nav.php'; ?>
+      <?php include __DIR__.'/../_nav.php'; ?>
 
       <!-- La Liga -->
       <div>
@@ -17,10 +19,9 @@
 
     </section><!-- /.main-sec -->
 
-    <?php include __DIR__.'/_sidebar.php'; ?>
+    <?php include __DIR__.'/../_sidebar.php'; ?>
 
   </div>
 </div><!-- /.body-sec -->
 
-
-<?php include __DIR__.'/_footer.php'; ?>
+<?php include __DIR__.'/../_footer.php'; ?>
