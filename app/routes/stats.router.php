@@ -238,59 +238,84 @@ $app->group('/stats', function () use($app) {
   // ==============================
   $this->group('/worldsoccer', function ($request, $response, $args) use ( $app ) {
 
+    // $page = array(
+    //   'title' => '海外サッカー | 速報 &amp; データ',
+    //   'category' => array(
+    //     'schedule' => '日程・結果',
+    //     'standing' => '順位',
+    //     'playlist' => '選手成績',
+    //     'team'     => 'チーム一覧',
+    //   ),
+    //   'league' => array(
+    //     'premier-league' => array(
+    //       'title' => 'プレミアリーグ',
+    //     ),
+    //     'bundesliga' => array(
+    //       'title' => 'ブンデスリーガ',
+    //     ),
+    //     'champions-league' => array(
+    //       'title' => 'UEFAチャンピオンズリーグ',
+    //     ),
+    //     'la-liga' => array(
+    //       'title' => 'リーガ・エスパニョーラ',
+    //     ),
+    //     'serie-a' => array(
+    //       'title' => 'セリエA',
+    //     ),
+    //   ),
+    // );
+
     $page = array(
       'title' => '海外サッカー | 速報 &amp; データ',
-      'category' => array(
-        'schedule' => '日程・結果',
-        'standing' => '順位',
-        'playlist' => '選手成績',
-        'team'     => 'チーム一覧',
-      ),
       'league' => array(
-        'premier-league' => array(
-          'title' => 'プレミアリーグ',
+        'premier-league'   => 'プレミアリーグ',
+        'bundesliga'       => 'ブンデスリーガ',
+        'champions-league' => 'ブンデスリーガ',
+        'la-liga'          => 'リーガ・エスパニョーラ',
+        'serie-a'          => 'セリエA',
+      ),
+      'category' => array(
+        'schedule' => array(
+          'title' => '日程・結果',
         ),
-        'bundesliga' => array(
-          'title' => 'ブンデスリーガ',
+        'standing' => array(
+          'title' => '順位',
         ),
-        'champions-league' => array(
-          'title' => 'UEFAチャンピオンズリーグ',
+        'playlist' => array(
+          'title' => '選手成績',
         ),
-        'la-liga' => array(
-          'title' => 'リーガ・エスパニョーラ',
-        ),
-        'serie-a' => array(
-          'title' => 'セリエA',
+        'team' => array(
+          'title' => 'チーム一覧',
         ),
       ),
     );
 
     // トップ -> `premier-league` のスケジュールに転送
     $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
-      return $response->withRedirect('/stats/worldsoccer/schedule/premier-league/', 301);
+      return $response->withRedirect('/stats/worldsoccer/premier-league/schedule/', 301);
     });
 
     // 各カテゴリー
-    foreach( array_keys($page['category']) as $key => $category ) :
+    foreach( array_keys($page['league']) as $key => $league ) :
 
-      $this->group('/'.$category, function ($request, $response, $args) use ($app, $page, $category) {
+      $this->group('/'.$league, function ($request, $response, $args) use ($app, $page, $league) {
 
         // 各トップ
-        $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page, $category) {
+        $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page, $league) {
           // 各カテゴリの premier-league に転送する
-          return $response->withRedirect('/stats/worldsoccer/'.$category.'/premier-league/', 301);
+          return $response->withRedirect('/stats/worldsoccer/'.$league.'/schedule/', 301);
         });
 
         // 各リーグ
-        $this->get('/{league:'.join('|',array_keys($page['league'])).'}[/]', function ($request, $response, $args) use ($app, $page, $category) {
+        $this->get('/{category:'.join('|',array_keys($page['category'])).'}[/]', function ($request, $response, $args) use ($app, $page, $league) {
 
           $args['page'] = $app->model->set(array(
-            'title'    => $page[$category].' | '.$page['league'][$league].' | '.$page['title'],
-            'og_title' => $page[$category].' | '.$page['league'][$league].' | '.$page['title'].' | '.$app->model->property('title'),
+            'title'    => $page[$league].' | '.$page['category'][$category].' | '.$page['title'],
+            'og_title' => $page[$league].' | '.$page['category'][$category].' | '.$page['title'].' | '.$app->model->property('title'),
             'path'     => $args,
           ));
 
-          return $this->renderer->render($response, 'stats/worldsoccer/'.$category.'/'.$args['league'].'.php', $args);
+          return $this->renderer->render($response, 'stats/worldsoccer/'.$league.'/'.$args['category'].'.php', $args);
         });
       });
 
