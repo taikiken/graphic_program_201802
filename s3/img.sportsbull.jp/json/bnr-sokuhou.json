@@ -52,6 +52,14 @@
           },
           "url": "https://sportsbull.jp/sokuhou/",
           "alt": "サッカー日本代表リアルタイム速報"
+        },
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-worldsoccer.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-worldsoccer.jpg"
+          },
+          "url": "https://sportsbull.jp/stats/worldsoccer/",
+          "alt": "海外サッカー 速報&amp;データを見る"
         }
       ]
     },
