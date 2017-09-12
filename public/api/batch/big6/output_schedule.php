@@ -1,6 +1,7 @@
 <?php
 
 include "local.php";
+include "inc.php";
 
 /*
 
@@ -10,13 +11,15 @@ include "local.php";
 */
 
 //連盟のJSON
-$jsonfile="http://big6.gr.jp/game_file/2017s_schedule.json";
+$jsonfile=sprintf("http://big6.gr.jp/game_file/%s_schedule.json",$target);
 //BULLのCSV
-$csvfile="../ver1/static/big6tv2017s_schedule.csv";
-//BULLのJSON
-$localjsonfile="../ver1/static/big6tv2017s_schedule.json";
+$csvfile=sprintf("%s/schedule.csv",$bucket);
+//BULLのハイライト動画JSON
+$localjsonfile2=sprintf("%s/highlightmovie.json",$bucket);
+//BULLのスケジュールJSON
+$localjsonfile=sprintf("%s/schedule.json",$bucket);
 //BULLのハイライト動画ファイル一覧
-$moviefile="http://cms.sportsbull.jp/api/batch/output_big6tvmovie.php";
+$moviefile="http://cms.sportsbull.jp/api/batch/output_big6tvmovie.php?target=2017a";
 
 $d=get_contents($jsonfile);
 $d=mb_convert_encoding($d,"UTF-8","SJIS");
@@ -85,7 +88,7 @@ foreach($rawdata as $k=>$v){
 	
 	foreach($v as $kk=>$vv){
 		$sttime=strtotime($kk);
-		$weekday=get_weekday(date("w",$sttime));		
+		$weekday=get_weekday(date("w",$sttime));
 		$y[$i]["gamedate"][$j]["date"]=$kk;
 		$y[$i]["gamedate"][$j]["weekday"]=$weekday;
 		$y[$i]["gamedate"][$j]["date_display"]=sprintf("%s (%s)",date("n/j",$sttime),$weekday);
@@ -107,6 +110,24 @@ foreach($rawdata as $k=>$v){
 			$y[$i]["gamedate"][$j]["game"][$ii]["team"][1]["name"]=$vv[$ii][9];
 			$y[$i]["gamedate"][$j]["game"][$ii]["team"][1]["nameI"]=$vv[$ii][10];
 			$y[$i]["gamedate"][$j]["game"][$ii]["team"][1]["score"]=$vv[$ii][11];
+
+			$sql=sprintf("select id,img1,title from repo_n where d2=34 and flag=1 and swf like'big6tv%s_%s_%s' order by m_time",$target,$vv[$ii][4],"%");
+			$o->query($sql);
+			$f=$o->fetch_array();
+
+			if(strlen($f["id"])>0){
+				$y2[sprintf("%s%s%s",$vv[$ii][7],$vv[$ii][10],sprintf("%02d",$vv[$ii][5]))]=array(
+					"title"=>$f["title"],
+					"img"=>sprintf("%s/raw/%s",$ImgPath,$f["img1"]),
+					"url"=>sprintf("%s/p/%s/",$domain,$f["id"])
+				);
+			}else{
+				$y2[sprintf("%s%s%s",$vv[$ii][7],$vv[$ii][10],sprintf("%02d",$vv[$ii][5]))]=array(
+					"title"=>"",
+					"img"=>"",
+					"url"=>""
+				);
+			}
 		}
 		$j++;
 	}
@@ -115,8 +136,13 @@ foreach($rawdata as $k=>$v){
 
 $result["response"]["lastupdate"]=date('Y-m-d H:i:s');
 $result["response"]["gameinfo"]=$y;
-
 $result=json_encode($result,JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 file_put_contents($localjsonfile,$result);
+
+$result=array();
+$result["response"]["lastupdate"]=date('Y-m-d H:i:s');
+$result["response"]["gameinfo"]=$y2;
+$result=json_encode($result,JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+file_put_contents($localjsonfile2,$result);
 
 ?>
