@@ -247,14 +247,22 @@
                             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                                 <a itemprop="item" href="/">
                                     <span itemprop="name">TOP</span>
-                                    <meta itemprop="position" content="1" />
-                                </a>
+                                    <meta itemprop="position" content="1" /> </a>
                             </li>
                             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="./">
-                                    <span itemprop="name">ページタイトル</span>
-                                    <meta itemprop="position" content="2" />
-                                </a>
+                                <a itemprop="item" href="/category/big6tv/">
+                                    <span itemprop="name">6大学野球</span>
+                                    <meta itemprop="position" content="2" /> </a>
+                            </li>
+                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="/big6tv/2017a">
+                                    <span itemprop="name"><?php echo $page['season_name']; ?>季リーグ</span>
+                                    <meta itemprop="position" content="3" /> </a>
+                            </li>
+                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="">
+                                    <span itemprop="name">日程・結果</span>
+                                    <meta itemprop="position" content="4" /> </a>
                             </li>
                         </ol>
                     </nav>
