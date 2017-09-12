@@ -1,1 +1,1 @@
-<script src="/assets/js/stats_golf.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/soccer.bundle.js?v=<?php echo $page['version']; ?>"></script>

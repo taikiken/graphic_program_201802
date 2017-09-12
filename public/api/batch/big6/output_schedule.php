@@ -19,7 +19,7 @@ $localjsonfile2=sprintf("%s/highlightmovie.json",$bucket);
 //BULLのスケジュールJSON
 $localjsonfile=sprintf("%s/schedule.json",$bucket);
 //BULLのハイライト動画ファイル一覧
-$moviefile="http://cms.sportsbull.jp/api/batch/output_big6tvmovie.php";
+$moviefile="http://cms.sportsbull.jp/api/batch/output_big6tvmovie.php?target=2017a";
 
 $d=get_contents($jsonfile);
 $d=mb_convert_encoding($d,"UTF-8","SJIS");
