@@ -73,16 +73,14 @@ img {
   -moz-user-select:none;
 }
 
-// webview hide head, foot, app-banner
-// @since 2017-09-11 .header-appbnr-link 追加
-.undotsushin-ios,
-.undotsushin-android {
-  //.header-appbnr-link,
-  .head-sec,
-  .foot-sec {
-    display: none !important;
-  }
-}
+// 諸々 override するために最下部へ移動します - 2017-09-11
+//.undotsushin-ios,
+//.undotsushin-android {
+//  .head-sec,
+//  .foot-sec {
+//    display: none !important;
+//  }
+//}
 
 
 
@@ -787,3 +785,18 @@ img {
     text-align: center;
   } //.copyright
 } //.foot-sec
+
+
+// webview hide head, foot, app-banner
+// @since 2017-09-11 .header-appbnr-link 追加
+.undotsushin-ios,
+.undotsushin-android {
+  .header-sticky + .body-sec {
+    margin-top: 50px;
+  }
+  //.header-appbnr-link,
+  .head-sec,
+  .foot-sec {
+    display: none !important;
+  }
+}
