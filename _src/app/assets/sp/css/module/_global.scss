@@ -787,14 +787,18 @@ img {
 } //.foot-sec
 
 
+
+// 4.1 global webview
+// ----------------------------------------------------------------------------------------------------------------------------------------
 // webview hide head, foot, app-banner
-// @since 2017-09-11 .header-appbnr-link 追加
+// @since 2017-09-11 .header-sticky + .body-se 追加
 .undotsushin-ios,
 .undotsushin-android {
+  // バナー非表示時の空き調整 - `head-sec` 50px 引算する
   .header-sticky + .body-sec {
     margin-top: 50px;
   }
-  //.header-appbnr-link,
+  // header / footer
   .head-sec,
   .foot-sec {
     display: none !important;
