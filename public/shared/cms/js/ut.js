@@ -148,7 +148,7 @@ function ut_init(){
 			u[5]=now.getSeconds();
 			$("[name='p_m_time']").val(sprintf("%s-%s-%s %s:%s:%s",u[0],("0"+u[1]).slice(-2),("0"+u[2]).slice(-2),("0"+u[3]).slice(-2),("0"+u[4]).slice(-2),("0"+u[5]).slice(-2)));
 		});
-
+		
 		if(dir===0&&fil===0){
 			settime("a1a2a3a4a5a6");
 			settime("a7a8a9a10a11a12");
@@ -292,17 +292,18 @@ function ut_init(){
 		if(rid==7){
 			
 			$(".display,.t_display").hide();
-		
-			if(cid==0&&dir==3){			
+			
+			/*
+			if(cid==0&&dir==3){
+				$(".newEntry").hide();
 				$(".blockds:eq(3) td:eq(3) a,.blockds:eq(3) td:eq(4) a").attr("href","javascript://").css({"color":"#999"});
 				$(".blockds:eq(3) .colname .j2").append("　※LS CMSに遷移します(スポーツブルCMSから編集はできません)。");
 				$(".blockds:eq(3) .colname a").attr("href",sprintf("http://input.sportsbull.jp/legendsstadium%s/",location.href.match(/cms/)?"":"2"));
-				
-				$(".colname,.t_title").css({"borderLeft":"1px solid #ccc"});
-				
-				$(".numbering,.display,.t_numbering,.t_display").hide();
+				//$(".colname,.t_title").css({"borderLeft":"1px solid #ccc"});
+				//$(".numbering,.display,.t_numbering,.t_display").hide();
 				$("td").css({"paddingTop":"8px","paddingBottom":"8px"});
 			}
+			*/
 			
 		}else if(rid==48){
 			
@@ -389,7 +390,6 @@ function ut_init(){
 	if(location.href.match(/repo_s\/\?rid=2/)){
 		$(".newEntry").hide();
 	}
-	if(cid==12)$(".newEntry").hide();
 	
 }
 function settime(field){
@@ -426,7 +426,7 @@ $(function(){
 	ut_init();
 
 	$(".orderby,.exuser,.excategory,.expickup").change(function(){
-		var s=$(this).val();		
+		var s=$(this).val();
 		$.cookie($(this).attr("class").replace(".",""),s,{path:"/editdm/",expires:1});
 		location.reload();
 	});
