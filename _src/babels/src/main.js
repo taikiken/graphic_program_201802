@@ -148,6 +148,10 @@ import {SPViewSingleRecommend} from './sp/view/single/SPViewSingleRecommend';
 import {SPViewComments} from './sp/view/SPViewComments';
 import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 
+// singles-option
+import SPViewSinglesRecommend from './sp/view/singles-option/SPViewSinglesRecommend';
+
+
 // mypage
 import {SPViewUserProfile} from './sp/view/mypage/SPViewUserProfile';
 import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
@@ -256,6 +260,9 @@ let UT = {
         SPViewSingleRanking,
         SPViewSingleRecommend
       },
+      singles: {
+        SPViewSinglesRecommend,
+      },
       comment: {
         SPViewCommentForm
       },
@@ -274,10 +281,10 @@ let UT = {
       mypage: {
         SPViewUserProfile,
         SPViewBookmarks
-      }
-    }
+      },
+    },
   },
-  Ga
+  Ga,
 };
 
 self.UT = UT;

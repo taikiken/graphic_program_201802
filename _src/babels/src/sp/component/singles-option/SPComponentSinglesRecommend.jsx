@@ -28,6 +28,13 @@ const BoardAd = ({ index, categories }) => {
   if (index === 1 || index === 3) {
     // output
     console.log('BoardAd', index);
+    return (
+      <div className="board-item">
+        <div className="board-item-ad">
+          ここに広告
+        </div>
+      </div>
+    );
   } else {
     return null;
   }
@@ -60,7 +67,7 @@ const BoardItem = ({ single, index }) => {
   );
 };
 
-const SPComponentSingleRecommend = ({ list, categories }) => {
+const SPComponentSinglesRecommend = ({ list, categories }) => {
   const length = list.length;
   if (!Array.isArray(list) || !length) {
     return null;
@@ -86,19 +93,19 @@ const SPComponentSingleRecommend = ({ list, categories }) => {
                 index={index}
               />
             </div>
-          ));
+          ))
         }
       </div>
     </div>
   );
 };
 
-SPComponentSingleRecommend.propTypes = {
+SPComponentSinglesRecommend.propTypes = {
   list: React.PropTypes.arrayOf(SingleDae).isRequired,
-  categories: React.PropTypes.arrayOf(PropTypes.shape({
+  categories: React.PropTypes.arrayOf(React.PropTypes.shape({
     label: React.PropTypes.string.isRequired,
     slug: React.PropTypes.string.isRequired,
   })).isRequired,
 };
 
-export default SPComponentSingleRecommend;
+export default SPComponentSinglesRecommend;
