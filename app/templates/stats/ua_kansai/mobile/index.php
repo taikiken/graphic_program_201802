@@ -1,9 +1,9 @@
 <?php include __DIR__."./../inc.php";
-// include __DIR__."./../getData.php";
-// $recentArray = getData::getScheduleRecent();
+include __DIR__."./../getData.php";
+$recentArray = getData::getScheduleRecent();
 ?>
 <link rel="stylesheet" href="/assets/css/photo/parts_sp.css">
-<!-- <link rel="stylesheet" href="/assets/stats/ua_kansai/css/style.css"> -->
+<link rel="stylesheet" href="/assets/stats/ua_kansai/css/style.css">
 <div class="sub_head_wrapper">
   <h2 class="sub_head_title"><i></i>関西学生アメリカンフットボールリーグ</h2>  
 </div>
@@ -11,7 +11,7 @@
 <!-- section_highlight_movie -->                      
 <section class="section_interhigh_highlight">
   <div class="ttl-wrapper">
-    <h2 class="ttl highlight"><i></i>動画特集</h2>
+    <h2 class="ttl highlight"><i></i>全試合ダイジェスト動画</h2>
   </div>
 
   <div class="article_list">
@@ -30,11 +30,11 @@
   </div>
     
   <div class="af-schedule">
-<?=//$recentArray?>
-<!--   </div>
+<?php $recentArray?>
+  </div>
 
   <p class="section_btn"><a href="/stats/ua_kansai/"><i></i>すべて日程・結果を見る</a></p>  
-</section> -->
+</section>
 
 <!-- section_photogallery -->
 <section class="section_interhigh_photo">

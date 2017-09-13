@@ -1,4 +1,7 @@
-<?php include __DIR__."/inc.php"; ?>
+<?php include __DIR__."/inc.php"; 
+include __DIR__."/getData.php";
+$recentArray = getData::getScheduleRecent();
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja" style="height: auto;">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
@@ -9,6 +12,7 @@
   <title> WebView | SPORTS BULL</title>
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
   <link rel="stylesheet" href="/assets/css/photo/parts_sp.css">
+  <link rel="stylesheet" href="/assets/stats/ua_kansai/css/style.css">
   <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
   <script>
     var googletag = googletag || {};
@@ -25,7 +29,7 @@
 <!-- section_highlight_movie -->                      
 <section class="section_interhigh_highlight">
   <div class="ttl-wrapper">
-    <h2 class="ttl highlight"><i></i>動画特集</h2>
+    <h2 class="ttl highlight"><i></i>全試合ダイジェスト動画</h2>
   </div>
 
   <div class="article_list">
@@ -37,6 +41,19 @@
   </div>
 </section>
                                
+<!-- section_stats -->
+<section class="section_interhigh_photo">
+  <div class="ttl-wrapper">
+    <h2 class="ttl calender"><i></i>直近の日程・結果</h2>
+  </div>
+    
+  <div class="af-schedule">
+<?php $recentArray?>
+  </div>
+
+  <p class="section_btn"><a href="/stats/ua_kansai/"><i></i>すべて日程・結果を見る</a></p>  
+</section>
+
 <!-- section_photogallery -->
 <section class="section_interhigh_photo">
   <div class="ttl-wrapper">
