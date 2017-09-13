@@ -23,13 +23,13 @@
 </section>
 
 <!-- section_stats -->
-<!-- <section class="section_interhigh_photo">
+<section class="section_interhigh_photo">
   <div class="ttl-wrapper">
     <h2 class="ttl calender"><i></i>直近の日程・結果</h2>
     <p class="ttl_link"><a href="/stats/ua_kansai/">全試合日程・結果を見る</a></p>
   </div>
         
-  <div class="af-schedule"> -->
+  <div class="af-schedule">
 <?php //$recentArray?>
 <!--   </div>
 </section> -->

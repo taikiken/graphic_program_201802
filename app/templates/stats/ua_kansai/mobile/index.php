@@ -24,12 +24,12 @@
 </section>
                                
 <!-- section_stats -->
-<!-- <section class="section_interhigh_photo">
+<section class="section_interhigh_photo">
   <div class="ttl-wrapper">
     <h2 class="ttl calender"><i></i>直近の日程・結果</h2>
   </div>
     
-  <div class="af-schedule"> -->
+  <div class="af-schedule">
 <?=//$recentArray?>
 <!--   </div>
 
