@@ -3,17 +3,12 @@
 include "local.php";
 include "../inc.php";
 
-
 function hms($sec){
 	$ss=$sec%60;
 	$mm=(int)($sec/60)%60;
 	$hh=(int)($sec/(60*60));
 	return $hh>0?sprintf("%d:%02d:%02d",$hh,$mm,$ss):sprintf("%02d:%02d",$mm,$ss);
 }
-
-
-//関西アメリカンフットボールJSONパス
-$path="https://dev-img.sportsbull.jp/static/americanfootball/2017/autumn/json";
 
 $moviefile="https://img.sportsbull.jp/static/americanfootball/2017/autumn/highlight.json";
 $movie=get_contents($moviefile);
@@ -37,19 +32,23 @@ for($i=0;$i<count($schedule["response"]["schedule"]);$i++){
 
 for($i=0;$i<count($gameid);$i++){
 	
-	$jsonfile1=sprintf("%s/%s.json",$path,$gameid[$i]);
+	$jsonfile1=sprintf("%s/%s.json",$ka_path,$gameid[$i]);
 	$data1=get_contents($jsonfile1);
-	if(!$data1||preg_match("/Access Denied/",$data1))continue;
-	$data1=str_replace(array('"stat"','"event"'),array('"stats"','"events"'),$data1);
+	if($data1===NULL||preg_match("/Not Found/",$data1))continue;
 	$data1=json_decode($data1,true);
 	
+	$score[$gameid[$i]]=array($data1["response"]["team"][0]["score"]["total"],$data1["response"]["team"][1]["score"]["total"]);	
 	$jsonfile2=sprintf("%s/%s.json",$bucket,$gameid[$i]);
+	if(file_exists($jsonfile2)){
+		$data2=get_contents($jsonfile2);
+		$data2=json_decode($data2,true);
+	}
 	
 	$flag=0;
 	if(!file_exists($jsonfile2)){
 		$flag=1;
 		$lastupdate=$data1["response"]["lastupdate"];
-	}elseif(strtotime($data1["response"]["lastupdate"])>strtotime($data1["response"]["lastupdate"])){
+	}elseif(strtotime($data1["response"]["lastupdate"])>strtotime($data2["response"]["lastupdate"])){
 		$flag=1;
 		$lastupdate=$data1["response"]["lastupdate"];
 	}else{
@@ -59,12 +58,8 @@ for($i=0;$i<count($gameid);$i++){
 		}
 	}
 	
-	if(file_exists($jsonfile2)){
-		$data2=get_contents($jsonfile2);
-		$data2=json_decode($data2,true);
-	}
-	
 	if($flag==1){
+		$data1["response"]["lastupdate"]=$lastupdate;
 		$data1["response"]["gameinfo"]["weekday"]=get_weekday(date("w",$data1["response"]["gameinfo"]["date"]));
 		$data1["response"]["highlightmovieurl"]=$movie["movie"][$gameid[$i]];
 		$data1["response"]["movieurl"]=$fullmovieurl[$gameid[$i]];
