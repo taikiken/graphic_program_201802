@@ -150,6 +150,7 @@ import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 
 // singles-option
 import SPViewSinglesRecommend from './sp/view/singles-option/SPViewSinglesRecommend';
+import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking';
 
 
 // mypage
@@ -262,6 +263,7 @@ let UT = {
       },
       singles: {
         SPViewSinglesRecommend,
+        SPViewSinglesRanking,
       },
       comment: {
         SPViewCommentForm

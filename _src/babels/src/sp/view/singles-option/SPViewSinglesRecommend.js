@@ -12,13 +12,13 @@
 
 // view/sidebar
 import { ViewRecommend } from '../../../view/sidebar/ViewRecommend';
+// import { ViewRanking } from '../../../view/sidebar/ViewRanking';
 
 // view
 import { View } from '../../../view/View';
 
 // sp/component
 import SPComponentSinglesRecommend from '../../component/singles-option/SPComponentSinglesRecommend';
-import { ViewRanking } from '../../../view/sidebar/ViewRanking';
 
 // React
 const React = self.React;

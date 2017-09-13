@@ -111,6 +111,7 @@ export class SPSingle {
       return;
     }
     const slug = single.categories.slug;
+    const label = single.categories.label;
 
     // nav current
     SPNav.start(slug);
@@ -126,6 +127,7 @@ export class SPSingle {
     // -----------------------
     // since 2017-09-13
     SPSingle.optionRecommend(slug);
+    SPSingle.optionRanking(slug, label);
   }
   // /**
   //  * 記事詳細下部・人気記事
@@ -226,6 +228,14 @@ export class SPSingle {
     if (recommendElement) {
       const recommend = new UT.sp.view.singles.SPViewSinglesRecommend(recommendElement, slug);
       recommend.start();
+    }
+  }
+  static optionRanking(slug, label) {
+    console.log('SPSingle.optionRecommend', slug, label);
+    const rankingElement = Dom.ranking();
+    if (rankingElement) {
+      const ranking = new UT.sp.view.singles.SPViewSinglesRanking(rankingElement, slug, label);
+      ranking.start();
     }
   }
 }
