@@ -29,7 +29,7 @@ import {Safety} from '../../../data/Safety';
 import {SPRankingNode} from '../../node/single/SPRankingNode';
 
 // React
-// let React = self.React;
+let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
@@ -45,7 +45,7 @@ export class SPViewSingleRanking extends ViewRanking {
    * @param {Number} length SP 記事詳細・人気記事, 記事表示件数
    */
   constructor( element:Element, option:Object = {}, slug:string = 'all', length:Number = Length.spRanking ) {
-    length = Safety.integer( length, Length.ranking );
+    length = Safety.integer( length, Length.spRanking );
     super( element, option, slug, length );
   }
   /**

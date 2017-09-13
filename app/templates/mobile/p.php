@@ -268,7 +268,7 @@
       // ------------------------------------
       // TODO: おすすめの記事 - sidebar: recommend
       ?>
-      <div id="js-widget-post_list_recommend"></div>
+      <div id="widget-recommend-list-container"></div>
       <?php
       // --------------------------------------------------------------
       ?>

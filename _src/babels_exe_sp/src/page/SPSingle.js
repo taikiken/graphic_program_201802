@@ -14,11 +14,11 @@
 // ui
 import {SPNav} from '../ui/SPNav';
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 let _prepared = 0;
 // let _singleDae = null;
@@ -32,66 +32,59 @@ let _articleId = 0;
  * 全て static です
  */
 export class SPSingle {
-  /**
-   * 記事詳細 singleton class です
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPSingle is static Class. not use new SPSingle().' );
-
-    }
-  }
+  // /**
+  //  * 記事詳細 singleton class です
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPSingle is static Class. not use new SPSingle().' );
+  //
+  //   }
+  // }
   /**
    * 記事詳細, 上部 / 下部 rendering 開始
    * @param {Number} articleId 記事 Id (:article_id)
    */
-  static start( articleId:Number ):void {
-
+  static start(articleId) {
     _articleId = articleId;
     // header
     // header.user
-    let profileElement = Dom.profile();
-    let headerUser;
+    const profileElement = Dom.profile();
+    let headerUser = null;
     if ( profileElement !== null ) {
       headerUser = new UT.sp.view.header.SPViewHeaderUser( profileElement );
-      if ( UT.app.User.sign ) {
-
+      if (UT.app.User.sign) {
         // login user はコメント投稿可能 -> 表示アイコン必要
         _headerUser = headerUser;
         headerUser.on( UT.view.View.BEFORE_RENDER, SPSingle.onHeader );
-
       } else {
-
         // 非ログインユーザーはアイコン取得いらない
         ++_prepared;
-
       }
-      headerUser.start();
+      if (headerUser) {
+        headerUser.start();
+      }
     }
-
-    let singleHeaderElement = Dom.singleHeader();
-
-    if ( singleHeaderElement !== null ) {
-      // console.log( 'start sp single header' );
-      let single = new UT.sp.view.SPViewSingle( articleId, singleHeaderElement, Dom.visual(), Dom.userBanner() );
+    // ----------------------------
+    const singleHeaderElement = Dom.singleHeader();
+    if (singleHeaderElement !== null) {
+      const single = new UT.sp.view.SPViewSingle( articleId, singleHeaderElement, Dom.visual(), Dom.userBanner() );
       _viewSingle = single;
       single.on( UT.view.View.BEFORE_RENDER, SPSingle.before );
       single.start();
-
     } else {
       SPSingle.comment();
     }
-
+    // ----------------------------
     // read more
-    let post = Dom.post();
-    let readMore = Dom.readMore();
-    if ( post !== null && readMore !== null ) {
-      let more = new UT.sp.view.single.SPViewContinueRead( post, readMore );
+    const post = Dom.post();
+    const readMore = Dom.readMore();
+    if (post !== null && readMore !== null) {
+      const more = new UT.sp.view.single.SPViewContinueRead( post, readMore );
       more.start();
     }
-
   }
   /**
    * header View.BEFORE_RENDER event handler
@@ -108,33 +101,31 @@ export class SPSingle {
    * <p>記事所属カテゴリ取得のために event を bind</p>
    * @param {Object} event event object
    */
-  static before( event ):void {
-
+  static before(event) {
     _viewSingle.off( UT.view.View.BEFORE_RENDER, SPSingle.before );
-
-    let single = event.args[ 0 ];
-    // _singleDae = single;
-
-    // let slug = single.category.slug;
-    // let slug = single.categories.all[0].slug;
-    let slug = single.categories.slug;
-    // let label = single.category.label;
-
-    // title は backend output
-
-    // sidebar
-    // SPSidebar.start( slug );
+    if (!event || !event.args) {
+      return;
+    }
+    const single = event.args[0];
+    if (!single || !single.categories || !single.categories.slug) {
+      return;
+    }
+    const slug = single.categories.slug;
 
     // nav current
-    SPNav.start( slug );
-
+    SPNav.start(slug);
+    // comment
     SPSingle.comment();
-    
-    // 記事詳細・人気記事
-    SPSingle.singleRanking( slug );
-
-    // 記事詳細・オススメ記事
-    SPSingle.singleRecommend( slug );
+    // -----------------------
+    // 2016-09-28 記事詳細の次の記事のために以下削除
+    // @see `/app/template/mobile/p.php#L.289`
+    // // 記事詳細・人気記事
+    // SPSingle.singleRanking(slug);
+    // // 記事詳細・オススメ記事
+    // SPSingle.singleRecommend(slug);
+    // -----------------------
+    // since 2017-09-13
+    SPSingle.optionRecommend(slug);
   }
   /**
    * 記事詳細下部・人気記事
@@ -228,6 +219,13 @@ export class SPSingle {
       }
       normal.start();
     }
-
+  }
+  static optionRecommend(slug) {
+    console.log('SPSingle.optionRecommend', slug);
+    const recommendElement = Dom.recommend();
+    if (recommendElement) {
+      const recommend = new UT.sp.view.singles.SPViewSinglesRecommend(recommendElement, slug);
+      recommend.start();
+    }
   }
 }
