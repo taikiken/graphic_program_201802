@@ -1,7 +1,6 @@
 <?php
 include __DIR__."/getData.php";
-$gameId = $_GET["gameId"];
-$dataArray = getData::getMatch($gameId);
+$dataArray = getData::getSchedule();
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
@@ -9,33 +8,32 @@ $dataArray = getData::getMatch($gameId);
   <meta charset="UTF-8">
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="format-detection" content="telephone=no">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title><?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?> - 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | スポーツブル (スポブル)</title>
+  <title>日程・結果 - 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | スポーツブル (スポブル)</title>
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
 
-  <meta name="keywords" content="関西学生アメリカンフットボールリーグ, 関西アメフト, 日程結果, スポーツ, メディア, ニュース, 動画, sports, media,<?=$dataArray["playFirstName"]?>,<?=$dataArray["drawFirstName"]?>">
-  <meta name="description" content="<?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?>。関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
+  <meta name="keywords" content="関西学生アメリカンフットボールリーグ, 関西アメフト, 日程結果, スポーツ, メディア, ニュース, 動画, sports, media">
+  <meta name="description" content="関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
 
   <meta property="fb:app_id" content="842032129256034">
   <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="<?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?> - 関西学生アメリカンフットボールリーグ | 速報 & データ | スポーツブル (スポブル)">
+  <meta property="og:title" content="日程・結果 - 関西学生アメリカンフットボールリーグ | 速報 & データ | スポーツブル (スポブル)">
   <meta property="og:image" content="https://sportsbull.jp/assets/stats/ua_kansai/images/ogp.jpg">
-  <meta property="og:url" content="https://sportsbull.jp/stats/ua_kansai/match/?gameId=<?=$gameId?>">
-  <meta property="og:description" content="<?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?>。関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
+  <meta property="og:url" content="https://sportsbull.jp/stats/ua_kansai/">
+  <meta property="og:description" content="関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
   <meta property="og:locale" content="ja_JP" />
 
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
-  <meta name="twitter:title" content="<?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?> - 関西学生アメリカンフットボールリーグ | 速報 & データ | スポーツブル (スポブル)">
+  <meta name="twitter:title" content="日程・結果 - 関西学生アメリカンフットボールリーグ | 速報 & データ | スポーツブル (スポブル)">
   <meta name="twitter:image" content="https://sportsbull.jp/assets/stats/ua_kansai/images/ogp.jpg">
-  <meta name="twitter:url" content="https://sportsbull.jp/stats/ua_kansai/match/?gameId=<?=$gameId?>">
-  <meta name="twitter:description" content="<?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?>。関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
+  <meta name="twitter:url" content="https://sportsbull.jp/stats/ua_kansai/">
+  <meta name="twitter:description" content="関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
 
   <link rel="canonical" href="">
   <link rel="apple-touch-icon" sizes="180x180" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
@@ -52,16 +50,8 @@ $dataArray = getData::getMatch($gameId);
   <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
   <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
 
-  <!-- 関西アメフト用css,js -->
-<<<<<<< HEAD
-  <link rel="stylesheet" href="/assets/stats/ur_kansai/css/ui.css">
-  <link rel="stylesheet" href="/assets/stats/ur_kansai/js/demo.js">
-  <link rel="stylesheet" href="/assets/stats/ur_kansai/css/style.css">
-=======
   <link rel="stylesheet" href="/assets/stats/ua_kansai/css/ui.css">
-  <!-- <link rel="stylesheet" href="/assets/stats/ua_kansai/js/demo.js"> -->
   <link rel="stylesheet" href="/assets/stats/ua_kansai/css/style.css">
->>>>>>> origin/feature/2264-amefoot-stats
   <!-- optimize -->
   <style>.async-hide { opacity: 0 !important} </style>
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
@@ -147,7 +137,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 </div>
 <!-- ad/531683568/appvador -->
 
-<div id="whole" class="whole dark">
+<div id="whole" class="whole">
 
   <header class="head-sec">
     <div class="head-sec-inner">
@@ -156,288 +146,106 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
   </header><!-- /.head-sec -->
 
   <div class="body-sec">
-<<<<<<< HEAD
-    <div class="title">
-<<<<<<< HEAD
-      <h2>
-<<<<<<< HEAD
-        <a href="./"><img src="/stats/hsb/img/hsb_header.png" alt="高校野球（甲子園） 試合速報"></a>
-=======
-        <a href="./"><img src="/assets/stats/ua_kansai/images/header.png" alt="関西学生アメフト 試合速報"></a>
->>>>>>> origin/feature/2264-amefoot-stats
-=======
-        <h2>
-            <a href="./">
-                <img src="/assets/stats/ua_kansai/images/header.png" alt="関西学生アメフト 試合速報">
-            </a>
-        </h2>
->>>>>>> b855344b4143b4510e955fc0eddbd556f4e47a56
-        <a class="btn" href="#">日程・結果へ</a>
-    </div><!-- /.title -->
-=======
-    <div class="nav-heade-area">
-      <div class="nav-heade">
-        <h2><img src="/assets/stats/ua_kansai/images/header.png" alt="関西学生アメフト 試合速報"></h2>
-        <div class="btnbox">
-          <a href="/stats/ua_kansai/">日程・結果へ</a>
-        </div>
-      </div>
-    </div>
-
->>>>>>> 2986a4a4b4d6468a3314e052365488103a63dff8
-    <div id="result-sec">
-      <div class="inner">
-<<<<<<< HEAD
-        <div class="game-name">新入生歓迎スポーツフェスティバル</div>
-        <div class="result">
-          <div class="home-name">
-<<<<<<< HEAD
-            <span class="team-120">甲南大学</span>
-=======
-            <span class="team-001">甲南大学</span>
->>>>>>> origin/feature/2264-amefoot-stats
-          </div>
-          <div class="score">
-            0<span>vs</span>0
-          </div>
-          <div class="away-name">
-<<<<<<< HEAD
-            <span class="team-120">関西大学</span>
-=======
-            <span class="team-002">関西大学</span>
->>>>>>> origin/feature/2264-amefoot-stats
-          </div>
-        </div>
-        <div class="state">試合前</div>
-        <div class="info">
-          2017年4月8日（土）　11:00～<br />
-          於：王子スタジアム　天候：晴れ　観衆：1,000人
-        </div>
-=======
-        <?=$dataArray["headInner"]?>
->>>>>>> b855344b4143b4510e955fc0eddbd556f4e47a56
-      </div><!-- /.inner -->
-      <span class="blue-line"></span>
-      <span class="red-line"></span>
-    </div><!-- /#result-sec -->
     <div class="body-sec-inner">
+
       <section class="main-sec">
 
-        <div class="stats__banner mt30">
-          <div id="ua-pc-big-banner" style='height:90px; width:728px;'>
-            <!-- /531683568/kansai-amefoot-ad/ua-pc-big-banner -->
-            <script>
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-pc-big-banner', [728, 90], 'div-gpt-ad-1504503001230-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.enableServices();
-              });
-            </script>
-            <div id='div-gpt-ad-1504503001230-0'>
-            <script>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503001230-0'); });
-            </script>
-            </div>
-            <!-- // /531683568/kansai-amefoot-ad/ua-pc-big-banner -->
+      <div class="stats__header mb30">
+        <h1 class="stats__header__title"><img class="responsive" src="/assets/stats/ua_kansai/images/heading.jpg" alt="関西アメフト 速報&スタッツ" /></h1>
+      </div><!-- /.stats__header -->
+
+      <div class="stats__banner mb30">
+        <div id="ua-pc-big-banner" style='height:90px; width:728px;'>
+          <!-- /531683568/kansai-amefoot-ad/ua-pc-big-banner -->
+          <script>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-pc-big-banner', [728, 90], 'div-gpt-ad-1504503001230-0').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-1504503001230-0'>
+          <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503001230-0'); });
+          </script>
           </div>
+          <!-- // /531683568/kansai-amefoot-ad/ua-pc-big-banner -->
+        </div>
 
-          <div id="ua-sp-big-banner" style='height:50px; width:320px;'>
-            <!-- /531683568/kansai-amefoot-ad/ua-sp-big-banner -->
-            <script>
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-sp-big-banner', [320, 50], 'div-gpt-ad-1504503049105-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.enableServices();
-              });
-            </script>
-            <div id='div-gpt-ad-1504503049105-0'>
-            <script>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503049105-0'); });
-            </script>
-            </div>
-            <!-- // /531683568/kansai-amefoot-ad/ua-sp-big-banner -->
+        <div id="ua-sp-big-banner" style='height:50px; width:320px;'>
+          <!-- /531683568/kansai-amefoot-ad/ua-sp-big-banner -->
+          <script>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-sp-big-banner', [320, 50], 'div-gpt-ad-1504503049105-0').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-1504503049105-0'>
+          <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503049105-0'); });
+          </script>
           </div>
+          <!-- // /531683568/kansai-amefoot-ad/ua-sp-big-banner -->
+        </div>
 
-          <div id="ua-app-big-banner" style='height:50px; width:320px;'>
-            <!-- /531683568/kansai-amefoot-ad/ua-app-big-banner -->
-            <script>
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-app-big-banner', [320, 50], 'div-gpt-ad-1504503090397-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.enableServices();
-              });
-            </script>
-            <div id='div-gpt-ad-1504503090397-0'>
-            <script>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503090397-0'); });
-            </script>
-            </div>
-            <!-- // /531683568/kansai-amefoot-ad/ua-app-big-banner -->
+        <div id="ua-app-big-banner" style='height:50px; width:320px;'>
+          <!-- /531683568/kansai-amefoot-ad/ua-app-big-banner -->
+          <script>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-app-big-banner', [320, 50], 'div-gpt-ad-1504503090397-0').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-1504503090397-0'>
+          <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1504503090397-0'); });
+          </script>
           </div>
-        </div><!-- /.stats__banner -->
+          <!-- // /531683568/kansai-amefoot-ad/ua-app-big-banner -->
+        </div>
+      </div><!-- /.stats__banner -->
 
-        <nav id="game-info" class="active-0">
-          <ul>
-            <li>基本情報</li>
-            <li>得点経過</li>
-            <li>個人成績</li>
-          </ul>
-        </nav>
-        <div id="basic-info">
-          <h3>関連動画</h3>
-          <div class="movie">
-            <?=$dataArray["movie"]?>
-          </div><!-- /.movie -->
+      <nav id="game-category" class="active-0">
+        <ul>
+          <li>公式戦</li>
+          <li>入替戦</li>
+          <li>全日本</li>
+          <li>甲子園ボウル</li>
+        </ul>
+      </nav>
+      <div class="game-category1">
+        <div class="af-schedule">
+            <h2 class="calendar">日程・結果 / Division1</h2>
+            <div class="lastupdate">最終更新日：<?=$dataArray["lastupdate"]?></div>
+            <?=$dataArray["game-category1"]["schedule"]?>
+        </div><!-- af-schedule -->
 
-          <h3>各クオーター結果</h3>
-          <div class="quarter">
-            <table>
-              <thead>
-                <tr>
-                  <th width="25%">チーム</th>
-                  <th>1Q</th>
-                  <th>2Q</th>
-                  <th>3Q</th>
-                  <th>4Q</th>
-                  <th>合計</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?=$dataArray["quarter"]?>
-              </tbody>
-            </table>
-          </div><!-- /.quarter -->
+        <div class="af-match">
+          <?=$dataArray["game-category1"]["standing"]?>
+        </div><!-- af-schedule -->
+      </div><!-- game-category -->
+      <div class="game-category2">
+        <div class="af-schedule">
+            <h2 class="calendar">日程・結果 / 入替戦</h2>
+            <?=$dataArray["game-category2"]["schedule"]?>
+        </div>
+      </div><!-- game-category2 -->
+      <div class="game-category3">
+        <div class="af-schedule">
+            <h2 class="calendar">日程・結果 / 全日本</h2>
+            <?=$dataArray["game-category3"]["schedule"]?>
+        </div>
+      </div><!-- game-category3 -->
+      <div class="game-category4">
+        <div class="af-schedule">
+            <h2 class="calendar">日程・結果 / 甲子園ボウル</h2>
+            <?=$dataArray["game-category4"]["schedule"]?>
+        </div>
+      </div><!-- game-category4 -->
 
-          <h3>データ</h3>
-          <div class="data">
-            <table>
-              <?=$dataArray["data"]?>
-            </table>
-            <div class="digestbtn"><?=$dataArray["digest"]?></div>
-          </div><!-- /.data -->
-        </div><!-- /#basic-info -->
-        <div id="score-info">
-          <ul>
-            <?=$dataArray["scoreInfo"]?>
-          </ul>
-        </div><!-- /#score-info -->
 
-        <div id="personal-info">
-          <nav id="team-tab" class="active-0">
-            <ul>
-              <li><?=$dataArray["playFirstName"]?></li>
-              <li><?=$dataArray["drawFirstName"]?></li>
-            </ul>
-          </nav>
-          <div class="play-first">
-            <h3>ラン<span>合計 <?=$dataArray["personalInfo"]["playFirst"]["run"]["total"]?></span></h3>
-            <div class="run">
-              <table>
-                <thead>
-                  <tr>
-                    <th>プレイヤー</th>
-                    <th>ATT</th>
-                    <th>YDS</th>
-                    <th>TD</th>
-                    <th>LG</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?=$dataArray["personalInfo"]["playFirst"]["run"]["data"]?>
-                </tbody>
-              </table>
-            </div><!-- /.run -->
-
-            <h3>パス<span>合計 <?=$dataArray["personalInfo"]["playFirst"]["pass"]["total"]?></span></h3>
-            <div class="pass">
-              <table>
-                <thead>
-                  <tr>
-                    <th>プレイヤー</th>
-                    <th>CP/AT</th>
-                    <th>YDS</th>
-                    <th>TD</th>
-                    <th>INT</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?=$dataArray["personalInfo"]["playFirst"]["pass"]["data"]?>
-                </tbody>
-              </table>
-            </div><!-- /.pass -->
-            <h3>レシーブ<span>合計 <?=$dataArray["personalInfo"]["playFirst"]["receive"]["total"]?></span></h3>
-            <div class="receive">
-              <table>
-                <thead>
-                  <tr>
-                    <th>プレイヤー</th>
-                    <th>ATT</th>
-                    <th>YDS</th>
-                    <th>TD</th>
-                    <th>LG</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?=$dataArray["personalInfo"]["playFirst"]["receive"]["data"]?>
-                </tbody>
-              </table>
-            </div><!-- /.receive -->
-          </div><!-- /.play-first -->
-          <div class="draw-first">
-            <h3>ラン<span>合計 <?=$dataArray["personalInfo"]["drawFirst"]["run"]["total"]?></span></h3>
-            <div class="run">
-              <table>
-                <thead>
-                  <tr>
-                    <th>プレイヤー</th>
-                    <th>ATT</th>
-                    <th>YDS</th>
-                    <th>TD</th>
-                    <th>LG</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?=$dataArray["personalInfo"]["drawFirst"]["run"]["data"]?>
-                </tbody>
-              </table>
-            </div><!-- /.run -->
-
-            <h3>パス<span>合計 <?=$dataArray["personalInfo"]["drawFirst"]["pass"]["total"]?></span></h3>
-            <div class="pass">
-              <table>
-                <thead>
-                  <tr>
-                    <th>プレイヤー</th>
-                    <th>CP/AT</th>
-                    <th>YDS</th>
-                    <th>TD</th>
-                    <th>INT</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?=$dataArray["personalInfo"]["drawFirst"]["pass"]["data"]?>
-                </tbody>
-              </table>
-            </div><!-- /.pass -->
-            <h3>レシーブ<span>合計 <?=$dataArray["personalInfo"]["drawFirst"]["receive"]["total"]?></span></h3>
-            <div class="receive">
-              <table>
-                <thead>
-                  <tr>
-                    <th>プレイヤー</th>
-                    <th>ATT</th>
-                    <th>YDS</th>
-                    <th>TD</th>
-                    <th>LG</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?=$dataArray["personalInfo"]["drawFirst"]["receive"]["data"]?>
-                </tbody>
-              </table>
-            </div><!-- /.receive -->
-          </div>
-        </div><!-- /#personal-info -->
       </section><!-- /.main-sec -->
 
       <section class="side-sec show-for-large">
@@ -470,11 +278,9 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
             </div>
             <!-- // ad/531683568/pc_sidebar_top_2nd -->
           </div>
-          
           <div class="mt30">
             <a href="http://amefootlive.jp/kcafl" target="_blank"><img src="/assets/stats/ua_kansai/images/amefootlive_bnr.jpg" alt="関西学生 アメリカンフットボールリーグLIVE!!" width="300px"></a>
           </div>
-
           <!-- sidebar recommend, オススメ記事 -->
           <div id="widget-recommend-list-container"></div><!--/recommend-->
 
@@ -500,7 +306,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
         <ol itemscope itemtype="http://schema.org/breadCrumbList">
           <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
           <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/stats/ua_kansai/"><span itemprop="name">関西アメフト 日程・結果</span><meta itemprop="position" content="2" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/stats/ua_kansai/match/?gameId=<?=$gameId?>"><span itemprop="name"><?=$dataArray["date"]?> <?=$dataArray["playFirstName"]?> vs <?=$dataArray["drawFirstName"]?></span><meta itemprop="position" content="2" /></a></li>
         </ol>
       </nav><!-- /.foot-breadCrumb -->
 
@@ -610,14 +415,11 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
+
 <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
 <script src="/assets/stats/ua_kansai/js/userAgent.js"></script>
 <script src="/assets/js/global.bundle.js"></script>
-<<<<<<< HEAD
-<script src="/assets/stats/ur_kansai/js/match.js"></script>
-=======
 <script src="/assets/stats/ua_kansai/js/amefoot.bundle.js"></script>
-<script src="/assets/stats/ua_kansai/js/match.js"></script>
->>>>>>> origin/feature/2264-amefoot-stats
+<script src="/assets/stats/ua_kansai/js/index.js"></script>
 </body>
 </html>

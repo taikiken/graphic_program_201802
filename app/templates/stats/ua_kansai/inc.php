@@ -18,11 +18,7 @@ while($f=$db->fetch_array()){
 	$movie.=sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><div class="txt_area"><p>%s %s</p></div></a></li>',$v["url"],$v["img"],$v["title"],$v["date"],$v["title"]);
 }
 
-<<<<<<< HEAD
-$sql="select id,img1,title,a1,a2,a3 from repo_n where d2=57 and flag=1 and m2=159 order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc limit 6 offset 0";
-=======
 $sql="select id,img1,title,a1,a2,a3 from repo_n where d2=57 and flag=1 and swf is null order by (a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':'||a6)::timestamp desc limit 4 offset 0";
->>>>>>> origin/feature/2264-amefoot-stats
 $db->query($sql);
 while($f=$db->fetch_array()){
 	$v=array(
