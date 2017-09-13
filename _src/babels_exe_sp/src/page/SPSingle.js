@@ -127,36 +127,36 @@ export class SPSingle {
     // since 2017-09-13
     SPSingle.optionRecommend(slug);
   }
-  /**
-   * 記事詳細下部・人気記事
-   * @param {string} slug category slug
-   */
-  static singleRanking( slug:string ):void {
-    let rankingElement = Dom.ranking();
-
-    if ( rankingElement !== null ) {
-      let ranking = new UT.sp.view.single.SPViewSingleRanking( rankingElement, null, slug );
-      ranking.start();
-    }
-  }
-
-  /**
-   * 記事詳細・オススメ記事
-   * <pre>
-   * Mobileでは関連記事上
-   * </pre>
-   *
-   * @see https://github.com/undotsushin/undotsushin/issues/862
-   * @since 2016-06-16
-   * @param {string} slug category slug
-   */
-  static singleRecommend( slug:string ):void {
-    let recommendElement = Dom.recommend();
-    if ( recommendElement !== null ) {
-      let recommend = new UT.sp.view.single.SPViewSingleRecommend( recommendElement, null, slug );
-      recommend.start();
-    }
-  }
+  // /**
+  //  * 記事詳細下部・人気記事
+  //  * @param {string} slug category slug
+  //  */
+  // static singleRanking( slug:string ):void {
+  //   let rankingElement = Dom.ranking();
+  //
+  //   if ( rankingElement !== null ) {
+  //     let ranking = new UT.sp.view.single.SPViewSingleRanking( rankingElement, null, slug );
+  //     ranking.start();
+  //   }
+  // }
+  //
+  // /**
+  //  * 記事詳細・オススメ記事
+  //  * <pre>
+  //  * Mobileでは関連記事上
+  //  * </pre>
+  //  *
+  //  * @see https://github.com/undotsushin/undotsushin/issues/862
+  //  * @since 2016-06-16
+  //  * @param {string} slug category slug
+  //  */
+  // static singleRecommend( slug:string ):void {
+  //   let recommendElement = Dom.recommend();
+  //   if ( recommendElement !== null ) {
+  //     let recommend = new UT.sp.view.single.SPViewSingleRecommend( recommendElement, null, slug );
+  //     recommend.start();
+  //   }
+  // }
   /**
    * **ログイン**
    * <p>ユーザー情報, 記事 Id 必須</p>

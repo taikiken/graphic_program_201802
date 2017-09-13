@@ -102,8 +102,7 @@ BoardItem.propTypes = {
  * @since 2017-09-13
  */
 const SPComponentSinglesRecommend = ({ list, slug }) => {
-  const length = list.length;
-  if (!Array.isArray(list) || !length) {
+  if (!Array.isArray(list) || !list.length) {
     return null;
   }
   // ---
