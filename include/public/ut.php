@@ -30,7 +30,7 @@ $articletable="
 	brightcove,
 	m_time,
 	t8 as videocaption,
-	t9
+	t9 
 from repo_n where flag=1%s) as t1
 
 left join (select 
@@ -54,7 +54,13 @@ left join (select
 	name as category2,
 	title as categorylabel2,
 	name_e as slug2
-from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2";
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
+
+left join (select 
+	pageid,
+	region,
+	pref
+from u_area) as t5 on t1.id=t5.pageid";
 
 $articletable2="
 (select 
@@ -80,7 +86,7 @@ $articletable2="
 	brightcove,
 	m_time,
 	t8 as videocaption,
-	t9
+	t9 
 from repo_n where flag=1%s%s%s) as t1
 
 left join (select 
@@ -104,7 +110,13 @@ left join (select
 	name as category2,
 	title as categorylabel2,
 	name_e as slug2
-from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2";
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
+
+left join (select 
+	pageid,
+	region,
+	pref
+from u_area) as t5 on t1.id=t5.pageid";
 
 $articletable2c="(select id,d2 from repo_n where cid=1 and flag=1%s%s%s) as t1,(select id as userid from u_media where flag=1) as t2 where t1.d2=t2.userid";
 
@@ -413,7 +425,8 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	$s["description"]=get_summary($f["b1"],$f["body"]);
 	
 	if(strlen($f["relatedpost"])>0)$body.=$f["relatedpost"];
-	if($type==1){	
+	if($type==1){
+			
 		$s["body"]=urlmodify($body);
 		$s["body_escape"]=stripbr($f["body"]);
 		if($apidetails!=1)$s["media_vk_refid"]=strlen($f["brightcove"])>0?$f["brightcove"]:"";
@@ -464,7 +477,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["categories"][1]["label"]=$cat2;
 		$s["categories"][1]["slug"]=$f["slug2"]; 
 	}
-	
+			
 	$s["is_bookmarked"]=$f["is_bookmark"]==0?false:true;
 	if($type==0)$s["is_recommend"]=$f["recommend"]==1?true:false;
 	$s["is_new"]=$datetime["relativetime"]<(60*24*30)?true:false;
@@ -501,9 +514,23 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	}
 	
 	$s["user"]=set_userinfo($f,0);
+	
+	//地域タブ
 	if($s["user"]["id"]==61){
-		$s["user"]["id"]="";
+		//地域タブのラベル置き換えのためにAPIに地域情報を追加
+		$s["another_categories"]["area"]["region"]=array();
+		$s["another_categories"]["area"]["pref"]=array();
+		if(strlen($f["region"])>0)$s["another_categories"]["area"]["region"][]=$f["region"];
+		if(strlen($f["pref"])>0)$s["another_categories"]["area"]["pref"][]=$f["pref"];
+		
+		//ノアドットの記事の場合は媒体名に変更
+		//IDはノアドットをそのまま継承
+		//$s["user"]["id"]="";
 		$s["user"]["name"]=$f["t10"];
+		$s["user"]["bio"]="";
+		$s["user"]["profile_picture"]="";
+		$s["user"]["logo"]["img"]="";
+		$s["user"]["logo"]["link"]="";
 	}
 
 	if (strlen($f["img1"]) === 0 && strlen($f["no_image"]) > 0)
@@ -608,7 +635,7 @@ function set_userinfo($f,$interestset){
 	
 	/* String型 */
 	$s["id"]=$f["userid"];
-	$s["name"]=mod_HTML($f["name"]);
+	$s["name"]=!preg_match("/^スポーツブル編集部/",$f["name"])?mod_HTML($f["name"]):"スポーツブル編集部";
 	
 	if(strlen($f["email"])>0){
 		$s["email"]=strlen($f["email"])>0?mod_HTML($f["email"]):"";
