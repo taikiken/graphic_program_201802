@@ -1,0 +1,129 @@
+@import "../../../../../scss_sp/asset";
+
+//.widget-post-carousel
+.widget-post-carousel {
+  // carousel width
+  $carousel-width: 140px + 10px;
+  $carousel-height: 190px;
+
+  width: 100%;
+  margin-top: (40/2)+px;
+  // 左右をクロップする
+  overflow: hidden;
+
+  .mod-headingA01 {
+    padding-bottom: (20/2)+px;
+    background-color: #eee;
+  }
+
+  //.widget-post-carousel-outer
+  &-outer {
+    width: 100%;
+    min-height: $carousel-height;
+    //margin-top: (20/2)+px;
+    margin: (20/2)+px 0 0;
+  }
+
+  // 左右に空きを作る
+  // .widget-post-carousel-center
+  &-center {
+    position: relative;
+    margin: 0 perCalc(20);
+  }
+
+  // carousel move target
+  // wrapper
+  // .widget-post-carousel-wrapper
+  &-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  // swipe target
+  // ul
+  //.widget-post-carousel-list
+  &-list {
+    position: absolute;
+    left: 0;
+    top: 0;
+    //width: 50000px;
+    width: $carousel-width * 7;
+    //margin-left: perCalc(20);
+    letter-spacing: ls(inline-block);
+  }
+
+  //.widget-post-carousel-item
+  &-item {
+    list-style: none;
+    display: inline-block;
+    margin-right: (20/2)+px;
+    vertical-align: top;
+    letter-spacing: normal;
+  }
+
+
+
+  //.post
+  .post {
+    display: block;
+    width: (280/2)+px;
+
+
+    //.post-thumb
+    &-thumb {
+      position: relative;
+      width: (280/2)+px;
+      height: (158/2)+px;
+      overflow: hidden;
+      border-radius: (6/2)+px;
+
+      //.post-thumb-overlay-movie
+      &-overlay-movie {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    //.post-data
+    &-data {
+      margin-top: (20/2)+px;
+    }
+
+    //.post-heading
+    &-heading {
+      line-height: lh(34, 22);
+      color: #333;
+      font-weight: bold;
+      font-size: fz(22/2);
+    }
+
+    //.post-category
+    &-category {
+      line-height: 1em;
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: fz(20/2);
+
+      &:empty {
+        display: none;
+      }
+
+      .category-label {
+        display: inline-block;
+        margin-right: 0.5em;
+      }
+    }
+
+    //.post-date
+    &-date {
+      // margin-top: .25em;
+      color: #666;
+      font-size: fz(20/2);
+    }
+  }
+}
