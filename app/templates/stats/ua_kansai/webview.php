@@ -48,7 +48,7 @@ $recentArray = getData::getScheduleRecent();
   </div>
     
   <div class="af-schedule">
-<?php $recentArray?>
+  <?php echo $recentArray ?>
   </div>
 
   <p class="section_btn"><a href="/stats/ua_kansai/"><i></i>すべて日程・結果を見る</a></p>  
