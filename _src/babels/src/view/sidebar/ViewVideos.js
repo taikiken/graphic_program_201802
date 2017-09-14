@@ -335,6 +335,7 @@ export class ViewVideos extends View {
                       home={home}
                       detail={detail}
                       thisSlug={thisSlug}
+                      anotherCategories={dae.anotherCategories}
                     />
                 );
 

@@ -122,6 +122,7 @@ export class ViewRecommend extends ViewRanking {
                       detail={detail}
                       thisSlug={thisSlug}
                       categorySlug={categorySlug}
+                      anotherCategories={dae.anotherCategories}
                     />
                   );
 
