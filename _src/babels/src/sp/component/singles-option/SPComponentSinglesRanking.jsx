@@ -9,6 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
 import { Safety } from '../../../data/Safety';
 import { Empty } from '../../../app/const/Empty';
 
@@ -17,6 +18,7 @@ import { ArticleDae } from '../../../dae/ArticleDae';
 // component
 import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+
 import { Touching } from '../../../ui/Touching';
 import { EventDispatcher } from '../../../event/EventDispatcher';
 
@@ -309,6 +311,7 @@ CarouselItem.propTypes = {
 
 /**
  * SP: 記事詳細一覧「よく読まれている記事」carousel
+ * TODO: state を使用しない carousel
  * - dead end
  * - swipe 移動
  * @since 2017-09-13
