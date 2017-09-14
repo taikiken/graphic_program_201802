@@ -44,7 +44,9 @@ import {ModelCategoriesSlug} from '../../../model/categoires/ModelCategoriesSlug
 import { SPComponentArticles } from '../../component/articles/SPComponentArticles';
 
 // react
-let ReactDOM = self.ReactDOM;
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
+const ReactDOM = self.ReactDOM;
 /**
  * SP category 一覧を表示します<br>
  * 広告をAPIでコントロール可能にします
