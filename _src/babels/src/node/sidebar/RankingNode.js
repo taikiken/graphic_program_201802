@@ -121,6 +121,7 @@ export const RankingNode = React.createClass( {
                 categories={p.categories}
                 id={p.id}
                 index={p.index}
+                anotherCategories={p.anotherCategories}
               />
             </p>
             <h4 className="post-heading">{p.title}</h4>

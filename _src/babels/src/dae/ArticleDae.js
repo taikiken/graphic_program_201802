@@ -119,12 +119,15 @@ export class ArticleDae {
      * @protected
      */
     this._index = -1;
-
     // 2017-09-14
+    /**
+     * `another_categories` value - 地域の詳細
+     * @type {AnotherCategoriesDae}
+     */
     this.anotherCategories = new AnotherCategoriesDae(article.another_categories);
   }
   // ---------------------------------------------------
-  //  GETTER / SETTER
+  //  METHOD
   // ---------------------------------------------------
   /**
    * index Number<br>
@@ -135,7 +138,6 @@ export class ArticleDae {
   get index():Number {
     return this._index;
   }
-
   /**
    * index Number を設定します
    * @param {Number} index index Number
