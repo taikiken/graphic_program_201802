@@ -17,15 +17,85 @@ import { ArticleDae } from '../../../dae/ArticleDae';
 // component
 import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import { Touching } from '../../../ui/Touching';
+import { EventDispatcher } from '../../../event/EventDispatcher';
 
 // React
 const React = self.React;
 
-const CarouselAd = ({ slug, index }) => {
+
+// ---------------------------------------------------
+class Swipe extends EventDispatcher {
+  static get SWIPE_LEFT() {
+    return 'swipeLeft';
+  }
+  static get SWIPE_RIGHT() {
+    return 'swipeRight';
+  }
+  static get DRAGGING() {
+    return 'dragging';
+  }
+  static get CANCEL() {
+    return 'swipeCancel';
+  }
+  constructor(element) {
+    super();
+    // ---
+    this.touching = new Touching(element, false, 1);
+    this.onStart = this.onStart.bind(this);
+    this.onMove = this.onMove.bind(this);
+    this.onEnd = this.onEnd.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+    this.dragging = 0;
+  }
+  start() {
+    const touching = this.touching;
+    touching.on(Touching.START, this.onStart);
+    touching.init();
+  }
+  activate() {
+    const touching = this.touching;
+    touching.on(Touching.MOVE, this.onMove);
+    touching.on(Touching.END, this.onEnd);
+    touching.on(Touching.CANCEL, this.onCancel);
+  }
+  dispose() {
+    const touching = this.touching;
+    touching.off(Touching.MOVE, this.onMove);
+    touching.off(Touching.END, this.onEnd);
+    touching.off(Touching.CANCEL, this.onCancel);
+  }
+  reset() {
+    this.dragging = 0;
+  }
+  drag(x) {
+    this.dispatch({ type: Swipe.DRAGGING, x });
+  }
+  onStart() {
+    this.reset();
+    this.dispose();
+    this.activate();
+  }
+  onMove(events) {
+    this.dragging += events.between.x;
+    this.drag(this.dragging);
+  }
+  onEnd() {
+    this.dispose();
+  }
+  onCancel() {
+    this.reset();
+    this.dispose();
+    this.dispatch({ type: Swipe.CANCEL });
+  }
+}
+// ---------------------------------------------------
+
+const CarouselAd = ({ slug, index, length }) => {
   if (slug === 'big6tv') {
     return null;
   }
-  if (index === 2 && index === 5) {
+  if ((index === 2 && index === 5) || length === 1) {
     return (
       <div className="widget-post-carousel-item widget-post-carousel-item-ad">
         ここに広告
@@ -61,26 +131,54 @@ const CarouselItem = ({ single, index }) => {
   );
 };
 
+/**
+ * SP: 記事詳細一覧「よく読まれている記事」carousel
+ * - dead end
+ * - swipe 移動
+ */
 class SPRankingCarousel extends React.Component {
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   static get propTypes() {
     return {
-      articles: React.PropTypes.arrayOf(React.PropTypes.instanceOf(ArticleDae)).isRequired,
+      articles: React.PropTypes.arrayOf(
+        React.PropTypes.instanceOf(ArticleDae)
+      ).isRequired,
       slug: React.PropTypes.string.isRequired,
       length: React.PropTypes.number.isRequired,
       last: React.PropTypes.number.isRequired,
     };
   }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   constructor(props) {
     super(props);
     // ---
     this.state = {
       x: 0,
       left: 0,
+      motion: false,
     };
     this.index = 0;
     this.width = 150;
-    console.log('SPRankingCarousel', this.index, this.width);
+    this.onPrev = this.onPrev.bind(this);
+    this.onNext = this.onNext.bind(this);
+    this.onStart = this.onStart.bind(this);
+    this.onDragging = this.onDragging.bind(this);
+    this.onCancel = this.onCancel.bind(this);
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  // ---------------------------------------------------
+  start() {
+    // TODO: swipe 設定
+    console.log('SPRankingCarousel.start', this.state);
+    this.jump(0);
+  }
+  // ---------------------------------------------------
   onPrev() {
     if (this.index === 0) {
       // 先頭は prev しない
@@ -93,10 +191,17 @@ class SPRankingCarousel extends React.Component {
       this.next();
     }
   }
-  start() {
-    // TODO: swipe 設定
-    console.log('SPRankingCarousel.start', this.state);
+  // ---------------------------------------------------
+  onStart() {
+
   }
+  onDragging(events) {
+
+  }
+  onCancel() {
+
+  }
+  // ---------------------------------------------------
   prev() {
     let index = this.index;
     index -= 1;
@@ -113,19 +218,35 @@ class SPRankingCarousel extends React.Component {
   }
   jump(index) {
     this.index = index;
+    const x = this.translateX(index);
+    this.setState({ x });
   }
+  // ---------------------------------------------------
+  // carousel move
   translateX(index) {
     return -this.width * index;
   }
-  transform(index, duration = 0.32) {
-    const x = this.translateX(index);
+  transform(duration = 0.32) {
+    const x = `translateX(${this.state.x}px)`;
     return {
       transform: x,
-      '-webkit-transform': x,
+      // WebkitTransform: x,
       transition: `transform ${duration}s ease-out`,
-      '-webkit-transition': `-webkit-transform ${duration}s ease-out`,
+      // WebkitTransition: `-webkit-transform ${duration}s ease-out`,
     };
   }
+  // ---------------------------------------------------
+  // swipe
+  dragging(left, duration = 0.31) {
+    const style = {
+      left: `${left}px`,
+    };
+    if (this.state.motion) {
+      style.transition = `left ${duration}s linear`;
+    }
+    return style;
+  }
+  // ---------------------------------------------------
   componentDidMount() {
     if (this.props.length > 1) {
       // carousel 1 を超えていたら実装を開始する
@@ -133,66 +254,80 @@ class SPRankingCarousel extends React.Component {
     }
   }
   render() {
-    const { articles, slug } = this.props;
+    const { articles, slug, length } = this.props;
     console.log('SPRankingCarousel.render', articles, slug);
     return (
-      <div className="widget-post-carousel-outer">
-        <div className="widget-post-carousel-center">
-          <div className="widget-post-carousel-wrapper">
-            <div className="widget-post-carousel-list">
-              {
-                articles.map((single, index) => {
-                  return (
-                    <div
-                      key={`widget-post-carousel-item-root-${single.id}`}
-                      className="widget-post-carousel-item-root"
-                    >
-                      <CarouselItem
-                        single={single}
-                        index={index}
-                      />
-                      <CarouselAd
-                        slug={slug}
-                        index={index}
-                      />
-                    </div>
-                  );
-                })
-              }
-            </div>
-          </div>
+      <div
+        className="widget-post-carousel-wrapper"
+        style={this.transform()}
+      >
+        <div
+          className="widget-post-carousel-list"
+          style={this.dragging(this.state.left)}
+        >
+          {
+            articles.map((single, index) => {
+              return (
+                <span
+                  key={`widget-post-carousel-item-root-${single.id}`}
+                  className="widget-post-carousel-item-root"
+                >
+                  <CarouselItem
+                    single={single}
+                    index={index}
+                  />
+                  <CarouselAd
+                    slug={slug}
+                    index={index}
+                    length={length}
+                  />
+                </span>
+              );
+            })
+          }
         </div>
       </div>
     );
   }
-  // render() {
-  //   console.log('SPRankingCarousel', this.props);
-  //   return (
-  //     <p>XXXXXX</p>
-  //   );
-  // }
 }
 
+/**
+ * SP: 記事詳細一覧「よく読まれている記事」carousel container
+ * - SPComponentSinglesRanking
+ *   - {@link SPRankingCarousel}
+ *     - {@link CarouselItem}
+ *     - {@link CarouselAd}
+ * 記事ページの最適化 #2381
+ * @see https://github.com/undotsushin/undotsushin/issues/2381
+ * @param {Array.<object>} list JSON result
+ * @param {string} slug category slug
+ * @param {string} label category label - title 使用
+ * @returns {?XML} div.widget-post-carousel or null
+ * @constructor
+ * @since 2017-09-13
+ */
 const SPComponentSinglesRanking = ({ list, slug, label }) => {
   if (!Array.isArray(list) || !list.length) {
     return null;
   }
   const articles = list.map(article => (new ArticleDae(article)));
-  console.log('SPComponentSinglesRanking', list, slug, label, Array.isArray(list), list.length, articles);
+  // console.log('SPComponentSinglesRanking', list, slug, label, Array.isArray(list), list.length, articles);
   // ---
   return (
     <div className="widget-post-carousel">
       <div className="mod-headingA01">
         <h2>{label}のよく読まれている記事</h2>
       </div>
-      {
-      <SPRankingCarousel
-        articles={articles}
-        slug={slug}
-        length={articles.length}
-        last={articles.length - 1}
-      />
-      }
+      <div className="widget-post-carousel-outer">
+        <div className="widget-post-carousel-center">
+          <SPRankingCarousel
+            articles={articles}
+            slug={slug}
+            length={articles.length}
+            last={articles.length - 1}
+          />
+        </div>
+      </div>
     </div>
   );
 };
