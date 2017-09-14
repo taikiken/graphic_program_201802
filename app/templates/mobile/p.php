@@ -132,6 +132,7 @@
                 googletag.enableServices();
               });
             </script>
+
             <div id='div-gpt-ad-1496897689545-0' style='height:50px; width:300px; text-align: center; margin: 20px auto;'>
             <script>
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496897689545-0'); });
@@ -140,6 +141,20 @@
             <!-- // /531683568/mobile/mobile_detail_body_bottom -->
 
           <?php endif; ?>
+
+          <?php
+          // ----------------------------------------------------
+          // アプリ導線
+          ?>
+          <div class="post-pr_app">
+            <div class="post-pr_app-inner">
+              <h3 class="post-pr_app-heading">毎日500記事以上の最新ニュースやスポーツ速報を完全無料で見放題!</h3>
+              <ul class="post-pr_app-list">
+                <li class="post-pr_app-item"><a class="post-pr_app-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/detail/pr_app-btn-ios.png" alt="App Store"></a></li>
+                <li class="post-pr_app-item"><a class="post-pr_app-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/detail/pr_app-btn-android.png" alt="Google play"></a></li>
+              </ul><!-- /.post-pr_app-list -->
+            </div><!-- /.post-pr_app-inner -->
+          </div><!-- /.post-pr_app -->
 
           <?php
           // ----------------------------------------------------
@@ -185,16 +200,6 @@
               </div>
             </div><!-- /.post-sns-list -->
           </div><!-- /.post-sns -->
-
-          <div class="post-pr_app">
-            <div class="post-pr_app-inner">
-              <h3 class="post-pr_app-heading">毎日500記事以上の最新ニュースやスポーツ速報を完全無料で見放題!</h3>
-              <ul class="post-pr_app-list">
-                <li class="post-pr_app-item"><a class="post-pr_app-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/detail/pr_app-btn-ios.png" alt="App Store"></a></li>
-                <li class="post-pr_app-item"><a class="post-pr_app-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/detail/pr_app-btn-android.png" alt="Google play"></a></li>
-              </ul><!-- /.post-pr_app-list -->
-            </div><!-- /.post-pr_app-inner -->
-          </div><!-- /.post-pr_app -->
 
         </div><!-- /.post-detail -->
 
