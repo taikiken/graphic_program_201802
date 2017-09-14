@@ -20,6 +20,7 @@ import {MediaDae} from './MediaDae';
 import {UserDae} from './UserDae';
 import {CommentsPopularDae} from './CommentsPopularDae';
 import {CategoriesDae} from './caegories/CategoriesDae';
+import AnotherCategoriesDae from './another-categories/AnotherCategoriesDae';
 
 /**
  * articles 記事一つのデータを管理します
@@ -119,6 +120,8 @@ export class ArticleDae {
      */
     this._index = -1;
 
+    // 2017-09-14
+    this.anotherCategories = new AnotherCategoriesDae(article.another_categories);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

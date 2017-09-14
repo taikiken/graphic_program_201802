@@ -564,6 +564,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                             categories={dae.categories.all}
                             id={`post-archive-${dae.id}`}
                             index={i}
+                            anotherCategories={dae.anotherCategories}
                           />
                         </p>
                         <h3 className="post-heading">{dae.title}</h3>

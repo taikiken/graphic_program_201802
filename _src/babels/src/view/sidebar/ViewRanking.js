@@ -290,6 +290,7 @@ export class ViewRanking extends View {
                       detail={detail}
                       thisSlug={thisSlug}
                       categorySlug={categorySlug}
+                      anotherCategories={dae.anotherCategories}
                     />
                 );
 

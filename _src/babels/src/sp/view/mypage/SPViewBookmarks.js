@@ -141,6 +141,7 @@ export class SPViewBookmarks extends ViewBookmarks {
                               categories={dae.categories.all}
                               id={`bookmarks-label-${dae.id}`}
                               index={idx}
+                              anotherCategories={dae.anotherCategories}
                             />
                           </p>
                           <h2 className="post-heading">{dae.title}</h2>

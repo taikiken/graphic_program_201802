@@ -80,6 +80,7 @@ export let SPRankingNode = React.createClass( {
                   detail={detail}
                   thisSlug={thisSlug}
                   categorySlug={thisSlug}
+                  anotherCategories={dae.anotherCategories}
                 />
               );
 

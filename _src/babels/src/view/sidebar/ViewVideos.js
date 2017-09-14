@@ -35,6 +35,7 @@ import {RecommendTitleNode} from '../../node/sidebar/RecommendTitleNode';
 // Ga
 import {Ga} from '../../ga/Ga';
 import {GaData} from '../../ga/GaData';
+import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
 
 // React
 let React = self.React;
@@ -219,7 +220,9 @@ export class ViewVideos extends View {
         thumbnail: React.PropTypes.string.isRequired,
         home: React.PropTypes.bool.isRequired,
         detail: React.PropTypes.bool.isRequired,
-        thisSlug: React.PropTypes.string.isRequired
+        thisSlug: React.PropTypes.string.isRequired,
+        // anotherCategories - 2017-09-14
+        anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae).isRequired,
       },
       // getDefaultPropTypes: function() {
       //   return {
@@ -246,6 +249,7 @@ export class ViewVideos extends View {
                     categories={p.categories}
                     id={`videos-label-${p.id}`}
                     index={p.index}
+                    anotherCategories={p.anotherCategories}
                   />
                 </p>
                 <h4 className="post-heading">{p.title}</h4>

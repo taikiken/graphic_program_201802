@@ -22,6 +22,7 @@ import {GaData} from '../../ga/GaData';
 
 // node
 import {CategoryLabelNode} from '../category/CategoryLabelNode';
+import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
 
 // React
 let React = self.React;
@@ -76,7 +77,9 @@ export const RankingNode = React.createClass( {
     home: React.PropTypes.bool.isRequired,
     detail: React.PropTypes.bool.isRequired,
     thisSlug: React.PropTypes.string.isRequired,
-    categorySlug: React.PropTypes.string.isRequired
+    categorySlug: React.PropTypes.string.isRequired,
+    // anotherCategories - 2017-09-14
+    anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae).isRequired,
   },
   // getDefaultPropTypes: function() {
   //   return {
