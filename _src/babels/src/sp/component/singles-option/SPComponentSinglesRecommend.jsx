@@ -10,11 +10,13 @@
  *
  */
 
-import { SingleDae } from '../../../dae/SingleDae';
+// import { SingleDae } from '../../../dae/SingleDae';
 import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
-import { Safety } from '../../../data/Safety';
-import { Empty } from '../../../app/const/Empty';
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+
+import { Safety } from '../../../data/Safety';
+
+import { Empty } from '../../../app/const/Empty';
 
 import { ArticleDae } from '../../../dae/ArticleDae';
 

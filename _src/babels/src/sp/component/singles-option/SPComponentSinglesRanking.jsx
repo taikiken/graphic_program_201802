@@ -23,55 +23,143 @@ import { EventDispatcher } from '../../../event/EventDispatcher';
 // React
 const React = self.React;
 
-
 // ---------------------------------------------------
+/**
+ * swipe 処理を行います
+ * - {@link Touching}
+ * @since 2017-09-13
+ */
 class Swipe extends EventDispatcher {
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * SWIPE_LEFT
+   * @returns {string} swipeLeft
+   */
   static get SWIPE_LEFT() {
     return 'swipeLeft';
   }
+  /**
+   * SWIPE_RIGHT
+   * @returns {string} swipeRight
+   */
   static get SWIPE_RIGHT() {
     return 'swipeRight';
   }
+  /**
+   * DRAGGING
+   * @returns {string} dragging
+   */
   static get DRAGGING() {
     return 'dragging';
   }
+  /**
+   * CANCEL
+   * @returns {string} swipeCancel
+   */
   static get CANCEL() {
     return 'swipeCancel';
   }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * swipe 処理を始めます
+   * @param {Element} element target element
+   * @param {number} limit 移動限界 px
+   */
   constructor(element, limit = 140) {
     super();
     // ---
+    /**
+     * touch event 処理インスタンス
+     * @type {Touching}
+     */
     this.touching = new Touching(element, false, 1);
+    /**
+     * bind onStart - Touching.START event handler
+     * @type {function}
+     */
     this.onStart = this.onStart.bind(this);
+    /**
+     * bind onMove - Touching.MOVE event handler
+     * @type {function}
+     */
     this.onMove = this.onMove.bind(this);
+    /**
+     * bind onEnd - Touching.END event handler
+     * @type {function}
+     */
     this.onEnd = this.onEnd.bind(this);
+    /**
+     * bind onCancel - Touching.CANCEL event handler
+     * @type {function}
+     */
     this.onCancel = this.onCancel.bind(this);
+    /**
+     * drag 移動 px - 積算
+     * @type {number}
+     */
     this.dragging = 0;
+    /**
+     * 移動限界 px
+     * @type {number}
+     */
     this.limit = limit;
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * 処理開始します
+   * - Touching.START watch
+   */
   start() {
     const touching = this.touching;
     touching.on(Touching.START, this.onStart);
     touching.init();
   }
+  /**
+   * {@link Touching} event 監視します
+   * - MOVE
+   * - END
+   * - CANCEL
+   */
   activate() {
     const touching = this.touching;
     touching.on(Touching.MOVE, this.onMove);
     touching.on(Touching.END, this.onEnd);
     touching.on(Touching.CANCEL, this.onCancel);
   }
+  /**
+   * {@link Touching} event 監視「解除」します
+   * - MOVE
+   * - END
+   * - CANCEL
+   */
   dispose() {
     const touching = this.touching;
     touching.off(Touching.MOVE, this.onMove);
     touching.off(Touching.END, this.onEnd);
     touching.off(Touching.CANCEL, this.onCancel);
   }
+  /**
+   * リセット - drag 積算 0 にします
+   */
   reset() {
     this.dragging = 0;
   }
+  /**
+   * drag 通知します - Swipe.DRAGGIN
+   * @param {number} x 移動 px 積算
+   */
   drag(x) {
     this.dispatch({ type: Swipe.DRAGGING, x });
   }
+  /**
+   * Touching.END 後の swipe 判定します
+   */
   move() {
     const x = this.dragging;
     let type = Swipe.SWIPE_LEFT;
@@ -82,11 +170,23 @@ class Swipe extends EventDispatcher {
     console.log('Swipe.move', type, x);
     this.dispatch({ type, x });
   }
+  /**
+   * Touching.START event handler
+   * - reset
+   * - dispose
+   * - activate
+   */
   onStart() {
     this.reset();
     this.dispose();
     this.activate();
   }
+  /**
+   * Touching.MOVE event handler
+   * - `events.between.x` を `dragging` へ加算します
+   * - drag 通知します
+   * @param {{between: {x: number}}} events Touching.MOVE event
+   */
   onMove(events) {
     let dragging = this.dragging;
     dragging += events.between.x;
@@ -97,6 +197,10 @@ class Swipe extends EventDispatcher {
     this.dragging = dragging;
     this.drag(this.dragging);
   }
+  /**
+   * Touching.END event handelr
+   * - 閾値チェックし `onCancel` or `move` を実行します
+   */
   onEnd() {
     this.dispose();
     const absX = Math.abs(this.dragging);
@@ -109,6 +213,10 @@ class Swipe extends EventDispatcher {
       this.move();
     }
   }
+  /**
+   * Touching.CANCEL event handler
+   * - drag 処理中止を通知します
+   */
   onCancel() {
     this.reset();
     this.dispose();
@@ -116,9 +224,22 @@ class Swipe extends EventDispatcher {
   }
 }
 // ---------------------------------------------------
-
+/**
+ * 広告を含む carousel length をカウントします
+ * @type {number}
+ */
 let containers = 0;
 
+/**
+ * carousel 広告
+ * TODO: update で多分空になるのをなんとかできるか考える
+ * @param {string} slug category slug - `big6tv` 出力しない
+ * @param {number} index slide index - 1 or 3 出力
+ * @param {number} length slide count, 1 は強制出力
+ * @returns {?XML} div.widget-post-carousel-item.widget-post-carousel-item-ad
+ * @constructor
+ * @since 2017-09-13
+ */
 const CarouselAd = ({ slug, index, length }) => {
   console.log('CarouselAd', slug, index, length);
   if (slug === 'big6tv') {
@@ -136,6 +257,22 @@ const CarouselAd = ({ slug, index, length }) => {
   return null;
 };
 
+CarouselAd.propTypes = {
+  slug: React.PropTypes.string.isRequired,
+  index: React.PropTypes.number.isRequired,
+  length: React.PropTypes.number.isRequired,
+};
+
+/**
+ * recommend - carousel article
+ * - {@link ComponentArticleThumbnail}
+ * - {@link ComponentCategoryLabels}
+ * @param {SingleDae} single 記事データ
+ * @param {number} index slide index {@link ComponentCategoryLabels} 引数に使用します
+ * @returns {XML} div.widget-post-carousel-item
+ * @constructor
+ * @since 2017-09-13
+ */
 const CarouselItem = ({ single, index }) => {
   containers += 1;
   const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
@@ -163,15 +300,28 @@ const CarouselItem = ({ single, index }) => {
   );
 };
 
+CarouselItem.propTypes = {
+  single: React.PropTypes.instanceOf(
+    React.PropTypes.instanceOf(ArticleDae)
+  ).isRequired,
+  index: React.PropTypes.number.isRequired,
+};
+
 /**
  * SP: 記事詳細一覧「よく読まれている記事」carousel
  * - dead end
  * - swipe 移動
+ * @since 2017-09-13
  */
 class SPRankingCarousel extends React.Component {
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * React.props
+   * @returns {{articles: Array.<SingleDae>, slug: string, length: number, last: number}}
+   * React.PropTypes を返します
+   */
   static get propTypes() {
     return {
       articles: React.PropTypes.arrayOf(
@@ -185,32 +335,89 @@ class SPRankingCarousel extends React.Component {
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
+  /**
+   * SP: 記事詳細一覧「よく読まれている記事」carousel 準備します
+   * @param {Object} props React.props
+   */
   constructor(props) {
     super(props);
     // ---
+    /**
+     * React.state
+     * - x: slide motion - transform value
+     * - left: swipe value
+     * - motion: left style - transition flag
+     * @type {{x: number, left: number, motion: boolean}}
+     */
     this.state = {
       x: 0,
       left: 0,
       motion: false,
     };
+    /**
+     * slide last No.
+     * @type {number}
+     */
     this.last = props.last;
+    /**
+     * slide count
+     * @type {number}
+     */
     this.length = props.length;
+    /**
+     * div.widget-post-carousel-list
+     * @type {?Element}
+     */
     this.slide = null;
+    /**
+     * div.widget-post-carousel-wrapper
+     * @type {?Element}
+     */
+    this.wrapper = null;
+    /**
+     * current slide No.
+     * @type {number}
+     */
     this.index = 0;
+    /**
+     * slide width
+     * @type {number}
+     */
     this.width = 150;
+    /**
+     * bind onPrev - Swipe.SWIPE_RIGHT event handler
+     * @type {function}
+     */
     this.onPrev = this.onPrev.bind(this);
+    /**
+     * bind onNext - Swipe.SWIPE_LEFT event handler
+     * @type {function}
+     */
     this.onNext = this.onNext.bind(this);
     // this.onStart = this.onStart.bind(this);
+    /**
+     * bind onDragging - Swipe.DRAGGING event handler
+     * @type {function}
+     */
     this.onDragging = this.onDragging.bind(this);
+    /**
+     * bind onCancel - Swipe.CANCEL event handler
+     * @type {function}
+     */
     this.onCancel = this.onCancel.bind(this);
-    console.log('SPRankingCarousel', props);
+    // console.log('SPRankingCarousel', props);
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   // ---------------------------------------------------
+  /**
+   * carousel 処理を開始します
+   * - 初期値 (0) へ移動します
+   * - carousel 関連イベントを watch します
+   * - 広告を含めた実際数へ `length`, `last` update します
+   */
   start() {
-    // TODO: swipe 設定
     this.jump(0);
     // ---
     const slide = this.slide;
@@ -228,6 +435,11 @@ class SPRankingCarousel extends React.Component {
     console.log('SPRankingCarousel.start', this.state, containers);
   }
   // ---------------------------------------------------
+  /**
+   * Swipe.SWIPE_RIGHT event handler
+   * - slide index 0: `onCancel` 実行
+   * - `prev` 実行
+   */
   onPrev() {
     console.log('SPRankingCarousel.onPrev', this.index);
     if (this.index !== 0) {
@@ -237,6 +449,11 @@ class SPRankingCarousel extends React.Component {
       this.onCancel();
     }
   }
+  /**
+   * Swipe.SWIPE_LEFT event handler
+   * - slide index `last`: `onCancel` 実行
+   * - `next` 実行
+   */
   onNext() {
     console.log('SPRankingCarousel.onNext', this.index, this.last);
     if (this.index !== this.last) {
@@ -247,14 +464,27 @@ class SPRankingCarousel extends React.Component {
     }
   }
   // ---------------------------------------------------
+  /**
+   * Swipe.DRAGGING event handler - drag 処理をします
+   * - state: left update します - motion: false
+   * @param {{x: number}} events Swipe.DRAGGING event
+   */
   onDragging(events) {
     const left = events.x;
     this.setState( { left, motion: false } );
   }
+  /**
+   * drag cancel - left: 0, motion: true します
+   */
   onCancel() {
     this.setState( { left: 0, motion: true } );
   }
   // ---------------------------------------------------
+  /**
+   * 前のスライド処理
+   * - index: 0 - `onCancel`
+   * - `jump`
+   */
   prev() {
     let index = this.index;
     index -= 1;
@@ -265,6 +495,11 @@ class SPRankingCarousel extends React.Component {
       this.onCancel();
     }
   }
+  /**
+   * 次のスライド処理
+   * - index: last - `onCancel`
+   * - `jump`
+   */
   next() {
     let index = this.index;
     index += 1;
@@ -275,6 +510,13 @@ class SPRankingCarousel extends React.Component {
       this.onCancel();
     }
   }
+  /**
+   * スライド移動
+   * - index update
+   * - `translateX` - x value 計算
+   * - setState: x, left: 0, motion: true
+   * @param {number} index 移動先
+   */
   jump(index) {
     this.index = index;
     const x = this.translateX(index);
@@ -283,9 +525,19 @@ class SPRankingCarousel extends React.Component {
   }
   // ---------------------------------------------------
   // carousel move
+  /**
+   * スライド移動 x value を計算します
+   * @param {number} index 移動先スライド番号
+   * @returns {number} x value
+   */
   translateX(index) {
     return -this.width * index;
   }
+  /**
+   * transform style を作成します
+   * @param {number} [duration=0.32] transition duration second
+   * @returns {{transform: string, transition: string}} transform style
+   */
   transform(duration = 0.32) {
     const x = `translateX(${this.state.x}px)`;
     return {
@@ -297,6 +549,12 @@ class SPRankingCarousel extends React.Component {
   }
   // ---------------------------------------------------
   // swipe - before drag
+  /**
+   * drag style を作成します
+   * @param {number} left 移動量 px
+   * @param {number} [duration=0.31] transition duration second
+   * @returns {{left: string}} drag style
+   */
   dragging(left, duration = 0.31) {
     const style = {
       left: `${left}px`,
@@ -307,12 +565,21 @@ class SPRankingCarousel extends React.Component {
     return style;
   }
   // ---------------------------------------------------
+  /**
+   * mount 後 length 1 を超えていたら `start` 実行します
+   */
   componentDidMount() {
     if (this.props.length > 1) {
       // carousel 1 を超えていたら実装を開始する
       this.start();
     }
   }
+  /**
+   * 出力します
+   * - {@link CarouselItem}
+   * - {@link CarouselAd}
+   * @returns {XML} div.widget-post-carousel-wrapper
+   */
   render() {
     containers = 0;
     const { articles, slug, length } = this.props;
@@ -322,6 +589,7 @@ class SPRankingCarousel extends React.Component {
       <div
         className="widget-post-carousel-wrapper"
         style={this.transform()}
+        ref={element => (this.wrapper = element)}
       >
         <div
           className="widget-post-carousel-list"

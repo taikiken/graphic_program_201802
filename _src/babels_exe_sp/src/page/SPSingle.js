@@ -222,16 +222,27 @@ export class SPSingle {
       normal.start();
     }
   }
+  /**
+   * single のおすすめ記事
+   * @param {string} slug category.slug
+   * @since 2017-09-13
+   */
   static optionRecommend(slug) {
-    console.log('SPSingle.optionRecommend', slug);
+    // console.log('SPSingle.optionRecommend', slug);
     const recommendElement = Dom.recommend();
     if (recommendElement) {
       const recommend = new UT.sp.view.singles.SPViewSinglesRecommend(recommendElement, slug);
       recommend.start();
     }
   }
+  /**
+   * single のよく読まれている記事 carousel
+   * @param {string} slug category.slug
+   * @param {string} label category.label
+   * @since 2017-09-13
+   */
   static optionRanking(slug, label) {
-    console.log('SPSingle.optionRecommend', slug, label);
+    // console.log('SPSingle.optionRecommend', slug, label);
     const rankingElement = Dom.ranking();
     if (rankingElement) {
       const ranking = new UT.sp.view.singles.SPViewSinglesRanking(rankingElement, slug, label);

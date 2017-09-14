@@ -21,6 +21,7 @@ import { View } from '../../../view/View';
 import SPComponentSinglesRecommend from '../../component/singles-option/SPComponentSinglesRecommend';
 
 // React
+// eslint-disable-next-line no-unused-vars
 const React = self.React;
 const ReactDOM = self.ReactDOM;
 

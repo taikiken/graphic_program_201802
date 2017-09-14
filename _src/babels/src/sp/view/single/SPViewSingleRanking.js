@@ -29,6 +29,7 @@ import {Safety} from '../../../data/Safety';
 import {SPRankingNode} from '../../node/single/SPRankingNode';
 
 // React
+// eslint-disable-next-line no-unused-vars
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
