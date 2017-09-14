@@ -57,3 +57,11 @@ const detector = () => {
 };
 
 detector();
+
+// -----------------------------
+// hotfix - app banner 緊急削除
+const remove = () => {
+  document.removeEventListener('DOMContentLoaded', remove);
+  Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+};
+document.addEventListener('DOMContentLoaded', remove, false);
