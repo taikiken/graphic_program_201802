@@ -161,6 +161,7 @@ class SPRankingCarousel extends React.Component {
       left: 0,
       motion: false,
     };
+    this.slide = null;
     this.index = 0;
     this.width = 150;
     this.onPrev = this.onPrev.bind(this);
@@ -177,6 +178,11 @@ class SPRankingCarousel extends React.Component {
     // TODO: swipe 設定
     console.log('SPRankingCarousel.start', this.state);
     this.jump(0);
+    // ---
+    const slide = this.slide;
+    if (slide) {
+
+    }
   }
   // ---------------------------------------------------
   onPrev() {
@@ -264,6 +270,7 @@ class SPRankingCarousel extends React.Component {
         <div
           className="widget-post-carousel-list"
           style={this.dragging(this.state.left)}
+          ref={element => (this.slide = element)}
         >
           {
             articles.map((single, index) => {
