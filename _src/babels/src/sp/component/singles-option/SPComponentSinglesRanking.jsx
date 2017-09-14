@@ -38,7 +38,7 @@ class Swipe extends EventDispatcher {
   static get CANCEL() {
     return 'swipeCancel';
   }
-  constructor(element) {
+  constructor(element, limit = 140) {
     super();
     // ---
     this.touching = new Touching(element, false, 1);
@@ -47,6 +47,7 @@ class Swipe extends EventDispatcher {
     this.onEnd = this.onEnd.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.dragging = 0;
+    this.limit = limit;
   }
   start() {
     const touching = this.touching;
@@ -71,17 +72,42 @@ class Swipe extends EventDispatcher {
   drag(x) {
     this.dispatch({ type: Swipe.DRAGGING, x });
   }
+  move() {
+    const x = this.dragging;
+    let type = Swipe.SWIPE_LEFT;
+    if (x > 0) {
+      // prev
+      type = Swipe.SWIPE_RIGHT;
+    }
+    console.log('Swipe.move', type, x);
+    this.dispatch({ type, x });
+  }
   onStart() {
     this.reset();
     this.dispose();
     this.activate();
   }
   onMove(events) {
-    this.dragging += events.between.x;
+    let dragging = this.dragging;
+    dragging += events.between.x;
+    if (Math.abs(dragging) > this.limit) {
+      this.onEnd();
+      return;
+    }
+    this.dragging = dragging;
     this.drag(this.dragging);
   }
   onEnd() {
     this.dispose();
+    const absX = Math.abs(this.dragging);
+    // 閾値チェック
+    if (absX < 10) {
+      // 元に戻す
+      this.onCancel();
+    } else {
+      // swipe
+      this.move();
+    }
   }
   onCancel() {
     this.reset();
@@ -91,11 +117,16 @@ class Swipe extends EventDispatcher {
 }
 // ---------------------------------------------------
 
+let containers = 0;
+
 const CarouselAd = ({ slug, index, length }) => {
+  console.log('CarouselAd', slug, index, length);
   if (slug === 'big6tv') {
     return null;
   }
-  if ((index === 2 && index === 5) || length === 1) {
+  if (index === 1 || index === 3 || length === 1) {
+    console.log('CarouselAd output *******');
+    containers += 1;
     return (
       <div className="widget-post-carousel-item widget-post-carousel-item-ad">
         ここに広告
@@ -106,6 +137,7 @@ const CarouselAd = ({ slug, index, length }) => {
 };
 
 const CarouselItem = ({ single, index }) => {
+  containers += 1;
   const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
   return (
     <div className="widget-post-carousel-item">
@@ -161,14 +193,17 @@ class SPRankingCarousel extends React.Component {
       left: 0,
       motion: false,
     };
+    this.last = props.last;
+    this.length = props.length;
     this.slide = null;
     this.index = 0;
     this.width = 150;
     this.onPrev = this.onPrev.bind(this);
     this.onNext = this.onNext.bind(this);
-    this.onStart = this.onStart.bind(this);
+    // this.onStart = this.onStart.bind(this);
     this.onDragging = this.onDragging.bind(this);
     this.onCancel = this.onCancel.bind(this);
+    console.log('SPRankingCarousel', props);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -176,56 +211,75 @@ class SPRankingCarousel extends React.Component {
   // ---------------------------------------------------
   start() {
     // TODO: swipe 設定
-    console.log('SPRankingCarousel.start', this.state);
     this.jump(0);
     // ---
     const slide = this.slide;
     if (slide) {
-
+      const swipe = new Swipe(slide);
+      swipe.on(Swipe.DRAGGING, this.onDragging);
+      swipe.on(Swipe.CANCEL, this.onCancel);
+      swipe.on(Swipe.SWIPE_LEFT, this.onNext);
+      swipe.on(Swipe.SWIPE_RIGHT, this.onPrev);
+      swipe.start();
     }
+    // ---
+    this.length = containers;
+    this.last = containers - 1;
+    console.log('SPRankingCarousel.start', this.state, containers);
   }
   // ---------------------------------------------------
   onPrev() {
-    if (this.index === 0) {
+    console.log('SPRankingCarousel.onPrev', this.index);
+    if (this.index !== 0) {
       // 先頭は prev しない
       this.prev();
+    } else {
+      this.onCancel();
     }
   }
   onNext() {
-    if (this.index !== this.props.last) {
+    console.log('SPRankingCarousel.onNext', this.index, this.last);
+    if (this.index !== this.last) {
       // last は next しない
       this.next();
+    } else {
+      this.onCancel();
     }
   }
   // ---------------------------------------------------
-  onStart() {
-
-  }
   onDragging(events) {
-
+    const left = events.x;
+    this.setState( { left, motion: false } );
   }
   onCancel() {
-
+    this.setState( { left: 0, motion: true } );
   }
   // ---------------------------------------------------
   prev() {
     let index = this.index;
     index -= 1;
+    console.log('SPRankingCarousel.prev', index);
     if (index >= 0) {
       this.jump(index);
+    } else {
+      this.onCancel();
     }
   }
   next() {
     let index = this.index;
     index += 1;
-    if (index <= this.props.last) {
+    console.log('SPRankingCarousel.next', index);
+    if (index <= this.last) {
       this.jump(index);
+    } else {
+      this.onCancel();
     }
   }
   jump(index) {
     this.index = index;
     const x = this.translateX(index);
-    this.setState({ x });
+    console.log('SPRankingCarousel.jump', index, x);
+    this.setState({ x, left: 0, motion: true });
   }
   // ---------------------------------------------------
   // carousel move
@@ -242,7 +296,7 @@ class SPRankingCarousel extends React.Component {
     };
   }
   // ---------------------------------------------------
-  // swipe
+  // swipe - before drag
   dragging(left, duration = 0.31) {
     const style = {
       left: `${left}px`,
@@ -260,8 +314,10 @@ class SPRankingCarousel extends React.Component {
     }
   }
   render() {
+    containers = 0;
     const { articles, slug, length } = this.props;
-    console.log('SPRankingCarousel.render', articles, slug);
+    console.log('SPRankingCarousel.render', this.state);
+    // return null;
     return (
       <div
         className="widget-post-carousel-wrapper"
@@ -318,7 +374,7 @@ const SPComponentSinglesRanking = ({ list, slug, label }) => {
     return null;
   }
   const articles = list.map(article => (new ArticleDae(article)));
-  // console.log('SPComponentSinglesRanking', list, slug, label, Array.isArray(list), list.length, articles);
+  console.log('SPComponentSinglesRanking', list, slug, label, Array.isArray(list), list.length, articles);
   // ---
   return (
     <div className="widget-post-carousel">

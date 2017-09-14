@@ -55,8 +55,9 @@
 
   //.widget-post-carousel-item
   &-item {
-    list-style: none;
+    //list-style: none;
     display: inline-block;
+    width: $carousel-width - (20px * 0.5);
     margin-right: (20/2)+px;
     vertical-align: top;
     letter-spacing: normal;
