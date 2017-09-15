@@ -72,7 +72,7 @@
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
 
-  <div class="ushi__message enable">
+  <div id="js-ushi__message" class="ushi__message">
     <p><img src="/assets/sp/images/ushi/message-entry.png" alt="エントリーが完了しました"></p>
   </div><!-- /.ushi__message -->
 
@@ -94,20 +94,22 @@
 
       <div class="ushi__pr_app__wrapper">
 
-        <div class="ushi__pr_app cm_disable fixed"><!-- CM公開前は .cm_disable -->
-          <div class="ushi__pr_app__outer">
-            <div class="ushi__pr_app__inner">
-              <figure class="ushi__pr_app__cm"><a href="hoge"><img src="/assets/sp/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>
-              <div class="ushi__pr_app__btn__container">
-                <h3 class="ushi__pr_app__btn__heading"><img src="/assets/sp/images/ushi/pr_app-copy.png" alt="アプリを無料ダウンロードして今すぐ応募する！"></h3>
-                <ul class="ushi__pr_app__btn__list">
-                  <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/ushi/pr_app-btn-ios.png" alt="App Store"></a></li>
-                  <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/ushi/pr_app-btn-android.png" alt="Google play"></a></li>
-                </ul><!-- /.ushi__pr_app__btn__list -->
-              </div><!-- /.ushi__pr_app__btn__container -->
-            </div><!-- /.ushi__pr_app__inner -->
-          </div><!-- /.ushi__pr_app__outer -->
-        </div><!-- /.ushi__pr_app -->
+        <div id="js-ushi__mom">
+          <div id="js-ushi__pr_app" class="ushi__pr_app cm_disable"><!-- CM公開前は .cm_disable -->
+            <div class="ushi__pr_app__outer">
+              <div class="ushi__pr_app__inner">
+                <figure class="ushi__pr_app__cm"><a href="hoge"><img src="/assets/sp/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>
+                <div class="ushi__pr_app__btn__container">
+                  <h3 class="ushi__pr_app__btn__heading"><img src="/assets/sp/images/ushi/pr_app-copy.png" alt="アプリを無料ダウンロードして今すぐ応募する！"></h3>
+                  <ul class="ushi__pr_app__btn__list">
+                    <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/ushi/pr_app-btn-ios.png" alt="App Store"></a></li>
+                    <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/ushi/pr_app-btn-android.png" alt="Google play"></a></li>
+                  </ul><!-- /.ushi__pr_app__btn__list -->
+                </div><!-- /.ushi__pr_app__btn__container -->
+              </div><!-- /.ushi__pr_app__inner -->
+            </div><!-- /.ushi__pr_app__outer -->
+          </div><!-- /.ushi__pr_app -->
+        </div>
 
       </div><!-- /.ushi__pr_app__wrapper -->
 

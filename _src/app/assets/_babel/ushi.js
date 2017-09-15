@@ -16,68 +16,68 @@
 
 // UT
 const UT = self.UT;
-const Dom = UT.app.Dom;
-const PageTop = UT.ui.PageTop;
-const ViewRanking = UT.view.sidebar.ViewRanking;
-const ViewVideos = UT.view.sidebar.ViewVideos;
-const ViewRecommend = UT.view.sidebar.ViewRecommend;
-const View = UT.view.View;
+const Offset = UT.util.Offset;
+// const Scroll = UT.util.Scroll;
+const Elements = UT.util.Elements;
 
-// init @see babels_exe Page.category
-// page top
-PageTop.start();
+let container = null;
+let elements = null;
+let mom = null;
 
-// --------------------------------
-// callback
-const didRanking = () => {
-  const ad = Dom.adRanking();
-  if (ad) {
-    ad.style.cssText = 'display: block;';
+/**
+ * scroll event handler, banner `fixed` or not
+ */
+const onScroll = () => {
+  // console.log('onScroll', container.offset(), window.innerHeight, mom.offset());
+  const offset = container.offset();
+  const bottom = window.innerHeight;
+  const momOffset = mom.offset();
+  if (!elements.dom.hasClass('fixed')) {
+    if (offset.bottom <= bottom) {
+      elements.dom.addClass('fixed');
+    }
+  } else if (momOffset.top >= offset.top) {
+    elements.dom.removeClass('fixed');
   }
 };
 
-const didVideo = () => {
-  const ad = Dom.adVideo();
-  if (ad) {
-    ad.style.cssText = 'display: block;';
-  }
+/**
+ * watch event
+ */
+const watch = () => {
+  window.addEventListener('scroll', onScroll, false);
+  window.addEventListener('resize', onScroll, false);
 };
 
-// --------------------------------
-const ranking = () => {
-  // ranking
-  const rankingElement = Dom.ranking();
-  if (!rankingElement) {
+// banner
+const target = document.getElementById('js-ushi__pr_app');
+const targetMom = document.getElementById('js-ushi__mom');
+if (target && targetMom) {
+  container = new Offset(target);
+  elements = new Elements(target);
+  mom = new Offset(targetMom);
+  watch();
+}
+
+// for only app webview
+const flushMessage = () => {
+  const message = document.getElementById('js-ushi__message');
+  if (!message) {
     return;
   }
-  const option = {};
-  option[View.DID_MOUNT] = didRanking;
-  const viewRanking = new ViewRanking(rankingElement, option, 'all');
-  viewRanking.start();
-};
-
-const video = () => {
-  // video
-  const videoElement = Dom.video();
-  if (!videoElement) {
+  const html = document.getElementsByTagName('html')[0];
+  if (!html) {
     return;
   }
-  const option = {};
-  option[View.DID_MOUNT] = didVideo;
-  const viewVideos = new ViewVideos(videoElement, option, 'all');
-  viewVideos.start();
-};
-
-const recommend = () => {
-  // recommend
-  const recommendElement = Dom.recommend();
-  if (!recommendElement) {
+  const htmlElements = new Elements(html);
+  // detect webview
+  if (!htmlElements.dom.hasClass('undotsushin-ios') && !htmlElements.dom.hasClass('undotsushin-android')) {
     return;
   }
-  const viewRecommend = new ViewRecommend(recommendElement, {}, 'all');
-  viewRecommend.start();
+  if (location.search === '?display=entry') {
+    const messageElements = new Elements(message);
+    messageElements.dom.addClass('enable');
+  }
 };
 
-ranking();
-video();
-recommend();
+flushMessage();
