@@ -30,7 +30,11 @@ $recentArray = getData::getScheduleRecent();
   </div>
         
   <div class="af-schedule">
+<<<<<<< HEAD
     <?php echo $recentArray; ?>
+=======
+<?= $recentArray?>
+>>>>>>> 0aab25b4386ad2337bdd4c8a1c80916f52cb2296
   </div>
 </section>
 
