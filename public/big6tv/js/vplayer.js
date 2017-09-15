@@ -1,7 +1,7 @@
 'use strict';
 
 var options = {
-  autoplay: true,
+  autoplay: false,
   controls: true,
   fluid: false, //[NOTE] This option is for responsive http://blog.videojs.com/Video-js-5-s-fluid-mode-and-playlist-picker/
   plugins: {
