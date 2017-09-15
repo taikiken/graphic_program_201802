@@ -128,10 +128,11 @@ export class ComponentCategoryLabelsLink extends React.Component {
         {
           /* Array<SlugDae> */
           categories.map((category, i) => {
+            // console.log('ComponentCategoryLabelsLink', category, anotherCategories);
             if (!category.label) {
               return null;
             }
-            if (category.label === 'area' && (anotherCategories && anotherCategories.area.has)) {
+            if (category.slug === 'area' && (anotherCategories && anotherCategories.area.has)) {
               return null;
             }
             const areaClassName = category.slug === 'area' ? ' category-label_area' : '';

@@ -115,7 +115,7 @@ export default class ComponentSidebarRanking extends React.Component {
               const dae = new ArticleDae(article);
               const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
               const empty = thumbnail === Empty.IMG_SMALL;
-              console.log('ComponentSidebarRanking', dae.anotherCategories);
+              // console.log('ComponentSidebarRanking', dae.anotherCategories);
               // RankingNode instance を使い render
               return (
                 <RankingNode

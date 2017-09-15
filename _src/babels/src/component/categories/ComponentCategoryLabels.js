@@ -120,7 +120,7 @@ export class ComponentCategoryLabels extends React.Component {
             if (!category.label) {
               return null;
             }
-            if (category.label === 'area' && (anotherCategories && anotherCategories.area.has)) {
+            if (category.slug === 'area' && (anotherCategories && anotherCategories.area.has)) {
               return null;
             }
             const areaClassName = category.slug === 'area' ? ' category-label_area' : '';

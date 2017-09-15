@@ -105,7 +105,7 @@ export const CategoryLabelNode = React.createClass( {
    */
   render: function() {
     const { anotherCategories, categories, id, index } = this.props;
-    console.log('CategoryLabelNode.render anotherCategories', anotherCategories, categories);
+    // console.log('CategoryLabelNode.render anotherCategories', anotherCategories, categories);
     if (!categories.length && (!anotherCategories || !anotherCategories.area.has)) {
       return null;
     }

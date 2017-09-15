@@ -75,7 +75,7 @@ export const CategoryLabelNodeLink = React.createClass( {
     // );
     // @since 2-17-09-13 - 地域名称表示のために改造する
     const { anotherCategories, categories, id, index } = this.props;
-    console.log('CategoryLabelNodeLink.render anotherCategories', anotherCategories, categories);
+    // console.log('CategoryLabelNodeLink.render anotherCategories', anotherCategories, categories);
     if (!categories.length && (!anotherCategories || !anotherCategories.area.has)) {
       return null;
     }
