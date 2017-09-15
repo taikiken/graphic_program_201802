@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <title>[pagetitle] | SPORTS BULL</title>
-  <meta name="description" content="説明文">
-  <meta name="keywords" content="キーワード, キーワード, キーワード">
+  <script src="/assets/js/app_ua_detector.bundle.js"></script>
+  <title><?php echo strip_tags($page['title']).' | '.$page['site_name']; ?></title>
+  <meta name="keywords" content="<?php echo $page['keywords']; ?>">
+  <meta name="description" content="<?php echo $page['og_description']; ?>">
   <!-- sns ogp -->
-  <meta property="og:title" content="[pagetitle] | SPORTS BULL">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://sportsbull.jp/">
-  <meta property="og:description" content="説明文">
+  <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
+  <meta property="og:type" content="<?php echo $page['og_type']; ?>">
+  <meta property="og:title" content="<?php echo $page['og_title']; ?>">
+  <meta property="og:image" content="<?php echo $page['og_image']; ?>">
+  <meta property="og:url" content="<?php echo $page['og_url']; ?>">
+  <meta property="og:description" content="<?php echo $page['og_description']; ?>">
+  <meta property="og:locale" content="ja_JP" />
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
   <!-- favicon -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/ushi/ui.css">
-  <script src="/assets/js/libs/vendor.react.js"></script>
-  <script src="/assets/js/bundle/main.bundle.js"></script>
+
+  <link rel="canonical" href="<?php echo $page['og_url']; ?>">
+  <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
+
+  <link rel="stylesheet" href="/assets/sp/css/<?php echo $page['dir_name']; ?>/ui.css?v=<?php echo $page['version']; ?>">
+  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
   <script type='text/javascript'>
     var googletag = googletag || {};
@@ -44,33 +57,38 @@
    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
    ga('create', 'UA-74679267-1', 'auto');
+   ga('require', 'GTM-KJ33JM9');
    ga('require', 'linkid');
    ga('require', 'displayfeatures');
    ga('send', 'pageview');
 
   </script>
 </head>
-<body>
-<div class="whole ushi">
+<body class="appbnr-disable">
+<div class="whole <?php echo $page['template_classname']; ?>">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
 
-  <div class="body-sec">
+  <div class="ushi__message enable">
+    <p><img src="/assets/sp/images/ushi/message-entry.png" alt="エントリーが完了しました"></p>
+  </div><!-- /.ushi__message -->
+
+  <div id="body-section" class="body-sec">
     <div class="body-sec-inner">
 
       <div class="ushi__summary">
         <div class="ushi__summary__inner">
           <figure class="ushi__summary__niku">
-            <img src="/assets/images/ushi/summary-figure_niku.png" alt="">
+            <img src="/assets/sp/images/ushi/summary-figure_niku.png" alt="">
             <figcaption class="ushi__summary__notice">※画像はイメージです</figcaption>
           </figure>
-          <p class="ushi__summary__lead"><img src="/assets/images/ushi/summary-lead.png" alt="スポーツニュースを3日連続見て最大5,000円分の高級ブランド牛を買えるクーポンがもらえる！"></p>
-          <i class="ushi__summary__bull"><img src="/assets/images/ushi/summary-figure_bull.png" alt=""></i>
-          <h1 class="ushi__summary__heading"><img src="/assets/images/ushi/summary-heading.png" alt="SPORTS BULL x Wowma! 牛キャンペーン"></h1>
-          <p class="ushi__summary__date"><img src="/assets/images/ushi/summary-date.png" alt="エントリー期間 2017年9月28日 - 10月31日まで"></p>
+          <p class="ushi__summary__lead"><img src="/assets/sp/images/ushi/summary-lead.png" alt="スポーツニュースを3日連続見て最大5,000円分の高級ブランド牛を買えるクーポンがもらえる！"></p>
+          <i class="ushi__summary__bull"><img src="/assets/sp/images/ushi/summary-figure_bull.png" alt=""></i>
+          <h1 class="ushi__summary__heading"><img src="/assets/sp/images/ushi/summary-heading.png" alt="SPORTS BULL x Wowma! 牛キャンペーン"></h1>
+          <p class="ushi__summary__date"><img src="/assets/sp/images/ushi/summary-date.png" alt="エントリー期間 2017年9月28日 - 10月31日まで"></p>
         </div><!-- /.ushi__summary__inner -->
       </div><!-- /.ushi__summary -->
 
@@ -79,13 +97,12 @@
         <div class="ushi__pr_app fixed"><!-- CM公開前は .cm_disable -->
           <div class="ushi__pr_app__outer">
             <div class="ushi__pr_app__inner">
-              <figure class="ushi__pr_app__cm"><a href="hoge"><img src="/assets/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>
+              <figure class="ushi__pr_app__cm"><a href="hoge"><img src="/assets/sp/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>
               <div class="ushi__pr_app__btn__container">
-                <figure class="ushi__pr_app__btn__qr"><img src="/assets/images/ushi/pr_app-figure-qr.png" alt=""></figure>
-                <h3 class="ushi__pr_app__btn__heading"><img src="/assets/images/ushi/pr_app-copy.png" alt="アプリを無料ダウンロードして今すぐ応募する！"></h3>
+                <h3 class="ushi__pr_app__btn__heading"><img src="/assets/sp/images/ushi/pr_app-copy.png" alt="アプリを無料ダウンロードして今すぐ応募する！"></h3>
                 <ul class="ushi__pr_app__btn__list">
-                  <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/ushi/pr_app-btn-ios.png" alt="App Store"></a></li>
-                  <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/images/ushi/pr_app-btn-android.png" alt="Google play"></a></li>
+                  <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/ushi/pr_app-btn-ios.png" alt="App Store"></a></li>
+                  <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/ushi/pr_app-btn-android.png" alt="Google play"></a></li>
                 </ul><!-- /.ushi__pr_app__btn__list -->
               </div><!-- /.ushi__pr_app__btn__container -->
             </div><!-- /.ushi__pr_app__inner -->
@@ -95,38 +112,37 @@
       </div><!-- /.ushi__pr_app__wrapper -->
 
       <div class="ushi__flow">
-        <h2 class="ushi__flow__heading"><img src="/assets/images/ushi/flow-heading.png" alt="キャンペーンの流れ"></h2>
+        <h2 class="ushi__flow__heading"><img src="/assets/sp/images/ushi/flow-heading.png" alt="キャンペーンの流れ"></h2>
         <ul class="ushi__flow__list">
-          <li class="ushi__flow__item ushi__flow__item--1"><img src="/assets/images/ushi/flow-flow1.png" alt="1. スポーツブルアプリを起動"></li><!-- /.ushi__flow__item--1 -->
-          <li class="ushi__flow__item ushi__flow__item--2"><img src="/assets/images/ushi/flow-flow2.png" alt="2. キャンペーンにエントリーをタップ"></li><!-- /.ushi__flow__item--1 -->
+          <li class="ushi__flow__item ushi__flow__item--1"><img src="/assets/sp/images/ushi/flow-flow1.png" alt="1. スポーツブルアプリを起動"></li><!-- /.ushi__flow__item--1 -->
+          <li class="ushi__flow__item ushi__flow__item--2"><img src="/assets/sp/images/ushi/flow-flow2.png" alt="2. キャンペーンにエントリーをタップ"></li><!-- /.ushi__flow__item--1 -->
           <li class="ushi__flow__item ushi__flow__item--3">
-            <p><img src="/assets/images/ushi/flow-flow3_text.png" alt="3. エントリーから3日連続アプリ起動でもれなく500円分のクーポンさらに抽選で200名様に5,000円分のクーポンがもらえる"></p>
+            <p><img src="/assets/sp/images/ushi/flow-flow3_text.png" alt="3. エントリーから3日連続アプリ起動でもれなく500円分のクーポンさらに抽選で200名様に5,000円分のクーポンがもらえる"></p>
             <ul>
-              <li><img src="/assets/images/ushi/flow-flow3_figure1.png" alt="抽選で200名様に5,000円"></li>
-              <li><img src="/assets/images/ushi/flow-flow3_figure2.png" alt="全員に500円"></li>
+              <li><img src="/assets/sp/images/ushi/flow-flow3_figure1.png" alt="抽選で200名様に5,000円"></li>
+              <li><img src="/assets/sp/images/ushi/flow-flow3_figure2.png" alt="全員に500円"></li>
             </ul>
+            <p class="ushi__flow__notice">※クーポンはWowma!サイトでのみ使用できます</p>
           </li><!-- /.ushi__flow__item--3 -->
         </ul><!-- /.ushi__flow__list -->
-        <p class="ushi__flow__notice">※クーポンはWowma!サイトでのみ使用できます</p>
       </div><!-- /.ushi__flow -->
 
       <div class="ushi__whatis">
         <div class="ushi__whatis__inner">
-          <h2 class="ushi__whatis__heading"><img src="/assets/images/ushi/whatis-heading.png" alt="「スポーツブル」って？"></h2>
-          <div class="ushi__whatis__copy"><img src="/assets/images/ushi/whatis-copy.png" alt="3分でスポーツを語れるようになる無料スポーツニュースアプリ"></div>
+          <h2 class="ushi__whatis__heading"><img src="/assets/sp/images/ushi/whatis-heading.png" alt="「スポーツブル」って？"></h2>
+          <div class="ushi__whatis__copy"><img src="/assets/sp/images/ushi/whatis-copy.png" alt="3分でスポーツを語れるようになる無料スポーツニュースアプリ"></div>
           <div class="ushi__whatis__btn__container">
-            <figure class="ushi__whatis__btn__qr"><img src="/assets/images/ushi/whatis-figure-qr.png" alt=""></figure>
-            <h3 class="ushi__whatis__btn__heading"><img src="/assets/images/ushi/whatis-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
+            <h3 class="ushi__whatis__btn__heading"><img src="/assets/sp/images/ushi/whatis-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
             <ul class="ushi__whatis__btn__list">
-              <li class="ushi__whatis__btn__item"><a class="ushi__whatis__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/ushi/whatis-btn-ios.png" alt="App Store"></a></li>
-              <li class="ushi__whatis__btn__item"><a class="ushi__whatis__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/images/ushi/whatis-btn-android.png" alt="Google play"></a></li>
+              <li class="ushi__whatis__btn__item"><a class="ushi__whatis__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/ushi/whatis-btn-ios.png" alt="App Store"></a></li>
+              <li class="ushi__whatis__btn__item"><a class="ushi__whatis__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/ushi/whatis-btn-android.png" alt="Google play"></a></li>
             </ul><!-- /.ushi__pr_app__btn__list -->
           </div><!-- /.ushi__pr_app__btn__container -->
         </div><!-- /.ushi__whatis__inner -->
       </div><!-- /.ushi__whatis -->
 
       <div class="ushi__overview">
-        <h2 class="ushi__overview__heading"><img src="/assets/images/ushi/overview-heading.png" alt="キャンペーン詳細"></h2>
+        <h2 class="ushi__overview__heading"><img src="/assets/sp/images/ushi/overview-heading.png" alt="キャンペーン詳細"></h2>
         <div class="ushi__overview__inner">
           <table class="ushi__overview__data">
             <tbody>
@@ -185,23 +201,21 @@
         </div><!-- /.ushi__overview__inner -->
       </div><!-- /.ushi__overview -->
 
-    </div><!-- /.body-sec-inner -->
+    </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 
   <footer class="ushi__footer">
     <div class="ushi__footer__btn__container">
-      <figure class="ushi__footer__btn__qr"><img src="/assets/images/ushi/footer-figure-qr.png" alt=""></figure>
-      <h3 class="ushi__footer__btn__heading"><img src="/assets/images/ushi/footer-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
+      <h3 class="ushi__footer__btn__heading"><img src="/assets/sp/images/ushi/footer-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
       <ul class="ushi__footer__btn__list">
-        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/ushi/footer-btn-ios.png" alt="App Store"></a></li>
-        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/images/ushi/footer-btn-android.png" alt="Google play"></a></li>
+        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/ushi/footer-btn-ios.png" alt="App Store"></a></li>
+        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/ushi/footer-btn-android.png" alt="Google play"></a></li>
       </ul><!-- /.ushi__pr_app__btn__list -->
     </div><!-- /.ushi__pr_app__btn__container -->
     <p class="ushi__footer__copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
   </footer><!-- /.ushi__footer -->
-</div><!-- /.whole -->
 
-<script src="/assets/js/ushi.bundle.js"></script>
+</div><!-- /.whole -->
 
 <script>
   window.fbAsyncInit = function() {
@@ -220,5 +234,12 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
+
+<script src="/assets/js/<?php echo $page['dir_name']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
 </body>
 </html>
+
+<?php
+include_once __DIR__."/../../_debug.php";
+?>

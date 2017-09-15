@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <title>[pagetitle] | SPORTS BULL</title>
-  <meta name="description" content="説明文">
-  <meta name="keywords" content="キーワード, キーワード, キーワード">
+  <title><?php echo strip_tags($page['title']).' | '.$page['site_name']; ?></title>
+  <meta name="keywords" content="<?php echo $page['keywords']; ?>">
+  <meta name="description" content="<?php echo $page['og_description']; ?>">
   <!-- sns ogp -->
-  <meta property="og:title" content="[pagetitle] | SPORTS BULL">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://sportsbull.jp/">
-  <meta property="og:description" content="説明文">
+  <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
+  <meta property="og:type" content="<?php echo $page['og_type']; ?>">
+  <meta property="og:title" content="<?php echo $page['og_title']; ?>">
+  <meta property="og:image" content="<?php echo $page['og_image']; ?>">
+  <meta property="og:url" content="<?php echo $page['og_url']; ?>">
+  <meta property="og:description" content="<?php echo $page['og_description']; ?>">
+  <meta property="og:locale" content="ja_JP" />
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
   <!-- favicon -->
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/ushi/ui.css">
-  <script src="/assets/js/libs/vendor.react.js"></script>
-  <script src="/assets/js/bundle/main.bundle.js"></script>
+  <link rel="canonical" href="<?php echo $page['og_url']; ?>">
+
+  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <link rel="stylesheet" href="/assets/css/<?php echo $page['dir_name']; ?>/ui.css?v=<?php echo $page['version']; ?>">
 
   <script type='text/javascript'>
     var googletag = googletag || {};
@@ -44,6 +48,7 @@
    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
    ga('create', 'UA-74679267-1', 'auto');
+   ga('require', 'GTM-KJ33JM9');
    ga('require', 'linkid');
    ga('require', 'displayfeatures');
    ga('send', 'pageview');
@@ -51,7 +56,7 @@
   </script>
 </head>
 <body>
-<div class="whole ushi">
+<div id="whole" class="whole <?php echo $page['template_classname']; ?>">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
@@ -185,7 +190,7 @@
         </div><!-- /.ushi__overview__inner -->
       </div><!-- /.ushi__overview -->
 
-    </div><!-- /.body-sec-inner -->
+    </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 
   <footer class="ushi__footer">
@@ -201,7 +206,7 @@
   </footer><!-- /.ushi__footer -->
 </div><!-- /.whole -->
 
-<script src="/assets/js/ushi.bundle.js"></script>
+<script src="/assets/js/<?php echo $page['dir_name']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <script>
   window.fbAsyncInit = function() {
@@ -220,5 +225,7 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
-</body>
-</html>
+
+<?php
+include_once __DIR__."/../../_debug.php";
+?>
