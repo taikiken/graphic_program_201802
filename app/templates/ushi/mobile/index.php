@@ -94,7 +94,7 @@
 
       <div class="ushi__pr_app__wrapper">
 
-        <div class="ushi__pr_app fixed"><!-- CM公開前は .cm_disable -->
+        <div class="ushi__pr_app cm_disable fixed"><!-- CM公開前は .cm_disable -->
           <div class="ushi__pr_app__outer">
             <div class="ushi__pr_app__inner">
               <figure class="ushi__pr_app__cm"><a href="hoge"><img src="/assets/sp/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>
@@ -133,10 +133,7 @@
           <div class="ushi__whatis__copy"><img src="/assets/sp/images/ushi/whatis-copy.png" alt="3分でスポーツを語れるようになる無料スポーツニュースアプリ"></div>
           <div class="ushi__whatis__btn__container">
             <h3 class="ushi__whatis__btn__heading"><img src="/assets/sp/images/ushi/whatis-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
-            <ul class="ushi__whatis__btn__list">
-              <li class="ushi__whatis__btn__item"><a class="ushi__whatis__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/ushi/whatis-btn-ios.png" alt="App Store"></a></li>
-              <li class="ushi__whatis__btn__item"><a class="ushi__whatis__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/ushi/whatis-btn-android.png" alt="Google play"></a></li>
-            </ul><!-- /.ushi__pr_app__btn__list -->
+            <div class="ushi__whatis__btn"><a href="https://app.adjust.com/7q5y6z" target="_blank"><img src="/assets/sp/images/ushi/whatis-btn.png" alt="ダウンロードはこちら"></a></div>
           </div><!-- /.ushi__pr_app__btn__container -->
         </div><!-- /.ushi__whatis__inner -->
       </div><!-- /.ushi__whatis -->

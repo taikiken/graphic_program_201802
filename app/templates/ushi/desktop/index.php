@@ -81,7 +81,7 @@
 
       <div class="ushi__pr_app__wrapper">
 
-        <div class="ushi__pr_app fixed"><!-- CM公開前は .cm_disable -->
+        <div class="ushi__pr_app cm_disable fixed"><!-- CM公開前は .cm_disable -->
           <div class="ushi__pr_app__outer">
             <div class="ushi__pr_app__inner">
               <figure class="ushi__pr_app__cm"><a href="hoge"><img src="/assets/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>

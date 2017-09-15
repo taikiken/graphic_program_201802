@@ -397,42 +397,76 @@
     //.ushi__whatis__btn__container
     &__container {
       position: relative;
-      margin: (40/2)+px perCalc(40, 750) 0;
-      overflow: hidden;
+      width: (524/2)+px;
+      margin: (50/2)+px auto 0;
+      padding-left: (124/2)+px;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        display: inline-block;
+        width: (110/2)+px;
+        height: (110/2)+px;
+        margin-right: (14/2)+px;
+        background: url(/assets/sp/images/ushi/whatis-icon-app.png) 0 0 no-repeat;
+        background-size: (110/2)+px;
+      }
     }
 
     //.ushi__whatis__btn__heading
     &__heading {
       width: (392/2)+px;
       line-height: 1;
-      margin-left: (124/2)+px;
     }
 
-    //.ushi__whatis__btn__list
-    &__list {
-      margin-top: -(32/2)+px;
-      display: table;
-
-      &:before {
-        content: "";
-        display: inline-block;
-        width: (110/2)+px;
-        height: (110/2)+px;
-        margin-right: (12/2)+px;
-        background: url(/assets/sp/images/ushi/whatis-icon-app.png) 0 0 no-repeat;
-        background-size: (110/2)+px;
-      }
+    //.ushi__whatis__btn
+    & {
+      width: (400/2)+px;
+      margin-top: (14/2)+px;
     }
 
-    //.ushi__whatis__btn__item
-    &__item {
-      display: table-cell;
-      vertical-align: bottom;
+    // ボタン2つのパターン
+    // //.ushi__whatis__btn__container
+    // &__container {
+    //   position: relative;
+    //   margin: (40/2)+px perCalc(40, 750) 0;
+    //   overflow: hidden;
+    // }
 
-      &:first-child {
-        padding-right: (16/2)+px;
-      }
-    }
+    // //.ushi__whatis__btn__heading
+    // &__heading {
+    //   width: (392/2)+px;
+    //   line-height: 1;
+    //   margin-left: (124/2)+px;
+    // }
+
+    // //.ushi__whatis__btn__list
+    // &__list {
+    //   margin-top: -(32/2)+px;
+    //   display: table;
+
+    //   &:before {
+    //     content: "";
+    //     display: inline-block;
+    //     width: (110/2)+px;
+    //     height: (110/2)+px;
+    //     margin-right: (12/2)+px;
+    //     background: url(/assets/sp/images/ushi/whatis-icon-app.png) 0 0 no-repeat;
+    //     background-size: (110/2)+px;
+    //   }
+    // }
+
+    // //.ushi__whatis__btn__item
+    // &__item {
+    //   display: table-cell;
+    //   vertical-align: bottom;
+
+    //   &:first-child {
+    //     padding-right: (16/2)+px;
+    //   }
+    // }
   } //.ushi__whatis__btn
 } //.ushi__whatis
 
