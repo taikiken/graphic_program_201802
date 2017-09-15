@@ -30,7 +30,7 @@ $recentArray = getData::getScheduleRecent();
   </div>
         
   <div class="af-schedule">
-    <?php echo $recentArray; ?>
+<?php echo $recentArray; ?>
   </div>
 </section>
 
