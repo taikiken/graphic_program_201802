@@ -14,9 +14,9 @@
 import {View} from '../View';
 
 // app
-import {Empty} from '../../app/const/Empty';
+// import {Empty} from '../../app/const/Empty';
 import {Message} from '../../app/const/Message';
-import {Dom} from '../../app/Dom';
+// import {Dom} from '../../app/Dom';
 
 // action
 import {Widget} from '../../action/sidebar/Widget';
@@ -26,25 +26,68 @@ import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
 // dae
-import {ArticleDae} from '../../dae/ArticleDae';
+// import {ArticleDae} from '../../dae/ArticleDae';
 
 // node
-import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
-import {RecommendTitleNode} from '../../node/sidebar/RecommendTitleNode';
+// import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
+// import {RecommendTitleNode} from '../../node/sidebar/RecommendTitleNode';
 
 // Ga
-import {Ga} from '../../ga/Ga';
-import {GaData} from '../../ga/GaData';
-import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
+// import {Ga} from '../../ga/Ga';
+// import {GaData} from '../../ga/GaData';
+// import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
+
+// component
+import ComponentSidebarVideo from '../../component/sidebar/ComponentSidebarVideo';
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
+const ReactDOM = self.ReactDOM;
 
 /**
  * sidebar video
  */
 export class ViewVideos extends View {
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * category slug
+   * @return {string|*} 捜査 slug を返します
+   */
+  get slug():string {
+    return this._slug;
+  }
+  /**
+   * home(index) か否かを表す真偽値
+   * @return {boolean} home(index) か否かを表す真偽値を返します
+   */
+  get home():Boolean {
+    return this._home;
+  }
+  /**
+   * @param {Boolean} bool home(index) か否かを表す真偽値
+   */
+  set home( bool:Boolean ):void {
+    this._home = bool;
+  }
+  /**
+   * 記事詳細か否かを表す真偽値
+   * @return {boolean} 記事詳細か否かを表す真偽値を返します
+   */
+  get detail():Boolean {
+    return this._detail;
+  }
+  /**
+   * @param {Boolean} bool 記事詳細か否かを表す真偽値
+   */
+  set detail( bool:Boolean ):void {
+    this._detail = bool;
+  }
+  // ---------------------------------------------------
+  // CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * sidebar video 5件 を表示します
    * @param {Element} element root element
@@ -89,42 +132,11 @@ export class ViewVideos extends View {
      * @private
      */
     this._detail = false;
-  }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * category slug
-   * @return {string|*} 捜査 slug を返します
-   */
-  get slug():string {
-    return this._slug;
-  }
-  /**
-   * home(index) か否かを表す真偽値
-   * @return {boolean} home(index) か否かを表す真偽値を返します
-   */
-  get home():Boolean {
-    return this._home;
-  }
-  /**
-   * @param {Boolean} bool home(index) か否かを表す真偽値
-   */
-  set home( bool:Boolean ):void {
-    this._home = bool;
-  }
-  /**
-   * 記事詳細か否かを表す真偽値
-   * @return {boolean} 記事詳細か否かを表す真偽値を返します
-   */
-  get detail():Boolean {
-    return this._detail;
-  }
-  /**
-   * @param {Boolean} bool 記事詳細か否かを表す真偽値
-   */
-  set detail( bool:Boolean ):void {
-    this._detail = bool;
+    /**
+     * componentDidMount callback
+     * @type {function}
+     */
+    this.didMount = this.didMount.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -201,171 +213,188 @@ export class ViewVideos extends View {
 
     this.executeSafely( View.BEFORE_RENDER, articles, this.slug );
 
-    let element = this.element;
-    let categorySlug = this.slug;
-    let _this = this;
-
-    // tag block
-    let VideosDom = React.createClass( {
-      propTypes: {
-        index: React.PropTypes.number.isRequired,
-        id: React.PropTypes.string.isRequired,
-        slug: React.PropTypes.string.isRequired,
-        // category: React.PropTypes.string.isRequired,
-        // category2: React.PropTypes.string,
-        categories: React.PropTypes.array.isRequired,
-        url: React.PropTypes.string.isRequired,
-        date: React.PropTypes.string.isRequired,
-        title: React.PropTypes.string.isRequired,
-        thumbnail: React.PropTypes.string.isRequired,
-        home: React.PropTypes.bool.isRequired,
-        detail: React.PropTypes.bool.isRequired,
-        thisSlug: React.PropTypes.string.isRequired,
-        // anotherCategories - 2017-09-14
-        anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae).isRequired,
-      },
-      // getDefaultPropTypes: function() {
-      //   return {
-      //     category2: ''
-      //   };
-      // },
-      render: function() {
-        let p = this.props;
-
-        // let category = ( label ):string => {
-        //   return !label ? '' : <span className="category-label">{label}</span>;
-        // };
-
-        return (
-          <li className={'board-item videos-' + p.index + ' videos-' + (p.slug || categorySlug)}>
-            <a href={p.url} className="post" onClick={this.gaSend}>
-              <figure className="post-thumb post-thumb-video">
-                <img className="video-thumbnail" src={p.thumbnail} alt={p.title}/>
-                <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SMALL} alt="" />
-              </figure>
-              <div className="post-data">
-                <p className={'post-category post-category-' + p.slug}>
-                  <CategoryLabelNode
-                    categories={p.categories}
-                    id={`videos-label-${p.id}`}
-                    index={p.index}
-                    anotherCategories={p.anotherCategories}
-                  />
-                </p>
-                <h4 className="post-heading">{p.title}</h4>
-                <p className="post-date">{p.date}</p>
-              </div>
-            </a>
-          </li>
-        );
-      },
-      // gaSend: function(e) {
-      //   e.preventDefault();
-      gaSend: function() {
-        if (this.props.home) {
-          this.gaHome();
-        } else if (this.props.detail) {
-          this.gaDetail();
-        } else {
-          this.gaCategory();
-        }
-      },
-      gaHome: function() {
-        // ----------------------------------------------
-        // GA 計測タグ
-        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'home_movie', 'click', this.props.url, parseFloat(this.props.id)) );
-        // ----------------------------------------------
-      },
-      gaCategory: function() {
-        // ----------------------------------------------
-        // GA 計測タグ
-        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', `${this.props.thisSlug}_movie`, 'click', this.props.url, parseFloat(this.props.id)) );
-        // ----------------------------------------------
-      },
-      gaDetail: function() {
-        // ----------------------------------------------
-        // GA 計測タグ
-        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'detail_movie', 'click', this.props.url, parseFloat(this.props.id)) );
-        //
-      }
-    } );
-
-    // React Class
-    let ArticleDom = React.createClass( {
-      propTypes: {
-        list: React.PropTypes.array.isRequired,
-        home: React.PropTypes.bool.isRequired,
-        detail: React.PropTypes.bool.isRequired,
-        slug: React.PropTypes.string.isRequired
-      },
-      render: function() {
-
-        let list = this.props.list;
-        let home = this.props.home;
-        let detail = this.props.detail;
-        let thisSlug = this.props.slug;
-
-        return (
-
-          <div className="board-small widget-recommend">
-            {/* title */}
-            <RecommendTitleNode
-              slug={categorySlug}
-              label={/* list[0].categories[0].label @since 2016-08-09 */Dom.categoryLabel()}
-              title={Message.VIDEOS_TITLE}
-            />
-            <ul className="board-list">
-            {
-              list.map( function( article, i ) {
-
-                let dae = new ArticleDae( article );
-                let thumbnail = Safety.image( dae.media.images.medium, Empty.VIDEO_THUMBNAIL );
-                // RankingNode instance を使い render
-                return (
-                    <VideosDom
-                      key={`ranking-${dae.id}`}
-                      index={i}
-                      id={String(dae.id)}
-                      slug={dae.categories.slug}
-                      categories={dae.categories.all}
-                      url={dae.url}
-                      date={dae.displayDate}
-                      title={dae.title}
-                      thumbnail={thumbnail}
-                      home={home}
-                      detail={detail}
-                      thisSlug={thisSlug}
-                      anotherCategories={dae.anotherCategories}
-                    />
-                );
-
-              } )// map
-            }
-            </ul>
-          </div>
-
-        );
-
-      },
-      componentDidMount: function() {
-
-        // after mount
-        _this.executeSafely( View.DID_MOUNT );
-
-      }
-    } );
-
+    // let element = this.element;
+    // let categorySlug = this.slug;
+    // let _this = this;
+    //
+    // // tag block
+    // let VideosDom = React.createClass( {
+    //   propTypes: {
+    //     index: React.PropTypes.number.isRequired,
+    //     id: React.PropTypes.string.isRequired,
+    //     slug: React.PropTypes.string.isRequired,
+    //     // category: React.PropTypes.string.isRequired,
+    //     // category2: React.PropTypes.string,
+    //     categories: React.PropTypes.array.isRequired,
+    //     url: React.PropTypes.string.isRequired,
+    //     date: React.PropTypes.string.isRequired,
+    //     title: React.PropTypes.string.isRequired,
+    //     thumbnail: React.PropTypes.string.isRequired,
+    //     home: React.PropTypes.bool.isRequired,
+    //     detail: React.PropTypes.bool.isRequired,
+    //     thisSlug: React.PropTypes.string.isRequired,
+    //     // anotherCategories - 2017-09-14
+    //     anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae).isRequired,
+    //   },
+    //   // getDefaultPropTypes: function() {
+    //   //   return {
+    //   //     category2: ''
+    //   //   };
+    //   // },
+    //   render: function() {
+    //     let p = this.props;
+    //
+    //     // let category = ( label ):string => {
+    //     //   return !label ? '' : <span className="category-label">{label}</span>;
+    //     // };
+    //
+    //     return (
+    //       <li className={'board-item videos-' + p.index + ' videos-' + (p.slug || categorySlug)}>
+    //         <a href={p.url} className="post" onClick={this.gaSend}>
+    //           <figure className="post-thumb post-thumb-video">
+    //             <img className="video-thumbnail" src={p.thumbnail} alt={p.title}/>
+    //             <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SMALL} alt="" />
+    //           </figure>
+    //           <div className="post-data">
+    //             <p className={'post-category post-category-' + p.slug}>
+    //               <CategoryLabelNode
+    //                 categories={p.categories}
+    //                 id={`videos-label-${p.id}`}
+    //                 index={p.index}
+    //                 anotherCategories={p.anotherCategories}
+    //               />
+    //             </p>
+    //             <h4 className="post-heading">{p.title}</h4>
+    //             <p className="post-date">{p.date}</p>
+    //           </div>
+    //         </a>
+    //       </li>
+    //     );
+    //   },
+    //   // gaSend: function(e) {
+    //   //   e.preventDefault();
+    //   gaSend: function() {
+    //     if (this.props.home) {
+    //       this.gaHome();
+    //     } else if (this.props.detail) {
+    //       this.gaDetail();
+    //     } else {
+    //       this.gaCategory();
+    //     }
+    //   },
+    //   gaHome: function() {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'home_movie', 'click', this.props.url, parseFloat(this.props.id)) );
+    //     // ----------------------------------------------
+    //   },
+    //   gaCategory: function() {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', `${this.props.thisSlug}_movie`, 'click', this.props.url, parseFloat(this.props.id)) );
+    //     // ----------------------------------------------
+    //   },
+    //   gaDetail: function() {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'detail_movie', 'click', this.props.url, parseFloat(this.props.id)) );
+    //     //
+    //   }
+    // } );
+    //
+    // // React Class
+    // let ArticleDom = React.createClass( {
+    //   propTypes: {
+    //     list: React.PropTypes.array.isRequired,
+    //     home: React.PropTypes.bool.isRequired,
+    //     detail: React.PropTypes.bool.isRequired,
+    //     slug: React.PropTypes.string.isRequired
+    //   },
+    //   render: function() {
+    //
+    //     let list = this.props.list;
+    //     let home = this.props.home;
+    //     let detail = this.props.detail;
+    //     let thisSlug = this.props.slug;
+    //
+    //     return (
+    //
+    //       <div className="board-small widget-recommend">
+    //         {/* title */}
+    //         <RecommendTitleNode
+    //           slug={categorySlug}
+    //           label={/* list[0].categories[0].label @since 2016-08-09 */Dom.categoryLabel()}
+    //           title={Message.VIDEOS_TITLE}
+    //         />
+    //         <ul className="board-list">
+    //         {
+    //           list.map( function( article, i ) {
+    //
+    //             let dae = new ArticleDae( article );
+    //             let thumbnail = Safety.image( dae.media.images.medium, Empty.VIDEO_THUMBNAIL );
+    //             // RankingNode instance を使い render
+    //             return (
+    //                 <VideosDom
+    //                   key={`ranking-${dae.id}`}
+    //                   index={i}
+    //                   id={String(dae.id)}
+    //                   slug={dae.categories.slug}
+    //                   categories={dae.categories.all}
+    //                   url={dae.url}
+    //                   date={dae.displayDate}
+    //                   title={dae.title}
+    //                   thumbnail={thumbnail}
+    //                   home={home}
+    //                   detail={detail}
+    //                   thisSlug={thisSlug}
+    //                   anotherCategories={dae.anotherCategories}
+    //                 />
+    //             );
+    //
+    //           } )// map
+    //         }
+    //         </ul>
+    //       </div>
+    //
+    //     );
+    //
+    //   },
+    //   componentDidMount: function() {
+    //
+    //     // after mount
+    //     _this.executeSafely( View.DID_MOUNT );
+    //
+    //   }
+    // } );
+    //
+    // // dom 生成
+    // ReactDOM.render(
+    //   React.createElement( ArticleDom, {
+    //     list: articles,
+    //     home: this.home,
+    //     detail: this.detail,
+    //     slug: this.slug } ),
+    //   element
+    // );
     // dom 生成
+    // @since 2017-09-14 - component へ移行
     ReactDOM.render(
-      React.createElement( ArticleDom, {
-        list: articles,
-        home: this.home,
-        detail: this.detail,
-        slug: this.slug } ),
-      element
+      <ComponentSidebarVideo
+        list={articles}
+        home={this.home}
+        detail={this.detail}
+        slug={this.slug}
+        categorySlug={this.slug}
+        did={this.didMount}
+      />,
+      this.element,
     );
-
-
   }// render
+  /**
+   * ComponentSidebarRanking.componentDidMount callback
+   */
+  didMount() {
+    this.executeSafely(View.DID_MOUNT);
+  }
 }
 

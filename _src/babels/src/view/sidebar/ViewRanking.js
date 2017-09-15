@@ -45,52 +45,6 @@ let ReactDOM = self.ReactDOM;
  * sidebar ranking
  */
 export class ViewRanking extends View {
-  /**
-   * sidebar ranking 5件 を表示します
-   * @param {Element} element root element
-   * @param {Object} [option={}] optional event handler
-   * @param {string} [slug=all] category slug です
-   * @param {Number|null} [length=null] 読み込む数
-   */
-  constructor( element:Element, option:Object = {}, slug:string = 'all', length:Number = null ) {
-
-    option = Safety.object( option );
-    slug = Safety.string( slug, 'all' );
-
-    super( element, option );
-    /**
-     * Action instance を設定します
-     * @override
-     * @type {Ranking}
-     */
-    this.action = Widget.ranking( slug, this.done.bind( this ), this.fail.bind( this ), length );
-    /**
-     * category slug
-     * @type {string}
-     * @private
-     * @default all
-     */
-    this._slug = slug;
-    /**
-     * response.request object を保持する
-     * @type {null|Object}
-     * @private
-     */
-    this._request = null;
-    /**
-     * home(index) か否かを表す真偽値, default false
-     * @type {boolean}
-     * @private
-     */
-    this._home = false;
-    /**
-     * 記事詳細 か否かを表す真偽値, default false
-     * @type {boolean}
-     * @private
-     */
-    this._detail = false;
-    this.didMount = this.didMount.bind(this);
-  }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
@@ -144,6 +98,59 @@ export class ViewRanking extends View {
    */
   set request(request:Object):void {
     this._request = request;
+  }
+  // ---------------------------------------------------
+  // CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * sidebar ranking 5件 を表示します
+   * @param {Element} element root element
+   * @param {Object} [option={}] optional event handler
+   * @param {string} [slug=all] category slug です
+   * @param {Number|null} [length=null] 読み込む数
+   */
+  constructor( element:Element, option:Object = {}, slug:string = 'all', length:Number = null ) {
+
+    option = Safety.object( option );
+    slug = Safety.string( slug, 'all' );
+
+    super( element, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Ranking}
+     */
+    this.action = Widget.ranking( slug, this.done.bind( this ), this.fail.bind( this ), length );
+    /**
+     * category slug
+     * @type {string}
+     * @private
+     * @default all
+     */
+    this._slug = slug;
+    /**
+     * response.request object を保持する
+     * @type {null|Object}
+     * @private
+     */
+    this._request = null;
+    /**
+     * home(index) か否かを表す真偽値, default false
+     * @type {boolean}
+     * @private
+     */
+    this._home = false;
+    /**
+     * 記事詳細 か否かを表す真偽値, default false
+     * @type {boolean}
+     * @private
+     */
+    this._detail = false;
+    /**
+     * componentDidMount callback
+     * @type {function}
+     */
+    this.didMount = this.didMount.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -336,6 +343,9 @@ export class ViewRanking extends View {
       this.element,
     );
   }// render
+  /**
+   * ComponentSidebarRanking.componentDidMount callback
+   */
   didMount() {
     this.executeSafely(View.DID_MOUNT);
   }
