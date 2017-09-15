@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script>
+  if (location.protocol == 'http:') {
+    location.replace(location.href.replace(/http:/, 'https:'));
+  }
+  </script>
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <?php
   if (0) :
