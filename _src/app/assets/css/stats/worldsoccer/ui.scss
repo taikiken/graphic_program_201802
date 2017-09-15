@@ -1,0 +1,190 @@
+.body-sec-inner {
+    background: none;
+}
+
+.stats__header.stats__header--worldsoccer img {
+	width: 100%;
+}
+
+.stats__nav {
+    margin: 30px 0 15px;
+}
+
+.stats__nav--worldsoccer .stats__nav__list {
+    display: table;
+    width: 100%;
+    border: 2px solid #cc141d;
+    border-radius: 4px;
+    letter-spacing: normal;
+}
+
+.stats__nav [class^=stats__nav__item] {
+    display: inline-block;
+    letter-spacing: normal;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.stats__nav .active a {
+	background: #cc141d;
+	color: #fff;
+}
+
+.stats__nav--worldsoccer [class^=stats__nav__item] {
+    display: table-cell;
+    width: 20%;
+    vertical-align: middle;
+}
+
+.stats__nav a {
+    display: block;
+    line-height: 1;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-right: 1px solid #efefef;
+    color: #cc141d;
+    background-color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+}
+
+.stats__local__nav {
+    margin: 10px 0 30px;
+}
+
+.stats__nav--worldsoccer li:last-child a {
+    border-right: none;
+}
+
+.stats__local__nav--worldsoccer .stats__local__nav__list {
+    display: table;
+    width: 100%;
+    border: 2px solid #0e357f;
+    border-radius: 4px;
+    letter-spacing: normal;
+}
+
+.stats__local__nav [class^=stats__local__nav__item] {
+    display: inline-block;
+    /*border-top: 2px solid #cc141d;
+    border-bottom: 2px solid #cc141d;*/
+    letter-spacing: normal;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.stats__local__nav--worldsoccer [class^=stats__local__nav__item] {
+    display: table-cell;
+    width: 25%;
+    vertical-align: middle;
+}
+
+.stats__local__nav--worldsoccer li:last-child a {
+	border-right: none;
+}
+
+.stats__local__nav a {
+    display: block;
+    line-height: 1;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-right: 1px solid #efefef;
+    background-color: #fff;
+    color: #0e357f;
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+}
+
+.stats__local__nav .active a {
+	background: #0e357f;
+	color: #fff;
+}
+
+.header-title {
+	background: #0e357f;
+}
+
+/* ----- PCだけ -----*/
+@media screen and (min-width: 0px) and (min-width: 769px) {
+	
+	.stats__header.stats__header--worldsoccer {
+		padding-top: 30px;
+	}
+
+	.stats__banner {
+		margin-top: 30px;
+	}
+
+    .stats__nav a:hover {
+        background: #cc141d;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .stats__local__nav a:hover {
+        background: #0e357f;
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+/* ----- SPだけ -----*/
+@media screen and (min-width: 0px) and (max-width: 768px) {
+
+	.stats__banner {
+		text-align: center;
+	}
+	
+	.stats__banner>div {
+    	padding: 10px 2.6666666667%;
+    	background-color: #ddd;
+	}
+
+	.stats__banner div {
+    	width: 100%!important;
+    	height: auto!important;
+	}
+
+	.stats__nav {
+    	margin: 10px;
+	}
+
+	.stats__nav [class^=stats__local__nav__item] {
+    	display: inline-block;
+    	letter-spacing: normal;
+    	box-sizing: border-box;
+    	vertical-align: top;
+	}
+
+	.stats__nav--worldsoccer [class^=stats__nav__item] {
+    	display: inline-block;
+    	width: 33.3333%;
+    	vertical-align: middle;
+	}
+
+	.stats__nav__item_1 a,.stats__nav__item_2 a,.stats__nav__item_3 a {
+		border-bottom: 1px solid #efefef;
+	}
+
+	.stats__nav__item_3 a,.stats__nav__item_6 a {
+		border-right: none;
+	}
+
+	.stats__nav a {
+    	font-size: 10px;
+	}
+
+	.stats__local__nav {
+    	margin: 15px 10px;
+	}
+
+	.stats__local__banner {
+    	text-align: center;
+	}
+
+    .stats-worldsoccer-widget {
+        padding: 0 10px;
+    }
+}

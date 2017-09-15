@@ -27,53 +27,53 @@ var View = UT.view.View;
 
 // --------------------------------
 // callback
-var didRanking = function didRanking() {
-  var ad = Dom.adRanking();
+const didRanking = () => {
+  const ad = Dom.adRanking();
   if (ad) {
     ad.style.cssText = 'display: block;';
   }
 };
 
-var didVideo = function didVideo() {
-  var ad = Dom.adVideo();
+const didVideo = () => {
+  const ad = Dom.adVideo();
   if (ad) {
     ad.style.cssText = 'display: block;';
   }
 };
 
 // --------------------------------
-var ranking = function ranking() {
+const ranking = () => {
   // ranking
-  var rankingElement = Dom.ranking();
+  const rankingElement = Dom.ranking();
   if (!rankingElement) {
     return;
   }
-  var option = {};
+  const option = {};
   option[View.DID_MOUNT] = didRanking;
-  var viewRanking = new ViewRanking(rankingElement, option, 'baseball');
+  const viewRanking = new ViewRanking(rankingElement, option, 'baseball');
   viewRanking.start();
 };
 
-var video = function video() {
+const video = () => {
   // video
-  var videoElement = Dom.video();
+  const videoElement = Dom.video();
   if (!videoElement) {
     return;
   }
-  var option = {};
+  const option = {};
   option[View.DID_MOUNT] = didVideo;
   option[View.DID_MOUNT] = didVideo;
-  var viewVideos = new ViewVideos(videoElement, option, 'baseball');
+  const viewVideos = new ViewVideos(videoElement, option, 'baseball');
   viewVideos.start();
 };
 
-var recommend = function recommend() {
+const recommend = () => {
   // recommend
-  var recommendElement = Dom.recommend();
+  const recommendElement = Dom.recommend();
   if (!recommendElement) {
     return;
   }
-  var viewRecommend = new ViewRecommend(recommendElement, {}, 'baseball');
+  const viewRecommend = new ViewRecommend(recommendElement, {}, 'baseball');
   viewRecommend.start();
 };
 

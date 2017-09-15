@@ -215,12 +215,20 @@
                 googletag.enableServices();
               });
             </script>
+          <?php
+          if (0) :
+          // テキストリンク削除 - 2317-09-14
+          // アプリダウンロード導線を一時非表示にする #2452 - https://github.com/undotsushin/undotsushin/issues/2452
+          ?>
             <div id='div-gpt-ad-1496897689545-0' style='height:50px; width:300px; text-align: center; margin: 20px auto;'>
             <script>
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496897689545-0'); });
             </script>
             </div>
             <!-- // /531683568/mobile/mobile_detail_body_bottom -->
+          <?php
+          endif;
+          ?>
 
           <?php endif; ?>
 

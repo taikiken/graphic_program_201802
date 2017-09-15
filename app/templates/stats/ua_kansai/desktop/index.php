@@ -10,7 +10,7 @@ $recentArray = getData::getScheduleRecent();
 <!-- section_highlight_movie -->
 <section class="section_interhigh_highlight">
   <div class="ttl-wrapper">
-    <h2 class="ttl highlight"><i></i>動画特集</h2>
+    <h2 class="ttl highlight"><i></i>全試合ダイジェスト動画</h2>
   </div>
   
   <div class="article_list">
@@ -30,7 +30,7 @@ $recentArray = getData::getScheduleRecent();
   </div>
         
   <div class="af-schedule">
-<?= $recentArray?>
+<?php echo $recentArray; ?>
   </div>
 </section>
 

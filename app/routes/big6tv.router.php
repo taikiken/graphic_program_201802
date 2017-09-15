@@ -15,7 +15,6 @@ $app->group('/{slug:big6tv}', function () use ($app) {
   // ==============================
   $this->get('/2017a/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
 
-    // パスからjson決めるソン
     $url = explode('/', $_SERVER['REQUEST_URI']);
     $league = $url[1];
     $season = $url[2];
@@ -29,10 +28,11 @@ $app->group('/{slug:big6tv}', function () use ($app) {
     $s3key = implode('/', $arr);
 
     $S3Module = new S3Module;
-    global $bucket;
     $json = $S3Module->getUrl($s3key);
 
     // jsonからタイトルつくる
+    // フロントはいつでも本番のバケットのjson取得してる
+    // ルーティングではUT_ENVみてバケット分けている
     $team_names = [];
     $visitor = '';
     $home = '';
