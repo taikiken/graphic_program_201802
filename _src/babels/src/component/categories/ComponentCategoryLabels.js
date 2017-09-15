@@ -71,6 +71,11 @@ export class ComponentCategoryLabels extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * 地域名称をカテゴリラベルの代わりに出力する
+   * @returns {?XML} span.category-label
+   * @since 2017-09-15
+   */
   renderRegion() {
     const { anotherCategories, id, index } = this.props;
     if (!anotherCategories) {

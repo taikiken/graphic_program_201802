@@ -123,6 +123,7 @@ export class ArticleDae {
     /**
      * `another_categories` value - 地域の詳細
      * @type {AnotherCategoriesDae}
+     * @since 2017-09-14
      */
     this.anotherCategories = new AnotherCategoriesDae(article.another_categories);
   }

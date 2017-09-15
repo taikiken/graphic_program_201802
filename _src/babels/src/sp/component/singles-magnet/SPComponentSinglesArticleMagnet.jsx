@@ -464,6 +464,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
               index={this.props.index}
               id={`single-label-${single.id}`}
               categories={single.categories.all}
+              anotherCategories={single.anotherCategories}
             />
 
             <p className="post-date">{single.displayDate}</p>

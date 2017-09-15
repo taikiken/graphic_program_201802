@@ -85,6 +85,7 @@ export class ComponentSingleHeader extends React.Component {
    * */
   render() {
     const single = this.state.single;
+    console.log('ComponentSingleHeader.render', single);
     return (
       <div className="single-header-root">
         <div className={`post-heading post-heading-${single.id}`}>
@@ -95,6 +96,7 @@ export class ComponentSingleHeader extends React.Component {
           id={`single-label-${single.id}`}
           categories={single.categories.all}
           className="category-heading"
+          anotherCategories={single.anotherCategories}
         />
         <div className="post-data">
           <div className="f-left">
