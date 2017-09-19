@@ -88,7 +88,7 @@
           <p class="ushi__summary__lead"><img src="/assets/sp/images/ushi/summary-lead.png" alt="スポーツニュースを3日連続見て最大5,000円分の高級ブランド牛を買えるクーポンがもらえる！"></p>
           <i class="ushi__summary__bull"><img src="/assets/sp/images/ushi/summary-figure_bull.png" alt=""></i>
           <h1 class="ushi__summary__heading"><img src="/assets/sp/images/ushi/summary-heading.png" alt="SPORTS BULL x Wowma! 牛キャンペーン"></h1>
-          <p class="ushi__summary__date"><img src="/assets/sp/images/ushi/summary-date.png" alt="エントリー期間 2017年9月28日 - 10月31日まで"></p>
+          <p class="ushi__summary__date"><img src="/assets/sp/images/ushi/summary-date.png" alt="エントリー期間 2017年9月25日 - 10月31日まで"></p>
         </div><!-- /.ushi__summary__inner -->
       </div><!-- /.ushi__summary -->
 
@@ -117,7 +117,7 @@
         <h2 class="ushi__flow__heading"><img src="/assets/sp/images/ushi/flow-heading.png" alt="キャンペーンの流れ"></h2>
         <ul class="ushi__flow__list">
           <li class="ushi__flow__item ushi__flow__item--1"><img src="/assets/sp/images/ushi/flow-flow1.png" alt="1. スポーツブルアプリを起動"></li><!-- /.ushi__flow__item--1 -->
-          <li class="ushi__flow__item ushi__flow__item--2"><img src="/assets/sp/images/ushi/flow-flow2.png" alt="2. キャンペーンにエントリーをタップ"></li><!-- /.ushi__flow__item--1 -->
+          <li class="ushi__flow__item ushi__flow__item--2"><img src="/assets/sp/images/ushi/flow-flow2.png" alt="2. アプリ内メッセージが届いたらキャンペーンにエントリーをタップ"></li><!-- /.ushi__flow__item--1 -->
           <li class="ushi__flow__item ushi__flow__item--3">
             <p><img src="/assets/sp/images/ushi/flow-flow3_text.png" alt="3. エントリーから3日連続アプリ起動でもれなく500円分のクーポンさらに抽選で200名様に5,000円分のクーポンがもらえる"></p>
             <ul>
@@ -155,8 +155,10 @@
               </tr>
               <tr>
                 <th>特典</th>
-                <td><strong>●500円クーポン</strong>　条件を達成しましたら、即時で付与されます。<br />
-                <strong>●5,000円クーポン</strong>　当選しましたら、キャンペーン終了1週間を目途に付与されます。</td>
+                <td><strong>●500円クーポン</strong><br />
+                条件を達成しましたら、Wowma!ページ上でクーポンを獲得の上、即時でご利用いただけます。<br />
+                <strong>●5,000円クーポン</strong><br />
+                条件を達成しましたら、Wowma!ページ上で応募が可能となります。当選しましたらキャンペーン終了一週間を目途にWowma!上で付与されます。</td>
               </tr>
               <tr>
                 <th>条件</th>
