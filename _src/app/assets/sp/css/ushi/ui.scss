@@ -1,0 +1,638 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss_sp/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss_sp/style/reset";
+@import "../../../../../scss_sp/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+
+
+// common override
+.ushi {
+  .head-sec-inner {
+    z-index: 99999;
+    background-color: #fff;
+  }
+
+  .body-sec-inner {
+    background-color: #000;
+  }
+}
+
+
+
+
+
+//.ushi__message
+.ushi__message {
+  position: relative;
+  z-index: 9999;
+
+  &,
+  &.disable {
+    display: none;
+  }
+
+  &.enable {
+    display: block;
+    padding: (52/2)+px 0;
+    background-color: #cc141d;
+    text-align: center;
+
+    img {
+      width: (408/2)+px;
+    }
+  }
+}
+
+
+
+//.ushi__summary
+.ushi__summary {
+
+  //.ushi__summary__inner
+  &__inner {
+    position: relative;
+  }
+
+  //.ushi__summary__lead
+  &__lead {
+    // position: absolute;
+    // top: 20px;
+    display: none;
+  }
+
+  //.ushi__summary__niku
+  &__niku {
+    z-index: 1;
+    position: relative;
+    animation: niku_in 1000ms 1000ms both;
+  }
+
+  //.ushi__summary__notice
+  &__notice {
+    // position: absolute;
+    // top: perCalc(268, 750);
+    // left: perCalc(610, 750);
+    // color: #fff;
+    // font-size: (20/2)+px;
+    display: none;
+  }
+
+  //.ushi__summary__bull
+  &__bull {
+    z-index: 2;
+    position: absolute;
+    top: perCalc(322, 982);
+    left: perCalc(514, 750);
+    width: perCalc(216, 750);
+    animation: niku_stomp 400ms 1200ms;
+  }
+
+  //.ushi__summary__heading
+  &__heading {
+    z-index: 10;
+    width: perCalc(710, 750);
+    margin: #{-(18/2)}px auto 0;
+    animation: niku_stomp 400ms 1200ms;
+
+    img {
+      position: relative;
+      z-index: 11;
+    }
+  }
+
+  //.ushi__summary__date
+  &__date {
+    width: perCalc(670, 750);
+    margin: (26/2)+px auto 0;
+    animation: niku_stomp 400ms 1200ms;
+  }
+} //.ushi__summary
+
+@keyframes niku_in {
+  0% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -950, 0, 1); }
+  3.6% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -520.096, 0, 1); }
+  7.21% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -234.9, 0, 1); }
+  10.81% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -74.032, 0, 1); }
+  14.31% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.376, 0, 1); }
+  20.22% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -30.867, 0, 1); }
+  42.94% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.018, 0, 1); }
+  48.85% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.493, 0, 1); }
+  71.47% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  77.38% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.008, 0, 1); }
+  100% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+}
+
+@keyframes niku_stomp {
+  0% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -10, 0, 1); }
+  3.6% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -5.475, 0, 1); }
+  7.21% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -2.473, 0, 1); }
+  10.81% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.779, 0, 1); }
+  14.31% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.004, 0, 1); }
+  20.22% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.325, 0, 1); }
+  42.94% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  48.85% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.005, 0, 1); }
+  71.47% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  77.38% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  100% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+}
+
+
+
+
+
+//.ushi__pr_app
+.ushi__pr_app__wrapper {
+  margin-top: (30/2)+px;
+  // height: (30+92)+px;
+
+  .fixed {
+    z-index: 99999;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+.ushi__pr_app {
+  padding-top: (60/2)+px;
+
+  //.ushi__pr_app__outer
+  &__outer {
+    position: relative;
+    width: 100%;
+    display: table-cell;
+    height: 92px;
+    background-color: #0e357f;
+    vertical-align: middle;
+
+    &:before {
+      content: "";
+      z-index: 100;
+      position: absolute;
+      top: #{-(60/2)}px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-block;
+      width: (108/2)+px;
+      height: (82/2)+px;
+      line-height: 1;
+      background: url(/assets/sp/images/ushi/pr_app-bg_bull.png) 0 0 no-repeat;
+      background-size: (108/2)+px;
+    }
+  }
+
+  //.ushi__pr_app__inner
+  &__inner {
+    // position: relative;
+    letter-spacing: ls(inline-block);
+
+    > figure, > div {
+      display: inline-block;
+      letter-spacing: normal;
+      vertical-align: top;
+    }
+  }
+
+  //.ushi__pr_app__cm
+  &__cm {
+    position: absolute;
+    top: -(20/2)+px;
+    right: 0;
+    width: (100/2)+px;
+  }
+
+
+  //.ushi__pr_app__btn
+  &__btn {
+    //.ushi__pr_app__btn__container
+    &__container {
+      position: relative;
+      margin: (24/2)+px perCalc(20, 750) 0;
+      overflow: hidden;
+    }
+
+    //.ushi__pr_app__btn__heading
+    &__heading {
+      width: (608/2)+px;
+      line-height: 1;
+
+      // for iPhone5, 5S
+      @media screen and (max-width: 320px) {
+        width: (500/2)+px;
+      }
+    }
+
+    //.ushi__pr_app__btn__list
+    &__list {
+      margin-top: (10/2)+px;
+      display: table;
+
+      &:before {
+        content: "";
+        display: inline-block;
+        width: (88/2)+px;
+        height: (88/2)+px;
+        margin-right: (12/2)+px;
+        background: url(/assets/sp/images/ushi/pr_app-icon-app.png) 0 0 no-repeat;
+        background-size: (88/2)+px;
+      }
+
+      // for iPhone5, 5S
+      @media screen and (max-width: 320px) {
+        &:before {
+          width: 36px;
+          height: 36px;
+          background-size: 36px;
+        }
+      }
+    }
+
+    //.ushi__pr_app__btn__item
+    &__item {
+      display: table-cell;
+      vertical-align: top;
+
+      &:first-child {
+        padding-right: (16/2)+px;
+      }
+    }
+  } //.ushi__pr_app__btn
+
+
+
+  //.cm_disable
+  &.cm_disable {
+    .ushi__pr_app__cm {
+      display: none;
+    }
+
+    .ushi__pr_app__btn__heading {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+} //.ushi__pr_app
+
+
+
+
+
+
+//.ushi__flow
+.ushi__flow {
+  position: relative;
+  margin: (76/2)+px perCalc(20, 750) 0;
+
+  //.ushi__flow__heading
+  &__heading {
+    width: perCalc(368, 710);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+
+
+  //.ushi__flow__list
+  &__list {
+    margin-top: (30/2)+px;
+  }
+
+  //.ushi__flow__item
+  &__item {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: (120/2)+px;
+  }
+
+  //.ushi__flow__item--1
+  &__item--1 {
+    padding-top: (56/2)+px;
+    padding-bottom: (60/2)+px;
+    background-color: #8b1016;
+    background-image: url(/assets/sp/images/ushi/flow-bg1.png);
+    border-radius: 4px 4px 0 0;
+    text-align: center;
+
+    img {
+      width: (352/2)+px;
+    }
+  }
+
+  //.ushi__flow__item--2
+  &__item--2 {
+    padding-top: (64/2)+px;
+    padding-bottom: (56/2)+px;
+    background-color: #aa131a;
+    background-image: url(/assets/sp/images/ushi/flow-bg2.png);
+    text-align: center;
+
+    img {
+      width: (470/2)+px;
+    }
+  }
+
+  //.ushi__flow__item--3
+  &__item--3 {
+    padding-top: (56/2)+px;
+    padding-bottom: (36/2)+px;
+    background-color: #cc141d;
+    background-image: url(/assets/sp/images/ushi/flow-bg3.png);
+    border-radius: 0 0 4px 4px;
+    text-align: center;
+
+    p {
+      img {
+        width: (508/2)+px;
+      }
+    }
+
+    ul {
+      display: table;
+      margin: (32/2)+px auto 0;
+    }
+
+    li {
+      display: table-cell;
+      padding-right: (6/2)+px;
+      padding-left: (6/2)+px;
+      vertical-align: top;
+
+      img {
+        width: (244/2)+px;
+      }
+    }
+  }
+
+
+
+  //.ushi__flow__notice
+  &__notice {
+    margin-top: (16/2)+px;
+    color: #fff;
+    font-size: (20/2)+px;
+    text-align: center;
+  }
+} //.ushi__flow
+
+
+
+
+
+//.ushi__whatis
+.ushi__whatis {
+  margin-top: (80/2)+px;
+  background: url(/assets/sp/images/ushi/whatis-bg.jpg) center 0 no-repeat;
+  background-size: cover;
+
+  //.ushi__summary__inner
+  &__inner {
+    position: relative;
+    padding-top: (68/2)+px;
+    padding-bottom: (516/2)+px;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: (414/2)+px;
+      height: (456/2)+px;
+      background: url(/assets/sp/images/ushi/whatis-figure_phone.png) 0 0 no-repeat;
+      background-size: (414/2)+px;
+    }
+  }
+
+
+
+  //.ushi__summary__heading
+  &__heading {
+    width: perCalc(420, 750);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.ushi__whatis__copy
+  &__copy {
+    width: perCalc(654, 750);
+    margin: (48/2)+px auto 0;
+  }
+
+  //.ushi__whatis__btn
+  &__btn {
+    //.ushi__whatis__btn__container
+    &__container {
+      position: relative;
+      width: (524/2)+px;
+      margin: (50/2)+px auto 0;
+      padding-left: (124/2)+px;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        display: inline-block;
+        width: (110/2)+px;
+        height: (110/2)+px;
+        margin-right: (14/2)+px;
+        background: url(/assets/sp/images/ushi/whatis-icon-app.png) 0 0 no-repeat;
+        background-size: (110/2)+px;
+      }
+    }
+
+    //.ushi__whatis__btn__heading
+    &__heading {
+      width: (392/2)+px;
+      line-height: 1;
+    }
+
+    //.ushi__whatis__btn
+    & {
+      width: (400/2)+px;
+      margin-top: (14/2)+px;
+    }
+
+    // ボタン2つのパターン
+    // //.ushi__whatis__btn__container
+    // &__container {
+    //   position: relative;
+    //   margin: (40/2)+px perCalc(40, 750) 0;
+    //   overflow: hidden;
+    // }
+
+    // //.ushi__whatis__btn__heading
+    // &__heading {
+    //   width: (392/2)+px;
+    //   line-height: 1;
+    //   margin-left: (124/2)+px;
+    // }
+
+    // //.ushi__whatis__btn__list
+    // &__list {
+    //   margin-top: -(32/2)+px;
+    //   display: table;
+
+    //   &:before {
+    //     content: "";
+    //     display: inline-block;
+    //     width: (110/2)+px;
+    //     height: (110/2)+px;
+    //     margin-right: (12/2)+px;
+    //     background: url(/assets/sp/images/ushi/whatis-icon-app.png) 0 0 no-repeat;
+    //     background-size: (110/2)+px;
+    //   }
+    // }
+
+    // //.ushi__whatis__btn__item
+    // &__item {
+    //   display: table-cell;
+    //   vertical-align: bottom;
+
+    //   &:first-child {
+    //     padding-right: (16/2)+px;
+    //   }
+    // }
+  } //.ushi__whatis__btn
+} //.ushi__whatis
+
+
+
+
+
+//.ushi__overview
+.ushi__overview {
+  position: relative;
+  margin: (80/2)+px perCalc(20, 750) 0;
+
+  //.ushi__overview__heading
+  &__heading {
+    width: perCalc(326, 710);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.ushi__overview__inner
+  &__inner {
+    margin-top: (36/2)+px;
+    background-color: #151515;
+    border-radius: 4px;
+  }
+
+  //.ushi__overview__data
+  &__data {
+    width: perCalc(670, 710);
+    margin-right: auto;
+    margin-left: auto;
+
+    th, td {
+      display: block;
+      font-size: (28/2)+px;
+    }
+
+    th {
+      padding-top: (52/2)+px;
+      padding-bottom: (20/2)+px;
+      border-top: 1px solid #222;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    td {
+      padding-bottom: (52/2)+px;
+      color: #cdcdcd;
+    }
+
+    tr:first-child {
+      th {
+        border-top: none;
+      }
+    }
+  }
+} //.ushi__overview
+
+
+
+
+
+//.ushi__footer
+.ushi__footer {
+  padding-top: (96/2)+px;
+  padding-bottom: (80/2+30+92)+px;
+  background-color: #000;
+
+  //.ushi__footer__btn
+  &__btn {
+    //.ushi__footer__btn__container
+    &__container {
+      position: relative;
+      width: (570/2)+px;
+      margin-right: auto;
+      margin-left: auto;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        display: inline-block;
+        width: (110/2)+px;
+        height: (110/2)+px;
+        background: url(/assets/sp/images/ushi/footer-icon-app.png) 0 0 no-repeat;
+        background-size: (110/2)+px;
+      }
+    }
+
+    //.ushi__footer__btn__heading
+    &__heading {
+      margin-left: (128/2)+px;
+
+      img {
+        width: (440/2)+px;
+      }
+    }
+
+    //.ushi__footer__btn__list
+    &__list {
+      display: table;
+      width: (570/2)+px;
+      margin-top: (24/2)+px;
+    }
+
+    //.ushi__footer__btn__item
+    &__item {
+      display: table-cell;
+      height: (80/2)+px;
+      vertical-align: top;
+
+      &:first-child {
+        padding-right: (18/2)+px;
+      }
+    }
+  } //.ushi__pr_app__btn
+
+
+
+  //.ushi__footer__copyright
+  &__copyright {
+    margin-top: (80/2)+px;
+    color: #555;
+    font-size: (20/2)+px;
+    text-align: center;
+  }
+} //.ushi__footer
