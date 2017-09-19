@@ -126,10 +126,12 @@ const SPComponentSinglesRecommend = ({ list, slug }) => {
                 key={`sp-singles-recommend-${dae.id}`}
                 className={`singles-recommend-${index}`}
               >
+                {/*
                 <BoardAd
                   index={index}
                   slug={slug}
                 />
+                */}
                 <BoardItem
                   key={`singles-widget-post-list-recommend-${single.id}`}
                   single={dae}
