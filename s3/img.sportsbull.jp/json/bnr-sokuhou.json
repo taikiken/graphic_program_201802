@@ -154,6 +154,19 @@
           "alt": "ゴルフ 速報&amp;データを見る"
         }
       ]
+    },
+    {
+      "title": "ラグビー",
+      "banners": [
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-rugby_univ.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-rugby_univ.jpg"
+          },
+          "url": "https://sportsbull.jp/stats/u_rugby/kantou/",
+          "alt": "大学ラグビー 速報&amp;データを見る"
+        }
+      ]
     }
   ]
 }
