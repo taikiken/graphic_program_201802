@@ -31,7 +31,7 @@ const React = self.React;
  * - {@link Touching}
  * @since 2017-09-13
  */
-class Swipe extends EventDispatcher {
+export class Swipe extends EventDispatcher {
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
