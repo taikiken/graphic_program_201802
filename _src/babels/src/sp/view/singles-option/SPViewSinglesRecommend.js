@@ -48,7 +48,7 @@ export default class SPViewSinglesRecommend extends ViewRecommend {
    * @param {Array} articles `/api/v1/articles/category/baseball/recommend?offset=0&length=5` な JSON {{Array.<object>}}
    */
   render(articles) {
-    console.log('SPViewSinglesRecommend.render', articles);
+    // console.log('SPViewSinglesRecommend.render', articles);
     // fire View.BEFORE_RENDER
     this.executeSafely(View.BEFORE_RENDER, articles, this.slug);
     // render

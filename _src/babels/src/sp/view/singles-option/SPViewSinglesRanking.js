@@ -49,7 +49,7 @@ export default class SPViewSinglesRanking extends ViewRanking {
    * @param {Array} articles `/api/v1/articles/category/baseball/ranking?offset=0&length=5` な JSON {{Array.<object>}}
    */
   render(articles) {
-    console.log('SPViewSinglesRanking.render', articles);
+    // console.log('SPViewSinglesRanking.render', articles);
     // fire View.BEFORE_RENDER
     this.executeSafely(View.BEFORE_RENDER, articles, this.slug, this.label);
     // render

@@ -38,7 +38,7 @@ const BoardAd = ({ index, slug }) => {
   // |0|ad|1|2|ad|3|4|
   if (index === 1 || index === 3) {
     // output
-    console.log('BoardAd', index);
+    // console.log('BoardAd', index);
     return (
       <div className="board-item board-item-ad-wrapper">
         <div className="board-item-ad">
@@ -51,9 +51,8 @@ const BoardAd = ({ index, slug }) => {
   }
 };
 
-// thumbnail + article
 /**
- * `div.board-item` 記事コンテナを作成します
+ * `div.board-item` 記事コンテナを作成します, thumbnail + article
  * @param {ArticleDae} single JSON convert data
  * @param {number} index 表示 index 0 ~ - 広告表示フラッグに使用します
  * @returns {XML} `div.board-item` 記事コンテナを返します
@@ -85,6 +84,10 @@ const BoardItem = ({ single, index }) => {
   );
 };
 
+/**
+ * React.propTypes
+ * @type {{single: ArticleDae, index: number}}
+ */
 BoardItem.propTypes = {
   single: React.PropTypes.instanceOf(ArticleDae).isRequired,
   index: React.PropTypes.number.isRequired,
@@ -120,7 +123,7 @@ const SPComponentSinglesRecommend = ({ list, slug }) => {
             const dae = new ArticleDae(single);
             return (
               <div
-                key={`singles-recommend-${dae.id}`}
+                key={`sp-singles-recommend-${dae.id}`}
                 className={`singles-recommend-${index}`}
               >
                 <BoardAd
@@ -141,6 +144,10 @@ const SPComponentSinglesRecommend = ({ list, slug }) => {
   );
 };
 
+/**
+ * React.propTypes
+ * @type {{list: Array.<object>, slug: string}}
+ */
 SPComponentSinglesRecommend.propTypes = {
   list: React.PropTypes.arrayOf(React.PropTypes.object.isRequired).isRequired,
   slug: React.PropTypes.string.isRequired,

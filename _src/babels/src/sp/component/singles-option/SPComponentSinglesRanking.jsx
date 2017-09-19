@@ -22,6 +22,9 @@ import { ComponentCategoryLabels } from '../../../component/categories/Component
 import { Touching } from '../../../ui/Touching';
 import { EventDispatcher } from '../../../event/EventDispatcher';
 
+// component
+import RankingCarouselManager from './ranking-carousel/RankingCarouselManager';
+
 // React
 const React = self.React;
 
@@ -169,7 +172,7 @@ export class Swipe extends EventDispatcher {
       // prev
       type = Swipe.SWIPE_RIGHT;
     }
-    console.log('Swipe.move', type, x);
+    // console.log('Swipe.move', type, x);
     this.dispatch({ type, x });
   }
   /**
@@ -243,12 +246,12 @@ let containers = 0;
  * @since 2017-09-13
  */
 const CarouselAd = ({ slug, index, length }) => {
-  console.log('CarouselAd', slug, index, length);
+  // console.log('CarouselAd', slug, index, length);
   if (slug === 'big6tv') {
     return null;
   }
-  if (index === 1 || index === 3 || length === 1) {
-    console.log('CarouselAd output *******');
+  if (index === 1 || index === 3 || (length === 1 || length === 2)) {
+    // console.log('CarouselAd output *******');
     containers += 1;
     return (
       <div className="widget-post-carousel-item widget-post-carousel-item-ad">
@@ -259,6 +262,10 @@ const CarouselAd = ({ slug, index, length }) => {
   return null;
 };
 
+/**
+ * React.propTypes
+ * @type {{slug: string, index: number, length: number}}
+ */
 CarouselAd.propTypes = {
   slug: React.PropTypes.string.isRequired,
   index: React.PropTypes.number.isRequired,
@@ -269,7 +276,7 @@ CarouselAd.propTypes = {
  * recommend - carousel article
  * - {@link ComponentArticleThumbnail}
  * - {@link ComponentCategoryLabels}
- * @param {SingleDae} single 記事データ
+ * @param {ArticleDae} single 記事データ
  * @param {number} index slide index {@link ComponentCategoryLabels} 引数に使用します
  * @returns {XML} div.widget-post-carousel-item
  * @constructor
@@ -302,10 +309,12 @@ const CarouselItem = ({ single, index }) => {
   );
 };
 
+/**
+ * React.propTypes
+ * @type {{single: ArticleDae, index: number}}
+ */
 CarouselItem.propTypes = {
-  single: React.PropTypes.instanceOf(
-    React.PropTypes.instanceOf(ArticleDae)
-  ).isRequired,
+  single: React.PropTypes.instanceOf(ArticleDae).isRequired,
   index: React.PropTypes.number.isRequired,
 };
 
@@ -413,12 +422,12 @@ class SPRankingCarousel extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  // ---------------------------------------------------
   /**
    * carousel 処理を開始します
    * - 初期値 (0) へ移動します
    * - carousel 関連イベントを watch します
    * - 広告を含めた実際数へ `length`, `last` update します
+   * TODO: RankingCarouselManager 移行確認後に削除する
    */
   start() {
     this.jump(0);
@@ -435,7 +444,7 @@ class SPRankingCarousel extends React.Component {
     // ---
     this.length = containers;
     this.last = containers - 1;
-    console.log('SPRankingCarousel.start', this.state, containers);
+    // console.log('SPRankingCarousel.start', this.state, containers);
   }
   // ---------------------------------------------------
   /**
@@ -444,7 +453,7 @@ class SPRankingCarousel extends React.Component {
    * - `prev` 実行
    */
   onPrev() {
-    console.log('SPRankingCarousel.onPrev', this.index);
+    // console.log('SPRankingCarousel.onPrev', this.index);
     if (this.index !== 0) {
       // 先頭は prev しない
       this.prev();
@@ -458,7 +467,7 @@ class SPRankingCarousel extends React.Component {
    * - `next` 実行
    */
   onNext() {
-    console.log('SPRankingCarousel.onNext', this.index, this.last);
+    // console.log('SPRankingCarousel.onNext', this.index, this.last);
     if (this.index !== this.last) {
       // last は next しない
       this.next();
@@ -491,7 +500,7 @@ class SPRankingCarousel extends React.Component {
   prev() {
     let index = this.index;
     index -= 1;
-    console.log('SPRankingCarousel.prev', index);
+    // console.log('SPRankingCarousel.prev', index);
     if (index >= 0) {
       this.jump(index);
     } else {
@@ -506,7 +515,7 @@ class SPRankingCarousel extends React.Component {
   next() {
     let index = this.index;
     index += 1;
-    console.log('SPRankingCarousel.next', index);
+    // console.log('SPRankingCarousel.next', index);
     if (index <= this.last) {
       this.jump(index);
     } else {
@@ -523,7 +532,7 @@ class SPRankingCarousel extends React.Component {
   jump(index) {
     this.index = index;
     const x = this.translateX(index);
-    console.log('SPRankingCarousel.jump', index, x);
+    // console.log('SPRankingCarousel.jump', index, x);
     this.setState({ x, left: 0, motion: true });
   }
   // ---------------------------------------------------
@@ -574,7 +583,13 @@ class SPRankingCarousel extends React.Component {
   componentDidMount() {
     if (this.props.length > 1) {
       // carousel 1 を超えていたら実装を開始する
-      this.start();
+      // this.start();
+      // -------------------------------
+      // React.state 使用しない
+      const slide = this.slide;
+      const swipe = new Swipe(slide);
+      RankingCarouselManager.setup(this.wrapper, slide, swipe, containers);
+      swipe.start();
     }
   }
   /**
@@ -586,7 +601,7 @@ class SPRankingCarousel extends React.Component {
   render() {
     containers = 0;
     const { articles, slug, length } = this.props;
-    console.log('SPRankingCarousel.render', this.state);
+    // console.log('SPRankingCarousel.render', this.state);
     // return null;
     return (
       <div
@@ -610,11 +625,13 @@ class SPRankingCarousel extends React.Component {
                     single={single}
                     index={index}
                   />
+                  {/*
                   <CarouselAd
                     slug={slug}
                     index={index}
                     length={length}
                   />
+                  */}
                 </span>
               );
             })
@@ -645,7 +662,7 @@ const SPComponentSinglesRanking = ({ list, slug, label }) => {
     return null;
   }
   const articles = list.map(article => (new ArticleDae(article)));
-  console.log('SPComponentSinglesRanking', list, slug, label, Array.isArray(list), list.length, articles);
+  // console.log('SPComponentSinglesRanking', list, slug, label, Array.isArray(list), list.length, articles);
   // ---
   return (
     <div className="widget-post-carousel">
@@ -666,6 +683,10 @@ const SPComponentSinglesRanking = ({ list, slug, label }) => {
   );
 };
 
+/**
+ * React.propTypes
+ * @type {{list: Array.<object>, slug: string, label: string}}
+ */
 SPComponentSinglesRanking.propTypes = {
   list: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   slug: React.PropTypes.string.isRequired,
