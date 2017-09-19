@@ -72,13 +72,6 @@
     <a href="https://www.redbull.com/jp-ja/events/red-bull-holy-ride-2017/" target="_blank"><img class="show-for-pc" src="/assets/images/red-bull-holy-ride/intro-banner.jpg" alt="Red Bull TV"><img class="show-for-sp" src="/assets/sp/images/red-bull-holy-ride/intro-banner.jpg" alt="Red Bull TV"></a>
   </div>
 
-  <div class="intro__widjet_twitter">
-    <?php
-    //<a class="twitter-timeline" href="https://twitter.com/redbulljapan" data-height="400" data-chrome="noheader nofooter" data-link-color="#be0940" data-border-color="#282d35">Tweets by redbulljapan</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-    ?>
-    <a class="twitter-timeline" href="https://twitter.com/hashtag/RedBullHolyRide" data-widget-id="898165035398160384" data-chrome="noheader nofooter" data-dnt="true">#RedBullHolyRide のツイート</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-  </div><!-- /.widjet_twitter -->
 </div><!-- /.holyride--intro -->
 
 <div class="holyride__container holyride__container--even holyride--course">
@@ -167,6 +160,17 @@
 
 <div class="holyride--related holyride__container--even holyride__container">
   <h2 class="related__heading"><img src="/assets/images/red-bull-holy-ride/related-heading.png" alt="関連記事"></h2>
+
+  <div class="related__post">
+    <a href="https://sportsbull.jp/a/188107/?">
+      <figure class="related__post__thumb"><img src="/assets/images/red-bull-holy-ride/related-post-figure6.jpg" alt=""></figure>
+      <div class="related__post__text">
+        <h3 class="related__post__heading">【フォトアルバム】Red Bull Holy Ride 2017（広島・尾道）</h3>
+        <h4 class="related__post__category">アクションスポーツ</h4>
+        <p class="related__post__date">9月4日（木）</p>
+      </div><!-- /.related__post__text -->
+    </a>
+  </div><!-- /.related__post -->
 
   <div class="related__post">
     <a href="https://sportsbull.jp/p/178733/">
