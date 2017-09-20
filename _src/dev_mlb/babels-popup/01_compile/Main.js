@@ -88,8 +88,9 @@ var Main = function () {
     key: 'start',
     value: function start() {
       // console.log('Main.start', Black.detect(), Visited.already());
-      if (!_Black2.default.detect() && !_Visited2.default.already()) {
-        _Visited2.default.arrive();
+      // googletag 条件追加する
+      if (!_Black2.default.detect() && !_Visited2.default.already() && self.googletag) {
+        // Visited.arrive();
         Main.modal();
       }
     }
