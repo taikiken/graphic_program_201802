@@ -17,8 +17,8 @@ const Sagen = self.Sagen;
  * バナーを非表示にします
  * - DOMContentLoaded を待って body から `appbnr-enable` class を削除します
  */
-const onReady = () => {
-  document.removeEventListener('DOMContentLoaded', onReady);
+const remove = () => {
+  document.removeEventListener('DOMContentLoaded', remove);
   Sagen.Dom.removeClass(document.body, 'appbnr-enable');
 };
 
@@ -53,7 +53,7 @@ const detector = () => {
   }
   // @since 2017-09-11
   // remove app banner
-  document.addEventListener('DOMContentLoaded', onReady, false);
+  // document.addEventListener('DOMContentLoaded', onReady, false);
 };
 
 detector();
@@ -64,4 +64,15 @@ detector();
 //   document.removeEventListener('DOMContentLoaded', remove);
 //   Sagen.Dom.removeClass(document.body, 'appbnr-enable');
 // };
-// document.addEventListener('DOMContentLoaded', remove, false);
+
+// -----------------------------
+// アプリダウンロード訴求のポップアップを表示 #2404
+// @see https://github.com/undotsushin/undotsushin/issues/2404
+// app banner 削除
+document.addEventListener('DOMContentLoaded', remove, false);
+
+// cookie
+
+// url - blacklist
+
+// script
