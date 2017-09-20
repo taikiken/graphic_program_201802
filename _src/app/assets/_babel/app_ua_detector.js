@@ -70,9 +70,3 @@ detector();
 // @see https://github.com/undotsushin/undotsushin/issues/2404
 // app banner 削除
 document.addEventListener('DOMContentLoaded', remove, false);
-
-// cookie
-
-// url - blacklist
-
-// script
