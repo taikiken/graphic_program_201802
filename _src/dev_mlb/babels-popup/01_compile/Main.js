@@ -90,7 +90,7 @@ var Main = function () {
       // console.log('Main.start', Black.detect(), Visited.already());
       // googletag 条件追加する
       if (!_Black2.default.detect() && !_Visited2.default.already() && self.googletag) {
-        // Visited.arrive();
+        _Visited2.default.arrive();
         Main.modal();
       }
     }

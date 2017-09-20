@@ -51,7 +51,7 @@ export default class Main {
     // console.log('Main.start', Black.detect(), Visited.already());
     // googletag 条件追加する
     if (!Black.detect() && !Visited.already() && self.googletag) {
-      // Visited.arrive();
+      Visited.arrive();
       Main.modal();
     }
   }
