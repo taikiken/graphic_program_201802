@@ -13,4 +13,5 @@
 import './moku/polyfill/method/babel';
 import Main from './Main';
 
+// 処理開始します
 Main.start();

@@ -16,14 +16,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
+// moku/device
 
-var _Visited = require('./banner/net/Visited');
 
-var _Visited2 = _interopRequireDefault(_Visited);
+// net
 
-var _Black = require('./banner/app/Black');
 
-var _Black2 = _interopRequireDefault(_Black);
+// app
+
+
+// ui
+
 
 var _Android = require('./moku/device/os/Android');
 
@@ -33,6 +36,14 @@ var _iOS = require('./moku/device/os/iOS');
 
 var _iOS2 = _interopRequireDefault(_iOS);
 
+var _Visited = require('./banner/net/Visited');
+
+var _Visited2 = _interopRequireDefault(_Visited);
+
+var _Black = require('./banner/app/Black');
+
+var _Black2 = _interopRequireDefault(_Black);
+
 var _Modal = require('./banner/ui/Modal');
 
 var _Modal2 = _interopRequireDefault(_Modal);
@@ -41,6 +52,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * 条件をチェックし `app download banner` を表示します
+ */
 var Main = function () {
   function Main() {
     _classCallCheck(this, Main);
@@ -48,7 +62,14 @@ var Main = function () {
 
   _createClass(Main, null, [{
     key: 'modal',
+
+    /**
+     * `app download banner` を表示します
+     * - pc / sp 判定し処理分岐します
+     * - modal Element 作成します
+     */
     value: function modal() {
+      // console.log('Main.modal');
       var element = document.createElement('div');
       element.className = 'modal-intro';
       // make modal container
@@ -58,9 +79,15 @@ var Main = function () {
         _Modal2.default.pc(element);
       }
     }
+    /**
+     * 条件チェックを行います -> modal 作成・表示します
+     * - {@link Black}, {@link Visited}
+     */
+
   }, {
     key: 'start',
     value: function start() {
+      // console.log('Main.start', Black.detect(), Visited.already());
       if (!_Black2.default.detect() && !_Visited2.default.already()) {
         _Visited2.default.arrive();
         Main.modal();

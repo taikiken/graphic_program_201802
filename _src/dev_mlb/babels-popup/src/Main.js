@@ -9,14 +9,31 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-import Visited from './banner/net/Visited';
-import Black from './banner/app/Black';
+
+// moku/device
 import Android from './moku/device/os/Android';
 import iOS from './moku/device/os/iOS';
+
+// net
+import Visited from './banner/net/Visited';
+
+// app
+import Black from './banner/app/Black';
+
+// ui
 import Modal from './banner/ui/Modal';
 
+/**
+ * 条件をチェックし `app download banner` を表示します
+ */
 export default class Main {
+  /**
+   * `app download banner` を表示します
+   * - pc / sp 判定し処理分岐します
+   * - modal Element 作成します
+   */
   static modal() {
+    // console.log('Main.modal');
     const element = document.createElement('div');
     element.className = 'modal-intro';
     // make modal container
@@ -26,7 +43,12 @@ export default class Main {
       Modal.pc(element);
     }
   }
+  /**
+   * 条件チェックを行います -> modal 作成・表示します
+   * - {@link Black}, {@link Visited}
+   */
   static start() {
+    // console.log('Main.start', Black.detect(), Visited.already());
     if (!Black.detect() && !Visited.already()) {
       Visited.arrive();
       Main.modal();

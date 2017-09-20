@@ -2777,6 +2777,7 @@ var _Main2 = _interopRequireDefault(_Main);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// 処理開始します
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
@@ -6192,22 +6193,33 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
+// moku/device
 
-var _Visited = __webpack_require__(193);
 
-var _Visited2 = _interopRequireDefault(_Visited);
+// net
 
-var _Black = __webpack_require__(196);
 
-var _Black2 = _interopRequireDefault(_Black);
+// app
 
-var _Android = __webpack_require__(197);
+
+// ui
+
+
+var _Android = __webpack_require__(193);
 
 var _Android2 = _interopRequireDefault(_Android);
 
-var _iOS = __webpack_require__(199);
+var _iOS = __webpack_require__(195);
 
 var _iOS2 = _interopRequireDefault(_iOS);
+
+var _Visited = __webpack_require__(196);
+
+var _Visited2 = _interopRequireDefault(_Visited);
+
+var _Black = __webpack_require__(199);
+
+var _Black2 = _interopRequireDefault(_Black);
 
 var _Modal = __webpack_require__(200);
 
@@ -6217,6 +6229,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * 条件をチェックし `app download banner` を表示します
+ */
 var Main = function () {
   function Main() {
     _classCallCheck(this, Main);
@@ -6224,7 +6239,14 @@ var Main = function () {
 
   _createClass(Main, null, [{
     key: 'modal',
+
+    /**
+     * `app download banner` を表示します
+     * - pc / sp 判定し処理分岐します
+     * - modal Element 作成します
+     */
     value: function modal() {
+      // console.log('Main.modal');
       var element = document.createElement('div');
       element.className = 'modal-intro';
       // make modal container
@@ -6234,9 +6256,15 @@ var Main = function () {
         _Modal2.default.pc(element);
       }
     }
+    /**
+     * 条件チェックを行います -> modal 作成・表示します
+     * - {@link Black}, {@link Visited}
+     */
+
   }, {
     key: 'start',
     value: function start() {
+      // console.log('Main.start', Black.detect(), Visited.already());
       if (!_Black2.default.detect() && !_Visited2.default.already()) {
         _Visited2.default.arrive();
         Main.modal();
@@ -6251,6 +6279,587 @@ exports.default = Main;
 
 /***/ }),
 /* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/08/28 - 16:36
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _devices = __webpack_require__(67);
+
+var _devices2 = _interopRequireDefault(_devices);
+
+var _Windows = __webpack_require__(194);
+
+var _Windows2 = _interopRequireDefault(_Windows);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * {@link devices}.props
+ * {@link Android}
+ * @type {?object}
+ */
+var props = null;
+
+/**
+ * version 情報を計算します
+ * {@link Android}
+ */
+var version = function version() {
+  var app = _devices2.default.app;
+  var numbers = app.match(/android (\d+)\.(\d+)\.?(\d+)?/i);
+  if (!Array.isArray(numbers)) {
+    return;
+  }
+  // 先頭の Android 4.3 削除
+  numbers.shift();
+  var versions = numbers.map(function (number, index) {
+    var int = parseInt(number, 10);
+    if (index < 3) {
+      return isNaN(int) ? 0 : int;
+    }
+    return null;
+  });
+  props.build = versions.join('.');
+  var major = parseInt(versions[0], 10);
+  var minor = 0;
+  if (versions.length >= 2) {
+    minor = versions[1];
+  }
+  var build = '';
+  if (versions.length >= 3) {
+    build = versions[2];
+  }
+  props.major = major;
+  props.version = parseFloat(major + '.' + minor + build);
+  props.numbers = versions;
+};
+
+/**
+ * - Android standard browser
+ * `Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13`,
+ * `Mozilla/5.0 (Linux; U; Android 2.2.1; en-us; Nexus One Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`
+ * - Windows phone
+ * `Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.<OS build number>`
+ *
+ * ## MSDN
+ * [MSDN](https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx)
+ * {@link Android}
+ * @see http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html
+ */
+var init = function init() {
+  if (props) {
+    return;
+  }
+  props = Object.assign({}, _devices2.default.props);
+  var ua = _devices2.default.ua;
+  // windows phone ua に `Android` が入っている
+  var android = !_Windows2.default.phone() && !!ua.match(/android/i);
+  if (android) {
+    props.android = true;
+    props.phone = !!ua.match(/mobile/i);
+    // phone / tablet
+    if (!props.phone) {
+      props.tablet = true;
+    }
+    // Android 標準 browser
+    props.standard = _devices2.default.safari && (!!ua.match(/version/i) || !!ua.match(/samsungbrowser/i));
+    // hd
+    props.hd = Math.max(window.innerWidth, window.innerHeight) > 1024;
+    // version check
+    version();
+  }
+};
+
+/**
+ * Android OS detector
+ */
+
+var Android = function () {
+  function Android() {
+    _classCallCheck(this, Android);
+  }
+
+  _createClass(Android, null, [{
+    key: 'is',
+
+    /**
+     * Android OS
+     * @returns {boolean} true: Android OS
+     */
+    value: function is() {
+      init();
+      return props.android;
+    }
+    /**
+     * Android OS && standard browser
+     * @returns {boolean} true: Android standard browser
+     */
+
+  }, {
+    key: 'standard',
+    value: function standard() {
+      init();
+      return props.standard;
+    }
+    /**
+     * Android OS && phone
+     * @returns {boolean} true: Android phone
+     */
+
+  }, {
+    key: 'phone',
+    value: function phone() {
+      init();
+      return props.phone;
+    }
+    /**
+     * Android OS && tablet
+     * @returns {boolean} true: Android tablet
+     */
+
+  }, {
+    key: 'tablet',
+    value: function tablet() {
+      init();
+      return props.tablet;
+    }
+    /**
+     * Android OS && HD window
+     * @returns {boolean} true: Android HD window
+     */
+
+  }, {
+    key: 'hd',
+    value: function hd() {
+      init();
+      return props.hd;
+    }
+    /**
+     * Android OS version
+     * @returns {number} Android OS version, not Android -1
+     */
+
+  }, {
+    key: 'version',
+    value: function version() {
+      init();
+      return props.version;
+    }
+    /**
+     * Android OS major version
+     * @returns {number} Android OS major version, not Android -1
+     */
+
+  }, {
+    key: 'major',
+    value: function major() {
+      init();
+      return props.major;
+    }
+    /**
+     * Android OS version `major.minor.build`
+     * @returns {string} Android OS version NN.NN.NN 型（文字）で返します, not Android ''
+     */
+
+  }, {
+    key: 'build',
+    value: function build() {
+      init();
+      return props.build;
+    }
+    /**
+     * version を配列形式で取得します
+     * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します
+     */
+
+  }, {
+    key: 'numbers',
+    value: function numbers() {
+      init();
+      return props.numbers;
+    }
+    /**
+     * Android 4.3 ~ 4.4 && standard browser
+     * - touchend が未実装
+     * @returns {boolean} true: Android 4.3 ~ 4.4
+     */
+
+  }, {
+    key: 'kitKat',
+    value: function kitKat() {
+      // no touchend - standard browser 4.3 ~ 4.4
+      var v = Android.version();
+      return Android.standard() && v > 4.2 && v < 4.5;
+    }
+  }]);
+
+  return Android;
+}();
+
+exports.default = Android;
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/08/28 - 16:50
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _devices = __webpack_require__(67);
+
+var _devices2 = _interopRequireDefault(_devices);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * {@link devices}.props
+ * {@link Windows}
+ * @type {?object}
+ */
+var props = null;
+
+/**
+ * `userAgent` を解析します
+ * {@link Windows}
+ * @private
+ */
+var init = function init() {
+  if (props) {
+    return;
+  }
+  props = Object.assign({}, _devices2.default.props);
+  var ua = _devices2.default.ua;
+  var windows = !!ua.match(/windows/i);
+  if (windows) {
+    props.windows = true;
+    props.phone = !!ua.match(/windows phone/i);
+  }
+};
+
+/**
+ * windows phone detector
+ */
+
+var Windows = function () {
+  function Windows() {
+    _classCallCheck(this, Windows);
+  }
+
+  _createClass(Windows, null, [{
+    key: 'is',
+
+    /**
+     * windows OS
+     * @returns {boolean} true; windows OS
+     */
+    value: function is() {
+      init();
+      return props.windows;
+    }
+    /**
+     * windows phone
+     * @returns {boolean} true: windows phone
+     */
+
+  }, {
+    key: 'phone',
+    value: function phone() {
+      init();
+      return props.phone;
+    }
+  }]);
+
+  return Windows;
+}();
+
+exports.default = Windows;
+
+/***/ }),
+/* 195 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/08/28 - 17:39
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _devices = __webpack_require__(67);
+
+var _devices2 = _interopRequireDefault(_devices);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * {@link devices}.props
+ * {@link iOS}
+ * @type {?object}
+ */
+var props = null;
+
+/**
+ * version 情報を計算します
+ * {@link iOS}
+ */
+var version = function version() {
+  var app = _devices2.default.app;
+  var numbers = app.match(/os (\d+)_(\d+)_?(\d+)?/i);
+  if (!Array.isArray(numbers)) {
+    return;
+  }
+  // iOS N.N.N 削除
+  numbers.shift();
+  var versions = numbers.map(function (number) {
+    var int = parseInt(number, 10);
+    return isNaN(int) ? 0 : int;
+  });
+  props.build = versions.join('.');
+  var major = parseInt(versions[0], 10);
+  var minor = 0;
+  if (versions.length >= 2) {
+    minor = versions[1];
+  }
+  var build = '';
+  if (versions.length >= 3) {
+    build = versions[2];
+  }
+  props.major = major;
+  props.version = parseFloat(major + '.' + minor + build);
+  props.numbers = versions;
+};
+
+/**
+ * iOS 判定を行います
+ * {@link iOS}
+ */
+var init = function init() {
+  if (props) {
+    return;
+  }
+  props = Object.assign({}, _devices2.default.props);
+  var ua = _devices2.default.ua;
+  var ipad = !!ua.match(/ipad/i);
+  var ipod = !!ua.match(/ipod/i);
+  var iphone = !!ua.match(/iphone/i) && !ipad && !ipod;
+  var ios = ipad || ipod || iphone;
+  if (!ios) {
+    return;
+  }
+  var standalone = !!navigator.standalone;
+  props.stanalone = standalone;
+  props.ios = ios;
+  props.ipad = ipad;
+  props.ipod = ipod;
+  props.iphone = iphone;
+  props.phone = iphone || ipod;
+  props.tablet = ipad;
+  // アプリ内コンテンツ
+  props.webView = ios && !standalone && !_devices2.default.safari;
+  // version check
+  version();
+};
+
+/**
+ * iOS detector
+ */
+
+var iOS = function () {
+  function iOS() {
+    _classCallCheck(this, iOS);
+  }
+
+  _createClass(iOS, null, [{
+    key: 'is',
+
+    /**
+     * iOS
+     * @returns {boolean} true: iOS
+     */
+    value: function is() {
+      init();
+      return props.android;
+    }
+    /**
+     * iOS && iPhone or iPod
+     * @returns {boolean} true: iOS && iPhone or iPod
+     */
+
+  }, {
+    key: 'phone',
+    value: function phone() {
+      init();
+      return props.phone;
+    }
+    /**
+     * iOS && iPad
+     * @returns {boolean} true: iOS && iPad
+     */
+
+  }, {
+    key: 'tablet',
+    value: function tablet() {
+      init();
+      return props.tablet;
+    }
+    /**
+     * iOS && iPhone
+     * @returns {boolean} true: iOS && iPhone
+     */
+
+  }, {
+    key: 'iphone',
+    value: function iphone() {
+      init();
+      return props.iphone;
+    }
+    /**
+     * iOS && iPad
+     * @returns {boolean} true: iOS && iPad
+     */
+
+  }, {
+    key: 'ipad',
+    value: function ipad() {
+      init();
+      return props.ipad;
+    }
+    /**
+     * iOS && iPod
+     * @returns {boolean} true: iOS && iPod
+     */
+
+  }, {
+    key: 'ipod',
+    value: function ipod() {
+      init();
+      return props.ipod;
+    }
+    /**
+     * iOS version
+     * @returns {number} iOS version, not iOS -1
+     */
+
+  }, {
+    key: 'version',
+    value: function version() {
+      init();
+      return props.version;
+    }
+    /**
+     * iOS major version
+     * @returns {number} iOS major version, not iOS -1
+     */
+
+  }, {
+    key: 'major',
+    value: function major() {
+      init();
+      return props.major;
+    }
+    /**
+     * iOS version `major.minor.build`
+     * @returns {string} iOS version NN.NN.NN 型（文字）で返します, not iOS 空文字列
+     */
+
+  }, {
+    key: 'build',
+    value: function build() {
+      init();
+      return props.build;
+    }
+    /**
+     * version を配列形式で取得します
+     * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します
+     */
+
+  }, {
+    key: 'numbers',
+    value: function numbers() {
+      init();
+      return props.numbers;
+    }
+    /**
+     * iOS webView - 標準 UA のみ対応
+     * @returns {boolean} true: iOS webView
+     */
+
+  }, {
+    key: 'webView',
+    value: function webView() {
+      init();
+      return props.webView;
+    }
+    /**
+     * iOS standalone - app mode
+     * @returns {boolean} true: iOS app mode
+     */
+
+  }, {
+    key: 'standalone',
+    value: function standalone() {
+      return props.standalone;
+    }
+  }]);
+
+  return iOS;
+}();
+
+exports.default = iOS;
+
+/***/ }),
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6278,11 +6887,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 // moku/util
 
 
-var _Cookie = __webpack_require__(194);
+var _Cookie = __webpack_require__(197);
 
 var _Cookie2 = _interopRequireDefault(_Cookie);
 
-var _Times = __webpack_require__(195);
+var _Times = __webpack_require__(198);
 
 var _Times2 = _interopRequireDefault(_Times);
 
@@ -6333,7 +6942,7 @@ Visited.COOKIE = '__app_banner_visited__';
 exports.default = Visited;
 
 /***/ }),
-/* 194 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6610,7 +7219,7 @@ var Cookie = function () {
 exports.default = Cookie;
 
 /***/ }),
-/* 195 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6783,7 +7392,7 @@ var Times = function () {
 exports.default = Times;
 
 /***/ }),
-/* 196 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6844,6 +7453,7 @@ var Black = function () {
   }, {
     key: 'detect',
     value: function detect() {
+      // console.log('Black.detect', Black.app());
       if (Black.app()) {
         return true;
       }
@@ -6860,587 +7470,6 @@ var Black = function () {
 
 Black.list = ['/about', '/big6tv/live/2017a'];
 exports.default = Black;
-
-/***/ }),
-/* 197 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/08/28 - 16:36
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-var _devices = __webpack_require__(67);
-
-var _devices2 = _interopRequireDefault(_devices);
-
-var _Windows = __webpack_require__(198);
-
-var _Windows2 = _interopRequireDefault(_Windows);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * {@link devices}.props
- * {@link Android}
- * @type {?object}
- */
-var props = null;
-
-/**
- * version 情報を計算します
- * {@link Android}
- */
-var version = function version() {
-  var app = _devices2.default.app;
-  var numbers = app.match(/android (\d+)\.(\d+)\.?(\d+)?/i);
-  if (!Array.isArray(numbers)) {
-    return;
-  }
-  // 先頭の Android 4.3 削除
-  numbers.shift();
-  var versions = numbers.map(function (number, index) {
-    var int = parseInt(number, 10);
-    if (index < 3) {
-      return isNaN(int) ? 0 : int;
-    }
-    return null;
-  });
-  props.build = versions.join('.');
-  var major = parseInt(versions[0], 10);
-  var minor = 0;
-  if (versions.length >= 2) {
-    minor = versions[1];
-  }
-  var build = '';
-  if (versions.length >= 3) {
-    build = versions[2];
-  }
-  props.major = major;
-  props.version = parseFloat(major + '.' + minor + build);
-  props.numbers = versions;
-};
-
-/**
- * - Android standard browser
- * `Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13`,
- * `Mozilla/5.0 (Linux; U; Android 2.2.1; en-us; Nexus One Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`
- * - Windows phone
- * `Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.<OS build number>`
- *
- * ## MSDN
- * [MSDN](https://msdn.microsoft.com/ja-jp/library/hh869301(v=vs.85).aspx)
- * {@link Android}
- * @see http://googlewebmastercentral.blogspot.jp/2011/03/mo-better-to-also-detect-mobile-user.html
- */
-var init = function init() {
-  if (props) {
-    return;
-  }
-  props = Object.assign({}, _devices2.default.props);
-  var ua = _devices2.default.ua;
-  // windows phone ua に `Android` が入っている
-  var android = !_Windows2.default.phone() && !!ua.match(/android/i);
-  if (android) {
-    props.android = true;
-    props.phone = !!ua.match(/mobile/i);
-    // phone / tablet
-    if (!props.phone) {
-      props.tablet = true;
-    }
-    // Android 標準 browser
-    props.standard = _devices2.default.safari && (!!ua.match(/version/i) || !!ua.match(/samsungbrowser/i));
-    // hd
-    props.hd = Math.max(window.innerWidth, window.innerHeight) > 1024;
-    // version check
-    version();
-  }
-};
-
-/**
- * Android OS detector
- */
-
-var Android = function () {
-  function Android() {
-    _classCallCheck(this, Android);
-  }
-
-  _createClass(Android, null, [{
-    key: 'is',
-
-    /**
-     * Android OS
-     * @returns {boolean} true: Android OS
-     */
-    value: function is() {
-      init();
-      return props.android;
-    }
-    /**
-     * Android OS && standard browser
-     * @returns {boolean} true: Android standard browser
-     */
-
-  }, {
-    key: 'standard',
-    value: function standard() {
-      init();
-      return props.standard;
-    }
-    /**
-     * Android OS && phone
-     * @returns {boolean} true: Android phone
-     */
-
-  }, {
-    key: 'phone',
-    value: function phone() {
-      init();
-      return props.phone;
-    }
-    /**
-     * Android OS && tablet
-     * @returns {boolean} true: Android tablet
-     */
-
-  }, {
-    key: 'tablet',
-    value: function tablet() {
-      init();
-      return props.tablet;
-    }
-    /**
-     * Android OS && HD window
-     * @returns {boolean} true: Android HD window
-     */
-
-  }, {
-    key: 'hd',
-    value: function hd() {
-      init();
-      return props.hd;
-    }
-    /**
-     * Android OS version
-     * @returns {number} Android OS version, not Android -1
-     */
-
-  }, {
-    key: 'version',
-    value: function version() {
-      init();
-      return props.version;
-    }
-    /**
-     * Android OS major version
-     * @returns {number} Android OS major version, not Android -1
-     */
-
-  }, {
-    key: 'major',
-    value: function major() {
-      init();
-      return props.major;
-    }
-    /**
-     * Android OS version `major.minor.build`
-     * @returns {string} Android OS version NN.NN.NN 型（文字）で返します, not Android ''
-     */
-
-  }, {
-    key: 'build',
-    value: function build() {
-      init();
-      return props.build;
-    }
-    /**
-     * version を配列形式で取得します
-     * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します
-     */
-
-  }, {
-    key: 'numbers',
-    value: function numbers() {
-      init();
-      return props.numbers;
-    }
-    /**
-     * Android 4.3 ~ 4.4 && standard browser
-     * - touchend が未実装
-     * @returns {boolean} true: Android 4.3 ~ 4.4
-     */
-
-  }, {
-    key: 'kitKat',
-    value: function kitKat() {
-      // no touchend - standard browser 4.3 ~ 4.4
-      var v = Android.version();
-      return Android.standard() && v > 4.2 && v < 4.5;
-    }
-  }]);
-
-  return Android;
-}();
-
-exports.default = Android;
-
-/***/ }),
-/* 198 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/08/28 - 16:50
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-var _devices = __webpack_require__(67);
-
-var _devices2 = _interopRequireDefault(_devices);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * {@link devices}.props
- * {@link Windows}
- * @type {?object}
- */
-var props = null;
-
-/**
- * `userAgent` を解析します
- * {@link Windows}
- * @private
- */
-var init = function init() {
-  if (props) {
-    return;
-  }
-  props = Object.assign({}, _devices2.default.props);
-  var ua = _devices2.default.ua;
-  var windows = !!ua.match(/windows/i);
-  if (windows) {
-    props.windows = true;
-    props.phone = !!ua.match(/windows phone/i);
-  }
-};
-
-/**
- * windows phone detector
- */
-
-var Windows = function () {
-  function Windows() {
-    _classCallCheck(this, Windows);
-  }
-
-  _createClass(Windows, null, [{
-    key: 'is',
-
-    /**
-     * windows OS
-     * @returns {boolean} true; windows OS
-     */
-    value: function is() {
-      init();
-      return props.windows;
-    }
-    /**
-     * windows phone
-     * @returns {boolean} true: windows phone
-     */
-
-  }, {
-    key: 'phone',
-    value: function phone() {
-      init();
-      return props.phone;
-    }
-  }]);
-
-  return Windows;
-}();
-
-exports.default = Windows;
-
-/***/ }),
-/* 199 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright (c) 2011-2017 inazumatv.com, inc.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @author (at)taikiken / http://inazumatv.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @date 2017/08/28 - 17:39
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Distributed under the terms of the MIT license.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.opensource.org/licenses/mit-license.html
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This notice shall be included in all copies or substantial portions of the Software.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-var _devices = __webpack_require__(67);
-
-var _devices2 = _interopRequireDefault(_devices);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * {@link devices}.props
- * {@link iOS}
- * @type {?object}
- */
-var props = null;
-
-/**
- * version 情報を計算します
- * {@link iOS}
- */
-var version = function version() {
-  var app = _devices2.default.app;
-  var numbers = app.match(/os (\d+)_(\d+)_?(\d+)?/i);
-  if (!Array.isArray(numbers)) {
-    return;
-  }
-  // iOS N.N.N 削除
-  numbers.shift();
-  var versions = numbers.map(function (number) {
-    var int = parseInt(number, 10);
-    return isNaN(int) ? 0 : int;
-  });
-  props.build = versions.join('.');
-  var major = parseInt(versions[0], 10);
-  var minor = 0;
-  if (versions.length >= 2) {
-    minor = versions[1];
-  }
-  var build = '';
-  if (versions.length >= 3) {
-    build = versions[2];
-  }
-  props.major = major;
-  props.version = parseFloat(major + '.' + minor + build);
-  props.numbers = versions;
-};
-
-/**
- * iOS 判定を行います
- * {@link iOS}
- */
-var init = function init() {
-  if (props) {
-    return;
-  }
-  props = Object.assign({}, _devices2.default.props);
-  var ua = _devices2.default.ua;
-  var ipad = !!ua.match(/ipad/i);
-  var ipod = !!ua.match(/ipod/i);
-  var iphone = !!ua.match(/iphone/i) && !ipad && !ipod;
-  var ios = ipad || ipod || iphone;
-  if (!ios) {
-    return;
-  }
-  var standalone = !!navigator.standalone;
-  props.stanalone = standalone;
-  props.ios = ios;
-  props.ipad = ipad;
-  props.ipod = ipod;
-  props.iphone = iphone;
-  props.phone = iphone || ipod;
-  props.tablet = ipad;
-  // アプリ内コンテンツ
-  props.webView = ios && !standalone && !_devices2.default.safari;
-  // version check
-  version();
-};
-
-/**
- * iOS detector
- */
-
-var iOS = function () {
-  function iOS() {
-    _classCallCheck(this, iOS);
-  }
-
-  _createClass(iOS, null, [{
-    key: 'is',
-
-    /**
-     * iOS
-     * @returns {boolean} true: iOS
-     */
-    value: function is() {
-      init();
-      return props.android;
-    }
-    /**
-     * iOS && iPhone or iPod
-     * @returns {boolean} true: iOS && iPhone or iPod
-     */
-
-  }, {
-    key: 'phone',
-    value: function phone() {
-      init();
-      return props.phone;
-    }
-    /**
-     * iOS && iPad
-     * @returns {boolean} true: iOS && iPad
-     */
-
-  }, {
-    key: 'tablet',
-    value: function tablet() {
-      init();
-      return props.tablet;
-    }
-    /**
-     * iOS && iPhone
-     * @returns {boolean} true: iOS && iPhone
-     */
-
-  }, {
-    key: 'iphone',
-    value: function iphone() {
-      init();
-      return props.iphone;
-    }
-    /**
-     * iOS && iPad
-     * @returns {boolean} true: iOS && iPad
-     */
-
-  }, {
-    key: 'ipad',
-    value: function ipad() {
-      init();
-      return props.ipad;
-    }
-    /**
-     * iOS && iPod
-     * @returns {boolean} true: iOS && iPod
-     */
-
-  }, {
-    key: 'ipod',
-    value: function ipod() {
-      init();
-      return props.ipod;
-    }
-    /**
-     * iOS version
-     * @returns {number} iOS version, not iOS -1
-     */
-
-  }, {
-    key: 'version',
-    value: function version() {
-      init();
-      return props.version;
-    }
-    /**
-     * iOS major version
-     * @returns {number} iOS major version, not iOS -1
-     */
-
-  }, {
-    key: 'major',
-    value: function major() {
-      init();
-      return props.major;
-    }
-    /**
-     * iOS version `major.minor.build`
-     * @returns {string} iOS version NN.NN.NN 型（文字）で返します, not iOS 空文字列
-     */
-
-  }, {
-    key: 'build',
-    value: function build() {
-      init();
-      return props.build;
-    }
-    /**
-     * version を配列形式で取得します
-     * @returns {Array.<number>} {{major: int, minor: int, build: int}} 形式で返します
-     */
-
-  }, {
-    key: 'numbers',
-    value: function numbers() {
-      init();
-      return props.numbers;
-    }
-    /**
-     * iOS webView - 標準 UA のみ対応
-     * @returns {boolean} true: iOS webView
-     */
-
-  }, {
-    key: 'webView',
-    value: function webView() {
-      init();
-      return props.webView;
-    }
-    /**
-     * iOS standalone - app mode
-     * @returns {boolean} true: iOS app mode
-     */
-
-  }, {
-    key: 'standalone',
-    value: function standalone() {
-      return props.standalone;
-    }
-  }]);
-
-  return iOS;
-}();
-
-exports.default = iOS;
 
 /***/ }),
 /* 200 */
@@ -7469,8 +7498,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *
  */
 
-// moku/dom
-
+/**
+ * 動的挿入する `script` tag
+ * @see https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-330758911
+ */
 var Tag = function () {
   function Tag() {
     _classCallCheck(this, Tag);
@@ -7478,12 +7509,22 @@ var Tag = function () {
 
   _createClass(Tag, null, [{
     key: 'pc',
+
+    /**
+     * PC script tag
+     * @returns {Element} PC script tag
+     */
     value: function pc() {
       var script = document.createElement('script');
       // eslint-disable-next-line max-len
       script.innerHTML = 'googletag.cmd.push(function(){googletag.display("div-gpt-ad-1505887740744-0");});';
       return script;
     }
+    /**
+     * SP script tag
+     * @returns {Element} SP script tag
+     */
+
   }, {
     key: 'sp',
     value: function sp() {
@@ -7497,6 +7538,14 @@ var Tag = function () {
   return Tag;
 }();
 
+// --------------------------------------
+// common element
+/**
+ * div.modal-bg
+ * @returns {Element} div.modal-bg
+ */
+
+
 var bg = function bg() {
   var element = document.createElement('div');
   element.className = 'modal-bg';
@@ -7504,18 +7553,30 @@ var bg = function bg() {
   return element;
 };
 
+/**
+ * div.modal-intro-contents
+ * @returns {Element} div.modal-intro-contents
+ */
 var contents = function contents() {
   var element = document.createElement('div');
   element.className = 'modal-intro-contents';
   return element;
 };
 
+/**
+ * div.modal-intro-link
+ * @returns {Element} div.modal-intro-link
+ */
 var link = function link() {
   var element = document.createElement('div');
   element.className = 'modal-intro-link';
   return element;
 };
 
+/**
+ * close button
+ * @returns {Element} div.modal-intro-close
+ */
 var button = function button() {
   var element = document.createElement('div');
   element.className = 'modal-intro-close';
@@ -7524,8 +7585,57 @@ var button = function button() {
   a.href = '#js-modal-bg';
   a.innerHTML = '閉じる';
   element.appendChild(a);
+  return element;
 };
 
+// --------------------------------------
+// sp
+/**
+ * SP modal container を作成し `body` へ `appendChild` します
+ * @param {Element} modal root HTMLElement
+ * @returns {{target: Element, close: Element, bgElement: Element}}
+ * script append target element, close button Element, 背景
+ */
+var _sp = function _sp(modal) {
+  var contentsElement = contents();
+  var linkElement = link();
+  var scriptElement = document.createElement('script');
+  // eslint-disable max-len
+  scriptElement.innerHTML = 'googletag.cmd.push(function() {\n          googletag.defineSlot(\'/531683568/download-popup/download-popup-mobile\', [300, 330], \'div-gpt-ad-1505887822751-0\').addService(googletag.pubads());\n          googletag.pubads().enableSingleRequest();\n          googletag.enableServices();\n        });';
+  // eslint-enable max-len
+  var target = document.createElement('div');
+  target.id = 'div-gpt-ad-1505887822751-0';
+  target.style.cssText = 'height:330px; width:300px;';
+  var close = button();
+  // ---
+  // link
+  linkElement.appendChild(scriptElement);
+  linkElement.appendChild(target);
+  // contents
+  contentsElement.appendChild(linkElement);
+  contentsElement.appendChild(close);
+  // element
+  var bgElement = bg();
+  modal.appendChild(bgElement);
+  modal.appendChild(contentsElement);
+  // body
+  document.body.appendChild(modal);
+  // return
+  return {
+    target: target,
+    close: close,
+    bgElement: bgElement
+  };
+};
+
+// --------------------------------------
+// pc
+/**
+ * PC modal container を作成し `body` へ `appendChild` します
+ * @param {Element} modal root HTMLElement
+ * @returns {{target: Element, close: Element, bgElement: Element}}
+ * script append target element, close button Element, 背景
+ */
 var _pc = function _pc(modal) {
   var contentsElement = contents();
   var linkElement = link();
@@ -7545,62 +7655,147 @@ var _pc = function _pc(modal) {
   contentsElement.appendChild(linkElement);
   contentsElement.appendChild(close);
   // element
-  modal.appendChild(bg());
+  var bgElement = bg();
+  modal.appendChild(bgElement);
   modal.appendChild(contentsElement);
   // body
   document.body.appendChild(modal);
   // return
   return {
     target: target,
-    close: close
+    close: close,
+    bgElement: bgElement
   };
 };
+
+// --------------------------------------
+/**
+ * modal 表示を準備します
+ */
 
 var Modal = function () {
   _createClass(Modal, null, [{
     key: 'sp',
+
+    // ---------------------------------------------------
+    //  STATIC METHOD
+    // ---------------------------------------------------
+    /**
+     * SP modal element を作成し `Modal` instance を作成・実行します
+     * @param {Element} modal root HTMLElement
+     */
     value: function sp(modal) {
-      // todo make modal dom
-      console.log('Modal.sp', modal);
+      // console.log('Modal.sp', modal);
+      // sp make dom
+      var _sp2 = _sp(modal),
+          close = _sp2.close,
+          target = _sp2.target,
+          bgElement = _sp2.bgElement;
+      // instance
+
+
+      var instance = new Modal(modal, close, target, true, bgElement);
+      instance.start();
     }
+    /**
+     * PC modal element を作成し `Modal` instance を作成・実行します
+     * @param {Element} modal root HTMLElement
+     */
+
   }, {
     key: 'pc',
     value: function pc(modal) {
-      // todo make modal dom
-      console.log('Modal.pc', modal);
-
+      // console.log('Modal.pc', modal);
+      // pc make dom
       var _pc2 = _pc(modal),
           close = _pc2.close,
-          target = _pc2.target;
+          target = _pc2.target,
+          bgElement = _pc2.bgElement;
+      // instance
 
-      var instance = new Modal(modal, close, target, false);
+
+      var instance = new Modal(modal, close, target, false, bgElement);
       instance.start();
     }
+    // ---------------------------------------------------
+    //  CONSTRUCTOR
+    // ---------------------------------------------------
+    /**
+     * modal を準備します
+     * @param {Element} modal root HTMLElement
+     * @param {Element} close close button HTMLElement
+     * @param {Element} target script tag insert target HTMLElement
+     * @param {boolean} mobile sp flag
+     * @param {Element} bgElement 背景 HTMLElement
+     */
+
   }]);
 
-  function Modal(modal, close, target, sp) {
+  function Modal(modal, close, target, mobile, bgElement) {
     _classCallCheck(this, Modal);
 
+    /**
+     * root HTMLElement
+     * @type {Element}
+     */
     this.modal = modal;
+    /**
+     * close button HTMLElement
+     * @type {Element}
+     */
     this.close = close;
+    /**
+     * script tag insert target HTMLElement
+     * @type {Element}
+     */
     this.target = target;
+    /**
+     * sp flag
+     * @type {boolean}
+     */
+    this.mobile = mobile;
+    /**
+     * 背景 HTMLElement
+     * @type {Element}
+     */
+    this.bg = bgElement;
+    /**
+     * bind onClick - close button click event handler
+     * @type {function}
+     */
     this.onClick = this.onClick.bind(this);
-    this.sp = sp;
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * modal を開きます
+   * - close button click event bind します
+   * - {@link Tag} script を `target` property Element へ挿入します
+   */
+
 
   _createClass(Modal, [{
     key: 'start',
     value: function start() {
       this.close.addEventListener('click', this.onClick, false);
+      this.bg.addEventListener('click', this.onClick, false);
       this.modal.style.cssText = 'display: block;';
-      var script = this.sp ? Tag.sp : Tag.pc();
+      var script = this.mobile ? Tag.sp() : Tag.pc();
       this.target.appendChild(script);
     }
+    /**
+     * close button click event handler
+     * - modal 閉じます
+     * @param {Event} event click event
+     */
+
   }, {
     key: 'onClick',
     value: function onClick(event) {
       event.preventDefault();
       this.close.removeEventListener('click', this.onClick);
+      this.bg.removeEventListener('click', this.onClick);
       this.modal.style.cssText = '';
     }
   }]);

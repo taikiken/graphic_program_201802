@@ -38,6 +38,7 @@ export default class Black {
    * @returns {boolean} true: 対象外
    */
   static detect() {
+    // console.log('Black.detect', Black.app());
     if (Black.app()) {
       return true;
     }

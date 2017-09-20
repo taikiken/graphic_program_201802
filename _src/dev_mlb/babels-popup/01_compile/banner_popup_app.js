@@ -8,6 +8,7 @@ var _Main2 = _interopRequireDefault(_Main);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// 処理開始します
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com

@@ -55,6 +55,7 @@ var Black = function () {
   }, {
     key: 'detect',
     value: function detect() {
+      // console.log('Black.detect', Black.app());
       if (Black.app()) {
         return true;
       }

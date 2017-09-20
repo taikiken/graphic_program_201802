@@ -207,6 +207,7 @@ if ( $page['apiRoot'] != '' ) :
 // @since 2017-06-26
 ?>
 <script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <?php
 // ------------------------------------------------------------
 ?>
