@@ -100,7 +100,7 @@
     "css:build": "npm run sprite:build && gulp css:build && gulp sp:css:build",
     "deploy": "npm run babels:build && npm run css:build && gulp deploy",
     "develop": "npm run babels:dev && npm run css:dev && gulp develop",
-    "esdoc": "cd ./_src/babels && esdoc",
+    "esdoc": "cd ./_src/babels && esdoc -c esdoc.json",
     "esdoc:pc": "cd ./_src/babels_exe && esdoc -c esdoc.json",
     "esdoc:sp": "cd ./_src/babels_exe_sp && esdoc -c esdoc.json"
   }
