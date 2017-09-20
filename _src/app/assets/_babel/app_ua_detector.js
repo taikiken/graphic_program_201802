@@ -44,6 +44,9 @@ const detector = () => {
     return;
   }
   const html = tags[0];
+  if (!html) {
+    return;
+  }
 
   // add class
   if (android) {
