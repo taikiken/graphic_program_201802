@@ -699,6 +699,7 @@
 // 初回起動時のサービス紹介
 .modal-intro {
   @extend %modal-dialogue;
+  display: none;
 
   .modal-bg {
     background-color: rgba(0, 0, 0, .8);
