@@ -32,6 +32,7 @@ import {Router} from './app/Router';
 // util
 import {Offset} from './util/Offset';
 import {Scroll} from './util/Scroll';
+import { Elements } from './util/Elements';
 
 
 
@@ -181,7 +182,8 @@ let UT = {
   },
   util: {
     Offset,
-    Scroll
+    Scroll,
+    Elements,
   },
   ui: {
     PageTop,
