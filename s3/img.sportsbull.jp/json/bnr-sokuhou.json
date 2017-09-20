@@ -52,6 +52,14 @@
           },
           "url": "https://sportsbull.jp/sokuhou/",
           "alt": "サッカー日本代表リアルタイム速報"
+        },
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-soccer_univ.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-soccer_univ.jpg"
+          },
+          "url": "https://sportsbull.jp/stats/u_soccer/kantou/",
+          "alt": "大学サッカー 速報&amp;データを見る"
         }
       ]
     },
