@@ -16,14 +16,12 @@ import Cookie from '../../moku/net/Cookie';
 // moku/util
 import Times from '../../moku/util/Times';
 
-// app
-import Define from '../app/Define';
-
 export default class Visited {
+  static COOKIE = '__app_banner_visited__';
   static already() {
-    return Cookie.get(Define.COOKIE_NAME);
+    return Cookie.get(Visited.COOKIE);
   }
   static arrive() {
-    Cookie.set(Define.COOKIE_NAME, '1', Times.day(1));
+    Cookie.set(Visited.COOKIE, '1', Times.hour(24));
   }
 }
