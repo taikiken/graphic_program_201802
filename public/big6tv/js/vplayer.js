@@ -6,7 +6,7 @@ var options = {
   fluid: false, //[NOTE] This option is for responsive http://blog.videojs.com/Video-js-5-s-fluid-mode-and-playlist-picker/
   plugins: {
     videoJsResolutionSwitcher: {
-      default: 1
+      default: 0
     }
   },
   nativeControlsForTouch: false
@@ -30,6 +30,13 @@ var viewtype = function () {
   }
   return type;
 }();
+
+//Overriding Android native HLS support:
+if (navigator.userAgent.match(/android/i)) {
+  videojs.options.hls.overrideNative = true;
+  videojs.options.html5.nativeAudioTracks = false;
+  videojs.options.html5.nativeVideoTracks = false;
+}
 
 var player;
 var superagent = window.superagent;
@@ -57,6 +64,9 @@ var setPlayerEvent = function setPlayerEvent() {
   player.one(startEvent, function () {
     isFirstPlay = false;
     $('.content_video_ima-ad-container div:eq(0)').css({ pointerEvents: 'auto' });
+    // if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)) {
+    //   $('.content_video_ima-ad-container div:eq(0)').css({pointerEvents: 'none'});
+    // }
     if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
       //iPhone & iPads
       player.play();
@@ -68,7 +78,7 @@ var setPlayerEvent = function setPlayerEvent() {
     }
 
     // Disabled subtitles/closed caption for Safari.
-    document.getElementsByClassName("vjs-captions-button")[0].style.display = "none";
+    // document.getElementsnpmByClassName("vjs-captions-button")[0].style.display = "none";
   });
 
   //For playing after resolution has been changed, for Chrome and Firefox
@@ -107,9 +117,10 @@ var setPlayerEvent = function setPlayerEvent() {
   });
 };
 
+var count = 0;
 //PLayer Initialization
 var videoLoad = function videoLoad() {
-  superagent.get('https://dev.sportsbull.jp/api/big6tv/live/2017a').end(function (err, res) {
+  superagent.get('/api/big6tv/live/2017a').end(function (err, res) {
     var video = res.body.response.live.video;
     var isPlaying = res.body.response.live.isPlaying;
     var ads_options = {
@@ -153,7 +164,7 @@ var videoLoad = function videoLoad() {
       $('.video__wrapper').show();
       $('.video_alt').hide();
     } else {
-      player.stop();
+      if (player) player.pause();
       var img = $('<img/>', { src: res.body.response.live.alt.large, alt: '' });
       $('.video_alt').empty();
       $('.video_alt').append(img);

@@ -11,6 +11,7 @@ $a[]=array("menu","13","cb",4,"","","","","","","","systems");
 $a[]=array("menu","58","cb",4,"","","","","","","","is_external");
 
 include $INCLUDEPATH."print_write.php";
+include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/media.php";
 include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/auth.php";
 
 ?>

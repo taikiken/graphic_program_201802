@@ -52,20 +52,13 @@
         </ul>
       </div>
 
-      <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/common-sp.css" />
-      <link rel="stylesheet" href="http://golf.stats-japan.jp/contents/css/sportsbull/sj-golf-sp.css" />
+      <?php if ( $page['ua'] === 'desktop' ) : ?>
+      <link rel="stylesheet" href="//sp-j.sports-digican.com/golf/contents/css/sportsbull/sj-golf.css" />
+      <?php else : ?>
+      <link rel="stylesheet" href="//sp-j.sports-digican.com/golf/contents/css/sportsbull/sj-golf-sp.css" />
+      <?php endif; ?>
 
-      <?php
-      /*
-        <?php if ( $page['ua'] === 'desktop' ) : ?>
-        <link rel="stylesheet" href="http://golf.stats-japan.jp/contents/css/sportsbull/sj-golf.css" />
-        <?php else : ?>
-        <link rel="stylesheet" href="http://golf.stats-japan.jp/contents/css/sportsbull/sj-golf-sp.css" />
-        <?php endif; ?>
-      */
-      ?>
-
-      <script src="http://golf.stats-japan.jp/parts/sportsbull/main.js"></script>
+      <script src="//sp-j.sports-digican.com/golf/parts/sportsbull/main.js"></script>
       <?php
       /*
       //--------------------------------

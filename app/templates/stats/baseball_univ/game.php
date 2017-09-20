@@ -170,9 +170,12 @@
                 <div class="body-sec-inner">
                     <section class="main-sec">
                         <div class="stats-top-image">
-                            <picture>
-                                <source media="(max-width: 768px)" srcset="/stats/assets/univbb/img/SP_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg">
-                                <img src="/stats/assets/univbb/img/PC_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg" alt="<?php echo $page['league_name']; ?> 速報&データ"> </picture>
+                            <a href="/stats/<?php echo $page['league']; ?>/<?php echo $page['season']; ?>/">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="/stats/assets/univbb/img/SP_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg">
+                                    <img src="/stats/assets/univbb/img/PC_stats_mlb_heading_<?php echo $page['stats_top_image']; ?>.jpg" alt="<?php echo $page['league_name']; ?> 速報&amp;データ">
+                                </picture>
+                            </a>
                         </div>
 
                         <div class="ub-ad-banner ub-ad-innerTop-banner">
@@ -222,14 +225,14 @@
                             <!-- // /531683568/u-baseball-ad/ub-app-big-banner -->
                         </div>
 
-                        <ul class="stats-module-header">
-                            <li class="active">
-                                <a href="/stats/<?php echo $page['league']; ?>/<?php echo $page['season']; ?>/">'<?php echo $page['short_season']; ?> 試合結果</a>
-                            </li>
-                            <li>
-                                <a href="/stats/<?php echo $page['league']; ?>/<?php echo $page['season']; ?>/standing/">'<?php echo $page['short_season']; ?> 順位表</a>
-                            </li>
-                        </ul>
+<!--                        <ul class="stats-module-header">-->
+<!--                            <li class="active">-->
+<!--                                <a href="/stats/--><?php //echo $page['league']; ?><!--/--><?php //echo $page['season']; ?><!--/">'--><?php //echo $page['short_season']; ?><!-- 試合結果</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a href="/stats/--><?php //echo $page['league']; ?><!--/--><?php //echo $page['season']; ?><!--/standing/">'--><?php //echo $page['short_season']; ?><!-- 順位表</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
                         <div id="univbb-widget2" data-type="others" data-league="<?php echo $page['league']; ?>" data-season="<?php echo $page['season']; ?>" data-id="<?php echo $page['game_id']; ?>"></div>
                         <script src="/stats/assets/univbb/js/Widget_univbb_2.js"></script>
 

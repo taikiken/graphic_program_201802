@@ -52,25 +52,17 @@
         </ul>
       </div>
 
-      <?php
-      /*
-        <?php if ( $page['ua'] === 'desktop' ) : ?>
-        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/common.css" />
-        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sportsbull/css/fonts/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/sj-tennis.css" />
-        <?php else : ?>
-        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/common-sp.css" />
-        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sportsbull/css/fonts/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/sj-tennis-sp.css" />
-        <?php endif; ?>
-      */
-      ?>
+      <?php if ( $page['ua'] === 'desktop' ) : ?>
+      <link rel="stylesheet" href="//sp-j.sports-digican.com/tennis/sportsbull/css/common.css" />
+      <link rel="stylesheet" href="//sp-j.sports-digican.com/tennis/sportsbull/css/fonts/css/font-awesome.min.css"/>
+      <link rel="stylesheet" href="//sp-j.sports-digican.com/tennis/sportsbull/css/sj-tennis.css" />
+      <?php else : ?>
+      <link rel="stylesheet" href="//sp-j.sports-digican.com/tennis/sportsbull/css/common-sp.css" />
+      <link rel="stylesheet" href="//sp-j.sports-digican.com/tennis/sportsbull/css/fonts/css/font-awesome.min.css"/>
+      <link rel="stylesheet" href="//sp-j.sports-digican.com/tennis/sportsbull/css/sj-tennis-sp.css" />
+      <?php endif; ?>
 
-      <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/common-sp.css" />
-      <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sportsbull/css/fonts/css/font-awesome.min.css"/>
-      <link rel="stylesheet" href="http://sports.stats-japan.jp/tennis/sjparts/css/sj-tennis-sp.css" />
-
-      <script src="http://sports.stats-japan.jp/tennis/sjparts/js/main/tennis.js"></script>
+      <script src="//sp-j.sports-digican.com/tennis/sportsbull/js/main/tennis.js"></script>
       <script>
         sj_Tennistour.instance.render({
           'hideBcl' : true

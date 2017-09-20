@@ -37,8 +37,9 @@ import { SPComponentMoreButton } from '../component/articles/SPComponentMoreButt
 import { SPComponentArticles } from '../component/articles/SPComponentArticles';
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
+const ReactDOM = self.ReactDOM;
 
 /**
  * SP 記事一覧 + 無限スクロール

@@ -11,27 +11,57 @@
  */
 'use strict';
 
+const Sagen = self.Sagen;
+
+/**
+ * バナーを非表示にします
+ * - DOMContentLoaded を待って body から `appbnr-enable` class を削除します
+ */
+const onReady = () => {
+  document.removeEventListener('DOMContentLoaded', onReady);
+  Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+};
+
+/**
+ * userAgent から `undotsushin-android`, `undotsushin-ios` を取得し html へクラスを追加します
+ */
 const detector = () => {
-  // html 取得
-  const tags = document.getElementsByTagName('html');
-  if (!tags || !tags.length) {
-    return;
-  }
-  const html = tags[0];
   // global object
-  const Sagen = self.Sagen;
   const ua = Sagen.Browser.ua();
 
   // android
   const android = ua.indexOf('undotsushin-android') !== -1;
   // ios
   const ios = ua.indexOf('undotsushin-ios') !== -1;
+
+  if (!android && !ios) {
+    return;
+  }
+
+  // html 取得
+  const tags = document.getElementsByTagName('html');
+  if (!tags || !tags.length) {
+    return;
+  }
+  const html = tags[0];
+
   // add class
   if (android) {
     Sagen.Dom.addClass(html, 'undotsushin-android');
   } else if (ios) {
     Sagen.Dom.addClass(html, 'undotsushin-ios');
   }
+  // @since 2017-09-11
+  // remove app banner
+  document.addEventListener('DOMContentLoaded', onReady, false);
 };
 
 detector();
+
+// -----------------------------
+// hotfix - app banner 緊急削除 - 2017-09-15 戻す
+// const remove = () => {
+//   document.removeEventListener('DOMContentLoaded', remove);
+//   Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+// };
+// document.addEventListener('DOMContentLoaded', remove, false);

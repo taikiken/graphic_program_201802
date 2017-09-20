@@ -24,8 +24,14 @@ for($i=0;$i<count($ob);$i++){
 
 <li>抽出：<select class="exuser" style="width:350px;">
 <?php
-
-$sql="select id,(select name from repo where id=u_media.cid) as name,title from u_media where flag=1 order by cid,id";
+if(false === empty(getSorC('is_external')) && false === empty(getSorC('u_media')))
+{
+    $sql="select id,(select name from repo where id=u_media.cid) as name,title from u_media where flag=1 and cid = 3 AND id IN (" . getSorC('u_media') . ") order by cid,id";
+}
+else
+{
+    $sql="select id,(select name from repo where id=u_media.cid) as name,title from u_media where flag=1 order by cid,id";
+}
 $o->query($sql);
 
 $c=!isset($_COOKIE["exuser"])?"":$_COOKIE["exuser"];
