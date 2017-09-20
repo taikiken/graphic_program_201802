@@ -11,3 +11,6 @@
  */
 
 import './moku/polyfill/method/babel';
+import Main from './Main';
+
+Main.start();
