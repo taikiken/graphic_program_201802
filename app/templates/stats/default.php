@@ -299,5 +299,6 @@ if (isset($page['prop_identity'])) {
 <link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
 <script src="/assets/js/global.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>

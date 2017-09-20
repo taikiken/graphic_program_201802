@@ -322,5 +322,6 @@ for($i=0;$i<count($v);$i++){
         </script>
         <script src="/assets/js/inhigh.bundle.js"></script>
         <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
+        <script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
     </body>
 </html>

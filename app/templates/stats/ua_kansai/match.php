@@ -561,5 +561,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 <script src="/assets/js/global.bundle.js"></script>
 <script src="/assets/stats/ua_kansai/js/amefoot.bundle.js"></script>
 <script src="/assets/stats/ua_kansai/js/match.js"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>

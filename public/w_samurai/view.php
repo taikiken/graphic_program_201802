@@ -193,6 +193,6 @@ if ($page['apiRoot'] != '') :
 <?php endif; ?>
 
 <script src="/assets/js/samurai.bundle.js?v=<?php echo $page['version']; ?>"></script>
-
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>
