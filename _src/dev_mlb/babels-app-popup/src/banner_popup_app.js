@@ -9,3 +9,5 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
+import './moku/polyfill/method/babel';

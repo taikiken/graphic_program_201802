@@ -20,10 +20,10 @@ import Times from '../../moku/util/Times';
 import Define from '../app/Define';
 
 export default class Visited {
-  static been() {
+  static already() {
     return Cookie.get(Define.COOKIE_NAME);
   }
-  static save() {
+  static arrive() {
     Cookie.set(Define.COOKIE_NAME, '1', Times.day(1));
   }
 }
