@@ -16,12 +16,12 @@
 
 // UT
 
-var UT = self.UT;
-var Dom = UT.app.Dom;
-var ViewRanking = UT.view.sidebar.ViewRanking;
-var ViewVideos = UT.view.sidebar.ViewVideos;
-var ViewRecommend = UT.view.sidebar.ViewRecommend;
-var View = UT.view.View;
+const UT = self.UT;
+const Dom = UT.app.Dom;
+const ViewRanking = UT.view.sidebar.ViewRanking;
+const ViewVideos = UT.view.sidebar.ViewVideos;
+const ViewRecommend = UT.view.sidebar.ViewRecommend;
+const View = UT.view.View;
 
 // init @see babels_exe Page.category
 
