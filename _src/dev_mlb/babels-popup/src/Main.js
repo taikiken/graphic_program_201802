@@ -17,10 +17,8 @@ import Modal from './banner/ui/Modal';
 
 export default class Main {
   static modal() {
-    const element = document.getElementById('js-app-popup');
-    if (!element) {
-      return;
-    }
+    const element = document.createElement('div');
+    element.className = 'modal-intro';
     // make modal container
     if (Android.phone() || iOS.phone()) {
       Modal.sp(element);
@@ -30,6 +28,7 @@ export default class Main {
   }
   static start() {
     if (!Black.detect() && !Visited.already()) {
+      Visited.arrive();
       Main.modal();
     }
   }

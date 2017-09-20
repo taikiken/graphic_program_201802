@@ -171,7 +171,7 @@ dir.mlb = {
 };
 
 // babels - popup
-const popup = `${root}/babels-app-popup`;
+const popup = `${root}/babels-popup`;
 dir.popup = {
   src: `${popup}/src`,
   dependencies: `${popup}/dependencies`,

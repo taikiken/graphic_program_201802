@@ -9,36 +9,36 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-import Classes from '../../moku/dom/Classes';
 
+/**
+ * app banner popup 動作条件を管理します
+ */
 export default class Black {
+  /**
+   * URL black list
+   * @type {[string,string]}
+   */
   static list = [
     '/about',
     '/big6tv/live/2017a',
   ];
-  static html() {
-    const tags = document.getElementsByTagName('html');
-    if (!tags || !tags.length) {
-      return null;
-    }
-    const html = tags[0];
-    if (!html) {
-      return null;
-    }
-    return html;
-  }
-  static webview() {
-    // check webview
-    const html = Black.html();
-    return html &&
-      (Classes.has(html, 'undotsushin-ios') || Classes.has(html, 'undotsushin-android'));
-  }
+  /**
+   * `userAgent` をチェックします
+   * - gunosy
+   * - newspass
+   * - undotsushin-ios
+   * - undotsushin-android
+   * @returns {boolean} true: 該当する
+   */
   static app() {
-    // gunosy , newspass)
-    return !!navigator.userAgent.match(/gunosy|newspass/);
+    return !!navigator.userAgent.match(/gunosy|newspass|undotsushin-ios|undotsushin-android/i);
   }
+  /**
+   * popup 対象かを `pathname`, `userAgent` でチェックします
+   * @returns {boolean} true: 対象外
+   */
   static detect() {
-    if (Black.webview() || Black.app()) {
+    if (Black.app()) {
       return true;
     }
     // check pathname with list

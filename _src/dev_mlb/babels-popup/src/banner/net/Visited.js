@@ -16,11 +16,27 @@ import Cookie from '../../moku/net/Cookie';
 // moku/util
 import Times from '../../moku/util/Times';
 
+/**
+ * app banner popup(modal) open check cookie を管理します
+ * - modal open 24h 持続します
+ * - cookie があると popup しません
+ */
 export default class Visited {
+  /**
+   * cookie name - __app_banner_visited__
+   * @type {string}
+   */
   static COOKIE = '__app_banner_visited__';
+  /**
+   * cookie 存在チェック
+   * @returns {string|null} 存在する時は value を返します
+   */
   static already() {
     return Cookie.get(Visited.COOKIE);
   }
+  /**
+   * cookie 24h セットします
+   */
   static arrive() {
     Cookie.set(Visited.COOKIE, '1', Times.hour(24));
   }
