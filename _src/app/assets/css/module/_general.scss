@@ -625,102 +625,15 @@
 
   .modal-intro-contents {
     position: absolute;
-    //top: 5%;
-    // 下すぎる
-    top: 160px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
     width: 750px;
     height: 943px;
-    background: #000 url(/assets/images/intro/bg.jpg) 0 0 no-repeat;
   }
 
-  .modal-intro-tagline,
-  .modal-intro-heading,
-  .modal-intro-copy {
-    position: absolute;
-    left: 63px;
-    // 幅指定
-    width: 100%;
-    @extend .sprite-intro;
-    @include hide-text;
-  }
 
-  .modal-intro-tagline {
-    top: 69px;
-    @include sprite( $intro-tagline );
-  }
 
-  .modal-intro-heading {
-    top: 255px;
-    @include sprite( $intro-logo );
-  }
-
-  .modal-intro-copy {
-    top: 360px;
-    @include sprite( $intro-copy );
-  }
-
-  .modal-intro-close {
-    position: absolute;
-    top: 60px;
-    left: 680px;
-    display: block;
-    width: 100px;
-    height: 100px;
-    background-color: #fff;
-    transition: background-color .4s;
-
-    span {
-      position: absolute;
-      top: 70px;
-      left: 29px;
-      @extend .sprite-intro;
-      @include sprite( $intro-btn-close );
-      @include hide-text;
-      transition: filter .3s;
-    }
-
-    i {
-      position: absolute;
-      top: 42px;
-      left: 28px;
-      display: block;
-      width: 46px;
-      height: 2px;
-      background-color: $highlight-color;
-      @include hide-text;
-      transition: transform .3s ease-in, background-color .3s;
-
-      &:nth-child(1) {
-        transform: rotate(45deg);
-      }
-
-      &:nth-child(2) {
-        transform: rotate(-45deg);
-      }
-    }
-
-    &:hover {
-      background-color: $highlight-color;
-
-      span {
-        filter: brightness(5)
-      }
-
-      i {
-        background-color: #fff;
-
-        &:nth-child(1) {
-          transform: rotate(315deg);
-        }
-
-        &:nth-child(2) {
-          transform: rotate(-315deg);
-        }
-      }
-    }
-  }
 }
 
 
