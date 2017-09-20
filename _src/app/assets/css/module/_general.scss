@@ -617,23 +617,39 @@
 // 初回起動時のサービス紹介
 .modal-intro {
   @extend %modal-dialogue;
-  position: absolute;
 
   .modal-bg {
     background-color: rgba(0, 0, 0, .7);
   }
 
-  .modal-intro-contents {
+  //.modal-intro-contents
+  &-contents {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
-    width: 750px;
-    height: 943px;
   }
 
+  //.modal-intro-close
+  &-close {
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
+  //.modal-intro-close-btn
+  &-close-btn {
+    display: block;
+    width: 28px;
+    height: 28px;
+    background: url(/assets/images/intro/btn-close.png) 0 0 no-repeat;
+    @include hide-text;
 
+    &:hover {
+      @include over-opacity;
+    }
+  }
 }
 
 
