@@ -73,7 +73,7 @@ const recommend = () => {
   if (!recommendElement) {
     return;
   }
-  var viewRecommend = new ViewRecommend(recommendElement, {}, 'basketball');
+  const viewRecommend = new ViewRecommend(recommendElement, {}, 'basketball');
   viewRecommend.start();
 };
 
