@@ -150,13 +150,17 @@ const dir = {
   dist: null,
   infinite: null,
   mlb: null,
+  popup: null,
 };
 
 dir.app = {
-  root,
+  root: '../app',
+  assets: '../app/assets/',
+  js: '../app/assets/js',
+  bundle: '../app/assets/js/bundle',
 };
 
-// babels - infinite
+// babels - mlb
 const mlb = `${root}/babels-mlb`;
 dir.mlb = {
   src: `${mlb}/src`,
@@ -164,6 +168,16 @@ dir.mlb = {
   compile: `${mlb}/01_compile`,
   dist: `${mlb}/02_dest`,
   docs: `${mlb}/_docs`,
+};
+
+// babels - popup
+const popup = `${root}/babels-app-popup`;
+dir.popup = {
+  src: `${popup}/src`,
+  dependencies: `${popup}/dependencies`,
+  compile: `${popup}/01_compile`,
+  dist: `${popup}/02_dest`,
+  docs: `${popup}/_docs`,
 };
 
 // dist
@@ -174,7 +188,9 @@ dir.dist = {
   assets: {
     root: `${sportsbull}/assets`,
     mlb: `${sportsbull}/assets/mlb`,
+    popup: `${sportsbull}/assets/popup`,
   },
+  // app popup
 };
 
 // --------------------------------------
