@@ -52,27 +52,28 @@ const wpk = module.wpk;
 // --------------------------------------
 
 const files = [
-  `${dir.mlb.src}/**/*.{js,jsx}`,
+  `${dir.popup.src}/**/*.{js,jsx}`,
 ];
 // console.log('files dir.dist.theme', dir.dist.theme);
 const fileName = {
-  raw: 'mlb_stats_app.js',
-  bundle: 'mlb_stats_app.bundle.js',
+  raw: 'banner_popup_app.js',
+  bundle: 'banner_popup_app.bundle.js',
 };
 
 // ESLintst
 // --------------------------------------
-gulp.task('mlb:lint', () => (
+gulp.task('popup:lint', () => (
   gulp.src(files)
     .pipe($.eslint({ useEslintrc: true }))
     .pipe($.eslint.format())
     .pipe($.eslint.failAfterError())
-    .pipe($.size({ title: '*** mlb:lint ***' }))
-),);
+    .pipe($.size({ title: '*** popup:lint ***' }))
+),
+);
 
 // babel
 // --------------------------------------
-gulp.task('mlb:babel', () => (
+gulp.task('popup:babel', () => (
   gulp.src(files)
   // .pipe($.babel({
   //   presets: [
@@ -89,29 +90,29 @@ gulp.task('mlb:babel', () => (
   // }))
     .pipe($.babel())
     .pipe($.replaceTask({ patterns }))
-    .pipe(gulp.dest(dir.mlb.compile))
-    .pipe($.size({ title: '*** mlb:babel ***' }))
-  ),
+    .pipe(gulp.dest(dir.popup.compile))
+    .pipe($.size({ title: '*** popup:babel ***' }))
+),
 );
 
 // webpack [DEV]
 // --------------------------------------
-gulp.task('mlb:pack:dev', (callback) => {
+gulp.task('popup:pack:dev', (callback) => {
   const config = Object.assign({}, wpk);
   // remove, since webpack 2.x, @see https://webpack.js.org/guides/migrating/
   // config.plugins = [
   //   new $$.webpack.optimize.DedupePlugin(),
   // ];
-  config.entry = `${wpk.entry}/babels-mlb/01_compile/${fileName.raw}`;
+  config.entry = `${wpk.entry}/babels-popup/01_compile/${fileName.raw}`;
   // config.output.path = dir.babels.dist;
-  config.output.path = `${wpk.entry}/babels-mlb/02_dest`;
+  config.output.path = `${wpk.entry}/babels-popup/02_dest`;
   config.output.filename = fileName.bundle;
   // webpack
   return $$.webpack(config, (error, stats) => {
     if (error) {
-      throw new $.util.PluginError('mlb:webpack:dev', error);
+      throw new $.util.PluginError('popup:webpack:dev', error);
     }
-    $.util.log('[mlb:webpack:dev]', stats.toString({
+    $.util.log('[popup:webpack:dev]', stats.toString({
       colors: true,
       progress: true,
     }));
@@ -121,7 +122,7 @@ gulp.task('mlb:pack:dev', (callback) => {
 
 // webpack [BUILD]
 // --------------------------------------
-gulp.task('mlb:pack:build', (callback) => {
+gulp.task('popup:pack:build', (callback) => {
   // const config = Object.create(wpk);
   const config = Object.assign({}, wpk);
   config.plugins = [
@@ -135,15 +136,15 @@ gulp.task('mlb:pack:build', (callback) => {
       },
     }),
   ];
-  config.entry = `${config.entry}/babels-mlb/01_compile/${fileName.raw}`;
-  config.output.path = `${wpk.entry}/babels-mlb/02_dest`;
+  config.entry = `${config.entry}/babels-popup/01_compile/${fileName.raw}`;
+  config.output.path = `${wpk.entry}/babels-popup/02_dest`;
   config.output.filename = fileName.bundle;
   // webpack
   return $$.webpack(config, (error, stats) => {
     if (error) {
-      throw new $.util.PluginError('mlb:webpack:build', error);
+      throw new $.util.PluginError('popup:webpack:build', error);
     }
-    $.util.log('[mlb:webpack:build]', stats.toString({
+    $.util.log('[popup:webpack:build]', stats.toString({
       colors: true,
       progress: true,
     }));
@@ -153,42 +154,42 @@ gulp.task('mlb:pack:build', (callback) => {
 
 // copy
 // --------------------------------------
-gulp.task('mlb:copy', () => (
+gulp.task('popup:copy', () => (
   gulp.src(
     [
       // `${dir.app.root}/**/*.bundle.js`,
-      `${wpk.entry}/babels-mlb/02_dest/**/*.bundle.js`,
+      `${wpk.entry}/babels-popup/02_dest/**/*.bundle.js`,
     ],
   )
-    .pipe($.debug({ title: '[BABELS:MLB]' }))
+    .pipe($.debug({ title: '[BABELS:POPUP]' }))
     // .pipe(gulp.dest(dir.dist.root))
     // .pipe(gulp.dest(dir.app.js))
-    .pipe(gulp.dest(`${dir.dist.assets.mlb}/js`))
+    .pipe(gulp.dest(`${dir.dist.assets.popup}/js`))
     .pipe(gulp.dest(`${dir.root}/test/assets/js`))
     // .pipe(gulp.dest(`${dir.root}/app/assets/js`))
-    .pipe($.size({ title: '*** mlb:copy ***' }))
-  ),
+    .pipe($.size({ title: '*** popup:copy ***' }))
+),
 );
 
 // --------------------------------------
 //  TASK > SEQUENCE
 // --------------------------------------
-gulp.task('mlb:dev', callback =>
+gulp.task('popup:dev', callback =>
   $$.runSequence(
-    'mlb:lint',
-    'mlb:babel',
-    'mlb:pack:dev',
-    'mlb:copy',
+    'popup:lint',
+    'popup:babel',
+    'popup:pack:dev',
+    'popup:copy',
     callback,
   ),
 );
 
-gulp.task('mlb:build', callback =>
+gulp.task('popup:build', callback =>
   $$.runSequence(
-    'mlb:lint',
-    'mlb:babel',
-    'mlb:pack:build',
-    'mlb:copy',
+    'popup:lint',
+    'popup:babel',
+    'popup:pack:build',
+    'popup:copy',
     callback,
   ),
 );
