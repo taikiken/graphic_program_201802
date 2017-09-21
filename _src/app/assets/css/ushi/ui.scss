@@ -520,6 +520,16 @@
 
     td {
       color: #cdcdcd;
+
+      .attention {
+        color: $highlight-secondary-color;
+      }
+    }
+
+    .ushi__overview__inquiry {
+      a {
+        @include link-decoration(#cdcdcd, #cdcdcd, underline, none);
+      }
     }
   }
 } //.ushi__overview
