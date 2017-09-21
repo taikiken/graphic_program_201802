@@ -64,7 +64,6 @@ if ($page['category']['slug'] == 'all') {
       // {@link ViewCategory.js}, {@link ComponentCategoryOption.js}
       ?>
       <div id="js-headline"></div>
-      <div id="js-headline"></div>
 
 
       <?php if ( $page['category']['slug'] === 'big6tv' ) : ?>
@@ -86,6 +85,13 @@ if ($page['category']['slug'] == 'all') {
       # ref. #2185
       if ( $page['category']['slug'] === 'inhigh' ) :
         include_once __DIR__.'/../inhigh/desktop/index.php';
+      endif;
+      ?>
+
+      <?php
+      # ref. #2321 
+      if ( $page['category']['slug'] === 'americanfootball' ) :
+        include_once __DIR__.'/../stats/ua_kansai/desktop/index.php';
       endif;
       ?>
 

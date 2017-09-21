@@ -425,11 +425,12 @@ EOM;
 				foreach ($value as $key2 => $value2) {
 					$week = "(".$value2['weekday'].")";
 					foreach ($value2["games"] as $game) {
-						if (empty($game['highlightmovieurl'])) {
-							$movie = "<div class='digest'>ダイジェスト動画</div>";
-						}else{
-							$movie = "<a class='digest active' href='".$game['highlightmovieurl']."'>ダイジェスト動画</a>";
-						}
+						// ダイジェストエリアを試合詳細へ変更するためコメントアウト
+						// if (empty($game['highlightmovieurl'])) {
+						// 	$movie = "<div class='digest'>ダイジェスト動画</div>";
+						// }else{
+						// 	$movie = "<a class='digest active' href='".$game['highlightmovieurl']."'>ダイジェスト動画</a>";
+						// }
 						if (empty($game['json'])) {
 							$gameLink = <<< EOM
 								<div class="match">
@@ -437,6 +438,7 @@ EOM;
 									{$game['team'][0]['score']} - {$game['team'][1]['score']}
 									<span class="team-{$game['team'][1]['id']}">{$game['team'][1]['name']}</span>
 								</div>
+								<div class='digest'>ダイジェスト動画</div>
 EOM;
 						}else{
 							$gameLink = <<< EOM
@@ -445,12 +447,12 @@ EOM;
 									{$game['team'][0]['score']} - {$game['team'][1]['score']}
 									<span class="team-{$game['team'][1]['id']}">{$game['team'][1]['name']}</span>
 								</a>
+								<a class='digest active' href='/stats/ua_kansai/match/?gameId={$game['gameid']}'>ダイジェスト動画</a>
 EOM;
 						}
 						$li .= <<< EOM
 							<li>
 								{$gameLink}
-								{$movie}
 							</li>
 EOM;
 					}
