@@ -4,7 +4,9 @@
 .widget-post-carousel {
   // carousel width
   $carousel-width: 140px + 10px;
-  $carousel-height: 200px;
+  //$carousel-height: 200px;
+  // https://github.com/undotsushin/undotsushin/issues/2381#issuecomment-331056538
+  $carousel-height: 170px;
 
   width: 100%;
   margin-top: (40/2)+px;
@@ -97,10 +99,16 @@
 
     //.post-heading
     &-heading {
-      line-height: lh(34, 22);
+      //line-height: lh(34, 22);
       color: #333;
       font-weight: bold;
-      font-size: fz(22/2);
+      //font-size: fz(22/2);
+      // FB - 2017-09-21
+      // https://github.com/undotsushin/undotsushin/issues/2381#issuecomment-331056538
+      height: 34px;
+      overflow: hidden;
+      line-height: 17px;
+      font-size: 11px;
     }
 
     //.post-category
