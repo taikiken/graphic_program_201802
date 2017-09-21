@@ -125,7 +125,7 @@ function toggle_options(t,f){
 }
 
 function ut_init(){
-	
+
 	if(cd=="repo_n"){
 		
 		$(".imglist li:eq(3)").css({"clear":"both"});
@@ -330,7 +330,6 @@ function ut_init(){
 		
 		$("#cmdtypes9").before("<br>");
 		$("[name$='flag']").each(function(){
-			console.log([$(this).attr("name"),$(this).prop("checked")])
 			if($(this).prop("checked"))toggleflag($(this).attr("name"),$(this).val());
 		});
 		$("[name$='flag']").change(function(){
@@ -462,6 +461,13 @@ $(function(){
 		});
 	});
 	
+	$(".inputFields img").delay(2000).each(function(){
+		var e=$(this).attr("name");
+		if(e&&e.match(/headerimg/)){
+			$(this).width(800).css({"marginBottom":"7px"});
+		}
+
+	});
 
 	pagenation();
  
