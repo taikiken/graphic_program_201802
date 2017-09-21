@@ -342,7 +342,7 @@ function ut_init(){
 			var key=key.replace(/^p_/,"");
 			
 			if(key.match(/^ad_video/)){
-				key=".ad_videoid,.ad_pc_videotag,.ad_sp_videotag";
+				key=".ad_videoid,.ad_pc_videotag,.ad_sp_videotag,.ad_ios_videotag,.ad_android_videotag";
 			}else if(key.match(/^ad/)){
 				key="."+key.replace(/flag/,"id");
 			}else if(key.match(/^(sidebar|single)_/)){

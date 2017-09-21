@@ -217,10 +217,10 @@ function set_advertise($ad,$type){
 	$bannertype=array("pc","sp","ios","android");
 	
 	for($i=0;$i<count($bannertype);$i++){
-		if($i<=1){
-			$s["ad_url".$bannertype[$i]]=$ad["ad_url".$bannertype[$i]];
+		if($i<=1){	
 			$s["theme"]["images"][$bannertype[$i]]=strlen($ad[$bannertype[$i]."_headerimg".$type])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i]."_headerimg".$type]):"";
 		}
+		$s["ad_url".$bannertype[$i]]=$ad["ad_url".$bannertype[$i]];
 		$s["banner"][$bannertype[$i]]["text"]=strlen($ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)])>0?checkstr($ad[sprintf("%sbannertext",$listordetail)]):"";
 		$s["banner"][$bannertype[$i]]["image"]=strlen($ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)]):"";
 		$s["banner"][$bannertype[$i]]["link"]=checkstr($ad[$bannertype[$i].sprintf("_%sbannerlink",$listordetail)]);		
@@ -285,6 +285,8 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 			$s["vast"]=$ad[$i]["ad_videoid"];
 			$s["ad_urlpc"]=$ad[$i]["ad_pc_videotag"];
 			$s["ad_urlsp"]=$ad[$i]["ad_sp_videotag"];
+			$s["ad_urlios"]=$ad[$i]["ad_ios_videotag"];
+			$s["ad_urlandroid"]=$ad[$i]["ad_android_videotag"];
 		}else{
 			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_videoid"])>0)$s["vast"]=$ad[$i]["ad_videoid"];
 			elseif($ad[$i]["ad_videoflag"]==2)$s["vast"]="";
@@ -294,6 +296,12 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 			
 			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_sp_videotag"])>0)$s["ad_urlsp"]=$ad[$i]["ad_sp_videotag"];
 			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlsp"]="";
+
+			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_ios_videotag"])>0)$s["ad_urlios"]=$ad[$i]["ad_ios_videotag"];
+			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlios"]="";
+
+			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_android_videotag"])>0)$s["ad_urlandroid"]=$ad[$i]["ad_android_videotag"];
+			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlandroid"]="";
 		}
 
 		if($i==1){
@@ -374,6 +382,10 @@ function set_categoriesinfo($f){
 	$ad_put=set_advertise($ad,"list");
 	
 	$s=$s+$ad_put;
+	foreach($s as $k=>$v){
+		if(preg_match("/^(ad_url|vast)/",$k))unset($s[$k]);
+	}
+	
 	return $s;
 }
 
@@ -511,6 +523,8 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["media"]["video"]["vast"]=$ad["vast"];
 		$s["media"]["video"]["ad_url"]["pc"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlpc"]);
 		$s["media"]["video"]["ad_url"]["sp"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlsp"]);
+		$s["media"]["video"]["ad_url"]["ios"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlios"]);
+		$s["media"]["video"]["ad_url"]["android"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlandroid"]);
 	}
 	
 	$s["user"]=set_userinfo($f,0);
