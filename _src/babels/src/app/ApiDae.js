@@ -161,6 +161,21 @@ let buildPath = ( root = '' ) => {
       new Queries()
     ),
     // --------------------------------------------
+    // /area/地域/
+    // @since 2017-08-29
+    'area': new Types(
+      new Type( `${API_PATH}/articles/area` ),
+      new Permalink(),
+      new Queries()
+    ),
+    // /area/地域/
+    // @since 2017-08-29
+    'pref': new Types(
+      new Type( `${API_PATH}/articles/pref` ),
+      new Permalink(),
+      new Queries()
+    ),
+    // --------------------------------------------
     // home / self
     // /api/v1/articles/home[/|/pickup|/headline]
     'home': new Types(

@@ -1,5 +1,8 @@
 <?php
 
+//関西アメリカンフットボールJSONパス
+$ka_path="http://stats_pr:KansaiL@www.kansai.football-statistics.jp/div1/sportsbull";
+
 $dir="americanfootball/2017/autumn";
 $path=preg_match("/cms/",$servername)?"img":"dev-img";
 
@@ -23,14 +26,14 @@ $univ["京都大"]=array("id"=>6,"name"=>"京都大学");
 $univ["桃山大"]=array("id"=>7,"name"=>"桃山学院大学");
 $univ["同志社"]=array("id"=>8,"name"=>"同志社大学");
 
-$urev["関西学院大学"]=array("id"=>1,"name"=>"関西学院大学");
-$urev["立命館大学"]=array("id"=>2,"name"=>"立命館大学");
-$urev["関西大学"]=array("id"=>3,"name"=>"関西大学");
-$urev["龍谷大学"]=array("id"=>4,"name"=>"龍谷大学");
-$urev["甲南大学"]=array("id"=>5,"name"=>"甲南大学");
-$urev["京都大学"]=array("id"=>6,"name"=>"京都大学");
-$urev["桃山学院大学"]=array("id"=>7,"name"=>"桃山学院大学");
-$urev["同志社大学"]=array("id"=>8,"name"=>"同志社大学");
+$urev["関西学院大学"]=array("id"=>1,"name"=>"関学大");
+$urev["立命館大学"]=array("id"=>2,"name"=>"立命館");
+$urev["関西大学"]=array("id"=>3,"name"=>"関西大");
+$urev["龍谷大学"]=array("id"=>4,"name"=>"龍谷大");
+$urev["甲南大学"]=array("id"=>5,"name"=>"甲南大");
+$urev["京都大学"]=array("id"=>6,"name"=>"京都大");
+$urev["桃山学院大学"]=array("id"=>7,"name"=>"桃山大");
+$urev["同志社大学"]=array("id"=>8,"name"=>"同志社");
 
 $map["#リーグ"]="league";
 $map["#日付け"]="date";
@@ -78,13 +81,24 @@ function check_result($score){
 	return $f;
 }
 
-function get_lastmod($file){
-	$c=get_headers($file);
-	for($i=0;$i<count($c);$i++){
-		if(preg_match("/Last-Modified: /",$c[$i])){
-			return strtotime(str_replace("Last-Modified: ","",$c[$i]));
+function get_lastmod($url){
+	if(preg_match("/http/",$url)){	
+		$ch=curl_init();	
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+		curl_setopt($ch,CURLOPT_HEADER,true);
+		curl_setopt($ch,CURLOPT_NOBODY ,true);
+		if(preg_match("/https/",$url)){
+			curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+			curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
 		}
-	}	
+		$s=curl_exec($ch);
+		preg_match("/^Date\s*:\s*(.+)$/m",$s,$matche);
+		$output=strtotime($matche[1]);
+	}else{
+		$output=filemtime($url);
+	}
+	return $output;
 }
 
 function setarray($key,$val,$n){

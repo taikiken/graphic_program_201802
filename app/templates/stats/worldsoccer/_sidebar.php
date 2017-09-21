@@ -2,12 +2,19 @@
       <div id="sidebar-moving-container">
 
         <div class="sponsor-link">
-          <!-- /531683568/npb-pc-rectangle -->
-          <div id='div-gpt-ad-1492577512561-0' style='height:250px; width:300px;'>
-          <script>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1492577512561-0'); });
-          </script>
-          </div>
+            <script type='text/javascript'>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/<?php echo $page['ad']['pc']['sidebar_top']; ?>', [300, 250], 'div-gpt-ad-pc_sidebar_top').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-pc_sidebar_top' style='height:250px; width:300px;'>
+            <script type='text/javascript'>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_sidebar_top'); });
+            </script>
+            </div>
         </div>
 
         <div class="app-bnr">
