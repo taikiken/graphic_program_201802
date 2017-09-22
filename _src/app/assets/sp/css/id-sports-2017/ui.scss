@@ -311,6 +311,7 @@
 //.id_sports2017__offshot_movie
 .id_sports2017__photo_gallery,
 .id_sports2017__offshot_movie {
+  padding-bottom: perCalc(40, 750);
   background-color: #f5f5f5;
 
   //.id_sports2017__photo_gallery__heading
@@ -402,7 +403,7 @@
   //.id_sports2017__photo_gallery__btn
   //.id_sports2017__offshot_movie__btn
   &__btn {
-    padding: perCalc(40, 750) perCalc(20, 750);
+    padding: perCalc(40, 750) perCalc(20, 750) 0;
 
     a {
       display: block;
