@@ -71,5 +71,5 @@ detector();
 // -----------------------------
 // アプリダウンロード訴求のポップアップを表示 #2404
 // @see https://github.com/undotsushin/undotsushin/issues/2404
-// app banner 削除
+// app banner 削除 on
 document.addEventListener('DOMContentLoaded', remove, false);
