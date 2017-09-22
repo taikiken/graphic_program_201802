@@ -128,6 +128,13 @@ export class ComponentVideojsImaArticle extends React.Component {
      * @type {function}
      */
     this.boundIn = this.hitIn.bind(this);
+    /**
+     * Safari 11 flag
+     * @type {boolean}
+     * @see https://github.com/undotsushin/undotsushin/issues/2503
+     * @since 2017-09-22
+     */
+    this.safari11 = Sagen.Browser.Safari.is() && Sagen.Browser.Safari.version() >= 11;
   }
   /**
    * マウント後に表示プレイヤーの初期化を行います<br>
@@ -203,6 +210,25 @@ export class ComponentVideojsImaArticle extends React.Component {
       player.ima.requestAds();
       player.play();
     });
+    console.log('ComponentVideojsImaArticle this.safari11', this.safari11);
+    // @see https://github.com/undotsushin/undotsushin/issues/2503
+    // @since 2017-09-22
+    if (this.safari11) {
+      console.log('ComponentVideojsImaArticle Safari 11 init');
+      player.muted(true);
+      player.setAttribute('muted', 'muted');
+      //
+      player.on(['adstart'], function() {
+        console.log('playse adstart');
+        try{
+          console.log('ComponentVideojsImaArticle playse adstart try');
+          player.muted(false);
+        } catch(e) {
+          console.warn(e);
+          player.play();
+        }
+      });
+    }
   }
   /**
    * desktop プレイヤー初期化（自動再生）
@@ -218,7 +244,7 @@ export class ComponentVideojsImaArticle extends React.Component {
     player.play();
   }
   /**
-   * iPad プリヤー初期化
+   * iPad プレイヤー初期化
    */
   iPadInitPlayer() {
     // console.log('iPadInitPlayer', this.props.articleId);
