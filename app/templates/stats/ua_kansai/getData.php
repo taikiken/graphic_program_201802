@@ -191,18 +191,18 @@ EOM;
 							</div>
 							<div><p>ダイジェスト</p><p>{$json['highlightmovieurl']['title']}</p></div>
 						</a>
-						<!-- <a href="{$json['movieurl']}" target="_blank">フルバージョンの動画はこちら</a> -->
 					</li>
 				</ul>
 EOM;
-			//ダイジェスト動画
-			$result["digest"] = '<a href="'.$json['movieurl'].'" target="_blank">フルバージョンの動画はこちら</a>';
 		else:
 			$result["movie"] = <<< EOM
 				<div class="mb30">関連動画はありません</div>
 EOM;
 		endif;
-
+		if (self::setJudgment($json['movieurl'])) :
+			//ダイジェスト動画
+			$result["digest"] = '<a href="'.$json['movieurl'].'" target="_blank">フルバージョンの動画はこちら</a>';
+		endif;
 		//各クオーター結果
 		if (self::setJudgment($playFirst['score'])) :
 			foreach ($playFirst['score'] as $key => $value) {
@@ -250,195 +250,100 @@ EOM;
 		//データ
 		$playData = $playFirst["stats"];
 		$drawData = $drawFirst["stats"];
-		if (self::setJudgment($playData['touchdown'])) :
-			$result["data"] = <<< EOM
-				<thead>
-	                <tr>
-	                  <th colspan="2"></th>
-	                  <th>{$playFirst['name']}</th>
-	                  <th>{$drawFirst['name']}</th>
-	                </tr>
-	              </thead>
-	              <tbody>
-	                <tr>
-	                  <td colspan="2">タッチダウン</td>
-	                  <td>{$playData['touchdown']}</td>
-	                  <td>{$drawData['touchdown']}</td>
-	                </tr>
-	                <tr>
-	                  <td rowspan="2">PAT</td>
-	                  <td>（1点）回数-成功</td>
-	                  <td>{$playData['pat']['1point']}</td>
-	                  <td>{$drawData['pat']['1point']}</td>
-	                </tr>
-	                <tr>
-	                  <td>（2点）回数-成功</td>
-	                  <td>{$playData['pat']['2point']}</td>
-	                  <td>{$drawData['pat']['2point']}</td>
-	                </tr>
-	                <tr>
-	                  <td>フィールドゴール</td>
-	                  <td>回数-成功</td>
-	                  <td>{$playData['fieldgoal']}</td>
-	                  <td>{$drawData['fieldgoal']}</td>
-	                </tr>
-	                <tr>
-	                  <td colspan="2">セイフティ</td>
-	                  <td>{$playData['safety']}</td>
-	                  <td>{$drawData['safety']}</td>
-	                </tr>
-	                <tr>
-	                  <td colspan="2">1stダウン（ラン-パス-反則）</td>
-	                  <td>{$playData['1stdown']}</td>
-	                  <td>{$drawData['1stdown']}</td>
-	                </tr>
-	                <tr>
-	                  <td rowspan="2">パス</td>
-	                  <td>試投-成功-被Intercept</td>
-	                  <td>{$playData['pass']['throw']}</td>
-	                  <td>{$drawData['pass']['throw']}</td>
-	                </tr>
-	                <tr>
-	                  <td>獲得ヤード</td>
-	                  <td>{$playData['pass']['yds']}</td>
-	                  <td>{$drawData['pass']['yds']}</td>
-	                </tr>
-	                <tr>
-	                  <td>ラン</td>
-	                  <td>回数-獲得ヤード</td>
-	                  <td>{$playData['run']}</td>
-	                  <td>{$drawData['run']}</td>
-	                </tr>
-	                <tr>
-	                  <td>攻撃</td>
-	                  <td>回数-獲得ヤード</td>
-	                  <td>{$playData['attack']}</td>
-	                  <td>{$drawData['attack']}</td>
-	                </tr>
-	                <tr>
-	                  <td>反則</td>
-	                  <td>回数-喪失ヤード</td>
-	                  <td>{$playData['penalty']}</td>
-	                  <td>{$drawData['penalty']}</td>
-	                </tr>
-	                <tr>
-	                  <td>ファンブル</td>
-	                  <td>回数-喪失回数</td>
-	                  <td>{$playData['fumble']}</td>
-	                  <td>{$drawData['fumble']}</td>
-	                </tr>
-	                <tr>
-	                  <td colspan="2">ボール所有時間</td>
-	                  <td>{$playData['possession']}</td>
-	                  <td>{$drawData['possession']}</td>
-	                </tr>
-	                <tr>
-	                  <td colspan="2">3rd Down Conversions</td>
-	                  <td>{$playData['3rdDownConversions']}</td>
-	                  <td>{$drawData['3rdDownConversions']}</td>
-	                </tr>
-	                <tr>
-	                  <td colspan="2">4rd Down Conversions</td>
-	                  <td>{$playData['4thDownConversions']}</td>
-	                  <td>{$drawData['4thDownConversions']}</td>
-	                </tr>
-	              </tbody>
+		$result["data"] = <<< EOM
+			<thead>
+                <tr>
+                  <th colspan="2"></th>
+                  <th>{$playFirst['name']}</th>
+                  <th>{$drawFirst['name']}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="2">タッチダウン</td>
+                  <td>{$playData['touchdown']}</td>
+                  <td>{$drawData['touchdown']}</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">PAT</td>
+                  <td>（1点）回数-成功</td>
+                  <td>{$playData['pat']['1point']}</td>
+                  <td>{$drawData['pat']['1point']}</td>
+                </tr>
+                <tr>
+                  <td>（2点）回数-成功</td>
+                  <td>{$playData['pat']['2point']}</td>
+                  <td>{$drawData['pat']['2point']}</td>
+                </tr>
+                <tr>
+                  <td>フィールドゴール</td>
+                  <td>回数-成功</td>
+                  <td>{$playData['fieldgoal']}</td>
+                  <td>{$drawData['fieldgoal']}</td>
+                </tr>
+                <tr>
+                  <td colspan="2">セイフティ</td>
+                  <td>{$playData['safety']}</td>
+                  <td>{$drawData['safety']}</td>
+                </tr>
+                <tr>
+                  <td colspan="2">1stダウン（ラン-パス-反則）</td>
+                  <td>{$playData['1stdown']}</td>
+                  <td>{$drawData['1stdown']}</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">パス</td>
+                  <td>試投-成功-被Intercept</td>
+                  <td>{$playData['pass']['throw']}</td>
+                  <td>{$drawData['pass']['throw']}</td>
+                </tr>
+                <tr>
+                  <td>獲得ヤード</td>
+                  <td>{$playData['pass']['yds']}</td>
+                  <td>{$drawData['pass']['yds']}</td>
+                </tr>
+                <tr>
+                  <td>ラン</td>
+                  <td>回数-獲得ヤード</td>
+                  <td>{$playData['run']}</td>
+                  <td>{$drawData['run']}</td>
+                </tr>
+                <tr>
+                  <td>攻撃</td>
+                  <td>回数-獲得ヤード</td>
+                  <td>{$playData['attack']}</td>
+                  <td>{$drawData['attack']}</td>
+                </tr>
+                <tr>
+                  <td>反則</td>
+                  <td>回数-喪失ヤード</td>
+                  <td>{$playData['penalty']}</td>
+                  <td>{$drawData['penalty']}</td>
+                </tr>
+                <tr>
+                  <td>ファンブル</td>
+                  <td>回数-喪失回数</td>
+                  <td>{$playData['fumble']}</td>
+                  <td>{$drawData['fumble']}</td>
+                </tr>
+                <tr>
+                  <td colspan="2">ボール所有時間</td>
+                  <td>{$playData['possession']}</td>
+                  <td>{$drawData['possession']}</td>
+                </tr>
+                <tr>
+                  <td colspan="2">3rd Down Conversions</td>
+                  <td>{$playData['3rdDownConversions']}</td>
+                  <td>{$drawData['3rdDownConversions']}</td>
+                </tr>
+                <tr>
+                  <td colspan="2">4rd Down Conversions</td>
+                  <td>{$playData['4thDownConversions']}</td>
+                  <td>{$drawData['4thDownConversions']}</td>
+                </tr>
+              </tbody>
 EOM;
-		else :
-			$result["data"] = <<< EOM
-				<thead>
-	                <tr>
-	                  <th colspan="2"></th>
-	                  <th>{$playFirst['name']}</th>
-	                  <th>{$drawFirst['name']}</th>
-	                </tr>
-	              </thead>
-	              <tbody>
-	                <tr>
-	                  <td colspan="2">タッチダウン</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td rowspan="2">PAT</td>
-	                  <td>（1点）回数-成功</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td>（2点）回数-成功</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td>フィールドゴール</td>
-	                  <td>回数-成功</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td colspan="2">セイフティ</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td colspan="2">1stダウン（ラン-パス-反則）</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td rowspan="2">パス</td>
-	                  <td>試投-成功-被Intercept</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td>獲得ヤード</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td>ラン</td>
-	                  <td>回数-獲得ヤード</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td>攻撃</td>
-	                  <td>回数-獲得ヤード</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td>反則</td>
-	                  <td>回数-喪失ヤード</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td>ファンブル</td>
-	                  <td>回数-喪失回数</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td colspan="2">ボール所有時間</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td colspan="2">3rd Down Conversions</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	                <tr>
-	                  <td colspan="2">4rd Down Conversions</td>
-	                  <td>-</td>
-	                  <td>-</td>
-	                </tr>
-	              </tbody>
-EOM;
-		endif;
+
 		//得点経過
 		$color = array('blue', 'red');
 		if (self::setJudgment($scoreInfo)) :

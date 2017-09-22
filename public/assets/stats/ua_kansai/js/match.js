@@ -51,7 +51,14 @@ $(function(){
 	});
 	var autoReloadActive = GetCookie("autoReload");
 	if ( autoReloadActive == 1) {
-		$('#auto').trigger('click');
+		if (document.getElementById("auto") != null) {
+			$('#auto').trigger('click');
+		}else{
+			//自動更新のまま試合終了した場合
+			var date = new Date();
+			date.setTime( date.getTime() - 1 );
+			document.cookie = 'autoReload=;path=/stats/ua_kansai/match/;expires=' + date.toUTCString();
+		}
 	}
 	var gameInfoActive = GetCookie("game-info");
 	if ( gameInfoActive ) {
