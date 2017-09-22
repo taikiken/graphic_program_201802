@@ -38,6 +38,8 @@ export default class Visited {
    * cookie 24h セットします
    */
   static arrive() {
-    Cookie.set(Visited.COOKIE, '1', Times.hour(24));
+    // Cookie.set(Visited.COOKIE, '1', Times.hour(24));
+    // https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-331352860
+    Cookie.set(Visited.COOKIE, location.href, Times.hour(24));
   }
 }

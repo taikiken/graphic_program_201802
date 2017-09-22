@@ -57,6 +57,7 @@
     "start": "NODE_ENV=development gulp dev",
     "dev": "NODE_ENV=development gulp dev",
     "build": "NODE_ENV=production gulp",
+    "build:popup": "NODE_ENV=production gulp popup:build",
     "esdoc": "cd ./babels-mlb && esdoc -c esdoc.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

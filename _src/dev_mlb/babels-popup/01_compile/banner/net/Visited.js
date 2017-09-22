@@ -66,7 +66,9 @@ var Visited = function () {
   }, {
     key: 'arrive',
     value: function arrive() {
-      _Cookie2.default.set(Visited.COOKIE, '1', _Times2.default.hour(24));
+      // Cookie.set(Visited.COOKIE, '1', Times.hour(24));
+      // https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-331352860
+      _Cookie2.default.set(Visited.COOKIE, location.href, _Times2.default.hour(24));
     }
   }]);
 
