@@ -147,6 +147,19 @@ EOM;
 		$result = array("date"=>$date,"playFirstName"=>$playFirst['name'],"drawFirstName"=>$drawFirst['name'],"headInner"=>"","movie"=>"","digest"=>"","quarter"=>"","data"=>"","scoreInfo"=>"","personalInfo"=>"","autoReload"=>false);
 
 		$result["autoReload"] = $gameinfo['status']!="試合終了" && $gameinfo['status']!="中止" && $gameinfo['status']!="ノーゲーム" ? true:false;
+
+		if (!self::setJudgment($gameinfo['status'])) {
+			$gameinfo['status'] = "試合中";
+		}
+		if (!self::setJudgment($gameinfo['stadium'])) {
+			$gameinfo['stadium'] = "-";
+		}
+		if (!self::setJudgment($gameinfo['weather'])) {
+			$gameinfo['weather'] = "-";
+		}
+		if (!self::setJudgment($gameinfo['spectators'])) {
+			$gameinfo['spectators'] = "-";
+		}
 		//ヘッダーインナー
 		$result["headInner"] = <<< EOM
 			<div class="game-name">{$gameinfo['league']}</div>
@@ -163,7 +176,7 @@ EOM;
 			</div>
 			<div class="state">{$gameinfo['status']}</div>
 			<div class="info">
-				{$date}（{$gameinfo['weekday']}）　{$gameinfo['kickoff']}～<br />
+				{$date}({$gameinfo['weekday']})　{$gameinfo['kickoff']}～<br />
 				於：{$gameinfo['stadium']}　天候：{$gameinfo['weather']}　観衆：{$gameinfo['spectators']}人
 			</div>
 EOM;
@@ -184,6 +197,10 @@ EOM;
 EOM;
 			//ダイジェスト動画
 			$result["digest"] = '<a href="'.$json['movieurl'].'" target="_blank">フルバージョンの動画はこちら</a>';
+		else:
+			$result["movie"] = <<< EOM
+				<div class="mb30">関連動画はありません</div>
+EOM;
 		endif;
 
 		//各クオーター結果
