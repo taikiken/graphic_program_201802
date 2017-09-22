@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="robots" content="noindex,nofollow" />
   <title>SPORTS BULL - アプリダウンロード</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.js"></script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -24,6 +25,9 @@
     var protocol = 'sportsbull-dev';
   }
 
+  // [tmp] 一時的に本番アプリに
+  var protocol = 'sportsbull';
+
   // var
   var url = {
     'base'           : 'https://app.adjust.com/' + adjust_code + '?deep_link=' + protocol + '://action?url=',
@@ -33,13 +37,26 @@
     'ga'             : window.location.href
   }
 
+  url.redirect = url.base;
+
+  // referrer
   if ( document.referrer ) {
-    url.referrer       = document.referrer;
+    url.referrer = document.referrer;
+
+  } else if ( Cookies.get('__app_banner_visited__') ) {
+    url.referrer = decodeURIComponent(Cookies.get('__app_banner_visited__'));
+  }
+
+
+  // arrange
+  if ( url.referrer ) {
+
+    // [tmp] 一時的にdevきる
+    url.referrer = url.referrer.replace(/dev\./,"");
+
     url.referrerEncode = encodeURIComponent(url.referrer)
     url.redirect       = url.base + url.referrerEncode;
     url.ga             = url.base + url.referrer;
-  } else {
-    url.redirect = url.base;
   }
 
   // ga
@@ -51,6 +68,8 @@
   });
 
   // redirect
+  alert(url.redirect);
+
   window.location.replace(url.redirect);
 
   </script>
