@@ -109,12 +109,11 @@
             <div class="id_sports2017__summary__text--4 js-animation"><img src="/assets/images/id-sports-2017/summary-flag.png" alt=""></div>
           </div><!-- /.id_sports2017__summary__text -->
         </div><!-- /.id_sports2017__summary__movie -->
+        <p class="id_sports2017__intro__scroll"><img src="/assets/images/id-sports-2017/intro-scroll.png" alt="SCROLL"></p>
       </div><!-- /.id_sports2017__summary -->
 
-      <div class="id_sports2017__intro_16x9">&nbsp;</div>
       <div class="id_sports2017__intro">
         <div class="id_sports2017__intro__inner">
-          <p class="id_sports2017__intro__scroll"><img src="/assets/images/id-sports-2017/intro-scroll.png" alt="SCROLL"></p>
           <h2 class="id_sports2017__intro__heading">第一回知的障がい者日韓スポーツ交流プログラム</h2>
           <p class="id_sports2017__intro__copy">エクアドル2015 グローバルゲームスに参加した有志により当プログラムは構成され、<br />
           アジア地域における知的障がい者スポーツの発展に日韓が協力して推進し、スポーツを通じた国際協力及び交流を目的に行われるものである。<br />
