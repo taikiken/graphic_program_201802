@@ -62,7 +62,7 @@ for($i=0;$i<count($gameid);$i++){
 		$data1["response"]["lastupdate"]=$lastupdate;
 		$data1["response"]["gameinfo"]["weekday"]=get_weekday(date("w",$data1["response"]["gameinfo"]["date"]));
 		$data1["response"]["highlightmovieurl"]=$movie["movie"][$gameid[$i]];
-		$data1["response"]["movieurl"]=$fullmovieurl[$gameid[$i]];
+		$data1["response"]["movieurl"]=$data1["response"]["gameinfo"]["status"]=="試合終了"?$fullmovieurl[$gameid[$i]]:"";
 		
 		$data1["response"]["team"][0]["stats"]["possession"]=hms($data1["response"]["team"][0]["stats"]["possession"]);
 		$data1["response"]["team"][1]["stats"]["possession"]=hms($data1["response"]["team"][1]["stats"]["possession"]);

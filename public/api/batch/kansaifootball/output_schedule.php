@@ -39,7 +39,19 @@ if(!file_exists($json)||$lastupdate>filemtime($json)){
 			$game=array();
 			
 			for($i=0;$i<count($v);$i++){
+				
+				$json="";
 				$endpointfile=sprintf("%s/%s.json",$bucket,$v[$i][5]);
+				if(file_exists($endpointfile)){
+					$json=str_replace(array("s3://","img-sportsbull-jp"),array("https://","img.sportsbull.jp"),$endpointfile);
+					$d2=get_contents($endpointfile);
+					$d2=json_decode($d2,TRUE);
+					if($d2["response"]["gameinfo"]["status"]!="試合終了"){
+						$v[$i][7]=$d2["response"]["team"][0]["score"]["total"];
+						$v[$i][9]=$d2["response"]["team"][1]["score"]["total"];
+					}
+				}
+				
 				$game[]=array(
 					"gameid"=>$v[$i][5],
 					"time"=>$v[$i][3],
@@ -57,7 +69,7 @@ if(!file_exists($json)||$lastupdate>filemtime($json)){
 							"score"=>$v[$i][9]
 						)
 					),
-					"json"=>file_exists($endpointfile)?str_replace(array("s3://","img-sportsbull-jp"),array("https://","img.sportsbull.jp"),$endpointfile):""
+					"json"=>$json
 				);
 				$league["games"]=$game;
 			}
