@@ -210,18 +210,18 @@ export class ComponentVideojsImaArticle extends React.Component {
       player.ima.requestAds();
       player.play();
     });
-    console.log('ComponentVideojsImaArticle this.safari11', this.safari11);
+    // console.log('ComponentVideojsImaArticle this.safari11', this.safari11);
     // @see https://github.com/undotsushin/undotsushin/issues/2503
     // @since 2017-09-22
     if (this.safari11) {
-      console.log('ComponentVideojsImaArticle Safari 11 init');
+      // console.log('ComponentVideojsImaArticle Safari 11 init', this.props.articleId);
       player.muted(true);
-      player.setAttribute('muted', 'muted');
+      // player.setAttribute('muted', 'muted');
       //
-      player.on(['adstart'], function() {
-        console.log('playse adstart');
+      player.on('adstart', function() {
+        // console.log('playse adstart');
         try{
-          console.log('ComponentVideojsImaArticle playse adstart try');
+          // console.log('ComponentVideojsImaArticle playse adstart try');
           player.muted(false);
         } catch(e) {
           console.warn(e);
