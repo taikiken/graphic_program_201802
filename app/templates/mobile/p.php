@@ -148,11 +148,13 @@
           ?>
           <div class="post-pr_app">
             <div class="post-pr_app-inner">
-              <h3 class="post-pr_app-heading">毎日500記事以上の最新ニュースやスポーツ速報を完全無料で見放題!</h3>
-              <ul class="post-pr_app-list">
-                <li class="post-pr_app-item"><a class="post-pr_app-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/detail/pr_app-btn-ios.png" alt="App Store"></a></li>
-                <li class="post-pr_app-item"><a class="post-pr_app-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/detail/pr_app-btn-android.png" alt="Google play"></a></li>
-              </ul><!-- /.post-pr_app-list -->
+              <a href="https://app.adjust.com/lac3f2?deep_link=sportsbull%3A%2F%2F" target="_blank">
+                <h3 class="post-pr_app-heading">40種類を超えるスポーツニュースや速報を完全無料でアプリで見放題！</h3>
+                <ul class="post-pr_app-list">
+                  <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-ios.png" alt="App Store"></li>
+                  <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-android.png" alt="Google play"></li>
+                </ul><!-- /.post-pr_app-list -->
+              </a>
             </div><!-- /.post-pr_app-inner -->
           </div><!-- /.post-pr_app -->
 
@@ -266,7 +268,7 @@
       <div class="pr_fb">
         <h4 class="pr_fb-heading"><span class="pr_fb-heading-item">毎日500本以上の最新スポーツニュースを配信 Facebookにいいね!して情報を受け取ろう!</span></h4>
         <div class="pr_fb-btn">
-          <div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+          <div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
         </div>
       </div>
       <?php
