@@ -59,7 +59,7 @@
   </script>
 </head>
 <body>
-<div id="whole" class="whole <?php echo $page['template_classname']; ?> teaser">
+<div id="whole" class="whole <?php echo $page['template_classname']; ?>">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>

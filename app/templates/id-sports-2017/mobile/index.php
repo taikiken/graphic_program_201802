@@ -68,7 +68,7 @@
   </script>
 </head>
 <body class="appbnr-disable">
-<div class="whole <?php echo $page['template_classname']; ?> teaser">
+<div class="whole <?php echo $page['template_classname']; ?>">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
