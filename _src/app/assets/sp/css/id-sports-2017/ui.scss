@@ -131,6 +131,10 @@
   width: 100%;
   min-height: (730/2)+px;
   background-color: #182745;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-image: url(/assets/sp/images/id-sports-2017/summary-bg.jpg);
+  background-size: auto 100%;
   text-align: center;
   -webkit-clip-path: polygon(0 95%, 0 0, 100% 0, 100% 95%, 50% 100%);
           clip-path: polygon(0 95%, 0 0, 100% 0, 100% 95%, 50% 100%);
