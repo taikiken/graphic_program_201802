@@ -229,6 +229,7 @@
 
     //.id_sports2017__intro__hilight_movie__heading
     &__heading {
+      z-index: 99;
       position: absolute;
       top: -10px;
 
@@ -236,6 +237,36 @@
         width: (290/2)+px;
       }
     }
+
+    //.id_sports2017__intro__hilight_movie__video
+    &__video {
+      a {
+        position: relative;
+        display: block;
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: #000;
+          @include opacity(0.4);
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          width: (60/2)+px;
+          height: (60/2)+px;
+          background: url(/assets/sp/images/id-sports-2017/intro-highlight-icon.png) 0 0 no-repeat;
+          background-size: (60/2)+px;
+          @include hide-text;
+        }
+      }
+    } //.id_sports2017__intro__hilight_movie__video
   }
 } //.id_sports2017__intro
 
