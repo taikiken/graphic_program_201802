@@ -86,16 +86,32 @@
       </nav><!-- .id_sports2017__nav -->
 
       <div class="id_sports2017__summary">
-        <div class="id_sports2017__summary__movie"></div><!-- /.id_sports2017__summary__movie -->
-
-        <div class="id_sports2017__summary__text">
-          <h1 class="id_sports2017__summary__text--1 js-animation"><img src="/assets/images/id-sports-2017/summary-text1.png" alt="第一回知的障がい者日韓スポーツ交流プログラム"></h1>
-          <p class="id_sports2017__summary__text--2 js-animation"><img src="/assets/images/id-sports-2017/summary-text2.png" alt="JAPAN - KOREA ID SPORTS 2017"></p>
-          <p class="id_sports2017__summary__text--3 js-animation"><img src="/assets/images/id-sports-2017/summary-text3.png" alt="Exchange Program"></p>
-          <div class="id_sports2017__summary__text--4 js-animation"><img src="/assets/images/id-sports-2017/summary-flag.png" alt=""></div>
-        </div><!-- /.id_sports2017__summary__text -->
+        <?php
+        // --------------------------------------------
+        // 動画ファイル
+        ?>
+        <div class="id_sports2017__summary__movie">
+          <video
+            id="js-id_sports2017__summary__movie--video"
+            class="id_sports2017__summary__movie--video"
+            width="1280"
+            height="720"
+            src="/assets/video/id-sports-2017/video.mp4"
+            autoplay="autoplay"
+            loop
+            muted
+          >
+          </video>
+          <div class="id_sports2017__summary__text">
+            <h1 class="id_sports2017__summary__text--1 js-animation"><img src="/assets/images/id-sports-2017/summary-text1.png" alt="第一回知的障がい者日韓スポーツ交流プログラム"></h1>
+            <p class="id_sports2017__summary__text--2 js-animation"><img src="/assets/images/id-sports-2017/summary-text2.png" alt="JAPAN - KOREA ID SPORTS 2017"></p>
+            <p class="id_sports2017__summary__text--3 js-animation"><img src="/assets/images/id-sports-2017/summary-text3.png" alt="Exchange Program"></p>
+            <div class="id_sports2017__summary__text--4 js-animation"><img src="/assets/images/id-sports-2017/summary-flag.png" alt=""></div>
+          </div><!-- /.id_sports2017__summary__text -->
+        </div><!-- /.id_sports2017__summary__movie -->
       </div><!-- /.id_sports2017__summary -->
 
+      <div class="id_sports2017__intro_16x9">&nbsp;</div>
       <div class="id_sports2017__intro">
         <div class="id_sports2017__intro__inner">
           <p class="id_sports2017__intro__scroll"><img src="/assets/images/id-sports-2017/intro-scroll.png" alt="SCROLL"></p>
