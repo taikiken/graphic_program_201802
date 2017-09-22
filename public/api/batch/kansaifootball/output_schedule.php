@@ -17,7 +17,7 @@ if(!file_exists($json)||$lastupdate>filemtime($json)){
 	$movie=get_contents($moviefile);
 	$movie=json_decode($movie,TRUE);
 	
-	$data=get_contents($csv);
+	$data=get_contents($csv);	
 	$data=mb_convert_encoding($data,"UTF-8","SJIS");
 	$data=preg_replace("/\r\n|\r|\n/","\n",$data);
 	$tmpfile=sprintf("%s/tmp/schedule.csv",$bucket);
@@ -29,7 +29,7 @@ if(!file_exists($json)||$lastupdate>filemtime($json)){
 			$sc[$l[0]][$l[1]][]=$l;
 		}
 	}
-	
+		
 	foreach($sc as $kk=>$vv){
 		$schedules=array();
 		foreach($vv as $k=>$v){
@@ -40,10 +40,10 @@ if(!file_exists($json)||$lastupdate>filemtime($json)){
 			
 			for($i=0;$i<count($v);$i++){
 				
-				$json="";
+				$jsonpath="";
 				$endpointfile=sprintf("%s/%s.json",$bucket,$v[$i][5]);
 				if(file_exists($endpointfile)){
-					$json=str_replace(array("s3://","img-sportsbull-jp"),array("https://","img.sportsbull.jp"),$endpointfile);
+					$jsonpath=str_replace(array("s3://","img-sportsbull-jp"),array("https://","img.sportsbull.jp"),$endpointfile);
 					$d2=get_contents($endpointfile);
 					$d2=json_decode($d2,TRUE);
 					if($d2["response"]["gameinfo"]["status"]!="試合終了"){
@@ -69,7 +69,7 @@ if(!file_exists($json)||$lastupdate>filemtime($json)){
 							"score"=>$v[$i][9]
 						)
 					),
-					"json"=>$json
+					"json"=>$jsonpath
 				);
 				$league["games"]=$game;
 			}
