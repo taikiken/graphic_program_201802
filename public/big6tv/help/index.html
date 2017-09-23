@@ -192,25 +192,34 @@
                         </ul>
                         <div class="big6tv-live-help">
                             <h2>ヘルプ</h2>
-                            <div class="big6tv-live-help-body" id="live-help-safari11">
-                                <p>
-                                    最新版の iOS, Mac における動画再生不具合について<br />
-                                    <br />
-                                    iOS版 Safari（iOS 11）, Mac版 Safari（バージョン 11）において、動画再生、音声に関する不具合が報告されており、現在、対応を進めております。<br />
-                                    対象となる環境でご利用中の皆様にはご不便をおかけいたしますが、<a href="https://app.adjust.com/a00tln" target="_blank" style="text-decoration: underline;">アプリ版（iOS, Android 対応）</a>をご利用頂くか、対応まで今しばらくお待ち下さい。
-                                </p>
+                            <div class="big6tv-live-help-body">
 
-                                <br /><br />
+                                <div id="live-help-safari11" style="margin-bottom: 2em;">
+                                  <h3>最新版の iOS, Mac における動画再生不具合について</h3>
+                                  <p>
+                                      iOS版 Safari（iOS 11）, Mac版 Safari（バージョン 11）において、動画再生、音声に関する不具合が報告されており、現在、対応を進めております。<br />
+                                      対象となる環境でご利用中の皆様にはご不便をおかけいたしますが、<a href="https://app.adjust.com/a00tln" target="_blank" style="text-decoration: underline;">アプリ版（iOS, Android 対応）</a>をご利用頂くか、対応まで今しばらくお待ち下さい。
+                                  </p>
+                                </div>
+                                <script>
+                                  var ua = window.navigator.userAgent.toLowerCase();
+                                  if ( /undotsushin/i.test(ua) ) {
+                                    var help = document.getElementById('live-help-safari11');
+                                    help.parentNode.removeChild(help);
+                                  }
+                                </script>
 
                                 <h3>動画が再生されない、音声・映像が乱れる場合</h3>
                                 <dl>
+                                    <dt>画質を下げる</dt>
+                                    <dd>プレイヤー右下にあるボタンより、低画質に変更すると改善される場合があります。</dd>
                                     <dt>ネットワークを見直す（wifi環境で見る）</dt>
                                     <dd>端末がインターネット回線に接続しているか確認してください。
                                         <br> 接続が行われていても、回線が弱い場合は正常に視聴できない場合があります。</dd>
                                     <dt>リロードもしくはキャッシュを消す</dt>
                                     <dd>ページの再読み込みにより改善される場合があります。</dd>
-                                    <dt>画質を下げる</dt>
-                                    <dd>プレイヤー右下にあるボタンより、低画質に変更すると改善される場合があります。</dd>
+                                    <dt>Flash Player を有効化する</dt>
+                                    <dd>PC からご利用の場合一部の環境において、Flash Player をインストール、有効化する必要があります。<br /><a href="https://helpx.adobe.com/jp/flash-player.html" target="_blank" style="text-decoration: underline; color: #fff;">詳しくは公式サイトのサポートページ</a>をご確認下さい。</dd>
                                 </dl>
                                 <h3>推奨環境</h3>
                                 <dl>
