@@ -135,6 +135,13 @@ export class ComponentVideojsImaArticle extends React.Component {
      * @since 2017-09-22
      */
     this.safari11 = Sagen.Browser.Safari.is() && Sagen.Browser.Safari.version() >= 11;
+    /**
+     * Safari 11 mute 実行 timer id
+     * @type {number}
+     * @see https://github.com/undotsushin/undotsushin/issues/2503
+     * @since 2017-09-22
+     */
+    this.muteId = 0;
   }
   /**
    * マウント後に表示プレイヤーの初期化を行います<br>
@@ -210,26 +217,62 @@ export class ComponentVideojsImaArticle extends React.Component {
       player.ima.requestAds();
       player.play();
     });
-    // console.log('ComponentVideojsImaArticle this.safari11', this.safari11);
+    // // console.log('ComponentVideojsImaArticle this.safari11', this.safari11);
+    // // @see https://github.com/undotsushin/undotsushin/issues/2503
+    // // @since 2017-09-22
+    // if (this.safari11) {
+    //   // console.log('ComponentVideojsImaArticle Safari 11 init', this.props.articleId);
+    //   player.muted(true);
+    //   // player.setAttribute('muted', 'muted');
+    //   //
+    //   // player.on(['adstart', 'adend', 'play'], function() {
+    //   player.on(['adstart', 'adended', 'adend'], function() {
+    //     // console.log('playse adstart');
+    //     try{
+    //       // console.log('ComponentVideojsImaArticle playse adstart try');
+    //       player.muted(false);
+    //     } catch(e) {
+    //       console.warn(e);
+    //       player.play();
+    //     }
+    //   });
+    // }
     // @see https://github.com/undotsushin/undotsushin/issues/2503
     // @since 2017-09-22
-    if (this.safari11) {
-      // console.log('ComponentVideojsImaArticle Safari 11 init', this.props.articleId);
-      player.muted(true);
-      // player.setAttribute('muted', 'muted');
-      //
-      // player.on(['adstart', 'adend', 'play'], function() {
-      player.on(['adstart', 'adended', 'adend'], function() {
-        // console.log('playse adstart');
-        try{
-          // console.log('ComponentVideojsImaArticle playse adstart try');
-          player.muted(false);
-        } catch(e) {
-          console.warn(e);
-          player.play();
-        }
-      });
+    if (adUrl && this.safari11) {
+      this.forSafari(player);
     }
+  }
+  /**
+   * `player.muted(false)` します
+   * @param {*} player videojs object
+   * @see https://github.com/undotsushin/undotsushin/issues/2503
+   * @since 2017-09-22
+   */
+  forSafariMute(player) {
+    clearTimeout(this.muteId);
+    try{
+      player.muted(false);
+    } catch(e) {
+      console.warn(e);
+      player.play();
+    }
+  }
+  /**
+   * Safari 11 ad 対策
+   * [videojs event type](https://github.com/videojs/videojs-contrib-ads/issues/108)
+   * @param {*} player videojs object
+   * @see https://github.com/undotsushin/undotsushin/issues/2503
+   * @since 2017-09-22
+   */
+  forSafari(player) {
+    player.muted(true);
+    player.on('play', () => {
+      console.log('safari 11 play');
+      this.muteId = setTimeout(() => (this.forSafariMute(player)), 1000 * 5);
+    });
+    // @see https://github.com/videojs/videojs-contrib-ads/issues/108
+    player.on(['adstart', 'adended', 'adend'], () => (this.forSafariMute(player)));
   }
   /**
    * desktop プレイヤー初期化（自動再生）
