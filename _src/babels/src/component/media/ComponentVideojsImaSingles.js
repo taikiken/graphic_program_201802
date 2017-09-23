@@ -198,20 +198,18 @@ export class ComponentVideojsImaSingles extends React.Component {
     if (this.safari11) {
       // console.log('ComponentVideojsImaSingles Safari 11 init ------------', this.props.articleId);
       player.muted(true);
+      // player.setAttribute('muted', 'muted');
       //
       player.on(['adstart'], function() {
         // console.log('ComponentVideojsImaSingles playse adstart');
         try{
           // console.log('ComponentVideojsImaSingles playse adstart try');
           player.muted(false);
-          // player.volume(0);
-          // setTimeout(() => (player.volume(0.8)), 250);
         } catch(e) {
           console.warn(e);
           player.play();
         }
       });
-      // player.setAttribute('muted', 'muted');
     }
 
     // global property セット
