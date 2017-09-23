@@ -103,13 +103,6 @@ export class ComponentVideojsImaSingles extends React.Component {
      * @type {?videojs}
      */
     this.player = null;
-    /**
-     * Safari 11 flag
-     * @type {boolean}
-     * @see https://github.com/undotsushin/undotsushin/issues/2503
-     * @since 2017-09-22
-     */
-    this.safari11 = Sagen.Browser.Safari.is() && Sagen.Browser.Safari.version() >= 11;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -192,25 +185,6 @@ export class ComponentVideojsImaSingles extends React.Component {
       // ---
       player.play();
     });
-    // console.log('ComponentVideojsImaSingles this.safari11', this.safari11);
-    // @see https://github.com/undotsushin/undotsushin/issues/2503
-    // @since 2017-09-22
-    if (this.safari11) {
-      // console.log('ComponentVideojsImaSingles Safari 11 init ------------', this.props.articleId);
-      player.muted(true);
-      // player.setAttribute('muted', 'muted');
-      //
-      player.on(['adstart'], function() {
-        // console.log('ComponentVideojsImaSingles playse adstart');
-        try{
-          // console.log('ComponentVideojsImaSingles playse adstart try');
-          player.muted(false);
-        } catch(e) {
-          console.warn(e);
-          player.play();
-        }
-      });
-    }
 
     // global property セット
     this.player = player;
