@@ -110,6 +110,13 @@ export class ComponentVideojsImaSingles extends React.Component {
      * @since 2017-09-22
      */
     this.safari11 = Sagen.Browser.Safari.is() && Sagen.Browser.Safari.version() >= 11;
+    /**
+     * Safari 11 mute 実行 timer id
+     * @type {number}
+     * @see https://github.com/undotsushin/undotsushin/issues/2503
+     * @since 2017-09-22
+     */
+    this.muteId = 0;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -192,24 +199,10 @@ export class ComponentVideojsImaSingles extends React.Component {
       // ---
       player.play();
     });
-    // console.log('ComponentVideojsImaSingles this.safari11', this.safari11);
     // @see https://github.com/undotsushin/undotsushin/issues/2503
     // @since 2017-09-22
-    if (this.safari11) {
-      // console.log('ComponentVideojsImaSingles Safari 11 init ------------', this.props.articleId);
-      player.muted(true);
-      // player.setAttribute('muted', 'muted');
-      //
-      player.on(['adstart'], function() {
-        // console.log('ComponentVideojsImaSingles playse adstart');
-        try{
-          // console.log('ComponentVideojsImaSingles playse adstart try');
-          player.muted(false);
-        } catch(e) {
-          console.warn(e);
-          player.play();
-        }
-      });
+    if (!this.mobile && adUrl && this.safari11) {
+      this.forSafari(player);
     }
 
     // global property セット
@@ -219,6 +212,39 @@ export class ComponentVideojsImaSingles extends React.Component {
     this.ga(player);
     // bind scroll
     window.addEventListener('scroll', this.onScroll.bind(this), false);
+  }
+  /**
+   * `player.muted(false)` します
+   * @param {*} player videojs object
+   * @see https://github.com/undotsushin/undotsushin/issues/2503
+   * @since 2017-09-22
+   */
+  forSafariMute(player) {
+    clearTimeout(this.muteId);
+    try{
+      player.muted(false);
+    } catch(e) {
+      console.warn(e);
+      player.play();
+    }
+  }
+  /**
+   * Safari 11 ad 対策
+   * [videojs event type](https://github.com/videojs/videojs-contrib-ads/issues/108)
+   * @param {*} player videojs object
+   * @see https://github.com/undotsushin/undotsushin/issues/2503
+   * @since 2017-09-22
+   */
+  forSafari(player) {
+    player.muted(true);
+    player.on('play', () => {
+      // console.log('safari 11 play');
+      this.muteId = setTimeout(() => (this.forSafariMute(player)), 1000 * 5);
+    });
+    // @see https://github.com/videojs/videojs-contrib-ads/issues/108
+    // player.on(['adstart', 'adended', 'adend'], () => (this.forSafariMute(player)));
+    player.on('adstart', () => (clearTimeout(this.muteId)));
+    player.on(['adended', 'adend'], () => (this.forSafariMute(player)));
   }
   /**
    * window.onscroll event handler<br>
@@ -296,6 +322,7 @@ export class ComponentVideojsImaSingles extends React.Component {
               />
           </video>
         </div>
+        <a href="https://sportsbull.jp/p/197106/" style={{fontSize: '11px', paddingTop: '10px'}}>最新版 Safari における動画再生不具合について</a>
       </div>
     );
   }
@@ -313,27 +340,30 @@ export class ComponentVideojsImaSingles extends React.Component {
     const width = Content.WIDTH;
     const height = Content.HD_HEIGHT;
     return (
-      <div className="post-kv post-video-kv">
-        <div
-          className="mainContainer"
-          ref={(component) => {
-            this.videoElement = component;
-          }}
-        >
-          <video
-            id={this.videoId()}
-            className="video-js vjs-default-skin vjs-big-play-centered"
-            poster={poster}
-            width={`${width}px`}
-            height={`${height}px`}
-            controls="controls"
+      <div className="for-safari-memo-201709">
+        <div className="post-kv post-video-kv">
+          <div
+            className="mainContainer"
+            ref={(component) => {
+              this.videoElement = component;
+            }}
           >
-            <source
-              src={url}
-              type="application/x-mpegURL"
-            />
-          </video>
+            <video
+              id={this.videoId()}
+              className="video-js vjs-default-skin vjs-big-play-centered"
+              poster={poster}
+              width={`${width}px`}
+              height={`${height}px`}
+              controls="controls"
+            >
+              <source
+                src={url}
+                type="application/x-mpegURL"
+              />
+            </video>
+          </div>
         </div>
+        <a href="https://sportsbull.jp/p/197106/" style={{fontSize: '12px', paddingTop: '10px'}}>最新版 Safari における動画再生不具合について</a>
       </div>
     );
   }
