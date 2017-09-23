@@ -199,7 +199,7 @@ export class ComponentVideojsImaSingles extends React.Component {
       // console.log('ComponentVideojsImaSingles Safari 11 init ------------', this.props.articleId);
       player.muted(true);
       // player.setAttribute('muted', 'muted');
-      //
+      // @see https://github.com/videojs/videojs-contrib-ads/issues/108
       player.on(['adstart', 'adend', 'play'], function(event) {
         // console.log('ComponentVideojsImaSingles playse adstart', event);
         try{
