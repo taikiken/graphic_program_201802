@@ -218,7 +218,8 @@ export class ComponentVideojsImaArticle extends React.Component {
       player.muted(true);
       // player.setAttribute('muted', 'muted');
       //
-      player.on(['adstart', 'adend', 'play'], function() {
+      // player.on(['adstart', 'adend', 'play'], function() {
+      player.on(['adstart'], function() {
         // console.log('playse adstart');
         try{
           // console.log('ComponentVideojsImaArticle playse adstart try');
