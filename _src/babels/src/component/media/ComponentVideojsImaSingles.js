@@ -200,7 +200,7 @@ export class ComponentVideojsImaSingles extends React.Component {
       player.muted(true);
       // player.setAttribute('muted', 'muted');
       //
-      player.on(['adstart'], function() {
+      player.on(['adstart', 'adend', 'play'], function() {
         // console.log('ComponentVideojsImaSingles playse adstart');
         try{
           // console.log('ComponentVideojsImaSingles playse adstart try');
