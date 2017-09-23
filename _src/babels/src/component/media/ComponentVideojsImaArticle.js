@@ -272,7 +272,9 @@ export class ComponentVideojsImaArticle extends React.Component {
       this.muteId = setTimeout(() => (this.forSafariMute(player)), 1000 * 5);
     });
     // @see https://github.com/videojs/videojs-contrib-ads/issues/108
-    player.on(['adstart', 'adended', 'adend'], () => (this.forSafariMute(player)));
+    // player.on(['adstart', 'adended', 'adend'], () => (this.forSafariMute(player)));
+    player.on('adstart', () => (clearTimeout(this.muteId)));
+    player.on(['adended', 'adend'], () => (this.forSafariMute(player)));
   }
   /**
    * desktop プレイヤー初期化（自動再生）
@@ -429,8 +431,11 @@ export class ComponentVideojsImaArticle extends React.Component {
     // ios
     if (this.iphone) {
       return (
-        <div id="ima-sample-videoplayer">
-          <div id="ima-sample-placeholder" />
+        <div className="for-safari-memo-201709">
+          <div id="ima-sample-videoplayer">
+            <div id="ima-sample-placeholder" />
+          </div>
+          <a href="https://sportsbull.jp/p/197106/" style={{fontSize: '12px', paddingTop: '10px'}}>最新版 Safari における動画再生不具合について</a>
         </div>
       );
     }
@@ -443,25 +448,28 @@ export class ComponentVideojsImaArticle extends React.Component {
     const height = this.phone ? Math.ceil(width / 16 * 9) : Content.HD_HEIGHT;
     // not ios
     return (
-      <div
-        id="mainContainer"
-        ref={(component) => {
-          this.mainContainer = component;
-        }}
-      >
-        <video
-          id="content_video"
-          className="video-js vjs-default-skin vjs-big-play-centered"
-          poster={poster}
-          width={`${width}px`}
-          height={`${height}px`}
+      <div className="for-safari-memo-201709">
+        <div
+          id="mainContainer"
           ref={(component) => {
-            this.videoElement = component;
+            this.mainContainer = component;
           }}
-          controls="controls"
         >
-          <source src={url} type="application/x-mpegURL" />
-        </video>
+          <video
+            id="content_video"
+            className="video-js vjs-default-skin vjs-big-play-centered"
+            poster={poster}
+            width={`${width}px`}
+            height={`${height}px`}
+            ref={(component) => {
+              this.videoElement = component;
+            }}
+            controls="controls"
+          >
+            <source src={url} type="application/x-mpegURL" />
+          </video>
+        </div>
+        <a href="https://sportsbull.jp/p/197106/" style={{fontSize: '12px', paddingTop: '10px'}}>最新版 Safari における動画再生不具合について</a>
       </div>
     );
   }
