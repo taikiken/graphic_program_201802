@@ -201,7 +201,7 @@ export class ComponentVideojsImaSingles extends React.Component {
     });
     // @see https://github.com/undotsushin/undotsushin/issues/2503
     // @since 2017-09-22
-    if (adUrl && this.safari11) {
+    if (!this.mobile && adUrl && this.safari11) {
       this.forSafari(player);
     }
 
@@ -238,7 +238,7 @@ export class ComponentVideojsImaSingles extends React.Component {
   forSafari(player) {
     player.muted(true);
     player.on('play', () => {
-      console.log('safari 11 play');
+      // console.log('safari 11 play');
       this.muteId = setTimeout(() => (this.forSafariMute(player)), 1000 * 5);
     });
     // @see https://github.com/videojs/videojs-contrib-ads/issues/108
@@ -322,7 +322,7 @@ export class ComponentVideojsImaSingles extends React.Component {
               />
           </video>
         </div>
-        <a href="https://sportsbull.jp/p/197106/">最新版 Safari における動画再生不具合について</a>
+        <a href="https://sportsbull.jp/p/197106/" style={{fontSize: '11px', paddingTop: '10px'}}>最新版 Safari における動画再生不具合について</a>
       </div>
     );
   }

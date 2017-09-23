@@ -268,7 +268,7 @@ export class ComponentVideojsImaArticle extends React.Component {
   forSafari(player) {
     player.muted(true);
     player.on('play', () => {
-      console.log('safari 11 play');
+      // console.log('safari 11 play');
       this.muteId = setTimeout(() => (this.forSafariMute(player)), 1000 * 5);
     });
     // @see https://github.com/videojs/videojs-contrib-ads/issues/108
@@ -435,7 +435,7 @@ export class ComponentVideojsImaArticle extends React.Component {
           <div id="ima-sample-videoplayer">
             <div id="ima-sample-placeholder" />
           </div>
-          <a href="https://sportsbull.jp/p/197106/" style={{fontSize: '12px', paddingTop: '10px'}}>最新版 Safari における動画再生不具合について</a>
+          <a href="https://sportsbull.jp/p/197106/" style={{fontSize: '11px', paddingTop: '10px'}}>最新版 Safari における動画再生不具合について</a>
         </div>
       );
     }
