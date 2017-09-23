@@ -239,7 +239,7 @@ export class ComponentVideojsImaArticle extends React.Component {
     // }
     // @see https://github.com/undotsushin/undotsushin/issues/2503
     // @since 2017-09-22
-    if (adUrl && this.safari11) {
+    if (!this.mobile && adUrl && this.safari11) {
       this.forSafari(player);
     }
   }
