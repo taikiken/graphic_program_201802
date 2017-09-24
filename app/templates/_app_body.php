@@ -118,7 +118,9 @@
                       </div>
                   <?php endif;?>
               <?php else:?>
-                  <?php print_r($page['post']['body']); ?>
+                  <div style="font-size:0.8em">
+                    <?php print_r($page['post']['body']); ?>
+                  </div>
               <?php endif;?>
 
           </div><!-- /.post-content -->
