@@ -199,6 +199,7 @@ EOM;
 				<div class="mb30">関連動画はありません</div>
 EOM;
 		endif;
+
 		if (self::setJudgment($json['movieurl'])) :
 			//ダイジェスト動画
 			$result["digest"] = '<a href="'.$json['movieurl'].'" target="_blank">フルバージョンの動画はこちら</a>';
@@ -416,11 +417,13 @@ EOM;
 	                  </tr>
 EOM;
 			}
-
+// print_r($result["personalInfo"][$keyName]);
 			//個人成績のデータが無い場合に空を挿入
 			foreach ($result["personalInfo"][$keyName] as $key => $value) {
-				if (empty($value["total"])) {
+				if (!self::setJudgment($value["total"])) {
 					$result["personalInfo"][$keyName][$key]["total"] = " - ";
+				}
+				if (!self::setJudgment($value["data"])) {
 					$result["personalInfo"][$keyName][$key]["data"] = $noneData;
 				}
 			}
