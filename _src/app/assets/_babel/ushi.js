@@ -77,6 +77,8 @@ const flushMessage = () => {
   if (!message) {
     return;
   }
+  alert(message);
+  alert(location.search);
   // const html = document.getElementsByTagName('html')[0];
   // if (!html) {
   //   return;
@@ -95,8 +97,9 @@ const flushMessage = () => {
   const ios = ua.indexOf('undotsushin-ios') !== -1;
   if (android || ios) {
     if (location.search === '?display=entry') {
-      const messageElements = new Elements(message);
-      messageElements.dom.addClass('enable');
+      // const messageElements = new Elements(message);
+      // messageElements.dom.addClass('enable');
+      message.className += ' enable';
     }
   }
 };
