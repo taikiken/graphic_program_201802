@@ -63,6 +63,12 @@
    ga('send', 'pageview');
 
   </script>
+  <style>
+    .undotsushin-ios .for-browser,
+    .undotsushin-android .for-browser {
+      display: none;
+    }
+  </style>
 </head>
 <body class="appbnr-disable">
 <div class="whole <?php echo $page['template_classname']; ?>">
@@ -92,7 +98,7 @@
         </div><!-- /.ushi__summary__inner -->
       </div><!-- /.ushi__summary -->
 
-      <div class="ushi__pr_app__wrapper">
+      <div class="ushi__pr_app__wrapper for-browser">
 
         <div id="js-ushi__mom">
           <div id="js-ushi__pr_app" class="ushi__pr_app cm_disable"><!-- CM公開前は .cm_disable -->
@@ -129,7 +135,7 @@
         </ul><!-- /.ushi__flow__list -->
       </div><!-- /.ushi__flow -->
 
-      <div class="ushi__whatis">
+      <div class="ushi__whatis for-browser">
         <div class="ushi__whatis__inner">
           <h2 class="ushi__whatis__heading"><img src="/assets/sp/images/ushi/whatis-heading.png" alt="「スポーツブル」って？"></h2>
           <div class="ushi__whatis__copy"><img src="/assets/sp/images/ushi/whatis-copy.png" alt="3分でスポーツを語れるようになる無料スポーツニュースアプリ"></div>
@@ -205,7 +211,7 @@
     </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 
-  <footer class="ushi__footer">
+  <footer class="ushi__footer for-browser">
     <div class="ushi__footer__btn__container">
       <h3 class="ushi__footer__btn__heading"><img src="/assets/sp/images/ushi/footer-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
       <ul class="ushi__footer__btn__list">
