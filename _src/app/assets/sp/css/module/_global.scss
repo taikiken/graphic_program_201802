@@ -73,13 +73,14 @@ img {
   -moz-user-select:none;
 }
 
-.undotsushin-ios,
-.undotsushin-android {
-  .head-sec,
-  .foot-sec {
-    display: none !important;
-  }
-}
+// 諸々 override するために最下部へ移動します - 2017-09-11
+//.undotsushin-ios,
+//.undotsushin-android {
+//  .head-sec,
+//  .foot-sec {
+//    display: none !important;
+//  }
+//}
 
 
 
@@ -784,3 +785,22 @@ img {
     text-align: center;
   } //.copyright
 } //.foot-sec
+
+
+
+// 4.1 global webview
+// ----------------------------------------------------------------------------------------------------------------------------------------
+// webview hide head, foot, app-banner
+// @since 2017-09-11 .header-sticky + .body-se 追加
+.undotsushin-ios,
+.undotsushin-android {
+  // バナー非表示時の空き調整 - `head-sec` 50px 引算する
+  .header-sticky + .body-sec {
+    margin-top: 50px;
+  }
+  // header / footer
+  .head-sec,
+  .foot-sec {
+    display: none !important;
+  }
+}

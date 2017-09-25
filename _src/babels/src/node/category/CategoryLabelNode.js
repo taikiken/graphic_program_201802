@@ -97,8 +97,13 @@ export const CategoryLabelNode = React.createClass( {
             if (!category.label) {
               return null;
             }
+            const areaClassName = category.slug === 'area' ? ' category-label_area' : '';
 
-            return <span key={`ranking-${id}-${index}-${i}`} className="category-label">{category.label}</span>;
+            return (
+              <span key={`ranking-${id}-${index}-${i}`} className={`category-label${areaClassName}`}>
+                {category.label}
+              </span>
+            );
           } )
         }
       </span>

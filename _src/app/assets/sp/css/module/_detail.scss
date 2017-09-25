@@ -260,6 +260,28 @@
           margin-left: 0;
         }
       }
+
+      // 地域カテゴリー用アイコン付カテゴリーラベル
+      // ref.https://github.com/undotsushin/undotsushin/issues/2318
+      .category-label_area {
+        a {
+          color: $highlight-secondary-color;
+
+          &:before {
+            content: "";
+            // position: relative;
+            // top: -1px;
+            display: inline-block;
+            width: (14/2)+px;
+            height: (19/2)+px;
+            margin-right: 4px;
+            background: url(/assets/sp/images/area/icon-heading.png) 0 0 no-repeat;
+            background-size: (14/2)+px;
+            vertical-align: middle;
+            @include hide-text;
+          }
+        }
+      }
     }
 
     // post-date

@@ -52,6 +52,22 @@
           },
           "url": "https://sportsbull.jp/sokuhou/",
           "alt": "サッカー日本代表リアルタイム速報"
+        },
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-worldsoccer.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-worldsoccer.jpg"
+          },
+          "url": "https://sportsbull.jp/stats/worldsoccer/",
+          "alt": "海外サッカー 速報&amp;データを見る"
+        },
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-soccer_univ.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-soccer_univ.jpg"
+          },
+          "url": "https://sportsbull.jp/stats/u_soccer/kantou/",
+          "alt": "大学サッカー 速報&amp;データを見る"
         }
       ]
     },
@@ -79,7 +95,7 @@
             "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-mlb.jpg",
             "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-mlb.jpg"
           },
-          "url": "http://sportsbull.jp/stats/mlb/",
+          "url": "https://sportsbull.jp/stats/mlb/",
           "alt": "MLB 速報&amp;データを見る"
         }
       ]
@@ -89,10 +105,18 @@
       "banners": [
         {
           "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-baseball_big6.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-baseball_big6.jpg"
+          },
+          "url": "https://sportsbull.jp/category/big6tv/",
+          "alt": "BIG6.TV 六大学野球 速報&amp;データを見る"
+        },
+        {
+          "image": {
             "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-baseball_univ_touto.jpg",
             "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-baseball_univ_touto.jpg"
           },
-          "url": "/stats/ub_tohto/",
+          "url": "https://sportsbull.jp/stats/ub_tohto/",
           "alt": "東都大学野球 速報&amp;データを見る"
         },
         {
@@ -100,7 +124,7 @@
             "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-baseball_univ_6.jpg",
             "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-baseball_univ_6.jpg"
           },
-          "url": "/stats/ub_kansaibig6/",
+          "url": "https://sportsbull.jp/stats/ub_kansaibig6/",
           "alt": "関西六大学野球 速報&amp;データを見る"
         },
         {
@@ -108,7 +132,7 @@
             "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-baseball_univ_kansai.jpg",
             "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-baseball_univ_kansai.jpg"
           },
-          "url": "/stats/ub_kansai/",
+          "url": "https://sportsbull.jp/stats/ub_kansai/",
           "alt": "関西大学野球 速報&amp;データを見る"
         }
       ]
@@ -121,7 +145,7 @@
             "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-tennis.jpg",
             "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-tennis.jpg"
           },
-          "url": "http://sportsbull.jp/stats/tennis/",
+          "url": "https://sportsbull.jp/stats/tennis/",
           "alt": "テニス 速報&amp;データを見る"
         }
       ]
@@ -134,8 +158,21 @@
             "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-golf.jpg",
             "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-golf.jpg"
           },
-          "url": "http://sportsbull.jp/stats/golf/",
+          "url": "https://sportsbull.jp/stats/golf/",
           "alt": "ゴルフ 速報&amp;データを見る"
+        }
+      ]
+    },
+    {
+      "title": "ラグビー",
+      "banners": [
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-rugby_univ.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-rugby_univ.jpg"
+          },
+          "url": "https://sportsbull.jp/stats/u_rugby/kantou/",
+          "alt": "大学ラグビー 速報&amp;データを見る"
         }
       ]
     }

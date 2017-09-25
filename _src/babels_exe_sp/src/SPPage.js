@@ -35,15 +35,15 @@ import {SPSearchForm} from './header/SPSearchForm';
 import {SPCommentDelete} from './modal/SPCommentDelete';
 import {SPFlush} from './modal/SPFlush';
 
-let _symbol = Symbol();
+// const _symbol = Symbol();
 
-let _scrolled:Boolean = false;
+let _scrolled = false;
 
 let _tween = null;
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * <p>ページ振り分けを行います</p>
@@ -52,17 +52,17 @@ let Dom = UT.app.Dom;
  * 全て static です
  */
 export class SPPage {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPPage is static Class. not use new SPPage().' );
-
-    }
-  }
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPPage is static Class. not use new SPPage().' );
+  //
+  //   }
+  // }
 
   /**
    * Page 初期化, UT.app.Router event を listen します
@@ -137,6 +137,9 @@ export class SPPage {
 
     // 404
     router.on( Router.NOT_FOUND, SPPage.notFound );
+
+    // area - from 2017-09-04
+    router.on(Router.CATEGORY_AREA, SPPage.area);
 
     router.route();
 
@@ -306,6 +309,8 @@ export class SPPage {
 
     // 404
     router.off( Router.NOT_FOUND, SPPage.notFound );
+    // area - from 2017-09-04
+    router.off(Router.CATEGORY_AREA, SPPage.area);
   }
   /**
    * 404 not found
@@ -683,5 +688,32 @@ export class SPPage {
 
     // event unbind
     SPPage.dispose();
+  }
+  /**
+   * 地域別記事 - category like 表示
+   * @param {Object} event Router event object
+   * @since 2017-09-04
+   */
+  static area(event) {
+    // like category
+    const { slug, mode, pref } = event;
+    // const slug = 'area';
+    // console.log('SPPage.area', mode, slug, event);
+    // page top
+    SPPageTop.start();
+    // search from
+    SPSearchForm.start();
+    // category
+    SPCategory.area(slug, mode, pref);
+    // nav
+    SPNav.start(slug);
+    // syn.
+    SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
+
+    // first
+    SPFirstVisit.start();
   }
 }
