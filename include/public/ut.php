@@ -11,8 +11,8 @@ $articletable="
 	%s
 	id,
 	title,
-	(select body from repo_body where pid=repo_n.id) as body,
-	(select video from u_view where pageid=repo_n.id) as videoflag,
+	(select body from repo_body where pid=repo_n.id limit 1 offset 0) as body,
+	(select video from u_view where pageid=repo_n.id limit 1 offset 0) as videoflag,
 	t16 as b1,
 	img1,
 	imgflag,
@@ -67,8 +67,8 @@ $articletable2="
 	%s
 	id,
 	title,
-	(select body from repo_body where pid=repo_n.id) as body,
-	(select video from u_view where pageid=repo_n.id) as videoflag,
+	(select body from repo_body where pid=repo_n.id limit 1 offset 0) as body,
+	(select video from u_view where pageid=repo_n.id limit 1 offset 0) as videoflag,
 	t16 as b1,
 	img1,
 	imgflag,
