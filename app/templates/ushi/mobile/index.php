@@ -63,6 +63,12 @@
    ga('send', 'pageview');
 
   </script>
+  <style>
+    .undotsushin-ios .for-browser,
+    .undotsushin-android .for-browser {
+      display: none;
+    }
+  </style>
 </head>
 <body class="appbnr-disable">
 <div class="whole <?php echo $page['template_classname']; ?>">
