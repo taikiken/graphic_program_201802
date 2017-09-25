@@ -12,7 +12,7 @@
 
 // sp/component/singles-content
 import { SPComponentSinglesSNSAbove } from './SPComponentSinglesSNSAbove';
-import { SPComponentSinglesSNSBelow } from './SPComponentSinglesSNSBelow';
+// import { SPComponentSinglesSNSBelow } from './SPComponentSinglesSNSBelow';
 import { SPComponentSingleComments } from './SPComponentSingleComments';
 
 

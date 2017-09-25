@@ -20,7 +20,7 @@ import { ComponentSingleSNS } from '../../../component/singles-content/Component
 
 // component/singles-content
 import { SPComponentSingleContent } from '../singles-content/SPComponentSingleContent';
-import { SPComponentSinglesSNSBelow } from '../singles-content/SPComponentSinglesSNSBelow';
+// import { SPComponentSinglesSNSBelow } from '../singles-content/SPComponentSinglesSNSBelow';
 
 // // util
 import { Scroll } from '../../../util/Scroll';

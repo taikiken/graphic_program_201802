@@ -316,14 +316,17 @@ const CarouselItem = ({ single, index }) => {
   const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
   return (
     <div className="widget-post-carousel-item">
-      <a href={single.url} className="post">
+      <a
+        href={single.url}
+        className="post"
+        onClick={() => (ga(single.url))}
+      >
         <ComponentArticleThumbnail
           mediaType={single.mediaType}
           thumbnail={thumbnail}
           title={single.title}
           recommend={false}
           small={true}
-          onClick={() => (ga(single.url))}
         />
         <div className="post-data">
           <h3 className="post-heading">{single.title}</h3>
@@ -630,7 +633,8 @@ class SPRankingCarousel extends React.Component {
    */
   render() {
     containers = 0;
-    const { articles, slug, length } = this.props;
+    // const { articles, slug, length } = this.props;
+    const { articles } = this.props;
     // console.log('SPRankingCarousel.render', this.state);
     // return null;
     return (

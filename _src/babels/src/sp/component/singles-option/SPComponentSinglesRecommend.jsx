@@ -23,34 +23,34 @@ import { Ga } from '../../../ga/Ga';
 
 // React
 const React = self.React;
-
-/**
- * 広告を表示します
- * @param {number} index 出力 index - 表示・非表示 flag 1 or 3
- * @param {string} slug category.slug `big6tv` 非表示
- * @returns {?XML} null or `div.board-item`
- * @constructor
- */
-const BoardAd = ({ index, slug }) => {
-  if (slug === 'big6tv') {
-    return null;
-  }
-  // 2 or 5件目
-  // |0|ad|1|2|ad|3|4|
-  if (index === 1 || index === 3) {
-    // output
-    // console.log('BoardAd', index);
-    return (
-      <div className="board-item board-item-ad-wrapper">
-        <div className="board-item-ad">
-          ここに広告
-        </div>
-      </div>
-    );
-  } else {
-    return null;
-  }
-};
+//
+// /**
+//  * 広告を表示します
+//  * @param {number} index 出力 index - 表示・非表示 flag 1 or 3
+//  * @param {string} slug category.slug `big6tv` 非表示
+//  * @returns {?XML} null or `div.board-item`
+//  * @constructor
+//  */
+// const BoardAd = ({ index, slug }) => {
+//   if (slug === 'big6tv') {
+//     return null;
+//   }
+//   // 2 or 5件目
+//   // |0|ad|1|2|ad|3|4|
+//   if (index === 1 || index === 3) {
+//     // output
+//     // console.log('BoardAd', index);
+//     return (
+//       <div className="board-item board-item-ad-wrapper">
+//         <div className="board-item-ad">
+//           ここに広告
+//         </div>
+//       </div>
+//     );
+//   } else {
+//     return null;
+//   }
+// };
 
 // -------------------------------------------------------------------
 // Ga 追加
