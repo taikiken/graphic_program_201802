@@ -83,6 +83,11 @@ import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
 import {ViewLogoutModal} from './view/modal/ViewLogoutModal';
 import {ViewFlushModal} from './view/modal/ViewFlushModal';
 
+// area
+// @since 2017-09-04
+import ViewArea from './view/ViewArea';
+
+
 // ----------- users
 // signup
 import {SignupWizard} from './view/signup/SignupWizard';
@@ -127,6 +132,9 @@ import {SPViewNews} from './sp/view/home/SPViewNews';
 import { SPViewCategory } from './sp/view/category/SPViewCategory';
 // SPViewCategoryWithSlug が多分正解
 import { SPViewCategoryWithSlug } from './sp/view/category/SPViewCategoryWithSlug';
+
+// 2017-09-04 - area
+import SPViewArea from './sp/view/category/SPViewArea';
 
 // search
 import {SPViewSearch} from './sp/view/SPViewSearch';
@@ -198,6 +206,7 @@ let UT = {
     ViewSearch,
     ViewCommentSingle,
     ViewFirstVisit,
+    ViewArea,
     comment: {
       ViewCommentForm
     },
@@ -267,7 +276,8 @@ let UT = {
       },
       category: {
         SPViewCategory,
-        SPViewCategoryWithSlug
+        SPViewCategoryWithSlug,
+        SPViewArea,
       },
       header: {
         SPViewHeaderUser,
