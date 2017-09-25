@@ -136,9 +136,10 @@ var setPlayerEvent = function setPlayerEvent() {
   });
 
   // This is for Safari 11
-  player.on(['adstart'], function(){
+  player.on(['adend'], function(){
     try{
       player.muted(false) ;
+      player.play();
     }catch(e){
       player.play();
     }
@@ -177,7 +178,7 @@ var videoLoad = function videoLoad() {
 
         // This is for Safari 11.
         var browser = get_browser();
-        if(browser.name == 'Safari' && browser.version == 11){
+        if(!navigator.userAgent.match(/iPhone/i) && browser.name == 'Safari' && browser.version == 11){
           player.muted(true) ;
           player.setAttribute('muted', 'muted')
         }
