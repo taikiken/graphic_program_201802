@@ -65,27 +65,18 @@ const flushMessage = () => {
   if (!message) {
     return;
   }
-  // const html = document.getElementsByTagName('html')[0];
-  // if (!html) {
-  //   return;
-  // }
-  // const htmlElements = new Elements(html);
-  // // detect webview
-  // if (!htmlElements.dom.hasClass('undotsushin-ios') && !htmlElements.dom.hasClass('undotsushin-android')) {
-  //   return;
-  // }
-  // global object
-  const ua = navigator.userAgent;
-
-  // android
-  const android = ua.indexOf('undotsushin-android') !== -1;
-  // ios
-  const ios = ua.indexOf('undotsushin-ios') !== -1;
-  if (android || ios) {
-    if (location.search === '?display=entry') {
-      const messageElements = new Elements(message);
-      messageElements.dom.addClass('enable');
-    }
+  const html = document.getElementsByTagName('html')[0];
+  if (!html) {
+    return;
+  }
+  const htmlElements = new Elements(html);
+  // detect webview
+  if (!htmlElements.dom.hasClass('undotsushin-ios') && !htmlElements.dom.hasClass('undotsushin-android')) {
+    return;
+  }
+  if (location.search === '?display=entry') {
+    const messageElements = new Elements(message);
+    messageElements.dom.addClass('enable');
   }
 };
 
