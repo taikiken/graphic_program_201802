@@ -147,15 +147,15 @@
           // アプリ導線
           ?>
           <div class="post-pr_app">
-            <div class="post-pr_app-inner">
-              <a href="https://app.adjust.com/lac3f2?deep_link=sportsbull%3A%2F%2F" target="_blank">
+            <a href="https://app.adjust.com/lac3f2?deep_link=sportsbull%3A%2F%2F" target="_blank">
+              <div class="post-pr_app-inner">
                 <h3 class="post-pr_app-heading">40種類を超えるスポーツニュースや速報を完全無料でアプリで見放題！</h3>
                 <ul class="post-pr_app-list">
                   <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-ios.png" alt="App Store"></li>
                   <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-android.png" alt="Google play"></li>
                 </ul><!-- /.post-pr_app-list -->
-              </a>
-            </div><!-- /.post-pr_app-inner -->
+              </div><!-- /.post-pr_app-inner -->
+            </a>
           </div><!-- /.post-pr_app -->
 
           <?php
