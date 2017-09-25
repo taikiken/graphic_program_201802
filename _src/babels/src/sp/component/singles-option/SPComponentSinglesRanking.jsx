@@ -10,20 +10,30 @@
  *
  */
 
+// data
 import { Safety } from '../../../data/Safety';
+
+// app
 import { Empty } from '../../../app/const/Empty';
 
+// dae
 import { ArticleDae } from '../../../dae/ArticleDae';
 
 // component
 import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
 
+// ui
 import { Touching } from '../../../ui/Touching';
+
+// event
 import { EventDispatcher } from '../../../event/EventDispatcher';
 
 // component
 import RankingCarouselManager from './ranking-carousel/RankingCarouselManager';
+
+// ga
+import { Ga } from '../../../ga/Ga';
 
 // React
 const React = self.React;
@@ -236,8 +246,7 @@ export class Swipe extends EventDispatcher {
 let containers = 0;
 
 /**
- * carousel 広告
- * TODO: update で多分空になるのをなんとかできるか考える
+ * carousel の 広告
  * @param {string} slug category slug - `big6tv` 出力しない
  * @param {number} index slide index - 1 or 3 出力
  * @param {number} length slide count, 1 は強制出力
@@ -272,10 +281,30 @@ CarouselAd.propTypes = {
   length: React.PropTypes.number.isRequired,
 };
 
+// -------------------------------------------------------------------
+// Ga 追加
+/**
+ * Ga tag 送信します
+ * ```
+ * onclick="UT.Ga.click('under_article_ranking', '[読んでいる記事URL]', 'click', '[リンク先記事URL]', true);"
+ * ```
+ * @param {string} href リンク先記事URL
+ * @since 2017-09-25
+ */
+const ga = (href) => {
+  Ga.click('under_article_ranking', location.href, 'click', href, true);
+};
+// -------------------------------------------------------------------
+
 /**
  * recommend - carousel article
  * - {@link ComponentArticleThumbnail}
  * - {@link ComponentCategoryLabels}
+ * Ga 追加 on 2017-09-25 - https://github.com/undotsushin/undotsushin/issues/2381#issuecomment-331775622
+ * ```
+ * 記事下ランキング記事
+ * onclick="UT.Ga.click('under_article_ranking', '[読んでいる記事URL]', 'click', '[リンク先記事URL]', true);"
+ * ```
  * @param {ArticleDae} single 記事データ
  * @param {number} index slide index {@link ComponentCategoryLabels} 引数に使用します
  * @returns {XML} div.widget-post-carousel-item
@@ -294,6 +323,7 @@ const CarouselItem = ({ single, index }) => {
           title={single.title}
           recommend={false}
           small={true}
+          onClick={() => (ga(single.url))}
         />
         <div className="post-data">
           <h3 className="post-heading">{single.title}</h3>

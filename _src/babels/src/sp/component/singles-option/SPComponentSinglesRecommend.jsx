@@ -19,6 +19,7 @@ import { Safety } from '../../../data/Safety';
 import { Empty } from '../../../app/const/Empty';
 
 import { ArticleDae } from '../../../dae/ArticleDae';
+import { Ga } from '../../../ga/Ga';
 
 // React
 const React = self.React;
@@ -51,8 +52,28 @@ const BoardAd = ({ index, slug }) => {
   }
 };
 
+// -------------------------------------------------------------------
+// Ga 追加
+/**
+ * Ga tag 送信します
+ * ```
+ * onclick="UT.Ga.click('under_article_recommend', '[読んでいる記事URL]', 'click', '[リンク先記事URL]', true);"
+ * ```
+ * @param {string} href リンク先記事URL
+ * @since 2017-09-25
+ */
+const ga = (href) => {
+  Ga.click('under_article_recommend', location.href, 'click', href, true);
+};
+// -------------------------------------------------------------------
+
 /**
  * `div.board-item` 記事コンテナを作成します, thumbnail + article
+ * Ga 追加 on 2017-09-25 - https://github.com/undotsushin/undotsushin/issues/2381#issuecomment-331775622
+ * ```
+ * 記事下レコメンド記事
+ * onclick="UT.Ga.click('under_article_recommend', '[読んでいる記事URL]', 'click', '[リンク先記事URL]', true);"
+ * ```
  * @param {ArticleDae} single JSON convert data
  * @param {number} index 表示 index 0 ~ - 広告表示フラッグに使用します
  * @returns {XML} `div.board-item` 記事コンテナを返します
@@ -62,7 +83,11 @@ const BoardItem = ({ single, index }) => {
   const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
   return (
     <div className="board-item">
-      <a href={single.url} className="post">
+      <a
+        href={single.url}
+        className="post"
+        onClick={() => (ga(single.url))}
+      >
         <ComponentArticleThumbnail
           mediaType={single.mediaType}
           thumbnail={thumbnail}
