@@ -229,6 +229,27 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
             <li>個人成績</li>
           </ul>
         </nav>
+        <?php if ($dataArray["autoReload"]) : ?>
+        <ul class="amefoot_live__reload">
+          <li class="refresh-container" style="display: inline;">
+            <div id="auto" class="amefoot_live__reload__btn--auto">
+              <a href="#auto">
+                <span>自動更新(30秒)</span>
+              </a>
+            </div>
+            <div id="manual" class="amefoot_live__reload__btn--manual">
+              <a href="#manual" class="selected">
+                <span>手動更新</span>
+              </a>
+            </div>
+          </li>
+          <li id="reload" class="amefoot_live__reload__btn--reload">
+            <a href="#">
+              <span>更新</span>
+            </a>
+          </li>
+        </ul>
+        <?php endif; ?>
         <div id="basic-info">
           <h3>関連動画</h3>
           <div class="movie">
