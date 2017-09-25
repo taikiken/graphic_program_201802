@@ -25,6 +25,15 @@
 'use strict';
 
 // ushi
+const ua = navigator.userAgent;
+// android
+const android = ua.indexOf('undotsushin-android') !== -1;
+// ios
+const ios = ua.indexOf('undotsushin-ios') !== -1;
+
+// if (ios || android) {
+//   return;
+// }
 
 // UT
 const UT = self.UT;
@@ -61,48 +70,47 @@ const watch = () => {
   window.addEventListener('resize', onScroll, false);
 };
 
-// banner
-const target = document.getElementById('js-ushi__pr_app');
-const targetMom = document.getElementById('js-ushi__mom');
-if (target && targetMom) {
+const start = () => {
+  if (ios || android) {
+    return;
+  }
+  // banner
+  const target = document.getElementById('js-ushi__pr_app');
+  const targetMom = document.getElementById('js-ushi__mom');
+  if (!target || !targetMom) {
+    return;
+  }
   container = new Offset(target);
   elements = new Elements(target);
   mom = new Offset(targetMom);
   watch();
-}
-
-// for only app webview
-const flushMessage = () => {
-  const message = document.getElementById('js-ushi__message');
-  if (!message) {
-    return;
-  }
-  alert(message);
-  alert(location.search);
-  // const html = document.getElementsByTagName('html')[0];
-  // if (!html) {
-  //   return;
-  // }
-  // const htmlElements = new Elements(html);
-  // // detect webview
-  // if (!htmlElements.dom.hasClass('undotsushin-ios') && !htmlElements.dom.hasClass('undotsushin-android')) {
-  //   return;
-  // }
-  // global object
-  const ua = navigator.userAgent;
-
-  // android
-  const android = ua.indexOf('undotsushin-android') !== -1;
-  // ios
-  const ios = ua.indexOf('undotsushin-ios') !== -1;
-  if (android || ios) {
-    if (location.search === '?display=entry') {
-      // const messageElements = new Elements(message);
-      // messageElements.dom.addClass('enable');
-      message.className += ' enable';
-    }
-  }
 };
+start();
 
-flushMessage();
+// // for only app webview
+// const flushMessage = () => {
+//   const message = document.getElementById('js-ushi__message');
+//   if (!message) {
+//     return;
+//   }
+//   alert(message);
+//   alert(location.search);
+//   // const html = document.getElementsByTagName('html')[0];
+//   // if (!html) {
+//   //   return;
+//   // }
+//   // const htmlElements = new Elements(html);
+//   // // detect webview
+//   // if (!htmlElements.dom.hasClass('undotsushin-ios') && !htmlElements.dom.hasClass('undotsushin-android')) {
+//   //   return;
+//   // }
+//   // global object
+//   if (location.search === '?display=entry') {
+//     // const messageElements = new Elements(message);
+//     // messageElements.dom.addClass('enable');
+//     message.className += ' enable';
+//   }
+// };
+//
+// flushMessage();
 

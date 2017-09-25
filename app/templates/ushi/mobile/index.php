@@ -77,8 +77,14 @@
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
-
-  <div id="js-ushi__message" class="ushi__message">
+  <?php
+  // ?display=entry で enable
+  $display_enable = '';
+  if ($_GET['display'] == 'entry') {
+    $display_enable = 'enable';
+  }
+  ?>
+  <div id="js-ushi__message" class="ushi__message <?php echo $display_enable; ?>">
     <p><img src="/assets/sp/images/ushi/message-entry.png" alt="エントリーが完了しました"></p>
   </div><!-- /.ushi__message -->
 
