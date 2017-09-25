@@ -211,7 +211,16 @@ if ( $page_has_header ) :
 ?>
 <div id="js-header-appbnr-container">
   <div class="header-appbnr">
+    <?php
+    if (0) :
+      // close トル - https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-331796551
+      // since 2017-05-25
+    ?>
     <div class="header-appbnr-btn-close"><span>閉じる</span></div>
+    <?php
+    endif;
+    // eof: close トル
+    ?>
     <div class="header-appbnr-link">
       <?php
       // banner 差替え

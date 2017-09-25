@@ -334,7 +334,7 @@ class AppBanner {
   init() {
     // scroll 監視開始
     this.activate();
-    this.element.addEventListener('click', this.onClose, false);
+    // this.element.addEventListener('click', this.onClose, false);
   }
   /**
    * div.header-appbnr-btn-close click event handler
@@ -404,7 +404,9 @@ export class SPViewAppBanner {
    * @return {boolean} mount すると true を返します
    */
   static init(element, visible = false) {
-    const has = Cookie.has(Cookie.APP_BANNER);
+    // cookie check 止める
+    // @since 2017-09-25
+    const has = false;// Cookie.has(Cookie.APP_BANNER);
     if (!has && visible) {
       AppBanner.enable();
       const banner = new AppBanner(element, visible);
