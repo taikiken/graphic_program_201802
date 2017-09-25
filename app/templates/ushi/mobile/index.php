@@ -51,18 +51,24 @@
   </script>
 
   <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-   ga('create', 'UA-74679267-1', 'auto');
-   ga('require', 'GTM-KJ33JM9');
-   ga('require', 'linkid');
-   ga('require', 'displayfeatures');
-   ga('send', 'pageview');
+    ga('create', 'UA-74679267-1', 'auto');
+    ga('require', 'GTM-KJ33JM9');
+    ga('require', 'linkid');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
 
   </script>
+  <style>
+    .undotsushin-ios .for-browser,
+    .undotsushin-android .for-browser {
+      display: none;
+    }
+  </style>
 </head>
 <body class="appbnr-disable">
 <div class="whole <?php echo $page['template_classname']; ?>">
@@ -71,8 +77,14 @@
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
-
-  <div id="js-ushi__message" class="ushi__message">
+  <?php
+  // ?display=entry で enable
+  $display_enable = '';
+  if ($_GET['display'] == 'entry') {
+    $display_enable = 'enable';
+  }
+  ?>
+  <div id="js-ushi__message" class="ushi__message <?php echo $display_enable; ?>">
     <p><img src="/assets/sp/images/ushi/message-entry.png" alt="エントリーが完了しました"></p>
   </div><!-- /.ushi__message -->
 
@@ -88,11 +100,11 @@
           <p class="ushi__summary__lead"><img src="/assets/sp/images/ushi/summary-lead.png" alt="スポーツニュースを3日連続見て最大5,000円分の高級ブランド牛を買えるクーポンがもらえる！"></p>
           <i class="ushi__summary__bull"><img src="/assets/sp/images/ushi/summary-figure_bull.png" alt=""></i>
           <h1 class="ushi__summary__heading"><img src="/assets/sp/images/ushi/summary-heading.png" alt="SPORTS BULL x Wowma! 牛キャンペーン"></h1>
-          <p class="ushi__summary__date"><img src="/assets/sp/images/ushi/summary-date.png" alt="エントリー期間 2017年9月28日 - 10月31日まで"></p>
+          <p class="ushi__summary__date"><img src="/assets/sp/images/ushi/summary-date.png" alt="エントリー期間 2017年9月25日 - 10月31日まで"></p>
         </div><!-- /.ushi__summary__inner -->
       </div><!-- /.ushi__summary -->
 
-      <div class="ushi__pr_app__wrapper">
+      <div class="ushi__pr_app__wrapper for-browser">
 
         <div id="js-ushi__mom">
           <div id="js-ushi__pr_app" class="ushi__pr_app cm_disable"><!-- CM公開前は .cm_disable -->
@@ -117,7 +129,7 @@
         <h2 class="ushi__flow__heading"><img src="/assets/sp/images/ushi/flow-heading.png" alt="キャンペーンの流れ"></h2>
         <ul class="ushi__flow__list">
           <li class="ushi__flow__item ushi__flow__item--1"><img src="/assets/sp/images/ushi/flow-flow1.png" alt="1. スポーツブルアプリを起動"></li><!-- /.ushi__flow__item--1 -->
-          <li class="ushi__flow__item ushi__flow__item--2"><img src="/assets/sp/images/ushi/flow-flow2.png" alt="2. キャンペーンにエントリーをタップ"></li><!-- /.ushi__flow__item--1 -->
+          <li class="ushi__flow__item ushi__flow__item--2"><img src="/assets/sp/images/ushi/flow-flow2.png" alt="2. アプリ内メッセージが届いたらキャンペーンにエントリーをタップ"></li><!-- /.ushi__flow__item--1 -->
           <li class="ushi__flow__item ushi__flow__item--3">
             <p><img src="/assets/sp/images/ushi/flow-flow3_text.png" alt="3. エントリーから3日連続アプリ起動でもれなく500円分のクーポンさらに抽選で200名様に5,000円分のクーポンがもらえる"></p>
             <ul>
@@ -129,7 +141,7 @@
         </ul><!-- /.ushi__flow__list -->
       </div><!-- /.ushi__flow -->
 
-      <div class="ushi__whatis">
+      <div class="ushi__whatis for-browser">
         <div class="ushi__whatis__inner">
           <h2 class="ushi__whatis__heading"><img src="/assets/sp/images/ushi/whatis-heading.png" alt="「スポーツブル」って？"></h2>
           <div class="ushi__whatis__copy"><img src="/assets/sp/images/ushi/whatis-copy.png" alt="3分でスポーツを語れるようになる無料スポーツニュースアプリ"></div>
@@ -145,34 +157,36 @@
         <div class="ushi__overview__inner">
           <table class="ushi__overview__data">
             <tbody>
-              <tr>
-                <th>エントリー期間</th>
-                <td>2017年9月25日 ~ 2017年10月31日</td>
-              </tr>
-              <tr>
-                <th>実施期間</th>
-                <td>2017年9月25日 ~ 2017年11月02日</td>
-              </tr>
-              <tr>
-                <th>特典</th>
-                <td><strong>●500円クーポン</strong>　条件を達成しましたら、即時で付与されます。<br />
-                <strong>●5,000円クーポン</strong>　当選しましたら、キャンペーン終了1週間を目途に付与されます。</td>
-              </tr>
-              <tr>
-                <th>条件</th>
-                <td>エントリー後に、期間内に「スポーツブル」アプリを(エントリー日を含め)3日連続利用すること。<br />
+            <tr>
+              <th>エントリー期間</th>
+              <td>2017年9月25日 ~ 2017年10月31日</td>
+            </tr>
+            <tr>
+              <th>実施期間</th>
+              <td>2017年9月25日 ~ 2017年11月02日</td>
+            </tr>
+            <tr>
+              <th>特典</th>
+              <td><strong>●500円クーポン</strong><br />
+                条件を達成しましたら、Wowma!ページ上でクーポンを獲得の上、即時でご利用いただけます。<br />
+                <strong>●5,000円クーポン</strong><br />
+                条件を達成しましたら、Wowma!ページ上で応募が可能となります。当選しましたら、キャンペーン終了一週間を目途にWowma!上で付与されます。</td>
+            </tr>
+            <tr>
+              <th>条件</th>
+              <td>エントリー後に、期間内に「スポーツブル」アプリを(エントリー日を含め)3日連続利用すること。<br />
                 ※Wowma! クーポンを受け取るには「Wowma!」に会員登録(無料)が必要になります。</td>
-              </tr>
-              <tr>
-                <th>受取方法</th>
-                <td>クーポン取得条件を達成されますと、「スポーツブル」アプリ内に表示されるメッセージ(バナー)より「Wowma! クーポンは受け取りサイト」 に移動することができ、特典のWowma! クーポンを取得可能です。</td>
-              </tr>
-              <tr>
-                <th>クーポン詳細</th>
-                <td><strong>●500円クーポン</strong><br />
-                  対象：条件を達成されたお客様全員<br />
-                  付与：即時<br />
-                  内容：2,000円以上のお買い物に利用できる500円クーポン<br />
+            </tr>
+            <tr>
+              <th>受取方法</th>
+              <td>クーポン取得条件を達成されますと、「スポーツブル」アプリ内に表示されるメッセージ(バナー)より「Wowma! クーポンは受け取りサイト」 に移動することができ、特典のWowma! クーポンを取得可能です。</td>
+            </tr>
+            <tr>
+              <th>クーポン詳細</th>
+              <td><strong>●500円クーポン</strong><br />
+                対象：条件を達成されたお客様全員<br />
+                付与：即時<br />
+                内容：2,000円以上のお買い物に利用できる500円クーポン<br />
                 有効期限：2017年11月30日まで<br />
                 注意事項：■チケット・金券を含む商品の金額は購入額にカウントされません。■クーポンは「対象のお店」に記載のお店でのみ、ご利用いただけます。■「対象のお店」はWowma!クーポン取得ページにて確認いただけます。■1回のお買物につき1枚のみご利用いただけます。■お一人様1枚、1回のみご利用いただけます。■他キャンペーンで付与されるクーポンとの併用はできません。■スマートフォン、PCでのみご利用いただけます。■ケータイ(フィーチャーフォン)ではご利用いただけません。<br />
                 <br />
@@ -182,19 +196,19 @@
                 内容：5,000円以上のお買い物に利用できる5,000円クーポン<br />
                 有効期限：2017年11月30日まで<br />
                 注意事項：■チケット・金券を含む商品の金額は購入額にカウントされません。■クーポンは「対象のお店」に記載のお店でのみ、ご利用いただけます。■「対象のお店」はWowma!クーポン取得ページにて確認いただけます。■1回のお買物につき1枚のみご利用いただけます。■お一人様1枚、1回のみご利用いただけます。■他キャンペーンで付与されるクーポンとの併用はできません。■スマートフォン、PCでのみご利用いただけます。■ケータイ(フィーチャーフォン)ではご利用いただけません。</td>
-              </tr>
-              <tr>
-                <th>注意事項</th>
-                <td>※エントリー後に3日連続ご利用なかった場合、特典は受け取れません。<br />
+            </tr>
+            <tr>
+              <th>注意事項</th>
+              <td>※エントリー後に3日連続ご利用なかった場合、特典は受け取れません。<br />
                 ※再エントリーはできません。<br />
                 ※本キャンペーンは予告なく変更する場合があります。<br />
                 ※本キャンペーンはApple Inc.またはその関連会社の提供・協賛によるもではありません。<br />
                 ※スポーツブルの利用規約に反する行為が判明した場合、本キャンペーンの対象外となる場合がございます。</td>
-              </tr>
-              <tr>
-                <th>お問い合わせ先</th>
-                <td>メール：&#105;&#110;&#102;&#111;&#64;&#115;&#112;&#111;&#114;&#116;&#115;&#98;&#117;&#108;&#108;&#46;&#106;&#112;</td>
-              </tr>
+            </tr>
+            <tr>
+              <th>お問い合わせ先</th>
+              <td>メール：&#105;&#110;&#102;&#111;&#64;&#115;&#112;&#111;&#114;&#116;&#115;&#98;&#117;&#108;&#108;&#46;&#106;&#112;</td>
+            </tr>
             </tbody>
           </table><!-- /.ushi__overview__data -->
         </div><!-- /.ushi__overview__inner -->
@@ -203,7 +217,7 @@
     </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 
-  <footer class="ushi__footer">
+  <footer class="ushi__footer for-browser">
     <div class="ushi__footer__btn__container">
       <h3 class="ushi__footer__btn__heading"><img src="/assets/sp/images/ushi/footer-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
       <ul class="ushi__footer__btn__list">
