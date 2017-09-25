@@ -202,8 +202,21 @@
                             </div>
                             <script src="/big6tv/js/vplayer.js"></script>
                         </div>
-                        <p class="live-help">動画の再生がうまくいかない場合は
-                            <a href="/big6tv/help/">ヘルプ</a>をご覧ください。</p>
+                        <p class="live-help">
+                            動画の再生がうまくいかない場合は<a href="/big6tv/help/" style="color:red !important;">ヘルプ</a>をご覧ください。
+                        </p>
+                        <p class="live-help" id="live-help-safari11">
+                            <a href="/big6tv/help/#live-help-safari11" style="color:red !important;">
+                              最新版の iOS, Mac における動画再生不具合について
+                            </a>
+                        </p>
+                        <script>
+                          var ua = window.navigator.userAgent.toLowerCase();
+                          if ( /undotsushin/i.test(ua) ) {
+                            var help = document.getElementById('live-help-safari11');
+                            help.parentNode.removeChild(help);
+                          }
+                        </script>
                         <div class="live-streaming-sns">
                             <ul class="live-streaming-sns-list">
                                 <li class="live-streaming-sns-item live-streaming-sns-item-fb">
@@ -259,8 +272,8 @@
                                     <table>
                                         <tr>
                                             <th>試合日</th>
-                                            <th>試合日</th>
-                                            <th>試合日</th>
+                                            <th>延長回数</th>
+                                            <th>時間制限</th>
                                         </tr>
                                         <tr>
                                             <td>2試合日</td>

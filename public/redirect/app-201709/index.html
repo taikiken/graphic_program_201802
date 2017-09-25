@@ -18,9 +18,15 @@
   // config
   var adjust_code = 'g2rvir';
 
+  if ( !(/dev|stg/i.test(window.location.host)) ) {
+    var protocol = 'sportsbull';
+  } else {
+    var protocol = 'sportsbull-dev';
+  }
+
   // var
   var url = {
-    'base'           : 'https://app.adjust.com/' + adjust_code + '?deep_link=sportsbull://action?url=',
+    'base'           : 'https://app.adjust.com/' + adjust_code + '?deep_link=' + protocol + '://action?url=',
     'redirect'       : '',
     'referrer'       : '',
     'referrerEncode' : '',

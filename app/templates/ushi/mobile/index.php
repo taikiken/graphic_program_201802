@@ -106,7 +106,7 @@
 
       <div class="ushi__pr_app__wrapper for-browser">
 
-        <div id="js-ushi__mom">
+        <div id="js-ushi__mom" class="for-browser">
           <div id="js-ushi__pr_app" class="ushi__pr_app cm_disable"><!-- CM公開前は .cm_disable -->
             <div class="ushi__pr_app__outer">
               <div class="ushi__pr_app__inner">
@@ -179,7 +179,8 @@
               </tr>
               <tr>
                 <th>受取方法</th>
-                <td>クーポン取得条件を達成されますと、「スポーツブル」アプリ内に表示されるメッセージ(バナー)より「Wowma! クーポンは受け取りサイト」 に移動することができ、特典のWowma! クーポンを取得可能です。</td>
+                <td>クーポン取得条件を達成されますと、「スポーツブル」アプリ内に表示されるメッセージ(バナー)より「Wowma! クーポンは受け取りサイト」 に移動することができ、特典のWowma! クーポンを取得可能です。<br />
+                                <strong class="attention">※ 一度メッセージ（バナー）を消してしまうとクーポンの受取ができなくなりますのでご注意下さい。</strong></td>
               </tr>
               <tr>
                 <th>クーポン詳細</th>
@@ -207,7 +208,8 @@
               </tr>
               <tr>
                 <th>お問い合わせ先</th>
-                <td>メール：&#105;&#110;&#102;&#111;&#64;&#115;&#112;&#111;&#114;&#116;&#115;&#98;&#117;&#108;&#108;&#46;&#106;&#112;</td>
+                <td class="ushi__overview__inquiry" target="_blank">&raquo; <a href="https://sportsbull.jp/p/195780/">スポーツブルに関するお問い合わせ</a><br />
+                &raquo; <a href="https://faq.wowma.jp/" target="_blank">クーポンに関するお問い合わせ</a></td>
               </tr>
             </tbody>
           </table><!-- /.ushi__overview__data -->
