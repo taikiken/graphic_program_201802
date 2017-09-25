@@ -59,7 +59,7 @@
   </script>
 </head>
 <body>
-<div id="whole" class="whole <?php echo $page['template_classname']; ?> teaser">
+<div id="whole" class="whole <?php echo $page['template_classname']; ?>">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
@@ -73,8 +73,8 @@
         <div class="id_sports2017__nav__inner">
           <ul class="id_sports2017__nav--nav">
             <li class="id_sports2017__nav__item"><a href="#anchor-1">大会映像</a></li>
-            <li class="id_sports2017__nav__item"><a href="hoge">大会写真</a></li>
-            <li class="id_sports2017__nav__item"><a href="hoge">記録映像</a></li>
+            <li class="id_sports2017__nav__item"><a href="#anchor-2">大会写真</a></li>
+            <li class="id_sports2017__nav__item"><a href="#anchor-3">記録映像</a></li>
           </ul><!-- /.id_sports2017__nav--nav1 -->
 
           <dl class="id_sports2017__nav--sns">
@@ -86,19 +86,34 @@
       </nav><!-- .id_sports2017__nav -->
 
       <div class="id_sports2017__summary">
-        <div class="id_sports2017__summary__movie"></div><!-- /.id_sports2017__summary__movie -->
-
-        <div class="id_sports2017__summary__text">
-          <h1 class="id_sports2017__summary__text--1 js-animation"><img src="/assets/images/id-sports-2017/summary-text1.png" alt="第一回知的障がい者日韓スポーツ交流プログラム"></h1>
-          <p class="id_sports2017__summary__text--2 js-animation"><img src="/assets/images/id-sports-2017/summary-text2.png" alt="JAPAN - KOREA ID SPORTS 2017"></p>
-          <p class="id_sports2017__summary__text--3 js-animation"><img src="/assets/images/id-sports-2017/summary-text3.png" alt="Exchange Program"></p>
-          <div class="id_sports2017__summary__text--4 js-animation"><img src="/assets/images/id-sports-2017/summary-flag.png" alt=""></div>
-        </div><!-- /.id_sports2017__summary__text -->
+        <?php
+        // --------------------------------------------
+        // 動画ファイル
+        ?>
+        <div class="id_sports2017__summary__movie">
+          <video
+            id="js-id_sports2017__summary__movie--video"
+            class="id_sports2017__summary__movie--video"
+            width="1280"
+            height="720"
+            src="/assets/video/id-sports-2017/video.mp4"
+            autoplay="autoplay"
+            loop
+            muted
+          >
+          </video>
+          <div class="id_sports2017__summary__text">
+            <h1 class="id_sports2017__summary__text--1 js-animation"><img src="/assets/images/id-sports-2017/summary-text1.png" alt="第一回知的障がい者日韓スポーツ交流プログラム"></h1>
+            <p class="id_sports2017__summary__text--2 js-animation"><img src="/assets/images/id-sports-2017/summary-text2.png" alt="JAPAN - KOREA ID SPORTS 2017"></p>
+            <p class="id_sports2017__summary__text--3 js-animation"><img src="/assets/images/id-sports-2017/summary-text3.png" alt="Exchange Program"></p>
+            <div class="id_sports2017__summary__text--4 js-animation"><img src="/assets/images/id-sports-2017/summary-flag.png" alt=""></div>
+          </div><!-- /.id_sports2017__summary__text -->
+        </div><!-- /.id_sports2017__summary__movie -->
+        <p class="id_sports2017__intro__scroll"><img src="/assets/images/id-sports-2017/intro-scroll.png" alt="SCROLL"></p>
       </div><!-- /.id_sports2017__summary -->
 
       <div class="id_sports2017__intro">
         <div class="id_sports2017__intro__inner">
-          <p class="id_sports2017__intro__scroll"><img src="/assets/images/id-sports-2017/intro-scroll.png" alt="SCROLL"></p>
           <h2 class="id_sports2017__intro__heading">第一回知的障がい者日韓スポーツ交流プログラム</h2>
           <p class="id_sports2017__intro__copy">エクアドル2015 グローバルゲームスに参加した有志により当プログラムは構成され、<br />
           アジア地域における知的障がい者スポーツの発展に日韓が協力して推進し、スポーツを通じた国際協力及び交流を目的に行われるものである。<br />
@@ -107,7 +122,7 @@
           <div id="anchor-1" class="id_sports2017__intro__hilight_movie">
             <h3 class="id_sports2017__intro__hilight_movie__heading"><img src="/assets/images/id-sports-2017/intro-highlight-label.png" alt="ハイライト動画"></h3>
             <div class="id_sports2017__intro__hilight_movie__video">
-              <img src="/assets/images/id-sports-2017/intro-highlight-movie_cs.png" alt="COMING SOON : 配信までお待ち下さい">
+              <a href="/p/196654/" target="_blank"><img src="/assets/images/id-sports-2017/intro-highlight-movie.png" alt=""></a>
             </div><!-- /.id_sports2017__intro__hilight_movie__video -->
           </div><!-- /.id_sports2017__intro__hilight_movie -->
         </div><!-- /.id_sports2017__intro__inner -->
@@ -181,39 +196,41 @@
       </div><!-- /.id_sports2017__overview -->
 
       <div class="id_sports2017__gallery_container">
-        <div class="id_sports2017__photo_gallery">
+        <div id="anchor-2" class="id_sports2017__photo_gallery">
           <div class="id_sports2017__photo_gallery__outer">
             <div class="id_sports2017__photo_gallery__inner">
               <div class="id_sports2017__photo_gallery__heading">
                 <h2><img src="/assets/images/id-sports-2017/gallery-heading.png" alt="大会写真"></h2>
-                <div class="id_sports2017__photo_gallery__heading__btn"><a href="/p/181566/">すべての大会写真を見る</a></div>
+                <div class="id_sports2017__photo_gallery__heading__btn"><a href="/a/196156/">すべての大会写真を見る</a></div>
               </div><!-- /.id_sports2017__photo_gallery__heading -->
 
               <ul class="id_sports2017__photo_gallery__list">
-                <li class="id_sports2017__photo_gallery__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_gallery1.png" alt=""></a></li>
-                <li class="id_sports2017__photo_gallery__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_gallery2.png" alt=""></a></li>
-                <li class="id_sports2017__photo_gallery__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_gallery3.png" alt=""></a></li>
-                <li class="id_sports2017__photo_gallery__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_gallery4.png" alt=""></a></li>
-                <li class="id_sports2017__photo_gallery__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_gallery5.png" alt=""></a></li>
+                <li class="id_sports2017__photo_gallery__item"><a href="/a/196156/?id=69"><img src="https://img.sportsbull.jp/photo/main/59c37a542892c.jpg" alt=""></a></li>
+                <li class="id_sports2017__photo_gallery__item"><a href="/a/196156/?id=372"><img src="https://img.sportsbull.jp/photo/main/59c3857aa0763.jpg" alt=""></a></li>
+                <li class="id_sports2017__photo_gallery__item"><a href="/a/196156/?id=414"><img src="https://img.sportsbull.jp/photo/main/59c3863756956.jpg" alt=""></a></li>
+                <li class="id_sports2017__photo_gallery__item"><a href="/a/196156/?id=111"><img src="https://img.sportsbull.jp/photo/main/59c37b7a48649.jpg" alt=""></a></li>
+                <li class="id_sports2017__photo_gallery__item"><a href="/a/196156/?id=261"><img src="https://img.sportsbull.jp/photo/main/59c381380cd12.jpg" alt=""></a></li>
               </ul><!-- /.id_sports2017__photo_gallery__list -->
             </div><!-- /.id_sports2017__photo_gallery__inner -->
           </div><!-- .id_sports2017__photo_gallery__outer -->
         </div><!-- /.id_sports2017__photo_gallery -->
 
-        <div class="id_sports2017__offshot_movie">
+        <div id="anchor-3" class="id_sports2017__offshot_movie">
           <div class="id_sports2017__offshot_movie__outer">
             <div class="id_sports2017__offshot_movie__inner">
               <div class="id_sports2017__offshot_movie__heading">
                 <h2><img src="/assets/images/id-sports-2017/movie-heading.png" alt="記録映像"></h2>
-                <div class="id_sports2017__offshot_movie__heading__btn"><a href="/bulls-station/off-shot-movie/">すべての記録映像を見る</a></div>
+                <?php
+                // <div class="id_sports2017__offshot_movie__heading__btn hide"><a href="#">すべての記録映像を見る</a></div>
+                ?>
               </div><!-- /.id_sports2017__offshot_movie__heading -->
 
               <ul class="id_sports2017__offshot_movie__list">
-                <li class="id_sports2017__offshot_movie__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_movie.png" alt=""></a></li>
-                <li class="id_sports2017__offshot_movie__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_movie.png" alt=""></a></li>
-                <li class="id_sports2017__offshot_movie__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_movie.png" alt=""></a></li>
-                <li class="id_sports2017__offshot_movie__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_movie.png" alt=""></a></li>
-                <li class="id_sports2017__offshot_movie__item"><a href="hoge"><img src="/assets/images/id-sports-2017/dummy-thumb_movie.png" alt=""></a></li>
+                <li class="id_sports2017__offshot_movie__item"><a href="/p/196654/"><img src="https://img.sportsbull.jp/thumbnail1/img2017092219135763918100.png" alt=""></a></li>
+                <li class="id_sports2017__offshot_movie__item"><a href="/p/195275/"><img src="https://img.sportsbull.jp/thumbnail1/img2017091920323831312700.png" alt=""></a></li>
+                <li class="id_sports2017__offshot_movie__item"><a href="/p/195272/"><img src="https://img.sportsbull.jp/thumbnail1/img2017091920352797434900.png" alt=""></a></li>
+                <li class="id_sports2017__offshot_movie__item"><a href="/p/195271/"><img src="https://img.sportsbull.jp/thumbnail1/img2017091920243129846000.png" alt=""></a></li>
+                <li class="id_sports2017__offshot_movie__item"><a href="/p/195273/"><img src="https://img.sportsbull.jp/thumbnail1/img2017091920305424178900.png" alt=""></a></li>
               </ul><!-- /.id_sports2017__offshot_movie__list -->
             </div><!-- /.id_sports2017__offshot_movie__inner -->
           </div><!-- /.id_sports2017__offshot_movie__outer -->
