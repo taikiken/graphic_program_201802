@@ -279,10 +279,15 @@ class AppBanner {
   /**
    * Scroll.SCROLL event handler
    * @param {Object} events Scroll.SCROLL event Object
+   * @see https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-332087234
    * @since 2-16-09-30 static へ変更
+   * @since 2017-09-26 banner - height: 85 -> 70 変更
    */
   static onScroll(events) {
-    if (events.y >= 85) {
+    // if (events.y >= 85) {
+    // @since 2017-09-26
+    //
+    if (events.y >= 70) {
       AppBanner.visible(false);
     } else {
       AppBanner.visible(true);
