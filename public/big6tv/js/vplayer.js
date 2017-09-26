@@ -21,6 +21,25 @@ if (isIE) {
   options['techOrder'] = ["flash"]; //-> IE 11
 }
 
+// To detect Safari 11
+function get_browser() {
+    var ua=navigator.userAgent,tem,M=ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=/\brv[ :]+(\d+)/g.exec(ua) || [];
+        return {name:'IE',version:(tem[1]||'')};
+        }
+    if(M[1]==='Chrome'){
+        tem=ua.match(/\bOPR|Edge\/(\d+)/)
+        if(tem!=null)   {return {name:'Opera', version:tem[1]};}
+        }
+    M=M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem=ua.match(/version\/(\d+)/i))!=null) {M.splice(1,1,tem[1]);}
+    return {
+      name: M[0],
+      version: M[1]
+    };
+ }
+
 var viewtype = function () {
   var type;
   if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0 || ua.indexOf('Windows Phone') > 0) {
@@ -115,6 +134,16 @@ var setPlayerEvent = function setPlayerEvent() {
     // Disabled subtitles/closed caption for Safari.
     document.getElementsByClassName("vjs-captions-button")[0].style.display = "none";
   });
+
+  // This is for Safari 11
+  player.on(['adend'], function(){
+    try{
+      player.muted(false) ;
+      player.play();
+    }catch(e){
+      player.play();
+    }
+  });
 };
 
 var count = 0;
@@ -146,6 +175,13 @@ var videoLoad = function videoLoad() {
           src: video.source,
           type: 'application/x-mpegURL'
         });
+
+        // This is for Safari 11.
+        var browser = get_browser();
+        if(!navigator.userAgent.match(/iPhone/i) && browser.name == 'Safari' && browser.version == 11){
+          player.muted(true) ;
+          player.setAttribute('muted', 'muted')
+        }
 
         player.updateSrc(sources);
         player.ima(ads_options);

@@ -63,6 +63,12 @@
    ga('send', 'pageview');
 
   </script>
+  <style>
+    .undotsushin-ios .for-browser,
+    .undotsushin-android .for-browser {
+      display: none;
+    }
+  </style>
 </head>
 <body class="appbnr-disable">
 <div class="whole <?php echo $page['template_classname']; ?>">
@@ -71,8 +77,14 @@
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
-
-  <div id="js-ushi__message" class="ushi__message">
+  <?php
+  // ?display=entry で enable
+  $display_enable = '';
+  if ($_GET['display'] == 'entry') {
+    $display_enable = 'enable';
+  }
+  ?>
+  <div id="js-ushi__message" class="ushi__message <?php echo $display_enable; ?>">
     <p><img src="/assets/sp/images/ushi/message-entry.png" alt="エントリーが完了しました"></p>
   </div><!-- /.ushi__message -->
 
@@ -94,7 +106,7 @@
 
       <div class="ushi__pr_app__wrapper">
 
-        <div id="js-ushi__mom">
+        <div id="js-ushi__mom" class="for-browser">
           <div id="js-ushi__pr_app" class="ushi__pr_app cm_disable"><!-- CM公開前は .cm_disable -->
             <div class="ushi__pr_app__outer">
               <div class="ushi__pr_app__inner">
@@ -117,7 +129,11 @@
         <h2 class="ushi__flow__heading"><img src="/assets/sp/images/ushi/flow-heading.png" alt="キャンペーンの流れ"></h2>
         <ul class="ushi__flow__list">
           <li class="ushi__flow__item ushi__flow__item--1"><img src="/assets/sp/images/ushi/flow-flow1.png" alt="1. スポーツブルアプリを起動"></li><!-- /.ushi__flow__item--1 -->
-          <li class="ushi__flow__item ushi__flow__item--2"><img src="/assets/sp/images/ushi/flow-flow2.png" alt="2. アプリ内メッセージが届いたらキャンペーンにエントリーをタップ"></li><!-- /.ushi__flow__item--1 -->
+          <li class="ushi__flow__item ushi__flow__item--2">
+            <p><img src="/assets/sp/images/ushi/flow-flow2.png" alt="2. アプリ内メッセージが届いたらキャンペーンにエントリーをタップ"></p>
+            <p class="ushi__flow__notice"> ※アプリ内メッセージ (エントリーボタン) が届くまでには、<br />
+            最大インストール翌日まで時間がかかる場合がございます。</p>
+          </li><!-- /.ushi__flow__item--1 -->
           <li class="ushi__flow__item ushi__flow__item--3">
             <p><img src="/assets/sp/images/ushi/flow-flow3_text.png" alt="3. エントリーから3日連続アプリ起動でもれなく500円分のクーポンさらに抽選で200名様に5,000円分のクーポンがもらえる"></p>
             <ul>
@@ -129,7 +145,7 @@
         </ul><!-- /.ushi__flow__list -->
       </div><!-- /.ushi__flow -->
 
-      <div class="ushi__whatis">
+      <div class="ushi__whatis for-browser">
         <div class="ushi__whatis__inner">
           <h2 class="ushi__whatis__heading"><img src="/assets/sp/images/ushi/whatis-heading.png" alt="「スポーツブル」って？"></h2>
           <div class="ushi__whatis__copy"><img src="/assets/sp/images/ushi/whatis-copy.png" alt="3分でスポーツを語れるようになる無料スポーツニュースアプリ"></div>
@@ -207,7 +223,7 @@
     </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 
-  <footer class="ushi__footer">
+  <footer class="ushi__footer for-browser">
     <div class="ushi__footer__btn__container">
       <h3 class="ushi__footer__btn__heading"><img src="/assets/sp/images/ushi/footer-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
       <ul class="ushi__footer__btn__list">
