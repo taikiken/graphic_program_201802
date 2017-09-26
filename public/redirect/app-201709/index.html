@@ -25,9 +25,6 @@
     var protocol = 'sportsbull-dev';
   }
 
-  // [tmp] 一時的に本番アプリに
-  var protocol = 'sportsbull';
-
   // var
   var url = {
     'base'           : 'https://app.adjust.com/' + adjust_code + '?deep_link=' + protocol + '://action?url=',
@@ -50,10 +47,6 @@
 
   // arrange
   if ( url.referrer ) {
-
-    // [tmp] 一時的にdevきる
-    url.referrer = url.referrer.replace(/dev\./,"");
-
     url.referrerEncode = encodeURIComponent(url.referrer)
     url.redirect       = url.base + url.referrerEncode;
     url.ga             = url.base + url.referrer;
@@ -68,7 +61,7 @@
   });
 
   // redirect
-  alert(url.redirect);
+  // alert(url.redirect);
 
   window.location.replace(url.redirect);
 
