@@ -238,6 +238,15 @@ $app->group('/stats', function () use($app) {
   // ==============================
   $this->group('/worldsoccer', function ($request, $response, $args) use ( $app ) {
 
+      // schedule
+      $this->get('/{league:premier-league|bundesliga|champions-league|la-liga|serie-a}/schedule/{editionid:[0-9]+}-{matchid:[0-9]+}[/]', function ($request, $response, $args) use ($app) {
+          return $this->renderer->render($response, 'stats/worldsoccer/schedule.php', $args);
+      });
+      // チーム一覧
+      $this->get('/{league:premier-league|bundesliga|champions-league|la-liga|serie-a}/team/{editionid:[0-9]+}-{teamid:[0-9]+}[/]', function ($request, $response, $args) use ($app) {
+          return $this->renderer->render($response, 'stats/worldsoccer/team.php', $args);
+      });
+
     $page = array(
       'title' => '海外サッカー | 速報 &amp; データ',
       'league' => array(
@@ -248,17 +257,11 @@ $app->group('/stats', function () use($app) {
         'serie-a'          => 'セリエA',
       ),
       'category' => array(
-        'schedule' => array(
-          'title' => '日程・結果',
-        ),
         'standing' => array(
           'title' => '順位',
         ),
         'playlist' => array(
           'title' => '選手成績',
-        ),
-        'team' => array(
-          'title' => 'チーム一覧',
         ),
       ),
     );
@@ -267,7 +270,6 @@ $app->group('/stats', function () use($app) {
     $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
       return $response->withRedirect('/stats/worldsoccer/premier-league/schedule/', 301);
     });
-
     // 各リーグ
     foreach( array_keys($page['league']) as $key => $league ) :
 
