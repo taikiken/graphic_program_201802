@@ -48,9 +48,11 @@ export default class Main {
    * - {@link Black}, {@link Visited}
    */
   static start() {
-    // console.log('Main.start', Black.detect(), Visited.already());
-    // googletag 条件追加する
-    if (!Black.detect() && !Visited.already() && self.googletag) {
+    if (location.hostname.indexOf('192.168.1.') === 0) {
+      // test
+      Main.modal();
+    } else if (!Black.detect() && !Visited.already() && self.googletag) {
+      // googletag 条件追加する
       Visited.arrive();
       Main.modal();
     }

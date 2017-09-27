@@ -87,9 +87,11 @@ var Main = function () {
   }, {
     key: 'start',
     value: function start() {
-      // console.log('Main.start', Black.detect(), Visited.already());
-      // googletag 条件追加する
-      if (!_Black2.default.detect() && !_Visited2.default.already() && self.googletag) {
+      if (location.hostname.indexOf('192.168.1.') === 0) {
+        // test
+        Main.modal();
+      } else if (!_Black2.default.detect() && !_Visited2.default.already() && self.googletag) {
+        // googletag 条件追加する
         _Visited2.default.arrive();
         Main.modal();
       }

@@ -161,12 +161,12 @@ gulp.task('popup:copy', () => (
       `${wpk.entry}/babels-popup/02_dest/**/*.bundle.js`,
     ],
   )
-    .pipe($.debug({ title: '[BABELS:POPUP]' }))
     // .pipe(gulp.dest(dir.dist.root))
     // .pipe(gulp.dest(dir.app.js))
     .pipe(gulp.dest(`${dir.dist.assets.popup}/js`))
     .pipe(gulp.dest(`${dir.root}/test/assets/js`))
-    // .pipe(gulp.dest(`${dir.root}/app/assets/js`))
+    .pipe(gulp.dest('../app/assets/popup/js'))
+    .pipe($.debug({ title: '[BABELS:POPUP]' }))
     .pipe($.size({ title: '*** popup:copy ***' }))
 ),
 );
