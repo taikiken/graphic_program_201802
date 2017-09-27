@@ -298,13 +298,87 @@ $app->group('/stats', function () use($app) {
         // schedule
         $this->get('/schedule/{editionid:[0-9]+}-{matchid:[0-9]+}[/]', function ($request, $response, $args) use ($app, $page, $league) {
 
+          $match_id = $args['matchid'];
+          $edition_id = $args['editionid'];
+          // matchidから日付を特定する。
+          $edition_list_s3key = 'json/edition_list.json';
+          $match_list_s3key = 'json/{league}/{season}/match_date_map.json';
+
+          // ルータではUT_ENVみてバケット分けている
+          $S3Module = new S3Module;
+          $edition_list_json = $S3Module->getUrl($edition_list_s3key);
+
+          $season = '';
+          $api_date = '';
+          $language_code = '';
+          $match_list_json = '';
+          $match_detail = [];
+
+          $home_team = '';
+          $away_team = '';
+          $match_date = '';
+
+          if (!empty(file_get_contents($edition_list_json, false, null, 0, 1))){
+            $edition_list_json = json_decode(file_get_contents($edition_list_json));
+            $season = $edition_list_json->$edition_id->season;
+            $language_code = $edition_list_json->$edition_id->languageCode;
+
+            $search = [
+              '{league}',
+              '{season}',
+            ];
+            $replace = [
+              $league,
+              $season,
+            ];
+            $match_list_s3key = str_replace($search, $replace , $match_list_s3key);
+            $match_list_json = $S3Module->getUrl($match_list_s3key);
+
+            if (!empty(file_get_contents($match_list_json, false, null, 0, 1))){
+              $match_list_json = json_decode(file_get_contents($match_list_json));
+              $api_date = $match_list_json->$match_id->date;
+            }
+          }
+
+
+          if (!empty($api_date)) {
+            $api = 'http://APIdemo:Var%40HaanjUhtajaXIvat@sportsbull.api.infostradasports.com/svc/Football.svc/json/GetMatchLiveList_Date?date={date}&editionId={editionId}&languageCode={languageCode}';
+
+            $search = [
+              '{date}',
+              '{editionId}',
+              '{languageCode}',
+            ];
+            $replace = [
+              $api_date,
+              $edition_id,
+              $language_code,
+            ];
+            $api = str_replace($search, $replace , $api);
+
+            if (!empty(file_get_contents($api, false, null, 0, 1))){
+              $res = json_decode(file_get_contents($api));
+              foreach ($res as $row) {
+                if ($row->n_MatchID == $match_id) {
+                  $home_team = $row->c_HomeTeam;
+                  $away_team = $row->c_AwayTeam;
+                  $DateTime = new DateTime($api_date);
+                  $match_date = $DateTime->format('Y年m月d日');
+                  $week_list = array( '日', '月', '火', '水', '木', '金', '土');
+                  $week = $week_list[(int)$DateTime->format('w')];
+                  $match_date = $match_date . '（' . $week .'）';
+                }
+              }
+            }
+          }
+          $title = $home_team.' vs '.$away_team.' - '.$match_date.' - '.$page['league'][$league];
           $args['page'] = $app->model->set(array(
-            'title'              => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'],
+            'title'              => $title . $page['category'][$args['category']]['title'].' | '.$page['title'],
             'og_type'            => 'article',
             'og_title'           => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'].' | '.$app->model->property('title'),
             'og_url'             => $app->model->property('site_url').'stats/worldsoccer/'.$league.'/'.$args['category'],
             'og_image'           => $app->model->property('site_url').'assets/images/stats/worldsoccer/ogp.jpg',
-            'og_description'     => $page['league'][$league] . "の" .$page['category'][$args['category']]['title']."見るならスポーツブル(スポブル)で！スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。",
+            'og_description'     => $title . "の結果を見るならスポーツブル(スポブル)で！スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。",
             'keywords'           => $page['league'][$league].',海外サッカー,欧州サッカー,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
             'path'               => $args,
             'match_id'           => $args['match_id'],
@@ -313,6 +387,47 @@ $app->group('/stats', function () use($app) {
         });
         // チーム一覧
         $this->get('/team/{editionid:[0-9]+}-{teamid:[0-9]+}[/]', function ($request, $response, $args) use ($app, $page, $league) {
+
+          $team_id = $args['teamid'];
+          $edition_id = $args['editionid'];
+          $edition_list_s3key = 'json/edition_list.json';
+
+          // ルータではUT_ENVみてバケット分けている
+          $S3Module = new S3Module;
+          $edition_list_json = $S3Module->getUrl($edition_list_s3key);
+
+          $language_code = '';
+          $team = '';
+
+          if (!empty(file_get_contents($edition_list_json, false, null, 0, 1))){
+            $edition_list_json = json_decode(file_get_contents($edition_list_json));
+            $season = $edition_list_json->$edition_id->season;
+            $language_code = $edition_list_json->$edition_id->languageCode;
+
+          }
+          if (!empty($language_code)) {
+            $api = 'http://APIdemo:Var%40HaanjUhtajaXIvat@sportsbull.api.infostradasports.com/svc/Football.svc/json/GetTeamList?editionId={editionId}&languageCode={languageCode}';
+
+            $search = [
+              '{editionId}',
+              '{languageCode}',
+            ];
+            $replace = [
+              $edition_id,
+              $language_code,
+            ];
+            $api = str_replace($search, $replace , $api);
+
+            if (!empty(file_get_contents($api, false, null, 0, 1))){
+              $res = json_decode(file_get_contents($api));
+              foreach ($res as $row) {
+                if ($row->n_MatchID == $match_id) {
+                  $team = $row->c_Team;
+                }
+              }
+            }
+          }
+
 
           $widget_id_map = array(
             'premier-league'   => '1eng',
@@ -324,16 +439,16 @@ $app->group('/stats', function () use($app) {
           $widget_id = $widget_id_map[$league];
 
           $args['page'] = $app->model->set(array(
-            'title'              => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'],
+            'title'              => $team.' - '.$page['league'][$league].' | '.$page['title'],
             'og_type'            => 'article',
             'og_title'           => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'].' | '.$app->model->property('title'),
             'og_url'             => $app->model->property('site_url').'stats/worldsoccer/'.$league.'/'.$args['category'],
             'og_image'           => $app->model->property('site_url').'assets/images/stats/worldsoccer/ogp.jpg',
-            'og_description'     => $page['league'][$league] . "の" .$page['category'][$args['category']]['title']."見るならスポーツブル(スポブル)で！スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。",
+            'og_description'     => $page['league'][$league] . "の" .$team."見るならスポーツブル(スポブル)で！スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。",
             'keywords'           => $page['league'][$league].',海外サッカー,欧州サッカー,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
             'path'               => $args,
             'widget_id'          => $widget_id,
-            'team_id'           => $args['teamid'],
+            'team_id'            => $team_id,
           ));
           return $this->renderer->render($response, 'stats/worldsoccer/team_detail.php', $args);
         });
