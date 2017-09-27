@@ -13,7 +13,7 @@
 
 import {Safety} from '../data/Safety';
 
-let _symbol = Symbol();
+// const _symbol = Symbol('Dom');
 
 /**
  * <p>React Dom を insert する element</p>
@@ -21,18 +21,18 @@ let _symbol = Symbol();
  * <p>全て static です<p>
  */
 export class Dom {
-  /**
-   * <p>PC / SP 共通です<br>
-   * static class です, instance を作成しません</p>
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Dom is static Class. not use new Dom().' );
-
-    }
-  }
+  // /**
+  //  * <p>PC / SP 共通です<br>
+  //  * static class です, instance を作成しません</p>
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Dom is static Class. not use new Dom().' );
+  //
+  //   }
+  // }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
