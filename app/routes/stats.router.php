@@ -238,15 +238,6 @@ $app->group('/stats', function () use($app) {
   // ==============================
   $this->group('/worldsoccer', function ($request, $response, $args) use ( $app ) {
 
-      // schedule
-      $this->get('/{league:premier-league|bundesliga|champions-league|la-liga|serie-a}/schedule/{editionid:[0-9]+}-{matchid:[0-9]+}[/]', function ($request, $response, $args) use ($app) {
-          return $this->renderer->render($response, 'stats/worldsoccer/schedule.php', $args);
-      });
-      // チーム一覧
-      $this->get('/{league:premier-league|bundesliga|champions-league|la-liga|serie-a}/team/{editionid:[0-9]+}-{teamid:[0-9]+}[/]', function ($request, $response, $args) use ($app) {
-          return $this->renderer->render($response, 'stats/worldsoccer/team.php', $args);
-      });
-
     $page = array(
       'title' => '海外サッカー | 速報 &amp; データ',
       'league' => array(
@@ -257,11 +248,17 @@ $app->group('/stats', function () use($app) {
         'serie-a'          => 'セリエA',
       ),
       'category' => array(
+        'schedule' => array(
+          'title' => '日程・結果',
+        ),
         'standing' => array(
           'title' => '順位',
         ),
         'playlist' => array(
           'title' => '選手成績',
+        ),
+        'team' => array(
+          'title' => 'チーム一覧',
         ),
       ),
     );
@@ -296,6 +293,49 @@ $app->group('/stats', function () use($app) {
           ));
 
           return $this->renderer->render($response, 'stats/worldsoccer/'.$league.'/'.$args['category'].'.php', $args);
+        });
+
+        // schedule
+        $this->get('/schedule/{editionid:[0-9]+}-{matchid:[0-9]+}[/]', function ($request, $response, $args) use ($app, $page, $league) {
+
+          $args['page'] = $app->model->set(array(
+            'title'              => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'],
+            'og_type'            => 'article',
+            'og_title'           => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'].' | '.$app->model->property('title'),
+            'og_url'             => $app->model->property('site_url').'stats/worldsoccer/'.$league.'/'.$args['category'],
+            'og_image'           => $app->model->property('site_url').'assets/images/stats/worldsoccer/ogp.jpg',
+            'og_description'     => $page['league'][$league] . "の" .$page['category'][$args['category']]['title']."見るならスポーツブル(スポブル)で！スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。",
+            'keywords'           => $page['league'][$league].',海外サッカー,欧州サッカー,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
+            'path'               => $args,
+            'match_id'           => $args['match_id'],
+          ));
+          return $this->renderer->render($response, 'stats/worldsoccer/schedule_detail.php', $args);
+        });
+        // チーム一覧
+        $this->get('/team/{editionid:[0-9]+}-{teamid:[0-9]+}[/]', function ($request, $response, $args) use ($app, $page, $league) {
+
+          $widget_id_map = array(
+            'premier-league'   => '1eng',
+            'bundesliga'       => '1ger',
+            'champions-league' => 'cl',
+            'la-liga'          => '1spa',
+            'serie-a'          => '1ita',
+          );
+          $widget_id = $widget_id_map[$league];
+
+          $args['page'] = $app->model->set(array(
+            'title'              => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'],
+            'og_type'            => 'article',
+            'og_title'           => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'].' | '.$app->model->property('title'),
+            'og_url'             => $app->model->property('site_url').'stats/worldsoccer/'.$league.'/'.$args['category'],
+            'og_image'           => $app->model->property('site_url').'assets/images/stats/worldsoccer/ogp.jpg',
+            'og_description'     => $page['league'][$league] . "の" .$page['category'][$args['category']]['title']."見るならスポーツブル(スポブル)で！スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。",
+            'keywords'           => $page['league'][$league].',海外サッカー,欧州サッカー,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
+            'path'               => $args,
+            'widget_id'          => $widget_id,
+            'team_id'           => $args['teamid'],
+          ));
+          return $this->renderer->render($response, 'stats/worldsoccer/team_detail.php', $args);
         });
       });
 
