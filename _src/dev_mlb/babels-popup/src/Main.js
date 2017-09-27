@@ -48,8 +48,9 @@ export default class Main {
    * - {@link Black}, {@link Visited}
    */
   static start() {
-    if (location.hostname.indexOf('192.168.1.') === 0) {
+    if (location.hostname.indexOf('192.168.1.') === 0 && location.port !== '8080') {
       // test
+      console.warn('local dev mode', location.hostname, location.port);
       Main.modal();
     } else if (!Black.detect() && !Visited.already() && self.googletag) {
       // googletag 条件追加する
