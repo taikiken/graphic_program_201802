@@ -239,6 +239,9 @@ const Sagen = self.Sagen;
 // @see https://github.com/undotsushin/undotsushin/issues/1906#issuecomment-301979040
 // @since 2017-05-17
 
+let headerSticky = null;
+let timer = 0;
+
 /**
  * アプリダウンロードの動線を改善 #1009
  *
@@ -294,12 +297,28 @@ class AppBanner {
     }
   }
   /**
+   * iOS safari rendering bug 対応させるために強制再描画します
+   */
+  static refresh() {
+    if (!headerSticky) {
+      return;
+    }
+    clearTimeout(timer);
+    headerSticky.style.cssText = 'top: 71px;';
+    timer = setTimeout(() => {
+      headerSticky.style.cssText = '';
+    }, 16);
+  }
+  /**
    * document.body に `.appbnr-invisible` を追加・削除します
    * @param {boolean} view true の時に `.appbnr-invisible` を削除します
    */
   static visible(view = false) {
     if (view) {
-      Sagen.Dom.removeClass(document.body, 'appbnr-invisible');
+      if (Sagen.Dom.hasClass(document.body, 'appbnr-invisible')) {
+        Sagen.Dom.removeClass(document.body, 'appbnr-invisible');
+        AppBanner.refresh();
+      }
     } else {
       Sagen.Dom.addClass(document.body, 'appbnr-invisible');
     }
@@ -332,6 +351,11 @@ class AppBanner {
      * @type {Scroll}
      */
     this.scroll = Scroll.factory();
+    const headers = document.getElementsByClassName('header-sticky');
+    // console.log('AppBanner headers', headers);
+    if (headers && headers.length) {
+      headerSticky = headers[0];
+    }
   }
   // ---------------------------------------------------
   //  METHOD
