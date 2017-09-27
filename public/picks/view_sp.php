@@ -226,6 +226,5 @@ if (0) :
 <?php
 endif;
 ?>
-<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>
