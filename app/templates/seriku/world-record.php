@@ -295,5 +295,6 @@ echo get_entries("record",0,$db);
         </script>
         <script src="/assets/js/seriku.bundle.js"></script>
         <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
+        <script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
     </body>
 </html>

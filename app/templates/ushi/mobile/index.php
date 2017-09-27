@@ -104,7 +104,7 @@
         </div><!-- /.ushi__summary__inner -->
       </div><!-- /.ushi__summary -->
 
-      <div class="ushi__pr_app__wrapper">
+      <div class="ushi__pr_app__wrapper for-browser">
 
         <div id="js-ushi__mom" class="for-browser">
           <div id="js-ushi__pr_app" class="ushi__pr_app cm_disable"><!-- CM公開前は .cm_disable -->

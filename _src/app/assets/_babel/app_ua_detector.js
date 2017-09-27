@@ -44,6 +44,9 @@ const detector = () => {
     return;
   }
   const html = tags[0];
+  if (!html) {
+    return;
+  }
 
   // add class
   if (android) {
@@ -64,4 +67,9 @@ detector();
 //   document.removeEventListener('DOMContentLoaded', remove);
 //   Sagen.Dom.removeClass(document.body, 'appbnr-enable');
 // };
+
+// -----------------------------
+// アプリダウンロード訴求のポップアップを表示 #2404
+// @see https://github.com/undotsushin/undotsushin/issues/2404
+// app banner 削除 on
 // document.addEventListener('DOMContentLoaded', remove, false);

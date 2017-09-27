@@ -218,7 +218,13 @@ endif;
 ?>
 
 <script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<?php
+if (0) :
+  // app_ua_detector.bundle.js で行います
+?>
 <script src="/assets/js/app_divide.bundle.js?v=<?php echo $page['version']; ?>"></script>
-
+<?php
+endif;
+?>
 </body>
 </html>
