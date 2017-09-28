@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/09/28 - 14:24
+ * @date 2017/09/28 - 18:23
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -14,24 +14,22 @@
 const React = self.React;
 
 /*
-@see https://github.com/undotsushin/undotsushin/issues/2537
-<script src="//i.socdm.com/sdk/js/adg-script-loader.js?id=54991&targetID=adg_54991&displayid=3&adType=INFEED&async=false&tagver=2.0.0"></script>
-<script src="//i.socdm.com/sdk/js/adg-script-loader.js?id=54992&targetID=adg_54992&displayid=3&adType=INFEED&async=false&tagver=2.0.0"></script>
+レコメンド内1
+<script src="//i.socdm.com/sdk/js/adg-script-loader.js?id=54993&targetID=adg_54993&displayid=3&adType=INFEED&async=false&tagver=2.0.0"></script>
+
+レコメンド内2
+<script src="//i.socdm.com/sdk/js/adg-script-loader.js?id=54994&targetID=adg_54994&displayid=3&adType=INFEED&async=false&tagver=2.0.0"></script>
  */
 
 /**
- * SP single ranking - carousel 内広告を作成します
+ * SP single recommend - 内広告を作成します
  * @since 2017-09-28
  * @see https://github.com/undotsushin/undotsushin/issues/2537
  */
-export default class SPComponentSingleRankingAd extends React.Component {
+export default class SPComponentSingleRecommendAd extends React.Component {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
-  /**
-   * React.propTypes
-   * @returns {{index: number}} React.propTypes
-   */
   static get propTypes() {
     return {
       index: React.PropTypes.number.isRequired,
@@ -40,10 +38,6 @@ export default class SPComponentSingleRankingAd extends React.Component {
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
-  /**
-   * 初期設定を行います
-   * @param {*} props React.props
-   */
   constructor(props) {
     super(props);
     // ---
@@ -53,15 +47,15 @@ export default class SPComponentSingleRankingAd extends React.Component {
      */
     this.container = null;
     /**
-     * script.src - ad - async: true 運用します
+     * script.src - ad async: true 運用します
      * ```
      * adg-script-loader.js Failed to execute 'write' on 'Document': It isn't possible to write into a document from an asynchronously-loaded external script unless it is explicitly opened.
      * ```
      * @type {{first: string, second: string}}
      */
     this.src = {
-      first: '//i.socdm.com/sdk/js/adg-script-loader.js?id=54991&targetID=adg_54991&displayid=3&adType=INFEED&async=true&tagver=2.0.0',
-      second: '//i.socdm.com/sdk/js/adg-script-loader.js?id=54992&targetID=adg_54992&displayid=3&adType=INFEED&async=true&tagver=2.0.0',
+      first: '//i.socdm.com/sdk/js/adg-script-loader.js?id=54993&targetID=adg_54993&displayid=3&adType=INFEED&async=true&tagver=2.0.0',
+      second: '//i.socdm.com/sdk/js/adg-script-loader.js?id=54994&targetID=adg_54994&displayid=3&adType=INFEED&async=true&tagver=2.0.0',
     };
   }
   // ---------------------------------------------------
@@ -72,7 +66,7 @@ export default class SPComponentSingleRankingAd extends React.Component {
    */
   componentDidMount() {
     if (this.container) {
-      // console.log('SPComponentSingleRankingAd.componentDidMount', this.container);
+      console.log('SPComponentSingleRecommendAd.componentDidMount', this.container);
       this.ad();
     }
   }
@@ -80,7 +74,7 @@ export default class SPComponentSingleRankingAd extends React.Component {
    * 広告タグ挿入
    */
   ad() {
-    // console.log('SPComponentSingleRankingAd.ad ------------');
+    console.log('SPComponentSingleRecommendAd.ad ------------');
     const container = this.container;
     const { index } = this.props;
     const div = document.createElement('div');
@@ -88,7 +82,7 @@ export default class SPComponentSingleRankingAd extends React.Component {
     script.src = index === 1 ? this.src.first : this.src.second;
     div.appendChild(script);
     container.appendChild(div);
-    // console.log('SPComponentSingleRankingAd.ad', container);
+    console.log('SPComponentSingleRecommendAd.ad', container);
   }
   /**
    * div.widget-post-carousel-item
@@ -96,10 +90,12 @@ export default class SPComponentSingleRankingAd extends React.Component {
    */
   render() {
     return (
-      <div
-        className="widget-post-carousel-item widget-post-carousel-item-ad"
-        ref={(element) => (this.container = element)}
-      />
+      <div className="board-item board-item-ad-wrapper">
+        <div
+          className="bord-item-ad"
+          ref={(element) => (this.container = element)}
+        />
+      </div>
     );
   }
 }
