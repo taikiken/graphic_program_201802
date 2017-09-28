@@ -281,6 +281,23 @@ $app->group('/stats', function () use($app) {
         // 各カテゴリー
         $this->get('/{category:'.join('|',array_keys($page['category'])).'}[/]', function ($request, $response, $args) use ($app, $page, $league) {
 
+          // ルータではUT_ENVみてバケット分けている
+          $edition_list_s3key = 'worldsoccer/json/edition_list.json';
+          $S3Module = new S3Module;
+          $edition_list_json = $S3Module->getUrl($edition_list_s3key);
+
+          $season = '';
+          $edition_id = '';
+
+          if (!empty(file_get_contents($edition_list_json, false, null, 0, 1))){
+            $edition_list_json = json_decode(file_get_contents($edition_list_json));
+            foreach ($edition_list_json as $value) {
+              if ($value->league == $league) {
+                $season = $value->season;
+                $edition_id = $value->editionId;
+              }
+            }
+          }
           $args['page'] = $app->model->set(array(
             'title'              => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'],
             'og_type'            => 'article',
@@ -290,7 +307,14 @@ $app->group('/stats', function () use($app) {
             'og_description'     => $page['league'][$league] . "の" .$page['category'][$args['category']]['title']."見るならスポーツブル(スポブル)で！スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。",
             'keywords'           => $page['league'][$league].',海外サッカー,欧州サッカー,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
             'path'               => $args,
+            'league'             => $league,
+            'season'             => $season,
+            'edition_id'         => $edition_id,
           ));
+
+          if ($args['category'] == 'schedule' || $args['category'] == 'team') {
+            return $this->renderer->render($response, 'stats/worldsoccer/'.$args['category'].'.php', $args);
+          }
 
           return $this->renderer->render($response, 'stats/worldsoccer/'.$league.'/'.$args['category'].'.php', $args);
         });
