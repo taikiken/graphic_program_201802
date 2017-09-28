@@ -360,6 +360,7 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
 </script>
 
 <script src="/assets/js/<?php echo $page['dir_name']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 </body>
 </html>

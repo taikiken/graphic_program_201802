@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="UTF-8">
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
+  <title>[pagetitle] | SPORTS BULL</title>
+  <meta name="description" content="説明文">
+  <meta name="keywords" content="キーワード, キーワード, キーワード">
+  <!-- sns ogp -->
+  <meta property="og:title" content="[pagetitle] | SPORTS BULL">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://undotsushin.com/assets/images/common/og_image.png">
+  <meta property="og:url" content="https://undotsushin.com/">
+  <meta property="og:description" content="説明文">
+  <!-- twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@sportsbull_jp">
+  <!-- favicon -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/assets/sp/css/ui.css">
+  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="/assets/js/libs/vendor.min.js"></script>
+  <script src="/assets/js/libs/vendor.react.js"></script>
+</head>
+<body>
+<div class="whole">
+  <div class="header-sticky">
+    <header class="head-sec">
+      <div class="head-sec-inner">
+        <h1><a href="/">SPORTS BULL</a></h1>
+
+        <div id="menu-opener" class="menu-opener">
+          <a id="side-menu-toggle" class="has-notification" href="#"><span></span><span></span><span></span></a>
+        </div>
+
+        <aside class="f-right clearfix">
+          <a class="head-search-opener" href="#">記事検索</a>
+
+          <div id="user-profile-container">
+            <div class="user">
+              <div class="preference">
+                <a class="preference-opener" href="#">
+                  <span class="preference-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
+                </a>
+                <span class="preference-num">88</span>
+              </div><!-- /.preference -->
+            </div><!-- /.user -->
+          </div><!--/.user-profile-container-->
+        </aside>
+      </div><!-- /.head-sec-inner -->
+    </header><!-- /.head-sec -->
+
+    <div class="head-search disable">
+      <form action="">
+        <input id="head-search" nama="head-search" type="text" placeholder="記事を検索">
+        <input type="submit" value="検索">
+      </form>
+    </div><!-- /.head-search -->
+
+    <nav class="gnav-sec">
+      <div class="gnav-sec-inner">
+        <ul class="gnav">
+          <li class="gnav-home current"><a href="hoge">一面</a></li>
+          <li class="gnav-crazy"><a href="hoge">CRAZY</a></li>
+          <li class="gnav-all"><a href="hoge">すべて</a></li>
+          <li class="gnav-baseball"><a href="hoge">野球</a></li>
+          <li class="gnav-soccer"><a href="hoge">サッカー</a></li>
+          <li class="gnav-basketball"><a href="hoge">バスケットボール</a></li>
+          <li class="gnav-golf"><a href="hoge">ゴルフ</a></li>
+          <li class="gnav-tennis"><a href="hoge">テニス</a></li>
+          <li class="gnav-battle"><a href="hoge">相撲・格闘技</a></li>
+          <li class="gnav-volleyball"><a href="hoge">バレーボール</a></li>
+          <li class="gnav-rugby"><a href="hoge">ラグビー</a></li>
+          <li class="gnav-americanfootball"><a href="hoge">アメフト</a></li>
+          <li class="gnav-athletics"><a href="hoge">陸上競技</a></li>
+          <li class="gnav-swimming"><a href="hoge">水泳</a></li>
+          <li class="gnav-pingpong"><a href="hoge">卓球</a></li>
+          <li class="gnav-motorsports"><a href="hoge">モータースポーツ</a></li>
+          <li class="gnav-extremesports"><a href="hoge">エクストリームスポーツ</a></li>
+          <li class="gnav-wintersports"><a href="hoge">ウィンタースポーツ </a></li>
+          <li class="gnav-disabledsports"><a href="hoge">障害者スポーツ</a></li>
+          <li class="gnav-etc"><a href="hoge">その他競技</a></li>
+          <li class="gnav-business"><a href="hoge">スポーツビジネス</a></li>
+        </ul><!-- /.gnav -->
+      </div><!-- /.gnav-sec-inner -->
+    </nav><!-- /.gnav-sec -->
+
+    <div class="dialogue-notice error hide">
+      <div class="dialogue-notice-inner">
+        <div class="dialogue-notice-info">
+          <p>パスワードが違います</p>
+        </div>
+        <div class="dialogue-notice-btn-close"><a href="#">CLOSE</a></div>
+      </div>
+    </div><!-- /.dialogue-notice -->
+  </div><!-- /.header-sticky -->
+
+  <div class="body-sec">
+    <div class="body-sec-inner">
+      <section class="main-sec">
+        <div class="post-kv">
+          <img src="/assets/images/dummy/kv-710x400.jpg" alt="">
+        </div><!-- /.post-kv -->
+
+        <div class="post-detail">
+
+          <div class="post-heading">
+            <h1>ダミータイトルダミータイトルダミータイトルダミータイトル</h1>
+          </div><!-- /.post-heading -->
+
+          <div class="post-data">
+            <div class="f-left">
+              <p class="post-author">運動通信編集部</p>
+              <p class="post-category">
+                <span class="category-label"><a href="hoge">サッカー</a></span>
+                <span class="category-label"><a href="hoge">J SPORTS</a></span>
+              </p>
+              <p class="post-date">12月18日(金) 22:04</p>
+            </div>
+
+            <div class="f-right">
+              <div class="btn-bookmark"><a href="#"><span>ブックマークする</span></a></div>
+              <div class="btn-bookmark"><a class="enable" href="#"><span>ブックマーク解除</span></a></div>
+            </div>
+          </div><!-- /.post-data -->
+
+          <div class="post-sns_upper">
+            <ul class="post-sns-list">
+              <li class="post-sns-item post-sns-item_fb"><a href="http://www.facebook.com/share.php" target="_blank"><span>facebook</span></a></li>
+              <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=【テキスト】&via=undotsushin" target="_blank"><span>ツイート</span></a></li>
+              <li class="post-sns-item post-sns-item_gt"><a href="https://plus.google.com/share" target="_blank"><span>Google+</span></a></li>
+              <li class="post-sns-item post-sns-item_line"><a href="http://line.me/R/msg/text/" target="_blank"><span>LINEへ送る</span></a></li>
+            </ul>
+          </div><!-- .post-sns_upper -->
+
+          <div class="post-content excerpt hidden">
+            <h1>h1タイトル</h1>
+            <h2>h2タイトル</h2>
+            <h3>h3タイトル</h3>
+            <h4>h4タイトル</h4>
+            <h5>h5タイトル</h5>
+            <h6>h6タイトル</h6>
+
+            <ul>
+              <li>リスト</li>
+              <li>リスト</li>
+              <li>リスト</li>
+            </ul>
+
+            <ol>
+              <li>番号付きリスト</li>
+              <li>番号付きリスト</li>
+              <li>番号付きリスト</li>
+            </ol>
+
+            <dl>
+              <dt>定義リスト</dt>
+              <dd>用語説明</dd>
+            </dl>
+
+            <p><strong>storng</strong></p>
+            <p><i>i</i></p>
+            <p><em>em</em></p>
+            <p><a href="hoge">リンク</a></p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>テーブルタイトル</th>
+                  <th>テーブルタイトル</th>
+                  <th>テーブルタイトル</th>
+                  <th>テーブルタイトル</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>テーブルタイトル</th>
+                  <td>テーブルセル</td>
+                  <td>テーブルセル</td>
+                  <td>テーブルセル</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p><code>&lt;code&gt;〜&lt;/code&gt;</code></p>
+            <p>
+<pre>
+&lt;pre&gt;
+  インデント
+&lt;/pre&gt;
+</pre>
+            </p>
+          </div><!-- /.post-content -->
+          <div class="post-content-readMore">
+            <a class="post-content-readMore-btn" href="#">続きを読む</a>
+          </div>
+
+          <div class="provider">
+            <i class="provider-logo"><img src="/assets/images/detail/provider-logo-asahi.png" alt=""></i>
+            <div class="provider-data">
+              <p class="provider-name">朝日新聞社</p>
+              <p class="provider-url"><a href="http://www.asahi.com/sports/" target="_blank">http://www.asahi.com/sports/</a></p>
+            </div>
+          </div><!-- /.provider -->
+
+          <div class="sponsor-link editor-bnr">
+            <a href="hoge" target="_blank"><img src="/assets/sp/images/dummy/bnr-640x200.jpg" alt=""></a>
+          </div><!-- /.sponsor-link -->
+
+          <div class="post-sns_lower">
+            <div class="post-sns-list">
+              <div class="post-sns-fixed">
+                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+              </div>
+
+              <div class="post-sns-flex">
+                <div class="post-sns-flex-inner">
+                  <ul class="post-sns-flex-list">
+                    <li class="post-sns-item post-sns-item_fb"><a href="http://www.facebook.com/share.php" target="_blank"><span>facebook</span></a></li>
+                    <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=【テキスト】&via=undotsushin" target="_blank"><span>ツイート</span></a></li>
+                    <li class="post-sns-item post-sns-item_gt"><a href="https://plus.google.com/share" target="_blank"><span>Google+</span></a></li>
+                    <li class="post-sns-item post-sns-item_line"><a href="http://line.me/R/msg/text/" target="_blank"><span>LINEへ送る</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div><!-- /.post-sns-list -->
+
+            <div class="post-sns-pr">
+              <dl class="post-sns-pr-inner">
+                <dt><span>いいねして最新ニュースをチェック！</span></dt>
+                <dd>
+                  <div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+                </dd>
+              </dl><!-- /.post-sns-pr-inner -->
+            </div><!-- /.post-sns-pr -->
+          </div><!-- /.post-sns_lower -->
+        </div><!-- /.post-detail -->
+
+        <div class="comment">
+          <div class="comment-yours">
+            <div class="comment-heading">
+              <h2>自分のコメント</h2>
+            </div><!-- /.comment-heading -->
+
+            <ul class="comment-list">
+              <li class="comment-item">
+                <div class="comment-item-inner">
+                  <nav class="comment-menu">
+                    <a class="comment-menu-btn" href="#">MENU</a>
+                    <ul class="dropMenu">
+                      <li class="dropMenu-item"><a class="dropMenu-link-delete" href="hoge"><span>このコメントを削除する</span></a></li>
+                    </ul>
+                  </nav><!-- /.comment-menu -->
+
+                  <figure class="comment-user">
+                    <a class="comment-user-link" href="hoge">
+                      <span class="comment-user-thumb">&nbsp;</span>
+                      <figcaption class="comment-user-data">
+                        <p class="comment-user-name">山田 太郎</p>
+                        <p class="comment-user-job">スポーツライター</p>
+                        <p class="comment-date">12月18日(金) 22:04</p>
+                      </figcaption>
+                    </a>
+                  </figure>
+
+                  <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+
+                  <div class="comment-reaction">
+                    <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
+                    <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
+                  </div>
+
+                  <div class="comment-respond">
+                    <a class="comment-respond-opener" href="#"><span>コメントへ返信</span></a>
+                    <div class="comment-form">
+                      <form action="">
+                        <div class="comment-form-inner">
+                          <i class="comment-form-user"><img src="/assets/images/dummy/avatar-80x80.jpg" alt=""></i>
+                          <div class="comment-form-comment-outer">
+                            <div class="comment-form-comment-inner">
+                              <textarea name="comment-form-comment" id="comment-form-comment" class="comment-form-comment" cols="30" rows="5" placeholder="コメントを書く"></textarea>
+                            </div>
+                          </div>
+                        </div><!-- /.comment-form-inner -->
+
+                        <div class="comment-form-submit">
+                          <button type="submit" value="send">コメントを投稿</button>
+                        </div>
+                      </form>
+                    </div><!-- /.comment-form -->
+                  </div><!-- /.comment-respond -->
+                </div><!-- /.comment-item-inner -->
+              </li><!-- /.comment-item -->
+            </ul><!-- /.comment-list -->
+          </div><!-- /.comment-yours -->
+
+          <div class="comment-official">
+            <div class="comment-heading">
+              <h2>公式コメンテーター</h2>
+            </div><!-- /.comment-heading -->
+
+            <ul class="comment-list">
+              <li class="comment-item">
+                <div class="comment-item-inner">
+                  <nav class="comment-menu">
+                    <a class="comment-menu-btn" href="#">MENU</a>
+                    <ul class="dropMenu">
+                      <li class="dropMenu-item"><a class="dropMenu-link-delete" href="hoge"><span>このコメントを削除する</span></a></li>
+                    </ul>
+                  </nav><!-- /.comment-menu -->
+
+                  <figure class="comment-user">
+                    <a class="comment-user-link" href="hoge">
+                      <span class="comment-user-thumb">&nbsp;</span>
+                      <figcaption class="comment-user-data">
+                        <p class="comment-user-name">山田 太郎</p>
+                        <p class="comment-user-job">スポーツライター</p>
+                        <p class="comment-date">12月18日(金) 22:04</p>
+                      </figcaption>
+                    </a>
+                  </figure>
+
+                  <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+
+                  <div class="comment-reaction">
+                    <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
+                    <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
+                  </div>
+
+                  <div class="comment-respond">
+                    <a class="comment-respond-opener" href="#"><span>コメントへ返信</span></a>
+                    <div class="comment-form" style="display: none;">
+                      <form action="">
+                        <i class="comment-form-user"><img src="/assets/images/dummy/avatar-80x80.jpg" alt=""></i>
+                        <div class="comment-form-comment-outer">
+                          <div class="comment-form-comment-inner">
+                            <textarea name="comment-form-comment" id="comment-form-comment" class="comment-form-comment" cols="30" rows="6" placeholder="コメントを書く"></textarea>
+                          </div>
+                        </div>
+                        <div class="comment-form-submit">
+                          <button type="submit" value="send">コメントを投稿</button>
+                        </div>
+                      </form>
+                    </div><!-- /.comment-form -->
+                  </div><!-- /.comment-respond -->
+                </div><!-- /.comment-item-inner -->
+              </li><!-- /.comment-item -->
+              <li class="comment-item">
+                <div class="comment-item-inner">
+                  <nav class="comment-menu">
+                    <a class="comment-menu-btn disable" href="#">MENU</a>
+                    <ul class="dropMenu">
+                      <li class="dropMenu-item"><a class="dropMenu-link-delete" href="hoge"><span>このコメントを削除する</span></a></li>
+                    </ul>
+                  </nav><!-- /.comment-menu -->
+
+                  <figure class="comment-user">
+                    <a class="comment-user-link" href="hoge">
+                      <span class="comment-user-thumb">&nbsp;</span>
+                      <figcaption class="comment-user-data">
+                        <p class="comment-user-name">山田 太郎</p>
+                        <p class="comment-user-job">スポーツライター</p>
+                        <p class="comment-date">12月18日(金) 22:04</p>
+                      </figcaption>
+                    </a>
+                  </figure>
+
+                  <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+
+                  <div class="comment-reaction">
+                    <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
+                    <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
+                  </div>
+
+                  <div class="comment-respond">
+                    <a class="comment-respond-opener" href="#"><span>コメントへ返信 (2)</span></a>
+                    <div class="comment-form" style="display: none;">
+                      <form action="">
+                        <i class="comment-form-user"><img src="/assets/images/dummy/avatar-80x80.jpg" alt=""></i>
+                        <div class="comment-form-comment-outer">
+                          <div class="comment-form-comment-inner">
+                            <textarea name="comment-form-comment" id="comment-form-comment" class="comment-form-comment" cols="30" rows="6" placeholder="コメントを書く"></textarea>
+                          </div>
+                        </div>
+                        <div class="comment-form-submit">
+                          <button type="submit" value="send">コメントを投稿</button>
+                        </div>
+                      </form>
+                    </div><!-- /.comment-form -->
+                  </div><!-- /.comment-respond -->
+                </div><!-- /.comment-item-inner -->
+
+                <ul class="comment-list">
+                  <li class="comment-item">
+                    <div class="comment-item-inner">
+                      <nav class="comment-menu">
+                        <a class="comment-menu-btn disable" href="#">MENU</a>
+                        <ul class="dropMenu">
+                          <li class="dropMenu-item"><a class="dropMenu-link-delete" href="hoge"><span>このコメントを削除する</span></a></li>
+                        </ul>
+                      </nav><!-- /.comment-menu -->
+
+                      <figure class="comment-user">
+                        <a class="comment-user-link" href="hoge">
+                          <span class="comment-user-thumb">&nbsp;</span>
+                          <figcaption class="comment-user-data">
+                            <p class="comment-user-name">山田 太郎</p>
+                            <p class="comment-user-job">スポーツライター</p>
+                            <p class="comment-date">12月18日(金) 22:04</p>
+                          </figcaption>
+                        </a>
+                      </figure>
+
+                      <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+
+                      <div class="comment-reaction">
+                        <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
+                        <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
+                      </div>
+                    </div><!-- /.comment-item-inner -->
+                  </li><!-- /.comment-item -->
+                  <li class="comment-item">
+                    <div class="comment-item-inner">
+                      <nav class="comment-menu">
+                        <a class="comment-menu-btn disable" href="#">MENU</a>
+                        <ul class="dropMenu">
+                          <li class="dropMenu-item"><a class="dropMenu-link-delete" href="hoge"><span>このコメントを削除する</span></a></li>
+                        </ul>
+                      </nav><!-- /.comment-menu -->
+
+                      <figure class="comment-user">
+                        <a class="comment-user-link" href="hoge">
+                          <span class="comment-user-thumb">&nbsp;</span>
+                          <figcaption class="comment-user-data">
+                            <p class="comment-user-name">山田 太郎</p>
+                            <p class="comment-user-job">スポーツライター</p>
+                            <p class="comment-date">12月18日(金) 22:04</p>
+                          </figcaption>
+                        </a>
+                      </figure>
+
+                      <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+
+                      <div class="comment-reaction">
+                        <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
+                        <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
+                      </div>
+                    </div><!-- /.comment-item-inner -->
+                  </li><!-- /.comment-item -->
+                </ul>
+              </li><!-- /.comment-item -->
+              <li class="comment-item">
+                <div class="comment-item-inner">
+                  <nav class="comment-menu">
+                    <a class="comment-menu-btn disable" href="#">MENU</a>
+                    <ul class="dropMenu">
+                      <li class="dropMenu-item"><a class="dropMenu-link-delete" href="hoge"><span>このコメントを削除する</span></a></li>
+                    </ul>
+                  </nav><!-- /.comment-menu -->
+
+                  <figure class="comment-user">
+                    <a class="comment-user-link" href="hoge">
+                      <span class="comment-user-thumb">&nbsp;</span>
+                      <figcaption class="comment-user-data">
+                        <p class="comment-user-name">山田 太郎</p>
+                        <p class="comment-user-job">スポーツライター</p>
+                        <p class="comment-date">12月18日(金) 22:04</p>
+                      </figcaption>
+                    </a>
+                  </figure>
+
+                  <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+
+                  <div class="comment-reaction">
+                    <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
+                    <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
+                  </div>
+
+                  <div class="comment-respond">
+                    <a class="comment-respond-opener" href="#"><span>コメントへ返信</span></a>
+                    <div class="comment-form" style="display: none;">
+                      <form action="">
+                        <i class="comment-form-user"><img src="/assets/images/dummy/avatar-80x80.jpg" alt=""></i>
+                        <div class="comment-form-comment-outer">
+                          <div class="comment-form-comment-inner">
+                            <textarea name="comment-form-comment" id="comment-form-comment" class="comment-form-comment" cols="30" rows="6" placeholder="コメントを書く"></textarea>
+                          </div>
+                        </div>
+                        <div class="comment-form-submit">
+                          <button type="submit" value="send">コメントを投稿</button>
+                        </div>
+                      </form>
+                    </div><!-- /.comment-form -->
+                  </div><!-- /.comment-respond -->
+                </div><!-- /.comment-item-inner -->
+              </li><!-- /.comment-item -->
+            </ul><!-- /.comment-list -->
+
+            <div class="comment-andmore"><a href="hoge">他42件を表示</a></div>
+          </div><!-- /.comment-official -->
+
+          <div class="comment-all">
+            <div class="comment-heading">
+              <h2>みんなのコメント</h2>
+            </div><!-- /.comment-heading -->
+          </div><!-- /.comment-all -->
+
+          <div class="comment-form-opener"><a class="comment-form-opener-trigger" href="#">コメントを投稿</a></div>
+          <div class="comment-form">
+            <form action="">
+              <div class="comment-form-inner">
+                <i class="comment-form-user"><img src="/assets/images/dummy/avatar-80x80.jpg" alt=""></i>
+                <div class="comment-form-comment-outer">
+                  <div class="comment-form-comment-inner">
+                    <textarea name="comment-form-comment" id="comment-form-comment" class="comment-form-comment" cols="30" rows="5" placeholder="コメントを書く"></textarea>
+                  </div>
+                </div>
+              </div><!-- /.comment-form-inner -->
+
+              <div class="comment-form-submit">
+                <button type="submit" value="send">コメントを投稿</button>
+              </div>
+            </form>
+          </div><!-- /.comment-form -->
+        </div><!-- /.comment -->
+
+        <!--
+        @since 2016-09-28
+        div.singles-next 親コンテナ追加
+          div#js-singles-container React root container
+
+          div#js-singles-more [VIEW MORE] button
+        -->
+        <div class="singles-next">
+          <div id="js-singles-container">
+            <div class="loaded-post">
+              <div class="post-kv">
+                <img src="/assets/images/dummy/kv-710x400.jpg" alt="">
+              </div><!-- /.post-kv -->
+
+              <div class="post-detail">
+                <div class="post-heading">
+                  <h1>ダミータイトルダミータイトルダミータイトルダミータイトル</h1>
+                </div><!-- /.post-heading -->
+
+                <div class="post-data">
+                  <div class="f-left">
+                    <p class="post-author">運動通信編集部</p>
+                    <p class="post-category">海外サッカー オリンピック</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div>
+                  <div class="f-right">
+                    <div class="btn-bookmark"><a href="#"><span>ブックマークする</span></a></div>
+                  </div>
+                </div><!-- /.post-data -->
+
+                <div class="post-content">
+                  <p>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</p>
+                </div><!-- /.post-content -->
+                <div class="post-content-read-more">
+                  <a class="post-content-btn-readMore" href="#">続きを読む</a>
+                </div>
+
+              </div><!-- /.post-detail -->
+            </div><!-- /.loaded-post -->
+
+            <div class="widget-postList widget-postList_recommend">
+              <div class="mod-headingA01">
+                <h2>オススメ記事</h2>
+              </div><!-- /.comment-heading -->
+
+              <div class="board">
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_1.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                      <img src="/assets/sp/images/common/thumb-16x9-play-s.png" alt="" class="post-thumb-overlay-movie">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">野球</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_2.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">タイトル１行の場合タイトルが入ります</h3>
+                      <p class="post-category">格闘技 オリンピック</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">エクストリームスポーツ</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_3.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">ラグビー</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_4.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">モータースポーツ</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+              </div><!-- /.board -->
+            </div><!-- /.widget-ranking -->
+
+            <div class="loaded-post">
+              <div class="post-kv">
+                <img src="/assets/images/dummy/kv-710x400.jpg" alt="">
+              </div><!-- /.post-kv -->
+
+              <div class="post-detail">
+                <div class="post-heading">
+                  <h1>ダミータイトルダミータイトルダミータイトルダミータイトル</h1>
+                </div><!-- /.post-heading -->
+
+                <div class="post-data">
+                  <div class="f-left">
+                    <p class="post-author">運動通信編集部</p>
+                    <p class="post-category">海外サッカー オリンピック</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div>
+                  <div class="f-right">
+                    <div class="btn-bookmark"><a href="#"><span>ブックマークする</span></a></div>
+                  </div>
+                </div><!-- /.post-data -->
+
+                <div class="post-content">
+                  <p>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</p>
+                </div><!-- /.post-content -->
+                <div class="post-content-read-more">
+                  <a class="post-content-btn-readMore" href="#">続きを読む</a>
+                </div>
+
+              </div><!-- /.post-detail -->
+            </div><!-- /.loaded-post -->
+
+            <div class="widget-postList widget-postList_popular">
+              <div class="mod-headingA01">
+                <h2>人気記事</h2>
+              </div><!-- /.mod-headingA01 -->
+
+              <div class="board">
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_1.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                      <img src="/assets/sp/images/common/thumb-16x9-play-s.png" alt="" class="post-thumb-overlay-movie">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">野球</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_2.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">タイトル１行の場合タイトルが入ります</h3>
+                      <p class="post-category">格闘技 オリンピック</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">エクストリームスポーツ</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_3.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">ラグビー</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_4.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">モータースポーツ</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+              </div><!-- /.board -->
+            </div><!-- /.widget-postList -->
+
+            <div class="loaded-post">
+              <div class="post-kv">
+                <img src="/assets/images/dummy/kv-710x400.jpg" alt="">
+              </div><!-- /.post-kv -->
+
+              <div class="post-detail">
+                <div class="post-heading">
+                  <h1>ダミータイトルダミータイトルダミータイトルダミータイトル</h1>
+                </div><!-- /.post-heading -->
+
+                <div class="post-data">
+                  <div class="f-left">
+                    <p class="post-author">運動通信編集部</p>
+                    <p class="post-category">海外サッカー オリンピック</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div>
+                  <div class="f-right">
+                    <div class="btn-bookmark"><a href="#"><span>ブックマークする</span></a></div>
+                  </div>
+                </div><!-- /.post-data -->
+
+                <div class="post-content">
+                  <p>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</p>
+                </div><!-- /.post-content -->
+                <div class="post-content-read-more">
+                  <a class="post-content-btn-readMore" href="#">続きを読む</a>
+                </div>
+
+              </div><!-- /.post-detail -->
+            </div><!-- /.loaded-post -->
+
+            <div class="widget-postList widget-postList_related">
+              <div class="mod-headingA01">
+                <h2>関連記事</h2>
+              </div><!-- /.mod-headingA01 -->
+
+              <div class="board">
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_1.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                      <img src="/assets/sp/images/common/thumb-16x9-play-s.png" alt="" class="post-thumb-overlay-movie">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">野球</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_2.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">タイトル１行の場合タイトルが入ります</h3>
+                      <p class="post-category">格闘技 オリンピック</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">エクストリームスポーツ</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_3.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">ラグビー</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+                <div class="board-item">
+                  <a class="post" href="hoge">
+                    <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_4.jpg') center center / cover no-repeat;">
+                      <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    </figure>
+                    <div class="post-data">
+                      <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                      <p class="post-category">モータースポーツ</p>
+                      <p class="post-date">12月18日(金) 22:04</p>
+                    </div><!-- /.post-data -->
+                  </a>
+                </div>
+              </div><!-- /.board -->
+            </div><!-- /.widget-postList -->
+          </div>
+          <div id="js-singles-more"></div>
+        </div>
+      </section><!-- /.main-sec -->
+    </div>
+  </div><!-- /.body-sec -->
+
+  <footer class="foot-sec">
+    <div class="foot-sec-inner">
+      <nav class="foot-breadCrumb">
+        <ol itemscope itemtype="http://schema.org/breadCrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="category.php"><span itemprop="name">海外サッカー</span><meta itemprop="position" content="2" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="p.php"><span itemprop="name">パナソニックのオリンピック・アクティベーション 「Active Learning Camp」の可能性</span><meta itemprop="position" content="3" /></a></li>
+        </ol>
+      </nav><!-- /.foot-breadCrumb -->
+
+      <div class="foot-pr">
+        <div class="foot-pr-inner">
+          <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
+          <div class="text-block">
+            <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
+            <ul class="foot-pr-list">
+              <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
+              <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
+            </ul>
+          </div>
+        </div><!-- /.foot-pr-inner -->
+
+        <div class="fb-page-plugin">
+          <div class="fb-page" data-href="https://www.facebook.com/sportsbull/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sportsbull/"><a href="https://www.facebook.com/sportsbull/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
+        </div>
+      </div><!-- /.foot-pr -->
+
+      <div class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
+
+      <nav class="fnav">
+        <ul>
+          <li><a href="/about/">サービス紹介</a></li>
+          <li><a href="/about/privacy/">プライバシーポリシー</a></li>
+          <li><a href="/about/company/">会社概要</a></li>
+          <li><a href="/about/terms/">利用規約</a></li>
+        </ul>
+      </nav><!-- /.fnav -->
+
+      <div class="sns-block">
+        <ul>
+          <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
+          <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
+          <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
+        </ul>
+      </div><!-- /.sns-block -->
+
+      <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
+    </div><!-- /.foot-sec-inner -->
+  </footer><!-- /.foot-sec -->
+
+  <div id="side-menu-container">
+    <div id="side-menu-bg"></div>
+    <div id='side-menu' data-role='panel' data-position='left' data-display='push'>
+      <ul id="side-menu-list">
+        <li class="ad"><img src="/assets/sp/images/dummy/side-bnr.jpg" alt=""></li>
+
+        <li id="side-menu-service">
+          <ul>
+            <!-- Service Specific Menu -->
+            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>スポーツブルトップへ</a></li>
+            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-mypage" href="#"><i></i>マイページ</a></li>
+            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-config" href="#"><i></i>設定</a></li>
+            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#"><i></i>ログアウト</a></li>
+            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>スポーツブルとは</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <!-- Syn. Service List -->
+          <div id='synapse-service-list-outer-box' style='display: none'>
+            <ul id='synapse-service-list'>
+              <li id="synapse-service-list-title">おすすめサービス</li>
+            </ul>
+          </div>
+
+          <!-- Syn. Logo -->
+          <div id="synapse-logo-box" class="synapse_logo" style='display: none'></div>
+        </li>
+
+      </ul>
+    </div><!--/#side-menu-->
+  </div><!--/#side-menu-container-->
+
+</div><!-- /.whole -->
+
+<!-- facebook like button -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.5&appId=265646656931954";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Google plus button -->
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ja'}
+</script>
+
+<script src="/assets/js/bundle/main.bundle.js"></script>
+<script src="/assets/js/xxx.bundle.js"></script>
+</body>
+</html>

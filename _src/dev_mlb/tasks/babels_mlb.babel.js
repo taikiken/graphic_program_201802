@@ -64,11 +64,11 @@ const fileName = {
 // --------------------------------------
 gulp.task('mlb:lint', () => (
   gulp.src(files)
-  .pipe($.eslint({ useEslintrc: true }))
-  .pipe($.eslint.format())
-  .pipe($.eslint.failAfterError())
-  .pipe($.size({ title: '*** mlb:lint ***' }))
-  ),
+    .pipe($.eslint({ useEslintrc: true }))
+    .pipe($.eslint.format())
+    .pipe($.eslint.failAfterError())
+    .pipe($.size({ title: '*** mlb:lint ***' }))
+),
 );
 
 // babel
@@ -88,11 +88,11 @@ gulp.task('mlb:babel', () => (
   //     'transform-class-properties',
   //   ],
   // }))
-  .pipe($.babel())
-  .pipe($.replaceTask({ patterns }))
-  .pipe(gulp.dest(dir.mlb.compile))
-  .pipe($.size({ title: '*** mlb:babel ***' }))
-  ),
+    .pipe($.babel())
+    .pipe($.replaceTask({ patterns }))
+    .pipe(gulp.dest(dir.mlb.compile))
+    .pipe($.size({ title: '*** mlb:babel ***' }))
+),
 );
 
 // webpack [DEV]
@@ -168,7 +168,7 @@ gulp.task('mlb:copy', () => (
     .pipe(gulp.dest(`${dir.root}/test/assets/js`))
     // .pipe(gulp.dest(`${dir.root}/app/assets/js`))
     .pipe($.size({ title: '*** mlb:copy ***' }))
-  ),
+),
 );
 
 // --------------------------------------

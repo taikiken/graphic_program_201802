@@ -28,30 +28,6 @@ if (
   <div id="side-menu-bg"></div>
   <div id='side-menu'>
     <ul id="side-menu-list">
-      <li class="ad">
-        <img class="ad-bg" src="/assets/sp/images/common/thumb-16x9.png" alt="">
-        <div id="adg_div">
-          <?php
-          /*
-
-          #195 Syn.ad_運動通信社 Syn.ad_運動通信サイドメニュー（web） 39050
-          sslの場合はドメインをhttps://ssl.socdm.com/にしてください
-
-          - http  : http://i.socdm.com
-          - https : https://ssl.socdm.com/
-
-          */
-          ?>
-          <!-- AdGeneration/ -->
-          <?php if ( UT_ENV == 'PRODUCTION' ) : ?>
-          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=33700&targetID=adg_33700&displayid=1&adType=FREE&async=false&tagver=2.0.0"></script>
-          <?php else : ?>
-          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=33700&targetID=adg_33700&displayid=1&adType=FREE&async=false&tagver=2.0.0"></script>
-          <?php endif; ?>
-          <!-- /AdGeneration -->
-        </div>
-      </li>
-
       <li id="side-menu-service">
         <ul>
           <!-- Service Specific Menu -->
@@ -207,6 +183,7 @@ if ( $page['apiRoot'] != '' ) :
 // @since 2017-06-26
 ?>
 <script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <?php
 // ------------------------------------------------------------
 ?>

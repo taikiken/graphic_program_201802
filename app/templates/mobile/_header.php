@@ -211,22 +211,35 @@ if ( $page_has_header ) :
 ?>
 <div id="js-header-appbnr-container">
   <div class="header-appbnr">
+    <?php
+    if (0) :
+      // close トル - https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-331796551
+      // since 2017-05-25
+    ?>
     <div class="header-appbnr-btn-close"><span>閉じる</span></div>
+    <?php
+    endif;
+    // eof: close トル
+    ?>
     <div class="header-appbnr-link">
-      <!-- /531683568/sp_header_app -->
+      <?php
+      // banner 差替え
+      // @see https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-331796551
+      ?>
+      <!-- /531683568/download-popup/download-header-big-banner -->
       <script>
         googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/sp_header_app', [270, 70], 'div-gpt-ad-1494939700357-0').addService(googletag.pubads());
+          googletag.defineSlot('/531683568/download-popup/download-header-big-banner', [320, 50], 'div-gpt-ad-1506323101947-0').addService(googletag.pubads());
           googletag.pubads().enableSingleRequest();
           googletag.enableServices();
         });
       </script>
-      <div id='div-gpt-ad-1494939700357-0' style='height:70px; width:270px;'>
-      <script>
-      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939700357-0'); });
-      </script>
+      <div id='div-gpt-ad-1506323101947-0' style='height:50px; width:320px;'>
+        <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1506323101947-0'); });
+        </script>
       </div>
-      <!-- // /531683568/sp_header_app -->
+      <!-- // /531683568/download-popup/download-header-big-banner -->
     </div><!-- /.header-appbnr-link -->
   </div><!-- /.header-appbnr -->
 </div>
