@@ -18,11 +18,11 @@
     },
     {
       "image": {
-        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-baseball_koukou.jpg",
-        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-baseball_koukou.jpg"
+        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-tennis.jpg",
+        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-tennis.jpg"
       },
-      "url": "http://sportsbull.jp/stats/hsb/",
-      "alt": "高校野球 速報&amp;データを見る"
+      "url": "http://sportsbull.jp/stats/tennis/",
+      "alt": "テニス 速報&amp;データを見る"
     },
     {
       "image": {
@@ -34,43 +34,6 @@
     }
   ],
   "bannerLists": [
-    {
-      "title": "サッカー",
-      "banners": [
-        {
-          "image": {
-            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-soccer_jleague.jpg",
-            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-soccer_jleague.jpg"
-          },
-          "url": "https://sportsbull.jp/jleague/match/",
-          "alt": "Jリーグ リアルタイム速報 試合速報/試合日程・結果/順位表"
-        },
-        {
-          "image": {
-            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-soccer20170906.jpg",
-            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-soccer20170906.jpg"
-          },
-          "url": "https://sportsbull.jp/sokuhou/",
-          "alt": "サッカー日本代表リアルタイム速報"
-        },
-        {
-          "image": {
-            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-worldsoccer.jpg",
-            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-worldsoccer.jpg"
-          },
-          "url": "https://sportsbull.jp/stats/worldsoccer/",
-          "alt": "海外サッカー 速報&amp;データを見る"
-        },
-        {
-          "image": {
-            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-soccer_univ.jpg",
-            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-soccer_univ.jpg"
-          },
-          "url": "https://sportsbull.jp/stats/u_soccer/kantou/",
-          "alt": "大学サッカー 速報&amp;データを見る"
-        }
-      ]
-    },
     {
       "title": "野球",
       "banners": [
@@ -97,12 +60,7 @@
           },
           "url": "https://sportsbull.jp/stats/mlb/",
           "alt": "MLB 速報&amp;データを見る"
-        }
-      ]
-    },
-    {
-      "title": "大学野球",
-      "banners": [
+        },
         {
           "image": {
             "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-baseball_big6.jpg",
@@ -134,6 +92,56 @@
           },
           "url": "https://sportsbull.jp/stats/ub_kansai/",
           "alt": "関西大学野球 速報&amp;データを見る"
+        }
+      ]
+    },
+    {
+      "title": "サッカー",
+      "banners": [
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-soccer_jleague.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-soccer_jleague.jpg"
+          },
+          "url": "https://sportsbull.jp/jleague/match/",
+          "alt": "Jリーグ リアルタイム速報 試合速報/試合日程・結果/順位表"
+        },
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-soccer20170906.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-soccer20170906.jpg"
+          },
+          "url": "https://sportsbull.jp/sokuhou/",
+          "alt": "サッカー日本代表リアルタイム速報"
+        },
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-worldsoccer.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-worldsoccer.png"
+          },
+          "url": "https://sportsbull.jp/stats/worldsoccer/",
+          "alt": "海外サッカー 速報&amp;データを見る"
+        },
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-soccer_univ.jpg",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-soccer_univ.jpg"
+          },
+          "url": "https://sportsbull.jp/stats/u_soccer/kantou/",
+          "alt": "大学サッカー 速報&amp;データを見る"
+        }
+      ]
+    },
+    {
+      "title": "バスケットボール",
+      "banners": [
+        {
+          "image": {
+            "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/bnrs-bleague.png",
+            "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/bnrs-bleague.png"
+          },
+          "url": "https://sportsbull.jp/stats/bleague/",
+          "alt": "Bリーグ 速報&amp;データを見る"
         }
       ]
     },
