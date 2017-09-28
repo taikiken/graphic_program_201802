@@ -288,6 +288,29 @@ $app->group('/stats', function () use($app) {
 
           $season = '';
           $edition_id = '';
+          $breadarray = [
+            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+            '<a itemprop="item" href="/stats/worldsoccer/',
+            $league,
+            '/">',
+            '<span itemprop="name">',
+            $page['league'][$league],
+            '</span>',
+            '<meta itemprop="position" content="3"> </a>',
+            '</li>',
+            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+            '<a itemprop="item" href="/stats/worldsoccer/',
+            $league,
+            '/',
+            $args['category'],
+            '">',
+            '<span itemprop="name">',
+            $page['category'][$args['category']]['title'],
+            '</span>',
+            '<meta itemprop="position" content="4"> </a>',
+            '</li>',
+          ];
+          $breadcrumb = implode('', $breadarray);
 
           if (!empty(file_get_contents($edition_list_json, false, null, 0, 1))){
             $edition_list_json = json_decode(file_get_contents($edition_list_json));
@@ -310,6 +333,7 @@ $app->group('/stats', function () use($app) {
             'league'             => $league,
             'season'             => $season,
             'edition_id'         => $edition_id,
+            'breadcrumb'         => $breadcrumb,
           ));
 
           if ($args['category'] == 'schedule' || $args['category'] == 'team') {
@@ -322,8 +346,8 @@ $app->group('/stats', function () use($app) {
         // schedule
         $this->get('/schedule/{editionid:[0-9]+}-{matchid:[0-9]+}[/]', function ($request, $response, $args) use ($app, $page, $league) {
 
-          $match_id = $args['matchid'];
           $edition_id = $args['editionid'];
+          $match_id = $args['matchid'];
           // matchidから日付を特定する。
           $edition_list_s3key = 'worldsoccer/json/edition_list.json';
           $match_list_s3key = 'worldsoccer/json/{league}/{season}/match_date_map.json';
@@ -395,25 +419,65 @@ $app->group('/stats', function () use($app) {
               }
             }
           }
-          $title = $home_team.' vs '.$away_team.' - '.$match_date.' - '.$page['league'][$league];
+
+          $title = $home_team.' vs '.$away_team.' - '.$match_date;
+          $breadarray = [
+            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+            '<a itemprop="item" href="/stats/worldsoccer/',
+            $league,
+            '/">',
+            '<span itemprop="name">',
+            $page['league'][$league],
+            '</span>',
+            '<meta itemprop="position" content="3"> </a>',
+            '</li>',
+            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+            '<a itemprop="item" href="/stats/worldsoccer/',
+            $league,
+            '/',
+            $args['category'],
+            '">',
+            '<span itemprop="name">',
+            $page['category'][$args['category']]['title'],
+            '</span>',
+            '<meta itemprop="position" content="4"> </a>',
+            '</li>',
+            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+            '<a itemprop="item" href="/stats/worldsoccer/',
+            $league,
+            '/',
+            'team/',
+            $edition_id,
+            '-',
+            $team_id,
+            '/">',
+            '<span itemprop="name">',
+            $title,
+            '</span>',
+            '<meta itemprop="position" content="5"> </a>',
+            '</li>',
+          ];
+          $breadcrumb = implode('', $breadarray);
+
           $args['page'] = $app->model->set(array(
-            'title'              => $title . $page['category'][$args['category']]['title'].' | '.$page['title'],
+            'title'              => $title.' - '.$page['league'][$league] . $page['category'][$args['category']]['title'].' | '.$page['title'],
             'og_type'            => 'article',
             'og_title'           => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'].' | '.$app->model->property('title'),
             'og_url'             => $app->model->property('site_url').'stats/worldsoccer/'.$league.'/'.$args['category'],
             'og_image'           => $app->model->property('site_url').'assets/images/stats/worldsoccer/ogp.jpg',
-            'og_description'     => $title . "の結果を見るならスポーツブル(スポブル)で！スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。",
+            'og_description'     => $title.' - '.$page['league'][$league] . "の結果を見るならスポーツブル(スポブル)で！スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。",
             'keywords'           => $page['league'][$league].',海外サッカー,欧州サッカー,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
             'path'               => $args,
             'match_id'           => $args['match_id'],
+            'breadcrumb'         => $breadcrumb,
           ));
           return $this->renderer->render($response, 'stats/worldsoccer/schedule_detail.php', $args);
         });
         // チーム一覧
         $this->get('/team/{editionid:[0-9]+}-{teamid:[0-9]+}[/]', function ($request, $response, $args) use ($app, $page, $league) {
 
-          $team_id = $args['teamid'];
           $edition_id = $args['editionid'];
+          $team_id = $args['teamid'];
           $edition_list_s3key = 'worldsoccer/json/edition_list.json';
 
           // ルータではUT_ENVみてバケット分けている
@@ -462,8 +526,46 @@ $app->group('/stats', function () use($app) {
           );
           $widget_id = $widget_id_map[$league];
 
+          $breadarray = [
+            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+            '<a itemprop="item" href="/stats/worldsoccer/',
+            $league,
+            '/">',
+            '<span itemprop="name">',
+            $page['league'][$league],
+            '</span>',
+            '<meta itemprop="position" content="3"> </a>',
+            '</li>',
+            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+            '<a itemprop="item" href="/stats/worldsoccer/',
+            $league,
+            '/',
+            $args['category'],
+            '">',
+            '<span itemprop="name">',
+            $page['category'][$args['category']]['title'],
+            '</span>',
+            '<meta itemprop="position" content="4"> </a>',
+            '</li>',
+            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+            '<a itemprop="item" href="/stats/worldsoccer/',
+            $league,
+            '/',
+            'team/',
+            $edition_id,
+            '-',
+            $team_id,
+            '/">',
+            '<span itemprop="name">',
+            $team,
+            '</span>',
+            '<meta itemprop="position" content="5"> </a>',
+            '</li>',
+          ];
+          $breadcrumb = implode('', $breadarray);
+
           $args['page'] = $app->model->set(array(
-            'title'              => $team.' - '.$page['league'][$league].' | '.$page['title'],
+            'title'              => $team.' - '.$page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'],
             'og_type'            => 'article',
             'og_title'           => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'].' | '.$app->model->property('title'),
             'og_url'             => $app->model->property('site_url').'stats/worldsoccer/'.$league.'/'.$args['category'],
@@ -473,6 +575,7 @@ $app->group('/stats', function () use($app) {
             'path'               => $args,
             'widget_id'          => $widget_id,
             'team_id'            => $team_id,
+            'breadcrumb'         => $breadcrumb,
           ));
           return $this->renderer->render($response, 'stats/worldsoccer/team_detail.php', $args);
         });
