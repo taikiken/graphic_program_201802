@@ -301,8 +301,8 @@ $app->group('/stats', function () use($app) {
           $match_id = $args['matchid'];
           $edition_id = $args['editionid'];
           // matchidから日付を特定する。
-          $edition_list_s3key = 'json/edition_list.json';
-          $match_list_s3key = 'json/{league}/{season}/match_date_map.json';
+          $edition_list_s3key = 'worldsoccer/json/edition_list.json';
+          $match_list_s3key = 'worldsoccer/json/{league}/{season}/match_date_map.json';
 
           // ルータではUT_ENVみてバケット分けている
           $S3Module = new S3Module;
@@ -390,7 +390,7 @@ $app->group('/stats', function () use($app) {
 
           $team_id = $args['teamid'];
           $edition_id = $args['editionid'];
-          $edition_list_s3key = 'json/edition_list.json';
+          $edition_list_s3key = 'worldsoccer/json/edition_list.json';
 
           // ルータではUT_ENVみてバケット分けている
           $S3Module = new S3Module;

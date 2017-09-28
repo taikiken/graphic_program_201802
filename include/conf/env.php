@@ -37,10 +37,11 @@ if(preg_match("/undotsushin/",$servername)){
     if (preg_match("/big6tv/", $requesturi) ||
       preg_match("/ub_kansai/",$requesturi) ||
       preg_match("/ub_kansaibig6/",$requesturi) ||
-      preg_match("/ub_tohto/",$requesturi) ||
-		  preg_match("/worldsoccer/",$requesturi)) {
+      preg_match("/ub_tohto/",$requesturi)) {
       $bucket="dev-ublive.sportsbull.jp";
-    }else{
+    }elseif (preg_match("/worldsoccer/",$requesturi)) {
+			$bucket="dev.sportsbull.jp";
+		}else{
       $bucket="dev-img-sportsbull-jp";
     }
 
@@ -59,10 +60,11 @@ if(preg_match("/undotsushin/",$servername)){
     if (preg_match("/big6tv/", $requesturi) ||
       preg_match("/ub_kansai/",$requesturi) ||
       preg_match("/ub_kansaibig6/",$requesturi) ||
-      preg_match("/ub_tohto/",$requesturi) ||
-		  preg_match("/worldsoccer/",$requesturi)) {
+      preg_match("/ub_tohto/",$requesturi)) {
       $bucket="dev-ublive.sportsbull.jp";
-    }else{
+    }elseif (preg_match("/worldsoccer/",$requesturi)) {
+			$bucket="dev.sportsbull.jp";
+		}else{
       $bucket="img-sportsbull-jp";
     }
 
@@ -116,10 +118,11 @@ if(preg_match("/undotsushin/",$servername)){
     if (preg_match("/big6tv/", $requesturi) ||
       preg_match("/ub_kansai/",$requesturi) ||
       preg_match("/ub_kansaibig6/",$requesturi) ||
-      preg_match("/ub_tohto/",$requesturi) ||
-		  preg_match("/worldsoccer/",$requesturi)) {
+      preg_match("/ub_tohto/",$requesturi)) {
       $bucket="dev-ublive.sportsbull.jp";
-    }else{
+    }elseif (preg_match("/worldsoccer/",$requesturi)) {
+			$bucket="dev.sportsbull.jp";
+		}else{
       $bucket="dev-img-sportsbull-jp";
     }
 
@@ -260,10 +263,11 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
   if (preg_match("/big6tv/", $requesturi) ||
     preg_match("/ub_kansai/",$requesturi) ||
     preg_match("/ub_kansaibig6/",$requesturi) ||
-    preg_match("/ub_tohto/",$requesturi) ||
-		preg_match("/worldsoccer/",$requesturi)) {
+    preg_match("/ub_tohto/",$requesturi)) {
     $bucket="dev-ublive.sportsbull.jp";
-  }
+  }elseif (preg_match("/worldsoccer/",$requesturi)) {
+		$bucket="dev.sportsbull.jp";
+	}
 endif;
 
 //$staticfilepath=preg_match("/sportsbull.jp/",$domain)?sprintf("s3://%s",$bucket):sprintf("%s/api/ver1",$SERVERPATH);
