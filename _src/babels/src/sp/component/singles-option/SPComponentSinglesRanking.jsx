@@ -31,6 +31,7 @@ import { EventDispatcher } from '../../../event/EventDispatcher';
 
 // component
 import RankingCarouselManager from './ranking-carousel/RankingCarouselManager';
+import SPComponentSingleRankingAd from './ad/SPComponentSingleRankingAd';
 
 // ga
 import { Ga } from '../../../ga/Ga';
@@ -263,9 +264,9 @@ const CarouselAd = ({ slug, index, length }) => {
     // console.log('CarouselAd output *******');
     containers += 1;
     return (
-      <div className="widget-post-carousel-item widget-post-carousel-item-ad">
-        ここに広告
-      </div>
+      <SPComponentSingleRankingAd
+        index={index}
+      />
     );
   }
   return null;
@@ -633,8 +634,8 @@ class SPRankingCarousel extends React.Component {
    */
   render() {
     containers = 0;
-    // const { articles, slug, length } = this.props;
-    const { articles } = this.props;
+    const { articles, slug, length } = this.props;
+    // const { articles } = this.props;
     // console.log('SPRankingCarousel.render', this.state);
     // return null;
     return (
@@ -659,13 +660,11 @@ class SPRankingCarousel extends React.Component {
                     single={single}
                     index={index}
                   />
-                  {/*
                   <CarouselAd
                     slug={slug}
                     index={index}
                     length={length}
                   />
-                  */}
                 </span>
               );
             })
