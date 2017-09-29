@@ -39,6 +39,24 @@ if (
         </ul>
       </li>
 
+      <?php if (!empty($page['side-menu'])) : ?>
+      <li>
+        <ul>
+        <?php foreach ($page['side-menu'] as $list) : ?>
+          <li class="sidemenu-list-title"><?php echo $list['header'];?></li>
+          <?php foreach($list['items'] as $side_item) : ?>
+          <li class="sidemenu-item">
+            <a href="<?php echo $side_item['link']; ?>">
+              <img src="<?php echo $side_item['image']['sp']; ?>" class="sidemenu-icon">
+              <?php echo $side_item['title']; ?>
+            </a>
+          </li>
+          <?php endforeach; ?>
+        <?php endforeach; ?>
+        </ul>
+      </li>
+      <?php endif; ?>
+
       <li>
         <!-- Syn. Service List -->
         <div id='synapse-service-list-outer-box' style='display: none'>

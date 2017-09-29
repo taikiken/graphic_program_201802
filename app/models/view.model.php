@@ -82,6 +82,9 @@ class ViewModel {
     'hostname'           => '', // debug用 - 利用なし
     'apiRoot'            => '', // APIの接続先振り分け用 - _footer.phpにて利用
 
+    //side-menu
+    'side-menu'          => array(),
+
     // user
     'is_logged_in'       => false, // ユーザーログイン判定
 
@@ -133,6 +136,8 @@ class ViewModel {
     $this->default['ua_device']       = $this->ua->get_device();
     $this->default['ua_is_bot']       = $this->ua->is_bot();
 
+    // side-menu
+    $this->default['side-menu']       = $this->get_side_menu();
 
     // user
     $this->default['is_logged_in']    = $this->get_is_logged_in();
@@ -374,6 +379,24 @@ class ViewModel {
       return $this->db->get_photo($id);
   }
 
+  /**
+  * side-menu  - サイト内サイドメニューを取得する
+  *
+  * @return array  サイドメニュー一覧の配列
+  */
+  public function get_side_menu() {
+
+    $side_menu_url = (UT_ENV == 'PRODUCTION') ? "https://img.sportsbull.jp/json/sidemenu.json" : "https://dev-img.sportsbull.jp/json/sidemenu.json";
+    $side_menu_list = file_get_contents($side_menu_url);
+    if ( $side_menu_list ) :
+      $side_menu_list = json_decode($side_menu_list, true);
+    else :
+      return false;
+    endif;
+    
+    return $side_menu_list;
+    
+  }
 
 
   /**

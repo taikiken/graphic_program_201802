@@ -388,6 +388,27 @@ div.synapse_logo {
 .side-menu-ut-nav-logout i { @include sprite( $common-icon-side-logout, inline-block ); }
 .side-menu-ut-nav-about i { @include sprite( $common-icon-side-about, inline-block ); }
 
+.sidemenu-list-title {
+  padding:12px 18px;
+  background-color:#aaa;
+  color:#fff;
+  font-weight:700;
+  font-size:12px
+}
+.sidemenu-item {
+  display: block;
+  line-height: 1.5;
+  padding: 14px 0 10px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  font-weight: 700;
+  font-size: 108%
+}
+img.sidemenu-icon {
+  width: 25px;
+  height: 25px;
+  margin:0 3px;
+}
 
 #synapse-service-list {
 }
