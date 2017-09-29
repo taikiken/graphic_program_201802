@@ -18,11 +18,11 @@
     },
     {
       "image": {
-        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-tennis.jpg",
-        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-tennis.jpg"
+        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-bleague.png",
+        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-bleague.png"
       },
-      "url": "http://sportsbull.jp/stats/tennis/",
-      "alt": "テニス 速報&amp;データを見る"
+      "url": "http://sportsbull.jp/stats/bleague/",
+      "alt": "Bリーグ 速報&amp;データを見る"
     },
     {
       "image": {
