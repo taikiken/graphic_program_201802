@@ -159,6 +159,13 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+  # ref. #2318
+  if ( $category === 'area' ) :
+    $categoriesinfo['webviews']     = array(
+      '/area/webview/',
+    );
+  endif;
+
   // #2080
 //  if ( $category === 'top' ) :
 //    $categoriesinfo['webviews'] = array(
