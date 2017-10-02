@@ -56,7 +56,7 @@ $sql[]="update u_view set video=0 where pageid in (select id from repo_n where v
 //$sql[]="update repo_n set m1=141,m2=128 where id in(select id from repo_n where keyword like '%リオパラ%' and m1!=141 and d2=1 and m2 is null);";
 
 //六大学野球
-//$sql[]="update repo_n set m2=151 where m1=113 and m2 is null and (keyword like '%東京六大学野球%' or title like '%東京六大学野球%');";
+$sql[]="update repo_n set m1=151,m2=null where id in (select id from u_index where substr(txt,0,100) like '%東京六大学野球%') and m1=113 and m_time > now()-interval '1 day';";
 
 //番組表 現在よりも古くなった番組を非公開に変更
 //$sql[]="update repo_n set flag=0 where d2=43 and flag=1 and a_time<now();";
@@ -71,11 +71,36 @@ $sql[]="update repo_n set m2=null where m1=m2;";
 $sql[]="update repo_n set m1=m2 where m1 is null and m2 is not null;";
 $sql[]="update repo_n set m2=null where m2=129;";
 
-//非公開になったテレビ番組プログラムに属する記事を非公開に変更
-$s="select pid from u_epg where flag=0";
-$o->query($s);
-while($f=$o->fetch_array()){
-	$sql[]=sprintf("update repo_n set flag=0 where t7 like '%s-%s' and flag=1 and d2=43;",$f["pid"],"%");
+//デイリースポーツ、スポーツ報知その他に割り振られてしまうカテゴリー処理
+$sql[]="update repo_n set m1=118 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%空手%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=118 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%相撲%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=118 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%プロレス%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=118 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%ボクシング%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=118 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%バンタム級%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=118 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%柔道%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=122 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%陸上%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=120 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%ラグビー%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=127 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%カーリング%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=117 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%テニス%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=124 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%卓球%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=119 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%バレーボール%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=127 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%フィギュアスケート%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=127 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%ノルディックスキー%') as t2 where t1.id=t2.id);";
+$sql[]="update repo_n set m1=123 where id in(select t1.id from (select id from repo_n where (d2=47 or d2=45) and m1=129) as t1,(select id,txt from u_index where txt like '%競泳%') as t2 where t1.id=t2.id);";
+
+//パラバドをパラスポーツに
+$sql[]="update repo_n set m1=128 where id in(select t1.id from (select id from repo_n where m1=129) as t1,(select id,txt from u_index where txt like '%パラバド%') as t2 where t1.id=t2.id);";
+
+//地域タブに紐付ける
+$sql[]="update repo_n set m2=161 where id in(select id from (select pageid from u_area)as t1,(select id,m2 from repo_n where d2=1 and m2 is null) as t2 where t1.pageid=t2.id);";
+
+if(preg_match("/dev/",$servername)){
+	//非公開になったテレビ番組プログラムに属する記事を非公開に変更
+	$s="select pid from u_epg where flag=0;";
+	$o->query($s);
+	while($f=$o->fetch_array()){
+		$sql[]=sprintf("update repo_n set flag=0 where t7 like '%s-%s' and flag=1 and d2=43;",$f["pid"],"%");
+	}
 }
 
 $sql=implode("\n",$sql);
