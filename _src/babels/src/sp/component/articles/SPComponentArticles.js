@@ -170,6 +170,7 @@ export class SPComponentArticles extends React.Component {
                             index={i}
                             mediaType={dae.mediaType}
                             recommend={false}
+                            anotherCategories={dae.anotherCategories}
                           />
                         </p>
                         <p className="post-date">{dae.displayDate}</p>

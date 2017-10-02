@@ -48,7 +48,8 @@ import { Ga } from '../ga/Ga';
 import { GaData } from '../ga/GaData';
 
 // React
-// let React = self.React;
+// eslint-disable-next-line no-unused-vars
+let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 // // imagesLoaded, isotope

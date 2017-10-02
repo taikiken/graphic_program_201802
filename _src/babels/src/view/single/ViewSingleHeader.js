@@ -26,8 +26,9 @@ import {User} from '../../app/User';
 import { ComponentSingleHeader } from '../../component/singles/ComponentSingleHeader';
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
+const ReactDOM = self.ReactDOM;
 
 /**
  * <h3>記事詳細(detail) 上部<h3>
@@ -91,7 +92,7 @@ export class ViewSingleHeader extends View {
    */
   render( singleDae:SingleDae ):void {
 
-    let element = this.element;
+    const element = this.element;
     // let _this = this;
     //
     // let HeaderDom = React.createClass( {

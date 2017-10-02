@@ -163,6 +163,7 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
                         index={i}
                         id={`single-recommend-label-${single.id}`}
                         categories={single.categories.all}
+                        anotherCategories={single.anotherCategories}
                       />
                       <h3 className="post-heading">{single.title}</h3>
                       <p className="post-date">{single.displayDate}</p>

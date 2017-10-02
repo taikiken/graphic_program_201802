@@ -47,7 +47,7 @@ export class Action {
    * @param {Types} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
-   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data Class
+   * @param {*|Result} [ResultClass=Result] 成功結果をセットします
    */
   constructor( types:Types, resolve:Function = null, reject:Function = null, ResultClass = Result ) {
     /**

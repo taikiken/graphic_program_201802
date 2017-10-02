@@ -239,6 +239,7 @@ export class ComponentSinglesArticle extends React.Component {
               id={`single-label-${single.id}`}
               categories={single.categories.all}
               className="category-heading"
+              anotherCategories={single.anotherCategories}
             />
 
             <div className="post-data">

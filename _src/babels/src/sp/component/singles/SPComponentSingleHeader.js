@@ -100,6 +100,7 @@ export class SPComponentSingleHeader extends React.Component {
               index={1}
               id={`single-label-${single.id}`}
               categories={single.categories.all}
+              anotherCategories={single.anotherCategories}
             />
             <p className="post-date">{single.displayDate}</p>
           </div>
