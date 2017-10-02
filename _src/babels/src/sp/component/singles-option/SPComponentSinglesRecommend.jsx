@@ -106,6 +106,7 @@ const BoardItem = ({ single, index }) => {
             index={index}
             id={`single-popular-label-${single.id}`}
             categories={single.categories.all}
+            anotherCategories={single.anotherCategories}
           />
           <p className="post-date">{single.displayDate}</p>
         </div>
