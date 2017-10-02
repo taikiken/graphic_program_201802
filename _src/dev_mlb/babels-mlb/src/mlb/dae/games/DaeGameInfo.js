@@ -408,7 +408,7 @@ export default class DaeGameInfo {
     //
     /**
      * status - class name
-     * - 試合前 -> .mlb_live__overview__info__status--end
+     * - 試合前 -> .mlb_live__overview__info__status--before
      * - 試合中 -> mlb_live__overview__info__status--live
      * - 試合終了 -> mlb_live__overview__info__status--end
      * - 試合中止 -> mlb_live__overview__info__status--cancel

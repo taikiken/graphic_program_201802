@@ -1,0 +1,142 @@
+[
+  {
+    "header": "ニュース",
+    "items": [
+      {
+        "type": 1,
+        "title": "トップ",
+        "caption": "全ての記事一覧",
+        "link": "https://dev.sportsbull.jp",
+        "image": {
+          "pc": "https://dev-img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "sp": "https://dev-img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "ios": "https://dev-img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "android": "https://dev-img.sportsbull.jp/img-sidemenu/toplogo.png"
+        },
+        "alt": "トップ"
+      },
+      {
+        "type": 1,
+        "title": "BULL'S PICKS",
+        "caption": "注目のニュース記事まとめ",
+        "link": "https://dev.sportsbull.jp/picks/",
+        "image": {
+            "pc": "https://dev-img.sportsbull.jp/img-sidemenu/bullpick.png",
+            "sp": "https://dev-img.sportsbull.jp/img-sidemenu/bullpick.png",
+            "ios": "https://dev-img.sportsbull.jp/img-sidemenu/bullpick.png",
+            "android": "https://dev-img.sportsbull.jp/img-sidemenu/bullpick.png"
+        },
+        "alt": "BULL'S PICKS"
+      },
+      {
+        "type": 1,
+        "title": "BULL'S STATION",
+        "caption": "今日のスポーツニュースを3分でお届",
+        "link": "https://dev.sportsbull.jp/category/station/",
+        "image": {
+            "pc": "https://img.sportsbull.jp/img-sidemenu/bullstation.png",
+            "sp": "https://img.sportsbull.jp/img-sidemenu/bullstation.png",
+            "ios": "https://img.sportsbull.jp/img-sidemenu/bullstation.png",
+            "android": "https://img.sportsbull.jp/img-sidemenu/bullstation.png"
+        },
+        "alt": "BULL'S STATION"
+      },
+      {
+        "type": 1,
+        "title": "テストカテゴリー",
+        "caption": "今日のスポーツニュースを3分でお届",
+        "link": "https://dev.sportsbull.jp/category/testcategory/",
+        "image": {
+            "pc": "https://img.sportsbull.jp/img-sidemenu/bullstation.png",
+            "sp": "https://img.sportsbull.jp/img-sidemenu/bullstation.png",
+            "ios": "https://img.sportsbull.jp/img-sidemenu/bullstation.png",
+            "android": "https://img.sportsbull.jp/img-sidemenu/bullstation.png"
+        },
+        "alt": "番組表"
+      },
+      {
+        "type": 1,
+        "title": "番組表",
+        "caption": "今日のスポーツニュースを3分でお届",
+        "link": "https://dev.sportsbull.jp/category/tvguide/",
+        "image": {
+            "pc": "https://img.sportsbull.jp/img-sidemenu/bullstation.png",
+            "sp": "https://img.sportsbull.jp/img-sidemenu/bullstation.png",
+            "ios": "https://img.sportsbull.jp/img-sidemenu/bullstation.png",
+            "android": "https://img.sportsbull.jp/img-sidemenu/bullstation.png"
+        },
+        "alt": "番組表"
+      }
+    ]
+  },
+  {
+    "header": "試合情報・データ",
+    "items": [
+      {
+        "type": 2,
+        "title": "プロ野球",
+        "caption": "",
+        "link": "https://dev.sportsbull.jp/npb/",
+        "image": {
+          "pc": "https://dev-img.sportsbull.jp/img-sidemenu/baseball.png",
+          "sp": "https://dev-img.sportsbull.jp/img-sidemenu/baseball.png",
+          "ios": "https://dev-img.sportsbull.jp/img-sidemenu/baseball.png",
+          "android": "https://dev-img.sportsbull.jp/img-sidemenu/baseball.png"
+        },
+        "alt": "プロ野球"
+      },
+      {
+        "type": 2,
+        "title": "サッカー日本代表",
+        "caption": "",
+        "link": "https://dev.sportsbull.jp/sokuhou/",
+        "image": {
+            "pc": "https://dev-img.sportsbull.jp/img-sidemenu/soccer.png",
+            "sp": "https://dev-img.sportsbull.jp/img-sidemenu/soccer.png",
+            "ios": "https://dev-img.sportsbull.jp/img-sidemenu/soccer.png",
+            "android": "https://dev-img.sportsbull.jp/img-sidemenu/soccer.png"
+        },
+        "alt": "サッカー日本代表"
+      },
+      {
+        "type": 2,
+        "title": "Jリーグ",
+        "caption": "",
+        "link": "https://dev.sportsbull.jp/jleague/",
+        "image": {
+            "pc": "https://dev-img.sportsbull.jp/img-sidemenu/soccer.png",
+            "sp": "https://dev-img.sportsbull.jp/img-sidemenu/soccer.png",
+            "ios": "https://dev-img.sportsbull.jp/img-sidemenu/soccer.png",
+            "android": "https://dev-img.sportsbull.jp/img-sidemenu/soccer.png"
+        },
+        "alt": "Jリーグ"
+      },
+      {
+        "type": 2,
+        "title": "ゴルフ",
+        "caption": "",
+        "link": "https://dev.sportsbull.jp/stats/golf/",
+        "image": {
+            "pc": "https://dev-img.sportsbull.jp/img-sidemenu/golf.png",
+            "sp": "https://dev-img.sportsbull.jp/img-sidemenu/golf.png",
+            "ios": "https://dev-img.sportsbull.jp/img-sidemenu/golf.png",
+            "android": "https://dev-img.sportsbull.jp/img-sidemenu/golf.png"
+        },
+        "alt": "ゴルフ"
+      },
+      {
+        "type": 2,
+        "title": "テニス",
+        "caption": "",
+        "link": "https://dev.sportsbull.jp/stats/tennis/",
+        "image": {
+            "pc": "https://dev-img.sportsbull.jp/img-sidemenu/tennis.png",
+            "sp": "https://dev-img.sportsbull.jp/img-sidemenu/tennis.png",
+            "ios": "https://dev-img.sportsbull.jp/img-sidemenu/tennis.png",
+            "android": "https://dev-img.sportsbull.jp/img-sidemenu/tennis.png"
+        },
+        "alt": "テニス"
+      }
+    ]
+  }
+]

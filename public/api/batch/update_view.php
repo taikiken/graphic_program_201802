@@ -91,6 +91,7 @@ $sql[]="update repo_n set m1=123 where id in(select t1.id from (select id from r
 //パラバドをパラスポーツに
 $sql[]="update repo_n set m1=128 where id in(select t1.id from (select id from repo_n where m1=129) as t1,(select id,txt from u_index where txt like '%パラバド%') as t2 where t1.id=t2.id);";
 
+
 //地域タブに紐付ける
 $sql[]="update repo_n set m2=161 where id in(select id from (select pageid from u_area)as t1,(select id,m2 from repo_n where d2=1 and m2 is null) as t2 where t1.pageid=t2.id);";
 

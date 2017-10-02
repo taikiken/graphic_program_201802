@@ -37,6 +37,11 @@
   endif;
   // -----------------------------------------
   ?>
+  <?php
+  // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+  // @since 2017-08-21
+  ?>
+  <script src="/assets/js/app_ua_detector.bundle.js"></script>
   <link rel="stylesheet" href="/assets/sp/css/w_samurai/ui.css?v=<?php echo $page['version']; ?>">
 
   <script type='text/javascript'>
@@ -73,7 +78,7 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <header class="head-sec">
+  <header class="head-sec for-web">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
@@ -111,14 +116,14 @@
 
         <?php
         // app in webview 時に .head-sec を非表示にする
-        // if (!$from_webview) :
+         if (!$from_webview) :
         ?>
         <?php
         // <aside class="bnr-app for-ios"><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
         // <aside class="bnr-app for-android"><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
         ?>
         <?php
-        // endif;
+         endif;
         // -----------------------------------------
         ?>
         <aside class="bnr-app"><a href="https://app.adjust.com/7hfkzc" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
@@ -130,7 +135,7 @@
   // app in webview 時に .foot-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <footer class="foot-sec">
+  <footer class="foot-sec for-web">
     <div class="foot-sec-inner">
 
       <div class="foot-pr">
@@ -206,6 +211,7 @@ endif;
 ?>
 
 <script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
-
+<script src="/assets/js/app_divide.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>

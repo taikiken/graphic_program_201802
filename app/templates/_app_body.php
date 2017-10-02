@@ -34,7 +34,7 @@
                       </div>
                   <?php else:?>
                       <div id="detail-photoalbum">
-                          <nav class="nav-photoalbum">
+                          <nav class="nav-photoalbum" style="margin-top: 20px;">
                               <p class="prev">
                                   <?php if($_GET['id'] == 1):?>
                                   <a href="<?php echo $page['og_url_with_param']?>id=<?php echo count($page['photo'])?>&viewhead=1">
@@ -118,7 +118,9 @@
                       </div>
                   <?php endif;?>
               <?php else:?>
-                  <?php print_r($page['post']['body']); ?>
+                  <div style="font-size:0.8em">
+                    <?php print_r($page['post']['body']); ?>
+                  </div>
               <?php endif;?>
 
           </div><!-- /.post-content -->

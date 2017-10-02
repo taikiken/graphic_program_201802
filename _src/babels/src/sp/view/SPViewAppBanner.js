@@ -239,6 +239,9 @@ const Sagen = self.Sagen;
 // @see https://github.com/undotsushin/undotsushin/issues/1906#issuecomment-301979040
 // @since 2017-05-17
 
+let headerSticky = null;
+let timer = 0;
+
 /**
  * アプリダウンロードの動線を改善 #1009
  *
@@ -279,14 +282,32 @@ class AppBanner {
   /**
    * Scroll.SCROLL event handler
    * @param {Object} events Scroll.SCROLL event Object
+   * @see https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-332087234
    * @since 2-16-09-30 static へ変更
+   * @since 2017-09-26 banner - height: 85 -> 70 変更
    */
   static onScroll(events) {
-    if (events.y >= 85) {
+    // if (events.y >= 85) {
+    // @since 2017-09-26
+    //
+    if (events.y >= 70) {
       AppBanner.visible(false);
     } else {
       AppBanner.visible(true);
     }
+  }
+  /**
+   * iOS safari rendering bug 対応させるために強制再描画します
+   */
+  static refresh() {
+    if (!headerSticky) {
+      return;
+    }
+    clearTimeout(timer);
+    headerSticky.style.cssText = 'top: 71px;';
+    timer = setTimeout(() => {
+      headerSticky.style.cssText = '';
+    }, 16);
   }
   /**
    * document.body に `.appbnr-invisible` を追加・削除します
@@ -294,7 +315,10 @@ class AppBanner {
    */
   static visible(view = false) {
     if (view) {
-      Sagen.Dom.removeClass(document.body, 'appbnr-invisible');
+      if (Sagen.Dom.hasClass(document.body, 'appbnr-invisible')) {
+        Sagen.Dom.removeClass(document.body, 'appbnr-invisible');
+        AppBanner.refresh();
+      }
     } else {
       Sagen.Dom.addClass(document.body, 'appbnr-invisible');
     }
@@ -327,6 +351,11 @@ class AppBanner {
      * @type {Scroll}
      */
     this.scroll = Scroll.factory();
+    const headers = document.getElementsByClassName('header-sticky');
+    // console.log('AppBanner headers', headers);
+    if (headers && headers.length) {
+      headerSticky = headers[0];
+    }
   }
   // ---------------------------------------------------
   //  METHOD
@@ -334,7 +363,7 @@ class AppBanner {
   init() {
     // scroll 監視開始
     this.activate();
-    this.element.addEventListener('click', this.onClose, false);
+    // this.element.addEventListener('click', this.onClose, false);
   }
   /**
    * div.header-appbnr-btn-close click event handler
@@ -404,7 +433,9 @@ export class SPViewAppBanner {
    * @return {boolean} mount すると true を返します
    */
   static init(element, visible = false) {
-    const has = Cookie.has(Cookie.APP_BANNER);
+    // cookie check 止める
+    // @since 2017-09-25
+    const has = false;// Cookie.has(Cookie.APP_BANNER);
     if (!has && visible) {
       AppBanner.enable();
       const banner = new AppBanner(element, visible);

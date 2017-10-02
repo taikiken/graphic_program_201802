@@ -35,13 +35,6 @@
     <section class="main-sec">
 
       <?php
-      if ( $page['category']['slug'] ==='big6' || $page['category']['slug'] ==='big6tv') :
-        include_once __DIR__.'/../big6tv/live.php';
-        include_once __DIR__.'/../big6tv/mobile/category.php';
-      endif;
-      ?>
-
-      <?php
       // ----------------------------------------------------
       // 記事一覧: sp banner
       if ( !empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']) ) :
@@ -53,6 +46,12 @@
       endif;
       // eof: 記事一覧: sp banner
       // ---------------------------------------------------- ?>
+
+
+      <?php if ( $page['category']['slug'] === 'big6tv' ) : ?>
+        <?php include_once __DIR__.'/../../../public/big6tv/category/index.html'; ?>
+      <?php endif; ?>
+
 
       <?php
       # ref. #2227
@@ -69,13 +68,27 @@
       ?>
 
       <?php
+      # ref. #2321 
+      if ( $page['category']['slug'] === 'americanfootball' ) :
+        include_once __DIR__.'/../stats/ua_kansai/mobile/index.php';
+      endif;
+      ?>
+
+      <?php
       # ref. #2104
       if ( $page['category']['slug'] === 'highschoolbaseball' ) :
         $hsb_parts = file_get_contents('https://sportsbull.jp/stats/hsb/webview/sp/');
         echo $hsb_parts;
       endif;
       ?>
-      
+
+      <?php
+      # ref. #2264
+      if ( $page['category']['slug'] === 'americanfootball' ) :
+        include_once __DIR__.'/../stats/ua_kansai/mobile/index.php';
+      endif;
+      ?>
+
       <div id="js-headline"></div>
       <div id="category-container"></div>
       <div id="board-container-more"></div>

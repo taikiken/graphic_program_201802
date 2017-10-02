@@ -34,6 +34,10 @@
   <meta property="og:description" content="<?php echo $page['og_description']; ?>">
   <meta property="og:locale" content="ja_JP" />
 
+<?php if ( $page['fb_pages'] && is_array($page['fb_pages']) ) : foreach( $page['fb_pages'] as $key => $value ) : ?>
+  <meta property="fb:pages" content="<?php echo $value; ?>" />
+<?php endforeach; endif; ?>
+
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@<?php echo $page['sns']['twitter']; ?>">
@@ -60,7 +64,7 @@
   <!-- favicon -->
 <?php
   /*
-  home screen 登録 しても web app mode だと cookie を引きつけず link click で safari に移動し使いづらい
+  home screen 登録 しても web app mode だと cookie を引きつげず link click で safari に移動し使いづらい
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   */

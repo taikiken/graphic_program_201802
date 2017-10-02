@@ -90,10 +90,12 @@ export default class ComScoreRefresh extends Component {
   }
   /**
    * manual click event handler - props.manual を call します
-   * @param {Event} event click event
+   * @param {?Event} [event=null] click event
    */
-  onClickManual(event) {
-    event.preventDefault();
+  onClickManual(event = null) {
+    if (event) {
+      event.preventDefault();
+    }
     const { radio } = this.state;
     if (radio !== 'manual') {
       this.setState({ radio: 'manual' });
@@ -114,12 +116,13 @@ export default class ComScoreRefresh extends Component {
    * @returns {XML} div.refresh-container > div.mlb_live__reload__btn--auto
    */
   renderRefresh(show) {
-    console.log('ComScoreRefresh.renderRefresh', show);
+    // console.log('ComScoreRefresh.renderRefresh', show);
     // flag 判定
-    // TODO: TEST CODE
-    // if (!show) {
-    //   return null;
-    // }
+    // TEST CODE
+    if (!show) {
+      this.onClickManual();
+      return null;
+    }
     // render
     const { radio } = this.state;
     return (
@@ -152,12 +155,12 @@ export default class ComScoreRefresh extends Component {
    * @returns {XML} div.mlb_live__reload__btn--reload
    */
   renderReload(show) {
-    console.log('ComScoreRefresh.renderReload', show);
+    // console.log('ComScoreRefresh.renderReload', show);
     // flag 判定
-    // TODO: TEST CODE
-    // if (!show) {
-    //   return null;
-    // }
+    // TEST CODE
+    if (!show) {
+      return null;
+    }
     // render
     return (
       <div id="reload" className="mlb_live__reload__btn--reload">
@@ -190,20 +193,20 @@ export default class ComScoreRefresh extends Component {
     } else if (status === 1 || status === 23) {
       // status: 1 - 試合前,   23 - 遅延/中断
       // 当日のみ「更新」表示させる
-      // @type {string} - YYYYMMDD
-      const today = Day.full(new Date());
-      // @type {string} - YYYYMMDD
-      const play = Day.full(date);
+      // @type {int} - YYYYMMDD
+      const today = parseInt(Day.full(new Date()), 10);
+      // @type {int} - YYYYMMDD
+      const play = parseInt(Day.full(date), 10);
       // 文字列比較する
-      if (today === play) {
+      if (today >= play) {
         showReload = true;
       }
     }
     // どちらも表示する必要がない時は null
-    // TODO: TEST CODE
-    // if (!showRefresh && !showReload) {
-    //   return null;
-    // }
+    // TEST CODE
+    if (!showRefresh && !showReload) {
+      return null;
+    }
     // render
     return (
       <nav className="mlb_live__reload">

@@ -12,7 +12,7 @@
 
 // sp/component/singles-content
 import { SPComponentSinglesSNSAbove } from './SPComponentSinglesSNSAbove';
-import { SPComponentSinglesSNSBelow } from './SPComponentSinglesSNSBelow';
+// import { SPComponentSinglesSNSBelow } from './SPComponentSinglesSNSBelow';
 import { SPComponentSingleComments } from './SPComponentSingleComments';
 
 
@@ -137,7 +137,13 @@ export class SPComponentSingleContent extends React.Component {
           single={single}
           callback={() => {}}
         />
+        {/*
         <SPComponentSinglesSNSBelow
+          single={single}
+          index={index}
+        />
+        */}
+        <SPComponentSinglesSNSAbove
           single={single}
           index={index}
         />

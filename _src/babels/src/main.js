@@ -32,6 +32,7 @@ import {Router} from './app/Router';
 // util
 import {Offset} from './util/Offset';
 import {Scroll} from './util/Scroll';
+import { Elements } from './util/Elements';
 
 
 
@@ -82,6 +83,11 @@ import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
 import {ViewLogoutModal} from './view/modal/ViewLogoutModal';
 import {ViewFlushModal} from './view/modal/ViewFlushModal';
 
+// area
+// @since 2017-09-04
+import ViewArea from './view/ViewArea';
+
+
 // ----------- users
 // signup
 import {SignupWizard} from './view/signup/SignupWizard';
@@ -127,6 +133,9 @@ import { SPViewCategory } from './sp/view/category/SPViewCategory';
 // SPViewCategoryWithSlug が多分正解
 import { SPViewCategoryWithSlug } from './sp/view/category/SPViewCategoryWithSlug';
 
+// 2017-09-04 - area
+import SPViewArea from './sp/view/category/SPViewArea';
+
 // search
 import {SPViewSearch} from './sp/view/SPViewSearch';
 
@@ -147,6 +156,11 @@ import {SPViewSingleRecommend} from './sp/view/single/SPViewSingleRecommend';
 // single/comment
 import {SPViewComments} from './sp/view/SPViewComments';
 import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
+
+// singles-option
+import SPViewSinglesRecommend from './sp/view/singles-option/SPViewSinglesRecommend';
+import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking';
+
 
 // mypage
 import {SPViewUserProfile} from './sp/view/mypage/SPViewUserProfile';
@@ -173,7 +187,8 @@ let UT = {
   },
   util: {
     Offset,
-    Scroll
+    Scroll,
+    Elements,
   },
   ui: {
     PageTop,
@@ -196,6 +211,7 @@ let UT = {
     ViewSearch,
     ViewCommentSingle,
     ViewFirstVisit,
+    ViewArea,
     comment: {
       ViewCommentForm
     },
@@ -256,6 +272,10 @@ let UT = {
         SPViewSingleRanking,
         SPViewSingleRecommend
       },
+      singles: {
+        SPViewSinglesRecommend,
+        SPViewSinglesRanking,
+      },
       comment: {
         SPViewCommentForm
       },
@@ -265,7 +285,8 @@ let UT = {
       },
       category: {
         SPViewCategory,
-        SPViewCategoryWithSlug
+        SPViewCategoryWithSlug,
+        SPViewArea,
       },
       header: {
         SPViewHeaderUser,
@@ -274,10 +295,10 @@ let UT = {
       mypage: {
         SPViewUserProfile,
         SPViewBookmarks
-      }
-    }
+      },
+    },
   },
-  Ga
+  Ga,
 };
 
 self.UT = UT;

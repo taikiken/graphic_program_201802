@@ -73,7 +73,7 @@ $app->group('/stats', function () use($app) {
   // ==============================
   $this->group('/mlb/game', function ($request, $response, $args) use ( $app ) {
     $this->get('/{category:\d{4}/\d{9}}[/]', function ($request, $response, $args) use ($app) {
-      
+
       $category = array(
         'title' => 'MLB | 速報 &amp; データ',
       );
@@ -84,7 +84,7 @@ $app->group('/stats', function () use($app) {
         'og_description'     => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
         'og_url'             => $app->model->property('site_url').'stats/mlb/',
         'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
-//        'template'           => 'mlb/'.$args['category'].'.php',
+        // 'template'           => 'mlb/'.$args['category'].'.php',
         'template'           => 'mlb/game.php',
         'path'               => $args,
         // @since 2017-07016 - .whole へ className 追加するために追加する
@@ -111,7 +111,7 @@ $app->group('/stats', function () use($app) {
         'og_description'     => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
         'og_url'             => $app->model->property('site_url').'stats/mlb/',
         'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
-//        'template'           => 'mlb/schedule.php',
+        // 'template'           => 'mlb/schedule.php',
         // @since 2017-07016 - /stats/mlb/ 表示ファイルをindex.phpへ変更する
         'template'           => 'mlb/index.php',
         'path'               => $args,
@@ -126,7 +126,7 @@ $app->group('/stats', function () use($app) {
 
     // ヒットする文字列だけ
     $this->get('/{category:schedule|standing|leaders|playerlist|\d{8}}[/]', function ($request, $response, $args) use ($app) {
-      
+
       $category = array(
         'title' => 'MLB | 速報 &amp; データ',
       );
@@ -148,7 +148,7 @@ $app->group('/stats', function () use($app) {
         'og_description'     => 'MLB 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
         'og_url'             => $app->model->property('site_url').'stats/mlb/',
         'og_image'           => $app->model->property('site_url').'assets/images/stats/mlb/og_image.jpg',
-//        'template'           => 'mlb/'.$args['category'].'.php',
+        // 'template'           => 'mlb/'.$args['category'].'.php',
         'template'           => 'mlb/'.$template.'.php',
         'path'               => $args,
         // @since 2017-07016 - .whole へ className 追加するために追加する
@@ -162,53 +162,328 @@ $app->group('/stats', function () use($app) {
   });
 
 
+  // 関西アメフト
+  // ==============================
+  $app->group('/{slug:ua_kansai}',  function () use($app) {
+
+
+    // /ua_kansai/
+    // ==============================
+    $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+      $args['page'] = $app->model->set(array(
+        'title'              => '関西学生アメリカンフットボールリーグ',
+        'og_title'           => '関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
+        'og_url'             => $app->model->property('site_url').'ua_kansai/',
+        'path'               => $args,
+        'template'           => 'category',
+        'template_classname' => '',
+      ));
+
+      return $this->renderer->render($response, 'stats/ua_kansai/index.php', $args);
+
+    });
+
+    // match
+    // ==============================
+    $this->get('/match[/]', function ($request, $response, $args) use ($app) {
+
+      $args['page'] = $app->model->set(array(
+        'title'              => '試合詳細 関西学生アメリカンフットボールリーグ',
+        'og_title'           => '試合詳細 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
+        'og_url'             => $app->model->property('site_url').'ua_kansai/match/',
+        'path'               => $args,
+        'template'           => 'category',
+        'template_classname' => '',
+      ));
+
+      return $this->renderer->render($response, 'stats/ua_kansai/match.php', $args);
+
+    });
+
+    // photo
+    // ==============================
+    $this->get('/photo[/]', function ($request, $response, $args) use ($app) {
+
+      $args['page'] = $app->model->set(array(
+        'title'              => 'フォトギャラリー 関西学生アメリカンフットボールリーグ',
+        'og_title'           => 'フォトギャラリー 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
+        'path'               => $args,
+        'template'           => 'photo',
+        'template_classname' => '',
+      ));
+
+      return $this->renderer->render($response, 'stats/ua_kansai/photo.php', $args);
+
+    });
+
+    // webview
+    // ==============================
+    $this->get('/webview[/]', function ($request, $response, $args) use ($app) {
+
+      $args['page'] = $app->model->set(array(
+        'title'              => 'WebView 関西学生アメリカンフットボールリーグ',
+        'og_title'           => 'WebView 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
+        'path'               => $args,
+        'template'           => 'webview',
+        'template_classname' => '',
+      ));
+
+      return $this->renderer->render($response, 'stats/ua_kansai/webview.php', $args);
+
+    });
+
+  });
 
   // 海外サッカー #2275
   // ==============================
   $this->group('/worldsoccer', function ($request, $response, $args) use ( $app ) {
 
-    $title        = '海外サッカー | 速報 &amp; データ';
-    $page = $app->model->set(array(
-      'title'              => $title,
-      'og_title'           => $title.' | '.$app->model->property('title_short'),
-      'og_description'     => '海外サッカー 速報 &amp; データ見るならスポーツブルで。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
-      'og_url'             => $app->model->property('site_url').'stats/worldsoccer/',
-      'og_image'           => $app->model->property('site_url').'assets/images/stats/worldsoccer/og_image.jpg',
-    ));
+    $page = array(
+      'title' => '海外サッカー | 速報 &amp; データ',
+      'league' => array(
+        'premier-league'   => 'プレミアリーグ',
+        'bundesliga'       => 'ブンデスリーガ',
+        'champions-league' => 'チャンピオンズリーグ',
+        'la-liga'          => 'リーガ・エスパニョーラ',
+        'serie-a'          => 'セリエA',
+      ),
+      'category' => array(
+        'schedule' => array(
+          'title' => '日程・結果',
+        ),
+        'standing' => array(
+          'title' => '順位',
+        ),
+        'playlist' => array(
+          'title' => '選手成績',
+        ),
+        'team' => array(
+          'title' => 'チーム一覧',
+        ),
+      ),
+    );
 
-
-    // トップ
+    // トップ -> 'premier-league/schedule' のスケジュールに転送
     $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
-      $args['page']             = $page;
-      $args['page']['template'] = 'worldsoccer/index.php';
-      return $this->renderer->render($response, 'stats/default.php', $args);
+      return $response->withRedirect('/stats/worldsoccer/premier-league/schedule/', 301);
     });
 
-    // ヒットする文字列だけ
-    $this->get('/{category:schedule|playerlist}[/]', function ($request, $response, $args) use ($app, $page) {
+    // 各リーグ
+    foreach( array_keys($page['league']) as $key => $league ) :
 
-      if ( $args['category'] === 'schedule' ) :
-        $category = array(
-          'title' => '試合日程',
-        );
-      endif;
+      $this->group('/'.$league, function ($request, $response, $args) use ($app, $page, $league) {
 
-      if ( $args['category'] === 'playerlist' ) :
-        $category = array(
-          'title' => '選手情報',
-        );
-      endif;
+        // 各トップ
+        $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page, $league) {
+          // 各カテゴリの schedule に転送する
+          return $response->withRedirect('/stats/worldsoccer/'.$league.'/schedule/', 301);
+        });
 
-      $args['page']             = $page;
-      $args['page']['template'] = 'worldsoccer/'.$args['category'].'.php';
-      $args['page']['title']    = $category['title'].' | '.$page['title'];
-      $args['page']['og_title'] = $category['title'].' | '.$page['og_title'];
-      $args['page']['og_url']   = $page['og_url'].$args['category'].'/';
+        // 各カテゴリー
+        $this->get('/{category:'.join('|',array_keys($page['category'])).'}[/]', function ($request, $response, $args) use ($app, $page, $league) {
 
-      return $this->renderer->render($response, 'stats/default.php', $args);
-    });
+          $args['page'] = $app->model->set(array(
+            'title'              => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'],
+            'og_type'            => 'article',
+            'og_title'           => $page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'].' | '.$app->model->property('title'),
+            'og_url'             => $app->model->property('site_url').'stats/worldsoccer/'.$league.'/'.$args['category'],
+            'og_image'           => $app->model->property('site_url').'assets/images/stats/worldsoccer/ogp.jpg',
+            'og_description'     => $page['league'][$league] . "の" .$page['category'][$args['category']]['title']."見るならスポーツブル(スポブル)で！スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。",
+            'keywords'           => $page['league'][$league].',海外サッカー,欧州サッカー,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
+            'path'               => $args,
+          ));
+
+          return $this->renderer->render($response, 'stats/worldsoccer/'.$league.'/'.$args['category'].'.php', $args);
+        });
+      });
+
+    endforeach;
+
   });
 
+
+  // 大学野球
+  // ==============================
+  // ヒットする文字列だけ
+  $this->group('/{league:ub_kansai|ub_kansaibig6|ub_tohto}', function ($request, $response, $args) use ($app) {
+
+    $this->get('/2017a/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
+
+      $request_uri = $_SERVER['REQUEST_URI'];
+      $url = explode('/', $request_uri);
+      $league = $url[2];
+      $season = $url[3];
+      $gameid = $args['gameid'];
+      $arr = [
+        'json',
+        $league,
+        $season,
+        'game_info_' . $gameid . '.json',
+      ];
+      $s3key = implode('/', $arr);
+
+      $S3Module = new S3Module;
+      $json = $S3Module->getUrl($s3key);
+
+      // jsonからタイトルつくる
+      // フロントはいつでも本番のバケットのjson取得してる
+      // ルーティングではUT_ENVみてバケット分けている
+      $team_names = [];
+      $visitor = '';
+      $home = '';
+      $dateY = '';
+      $dateM = '';
+      $dateD = '';
+      $weekday = '';
+      if (!empty(file_get_contents($json, false, null, 0, 1))){
+        $json = json_decode(file_get_contents($json));
+        foreach ($json->team as $team) {
+          $team_names[] = $team->teaminfo->name;
+        }
+        $visitor = $team_names[0];
+        $home = $team_names[1];
+        $dateY = $json->gameinfo->dateY;
+        $dateM = $json->gameinfo->dateM;
+        $dateD = $json->gameinfo->dateD;
+        $weekday = $json->gameinfo->weekday;
+      }
+      // シーズン日本語化
+      $season_array = str_split($season, 4);
+      $year = $season_array[0];
+      $season_jp = $season_array[1] == 's' ? '春' : '秋';
+
+      switch ($league) {
+        case 'ub_tohto':
+          $season_name = $year . $season_jp;
+          $short_season_name = substr($season_name, 2);
+
+          $league_name = '東都大学野球';
+          $team_and_date = implode('', [
+            $visitor,
+            ' vs ',
+            $home,
+            ' - ',
+            $dateY,
+            '年',
+            $dateM,
+            '月',
+            $dateD,
+            '日（',
+            $weekday,
+            '）',
+          ]);
+
+          $title = implode('', [
+            $team_and_date,
+            '- ',
+            $league_name,
+            ' ',
+            $season_name
+          ]);
+
+          $args['page'] = $app->model->set(array(
+            'request_uri' => $request_uri,
+            'title' => $title,
+            'og_image' => 'OG_univ_tohto',
+            'stats_top_image' => 'tohto',
+            'league' => $league,
+            'league_name' => $league_name,
+            'game_id' => $gameid,
+            'season' => $season,
+            'season_name' => $season_name,
+            'short_season' => $short_season_name,
+            'team_and_date' => $team_and_date,
+          ));
+          return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
+
+        case 'ub_kansaibig6':
+          $season_name = $year . $season_jp;
+          $short_season_name = substr($season_name, 2);
+
+          $league_name = '関西六大学野球';
+          $team_and_date = implode('', [
+            $visitor,
+            ' vs ',
+            $home,
+            ' - ',
+            $dateY,
+            '年',
+            $dateM,
+            '月',
+            $dateD,
+            '日（',
+            $weekday,
+            '）',
+          ]);
+
+          $title = implode('', [
+            $team_and_date,
+            '- ',
+            $league_name,
+            ' ',
+            $season_name
+          ]);
+
+          $args['page'] = $app->model->set(array(
+            'request_uri' => $request_uri,
+            'title' => $title,
+            'og_image' => 'OG_univ_6',
+            'stats_top_image' => 'kansai6',
+            'league' => $league,
+            'league_name' => $league_name,
+            'game_id' => $gameid,
+            'season' => $season,
+            'season_name' => $season_name,
+            'short_season' => $short_season_name,
+            'team_and_date' => $team_and_date,
+          ));
+          return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
+
+        case 'ub_kansai':
+          $season_name = $year . $season_jp;
+          $short_season_name = substr($season_name, 2);
+
+          $league_name = '関西大学野球';
+          $team_and_date = implode('', [
+            $visitor,
+            ' vs ',
+            $home,
+            ' - ',
+            $dateY,
+            '年',
+            $dateM,
+            '月',
+            $dateD,
+            '日（',
+            $weekday,
+            '）',
+          ]);
+
+          $title = implode('', [
+            $team_and_date,
+            '- ',
+            $league_name,
+            ' ',
+            $season_name
+          ]);
+
+          $args['page'] = $app->model->set(array(
+            'request_uri' => $request_uri,
+            'title' => $title,
+            'og_image' => 'OG_univ_kansai',
+            'stats_top_image' => 'kansai',
+            'league' => $league,
+            'league_name' => $league_name,
+            'game_id' => $gameid,
+            'season' => $season,
+            'season_name' => $season_name,
+            'short_season' => $short_season_name,
+            'team_and_date' => $team_and_date,
+          ));
+          return $this->renderer->render($response, 'stats/baseball_univ/game.php', $args);
+      }
+    });
+  });
 
 });
 

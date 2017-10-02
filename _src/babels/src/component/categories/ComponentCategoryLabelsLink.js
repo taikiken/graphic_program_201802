@@ -22,45 +22,6 @@ const React = self.React;
  * @since 2016-09-24
  * */
 export class ComponentCategoryLabelsLink extends React.Component {
-  /**
-   * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentCategoryLabelsLink.propTypes}
-   */
-  constructor(props) {
-    super(props);
-  }
-  /**
-   * p.post-category を出力します<br>
-   * category 未設定の時は null を返します
-   * @return {?XML} p.post-category を返します
-   */
-  render() {
-    const props = this.props;
-    const categories = props.categories;
-    if (categories.length === 0) {
-      return null;
-    }
-
-    const id = props.id;
-    const index = props.index;
-    const slug = props.slug || 'x';
-    const className = this.props.className;
-
-    return (
-      <p className={`${className} ${className}-${slug}`}>
-        {
-          /* Array<SlugDae> */
-          categories.map((dae, i) => {
-            return (
-              <span key={`labels-${id}-${index}-${i}`} className="category-label">
-                <a href={Url.category(dae.slug)}>{dae.label}</a>
-              </span>
-            );
-          })
-        }
-      </p>
-    );
-  }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -92,6 +53,60 @@ export class ComponentCategoryLabelsLink extends React.Component {
       slug: '',
       className: 'post-category'
     };
+  }
+  /**
+   * category slug `area` の時のみ `category-label_area` を与えます
+   * @param {string} slug category slug
+   * @returns {string} `area` 用 className
+   * @since 2017-09-08
+   */
+  static areaClassName(slug) {
+    return slug === 'area' ? ' category-label_area' : '';
+  }
+  // // ---------------------------------------------------
+  // //  CONSTRUCTOR
+  // // ---------------------------------------------------
+  // /**
+  //  * プロパティを保存し必要な関数・変数を準備します
+  //  * @param {Object} props プロパティ {@link ComponentCategoryLabelsLink.propTypes}
+  //  */
+  // constructor(props) {
+  //   super(props);
+  // }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * p.post-category を出力します<br>
+   * category 未設定の時は null を返します
+   * @return {?XML} p.post-category を返します
+   */
+  render() {
+    const props = this.props;
+    const categories = props.categories;
+    if (categories.length === 0) {
+      return null;
+    }
+
+    const id = props.id;
+    const index = props.index;
+    const slug = props.slug || 'x';
+    const className = this.props.className;
+
+    return (
+      <p className={`${className} ${className}-${slug}`}>
+        {
+          /* Array<SlugDae> */
+          categories.map((dae, i) => {
+            return (
+              <span key={`labels-${id}-${index}-${i}`} className={`category-label${ComponentCategoryLabelsLink.areaClassName(dae.slug)}`}>
+                <a href={Url.category(dae.slug)}>{dae.label}</a>
+              </span>
+            );
+          })
+        }
+      </p>
+    );
   }
 }
 //

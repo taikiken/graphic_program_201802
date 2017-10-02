@@ -376,6 +376,26 @@
         //&:first-of-type {
         //  margin-left: 0;
         //}
+
+        // 地域カテゴリー用アイコン付カテゴリーラベル
+        // ref.https://github.com/undotsushin/undotsushin/issues/2318
+        &.category-label_area {
+          color: $highlight-secondary-color;
+
+          &:before {
+            content: "";
+            // position: relative;
+            // top: -1px;
+            display: inline-block;
+            width: (14/2)+px;
+            height: (19/2)+px;
+            margin-right: 4px;
+            background: url(/assets/sp/images/area/icon-heading.png) 0 0 no-repeat;
+            background-size: (14/2)+px;
+            vertical-align: middle;
+            @include hide-text;
+          }
+        }
       }
     }
 
@@ -679,46 +699,45 @@
 // 初回起動時のサービス紹介
 .modal-intro {
   @extend %modal-dialogue;
-  position: absolute;
+  display: none;
 
   .modal-bg {
     background-color: rgba(0, 0, 0, .8);
   }
 
-  .modal-intro-contents {
-    position: relative;
-    padding-bottom: (80/2)+px;
-    background: url(/assets/sp/images/intro/bg.png) center 0 no-repeat;
-    background-size: 100%;
+  //.modal-intro-contents
+  &-contents {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    // width: perCalc(600, 750);
+    width: (600/2)+px;
   }
 
-  .modal-intro-tagline,
-  .modal-intro-heading,
-  .modal-intro-copy {
+  //.modal-intro-link
+  &-link {
     img {
-      width: 100%;
+      max-width: 100%;
     }
   }
 
-  .modal-intro-tagline {}
-
-  .modal-intro-heading {
-    margin: (36/2)+px 0 0 perCalc(30);
-    width: perCalc(300);
+  //.modal-intro-close
+  &-close {
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
-  .modal-intro-copy {
-    margin: (40/2)+px 0 0 perCalc(30);
-    width: perCalc(580);
-  }
-
-  .mod-btnB01 {
-    width: perCalc(540);
-    margin: (50/2)+px auto 0;
-
-    a {
-      width: 100%;
-    }
+  //.modal-intro-close-btn
+  &-close-btn {
+    display: block;
+    width: (60/2)+px;
+    height: (60/2)+px;
+    background: url(/assets/sp/images/intro/btn-close.png) 0 0 no-repeat;
+    background-size: (60/2)+px;
+    @include hide-text;
   }
 }
 

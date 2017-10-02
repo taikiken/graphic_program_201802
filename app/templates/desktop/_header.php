@@ -224,7 +224,7 @@ if (
         <div id="head-search-container"></div><!-- /.head-search -->
       </aside>
 
-      <h1><a href="/">SPORTS BULL</a></h1>
+      <h1><a href="/">スポーツブル（スポブル）</a></h1>
 
       <aside class="f-right clearfix">
         <div id="user-profile-container"></div><!--/.user-profile-container-->

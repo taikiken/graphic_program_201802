@@ -25,24 +25,35 @@ export default class S3 {
    * @type {string}
    */
   static AMAZON = 's3.amazonaws.com';
+  // static AMAZON = '';
+  static PROTOCOL = location.protocol;
   /**
-   * dev 環境サーバー - https://dev-mlive.sportsbull.jp.
+   * dev 環境サーバー - [https|http]://dev-mlive.sportsbull.jp
+   * - 接続元 protocol でリクエストします
    * @const DEV
    * @type {string}
+   * @since 2017-09-10 - protocol 可変
    */
-  static DEV = `http://dev-mlive.sportsbull.jp.${S3.AMAZON}`;
+  static DEV = `${S3.PROTOCOL}//dev-mlive.sportsbull.jp`;
+  // static DEV = `https://dev-mlive.sportsbull.jp.${S3.AMAZON}`;
   /**
-   * stg 環境サーバー - https://stg-mlive.sportsbull.jp.
+   * stg 環境サーバー - [https|http]://stg-mlive.sportsbull.jp
+   * - 接続元 protocol でリクエストします
    * @const DEV
    * @type {string}
+   * @since 2017-09-10 - protocol 可変
    */
-  static STG = `http://stg-mlive.sportsbull.jp.${S3.AMAZON}`;
+  static STG = `${S3.PROTOCOL}//stg-mlive.sportsbull.jp`;
+  // static STG = `https://stg-mlive.sportsbull.jp.${S3.AMAZON}`;
   /**
-   * 本番 環境サーバー - https://mlive.sportsbull.jp.
+   * 本番 環境サーバー - [https|http]://mlive.sportsbull.jp
+   * - 接続元 protocol でリクエストします
    * @const WWW
    * @type {string}
+   * @since 2017-09-10 - protocol 可変
    */
-  static WWW = `http://mlive.sportsbull.jp.${S3.AMAZON}`;
+  static WWW = `${S3.PROTOCOL}//mlive.sportsbull.jp`;
+  // static WWW = `https://mlive.sportsbull.jp.${S3.AMAZON}`;
   // ---------------------------------------------------
   //  PROPERTY
   // ---------------------------------------------------
@@ -59,10 +70,14 @@ export default class S3 {
    * @returns {string} DEV | STG | WWW を返します
    */
   static init() {
+    // console.log('S3.PROTOCOL', S3.PROTOCOL, S3.DEV);
     if (Env.www()) {
       return S3.WWW;
     } else if (Env.stg()) {
-      return S3.STG;
+      // return S3.STG;
+      // https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-27#comment-1174830746
+      // @since 2017-08-23 - stg www 見る
+      return S3.WWW;
     }
     return S3.DEV;
   }

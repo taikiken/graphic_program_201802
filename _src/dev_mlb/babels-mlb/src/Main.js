@@ -39,7 +39,7 @@ export default class Main {
    * @param {{path: ?string, id: ?string, year: ?string}} page {@link Router.search} 戻り値
    */
   static game(page) {
-    console.log('Main.game', page);
+    // console.log('Main.game', page);
     const overview = document.getElementById('js-mlb-game-overview');
     const score = document.getElementById('js-mlb-game-score');
     const info = document.getElementById('js-mlb-game-info');
@@ -59,7 +59,7 @@ export default class Main {
    * @param {{path: ?string, id: ?string, year: ?string}} page {@link Router.search} 戻り値
    */
   static index(page) {
-    console.log('Main.index', page);
+    // console.log('Main.index', page);
     const id = page.id;
     if (id) {
       // id: not null - /stats/mlb/yyyymmdd/
@@ -84,7 +84,7 @@ export default class Main {
    */
   static init() {
     const page = Router.search();
-    console.log('Main.init page', page);
+    // console.log('Main.init page', page);
     // ---------------------------
     // 処理開始
     switch (page.path) {

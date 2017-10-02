@@ -154,7 +154,7 @@
     background-color: $highlight-color;
     color: #fff;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 16px;
   } //.mlb__today_jp__heading
 
 
@@ -164,6 +164,54 @@
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #dbdbdb;
+
+    // フォントサイズを下げる/レイアウト変更
+    // ref.https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-26#comment-1174357231
+    //.mlb__game__overview
+    .mlb__game__overview {
+      //.mlb__game__overview__team
+      &__team {
+        font-size: 14px;
+      }
+
+      //.mlb__game__overview__info
+      &__info {
+        position: relative;
+
+        //.mlb__game__overview__info__place
+        &__place {
+          margin-bottom: 8px;
+          font-size: 10px;
+        }
+
+        //.mlb__game__overview__info__score
+        &__score {
+          //.mlb__game__overview__info__score--home
+          //.mlb__game__overview__info__score--visitor
+          &--home,
+          &--visitor {
+            width: 18%;
+            font-size: 16px;
+          }
+
+          //.mlb__game__overview__info__score--vs
+          &--vs {
+            // font-size: 16px;
+            @include hide-text;
+          }
+        }
+
+        //.mlb__game__overview__info__status
+        &__status {
+          position: absolute;
+          top: 2.3em;
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 4px 6px;
+          font-size: 10px;
+        }
+      } //.mlb__game__overview__info
+    } //.mlb__game__overview
   } //.mlb__today_jp__container
 
 
@@ -179,7 +227,7 @@
       float: left;
       color: $highlight-color;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 18px;
     }
 
     //.mlb__today_jp__player__profile
@@ -193,7 +241,7 @@
         padding: 4px 6px;
         white-space: nowrap;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 12px;
       }
 
       //.mlb__today_jp__player__profile__team
@@ -223,8 +271,8 @@
 
     &__th,
     &__td {
-      padding: 12px 8px;
-      font-size: 16px;
+      padding: 8px 8px;
+      font-size: 12px;
       text-align: center;
     }
 
@@ -410,10 +458,59 @@
     //.mlb__schedule__result__container
     &__container {
       margin-top: 24px;
+
+      // フォントサイズを下げる/レイアウト変更
+      // ref.https://aws-plus.backlog.jp/view/UNDO_MLBSTATS-26#comment-1174357231
+      //.mlb__game__overview
+      .mlb__game__overview {
+        //.mlb__game__overview__team
+        &__team {
+          font-size: 14px;
+        }
+
+        //.mlb__game__overview__info
+        &__info {
+          position: relative;
+
+          //.mlb__game__overview__info__place
+          &__place {
+            margin-bottom: 8px;
+            font-size: 10px;
+          }
+
+          //.mlb__game__overview__info__score
+          &__score {
+            //.mlb__game__overview__info__score--home
+            //.mlb__game__overview__info__score--visitor
+            &--home,
+            &--visitor {
+              width: 18%;
+              font-size: 16px;
+            }
+
+            //.mlb__game__overview__info__score--vs
+            &--vs {
+              // font-size: 16px;
+              @include hide-text;
+            }
+          }
+
+          //.mlb__game__overview__info__status
+          &__status {
+            position: absolute;
+            top: 2.3em;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 6px;
+            font-size: 10px;
+          }
+        } //.mlb__game__overview__info
+      } //.mlb__game__overview
     }
 
     //.mlb__schedule__result__heading
     &__heading {
+      margin-top: 24px;
       padding: 2px 0;
       margin-bottom: 16px;
       border-bottom: 3px solid $highlight-color;
@@ -421,13 +518,14 @@
       font-weight: bold;
       font-size: 18px;
     }
+
   } //.mlb__schedule__result
 
 
 
   //.mlb__schedule__calendar
   &__calendar {
-    height: 800px;
+    height: 540px;
     margin-top: 30px;
     padding: 0 0 40px;
 
@@ -521,8 +619,8 @@
 
     // カレンダー週(月〜金)ラベル
     .rbc-header {
-      padding-top: 12px;
-      padding-bottom: 12px;
+      padding-top: 10px;
+      padding-bottom: 10px;
 
       .weeks-header-label {
         color: #000;
@@ -567,7 +665,7 @@
         .rbc-date-cell {
           position: relative;
           width: 100%;
-          height: 100px;
+          height: 60px;
           padding-right: 0;
 
           a {
@@ -575,6 +673,7 @@
             top: 50%;
             left: 50%;
             transform: translateY(-50%) translateX(-50%);
+            margin-top: -0.25em;
           }
         }
       }
@@ -614,12 +713,12 @@
     .rbc-row-content {
       .rbc-row:nth-child(2) {
         // z-index: -1;
-        margin-top: -100px;
+        margin-top: -60px;
       }
     }
 
     .rbc-row-segment {
-      height: 100px;
+      height: 60px;
       padding: 0;
 
       .rbc-event {
@@ -637,7 +736,7 @@
           transform: translateY(-50%) translateX(-50%);
           width: 1.5em;
           height: 2px;
-          margin-top: 1em;
+          margin-top: 0.55em;
           background-color: #000;
         }
 

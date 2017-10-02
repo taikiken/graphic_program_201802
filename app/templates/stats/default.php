@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <script>
-  (function () {
-    if ( window.location.protocol == 'https:' && !/worldsoccer/.test(window.location.href) ) {
-      window.location.replace(window.location.href.replace(/https:/, 'http:'));
-    }
-  }());
-  </script>
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <?php
+  if (0) :
+    // app_ua_detector.bundle.js を使います
+    // @since 2017-08-23
+  ?>
   <script src="/assets/js/app_divide.bundle.js"></script>
+  <?php
+  endif;
+  ?>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <?php
   // app in webview 時に head内不要なタグを非表示にする
@@ -51,7 +52,11 @@
   endif;
   // -----------------------------------------
   ?>
-
+  <?php
+  // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+  // @since 2017-08-21
+  ?>
+  <script src="/assets/js/app_ua_detector.bundle.js"></script>
   <?php // #1876 - Google Optimize ?>
   <style>.async-hide { opacity: 0 !important} </style>
   <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
@@ -147,7 +152,7 @@ if (isset($page['prop_identity'])) {
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <header class="head-sec">
+  <header class="head-sec for-web">
     <div class="head-sec-inner">
       <h1><a href="https://sportsbull.jp/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
@@ -163,7 +168,7 @@ if (isset($page['prop_identity'])) {
   // app in webview 時に .foot-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <footer id="footer-container" class="foot-sec show-for-large">
+  <footer id="footer-container" class="foot-sec show-for-large for-web">
     <div class="foot-sec-inner">
       <nav class="foot-breadCrumb">
         <ol itemscope itemtype="http://schema.org/breadCrumbList">
@@ -289,5 +294,6 @@ if (isset($page['prop_identity'])) {
 <link rel="stylesheet" href="/assets/sp/css/stats/ui.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
 
 <script src="/assets/js/global.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>

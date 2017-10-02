@@ -125,7 +125,7 @@ __EOL__;
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <header class="head-sec">
+  <header class="head-sec for-web">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
@@ -199,7 +199,7 @@ __EOL__;
   // app in webview 時に .foot-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <footer id="footer-container" class="foot-sec show-for-large">
+  <footer id="footer-container" class="foot-sec show-for-large for-web">
     <div class="foot-sec-inner">
       <nav class="foot-breadCrumb">
         <ol itemscope itemtype="http://schema.org/breadCrumbList">
@@ -323,5 +323,6 @@ __EOL__;
 
 <script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script src="/assets/js/stats_banners.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>

@@ -1,5 +1,4 @@
 <?php
-
 if($q->get_dir()===0){
 	if($q->get_file()===0){
 
@@ -31,6 +30,7 @@ if($q->get_dir()===0){
 
 			$o=new dbutl("authentic",$sn,$sv);
 			$e=$o->insert();
+
 		}
 	}
 }elseif($q->get_dir()===1){

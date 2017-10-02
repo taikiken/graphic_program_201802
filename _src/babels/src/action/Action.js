@@ -200,42 +200,29 @@ export class Action {
    * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
    */
   start( method:string = this.method ):void {
-
     method = Safety.string( method, this.method );
     this.ajax.start( this.url, method, this.boundSuccess, this.boundFail, this.resultClass );
-
   }
   /**
    * Ajax success callback
    * @param {Result} result Ajax成功結果
    */
   success( result:Result ):void {
-
     // success
-    var resolve = this._resolve;
-
+    const resolve = this._resolve;
     if ( typeof resolve === 'function' ) {
-
       resolve( result );
-
     }
-
   }
   /**
    * Ajax error callback
    * @param {Error} error Ajax失敗結果
    */
   fail( error:Error ):void {
-
     // error
-    var reject = this._reject;
-
+    const reject = this._reject;
     if ( typeof reject === 'function' ) {
-
       reject( error );
-
     }
-
   }
-
 }

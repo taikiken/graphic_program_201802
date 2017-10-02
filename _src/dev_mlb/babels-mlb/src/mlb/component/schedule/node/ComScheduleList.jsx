@@ -82,11 +82,10 @@ ComGameDetail.propTypes = {
  * @param {DaeGame} game ゲーム情報
  * @param {string} team team.id - 【注意】data は number なので cast して比較すること
  * @param {*} date {{year: number, month: number, day: number, full: string}} な object
- * @param {*} today {{year: number, month: number, day: number, full: string}} な object
  * @returns {?XML} div.mlb__game__overview
  * @constructor
  */
-const ComGame = ({ game, team, date, today }) => {
+const ComGame = ({ game, team, date }) => {
   const teamClass = 'mlb__game__overview__team';
   // team `all` 以外は filter する
   if (team !== 'all') {
@@ -102,28 +101,36 @@ const ComGame = ({ game, team, date, today }) => {
   const statusClass = game.className;
   // render
   // 未来のゲームはリンクしない
-  if (date.full > today.full) {
-    // console.log('div.mlb__game__overview__no_link');
-    return (
-      <div
-        className="mlb__game__overview__no_link"
-        data-href={`/stats/mlb/game/${date.year}/${game.id}/`}
-      >
-        <ComGameDetail
-          game={game}
-          homeClass={homeClass}
-          visitorClass={visitorClass}
-          statusClass={statusClass}
-          teamClass={teamClass}
-        />
-      </div>
-    );
-  }
+  // 未来のゲームはリンクしない - deprecated
+  // 未来のゲームもリンクつける - リンク先のために home / visitor / stadium / date をクエリ送信する
+  // let query = '';
+  // if (date.full > today.full) {
+  //   // console.log('div.mlb__game__overview__no_link');
+  //   // eslint-disable-next-line max-len
+  //   query = `?home=${game.home.team}&visitor=${game.visitor.team}&stadium=${game.stadium}&title=${Day.title(date)}`;
+  //   // return (
+  //   //   <a
+  //   //     href={`/stats/mlb/game/${date.year}/${game.id}/${query}`}
+  //   //     className="mlb__game__overview__link"
+  //   //   >
+  //   //     <ComGameDetail
+  //   //       game={game}
+  //   //       homeClass={homeClass}
+  //   //       visitorClass={visitorClass}
+  //   //       statusClass={statusClass}
+  //   //       teamClass={teamClass}
+  //   //     />
+  //   //   </a>
+  //   // );
+  // }
+  // data 不正な時があるので常にクエリ付きリンクにする
+  // eslint-disable-next-line max-len
+  const query = `?home=${game.home.team}&visitor=${game.visitor.team}&stadium=${game.stadium}&title=${Day.title(date)}`;
   // ----
   // console.log('a.mlb__game__overview__link');
   return (
     <a
-      href={`/stats/mlb/game/${date.year}/${game.id}/`}
+      href={`/stats/mlb/game/${date.year}/${game.id}/${query}`}
       className="mlb__game__overview__link"
     >
       <ComGameDetail
@@ -145,12 +152,6 @@ ComGame.propTypes = {
   game: PropTypes.instanceOf(DaeGame).isRequired,
   team: PropTypes.string.isRequired,
   date: PropTypes.shape({
-    year: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    day: PropTypes.number.isRequired,
-    full: PropTypes.string.isRequired,
-  }).isRequired,
-  today: PropTypes.shape({
     year: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
     day: PropTypes.number.isRequired,
@@ -192,7 +193,7 @@ const ComGames = ({ games, team, date }) => {
   const title = games.title ?
     <h3 className="mlb__schedule__result__heading">{Print.str(games.title)}</h3> :
     '';
-  const today = Day.today();
+  // const today = Day.today();
   // render
   return (
     <div className="game-container">
@@ -204,7 +205,6 @@ const ComGames = ({ games, team, date }) => {
             game={game}
             team={team}
             date={date}
-            today={today}
           />
         ))
       }
@@ -311,7 +311,7 @@ export default class ComScheduleList extends Component {
     if (type !== nextProps.type) {
       update = true;
     }
-    console.log('ComScheduleList shouldComponentUpdate', nextProps, update);
+    // console.log('ComScheduleList shouldComponentUpdate', nextProps, update);
     return update;
   }
   /**
@@ -326,7 +326,7 @@ export default class ComScheduleList extends Component {
   render() {
     // select / option の値
     const { team, type, date } = this.props;
-    console.log('ComScheduleList.render team, type', team, type);
+    // console.log('ComScheduleList.render team, type', team, type);
     return (
       <div className="mlb__schedule__result__section">
         {
