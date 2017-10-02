@@ -350,18 +350,14 @@ $app->group('/stats', function () use($app) {
           $match_id = $args['matchid'];
           // matchidから日付を特定する。
           $edition_list_s3key = 'worldsoccer/json/edition_list.json';
-          $match_list_s3key = 'worldsoccer/json/{league}/{season}/match_date_map.json';
+          $match_week_s3key = 'worldsoccer/json/{league}/{season}/match_week_map.json';
 
           // ルータではUT_ENVみてバケット分けている
           $S3Module = new S3Module;
           $edition_list_json = $S3Module->getUrl($edition_list_s3key);
 
           $season = '';
-          $api_date = '';
-          $language_code = '';
-          $match_list_json = '';
-          $match_detail = [];
-
+          $date = '';
           $home_team = '';
           $away_team = '';
           $match_date = '';
@@ -369,7 +365,6 @@ $app->group('/stats', function () use($app) {
           if (!empty(file_get_contents($edition_list_json, false, null, 0, 1))){
             $edition_list_json = json_decode(file_get_contents($edition_list_json));
             $season = $edition_list_json->$edition_id->season;
-            $language_code = $edition_list_json->$edition_id->languageCode;
 
             $search = [
               '{league}',
@@ -379,38 +374,39 @@ $app->group('/stats', function () use($app) {
               $league,
               $season,
             ];
-            $match_list_s3key = str_replace($search, $replace , $match_list_s3key);
-            $match_list_json = $S3Module->getUrl($match_list_s3key);
+            $match_week_s3key = str_replace($search, $replace, $match_week_s3key);
+            $match_week_json = $S3Module->getUrl($match_week_s3key);
 
-            if (!empty(file_get_contents($match_list_json, false, null, 0, 1))){
-              $match_list_json = json_decode(file_get_contents($match_list_json));
-              $api_date = $match_list_json->$match_id->date;
+            if (!empty(file_get_contents($match_week_json, false, null, 0, 1))){
+              $match_week_json = json_decode(file_get_contents($match_week_json));
+              $week_id = $match_week_json->$match_id->weekId;
+              $date = $match_week_json->$match_id->date;
             }
           }
 
-
-          if (!empty($api_date)) {
-            $api = 'http://APIdemo:Var%40HaanjUhtajaXIvat@sportsbull.api.infostradasports.com/svc/Football.svc/json/GetMatchLiveList_Date?date={date}&editionId={editionId}&languageCode={languageCode}';
-
+          // week_id から 試合情報とる
+          if (!empty($week_id)) {
+            $week_id_s3key = 'worldsoccer/json/{league}/{season}/{weekid}.json';
             $search = [
-              '{date}',
-              '{editionId}',
-              '{languageCode}',
+              '{league}',
+              '{season}',
+              '{weekid}',
             ];
             $replace = [
-              $api_date,
-              $edition_id,
-              $language_code,
+              $league,
+              $season,
+              $week_id,
             ];
-            $api = str_replace($search, $replace , $api);
+            $week_id_s3key = str_replace($search, $replace, $week_id_s3key);
+            $week_id_json = $S3Module->getUrl($week_id_s3key);
 
-            if (!empty(file_get_contents($api, false, null, 0, 1))){
-              $res = json_decode(file_get_contents($api));
-              foreach ($res as $row) {
-                if ($row->n_MatchID == $match_id) {
-                  $home_team = $row->c_HomeTeam;
-                  $away_team = $row->c_AwayTeam;
-                  $DateTime = new DateTime($api_date);
+            if (!empty(file_get_contents($week_id_json, false, null, 0, 1))) {
+              $week_id_json = json_decode(file_get_contents($week_id_json));
+              foreach ($week_id_json as $match) {
+                if ($match->n_MatchID == $match_id) {
+                  $home_team = $match->c_HomeTeam;
+                  $away_team = $match->c_AwayTeam;
+                  $DateTime = new DateTime($date);
                   $match_date = $DateTime->format('Y年m月d日');
                   $week_list = array( '日', '月', '火', '水', '木', '金', '土');
                   $week = $week_list[(int)$DateTime->format('w')];
@@ -449,7 +445,7 @@ $app->group('/stats', function () use($app) {
             'team/',
             $edition_id,
             '-',
-            $team_id,
+            $match_id,
             '/">',
             '<span itemprop="name">',
             $title,
@@ -489,7 +485,6 @@ $app->group('/stats', function () use($app) {
 
           if (!empty(file_get_contents($edition_list_json, false, null, 0, 1))){
             $edition_list_json = json_decode(file_get_contents($edition_list_json));
-            $season = $edition_list_json->$edition_id->season;
             $language_code = $edition_list_json->$edition_id->languageCode;
 
           }
@@ -509,7 +504,7 @@ $app->group('/stats', function () use($app) {
             if (!empty(file_get_contents($api, false, null, 0, 1))){
               $res = json_decode(file_get_contents($api));
               foreach ($res as $row) {
-                if ($row->n_MatchID == $match_id) {
+                if ($row->n_TeamID == $team_id) {
                   $team = $row->c_Team;
                 }
               }
