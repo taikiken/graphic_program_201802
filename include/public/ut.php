@@ -1037,4 +1037,32 @@ function create_article_json($article_id, $reload = false)
     return json_decode($json, true);
 }
 
+/**
+ * @param bool $reload
+ * @return mixed
+ * 未ログイン時のinitialize用json
+ */
+function create_initialize_json($reload = false)
+{
+    global $articletable, $o, $ImgPath;
+    $object_key = 'json/initialize.json';
+    $url = join('/', [$ImgPath, $object_key]);
+
+    $json = @file_get_contents($url);
+    if(empty($json) || $reload)
+    {
+        $json = [];
+        $sql = sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark("")," and m_time > now() - interval '10 day'"),100,0);
+        $o->query($sql);
+        while($f = $o->fetch_array())
+        {
+            $json[] = $f;
+        }
+        $json = json_encode($json);
+
+        $s3 = new S3Module;
+        $s3->createObject($json, $object_key, 'application/json');
+    }
+    return json_decode($json, true);
+}
 ?>
