@@ -166,6 +166,13 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+  # ref. #2559
+  if ( $category === 'basketball' ) :
+    $categoriesinfo['webviews']     = array(
+      '/stats/bleague/webview/app/',
+    );
+  endif;
+
   // #2080
 //  if ( $category === 'top' ) :
 //    $categoriesinfo['webviews'] = array(
