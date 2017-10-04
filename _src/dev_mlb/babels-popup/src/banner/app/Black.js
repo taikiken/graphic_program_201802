@@ -20,7 +20,20 @@ export default class Black {
    */
   static list = [
     '/about',
+    // https://github.com/undotsushin/undotsushin/issues/2590
+    // URLに /big6tv/ を含むページ
+    // 六大学カテゴリー記事
+    '/big6tv',
     '/big6tv/live/2017a',
+    '/category/big6tv',
+  ];
+  /**
+   * URL black list - strong
+   * URL に含まれていても弾きます
+   * @type {[string]}
+   */
+  static strong = [
+    'big6tv',
   ];
   /**
    * `userAgent` をチェックします
@@ -44,6 +57,8 @@ export default class Black {
     }
     // check pathname with list
     const pathname = location.pathname;
-    return Black.list.some(url => pathname.indexOf(url) === 0);
+    const result = Black.list.some(url => pathname.indexOf(url) === 0);
+    const strong = Black.strong.some(url => pathname.indexOf(url) !== -1);
+    return result || strong;
   }
 }

@@ -39,6 +39,11 @@ var Black = function () {
      * - undotsushin-android
      * @returns {boolean} true: 該当する
      */
+
+    /**
+     * URL black list
+     * @type {[string,string]}
+     */
     value: function app() {
       return !!navigator.userAgent.match(/gunosy|newspass|undotsushin-ios|undotsushin-android/i);
     }
@@ -48,8 +53,9 @@ var Black = function () {
      */
 
     /**
-     * URL black list
-     * @type {[string,string]}
+     * URL black list - strong
+     * URL に含まれていても弾きます
+     * @type {[string]}
      */
 
   }, {
@@ -61,14 +67,23 @@ var Black = function () {
       }
       // check pathname with list
       var pathname = location.pathname;
-      return Black.list.some(function (url) {
+      var result = Black.list.some(function (url) {
         return pathname.indexOf(url) === 0;
       });
+      var strong = Black.strong.some(function (url) {
+        return pathname.indexOf(url) !== -1;
+      });
+      return result || strong;
     }
   }]);
 
   return Black;
 }();
 
-Black.list = ['/about', '/big6tv/live/2017a'];
+Black.list = ['/about',
+// https://github.com/undotsushin/undotsushin/issues/2590
+// URLに /big6tv/ を含むページ
+// 六大学カテゴリー記事
+'/big6tv', '/big6tv/live/2017a', '/category/big6tv'];
+Black.strong = ['big6tv'];
 exports.default = Black;
