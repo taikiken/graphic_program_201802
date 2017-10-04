@@ -48,7 +48,7 @@ function get_browser() {
 
 var viewtype = function () {
   var type;
-  if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0 || ua.indexOf('Windows Phone') > 0) {
+  if (ua.indexOf('iphone') > 0 || ua.indexOf('ipod') > 0 || ua.indexOf('android') > 0 && ua.indexOf('mobile') > 0 || ua.indexOf('windows phone') > 0) {
     type = 'sp';
   } else {
     type = 'pc';
@@ -155,7 +155,7 @@ var setPlayerEvent = function setPlayerEvent() {
 var count = 0;
 //PLayer Initialization
 var videoLoad = function videoLoad() {
-  superagent.get('/api/big6tv/live/2017a').end(function (err, res) {
+  superagent.get(' https://dev.sportsbull.jp/api/big6tv/live/2017a').end(function (err, res) {
     // console.log(res.body.response)
     var video = res.body.response.live.video;
     var isPlaying = res.body.response.live.isPlaying;
@@ -166,7 +166,8 @@ var videoLoad = function videoLoad() {
       adTagUrl: viewtype === 'pc' ? video.ad_url.pc : video.ad_url.sp,
       timeout: 3000
     };
-    var sourcesType = viewtype === 'sp' ? video.souces_sp : video.sources;
+    // console.log(viewtype, video['sources_sp'])
+    var sourcesType = viewtype === 'sp' ? video['sources_sp'] : video['sources'];
     // console.log(sourcesType)
     sources = sourcesType.map(function (element, index) {
       return {
