@@ -2,20 +2,19 @@
 
 include $INCLUDEPATH."local.php";
 
-$project="big6live";
-$season="2017/autumn";
+$project="boxcart";
 
 if(!$bucket){
-	$bucket=sprintf("%s/api/ver1/static/%s/%s",$SERVERPATH,str_replace("live","",$project),$season);
-	$url=sprintf("http://utinput/api/%s.dat",$project);
+	$bucket=sprintf("%s/api/ver1/static/%s",$SERVERPATH,$project);
+	$url=sprintf("http://utinput/api/%slive.dat",$project);
 }else{
 	$client = new Aws\S3\S3Client([
 		'region' => 'ap-northeast-1',
 		'version' => 'latest',
 	]);
 	$client->registerStreamWrapper();
-	$bucket=sprintf("s3://%s/static/%s/%s",$bucket,str_replace("live","",$project),$season);
-	$url=sprintf("http://input.sportsbull.jp/api/%s%s.dat",$project,preg_match("/dev/",$servername)?"_dev":"");
+	$bucket=sprintf("s3://%s/static/%s",$bucket,$project);
+	$url=sprintf("http://input.sportsbull.jp/api/%slive%s.dat",$project,preg_match("/dev/",$servername)?"_dev":"");
 }
 
 function put_json($file,$data){
