@@ -73,6 +73,7 @@ var Black = function () {
       var strong = Black.strong.some(function (url) {
         return pathname.indexOf(url) !== -1;
       });
+      // console.log('Black.detect', result, strong, result || strong);
       return result || strong;
     }
   }]);

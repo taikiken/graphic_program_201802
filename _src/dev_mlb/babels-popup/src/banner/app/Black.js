@@ -59,6 +59,7 @@ export default class Black {
     const pathname = location.pathname;
     const result = Black.list.some(url => pathname.indexOf(url) === 0);
     const strong = Black.strong.some(url => pathname.indexOf(url) !== -1);
+    // console.log('Black.detect', result, strong, result || strong);
     return result || strong;
   }
 }
