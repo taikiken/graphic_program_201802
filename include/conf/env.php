@@ -40,7 +40,7 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_tohto/",$requesturi)) {
       $bucket="dev-ublive.sportsbull.jp";
     }elseif (preg_match("/worldsoccer/",$requesturi)) {
-			$bucket="dev.sportsbull.jp";
+			$bucket="dev-stats.sportsbull.jp";
 		}else{
       $bucket="dev-img-sportsbull-jp";
     }
@@ -63,7 +63,7 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_tohto/",$requesturi)) {
       $bucket="dev-ublive.sportsbull.jp";
     }elseif (preg_match("/worldsoccer/",$requesturi)) {
-			$bucket="dev.sportsbull.jp";
+			$bucket="dev-stats.sportsbull.jp";
 		}else{
       $bucket="img-sportsbull-jp";
     }
@@ -121,7 +121,7 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_tohto/",$requesturi)) {
       $bucket="dev-ublive.sportsbull.jp";
     }elseif (preg_match("/worldsoccer/",$requesturi)) {
-			$bucket="dev.sportsbull.jp";
+			$bucket="dev-stats.sportsbull.jp";
 		}else{
       $bucket="dev-img-sportsbull-jp";
     }
@@ -266,7 +266,7 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
     preg_match("/ub_tohto/",$requesturi)) {
     $bucket="dev-ublive.sportsbull.jp";
   }elseif (preg_match("/worldsoccer/",$requesturi)) {
-		$bucket="dev.sportsbull.jp";
+		$bucket="dev-stats.sportsbull.jp";
 	}
 endif;
 
