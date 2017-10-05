@@ -23,6 +23,7 @@ import Black from './banner/app/Black';
 // ui
 import Modal from './banner/ui/Modal';
 import Title from './banner/app/Title';
+import Query from './banner/app/Query';
 
 /**
  * 条件をチェックし `app download banner` を表示します
@@ -55,7 +56,10 @@ export default class Main {
       Main.modal();
     } else if (
       !Black.detect() &&
+      // add 2017-10-05
       !Title.detect() &&
+      // add 2017-10-05
+      !Query.detect() &&
       !Visited.already() &&
       self.googletag
     ) {
