@@ -27,6 +27,8 @@ import { CategoryAuth } from '../../action/archive/CategoryAuth';
 import { ComponentSinglesWidgetPopularList } from '../../component/singles/ComponentSinglesWidgetPopularList';
 
 // React
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
 const ReactDOM = self.ReactDOM;
 
 /**
@@ -50,8 +52,6 @@ export class ViewSinglesPopular extends ViewArchiveMasonry {
     const type = '';
     const resolve = this.done.bind(this);
     const reject = this.fail.bind(this);
-
-
     /**
      * `all` すべての記事の新着順
      * @type {string}
@@ -120,7 +120,7 @@ export class ViewSinglesPopular extends ViewArchiveMasonry {
      * bind onMount
      * @type {function}
      */
-    this.boundMount = this.onMount.bind(this);
+    this.onMount = this.onMount.bind(this);
   }
   /**
    * 成功後に `ComponentSinglesWidgetPopularList` を render します
@@ -135,7 +135,7 @@ export class ViewSinglesPopular extends ViewArchiveMasonry {
       this.articleRendered = ReactDOM.render(
         <ComponentSinglesWidgetPopularList
           list={list}
-          callback={this.boundMount}
+          callback={this.onMount}
         />,
         this.element
       );

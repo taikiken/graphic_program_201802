@@ -21,36 +21,41 @@ import { Empty } from '../../../app/const/Empty';
 import { ArticleDae } from '../../../dae/ArticleDae';
 import { Ga } from '../../../ga/Ga';
 
+import SPComponentSingleRecommendAd from './ad/SPComponentSingleRecommendAd';
+
 // React
 const React = self.React;
-//
-// /**
-//  * 広告を表示します
-//  * @param {number} index 出力 index - 表示・非表示 flag 1 or 3
-//  * @param {string} slug category.slug `big6tv` 非表示
-//  * @returns {?XML} null or `div.board-item`
-//  * @constructor
-//  */
-// const BoardAd = ({ index, slug }) => {
-//   if (slug === 'big6tv') {
-//     return null;
-//   }
-//   // 2 or 5件目
-//   // |0|ad|1|2|ad|3|4|
-//   if (index === 1 || index === 3) {
-//     // output
-//     // console.log('BoardAd', index);
-//     return (
-//       <div className="board-item board-item-ad-wrapper">
-//         <div className="board-item-ad">
-//           ここに広告
-//         </div>
-//       </div>
-//     );
-//   } else {
-//     return null;
-//   }
-// };
+
+/**
+ * 広告を表示します
+ * @param {number} index 出力 index - 表示・非表示 flag 1 or 3
+ * @param {string} slug category.slug `big6tv` 非表示
+ * @returns {?XML} null or `div.board-item`
+ * @constructor
+ */
+const BoardAd = ({ index, slug }) => {
+  if (slug === 'big6tv') {
+    return null;
+  }
+  // 2 or 5件目
+  // |0|ad|1|2|ad|3|4|
+  if (index === 1 || index === 3) {
+    // output
+    console.log('BoardAd', index);
+    return (
+      <SPComponentSingleRecommendAd
+        index={index}
+      />
+    );
+  } else {
+    return null;
+  }
+};
+
+BoardAd.propTypes = {
+  index: React.PropTypes.number.isRequired,
+  slug: React.PropTypes.string.isRequired,
+};
 
 // -------------------------------------------------------------------
 // Ga 追加
@@ -101,6 +106,7 @@ const BoardItem = ({ single, index }) => {
             index={index}
             id={`single-popular-label-${single.id}`}
             categories={single.categories.all}
+            anotherCategories={single.anotherCategories}
           />
           <p className="post-date">{single.displayDate}</p>
         </div>
@@ -151,12 +157,10 @@ const SPComponentSinglesRecommend = ({ list, slug }) => {
                 key={`sp-singles-recommend-${dae.id}`}
                 className={`singles-recommend-${index}`}
               >
-                {/*
                 <BoardAd
                   index={index}
                   slug={slug}
                 />
-                */}
                 <BoardItem
                   key={`singles-widget-post-list-recommend-${single.id}`}
                   single={dae}

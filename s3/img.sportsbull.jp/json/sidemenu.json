@@ -44,7 +44,7 @@
     ]
   },
   {
-    "header": "試合情報・データ",
+    "header": "野球速報 & データ",
     "items": [
       {
         "type": 2,
@@ -61,19 +61,6 @@
       },
       {
         "type": 2,
-        "title": "高校野球",
-        "caption": "",
-        "link": "https://sportsbull.jp/stats/hsb/",
-        "image": {
-          "pc": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
-          "sp": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
-          "ios": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
-          "android": "https://img.sportsbull.jp/img-sidemenu/baseball.png"
-        },
-        "alt": "高校野球"
-      },
-      {
-        "type": 2,
         "title": "MLB",
         "caption": "",
         "link": "https://sportsbull.jp/stats/mlb/",
@@ -87,55 +74,272 @@
       },
       {
         "type": 2,
-        "title": "サッカー日本代表",
+        "title": "東京六大学野球",
         "caption": "",
-        "link": "https://sportsbull.jp/sokuhou/",
+        "link": "https://sportsbull.jp/category/big6tv/",
         "image": {
-            "pc": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
-            "sp": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
-            "ios": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
-            "android": "https://img.sportsbull.jp/img-sidemenu/soccer.png"
+          "pc": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/baseball.png"
         },
-        "alt": "サッカー日本代表"
+        "alt": "東京六大学野球"
       },
+      {
+        "type": 2,
+        "title": "東都大学野球",
+        "caption": "",
+        "link": "https://sportsbull.jp/stats/ub_tohto/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/baseball.png"
+        },
+        "alt": "東都大学野球"
+      },
+      {
+        "type": 2,
+        "title": "関西六大学野球",
+        "caption": "",
+        "link": "https://sportsbull.jp/stats/ub_kansaibig6/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/baseball.png"
+        },
+        "alt": "関西六大学野球"
+      },
+      {
+        "type": 2,
+        "title": "関西大学野球",
+        "caption": "",
+        "link": "https://sportsbull.jp/stats/ub_kansai/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/baseball.png"
+        },
+        "alt": "関西大学野球"
+      },
+      {
+        "type": 2,
+        "title": "高校野球",
+        "caption": "",
+        "link": "https://sportsbull.jp/stats/hsb/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/baseball.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/baseball.png"
+        },
+        "alt": "高校野球"
+      }
+    ]
+  },
+  {
+    "header": "サッカー速報 & データ",
+    "items": [
       {
         "type": 2,
         "title": "Jリーグ",
         "caption": "",
-        "link": "https://sportsbull.jp/jleague/",
+        "link": "https://sportsbull.jp/jleague/match/",
         "image": {
-            "pc": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
-            "sp": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
-            "ios": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
-            "android": "https://img.sportsbull.jp/img-sidemenu/soccer.png"
+          "pc": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/soccer.png"
         },
         "alt": "Jリーグ"
       },
       {
         "type": 2,
-        "title": "ゴルフ",
+        "title": "サッカー日本代表",
         "caption": "",
-        "link": "https://sportsbull.jp/stats/golf/",
+        "link": "https://sportsbull.jp/sokuhou/",
         "image": {
-            "pc": "https://img.sportsbull.jp/img-sidemenu/golf.png",
-            "sp": "https://img.sportsbull.jp/img-sidemenu/golf.png",
-            "ios": "https://img.sportsbull.jp/img-sidemenu/golf.png",
-            "android": "https://img.sportsbull.jp/img-sidemenu/golf.png"
+          "pc": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/soccer.png"
         },
-        "alt": "ゴルフ"
+        "alt": "サッカー日本代表"
       },
+      {
+        "type": 2,
+        "title": "海外サッカー",
+        "caption": "",
+        "link": "https://sportsbull.jp/stats/worldsoccer/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/soccer.png"
+        },
+        "alt": "海外サッカー"
+      },
+      {
+        "type": 2,
+        "title": "大学サッカー",
+        "caption": "",
+        "link": "https://sportsbull.jp/stats/u_soccer/kantou/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/soccer.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/soccer.png"
+        },
+        "alt": "大学サッカー"
+      }
+    ]
+  },
+  {
+    "header": "バスケ速報 & データ",
+    "items": [
+      {
+        "type": 2,
+        "title": "Bリーグ",
+        "caption": "",
+        "link": "https://sportsbull.jp/stats/bleague/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/toplogo.png"
+        },
+        "alt": "Bリーグ"
+      }
+    ]
+  },
+  {
+    "header": "テニス速報 & データ",
+    "items": [
       {
         "type": 2,
         "title": "テニス",
         "caption": "",
         "link": "https://sportsbull.jp/stats/tennis/",
         "image": {
-            "pc": "https://img.sportsbull.jp/img-sidemenu/tennis.png",
-            "sp": "https://img.sportsbull.jp/img-sidemenu/tennis.png",
-            "ios": "https://img.sportsbull.jp/img-sidemenu/tennis.png",
-            "android": "https://img.sportsbull.jp/img-sidemenu/tennis.png"
+          "pc": "https://img.sportsbull.jp/img-sidemenu/tennis.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/tennis.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/tennis.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/tennis.png"
         },
         "alt": "テニス"
+      }
+    ]
+  },
+  {
+    "header": "ゴルフ速報 & データ",
+    "items": [
+      {
+        "type": 2,
+        "title": "ゴルフ",
+        "caption": "",
+        "link": "https://sportsbull.jp/stats/golf/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/golf.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/golf.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/golf.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/golf.png"
+        },
+        "alt": "ゴルフ"
+      }
+    ]
+  },
+  {
+    "header": "アメフト速報 & データ",
+    "items": [
+      {
+        "type": 2,
+        "title": "関西学生アメフト",
+        "caption": "",
+        "link": "https://sportsbull.jp/stats/ua_kansai/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/toplogo.png"
+        },
+        "alt": "関西学生アメフト"
+      }
+    ]
+  },
+  {
+    "header": "ラグビー速報 & データ",
+    "items": [
+      {
+        "type": 2,
+        "title": "大学ラグビー",
+        "caption": "",
+        "link": "https://sportsbull.jp/stats/u_rugby/kantou/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/toplogo.png"
+        },
+        "alt": "大学ラグビー"
+      }
+    ]
+  },
+  {
+    "header": "モータースポーツ速報 & データ",
+    "items": [
+      {
+        "type": 2,
+        "title": "F1",
+        "caption": "",
+        "link": "https://sportsbull.jp/motorsports/f1/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/toplogo.png"
+        },
+        "alt": "F1"
+      },
+      {
+        "type": 2,
+        "title": "SGT",
+        "caption": "",
+        "link": "https://sportsbull.jp/motorsports/sgt/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/toplogo.png"
+        },
+        "alt": "SGT"
+      },
+      {
+        "type": 2,
+        "title": "WEC",
+        "caption": "",
+        "link": "https://sportsbull.jp/motorsports/wec/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/toplogo.png"
+        },
+        "alt": "WEC"
+      },
+      {
+        "type": 2,
+        "title": "WRC",
+        "caption": "",
+        "link": "https://sportsbull.jp/motorsports/wrc/",
+        "image": {
+          "pc": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "sp": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "ios": "https://img.sportsbull.jp/img-sidemenu/toplogo.png",
+          "android": "https://img.sportsbull.jp/img-sidemenu/toplogo.png"
+        },
+        "alt": "WRC"
       }
     ]
   }

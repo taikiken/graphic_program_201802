@@ -15,30 +15,32 @@ import {View} from '../View';
 import {ViewRanking} from './ViewRanking';
 
 // app
-import {Empty} from '../../app/const/Empty';
-import {Message} from '../../app/const/Message';
+// import {Empty} from '../../app/const/Empty';
+// import {Message} from '../../app/const/Message';
 
 // action
 import {Widget} from '../../action/sidebar/Widget';
 
 // data
 // import {Result} from '../../data/Result';
-import {Safety} from '../../data/Safety';
+// import {Safety} from '../../data/Safety';
 
 // dae
-import {ArticleDae} from '../../dae/ArticleDae';
+// import {ArticleDae} from '../../dae/ArticleDae';
 
 // node
-import {RankingNode} from '../../node/sidebar/RankingNode';
-import {RecommendTitleNode} from '../../node/sidebar/RecommendTitleNode';
+// import {RankingNode} from '../../node/sidebar/RankingNode';
+// import {RecommendTitleNode} from '../../node/sidebar/RecommendTitleNode';
+import ComponentSidebarRecommend from '../../component/sidebar/ComponentSidebarRecommend';
 
 // Ga
 // import {Ga} from '../../ga/Ga';
 // import {GaData} from '../../ga/GaData';
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
+const ReactDOM = self.ReactDOM;
 /**
  * sidebar オススメ記事 5件を表示します
  * @since 2016-06-29
@@ -61,6 +63,11 @@ export class ViewRecommend extends ViewRanking {
      * @type {Ranking}
      */
     this.action = Widget.recommend( slug, this.done.bind( this ), this.fail.bind( this ), length );
+    /**
+     * componentDidMount callback
+     * @type {function}
+     */
+    this.didMount = this.didMount.bind(this);
   }
   /**
    * dom を render します
@@ -69,86 +76,106 @@ export class ViewRecommend extends ViewRanking {
   render( articles:Array ):void {
     this.executeSafely( View.BEFORE_RENDER, articles, this.slug );
 
-    let element = this.element;
-    let categorySlug = this.slug;
-    let _this = this;
-
-    // React Class
-    let ArticleDom = React.createClass( {
-      propTypes: {
-        list: React.PropTypes.array.isRequired,
-        home: React.PropTypes.bool.isRequired,
-        detail: React.PropTypes.bool.isRequired,
-        slug: React.PropTypes.string.isRequired
-      },
-      render: function() {
-
-        let list = this.props.list;
-        let home = this.props.home;
-        let detail = this.props.detail;
-        let thisSlug = this.props.slug;
-
-        return (
-
-          <div className="board-small widget-ranking">
-            {/* title */}
-            <RecommendTitleNode
-              slug={categorySlug}
-              label=""
-              title={Message.RECOMMEND_TITLE}
-            />
-            <ul className="post-list">
-              {
-                list.map( function( article, i ) {
-
-                  let dae = new ArticleDae( article );
-                  let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
-                  let empty = thumbnail === Empty.IMG_SMALL;
-
-                  // RankingNode instance を使い render
-                  return (
-                    <RankingNode
-                      key={'recommend-' + dae.id}
-                      index={i}
-                      id={String( dae.id )}
-                      categories={dae.categories.all}
-                      url={dae.url}
-                      date={dae.displayDate}
-                      title={dae.title}
-                      thumbnail={thumbnail}
-                      empty={empty}
-                      total={dae.commentsCount}
-                      home={home}
-                      detail={detail}
-                      thisSlug={thisSlug}
-                      categorySlug={categorySlug}
-                    />
-                  );
-
-                } )
-              }
-            </ul>
-          </div>
-
-        );
-
-      },
-      componentDidMount: function() {
-
-        // after mount
-        _this.executeSafely( View.DID_MOUNT );
-
-      }
-    } );
-
+    // let element = this.element;
+    // let categorySlug = this.slug;
+    // let _this = this;
+    //
+    // // React Class
+    // let ArticleDom = React.createClass( {
+    //   propTypes: {
+    //     list: React.PropTypes.array.isRequired,
+    //     home: React.PropTypes.bool.isRequired,
+    //     detail: React.PropTypes.bool.isRequired,
+    //     slug: React.PropTypes.string.isRequired
+    //   },
+    //   render: function() {
+    //
+    //     let list = this.props.list;
+    //     let home = this.props.home;
+    //     let detail = this.props.detail;
+    //     let thisSlug = this.props.slug;
+    //
+    //     return (
+    //
+    //       <div className="board-small widget-ranking">
+    //         {/* title */}
+    //         <RecommendTitleNode
+    //           slug={categorySlug}
+    //           label=""
+    //           title={Message.RECOMMEND_TITLE}
+    //         />
+    //         <ul className="post-list">
+    //           {
+    //             list.map( function( article, i ) {
+    //
+    //               let dae = new ArticleDae( article );
+    //               let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
+    //               let empty = thumbnail === Empty.IMG_SMALL;
+    //
+    //               // RankingNode instance を使い render
+    //               return (
+    //                 <RankingNode
+    //                   key={'recommend-' + dae.id}
+    //                   index={i}
+    //                   id={String( dae.id )}
+    //                   categories={dae.categories.all}
+    //                   url={dae.url}
+    //                   date={dae.displayDate}
+    //                   title={dae.title}
+    //                   thumbnail={thumbnail}
+    //                   empty={empty}
+    //                   total={dae.commentsCount}
+    //                   home={home}
+    //                   detail={detail}
+    //                   thisSlug={thisSlug}
+    //                   categorySlug={categorySlug}
+    //                   anotherCategories={dae.anotherCategories}
+    //                 />
+    //               );
+    //
+    //             } )
+    //           }
+    //         </ul>
+    //       </div>
+    //
+    //     );
+    //
+    //   },
+    //   componentDidMount: function() {
+    //
+    //     // after mount
+    //     _this.executeSafely( View.DID_MOUNT );
+    //
+    //   }
+    // } );
+    //
+    // // dom 生成
+    // ReactDOM.render(
+    //   React.createElement( ArticleDom, {
+    //     list: articles,
+    //     home: this.home,
+    //     detail: this.detail,
+    //     slug: this.slug } ),
+    //   element
+    // );
     // dom 生成
+    // @since 2017-09-14 - component へ移行
     ReactDOM.render(
-      React.createElement( ArticleDom, {
-        list: articles,
-        home: this.home,
-        detail: this.detail,
-        slug: this.slug } ),
-      element
+      <ComponentSidebarRecommend
+        list={articles}
+        home={this.home}
+        detail={this.detail}
+        slug={this.slug}
+        categorySlug={this.slug}
+        did={this.didMount}
+      />,
+      this.element,
     );
+  }
+  /**
+   * ComponentSidebarRanking.componentDidMount callback
+   */
+  didMount() {
+    this.executeSafely(View.DID_MOUNT);
   }
 }

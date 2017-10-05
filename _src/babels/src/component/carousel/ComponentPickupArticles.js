@@ -146,6 +146,7 @@ export class ComponentPickupArticles extends React.Component {
           mediaType={dae.mediaType}
           home={home}
           position={position}
+          anotherCategories={dae.anotherCategories}
         />
       );
     } else {

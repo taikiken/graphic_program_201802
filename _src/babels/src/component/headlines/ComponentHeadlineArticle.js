@@ -25,6 +25,9 @@ import { Num } from '../../util/Num';
 import { Ga } from '../../ga/Ga';
 import { GaData } from '../../ga/GaData';
 
+// dae
+import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
+
 // React
 const React = self.React;
 
@@ -80,7 +83,9 @@ export class ComponentHeadlineArticle extends React.Component {
       title: React.PropTypes.string.isRequired,
       thumbnail: React.PropTypes.string.isRequired,
       mediaType: React.PropTypes.string.isRequired,
-      home: React.PropTypes.bool.isRequired
+      home: React.PropTypes.bool.isRequired,
+      // anotherCategories - 2017-09-14
+      anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae).isRequired,
     };
   }
   // ---------------------------------------------------
@@ -180,6 +185,7 @@ export class ComponentHeadlineArticle extends React.Component {
                 index={this.props.index}
                 mediaType={this.props.mediaType}
                 recommend={false}
+                anotherCategories={this.props.anotherCategories}
               />
             </p>
             <h3

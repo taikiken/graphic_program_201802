@@ -1,7 +1,7 @@
 <table class="notcs">
 <?php if($gBILL!=1){ ?>
 <tr>
-<?php if(strlen($DIRECTORY)>0){ ?><td width="15"><a href="<?=$domain?><?=rewrite($DIRECTORY,$p[$i])?>" target="_blank"><img src="/shared/cms/img/icon_browser.gif" width="16" height="16" ></a><td><?php } ?>
+<?php if(strlen($DIRECTORY)>0){ ?><td width="14"><a href="<?=$domain?><?=rewrite($DIRECTORY,$p[$i])?>" target="_blank"><img src="<?=strlen($p[$i]["img1"])>0?sprintf("/prg_img/thumbnail2/%s",$p[$i]["img1"]):"/shared/cms/img/icon_browser.gif"?>" width="16"></a><td><?php } ?>
 <td>
 <?php
 

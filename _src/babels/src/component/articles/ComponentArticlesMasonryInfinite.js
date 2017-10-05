@@ -222,6 +222,7 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
                         index={i}
                         mediaType={dae.mediaType}
                         recommend={dae.isRecommend && this.props.home}
+                        anotherCategories={dae.anotherCategories}
                       />
                     </p>
                     <h3 className="post-heading">{dae.title}</h3>

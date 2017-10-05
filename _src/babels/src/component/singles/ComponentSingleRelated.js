@@ -97,6 +97,7 @@ export class ComponentSingleRelated extends React.Component {
                         id={`related-${dae.id}`}
                         categories={dae.categories.all}
                         slug={dae.categories.slug}
+                        anotherCategories={dae.anotherCategories}
                       />
                       <h3 className="post-heading">{dae.title}</h3>
                       <p className="post-date">{dae.displayDate}</p>

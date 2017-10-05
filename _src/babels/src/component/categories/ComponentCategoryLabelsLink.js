@@ -13,6 +13,9 @@
 // app
 import { Url } from '../../app/const/Url';
 
+// dae
+import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
+
 // React
 const React = self.React;
 /**
@@ -41,7 +44,9 @@ export class ComponentCategoryLabelsLink extends React.Component {
       id: React.PropTypes.string.isRequired,
       categories: React.PropTypes.array.isRequired,
       slug: React.PropTypes.string,
-      className: React.PropTypes.string
+      className: React.PropTypes.string,
+      // @since 2017-09-13
+      anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae),
     };
   }
   /**
@@ -77,6 +82,30 @@ export class ComponentCategoryLabelsLink extends React.Component {
   //  METHOD
   // ---------------------------------------------------
   /**
+   * 地域名称をカテゴリラベルの代わりに出力する
+   * @returns {?XML} span.category-label
+   * @since 2017-09-15
+   */
+  renderRegion() {
+    const { anotherCategories, id, index } = this.props;
+    if (!anotherCategories) {
+      return null;
+    }
+    // region
+    return anotherCategories.area.list.map((regionDae, i) => {
+      return (
+        <span
+          key={`labels-area-${id}-${index}-${i}`}
+          className="category-label category-label_area"
+        >
+          <a href={`/area/${regionDae.region}/`}>
+            {regionDae.region}
+          </a>
+        </span>
+      );
+    });
+  }
+  /**
    * p.post-category を出力します<br>
    * category 未設定の時は null を返します
    * @return {?XML} p.post-category を返します
@@ -91,19 +120,34 @@ export class ComponentCategoryLabelsLink extends React.Component {
     const id = props.id;
     const index = props.index;
     const slug = props.slug || 'x';
-    const className = this.props.className;
+    const className = props.className;
+    const anotherCategories = props.anotherCategories;
 
     return (
       <p className={`${className} ${className}-${slug}`}>
         {
           /* Array<SlugDae> */
-          categories.map((dae, i) => {
+          categories.map((category, i) => {
+            // console.log('ComponentCategoryLabelsLink', category, anotherCategories);
+            if (!category.label) {
+              return null;
+            }
+            if (category.slug === 'area' && (anotherCategories && anotherCategories.area.has)) {
+              return null;
+            }
+            const areaClassName = category.slug === 'area' ? ' category-label_area' : '';
             return (
-              <span key={`labels-${id}-${index}-${i}`} className={`category-label${ComponentCategoryLabelsLink.areaClassName(dae.slug)}`}>
-                <a href={Url.category(dae.slug)}>{dae.label}</a>
+              <span key={`labels-${id}-${index}-${i}`} className={`category-label${areaClassName}`}>
+                <a href={Url.category(category.slug)}>{category.label}</a>
               </span>
             );
           })
+        }
+        {
+          this.renderRegion()
+        }
+        {
+          // pref output
         }
       </p>
     );
