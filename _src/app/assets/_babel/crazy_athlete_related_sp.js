@@ -39,20 +39,21 @@ const related = (slug) => {
   archive.start();
 };
 
-// /**
-//  * div#widget-ranking-container
-//  * @param {string} slug category slug
-//  * @param {{}} [option={}] request class callback 引数
-//  */
-// const ranking = (slug, option = {}) => {
-//   const element = UT.app.Dom.ranking();
-//   if (!element) {
-//     return;
-//   }
-//   // ranking
-//   const archive = new UT.view.sidebar.ViewRanking(element, option, slug);
-//   archive.start();
-// };
+/**
+ * div#widget-ranking-container
+ * @param {string} slug category slug
+ * @param {{}} [option={}] request class callback 引数
+ */
+const ranking = (slug, option = {}) => {
+  const element = UT.app.Dom.ranking();
+  // console.log('ranking', element);
+  if (!element) {
+    return;
+  }
+  // ranking
+  const archive = new UT.view.sidebar.ViewRanking(element, option, slug);
+  archive.start();
+};
 
 /**
  * オススメ動画
@@ -62,6 +63,7 @@ const related = (slug) => {
  */
 const video = (slug, option = {}) => {
   const element = UT.app.Dom.video();
+  // console.log('video', element);
   if (!element) {
     return;
   }
@@ -78,6 +80,7 @@ const video = (slug, option = {}) => {
  */
 const recommend = (slug, option = {}) => {
   const element = UT.app.Dom.recommend();
+  // console.log('recommend', element);
   if (!element) {
     return;
   }
@@ -93,7 +96,7 @@ const recommend = (slug, option = {}) => {
  * @param {string} slug category slug
  */
 const sidebar = (slug) => {
-  // ranking(slug);
+  ranking(slug);
   video(slug);
   recommend(slug);
 };

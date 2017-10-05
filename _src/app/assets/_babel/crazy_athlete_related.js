@@ -35,10 +35,10 @@ const related = (slug) => {
     return;
   }
   // 関連ニュース出力
-  const archive = new UT.view.ViewCategory(slug, element, elementMore);
+  const archive = new UT.sp.view.category.SPViewCategoryWithSlug(slug, element, elementMore);
   archive.start();
 };
-
+//
 // /**
 //  * div#widget-ranking-container
 //  * @param {string} slug category slug
@@ -46,6 +46,7 @@ const related = (slug) => {
 //  */
 // const ranking = (slug, option = {}) => {
 //   const element = UT.app.Dom.ranking();
+//   // console.log('ranking', element);
 //   if (!element) {
 //     return;
 //   }
@@ -53,50 +54,52 @@ const related = (slug) => {
 //   const archive = new UT.view.sidebar.ViewRanking(element, option, slug);
 //   archive.start();
 // };
-
-/**
- * オススメ動画
- * div#widget-recommend-container
- * @param {string} slug category slug
- * @param {{}} [option={}] request class callback 引数
- */
-const video = (slug, option = {}) => {
-  const element = UT.app.Dom.video();
-  if (!element) {
-    return;
-  }
-  // videos
-  const archive = new UT.view.sidebar.ViewVideos(element, option, slug);
-  archive.start();
-};
-
-/**
- * オススメ記事
- * - `div#widget-recommend-list-container`
- * @param {string} slug category slug
- * @param {{}} [option={}] request class callback 引数
- */
-const recommend = (slug, option = {}) => {
-  const element = UT.app.Dom.recommend();
-  if (!element) {
-    return;
-  }
-  // videos
-  const archive = new UT.view.sidebar.ViewRecommend(element, option, slug);
-  archive.start();
-};
-
-/**
- * sidebar を出力します
- * - オススメ記事
- * - 人気の記事
- * @param {string} slug category slug
- */
-const sidebar = (slug) => {
-  // ranking(slug);
-  video(slug);
-  recommend(slug);
-};
+//
+// /**
+//  * オススメ動画
+//  * div#widget-recommend-container
+//  * @param {string} slug category slug
+//  * @param {{}} [option={}] request class callback 引数
+//  */
+// const video = (slug, option = {}) => {
+//   const element = UT.app.Dom.video();
+//   // console.log('video', element);
+//   if (!element) {
+//     return;
+//   }
+//   // videos
+//   const archive = new UT.view.sidebar.ViewVideos(element, option, slug);
+//   archive.start();
+// };
+//
+// /**
+//  * オススメ記事
+//  * - `div#widget-recommend-list-container`
+//  * @param {string} slug category slug
+//  * @param {{}} [option={}] request class callback 引数
+//  */
+// const recommend = (slug, option = {}) => {
+//   const element = UT.app.Dom.recommend();
+//   // console.log('recommend', element);
+//   if (!element) {
+//     return;
+//   }
+//   // videos
+//   const archive = new UT.view.sidebar.ViewRecommend(element, option, slug);
+//   archive.start();
+// };
+//
+// /**
+//  * sidebar を出力します
+//  * - オススメ記事
+//  * - 人気の記事
+//  * @param {string} slug category slug
+//  */
+// const sidebar = (slug) => {
+//   ranking(slug);
+//   video(slug);
+//   recommend(slug);
+// };
 
 /**
  * local 開発に対応させるためリクエスト先を変更します
@@ -116,4 +119,4 @@ const host = () => {
 // crazy-athlete 関連ニュースを出力する
 host();
 related('crazy');
-sidebar('crazy');
+// sidebar('crazy');

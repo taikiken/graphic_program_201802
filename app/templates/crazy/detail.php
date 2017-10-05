@@ -278,20 +278,20 @@
                     <!-- sidebar recommend, オススメ記事 -->
                     <div id="widget-recommend-list-container"></div>
                     <!--/recommend-->
+                    <div id="widget-ranking-container"></div>
+                    <!--/ranking-->
+                    <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
+                        <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+                    </div>
                   <?php
                   /*
                    * sidebar videos, オススメ動画
                    * crazy 表示しない
                    * https://github.com/undotsushin/undotsushin/issues/862#issuecomment-229568814
                    * なので削除しました
-                    <div id="widget-ranking-container"></div>
-                    <!--/ranking-->
-                  */
-                  ?>
-                    <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
-                        <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-                    </div>
                     <div id="widget-recommend-container"></div>
+                   */
+                  ?>
                     <!--/videos-->
                     <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
                         <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
