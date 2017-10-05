@@ -299,7 +299,7 @@ const ga = (href, event = null) => {
     event.preventDefault();
   }
   // event.preventDefault();
-  Ga.click('under_article_ranking', location.href, 'click', href, true);
+  Ga.click('SPComponentSinglesRanking.ga', 'under_article_ranking', location.href, 'click', href, true);
 };
 // -------------------------------------------------------------------
 

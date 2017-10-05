@@ -79,7 +79,7 @@ const ga = (href, event = null) => {
   if (Env.mode !== Env.PRODUCTION) {
     event.preventDefault();
   }
-  Ga.click('under_article_recommend', location.href, 'click', href, true);
+  Ga.click('SPComponentSinglesRecommend.ga', 'under_article_recommend', location.href, 'click', href, true);
 };
 // -------------------------------------------------------------------
 
