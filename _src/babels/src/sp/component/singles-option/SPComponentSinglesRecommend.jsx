@@ -102,7 +102,7 @@ const BoardItem = ({ single, index }) => {
       <a
         href={single.url}
         className="post"
-        onClick={() => (ga(single.url))}
+        onClick={(event) => (ga(single.url, event))}
       >
         <ComponentArticleThumbnail
           mediaType={single.mediaType}
