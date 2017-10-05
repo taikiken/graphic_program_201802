@@ -177,7 +177,7 @@ if(strlen($f["name"])>0){
 # ref. #2559
   if ( $category === 'crazy' ) :
     $categoriesinfo['webviews']     = array(
-        '/crazy/webview/a',
+        '/crazy/webview/',
     );
   endif;
 
