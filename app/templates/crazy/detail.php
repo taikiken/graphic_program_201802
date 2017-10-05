@@ -226,7 +226,12 @@
 
                     <div id="board-container"></div>
                     <div id="board-container-more">
-<!--                      <div id="more" class="board-btn-viewmore loading-root "><a class="board-btn-viewmore-link" href="#more"><span>VIEW MORE</span></a><span class="loading-spinner">&nbsp;</span></div>-->
+                      <?php
+                      /*
+                       * タグごと[JS]で出力するので削除します
+                      <div id="more" class="board-btn-viewmore loading-root "><a class="board-btn-viewmore-link" href="#more"><span>VIEW MORE</span></a><span class="loading-spinner">&nbsp;</span></div>
+                      */
+                      ?>
                     </div><!--/archive-more-->
 
                 </div>
@@ -273,8 +278,16 @@
                     <!-- sidebar recommend, オススメ記事 -->
                     <div id="widget-recommend-list-container"></div>
                     <!--/recommend-->
+                  <?php
+                  /*
+                   * sidebar videos, オススメ動画
+                   * crazy 表示しない
+                   * https://github.com/undotsushin/undotsushin/issues/862#issuecomment-229568814
+                   * なので削除しました
                     <div id="widget-ranking-container"></div>
                     <!--/ranking-->
+                  */
+                  ?>
                     <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
                         <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
                     </div>
@@ -542,7 +555,7 @@
         }
     });
 </script>
-<script src="/assets/js/crazy_athlete_related.bundle.js"></script>
+<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js" data-label="CRAZY ATHLETES"></script>
 </body>
 </html>
 <?php

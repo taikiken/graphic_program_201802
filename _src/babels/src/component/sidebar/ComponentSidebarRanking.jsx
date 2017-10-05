@@ -78,6 +78,7 @@ export default class ComponentSidebarRanking extends React.Component {
         categoryTitle = <span className="widget-ranking-heading-ruby-label"> / {categoryLabel}</span>;
       }
     }
+    console.log('ComponentSidebarRanking.title', categorySlug, Dom.categoryLabel());
     return categoryTitle;
   }
   // ---------------------------------------------------
