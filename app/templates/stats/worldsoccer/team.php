@@ -11,7 +11,7 @@
 
       <?php include __DIR__.'/_nav.php'; ?>
 
-      <div id="Widget_worldsoccer_team" data-league="<?php echo $page['league']; ?>" data-editionid="<?php echo $page['edition_id']; ?>"></div>
+      <div id="Widget_worldsoccer_team" data-league="<?php echo $page['league']; ?>" data-term="<?php echo $page['season']; ?>" data-editionid="<?php echo $page['edition_id']; ?>"></div>
       <script src="/stats/assets/worldsoccer/js/Widget_worldsoccer_team.js"></script>
 
     </section><!-- /.main-sec -->
