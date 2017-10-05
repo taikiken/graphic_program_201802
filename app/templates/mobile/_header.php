@@ -34,7 +34,8 @@
   $template_name == 'mypage' ||
   $template_name == 'mypage.activities' ||
   $template_name == 'notifications' ||
-  $template_name == 'logout'
+  $template_name == 'logout' ||
+  $template_name == 'crazy'
   ) {
     $page_has_header = true;
   }
@@ -134,6 +135,14 @@ if ( $page['template'] == 'p'
   <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
 
   <?php
+elseif($page['category']['slug'] == 'crazy'):
+    ?>
+<link rel="stylesheet" href="/assets/css/crazy.css">
+<?php
+elseif($page['template'] == 'crazy'):
+?>
+<link rel="stylesheet" href="/assets/css/player.css">
+    <?php
 endif;
 // eof brightcove
 // ---------------------------------------------------------------------------

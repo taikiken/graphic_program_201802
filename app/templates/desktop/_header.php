@@ -7,7 +7,6 @@
 <?php include_once __DIR__."/../_head.php"; ?>
 
 <?php if(count($page['photo']) > 0):?>
-
   <link rel="stylesheet" href="/assets/css/style_pc.css?v=<?php echo $page['version']; ?>">
   <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
 <?php endif;?>
@@ -157,19 +156,23 @@ if ( $template_name == 'p' || $template_name == 'comment' ) {
 
 // in category
 if ( $template_name == 'category' ) {
-  // @since 2016-09-01
-  // https://github.com/undotsushin/undotsushin/issues/1053
-  $whole_classes[] = 'layout-list';
-  // ---[end 2016-09-01]---
 
-  // template_classname があれば
-  if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
-    $whole_classes[] = $page['template_classname'];
-  }
+    //crazy athletes除外
+    if($page['category']['slug'] != 'crazy') {
+      // @since 2016-09-01
+      // https://github.com/undotsushin/undotsushin/issues/1053
+      $whole_classes[] = 'layout-list';
+      // ---[end 2016-09-01]---
+
+      // template_classname があれば
+      if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
+        $whole_classes[] = $page['template_classname'];
+      }
 
   // @see https://github.com/undotsushin/undotsushin/issues/1891#issuecomment-298291706
   // @since 2017-05-08 - category slug を追加する
-  $whole_classes[] = $page['category']['slug'];
+        $whole_classes[] = $page['category']['slug'];
+    }
 } elseif ( $template_name == 'search' ) {
   // @since 2016-09-01
   // https://github.com/undotsushin/undotsushin/issues/1053
@@ -215,7 +218,8 @@ if (
   $template_name == 'mypage' ||
   $template_name == 'mypage.activities' ||
   $template_name == 'notifications' ||
-  $template_name == 'logout'
+  $template_name == 'logout' ||
+  $template_name == 'crazy'
 ) :
 ?>
   <header id="header-container" class="head-sec">
