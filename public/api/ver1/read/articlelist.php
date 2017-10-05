@@ -35,17 +35,19 @@ if(strlen($api)>0){
                 {
                     $ids = join(',', $json[$player_id]);
                     $sql=sprintf("select * from %s%s",sprintf($articletable3,set_isbookmark($uid),$ids, $c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+                    $nsql=sprintf("select count(id) as n from repo_n where m1=%s and id in(%s)",$c[0],$ids);
                 }
                 else
                 {
                     $sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+                    $nsql=sprintf("select num as n from u_latestpost where m1=%s",$c[0]);
                 }
             }
             else
             {
                 $sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+                $nsql=sprintf("select num as n from u_latestpost where m1=%s",$c[0]);
             }
-			$nsql=sprintf("select num as n from u_latestpost where m1=%s",$c[0]);
 
 /*						
 			if($category=="crazy"){

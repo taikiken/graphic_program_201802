@@ -217,11 +217,6 @@
                         <img src="https://img.sportsbull.jp/img/img2017081510023900588800.jpg" alt="三井不動産『BE THE CHANGE - さぁ、街から世界を変えよう。』" class="pc_hide"></a>
                 </div><!-- /sponsor-link-->
 
-
-                <div class="ttl-wrapper pc_hide">
-                    <div class="ttl"><i></i>関連記事</div>
-                </div>
-
                 <!-- 関連記事一覧 -->
                 <div class="board">
                   <div id="board-container"></div>
