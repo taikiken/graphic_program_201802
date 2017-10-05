@@ -24,6 +24,10 @@ _no
 _docs
 
 # babels
-babels-infinite/01_compile/*
-babels-infinite/02_dest/*
-babels-infinite/_not_use/*
+babels-mlb/01_compile/*
+babels-mlb/02_dest/*
+babels-mlb/_not_use/*
+
+babels-popup/01_compile/*
+babels-popup/02_dest/*
+babels-popup/_not_use/*

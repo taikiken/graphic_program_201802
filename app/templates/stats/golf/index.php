@@ -47,7 +47,7 @@
         <ul class="stats__nav__list">
           <li class="stats__nav__item_1"><a class="show-for-large" href="./?sj_PageID=pc_2017_schedule_21">国内男子</a><a class="show-for-small" href="./?sj_PageID=sp_2017_schedule_21">国内男子</a></li>
           <li class="stats__nav__item_2"><a class="show-for-large" href="./?sj_PageID=pc_2017_schedule_23">国内女子</a><a class="show-for-small" href="./?sj_PageID=sp_2017_schedule_23">国内女子</a></li>
-          <li class="stats__nav__item_3"><a class="show-for-large" href="./?sj_PageID=pc_2017_schedule_11">海外男子</a><a class="show-for-small" href="./?sj_PageID=sp_2017_schedule_11">海外男子</a></li>
+          <li class="stats__nav__item_3"><a class="show-for-large" href="./?sj_PageID=pc_2018_schedule_11">海外男子</a><a class="show-for-small" href="./?sj_PageID=sp_2018_schedule_11">海外男子</a></li>
           <li class="stats__nav__item_4"><a class="show-for-large" href="./?sj_PageID=pc_2017_schedule_13">海外女子</a><a class="show-for-small" href="./?sj_PageID=sp_2017_schedule_13">海外女子</a></li>
         </ul>
       </div>

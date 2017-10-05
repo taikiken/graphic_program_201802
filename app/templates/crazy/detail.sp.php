@@ -224,6 +224,8 @@
 
                 <!-- 関連記事一覧 -->
                 <div class="board">
+                  <div id="board-container"></div>
+                  <div id="board-container-more"></div>
                 </div>
 
                 <!--  / メインコンテンツ ---------------------------------------------------------->
@@ -537,6 +539,7 @@
         }
     });
 </script>
+<script id="js-exe" src="/assets/js/crazy_athlete_related_sp.bundle.js" data-label="CRAZY ATHLETES"></script>
 </body>
 </html>
 <?php
