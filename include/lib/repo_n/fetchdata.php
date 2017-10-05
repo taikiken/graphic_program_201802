@@ -7,7 +7,7 @@
 
 if($TABLE=="repo_n"){
 
-	$title =sprintf("[%s-%s-%s %s:%s] ",$p[$i]["a1"],$p[$i]["a2"],$p[$i]["a3"],$p[$i]["a4"],$p[$i]["a5"]);
+	$title =sprintf("%s：[%s-%s-%s %s:%s] ",$p[$i]["id"],$p[$i]["a1"],$p[$i]["a2"],$p[$i]["a3"],$p[$i]["a4"],$p[$i]["a5"]);
 	$title.=mod_HTML($p[$i]["title"],1);
 	
 	$sql=sprintf("select title from u_media where id=%s",$p[$i]["d2"]);
