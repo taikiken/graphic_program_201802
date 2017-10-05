@@ -1,13 +1,13 @@
 <table class="notcs">
 <?php if($gBILL!=1){ ?>
 <tr>
-<?php if(strlen($DIRECTORY)>0){ ?><td width="15"><a href="<?=$domain?><?=rewrite($DIRECTORY,$p[$i])?>" target="_blank"><img src="/shared/cms/img/icon_browser.gif" width="16" height="16" ></a><td><?php } ?>
+<?php if(strlen($DIRECTORY)>0){ ?><td width="14"><a href="<?=$domain?><?=rewrite($DIRECTORY,$p[$i])?>" target="_blank"><img src="<?=strlen($p[$i]["img1"])>0?sprintf("/prg_img/thumbnail2/%s",$p[$i]["img1"]):"/shared/cms/img/icon_browser.gif"?>" width="16"></a><td><?php } ?>
 <td>
 <?php
 
 if($TABLE=="repo_n"){
 
-	$title =sprintf("[%s-%s-%s %s:%s] ",$p[$i]["a1"],$p[$i]["a2"],$p[$i]["a3"],$p[$i]["a4"],$p[$i]["a5"]);
+	$title =sprintf("%s：[%s-%s-%s %s:%s] ",$p[$i]["id"],$p[$i]["a1"],$p[$i]["a2"],$p[$i]["a3"],$p[$i]["a4"],$p[$i]["a5"]);
 	$title.=mod_HTML($p[$i]["title"],1);
 	
 	$sql=sprintf("select title from u_media where id=%s",$p[$i]["d2"]);

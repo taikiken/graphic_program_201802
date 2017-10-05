@@ -6,7 +6,7 @@ include $INCLUDEPATH."public/import.php";
 $MEDIAID=61;
 $MEDIANAME="nordot";
 $bullid="262792796378236410";
-$ID=isset($_GET["id"])?$_GET["id"]:0;
+$ID=isset($_GET["id"])?$_GET["id"]:3;
 
 $area=array("北海道","東北","関東","北陸・甲信越","東海","関西","中国","四国","九州・沖縄");
 
@@ -88,12 +88,14 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	unset($s);
 	
+	if(is_array($data["channel"]["item"][$i]["description"]))continue;
+	
 	$s["title"]=$data["channel"]["item"][$i]["title"];
 	$s["t9"]=sprintf("%s?c=%s",$data["channel"]["item"][$i]["link"],$bullid);
 	$s["t7"]=$data["channel"]["item"][$i]["guid"];
 	
 	$modbody=preg_replace("/(\r|\n|\t)/","",$data["channel"]["item"][$i]["description"]);
-	
+
 	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
 	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
 	$s["a_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
@@ -101,8 +103,10 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	if($data["channel"]["item"][$i]["img"]){
 		$s["t30"]=$data["channel"]["item"][$i]["img"]["@attributes"]["url"];
 	}
+	$pref=$area[$ID]!="北海道"?get_pref($data["channel"]["item"][$i]["creator"]):"北海道";
 	$s["t10"]=$data["channel"]["item"][$i]["creator"];
 	$s["t11"]=$area[$ID];
+	if($pref!="北海道"&&strlen($pref)>0)$s["t12"]=$pref;
 	
 	$sql=sprintf("select id,title,(select body from repo_body where pid=repo_n.id) as body from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$s["t7"]);
 	$o->query($sql);
@@ -137,7 +141,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		splittime($s["m_time"],$s["a_time"]);
 		$sqla[]=makesql($s,0);
 		$sqla[]=sprintf("insert into repo_body(pid,body) values(currval('repo_n_id_seq'),'%s');",pg_escape_string($modbody));
-		$sqla[]=sprintf("insert into u_area(pageid,region,pref) values(currval('repo_n_id_seq'),'%s','%s');",$area[$ID],$area[$ID]!="北海道"?get_pref($data["channel"]["item"][$i]["creator"]):"北海道");	
+		$sqla[]=sprintf("insert into u_area(pageid,region,pref) values(currval('repo_n_id_seq'),'%s','%s');",$area[$ID],$pref);	
 		
 	}
 	
