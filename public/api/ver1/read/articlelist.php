@@ -31,7 +31,7 @@ if(strlen($api)>0){
                 $json = json_decode($json, true);
                 $path_arr = array_reverse(explode('/', $_SERVER['HTTP_REFERER']));
                 $player_id = $path_arr[1];
-                if(isset($json[$player_id]) && is_array($json[$player_id]))
+                if(isset($json[$player_id]) && is_array($json[$player_id]) && count($json[$player_id]) > 0)
                 {
                     $ids = join(',', $json[$player_id]);
                     $sql=sprintf("select * from %s%s",sprintf($articletable3,set_isbookmark($uid),$ids, $c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
