@@ -59,8 +59,12 @@ $app->group('/crazy', function () use($app, $ImgPath) {
                 'ua'                 => $app->model->property('ua')
             ));
 
+            if ( $app->model->property('ua') === 'desktop' ) :
+                return $this->renderer->render($response, 'crazy/detail.php', $args);
+            else :
+                return $this->renderer->render($response, 'crazy/detail.sp.php', $args);
+            endif;
 
-            return $this->renderer->render($response, 'crazy/detail.php', $args);
         });
     });
 
