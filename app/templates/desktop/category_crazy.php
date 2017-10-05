@@ -12,7 +12,7 @@
 ?>
 <?php
 // PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
-include_once __DIR__.'/_category-heading.php';
+i//nclude_once __DIR__.'/_category-heading.php';
 ?>
 <?php
 // https://github.com/undotsushin/undotsushin/issues/1210
