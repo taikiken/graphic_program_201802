@@ -224,12 +224,10 @@
 
                 <div class="board-large">
 
-                    <div id="board-container">
-                        <div data-reactroot="" class="board-large-column" style="position: relative;">
-
-                        </div>
-                    </div>
-                    <div id="board-container-more"><div data-reactroot="" id="more" class="board-btn-viewmore loading-root "><a class="board-btn-viewmore-link" href="#more"><span>VIEW MORE</span></a><span class="loading-spinner">&nbsp;</span></div></div><!--/archive-more-->
+                    <div id="board-container"></div>
+                    <div id="board-container-more">
+<!--                      <div id="more" class="board-btn-viewmore loading-root "><a class="board-btn-viewmore-link" href="#more"><span>VIEW MORE</span></a><span class="loading-spinner">&nbsp;</span></div>-->
+                    </div><!--/archive-more-->
 
                 </div>
 
@@ -544,6 +542,7 @@
         }
     });
 </script>
+<script src="/assets/js/crazy_athlete_related.bundle.js"></script>
 </body>
 </html>
 <?php
