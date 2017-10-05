@@ -48,6 +48,10 @@ var _Modal = require('./banner/ui/Modal');
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
+var _Title = require('./banner/app/Title');
+
+var _Title2 = _interopRequireDefault(_Title);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -91,7 +95,7 @@ var Main = function () {
         // test
         console.warn('local dev mode', location.hostname, location.port);
         Main.modal();
-      } else if (!_Black2.default.detect() && !_Visited2.default.already() && self.googletag) {
+      } else if (!_Black2.default.detect() && !_Title2.default.detect() && !_Visited2.default.already() && self.googletag) {
         // googletag 条件追加する
         _Visited2.default.arrive();
         Main.modal();
