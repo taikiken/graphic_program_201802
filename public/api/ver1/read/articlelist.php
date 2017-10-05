@@ -25,7 +25,26 @@ if(strlen($api)>0){
 
 		if($type===""){
 
-			$sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+            if($category == "crazy" && strpos($_SERVER['HTTP_REFERER'], '/crazy/detail/'))
+            {
+                $json = file_get_contents($ImgPath . '/json/ca_article_ids.json');
+                $json = json_decode($json, true);
+                $path_arr = array_reverse(explode('/', $_SERVER['HTTP_REFERER']));
+                $player_id = $path_arr[1];
+                if(isset($json[$player_id]) && is_array($json[$player_id]))
+                {
+                    $ids = join(',', $json[$player_id]);
+                    $sql=sprintf("select * from %s%s",sprintf($articletable3,set_isbookmark($uid),$ids, $c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+                }
+                else
+                {
+                    $sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+                }
+            }
+            else
+            {
+                $sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+            }
 			$nsql=sprintf("select num as n from u_latestpost where m1=%s",$c[0]);
 
 /*						

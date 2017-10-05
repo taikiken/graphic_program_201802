@@ -118,6 +118,62 @@ left join (select
 	pref
 from u_area) as t5 on t1.id=t5.pageid";
 
+$articletable3="
+(select 
+	%s
+	id,
+	title,
+	(select body from repo_body where pid=repo_n.id limit 1 offset 0) as body,
+	(select video from u_view where pageid=repo_n.id limit 1 offset 0) as videoflag,
+	t16 as b1,
+	img1,
+	imgflag,
+	(select name from repo where id=d1) as type,
+	d2,
+	d3,
+	t1,
+	m1,
+	m2,
+	t10,t11,t12,t13,t14,t15,
+	a1,a2,a3,a4,a5,a6,
+	swf as video,
+	youtube,
+	facebook,
+	brightcove,
+	m_time,
+	t8 as videocaption,
+	t9 
+from repo_n where flag=1 and id in(%s)%s%s%s) as t1
+
+left join (select 
+	id as userid,
+	t1 as url,
+	cid as typeid,
+	title as name,
+	img1 as icon 
+from u_media) as t2 on t1.d2=t2.userid
+
+left join (select 
+	id as categoryid,
+	name as category,
+	title as categorylabel,
+	name_e as slug,
+	no_image as no_image
+from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
+
+left join (select 
+	id as categoryid2,
+	name as category2,
+	title as categorylabel2,
+	name_e as slug2
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
+
+left join (select 
+	pageid,
+	region,
+	pref
+from u_area) as t5 on t1.id=t5.pageid";
+
 $articletable2c="(select id,d2 from repo_n where cid=1 and flag=1%s%s%s) as t1,(select id as userid from u_media where flag=1) as t2 where t1.d2=t2.userid";
 
 $commentfield="isreaction,id,comment,userid,pageid,regitime,slug,good,bad,reply,typeid,type,name,profile,icon";
