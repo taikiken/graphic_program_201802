@@ -464,7 +464,7 @@ $app->group('/stats', function () use($app) {
             'keywords'           => $page['league'][$league].',海外サッカー,欧州サッカー,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
             'league'             => $league,
             'path'               => $args,
-            'match_id'           => $args['match_id'],
+            'match_id'           => $match_id,
             'breadcrumb'         => $breadcrumb,
           ));
           return $this->renderer->render($response, 'stats/worldsoccer/schedule_detail.php', $args);
