@@ -226,7 +226,7 @@
                     </div>
                 </section>
                 <!--  /  recommend   -->
-
+                <?php /*
                 <section class="section_crazy_popular">
                     <div class="ttl-wrapper pc_hide">
                         <h2 class="ttl popular"><i></i>人気の記事</h2>
@@ -235,6 +235,7 @@
                     <div id="category-container"></div>
                     <div id="board-container-more"></div>
                 </section>
+                */?>
                 <!-- / popular  -->
 
                 <div class="back_btn"><a href="/category/crazy/">CRAZY ATHLETES トップへ戻る</a></div>
