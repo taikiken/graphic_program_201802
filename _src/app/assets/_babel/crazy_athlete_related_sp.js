@@ -116,7 +116,38 @@ const host = () => {
   }
 };
 
+// ------------------------------
+let $ = null;
+
+/**
+ * `p#js-pagetop` > `a` click event handler
+ * scroll 位置を 0 まで animation させます
+ * @param {Event} event click event
+ */
+const onClick = (event) => {
+  event.preventDefault();
+  $('html, body').animate({
+    scrollTop: 0,
+  }, 320, );
+};
+
+/**
+ * page top button を活性化させます
+ */
+const pageTop = () => {
+  const button = document.getElementById('js-page_top');
+  if (!button) {
+    return;
+  }
+  $ = window.jQuery;
+  if (!$) {
+    return;
+  }
+  $(button).on('click', onClick);
+};
+
 // crazy-athlete 関連ニュースを出力する
 host();
 related('crazy');
 // sidebar('crazy');
+pageTop();
