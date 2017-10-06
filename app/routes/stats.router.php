@@ -482,27 +482,30 @@ $app->group('/stats', function () use($app) {
 
           $language_code = '';
           $team = '';
+          $season = '';
 
           if (!empty(file_get_contents($edition_list_json, false, null, 0, 1))){
             $edition_list_json = json_decode(file_get_contents($edition_list_json));
             $language_code = $edition_list_json->$edition_id->languageCode;
+            $season = $edition_list_json->$edition_id->season;
 
           }
           if (!empty($language_code)) {
-            $api = 'http://APIdemo:Var%40HaanjUhtajaXIvat@sportsbull.api.infostradasports.com/svc/Football.svc/json/GetTeamList?editionId={editionId}&languageCode={languageCode}';
+            $team_list_s3key = 'worldsoccer/json/{league}/{season}/team_list.json';
 
             $search = [
-              '{editionId}',
-              '{languageCode}',
+              '{league}',
+              '{season}',
             ];
             $replace = [
-              $edition_id,
-              $language_code,
+              $league,
+              $season,
             ];
-            $api = str_replace($search, $replace , $api);
+            $team_list_s3key = str_replace($search, $replace , $team_list_s3key);
+            $team_list_json = $S3Module->getUrl($team_list_s3key);
 
-            if (!empty(file_get_contents($api, false, null, 0, 1))){
-              $res = json_decode(file_get_contents($api));
+            if (!empty(file_get_contents($team_list_json, false, null, 0, 1))){
+              $res = json_decode(file_get_contents($team_list_json));
               foreach ($res as $row) {
                 if ($row->n_TeamID == $team_id) {
                   $team = $row->c_Team;
