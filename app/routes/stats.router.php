@@ -519,7 +519,7 @@ $app->group('/stats', function () use($app) {
             'premier-league'   => '1eng',
             'bundesliga'       => '1ger',
             'champions-league' => 'cl',
-            'la-liga'          => '1spa',
+            'la-liga'          => '1esp',
             'serie-a'          => '1ita',
           );
           $widget_id = $widget_id_map[$league];
