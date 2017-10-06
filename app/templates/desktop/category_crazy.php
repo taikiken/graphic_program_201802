@@ -97,8 +97,8 @@ if ($page['category']['slug'] == 'all') {
                             </div>
                         </a></li>
 
-                    <li><a href="/crazy/detail/14/">
-                            <div class="img"><img src="/assets/img/pickup_4.png" alt=""></div>
+                    <li><a href="/crazy/detail/2/">
+                            <div class="img"><img src="/assets/img/pickup_2.png" alt=""></div>
                             <div class="txt_area">
                                 <h3 class="name">山中慎介</h3>
                                 <p class="genre">ボクシング</p>
