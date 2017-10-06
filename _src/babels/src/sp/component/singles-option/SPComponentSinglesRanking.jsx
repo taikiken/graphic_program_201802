@@ -15,6 +15,7 @@ import { Safety } from '../../../data/Safety';
 
 // app
 import { Empty } from '../../../app/const/Empty';
+import { Env } from '../../../app/Env';
 
 // dae
 import { ArticleDae } from '../../../dae/ArticleDae';
@@ -290,10 +291,15 @@ CarouselAd.propTypes = {
  * onclick="UT.Ga.click('under_article_ranking', '[読んでいる記事URL]', 'click', '[リンク先記事URL]', true);"
  * ```
  * @param {string} href リンク先記事URL
+ * @param {Event} [event=null] click event
  * @since 2017-09-25
  */
-const ga = (href) => {
-  Ga.click('under_article_ranking', location.href, 'click', href, true);
+const ga = (href, event = null) => {
+  if (Env.mode !== Env.PRODUCTION) {
+    event.preventDefault();
+  }
+  // event.preventDefault();
+  Ga.click('SPComponentSinglesRanking.ga', 'under_article_ranking', location.href, 'click', href, true);
 };
 // -------------------------------------------------------------------
 
@@ -320,7 +326,7 @@ const CarouselItem = ({ single, index }) => {
       <a
         href={single.url}
         className="post"
-        onClick={() => (ga(single.url))}
+        onClick={(event) => (ga(single.url, event))}
       >
         <ComponentArticleThumbnail
           mediaType={single.mediaType}
@@ -355,7 +361,6 @@ CarouselItem.propTypes = {
 
 /**
  * SP: 記事詳細一覧「よく読まれている記事」carousel
- * TODO: state を使用しない carousel
  * - dead end
  * - swipe 移動
  * @since 2017-09-13
