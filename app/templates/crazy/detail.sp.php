@@ -10,7 +10,7 @@
     <title>CRAZY ATHLETES | スポーツブル / SPORTS BULL</title>
     <script src="/assets/js/libs/vendor.react.js"></script>
     <script src="/assets/js/bundle/main.bundle.js"></script>
-    <link rel="stylesheet" href="https://sportsbull.jp/assets/css/ui.css">
+    <link rel="stylesheet" href="/assets/sp/css/ui.css">
     <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
     <meta name="description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
     <meta property="fb:app_id" content="842032129256034">
@@ -281,186 +281,54 @@
         </div>
     </div>
     <!-- /.body-sec -->
-    <!-- /.foot-sec -->
-    <footer id="footer-container" class="foot-sec show-for-large">
+    <footer class="foot-sec">
         <div class="foot-sec-inner">
             <nav class="foot-breadCrumb">
-                <ol itemscope itemtype="http://schema.org/breadCrumbList">
-                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                        <a itemprop="item" href="/">
-                            <span itemprop="name">TOP</span>
-                            <meta itemprop="position" content="1" />
-                        </a>
-                    </li>
-                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                        <a itemprop="item" href="./">
-                            <span itemprop="name">CRAZY ATHLETES</span>
-                            <meta itemprop="position" content="2" />
-                        </a>
-                    </li>
+                <ol itemscope="" itemtype="http://schema.org/breadCrumbList">
+                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1"></a></li>
+                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="/category/crazy"><span itemprop="name">CRAZY ATHLETES</span><meta itemprop="position" content="2"></a></li>
+
                 </ol>
             </nav>
-            <!-- /.foot-breadCrumb -->
             <div class="foot-pr">
                 <div class="foot-pr-inner">
-                    <figure>
-                        <img src="https://sportsbull.jp/assets/images/common/footer-overview-figure.png" alt="">
-                    </figure>
-                    <div class="text-block">
-                        <h3 class="foot-pr-logo">
-                            <img src="https://sportsbull.jp/assets/images/common/footer-overview-logo.png" alt="SPORTS BULL アプリ版(iPhone/Android)">
-                        </h3>
-                        <ul class="foot-pr-btn">
-                            <li>
-                                <a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank">
-                                    <img src="https://sportsbull.jp/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank">
-                                    <img src="https://sportsbull.jp/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play">
-                                </a>
-                            </li>
-                        </ul>
-                        <p class="foot-pr-text">話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「スポーツ・ブル」。高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
-                    </div>
-                    <!-- /.text-block -->
-                    <div class="fb-page-plugin">
-                        <div class="fb-page" data-href="https://www.facebook.com/sportsbull/" data-width="400" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true">
-                            <div class="fb-xfbml-parse-ignore">
-                                <blockquote cite="https://www.facebook.com/sportsbull/">
-                                    <a href="https://www.facebook.com/sportsbull/">スポーツブル（SPORTS BULL）</a>
-                                </blockquote>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.foot-pr-inner -->
-            </div>
-            <!-- /.foot-pr -->
-            <div id="pageTop" class="pagetop">
-                <a href="#">
-                    <span>このページの先頭へ</span>
-                </a>
-            </div>
-            <div class="fnav-block">
-                <nav class="fnav">
-                    <h3 class="fnav-logo">
-                        <img src="https://sportsbull.jp/assets/images/common/footer-fnav-logo.png" alt="SPORTS BULL">
-                    </h3>
-                    <ul>
-                        <li>
-                            <a href="/about/">サービス紹介</a>
-                        </li>
-                        <li>
-                            <a href="/about/company/">会社概要</a>
-                        </li>
-                        <li>
-                            <a href="/about/privacy/">プライバシーポリシー</a>
-                        </li>
-                        <li>
-                            <a href="/about/terms/">利用規約</a>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- /.fnav -->
-                <div class="sns-block">
-                    <ul>
-                        <li class="sns-fb">
-                            <a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a>
-                        </li>
-                        <li class="sns-tw">
-                            <a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a>
-                        </li>
-                        <li class="sns-yt">
-                            <a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sns-block -->
-                <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
-            </div>
-            <!-- /.fnav-block -->
-        </div>
-        <!-- /.foot-sec-inner -->
-    </footer>
-    <!-- /.foot-sec -->
-    <footer class="foot-sec show-for-small">
-        <div class="foot-sec-inner">
-            <div class="foot-pr">
-                <div class="foot-pr-inner">
-                    <figure class="foot-pr-logo">
-                        <img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL">
-                    </figure>
+                    <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
                     <div class="text-block">
                         <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
                         <ul class="foot-pr-list">
-                            <li class="foot-pr-item">
-                                <a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank">
-                                    <img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" />
-                                </a>
-                            </li>
-                            <li class="foot-pr-item">
-                                <a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank">
-                                    <img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play">
-                                </a>
-                            </li>
+                            <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&amp;ls=1&amp;mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store"></a></li>
+                            <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
                         </ul>
                     </div>
-                </div>
-                <!-- /.foot-pr-inner -->
+                </div><!-- /.foot-pr-inner -->
+
                 <div class="fb-page-plugin">
-                    <div class="fb-page" data-href="https://www.facebook.com/sportsbull/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true">
-                        <div class="fb-xfbml-parse-ignore">
-                            <blockquote cite="https://www.facebook.com/sportsbull/">
-                                <a href="https://www.facebook.com/sportsbull/">スポーツブル（SPORTS BULL）</a>
-                            </blockquote>
-                        </div>
-                    </div>
+                    <div class="fb-page fb_iframe_widget fb_iframe_widget_fluid" data-href="https://www.facebook.com/sportsbull/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="adapt_container_width=true&amp;app_id=842032129256034&amp;container_width=300&amp;height=154&amp;hide_cover=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fsportsbull%2F&amp;locale=ja_JP&amp;sdk=joey&amp;show_facepile=true&amp;small_header=true&amp;width=500"><span style="vertical-align: bottom; width: 300px; height: 154px;"><iframe name="f3949bbef554a48" width="500px" height="154px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:page Facebook Social Plugin" src="https://www.facebook.com/v2.5/plugins/page.php?adapt_container_width=true&amp;app_id=842032129256034&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2F0sTQzbapM8j.js%3Fversion%3D42%23cb%3Df12404fb9226c0c%26domain%3Dsportsbull.jp%26origin%3Dhttps%253A%252F%252Fsportsbull.jp%252Ff1f0eb6ab11b638%26relation%3Dparent.parent&amp;container_width=300&amp;height=154&amp;hide_cover=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fsportsbull%2F&amp;locale=ja_JP&amp;sdk=joey&amp;show_facepile=true&amp;small_header=true&amp;width=500" style="border: none; visibility: visible; width: 300px; height: 154px;" class=""></iframe></span></div>
                 </div>
-            </div>
-            <!-- /.foot-pr -->
-            <div id="js-page_top" class="pagetop">
-                <a href="#">
-                    <span>このページの先頭へ</span>
-                </a>
-            </div>
+            </div><!-- /.foot-pr -->
+
+            <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
+
             <nav class="fnav">
                 <ul>
-                    <li>
-                        <a href="/about/">サービス紹介</a>
-                    </li>
-                    <li>
-                        <a href="/about/privacy/">プライバシーポリシー</a>
-                    </li>
-                    <li>
-                        <a href="/about/company/">会社概要</a>
-                    </li>
-                    <li>
-                        <a href="/about/terms/">利用規約</a>
-                    </li>
+                    <li><a href="/about/">サービス紹介</a></li>
+                    <li><a href="/about/company/">会社概要</a></li>
+                    <li><a href="/about/privacy/">プライバシーポリシー</a></li>
+                    <li><a href="/about/terms/">利用規約</a></li>
                 </ul>
-            </nav>
-            <!-- /.fnav -->
+            </nav><!-- /.fnav -->
+
             <div class="sns-block">
                 <ul>
-                    <li class="sns-fb">
-                        <a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a>
-                    </li>
-                    <li class="sns-tw">
-                        <a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a>
-                    </li>
-                    <li class="sns-yt">
-                        <a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a>
-                    </li>
+                    <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
+                    <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
+                    <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
                 </ul>
-            </div>
-            <!-- /.sns-block -->
-            <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
-        </div>
-        <!-- /.foot-sec-inner -->
-    </footer>
-    <!-- /.foot-sec -->
+            </div><!-- /.sns-block -->
+
+            <p class="copyright">Copyright © SPORTS BULL All rights reserved.</p>
+        </div><!-- /.foot-sec-inner -->
+    </footer><!-- /.foot-sec -->
 </div>
 <!-- /.whole -->
 <!-- for facebook -->
