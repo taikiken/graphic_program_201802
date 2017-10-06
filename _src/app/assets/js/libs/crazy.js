@@ -16,7 +16,7 @@ $(function () {
         $(response.response.articles).each(function(key,row){
             $li = $('<li></li>');
             $link = $('<a href="' + row.url + '"></a>');
-            $link.append('<div class="img"><img src="' + row.media.images.medium + '" alt=""></div>');
+            $link.append('<div class="img"><img src="' + row.media.images.thumbnail + '" alt=""></div>');
             $div = $('<div class="txt_area"></div>');
             $div.append('<p class="category">' + row.category.label + '</p>');
             $div.append('<h3 class="post_ttl">' + row.title + '</h3>');
@@ -25,6 +25,8 @@ $(function () {
             $li.append($link);
             $('.recommend_list .thumb_area').append($li);
         });
+
+        window.webkit.messageHandlers.onLoadComplete.postMessage("");
         // 成功時処理
         //レスポンスデータはパースされた上でresponseに渡される
     }).fail(function(jqXHR, textStatus, errorThrown ) {
