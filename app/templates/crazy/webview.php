@@ -68,7 +68,7 @@
             <h2 class="ttl recommend"><i></i>編集部おすすめの記事</h2>
         </div>
 
-        <div class="recommend_list" style="height:267px;">
+        <div class="recommend_list" style="height:auto;">
             <ul class="thumb_area">
             </ul>
         </div>
