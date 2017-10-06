@@ -205,10 +205,12 @@
                         </div>
                     </div>
 
+                    <?php if(false === empty($page['player']->body->description)):?>
                     <div class="txt_area">
                         <p class="subttl">PROFILE</p>
                         <p><?php echo $page['player']->body->description?></p>
                     </div>
+                    <?php endif;?>
                 </div>
                 <!-- / player_profile  -->
 
