@@ -106,9 +106,9 @@ const related = (slug) => {
  * - local -> api `dev` 使用します
  */
 const host = () => {
-  const pathname = location.pathname;
-  const local = pathname.indexOf('192.168.1.') !== -1 ||
-    pathname.indexOf('http://undotsushin.local/') !== -1 ||
+  const hostname = location.hostname;
+  const local = hostname.indexOf('192.168.1.') !== -1 ||
+    hostname.indexOf('undotsushin.local') !== -1 ||
     location.port === '8080';
   // リクエスト先を変更します
   if (local) {
