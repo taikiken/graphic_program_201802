@@ -20,7 +20,7 @@ $(function () {
             $div = $('<div class="txt_area"></div>');
             $div.append('<p class="category">' + row.category.label + '</p>');
             $div.append('<h3 class="post_ttl">' + row.title + '</h3>');
-            $div.append('<p class="date">row.display_date</p>');
+            $div.append('<p class="date">' + row.display_date + '</p>');
             $link.append($div);
             $li.append($link);
             $('.recommend_list .thumb_area').append($li);
