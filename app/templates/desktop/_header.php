@@ -195,7 +195,10 @@ if ( $template_name == 'category' ) {
 
   // @see https://github.com/undotsushin/undotsushin/issues/1891#issuecomment-298291706
   // @since 2017-05-08 - category slug を追加する
-  $whole_classes[] = $page_category['slug'];
+    if($page_category['slug'] != 'crazy')
+    {
+        $whole_classes[] = $page_category['slug'];
+    }
 }
 ?>
 </head>
