@@ -37,6 +37,7 @@ for($i=0;$i<count($gameid);$i++){
 	if($data1===NULL||preg_match("/Not Found/",$data1))continue;
 	$data1=str_replace("studium","stadium",$data1);
 	$data1=json_decode($data1,true);
+	if(!$data1["response"])continue;
 	
 	$score[$gameid[$i]]=array($data1["response"]["team"][0]["score"]["total"],$data1["response"]["team"][1]["score"]["total"]);	
 	$jsonfile2=sprintf("%s/%s.json",$bucket,$gameid[$i]);
