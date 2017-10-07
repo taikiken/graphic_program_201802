@@ -60,10 +60,10 @@ for($i=0;$i<count($gameid);$i++){
 			$lastupdate=$movie["movie"][$gameid[$i]]["lastupdate"];
 		}
 	}
-		
+	
 	if($flag==1){
 		$data1["response"]["lastupdate"]=$lastupdate;
-		$data1["response"]["gameinfo"]["weekday"]=get_weekday(date("w",$data1["response"]["gameinfo"]["date"]));
+		$data1["response"]["gameinfo"]["weekday"]=get_weekday(date("w",strtotime($data1["response"]["gameinfo"]["date"])));
 		$data1["response"]["highlightmovieurl"]=$movie["movie"][$gameid[$i]];
 		$data1["response"]["movieurl"]=$data1["response"]["gameinfo"]["status"]=="試合終了"?$fullmovieurl[$gameid[$i]]:"";
 		
