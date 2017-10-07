@@ -145,6 +145,7 @@ EOM;
 		$drawFirst = $json["team"][1];
 		$scoreInfo = $json["events"];
 		$date = date("n月j日",strtotime($gameinfo["date"]));
+		$kickoff = date("H:i",strtotime($gameinfo['kickoff']));
 
 		$result = array("date"=>$date,"playFirstName"=>$playFirst['name'],"drawFirstName"=>$drawFirst['name'],"headInner"=>"","movie"=>"","digest"=>"","quarter"=>"","data"=>"","scoreInfo"=>"","personalInfo"=>"","autoReload"=>false);
 
@@ -178,7 +179,7 @@ EOM;
 			</div>
 			<div class="state">{$gameinfo['status']}</div>
 			<div class="info">
-				{$date}({$gameinfo['weekday']})　{$gameinfo['kickoff']}～<br />
+				{$date}({$gameinfo['weekday']})　{$kickoff}～<br />
 				於：{$gameinfo['stadium']}　天候：{$gameinfo['weather']}　観衆：{$gameinfo['spectators']}人
 			</div>
 EOM;
