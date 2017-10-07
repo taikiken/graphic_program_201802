@@ -63,6 +63,8 @@
         <div class="more_btn pc_hide"><a href="/crazy/list/"><i></i>すべての選手を見る</a></div>
     </section>
 
+    <?php /*
+
     <section class="section_crazy_recommend">
         <div class="ttl-wrapper">
             <h2 class="ttl recommend"><i></i>編集部おすすめの記事</h2>
@@ -73,8 +75,6 @@
             </ul>
         </div>
     </section>
-
-        <script src="https://code.jquery.com/jquery-git.min.js"></script>
-        <script src="/assets/js/libs/crazy.js"></script>
+    */?>
     </body>
 </html>
