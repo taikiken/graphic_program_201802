@@ -66,8 +66,16 @@
              document.querySelector('html').classList.add("undotsushin-android");
              isApp = true;
           }
+
+          if ( isApp ) {
+             document.querySelector('html').classList.add("is-app");
+           }
         })();
         </script>
+        <style>
+        html.is-app .top-image { display:none !important; }
+        html.is-app #liveVideo { display:none !important; }
+        </style>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.5.0/videojs-contrib-hls.js"></script>
