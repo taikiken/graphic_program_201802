@@ -55,9 +55,9 @@
         <!-- Javascript -->
 
         <script>
+        var isApp = false;
         (function(){
           var param = window.location.search;
-          var isApp = false;
           if ( /app=ios/i.test(param) ) {
              document.querySelector('html').classList.add("undotsushin-ios");
              isApp = true;
