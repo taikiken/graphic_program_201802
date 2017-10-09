@@ -6,7 +6,7 @@ include $INCLUDEPATH."public/import.php";
 $MEDIAID=61;
 $MEDIANAME="nordot";
 $bullid="262792796378236410";
-$ID=isset($_GET["id"])?$_GET["id"]:3;
+$ID=isset($_GET["id"])?$_GET["id"]:0;
 
 $area=array("北海道","東北","関東","北陸・甲信越","東海","関西","中国","四国","九州・沖縄");
 
@@ -76,6 +76,14 @@ for($i=0;$i<count($rss);$i++){
 	$xml=str_replace(array("dc:","media:content"),array("","img"),$xml);
 	$d=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 	$d=json_decode(json_encode($d),TRUE);
+	
+	if(count($d["channel"]["item"])==0)continue;
+	if($d["channel"]["item"]["guid"]){
+		$entry=$d["channel"]["item"];
+		unset($d);
+		$d["channel"]["item"][]=$entry;
+	}
+	
 	for($j=0;$j<count($d["channel"]["item"]);$j++){
 		$data["channel"]["item"][]=$d["channel"]["item"][$j];
 	}
@@ -88,7 +96,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	unset($s);
 	
-	if(is_array($data["channel"]["item"][$i]["description"]))continue;
+	if($data["channel"]["item"][$i]["description"]==NULL||is_array($data["channel"]["item"][$i]["description"]))continue;
 	
 	$s["title"]=$data["channel"]["item"][$i]["title"];
 	$s["t9"]=sprintf("%s?c=%s",$data["channel"]["item"][$i]["link"],$bullid);
