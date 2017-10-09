@@ -78,7 +78,8 @@
         <?php
         // static_contents
         // ===========================================
-        include_once dirname(__DIR__) . '/_include/_static_contents.php';
+        // file 存在しないのでコメントにします
+//        include_once dirname(__DIR__) . '/_include/_static_contents.php';
         // ===========================================
         ?>
 
