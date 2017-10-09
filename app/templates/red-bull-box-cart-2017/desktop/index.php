@@ -56,7 +56,7 @@
   </script>
 </head>
 <body>
-<div id="whole" class="whole dark <?php echo $page['template_classname']; ?>">
+<div id="whole" class="whole <?php echo $page['template_classname']; ?>">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
