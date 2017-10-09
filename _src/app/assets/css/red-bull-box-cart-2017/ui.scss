@@ -42,6 +42,8 @@
 
 //.special-summary
 .special-summary {
+  z-index: 999;
+  position: relative;
   background: url(/assets/images/red-bull-box-cart-2017/summry-bg.png) 0 0 repeat;
 
   //.special-summary-heading
@@ -69,7 +71,7 @@
 
     &:after {
       top: -8px;
-      right: 181px;
+      right: -32px;
       width: 210px;
       height: 149px;
       background: url(/assets/images/red-bull-box-cart-2017/summary-figure2.png) 0 0 no-repeat;

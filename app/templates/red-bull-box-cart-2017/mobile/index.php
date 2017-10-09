@@ -38,7 +38,7 @@
   endif;
   // -----------------------------------------
   ?>
-  <link rel="stylesheet" href="/assets/sp/css/red-bull-holy-ride/ui.css?v=<?php echo $page['version']; ?>">
+  <link rel="stylesheet" href="/assets/sp/css/<?php echo $page['template_classname']; ?>/ui.css?v=<?php echo $page['version']; ?>">
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
@@ -105,8 +105,8 @@
 <div id="body-section" class="body-sec">
   <div class="body-sec-inner">
     <div class="special-summary">
-      <h1 class="special-summary-heading"><img src="/assets/sp/images/red-bull-holy-ride/summary-heading.png" alt="RED BULL HOLY RIDE 2017"></h1>
-      <p class="special-summary-copy">型破りなMTBダウンヒル・レース「Red Bull <br> Holy Ride 2017」をスポーツブルで無料ライブ配信！</p>
+      <h1 class="special-summary-heading"><img src="/assets/sp/images/red-bull-box-cart-2017/summary-heading.png" alt="RED BULL BOX CART RACE TOKYO 2017. Akasaka, Tokyo / 2017.10.22 [Sun]"></h1>
+      <p class="special-summary-copy"><img src="/assets/sp/images/red-bull-box-cart-2017/summary-copy.png" alt="アマチュアドライバーが手作りのボックスカートで競う「レッドブル・ボックスカート・レース」をスポーツブルで無料ライブ配信！"></p>
     </div><!-- /.special-summary -->
 
     <?php include_once __DIR__."/../live.php"; ?>
