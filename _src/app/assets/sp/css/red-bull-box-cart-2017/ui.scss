@@ -1,0 +1,436 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss_sp/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss_sp/style/reset";
+@import "../../../../../scss_sp/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+
+
+// common override
+.red-bull-box-cart-2017 {
+  .body-sec,
+  .body-sec-inner {
+    background-color: #10151e !important;
+  }
+
+  .main-sec {
+    padding-bottom: (40/2)+px;
+  }
+
+  .side-sec {
+    padding-bottom: (80/2)+px;
+
+    .sponsor-link {
+      > div {
+        width: 100% !important;
+      }
+
+      iframe {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+
+
+
+
+//.special-summary
+.special-summary {
+  background: url(/assets/sp/images/red-bull-box-cart-2017/summry-bg.png) 0 0 repeat;
+  background-size: (8/2)+px;
+
+  //.special-summary-heading
+  &-heading {
+    position: relative;
+    padding-top: (30/2)+px;
+    padding-bottom: (20/2)+px;
+    text-align: center;
+
+    img {
+      width: (520/2)+px;
+      // width: perCalc(520, 640);
+    }
+
+    &:before, &:after {
+      content: "";
+      position: absolute;
+      @include hide-text;
+    }
+
+    &:before {
+      top: (40/2)+px;
+      left: 0;
+      width: (124/2)+px;
+      height: (188/2)+px;
+      background: url(/assets/sp/images/red-bull-box-cart-2017/summary-figure1.png) 0 0 no-repeat;
+      background-size: (124/2)+px;
+    }
+
+    &:after {
+      bottom: 0;
+      right: 0;
+      width: (120/2)+px;
+      height: (190/2)+px;
+      background: url(/assets/sp/images/red-bull-box-cart-2017/summary-figure2.png) 0 0 no-repeat;
+      background-size: (120/2)+px;
+    }
+  }
+
+  //.special-summary-copy
+  &-copy {
+    line-height: 1;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #e6034f;
+    text-align: center;
+
+    img {
+      width: (594/2)+px;
+      // width: perCalc(594, 640);
+    }
+  }
+}
+
+
+
+
+
+//.live-streaming
+.live-streaming {}
+
+
+
+
+
+//container setting
+.holyride__container {
+}
+
+.holyride__container--odd {
+  position: relative;
+  padding-bottom: (70/2)+px;
+  background: url(/assets/sp/images/red-bull-holy-ride/bg-odd.png) center bottom no-repeat;
+  background-size: 100%;
+}
+
+.holyride__container--even {
+  position: relative;
+  padding-bottom: (70/2)+px;
+  background: #0f1b33 url(/assets/sp/images/red-bull-holy-ride/bg-even.png) center bottom no-repeat;
+  background-size: 100%;
+}
+
+
+
+
+
+//.holyride--intro
+.holyride--intro {
+  margin-top: (32/2)+px;
+
+  .intro__catch {
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+    // padding-bottom: perCalc(20, 640);
+    // border-bottom: 1px solid #282d35;
+    color: #fff;
+    font-weight: bold;
+    font-size: (32/2)+px;
+  }
+
+  .intro__link__app {
+    margin-top: (32/2)+px;
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+    padding-top:  perCalc(20, 640);
+    border-top: 1px solid #282d35;
+
+    .undotsushin-ios &,
+    .undotsushin-android & {
+      display: none;
+    }
+
+
+    a {
+      @include link-decoration(#fff, #fff, underline, underline);
+      display: inline-block;
+      line-height: (80/2)+px;
+      padding-left: (100/2)+px;
+      background: url(/assets/sp/images/red-bull-holy-ride/intro-app_icon.png) 0 0 no-repeat;
+      background-size: (80/2)+px;
+      font-weight: bold;
+      font-size: (28/2)+px;
+    }
+  }
+
+  .intro__timetable {
+    margin-top: (32/2)+px;
+
+    table {
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: (8/2)+px perCalc(20, 640);
+      color: #fff;
+      font-size: (24/2)+px;
+    }
+
+    th {
+      width: 30%;
+      font-style: italic;
+    }
+
+    td {
+      padding-left: 0;
+      font-weight: bold;
+    }
+
+    tr:nth-child(odd) {
+      th, td {
+        background-color: #1c2129;
+      }
+    }
+  }
+
+  .intro__banner {
+    margin-top: (32/2)+px;
+  }
+
+  .intro__widjet_twitter {
+    margin-top: 40px;
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+  }
+} //.holyride--intro
+
+
+
+
+//.holyride--course
+.holyride--course {
+  padding-top: (20/2)+px;
+  padding-right: perCalc(20, 640);
+  padding-left: perCalc(20, 640);
+
+  .course__heading {
+    position: relative;
+    height: (40/2)+px;
+    margin-bottom: (40/2)+px;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  .course__map {
+    > img {
+      display: block;
+    }
+
+    figcaption {
+      p {
+        margin-top: 1em;
+        color: #fff;
+        font-size: (24/2)+px;
+      }
+
+      .note {
+        margin-top: 0;
+        font-size: (20/2)+px;
+      }
+    }
+  }
+
+  .course__staff {
+    //.course__staff__heading
+    &__heading {
+      margin-top: (40/2)+px;
+      height: (22/2)+px;
+
+      img {
+        width: auto;
+        height: 100%;
+        vertical-align: top;
+      }
+    }
+
+    //.course__staff__container
+    &__container {
+      display: table;
+      width: 100%;
+      margin-top: (32/2)+px;
+    }
+
+    //.course__staff__thumb
+    //.course__staff__data
+    .course__staff__thumb,
+    .course__staff__data {
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    //.course__staff__thumb
+    .course__staff__thumb {
+      width: perCalc(240, 600);
+      padding-right: perCalc(20, 600);
+    }
+
+    //.course__staff__data
+    .course__staff__data {
+      //.course__staff__data__heading
+      &__heading {
+        color: #fff;
+        font-weight: bold;
+        font-size: (24/2)+px;
+      }
+
+      //.course__staff__data__text
+      &__text {
+        color: #fff;
+        margin-top: 0.5em;
+        font-size: (24/2)+px;
+      }
+    }
+  } //.course__staff
+} //.holyride--course
+
+
+
+
+
+//.holyride--overview
+.holyride--overview {
+  margin-top: (40/2)+px;
+  padding-right: perCalc(20, 640);
+  padding-left: perCalc(20, 640);
+
+  .overview__heading {
+    position: relative;
+    height: (40/2)+px;
+    margin-bottom: (40/2)+px;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  .overview__data {
+    th,
+    td {
+      padding-bottom: 0.5em;
+      color: #fff;
+      vertical-align: top;
+      font-size: (24/2)+px;
+    }
+
+    th {
+      padding-right: (16/2)+px;
+      font-weight: bold;
+    }
+  }
+} //.holyride--overview
+
+
+
+
+
+//.holyride--related
+.holyride--related {
+  padding-top: (20/2)+px;
+  padding-right: perCalc(20, 640);
+  padding-left: perCalc(20, 640);
+
+  .related__heading {
+    position: relative;
+    height: (40/2)+px;
+    margin-bottom: (40/2)+px;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  .related__post {
+
+    + .related__post {
+      border-top: 1px solid #273248;
+    }
+
+    a {
+      @include link-decoration(null, null, none, none);
+      display: table;
+      padding-top: (20/2)+px;
+      padding-bottom: (20/2)+px;
+
+      &:active {
+        background-color: #10151e;
+      }
+    }
+
+    //.related__post__thumb
+    //.related__post__text
+    &__thumb,
+    &__text {
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    //.related__post__thumb
+    &__thumb {
+      width: perCalc(280, 600);
+      padding-right: perCalc(20, 600);
+    }
+
+    //.related__post__text
+    &__text {
+      padding-right: 1em;
+
+      .related__post__heading {
+        color: #fff;
+        font-weight: bold;
+        font-size: (24/2)+px;
+      }
+
+      .related__post__excerpt {
+        margin-top: 0.75em;
+        color: #fff;
+        display: none;
+      }
+
+      .related__post__category {
+        margin-top: 0.75em;
+        color: #be0940;
+        font-weight: bold;
+        font-size: (20/2)+px;
+      }
+
+      .related__post__date {
+        margin-top: 0.75em;
+        color: #999;
+        font-size: (20/2)+px;
+      }
+    } //.related__post__text
+
+  } //.related__post
+} //.holyride--related
