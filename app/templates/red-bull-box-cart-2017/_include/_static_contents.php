@@ -64,7 +64,7 @@
   </div><!-- /.intro__schedule -->
 
   <div class="intro__banner">
-    <a href="https://www.redbull.com/jp-ja/events/red-bull-holy-ride-2017/" target="_blank"><img class="show-for-pc" src="/assets/images/red-bull-box-cart-2017/intro-banner.jpg" alt="Red Bull TV"><img class="show-for-sp" src="/assets/sp/images/red-bull-box-cart-2017/intro-banner.jpg" alt="Red Bull TV"></a>
+    <a href="http://www.redbullsoapboxrace.com/jp/ja/" target="_blank"><img class="show-for-pc" src="/assets/images/red-bull-box-cart-2017/intro-banner.jpg" alt="Red Bull TV"><img class="show-for-sp" src="/assets/sp/images/red-bull-box-cart-2017/intro-banner.jpg" alt="Red Bull TV"></a>
   </div>
 
   <div class="intro__widjet_twitter">
