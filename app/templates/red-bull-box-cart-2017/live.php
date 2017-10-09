@@ -7,9 +7,9 @@
 
 $live = array(
   // liveAPIのエンドポイント
-  // https://github.com/undotsushin/undotsushin/issues/2279#issuecomment-321793026
+  // https://github.com/undotsushin/undotsushin/issues/2415#issuecomment-333852219
 
-  'endpoint' => UT_ENV !== 'PRODUCTION' ? "'https://dev-img.sportsbull.jp/static/redbull/live.json'" : "'https://img.sportsbull.jp/static/redbull/live.json'",
+  'endpoint' => UT_ENV !== 'PRODUCTION' ? "'https://dev-img.sportsbull.jp/static/redbull/boxcart.json'" : "'https://img.sportsbull.jp/static/boxcart/live.json'",
   'interval' => 20, // polling間隔
 );
 
