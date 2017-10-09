@@ -449,6 +449,7 @@
       // transition: background-color 0.2s;
 
       &:hover {
+        @include opacity(0.8);
         // background-color: #10151e;
       }
     }
