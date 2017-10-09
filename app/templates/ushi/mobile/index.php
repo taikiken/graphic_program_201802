@@ -107,7 +107,7 @@
       <div class="ushi__pr_app__wrapper for-browser">
 
         <div id="js-ushi__mom" class="for-browser">
-          <div id="js-ushi__pr_app" class="ushi__pr_app cm_disable"><!-- CM公開前は .cm_disable -->
+          <div id="js-ushi__pr_app" class="ushi__pr_app">
             <div class="ushi__pr_app__outer">
               <div class="ushi__pr_app__inner">
                 <figure class="ushi__pr_app__cm"><a href="hoge"><img src="/assets/sp/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>
