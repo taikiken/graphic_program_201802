@@ -274,6 +274,7 @@
     //.mlb_live__scoreboard__column
     &__column {
       display: table-cell;
+      vertical-align: top;
 
       &--team {
         width: 105px;
