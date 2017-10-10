@@ -142,4 +142,4 @@ if ($page['category']['slug'] == 'all') {
 </div><!-- /.body-sec -->
 
 <script src="https://code.jquery.com/jquery-git.min.js"></script>
-<script src="/assets/js/libs/crazy.js"></script>
+<script src="/assets/js/crazy.js"></script>
