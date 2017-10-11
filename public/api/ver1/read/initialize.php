@@ -108,6 +108,8 @@ if($uid!=""){
 		$sql=sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '10 day'"),100,0);
 	}
 	
+}else{
+	$sql=sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '10 day'"),100,0);
 }
 
 /*
@@ -117,19 +119,9 @@ if($uid!=""){
 	$sql=sprintf("select 2 as h,0 as recommend,*,1 as sort from %s order by m_time desc limit 10 offset 0",sprintf($articletable,set_isbookmark($uid)," and m1!=130"));
 }
 */
-if($uid!="")
-{
-    $o->query($sql);
-    while($f=$o->fetch_array())$p[]=$f;
-}
-else
-{
-    $list = create_initialize_json(false);
-    foreach($list as $key => $val)
-    {
-        $p[] = $val;
-    }
-}
+
+$o->query($sql);
+while($f=$o->fetch_array())$p[]=$f;
 
 $hg=array("headline","pickup","latest");
 for($i=0;$i<count($hg);$i++){

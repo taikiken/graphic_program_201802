@@ -11,10 +11,8 @@ $uid=auth();
 $id=bind($_REQUEST["id"]);
 
 if($_REQUEST["api"]!="next"){
-	if(false === empty($uid))
-	{
-        $sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id=%s",$id)));
-    }
+
+	$sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id=%s",$id)));
 }else{
 	
 	//番組表のみ順番を変える
@@ -51,19 +49,9 @@ if($_REQUEST["api"]!="next"){
 if($_GET["debugg"]==1){
 	echo $sql;
 }
-if($_REQUEST['api'] != 'next' && empty($uid))
-{
-    $list = create_article_json($id, false);
-    foreach($list as $key => $val)
-    {
-        $p[] = $val;
-    }
-}
-else
-{
-    $o->query($sql);
-    while($f=$o->fetch_array())$p[]=$f;
-}
+
+$o->query($sql);
+while($f=$o->fetch_array())$p[]=$f;
 
 $relatedPosts=unserialize(get_contents(sprintf("%s/static/%s.dat",$ImgPath,$p[0]["m1"])));
 if(!$relatedPosts)$relatedPosts=array();
