@@ -235,12 +235,18 @@
 
   .intro__banner {
     margin-top: (32/2)+px;
+
+    img {
+      border: 1px solid #eee;
+    }
   }
 
   .intro__widjet_twitter {
+    height: 200px;
     margin-top: (40/2)+px;
     margin-right: perCalc(20, 640);
     margin-left: perCalc(20, 640);
+    overflow: hidden;
   }
 } //.boxcart--intro
 

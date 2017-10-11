@@ -124,20 +124,20 @@
 
     <div class="side-sec">
       <div class="sponsor-link">
-        <!-- /531683568/redbull_ad/holy-ride_sp_big-banner -->
+        <!-- /531683568/redbull_ad/box-cart_sp_big-banner -->
         <script>
           googletag.cmd.push(function() {
-            googletag.defineSlot('/531683568/redbull_ad/holy-ride_sp_big-banner', [320, 96], 'div-gpt-ad-1502965583832-0').addService(googletag.pubads());
+            googletag.defineSlot('/531683568/redbull_ad/box-cart_sp_big-banner', [320, 96], 'div-gpt-ad-1507615110744-0').addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.enableServices();
           });
         </script>
-        <div id='div-gpt-ad-1502965583832-0' style='height:96px; width:320px;'>
+        <div id='div-gpt-ad-1507615110744-0' style='height:96px; width:320px;'>
         <script>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1502965583832-0'); });
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507615110744-0'); });
         </script>
         </div>
-        <!-- // /531683568/redbull_ad/holy-ride_sp_big-banner -->
+        <!-- // /531683568/redbull_ad/box-cart_sp_big-banner -->
       </div>
     </div>
 

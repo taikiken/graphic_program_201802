@@ -16,7 +16,7 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <div class="intro__link__app"><a href="https://app.adjust.com/rpt1kl?deep_link=sportsbull%3A%2F%2F" target="_blank">アプリでライブ配信開始の通知を受け取る</a></div>
+  <div class="intro__link__app"><a href="https://app.adjust.com/paf496?deep_link=sportsbull%3A%2F%2F" target="_blank">アプリでライブ配信開始の通知を受け取る</a></div>
   <?php
   endif;
   // -----------------------------------------
