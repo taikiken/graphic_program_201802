@@ -33,7 +33,7 @@ if(count($_POST)>0){
 	}
 	$QUERY.=$wp;
 	
-	$sql=sprintf("select id,%s from repo_n where ( %s ) order by n",str_replace("\"","",$SEARCHFIELD),$QUERY);
+	$sql=sprintf("select id,%s from %s where ( %s ) order by n",str_replace("\"","",$SEARCHFIELD),$TABLE,$QUERY);
 	$o->query($sql);
 
 	while($f=$o->fetch_array()){

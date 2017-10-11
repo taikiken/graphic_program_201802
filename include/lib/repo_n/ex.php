@@ -40,11 +40,19 @@ if($META!=111){
 
 include $INCLUDEPATH."print_write.php";
 
-$a=array("表示設定","flag",array("表示","非表示"),"");
-include $INCLUDEPATH."_newfield2.php";
+if($q->get_dir()==4){
+	if($q->get_file()===0){
+		//include $INCLUDEPATH."_newfield.php";
+	}elseif($q->get_file()===1){
+		echo $HTML;
+	}
+}else{
+	$a=array("表示設定","flag",array("表示","非表示"),"");
+	include $INCLUDEPATH."_newfield2.php";
 
-if($TABLE!="repo_n"){
-	include $INCLUDEPATH."_pageaddition.php";
+	if($TABLE!="repo_n"){
+		include $INCLUDEPATH."_pageaddition.php";
+	}
 }
 
 ?>
