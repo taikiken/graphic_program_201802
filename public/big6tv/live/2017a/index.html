@@ -53,6 +53,30 @@
         <link rel="stylesheet" href="/stats/assets/univbb/css/video.css" />
         <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.css" /> -->
         <!-- Javascript -->
+
+        <script>
+        var isApp = false;
+        (function(){
+          var param = window.location.search;
+          if ( /app=ios/i.test(param) ) {
+             document.querySelector('html').classList.add("undotsushin-ios");
+             isApp = true;
+          }
+          if ( /app=android/i.test(param) ) {
+             document.querySelector('html').classList.add("undotsushin-android");
+             isApp = true;
+          }
+
+          if ( isApp ) {
+             document.querySelector('html').classList.add("is-app");
+           }
+        })();
+        </script>
+        <style>
+        html.is-app .top-image { display:none !important; }
+        html.is-app #liveVideo { display:none !important; }
+        </style>
+
         <script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.5.0/videojs-contrib-hls.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-resolution-switcher/0.4.2/videojs-resolution-switcher.js"></script>
@@ -141,6 +165,10 @@
             ga('require', 'linkid');
             ga('require', 'displayfeatures');
             ga('send', 'pageview');
+
+            if ( isApp === true ) {
+              ga('send', 'event', 'ua', 'view', navigator.userAgent );
+            }
         </script>
         <!-- //ga -->
         <link rel="stylesheet" href="/assets/css/ui.css?v=5b38cb37" media="only screen and (min-width: 769px)"> </head>

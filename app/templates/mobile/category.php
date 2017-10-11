@@ -9,11 +9,14 @@
  * @see https://github.com/undotsushin/undotsushin/issues/1915
  */
 if ($page['category']['slug'] == 'motorsports') {
-  // motorsports
-  include_once __DIR__ . '/category_motorsports.php';
+    // motorsports
+    include_once __DIR__ . '/category_motorsports.php';
 } else if ($page['category']['slug'] == 'area') {
-  // area - since 2017-09-08
-  include_once __DIR__ . '/category_area.php';
+    // area - since 2017-09-08
+    include_once __DIR__ . '/category_area.php';
+} elseif($page['category']['slug'] == 'crazy') {
+    // CRAZY ATHLETES
+    include_once __DIR__.'/category_crazy.php';
 } else {
-  include_once __DIR__.'/category_content.php';
+    include_once __DIR__.'/category_content.php';
 }

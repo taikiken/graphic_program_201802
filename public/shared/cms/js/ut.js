@@ -124,8 +124,36 @@ function toggle_options(t,f){
 	t.css({"display":f===1?"block":"none"});
 }
 
+function getActualDimension(image) {
+    var run, mem, w, h, key = "actual";
+
+    // for Firefox, Safari, Google Chrome
+    if ("naturalWidth" in image) {
+        return {width: image.naturalWidth, height: image.naturalHeight};
+    }
+    if ("src" in image) { // HTMLImageElement
+        if (image[key] && image[key].src === image.src) {return  image[key];}
+
+        if (document.uniqueID) { // for IE
+            w = $(image).css("width");
+            h = $(image).css("height");
+        } else { // for Opera and Other
+            mem = {w: image.width, h: image.height}; // keep current style
+            $(this).removeAttr("width").removeAttr("height").css({width:"",  height:""});    // Remove attributes in case img-element has set width  and height (for webkit browsers)
+            w = image.width;
+            h = image.height;
+            image.width  = mem.w; // restore
+            image.height = mem.h;
+        }
+        return image[key] = {width: w, height: h, src: image.src}; // bond
+    }
+
+    // HTMLCanvasElement
+    return {width: image.width, height: image.height};
+}
+
 function ut_init(){
-	
+
 	if(cd=="repo_n"){
 		
 		$(".imglist li:eq(3)").css({"clear":"both"});
@@ -330,7 +358,6 @@ function ut_init(){
 		
 		$("#cmdtypes9").before("<br>");
 		$("[name$='flag']").each(function(){
-			console.log([$(this).attr("name"),$(this).prop("checked")])
 			if($(this).prop("checked"))toggleflag($(this).attr("name"),$(this).val());
 		});
 		$("[name$='flag']").change(function(){
@@ -342,7 +369,7 @@ function ut_init(){
 			var key=key.replace(/^p_/,"");
 			
 			if(key.match(/^ad_video/)){
-				key=".ad_videoid,.ad_pc_videotag,.ad_sp_videotag";
+				key=".ad_videoid,.ad_pc_videotag,.ad_sp_videotag,.ad_ios_videotag,.ad_android_videotag";
 			}else if(key.match(/^ad/)){
 				key="."+key.replace(/flag/,"id");
 			}else if(key.match(/^(sidebar|single)_/)){
@@ -462,6 +489,13 @@ $(function(){
 		});
 	});
 	
+	$(".inputFields img").delay(2000).each(function(){
+		var e=$(this).attr("name");
+		if(e&&e.match(/headerimg/)){
+			$(this).width(800).css({"marginBottom":"7px"});
+		}
+
+	});
 
 	pagenation();
  

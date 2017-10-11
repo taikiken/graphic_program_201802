@@ -11,6 +11,12 @@
   },
   "private": true,
   "dependencies": {
+    "esdoc": "^1.0.2",
+    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+    "esdoc-es7-plugin": "0.0.3",
+    "esdoc-flow-type-plugin": "^1.0.1",
+    "esdoc-jsx-plugin": "^1.0.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "gsap": "^1.20.2"
   },
   "devDependencies": {

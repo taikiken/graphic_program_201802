@@ -7,12 +7,12 @@ $SIZE=200;
 $articlefield="*";
 
 $articletable="
-(select
+(select 
 	%s
 	id,
 	title,
-	(select body from repo_body where pid=repo_n.id) as body,
-	(select video from u_view where pageid=repo_n.id) as videoflag,
+	(select body from repo_body where pid=repo_n.id limit 1 offset 0) as body,
+	(select video from u_view where pageid=repo_n.id limit 1 offset 0) as videoflag,
 	t16 as b1,
 	img1,
 	imgflag,
@@ -30,18 +30,18 @@ $articletable="
 	brightcove,
 	m_time,
 	t8 as videocaption,
-	t9
+	t9 
 from repo_n where flag=1%s) as t1
 
-left join (select
+left join (select 
 	id as userid,
 	t1 as url,
 	cid as typeid,
 	title as name,
-	img1 as icon
+	img1 as icon 
 from u_media) as t2 on t1.d2=t2.userid
 
-left join (select
+left join (select 
 	id as categoryid,
 	name as category,
 	title as categorylabel,
@@ -49,26 +49,26 @@ left join (select
 	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
-left join (select
+left join (select 
 	id as categoryid2,
 	name as category2,
 	title as categorylabel2,
 	name_e as slug2
 from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
 
-left join (select
+left join (select 
 	pageid,
 	region,
 	pref
 from u_area) as t5 on t1.id=t5.pageid";
 
 $articletable2="
-(select
+(select 
 	%s
 	id,
 	title,
-	(select body from repo_body where pid=repo_n.id) as body,
-	(select video from u_view where pageid=repo_n.id) as videoflag,
+	(select body from repo_body where pid=repo_n.id limit 1 offset 0) as body,
+	(select video from u_view where pageid=repo_n.id limit 1 offset 0) as videoflag,
 	t16 as b1,
 	img1,
 	imgflag,
@@ -86,18 +86,18 @@ $articletable2="
 	brightcove,
 	m_time,
 	t8 as videocaption,
-	t9
+	t9 
 from repo_n where flag=1%s%s%s) as t1
 
-left join (select
+left join (select 
 	id as userid,
 	t1 as url,
 	cid as typeid,
 	title as name,
-	img1 as icon
+	img1 as icon 
 from u_media) as t2 on t1.d2=t2.userid
 
-left join (select
+left join (select 
 	id as categoryid,
 	name as category,
 	title as categorylabel,
@@ -105,14 +105,70 @@ left join (select
 	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
-left join (select
+left join (select 
 	id as categoryid2,
 	name as category2,
 	title as categorylabel2,
 	name_e as slug2
 from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
 
-left join (select
+left join (select 
+	pageid,
+	region,
+	pref
+from u_area) as t5 on t1.id=t5.pageid";
+
+$articletable3="
+(select 
+	%s
+	id,
+	title,
+	(select body from repo_body where pid=repo_n.id limit 1 offset 0) as body,
+	(select video from u_view where pageid=repo_n.id limit 1 offset 0) as videoflag,
+	t16 as b1,
+	img1,
+	imgflag,
+	(select name from repo where id=d1) as type,
+	d2,
+	d3,
+	t1,
+	m1,
+	m2,
+	t10,t11,t12,t13,t14,t15,
+	a1,a2,a3,a4,a5,a6,
+	swf as video,
+	youtube,
+	facebook,
+	brightcove,
+	m_time,
+	t8 as videocaption,
+	t9 
+from repo_n where flag=1 and id in(%s)%s%s%s) as t1
+
+left join (select 
+	id as userid,
+	t1 as url,
+	cid as typeid,
+	title as name,
+	img1 as icon 
+from u_media) as t2 on t1.d2=t2.userid
+
+left join (select 
+	id as categoryid,
+	name as category,
+	title as categorylabel,
+	name_e as slug,
+	no_image as no_image
+from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
+
+left join (select 
+	id as categoryid2,
+	name as category2,
+	title as categorylabel2,
+	name_e as slug2
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
+
+left join (select 
 	pageid,
 	region,
 	pref
@@ -219,9 +275,9 @@ function set_advertise($ad,$type){
 
 	for($i=0;$i<count($bannertype);$i++){
 		if($i<=1){
-			$s["ad_url".$bannertype[$i]]=$ad["ad_url".$bannertype[$i]];
 			$s["theme"]["images"][$bannertype[$i]]=strlen($ad[$bannertype[$i]."_headerimg".$type])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i]."_headerimg".$type]):"";
 		}
+		$s["ad_url".$bannertype[$i]]=$ad["ad_url".$bannertype[$i]];
 		$s["banner"][$bannertype[$i]]["text"]=strlen($ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)])>0?checkstr($ad[sprintf("%sbannertext",$listordetail)]):"";
 		$s["banner"][$bannertype[$i]]["image"]=strlen($ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)]):"";
 		$s["banner"][$bannertype[$i]]["link"]=checkstr($ad[$bannertype[$i].sprintf("_%sbannerlink",$listordetail)]);
@@ -286,6 +342,8 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 			$s["vast"]=$ad[$i]["ad_videoid"];
 			$s["ad_urlpc"]=$ad[$i]["ad_pc_videotag"];
 			$s["ad_urlsp"]=$ad[$i]["ad_sp_videotag"];
+			$s["ad_urlios"]=$ad[$i]["ad_ios_videotag"];
+			$s["ad_urlandroid"]=$ad[$i]["ad_android_videotag"];
 		}else{
 			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_videoid"])>0)$s["vast"]=$ad[$i]["ad_videoid"];
 			elseif($ad[$i]["ad_videoflag"]==2)$s["vast"]="";
@@ -295,6 +353,12 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 
 			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_sp_videotag"])>0)$s["ad_urlsp"]=$ad[$i]["ad_sp_videotag"];
 			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlsp"]="";
+
+			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_ios_videotag"])>0)$s["ad_urlios"]=$ad[$i]["ad_ios_videotag"];
+			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlios"]="";
+
+			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_android_videotag"])>0)$s["ad_urlandroid"]=$ad[$i]["ad_android_videotag"];
+			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlandroid"]="";
 		}
 
 		if($i==1){
@@ -375,6 +439,10 @@ function set_categoriesinfo($f){
 	$ad_put=set_advertise($ad,"list");
 
 	$s=$s+$ad_put;
+	foreach($s as $k=>$v){
+		if(preg_match("/^(ad_url|vast)/",$k))unset($s[$k]);
+	}
+
 	return $s;
 }
 
@@ -512,6 +580,8 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["media"]["video"]["vast"]=$ad["vast"];
 		$s["media"]["video"]["ad_url"]["pc"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlpc"]);
 		$s["media"]["video"]["ad_url"]["sp"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlsp"]);
+		$s["media"]["video"]["ad_url"]["ios"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlios"]);
+		$s["media"]["video"]["ad_url"]["android"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlandroid"]);
 	}
 
 	$s["user"]=set_userinfo($f,0);
@@ -1012,4 +1082,62 @@ function split_utime($a){
 	}
 }
 
+/**
+ * @param $article_id
+ * @param bool $reload
+ * @return mixed
+ * 未ログイン時の記事詳細情報をS3のjsonから取得、存在しない場合は新たに作成する
+ */
+function create_article_json($article_id, $reload = false)
+{
+    global $articletable, $o, $ImgPath;
+    $object_key = 'json/articles/' . $article_id . '.json';
+    $url = join('/', [$ImgPath, $object_key]);
+
+    $json = @file_get_contents($url);
+    if(empty($json) || $reload)
+    {
+        $json = [];
+        $sql = sprintf("select * from %s",sprintf($articletable,set_isbookmark(),sprintf(" and id=%s",$article_id)));
+        $o->query($sql);
+        while($f = $o->fetch_array())
+        {
+            $json[] = $f;
+        }
+        $json = json_encode($json);
+
+        $s3 = new S3Module;
+        $s3->createObject($json, $object_key, 'application/json');
+    }
+    return json_decode($json, true);
+}
+
+/**
+ * @param bool $reload
+ * @return mixed
+ * 未ログイン時のinitialize用json
+ */
+function create_initialize_json($reload = false)
+{
+    global $articletable, $o, $ImgPath;
+    $object_key = 'json/initialize.json';
+    $url = join('/', [$ImgPath, $object_key]);
+
+    $json = @file_get_contents($url);
+    if(empty($json) || $reload)
+    {
+        $json = [];
+        $sql = sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark("")," and m_time > now() - interval '10 day'"),100,0);
+        $o->query($sql);
+        while($f = $o->fetch_array())
+        {
+            $json[] = $f;
+        }
+        $json = json_encode($json);
+
+        $s3 = new S3Module;
+        $s3->createObject($json, $object_key, 'application/json');
+    }
+    return json_decode($json, true);
+}
 ?>

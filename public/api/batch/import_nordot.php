@@ -76,6 +76,14 @@ for($i=0;$i<count($rss);$i++){
 	$xml=str_replace(array("dc:","media:content"),array("","img"),$xml);
 	$d=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 	$d=json_decode(json_encode($d),TRUE);
+	
+	if(count($d["channel"]["item"])==0)continue;
+	if($d["channel"]["item"]["guid"]){
+		$entry=$d["channel"]["item"];
+		unset($d);
+		$d["channel"]["item"][]=$entry;
+	}
+	
 	for($j=0;$j<count($d["channel"]["item"]);$j++){
 		$data["channel"]["item"][]=$d["channel"]["item"][$j];
 	}
@@ -88,12 +96,14 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	unset($s);
 	
+	if($data["channel"]["item"][$i]["description"]==NULL||is_array($data["channel"]["item"][$i]["description"]))continue;
+	
 	$s["title"]=$data["channel"]["item"][$i]["title"];
 	$s["t9"]=sprintf("%s?c=%s",$data["channel"]["item"][$i]["link"],$bullid);
 	$s["t7"]=$data["channel"]["item"][$i]["guid"];
 	
 	$modbody=preg_replace("/(\r|\n|\t)/","",$data["channel"]["item"][$i]["description"]);
-	
+
 	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
 	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
 	$s["a_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
@@ -101,8 +111,10 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	if($data["channel"]["item"][$i]["img"]){
 		$s["t30"]=$data["channel"]["item"][$i]["img"]["@attributes"]["url"];
 	}
+	$pref=$area[$ID]!="北海道"?get_pref($data["channel"]["item"][$i]["creator"]):"北海道";
 	$s["t10"]=$data["channel"]["item"][$i]["creator"];
 	$s["t11"]=$area[$ID];
+	if($pref!="北海道"&&strlen($pref)>0)$s["t12"]=$pref;
 	
 	$sql=sprintf("select id,title,(select body from repo_body where pid=repo_n.id) as body from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$s["t7"]);
 	$o->query($sql);
@@ -137,7 +149,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		splittime($s["m_time"],$s["a_time"]);
 		$sqla[]=makesql($s,0);
 		$sqla[]=sprintf("insert into repo_body(pid,body) values(currval('repo_n_id_seq'),'%s');",pg_escape_string($modbody));
-		$sqla[]=sprintf("insert into u_area(pageid,region,pref) values(currval('repo_n_id_seq'),'%s','%s');",$area[$ID],$area[$ID]!="北海道"?get_pref($data["channel"]["item"][$i]["creator"]):"北海道");	
+		$sqla[]=sprintf("insert into u_area(pageid,region,pref) values(currval('repo_n_id_seq'),'%s','%s');",$area[$ID],$pref);	
 		
 	}
 	

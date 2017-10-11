@@ -11,27 +11,27 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 /**
  * <h3>データが安全かを調べます</h3>
  * 全て static
  */
 export class Safety {
-  /**
-   * データが安全かを調べます
-   * static class です、instance を作成できません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Safety is static Class. not use new Safety().' );
-
-    }
-
-  }
+  // /**
+  //  * データが安全かを調べます
+  //  * static class です、instance を作成できません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Safety is static Class. not use new Safety().' );
+  //
+  //   }
+  //
+  // }
   /**
    * object に keyName が存在することと type があっているかを調べます
    * @param {Object} object 調査対象 Object

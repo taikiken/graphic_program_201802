@@ -21,6 +21,9 @@ import { MediaType } from '../../app/const/MediaType';
 import { Ga } from '../../ga/Ga';
 import { GaData } from '../../ga/GaData';
 
+// dae
+import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
+
 // React
 const React = self.React;
 
@@ -74,7 +77,9 @@ export class ComponentPickupArticle extends React.Component {
       home: React.PropTypes.bool.isRequired,
       // 現在 スライドNo.
       // @since 2017-03-28
-      position: React.PropTypes.number.isRequired
+      position: React.PropTypes.number.isRequired,
+      // anotherCategories - 2017-09-14
+      anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae).isRequired,
     };
   }
   // ---------------------------------------------------
