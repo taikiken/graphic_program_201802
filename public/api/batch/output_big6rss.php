@@ -87,7 +87,10 @@ flag=1 and m1=151 and swf is null and m_time > now()-interval '2 week' order by 
 
 $o->query($sql);
 while($f=$o->fetch_array()){
-
+	
+	//六大学野球新聞社以外のメディアは取り下げ
+	if(!preg_match("/^(17|37|38|39|41|42)$/",$f["d2"]))$f["flag"]=0;
+	
 	$item[]=sprintf('<item>
 		<title>%s</title>
 		<link>https://sportsbull.jp/p/%s/</link>
