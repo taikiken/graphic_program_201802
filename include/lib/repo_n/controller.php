@@ -122,6 +122,7 @@ if($q->get_dir()===0){
 		
 		$o=new dbutl($TABLE,$sn,$sv);
 		$e=$o->update($g->f("nid"));
+		create_article_json($g->f("nid"), true);
 		
 		if($g->f("cid")!=1||$g->f("cid")!=6){
 			if(strlen($_POST["POSITION"])>0){

@@ -166,6 +166,42 @@ class S3Module {
 		$s3Object = S3Client::factory($s3Setting);
 		return $s3Object;
 	}
+
+
+    function createObject($body, $object_key, $mime_type)
+    {
+        // パスのチェック　ファイルパスが空ではないか？
+        if (empty($body)) {
+            throw new Exception('ファイルアップロード::bodyが見つかりません');
+        }
+
+        // パスのチェック　ファイルが存在するか
+        if (empty($mime_type)) {
+            throw new Exception('ファイルアップロード::mime_typeを指定してください');
+        }
+
+        // パスのチェック　ファイルが存在するか
+        if (empty($object_key)) {
+            throw new Exception('ファイルアップロード::objectのkeyを指定してください');
+        }
+
+        // s3オブジェクト生成
+        $s3Object = $this->getS3ClientInstance($this->keyId, $this->secretKey, $this->region);
+
+        // アップロードする。例外が発生するとS3Exceptionがthrowされます。
+        $uploadInfo = [
+            'Bucket'      => $this->bucketName,
+            'Key'         => $object_key,
+            'Body'        => $body,
+            'ContentType' => $mime_type,
+            'CacheControl' => 'max-age=60',
+            'Expires'     => gmdate("D, d M Y H:i:s T", strtotime("+1 min"))
+        ];
+
+        // ファイルを置く。
+        $result = $s3Object->putObject($uploadInfo);
+        return $result;
+    }
 }
 
 $client = new Aws\S3\S3Client([
@@ -180,5 +216,6 @@ function s3upload($from,$to){
 	$s3i=new S3Module;
 	$s3i->upload($from,$to);
 }
+
 
 ?>
