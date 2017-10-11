@@ -31,8 +31,9 @@ if(isset($_POST["setting-form-mail"])){
 		こちらのメールアドレスは送信専用のため、直接返信されても返答できませんので予めご了承ください。",$name, $site_url, $hash);
 		$from="noreply@sportsbull.jp";
 		$reply="info@sportsbull.jp";
+        $bcc="account@sportsbull.jp";
 
-		return sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply);
+        return sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply,$bcc);
 
 	}
 
