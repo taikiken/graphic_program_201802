@@ -5,6 +5,7 @@
  * Time: 22:57
  */
 // 一面タブからの導線を増やす #2080
+// https://img.sportsbull.jp/json/bnr-sokuhou.json の topBanners の値を出力する
 // @see https://github.com/undotsushin/undotsushin/issues/2080
 // @since 2017-06-26
 ?>
