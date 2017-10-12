@@ -128,7 +128,7 @@ if(preg_match("/undotsushin/",$servername)){
 		$domain="https://stg.sportsbull.jp";
 		$ImgPath="https://img.sportsbull.jp";
 		$UserImgPath="https://img.sportsbull.jp";
-		
+
 		$LSCMS="legendsstadium";
 
     // 大学野球
@@ -147,9 +147,9 @@ if(preg_match("/undotsushin/",$servername)){
 
 		$SERVERPATH="/var/www/sportsbull.jp/www/public";
 		$USERS="/var/www/sportsbull.jp/www/public/users";
-		
+
 		$LSCMS="legendsstadium";
-		
+
 		$domain="https://sportsbull.jp";
 		$ImgPath="https://img.sportsbull.jp";
 		$UserImgPath="https://img.sportsbull.jp";
@@ -193,10 +193,10 @@ if(preg_match("/undotsushin/",$servername)){
 	$ACLOGTXT="/var/www/data/log/ut_article_access.txt";
 	$IMGP="/var/www/data/img/";
 	$RSS="/var/www/data/rss/";
-	
+
 	$MEDIADATA="http://input.sportsbull.jp/api";
 	$videopath="https://video.sportsbull.jp";
-	
+
 }else{
 
 	$staticfileimport=1;
@@ -220,10 +220,9 @@ if(preg_match("/undotsushin/",$servername)){
 	$UserImgPath=$ImgPath;
 	$LOGIN="d:/log/ut/ut_login.txt";
 	$RSS="d:/log/ut/rss/";
-	
+
 	$MEDIADATA="http://utinput/api";
 }
-
 
 // setting for Vagrant
 // ==============================
@@ -232,9 +231,10 @@ if(preg_match("/undotsushin/",$servername)){
 // - :8888 - vagrant local network port
 if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'undotsushin.local' || $_SERVER['SERVER_PORT'] == '8080' || $_SERVER['SERVER_PORT'] == '8888' ) :
   $staticfileimport=0;
-  $DBNAME="ut";
+  // $DBNAME="ut_devnew";
   $DBUSR="ut";
   $DBPWD="ut";
+  // $DBHOST="undo-dev.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
   $DBHOST="localhost";
   $DBPORT=5432;
   $SERVERPATH="/vagrant/public";
@@ -266,5 +266,4 @@ endif;
 
 //$staticfilepath=preg_match("/sportsbull.jp/",$domain)?sprintf("s3://%s",$bucket):sprintf("%s/api/ver1",$SERVERPATH);
 $staticfilepath=sprintf("%s/api/ver1",$SERVERPATH);
-
 ?>
