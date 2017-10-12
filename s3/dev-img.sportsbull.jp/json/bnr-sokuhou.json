@@ -5,7 +5,7 @@
         "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-baseball_pro.jpg",
         "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-baseball_pro.jpg"
       },
-      "url": "https://sportsbull.jp/stats/npb/",
+      "url": "https://sportsbull.jp/stats/npb/?utm_source=spbl&utm_medium=top_stats&utm_campaign=npb",
       "alt": "プロ野球 速報&amp;データを見る"
     },
     {
@@ -13,7 +13,7 @@
         "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-baseball_mlb.jpg",
         "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-baseball_mlb.jpg"
       },
-      "url": "https://sportsbull.jp/mlb/",
+      "url": "https://sportsbull.jp/stats/mlb/?utm_source=spbl&utm_medium=top_stats&utm_campaign=mlb",
       "alt": "MLB 速報&amp;データを見る"
     }
   ],
