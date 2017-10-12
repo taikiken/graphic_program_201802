@@ -118,11 +118,67 @@ left join (select
 	pref
 from u_area) as t5 on t1.id=t5.pageid";
 
+$articletable3="
+(select 
+	%s
+	id,
+	title,
+	(select body from repo_body where pid=repo_n.id limit 1 offset 0) as body,
+	(select video from u_view where pageid=repo_n.id limit 1 offset 0) as videoflag,
+	t16 as b1,
+	img1,
+	imgflag,
+	(select name from repo where id=d1) as type,
+	d2,
+	d3,
+	t1,
+	m1,
+	m2,
+	t10,t11,t12,t13,t14,t15,
+	a1,a2,a3,a4,a5,a6,
+	swf as video,
+	youtube,
+	facebook,
+	brightcove,
+	m_time,
+	t8 as videocaption,
+	t9 
+from repo_n where flag=1 and id in(%s)%s%s%s) as t1
+
+left join (select 
+	id as userid,
+	t1 as url,
+	cid as typeid,
+	title as name,
+	img1 as icon 
+from u_media) as t2 on t1.d2=t2.userid
+
+left join (select 
+	id as categoryid,
+	name as category,
+	title as categorylabel,
+	name_e as slug,
+	no_image as no_image
+from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
+
+left join (select 
+	id as categoryid2,
+	name as category2,
+	title as categorylabel2,
+	name_e as slug2
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
+
+left join (select 
+	pageid,
+	region,
+	pref
+from u_area) as t5 on t1.id=t5.pageid";
+
 $articletable2c="(select id,d2 from repo_n where cid=1 and flag=1%s%s%s) as t1,(select id as userid from u_media where flag=1) as t2 where t1.d2=t2.userid";
 
 $commentfield="isreaction,id,comment,userid,pageid,regitime,slug,good,bad,reply,typeid,type,name,profile,icon";
 $commenttable="
-(select 
+(select
 	%s
 	id,
 	comment,
@@ -133,15 +189,15 @@ $commenttable="
 	(select count(reaction) from u_reaction where commentid=u_comment.id and reaction=1 and flag=1) as good,
 	(select count(reaction) from u_reaction where commentid=u_comment.id and reaction=2 and flag=1) as bad,
 	(select n from (select commentid,count(commentid) as n from u_comment where commentid!=0 and flag=1 group by commentid) as t where t.commentid=u_comment.id) as reply
-from 
+from
 u_comment where %s) as t1,
-(select 
+(select
 	id as uid,
 	cid as typeid,
 	(select name from repo where id=cid) as type,
 	title as name,
 	t2 as profile,
-	img1 as icon 
+	img1 as icon
 from u_member where flag=1%s) as t2";
 
 function switch_category_title($label,$title){
@@ -153,7 +209,7 @@ function set_orderby($s=0){
 }
 
 function set_isbookmark($uid){
-	
+
 	if(strlen($uid)>0){
 		$r=sprintf("(select count(pageid) as n from u_bookmark where pageid=repo_n.id and userid=%s and flag=1) as is_bookmark,",$uid);
 	}else{
@@ -176,54 +232,55 @@ function mailregister($email,$name){
 	$to=$email;
 	$subject="【SPORTS BULL】会員登録完了のお知らせ";
 	$body=sprintf("%s様
-	
+
 	この度は、SPORTS BULL sportsbull.jp にご登録いただき、誠にありがとうございます。
-	
+
 	会員登録が完了しましたのでお知らせいたします。
 	下記登録内容をご確認の上、大切に保管ください。
-	
+
 	[登録内容]
 	メールアドレス： %s
 	ユーザー名：　%s
 	パスワード：　セキュリティ保持のため非公開
-	
+
 	※	パスワードを忘れた場合は、以下のURLから再登録をお願いいたします。
 	https://sportsbull.jp/reset_password/
-	
+
 	ご不明な点等ございましたら、以下の運動通信カスタマーセンターまでお問い合わせください。
 	info@sportsbull.jp
-	
+
 	※	当社コンテンツをご使用の際は、必ず下記の利用規約をお読みください。
 	https://sportsbull.jp/about/terms/
-	
+
 	[ご注意]
 	こちらのメールアドレスは送信専用のため、直接返信されても返答できませんので予めご了承ください。",$name,$email,$name);
 	$from="noreply@sportsbull.jp";
 	$reply="info@sportsbull.jp";
+	$bcc="account@sportsbull.jp";
 
-	return sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply);
+	return sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply,$bcc);
 }
 
 function set_advertise($ad,$type){
-	
+
 	global $ImgPath;
-	
+
 	$s["vast"]=$ad["vast"];
 	$s["theme"]["base"]=strlen($ad["base"])>0?$ad["base"]:"normal";
 	$s["theme"]["background_color"]=strlen($ad["bgcolor"])>0?$ad["bgcolor"]:"";
 	$s["is_show_filter"]=!$ad["sp_showfilter"]?true:false;
-	
+
 	$listordetail=$type=="detail"?"abody":"";
 	$bannertype=array("pc","sp","ios","android");
-	
+
 	for($i=0;$i<count($bannertype);$i++){
-		if($i<=1){	
+		if($i<=1){
 			$s["theme"]["images"][$bannertype[$i]]=strlen($ad[$bannertype[$i]."_headerimg".$type])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i]."_headerimg".$type]):"";
 		}
 		$s["ad_url".$bannertype[$i]]=$ad["ad_url".$bannertype[$i]];
 		$s["banner"][$bannertype[$i]]["text"]=strlen($ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)])>0?checkstr($ad[sprintf("%sbannertext",$listordetail)]):"";
 		$s["banner"][$bannertype[$i]]["image"]=strlen($ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i].sprintf("_%sbannerimg",$listordetail)]):"";
-		$s["banner"][$bannertype[$i]]["link"]=checkstr($ad[$bannertype[$i].sprintf("_%sbannerlink",$listordetail)]);		
+		$s["banner"][$bannertype[$i]]["link"]=checkstr($ad[$bannertype[$i].sprintf("_%sbannerlink",$listordetail)]);
 		if($i==0){
 			$s["ad"][$bannertype[$i]]["sidebar_top"]=$ad["sidebar_top"];
 			$s["ad"][$bannertype[$i]]["sidebar_bottom"]=$ad["sidebar_bottom"];
@@ -241,14 +298,14 @@ function set_advertise($ad,$type){
 			$s["ad"]["mobile"][$bannertype[$i]]["article_detail"]=$ad[$bannertype[$i]."_detail"];
 		}
 	}
-		
+
 	return $s;
 }
 
 function get_advertise($categoryid="",$userid="",$pageid=""){
-	
+
 	global $staticfilepath;
-	
+
 	$ad[]=unserialize(get_contents(sprintf("%s/static/ad/0-0.dat",$staticfilepath)));
 	if($categoryid!=""){
 		unset($v);
@@ -278,9 +335,9 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 	$_abodybanner=array("abodybannertext","pc_abodybannerimg","pc_abodybannerlink","sp_abodybannerimg","sp_abodybannerlink","ios_abodybannerimg","ios_abodybannerlink","android_abodybannerimg","android_abodybannerlink");
 	$_theme=array("base","bgcolor","pc_headerimglist","sp_headerimglist","pc_headerimgdetail","sp_headerimgdetail","sp_showfilter");
 	$s=array();
-	
+
 	for($i=0;$i<count($ad);$i++){
-		
+
 		if($i==0){
 			$s["vast"]=$ad[$i]["ad_videoid"];
 			$s["ad_urlpc"]=$ad[$i]["ad_pc_videotag"];
@@ -290,10 +347,10 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 		}else{
 			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_videoid"])>0)$s["vast"]=$ad[$i]["ad_videoid"];
 			elseif($ad[$i]["ad_videoflag"]==2)$s["vast"]="";
-			
+
 			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_pc_videotag"])>0)$s["ad_urlpc"]=$ad[$i]["ad_pc_videotag"];
 			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlpc"]="";
-			
+
 			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_sp_videotag"])>0)$s["ad_urlsp"]=$ad[$i]["ad_sp_videotag"];
 			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlsp"]="";
 
@@ -309,7 +366,7 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 				$s[$_theme[$j]]=$ad[$i][$_theme[$j]];
 			}
 		}
-		
+
 		for($j=0;$j<count($_adpc);$j++){
 			$id=$_adpc[$j];
 			$flag=sprintf("%sflag",$_adpc[$j]);
@@ -347,9 +404,9 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 }
 
 function set_categoriesinfo($f){
-	
+
 	global $ImgPath,$domain;
-	
+
 	$s["id"]=$f["id"];
 	$s["label"]=switch_category_title($f["name"],$f["title"]);
 	$s["slug"]=mod_HTML($f["name_e"]);
@@ -366,11 +423,11 @@ function set_categoriesinfo($f){
 	//https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
 	//タイトル画像のリンク追加
 	$s["title_img_link"]=strlen($f["url"])>0?$f["url"]:"";
-	
+
 	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/img/%s",$ImgPath,$f["img"]):"";
 	$s["title"]=mod_HTML($f["title"]);
 	$s["description"]=mod_HTML($f["description"]);
-	
+
 	$s["title_banner"]["pc"]["image"]=strlen($f["img"])>0?sprintf("%s/img/%s",$ImgPath,$f["img"]):"";
 	$s["title_banner"]["pc"]["text"]=strlen($f["alt"])>0?$f["alt"]:"";
 	$s["title_banner"]["pc"]["link"]=strlen($f["url"])>0?$f["url"]:"";
@@ -380,76 +437,76 @@ function set_categoriesinfo($f){
 
 	$ad=get_advertise($s["id"]);
 	$ad_put=set_advertise($ad,"list");
-	
+
 	$s=$s+$ad_put;
 	foreach($s as $k=>$v){
 		if(preg_match("/^(ad_url|vast)/",$k))unset($s[$k]);
 	}
-	
+
 	return $s;
 }
 
 function set_categoryinfo($f,$personalized="",$longtitle=1){
-	
+
 	global $ImgPath,$domain;
-	
+
 	$s["id"]=(int)$f["id"];
 	$s["label"]=$longtitle==1?switch_category_title($f["name"],$f["title"]):$f["name"];
 	$s["slug"]=$f["name_e"];
 	$s["url"]=sprintf("%s/category/%s/",$domain,$f["name_e"]);
 	if($personalized!=="")$s["is_interest"]=$personalized;
 	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/img/%s",$ImgPath,$f["img"]):"";
-	
+
 	return $s;
 }
 
 function urlmodify($body){
-	
+
 	/*
 	すでに登録されている記事の画像パスを運動通信からSPORTS BULLに変換
 	*/
-	
+
 	$body=str_replace("https://www.undotsushin.com/prg_img/","https://img.sportsbull.jp/",$body);
 	$body=str_replace("/prg_img/","https://img.sportsbull.jp/",$body);
 	return $body;
 }
 
 function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
-	
+
 	/*
 		$type:0 記事一覧　$type:1 記事詳細
 	*/
-	
+
 	global $ImgPath,$domain,$ad,$mediaoption,$videopath,$apidetails,$staticfilepath;
-	
+
 	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
 	$datetime=get_date(sprintf("%s-%s-%s %s:%s:%s",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["a6"]));
-	
+
 	$body=$f["body"];
-	
+
 	$s["id"]=(int)$f["id"];
 	$s["date"]=$datetime["isotime"];
 	$s["display_date"]=get_relativetime($datetime["relativetime"],$datetime["date"],$datetime["weekday"]);
 	if($f["m1"]==152&&preg_match("/前/",$s["display_date"]))$s["display_date"]=sprintf("%s%s",$datetime["date"],sprintf("(%s)",get_weekday($datetime["weekday"])));
-	
+
 	$s["title"]=str_replace("&#039;","'",strlen($f["modtitle"])>0?$f["modtitle"]:$f["title"]);
-	
+
 	$s["description"]=get_summary($f["b1"],$f["body"]);
-	
+
 	if(strlen($f["relatedpost"])>0)$body.=$f["relatedpost"];
 	if($type==1){
-			
+
 		$s["body"]=urlmodify($body);
 		$s["body_escape"]=stripbr($f["body"]);
 		if($apidetails!=1)$s["media_vk_refid"]=strlen($f["brightcove"])>0?$f["brightcove"]:"";
-		
+
 		#1013 続きを読む
 		$file=sprintf("%s/static/ad/2-%s.dat",$staticfilepath,$f["userid"]);
 		if(file_exists($file)){
 			$v=unserialize(get_contents($file));
 			$readmoreflag=$v["readmore"];
 			$canonicalflag=$v["canonical"];
-		}	
+		}
 		$file=sprintf("%s/static/ad/1-%s.dat",$staticfilepath,$f["id"]);
 		if(file_exists($file)){
 		   $v=get_contents($file);
@@ -463,7 +520,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 			$s["readmore"]["is_readmore"]=false;
 			$s["readmore"]["url"]="";
 		}
-		 
+
 		if($canonicalflag){
 			$s["canonical"]["is_canonical"]=true;
 			$s["canonical"]["url"]=$f["t9"];
@@ -475,29 +532,29 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	}
 
 	$s["url"]=sprintf("%s/%s/%s/",$domain,"p",$f["id"]);
-	
+
 	//カテゴリー期を見て配列のみに変更する
 	$cat1=switch_category_title($f["category"],$f["categorylabel"]);
 	$cat2=switch_category_title($f["category2"],$f["categorylabel2"]);
 	$s["category"]["label"]=$cat1;
-	$s["category"]["slug"]=$f["slug"]; 
-	$s["category2"]["label"]=$cat2; 
+	$s["category"]["slug"]=$f["slug"];
+	$s["category2"]["label"]=$cat2;
 	$s["category2"]["slug"]=$f["slug2"];
-	$s["categories"][0]["label"]=$cat1; 
+	$s["categories"][0]["label"]=$cat1;
 	$s["categories"][0]["slug"]=$f["slug"];
 	if(strlen($f["category2"])>0){
 		$s["categories"][1]["label"]=$cat2;
-		$s["categories"][1]["slug"]=$f["slug2"]; 
+		$s["categories"][1]["slug"]=$f["slug2"];
 	}
-			
+
 	$s["is_bookmarked"]=$f["is_bookmark"]==0?false:true;
 	if($type==0)$s["is_recommend"]=$f["recommend"]==1?true:false;
 	$s["is_new"]=$datetime["relativetime"]<(60*24*30)?true:false;
 	if($type==1)$s["is_show_image"]=$f["imgflag"]==168?false:true;
-	
+
 	$s["media_type"]=strlen($video)>0?"video":"image";
 	//if($f["videoflag"])$s["media_type"]="video";
-	
+
 	#996 動画記事の判定ロジックを変更する
 	if($type==0){
 		if($s["media_type"]=="image"&&$f["videoflag"]==1){
@@ -505,16 +562,16 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		}
 	}
 	#996 ここまで
-	
+
 	$s["media"]["images"]=get_img($f["img1"],$f["id"]);
 	$s["media"]["images"]["caption"]=checkstr($f["t1"],1);
-	
+
 	$s["media"]["video"]["player"]=$video;
-	
+
 	//$s["media"]["video"]["url"]="";
 	$s["media"]["video"]["url"]["sd"]=strlen($f["video"])>0?sprintf("%s/%s/%s/sd/%s.m3u8",str_replace("video",$mediaoption[$f["d2"]]["geoblock"]==0?"video":"video-jp",$videopath),$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
 	$s["media"]["video"]["url"]["hd"]=strlen($f["video"])>0?sprintf("%s/%s/%s/hd/%s.m3u8",str_replace("video",$mediaoption[$f["d2"]]["geoblock"]==0?"video":"video-jp",$videopath),$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
-	
+
 	$s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 	$s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
@@ -526,9 +583,9 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["media"]["video"]["ad_url"]["ios"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlios"]);
 		$s["media"]["video"]["ad_url"]["android"]=str_replace('[referrer_url]', $s["url"], $ad["ad_urlandroid"]);
 	}
-	
+
 	$s["user"]=set_userinfo($f,0);
-	
+
 	//地域タブ
 	//地域タブのラベル置き換えのためにAPIに地域情報を追加
 	$s["another_categories"]["area"]=array();
@@ -565,40 +622,40 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 
 /*
 function get_pickup($cid){
-	
+
 	global $o,$articletable;
-	
+
 	$sql=sprintf("select rt1.title as modtitle,rt2.* from (select d2,title,n as sort from u_headline where cid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort",$cid,sprintf($articletable,set_isbookmark(""),""));
 	$nsql=sprintf("select count(id) as n from u_headline where cid=%s and flag=1",$cid);
-	
+
 	$o->query($nsql);
 	$f=$o->fetch_array();
 	$count=$f["n"];
-	
+
 	if($count>0){
 		$o->query($sql);
 		while($f=$o->fetch_array())$p[]=$f;
-		for($i=0;$i<count($p);$i++){	
+		for($i=0;$i<count($p);$i++){
 			$s[$i]=set_articleinfo($p[$i],2);
 			$sql=sprintf("select count(*) as n from u_ranking where pageid=%s and flag=1 and userflag=1",$p[$i]["id"]);
 			$o->query($sql);
-			$f=$o->fetch_array();		
+			$f=$o->fetch_array();
 			$s[$i]["comments_count"]=(int)$f["n"];
 		}
 	}
-	
+
 	return $s;
 }
 */
 
 function s2h($seconds){
-	
+
 	if(strlen($seconds)==0)return "";
-	
+
 	$hours=floor($seconds/3600);
 	$minutes=floor(($seconds/60)%60);
 	$seconds=$seconds%60;
-	
+
 	if($hours>0){
 		$hms=sprintf("%02d:%02d:%02d",$hours,$minutes,$seconds);
 	}else{
@@ -616,10 +673,10 @@ function mod_replyfield($f,$data){
 }
 
 function set_commentinfo($f,$type,$reply=0){
-	
+
 	global $ImgPath,$domain;
 	$datetime=get_date($f["regitime"]);
-	
+
 	$s["id"]=(int)$f["id"];
 	$body=mb_strlen($f["comment"])<52?$f["comment"]:sprintf("%s…",mb_substr($f["comment"],0,52));
 
@@ -643,22 +700,22 @@ function set_commentinfo($f,$type,$reply=0){
 	}
 	//$s["url"]=sprintf("%s/%s/%s/comment/%s%s",$domain,"p",$f["pageid"],$reply==""?"":sprintf("/%s",$reply),$f["id"]);
 	$s["user"]=set_userinfo($f,0);
-	
+
 	return $s;
 }
 
 function set_userinfo($f,$interestset){
-	
+
 	global $UserImgPath,$domain,$banner,$articledetails;
-	
+
 	/* String型 */
 	$s["id"]=$f["userid"];
 	$s["name"]=!preg_match("/^スポーツブル編集部/",$f["name"])?mod_HTML($f["name"]):"スポーツブル編集部";
-	
+
 	if(strlen($f["email"])>0){
 		$s["email"]=strlen($f["email"])>0?mod_HTML($f["email"]):"";
 	}
-	
+
 	if(!preg_match("/http/",$f["icon"])){
 		$s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/users/img/%s",$UserImgPath,$f["icon"]):"";
 	}elseif(strlen($f["icon"])>0){
@@ -666,12 +723,12 @@ function set_userinfo($f,$interestset){
 	}else{
 		$s["profile_picture"]="";
 	}
-	
+
 	$s["bio"]=checkstr($f["profile"]);
 	$s["url"]=sprintf("%s/mypage/",$domain);
 	$s["type"]["id"]=(int)$f["typeid"];
 	$s["type"]["label"]=$f["type"];
-	
+
 	if($interestset===1){
 		$s["interest"]=$f["interest"];
 	}
@@ -682,21 +739,21 @@ function set_userinfo($f,$interestset){
 		$s["logo"]["img"]=strlen($f["icon"])>0?sprintf("%s/img/%s",$UserImgPath,$f["icon"]):"";
 		$s["logo"]["link"]=strlen($f["icon"])>0&&strlen($f["url"])>0?$f["url"]:"";
 	}
-	
+
 	// 後で消す
 	if($banner){
 		$s["banner"]=$banner;
 	}
-	
+
 	return $s;
 }
 
 
 function set_activity($f){
-	
+
 	global $ImgPath,$domain;
 	$datetime=get_date($f["regitime"]);
-	
+
 	$s["id"]=(int)$f["id"];
 	$s["date"]=$datetime["isotime"];
 	$s["display_date"]=get_relativetime($datetime["relativetime"],$datetime["date"],$datetime["weekday"]);
@@ -707,16 +764,16 @@ function set_activity($f){
 	$s["article"]["id"]=$f["pageid"];
 	$s["article"]["title"]=$f["title"];
 	$s["article"]["url"]=sprintf("%s/%s/%s/",$domain,"p",$f["pageid"]);
-	
+
 	return $s;
 }
 
 function check_token($h){
-	
+
 	if(strlen($h["Authorization"])>0)$f=$h["Authorization"];
 	else if(strlen($h["authorization"])>0)$f=$h["authorization"];
 	else $f="";
-	
+
 	$s=array();
 	if(strlen($f)>0){
 		$f=str_replace("OAuth ","",$f);
@@ -726,12 +783,12 @@ function check_token($h){
 			$s[trim($e[0])]=trim($e[1]);
 		}
 	}
-	
+
 	return $s;
 }
 
 function auth(){
-	
+
 	global $o,$H;
 	$token=check_token($H);
 
@@ -751,9 +808,9 @@ function wlog($file,$data){
 }
 
 function debug($token,$id,$txt=array()){
-	
+
 	global $H,$LOGTXT;
-	
+
 	if(count($txt)==0){
 		$log=$H;
 		$log["REQUEST_URI"]=$_SERVER['REQUEST_URI'];
@@ -774,18 +831,18 @@ function debug($token,$id,$txt=array()){
 	$fp=fopen($LOGTXT,"a");
 	fputs($fp,$out);
 	fclose($fp);
-	
+
 }
 
 function get_img($img,$id){
-	
+
 	global $ImgPath;
-	
+
 	$s=array();
 	$type=array("thumbnail","medium","large","original");
 	$path=array("thumbnail2","thumbnail1","img","raw");
 	if(strlen($img)==0)$defimg=sprintf("0%s.jpg",($id%7+1));
-	
+
 	for($i=0;$i<count($path);$i++){
 		if(strlen($img)==0){
 				$s[$type[$i]]=sprintf("%s/%s/%s",$ImgPath,$path[$i],$defimg);
@@ -804,12 +861,12 @@ function get_date($m){
 
 	$str=strtotime($m);
 	$now=strtotime(date("Y-m-d H:i:s"));
-	
-	$t["relativetime"]=($now-$str)/60;	
+
+	$t["relativetime"]=($now-$str)/60;
 	$t["date"]=date("m月d日 H時i分",$str);
 	$t["isotime"]=str_replace(" ","T",date("Y-m-d H:i:s+0900",$str));
 	$t["weekday"]=date("w",$str);
-	
+
 	return $t;
 }
 function get_weekday($a){
@@ -876,16 +933,16 @@ function bind($v){
 function get_summary($description,$body){
 
 	$s="";
-	
+
 	$description=preg_replace("#<script.*?</script>#ims","",$description);
 	$body=preg_replace("#<script.*?</script>#ims","",$body);
-	
+
 	$description=strip_tags($description);
 	$body=strip_tags($body);
-	
+
 	$description=preg_replace('/\s+/',' ',$description);
 	$body=preg_replace('/\s+/',' ',$body);
-	
+
 	if(strlen($description)>0){
 		$s=$description;
 	}else{
@@ -893,10 +950,10 @@ function get_summary($description,$body){
 		$s=preg_replace("/(\n|\r)/","",$s);
 		$s=preg_replace("/(^　)/","",$s);
 	}
-	
+
 	//gorin.jp 強引に動画扱いにしたことで一覧に画像キャプションが出てしまうので削除
 	$s=str_replace("写真提供：Getty Images","",$s);
-	
+
 	$s=html_entity_decode($s);
 	if(mb_strlen($s)>90){
 		$s=sprintf("%s…",mb_substr($s,0,90));
@@ -911,27 +968,27 @@ function stripbr($s){
 }
 
 function check_email($email,$conf=0){
-	
+
 	global $o;
 
 	$err="";
-	
+
 	if(strlen($email)==0){
 		$err="メールアドレスは必須項目です。";
 	}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 		$err="正しいメールアドレスを入力してください。";
 	}else{
-		
+
 		$sql=sprintf("select id from u_member where flag=1 and t1='%s'",$email);
 		if($conf!=0)$sql.=sprintf(" and id!=%s",$conf);
-		
+
 		$o->query($sql);
 		$f=$o->fetch_array();
 		if(strlen($f["id"])>0){
 			$err=sprintf("入力いただいたメールアドレス%sはすでに登録されております。",$email);
 		}
 	}
-	
+
 	return $err;
 }
 
@@ -944,12 +1001,12 @@ function set_status($s){
 }
 
 function check_passwd($passwd){
-	
+
 	/* 英数字8桁以上 */
-	
+
 	$err="";
 	$email=trim(htmlspecialchars($passwd));
-	
+
 	if(strlen($passwd)==0){
 		$err="パスワードは必須項目です。";
 	}elseif(strlen($passwd)<8){
@@ -968,14 +1025,18 @@ function get_videotype($v1,$v2,$v3,$v4){
 	return $s;
 }
 
-function sendmail($to,$subject,$body,$from,$reply){
+function sendmail($to,$subject,$body,$from,$reply,$bcc=null){
 
 	$sbj="=?iso-2022-jp?B?".base64_encode(mb_convert_encoding($subject,"JIS","UTF-8"))."?=";
 	$msg=stripslashes($body);
 	$msg=addslashes($msg);
 	$msg=mb_convert_encoding($msg,"JIS","UTF-8");
 	$header="From:=?iso-2022-jp?B?".base64_encode(mb_convert_encoding("SPORTS BULL","JIS","UTF-8"))."?=<".$from.">\n";
-	$header.="Bcc: info@undotsushin.com\n";
+    if(!empty($bcc)){
+        $header.="Bcc: ".$bcc."\n";
+	} else {
+        $header.="Bcc: info@undotsushin.com\n";
+	}
 	$header.="Reply-To:".$reply."\n";
 	$header.="Return-Path:".$from."\n";
 	$header.="Content-Type:text/plain;charset=\"ISO-2022-JP\"";
@@ -990,13 +1051,13 @@ function print_json($y,$r){
 	}else{
 		header('Content-Type: application/json; charset=utf-8');
 		echo json_encode($y,JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
-	}	
+	}
 }
 
 function get_contents($url){
-	
-	if(preg_match("/http/",$url)){	
-		$ch=curl_init();	
+
+	if(preg_match("/http/",$url)){
+		$ch=curl_init();
 		curl_setopt($ch,CURLOPT_URL,$url);
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 		if(preg_match("/https/",$url)){
@@ -1007,7 +1068,7 @@ function get_contents($url){
 	}else{
 		$output=file_get_contents($url);
 	}
-	
+
 	if(curl_errno($ch))return "";
 	else return $output;
 }
@@ -1021,4 +1082,62 @@ function split_utime($a){
 	}
 }
 
+/**
+ * @param $article_id
+ * @param bool $reload
+ * @return mixed
+ * 未ログイン時の記事詳細情報をS3のjsonから取得、存在しない場合は新たに作成する
+ */
+function create_article_json($article_id, $reload = false)
+{
+    global $articletable, $o, $ImgPath;
+    $object_key = 'json/articles/' . $article_id . '.json';
+    $url = join('/', [$ImgPath, $object_key]);
+
+    $json = @file_get_contents($url);
+    if(empty($json) || $reload)
+    {
+        $json = [];
+        $sql = sprintf("select * from %s",sprintf($articletable,set_isbookmark(),sprintf(" and id=%s",$article_id)));
+        $o->query($sql);
+        while($f = $o->fetch_array())
+        {
+            $json[] = $f;
+        }
+        $json = json_encode($json);
+
+        $s3 = new S3Module;
+        $s3->createObject($json, $object_key, 'application/json');
+    }
+    return json_decode($json, true);
+}
+
+/**
+ * @param bool $reload
+ * @return mixed
+ * 未ログイン時のinitialize用json
+ */
+function create_initialize_json($reload = false)
+{
+    global $articletable, $o, $ImgPath;
+    $object_key = 'json/initialize.json';
+    $url = join('/', [$ImgPath, $object_key]);
+
+    $json = @file_get_contents($url);
+    if(empty($json) || $reload)
+    {
+        $json = [];
+        $sql = sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark("")," and m_time > now() - interval '10 day'"),100,0);
+        $o->query($sql);
+        while($f = $o->fetch_array())
+        {
+            $json[] = $f;
+        }
+        $json = json_encode($json);
+
+        $s3 = new S3Module;
+        $s3->createObject($json, $object_key, 'application/json');
+    }
+    return json_decode($json, true);
+}
 ?>

@@ -97,7 +97,7 @@
             <img src="/assets/sp/images/ushi/summary-figure_niku.png" alt="">
             <figcaption class="ushi__summary__notice">※画像はイメージです</figcaption>
           </figure>
-          <p class="ushi__summary__lead"><img src="/assets/sp/images/ushi/summary-lead.png" alt="スポーツニュースを3日連続見て最大5,000円分の高級ブランド牛を買えるクーポンがもらえる！"></p>
+          <p class="ushi__summary__lead">スポーツニュースを3日連続見て最大5,000円分の高級ブランド牛を買えるクーポンがもらえる！</p>
           <i class="ushi__summary__bull"><img src="/assets/sp/images/ushi/summary-figure_bull.png" alt=""></i>
           <h1 class="ushi__summary__heading"><img src="/assets/sp/images/ushi/summary-heading.png" alt="SPORTS BULL x Wowma! 牛キャンペーン"></h1>
           <p class="ushi__summary__date"><img src="/assets/sp/images/ushi/summary-date.png" alt="エントリー期間 2017年9月25日 - 10月31日まで"></p>
@@ -107,10 +107,10 @@
       <div class="ushi__pr_app__wrapper for-browser">
 
         <div id="js-ushi__mom" class="for-browser">
-          <div id="js-ushi__pr_app" class="ushi__pr_app cm_disable"><!-- CM公開前は .cm_disable -->
+          <div id="js-ushi__pr_app" class="ushi__pr_app">
             <div class="ushi__pr_app__outer">
               <div class="ushi__pr_app__inner">
-                <figure class="ushi__pr_app__cm"><a href="hoge"><img src="/assets/sp/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>
+                <figure class="ushi__pr_app__cm"><a href="/p/203529/"><img src="/assets/sp/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>
                 <div class="ushi__pr_app__btn__container">
                   <h3 class="ushi__pr_app__btn__heading"><img src="/assets/sp/images/ushi/pr_app-copy.png" alt="アプリを無料ダウンロードして今すぐ応募する！"></h3>
                   <ul class="ushi__pr_app__btn__list">

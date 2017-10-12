@@ -28,6 +28,7 @@ class getData {
 					// ダイジェストエリアを試合詳細へ変更するためコメントアウト
 					// if (empty($game['highlightmovieurl'])) {
 					// 	$movie = "<div class='digest'>ダイジェスト動画</div>";
+					// 	// $movie = "<a class='digest active' href='/stats/ua_kansai/match/?gameId={$game['gameid']}'>LIVE速報中</a>";
 					// }else{
 					// 	$movie = "<a class='digest active' href='".$game['highlightmovieurl']."'>ダイジェスト動画</a>";
 					// }
@@ -53,6 +54,7 @@ EOM;
 					$li .= <<< EOM
 						<li>
 							{$gameLink}
+							{$movie}
 						</li>
 EOM;
 				}
@@ -143,6 +145,7 @@ EOM;
 		$drawFirst = $json["team"][1];
 		$scoreInfo = $json["events"];
 		$date = date("n月j日",strtotime($gameinfo["date"]));
+		$kickoff = date("H:i",strtotime($gameinfo['kickoff']));
 
 		$result = array("date"=>$date,"playFirstName"=>$playFirst['name'],"drawFirstName"=>$drawFirst['name'],"headInner"=>"","movie"=>"","digest"=>"","quarter"=>"","data"=>"","scoreInfo"=>"","personalInfo"=>"","autoReload"=>false);
 
@@ -176,7 +179,7 @@ EOM;
 			</div>
 			<div class="state">{$gameinfo['status']}</div>
 			<div class="info">
-				{$date}({$gameinfo['weekday']})　{$gameinfo['kickoff']}～<br />
+				{$date}({$gameinfo['weekday']})　{$kickoff}～<br />
 				於：{$gameinfo['stadium']}　天候：{$gameinfo['weather']}　観衆：{$gameinfo['spectators']}人
 			</div>
 EOM;
@@ -456,18 +459,21 @@ EOM;
 		}
 		//全日程から予定1日分を取得
 		foreach ($json["response"]["schedule"] as $key => $value) {
-			$cnt = 0;
 			//大会ごとにまわす
 			foreach ($value["league"] as $oneDay) {
 				//一番最初の試合詳細がない（jsonがない）試合を残す
+				$cnt = 0;
+				$cnt2 = 0;
 				foreach ($oneDay["games"] as $game) {
 					if (empty($game['json'])) {
-						$recentArray[$oneDay["date"]][] = $oneDay;
-						$cnt++;
-						break;
+						$cnt++;//試合が始まっていない試合数
 					}
+					$cnt2++;//その日の試合数
 				}
-				if ($cnt == 1) break;
+				if ($cnt == $cnt2){
+					$recentArray[$oneDay["date"]][] = $oneDay;
+					break;
+				}
 			}
 		}
 		

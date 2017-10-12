@@ -66,7 +66,7 @@ export default class SPComponentSingleRecommendAd extends React.Component {
    */
   componentDidMount() {
     if (this.container) {
-      console.log('SPComponentSingleRecommendAd.componentDidMount', this.container);
+      // console.log('SPComponentSingleRecommendAd.componentDidMount', this.container);
       this.ad();
     }
   }
@@ -74,7 +74,7 @@ export default class SPComponentSingleRecommendAd extends React.Component {
    * 広告タグ挿入
    */
   ad() {
-    console.log('SPComponentSingleRecommendAd.ad ------------');
+    // console.log('SPComponentSingleRecommendAd.ad ------------');
     const container = this.container;
     const { index } = this.props;
     const div = document.createElement('div');
@@ -82,7 +82,7 @@ export default class SPComponentSingleRecommendAd extends React.Component {
     script.src = index === 1 ? this.src.first : this.src.second;
     div.appendChild(script);
     container.appendChild(div);
-    console.log('SPComponentSingleRecommendAd.ad', container);
+    // console.log('SPComponentSingleRecommendAd.ad', container);
   }
   /**
    * div.widget-post-carousel-item

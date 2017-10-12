@@ -219,8 +219,10 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
   else :
     $domain="http://".$_SERVER['SERVER_NAME'];
   endif;
-  $ImgPath="https://dev.sportsbull.jp";
-  $UserImgPath="https://sportsbull.jp";
+//  $ImgPath="https://dev.sportsbull.jp";
+  $ImgPath="https://dev-img.sportsbull.jp";
+//  $UserImgPath="https://sportsbull.jp";
+  $UserImgPath="https://dev-img.sportsbull.jp";
   $SQLLOG="/vagrant/.tmp/log/ut_sqllog.txt";
   $CMSLOG="/vagrant/.tmp/log/ut_cmslog.txt";
   $LOGTXT="/vagrant/.tmp/log/ut_log.txt";

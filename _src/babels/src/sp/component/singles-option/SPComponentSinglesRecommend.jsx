@@ -14,13 +14,20 @@
 import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
 
+// data
 import { Safety } from '../../../data/Safety';
 
+// app
 import { Empty } from '../../../app/const/Empty';
+import { Env } from '../../../app/Env';
 
+// dae
 import { ArticleDae } from '../../../dae/ArticleDae';
+
+// ga
 import { Ga } from '../../../ga/Ga';
 
+// singles-option/ad
 import SPComponentSingleRecommendAd from './ad/SPComponentSingleRecommendAd';
 
 // React
@@ -41,7 +48,7 @@ const BoardAd = ({ index, slug }) => {
   // |0|ad|1|2|ad|3|4|
   if (index === 1 || index === 3) {
     // output
-    console.log('BoardAd', index);
+    // console.log('BoardAd', index);
     return (
       <SPComponentSingleRecommendAd
         index={index}
@@ -65,10 +72,14 @@ BoardAd.propTypes = {
  * onclick="UT.Ga.click('under_article_recommend', '[読んでいる記事URL]', 'click', '[リンク先記事URL]', true);"
  * ```
  * @param {string} href リンク先記事URL
+ * @param {Event} [event=null] click event
  * @since 2017-09-25
  */
-const ga = (href) => {
-  Ga.click('under_article_recommend', location.href, 'click', href, true);
+const ga = (href, event = null) => {
+  if (Env.mode !== Env.PRODUCTION) {
+    event.preventDefault();
+  }
+  Ga.click('SPComponentSinglesRecommend.ga', 'under_article_recommend', location.href, 'click', href, true);
 };
 // -------------------------------------------------------------------
 
@@ -91,7 +102,7 @@ const BoardItem = ({ single, index }) => {
       <a
         href={single.url}
         className="post"
-        onClick={() => (ga(single.url))}
+        onClick={(event) => (ga(single.url, event))}
       >
         <ComponentArticleThumbnail
           mediaType={single.mediaType}
