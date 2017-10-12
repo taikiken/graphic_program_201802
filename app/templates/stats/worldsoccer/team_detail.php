@@ -12,7 +12,9 @@
       <?php include __DIR__.'/_nav.php'; ?>
 
       <!-- 詳細埋め込み　ここから -->
-      <script src="//widgets.sports.gracenote.com/gns.widget.loader.js?c=1323" data-widget_id="kyodo_sportsbull-fb-squad-<?php echo $page['widget_id']; ?>" data-team_id="<?php echo $page['team_id']; ?>"></script>
+        <div class="stats-worldsoccer-widget">
+            <script src="//widgets.sports.gracenote.com/gns.widget.loader.js?c=1323" data-widget_id="kyodo_sportsbull-fb-squad-<?php echo $page['widget_id']; ?>" data-team_id="<?php echo $page['team_id']; ?>"></script>
+  </div>
       <!-- 詳細埋め込み　ここまで -->
 
     </section><!-- /.main-sec -->
