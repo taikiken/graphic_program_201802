@@ -167,6 +167,15 @@ foreach($items as $item)
 			}
 			$item_map['flag'] = 1;
 			$item_map['cid']  = 1;
+			/*
+			|--------------------------------------------------------------------------
+			| !note
+			|--------------------------------------------------------------------------
+			|
+			| makesql関数内でマッチングさせている処理があるので
+			| select max 〜〜 は 小文字で記述
+			|
+			*/
 			$item_map['n']    = '(select max(n) + 1 from repo_n where cid = 1)';
 
 			if(strlen($enclosure_url) > 0) $item_map["img1"] = outimg($enclosure_url);
