@@ -38,6 +38,7 @@ $xml     = simplexml_load_string($content);
 $items   = $xml->xpath('//item'); // itemのXMLオブジェクト配列取得
 
 
+
 foreach($items as $item)
 {
 	#
