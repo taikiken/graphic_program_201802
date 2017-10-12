@@ -480,17 +480,15 @@ $app->group('/stats', function () use($app) {
           $S3Module = new S3Module;
           $edition_list_json = $S3Module->getUrl($edition_list_s3key);
 
-          $language_code = '';
           $team = '';
           $season = '';
 
           if (!empty(file_get_contents($edition_list_json, false, null, 0, 1))){
             $edition_list_json = json_decode(file_get_contents($edition_list_json));
-            $language_code = $edition_list_json->$edition_id->languageCode;
             $season = $edition_list_json->$edition_id->season;
 
           }
-          if (!empty($language_code)) {
+          if (!empty($season)) {
             $team_list_s3key = 'worldsoccer/json/{league}/{season}/team_list.json';
 
             $search = [
