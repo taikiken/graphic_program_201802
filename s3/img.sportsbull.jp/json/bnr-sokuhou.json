@@ -5,32 +5,16 @@
         "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-baseball_pro.jpg",
         "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-baseball_pro.jpg"
       },
-      "url": "https://sportsbull.jp/stats/npb/",
+      "url": "https://sportsbull.jp/stats/npb/?utm_source=spbl&utm_medium=top_stats&utm_campaign=npb",
       "alt": "プロ野球 速報&amp;データを見る"
     },
     {
       "image": {
-        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-soccer_jleague.jpg",
-        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-soccer_jleague.jpg"
+        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-baseball_mlb.jpg",
+        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-baseball_mlb.jpg"
       },
-      "url": "https://sportsbull.jp/jleague/match/",
-      "alt": "Jリーグ 速報&amp;データを見る"
-    },
-    {
-      "image": {
-        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-bleague.png",
-        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-bleague.png"
-      },
-      "url": "http://sportsbull.jp/stats/bleague/",
-      "alt": "Bリーグ 速報&amp;データを見る"
-    },
-    {
-      "image": {
-        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-golf.jpg",
-        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-golf.jpg"
-      },
-      "url": "http://sportsbull.jp/stats/golf/",
-      "alt": "ゴルフ 速報&amp;データを見る"
+      "url": "https://sportsbull.jp/stats/mlb/?utm_source=spbl&utm_medium=top_stats&utm_campaign=mlb",
+      "alt": "MLB 速報&amp;データを見る"
     }
   ],
   "bannerLists": [
