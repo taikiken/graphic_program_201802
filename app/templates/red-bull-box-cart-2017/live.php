@@ -20,21 +20,17 @@ $live = array(
 </div><!-- /.live-streaming__container -->
 
 <!-- video.js -->
-<link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video-js.min.css" rel="stylesheet" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video.js"></script>
-<!-- //video.js -->
-
-<!-- hls -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.5.0/videojs-contrib-hls.js"></script>
-<!-- //hls -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-resolution-switcher/0.4.2/videojs-resolution-switcher.js"></script>
+<!-- //video.js -->
 
 <!-- ads - sdk -->
 <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
 <!-- //ads - sdk -->
 
 <!-- ads - ad -->
-<link href="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.min.css" rel="stylesheet" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.js"></script>
 <!-- //ads - ad -->
 
 <!-- ads - ima -->
@@ -42,9 +38,17 @@ $live = array(
 <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.js"></script>
 <!-- //ads - ima -->
 
-<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
-<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
-<link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
+<!-- Player original CSS-->
+<link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video-js.css" rel="stylesheet">
+<!-- Video switcher CSS -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-resolution-switcher/0.4.2/videojs-resolution-switcher.css">
+<!-- Google IMA CSS -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.css" />
+<!-- Player skin custom CSS -->
+<link href="/stats/assets/univbb/css/videojs.custom.css" rel="stylesheet">
+<!-- Player skin custom CSS for Ads -->
+<link rel="stylesheet" href="/stats/assets/univbb/css/videojs.ima.css" />
+<link rel="stylesheet" href="/stats/assets/univbb/css/video.css" />
 
 <style>
 .live-streaming {
