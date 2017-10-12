@@ -65,7 +65,7 @@ foreach($items as $item)
 	$pref   = (string)$item->pref;
 
 	$body = (string)$item->description;
-	$modbody = str_replace("\'","''",preg_replace('/(\r|\n|\t)/', '', $body));
+	$modbody = str_replace('<p>&nbsp;</p>', '', str_replace("\'","''",preg_replace('/(\r|\n|\t)/', '', $body)));
 
 	$a_time = strtotime((string)$item->lastUpdate);
 	$u_time = strtotime((string)$item->pubDate);
@@ -123,7 +123,7 @@ foreach($items as $item)
 	$data = (object)$o->fetch_array();
 
 	# 既に登録されている記事の場合
-	if(strlen($list['id']) > 0)
+	if(strlen($data->id) > 0)
 	{
 		if($status == 1)
 		{
@@ -184,10 +184,10 @@ foreach($items as $item)
 			$sqla[] = makesql($item_map, 0);
 			$sqla[] = sprintf("INSERT INTO repo_body(pid, body) VALUES(CURRVAL('repo_n_id_seq'),'%s');", $modbody);
 			$sqla[] = relatedlink2($related_links);
+			$sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref}');";
 		}
 	}
 
-	$sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref}');";
 
 
 	if($sqla){
