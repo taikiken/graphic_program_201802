@@ -10,11 +10,11 @@
     },
     {
       "image": {
-        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-soccer_jleague.jpg",
-        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-soccer_jleague.jpg"
+        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-baseball_mlb.jpg",
+        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-baseball_mlb.jpg"
       },
-      "url": "https://sportsbull.jp/jleague/match/",
-      "alt": "Jリーグ 速報&amp;データを見る"
+      "url": "https://sportsbull.jp/mlb/",
+      "alt": "MLB 速報&amp;データを見る"
     }
   ],
   "bannerLists": [
