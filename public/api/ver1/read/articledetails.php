@@ -11,8 +11,8 @@ $uid=auth();
 $id=bind($_REQUEST["id"]);
 
 if($_REQUEST["api"]!="next"){
-	
-	$sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id=%s",$id)));	
+
+	$sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id=%s",$id)));
 }else{
 	
 	//番組表のみ順番を変える

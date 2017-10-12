@@ -76,7 +76,7 @@ if ($page['category']['slug'] == 'all') {
                     <li><a href="/crazy/detail/14/">
                             <div class="img"><img src="/assets/img/pickup_14.png" alt=""></div>
                             <div class="txt_area">
-                                <h3 class="name">川崎宗則</h3>
+                                <h3 class="name">川﨑宗則</h3>
                                 <p class="genre">野球</p>
                             </div>
                         </a></li>
@@ -142,4 +142,4 @@ if ($page['category']['slug'] == 'all') {
 </div><!-- /.body-sec -->
 
 <script src="https://code.jquery.com/jquery-git.min.js"></script>
-<script src="/assets/js/libs/crazy.js"></script>
+<script src="/assets/js/crazy.js"></script>
