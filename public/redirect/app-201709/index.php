@@ -1,3 +1,12 @@
+<?php
+
+if ( isset($_GET['id']) && $_GET['id'] ) :
+  $adjust_code = htmlspecialchars($_GET['id'], ENT_QUOTES, 'UTF-8');
+else :
+  $adjust_code = 'g2rvir';
+endif;
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -17,7 +26,7 @@
   ga('send', 'pageview');
 
   // config
-  var adjust_code = 'g2rvir';
+  var adjust_code = '<?php echo $adjust_code; ?>';
 
   if ( !(/dev|stg/i.test(window.location.host)) ) {
     var protocol = 'sportsbull';

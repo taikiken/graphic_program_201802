@@ -174,7 +174,7 @@ if(strlen($f["name"])>0){
   endif;
 
   #crazy
-# ref. #2559
+  # ref. #2559
   if ( $category === 'crazy' ) :
     $categoriesinfo['webviews']     = array(
         '/crazy/webview/',
@@ -182,11 +182,11 @@ if(strlen($f["name"])>0){
   endif;
 
   // #2080
-//  if ( $category === 'top' ) :
-//    $categoriesinfo['webviews'] = array(
-//      '/stats/webview/',
-//    );
-//  endif;
+  if ( $category === 'top' ) :
+    $categoriesinfo['webviews'] = array(
+      '/stats/webview/',
+    );
+  endif;
 
 $y["response"]=$categoriesinfo;
 
