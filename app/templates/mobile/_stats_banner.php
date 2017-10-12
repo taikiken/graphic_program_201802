@@ -15,9 +15,13 @@
 
   <div id="js-stats_banner-list"></div>
 
+<?php
+/*
   <div class="stats_banner-btn">
     <a class="stats_banner-btn-link" href="/stats/"><span>すべての速報&amp;データを見る</span></a>
   </div><!-- /.stats_banner-btn -->
+*/
+?>
 </aside>
 <?php
 // ------------------------------------------------------------
