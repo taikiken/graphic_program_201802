@@ -15,22 +15,6 @@
       },
       "url": "https://sportsbull.jp/jleague/match/",
       "alt": "Jリーグ 速報&amp;データを見る"
-    },
-    {
-      "image": {
-        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-baseball_koukou.jpg",
-        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-baseball_koukou.jpg"
-      },
-      "url": "https://sportsbull.jp/stats/hsb/",
-      "alt": "高校野球 速報&amp;データを見る"
-    },
-    {
-      "image": {
-        "pc": "https://img.sportsbull.jp/img-bnr-sokuhou/pc/top_bnr-golf.jpg",
-        "sp": "https://img.sportsbull.jp/img-bnr-sokuhou/sp/top_bnr-golf.jpg"
-      },
-      "url": "https://sportsbull.jp/stats/golf/",
-      "alt": "ゴルフ 速報&amp;データを見る"
     }
   ],
   "bannerLists": [
