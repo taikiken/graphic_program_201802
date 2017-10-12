@@ -25,6 +25,16 @@ const RSS_FILE = 'https://perfectanavi:C4IiJ8V7@test.perfectanavi.com/tag/sports
 $o = new db;
 $o->connect();
 
+$sql = sprintf("SELECT id,name,name_e,yobi FROM u_categories WHERE flag=1 AND id NOT IN(%s) ORDER BY id DESC",implode(",", $excategory));
+$o->query($sql);
+while($f = $o->fetch_array()) {
+	$sw = strlen($f["yobi"]) > 0 ? @explode(",", $f["yobi"]) :array();
+	$sw[] = $f["name"];
+	$r[] = array($f["id"], $sw, $f["name"]);
+	$exword[] = $f["name"];
+	$exword[] = $f["name_e"];
+}
+
 /*
 |--------------------------------------------------------------------------
 | パーフェクトナビRSS取込処理
@@ -151,7 +161,7 @@ foreach($items as $item)
 			$item_map['d2']   = $MEDIAID;
 			if(isset($item->category)) {
 				$category = (string)$item->category;
-				$item_map['m1'] =category_mapping($r, array($category, $keyword, $s["title"], $s["t1"], $body));
+				$item_map['m1'] =category_mapping($r, array($category, $keyword, $title, $item_map["t1"], $body));
 			} else {
 				$item_map['m1']   = 129;
 			}
@@ -173,8 +183,8 @@ foreach($items as $item)
 
 	if($sqla){
 		$sqla=implode("\n",$sqla);
-		// $res = $o->query($sqla);
-		var_dump(htmlspecialchars($sqla));
+		$res = $o->query($sqla);
+		// var_dump(htmlspecialchars($sqla));
 		unset($sqla);
 	}
 }
