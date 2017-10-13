@@ -57,7 +57,8 @@ foreach($items as $item)
 	$keyword = key_merge((string)$item->keyword);
 	$status  = (int)$item->status;
 	$enclosure_url = str_replace('http://','https://', (string)$item->enclosure->attributes()->url);
-	$related_links = (array)$item->relatedLink;
+	$related_links = $item->xpath('relatedLink');
+
 	$link  = (string)$item->link;
 	$title = (string)$item->title;
 
@@ -127,7 +128,7 @@ foreach($items as $item)
 	{
 		if($status == 1)
 		{
-			if(strtotime($item_map['a_time']) > strtotime($data->a_time))
+			if(/*true || */strtotime($item_map['a_time']) > strtotime($data->a_time))
 			{
 				if(strlen($enclosure_url) > 0)
 				{
@@ -143,7 +144,7 @@ foreach($items as $item)
 				splittime($item_map['m_time'], $item_map['a_time']);
 				$sqla[] = makesql($item_map, $data->id);
 				$sqla[] = sprintf("UPDATE repo_body SET body = '%s' WHERE pid = %s;", $modbody, $data->id);
-				$sqla[] = relatedlink2($related_links, $data->id);
+				$sqla[] = relatedlink_New($related_links, $data->id);
 			}
 		}
 		elseif ($status == 0)
@@ -161,9 +162,9 @@ foreach($items as $item)
 			$item_map['d2']   = $MEDIAID;
 			if(isset($item->category)) {
 				$category = (string)$item->category;
-				$item_map['m1'] =category_mapping($r, array($category, $keyword, $title, $item_map["t1"], $body));
+				$item_map['m1'] = category_mapping($r, array($category, $keyword, $title, $item_map["t1"], $body));
 			} else {
-				$item_map['m1']   = 129;
+				$item_map['m1'] = 129;
 			}
 			$item_map['flag'] = 1;
 			$item_map['cid']  = 1;
@@ -176,14 +177,14 @@ foreach($items as $item)
 			| select max 〜〜 は 小文字で記述
 			|
 			*/
-			$item_map['n']    = '(select max(n) + 1 from repo_n where cid = 1)';
+			$item_map['n'] = '(select max(n) + 1 from repo_n where cid = 1)';
 
 			if(strlen($enclosure_url) > 0) $item_map["img1"] = outimg($enclosure_url);
 
 			splittime($item_map["m_time"], $item_map["a_time"]);
 			$sqla[] = makesql($item_map, 0);
 			$sqla[] = sprintf("INSERT INTO repo_body(pid, body) VALUES(CURRVAL('repo_n_id_seq'),'%s');", $modbody);
-			$sqla[] = relatedlink2($related_links);
+			$sqla[] = relatedlink_New($related_links);
 			$sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref}');";
 		}
 	}
