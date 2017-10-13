@@ -19,12 +19,11 @@ $app->group('/red-bull-box-cart-2017',  function () use($app) {
   );
 
 
-  // リダイレクト不要
-  // /red-bull-box-cart-2017/ -> /red-bull-box-cart-2017/live/
+  // /red-bull-box-cart-2017/live/ -> /red-bull-box-cart-2017/
   // ==============================
-  // $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
-  //   return $response->withRedirect('/red-bull-box-cart-2017/live/', 301);
-  // });
+  $this->get('/live[/]', function ($request, $response, $args) use ($app, $page) {
+    return $response->withRedirect('/red-bull-box-cart-2017/', 301);
+  });
 
   // live
   // ==============================
