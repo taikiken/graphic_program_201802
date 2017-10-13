@@ -19,15 +19,17 @@ $app->group('/red-bull-box-cart-2017',  function () use($app) {
   );
 
 
+  // リダイレクト不要
   // /red-bull-box-cart-2017/ -> /red-bull-box-cart-2017/live/
   // ==============================
-  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
-    return $response->withRedirect('/red-bull-box-cart-2017/live/', 301);
-  });
+  // $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+  //   return $response->withRedirect('/red-bull-box-cart-2017/live/', 301);
+  // });
 
   // live
   // ==============================
-  $this->get('/live[/]', function ($request, $response, $args) use ($app, $page) {
+  // $this->get('/live[/]', function ($request, $response, $args) use ($app, $page) {
+  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
 
     $args['path'] = $args;
     $args['page'] = $page;

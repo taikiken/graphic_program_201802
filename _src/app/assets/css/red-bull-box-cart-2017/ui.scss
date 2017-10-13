@@ -3,13 +3,13 @@
 // import mixin / function
 @import "../../../../scss/asset";
 
-// normalize / reset / 基本 class, tag 設定
+// normalize / reset / åŸºæœ¬ class, tag è¨­å®š
 @import "../../../../bower_exports/modularized/normalize";
 @import "../../../../scss/style/reset";
 @import "../../../../scss/dependencies/style";
 
 // --------------------------------------------
-// 以下、import ファイルを編集
+// ä»¥ä¸‹ã€import ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç·¨é›†
 // --------------------------------------------
 
 // page layout
@@ -104,6 +104,10 @@
   &--sp {
     // display: none;
   }
+}
+
+#liveVideo {
+  text-align: center;
 }
 
 
@@ -469,6 +473,10 @@
     //.related__post__thumb
     &__thumb {
       width: 300px;
+
+      img {
+        width: 280px;
+      }
     }
 
     //.related__post__text
