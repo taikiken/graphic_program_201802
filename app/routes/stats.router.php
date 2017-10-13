@@ -357,7 +357,6 @@ $app->group('/stats', function () use($app) {
           $edition_list_json = $S3Module->getUrl($edition_list_s3key);
 
           $season = '';
-          $date = '';
           $home_team = '';
           $away_team = '';
           $match_date = '';
@@ -380,7 +379,6 @@ $app->group('/stats', function () use($app) {
             if (!empty(file_get_contents($match_week_json, false, null, 0, 1))){
               $match_week_json = json_decode(file_get_contents($match_week_json));
               $week_id = $match_week_json->$match_id->weekId;
-              $date = $match_week_json->$match_id->date;
             }
           }
 
@@ -406,7 +404,9 @@ $app->group('/stats', function () use($app) {
                 if ($match->n_MatchID == $match_id) {
                   $home_team = $match->c_HomeTeam;
                   $away_team = $match->c_AwayTeam;
-                  $DateTime = new DateTime($date);
+                  $utc_timestamp = substr($match->d_DateUTC, 6, 10);
+                  $DateTime = new DateTime();
+                  $DateTime->setTimestamp($utc_timestamp)->setTimezone(new DateTimeZone('Asia/Tokyo'));
                   $match_date = $DateTime->format('Y年m月d日');
                   $week_list = array( '日', '月', '火', '水', '木', '金', '土');
                   $week = $week_list[(int)$DateTime->format('w')];
