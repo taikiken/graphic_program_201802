@@ -416,7 +416,11 @@ $app->group('/stats', function () use($app) {
             }
           }
 
-          $title = $home_team.' vs '.$away_team.' - '.$match_date;
+          if (empty($home_team)) {
+            $title = '未定';
+          } else {
+            $title = $home_team.' vs '.$away_team.' - '.$match_date;
+          }
           $breadarray = [
             '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
             '<a itemprop="item" href="/stats/worldsoccer/',
