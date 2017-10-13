@@ -47,6 +47,7 @@
   <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
 
   <link rel="stylesheet" href="/assets/css/stats/worldsoccer/ui.css">
+  <link rel="stylesheet" href="/stats/assets/worldsoccer/css/style.css">
 
   <!-- optimize -->
   <style>.async-hide { opacity: 0 !important} </style>
