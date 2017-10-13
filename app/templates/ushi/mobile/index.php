@@ -227,8 +227,8 @@
     <div class="ushi__footer__btn__container">
       <h3 class="ushi__footer__btn__heading"><img src="/assets/sp/images/ushi/footer-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
       <ul class="ushi__footer__btn__list">
-        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/ushi/footer-btn-ios.png" alt="App Store"></a></li>
-        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/ushi/footer-btn-android.png" alt="Google play"></a></li>
+        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://app.adjust.com/i0sjex" target="_blank"><img src="/assets/sp/images/ushi/footer-btn-ios.png" alt="App Store"></a></li>
+        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://app.adjust.com/piaqfs" target="_blank"><img src="/assets/sp/images/ushi/footer-btn-android.png" alt="Google play"></a></li>
       </ul><!-- /.ushi__pr_app__btn__list -->
     </div><!-- /.ushi__pr_app__btn__container -->
     <p class="ushi__footer__copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
