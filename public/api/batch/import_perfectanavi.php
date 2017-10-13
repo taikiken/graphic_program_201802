@@ -25,6 +25,16 @@ const RSS_FILE = 'https://perfectanavi:C4IiJ8V7@test.perfectanavi.com/tag/sports
 $o = new db;
 $o->connect();
 
+$sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
+$o->query($sql);
+$sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
+$o->query($sql);
+$sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
+$o->query($sql);
+$sql = "delete from repo_n where d2={$MEDIAID};";
+$o->query($sql);
+// return;
+
 $sql = sprintf("SELECT id,name,name_e,yobi FROM u_categories WHERE flag=1 AND id NOT IN(%s) ORDER BY id DESC",implode(",", $excategory));
 $o->query($sql);
 while($f = $o->fetch_array()) {
@@ -67,6 +77,24 @@ foreach($items as $item)
 
 	$body = (string)$item->description;
 	$modbody = str_replace('<p>&nbsp;</p>', '', str_replace("\'","''",preg_replace('/(\r|\n|\t)/', '', $body)));
+
+	#
+	# 記事本文中の画像は先方のサーバを参照するのではなくブルのS3にコピーする
+	# 画像本文のimgタグのsrcをoutimg()でS3にコピーしsrcをS3のパスに変更
+	#
+	preg_match_all("#<img[^>]+>#", $modbody, $match);
+	for($i = 0; $i < count($match[0]); $i++)
+	{
+		preg_match('/<img.*src\s*=\s*[\"|\'](.*?)[\"|\'].*alt\s*=\s*[\"|\'](.*?)[\"|\'].*>/i', $match[0][$i], $replaceimg);
+		if(preg_match("#^http#", $replaceimg[1])) {
+			$img = outimg($replaceimg[1], 0);
+			$modbody = str_replace(
+				$match[0][$i],
+				sprintf("<img src=\"%s/raw/%s\">%s", $ImgPath, $img, strlen($replaceimg[2])>0?sprintf("<br>%s",$replaceimg[2]):""),
+				$modbody
+			);
+		}
+	}
 
 	$a_time = strtotime((string)$item->lastUpdate);
 	$u_time = strtotime((string)$item->pubDate);
