@@ -416,7 +416,7 @@ $app->group('/stats', function () use($app) {
             }
           }
           if (empty($home_team) && empty($away_team)) {
-            $title = '未定';
+            $title = '未定'.' - '.$match_date;
           } else {
             $home_team = @$home_team ?: '未定';
             $away_team = @$away_team ?: '未定';
