@@ -67,6 +67,8 @@ foreach($items as $item)
 	$keyword = key_merge((string)$item->keyword);
 	$status  = (int)$item->status;
 	$enclosure_url = str_replace('http://','https://', (string)$item->enclosure->attributes()->url);
+	$enclosure_url = preg_replace('/test\.perfectanavi\.com/m', 'perfectanavi:C4IiJ8V7@test.perfectanavi.com', $enclosure_url[1]);
+
 	$related_links = $item->xpath('relatedLink');
 
 	$link  = (string)$item->link;
@@ -76,25 +78,12 @@ foreach($items as $item)
 	$pref   = (string)$item->pref;
 
 	$body = (string)$item->description;
-	$modbody = str_replace('<p>&nbsp;</p>', '', str_replace("\'","''",preg_replace('/(\r|\n|\t)/', '', $body)));
-
 	#
+	# modifytag：
 	# 記事本文中の画像は先方のサーバを参照するのではなくブルのS3にコピーする
 	# 画像本文のimgタグのsrcをoutimg()でS3にコピーしsrcをS3のパスに変更
 	#
-	preg_match_all("#<img[^>]+>#", $modbody, $match);
-	for($i = 0; $i < count($match[0]); $i++)
-	{
-		preg_match('/<img.*src\s*=\s*[\"|\'](.*?)[\"|\'].*alt\s*=\s*[\"|\'](.*?)[\"|\'].*>/i', $match[0][$i], $replaceimg);
-		if(preg_match("#^http#", $replaceimg[1])) {
-			$img = outimg($replaceimg[1], 0);
-			$modbody = str_replace(
-				$match[0][$i],
-				sprintf("<img src=\"%s/raw/%s\">%s", $ImgPath, $img, strlen($replaceimg[2])>0?sprintf("<br>%s",$replaceimg[2]):""),
-				$modbody
-			);
-		}
-	}
+	$modbody = modifytag(str_replace('<p>&nbsp;</p>', '', str_replace("\'","''",preg_replace('/(\r|\n|\t)/', '', $body))));
 
 	$a_time = strtotime((string)$item->lastUpdate);
 	$u_time = strtotime((string)$item->pubDate);
@@ -228,5 +217,38 @@ foreach($items as $item)
 }
 
 include $INCLUDEPATH.'public/display.php';
+
+function modifytag($s){
+
+	global $ImgPath;
+
+	if(count($s)==0)return "";
+
+	$s = preg_replace('/ alt=""/', '', $s);
+	preg_match_all("/<img[^>]+>/", $s, $u);
+	for($i = 0; $i<count($u[0]); $i++){
+		preg_match('/src="([^"]+)"/',$u[0][$i], $r);
+		#
+		# パーフェクタナビはテスト環境はBasic認証かかってるから... 置換しておく
+		#
+		$image_url = preg_replace('/test\.perfectanavi\.com/m', 'perfectanavi:C4IiJ8V7@test.perfectanavi.com', $r[1]);
+		// echo $image_url . "<br>";
+		$img = outimg($image_url, 0, false);
+		if(preg_match("/:\/\//", $r[1])) {
+			if(strlen($img) > 0){
+				$s = str_replace($u[0][$i], sprintf("<img src=\"%s/raw/%s\"><br>", $ImgPath, $img), $s);
+			}else{
+				$s = str_replace($u[0][$i], "", $s);
+			}
+		}else{
+			$s = str_replace($u[0][$i], "", $s);
+		}
+	}
+
+	$s = str_replace(array("<p></p>", "<p>&nbsp;</p>"), "", $s);
+	$s = str_replace("\'", "''", preg_replace("/(\r|\n|\t)/", "", $s));
+
+	return $s;
+}
 
 ?>

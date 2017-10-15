@@ -414,14 +414,16 @@ function getfileinfo($i){
 	return array(sprintf("%s%s",date("YmdHis"),$m[1]),$ext);
 }
 
-function outimg($oimg,$tumb=1){
+function outimg($oimg,$tumb=1, $parse=true){
 
 	global $SERVERPATH;
 	$imgp=$SERVERPATH."/prg_img/";
 
-	$oimg=str_replace(" ","%20",$oimg);
-	$u=parse_url($oimg);
-	$oimg=sprintf("%s://%s%s",$u["scheme"],$u["host"],$u["path"]);
+	if($parse) {
+		$oimg=str_replace(" ","%20",$oimg);
+		$u=parse_url($oimg);
+		$oimg=sprintf("%s://%s%s",$u["scheme"],$u["host"],$u["path"]);
+	}
 
 	$fl=getfileinfo($oimg);
 	$img=get_imgs($oimg);
