@@ -10,32 +10,32 @@
  *
  */
 
-/**
- * 動的挿入する `script` tag
- * @see https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-330758911
- */
-class Tag {
-  /**
-   * PC script tag
-   * @returns {Element} PC script tag
-   */
-  static pc() {
-    const script = document.createElement('script');
-    // eslint-disable-next-line max-len
-    script.innerHTML = 'googletag.cmd.push(function(){googletag.display("div-gpt-ad-1505887740744-0");});';
-    return script;
-  }
-  /**
-   * SP script tag
-   * @returns {Element} SP script tag
-   */
-  static sp() {
-    const script = document.createElement('script');
-    // eslint-disable-next-line max-len
-    script.innerHTML = 'googletag.cmd.push(function(){googletag.display("div-gpt-ad-1505887822751-0");});';
-    return script;
-  }
-}
+// /**
+//  * 動的挿入する `script` tag
+//  * @see https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-330758911
+//  */
+// class Tag {
+//   /**
+//    * PC script tag
+//    * @returns {Element} PC script tag
+//    */
+//   static pc() {
+//     const script = document.createElement('script');
+//     // eslint-disable-next-line max-len
+//     script.innerHTML = 'googletag.cmd.push(function(){googletag.display("div-gpt-ad-1505887740744-0");});';
+//     return script;
+//   }
+//   /**
+//    * SP script tag
+//    * @returns {Element} SP script tag
+//    */
+//   static sp() {
+//     const script = document.createElement('script');
+//     // eslint-disable-next-line max-len
+//     script.innerHTML = 'googletag.cmd.push(function(){googletag.display("div-gpt-ad-1505887822751-0");});';
+//     return script;
+//   }
+// }
 
 // --------------------------------------
 // common element
@@ -96,22 +96,30 @@ const button = () => {
 const sp = (modal) => {
   const contentsElement = contents();
   const linkElement = link();
-  const scriptElement = document.createElement('script');
-  // eslint-disable max-len
-  scriptElement.innerHTML = `googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/download-popup/download-popup-mobile', [300, 330], 'div-gpt-ad-1505887822751-0').addService(googletag.pubads());
-          googletag.pubads().enableSingleRequest();
-          googletag.enableServices();
-        });`;
+  // const scriptElement = document.createElement('script');
+  // // eslint-disable max-len
+  // scriptElement.innerHTML = `googletag.cmd.push(function() {
+  //         googletag.defineSlot('/531683568/download-popup/download-popup-mobile', [300, 330], 'div-gpt-ad-1505887822751-0').addService(googletag.pubads());
+  //         googletag.pubads().enableSingleRequest();
+  //         googletag.enableServices();
+  //       });`;
   // eslint-enable max-len
-  const target = document.createElement('div');
-  target.id = 'div-gpt-ad-1505887822751-0';
-  target.style.cssText = 'height:330px; width:300px;';
+  // const target = document.createElement('div');
+  // target.id = 'div-gpt-ad-1505887822751-0';
+  // target.style.cssText = 'height:330px; width:300px;';
   const close = button();
   // ---
   // link
-  linkElement.appendChild(scriptElement);
-  linkElement.appendChild(target);
+  // linkElement.appendChild(scriptElement);
+  // linkElement.appendChild(target);
+  // @see https://github.com/undotsushin/undotsushin/issues/2688
+  // @since 2017-10-16 hard code する
+  const a = document.createElement('a');
+  a.href = `https://app.adjust.com/bm04c5?deep_link=sportsbull://action?url=${location.href}`;
+  const img = document.createElement('img');
+  img.src = '/assets/images/popup/cm_popup_0929_sp-1_preview.png';
+  a.appendChild(img);
+  linkElement.appendChild(a);
   // contents
   contentsElement.appendChild(linkElement);
   contentsElement.appendChild(close);
@@ -123,7 +131,7 @@ const sp = (modal) => {
   document.body.appendChild(modal);
   // return
   return {
-    target,
+    // target,
     close,
     bgElement,
   };
@@ -140,22 +148,30 @@ const sp = (modal) => {
 const pc = (modal) => {
   const contentsElement = contents();
   const linkElement = link();
-  const scriptElement = document.createElement('script');
-  // eslint-disable max-len
-  scriptElement.innerHTML = `googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/download-popup/download-popup-desktop', [580, 280], 'div-gpt-ad-1505887740744-0').addService(googletag.pubads());
-          googletag.pubads().enableSingleRequest();
-          googletag.enableServices();
-        });`;
-  // eslint-enable max-len
-  const target = document.createElement('div');
-  target.id = 'div-gpt-ad-1505887740744-0';
-  target.style.cssText = 'height:280px; width:580px;';
+  // const scriptElement = document.createElement('script');
+  // // eslint-disable max-len
+  // scriptElement.innerHTML = `googletag.cmd.push(function() {
+  //         googletag.defineSlot('/531683568/download-popup/download-popup-desktop', [580, 280], 'div-gpt-ad-1505887740744-0').addService(googletag.pubads());
+  //         googletag.pubads().enableSingleRequest();
+  //         googletag.enableServices();
+  //       });`;
+  // // eslint-enable max-len
+  // const target = document.createElement('div');
+  // target.id = 'div-gpt-ad-1505887740744-0';
+  // target.style.cssText = 'height:280px; width:580px;';
   const close = button();
   // ---
   // link
-  linkElement.appendChild(scriptElement);
-  linkElement.appendChild(target);
+  // linkElement.appendChild(scriptElement);
+  // linkElement.appendChild(target);
+  // @see https://github.com/undotsushin/undotsushin/issues/2688
+  // @since 2017-10-16 hard code する
+  const a = document.createElement('a');
+  a.href = 'https://sportsbull.jp/about/';
+  const img = document.createElement('img');
+  img.src = '/assets/images/popup/cm_popup_0929_pc-1_preview.png';
+  a.appendChild(img);
+  linkElement.appendChild(a);
   // contents
   contentsElement.appendChild(linkElement);
   contentsElement.appendChild(close);
@@ -167,7 +183,7 @@ const pc = (modal) => {
   document.body.appendChild(modal);
   // return
   return {
-    target,
+    // target,
     close,
     bgElement,
   };
@@ -188,9 +204,10 @@ export default class Modal {
   static sp(modal) {
     // console.log('Modal.sp', modal);
     // sp make dom
-    const { close, target, bgElement } = sp(modal);
+    const { close, bgElement } = sp(modal);
     // instance
-    const instance = new Modal(modal, close, target, true, bgElement);
+    // const instance = new Modal(modal, close, target, true, bgElement);
+    const instance = new Modal(modal, close, true, bgElement);
     instance.start();
   }
   /**
@@ -200,9 +217,10 @@ export default class Modal {
   static pc(modal) {
     // console.log('Modal.pc', modal);
     // pc make dom
-    const { close, target, bgElement } = pc(modal);
+    const { close, bgElement } = pc(modal);
     // instance
-    const instance = new Modal(modal, close, target, false, bgElement);
+    // const instance = new Modal(modal, close, target, false, bgElement);
+    const instance = new Modal(modal, close, false, bgElement);
     instance.start();
   }
   // ---------------------------------------------------
@@ -212,11 +230,11 @@ export default class Modal {
    * modal を準備します
    * @param {Element} modal root HTMLElement
    * @param {Element} close close button HTMLElement
-   * @param {Element} target script tag insert target HTMLElement
    * @param {boolean} mobile sp flag
    * @param {Element} bgElement 背景 HTMLElement
+   * @param {?Element} [target=null] script tag insert target HTMLElement
    */
-  constructor(modal, close, target, mobile, bgElement) {
+  constructor(modal, close, mobile, bgElement, target = null) {
     /**
      * root HTMLElement
      * @type {Element}
@@ -229,7 +247,7 @@ export default class Modal {
     this.close = close;
     /**
      * script tag insert target HTMLElement
-     * @type {Element}
+     * @type {?Element}
      */
     this.target = target;
     /**
@@ -260,8 +278,8 @@ export default class Modal {
     this.close.addEventListener('click', this.onClick, false);
     this.bg.addEventListener('click', this.onClick, false);
     this.modal.style.cssText = 'display: block;';
-    const script = this.mobile ? Tag.sp() : Tag.pc();
-    this.target.appendChild(script);
+    // const script = this.mobile ? Tag.sp() : Tag.pc();
+    // this.target.appendChild(script);
   }
   /**
    * close button click event handler
