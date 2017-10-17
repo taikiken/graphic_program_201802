@@ -573,6 +573,12 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	$s["media"]["video"]["url"]["hd"]=strlen($f["video"])>0?sprintf("%s/%s/%s/hd/%s.m3u8",str_replace("video",$mediaoption[$f["d2"]]["geoblock"]==0?"video":"video-jp",$videopath),$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
 
 	$s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
+	
+	//2017.10.17 - アプリでHLS動画が再生できない問題を臨時対応
+	if(strlen($f["video"])>0&&strlen($f["youtube"])==0){
+		$s["media"]["video"]["youtube"]=$s["media"]["video"]["url"]["sd"];
+	}
+	
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 	$s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
 	//$s["media"]["video"]["time"]=s2h($f["d3"]);
