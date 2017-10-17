@@ -125,7 +125,9 @@ const ComGame = ({ game, team, date }) => {
   // }
   // data 不正な時があるので常にクエリ付きリンクにする
   // eslint-disable-next-line max-len
-  const query = `?home=${game.home.team}&visitor=${game.visitor.team}&stadium=${game.stadium}&title=${Day.title(date)}`;
+  // const query = `?home=${game.home.team}&visitor=${game.visitor.team}&stadium=${game.stadium}&title=${Day.title(date)}`;
+  // @since 2017-10-16 query つけない - @see https://github.com/undotsushin/undotsushin/issues/2636
+  const query = '';
   // ----
   // console.log('a.mlb__game__overview__link');
   return (
