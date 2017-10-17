@@ -116,6 +116,11 @@
             <p class="ruby">Tempura Kidz</p>
           </li>
           <li class="course__guest__item">
+            <figure><img src="/assets/images/red-bull-box-cart-2017/course-guest1-figure5.jpg" alt=""></figure>
+            <h3>ジミー大西</h3>
+            <p class="ruby">Jimmy Onishi</p>
+          </li>
+          <li class="course__guest__item">
             <figure><img src="/assets/images/red-bull-box-cart-2017/course-guest1-figure4.jpg" alt=""></figure>
             <h3>ほんこん</h3>
             <p class="ruby">Honkon</p>
@@ -185,6 +190,11 @@
             <figure><img src="/assets/images/red-bull-box-cart-2017/course-guest5-figure2.jpg" alt=""></figure>
             <h3>ざわちん</h3>
             <p class="ruby">Zawachin</p>
+          </li>
+          <li class="course__guest__item">
+            <figure><img src="/assets/images/red-bull-box-cart-2017/course-guest5-figure3.jpg" alt=""></figure>
+            <h3>IKURA</h3>
+            <p class="ruby">IKURA</p>
           </li>
         </ul>
       </dd>
