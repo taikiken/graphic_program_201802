@@ -575,7 +575,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	$s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
 	
 	if(strlen($f["video"])>0&&strlen($f["youtube"])==0){
-		$s["media"]["video"]["youtube"]=$s["media"]["video"]["url"];
+		$s["media"]["video"]["youtube"]=$s["media"]["video"]["url"]["sd"];
 	}
 	
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
