@@ -22,7 +22,7 @@ import Print from '../../../util/Print';
 
 // define
 import Style from '../../../define/Style';
-import Day from '../../../util/Day';
+// import Day from '../../../util/Day';
 
 // ----------------------------------------
 // 各ゲーム
