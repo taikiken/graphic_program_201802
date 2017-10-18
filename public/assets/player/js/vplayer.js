@@ -152,24 +152,10 @@ var setPlayerEvent = function setPlayerEvent() {
   });
 };
 
-var getTime = function getTime() {
-  var d = new Date();
-  var year = d.getFullYear();
-  var month = d.getMonth() + 1;
-  var day = d.getDate();
-  var hour = d.getHours() < 10 ? '0' + d.getHours() : d.getHours();
-  var min = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
-  var sec = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
-  return '' + year + month + day + hour + min + sec;
-};
-
 var count = 0;
 //PLayer Initialization
 var videoLoad = function videoLoad() {
-  var time = getTime();
-  superagent.get('/api/big6tv/live/2017a').query({
-    date: time
-  }).end(function (err, res) {
+  superagent.get(window.PLAYER_API_ENDPOINT).end(function (err, res) {
     // console.log(res.body.response)
     var video = res.body.response.live.video;
     var isPlaying = res.body.response.live.isPlaying;
