@@ -7,7 +7,7 @@
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
- * dateTIme: @@dateTime
+ * buildTime: @@buildTime
  */
 // ----------------------------------------
 // プライバシーポリシーをプラットフォームごとに分ける #2504
