@@ -401,7 +401,7 @@ export default class ComInfo extends Component {
    */
   choose(tab) {
     const { info, member, team, innings } = this.props;
-    console.log('ComInfo.choose tab', tab, info, member, team);
+    // console.log('ComInfo.choose tab', tab, info, member, team);
 
     switch (tab) {
       case 'game': {
@@ -427,6 +427,9 @@ export default class ComInfo extends Component {
     if (!info || !member || !team || !innings) {
       return this.empty();
       // return null;
+    } else if (!team.ids.length || !team.list.length) {
+      // data 不正
+      return this.empty();
     }
     // render
     return (
