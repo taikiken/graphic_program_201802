@@ -44,7 +44,7 @@ const android = !!ua.match(/undotsushin-android/i);
  * true: ios app by userAgent
  * @type {boolean}
  */
-const ios = !!ua.match(/undotsushin-iphone/i);
+const ios = !!ua.match(/undotsushin-ios/i);
 
 // privacy
 if (android) {
