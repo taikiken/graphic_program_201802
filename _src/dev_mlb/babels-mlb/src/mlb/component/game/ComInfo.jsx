@@ -401,7 +401,7 @@ export default class ComInfo extends Component {
    */
   choose(tab) {
     const { info, member, team, innings } = this.props;
-    // console.log('ComInfo.choose tab', tab, info, member, team);
+    console.log('ComInfo.choose tab', tab, info, member, team);
 
     switch (tab) {
       case 'game': {
