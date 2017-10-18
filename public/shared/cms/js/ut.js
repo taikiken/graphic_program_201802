@@ -1,6 +1,6 @@
 function selectedmedia(id){
 	
-	$(".inputCap,.facebook,.t7,.t9,.body,.t16,.youtube,.t30,.swf,.t8,.a7a8a9a10a11a12,.brightcove").show();
+	$(".inputCap,.facebook,.t7,.t9,.body,.t16,.youtube,.t30,.swf,.t8,.a7a8a9a10a11a12,.brightcove,.streampack").show();
 	
 	//関連リンク
 	if(in_array(id,RELATEDLINK_ALLOWED))relatedlink(1);
@@ -41,6 +41,11 @@ function selectedmedia(id){
 	//外部Brightcove
 	if(in_array(id,EXBRIGHTCOVE_ALLOWED))exbrightcove(1);
 	else exbrightcove(0);
+
+	//streampack
+	if(in_array(id,STREAMPACK_ALLOWED))streampack(1);
+	else streampack(0);
+
 /*		
 	//コンテンツ
 	if($.inArray(id,CONTENTS_EDITED)!=-1){
@@ -118,6 +123,10 @@ function contents(f){
 function exbrightcove(f){
 	if(f===1)$(".brightcove").show();
 	else $(".brightcove").hide();
+}
+function streampack(f){
+	if(f===1)$(".streampack").show();
+	else $(".streampack").hide();
 }
 
 function toggle_options(t,f){
