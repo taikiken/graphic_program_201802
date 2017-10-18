@@ -36,15 +36,15 @@
  */
 const ua = navigator.userAgent;
 /**
- * true: android by userAgent
+ * true: android app by userAgent
  * @type {boolean}
  */
-const android = !!ua.match(/android/i);
+const android = !!ua.match(/undotsushin-android/i);
 /**
- * true: ios by userAgent
+ * true: ios app by userAgent
  * @type {boolean}
  */
-const ios = !!ua.match(/iphone/i);
+const ios = !!ua.match(/undotsushin-iphone/i);
 
 // summary
 if (android) {
