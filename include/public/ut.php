@@ -482,7 +482,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 
 	global $ImgPath,$domain,$ad,$mediaoption,$videopath,$apidetails,$staticfilepath;
 
-	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
+	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"],$f["streampack"]);
 	$datetime=get_date(sprintf("%s-%s-%s %s:%s:%s",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["a6"]));
 
 	$body=$f["body"];
