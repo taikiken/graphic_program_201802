@@ -1,0 +1,49 @@
+// import library setting + mixin + function
+@import "./asset";
+
+// scss-lint:disable ColorVariable
+
+// scss-lint:disable NestingDepth
+
+
+// draft-header
+.draft-header {
+  .lead {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+}
+
+.draft-header-bnr-top {
+  padding-top: 20px;
+
+  li {
+    text-align: center;
+  }
+}
+
+.draft-header-main {
+  position: relative;
+  width: 840px;
+  margin: 60px auto 0;
+  padding-left: 249px;
+
+  .draft-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .lead {
+    margin-top: 10px;
+    color: $color-white;
+  }
+}
+
+.draft-header-bnr-bottom {
+  padding-top: 20px;
+
+  li {
+    text-align: center;
+  }
+}

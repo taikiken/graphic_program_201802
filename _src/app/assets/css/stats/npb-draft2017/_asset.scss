@@ -1,0 +1,14 @@
+// -------------------------------------------------------------
+// library property
+// import 階層が醜くなるので中間ファイルとして使用します
+// -------------------------------------------------------------
+
+// import library setting
+@import "../../../../../scss/asset";
+
+$color-key: #0e357f;
+
+$color-white: #fff;
+$color-black: #000;
+$color-yellow: #fc0;
+$color-blue: #00a2e4;
