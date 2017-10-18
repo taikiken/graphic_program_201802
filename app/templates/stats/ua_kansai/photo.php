@@ -17,19 +17,19 @@
   <meta property="fb:app_id" content="842032129256034">
   <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="">
-  <meta property="og:description" content="">
+  <meta property="og:title" content="フォトギャラリー 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | SPORTS BULL">
+  <meta property="og:image" content="https://sportsbull.jp/assets/stats/ua_kansai/images/ogp.jpg">
+  <meta property="og:url" content="https://sportsbull.jp/stats/ua_kansai/photo/">
+  <meta property="og:description" content="関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
   <meta property="og:locale" content="ja_JP" />
 
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
-  <meta name="twitter:title" content="ヘッダー・フッターテンプレート | SPORTS BULL">
-  <meta name="twitter:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta name="twitter:url" content="">
-  <meta name="twitter:description" content="">
+  <meta name="twitter:title" content="フォトギャラリー 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | SPORTS BULL">
+  <meta name="twitter:image" content="https://sportsbull.jp/assets/stats/ua_kansai/images/ogp.jpg">
+  <meta name="twitter:url" content="https://sportsbull.jp/stats/ua_kansai/photo/">
+  <meta name="twitter:description" content="関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
 
   <link rel="canonical" href="">
   <link rel="apple-touch-icon" sizes="180x180" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
@@ -43,7 +43,7 @@
   <!-- / 表示確認用 -->
   <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
   <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
-  <!-- インターハイ css & js -->
+  <!-- css & js -->
   <link rel="stylesheet" href="/assets/css/photo/photo.css" media="only screen and (min-width: 769px)">
   <link rel="stylesheet" href="/assets/css/photo/sp_photo.css" media="only screen and (max-width: 768px)">
 
