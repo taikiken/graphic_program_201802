@@ -101,6 +101,19 @@
   }
 }
 
+#liveVideo {
+  width: 1090px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+
+  .video_alt {
+    img {
+      width: 100%;
+    }
+  }
+}
+
 
 
 
@@ -218,21 +231,21 @@
     }
   }
 
-  .intro__banner {
-    margin-top: 20px;
+  // .intro__banner {
+  //   margin-top: 20px;
 
-    a:hover {
-      @include opacity(0.8);
-    }
-  }
+  //   a:hover {
+  //     @include opacity(0.8);
+  //   }
+  // }
 
-  .intro__widjet_twitter {
-    margin-top: 40px;
+  // .intro__widjet_twitter {
+  //   margin-top: 40px;
 
-    iframe {
-    width: 100% !important;
-    }
-  }
+  //   iframe {
+  //   width: 100% !important;
+  //   }
+  // }
 } //.gobig--intro
 
 
@@ -251,6 +264,8 @@
       left: -42px;
     }
   }
+
+
 
   .about__lead {
     margin-top: 24px;
@@ -297,6 +312,7 @@
       font-size: 16px;
     }
   } //.about__fmx
+
 
 
   .about__featured {

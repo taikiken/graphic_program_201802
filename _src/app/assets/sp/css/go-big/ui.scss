@@ -19,10 +19,10 @@
 
 
 // common override
-.red-bull-holy-ride {
+.go-big {
   .body-sec,
   .body-sec-inner {
-    background-color: #10151e !important;
+    background-color: #000 !important;
   }
 
   .main-sec {
@@ -52,19 +52,40 @@
 
 //.special-summary
 .special-summary {
-  background: url(/assets/sp/images/red-bull-holy-ride/summry-bg.png) center 0 no-repeat;
+  padding-bottom: (4/2)+px;
+  background: url(/assets/sp/images/go-big/summary-bg.jpg) center 0 no-repeat;
   background-size: cover;
 
   //.special-summary-heading
-  &-heading {}
+  &-heading {
+    padding-top: (32/2)+px;
+    text-align: center;
 
-  //.special-summary-copy
-  &-copy {
-    padding: perCalc(20, 640) perCalc(10, 640);
-    color: #10151e;
-    font-weight: bold;
-    font-size: (24/2)+px;
-    text-align: right;
+    img {
+      width: perCalc(428, 640);
+    }
+  }
+
+  //.sspecial-summary-catch
+  &-catch {
+    position: relative;
+    margin-top: -(16/2)+px;
+    margin-left: perCalc(16, 640);
+
+    img {
+      width: perCalc(296, 640);
+    }
+  }
+
+  //.sspecial-summary-lead
+  &-lead {
+    position: relative;
+    margin-top: -(10/2)+px;
+    margin-left: perCalc(24, 640);
+
+    img {
+      width: perCalc(356, 640);
+    }
   }
 }
 
@@ -80,20 +101,20 @@
 
 
 //container setting
-.holyride__container {
+.gobig__container {
 }
 
-.holyride__container--odd {
+.gobig__container--odd {
   position: relative;
   padding-bottom: (70/2)+px;
-  background: url(/assets/sp/images/red-bull-holy-ride/bg-odd.png) center bottom no-repeat;
+  background: url(/assets/sp/images/go-big/bg-odd.png) center bottom no-repeat;
   background-size: 100%;
 }
 
-.holyride__container--even {
+.gobig__container--even {
   position: relative;
   padding-bottom: (70/2)+px;
-  background: #0f1b33 url(/assets/sp/images/red-bull-holy-ride/bg-even.png) center bottom no-repeat;
+  background: #1a1a00 url(/assets/sp/images/go-big/bg-even.png) center bottom no-repeat;
   background-size: 100%;
 }
 
@@ -101,8 +122,8 @@
 
 
 
-//.holyride--intro
-.holyride--intro {
+//.gobig--intro
+.gobig--intro {
   margin-top: (32/2)+px;
 
   .intro__catch {
@@ -120,20 +141,20 @@
     margin-right: perCalc(20, 640);
     margin-left: perCalc(20, 640);
     padding-top:  perCalc(20, 640);
-    border-top: 1px solid #282d35;
+    border-top: 1px solid #1a1a00;
+    text-align: center;
 
     .undotsushin-ios &,
     .undotsushin-android & {
       display: none;
     }
 
-
     a {
       @include link-decoration(#fff, #fff, underline, underline);
       display: inline-block;
       line-height: (80/2)+px;
       padding-left: (100/2)+px;
-      background: url(/assets/sp/images/red-bull-holy-ride/intro-app_icon.png) 0 0 no-repeat;
+      background: url(/assets/images/go-big/intro-app_icon.png) 0 0 no-repeat;
       background-size: (80/2)+px;
       font-weight: bold;
       font-size: (28/2)+px;
@@ -151,151 +172,222 @@
     td {
       padding: (8/2)+px perCalc(20, 640);
       color: #fff;
+      font-weight: bold;
       font-size: (24/2)+px;
     }
 
     th {
-      width: 30%;
-      font-style: italic;
+      width: 22%;
+      color: #ff0;
     }
 
     td {
       padding-left: 0;
-      font-weight: bold;
     }
 
     tr:nth-child(odd) {
       th, td {
-        background-color: #1c2129;
+        background-color: #1a1a00;
       }
     }
   }
 
-  .intro__banner {
-    margin-top: (32/2)+px;
-  }
+  // .intro__banner {
+  //   margin-top: (32/2)+px;
+  // }
 
-  .intro__widjet_twitter {
-    margin-top: 40px;
-    margin-right: perCalc(20, 640);
-    margin-left: perCalc(20, 640);
-  }
-} //.holyride--intro
-
-
+  // .intro__widjet_twitter {
+  //   margin-top: 40px;
+  //   margin-right: perCalc(20, 640);
+  //   margin-left: perCalc(20, 640);
+  // }
+} //.gobig--intro
 
 
-//.holyride--course
-.holyride--course {
-  padding-top: (20/2)+px;
+
+
+//.gobig--about
+.gobig--about {
+  // padding-top: (20/2)+px;
   padding-right: perCalc(20, 640);
   padding-left: perCalc(20, 640);
 
-  .course__heading {
+  .about__heading {
     position: relative;
-    height: (40/2)+px;
-    margin-bottom: (40/2)+px;
+    height: (72/2)+px;
 
     img {
+      position: relative;
+      margin-left: -(perCalc(20, 640));
       width: auto;
       height: 100%;
     }
   }
 
-  .course__map {
-    > img {
-      display: block;
-    }
 
-    figcaption {
-      p {
-        margin-top: 1em;
-        color: #fff;
-        font-size: (24/2)+px;
-      }
 
-      .note {
-        margin-top: 0;
-        font-size: (20/2)+px;
-      }
-    }
+  .about__lead {
+    margin-top: (28/2)+px;
+    color: #fff;
+    font-size: (24/2)+px;
   }
 
-  .course__staff {
-    //.course__staff__heading
+
+
+  .about__fmx {
+    margin-top: 32px;
+    padding: (20/2)+px;
+    overflow: hidden;
+    border: 2px solid #a3a300;
+    border-radius: 3px;
+
+    //.about__fmx__figure
+    &__figure {
+      // width: (552/2)+px;
+    }
+
+    //.about__fmx__heading
     &__heading {
-      margin-top: (40/2)+px;
-      height: (22/2)+px;
+      margin-top: (24/2)+px;
+      text-align: center;
 
       img {
-        width: auto;
-        height: 100%;
-        vertical-align: top;
+        width: (342/2)+px;
       }
     }
 
-    //.course__staff__container
-    &__container {
-      display: table;
-      width: 100%;
-      margin-top: (32/2)+px;
+    //.about__fmx__lead
+    &__lead {
+      margin-top: (24/2)+px;
+      color: #ff0;
+      font-size: (24/2)+px;
+    }
+  } //.about__fmx
+
+
+
+  .about__featured {
+    margin-top: (40/2)+px;
+
+    //.about__featured__heading
+    &__heading {
+      img {
+        width: (342/2)+px;
+      }
     }
 
-    //.course__staff__thumb
-    //.course__staff__data
-    .course__staff__thumb,
-    .course__staff__data {
-      display: table-cell;
-      vertical-align: top;
+    //.about__featured__list
+    &__list {
+      overflow: hidden;
     }
 
-    //.course__staff__thumb
-    .course__staff__thumb {
-      width: perCalc(240, 600);
-      padding-right: perCalc(20, 600);
-    }
+    //.about__featured__item
+    &__item {
+      float: left;
+      margin-top: (28/2)+px;
+      margin-right: perCalc(16, 600);
+      width: perCalc(188, 600);
 
-    //.course__staff__data
-    .course__staff__data {
-      //.course__staff__data__heading
-      &__heading {
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+
+      h4 {
+        margin-top: (20/2)+px;
         color: #fff;
         font-weight: bold;
         font-size: (24/2)+px;
       }
 
-      //.course__staff__data__text
-      &__text {
+      .nick {
+        margin-top: (6/2)+px;
         color: #fff;
-        margin-top: 0.5em;
+        font-weight: bold;
+        font-size: (20/2)+px;
+      }
+    }
+  } //.about__featured
+
+
+
+  .about__guest {
+    margin-top: (40/2)+px;
+
+    //.about__guest__heading
+    &__heading {
+      img {
+        width: (470/2)+px;
+      }
+    }
+
+    //.about__guest__container
+    &__container {
+      margin-top: (30/2)+px;
+      overflow: hidden;
+    }
+
+    //.about__guest__figure
+    &__figure {
+      float: left;
+      width: perCalc(188, 600);
+      margin-right: perCalc(16, 600);
+
+      img {
+        // width: perCalc(188, 600);
+      }
+    }
+
+    //.about__guest__data
+    &__data {
+      float: left;
+      width: perCalc(396, 600);
+
+      h4 {
+        color: #fff;
+        font-weight: bold;
+        font-size: (24/2)+px;
+      }
+
+      .nick {
+        margin-top: (6/2)+px;
+        color: #fff;
+        font-weight: bold;
+        font-size: (20/2)+px;
+      }
+
+      .about__guest__text {
+        margin-top: (20/2)+px;
+        color: #fff;
         font-size: (24/2)+px;
       }
     }
-  } //.course__staff
-} //.holyride--course
+  } //.about__guest
+} //.gobig--about
 
 
 
 
 
-//.holyride--overview
-.holyride--overview {
-  margin-top: (40/2)+px;
+//.gobig--overview
+.gobig--overview {
   padding-right: perCalc(20, 640);
   padding-left: perCalc(20, 640);
 
   .overview__heading {
     position: relative;
-    height: (40/2)+px;
-    margin-bottom: (40/2)+px;
+    height: (82/2)+px;
 
     img {
+      position: relative;
+      margin-left: -(perCalc(20, 640));
       width: auto;
       height: 100%;
     }
   }
 
   .overview__data {
+    margin-top: (32/2)+px;
+
     th,
     td {
       padding-bottom: 0.5em;
@@ -306,27 +398,42 @@
 
     th {
       padding-right: (16/2)+px;
+      border-right: 1px solid #660;
       font-weight: bold;
+      white-space: nowrap;
+    }
+
+    td {
+      padding-left: (16/2)+px;
+
+      a {
+        @include link-decoration(#ff0, #ff0, none, underline);
+      }
+
+      span {
+        font-size: (20/2)+px;
+      }
     }
   }
-} //.holyride--overview
+} //.gobig--overview
 
 
 
 
 
-//.holyride--related
-.holyride--related {
+//.gobig--related
+.gobig--related {
   padding-top: (20/2)+px;
   padding-right: perCalc(20, 640);
   padding-left: perCalc(20, 640);
 
   .related__heading {
     position: relative;
-    height: (40/2)+px;
-    margin-bottom: (40/2)+px;
+    height: (76/2)+px;
 
     img {
+      position: relative;
+      margin-left: -(perCalc(20, 640));
       width: auto;
       height: 100%;
     }
@@ -335,7 +442,7 @@
   .related__post {
 
     + .related__post {
-      border-top: 1px solid #273248;
+      border-top: 1px solid #000;
     }
 
     a {
@@ -345,7 +452,7 @@
       padding-bottom: (20/2)+px;
 
       &:active {
-        background-color: #10151e;
+        background-color: #000;
       }
     }
 
@@ -381,7 +488,7 @@
 
       .related__post__category {
         margin-top: 0.75em;
-        color: #be0940;
+        color: #ffff00;
         font-weight: bold;
         font-size: (20/2)+px;
       }
@@ -394,4 +501,4 @@
     } //.related__post__text
 
   } //.related__post
-} //.holyride--related
+} //.gobig--related
