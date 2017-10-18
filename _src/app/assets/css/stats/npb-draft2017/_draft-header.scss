@@ -18,7 +18,12 @@
   padding-top: 20px;
 
   li {
+    margin-top: 20px;
     text-align: center;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 }
 
@@ -44,6 +49,11 @@
   padding-top: 20px;
 
   li {
+    margin-top: 20px;
     text-align: center;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 }
