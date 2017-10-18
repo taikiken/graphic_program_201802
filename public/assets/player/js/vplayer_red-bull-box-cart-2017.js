@@ -166,8 +166,15 @@ var getTime = function getTime() {
 var count = 0;
 //PLayer Initialization
 var videoLoad = function videoLoad() {
+  // --- [2017-10-18]
+  var hostname = location.hostname;
+  var api = 'https://dev-img.sportsbull.jp/static/boxcart/live.json';
+  if (hostname === 'sportsbull.jp' || hostname === 'stg.sportsbull.jp') {
+    api = 'https://img.sportsbull.jp/static/boxcart/live.json';
+  }
+  // ---
   var time = getTime();
-  superagent.get('/api/big6tv/live/2017a').query({
+  superagent.get(api).query({
     date: time
   }).end(function (err, res) {
     // console.log(res.body.response)
