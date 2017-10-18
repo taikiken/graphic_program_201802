@@ -167,7 +167,7 @@ var count = 0;
 //PLayer Initialization
 var videoLoad = function videoLoad() {
   var time = getTime();
-  superagent.get(' https://dev.sportsbull.jp/api/big6tv/live/2017a').query({
+  superagent.get('/api/big6tv/live/2017a').query({
     date: time
   }).end(function (err, res) {
     // console.log(res.body.response)
