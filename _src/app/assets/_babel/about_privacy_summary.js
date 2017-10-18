@@ -35,13 +35,21 @@
  * @type {string}
  */
 const ua = navigator.userAgent;
+/**
+ * true: android by userAgent
+ * @type {boolean}
+ */
 const android = !!ua.match(/android/i);
+/**
+ * true: ios by userAgent
+ * @type {boolean}
+ */
 const ios = !!ua.match(/iphone/i);
 
-// privacy
+// summary
 if (android) {
-  location.href = '/about/privacy/android.html';
+  location.href = '/about/privacy/android-summary.html';
 } else if (ios) {
-  location.href = '/about/privacy/ios.html';
+  location.href = '/about/privacy/ios-summary.html';
 }
 
