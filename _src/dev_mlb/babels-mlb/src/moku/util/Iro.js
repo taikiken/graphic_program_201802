@@ -350,11 +350,11 @@ export default class Iro {
     // ---
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexString);
     return Array.isArray(result) && result.length === 4 ?
-    {
-      r: mathInt(result[1], 16),
-      g: mathInt(result[2], 16),
-      b: mathInt(result[3], 16),
-    } : null;
+      {
+        r: mathInt(result[1], 16),
+        g: mathInt(result[2], 16),
+        b: mathInt(result[3], 16),
+      } : null;
   }
   /**
    * 0 ~ 255 RGB color number を `00` な 16進形式に変換します

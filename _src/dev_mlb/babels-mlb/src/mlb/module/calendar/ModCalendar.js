@@ -94,7 +94,10 @@ export default class ModCalendar {
   constructor(schedules) {
     const games = schedules.map(game => (new ModCalendarEvents(game)));
     const calendar = {};
-    games.map(event => (calendar[event.start] = event));
+    games.map((event) => {
+      calendar[event.start] = event;
+      return event;
+    });
     /**
      * イベントリスト
      * @type {Array.<ModCalendarEvents>}

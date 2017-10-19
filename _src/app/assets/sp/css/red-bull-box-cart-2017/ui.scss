@@ -52,8 +52,8 @@
 
 //.special-summary
 .special-summary {
-  background: url(/assets/sp/images/red-bull-box-cart-2017/summry-bg.png) 0 0 repeat;
-  background-size: (8/2)+px;
+  background: url(/assets/sp/images/red-bull-box-cart-2017/summary-bg.png) 0 0 repeat-x;
+  background-size: (10/2)+px;
 
   //.special-summary-heading
   &-heading {
@@ -95,9 +95,9 @@
   //.special-summary-copy
   &-copy {
     line-height: 1;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    background-color: #e6034f;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #193080;
     text-align: center;
 
     img {
@@ -370,7 +370,8 @@
     }
   } //.course__guest
 
-  .course__guest__wrap--1 {
+  .course__guest__wrap--1,
+  .course__guest__wrap--5 {
     .course__guest__item:nth-child(3) {
       margin-right: 0;
     }
