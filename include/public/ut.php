@@ -464,13 +464,15 @@ function set_categoryinfo($f,$personalized="",$longtitle=1){
 }
 
 function urlmodify($body){
-
+	
+	global $ImgPath;
+	
 	/*
 	すでに登録されている記事の画像パスを運動通信からSPORTS BULLに変換
 	*/
 
 	$body=str_replace("https://www.undotsushin.com/prg_img/","https://img.sportsbull.jp/",$body);
-	$body=str_replace("/prg_img/","https://img.sportsbull.jp/",$body);
+	$body=str_replace("/prg_img",$ImgPath,$body);
 	return $body;
 }
 
