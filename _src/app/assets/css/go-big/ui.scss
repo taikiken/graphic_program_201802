@@ -158,9 +158,9 @@
     bottom: -100px;
     left: 0;
     display: block;
-    margin-right: -751px;
+    // margin-right: -751px;
     margin-left: 0;
-    padding-right: 751px;
+    // padding-right: 751px;
     padding-left: 0;
 
     border-style: solid;
@@ -464,6 +464,10 @@
   margin-top: 80px;
   margin-bottom: 80px;
   padding-bottom: 40px;
+
+  &:after {
+    bottom: -80px;
+  }
 
   .related__heading {
     position: relative;
