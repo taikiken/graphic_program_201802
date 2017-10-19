@@ -101,9 +101,9 @@
           <div class="draft-header-main">
             <div class="row">
               <div class="draft-logo"><img src="/assets/images/stats/npb-draft2017/draft-logo@2x.png" alt="DRAFT 2017! NPB supported by リポビタンD"></div>
-              <h1><img src="/assets/images/stats/npb-draft2017/player-title@2x.png" alt="プロ野球2017 ドラフト候補選手一覧"></h1>
+              <h1><img src="/assets/images/stats/npb-draft2017/live-title@2x.png" alt="プロ野球2017 ドラフトリアル生速報"></h1>
             </div>
-            <p class="lead">高校生、大学生そして社会人・独立リーグと、今年のドラフト候補選手を幅広くリストアップ！</p>
+            <p class="lead">確定次第、指名順とともに指名権獲得球団をリアルタイムで<br>お届けいたします。</p>
           </div>
 
           <aside class="draft-header-bnr-bottom">
@@ -115,147 +115,139 @@
           <!-- draft-nav -->
           <nav class="draft-nav">
             <ul>
-              <li>ドラフト候補選手名鑑</li>
-              <li><a href="result/">ドラフト超速報</a></li>
+              <li><a href="../">ドラフト候補選手名鑑</a></li>
+              <li>ドラフト超速報</li>
             </ul>
           </nav>
           <!-- draft-nav -->
         </header>
         <!-- /draft-header -->
 
-        <!-- category-nav -->
-        <nav class="category-nav">
-          <ul>
-            <li><a class="category-1 is-checked" href="#">高校生</a></li>
-            <li><a class="category-2" href="#">大学生</a></li>
-            <li><a class="category-3" href="#">社会人</a></li>
-            <li><a class="category-4" href="#">独立リーグ</a></li>
-          </ul>
-        </nav>
-        <!-- /category-nav -->
 
-        <!-- position-filter -->
-        <div class="position-filter">
-          <button class="position-1 button is-checked" data-filter="">投手</button>
-          <button class="position-2 button" data-filter="">捕手</button>
-          <button class="position-3 button" data-filter="">内野手</button>
-          <button class="position-4 button" data-filter="">外野手</button>
-          <button class="position-5 button" data-filter="">その他</button>
-        </div>
-        <!-- /position-filter -->
+        <!-- draft-results -->
+        <section class="draft-results">
+          <!-- draft-results-header -->
+          <header class="draft-results-header">
+            <h2>ドラフト会議結果</h2>
+            <p><span class="draft-status-1"></span>競合による１位確定<br><span class="position pitcher">投</span>投手<span class="position catcher">捕</span>捕手<span class="position infielder">内</span>内野手<span class="position outfielder">外</span>外野手</p>
+          </header>
+          <!-- /draft-results-header -->
 
-        <!-- players-list -->
-        <div class="players-list">
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
+          <!-- draft-results-body -->
+          <div class="draft-results-body">
+            <!-- draft-team -->
+            <div class="draft-team">
+              <p>球団選択：</p>
+              <div class="draft-team-select team-376">
+                <form action="">
+                  <select name="team">
+                    <option value="team-376" selected>楽天</option>
+                    <option value="team-3">DeNA</option>
+                    <option value="team-11">オリックス</option>
+                    <option value="team-4">中日</option>
+                    <option value="team-7">埼玉西武</option>
+                    <option value="team-6">広島</option>
+                    <option value="team-9">千葉ロッテ</option>
+                    <option value="team-5">阪神</option>
+                    <option value="team-8">日本ハム</option>
+                    <option value="team-1">巨人</option>
+                    <option value="team-12">ソフトバンク</option>
+                    <option value="team-2">ヤクルト</option>
+                  </select>
+                </form>
               </div>
-            </a>
+            </div>
+            <!-- /draft-team -->
+
+            <!-- draft-table -->
+            <div class="draft-table">
+              <p class="rank-1">
+                <i class="ranking"><span class="num">1</span><br>位</i>
+                <a class="status-lose" href="#">
+                  <i class="pos pos-pitcher">捕</i>
+                  <span class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></span>
+                  <span class="player-name">平沢 大河</span>
+                  <span class="player-team">仙台育英</span>
+                </a>
+              </p>
+
+              <p class="rank-1">
+                <i class="ranking"></i>
+                <a class="status-win" href="#">
+                  <i class="pos pos-catcher">捕</i>
+                  <span class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></span>
+                  <span class="player-name">平沢 大河</span>
+                  <span class="player-team">仙台育英</span>
+                </a>
+              </p>
+
+              <p class="rank-2">
+                <i class="ranking"><span class="num">2</span><br>位</i>
+                <a href="#">
+                  <i class="pos pos-infielder">内</i>
+                  <span class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></span>
+                  <span class="player-name">平沢 大河</span>
+                  <span class="player-team">仙台育英</span>
+                </a>
+              </p>
+
+              <p class="rank-3">
+                <i class="ranking"><span class="num">3</span><br>位</i>
+                <a href="#">
+                  <i class="pos pos-outfielder">外</i>
+                  <span class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></span>
+                  <span class="player-name">平沢 大河</span>
+                  <span class="player-team">仙台育英</span>
+                </a>
+              </p>
+            </div>
+            <!-- /draft-table -->
+
+            <!-- draft-table -->
+            <div class="draft-table">
+              <h3><span>育成ドラフト</span></h3>
+              <p class="rank-1">
+                <i class="ranking"><span class="text-s">育<br>成<br></span><span class="num">1</span><br>位</i>
+                <a href="#">
+                  <i class="pos pos-pitcher">投</i>
+                  <span class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></span>
+                  <span class="player-name">平沢 大河</span>
+                  <span class="player-team">仙台育英</span>
+                </a>
+              </p>
+
+              <p class="rank-2">
+                <i class="ranking"><span class="text-s">育<br>成<br></span><span class="num">2</span><br>位</i>
+                <a href="#">
+                  <i class="pos pos-pitcher">投</i>
+                  <span class="player-image"></span>
+                  <span class="player-name">平沢 大河</span>
+                  <span class="player-team">仙台育英</span>
+                </a>
+              </p>
+
+              <p class="rank-3">
+                <i class="ranking"><span class="text-s">育<br>成<br></span><span class="num">3</span><br>位</i>
+                <a href="#">
+                  <i class="pos pos-pitcher">投</i>
+                  <span class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></span>
+                  <span class="player-name">平沢 大河</span>
+                  <span class="player-team">仙台育英</span>
+                </a>
+              </p>
+
+            </div>
+            <!-- /draft-table -->
           </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos2">捕</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos3">内</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/player-transparent@2x.png" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos4">外</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos5">他</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-        </div>
-        <!-- /players-list -->
+          <!-- /draft-results-body -->
+        </section>
+        <!-- /draft-results -->
 
         <div class="note-block">
           <ul>
             <li>※ 表示地域は高校生と社会人はチームが所属している各地区の連盟、大学生は野球部合宿所（合宿所がない場合はグラウンド）の所在地に基づきます。<br>独立リーグはチームの本拠地となる都道府県を記載しています。</li>
           </ul>
         </div>
-
-
 
         <div id="js-modal">
           <div class="player-modal">
@@ -326,7 +318,8 @@
       <nav class="foot-breadCrumb">
         <ol itemscope itemtype="http://schema.org/breadCrumbList">
           <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">プロ野球2017 ドラフト</span><meta itemprop="position" content="2" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="../"><span itemprop="name">プロ野球2017 ドラフト候補選手一覧</span><meta itemprop="position" content="2" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">プロ野球2017 ドラフトリアル生速報</span><meta itemprop="position" content="3" /></a></li>
         </ol>
       </nav><!-- /.foot-breadCrumb -->
 

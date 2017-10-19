@@ -5,21 +5,25 @@
 // -------------------------------------------------------------
 // draft_results
 // -------------------------------------------------------------
+.draft-results {
+  margin: 0 percent(20, 750);
+}
+
 // draft-results-header
 .draft-results-header {
   position: relative;
   padding: 20px * .5 0;
-  background-color: $color-yellow;
+  background-color: #222;
   text-align: center;
 
   h2 {
-    color: $color-black;
+    color: $color-white;
     font-size: 38px * .5;
     font-weight: bold;
   }
 
   p {
-    color: $color-black;
+    color: $color-white;
     font-size: 24px * .5;
     font-weight: bold;
 
@@ -79,7 +83,7 @@
 .draft-team {
   p {
     // scss-lint:disable ColorVariable
-    color: #333;
+    color: #ccc;
     // scss-lint:enable ColorVariable
     font-size: 24px * .5;
   }
@@ -92,7 +96,7 @@
     border-top-width: 4px * .5;
     border-top-style: solid;
     // scss-lint:disable ColorVariable
-    background-color: #4b4b4b;
+    background-color: #333;
     // scss-lint:enable ColorVariable
 
     &::before {
@@ -255,20 +259,21 @@
 // draft-table
 .draft-table {
   // scss-lint:disable ColorVariable
-  border-bottom: 2px * .5 solid #ccc;
+  border-bottom: 2px * .5 solid $color-black;
   // scss-lint:enable ColorVariable
 
   p {
     display: table;
     width: 100%;
+    background-color: #222;
 
     a {
       position: relative;
       display: table-cell;
       padding: 40px * .5 60px * .5 40px * .5 180px * .5;
       // scss-lint:disable ColorVariable
-      border-top: 2px * .5 solid #ccc;
-      border-right: 2px * .5 solid #ccc;
+      border-top: 2px * .5 solid $color-black;
+      border-right: 2px * .5 solid $color-black;
       // scss-lint:enable ColorVariable
       @include link-decoration($color-white, $color-white, none, none);
       vertical-align: middle;
@@ -280,12 +285,12 @@
     width: 70px * .5;
     line-height: 1.2;
     // scss-lint:disable ColorVariable
-    border-top: 2px * .5 solid #ccc;
-    border-left: 2px * .5 solid #ccc;
-    border-right: 2px * .5 solid #ccc;
-    background-color: #4b4b4b;
+    border-top: 2px * .5 solid $color-black;
+    border-left: 2px * .5 solid $color-black;
+    border-right: 2px * .5 solid $color-black;
+    background-color: #333;
     // scss-lint:enable ColorVariable
-    color: $color-yellow;
+    color: $color-white;
     font-size: 30px * .5;
     font-weight: bold;
     text-align: center;
@@ -357,14 +362,14 @@
 
   .player-name {
     display: block;
-    color: #333;
+    color: $color-white;
     font-size: 34px * .5;
     font-weight: bold;
   }
 
   .player-team {
     display: block;
-    color: #333;
+    color: $color-white;
     font-size: 26px * .5;
     font-weight: bold;
   }
@@ -394,7 +399,7 @@
   .rank-1 + .rank-1 {
     .ranking {
       // scss-lint:disable ColorVariable
-      border-top-color: #4b4b4b;
+      border-top-color: #333;
       // scss-lint:enable ColorVariable
     }
   }
@@ -403,14 +408,15 @@
     display: table;
     width: 100%;
     // scss-lint:disable ColorVariable
-    border-left: 2px * .5 solid #ccc;
-    border-right: 2px * .5 solid #ccc;
-    background-color: #4b4b4b;
+    border-left: 2px * .5 solid $color-black;
+    border-right: 2px * .5 solid $color-black;
+    background-color: #333;
     // scss-lint:enable ColorVariable
 
     span {
       display: table-cell;
       padding: 20px * .5 0;
+      color: $color-white;
       font-size: 32px * .5;
       font-weight: bold;
       text-align: center;
