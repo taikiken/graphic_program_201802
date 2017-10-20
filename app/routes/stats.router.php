@@ -770,6 +770,48 @@ $app->group('/stats', function () use($app) {
     });
   });
 
+  // draft
+  // ==============================
+  $this->group('/npb-draft2017', function ($request, $response, $args) use ( $app ) {
+
+    // ドラフト候補選手
+    $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+      $args['page'] = $app->model->set(array(
+        'title'              => 'プロ野球2017 ドラフト候補選手 | スポーツブル (スポブル)',
+        'og_title'           => 'プロ野球2017 ドラフト候補選手 | スポーツブル (スポブル)',
+        'og_url'             => $app->model->property('site_url') . 'stats/npb-draft2017/',
+        'template'           => 'draft',
+        'template_classname' => '',
+        'path'               => $args,
+        'ua'                 => $app->model->property('ua')
+      ));
+
+      if ( $app->model->property('ua') === 'desktop' ) :
+        return $this->renderer->render($response, 'draft/players.php', $args);
+      else :
+        return $this->renderer->render($response, 'draft/players.sp.php', $args);
+      endif;
+    });
+
+    // ドラフト速報
+    $this->get('/{category:\d{4}/\d{10}}[/]', function ($request, $response, $args) use ($app) {
+      $args['page'] = $app->model->set(array(
+        'title'              => 'プロ野球2017 ドラフトリアル生速報 | スポーツブル (スポブル)',
+        'og_title'           => 'プロ野球2017 ドラフトリアル生速報 | スポーツブル (スポブル)',
+        'og_url'             => $app->model->property('site_url') . 'stats/npb-draft2017/',
+        'template'           => 'draft',
+        'template_classname' => '',
+        'path'               => $args,
+        'ua'                 => $app->model->property('ua')
+      ));
+
+      if ( $app->model->property('ua') === 'desktop' ) :
+        return $this->renderer->render($response, 'draft/live.php', $args);
+      else :
+        return $this->renderer->render($response, 'draft/live.sp.php', $args);
+      endif;
+    });
+  });
 });
 
 ?>
