@@ -523,3 +523,24 @@
 
   } //.related__post
 } //.boxcart--related
+
+
+
+
+
+//.boxcart--jasrac
+.boxcart--jasrac {
+  padding-right: perCalc(20, 640);
+  padding-left: perCalc(20, 640);
+  padding-bottom: 0;
+  // text-align: right;
+
+  .jasrac__num {
+    display: inline-block;
+    line-height: (50/2)+px;
+    padding-left: (60/2)+px;
+    background: url(/assets/images/red-bull-box-cart-2017/jasrac-logo.jpg) 0 0 no-repeat;
+    background-size: (50/2)+px;
+    font-size: 10px;
+  }
+} //.boxcart--jasrac
