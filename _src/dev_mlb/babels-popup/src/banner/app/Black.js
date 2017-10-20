@@ -41,10 +41,12 @@ export default class Black {
    * - newspass
    * - undotsushin-ios
    * - undotsushin-android
+   * - spass-app - 2017-10-20
    * @returns {boolean} true: 該当する
    */
   static app() {
-    return !!navigator.userAgent.match(/gunosy|newspass|undotsushin-ios|undotsushin-android/i);
+    // eslint-disable-next-line max-len
+    return !!navigator.userAgent.match(/gunosy|newspass|undotsushin-ios|undotsushin-android|spass-app/i);
   }
   /**
    * popup 対象かを `pathname`, `userAgent` でチェックします
