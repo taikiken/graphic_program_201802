@@ -34,7 +34,7 @@ export default class Path {
    * @see https://aws-plus.backlog.jp/view/BGATE-451#comment-1178935652
    */
   static get players() {
-    return `${Path.host()}/json/v1/2017/draft/list.json`;
+    return `${Path.host()}/json/v1/2017/draft/list_bull.json`;
   }
   // /**
   //  * ドラフト速報 JSON path

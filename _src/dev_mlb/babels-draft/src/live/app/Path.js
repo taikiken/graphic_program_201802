@@ -21,7 +21,7 @@ export default class Path {
    * @return {string} ドラフト速報 JSON パスを返します
    */
   static get live() {
-    return `${Path.host()}/json/v1/2017/draft/result.json?t=${Date.now()}`;
+    return `${Path.host()}/json/v1/2017/draft/result_bull.json?t=${Date.now()}`;
   }
   /**
    * Ajax 接続サーバーを Env のモードを元に決定します {@link Env}

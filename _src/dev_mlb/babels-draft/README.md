@@ -1,7 +1,7 @@
 # BGATE DRAFT 2017
 
-- **draft_2017_player**
-- **draft_2017_live**
+- **bull_draft_2017_player**
+- **bull_draft_2017_live**
 
 ## ES2015, JSX Harmony
 
