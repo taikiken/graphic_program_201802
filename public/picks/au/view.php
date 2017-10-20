@@ -160,6 +160,14 @@
     <?php foreach( $article_page_data as $value ) :
     // 記事一覧ループ ?>
 
+      <article class="todays_station">
+        <h1 class="todays_station__heading">本日のスポーツニュースまとめ動画</h1>
+        <a href="hoge">
+          <figure class="todays_station__figure"><img src="/assets/sp/images/picks/au/summy-station-figure.jpg" alt=""></figure>
+          <span class="todays_station__btn">動画を見る</span>
+        </a>
+      </article><!-- /.todays_station -->
+
       <article class="post">
         <header class="post__header">
           <a href="<?php echo $value['post']['url']; ?>">
