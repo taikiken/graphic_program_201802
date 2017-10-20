@@ -12,7 +12,10 @@ if ( $categories ) :
 endif;
 
 
-$app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app) {
+$s3key = 'json/ca_list.json';
+
+$json = $ImgPath . '/' . $s3key;
+$app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app, $json) {
 
 
   // 各カテゴリートップ - /category/:category_slug/
@@ -115,7 +118,49 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
   });
 
+    // CRAZY ATHLETE v2.0
+    $this->get('/{type:athletes}[/]', function ($request, $response, $args) use ($app, $json) {
+        var_dump($json);
+        // 選手詳細ルーティング
 
+        $data = @file_get_contents($json);
+
+        // jsonの中身が空の場合404
+        if(empty($data))
+        {
+            // 404
+            // ------------------------------
+            $args['page'] = $app->model->set([
+                'title'    => '404 Not Found',
+                'og_title' => '404 Not Found',
+                'template' => 404,
+            ]);
+
+            $args['request']  = $request;
+            $args['response'] = $response;
+
+            if($app->model->property('ua') === 'desktop')
+            {
+                return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
+            }
+            else
+            {
+                return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
+            }
+        }
+
+        $data = json_decode($data);
+        $args['page'] = $app->model->set(array(
+            'title'              => 'CRAZY ATHLETES',
+            'og_title'           => 'CRAZY ATHLETES | '.$app->model->property('title'),
+            'path'               => $args,
+            'template'           => 'category_list',
+            'template_classname' => '',
+            'list'               => $data
+        ));
+
+        return $this->renderer->render($response, 'crazy/list.php', $args);
+    });
 
   // webviews - /category/:category_slug/webviews/:slug  ref. #1918
   // ==============================
@@ -152,8 +197,6 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     endif;
 
   });
-
-
 });
 
 

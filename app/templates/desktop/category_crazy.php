@@ -68,12 +68,12 @@ if ($page['category']['slug'] == 'all') {
         <section class="section_crazy_pickup">
             <div class="ttl-wrapper">
                 <h2 class="ttl pickup"><i></i>注目のアスリート</h2>
-                <p class="more sp_hide"><a href="/crazy/list/">すべての選手を見る</a></p>
+                <p class="more sp_hide"><a href="/category/crazy/athletes/">すべての選手を見る</a></p>
             </div>
 
             <div class="pickup_player_list">
                 <ul class="thumb_area">
-                    <li><a href="/crazy/detail/14/">
+                    <li><a href="/athlete/14/">
                             <div class="img"><img src="/assets/img/pickup_14.png" alt=""></div>
                             <div class="txt_area">
                                 <h3 class="name">川﨑宗則</h3>
@@ -81,7 +81,7 @@ if ($page['category']['slug'] == 'all') {
                             </div>
                         </a></li>
 
-                    <li><a href="/crazy/detail/1/">
+                    <li><a href="/athlete/1/">
                             <div class="img"><img src="/assets/img/pickup_1.png" alt=""></div>
                             <div class="txt_area">
                                 <h3 class="name">遠藤保仁</h3>
@@ -89,7 +89,7 @@ if ($page['category']['slug'] == 'all') {
                             </div>
                         </a></li>
 
-                    <li><a href="/crazy/detail/13/">
+                    <li><a href="/athlete/13/">
                             <div class="img"><img src="/assets/img/pickup_13.png" alt=""></div>
                             <div class="txt_area">
                                 <h3 class="name">田臥勇太</h3>
@@ -97,7 +97,7 @@ if ($page['category']['slug'] == 'all') {
                             </div>
                         </a></li>
 
-                    <li><a href="/crazy/detail/2/">
+                    <li><a href="/athlete/2/">
                             <div class="img"><img src="/assets/img/pickup_2.png" alt=""></div>
                             <div class="txt_area">
                                 <h3 class="name">山中慎介</h3>
@@ -107,7 +107,7 @@ if ($page['category']['slug'] == 'all') {
                 </ul>
             </div>
 
-            <div class="more_btn pc_hide"><a href="/crazy/list/"><i></i>すべての選手を見る</a></div>
+            <div class="more_btn pc_hide"><a href="/category/crazy/athletes/"><i></i>すべての選手を見る</a></div>
         </section>
 
 

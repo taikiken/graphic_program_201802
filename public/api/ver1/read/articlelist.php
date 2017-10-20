@@ -25,7 +25,7 @@ if(strlen($api)>0){
 
 		if($type===""){
 
-            if($category == "crazy" && strpos($_SERVER['HTTP_REFERER'], '/crazy/detail/'))
+            if($category == "crazy" && strpos($_SERVER['HTTP_REFERER'], '/athlete/'))
             {
                 $json = file_get_contents($ImgPath . '/json/ca_article_ids.json');
                 $json = json_decode($json, true);
