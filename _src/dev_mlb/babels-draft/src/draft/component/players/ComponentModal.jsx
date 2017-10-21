@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// TweenMax
-import { TweenLite, Linear } from 'gsap';
+// // TweenMax
+// import { TweenLite, Linear } from 'gsap';
 
 // app/draft
 import Text from '../../app/draft/Text';
@@ -30,6 +30,9 @@ import UrlsDae, { UrlDae } from '../../dae/players/UrlsDae';
 // // TweenLite
 // const TweenLite = self.TweenLite;
 // const easing = self.com.greensock.easing;
+
+const TweenLite = self.TweenLite;
+const Linear = self.Linear;
 
 /**
  * 選手記事リンク - 複数件

@@ -197,7 +197,7 @@ export class ComponentDraftContainer extends Component {
     this.isotope = new Isotope(this.element, {
       itemSelector: '.draft-player',
       masonry: {
-        gutter: 20,
+        gutter: 12,
         columnWidth: 208,
       },
       filter: this.filtering(this.state.identity),
