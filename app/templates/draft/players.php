@@ -38,8 +38,8 @@
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="canonical" href="https://sportsbull.jp/stats/npb-draft2017/">
 
-<!--  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>-->
-<!--  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>-->
+  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 
   <script type='text/javascript'>
