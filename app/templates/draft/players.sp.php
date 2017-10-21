@@ -1,85 +1,25 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="ja">
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-  <meta charset="UTF-8">
-  <meta http-equiv="pragma" content="no-cache">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <script src="/assets/js/app_divide.bundle.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title>プロ野球2017 ドラフト候補選手 | スポーツブル (スポブル)</title>
-  <meta name="apple-itunes-app" content="app-id=1086719653">
-  <meta name="description" content="ドラフト候補選手見るならスポーツブル（スポブル）で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
-  <meta name="keywords" content="ドラフト, 野球, 候補選手, スポーツ, メディア, ニュース, 動画, sports, media, スポブル">
-  <!-- sns ogp -->
-  <meta property="og:title" content="プロ野球2017 ドラフト候補選手 | スポーツブル (スポブル)">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://sportsbull.jp/stats/npb-draft2017/">
-  <meta property="og:description" content="ドラフト候補選手見るならスポーツブル（スポブル）で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
-  <!-- twitter card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@sportsbull_jp">
-  <!-- favicon -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="canonical" href="https://sportsbull.jp/stats/npb-draft2017/">
-
-  <script src="/assets/js/libs/vendor.react.js"></script>
-  <script src="/assets/js/bundle/main.bundle.js"></script>
-
-
-  <script type='text/javascript'>
-    var googletag = googletag || {};
-    googletag.cmd = googletag.cmd || [];
-    (function() {
-      var gads = document.createElement('script');
-      gads.async = true;
-      gads.type = 'text/javascript';
-      var useSSL = 'https:' == document.location.protocol;
-      gads.src = (useSSL ? 'https:' : 'http:') +
-        '//www.googletagservices.com/tag/js/gpt.js';
-      var node = document.getElementsByTagName('script')[0];
-      node.parentNode.insertBefore(gads, node);
-    })();
-  </script>
-
-  <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-   ga('create', 'UA-74679267-1', 'auto');
-   ga('require', 'linkid');
-   ga('require', 'displayfeatures');
-   ga('send', 'pageview');
-
-  </script>
-
-  <script>
-    googletag.cmd.push(function() {
-      googletag.defineSlot('/531683568/npb-pc-rectangle', [300, 250], 'div-gpt-ad-1492577512561-0').addService(googletag.pubads());
-      googletag.pubads().enableSingleRequest();
-      googletag.pubads().collapseEmptyDivs();
-      googletag.enableServices();
-    });
-  </script>
-
-</head>
-<body>
-
-<div id="apvad-9881b571b6869b1815c4f16e1a2adbd4"></div>
-<script type="text/javascript" src="//cdn.apvdr.com/js/VastAdUnit.min.js"></script>
-<script>;(function(){new APV.VASTAdUnit({s:"9881b571b6869b1815c4f16e1a2adbd4", format:APV.AD_FORMAT.OVERLAY}).load();})();</script>
-<script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
-
-<div class="whole dark">
+<?php
+// draft
+// ==============================
+/**
+ * BGATE-449 ドラフト会議2017 / データの用意
+ * https://aws-plus.backlog.jp/view/BGATE-449
+ * BGATE-459 ドラフト会議2017 - スポブル展開
+ * https://aws-plus.backlog.jp/view/BGATE-459
+ * ```
+ * URL :
+ * ドラフト候補選手 : `/stats/npb-draft2017/`
+ * ドラフト速報 : `/stats/npb-draft2017/result/`
+ * ```
+ * User: @taikiken
+ * Date: 2017/10/20
+ * Time: 21:23
+ */
+?>
+<?php
+// header
+include_once __DIR__."/../${page['ua']}/_header.php";
+?>
 
   <header class="head-sec">
     <div class="head-sec-inner">
@@ -123,131 +63,7 @@
         </header>
         <!-- /draft-header -->
 
-        <!-- category-nav -->
-        <nav class="category-nav">
-          <ul>
-            <li><a class="category-1 is-checked" href="#">高校生</a></li>
-            <li><a class="category-2" href="#">大学生</a></li>
-            <li><a class="category-3" href="#">社会人</a></li>
-            <li><a class="category-4" href="#">独立リーグ</a></li>
-          </ul>
-        </nav>
-        <!-- /category-nav -->
-
-        <!-- position-filter -->
-        <div class="position-filter">
-          <button class="position-1 button is-checked" data-filter="">投手</button>
-          <button class="position-2 button" data-filter="">捕手</button>
-          <button class="position-3 button" data-filter="">内野手</button>
-          <button class="position-4 button" data-filter="">外野手</button>
-          <button class="position-5 button" data-filter="">その他</button>
-        </div>
-        <!-- /position-filter -->
-
-        <!-- players-list -->
-        <div class="players-list">
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos2">捕</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos3">内</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/player-transparent@2x.png" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos4">外</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos5">他</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-          <div class="player">
-            <a href="#">
-              <i class="player-pos player-pos1">投</i>
-              <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-250x250@2x.jpg" alt=""></figure>
-              <div class="player-info">
-                <p class="player-name">今井 達也</p>
-                <p class="player-team">東海大相模高</p>
-              </div>
-            </a>
-          </div>
-        </div>
-        <!-- /players-list -->
+        <div id="js-players"></div>
 
         <div class="note-block">
           <ul>
@@ -255,67 +71,7 @@
           </ul>
         </div>
 
-
-
-        <div id="js-modal">
-          <div class="player-modal">
-            <!-- players-info -->
-            <div class="overlay"></div>
-            <div class="players-info">
-              <div class="players-info-inner">
-                <div class="players-info-inner2">
-                  <i class="btn-close"></i>
-                  <header class="players-info-header">
-                    <figure class="player-image"><img src="/assets/images/stats/npb-draft2017/dummy-player-220x220.jpg" alt=""></figure>
-
-                    <h2><span class="player-pos player-pos1">投手</span><span class="player-name">今井 達也</span><span class="player-category">【高校生】</span></h2>
-                  </header>
-
-                  <div class="players-info-detail">
-                    <dl>
-                      <dt>・所属</dt>
-                      <dd class="player-team">東海大相模高</dd>
-                    </dl>
-                    <dl>
-                      <dt>・年齢</dt>
-                      <dd class="player-age">18歳</dd>
-                    </dl>
-                    <dl>
-                      <dt>・身長</dt>
-                      <dd class="player-height">180cm</dd>
-                    </dl>
-                    <dl>
-                      <dt>・体重</dt>
-                      <dd class="player-weight">72kg</dd>
-                    </dl>
-                    <dl>
-                      <dt>・投打</dt>
-                      <dd class="player-handed">右投げ右打ち</dd>
-                    </dl>
-                    <dl>
-                      <dt>・経歴</dt>
-                      <dd class="player-profile">東海大相模高－東海大－ＮＴＴ西日本</dd>
-                    </dl>
-                  </div>
-
-                  <p class="player-comment">180センチ84キロの恵まれた体格を生かして投げる大型右腕。下級生時から地区有数の投手として注目を集めた逸材で、北の大地からプロ入りを目指す。</p>
-
-                  <ul class="player-link-detail">
-                    <!-- 記事1つの場合 -->
-                    <!-- <li><a href="">選手紹介記事へ</a></li> -->
-
-                    <!-- 記事複数の場合 -->
-                    <li><a href="">選手紹介記事 1</a></li>
-                    <li><a href="">選手紹介記事 2</a></li>
-                    <li><a href="">選手紹介記事 3</a></li>
-                    <li><a href="">選手紹介記事 4</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <!-- /players-info -->
-          </div>
-        </div>
+        <div id="js-modal"></div>
       </section><!-- /.main-sec -->
 
     </div>
@@ -417,27 +173,13 @@
       <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
-</div><!-- /.whole -->
 
-<link rel="stylesheet" href="/assets/sp/css/stats/npb-draft2017/ui.css" media="only screen">
+<link rel="stylesheet" href="/assets/sp/css/stats/npb-draft2017/ui.css?v=<?php echo $page['version']; ?>" media="only screen">
+<script src="/assets/draft/js/bull_draft_2017_player.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<?php
 
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '842032129256034',
-      xfbml      : true,
-      version    : 'v2.5'
-    });
-  };
+include_once __DIR__."/../${page['ua']}/_footer.php";
 
-  (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/ja_JP/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-</body>
-</html>
+// debug
+include_once __DIR__."/../_debug.php";
+?>
