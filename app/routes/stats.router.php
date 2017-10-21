@@ -772,6 +772,20 @@ $app->group('/stats', function () use($app) {
 
   // draft
   // ==============================
+  /**
+   * BGATE-449 ドラフト会議2017 / データの用意
+   * https://aws-plus.backlog.jp/view/BGATE-449
+   * BGATE-459 ドラフト会議2017 - スポブル展開
+   * https://aws-plus.backlog.jp/view/BGATE-459
+   * ```
+   * URL :
+   * ドラフト候補選手 : `/stats/npb-draft2017/`
+   * ドラフト速報 : `/stats/npb-draft2017/result/`
+   * ```
+   * User: @taikiken
+   * Date: 2017/10/20
+   * Time: 21:23
+   */
   $this->group('/npb-draft2017', function ($request, $response, $args) use ( $app ) {
 
     // ドラフト候補選手
@@ -794,11 +808,11 @@ $app->group('/stats', function () use($app) {
     });
 
     // ドラフト速報
-    $this->get('/{category:\d{4}/\d{10}}[/]', function ($request, $response, $args) use ($app) {
+    $this->get('/{category:result}[/]', function ($request, $response, $args) use ($app) {
       $args['page'] = $app->model->set(array(
         'title'              => 'プロ野球2017 ドラフトリアル生速報 | スポーツブル (スポブル)',
         'og_title'           => 'プロ野球2017 ドラフトリアル生速報 | スポーツブル (スポブル)',
-        'og_url'             => $app->model->property('site_url') . 'stats/npb-draft2017/',
+        'og_url'             => $app->model->property('site_url') . 'stats/npb-draft2017/result/',
         'template'           => 'draft',
         'template_classname' => '',
         'path'               => $args,
