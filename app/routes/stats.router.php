@@ -821,9 +821,9 @@ $app->group('/stats', function () use($app) {
       ));
 
       if ( $app->model->property('ua') === 'desktop' ) :
-        return $this->renderer->render($response, 'draft/live.php', $args);
+        return $this->renderer->render($response, 'draft/result.php', $args);
       else :
-        return $this->renderer->render($response, 'draft/live.sp.php', $args);
+        return $this->renderer->render($response, 'draft/result.sp.php', $args);
       endif;
     });
   });
