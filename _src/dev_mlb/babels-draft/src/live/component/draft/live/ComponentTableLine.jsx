@@ -130,7 +130,7 @@ ComponentTableLine.propTypes = {
     376: Players,
   }).isRequired,
   roster: PropTypes.bool.isRequired,
-  rankOutput: React.PropTypes.bool,
+  rankOutput: PropTypes.bool,
 };
 
 /**

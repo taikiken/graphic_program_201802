@@ -87,11 +87,12 @@ const interval = () => {
   if (!element) {
     return false;
   }
-  let time = parseFloat(element.dataset.interval);
-  // polling time 負数でも local.dev の時は 5 をセットしテストする
-  if (time <= 0 && Env.mode === Env.LOCAL_DEV) {
-    time = 5;
-  }
+  const time = parseFloat(element.dataset.interval);
+  // let time = parseFloat(element.dataset.interval);
+  // // polling time 負数でも local.dev の時は 5 をセットしテストする
+  // if (time <= 0 && Env.mode === Env.LOCAL_DEV) {
+  //   time = 5;
+  // }
   Env.flashInterval = time;
   return true;
 };

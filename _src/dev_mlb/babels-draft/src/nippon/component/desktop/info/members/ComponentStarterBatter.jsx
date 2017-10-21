@@ -136,9 +136,9 @@ const ComponentStarterBatter = ({ batter, option }) => (
  */
 ComponentStarterBatter.propTypes = {
   // @type {Fielder}
-  batter: React.PropTypes.instanceOf(Batter).isRequired,
+  batter: PropTypes.instanceOf(Batter).isRequired,
   // @type {Object}
-  option: React.PropTypes.shape({
+  option: PropTypes.shape({
     batNo: PropTypes.bool.isRequired,
     position: PropTypes.bool.isRequired,
     name: PropTypes.bool.isRequired,

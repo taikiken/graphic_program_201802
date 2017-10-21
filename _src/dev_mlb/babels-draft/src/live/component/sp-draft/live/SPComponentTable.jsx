@@ -63,7 +63,7 @@ export default class SPComponentTable extends Component {
     // @type {Team}
     team: PropTypes.instanceOf(Team).isRequired,
     // @type {number} - 初期選択済み チームID
-    selected: React.PropTypes.number.isRequired,
+    selected: PropTypes.number.isRequired,
   };
   // ----------------------------------------
   // STATIC METHOD

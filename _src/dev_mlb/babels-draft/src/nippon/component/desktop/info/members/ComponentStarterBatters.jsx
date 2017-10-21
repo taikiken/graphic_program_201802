@@ -76,9 +76,9 @@ const ComponentStarterBatters = ({ starter, option, home }) => {
  */
 ComponentStarterBatters.propTypes = {
   // @type {Starter}
-  starter: React.PropTypes.instanceOf(Batters).isRequired,
+  starter: PropTypes.instanceOf(Batters).isRequired,
   // 出力オプション
-  option: React.PropTypes.shape({
+  option: PropTypes.shape({
     batNo: PropTypes.bool.isRequired,
     position: PropTypes.bool.isRequired,
     name: PropTypes.bool.isRequired,
@@ -86,7 +86,7 @@ ComponentStarterBatters.propTypes = {
     avg: PropTypes.bool.isRequired,
   }).isRequired,
   // @type {boolean} - true: ホームチーム
-  home: React.PropTypes.bool.isRequired,
+  home: PropTypes.bool.isRequired,
 };
 
 export default ComponentStarterBatters;
