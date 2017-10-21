@@ -56,24 +56,24 @@ const files = [
 ];
 // console.log('files dir.dist.theme', dir.dist.theme);
 const fileName = {
-  raw: 'bull_draft_2017_player.js',
-  bundle: 'bull_draft_2017_player.bundle.js',
+  raw: 'bull_draft_2017_live.js',
+  bundle: 'bull_draft_2017_live.bundle.js',
 };
 
 // ESLintst
 // --------------------------------------
-gulp.task('draft:lint', () => (
+gulp.task('live:lint', () => (
   gulp.src(files)
     .pipe($.eslint({ useEslintrc: true }))
     .pipe($.eslint.format())
     .pipe($.eslint.failAfterError())
-    .pipe($.size({ title: '*** draft:lint ***' }))
+    .pipe($.size({ title: '*** live:lint ***' }))
 ),
 );
 
 // babel
 // --------------------------------------
-gulp.task('draft:babel', () => (
+gulp.task('live:babel', () => (
   gulp.src(files)
   // .pipe($.babel({
   //   presets: [
@@ -91,13 +91,13 @@ gulp.task('draft:babel', () => (
     .pipe($.babel())
     .pipe($.replaceTask({ patterns }))
     .pipe(gulp.dest(dir.draft.compile))
-    .pipe($.size({ title: '*** draft:babel ***' }))
+    .pipe($.size({ title: 'live' }))
 ),
 );
 
 // webpack [DEV]
 // --------------------------------------
-gulp.task('draft:pack:dev', (callback) => {
+gulp.task('live:pack:dev', (callback) => {
   const config = Object.assign({}, wpk);
   // remove, since webpack 2.x, @see https://webpack.js.org/guides/migrating/
   // config.plugins = [
@@ -118,9 +118,9 @@ gulp.task('draft:pack:dev', (callback) => {
   // webpack
   return $$.webpack(config, (error, stats) => {
     if (error) {
-      throw new $.util.PluginError('draft:webpack:dev', error);
+      throw new $.util.PluginError('live:webpack:dev', error);
     }
-    $.util.log('[draft:webpack:dev]', stats.toString({
+    $.util.log('[live:webpack:dev]', stats.toString({
       colors: true,
       progress: true,
     }));
@@ -130,7 +130,7 @@ gulp.task('draft:pack:dev', (callback) => {
 
 // webpack [BUILD]
 // --------------------------------------
-gulp.task('draft:pack:build', (callback) => {
+gulp.task('live:pack:build', (callback) => {
   // const config = Object.create(wpk);
   const config = Object.assign({}, wpk);
   config.plugins = [
@@ -158,9 +158,9 @@ gulp.task('draft:pack:build', (callback) => {
   // webpack
   return $$.webpack(config, (error, stats) => {
     if (error) {
-      throw new $.util.PluginError('draft:webpack:build', error);
+      throw new $.util.PluginError('live:webpack:build', error);
     }
-    $.util.log('[draft:webpack:build]', stats.toString({
+    $.util.log('[live:webpack:build]', stats.toString({
       colors: true,
       progress: true,
     }));
@@ -170,7 +170,7 @@ gulp.task('draft:pack:build', (callback) => {
 
 // copy
 // --------------------------------------
-gulp.task('draft:copy', () => (
+gulp.task('live:copy', () => (
   gulp.src(
     [
       // `${dir.app.root}/**/*.bundle.js`,
@@ -180,34 +180,34 @@ gulp.task('draft:copy', () => (
     // .pipe(gulp.dest(dir.dist.root))
     // .pipe(gulp.dest(dir.app.js))
     .pipe(gulp.dest(`${dir.dist.assets.draft}/js`))
-    .pipe($.debug({ title: '[BABELS:DRAFT]' }))
+    .pipe($.debug({ title: '[BABELS:live]' }))
     // .pipe(gulp.dest(`${dir.root}/test/assets/js`))
-    .pipe($.debug({ title: '[BABELS:DRAFT]' }))
+    .pipe($.debug({ title: '[BABELS:live]' }))
     .pipe(gulp.dest('../app/assets/draft/js'))
-    .pipe($.debug({ title: '[BABELS:DRAFT]' }))
-    .pipe($.size({ title: '*** draft:copy ***' }))
+    .pipe($.debug({ title: '[BABELS:live]' }))
+    .pipe($.size({ title: '*** live:copy ***' }))
 ),
 );
 
 // --------------------------------------
 //  TASK > SEQUENCE
 // --------------------------------------
-gulp.task('draft:dev', callback =>
+gulp.task('live:dev', callback =>
   $$.runSequence(
-    'draft:lint',
-    'draft:babel',
-    'draft:pack:dev',
-    'draft:copy',
+    'live:lint',
+    'live:babel',
+    'live:pack:dev',
+    'live:copy',
     callback,
   ),
 );
 
-gulp.task('draft:build', callback =>
+gulp.task('live:build', callback =>
   $$.runSequence(
-    'draft:lint',
-    'draft:babel',
-    'draft:pack:build',
-    'draft:copy',
+    'live:lint',
+    'live:babel',
+    'live:pack:build',
+    'live:copy',
     callback,
   ),
 );
