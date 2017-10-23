@@ -1146,4 +1146,20 @@ function create_initialize_json($reload = false)
     }
     return json_decode($json, true);
 }
+
+function set_partners_info($f){
+
+	global $ImgPath;
+
+    $s["partner_name"]=$f["title"];
+    $s["site_url"]=$f["t1"];
+    $s["img_url"] = strlen($f["img1"])>0?sprintf("%s/img/%s",$ImgPath,$f["img1"]):"";
+    $s["sort_no"] = $f["n"];
+
+    return $s;
+}
+
+
+
+
 ?>

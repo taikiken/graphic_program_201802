@@ -500,6 +500,17 @@ class ViewModel {
 
   }
 
+    /**
+     * パートナー情報を取得する = /api/v1/partners/
+     *
+     * @return array
+     */
+    public function get_partners() {
+
+        $res = $this->db->get_partners();
+        return $res;
+    }
+
 }
 
 ?>

@@ -319,6 +319,22 @@ END_DOC;
 
   }
 
+    /**
+     * パートナー情報を取得する = /api/v1/partners/
+     *
+     * @return array
+     */
+    public function get_partners() {
+
+        $sql="select title,t1,img1,n from u_media order by n";
+        $this->query($sql);
+        while( $f = $this->fetch_array() ){
+            $s[] = set_partners_info($f);
+        }
+
+        return $s;
+    }
+
 }
 
 ?>
