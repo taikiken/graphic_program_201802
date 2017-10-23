@@ -44,6 +44,7 @@ include_once __DIR__."/../${page['ua']}/_header.php";
               <h1><img src="/assets/images/stats/npb-draft2017/player-title@2x.png" alt="プロ野球2017 ドラフト候補選手一覧"></h1>
             </div>
             <p class="lead">高校生、大学生そして社会人・独立リーグと、今年のドラフト候補選手を幅広くリストアップ！</p>
+            <p class="lead-credit">powered by  : <span class="lead-credit-logo"><img src="/assets/images/stats/npb-draft2017/logo-baseballmagazine.png" alt="週刊ベースボール"></span></p>
           </div>
 
           <aside class="draft-header-bnr-bottom">

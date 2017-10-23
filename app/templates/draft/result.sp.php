@@ -44,6 +44,7 @@ include_once __DIR__."/../${page['ua']}/_header.php";
               <h1><img src="/assets/images/stats/npb-draft2017/live-title@2x.png" alt="プロ野球2017 ドラフトリアル生速報"></h1>
             </div>
             <p class="lead">確定次第、指名順とともに指名権獲得球団をリアルタイムで<br>お届けいたします。</p>
+            <p class="lead-credit">powered by  : <span class="lead-credit-logo"><img src="/assets/images/stats/npb-draft2017/logo-baseballmagazine.png" alt="週刊ベースボール"></span></p>
           </div>
 
           <aside class="draft-header-bnr-bottom">

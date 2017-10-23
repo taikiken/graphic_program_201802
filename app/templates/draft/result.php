@@ -42,6 +42,7 @@ include_once __DIR__."/../${page['ua']}/_header.php";
             <div class="draft-logo"><img src="/assets/images/stats/npb-draft2017/draft-logo.png" alt="DRAFT 2017! NPB supported by リポビタンD" width="225" height="207"></div>
             <h1><img src="/assets/images/stats/npb-draft2017/live-title.png" alt="プロ野球2017 ドラフトリアル生速報" width="584" height="163"></h1>
             <p class="lead">確定次第、指名順とともに指名権獲得球団をリアルタイムでお届けいたします。</p>
+            <p class="lead-credit">powered by  : <span class="lead-credit-logo"><img src="/assets/images/stats/npb-draft2017/logo-baseballmagazine.png" alt="週刊ベースボール"></span></p>
           </div>
 
           <aside class="draft-header-bnr-bottom">
