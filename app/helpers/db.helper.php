@@ -319,6 +319,28 @@ END_DOC;
 
   }
 
+
+  /**
+   * プレスリリース一覧
+   * @return array
+   */
+  public function get_company_news_items()
+  {
+
+    $sql = <<<EOF
+select
+ title,
+ t1,
+ m_time
+ from u_media
+EOF;
+
+    $this->query($sql);
+    while ($f = $this->fetch_array()) {
+      $s[] = set_company_news_items($f);
+    }
+    return $s;
+  }
 }
 
 ?>
