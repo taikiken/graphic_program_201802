@@ -802,9 +802,9 @@ $app->group('/stats', function () use($app) {
       ));
 
       if ( $app->model->property('ua') === 'desktop' ) :
-        return $this->renderer->render($response, 'draft/players.php', $args);
+        return $this->renderer->render($response, 'stats/npb-draft2017/players.php', $args);
       else :
-        return $this->renderer->render($response, 'draft/players.sp.php', $args);
+        return $this->renderer->render($response, 'stats/npb-draft2017/players.sp.php', $args);
       endif;
     });
 
@@ -821,9 +821,9 @@ $app->group('/stats', function () use($app) {
       ));
 
       if ( $app->model->property('ua') === 'desktop' ) :
-        return $this->renderer->render($response, 'draft/result.php', $args);
+        return $this->renderer->render($response, 'stats/npb-draft2017/result.php', $args);
       else :
-        return $this->renderer->render($response, 'draft/result.sp.php', $args);
+        return $this->renderer->render($response, 'stats/npb-draft2017/result.sp.php', $args);
       endif;
     });
   });

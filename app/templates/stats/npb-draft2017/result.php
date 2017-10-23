@@ -18,7 +18,7 @@
 ?>
 <?php
 // header
-include_once __DIR__."/../${page['ua']}/_header.php";
+include_once __DIR__."/../../${page['ua']}/_header.php";
 ?>
 
   <header class="head-sec">
@@ -34,37 +34,49 @@ include_once __DIR__."/../${page['ua']}/_header.php";
         <header class="draft-header">
           <aside class="draft-header-bnr-top">
             <ul>
-              <li><a href="#"><img src="/assets/images/stats/npb-draft2017/bnr-dummy-640x100@2x.png" alt=""></a></li>
+              <li><a href="#"><img src="/assets/images/stats/npb-draft2017/bnr-dummy-728x90.png" alt="" width="728" height="90"></a></li>
             </ul>
           </aside>
 
           <div class="draft-header-main">
-            <div class="row">
-              <div class="draft-logo"><img src="/assets/images/stats/npb-draft2017/draft-logo@2x.png" alt="DRAFT 2017! NPB supported by リポビタンD"></div>
-              <h1><img src="/assets/images/stats/npb-draft2017/player-title@2x.png" alt="プロ野球2017 ドラフト候補選手一覧"></h1>
-            </div>
-            <p class="lead">高校生、大学生そして社会人・独立リーグと、今年のドラフト候補選手を幅広くリストアップ！</p>
+            <div class="draft-logo"><img src="/assets/images/stats/npb-draft2017/draft-logo.png" alt="DRAFT 2017! NPB supported by リポビタンD" width="225" height="207"></div>
+            <h1><img src="/assets/images/stats/npb-draft2017/live-title.png" alt="プロ野球2017 ドラフトリアル生速報" width="584" height="163"></h1>
+            <p class="lead">確定次第、指名順とともに指名権獲得球団をリアルタイムでお届けいたします。</p>
             <p class="lead-credit">powered by  : <span class="lead-credit-logo"><img src="/assets/images/stats/npb-draft2017/logo-baseballmagazine.png" alt="週刊ベースボール"></span></p>
           </div>
 
           <aside class="draft-header-bnr-bottom">
             <ul>
-              <li><a href="#"><img src="/assets/images/stats/npb-draft2017/bnr-dummy-700x86@2x.png" alt=""></a></li>
+              <li><a href="#"><img src="/assets/images/stats/npb-draft2017/bnr-dummy-728x90.png" alt="" width="728" height="90"></a></li>
             </ul>
           </aside>
 
           <!-- draft-nav -->
           <nav class="draft-nav">
             <ul>
-              <li>ドラフト候補選手名鑑</li>
-              <li><a href="result/">ドラフト超速報</a></li>
+              <li><a href="../">ドラフト候補選手名鑑</a></li>
+              <li>ドラフト超速報</li>
             </ul>
           </nav>
           <!-- draft-nav -->
         </header>
         <!-- /draft-header -->
 
-        <div id="js-players"></div>
+
+        <!-- draft-results -->
+        <section class="draft-results">
+          <!-- draft-results-header -->
+          <header class="draft-results-header">
+            <h2>ドラフト会議結果</h2>
+            <p><span class="draft-status-1"></span>競合による１位確定<span class="position pitcher">投</span>投手<span class="position catcher">捕</span>捕手<span class="position infielder">内</span>内野手<span class="position outfielder">外</span>外野手</p>
+          </header>
+          <!-- /draft-results-header -->
+
+          <!-- draft-results-body -->
+          <div id="js-live"></div>
+          <!-- /draft-results-body -->
+        </section>
+        <!-- /draft-results -->
 
         <div class="note-block">
           <ul>
@@ -72,6 +84,8 @@ include_once __DIR__."/../${page['ua']}/_header.php";
           </ul>
         </div>
 
+
+        <!-- players-info -->
         <div id="js-modal"></div>
       </section><!-- /.main-sec -->
 
@@ -83,7 +97,8 @@ include_once __DIR__."/../${page['ua']}/_header.php";
       <nav class="foot-breadCrumb">
         <ol itemscope itemtype="http://schema.org/breadCrumbList">
           <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">プロ野球2017 ドラフト候補選手</span><meta itemprop="position" content="2" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="../"><span itemprop="name">プロ野球2017 ドラフト候補選手</span><meta itemprop="position" content="2" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">プロ野球2017 ドラフトリアル生速報</span><meta itemprop="position" content="3" /></a></li>
         </ol>
       </nav><!-- /.foot-breadCrumb -->
 
@@ -174,13 +189,12 @@ include_once __DIR__."/../${page['ua']}/_header.php";
       <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
-
-<link rel="stylesheet" href="/assets/sp/css/stats/npb-draft2017/ui.css?v=<?php echo $page['version']; ?>" media="only screen">
-<script src="/assets/draft/js/bull_draft_2017_player.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<link rel="stylesheet" href="/assets/css/stats/npb-draft2017/ui.css?v=<?php echo $page['version']; ?>" media="only screen">
+<script id="js-live-bundle" data-interval="9" src="/assets/draft/js/bull_draft_2017_live.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <?php
 
-include_once __DIR__."/../${page['ua']}/_footer.php";
+include_once __DIR__."/../../${page['ua']}/_footer.php";
 
 // debug
-include_once __DIR__."/../_debug.php";
+include_once __DIR__."/../../_debug.php";
 ?>
