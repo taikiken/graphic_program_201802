@@ -55,6 +55,28 @@
     font-weight: bold;
     text-align: center;
   }
+
+  .lead-credit {
+    margin: 1em percent(20, 750) 0;
+    color: $color-white;
+    font-size: 9px;
+    text-align: right;
+  }
+
+  .lead-credit-logo {
+    margin-left: 5px;
+    display: inline-block;
+    background: hsla(0, 0, 100%, .8);
+    padding: 5px;
+    border: 1px solid #666;
+
+    img {
+      max-width: 80px;
+      height: auto;
+      vertical-align: middle;
+      line-height: 0;
+    }
+  }
 }
 
 .draft-header-bnr-bottom {
