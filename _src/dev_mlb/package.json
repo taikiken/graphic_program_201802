@@ -69,6 +69,7 @@
     "build:popup": "NODE_ENV=production gulp popup:build",
     "build:players": "NODE_ENV=production gulp players:build",
     "build:live": "NODE_ENV=production gulp live:build",
+    "build:draft": "yarn build:players && yarn build:live",
     "esdoc:mlb": "cd ./babels-mlb && esdoc -c esdoc.json",
     "esdoc:popup": "cd ./babels-popup && esdoc -c esdoc.json",
     "test": "echo \"Error: no test specified\" && exit 1"
