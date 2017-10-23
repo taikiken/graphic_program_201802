@@ -92,13 +92,14 @@ const ComponentLives = ({ result, error }) => {
   if (!action && !error) {
     return null;
   }
+  // ---
+  // polling setting
+  sequence();
+  // ----
   if (error && !data) {
     fail(error);
     return null;
   }
-  // ---
-  // polling setting
-  sequence();
   // error でも前回データが存在すれば使用しエラー表示しない
   if (action) {
     // 取得データを `data` 保存する

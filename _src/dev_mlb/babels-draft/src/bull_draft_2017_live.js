@@ -53,12 +53,12 @@ const mode = () => {
     hostname.indexOf('192.168.1.') !== -1 ||
     hostname.indexOf('127.0.0.1') !== -1 ||
     hostname.indexOf('localhost') !== -1 ||
-    hostname.indexOf('baseballgate.local') !== -1 ||
+    hostname.indexOf('undotsuhin.local') !== -1 ||
     location.port === '8000'
   ) {
     Env.local();
     Env.mode = Env.LOCAL_DEV;
-  } else if (hostname.indexOf('dev.baseballgate.jp') !== -1) {
+  } else if (hostname.indexOf('dev.sportsbull.jp') !== -1) {
     Env.mode = Env.DEVELOPMENT;
   }
 };
