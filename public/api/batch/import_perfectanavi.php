@@ -3,6 +3,7 @@
 include $INCLUDEPATH.'local.php';
 include $INCLUDEPATH.'public/import.php';
 
+ini_set("max_execution_time", 180);
 /*
 |--------------------------------------------------------------------------
 | RSS取込バッチ
@@ -19,20 +20,20 @@ const MEDIA_NAME = 'perfectanavi';
 # RSSファイル
 # 現状、検証用RSSしかもらってないので一旦下記RSSを使用
 #
-const RSS_FILE = 'https://perfectanavi:C4IiJ8V7@test.perfectanavi.com/tag/sportsbull/?feed=sportsbull';
+const RSS_FILE = 'https://perfectanavi.com/tag/sportsbull/?feed=sportsbull';
 // $RSS_FILE = dirname(__FILE__) . '/rss.xml';
 
 $o = new db;
 $o->connect();
 
-$sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
-$o->query($sql);
-$sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
-$o->query($sql);
-$sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
-$o->query($sql);
-$sql = "delete from repo_n where d2={$MEDIAID};";
-$o->query($sql);
+// $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from repo_n where d2={$MEDIAID};";
+// $o->query($sql);
 // return;
 
 $sql = sprintf("SELECT id,name,name_e,yobi FROM u_categories WHERE flag=1 AND id NOT IN(%s) ORDER BY id DESC",implode(",", $excategory));
@@ -66,8 +67,8 @@ foreach($items as $item)
 	#
 	$keyword = key_merge((string)$item->keyword);
 	$status  = (int)$item->status;
-	$enclosure_url = str_replace('http://','https://', (string)$item->enclosure->attributes()->url);
-	$enclosure_url = preg_replace('/test\.perfectanavi\.com/m', 'perfectanavi:C4IiJ8V7@test.perfectanavi.com', $enclosure_url[1]);
+	$enclosure_url = (string)$item->enclosure->attributes()->url;
+	$enclosure_url = preg_replace('/test\.perfectanavi\.com/m', 'perfectanavi:C4IiJ8V7@test.perfectanavi.com', $enclosure_url);
 
 	$related_links = $item->xpath('relatedLink');
 
@@ -125,9 +126,10 @@ foreach($items as $item)
 	if(count($tag) > 0) {
 		for($cnt=0; $cnt<count($tag); $cnt++) {
 			if($cnt == 6) break;
-			$s['t1' . $cnt] = esc($tag[$cnt]);
+			$item_map['t1' . $cnt] = esc($tag[$cnt]);
 		}
 	}
+
 
 	#
 	# 該当記事の抽出
@@ -218,36 +220,35 @@ foreach($items as $item)
 
 include $INCLUDEPATH.'public/display.php';
 
-function modifytag($s){
-
+function modifytag($s, $enclosure_url){
 	global $ImgPath;
-
+	$enclosure = basename($enclosure_url);
 	if(count($s)==0)return "";
-
 	$s = preg_replace('/ alt=""/', '', $s);
 	preg_match_all("/<img[^>]+>/", $s, $u);
 	for($i = 0; $i<count($u[0]); $i++){
 		preg_match('/src="([^"]+)"/',$u[0][$i], $r);
-		#
-		# パーフェクタナビはテスト環境はBasic認証かかってるから... 置換しておく
-		#
-		$image_url = preg_replace('/test\.perfectanavi\.com/m', 'perfectanavi:C4IiJ8V7@test.perfectanavi.com', $r[1]);
-		// echo $image_url . "<br>";
-		$img = outimg($image_url, 0, false);
-		if(preg_match("/:\/\//", $r[1])) {
-			if(strlen($img) > 0){
-				$s = str_replace($u[0][$i], sprintf("<img src=\"%s/raw/%s\"><br>", $ImgPath, $img), $s);
+		$image_url = $r[1];
+		if($enclosure == basename($image_url))
+		{
+			$s = str_replace($u[0][$i], '', $s);
+		}
+		else
+		{
+			$img = outimg($image_url, 0, false);
+			if(preg_match("/:\/\//", $r[1])) {
+				if(strlen($img) > 0){
+					$s = str_replace($u[0][$i], sprintf("<img src=\"%s/raw/%s\"><br>", $ImgPath, $img), $s);
+				}else{
+					$s = str_replace($u[0][$i], "", $s);
+				}
 			}else{
 				$s = str_replace($u[0][$i], "", $s);
 			}
-		}else{
-			$s = str_replace($u[0][$i], "", $s);
 		}
 	}
-
 	$s = str_replace(array("<p></p>", "<p>&nbsp;</p>"), "", $s);
 	$s = str_replace("\'", "''", preg_replace("/(\r|\n|\t)/", "", $s));
-
 	return $s;
 }
 
