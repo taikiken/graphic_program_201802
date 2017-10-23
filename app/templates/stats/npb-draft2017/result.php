@@ -121,7 +121,7 @@ include_once __DIR__."/../../${page['ua']}/_header.php";
         </div><!-- /.foot-pr-inner -->
       </div><!-- /.foot-pr -->
 
-      <div class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
+      <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
 
       <div class="fnav-block">
         <nav class="fnav">
