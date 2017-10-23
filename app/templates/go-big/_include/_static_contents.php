@@ -8,6 +8,24 @@
  */
 ?>
 <div class="gobig--intro gobig__container gobig__container--odd">
+  <div class="gobig__sns">
+    <ul class="gobig__sns__share">
+      <li class="gobig__sns__share__item gobig__sns__share__item--facebook"><a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">Facebook</a></li>
+      <li class="gobig__sns__share__item gobig__sns__share__item--twitter"><a href="http://twitter.com/share?text=<?php echo $page['og_title']; ?>&url=<?php echo $page['og_url']; ?>&via=big6_tv" onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Twitter</a></li>
+      <li class="gobig__sns__share__item gobig__sns__share__item--line"><a class="line btn" href="http://line.me/R/msg/text/?<?php echo $page['og_url']; ?>">LINE</a></li>
+    </ul><!-- /.gobig__sns__share -->
+
+    <dl class="gobig__sns__follow">
+      <dt class="gobig__sns__follow__copy"><span>スポブルをいいねして</span><br>最新ニュースをチェック！</dt>
+      <dd class="gobig__sns__follow__btns">
+        <ul class="gobig__sns__follow__list">
+          <li class="gobig__sns__follow__item gobig__sns__follow__item--facebook"><div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="box_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></li>
+          <li class="gobig__sns__follow__item gobig__sns__follow__item--twitter"><a class="tw-follow-btn" href="https://twitter.com/intent/follow?screen_name=sportsbull_jp" target="_blank" onclick="window.open(this.href, 'window', 'width=600, height=400, menubar=no, toolbar=no, scrollbars=yes'); return false;"></a></li>
+        </ul><!-- /.gobig__sns__follow__list -->
+      </dd>
+    </dl><!-- /.gobig__sns__follow -->
+  </div><!-- /.gobig__sns -->
+
   <p class="intro__catch">⽇本⼈ライダーのための、国内唯⼀のFMX（フリースタイルモトクロス）王座決定戦「GO BIG」 が今年も開催。デモンストレーションとは異なる、個々のライダースキルで競われる本大会が10周年の節目に、さらなる進化を見せつける。</p>
 
   <?php
@@ -211,45 +229,23 @@
   <h2 class="related__heading"><img class="show-for-pc" src="/assets/images/go-big/related-heading.png" alt="関連記事"><img class="show-for-sp" src="/assets/sp/images/go-big/related-heading.png" alt="関連記事"></h2>
 
   <div class="related__post">
-    <a href="hoge">
+    <a href="/p/213182/">
       <figure class="related__post__thumb"><img src="/assets/images/go-big/related-post-figure1.jpg" alt=""></figure>
       <div class="related__post__text">
-        <h3 class="related__post__heading">GO BIG 2016 ハイライト</h3>
-        <h4 class="related__post__category">FMX</h4>
-        <p class="related__post__date">10月17日（火）</p>
+        <h3 class="related__post__heading">【ハイライト動画】GO BIG 2015</h3>
+        <h4 class="related__post__category">アクションスポーツ</h4>
+        <p class="related__post__date">10月23日（月）</p>
       </div><!-- /.related__post__text -->
     </a>
   </div><!-- /.related__post -->
 
   <div class="related__post">
-    <a href="hoge">
+    <a href="/p/213184/">
       <figure class="related__post__thumb"><img src="/assets/images/go-big/related-post-figure2.jpg" alt=""></figure>
       <div class="related__post__text">
-        <h3 class="related__post__heading">GO BIG  2015 ハイライト</h3>
-        <h4 class="related__post__category">FMX</h4>
-        <p class="related__post__date">10月17日（火）</p>
-      </div><!-- /.related__post__text -->
-    </a>
-  </div><!-- /.related__post -->
-
-  <div class="related__post">
-    <a href="hoge">
-      <figure class="related__post__thumb"><img src="/assets/images/go-big/related-post-figure3.jpg" alt=""></figure>
-      <div class="related__post__text">
-        <h3 class="related__post__heading">GO BIG  2014 ハイライト</h3>
-        <h4 class="related__post__category">FMX</h4>
-        <p class="related__post__date">10月17日（火）</p>
-      </div><!-- /.related__post__text -->
-    </a>
-  </div><!-- /.related__post -->
-
-  <div class="related__post">
-    <a href="hoge">
-      <figure class="related__post__thumb"><img src="/assets/images/go-big/related-post-figure4.jpg" alt=""></figure>
-      <div class="related__post__text">
-        <h3 class="related__post__heading">GO BIG  2015 ハイライト</h3>
-        <h4 class="related__post__category">FMX</h4>
-        <p class="related__post__date">10月17日（火）</p>
+        <h3 class="related__post__heading">【ハイライト動画】GO BIG 2016</h3>
+        <h4 class="related__post__category">アクションスポーツ</h4>
+        <p class="related__post__date">10月23日（月）</p>
       </div><!-- /.related__post__text -->
     </a>
   </div><!-- /.related__post -->

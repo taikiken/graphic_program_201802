@@ -545,3 +545,117 @@
 
   } //.related__post
 } //.gobig--related
+
+
+
+
+//.gobig__sns
+.gobig__sns {
+  margin-bottom: 28px;
+  overflow: hidden;
+
+  //.gobig__sns__share
+  &__share {
+    float: right;
+    display: table;
+    width: 300px;
+
+    //.gobig__sns__share__item
+    &__item {
+      display: table-cell;
+      width: (100/3)+%;
+
+      a {
+        display: block;
+        width: 100%;
+        height: 40px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: auto (36/2)+px;
+        @include hide-text;
+      }
+
+      //.gobig__sns__share__item--facebook
+      &--facebook {
+        a {
+          border-radius: 3px 0 0 3px;
+          background-color: #4065b5;
+          background-image: url(/assets/images/go-big/sns-icon-facebook.png);
+        }
+      }
+
+      //.gobig__sns__share__item--twitter
+      &--twitter {
+        a {
+          background-color: #1b95e0;
+          background-image: url(/assets/images/go-big/sns-icon-twitter.png);
+        }
+      }
+
+      //.gobig__sns__share__item--line
+      &--line {
+        a {
+          border-radius: 0 3px 3px 0;
+          background-color: #00c300;
+          background-image: url(/assets/images/go-big/sns-icon-line.png);
+        }
+      }
+    } //.gobig__sns__share__item
+  } //.gobig__sns__share
+
+  //.gobig__sns__follow
+  &__follow {
+    float: left;
+    display: table;
+    width: 418px;
+
+    dt,
+    dd {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    //.gobig__sns__follow__copy
+    &__copy {
+      color: #fff;
+      font-weight: bold;
+
+      span {
+        font-size: 15px;
+      }
+    }
+
+    //.gobig__sns__follow__btns
+    &__btns {
+    }
+
+    //.gobig__sns__follow__list
+    &__list {
+      float: right;
+      display: table;
+    } //.gobig__sns__follow__list
+
+    //.gobig__sns__follow__item
+    &__item {
+      display: table-cell;
+      vertical-align: top;
+
+      //.gobig__sns__follow__item--facebook
+      &--facebook {
+        padding-right: 10px;
+      }
+
+      //.gobig__sns__follow__item--twitter
+      &--twitter {
+        a {
+          display: block;
+          width: 155px;
+          height: 40px;
+          background: #1b95e0 url(/assets/images/go-big/sns-icon-twitter_2.png) center center no-repeat;
+          background-size: (180/2)+px;
+          border-radius: 3px;
+        }
+      }
+    } //.gobig__sns__follow__item
+  }
+} //.gobig__sns
