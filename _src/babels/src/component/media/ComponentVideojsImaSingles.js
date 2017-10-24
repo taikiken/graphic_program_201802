@@ -199,11 +199,14 @@ export class ComponentVideojsImaSingles extends React.Component {
       // ---
       player.play();
     });
-    // @see https://github.com/undotsushin/undotsushin/issues/2503
-    // @since 2017-09-22
-    if (!this.mobile && adUrl && this.safari11) {
-      this.forSafari(player);
-    }
+    // > Google IMAが最新版で対応し、不要になった - Safari 11 mute 処理とる
+    // @see https://github.com/undotsushin/undotsushin/issues/2503#issuecomment-338888297
+    // @since 2017-10-24
+    // // @see https://github.com/undotsushin/undotsushin/issues/2503
+    // // @since 2017-09-22
+    // if (!this.mobile && adUrl && this.safari11) {
+    //   this.forSafari(player);
+    // }
 
     // global property セット
     this.player = player;
@@ -220,7 +223,7 @@ export class ComponentVideojsImaSingles extends React.Component {
    * @since 2017-09-22
    */
   forSafariMute(player) {
-    clearTimeout(this.muteId);
+    clearTimeout(this.muteId);  
     try{
       player.muted(false);
     } catch(e) {
