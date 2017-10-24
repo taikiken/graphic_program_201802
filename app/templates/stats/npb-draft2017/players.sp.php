@@ -34,7 +34,7 @@ include_once __DIR__."/../../${page['ua']}/_header.php";
         <header class="draft-header">
           <aside class="draft-header-bnr-top">
             <ul>
-              <li><a href="#"><img src="/assets/images/stats/npb-draft2017/bnr-dummy-640x100@2x.png" alt=""></a></li>
+              <li><a href="https://googleads.g.doubleclick.net/pcs/click?xai=AKAOjsuhZzvw0Yd2OgYW0fjbJHItn15BYphhGgFmfimTxPf9XgaDL8kryItylw0v3XshIStZeQUUHTUTuSinFUPY03v0GNSwW-JU1hK-DVfix7VT-ljI7yIr6SmL8eLp45wODTRixaEtOwaEBld159E21AXdr5qrB6ZR7ZYyn1Dm3DtnTYQRMIHNHkBEkrhlZh6pOr1yLXm0c9lKIlgIaUnJJFjc2q1jjCJaorRAkC60eGjuxAGZ&sig=Cg0ArKJSzA37vLPJDNHY&adurl=https://sportsbull.jp/about/&nm=2&nx=149&ny=88&mb=2" target="_blank"><img src="/assets/images/stats/npb-draft2017/spbl-download-320x50.png" alt="完全無料のスポーツアプリ スポブル ダウンロード"></a></li>
             </ul>
           </aside>
 
@@ -49,7 +49,7 @@ include_once __DIR__."/../../${page['ua']}/_header.php";
 
           <aside class="draft-header-bnr-bottom">
             <ul>
-              <li><a href="#"><img src="/assets/images/stats/npb-draft2017/bnr-dummy-700x86@2x.png" alt=""></a></li>
+              <li><a href="https://sportsbull.jp/category/big6tv/" target="_blank"><img src="/assets/images/stats/npb-draft2017/spbl-big6-320x50.png" alt="東京六大学野球 無料LIVE配信"></a></li>
             </ul>
           </aside>
 
