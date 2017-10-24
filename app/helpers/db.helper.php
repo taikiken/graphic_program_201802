@@ -328,11 +328,12 @@ END_DOC;
   {
 
     $sql = <<<EOF
-select
+SELECT
  title,
- t1,
- m_time
- from u_media
+ url,
+ published_at
+ FROM company_news
+ ORDER BY published_at DESC
 EOF;
 
     $this->query($sql);

@@ -1149,9 +1149,9 @@ function create_initialize_json($reload = false)
 
 function set_company_news_items($f){
 
-    $s["date"]=date("Y年n月j日",strtotime($f["m_time"]));
+    $s["date"]=date("Y年n月j日",strtotime($f["published_at"]));
     $s["title"]=$f["title"];
-    $s["url"]=$f["t1"];
+    $s["url"]=$f["url"];
 
     return $s;
 }
