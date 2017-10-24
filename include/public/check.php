@@ -352,7 +352,7 @@ function set_category($category,$type){
 		return;		
 	}
 	
-	return $category=="all"?" and m1!=152":sprintf(" and (m1=%s or m2=%s)",$caa[$category],$caa[$category]);
+	return $category=="all"?" and m1!=152 and m1!=161":sprintf(" and (m1=%s or m2=%s)",$caa[$category],$caa[$category]);
 
 }
 function set_category2($category,$type){
@@ -403,7 +403,7 @@ function set_category2($category,$type){
 		return;		
 	}
 	
-	return array($f["id"],$category=="all"?" and m1!=152":sprintf(" and (m1=%s or m2=%s)",$f["id"],$f["id"]));
+	return array($f["id"],$category=="all"?" and m1!=152 and m1!=161":sprintf(" and (m1=%s or m2=%s)",$f["id"],$f["id"]));
 }
 
 

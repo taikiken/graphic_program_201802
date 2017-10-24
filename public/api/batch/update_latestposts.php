@@ -26,12 +26,16 @@ for($i=0;$i<count($p);$i++){
 	$s[]=sprintf("update u_latestpost set pageid=%s,num=%s where m1=%s;",strlen($id)>0?$id:0,strlen($num)>0?$num:0,$p[$i]["id"]);
 }
 
-$sql="select count(id) as n from repo_n where cid=1 and flag=1 and m1!=130";
+//「すべて」の一覧から特定のメディアの記事を除外
+$exclusion=array(61);
+$exclusion=implode(",",$exclusion);
+
+$sql=sprintf("select count(id) as n from repo_n where cid=1 and flag=1 and d2 not in(%s)",$exclusion);
 $o->query($sql);
 $f=$o->fetch_array();
 $num=$f["n"];
 
-$sql="select m1,id from repo_n where cid=1 and flag=1 order by m_time desc limit 1 offset 0";
+$sql=sprintf("select m1,id from repo_n where cid=1 and flag=1 and d2 not in(%s) order by m_time desc limit 1 offset 0",$exclusion);
 $o->query($sql);
 $f=$o->fetch_array();
 $id=$f["id"];

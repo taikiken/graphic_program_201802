@@ -405,6 +405,11 @@ export default class ComMember extends Component {
    */
   choose(tab) {
     const { info, member } = this.props;
+    const home = member.team(info.home.id);
+    const visitor = member.team(info.visitor.id);
+    if (!home || !visitor) {
+      return this.emptyChoose();
+    }
     // console.log('ComMember.choose', tab, info, member);
     switch (tab) {
       case 'batter': {

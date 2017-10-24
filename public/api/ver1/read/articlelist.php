@@ -94,9 +94,9 @@ if(strlen($api)>0){
 				}
 				
 				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and regitime > now() - interval '%s day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
-				str_replace(" and","",$c[1]),$day,sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
+				preg_replace("/^ and/","",$c[1]),$day,sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
 				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and regitime > now() - interval '%s day') as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
-				str_replace(" and","",$c[1]),$day,sprintf($articletable2c,$c[1],"",""),"");
+				preg_replace("/^ and/","",$c[1]),$day,sprintf($articletable2c,$c[1],"",""),"");
 
 
 /*
@@ -117,9 +117,9 @@ if(strlen($api)>0){
 			}else{
 
 				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=1%s order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
-				str_replace(" and","",$c[1]),$category=="all"?" and regitime > now() - interval '7 day'":"",sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
+				preg_replace("/^ and/","",$c[1]),$category=="all"?" and regitime > now() - interval '7 day'":"",sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
 				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=1%s) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
-				str_replace(" and","",$c[1]),$category=="all"?" and regitime > now() - interval '7 day'":"",sprintf($articletable2c,$c[1],"",""),"");
+				preg_replace("/^ and/","",$c[1]),$category=="all"?" and regitime > now() - interval '7 day'":"",sprintf($articletable2c,$c[1],"",""),"");
 			}
 /*		
 			$sql=sprintf("select %s from %s order by m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid),$c." and (swf is not null or youtube is not null or facebook is not null)"),$length,$offset);
