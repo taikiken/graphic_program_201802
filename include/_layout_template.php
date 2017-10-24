@@ -47,7 +47,6 @@ var dir=<?=$q->get_dir()?>;
 var fil=<?=$q->get_file()?>;
 var cid=<?=$_GET["cid"]?$_GET["cid"]:0?>;
 var rid=<?=$_GET["rid"]?$_GET["rid"]:0?>;
-var company_news=<?=$_GET["company_news"]?$_GET["company_news"]:0?>;
 var cd="<?=$TABLE?>";
 var ct="<?=date("Y/m/d H:i:s")?>";
 </script>
