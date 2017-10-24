@@ -58,34 +58,34 @@ function baseball_mapping($f){
 }
 
 function relatedlink($link,$id=0){
-	
+
 	$s=array();
 	$n=count($link["li"]);
-	
+
 	if($n==1){
 		$se=$link["li"];
 		unlink($link);
 		$link["li"][0]=$se;
 	}
-	
+
 	for($i=0;$i<$n;$i++){
-		
+
 		$title=bind($link["li"][$i]["@attributes"]["url"]);
 		$url=bind(str_replace("]>","]",$link["li"][$i]["@attributes"]["title"]));
-		
+
 		if($id==0){
 			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
-		}else{	
+		}else{
 			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s where not exists (select*from u_link where pid=%s and n=%s);",$id,$title,$url,($i+1),$id,($i+1));
 			$s[]=sprintf("update u_link set title='%s',link='%s' where not exists (select * from u_link where title='%s' and link='%s') and pid=%s and n=%s;",$title,$url,$title,$url,$id,($i+1));
 		}
 	}
-		
+
 	return implode("\n",$s);
 }
 
 function relatedlink2($links,$id=0){
-	
+
 	$s=array();
 	$n=count($links);
 
@@ -94,15 +94,15 @@ function relatedlink2($links,$id=0){
 	}else{
 		$link=$links;
 	}
-	
+
 	for($i=0;$i<$n;$i++){
-		
+
 		$title=bind($link[$i]["@attributes"]["url"]);
 		$url=bind($link[$i]["@attributes"]["title"]);
-		
+
 		if($id==0){
 			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
-		}else{	
+		}else{
 			if($i==0)$s[]=sprintf("delete from u_link where pid=%s;",$id);
 			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s;",$id,$title,$url,($i+1));
 		}
@@ -111,32 +111,32 @@ function relatedlink2($links,$id=0){
 }
 
 function relatedlink3($links,$id=0){
-	
+
 	if(!$links)return;
-	
+
 	$s=array();
-	
+
 	if($links["link"]){
 		$link[0]=$links;
 	}else{
 		$link=$links;
 	}
-	
+
 	for($i=0;$i<count($link);$i++){
-		
+
 		$title=bind($link[$i]["link"]["@attributes"]["url"]);
 		$url=bind($link[$i]["link"]["@attributes"]["title"]);
-		
+
 		if($id==0){
 			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
-		}else{	
+		}else{
 			if($i==0)$s[]=sprintf("delete from u_link where pid=%s;",$id);
 			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s;",$id,$title,$url,($i+1));
 		}
-		
+
 		if($i==4)break;
 	}
-	
+
 	return implode("\n",$s);
 }
 
@@ -164,6 +164,26 @@ function relatedlink4($links,$id=0)
 		if($i==4)break;
 	}
 
+	return implode("\n",$s);
+}
+
+/*
+* 2017-10-13 関連リンク生成
+*/
+function relatedlink_New($links, $id=0){
+
+	$s = array();
+	foreach($links as $i => $link) {
+		$title = bind((string)$link->attributes()->url);
+		$url = bind(str_replace("]>", "]", (string)$link->attributes()->title));
+
+		if($id==0){
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
+		}else{
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s where not exists (select*from u_link where pid=%s and n=%s);",$id,$title,$url,($i+1),$id,($i+1));
+			$s[]=sprintf("update u_link set title='%s',link='%s' where not exists (select * from u_link where title='%s' and link='%s') and pid=%s and n=%s;",$title,$url,$title,$url,$id,($i+1));
+		}
+	}
 	return implode("\n",$s);
 }
 
@@ -253,7 +273,7 @@ function splittime($a,$b){
 }
 
 function get_imgs($img){
-	$ch=curl_init();	
+	$ch=curl_init();
 	curl_setopt($ch,CURLOPT_URL,$img);
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 	if(preg_match("/https/",$img)){
@@ -266,24 +286,24 @@ function get_imgs($img){
 }
 
 function eximg($img1,$img2){
-	
+
 	global $SERVERPATH;
-	
+
 	$img1=str_replace(sprintf("%s/prg_img",$SERVERPATH),preg_match("#/dev/#",$SERVERPATH)?"https://dev-img.sportsbull.jp":"https://img.sportsbull.jp",$img1);
-	
+
 	$a=(binary)get_imgs($img1);
 	$b=(binary)get_imgs($img2);
-	
+
 	return $a===$b?true:false;
 }
 
 function imgResize($img_name,$n_img,$re_size,$p="jpg"){
-	
+
 	global $SERVERPATH;
-	
+
 	$ww=$re_size;
 	$size=getimagesize($img_name);
-	
+
 	if($ww>$size[0]){
 		copy($img_name,$n_img);
 		s3upload($img_name,str_replace($SERVERPATH."/prg_img/","",$n_img));
@@ -320,7 +340,7 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg"){
 		}
 		$sp=array(0,0);
 		$resize=array($size[0]*$ptg+1,$size[1]*$ptg+1);
-		
+
 	}elseif($re_size[0]>$size[0]&&$re_size[1]>$size[1]){
 		$sp[0]=ceil(($re_size[0]-$size[0])/2);
 		$sp[1]=ceil(($re_size[1]-$size[1])/2);
@@ -341,7 +361,7 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg"){
 		$y=20;
 		$resize=array($size[0],$size[1]);
 	}
-	
+
 	$newImg=imagecreatetruecolor($re_size[0],$re_size[1]);
 	imagefill($newImg,0,0,imagecolorclosest($newImg,0,0,0));
 	$defImg=makeDefaultImg($img_name,$p);
@@ -361,12 +381,12 @@ function makeDefaultImg($filename,$type){
 		return imagecreatefrompng($filename);
 	}elseif($type=="gif"){
 		return imagecreatefromgif($filename);
-	}	
+	}
 }
 function outputImg($res,$filename,$type){
-	
+
 	global $SERVERPATH;
-	
+
 	if($type=="jpg"){
 		$e=imagejpeg($res,$filename,85);
 	}elseif($type=="gif"){
@@ -374,16 +394,16 @@ function outputImg($res,$filename,$type){
 	}elseif($type=="png"){
 		$e=imagepng($res,$filename,0);
 	}
-	
+
 	if($e){
 		imagedestroy($res);
 		chmod($filename,0777);
 	}else{
 		echo "画像の出力に失敗しました。もう一度アップロードしてください。";
 	}
-	
+
 	s3upload($filename,str_replace($SERVERPATH."/prg_img/","",$filename));
-	
+
 	return $e;
 }
 
@@ -394,29 +414,31 @@ function getfileinfo($i){
 	return array(sprintf("%s%s",date("YmdHis"),$m[1]),$ext);
 }
 
-function outimg($oimg,$tumb=1){
-	
+function outimg($oimg,$tumb=1, $parse=true){
+
 	global $SERVERPATH;
 	$imgp=$SERVERPATH."/prg_img/";
-	
-	$oimg=str_replace(" ","%20",$oimg);
-	$u=parse_url($oimg);
-	$oimg=sprintf("%s://%s%s",$u["scheme"],$u["host"],$u["path"]);
-	
+
+	if($parse) {
+		$oimg=str_replace(" ","%20",$oimg);
+		$u=parse_url($oimg);
+		$oimg=sprintf("%s://%s%s",$u["scheme"],$u["host"],$u["path"]);
+	}
+
 	$fl=getfileinfo($oimg);
 	$img=get_imgs($oimg);
 	if($img=="")return "";
-	
+
 	$file=sprintf("%stmp/%s.%s",$imgp,$fl[0],$fl[1]);
 	file_put_contents($file,$img);
-	
+
 	$size=getimagesize($file);
 	if(!$size)return "";
-	
+
 	if(preg_match("/jpe?g/",$size["mime"]))$p="jpg";
 	elseif(preg_match("/gif/",$size["mime"]))$p="gif";
 	elseif(preg_match("/png/",$size["mime"]))$p="png";
-	
+
 	if($tumb==1){
 		imgDresize($file,sprintf("%simg/%s.%s",$imgp,$fl[0],$p),array(640,400),$p);
 		imgDresize($file,sprintf("%sthumbnail1/%s.%s",$imgp,$fl[0],$p),array(320,180),$p);
@@ -426,17 +448,17 @@ function outimg($oimg,$tumb=1){
 		imgDresize($file,sprintf("%sthumbnail4/%s.%s",$imgp,$fl[0],$p),array(480,480),$p);
 	}
 	imgResize($file,sprintf("%sraw/%s.%s",$imgp,$fl[0],$p),980,$p);
-	
+
 	/* sportsbull移行後EC2のファイルは削除を有効にする */
 	unlink($file);
-	
+
 	return sprintf("%s.%s",$fl[0],$p);
 }
 
 function makesql($a,$f,$mediaid){
-	
+
 	global $MEDIAID;
-	
+
 	if($f==0){
 		while(list($k,$v)=each($a)){
 			if(strlen($v)>0){
