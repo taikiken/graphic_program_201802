@@ -37,6 +37,26 @@
   background: none !important;
 }
 
+
+// bottom-bnr-list
+.bottom-bnr-list {
+  margin-top: 30px;
+
+  li {
+    margin-top: 20px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  a {
+    display: block;
+    text-align: center;
+  }
+}
+
+
 // -------------------------------------------------------------
 // players
 // -------------------------------------------------------------

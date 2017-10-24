@@ -90,6 +90,14 @@ include_once __DIR__."/../../${page['ua']}/_header.php";
           </ul>
         </div>
 
+        <!-- bottom-bnr-list -->
+        <ul class="bottom-bnr-list">
+          <li><a href="http://www.tbs.co.jp/baseball-draft/" target="_blank"><img src="/assets/images/stats/npb-draft2017/bnr-tbs-sp.jpg" alt="プロ野球ドラフト会議 10月26日（木）午後4時50分 TBS系列全国ネット放送 supported by リポビタンD"></a></li>
+          <li><a href="http://www.tbs.co.jp/baseball-draft/tokuban/" target="_blank"><img src="/assets/images/stats/npb-draft2017/bnr-thanks-sp.jpg" alt="ドラフト緊急生特番！お母さんありがとう 10月26日（木）よる7時 TBS系列全国ネット放送"></a></li>
+        </ul>
+        <!-- /bottom-bnr-list -->
+
+
         <div id="js-modal"></div>
       </section><!-- /.main-sec -->
 
