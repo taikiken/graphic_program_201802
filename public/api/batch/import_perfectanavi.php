@@ -13,7 +13,7 @@ ini_set("max_execution_time", 180);
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-$MEDIAID = 63;
+$MEDIAID = 65;
 const MEDIA_NAME = 'perfectanavi';
 
 
