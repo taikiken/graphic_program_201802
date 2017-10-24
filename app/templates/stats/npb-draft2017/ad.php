@@ -34,17 +34,19 @@ DFPの広告出力管理
     <?php endif; ?>
 
     // 枠のインスタンス
-    var DFP_header_bottom = googletag.defineSlot('/531683568/stats/header', [slot_size], 'div-gpt-ad-header_bottom').addService(googletag.pubads());
+    var DFP_header_bottom = googletag.defineSlot('/531683568/stats/header', slot_size, 'div-gpt-ad-header_bottom');
 
-    var DFP_title_bottom = googletag.defineSlot('/531683568/stats/title_bottom', [slot_size], 'div-gpt-ad-title_bottom').addService(googletag.pubads());
+    var DFP_title_bottom = googletag.defineSlot('/531683568/stats/title_bottom', slot_size, 'div-gpt-ad-title_bottom');
 
 
     // targeting
     // ------------------------------
     // 個別にkey-value
+    DFP_header_bottom.addService(googletag.pubads());
     DFP_header_bottom.setTargeting("category", "draft2017");
     DFP_header_bottom.setTargeting("platform", platform);
 
+    DFP_title_bottom.addService(googletag.pubads());
     DFP_title_bottom.setTargeting("category", "draft2017");
     DFP_title_bottom.setTargeting("platform", platform);
 
