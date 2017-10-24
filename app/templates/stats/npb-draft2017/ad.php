@@ -10,10 +10,11 @@ DFPの広告出力管理
 
 <script>
 
-  // # Step1. settings
   googletag.cmd.push(function() {
 
-    // UAに応じてサイズとプラットフォームを定義
+    // # Step1. settings
+
+    // UAに応じてサイズとサイズとプラットフォームを定義
     // ------------------------------
     var platform = 'web_mobile';
     var slot_size = [320, 50];
@@ -47,21 +48,29 @@ DFPの広告出力管理
     DFP_title_bottom.setTargeting("catergory", "draft2017");
     DFP_title_bottom.setTargeting("platform", platform);
 
-
     // まとめてkey-value - 今回はこちらでもよさげ
     // googletag.pubads().setTargeting("catergory", "draft2017");
     // googletag.pubads().setTargeting("platform", platform);
 
 
+    // config
     googletag.pubads().enableSingleRequest();
     googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
+
+
+    // # Step.2 show
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-header_bottom'); });
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-title_bottom'); });
+
+
+    // # Step.3 Reload
+    setInterval(function(){
+      googletag.pubads().refresh([DFP_header_bottom]);
+      // googletag.pubads().refresh([DFP_title_bottom]); - 六大固定なのでリロードしない
+    }, 30000 );
+
   });
-
-
-  // # Step.2 show
-  googletag.cmd.push(function() { googletag.display('div-gpt-ad-header_bottom'); });
-  googletag.cmd.push(function() { googletag.display('div-gpt-ad-title_bottom'); });
 
 
 </script>
