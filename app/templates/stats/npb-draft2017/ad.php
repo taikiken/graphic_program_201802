@@ -33,7 +33,7 @@ DFPの広告出力管理
     <?php endif; ?>
 
     // 枠のインスタンス
-    var DFP_header_bottom = googletag.defineSlot('/531683568/stats/header_bottom', [slot_size], 'div-gpt-ad-header_bottom').addService(googletag.pubads());
+    var DFP_header_bottom = googletag.defineSlot('/531683568/stats/header', [slot_size], 'div-gpt-ad-header_bottom').addService(googletag.pubads());
 
     var DFP_title_bottom = googletag.defineSlot('/531683568/stats/title_bottom', [slot_size], 'div-gpt-ad-title_bottom').addService(googletag.pubads());
 
