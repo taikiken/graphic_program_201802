@@ -42,14 +42,14 @@ DFPの広告出力管理
     // targeting
     // ------------------------------
     // 個別にkey-value
-    DFP_header_bottom.setTargeting("catergory", "draft2017");
+    DFP_header_bottom.setTargeting("category", "draft2017");
     DFP_header_bottom.setTargeting("platform", platform);
 
-    DFP_title_bottom.setTargeting("catergory", "draft2017");
+    DFP_title_bottom.setTargeting("category", "draft2017");
     DFP_title_bottom.setTargeting("platform", platform);
 
     // まとめてkey-value - 今回はこちらでもよさげ
-    // googletag.pubads().setTargeting("catergory", "draft2017");
+    // googletag.pubads().setTargeting("category", "draft2017");
     // googletag.pubads().setTargeting("platform", platform);
 
 
