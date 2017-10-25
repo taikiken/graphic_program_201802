@@ -11,7 +11,7 @@
 
   ul {
     display: flex;
-    width: 540px;
+    width: 541px;
     margin: 0 auto;
   }
 
@@ -21,8 +21,8 @@
     height: 54px;
     line-height: 54px;
     border-radius: 0 2px 2px 0;
-    background-color: #222;
-    color: #4c4c4c;
+    background-color: #947d15;
+    color: $color-white;
     font-size: 16px;
     text-align: center;
 
@@ -31,6 +31,7 @@
     }
 
     &:first-child {
+      margin-right: 1px;
       border-radius: 2px 0 0 2px;
 
       a {
@@ -42,12 +43,12 @@
   a {
     display: block;
     line-height: 54px;
-    background-color: #947d15;
+    background-color: #222;
     @include link-decoration($color-white, $color-white, none, none);
-    @include transition(background-color);
+    @include transition();
 
     &:hover {
-      background-color: #b3971a;
+      background-color: #947d15;
     }
   }
 }
