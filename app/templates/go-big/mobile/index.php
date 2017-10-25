@@ -4,10 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <?php
-  // app in webview 時に .head-sec を非表示にする
-  if (!$from_webview) :
-  ?>
   <title><?php echo strip_tags($page['title']).' | '.$page['site_name']; ?></title>
   <meta name="keywords" content="<?php echo $page['keywords']; ?>">
   <meta name="description" content="<?php echo $page['og_description']; ?>">
@@ -34,10 +30,6 @@
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
   <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
 
-  <?php
-  endif;
-  // -----------------------------------------
-  ?>
   <link rel="stylesheet" href="/assets/sp/css/<?php echo $page['template_classname']; ?>/ui.css?v=<?php echo $page['version']; ?>">
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
@@ -83,19 +75,11 @@
 </head>
 <body class="appbnr-disable">
 <div class="whole <?php echo $page['template_classname']; ?>">
-  <?php
-  // app in webview 時に .head-sec を非表示にする
-  if (!$from_webview) :
-  ?>
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
-  <?php
-  endif;
-  // -----------------------------------------
-  ?>
 
 <?php
 // ------------------------------------------------
@@ -145,10 +129,6 @@
   </div>
 </div><!-- /.body-sec -->
 
-  <?php
-  // app in webview 時に .foot-sec を非表示にする
-  if (!$from_webview) :
-  ?>
   <footer class="foot-sec">
     <div class="foot-sec-inner">
 
@@ -191,17 +171,9 @@
       <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
-  <?php
-  // -----------------------------------------
-  endif;
-  ?>
 
 </div><!-- /.whole -->
 
-<?php
-// app in webview 時に .foot-sec を非表示にするので FB いらない
-if (!$from_webview) :
-?>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -219,10 +191,6 @@ if (!$from_webview) :
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
-<?php
-endif;
-// -----------------------------------------
-?>
 
 <script src="/assets/js/<?php echo $page['template_classname']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>

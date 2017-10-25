@@ -8,10 +8,6 @@
  */
 ?>
 <div class="gobig--intro gobig__container gobig__container--odd">
-  <?php
-  // app in webview 時に .head-sec を非表示にする
-  if (!$from_webview) :
-  ?>
   <div class="gobig__sns">
     <ul class="gobig__sns__share">
       <li class="gobig__sns__share__item gobig__sns__share__item--facebook"><a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">Facebook</a></li>
@@ -29,22 +25,10 @@
       </dd>
     </dl><!-- /.gobig__sns__follow -->
   </div><!-- /.gobig__sns -->
-  <?php
-  endif;
-  // -----------------------------------------
-  ?>
 
   <p class="intro__catch">⽇本⼈ライダーのための、国内唯⼀のFMX（フリースタイルモトクロス）王座決定戦「GO BIG」 が今年も開催。デモンストレーションとは異なる、個々のライダースキルで競われる本大会が10周年の節目に、さらなる進化を見せつける。</p>
 
-  <?php
-  // app in webview 時に .head-sec を非表示にする
-  if (!$from_webview) :
-  ?>
   <div class="intro__link__app"><a href="https://app.adjust.com/chwhc2?deep_link=sportsbull%3A%2F%2F" target="_blank">アプリでライブ配信開始の通知を受け取る</a></div>
-  <?php
-  endif;
-  // -----------------------------------------
-  ?>
 
   <div class="intro__timetable">
     <table>

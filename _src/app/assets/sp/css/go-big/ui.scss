@@ -515,6 +515,11 @@
   padding-bottom: (24/2)+px;
   border-bottom: 1px solid #333300;
 
+  .undotsushin-ios &,
+  .undotsushin-android & {
+    display: none;
+  }
+
   //.gobig__sns__share
   &__share {
     display: table;
