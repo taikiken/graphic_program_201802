@@ -792,7 +792,7 @@ $app->group('/stats', function () use($app) {
     $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
       $args['page'] = $app->model->set(array(
         'title'              => 'プロ野球2017 ドラフト候補選手',
-        'og_title'           => 'プロ野球2017 ドラフト候補選手',
+        'og_title'           => 'プロ野球2017 ドラフト候補選手 | スポーツブル(スポブル)',
         'og_url'             => $app->model->property('site_url') . 'stats/npb-draft2017/',
         'og_description'     => 'ドラフト候補選手見るならスポーツブル（スポブル）で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
         'template'           => 'draft',
@@ -812,7 +812,7 @@ $app->group('/stats', function () use($app) {
     $this->get('/{category:result}[/]', function ($request, $response, $args) use ($app) {
       $args['page'] = $app->model->set(array(
         'title'              => 'プロ野球2017 ドラフトリアル生速報',
-        'og_title'           => 'プロ野球2017 ドラフトリアル生速報',
+        'og_title'           => 'プロ野球2017 ドラフトリアル生速報 | スポーツブル(スポブル)',
         'og_url'             => $app->model->property('site_url') . 'stats/npb-draft2017/result/',
         'template'           => 'draft',
         'template_classname' => 'dark',
