@@ -76,6 +76,7 @@ const sequence = () => {
  */
 const fail = (error) => {
   console.warn('[DRAFT:LIVE]', error);
+  return null;
 };
 
 /**
@@ -97,8 +98,8 @@ const ComponentLives = ({ result, error }) => {
   sequence();
   // ----
   if (error && !data) {
-    fail(error);
-    return null;
+    return fail(error);
+    // return null;
   }
   // error でも前回データが存在すれば使用しエラー表示しない
   if (action) {
