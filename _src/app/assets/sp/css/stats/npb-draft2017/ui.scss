@@ -59,6 +59,20 @@
   }
 }
 
+
+
+// draft-live-message
+.draft-live-message {
+  margin-top: percent(50, 750);
+  padding: percent(30, 750) 0;
+  border-top: 2px * 0.5 solid $color-white;
+  border-bottom: 2px * 0.5 solid $color-white;
+  color: $color-white;
+  font-size: 26px * 0.5;
+  font-weight: bold;
+  text-align: center;
+}
+
 // -------------------------------------------------------------
 // players
 // -------------------------------------------------------------
