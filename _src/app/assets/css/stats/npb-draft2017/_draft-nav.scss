@@ -44,7 +44,7 @@
     display: block;
     line-height: 54px;
     background-color: #222;
-    @include link-decoration(#4c4c4c, $color-white, none, none);
+    @include link-decoration($color-white, $color-white, none, none);
     @include transition();
 
     &:hover {

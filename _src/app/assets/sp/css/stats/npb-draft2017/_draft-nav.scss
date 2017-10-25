@@ -41,6 +41,6 @@
     display: block;
     line-height: 80px * 0.5;
     background-color: #222;
-    @include link-decoration(#4c4c4c, #4c4c4c, none, none);
+    @include link-decoration($color-white, $color-white, none, none);
   }
 }
