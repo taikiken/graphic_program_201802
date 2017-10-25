@@ -14,7 +14,7 @@ if($TABLE=="company_news"){
 	$o->query($sql);
 	$f=$o->fetch_array();
 
-	$title.=sprintf("（%s）",date("Y年n月j日 H:i:s",strtotime($p[$i]["published_at"])));
+	$title.=sprintf("（%s）",date("Y年n月j日",strtotime($p[$i]["published_at"])));
 
 }else{
 
