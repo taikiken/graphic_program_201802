@@ -28,3 +28,8 @@
   $value: strip-unit($target-value) / strip-unit($base-value) * 100%;
   @return $value;
 }
+
+@function percent($target-value, $base-value: $screen-small) {
+  $value: strip-unit($target-value) / strip-unit($base-value) * 100%;
+  @return $value;
+}

@@ -770,6 +770,63 @@ $app->group('/stats', function () use($app) {
     });
   });
 
+  // draft
+  // ==============================
+  /**
+   * BGATE-449 ドラフト会議2017 / データの用意
+   * https://aws-plus.backlog.jp/view/BGATE-449
+   * BGATE-459 ドラフト会議2017 - スポブル展開
+   * https://aws-plus.backlog.jp/view/BGATE-459
+   * ```
+   * URL :
+   * ドラフト候補選手 : `/stats/npb-draft2017/`
+   * ドラフト速報 : `/stats/npb-draft2017/result/`
+   * ```
+   * User: @taikiken
+   * Date: 2017/10/20
+   * Time: 21:23
+   */
+  $this->group('/npb-draft2017', function ($request, $response, $args) use ( $app ) {
+
+    // ドラフト候補選手
+    $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+      $args['page'] = $app->model->set(array(
+        'title'              => 'プロ野球2017 ドラフト候補選手',
+        'og_title'           => 'プロ野球2017 ドラフト候補選手',
+        'og_url'             => $app->model->property('site_url') . 'stats/npb-draft2017/',
+        'og_description'     => 'ドラフト候補選手見るならスポーツブル（スポブル）で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
+        'template'           => 'draft',
+        'template_classname' => 'dark',
+        'path'               => $args,
+        'ua'                 => $app->model->property('ua')
+      ));
+
+      if ( $app->model->property('ua') === 'desktop' ) :
+        return $this->renderer->render($response, 'stats/npb-draft2017/players.php', $args);
+      else :
+        return $this->renderer->render($response, 'stats/npb-draft2017/players.sp.php', $args);
+      endif;
+    });
+
+    // ドラフト速報
+    $this->get('/{category:result}[/]', function ($request, $response, $args) use ($app) {
+      $args['page'] = $app->model->set(array(
+        'title'              => 'プロ野球2017 ドラフトリアル生速報',
+        'og_title'           => 'プロ野球2017 ドラフトリアル生速報',
+        'og_url'             => $app->model->property('site_url') . 'stats/npb-draft2017/result/',
+        'template'           => 'draft',
+        'template_classname' => 'dark',
+        'path'               => $args,
+        'ua'                 => $app->model->property('ua')
+      ));
+
+      if ( $app->model->property('ua') === 'desktop' ) :
+        return $this->renderer->render($response, 'stats/npb-draft2017/result.php', $args);
+      else :
+        return $this->renderer->render($response, 'stats/npb-draft2017/result.sp.php', $args);
+      endif;
+    });
+  });
 });
 
 ?>
