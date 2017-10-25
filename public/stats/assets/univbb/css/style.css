@@ -11,15 +11,13 @@
 }
 @media screen and (max-width: 768px) {
 	.sponsor-link ~ .bnr-draft {
-		margin-top: 10px;
-		margin-bottom: 10px;
+		margin: 10px;
 	}
 	.bnr-draft.live {
-		margin-top: 10px;
-		margin-bottom: 10px;
+		margin: 10px;
 	}
 }
 .webview .bnr-draft {
 	border-top: 10px solid  #000;
-	padding-bottom: 10px;
+	padding: 0 10px 10px;
 }
