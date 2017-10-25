@@ -5,6 +5,13 @@
 DFPの広告出力管理
 
 
+# タイトル下部 DFP在庫名
+- title_bottom_web_desktop
+- title_bottom_web_mobile
+- title_bottom_app_ios
+- title_bottom_app_android
+
+
 */
 ?>
 
@@ -36,7 +43,7 @@ DFPの広告出力管理
     // 枠のインスタンス
     var DFP_header_bottom = googletag.defineSlot('/531683568/stats/header', slot_size, 'div-gpt-ad-header_bottom');
 
-    var DFP_title_bottom = googletag.defineSlot('/531683568/stats/header_bottom', slot_size, 'div-gpt-ad-title_bottom');
+    var DFP_title_bottom = googletag.defineSlot('/531683568/stats/title_bottom_' + platform, slot_size, 'div-gpt-ad-title_bottom');
 
 
     // targeting
