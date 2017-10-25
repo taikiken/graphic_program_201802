@@ -1,0 +1,53 @@
+// import library setting + mixin + function
+@import "./asset";
+
+// scss-lint:disable ColorVariable
+
+// scss-lint:disable NestingDepth
+
+// draft-nav
+.draft-nav {
+  margin-top: 40px;
+
+  ul {
+    display: flex;
+    width: 540px;
+    margin: 0 auto;
+  }
+
+
+  li {
+    width: 50%;
+    height: 54px;
+    line-height: 54px;
+    border-radius: 0 2px 2px 0;
+    background-color: #222;
+    color: #4c4c4c;
+    font-size: 16px;
+    text-align: center;
+
+    a {
+      border-radius: 0 2px 2px 0;
+    }
+
+    &:first-child {
+      border-radius: 2px 0 0 2px;
+
+      a {
+        border-radius: 2px 0 0 2px;
+      }
+    }
+  }
+
+  a {
+    display: block;
+    line-height: 54px;
+    background-color: #947d15;
+    @include link-decoration($color-white, $color-white, none, none);
+    @include transition(background-color);
+
+    &:hover {
+      background-color: #b3971a;
+    }
+  }
+}

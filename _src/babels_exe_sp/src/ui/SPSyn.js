@@ -9,39 +9,43 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
-
-let _symbol = Symbol();
+//
+//
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * Syn. menu + open / close UI
  */
 export class SPSyn {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPSyn is static Class. not use new SPSyn().' );
-
-    }
-  }
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPSyn is static Class. not use new SPSyn().' );
+  //
+  //   }
+  // }
   /**
    * side menu + Syn.
    */
   static start():void {
-    let element = Dom.service();
-    let button = Dom.serviceOpener();
-    let menu = Dom.serviceMenu();
-    let modal = Dom.modal();
+    const element = Dom.service();
+    const button = Dom.serviceOpener();
+    const menu = Dom.serviceMenu();
+    const modal = Dom.modal();
+    // element 存在チェック追加する - 2017-10-21
+    if (!element || !button || !menu || !modal) {
+      return;
+    }
 
-    let syn = new UT.sp.view.SPViewSyn( element, button, menu, modal );
+    const syn = new UT.sp.view.SPViewSyn( element, button, menu, modal );
     syn.start();
   }
 }
