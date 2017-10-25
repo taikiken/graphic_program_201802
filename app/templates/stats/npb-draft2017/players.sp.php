@@ -60,8 +60,8 @@ include_once __DIR__."/../../${page['ua']}/_header.php";
           <!-- draft-nav -->
           <nav class="draft-nav">
             <ul>
-              <li>ドラフト候補選手名鑑</li>
-              <li><a href="result/">ドラフト超速報</a></li>
+              <li>ドラフト候補選手一覧</li>
+              <li><a href="result/">ドラフトリアル生速報</a></li>
             </ul>
           </nav>
           <!-- draft-nav -->
