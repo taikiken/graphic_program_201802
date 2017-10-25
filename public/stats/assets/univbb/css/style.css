@@ -3,15 +3,16 @@
 	display: block;
 	line-height: 0;
 }
-.sponsor-link + .bnr-draft {
+.sponsor-link ~ .bnr-draft {
 	margin-top: 30px;
 }
 .bnr-draft.live {
 	margin-bottom: 30px;
 }
 @media screen and (max-width: 768px) {
-	.sponsor-link + .bnr-draft {
+	.sponsor-link ~ .bnr-draft {
 		margin-top: 10px;
+		margin-bottom: 10px;
 	}
 	.bnr-draft.live {
 		margin-top: 10px;
