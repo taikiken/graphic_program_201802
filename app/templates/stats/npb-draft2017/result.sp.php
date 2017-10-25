@@ -32,7 +32,7 @@ include_once __DIR__."/../../${page['ua']}/_header.php";
       <section class="main-sec">
         <!-- draft-header -->
         <header class="draft-header">
-          <aside class="draft-header-bnr-top">
+          <aside class="draft-header-bnr-top" style="padding-left:0; padding-right: 0;">
             <ul>
               <li>
                 <div id='div-gpt-ad-header_bottom'></div>
@@ -49,7 +49,7 @@ include_once __DIR__."/../../${page['ua']}/_header.php";
             <p class="lead-credit">powered by  : <span class="lead-credit-logo"><a href="http://sp.baseball.findfriends.jp/" target="_blank"><img src="/assets/images/stats/npb-draft2017/logo-baseballmagazine.png" alt="週刊ベースボール"></a></span></p>
           </div>
 
-          <aside class="draft-header-bnr-bottom">
+          <aside class="draft-header-bnr-bottom" style="padding-left:0; padding-right: 0;">
             <ul>
               <li>
                 <div id='div-gpt-ad-title_bottom'></div>
