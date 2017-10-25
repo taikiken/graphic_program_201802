@@ -72,10 +72,17 @@ const sequence = () => {
 /**
  * {@link ComponentLives} - Ajax error event handler
  * - `console.warn` します
+ * - 2017-10-25 - error 時に案内表示
  * @param {Error} error ajax error
+ * @returns {XML} div.draft-live-message
  */
 const fail = (error) => {
   console.warn('[DRAFT:LIVE]', error);
+  return (
+    <div className="draft-live-message">
+      <p>2017年10月26日（木）17:00〜 速報スタート</p>
+    </div>
+  );
 };
 
 /**
@@ -92,13 +99,14 @@ const ComponentLives = ({ result, error }) => {
   if (!action && !error) {
     return null;
   }
-  if (error && !data) {
-    fail(error);
-    return null;
-  }
   // ---
   // polling setting
   sequence();
+  // ----
+  if (error && !data) {
+    return fail(error);
+    // return null;
+  }
   // error でも前回データが存在すれば使用しエラー表示しない
   if (action) {
     // 取得データを `data` 保存する

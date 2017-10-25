@@ -136,7 +136,7 @@ gulp.task('live:pack:build', (callback) => {
   config.plugins = [
     // remove, since webpack 2.x, @see https://webpack.js.org/guides/migrating/
     // new $$.webpack.optimize.DedupePlugin(),
-    new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: true } }),
+    new $$.webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
     // https://facebook.github.io/react/docs/optimizing-performance.html#use-the-production-build
     new $$.webpack.DefinePlugin({
       'process.env': {

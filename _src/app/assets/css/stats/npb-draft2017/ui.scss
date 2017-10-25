@@ -37,6 +37,39 @@
   background: none !important;
 }
 
+
+// bottom-bnr-list
+.bottom-bnr-list {
+  margin-top: 30px;
+
+  li {
+    margin-top: 20px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  a {
+    display: block;
+    text-align: center;
+  }
+}
+
+
+// draft-live-message
+.draft-live-message {
+  margin: 30px 30px 0;
+  padding: 25px 0;
+  border-top: 1px solid $color-white;
+  border-bottom: 1px solid $color-white;
+  color: $color-white;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
 // -------------------------------------------------------------
 // players
 // -------------------------------------------------------------

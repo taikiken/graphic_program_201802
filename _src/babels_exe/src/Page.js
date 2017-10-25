@@ -613,7 +613,7 @@ export class Page {
     // like category
     const { mode, pref } = event;
     const slug = 'area';
-    console.log('Page.area', mode, slug, event);
+    // console.log('Page.area', mode, slug, event);
     // page top
     PageTop.start();
     // search from

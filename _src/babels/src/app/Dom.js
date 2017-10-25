@@ -75,13 +75,22 @@ export class Dom {
     return Dom.get( 'page' );
   }
   /**
+   * div#js-page_top - for sp
+   * @returns {Element} div#js-page_top - for sp
+   * @since 2017-10-23
+   */
+  static jsPageTop() {
+    return Dom.get('js-page_top');
+  }
+  /**
    * pageTop container
    * - 2017-08-24 - `#js-page_top` を使用しているページに対応するため取得 ID を増やす
    * - `pageTop`
    * @return {Element} pageTop element を返します
    */
   static pageTop():Element {
-    return Dom.get('pageTop') || Dom.get('js-page_top');
+    // return Dom.get('pageTop') || Dom.get('js-page_top');
+    return Dom.get('pageTop') || Dom.jsPageTop();
   }
   // --------------------------------------
   // header

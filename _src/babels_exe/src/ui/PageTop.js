@@ -133,6 +133,7 @@ export class PageTop {
    */
   init():void {
     const element = Dom.pageTop();
+    // console.log('PageTop.init', element);
     if (element === null) {
       return;
     }

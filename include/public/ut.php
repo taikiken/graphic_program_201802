@@ -867,9 +867,16 @@ function get_date($m){
 
 	$str=strtotime($m);
 	$now=strtotime(date("Y-m-d H:i:s"));
+	$one_yr_b4=strtotime(date("Y-m-d H:i:s",strtotime("-1 year")));
+
+  if ($str < $one_yr_b4) {
+  	$date = date("Y年m月d日 H時i分",$str);
+	} else {
+    $date = date("m月d日 H時i分",$str);
+  }
 
 	$t["relativetime"]=($now-$str)/60;
-	$t["date"]=date("m月d日 H時i分",$str);
+	$t["date"]=$date;
 	$t["isotime"]=str_replace(" ","T",date("Y-m-d H:i:s+0900",$str));
 	$t["weekday"]=date("w",$str);
 

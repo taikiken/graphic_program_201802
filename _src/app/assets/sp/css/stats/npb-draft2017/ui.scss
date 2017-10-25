@@ -41,6 +41,38 @@
   padding-bottom: percent(60, 750);
 }
 
+
+// bottom-bnr-list
+.bottom-bnr-list {
+  margin: percent(40, 750) percent(20, 750) 0;
+
+  li {
+    margin-top: percent(20, 710);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  a {
+    display: block;
+  }
+}
+
+
+
+// draft-live-message
+.draft-live-message {
+  margin-top: percent(50, 750);
+  padding: percent(30, 750) 0;
+  border-top: 2px * 0.5 solid $color-white;
+  border-bottom: 2px * 0.5 solid $color-white;
+  color: $color-white;
+  font-size: 26px * 0.5;
+  font-weight: bold;
+  text-align: center;
+}
+
 // -------------------------------------------------------------
 // players
 // -------------------------------------------------------------
