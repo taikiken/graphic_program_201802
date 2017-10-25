@@ -72,11 +72,17 @@ const sequence = () => {
 /**
  * {@link ComponentLives} - Ajax error event handler
  * - `console.warn` します
+ * - 2017-10-25 - error 時に案内表示
  * @param {Error} error ajax error
+ * @returns {XML} div.draft-live-message
  */
 const fail = (error) => {
   console.warn('[DRAFT:LIVE]', error);
-  return null;
+  return (
+    <div className="draft-live-message">
+      <p>2017年10月26日（木）17:00〜 速報スタート</p>
+    </div>
+  );
 };
 
 /**
