@@ -12,9 +12,9 @@ include $INCLUDEPATH.'public/import.php';
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-const MEDIA_ID = 62;
-const MEDIA_NAME = 'パラスポ';
-
+$MEDIAID = 66;
+const MEDIA_NAME = 'パラスポ+';
+const SPECIAL_CHAR = 'www.youtube.com/embed';
 
 # RSSファイル
 # 現状、検証用RSSしかもらってないので一旦下記RSSを使用
@@ -24,6 +24,28 @@ const RSS_FILE = 'http://staging.paraspoplus.com/feed/sports-bull';
 
 $o = new db;
 $o->connect();
+
+// $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from repo_e where nid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from repo_n where d2={$MEDIAID};";
+// $o->query($sql);
+// return;
+
+$sql = sprintf("SELECT id,name,name_e,yobi FROM u_categories WHERE flag=1 AND id NOT IN(%s) ORDER BY id DESC",implode(",", $excategory));
+$o->query($sql);
+while($f = $o->fetch_array()) {
+	$sw = strlen($f["yobi"]) > 0 ? @explode(",", $f["yobi"]) :array();
+	$sw[] = $f["name"];
+	$r[] = array($f["id"], $sw, $f["name"]);
+	$exword[] = $f["name"];
+	$exword[] = $f["name_e"];
+}
 
 /*
 |--------------------------------------------------------------------------
