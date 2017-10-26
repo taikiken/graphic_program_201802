@@ -123,11 +123,16 @@
                 <p class="note">（以下掲載開始時期の順）</p>
                 <ul>
                     <?php foreach($partners as $partner): ?>
-                        <li style="width:190px;height:50px;">
+                        <li style="width:190px;height:50px;text-align: center;">
                             <?php if(!empty($partner['img_url'])): ?>
                             <a href="<?php echo $partner['site_url']; ?>" target="_blank"><img src="<?php echo $partner['img_url'] ?>" alt="<?php echo $partner['partner_name']?>" width="190" height="50"></a>
                             <?php else: ?>
-                                <a href="<?php echo $partner['site_url']; ?>" target="_blank"><font><?php echo $partner['partner_name'] ?></font></a>
+                                <a style="line-height: 2.1875;
+    color: #272727;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    text-decoration: none;" href="<?php echo $partner['site_url']; ?>" target="_blank"><?php echo $partner['partner_name'] ?></a>
                             <?php endif ?>
                         </li>
                     <?php endforeach;?>
