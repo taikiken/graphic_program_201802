@@ -156,7 +156,7 @@ include_once __DIR__."/../../${page['ua']}/_header.php";
   </footer><!-- /.foot-sec -->
 
 <link rel="stylesheet" href="/assets/sp/css/stats/npb-draft2017/ui.css?v=<?php echo $page['version']; ?>" media="only screen">
-<script id="js-live-bundle" data-interval="10" src="/assets/draft/js/bull_draft_2017_live.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script id="js-live-bundle" data-interval="-1" src="/assets/draft/js/bull_draft_2017_live.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <?php
 
 include_once __DIR__."/ad.php";
