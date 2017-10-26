@@ -1,0 +1,498 @@
+@charset "UTF-8";
+// import library setting + mixin + function
+@import "./asset";
+
+// scss-lint:disable ColorVariable
+
+// category-nav
+.category-nav {
+  margin-top: 50px;
+
+  ul {
+    display: flex;
+  }
+
+  li {
+    width: 25%;
+    padding-left: 1px;
+
+    &:first-child {
+      padding-left: 0;
+
+      a {
+        border-radius: 2px 0 0 2px;
+      }
+    }
+
+    &:last-child {
+      a {
+        border-radius: 0 2px 2px 0;
+      }
+    }
+  }
+
+  a {
+    position: relative;
+    display: block;
+    line-height: 60px;
+    background-color: #222;
+    @include link-decoration($color-white, $color-white, none, none);
+    font-size: 20px;
+    text-align: center;
+    @include transition(background-color);
+
+    &:hover {
+      background-color: $color-key;
+    }
+  }
+
+  .is-checked {
+    background-color: $color-key;
+  }
+}
+
+
+// position-filter
+.position-filter {
+  display: flex;
+  margin-top: 30px;
+  text-align: center;
+
+  .button {
+    width: 20%;
+    line-height: 1;
+    padding: 14px 0;
+    background-color: #ccc;
+    border: 1px solid $color-key;
+    border-left: 0;
+    color: #444;
+    font-size: 18px;
+    outline: none;
+    @include transition();
+
+    &:first-child {
+      border-left: 1px solid $color-key;
+      border-radius: 2px 0 0 2px;
+    }
+
+    &:last-child {
+      border-radius: 0 2px 2px 0;
+    }
+
+    &:hover,
+    &.is-checked {
+      background-color: $color-key;
+      color: $color-white;
+    }
+  }
+}
+
+
+// players-list
+.players-list {
+  // for isotope
+  position: relative;
+  min-height: 500px;
+  margin: 30px 0 0;
+}
+
+.player {
+  position: absolute;
+  width: 208px;
+  margin-bottom: 13px;
+
+  a {
+    position: relative;
+    display: block;
+    background-color: #222;
+    padding: 17px 0 14px;
+    @include link-decoration($color-white, $color-white, none, none);
+    text-align: center;
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      @include transition(background-color);
+    }
+
+    &:hover::before {
+      height: 100%;
+      background-color: rgba(51, 51, 51, 0.4);
+    }
+  }
+
+  .player-pos {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 2px;
+    color: $color-white;
+    font-size: fs(16, 14);
+    font-weight: bold;
+    z-index: 1;
+  }
+
+  .player-image {
+    width: 108px;
+    height: 108px;
+    margin: 0 auto;
+    background: url("/assets/images/stats/npb-draft2017/player-no-image.png") 50% 50% no-repeat;
+    background-size: 108px auto;
+
+    img {
+      width: 108px;
+    }
+  }
+
+  .player-name {
+    margin-top: 8px;
+    font-size: fs(18, 14);
+    font-weight: bold;
+  }
+
+  .player-team {
+    margin-top: 1px;
+    font-weight: bold;
+  }
+}
+
+.player-image {
+  border-radius: 50%;
+  text-align: center;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+// scss-lint:disable ColorVariable
+.player-pos.pitcher,
+.player-pos1 {
+  background-color: #f00;
+}
+
+.player-pos.catcher,
+.player-pos2 {
+  background-color: #6af;
+}
+
+.player-pos.infielder,
+.player-pos3 {
+  background-color: #fd8300;
+}
+
+.player-pos.outfielder,
+.player-pos4 {
+  background-color: #0c0;
+}
+
+.player-pos.etc,
+.player-pos5 {
+  background-color: #f9f;
+}
+// scss-lint:enable ColorVariable
+
+
+
+// players-info
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  // scss-lint:disable ColorVariable
+  background-color: rgba(0, 0, 0, 0.6);
+  // scss-lint:enable ColorVariable
+  //z-index: 100;
+  //@include opacity(0);
+  // 下記にて transition: opacity 0.20s の設定をしていますが、jsで動きをつけられる際は削除します。
+  //@include transition(opacity);
+
+  //// .is-active 付与で表示されるようにしています。
+  //&.is-active {
+  //  width: 100%;
+  //  height: 100%;
+  //  @include opacity(1);
+  //}
+}
+
+.players-info {
+  position: fixed;
+  // 下記のpositionの値はモーダルjs実装時に任意の値に変更していただいてOKです。
+  top: 20%;
+  right: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  margin: auto;
+  // background-color: $color-white;
+  color: #333;
+  z-index: 2110;
+  //z-index: 110;
+  //@include opacity(0);
+  // 下記にて transition: opacity 0.20s の設定をしていますが、jsで動きをつけられる際は削除します。
+  //@include transition(opacity);
+
+// .is-active 付与で表示されるようにしています。
+ // &.is-active {
+ //   width: 840px;
+ //   height: auto;
+ //   @include opacity(1);
+ // }
+
+  .players-info-inner {
+    padding: 70px 0;
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .players-info-inner2 {
+    position: relative;
+    padding-bottom: 30px;
+    border-radius: 4px;
+    // scss-lint:disable ColorVariable
+    background-color: #ededed;
+    // scss-lint:enable ColorVariable
+  }
+
+  .btn-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 19px;
+    height: 19px;
+    background: url("/assets/images/stats/npb-draft2017/btn-close.png") 0 0 no-repeat;
+    cursor: pointer;
+  }
+}
+
+.players-info-header {
+  padding: 17px 27px;
+  border-radius: 4px 4px 0 0;
+  background-color: $color-key;
+  color: $color-white;
+
+  span {
+    display: inline-block;
+    line-height: 1;
+    font-weight: bold;
+    vertical-align: middle;
+  }
+
+  .player-pos {
+    margin-right: 17px;
+    padding: 3px 9px;
+    border-radius: 2px;
+    font-size: 16px;
+  }
+
+  .player-name {
+    font-size: 28px;
+  }
+
+  .player-category {
+    font-size: 18px;
+  }
+}
+
+.players-info-body {
+  border-radius: 0 0 4px 4px;
+  // scss-lint:disable ColorVariable
+  background-color: #ededed;
+
+  .row {
+    position: relative;
+    // @include clearfix;
+    padding: 20px 30px 20px 275px;
+    background-color: $color-white;
+  }
+
+  .player-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 30px;
+    // float: left;
+    width: 220px;
+    height: 220px;
+    margin: auto;
+    // margin-right: 25px;
+    background: url("/assets/images/stats/npb-draft2017/player-no-image.png") 50% 50% no-repeat;
+    background-size: 220px auto;
+
+    img {
+      width: 220px;
+    }
+  }
+}
+
+.players-info-detail {
+  // overflow: hidden;
+
+  dl {
+    @include clearfix;
+    padding: 6px 0;
+    // scss-lint:disable ColorVariable
+    border-top: 1px solid #ccc;
+    // scss-lint:enable ColorVariable
+
+    &:first-child {
+      border-top: 0;
+    }
+
+    dt {
+      float: left;
+      width: 95px;
+      line-height: lh(28, 16);
+      font-size: fs(16, 14);
+      font-weight: bold;
+    }
+
+    dd {
+      line-height: lh(28, 16);
+      overflow: hidden;
+      font-size: fs(16, 14);
+      font-weight: bold;
+    }
+  }
+}
+
+.player-comment {
+  padding: 15px 30px 0;
+  font-size: fs(16, 14);
+  font-weight: bold;
+}
+
+.player-link-detail {
+  margin-top: 16px;
+
+  li {
+    width: 260px;
+    margin: 10px auto 0;
+  }
+
+  a {
+    position: relative;
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 4px;
+    // scss-lint:disable ColorVariable
+    background-color: $color-key;
+    @include link-decoration($color-white, $color-white, none, none);
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    @include transition(opacity);
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 20px;
+      width: 9px;
+      height: 15px;
+      margin: auto;
+      background: url("/assets/images/stats/npb-draft2017/icon-arw-right-white.png") 0 0 no-repeat;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+
+// note-block
+.note-block {
+  margin-top: 30px;
+
+  li {
+    color: #eee;
+    padding-left: 1.3em;
+    text-indent: -1.3em;
+  }
+}
+
+
+// ------------------------------------------------
+// for isotope setting
+.main-sec {
+  min-height: 300px;
+  overflow: hidden;
+}
+
+.height-target {
+  overflow: hidden;
+}
+
+.draft-player {
+  position: absolute;
+  // isotope 使用のため左右 margin を 0 にします
+  margin: 0 0 20px;
+}
+
+.draft-hide {
+  .draft-player {
+    opacity: 0;
+    top: 999999px;
+  }
+}
+
+.draft-show {
+  .draft-player {
+    opacity: 1;
+    //// animation
+    //transition-duration: 0.3s;
+    //transition-property: top, opacity;
+  }
+}
+
+
+// ------------------------------------------------
+// modal
+.player-modal {
+  display: none;
+
+  &.activate {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2500;
+    background: url("/assets/images/stats/npb-draft2017/player-transparent.png");
+    //min-width: 1120px;
+
+    .overlay {
+      width: 100%;
+      height: 100%;
+      //opacity: 1;
+      z-index: 2510;
+      min-width: 1120px;
+    }
+
+    .players-info {
+      width: 840px;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      //opacity: 1;
+      z-index: 2520;
+    }
+  }
+}

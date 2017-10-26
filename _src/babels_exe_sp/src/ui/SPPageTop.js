@@ -39,14 +39,27 @@ export class SPPageTop {
      * @default true;
      */
     this._can = true;
+    /**
+     * bond onClick  - page top button bind
+     * @type {function(this:SPPageTop)}
+     * @since 2017-10-23
+     */
+    this.onClick = this.onClick.bind(this);
   }
   /**
    * click event を bind します
    */
   init():void {
-    let element = Dom.pageTop();
+    const element = Dom.pageTop();
+    // resposive 残骸で pageTop が 2 Element 存在することがある
+    // #js-page_top を sp は優先にする
+    // @since 2017-10-23
+    const pagetop = Dom.jsPageTop();
+    // console.log('SPPageTop.init', element, pagetop);
     if ( element !== null ) {
-      element.addEventListener( 'click', this.onClick.bind( this ), false );
+      const container = pagetop || element;
+      // console.log('SPPageTop.init container', container);
+      container.addEventListener('click', this.onClick, false);
     }
   }
   /**
@@ -57,7 +70,7 @@ export class SPPageTop {
    */
   onClick( event:Event ):void {
     event.preventDefault();
-
+    // console.log('SPPageTop.onClick', this._can);
     // click 不可のときは処理しない
     if ( !this._can ) {
       return;

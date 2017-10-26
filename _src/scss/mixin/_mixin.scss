@@ -141,3 +141,14 @@ $arg_i: null;
   top: 50%;
   transform: translateY(-50%);
 }
+
+
+
+// ---------------------------
+
+// animate
+// transitionの設定
+// デフォルト $property: all, $duration: 0.20s, $easing: ease-in-out, $delay: 0s
+@mixin transition($property: all, $duration: 0.20s, $easing: ease-in-out, $delay: 0s) {
+  transition: $property $duration $easing $delay;
+}
