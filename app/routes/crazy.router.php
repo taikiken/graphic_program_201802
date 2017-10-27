@@ -24,6 +24,46 @@ $app->group('/crazy', function () use($app, $ImgPath) {
         return $this->renderer->render($response, 'crazy/webview.php', $args);
 
     });
+
+    $this->get('/list[/]', function ($request, $response, $args) use ($app, $data) {
+        // 選手詳細ルーティング
+
+        // jsonの中身が空の場合404
+        if(empty($data))
+        {
+            // 404
+            // ------------------------------
+            $args['page'] = $app->model->set([
+                'title'    => '404 Not Found',
+                'og_title' => '404 Not Found',
+                'template' => 404,
+            ]);
+
+            $args['request']  = $request;
+            $args['response'] = $response;
+
+            if($app->model->property('ua') === 'desktop')
+            {
+                return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
+            }
+            else
+            {
+                return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
+            }
+        }
+
+        $data = json_decode($data);
+        $args['page'] = $app->model->set(array(
+            'title'              => 'CRAZY ATHLETES',
+            'og_title'           => 'CRAZY ATHLETES | '.$app->model->property('title'),
+            'path'               => $args,
+            'template'           => 'category_list',
+            'template_classname' => '',
+            'list'               => $data
+        ));
+
+        return $this->renderer->render($response, 'crazy/list.php', $args);
+    });
 });
 
 $app->group('/athlete', function () use($app, $ImgPath) {

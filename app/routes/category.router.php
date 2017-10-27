@@ -120,7 +120,6 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
     // CRAZY ATHLETE v2.0
     $this->get('/{type:athletes}[/]', function ($request, $response, $args) use ($app, $json) {
-        var_dump($json);
         // 選手詳細ルーティング
 
         $data = @file_get_contents($json);
