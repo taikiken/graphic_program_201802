@@ -316,6 +316,7 @@ export class SPPage {
    * 404 not found
    */
   static notFound():void {
+    // console.log('SPPage.notFound');
     // page top
     SPPageTop.start();
     // search from

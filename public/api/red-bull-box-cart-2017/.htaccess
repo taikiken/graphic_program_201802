@@ -1,0 +1,7 @@
+Options FollowSymLinks Includes
+RewriteEngine on
+RewriteBase /
+
+# live
+RewriteRule ^live$ /api/red-bull-box-cart-2017/live.php [L]
+RewriteRule ^live/(.*) /api/red-bull-box-cart-2017/live.php [L]

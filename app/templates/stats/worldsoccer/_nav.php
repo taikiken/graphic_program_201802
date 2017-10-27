@@ -24,9 +24,9 @@ function is_active_nav($uri) {
 
 <div class="stats__local__nav stats__local__nav--worldsoccer">
 	<ul class="stats__local__nav__list">
-		<li class="stats__local__nav__item_1 <?php is_active_nav('schedule');?>"><a href="../schedule">試合日程</a></li>
-    	<li class="stats__local__nav__item_2 <?php is_active_nav('standing');?>"><a href="../standing">順位表</a></li>
-    	<li class="stats__local__nav__item_3 <?php is_active_nav('playlist');?>"><a href="../playlist">選手情報</a></li>
-    	<li class="stats__local__nav__item_4 <?php is_active_nav('team');?>"><a href="../team">チーム情報</a></li>
+		<li class="stats__local__nav__item_1 <?php is_active_nav('schedule');?>"><a href="/stats/worldsoccer/<?php echo $page['league']; ?>/schedule">試合日程</a></li>
+    	<li class="stats__local__nav__item_2 <?php is_active_nav('standing');?>"><a href="/stats/worldsoccer/<?php echo $page['league']; ?>/standing">順位表</a></li>
+    	<li class="stats__local__nav__item_3 <?php is_active_nav('playlist');?>"><a href="/stats/worldsoccer/<?php echo $page['league']; ?>/playlist">選手情報</a></li>
+    	<li class="stats__local__nav__item_4 <?php is_active_nav('team');?>"><a href="/stats/worldsoccer/<?php echo $page['league']; ?>/team">チーム情報</a></li>
     </ul>
 </div>

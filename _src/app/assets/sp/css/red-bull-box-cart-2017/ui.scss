@@ -1,0 +1,546 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss_sp/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss_sp/style/reset";
+@import "../../../../../scss_sp/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+
+
+// common override
+.red-bull-box-cart-2017 {
+  .body-sec,
+  .body-sec-inner {
+    background-color: #fff !important;
+  }
+
+  .main-sec {
+    padding-bottom: (40/2)+px;
+  }
+
+  .side-sec {
+    padding-bottom: (80/2)+px;
+
+    .sponsor-link {
+      > div {
+        width: 100% !important;
+      }
+
+      iframe {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+
+
+
+
+//.special-summary
+.special-summary {
+  background: url(/assets/sp/images/red-bull-box-cart-2017/summary-bg.png) 0 0 repeat-x;
+  background-size: (10/2)+px;
+
+  //.special-summary-heading
+  &-heading {
+    position: relative;
+    padding-top: (30/2)+px;
+    padding-bottom: (20/2)+px;
+    text-align: center;
+
+    img {
+      width: (520/2)+px;
+      // width: perCalc(520, 640);
+    }
+
+    &:before, &:after {
+      content: "";
+      position: absolute;
+      @include hide-text;
+    }
+
+    &:before {
+      top: (40/2)+px;
+      left: 0;
+      width: (124/2)+px;
+      height: (188/2)+px;
+      background: url(/assets/sp/images/red-bull-box-cart-2017/summary-figure1.png) 0 0 no-repeat;
+      background-size: (124/2)+px;
+    }
+
+    &:after {
+      bottom: 0;
+      right: 0;
+      width: (120/2)+px;
+      height: (190/2)+px;
+      background: url(/assets/sp/images/red-bull-box-cart-2017/summary-figure2.png) 0 0 no-repeat;
+      background-size: (120/2)+px;
+    }
+  }
+
+  //.special-summary-copy
+  &-copy {
+    line-height: 1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #193080;
+    text-align: center;
+
+    img {
+      width: (594/2)+px;
+      // width: perCalc(594, 640);
+    }
+  }
+}
+
+
+
+
+
+//.live-streaming
+.live-streaming {}
+
+#liveVideo {
+  text-align: center;
+}
+
+
+
+
+
+//container setting
+.boxcart__container {
+  padding-top: (40/2)+px;
+  padding-bottom: (40/2)+px;
+
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    @include hide-text;
+  }
+}
+
+.boxcart__container--odd {
+  // position: relative;
+  // padding-bottom: (70/2)+px;
+  // background: url(/assets/sp/images/red-bull-holy-ride/bg-odd.png) center bottom no-repeat;
+  // background-size: 100%;
+}
+
+.boxcart__container--even {
+  background: url(/assets/sp/images/red-bull-box-cart-2017/bg-even.png) 0 0 repeat;
+  background-size: (8/2)+px;
+
+  // position: relative;
+  // padding-bottom: (70/2)+px;
+  // background: #0f1b33 url(/assets/sp/images/red-bull-holy-ride/bg-even.png) center bottom no-repeat;
+  // background-size: 100%;
+}
+
+
+
+
+
+//.boxcart--intro
+.boxcart--intro {
+
+  .intro__catch {
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+    font-weight: bold;
+    font-size: (24/2)+px;
+  }
+
+  .intro__link__app {
+    margin-top: (32/2)+px;
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+    padding-top:  perCalc(20, 640);
+    border-top: 1px solid #ccd1e3;
+
+    text-align: center;
+
+    .undotsushin-ios &,
+    .undotsushin-android & {
+      display: none;
+    }
+
+    a {
+      @include link-decoration(#001a72, #001a72, underline, underline);
+      display: inline-block;
+      line-height: (80/2)+px;
+      padding-left: (100/2)+px;
+      background: url(/assets/images/red-bull-box-cart-2017/intro-app_icon.png) 0 0 no-repeat;
+      background-size: (80/2)+px;
+      font-weight: bold;
+      font-size: (28/2)+px;
+    }
+  }
+
+  .intro__timetable {
+    margin-top: (32/2)+px;
+
+    table {
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: (8/2)+px perCalc(20, 640);
+      font-weight: bold;
+      font-size: (24/2)+px;
+      vertical-align: top;
+    }
+
+    th {
+      // width: 20%;
+      color: #e80550;
+      white-space: nowrap;
+    }
+
+    td {
+      padding-left: 0;
+
+      span {
+        font-size: 10px;
+      }
+    }
+
+    tr:nth-child(odd) {
+      th, td {
+        background-color: #e5e8f1;
+      }
+    }
+
+    //.intro__timetable__note
+    &__note {
+      margin: (12/2)+px perCalc(20, 640) 0;
+      font-size: 10px;
+    }
+  }
+
+  .intro__banner {
+    margin-top: (32/2)+px;
+
+    img {
+      border: 1px solid #eee;
+    }
+  }
+
+  .intro__widjet_twitter {
+    height: 200px;
+    margin-top: (40/2)+px;
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+    overflow: hidden;
+  }
+} //.boxcart--intro
+
+
+
+
+//.boxcart--course
+.boxcart--course {
+
+  &:before {
+    top: -(32/2)+px;
+    right: 0;
+    width: (208/2)+px;
+    height: (192/2)+px;
+    background-image: url(/assets/sp/images/red-bull-box-cart-2017/course-bg.png);
+    background-size: (208/2)+px;
+  }
+
+  .course__heading {
+    margin-left: perCalc(20, 640);
+    margin-bottom: (32/2)+px;
+
+    img {
+      width: (392/2)+px;
+    }
+  }
+
+  .course__map {
+    position: relative;
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+
+    > img {
+      display: block;
+    }
+  }
+
+  .course__rule {
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+
+    dl {
+      margin-top: (32/2)+px;
+      display: table;
+    }
+
+    dt, dd {
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    dt {
+      width: (104/2)+px;
+    }
+
+    dd {
+      padding-left: (16/2)+px;
+      border-left: 1px solid #ff004b;
+      font-size: (24/2)+px;
+    }
+
+    .course__rule--3 {
+      dt img {
+        position: relative;
+        top: -(16/2)+px;
+      }
+    }
+  } //.course__rule
+
+  //.course__guest
+  .course__guest {
+    margin-top: (8/2)+px;
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+    overflow: hidden;
+
+    .course__guest__wrap {
+      float: left;
+    }
+
+    .course__guest__heading {
+      padding-top: (32/2)+px;
+
+      img {
+        width: auto;
+        height: (26/2)+px;
+      }
+    }
+
+    .course__guest__list {
+      overflow: hidden;
+    }
+
+    .course__guest__item {
+      float: left;
+      width: perCalc(188, 600);
+      margin-top: (32/2)+px;
+      margin-right: perCalc(16, 600);
+
+      figure {
+        img {
+          width: 100%;
+        }
+      }
+
+      h3 {
+        margin-top: (20/2)+px;
+        font-weight: bold;
+        font-size: (24/2)+px;
+      }
+
+      p {
+        margin-top: (8/2)+px;
+        font-weight: bold;
+        font-size: (20/2)+px;
+      }
+    }
+  } //.course__guest
+
+  .course__guest__wrap--1,
+  .course__guest__wrap--5 {
+    .course__guest__item:nth-child(3) {
+      margin-right: 0;
+    }
+  }
+
+  .course__guest__wrap--2,
+  .course__guest__wrap--3 {
+    width: perCalc(188, 600);
+    margin-right: perCalc(16, 600);
+
+    .course__guest__item {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+
+} //.boxcart--course
+
+
+
+
+
+//.boxcart--overview
+.boxcart--overview {
+
+  &:before {
+    top: -(48/2)+px;
+    right: 0;
+    width: (294/2)+px;
+    height: (148/2)+px;
+    background-image: url(/assets/sp/images/red-bull-box-cart-2017/overview-bg.png);
+    background-size: (294/2)+px;
+  }
+
+  .overview__heading {
+    position: relative;
+    margin-left: perCalc(20, 640);
+    margin-bottom: (40/2)+px;
+
+    img {
+      width: (342/2)+px;
+    }
+  }
+
+  .overview__data {
+    margin-right: perCalc(20, 640);
+    margin-left: perCalc(20, 640);
+
+    th,
+    td {
+      padding-bottom: 0.5em;
+      vertical-align: top;
+      font-size: (24/2)+px;
+    }
+
+    th {
+      padding-right: (16/2)+px;
+      color: #ff004b;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+  }
+} //.boxcart--overview
+
+
+
+
+
+//.boxcart--related
+.boxcart--related {
+  padding-top: (20/2)+px;
+  padding-right: perCalc(20, 640);
+  padding-left: perCalc(20, 640);
+
+  &:before {
+    top: -(64/2)+px;
+    right: (20/2)+px;
+    width: (214/2)+px;
+    height: (156/2)+px;
+    background-image: url(/assets/sp/images/red-bull-box-cart-2017/related-bg.png);
+    background-size: (214/2)+px;
+  }
+
+  .related__heading {
+    position: relative;
+    margin-left: perCalc(20, 640);
+    margin-bottom: (40/2)+px;
+
+    img {
+      width: (258/2)+px;
+    }
+  }
+
+  .related__post {
+
+    a {
+      @include link-decoration(null, null, none, none);
+      display: table;
+      padding-top: (10/2)+px;
+      padding-bottom: (10/2)+px;
+
+      // &:active {
+      //   background-color: #10151e;
+      // }
+    }
+
+    //.related__post__thumb
+    //.related__post__text
+    &__thumb,
+    &__text {
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    //.related__post__thumb
+    &__thumb {
+      width: perCalc(280, 600);
+      padding-right: perCalc(20, 600);
+    }
+
+    //.related__post__text
+    &__text {
+      padding-right: 1em;
+
+      .related__post__heading {
+        color: #333;
+        font-weight: bold;
+        font-size: (24/2)+px;
+      }
+
+      .related__post__excerpt {
+        margin-top: 0.75em;
+        display: none;
+      }
+
+      .related__post__category {
+        margin-top: 0.75em;
+        color: #001a72;
+        font-weight: bold;
+        font-size: (20/2)+px;
+      }
+
+      .related__post__date {
+        margin-top: 0.75em;
+        color: #999;
+        font-size: (20/2)+px;
+      }
+    } //.related__post__text
+
+  } //.related__post
+} //.boxcart--related
+
+
+
+
+
+//.boxcart--jasrac
+.boxcart--jasrac {
+  padding-right: perCalc(20, 640);
+  padding-left: perCalc(20, 640);
+  padding-bottom: 0;
+  // text-align: right;
+
+  .jasrac__num {
+    display: inline-block;
+    line-height: (50/2)+px;
+    padding-left: (60/2)+px;
+    background: url(/assets/images/red-bull-box-cart-2017/jasrac-logo.jpg) 0 0 no-repeat;
+    background-size: (50/2)+px;
+    font-size: 10px;
+  }
+} //.boxcart--jasrac

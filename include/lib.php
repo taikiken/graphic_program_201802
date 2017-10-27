@@ -5,13 +5,13 @@ if($_POST["u"]==1){
 	$sqls="update ".$TABLE." set flag=".$_POST["nv"]." where id=".$_POST["nn"];
 	@$o->query($sqls);
 	$e=$o->affected_rows();
-	
+
 	$oo=new dbutl($TABLE);
 	$oo->setExpire($_POST["nn"]);
 	$oo->setCount();
-	
+
 	include $INCLUDEPATH."__debug_title.php";
-	
+
 	$sql=sprintf("select %s from %s where id=%s",$TITLEFIELDNAME,$TABLE,$_POST["nn"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
@@ -39,7 +39,7 @@ if(strlen($_POST["s"])>0){
 
 	$S=$_POST["s"];
 	$T=$_POST["t"];
-	
+
 	$III=0;
 	include $INCLUDEPATH."__debug_title.php";
 	$sql=sprintf("select id,%s from %s%sn in(%s,%s) order by n",$TITLEFIELDNAME,$TABLE,(strlen($WHERE)>0)?$WHERE." and ":" where ",$S,($T==0)?$S+1:$S-1);
@@ -69,9 +69,9 @@ if(strlen($_POST["s"])>0){
 
 	$sqls=implode("\n",$sqls);
 	@$o->query($sqls);
-	
+
 	$e=$o->affected_rows();
-	
+
 	if($CURRENTDIRECTORY=="repo_e"&&strlen($RIREKITITLE)==0){
 		$sql=sprintf("select body from repo_e where id=%s",$RIREKITITLEID);
 		$o->query($sql);
@@ -89,7 +89,7 @@ if($CURRENTDIRECTORY=="repo_n"&&$_GET["cid"]==1&&!preg_match("#/photo/#",$_SERVE
 
 	if(strlen($_COOKIE["exuser"])>0){
 		$exuser=$_COOKIE["exuser"]!=0?sprintf(" and d2=%s",$_COOKIE["exuser"]):"";
-		
+
 		$sql=sprintf("select cid,(select name from repo where id=u_media.cid) as name,title from u_media where id=%s",$_COOKIE["exuser"]);
 		$o->query($sql);
 		$f=$o->fetch_array();
@@ -113,6 +113,40 @@ if($CURRENTDIRECTORY=="repo_n"&&$_GET["cid"]==1&&!preg_match("#/photo/#",$_SERVE
 
 	$sql=sprintf("select count(*) as n from %s%s%s%s",$TABLE,$WHERE,$exuser,$excategory);
 
+}
+elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 16 && !preg_match("#/photo/#", $_SERVER["REQUEST_URI"]))
+{
+	//
+	// 選手一覧
+	//
+	$exuser = "";
+
+	// 抽出条件（カテゴリー）設定
+	if (strlen($_COOKIE["excategory"]) > 0)
+	{
+		if ($_COOKIE["excategory"] != "a")
+		{
+			// 抽出条件が選択されている場合
+			$excategory = $_COOKIE["excategory"] != 0 ? " WHERE category LIKE '%" . $_COOKIE["excategory"] . "%'" : "";
+		}
+		else
+		{
+			// 抽出条件が未指定、もしくは「指定なし」の場合
+			$excategory = "";
+		}
+	}
+
+	// ソート条件設定
+	if($_COOKIE["orderby"]=="snew"){
+		$orderby=sprintf("m_time desc");
+	}elseif($_COOKIE["orderby"]=="sold"){
+		$orderby=sprintf("m_time");
+	}else{
+		$orderby="n desc";
+	}
+
+	$sql = sprintf("SELECT COUNT(*) AS n FROM %s%s%s%s", $TABLE, $WHERE, $exuser, $excategory);
+
 }else{
 	$sql=sprintf("select count(*) as n from %s%s",$TABLE,$WHERE);
 }
@@ -135,15 +169,20 @@ if($TABLE=="repo_n"&&!preg_match("#/photo/#",$_SERVER["REQUEST_URI"])){
 	if(!$_COOKIE["orderby"]&&!$_COOKIE["exuser"]&&!$_COOKIE["excategory"]){
 		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE," desc",dblm($no,$offset));
 		setcookie("orderby","",time()-3600,"/editdm/");
-	}else{		
+	}else{
 		$sql=sprintf("select %s from %s%s%s%s order by %s %s",$FIELD,$TABLE,$WHERE,$exuser,$excategory,$orderby,dblm($no,$offset));
 	}
 }elseif($TABLE=="u_member") {
     $sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "id", dblm($no, $offset));
 }elseif($TABLE=="photo"){
     $sql = sprintf("select * from %s where nid = %s order by n%s ",$TABLE, $_GET["nid"], ($CURRENTDIRECTORY=="log")?" desc":"");
+}
+elseif ($TABLE == "tbl_player")
+{
+	// 選手一覧
+	$sql = sprintf("SELECT %s FROM %s%s%s%s ORDER BY %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, $orderby, dblm($no, $offset));
 }else{
-		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
+	$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
 }
 
 $o->query($sql);

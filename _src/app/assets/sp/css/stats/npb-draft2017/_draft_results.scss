@@ -1,0 +1,425 @@
+@charset "UTF-8";
+// import library setting + mixin + function
+@import "./asset";
+
+// -------------------------------------------------------------
+// draft_results
+// -------------------------------------------------------------
+.draft-results {
+  margin: 0 percent(20, 750);
+}
+
+// draft-results-header
+.draft-results-header {
+  position: relative;
+  padding: 20px * .5 0;
+  background-color: #222;
+  text-align: center;
+
+  h2 {
+    color: $color-white;
+    font-size: 38px * .5;
+    font-weight: bold;
+  }
+
+  p {
+    color: $color-white;
+    font-size: 24px * .5;
+    font-weight: bold;
+
+    span {
+      display: inline-block;
+    }
+
+    .draft-status-1 {
+      position: relative;
+      top: 4px * .5;
+      width: 28px * .5;
+      height: 26px * .5;
+      margin-right: 6px * .5;
+      background: url("/assets/images/stats/npb-draft2017/icon-star@2x.png") 0 0 no-repeat;
+      background-size: 28px * .5 auto;
+    }
+
+    .position {
+      width: 28px * .5;
+      height: 28px * .5;
+      line-height: 28px * .5;
+      margin: 0 10px * .5 0 20px * .5;
+      color: $color-white;
+      font-size: 20px * .5;
+      text-align: center;
+    }
+
+    // scss-lint:disable ColorVariable
+    .pitcher {
+      margin-left: 0;
+      background-color: #f00;
+    }
+
+    .catcher {
+      background-color: #6af;
+    }
+
+    .infielder {
+      background-color: #fd8301;
+    }
+
+    .outfielder {
+      background-color: #0c0;
+    }
+    // scss-lint:enable ColorVariable
+  }
+}
+
+
+// draft-results-body
+.draft-results-body {
+  padding-top: 40px * .5;
+}
+
+
+// draft-team
+.draft-team {
+  p {
+    // scss-lint:disable ColorVariable
+    color: #ccc;
+    // scss-lint:enable ColorVariable
+    font-size: 24px * .5;
+  }
+
+  .draft-team-select {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: 10px * .5 0 20px * .5;
+    border-top-width: 4px * .5;
+    border-top-style: solid;
+    // scss-lint:disable ColorVariable
+    background-color: #333;
+    // scss-lint:enable ColorVariable
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -34px * .5;
+      right: -30px * .5;
+      transform: rotate(-45deg);
+      width: 0;
+      height: 0;
+      border-top: 30px * .5 solid transparent;
+      border-right: 30px * .5 solid transparent;
+      border-bottom: 30px * .5 solid transparent;
+      border-left-width: 30px * .5;
+      border-left-style: solid;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 30px * .5;
+      width: 24px * .5;
+      height: 22px * .5;
+      margin: auto;
+      background: url("/assets/images/stats/npb-draft2017/icon-arw-down@2x.png") 0 0 no-repeat;
+      background-size: 24px * .5 auto;
+    }
+
+    select {
+      appearance: none;
+      width: 130%;
+      line-height: 1;
+      border-radius: 0;
+      border: 0;
+      margin: 0;
+      padding: 30px * .5;
+      background: none transparent;
+      color: $color-white;
+      font-size: 34px * .5;
+      font-weight: bold;
+      vertical-align: middle;
+      outline: none;
+    }
+  }
+
+  // scss-lint:disable ColorVariable
+  .eagles,
+  .team-376 {
+    border-top-color: #860010;
+
+    &::before {
+      border-left-color: #860010;
+    }
+  }
+
+  .baystars,
+  .team-3 {
+    border-top-color: #0055a5;
+
+    &::before {
+      border-left-color: #0055a5;
+    }
+  }
+
+  .buffaloes,
+  .team-11 {
+    border-top-color: #000019;
+
+    &::before {
+      border-left-color: #000019;
+    }
+  }
+
+  .dragons,
+  .team-4 {
+    border-top-color: #002569;
+
+    &::before {
+      border-left-color: #002569;
+    }
+  }
+
+  .lions,
+  .team-7 {
+    border-top-color: #1f366a;
+
+    &::before {
+      border-left-color: #1f366a;
+    }
+  }
+
+  .carp,
+  .team-6 {
+    border-top-color: #ff2b06;
+
+    &::before {
+      border-left-color: #ff2b06;
+    }
+  }
+
+  .marines,
+  .team-9 {
+    border-top-color: #221815;
+
+    &::before {
+      border-left-color: #221815;
+    }
+  }
+
+  .tigers,
+  .team-5 {
+    border-top-color: #ffe201;
+
+    &::before {
+      border-left-color: #ffe201;
+    }
+  }
+
+  .fighters,
+  .team-8 {
+    border-top-color: #4c7b98;
+
+    &::before {
+      border-left-color: #4c7b98;
+    }
+  }
+
+  .giants,
+  .team-1 {
+    border-top-color: #f97709;
+
+    &::before {
+      border-left-color: #f97709;
+    }
+  }
+
+  .hawks,
+  .team-12 {
+    border-top-color: #f5c700;
+
+    &::before {
+      border-left-color: #f5c700;
+    }
+  }
+
+  .swallows,
+  .team-2 {
+    border-top-color: #00ab5c;
+
+    &::before {
+      border-left-color: #00ab5c;
+    }
+  }
+  // scss-lint:enable ColorVariable
+}
+
+
+// draft-table
+.draft-table {
+  // scss-lint:disable ColorVariable
+  border-bottom: 2px * .5 solid $color-black;
+  // scss-lint:enable ColorVariable
+
+  p {
+    display: table;
+    width: 100%;
+    background-color: #222;
+
+    a {
+      position: relative;
+      display: table-cell;
+      padding: 40px * .5 60px * .5 40px * .5 180px * .5;
+      // scss-lint:disable ColorVariable
+      border-top: 2px * .5 solid $color-black;
+      border-right: 2px * .5 solid $color-black;
+      // scss-lint:enable ColorVariable
+      @include link-decoration($color-white, $color-white, none, none);
+      vertical-align: middle;
+    }
+  }
+
+  .ranking {
+    display: table-cell;
+    width: 70px * .5;
+    line-height: 1.2;
+    // scss-lint:disable ColorVariable
+    border-top: 2px * .5 solid $color-black;
+    border-left: 2px * .5 solid $color-black;
+    border-right: 2px * .5 solid $color-black;
+    background-color: #333;
+    // scss-lint:enable ColorVariable
+    color: $color-white;
+    font-size: 30px * .5;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+
+    .num {
+      line-height: 1.2;
+      font-size: 38px * .5;
+    }
+
+    .text-s {
+      line-height: 1.2;
+      font-size: 24px * .5;
+    }
+
+    br {
+      line-height: 0;
+    }
+  }
+
+  .pos {
+    position: absolute;
+    top: 10px * .5;
+    right: 10px * .5;
+    width: 48px * .5;
+    height: 48px * .5;
+    line-height: 48px * .5;
+    font-size: 28px * .5;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+  }
+
+  // scss-lint:disable ColorVariable
+  .pos-pitcher {
+    background-color: #f00;
+  }
+
+  .pos-catcher {
+    background-color: #6af;
+  }
+
+  .pos-infielder {
+    background-color: #fd8300;
+  }
+
+  .pos-outfielder {
+    background-color: #0c0;
+  }
+  // scss-lint:enable ColorVariable
+
+  // scss-lint:disable ColorVariable
+  .player-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 26px * .5;
+    display: block;
+    width: 130px * .5;
+    height: 130px * .5;
+    margin: auto;
+    background: url("/assets/images/stats/npb-draft2017/player-no-image@2x.png") 50% 50% no-repeat;
+    background-size: 130px * .5 auto;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .player-name {
+    display: block;
+    color: $color-white;
+    font-size: 34px * .5;
+    font-weight: bold;
+  }
+
+  .player-team {
+    display: block;
+    color: $color-white;
+    font-size: 26px * .5;
+    font-weight: bold;
+  }
+
+  .status-win {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 14px * .5;
+      right: 72px * .5;
+      width: 32px * .5;
+      height: 32px * .5;
+      background: url("/assets/images/stats/npb-draft2017/icon-star-l@2x.png") 0 0 no-repeat;
+      background-size: 32px * .5 auto;
+    }
+  }
+
+  .status-lose {
+    .pos,
+    .player-image,
+    .player-name,
+    .player-team {
+      @include opacity(0.3);
+    }
+  }
+
+  .rank-1 + .rank-1 {
+    .ranking {
+      // scss-lint:disable ColorVariable
+      border-top-color: #333;
+      // scss-lint:enable ColorVariable
+    }
+  }
+
+  h3 {
+    display: table;
+    width: 100%;
+    // scss-lint:disable ColorVariable
+    border-left: 2px * .5 solid $color-black;
+    border-right: 2px * .5 solid $color-black;
+    background-color: #333;
+    // scss-lint:enable ColorVariable
+
+    span {
+      display: table-cell;
+      padding: 20px * .5 0;
+      color: $color-white;
+      font-size: 32px * .5;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+}

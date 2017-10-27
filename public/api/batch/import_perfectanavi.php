@@ -3,6 +3,7 @@
 include $INCLUDEPATH.'local.php';
 include $INCLUDEPATH.'public/import.php';
 
+ini_set("max_execution_time", 180);
 /*
 |--------------------------------------------------------------------------
 | RSS取込バッチ
@@ -12,27 +13,27 @@ include $INCLUDEPATH.'public/import.php';
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-$MEDIAID = 63;
+$MEDIAID = 65;
 const MEDIA_NAME = 'perfectanavi';
 
 
 # RSSファイル
 # 現状、検証用RSSしかもらってないので一旦下記RSSを使用
 #
-const RSS_FILE = 'https://perfectanavi:C4IiJ8V7@test.perfectanavi.com/tag/sportsbull/?feed=sportsbull';
+const RSS_FILE = 'https://perfectanavi.com/tag/sportsbull/?feed=sportsbull';
 // $RSS_FILE = dirname(__FILE__) . '/rss.xml';
 
 $o = new db;
 $o->connect();
 
-$sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
-$o->query($sql);
-$sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
-$o->query($sql);
-$sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
-$o->query($sql);
-$sql = "delete from repo_n where d2={$MEDIAID};";
-$o->query($sql);
+// $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from repo_n where d2={$MEDIAID};";
+// $o->query($sql);
 // return;
 
 $sql = sprintf("SELECT id,name,name_e,yobi FROM u_categories WHERE flag=1 AND id NOT IN(%s) ORDER BY id DESC",implode(",", $excategory));
@@ -66,7 +67,9 @@ foreach($items as $item)
 	#
 	$keyword = key_merge((string)$item->keyword);
 	$status  = (int)$item->status;
-	$enclosure_url = str_replace('http://','https://', (string)$item->enclosure->attributes()->url);
+	$enclosure_url = (string)$item->enclosure->attributes()->url;
+	$enclosure_url = preg_replace('/test\.perfectanavi\.com/m', 'perfectanavi:C4IiJ8V7@test.perfectanavi.com', $enclosure_url);
+
 	$related_links = $item->xpath('relatedLink');
 
 	$link  = (string)$item->link;
@@ -76,25 +79,12 @@ foreach($items as $item)
 	$pref   = (string)$item->pref;
 
 	$body = (string)$item->description;
-	$modbody = str_replace('<p>&nbsp;</p>', '', str_replace("\'","''",preg_replace('/(\r|\n|\t)/', '', $body)));
-
 	#
+	# modifytag：
 	# 記事本文中の画像は先方のサーバを参照するのではなくブルのS3にコピーする
 	# 画像本文のimgタグのsrcをoutimg()でS3にコピーしsrcをS3のパスに変更
 	#
-	preg_match_all("#<img[^>]+>#", $modbody, $match);
-	for($i = 0; $i < count($match[0]); $i++)
-	{
-		preg_match('/<img.*src\s*=\s*[\"|\'](.*?)[\"|\'].*alt\s*=\s*[\"|\'](.*?)[\"|\'].*>/i', $match[0][$i], $replaceimg);
-		if(preg_match("#^http#", $replaceimg[1])) {
-			$img = outimg($replaceimg[1], 0);
-			$modbody = str_replace(
-				$match[0][$i],
-				sprintf("<img src=\"%s/raw/%s\">%s", $ImgPath, $img, strlen($replaceimg[2])>0?sprintf("<br>%s",$replaceimg[2]):""),
-				$modbody
-			);
-		}
-	}
+	$modbody = modifytag(str_replace('<p>&nbsp;</p>', '', str_replace("\'","''",preg_replace('/(\r|\n|\t)/', '', $body))));
 
 	$a_time = strtotime((string)$item->lastUpdate);
 	$u_time = strtotime((string)$item->pubDate);
@@ -136,9 +126,10 @@ foreach($items as $item)
 	if(count($tag) > 0) {
 		for($cnt=0; $cnt<count($tag); $cnt++) {
 			if($cnt == 6) break;
-			$s['t1' . $cnt] = esc($tag[$cnt]);
+			$item_map['t1' . $cnt] = esc($tag[$cnt]);
 		}
 	}
+
 
 	#
 	# 該当記事の抽出
@@ -228,5 +219,37 @@ foreach($items as $item)
 }
 
 include $INCLUDEPATH.'public/display.php';
+
+function modifytag($s, $enclosure_url){
+	global $ImgPath;
+	$enclosure = basename($enclosure_url);
+	if(count($s)==0)return "";
+	$s = preg_replace('/ alt=""/', '', $s);
+	preg_match_all("/<img[^>]+>/", $s, $u);
+	for($i = 0; $i<count($u[0]); $i++){
+		preg_match('/src="([^"]+)"/',$u[0][$i], $r);
+		$image_url = $r[1];
+		if($enclosure == basename($image_url))
+		{
+			$s = str_replace($u[0][$i], '', $s);
+		}
+		else
+		{
+			$img = outimg($image_url, 0, false);
+			if(preg_match("/:\/\//", $r[1])) {
+				if(strlen($img) > 0){
+					$s = str_replace($u[0][$i], sprintf("<img src=\"%s/raw/%s\"><br>", $ImgPath, $img), $s);
+				}else{
+					$s = str_replace($u[0][$i], "", $s);
+				}
+			}else{
+				$s = str_replace($u[0][$i], "", $s);
+			}
+		}
+	}
+	$s = str_replace(array("<p></p>", "<p>&nbsp;</p>"), "", $s);
+	$s = str_replace("\'", "''", preg_replace("/(\r|\n|\t)/", "", $s));
+	return $s;
+}
 
 ?>
