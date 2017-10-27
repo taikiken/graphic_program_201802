@@ -59,7 +59,7 @@ if($q->get_dir()===4){
       $SEARCHLAYOUT=explode("\n",$SEARCHLAYOUT);
 
       for($i=0;$i<count($p);$i++){
-        $cHTML=sprintf("<tr>\n<th colspan=\"2\" class=\"resultTitle\"><a href=\"#\" onclick=\"go_back('../../repo_e/?%s&id=%s')\">%s</a></th>\n</tr>\n",$g->g_url(),$p[$i]["id"],$SEARCHLAYOUT[0]);
+        $cHTML=sprintf("<tr>\n<th colspan=\"2\" class=\"resultTitle\"><a href=\"#\" onclick=\"go_back('../../comment/edit/?%s&id=%s')\">%s</a></th>\n</tr>\n",$g->g_url(),$p[$i]["id"],$SEARCHLAYOUT[0]);
 
         $cHTML.=sprintf("<tr>\n<td colspan=\"2\" class=\"resultCont\">%s</td>\n</tr>\n",$SEARCHLAYOUT[1]);
 
