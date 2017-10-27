@@ -1162,6 +1162,7 @@ function set_partners_info($f){
     $s["site_url"]=$f["t1"];
     $s["img_url"] = strlen($f["img1"])>0?sprintf("%s/img/%s",$ImgPath,$f["img1"]):"";
     $s["sort_no"] = $f["n"];
+    $s["ng_flag"] = $f["ng_flag"];
 
     return $s;
 }

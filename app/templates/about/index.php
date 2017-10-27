@@ -123,6 +123,7 @@
                 <p class="note">（以下掲載開始時期の順）</p>
                 <ul>
                     <?php foreach($partners as $partner): ?>
+                      <?php if($partner['ng_flag'] == 0): ?>
                         <li style="width:190px;height:50px;text-align: center;">
                             <?php if(!empty($partner['img_url'])): ?>
                             <a href="<?php echo $partner['site_url']; ?>" target="_blank"><img src="<?php echo $partner['img_url'] ?>" alt="<?php echo $partner['partner_name']?>" width="190" height="50"></a>
@@ -135,6 +136,7 @@
     text-decoration: none;" href="<?php echo $partner['site_url']; ?>" target="_blank"><?php echo $partner['partner_name'] ?></a>
                             <?php endif ?>
                         </li>
+                      <?php endif ?>
                     <?php endforeach;?>
                 </ul>
             </div><!-- /.index__partner -->

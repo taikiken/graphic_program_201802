@@ -158,8 +158,8 @@ import {SPViewComments} from './sp/view/SPViewComments';
 import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 
 // singles-option
-import SPViewSinglesRecommend from './sp/view/singles-option/SPViewSinglesRecommend';
-import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking';
+// import SPViewSinglesRecommend from './sp/view/singles-option/SPViewSinglesRecommend';
+// import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking';
 
 
 // mypage

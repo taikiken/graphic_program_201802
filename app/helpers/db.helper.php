@@ -326,7 +326,7 @@ END_DOC;
      */
     public function get_partners() {
 
-        $sql="select title,t1,img1,n from u_media order by n";
+        $sql="select title,t1,img1,n,ng_flag from u_media order by n";
         $this->query($sql);
         while( $f = $this->fetch_array() ){
             $s[] = set_partners_info($f);
