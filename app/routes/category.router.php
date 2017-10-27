@@ -14,6 +14,7 @@ endif;
 
 $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app) {
 
+
   // 各カテゴリートップ - /category/:category_slug/
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
@@ -152,56 +153,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
   });
 
-});
 
-// 「/category/crazy/athletes/」でアクセスした場合でも「/crazy/list/」と同一のサイトを表示
-$app->group('/category', function () use($app, $ImgPath) {
-
-    $s3key = 'json/ca_list.json';
-    $json = $ImgPath . '/' . $s3key;
-    $data = @file_get_contents($json);
-
-    // カテゴリー/注目アスリート/リスト - /category/crazy/athletes/
-    $this->group('/crazy/athletes', function ($request, $response, $args) use ($app, $data) {
-        // 選手詳細ルーティング
-        $this->get('[/]', function ($request, $response, $args) use ($app, $data) {
-            // jsonの中身が空の場合404
-            if(empty($data))
-            {
-                // 404
-                // ------------------------------
-                $args['page'] = $app->model->set([
-                    'title'    => '404 Not Found',
-                    'og_title' => '404 Not Found',
-                    'template' => 404,
-                ]);
-
-                $args['request']  = $request;
-                $args['response'] = $response;
-
-                if($app->model->property('ua') === 'desktop')
-                {
-                    return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
-                }
-                else
-                {
-                    return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
-                }
-            }
-
-            $data = json_decode($data);
-            $args['page'] = $app->model->set(array(
-                'title'              => 'CRAZY ATHLETES',
-                'og_title'           => 'CRAZY ATHLETES | '.$app->model->property('title'),
-                'path'               => $args,
-                'template'           => 'category_list',
-                'template_classname' => '',
-                'list'               => $data
-            ));
-
-            return $this->renderer->render($response, 'crazy/list.php', $args);
-        });
-    });
 });
 
 
