@@ -51,6 +51,7 @@ include_once __DIR__."/../../${page['ua']}/_header.php";
 
           <aside class="draft-header-bnr-bottom" style="padding-left:0; padding-right: 0;">
             <ul>
+              <li><a href="https://sportsbull.jp/p/214500/" target="_blank"><img src="/assets/images/stats/npb-draft2017/bnr-highlight@2x.jpg" alt="プロ野球2017 ドラフトハイライト動画" width="728" height="90"></a></li>
               <li>
                 <div id='div-gpt-ad-title_bottom'></div>
               </li>

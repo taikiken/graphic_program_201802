@@ -61,7 +61,7 @@ cd="comment";
 </div><!-- End pageDescription -->
   <div id="pageController">
     <ul class="controllMenu clearfix">
-      <li class="ds"><a href="./search/">絞り込み検索</a></li>
+      <li class="ds"><a href="/editdm/comment/search/">絞り込み検索</a></li>
     </ul></div><!-- End pageController -->
 <table border="0" cellspacing="0" cellpadding="0" summary="一覧" class="listTable modform commenttable">
 <tbody>
@@ -70,7 +70,7 @@ cd="comment";
 </tr>
 <?php
 
-$sql="select id,pageid,(select title from repo_n where id=pageid) as pagetitle,comment,commentid,(select title from u_member where id=userid) as name,(select flag from u_member where id=userid) as userflag,regitime,flag from u_comment order by id desc;";
+$sql=sprintf("select id,pageid,(select title from repo_n where id=pageid) as pagetitle,comment,commentid,(select title from u_member where id=userid) as name,(select flag from u_member where id=userid) as userflag,regitime,flag from u_comment where id=%s order by id desc;", $_GET["id"]);
 $o->query($sql);
 
 while($f=$o->fetch_array()){
