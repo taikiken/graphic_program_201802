@@ -142,6 +142,8 @@ if($TABLE=="repo_n"&&!preg_match("#/photo/#",$_SERVER["REQUEST_URI"])){
     $sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "id", dblm($no, $offset));
 }elseif($TABLE=="photo"){
     $sql = sprintf("select * from %s where nid = %s order by n%s ",$TABLE, $_GET["nid"], ($CURRENTDIRECTORY=="log")?" desc":"");
+}elseif($TABLE=="company_news") {
+  $sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "published_at DESC", dblm($no, $offset));
 }else{
 		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
 }
