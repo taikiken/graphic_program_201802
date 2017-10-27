@@ -186,7 +186,57 @@ function relatedlink_New($links, $id=0){
 	}
 	return implode("\n",$s);
 }
+function modifytag_New($body, $enclosure_url) {
 
+	#
+	# 本文中から文字色のスタイルをspanタグごと削除
+	#
+	preg_match_all('/<span style="color.+?">.+?<\/span>/m', $body, $matches);
+	foreach($matches as $match)
+	{
+		foreach($match as $val)
+		{
+			$body = str_replace($val, strip_tags($val, '<strong>'), $body);
+		}
+	}
+
+
+	global $ImgPath;
+
+	$enclosure = basename($enclosure_url);
+
+	if(count($body)==0)return "";
+
+	$body = preg_replace('/ alt=""/', '', $body);
+	preg_match_all("/<img[^>]+>/", $body, $u);
+	for($i = 0; $i<count($u[0]); $i++){
+		preg_match('/src="([^"]+)"/',$u[0][$i], $r);
+		$image_url = $r[1];
+
+		if($enclosure == basename($image_url))
+		{
+			$body = str_replace($u[0][$i], '', $body);
+		}
+		else
+		{
+			$img = outimg($image_url, 0, false);
+			if(preg_match("/:\/\//", $r[1])) {
+				if(strlen($img) > 0){
+					$body = str_replace($u[0][$i], sprintf("<img src=\"%s/raw/%s\"><br>", $ImgPath, $img), $body);
+				}else{
+					$body = str_replace($u[0][$i], "", $body);
+				}
+			}else{
+				$body = str_replace($u[0][$i], "", $body);
+			}
+		}
+	}
+
+	$body = str_replace(array("<p></p>", "<p>&nbsp;</p>"), "", $body);
+	$body = str_replace("\'", "''", preg_replace("/(\r|\n|\t)/", "", $body));
+
+	return $body;
+}
 
 function removeimg($img){
 	global $IMGP;
