@@ -33,15 +33,7 @@ if(preg_match("/undotsushin/",$servername)){
 
 		$LSCMS="legendsstadium2";
 
-    // 大学野球
-    if (preg_match("/big6tv/", $requesturi) ||
-      preg_match("/ub_kansai/",$requesturi) ||
-      preg_match("/ub_kansaibig6/",$requesturi) ||
-      preg_match("/ub_tohto/",$requesturi)) {
-      $bucket="dev-ublive.sportsbull.jp";
-    }else{
-      $bucket="dev-img-sportsbull-jp";
-    }
+		$bucket="dev-img-sportsbull-jp";
 
 	}elseif(preg_match("/stg/",$servername)){
 
@@ -54,15 +46,7 @@ if(preg_match("/undotsushin/",$servername)){
 
 		$LSCMS="legendsstadium";
 
-    // 大学野球
-    if (preg_match("/big6tv/", $requesturi) ||
-      preg_match("/ub_kansai/",$requesturi) ||
-      preg_match("/ub_kansaibig6/",$requesturi) ||
-      preg_match("/ub_tohto/",$requesturi)) {
-      $bucket="dev-ublive.sportsbull.jp";
-    }else{
-      $bucket="img-sportsbull-jp";
-    }
+		$bucket="img-sportsbull-jp";
 
 	}else{
 
@@ -75,15 +59,7 @@ if(preg_match("/undotsushin/",$servername)){
 		$ImgPath="https://www.undotsushin.com";
 		$UserImgPath="https://www.undotsushin.com";
 
-    // 大学野球
-    if (preg_match("/big6tv/", $requesturi) ||
-      preg_match("/ub_kansai/",$requesturi) ||
-      preg_match("/ub_kansaibig6/",$requesturi) ||
-      preg_match("/ub_tohto/",$requesturi)) {
-      $bucket="ublive.sportsbull.jp";
-    }else{
-      $bucket="img-sportsbull-jp";
-    }
+		$bucket="img-sportsbull-jp";
 	}
 
 	$SQLLOG="/var/www/data/log/ut_sqllog.txt";
@@ -116,7 +92,9 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_kansaibig6/",$requesturi) ||
       preg_match("/ub_tohto/",$requesturi)) {
       $bucket="dev-ublive.sportsbull.jp";
-    }else{
+    }elseif (preg_match("/worldsoccer/",$requesturi)) {
+			$bucket="dev-stats.sportsbull.jp";
+		}else{
       $bucket="dev-img-sportsbull-jp";
     }
 
@@ -137,6 +115,8 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_kansaibig6/",$requesturi) ||
       preg_match("/ub_tohto/",$requesturi)) {
       $bucket="ublive.sportsbull.jp";
+    }elseif (preg_match("/worldsoccer/",$requesturi)) {
+      $bucket="stats.sportsbull.jp";
     }else{
       $bucket="img-sportsbull-jp";
     }
@@ -154,15 +134,8 @@ if(preg_match("/undotsushin/",$servername)){
 		$ImgPath="https://img.sportsbull.jp";
 		$UserImgPath="https://img.sportsbull.jp";
 
-    // 大学野球
-    if (preg_match("/big6tv/", $requesturi) ||
-      preg_match("/ub_kansai/",$requesturi) ||
-      preg_match("/ub_kansaibig6/",$requesturi) ||
-      preg_match("/ub_tohto/",$requesturi)) {
-      $bucket="ublive.sportsbull.jp";
-    }else{
-      $bucket="img-sportsbull-jp";
-    }
+		$bucket="img-sportsbull-jp";
+
 	}else{
 
 		$staticfileimport=1;
@@ -181,6 +154,8 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_kansaibig6/",$requesturi) ||
       preg_match("/ub_tohto/",$requesturi)) {
       $bucket="ublive.sportsbull.jp";
+    }elseif (preg_match("/worldsoccer/",$requesturi)) {
+      $bucket="stats.sportsbull.jp";
     }else{
       $bucket="img-sportsbull-jp";
     }
@@ -224,6 +199,7 @@ if(preg_match("/undotsushin/",$servername)){
 	$MEDIADATA="http://utinput/api";
 }
 
+
 // setting for Vagrant
 // ==============================
 // - 192.168.33.50 - vagrant local ip
@@ -231,10 +207,9 @@ if(preg_match("/undotsushin/",$servername)){
 // - :8888 - vagrant local network port
 if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'undotsushin.local' || $_SERVER['SERVER_PORT'] == '8080' || $_SERVER['SERVER_PORT'] == '8888' ) :
   $staticfileimport=0;
-  // $DBNAME="ut_devnew";
+  $DBNAME="ut";
   $DBUSR="ut";
   $DBPWD="ut";
-  // $DBHOST="undo-dev.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
   $DBHOST="localhost";
   $DBPORT=5432;
   $SERVERPATH="/vagrant/public";
@@ -261,9 +236,12 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
     preg_match("/ub_kansaibig6/",$requesturi) ||
     preg_match("/ub_tohto/",$requesturi)) {
     $bucket="dev-ublive.sportsbull.jp";
-  }
+  }elseif (preg_match("/worldsoccer/",$requesturi)) {
+		$bucket="dev-stats.sportsbull.jp";
+	}
 endif;
 
 //$staticfilepath=preg_match("/sportsbull.jp/",$domain)?sprintf("s3://%s",$bucket):sprintf("%s/api/ver1",$SERVERPATH);
 $staticfilepath=sprintf("%s/api/ver1",$SERVERPATH);
+
 ?>
