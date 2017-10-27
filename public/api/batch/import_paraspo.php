@@ -1,8 +1,6 @@
 <?php
-
 include $INCLUDEPATH.'local.php';
 include $INCLUDEPATH.'public/import.php';
-
 /*
 |--------------------------------------------------------------------------
 | RSS取込バッチ
@@ -12,20 +10,26 @@ include $INCLUDEPATH.'public/import.php';
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-$MEDIAID = 62;
-const MEDIA_NAME = 'パラスポ';
-
-
+$MEDIAID = 66;
+const MEDIA_NAME = 'パラスポ+';
+const SPECIAL_CHAR = 'www.youtube.com/embed';
 # RSSファイル
 # 現状、検証用RSSしかもらってないので一旦下記RSSを使用
 #
-const RSS_FILE = 'http://staging.paraspoplus.com/feed/sports-bull';
-// const RSS_FILE = 'https://perfectanavi:C4IiJ8V7@test.perfectanavi.com/tag/sportsbull/?feed=sportsbull';
-// $RSS_FILE = dirname(__FILE__) . '/rss.xml';
-
+const RSS_FILE = 'http://paraspoplus.com/feed/sports-bull';
 $o = new db;
 $o->connect();
-
+// $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from repo_e where nid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from repo_n where d2={$MEDIAID};";
+// $o->query($sql);
+// return;
 $sql = sprintf("SELECT id,name,name_e,yobi FROM u_categories WHERE flag=1 AND id NOT IN(%s) ORDER BY id DESC",implode(",", $excategory));
 $o->query($sql);
 while($f = $o->fetch_array()) {
@@ -35,7 +39,6 @@ while($f = $o->fetch_array()) {
 	$exword[] = $f["name"];
 	$exword[] = $f["name_e"];
 }
-
 /*
 |--------------------------------------------------------------------------
 | パラスポRSS取込処理
@@ -47,7 +50,6 @@ while($f = $o->fetch_array()) {
 $content = get_contents(RSS_FILE);
 $xml     = simplexml_load_string($content);
 $items   = $xml->xpath('//item'); // itemのXMLオブジェクト配列取得
-
 foreach($items as $item)
 {
 	#
@@ -55,32 +57,24 @@ foreach($items as $item)
 	#
 	$keyword = key_merge((string)$item->keyword);
 	$status  = (int)$item->status;
-	$enclosure_url = str_replace('http://','https://', (string)$item->enclosure->attributes()->url);
-	$related_links = (array)$item->relatedLink;
+	$enclosure_url = (string)$item->enclosure->attributes()->url;
+	$related_links = $item->xpath('relatedLink');
 	$link  = (string)$item->link;
 	$title = (string)$item->title;
-
 	$region = (string)$item->area;
 	$pref   = (string)$item->pref;
-
 	$body = (string)$item->description;
-	#
-	# youtubeのembedが存在する場合、例外対応が必要
-	# bodyflag => 170
-	# <div class="cms_widget ratio16_9"><div class="ratio16_9-inner">＜ここにbodyをいれる＞</div></div>
-	if(strpos(false !== $body, 'www.youtube.com/embed')) {
-		$body =<<<END_DOC
-<div class="cms_widget ratio16_9"><div class="ratio16_9-inner">
-{$body}
-</div></div>
-END_DOC;
-		$sqla[] = sprintf("insert into repo_e(nid,types,title,n,flag,m_time,u_time) values(currval('repo_n_id_seq'),5,'%s',1,1,now(),now());",$body);
-	}
-	$modbody = str_replace('<p>&nbsp;</p>', '', str_replace("\'","''",preg_replace('/(\r|\n|\t)/', '', $body)));
-
+	$modbody = modifytag_New(
+		str_replace('<p>&nbsp;</p>', '',
+			str_replace("\'", "''", preg_replace('/(\r|\n|\t)/', '', $body))
+		),
+		$enclosure_url
+	);
 	#
 	# SQL生成用map
 	#
+    $a_time = strtotime((string)$item->lastUpdate);
+    $u_time = strtotime((string)$item->pubDate);
 	$item_map = [
 		'title'  		=> $title,
 		't9'   			=> $link,
@@ -108,7 +102,25 @@ END_DOC;
 		// 'description' 	=> $body,
 		'keyword' 		=> $keyword,
 	];
-
+	#
+	# youtubeのembedが存在する場合、例外対応が必要
+	# bodyflag => 170
+	# <div class="cms_widget ratio16_9"><div class="ratio16_9-inner">＜ここにbodyをいれる＞</div></div>
+	$yt_flg = false;
+	if (strpos($modbody, SPECIAL_CHAR) !== false)
+	{
+		$item_map['bodyflag'] = 170;
+		preg_match_all("/<iframe .*?<\/iframe>/", $modbody, $matchAll);
+		for ($i=0; $i < count($matchAll[0]); $i++)
+		{
+			preg_match('/src="([^"]+)"/', $matchAll[0][$i], $match);
+			//$r[1] = preg_replace("(http(s):)", "", $r[1]);
+			$modbody = str_replace($matchAll[0][$i],
+								   sprintf('<div class="cms_widget ratio16_9"><div class="ratio16_9-inner"><iframe width="728" height="410" %s frameborder="0" allowfullscreen></iframe></div></div>', $match[0]),
+								   $modbody);
+			$yt_flg = true;
+		}
+	}
 	#
 	# タグの抽出
 	#
@@ -119,7 +131,6 @@ END_DOC;
 			$item_map['t1' . $cnt] = esc($tag[$cnt]);
 		}
 	}
-
 	#
 	# 該当記事の抽出
 	#
@@ -130,7 +141,6 @@ END_DOC;
 	);
 	$o->query($sql);
 	$data = (object)$o->fetch_array();
-
 	# 既に登録されている記事の場合
 	if(strlen($data->id) > 0)
 	{
@@ -150,9 +160,16 @@ END_DOC;
 					$item_map['t1']   = '';
 				}
 				splittime($item_map['m_time'], $item_map['a_time']);
-				$sqla[] = makesql($item_map, $data->id);
+				$sqla[] = makesql($item_map, $data->id, $MEDIAID);
 				$sqla[] = sprintf("UPDATE repo_body SET body = '%s' WHERE pid = %s;", $modbody, $data->id);
-				$sqla[] = relatedlink2($related_links, $data->id);
+				$sqla[] = relatedlink_New($related_links, $data->id);
+				//
+                // 特殊文字列を含んでいる場合は「drepo_e」も更新する
+				//
+                if ($yt_flg)
+                {
+                    $sqla[] = sprintf("update repo_e set title = '%s' where nid = %s;", $modbody, $data->id);
+                }
 			}
 		}
 		elseif ($status == 0)
@@ -165,7 +182,6 @@ END_DOC;
 	{
 		if($status == 1) {
 			$TITLE[] = pg_escape_string($title);
-
 			$item_map['d1']   = 3;
 			$item_map['d2']   = $MEDIAID;
 			if(isset($item->category)) {
@@ -186,20 +202,21 @@ END_DOC;
 			|
 			*/
 			$item_map['n'] = '(select max(n) + 1 FROM repo_n WHERE cid = 1)';
-
 			if(strlen($enclosure_url) > 0) $item_map["img1"] = outimg($enclosure_url);
-
 			splittime($item_map["m_time"], $item_map["a_time"]);
-			$sqla[] = makesql($item_map, 0);
+			$sqla[] = makesql($item_map, 0, $MEDIAID);
 			$sqla[] = sprintf("INSERT INTO repo_body(pid, body) VALUES(CURRVAL('repo_n_id_seq'),'%s');", $modbody);
-			$sqla[] = relatedlink2($related_links);
+			$sqla[] = relatedlink_New($related_links);
+            // 特殊文字列を含んでいる場合は「drepo_e」も登録する
+            if ($yt_flg)
+            {
+                $sqla[] = sprintf("insert into repo_e(nid, types, title, n, flag, m_time, u_time) values(currval('repo_n_id_seq'), 5, '%s', 1, 1, now(), now());", $modbody);
+            }
 		}
 		if(! empty($region)) {
 			$sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref}');";
 		}
 	}
-
-
 	if($sqla){
 		$sqla=implode("\n",$sqla);
 		$o->query($sqla);
@@ -207,7 +224,5 @@ END_DOC;
 		unset($sqla);
 	}
 }
-
 include $INCLUDEPATH.'public/display.php';
-
 ?>
