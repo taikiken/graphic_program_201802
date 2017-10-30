@@ -52,10 +52,12 @@ class dbutl extends db{
 	
 	function makelink($s,$f){
 		if($f!=0)$sql[]=sprintf("delete from u_link where pid=%s;\n",$f);
-		for($i=2;$i<=6;$i++){
+    $n_count = 1; // ソート用カウンター
+    for($i=2;$i<=6;$i++){
 			if($s["t".$i]!="null"){
-				$sql[]=sprintf("insert into u_link(pid,title,link,n) values(%s,%s,%s,%s);\n",$f==0?"currval('repo_n_id_seq')":$f,$s["b".$i],$s["t".$i],$i);
-			}
+				$sql[]=sprintf("insert into u_link(pid,title,link,n) values(%s,%s,%s,%s);\n",$f==0?"currval('repo_n_id_seq')":$f,$s["b".$i],$s["t".$i],$$n_count);
+        $n_count ++;
+      }
 		}
 		return implode("",$sql);
 	}
