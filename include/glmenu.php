@@ -5,6 +5,7 @@
         <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
         <li><a href="/editdm/repo_n/?cid=9&rid=7">TOPピックアップ</a></li>
         <li><a href="/editdm/repo_s/?rid=7">TOP以外ピックアップ</a></li>
+        <li><a href="/editdm/bulls_picks/">BULL'S PICKS</a></li>
         <li><a href="/editdm/company_news/">プレスリリース</a></li>
     <?php } ?>
     <li><a href="/editdm/repo_n/?cid=1">記事</a></li>
