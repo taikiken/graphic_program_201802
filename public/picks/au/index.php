@@ -106,7 +106,11 @@ if ($app_host_name == '') {
 // default `https://img.sportsbull.jp` - 本番サーバー
 $xml_host_name = 'https://img.sportsbull.jp';
 // dev のみ `https://dev-img.sportsbull.jp` から取得
-if ($app_host_name == 'https://dev.sportsbull.jp' || $app_host_name == 'https://dev.sportsbull.jp/') {
+if (
+  $app_host_name == 'https://dev.sportsbull.jp' || $app_host_name == 'https://dev.sportsbull.jp/' ||
+  // 2015-10-27 - local 追加
+  strpos($app_host_name, '8080') || strpos($app_host_name, 'indotsushin.local')
+) {
   $xml_host_name = 'https://dev-img.sportsbull.jp';
 }
 
@@ -127,7 +131,26 @@ foreach ($xml_element as $xml_date) :
   // parse attribute
   $xml_date_value = (string)$xml_date->attributes()->date;
   $xml_new_flag = (string)$xml_date->attributes()->new;
+
   $articles = array();
+
+  // ------------------------
+  // @since 2017-10-25
+  // ---
+  $blstarticle_id = (string)$xml_date->blstarticle->id;
+  $blstarticle_post = $model->get_post($blstarticle_id);
+  unset($blstarticle_post['ad']);
+  unset($blstarticle_post['banner']);
+  unset($blstarticle_post['recommend_articles']);
+  unset($blstarticle_post['related_articles']);
+  unset($blstarticle_post['body']);
+  unset($blstarticle_post['description']);
+  unset($blstarticle_post['body_escape']);
+  $blstarticle_data = array(
+    'id' => $blstarticle_id,
+    'post' => $blstarticle_post,
+  );
+  // ------------------------
 
   foreach( $xml_date->article as $xml_article ) :
     $article_id = (string)$xml_article->id;
@@ -147,6 +170,7 @@ foreach ($xml_element as $xml_date) :
   $xml_data = array(
     'new' => $xml_new_flag,
     'articles' => $articles,
+    'blstarticle' => $blstarticle_data,
   );
   $xml_articles[][$xml_date_value] = $xml_data;
 endforeach;
