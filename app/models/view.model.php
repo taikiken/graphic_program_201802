@@ -500,6 +500,17 @@ class ViewModel {
 
   }
 
+  /**
+   * プレスリリース一覧
+   * @return array
+   */
+  public function get_company_news_items()
+  {
+
+    $res = $this->db->get_company_news_items();
+    return $res;
+  }
+
 }
 
 ?>

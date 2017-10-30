@@ -31,6 +31,8 @@ if($CURRENTDIRECTORY=="repo_n"){
 	$TITLEFIELDNAME="types";
 }elseif($CURRENTDIRECTORY=="confs"){
 	$TITLEFIELDNAME="SITE";
+}elseif($CURRENTDIRECTORY=="company_news"){
+	$TITLEFIELDNAME="title";
 }
 
 ?>
