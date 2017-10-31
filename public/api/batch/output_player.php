@@ -46,6 +46,7 @@ $sql .= "WHERE flag = 1 ";
 $sql .= "ORDER BY n";
 $dbo->query($sql);
 
+$value = array();
 $data = array();
 $jdata = array();
 while ($fdata = $dbo->fetch_array())
@@ -114,6 +115,7 @@ put_json(sprintf("%s/ca_article_ids.json", $bucket), $jdata);
 
 /*
  * 注目の選手一覧をJSON形式のファイルに出力
+ * 　抽出件数はソート順に４件
  */
 // 注目の選手一覧データ取得・作成
 $sql = "";
@@ -121,9 +123,11 @@ $sql .= "SELECT tp.id, tp.name, '' as name_kana, tp.competition, tp.description,
 $sql .= "FROM tbl_player AS tp INNER JOIN u_headline AS hl ";
 $sql .= "    ON tp.id = hl.d2 AND hl.cid = 18 AND hl.qid = 17 ";
 $sql .= "WHERE tp.flag = 1 AND hl.flag = 1 ";
-$sql .= "ORDER BY hl.n";
+$sql .= "ORDER BY hl.n ";
+$sql .= "LIMIT 4";
 $dbo->query($sql);
 
+$value = array();
 $data = array();
 $jdata = array();
 while ($fdata = $dbo->fetch_array())

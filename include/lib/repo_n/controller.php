@@ -14,7 +14,6 @@ if($_GET["cid"]==6){
 } elseif ($_GET["cid"] == 16) {
 	// 選手
 	$TABLE="tbl_player";
-	$NUMBERINGOFF=1;
 } elseif ($_GET["rid"] == 17 && $_GET['cid']) {
 	// 注目の選手
 	$TABLE="u_headline";
