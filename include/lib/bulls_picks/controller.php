@@ -1,7 +1,13 @@
 <?php
 
+//$TABLE="bulls_picks";
+
 if($q->get_dir()===1){ // 編集
-  if($q->get_file()===2){
+
+  if($q->get_file()===1){
+    data_conf();
+
+  }elseif($q->get_file()===2){
     include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/ex.php";
 
     // テストxml作成
