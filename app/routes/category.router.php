@@ -15,12 +15,12 @@ endif;
 $s3key = 'json/ca_list.json';
 
 $json = $ImgPath . '/' . $s3key;
-$app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app, $json) {
+$app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app, $json, $ImgPath) {
 
 
   // 各カテゴリートップ - /category/:category_slug/
   // ==============================
-  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $ImgPath) {
 
     $category           = $app->model->get_category_by_slug($args['category_slug']);
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
@@ -28,6 +28,15 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     if ( $args['category_slug'] === 'big6tv' ) :
       $template_classname = $template_classname . ' theme_big6';
     endif;
+
+    $data = [];
+      if ( $args['category_slug'] === 'crazy' ) :
+          $s3key = 'json/ca_picup_list.json';
+
+          $json = $ImgPath . '/' . $s3key;
+          $data = @file_get_contents($json);
+          $data = json_decode($data);
+      endif;
 
     $args['page'] = $app->model->set(array(
       'title'              => $category['label'],
@@ -41,6 +50,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
       'template'           => 'category',
       'template_classname' => $template_classname,
       'path'               => $args,
+      'list'               => $data
     ));
 
 

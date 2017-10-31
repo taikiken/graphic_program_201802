@@ -11,14 +11,20 @@ $app->group('/crazy', function () use($app, $ImgPath) {
 
     // webview
     // ==============================
-    $this->get('/webview[/]', function ($request, $response, $args) use ($app) {
+    $this->get('/webview[/]', function ($request, $response, $args) use ($app, $ImgPath) {
+        $s3key = 'json/ca_picup_list.json';
 
+        $json = $ImgPath . '/' . $s3key;
+        $data = @file_get_contents($json);
+
+        $data = json_decode($data);
         $args['page'] = $app->model->set(array(
             'title'              => 'CRAZY ATHLETES',
             'og_title'           => 'CRAZY ATHLETES | '.$app->model->property('title'),
             'path'               => $args,
             'template'           => 'webview',
             'template_classname' => '',
+            'list'               => $data
         ));
 
         return $this->renderer->render($response, 'crazy/webview.php', $args);
