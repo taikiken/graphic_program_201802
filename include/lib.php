@@ -138,9 +138,9 @@ elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 16 && !preg_match("#/ph
 
 	// ソート条件設定
 	if($_COOKIE["orderby"]=="snew"){
-		$orderby=sprintf("m_time desc");
+		$orderby=sprintf("n desc");
 	}elseif($_COOKIE["orderby"]=="sold"){
-		$orderby=sprintf("m_time");
+		$orderby=sprintf("n");
 	}else{
 		$orderby="n desc";
 	}
