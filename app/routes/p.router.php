@@ -35,8 +35,10 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
           foreach($_GET as $k => $v):
               $id .= $k . '=' . $v . '&';
           endforeach;
-          header('Location: ' . $app->model->property('site_url').'a/'.$post['id'].'/' . $id);
-          exit();
+          if($app->model->property('ua_app') != 'Android' || isset($_GET['id'])):
+              header('Location: ' . $app->model->property('site_url').'a/'.$post['id'].'/' . $id);
+              exit();
+          endif;
       endif;
 
       // #1179 Syn.extension 判定
@@ -61,6 +63,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         'title'          => $post['title'].' | '.$category['label'],
         'og_title'       => $post['title'].' | '.$app->model->property('title_short'),
         'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/',
+        'og_url_with_param'         => $app->model->property('site_url').'a/'.$post['id'].'/' . $id,
         'og_image'       => $post['media']['images']['original'],
         'og_description' => $post['description'],
         'canonical'      => $canonical,
