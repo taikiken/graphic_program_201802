@@ -759,15 +759,56 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 	for($i=0;$i<count($imgSubstance);$i++){
 		if($type!="gif"){
 			if($imgSubstance[$i]["w"]!=""&&$imgSubstance[$i]["h"]!=""){
-				if($imgSubstance[$i]["w"]<$size[0]){
-					imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
-				}else{
-					if($i==0){
-						copy($RAWIMG.$filename,$IMG[$i].$filename);
-						s3upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
-						//imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
-					}else{
+				// アップロード画像の縦横サイズ判定（選手情報登録のみ）
+				if ($i == 0 && $size[0] != $size[1] && $_GET["cid"] == 16) {
+					// アップロード画像のサイズ調整
+					$size_w = 0;
+					$size_h = 0;
+					if ($size[0] < $size[1]) {
+						// 縦（高さ）に合わせる
+						$size_w = $size[1];
+						$size_h = $size[1];
+					}
+					else {
+						// 横（幅）に合わせる
+						$size_w = $size[0];
+						$size_h = $size[0];
+					}
+
+					// アップロード画像の縦横サイズを同一にリサイズ
+					imgDresize($RAWIMG.$filename,
+							   $IMG[$i].$filename,
+							   array($size_w,
+									 $size_h),
+							   $type,
+							   $imgSubstance[$i]["c"],
+							   $copy,
+							   $imgSubstance[$i]["i"],
+							   $imgSubstance[$i]["p"]);
+
+					// 指定サイズにリサイズ
+					imgDresize($IMG[$i].$filename,
+							   $IMG[$i].$filename,
+							   array($imgSubstance[$i]["w"],
+									 $imgSubstance[$i]["h"]),
+							   $type,
+							   $imgSubstance[$i]["c"],
+							   $copy,
+							   $imgSubstance[$i]["i"],
+							   $imgSubstance[$i]["p"]);
+
+				}
+				else {
+					if($imgSubstance[$i]["w"]<$size[0]){
 						imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
+					}else{
+						if($i==0){
+							copy($RAWIMG.$filename,$IMG[$i].$filename);
+							s3upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
+							//imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
+						}else{
+							imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
+						}
 					}
 				}
 			}elseif($imgSubstance[$i]["w"]!=""){

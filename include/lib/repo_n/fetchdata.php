@@ -1,7 +1,7 @@
 <table class="notcs">
 <?php if($gBILL!=1){ ?>
 <tr>
-<?php if(strlen($DIRECTORY)>0){ ?>
+<?php if(strlen($DIRECTORY)>0 && $TABLE != "tbl_player"){ ?>
 	<td width="14">
 		<a href="<?=$domain?><?=rewrite($DIRECTORY,$p[$i])?>" target="_blank"><img src="<?=strlen($p[$i]["img1"])>0?sprintf("/prg_img/thumbnail2/%s",$p[$i]["img1"]):"/shared/cms/img/icon_browser.gif"?>" width="16"></a>
 	<td>
@@ -72,6 +72,10 @@ if($TABLE=="repo_n"){
 }
 elseif ($TABLE == "tbl_player")
 {
+	// 選手一覧の場合は、ここで選手の画像を追加
+?>
+	<a href="<?= $domain ?><?= rewrite($DIRECTORY, $p[$i]) ?>" target="_blank"><img src="<?= strlen($p[$i]["img1"]) > 0 ? sprintf("/prg_img/thumbnail2/%s", $p[$i]["img1"]) : "/shared/cms/img/icon_browser.gif" ?>" width="16"></a>
+<?php
 	// 選手（「ID：選手名」で表示）
 	$title = sprintf("%s：", $p[$i]["id"]);
 	$title .= mod_HTML($p[$i]["name"] . " （" . $p[$i]["competition"] . "）");
