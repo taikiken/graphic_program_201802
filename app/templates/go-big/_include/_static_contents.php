@@ -233,4 +233,14 @@
       </div><!-- /.related__post__text -->
     </a>
   </div><!-- /.related__post -->
+
+  <div class="related__post">
+    <a href="https://fineplay.me/gobig2017/" target="_blank">
+      <figure class="related__post__thumb"><img src="/assets/images/go-big/related-post-figure3.jpg" alt=""></figure>
+      <div class="related__post__text">
+        <h3 class="related__post__heading">日本最大級のアクションスポーツマガジンFINE PLAYでもGO BIGの特集をチェック！</h3>
+        <p class="related__post__date">11月1日（水）</p>
+      </div><!-- /.related__post__text -->
+    </a>
+  </div><!-- /.related__post -->
 </div><!-- /.gobig--related -->
