@@ -116,6 +116,28 @@ $app->group('/athlete', function () use($app, $ImgPath) {
                 break;
             }
         }
+        if(empty($player_info))
+        {
+            // 404
+            // ------------------------------
+            $args['page'] = $app->model->set([
+                'title'    => '404 Not Found',
+                'og_title' => '404 Not Found',
+                'template' => 404,
+            ]);
+
+            $args['request']  = $request;
+            $args['response'] = $response;
+
+            if($app->model->property('ua') === 'desktop')
+            {
+                return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
+            }
+            else
+            {
+                return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
+            }
+        }
 
         $args['page'] = $app->model->set(array(
             'title'              => 'CRAZY ATHLETES',

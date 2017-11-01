@@ -143,7 +143,7 @@ $articletable3="
 	m_time,
 	t8 as videocaption,
 	t9 
-from repo_n where flag=1 and id in(%s)%s%s%s) as t1
+from repo_n where flag=1 and id in(%s)%s%s) as t1
 
 left join (select 
 	id as userid,
