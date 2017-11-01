@@ -11,8 +11,8 @@ if ($q->get_dir() === 1) { // 編集
     $S3Module = new S3Module;
     $url = $S3Module->getUrl($PICKS_FILENAME);
     $picks_xml = simplexml_load_file($url);
-
     $date = (string)$picks_xml->xpath('/date')[0]->articles->attributes()->date;
+    $date = str_replace('/', '', $date);
     $picks_xml->asXML($TMP_PICKS);
 
     // xml/archives/10月31日picks.xml
