@@ -499,7 +499,7 @@ $(function(){
 
 	ut_init();
 
-	$(".orderby,.exuser,.excategory,.expickup").change(function(){
+	$(".orderby,.exuser,.excategory,.expickup,.orderby_p,.excategory_p").change(function(){
 		var s=$(this).val();
 		$.cookie($(this).attr("class").replace(".",""),s,{path:"/editdm/",expires:1});
 		location.reload();

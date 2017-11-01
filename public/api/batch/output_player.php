@@ -43,7 +43,7 @@ $sql = "";
 $sql .= "SELECT id, name, '' as name_kana, competition, description, img1 ";
 $sql .= "FROM tbl_player ";
 $sql .= "WHERE flag = 1 ";
-$sql .= "ORDER BY n DESC";
+$sql .= "ORDER BY n";
 $dbo->query($sql);
 
 $value = array();

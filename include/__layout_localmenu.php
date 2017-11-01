@@ -86,10 +86,10 @@ while($f=$o->fetch_array()){
 
 <?php } elseif ($_GET["cid"] == 16) { ?>
   <?php // 選手一覧のパターン ?>
-  <li>並び替え：<select class="orderby">
+  <li>並び替え：<select class="orderby_p">
     <?php
-      $ob = array(array("snew", "　登録日新しい順　"), array("sold", "　登録日古い順　"));
-      $c = !isset($_COOKIE["orderby"]) ? "snew" : $_COOKIE["orderby"];
+      $ob = array(array("sold", "　登録の昇順　"), array("snew", "　登録の降順　"));
+      $c = !isset($_COOKIE["orderby_p"]) ? "sold" : $_COOKIE["orderby_p"];
 
       for ($i=0; $i<count($ob); $i++) {
     ?>
@@ -99,12 +99,9 @@ while($f=$o->fetch_array()){
   　｜
   </li>
 
-  <li>抽出：<select class="excategory">
+  <li>抽出：<select class="excategory_p">
     <?php
-      $c = !isset($_COOKIE["excategory"]) ? 0 : $_COOKIE["excategory"];
-    ?>
-
-	<?php
+    	$c = !isset($_COOKIE["excategory_p"]) ? 0 : $_COOKIE["excategory_p"];
 		echo sprintf("<option value=\"\"%s>　すべてのカテゴリー</option>", $c==0 ? " selected=\"selected\"" : "");
 
 		// カテゴリー一覧を取得

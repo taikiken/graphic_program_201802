@@ -122,12 +122,12 @@ elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 16 && !preg_match("#/ph
 	$exuser = "";
 
 	// 抽出条件（カテゴリー）設定
-	if (strlen($_COOKIE["excategory"]) > 0)
+	if (strlen($_COOKIE["excategory_p"]) > 0)
 	{
-		if ($_COOKIE["excategory"] != "a")
+		if ($_COOKIE["excategory_p"] != "a")
 		{
 			// 抽出条件が選択されている場合
-			$excategory = $_COOKIE["excategory"] != 0 ? " WHERE category LIKE '%" . $_COOKIE["excategory"] . "%'" : "";
+			$excategory = $_COOKIE["excategory_p"] != 0 ? " WHERE category LIKE '%" . $_COOKIE["excategory_p"] . "%'" : "";
 		}
 		else
 		{
@@ -137,12 +137,15 @@ elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 16 && !preg_match("#/ph
 	}
 
 	// ソート条件設定
-	if($_COOKIE["orderby"]=="snew"){
-		$orderby=sprintf("n desc");
-	}elseif($_COOKIE["orderby"]=="sold"){
-		$orderby=sprintf("n");
-	}else{
-		$orderby="n desc";
+	if ($_COOKIE["orderby_p"] == "snew") {
+		// 登録の降順
+		$orderby = sprintf("n desc");
+	} elseif ($_COOKIE["orderby_p"] == "sold") {
+		// 登録の昇順
+		$orderby = sprintf("n");
+	} else {
+		// 未設定の場合は登録の昇順
+		$orderby = "n";
 	}
 
 	$sql = sprintf("SELECT COUNT(*) AS n FROM %s%s%s%s", $TABLE, $WHERE, $exuser, $excategory);
