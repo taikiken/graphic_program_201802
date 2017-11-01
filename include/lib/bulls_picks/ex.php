@@ -1,7 +1,9 @@
 <?php
 // s3ファイルを表示
-$filename = '/tmp/picks.xml';
-$picks_xml = simplexml_load_file($filename);
+$S3Module = new S3Module;
+$url = $S3Module->getUrl($PICKS_FILENAME);
+
+$picks_xml = simplexml_load_file($url);
 $picks_xml = $picks_xml->xpath('/date')[0];
 
 $date = (string)$picks_xml->articles->attributes()->date;

@@ -78,4 +78,7 @@ setlocale(LC_ALL,'ja_JP.UTF-8');
 
 include $INCLUDEPATH."conf/configExtend.php";
 
+// bull's pick のファイル名
+$PICKS_FILENAME = 'xml/picks.xml';
+$TMP_PICKS = '/tmp/picks.xml';
 ?>
