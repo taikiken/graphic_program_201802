@@ -371,6 +371,9 @@
 			removeClass(e.target, lazySizesConfig.loadingClass);
 			addRemoveLoadEvents(e.target, rafSwitchLoadingClass);
 			triggerEvent(e.target, 'lazyloaded');
+            if ((/undotsushin-ios/i.test(window.navigator.userAgent))) {
+                window.webkit.messageHandlers.onLoadComplete.postMessage("");
+            }
 		};
 		var rafedSwitchLoadingClass = rAFIt(switchLoadingClass);
 		var rafSwitchLoadingClass = function(e){
