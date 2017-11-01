@@ -8,6 +8,16 @@ if ($q->get_dir() === 1) { // 編集
   } elseif ($q->get_file() === 2) {
 
     // アーカイブ作成
+    $S3Module = new S3Module;
+    $url = $S3Module->getUrl($PICKS_FILENAME);
+    $picks_xml = simplexml_load_file($url);
+
+    $date = (string)$picks_xml->xpath('/date')[0]->articles->attributes()->date;
+    $picks_xml->asXML($TMP_PICKS);
+
+    // xml/archives/10月31日picks.xml
+    s3upload($TMP_PICKS, 'xml/archives/' . $date . 'picks.xml');
+
 
     // 入力内容でpicks.xml作成
     include $INCLUDEPATH . "lib/" . $CURRENTDIRECTORY . "/ex.php";
