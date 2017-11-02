@@ -517,7 +517,7 @@ $(function(){
 			u="https://sportsbull.jp/";
 		}
 
-		if (rid != 17)
+		if (rid != 95)
 		{
 			window.open(u+"/p/"+$("[name='p_d2']").val().match(/^([0-9]+):/)[1]);
 		}

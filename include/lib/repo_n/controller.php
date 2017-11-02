@@ -11,10 +11,10 @@ if($_GET["cid"]==6){
 	$TABLE="u_categories";
 }elseif($_GET["rid"]==48){
 	$TABLE="u_epg";
-} elseif ($_GET["cid"] == 16) {
+} elseif ($_GET["cid"] == 94) {
 	// 選手
 	$TABLE="tbl_player";
-} elseif ($_GET["rid"] == 17 && $_GET['cid']) {
+} elseif ($_GET["rid"] == 95 && $_GET['cid']) {
 	// 注目の選手
 	$TABLE="u_headline";
 }else{
@@ -152,7 +152,7 @@ if($q->get_dir()===0){
 		$e=$o->update($g->f("nid"));
 
 		// 選手情報更新の場合は実施しない
-		if ($g->f("cid") != 16)
+		if ($g->f("cid") != 94)
 		{
 			create_article_json($g->f("nid"), true);
 
@@ -244,12 +244,12 @@ if($q->get_dir()===0){
 	$gBILL=getBill();
 	$FIELD="*";
 
-	if ($g->f("cid") == 16)
+	if ($g->f("cid") == 94)
 	{
 		// 選手
 		$WHERE = "";
 	}
-	elseif ($g->f("cid") == 18)
+	elseif ($g->f("cid") == 96)
 	{
 		// 注目の選手
 		$WHERE = " where cid = " . $g->f("cid");

@@ -84,7 +84,7 @@ while($f=$o->fetch_array()){
     </div>
 -->
 
-<?php } elseif ($_GET["cid"] == 16) { ?>
+<?php } elseif ($_GET["cid"] == 94) { ?>
   <?php // 選手一覧のパターン ?>
   <li>並び替え：<select class="orderby_p">
     <?php

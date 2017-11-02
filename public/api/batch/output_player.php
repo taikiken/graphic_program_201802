@@ -121,7 +121,7 @@ put_json(sprintf("%s/ca_article_ids.json", $bucket), $jdata);
 $sql = "";
 $sql .= "SELECT tp.id, tp.name, '' as name_kana, tp.competition, tp.description, tp.img1 ";
 $sql .= "FROM tbl_player AS tp INNER JOIN u_headline AS hl ";
-$sql .= "    ON tp.id = hl.d2 AND hl.cid = 18 AND hl.qid = 17 ";
+$sql .= "    ON tp.id = hl.d2 AND hl.cid = 96 AND hl.qid = 95 ";
 $sql .= "WHERE tp.flag = 1 AND hl.flag = 1 ";
 $sql .= "ORDER BY hl.n ";
 $sql .= "LIMIT 4";

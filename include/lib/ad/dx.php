@@ -49,7 +49,7 @@ if($_GET["cid"]==1){
 
 	$PARENT="デフォルト";
 }
-if ($_GET["cid"] == 16)
+if ($_GET["cid"] == 94)
 {
 	/*
 	 * 選手の広告設定については仕様が決まるまで表示しない
@@ -62,7 +62,7 @@ if ($_GET["cid"] == 16)
 	$f = $o->fetch_array();
 
 	$TITLE = "選手";
-	$QST = "?cid=16";
+	$QST = "?cid=94";
 
 	$THIS = $f["name"];
 	$PARENT = "広告設定";

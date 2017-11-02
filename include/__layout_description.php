@@ -3,11 +3,11 @@
 $TITLEFIELDNAME="name";
 if($CURRENTDIRECTORY=="repo_n"){
 	switch ($_GET["cid"]) {
-		case 16:
+		case 94:
 			// 選手
 			$TITLEFIELDNAME = "name";
 			break;
-		case 18:
+		case 96:
 			// 注目選手
 			$TITLEFIELDNAME = "d2";
 			break;
@@ -65,7 +65,7 @@ if($CURRENTDIRECTORY=="repo_n"){
 		<?php }elseif($q->get_dir()===1){ ?>
 		<?php if($q->get_file()===0){ ?>
 
-			<?php if ($_GET["cid"] == 16) { ?>
+			<?php if ($_GET["cid"] == 94) { ?>
 				<?php // 選手の広告設定の場合 ?>
 				<p>「<?= $THIS ?>」の<?= $PARENT ?> を<?=$q->exe_fl() ?>します。</p>
 			<?php } else { ?>
@@ -75,7 +75,7 @@ if($CURRENTDIRECTORY=="repo_n"){
 
 		<?php }elseif($q->get_file()===1){ ?>
 
-			<?php if ($_GET["cid"] == 16) { ?>
+			<?php if ($_GET["cid"] == 94) { ?>
 				<?php // 選手の広告設定の場合 ?>
 				<p>「<?= $THIS ?>」の<?= $PARENT ?> を下記の内容で<?= $q->exe_fl() ?>します。</p>
 			<?php } else { ?>
