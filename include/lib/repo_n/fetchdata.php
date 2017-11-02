@@ -44,7 +44,7 @@ if($TABLE=="repo_n"){
 
 }elseif($TABLE=="u_headline"){
 
-	if ($_GET["cid"] != 18)
+	if ($_GET["cid"] != 96)
 	{
 		if(!preg_match("/^[0-9]+$/",$p[$i]["d2"])){
 			preg_match("/^([0-9]+):/",$p[$i]["d2"],$r);

@@ -25,7 +25,7 @@ if($_GET["rid"]==2){
 	$a[]=array("inputradio","続きを読むリンク先","readmore",array("運動通信Web View","媒体指定URL"),"","","","");
 }
 
-if ($_GET["cid"] != 16)
+if ($_GET["cid"] != 94)
 {
 	if($_GET["cid"]!=0){
 

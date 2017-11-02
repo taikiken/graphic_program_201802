@@ -114,7 +114,7 @@ if($CURRENTDIRECTORY=="repo_n"&&$_GET["cid"]==1&&!preg_match("#/photo/#",$_SERVE
 	$sql=sprintf("select count(*) as n from %s%s%s%s",$TABLE,$WHERE,$exuser,$excategory);
 
 }
-elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 16 && !preg_match("#/photo/#", $_SERVER["REQUEST_URI"]))
+elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 94 && !preg_match("#/photo/#", $_SERVER["REQUEST_URI"]))
 {
 	//
 	// 選手一覧

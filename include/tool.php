@@ -184,7 +184,7 @@ function makeTextfieldCell($a,$b,$c,$d,$e){
 		if(preg_match("/a1a2a3a4a5a6|a7a8a9a10a11a12/",$a)){
 			echo sprintf("<span class=\"btncurrenttime rollover %s\" id=\"%s\">現在の日時を設定</span><br class=\"cboth %s\">",$LANG[$i],$c[0],$LANG[$i]);
 		}elseif(preg_match("/d1d2/",$a)){
-			if($_GET["rid"]==7 || $_GET["rid"] == 17){
+			if($_GET["rid"]==7 || $_GET["rid"] == 95){
 				echo sprintf("<span class=\"btnpreview rollover %s\" id=\"%s\">確認</span><br class=\"cboth %s\">",$LANG[$i],$c[0],$LANG[$i]);
 			}
 		}
@@ -760,7 +760,7 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 		if($type!="gif"){
 			if($imgSubstance[$i]["w"]!=""&&$imgSubstance[$i]["h"]!=""){
 				// アップロード画像の縦横サイズ判定（選手情報登録のみ）
-				if ($i == 0 && $size[0] != $size[1] && $_GET["cid"] == 16) {
+				if ($i == 0 && $size[0] != $size[1] && $_GET["cid"] == 94) {
 					// アップロード画像のサイズ調整
 					$size_w = 0;
 					$size_h = 0;
