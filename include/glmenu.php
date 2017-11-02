@@ -1,3 +1,10 @@
+<?php
+/*
+ * CMS画面の上部メニュー定義
+ *
+ *   getSorC("is_external")で「authentic」テーブルの「is_external」値を判定
+ */
+?>
 <li class="pl0"><a href="/editdm/">TOP</a></li>
 <?php if(getSorC("usr")!="inhigh" && getSorC("usr")!="kansaifootball"){ ?>
     <?php if(getSorC("is_external")!=1){ ?>
@@ -10,6 +17,10 @@
     <?php if(getSorC("is_external")!=1){ ?>
         <li><a href="/editdm/photo/">フォトアルバム</a></li>
         <li><a href="/editdm/repo_n/?cid=10">カテゴリー</a></li>
+    <?php } ?>
+    <li><a href="/editdm/repo_n/?cid=16">選手</a></li>
+    <li><a href="/editdm/repo_n/?cid=18&rid=17">注目の選手</a></li>
+    <?php if(getSorC("is_external")!=1){ ?>
         <li><a href="/editdm/repo_s/?rid=2">メディア</a></li>
         <li><a href="/editdm/company_news/">プレスリリース</a></li>
         <li><a href="/editdm/repo_n/?cid=6">会員</a></li>
