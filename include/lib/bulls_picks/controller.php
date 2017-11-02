@@ -2,7 +2,10 @@
 
 if ($q->get_dir() === 1) { // 編集
 
-  if ($q->get_file() === 1) {
+  if ($q->get_file() === 0) {
+
+
+  } elseif ($q->get_file() === 1) {
     data_conf();
 
   } elseif ($q->get_file() === 2) {
