@@ -83,7 +83,50 @@ while($f=$o->fetch_array()){
     </select>
     </div>
 -->
-	<?php } ?>
+
+<?php } elseif ($_GET["cid"] == 94) { ?>
+  <?php // 選手一覧のパターン ?>
+  <li>並び替え：<select class="orderby_p">
+    <?php
+      $ob = array(array("sold", "　登録の昇順　"), array("snew", "　登録の降順　"));
+      $c = !isset($_COOKIE["orderby_p"]) ? "sold" : $_COOKIE["orderby_p"];
+
+      for ($i=0; $i<count($ob); $i++) {
+    ?>
+    <option value="<?= $ob[$i][0] ?>"<?= $c == $ob[$i][0] ? " selected=\"selected\"" : "" ?>><?= $ob[$i][1] ?></option>
+    <?php } ?>
+  </select>
+  　｜
+  </li>
+
+  <li>抽出：<select class="excategory_p">
+    <?php
+    	$c = !isset($_COOKIE["excategory_p"]) ? 0 : $_COOKIE["excategory_p"];
+		echo sprintf("<option value=\"\"%s>　すべてのカテゴリー</option>", $c==0 ? " selected=\"selected\"" : "");
+
+		// カテゴリー一覧を取得
+		$sql = "SELECT id, name, n FROM u_categories ORDER BY n";
+		$o->query($sql);
+
+		$o2 = new db;
+		while ($f=$o->fetch_array())
+		{
+			// カテゴリー毎に、選手テーブルに登録されているデータ件数を取得
+			$sql = "SELECT COUNT(id) AS num FROM tbl_player WHERE category LIKE '%" . $f["id"] . "%'";
+			$o2->query($sql);
+			$f2 = $o2->fetch_array();
+	?>
+			<option value="<?= $f["id"] ?>"<?= $c == $f["id"] ? " selected=\"selected\"" : "" ?>>　<?= $f["name"] ?>(<?= $f2["num"] ?>)</option>
+	<?php
+		}
+		unset($o2); ?>
+	<option value="a"<?= $c === "a" ? " selected=\"selected\"" : ""?>>　指定なし</option>
+
+
+  </select>
+  </li>
+
+  <?php } ?>
 <?php }elseif($CURRENTDIRECTORY=="repo_e"){ ?>
 
 	<?php if($N>0){ ?>
@@ -94,12 +137,12 @@ while($f=$o->fetch_array()){
     <select name="usrselection" onchange="chg_form(this.value)">
 	<option value="">他のページをテンプレートとしてブロックを作成する</option>
     <?php
-    
+
 		$SQL=sprintf("select id,title from repo_n where cid=%s and id!=%s and fulltext is not null order by n",$_GET["cid"],$_GET["nid"]);
 		$o->query($SQL);
-		
+
 		while($f=$o->fetch_array()){
-	
+
 	?>
     <option value="<?=$f["id"]?>"><?=mod_HTML($f["title"])?></option>
     <?php } ?>

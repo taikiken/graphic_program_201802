@@ -146,7 +146,7 @@ $articletable3="
 	m_time,
 	t8 as videocaption,
 	t9 
-from repo_n where flag=1 and id in(%s)%s%s%s) as t1
+from repo_n where flag=1 and id in(%s)%s%s) as t1
 
 left join (select 
 	id as userid,
@@ -878,9 +878,16 @@ function get_date($m){
 
 	$str=strtotime($m);
 	$now=strtotime(date("Y-m-d H:i:s"));
+	$one_yr_b4=strtotime(date("Y-m-d H:i:s",strtotime("-1 year")));
+
+  if ($str < $one_yr_b4) {
+  	$date = date("Y年m月d日 H時i分",$str);
+	} else {
+    $date = date("m月d日 H時i分",$str);
+  }
 
 	$t["relativetime"]=($now-$str)/60;
-	$t["date"]=date("m月d日 H時i分",$str);
+	$t["date"]=$date;
 	$t["isotime"]=str_replace(" ","T",date("Y-m-d H:i:s+0900",$str));
 	$t["weekday"]=date("w",$str);
 
@@ -1158,4 +1165,17 @@ function create_initialize_json($reload = false)
     }
     return json_decode($json, true);
 }
+
+function set_company_news_items($f){
+
+    $s["date"]=date("Y年m月d日",strtotime($f["published_at"]));
+    $s["title"]=$f["title"];
+    $s["url"]=$f["url"];
+
+    return $s;
+}
+
+
+
+
 ?>

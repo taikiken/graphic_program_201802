@@ -151,6 +151,7 @@ const dir = {
   infinite: null,
   mlb: null,
   popup: null,
+  draft: null,
 };
 
 dir.app = {
@@ -180,6 +181,16 @@ dir.popup = {
   docs: `${popup}/_docs`,
 };
 
+// babels - draft
+const draft = `${root}/babels-draft`;
+dir.draft = {
+  src: `${draft}/src`,
+  dependencies: `${draft}/dependencies`,
+  compile: `${draft}/01_compile`,
+  dist: `${draft}/02_dest`,
+  docs: `${draft}/_docs`,
+};
+
 // dist
 const sportsbull = '../../public';
 
@@ -189,6 +200,7 @@ dir.dist = {
     root: `${sportsbull}/assets`,
     mlb: `${sportsbull}/assets/mlb`,
     popup: `${sportsbull}/assets/popup`,
+    draft: `${sportsbull}/assets/draft`,
   },
   // app popup
 };

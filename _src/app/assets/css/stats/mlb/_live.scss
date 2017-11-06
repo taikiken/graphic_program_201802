@@ -292,6 +292,7 @@
     //.mlb_live__scoreboard__table
     &__table {
       width: 100%;
+      min-height: 136px;
     }
 
     th, td {
@@ -460,6 +461,7 @@
   //.mlb_live__reload
   &__reload {
     position: relative;
+    min-height: 45px;
     margin-top: 20px;
     // margin-right: perCalc(20, 750);
     // margin-left: perCalc(20, 750);

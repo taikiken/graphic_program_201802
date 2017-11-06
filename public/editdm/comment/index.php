@@ -59,7 +59,10 @@ cd="comment";
 <div id="pageDescription">
 <p>フォームで送信されたお問合せ一覧です。</p>
 </div><!-- End pageDescription -->
-
+  <div id="pageController">
+    <ul class="controllMenu clearfix">
+      <li class="ds"><a href="./search/">絞り込み検索</a></li>
+    </ul></div><!-- End pageController -->
 <table border="0" cellspacing="0" cellpadding="0" summary="一覧" class="listTable modform commenttable">
 <tbody>
 <tr>

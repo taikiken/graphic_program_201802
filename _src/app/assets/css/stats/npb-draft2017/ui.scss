@@ -1,0 +1,100 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "./asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss/style/reset";
+@import "../../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../../module/utility";
+@import "../../module/global";
+@import "../../module/general";
+@import "../../module/theme_dark";
+@import "../../layout";
+
+
+// print
+// @import "print";
+
+// common override
+.body-sec {
+  background: url("/assets/images/stats/npb-draft2017/contents-bg.png") 50% 0 no-repeat;
+
+  .main-sec {
+    width: 100%;
+    float: none;
+  }
+}
+
+.body-sec-inner {
+  background: none !important;
+}
+
+
+// bottom-bnr-list
+.bottom-bnr-list {
+  margin-top: 30px;
+
+  li {
+    margin-top: 20px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  a {
+    display: block;
+    text-align: center;
+  }
+}
+
+
+// draft-live-message
+.draft-live-message {
+  margin: 30px 30px 0;
+  padding: 25px 0;
+  border-top: 1px solid $color-white;
+  border-bottom: 1px solid $color-white;
+  color: $color-white;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+// -------------------------------------------------------------
+// players
+// -------------------------------------------------------------
+@import "players";
+
+
+// -------------------------------------------------------------
+// draft-header
+// -------------------------------------------------------------
+@import "draft-header";
+
+
+// -------------------------------------------------------------
+// draft-nav
+// -------------------------------------------------------------
+@import "draft-nav";
+
+
+// -------------------------------------------------------------
+// draft_live
+// -------------------------------------------------------------
+@import "draft_live";
+
+
+// -------------------------------------------------------------
+// draft_results
+// -------------------------------------------------------------
+@import "draft_results";
