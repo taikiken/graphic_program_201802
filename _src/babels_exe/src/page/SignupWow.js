@@ -18,28 +18,18 @@ const UT = self.UT;
 const Dom = UT.app.Dom;
 
 /**
- * <p>ユーザー登録, signup wizard</p>
+ * <p>ユーザー登録, signup-wow wizard</p>
  * 全て static です
+ * @since 2017-11-06
  */
-export class Signup {
-  // /**
-  //  * signup wizard (3 step) singleton class です
-  //  * @param {Symbol} target Singleton を実現するための private symbol
-  //  */
-  // constructor( target ) {
-  //   if ( _symbol !== target ) {
-  //
-  //     throw new Error( 'Signup is static Class. not use new Signup().' );
-  //
-  //   }
-  // }
+export default class SignupWow {
   /**
    * rendering 開始
    */
   static start():void {
-    let signupElement = Dom.signup();
+    const signupElement = Dom.signup();
     if ( signupElement !== null ) {
-      let signup = new UT.view.signup.SignupWizard( signupElement );
+      const signup = new UT.view.signup.SignupWizard( signupElement );
       signup.start();
     }
   }

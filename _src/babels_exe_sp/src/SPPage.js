@@ -35,6 +35,8 @@ import {SPSearchForm} from './header/SPSearchForm';
 import {SPCommentDelete} from './modal/SPCommentDelete';
 import {SPFlush} from './modal/SPFlush';
 
+import SPSignupWow from './page/SPSignupWow';
+
 // const _symbol = Symbol();
 
 let _scrolled = false;
@@ -140,6 +142,9 @@ export class SPPage {
 
     // area - from 2017-09-04
     router.on(Router.CATEGORY_AREA, SPPage.area);
+
+    // signup-wow from 2017-11-06
+    router.on(Router.SIGNUP_WOW, SPPage.signupWow);
 
     router.route();
 
@@ -311,6 +316,8 @@ export class SPPage {
     router.off( Router.NOT_FOUND, SPPage.notFound );
     // area - from 2017-09-04
     router.off(Router.CATEGORY_AREA, SPPage.area);
+    // signup-wow from 2017-11-06
+    router.off(Router.SIGNUP_WOW, SPPage.signupWow);
   }
   /**
    * 404 not found
@@ -470,6 +477,13 @@ export class SPPage {
    */
   static signup():void {
     SPSignup.start();
+  }
+  /**
+   * signup-wow page
+   * @since 2017-11-06
+   */
+  static signupWow() {
+    SPSignupWow.start();
   }
   /**
    * login page

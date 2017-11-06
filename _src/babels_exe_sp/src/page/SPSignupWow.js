@@ -18,10 +18,11 @@ const UT = self.UT;
 const Dom = UT.app.Dom;
 
 /**
- * <p>ユーザー登録, signup wizard</p>
+ * <p>signup-wow wizard</p>
  * 全て static です
+ * @since 2017-11-06
  */
-export class Signup {
+export default class SPSignupWow {
   // /**
   //  * signup wizard (3 step) singleton class です
   //  * @param {Symbol} target Singleton を実現するための private symbol
@@ -29,7 +30,7 @@ export class Signup {
   // constructor( target ) {
   //   if ( _symbol !== target ) {
   //
-  //     throw new Error( 'Signup is static Class. not use new Signup().' );
+  //     throw new Error( 'SPSignup is static Class. not use new SPSignup().' );
   //
   //   }
   // }
