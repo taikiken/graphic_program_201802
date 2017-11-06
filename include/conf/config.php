@@ -28,6 +28,7 @@ $FACEBOOK_ALLOWED=$s[6];
 $MCAPTION_ALLOWED=$s[7];
 $CONTENTS_ALLOWED=$s[8];
 $EXBRIGHTCOVE_ALLOWED=$s[9];
+$STREAMPACK_ALLOWED=$s[10];
 unset($s);
 
 //ウィジェット系ビデオかどうか判定

@@ -198,7 +198,7 @@
                 <!--  メインコンテンツ ---------------------------------------------------------->
                 <div class="player_profile">
                     <div class="img_area">
-                        <div class="img"><img src="/assets/img/pickup_<?php echo $page['player']->body->no?>.png" alt=""></div>
+                        <div class="img"><img src="/prg_img/img/<?php echo $page['player']->body->img?>" alt=""></div>
                         <div class="name_area">
                             <h2 class="name"><?php echo $page['player']->body->name?></h2>
                             <p class="genre"><?php echo $page['player']->body->competition?></p>

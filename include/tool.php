@@ -1,7 +1,7 @@
 <?php
 
 function makeContentsPreview($d){
-	
+
 	global $LANG;
 	if($d["types"]==0||$d["types"]==1||$d["types"]==5||$d["types"]==6){
 		for($i=0;$i<count($LANG);$i++){
@@ -72,7 +72,7 @@ function getLatLng($ad){
 	$fp=fopen($u,"r");
 	$flg=0;
 	while($f=fgets($fp,1024)){
-		$f=trim($f);	
+		$f=trim($f);
 		if(ereg("location",$f))$flg=1;
 		if($flg==1&&ereg("lat",$f))$k[$i][1]=str_replace(array('"lat" : ',","),"",$f);
 		if($flg==1&&ereg("lng",$f)){
@@ -83,22 +83,22 @@ function getLatLng($ad){
 }
 function getBill(){
 	global $o;
-	
+
 	if(strlen($_GET["qid"])>0)$cid=$_GET["qid"];
 	elseif(strlen($_GET["rid"])>0)$cid=$_GET["rid"];
 	else $cid=$_GET["cid"];
-	
+
 	$sql=sprintf("select bill from editor where directory='nid' and f_name='title' and cid=%s",$cid);
 	$o->query($sql);
 	$f=$o->fetch_array();
-	
+
 	return $f["bill"];
 }
 
 function makeTextfieldAddOption($a,$b,$c,$d,$e,$f,$g,$h,$x){
-	
+
 	global $o,$p;
-	
+
 	if($b==""){
 		$f_name=array($a);
 		$_OPTION=preg_match("/,/",$b)?explode(",",$b):array($b);
@@ -110,12 +110,12 @@ function makeTextfieldAddOption($a,$b,$c,$d,$e,$f,$g,$h,$x){
 		$SIZE=explode(",",$c);
 		$OP=array($d,$e,$f,$g,$x);
 	}
-	
+
 	//var_dump($OP);
-	
+
 	$pv=$h;
 	if(strlen($pv)>0)$pvl=strtoupper($pv);
-	
+
 	$l="";$ll="";$s="<ul class=\"m_%s%s\" style=\"display:none\">%s</ul>";
 	for($U=0;$U<count($SIZE);$U++){
 		$OPv=trim($OP[$U]);
@@ -129,7 +129,7 @@ function makeTextfieldAddOption($a,$b,$c,$d,$e,$f,$g,$h,$x){
 			}elseif(preg_match('/^select id,/',$OPv)){
 				unset($sa);
 				if(!preg_match("/{p_[0-9a-z]+}/",$OPv)){
-					
+
 					$o->query(str_replace("{LANG}",$h,$OPv));
 					while($f=$o->fetch_array()){
                         if(false === empty(getSorC('is_external')) && false === empty(getSorC('u_media'))) {
@@ -184,9 +184,14 @@ function makeTextfieldCell($a,$b,$c,$d,$e){
 		if(preg_match("/a1a2a3a4a5a6|a7a8a9a10a11a12/",$a)){
 			echo sprintf("<span class=\"btncurrenttime rollover %s\" id=\"%s\">現在の日時を設定</span><br class=\"cboth %s\">",$LANG[$i],$c[0],$LANG[$i]);
 		}elseif(preg_match("/d1d2/",$a)){
-			if($_GET["rid"]==7){
+			if($_GET["rid"]==7 || $_GET["rid"] == 95){
 				echo sprintf("<span class=\"btnpreview rollover %s\" id=\"%s\">確認</span><br class=\"cboth %s\">",$LANG[$i],$c[0],$LANG[$i]);
 			}
+		}
+		elseif (preg_match("/pcg[1-9]pid[1-9]/", $a))
+		{
+			// 記事に関連する選手確認
+			echo sprintf("<span class=\"btnplayerpreview rollover %s\" id=\"%s\">確認</span><br class=\"cboth %s\">", $LANG[$i], $c[0], $LANG[$i]);
 		}
 
 	}else{
@@ -236,12 +241,12 @@ function makeTextfieldConf($a,$b,$c,$d,$e,$f,$g,$h,$yz){
 		$_OPTION=explode(",",$b);
 		$SIZE=explode(",",$c);
 	}
-	
+
 	$SQLS=array($_OP01,$_OP02,$_OP03);
-	
+
 	echo sprintf("<tr class=\"%s\"><td class=\"confTitle\">%s</td><td class=\"confFields\">",$f,$g);
 	if($h==0){
-		
+
 		//if(preg_match("/fn0fn1/",$f))include "_map.php";
 		for($U=0;$U<count($f_name);$U++){
 			$s=$e[$d.$f_name[$U]];
@@ -249,7 +254,7 @@ function makeTextfieldConf($a,$b,$c,$d,$e,$f,$g,$h,$yz){
 			if(strlen($v)>0&&$q->dr==2&&preg_match("/^(d|m)/",$a)){
 				$v=setTextfieldMenuTitle($SQLS[$U],$v);
 				//$v=getPulldownValue($q->pdir,$v);
-			}			
+			}
 			echo sprintf("%s%s",$_OPTION[$U],strlen($v)>0?mod_HTML($v):"-");
 		}
 		if(count($_OPTION)>count($f_name))echo $_OPTION[$U];
@@ -288,7 +293,7 @@ function makeTextAreaCell($a,$b,$c,$d,$e,$f){
 }
 
 function makeTextAreaConf($a,$b,$c,$d,$e){
-	
+
 	global $LANG;
 	echo sprintf("<tr class=\"%s\"><td class=\"confTitle\"><div class=\"cms_widget\">%s</div></td><td class=\"confFields\">",$b,$a);
 	if($e==0){
@@ -400,10 +405,10 @@ function echoCommentGeneral($c,$f,$opt=0){
 	return mod_HTML(strlen($c)>0 ? $c : sprintf("%sを%sしてください。",$f,$option[$opt]));
 }
 function echoCellField($title,$contents,$comment="",$flag=1){
-	
+
 	$option[]=array($comment==""?" class=\"inputTitle\"":" rowspan=\"2\" class=\"inputTitle\""," class=\"confTitle\"");
 	$option[]=array(" class=\"inputFields\""," class=\"confFields\"");
-	
+
 	$l="<tr>";
 	$l.=sprintf("<td%s>%s</td>",$option[0][$flag],$title);
 	$l.=sprintf("<td%s>%s</td>",$option[1][$flag],$contents);
@@ -420,12 +425,12 @@ function echoPullMenu($f_name,$SIZE,$d_name,$op,$sv,$r,$op01="",$op02="",$op03="
 	for($i=0;$i<count($c);$i++){
 		$c[$i]=$c[$i].$langf;
 	}
-	
+
 	if(count($c)==1&&$sv[$r.$c[0]]==0){
 		return "その他";
 	}
-	
-	$s=mb_convert_kana($SIZE,"a");	
+
+	$s=mb_convert_kana($SIZE,"a");
 	ereg("select ([a-z0-9_]+),([a-z0-9_]+) from",$s,$t);
 	$op=trim($op);
 	if(strlen($op)>0&&!ereg("^and",$op)){
@@ -434,7 +439,7 @@ function echoPullMenu($f_name,$SIZE,$d_name,$op,$sv,$r,$op01="",$op02="",$op03="
 	}
 	$sql=$s." where %s in ('%s') ".$op;
 	$sql.=" order by n";
-	
+
 	for($i=0;$i<count($c);$i++){
 		if(strlen($sv[$r.$c[$i]])>0)$l[]=$sv[$r.$c[$i]];
 	}
@@ -452,14 +457,14 @@ function echoPullMenu($f_name,$SIZE,$d_name,$op,$sv,$r,$op01="",$op02="",$op03="
 function makePullMenus($f,$s,$d,$op,$sv,$r="p_",$v="",$op01="",$op02="",$op03="",$op04="",$op05="",$langf=""){
 
 	global $o;
-	
+
 	$c=explode(",",$f);
 	for($i=0;$i<count($c);$i++){
 		$c[$i]=$c[$i].$langf;
 	}
 	$s=mb_convert_kana($s,"a");
 	ereg("select ([a-z0-9_]+),([a-z0-9_]+) from",$s,$t);
-	
+
 	if($v=="")$v=" where flag=1 %s order by ".$t[2];
 	$q=$s.$v;
 	$op=trim($op);
@@ -468,9 +473,8 @@ function makePullMenus($f,$s,$d,$op,$sv,$r="p_",$v="",$op01="",$op02="",$op03=""
 		$op=sprintf(" and %s=%s",$op[0],$_GET[$op[1]]);
 	}
 	$q=sprintf($q,$op);
-	
-	
-	for($i=0;$i<count($c);$i++){	
+
+	for($i=0;$i<count($c);$i++){
 		$l.=sprintf("<label for=\"%s\" class=\"pulldownmenulabel\"><select name=\"p_%s\"%s%s>",$c[$i],$c[$i],$op01!="" ?  sprintf(" size=\"%s\"",$op01):"",$op01!=1?" class=\"p\"":"");
 		$l.="<option value=\"\">---選択しない---</option>";
 		$o->query($q);
@@ -482,25 +486,25 @@ function makePullMenus($f,$s,$d,$op,$sv,$r="p_",$v="",$op01="",$op02="",$op03=""
 	}
 	//if($op03==1)$l.=sprintf("<input type=\"text\" size=\"30\" >");
 	if(strlen($op03)>0)$l.=sprintf("<script type=\"text/javascript\">%s</script>",$op03);
-	
+
 	return $l;
 }
 
 function conffieldStyleOutput(){
-	
+
 	global $CSSFILE0;
 	$flg=0;
 	$l="";
-	
+
 	$fp=fopen($CSSFILE0,"r");
 	while($f=fgets($fp,1024)){
 		if(gettype(strpos($f,"DescriptionExtendsClassStart"))=="integer")$flg=1;
 		if($flg==1)$l.=$f;
 		if($flg==1&&gettype(strpos($f,"DescriptionExtendsClassEnd"))=="integer")break;
 	}
-	
+
 	$l=str_replace(".contentsEditor .description","table.listTable td.confFields",$l);
-	
+
 	echo $l;
 }
 function echoBlockContents($s,$l,$h=""){
@@ -535,7 +539,7 @@ function echoBlockContents2($s){
 
 function echoBlockContents4($s){
 	global $contentsEditorTypes;
-	
+
 	$k[]="<option value=\"\"></option>";
 	for($i=0;$i<count($s);$i++){
 		$sld=($s[$i]["id"]==$_GET["nid"])?sprintf("value=\"\" selected=\"selected\""):sprintf("value=\"%s\"",$s[$i]["id"]);
@@ -584,14 +588,14 @@ function get_youtubeimg($y){
   $youtubeimg[]=sprintf("http://i.ytimg.com/vi/%s/maxresdefault.jpg",$y);
   $youtubeimg[]=sprintf("http://i.ytimg.com/vi/%s/sddefault.jpg",$y);
   $youtubeimg[]=sprintf("http://i.ytimg.com/vi/%s/mqdefault.jpg",$y);
-  
+
   for($i=0;$i<count($youtubeimg);$i++){
 	  $img=$youtubeimg[$i];
 	  $size=getimagesize($img);
 	  if($size[0]){
 		  return $img;
 	  }
-  }	
+  }
 }
 
 function makeComment($s,$m,$c){
@@ -638,12 +642,12 @@ function makeDefaultImg($filename,$type){
 		return imagecreatefrompng($filename);
 	}elseif($type=="gif"){
 		return imagecreatefromgif($filename);
-	}	
+	}
 }
 function outputImg($res,$filename,$type){
-	
+
 	global $domain;
-	
+
 	if($type=="jpg"){
 		$e=imagejpeg($res,$filename,75);
 	}elseif($type=="gif"){
@@ -657,11 +661,11 @@ function outputImg($res,$filename,$type){
 	}else{
 		echo "画像の出力に失敗しました。もう一度アップロードしてください。";
 	}
-	
+
 	if(preg_match("/prg_img/",$filename)){
 		s3upload($filename,str_replace("../../../prg_img/","",$filename));
 	}
-	
+
 	return $e;
 }
 function imgFileMove($p,$filename){
@@ -687,9 +691,9 @@ function chk_img($p,$SIZE="",$copy="",$oi="",$df=""){
 	global $RAWIMG;
 	global $_OPTION;
 	global $domain;
-	
+
 	$imgSubstance=imgInitialize($_OPTION,$SIZE);
-	
+
 	if($df!=""){
 		return false;
 	}
@@ -703,18 +707,18 @@ function chk_img($p,$SIZE="",$copy="",$oi="",$df=""){
 	}
 	ereg(".([0-9]+) ",microtime(),$m);
 	if(!preg_match("#^http#",$p["tmp_name"])){
-		
+
 		if(!imgFileMove($p,$filename=sprintf("img%s%s.%s",date("YmdHis"),$m[1],$type))){
 			echo "画像のアップロードに失敗しました。もう一度アップロードしてください。";
 			return false;
 		}
 	}else{
-		
+
 		$size=getimagesize($p["tmp_name"]);
 		$img=get_contents($p["tmp_name"]);
 		$filename=sprintf("img%s%s.%s",date("YmdHis"),$m[1],$type);
 		file_put_contents($TMPPATH.$filename,$img);
-		
+
 		if($size>728){
 			imgResize($TMPPATH.$filename,$RAWIMG.$filename,728,$p="jpg","","","","");
 		}else{
@@ -729,7 +733,7 @@ function chk_img($p,$SIZE="",$copy="",$oi="",$df=""){
 			return false;
 		}
 	}
-	
+
 	if($type=="swf"){
 		if($size[0]<$SIZE){
 			return $filename;
@@ -738,7 +742,7 @@ function chk_img($p,$SIZE="",$copy="",$oi="",$df=""){
 			return false;
 		}
 	}
-	
+
 	outputs($imgSubstance,$filename,$type,$size,$copy);
 	return $filename;
 }
@@ -748,22 +752,63 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 	global $IMG;
 	global $RAWIMG;
 	global $domain;
-		
+
 	if(strlen($type)==0)$type=substr($filename,-3,3);
 	if(strlen($size)==0)$size=getimagesize($RAWIMG.$filename);
 
 	for($i=0;$i<count($imgSubstance);$i++){
 		if($type!="gif"){
 			if($imgSubstance[$i]["w"]!=""&&$imgSubstance[$i]["h"]!=""){
-				if($imgSubstance[$i]["w"]<$size[0]){
-					imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
-				}else{
-					if($i==0){
-						copy($RAWIMG.$filename,$IMG[$i].$filename);
-						s3upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
-						//imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
-					}else{
+				// アップロード画像の縦横サイズ判定（選手情報登録のみ）
+				if ($i == 0 && $size[0] != $size[1] && $_GET["cid"] == 94) {
+					// アップロード画像のサイズ調整
+					$size_w = 0;
+					$size_h = 0;
+					if ($size[0] < $size[1]) {
+						// 縦（高さ）に合わせる
+						$size_w = $size[1];
+						$size_h = $size[1];
+					}
+					else {
+						// 横（幅）に合わせる
+						$size_w = $size[0];
+						$size_h = $size[0];
+					}
+
+					// アップロード画像の縦横サイズを同一にリサイズ
+					imgDresize($RAWIMG.$filename,
+							   $IMG[$i].$filename,
+							   array($size_w,
+									 $size_h),
+							   $type,
+							   $imgSubstance[$i]["c"],
+							   $copy,
+							   $imgSubstance[$i]["i"],
+							   $imgSubstance[$i]["p"]);
+
+					// 指定サイズにリサイズ
+					imgDresize($IMG[$i].$filename,
+							   $IMG[$i].$filename,
+							   array($imgSubstance[$i]["w"],
+									 $imgSubstance[$i]["h"]),
+							   $type,
+							   $imgSubstance[$i]["c"],
+							   $copy,
+							   $imgSubstance[$i]["i"],
+							   $imgSubstance[$i]["p"]);
+
+				}
+				else {
+					if($imgSubstance[$i]["w"]<$size[0]){
 						imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
+					}else{
+						if($i==0){
+							copy($RAWIMG.$filename,$IMG[$i].$filename);
+							s3upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
+							//imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
+						}else{
+							imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
+						}
 					}
 				}
 			}elseif($imgSubstance[$i]["w"]!=""){
@@ -820,8 +865,8 @@ function imageflips($image, $mode){
     $src_y = 0;
     $src_w = $dst_w;
     $src_h = $dst_h;
-    $dst_image = imagecreatetruecolor($dst_w, $dst_h);    
-    
+    $dst_image = imagecreatetruecolor($dst_w, $dst_h);
+
     switch($mode)
     {
         case 'IMG_FLIP_HORIZONTAL': // 垂直方向
@@ -853,7 +898,7 @@ function imageRotation($file_name,$orientation){
 
     $degrees = 0;
     $mode = '';
-  
+
     switch($orientation) {
         case 1: // 通常
             break;
@@ -888,12 +933,12 @@ function imageRotation($file_name,$orientation){
         $im = imagerotate($im, $degrees, 0);
     }
     imagejpeg($im,$file_name);
-    imagedestroy($im);    
+    imagedestroy($im);
 }
 
 function get_orientation($exif){
-	foreach ($exif as $key => $section) { 
-		foreach ($section as $name => $value) { 
+	foreach ($exif as $key => $section) {
+		foreach ($section as $name => $value) {
 			if($name=="Orientation"){
 				return $value;
 			}
@@ -910,7 +955,7 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg",$copytype,$copy,$iconNo,$
 	if($p=="jpg"&&$orientation!=0){
 		imageRotation($img_name,$orientation);
 	}
-	
+
 	$size=getimagesize($img_name);
 	if($re_size[0]==$size[0]&&$re_size[1]==$size[1]){
 		copy($img_name,$n_Img);
@@ -948,7 +993,7 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg",$copytype,$copy,$iconNo,$
 			$y=ceil(($size[1]-$re_size[1])/2);
 			$resize=array($size[0],$size[1]);
 		}
-		
+
 		$newImg=imagecreatetruecolor($re_size[0],$re_size[1]);
 		if($p=="png"){
 			imagealphablending($newImg,false);
@@ -1007,10 +1052,10 @@ function embedIcon($img,$size,$no,$pos){
 }
 
 function embedCopy($img,$height,$copytype,$copy){
-	
+
 	if(strlen($copy)==0)return false;
 	if($copytype!=1)return false;
-	
+
 	global $FONT;
 
 	$f_size=8;
@@ -1043,7 +1088,7 @@ function embedCopy($img,$height,$copytype,$copy){
 }
 
 function imgInCopy($img_name,$p,$copytype,$copy){
-	
+
 	if(strlen($copy)==0)return false;
 	$re_size=getimagesize($img_name);
 	$newImg=imagecreatetruecolor($re_size[0],$re_size[1]);
@@ -1069,7 +1114,7 @@ function colorPicker($img,$y){
 		$rgb[]=imagecolorat($img,$i,$point-8);
 		$rgb[]=imagecolorat($img,$i,$point-9);
 	}
-	
+
 	$wh=0;$bl=0;
 	for($i=0;$i<count($rgb);$i++){
 		$r=($rgb[$i]>>16)&0xFF;
