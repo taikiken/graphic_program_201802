@@ -100,9 +100,7 @@ if($q->get_dir()==3){
           <div class="card bg-light mb-3">
             <div class="card-header">picks.xml</div>
             <div class="card-body">
-              <pre class="card-text">
-                <code id="showxml" class="language-html" data-lang="html"></code>
-              </pre>
+              <pre class="card-text"><code id="showxml" class="language-html" data-lang="html"></code></pre>
             </div>
           </div>
         </div>
