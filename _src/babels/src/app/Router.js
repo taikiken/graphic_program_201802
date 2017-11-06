@@ -147,6 +147,14 @@ export class Router extends EventDispatcher {
     return 'routeSignupInterest';
   }
   /**
+   * event type SIGNUP_WOW
+   * @returns {string} routerSignupWow
+   * @since 2017-11-06
+   */
+  static get SIGNUP_WOW() {
+    return 'routerSignupWow';
+  }
+  /**
    * event type LOGIN
    * @return {string} LOGIN を返します
    */
@@ -296,6 +304,9 @@ export class Router extends EventDispatcher {
       // '/notifications': this.notifications,
       '/settings/': this.settings,
       // '/settings': this.settings,
+      // @see https://cloudpack.slack.com/archives/D7URD0FH7/p1509944048000078
+      // @since 2017-11-06
+      '/signup-wow/': this.signupWow()
     };
     // -------------
     return this;
@@ -642,6 +653,13 @@ export class Router extends EventDispatcher {
     // 1 page コンテンツ
     this.dispatch( { type: Router.SIGNUP } );
 
+  }
+  /**
+   * signup-wow
+   * @since 2017-11-06
+   */
+  signupWow() {
+    this.dispatch( { type: Router.SIGNUP_WOW } );
   }
   /**
    * signup_login URL
