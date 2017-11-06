@@ -673,6 +673,8 @@ function data_sql($q="^p_"){
 				$v=str_replace('\\','\\\\',$v);
 				$v=html_entity_decode($v);
 				$v=sprintf("'%s'",$v);
+			}elseif(is_array ($v)){
+				$v = json_encode($v);
 			}else{
 				$v="null";
 			}

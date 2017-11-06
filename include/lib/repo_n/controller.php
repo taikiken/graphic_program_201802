@@ -113,6 +113,25 @@ if($q->get_dir()===0){
 		$o->query($sql);
 		$p=$o->fetch_array();
 
+		//カテゴリー
+		if($g->f("cid") == 10){
+			//webviewをjson_decode & 整形
+			$webview_keys = [
+				'webview-desktop',
+				'webview-mobile',
+				'webview-ios',
+				'webview-android'
+			];
+			$webview = json_decode($p['webview'], true);
+			foreach($webview_keys as $key){
+				$json_key = str_replace('webview-', '', $key);
+				if($p['webview'] !== null){
+					$p[] = empty($webview[$json_key]) ? null : implode(',', $webview[$json_key]);
+					$p[$key] = empty($webview[$json_key]) ? null : implode(',', $webview[$json_key]);
+				}
+			}
+		}
+
 		if($TABLE=="repo_n"){
 			$sql=sprintf("select title,link,(n+1) as n from u_link where pid=%s order by n",$g->f("nid"));
 			$o->query($sql);
@@ -147,6 +166,30 @@ if($q->get_dir()===0){
 		data_sql();
 
 		$sv[$sn[]="u_time"]="now()";
+
+		//カテゴリー データ整形
+		if($g->f("cid") == 10){
+			//webviewを１つにまとめてjsonencodeする
+			$webview_keys = [
+				'webview-desktop',
+				'webview-mobile',
+				'webview-ios',
+				'webview-android'
+			];
+			$webview = [];
+			$sn_temp = $sn;
+			foreach($sn_temp as $sn_index => $sn_value){
+				if(in_array($sn_value, $webview_keys)){
+					//"webview-"を取り除いてセット 値はすでにencodeされているので一度decodeする
+					$webview[str_replace('webview-', '', $sn_value)] = json_decode($sv[$sn_value]);
+					unset($sn[$sn_index]);
+					unset($sv[$sn_value]);
+				}
+			}
+			//連番振り直し
+			$sn = array_merge($sn);
+			$sv[$sn[]='webview'] = "'".json_encode($webview)."'";
+		}
 
 		$o=new dbutl($TABLE,$sn,$sv);
 		$e=$o->update($g->f("nid"));
