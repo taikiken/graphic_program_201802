@@ -81,4 +81,7 @@ include $INCLUDEPATH."conf/configExtend.php";
 // bull's pick のファイル名
 $PICKS_FILENAME = 'xml/picks.xml';
 $TMP_PICKS = '/tmp/picks.xml';
+$GET_TMP_PICKS_API = '/api/bulls_picks/get/picks.xml.php';
+$POST_TMP_PICKS_API = '/api/bulls_picks/post/picks.xml.php';
+
 ?>

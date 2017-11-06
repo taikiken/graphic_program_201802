@@ -91,14 +91,6 @@ if($q->get_dir()==3){
           <table border="0" cellspacing="0" cellpadding="0" summary="<?=$THIS?><?=($q->get_dir()===3)?"一覧":sprintf("%s項目",$q->exe_fl())?>" class="listTable">
             <tbody>
             <!-- フォーム -->
-            <tr class="date"><td class="inputTitle">日付</td><td class="inputFields">
-                <div class="clearfix  fl langs">変更前: 11/02<BR>
-                  <input type="text" style="width:210px;" name="p_date" value="" class="in q0" id="ooo">
-                </div>
-              </td>
-            </tr><tr>
-              <th colspan="2" class="inputHeader" scope="row">記事1</th>
-            </tr>
             <?php include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/ex.php"; ?>
             <!-- End フォーム -->
             </tbody>
@@ -127,8 +119,9 @@ if($q->get_dir()==3){
 <div class="optionselbg"></div>
 
 <?php
-$S3Module = new S3Module;
-$url = $S3Module->getUrl($PICKS_FILENAME);
+//$S3Module = new S3Module;
+//$url = $S3Module->getUrl($PICKS_FILENAME);
+$url = $GET_TMP_PICKS_API;
 ?>
 <script type="text/javascript">
     var url = "<?=$url?>";
@@ -150,9 +143,13 @@ $url = $S3Module->getUrl($PICKS_FILENAME);
                 alart('error');
             },
             success: function (data) {
-                var s = new XMLSerializer();
-                var xml = s.serializeToString(data);
-                $('<div/>').text(xml).appendTo('#showxml'); // escape tags.
+                // s3上のxml
+//                var s = new XMLSerializer();
+//                var xml = s.serializeToString(data);
+//                $('<div/>').text(xml).appendTo('#showxml'); // escape tags.
+
+                // ローカル上のxml
+                $('<div/>').text(data).appendTo('#showxml'); // escape tags.
             }
         });
     }
