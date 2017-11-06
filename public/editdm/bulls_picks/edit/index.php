@@ -118,15 +118,16 @@ if($q->get_dir()==3){
 
 <?php
 //$S3Module = new S3Module;
-//$url = $S3Module->getUrl($PICKS_FILENAME);
-$url = $GET_TMP_PICKS_API;
+//$get_api = $S3Module->getUrl($PICKS_FILENAME);
 ?>
 <script type="text/javascript">
-    var url = "<?=$url?>";
-    getXml(url); //初回
+    var get_api = "<?=$GET_PICKS_API?>";
+    var get_tmp_api = "<?=$GET_TMP_PICKS_API?>";
+    var post_api = "<?=$POST_TMP_PICKS_API?>";
+    getXml(get_api); //初回はs3から
 
     $('.in').change(function () {
-        getXml(url);
+        postXml(post_api, get_tmp_api);
     });
 
     function getXml(url) {
@@ -137,9 +138,6 @@ $url = $GET_TMP_PICKS_API;
             type: 'GET',
             dateType: 'xml',
             timeout: 1000,
-            error: function () {
-                alart('error');
-            },
             success: function (data) {
                 // s3上のxml
 //                var s = new XMLSerializer();
@@ -148,7 +146,29 @@ $url = $GET_TMP_PICKS_API;
 
                 // ローカル上のxml
                 $('<div/>').text(data).appendTo('#showxml'); // escape tags.
+            },
+            error: function () {
+                alart('error');
             }
+        });
+    }
+
+    function postXml(post_api, get_tmp_api) {
+        var data = $('form').serializeArray();
+
+        $.ajax({
+            url: post_api,
+            type: 'POST',
+            cache: false,
+            data: data,
+        }).done(function(){
+            getXml(get_tmp_api); // post後の内容をgetしたい
+
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            console.log('fail');
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
         });
     }
 

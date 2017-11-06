@@ -1,10 +1,4 @@
 <?php
-/*
-
-# big6tv - 順位表
-
-
-*/
 
 date_default_timezone_set('Asia/Tokyo');
 setlocale(LC_ALL, 'ja_JP.UTF-8');
