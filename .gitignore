@@ -93,6 +93,8 @@ public/assets/js/
 public/assets/sp/
 # 2016-09-06 added
 public/about/*
+# since 2017-11-06 - company CMS に伴い index.html を ignore から外し削除する
+!public/about/comapny/index.html
 # 2017-05-17 added
 public/wbc/_index_archive.html
 
