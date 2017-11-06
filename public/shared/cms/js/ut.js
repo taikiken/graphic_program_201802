@@ -56,7 +56,6 @@ function selectedmedia(id){
 			//$(".body .inputFields").html(sprintf("<a href=\"/editdm/repo_e/?nid=%s&cid=1\" style=\"line-height:3em;\">本文はこちらのリンクもしくは一覧のページ管理より行ってください。</a>",l[1]));
 		}
 	}
-*/
 }
 
 function relatedlink(f){
