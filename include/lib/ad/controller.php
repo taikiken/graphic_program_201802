@@ -4,7 +4,7 @@ $TABLE="advertise";
 
 if($_GET["rid"]==2){
 	$a[]=array("head","システム設定");
-	$a[]=array("inputcheckbox","CMS管理項目オプション","cmdtypes",array("速報・紙面記事形式","関連リンク","サマリー","元記事URL","MP4動画","Youtube","Facebook","動画キャプション","コンテンツ仕様選択","外部Brightcove RefID"),"","","","");
+	$a[]=array("inputcheckbox","CMS管理項目オプション","cmdtypes",array("速報・紙面記事形式","関連リンク","サマリー","元記事URL","MP4動画","Youtube","Facebook","動画キャプション","コンテンツ仕様選択","外部Brightcove RefID","streampack"),"","","","");
 	$a[]=array("inputradio","続きを読むリンク先","readmore",array("運動通信Web View","媒体指定URL"),"","","","");
 	$a[]=array("inputradio","Canonical","canonical",array("運動通信URL","媒体指定URL"),"","","","");
 	$a[]=array("textfield","出力バケット名","bucket","20","","","");

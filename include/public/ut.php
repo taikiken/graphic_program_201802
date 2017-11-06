@@ -24,6 +24,7 @@ $articletable="
 	m2,
 	t10,t11,t12,t13,t14,t15,
 	a1,a2,a3,a4,a5,a6,
+	streampack,
 	swf as video,
 	youtube,
 	facebook,
@@ -80,6 +81,7 @@ $articletable2="
 	m2,
 	t10,t11,t12,t13,t14,t15,
 	a1,a2,a3,a4,a5,a6,
+	streampack,
 	swf as video,
 	youtube,
 	facebook,
@@ -136,6 +138,7 @@ $articletable3="
 	m2,
 	t10,t11,t12,t13,t14,t15,
 	a1,a2,a3,a4,a5,a6,
+	streampack,
 	swf as video,
 	youtube,
 	facebook,
@@ -461,13 +464,15 @@ function set_categoryinfo($f,$personalized="",$longtitle=1){
 }
 
 function urlmodify($body){
-
+	
+	global $ImgPath;
+	
 	/*
 	すでに登録されている記事の画像パスを運動通信からSPORTS BULLに変換
 	*/
 
 	$body=str_replace("https://www.undotsushin.com/prg_img/","https://img.sportsbull.jp/",$body);
-	$body=str_replace("/prg_img/","https://img.sportsbull.jp/",$body);
+	$body=str_replace("/prg_img",$ImgPath,$body);
 	return $body;
 }
 
@@ -479,7 +484,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 
 	global $ImgPath,$domain,$ad,$mediaoption,$videopath,$apidetails,$staticfilepath;
 
-	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
+	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"],$f["streampack"]);
 	$datetime=get_date(sprintf("%s-%s-%s %s:%s:%s",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["a6"]));
 
 	$body=$f["body"];
@@ -572,10 +577,16 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	$s["media"]["video"]["url"]["sd"]=strlen($f["video"])>0?sprintf("%s/%s/%s/sd/%s.m3u8",str_replace("video",$mediaoption[$f["d2"]]["geoblock"]==0?"video":"video-jp",$videopath),$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
 	$s["media"]["video"]["url"]["hd"]=strlen($f["video"])>0?sprintf("%s/%s/%s/hd/%s.m3u8",str_replace("video",$mediaoption[$f["d2"]]["geoblock"]==0?"video":"video-jp",$videopath),$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
 
+	//streampackのURLが指定されていればS3のHLSのURLを上書きする
+	if(strlen($f["streampack"])>0){
+		$s["media"]["video"]["url"]["sd"]=$f["streampack"];
+		$s["media"]["video"]["url"]["hd"]=$f["streampack"];
+	}
+
 	$s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
 	
 	//2017.10.17 - アプリでHLS動画が再生できない問題を臨時対応
-	if(strlen($f["video"])>0&&strlen($f["youtube"])==0){
+	if(strlen($s["media"]["video"]["url"]["sd"])>0&&strlen($f["youtube"])==0){
 		$s["media"]["video"]["youtube"]=$s["media"]["video"]["url"]["sd"];
 	}
 	
@@ -1031,7 +1042,8 @@ function check_passwd($passwd){
 }
 
 function get_videotype($v1,$v2,$v3,$v4){
-	if(strlen($v1)>0)$s="brightcove";
+	if(strlen($v4)>0)$s="brightcove";
+	elseif(strlen($v1)>0)$s="brightcove";
 	elseif(strlen($v2)>0)$s="youtube";
 	elseif(strlen($v3)>0)$s="facebook";
 	else $s="";
