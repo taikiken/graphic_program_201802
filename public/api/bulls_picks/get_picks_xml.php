@@ -15,6 +15,7 @@ $url = $S3Module->getUrl($PICKS_FILENAME);
 $picks_xml = simplexml_load_file($url);
 $picks_xml->asXML($TMP_PICKS);
 
+header("Content-Type: application/xml; charset=UTF-8");
 $res = file_get_contents($TMP_PICKS);
 
 // print

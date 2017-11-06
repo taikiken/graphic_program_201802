@@ -98,7 +98,7 @@ if($q->get_dir()==3){
         </div>
         <div class="col-sm-6">
           <div class="card bg-light mb-3">
-            <div class="card-header">picks.xml</div>
+            <div class="card-header">プレビュー</div>
             <div class="card-body">
               <pre class="card-text"><code id="showxml" class="language-html" data-lang="html"></code></pre>
             </div>
@@ -131,7 +131,7 @@ if($q->get_dir()==3){
     });
 
     function getXml(url) {
-        $('#showxml').empty(); //
+        $('#showxml').empty(); // 初期化
 
         $.ajax({
             url: url,
@@ -139,13 +139,8 @@ if($q->get_dir()==3){
             dateType: 'xml',
             timeout: 1000,
             success: function (data) {
-                // s3上のxml
-//                var s = new XMLSerializer();
-//                var xml = s.serializeToString(data);
-//                $('<div/>').text(xml).appendTo('#showxml'); // escape tags.
+                setValueField(data);
 
-                // ローカル上のxml
-                $('<div/>').text(data).appendTo('#showxml'); // escape tags.
             },
             error: function () {
                 alart('error');
@@ -165,11 +160,18 @@ if($q->get_dir()==3){
             getXml(get_tmp_api); // post後の内容をgetしたい
 
         }).fail(function(jqXHR, textStatus, errorThrown){
-            console.log('fail');
+            console.log('failed');
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
         });
+    }
+
+    function setValueField(data) {
+        var s = new XMLSerializer();
+        var xml = s.serializeToString(data);
+
+        $('#showxml').text(xml);
     }
 
 
