@@ -117,8 +117,8 @@ if($q->get_dir()===0){
 		if($g->f("cid") == 10){
 			//webviewをjson_decode & 整形
 			$webview_keys = [
-				'webview-desktop',
-				'webview-mobile',
+				'webview-pc',
+				'webview-sp',
 				'webview-ios',
 				'webview-android'
 			];
@@ -171,8 +171,8 @@ if($q->get_dir()===0){
 		if($g->f("cid") == 10){
 			//webviewを１つにまとめてjsonencodeする
 			$webview_keys = [
-				'webview-desktop',
-				'webview-mobile',
+				'webview-pc',
+				'webview-sp',
 				'webview-ios',
 				'webview-android'
 			];

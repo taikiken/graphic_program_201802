@@ -29,6 +29,7 @@ include $INCLUDEPATH."_layout_template.php";
 		border-radius: 4px;
 		cursor: pointer;
 		transition: 0s background-color;
+		background-color: #FFF;
 	}
 	span.btn.disable{
 		border: solid 1px #eee;
