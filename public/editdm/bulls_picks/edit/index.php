@@ -54,6 +54,8 @@ if($q->get_dir()==3){
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
       $( function() {
+          $( "#datepicker" ).datepicker();
+          $( "#datepicker" ).datepicker( "setDate", "<?php echo $date ?>/<?php echo date('Y')?>" );
           $( "#datepicker" ).datepicker( "option", "dateFormat", "mm/dd" );
       } );
   </script>
