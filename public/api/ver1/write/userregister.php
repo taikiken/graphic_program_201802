@@ -2,7 +2,6 @@
 
 include "local.php";
 include "tool.php";
-include "aws.php";
 include "public/check.php";
 
 $o=new db;
