@@ -1,27 +1,4 @@
 <?php
-// s3ファイルを表示
-$S3Module = new S3Module;
-$url = $S3Module->getUrl($PICKS_FILENAME);
-
-$picks_xml = simplexml_load_file($url);
-$picks_xml = $picks_xml->xpath('/date')[0];
-
-$date = (string)$picks_xml->articles->attributes()->date;
-
-$ids = [];
-$comments = [];
-
-$article_count = 0; // コメント配列管理用
-foreach ($picks_xml->articles->article as $article) {
-  $ids[] = (string)$article->id;
-
-  foreach ($article->comments as $value) {
-    foreach ($value as $comment) {
-      $comments[$article_count][] = (string)$comment;
-    }
-  }
-  $article_count ++;
-}
 
 $a[] = array("textfield", "日付", "date", "30", "", "", $BILLINGUAL);
 

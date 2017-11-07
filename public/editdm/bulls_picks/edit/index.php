@@ -91,7 +91,48 @@ if($q->get_dir()==3){
           <table border="0" cellspacing="0" cellpadding="0" summary="<?=$THIS?><?=($q->get_dir()===3)?"一覧":sprintf("%s項目",$q->exe_fl())?>" class="listTable">
             <tbody>
             <!-- フォーム -->
-            <?php include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/ex.php"; ?>
+
+            <tr class="date">
+              <td class="inputTitle">日付</td>
+              <td class="inputFields">
+                <div class="clearfix  fl langs">
+                  <input type="text" style="width:210px;" name="p_date"
+                                                       value="<?php echo $date; ?>" class="in q0"></div>
+              </td>
+            </tr>
+            <?php
+            for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
+              $view_id_count = $articles_itr + 1;
+              echo <<<EOT
+<tr>
+  <th colspan="2" class="inputHeader" scope="row">記事{$view_id_count}</th>
+</tr>
+EOT;
+
+              echo <<<EOT
+<tr class="id{$articles_itr}">
+  <td class="inputTitle">記事ID</td>
+  <td class="inputFields">
+    <div class="clearfix  fl langs">
+    <input type="text" style="width:210px;" name="p_id{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0"></div>
+  </td>
+</tr>
+EOT;
+
+              for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
+                $view_comment_count = $comment_itr + 1;
+                echo <<<EOT
+<tr class="comment00">
+  <td class="inputTitle">コメント{$view_comment_count}</td>
+  <td class="inputFields">
+    <div class="clearfix  fl langs"><input type="text" style="width:420px;" name="p_comment{$articles_itr}{$comment_itr}" value="{$comments[$articles_itr][$comment_itr]}" class="in q0"></div>
+  </td>
+</tr>
+EOT;
+                
+              }
+            }
+            ?>
             <!-- End フォーム -->
             </tbody>
           </table>
@@ -139,7 +180,10 @@ if($q->get_dir()==3){
             dateType: 'xml',
             timeout: 1000,
             success: function (data) {
-                setValueField(data);
+//                var s = new XMLSerializer();
+//                var xml = s.serializeToString(data);
+//                $('#showxml').text(xml);
+                $('#showxml').text(data);
 
             },
             error: function () {
@@ -167,12 +211,6 @@ if($q->get_dir()==3){
         });
     }
 
-    function setValueField(data) {
-        var s = new XMLSerializer();
-        var xml = s.serializeToString(data);
-
-        $('#showxml').text(xml);
-    }
 
 
 </script>

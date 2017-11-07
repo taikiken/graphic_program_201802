@@ -10,7 +10,6 @@ include_once __DIR__."/../../../app/helpers/env.helper.php";
 // run
 // ==============================
 
-header("Content-Type: application/xml; charset=UTF-8");
 $res = file_get_contents($TMP_PICKS);
 
 // print

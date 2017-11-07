@@ -4,6 +4,28 @@ if ($q->get_dir() === 1) { // 編集
 
   if ($q->get_file() === 0) {
 
+    //初期値はs3ファイルの値
+    $S3Module = new S3Module;
+    $url = $S3Module->getUrl($PICKS_FILENAME);
+
+    $picks_xml = simplexml_load_file($url);
+    $picks_xml = $picks_xml->xpath('/date')[0];
+
+    $date = (string)$picks_xml->articles->attributes()->date;
+    $ids = [];
+    $comments = [];
+
+    $article_count = 0; // コメント配列管理用
+    foreach ($picks_xml->articles->article as $article) {
+      $ids[] = (string)$article->id;
+
+      foreach ($article->comments as $value) {
+        foreach ($value as $comment) {
+          $comments[$article_count][] = (string)$comment;
+        }
+      }
+      $article_count ++;
+    }
 
   } elseif ($q->get_file() === 1) {
     data_conf();
@@ -32,21 +54,25 @@ if ($q->get_dir() === 1) { // 編集
 
     $articles = $date->appendChild($dom->createElement('articles'));
     $articles_date = $dom->createAttribute('date');
-    $articles_date->value = $_POST['p_date'];
+    $articles_date->value = !empty($_POST['p_date']) ? $_POST['p_date'] : '-';
     $articles->appendChild($articles_date);
 
     for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
+      $post_id = !empty($_POST['p_id' . $articles_itr]) ? $_POST['p_id' . $articles_itr] : 0;
+
       $article = $articles->appendChild($dom->createElement('article'));
       $id = $article->appendChild($dom->createElement('id'));
       $id->appendChild(
-        $dom->createTextNode($_POST['p_id' . $articles_itr])
+        $dom->createTextNode($post_id)
       );
 
       $comments = $article->appendChild($dom->createElement('comments'));
       for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
+        $post_comment = !empty($_POST['p_comment' . $articles_itr . $comment_itr]) ? $_POST['p_comment' . $articles_itr . $comment_itr] : '-';
+
         $comment = $comments->appendChild($dom->createElement('comment'));
         $comment->appendChild(
-          $dom->createTextNode($_POST['p_comment' . $articles_itr . $comment_itr])
+          $dom->createTextNode($post_comment)
         );
       }
     }
