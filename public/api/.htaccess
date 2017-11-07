@@ -49,6 +49,8 @@ RewriteRule ^v1/articles/home/([a-z]+) /api/ver1/read/articlelist.php?api=home&c
 RewriteRule ^v1/articles/home /api/ver1/read/articlelist.php?api=home [L,QSA]
 RewriteRule ^v1/articles/static/([a-z0-9_-]+) /api/ver1/read/articlelist.php?api=static&subcategory=$1 [L,QSA]
 RewriteRule ^v1/articles/video/([a-z0-9_-]+) /api/ver1/read/movielist.php?category=$1 [L,QSA]
+RewriteRule ^v1/articles/tag /api/ver1/read/tag.php [L,QSA]
+
 RewriteRule ^v1/articles/area/(.*) /api/ver1/read/articlelist.php?region=$1&api=area [L,QSA]
 RewriteRule ^v1/articles/pref/(.*) /api/ver1/read/articlelist.php?pref=$1&api=pref [L,QSA]
 
