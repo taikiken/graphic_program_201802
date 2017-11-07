@@ -50,6 +50,14 @@ if($q->get_dir()==3){
       var ct="<?=date("Y/m/d H:i:s")?>";
   </script>
   <link rel="stylesheet" href="/shared/cms/css/lightbox.css" type="text/css" media="screen" >
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+      $( function() {
+          $( "#datepicker" ).datepicker( "option", "dateFormat", "mm/dd" );
+      } );
+  </script>
+
   <title><?php printf("%s-%s｜%s｜%sWEB サイト管理画面",$THIS,$q->exe_fl(),$PARENT,$SITE); ?></title>
 </head>
 <body>
@@ -96,7 +104,7 @@ if($q->get_dir()==3){
               <td class="inputTitle">日付</td>
               <td class="inputFields">
                 <div class="clearfix  fl langs">
-                  <input type="text" style="width:210px;" name="p_date"
+                  <input type="text" id="datepicker" style="width:210px;" name="p_date"
                                                        value="<?php echo $date; ?>" class="in q0"></div>
               </td>
             </tr>
@@ -122,7 +130,7 @@ EOT;
               for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
                 $view_comment_count = $comment_itr + 1;
                 echo <<<EOT
-<tr class="comment00">
+<tr class="comment{$articles_itr}{$comment_itr}">
   <td class="inputTitle">コメント{$view_comment_count}</td>
   <td class="inputFields">
     <div class="clearfix  fl langs"><input type="text" style="width:420px;" name="p_comment{$articles_itr}{$comment_itr}" value="{$comments[$articles_itr][$comment_itr]}" class="in q0"></div>
