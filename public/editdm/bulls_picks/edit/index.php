@@ -53,10 +53,15 @@ if($q->get_dir()==3){
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
+    <?php
+      $array_month_day = explode('/', $date);
+    ?>
       $( function() {
-          $( "#datepicker" ).datepicker();
-          $( "#datepicker" ).datepicker( "setDate", "<?php echo $date ?>/<?php echo date('Y')?>" );
-          $( "#datepicker" ).datepicker( "option", "dateFormat", "mm/dd" );
+          $( "#datepicker" ).datepicker({
+              setDate : "<?php echo $date ?>/<?php echo date('Y')?>",
+              dateFormat : "mm/dd",
+              minDate : new Date(<?php echo date('Y')?>, <?php echo $array_month_day[0] -1 ?>, <?php echo $array_month_day[1] ?>)
+          });
       } );
   </script>
 
@@ -107,7 +112,7 @@ if($q->get_dir()==3){
               <td class="inputFields">
                 <div class="clearfix  fl langs">
                   <input type="text" id="datepicker" style="width:210px;" name="p_date"
-                                                       value="<?php echo $date; ?>" class="in q0"></div>
+                         value="<?php echo $date; ?>" class="in q0" readonly="readonly"></div>
               </td>
             </tr>
             <?php
@@ -124,7 +129,7 @@ EOT;
   <td class="inputTitle">記事ID</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width:210px;" name="p_id{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0"></div>
+    <input type="text" style="width:210px;" name="p_id{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
   </td>
 </tr>
 EOT;
