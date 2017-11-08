@@ -6,26 +6,51 @@ if ($q->get_dir() === 1) { // 編集
 
     //初期値はs3ファイルの値
     $S3Module = new S3Module;
-    $url = $S3Module->getUrl($PICKS_FILENAME);
 
-    $picks_xml = simplexml_load_file($url);
-    $picks_xml = $picks_xml->xpath('/date')[0];
+    if ($q->tstr[3] == 'au') {
+      $url = $S3Module->getUrl($AU_PICKS_FILENAME);
 
-    $date = (string)$picks_xml->articles->attributes()->date;
-    $ids = [];
-    $comments = [];
+      $picks_xml = simplexml_load_file($url);
+      $picks_xml = $picks_xml->xpath('/date')[0];
 
-    $article_count = 0; // コメント配列管理用
-    foreach ($picks_xml->articles->article as $article) {
-      $ids[] = (string)$article->id;
+      $date = (string)$picks_xml->articles->attributes()->date;
+      $ids = [];
+      $comments = [];
 
-      foreach ($article->comments as $value) {
-        foreach ($value as $comment) {
-          $comments[$article_count][] = (string)$comment;
+      $article_count = 0; // コメント配列管理用
+      foreach ($picks_xml->articles->article as $article) {
+        $ids[] = (string)$article->id;
+
+        foreach ($article->comments as $value) {
+          foreach ($value as $comment) {
+            $comments[$article_count][] = (string)$comment;
+          }
         }
+        $article_count ++;
       }
-      $article_count ++;
+    } else {
+      $url = $S3Module->getUrl($PICKS_FILENAME);
+
+      $picks_xml = simplexml_load_file($url);
+      $picks_xml = $picks_xml->xpath('/date')[0];
+
+      $date = (string)$picks_xml->articles->attributes()->date;
+      $ids = [];
+      $comments = [];
+
+      $article_count = 0; // コメント配列管理用
+      foreach ($picks_xml->articles->article as $article) {
+        $ids[] = (string)$article->id;
+
+        foreach ($article->comments as $value) {
+          foreach ($value as $comment) {
+            $comments[$article_count][] = (string)$comment;
+          }
+        }
+        $article_count ++;
+      }
     }
+
 
   } elseif ($q->get_file() === 1) {
     data_conf();

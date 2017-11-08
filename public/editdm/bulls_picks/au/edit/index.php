@@ -1,5 +1,6 @@
 <?php
-
+header("Location: /editdm/bulls_picks/");
+exit();
 
 include $INCLUDEPATH."local.php";
 //include $INCLUDEPATH."_layout_template.php";
@@ -120,14 +121,7 @@ if($q->get_dir()==3){
               $view_id_count = $articles_itr + 1;
               echo <<<EOT
 <tr>
-  <th colspan="2" class="inputHeader" scope="row">記事{$view_id_count}
-    <a href="javascript:void(0)" onclick="moveUp({$articles_itr})">
-      <img src="/shared/cms/img/cmd_up.gif" width="13" height="13" alt="一つ上へ入れ替える" >
-    </a>
-    <a href="javascript:void(0)" onclick="moveDown({$articles_itr})">
-      <img src="/shared/cms/img/cmd_down.gif" width="13" height="13" alt="一つ下へ入れ替える" >
-    </a>
-  </th>
+  <th colspan="2" class="inputHeader" scope="row">記事{$view_id_count}</th>
 </tr>
 EOT;
 
@@ -238,59 +232,6 @@ EOT;
         });
     }
 
-
-    function moveUp(article_id) {
-        if (article_id > 0) {
-            var serialize = $('form').serializeArray();
-            var form_values = {};
-            for (i in serialize) {
-                var key = serialize[i]["name"];
-                var value = serialize[i]["value"];
-                form_values[key] = value;
-            }
-
-            var prev_article_id = article_id - 1;
-            // 移動元から移動先へ
-            document.getElementsByName('p_id' + prev_article_id)[0].value = form_values['p_id' + article_id];
-            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment' + prev_article_id + comment_itr)[0].value = form_values['p_comment' + article_id + comment_itr];
-            }
-            // 移動先の内容を移動元へ
-            document.getElementsByName('p_id' + article_id)[0].value = form_values['p_id' + prev_article_id];
-            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment' + article_id + comment_itr)[0].value = form_values['p_comment' + prev_article_id + comment_itr];
-            }
-
-            postXml(post_api, get_tmp_api); // プレビューに反映
-        }
-    }
-
-
-    function moveDown(article_id) {
-        if (article_id < 4) {
-            var serialize = $('form').serializeArray();
-            var form_values = {};
-            for (i in serialize) {
-                var key = serialize[i]["name"];
-                var value = serialize[i]["value"];
-                form_values[key] = value;
-            }
-
-            var next_article_id = article_id + 1;
-            // 移動元から移動先へ
-            document.getElementsByName('p_id' + next_article_id)[0].value = form_values['p_id' + article_id];
-            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment' + next_article_id + comment_itr)[0].value = form_values['p_comment' + article_id + comment_itr];
-            }
-            // 移動先の内容を移動元へ
-            document.getElementsByName('p_id' + article_id)[0].value = form_values['p_id' + next_article_id];
-            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment' + article_id + comment_itr)[0].value = form_values['p_comment' + next_article_id + comment_itr];
-            }
-
-            postXml(post_api, get_tmp_api); // プレビューに反映
-        }
-    }
 
 
 </script>
