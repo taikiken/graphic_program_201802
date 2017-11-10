@@ -106,7 +106,7 @@ if($q->get_dir()==3){
       </div><!-- End pageDescription -->
       <div class="row">
         <div class="col-sm-6">
-          <a href="/editdm/bulls_picks/edit/"> >スポーツブル 編集</a>
+          <a href="/editdm/bulls_picks/edit/"> > スポーツブル 編集</a>
           <p>アーカイブ検索: <input type="text" id="spb-datepicker" readonly></p><br/>
 
           <div class="card bg-light mb-3">
@@ -117,7 +117,7 @@ if($q->get_dir()==3){
           </div>
         </div>
         <div class="col-sm-6">
-          <a href="/editdm/bulls_picks/au/edit/"> >au 編集</a>
+          <a href="/editdm/bulls_picks/au/edit/"> > au 編集</a>
           <p>アーカイブ検索: <input type="text" id="au-datepicker" readonly></p><br/>
 
           <div class="card bg-warning mb-3">
@@ -150,6 +150,7 @@ if($q->get_dir()==3){
     getXml(get_api);
     getXml(get_au_api, true);
 
+    // アーカイブ検索
     $('#spb-datepicker').change(function () {
         var archive_api = get_api + '?date=' + document.getElementById('spb-datepicker').value;
         getXml(archive_api);
@@ -166,9 +167,6 @@ if($q->get_dir()==3){
             dateType: 'xml',
             timeout: 1000,
             success: function (data) {
-//                var s = new XMLSerializer();
-//                var xml = s.serializeToString(data);
-//                $('#showxml').text(xml);
                 if (au_flag) {
                     $('#au-xml').text(data);
                 } else {
@@ -176,21 +174,15 @@ if($q->get_dir()==3){
                 }
             },
             error: function () {
-                var sorry = '読み込めませんでした...';
+                // リロード
                 if (au_flag) {
-                    $('#au-xml').text(sorry);
+                    $('#au-xml').append(getXml(url, au_flag));
                 } else {
-                    $('#spb-xml').text(sorry);
+                    $('#spb-xml').append(getXml(url));
                 }
             }
         });
     }
-
-
-
-
-
-
 
 </script>
 </body>
