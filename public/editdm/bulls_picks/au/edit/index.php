@@ -1,6 +1,4 @@
 <?php
-header("Location: /editdm/bulls_picks/");
-exit();
 
 include $INCLUDEPATH."local.php";
 //include $INCLUDEPATH."_layout_template.php";
@@ -108,44 +106,60 @@ if($q->get_dir()==3){
             <tbody>
             <!-- フォーム -->
 
-            <tr class="date">
-              <td class="inputTitle">日付</td>
+            <tr class="blstarticle">
+              <td class="inputTitle">動画記事ID</td>
               <td class="inputFields">
                 <div class="clearfix  fl langs">
-                  <input type="text" id="datepicker" style="width:210px;" name="p_date"
-                         value="<?php echo $date; ?>" class="in q0" readonly="readonly"></div>
+                  <input type="text" style="width:210px;" name="p_blstarticle"
+                         value="<?php echo $blstarticle_id; ?>" class="in q0"></div>
               </td>
             </tr>
             <?php
-            for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
-              $view_id_count = $articles_itr + 1;
+
+            for ($date_itr = 0; $date_itr < 3; $date_itr++) {
               echo <<<EOT
+<tr>
+  <th colspan="2" class="inputHeader" scope="row"></th>
+</tr>
+<tr class="date">
+  <td class="inputTitle">日付</td>
+  <td class="inputFields">
+    <div class="clearfix  fl langs">
+      <input type="text" id="datepicker" style="width:210px;" name="p_date{$date_itr}"
+             value="{$dates[$date_itr]}" class="in q0" readonly="readonly"></div>
+  </td>
+</tr>
+EOT;
+              for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
+                $view_id_count = $articles_itr + 1; // 表示用特集番号
+                echo <<<EOT
 <tr>
   <th colspan="2" class="inputHeader" scope="row">記事{$view_id_count}</th>
 </tr>
 EOT;
 
-              echo <<<EOT
-<tr class="id{$articles_itr}">
+                echo <<<EOT
+<tr class="id{$date_itr}{$articles_itr}">
   <td class="inputTitle">記事ID</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width:210px;" name="p_id{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
+    <input type="text" style="width:210px;" name="p_id{$date_itr}{$articles_itr}" value="{$ids[$date_itr][$articles_itr]}" class="in q0" ></div>
   </td>
 </tr>
 EOT;
 
-              for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
-                $view_comment_count = $comment_itr + 1;
-                echo <<<EOT
-<tr class="comment{$articles_itr}{$comment_itr}">
+                for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
+                  $view_comment_count = $comment_itr + 1; // 表示用コメント番号
+                  echo <<<EOT
+<tr class="comment{$date_itr}{$articles_itr}{$comment_itr}">
   <td class="inputTitle">コメント{$view_comment_count}</td>
   <td class="inputFields">
-    <div class="clearfix  fl langs"><input type="text" style="width:420px;" name="p_comment{$articles_itr}{$comment_itr}" value="{$comments[$articles_itr][$comment_itr]}" class="in q0"></div>
+    <div class="clearfix  fl langs"><input type="text" style="width:420px;" name="p_comment{$date_itr}{$articles_itr}{$comment_itr}" value="{$comments[$date_itr][$articles_itr][$comment_itr]}" class="in q0"></div>
   </td>
 </tr>
 EOT;
-                
+
+                }
               }
             }
             ?>
@@ -154,8 +168,8 @@ EOT;
           </table>
         </div>
         <div class="col-sm-6">
-          <div class="card bg-light mb-3">
-            <div class="card-header">プレビュー</div>
+          <div class="card bg-warning mb-3">
+            <div class="card-header">au プレビュー</div>
             <div class="card-body">
               <pre class="card-text"><code id="showxml" class="language-html" data-lang="html"></code></pre>
             </div>
@@ -178,9 +192,9 @@ EOT;
 //$get_api = $S3Module->getUrl($PICKS_FILENAME);
 ?>
 <script type="text/javascript">
-    var get_api = "<?=$GET_PICKS_API?>";
-    var get_tmp_api = "<?=$GET_TMP_PICKS_API?>";
-    var post_api = "<?=$POST_TMP_PICKS_API?>";
+    var get_api = "<?=$GET_AU_PICKS_API?>";
+    var get_tmp_api = "<?=$GET_AU_TMP_PICKS_API?>";
+    var post_api = "<?=$POST_AU_TMP_PICKS_API?>";
     getXml(get_api); //初回はs3から
 
     $('.in').change(function () {
