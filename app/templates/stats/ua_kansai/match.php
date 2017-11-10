@@ -169,6 +169,10 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
     <div class="body-sec-inner">
       <section class="main-sec">
 
+<!-- 20171119試合特別LIVE -->
+<?=$dataArray["live"]?>
+
+
         <div class="stats__banner mt30">
           <div id="ua-pc-big-banner" style='height:90px; width:728px;'>
             <!-- /531683568/kansai-amefoot-ad/ua-pc-big-banner -->

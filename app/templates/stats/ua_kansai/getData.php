@@ -163,6 +163,30 @@ EOM;
 		if (!self::setJudgment($gameinfo['spectators'])) {
 			$gameinfo['spectators'] = "-";
 		}
+		//20171119試合特別LIVE
+		if ($gameId == "20171105_1") :
+			if ($gameinfo['status'] == "試合前") {
+				$result["live"] = <<< EOM
+				<div class="mt30">
+					<img src="/assets/stats/ua_kansai/images/before_game.png" alt="関西学生 アメリカンフットボールリーグLIVE!!" width="100%">
+				</div>
+EOM;
+			}elseif($gameinfo['status'] == "試合終了"){
+				$result["live"] = <<< EOM
+				<div class="mt30">
+					<img src="/assets/stats/ua_kansai/images/after_game.png" alt="関西学生 アメリカンフットボールリーグLIVE!!" width="100%">
+				</div>
+EOM;
+			}elseif($gameinfo['status'] == "試合中"){
+				$result["live"] = <<< EOM
+				<div style="position: relative; display: block;" class="mt30">
+					<div style="padding-top: 56.25%;">
+						<iframe src="//players.brightcove.net/4072219199001/ByLstQu0b_default/index.html?videoId=5640189896001" allowfullscreen webkitallowfullscreen mozallowfullscreen style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; width: 100%; height: 100%;"></iframe>
+					</div>
+				</div>
+EOM;
+			}
+		endif;
 		//ヘッダーインナー
 		$result["headInner"] = <<< EOM
 			<div class="game-name">{$gameinfo['league']}</div>
