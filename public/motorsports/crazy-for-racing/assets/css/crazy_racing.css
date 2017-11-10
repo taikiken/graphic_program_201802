@@ -41,7 +41,25 @@ sumo
       bottom: 0;
       left: 0;
       right: 0;
-      margin: 0 auto; }
+      margin: 0 auto;
+      -webkit-animation: anim 50s ease forwards;
+      animation: anim 50s ease forwards; }
+
+@-webkit-keyframes anim {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  100% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); } }
+
+@keyframes anim {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  100% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); } }
   .crazy_racing .main_ttl {
     position: absolute;
     top: 40%;
