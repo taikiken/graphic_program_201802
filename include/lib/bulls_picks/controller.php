@@ -4,31 +4,47 @@ if ($q->get_dir() === 1) { // 編集
 
   if ($q->get_file() === 0) {
 
-    //初期値はs3ファイルの値
-    $S3Module = new S3Module;
-
     if ($q->tstr[3] == 'au') {
-      $url = $S3Module->getUrl($AU_PICKS_FILENAME);
 
-      $picks_xml = simplexml_load_file($url);
+      // スポブルxml保存時にau xmlを /tmpへ作成するので
+      // /tmpのau xmlをフロントに表示する
+      if (file_exists($TMP_AU_PICKS)) {
+        $picks_xml = simplexml_load_file($TMP_AU_PICKS);
+      }
+      else {
+        $S3Module = new S3Module;
+        $url = $S3Module->getUrl($AU_PICKS_FILENAME);
+        $picks_xml = simplexml_load_file($url);
+      }
+
       $picks_xml = $picks_xml->xpath('/date')[0];
 
-      $date = (string)$picks_xml->articles->attributes()->date;
+      $dates = [];
       $ids = [];
       $comments = [];
+      $blstarticle_id = (string)$picks_xml->articles->blstarticle->id;
 
-      $article_count = 0; // コメント配列管理用
-      foreach ($picks_xml->articles->article as $article) {
-        $ids[] = (string)$article->id;
+      $date_count = 0; // 配列管理用
+      foreach ($picks_xml->articles as $articles) {
+        $dates[] = (string)$articles->attributes()->date;
 
-        foreach ($article->comments as $value) {
-          foreach ($value as $comment) {
-            $comments[$article_count][] = (string)$comment;
+        $article_count = 0; // コメント配列管理用  日付変更でリセット
+        foreach ($articles->article as $article) {
+          $ids[$date_count][] = (string)$article->id;
+
+          foreach ($article->comments as $value) {
+            foreach ($value as $comment) {
+              $comments[$date_count][$article_count][] = (string)$comment;
+            }
           }
+          $article_count++;
         }
-        $article_count ++;
+        $date_count++;
       }
-    } else {
+print_r($ids);
+
+    } else { // spb
+      $S3Module = new S3Module;
       $url = $S3Module->getUrl($PICKS_FILENAME);
 
       $picks_xml = simplexml_load_file($url);
