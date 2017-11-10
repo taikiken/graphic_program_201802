@@ -41,7 +41,6 @@ if ($q->get_dir() === 1) { // 編集
         }
         $date_count++;
       }
-print_r($ids);
 
     } else { // spb
       $S3Module = new S3Module;
