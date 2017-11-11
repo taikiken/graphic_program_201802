@@ -142,7 +142,7 @@
           <div class="wowma_cpn__whatis__copy"><img src="/assets/sp/images/wowma-campaign-171116/whatis-copy.png" alt="3分でスポーツを語れるようになる無料スポーツニュースアプリ"></div>
           <div class="wowma_cpn__whatis__btn__container">
             <h3 class="wowma_cpn__whatis__btn__heading"><img src="/assets/sp/images/wowma-campaign-171116/whatis-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
-            <div class="wowma_cpn__whatis__btn"><a href="https://app.adjust.com/7q5y6z" target="_blank"><img src="/assets/sp/images/wowma-campaign-171116/whatis-btn.png" alt="ダウンロードはこちら"></a></div>
+            <div class="wowma_cpn__whatis__btn"><a href="https://app.adjust.com/6fv6u2" target="_blank"><img src="/assets/sp/images/wowma-campaign-171116/whatis-btn.png" alt="ダウンロードはこちら"></a></div>
           </div><!-- /.ushi__pr_app__btn__container -->
         </div><!-- /.wowma_cpn__whatis__inner -->
       </div><!-- /.wowma_cpn__whatis -->
