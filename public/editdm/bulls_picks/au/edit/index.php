@@ -187,10 +187,6 @@ EOT;
 </div>
 <div class="optionselbg"></div>
 
-<?php
-//$S3Module = new S3Module;
-//$get_api = $S3Module->getUrl($PICKS_FILENAME);
-?>
 <script type="text/javascript">
     var get_tmp_api = "<?=$GET_AU_TMP_PICKS_API?>";
     var post_api = "<?=$POST_AU_TMP_PICKS_API?>";

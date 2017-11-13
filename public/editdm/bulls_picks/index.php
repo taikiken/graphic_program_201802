@@ -139,10 +139,6 @@ if($q->get_dir()==3){
 </div>
 <div class="optionselbg"></div>
 
-<?php
-//$S3Module = new S3Module;
-//$get_api = $S3Module->getUrl($PICKS_FILENAME);
-?>
 <script type="text/javascript">
     var get_api = "<?=$GET_PICKS_API?>";
     var get_au_api = "<?=$GET_AU_PICKS_API?>";
