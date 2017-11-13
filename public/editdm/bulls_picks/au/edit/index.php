@@ -192,10 +192,9 @@ EOT;
 //$get_api = $S3Module->getUrl($PICKS_FILENAME);
 ?>
 <script type="text/javascript">
-    var get_api = "<?=$GET_AU_PICKS_API?>";
     var get_tmp_api = "<?=$GET_AU_TMP_PICKS_API?>";
     var post_api = "<?=$POST_AU_TMP_PICKS_API?>";
-    getXml(get_api); //初回はs3から
+    getXml(get_tmp_api); // auは初回はローカルから
 
     $('.in').change(function () {
         postXml(post_api, get_tmp_api);
