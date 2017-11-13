@@ -161,7 +161,7 @@ if($q->get_dir()==3){
             url: url,
             type: 'GET',
             dateType: 'xml',
-            timeout: 1000,
+            timeout: 10000,
             success: function (data) {
                 if (au_flag) {
                     $('#au-xml').text(data);
