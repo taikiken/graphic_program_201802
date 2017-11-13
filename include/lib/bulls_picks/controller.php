@@ -22,7 +22,7 @@ if ($q->get_dir() === 1) { // 編集
       $dates = [];
       $ids = [];
       $comments = [];
-      $post_blstarticle_id = (string)$picks_xml->articles->blstarticle->id;
+      $blstarticle_id = (string)$picks_xml->articles->blstarticle->id;
 
       $date_count = 0; // 配列管理用
       foreach ($picks_xml->articles as $articles) {

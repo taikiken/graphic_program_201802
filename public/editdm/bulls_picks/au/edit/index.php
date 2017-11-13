@@ -56,7 +56,7 @@ if($q->get_dir()==3){
       $array_month_day = explode('/', $date);
     ?>
       $( function() {
-          $( "#datepicker" ).datepicker({
+          $( ".datepicker" ).datepicker({
               setDate : "<?php echo $date ?>/<?php echo date('Y')?>",
               dateFormat : "mm/dd",
               minDate : new Date(<?php echo date('Y')?>, <?php echo $array_month_day[0] -1 ?>, <?php echo $array_month_day[1] ?>)
@@ -125,8 +125,8 @@ if($q->get_dir()==3){
   <td class="inputTitle">日付</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-      <input type="text" id="datepicker" style="width:210px;" name="p_date{$date_itr}"
-             value="{$dates[$date_itr]}" class="in q0" readonly="readonly"></div>
+      <input type="text" style="width:210px;" name="p_date{$date_itr}"
+             value="{$dates[$date_itr]}" class="in q0 datepicker" readonly="readonly"></div>
   </td>
 </tr>
 EOT;
