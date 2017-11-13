@@ -34,19 +34,23 @@ import {StatusDae} from '../../dae/StatusDae';
 // data
 import {Result} from '../../data/Result';
 
-// node
-import {HeadingNode} from '../../node/signup/HeadingNode';
-import {RootNode} from '../../node/signup/RootNode';
+// // node
+// import {HeadingNode} from '../../node/signup/HeadingNode';
+// import {RootNode} from '../../node/signup/RootNode';
 
 // event
 import {SignupStatus} from '../../event/SignupStatus';
 
+// component
+import ComponentSignup from '../../component/signup/ComponentSignup';
+
 // Sagen
-let Sagen = self.Sagen;
+const Sagen = self.Sagen;
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
+const ReactDOM = self.ReactDOM;
 
 /**
  * ユーザー新規登録ウィザード
@@ -57,8 +61,9 @@ export class SignupWizard extends View {
    * ユーザー新規登録ウィザード
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [wow=false] Wowma キャンペーン flag
    */
-  constructor( element:Element, option:Object = {} ) {
+  constructor(element, option = {}, wow = false) {
     super( element, option );
     //
     // this._action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
@@ -112,6 +117,23 @@ export class SignupWizard extends View {
      * @default false
      */
     this._unload = false;
+    // @since 2017-11-07
+    /**
+     * bind didMount
+     * @type {function(this:SignupWizard)}
+     */
+    this.didMount = this.didMount.bind(this);
+    /**
+     * bind onHash
+     * @type {function(this:SignupWizard)}
+     */
+    this.onHash = this.onHash.bind(this);
+    /**
+     * Wowma キャンペーン flag
+     * @type {boolean}
+     * @since 2017-11-13
+     */
+    this.wow = wow;
   }
   /**
    * Ajax request を開始します
@@ -141,75 +163,90 @@ export class SignupWizard extends View {
    * @param {CategoriesDae} categoriesDae カテゴリー一覧, 興味のある競技表示に使用します
    * @param {Number} [stepNumber=1] wizard step No. default 1, どの段階かを表します
    */
-  render( categoriesDae:CategoriesDae, stepNumber:Number = 1 ):void {
+  render(categoriesDae, stepNumber = 1) {
+  // render( categoriesDae:CategoriesDae, stepNumber:Number = 1 ):void {
+    //
+    // // variable
+    // let _this = this;
+    //
+    // // main dom
+    // let SignupDom = React.createClass( {
+    //   propTypes: {
+    //     step: React.PropTypes.number.isRequired,
+    //     // 興味のあるカテゴリーに使用するカテゴリー一覧
+    //     categoriesDae: React.PropTypes.object.isRequired
+    //   },
+    //   getInitialState: function() {
+    //     /**
+    //      * SignupStatus instance
+    //      * @private
+    //      * @type {SignupStatus}
+    //      */
+    //     this.status = SignupStatus.factory();
+    //
+    //     return {
+    //       step: this.props.step
+    //     };
+    //   },
+    //   render: function() {
+    //     return (
+    //       <div className={'signup-' + this.state.step}>
+    //         <HeadingNode step={this.props.step} />
+    //         <RootNode
+    //           step={this.props.step}
+    //           categories={this.props.categoriesDae.categories}
+    //           beforeRedirect={this.beforeRedirect}
+    //           sp={Sagen.Browser.Mobile.phone()}
+    //         />
+    //       </div>
+    //     );
+    //   },
+    //   componentDidMount: function() {
+    //     // status event bind
+    //     _this.didMount();
+    //     this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
+    //   },
+    //   componentWillUnMount: function() {
+    //     // status event unbind
+    //     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
+    //   },
+    //   // ------------
+    //   // SignupStatus.SIGNUP_STEP event handler
+    //   // step 値を update します
+    //   stepChange: function( event:Object ):void {
+    //     // SignupStatus.SIGNUP_STEP 発生後 step 値を update する
+    //     this.updateStep( event.step );
+    //   },
+    //   // step値を update -> CSS クラス signup-n のナンバリングに使用
+    //   updateStep: function( step:Number ) {
+    //     this.setState( { step: step } );
+    //   },
+    //   // 登録が終わり home に遷移する前に呼び出されます
+    //   beforeRedirect: function() {
+    //     // onbeforeunload を unbind し
+    //     // home へ遷移するのに警告が出ないようにします
+    //     SignupWizard.deactivateUnload();
+    //   }
+    // } );
+    //
+    // ReactDOM.render(
+    //   <SignupDom
+    //     step={stepNumber}
+    //     categoriesDae={categoriesDae}
+    //   />,
+    //   this.element
+    // );
 
-    // variable
-    let _this = this;
-
-    // main dom
-    let SignupDom = React.createClass( {
-      propTypes: {
-        step: React.PropTypes.number.isRequired,
-        // 興味のあるカテゴリーに使用するカテゴリー一覧
-        categoriesDae: React.PropTypes.object.isRequired
-      },
-      getInitialState: function() {
-        /**
-         * SignupStatus instance
-         * @private
-         * @type {SignupStatus}
-         */
-        this.status = SignupStatus.factory();
-
-        return {
-          step: this.props.step
-        };
-      },
-      render: function() {
-        return (
-          <div className={'signup-' + this.state.step}>
-            <HeadingNode step={this.props.step} />
-            <RootNode
-              step={this.props.step}
-              categories={this.props.categoriesDae.categories}
-              beforeRedirect={this.beforeRedirect}
-              sp={Sagen.Browser.Mobile.phone()}
-            />
-          </div>
-        );
-      },
-      componentDidMount: function() {
-        // status event bind
-        _this.didMount();
-        this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
-      },
-      componentWillUnMount: function() {
-        // status event unbind
-        this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
-      },
-      // ------------
-      // SignupStatus.SIGNUP_STEP event handler
-      // step 値を update します
-      stepChange: function( event:Object ):void {
-        // SignupStatus.SIGNUP_STEP 発生後 step 値を update する
-        this.updateStep( event.step );
-      },
-      // step値を update -> CSS クラス signup-n のナンバリングに使用
-      updateStep: function( step:Number ) {
-        this.setState( { step: step } );
-      },
-      // 登録が終わり home に遷移する前に呼び出されます
-      beforeRedirect: function() {
-        // onbeforeunload を unbind し
-        // home へ遷移するのに警告が出ないようにします
-        SignupWizard.deactivateUnload();
-      }
-    } );
-
+    // ---------------------------------------------
+    // since 2017-11-07
     ReactDOM.render(
-      <SignupDom
+      <ComponentSignup
         step={stepNumber}
-        categoriesDae={categoriesDae}
+        dae={categoriesDae}
+        didMount={this.didMount}
+        beforeRedirect={SignupWizard.deactivateUnload}
+        sp={Sagen.Browser.Mobile.is()}
+        wow={this.wow}
       />,
       this.element
     );
@@ -226,51 +263,46 @@ export class SignupWizard extends View {
      */
     // なのでいらないかも
     // code は残す
-    this.social();
-
+    // wow flag false condition 追加 - 2017-11-13
+    if (!this.wow) {
+      this.social();
+    }
   }
-
   /**
    * component が mount された
    */
   didMount():void {
     // dom mound after
-
     // SignupStatus event bind
     this._status.on( SignupStatus.SIGNUP_STEP, this.stepChange.bind( this ) );
-
     // 多分 email のチェックが終わり次のステップに遷移
     // window blur と hash change 監視を開始
     if ( this._boundHash === null ) {
       this.activateHashChange();
     }
-
   }
-
   /**
    * SignupStatus.SIGNUP_STEP event handler
-   * @param {Object} event SignupStatus event object
+   * @param {{step: number}} event SignupStatus event object
    */
   stepChange( event:Object ):void {
-
-    let step = event.step;
-    this._step = step;
+    // let step = event.step;
+    // this._step = step;
+    this._step = event.step;
     if ( !this._unload ) {
       this._unload = true;
       SignupWizard.activateUnload();
     }
-
   }
   /**
    * hash change event を監視開始
    */
   activateHashChange():void {
-
-    let boundHash = this.onHash.bind( this );
+    // let boundHash = this.onHash.bind( this );
+    const boundHash = this.onHash;
     this._boundHash = boundHash;
 
     window.addEventListener( 'hashchange', boundHash, false );
-
   }
   /**
    * onbeforeunload を bind する
@@ -278,14 +310,12 @@ export class SignupWizard extends View {
   static activateUnload():void {
     window.addEventListener( 'beforeunload', SignupWizard.onUnload, false );
   }
-
   /**
    * onbeforeunload を unbind する
    */
   static deactivateUnload():void {
     window.removeEventListener( 'beforeunload', SignupWizard.onUnload );
   }
-
   /**
    * onbeforeunload returnValue へ メッセージを設定する
    * @param {Event} event onbeforeunload Event instance
@@ -293,7 +323,6 @@ export class SignupWizard extends View {
   static onUnload( event ):void {
     event.returnValue = Message.UNLOAD;
   }
-
   // /**
   //  * HashChangeEvent event handler, hash が変更された後に呼び出されます
   //  * @param {HashChangeEvent} event HashChangeEvent instance
@@ -317,7 +346,6 @@ export class SignupWizard extends View {
   // ---------------------------------------------
   // /api/v1/sessions/social を叩く
   // 2016-03-16 追加
-
   /**
    * API request を行うかを query が URL に存在するかで判断します
    * <pre>
@@ -346,17 +374,16 @@ export class SignupWizard extends View {
      http://dev.undotsushin.com/signup/?oauth=facebook
      http://dev.undotsushin.com/signup/?oauth=twitter
      */
-    let queries = Loc.parse();
+    const queries = Loc.parse();
     if ( queries !== null && queries.hasOwnProperty( 'oauth' ) ) {
 
-      let value = queries.oauth;
+      const value = queries.oauth;
       // console.log( 'social request ', queries );
       // query value
       // facebook が #(hash) ついていたりして言ってることと違うので チェック項目増やす
       if ( value.indexOf( 'facebook' ) !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter' ) {
         this.socialRequest();
       }
-
     }
   }
   /**
@@ -372,33 +399,26 @@ export class SignupWizard extends View {
     let model = new ModelSocial( callback );
     model.start();
   }
-
   /**
    * API `/api/v1/sessions/social` 成功
    * @param {Result} result 結果セット
    */
   socialDone( result:Result ):void {
-
     let response = result.response;
 
     if ( typeof response === 'undefined' ) {
-
       // articles undefined
       // JSON に問題がある
       let error = new Error( Message.undef('[SOCIAL:USER_PROFILE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
-
     } else {
-
       let status = new StatusDae( result.status );
       // console.log( 'socialDone ', status );
       if ( status.code === 200 ) {
         // status.code 200 の時に success method を呼び出します
         this.success( new UserDae( response ) );
       }
-
     }
-
   }
   // /**
   //  * API `/api/v1/sessions/social` error

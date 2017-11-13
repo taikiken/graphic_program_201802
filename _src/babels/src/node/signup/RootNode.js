@@ -16,11 +16,14 @@ import {SignupStatus} from '../../event/SignupStatus';
 import {SignupHeadingNode} from './SignupHeadingNode';
 import {LegendStep1Node} from './LegendStep1Node';
 import {LegendStep2Node} from './LegendStep2Node';
-import {LegendStep3Node} from './LegendStep3Node';
+// import {LegendStep3Node} from './LegendStep3Node';
+
+// component - 2017-11-07
+import { ComponentLegendStep3 } from '../../component/signup/ComponentLegendStep3';
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+const React = self.React;
+const ReactDOM = self.ReactDOM;
 /**
  * <p>「新規会員登録」 main HTML</p>
  *
@@ -35,13 +38,18 @@ let ReactDOM = self.ReactDOM;
  *
  * @type {ReactClass}
  * */
-export let RootNode = React.createClass( {
+export const RootNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     categories: React.PropTypes.array.isRequired,
     beforeRedirect: React.PropTypes.func.isRequired,
-    sp: React.PropTypes.bool.isRequired
+    sp: React.PropTypes.bool.isRequired,
+    // since 2017-11-07
+    wow: React.PropTypes.bool.isRequired,
   },
+  // defaultProps: {
+  //   wow: false,
+  // },
   getInitialState: function() {
     this.status = SignupStatus.factory();
 
@@ -50,56 +58,6 @@ export let RootNode = React.createClass( {
       email1: '',
       email2: ''
     };
-  },
-  render: function() {
-
-    let stepClassSelector = ( step ) => {
-      // console.log( 'stepClassSelector ', step );
-      switch (step) {
-        case 2:
-          return 'basic-setting setting-form';
-
-        case 3:
-          return 'interest-setting setting-form';
-
-        case 1:
-        default:
-          return 'register';
-      }
-    };
-
-    return (
-      <div className="body-sec">
-        <div className="body-sec-inner">
-          <SignupHeadingNode step={this.state.step} />
-           <div className={stepClassSelector(this.state.step)}>
-              <form ref="signup" encType="multipart/form-data" onSubmit={this.submitHandler}>
-                <LegendStep1Node
-                  step={this.props.step}
-                  changeEmail={this.email1Change}
-                  email={this.state.email1}
-                />
-                <LegendStep2Node
-                  step={this.props.step + 1}
-                  getForm={this.getForm}
-                  changeEmail={this.email2Change}
-                  email={this.state.email2}
-                  sp={this.props.sp}
-                />
-                <LegendStep3Node
-                  step={this.props.step + 2}
-                  categories={this.props.categories}
-                  getForm={this.getForm}
-                  beforeRedirect={this.props.beforeRedirect}
-                />
-
-                {/* submit button, 非表示 */}
-                <div className="submit-hidden-container"><input type="submit" /></div>
-              </form>
-          </div>
-        </div>
-      </div>
-    );
   },
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
@@ -141,5 +99,66 @@ export let RootNode = React.createClass( {
     // email 2 が変更されたので email 1 へ通知する
     // console.log( 'email2Change ', email );
     this.setState( { email1: email } );
+  },
+  // -----------------------------------------------
+  render: function() {
+
+    let stepClassSelector = ( step ) => {
+      // console.log( 'stepClassSelector ', step );
+      switch (step) {
+        case 2:
+          return 'basic-setting setting-form';
+
+        case 3:
+          return 'interest-setting setting-form';
+
+        case 1:
+        default:
+          return 'register';
+      }
+    };
+
+    return (
+      <div className="body-sec">
+        <div className="body-sec-inner">
+          <SignupHeadingNode step={this.state.step} />
+          <div className={stepClassSelector(this.state.step)}>
+            <form ref="signup" encType="multipart/form-data" onSubmit={this.submitHandler}>
+              <LegendStep1Node
+                step={this.props.step}
+                changeEmail={this.email1Change}
+                email={this.state.email1}
+                wow={this.props.wow}
+              />
+              <LegendStep2Node
+                step={this.props.step + 1}
+                getForm={this.getForm}
+                changeEmail={this.email2Change}
+                email={this.state.email2}
+                sp={this.props.sp}
+              />
+              {/*
+              <LegendStep3Node
+                step={this.props.step + 2}
+                categories={this.props.categories}
+                getForm={this.getForm}
+                beforeRedirect={this.props.beforeRedirect}
+                wow={this.props.wow}
+              />
+              */}
+              <ComponentLegendStep3
+                step={this.props.step + 2}
+                categories={this.props.categories}
+                getForm={this.getForm}
+                beforeRedirect={this.props.beforeRedirect}
+                wow={this.props.wow}
+              />
+              {/* submit button, 非表示 */}
+              <div className="submit-hidden-container"><input type="submit" /></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
   }
 } );
