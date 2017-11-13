@@ -22,7 +22,7 @@ if ($q->get_dir() === 1) { // 編集
       $dates = [];
       $ids = [];
       $comments = [];
-      $blstarticle_id = (string)$picks_xml->articles->blstarticle->id;
+      $post_blstarticle_id = (string)$picks_xml->articles->blstarticle->id;
 
       $date_count = 0; // 配列管理用
       foreach ($picks_xml->articles as $articles) {
@@ -72,57 +72,106 @@ if ($q->get_dir() === 1) { // 編集
 
   } elseif ($q->get_file() === 2) {
 
-    // アーカイブ作成
     $S3Module = new S3Module;
-    $url = $S3Module->getUrl($PICKS_FILENAME);
+
+    if ($q->tstr[3] == 'au') {
+      $s3_key = $AU_PICKS_FILENAME;
+      $tmp_filename = $TMP_AU_PICKS;
+    } else {
+      $s3_key = $PICKS_FILENAME;
+      $tmp_filename = $TMP_PICKS;
+    }
+
+    // アーカイブ作成
+    $url = $S3Module->getUrl($s3_key);
     $picks_xml = simplexml_load_file($url);
     $date = (string)$picks_xml->xpath('/date')[0]->articles->attributes()->date;
     $date = str_replace('/', '', $date);
-    $picks_xml->asXML($TMP_PICKS);
+    $picks_xml->asXML($tmp_filename);
 
-    // xml/archives/10月31日picks.xml
-    s3upload($TMP_PICKS, 'xml/archives/' . $date . 'picks.xml');
-
+    // xml/archives/1031picks.xml
+    s3upload($tmp_filename, 'xml/au/archives/' . $date . 'picks.xml');
 
     // 入力内容でpicks.xml作成
     include $INCLUDEPATH . "lib/" . $CURRENTDIRECTORY . "/ex.php";
 
     // フォームからxml作成
     $dom = new DomDocument('1.0', 'UTF-8');
-
     $date = $dom->appendChild($dom->createElement('date'));
 
-    $articles = $date->appendChild($dom->createElement('articles'));
-    $articles_date = $dom->createAttribute('date');
-    $articles_date->value = !empty($_POST['p_date']) ? $_POST['p_date'] : '-';
-    $articles->appendChild($articles_date);
+    if ($q->tstr[3] == 'au') {
+      for ($date_itr = 0; $date_itr < 3; $date_itr++) {
+        $articles = $date->appendChild($dom->createElement('articles'));
+        $articles_date = $dom->createAttribute('date');
+        $articles_date->value = !empty($_POST['p_date' . $date_itr]) ? $_POST['p_date' . $date_itr] : '-';
+        $articles->appendChild($articles_date);
 
-    for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
-      $post_id = !empty($_POST['p_id' . $articles_itr]) ? $_POST['p_id' . $articles_itr] : 0;
+        $new_flag = $dom->createAttribute('new');
+        $new_flag->value = $date_itr == 0 ? 'true' : 'false';
+        $articles->appendChild($new_flag);
 
-      $article = $articles->appendChild($dom->createElement('article'));
-      $id = $article->appendChild($dom->createElement('id'));
-      $id->appendChild(
-        $dom->createTextNode($post_id)
-      );
+        for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
+          $post_id = !empty($_POST['p_id' . $date_itr . $articles_itr]) ? $_POST['p_id' . $date_itr . $articles_itr] : 0;
+          $post_blstarticle_id = !empty($_POST['p_blstarticle']) ? $_POST['p_blstarticle'] : 0;
 
-      $comments = $article->appendChild($dom->createElement('comments'));
-      for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
-        $post_comment = !empty($_POST['p_comment' . $articles_itr . $comment_itr]) ? $_POST['p_comment' . $articles_itr . $comment_itr] : '-';
+          // 動画記事IDを最初の特集内にいれる
+          if ($articles_itr == 0 ) {
+            $blstarticle = $articles->appendChild($dom->createElement('blstarticle'));
+            $blstarticle_id = $blstarticle->appendChild($dom->createElement('id'));
+            $blstarticle_id->appendChild(
+              $dom->createTextNode($post_blstarticle_id)
+            );
+          }
+          $article = $articles->appendChild($dom->createElement('article'));
+          $id = $article->appendChild($dom->createElement('id'));
+          $id->appendChild(
+            $dom->createTextNode($post_id)
+          );
 
-        $comment = $comments->appendChild($dom->createElement('comment'));
-        $comment->appendChild(
-          $dom->createTextNode($post_comment)
+          $comments = $article->appendChild($dom->createElement('comments'));
+          for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
+            $post_comment = !empty($_POST['p_comment' . $date_itr . $articles_itr . $comment_itr]) ? $_POST['p_comment' . $date_itr . $articles_itr . $comment_itr] : '-';
+
+            $comment = $comments->appendChild($dom->createElement('comment'));
+            $comment->appendChild(
+              $dom->createTextNode($post_comment)
+            );
+          }
+        }
+      }
+
+    } else {
+      $articles = $date->appendChild($dom->createElement('articles'));
+      $articles_date = $dom->createAttribute('date');
+      $articles_date->value = !empty($_POST['p_date']) ? $_POST['p_date'] : '-';
+      $articles->appendChild($articles_date);
+
+      for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
+        $post_id = !empty($_POST['p_id' . $articles_itr]) ? $_POST['p_id' . $articles_itr] : 0;
+
+        $article = $articles->appendChild($dom->createElement('article'));
+        $id = $article->appendChild($dom->createElement('id'));
+        $id->appendChild(
+          $dom->createTextNode($post_id)
         );
+
+        $comments = $article->appendChild($dom->createElement('comments'));
+        for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
+          $post_comment = !empty($_POST['p_comment' . $articles_itr . $comment_itr]) ? $_POST['p_comment' . $articles_itr . $comment_itr] : '-';
+
+          $comment = $comments->appendChild($dom->createElement('comment'));
+          $comment->appendChild(
+            $dom->createTextNode($post_comment)
+          );
+        }
       }
     }
     $dom->formatOutput = true;
-    $dom->save($TMP_PICKS);
+    $dom->save($tmp_filename);
 
     // s3へ保存
-    s3upload($TMP_PICKS, $PICKS_FILENAME);
-    $e = s3upload($TMP_PICKS, $PICKS_FILENAME);
-    unlink($TMP_PICKS);
+    s3upload($tmp_filename, $s3_key);
+    $e = s3upload($tmp_filename, $s3_key);
 
   }
 }
