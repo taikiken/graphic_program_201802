@@ -38,9 +38,10 @@ export default class SPSignupWow {
    * rendering 開始
    */
   static start():void {
-    let signupElement = Dom.signup();
+    const signupElement = Dom.signup();
     if ( signupElement !== null ) {
-      let signup = new UT.view.signup.SignupWizard( signupElement );
+      // Wowma flag true で実行する
+      const signup = new UT.view.signup.SignupWizard(signupElement, {}, true);
       signup.start();
     }
   }

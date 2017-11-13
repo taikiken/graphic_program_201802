@@ -29,7 +29,8 @@ export default class SignupWow {
   static start():void {
     const signupElement = Dom.signup();
     if ( signupElement !== null ) {
-      const signup = new UT.view.signup.SignupWizard( signupElement );
+      // Wowma flag true で実行する
+      const signup = new UT.view.signup.SignupWizard(signupElement, {}, true);
       signup.start();
     }
   }
