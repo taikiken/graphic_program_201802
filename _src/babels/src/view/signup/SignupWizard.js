@@ -279,10 +279,7 @@ export class SignupWizard extends View {
      */
     // なのでいらないかも
     // code は残す
-    // wow flag false condition 追加 - 2017-11-13
-    if (!this.wow) {
-      this.social();
-    }
+    this.social();
     // console.log('SignupWizard.render 2', this.element, this.wow);
   }
   /**
