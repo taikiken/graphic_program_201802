@@ -141,10 +141,10 @@ if($q->get_dir()==3){
 
 <script type="text/javascript">
     var get_api = "<?=$GET_PICKS_API?>";
-    var get_au_tmp_api = "<?=$GET_AU_TMP_PICKS_API?>";
+    var get_au_api = "<?=$GET_AU_PICKS_API?>";
     // 初回
     getXml(get_api);
-    getXml(get_au_tmp_api, true);
+    getXml(get_au_api, true);
 
     // アーカイブ検索
     $('#spb-datepicker').change(function () {
@@ -152,7 +152,7 @@ if($q->get_dir()==3){
         getXml(archive_api);
     });
     $('#au-datepicker').change(function () {
-        var archive_api = get_au_tmp_api + '?date=' + document.getElementById('au-datepicker').value;
+        var archive_api = get_au_api + '?date=' + document.getElementById('au-datepicker').value;
         getXml(archive_api, true);
     });
 

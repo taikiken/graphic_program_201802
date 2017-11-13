@@ -20,8 +20,7 @@ if (isset($_GET['date'])) {
 
 $picks_xml = simplexml_load_file($url);
 if ($picks_xml) {
-  $picks_xml->asXML($TMP_PICKS);
-  $res = file_get_contents($TMP_PICKS);
+  $res = file_get_contents($url);
 
 } else {
   $res = 'ファイルが存在しません';
