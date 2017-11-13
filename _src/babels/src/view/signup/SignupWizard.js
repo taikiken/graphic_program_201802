@@ -57,6 +57,18 @@ const ReactDOM = self.ReactDOM;
  * step 1 ~ step 3 画面遷移をコントロールします
  */
 export class SignupWizard extends View {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  static prepareWow() {
+    const div = document.createElement('div');
+    div.id = 'js-wow-modal-container';
+    document.body.appendChild(div);
+    return div;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * ユーザー新規登録ウィザード
    * @param {Element} element root element
@@ -65,22 +77,23 @@ export class SignupWizard extends View {
    */
   constructor(element, option = {}, wow = false) {
     super( element, option );
+    console.log('SignupWizard', element, option, wow);
     //
     // this._action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
 
     // get categories by model
     // 処理一貫性のため ModelCategories を使い取得
-    // let boundError = this.error.bind( this );
-    let callbacks = {};
+    const boundError = this.error.bind(this);
+    const callbacks = {};
     /**
      * コールバック関数を設定する Object
      * @type {{}}
      * @private
      */
     this._callbacks = callbacks;
-    callbacks[ Model.COMPLETE ] = this.complete.bind( this );
-    // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
-    // callbacks[ Model.RESPONSE_ERROR ] = boundError;
+    callbacks[Model.COMPLETE] = this.complete.bind(this);
+    callbacks[Model.UNDEFINED_ERROR] = boundError;
+    callbacks[Model.RESPONSE_ERROR] = boundError;
     /**
      * Action instance を設定します
      * @override
@@ -135,6 +148,9 @@ export class SignupWizard extends View {
      */
     this.wow = wow;
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * Ajax request を開始します
    */
@@ -146,18 +162,16 @@ export class SignupWizard extends View {
    * @param {CategoriesDae} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
   complete( result:CategoriesDae ):void {
-
+    console.log('SignupWizard.complete', result);
     this.render( result, this._step );
   }
-  // /**
-  //  * Ajax response error
-  //  * @param {Error} error Error instance
-  //  */
-  // error( error:Error ):void {
-  //
-  //   // console.log( 'Signup complete', error );
-  //
-  // }
+  /**
+   * Ajax response error
+   * @param {Error} error Error instance
+   */
+  error(error) {
+    console.warn('SignupWizard.error', error, this.wow);
+  }
   /**
    * Dom 作成(rendering)を開始します
    * @param {CategoriesDae} categoriesDae カテゴリー一覧, 興味のある競技表示に使用します
@@ -236,7 +250,8 @@ export class SignupWizard extends View {
     //   />,
     //   this.element
     // );
-
+    console.log('SignupWizard.render 1', this.element, this.wow);
+    const container = this.wow ? SignupWizard.prepareWow() : null;
     // ---------------------------------------------
     // since 2017-11-07
     ReactDOM.render(
@@ -247,6 +262,7 @@ export class SignupWizard extends View {
         beforeRedirect={SignupWizard.deactivateUnload}
         sp={Sagen.Browser.Mobile.is()}
         wow={this.wow}
+        container={container}
       />,
       this.element
     );
@@ -267,6 +283,7 @@ export class SignupWizard extends View {
     if (!this.wow) {
       this.social();
     }
+    console.log('SignupWizard.render 2', this.element, this.wow);
   }
   /**
    * component が mount された
@@ -434,5 +451,4 @@ export class SignupWizard extends View {
   success( userDae:UserDae ):void {
     this._status.sns( userDae.userName, userDae.profilePicture, userDae.email, userDae.bio );
   }
-
 }

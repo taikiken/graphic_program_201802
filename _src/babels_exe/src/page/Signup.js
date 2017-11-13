@@ -37,9 +37,10 @@ export class Signup {
    * rendering 開始
    */
   static start():void {
-    let signupElement = Dom.signup();
+    const signupElement = Dom.signup();
+    console.log('Signup.start', signupElement);
     if ( signupElement !== null ) {
-      let signup = new UT.view.signup.SignupWizard( signupElement );
+      const signup = new UT.view.signup.SignupWizard(signupElement);
       signup.start();
     }
   }

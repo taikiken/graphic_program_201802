@@ -53,6 +53,8 @@ export default class ComponentSignup extends React.Component {
       sp: React.PropTypes.bool.isRequired,
       // since 2017-11-13
       wow: React.PropTypes.bool.isRequired,
+      // div#js-wow-modal-container - modal insert container
+      container: React.PropTypes.object.isRequired,
     };
   }
   // /**
@@ -176,6 +178,7 @@ export default class ComponentSignup extends React.Component {
           sp={sp}
           beforeRedirect={this.onBeforeRedirect}
           wow={this.props.wow}
+          container={this.props.container}
         />
       </div>
     );

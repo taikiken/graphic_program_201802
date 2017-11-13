@@ -46,6 +46,7 @@ export const RootNode = React.createClass( {
     sp: React.PropTypes.bool.isRequired,
     // since 2017-11-07
     wow: React.PropTypes.bool.isRequired,
+    container: React.PropTypes.object.isRequired,
   },
   // defaultProps: {
   //   wow: false,
@@ -152,6 +153,7 @@ export const RootNode = React.createClass( {
                 getForm={this.getForm}
                 beforeRedirect={this.props.beforeRedirect}
                 wow={this.props.wow}
+                container={this.props.container}
               />
               {/* submit button, 非表示 */}
               <div className="submit-hidden-container"><input type="submit" /></div>

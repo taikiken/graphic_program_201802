@@ -22,10 +22,9 @@ const React = self.React;
  * @since 2017-11-13 Wowma
  */
 const ComponentSignupSNS = ({ wow }) => {
-  // wow flag true - SNS での会員登録を表示しない
-  if (wow) {
-    return null;
-  }
+  // wow flag
+  const note = wow ? <p className="wowma-attention">【注意！】Wowma !クーポンはTwitterとFacebook でのご登録では受け取れません。<br />
+    下の入力欄にメールアドレスを入力し、ご登録をお願いいたします。</p> : '';
   // 移設 - from LegendStep1Node.js
   return (
     <div className="react-linkage-sns">
@@ -40,6 +39,7 @@ const ComponentSignupSNS = ({ wow }) => {
           </li>
         </ul>
       </div>
+      {note}
       <p className="register-or">または</p>
     </div>
   );
