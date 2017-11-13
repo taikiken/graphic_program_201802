@@ -200,7 +200,7 @@ EOT;
             url: url,
             type: 'GET',
             dateType: 'xml',
-            timeout: 1000,
+            timeout: 10000,
             success: function (data) {
 //                var s = new XMLSerializer();
 //                var xml = s.serializeToString(data);
@@ -210,11 +210,7 @@ EOT;
             },
             error: function () {
                 var sorry = '読み込めませんでした...';
-                if (au_flag) {
-                    $('#au-xml').text(sorry);
-                } else {
-                    $('#spb-xml').text(sorry);
-                }
+                $('#spb-xml').text(sorry);
             }
         });
     }
