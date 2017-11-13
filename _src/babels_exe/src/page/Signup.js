@@ -38,7 +38,7 @@ export class Signup {
    */
   static start():void {
     const signupElement = Dom.signup();
-    console.log('Signup.start', signupElement);
+    // console.log('Signup.start', signupElement);
     if ( signupElement !== null ) {
       const signup = new UT.view.signup.SignupWizard(signupElement);
       signup.start();

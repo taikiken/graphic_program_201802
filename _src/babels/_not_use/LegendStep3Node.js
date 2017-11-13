@@ -11,27 +11,27 @@
  */
 
 // app
-import {User} from '../../app/User';
-import {Message} from '../../app/const/Message';
+import {User} from '../src/app/User';
+import {Message} from '../src/app/const/Message';
 
 // model
-import {Model} from '../../model/Model';
-import {ModelSignup} from '../../model/signup/ModelSignup';
+import {Model} from '../src/model/Model';
+import {ModelSignup} from '../src/model/signup/ModelSignup';
 
 // data
-import {Result} from '../../data/Result';
-import {Form} from '../../data/Form';
+import {Result} from '../src/data/Result';
+import {Form} from '../src/data/Form';
 
 // dae
-import {UserDae} from '../../dae/UserDae';
-import {StatusDae} from '../../dae/StatusDae';
+import {UserDae} from '../src/dae/UserDae';
+import {StatusDae} from '../src/dae/StatusDae';
 
 // util
-import {Loc} from '../../util/Loc';
+import {Loc} from '../src/util/Loc';
 
 // event
-import {SignupStatus} from '../../event/SignupStatus';
-import {MessageStatus} from '../../event/MessageStatus';
+import {SignupStatus} from '../src/event/SignupStatus';
+import {MessageStatus} from '../src/event/MessageStatus';
 
 // React
 let React = self.React;
@@ -46,7 +46,9 @@ let Step3FormNode = React.createClass( {
     step: React.PropTypes.number.isRequired,
     categories: React.PropTypes.array.isRequired,
     getForm: React.PropTypes.func.isRequired,
-    beforeRedirect: React.PropTypes.func.isRequired
+    beforeRedirect: React.PropTypes.func.isRequired,
+    // since 2017-11-07
+    wow: React.PropTypes.bool.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -181,27 +183,41 @@ let Step3FormNode = React.createClass( {
   done: function( result:Result ) {
     // console.log( 'done ', result );
     if ( result.status.code === 200 ) {
+      // wow 別処理
+      if (this.props.wow) {
+        this.doneWow(result);
+        return;
+      }
       // OK
       // token 取り出し
-      let userDae = new UserDae( result.response );
+      const userDae = new UserDae( result.response );
 
       // flush message
-      let status = new StatusDae( result.status );
+      const status = new StatusDae( result.status );
       this.messageStatus.flush( MessageStatus.message( status.userMessage ), MessageStatus.SUCCESS );
 
       // -> next step
       this.next( userDae.accessToken );
     }
   },
-  fail: function( /* error:Error */ ) {
-    // console.log( 'error step3', error );
+  doneWow: function(result) {
+    // OK
+    // token 取り出し
+    const userDae = new UserDae( result.response );
+    if (User.login(userDae.accessToken)) {
+      // modal open
+      // console.log('Step3FormNode.doneWow');
+    }
   },
-  reset: function() {
-
-  },
-  dispose: function() {
-
-  }
+  // fail: function( /* error:Error */ ) {
+  //   // console.log( 'error step3', error );
+  // },
+  // reset: function() {
+  //
+  // },
+  // dispose: function() {
+  //
+  // }
 } );
 
 /**
@@ -217,7 +233,8 @@ export let LegendStep3Node = React.createClass( {
     step: React.PropTypes.number.isRequired,
     categories: React.PropTypes.array.isRequired,
     getForm: React.PropTypes.func.isRequired,
-    beforeRedirect: React.PropTypes.func.isRequired
+    beforeRedirect: React.PropTypes.func.isRequired,
+    wow: React.PropTypes.bool.isRequired,
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -236,13 +253,14 @@ export let LegendStep3Node = React.createClass( {
           categories={this.props.categories}
           getForm={this.props.getForm}
           beforeRedirect={this.props.beforeRedirect}
+          wow={this.props.wow}
         />
       </div>
     );
 
   },
-  componentDidMount: function() {
-  },
-  componentWillUnMount: function() {
-  }
+  // componentDidMount: function() {
+  // },
+  // componentWillUnMount: function() {
+  // }
 } );

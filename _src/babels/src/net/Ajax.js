@@ -102,7 +102,7 @@ export class Ajax {
       option.headers = headers;
     }
 
-    console.log(`Ajax.start: ${url}, ${method}`, option);
+    // console.log(`Ajax.start: ${url}, ${method}`, option);
 
     // https://github.com/github/fetch
     // request を開始します
@@ -110,7 +110,7 @@ export class Ajax {
     .then((response) => {
       // check status (Server)
       const status = response.status;
-      console.log('Ajax.then response', response);
+      // console.log('Ajax.then response', response);
       if (status >= 200 && status < 300) {
         // may be ok
         return response;
@@ -129,7 +129,7 @@ export class Ajax {
     .then((json) => {
       // parsed JSON
       const result = new ResultClass( json );
-      console.log('Ajax.then result', result);
+      // console.log('Ajax.then result', result);
       if ( !Codes.status( result.status.code ) ) {
         // something bad
         let code = result.status.code;
@@ -148,7 +148,7 @@ export class Ajax {
       // 何か問題発生
       // 注意！Promise が永遠に続くので Dom rendering error でもここに戻る
       // error callback
-      console.log('Ajax.then error', error);
+      // console.log('Ajax.then error', error);
       this.enable();
       reject(error);
       return error;

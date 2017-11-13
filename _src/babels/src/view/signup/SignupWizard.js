@@ -77,7 +77,7 @@ export class SignupWizard extends View {
    */
   constructor(element, option = {}, wow = false) {
     super( element, option );
-    console.log('SignupWizard', element, option, wow);
+    // console.log('SignupWizard', element, option, wow);
     //
     // this._action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
 
@@ -162,7 +162,7 @@ export class SignupWizard extends View {
    * @param {CategoriesDae} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
   complete( result:CategoriesDae ):void {
-    console.log('SignupWizard.complete', result);
+    // console.log('SignupWizard.complete', result);
     this.render( result, this._step );
   }
   /**
@@ -250,7 +250,7 @@ export class SignupWizard extends View {
     //   />,
     //   this.element
     // );
-    console.log('SignupWizard.render 1', this.element, this.wow);
+    // console.log('SignupWizard.render 1', this.element, this.wow);
     const container = this.wow ? SignupWizard.prepareWow() : null;
     // ---------------------------------------------
     // since 2017-11-07
@@ -283,7 +283,7 @@ export class SignupWizard extends View {
     if (!this.wow) {
       this.social();
     }
-    console.log('SignupWizard.render 2', this.element, this.wow);
+    // console.log('SignupWizard.render 2', this.element, this.wow);
   }
   /**
    * component が mount された

@@ -294,7 +294,7 @@ export class ComponentStep3Form extends React.Component {
     const userDae = new UserDae(result.response);
     if (User.login(userDae.accessToken)) {
       // modal open
-      console.log('ComponentStep3Form.doneWow', this.wow);
+      // console.log('ComponentStep3Form.doneWow', this.wow);
       // onbeforeunload を解除するため
       this.props.beforeRedirect();
       // modal component
