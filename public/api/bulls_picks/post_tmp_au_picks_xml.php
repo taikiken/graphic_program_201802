@@ -29,7 +29,7 @@ for ($date_itr = 0; $date_itr < 3; $date_itr++) {
     $post_blstarticle_id = !empty($_POST['p_blstarticle']) ? $_POST['p_blstarticle'] : 0;
 
     // 動画記事IDを最初の特集内にいれる
-    if ($articles_itr == 0 ) {
+    if ($date_itr == 0 && $articles_itr == 0) {
       $blstarticle = $articles->appendChild($dom->createElement('blstarticle'));
       $blstarticle_id = $blstarticle->appendChild($dom->createElement('id'));
       $blstarticle_id->appendChild(
