@@ -46,11 +46,11 @@ export const RootNode = React.createClass( {
     sp: React.PropTypes.bool.isRequired,
     // since 2017-11-07
     wow: React.PropTypes.bool.isRequired,
-    container: React.PropTypes.object.isRequired,
+    container: React.PropTypes.object,
   },
-  // defaultProps: {
-  //   wow: false,
-  // },
+  defaultProps: {
+    container: null,
+  },
   getInitialState: function() {
     this.status = SignupStatus.factory();
 

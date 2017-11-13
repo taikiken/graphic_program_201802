@@ -63,7 +63,16 @@ export class ComponentStep3Form extends React.Component {
       beforeRedirect: React.PropTypes.func.isRequired,
       // since 2017-11-07
       wow: React.PropTypes.bool.isRequired,
-      container: React.PropTypes.object.isRequired,
+      container: React.PropTypes.object,
+    };
+  }
+  /**
+   * React.defaultProps
+   * @returns {{container: null}} React.defaultProps
+   */
+  static get defaultProps() {
+    return {
+      container: null,
     };
   }
   // ---------------------------------------------------
@@ -379,5 +388,9 @@ ComponentLegendStep3.propTypes = {
   getForm: React.PropTypes.func.isRequired,
   beforeRedirect: React.PropTypes.func.isRequired,
   wow: React.PropTypes.bool.isRequired,
-  container: React.PropTypes.object.isRequired,
+  container: React.PropTypes.object,
+};
+
+ComponentLegendStep3.defaultProps = {
+  container: null,
 };

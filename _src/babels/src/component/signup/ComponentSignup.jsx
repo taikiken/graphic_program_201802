@@ -54,21 +54,18 @@ export default class ComponentSignup extends React.Component {
       // since 2017-11-13
       wow: React.PropTypes.bool.isRequired,
       // div#js-wow-modal-container - modal insert container
-      container: React.PropTypes.object.isRequired,
+      container: React.PropTypes.object,
     };
   }
-  // /**
-  //  * React.defaultProps
-  //  * @returns {{didMount: ?function, beforeRedirect: ?function, sp: boolean}}
-  //  * React.defaultProps を設定し返します
-  //  */
-  // static get defaultProps() {
-  //   return {
-  //     didMount: null,
-  //     beforeRedirect: null,
-  //     sp: false,
-  //   };
-  // }
+  /**
+   * React.defaultProps
+   * @returns {{container: null}} React.defaultProps
+   */
+  static get defaultProps() {
+    return {
+      container: null,
+    };
+  }
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
