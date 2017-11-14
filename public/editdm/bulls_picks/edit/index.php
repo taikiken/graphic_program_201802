@@ -163,7 +163,7 @@ EOT;
           <div class="card bg-light mb-3">
             <div class="card-header">プレビュー</div>
             <div class="card-body">
-              <pre class="card-text"><code id="showxml" class="language-html" data-lang="html"></code></pre>
+              <pre class="card-text"><code id="preview-xml" class="language-html" data-lang="html"></code></pre>
             </div>
           </div>
         </div>
@@ -194,7 +194,7 @@ EOT;
     });
 
     function getXml(url) {
-        $('#showxml').empty(); // 初期化
+        $('#preview-xml').empty(); // 初期化
 
         $.ajax({
             url: url,
@@ -204,13 +204,13 @@ EOT;
             success: function (data) {
 //                var s = new XMLSerializer();
 //                var xml = s.serializeToString(data);
-//                $('#showxml').text(xml);
-                $('#showxml').text(data);
+//                $('#preview-xml').text(xml);
+                $('#preview-xml').text(data);
 
             },
             error: function () {
                 var sorry = '読み込めませんでした...';
-                $('#spb-xml').text(sorry);
+                $('#preview-xml').text(sorry);
             }
         });
     }

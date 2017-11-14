@@ -134,7 +134,14 @@ EOT;
                 $view_id_count = $articles_itr + 1; // 表示用特集番号
                 echo <<<EOT
 <tr>
-  <th colspan="2" class="inputHeader" scope="row">記事{$view_id_count}</th>
+  <th colspan="2" class="inputHeader" scope="row">記事{$view_id_count}
+    <a href="javascript:void(0)" onclick="moveUp({$date_itr},{$articles_itr})">
+      <img src="/shared/cms/img/cmd_up.gif" width="13" height="13" alt="一つ上へ入れ替える" >
+    </a>
+    <a href="javascript:void(0)" onclick="moveDown({$date_itr},{$articles_itr})">
+      <img src="/shared/cms/img/cmd_down.gif" width="13" height="13" alt="一つ下へ入れ替える" >
+    </a>
+  </th>
 </tr>
 EOT;
 
@@ -171,7 +178,7 @@ EOT;
           <div class="card bg-warning mb-3">
             <div class="card-header">au プレビュー</div>
             <div class="card-body">
-              <pre class="card-text"><code id="showxml" class="language-html" data-lang="html"></code></pre>
+              <pre class="card-text"><code id="preview-xml" class="language-html" data-lang="html"></code></pre>
             </div>
           </div>
         </div>
@@ -197,7 +204,7 @@ EOT;
     });
 
     function getXml(url) {
-        $('#showxml').empty(); // 初期化
+        $('#preview-xml').empty(); // 初期化
 
         $.ajax({
             url: url,
@@ -207,8 +214,8 @@ EOT;
             success: function (data) {
 //                var s = new XMLSerializer();
 //                var xml = s.serializeToString(data);
-//                $('#showxml').text(xml);
-                $('#showxml').text(data);
+//                $('#preview-xml').text(xml);
+                $('#preview-xml').text(data);
 
             },
             error: function () {
@@ -237,7 +244,59 @@ EOT;
         });
     }
 
+    function moveUp(date_id, article_id) {
+        if (article_id > 0) {
+            var serialize = $('form').serializeArray();
+            var form_values = {};
+            for (i in serialize) {
+                var key = serialize[i]["name"];
+                var value = serialize[i]["value"];
+                form_values[key] = value;
+            }
+            console.log(form_values['p_id' + date_id + article_id]);
 
+            var prev_article_id = article_id - 1;
+            // 移動元から移動先へ
+            document.getElementsByName('p_id' + date_id + prev_article_id)[0].value = form_values['p_id' + date_id + article_id];
+            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
+                document.getElementsByName('p_comment' + date_id + prev_article_id + comment_itr)[0].value = form_values['p_comment' + date_id + article_id + comment_itr];
+            }
+            // 移動先の内容を移動元へ
+            document.getElementsByName('p_id' + date_id + article_id)[0].value = form_values['p_id' + date_id + prev_article_id];
+            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
+                document.getElementsByName('p_comment' + date_id + article_id + comment_itr)[0].value = form_values['p_comment' + date_id + prev_article_id + comment_itr];
+            }
+
+            postXml(post_api, get_tmp_api); // プレビューに反映
+        }
+    }
+
+
+    function moveDown(date_id, article_id) {
+        if (article_id < 4) {
+            var serialize = $('form').serializeArray();
+            var form_values = {};
+            for (i in serialize) {
+                var key = serialize[i]["name"];
+                var value = serialize[i]["value"];
+                form_values[key] = value;
+            }
+
+            var next_article_id = article_id + 1;
+            // 移動元から移動先へ
+            document.getElementsByName('p_id' + date_id + next_article_id)[0].value = form_values['p_id' + date_id + article_id];
+            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
+                document.getElementsByName('p_comment' + date_id + next_article_id + comment_itr)[0].value = form_values['p_comment' + date_id + article_id + comment_itr];
+            }
+            // 移動先の内容を移動元へ
+            document.getElementsByName('p_id' + date_id + article_id)[0].value = form_values['p_id' + date_id + next_article_id];
+            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
+                document.getElementsByName('p_comment' + date_id + article_id + comment_itr)[0].value = form_values['p_comment' + date_id + next_article_id + comment_itr];
+            }
+
+            postXml(post_api, get_tmp_api); // プレビューに反映
+        }
+    }
 
 </script>
 </body>
