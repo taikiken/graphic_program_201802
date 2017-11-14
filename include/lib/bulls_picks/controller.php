@@ -109,6 +109,7 @@ if ($q->get_dir() === 1) { // 編集
       $articles_date->value = !empty($_POST['p_date']) ? $_POST['p_date'] : '-';
       $articles->appendChild($articles_date);
       // $au_paramを一緒に作っていく
+      // $au_param 1日目
       $au_params['p_date0'] = !empty($_POST['p_date']) ? $_POST['p_date'] : '-';
 
       for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
@@ -169,19 +170,41 @@ if ($q->get_dir() === 1) { // 編集
       }
 
       $au_params['p_blstarticle'] = (string)$au_picks_xml->articles->blstarticle->id;
+      // $au_param 2日目以降
 
-      for ($date_itr = 0; $date_itr < 3; $date_itr++) {
-        // 2日目以降を作っていく 1日ずらす
-        $au_params['p_date' . ($date_itr + 1)] = $dates[$date_itr];
+      // 2日目以降を作っていく
+      // ずらさない
+      if ($_POST['p_date'] == $dates[0])
+      {
+        for ($date_itr = 0; $date_itr < 3; $date_itr++) {
+          $au_params['p_date' . ($date_itr + 1)] = $dates[$date_itr +1];
 
-        for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
-          $au_params['p_id' . ($date_itr + 1) . $articles_itr] = $ids[$date_itr][$articles_itr];
+          for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
+            $au_params['p_id' . ($date_itr + 1) . $articles_itr] = $ids[$date_itr +1][$articles_itr];
 
-          for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
-            $au_params['p_comment' . ($date_itr + 1) . $articles_itr . $comment_itr] = $comments[$date_itr][$articles_itr][$comment_itr];
+            for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
+              $au_params['p_comment' . ($date_itr + 1) . $articles_itr . $comment_itr] = $comments[$date_itr +1][$articles_itr][$comment_itr];
+            }
           }
         }
       }
+      // 1日ずらす
+      else
+      {
+        for ($date_itr = 0; $date_itr < 3; $date_itr++) {
+          $au_params['p_date' . ($date_itr + 1)] = $dates[$date_itr];
+
+          for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
+            $au_params['p_id' . ($date_itr + 1) . $articles_itr] = $ids[$date_itr][$articles_itr];
+
+            for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
+              $au_params['p_comment' . ($date_itr + 1) . $articles_itr . $comment_itr] = $comments[$date_itr][$articles_itr][$comment_itr];
+            }
+          }
+        }
+
+      }
+
     }
 
     file_put_contents('/tmp/ooo.xml', print_r($au_params, true));
