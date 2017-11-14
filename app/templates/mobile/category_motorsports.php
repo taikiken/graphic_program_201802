@@ -53,7 +53,7 @@
         // 記事一覧: sp banner
         if ( !empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']) ) :
         ?>
-        <div class="sponsor-link" style="margin:0 3.125%">
+        <div class="sponsor-link" style="padding:15px 3.125%">
             <a href="/motorsports/crazy-for-racing/" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '/motorsports/crazy-for-racing/', true);"><img src="/motorsports/crazy-for-racing/assets/img/640x100.png" alt="CRAZY FOR RACING"></a>
         </div>
         <?php
