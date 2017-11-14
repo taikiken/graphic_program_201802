@@ -25,7 +25,7 @@ if(strlen($api)>0){
 
 		if($type===""){
 
-            if($category == "crazy" && strpos($_SERVER['HTTP_REFERER'], '/crazy/detail/'))
+            if($category == "crazy" && strpos($_SERVER['HTTP_REFERER'], '/athlete/'))
             {
                 $json = file_get_contents($ImgPath . '/json/ca_article_ids.json');
                 $json = json_decode($json, true);
@@ -34,13 +34,14 @@ if(strlen($api)>0){
                 if(isset($json[$player_id]) && is_array($json[$player_id]) && count($json[$player_id]) > 0)
                 {
                     $ids = join(',', $json[$player_id]);
-                    $sql=sprintf("select * from %s%s",sprintf($articletable3,set_isbookmark($uid),$ids, $c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
-                    $nsql=sprintf("select count(id) as n from repo_n where m1=%s and id in(%s)",$c[0],$ids);
+                    $sql=sprintf("select * from %s%s",sprintf($articletable3,set_isbookmark($uid),$ids,$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+                    $nsql=sprintf("select count(id) as n from repo_n where id in(%s)",$ids);
                 }
                 else
                 {
-                    $sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
-                    $nsql=sprintf("select num as n from u_latestpost where m1=%s",$c[0]);
+                    $ids = "1";
+                    $sql=sprintf("select * from %s%s",sprintf($articletable3,set_isbookmark($uid),$ids,$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+                    $nsql=sprintf("select count(id) as n from repo_n where id in(%s)",$ids);
                 }
             }
             else
