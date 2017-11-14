@@ -206,9 +206,7 @@ if ($q->get_dir() === 1) { // 編集
       }
 
     }
-
-    file_put_contents('/tmp/ooo.xml', print_r($au_params, true));
-
+    
 
     // au編集画面で編集したら、postされた内容でs3へ保存する
     // spb編集画面ではspbの内容をauの1日目へ入れて $TMP_AU_PICKS へ保存する
