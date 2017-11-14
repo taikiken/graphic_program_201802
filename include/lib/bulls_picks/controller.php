@@ -77,9 +77,11 @@ if ($q->get_dir() === 1) { // 編集
     if ($q->tstr[3] == 'au') {
       $s3_key = $AU_PICKS_FILENAME;
       $tmp_filename = $TMP_AU_PICKS;
+      $archive_filename = $AU_ARCHIVE_PICKS;
     } else {
       $s3_key = $PICKS_FILENAME;
       $tmp_filename = $TMP_PICKS;
+      $archive_filename = $ARCHIVE_PICKS;
     }
 
     // アーカイブ作成
@@ -89,8 +91,10 @@ if ($q->get_dir() === 1) { // 編集
     $date = str_replace('/', '', $date);
     $picks_xml->asXML($tmp_filename);
 
+    $archive_filename = str_replace('{date}', $date, $archive_filename);
+
     // xml/archives/1031picks.xml
-    s3upload($tmp_filename, 'xml/au/archives/' . $date . 'picks.xml');
+    s3upload($tmp_filename, $archive_filename);
 
     // 入力内容でpicks.xml作成
     include $INCLUDEPATH . "lib/" . $CURRENTDIRECTORY . "/ex.php";
