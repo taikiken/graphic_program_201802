@@ -136,7 +136,7 @@
         <p class="wowma_cpn__flow__notice">※クーポンはWowma!サイトでのみ使用できます</p>
       </div><!-- /.wowma_cpn__flow -->
 
-      <div class="wowma_cpn__whatis">
+      <div class="wowma_cpn__whatis for-browser">
         <div class="wowma_cpn__whatis__inner">
           <h2 class="wowma_cpn__whatis__heading"><img src="/assets/sp/images/wowma-campaign-171116/whatis-heading.png" alt="「スポーツブル」って？"></h2>
           <div class="wowma_cpn__whatis__copy"><img src="/assets/sp/images/wowma-campaign-171116/whatis-copy.png" alt="3分でスポーツを語れるようになる無料スポーツニュースアプリ"></div>
