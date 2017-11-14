@@ -184,13 +184,13 @@ export class ComponentMoreButton extends React.Component {
    * @param {boolean} show button 表示・非表示 フラッグ false: 非表示
    */
   updateShow(show) {
-    if (!show) {
+//    if (!show) {
       // button を非表示にするので rise 監視を止める
-      this.destroy();
-    } else {
+//      this.destroy();
+//    } else {
       // button 表示, loading 表示を止める
       this.updateLoading(false);
-    }
+//    }
 
     this.setState({ show });
   }
@@ -268,17 +268,19 @@ export class ComponentMoreButton extends React.Component {
    */
   render() {
     // hasNext: true, button を表示する？
-    if (!this.state.show) {
+    if (!this.props.action.hasNext()) {
       // button 表示なし
       return null;
-    }
-    return (
-      <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
-        <a className="board-btn-viewmore-link" href={'#more'} onClick={this.boundClick} >
-          <span>{Message.BUTTON_VIEW_MORE}</span>
+    } else {
+        return (
+            <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
+    <a className="board-btn-viewmore-link" href={'#more'} onClick={this.boundClick} >
+    <span>{Message.BUTTON_VIEW_MORE}</span>
         </a>
         <span className="loading-spinner">&nbsp;</span>
-      </div>
+        </div>
     );
+
+    }
   }
 }

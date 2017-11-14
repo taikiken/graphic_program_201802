@@ -461,7 +461,10 @@ $(function(){
 						$("input[name='"+n+"']").val($(this).html()!="選択をクリアする"?$(this).html():"");
 
 						if(cid===1&&$("[name='p_d1']").val().match(/3|4|5/)){
-							selectedmedia(parseInt($(this).html()));
+							if ($(this).html() === $("[name='p_d2']").val()) {
+								// 記事の投稿者が選択された場合のみ
+								selectedmedia(parseInt($(this).html()));
+							}
 						}
 						$(".optionsel,.optionselbg").hide();
 					});
