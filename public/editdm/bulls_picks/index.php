@@ -110,7 +110,7 @@ if($q->get_dir()==3){
           <p>アーカイブ検索: <input type="text" id="spb-datepicker" readonly></p><br/>
 
           <div class="card bg-light mb-3">
-            <div class="card-header">スポーツブル picks.xml</div>
+            <div class="card-header" id="spb-card-header">反映中のスポーツブル picks.xml</div>
             <div class="card-body">
               <pre class="card-text"><code id="spb-xml" class="language-html" data-lang="html"></code></pre>
             </div>
@@ -121,7 +121,7 @@ if($q->get_dir()==3){
           <p>アーカイブ検索: <input type="text" id="au-datepicker" readonly></p><br/>
 
           <div class="card bg-warning mb-3">
-            <div class="card-header">au picks.xml</div>
+            <div class="card-header" id="au-card-header">反映中のau picks.xml</div>
             <div class="card-body">
               <pre class="card-text"><code id="au-xml" class="language-html" data-lang="html"></code></pre>
             </div>
@@ -150,10 +150,16 @@ if($q->get_dir()==3){
     $('#spb-datepicker').change(function () {
         var archive_api = get_api + '?date=' + document.getElementById('spb-datepicker').value;
         getXml(archive_api);
+        var title = document.getElementById('spb-datepicker').value;
+        $('#spb-card-header').text(title + 'のスポーツブル アーカイブ');
+
     });
     $('#au-datepicker').change(function () {
         var archive_api = get_au_api + '?date=' + document.getElementById('au-datepicker').value;
         getXml(archive_api, true);
+        var title = document.getElementById('au-datepicker').value;
+        $('#au-card-header').text(title + 'のau アーカイブ');
+
     });
 
     function getXml(url, au_flag=false) {
