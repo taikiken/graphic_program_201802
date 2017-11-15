@@ -325,8 +325,30 @@
         <!-- /.foot-sec-inner -->
     </footer>
     <!-- /.foot-sec -->
-
-    <script src="https://sportsbull.jp/assets/js/.bundle.js"></script>
+    <script>
+        window.fbAsyncInit = function()
+        {
+            FB.init(
+                {
+                    appId: '842032129256034',
+                    xfbml: true,
+                    version: 'v2.5'
+                });
+        };
+        (function(d, s, id)
+         {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id))
+            {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/ja_JP/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script src="https://sportsbull.jp/assets/js/global.bundle.js"></script>
     <script src="/motorsports/crazy-for-racing/assets/js/Widget_news.js"></script>
 
     </div>
