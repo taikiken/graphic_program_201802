@@ -1,5 +1,13 @@
 <?php
 
+//#2820 Crazy for Racing動画記事API作成
+//slug=>tag で指定
+$categories=array(
+	"station"=>"ブルステオフショットムービー",
+	"cfr_interview"=>"CFRインタビュー",
+	"cfr_report"=>"CFR体験レポート"
+);
+
 include "local.php";
 include "public/check.php";
 
@@ -12,7 +20,10 @@ $category=$_REQUEST["category"];
 
 function check_moviecategory($category){
 	
-	$categories=array("station");
+	global $categories;
+	foreach($categories as $k=>$v){
+		$keys[]=$k;
+	}
 	
 	if(!$category){
 		$status=array(
@@ -21,7 +32,7 @@ function check_moviecategory($category){
 			"user_message"=>"リクエストに誤りがあります。",
 			"developer_message"=>"カテゴリーが指定されておりません。"
 		);
-	}elseif(!in_array($category,$categories)){
+	}elseif(!in_array($category,$keys)){
 		$status=array(
 			"code"=>400,
 			"message_type"=>"error",
@@ -45,21 +56,22 @@ if(strlen($_REQUEST["offset"])>0)$y["request"]["offset"]=(int)$_REQUEST["offset"
 
 if($y["status"]["code"]===200){
 	
-	if($category=="station"){
-		$nsql="select count(*) as n from repo_n where d2=51 and flag=1 and t10='ブルステオフショットムービー'";
-		$o->query($nsql);
-		$f=$o->fetch_array();
-		$count=$f["n"];
-		
-		$sql=sprintf("select id,img1,title from repo_n where d2=51 and flag=1 and t10='ブルステオフショットムービー' order by m_time desc limit %s offset %s",$length,$offset);
-		$o->query($sql);
-		while($f=$o->fetch_array()){
-			$s[]=array(
-				"title"=>$f["title"],
-				"img"=>sprintf("%s/thumbnail1/%s",$ImgPath,$f["img1"]),
-				"url"=>sprintf("%s/p/%s/",$domain,$f["id"])
-			);
-		}
+	$tag=$categories[$category];
+	
+	$nsql=sprintf("select count(*) as n from repo_n where flag=1 and t10='%s'",$tag);
+	$o->query($nsql);
+	$f=$o->fetch_array();
+	$count=$f["n"];
+	
+	$sql=sprintf("select id,img1,title from repo_n where flag=1 and (t10='%s' or t11='%s' or t12='%s' or t13='%s' or t14='%s' or t15='%s') order by m_time desc limit %s offset %s",$tag,$tag,$tag,$tag,$tag,$tag,$length,$offset);
+	$o->query($sql);
+	while($f=$o->fetch_array()){
+		$s[]=array(
+			"title"=>$f["title"],
+			"img"=>sprintf("%s/thumbnail1/%s",$ImgPath,$f["img1"]),
+			"url"=>sprintf("%s/p/%s/",$domain,$f["id"]),
+			"is_movie"=>true
+		);
 	}
 	
 	$y["response"]["count"]=(int)$count;
