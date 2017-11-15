@@ -34,6 +34,9 @@ $a[]=array("head","公開設定");
 $a[]=array("menu","5","rb",2,"chgExpire(this.value)");
 $a[]=array("startendDate","公開スケジュール","sy,sm,sd,ey,em,ed","","","","");
 */
+if ($_GET["rid"] == "95") { // 注目の選手
+  $a[]=array("textfield","タイトル","name","45","","",$BILLINGUAL);
+}
 
 include $INCLUDEPATH."print_write.php";
 
