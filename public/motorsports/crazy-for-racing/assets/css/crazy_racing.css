@@ -172,7 +172,7 @@ sumo
         .crazy_racing .talks_content .article .img a:hover img {
           opacity: 0.7; }
     .crazy_racing .talks_content .article .txt_box {
-      max-width: 645px; }
+      width: 645px; }
       .crazy_racing .talks_content .article .txt_box p {
         line-height: 1.8;
         font-size: 16px; }
@@ -380,7 +380,8 @@ sumo
           top: -10px;
           left: 0; }
       .whole.crazy_racing .talks_content .article .txt_box {
-        max-width: 645px; }
+        max-width: 645px;
+        width: auto; }
         .whole.crazy_racing .talks_content .article .txt_box p {
           font-size: 14px; }
       .whole.crazy_racing .talks_content .article .article_ttl {
