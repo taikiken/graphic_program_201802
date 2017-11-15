@@ -812,4 +812,24 @@ function generalRadioButton($v,$name,$e=""){
 	return $l;
 }
 
+/**
+ * repo_nがアカウントに紐づけられたmediaIdに属するかを返す
+ * @param int $repo_n_id
+ * @param array $media_ids emptyのときは全権限を持っているとみなす
+ * @return boolean
+ */
+function isMyMedia($repo_n_id, $media_ids){
+	global $o;
+
+	$sql="SELECT um.id AS media_id FROM repo_n rn "
+			. "LEFT JOIN u_media um ON rn.d2 = um.id "
+			. "WHERE rn.id = {$repo_n_id}";
+	$o->query($sql);
+	$f=$o->fetch_array();
+	if(empty($f)){
+		return false;
+	}
+
+	return in_array($f['media_id'], $media_ids);
+}
 ?>
