@@ -25,11 +25,11 @@
 'use strict';
 
 // ushi
-const ua = navigator.userAgent;
-// android
-const android = ua.indexOf('undotsushin-android') !== -1;
-// ios
-const ios = ua.indexOf('undotsushin-ios') !== -1;
+// const ua = navigator.userAgent;
+// // android
+// const android = ua.indexOf('undotsushin-android') !== -1;
+// // ios
+// const ios = ua.indexOf('undotsushin-ios') !== -1;
 
 // if (ios || android) {
 //   return;
@@ -71,9 +71,9 @@ const watch = () => {
 };
 
 const start = () => {
-  if (ios || android) {
-    return;
-  }
+  // if (ios || android) {
+  //   return;
+  // }
   // banner
   const target = document.getElementById('js-wowma_cpn__regist');
   const targetMom = document.getElementById('js-wowma_cpn__mom');
