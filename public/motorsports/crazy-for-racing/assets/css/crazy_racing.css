@@ -176,6 +176,14 @@ sumo
       .crazy_racing .talks_content .article .txt_box p {
         line-height: 1.8;
         font-size: 16px; }
+      .crazy_racing .talks_content .article .txt_box a {
+        color: #fff;
+        -webkit-transition: .2s ease;
+        -o-transition: .2s ease;
+        transition: .2s ease; }
+        .crazy_racing .talks_content .article .txt_box a:hover {
+          color: #E91D24;
+          text-decoration: none; }
     .crazy_racing .talks_content .article .article_ttl {
       font-size: 24px;
       font-weight: bold;
