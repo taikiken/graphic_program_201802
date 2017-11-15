@@ -262,7 +262,7 @@ h1{
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
 	margin:10px 0 10px 0;
-	
+
 }
 #topicPath ul li{
 	background-image:url(/shared/cms/img/point_topicpath_default.gif);
@@ -727,7 +727,7 @@ table.listTable td.resultCont{
 	display:block;
 	float:left;
 	margin:0 0.3em 0 0;
-	
+
 }
 .pms{
 	padding:0.5em 0 0.5em 0!important;
@@ -912,7 +912,7 @@ table.listTable td.resultCont{
 	font-size:75% !important;
 	text-align:left !important;
 	padding:0.5em 1em !important;
-	
+
 }
 .registtable th{
 	border:1px solid #ccc !important;
@@ -1037,7 +1037,7 @@ table.listTable td.resultCont{
 	font-weight:bold;
 	float:left;
 	width:800px;
-	
+
 }
 .langselect dt{
 	float:left !important;
@@ -1249,6 +1249,23 @@ table.listTable td.resultCont{
 	margin:3px 0 0 8px;
 }
 
+.btnplayerpreview{
+	width:60px;
+	display:block;
+	text-align:center;
+	line-height:28px;
+	background-color:#efefef;
+	border:1px solid #999;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	color:#333;
+	padding:1px 0 0 0;
+	float:left;
+	cursor:pointer;
+	margin:3px 0 0 8px;
+}
+
 .editimage{
 	width:60px;
 	display:block;
@@ -1301,7 +1318,7 @@ table.listTable td.resultCont{
 
 
 .hidetd{
-	
+
 }
 
 
@@ -1433,8 +1450,8 @@ table.listTable td.resultCont{
 .pickup{
 	display:none;
 }
-	
-	
+
+
 .wmne{
 	padding:0 0 0 5px;
 }
@@ -1451,7 +1468,7 @@ table.listTable td.resultCont{
 	font-weight:bold;
 	margin:0 5px 0 0;
 }
-	
+
 .sedx{
 	color:#119BFF;
 	text-decoration:underline;
@@ -1460,7 +1477,7 @@ table.listTable td.resultCont{
 }
 
 
-.orderby,.exuser,.excategory,.experiod{
+.orderby,.exuser,.excategory,.experiod,.orderby_p,.excategory_p{
 	font-size:12px !important;
 	font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
@@ -1472,7 +1489,7 @@ table.listTable td.resultCont{
 }
 .activiti{
 	color:#FF6700;
-	
+
 }
 .numTable{
 	margin:0 0 0 10px;
@@ -1520,7 +1537,7 @@ table.listTable td.resultCont{
 }
 
 .preview{
-	
+
 }
 .preview img{
 	width:640px;
@@ -1617,7 +1634,7 @@ table.listTable td.resultCont{
 }
 
 
-.prevmonth,.nextmonth{	
+.prevmonth,.nextmonth{
 	color:#3a87d5;
 	text-decoration:none;
 }

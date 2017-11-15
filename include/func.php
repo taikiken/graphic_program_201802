@@ -54,7 +54,7 @@ function make_contents($id,$type=0){
 		$l[]=make_contentsblock($f["types"],$f["title"],$f["media"],$f["link"],1);
 	}
 	$l=implode("\n",$l);
-	
+
 	if($type==0){
 		return $l;
 	}else{
@@ -80,7 +80,7 @@ function youtubeURL($u){
 }
 
 function make_contentsblock($type,$title,$media,$link,$flag=0){
-	
+
 	$title=str_replace("''","'",$title);
 	$l="";
 	if($type==0){
@@ -99,19 +99,19 @@ function make_contentsblock($type,$title,$media,$link,$flag=0){
 		$l=sprintf("<div class=\"cms_table\">%s</div>",modDispText($title,$media));
 	}elseif($type==5){
 		if(preg_match("/youtube/",$title)){
-			
+
 			$css=" ratio16_9";
 			$container="<div class=\"ratio16_9-inner\">%s</div>";
 			$title=youtubeURL($title);
-			
+
 		}else{
 			$css="";
 			$container="%s";
 		}
-		
+
 		$contents=sprintf($container,$title);
 		if($flag==0&&preg_match("/location\.href/",$title)&&preg_match("/editdm/",$_SERVER["REQUEST_URI"]))$contents=htmlspecialchars(stripslashes($title));
-		
+
 		$l=sprintf("<div class=\"cms_widget%s\">%s</div>",$css,$contents);
 	}elseif($type==6){
 		//$l=sprintf("<div class=\"cms_pdf\"><a href=\"/prg_img/pdf/%s\" target=\"_blank\">%s</a></div>",$media,$title);
@@ -132,7 +132,7 @@ function datemapping($t){
 function splittxts($s){
 	$s=strip_tags($s);
 	$s=htmlspecialchars($s);
-	
+
 	$l=mb_strlen($s);
 	if($l>100){
 		$s=mb_substr($s,0,100);
@@ -148,15 +148,15 @@ function splittxts($s){
 function bookmarkMaker($title,$url,$w=1){
 
 	global $o;
-	
+
 	if(!$o){
 		$o=new db;
 		$o->connect();
 	}
-	
+
 	$title=urlencode($title);
 	$url=urlencode($url);
-	
+
 	$sql="select name,name_e from pm_ where flag=1 and cid=22 order by n";
 	$o->query($sql);
 
@@ -185,11 +185,11 @@ function setTransaction($title,$sessionid,$condition=""){
 
 	global $SITE_URL;
 	global $SESSIONFILEDIR;
-	
+
 	$r=$_SERVER['HTTP_REFERER'];
 	$ua=$_SERVER['HTTP_USER_AGENT'];
 	$ip=$_SERVER['REMOTE_ADDR'];
-	
+
 	if(strlen($ua)>0&&!chkCrawler($ua,$ip)){
 		$encd="";
 		$hash="";
@@ -285,7 +285,7 @@ function tagMatchSplit($iOpenRegex,$iCloseRegex,$iString,&$oMatches){
 	$matchesOpen=$matchesClose=$oMatches=array();
 	$start=$pos=$len=$searchPos=$tmpPos=0;
 	$splitstr='';
-	
+
 	if(!preg_match_all($iOpenRegex,$iString,$matchesOpen)){
 		return false;
 	}
@@ -371,9 +371,9 @@ function pTagModify($l){
 
 function stSw($a,$b){
 	if(strlen($a)>0){
-		return mod_HTML($a);	
+		return mod_HTML($a);
 	}else{
-		return($b!="")?mod_HTML($b):"&nbsp;";	
+		return($b!="")?mod_HTML($b):"&nbsp;";
 	}
 }
 
@@ -392,14 +392,14 @@ function dateOffset($offset,$y,$m,$d){
 		return sprintf("%s%s%s%s%s",$y,$offset,$m,$offset,$d);
 	}else{
 		$m=(strlen($m)==1)?sprintf("0%s",$m):$m;
-		return sprintf("%s%s%s",$y,$offset,$m);	
+		return sprintf("%s%s%s",$y,$offset,$m);
 	}
 }
 
 function logIns($message,$usr,$error="",$sqls=""){
-	
+
 	global $CMSLOG;
-		
+
 	$fp=@fopen($CMSLOG,"a");
 	@fputs($fp,sprintf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n",date("Y-m-d H:i:s"),$_COOKIE["usr"],$message,(strlen($error)>0)?0:1,$error,preg_replace('/(\n|\t)/',"",$sqls)));
 	@fclose($fp);
@@ -498,7 +498,7 @@ function auto_link($str){
 }
 
 function ctx($s,$f=0){
-	
+
 	if(preg_match("/</",$s)){
 		return str_replace(array("<div","</div>"),array("<p","</p>"),$s);
 	}else{
@@ -528,7 +528,7 @@ function ptagmake($s){
 	}
 }
 
-function mod_HTML($str,$rua=0){	
+function mod_HTML($str,$rua=0){
 	global $w;
 	$str=trim($str);
 	$str=stripslashes($str);
@@ -539,7 +539,7 @@ function mod_HTML($str,$rua=0){
 		//$str=htmlspecialchars($str);
 		$str=auto_link($str);
 		$str=ereg_replace("\n","<br>",$str);
-		
+
 	}elseif($rua==2){
 		$str=strip_tags($str,"<img><blockquote><sub><sup><strong><italic><strike><a><span><b><u><i><p><div><ol><ul><li><dl><dt><dd><table><tr><th><td><h1><h2><h3><h4><h5><h6><br><font>");
 		$str=pTagModify($str);
@@ -551,7 +551,7 @@ function mod_HTML($str,$rua=0){
 		//$str=htmlspecialchars($str);
 		//$str=ereg_replace("\n","\\n",$str);
 	}else{
-		
+
 	}
 	//$str=ex2byte($str);
 	return $str;
@@ -655,7 +655,7 @@ function data_sql($q="^p_"){
 				}
 				//$v=stripslashes($v);
 				//$v=addslashes($v);
-				if(preg_match('/((m|d|fn)[0-9]+)/',$k)){
+				if(preg_match('/((m|d|fn|pcg|pid)[0-9]+)/',$k)){
 					//$v=mb_convert_kana($v,"n");
 					if(preg_match('/(^[0-9]+):/',$v,$rrd)){
 						$v=$rrd[1];
@@ -665,7 +665,7 @@ function data_sql($q="^p_"){
 				}
 				$v=str_replace(array("\r\n","\r"),"\n",$v);
 				$v=str_replace("―","-",$v);
-				
+
 				if(preg_match("/body[a-z]{2}/",$k)){
 					//$v=ctx($v,2);
 				}
@@ -694,7 +694,7 @@ function strs_split($str_data,$line_width){
 	return $mystr;
 }
 function line_split($line_data,$line_width){
-	
+
 	$this_array=array();
 	$i=0;
 	while($line_data!=""){
