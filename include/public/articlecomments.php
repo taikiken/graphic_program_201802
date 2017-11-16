@@ -9,7 +9,14 @@ for($i=0;$i<count($p);$i++){
 	$f=$o->fetch_array();
 	
 	$s[$i]["comments_count"]=(int)$f["n"];
-	
+
+	$s[$i]['is_direct_link'] = false;
+	if(isset($p[$i]['flag']) && $p[$i]['flag'] == "3"){
+		//直リンク用設定
+		$s[$i]['is_direct_link'] = true;
+		$s[$i]['url'] = $p[$i]['direct_link'];
+	}
+
 	if($f["n"]>0){
 		
 		$sql=sprintf("select * from 

@@ -7,7 +7,7 @@ $SIZE=200;
 $articlefield="*";
 
 $articletable="
-(select 
+(select
 	%s
 	id,
 	title,
@@ -31,18 +31,18 @@ $articletable="
 	brightcove,
 	m_time,
 	t8 as videocaption,
-	t9 
+	t9
 from repo_n where flag=1%s) as t1
 
-left join (select 
+left join (select
 	id as userid,
 	t1 as url,
 	cid as typeid,
 	title as name,
-	img1 as icon 
+	img1 as icon
 from u_media) as t2 on t1.d2=t2.userid
 
-left join (select 
+left join (select
 	id as categoryid,
 	name as category,
 	title as categorylabel,
@@ -50,14 +50,73 @@ left join (select
 	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
-left join (select 
+left join (select
 	id as categoryid2,
 	name as category2,
 	title as categorylabel2,
 	name_e as slug2
 from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
 
-left join (select 
+left join (select
+	pageid,
+	region,
+	pref
+from u_area) as t5 on t1.id=t5.pageid";
+
+$articleWithDirectLinktable="
+(select
+	%s
+	id,
+	title,
+	(select body from repo_body where pid=repo_n.id limit 1 offset 0) as body,
+	(select video from u_view where pageid=repo_n.id limit 1 offset 0) as videoflag,
+	t16 as b1,
+	img1,
+	imgflag,
+	(select name from repo where id=d1) as type,
+	d2,
+	d3,
+	t1,
+	m1,
+	m2,
+	t10,t11,t12,t13,t14,t15,
+	a1,a2,a3,a4,a5,a6,
+	streampack,
+	swf as video,
+	youtube,
+	facebook,
+	brightcove,
+	m_time,
+	t8 as videocaption,
+	t9,
+	flag,
+	direct_link_url
+from repo_n where (flag=1 or flag=3)%s) as t1
+
+left join (select
+	id as userid,
+	t1 as url,
+	cid as typeid,
+	title as name,
+	img1 as icon
+from u_media) as t2 on t1.d2=t2.userid
+
+left join (select
+	id as categoryid,
+	name as category,
+	title as categorylabel,
+	name_e as slug,
+	no_image as no_image
+from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
+
+left join (select
+	id as categoryid2,
+	name as category2,
+	title as categorylabel2,
+	name_e as slug2
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
+
+left join (select
 	pageid,
 	region,
 	pref
