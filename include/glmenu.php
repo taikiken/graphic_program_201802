@@ -26,6 +26,7 @@
         <li><a href="/editdm/repo_n/?cid=6">会員</a></li>
         <li><a href="/editdm/comment/">コメント</a></li>
         <li><a href="/editdm/link/">記事取得</a></li>
+        <li><a href="/editdm/ads/edit">ads.txt設定</a></li>
     <?php } ?>
 <?php }else{ ?>
     <li><a href="/editdm/photo/">フォトアルバム</a></li>
