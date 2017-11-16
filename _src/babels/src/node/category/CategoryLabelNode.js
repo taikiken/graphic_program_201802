@@ -10,8 +10,12 @@
  *
  */
 
+// app
 import { Message } from '../../app/const/Message';
 import { MediaType } from '../../app/const/MediaType';
+
+// dae
+import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
 
 // React
 const React = self.React;
@@ -64,7 +68,9 @@ export const CategoryLabelNode = React.createClass( {
     categories: React.PropTypes.array.isRequired,
     // @since 2016-12-26
     mediaType: React.PropTypes.string,
-    recommend: React.PropTypes.bool
+    recommend: React.PropTypes.bool,
+    // @since 2017-09-13
+    anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae),
   },
   /**
    * 下位互換を保つために default 値を設定します
@@ -72,18 +78,39 @@ export const CategoryLabelNode = React.createClass( {
    */
   defaultProps: {
     mediaType: '',
-    recommend: false
+    recommend: false,
+    // @since 2017-09-13
+    anotherCategories: null,
+  },
+  renderRegion: function() {
+    const { anotherCategories, id, index } = this.props;
+    if (!anotherCategories) {
+      return null;
+    }
+    // region
+    return anotherCategories.area.list.map((regionDae, i) => {
+      return (
+        <span
+          key={`labels-area-${id}-${index}-${i}`}
+          className="category-label category-label_area"
+        >
+          {regionDae.region}
+        </span>
+      );
+    });
   },
   /**
    * 記事一覧の 1記事ブロック カテゴリコンテナ + 動画 + オススメ記事
    * @returns {XML} span.category-label-wrapper
    */
   render: function() {
-    if (!this.props.categories.length) {
+    const { anotherCategories, categories, id, index } = this.props;
+    // console.log('CategoryLabelNode.render anotherCategories', anotherCategories, categories);
+    if (!categories.length && (!anotherCategories || !anotherCategories.area.has)) {
       return null;
     }
-    const id = this.props.id;
-    const index = this.props.index;
+    // const id = this.props.id;
+    // const index = this.props.index;
     return (
       <span className="category-label-wrapper">
         {
@@ -97,14 +124,26 @@ export const CategoryLabelNode = React.createClass( {
             if (!category.label) {
               return null;
             }
+            if (category.slug === 'area' && (anotherCategories && anotherCategories.area.has)) {
+              return null;
+            }
             const areaClassName = category.slug === 'area' ? ' category-label_area' : '';
-
             return (
-              <span key={`ranking-${id}-${index}-${i}`} className={`category-label${areaClassName}`}>
+              <span
+                key={`ranking-${id}-${index}-${i}`}
+                className={`category-label${areaClassName}`}
+              >
                 {category.label}
               </span>
             );
-          } )
+          })
+        }
+        {
+          // region
+          this.renderRegion()
+        }
+        {
+          // pref output
         }
       </span>
     );

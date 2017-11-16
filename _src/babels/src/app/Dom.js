@@ -13,7 +13,7 @@
 
 import {Safety} from '../data/Safety';
 
-let _symbol = Symbol();
+// const _symbol = Symbol('Dom');
 
 /**
  * <p>React Dom を insert する element</p>
@@ -21,18 +21,18 @@ let _symbol = Symbol();
  * <p>全て static です<p>
  */
 export class Dom {
-  /**
-   * <p>PC / SP 共通です<br>
-   * static class です, instance を作成しません</p>
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Dom is static Class. not use new Dom().' );
-
-    }
-  }
+  // /**
+  //  * <p>PC / SP 共通です<br>
+  //  * static class です, instance を作成しません</p>
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Dom is static Class. not use new Dom().' );
+  //
+  //   }
+  // }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -75,13 +75,22 @@ export class Dom {
     return Dom.get( 'page' );
   }
   /**
+   * div#js-page_top - for sp
+   * @returns {Element} div#js-page_top - for sp
+   * @since 2017-10-23
+   */
+  static jsPageTop() {
+    return Dom.get('js-page_top');
+  }
+  /**
    * pageTop container
    * - 2017-08-24 - `#js-page_top` を使用しているページに対応するため取得 ID を増やす
    * - `pageTop`
    * @return {Element} pageTop element を返します
    */
   static pageTop():Element {
-    return Dom.get('pageTop') || Dom.get('js-page_top');
+    // return Dom.get('pageTop') || Dom.get('js-page_top');
+    return Dom.get('pageTop') || Dom.jsPageTop();
   }
   // --------------------------------------
   // header

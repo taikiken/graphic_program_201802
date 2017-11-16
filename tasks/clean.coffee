@@ -105,6 +105,26 @@ gulp.task 'clean:low', ->
 gulp.task 'clean:scss', ->
   return delDot 'scss'
 
+
+# since 2017-11-06 `/public/about/company/*.html`
+gulp.task 'clean:company:html', ->
+  return del(
+    [
+      htdocs + '/about/company/*.html'
+    ]
+    {
+      base: process.cwd()
+      dot: true
+      force: true
+    }
+  )
+  .then(
+    ( paths ) ->
+      console.log '*** clean:company ' + paths.length
+      if paths.length
+        console.log paths.join '\n'
+  )
+
 # ------------------------------------------------------
 
 # all
@@ -114,6 +134,7 @@ gulp.task 'clean:all', ( cb ) ->
       'clean:map'
       'clean:low'
       'clean:scss'
+      'clean:company:html'
     ]
     cb
   )

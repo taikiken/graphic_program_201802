@@ -129,6 +129,7 @@ export class ComponentHeadlines extends React.Component {
                   thumbnail={thumbnail}
                   mediaType={dae.mediaType}
                   home={home}
+                  anotherCategories={dae.anotherCategories}
                 />
               );
             })

@@ -35,12 +35,15 @@ for($i=0;$i<count($gameid);$i++){
 	$jsonfile1=sprintf("%s/%s.json",$ka_path,$gameid[$i]);
 	$data1=get_contents($jsonfile1);
 	if($data1===NULL||preg_match("/Not Found/",$data1))continue;
+	$data1=str_replace("studium","stadium",$data1);
 	$data1=json_decode($data1,true);
+	if(!$data1["response"])continue;
 	
 	$score[$gameid[$i]]=array($data1["response"]["team"][0]["score"]["total"],$data1["response"]["team"][1]["score"]["total"]);	
 	$jsonfile2=sprintf("%s/%s.json",$bucket,$gameid[$i]);
 	if(file_exists($jsonfile2)){
 		$data2=get_contents($jsonfile2);
+		$data2=str_replace("studium","stadium",$data2);
 		$data2=json_decode($data2,true);
 	}
 	
@@ -60,9 +63,9 @@ for($i=0;$i<count($gameid);$i++){
 	
 	if($flag==1){
 		$data1["response"]["lastupdate"]=$lastupdate;
-		$data1["response"]["gameinfo"]["weekday"]=get_weekday(date("w",$data1["response"]["gameinfo"]["date"]));
+		$data1["response"]["gameinfo"]["weekday"]=get_weekday(date("w",strtotime($data1["response"]["gameinfo"]["date"])));
 		$data1["response"]["highlightmovieurl"]=$movie["movie"][$gameid[$i]];
-		$data1["response"]["movieurl"]=$fullmovieurl[$gameid[$i]];
+		$data1["response"]["movieurl"]=$data1["response"]["gameinfo"]["status"]=="試合終了"?$fullmovieurl[$gameid[$i]]:"";
 		
 		$data1["response"]["team"][0]["stats"]["possession"]=hms($data1["response"]["team"][0]["stats"]["possession"]);
 		$data1["response"]["team"][1]["stats"]["possession"]=hms($data1["response"]["team"][1]["stats"]["possession"]);

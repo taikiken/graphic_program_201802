@@ -212,6 +212,6 @@ endif;
 
 <script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script src="/assets/js/app_divide.bundle.js?v=<?php echo $page['version']; ?>"></script>
-
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>

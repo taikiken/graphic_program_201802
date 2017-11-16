@@ -63,6 +63,12 @@
    ga('send', 'pageview');
 
   </script>
+  <style>
+    .undotsushin-ios .for-browser,
+    .undotsushin-android .for-browser {
+      display: none;
+    }
+  </style>
 </head>
 <body class="appbnr-disable">
 <div class="whole <?php echo $page['template_classname']; ?>">
@@ -71,8 +77,14 @@
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
-
-  <div id="js-ushi__message" class="ushi__message">
+  <?php
+  // ?display=entry で enable
+  $display_enable = '';
+  if ($_GET['display'] == 'entry') {
+    $display_enable = 'enable';
+  }
+  ?>
+  <div id="js-ushi__message" class="ushi__message <?php echo $display_enable; ?>">
     <p><img src="/assets/sp/images/ushi/message-entry.png" alt="エントリーが完了しました"></p>
   </div><!-- /.ushi__message -->
 
@@ -85,25 +97,25 @@
             <img src="/assets/sp/images/ushi/summary-figure_niku.png" alt="">
             <figcaption class="ushi__summary__notice">※画像はイメージです</figcaption>
           </figure>
-          <p class="ushi__summary__lead"><img src="/assets/sp/images/ushi/summary-lead.png" alt="スポーツニュースを3日連続見て最大5,000円分の高級ブランド牛を買えるクーポンがもらえる！"></p>
+          <p class="ushi__summary__lead">スポーツニュースを3日連続見て最大5,000円分の高級ブランド牛を買えるクーポンがもらえる！</p>
           <i class="ushi__summary__bull"><img src="/assets/sp/images/ushi/summary-figure_bull.png" alt=""></i>
           <h1 class="ushi__summary__heading"><img src="/assets/sp/images/ushi/summary-heading.png" alt="SPORTS BULL x Wowma! 牛キャンペーン"></h1>
           <p class="ushi__summary__date"><img src="/assets/sp/images/ushi/summary-date.png" alt="エントリー期間 2017年9月25日 - 10月31日まで"></p>
         </div><!-- /.ushi__summary__inner -->
       </div><!-- /.ushi__summary -->
 
-      <div class="ushi__pr_app__wrapper">
+      <div class="ushi__pr_app__wrapper for-browser">
 
-        <div id="js-ushi__mom">
-          <div id="js-ushi__pr_app" class="ushi__pr_app cm_disable"><!-- CM公開前は .cm_disable -->
+        <div id="js-ushi__mom" class="for-browser">
+          <div id="js-ushi__pr_app" class="ushi__pr_app">
             <div class="ushi__pr_app__outer">
               <div class="ushi__pr_app__inner">
-                <figure class="ushi__pr_app__cm"><a href="hoge"><img src="/assets/sp/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>
+                <figure class="ushi__pr_app__cm"><a href="/p/203529/"><img src="/assets/sp/images/ushi/pr_app-figure-cm.png" alt="TVCM放映中"></a></figure>
                 <div class="ushi__pr_app__btn__container">
                   <h3 class="ushi__pr_app__btn__heading"><img src="/assets/sp/images/ushi/pr_app-copy.png" alt="アプリを無料ダウンロードして今すぐ応募する！"></h3>
                   <ul class="ushi__pr_app__btn__list">
-                    <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/ushi/pr_app-btn-ios.png" alt="App Store"></a></li>
-                    <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/ushi/pr_app-btn-android.png" alt="Google play"></a></li>
+                    <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://app.adjust.com/wlqwku" target="_blank"><img src="/assets/sp/images/ushi/pr_app-btn-ios.png" alt="App Store"></a></li>
+                    <li class="ushi__pr_app__btn__item"><a class="ushi__pr_app__btn__link" href="https://app.adjust.com/dpse4s" target="_blank"><img src="/assets/sp/images/ushi/pr_app-btn-android.png" alt="Google play"></a></li>
                   </ul><!-- /.ushi__pr_app__btn__list -->
                 </div><!-- /.ushi__pr_app__btn__container -->
               </div><!-- /.ushi__pr_app__inner -->
@@ -117,7 +129,11 @@
         <h2 class="ushi__flow__heading"><img src="/assets/sp/images/ushi/flow-heading.png" alt="キャンペーンの流れ"></h2>
         <ul class="ushi__flow__list">
           <li class="ushi__flow__item ushi__flow__item--1"><img src="/assets/sp/images/ushi/flow-flow1.png" alt="1. スポーツブルアプリを起動"></li><!-- /.ushi__flow__item--1 -->
-          <li class="ushi__flow__item ushi__flow__item--2"><img src="/assets/sp/images/ushi/flow-flow2.png" alt="2. アプリ内メッセージが届いたらキャンペーンにエントリーをタップ"></li><!-- /.ushi__flow__item--1 -->
+          <li class="ushi__flow__item ushi__flow__item--2">
+            <p><img src="/assets/sp/images/ushi/flow-flow2.png" alt="2. アプリ内メッセージが届いたらキャンペーンにエントリーをタップ"></p>
+            <p class="ushi__flow__notice"> ※アプリ内メッセージ (エントリーボタン) が届くまでには、<br />
+            最大インストール翌日まで時間がかかる場合がございます。</p>
+          </li><!-- /.ushi__flow__item--1 -->
           <li class="ushi__flow__item ushi__flow__item--3">
             <p><img src="/assets/sp/images/ushi/flow-flow3_text.png" alt="3. エントリーから3日連続アプリ起動でもれなく500円分のクーポンさらに抽選で200名様に5,000円分のクーポンがもらえる"></p>
             <ul>
@@ -129,7 +145,7 @@
         </ul><!-- /.ushi__flow__list -->
       </div><!-- /.ushi__flow -->
 
-      <div class="ushi__whatis">
+      <div class="ushi__whatis for-browser">
         <div class="ushi__whatis__inner">
           <h2 class="ushi__whatis__heading"><img src="/assets/sp/images/ushi/whatis-heading.png" alt="「スポーツブル」って？"></h2>
           <div class="ushi__whatis__copy"><img src="/assets/sp/images/ushi/whatis-copy.png" alt="3分でスポーツを語れるようになる無料スポーツニュースアプリ"></div>
@@ -167,7 +183,8 @@
               </tr>
               <tr>
                 <th>受取方法</th>
-                <td>クーポン取得条件を達成されますと、「スポーツブル」アプリ内に表示されるメッセージ(バナー)より「Wowma! クーポンは受け取りサイト」 に移動することができ、特典のWowma! クーポンを取得可能です。</td>
+                <td>クーポン取得条件を達成されますと、「スポーツブル」アプリ内に表示されるメッセージ(バナー)より「Wowma! クーポンは受け取りサイト」 に移動することができ、特典のWowma! クーポンを取得可能です。<br />
+                                <strong class="attention">※ 一度メッセージ（バナー）を消してしまうとクーポンの受取ができなくなりますのでご注意下さい。</strong></td>
               </tr>
               <tr>
                 <th>クーポン詳細</th>
@@ -195,7 +212,8 @@
               </tr>
               <tr>
                 <th>お問い合わせ先</th>
-                <td>メール：&#105;&#110;&#102;&#111;&#64;&#115;&#112;&#111;&#114;&#116;&#115;&#98;&#117;&#108;&#108;&#46;&#106;&#112;</td>
+                <td class="ushi__overview__inquiry" target="_blank">&raquo; <a href="https://sportsbull.jp/p/195780/">スポーツブルに関するお問い合わせ</a><br />
+                &raquo; <a href="https://faq.wowma.jp/" target="_blank">クーポンに関するお問い合わせ</a></td>
               </tr>
             </tbody>
           </table><!-- /.ushi__overview__data -->
@@ -205,12 +223,12 @@
     </div><!-- .body-sec-inner -->
   </div><!-- /.body-sec -->
 
-  <footer class="ushi__footer">
+  <footer class="ushi__footer for-browser">
     <div class="ushi__footer__btn__container">
       <h3 class="ushi__footer__btn__heading"><img src="/assets/sp/images/ushi/footer-copy-app.png" alt="iPhone / Android対応今すぐダウンロード！"></h3>
       <ul class="ushi__footer__btn__list">
-        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/ushi/footer-btn-ios.png" alt="App Store"></a></li>
-        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/ushi/footer-btn-android.png" alt="Google play"></a></li>
+        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://app.adjust.com/i0sjex" target="_blank"><img src="/assets/sp/images/ushi/footer-btn-ios.png" alt="App Store"></a></li>
+        <li class="ushi__footer__btn__item"><a class="ushi__footer__btn__link" href="https://app.adjust.com/piaqfs" target="_blank"><img src="/assets/sp/images/ushi/footer-btn-android.png" alt="Google play"></a></li>
       </ul><!-- /.ushi__pr_app__btn__list -->
     </div><!-- /.ushi__pr_app__btn__container -->
     <p class="ushi__footer__copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>

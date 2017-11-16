@@ -401,6 +401,7 @@ export let SPArchiveNode = React.createClass( {
                           categories={dae.categories.all}
                           id={`archive-label-${dae.id}`}
                           index={i}
+                          anotherCategories={dae.anotherCategories}
                         />
                       </p>
                       <p className="post-date">{dae.displayDate}</p>

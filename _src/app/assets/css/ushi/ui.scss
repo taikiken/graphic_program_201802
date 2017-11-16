@@ -335,7 +335,7 @@
   &__item--2 {
     width: 310px;
     padding-top: 48px;
-    padding-left: 60px;
+    padding-left: 40px;
   }
 
   //.ushi__flow__item--3
@@ -520,6 +520,16 @@
 
     td {
       color: #cdcdcd;
+
+      .attention {
+        color: $highlight-secondary-color;
+      }
+    }
+
+    .ushi__overview__inquiry {
+      a {
+        @include link-decoration(#cdcdcd, #cdcdcd, underline, none);
+      }
     }
   }
 } //.ushi__overview

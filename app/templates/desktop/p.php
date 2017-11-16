@@ -135,7 +135,7 @@
                   if(!isset($_GET['id'])):
           ?>
                   <div id="list-photoalbum">
-                      <p class="lead"><?php echo $page['post']['description'];?></p>
+                      <p class="lead"><?php echo $page['post']['body'];?></p>
                       <ul>
                           <?php foreach($page['photo'] as $id => $photo) :?>
                               <li>

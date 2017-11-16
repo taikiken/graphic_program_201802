@@ -48,7 +48,8 @@ import { Ga } from '../ga/Ga';
 import { GaData } from '../ga/GaData';
 
 // React
-// let React = self.React;
+// eslint-disable-next-line no-unused-vars
+let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 // // imagesLoaded, isotope
@@ -475,6 +476,23 @@ export class ViewArchiveMasonryInfinite extends View {
         this.moreRendered.updateShow(show);
       }
       this.scroll.fire();
+    } else {
+      if (this.moreRendered === null){
+            this.moreRendered = ReactDOM.render(
+                <ComponentMoreButton
+            show={show}
+            action={this.action}
+            element={moreElement}
+            home={this.home}
+            slug={this.slug}
+            afterClick={this.afterClick}
+        />,
+            moreElement
+        );
+
+      } else {
+        this.moreRendered.updateShow(show);
+      }
     }
   }
 }// class

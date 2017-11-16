@@ -157,6 +157,38 @@
     <div class="update">
       <h2 class="update-heading<?php echo $article_new_class; ?>"><?php echo $key; ?></h2>
     </div><!-- /.update -->
+
+    <?php
+    /*
+    // template
+    // https://github.com/undotsushin/undotsushin/issues/2594
+    // ---------------------------------------------------------
+    ?>
+    <article class="todays_station">
+      <h1 class="todays_station__heading">本日のスポーツニュースまとめ動画</h1>
+      <a href="hoge">
+        <figure class="todays_station__figure"><img src="/assets/sp/images/picks/au/summy-station-figure.jpg" alt=""></figure>
+        <span class="todays_station__btn">動画を見る</span>
+      </a>
+    </article><!-- /.todays_station -->
+    <?php
+    */
+    ?>
+    <?php
+    // blstarticle 存在チェック
+    $blstarticle = $value_data_article['blstarticle'];
+    if (isset($blstarticle['post'])) :
+    ?>
+        <article class="todays_station">
+          <h1 class="todays_station__heading">本日のスポーツニュースまとめ動画</h1>
+          <a href="/p/<?php echo $blstarticle['id']; ?>/">
+            <figure class="todays_station__figure"><img src="<?php echo $blstarticle['post']['media']['images']['medium']; ?>" alt=""></figure>
+            <span class="todays_station__btn">動画を見る</span>
+          </a>
+        </article>
+    <?php
+    endif;
+    ?>
     <?php foreach( $article_page_data as $value ) :
     // 記事一覧ループ ?>
 
@@ -236,6 +268,5 @@ endif;
 ?>
 <script src="/assets/js/au/index.js?v=<?php echo $page['version']; ?>"></script>
 <script src="/assets/js/picks_au_banner.bundle.js?v=<?php echo $page['version']; ?>"></script>
-
 </body>
 </html>

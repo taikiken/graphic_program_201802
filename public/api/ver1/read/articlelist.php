@@ -25,8 +25,30 @@ if(strlen($api)>0){
 
 		if($type===""){
 
-			$sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
-			$nsql=sprintf("select num as n from u_latestpost where m1=%s",$c[0]);
+            if($category == "crazy" && strpos($_SERVER['HTTP_REFERER'], '/athlete/'))
+            {
+                $json = file_get_contents($ImgPath . '/json/ca_article_ids.json');
+                $json = json_decode($json, true);
+                $path_arr = array_reverse(explode('/', $_SERVER['HTTP_REFERER']));
+                $player_id = $path_arr[1];
+                if(isset($json[$player_id]) && is_array($json[$player_id]) && count($json[$player_id]) > 0)
+                {
+                    $ids = join(',', $json[$player_id]);
+                    $sql=sprintf("select * from %s%s",sprintf($articletable3,set_isbookmark($uid),$ids,$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+                    $nsql=sprintf("select count(id) as n from repo_n where id in(%s)",$ids);
+                }
+                else
+                {
+                    $ids = "1";
+                    $sql=sprintf("select * from %s%s",sprintf($articletable3,set_isbookmark($uid),$ids,$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+                    $nsql=sprintf("select count(id) as n from repo_n where id in(%s)",$ids);
+                }
+            }
+            else
+            {
+                $sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
+                $nsql=sprintf("select num as n from u_latestpost where m1=%s",$c[0]);
+            }
 
 /*						
 			if($category=="crazy"){
@@ -73,9 +95,9 @@ if(strlen($api)>0){
 				}
 				
 				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and regitime > now() - interval '%s day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
-				str_replace(" and","",$c[1]),$day,sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
+				preg_replace("/^ and/","",$c[1]),$day,sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
 				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and regitime > now() - interval '%s day') as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
-				str_replace(" and","",$c[1]),$day,sprintf($articletable2c,$c[1],"",""),"");
+				preg_replace("/^ and/","",$c[1]),$day,sprintf($articletable2c,$c[1],"",""),"");
 
 
 /*
@@ -96,9 +118,9 @@ if(strlen($api)>0){
 			}else{
 
 				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=1%s order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
-				str_replace(" and","",$c[1]),$category=="all"?" and regitime > now() - interval '7 day'":"",sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
+				preg_replace("/^ and/","",$c[1]),$category=="all"?" and regitime > now() - interval '7 day'":"",sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
 				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=1%s) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
-				str_replace(" and","",$c[1]),$category=="all"?" and regitime > now() - interval '7 day'":"",sprintf($articletable2c,$c[1],"",""),"");
+				preg_replace("/^ and/","",$c[1]),$category=="all"?" and regitime > now() - interval '7 day'":"",sprintf($articletable2c,$c[1],"",""),"");
 			}
 /*		
 			$sql=sprintf("select %s from %s order by m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid),$c." and (swf is not null or youtube is not null or facebook is not null)"),$length,$offset);

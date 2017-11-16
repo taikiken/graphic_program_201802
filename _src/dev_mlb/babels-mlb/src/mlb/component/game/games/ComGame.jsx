@@ -149,7 +149,8 @@ const comReservesPlayer = list => (
       </td>
     </tr>
   ),
-));
+  )
+);
 
 
 /**

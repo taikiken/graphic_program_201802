@@ -12,7 +12,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title><?php echo $page['title']; ?></title>
+  <title>地域</title>
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
 </head>
 <body>

@@ -12,12 +12,15 @@ if ( $categories ) :
 endif;
 
 
-$app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app) {
+$s3key = 'json/ca_list.json';
+
+$json = $ImgPath . '/' . $s3key;
+$app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app, $json, $ImgPath) {
 
 
   // 各カテゴリートップ - /category/:category_slug/
   // ==============================
-  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $ImgPath) {
 
     $category           = $app->model->get_category_by_slug($args['category_slug']);
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
@@ -25,6 +28,15 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     if ( $args['category_slug'] === 'big6tv' ) :
       $template_classname = $template_classname . ' theme_big6';
     endif;
+
+    $data = [];
+      if ( $args['category_slug'] === 'crazy' ) :
+          $s3key = 'json/ca_picup_list.json';
+
+          $json = $ImgPath . '/' . $s3key;
+          $data = @file_get_contents($json);
+          $data = json_decode($data);
+      endif;
 
     $args['page'] = $app->model->set(array(
       'title'              => $category['label'],
@@ -38,6 +50,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
       'template'           => 'category',
       'template_classname' => $template_classname,
       'path'               => $args,
+      'list'               => $data
     ));
 
 
@@ -115,7 +128,48 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
   });
 
+    // CRAZY ATHLETE v2.0
+    $this->get('/{type:athletes}[/]', function ($request, $response, $args) use ($app, $json) {
+        // 選手詳細ルーティング
 
+        $data = @file_get_contents($json);
+
+        // jsonの中身が空の場合404
+        if(empty($data))
+        {
+            // 404
+            // ------------------------------
+            $args['page'] = $app->model->set([
+                'title'    => '404 Not Found',
+                'og_title' => '404 Not Found',
+                'template' => 404,
+            ]);
+
+            $args['request']  = $request;
+            $args['response'] = $response;
+
+            if($app->model->property('ua') === 'desktop')
+            {
+                return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
+            }
+            else
+            {
+                return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
+            }
+        }
+
+        $data = json_decode($data);
+        $args['page'] = $app->model->set(array(
+            'title'              => 'CRAZY ATHLETES',
+            'og_title'           => 'CRAZY ATHLETES | '.$app->model->property('title'),
+            'path'               => $args,
+            'template'           => 'category_list',
+            'template_classname' => '',
+            'list'               => $data
+        ));
+
+        return $this->renderer->render($response, 'crazy/list.php', $args);
+    });
 
   // webviews - /category/:category_slug/webviews/:slug  ref. #1918
   // ==============================
@@ -152,8 +206,6 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     endif;
 
   });
-
-
 });
 
 

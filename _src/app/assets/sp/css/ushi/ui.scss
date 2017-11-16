@@ -380,6 +380,8 @@
 
   //.ushi__flow__notice
   &__notice {
+    padding-right: perCalc(20, 710);
+    padding-left: perCalc(20, 710);
     margin-top: (16/2)+px;
     color: #fff;
     font-size: (20/2)+px;
@@ -556,6 +558,16 @@
     td {
       padding-bottom: (52/2)+px;
       color: #cdcdcd;
+
+      .attention {
+        color: $highlight-secondary-color;
+      }
+    }
+
+    .ushi__overview__inquiry {
+      a {
+        @include link-decoration(#cdcdcd, #cdcdcd, underline, none);
+      }
     }
 
     tr:first-child {

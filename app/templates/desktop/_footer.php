@@ -20,7 +20,8 @@ if (
   $template_name == 'notifications' ||
   $template_name == 'logout' ||
   // mortorsports 条件を追加 - `/public/motorsports/motorsports_model.php` on 2017-07-06
-  $template_name == 'motorsports'
+  $template_name == 'motorsports' ||
+  $template_name == 'crazy'
 ) {
   ?>
   <footer id="footer-container" class="foot-sec">
@@ -126,6 +127,7 @@ if ( $page['apiRoot'] != '' ) :
 // @since 2017-06-26
 ?>
 <script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <?php
 // ------------------------------------------------------------
 ?>

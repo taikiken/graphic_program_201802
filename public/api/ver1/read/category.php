@@ -159,6 +159,28 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+  # ref. #2318
+  if ( $category === 'area' ) :
+    $categoriesinfo['webviews']     = array(
+      '/area/webview/',
+    );
+  endif;
+
+  # ref. #2559
+  if ( $category === 'basketball' ) :
+    $categoriesinfo['webviews']     = array(
+      '/stats/bleague/webview/app/',
+    );
+  endif;
+
+  #crazy
+  # ref. #2559
+  if ( $category === 'crazy' ) :
+    $categoriesinfo['webviews']     = array(
+        '/crazy/webview/',
+    );
+  endif;
+
   // #2080
   if ( $category === 'top' ) :
     $categoriesinfo['webviews'] = array(

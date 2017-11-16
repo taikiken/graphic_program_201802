@@ -1,10 +1,20 @@
+
   <footer id="footer-container" class="foot-sec show-for-large">
     <div class="foot-sec-inner">
       <nav class="foot-breadCrumb">
-        <ol itemscope itemtype="http://schema.org/breadCrumbList">
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">ページタイトル</span><meta itemprop="position" content="2" /></a></li>
-        </ol>
+          <ol itemscope="" itemtype="http://schema.org/breadCrumbList">
+              <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                  <a itemprop="item" href="/">
+                      <span itemprop="name">TOP</span>
+                      <meta itemprop="position" content="1"> </a>
+              </li>
+              <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                  <a itemprop="item" href="/stats/">
+                      <span itemprop="name">速報&amp;データ</span>
+                      <meta itemprop="position" content="2"> </a>
+              </li>
+              <?php echo $page['breadcrumb']; ?>
+          </ol>
       </nav><!-- /.foot-breadCrumb -->
 
       <div class="foot-pr">
@@ -29,7 +39,7 @@
       <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
 
       <div class="fnav-block">
-        <nav class="fnav">
+       <nav class="fnav">
           <h3 class="fnav-logo"><img src="/assets/images/common/footer-fnav-logo.png" alt="SPORTS BULL"></h3>
           <ul>
             <li><a href="/about/">サービス紹介</a></li>
@@ -115,5 +125,6 @@
 </script>
 
 <script src="/assets/js/soccer.bundle.js"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>

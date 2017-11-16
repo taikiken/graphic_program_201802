@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <!--<script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="9" data-firefox="44" data-ie="11" data-edge="13"></script>-->
   <title>[pagetitle] | SPORTS BULL</title>
   <meta name="description" content="説明文">
   <meta name="keywords" content="キーワード, キーワード, キーワード">
-  <!-- favicon -->
-  <link rel="shortcut icon" href="/favicon.ico">
   <!-- sns ogp -->
   <meta property="og:title" content="[pagetitle] | SPORTS BULL">
   <meta property="og:type" content="website">
@@ -19,10 +16,39 @@
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/ui.css">
-  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
-  <script src="/assets/js/libs/vendor.min.js"></script>
   <script src="/assets/js/libs/vendor.react.js"></script>
+  <script src="/assets/js/bundle/main.bundle.js"></script>
+
+  <script type='text/javascript'>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function() {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+    })();
+  </script>
+
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+   ga('create', 'UA-74679267-1', 'auto');
+   ga('require', 'linkid');
+   ga('require', 'displayfeatures');
+   ga('send', 'pageview');
+
+  </script>
 </head>
 <body class="appbnr-enable">
 <div class="whole home">
@@ -607,8 +633,31 @@
   </footer><!-- /.foot-sec -->
 </div><!-- /.whole -->
 
+<div class="modal-intro">
+  <div class="modal-bg"></div>
+  <div class="modal-intro-contents">
+    <div class="modal-intro-link">
+      <!-- 確認用 <img src="/assets/images/dummy/bnr-modal-app.png" alt=""> -->
+      <!-- /531683568/download-popup/download-popup-desktop -->
+      <script>
+        googletag.cmd.push(function() {
+          googletag.defineSlot('/531683568/download-popup/download-popup-desktop', [580, 280], 'div-gpt-ad-1505887740744-0').addService(googletag.pubads());
+          googletag.pubads().enableSingleRequest();
+          googletag.enableServices();
+        });
+      </script>
+      <div id='div-gpt-ad-1505887740744-0' style='height:280px; width:580px;'>
+      <script>
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1505887740744-0'); });
+      </script>
+      </div>
+      <!-- // /531683568/download-popup/download-popup-desktop -->
+    </div><!-- /.modal-intro-link -->
+    <div class="modal-intro-close"><a class="modal-intro-close-btn" href="#">閉じる</a></div>
+  </div><!-- /.modal-intro-contents -->
+</div><!-- /.modal-intro -->
+
 <script src="/assets/js/bundle/main.bundle.js"></script>
-<script src="/assets/js/xxx.bundle.js"></script>
 <script>
   window.fbAsyncInit = function() {
     FB.init({

@@ -24,6 +24,7 @@ import {CategoriesDae} from './caegories/CategoriesDae';
 import {ThemeDae} from './theme/ThemeDae';
 import {AdDae} from './theme/AdDae';
 import {BannersDae} from './banner/BannersDae';
+import AnotherCategoriesDae from './another-categories/AnotherCategoriesDae';
 
 /**
  * 記事詳細 関連記事 JSON
@@ -114,6 +115,12 @@ export class RelatedDae {
      * @protected
      */
     this._ad = new AdDae( response.ad );
+    /**
+     * `another_categories` value - 地域の詳細
+     * @type {AnotherCategoriesDae}
+     * @since 2017-09-14
+     */
+    this.anotherCategories = new AnotherCategoriesDae(response.another_categories);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

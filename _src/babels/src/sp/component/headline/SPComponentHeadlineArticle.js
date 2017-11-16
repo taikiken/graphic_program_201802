@@ -20,6 +20,9 @@ import { ComponentArticleThumbnail } from '../../../component/articles/Component
 import { Ga } from '../../../ga/Ga';
 import { GaData } from '../../../ga/GaData';
 
+// dae
+import AnotherCategoriesDae from '../../../dae/another-categories/AnotherCategoriesDae';
+
 // React
 const React = self.React;
 
@@ -66,6 +69,7 @@ export class SPComponentHeadlineArticle extends React.Component {
                 index={props.index}
                 mediaType={props.mediaType}
                 recommend={false}
+                anotherCategories={props.anotherCategories}
               />
             </p>
             <p className="post-date">{props.date}</p>
@@ -105,7 +109,9 @@ export class SPComponentHeadlineArticle extends React.Component {
       title: React.PropTypes.string.isRequired,
       thumbnail: React.PropTypes.string.isRequired,
       mediaType: React.PropTypes.string.isRequired,
-      home: React.PropTypes.bool.isRequired
+      home: React.PropTypes.bool.isRequired,
+      // anotherCategories - 2017-09-14
+      anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae).isRequired,
     };
   }
 }

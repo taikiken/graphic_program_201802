@@ -138,6 +138,7 @@ export class SPComponentHeadlines extends React.Component {
                     thumbnail={thumbnail}
                     mediaType={dae.mediaType}
                     home={this.props.home}
+                    anotherCategories={dae.anotherCategories}
                   />
                 );
               })

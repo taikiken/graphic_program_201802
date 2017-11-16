@@ -1,0 +1,16 @@
+{
+  "source": "./src",
+  "includes": [".*\\.js", ".*\\.jsx"],
+  "destination": "./_docs",
+  "access": ["public", "protected", "private"],
+  "autoPrivate": true,
+  "styles": ["./_docs_extension/esdoc_extension.css"],
+  "plugins": [
+    {
+      "name": "esdoc-es7-plugin"
+    },
+    {
+      "name": "esdoc-standard-plugin"
+    }
+  ]
+}

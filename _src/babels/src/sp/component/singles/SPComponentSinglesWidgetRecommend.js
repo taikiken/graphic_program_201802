@@ -135,6 +135,7 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
                         index={i}
                         id={`single-recommend-label-${single.id}`}
                         categories={single.categories.all}
+                        anotherCategories={single.anotherCategories}
                       />
                       <p className="post-date">{single.displayDate}</p>
                     </div>
