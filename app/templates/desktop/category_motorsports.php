@@ -66,6 +66,19 @@ if ($page['category']['slug'] == 'all') {
       ?>
       <div id="js-headline"></div>
 
+        <?php
+        // ----------------------------------------------------
+        // 記事一覧: pc banner
+        if ( !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
+        ?>
+        <div class="sponsor-link mt30">
+            <a href="/motorsports/crazy-for-racing/" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '/motorsports/crazy-for-racing/', true);"><img src="/motorsports/crazy-for-racing/assets/img/729x90.png" alt="CRAZY FOR RACING"></a>
+        </div>
+        <?php
+    endif;
+      // eof: 記事一覧: pc banner
+      // ---------------------------------------------------- ?>
+      
       <?php
       // motor sports navigation
       // @since 2017-05-26
