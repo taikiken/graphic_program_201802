@@ -108,7 +108,12 @@ if($q->get_dir()===0){
 }elseif($q->get_dir()===1){
 	if($q->get_file()===0){
 
-		$sql=sprintf("select *,(select body from repo_body where pid=%s.id) as body from %s where id=%s",$TABLE,$TABLE,$g->f("nid"));
+		if ($g->f("rid") == 95) { // 注目の選手
+      $sql=sprintf("select * from %s where id=%s",$TABLE,$g->f("nid"));
+
+    } else {
+      $sql=sprintf("select *,(select body from repo_body where pid=%s.id) as body from %s where id=%s",$TABLE,$TABLE,$g->f("nid"));
+    }
 
 		$o->query($sql);
 		$p=$o->fetch_array();

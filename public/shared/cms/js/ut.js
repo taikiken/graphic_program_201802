@@ -330,7 +330,7 @@ function ut_init(){
 				$.ajax({
 					type: "POST",
 					url: "/editdm/module/gettitle.php",
-					data: {"id" : $("[name='p_d2']").val(), "cid" : cid},
+					data: {"id" : $("[name='p_d2']").val(), "cid" : cid, "rid" : rid},
 					//data: "id="+$("[name='p_d2']").val(),
 					success: function(m){
 						prevtitle=m;
