@@ -14,7 +14,7 @@ for($i=0;$i<count($p);$i++){
 	if(isset($p[$i]['flag']) && $p[$i]['flag'] == "3"){
 		//直リンク用設定
 		$s[$i]['is_direct_link'] = true;
-		$s[$i]['url'] = $p[$i]['direct_link'];
+		$s[$i]['url'] = $p[$i]['direct_link_url'];
 	}
 
 	if($f["n"]>0){
