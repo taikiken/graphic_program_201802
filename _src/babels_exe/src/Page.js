@@ -35,15 +35,18 @@ import {SearchForm} from './header/SearchForm';
 import {CommentDelete} from './modal/CommentDelete';
 import {Flush} from './modal/Flush';
 
-let _symbol = Symbol();
+// since 2017-11-06
+import SignupWow from './page/SignupWow';
+
+// let _symbol = Symbol();
 
 let _scrolled:Boolean = false;
 
 let _tween = null;
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 // let Sagen = self.Sagen;
 
@@ -54,17 +57,17 @@ let Dom = UT.app.Dom;
  * 全て static です
  */
 export class Page {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Page is static Class. not use new Page().' );
-
-    }
-  }
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Page is static Class. not use new Page().' );
+  //
+  //   }
+  // }
   /**
    * Page 初期化, UT.app.Router event を listen します
    */
@@ -140,6 +143,10 @@ export class Page {
 
     // area - from 2017-09-04
     router.on(Router.CATEGORY_AREA, Page.area);
+
+    // signup-wow from 2017-11-06
+    router.on(Router.SIGNUP_WOW, Page.signupWow);
+
     // parse
     router.route();
   }
@@ -272,6 +279,8 @@ export class Page {
 
     // 404
     router.off( Router.NOT_FOUND, Page.notFound );
+    // signup-wow from 2017-11-06
+    router.off(Router.SIGNUP_WOW, Page.signupWow);
   }
   /**
    * 404 not found
@@ -416,6 +425,13 @@ export class Page {
    */
   static signup():void {
     Signup.start();
+  }
+  /**
+   * signup-wow page
+   * @since 2017-11-06
+   */
+  static signupWow() {
+    SignupWow.start();
   }
   /**
    * login page
