@@ -104,7 +104,7 @@ foreach($items as $item)
         // 'description' 	=> $body,
         'keyword' 		=> $keyword,
     ];
-    #
+
     # youtubeのembedが存在する場合、例外対応が必要
     # bodyflag => 170
     # <div class="cms_widget ratio16_9"><div class="ratio16_9-inner">＜ここにbodyをいれる＞</div></div>
