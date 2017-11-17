@@ -45,11 +45,22 @@ if (
         <?php foreach ($page['side-menu'] as $list) : ?>
           <li class="sidemenu-list-title"><?php echo $list['header'];?></li>
           <?php foreach($list['items'] as $side_item) : ?>
-          <li class="sidemenu-item">
-            <a href="<?php echo $side_item['link']; ?>">
-              <img src="<?php echo $side_item['image']['sp']; ?>" class="sidemenu-icon">
-              <?php echo $side_item['title']; ?>
-            </a>
+          <li>
+              <div class="sidemenu_container">
+                  <a href="<?php echo $side_item['link']; ?>">
+                      <img src="<?php echo $side_item['image']['sp']; ?>" class="sidemenu_icon">
+                      <?php if ($side_item['type'] === 1 && false === empty($side_item['caption'])):?>
+                          <div class="sidemenu_title">
+                              <?php echo $side_item['title']; ?>
+                          </div>
+                          <div class="sidemenu_caption"><?php echo $side_item['caption'];?></div>
+                      <?php else: ?>
+                          <div class="sidemenu_title_single">
+                              <?php echo $side_item['title']; ?>
+                          </div>
+                    <?php endif;?>
+                  </a>
+              </div>
           </li>
           <?php endforeach; ?>
         <?php endforeach; ?>
