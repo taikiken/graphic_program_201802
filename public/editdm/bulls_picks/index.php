@@ -148,14 +148,14 @@ if($q->get_dir()==3){
 
     // アーカイブ検索
     $('#spb-datepicker').change(function () {
-        var archive_api = get_api + '?date=' + document.getElementById('spb-datepicker').value;
+        var archive_api = get_api + '/' + document.getElementById('spb-datepicker').value;
         getXml(archive_api);
         var title = document.getElementById('spb-datepicker').value;
         $('#spb-card-header').text(title + 'のスポーツブル アーカイブ');
 
     });
     $('#au-datepicker').change(function () {
-        var archive_api = get_au_api + '?date=' + document.getElementById('au-datepicker').value;
+        var archive_api = get_au_api + '/' + document.getElementById('au-datepicker').value;
         getXml(archive_api, true);
         var title = document.getElementById('au-datepicker').value;
         $('#au-card-header').text(title + 'のau アーカイブ');
