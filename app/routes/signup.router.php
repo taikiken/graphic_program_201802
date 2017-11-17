@@ -16,7 +16,7 @@ $app->get('/signup[/]', function ($request, $response, $args) use ($app) {
 
 });
 
-$app->get('/signup_wow[/]', function ($request, $response, $args) use ($app) {
+$app->get('/signup-wow[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => '新規会員登録',
