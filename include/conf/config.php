@@ -83,15 +83,15 @@ include $INCLUDEPATH."conf/configExtend.php";
 $PICKS_FILENAME = 'xml/picks.xml';
 $ARCHIVE_PICKS = 'xml/archives/{date}picks.xml';
 $TMP_PICKS = '/tmp/picks.xml';
-$GET_PICKS_API = '/api/bulls_picks/get_picks_xml.php';
-$GET_TMP_PICKS_API = '/api/bulls_picks/get_tmp_picks_xml.php';
-$POST_TMP_PICKS_API = '/api/bulls_picks/post_tmp_picks_xml.php';
+$GET_PICKS_API = '/api/editdm/bulls-picks';
+$GET_TMP_PICKS_API = '/api/editdm/bulls-picks/tmp';
+$POST_TMP_PICKS_API = '/api/editdm/bulls-picks/tmp/update';
 
 $AU_PICKS_FILENAME = 'xml/au/picks.xml';
 $AU_ARCHIVE_PICKS = 'xml/au/archives/{date}picks.xml';
 $TMP_AU_PICKS = '/tmp/au_picks.xml';
-$GET_AU_PICKS_API = '/api/bulls_picks/get_au_picks_xml.php';
-$GET_AU_TMP_PICKS_API = '/api/bulls_picks/get_tmp_au_picks_xml.php';
-$POST_AU_TMP_PICKS_API = '/api/bulls_picks/post_tmp_au_picks_xml.php';
+$GET_AU_PICKS_API = '/api/editdm/bulls-picks/au';
+$GET_AU_TMP_PICKS_API = '/api/editdm/bulls-picks/au/tmp';
+$POST_AU_TMP_PICKS_API = '/api/editdm/bulls-picks/au/tmp/update';
 
 ?>
