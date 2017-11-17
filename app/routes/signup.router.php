@@ -21,7 +21,7 @@ $app->get('/signup_wow[/]', function ($request, $response, $args) use ($app) {
     $args['page'] = $app->model->set(array(
       'title'    => '新規会員登録',
       'og_title' => '新規会員登録 | '.$app->model->property('title'),
-      'og_url'   => $app->model->property('site_url').'signup/',
+      'og_url'   => $app->model->property('site_url').'signup_wow/',
       'template' => 'signup',
       'path'     => $args,
       'template_classname' => 'signup',
