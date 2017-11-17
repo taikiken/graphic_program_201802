@@ -30,7 +30,7 @@ $o->connect();
  $o->query($sql);
  $sql = "delete from repo_n where d2={$MEDIAID};";
  $o->query($sql);
- exit;
+ //exit;
 */
 $sql = sprintf("SELECT id,name,name_e,yobi FROM u_categories WHERE flag=1 AND id NOT IN(%s) ORDER BY id DESC",implode(",", $excategory));
 $o->query($sql);
