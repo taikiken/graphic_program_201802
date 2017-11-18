@@ -191,7 +191,7 @@ EOM;
 				$result["live"] = <<< EOM
 				<div style="position: relative; display: block;" class="live-player">
 					<div style="padding-top: 56.25%;">
-						<iframe src="//players.brightcove.net/4072219199001/ByLstQu0b_default/index.html?videoId=5640189896001" allowfullscreen webkitallowfullscreen mozallowfullscreen style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; width: 100%; height: 100%;"></iframe>
+						<iframe src="//players.brightcove.net/4072219199001/ByfgztaCW_default/index.html?videoId=5649611300001" allowfullscreen webkitallowfullscreen mozallowfullscreen style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; width: 100%; height: 100%;"></iframe>
 					</div>
 				</div>
 				{$bnr}
