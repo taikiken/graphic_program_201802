@@ -179,10 +179,9 @@ EOT;
 <div class="optionselbg"></div>
 
 <script type="text/javascript">
-    var get_api = "<?=$GET_PICKS_API?>";
     var get_tmp_api = "<?=$GET_TMP_PICKS_API?>";
     var post_api = "<?=$POST_TMP_PICKS_API?>";
-    getXml(get_api); // 初回
+    postXml(post_api, get_tmp_api); // 初回
 
     $('.in').change(function () {
         postXml(post_api, get_tmp_api);
