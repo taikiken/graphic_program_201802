@@ -1,5 +1,8 @@
 <?php
 
+date_default_timezone_set('Asia/Tokyo');
+setlocale(LC_ALL, 'ja_JP.UTF-8');
+
 if ( UT_ENV != 'PRODUCTION' )
 {
   include_once __DIR__."/../../../../include/conf/config.php";
