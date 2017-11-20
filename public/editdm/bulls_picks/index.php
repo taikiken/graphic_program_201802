@@ -208,10 +208,13 @@ if($q->get_dir()==3){
             dateType: 'xml',
             timeout: 10000,
             success: function (data) {
-               console.log(data)
+                if (data.existArchivedXml == false) {
+                    alert('アーカイブファイルが存在しません。');
+                }
+                alert('本番反映しました。');
             },
             error: function () {
-                alert('反映に失敗しました。')
+                alert('反映に失敗しました。');
             }
         });
     }
