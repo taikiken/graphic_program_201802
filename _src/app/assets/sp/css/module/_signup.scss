@@ -348,6 +348,12 @@
       // width: 250px;
     }
   }
+
+  .wowma-attention {
+    margin-top: 0.5em;
+    color: $highlight-secondary-color;
+    font-size: fz(10);
+  }
 } //.register
 
 
@@ -561,7 +567,60 @@
 
 
 
+// Wowma!キャンペーン用モーダルウインドウ
+// ref.https://aws-plus.backlog.jp/view/UNDO_SPBL-154
+.signup_wowma__modal {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 
-// -------------------------------------------------
-// override
-// @import "signup_override";
+  //.signup_wowma__modal__inner
+  &__inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: perCalc(600, 750);
+    padding: (42/2)+px (28/2)+px (36/2)+px;
+    background-color: #fff;
+    border: (6/2)+px solid $highlight-color;
+    border-radius: 2px;
+  }
+
+  //.signup_wowma__modal__heading
+  &__heading {
+    color: $highlight-color;
+    font-weight: bold;
+    font-size: fz(32/2);
+    text-align: center;
+  }
+
+  //.signup_wowma__modal__text
+  &__text {
+    margin-top: (36/2)+px;
+    color: $highlight-color;
+    font-size: fz(24/2);
+  }
+
+  //.signup_wowma__modal__btn
+  &__btn {
+    margin-top: (40/2)+px;
+
+    //.signup_wowma__modal__btn__link
+    &__link {
+      @include link-decoration(#fff, #fff, none, none);
+      display: block;
+      line-height: 1;
+      padding: 14px;
+      background-color: $highlight-color;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(30/2);
+      text-align: center;
+    }
+  } //.signup_wowma__modal__btn
+} //.signup_wowma__modal

@@ -226,8 +226,8 @@ if(count($ermsg)>0){
 				$regist_log_query = sprintf("insert into u_member_signup(userid,kind,created_at) values(%s,%s,now());",$ID, $kind);
 				$o->query($regist_log_query);
 				$o->query("commit");
-				$e=mailregister($email,$name);
-				if($e){
+
+        if($e){
 					set_status(array("user_message"=>"会員情報を登録しました。"));
 				}else{
 					set_status(array("user_message"=>"会員登録は完了しましたがメールが送信できませんでした。メールアドレスをご確認ください。"));
