@@ -9,7 +9,7 @@
 <?php if(getSorC('is_carousel_headline')==1){
     //dews特別対応
     if(empty(getSorC('u_media')) === false && getSorC('u_media') == '67'){ ?>
-            <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
+            <li><a href="/editdm/repo_n/?cid=49&rid=7">ダンス_カルーセル</a></li>
     <?php } else { ?>
         <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
         <li><a href="/editdm/repo_n/?cid=9&rid=7">TOPピックアップ</a></li>
