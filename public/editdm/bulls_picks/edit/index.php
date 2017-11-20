@@ -110,7 +110,7 @@ if($q->get_dir()==3){
               <td class="inputTitle">日付</td>
               <td class="inputFields">
                 <div class="clearfix  fl langs">
-                  <input type="text" id="datepicker" style="width:210px;" name="p_date"
+                  <input type="text" id="datepicker" style="width:210px;" name="p_date0"
                          value="<?php echo $date; ?>" class="in q0" readonly="readonly"></div>
               </td>
             </tr>
@@ -135,7 +135,7 @@ EOT;
   <td class="inputTitle">記事ID</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width:210px;" name="p_id{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
+    <input type="text" style="width:210px;" name="p_id0{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
   </td>
 </tr>
 EOT;
@@ -146,7 +146,7 @@ EOT;
 <tr class="comment{$articles_itr}{$comment_itr}">
   <td class="inputTitle">コメント{$view_comment_count}</td>
   <td class="inputFields">
-    <div class="clearfix  fl langs"><input type="text" style="width:420px;" name="p_comment{$articles_itr}{$comment_itr}" value="{$comments[$articles_itr][$comment_itr]}" class="in q0"></div>
+    <div class="clearfix  fl langs"><input type="text" style="width:420px;" name="p_comment0{$articles_itr}{$comment_itr}" value="{$comments[$articles_itr][$comment_itr]}" class="in q0"></div>
   </td>
 </tr>
 EOT;
