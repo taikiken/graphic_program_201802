@@ -178,14 +178,11 @@ EOT;
 </div>
 <div class="optionselbg"></div>
 
-<?php
-//$S3Module = new S3Module;
-//$get_api = $S3Module->getUrl($PICKS_FILENAME);
-?>
 <script type="text/javascript">
+    var get_api = "<?=$GET_PICKS_API?>";
     var get_tmp_api = "<?=$GET_TMP_PICKS_API?>";
     var post_api = "<?=$POST_TMP_PICKS_API?>";
-    getXml(get_tmp_api); // 初回
+    getXml(get_api); // 初回
 
     $('.in').change(function () {
         postXml(post_api, get_tmp_api);
@@ -200,11 +197,7 @@ EOT;
             dateType: 'xml',
             timeout: 10000,
             success: function (data) {
-//                var s = new XMLSerializer();
-//                var xml = s.serializeToString(data);
-//                $('#preview-xml').text(xml);
                 $('#preview-xml').text(data);
-
             },
             error: function () {
                 var sorry = '読み込めませんでした...';
@@ -245,14 +238,14 @@ EOT;
 
             var prev_article_id = article_id - 1;
             // 移動元から移動先へ
-            document.getElementsByName('p_id' + prev_article_id)[0].value = form_values['p_id' + article_id];
+            document.getElementsByName('p_id0' + prev_article_id)[0].value = form_values['p_id0' + article_id];
             for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment' + prev_article_id + comment_itr)[0].value = form_values['p_comment' + article_id + comment_itr];
+                document.getElementsByName('p_comment0' + prev_article_id + comment_itr)[0].value = form_values['p_comment0' + article_id + comment_itr];
             }
             // 移動先の内容を移動元へ
-            document.getElementsByName('p_id' + article_id)[0].value = form_values['p_id' + prev_article_id];
+            document.getElementsByName('p_id0' + article_id)[0].value = form_values['p_id0' + prev_article_id];
             for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment' + article_id + comment_itr)[0].value = form_values['p_comment' + prev_article_id + comment_itr];
+                document.getElementsByName('p_comment0' + article_id + comment_itr)[0].value = form_values['p_comment0' + prev_article_id + comment_itr];
             }
 
             postXml(post_api, get_tmp_api); // プレビューに反映
@@ -272,14 +265,14 @@ EOT;
 
             var next_article_id = article_id + 1;
             // 移動元から移動先へ
-            document.getElementsByName('p_id' + next_article_id)[0].value = form_values['p_id' + article_id];
+            document.getElementsByName('p_id0' + next_article_id)[0].value = form_values['p_id0' + article_id];
             for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment' + next_article_id + comment_itr)[0].value = form_values['p_comment' + article_id + comment_itr];
+                document.getElementsByName('p_comment0' + next_article_id + comment_itr)[0].value = form_values['p_comment0' + article_id + comment_itr];
             }
             // 移動先の内容を移動元へ
-            document.getElementsByName('p_id' + article_id)[0].value = form_values['p_id' + next_article_id];
+            document.getElementsByName('p_id0' + article_id)[0].value = form_values['p_id0' + next_article_id];
             for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment' + article_id + comment_itr)[0].value = form_values['p_comment' + next_article_id + comment_itr];
+                document.getElementsByName('p_comment0' + article_id + comment_itr)[0].value = form_values['p_comment0' + next_article_id + comment_itr];
             }
 
             postXml(post_api, get_tmp_api); // プレビューに反映
