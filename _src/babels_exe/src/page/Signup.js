@@ -11,35 +11,36 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * <p>ユーザー登録, signup wizard</p>
  * 全て static です
  */
 export class Signup {
-  /**
-   * signup wizard (3 step) singleton class です
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Signup is static Class. not use new Signup().' );
-
-    }
-  }
+  // /**
+  //  * signup wizard (3 step) singleton class です
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Signup is static Class. not use new Signup().' );
+  //
+  //   }
+  // }
   /**
    * rendering 開始
    */
   static start():void {
-    let signupElement = Dom.signup();
+    const signupElement = Dom.signup();
+    // console.log('Signup.start', signupElement);
     if ( signupElement !== null ) {
-      let signup = new UT.view.signup.SignupWizard( signupElement );
+      const signup = new UT.view.signup.SignupWizard(signupElement);
       signup.start();
     }
   }

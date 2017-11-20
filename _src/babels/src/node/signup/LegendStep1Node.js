@@ -36,15 +36,17 @@ import {ModelUserDetect} from '../../model/signup/ModelUserDetect';
 // node
 import {ErrorNode} from '../error/ErrorNode';
 
-// Api
-import {Api} from '../../net/Api';
+// // Api
+// import {Api} from '../../net/Api';
 
 // // ga
 // import {Ga} from '../../ga/Ga';
 // import {GaData} from '../../ga/GaData';
 
+import ComponentSignupSNS from '../../component/signup/ComponentSignupSNS';
+
 // React
-let React = self.React;
+const React = self.React;
 
 /**
  * <p>新規登録 step 1 form parts</p>
@@ -55,7 +57,7 @@ let Step1FormNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     changeEmail: React.PropTypes.func.isRequired,
-    email: React.PropTypes.string.isRequired
+    email: React.PropTypes.string.isRequired,
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -257,7 +259,9 @@ export let LegendStep1Node = React.createClass( {
     // 親 component へ email change を通知する
     changeEmail: React.PropTypes.func.isRequired,
     // 初期 email value
-    email: React.PropTypes.string.isRequired
+    email: React.PropTypes.string.isRequired,
+    // @since 2017-11-13 - Wowma キャンペーン
+    wow: React.PropTypes.bool.isRequired,
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -270,10 +274,13 @@ export let LegendStep1Node = React.createClass( {
 
     return (
       <div className="fieldset-container fieldset-container-1">
+        {/* https://github.com/undotsushin/undotsushin/issues/334 */}
+        {/*
+        ComponentSignupSNS へ移動 - 2017-11-13
         <div className="linkage-sns">
           <ul className="linkage-sns-list">
             <li className="linkage-sns-item">
-              {/* https://github.com/undotsushin/undotsushin/issues/334 */}
+
               <a href={Api.auth('tw').url} className="linkage-sns-link linkage-sns-tw"><span>Twitterで新規登録</span></a>
             </li>
             <li className="linkage-sns-item">
@@ -282,6 +289,10 @@ export let LegendStep1Node = React.createClass( {
           </ul>
         </div>
         <p className="register-or">または</p>
+        */}
+        <ComponentSignupSNS
+          wow={this.props.wow}
+        />
         <div className="register-mail setting-form">
           <Step1FormNode
             step={this.props.step}
