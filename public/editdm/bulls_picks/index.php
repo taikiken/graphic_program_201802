@@ -115,6 +115,7 @@ if($q->get_dir()==3){
               <pre class="card-text"><code id="spb-xml" class="language-html" data-lang="html"></code></pre>
             </div>
           </div>
+          <input type="button" class="btn btn-secondary btn-block" value="スポーツブル 本番反映" onclick="archive2prd();"/>
         </div>
         <div class="col-sm-6">
           <a href="/editdm/bulls_picks/au/edit/"> > au 編集</a>
@@ -126,6 +127,7 @@ if($q->get_dir()==3){
               <pre class="card-text"><code id="au-xml" class="language-html" data-lang="html"></code></pre>
             </div>
           </div>
+          <input type="button" class="btn btn-warning btn-block" value="au 本番反映" onclick="archive2prd(true);"/>
         </div>
       </div>
 
@@ -182,6 +184,34 @@ if($q->get_dir()==3){
                 } else {
                     $('#spb-xml').append(getXml(url));
                 }
+            }
+        });
+    }
+
+    // 本番反映
+    function archive2prd(au_flag = false) {
+
+        if (au_flag) {
+            var date = document.getElementById('au-datepicker').value;
+            var api = "<?= $AU_ARCHIVE_PICKS_TO_PRODUCTION_API ?>"
+        } else {
+            var date = document.getElementById('spb-datepicker').value;
+            var api = "<?= $ARCHIVE_PICKS_TO_PRODUCTION_API ?>"
+        }
+
+        api = api + '/' + date;
+        console.log(api);
+
+        $.ajax({
+            url: api,
+            type: 'GET',
+            dateType: 'xml',
+            timeout: 10000,
+            success: function (data) {
+               console.log(data)
+            },
+            error: function () {
+                alert('反映に失敗しました。')
             }
         });
     }

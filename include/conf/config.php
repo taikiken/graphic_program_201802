@@ -86,6 +86,7 @@ $TMP_PICKS = '/tmp/picks.xml';
 $GET_PICKS_API = '/api/editdm/bulls-picks';
 $GET_TMP_PICKS_API = '/api/editdm/bulls-picks/tmp';
 $POST_TMP_PICKS_API = '/api/editdm/bulls-picks/tmp/update';
+$ARCHIVE_PICKS_TO_PRODUCTION_API = '/api/editdm/bulls-picks/2prd';
 
 $AU_PICKS_FILENAME = 'xml/au/picks.xml';
 $AU_ARCHIVE_PICKS = 'xml/au/archives/{date}picks.xml';
@@ -93,5 +94,6 @@ $TMP_AU_PICKS = '/tmp/au_picks.xml';
 $GET_AU_PICKS_API = '/api/editdm/bulls-picks/au';
 $GET_AU_TMP_PICKS_API = '/api/editdm/bulls-picks/au/tmp';
 $POST_AU_TMP_PICKS_API = '/api/editdm/bulls-picks/au/tmp/update';
+$AU_ARCHIVE_PICKS_TO_PRODUCTION_API = '/api/editdm/bulls-picks/au/2prd';
 
 ?>
