@@ -117,6 +117,7 @@ const sp = (modal) => {
   const a = document.createElement('a');
   // a.href = `https://app.adjust.com/bm04c5?deep_link=sportsbull://action?url=${location.href}`;
   // 2017-11-19 change - UNDO_SPBL-154 【フロント】Wowクーポン プレゼント キャンペーン対応
+  // eslint-disable-next-line max-len
   a.href = 'https://sportsbull.jp/wowma-campaign-171116/?utm_source=spbl_popup&utm_medium=popup_web_mobile&utm_campaign=wowid&utm_content=20171120';
   const img = document.createElement('img');
   // img.src = '/assets/images/popup/cm_popup_0929_sp-1_preview.png';
@@ -172,6 +173,7 @@ const pc = (modal) => {
   const a = document.createElement('a');
   // a.href = 'https://sportsbull.jp/about/';
   // change 2017-11-19 - UNDO_SPBL-154 【フロント】Wowクーポン プレゼント キャンペーン対応
+  // eslint-disable-next-line max-len
   a.href = 'https://sportsbull.jp/wowma-campaign-171116/?utm_source=spbl_popup&utm_medium=popup_web_desktop&utm_campaign=wowid&utm_content=20171120';
   const img = document.createElement('img');
   // img.src = '/assets/images/popup/cm_popup_0929_pc-1_preview.png';
