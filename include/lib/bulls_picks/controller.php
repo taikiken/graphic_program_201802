@@ -18,21 +18,51 @@ else
 if ($q->get_dir() === 1) { // 編集
 
   if ($q->get_file() === 0) {
+
+    // spbのxmlはauも共通して必要
     $S3Module = new S3Module;
-    $url = $S3Module->getUrl($picks_filename);
+    $url = $S3Module->getUrl($PICKS_FILENAME);
 
     $picks_xml = simplexml_load_file($url);
     $picks_xml = $picks_xml->xpath('/date')[0];
 
+    $date = (string)$picks_xml->articles->attributes()->date;
+    $ids = [];
+    $comments = [];
+
+    $article_count = 0; // コメント配列管理用
+    foreach ($picks_xml->articles->article as $article) {
+      $ids[] = (string)$article->id;
+
+      foreach ($article->comments as $value) {
+        foreach ($value as $comment) {
+          $comments[$article_count][] = (string)$comment;
+        }
+      }
+      $article_count ++;
+    }
+
+
     if ($q->tstr[3] == 'au')
     {
+      $spb_ids = $ids;
+      $spb_comments = $comments;
+
+      // spb本番とau本番の日付を比較する
+      $S3Module = new S3Module;
+      $url = $S3Module->getUrl($picks_filename);
+
+      $au_picks_xml = simplexml_load_file($url);
+      $au_picks_xml = $au_picks_xml->xpath('/date')[0];
+
       $dates = [];
       $ids = [];
       $comments = [];
-      $blstarticle_id = (string)$picks_xml->articles->blstarticle->id;
+      $blstarticle_id = (string)$au_picks_xml->articles->blstarticle->id;
+
 
       $date_count = 0; // 配列管理用
-      foreach ($picks_xml->articles as $articles) {
+      foreach ($au_picks_xml->articles as $articles) {
         $dates[] = (string)$articles->attributes()->date;
 
         $article_count = 0; // コメント配列管理用  日付変更でリセット
@@ -49,24 +79,33 @@ if ($q->get_dir() === 1) { // 編集
         $date_count++;
       }
 
-    }
-    else // spb
-    {
-      $date = (string)$picks_xml->articles->attributes()->date;
-      $ids = [];
-      $comments = [];
 
-      $article_count = 0; // コメント配列管理用
-      foreach ($picks_xml->articles->article as $article) {
-        $ids[] = (string)$article->id;
+      // 1日ずらす
+      if ($date != $dates[0]) // ブル本番とau本番のdate違うとき
+      {
+        // 最終日から作っていく
+        for ($date_itr = 2; $date_itr > 0; $date_itr--) {
+          $dates[$date_itr] = $dates[$date_itr - 1];
 
-        foreach ($article->comments as $value) {
-          foreach ($value as $comment) {
-            $comments[$article_count][] = (string)$comment;
+          for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
+            $ids[$date_itr][$articles_itr] = $ids[$date_itr - 1][$articles_itr];
+
+            for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
+              $comments[$date_itr][$articles_itr][$comment_itr] = $comments[$date_itr - 1][$articles_itr][$comment_itr];
+            }
           }
         }
-        $article_count ++;
+        // 初日
+        $dates[0] = $date;
+        for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
+          $ids[0][$articles_itr] = $spb_ids[$articles_itr];
+
+          for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
+            $comments[0][$articles_itr][$comment_itr] = $spb_comments[$articles_itr][$comment_itr];
+          }
+        }
       }
+
     }
 
 
@@ -80,12 +119,12 @@ if ($q->get_dir() === 1) { // 編集
     // 入力内容で アーカイブpicks.xml作成
     include $INCLUDEPATH . "lib/" . $CURRENTDIRECTORY . "/ex.php";
 
+    // フォームからxml作成
+    $dom = new DomDocument('1.0', 'UTF-8');
+    $date = $dom->appendChild($dom->createElement('date'));
 
     if ($q->tstr[3] == 'au')
     {
-      $dom = new DomDocument('1.0', 'UTF-8');
-      $date = $dom->appendChild($dom->createElement('date'));
-
       for ($date_itr = 0; $date_itr < 3; $date_itr++) {
         $articles = $date->appendChild($dom->createElement('articles'));
         $articles_date = $dom->createAttribute('date');
@@ -129,11 +168,6 @@ if ($q->get_dir() === 1) { // 編集
     }
     else // spb
     {
-      $_POST['p_date0'] = mb_ereg_replace('[^0-9]', '', $_POST['p_date0']);
-      // フォームからxml作成
-      $dom = new DomDocument('1.0', 'UTF-8');
-      $date = $dom->appendChild($dom->createElement('date'));
-
       $articles = $date->appendChild($dom->createElement('articles'));
       $articles_date = $dom->createAttribute('date');
       $articles_date->value = !empty($_POST['p_date0']) ? $_POST['p_date0'] : '-';
@@ -164,6 +198,7 @@ if ($q->get_dir() === 1) { // 編集
     $dom->save($tmp_filename);
 
     // s3へ保存
+    $_POST['p_date0'] = mb_ereg_replace('[^0-9]', '', $_POST['p_date0']);
     $archive_filename = str_replace('{date}', $_POST['p_date0'], $archive_filename);
 
     // xml/archives/1031picks.xml みたいな名前で保存する
