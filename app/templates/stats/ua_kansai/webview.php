@@ -40,7 +40,7 @@ $recentArray = getData::getScheduleRecent();
     </article>
   </div>
 </section>
-                               
+
 <!-- section_stats -->
 <section class="section_interhigh_photo">
   <div class="ttl-wrapper">

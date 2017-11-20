@@ -1,5 +1,6 @@
 <?php
 class getData {
+	// public static $subdomain = preg_match("/dev/",$_SERVER["SERVER_NAME"])?"dev-img":"img";
 	public static $scheduleUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/schedule.json";
 	public static $standingUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/standing.json";
 	public static $gameUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/%s.json";
@@ -163,6 +164,40 @@ EOM;
 		if (!self::setJudgment($gameinfo['spectators'])) {
 			$gameinfo['spectators'] = "-";
 		}
+		//20171119試合特別LIVE
+		$result["live"] = "";
+		if ($gameId == "20171119_1") :
+			$bnr = <<< EOM
+			<div class="mt30" style="text-align:center;">
+				<a id="athletech_pc" style="display:none;" href="http://ytv-athlete.jp/" target="_blank"><img src="/assets/stats/ua_kansai/images/bn_athletech_pc.jpg" alt="あすリートチャンネル" width="100%"></a>
+				<a id="athletech_sp" style="display:none;" href="http://ytv-athlete.jp/" target="_blank"><img src="/assets/stats/ua_kansai/images/bn_athletech_sp.jpg" alt="あすリートチャンネル" width="100%" style="width:320px !important"></a>
+			</div>
+EOM;
+			if ($gameinfo['status'] == "開始前" || $gameinfo['status'] == "試合前") {
+				$result["live"] = <<< EOM
+				<div class="live-player">
+					<img src="/assets/stats/ua_kansai/images/before_game.png" alt="関西学生 アメリカンフットボールリーグLIVE!!" width="100%">
+				</div>
+				{$bnr}
+EOM;
+			}elseif($gameinfo['status'] == "試合終了"){
+				$result["live"] = <<< EOM
+				<div class="live-player">
+					<img src="/assets/stats/ua_kansai/images/after_game.png" alt="関西学生 アメリカンフットボールリーグLIVE!!" width="100%">
+				</div>
+				{$bnr}
+EOM;
+			}elseif($gameinfo['status'] == "試合中"){
+				$result["live"] = <<< EOM
+				<div style="position: relative; display: block;" class="live-player">
+					<div style="padding-top: 56.25%;">
+						<iframe src="//players.brightcove.net/4072219199001/ByfgztaCW_default/index.html?videoId=5649611300001" allowfullscreen webkitallowfullscreen mozallowfullscreen style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; width: 100%; height: 100%;"></iframe>
+					</div>
+				</div>
+				{$bnr}
+EOM;
+			}
+		endif;
 		//ヘッダーインナー
 		$result["headInner"] = <<< EOM
 			<div class="game-name">{$gameinfo['league']}</div>
@@ -535,7 +570,7 @@ EOM;
 				if ($cnt == 1) break;
 			}
 		}
-		if (empty($result)) {
+		if (empty($endArray) && empty($recentArray)) {
 			$result = "<div class='non-data mt20 mb30'>直近の日程はございません</div>";
 		}
 		return $result;

@@ -18,7 +18,12 @@
 </head>
 <body>
 <div class="whole motorsports">
-  <div class="motorsports__category-btns">
+    <div class="motorsports__category-btns">
+
+    <div class="sponsor-link" style="padding:15px 3.125%">
+        <a href="/motorsports/crazy-for-racing/"><img src="/motorsports/crazy-for-racing/assets/img/640x100.png" alt="CRAZY FOR RACING"></a>
+    </div>
+        
     <ul class="motorsports__category-btns__list">
       <li class="motorsports__category-btns__item">
         <a class="motorsports__category-btns__link" href="/motorsports/f1/"><img src="/assets/sp/images/motorsports/btn-category_f1.png" alt="F1 / FORMULA 1 レース日程・結果"></a>
@@ -34,6 +39,7 @@
       </li>
     </ul><!-- /.motorsports__category-btns__list -->
   </div><!-- /.motorsports__category-btns -->
+    
 </div><!-- /.whole -->
 </body>
 </html>

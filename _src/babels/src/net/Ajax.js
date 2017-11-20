@@ -32,7 +32,6 @@ export class Ajax {
    * Ajax instanceを作成し、実行可能プロパティを可能に設定します
    */
   constructor() {
-
     /**
      * <p>Ajax request 実行可否判断 flag<br>
      * 二重送信を防止するために使用します</p>
@@ -43,7 +42,6 @@ export class Ajax {
      * @private
      */
     this._can = true;
-
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -54,9 +52,7 @@ export class Ajax {
    * @return {Boolean} 実行可否 flag を返します
    */
   get can():Boolean {
-
     return this._can;
-
   }
   // ---------------------------------------------------
   //  METHOD
@@ -72,25 +68,22 @@ export class Ajax {
    * @param {FormData} [formData=null] FormData Object
    */
   start( url, method, resolve, reject, ResultClass = Result, headers:Object = null, formData:FormData = null ):void {
-
-    let fetch = self.fetch;
-    let _this = this;
+    const fetch = self.fetch;
+    // let _this = this;
 
     // 実行可否をチェックし, false の時は何もしません
-    if ( !this.can ) {
-
+    if (!this.can) {
       let error = new Error( 'status:999, message:duplicate or busy.' );
       error.response = {};
       error.number = 999;
       reject( error );
       return;
-
     }
 
     // flag off
     this.disable();
 
-    let option = {
+    const option = {
       method: method,
       cache: 'no-cache',
       // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
@@ -100,76 +93,65 @@ export class Ajax {
 
     // body へ FormData をセット
     if ( formData !== null && typeof formData !== 'undefined' ) {
-
       option.body = formData;
-
     }
 
     // headers option
     // headers が null or undefined の時は 追加しません
     if ( headers !== null && typeof headers !== 'undefined' ) {
-
       option.headers = headers;
-
     }
 
-    // console.log( `ajax.start: ${url}, ${method}`, option );
+    // console.log(`Ajax.start: ${url}, ${method}`, option);
 
     // https://github.com/github/fetch
     // request を開始します
     fetch( url, option )
-    .then( function( response ) {
+    .then((response) => {
       // check status (Server)
-      let status = response.status;
-
-      if ( status >= 200 && status < 300 ) {
+      const status = response.status;
+      // console.log('Ajax.then response', response);
+      if (status >= 200 && status < 300) {
         // may be ok
         return response;
-
-      } else {
-
-        // bad response, サーバーからのエラーメッセージ
-        let error = new Error( `status:${status}, message:${response.statusText}` );
-
-        error.result = new ResultClass( response.json() );
-        error.status = new StatusDae( status );
-        throw error;
-
       }
+      // bad response, サーバーからのエラーメッセージ
+      const error = new Error( `status:${status}, message:${response.statusText}` );
 
+      error.result = new ResultClass( response.json() );
+      error.status = new StatusDae( status );
+      throw error;
     } )
-    .then( function( response ) {
+    .then((response) => {
       // parse JSON
       return response.json();
     } )
-    .then( function( json:Object ) {
+    .then((json) => {
       // parsed JSON
-      let result = new ResultClass( json );
-
+      const result = new ResultClass( json );
+      // console.log('Ajax.then result', result);
       if ( !Codes.status( result.status.code ) ) {
-
         // something bad
         let code = result.status.code;
         let error = new Error( `status:${code}, user:${result.status.user_message}, dev:${result.status.developer_message}` );
         error.result = result;
         error.status = new StatusDae( result.status );
         throw error;
-
       }
 
       // success callback
-      _this.enable();
-      resolve( result );
-
+      this.enable();
+      resolve(result);
+      return result;
     } )
-    .catch( function( error ) {
-
+    .catch((error) => {
       // 何か問題発生
       // 注意！Promise が永遠に続くので Dom rendering error でもここに戻る
       // error callback
-      _this.enable();
-      reject( error );
-
+      // console.log('Ajax.then error', error);
+      this.enable();
+      reject(error);
+      return error;
     } );
 
   }
@@ -177,17 +159,13 @@ export class Ajax {
    * 実行可否 flag を true にします
    */
   enable():void {
-
     this._can = true;
-
   }
   /**
    * 実行可否 flag を false にします
    */
   disable():void {
-
     this._can = false;
-
   }
 
 }

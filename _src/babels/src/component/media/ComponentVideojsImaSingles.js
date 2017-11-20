@@ -223,7 +223,8 @@ export class ComponentVideojsImaSingles extends React.Component {
    * @since 2017-09-22
    */
   forSafariMute(player) {
-    clearTimeout(this.muteId);  
+    clearTimeout(this.muteId);
+    // try / catch
     try{
       player.muted(false);
     } catch(e) {

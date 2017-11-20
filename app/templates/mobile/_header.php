@@ -255,7 +255,7 @@ if ( $page_has_header ) :
 <div class="header-sticky">
   <header class="head-sec">
     <div class="head-sec-inner">
-      <h1><a href="/">スポーツブル（スポブル）</a></h1>
+      <h1><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a></h1>
 
       <div id="menu-opener" class="menu-opener">
         <a id="side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
