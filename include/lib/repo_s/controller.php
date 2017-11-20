@@ -112,15 +112,11 @@ if($q->get_dir()===0){
 	$TABLE="repo";
 	$FIELD="*";
 	$WHERE=" where rid=".$PARAM["rid"];
-	if(empty(getSorC('u_media')) === false){
-		//mediaIdとslug(repo.t1)の関連づけ
-		$mediaIdAndRepoSlugMapping = [
-			'67' => 'dance'	//dews
-		];
-		$WHERE .= empty($mediaIdAndRepoSlugMapping[getSorC('u_media')]) === false
-			? "and t1 = '{$mediaIdAndRepoSlugMapping[getSorC('u_media')]}'"
-			: "";
-	}
+
+	//dews特別対応
+	if(empty(getSorC('u_media')) === false && getSorC('u_media') == '67'){
+		$WHERE .= " and t1 = 'dance'";
+    }
 }
 
 $EDITDELETEINITIAL="";

@@ -6,9 +6,14 @@
  */
 ?>
 <li class="pl0"><a href="/editdm/">TOP</a></li>
-<?php if(getSorC('is_carousel_headline')==1){ ?>
-    <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
-    <li><a href="/editdm/repo_n/?cid=9&rid=7">TOPピックアップ</a></li>
+<?php if(getSorC('is_carousel_headline')==1){
+    //dews特別対応
+    if(empty(getSorC('u_media')) === false && getSorC('u_media') == '67'){ ?>
+            <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
+    <?php } else { ?>
+        <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
+        <li><a href="/editdm/repo_n/?cid=9&rid=7">TOPピックアップ</a></li>
+    <?php } //endif ?>
 <?php }elseif(getSorC("usr")!="inhigh" && getSorC("usr")!="kansaifootball"){ ?>
     <?php if(getSorC("is_external")!=1){ ?>
         <li><a href="/editdm/ad/?cid=0&nid=0">広告設定</a></li>
