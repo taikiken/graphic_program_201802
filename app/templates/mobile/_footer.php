@@ -41,30 +41,37 @@ if (
 
       <?php if (!empty($page['side-menu'])) : ?>
       <li>
-        <ul>
-        <?php foreach ($page['side-menu'] as $list) : ?>
-          <li class="sidemenu-list-title"><?php echo $list['header'];?></li>
-          <?php foreach($list['items'] as $side_item) : ?>
-          <li>
-              <div class="sidemenu_container">
-                  <a href="<?php echo $side_item['link']; ?>">
-                      <img src="<?php echo $side_item['image']['sp']; ?>" class="sidemenu_icon">
-                      <?php if ($side_item['type'] === 1 && false === empty($side_item['caption'])):?>
-                          <div class="sidemenu_title">
-                              <?php echo $side_item['title']; ?>
-                          </div>
-                          <div class="sidemenu_caption"><?php echo $side_item['caption'];?></div>
-                      <?php else: ?>
-                          <div class="sidemenu_title_single">
-                              <?php echo $side_item['title']; ?>
-                          </div>
-                    <?php endif;?>
-                  </a>
-              </div>
-          </li>
-          <?php endforeach; ?>
-        <?php endforeach; ?>
-        </ul>
+          <ul>
+              <?php foreach ($page['side-menu'] as $list) : ?>
+                  <li class="sidemenu-list-title"><?php echo $list['header'];?></li>
+                  <?php foreach($list['items'] as $side_item) : ?>
+                      <li>
+                          <?php if ($side_item['type'] === 1 && false === empty($side_item['caption'])):?>
+                              <div class="sidemenu_container">
+                                  <a href="<?php echo $side_item['link']; ?>">
+                                      <img src="<?php echo $side_item['image']['sp']; ?>" class="sidemenu_icon">
+                                      <div class="sidemenu_title">
+                                          <?php echo $side_item['title']; ?>
+                                      </div>
+                                      <div class="sidemenu_caption">
+                                          <?php echo $side_item['caption'];?>
+                                      </div>
+                                  </a>
+                              </div>
+                          <?php else: ?>
+                              <div class="sidemenu_container_single">
+                                  <a href="<?php echo $side_item['link']; ?>">
+                                      <img src="<?php echo $side_item['image']['sp']; ?>" class="sidemenu_icon">
+                                      <div class="sidemenu_title_single">
+                                          <?php echo $side_item['title']; ?>
+                                      </div>
+                                  </a>
+                              </div>
+                          <?php endif;?>
+                      </li>
+                  <?php endforeach; ?>
+              <?php endforeach; ?>
+          </ul>
       </li>
       <?php endif; ?>
 

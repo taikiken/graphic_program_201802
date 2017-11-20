@@ -389,9 +389,10 @@ div.synapse_logo {
 .side-menu-ut-nav-logout i { @include sprite( $common-icon-side-logout, inline-block ); }
 .side-menu-ut-nav-about i { @include sprite( $common-icon-side-about, inline-block ); }
 
-.sidemenu_container {
+.sidemenu_container,
+.sidemenu_container_single {
   position: relative;
-  padding: 16px 8px;
+  padding: 12px 8px;
   border-bottom: 1px solid #eee;
 }
 
@@ -399,24 +400,32 @@ div.synapse_logo {
   text-decoration: none;
 }
 
-.sidemenu_container img.sidemenu_icon {
+.sidemenu_container_single a {
+  text-decoration: none;
+  display: flex;
+  align-items:center;
+}
+
+.sidemenu_container img.sidemenu_icon,
+.sidemenu_container_single img.sidemenu_icon {
   width: 40px;
   height: 40px;
   padding: 8px;
   float: left;
 }
 
-.sidemenu_container div.sidemenu_title {
+.sidemenu_container div.sidemenu_title,
+.sidemenu_container_single div.sidemenu_title {
   line-height: 1.2em;
   margin-right: 20px;
   font-weight: bold;
   font-size: 16px;
 }
 
-.sidemenu_container div.sidemenu_title_single {
+.sidemenu_container div.sidemenu_title_single,
+.sidemenu_container_single div.sidemenu_title_single {
   line-height: 1em;
   margin-right: 20px;
-  margin-top: 12px;
   font-weight: bold;
   font-size: 16px;
 }
