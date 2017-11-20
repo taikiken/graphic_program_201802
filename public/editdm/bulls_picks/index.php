@@ -210,8 +210,9 @@ if($q->get_dir()==3){
             success: function (data) {
                 if (data.existArchivedXml == false) {
                     alert('アーカイブファイルが存在しません。');
+                } else {
+                    alert('本番反映しました。');
                 }
-                alert('本番反映しました。');
             },
             error: function () {
                 alert('反映に失敗しました。');
