@@ -54,9 +54,9 @@ if ( UT_ENV != 'PRODUCTION' )
   // print
   // ------------------------------
     echo $res;
-  }
-  else
-  {
-    header('Location: ' . '/', true , 301);
-    exit;
+}
+else
+{
+  header('Location: ' . '/', true, 301);
+  exit;
 }
