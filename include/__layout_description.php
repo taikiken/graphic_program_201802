@@ -11,7 +11,7 @@ if($CURRENTDIRECTORY=="repo_n"){
 			$TITLEFIELDNAME = multiLangTitle("title");
 			break;
 	}
-  if ($_GET['rid'] == 95) { // 注目の選手
+  if ($_GET['rid'] == 95 && $q->get_dir() == 1) { // 注目の選手 編集画面のみ
     $TITLEFIELDNAME = "d2";
     $sql = sprintf("select name from tbl_player where id=%s", $p[$TITLEFIELDNAME]);
     $o->query($sql);
