@@ -7,14 +7,17 @@ if($CURRENTDIRECTORY=="repo_n"){
 			// 選手
 			$TITLEFIELDNAME = "name";
 			break;
-		case 96:
-			// 注目選手
-			$TITLEFIELDNAME = "d2";
-			break;
 		default:
 			$TITLEFIELDNAME = multiLangTitle("title");
 			break;
 	}
+  if ($_GET['rid'] == 95) { // 注目の選手
+    $TITLEFIELDNAME = "d2";
+    $sql = sprintf("select name from tbl_player where id=%s", $p[$TITLEFIELDNAME]);
+    $o->query($sql);
+    $fetch_tbl_player = $o->fetch_array();
+    $p[$TITLEFIELDNAME] = $p[$TITLEFIELDNAME] . ': ' . $fetch_tbl_player['name'];
+  }
 }elseif($CURRENTDIRECTORY=="mail"){
 	$TITLEFIELDNAME="subject";
 }elseif($CURRENTDIRECTORY=="mailtemplate"){
