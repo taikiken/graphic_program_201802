@@ -82,17 +82,6 @@ $dataArray = getData::getMatch($gameId);
   </script>
   <!-- ad/dfp -->
 
-  <!-- ad/appvador -->
-  <script>
-    googletag.cmd.push(function() {
-      googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
-      googletag.pubads().enableSingleRequest();
-      googletag.pubads().collapseEmptyDivs();
-      googletag.enableServices();
-    });
-  </script>
-  <!-- //ad/appvador -->
-
   <!-- ad/dfp - pc/rectangle -->
   <script>
     googletag.cmd.push(function() {
@@ -168,6 +157,10 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
     </div><!-- /#result-sec -->
     <div class="body-sec-inner">
       <section class="main-sec">
+
+<!-- 20171119試合特別LIVE -->
+<?=$dataArray["live"]?>
+
 
         <div class="stats__banner mt30">
           <div id="ua-pc-big-banner" style='height:90px; width:728px;'>
@@ -411,13 +404,20 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
         <div id="sidebar-moving-container">
 
           <div class="sponsor-link">
-            <!-- ad/531683568/npb-pc-rectangle -->
-            <div id='div-gpt-ad-1492577512561-0' style='height:250px; width:300px;'>
+            <!-- /531683568/kansai-amefoot-ad/ua-pc-sidebar-rectabgle -->
             <script>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1492577512561-0'); });
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-pc-sidebar-rectabgle', [300, 250], 'div-gpt-ad-1510649945193-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1510649945193-0' style='height:250px; width:300px;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1510649945193-0'); });
             </script>
             </div>
-            <!-- // ad/531683568/npb-pc-rectangle -->
+            <!-- // /531683568/kansai-amefoot-ad/ua-pc-sidebar-rectabgle -->
           </div>
 
           <div class="app-bnr">
