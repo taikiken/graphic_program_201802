@@ -226,6 +226,12 @@ END_DOC;
     $s=set_articleinfo($f,1,1,1);
     $ad_put=set_advertise($ad,"detail");
 
+      // 関連記事があったらフロントに引き渡す
+      if(false === empty($f["relatedpost"]))
+      {
+          $s["relatedpost"] = $f["relatedpost"];
+      }
+
     // media.video.ad_urlの設定
     if ( $ad_put['vast'] ) :
       $s['media']['video']['vast'] = $ad_put['vast'];
