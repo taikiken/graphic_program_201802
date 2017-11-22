@@ -40,6 +40,8 @@ export default class Visited {
   static arrive() {
     // Cookie.set(Visited.COOKIE, '1', Times.hour(24));
     // https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-331352860
-    Cookie.set(Visited.COOKIE, location.href, Times.hour(24));
+    // Cookie.set(Visited.COOKIE, location.href, Times.hour(24));
+    // UNDO_SPBL-154 【フロント】Wowクーポン プレゼント キャンペーン対応 - 24時間に1回出しているものを72時間に変更
+    Cookie.set(Visited.COOKIE, location.href, Times.hour(24 * 3));
   }
 }
