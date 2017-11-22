@@ -6,12 +6,10 @@ include "public/check.php";
 $o = new db;
 $o->connect();
 
-$editorialDepartmentMediaId = 51;
-
 $offset = strlen($_REQUEST["offset"]) > 0 ? $_REQUEST["offset"] : 0;
 $length = strlen($_REQUEST["length"]) > 0 ? $_REQUEST["length"] : 5;
 $t10 = $_REQUEST["t10"];
-$mediaId = empty($_REQUEST["d2"]) === false ? $_REQUEST["d2"] : $editorialDepartmentMediaId;
+$mediaId = empty($_REQUEST["d2"]) === false ? $_REQUEST["d2"] : null;
 
 function get_status($t10) {
 	if(!$t10){
@@ -46,9 +44,11 @@ if ($y["status"]["code"] === 200) {
 
 	//where句を組み立てる
 	$arrayWheres = [
-		"d2=".pg_escape_literal($mediaId),
 		"flag=1",
 	];
+	if($mediaId !== null){
+		$arrayWheres[] = "d2=".pg_escape_literal($mediaId);
+	}
 	if($t10){
 		$arrayWheres[] = 't10='.pg_escape_literal($t10);
 	}
