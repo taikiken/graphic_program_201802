@@ -220,22 +220,17 @@
                         <h2 class="ttl recommend"><i></i>編集部おすすめの記事</h2>
                     </div>
 
-                    <div class="recommend_list">
-                        <ul class="thumb_area">
-                        </ul>
-                    </div>
+                    <div id="Widget_articles-1" class="Widget_articles" data-category="crazy" data-type="recommend"></div>
                 </section>
                 <!--  /  recommend   -->
-                <?php /*
-                <section class="section_crazy_popular">
+
+                <section class="section_crazy_popular pc_hide">
                     <div class="ttl-wrapper pc_hide">
                         <h2 class="ttl popular"><i></i>人気の記事</h2>
                     </div>
-
-                    <div id="category-container"></div>
-                    <div id="board-container-more"></div>
+                    <div id="Widget_articles-2" class="Widget_articles" data-category="crazy" data-type="ranking"></div>
                 </section>
-                */?>
+
                 <!-- / popular  -->
 
                 <div class="back_btn"><a href="/category/crazy/">CRAZY ATHLETES トップへ戻る</a></div>
@@ -505,7 +500,6 @@
 </script>
 <script src="/assets/js/global.bundle.js"></script>
 <script src="https://code.jquery.com/jquery-git.min.js"></script>
-<script src="/assets/js/crazy.js"></script>
 <script>
     $(function()
     {
@@ -550,5 +544,6 @@
         }
     });
 </script>
+<script src="/assets/widgets/articles-index/Widget_articles.js"></script>
 </body>
 </html>
