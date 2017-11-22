@@ -187,7 +187,18 @@ EOT;
         postXml(post_api, get_tmp_api);
     });
 
-    function getXml(url) {
+    // フォームクリア
+    $('#datepicker').change(function () {
+        var date = $('#datepicker').val();
+
+        if ("<?php echo $date; ?>" != date){
+            $('.in').val('');
+            $('#datepicker').val(date) // 日付はクリアしたくなかった
+        }
+    });
+
+
+        function getXml(url) {
         $('#preview-xml').empty(); // 初期化
 
         $.ajax({
