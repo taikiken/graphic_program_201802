@@ -164,25 +164,30 @@ if($q->get_dir()==3){
 
     });
 
+    function xmlPreview(data, au_flag) {
+        if (au_flag) {
+            $('#au-xml').text(data);
+        } else {
+            $('#spb-xml').text(data);
+        }
+    }
     function getXml(url, au_flag=false) {
+        xmlPreview('読み込み中です...', au_flag);
+
         $.ajax({
             url: url,
             type: 'GET',
             dateType: 'xml',
             timeout: 10000,
             success: function (data) {
-                if (au_flag) {
-                    $('#au-xml').text(data);
-                } else {
-                    $('#spb-xml').text(data);
-                }
+                xmlPreview(data, au_flag)
             },
             error: function () {
                 // リロード
                 if (au_flag) {
-                    $('#au-xml').append(getXml(url, au_flag));
+                    getXml(url, au_flag);
                 } else {
-                    $('#spb-xml').append(getXml(url));
+                    getXml(url);
                 }
             }
         });
