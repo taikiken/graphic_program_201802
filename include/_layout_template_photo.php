@@ -227,6 +227,11 @@ var where="<?=$WHERE?>";
             formData.append(i, files[i]);
         }
         var cnt = i;
+        if(cnt > 100) {
+            alert('100枚以上の画像はアップロードできません');
+            dragLeave(event);
+            return;
+        }
         if(confirm(cnt + '件の画像をアップロードします')) {
             imageFileUpload(formData);
         }
@@ -247,7 +252,8 @@ var where="<?=$WHERE?>";
                 location.reload();
             },
             error:function(err){
-                console.log(err);
+                alert('アップロードに失敗しました');
+                //location.reload();
             }
         });
     }
@@ -284,7 +290,7 @@ var where="<?=$WHERE?>";
                     location.reload();
                 },
                 error:function(err){
-                    console.log(err);
+                    location.reload();
                 }
             });
         }

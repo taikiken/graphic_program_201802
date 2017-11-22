@@ -8,7 +8,7 @@
 <?php
 if(!isset($_GET['id'])): ?>
   <div id="list-photoalbum">
-    <p class="lead"><?php echo $page['post']['body'];?></p>
+    <p class="lead"><?php echo $page['post']['body_escape'];?></p>
     <ul>
       <?php foreach($page['photo'] as $id => $photo) :?>
         <li>
@@ -19,6 +19,11 @@ if(!isset($_GET['id'])): ?>
       <?php endforeach;?>
     </ul>
   </div>
+    <?php
+    if(false === empty($page['post']['relatedpost'])):
+        echo $page['post']['relatedpost'];
+    endif;
+    ?>
 <?php else:?>
   <div id="detail-photoalbum">
     <nav class="nav-photoalbum" style="margin-top: 20px;">
@@ -102,4 +107,10 @@ if(!isset($_GET['id'])): ?>
       ?>
     </ul>
   </div>
+
+    <?php
+    if(false === empty($page['post']['relatedpost'])):
+        echo $page['post']['relatedpost'];
+    endif;
+    ?>
 <?php endif;?>

@@ -5,6 +5,7 @@
  * Date: 2017/07/19
  * Time: 10:24
  */
+set_time_limit(120);
 
 include "local.php";
 include "public/check.php";
