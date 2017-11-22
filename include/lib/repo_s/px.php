@@ -1,8 +1,6 @@
 <?php
 
-if ($q->get_dir() !== 2) {
-
-  if ($g->f("rid") == 95) {
+if ($g->f("rid") == 95 && $q->get_dir() == 1) {
     if ($q->get_file() !== 2) {
       $TITLE = "公開";
       $FIELD = "flag";
@@ -38,7 +36,8 @@ if ($q->get_dir() !== 2) {
       }
     }
   }
-  include $INCLUDEPATH . "_pageaddition.php";
+  else
+  {
+    include $INCLUDEPATH . "_pageaddition.php";
 
-}
-
+  }
