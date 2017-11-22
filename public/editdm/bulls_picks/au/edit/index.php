@@ -59,7 +59,6 @@ if($q->get_dir()==3){
           $( ".datepicker" ).datepicker({
               setDate : "<?php echo $date ?>/<?php echo date('Y')?>",
               dateFormat : "mm/dd",
-              minDate : new Date(<?php echo date('Y')?>, <?php echo $array_month_day[0] -1 ?>, <?php echo $array_month_day[1] ?>)
           });
       } );
   </script>
