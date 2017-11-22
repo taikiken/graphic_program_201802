@@ -26,6 +26,8 @@ export default class Black {
     '/big6tv',
     '/big6tv/live/2017a',
     '/category/big6tv',
+    // add - 2017-11-04 - https://aws-plus.backlog.jp/view/UNDO_SPBL-154#comment-1181749714
+    '/signup-wow',
   ];
   /**
    * URL black list - strong
