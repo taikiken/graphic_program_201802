@@ -1,3 +1,8 @@
+.undotsushin-ios .head-sec, .undotsushin-ios .foot-sec,
+.undotsushin-android .head-sec,
+.undotsushin-android .foot-sec {
+  display: none; }
+
 /* -----------------------------------------
 mlb-dream-cup
 ----------------------------------------- */
@@ -295,7 +300,7 @@ mlb-dream-cup
         margin-top: 10px;
         margin-left: 2%; }
       .whole.mlb_dc .archive_container .thumbs_list.photo {
-        min-height: 170px; }
+        min-height: 140px; }
         .whole.mlb_dc .archive_container .thumbs_list.photo a {
           height: 130px; }
           .whole.mlb_dc .archive_container .thumbs_list.photo a figure {
