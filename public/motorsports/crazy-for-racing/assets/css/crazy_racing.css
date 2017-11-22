@@ -1,5 +1,10 @@
+.undotsushin-ios .head-sec, .undotsushin-ios .foot-sec,
+.undotsushin-android .head-sec,
+.undotsushin-android .foot-sec {
+  display: none; }
+
 /* -----------------------------------------
-sumo
+crazy-for-racing
 ----------------------------------------- */
 .crazy_racing {
   color: #fff;
