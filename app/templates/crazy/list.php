@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-    <script src="/assets/js/app_divide.bundle.js"></script>
+    <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true"></script>
+    <script src="/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <title>CRAZY ATHLETES | スポーツブル / SPORTS BULL</title>
-    <script src="/assets/js/libs/vendor.react.js"></script>
-    <script src="/assets/js/bundle/main.bundle.js"></script>
+    <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
     <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
     <meta name="description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
     <meta property="fb:app_id" content="842032129256034">
@@ -286,7 +286,13 @@
                     <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
                         <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
                     </div>
+                  <?php
+                  /*
+                   オススメ記事 - crazy 不要
+                  https://github.com/undotsushin/undotsushin/issues/862#issuecomment-229568814
                     <div id="widget-recommend-container"></div>
+                  */
+                  ?>
                     <!--/videos-->
                     <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
                         <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
@@ -549,5 +555,6 @@
     });
 </script>
 <script src="/assets/widgets/articles-index/Widget_articles.js"></script>
+<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js?v=<?php echo $page['version']; ?>" data-label="CRAZY ATHLETES"></script>
 </body>
 </html>
