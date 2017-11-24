@@ -9,6 +9,7 @@
 <?php if(getSorC("usr")!="inhigh" && getSorC("usr")!="kansaifootball"){ ?>
     <?php if(getSorC("is_external")!=1){ ?>
         <li><a href="/editdm/ad/?cid=0&nid=0">広告設定</a></li>
+        <li><a href="/editdm/notice/">お知らせ設定</a></li>
         <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
         <li><a href="/editdm/repo_n/?cid=9&rid=7">TOPピックアップ</a></li>
         <li><a href="/editdm/repo_s/?rid=7">TOP以外ピックアップ</a></li>
