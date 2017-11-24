@@ -88,6 +88,7 @@
     </script>
     <!-- ad/dfp -->
     <!-- ad/appvador -->
+<!--
     <script>
         googletag.cmd.push(function()
         {
@@ -97,6 +98,7 @@
             googletag.enableServices();
         });
     </script>
+-->
     <!-- //ad/appvador -->
     <!-- ad/dfp - pc/rectangle -->
     <script>
@@ -144,6 +146,7 @@
 </head>
 <body>
 <!-- ad/531683568/appvador -->
+<!--
 <div id='div-gpt-ad-1501126889988-0'>
     <style>
         #div-gpt-ad-1501126889988-0 * {
@@ -158,6 +161,7 @@
     </script>
     <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
 </div>
+-->
 <!-- ad/531683568/appvador -->
 <div id="whole" class="whole">
     <header class="head-sec">
