@@ -188,6 +188,90 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+
+
+  // ref. https://aws-plus.backlog.jp/view/UNDO_SPBL-150/
+  // お知らせのダミーレスポンス ( CMSの実装完了したら削除してください )
+  $information = array(
+
+    'notice' => array(
+      'type'             => 'notice',
+      'text'             => 'スポブルアプリ3日間利用で5000円分クーポンがあたる！',
+      'text_color'       => '#333333',
+      'background_color' => '#ffffff',
+      'icon'             => 'https://dev.sportsbull.jp/assets/information/icon/3x/information__icon__notice.png',
+      'img'              => '',
+      'link'             => 'https://dev.sportsbull.jp/?notice',
+    ),
+
+    'notice_textlong' => array(
+      'type'             => 'notice',
+      'text'             => 'スポブルアプリ3日間利用で5000円分クーポンがあたる！スポブルアプリ3日間利用で5000円分クーポンがあたる！スポブルアプリ3日間利用で5000円分クーポンがあたる！',
+      'text_color'       => '#333333',
+      'background_color' => '#ffffff',
+      'icon'             => 'https://dev.sportsbull.jp/assets/information/icon/3x/information__icon__notice.png',
+      'img'              => '',
+      'link'             => 'https://dev.sportsbull.jp/?notice',
+    ),
+
+    'warning' => array(
+      'type'             => 'warning',
+      'text'             => '2017年12月1日 14:00 - 16:00までメンテナンスします',
+      'text_color'       => '#333333',
+      'background_color' => '#ffcccc',
+      'icon'             => 'https://dev.sportsbull.jp/assets/information/icon/3x/information__icon__warning.png',
+      'img'              => '',
+      'link'             => 'https://dev.sportsbull.jp/?warning',
+    ),
+
+    'img' => array(
+      'type'             => 'img',
+      'text'             => '画像表示パターン',
+      'text_color'       => '',
+      'background_color' => '',
+      'icon'             => '',
+      'img'              => 'https://img.sportsbull.jp/img/img2017112518104761132200.jpg',
+      'link'             => 'https://dev.sportsbull.jp/?img',
+    ),
+  );
+
+  if ( $category === 'top' ) :
+    $categoriesinfo['information'] = array(
+      'pc'      => $information['notice'],
+      'sp'      => $information['notice'],
+      'ios'     => $information['notice'],
+      'android' => $information['notice'],
+    );
+  endif;
+
+  if ( $category === 'all' ) :
+    $categoriesinfo['information'] = array(
+      'pc'      => $information['notice_textlong'],
+      'sp'      => $information['notice_textlong'],
+      'ios'     => $information['notice_textlong'],
+      'android' => $information['notice_textlong'],
+    );
+  endif;
+
+  if ( $category === 'baseball' ) :
+    $categoriesinfo['information'] = array(
+      'pc'      => $information['warning'],
+      'sp'      => $information['warning'],
+      'ios'     => $information['warning'],
+      'android' => $information['warning'],
+    );
+  endif;
+
+  if ( $category === 'highschoolbaseball' ) :
+    $categoriesinfo['information'] = array(
+      'pc'      => $information['img'],
+      'sp'      => $information['img'],
+      'ios'     => $information['img'],
+      'android' => $information['img'],
+    );
+  endif;
+
+
 $y["response"]=$categoriesinfo;
 
 print_json($y,$_SERVER['HTTP_REFERER']);
