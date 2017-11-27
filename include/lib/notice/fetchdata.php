@@ -13,7 +13,7 @@
 </table>
 
 <?php
-$title =sprintf("%s：[タイプ:%s] ",$p[$i]["body"], $p[$i]["type"]);
+$title =sprintf("%s：[タイプ:%s] ",$p[$i]["text"], $p[$i]["type"]);
 $title.=mod_HTML($p[$i]["title"],1);
 
 $sql=sprintf("SELECT title FROM notices");
