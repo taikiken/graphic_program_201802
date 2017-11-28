@@ -5,7 +5,6 @@
 
 if($q->get_dir()===0){ // 新規
 	if($q->get_file()===0){
-    include $INCLUDEPATH."formback.php";
 
 	}elseif($q->get_file()===1){
 		data_conf();
@@ -16,10 +15,26 @@ if($q->get_dir()===0){ // 新規
 
     $sv[$sn[] = "created_at"] = "now()";
     $o = new dbutl($TABLE, $sn, $sv);
-    $columns = implode(",", $sn);
-    $values = implode(",", $sv);
 
-    $sql = sprintf("INSERT INTO notices(%s) VALUES(%s) RETURNING id;", $columns, $values);
+    // u_categoriesが混ざっちゃうからカラム指定する
+    $sql = <<<SQL
+INSERT INTO notices(
+        type,
+        text,
+        img,
+        link,
+        created_at
+        ) 
+VALUES(
+        {$sv['type']},
+        {$sv['text']},
+        {$sv['img']},
+        {$sv['link']},
+        NOW()
+        )
+RETURNING id;
+SQL;
+
     $o->query($sql);
     $f = $o->fetch_array();
     $notice_id = $f['id'];
@@ -37,7 +52,7 @@ if($q->get_dir()===0){ // 新規
 }elseif($q->get_dir()===1){ // 編集
 	if($q->get_file()===0){
 
-		$sql=sprintf("select category_id from %s where id=%s",$TABLE,$g->f("id"));
+		$sql=sprintf("select * from %s where id=%s",$TABLE,$g->f("id"));
 		$o->query($sql);
 		$p=$o->fetch_array();
 		include $INCLUDEPATH."formback.php";
@@ -52,7 +67,17 @@ if($q->get_dir()===0){ // 新規
 		$notice_id = $g->f("id");
     $sv[$sn[]="id"]=$notice_id;
 		$o=new dbutl($TABLE,$sn,$sv);
-		$e=$o->update($notice_id);
+
+		$sql = <<<SQL
+UPDATE notices 
+set 
+        type = {$sv['type']},
+        text = {$sv['text']},
+        img = {$sv['img']},
+        link = {$sv['link']}
+where id = {$notice_id}
+SQL;
+		$e=$o->query($sql);
 
     // 中間テーブル削除
     $sql = sprintf("DELETE FROM categories_notices WHERE notice_id=%s;", $notice_id);
@@ -73,7 +98,6 @@ if($q->get_dir()===0){ // 新規
 		$sql=sprintf("select * from %s where id=%s",$TABLE,$g->f("id"));
 		$o->query($sql);
     $p=$o->fetch_array();
-    include $INCLUDEPATH."formback.php";
 
 	}elseif($q->get_file()===1){
 		data_conf();
