@@ -231,12 +231,14 @@ SQL;
 
 if (!empty($f))
 {
+  $domain = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"];
+
   $type = $f['type'];
   $text_color = ['#333333', '#333333', ''];
   $background_color = ['#ffffff', '#ffcccc', ''];
   $icon = [
-    '/assets/information/icon/3x/information__icon__notice.png',
-    '/assets/information/icon/3x/information__icon__warning.png',
+    $domain . '/assets/information/icon/3x/information__icon__notice.png',
+    $domain . '/assets/information/icon/3x/information__icon__warning.png',
     '',
   ];
   $disp_type = ['notice', 'warning', 'img'];
