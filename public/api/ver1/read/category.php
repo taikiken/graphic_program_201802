@@ -18,19 +18,20 @@ $categoriesinfo=array();
 if(strlen($f["name"])>0){
 
 	$categoriesinfo=set_categoriesinfo($f);
+  $category_id = $f['id']; // お知らせ $categoriesinfo['information'] で使う
 
-	/*
+  /*
 
-	https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
-	カテゴリーにpickup, hedlineの記事を追加
+  https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
+  カテゴリーにpickup, hedlineの記事を追加
 
-	pickupとheadlineが同じ場合は、CMS「記事選択」から新規登録で、該当カテゴリーslugにカテゴリー名を入力する。
-	例）クライミング 'climbing'
+  pickupとheadlineが同じ場合は、CMS「記事選択」から新規登録で、該当カテゴリーslugにカテゴリー名を入力する。
+  例）クライミング 'climbing'
 
-	pickupとheadlineを分離して管理する場合、CMS「記事選択」から新規登録で、該当カテゴリーslugに '_headline'を付加する。
-	例）クライミング 'climbing_headline'
+  pickupとheadlineを分離して管理する場合、CMS「記事選択」から新規登録で、該当カテゴリーslugに '_headline'を付加する。
+  例）クライミング 'climbing_headline'
 
-	*/
+  */
 
 	$sql=sprintf("select id from repo where t1='%s'",$category);
 	$o->query($sql);
@@ -188,89 +189,92 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+$sql = <<<SQL
+SELECT 
+		notices.*
+FROM
+		categories_notices,
+		notices
+WHERE
+ 		category_id = {$category_id}
+AND
+		notice_id = notices.id
+ORDER BY
+		categories_notices.created_at DESC
+LIMIT 1
+SQL;
+
+$o->query($sql);
+$f = $o->fetch_array();
+
+// デフォルトのお知らせ取得
+if (empty($f))
+{
+  $sql = <<<SQL
+SELECT 
+		notices.*
+FROM
+		categories_notices,
+		notices
+WHERE
+ 		category_id = 0
+AND
+		notice_id = notices.id
+ORDER BY
+		categories_notices.created_at DESC
+LIMIT 1
+SQL;
+
+  $o->query($sql);
+  $f = $o->fetch_array();
+}
+
+if (!empty($f))
+{
+  $type = $f['type'];
+  $text_color = ['#333333', '#333333', ''];
+  $background_color = ['#ffffff', '#ffcccc', ''];
+  $icon = [
+    '/assets/information/icon/3x/information__icon__notice.png',
+    '/assets/information/icon/3x/information__icon__warning.png',
+    '',
+  ];
+  $disp_type = ['notice', 'warning', 'img'];
 
 
-  // ref. https://aws-plus.backlog.jp/view/UNDO_SPBL-150/
-  // お知らせのダミーレスポンス ( CMSの実装完了したら削除してください )
   $information = array(
 
-    'notice' => array(
-      'type'             => 'notice',
-      'text'             => 'スポブルアプリ3日間利用で5000円分クーポンがあたる！',
-      'text_color'       => '#333333',
-      'background_color' => '#ffffff',
-      'icon'             => 'https://dev.sportsbull.jp/assets/information/icon/3x/information__icon__notice.png',
-      'img'              => '',
-      'link'             => 'https://dev.sportsbull.jp/?notice',
-    ),
-
-    'notice_textlong' => array(
-      'type'             => 'notice',
-      'text'             => 'スポブルアプリ3日間利用で5000円分クーポンがあたる！スポブルアプリ3日間利用で5000円分クーポンがあたる！スポブルアプリ3日間利用で5000円分クーポンがあたる！',
-      'text_color'       => '#333333',
-      'background_color' => '#ffffff',
-      'icon'             => 'https://dev.sportsbull.jp/assets/information/icon/3x/information__icon__notice.png',
-      'img'              => '',
-      'link'             => 'https://dev.sportsbull.jp/?notice',
-    ),
-
-    'warning' => array(
-      'type'             => 'warning',
-      'text'             => '2017年12月1日 14:00 - 16:00までメンテナンスします',
-      'text_color'       => '#333333',
-      'background_color' => '#ffcccc',
-      'icon'             => 'https://dev.sportsbull.jp/assets/information/icon/3x/information__icon__warning.png',
-      'img'              => '',
-      'link'             => 'https://dev.sportsbull.jp/?warning',
-    ),
-
-    'img' => array(
-      'type'             => 'img',
-      'text'             => '画像表示パターン',
-      'text_color'       => '',
-      'background_color' => '',
-      'icon'             => '',
-      'img'              => 'https://img.sportsbull.jp/img/img2017112518104761132200.jpg',
-      'link'             => 'https://dev.sportsbull.jp/?img',
-    ),
+    'type'             => $disp_type[$type],
+    'text'             => $f['text'],
+    'text_color'       => $text_color[$type],
+    'background_color' => $background_color[$type],
+    'icon'             => $icon[$type],
+    'img'              => $f['img'],
+    'link'             => $f['link'],
   );
 
-  if ( $category === 'top' ) :
-    $categoriesinfo['information'] = array(
-      'pc'      => $information['notice'],
-      'sp'      => $information['notice'],
-      'ios'     => $information['notice'],
-      'android' => $information['notice'],
-    );
-  endif;
+}
+else
+{
+  $information = array(
 
-  if ( $category === 'all' ) :
-    $categoriesinfo['information'] = array(
-      'pc'      => $information['notice_textlong'],
-      'sp'      => $information['notice_textlong'],
-      'ios'     => $information['notice_textlong'],
-      'android' => $information['notice_textlong'],
-    );
-  endif;
+    'type'             => '',
+    'text'             => '',
+    'text_color'       => '',
+    'background_color' => '',
+    'icon'             => '',
+    'img'              => '',
+    'link'             => '',
+  );
 
-  if ( $category === 'baseball' ) :
-    $categoriesinfo['information'] = array(
-      'pc'      => $information['warning'],
-      'sp'      => $information['warning'],
-      'ios'     => $information['warning'],
-      'android' => $information['warning'],
-    );
-  endif;
+}
 
-  if ( $category === 'highschoolbaseball' ) :
-    $categoriesinfo['information'] = array(
-      'pc'      => $information['img'],
-      'sp'      => $information['img'],
-      'ios'     => $information['img'],
-      'android' => $information['img'],
-    );
-  endif;
-
+$categoriesinfo['information'] = array(
+  'pc'      => $information,
+  'sp'      => $information,
+  'ios'     => $information,
+  'android' => $information,
+);
 
 $y["response"]=$categoriesinfo;
 
