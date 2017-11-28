@@ -63,7 +63,9 @@ var ct="<?=date("Y/m/d H:i:s")?>";
 .chbtn{
 	display:none;
 }
-
+.listTable.daily td, .listTable.daily th{
+  padding: 4px;
+}
 </style>
 <?php } ?>
 <link rel="stylesheet" href="/shared/cms/css/lightbox.css" type="text/css" media="screen" >
@@ -100,6 +102,23 @@ var ct="<?=date("Y/m/d H:i:s")?>";
 </div><!-- End topicPath -->
 
 <div style="margin-bottom: 12px;">
+  <div>
+        <?php $start_year = 2014?>
+
+        <div style="margin: 20px 0 10px 0; text-align: right;">
+          <select name="target_year" id="target_year">
+          <?php for($year=$start_year; $year <= $start_year+5; $year++):?>
+            <option value="<?php echo $year;?>" <?php if($year == date('Y')):?> selected="selected" <?php endif;?> ><?php echo $year;?></option>
+            <?php endfor;?>
+          </select>年
+          <select name="target_month" id="target_month">
+          <?php for($month=1; $month <= 12; $month++):?>
+          <option value="<?php echo sprintf('%02d', $month)?>" <?php if($month == date('n')):?> selected="selected" <?php endif;?>><?php echo $month?></option>
+          <?php endfor;?>
+          </select>月
+          <a class="submit_date" onclick="javascript:void(0);"><span class="value">選択</span></a>
+        </div>
+  </div>
   <table style="width:100%;">
     <tr>
       <td style="vertical-align: top; width:50%;">
@@ -120,71 +139,16 @@ var ct="<?=date("Y/m/d H:i:s")?>";
         </table>
       </td>
       <td style="vertical-align: top;">
-        <table class="listTable">
+        <table class="listTable daily">
           <tr>
-            <th></th>
+            <th colspan="2"></th>
             <th class="t_display">通常</th>
             <th class="t_display">Wow</th>
-          </tr>
-          <tr>
-            <th class="t_display">メール</th>
-            <th class="t_display even">0</th>
-            <th class="t_display even">0</th>
-          </tr>
-          <tr>
-            <th class="t_display">Twitter</th>
-            <th class="t_display even">0</th>
-            <th class="t_display even">0</th>
-          </tr>
-          <tr>
-            <th class="t_display">Facebook</th>
-            <th class="t_display even">0</th>
-            <th class="t_display even">0</th>
-          </tr>
+            <th class="t_display">合計</th>
+            </tr>
+          <tbody class="data-table">
+          </tbody>
         </table>
-
-        <!-- <?php $start_year = 2014?>
-
-        <div style="margin: 20px 0 10px 0; text-align: right;">
-          <select name="target_year" id="target_year">
-            <?php for($year=$start_year; $year <= $start_year+5; $year++):?>
-            <option value="<?php echo $year;?>"><?php echo $year;?></option>
-            <?php endfor;?>
-          </select>年
-          <select name="target_month" id="target_month">
-          <?php for($month=1; $month <= 12; $month++):?>
-          <option value="<?php echo $month?>"><?php echo $month?></option>
-          <?php endfor;?>
-          </select>月
-          <select name="target_date" id="target_date">
-            <?php for($date=1; $date <= 31; $date++):?>
-            <option value="<?php echo $date?>"><?php echo $date?></option>
-            <?php endfor;?>
-          </select>日
-        </div> -->
-
-        <!-- <table class="listTable">
-          <tr>
-            <th></th>
-            <th class="t_display">通常</th>
-            <th class="t_display">Wow</th>
-          </tr>
-          <tr>
-            <th class="t_display">メール</th>
-            <th class="t_display even">0</th>
-            <th class="t_display even">0</th>
-          </tr>
-          <tr>
-            <th class="t_display">Twitter</th>
-            <th class="t_display even">0</th>
-            <th class="t_display even">0</th>
-          </tr>
-          <tr>
-            <th class="t_display">Facebook</th>
-            <th class="t_display even">0</th>
-            <th class="t_display even">0</th>
-          </tr>
-        </table> -->
       </td>
     </tr>
   </table>
@@ -231,6 +195,29 @@ td.pagenation {
   color: #333;
   cursor: default;
 }
+table.listTable.daily .data-table tr th {
+  padding: 2px;
+}
+table.listTable.daily .data-table {
+  max-height: 730px; overflow-y: auto;
+}
+.submit_date span.value{
+  display: inline-block;
+  border: 1px solid #6699ff;
+  padding: 4px 7px;
+  margin: 3px;
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -o-transition: all 0.1s ease;
+  transition: all  0.1s ease;
+  cursor: pointer;
+}
+.submit_date span.value:hover {
+  background: #6699ff;
+  border: 1px solid #3333ff;
+  color: #efefef;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -249,10 +236,15 @@ $(function(){
     showList(res);
   });
 
-  // 右カラムのユーザー数
-  getUserKindGroupData('', 0).then(function(res) {
-    // showData(res);
+
+  $('.submit_date').click(function(){
+    $('.data-table').empty();
+    getUserKindGroupData($('#target_year').val() + $('#target_month').val()).then(function(res) {
+      showData(res);
+    });
   });
+  // 右カラムのユーザー数
+  $('.submit_date').trigger('click');
 
   function showList(data)
   {
@@ -308,6 +300,56 @@ $(function(){
       });
       $('.pagenation').append($tr);
     }
+  }
+
+  function showData(data)
+  {
+    var container = $('.data-table');
+    $('.data-table').empty();
+    var count = 0;
+    var count_wow = 0;
+    var total_count = 0;
+    $.each(data, function(key, row){
+      var styleClass = key % 2 == 0 ? 'odd' : 'even';
+      $tr1 = $('<tr></tr>');
+      $tr1.append($('<th class="t_display '+ styleClass +'" style="background-image: none;">'+$('#target_month').val()+' / '+ key +'</th>'));
+      $tr1.append($('<th class="t_display '+ styleClass +'">メール</th>'));
+      $tr1.append($('<th class="t_display '+ styleClass +'">'+ row.mail_count +'</th>'));
+      $tr1.append($('<th class="t_display '+ styleClass +'">'+ row.mail_count_wow +'</th>'));
+      $tr1.append($('<th class="t_display '+ styleClass +'">'+ (parseInt(row.mail_count) + parseInt(row.mail_count_wow)) +'</th>'));
+
+      $tr2 = $('<tr class="'+ styleClass +'"></tr>');
+      $tr2.append($('<th class="'+ styleClass +'" style="background-image: none;"></th>'));
+      $tr2.append($('<th class="t_display '+ styleClass +'">Twitter</th>'));
+      $tr2.append($('<th class="t_display '+ styleClass +'">'+ row.tw_count +'</th>'));
+      $tr2.append($('<th class="t_display '+ styleClass +'">'+ row.tw_count_wow +'</th>'));
+      $tr2.append($('<th class="t_display '+ styleClass +'">'+ (parseInt(row.tw_count) + parseInt(row.tw_count_wow)) +'</th>'));
+
+      $tr3 = $('<tr class="'+ styleClass +'"></tr>');
+      $tr3.append($('<th class="'+ styleClass +'" style="background-image: none;border-bottom: none;"></th>'));
+      $tr3.append($('<th class="t_display '+ styleClass +'">Facebook</th>'));
+      $tr3.append($('<th class="t_display '+ styleClass +'">'+ row.fb_count +'</th>'));
+      $tr3.append($('<th class="t_display '+ styleClass +'">'+ row.fb_count_wow +'</th>'));
+      $tr3.append($('<th class="t_display '+ styleClass +'">'+ (parseInt(row.fb_count) + parseInt(row.fb_count_wow)) +'</th>'));
+
+      count = count + (parseInt(row.mail_count) + parseInt(row.tw_count) + parseInt(row.fb_count));
+      count_wow = count_wow + (parseInt(row.mail_count_wow) + parseInt(row.tw_count_wow) + parseInt(row.fb_count_wow));
+      container.append($tr1).append($tr2).append($tr3);
+    });
+    styleClass = 'odd' ? 'even' : 'odd';
+
+    $tr4 = $('<tr class="'+ styleClass +'"></tr>');
+    $tr4.append($('<th class="'+ styleClass +'" style="background-image: none;border-bottom: none;" colspan="2">合計</th>'));
+    $tr4.append($('<th class="t_display '+ styleClass +'">'+ count +'</th>'));
+    $tr4.append($('<th class="t_display '+ styleClass +'">'+ count_wow +'</th>'));
+    $tr4.append($('<th class="t_display '+ styleClass +'">'+ (parseInt(count) + parseInt(count_wow)) +'</th>'));
+    container.prepend($tr4);
+    $tr5 = $('<tr class="'+ styleClass +'"></tr>');
+    $tr5.append($('<th class="'+ styleClass +'" style="background-image: none;border-bottom: none;" colspan="2">合計</th>'));
+    $tr5.append($('<th class="t_display '+ styleClass +'">'+ count +'</th>'));
+    $tr5.append($('<th class="t_display '+ styleClass +'">'+ count_wow +'</th>'));
+    $tr5.append($('<th class="t_display '+ styleClass +'">'+ (parseInt(count) + parseInt(count_wow)) +'</th>'));
+    container.append($tr5);
   }
 
   function movePage(page) {
@@ -374,14 +416,13 @@ $(function(){
       dataType: "json"
     });
   }
-  function getUserKindGroupData(from, to)
+  function getUserKindGroupData(from)
   {
     return $.ajax({
       type: "GET",
       url: "/api/editdm/user/get_kind.php",
       data: {
-        from: target,
-        to: offset
+        target: from
       },
       dataType: "json"
     });
