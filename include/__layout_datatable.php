@@ -1,5 +1,7 @@
 <?php if($CURRENTDIRECTORY!="log"){ ?>
 <?php if($q->get_dir()===3){ ?>
+
+<?php // 一覧ヘッダー定義 ?>
 <tr>
 <?php if($NUMBERINGOFF!=1){ ?>
 <th scope="col" width="45" class="t_numbering<?php if(getSorC("order")!=1){ ?>_disabled<?php } ?>">順番</th>
@@ -19,6 +21,8 @@
         <?php }?>
 <th scope="col" width="55" align="center" class="t_delete<?php if(getSorC("delete")!=1){ ?>_disabled<?php } ?>">削除</th>
 </tr>
+
+<?php // 一覧詳細定義 ?>
 <?php for($i=0;$i<count($p);$i++){ ?>
 
 <tr class="blockds" style="border-top:1px dotted #ccc;">
