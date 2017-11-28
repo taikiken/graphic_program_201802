@@ -89,7 +89,7 @@ for($i=0;$i<count($data);$i++)
 	if(strlen($data[$i]["enclosure"]["@attributes"]["url"]) > 0)
 	{
 		$s["t30"]=$data[$i]["enclosure"]["@attributes"]["url"];
-		$s["t1"]=$data[$i]["title"];
+		$s["t1"]=$data[$i]["enclosure"]["@attributes"]["caption"]?$data[$i]["enclosure"]["@attributes"]["caption"]:"";
 	}
 
 	$body=$data[$i]["description"];
