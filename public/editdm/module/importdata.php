@@ -9,6 +9,7 @@ $s=trim($_POST["s"]);
 $s=str_replace(array("＞","＜"),array(">","<"),$s);
 $o->query($s);
 
+$p=[];
 while($f=$o->fetch_array()){
 	$p[]=sprintf("<li>%s:%s</li>",$f["id"],$f["title"]);
 }

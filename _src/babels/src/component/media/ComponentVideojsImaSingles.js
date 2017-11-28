@@ -326,7 +326,10 @@ export class ComponentVideojsImaSingles extends React.Component {
               />
           </video>
         </div>
+        {/*
+        // トルツメ - UNDO_SPBL-206 【フロント】記事プレイヤー下のヘルプ文言を削除する
         <a href="https://sportsbull.jp/p/197106/" style={{fontSize: '11px', paddingTop: '10px'}}>最新版 Safari における動画再生不具合について</a>
+        */}
       </div>
     );
   }
@@ -367,7 +370,10 @@ export class ComponentVideojsImaSingles extends React.Component {
             </video>
           </div>
         </div>
+        {/*
+        // トルツメ - UNDO_SPBL-206 【フロント】記事プレイヤー下のヘルプ文言を削除する
         <a href="https://sportsbull.jp/p/197106/" style={{fontSize: '12px', paddingTop: '10px'}}>最新版 Safari における動画再生不具合について</a>
+        */}
       </div>
     );
   }
