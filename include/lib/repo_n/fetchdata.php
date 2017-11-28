@@ -58,10 +58,6 @@ if($TABLE=="repo_n"){
 		$f=$o->fetch_array();
 
 		$title=strlen($p[$i]["title"])>0?sprintf("[%s-%s-%s %s:%s] %s：%s(%s)",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["category"],strlen($p[$i]["title"])>0?$p[$i]["title"]:$f["title"],$f["media"]):"-";
-
-		if($is_my_media === false){
-			$title = '操作権限がありません';
-		}
 	}
 	else
 	{

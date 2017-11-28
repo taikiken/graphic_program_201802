@@ -155,7 +155,7 @@ function makeTextfieldAddOption($a,$b,$c,$d,$e,$f,$g,$h,$x){
 					    // 外部ユーザーは力技でクエリを書き換える
                         // より良い方法は後々考える
                         $OPv = str_replace('where ', 'where id in (' . getSorC('u_media') . ') and ', $OPv);
-					}
+                    }
 					$ll.=sprintf("<span class=\"m_%s\" style=\"display:none\">%s</span>",$f_name[$U],str_replace("{LANG}",$_COOKIE["lang"],$OPv));
 				}
 			}elseif(!preg_match('/{p_/',$OPv)){
