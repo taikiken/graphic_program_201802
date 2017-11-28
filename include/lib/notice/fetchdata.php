@@ -13,7 +13,21 @@
 </table>
 
 <?php
-$title =sprintf("%s：[タイプ:%s] ",$p[$i]["text"], $p[$i]["type"]);
+switch ($p[$i]["type"]) {
+  case 0:
+    $disp_type = 'notice';
+    break;
+  case 1:
+    $disp_type = 'warning';
+    break;
+  case 2:
+    $disp_type = 'img';
+    break;
+  default:
+    $disp_type = '不正なタイプです';
+}
+
+$title =sprintf("%s：[%s] ",$p[$i]["text"], $disp_type);
 $title.=mod_HTML($p[$i]["title"],1);
 
 $sql=sprintf("SELECT title FROM notices");
