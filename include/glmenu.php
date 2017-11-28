@@ -26,9 +26,9 @@
         <li><a href="/editdm/photo/">フォトアルバム</a></li>
         <li><a href="/editdm/repo_n/?cid=10">カテゴリー</a></li>
     <?php } ?>
-    <li><a href="/editdm/repo_n/?cid=94">選手</a></li>
-    <li><a href="/editdm/repo_n/?cid=96&rid=95">注目の選手</a></li>
     <?php if(getSorC("is_external")!=1){ ?>
+        <li><a href="/editdm/repo_n/?cid=94">選手</a></li>
+        <li><a href="/editdm/repo_n/?cid=96&rid=95">注目の選手</a></li>
         <li><a href="/editdm/repo_s/?rid=2">メディア</a></li>
         <li><a href="/editdm/company_news/">プレスリリース</a></li>
         <li><a href="/editdm/repo_n/?cid=6">会員</a></li>

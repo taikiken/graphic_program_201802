@@ -21,7 +21,7 @@ sumo
     .sumo #sj_contents_div table tbody tr.SJ_odd td {
       background-color: #fff !important; }
     .sumo #sj_contents_div table tbody td {
-      background-color: #e6e6e6 !important;
+      background-color: #e6e6e6;
       border-color: #e1e1e1; }
       .sumo #sj_contents_div table tbody td.SJ_ban {
         background-color: #e6e6e6 !important; }
@@ -101,6 +101,8 @@ sumo
     padding: 0;
     border-bottom: none;
     margin-bottom: 5px; }
+    .sumo #sj_contents_div .SJ_box-stage ul li:first-child {
+      border-right: 1px solid #888; }
     .sumo #sj_contents_div .SJ_box-stage ul li a {
       color: #0e357f;
       padding: 3px 0;
@@ -112,6 +114,10 @@ sumo
       font-weight: bold;
       padding: 3px 0;
       color: #333; }
+    .sumo #sj_contents_div .SJ_box-stage ul li span {
+      padding: 3px 0;
+      width: 100%;
+      display: inline-block; }
 
 .bnr-foot {
   padding: 0 45px;
@@ -181,6 +187,9 @@ sumo
       background-color: #ea7422 !important; }
     .sumo.hoshitori #sj_contents_div table.SJ_table-noborder tbody td.SJ_make {
       background-color: #aaa !important; }
+
+.sumo.banduke #sj_contents_div table.SJ_table-plain tbody tr.SJ_even td {
+  background-color: #e6e6e6; }
 
 @media screen and (max-width: 768px) {
   .sumo .sumo_back_btn {
