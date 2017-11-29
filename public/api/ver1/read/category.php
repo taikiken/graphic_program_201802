@@ -231,11 +231,14 @@ SQL;
 
 if (!empty($f))
 {
-  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/img/' : 'https://dev-img.sportsbull.jp/img/';
-  $bucket="dev-img-sportsbull-jp";
-
+  // フルパスで返す
   $domain = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"];
+  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/img/' : 'https://dev-img.sportsbull.jp/img/';
+  // img、linkはnullの場合あるから空にする
+  $f['img'] = isset($f['img']) ? $cf . $f['img'] : '';
+  $f['link'] = isset($f['link']) ? $f['link'] : '';
 
+  // 定数
   $type = $f['type'];
   $text_color = ['#333333', '#333333', ''];
   $background_color = ['#ffffff', '#ffcccc', ''];
@@ -254,7 +257,7 @@ if (!empty($f))
     'text_color'       => $text_color[$type],
     'background_color' => $background_color[$type],
     'icon'             => $icon[$type],
-    'img'              => $cf . $f['img'],
+    'img'              => $f['img'],
     'link'             => $f['link'],
   );
 
