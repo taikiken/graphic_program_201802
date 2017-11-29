@@ -258,17 +258,7 @@ if (!empty($f))
 }
 else
 {
-  $information = array(
-
-    'type'             => '',
-    'text'             => '',
-    'text_color'       => '',
-    'background_color' => '',
-    'icon'             => '',
-    'img'              => '',
-    'link'             => '',
-  );
-
+  $information = null;
 }
 
 $categoriesinfo['information'] = array(
