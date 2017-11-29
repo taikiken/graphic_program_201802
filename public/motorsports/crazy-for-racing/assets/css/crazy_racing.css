@@ -1,0 +1,434 @@
+.undotsushin-ios .head-sec, .undotsushin-ios .foot-sec,
+.undotsushin-android .head-sec,
+.undotsushin-android .foot-sec {
+  display: none; }
+
+/* -----------------------------------------
+crazy-for-racing
+----------------------------------------- */
+.crazy_racing {
+  color: #fff;
+  /*  /page ------------------------------ */
+  /*  /mainimg_wrap ------------------------------ */
+  /*  /talks_content ------------------------------ */ }
+  .crazy_racing a {
+    color: #fff;
+    -webkit-transition: ease .2s;
+    -o-transition: ease .2s;
+    transition: ease .2s; }
+  .crazy_racing img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom; }
+  .crazy_racing .body-sec {
+    background-color: #000;
+    padding-bottom: 75px; }
+  .crazy_racing .body-sec-inner {
+    background: none;
+    width: auto; }
+  .crazy_racing .pc_hide {
+    display: none; }
+  .crazy_racing .mainimg_wrap {
+    position: relative;
+    max-height: 780px;
+    overflow: hidden;
+    z-index: 100; }
+  .crazy_racing .mainimg {
+    min-width: 1385px;
+    min-height: 780px;
+    margin: 0 auto;
+    position: relative; }
+    .crazy_racing .mainimg img {
+      width: 100%;
+      max-width: inherit;
+      min-height: 780px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      -webkit-animation: anim 50s ease forwards;
+      animation: anim 50s ease forwards; }
+
+@-webkit-keyframes anim {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0; }
+  6% {
+    opacity: 1; }
+  100% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); } }
+
+@keyframes anim {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0; }
+  6% {
+    opacity: 1; }
+  100% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); } }
+  .crazy_racing .main_ttl {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center; }
+  .crazy_racing .main_subtxt {
+    position: absolute;
+    bottom: 33%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center; }
+  .crazy_racing .crazy_racing_contents {
+    background-color: #000;
+    position: relative; }
+  .crazy_racing .scroll {
+    position: absolute;
+    left: 0;
+    top: -75px;
+    width: 100%;
+    text-align: center;
+    z-index: 100; }
+    .crazy_racing .scroll img {
+      z-index: 111;
+      position: relative; }
+  .crazy_racing .contents_inner {
+    max-width: 1090px;
+    margin: 0 auto;
+    padding-top: 135px; }
+  .crazy_racing .talks_content .subttl {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
+    margin-bottom: 100px; }
+    .crazy_racing .talks_content .subttl:before {
+      content: "";
+      width: 28px;
+      height: 28px;
+      background: url(../img/icon_ttl_play.png) no-repeat left top/contain;
+      display: inline-block;
+      position: relative;
+      top: 2px;
+      margin-right: 20px; }
+    .crazy_racing .talks_content .subttl:after {
+      content: "";
+      width: 115px;
+      border-bottom: 1px solid #999;
+      position: absolute;
+      bottom: -44px;
+      left: 0;
+      right: 0;
+      margin: 0 auto; }
+  .crazy_racing .talks_content .article {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding-bottom: 30px;
+    margin-bottom: 45px;
+    border-bottom: 1px solid #999; }
+    .crazy_racing .talks_content .article:nth-child(odd) {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: reverse;
+      -webkit-flex-direction: row-reverse;
+      -ms-flex-direction: row-reverse;
+      flex-direction: row-reverse; }
+      .crazy_racing .talks_content .article:nth-child(odd) .img {
+        margin-right: 0;
+        margin-left: 45px; }
+    .crazy_racing .talks_content .article .img {
+      max-width: 400px;
+      position: relative;
+      margin-right: 45px; }
+      .crazy_racing .talks_content .article .img:before {
+        content: "";
+        width: 62px;
+        height: 62px;
+        background: url(../img/icon_play.png) no-repeat center/contain;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        z-index: 33; }
+      .crazy_racing .talks_content .article .img:after {
+        content: "";
+        width: 220px;
+        height: 44px;
+        background: url(../img/talk_ribbon.png) no-repeat center/contain;
+        position: absolute;
+        top: -16px;
+        left: -10px; }
+      .crazy_racing .talks_content .article .img img {
+        -webkit-transition: ease .2s;
+        -o-transition: ease .2s;
+        transition: ease .2s; }
+      .crazy_racing .talks_content .article .img a {
+        display: block;
+        position: relative; }
+        .crazy_racing .talks_content .article .img a:hover img {
+          opacity: 0.7; }
+    .crazy_racing .talks_content .article .txt_box {
+      width: 645px; }
+      .crazy_racing .talks_content .article .txt_box p {
+        line-height: 1.8;
+        font-size: 16px; }
+      .crazy_racing .talks_content .article .txt_box a {
+        color: #fff;
+        -webkit-transition: .2s ease;
+        -o-transition: .2s ease;
+        transition: .2s ease; }
+        .crazy_racing .talks_content .article .txt_box a:hover {
+          color: #E91D24;
+          text-decoration: none; }
+    .crazy_racing .talks_content .article .article_ttl {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 25px; }
+  .crazy_racing .archive_container .interview_wrap {
+    margin-bottom: 70px; }
+  .crazy_racing .archive_container .heading {
+    background-color: #e60012;
+    padding: 13px 20px 14px;
+    position: relative;
+    margin-bottom: 20px; }
+    .crazy_racing .archive_container .heading .ttl {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 0; }
+      .crazy_racing .archive_container .heading .ttl:before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        background: url(../img/icon_ttl_play2.png) no-repeat left top/contain;
+        display: inline-block;
+        position: relative;
+        top: 2px;
+        margin-right: 10px; }
+    .crazy_racing .archive_container .heading .more_btn {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 240px; }
+      .crazy_racing .archive_container .heading .more_btn a {
+        display: block;
+        background-color: #fff;
+        position: relative;
+        height: 60px;
+        color: #0e357f;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 60px; }
+        .crazy_racing .archive_container .heading .more_btn a span:after {
+          content: "";
+          background: url(../img/icon_arrow.png) no-repeat left top/contain;
+          width: 7px;
+          height: 12px;
+          display: inline-block;
+          position: relative;
+          top: 1px;
+          margin-left: 13px; }
+        .crazy_racing .archive_container .heading .more_btn a:before {
+          content: "";
+          border-style: solid;
+          border-width: 0 40px 60px 0;
+          border-color: transparent #fff transparent transparent;
+          position: absolute;
+          left: -40px;
+          -webkit-transition: ease .2s;
+          -o-transition: ease .2s;
+          transition: ease .2s; }
+        .crazy_racing .archive_container .heading .more_btn a:hover {
+          text-decoration: none;
+          background-color: #ddd; }
+          .crazy_racing .archive_container .heading .more_btn a:hover:before {
+            border-color: transparent #ddd transparent transparent; }
+  .crazy_racing .archive_container .thumbs_list {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between; }
+    .crazy_racing .archive_container .thumbs_list li {
+      width: 200px;
+      position: relative; }
+      .crazy_racing .archive_container .thumbs_list li:before {
+        content: "";
+        width: 40px;
+        height: 40px;
+        background: url(../img/icon_play2.png) no-repeat center/contain;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        z-index: 44; }
+      .crazy_racing .archive_container .thumbs_list li a {
+        display: block;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden; }
+        .crazy_racing .archive_container .thumbs_list li a img {
+          -webkit-transition: ease .2s;
+          -o-transition: ease .2s;
+          transition: ease .2s;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+        .crazy_racing .archive_container .thumbs_list li a:hover img {
+          opacity: 0.7; }
+  .crazy_racing .archive_container .bottom_more_btn {
+    display: none;
+    margin: 0 10px; }
+    .crazy_racing .archive_container .bottom_more_btn a {
+      display: block;
+      background-color: #cc141d;
+      border-radius: 4px;
+      height: 44px;
+      line-height: 44px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      color: #fff; }
+      .crazy_racing .archive_container .bottom_more_btn a:before {
+        content: "";
+        background: url(../img/icon_list.png) no-repeat left top/contain;
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        position: relative;
+        top: 1px;
+        margin-right: 5px; }
+
+.crazy_racing.foot-sec {
+  background-color: #000; }
+
+@media screen and (max-width: 768px) {
+  .whole.crazy_racing {
+    /*  /mainimg_wrap ------------------------------ */
+    /*  /talks_content ------------------------------ */ }
+    .whole.crazy_racing img {
+      width: auto;
+      max-width: 100%; }
+    .whole.crazy_racing .sp_hide {
+      display: none; }
+    .whole.crazy_racing .mainimg_wrap {
+      max-height: inherit; }
+    .whole.crazy_racing .mainimg {
+      min-width: inherit;
+      min-height: inherit;
+      margin: 0 auto;
+      position: relative; }
+      .whole.crazy_racing .mainimg img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-width: inherit;
+        min-height: inherit;
+        position: static; }
+        .whole.crazy_racing .mainimg img.pc_hide {
+          display: block;
+          margin: 0; }
+    .whole.crazy_racing .main_ttl {
+      padding: 0 22px; }
+    .whole.crazy_racing .main_subtxt .pc_hide {
+      display: inline-block;
+      max-width: 100%;
+      padding: 0 70px; }
+    .whole.crazy_racing .scroll {
+      display: none; }
+    .whole.crazy_racing .contents_inner {
+      padding-top: 30px; }
+    .whole.crazy_racing .talks_content .subttl {
+      font-size: 20px;
+      margin-bottom: 70px;
+      padding: 0 10px; }
+      .whole.crazy_racing .talks_content .subttl:before {
+        width: 20px;
+        height: 20px;
+        top: 2px;
+        margin-right: 7px; }
+      .whole.crazy_racing .talks_content .subttl:after {
+        width: 70px;
+        bottom: -25px; }
+    .whole.crazy_racing .talks_content .article {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      padding: 0 10px 40px;
+      margin-bottom: 50px; }
+      .whole.crazy_racing .talks_content .article:nth-child(odd) {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column; }
+        .whole.crazy_racing .talks_content .article:nth-child(odd) .img {
+          margin-left: 0; }
+      .whole.crazy_racing .talks_content .article:last-child {
+        border-bottom: none; }
+      .whole.crazy_racing .talks_content .article .img {
+        max-width: inherit;
+        margin-right: 0;
+        margin-bottom: 10px; }
+        .whole.crazy_racing .talks_content .article .img:before {
+          width: 60px;
+          height: 60px; }
+        .whole.crazy_racing .talks_content .article .img:after {
+          width: 165px;
+          height: 33px;
+          top: -10px;
+          left: 0; }
+      .whole.crazy_racing .talks_content .article .txt_box {
+        max-width: 645px;
+        width: auto; }
+        .whole.crazy_racing .talks_content .article .txt_box p {
+          font-size: 14px; }
+      .whole.crazy_racing .talks_content .article .article_ttl {
+        font-size: 18px;
+        margin-bottom: 15px; }
+    .whole.crazy_racing .archive_container .interview_wrap {
+      margin-bottom: 40px; }
+    .whole.crazy_racing .archive_container .heading {
+      padding: 5px 0 6px;
+      margin-bottom: 0; }
+      .whole.crazy_racing .archive_container .heading .ttl {
+        font-size: 14px;
+        text-align: center; }
+        .whole.crazy_racing .archive_container .heading .ttl:before {
+          width: 11px;
+          height: 11px;
+          background: url(../img/icon_ttl_play2.png) no-repeat left top/contain;
+          top: 0;
+          margin-right: 5px; }
+      .whole.crazy_racing .archive_container .heading .more_btn {
+        display: none; }
+    .whole.crazy_racing .archive_container .thumbs_list {
+      padding: 0 10px;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+      .whole.crazy_racing .archive_container .thumbs_list li {
+        width: 48%;
+        margin-top: 10px; }
+        .whole.crazy_racing .archive_container .thumbs_list li:nth-child(5) {
+          display: none; }
+    .whole.crazy_racing .archive_container .bottom_more_btn {
+      display: block; }
+    .whole.crazy_racing .archive_container .news-widget ul {
+      margin-right: -2%; }
+    .whole.crazy_racing .archive_container li[data-v-5e3b2574] {
+      margin-right: 2%; } }
