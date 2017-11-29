@@ -14,7 +14,10 @@
 'use strict';
 
 import './moku/polyfill/method/babel';
-import Main from './Main';
-
-// 処理開始します
-Main.start();
+// UNDO_SPBL-214 【フロント】Webポップアップを削除する
+// https://aws-plus.backlog.jp/view/UNDO_SPBL-214
+// @since 2017-11-22 - 処理しない
+// import Main from './Main';
+//
+// // 処理開始します
+// Main.start();
