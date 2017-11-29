@@ -231,6 +231,9 @@ SQL;
 
 if (!empty($f))
 {
+  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/img/' : 'https://dev-img.sportsbull.jp/img/';
+  $bucket="dev-img-sportsbull-jp";
+
   $domain = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"];
 
   $type = $f['type'];
@@ -251,7 +254,7 @@ if (!empty($f))
     'text_color'       => $text_color[$type],
     'background_color' => $background_color[$type],
     'icon'             => $icon[$type],
-    'img'              => $f['img'],
+    'img'              => $cf . $f['img'],
     'link'             => $f['link'],
   );
 
