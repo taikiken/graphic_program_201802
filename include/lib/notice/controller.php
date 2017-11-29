@@ -17,6 +17,10 @@ if($q->get_dir()===0){ // 新規
     $o = new dbutl($TABLE, $sn, $sv);
 
     // u_categoriesが混ざっちゃうからカラム指定する
+    // ファイルアップロードされてないとないと配列キーimgつくられない
+    if (empty($sv['img'])) {
+      $sv[$sn[] = 'img'] = 'NULL';
+    }
     $sql = <<<SQL
 INSERT INTO notices(
         type,
@@ -68,6 +72,10 @@ SQL;
     $sv[$sn[]="id"]=$notice_id;
 		$o=new dbutl($TABLE,$sn,$sv);
 
+    // ファイルアップロードされてないとないと配列キーimgつくられない
+    if (empty($sv['img'])) {
+      $sv[$sn[] = 'img'] = 'NULL';
+    }
 		$sql = <<<SQL
 UPDATE notices 
 set 
