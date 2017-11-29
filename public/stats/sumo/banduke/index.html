@@ -88,12 +88,13 @@
         <!-- ad/dfp -->
         <!-- ad/appvador -->
         <script>
-            googletag.cmd.push(function()
-            {
-                googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
+            googletag.cmd.push(function() {
+                if ( !(/undotsushin|gunosy|newspass/i.test(window.navigator.userAgent)) ) {
+                    googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
+                    googletag.pubads().enableSingleRequest();
+                    googletag.pubads().collapseEmptyDivs();
+                    googletag.enableServices();
+                }
             });
         </script>
         <!-- //ad/appvador -->
@@ -143,9 +144,10 @@
                 }
             </style>
             <script>
-                googletag.cmd.push(function()
-                {
-                    googletag.display('div-gpt-ad-1501126889988-0');
+                googletag.cmd.push(function(){
+                    if ( !(/undotsushin|gunosy|newspass/i.test(window.navigator.userAgent)) ) {
+                        googletag.display('div-gpt-ad-1501126889988-0');
+                    }
                 });
             </script>
             <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
