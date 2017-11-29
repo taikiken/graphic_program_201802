@@ -9,7 +9,6 @@
 <?php if(getSorC("usr")!="inhigh" && getSorC("usr")!="kansaifootball"){ ?>
     <?php if(getSorC("is_external")!=1){ ?>
         <li><a href="/editdm/ad/?cid=0&nid=0">広告設定</a></li>
-        <li><a href="/editdm/notice/">お知らせ設定</a></li>
         <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
         <li><a href="/editdm/repo_n/?cid=9&rid=7">TOPピックアップ</a></li>
         <li><a href="/editdm/repo_s/?rid=7">TOP以外ピックアップ</a></li>
@@ -29,7 +28,8 @@
         <li><a href="/editdm/link/">記事取得</a></li>
         <li><a href="/editdm/ads/edit">ads.txt設定</a></li>
         <li><a href="/editdm/user/status">会員ステータス</a></li>
-    <?php } ?>
+        <li><a href="/editdm/notice/">お知らせ設定</a></li>
+  <?php } ?>
 <?php }else{ ?>
     <li><a href="/editdm/photo/">フォトアルバム</a></li>
 <?php } ?>
