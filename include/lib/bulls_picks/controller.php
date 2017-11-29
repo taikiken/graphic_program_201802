@@ -81,7 +81,11 @@ if ($q->get_dir() === 1) { // 編集
 
 
       // 1日ずらす
-      if ($date != $dates[0]) // ブル本番とau本番のdate違うとき
+      // ブル本番とau本番のdate違うとき
+      $diff_spb_date =  mb_ereg_replace('[^0-9]', '', $date);
+      $diff_au_date =  mb_ereg_replace('[^0-9]', '', $dates[0]);
+
+      if ($diff_spb_date != $diff_au_date)
       {
         // 最終日から作っていく
         for ($date_itr = 2; $date_itr > 0; $date_itr--) {
@@ -96,7 +100,11 @@ if ($q->get_dir() === 1) { // 編集
           }
         }
         // 初日
-        $dates[0] = $date;
+        // スポブルは10/31 auは10月31日 の表記差をうめる
+        $japanese_date = explode('/', $date);
+        $japanese_date = $japanese_date[0] . '月' . $japanese_date[1] . '日';
+
+        $dates[0] = $japanese_date;
         for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
           $ids[0][$articles_itr] = $spb_ids[$articles_itr];
 
