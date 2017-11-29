@@ -108,7 +108,7 @@
           <div id="js-wowma_cpn__regist" class="wowma_cpn__regist">
             <div class="wowma_cpn__regist__outer">
               <div class="wowma_cpn__regist__inner">
-                <div class="wowma_cpn__regist__btn"><a href="/signup-wow/"><img src="/assets/sp/images/wowma-campaign-171116/regist-btn.png" alt="アカウント新規作成"></a></div>
+                <div class="wowma_cpn__regist__btn"><a href="/signup/"><img src="/assets/sp/images/wowma-campaign-171116/regist-btn.png" alt="アカウント新規作成"></a></div>
               </div><!-- /.wowma_cpn__regist__inner -->
             </div><!-- /.wowma_cpn__regist__outer -->
           </div><!-- /.wowma_cpn__regist -->
@@ -121,7 +121,7 @@
         <ul class="wowma_cpn__flow__list">
           <li class="wowma_cpn__flow__item wowma_cpn__flow__item--1">
             <h3 class="wowma_cpn__flow__item__heading"><img src="/assets/sp/images/wowma-campaign-171116/flow-flow1-heading.png" alt="1. このページの「アカウント新規作成」ボタンを押す"></h3>
-            <div class="wowma_cpn__flow__item__btn"><a href="/signup-wow/"><img src="/assets/sp/images/wowma-campaign-171116/flow-flow1-btn.png" alt="アカウント新規作成"></a></div>
+            <div class="wowma_cpn__flow__item__btn"><a href="/signup/"><img src="/assets/sp/images/wowma-campaign-171116/flow-flow1-btn.png" alt="アカウント新規作成"></a></div>
             <p class="wowma_cpn__flow__item__note"><img src="/assets/sp/images/wowma-campaign-171116/flow-flow1-note.png" alt="※このページからの登録でないとクーポンは配布できません"></p>
           </li><!-- /.wowma_cpn__flow__item--1 -->
           <li class="wowma_cpn__flow__item wowma_cpn__flow__item--2">
