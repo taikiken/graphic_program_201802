@@ -7,7 +7,9 @@ include_once __DIR__."/../../../../include/conf/config.php";
 include_once __DIR__."/../../../../app/helpers/env.helper.php";
 include_once __DIR__ . "/../../../../include/aws.php";
 
-if ( UT_ENV != 'PRODUCTION' )
+$servername=$_SERVER["SERVER_NAME"];
+if (preg_match("/cms/",$servername) ||
+  preg_match("/dev/",$servername))
 {
   $res = ['result' => 'NG'];
   $is_exist_xml = false;
