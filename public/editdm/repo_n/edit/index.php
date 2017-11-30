@@ -65,7 +65,7 @@ include $INCLUDEPATH."_layout_template.php";
 
 		//初期処理
 		function init(){
-			var webviewBox = $('tr[class^="webview-"');
+			var webviewBox = $('tr[class^="webview-"]');
 			var tr;
 			var webviewClass;
 
