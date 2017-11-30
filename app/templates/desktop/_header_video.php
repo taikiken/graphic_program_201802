@@ -50,21 +50,13 @@ if ( $page['template'] == 'p'
   <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
   <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
 
-  <script>
-    (function () {
-      var scripts = [
-        '//vjs.zencdn.net/5.3/video.min.js',
-        '//imasdk.googleapis.com/js/sdkloader/ima3.js',
-        '/assets/js/libs/hls/videojs-contrib-hls.min.js',
-        '/assets/ima_plugin/js/videojs.hls.js',
-        '/assets/ima_plugin/js/videojs.ads.js',
-        '/assets/ima_plugin/js/videojs.ima.js'
-      ];
-      for ( i = 0; i < scripts.length; i++ ) {
-        document.write("<script src='" + scripts[i] + "'><\/script>");
-      }
-    }());
-  </script>
+  <script src="//vjs.zencdn.net/5.3/video.min.js"></script>
+  <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
 
   <style type="text/css">
     #mainContainer{
