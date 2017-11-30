@@ -34,6 +34,7 @@
         <li><a href="/editdm/repo_n/?cid=6">会員</a></li>
         <li><a href="/editdm/comment/">コメント</a></li>
         <li><a href="/editdm/link/">記事取得</a></li>
+        <li><a href="/editdm/bulls_picks/">BULL'S PICKS</a></li>
         <li><a href="/editdm/ads/edit">ads.txt設定</a></li>
         <li><a href="/editdm/user/status">会員ステータス</a></li>
     <?php } ?>
