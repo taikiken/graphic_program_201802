@@ -6,7 +6,11 @@ setlocale(LC_ALL, 'ja_JP.UTF-8');
 include_once __DIR__."/../../../../include/conf/config.php";
 include_once __DIR__."/../../../../app/helpers/env.helper.php";
 
-if ( UT_ENV != 'PRODUCTION' )
+$servername=$_SERVER["SERVER_NAME"];
+
+$servername=$_SERVER["SERVER_NAME"];
+if (preg_match("/cms/",$servername) ||
+  preg_match("/dev/",$servername))
 {
 // run
 // ==============================
