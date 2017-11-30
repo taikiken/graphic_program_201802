@@ -189,8 +189,19 @@ elseif ($TABLE == "tbl_player")
 }
 elseif ($TABLE == "notices")
 {
+	$cookie_categoryid = (int)$_COOKIE['excategory'];
+	if(isint($_COOKIE["excategory"])){
+    $WHERE = <<<WHR
+		, categories_notices 
+WHERE
+		{$TABLE}.id = notice_id
+AND
+		category_id = {$cookie_categoryid}
+WHR;
+
+	}
 	// お知らせ一覧
-	$sql = sprintf("SELECT %s FROM %s ORDER BY created_at DESC", $FIELD, $TABLE);
+	$sql = sprintf("SELECT %s FROM %s%s ORDER BY notices.created_at DESC", $FIELD, $TABLE, $WHERE);
 
 }else{
 	$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));

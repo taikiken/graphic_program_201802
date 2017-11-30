@@ -124,4 +124,5 @@ SQL;
 	}
 }elseif($q->get_dir()===3){ // 一覧画面
   $FIELD="*";
+  // $WHERE はinclude/lib.php に書いてる
 }
