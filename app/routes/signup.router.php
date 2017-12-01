@@ -15,7 +15,10 @@ $app->get('/signup[/]', function ($request, $response, $args) use ($app) {
   return $this->renderer->render($response, "default.php", $args);
 
 });
-
+/*
+//
+// キャンペーン終了のため、ルーティングを解除
+//
 $app->get('/signup-wow[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = $app->model->set(array(
@@ -30,6 +33,7 @@ $app->get('/signup-wow[/]', function ($request, $response, $args) use ($app) {
     return $this->renderer->render($response, "default.php", $args);
 
   });
+*/
 
 // # サインアップ登録トップで非同期で完結のためルーティング廃止
 
