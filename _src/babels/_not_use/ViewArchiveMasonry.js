@@ -19,7 +19,7 @@ import {Empty} from '../app/const/Empty';
 import {User} from '../app/User';
 
 // view
-import {View} from './View';
+import View from './View';
 import {ViewError} from './error/ViewError';
 // action
 // import {Headline} from '../action/home/Headline';

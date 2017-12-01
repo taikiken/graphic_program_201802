@@ -11,7 +11,7 @@
  */
 
 
-import {View} from '../../../view/View';
+import View from '../../../view/View';
 import {ViewUserProfile} from '../../../view/mypage/ViewUserProfile';
 
 // app

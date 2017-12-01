@@ -12,7 +12,7 @@
 
 
 // view
-// import {View} from '../../../view/View';
+// import View from '../../../view/View';
 import {ViewSingleHeader} from '../../../view/single/ViewSingleHeader';
 
 // app

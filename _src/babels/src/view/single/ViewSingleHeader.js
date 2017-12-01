@@ -12,7 +12,7 @@
 
 
 // view
-import {View} from '../View';
+import View from '../View';
 
 // dae
 import {SingleDae} from '../../dae/SingleDae';

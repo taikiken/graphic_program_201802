@@ -12,7 +12,7 @@
 
 
 // view
-import { View } from './View';
+import View from './View';
 import { ViewRelated } from './single/ViewRelated';
 import { ViewSingleHeader } from './single/ViewSingleHeader';
 import { ViewSingleFooter } from './single/ViewSingleFooter';

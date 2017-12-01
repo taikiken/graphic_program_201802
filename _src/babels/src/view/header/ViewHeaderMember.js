@@ -11,7 +11,7 @@
  */
 
 
-import {View} from '../View';
+import View from '../View';
 import {ViewHeaderMemberNotice} from './ViewHeaderMemberNotice';
 
 // app

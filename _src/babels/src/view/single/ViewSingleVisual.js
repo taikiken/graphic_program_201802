@@ -14,7 +14,7 @@
 // 2016-03-15
 // design 変更により タイトル と メイン画像 を分離出力する必要が出たので作成する
 
-import {View} from '../View';
+import View from '../View';
 
 // dae
 import {SingleDae} from '../../dae/SingleDae';

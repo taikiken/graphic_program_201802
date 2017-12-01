@@ -11,7 +11,7 @@
  */
 
 
-import {View} from '../View';
+import View from '../View';
 import {Safety} from '../../data/Safety';
 
 let React = self.React;

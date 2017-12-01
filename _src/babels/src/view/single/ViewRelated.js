@@ -15,7 +15,7 @@
 // import {Empty} from '../../app/const/Empty';
 
 // view
-import {View} from '../View';
+import View from '../View';
 
 // data
 import {Safety} from '../../data/Safety';

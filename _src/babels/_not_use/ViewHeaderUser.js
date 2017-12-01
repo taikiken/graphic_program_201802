@@ -12,7 +12,7 @@
 
 'use strict';
 
-import {View} from '../View';
+import View from '../View';
 import {User} from '../../app/User';
 import {UserStatus} from '../../event/UserStatus';
 

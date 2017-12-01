@@ -12,7 +12,7 @@
 
 // view
 import { ViewArchiveMasonryInfinite } from '../ViewArchiveMasonryInfinite';
-import { View } from '../View';
+import View from '../View';
 
 
 // app

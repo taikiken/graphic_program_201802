@@ -11,7 +11,7 @@
  */
 
 
-import {View} from '../View';
+import View from '../View';
 
 // app
 import {User} from '../../app/User';

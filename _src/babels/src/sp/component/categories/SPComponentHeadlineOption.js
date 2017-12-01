@@ -11,7 +11,7 @@
  */
 
 // view
-import { View } from '../../../view/View';
+import View from '../../../view/View';
 
 // view/categories
 import { ComponentHeadlineAd } from '../../../component/categories/ComponentHeadlineAd';

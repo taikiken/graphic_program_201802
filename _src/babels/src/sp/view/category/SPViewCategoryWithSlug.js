@@ -24,7 +24,7 @@ import {ArticleDae} from '../../../dae/ArticleDae';
 import {CategoriesSlugDae} from '../../../dae/caegories/CategoriesSlugDae';
 
 // view
-import {View} from '../../../view/View';
+import View from '../../../view/View';
 // model
 import {Model} from '../../../model/Model';
 

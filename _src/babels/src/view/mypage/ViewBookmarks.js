@@ -11,7 +11,7 @@
  */
 
 // view
-import {View} from '../View';
+import View from '../View';
 import {ViewError} from '../error/ViewError';
 
 import {Bookmarks} from '../../action/mypage/Bookmarks';

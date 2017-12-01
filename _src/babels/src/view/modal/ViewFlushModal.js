@@ -10,7 +10,7 @@
  *
  */
 
-import {View} from '../View';
+import View from '../View';
 
 import {MessageStatus} from '../../event/MessageStatus';
 

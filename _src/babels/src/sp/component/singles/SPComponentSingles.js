@@ -11,7 +11,7 @@
  */
 
 // view
-import { View } from '../../../view/View';
+import View from '../../../view/View';
 
 // app
 import { WidgetType } from '../../../app/const/WidgetType';

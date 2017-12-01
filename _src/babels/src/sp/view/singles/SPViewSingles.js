@@ -14,7 +14,7 @@
 // import { ViewSingles } from '../../../view/singles/ViewSingles';
 
 // view
-import { View } from '../../../view/View';
+import View from '../../../view/View';
 
 // sp/view
 import { SPViewArchiveInfinite } from '../SPViewArchiveInfinite';

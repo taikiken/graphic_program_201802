@@ -11,7 +11,7 @@
  */
 
 // view
-import { View } from '../../view/View';
+import View from '../../view/View';
 
 // app
 import { Url } from '../../app/const/Url';

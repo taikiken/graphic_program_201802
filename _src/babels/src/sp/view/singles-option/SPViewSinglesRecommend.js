@@ -16,7 +16,7 @@
 import { ViewVideos } from '../../../view/sidebar/ViewVideos';
 
 // view
-import { View } from '../../../view/View';
+import View from '../../../view/View';
 
 // sp/component
 import SPComponentSinglesRecommend from '../../component/singles-option/SPComponentSinglesRecommend';

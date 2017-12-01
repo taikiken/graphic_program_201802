@@ -11,7 +11,7 @@
  */
 
 // view
-import {View} from '../View';
+import View from '../View';
 import { ComponentHeadlines } from '../../component/headlines/ComponentHeadlines';
 
 // app

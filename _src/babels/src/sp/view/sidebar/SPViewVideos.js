@@ -18,7 +18,7 @@ import {Length} from '../../../app/const/Length';
 import {Message} from '../../../app/const/Message';
 
 // view
-import {View} from '../../../view/View';
+import View from '../../../view/View';
 
 // dae
 import {ArticleDae} from '../../../dae/ArticleDae';

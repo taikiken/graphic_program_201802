@@ -14,7 +14,7 @@
 import { Dom } from '../../app/Dom';
 
 // view
-import { View } from '../../view/View';
+import View from '../../view/View';
 // view/carousel
 import { ComponentCarousel } from '../carousel/ComponentCarousel';
 // view/categories

@@ -21,7 +21,7 @@ import { Dom } from '../../app/Dom';
 // import {Safety} from '../../data/Safety';
 
 // view
-import {View} from '../../view/View';
+import View from '../../view/View';
 // @since 2016-09-34
 import { Banner } from '../../view/Banner';
 

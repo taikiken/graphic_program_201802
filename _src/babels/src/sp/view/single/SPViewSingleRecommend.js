@@ -11,7 +11,7 @@
  */
 
 import {ViewRecommend} from '../../../view/sidebar/ViewRecommend';
-import {View} from '../../../view/View';
+import View from '../../../view/View';
 
 // app
 import {Length} from '../../../app/const/Length';

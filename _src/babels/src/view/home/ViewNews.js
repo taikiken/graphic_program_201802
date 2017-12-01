@@ -11,7 +11,7 @@
  */
 
 // view
-import { View } from '../View';
+import View from '../View';
 import { ViewArchiveMasonryInfinite } from '../ViewArchiveMasonryInfinite';
 
 // app

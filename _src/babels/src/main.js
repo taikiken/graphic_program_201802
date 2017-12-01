@@ -47,7 +47,7 @@ import {Model} from './model/Model';
 
 // -------------------------------------
 // view
-import {View} from './view/View';
+import View from './view/View';
 
 import {ViewHeaderUser} from './view/header/ViewHeaderUser';
 import {ViewHeaderSearch} from './view/header/ViewHeaderSearch';

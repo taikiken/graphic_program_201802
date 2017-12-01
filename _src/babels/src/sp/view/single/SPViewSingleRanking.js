@@ -11,7 +11,7 @@
  */
 
 import {ViewRanking} from '../../../view/sidebar/ViewRanking';
-import {View} from '../../../view/View';
+import View from '../../../view/View';
 
 // app
 import {Length} from '../../../app/const/Length';

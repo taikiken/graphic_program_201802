@@ -12,7 +12,7 @@
 
 
 // parent class
-import {View} from '../View';
+import View from '../View';
 
 // app
 import {Message} from '../../app/const/Message';

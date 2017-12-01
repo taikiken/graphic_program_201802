@@ -12,7 +12,7 @@
 
 
 // parent
-import {View} from '../../../view/View';
+import View from '../../../view/View';
 
 // view
 import {SPViewCategoryWithSlug} from './SPViewCategoryWithSlug';

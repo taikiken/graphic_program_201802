@@ -14,7 +14,7 @@
 import { ViewRanking } from '../../../view/sidebar/ViewRanking';
 
 // view
-import { View } from '../../../view/View';
+import View from '../../../view/View';
 import SPComponentSinglesRanking from '../../component/singles-option/SPComponentSinglesRanking';
 
 // React

@@ -11,7 +11,7 @@
  */
 
 // view
-import {View} from '../../view/View';
+import View from '../../view/View';
 
 // app
 import {Message} from '../../app/const/Message';

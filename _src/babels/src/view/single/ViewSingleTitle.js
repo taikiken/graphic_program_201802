@@ -13,7 +13,7 @@
 // コメント詳細上部に表示する 記事タイトル
 
 // view
-import {View} from '../View';
+import View from '../View';
 import {ViewError} from '../error/ViewError';
 
 // app

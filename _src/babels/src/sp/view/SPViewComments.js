@@ -16,7 +16,7 @@ import {CommentsType} from '../../app/const/CommentsType';
 import {User} from '../../app/User';
 
 // view
-import {View} from '../../view/View';
+import View from '../../view/View';
 import {ViewComments} from '../../view/ViewComments';
 
 // data

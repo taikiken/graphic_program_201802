@@ -18,7 +18,7 @@
 import {Message} from '../app/const/Message';
 
 // view
-import {View} from './View';
+import View from './View';
 // import {ViewError} from './error/ViewError';
 
 // data

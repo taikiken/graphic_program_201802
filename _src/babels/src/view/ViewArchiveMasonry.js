@@ -19,7 +19,7 @@ import {MediaType} from '../app/const/MediaType';
 import {Message} from '../app/const/Message';
 
 // view
-import {View} from './View';
+import View from './View';
 
 // data
 import {Safety} from '../data/Safety';

@@ -20,7 +20,68 @@ import {Safety} from '../data/Safety';
 /**
  * 表示を行います
  */
-export class View extends EventDispatcher {
+export default class View extends EventDispatcher {
+  // ---------------------------------------------------
+  //  STATIC CONST
+  // ---------------------------------------------------
+  /**
+   * event BEFORE_RENDER<br>
+   * ReactDOM.render 前
+   * @return {string} viewBeforeRender を返します
+   */
+  static get BEFORE_RENDER():string {
+    return 'viewBeforeRender';
+  }
+  /**
+   * event WILL_MOUNT<br>
+   * ReactClass.componentWillMount 後
+   * @return {string} viewWillMount を返します
+   */
+  static get WILL_MOUNT():string {
+    return 'viewWillMount';
+  }
+  /**
+   * event DID_MOUNT<br>
+   * ReactClass.componentDidMount 後
+   * @return {string} viewDidMount を返します
+   */
+  static get DID_MOUNT():string {
+    return 'viewDidMount';
+  }
+  /**
+   * event ERROR_MOUNT
+   * @return {string} viewErrorMount を返します
+   */
+  static get ERROR_MOUNT():string {
+    return 'viewErrorMount';
+  }
+  /**
+   * event UNDEFINED_ERROR<br>
+   * Ajax は成功したが設定されるべき key 値が undefined or null の時
+   * @return {string} viewUndefinedError を返します
+   */
+  static get UNDEFINED_ERROR():string {
+    return 'viewUndefinedError';
+  }
+  /**
+   * event EMPTY_ERROR<br>
+   * Ajax は成功したが配列であるべき結果が length 0 の時
+   * @return {string} viewEmptyError を返します
+   */
+  static get EMPTY_ERROR():string {
+    return 'viewEmptyError';
+  }
+  /**
+   * event RESPONSE_ERROR<br>
+   * Ajax 失敗
+   * @return {string} viewResponseError を返します
+   */
+  static get RESPONSE_ERROR():string {
+    return 'viewResponseError';
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * action/Headline を使い Ajax request 後 element へ dom を作成します
    * @param {Element} element root element
@@ -149,63 +210,5 @@ export class View extends EventDispatcher {
     this.dispatch( { type: keyName, args: args } );
     // console.log( 'executeSafely after dispatch' );
 
-  }
-  // ---------------------------------------------------
-  //  CONST
-  // ---------------------------------------------------
-  /**
-   * event BEFORE_RENDER<br>
-   * ReactDOM.render 前
-   * @return {string} viewBeforeRender を返します
-   */
-  static get BEFORE_RENDER():string {
-    return 'viewBeforeRender';
-  }
-  /**
-   * event WILL_MOUNT<br>
-   * ReactClass.componentWillMount 後
-   * @return {string} viewWillMount を返します
-   */
-  static get WILL_MOUNT():string {
-    return 'viewWillMount';
-  }
-  /**
-   * event DID_MOUNT<br>
-   * ReactClass.componentDidMount 後
-   * @return {string} viewDidMount を返します
-   */
-  static get DID_MOUNT():string {
-    return 'viewDidMount';
-  }
-  /**
-   * event ERROR_MOUNT
-   * @return {string} viewErrorMount を返します
-   */
-  static get ERROR_MOUNT():string {
-    return 'viewErrorMount';
-  }
-  /**
-   * event UNDEFINED_ERROR<br>
-   * Ajax は成功したが設定されるべき key 値が undefined or null の時
-   * @return {string} viewUndefinedError を返します
-   */
-  static get UNDEFINED_ERROR():string {
-    return 'viewUndefinedError';
-  }
-  /**
-   * event EMPTY_ERROR<br>
-   * Ajax は成功したが配列であるべき結果が length 0 の時
-   * @return {string} viewEmptyError を返します
-   */
-  static get EMPTY_ERROR():string {
-    return 'viewEmptyError';
-  }
-  /**
-   * event RESPONSE_ERROR<br>
-   * Ajax 失敗
-   * @return {string} viewResponseError を返します
-   */
-  static get RESPONSE_ERROR():string {
-    return 'viewResponseError';
   }
 }

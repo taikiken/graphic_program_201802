@@ -19,7 +19,7 @@ import {User} from '../../app/User';
 import {Ad} from '../../app/const/Ad';
 
 // view
-import {View} from '../../view/View';
+import View from '../../view/View';
 
 // action
 import {SearchAuth} from '../../action/search/SearchAuth';

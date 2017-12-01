@@ -12,7 +12,7 @@
 // https://github.com/undotsushin/undotsushin/issues/451
 // 初回起動時のサービス紹介
 
-import {View} from './View';
+import View from './View';
 
 // app
 import {Dom} from '../app/Dom';

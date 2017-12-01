@@ -20,7 +20,7 @@ import {SearchAuth} from '../action/search/SearchAuth';
 import {Search} from '../action/search/Search';
 
 // view
-import {View} from './View';
+import View from './View';
 
 // data
 import {Result} from '../data/Result';

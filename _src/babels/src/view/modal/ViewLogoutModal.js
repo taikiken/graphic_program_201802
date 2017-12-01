@@ -11,7 +11,7 @@
  */
 
 
-import {View} from '../View';
+import View from '../View';
 // node
 import {LogoutNode} from '../../node/modal/LogoutNode';
 // event

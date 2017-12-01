@@ -11,7 +11,7 @@
  */
 
 
-import {View} from '../../../view/View';
+import View from '../../../view/View';
 import {ViewBookmarks} from '../../../view/mypage/ViewBookmarks';
 
 // app

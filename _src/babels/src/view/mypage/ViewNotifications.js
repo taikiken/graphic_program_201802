@@ -11,7 +11,7 @@
  */
 
 // view
-import {View} from '../View';
+import View from '../View';
 // action
 import {Notice} from '../../action/users/Notice';
 // app

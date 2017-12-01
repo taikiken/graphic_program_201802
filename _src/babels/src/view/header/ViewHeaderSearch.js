@@ -11,7 +11,7 @@
  */
 
 
-import {View} from '../View';
+import View from '../View';
 
 // node
 import {HeaderSearchNode} from '../../node/header/HeaderSearchNode';

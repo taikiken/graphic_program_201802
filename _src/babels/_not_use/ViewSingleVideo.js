@@ -12,7 +12,7 @@
 'use strict';
 
 // view
-import {View} from '../View';
+import View from '../View';
 // data
 import {Safety} from '../../data/Safety';
 // dae

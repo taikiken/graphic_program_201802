@@ -11,7 +11,7 @@
  */
 
 
-import {View} from '../View';
+import View from '../View';
 import {ViewError} from '../error/ViewError';
 
 import {Activities} from '../../action/mypage/Activities';
