@@ -1,18 +1,19 @@
 <?php if($CURRENTDIRECTORY!="log"){ ?>
 <?php if($q->get_dir()===3){ ?>
+
+<?php // 一覧ヘッダー定義 ?>
 <tr>
 <?php if($NUMBERINGOFF!=1){ ?>
 <th scope="col" width="45" class="t_numbering<?php if(getSorC("order")!=1){ ?>_disabled<?php } ?>">順番</th>
 <?php } ?>
-
   <?php if ($CURRENTDIRECTORY != "company_news") { ?>
     <th scope="col" width="35" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">公開</th>
   <?php } ?>
-
   <?php if($TABLE == "u_media"){ ?>
     <th scope="col" width="35" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">NG</th>
   <?php } ?>
-<th scope="col" class="t_title"><?=$THIS?>タイトル</th>
+
+  <th scope="col" class="t_title"><?=$THIS?>タイトル</th>
         <?php if($CURRENTDIRECTORY == "photo"){?>
             <th scope="col" width="55" align="center" class="t_edit<?php if(getSorC("edit")!=1){ ?>_disabled<?php } ?>">画像一覧</th>
         <?php }else{?>
@@ -37,20 +38,18 @@
 -->
 </td>
       <?php if ($CURRENTDIRECTORY != "company_news") { ?>
-<td class="display"><?php
-if($CURRENTDIRECTORY == "photo"){
-    echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
 
-} else {
-    if(getSorC("draft")==1){
-        echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
-    }else{
-        echo "<div class=\"dp2\"><img src=\"/shared/cms/img/cmd_active_disabled.gif\" width=\"13\" height=\"13\"></div>";
-    }
-}
-
-?></td>
-
+        <td class="display"><?php
+          if($CURRENTDIRECTORY == "photo"){
+            echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
+          } else {
+            if(getSorC("draft")==1){
+                echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
+            }else{
+                echo "<div class=\"dp2\"><img src=\"/shared/cms/img/cmd_active_disabled.gif\" width=\"13\" height=\"13\"></div>";
+            }
+        }
+        ?></td>
       <?php } ?>
 
   <?php if($TABLE == "u_media"){ ?>
@@ -69,10 +68,6 @@ if($CURRENTDIRECTORY == "photo"){
     ?><?php if($TABLE == "u_media"){ ?>
   </td>
 <?php } ?>
-
-
-
-
 
 
   <td class="colname"><?php include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/fetchdata.php"; ?></td>
