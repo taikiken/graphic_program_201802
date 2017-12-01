@@ -1,5 +1,4 @@
 <?php
-
 for($III=0;$III<count($a);$III++){
 	unset($_OPTION,$_COMMENT,$d_name,$f_name,$SIZE,$_BILL,$_OP01,$_OP02,$_OP03,$_OP04,$_OP05);
 	$d_name=$a[$III][1];
@@ -14,12 +13,17 @@ for($III=0;$III<count($a);$III++){
 	if(strlen($a[$III][10])>0)$_OP04=$a[$III][10];
 	if(strlen($a[$III][11])>0)$_OP05=$a[$III][11];
 
-	if ($TABLE === 'u_headline' && $d_name === 'タイトル' && $f_name === 'd1,d2'
+  if ($TABLE === 'u_headline' && $d_name === 'タイトル' && $f_name === 'd1,d2'
 		&& getSorC('is_carousel_headline') == '1' && getSorC('u_media') == '67'
 	) {
 		$_OP01 = str_replace('where', 'where id=162 and', $_OP01);
 	}
-	include $INCLUDEPATH."_".$a[$III][0].".php";
+
+	if(preg_match('/^webview/',$f_name) && $a[$III][0] !== 'head'){
+		include $INCLUDEPATH."_category_webview.php";
+	} else {
+		include $INCLUDEPATH."_".$a[$III][0].".php";
+	}
 }
 
 ?>
