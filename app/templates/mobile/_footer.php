@@ -39,6 +39,42 @@ if (
         </ul>
       </li>
 
+      <?php if (!empty($page['side-menu'])) : ?>
+      <li>
+          <ul>
+              <?php foreach ($page['side-menu'] as $list) : ?>
+                  <li class="sidemenu-list-title"><?php echo $list['header'];?></li>
+                  <?php foreach($list['items'] as $side_item) : ?>
+                      <li>
+                          <?php if ($side_item['type'] === 1 && false === empty($side_item['caption'])):?>
+                              <div class="sidemenu_container">
+                                  <a href="<?php echo $side_item['link']; ?>">
+                                      <img src="<?php echo $side_item['image']['sp']; ?>" class="sidemenu_icon">
+                                      <div class="sidemenu_title">
+                                          <?php echo $side_item['title']; ?>
+                                      </div>
+                                      <div class="sidemenu_caption">
+                                          <?php echo $side_item['caption'];?>
+                                      </div>
+                                  </a>
+                              </div>
+                          <?php else: ?>
+                              <div class="sidemenu_container_single">
+                                  <a href="<?php echo $side_item['link']; ?>">
+                                      <img src="<?php echo $side_item['image']['sp']; ?>" class="sidemenu_icon">
+                                      <div class="sidemenu_title_single">
+                                          <?php echo $side_item['title']; ?>
+                                      </div>
+                                  </a>
+                              </div>
+                          <?php endif;?>
+                      </li>
+                  <?php endforeach; ?>
+              <?php endforeach; ?>
+          </ul>
+      </li>
+      <?php endif; ?>
+
       <li>
         <!-- Syn. Service List -->
         <div id='synapse-service-list-outer-box' style='display: none'>
@@ -243,6 +279,26 @@ __EOL__;
   endif;
 endif;
 ?>
+
+<!-- #2737 対応 -->
+<?php if ($template_name == 'index') : ?>
+<script type="text/javascript" class="microad_blade_track">
+<!--
+var microad_blade_jp = microad_blade_jp || { 'params' : new Array(), 'complete_map' : new Object() };
+(function() {
+var param = {'co_account_id' : '17645', 'group_id' : '', 'country_id' : '1', 'ver' : '2.1.0'};
+microad_blade_jp.params.push(param);
+var src = (location.protocol == 'https:')
+? 'https://d-cache.microad.jp/js/blade_track_jp.js' : 'http://d-cache.microad.jp/js/blade_track_jp.js';
+var bs = document.createElement('script');
+bs.type = 'text/javascript'; bs.async = true;
+bs.charset = 'utf-8'; bs.src = src;
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(bs, s);
+})();
+-->
+</script>
+<?php endif; ?>
 
 </body>
 </html>

@@ -476,6 +476,36 @@ export class ViewArchiveMasonryInfinite extends View {
         this.moreRendered.updateShow(show);
       }
       this.scroll.fire();
+    } else {
+      // if (this.moreRendered === null){
+      // lint error になるので space 入れる - こんな雑な修正信用できる？
+      if (this.moreRendered === null) {
+        //     this.moreRendered = ReactDOM.render(
+        //         <ComponentMoreButton
+        //     show={show}
+        //     action={this.action}
+        //     element={moreElement}
+        //     home={this.home}
+        //     slug={this.slug}
+        //     afterClick={this.afterClick}
+        // />,
+        //     moreElement
+        // );
+        // lint error になる indent 修正する
+        this.moreRendered = ReactDOM.render(
+          <ComponentMoreButton
+            show={show}
+            action={this.action}
+            element={moreElement}
+            home={this.home}
+            slug={this.slug}
+            afterClick={this.afterClick}
+          />,
+          moreElement
+        );
+      } else {
+        this.moreRendered.updateShow(show);
+      }
     }
   }
 }// class

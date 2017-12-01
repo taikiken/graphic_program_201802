@@ -15,6 +15,8 @@ import {EventDispatcher} from '../event/EventDispatcher';
 // import {User} from './User';
 import {Loc} from '../util/Loc';
 
+// import Text from '../util/Text';
+
 /**
  * single ton instance - inner Symbol
  * @type {Symbol}
@@ -147,6 +149,14 @@ export class Router extends EventDispatcher {
     return 'routeSignupInterest';
   }
   /**
+   * event type SIGNUP_WOW
+   * @returns {string} routerSignupWow
+   * @since 2017-11-06
+   */
+  static get SIGNUP_WOW() {
+    return 'routerSignupWow';
+  }
+  /**
    * event type LOGIN
    * @return {string} LOGIN を返します
    */
@@ -260,6 +270,7 @@ export class Router extends EventDispatcher {
     //   this.init( _symbol );
     //   _instance = this;
     // }
+    // this 参照のために `bind` します
     this.index = this.index.bind(this);
     this.single = this.single.bind(this);
     this.singleA = this.singleA.bind(this);
@@ -272,6 +283,7 @@ export class Router extends EventDispatcher {
     this.mypage = this.mypage.bind(this);
     this.notifications = this.notifications.bind(this);
     this.settings = this.settings.bind(this);
+    this.signupWow = this.signupWow.bind(this);
     // -------------
     this._rule = {
       '/': this.index,
@@ -296,6 +308,9 @@ export class Router extends EventDispatcher {
       // '/notifications': this.notifications,
       '/settings/': this.settings,
       // '/settings': this.settings,
+      // @see https://cloudpack.slack.com/archives/D7URD0FH7/p1509944048000078
+      // @since 2017-11-06
+      '/signup-wow/': this.signupWow,
     };
     // -------------
     return this;
@@ -388,11 +403,11 @@ export class Router extends EventDispatcher {
       this.index();
       return;
     }
-
     // rule.key
     const result = Object.keys(rule).some((key) => {
       const keyLength = key.length;
       if (keyLength !== 1 && path.substr(0, keyLength) === key) {
+        // const camel = Text.camel(key);
         // console.log('Router.route found', key, path);
         rule[key].call(this);
         return true;
@@ -642,6 +657,13 @@ export class Router extends EventDispatcher {
     // 1 page コンテンツ
     this.dispatch( { type: Router.SIGNUP } );
 
+  }
+  /**
+   * signup-wow
+   * @since 2017-11-06
+   */
+  signupWow() {
+    this.dispatch( { type: Router.SIGNUP_WOW } );
   }
   /**
    * signup_login URL

@@ -7,7 +7,7 @@ $SIZE=200;
 $articlefield="*";
 
 $articletable="
-(select 
+(select
 	%s
 	id,
 	title,
@@ -24,24 +24,25 @@ $articletable="
 	m2,
 	t10,t11,t12,t13,t14,t15,
 	a1,a2,a3,a4,a5,a6,
+	streampack,
 	swf as video,
 	youtube,
 	facebook,
 	brightcove,
 	m_time,
 	t8 as videocaption,
-	t9 
+	t9
 from repo_n where flag=1%s) as t1
 
-left join (select 
+left join (select
 	id as userid,
 	t1 as url,
 	cid as typeid,
 	title as name,
-	img1 as icon 
+	img1 as icon
 from u_media) as t2 on t1.d2=t2.userid
 
-left join (select 
+left join (select
 	id as categoryid,
 	name as category,
 	title as categorylabel,
@@ -49,21 +50,21 @@ left join (select
 	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
-left join (select 
+left join (select
 	id as categoryid2,
 	name as category2,
 	title as categorylabel2,
 	name_e as slug2
 from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
 
-left join (select 
+left join (select
 	pageid,
 	region,
 	pref
 from u_area) as t5 on t1.id=t5.pageid";
 
 $articletable2="
-(select 
+(select
 	%s
 	id,
 	title,
@@ -80,24 +81,25 @@ $articletable2="
 	m2,
 	t10,t11,t12,t13,t14,t15,
 	a1,a2,a3,a4,a5,a6,
+	streampack,
 	swf as video,
 	youtube,
 	facebook,
 	brightcove,
 	m_time,
 	t8 as videocaption,
-	t9 
+	t9
 from repo_n where flag=1%s%s%s) as t1
 
-left join (select 
+left join (select
 	id as userid,
 	t1 as url,
 	cid as typeid,
 	title as name,
-	img1 as icon 
+	img1 as icon
 from u_media) as t2 on t1.d2=t2.userid
 
-left join (select 
+left join (select
 	id as categoryid,
 	name as category,
 	title as categorylabel,
@@ -105,21 +107,21 @@ left join (select
 	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
-left join (select 
+left join (select
 	id as categoryid2,
 	name as category2,
 	title as categorylabel2,
 	name_e as slug2
 from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
 
-left join (select 
+left join (select
 	pageid,
 	region,
 	pref
 from u_area) as t5 on t1.id=t5.pageid";
 
 $articletable3="
-(select 
+(select
 	%s
 	id,
 	title,
@@ -136,24 +138,25 @@ $articletable3="
 	m2,
 	t10,t11,t12,t13,t14,t15,
 	a1,a2,a3,a4,a5,a6,
+	streampack,
 	swf as video,
 	youtube,
 	facebook,
 	brightcove,
 	m_time,
 	t8 as videocaption,
-	t9 
-from repo_n where flag=1 and id in(%s)%s%s%s) as t1
+	t9
+from repo_n where flag=1 and id in(%s)%s%s) as t1
 
-left join (select 
+left join (select
 	id as userid,
 	t1 as url,
 	cid as typeid,
 	title as name,
-	img1 as icon 
+	img1 as icon
 from u_media) as t2 on t1.d2=t2.userid
 
-left join (select 
+left join (select
 	id as categoryid,
 	name as category,
 	title as categorylabel,
@@ -161,14 +164,14 @@ left join (select
 	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
-left join (select 
+left join (select
 	id as categoryid2,
 	name as category2,
 	title as categorylabel2,
 	name_e as slug2
 from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
 
-left join (select 
+left join (select
 	pageid,
 	region,
 	pref
@@ -242,6 +245,43 @@ function mailregister($email,$name){
 	メールアドレス： %s
 	ユーザー名：　%s
 	パスワード：　セキュリティ保持のため非公開
+
+	※	パスワードを忘れた場合は、以下のURLから再登録をお願いいたします。
+	https://sportsbull.jp/reset_password/
+
+	ご不明な点等ございましたら、以下の運動通信カスタマーセンターまでお問い合わせください。
+	info@sportsbull.jp
+
+	※	当社コンテンツをご使用の際は、必ず下記の利用規約をお読みください。
+	https://sportsbull.jp/about/terms/
+
+	[ご注意]
+	こちらのメールアドレスは送信専用のため、直接返信されても返答できませんので予めご了承ください。",$name,$email,$name);
+	$from="noreply@sportsbull.jp";
+	$reply="info@sportsbull.jp";
+	$bcc="account@sportsbull.jp";
+
+	return sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply,$bcc);
+}
+
+function mailregister_wow($email,$name){
+
+	$to=$email;
+	$subject="【SPORTS BULL】会員登録完了のお知らせ";
+	$body=sprintf("%s様
+
+	この度は、SPORTS BULL sportsbull.jp にご登録いただき、誠にありがとうございます。
+
+	会員登録が完了しましたのでお知らせいたします。
+	下記登録内容をご確認の上、大切に保管ください。
+
+	[登録内容]
+	メールアドレス： %s
+	ユーザー名：　%s
+	パスワード：　セキュリティ保持のため非公開
+
+	また、Wowma!クーポンプレゼントキャンペーンの条件を達成されましたので、クーポンを下記のURLからお受け取りください。
+	https://wowma.jp/bep/m/coup02?tf=couponInfo02&coupon_keys=ds_17_11_sbull_03_p6d&aff_id=aot0006
 
 	※	パスワードを忘れた場合は、以下のURLから再登録をお願いいたします。
 	https://sportsbull.jp/reset_password/
@@ -462,12 +502,14 @@ function set_categoryinfo($f,$personalized="",$longtitle=1){
 
 function urlmodify($body){
 
+	global $ImgPath;
+
 	/*
 	すでに登録されている記事の画像パスを運動通信からSPORTS BULLに変換
 	*/
 
 	$body=str_replace("https://www.undotsushin.com/prg_img/","https://img.sportsbull.jp/",$body);
-	$body=str_replace("/prg_img/","https://img.sportsbull.jp/",$body);
+	$body=str_replace("/prg_img",$ImgPath,$body);
 	return $body;
 }
 
@@ -479,7 +521,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 
 	global $ImgPath,$domain,$ad,$mediaoption,$videopath,$apidetails,$staticfilepath;
 
-	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
+	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"],$f["streampack"]);
 	$datetime=get_date(sprintf("%s-%s-%s %s:%s:%s",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["a6"]));
 
 	$body=$f["body"];
@@ -572,13 +614,19 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	$s["media"]["video"]["url"]["sd"]=strlen($f["video"])>0?sprintf("%s/%s/%s/sd/%s.m3u8",str_replace("video",$mediaoption[$f["d2"]]["geoblock"]==0?"video":"video-jp",$videopath),$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
 	$s["media"]["video"]["url"]["hd"]=strlen($f["video"])>0?sprintf("%s/%s/%s/hd/%s.m3u8",str_replace("video",$mediaoption[$f["d2"]]["geoblock"]==0?"video":"video-jp",$videopath),$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
 
+	//streampackのURLが指定されていればS3のHLSのURLを上書きする
+	if(strlen($f["streampack"])>0){
+		$s["media"]["video"]["url"]["sd"]=$f["streampack"];
+		$s["media"]["video"]["url"]["hd"]=$f["streampack"];
+	}
+
 	$s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
-	
+
 	//2017.10.17 - アプリでHLS動画が再生できない問題を臨時対応
-	if(strlen($f["video"])>0&&strlen($f["youtube"])==0){
+	if(strlen($s["media"]["video"]["url"]["sd"])>0&&strlen($f["youtube"])==0){
 		$s["media"]["video"]["youtube"]=$s["media"]["video"]["url"]["sd"];
 	}
-	
+
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 	$s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
 	//$s["media"]["video"]["time"]=s2h($f["d3"]);
@@ -1031,7 +1079,8 @@ function check_passwd($passwd){
 }
 
 function get_videotype($v1,$v2,$v3,$v4){
-	if(strlen($v1)>0)$s="brightcove";
+	if(strlen($v4)>0)$s="brightcove";
+	elseif(strlen($v1)>0)$s="brightcove";
 	elseif(strlen($v2)>0)$s="youtube";
 	elseif(strlen($v3)>0)$s="facebook";
 	else $s="";
@@ -1153,6 +1202,19 @@ function create_initialize_json($reload = false)
     }
     return json_decode($json, true);
 }
+
+function set_company_news_items($f){
+
+    $s["date"]=date("Y年m月d日",strtotime($f["published_at"]));
+    $s["title"]=$f["title"];
+    $s["url"]=$f["url"];
+
+    return $s;
+}
+
+
+
+
 
 function set_partners_info($f){
 

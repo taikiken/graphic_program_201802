@@ -226,6 +226,12 @@ END_DOC;
     $s=set_articleinfo($f,1,1,1);
     $ad_put=set_advertise($ad,"detail");
 
+      // 関連記事があったらフロントに引き渡す
+      if(false === empty($f["relatedpost"]))
+      {
+          $s["relatedpost"] = $f["relatedpost"];
+      }
+
     // media.video.ad_urlの設定
     if ( $ad_put['vast'] ) :
       $s['media']['video']['vast'] = $ad_put['vast'];
@@ -317,6 +323,30 @@ END_DOC;
 
     return $s;
 
+  }
+
+
+  /**
+   * プレスリリース一覧
+   * @return array
+   */
+  public function get_company_news_items()
+  {
+
+    $sql = <<<EOF
+SELECT
+ title,
+ url,
+ published_at
+ FROM company_news
+ ORDER BY published_at DESC
+EOF;
+
+    $this->query($sql);
+    while ($f = $this->fetch_array()) {
+      $s[] = set_company_news_items($f);
+    }
+    return $s;
   }
 
     /**

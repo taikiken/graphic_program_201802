@@ -5,20 +5,8 @@ $requesturi=$_SERVER['REQUEST_URI'];
 $staticfileimport=0;
 $filename=$_SERVER['SCRIPT_FILENAME'].$_SERVER['REQUEST_URI'];
 
-if(!preg_match("/dev/",$servername)){
-	$DBNAME="ut0";
-	if(preg_match("/editdm|write|batch|password|image/",$filename)){
-		//マスターDB
-		$DBHOST="undo-prod.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
-	}else{
-		//リードレプリカ ※スケールアウトの場合、ここを変更
-		$DBHOST="undo-prod-replica-c1.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
-	}
-}else{
-	// 開発環境DB
-	$DBHOST="undo-dev.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
-	$DBNAME="ut_devnew";
-}
+//DB設定
+include "conf/db_setting.php";
 
 if(preg_match("/undotsushin/",$servername)){
 
@@ -238,7 +226,9 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
     $bucket="dev-ublive.sportsbull.jp";
   }elseif (preg_match("/worldsoccer/",$requesturi)) {
 		$bucket="dev-stats.sportsbull.jp";
-	}
+	}else{
+    $bucket="dev-img-sportsbull-jp";
+  }
 endif;
 
 //$staticfilepath=preg_match("/sportsbull.jp/",$domain)?sprintf("s3://%s",$bucket):sprintf("%s/api/ver1",$SERVERPATH);

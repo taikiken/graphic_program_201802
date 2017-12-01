@@ -13,12 +13,12 @@ class m{
 		$this->sql=$sql;
 		$this->size=$size;
 		$this->option=$option;
-		$this->name=$fieldname;		
+		$this->name=$fieldname;
 		//$this->field=$fieldname;
 	}
 	function mt(){
 		$III=0;
-		
+
 		if($this->id!=20){
 			$sql="select id,name from pm_ where flag=1 and cid=".$this->id." order by n";
 		}else{
@@ -74,7 +74,11 @@ class m{
 				$e[$I]="id=".$e[$I];
 			}
 			$e=implode(" or ",$e);
-			$sql="select name from pm_ where ".$e." order by n";
+			if($this->id!=20){
+				$sql="select name from pm_ where ".$e." order by n";
+			}else{
+				$sql="select name from u_categories where " . $e . " order by n";
+			}
 			$this->o->query($sql);
 			$IIII=0;
 			while($f=$this->o->fetch_array($IIII)){
@@ -129,7 +133,7 @@ class m{
 					$cb.=($e==$v[$K]["id"])?" checked":"";
 					//$cb.=($e==""&&$K==0)?" checked":"";
 					//$cb.=($K==0)?" checked":"";
-					$cb.="><label for=\"".$this->name.$K."\">";		
+					$cb.="><label for=\"".$this->name.$K."\">";
 					$cb.=$v[$K]["name"];
 					$cb.="</label></td>\n";
 					$K++;

@@ -47,15 +47,15 @@ function wrapperback(){
 	$('select, object, embed').show();
 }
 function editImages(name,flags,width,height,copyright,copytype,thumno,thumpos,fname,path,op){
-	
+
 	var arrayPageSize=getPageSize();
 	var arrayPageScroll=getPageScroll();
 	var fTop=arrayPageScroll[1];
-	var fLeft=(arrayPageSize[0]-1151)/2;	
-	
+	var fLeft=(arrayPageSize[0]-1151)/2;
+
 	$("#flash").css({position:"absolute",left:fLeft+"px",top:fTop+"px"}).html("");
 	$('select, object, embed,#overlay').hide();
-	
+
 	var file;
 	var sheight;
 	if(height<590){
@@ -74,7 +74,7 @@ function editImages(name,flags,width,height,copyright,copytype,thumno,thumpos,fn
 		file="_1000";
 		sheight=1051;
 	}
-	
+
 	var so=new SWFObject("/editdm/modimg/flash"+file+".swf?img="+name+"&amp;fname="+fname+"&amp;w="+width+"&amp;h="+height+"&amp;flags="+flags+"&amp;copyright="+encodeURI(copyright)+"&amp;copytype="+copytype+"&amp;thumno="+thumno+"&amp;thumpos="+thumpos+"&amp;path="+path+"&amp;op="+op, "topMovie", "1151", sheight, "8", "#fff");
 	so.write("flash");
 	$("#container").height(arrayPageSize[1]).fadeIn();
@@ -146,13 +146,13 @@ function encodeURI(str){
 
 function cn(s,t){
 
-/*	
+/*
 	var no=(t==1)?[s-1,s]:[s,s+1];
 	for(var i=no[0];i<no.length;i++){
-		
+
 	}
 */
-	
+
 	$.ajax({
 		type: "POST",
 		url: "/editdm/module/orderswitch.php",
@@ -230,9 +230,9 @@ function deleteWrap(){
 }
 
 $(function(){
-	
+
 	$("[type='checkbox'],[type='radio'],label").css({"cursor":"pointer"});
-	
+
 	$(".listTable tr").each(function(){
 		if($(this).parents("table").attr("class")=="listTable"){
 			$(this).addClass("bottomborder");
@@ -240,18 +240,18 @@ $(function(){
 	});
 
 	var mx=$(".blockds").length;
-	
+
 	function menuchange(n){
-		
+
 		if(!location.href.match(/\/repo_n\//))return;
-		
+
 		if(n==0){
 			$(".blockds").show();
 			$(".numbering a,.numbering img").show();
 		}else{
 			$(".numbering a,.numbering img").hide();
 			for(var i=0;i<mx;i++){
-				
+
 				var ss=$(".blockds:eq("+i+") .inbox").attr("class").match(/qwa(.*)/)[1];
 				if(n==ss){
 					$(".blockds:eq("+i+")").show();
@@ -273,8 +273,8 @@ $(function(){
 	}
 
 	$("input[type='text']").css({lineHeight:"20px",height:"20px"});
-	
-	
+
+
 	$(".rollover").hover(
 		function(){
 			if(!$(this).attr("class").match(/lngA/))$(this).fadeTo(100,0.7);
@@ -287,16 +287,16 @@ $(function(){
 		function(){$(this).fadeTo(100,0.9);},
 		function(){$(this).fadeTo(100,1);}
 	);
-	
+
 	$("input").each(function(){
 		if($(this).attr("readonly"))$(this).css({backgroundColor:"#ffffeb",cursor:"pointer"});
 	});
 
 /*
 	$(".btncopy").click(function(){
-		
+
 		var a=$(this).attr("id").replace("btncopy rollover ","");
-		
+
 		fname=a;
 		var lv=$.cookie('lang');
 		var lang=$(this).attr("class").replace("btncopy rollover ","");
@@ -305,10 +305,10 @@ $(function(){
 		var w=$(this).width()+68;
 		var x=$(this).offset().left;
 		var h=lv=="al"?100:80;
-		
+
 		$(".optionsel").html("<ul><li class=\"en\">[EN]からコピー</li><li class=\"kr\">[KR]からコピー</li><li class=\"ch\">[CH]からコピー</li><li class=\"sc\">[SC]からコピー</li><li class=\"ta\">[TA]からコピー</li></ul>");
 		$(".optionsel").css({zIndex:1000,top:y+"px",left:x+"px",width:w+"px",height:h+"px",scrollTop:0}).show();
-		
+
 		var cize=getPageSize();
 		$(".optionselbg").css({width:cize[0]-1,height:cize[1]-1}).show().click(function(){
 			$(".optionsel").hide();
@@ -335,7 +335,7 @@ $(function(){
 		});
 	});
 */
-	
+
 
 	$(".q1").focus(function(){
 		$(this).css({backgroundImage:"none"});
@@ -355,8 +355,8 @@ $(function(){
 			return false;
 		}
 	});
-		
-	$(".flagswitch").click(function(){	
+
+	$(".flagswitch").click(function(){
 		var slang=$(this).attr("class").match(/ lang_([^"]*)/)[1];
 		var sid=$(this).attr("id").replace("e","");
 		var sflag=$(this).attr("src").match(/dis/)?1:0;
@@ -423,32 +423,38 @@ $(function(){
 	var d1d2flag=1;
 
 	$(".q1").click(function(){
-		
+
 		//if(d1d2flag===0)return;
 		//if(cid===1&&dir==1&&fil==0)return;
-		
+
 		var n=$(this).attr("name");
 		var y=$(this).offset().top+$(this).height()+14;
 		var w=$(this).width()+28;
 		var x=$(this).offset().left;
 		var u=$(n.replace("p_",".m_")).html();
-		
+
 		if(u.match(/select/)){
 			var t=u.match(/{([0-9a-z_]+)}/g);
-			
 			var p=[];
 			for(var i=0;i<t.length;i++){
 				p[i]=$("input[name='"+t[i].replace(/[^0-9a-z_]/g,"")+"']").val();
-				u=u.replace(t[i],"'"+p[i].replace(/[^0-9]/g,"")+"'");
+				if (u.match(/like {p_/))
+				{
+					u = u.replace(t[i], "'%25" + p[i].replace(/[^0-9]/g, "") + "%'");
+				}
+				else
+				{
+					u = u.replace(t[i], "'" + p[i].replace(/[^0-9]/g, "") + "'");
+				}
 				if(p[i].length==0)return;
 			}
-			
+
 			if((p[0].replace(/[^0-9]/g,"")-0)<10){
 				u=u.replace("{X}",1);
 			}else{
 				u=u.replace("{X}",2);
 			}
-						
+
 			$.ajax({
 				type: "POST",
 				url: "/editdm/module/importdata.php",
@@ -457,28 +463,31 @@ $(function(){
 					//var m=eval("("+m+")");
 					$(".optionsel").html("<ul>"+m.d+"<li>選択をクリアする</li></ul>");
 					var l=m.n-0;
-					
+
 					var h=l<10?(l+1)*20:200;
 					$(".optionsel").css({zIndex:100,top:y+"px",left:x+"px",width:w+"px",height:h+"px",scrollTop:0}).show();
-					
+
 					var cize=getPageSize();
 					$(".optionselbg").css({width:cize[0]-1,height:cize[1]-1}).show().click(function(){
 						$(".optionsel").hide();
 						$(this).hide();
 					});
-					
+
 					$(".optionsel li").hover(
 						function(){$(this).css({backgroundColor:"#efefef"});},
 						function(){$(this).css({backgroundColor:"#fff"});}
 					);
 					$(".optionsel li").click(function(){
 						$("input[name='"+n+"']").val($(this).html()!="選択をクリアする"?$(this).html():"");
-						
+
 						if(cid===1&&$("[name='p_d1']").val().match(/3|4|5/)){
-							selectedmedia(parseInt($(this).html()));
+							if ($(this).html() === $("[name='p_d2']").val()) {
+								// 記事の投稿者が選択された場合のみ
+								selectedmedia(parseInt($(this).html()));
+							}
 						}
 						$(".optionsel,.optionselbg").hide();
-					});	
+					});
 				}
 			});
 		}else{
@@ -498,8 +507,8 @@ $(function(){
 				var v=$(this).html()!="選択をクリアする"?$(this).html():"";
 				$("input[name='"+n+"']").focus().val(v.replace(/\(\d+\)$/,""));
 				$(".optionsel,.optionselbg").hide();
-			});	
+			});
 		}
 	});
-	
+
 });

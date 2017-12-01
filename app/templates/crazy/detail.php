@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-    <script src="/assets/js/app_divide.bundle.js"></script>
+    <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true"></script>
+    <script src="/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <title>CRAZY ATHLETES | スポーツブル / SPORTS BULL</title>
-    <script src="/assets/js/libs/vendor.react.js"></script>
-    <script src="/assets/js/bundle/main.bundle.js"></script>
+    <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
     <link rel="stylesheet" href="https://sportsbull.jp/assets/css/ui.css">
     <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
     <meta name="description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
@@ -198,7 +198,7 @@
                 <!--  メインコンテンツ ---------------------------------------------------------->
                 <div class="player_profile">
                     <div class="img_area">
-                        <div class="img"><img src="/assets/img/pickup_<?php echo $page['player']->body->no?>.png" alt=""></div>
+                        <div class="img"><img src="/prg_img/img/<?php echo $page['player']->body->img?>" alt=""></div>
                         <div class="name_area">
                             <h2 class="name"><?php echo $page['player']->body->name?></h2>
                             <p class="genre"><?php echo $page['player']->body->competition?></p>
@@ -557,7 +557,7 @@
         }
     });
 </script>
-<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js" data-label="CRAZY ATHLETES"></script>
+<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js?v=<?php echo $page['version']; ?>" data-label="CRAZY ATHLETES"></script>
 </body>
 </html>
 <?php
