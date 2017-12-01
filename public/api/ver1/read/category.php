@@ -189,6 +189,7 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+  // お知らせ
 $sql = <<<SQL
 SELECT 
 		notices.*
