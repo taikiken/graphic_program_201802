@@ -125,8 +125,8 @@
                     <?php foreach($partners as $partner): ?>
                       <?php if($partner['ng_flag'] == 0): ?>
                         <li style="width:190px;height:50px;text-align: center;">
-                            <?php if(!empty($partner['img_url'])): ?>
-                            <a href="<?php echo $partner['site_url']; ?>" target="_blank"><img src="<?php echo $partner['img_url'] ?>" alt="<?php echo $partner['partner_name']?>" width="190" height="50"></a>
+                            <?php if(!empty($partner['company_img_url'])): ?>
+                            <a href="<?php echo $partner['site_url']; ?>" target="_blank"><img src="<?php echo $partner['company_img_url'] ?>" alt="<?php echo $partner['partner_name']?>" width="190" height="50"></a>
                             <?php else: ?>
                                 <a style="line-height: 2.1875;
     color: #272727;
