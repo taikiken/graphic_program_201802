@@ -21,7 +21,6 @@
     <section class="section_crazy_pickup">
         <div class="ttl-wrapper">
             <h2 class="ttl pickup"><i></i>注目のアスリート</h2>
-            <p class="more sp_hide"><a href="/crazy/list/">すべての選手を見る</a></p>
         </div>
 
         <div class="pickup_player_list">
@@ -40,19 +39,12 @@
 
         <div class="more_btn pc_hide"><a href="/crazy/list/"><i></i>すべての選手を見る</a></div>
     </section>
-
-    <?php /*
-
-    <section class="section_crazy_recommend">
-        <div class="ttl-wrapper">
-            <h2 class="ttl recommend"><i></i>編集部おすすめの記事</h2>
+    <section class="section_crazy_popular pc_hide">
+        <div class="ttl-wrapper pc_hide">
+            <h2 class="ttl popular"><i></i>人気の記事</h2>
         </div>
-
-        <div class="recommend_list" style="height:auto;">
-            <ul class="thumb_area">
-            </ul>
-        </div>
+        <div id="Widget_articles-2" class="Widget_articles" data-category="crazy" data-type="ranking"></div>
     </section>
-    */?>
+    <script src="/assets/widgets/articles-index/Widget_articles.js"></script>
     </body>
 </html>

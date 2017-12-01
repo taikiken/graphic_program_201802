@@ -113,6 +113,10 @@ if($q->get_dir()===0){
 	$FIELD="*";
 	$WHERE=" where rid=".$PARAM["rid"];
 
+	//dews特別対応
+	if(empty(getSorC('u_media')) === false && getSorC('u_media') == '67'){
+		$WHERE .= " and t1 = 'dance'";
+    }
 }
 
 $EDITDELETEINITIAL="";
