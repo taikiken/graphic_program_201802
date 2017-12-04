@@ -420,11 +420,11 @@ function ut_init(){
 				$(name1).css({"color":"blue","fontWeight":"bold"});
 				$(name2).css({"color":"#333","fontWeight":"normal"});
 			}else if(value==2){
-				$(key).hide();
+				// $(key).hide();
 				$(name1).css({"color":"#333","fontWeight":"normal"});
 				$(name2).css({"color":"red","fontWeight":"bold"});
 			}else{
-				$(key).hide();
+				// $(key).hide();
 				$(name1).css({"color":"#333","fontWeight":"normal"});
 				$(name2).css({"color":"#333","fontWeight":"normal"});
 			}
