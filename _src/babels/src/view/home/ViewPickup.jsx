@@ -125,7 +125,7 @@ export class ViewPickup extends View {
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
   done(result) {
-    let articles = result.articles;
+    const articles = result.articles;
 
     if ( typeof articles === 'undefined' ) {
       // articles undefined
