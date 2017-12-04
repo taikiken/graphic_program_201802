@@ -10,6 +10,8 @@
  *
  */
 
+// CommentMoreViewNode
+
 const React = self.React;
 
 export default class ComponentCommentMoreView extends React.Component {
