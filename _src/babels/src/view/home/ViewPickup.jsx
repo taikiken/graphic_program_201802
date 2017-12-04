@@ -60,25 +60,6 @@ const ReactDOM = self.ReactDOM;
  */
 export class ViewPickup extends View {
   // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * interval 間隔, milliseconds, default 5000ms
-   * @property {Number} waiting interval milliseconds
-   * @default 5000
-   * @return {number} slideshow interval milliseconds を返します
-   */
-  get waiting() {
-    return this._waiting;
-  }
-  /**
-   * slideshow interval milliseconds を設定します
-   * @param {number} milliseconds slideshow interval milliseconds
-   */
-  set waiting(milliseconds) {
-    this._waiting = milliseconds;
-  }
-  // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
   /**
@@ -110,6 +91,25 @@ export class ViewPickup extends View {
      * @default 500
      */
     this._waiting = 1000 * 5;
+  }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * interval 間隔, milliseconds, default 5000ms
+   * @property {Number} waiting interval milliseconds
+   * @default 5000
+   * @return {number} slideshow interval milliseconds を返します
+   */
+  get waiting() {
+    return this._waiting;
+  }
+  /**
+   * slideshow interval milliseconds を設定します
+   * @param {number} milliseconds slideshow interval milliseconds
+   */
+  set waiting(milliseconds) {
+    this._waiting = milliseconds;
   }
   // ---------------------------------------------------
   //  METHOD

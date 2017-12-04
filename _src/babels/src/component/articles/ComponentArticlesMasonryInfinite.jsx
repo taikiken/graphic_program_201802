@@ -29,8 +29,8 @@ const React = self.React;
 const ReactDOM = self.ReactDOM;
 
 // imagesLoaded, isotope
-let imagesLoaded = self.imagesLoaded;
-let Isotope = self.Isotope;
+const imagesLoaded = self.imagesLoaded;
+const Isotope = self.Isotope;
 
 /**
  * 記事一覧 + 無限スクロール + isotope

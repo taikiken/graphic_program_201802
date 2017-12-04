@@ -49,8 +49,8 @@ import { GaData } from '../ga/GaData';
 
 // React
 // eslint-disable-next-line no-unused-vars
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+const React = self.React;
+const ReactDOM = self.ReactDOM;
 
 // // imagesLoaded, isotope
 // let imagesLoaded = self.imagesLoaded;
@@ -68,9 +68,9 @@ export class ViewArchiveMasonryInfinite extends View {
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
-   * @param {Boolean} [useMasonry=true] isotope を行うかの真偽値
+   * @param {boolean} [useMasonry=true] isotope を行うかの真偽値
    */
-  constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:Boolean = true ) {
+  constructor(element, moreElement, ActionClass = null, option = {}, useMasonry = true) {
 
     option = Safety.object( option );
 
@@ -102,7 +102,7 @@ export class ViewArchiveMasonryInfinite extends View {
      * @type {boolean}
      * @protected
      */
-    this._useMasonry = !!useMasonry;
+    this._useMasonry = useMasonry;
     /**
      * <p>ArticleDom instance を保持します</p>
      * <p>first render を区別するためにも使用します</p>
@@ -182,7 +182,7 @@ export class ViewArchiveMasonryInfinite extends View {
    * more button root element
    * @return {Element|*} more button root element を返します
    */
-  get moreElement():Element {
+  get moreElement() {
     return this._moreElement;
   }
   // View へ移動
@@ -206,35 +206,35 @@ export class ViewArchiveMasonryInfinite extends View {
    * @default all
    * @return {string} category slug を返します
    */
-  get slug():string {
+  get slug() {
     return this._slug;
   }
   /**
    * category slug を設定します
    * @param {string} categorySlug 設定する category slug
    */
-  set slug( categorySlug:string ):void {
+  set slug(categorySlug) {
     this._slug = categorySlug;
   }
   /**
    * API 取得 JSON.response を ArticleDae instance にし保持する配列
    * @return {Array.<ArticleDae>} API 取得 JSON.response を ArticleDae instance にし保持する配列を返します
    */
-  get articlesList():Array<ArticleDae> {
+  get articlesList() {
     return this._articles;
   }
   /**
    * Ga トラッキングタグを送信済みかを表す真偽値
    * @return {boolean} Ga トラッキングタグを送信済みかを表す真偽値を返します
    */
-  get gaSend():Boolean {
+  get gaSend() {
     return this._gaSend;
   }
   /**
    * Ga トラッキングタグを送信済みかを表す真偽値を設定します
-   * @param {Boolean} flag Ga トラッキングタグを送信済みかを表す真偽値
+   * @param {boolean} flag Ga トラッキングタグを送信済みかを表す真偽値
    */
-  set gaSend( flag:Boolean ):void {
+  set gaSend(flag) {
     this._gaSend = flag;
   }
   // -- @since 2016-06-27
@@ -247,58 +247,58 @@ export class ViewArchiveMasonryInfinite extends View {
   }
   /**
    * ArticleDom instance を取得します
-   * @return {Object|null} ArticleDom instance を返します
+   * @return {?Object} ArticleDom instance を返します
    */
-  get articleRendered():Object {
+  get articleRendered() {
     return this._articleRendered;
   }
   /**
    * ArticleDom instance を設定します
-   * @param {Object|null} rendered ArticleDom instance
+   * @param {?Object} rendered ArticleDom instance
    */
-  set articleRendered( rendered:Object ):void {
+  set articleRendered(rendered):void {
     this._articleRendered = rendered;
   }
   /**
    * more button instance
-   * @return {null|Object} more button instance を返します
+   * @return {?Object} more button instance を返します
    */
-  get moreRendered():Object {
+  get moreRendered() {
     return this._moreRendered;
   }
   /**
    * more button instance を設定します
-   * @param {null|Object} more button instance
+   * @param {?Object} more button instance
    */
-  set moreRendered( more:Object ):void {
+  set moreRendered(more) {
     this._moreRendered = more;
   }
   /**
    * response.request object を取得します
-   * @return {null|Object|Object|*} response.request object を返します
+   * @return {?Object} response.request object を返します
    */
-  get request():Object {
+  get request() {
     return this._request;
   }
   /**
    * response.request object を設定します
-   * @param {Object|null} requestObject response.request object
+   * @param {?Object} requestObject response.request object
    */
-  set request( requestObject:Object ):void {
+  set request(requestObject) {
     this._request = requestObject;
   }
   /**
    * 取得記事(articles)をArticleDae instance 配列として 取得します
    * @return {Array.<ArticleDae>} 取得記事(articles)をArticleDae instance 配列として返します
    */
-  get articles():Array<ArticleDae> {
+  get articles() {
     return this._articles;
   }
   /**
    * 取得記事(articles)をArticleDae instance 配列を設定します
-   * @param {Array} articles 取得記事(articles)をArticleDae instance 配列
+   * @param {Array.<ArticleDae>} articles 取得記事(articles)をArticleDae instance 配列
    */
-  set articles( articles:Array<ArticleDae> ):void {
+  set articles(articles) {
     this._articles = articles;
   }
   // ---------------------------------------------------
@@ -307,53 +307,43 @@ export class ViewArchiveMasonryInfinite extends View {
   /**
    * Ajax request を開始します
    */
-  start():void {
-
+  start() {
     this.action.next();
-
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result:Result ):void {
-
-    let articles = result.articles;
+  done(result) {
+    const articles = result.articles;
     // console.log( 'ViewArchiveMasonry done ', result );
     if ( typeof articles === 'undefined' ) {
-
-      // articles undefined
+      // [ERROR] articles undefined
       // JSON に問題がある
       let error = new Error( Message.undef('[ARCHIVE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
       // @since 2016-09-28, error で button を非表示へ
       this.moreButton(false);
-
     } else if ( articles.length === 0 ) {
-
-      // articles empty
+      // [ERROR] articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
       let error = new Error( Message.empty('[ARCHIVE:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
       // @since 2016-09-28, error で button を非表示へ
       this.moreButton(false);
-
     } else {
-
+      // success
       this.request = result.request;
-      this.render( articles );
-
+      this.render(articles);
     }
-
   }
   /**
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error:Error ):void {
-
+  fail(error) {
     this.executeSafely( View.RESPONSE_ERROR, error );
     // @since 2016-09-28, error で button を非表示へ
     // this.moreButton(false);
@@ -370,20 +360,19 @@ export class ViewArchiveMasonryInfinite extends View {
    * ViewError でエラーコンテナを作成します
    * @param {string} message エラーメッセージ
    */
-  showError( message:string = '' ):void {
-
+  showError(message = '') {
     // message = Safety.string( message, '' );
     //
-    // // ToDo: Error 時の表示が決まったら変更する
+    // // Error 時の表示が決まったら変更する
     // let error = new ViewError( this.element, this.option, message );
     // error.render();
-
+    console.warn('ViewArchiveMasonryInfinite.showError', message);
   }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render( articles:Array ):void {
+  render(articles) {
     // ------------------------------------------------
     // @since 2016-09-15
     // 既存データ用のglobal配列
