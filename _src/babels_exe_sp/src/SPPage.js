@@ -379,13 +379,14 @@ export default class SPPage {
    */
   static category(event) {
     const slug = event.slug;
-    const type = event.slugType;
+    // const type = event.slugType;
     // page top
     SPPageTop.start();
     // search from
     SPSearchForm.start();
     // category
-    SPCategory.start(slug, type);
+    // SPCategory.start(slug, type);
+    SPCategory.start(slug);
     // nav
     SPNav.start(slug);
     // syn.
