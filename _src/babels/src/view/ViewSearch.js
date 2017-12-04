@@ -12,7 +12,7 @@
 /* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
 // parent
-import {ViewArchiveMasonry} from './ViewArchiveMasonry';
+// import {ViewArchiveMasonry} from './ViewArchiveMasonry';
 import { ViewArchiveMasonryInfinite } from './ViewArchiveMasonryInfinite';
 
 // action
