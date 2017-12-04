@@ -11,7 +11,7 @@
  */
 
 // view
-import { SPViewArchive } from '../SPViewArchive';
+import SPViewArchive from '../SPViewArchive';
 
 // app
 import { User } from '../../../app/User';

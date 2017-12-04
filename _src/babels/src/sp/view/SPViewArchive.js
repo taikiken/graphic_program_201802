@@ -38,7 +38,7 @@ let ReactDOM = self.ReactDOM;
 /**
  * <p><strong>SP</strong>: archive 一覧標示</p>
  */
-export class SPViewArchive extends View {
+export default class SPViewArchive extends View {
   /**
    * <p>archive 一覧標示</p>
    * @param {Element} element root element, Ajax result を配置する

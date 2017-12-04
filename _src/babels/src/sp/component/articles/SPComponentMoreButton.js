@@ -29,6 +29,43 @@ const React = self.React;
  * @since 2016-09-16
  */
 export class SPComponentMoreButton extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{show: boolean, action: Object, element: Element, home: boolean, slug: string, loading: string, type: string}} React props
+   */
+  static get propTypes() {
+    return {
+      show: React.PropTypes.bool.isRequired,
+      action: React.PropTypes.object.isRequired,
+      // 監視コンテナ
+      element: React.PropTypes.object.isRequired,
+      home: React.PropTypes.bool.isRequired,
+      slug: React.PropTypes.string.isRequired,
+      // option, default ''
+      loading: React.PropTypes.string,
+      // ranking | movie
+      type: React.PropTypes.string
+    };
+  }
+  /**
+   * defaultProps
+   *
+   * - [loading='']
+   * - [type='']
+   * @return {{loading: string, type: string}} React props
+   */
+  static get defaultProps() {
+    return {
+      loading: '',
+      type: ''
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー {@link SPComponentMoreButton.propTypes}
@@ -69,24 +106,9 @@ export class SPComponentMoreButton extends React.Component {
      */
     this.page = 1;
   }
-  /**
-   * div.board-btn-viewmore を出力します
-   * @return {?XML} div.board-btn-viewmore を返します
-   */
-  render() {
-    // hasNext: true, button を表示する？
-    if ( this.state.show ) {
-      return (
-        <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
-          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
-          <span className="loading-spinner">&nbsp;</span>
-        </div>
-      );
-    }
-
-    // button 表示なし
-    return null;
-  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   // -----------------------------------------
   // delegate
   /**
@@ -217,39 +239,23 @@ export class SPComponentMoreButton extends React.Component {
     Ga.add( new GaData('SPComponentMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
   /**
-   * propTypes
-   * @return {{show: boolean, action: Object, element: Element, home: boolean, slug: string, loading: string, type: string}} React props
+   * div.board-btn-viewmore を出力します
+   * @return {?XML} div.board-btn-viewmore を返します
    */
-  static get propTypes() {
-    return {
-      show: React.PropTypes.bool.isRequired,
-      action: React.PropTypes.object.isRequired,
-      // 監視コンテナ
-      element: React.PropTypes.object.isRequired,
-      home: React.PropTypes.bool.isRequired,
-      slug: React.PropTypes.string.isRequired,
-      // option, default ''
-      loading: React.PropTypes.string,
-      // ranking | movie
-      type: React.PropTypes.string
-    };
-  }
-  /**
-   * defaultProps
-   *
-   * - [loading='']
-   * - [type='']
-   * @return {{loading: string, type: string}} React props
-   */
-  static get defaultProps() {
-    return {
-      loading: '',
-      type: ''
-    };
+  render() {
+    // hasNext: true, button を表示する？
+    if ( this.state.show ) {
+      return (
+        <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
+          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
+          <span className="loading-spinner">&nbsp;</span>
+        </div>
+      );
+    }
+
+    // button 表示なし
+    return null;
   }
 }
 //

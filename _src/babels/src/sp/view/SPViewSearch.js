@@ -11,7 +11,7 @@
  */
 /* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
-import {SPViewArchive} from './SPViewArchive';
+import SPViewArchive from './SPViewArchive';
 import { SPViewArchiveInfinite } from './SPViewArchiveInfinite';
 
 // app
