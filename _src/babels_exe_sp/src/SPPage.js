@@ -10,37 +10,50 @@
  *
  */
 
-import {SPPageTop} from './ui/SPPageTop';
-import {SPNav} from './ui/SPNav';
-import {SPSyn} from './ui/SPSyn';
-import {SPFirstVisit} from './ui/SPFirstVisit';
-import { SPAppBanner } from './ui/SPAppBanner';
+// ui
+import SPPageTop from './ui/SPPageTop';
+import SPNav from './ui/SPNav';
+import SPSyn from './ui/SPSyn';
+import SPFirstVisit from './ui/SPFirstVisit';
+import SPAppBanner from './ui/SPAppBanner';
 
-import {SPIndex} from './page/SPIndex';
-import {SPCategory} from './page/SPCategory';
-import {SPSingle} from './page/SPSingle';
-import {SPSearch} from './page/SPSearch';
-import {SPSignup} from './page/SPSignup';
-import {SPUserProfile} from './page/SPUserProfile';
-import {SPSidebar} from './page/SPSidebar';
-import {SPHeader} from './page/SPHeader';
-import {SPBookmarks} from './page/SPBookmarks';
-import {SPActivities} from './page/SPActivities';
-import {SPNotifications} from './page/SPNotifications';
-import {SPSettings} from './page/SPSettings';
-import {SPComment} from './page/SPComment';
-
-import {SPSearchForm} from './header/SPSearchForm';
-
-import {SPCommentDelete} from './modal/SPCommentDelete';
-import {SPFlush} from './modal/SPFlush';
-
+// page
+import SPIndex from './page/SPIndex';
+import SPCategory from './page/SPCategory';
+import SPSingle from './page/SPSingle';
+import SPSearch from './page/SPSearch';
+import SPSignup from './page/SPSignup';
+import SPUserProfile from './page/SPUserProfile';
+import SPSidebar from './page/SPSidebar';
+import SPHeader from './page/SPHeader';
+import SPBookmarks from './page/SPBookmarks';
+import SPActivities from './page/SPActivities';
+import SPNotifications from './page/SPNotifications';
+import SPSettings from './page/SPSettings';
+import SPComment from './page/SPComment';
+// since 2017-11-06
 import SPSignupWow from './page/SPSignupWow';
 
-// const _symbol = Symbol();
+// header
+import SPSearchForm from './header/SPSearchForm';
 
+// modal
+import SPCommentDelete from './modal/SPCommentDelete';
+import SPFlush from './modal/SPFlush';
+
+// const _symbol = Symbol();
+/**
+ * scroll flag
+ * @type {boolean}
+ * @private
+ */
 let _scrolled = false;
 
+/**
+ * `Scroll.sticky` 戻り値 TweenLite insatnce
+ * @type {?TweenLite}
+ * @private
+ */
 let _tween = null;
 
 // UT
@@ -53,7 +66,7 @@ const Dom = UT.app.Dom;
  * url に沿ったページ作成 Class をコールします</p>
  * 全て static です
  */
-export class SPPage {
+export default class SPPage {
   // /**
   //  * static class です, instance を作成しません
   //  * @param {Symbol} target Singleton を実現するための private symbol
@@ -69,11 +82,10 @@ export class SPPage {
   /**
    * Page 初期化, UT.app.Router event を listen します
    */
-  static init():void {
-
+  static init() {
     // page 上部に貼り付ける
     SPPage.bindScroll();
-    setTimeout( SPPage.reserveSticky, 25);
+    setTimeout(SPPage.reserveSticky, 25);
 
     // user login check
     UT.app.User.init();
@@ -86,31 +98,31 @@ export class SPPage {
     SPAppBanner.start();
 
     // router
-    let Router = UT.app.Router;
-    let router = Router.factory();
+    const Router = UT.app.Router;
+    const router = Router.factory();
 
     SPPage.router = router;
 
     // index
-    router.on( Router.INDEX, SPPage.index );
+    router.on(Router.INDEX, SPPage.index);
     // category
-    router.on( Router.CATEGORY, SPPage.category );
+    router.on(Router.CATEGORY, SPPage.category);
     // single(detail|p)
-    router.on( Router.SINGLE, SPPage.single );
+    router.on(Router.SINGLE, SPPage.single);
     // search
-    router.on( Router.SEARCH, SPPage.search );
+    router.on(Router.SEARCH, SPPage.search);
 
     // comment
-    router.on( Router.COMMENT, SPPage.comment );
-    router.on( Router.COMMENT_REPLY, SPPage.commentReply );
+    router.on(Router.COMMENT, SPPage.comment);
+    router.on(Router.COMMENT_REPLY, SPPage.commentReply);
 
     // 管理系
     // signup
-    router.on( Router.SIGNUP, SPPage.signup );
+    router.on(Router.SIGNUP, SPPage.signup);
     // login
-    router.on( Router.LOGIN, SPPage.login );
+    router.on(Router.LOGIN, SPPage.login);
     // logout
-    router.on( Router.LOGOUT, SPPage.logout );
+    router.on(Router.LOGOUT, SPPage.logout);
     /*
      // reset_password
      router.on( Router.RESET_PASSWORD, SPPage.password );
@@ -118,27 +130,27 @@ export class SPPage {
      router.on( Router.RESET_PASSWORD_RESETTING, SPPage.passwordResetting );
      */
     // mypage
-    router.on( Router.MYPAGE, SPPage.mypage );
+    router.on(Router.MYPAGE, SPPage.mypage);
     // mypage/activities
-    router.on( Router.MYPAGE_ACTIVITIES, SPPage.activities );
+    router.on(Router.MYPAGE_ACTIVITIES, SPPage.activities);
     // notifications
-    router.on( Router.NOTIFICATIONS, SPPage.notifications );
+    router.on(Router.NOTIFICATIONS, SPPage.notifications);
     // settings
-    router.on( Router.SETTING, SPPage.settings );
+    router.on(Router.SETTING, SPPage.settings);
     // settings/interest
-    router.on( Router.SETTING_INTEREST, SPPage.interest );
+    router.on(Router.SETTING_INTEREST, SPPage.interest);
 
     // settings/social
-    router.on( Router.SETTING_SOCIAL, SPPage.social );
+    router.on(Router.SETTING_SOCIAL, SPPage.social);
 
     // settings/deactivate
-    router.on( Router.SETTING_DEACTIVATE, SPPage.deactivate );
+    router.on(Router.SETTING_DEACTIVATE, SPPage.deactivate);
 
     // sp only /signup_login
-    router.on( Router.SIGNUP_LOGIN, SPPage.signupLogin );
+    router.on(Router.SIGNUP_LOGIN, SPPage.signupLogin);
 
     // 404
-    router.on( Router.NOT_FOUND, SPPage.notFound );
+    router.on(Router.NOT_FOUND, SPPage.notFound);
 
     // area - from 2017-09-04
     router.on(Router.CATEGORY_AREA, SPPage.area);
@@ -148,7 +160,7 @@ export class SPPage {
 
     router.route();
 
-    window.addEventListener( 'load', SPPage.sticky, false );
+    window.addEventListener('load', SPPage.sticky, false);
 
     // let whole = Dom.page();
     // whole.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
@@ -157,7 +169,7 @@ export class SPPage {
   /**
    * scroll, wheel を監視し event が発生したら sticky をキャンセルする
    */
-  static bindScroll():void {
+  static bindScroll() {
     // scroll event listen
     window.addEventListener('scroll', SPPage.onScroll, false);
     window.addEventListener('wheel', SPPage.onScroll, false);
@@ -170,10 +182,10 @@ export class SPPage {
    * scroll, wheel 監視をキャンセルし
    * body style を空にする
    */
-  static disposeScroll():void {
+  static disposeScroll() {
     _scrolled = true;
     // load event unbind
-    window.removeEventListener( 'load', SPPage.sticky );
+    window.removeEventListener('load', SPPage.sticky);
     // scroll event unbind
     window.removeEventListener('scroll', SPPage.onScroll);
     window.removeEventListener('wheel', SPPage.onScroll);
@@ -184,7 +196,7 @@ export class SPPage {
     document.body.removeEventListener('touchend', SPPage.onTouchEnd);
 
     document.body.style.cssText = '';
-    if ( _tween !== null ) {
+    if (_tween !== null) {
       _tween.kill();
       _tween = null;
     }
@@ -192,36 +204,36 @@ export class SPPage {
 
     // iOS Browser rendering bug で 真っ白になるの対策
     // 強制再描画させてる
-    setTimeout( function() {
+    setTimeout(function() {
       window.scrollBy(0, 1);
-    }, 0 );
+    }, 0);
   }
   /**
    * touchstart で touchmove 監視
    */
-  static onTouchStart():void {
+  static onTouchStart() {
     // console.log( 'onTouchStart', arguments );
     document.body.addEventListener('touchmove', SPPage.onScroll, false);
   }
   /**
    * touchend で touchmove 監視キャンセル
    */
-  static onTouchEnd():void {
+  static onTouchEnd() {
     // console.log( 'onTouchEnd', arguments );
     document.body.removeEventListener('touchmove', SPPage.onScroll);
   }
   /**
    * scroll 関連 event handler
    */
-  static onScroll():void {
+  static onScroll() {
     // console.log( 'onScroll', arguments );
     SPPage.disposeScroll();
   }
   /**
    * window.onload での stickyを予約する
    */
-  static reserveSticky():void {
-    window.addEventListener( 'load', SPPage.sticky, false );
+  static reserveSticky() {
+    window.addEventListener('load', SPPage.sticky, false);
     
     if (!_scrolled) {
       // fixed にして貼り付ける
@@ -231,12 +243,12 @@ export class SPPage {
   /**
    * scroll 位置を top に戻す
    */
-  static sticky():void {
-    window.removeEventListener( 'load', SPPage.sticky );
+  static sticky() {
+    window.removeEventListener('load', SPPage.sticky);
     // console.log( 'sticky ', _scrolled );
     // ユーザーがスクロールしたらキャンセルする
-    if ( !_scrolled ) {
-      _tween = UT.util.Scroll.sticky( 0.1, 1, null, SPPage.disposeScroll, true );
+    if (!_scrolled) {
+      _tween = UT.util.Scroll.sticky(0.1, 1, null, SPPage.disposeScroll, true);
     } else {
       SPPage.disposeScroll();
     }
@@ -267,53 +279,53 @@ export class SPPage {
   /**
    * event unbind
    */
-  static dispose():void {
-    let Router = UT.app.Router;
-    let router = SPPage.router;
+  static dispose() {
+    const Router = UT.app.Router;
+    const router = SPPage.router;
 
     // index
-    router.off( Router.INDEX, SPPage.index );
+    router.off(Router.INDEX, SPPage.index);
     // category
-    router.off( Router.CATEGORY, SPPage.category );
+    router.off(Router.CATEGORY, SPPage.category);
     // single(detail|p)
-    router.off( Router.SINGLE, SPPage.single );
+    router.off(Router.SINGLE, SPPage.single);
     // search
-    router.off( Router.SEARCH, SPPage.search );
+    router.off(Router.SEARCH, SPPage.search);
 
     // comment
-    router.off( Router.COMMENT, SPPage.comment );
-    router.off( Router.COMMENT_REPLY, SPPage.commentReply );
+    router.off(Router.COMMENT, SPPage.comment);
+    router.off(Router.COMMENT_REPLY, SPPage.commentReply);
 
     // 管理系
     // signup
-    router.off( Router.SIGNUP, SPPage.signup );
+    router.off(Router.SIGNUP, SPPage.signup);
     // login
-    router.off( Router.LOGIN, SPPage.login );
+    router.off(Router.LOGIN, SPPage.login);
     // logout
-    router.off( Router.LOGOUT, SPPage.logout );
+    router.off(Router.LOGOUT, SPPage.logout);
 
     // mypage
-    router.off( Router.MYPAGE, SPPage.mypage );
+    router.off(Router.MYPAGE, SPPage.mypage);
     // mypage/activities
-    router.off( Router.MYPAGE_ACTIVITIES, SPPage.activities );
+    router.off(Router.MYPAGE_ACTIVITIES, SPPage.activities);
     // notifications
-    router.off( Router.NOTIFICATIONS, SPPage.notifications );
+    router.off(Router.NOTIFICATIONS, SPPage.notifications);
     // settings
-    router.off( Router.SETTING, SPPage.settings );
+    router.off(Router.SETTING, SPPage.settings);
     // settings/interest
-    router.off( Router.SETTING_INTEREST, SPPage.interest );
+    router.off(Router.SETTING_INTEREST, SPPage.interest);
 
     // settings/social
-    router.off( Router.SETTING_SOCIAL, SPPage.social );
+    router.off(Router.SETTING_SOCIAL, SPPage.social);
 
     // settings/deactivate
-    router.off( Router.SETTING_DEACTIVATE, SPPage.deactivate );
+    router.off(Router.SETTING_DEACTIVATE, SPPage.deactivate);
 
     // sp only /signup_login
-    router.off( Router.SIGNUP_LOGIN, SPPage.signupLogin );
+    router.off(Router.SIGNUP_LOGIN, SPPage.signupLogin);
 
     // 404
-    router.off( Router.NOT_FOUND, SPPage.notFound );
+    router.off(Router.NOT_FOUND, SPPage.notFound);
     // area - from 2017-09-04
     router.off(Router.CATEGORY_AREA, SPPage.area);
     // signup-wow from 2017-11-06
@@ -322,7 +334,7 @@ export class SPPage {
   /**
    * 404 not found
    */
-  static notFound():void {
+  static notFound() {
     // console.log('SPPage.notFound');
     // page top
     SPPageTop.start();
@@ -343,7 +355,7 @@ export class SPPage {
   /**
    * home, index page
    */
-  static index():void {
+  static index() {
     // page top
     SPPageTop.start();
     // search from
@@ -351,7 +363,7 @@ export class SPPage {
     // index
     SPIndex.start();
     // nav
-    SPNav.start( 'home' );
+    SPNav.start('home');
     // syn.
     SPSyn.start();
 
@@ -365,18 +377,17 @@ export class SPPage {
    * category page
    * @param {Object} event Router event object
    */
-  static category( event:Object ):void {
-
-    let slug = event.slug;
-    let type = event.slugType;
+  static category(event) {
+    const slug = event.slug;
+    const type = event.slugType;
     // page top
     SPPageTop.start();
     // search from
     SPSearchForm.start();
     // category
-    SPCategory.start( slug, type );
+    SPCategory.start(slug, type);
     // nav
-    SPNav.start( slug );
+    SPNav.start(slug);
     // syn.
     SPSyn.start();
 
@@ -390,15 +401,14 @@ export class SPPage {
    * single, detail page
    * @param {Object} event Router event object
    */
-  static single( event:Object ):void {
-
-    let articleId = event.id;
+  static single(event) {
+    const articleId = event.id;
     // page top
     SPPageTop.start();
     // search from
     SPSearchForm.start();
     // single
-    SPSingle.start( articleId );
+    SPSingle.start(articleId);
     // syn.
     SPSyn.start();
 
@@ -412,14 +422,13 @@ export class SPPage {
    * コメント詳細
    * @param {Object} event Router event object
    */
-  static comment( event:Object ):void {
-
+  static comment(event) {
     // page top
     SPPageTop.start();
     // search from
     SPSearchForm.start();
 
-    SPComment.user( 'comment', event.article, event.comment );
+    SPComment.user('comment', event.article, event.comment);
     // syn.
     SPSyn.start();
 
@@ -433,14 +442,13 @@ export class SPPage {
    * コメント返信 詳細
    * @param {Object} event Router event object
    */
-  static commentReply( event:Object ):void {
-
+  static commentReply(event ) {
     // page top
     SPPageTop.start();
     // search from
     SPSearchForm.start();
 
-    SPComment.user( 'reply', event.article, event.comment, event.article );
+    SPComment.user('reply', event.article, event.comment, event.article);
     // syn.
     SPSyn.start();
 
@@ -454,13 +462,13 @@ export class SPPage {
    * 検索ページ
    * @param {Object} event Router.SEARCH event object
    */
-  static search( event:Object ):void {
+  static search(event) {
     // page top
     SPPageTop.start();
     // search from
     SPSearchForm.start();
 
-    SPSearch.start( event.keyword );
+    SPSearch.start(event.keyword);
     // syn.
     SPSyn.start();
 
@@ -475,7 +483,7 @@ export class SPPage {
   /**
    * signup page
    */
-  static signup():void {
+  static signup() {
     SPSignup.start();
   }
   /**
@@ -488,10 +496,10 @@ export class SPPage {
   /**
    * login page
    */
-  static login():void {
-    let loginElement = Dom.login();
-    if ( loginElement !== null ) {
-      let login = new UT.view.login.ViewLogin( loginElement );
+  static login() {
+    const loginElement = Dom.login();
+    if (loginElement !== null) {
+      const login = new UT.view.login.ViewLogin(loginElement);
       login.start();
     }
 
@@ -511,21 +519,20 @@ export class SPPage {
     SPSidebar.start();
     SPHeader.start();
 
-    if ( UT.app.User.sign ) {
-      let logoutElement = Dom.logout();
-      if ( logoutElement !== null ) {
-        let logout = new UT.view.login.ViewLogout( logoutElement );
+    if (UT.app.User.sign) {
+      const logoutElement = Dom.logout();
+      if (logoutElement !== null) {
+        const logout = new UT.view.login.ViewLogout(logoutElement);
         logout.start();
       }
     }
-
     // event unbind
     SPPage.dispose();
   }
   /**
    * signup_login
    */
-  static signupLogin():void {
+  static signupLogin() {
     // page top
     SPPageTop.start();
     // search from
@@ -554,7 +561,7 @@ export class SPPage {
   /**
    * マイページ, index（ブックマーク一覧）
    */
-  static mypage():void {
+  static mypage() {
     // page top
     SPPageTop.start();
     // search from
@@ -577,7 +584,7 @@ export class SPPage {
   /**
    * マイページ / アクティビティーズ一覧
    */
-  static activities():void {
+  static activities() {
     // page top
     SPPageTop.start();
     // search from
@@ -600,7 +607,7 @@ export class SPPage {
   /**
    * マイページ / お知らせ一覧
    */
-  static notifications():void {
+  static notifications() {
     // page top
     SPPageTop.start();
     // search from
@@ -624,7 +631,7 @@ export class SPPage {
   /**
    * 設定 基本情報設定
    */
-  static settings():void {
+  static settings() {
     // page top
     SPPageTop.start();
     // search from
@@ -646,7 +653,7 @@ export class SPPage {
   /**
    * 設定 パーソナライズ設定 興味のある競技
    */
-  static interest():void {
+  static interest() {
     // page top
     SPPageTop.start();
     // search from
@@ -668,7 +675,7 @@ export class SPPage {
   /**
    * 設定 ソーシャル連携
    */
-  static social():void {
+  static social() {
     // page top
     SPPageTop.start();
     // search from
@@ -685,7 +692,7 @@ export class SPPage {
   /**
    * 退会
    */
-  static deactivate():void {
+  static deactivate() {
     // page top
     SPPageTop.start();
     // search from
@@ -705,7 +712,7 @@ export class SPPage {
     SPPage.dispose();
   }
   /**
-   * 地域別記事 - category like 表示
+   * 地域別記事 - category のように 表示
    * @param {Object} event Router event object
    * @since 2017-09-04
    */

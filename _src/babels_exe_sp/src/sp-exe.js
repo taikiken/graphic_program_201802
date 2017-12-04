@@ -13,6 +13,11 @@
 'use strict';
 
 /**
+ * UT library を使い実行します
+ */
+import SPPage from './SPPage';
+
+/**
  * app アクセスの時に特別な className を html tag に追加します
  * - ios - undotsushin-ios
  * - android - undotsushin-android
@@ -50,10 +55,5 @@ const detector = () => {
 
 detector();
 
-
-/**
- * UT library を使い実行します
- */
-import {SPPage} from './SPPage';
 // Page class をキックします
 SPPage.init();

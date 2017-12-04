@@ -631,7 +631,7 @@ export default class Page {
     Page.dispose();
   }
   /**
-   * 地域別記事 - category like 表示
+   * 地域別記事 - category のように 表示
    * @param {Object} event Router event object
    * @since 2017-09-04
    */
