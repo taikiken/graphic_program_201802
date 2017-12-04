@@ -119,49 +119,46 @@ if ($_GET["cid"] != 94)
 }
 else
 {
+	/*
+	* 選手の広告設定
+	*/
+
 	// 選手情報の場合の選手広告ヘッダータイトル設定
 	$head_val1 = "選手詳細";
 	$head_val2 = "選手";
 	$item_val1 = "プロフィール";
+
+	// PC
+	$a[] = array("head", $head_val1 . " / ウェブ・デスクトップ版：（親＞子）デフォルト ＞ " . $head_val2 . "で継承されますが、子要素の指定は優先されます");
+	if($_GET["cid"]!=0)$a[] = array("inputradio", $item_val1 . " / 広告表示", "ad_pc_playerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
+	$a[] = array("textfield", $item_val1 . " / 広告ID", "ad_pc_playerid", "20", "", "", "");
+	if($_GET["cid"]!=0)$a[] = array("inputradio","サイドバー / 広告表示", "ad_pc_sideflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
+	$a[] = array("textfield","サイドバー / 広告ID", "ad_pc_sideid", "20", "", "", "");
+	if($_GET["cid"]!=0)$a[] = array("inputradio","フッター / 広告表示", "ad_pc_footerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
+	$a[] = array("textfield","フッター / 広告ID", "ad_pc_footerid", "20", "", "", "");
+
+	// モバイル
+	$a[] = array("head", $head_val1 . " / ウェブ・モバイル版：（親＞子）デフォルト ＞ " . $head_val2 . "で継承されますが、子要素の指定は優先されます");
+	if($_GET["cid"]!=0)$a[] = array("inputradio", $item_val1 . " / 広告表示", "ad_sp_playerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
+	$a[] = array("textfield", $item_val1 . " / 広告ID", "ad_sp_playerid", "20", "", "", "");
+	if($_GET["cid"]!=0)$a[] = array("inputradio","フッター / 広告表示", "ad_sp_footerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
+	$a[] = array("textfield","フッター / 広告ID", "ad_sp_footerid", "20", "", "", "");
+
+	// iOS
+	$a[] = array("head", $head_val1 . " / アプリ・iOS版：（親＞子）デフォルト ＞ " . $head_val2 . "で継承されますが、子要素の指定は優先されます");
+	if($_GET["cid"]!=0)$a[] = array("inputradio", $item_val1 . " / 広告表示", "ad_ios_playerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
+	$a[] = array("textfield", $item_val1 . " / 広告ID", "ad_ios_playerid", "20", "", "", "");
+	if($_GET["cid"]!=0)$a[] = array("inputradio","フッター / 広告表示", "ad_ios_footerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
+	$a[] = array("textfield","フッター / 広告ID", "ad_ios_footerid", "20", "", "", "");
+
+	// Android
+	$a[] = array("head", $head_val1 . " / アプリ・Android版：（親＞子）デフォルト ＞ " . $head_val2 . "で継承されますが、子要素の指定は優先されます");
+	if($_GET["cid"]!=0)$a[] = array("inputradio", $item_val1 . " / 広告表示", "ad_android_playerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
+	$a[] = array("textfield", $item_val1 . " / 広告ID", "ad_android_playerid", "20", "", "", "");
+	if($_GET["cid"]!=0)$a[] = array("inputradio","フッター / 広告表示", "ad_android_footerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
+	$a[] = array("textfield","フッター / 広告ID", "ad_android_footerid", "20", "", "", "");
+
 }
-
-/*
- * 選手の広告設定
- */
-/*
- * 選手の広告設定については仕様が決まるまで表示しない
- *
-
-// PC
-$a[] = array("head", $head_val1 . " / ウェブ・デスクトップ版：（親＞子）デフォルト ＞ " . $head_val2 . "で継承されますが、子要素の指定は優先されます");
-if($_GET["cid"]!=0)$a[] = array("inputradio", $item_val1 . " / 広告表示", "ad_pc_playerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
-$a[] = array("textfield", $item_val1 . " / 広告ID", "ad_pc_playerid", "20", "", "", "");
-if($_GET["cid"]!=0)$a[] = array("inputradio","サイドバー / 広告表示", "ad_pc_sideflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
-$a[] = array("textfield","サイドバー / 広告ID", "ad_pc_sideid", "20", "", "", "");
-if($_GET["cid"]!=0)$a[] = array("inputradio","フッター / 広告表示", "ad_pc_footerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
-$a[] = array("textfield","フッター / 広告ID", "ad_pc_footerid", "20", "", "", "");
-
-// モバイル
-$a[] = array("head", $head_val1 . " / ウェブ・モバイル版：（親＞子）デフォルト ＞ " . $head_val2 . "で継承されますが、子要素の指定は優先されます");
-if($_GET["cid"]!=0)$a[] = array("inputradio", $item_val1 . " / 広告表示", "ad_sp_playerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
-$a[] = array("textfield", $item_val1 . " / 広告ID", "ad_sp_playerid", "20", "", "", "");
-if($_GET["cid"]!=0)$a[] = array("inputradio","フッター / 広告表示", "ad_sp_footerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
-$a[] = array("textfield","フッター / 広告ID", "ad_sp_footerid", "20", "", "", "");
-
-// iOS
-$a[] = array("head", $head_val1 . " / アプリ・iOS版：（親＞子）デフォルト ＞ " . $head_val2 . "で継承されますが、子要素の指定は優先されます");
-if($_GET["cid"]!=0)$a[] = array("inputradio", $item_val1 . " / 広告表示", "ad_ios_playerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
-$a[] = array("textfield", $item_val1 . " / 広告ID", "ad_ios_playerid", "20", "", "", "");
-if($_GET["cid"]!=0)$a[] = array("inputradio","フッター / 広告表示", "ad_ios_footerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
-$a[] = array("textfield","フッター / 広告ID", "ad_ios_footerid", "20", "", "", "");
-
-// Android
-$a[] = array("head", $head_val1 . " / アプリ・Android版：（親＞子）デフォルト ＞ " . $head_val2 . "で継承されますが、子要素の指定は優先されます");
-if($_GET["cid"]!=0)$a[] = array("inputradio", $item_val1 . " / 広告表示", "ad_android_playerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
-$a[] = array("textfield", $item_val1 . " / 広告ID", "ad_android_playerid", "20", "", "", "");
-if($_GET["cid"]!=0)$a[] = array("inputradio","フッター / 広告表示", "ad_android_footerflag", array("親の広告表示設定を継承する", "広告を設定する", "広告を表示しない"));
-$a[] = array("textfield","フッター / 広告ID", "ad_android_footerid", "20", "", "", "");
-*/
 
 function output(){
 
@@ -227,6 +224,8 @@ if($q->get_dir()===1){
 		}
 		$data=serialize($data);
 		$e=file_put_contents($file,$data);
+		var_dump($file, $data);
+		var_dump($e);
 		s3upload($file,sprintf("static/ad/%s-%s.dat",isset($_GET["rid"])?$_GET["rid"]:$_GET["cid"],$_GET["nid"]));
 		output();
 	}
