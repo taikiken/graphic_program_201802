@@ -38,7 +38,7 @@ import {ArticleDae} from '../dae/ArticleDae';
 
 // view/articles
 import { ComponentArticlesMasonryInfinite } from '../component/articles/ComponentArticlesMasonryInfinite';
-import { ComponentMoreButton } from '../component/articles/ComponentMoreButton';
+import ComponentMoreButton from '../component/articles/ComponentMoreButton';
 
 // util
 import { Scroll } from '../util/Scroll';
@@ -448,64 +448,79 @@ export class ViewArchiveMasonryInfinite extends View {
   /**
    * more button の表示・非表示を行います
    * @since 2016-09-16
-   * @param {boolean} show true の時にボタンを表示させ機能させます
+   * @param {boolean} [show=false] true の時にボタンを表示させ機能させます
    */
-  moreButton(show) {
-    // console.log('====== moreButton ======', show);
+  moreButton(show = false) {
+    // console.log('====== moreButton ======', show, this.home, this.afterClick);
     // 'View More' button root element
     const moreElement = this.moreElement;
-    // moreElement 存在チェックを行う
-    // Element 型を保証する
-    // moreRendered が null の時のみ instance を作成し
-    // instance があれば state を update する
-    // @since 2017-06-01 - show: true の時のみ button 有効化
-    if (show) {
-      if (this.moreRendered === null) {
-        this.moreRendered = ReactDOM.render(
-          <ComponentMoreButton
-            show={show}
-            action={this.action}
-            element={moreElement}
-            home={this.home}
-            slug={this.slug}
-            afterClick={this.afterClick}
-          />,
-          moreElement
-        );
-      } else {
-        this.moreRendered.updateShow(show);
-      }
-      this.scroll.fire();
-    } else {
-      // if (this.moreRendered === null){
-      // lint error になるので space 入れる - こんな雑な修正信用できる？
-      if (this.moreRendered === null) {
-        //     this.moreRendered = ReactDOM.render(
-        //         <ComponentMoreButton
-        //     show={show}
-        //     action={this.action}
-        //     element={moreElement}
-        //     home={this.home}
-        //     slug={this.slug}
-        //     afterClick={this.afterClick}
-        // />,
-        //     moreElement
-        // );
-        // lint error になる indent 修正する
-        this.moreRendered = ReactDOM.render(
-          <ComponentMoreButton
-            show={show}
-            action={this.action}
-            element={moreElement}
-            home={this.home}
-            slug={this.slug}
-            afterClick={this.afterClick}
-          />,
-          moreElement
-        );
-      } else {
-        this.moreRendered.updateShow(show);
-      }
+    // // moreElement 存在チェックを行う
+    // // Element 型を保証する
+    // // moreRendered が null の時のみ instance を作成し
+    // // instance があれば state を update する
+    // // @since 2017-06-01 - show: true の時のみ button 有効化
+    // if (show) {
+    //   if (this.moreRendered === null) {
+    //     this.moreRendered = ReactDOM.render(
+    //       <ComponentMoreButton
+    //         show={show}
+    //         action={this.action}
+    //         element={moreElement}
+    //         home={this.home}
+    //         slug={this.slug}
+    //         afterClick={this.afterClick}
+    //       />,
+    //       moreElement
+    //     );
+    //   } else {
+    //     this.moreRendered.updateShow(show);
+    //   }
+    //   this.scroll.fire();
+    // } else {
+    //   // if (this.moreRendered === null){
+    //   // lint error になるので space 入れる - こんな雑な修正信用できる？
+    //   if (this.moreRendered === null) {
+    //     //     this.moreRendered = ReactDOM.render(
+    //     //         <ComponentMoreButton
+    //     //     show={show}
+    //     //     action={this.action}
+    //     //     element={moreElement}
+    //     //     home={this.home}
+    //     //     slug={this.slug}
+    //     //     afterClick={this.afterClick}
+    //     // />,
+    //     //     moreElement
+    //     // );
+    //     // lint error になる indent 修正する
+    //     this.moreRendered = ReactDOM.render(
+    //       <ComponentMoreButton
+    //         show={show}
+    //         action={this.action}
+    //         element={moreElement}
+    //         home={this.home}
+    //         slug={this.slug}
+    //         afterClick={this.afterClick}
+    //       />,
+    //       moreElement
+    //     );
+    //   } else {
+    //     this.moreRendered.updateShow(show);
+    //   }
+    // }
+    // more button 表示ロジック最適化 - 2017-12-01
+    if (this.moreRendered === null) {
+      this.moreRendered = ReactDOM.render(
+        <ComponentMoreButton
+          show={show}
+          action={this.action}
+          element={moreElement}
+          home={this.home}
+          slug={this.slug}
+          afterClick={this.afterClick}
+        />,
+        moreElement
+      );
     }
+    this.moreRendered.updateShow(show);
   }
 }// class
