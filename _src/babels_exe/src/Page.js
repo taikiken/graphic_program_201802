@@ -47,7 +47,7 @@ import Flush from './modal/Flush';
  * @type {boolean}
  * @private
  */
-let _scrolled = false;  
+let _scrolled = false;
 
 /**
  * `Scroll.sticky` 戻り値 TweenLite insatnce
