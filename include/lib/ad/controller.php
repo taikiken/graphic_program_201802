@@ -204,8 +204,6 @@ if($q->get_dir()===1){
 		}
 		$data=serialize($data);
 		$e=file_put_contents($file,$data);
-		var_dump($file, $data);
-		var_dump($e);
 		s3upload($file,sprintf("static/ad/%s-%s.dat",isset($_GET["rid"])?$_GET["rid"]:$_GET["cid"],$_GET["nid"]));
 		output();
 	}
