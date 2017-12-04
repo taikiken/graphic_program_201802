@@ -24,7 +24,7 @@ import {Pickup} from '../../action/home/Pickup';
 import {PickupAuth} from '../../action/home/PickupAuth';
 
 // data
-import {Result} from '../../data/Result';
+// import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
 // carousel
@@ -45,8 +45,9 @@ import { Polling } from '../../tick/Polling';
 
 // global object
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
+const ReactDOM = self.ReactDOM;
 
 // Gasane
 // let Polling = self.Gasane.Polling;
@@ -58,13 +59,35 @@ let ReactDOM = self.ReactDOM;
  * 1. Dom作成 by React
  */
 export class ViewPickup extends View {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * interval 間隔, milliseconds, default 5000ms
+   * @property {Number} waiting interval milliseconds
+   * @default 5000
+   * @return {number} slideshow interval milliseconds を返します
+   */
+  get waiting() {
+    return this._waiting;
+  }
+  /**
+   * slideshow interval milliseconds を設定します
+   * @param {number} milliseconds slideshow interval milliseconds
+   */
+  set waiting(milliseconds) {
+    this._waiting = milliseconds;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * action/Pickup を使い Ajax request 後 element へ dom を作成します
    * @link ViewHeadline
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, option:Object = {} ) {
+  constructor(element, option = {}) {
     option = Safety.object( option );
     super( element, option );
     let ActionClass = User.sign ? PickupAuth : Pickup;
@@ -76,7 +99,6 @@ export class ViewPickup extends View {
     this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
     /**
      * 最後のナンバー
-     * @ToDo 不要なら削除する
      * @type {number}
      * @private
      */
@@ -90,38 +112,19 @@ export class ViewPickup extends View {
     this._waiting = 1000 * 5;
   }
   // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * interval 間隔, milliseconds, default 5000ms
-   * @property {Number} waiting interval milliseconds
-   * @default 5000
-   * @return {number|*|Number} slideshow interval milliseconds を返します
-   */
-  get waiting():Number {
-    return this._waiting;
-  }
-  /**
-   * slideshow interval milliseconds を設定します
-   * @param {Number} milliseconds slideshow interval milliseconds
-   */
-  set waiting( milliseconds:Number ):void {
-    this._waiting = milliseconds;
-  }
-  // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
    */
-  start():void {
+  start() {
     this.action.start();
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result:Result ):void {
+  done(result) {
     let articles = result.articles;
 
     if ( typeof articles === 'undefined' ) {
@@ -144,7 +147,7 @@ export class ViewPickup extends View {
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error:Error ):void {
+  fail(error) {
     this.executeSafely( View.RESPONSE_ERROR, error );
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
@@ -157,7 +160,7 @@ export class ViewPickup extends View {
   //
   //   message = Safety.string( message, '' );
   //
-  //   // ToDo: Error 時の表示が決まったら変更する
+  //   // Error 時の表示が決まったら変更する
   //   let error = new ViewError( this.element, this.option, message );
   //   error.render();
   //
@@ -166,7 +169,7 @@ export class ViewPickup extends View {
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render( articles:Array ):void {
+  render(articles) {
     const list = articles.map((article) => new ArticleDae(article));
 
     ReactDOM.render(
