@@ -11,35 +11,35 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * Flushモーダル
  */
-export class Flush {
-  /**
-   * Flush modal
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Flush is static Class. not use new Flush().' );
-
-    }
-  }
+export default class Flush {
+  // /**
+  //  * Flush modal
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Flush is static Class. not use new Flush().' );
+  //
+  //   }
+  // }
   /**
    * comment delete confirm modal 準備
    */
-  static start():void {
-    let element = Dom.flushModal();
-    if ( element !== null ) {
-      let flush = new UT.view.modal.ViewFlushModal( element );
+  static start() {
+    const element = Dom.flushModal();
+    if (element !== null) {
+      const flush = new UT.view.modal.ViewFlushModal(element);
       flush.start();
     }
   }
