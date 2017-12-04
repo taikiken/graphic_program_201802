@@ -99,9 +99,8 @@ $settings["repo_n"]=array(array(75),array("広告"));
 $settings["u_categories"]=array(array(120),array("テーマ/広告"));
 /*
  * 選手の広告設定については仕様が決まるまで表示しない
- *
+ */
 $settings["tbl_player"]=array(array(75),array("広告"));
-*/
 
 ?>
 </td>
