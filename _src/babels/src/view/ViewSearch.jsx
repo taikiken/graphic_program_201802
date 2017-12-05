@@ -35,9 +35,11 @@ const React = self.React;
 const ReactDOM = self.ReactDOM;
 
 /**
+ * {@link ViewSearch} -
  * 検索結果が見つかりませんでした コンテナ
  * @constructor
  * @returns {XML} `div.error-container` - 検索結果が見つかりませんでした
+ * @since 2017-12-05
  */
 const SearchErrorComponent = () => (
   <div className="error-container">
@@ -84,7 +86,7 @@ export class ViewSearch extends ViewArchiveMasonryInfinite {
     if (typeof articles === 'undefined') {
       // articles undefined
       // JSON に問題がある
-      let error = new Error( Message.undef('[SEARCH:UNDEFINED]') );
+      let error = new Error(Message.undef('[SEARCH:UNDEFINED]'));
       this.executeSafely( View.UNDEFINED_ERROR, error );
       this.showError( error.message );
     } else if (articles.length === 0) {
@@ -100,23 +102,23 @@ export class ViewSearch extends ViewArchiveMasonryInfinite {
        * @type {Object}
        */
       this.request = result.request;
-      this.render( articles );
+      this.render(articles);
     }
   }
   /**
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail(error ) {
-    this.executeSafely( View.RESPONSE_ERROR, error );
+  fail(error) {
+    this.executeSafely(View.RESPONSE_ERROR, error);
     // 検索結果ない時は 404 -> fail になる -> showError: not found
-    this.showError( error.message );
+    this.showError(error.message);
   }
   /**
    * 検索結果が見つかりませんでした コンテナを作成します
    * @param {string} message エラーメッセージ
    */
-  showError(message:string = '') {
+  showError(message = '') {
     // /**
     //  * 検索結果が見つかりませんでした コンテナ
     //  * @private
@@ -143,7 +145,7 @@ export class ViewSearch extends ViewArchiveMasonryInfinite {
     //   this.element
     // );
     ReactDOM.render(
-      <searchErrorComponent />,
+      <SearchErrorComponent />,
       this.element,
     );
   }
