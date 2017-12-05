@@ -23,7 +23,37 @@ import { Comments } from '../../action/comment/Comments';
 const React = self.React;
 // const ReactDOM = self.ReactDOM;
 
+/**
+ * コメントコンテナを出力します
+ * - {@link ComponentCommentsParent}
+ *   - {@link ComponentCommentsChildList}
+ *     - {@link CommentMenuNode}
+ *     - {@link CommentUserNode}
+ *     - {@link CommentContentNode}
+ *     - {@link ReactionNode}
+ *     - {@link CommentFormNode}
+ *   - {@link ComponentCommentsChildReply}
+ *     - {@link CommentNode}
+ * - {@link ComponentCommentMoreView}
+ * @since 2017-12-05
+ */
 export default class ComponentComments extends React.Component {
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * React.propTypes
+   * @returns {{
+   *    commentsListDae: CommentsListDae,
+   *    commentsList: Array.<number>,
+   *    commentsListType: string,
+   *    articleId: string,
+   *    execute: function,
+   *    action: Comments,
+   *    commentsBank: object,
+   *    user: object
+   * }} React.propTypes を返します
+   */
   static get propTypes() {
     return {
       commentsListDae: React.PropTypes.instanceOf(CommentsListDae).isRequired,
@@ -42,25 +72,52 @@ export default class ComponentComments extends React.Component {
       user: React.PropTypes.object.isRequired,
     };
   }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * コメントコンテナを出力します
+   * @param {*} props React.props
+   */
   constructor(props) {
     super(props);
     // ---
+    /**
+     * React.state
+     * - comment id list
+     * @type {{commentsList: Array.<number>}}
+     */
     this.state = {
       commentsList: props.commentsList,
     };
-    this.commentMore = null;
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * delegate - after mount
+   * {@link View.DID_MOUNT} を実行します
+   */
   componentDidMount() {
     // after mount
     this.props.execute(View.DID_MOUNT);
   }
+  /**
+   * delegate - props 更新時に呼び出されます,
+   * @param {{ commentsList: Array.<number> }} nextProps 更新される props
+   */
   componentWillReceiveProps(nextProps) {
     const { commentsList } = nextProps;
-    console.log('ComponentComments.componentWillReceiveProps', nextProps.commentsList, this.state.commentsList);
+    // console.log('ComponentComments.componentWillReceiveProps', nextProps.commentsList, this.state.commentsList);
     if (Safety.array(commentsList) && commentsList.length > this.state.commentsList.length) {
       this.setState({ commentsList });
     }
   }
+
+  /**
+   * 「N件を表示」リンクを作成します
+   * @returns {XML} {@link ComponentCommentMoreView} component を返します
+   */
   moreButton() {
     const { action } = this.props;
     // more button
@@ -73,6 +130,11 @@ export default class ComponentComments extends React.Component {
       />
     );
   }
+
+  /**
+   * コメントコンテナを出力します
+   * @returns {XML} `div.comment > ` {@link ComponentCommentsParent} + {@link ComponentCommentMoreView}
+   */
   render() {
     const { commentsList } = this.state;
     if (!Safety.array(commentsList) || !commentsList.length) {

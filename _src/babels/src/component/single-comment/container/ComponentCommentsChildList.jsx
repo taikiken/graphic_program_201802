@@ -25,24 +25,54 @@ import { CommentContentNode } from '../../../node/comment/CommentContentNode';
 // React
 const React = self.React;
 
-const replyClass = (replyId) => (replyId === '' ? '' : ` comment-content-reply-${replyId}`);
+/**
+ * reply container class name を作成します
+ * @param {number} replyId comment reply id
+ * @returns {string} class name を返します
+ */
+const replyClass = (replyId) => (replyId ? ` comment-content-reply-${replyId}` : '');
 
+/**
+ * `div.comment-item-inner.comment-root` を出力します
+ * - {@link CommentMenuNode}
+ * - {@link CommentUserNode}
+ * - {@link CommentContentNode}
+ * - {@link ReactionNode}
+ * - {@link CommentFormNode}
+ *
+ * @param {CommentsDae} commentDae JSON comment data
+ * @param {boolean} sign ログインの有無 flag
+ * @param {string} uniqueId 識別のために使用します
+ * @param {string} articleId コメントした記事 id
+ * @param {string} commentUserId コメントした user id
+ * @param {string} commentsListType comment type, normal / self / official
+ * @param {string} [userId=''] user id
+ * @param {string} [icon=''] コメント送信者（自分の）profile picture
+ * @param {string} [commentId=''] comment id
+ * @param {string} [replyId=''] replay id
+ * @param {number} [commentCount=0] コメント数
+ * @param {boolean} [parent=false] 親コメント flag
+ * @param {boolean} [independent=false] 記事へのコメント
+ * @param {string} [url=''] comment 詳細への path
+ * @returns {XML} `div.comment-item-inner.comment-root` コメントコンテナを返します
+ * @constructor
+ */
 const ComponentCommentsChildList = ({
-                                 commentDae,
-                                 sign,
-                                 uniqueId,
-                                 userId,
-                                 commentUserId,
-                                 articleId,
-                                 commentId,
-                                 replyId,
-                                 parent,
-                                 url,
-                                 icon,
-                                 commentCount,
-                                 independent,
-                                 commentsListType,
-                               }) => {
+                                      commentDae,
+                                      sign,
+                                      uniqueId,
+                                      articleId,
+                                      commentUserId,
+                                      commentsListType,
+                                      userId,
+                                      icon,
+                                      commentId,
+                                      replyId,
+                                      commentCount,
+                                      parent,
+                                      independent,
+                                      url,
+                                    }) => {
   const comment = commentDae.comment;
   const picture = Safety.image(comment.user.profilePicture, Empty.USER_EMPTY);
   const loggedIn = Safety.same(picture, Empty.USER_EMPTY);
@@ -104,19 +134,38 @@ const ComponentCommentsChildList = ({
   );
 };
 
-ComponentCommentsChildList.defaultProps = {
-  // unique id（識別のために必要）
-  uniqueId: React.PropTypes.string.isRequired,
+/**
+ * React.propTypes
+ * @type {{
+ *   commentDae: CommentsDae,
+ *   sign: boolean,
+ *   uniqueId: string,
+ *   articleId: string,
+ *   commentUserId: string,
+ *   commentsListType: string,
+ *   userId: string,
+ *   icon: string,
+ *   commentId: string,
+ *   replyId: string,
+ *   commentCount: number,
+ *   parent: boolean,
+ *   independent: boolean,
+ *   url: string
+ * }}
+ */
+ComponentCommentsChildList.propTypes = {
   // CommentDae instance
   commentDae: React.PropTypes.instanceOf(CommentsDae).isRequired,
+  // ログインの有無
+  sign: React.PropTypes.bool.isRequired,
+  // unique id（識別のために必要）
+  uniqueId: React.PropTypes.string.isRequired,
   // 記事 id
   articleId: React.PropTypes.string.isRequired,
   // コメントした user id
   commentUserId: React.PropTypes.string.isRequired,
   // comment type
   commentsListType: React.PropTypes.string.isRequired,
-  // ログインの有無
-  sign: React.PropTypes.bool.isRequired,
   // user id（オプション）
   userId: React.PropTypes.string,
   // コメント送信者（自分の）profile picture
@@ -131,12 +180,16 @@ ComponentCommentsChildList.defaultProps = {
   parent: React.PropTypes.bool,
   // 記事へのコメント送信 default false
   independent: React.PropTypes.bool,
-  // フォームをopen（表示）するか default false
-  open: React.PropTypes.bool,
+  // // フォームをopen（表示）するか default false
+  // open: React.PropTypes.bool,
   // comment 詳細 url
   url: React.PropTypes.string,
 };
 
+/**
+ * React.defaultProps
+ * @type {{userId: string, icon: string, commentId: string, replyId: string, commentCount: number, parent: boolean, independent: boolean, url: string}}
+ */
 ComponentCommentsChildList.defaultProps = {
   userId: '',
   icon: '',
@@ -145,7 +198,7 @@ ComponentCommentsChildList.defaultProps = {
   commentCount: 0,
   parent: false,
   independent: false,
-  open: false,
+  // open: false,
   url: '',
 };
 

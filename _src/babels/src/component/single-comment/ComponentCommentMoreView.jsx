@@ -9,59 +9,116 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+import { Comments } from '../../action/comment/Comments';
 
 // CommentMoreViewNode
 
 const React = self.React;
 
+/**
+ * コメント`div.comment-andmore` 「N件を表示」リンクを管理します
+ * - `click` -> Ajax request + loading
+ * - loading, ON / OFF
+ * - 表示 / 非表示
+ * @since 2017-12-05
+ */
 export default class ComponentCommentMoreView extends React.Component {
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
+  /**
+   * React.propTypes
+   * - action {Comments} - Ajax instance
+   * - show {boolean} - `action.hasNext()`
+   * - rest {number} - 残り件数, 0 以下で非表示
+   * @returns {{action: Comments, show: boolean, rest: number}}
+   * React.propTypes を返します
+   */
   static get propTypes() {
     return {
-      action: React.PropTypes.object.isRequired,
+      action: React.PropTypes.instanceOf(Comments).isRequired,
       show: React.PropTypes.bool,
       rest: React.PropTypes.number,
     };
   }
+  /**
+   * React.props
+   * - show - false
+   * - rest - 0
+   * @returns {{show: boolean, rest: number}}
+   * default React.props
+   */
   static get defaultProps() {
     return {
       show: false,
       rest: 0,
     };
   }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * コメント `div.comment-andmore` 「N件を表示」リンクを管理します
+   * @param {{ action: Comment, show: boolean, rest: number }} props React.Component props
+   */
   constructor(props) {
     super(props);
     // ---
+    /**
+     * React.state
+     * - loading {string} - loading class
+     * - show {boolean} - `action.hasNext()`
+     * - rest {number} - 残り件数, 0 以下で非表示
+     * @type {{loading: string, show: boolean, rest: number}}
+     */
     this.state = {
       loading: '',
       show: props.show,
       rest: props.rest,
     };
+    /**
+     * bind onClick - a.onclick event handler - Ajax 実行します
+     * @type {function}
+     */
     this.onClick = this.onClick.bind(this);
   }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * a.onclick event handler - Ajax 実行します
+   * @param {Event} event click event
+   */
   onClick(event) {
     event.preventDefault();
+    // loading 表示
     this.setState({ loading: 'loading' });
     this.props.action.next();
   }
+  /**
+   * delegate - props 更新時に呼び出されます,
+   * state.show, state.rest をチェックし 更新するかを決定します
+   * @param {{ show: boolean, rest: number }} nextProps 更新される props
+   */
   componentWillReceiveProps(nextProps) {
     const { show, rest } = nextProps;
     // console.log('ComponentCommentMoreView.componentWillReceiveProps', nextProps);
     const state = {
       loading: '',
     };
-    let changed = false;
     if (this.state.show !== show) {
-      changed = true;
       state.show = show;
     }
     if (this.state.rest !== rest) {
-      changed = true;
       state.rest = rest;
     }
-    if (changed) {
-      this.setState(state);
-    }
+    this.setState(state);
   }
+
+  /**
+   * `div.comment-andmore` 「N件を表示」リンクを作成します
+   * @returns {XML} `div.comment-andmore` 「N件を表示」リンク
+   */
   render() {
     const { show, rest, loading } = this.state;
     if (!show || rest === 0) {

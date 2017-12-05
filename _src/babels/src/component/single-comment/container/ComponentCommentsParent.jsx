@@ -13,12 +13,25 @@ import { Safety } from '../../../data/Safety';
 import { User } from '../../../app/User';
 import ComponentCommentsChildList from './ComponentCommentsChildList';
 import ComponentCommentsChildReply from './ComponentCommentsChildReply';
+import { CommentsDae } from '../../../dae/comments/CommentsDae';
 
 // CommentsParentDom
 
 // React
 const React = self.React;
 
+/**
+ * コメントリスト `ul.comment-list` を作成します
+ * - {@link ComponentCommentsChildList}
+ * - {@link ComponentCommentsChildReply}
+ * @param {CommentsDae} commentObject JSON コメントデータ
+ * @param {string} uniqueId 識別子
+ * @param {string} articleId 記事 ID
+ * @param {string} commentsListType コメント種別 normal / official / self
+ * @param {*} user ユーザー情報
+ * @returns {XML} `ul.comment-list` + {@link ComponentCommentsChildList}, {@link ComponentCommentsChildReply}
+ * @constructor
+ */
 const ComponentCommentsParent = ({
                                    commentObject,
                                    uniqueId,
@@ -68,8 +81,12 @@ const ComponentCommentsParent = ({
   );
 };
 
+/**
+ * React.propTypes
+ * @type {{commentObject: CommentsDae, uniqueId: string, articleId: string, commentsListType: string, user: *}}
+ */
 ComponentCommentsParent.propTypes = {
-  commentObject: React.PropTypes.object.isRequired,
+  commentObject: React.PropTypes.instanceOf(CommentsDae).isRequired,
   uniqueId: React.PropTypes.string.isRequired,
   articleId: React.PropTypes.string.isRequired,
   commentsListType: React.PropTypes.string.isRequired,

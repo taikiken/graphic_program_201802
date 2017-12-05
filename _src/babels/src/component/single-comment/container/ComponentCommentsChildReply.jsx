@@ -16,6 +16,21 @@ import { CommentNode } from '../../../node/comment/CommentNode';
 // React
 const React = self.React;
 
+/**
+ * コメント返信コンテナを出力します
+ * - {@link CommentNode}
+ * @param {number} total 返信件数
+ * @param {boolean} sign login flag
+ * @param {string} uniqueId 識別子
+ * @param {string} userId user id
+ * @param {string} icon user profile picture path
+ * @param {string} articleId 記事 ID
+ * @param {string} commentId comment ID
+ * @param {string} commentsListType comment 種別, normal / official / self
+ * @param {{comments: Array.<*>}} reply コメント返信リスト
+ * @returns {XML} `ul.comment-list` > {@link CommentNode}
+ * @constructor
+ */
 const ComponentCommentsChildReply = ({
                                        total,
                                        sign,
@@ -27,8 +42,10 @@ const ComponentCommentsChildReply = ({
                                        commentsListType,
                                        reply,
                                      }) => {
-  console.log('ComponentCommentsChildReply total', total, commentsListType, reply.comments);
+  // console.log('ComponentCommentsChildReply total', total, commentsListType, reply.comments);
   const replyList = reply.comments;
+  // data が存在しない時は出力しない
+  // total 件数入っていても配列が空の時がある
   if (!total || !replyList.length) {
     return null;
   }
@@ -64,6 +81,20 @@ const ComponentCommentsChildReply = ({
   );
 };
 
+/**
+ * React.propTypes
+ * @type {{
+ *   total: number,
+ *   sign: boolean,
+ *   uniqueId: string,
+ *   userId: string,
+ *   icon: string,
+ *   articleId: string,
+ *   commentId: string,
+ *   commentsListType: string,
+ *   reply: *
+ * }}
+ */
 ComponentCommentsChildReply.propTypes = {
   total: React.PropTypes.number.isRequired,
   sign: React.PropTypes.bool.isRequired,
