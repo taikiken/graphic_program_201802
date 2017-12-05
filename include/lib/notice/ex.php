@@ -44,7 +44,7 @@ if($q->get_dir()!=2){
 $a[] = array("textfield", "お知らせ内容", "text", "120");
 $a[] = array("textfield", "Link", "link", "120");
 //$a[] = array("textfield", "画像", "img", "120");
-$a[] = array("img", "画像", "img", "任意-任意-0-0-0-0", "", "", "");
+$a[] = array("img", "画像", "img", "780-780-0-0-0-0", "", "", "");
 include $INCLUDEPATH . "print_write.php";
 include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/categories.php";
 
