@@ -11,7 +11,7 @@
  */
 // CommentReplyChildDom
 
-import { CommentNode } from '../../node/comment/CommentNode';
+import { CommentNode } from '../../../node/comment/CommentNode';
 
 // React
 const React = self.React;
@@ -27,10 +27,11 @@ const ComponentCommentsChildReply = ({
                                        commentsListType,
                                        reply,
                                      }) => {
-  if (!total) {
+  console.log('ComponentCommentsChildReply total', total, commentsListType, reply.comments);
+  const replyList = reply.comments;
+  if (!total || !replyList.length) {
     return null;
   }
-  const replyList = reply.comments;
   return (
     <ul className="comment-list">
       {
@@ -71,7 +72,7 @@ ComponentCommentsChildReply.propTypes = {
   icon: React.PropTypes.string.isRequired,
   articleId: React.PropTypes.string.isRequired,
   commentId: React.PropTypes.string.isRequired,
-  commentsListType: React.PropTypes.object.isRequired,
+  commentsListType: React.PropTypes.string.isRequired,
   reply: React.PropTypes.object.isRequired,
 };
 

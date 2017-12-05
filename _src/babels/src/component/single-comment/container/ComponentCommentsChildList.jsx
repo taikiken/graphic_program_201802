@@ -11,16 +11,16 @@
  */
 // CommentNode
 
-import { CommentsDae } from '../../dae/comments/CommentsDae';
-import { Safety } from '../../data/Safety';
-import { Empty } from '../../app/const/Empty';
+import { CommentsDae } from '../../../dae/comments/CommentsDae';
+import { Safety } from '../../../data/Safety';
+import { Empty } from '../../../app/const/Empty';
 
 // node
-import { ReactionNode } from '../../node/comment/ReactionNode';
-import { CommentFormNode } from '../../node/comment/CommentFormNode';
-import { CommentMenuNode } from '../../node/comment/CommentMenuNode';
-import { CommentUserNode } from '../../node/comment/CommentUserNode';
-import { CommentContentNode } from '../../node/comment/CommentContentNode';
+import { ReactionNode } from '../../../node/comment/ReactionNode';
+import { CommentFormNode } from '../../../node/comment/CommentFormNode';
+import { CommentMenuNode } from '../../../node/comment/CommentMenuNode';
+import { CommentUserNode } from '../../../node/comment/CommentUserNode';
+import { CommentContentNode } from '../../../node/comment/CommentContentNode';
 
 // React
 const React = self.React;

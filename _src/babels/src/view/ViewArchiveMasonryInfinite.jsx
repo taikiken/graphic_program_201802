@@ -440,9 +440,14 @@ export class ViewArchiveMasonryInfinite extends View {
    * @param {boolean} [show=false] true の時にボタンを表示させ機能させます
    */
   moreButton(show = false) {
-    // console.log('====== moreButton ======', show, this.home, this.afterClick);
+    // console.log('====== moreButton ======', show, this.home, this.moreElement);
     // 'View More' button root element
     const moreElement = this.moreElement;
+    // @since 2017-12-05 element  check 追加
+    if (!moreElement) {
+      // console.log('ViewArchiveMasonryInfinite.moreElement no more element', this);
+      return;
+    }
     // // moreElement 存在チェックを行う
     // // Element 型を保証する
     // // moreRendered が null の時のみ instance を作成し

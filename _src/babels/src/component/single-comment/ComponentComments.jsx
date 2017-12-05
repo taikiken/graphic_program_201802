@@ -12,8 +12,10 @@
 import { Safety } from '../../data/Safety';
 import View from '../../view/View';
 import { CommentsType } from '../../app/const/CommentsType';
-import ComponentCommentsParent from './ComponentCommentsParent';
+import ComponentCommentsParent from './container/ComponentCommentsParent';
 import ComponentCommentMoreView from './ComponentCommentMoreView';
+import { CommentsListDae } from '../../dae/CommentsListDae';
+import { Comments } from '../../action/comment/Comments';
 
 // CommentsDom
 
@@ -24,19 +26,20 @@ const React = self.React;
 export default class ComponentComments extends React.Component {
   static get propTypes() {
     return {
-      commentsList: React.PropTypes.array.isRequired,
+      commentsListDae: React.PropTypes.instanceOf(CommentsListDae).isRequired,
+      // commentsList: React.PropTypes.array.isRequired,
+      // CommentsListDae.comments(CommentsDae).list - comment id list
+      commentsList: React.PropTypes.arrayOf(
+        React.PropTypes.number.isRequired
+      ).isRequired,
       commentsListType: React.PropTypes.string.isRequired,
       articleId: React.PropTypes.string.isRequired,
+      // executeSafely
       execute: React.PropTypes.func.isRequired,
-      action: React.PropTypes.func.isRequired,
+      action: React.PropTypes.instanceOf(Comments).isRequired,
       // コメントIDをキーにコメント Object
       commentsBank: React.PropTypes.object.isRequired,
-      user: React.PropTypes.object,
-    };
-  }
-  static get defaultProps() {
-    return {
-      user: null,
+      user: React.PropTypes.object.isRequired,
     };
   }
   constructor(props) {
@@ -53,13 +56,15 @@ export default class ComponentComments extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     const { commentsList } = nextProps;
+    console.log('ComponentComments.componentWillReceiveProps', nextProps.commentsList, this.state.commentsList);
     if (Safety.array(commentsList) && commentsList.length > this.state.commentsList.length) {
       this.setState({ commentsList });
     }
   }
   moreButton() {
-    // more button
     const { action } = this.props;
+    // more button
+    // console.log('ComponentComments.moreButton', action.hasNext(), action.rest());
     return (
       <ComponentCommentMoreView
         action={action}
@@ -74,8 +79,7 @@ export default class ComponentComments extends React.Component {
       return null;
     }
     const { articleId, commentsListType, user, commentsBank } = this.props;
-    const usr = user ? user : Object.create({});
-    const usrId = user ? String(Safety.integer((user.id), 0)) : '0';
+    const userId = String(Safety.integer((user.id), 0));
     return (
       <div className={`comment-${commentsListType}`}>
         <div className="comment-heading">
@@ -84,7 +88,7 @@ export default class ComponentComments extends React.Component {
         {
           commentsList.map((commentId, index) => {
             const commentObject = commentsBank[commentId];
-            const key = `${index}-${commentsListType}-${articleId}-${commentId}-${usrId}`;
+            const key = `${index}-${commentsListType}-${articleId}-${commentId}-${userId}`;
             return (
               <ComponentCommentsParent
                 key={key}
@@ -92,7 +96,7 @@ export default class ComponentComments extends React.Component {
                 uniqueId={key}
                 articleId={articleId}
                 commentsListType={commentsListType}
-                user={usr}
+                user={user}
               />
             );
           })

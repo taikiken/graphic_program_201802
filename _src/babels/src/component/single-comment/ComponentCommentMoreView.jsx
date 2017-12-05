@@ -45,7 +45,10 @@ export default class ComponentCommentMoreView extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     const { show, rest } = nextProps;
-    const state = {};
+    // console.log('ComponentCommentMoreView.componentWillReceiveProps', nextProps);
+    const state = {
+      loading: '',
+    };
     let changed = false;
     if (this.state.show !== show) {
       changed = true;

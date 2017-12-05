@@ -9,8 +9,8 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-import { Safety } from '../../data/Safety';
-import { User } from '../../app/User';
+import { Safety } from '../../../data/Safety';
+import { User } from '../../../app/User';
 import ComponentCommentsChildList from './ComponentCommentsChildList';
 import ComponentCommentsChildReply from './ComponentCommentsChildReply';
 
@@ -66,6 +66,14 @@ const ComponentCommentsParent = ({
       </li>
     </ul>
   );
+};
+
+ComponentCommentsParent.propTypes = {
+  commentObject: React.PropTypes.object.isRequired,
+  uniqueId: React.PropTypes.string.isRequired,
+  articleId: React.PropTypes.string.isRequired,
+  commentsListType: React.PropTypes.string.isRequired,
+  user: React.PropTypes.object.isRequired,
 };
 
 export default ComponentCommentsParent;
