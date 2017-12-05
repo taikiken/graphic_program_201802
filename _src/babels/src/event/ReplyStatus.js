@@ -111,6 +111,7 @@ export class ReplyStatus extends EventDispatcher {
    * @since 2016-11-05 articleId added
    */
   complete(id:string, kind:string = '', articleId = ''):void {
+    // console.log('ReplyStatus.complete', id, kind, articleId);
     this.dispatch({ type: ReplyStatus.COMPLETE, id, kind, articleId });
   }
   // ---------------------------------------------------

@@ -13,7 +13,10 @@ import { Safety } from '../../../data/Safety';
 import { User } from '../../../app/User';
 import ComponentCommentsChildList from './ComponentCommentsChildList';
 import ComponentCommentsChildReply from './ComponentCommentsChildReply';
-import { CommentsDae } from '../../../dae/comments/CommentsDae';
+// import { CommentsDae } from '../../../dae/comments/CommentsDae';
+import { PopularDae } from '../../../dae/comments/PopularDae';
+import { ReplyDae } from '../../../dae/comments/ReplyDae';
+import { UserDae } from '../../../dae/UserDae';
 
 // CommentsParentDom
 
@@ -24,11 +27,11 @@ const React = self.React;
  * コメントリスト `ul.comment-list` を作成します
  * - {@link ComponentCommentsChildList}
  * - {@link ComponentCommentsChildReply}
- * @param {CommentsDae} commentObject JSON コメントデータ
+ * @param {{comment: PopularDae, reply: ReplyDae}} commentObject JSON コメントデータ
  * @param {string} uniqueId 識別子
  * @param {string} articleId 記事 ID
  * @param {string} commentsListType コメント種別 normal / official / self
- * @param {*} user ユーザー情報
+ * @param {UserDae} user ユーザー情報
  * @returns {XML} `ul.comment-list` + {@link ComponentCommentsChildList}, {@link ComponentCommentsChildReply}
  * @constructor
  */
@@ -51,7 +54,7 @@ const ComponentCommentsParent = ({
         {/* independent, open 省略 */}
         <ComponentCommentsChildList
           uniqueId={`comment-${uniqueId}`}
-          commentDae={commentObject}
+          commentObject={commentObject}
           icon={icon}
           userId={userId}
           articleId={articleId}
@@ -83,14 +86,23 @@ const ComponentCommentsParent = ({
 
 /**
  * React.propTypes
- * @type {{commentObject: CommentsDae, uniqueId: string, articleId: string, commentsListType: string, user: *}}
+ * @type {{
+ *   commentObject: {comment: PopularDae, reply: ReplyDae},
+ *   uniqueId: string,
+ *   articleId: string,
+ *   commentsListType: string,
+ *   user: *
+ * }}
  */
 ComponentCommentsParent.propTypes = {
-  commentObject: React.PropTypes.instanceOf(CommentsDae).isRequired,
+  commentObject: React.PropTypes.shape({
+    comment: React.PropTypes.instanceOf(PopularDae).isRequired,
+    reply: React.PropTypes.instanceOf(ReplyDae).isRequired
+  }).isRequired,
   uniqueId: React.PropTypes.string.isRequired,
   articleId: React.PropTypes.string.isRequired,
   commentsListType: React.PropTypes.string.isRequired,
-  user: React.PropTypes.object.isRequired,
+  user: React.PropTypes.instanceOf(UserDae).isRequired,
 };
 
 export default ComponentCommentsParent;

@@ -54,7 +54,7 @@ const ReactDOM = self.ReactDOM;
 export class ViewComments extends View {
   /**
    * コメントスレッド表示（記事詳細）
-   * @param {number} id 記事ID :article_id
+   * @param {number} id 記事ID :article_id1
    * @param {Element} element target HTMLElement
    * @param {string} commentsType all|official|self|normal コメントリスト種類
    * @param {Object} [option={}] optional event handler
@@ -107,20 +107,21 @@ export class ViewComments extends View {
     this._user = null;
 
     // コメント投稿後の再読み込み設定
-    let status = ReplyStatus.factory();
-    let boundComplete = this.onComplete.bind(this);
+    const status = ReplyStatus.factory();
+    const boundComplete = this.onComplete.bind(this);
+    // console.log('ViewComments', id, commentsType);
     status.on(ReplyStatus.COMPLETE, boundComplete);
 
     // コメント削除後の再読み込み設定
-    let comment = CommentStatus.factory();
+    const comment = CommentStatus.factory();
     comment.on(CommentStatus.COMMENT_DELETE, boundComplete);
 
     // Good / Bad, add | delete も reload 対象にする
-    let good = Good.factory();
+    const good = Good.factory();
     good.on(CommentStatus.GOOD_ADD, boundComplete);
     good.on(CommentStatus.GOOD_DELETE, boundComplete);
 
-    let bad = Bad.factory();
+    const bad = Bad.factory();
     bad.on(CommentStatus.BAD_ADD, boundComplete);
     bad.on(CommentStatus.BAD_DELETE, boundComplete);
 
@@ -305,11 +306,13 @@ export class ViewComments extends View {
       }
     }
     this.commentsList = commentList.concat(commentsListDae.comments.list);
+    // console.log('ViewComments.render', this.articleId, this.commentsListType, this.commentsList);
     // _commentsBank へ comment.id をキーにデータをセット
     const bank = this.commentsBank;
-    commentsListDae.comments.list.forEach(function(commentId) {
-      bank[commentId] = commentsListDae.comments.bank[commentId];
-    });
+    // commentsListDae.comments.list.forEach(function(commentId) {
+    //   bank[commentId] = commentsListDae.comments.bank[commentId];
+    // });
+    commentsListDae.comments.list.map(commentId => (bank[commentId] = commentsListDae.comments.bank[commentId]));
     // 処理開始 関数振り分け いらないんじゃないか疑惑
     this.all(commentsListDae);
   }// render
@@ -629,8 +632,8 @@ export class ViewComments extends View {
    * <p>再読み込みを行うかを決める</p>
    * @param {Object} events 記事 ID を含んだ event object
    */
-  onComplete(events):void {
-    // console.log('ViewComment.onComplete', this.articleId, events);
+  onComplete(events) {
+    // console.log('ViewComment.onComplete', this.articleId, events, this.commentsListType);
     // @since 2016-11-05
     // 記事IDをチェックし同じ時のみリロードします
     // page 内に複数の記事詳細が存在するようになるため
@@ -647,7 +650,8 @@ export class ViewComments extends View {
   /**
    * 再読み込み
    */
-  reload():void {
+  reload() {
+    // console.log('ViewComment.reload', this.articleId, this.commentsListType);
     // 既存リストを空にする
     this.commentsList = [];
     // reload flag on

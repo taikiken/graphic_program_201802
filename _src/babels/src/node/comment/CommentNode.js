@@ -82,6 +82,7 @@ export let CommentNode = React.createClass( {
     };
   },
   render: function() {
+    // console.log('CommentNode.render', this.props.uniqueId);
     let commentDae = this.props.commentDae;
     let comment = commentDae.comment;
     let sign = this.props.sign;
@@ -153,7 +154,10 @@ export let CommentNode = React.createClass( {
   // componentDidMount: function() {
   //
   // },
-  // componentWillUnmount: function() {
+  // componentWillUnMount: function() {
   //
   // }
+  // componentWillReceiveProps: function(nextProps) {
+  //   console.log('CommentNode.componentWillReceiveProps', this.props.uniqueId, nextProps);
+  // },
 } );

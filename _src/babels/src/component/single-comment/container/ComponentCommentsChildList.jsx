@@ -11,7 +11,7 @@
  */
 // CommentNode
 
-import { CommentsDae } from '../../../dae/comments/CommentsDae';
+// import { CommentsDae } from '../../../dae/comments/CommentsDae';
 import { Safety } from '../../../data/Safety';
 import { Empty } from '../../../app/const/Empty';
 
@@ -21,6 +21,8 @@ import { CommentFormNode } from '../../../node/comment/CommentFormNode';
 import { CommentMenuNode } from '../../../node/comment/CommentMenuNode';
 import { CommentUserNode } from '../../../node/comment/CommentUserNode';
 import { CommentContentNode } from '../../../node/comment/CommentContentNode';
+import { ReplyDae } from '../../../dae/comments/ReplyDae';
+import { PopularDae } from '../../../dae/comments/PopularDae';
 
 // React
 const React = self.React;
@@ -40,7 +42,7 @@ const replyClass = (replyId) => (replyId ? ` comment-content-reply-${replyId}` :
  * - {@link ReactionNode}
  * - {@link CommentFormNode}
  *
- * @param {CommentsDae} commentDae JSON comment data
+ * @param {{comment: PopularDae, reply: ReplyDae}} commentObject JSON コメントデータ
  * @param {boolean} sign ログインの有無 flag
  * @param {string} uniqueId 識別のために使用します
  * @param {string} articleId コメントした記事 id
@@ -58,7 +60,7 @@ const replyClass = (replyId) => (replyId ? ` comment-content-reply-${replyId}` :
  * @constructor
  */
 const ComponentCommentsChildList = ({
-                                      commentDae,
+                                      commentObject: commentObject,
                                       sign,
                                       uniqueId,
                                       articleId,
@@ -73,7 +75,8 @@ const ComponentCommentsChildList = ({
                                       independent,
                                       url,
                                     }) => {
-  const comment = commentDae.comment;
+  // console.log('ComponentCommentsChildList commentObject', commentObject);
+  const comment = commentObject.comment;
   const picture = Safety.image(comment.user.profilePicture, Empty.USER_EMPTY);
   const loggedIn = Safety.same(picture, Empty.USER_EMPTY);
   // ---
@@ -137,7 +140,7 @@ const ComponentCommentsChildList = ({
 /**
  * React.propTypes
  * @type {{
- *   commentDae: CommentsDae,
+ *   commentObject: {comment: PopularDae, reply: ReplyDae},
  *   sign: boolean,
  *   uniqueId: string,
  *   articleId: string,
@@ -154,8 +157,10 @@ const ComponentCommentsChildList = ({
  * }}
  */
 ComponentCommentsChildList.propTypes = {
-  // CommentDae instance
-  commentDae: React.PropTypes.instanceOf(CommentsDae).isRequired,
+  commentObject: React.PropTypes.shape({
+    comment: React.PropTypes.instanceOf(PopularDae).isRequired,
+    reply: React.PropTypes.instanceOf(ReplyDae).isRequired
+  }).isRequired,
   // ログインの有無
   sign: React.PropTypes.bool.isRequired,
   // unique id（識別のために必要）

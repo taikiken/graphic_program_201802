@@ -156,7 +156,7 @@ export let CommentFormNode = React.createClass( {
   componentDidMount: function() {
 
   },
-  componentWillUnmount: function() {
+  componentWillUnMount: function() {
 
   },
   */

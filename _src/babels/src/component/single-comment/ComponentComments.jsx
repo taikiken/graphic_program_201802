@@ -109,7 +109,7 @@ export default class ComponentComments extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { commentsList } = nextProps;
     // console.log('ComponentComments.componentWillReceiveProps', nextProps.commentsList, this.state.commentsList);
-    if (Safety.array(commentsList) && commentsList.length > this.state.commentsList.length) {
+    if (Safety.array(commentsList) && commentsList.length !== this.state.commentsList.length) {
       this.setState({ commentsList });
     }
   }
@@ -137,6 +137,7 @@ export default class ComponentComments extends React.Component {
    */
   render() {
     const { commentsList } = this.state;
+    // console.log('ComponentComments.render commentsList', commentsList);
     if (!Safety.array(commentsList) || !commentsList.length) {
       return null;
     }
@@ -150,6 +151,7 @@ export default class ComponentComments extends React.Component {
         {
           commentsList.map((commentId, index) => {
             const commentObject = commentsBank[commentId];
+            // console.log('ComponentComments.render.map commentObject', commentId, commentObject);
             const key = `${index}-${commentsListType}-${articleId}-${commentId}-${userId}`;
             return (
               <ComponentCommentsParent
