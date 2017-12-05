@@ -22,6 +22,11 @@ import Nav from '../ui/Nav';
 const UT = self.UT;
 const Dom = UT.app.Dom;
 
+/**
+ * 処理終了 counter
+ * @type {number}
+ * @private
+ */
 let _prepared = 0;
 let _singleDae = null;
 let _userDae = null;
@@ -32,7 +37,7 @@ let _headerUser = null;
  * <p>Single(detail)記事詳細</p>
  * 全て static です
  */
-export class Single {
+export default class Single {
   // /**
   //  * 記事詳細 singleton class です
   //  * @param {Symbol} target Singleton を実現するための private symbol
