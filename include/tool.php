@@ -759,8 +759,9 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 	for($i=0;$i<count($imgSubstance);$i++){
 		if($type!="gif"){
 			if($imgSubstance[$i]["w"]!=""&&$imgSubstance[$i]["h"]!=""){
-				// アップロード画像の縦横サイズ判定（選手情報登録のみ）
-				if ($i == 0 && $size[0] != $size[1] && $_GET["cid"] == 94) {
+				// アップロード画像の縦横サイズ判定（選手情報登録,注目の選手のみ）
+				if ($i == 0 && $size[0] != $size[1] && $_GET["cid"] == 94 ||
+          $i == 0 && $size[0] != $size[1] && $_GET["rid"] == 95) {
 					// アップロード画像のサイズ調整
 					$size_w = 0;
 					$size_h = 0;

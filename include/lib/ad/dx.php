@@ -64,6 +64,20 @@ if ($_GET["cid"] == 94)
 	$THIS = $f["name"];
 	$PARENT = "広告設定";
 }
+if ($_GET["rid"] == 95)
+{
+	//
+	// 注目の選手
+	//
+	$sql = sprintf("select name from repo where id = %s", $_GET["nid"]);
+	$o->query($sql);
+	$f = $o->fetch_array();
+
+	$TITLE = "注目の選手";
+
+	$THIS = $f["name"];
+	$PARENT = "広告設定";
+}
 
 if($_GET["cid"]!=0){
 	$l[]=sprintf("<li class=\"root\"><a href=\"%srepo_n/%s\">%s</a></li>",$ADPATH,$QST,$TITLE);
