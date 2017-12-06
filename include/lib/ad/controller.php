@@ -168,7 +168,7 @@ function output(){
 
 	$file=sprintf("%s/static/cms.dat",$staticfilepath);
 	file_put_contents($file,serialize($r));
-	s3upload($file,sprintf("static/cms.datt",$id));
+	s3upload($file,sprintf("static/cms.dat",$id));
 
 	$file=sprintf("%s/static/media.dat",$staticfilepath);
 	file_put_contents($file,serialize($op));
