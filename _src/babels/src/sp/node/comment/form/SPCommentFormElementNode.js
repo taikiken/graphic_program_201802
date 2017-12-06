@@ -97,28 +97,26 @@ export let SPCommentFormElementNode = React.createClass( {
     };
   },
   render: function() {
-
     if ( !this.props.independent ) {
       // コメントへのコメント
-      let commentId = this.props.commentId;
-
-      if ( !commentId || commentId === '0' ) {
-        throw new Error( `need comment Id ${commentId}` );
+      const commentId = this.props.commentId;
+      if (!commentId || commentId === '0') {
+        throw new Error(`need comment Id ${commentId}`);
       }
-
     }
 
-    if ( this.state.open || this.props.independent ) {
-
+    if (this.state.open || this.props.independent) {
       // user icon
-      let picture = Safety.image( this.props.icon, Empty.USER_EMPTY );
-      let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
+      const picture = Safety.image(this.props.icon, Empty.USER_EMPTY);
+      const loggedIn = Safety.same(picture, Empty.USER_EMPTY);
 
-      let errorClass = ( keyName:string ) => {
+      // inner methods
+      // error 表示する？
+      const errorClass = ( keyName:string ) => {
         return this.errors[ keyName ].error ? 'error' : '';
       };
-
-      let message = ( keyName:string ) => {
+      // error message を表示する？
+      const message = ( keyName:string ) => {
         return this.errors[ keyName ].message;
       };
 
@@ -145,9 +143,8 @@ export let SPCommentFormElementNode = React.createClass( {
           <div className="loading-spinner">&nbsp;</div>
         </div>
       );
-    } else {
-      return null;
     }
+    return null;
   },
   // ----------------------------------------
   // delegate
@@ -168,18 +165,16 @@ export let SPCommentFormElementNode = React.createClass( {
     if (replyStatus === null) {
       replyStatus = ReplyStatus.factory();
       this.replyStatus = replyStatus;
-
       // 記事へのコメントは閉じない
-      if ( !this.props.independent ) {
+      if (!this.props.independent) {
         replyStatus.on(ReplyStatus.OPEN, this.replyOpen);
         replyStatus.on(ReplyStatus.CLOSE, this.replyClose);
         // dispose しない - reload しても mount しないから - 2017-12-05
         // replyStatus.on( ReplyStatus.COMPLETE, this.beforeReload );
       }
     }
-
+    // comment status
     let commentStatus = this.commentStatus;
-
     if (commentStatus === null) {
       if (!this.props.independent) {
         commentStatus = CommentStatus.factory();
@@ -193,8 +188,8 @@ export let SPCommentFormElementNode = React.createClass( {
   beforeReload: function() {
     if ( !this.props.independent ) {
       // 記事へのコメント以外は dispose 処理をする
-      this.dispose();
-      // this.commentDispose();
+      // this.dispose();
+      this.commentDispose();
     }
   },
   commentDispose: function() {
@@ -208,7 +203,7 @@ export let SPCommentFormElementNode = React.createClass( {
   // all event unbind
   dispose: function() {
     // event unbind
-    this.setState( {loading: '', open: false} );
+    this.setState({ loading: '', open: false });
     // let comment = this.comment;
     // if ( comment !== null ) {
     //   comment.off( Model.COMPLETE, this.done );
@@ -218,7 +213,7 @@ export let SPCommentFormElementNode = React.createClass( {
     // }
     this.commentDispose();
 
-    let replyStatus = this.replyStatus;
+    const replyStatus = this.replyStatus;
     if (replyStatus !== null) {
       replyStatus.off(ReplyStatus.OPEN, this.replyOpen);
       replyStatus.off(ReplyStatus.CLOSE, this.replyClose);
@@ -263,7 +258,6 @@ export let SPCommentFormElementNode = React.createClass( {
     event.preventDefault();
     const body = this.state.body;
     this.reset();
-
     if (body === '') {
       this.error(`${ErrorTxt.BODY_EMPTY}`);
     } else {
@@ -290,13 +284,14 @@ export let SPCommentFormElementNode = React.createClass( {
 
     this.replyStatus.start(this.props.uniqueId);
 
+    this.commentDispose();
     let comment;
     if (this.props.independent) {
       // 記事へのコメント
       comment = new ModelComment(this.props.articleId, formData);
     } else {
       // コメントへのコメント
-      comment = new ModelCommentReply(this.props.articleId, this.props.commentId, formData );
+      comment = new ModelCommentReply(this.props.articleId, this.props.commentId, formData);
     }
 
     this.comment = comment;
@@ -317,10 +312,10 @@ export let SPCommentFormElementNode = React.createClass( {
     // GA 計測タグ
     if (this.props.independent) {
       // 記事へのコメント
-      Ga.add( new GaData('SPCommentFormElementNode.done', 'comment', 'post', Loc.current, parseFloat(this.props.articleId)) );
+      Ga.add(new GaData('SPCommentFormElementNode.done', 'comment', 'post', Loc.current, parseFloat(this.props.articleId)));
     } else {
       // コメントへのコメント
-      Ga.add( new GaData('SPCommentFormElementNode.done', 'comment', 'post - reply', this.props.url, parseFloat(this.props.commentId)) );
+      Ga.add(new GaData('SPCommentFormElementNode.done', 'comment', 'post - reply', this.props.url, parseFloat(this.props.commentId)));
     }
     // ----------------------------------------------
     // this.dispose();

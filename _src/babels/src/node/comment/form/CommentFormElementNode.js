@@ -177,8 +177,8 @@ export let CommentFormElementNode = React.createClass( {
       this.replyStatus = replyStatus;
       // 記事へのコメントは閉じない
       if (!this.props.independent) {
-        replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
-        replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
+        replyStatus.on(ReplyStatus.OPEN, this.replyOpen);
+        replyStatus.on(ReplyStatus.CLOSE, this.replyClose);
         // dispose しない - reload しても mount しないから - 2017-12-05
         // replyStatus.on( ReplyStatus.COMPLETE, this.beforeReload );
       }
@@ -225,8 +225,8 @@ export let CommentFormElementNode = React.createClass( {
 
     const replyStatus = this.replyStatus;
     if (replyStatus !== null) {
-      replyStatus.off( ReplyStatus.OPEN, this.replyOpen);
-      replyStatus.off( ReplyStatus.CLOSE, this.replyClose);
+      replyStatus.off(ReplyStatus.OPEN, this.replyOpen);
+      replyStatus.off(ReplyStatus.CLOSE, this.replyClose);
       // dispose しない - reload しても mount しないから - 2017-12-05
       // replyStatus.off( ReplyStatus.COMPLETE, this.beforeReload );
     }
@@ -289,7 +289,7 @@ export let CommentFormElementNode = React.createClass( {
   sending: function() {
     this.setState({ loading: 'loading' });
     const formNode = ReactDOM.findDOMNode(this.refs.form);
-    const formData = Form.element( formNode );
+    const formData = Form.element(formNode);
 
     this.replyStatus.start(this.props.uniqueId);
 
@@ -320,10 +320,10 @@ export let CommentFormElementNode = React.createClass( {
     // GA 計測タグ
     if (this.props.independent) {
       // 記事へのコメント
-      Ga.add( new GaData('CommentFormElementNode.done', 'comment', 'post', Loc.current, parseFloat(this.props.articleId)) );
+      Ga.add(new GaData('CommentFormElementNode.done', 'comment', 'post', Loc.current, parseFloat(this.props.articleId)));
     } else {
       // コメントへのコメント
-      Ga.add( new GaData('CommentFormElementNode.done', 'comment', 'post - reply', this.props.url, parseFloat(this.props.commentId)) );
+      Ga.add(new GaData('CommentFormElementNode.done', 'comment', 'post - reply', this.props.url, parseFloat(this.props.commentId)));
     }
     // ----------------------------------------------
     // this.dispose();
