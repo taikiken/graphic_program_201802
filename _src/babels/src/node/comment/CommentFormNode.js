@@ -21,6 +21,7 @@ let React = self.React;
 /**
  * <p>comment form を表示するための基点 class</p>
  * @type {ReactClass}
+ * @deprecated 2017-12-06 istead use ComponentCommentForm
  */
 export let CommentFormNode = React.createClass( {
   propTypes: {
