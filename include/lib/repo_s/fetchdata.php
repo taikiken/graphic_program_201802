@@ -4,7 +4,7 @@
       <td><?php if (strlen($DIRECTORY1) > 0) { ?><a href="<?= rewrite($DIRECTORY1, $p[$i]) ?>" target="_blank"><img
             src="/shared/cms/img/icon_browser<?= ($p[$i]["expire"] == 1) ? "" : "_" ?>.gif"
             alt="<?= mod_HTML($p[$i]["name"]) ?>ページをブラウザでプレビューする" width="16" height="16"></a><?php } ?>
-        <a href="<?= ($p[$i]["c_flag"] != 1) ? sprintf("%srepo_n/?cid=%s&rid=%s", $ADPATH, $p[$i]["id"], $PARAM["rid"]) : sprintf("?cid=%s&rid=%s", $PARAM["rid"], $p[$i]["id"]) ?>" class="folder"><?= mod_HTML($p[$i]["name"]) ?></a>
+        <a href="<?= ($p[$i]["c_flag"] != 1) ? sprintf("%srepo_n/?cid=%s&rid=%s", $ADPATH, $p[$i]["id"], $PARAM["rid"]) : sprintf("?cid=%s&rid=%s", $PARAM["rid"], $p[$i]["id"]) ?>" class="folder"><?= mod_HTML($p[$i]["name"]) ?> (<?php echo isset($p[$i]["category"]) ? $p[$i]["disp_category"] : 'カテゴリー未設定' ?>)</a>
       </td>
       <td width="75">
         <a href="../ad/?nid=<?= $p[$i]["id"] ?>&<?= $g->g_url() ?>" class=" toe">

@@ -186,7 +186,21 @@ elseif ($TABLE == "tbl_player")
 {
 	// 選手一覧
 	$sql = sprintf("SELECT %s FROM %s%s%s%s ORDER BY %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, $orderby, dblm($no, $offset));
-}else{
+}
+elseif ($CURRENTDIRECTORY == "repo_s" && $_GET["rid"] == 95 && $q->get_dir() == 3) // 注目の選手一覧
+{
+  $sql = <<<SQL
+SELECT 
+    repo.*, u_categories.name AS disp_category 
+FROM 
+    repo LEFT JOIN u_categories ON repo.category = u_categories.id
+WHERE
+    rid = 95
+ORDER BY n
+SQL;
+
+}
+else{
 	$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
 }
 
