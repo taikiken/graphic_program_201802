@@ -523,7 +523,27 @@ class ViewModel {
 
   }
 
+
   /**
+   * 与えられた条件で選手を取得する
+   * @param int $category_id tbl_player.category
+   * @param int $player_id   tbl_player.id
+   */
+  public function get_players($category_id = null, $player_id = null) {
+    return $this->db->get_players($category_id, $player_id);
+  }
+
+  /**
+   * 与えられた条件で注目の選手を取得する
+   * @param string $category_slug tbl_player.category
+   * @param int $player_id     tbl_player.id
+   * @return array
+   */
+  public function get_pickup_players($category_id = null, $player_id = null, $is_unique = true) {
+    return $this->db->get_pickup_players($category_id, $player_id, $is_unique);
+  }
+
+/**
    * プレスリリース一覧
    * @return array
    */

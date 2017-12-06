@@ -319,6 +319,48 @@ END_DOC;
 
   }
 
+  /**
+   * 与えられた条件で選手を取得する
+   * @param int $category_id tbl_player.category
+   * @param int $player_id   tbl_player.id
+   */
+  public function get_players($category_id = null, $player_id = null) {
+    $sql = 'SELECT * FROM tbl_player WHERE flag = 1';
+    if($player_id !== null){
+      $sql .= " AND id = {$player_id}";
+    }
+    if($category_id !== null){
+      $sql .= " AND category = {$category_id}";
+    }
+    $sql .= " ORDER BY n";
+
+    $this->query($sql);
+    return $this->fetch_all();
+  }
+
+  /**
+   * 与えられた条件で注目の選手を取得する
+   * @param int $category_id   tbl_player.category
+   * @param int $player_id     tbl_player.id
+   * @param boolean $is_unique 重複する選手を削除するかどうか（どのヘッドラインに属する選手が返るかは不明）
+   * @return array
+   */
+  public function get_pickup_players($category_id = null, $player_id = null) {
+    $sql = "SELECT p.*, MAX(h.n) AS max_h_n FROM repo r"
+            . " LEFT JOIN u_headline h ON r.id = h.cid"
+            . " LEFT JOIN tbl_player p ON h.d2 = p.id"
+            . " WHERE r.rid = 95 AND r.flag = 1 AND h.flag = 1 AND p.flag = 1";
+    if($player_id !== null){
+      $sql .= " AND p.id = {$player_id}";
+    }
+    if($category_id !== null){
+      $sql .= " AND r.category = '{$category_id}'";
+    }
+    $sql .= " GROUP BY p.id ORDER BY max_h_n";
+
+    $this->query($sql);
+    return $this->fetch_all();
+  }
 
   /**
    * プレスリリース一覧
