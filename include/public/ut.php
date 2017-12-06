@@ -702,14 +702,18 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	//地域タブ
 	//地域タブのラベル置き換えのためにAPIに地域情報を追加
 	$s["another_categories"]["area"]=array();
-	if(strlen($f["region"])>0){
-		$s["another_categories"]["area"][0]["region"]=$f["region"];
-		if(strlen($f["pref"])>0){
-			$s["another_categories"]["area"][0]["pref"][]=$f["pref"];
-		}else{
-			$s["another_categories"]["area"][0]["pref"]=array();
-		}
-	}
+
+if ($s["categories"][0]["slug"] != 'dance') // hotfix ダンスのみ地域非表示対応
+{
+  if (strlen($f["region"]) > 0) {
+    $s["another_categories"]["area"][0]["region"] = $f["region"];
+    if (strlen($f["pref"]) > 0) {
+      $s["another_categories"]["area"][0]["pref"][] = $f["pref"];
+    } else {
+      $s["another_categories"]["area"][0]["pref"] = array();
+    }
+  }
+}
 	if($s["user"]["id"]==61){
 		//ノアドットの記事の場合は媒体名に変更
 		//IDはノアドットをそのまま継承
