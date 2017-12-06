@@ -25,6 +25,7 @@ import { CommentFormNode } from '../../../node/comment/CommentFormNode';
 import { CommentMenuNode } from '../../../node/comment/CommentMenuNode';
 import { CommentUserNode } from '../../../node/comment/CommentUserNode';
 import { CommentContentNode } from '../../../node/comment/CommentContentNode';
+import ComponentCommentForm from '../form/ComponentCommentForm';
 
 // React
 const React = self.React;
@@ -123,7 +124,22 @@ const ComponentCommentsChildList = ({
         isBad={comment.isBad}
         url={url}
       />
+      {/*
+      2017-12-06
       <CommentFormNode
+        uniqueId={uniqueId}
+        icon={icon}
+        articleId={articleId}
+        commentId={commentId}
+        commentCount={commentCount}
+        sign={sign}
+        parent={parent}
+        independent={independent}
+        commentType={commentsListType}
+        url={url}
+      />
+      */}
+      <ComponentCommentForm
         uniqueId={uniqueId}
         icon={icon}
         articleId={articleId}
