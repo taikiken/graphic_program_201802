@@ -1,7 +1,17 @@
+import { User } from '../../../../app/User';
+import { PopularDae } from '../../../../dae/comments/PopularDae';
+import { ReplyDae } from '../../../../dae/comments/ReplyDae';
+import { UserDae } from '../../../../dae/UserDae';
+import { Safety } from '../../../../data/Safety';
+
+// component
+import SPComponentCommentsChildList from './SPComponentCommentsChildList';
+import SPComponentCommentsChildReply from './SPComponentCommentsChildReply';
+
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/12/04 - 20:07
+ * @date 2017/12/06 - 13:26
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -10,20 +20,6 @@
  *
  */
 // CommentsParentDom
-
-import { Safety } from '../../../data/Safety';
-import { User } from '../../../app/User';
-
-// component
-import ComponentCommentsChildList from './ComponentCommentsChildList';
-import ComponentCommentsChildReply from './ComponentCommentsChildReply';
-
-// dae
-// import { CommentsDae } from '../../../dae/comments/CommentsDae';
-import { PopularDae } from '../../../dae/comments/PopularDae';
-import { ReplyDae } from '../../../dae/comments/ReplyDae';
-import { UserDae } from '../../../dae/UserDae';
-
 
 // React
 const React = self.React;
@@ -40,7 +36,7 @@ const React = self.React;
  * @returns {XML} `ul.comment-list` + {@link ComponentCommentsChildList}, {@link ComponentCommentsChildReply}
  * @constructor
  */
-const ComponentCommentsParent = ({
+const SPComponentCommentsParent = ({
                                    commentObject,
                                    uniqueId,
                                    articleId,
@@ -57,7 +53,7 @@ const ComponentCommentsParent = ({
     <ul className={'comment-list'}>
       <li className="comment-item">
         {/* independent, open 省略 */}
-        <ComponentCommentsChildList
+        <SPComponentCommentsChildList
           uniqueId={`comment-${uniqueId}`}
           commentObject={commentObject}
           icon={icon}
@@ -73,7 +69,7 @@ const ComponentCommentsParent = ({
         />
         {/* comment reply */}
         {/* unique を確保するため comment type を追加 2016-04-27 */}
-        <ComponentCommentsChildReply
+        <SPComponentCommentsChildReply
           uniqueId={`reply-${commentsListType}-${uniqueId}`}
           total={replyTotal}
           sign={sign}
@@ -99,7 +95,7 @@ const ComponentCommentsParent = ({
  *   user: *
  * }}
  */
-ComponentCommentsParent.propTypes = {
+SPComponentCommentsParent.propTypes = {
   commentObject: React.PropTypes.shape({
     comment: React.PropTypes.instanceOf(PopularDae).isRequired,
     reply: React.PropTypes.instanceOf(ReplyDae).isRequired
@@ -110,4 +106,4 @@ ComponentCommentsParent.propTypes = {
   user: React.PropTypes.instanceOf(UserDae).isRequired,
 };
 
-export default ComponentCommentsParent;
+export default SPComponentCommentsParent;

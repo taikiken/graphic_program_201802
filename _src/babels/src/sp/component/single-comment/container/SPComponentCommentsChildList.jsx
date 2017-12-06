@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/12/04 - 20:09
+ * @date 2017/12/06 - 12:12
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -9,22 +9,21 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-// CommentNode
+// SPCommentNode
 
-// import { CommentsDae } from '../../../dae/comments/CommentsDae';
-import { Safety } from '../../../data/Safety';
-import { Empty } from '../../../app/const/Empty';
-
-// dae
-import { ReplyDae } from '../../../dae/comments/ReplyDae';
-import { PopularDae } from '../../../dae/comments/PopularDae';
+import { PopularDae } from '../../../../dae/comments/PopularDae';
+import { ReplyDae } from '../../../../dae/comments/ReplyDae';
+import { Empty } from '../../../../app/const/Empty';
+import { Safety } from '../../../../data/Safety';
 
 // node
-import { ReactionNode } from '../../../node/comment/ReactionNode';
-import { CommentFormNode } from '../../../node/comment/CommentFormNode';
-import { CommentMenuNode } from '../../../node/comment/CommentMenuNode';
-import { CommentUserNode } from '../../../node/comment/CommentUserNode';
-import { CommentContentNode } from '../../../node/comment/CommentContentNode';
+import { ReactionNode } from '../../../../node/comment/ReactionNode';
+import { CommentMenuNode } from '../../../../node/comment/CommentMenuNode';
+import { CommentUserNode } from '../../../../node/comment/CommentUserNode';
+import { CommentContentNode } from '../../../../node/comment/CommentContentNode';
+
+// sp/node/comment
+import { SPCommentFormNode } from '../../../node/comment/SPCommentFormNode';
 
 // React
 const React = self.React;
@@ -61,7 +60,7 @@ const replyClass = (replyId) => (replyId ? ` comment-content-reply-${replyId}` :
  * @returns {XML} `div.comment-item-inner.comment-root` コメントコンテナを返します
  * @constructor
  */
-const ComponentCommentsChildList = ({
+const SPComponentCommentsChildList = ({
                                       commentObject: commentObject,
                                       sign,
                                       uniqueId,
@@ -77,7 +76,7 @@ const ComponentCommentsChildList = ({
                                       independent,
                                       url,
                                     }) => {
-  // console.log('ComponentCommentsChildList commentObject', commentObject);
+  // console.log('SPComponentCommentsChildList commentObject', commentsListType, commentObject);
   const comment = commentObject.comment;
   const picture = Safety.image(comment.user.profilePicture, Empty.USER_EMPTY);
   const loggedIn = Safety.same(picture, Empty.USER_EMPTY);
@@ -123,8 +122,8 @@ const ComponentCommentsChildList = ({
         isBad={comment.isBad}
         url={url}
       />
-      <CommentFormNode
-        uniqueId={uniqueId}
+      <SPCommentFormNode
+        uniqueId={`${uniqueId}-form`}
         icon={icon}
         articleId={articleId}
         commentId={commentId}
@@ -158,7 +157,7 @@ const ComponentCommentsChildList = ({
  *   url: string
  * }}
  */
-ComponentCommentsChildList.propTypes = {
+SPComponentCommentsChildList.propTypes = {
   commentObject: React.PropTypes.shape({
     comment: React.PropTypes.instanceOf(PopularDae).isRequired,
     reply: React.PropTypes.instanceOf(ReplyDae).isRequired
@@ -197,7 +196,7 @@ ComponentCommentsChildList.propTypes = {
  * React.defaultProps
  * @type {{userId: string, icon: string, commentId: string, replyId: string, commentCount: number, parent: boolean, independent: boolean, url: string}}
  */
-ComponentCommentsChildList.defaultProps = {
+SPComponentCommentsChildList.defaultProps = {
   userId: '',
   icon: '',
   commentId: '',
@@ -209,4 +208,4 @@ ComponentCommentsChildList.defaultProps = {
   url: '',
 };
 
-export default ComponentCommentsChildList;
+export default SPComponentCommentsChildList;

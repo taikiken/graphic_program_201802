@@ -198,7 +198,8 @@ export let CommentFormElementNode = React.createClass( {
   beforeReload: function() {
     if ( !this.props.independent ) {
       // 記事へのコメント以外は dispose 処理をする
-      this.dispose();
+      // this.dispose();
+      this.commentDispose();
     }
   },
   commentDispose: function() {
@@ -268,7 +269,7 @@ export let CommentFormElementNode = React.createClass( {
     const body = this.state.body;
     this.reset();
     if (body === '') {
-      this.error( `${ErrorTxt.BODY_EMPTY}`);
+      this.error(`${ErrorTxt.BODY_EMPTY}`);
     } else {
       // submit sequence
       this.sending();
@@ -290,7 +291,7 @@ export let CommentFormElementNode = React.createClass( {
     const formNode = ReactDOM.findDOMNode(this.refs.form);
     const formData = Form.element( formNode );
 
-    this.replyStatus.start( this.props.uniqueId );
+    this.replyStatus.start(this.props.uniqueId);
 
     this.commentDispose();
     let comment;

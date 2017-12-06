@@ -152,10 +152,8 @@ export let SPCommentFormElementNode = React.createClass( {
   // ----------------------------------------
   // delegate
   componentDidMount: function() {
-
     this.mounted = true;
     this.listen();
-
   },
   // componentDidUpdate: function() {
   // },
@@ -167,30 +165,26 @@ export let SPCommentFormElementNode = React.createClass( {
   listen: function() {
     let replyStatus = this.replyStatus;
     // console.log( '+++++++++++ listen ', this.props.uniqueId, replyStatus );
-
-    if ( replyStatus === null ) {
-
+    if (replyStatus === null) {
       replyStatus = ReplyStatus.factory();
       this.replyStatus = replyStatus;
 
       // 記事へのコメントは閉じない
       if ( !this.props.independent ) {
-
-        replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
-        replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
-        replyStatus.on( ReplyStatus.COMPLETE, this.beforeReload );
-
+        replyStatus.on(ReplyStatus.OPEN, this.replyOpen);
+        replyStatus.on(ReplyStatus.CLOSE, this.replyClose);
+        // dispose しない - reload しても mount しないから - 2017-12-05
+        // replyStatus.on( ReplyStatus.COMPLETE, this.beforeReload );
       }
-
     }
 
     let commentStatus = this.commentStatus;
 
-    if ( commentStatus === null ) {
-      if ( !this.props.independent ) {
+    if (commentStatus === null) {
+      if (!this.props.independent) {
         commentStatus = CommentStatus.factory();
         this.commentStatus = commentStatus;
-        commentStatus.on( CommentStatus.COMMENT_DELETE, this.beforeReload );
+        commentStatus.on(CommentStatus.COMMENT_DELETE, this.beforeReload);
       }
     }
   },
@@ -200,106 +194,115 @@ export let SPCommentFormElementNode = React.createClass( {
     if ( !this.props.independent ) {
       // 記事へのコメント以外は dispose 処理をする
       this.dispose();
+      // this.commentDispose();
+    }
+  },
+  commentDispose: function() {
+    const comment = this.comment;
+    if (comment) {
+      comment.off(Model.COMPLETE, this.done);
+      comment.off(Model.UNDEFINED_ERROR, this.fail);
+      comment.off(Model.RESPONSE_ERROR, this.fail);
     }
   },
   // all event unbind
   dispose: function() {
     // event unbind
     this.setState( {loading: '', open: false} );
-    let comment = this.comment;
-    if ( comment !== null ) {
-      comment.off( Model.COMPLETE, this.done );
-      comment.off( Model.UNDEFINED_ERROR, this.fail );
-      comment.off( Model.RESPONSE_ERROR, this.fail );
-      // this.comment = null;
-    }
+    // let comment = this.comment;
+    // if ( comment !== null ) {
+    //   comment.off( Model.COMPLETE, this.done );
+    //   comment.off( Model.UNDEFINED_ERROR, this.fail );
+    //   comment.off( Model.RESPONSE_ERROR, this.fail );
+    //   // this.comment = null;
+    // }
+    this.commentDispose();
 
     let replyStatus = this.replyStatus;
-    if ( replyStatus !== null ) {
-      replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
-      replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
-      replyStatus.off( ReplyStatus.COMPLETE, this.beforeReload );
+    if (replyStatus !== null) {
+      replyStatus.off(ReplyStatus.OPEN, this.replyOpen);
+      replyStatus.off(ReplyStatus.CLOSE, this.replyClose);
+      // dispose しない - reload しても mount しないから - 2017-12-05
+      // replyStatus.off(ReplyStatus.COMPLETE, this.beforeReload);
       // this.replyStatus = null;
     }
 
-    let commentStatus = this.commentStatus;
-    if ( commentStatus !== null ) {
-      commentStatus.off( CommentStatus.COMMENT_DELETE, this.beforeReload );
+    const commentStatus = this.commentStatus;
+    if (commentStatus !== null) {
+      commentStatus.off(CommentStatus.COMMENT_DELETE, this.beforeReload);
     }
   },
   // ----------------------------------------
-  checkId: function( event ) {
+  checkId: function(event) {
     return this.props.uniqueId === event.id;
   },
   // ----------------------------------------
   // listener
-  replyOpen: function( event ) {
+  replyOpen: function(event) {
     // let uniqueId = this.props.uniqueId;
-    if ( this.mounted && !this.state.open && this.checkId( event ) ) {
+    if (this.mounted && !this.state.open && this.checkId(event)) {
       // console.log( '*** replyOpen *** ', this.props.uniqueId, this.mounted );
-      this.setState( { open: true } );
+      this.setState({ open: true });
     }
   },
-  replyClose: function( event ) {
+  replyClose: function(event) {
     // let uniqueId = this.props.uniqueId;
-    if ( this.mounted && this.state.open && this.checkId( event ) ) {
+    if (this.mounted && this.state.open && this.checkId(event)) {
       // console.log( '*** replyClose *** ', this.props.uniqueId, this.mounted );
-      this.setState( { open: false } );
+      this.setState({ open: false });
     }
   },
   // ----------------------------------------
   // form
-
   // コメント本文入力 onChance event handler
-  onBodyChange: function( event ) {
-    this.setState( {body: event.target.value} );
+  onBodyChange: function(event) {
+    this.setState({ body: event.target.value });
   },
   // submit button click event handler
-  onSubmit: function( event ) {
+  onSubmit: function(event) {
     event.preventDefault();
-
-    var body = this.state.body;
+    const body = this.state.body;
     this.reset();
 
-    if ( body === '' ) {
-      this.error( `${ErrorTxt.BODY_EMPTY}` );
+    if (body === '') {
+      this.error(`${ErrorTxt.BODY_EMPTY}`);
     } else {
       // submit sequence
       this.sending();
     }
   },
   // show error
-  error: function( message:string ) {
+  error: function(message) {
     this.errors.body.message = message;
-    this.setState( { error: true } );
+    this.setState({ error: true });
   },
   // error を非表示にし error state を false にする
   reset: function() {
     this.errors.body.reset();
-    this.setState( { error: false } );
+    this.setState({ error: false });
   },
   // ajax start
   sending: function() {
-    this.setState( {loading: 'loading'} );
-    let formNode = ReactDOM.findDOMNode(this.refs.form);
-    let formData = Form.element( formNode );
+    this.setState({ loading: 'loading' });
+    const formNode = ReactDOM.findDOMNode(this.refs.form);
+    const formData = Form.element(formNode);
     // console.log( 'sending ===============', this.props.articleId, formNode, formData );
 
-    this.replyStatus.start( this.props.uniqueId );
+    this.replyStatus.start(this.props.uniqueId);
 
     let comment;
-    if ( this.props.independent ) {
+    if (this.props.independent) {
       // 記事へのコメント
-      comment = new ModelComment( this.props.articleId, formData );
+      comment = new ModelComment(this.props.articleId, formData);
     } else {
       // コメントへのコメント
-      comment = new ModelCommentReply( this.props.articleId, this.props.commentId, formData );
+      comment = new ModelCommentReply(this.props.articleId, this.props.commentId, formData );
     }
 
     this.comment = comment;
-    comment.on( Model.COMPLETE, this.done );
-    comment.on( Model.UNDEFINED_ERROR, this.fail );
-    comment.on( Model.RESPONSE_ERROR, this.fail );
+    comment.on(Model.COMPLETE, this.done);
+    comment.on(Model.UNDEFINED_ERROR, this.fail);
+    comment.on(Model.RESPONSE_ERROR, this.fail);
     comment.start();
   },
   // コメント送信成功
@@ -309,7 +312,7 @@ export let SPCommentFormElementNode = React.createClass( {
     // console.log( 'done', event );
     // @since 2016-11-05, articleId added
     this.replyStatus.complete(this.props.uniqueId, this.props.commentType, this.props.articleId);
-    this.setState( { body: '' } );
+    // this.setState( { body: '' } );
     // ----------------------------------------------
     // GA 計測タグ
     if (this.props.independent) {
@@ -320,7 +323,10 @@ export let SPCommentFormElementNode = React.createClass( {
       Ga.add( new GaData('SPCommentFormElementNode.done', 'comment', 'post - reply', this.props.url, parseFloat(this.props.commentId)) );
     }
     // ----------------------------------------------
-    this.dispose();
+    // this.dispose();
+    // dispose しない - reload しても mount しないから - 2017-12-05
+    this.commentDispose();
+    this.setState({ loading: '', open: false, body: '' });
   },
   // コメント送信失敗
   //
@@ -328,6 +334,9 @@ export let SPCommentFormElementNode = React.createClass( {
     // let error = event.args[ 0 ];
     // console.log( 'fail', error.message, error.result.status );
     // this.replyStatus.complete( this.props.uniqueId );
-    this.dispose();
+    // this.dispose();
+    // dispose しない - reload しても mount しないから - 2017-12-05
+    this.commentDispose();
+    this.setState({ loading: '', open: false });
   }
 } );

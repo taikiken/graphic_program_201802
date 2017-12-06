@@ -64,7 +64,7 @@ import {ViewSingleTitle} from './view/single/ViewSingleTitle';
 import {ViewSingleVisual} from './view/single/ViewSingleVisual';
 
 // comment
-import {ViewComments} from './view/ViewComments';
+import ViewComments from './view/ViewComments';
 import {ViewCommentForm} from './view/comment/ViewCommentForm';
 
 // home
@@ -154,7 +154,7 @@ import {SPViewSingleRanking} from './sp/view/single/SPViewSingleRanking';
 import {SPViewSingleRecommend} from './sp/view/single/SPViewSingleRecommend';
 
 // single/comment
-import {SPViewComments} from './sp/view/SPViewComments';
+import SPViewComments from './sp/view/SPViewComments';
 import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 
 // singles-option

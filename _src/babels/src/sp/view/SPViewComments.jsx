@@ -11,37 +11,27 @@
  */
 
 
-// app
-// import {CommentsType} from '../app/const/CommentsType';
-import {Message} from '../app/const/Message';
-import {User} from '../app/User';
+// // app
+// import {CommentsType} from '../../app/const/CommentsType';
+// import {User} from '../../app/User';
 
 // view
-import View from './View';
-import {ViewError} from './error/ViewError';
+// import View from '../../view/View';
+import ViewComments from '../../view/ViewComments';
 
-// action
-import {Comments} from '../action/comment/Comments';
+// // data
+// import {Safety} from '../../data/Safety';
 
-// data
-// import {Result} from '../data/Result';
-import {Safety} from '../data/Safety';
+// // dae
+// import {CommentsListDae} from '../../dae/CommentsListDae';
 
-// dae
-import {CommentsListDae} from '../dae/CommentsListDae';
-// import {UserDae} from '../dae/UserDae';
-// import {ArticleDae} from '../dae/ArticleDae';
+// // node
+// import {CommentMoreViewNode} from '../../node/comment/CommentMoreViewNode';
+// import {SPCommentAdNode} from '../node/ad/SPCommentAdNode';
 
-// node
-// import {CommentNode} from '../node/comment/CommentNode';
-// import {CommentMoreViewNode} from '../node/comment/CommentMoreViewNode';
-
-// event
-import {ReplyStatus} from '../event/ReplyStatus';
-import {CommentStatus} from '../event/CommentStatus';
-import {Good} from '../event/comment/Good';
-import {Bad} from '../event/comment/Bad';
-import ComponentComments from '../component/single-comment/ComponentComments';
+// sp/node
+// import {SPCommentNode} from '../node/comment/SPCommentNode';
+import SPComponentComments from '../component/single-comment/SPComponentComments';
 
 // React
 // eslint-disable-next-line no-unused-vars
@@ -49,88 +39,22 @@ const React = self.React;
 const ReactDOM = self.ReactDOM;
 
 /**
- * comments スレッド を表示する
+ * SP, comments スレッド を表示する
+ * - {@lnk SPComponentComments}
+ *   - {@link SPComponentCommentsParent}
+ *     - {@link SPComponentCommentsChildList}
+ *     - {@link SPComponentCommentsChildReply}
  */
-export default class ViewComments extends View {
+export default class SPViewComments extends ViewComments {
   /**
    * コメントスレッド表示（記事詳細）
-   * @param {number} id 記事ID :article_id1
+   * @param {number} id 記事ID :article_id
    * @param {Element} element target HTMLElement
    * @param {string} commentsType all|official|self|normal コメントリスト種類
    * @param {Object} [option={}] optional event handler
    */
   constructor(id, element, commentsType, option = {}) {
-    option = Safety.object(option);
-
-    super(element, option);
-    /**
-     * Action instance を設定します
-     * @override
-     * @type {Comments}
-     */
-    this.action = Comments.type(commentsType, id, this.done.bind(this), this.fail.bind(this));
-    /**
-     * 記事ID
-     * @type {number}
-     * @protected
-     */
-    this._articleId = id;
-    /**
-     * コメントタイプ, all|official|self|normal
-     * @type {string}
-     * @protected
-     */
-    this._commentsListType = commentsType;
-    /**
-     * 取得記事(articles)をArticleDae instance 配列として保存する
-     * @type {Array<ArticleDae>}
-     * @protected
-     */
-    this._commentsList = [];
-    /**
-     * コメントIDをキーにコメント Object を保存します
-     * @type {{}}
-     * @protected
-     */
-    this._commentsBank = {};
-    /**
-     * more button instance 用
-     * @type {null|Object}
-     * @protected
-     */
-    this._moreRendered = null;
-    /**
-     * user 情報
-     * @type {null|UserDae}
-     * @protected
-     */
-    this._user = null;
-
-    // コメント投稿後の再読み込み設定
-    const status = ReplyStatus.factory();
-    const boundComplete = this.onComplete.bind(this);
-    // console.log('ViewComments', id, commentsType);
-    status.on(ReplyStatus.COMPLETE, boundComplete);
-
-    // コメント削除後の再読み込み設定
-    const comment = CommentStatus.factory();
-    comment.on(CommentStatus.COMMENT_DELETE, boundComplete);
-
-    // Good / Bad, add | delete も reload 対象にする
-    const good = Good.factory();
-    good.on(CommentStatus.GOOD_ADD, boundComplete);
-    good.on(CommentStatus.GOOD_DELETE, boundComplete);
-
-    const bad = Bad.factory();
-    bad.on(CommentStatus.BAD_ADD, boundComplete);
-    bad.on(CommentStatus.BAD_DELETE, boundComplete);
-
-    /**
-     * リロードフラッグ
-     * @type {boolean}
-     * @protected
-     */
-    this._reloadFlag = false;
+    super(id, element, commentsType, option);
     /**
      * bind 済み executeSafely
      * @type {function}
@@ -138,192 +62,19 @@ export default class ViewComments extends View {
      */
     this.boundSafely = this.executeSafely.bind(this);
   }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * ログイン user 情報
-   * @return {UserDae} ログイン user 情報を返します
-   */
-  get user() {
-    return this._user;
-  }
-  /**
-   * ログイン user 情報を設定します<br>
-   * start の前に設定します
-   * @param {UserDae} user ログイン user 情報
-   */
-  set user(user) {
-    this._user = user;
-  }
-  /**
-   * 記事IDを取得します
-   * @return {number} 記事IDを返します
-   */
-  get articleId() {
-    return this._articleId;
-  }
-  /**
-   * 記事IDを設定します
-   * @param {number} id 記事ID
-   */
-  set articleId(id) {
-    this._articleId = id;
-  }
-  /**
-   * コメントタイプ, all|official|self|normal を取得します
-   * @return {string} コメントタイプ, all|official|self|normal を返します
-   */
-  get commentsListType() {
-    return this._commentsListType;
-  }
-  /**
-   * コメントタイプ, all|official|self|normal を設定します
-   * @param {string} type コメントタイプ, all|official|self|normal
-   */
-  set commentsListType(type) {
-    this._commentsListType = type;
-  }
-  /**
-   * コメントIDをキーにコメント Object を取得します
-   * @return {Object} コメントIDをキーにコメント Object を返します
-   */
-  get commentsBank() {
-    return this._commentsBank;
-  }
-  /**
-   * コメントIDをキーにコメント Object を設定します
-   * @param {Object} bank コメントIDをキーにコメント Object
-   */
-  set commentsBank(bank) {
-    this._commentsBank = bank;
-  }
-  /**
-   * more button instance
-   * @return {null|Object} more button instance を返します
-   */
-  get moreRendered() {
-    return this._moreRendered;
-  }
-  /**
-   * more button instance を設定します
-   * @param {null|Object} more button instance
-   */
-  set moreRendered(more) {
-    this._moreRendered = more;
-  }
-  /**
-   * リロードフラッグ を取得します
-   * @return {boolean} リロードフラッグを返します
-   */
-  get reloadFlag() {
-    return this._reloadFlag;
-  }
-  /**
-   * リロードフラッグを設定します
-   * @param {boolean} flag リロードフラッグ
-   */
-  set reloadFlag(flag) {
-    this._reloadFlag = flag;
-  }
-  /**
-   * 取得記事(articles)をArticleDae instance 配列として取得する
-   * @return {Array.<ArticleDae>} 取得記事(articles)をArticleDae instance 配列を返します
-   */
-  get commentsList() {
-    return this._commentsList;
-  }
-  /**
-   * 取得記事(articles)をArticleDae instance 配列として設定する
-   * @param {Array.<ArticleDae>} list Array<ArticleDae>
-   */
-  set commentsList(list) {
-    this._commentsList = list;
-  }
-  // ---------------------------------------------------
-  //  Method
-  // ---------------------------------------------------
-  /**
-   * Ajax request を開始します
-   * @param {string} [path=''] path - not use
-   */
-  start(path = '') {
-    if (User.sign && this.user === null) {
-      throw new Error(`user info have to set before start.${this.articleId}, ${this.commentsListType}`, path);
-    }
-    this.action.next();
-  }
-  /**
-   * Ajax response success
-   * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
-   */
-  done(result) {
-    const response = result.response;
-    // console.log('ViewComments.done response ', this.commentsListType, this.commentsListType, typeof response === 'undefined', response );
-    if (typeof response === 'undefined') {
-      // articles undefined
-      // JSON に問題がある
-      const error = new Error(Message.undef('[COMMENTS:UNDEFINED]'));
-      this.executeSafely(View.UNDEFINED_ERROR, error);
-      // this.showError( error.message );
-    } else {
-      this.render(response);
-    }
-  }
-  /**
-   * Ajax response error
-   * @param {Error} error Error instance
-   */
-  fail(error) {
-    this.executeSafely(View.RESPONSE_ERROR, error);
-    // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
-    // this.showError( error.message );
-  }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError(message = '') {
-    message = Safety.string(message, '');
-    // Error 時の表示が決まったら変更する
-    const error = new ViewError(this.element, this.option, message);
-    error.render();
-  }
-  /**
-   * dom を render します
-   * @param {Object} response JSON response
-   */
-  render(response) {
-    const commentsListDae = new CommentsListDae(response);
-    const commentList = this.commentsList;
-    // console.log('ViewComments.render ', this.commentsListType, commentsListDae);
-    // total check
-    if (commentsListDae.total === 0) {
-      // reload の時はエラーにしない
-      if (!this.reloadFlag) {
-        // デーが無いので処理を止める + reload 除く
-        this.executeSafely(View.EMPTY_ERROR);
-        return;
-      }
-    }
-    this.commentsList = commentList.concat(commentsListDae.comments.list);
-    // console.log('ViewComments.render', this.articleId, this.commentsListType, this.commentsList);
-    // _commentsBank へ comment.id をキーにデータをセット
-    const bank = this.commentsBank;
-    // commentsListDae.comments.list.forEach(function(commentId) {
-    //   bank[commentId] = commentsListDae.comments.bank[commentId];
-    // });
-    commentsListDae.comments.list.map(commentId => (bank[commentId] = commentsListDae.comments.bank[commentId]));
-    // 処理開始 関数振り分け いらないんじゃないか疑惑
-    this.all(commentsListDae);
-  }// render
   /**
    * normal, official, all をレンダリング
    * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
    */
   all(commentsListDae) {
+    // console.log('SPViewComments.all', this.commentsListType, commentsListDae);
+    /**
+     * reload flag
+     * @override
+     * @type {boolean}
+     * */
     this.reloadFlag = false;
-    //
+
     // let commentsList = this.commentsList;
     // let commentsBank = this.commentsBank;
     //
@@ -400,7 +151,7 @@ export default class ViewComments extends View {
     //             /* independent, open, commentCount 省略 */
     //             return (
     //               <li key={`${uniqueId}-${replyComment.id}`} className="comment-item">
-    //                 <CommentNode
+    //                 <SPCommentNode
     //                   uniqueId={`${uniqueId}-${replyComment.id}`}
     //                   commentDae={{comment: replyComment}}
     //                   userId={userId}
@@ -466,12 +217,13 @@ export default class ViewComments extends View {
     //       }
     //     }
     //
+    //     // console.log( '================================== parent =========================', icon, this.props.user, userId, ', comment:', commentObject.comment.user.id );
     //     return (
     //
     //       <ul className={'comment-list'}>
     //         <li className="comment-item">
     //           {/* independent, open 省略 */}
-    //           <CommentNode
+    //           <SPCommentNode
     //             uniqueId={`comment-${this.props.uniqueId}`}
     //             commentDae={commentObject}
     //             icon={icon}
@@ -486,7 +238,6 @@ export default class ViewComments extends View {
     //             url={commentObject.comment.url}
     //           />
     //           {/* comment reply */}
-    //           {/* unique を確保するため comment type を追加 2016-04-27 */}
     //           <CommentReplyChildDom
     //             uniqueId={`reply-${commentsListType}-${this.props.uniqueId}`}
     //             total={total}
@@ -505,6 +256,52 @@ export default class ViewComments extends View {
     //
     //   }
     // } );
+    //
+    // // --------------------------------------------
+    // // AD
+    // // --------------------------------------------
+    // // let AdDom = React.createClass( {
+    // //   propTypes: {
+    // //     commentsListType: React.PropTypes.string.isRequired
+    // //   },
+    // //   getInitialState: function() {
+    // //     return {
+    // //       need: this.props.commentsListType === CommentsType.OFFICIAL || this.props.commentsListType === CommentsType.NORMAL
+    // //     };
+    // //   },
+    // //   render: function() {
+    // //
+    // //     if ( this.state.need ) {
+    // //       return (
+    // //         <div className={`comment-ad comment-${this.props.commentsListType}-ad`} ref="comment_official_ad"></div>
+    // //       );
+    // //     } else {
+    // //       return null;
+    // //     }
+    // //
+    // //   },
+    // //   componentDidMount: function() {
+    // //     if ( !this.state.need ) {
+    // //       return;
+    // //     }
+    // //
+    // //     let script;
+    // //
+    // //     // script insert
+    // //     switch ( this.props.commentsListType ) {
+    // //       case CommentsType.OFFICIAL:
+    // //         script = Ad.make( Ad.SP_OFFICIAL );
+    // //         break;
+    // //
+    // //       case CommentsType.NORMAL:
+    // //       default:
+    // //         script = Ad.make( Ad.SP_NORMAL );
+    // //         break;
+    // //     }
+    // //
+    // //     ReactDOM.findDOMNode( this.refs.comment_official_ad ).appendChild( script );
+    // //   }
+    // // } );
     //
     // // --------------------------------------------
     // // COMMENT iteration
@@ -544,7 +341,7 @@ export default class ViewComments extends View {
     //       // console.warn( 'list error ', commentsListType, list );
     //       return null;
     //     }
-    //     // console.log( '******************************* start render *******************************', list );
+    //
     //     return (
     //       <div className={'comment-' + commentsListType}>
     //         <div className="comment-heading">
@@ -570,6 +367,10 @@ export default class ViewComments extends View {
     //             );
     //           } )
     //         }
+    //         <SPCommentAdNode
+    //           uniqueId={`ad-${commentsListType}`}
+    //           commentsListType={commentsListType}
+    //         />
     //         <div className="comment-more" ref="commentMore" />
     //       </div>
     //     );
@@ -598,10 +399,10 @@ export default class ViewComments extends View {
     // // COMMENT Dom build
     // // --------------------------------------------
     // let user = this.user;
-    // if (user === null) {
-    //   user = Object.create({});
+    // if ( user === null ) {
+    //   user = Object.create( {} );
     // }
-    // // console.log( 'CommentsDom commentsListType', this._commentsListType, this.commentsListType );
+    //
     // // とにかくそのまま
     // ReactDOM.render(
     //   <CommentsDom
@@ -615,7 +416,7 @@ export default class ViewComments extends View {
     // since 2017-12-05 - .jsx + component
     const user = this.user ? this.user : Object.create({});
     ReactDOM.render(
-      <ComponentComments
+      <SPComponentComments
         commentsListDae={commentsListDae}
         commentsList={this.commentsList}
         commentsListType={this.commentsListType}
@@ -634,16 +435,12 @@ export default class ViewComments extends View {
    * @param {Object} events 記事 ID を含んだ event object
    */
   onComplete(events) {
-    // console.log('ViewComment.onComplete', this.articleId, events, this.commentsListType);
+    // console.log('SPViewComment.onComplete', this.articleId, parseInt(events.articleId, 10) === parseInt(this.articleId, 10), events, this.commentsListType);
     // @since 2016-11-05
     // 記事IDをチェックし同じ時のみリロードします
     // page 内に複数の記事詳細が存在するようになるため
     // 記事IDを識別子として加える
-    if (parseInt(events.articleId, 10) === this.articleId) {
-      //
-      // // @since 2017-04-17
-      // // comments delete は articleId を持たないので従来通り再更新する
-      // if (events.type === CommentStatus.COMMENT_DELETE || parseInt(events.articleId, 10) === this.articleId) {
+    if (parseInt(events.articleId, 10) === parseInt(this.articleId, 10)) {
       // とにかくreloadが良さそう
       this.reload();
     }
@@ -651,9 +448,13 @@ export default class ViewComments extends View {
   /**
    * 再読み込み
    */
-  reload() {
-    // console.log('ViewComment.reload', this.articleId, this.commentsListType);
-    // 既存リストを空にする
+  reload():void {
+    // console.log('SPViewComment.reload', this.articleId, this.commentsListType);
+    /**
+     * 既存リストを空にする
+     * @override
+     * @type {Array}
+     */
     this.commentsList = [];
     // reload flag on
     this.reloadFlag = true;

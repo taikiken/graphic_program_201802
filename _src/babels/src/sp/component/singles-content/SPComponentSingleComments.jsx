@@ -14,7 +14,7 @@
 import { SPViewCommentForm } from '../../view/comment/SPViewCommentForm';
 
 // view
-import { SPViewComments } from '../../view/SPViewComments';
+import SPViewComments from '../../view/SPViewComments';
 
 // app
 import { User } from '../../../app/User';
