@@ -117,7 +117,7 @@ mlb-dream-cup
         position: relative;
         margin-right: 10px; }
   .mlb_dc .archive_container .photo_wrap {
-    margin-bottom: 70px; }
+    margin-bottom: 50px; }
     .mlb_dc .archive_container .photo_wrap .heading .ttl:before {
       width: 24px;
       height: 25px;
@@ -273,7 +273,9 @@ mlb-dream-cup
     .whole.mlb_dc .contents {
       padding-top: 0; }
     .whole.mlb_dc .archive_container .photo_wrap {
-      margin-bottom: 40px; }
+      margin-bottom: 30px; }
+      .whole.mlb_dc .archive_container .photo_wrap p {
+        padding: 0 10px; }
     .whole.mlb_dc .archive_container .heading {
       padding: 5px 0 6px;
       margin-bottom: 0; }

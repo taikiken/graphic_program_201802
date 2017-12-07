@@ -4,6 +4,10 @@ if($q->get_dir()==1){
 
 	$a=array("公開","flag",array("公開","非公開"),"");
 
+	if(isset($g->f['cid']) && $g->f['cid'] == "1"){
+		$a[2][] = '直リンク';
+	}
+
 	$TITLE = $a[0];
 	$FIELD = $a[1];
 	$ARRAY = $a[2];

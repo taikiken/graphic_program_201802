@@ -88,7 +88,7 @@ $sql=sprintf("select 0 as h,0 as recommend,tt1.*,tt2.sort,tt2.modtitle from (sel
 $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
 
-$sql=sprintf("select 1 as h,0 as recommend,tt1.*,tt2.sort,tt2.modtitle from (select d2,n as sort,title as modtitle from u_headline where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id order by sort",sprintf($articletable,set_isbookmark($uid),""));
+$sql=sprintf("select 1 as h,0 as recommend,tt1.*,tt2.sort,tt2.modtitle from (select d2,n as sort,title as modtitle from u_headline where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id order by sort",sprintf($articleWithDirectLinktable,set_isbookmark($uid),""));
 $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
 
@@ -140,7 +140,15 @@ for($i=0;$i<count($p);$i++){
 	$f=$o->fetch_array();
 	
 	$s[$hg[$p[$i]["h"]]][$nm]["comments_count"]=(int)$f["n"];
-	
+
+	if($hg[$p[$i]["h"]] === 'pickup'){
+		$s[$hg[$p[$i]["h"]]][$nm]['is_direct_link'] = false;
+		if(isset($p[$i]['flag']) && $p[$i]['flag'] == "3"){
+			//直リンク用設定
+			$s[$hg[$p[$i]["h"]]][$nm]['is_direct_link'] = true;
+			$s[$hg[$p[$i]["h"]]][$nm]['url'] = $p[$i]['direct_link_url'];
+		}
+	}
 	if($f["n"]>0){
 
 	  $sql=sprintf("select * from 

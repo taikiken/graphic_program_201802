@@ -8,7 +8,7 @@ $o->connect();
 
 $category=bind($_REQUEST["category"]);
 
-$sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e,og_image,no_image from u_categories where name_e='%s'",$category);
+$sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e,og_image,no_image,webview from u_categories where name_e='%s'",$category);
 $o->query($sql);
 $f=$o->fetch_array();
 
@@ -18,6 +18,21 @@ $categoriesinfo=array();
 if(strlen($f["name"])>0){
 
 	$categoriesinfo=set_categoriesinfo($f);
+
+	//append
+	$append = [];
+	//appendで返すキーのリスト
+	$appendKeys = [
+		'pc', 'sp', 'ios', 'android'
+	];
+	$appendsWebview = json_decode($f['webview'], true);
+	foreach($appendKeys as $appendKey){
+		//キーが存在しない場合は空の配列をセットする。
+		$append[$appendKey] = empty($appendsWebview)
+				? []
+				: $appendsWebview[$appendKey];
+	}
+	$categoriesinfo['append'] = $append;
 
 	/*
 
