@@ -94,12 +94,7 @@ if ($page['category']['slug'] == 'all') {
             <div class="ttl-wrapper">
                 <h2 class="ttl recommend"><i></i>編集部おすすめの記事</h2>
             </div>
-
-            <div class="recommend_list">
-                <ul class="thumb_area">
-
-                </ul>
-            </div>
+            <div id="Widget_articles-1" class="Widget_articles" data-category="crazy" data-type="recommend"></div>
         </section>
       <div class="board-large">
 
@@ -118,6 +113,5 @@ if ($page['category']['slug'] == 'all') {
 
   </div>
 </div><!-- /.body-sec -->
-
 <script src="https://code.jquery.com/jquery-git.min.js"></script>
-<script src="/assets/js/crazy.js"></script>
+<script src="/assets/widgets/articles-index/Widget_articles.js"></script>

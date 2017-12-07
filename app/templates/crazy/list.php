@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-    <script src="/assets/js/app_divide.bundle.js"></script>
+    <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true"></script>
+    <script src="/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <title>CRAZY ATHLETES | スポーツブル / SPORTS BULL</title>
-    <script src="/assets/js/libs/vendor.react.js"></script>
-    <script src="/assets/js/bundle/main.bundle.js"></script>
+    <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
     <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
     <meta name="description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
     <meta property="fb:app_id" content="842032129256034">
@@ -88,6 +88,7 @@
     </script>
     <!-- ad/dfp -->
     <!-- ad/appvador -->
+<!--
     <script>
         googletag.cmd.push(function()
         {
@@ -97,6 +98,7 @@
             googletag.enableServices();
         });
     </script>
+-->
     <!-- //ad/appvador -->
     <!-- ad/dfp - pc/rectangle -->
     <script>
@@ -110,6 +112,7 @@
     </script>
     <!-- //ad/dfp - pc/rectangle -->
     <!-- ad/npb-sp-anchor -->
+<!--
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push(
@@ -118,6 +121,7 @@
                 enable_page_level_ads: true
             });
     </script>
+-->
     <!-- // ad/npb-sp-anchor -->
     <!-- ga -->
     <script>
@@ -144,6 +148,7 @@
 </head>
 <body>
 <!-- ad/531683568/appvador -->
+<!--
 <div id='div-gpt-ad-1501126889988-0'>
     <style>
         #div-gpt-ad-1501126889988-0 * {
@@ -158,6 +163,7 @@
     </script>
     <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
 </div>
+-->
 <!-- ad/531683568/appvador -->
 <div id="whole" class="whole">
     <header class="head-sec">
@@ -220,22 +226,17 @@
                         <h2 class="ttl recommend"><i></i>編集部おすすめの記事</h2>
                     </div>
 
-                    <div class="recommend_list">
-                        <ul class="thumb_area">
-                        </ul>
-                    </div>
+                    <div id="Widget_articles-1" class="Widget_articles" data-category="crazy" data-type="recommend"></div>
                 </section>
                 <!--  /  recommend   -->
-                <?php /*
-                <section class="section_crazy_popular">
+
+                <section class="section_crazy_popular pc_hide">
                     <div class="ttl-wrapper pc_hide">
                         <h2 class="ttl popular"><i></i>人気の記事</h2>
                     </div>
-
-                    <div id="category-container"></div>
-                    <div id="board-container-more"></div>
+                    <div id="Widget_articles-2" class="Widget_articles" data-category="crazy" data-type="ranking"></div>
                 </section>
-                */?>
+
                 <!-- / popular  -->
 
                 <div class="back_btn"><a href="/category/crazy/">CRAZY ATHLETES トップへ戻る</a></div>
@@ -287,7 +288,13 @@
                     <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
                         <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
                     </div>
+                  <?php
+                  /*
+                   オススメ記事 - crazy 不要
+                  https://github.com/undotsushin/undotsushin/issues/862#issuecomment-229568814
                     <div id="widget-recommend-container"></div>
+                  */
+                  ?>
                     <!--/videos-->
                     <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
                         <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
@@ -505,7 +512,6 @@
 </script>
 <script src="/assets/js/global.bundle.js"></script>
 <script src="https://code.jquery.com/jquery-git.min.js"></script>
-<script src="/assets/js/crazy.js"></script>
 <script>
     $(function()
     {
@@ -550,5 +556,7 @@
         }
     });
 </script>
+<script src="/assets/widgets/articles-index/Widget_articles.js"></script>
+<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js?v=<?php echo $page['version']; ?>" data-label="CRAZY ATHLETES"></script>
 </body>
 </html>

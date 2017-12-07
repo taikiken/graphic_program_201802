@@ -18,6 +18,7 @@
 // = ではなく、含まれる、になります。match で判定してください
 
 const detector = () => {
+  console.warn('deprecate: app_divide.bundle.js. instead use app_ua_detector.bundle.js');
   // html 取得
   const tags = document.getElementsByTagName('html');
   if (!tags || !tags.length) {

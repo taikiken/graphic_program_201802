@@ -8,7 +8,7 @@ $o->connect();
 
 $category=bind($_REQUEST["category"]);
 
-$sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e,og_image,no_image from u_categories where name_e='%s'",$category);
+$sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e,og_image,no_image,webview from u_categories where name_e='%s'",$category);
 $o->query($sql);
 $f=$o->fetch_array();
 
@@ -20,18 +20,33 @@ if(strlen($f["name"])>0){
 	$categoriesinfo=set_categoriesinfo($f);
   $category_id = $f['id']; // お知らせ $categoriesinfo['information'] で使う
 
-  /*
+	//append
+	$append = [];
+	//appendで返すキーのリスト
+	$appendKeys = [
+		'pc', 'sp', 'ios', 'android'
+	];
+	$appendsWebview = json_decode($f['webview'], true);
+	foreach($appendKeys as $appendKey){
+		//キーが存在しない場合は空の配列をセットする。
+		$append[$appendKey] = empty($appendsWebview)
+				? []
+				: $appendsWebview[$appendKey];
+	}
+	$categoriesinfo['append'] = $append;
 
-  https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
-  カテゴリーにpickup, hedlineの記事を追加
+	/*
 
-  pickupとheadlineが同じ場合は、CMS「記事選択」から新規登録で、該当カテゴリーslugにカテゴリー名を入力する。
-  例）クライミング 'climbing'
+	https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
+	カテゴリーにpickup, hedlineの記事を追加
 
-  pickupとheadlineを分離して管理する場合、CMS「記事選択」から新規登録で、該当カテゴリーslugに '_headline'を付加する。
-  例）クライミング 'climbing_headline'
+	pickupとheadlineが同じ場合は、CMS「記事選択」から新規登録で、該当カテゴリーslugにカテゴリー名を入力する。
+	例）クライミング 'climbing'
 
-  */
+	pickupとheadlineを分離して管理する場合、CMS「記事選択」から新規登録で、該当カテゴリーslugに '_headline'を付加する。
+	例）クライミング 'climbing_headline'
+
+	*/
 
 	$sql=sprintf("select id from repo where t1='%s'",$category);
 	$o->query($sql);

@@ -58,7 +58,11 @@ archives =  [
 
 # eslint
 gulp.task 'single:eslint', ->
-  return gulp.src archives
+  list = archives.slice(0);
+#  uglify されたの突っ込むやついるので ignore する
+  list.push '!' + app + '/assets/_babel/**/battle.js'
+  console.log('list', list);
+  return gulp.src list
   .pipe $.changed app + '/**', extension: '.js'
   .pipe $.eslint useEslintrc: true
   .pipe $.eslint.format()
