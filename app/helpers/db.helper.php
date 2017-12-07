@@ -354,17 +354,15 @@ EOF;
      *
      * @return array
      */
-    public function get_partners() {
+  public function get_partners() {
 
-        $sql="select title,t1,img1,company_img1,n,ng_flag from u_media order by n";
-        $this->query($sql);
-        while( $f = $this->fetch_array() ){
-            $s[] = set_partners_info($f);
-        }
-
-        return $s;
+    $sql="select title,t1,img1,company_img1,n,ng_flag from u_media order by n";
+    $this->query($sql);
+    while( $f = $this->fetch_array() ){
+      $s[] = set_partners_info($f);
     }
-
+    return $s;
+  }
 }
 
 ?>
