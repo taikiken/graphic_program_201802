@@ -343,9 +343,10 @@ END_DOC;
    * @param int $category_id   tbl_player.category
    * @param int $player_id     tbl_player.id
    * @param boolean $is_unique 重複する選手を削除するかどうか（どのヘッドラインに属する選手が返るかは不明）
+   * @param int $limit         取得する選手の件数上限
    * @return array
    */
-  public function get_pickup_players($category_id = null, $player_id = null) {
+  public function get_pickup_players($category_id = null, $player_id = null, $limit = null) {
     $sql = "SELECT p.*, MAX(h.n) AS max_h_n FROM repo r"
             . " LEFT JOIN u_headline h ON r.id = h.cid"
             . " LEFT JOIN tbl_player p ON h.d2 = p.id"
@@ -357,6 +358,9 @@ END_DOC;
       $sql .= " AND r.category = '{$category_id}'";
     }
     $sql .= " GROUP BY p.id ORDER BY max_h_n";
+    if($limit !== null) {
+      $sql .= " LIMIT {$limit}";
+    }
 
     $this->query($sql);
     return $this->fetch_all();

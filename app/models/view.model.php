@@ -539,8 +539,8 @@ class ViewModel {
    * @param int $player_id     tbl_player.id
    * @return array
    */
-  public function get_pickup_players($category_id = null, $player_id = null, $is_unique = true) {
-    return $this->db->get_pickup_players($category_id, $player_id, $is_unique);
+  public function get_pickup_players($category_id = null, $player_id = null, $limit = null) {
+    return $this->db->get_pickup_players($category_id, $player_id, $limit);
   }
 
 /**
