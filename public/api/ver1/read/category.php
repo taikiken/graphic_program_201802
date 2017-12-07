@@ -18,6 +18,7 @@ $categoriesinfo=array();
 if(strlen($f["name"])>0){
 
 	$categoriesinfo=set_categoriesinfo($f);
+  $category_id = $f['id']; // お知らせ $categoriesinfo['information'] で使う
 
 	//append
 	$append = [];
@@ -160,6 +161,13 @@ if(strlen($f["name"])>0){
     );
   endif;
 
+  # ref. #2104
+  if ( $category === 'highschoolbaseball' ) :
+    $categoriesinfo['webviews']     = array(
+      '/stats/hsb/webview/app/',
+    );
+  endif;
+
   # ref. #2321
   if ( $category === 'americanfootball' ) :
     $categoriesinfo['webviews']     = array(
@@ -195,6 +203,92 @@ if(strlen($f["name"])>0){
       '/stats/webview/',
     );
   endif;
+
+  // お知らせ
+$sql = <<<SQL
+SELECT 
+		notices.*
+FROM
+		categories_notices,
+		notices
+WHERE
+ 		category_id = {$category_id}
+AND
+		notice_id = notices.id
+ORDER BY
+		categories_notices.created_at DESC
+LIMIT 1
+SQL;
+
+$o->query($sql);
+$f = $o->fetch_array();
+
+// デフォルトのお知らせ取得
+if (empty($f))
+{
+  $sql = <<<SQL
+SELECT 
+		notices.*
+FROM
+		categories_notices,
+		notices
+WHERE
+ 		category_id = 0
+AND
+		notice_id = notices.id
+ORDER BY
+		categories_notices.created_at DESC
+LIMIT 1
+SQL;
+
+  $o->query($sql);
+  $f = $o->fetch_array();
+}
+
+if (!empty($f))
+{
+  // フルパスで返す
+  $domain = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"];
+  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
+  // img、linkはnullの場合あるから空にする
+  $f['img'] = isset($f['img']) ? $cf . $f['img'] : '';
+  $f['link'] = isset($f['link']) ? $f['link'] : '';
+
+  // 定数
+  $type = $f['type'];
+  $text_color = ['#333333', '#333333', ''];
+  $background_color = ['#ffffff', '#ffcccc', ''];
+  $icon = [
+    $domain . '/assets/information/icon/3x/information__icon__notice.png',
+    $domain . '/assets/information/icon/3x/information__icon__warning.png',
+    '',
+  ];
+  $disp_type = ['notice', 'warning', 'img'];
+
+
+  $information = array(
+
+    'type'             => $disp_type[$type],
+    'text'             => $f['text'],
+    'text_color'       => $text_color[$type],
+    'background_color' => $background_color[$type],
+    'icon'             => $icon[$type],
+    'img'              => $f['img'],
+    'link'             => $f['link'],
+  );
+
+}
+else
+{
+  $information = null;
+}
+
+$categoriesinfo['information'] = array(
+  'pc'      => $information,
+  'sp'      => $information,
+  'ios'     => $information,
+  'android' => $information,
+);
 
 $y["response"]=$categoriesinfo;
 
