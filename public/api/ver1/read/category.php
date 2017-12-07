@@ -259,8 +259,8 @@ if (!empty($f))
   $text_color = ['#333333', '#333333', ''];
   $background_color = ['#ffffff', '#ffcccc', ''];
   $icon = [
-    $domain . '/assets/information/icon/3x/information__icon__notice.png',
-    $domain . '/assets/information/icon/3x/information__icon__warning.png',
+    '/information/icon/3x/information__icon__notice.png',
+    '/information/icon/3x/information__icon__warning.png',
     '',
   ];
   $disp_type = ['notice', 'warning', 'img'];
