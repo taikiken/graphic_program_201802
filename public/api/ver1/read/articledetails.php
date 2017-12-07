@@ -171,7 +171,7 @@ SQL;
 if (!empty($f))
 {
   // フルパスで返す
-  $domain = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"];
+  $domain = "https://" . $_SERVER["HTTP_HOST"];
   $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
   // img、linkはnullの場合あるから空にする
   $f['img'] = isset($f['img']) ? $cf . $f['img'] : '';
