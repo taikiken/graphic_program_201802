@@ -17,9 +17,10 @@ import {ReactionNode} from './ReactionNode';
 // import {CommentFormNode} from './CommentFormNode';
 import {CommentMenuNode} from './CommentMenuNode';
 // import {CommentUserNode} from './CommentUserNode';
-import {CommentContentNode} from './CommentContentNode';
+// import {CommentContentNode} from './CommentContentNode';
 import ComponentCommentUser from '../../component/single-comment/user/ComponentCommentUser';
 import ComponentCommentForm from '../../component/single-comment/form/ComponentCommentForm';
+import ComponentCommentContentBody from '../../component/single-comment/content/ComponentCommentContentBody';
 
 // React
 const React = self.React;
@@ -131,7 +132,14 @@ export const CommentNode = React.createClass( {
           displayDate={comment.displayDate}
         />
         {/* div.comment-content */}
+        {/*
         <CommentContentNode
+          content={comment.body}
+          commentId={this.props.commentId}
+          replyClass={replyClass(this.props.replyId)}
+        />
+        */}
+        <ComponentCommentContentBody
           content={comment.body}
           commentId={this.props.commentId}
           replyClass={replyClass(this.props.replyId)}

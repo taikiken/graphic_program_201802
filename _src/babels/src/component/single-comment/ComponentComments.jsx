@@ -18,6 +18,8 @@ import ComponentCommentsParent from './container/ComponentCommentsParent';
 import ComponentCommentMoreView from './ComponentCommentMoreView';
 import { CommentsListDae } from '../../dae/CommentsListDae';
 import { Comments } from '../../action/comment/Comments';
+import { CommentSingle } from '../../action/comment/CommentSingle';
+import { CommentSingleReply } from '../../action/comment/CommentSingleReply';
 
 
 // React
@@ -67,7 +69,11 @@ export default class ComponentComments extends React.Component {
       articleId: React.PropTypes.string.isRequired,
       // executeSafely
       execute: React.PropTypes.func.isRequired,
-      action: React.PropTypes.instanceOf(Comments).isRequired,
+      action: React.PropTypes.oneOfType([
+        React.PropTypes.instanceOf(Comments),
+        React.PropTypes.instanceOf(CommentSingle),
+        React.PropTypes.instanceOf(CommentSingleReply)
+      ]).isRequired,
       // コメントIDをキーにコメント Object
       commentsBank: React.PropTypes.object.isRequired,
       user: React.PropTypes.object.isRequired,

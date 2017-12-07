@@ -16,7 +16,7 @@ import { Safety } from '../../../data/Safety';
 import { Empty } from '../../../app/const/Empty';
 
 // dae
-import { ReplyDae } from '../../../dae/comments/ReplyDae';
+// import { ReplyDae } from '../../../dae/comments/ReplyDae';
 import { PopularDae } from '../../../dae/comments/PopularDae';
 
 // node
@@ -24,9 +24,10 @@ import { ReactionNode } from '../../../node/comment/ReactionNode';
 // import { CommentFormNode } from '../../../node/comment/CommentFormNode';
 import { CommentMenuNode } from '../../../node/comment/CommentMenuNode';
 // import { CommentUserNode } from '../../../node/comment/CommentUserNode';
-import { CommentContentNode } from '../../../node/comment/CommentContentNode';
+// import { CommentContentNode } from '../../../node/comment/CommentContentNode';
 import ComponentCommentForm from '../form/ComponentCommentForm';
 import ComponentCommentUser from '../user/ComponentCommentUser';
+import ComponentCommentContentBody from '../content/ComponentCommentContentBody';
 
 // React
 const React = self.React;
@@ -42,7 +43,7 @@ const replyClass = (replyId) => (replyId ? ` comment-content-reply-${replyId}` :
  * `div.comment-item-inner.comment-root` を出力します
  * - {@link CommentMenuNode}
  * - {@link CommentUserNode}
- * - {@link CommentContentNode}
+ * - {@link ComponentCommentContentBody}
  * - {@link ReactionNode}
  * - {@link CommentFormNode}
  *
@@ -117,7 +118,14 @@ const ComponentCommentsChildList = ({
         displayDate={comment.displayDate}
       />
       {/* div.comment-content */}
+      {/*
       <CommentContentNode
+        content={comment.body}
+        commentId={commentId}
+        replyClass={replyClass(replyId)}
+      />
+      */}
+      <ComponentCommentContentBody
         content={comment.body}
         commentId={commentId}
         replyClass={replyClass(replyId)}
@@ -187,7 +195,7 @@ const ComponentCommentsChildList = ({
 ComponentCommentsChildList.propTypes = {
   commentObject: React.PropTypes.shape({
     comment: React.PropTypes.instanceOf(PopularDae).isRequired,
-    reply: React.PropTypes.instanceOf(ReplyDae).isRequired
+    // reply: React.PropTypes.instanceOf(ReplyDae).isRequired,
   }).isRequired,
   // ログインの有無
   sign: React.PropTypes.bool.isRequired,

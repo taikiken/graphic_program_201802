@@ -10,6 +10,8 @@
  *
  */
 import { Comments } from '../../action/comment/Comments';
+import { CommentSingleReply } from '../../action/comment/CommentSingleReply';
+import { CommentSingle } from '../../action/comment/CommentSingle';
 
 // CommentMoreViewNode
 
@@ -28,7 +30,7 @@ export default class ComponentCommentMoreView extends React.Component {
   // ----------------------------------------
   /**
    * React.propTypes
-   * - action {Comments} - Ajax instance
+   * - action {Comments|CommentSingle|CommentSingleReply} - Ajax instance
    * - show {boolean} - `action.hasNext()`
    * - rest {number} - 残り件数, 0 以下で非表示
    * @returns {{action: Comments, show: boolean, rest: number}}
@@ -36,7 +38,12 @@ export default class ComponentCommentMoreView extends React.Component {
    */
   static get propTypes() {
     return {
-      action: React.PropTypes.instanceOf(Comments).isRequired,
+      // action: React.PropTypes.instanceOf(Comments).isRequired,
+      action: React.PropTypes.oneOfType([
+        React.PropTypes.instanceOf(Comments),
+        React.PropTypes.instanceOf(CommentSingle),
+        React.PropTypes.instanceOf(CommentSingleReply)
+      ]).isRequired,
       show: React.PropTypes.bool,
       rest: React.PropTypes.number,
     };

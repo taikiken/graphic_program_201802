@@ -11,7 +11,8 @@
  */
 // CommentReplyChildDom
 
-import { CommentNode } from '../../../node/comment/CommentNode';
+// import { CommentNode } from '../../../node/comment/CommentNode';
+import ComponentCommentsChildList from './ComponentCommentsChildList';
 
 // React
 const React = self.React;
@@ -59,6 +60,7 @@ const ComponentCommentsChildReply = ({
           /* independent, open, commentCount 省略 */
           return (
             <li key={`${uniqueId}-${replyComment.id}`} className="comment-item">
+              {/*
               <CommentNode
                 uniqueId={`${uniqueId}-${replyComment.id}`}
                 commentDae={{comment: replyComment}}
@@ -72,6 +74,20 @@ const ComponentCommentsChildReply = ({
                 parent={false}
                 commentsListType={commentsListType}
                 url={replyComment.url}
+              />
+              */}
+              <ComponentCommentsChildList
+                commentObject={{comment: replyComment}}
+                sign={sign}
+                uniqueId={`${uniqueId}-${replyComment.id}`}
+                articleId={articleId}
+                commentUserId={String(replyComment.user.id)}
+                commentsListType={commentsListType}
+                userId={userId}
+                icon={icon}
+                commentId={commentId}
+                replyId={String(replyComment.id)}
+                parent={false}
               />
             </li>
           );

@@ -56,7 +56,7 @@ import {ViewCategory} from './view/ViewCategory';
 import {ViewSingle} from './view/ViewSingle';
 // import {ViewTitle} from './view/ViewTitle';
 import {ViewSearch} from './view/ViewSearch';
-import {ViewCommentSingle} from './view/ViewCommentSingle';
+import ViewCommentSingle from './view/ViewCommentSingle';
 import {ViewFirstVisit} from './view/ViewFirstVisit';
 
 // single
