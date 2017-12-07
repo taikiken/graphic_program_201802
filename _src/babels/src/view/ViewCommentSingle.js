@@ -33,11 +33,14 @@ import {CommentsListDae} from '../dae/CommentsListDae';
 import {UserDae} from '../dae/UserDae';
 
 // node
-import {CommentNode} from '../node/comment/CommentNode';
+// import {CommentNode} from '../node/comment/CommentNode';
 
 // event
 import {ReplyStatus} from '../event/ReplyStatus';
 import {CommentStatus} from '../event/CommentStatus';
+
+// component
+import ComponentComments from '../component/single-comment/ComponentComments';
 
 // React
 let React = self.React;
@@ -525,7 +528,22 @@ export class ViewCommentSingle extends View {
           <ul className={'comment-list'}>
             <li className="comment-item">
               {/* independent, open 省略 */}
+              {/*
               <CommentNode
+                uniqueId={`comment-${this.props.uniqueId}`}
+                commentDae={commentObject}
+                icon={icon}
+                userId={userId}
+                articleId={articleId}
+                commentId={commentId}
+                commentUserId={String(commentObject.comment.user.id)}
+                commentCount={commentObject.reply.total}
+                sign={sign}
+                parent={true}
+                commentsListType={commentsListType}
+              />
+              */}
+              <ComponentComments
                 uniqueId={`comment-${this.props.uniqueId}`}
                 commentDae={commentObject}
                 icon={icon}

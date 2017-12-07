@@ -23,6 +23,7 @@ let React = self.React;
  * </pre>
  *
  * @type {ReactClass}
+ * @deprecated 2017-12-07 instead use {@link ComponentCommentUser}
  */
 export let CommentUserNode = React.createClass( {
   propTypes: {

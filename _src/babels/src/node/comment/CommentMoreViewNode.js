@@ -19,6 +19,7 @@ let React = self.React;
 /**
  * コメント[More View] button + 残件数表示
  * @type {ReactClass}
+ * @deprecated 2017-12-06 instead use {@link ComponentCommentMoreView}
  */
 export let CommentMoreViewNode = React.createClass( {
   propTypes: {

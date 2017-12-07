@@ -14,20 +14,23 @@ import {Safety} from '../../data/Safety';
 
 // node
 import {ReactionNode} from './ReactionNode';
-import {CommentFormNode} from './CommentFormNode';
+// import {CommentFormNode} from './CommentFormNode';
 import {CommentMenuNode} from './CommentMenuNode';
-import {CommentUserNode} from './CommentUserNode';
+// import {CommentUserNode} from './CommentUserNode';
 import {CommentContentNode} from './CommentContentNode';
+import ComponentCommentUser from '../../component/single-comment/user/ComponentCommentUser';
+import ComponentCommentForm from '../../component/single-comment/form/ComponentCommentForm';
 
 // React
-let React = self.React;
+const React = self.React;
 
 /**
  * <p>記事詳細 > コメント一覧 node を作成します</p>
  * @class CommentNode
  * @type {Function}
+ * @deprecated 2017-12-06 instead use {@link ComponentCommentsChildList}
  */
-export let CommentNode = React.createClass( {
+export const CommentNode = React.createClass( {
   propTypes: {
     // unique id（識別のために必要）
     uniqueId: React.PropTypes.string.isRequired,
@@ -111,7 +114,16 @@ export let CommentNode = React.createClass( {
           url={this.props.url}
         />
         {/* figure.comment-user */}
+        {/*
         <CommentUserNode
+          loggedIn={loggedIn}
+          picture={picture}
+          userName={comment.user.userName}
+          bio={comment.user.bio || ''}
+          displayDate={comment.displayDate}
+        />
+        */}
+        <ComponentCommentUser
           loggedIn={loggedIn}
           picture={picture}
           userName={comment.user.userName}
@@ -136,6 +148,7 @@ export let CommentNode = React.createClass( {
           isBad={comment.isBad}
           url={this.props.url}
         />
+        {/*
         <CommentFormNode
           uniqueId={this.props.uniqueId}
           icon={this.props.icon}
@@ -145,6 +158,14 @@ export let CommentNode = React.createClass( {
           sign={sign}
           parent={this.props.parent}
           independent={this.props.independent}
+          commentType={this.props.commentsListType}
+          url={this.props.url}
+        />
+        */}
+        <ComponentCommentForm
+          uniqueId={this.props.uniqueId}
+          articleId={this.props.articleId}
+          sign={sign}
           commentType={this.props.commentsListType}
           url={this.props.url}
         />

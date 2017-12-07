@@ -16,11 +16,12 @@ import {Safety} from '../../../data/Safety';
 import {ReactionNode} from '../../../node/comment/ReactionNode';
 // import {CommentFormNode} from '../../../node/comment/CommentFormNode';
 import {CommentMenuNode} from '../../../node/comment/CommentMenuNode';
-import {CommentUserNode} from '../../../node/comment/CommentUserNode';
+// import {CommentUserNode} from '../../../node/comment/CommentUserNode';
 import {CommentContentNode} from '../../../node/comment/CommentContentNode';
 
 // sp/node
 import {SPCommentFormNode} from './SPCommentFormNode';
+import ComponentCommentUser from '../../../component/single-comment/user/ComponentCommentUser';
 
 // React
 let React = self.React;
@@ -113,7 +114,16 @@ export let SPCommentNode = React.createClass( {
           url={this.props.url}
         />
         {/* figure.comment-user */}
+        {/*
         <CommentUserNode
+          loggedIn={loggedIn}
+          picture={picture}
+          userName={comment.user.userName}
+          bio={comment.user.bio || ''}
+          displayDate={comment.displayDate}
+        />
+        */}
+        <ComponentCommentUser
           loggedIn={loggedIn}
           picture={picture}
           userName={comment.user.userName}
