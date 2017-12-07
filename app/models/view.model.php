@@ -539,12 +539,11 @@ class ViewModel {
      *
      * @return array
      */
-    public function get_partners() {
+  public function get_partners() {
 
-        $res = $this->db->get_partners();
-        return $res;
-    }
-
+    $res = $this->db->get_partners();
+    return $res;
+  }
 }
 
 ?>
