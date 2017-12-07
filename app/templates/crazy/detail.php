@@ -214,10 +214,34 @@
                 </div>
                 <!-- / player_profile  -->
 
-                <div class="sponsor-link">
-                    <a href="http://www.mitsuifudosan.co.jp/tokyo2020/" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', 'http://www.mitsuifudosan.co.jp/tokyo2020/', true);"><img src="https://img.sportsbull.jp/img/img2016070811545056886100.jpg" alt="三井不動産『BE THE CHANGE - さぁ、街から世界を変えよう。』" class="sp_hide">
-                        <img src="https://img.sportsbull.jp/img/img2017081510023900588800.jpg" alt="三井不動産『BE THE CHANGE - さぁ、街から世界を変えよう。』" class="pc_hide"></a>
-                </div><!-- /sponsor-link-->
+              <div class="sponsor-link">
+                <?php
+                // ----------------------------------------------------
+                // 記事一覧: pc banner
+                if (!empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']))
+                {
+                  ?>
+                  <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank"
+                     onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['pc']['link']; ?>', true);"><img
+                      src="<?php echo $page['category']['banner']['pc']['image']; ?>"
+                      alt="<?php echo $page['category']['banner']['pc']['text'] ? $page['category']['banner']['pc']['text'] : '' ?>"></a>
+                  <?php
+                }
+                else
+                {
+                  ?>
+                  <a href="http://www.mitsuifudosan.co.jp/tokyo2020/" target="_blank"
+                     onclick="UT.Ga.click('category.banner', 'banner_link', 'click', 'http://www.mitsuifudosan.co.jp/tokyo2020/', true);"><img
+                      src="https://img.sportsbull.jp/img/img2016070811545056886100.jpg"
+                      alt="三井不動産『BE THE CHANGE - さぁ、街から世界を変えよう。』" class="sp_hide">
+                    <img src="https://img.sportsbull.jp/img/img2017081510023900588800.jpg"
+                         alt="三井不動産『BE THE CHANGE - さぁ、街から世界を変えよう。』" class="pc_hide"></a>
+
+                  <?php
+                }
+                // eof: 記事一覧: pc banner
+                // ---------------------------------------------------- ?>
+              </div><!-- /sponsor-link-->
 
 
                 <div class="ttl-wrapper pc_hide">
