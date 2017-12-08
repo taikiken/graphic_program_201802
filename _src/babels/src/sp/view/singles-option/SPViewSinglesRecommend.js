@@ -11,9 +11,9 @@
  */
 
 // view/sidebar
-// import { ViewRecommend } from '../../../view/sidebar/ViewRecommend';
+// import ViewRecommend from '../../../view/sidebar/ViewRecommend';
 // import ViewRanking from '../../../view/sidebar/ViewRanking';
-import { ViewVideos } from '../../../view/sidebar/ViewVideos';
+import ViewVideos from '../../../view/sidebar/ViewVideos';
 
 // view
 import View from '../../../view/View';
@@ -22,8 +22,15 @@ import View from '../../../view/View';
 import SPComponentSinglesRecommend from '../../component/singles-option/SPComponentSinglesRecommend';
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**

@@ -11,7 +11,7 @@
  */
 
 
-import {ViewVideos} from '../../../view/sidebar/ViewVideos';
+import ViewVideos from '../../../view/sidebar/ViewVideos';
 
 // app
 import {Length} from '../../../app/const/Length';

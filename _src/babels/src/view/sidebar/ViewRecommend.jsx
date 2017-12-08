@@ -38,31 +38,39 @@ import ComponentSidebarRecommend from '../../component/sidebar/ComponentSidebarR
 // import {GaData} from '../../ga/GaData';
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
+
 /**
  * sidebar オススメ記事 5件を表示します
  * @since 2016-06-29
  */
-export class ViewRecommend extends ViewRanking {
+export default class ViewRecommend extends ViewRanking {
   /**
    * sidebar オススメ記事 5件 を表示します
    * @since 2016-06-29
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    * @param {string} [slug=all] category slug です
-   * @param {Number|null} [length=null] 読み込む数
+   * @param {?number} [length=null] 読み込む数
    */
-  constructor( element:Element, option:Object = {}, slug:string = 'all', length:Number = null ) {
-    super( element, option, slug, length );
+  constructor(element, option = {}, slug = 'all', length = null) {
+    super(element, option, slug, length);
 
     /**
      * Action instance を設定します
      * @override
      * @type {Ranking}
      */
-    this.action = Widget.recommend( slug, this.done.bind( this ), this.fail.bind( this ), length );
+    this.action = Widget.recommend(slug, this.done.bind(this), this.fail.bind(this), length);
     /**
      * componentDidMount callback
      * @type {function}
@@ -73,9 +81,8 @@ export class ViewRecommend extends ViewRanking {
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render( articles:Array ):void {
-    this.executeSafely( View.BEFORE_RENDER, articles, this.slug );
-
+  render(articles ) {
+    this.executeSafely(View.BEFORE_RENDER, articles, this.slug);
     // let element = this.element;
     // let categorySlug = this.slug;
     // let _this = this;

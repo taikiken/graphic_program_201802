@@ -10,7 +10,7 @@
  *
  */
 
-import {ViewRecommend} from '../../../view/sidebar/ViewRecommend';
+import ViewRecommend from '../../../view/sidebar/ViewRecommend';
 import View from '../../../view/View';
 
 // app
@@ -28,8 +28,16 @@ import {Safety} from '../../../data/Safety';
 import {SPRankingNode} from '../../node/single/SPRankingNode';
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * SP 記事詳細, オススメ記事 一覧
