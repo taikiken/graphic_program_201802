@@ -22,11 +22,12 @@ import {Safety} from '../../data/Safety';
 import ComponentCommentForm from '../../component/single-comment/form/ComponentCommentForm';
 
 // React
+/* eslint-disable no-unused-vars */
 /**
  * [library] - React
  */
-// eslint-disable-next-line no-unused-vars
 const React = self.React;
+/* eslint-enable no-unused-vars */
 /**
  * [library] - ReactDOM
  */

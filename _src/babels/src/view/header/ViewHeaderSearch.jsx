@@ -17,20 +17,28 @@ import View from '../View';
 import {HeaderSearchNode} from '../../node/header/HeaderSearchNode';
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * 検索フォーム
  */
-export class ViewHeaderSearch extends View {
+export default class ViewHeaderSearch extends View {
   /**
    * 検索フォーム + ロケーション遷移
    * @param {Element} element insert parent element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, option:Object = {} ) {
-    super( element, option );
+  constructor(element, option = {}) {
+    super(element, option);
   }
   // ---------------------------------------------------
   //  Method
@@ -38,18 +46,16 @@ export class ViewHeaderSearch extends View {
   /**
    * render 実行
    */
-  start():void {
+  start() {
     this.render();
   }
   /**
    * HTMLElement を生成します
    */
-  render():void {
-
+  render() {
     ReactDOM.render(
       <HeaderSearchNode />,
       this.element
     );
-
   }
 }

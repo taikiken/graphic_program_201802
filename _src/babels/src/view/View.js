@@ -12,7 +12,7 @@
 
 
 // import {Action} from '../action/Action';
-// import {ViewError} from './error/ViewError';
+// import ViewError from './error/ViewError';
 
 import {EventDispatcher} from '../event/EventDispatcher';
 import {Safety} from '../data/Safety';
@@ -87,7 +87,7 @@ export default class View extends EventDispatcher {
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, option = {} ) {
+  constructor(element, option = {}) {
     option = Safety.object(option);
     super();
     /**
@@ -193,10 +193,10 @@ export default class View extends EventDispatcher {
    * @param {string} keyName 存在チェックを行う関数キー名
    * @param {*} [args=] 実行関数へ渡す引数, 不特定多数
    */
-  executeSafely( keyName, ...args ) {
+  executeSafely(keyName, ...args) {
     let option = this.option;
     // console.log( 'executeSafely', keyName, this, args, option, option.hasOwnProperty( keyName ), typeof option[ keyName] );
-    if (option.hasOwnProperty( keyName ) && typeof option[ keyName] === 'function') {
+    if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
       // callback 側で通常の引数として取り出せるように apply します
       option[keyName].apply(this, args);
     }

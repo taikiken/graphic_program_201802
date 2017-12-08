@@ -49,8 +49,8 @@ import {Model} from './model/Model';
 // view
 import View from './view/View';
 
-import {ViewHeaderUser} from './view/header/ViewHeaderUser';
-import {ViewHeaderSearch} from './view/header/ViewHeaderSearch';
+import ViewHeaderUser from './view/header/ViewHeaderUser';
+import ViewHeaderSearch from './view/header/ViewHeaderSearch';
 
 import {ViewCategory} from './view/ViewCategory';
 import {ViewSingle} from './view/ViewSingle';

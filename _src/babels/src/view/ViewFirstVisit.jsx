@@ -251,6 +251,7 @@ export default class ViewFirstVisit extends View {
   // constructor( element:Element, option:Object = {} ) {
   //   super( element, option );
   // }
+  /* eslint-disable no-unused-vars */
   /**
    * cookie をチェックし表示するかを決める
    * @param {string} [path=''] path -  not use
@@ -258,13 +259,13 @@ export default class ViewFirstVisit extends View {
   start(path = '') {
     if (Cookie.get(Cookie.EVER_BEEN) === '1') {
       // きたことある
-      console.warn('[ViewFirstVisit.start] user visited', path);
+      // console.warn('[ViewFirstVisit.start] user visited', path);
       return;
     }
     // cookie set 10 years
     Cookie.save('1', Cookie.EVER_BEEN, Time.later(365 * 10));
   }
-
+  /* eslint-enable no-unused-vars */
   /**
    * 初回起動時のサービス紹介 を表示する
    */
