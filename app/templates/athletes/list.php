@@ -143,25 +143,6 @@
     <!-- //ga -->
 </head>
 <body>
-    
-$pageの内容 ※忘れそうなので実装が完了するでｋのデバッグコードを残しておく
-<pre style="font-size: 1%;line-height: 90%;">
-<?php
-function recursion($arr, $space=''){
-  foreach($arr as $k => $v){
-    echo "\n{$space}[{$k}]&nbsp;=>";
-    if(is_array($v)){
-      recursion($v, $space."&nbsp;&nbsp;&nbsp;&nbsp;");
-    } else {
-      echo "&nbsp;{$v}";
-    }
-  }
-}
-?>
-
-<?php recursion($page['category']) ?>
-</pre>
-
 <!-- ad/531683568/appvador -->
 <div id='div-gpt-ad-1501126889988-0'>
     <style>
@@ -193,7 +174,10 @@ function recursion($arr, $space=''){
 
         <!-- メイン画像 ---------------------------------------------------------->
         <div class="special-summary">
-            <h1 class="special-summary-heading"><img src="<?= $page['category']['banner']['pc']['image'] ?>" alt="三井不動産PRESENTS CRAZY ATHLETES 多くの犠牲や忍耐と引き換えにアスリートが生み出す奇跡こそ、人々をスポーツに熱狂させる。その瞬間に生きることを選んだ彼らの内面に迫ったドキュメンタリー番組「CRAZY ATHLETES」。" class="sp_hide"><img src="<?= $page['category']['banner']['sp']['image'] ?>" alt="三井不動産PRESENTS CRAZY ATHLETES" class="pc_hide"></h1>
+            <h1 class="special-summary-heading">
+                <img src="<?= $page['category']['pc_header'] ?>" alt="<?= $page['category']['pc_header'] ?>" class="sp_hide">
+                <img src="<?= $page['category']['sp_header'] ?>" alt="<?= $page['category']['sp_header'] ?>" class="pc_hide">
+            </h1>
         </div>
         <!-- / メイン画像 ---------------------------------------------------------->
 
@@ -201,7 +185,6 @@ function recursion($arr, $space=''){
         <div class="body-sec-inner">
             <section class="main-sec">
                 <!--  メインコンテンツ ---------------------------------------------------------->
-
                 <section class="section_crazy_pickup">
                     <div class="ttl-wrapper">
                         <h2 class="ttl pickup"><i></i>アスリート一覧</h2>
@@ -210,7 +193,7 @@ function recursion($arr, $space=''){
                     <div class="pickup_player_list">
                         <ul class="thumb_area">
                             <?php foreach($page['list'] as $player):?>
-                            <li><a href="/athlete/<?php echo $player->body->no?>?category=<?= $page['category']['slug'] ?>">
+                            <li><a href="/athlete/<?php echo $player->body->no?>">
                                 <div class="img"><img src="/prg_img/img/<?php echo $player->body->img?>" alt=""></div>
                                 <div class="txt_area">
                                     <h3 class="name"><?php echo $player->body->name?></h3>
@@ -227,8 +210,10 @@ function recursion($arr, $space=''){
 
 
                 <div class="sponsor-link">
-                    <a href="http://www.mitsuifudosan.co.jp/tokyo2020/" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', 'http://www.mitsuifudosan.co.jp/tokyo2020/', true);"><img src="https://img.sportsbull.jp/img/img2016070811545056886100.jpg" alt="三井不動産『BE THE CHANGE - さぁ、街から世界を変えよう。』" class="sp_hide">
-                        <img src="https://img.sportsbull.jp/img/img2017081510023900588800.jpg" alt="三井不動産『BE THE CHANGE - さぁ、街から世界を変えよう。』" class="pc_hide"></a>
+                    <a href="<?= $page['category']['banner']['pc']['link'] ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?= $page['category']['banner']['pc']['link'] ?>', true);">
+                        <img src="<?= $page['category']['banner']['pc']['image'] ?>" alt="<?= $page['category']['banner']['pc']['text'] ?>" class="sp_hide">
+                        <img src="<?= $page['category']['banner']['sp']['image'] ?>" alt="<?= $page['category']['banner']['sp']['text'] ?>" class="pc_hide">
+                    </a>
                 </div><!-- /sponsor-link-->
 
                 <section class="section_crazy_recommend">

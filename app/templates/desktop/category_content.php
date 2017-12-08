@@ -60,7 +60,7 @@ if ($page['category']['slug'] == 'all') {
                   <ul class="thumb_area">
                       <?php foreach ($page['list'] as $player): ?>
                         <li>
-                            <a href="/athlete/<?php echo $player->body->no ?>/<?php echo $page['category']['slug'] ?>/">
+                            <a href="/athlete/<?php echo $player->body->no ?>/">
                                 <div class="img"><img src="/prg_img/img/<?php echo $player->body->img ?>" alt=""></div>
                                 <div class="txt_area">
                                     <h3 class="name"><?php echo $player->body->name ?></h3>
