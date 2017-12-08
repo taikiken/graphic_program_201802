@@ -15,13 +15,19 @@ import {Content} from '../../app/const/Content';
 import {Scroll} from '../../util/Scroll';
 // import {Offset} from '../../util/Offset';
 
+/**
+ * [library] - Sagen
+ */
 const Sagen = self.Sagen;
+/**
+ * [library] - Sagen.Dom
+ */
 const Dom = Sagen.Dom;
 
 /**
  * sidebar をスクロール追随させます
  */
-export class Sidebar {
+export default class Sidebar {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------

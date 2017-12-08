@@ -76,7 +76,7 @@ import {ViewNews} from './view/home/ViewNews';
 import {ViewRanking} from './view/sidebar/ViewRanking';
 import {ViewVideos} from './view/sidebar/ViewVideos';
 import {ViewRecommend} from './view/sidebar/ViewRecommend';
-import {Sidebar} from './view/sidebar/Sidebar';
+import Sidebar from './view/sidebar/Sidebar';
 
 // modal
 import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
