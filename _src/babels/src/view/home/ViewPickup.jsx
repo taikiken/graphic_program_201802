@@ -45,20 +45,27 @@ import { Polling } from '../../tick/Polling';
 
 // global object
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 // Gasane
 // let Polling = self.Gasane.Polling;
 
 /**
- * <p>home > pickup（スライダー）を表示します。</p>
+ * home > pickup（スライダー）を表示します。
  *
  * 1. JSON取得(Ajax)
  * 1. Dom作成 by React
  */
-export class ViewPickup extends View {
+export default class ViewPickup extends View {
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------

@@ -11,7 +11,7 @@
  */
 
 // parent
-import {ViewHeadline} from '../../../view/home/ViewHeadline';
+import ViewHeadline from '../../../view/home/ViewHeadline';
 
 // view
 import { SPComponentHeadlines } from '../../component/headline/SPComponentHeadlines';

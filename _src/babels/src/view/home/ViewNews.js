@@ -34,10 +34,10 @@ export class ViewNews extends ViewArchiveMasonryInfinite {
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Object} [option={}] optional event handler
-   * @param {Boolean} [useMasonry=true] isotope を行うかの
+   * @param {boolean} [useMasonry=true] isotope を行うかの
    */
-  constructor( element:Element, moreElement:Element, option:Object = {}, useMasonry:Boolean = true ) {
-    super( element, moreElement, null, option, useMasonry );
+  constructor(element, moreElement, option = {}, useMasonry = true) {
+    super(element, moreElement, null, option, useMasonry);
     /**
      * Action instance を設定します
      * @override
@@ -50,7 +50,7 @@ export class ViewNews extends ViewArchiveMasonryInfinite {
     // home flag on
     /**
      * home flag, おすすめ ラベル表示するかしないかに使用
-     * @type {Boolean}
+     * @type {boolean}
      */
     this.home = true;
     /**
@@ -79,8 +79,8 @@ export class ViewNews extends ViewArchiveMasonryInfinite {
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    * @since 2016-10-04
    */
-  done(result):void {
-    let articles = result.articles;
+  done(result) {
+    const articles = result.articles;
     /**
      * 読み込み件数を標準 (Length.archive) に戻します {@link Length}
      * @type {Number}
@@ -88,10 +88,10 @@ export class ViewNews extends ViewArchiveMasonryInfinite {
      */
     this.action.length = Length.archive;
     // console.log( 'ViewArchiveMasonry done ', result );
-    if ( typeof articles === 'undefined' ) {
+    if (typeof articles === 'undefined') {
       // articles undefined
       // JSON に問題がある
-      let error = new Error(Message.undef('[ARCHIVE:UNDEFINED]'));
+      const error = new Error(Message.undef('[ARCHIVE:UNDEFINED]'));
       this.executeSafely(View.UNDEFINED_ERROR, error);
       // this.showError( error.message );
       // @since 2016-09-28, error で button を非表示へ
@@ -99,14 +99,14 @@ export class ViewNews extends ViewArchiveMasonryInfinite {
     } else if (articles.length === 0) {
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error(Message.empty('[ARCHIVE:EMPTY]'));
+      const error = new Error(Message.empty('[ARCHIVE:EMPTY]'));
       this.executeSafely(View.EMPTY_ERROR, error);
       // this.showError( error.message );
       // @since 2016-09-28, error で button を非表示へ
       this.moreButton(false);
     } else {
       this.request = result.request;
-      this.render( articles );
+      this.render(articles);
     }
   }
 }

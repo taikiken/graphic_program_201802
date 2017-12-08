@@ -68,8 +68,8 @@ import ViewComments from './view/ViewComments';
 import ViewCommentForm from './view/comment/ViewCommentForm';
 
 // home
-import {ViewHeadline} from './view/home/ViewHeadline';
-import {ViewPickup} from './view/home/ViewPickup';
+import ViewHeadline from './view/home/ViewHeadline';
+import ViewPickup from './view/home/ViewPickup';
 import {ViewNews} from './view/home/ViewNews';
 
 // sidebar
