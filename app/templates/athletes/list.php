@@ -10,7 +10,7 @@
     <title><?= $page['title'] ?> | スポーツブル / SPORTS BULL</title>
     <script src="/assets/js/libs/vendor.react.js"></script>
     <script src="/assets/js/bundle/main.bundle.js"></script>
-    <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
+    <meta name="keywords" content="スポーツ,メディア,<?= $page['title'] ?>,アスリート,ニュース,動画,sports,media,<?= $page['category']['slug'] ?>">
     <meta name="description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
     <meta property="fb:app_id" content="842032129256034">
     <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
