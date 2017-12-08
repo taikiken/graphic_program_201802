@@ -37,49 +37,55 @@ import ComponentSidebarRanking from '../../component/sidebar/ComponentSidebarRan
 // import {GaData} from '../../ga/GaData';
 
 // React
-// eslint-disable-next-line no-unused-vars
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * sidebar ranking
  */
-export class ViewRanking extends View {
+export default class ViewRanking extends View {
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
    * category slug
-   * @return {string|*} 捜査 slug を返します
+   * @return {string} 捜査 slug を返します
    */
-  get slug():string {
+  get slug() {
     return this._slug;
   }
-
   /**
    * home(index) か否かを表す真偽値
    * @return {boolean} home(index) か否かを表す真偽値を返します
    */
-  get home():Boolean {
+  get home() {
     return this._home;
   }
   /**
-   * @param {Boolean} bool home(index) か否かを表す真偽値
+   * @param {boolean} bool home(index) か否かを表す真偽値
    */
-  set home( bool:Boolean ):void {
+  set home(bool) {
     this._home = bool;
   }
   /**
    * 記事詳細か否かを表す真偽値
    * @return {boolean} 記事詳細か否かを表す真偽値を返します
    */
-  get detail():Boolean {
+  get detail() {
     return this._detail;
   }
   /**
-   * @param {Boolean} bool 記事詳細か否かを表す真偽値
+   * @param {boolean} bool 記事詳細か否かを表す真偽値
    */
-  set detail( bool:Boolean ):void {
+  set detail(bool) {
     this._detail = bool;
   }
   // @since 2016-09-16
@@ -88,15 +94,15 @@ export class ViewRanking extends View {
    * @since 2016-09-16
    * @return {?Object} response.request objectを返します
    */
-  get request():Object {
+  get request() {
     return this._request;
   }
   /**
    * response.request object を設定します
    * @since 2016-09-16
-   * @param {Boolean} request response.request object
+   * @param {?Object} request response.request object
    */
-  set request(request:Object):void {
+  set request(request) {
     this._request = request;
   }
   // ---------------------------------------------------
@@ -107,20 +113,19 @@ export class ViewRanking extends View {
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    * @param {string} [slug=all] category slug です
-   * @param {Number|null} [length=null] 読み込む数
+   * @param {?number} [length=null] 読み込む数
    */
-  constructor( element:Element, option:Object = {}, slug:string = 'all', length:Number = null ) {
-
-    option = Safety.object( option );
-    slug = Safety.string( slug, 'all' );
-
-    super( element, option );
+  constructor(element, option = {}, slug = 'all', length = null ) {
+    option = Safety.object(option);
+    slug = Safety.string(slug, 'all');
+    super(element, option);
+    // ------
     /**
      * Action instance を設定します
      * @override
      * @type {Ranking}
      */
-    this.action = Widget.ranking( slug, this.done.bind( this ), this.fail.bind( this ), length );
+    this.action = Widget.ranking(slug, this.done.bind(this), this.fail.bind(this), length);
     /**
      * category slug
      * @type {string}
@@ -159,52 +164,39 @@ export class ViewRanking extends View {
    * Ajax request を開始します
    */
   start():void {
-
     this.action.next();
-
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
   done( result:Result ):void {
-
-    let articles = result.articles;
-
+    const articles = result.articles;
     if ( typeof articles === 'undefined' ) {
-
       // articles undefined
       // JSON に問題がある
-      let error = new Error( Message.undef('[RANKING:UNDEFINED]') );
+      const error = new Error( Message.undef('[RANKING:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
-
     } else if ( articles.length === 0 ) {
-
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( Message.empty('[RANKING:EMPTY]') );
+      const error = new Error( Message.empty('[RANKING:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
-
     } else {
-
       this._request = result.request;
       this.render( articles );
-
     }
-
   }
   /**
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error:Error ):void {
-
-    this.executeSafely( View.RESPONSE_ERROR, error );
+  fail(error) {
+    this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-
   }
   // /**
   //  * ViewError でエラーコンテナを作成します
@@ -214,7 +206,7 @@ export class ViewRanking extends View {
   //
   //   // message = Safety.string( message, '' );
   //   //
-  //   // // ToDo: Error 時の表示が決まったら変更する
+  //   // // Error 時の表示が決まったら変更する
   //   // let error = new ViewError( this.element, this.option, message );
   //   // error.render();
   //
@@ -223,10 +215,8 @@ export class ViewRanking extends View {
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render( articles:Array ):void {
-
-    this.executeSafely( View.BEFORE_RENDER, articles, this.slug );
-
+  render(articles) {
+    this.executeSafely(View.BEFORE_RENDER, articles, this.slug);
     // let element = this.element;
     // let categorySlug = this.slug;
     // let _this = this;

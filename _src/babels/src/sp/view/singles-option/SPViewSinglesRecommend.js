@@ -12,7 +12,7 @@
 
 // view/sidebar
 // import { ViewRecommend } from '../../../view/sidebar/ViewRecommend';
-// import { ViewRanking } from '../../../view/sidebar/ViewRanking';
+// import ViewRanking from '../../../view/sidebar/ViewRanking';
 import { ViewVideos } from '../../../view/sidebar/ViewVideos';
 
 // view

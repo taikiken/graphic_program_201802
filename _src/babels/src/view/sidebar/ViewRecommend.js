@@ -12,7 +12,7 @@
 
 // view
 import View from '../View';
-import {ViewRanking} from './ViewRanking';
+import ViewRanking from './ViewRanking';
 
 // app
 // import {Empty} from '../../app/const/Empty';

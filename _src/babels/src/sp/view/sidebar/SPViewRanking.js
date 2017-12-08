@@ -10,7 +10,7 @@
  *
  */
 
-import {ViewRanking} from '../../../view/sidebar/ViewRanking';
+import ViewRanking from '../../../view/sidebar/ViewRanking';
 
 // app
 import {Length} from '../../../app/const/Length';

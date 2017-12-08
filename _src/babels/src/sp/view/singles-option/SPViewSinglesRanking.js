@@ -11,7 +11,7 @@
  */
 
 // view/sidebar
-import { ViewRanking } from '../../../view/sidebar/ViewRanking';
+import ViewRanking from '../../../view/sidebar/ViewRanking';
 
 // view
 import View from '../../../view/View';
