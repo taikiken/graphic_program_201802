@@ -150,7 +150,7 @@ elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 94 && !preg_match("#/ph
 
 	$sql = sprintf("SELECT COUNT(*) AS n FROM %s%s%s%s", $TABLE, $WHERE, $exuser, $excategory);
 
-}else{
+}elseif($CURRENTDIRECTORY=="notice"){
 	$sql=sprintf("select count(*) as n from %s%s",$TABLE,$WHERE);
 }
 
@@ -186,6 +186,23 @@ elseif ($TABLE == "tbl_player")
 {
 	// 選手一覧
 	$sql = sprintf("SELECT %s FROM %s%s%s%s ORDER BY %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, $orderby, dblm($no, $offset));
+}
+elseif ($TABLE == "notices")
+{
+	$cookie_categoryid = (int)$_COOKIE['excategory'];
+	if(isint($_COOKIE["excategory"])){
+    $WHERE = <<<WHR
+		, categories_notices 
+WHERE
+		{$TABLE}.id = notice_id
+AND
+		category_id = {$cookie_categoryid}
+WHR;
+
+	}
+	// お知らせ一覧
+	$sql = sprintf("SELECT %s FROM %s%s ORDER BY notices.created_at DESC", $FIELD, $TABLE, $WHERE);
+
 }else{
 	$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
 }
