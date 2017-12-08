@@ -14,7 +14,7 @@
 
 // view
 import View from '../View';
-import {ViewError} from '../error/ViewError';
+import ViewError from '../error/ViewError';
 
 // app
 import {Message} from '../../app/const/Message';

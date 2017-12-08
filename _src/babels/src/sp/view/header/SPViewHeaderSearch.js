@@ -12,7 +12,7 @@
 
 
 // parent
-import {ViewHeaderSearch} from '../../../view/header/ViewHeaderSearch';
+import ViewHeaderSearch from '../../../view/header/ViewHeaderSearch';
 
 // app
 import {Message} from '../../../app/const/Message';

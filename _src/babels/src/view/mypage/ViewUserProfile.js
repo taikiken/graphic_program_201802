@@ -12,7 +12,7 @@
 
 
 import View from '../View';
-import {ViewError} from '../error/ViewError';
+import ViewError from '../error/ViewError';
 
 // action
 import {UsersSelf} from '../../action/users/UsersSelf';

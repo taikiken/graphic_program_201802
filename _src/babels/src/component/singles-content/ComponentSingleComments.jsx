@@ -14,7 +14,7 @@
 import { ViewCommentForm } from '../../view/comment/ViewCommentForm';
 
 // view
-import { ViewComments } from '../../view/ViewComments';
+import ViewComments from '../../view/ViewComments';
 
 // app
 import { User } from '../../app/User';

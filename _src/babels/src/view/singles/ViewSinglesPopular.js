@@ -36,6 +36,9 @@ const ReactDOM = self.ReactDOM;
  * @since 2016-09-30
  */
 export class ViewSinglesPopular extends ViewArchiveMasonry {
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
    * 必要なデータを保持します
    * @param {Element} element 出力親コンテナ
@@ -122,27 +125,9 @@ export class ViewSinglesPopular extends ViewArchiveMasonry {
      */
     this.onMount = this.onMount.bind(this);
   }
-  /**
-   * 成功後に `ComponentSinglesWidgetPopularList` を render します
-   * @param {Array} articles JSON response.articles
-   */
-  render(articles) {
-    const list = articles.map((article) => new ArticleDae(article));
-
-    this.articles = list;
-
-    if (this.articleRendered === null) {
-      this.articleRendered = ReactDOM.render(
-        <ComponentSinglesWidgetPopularList
-          list={list}
-          callback={this.onMount}
-        />,
-        this.element
-      );
-    } else {
-      this.articleRendered.updateList(list, this.request.offset, this.request.length);
-    }
-  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
   /**
    * Ajax 取得コンテンツがコンテナにセットされた時に呼び出されます
    * @since 2016-10-29
@@ -165,5 +150,26 @@ export class ViewSinglesPopular extends ViewArchiveMasonry {
 
     component.reload();
     return true;
+  }
+  /**
+   * 成功後に `ComponentSinglesWidgetPopularList` を render します
+   * @param {Array} articles JSON response.articles
+   */
+  render(articles) {
+    const list = articles.map((article) => new ArticleDae(article));
+
+    this.articles = list;
+
+    if (this.articleRendered === null) {
+      this.articleRendered = ReactDOM.render(
+        <ComponentSinglesWidgetPopularList
+          list={list}
+          callback={this.onMount}
+        />,
+        this.element
+      );
+    } else {
+      this.articleRendered.updateList(list, this.request.offset, this.request.length);
+    }
   }
 }

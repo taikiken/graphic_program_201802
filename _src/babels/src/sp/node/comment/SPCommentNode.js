@@ -16,19 +16,23 @@ import {Safety} from '../../../data/Safety';
 import {ReactionNode} from '../../../node/comment/ReactionNode';
 // import {CommentFormNode} from '../../../node/comment/CommentFormNode';
 import {CommentMenuNode} from '../../../node/comment/CommentMenuNode';
-import {CommentUserNode} from '../../../node/comment/CommentUserNode';
-import {CommentContentNode} from '../../../node/comment/CommentContentNode';
+// import {CommentUserNode} from '../../../node/comment/CommentUserNode';
+// import {CommentContentNode} from '../../../node/comment/CommentContentNode';
 
 // sp/node
 import {SPCommentFormNode} from './SPCommentFormNode';
+import ComponentCommentUser from '../../../component/single-comment/user/ComponentCommentUser';
+import ComponentCommentContentBody from '../../../component/single-comment/content/ComponentCommentContentBody';
 
 // React
 let React = self.React;
 
 /**
  * 記事詳細 > コメント一覧 node を作成します
+ * TODO: future remove
  * @class CommentNode
  * @type {Function}
+ * @deprecated 2017-12-07 instead use {@link SPComponentCommentsChildList}
  */
 export let SPCommentNode = React.createClass( {
   propTypes: {
@@ -84,6 +88,7 @@ export let SPCommentNode = React.createClass( {
     };
   },
   render: function() {
+    // console.log('SPCommentNode.render', this.props.uniqueId);
     let commentDae = this.props.commentDae;
     let comment = commentDae.comment;
     let sign = this.props.sign;
@@ -112,6 +117,7 @@ export let SPCommentNode = React.createClass( {
           url={this.props.url}
         />
         {/* figure.comment-user */}
+        {/*
         <CommentUserNode
           loggedIn={loggedIn}
           picture={picture}
@@ -119,8 +125,23 @@ export let SPCommentNode = React.createClass( {
           bio={comment.user.bio || ''}
           displayDate={comment.displayDate}
         />
+        */}
+        <ComponentCommentUser
+          loggedIn={loggedIn}
+          picture={picture}
+          userName={comment.user.userName}
+          bio={comment.user.bio || ''}
+          displayDate={comment.displayDate}
+        />
         {/* div.comment-content */}
+        {/*
         <CommentContentNode
+          content={comment.body}
+          commentId={this.props.commentId}
+          replyClass={replyClass(this.props.replyId)}
+        />
+        */}
+        <ComponentCommentContentBody
           content={comment.body}
           commentId={this.props.commentId}
           replyClass={replyClass(this.props.replyId)}
@@ -156,7 +177,7 @@ export let SPCommentNode = React.createClass( {
   // componentDidMount: function() {
   //
   // },
-  // componentWillUnmount: function() {
+  // componentWillUnMount: function() {
   //
   // }
 } );

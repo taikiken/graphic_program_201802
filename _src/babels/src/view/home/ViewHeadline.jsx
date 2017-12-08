@@ -25,7 +25,7 @@ import {Headline} from '../../action/home/Headline';
 import {HeadlineAuth} from '../../action/home/HeadlineAuth';
 
 // data
-import {Result} from '../../data/Result';
+// import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
 // dae
@@ -39,8 +39,16 @@ import {ArticleDae} from '../../dae/ArticleDae';
 // import {GaData} from '../../ga/GaData';
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * <p>home > headline（注目ニュース）を表示します。</p>
@@ -49,7 +57,7 @@ let ReactDOM = self.ReactDOM;
  * 1. Dom作成 by React
  *
  * ```
- * let headline;
+ * const headline;
  *
  * function didMount() {
  *    console.log( 'dom mount' );
@@ -68,7 +76,7 @@ let ReactDOM = self.ReactDOM;
  *
  *    headline.showError( 'error message ' + error.name + ', ' + error.message );
  * }
- * let option = {
+ * const option = {
  *    didMount: didMount,
  *    errorMount: errorMount,
  *    undefinedError: undefinedError,
@@ -80,76 +88,60 @@ let ReactDOM = self.ReactDOM;
  * headline.start();
  * ```
  */
-export class ViewHeadline extends View {
+export default class ViewHeadline extends View {
   /**
    * action/Headline を使い Ajax request 後 element へ dom を作成します
    *
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, option:Object = {} ) {
-
+  constructor(element, option = {}) {
     option = Safety.object( option );
-
     super( element, option );
-    let ActionClass = User.sign ? HeadlineAuth : Headline;
+    const ActionClass = User.sign ? HeadlineAuth : Headline;
     /**
      * Action instance を設定します
      * @override
      * @type {HeadlineAuth|Headline}
      */
-    this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
-
+    this.action = new ActionClass(this.done.bind(this), this.fail.bind(this));
   }
   /**
    * Ajax request を開始します
    */
-  start():void {
-
+  start() {
     this.action.start();
-
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result:Result ):void {
-
-    let articles = result.articles;
-
-    if ( typeof articles === 'undefined' ) {
-
+  done(result) {
+    const articles = result.articles;
+    if (typeof articles === 'undefined') {
       // articles undefined
       // JSON に問題がある
-      let error = new Error( Message.undef('[HEADLINE:UNDEFINED]') );
-      this.executeSafely( View.UNDEFINED_ERROR, error );
+      let error = new Error(Message.undef('[HEADLINE:UNDEFINED]'));
+      this.executeSafely(View.UNDEFINED_ERROR, error);
       // this.showError( error.message );
-
-    } else if ( articles.length === 0 ) {
-
+    } else if (articles.length === 0) {
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( Message.empty('[HEADLINE:EMPTY]') );
-      this.executeSafely( View.EMPTY_ERROR, error );
+      let error = new Error(Message.empty('[HEADLINE:EMPTY]'));
+      this.executeSafely(View.EMPTY_ERROR, error);
       // this.showError( error.message );
-
     } else {
-
-      this.render( articles );
-
+      this.render(articles);
     }
-
   }
   /**
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error:Error ):void {
-
-    this.executeSafely( View.RESPONSE_ERROR, error );
+  fail(error) {
+    this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-
   }
   // /**
   //  * ViewError でエラーコンテナを作成します
@@ -160,7 +152,7 @@ export class ViewHeadline extends View {
   //   message = Safety.string( message, '' );
   //
   //   /*
-  //   // ToDo: Error 時の表示が決まったら変更する
+  //   // Error 時の表示が決まったら変更する
   //   let error = new ViewError( this.element, this.option, message );
   //   error.render();
   //   */
@@ -170,7 +162,7 @@ export class ViewHeadline extends View {
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render( articles:Array ):void {
+  render(articles) {
     //
     // let element = this.element;
     // let _this = this;

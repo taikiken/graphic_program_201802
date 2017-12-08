@@ -1,7 +1,15 @@
+import { CommentsType } from '../../../app/const/CommentsType';
+import { CommentsListDae } from '../../../dae/CommentsListDae';
+import View from '../../../view/View';
+import { Safety } from '../../../data/Safety';
+import { Comments } from '../../../action/comment/Comments';
+import ComponentCommentMoreView from '../../../component/single-comment/ComponentCommentMoreView';
+import SPComponentCommentsParent from './container/SPComponentCommentsParent';
+
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/12/04 - 20:06
+ * @date 2017/12/06 - 12:11
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -9,18 +17,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-// CommentsDom
-
-import { Safety } from '../../data/Safety';
-import View from '../../view/View';
-import { CommentsType } from '../../app/const/CommentsType';
-import ComponentCommentsParent from './container/ComponentCommentsParent';
-import ComponentCommentMoreView from './ComponentCommentMoreView';
-import { CommentsListDae } from '../../dae/CommentsListDae';
-import { Comments } from '../../action/comment/Comments';
-import { CommentSingle } from '../../action/comment/CommentSingle';
-import { CommentSingleReply } from '../../action/comment/CommentSingleReply';
-
+// SP:CommentsDom
 
 // React
 const React = self.React;
@@ -28,19 +25,19 @@ const React = self.React;
 
 /**
  * コメントコンテナを出力します
- * - {@link ComponentCommentsParent}
- *   - {@link ComponentCommentsChildList}
+ * - {@link SPComponentCommentsParent}
+ *   - {@link SPComponentCommentsChildList}
  *     - {@link CommentMenuNode}
  *     - {@link CommentUserNode}
  *     - {@link CommentContentNode}
  *     - {@link ReactionNode}
  *     - {@link CommentFormNode}
- *   - {@link ComponentCommentsChildReply}
- *     - {@link CommentNode}
+ *   - {@link SPComponentCommentsChildReply}
+ *     - {@link SPCommentNode}
  * - {@link ComponentCommentMoreView}
  * @since 2017-12-05
  */
-export default class ComponentComments extends React.Component {
+export default class SPComponentComments extends React.Component {
   // ----------------------------------------
   // STATIC METHOD
   // ----------------------------------------
@@ -69,11 +66,7 @@ export default class ComponentComments extends React.Component {
       articleId: React.PropTypes.string.isRequired,
       // executeSafely
       execute: React.PropTypes.func.isRequired,
-      action: React.PropTypes.oneOfType([
-        React.PropTypes.instanceOf(Comments),
-        React.PropTypes.instanceOf(CommentSingle),
-        React.PropTypes.instanceOf(CommentSingleReply)
-      ]).isRequired,
+      action: React.PropTypes.instanceOf(Comments).isRequired,
       // コメントIDをキーにコメント Object
       commentsBank: React.PropTypes.object.isRequired,
       user: React.PropTypes.object.isRequired,
@@ -115,7 +108,7 @@ export default class ComponentComments extends React.Component {
    */
   componentWillReceiveProps(nextProps) {
     const { commentsList } = nextProps;
-    // console.log('ComponentComments.componentWillReceiveProps', nextProps.commentsList, this.state.commentsList);
+    // console.log('SPComponentComments.componentWillReceiveProps', nextProps.commentsList, this.state.commentsList);
     if (Safety.array(commentsList) && commentsList.length !== this.state.commentsList.length) {
       this.setState({ commentsList });
     }
@@ -144,7 +137,7 @@ export default class ComponentComments extends React.Component {
    */
   render() {
     const { commentsList } = this.state;
-    // console.log('ComponentComments.render commentsList', commentsList);
+    // console.log('SPComponentComments.render commentsList', commentsList);
     if (!Safety.array(commentsList) || !commentsList.length) {
       return null;
     }
@@ -161,7 +154,7 @@ export default class ComponentComments extends React.Component {
             // console.log('ComponentComments.render.map commentObject', commentId, commentObject);
             const key = `${index}-${commentsListType}-${articleId}-${commentId}-${userId}`;
             return (
-              <ComponentCommentsParent
+              <SPComponentCommentsParent
                 key={key}
                 commentObject={commentObject}
                 uniqueId={key}

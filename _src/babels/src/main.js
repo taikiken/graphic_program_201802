@@ -49,34 +49,34 @@ import {Model} from './model/Model';
 // view
 import View from './view/View';
 
-import {ViewHeaderUser} from './view/header/ViewHeaderUser';
-import {ViewHeaderSearch} from './view/header/ViewHeaderSearch';
+import ViewHeaderUser from './view/header/ViewHeaderUser';
+import ViewHeaderSearch from './view/header/ViewHeaderSearch';
 
 import {ViewCategory} from './view/ViewCategory';
 import {ViewSingle} from './view/ViewSingle';
 // import {ViewTitle} from './view/ViewTitle';
 import {ViewSearch} from './view/ViewSearch';
-import {ViewCommentSingle} from './view/ViewCommentSingle';
-import {ViewFirstVisit} from './view/ViewFirstVisit';
+import ViewCommentSingle from './view/ViewCommentSingle';
+import ViewFirstVisit from './view/ViewFirstVisit';
 
 // single
 import {ViewSingleTitle} from './view/single/ViewSingleTitle';
 import {ViewSingleVisual} from './view/single/ViewSingleVisual';
 
 // comment
-import {ViewComments} from './view/ViewComments';
-import {ViewCommentForm} from './view/comment/ViewCommentForm';
+import ViewComments from './view/ViewComments';
+import ViewCommentForm from './view/comment/ViewCommentForm';
 
 // home
-import {ViewHeadline} from './view/home/ViewHeadline';
-import {ViewPickup} from './view/home/ViewPickup';
+import ViewHeadline from './view/home/ViewHeadline';
+import ViewPickup from './view/home/ViewPickup';
 import {ViewNews} from './view/home/ViewNews';
 
 // sidebar
 import {ViewRanking} from './view/sidebar/ViewRanking';
 import {ViewVideos} from './view/sidebar/ViewVideos';
 import {ViewRecommend} from './view/sidebar/ViewRecommend';
-import {Sidebar} from './view/sidebar/Sidebar';
+import Sidebar from './view/sidebar/Sidebar';
 
 // modal
 import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
@@ -118,7 +118,7 @@ import { PageTop } from './ui/PageTop';
 // sp
 
 // sp/view
-import { SPViewFirstVisit } from './sp/view/SPViewFirstVisit';
+import SPViewFirstVisit from './sp/view/SPViewFirstVisit';
 import { SPViewAppBanner } from './sp/view/SPViewAppBanner';
 
 // home
@@ -154,7 +154,7 @@ import {SPViewSingleRanking} from './sp/view/single/SPViewSingleRanking';
 import {SPViewSingleRecommend} from './sp/view/single/SPViewSingleRecommend';
 
 // single/comment
-import {SPViewComments} from './sp/view/SPViewComments';
+import SPViewComments from './sp/view/SPViewComments';
 import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 
 // singles-option
