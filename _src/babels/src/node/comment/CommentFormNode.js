@@ -20,8 +20,9 @@ let React = self.React;
 // wrapper dom + form
 /**
  * <p>comment form を表示するための基点 class</p>
+ * TODO: future remove
  * @type {ReactClass}
- * @deprecated 2017-12-06 istead use {@link ComponentCommentForm}
+ * @deprecated 2017-12-06 instead use {@link ComponentCommentForm}
  */
 export let CommentFormNode = React.createClass( {
   propTypes: {

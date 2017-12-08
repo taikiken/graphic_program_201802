@@ -21,7 +21,7 @@ let React = self.React;
  * CommentNode
  * |- CommentUserNode
  * </pre>
- *
+ * TODO: future remove
  * @type {ReactClass}
  * @deprecated 2017-12-07 instead use {@link ComponentCommentUser}
  */

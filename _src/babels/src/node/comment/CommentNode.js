@@ -27,6 +27,7 @@ const React = self.React;
 
 /**
  * <p>記事詳細 > コメント一覧 node を作成します</p>
+ * TODO: future remove
  * @class CommentNode
  * @type {Function}
  * @deprecated 2017-12-06 instead use {@link ComponentCommentsChildList}

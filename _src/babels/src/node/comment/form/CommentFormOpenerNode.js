@@ -24,9 +24,9 @@ let React = self.React;
  * CommentFormNode
  * |- CommentFormOpenerNode
  * </pre>
- *
+ * TODO: future remove
  * @type {ReactClass}
- * @deprecated 2017-12-06 instead use ComponentCommentFormOpener
+ * @deprecated 2017-12-06 instead use {@link ComponentCommentFormOpener}
  */
 export let CommentFormOpenerNode = React.createClass( {
   propTypes: {

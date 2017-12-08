@@ -29,8 +29,10 @@ let React = self.React;
 
 /**
  * 記事詳細 > コメント一覧 node を作成します
+ * TODO: future remove
  * @class CommentNode
  * @type {Function}
+ * @deprecated 2017-12-07 instead use {@link SPComponentCommentsChildList}
  */
 export let SPCommentNode = React.createClass( {
   propTypes: {

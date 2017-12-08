@@ -19,11 +19,13 @@ import { Safety } from '../../../../data/Safety';
 // node
 import { ReactionNode } from '../../../../node/comment/ReactionNode';
 import { CommentMenuNode } from '../../../../node/comment/CommentMenuNode';
-import { CommentUserNode } from '../../../../node/comment/CommentUserNode';
-import { CommentContentNode } from '../../../../node/comment/CommentContentNode';
+// import { CommentUserNode } from '../../../../node/comment/CommentUserNode';
+// import { CommentContentNode } from '../../../../node/comment/CommentContentNode';
 
 // sp/node/comment
 import { SPCommentFormNode } from '../../../node/comment/SPCommentFormNode';
+import ComponentCommentContentBody from '../../../../component/single-comment/content/ComponentCommentContentBody';
+import ComponentCommentUser from '../../../../component/single-comment/user/ComponentCommentUser';
 
 // React
 const React = self.React;
@@ -97,6 +99,7 @@ const SPComponentCommentsChildList = ({
         url={url}
       />
       {/* figure.comment-user */}
+      {/*
       <CommentUserNode
         loggedIn={loggedIn}
         picture={picture}
@@ -104,8 +107,23 @@ const SPComponentCommentsChildList = ({
         bio={comment.user.bio || ''}
         displayDate={comment.displayDate}
       />
+      */}
+      <ComponentCommentUser
+        loggedIn={loggedIn}
+        picture={picture}
+        userName={comment.user.userName}
+        bio={comment.user.bio || ''}
+        displayDate={comment.displayDate}
+      />
       {/* div.comment-content */}
+      {/*
       <CommentContentNode
+        content={comment.body}
+        commentId={commentId}
+        replyClass={replyClass(replyId)}
+      />
+      */}
+      <ComponentCommentContentBody
         content={comment.body}
         commentId={commentId}
         replyClass={replyClass(replyId)}

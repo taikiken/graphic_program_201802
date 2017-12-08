@@ -48,7 +48,7 @@ let ReactDOM = self.ReactDOM;
 /**
  * <p>コメント Form Element<br>
  * 入力(textarea)と送信(input:submit)</p>
- *
+ * TODO: future remove
  * <pre>
  * CommentFormNode
  * |- CommentFormElementNode
