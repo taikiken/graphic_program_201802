@@ -475,8 +475,8 @@ function set_categoriesinfo($f){
 	$s["title_banner"]["sp"]["text"]=strlen($f["alt"])>0?$f["alt"]:"";
 	$s["title_banner"]["sp"]["link"]=strlen($f["url1"])>0?$f["url1"]:"";
 
-  $s["pc_header"]="";
-  $s["_header"]=strlen($f["sp_header"])>0?sprintf("%s/img/%s",$ImgPath,$f["sp_header"]):"";
+  $s["pc_header"]=strlen($f["pc_header"])>0?sprintf("%s/img/%s",$ImgPath,$f["pc_header"]):"";
+  $s["sp_header"]=strlen($f["sp_header"])>0?sprintf("%s/img/%s",$ImgPath,$f["sp_header"]):"";
 
 
   $ad=get_advertise($s["id"]);
