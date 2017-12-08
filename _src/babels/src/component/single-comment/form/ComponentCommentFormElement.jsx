@@ -469,6 +469,7 @@ export default class ComponentCommentFormElement extends React.Component {
       body,
       open,
     } = this.state;
+    // console.log('ComponentCommentFormElement.render', this.props.uniqueId, this.props.commentType, open, independent);
     // ---
     if (!independent) {
       // コメントへのコメント
@@ -476,7 +477,6 @@ export default class ComponentCommentFormElement extends React.Component {
         throw new Error(`need comment Id ${commentId}`);
       }
     }
-    // console.log('ComponentCommentFormElement.render', this.props.uniqueId, this.props.commentType, open, independent);
     if (!open && !independent) {
       return null;
     }

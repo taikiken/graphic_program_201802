@@ -11,7 +11,7 @@
  */
 
 
-import {ViewCommentForm} from '../../../view/comment/ViewCommentForm';
+import ViewCommentForm from '../../../view/comment/ViewCommentForm';
 import SPComponentFormOpener from '../../component/single-comment/opener/SPComponentFormOpener';
 
 // // app
@@ -24,8 +24,15 @@ import { CommentsType } from '../../../app/const/CommentsType';
 // import {SPCommentFormNode} from '../../node/comment/SPCommentFormNode';
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**

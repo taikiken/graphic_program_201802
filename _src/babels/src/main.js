@@ -57,7 +57,7 @@ import {ViewSingle} from './view/ViewSingle';
 // import {ViewTitle} from './view/ViewTitle';
 import {ViewSearch} from './view/ViewSearch';
 import ViewCommentSingle from './view/ViewCommentSingle';
-import {ViewFirstVisit} from './view/ViewFirstVisit';
+import ViewFirstVisit from './view/ViewFirstVisit';
 
 // single
 import {ViewSingleTitle} from './view/single/ViewSingleTitle';
@@ -65,7 +65,7 @@ import {ViewSingleVisual} from './view/single/ViewSingleVisual';
 
 // comment
 import ViewComments from './view/ViewComments';
-import {ViewCommentForm} from './view/comment/ViewCommentForm';
+import ViewCommentForm from './view/comment/ViewCommentForm';
 
 // home
 import {ViewHeadline} from './view/home/ViewHeadline';
@@ -118,7 +118,7 @@ import { PageTop } from './ui/PageTop';
 // sp
 
 // sp/view
-import { SPViewFirstVisit } from './sp/view/SPViewFirstVisit';
+import SPViewFirstVisit from './sp/view/SPViewFirstVisit';
 import { SPViewAppBanner } from './sp/view/SPViewAppBanner';
 
 // home

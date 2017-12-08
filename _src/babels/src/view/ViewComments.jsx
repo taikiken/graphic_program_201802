@@ -52,6 +52,9 @@ const ReactDOM = self.ReactDOM;
  * comments スレッド を表示する
  */
 export default class ViewComments extends View {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * コメントスレッド表示（記事詳細）
    * @param {number} id 記事ID :article_id1
