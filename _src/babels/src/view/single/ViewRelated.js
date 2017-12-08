@@ -29,8 +29,16 @@ import { ComponentSingleRelated } from '../../component/singles/ComponentSingleR
 
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * 関連記事表示<br>
@@ -46,14 +54,14 @@ export class ViewRelated extends View {
    * @param {Element} element root element
    * @param {Array<RelatedDae>} [related=[]] response.related_articles 配列
    */
-  constructor( element:Element, related:Array<RelatedDae> = [] ) {
+  constructor(element, related = []) {
     super( element );
     /**
      * response.related_articles 配列
      * @type {Array}
      * @private
      */
-    this._related = Safety.array( related );
+    this._related = Safety.array(related);
     /**
      * 関連記事 dom 生成 instance
      * @type {null|Object}
@@ -64,16 +72,15 @@ export class ViewRelated extends View {
   /**
    * render 処理を開始します
    */
-  start():void {
-    this.render( this._related );
+  start() {
+    this.render(this._related);
   }
   /**
    * Dom 生成します
    * @param {Array<RelatedDae>} [related=[]] response.related_articles 配列
    */
-  render( related ):void {
-
-    if ( !Safety.isElement( this.element ) ) {
+  render(related) {
+    if (!Safety.isElement(this.element)) {
       // nothing do
       return;
     }
@@ -81,14 +88,14 @@ export class ViewRelated extends View {
     // -------------------------------------------------
     // 配列が空
     // 関連記事がないので処理中止
-    if ( related.length === 0 ) {
+    if (related.length === 0) {
       return;
     }
 
     // -------------------------------------------------
     // 関連記事があった
-
-    let element = this.element;
+    //
+    // let element = this.element;
 
     // // React Class
     // let ArticleDom = React.createClass( {
@@ -159,8 +166,7 @@ export class ViewRelated extends View {
     // } );
 
     // 関連記事 dom 生成
-    if ( this._rendered === null ) {
-
+    if (this._rendered === null) {
       // this._rendered = ReactDOM.render(
       //   React.createElement( ArticleDom, { list: related } ),
       //   element
@@ -169,14 +175,10 @@ export class ViewRelated extends View {
         <ComponentSingleRelated
           list={related}
         />,
-        element
+        this.element,
       );
-
     } else {
-
-      this._rendered.updateList( related );
-
+      this._rendered.updateList(related);
     }
-
   }
 }

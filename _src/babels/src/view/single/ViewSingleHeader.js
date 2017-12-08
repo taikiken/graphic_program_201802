@@ -26,8 +26,15 @@ import {User} from '../../app/User';
 import { ComponentSingleHeader } from '../../component/singles/ComponentSingleHeader';
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**
@@ -45,7 +52,7 @@ export class ViewSingleHeader extends View {
    * @param {Element} element single header root element
    * @param {SingleDae} single 変換済み JSON data
    */
-  constructor( element:Element, single:SingleDae ) {
+  constructor(element, single) {
     super( element );
     /**
      * 変換済み JSON data
@@ -59,6 +66,11 @@ export class ViewSingleHeader extends View {
      * @private
      */
     this._rendered = null;
+    /**
+     * bound executeSafely
+     * @type {function}
+     */
+    this.boundSafely = this.executeSafely.bind(this);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -67,14 +79,14 @@ export class ViewSingleHeader extends View {
    * HeaderDom instance を取得します
    * @return {?ComponentSingleHeader} HeaderDom instance を返します
    */
-  get rendered():ComponentSingleHeader {
+  get rendered() {
     return this._rendered;
   }
   /**
    * HeaderDom instance を設定します
    * @param {?ComponentSingleHeader} rendered HeaderDom instance
    */
-  set rendered( rendered:ComponentSingleHeader ):void {
+  set rendered(rendered) {
     this._rendered = rendered;
   }
   // ---------------------------------------------------
@@ -83,16 +95,16 @@ export class ViewSingleHeader extends View {
   /**
    * render 処理を開始します
    */
-  start():void {
-    this.render( this._single );
+  start() {
+    this.render(this._single);
   }
   /**
    * render します
    * @param {SingleDae} singleDae JSON 変換済みデータ
    */
-  render( singleDae:SingleDae ):void {
-
-    const element = this.element;
+  render(singleDae) {
+    //
+    // const element = this.element;
     // let _this = this;
     //
     // let HeaderDom = React.createClass( {
@@ -168,8 +180,7 @@ export class ViewSingleHeader extends View {
     //   }
     // } );
 
-    if ( this._rendered === null ) {
-
+    if (this._rendered === null) {
       // this._rendered = ReactDOM.render(
       //   React.createElement( HeaderDom, { single: singleDae, sign: User.sign } ),
       //   element
@@ -179,15 +190,12 @@ export class ViewSingleHeader extends View {
         <ComponentSingleHeader
           single={singleDae}
           sign={User.sign}
-          callback={this.executeSafely.bind(this)}
+          callback={this.boundSafely}
         />,
-        element
+        this.element
       );
-
     } else {
-
-      this._rendered.updateSingle( singleDae, User.sign );
-
+      this._rendered.updateSingle(singleDae, User.sign);
     }
 
   }// render

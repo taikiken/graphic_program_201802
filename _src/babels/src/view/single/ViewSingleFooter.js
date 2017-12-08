@@ -26,8 +26,16 @@ import {SingleDae} from '../../dae/SingleDae';
 import { ComponentSingleFooter } from '../../component/singles/ComponentSingleFooter';
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * <p>記事詳細</p>
@@ -39,8 +47,8 @@ export class ViewSingleFooter extends View {
    * @param {Element} element single footer root element
    * @param {SingleDae} single 変換済み JSON data
    */
-  constructor( element:Element, single:SingleDae ) {
-    super( element );
+  constructor(element, single) {
+    super(element);
     /**
      * 変換済み JSON data
      * @type {SingleDae}
@@ -57,17 +65,15 @@ export class ViewSingleFooter extends View {
   /**
    * render 処理を開始します
    */
-  start():void {
-    this.render( this._single );
+  start() {
+    this.render(this._single);
   }
   /**
    * render します
    * @param {SingleDae} singleDae JSON 変換済みデータ
    */
-  render( singleDae:SingleDae ):void {
-
+  render(singleDae) {
     // let element = this.element;
-
     // let FooterDom = React.createClass( {
     //   propTypes: {
     //     single: React.PropTypes.object.isRequired
@@ -131,9 +137,7 @@ export class ViewSingleFooter extends View {
     //     this.setState( { single: single } );
     //   }
     // } );
-
-    if ( this._rendered === null ) {
-
+    if (this._rendered === null) {
       // this._rendered = ReactDOM.render(
       //   React.createElement( FooterDom, { single: singleDae } ),
       //   element
@@ -146,12 +150,8 @@ export class ViewSingleFooter extends View {
         />,
         this.element
       );
-
     } else {
-
       this._rendered.updateSingle( singleDae );
-
     }
-
   }
 }

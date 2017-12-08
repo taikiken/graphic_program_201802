@@ -30,8 +30,16 @@ import {Safety} from '../../data/Safety';
 import {SingleDae} from '../../dae/SingleDae';
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * コメント詳細上部に表示する 記事タイトル
@@ -43,81 +51,65 @@ export class ViewSingleTitle extends View {
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( id:number, element:Element, option:Object = {} ) {
+  constructor(id, element, option = {}) {
     option = Safety.object( option );
-
-    super( element, option );
+    super(element, option);
     /**
      * Action instance を設定します
      * @override
      * @type {Single}
      */
-    this.action = new Single( id, this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Single(id, this.done.bind(this), this.fail.bind(this));
   }
   /**
    * Ajax request を開始します
    */
-  start():void {
-
+  start() {
     this.action.start();
-
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result:Result ):void {
-
-    let response = result.response;
-
-    if ( typeof response === 'undefined' ) {
-
+  done(result) {
+    const response = result.response;
+    if (typeof response === 'undefined') {
       // articles undefined
       // JSON に問題がある
-      let error = new Error( Message.undef('[COMMENT_BY_SINGLE:UNDEFINED]') );
-      this.executeSafely( View.UNDEFINED_ERROR, error );
+      const error = new Error(Message.undef('[COMMENT_BY_SINGLE:UNDEFINED]'));
+      this.executeSafely(View.UNDEFINED_ERROR, error);
       // this.showError( error.message );
-
     } else {
-
-      this.render( response );
-
+      this.render(response);
     }
-
   }
   /**
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error:Error ):void {
-
-    this.executeSafely( View.RESPONSE_ERROR, error );
+  fail(error) {
+    this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-
   }
   /**
    * ViewError でエラーコンテナを作成します
    * @param {string} message エラーメッセージ
    */
-  showError( message:string = '' ):void {
-
-    message = Safety.string( message, '' );
-
+  showError(message = '') {
+    message = Safety.string(message, '');
     // ToDo: Error 時の表示が決まったら変更する
-    let error = new ViewError( this.element, this.option, message );
+    const error = new ViewError(this.element, this.option, message);
     error.render();
-
   }
   /**
    * dom を render します
    * @param {Object} response JSON response
    */
-  render( response:Object ):void {
-    let single = new SingleDae( response );
-
+  render(response) {
+    const single = new SingleDae(response);
     // beforeRender call
-    this.executeSafely( View.BEFORE_RENDER, single );
+    this.executeSafely(View.BEFORE_RENDER, single);
 
     /**
      * 記事詳細タイトル

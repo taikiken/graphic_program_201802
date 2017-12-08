@@ -23,7 +23,16 @@ import {SingleDae} from '../../dae/SingleDae';
 import {MediaNode} from '../../node/single/MediaNode';
 
 // React
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * PC main visual
