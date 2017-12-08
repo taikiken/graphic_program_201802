@@ -148,9 +148,25 @@ END_DOC;
   * @param  string $slug カテゴリースラッグ
   * @return array
   */
-  public function get_category_by_slug( $slug ) {
+  public function get_category_by_slug( $slug, $playerid=null ) {
 
-    $sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e,no_image,og_image,seo_desc,seo_key from u_categories where name_e='%s'",$slug);
+//    if (isset($playerid))
+//    {
+      $sql=<<<SQL_EOL
+SELECT 
+u_categories.id,u_categories.name,u_categories.title,u_categories.url,u_categories.img,u_categories.url1,u_categories.img1,u_categories.alt,u_categories.description,name_e,u_categories.no_image,u_categories.og_image,seo_desc,u_categories.seo_key,
+repo.img1 AS pc_header, repo.img2 AS sp_header
+FROM u_categories
+LEFT JOIN repo ON u_categories.id = repo.category
+WHERE name_e= '{$slug}'
+SQL_EOL;
+
+
+//    else
+//    {
+//      $sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e,no_image,og_image,seo_desc,seo_key from u_categories where name_e='%s'",$slug);
+//
+//    }
     $this->query($sql);
     $f=$this->fetch_array();
     $s=set_categoriesinfo($f);

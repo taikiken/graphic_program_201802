@@ -270,27 +270,27 @@ class ViewModel {
   * @param  string  $slug カテゴリースラッグ
   * @return array   該当カテゴリー情報
   */
-  public function get_category_by_slug($slug) {
+  public function get_category_by_slug($slug, $playerid=null) {
 
     if ( $this->default['site_categories'][$slug] || $slug === 'top' ) :
 
+//
+//      if ( UT_ENV == 'LOCAL' ) :
+//
+//        $category = $this->default['site_categories'][$slug];
+//        $response = file_get_contents($this->default['file_get_url'].'/api/v1/category/'.$slug);
+//
+//        if ( $response ) :
+//          $category = json_decode($response, true)['response'];
+//        else :
+//          return false;
+//        endif;
+//
+//      else :
 
-      if ( UT_ENV == 'LOCAL' ) :
+        $category = $this->db->get_category_by_slug($slug, $playerid);
 
-        $category = $this->default['site_categories'][$slug];
-        $response = file_get_contents($this->default['file_get_url'].'/api/v1/category/'.$slug);
-
-        if ( $response ) :
-          $category = json_decode($response, true)['response'];
-        else :
-          return false;
-        endif;
-
-      else :
-
-        $category = $this->db->get_category_by_slug($slug);
-
-      endif;
+//      endif;
 
       // すべての場合はlabel/titleが空なのですべてをセット
       if ( !$category['label'] ) :

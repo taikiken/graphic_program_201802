@@ -342,7 +342,7 @@ function set_advertise($ad,$type){
 	return $s;
 }
 
-function get_advertise($categoryid="",$userid="",$pageid=""){
+function get_advertise($categoryid="",$userid="",$pageid="",$playerid=""){
 
 	global $staticfilepath;
 
@@ -475,7 +475,11 @@ function set_categoriesinfo($f){
 	$s["title_banner"]["sp"]["text"]=strlen($f["alt"])>0?$f["alt"]:"";
 	$s["title_banner"]["sp"]["link"]=strlen($f["url1"])>0?$f["url1"]:"";
 
-	$ad=get_advertise($s["id"]);
+  $s["pc_header"]="";
+  $s["_header"]=strlen($f["sp_header"])>0?sprintf("%s/img/%s",$ImgPath,$f["sp_header"]):"";
+
+
+  $ad=get_advertise($s["id"]);
 	$ad_put=set_advertise($ad,"list");
 
 	$s=$s+$ad_put;
