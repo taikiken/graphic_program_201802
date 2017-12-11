@@ -11,7 +11,7 @@
  */
 
 // view
-import { ViewArchiveMasonryInfinite } from '../ViewArchiveMasonryInfinite';
+import ViewArchiveMasonryInfinite from '../ViewArchiveMasonryInfinite';
 import View from '../View';
 
 
@@ -32,9 +32,16 @@ import { ComponentSingles } from '../../component/singles/ComponentSingles';
 // import { ComponentMoreButton } from '../../component/articles/ComponentMoreButton';
 
 // React
-const ReactDOM = self.ReactDOM;
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * 記事詳細・次の記事一覧を出力します
@@ -70,7 +77,7 @@ const React = self.React;
  * - 人気記事は 3件ごとに `Component` を挿入しそこで Ajax request を行い記事挿入します
  * @since 2016-09-26
  */
-export class ViewSingles extends ViewArchiveMasonryInfinite {
+export default class ViewSingles extends ViewArchiveMasonryInfinite {
   /**
    * 記事詳細の次の記事ブロック表示を行います
    * @param {number} id 記事 ID
@@ -127,7 +134,7 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done(result):void {
+  done(result) {
     const articles = result.articles;
     if (!Array.isArray(articles) || typeof articles === 'undefined') {
       // articles undefined
@@ -154,7 +161,7 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render(articles:Array):void {
+  render(articles) {
     // 既存データ用のglobal配列
     // @type {Array<SingleDae>} - 参照渡し `this.articles`
     const articlesList = this.articles;

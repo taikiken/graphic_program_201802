@@ -11,7 +11,7 @@
  */
 
 // parent
-// import { ViewSingles } from '../../../view/singles/ViewSingles';
+// import ViewSingles from '../../../view/singles/ViewSingles';
 
 // view
 import View from '../../../view/View';

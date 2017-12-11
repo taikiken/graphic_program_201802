@@ -101,7 +101,6 @@ export class Scroll extends EventDispatcher {
    * window scroll 監視を止めます
    */
   stop():void {
-    // @TODO
     // 2016-09-16
     // listener がいなかったら止める
     _watch = false;

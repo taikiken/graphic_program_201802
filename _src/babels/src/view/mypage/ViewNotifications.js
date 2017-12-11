@@ -35,6 +35,7 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * my page お知らせ 一覧
+ * TODO: React.createClass を止める
  */
 export class ViewNotifications extends View {
   /**

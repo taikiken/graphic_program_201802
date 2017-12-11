@@ -10,7 +10,7 @@
  *
  */
 
-import {ViewArchiveMasonryInfinite} from './ViewArchiveMasonryInfinite';
+import ViewArchiveMasonryInfinite from './ViewArchiveMasonryInfinite';
 
 // // app
 // import {Empty} from '../app/const/Empty';
@@ -50,17 +50,17 @@ import { Scroll } from '../util/Scroll';
 /**
  * 無限スクロール をしない記事一覧
  */
-export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
+export default class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
   /**
    * 無限スクロール をしない archive view
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
-   * @param {Boolean} [useMasonry=true] isotope を行うかの
+   * @param {boolean} [useMasonry=true] isotope を行うかの
    */
-  constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:Boolean = true ) {
-    super( element, moreElement, ActionClass, option, useMasonry );
+  constructor(element, moreElement, ActionClass = null, option = {}, useMasonry = true) {
+    super(element, moreElement, ActionClass, option, useMasonry);
     /**
      * category slug
      * @override
@@ -68,7 +68,6 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
      * @default all
      */
     this.slug = 'all';
-
     /**
      * Scroll instance, コンテナ高さが変わった時にイベントを発火させるために使用します
      * @type {Scroll}
@@ -176,7 +175,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
   //       this.onRise();
   //     },
   //     // button 表示・非表示
-  //     updateShow: function( show:Boolean ) {
+  //     updateShow: function( show:boolean ) {
   //
   //       if ( !show ) {
   //         // button を非表示にするので rise 監視を止める
@@ -191,7 +190,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
   //     },
   //     // loading 表示 on / off
   //     // on: true, off: false
-  //     updateLoading: function( loading:Boolean = false ) {
+  //     updateLoading: function( loading:boolean = false ) {
   //
   //       let loadingClass = '';
   //       if ( loading ) {
@@ -235,7 +234,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
   //
   //   // more button 作成関数
   //   // ArchiveDom から呼び出す
-  //   let moreButton = ( show:Boolean ) => {
+  //   let moreButton = ( show:boolean ) => {
   //
   //     show = !!show;
   //     // moreElement 存在チェックを行う

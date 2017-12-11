@@ -44,8 +44,15 @@ import {Bad} from '../event/comment/Bad';
 import ComponentComments from '../component/single-comment/ComponentComments';
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**

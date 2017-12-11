@@ -32,6 +32,7 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 /**
  * my page bookmark 一覧
+ * TODO: React.createClass を止める
  */
 export class ViewActivities extends View {
   /**
@@ -149,14 +150,12 @@ export class ViewActivities extends View {
    * ViewError でエラーコンテナを作成します
    * @param {string} message エラーメッセージ
    */
-  showError( message:string = '' ):void {
-
+  showError(message:string = ''):void {
     message = Safety.string( message, '' );
 
-    // ToDo: Error 時の表示が決まったら変更する
-    let error = new ViewError( this.element, this.option, message );
+    // Error 時の表示
+    const error = new ViewError( this.element, this.option, message );
     error.render();
-
   }
   /**
    * dom を render します

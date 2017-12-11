@@ -18,63 +18,77 @@ import {Model} from '../../model/Model';
 import {ModelInterest} from '../../model/settings/ModelInterest';
 
 // dae
-import {CategoriesDae} from '../../dae/categories/CategoriesDae';
+// import {CategoriesDae} from '../../dae/categories/CategoriesDae';
 
 // event
 import {SettingsStatus} from '../../event/SettingsStatus';
 
 // node
 import {SettingsInterestNode} from '../../node/settings/SettingsInterestNode';
+import { Env } from '../../app/Env';
 
 // React
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * 設定 好きな競技
  */
-export class ViewSettingsInterest extends View {
+export default class ViewSettingsInterest extends View {
   /**
    * 設定 好きな競技
    * @param {Element} element 基点 element
    * @param {Object} [option={}] callback methods
    */
-  constructor( element:Element, option:Object = {} ) {
-    super( element, option );
+  constructor(element, option = {}) {
+    super(element, option);
 
     // アカウント情報
     // let boundError = this.error.bind( this );
-    let callbacks = {};
+    const callbacks = {};
+    callbacks[Model.COMPLETE] = this.complete.bind(this);
+    // callbacks[Model.UNDEFINED_ERROR] = boundError;
+    // callbacks[Model.RESPONSE_ERROR] = boundError;
     /**
      * コールバック関数を設定する Object
      * @type {{}}
      * @private
      */
     this._callbacks = callbacks;
-    callbacks[ Model.COMPLETE ] = this.complete.bind( this );
-    // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
-    // callbacks[ Model.RESPONSE_ERROR ] = boundError;
     /**
      * Action instance を設定します
      * @override
      * @type {ModelInterest}
      */
-    this.action = new ModelInterest( callbacks );
+    this.action = new ModelInterest(callbacks);
 
-    let status = SettingsStatus.factory();
-    status.on( SettingsStatus.INTEREST_COMPLETE, this.reload.bind( this ) );
+    const status = SettingsStatus.factory();
+    status.on( SettingsStatus.INTEREST_COMPLETE, this.reload.bind(this));
   }
   /**
    * Ajax request を開始します
+   * @param {string} [path=''] option argument
    */
-  start():void {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleTitle].start', path);
+    }
     this.action.start();
   }
   /**
    * Ajax response success
    * @param {CategoriesDae} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  complete( result:CategoriesDae ):void {
-    this.render( result );
+  complete(result) {
+    this.render(result);
   }
   // /**
   //  * Ajax response error
@@ -87,20 +101,19 @@ export class ViewSettingsInterest extends View {
    * form 出力
    * @param {CategoriesDae} dae 興味のあるカテゴリー
    */
-  render( dae:CategoriesDae ):void {
-
+  render(dae) {
     ReactDOM.render(
       <SettingsInterestNode
         dae={dae}
       />,
-      this.element
+      this.element,
     );
   }
   /**
    * 再読み込み<br>
    * 更新後再読み込みし再セットアップします
    */
-  reload():void {
+  reload() {
     this.start();
   }
 }

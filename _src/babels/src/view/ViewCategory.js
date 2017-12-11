@@ -15,8 +15,8 @@ import {Category} from '../action/archive/Category';
 import {CategoryAuth} from '../action/archive/CategoryAuth';
 
 // view
-// import {ViewArchiveMasonry} from './ViewArchiveMasonry';
-import { ViewArchiveMasonryInfinite } from './ViewArchiveMasonryInfinite';
+// import ViewArchiveMasonry from './ViewArchiveMasonry';
+import ViewArchiveMasonryInfinite from './ViewArchiveMasonryInfinite';
 
 // view/categories
 import { ComponentCategoryOption } from '../component/categories/ComponentCategoryOption';
@@ -46,7 +46,7 @@ import { Safety } from '../data/Safety';
  */
 // export class ViewCategory extends ViewArchiveMasonry {
 // @since 2016-09-16 parent class changed
-export class ViewCategory extends ViewArchiveMasonryInfinite {
+export default class ViewCategory extends ViewArchiveMasonryInfinite {
   /**
    * category 一覧表示 要 **slug**
    * @param {string} slug category slug, default 'all'
@@ -54,8 +54,8 @@ export class ViewCategory extends ViewArchiveMasonryInfinite {
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Object} [option={}] optional event handler
    */
-  constructor( slug:string, element:Element, moreElement:Element, option:Object = {} ) {
-    super( element, moreElement, null, option, true );
+  constructor(slug, element, moreElement, option:Object = {}) {
+    super(element, moreElement, null, option, true);
     // @since 2016-09-17
     // default を all にするために追加
     const argsSlug = Safety.string(slug, 'all');
@@ -68,8 +68,8 @@ export class ViewCategory extends ViewArchiveMasonryInfinite {
      * @type {CategoryAuth|Category}
      */
     this.action = User.sign ?
-      new CategoryAuth( argsSlug, '', this.done.bind( this ), this.fail.bind( this ) ) :
-      new Category( argsSlug, '', this.done.bind( this ), this.fail.bind( this ) );
+      new CategoryAuth(argsSlug, '', this.done.bind(this), this.fail.bind(this)) :
+      new Category(argsSlug, '', this.done.bind(this), this.fail.bind(this));
     /**
      * category slug
      * @override

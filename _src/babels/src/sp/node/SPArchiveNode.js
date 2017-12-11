@@ -360,16 +360,12 @@ export let SPArchiveNode = React.createClass( {
     let type = this.props.type;
     let adSp = this.props.adSp;
 
-    /**
-     * @TODO: 「新着記事タイトル」
-     */
-
     // dom出力する
     return (
       <div ref="boardRout" className="board-stack board-large">
         {
           // -------------------------------------------
-          // @TODO: 「新着記事タイトル」
+          // TODO: 「新着記事タイトル」
           // -------------------------------------------
           // loop start
           this.state.list.map( function( dae, i ) {

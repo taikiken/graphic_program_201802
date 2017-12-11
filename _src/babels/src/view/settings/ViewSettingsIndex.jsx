@@ -18,64 +18,80 @@ import {Model} from '../../model/Model';
 import {ModelAccount} from '../../model/settings/ModelAccount';
 
 // dae
-import {UserDae} from '../../dae/UserDae';
+// import {UserDae} from '../../dae/UserDae';
 
 // node
 import {SettingsIndexNode} from '../../node/settings/SettingsIndexNode';
 
 // event
 import {SettingsStatus} from '../../event/SettingsStatus';
+import { Env } from '../../app/Env';
 
 // Sagen
-let Sagen = self.Sagen;
+/**
+ * [library] - Sagen
+ */
+const Sagen = self.Sagen;
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * 設定 アカウント
  */
-export class ViewSettingsIndex extends View {
+export default class ViewSettingsIndex extends View {
   /**
    * 設定 アカウント
    * @param {Element} element root element, Ajax result を配置する
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, option:Object = {} ) {
-    super( element, option );
+  constructor(element, option = {}) {
+    super(element, option);
 
-    let callbacks = {};
+    const callbacks = {};
+    callbacks[Model.COMPLETE] = this.complete.bind(this);
+    // callbacks[Model.UNDEFINED_ERROR] = boundError;
+    // callbacks[Model.RESPONSE_ERROR] = boundError;
     /**
      * コールバック関数を設定する Object
      * @type {{}}
      * @private
      */
     this._callbacks = callbacks;
-    callbacks[ Model.COMPLETE ] = this.complete.bind( this );
-    // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
-    // callbacks[ Model.RESPONSE_ERROR ] = boundError;
     /**
      * Action instance を設定します
      * @override
      * @type {ModelAccount}
      */
-    this.action = new ModelAccount( callbacks );
+    this.action = new ModelAccount(callbacks);
 
-    let status = SettingsStatus.factory();
-    status.on( SettingsStatus.ACCOUNT_COMPLETE, this.reload.bind( this ) );
+    const status = SettingsStatus.factory();
+    status.on(SettingsStatus.ACCOUNT_COMPLETE, this.reload.bind(this));
   }
   /**
    * Ajax request を開始します
+   * @param {string} [path=''] option argument
    */
-  start():void {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleTitle].start', path);
+    }
     this.action.start();
   }
   /**
    * Ajax response success
    * @param {CategoriesDae} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  complete( result:UserDae ):void {
+  complete(result) {
     this.render( result );
   }
   // /**
@@ -89,10 +105,8 @@ export class ViewSettingsIndex extends View {
    * form 出力
    * @param {UserDae} dae アカウント情報
    */
-  render( dae:UserDae ):void {
-
+  render(dae) {
     // console.log( 'ViewSettingsIndex render ', dae, this.element );
-
     ReactDOM.render(
       <SettingsIndexNode
         email={dae.email}
@@ -105,10 +119,10 @@ export class ViewSettingsIndex extends View {
     );
   }
   /**
-   * 再読み込み<br>
+   * 再読み込み
    * 更新後再読み込みし再セットアップします
    */
-  reload():void {
+  reload() {
     this.start();
   }
 }

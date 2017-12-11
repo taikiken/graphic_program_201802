@@ -12,7 +12,7 @@
 
 
 // parent
-import {ViewSingle} from '../../view/ViewSingle';
+import ViewSingle from '../../view/ViewSingle';
 
 // app
 import { Dom } from '../../app/Dom';

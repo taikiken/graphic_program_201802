@@ -90,7 +90,7 @@ export class ComponentSinglesWidgetOption extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateSingle(this.state.single);

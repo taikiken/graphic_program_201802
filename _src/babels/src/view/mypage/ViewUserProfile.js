@@ -35,6 +35,7 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * ユーザー情報 設定画面上
+ * TODO: React.createClass を止める
  */
 export class ViewUserProfile extends View {
   /**
@@ -102,7 +103,7 @@ export class ViewUserProfile extends View {
 
     message = Safety.string( message, '' );
 
-    // ToDo: Error 時の表示が決まったら変更する
+    // Error 時の表示
     let error = new ViewError( this.element, this.option, message );
     error.render();
 

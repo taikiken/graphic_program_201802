@@ -18,7 +18,7 @@ import ViewSingleHeader from './single/ViewSingleHeader';
 import ViewSingleFooter from './single/ViewSingleFooter';
 
 // view/singles
-import { ViewSingles } from './singles/ViewSingles';
+import ViewSingles from './singles/ViewSingles';
 
 // action
 import { Single } from '../action/single/Single';
@@ -70,7 +70,7 @@ import { Env } from '../app/Env';
  * single.start();
  * ```
  */
-export class ViewSingle extends View {
+export default class ViewSingle extends View {
   /**
    * 記事ID で 記事詳細JSONを取得し表示します
    *

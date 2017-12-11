@@ -46,10 +46,18 @@ import { Scroll } from '../util/Scroll';
 // Ga
 import { Ga } from '../ga/Ga';
 import { GaData } from '../ga/GaData';
+import { Env } from '../app/Env';
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 // // imagesLoaded, isotope
@@ -59,7 +67,7 @@ const ReactDOM = self.ReactDOM;
 /**
  * archive 一覧を isotope で
  */
-export class ViewArchiveMasonryInfinite extends View {
+export default class ViewArchiveMasonryInfinite extends View {
   /**
    * <p>archive 一覧標示後 isotope で位置調整します<br>
    * + infinite scroll を実装します
@@ -72,9 +80,9 @@ export class ViewArchiveMasonryInfinite extends View {
    */
   constructor(element, moreElement, ActionClass = null, option = {}, useMasonry = true) {
 
-    option = Safety.object( option );
+    option = Safety.object(option);
 
-    super( element, option );
+    super(element, option);
 
     if ( typeof ActionClass === 'function' ) {
       /**
@@ -82,7 +90,7 @@ export class ViewArchiveMasonryInfinite extends View {
        * @override
        * @type {*}
        */
-      this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+      this.action = new ActionClass(this.done.bind(this), this.fail.bind(this));
 
     }
     /**
@@ -306,8 +314,12 @@ export class ViewArchiveMasonryInfinite extends View {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
+   * @param {string} [path=''] option argument
    */
-  start() {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleTitle].start', path);
+    }
     this.action.next();
   }
   /**
@@ -415,17 +427,17 @@ export class ViewArchiveMasonryInfinite extends View {
         element
       );
 
-      if ( this.home ) {
+      if (this.home) {
         // ----------------------------------------------
         // GA 計測タグ
         // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
-        Ga.add( new GaData('ViewArchiveMasonryInfinite.render', 'home_articles', 'view - new', String(1), 0, true) );
+        Ga.add(new GaData('ViewArchiveMasonryInfinite.render', 'home_articles', 'view - new', String(1), 0, true));
         // ----------------------------------------------
       } else {
         // ----------------------------------------------
         // GA 計測タグ
         // PC/スマホカテゴリー一覧の新着記事
-        Ga.add( new GaData('ViewArchiveMasonryInfinite.render', `${this.slug}_articles`, 'view - new', String(1), 0, true) );
+        Ga.add(new GaData('ViewArchiveMasonryInfinite.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
         // ----------------------------------------------
       }
     } else {
@@ -440,12 +452,10 @@ export class ViewArchiveMasonryInfinite extends View {
    * @param {boolean} [show=false] true の時にボタンを表示させ機能させます
    */
   moreButton(show = false) {
-    // console.log('====== moreButton ======', show, this.home, this.moreElement);
     // 'View More' button root element
     const moreElement = this.moreElement;
     // @since 2017-12-05 element  check 追加
     if (!moreElement) {
-      // console.log('ViewArchiveMasonryInfinite.moreElement no more element', this);
       return;
     }
     // // moreElement 存在チェックを行う

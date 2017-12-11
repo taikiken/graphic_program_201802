@@ -13,7 +13,7 @@
 
 // parent
 // import {ViewArchiveMasonry} from './ViewArchiveMasonry';
-import { ViewArchiveMasonryInfinite } from './ViewArchiveMasonryInfinite';
+import ViewArchiveMasonryInfinite from './ViewArchiveMasonryInfinite';
 
 // action
 import {SearchAuth} from '../action/search/SearchAuth';
@@ -31,7 +31,15 @@ import {User} from '../app/User';
 import {Message} from '../app/const/Message';
 
 // React
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**

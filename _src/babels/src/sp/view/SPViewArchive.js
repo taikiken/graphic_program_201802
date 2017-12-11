@@ -32,8 +32,16 @@ import {Ga} from '../../ga/Ga';
 import {GaData} from '../../ga/GaData';
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * <p><strong>SP</strong>: archive 一覧標示</p>
@@ -275,7 +283,7 @@ export default class SPViewArchive extends View {
   //
   //   // message = Safety.string( message, '' );
   //   // console.log( '**************** SPViewArchive showError ', message );
-  //   // ToDo: Error 時の表示が決まったら変更する
+  //   // Error 時の表示
   //   /*
   //   let error = new ViewError( this.element, this.option, message );
   //   error.render();

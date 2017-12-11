@@ -11,7 +11,7 @@
  */
 
 // view
-import { ViewArchiveMasonry } from '../ViewArchiveMasonry';
+import ViewArchiveMasonry from '../ViewArchiveMasonry';
 
 // app
 import { User } from '../../app/User';
@@ -27,15 +27,22 @@ import { CategoryAuth } from '../../action/archive/CategoryAuth';
 import { ComponentSinglesWidgetPopularList } from '../../component/singles/ComponentSinglesWidgetPopularList';
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**
  * PC: 記事詳細「次の記事一覧」人気記事を出力するためのデータを取得し描画します
  * @since 2016-09-30
  */
-export class ViewSinglesPopular extends ViewArchiveMasonry {
+export default class ViewSinglesPopular extends ViewArchiveMasonry {
   // ----------------------------------------
   // CONSTRUCTOR
   // ----------------------------------------

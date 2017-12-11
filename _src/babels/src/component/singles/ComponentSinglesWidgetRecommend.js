@@ -104,7 +104,7 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
     if (this.element !== null) {
       const snap = new Snap(this.element);
       // snap.on(Snap.SNAPPED, this.onSnap.bind(this));
-      snap.init();
+      snap.start();
     }
   }
   // onSnap() {
@@ -186,7 +186,7 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateSingle(this.state.single);

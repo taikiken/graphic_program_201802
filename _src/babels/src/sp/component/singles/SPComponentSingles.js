@@ -281,7 +281,7 @@ export class SPComponentSingles extends React.Component {
   // }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     const state = this.state;
@@ -342,8 +342,8 @@ export class SPComponentSingles extends React.Component {
     const list = state.list;
     const length = list.length;
 
-    // @ToDO 条件簡略化可能か調べる
-    // @ToDO 各件数のテスト
+    // 条件簡略化可能か調べる
+    // 各件数のテスト
     if (length === 0) {
       // 続きの記事 0 件
       // オススメ・関連・人気

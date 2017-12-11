@@ -138,7 +138,7 @@ export let HeaderSearchNode = React.createClass( {
     console.log( 'open input', ReactDOM.findDOMNode( this.refs.searchText ) );
     this.setState( {focus: 'focus='} );
     */
-    // ToDo: open event 経由の時の focus
+    // open event 経由の時の focus 未実装
     // if ( this.input !== null ) {
     //   this.input.focus();
     // }

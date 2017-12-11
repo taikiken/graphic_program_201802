@@ -37,6 +37,7 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 /**
  * my page bookmark 一覧
+ * TODO: React.createClass を止める
  */
 export class ViewBookmarks extends View {
   /**
@@ -203,7 +204,7 @@ export class ViewBookmarks extends View {
 
     message = Safety.string( message, '' );
 
-    // ToDo: Error 時の表示が決まったら変更する
+    // Error 時の表示
     let error = new ViewError( this.element, this.option, message );
     error.render();
 

@@ -52,8 +52,8 @@ import View from './view/View';
 import ViewHeaderUser from './view/header/ViewHeaderUser';
 import ViewHeaderSearch from './view/header/ViewHeaderSearch';
 
-import {ViewCategory} from './view/ViewCategory';
-import {ViewSingle} from './view/ViewSingle';
+import ViewCategory from './view/ViewCategory';
+import ViewSingle from './view/ViewSingle';
 // import {ViewTitle} from './view/ViewTitle';
 import {ViewSearch} from './view/ViewSearch';
 import ViewCommentSingle from './view/ViewCommentSingle';
@@ -104,8 +104,8 @@ import {ViewActivities} from './view/mypage/ViewActivities';
 import {ViewNotifications} from './view/mypage/ViewNotifications';
 
 // settings
-import {ViewSettingsIndex} from './view/settings/ViewSettingsIndex';
-import {ViewSettingsInterest} from './view/settings/ViewSettingsInterest';
+import ViewSettingsIndex from './view/settings/ViewSettingsIndex';
+import ViewSettingsInterest from './view/settings/ViewSettingsInterest';
 
 // ----------- ga
 import {Ga} from './ga/Ga';
