@@ -169,7 +169,7 @@ SQL_EOL;
 //    }
     $this->query($sql);
     $f=$this->fetch_array();
-    $s=set_categoriesinfo($f);
+    $s=set_categoriesinfo($f, $playerid);
 
     return $s;
 

@@ -90,7 +90,7 @@ $app->group('/athlete', function () use($app, $ImgPath) {
   endif;
 
     // CRAZY ATHLETE v2.0
-    $this->get('/{id:[0-9]+}/[{category_slug:all|'.join('|',$category_slug).'}/]', function ($request, $response, $args) use ($app, $data) {
+    $this->get('/{id:[0-9]+}[/]', function ($request, $response, $args) use ($app, $data) {
         // jsonの中身が空の場合404
         if(empty($data))
         {
@@ -149,7 +149,9 @@ $app->group('/athlete', function () use($app, $ImgPath) {
             }
         }
 
-        $category = $app->model->get_category_by_slug($args['category_slug']);
+        $sponsor_link = $app->model->get_category_by_slug($args['category_slug'], $args['id']);
+        var_dump($sponsor_link);
+        var_dump('ooo');
 
         $args['page'] = $app->model->set(array(
             'title'              => 'CRAZY ATHLETES',
@@ -159,7 +161,7 @@ $app->group('/athlete', function () use($app, $ImgPath) {
             'template_classname' => '',
             'player'             => $player_info,
             'ua'                 => $app->model->property('ua'),
-            'category'           => $category,
+            'sponsor_link'       => $sponsor_link,
         ));
 
         if ( $app->model->property('ua') === 'desktop' ) :

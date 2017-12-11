@@ -310,6 +310,17 @@ function set_advertise($ad,$type){
 	$s["theme"]["background_color"]=strlen($ad["bgcolor"])>0?$ad["bgcolor"]:"";
 	$s["is_show_filter"]=!$ad["sp_showfilter"]?true:false;
 
+  $s["pc_bannerimg"]=!empty($ad["pc_bannerimg"]) ? $ad[$i]["pc_bannerimg"] : '';
+  $s["sp_bannerimg"]=$ad["sp_bannerimg"];
+  $s["ios_bannerimg"]=$ad["ios_bannerimg"];
+  $s["android_bannerimg"]=$ad["android_bannerimg"];
+  $s["bannerflag"]=$ad["bannerflag"];
+  $s["bannertext"]=$ad["bannertext"];
+  $s["pc_bannerlink"]=$ad["pc_bannerlink"];
+  $s["sp_bannerlink"]=$ad["sp_bannerlink"];
+  $s["ios_bannerlink"]=$ad["ios_bannerlink"];
+  $s["android_bannerlink"]=$ad["android_bannerlink"];
+
 	$listordetail=$type=="detail"?"abody":"";
 	$bannertype=array("pc","sp","ios","android");
 
@@ -347,7 +358,14 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid=""){
 	global $staticfilepath;
 
 	$ad[]=unserialize(get_contents(sprintf("%s/static/ad/0-0.dat",$staticfilepath)));
-	if($categoryid!=""){
+  if(isset($playerid)){
+    unset($v);
+    $file=sprintf("%s/static/ad/94-%s.dat",$staticfilepath,$playerid);
+    if(file_exists($file)){
+      $v=get_contents($file);
+      $ad[]=unserialize($v);
+    }
+  }if($categoryid!=""){
 		unset($v);
 		$file=sprintf("%s/static/ad/10-%s.dat",$staticfilepath,$categoryid);
 		if(file_exists($file)){
@@ -399,6 +417,17 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid=""){
 
 			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_android_videotag"])>0)$s["ad_urlandroid"]=$ad[$i]["ad_android_videotag"];
 			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlandroid"]="";
+
+      $s["pc_bannerimg"]=!empty($ad[$i]["pc_bannerimg"]) ? $ad[$i]["pc_bannerimg"] : '';
+      $s["sp_bannerimg"]=$ad[$i]["sp_bannerimg"];
+      $s["ios_bannerimg"]=$ad[$i]["ios_bannerimg"];
+      $s["android_bannerimg"]=$ad[$i]["android_bannerimg"];
+      $s["bannerflag"]=$ad[$i]["bannerflag"];
+      $s["bannertext"]=$ad[$i]["bannertext"];
+      $s["pc_bannerlink"]=$ad[$i]["pc_bannerlink"];
+      $s["sp_bannerlink"]=$ad[$i]["sp_bannerlink"];
+      $s["ios_bannerlink"]=$ad[$i]["ios_bannerlink"];
+      $s["android_bannerlink"]=$ad[$i]["android_bannerlink"];
 		}
 
 		if($i==1){
@@ -443,7 +472,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid=""){
 	return $s;
 }
 
-function set_categoriesinfo($f){
+function set_categoriesinfo($f, $playerid=null){
 
 	global $ImgPath,$domain;
 
@@ -479,7 +508,7 @@ function set_categoriesinfo($f){
   $s["sp_header"]=strlen($f["sp_header"])>0?sprintf("%s/img/%s",$ImgPath,$f["sp_header"]):"";
 
 
-  $ad=get_advertise($s["id"]);
+  $ad=get_advertise($s["id"], "", "", $playerid);
 	$ad_put=set_advertise($ad,"list");
 
 	$s=$s+$ad_put;

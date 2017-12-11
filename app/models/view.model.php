@@ -272,7 +272,7 @@ class ViewModel {
   */
   public function get_category_by_slug($slug, $playerid=null) {
 
-    if ( $this->default['site_categories'][$slug] || $slug === 'top' ) :
+    if ( $this->default['site_categories'][$slug] || $slug === 'top' || isset($playerid) ) :
 
 //
 //      if ( UT_ENV == 'LOCAL' ) :
