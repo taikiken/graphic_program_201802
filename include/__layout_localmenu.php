@@ -225,5 +225,49 @@ while($f=$o->fetch_array()){
 	function chg_form(c){
 	if(c!="")document.location.href=".?<?=$g->g_url()?>&template="+c;
 }</script></li>
+<?php }elseif($CURRENTDIRECTORY=="notice"){ ?>
+  <!--
+<li class="ds"><a href="./search/?<?=$g->g_url()?>">検索</a>　｜　</li>
+-->
+
+  </li>
+
+  <li><select class="excategory">
+      <?php
+
+      $c=!isset($_COOKIE["excategory"])?0:$_COOKIE["excategory"];
+
+      ?>
+      <option value="a"<?=$c==="a"?" selected=\"selected\"":""?>>　すべてのカテゴリ</option>
+      <option value="0"<?=$c==="0"?" selected=\"selected\"":""?>>　デフォルト</option>
+      <?php
+
+      $sql=<<<EOL
+SELECT 
+        id,name,n,
+        (CASE WHEN num1 IS NOT NULL THEN num1 ELSE 0 end) AS num 
+FROM 
+        (SELECT id,name,n FROM u_categories ORDER BY n ) AS t0 
+LEFT JOIN 
+        (SELECT category_id,count(category_id) AS num1 
+FROM
+        categories_notices 
+        
+GROUP BY
+        category_id) AS t1 
+ON 
+        t0.id=t1.category_id
+ORDER BY
+        n;
+EOL;
+
+      $o->query($sql);
+      while($f=$o->fetch_array()){
+
+        ?>
+        <option value="<?=$f["id"]?>"<?=$c==$f["id"]?" selected=\"selected\"":""?>>　<?=$f["name"]?>(<?=$f["num"]?>)</option>
+      <?php } ?>
+    </select>
+  </li>
 <?php } ?>
 </ul>
