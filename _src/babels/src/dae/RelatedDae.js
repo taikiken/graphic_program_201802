@@ -20,7 +20,7 @@ import {Format} from '../util/Format';
 // import {CategoryDae} from './CategoryDae';
 import {MediaDae} from './MediaDae';
 import {UserDae} from './UserDae';
-import {CategoriesDae} from './caegories/CategoriesDae';
+import {CategoriesDae} from './categories/CategoriesDae';
 import {ThemeDae} from './theme/ThemeDae';
 import {AdDae} from './theme/AdDae';
 import {BannersDae} from './banner/BannersDae';

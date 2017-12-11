@@ -19,7 +19,7 @@ import {Format} from '../util/Format';
 import {MediaDae} from './MediaDae';
 import {UserDae} from './UserDae';
 import {CommentsPopularDae} from './CommentsPopularDae';
-import {CategoriesDae} from './caegories/CategoriesDae';
+import {CategoriesDae} from './categories/CategoriesDae';
 import AnotherCategoriesDae from './another-categories/AnotherCategoriesDae';
 
 /**
