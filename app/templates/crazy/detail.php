@@ -7,18 +7,18 @@
     <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
     <script src="/assets/js/app_divide.bundle.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <title>CRAZY ATHLETES | スポーツブル / SPORTS BULL</title>
+    <title><?php echo $page['player']->body->name?> | スポーツブル / SPORTS BULL</title>
     <script src="/assets/js/libs/vendor.react.js"></script>
     <script src="/assets/js/bundle/main.bundle.js"></script>
     <link rel="stylesheet" href="https://sportsbull.jp/assets/css/ui.css">
-    <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
+    <meta name="keywords" content="スポーツ,メディア,アスリート,ニュース,動画,sports,media,<?php echo $page['player']->body->name?>">
     <meta name="description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
     <meta property="fb:app_id" content="842032129256034">
     <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="CRAZY ATHLETES | スポーツブル / SPORTS BULL">
+    <meta property="og:title" content="<?php echo $page['player']->body->name?> | スポーツブル / SPORTS BULL">
     <meta property="og:image" content="/assets/images/common/og_image.png">
-    <meta property="og:url" content="https://sportsbull.jp/category/crazy/">
+    <meta property="og:url" content="https://sportsbull.jp/">
     <meta property="og:description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
     <meta property="og:locale" content="ja_JP" />
     <meta property="fb:pages" content="1667524780195522" />
@@ -27,11 +27,11 @@
     <!-- twitter card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@sportsbull_jp">
-    <meta name="twitter:title" content="CRAZY ATHLETES | スポーツブル / SPORTS BULL">
+    <meta name="twitter:title" content="<?php echo $page['player']->body->name?> | スポーツブル / SPORTS BULL">
     <meta name="twitter:image" content="/assets/images/common/og_image.png">
-    <meta name="twitter:url" content="https://sportsbull.jp/category/crazy/">
+    <meta name="twitter:url" content="https://sportsbull.jp/">
     <meta name="twitter:description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
-    <link rel="canonical" href="https://sportsbull.jp/category/crazy/">
+    <link rel="canonical" href="https://sportsbull.jp/">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
     <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
     <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
@@ -341,7 +341,7 @@
                     </li>
                     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                         <a itemprop="item" href="./">
-                            <span itemprop="name">CRAZY ATHLETES</span>
+                            <span itemprop="name"><?php echo $page['player']->body->name?></span>
                             <meta itemprop="position" content="2" />
                         </a>
                     </li>
@@ -581,7 +581,7 @@
         }
     });
 </script>
-<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js" data-label="CRAZY ATHLETES"></script>
+<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js" data-label="<?php echo $page['player']->body->name?>"></script>
 </body>
 </html>
 <?php
