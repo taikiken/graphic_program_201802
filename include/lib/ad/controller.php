@@ -112,7 +112,18 @@ if ($_GET["cid"] != 94 && $_GET["rid"] != 95)
 	if($_GET["cid"]!=0)$a[]=array("inputradio","オススメ記事広告表示","ad_android_recommendflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
 	$a[]=array("textfield","オススメ記事広告ID","ad_android_recommendid","20","","","");
 
-	// 選手情報以外の選手広告ヘッダータイトル設定
+  $a[]=array("head", "一覧上バナーデフォルト画像設定：（親＞子）カテゴリー ＞ (注目の選手) ＞ 選手で継承されますが、子要素の指定は優先されます");
+  $a[]=array("textfield","ALTテキスト（共通）","bannertext","70","","","");
+  $a[]=array("img","PCバナー画像","pc_bannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("textfield","PCリンク先","pc_bannerlink","100","","","");
+  $a[]=array("img","スマホバナー画像","sp_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("textfield","スマホリンク先","sp_bannerlink","100","","","");
+  $a[]=array("img","iOSバナー画像","ios_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("textfield","iOSリンク先","ios_bannerlink","100","","","");
+  $a[]=array("img","Androidバナー画像","android_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("textfield","Androidリンク先","android_bannerlink","100","","","");
+
+  // 選手情報以外の選手広告ヘッダータイトル設定
 	$head_val1 = "関連選手一覧";
 	$head_val2 = "カテゴリー";
 	$item_val1 = "選手一覧";
