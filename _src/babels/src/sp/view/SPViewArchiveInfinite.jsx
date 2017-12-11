@@ -37,15 +37,22 @@ import { SPComponentMoreButton } from '../component/articles/SPComponentMoreButt
 import { SPComponentArticles } from '../component/articles/SPComponentArticles';
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**
  * SP 記事一覧 + 無限スクロール
  * @since 2016-09-16
  */
-export class SPViewArchiveInfinite extends SPViewArchive {
+export default class SPViewArchiveInfinite extends SPViewArchive {
   /**
    * SP 記事一覧 + 無限スクロール 設定を行います
    * @param {Element} element root element, Ajax result を配置する
@@ -53,9 +60,8 @@ export class SPViewArchiveInfinite extends SPViewArchive {
    * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
    */
-  constructor(element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}) {
+  constructor(element, moreElement, ActionClass = null, option = {}) {
     super(element, moreElement, ActionClass, option);
-
     /**
      * bind 済み moreButton 関数
      * @type {Function}
@@ -66,7 +72,7 @@ export class SPViewArchiveInfinite extends SPViewArchive {
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render(articles:Array):void {
+  render(articles) {
     // 既存データ用のglobal配列
     const articlesList = this._articles;
 
@@ -76,11 +82,18 @@ export class SPViewArchiveInfinite extends SPViewArchive {
 
     // ------------------------------------------------
     // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
-    articles.forEach((article, i) => {
+    // articles.forEach((article, i) => {
+    //   const dae = new ArticleDae(article);
+    //   dae.index = prevLast + i;
+    //   articlesList.push(dae);
+    // } );
+
+    articles.map((article, i) => {
       const dae = new ArticleDae(article);
       dae.index = prevLast + i;
       articlesList.push(dae);
-    } );
+      return article;
+    });
 
     // 通知
     this.executeSafely(View.BEFORE_RENDER, articlesList);
@@ -115,7 +128,7 @@ export class SPViewArchiveInfinite extends SPViewArchive {
           home={this.home}
           adSp=""
         />,
-        this.element
+        this.element,
       );
 
       if (this.home) {
@@ -141,7 +154,7 @@ export class SPViewArchiveInfinite extends SPViewArchive {
    * more button の表示・非表示を行います
    * @param {boolean} show true の時にボタンを表示させ機能させます
    */
-  moreButton(show:boolean):void {
+  moreButton(show) {
     // console.log('SPViewArchiveInfinite.moreButton', show);
     // 'View More' button root element
     const moreElement = this.moreElement;

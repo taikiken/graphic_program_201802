@@ -119,7 +119,7 @@ import { PageTop } from './ui/PageTop';
 
 // sp/view
 import SPViewFirstVisit from './sp/view/SPViewFirstVisit';
-import { SPViewAppBanner } from './sp/view/SPViewAppBanner';
+import SPViewAppBanner from './sp/view/SPViewAppBanner';
 
 // home
 import {SPViewHeadLine} from './sp/view/home/SPViewHeadLine';

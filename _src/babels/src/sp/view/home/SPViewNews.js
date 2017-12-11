@@ -11,7 +11,7 @@
  */
 
 // sp/view
-import { SPViewArchiveInfinite } from '../SPViewArchiveInfinite';
+import SPViewArchiveInfinite from '../SPViewArchiveInfinite';
 
 // app
 import {User} from '../../../app/User';

@@ -11,7 +11,7 @@
  */
 
 // sp/view
-import { SPViewArchiveInfinite } from './../SPViewArchiveInfinite';
+import SPViewArchiveInfinite from '../SPViewArchiveInfinite';
 
 // action
 import {Category} from '../../../action/archive/Category';

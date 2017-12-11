@@ -18,7 +18,7 @@ import {Ga} from '../../ga/Ga';
 import {GaData} from '../../ga/GaData';
 
 // React
-let React = self.React;
+const React = self.React;
 
 // --------------------------------------------
 // More button
@@ -27,7 +27,7 @@ let React = self.React;
  * SP 次を見る VIEW MORE button
  * @type {ReactClass}
  */
-export let SPMoreViewNode = React.createClass( {
+export const SPMoreViewNode = React.createClass( {
   propTypes: {
     // 表示・非表示, true: 表示
     show: React.PropTypes.bool.isRequired,
@@ -63,34 +63,6 @@ export let SPMoreViewNode = React.createClass( {
       loading: this.props.loading
     };
   },
-  render: function() {
-
-    // hasNext: true, button を表示する？
-    if ( this.state.show ) {
-
-      return (
-        <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
-          <span className="loading-spinner">&nbsp;</span>
-        </div>
-      );
-
-    } else {
-
-      // button 表示なし
-      return (
-        <div className="no-more" />
-      );
-
-    }
-
-  },
-  // componentDidMount: function() {
-  // },
-  componentWillUnmount: function() {
-    // unmount 時に rise 破棄を行う
-    this.destroy();
-  },
   // -----------------------------------------
   // // button 関連 custom method
   // // rise 関連 event を破棄する
@@ -115,7 +87,6 @@ export let SPMoreViewNode = React.createClass( {
   // loading 表示 on / off
   // on: true, off: false
   updateLoading: function( loading:Boolean = false ) {
-
     let loadingClass = '';
     if ( loading ) {
 
@@ -157,5 +128,27 @@ export let SPMoreViewNode = React.createClass( {
     // PC/スマホカテゴリー一覧の新着記事
     Ga.add( new GaData('SPMoreViewNode.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
-  }
+  },
+  // componentDidMount: function() {
+  // },
+  componentWillUnmount: function() {
+    // unmount 時に rise 破棄を行う
+    this.destroy();
+  },
+  render: function() {
+    // hasNext: true, button を表示する？
+    if (this.state.show) {
+      return (
+        <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
+          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
+          <span className="loading-spinner">&nbsp;</span>
+        </div>
+      );
+    } else {
+      // button 表示なし
+      return (
+        <div className="no-more" />
+      );
+    }
+  },
 } );

@@ -21,6 +21,9 @@ import { Ga } from '../../../ga/Ga';
 import { GaData } from '../../../ga/GaData';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

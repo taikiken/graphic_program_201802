@@ -17,7 +17,7 @@
 import View from '../../../view/View';
 
 // sp/view
-import { SPViewArchiveInfinite } from '../SPViewArchiveInfinite';
+import SPViewArchiveInfinite from '../SPViewArchiveInfinite';
 
 
 // action
@@ -36,9 +36,16 @@ import { SingleDae } from '../../../dae/SingleDae';
 import { SPComponentSingles } from '../../component/singles/SPComponentSingles';
 
 // React
-const ReactDOM = self.ReactDOM;
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * 記事詳細・次の記事一覧を出力します
