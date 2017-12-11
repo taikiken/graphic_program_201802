@@ -15,7 +15,7 @@
 import View from '../../../view/View';
 
 // view
-import {SPViewCategoryWithSlug} from './SPViewCategoryWithSlug';
+import SPViewCategoryWithSlug from './SPViewCategoryWithSlug';
 import {SPViewRanking} from '../sidebar/SPViewRanking';
 import {SPViewVideos} from '../sidebar/SPViewVideos';
 
@@ -34,13 +34,23 @@ import {Scroll} from '../../../util/Scroll';
 // Ga
 import {Ga} from '../../../ga/Ga';
 import {GaData} from '../../../ga/GaData';
+import { Env } from '../../../app/Env';
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * archive 親コンテナ
+ * TODO: React.createClass を止める
  */
 export class SPViewCategoryRoot extends View {
   /**
@@ -55,26 +65,29 @@ export class SPViewCategoryRoot extends View {
    * @param {Element} element root element archive 親
    * @param {Object} [option={}] optional event handler
    */
-  constructor( slug:string, element:Element, option:Object = {} ) {
-    super( element, option );
+  constructor(slug, element, option = {}) {
+    super(element, option);
     /**
      * category slug
      * @type {string}
      * @private
      */
-    this._slug = Safety.string( slug, 'all' );
+    this._slug = Safety.string(slug, 'all');
   }
   /**
    * rendering 開始
+   * @param {string} [path=''] option argument
    */
-  start():void {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewLogout].start', path);
+    }
     this.render();
   }
   /**
    * rendering
    */
-  render():void {
-
+  render() {
     let CategoryRootDom = React.createClass( {
       propTypes: {
         slug: React.PropTypes.string.isRequired

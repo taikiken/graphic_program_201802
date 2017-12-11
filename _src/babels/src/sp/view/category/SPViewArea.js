@@ -11,7 +11,7 @@
  */
 
 // sp/view
-import { SPViewCategoryWithSlug } from './SPViewCategoryWithSlug';
+import SPViewCategoryWithSlug from './SPViewCategoryWithSlug';
 
 // sp/component
 // import { SPComponentCategoryOption } from '../../component/categories/SPComponentCategoryOption';

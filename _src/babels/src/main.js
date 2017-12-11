@@ -129,9 +129,9 @@ import SPViewNews from './sp/view/home/SPViewNews';
 // @since 2016-09-20 remove
 // import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
 // @since 2016-0920
-import { SPViewCategory } from './sp/view/category/SPViewCategory';
+import SPViewCategory from './sp/view/category/SPViewCategory';
 // SPViewCategoryWithSlug が多分正解
-import { SPViewCategoryWithSlug } from './sp/view/category/SPViewCategoryWithSlug';
+import SPViewCategoryWithSlug from './sp/view/category/SPViewCategoryWithSlug';
 
 // 2017-09-04 - area
 import SPViewArea from './sp/view/category/SPViewArea';
