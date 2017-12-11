@@ -218,13 +218,13 @@
                 <?php
                 // ----------------------------------------------------
                 // 記事一覧: pc banner
-                if (!empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']))
+                if ($page['banner']['player_banner']['bannerflag'])
                 {
                   ?>
-                  <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank"
-                     onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['pc']['link']; ?>', true);"><img
-                      src="<?php echo $page['category']['banner']['pc']['image']; ?>"
-                      alt="<?php echo $page['category']['banner']['pc']['text'] ? $page['category']['banner']['pc']['text'] : '' ?>"></a>
+                  <a href="<?php echo $page['banner']['player_banner']['pc']['pc_bannerlink']; ?>" target="_blank"
+                     onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['player_banner']['pc']['link']; ?>', true);"><img
+                      src="<?php echo $page['banner']['player_banner']['pc']['pc_bannerimg']; ?>"
+                      alt="<?php echo $page['banner']['player_banner']['bannertext'] ?>"></a>
                   <?php
                 }
                 else

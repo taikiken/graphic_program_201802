@@ -79,16 +79,6 @@ $app->group('/athlete', function () use($app, $ImgPath) {
     $json = $ImgPath . '/' . $s3key;
     $data = @file_get_contents($json);
 
-  $categories = $app->model->property('site_categories');
-
-  if ( $categories ) :
-
-    // ルーティングのためのスラッグを設定する - 存在しないカテゴリーは404を返す
-    $category_slug = array_keys( $categories );
-
-
-  endif;
-
     // CRAZY ATHLETE v2.0
     $this->get('/{id:[0-9]+}[/]', function ($request, $response, $args) use ($app, $data) {
         // jsonの中身が空の場合404
@@ -149,9 +139,8 @@ $app->group('/athlete', function () use($app, $ImgPath) {
             }
         }
 
-        $sponsor_link = $app->model->get_category_by_slug($args['category_slug'], $args['id']);
-        var_dump($sponsor_link);
-        var_dump('ooo');
+        $banner = $app->model->get_category_by_slug($args['category_slug'], $args['id']);
+        var_dump($banner);
 
         $args['page'] = $app->model->set(array(
             'title'              => 'CRAZY ATHLETES',
@@ -161,7 +150,7 @@ $app->group('/athlete', function () use($app, $ImgPath) {
             'template_classname' => '',
             'player'             => $player_info,
             'ua'                 => $app->model->property('ua'),
-            'sponsor_link'       => $sponsor_link,
+            'banner'             => $banner,
         ));
 
         if ( $app->model->property('ua') === 'desktop' ) :

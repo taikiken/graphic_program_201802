@@ -218,13 +218,13 @@
                 <?php
                 // ----------------------------------------------------
                 // 記事一覧: sp banner
-                if (!empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']))
+                if ($page['banner']['player_banner']['bannerflag'])
                 {
                   ?>
-                  <a href="<?php echo $page['category']['banner']['sp']['link']; ?>" target="_blank"
-                     onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['sp']['link']; ?>', true);"><img
-                      src="<?php echo $page['category']['banner']['sp']['image']; ?>"
-                      alt="<?php echo $page['category']['banner']['sp']['text'] ? $page['category']['banner']['sp']['text'] : '' ?>"></a>
+                  <a href="<?php echo $page['banner']['player_banner']['sp']['sp_bannerlink']; ?>" target="_blank"
+                     onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['sp']['link']; ?>', true);"><img
+                      src="<?php echo $page['banner']['player_banner']['sp']['sp_bannerimg']; ?>"
+                      alt="<?php echo $page['banner']['player_banner']['bannertext'] ?>"></a>
                   <?php
                 }
                 else
