@@ -38,6 +38,6 @@ while($result = $o->fetch_array()){
     $counts[] = true;
   }
 }
-echo count($counts);
+echo "Youtube動画を利用している記事数:".count($counts)."件";
 
 ?>
