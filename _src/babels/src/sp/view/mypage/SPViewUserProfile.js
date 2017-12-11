@@ -12,7 +12,7 @@
 
 
 import View from '../../../view/View';
-import {ViewUserProfile} from '../../../view/mypage/ViewUserProfile';
+import ViewUserProfile from '../../../view/mypage/ViewUserProfile';
 
 // app
 import {Empty} from '../../../app/const/Empty';

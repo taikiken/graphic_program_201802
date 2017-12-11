@@ -92,7 +92,7 @@ export default class ViewSettingsIndex extends View {
    * @param {CategoriesDae} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
   complete(result) {
-    this.render( result );
+    this.render(result);
   }
   // /**
   //  * Ajax response error

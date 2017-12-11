@@ -9,8 +9,6 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
-
 // app
 // import {CommentsType} from '../app/const/CommentsType';
 import {Message} from '../app/const/Message';
@@ -18,7 +16,7 @@ import {User} from '../app/User';
 
 // view
 import View from './View';
-import {ViewError} from './error/ViewError';
+import ViewError from './error/ViewError';
 
 // action
 import {Comments} from '../action/comment/Comments';
@@ -41,6 +39,8 @@ import {ReplyStatus} from '../event/ReplyStatus';
 import {CommentStatus} from '../event/CommentStatus';
 import {Good} from '../event/comment/Good';
 import {Bad} from '../event/comment/Bad';
+
+// component
 import ComponentComments from '../component/single-comment/ComponentComments';
 
 // React

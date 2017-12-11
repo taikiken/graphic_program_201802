@@ -79,19 +79,15 @@ export default class ViewArchiveMasonryInfinite extends View {
    * @param {boolean} [useMasonry=true] isotope を行うかの真偽値
    */
   constructor(element, moreElement, ActionClass = null, option = {}, useMasonry = true) {
-
     option = Safety.object(option);
-
     super(element, option);
-
-    if ( typeof ActionClass === 'function' ) {
+    if (ActionClass) {
       /**
        * Action instance を設定します
        * @override
        * @type {*}
        */
       this.action = new ActionClass(this.done.bind(this), this.fail.bind(this));
-
     }
     /**
      * more button root element, 'View More'
