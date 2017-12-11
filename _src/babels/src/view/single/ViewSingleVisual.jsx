@@ -17,10 +17,11 @@
 import View from '../View';
 
 // dae
-import {SingleDae} from '../../dae/SingleDae';
+// import {SingleDae} from '../../dae/SingleDae';
 
 // node
 import {MediaNode} from '../../node/single/MediaNode';
+import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -43,8 +44,8 @@ export class ViewSingleVisual extends View {
    * @param {Element} element 基点 element
    * @param {SingleDae} single SingleDae instance
    */
-  constructor( element:Element, single:SingleDae ) {
-    super( element );
+  constructor(element, single) {
+    super(element);
     /**
      * 記事詳細 API 取得 JSON を SingleDae instance とし保存し利用します
      * @type {SingleDae}
@@ -54,15 +55,19 @@ export class ViewSingleVisual extends View {
   }
   /**
    * render 処理を開始します
+   * @param {string} [path=''] option argument
    */
-  start():void {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleVisual].start', path);
+    }
     this.render();
   }
   /**
    * render します
    */
-  render():void {
-    let single = this._single;
+  render() {
+    const single = this._single;
 
     ReactDOM.render(
       <MediaNode
@@ -72,7 +77,7 @@ export class ViewSingleVisual extends View {
         isShowImage={single.isShowImage}
         index={0}
       />,
-      this.element
+      this.element,
     );
   }
 }

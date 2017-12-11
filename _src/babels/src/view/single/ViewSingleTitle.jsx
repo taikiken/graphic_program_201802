@@ -14,7 +14,7 @@
 
 // view
 import View from '../View';
-import ViewError from '../error/ViewError';
+// import ViewError from '../error/ViewError';
 
 // app
 import {Message} from '../../app/const/Message';
@@ -23,11 +23,12 @@ import {Message} from '../../app/const/Message';
 import {Single} from '../../action/single/Single';
 
 // data
-import {Result} from '../../data/Result';
+// import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
 // dae
 import {SingleDae} from '../../dae/SingleDae';
+import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -42,9 +43,35 @@ const React = self.React;
 const ReactDOM = self.ReactDOM;
 
 /**
+ * {@link ViewSingleTitle} - 記事詳細タイトルを出力します
+ * @param {string} title 記事タイトル
+ * @param {string} id 記事 ID
+ * @param {string} url 記事 URL
+ * @returns {XML} `div.comment-detail-heading`
+ * @constructor
+ */
+export const SingleTitleComponent = ({ title, id, url }) => (
+  <div className={`comment-detail-heading post-heading post-heading-${id}`}>
+    <h1>
+      <a href={url}>{title}</a>
+    </h1>
+  </div>
+);
+
+/**
+ * React.comment-detail-heading
+ * @type {{title: string, id: string, url: string}}
+ */
+SingleTitleComponent.propTypes = {
+  title: React.PropTypes.string.isRequired,
+  id: React.PropTypes.string.isRequired,
+  url: React.PropTypes.string.isRequired,
+};
+
+/**
  * コメント詳細上部に表示する 記事タイトル
  */
-export class ViewSingleTitle extends View {
+export default class ViewSingleTitle extends View {
   /**
    * コメント詳細上部に表示する 記事タイトル
    * @param {Number} id article id, 記事Id
@@ -63,8 +90,12 @@ export class ViewSingleTitle extends View {
   }
   /**
    * Ajax request を開始します
+   * @param {string} [path=''] option argument
    */
-  start() {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleTitle].start', path);
+    }
     this.action.start();
   }
   /**
@@ -92,16 +123,16 @@ export class ViewSingleTitle extends View {
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
   }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError(message = '') {
-    message = Safety.string(message, '');
-    // ToDo: Error 時の表示が決まったら変更する
-    const error = new ViewError(this.element, this.option, message);
-    error.render();
-  }
+  // /**
+  //  * ViewError でエラーコンテナを作成します
+  //  * @param {string} message エラーメッセージ
+  //  */
+  // showError(message = '') {
+  //   message = Safety.string(message, '');
+  //   // Error 時の表示
+  //   const error = new ViewError(this.element, this.option, message);
+  //   error.render();
+  // }
   /**
    * dom を render します
    * @param {Object} response JSON response
@@ -111,33 +142,41 @@ export class ViewSingleTitle extends View {
     // beforeRender call
     this.executeSafely(View.BEFORE_RENDER, single);
 
-    /**
-     * 記事詳細タイトル
-     * @private
-     * @type {ReactClass}
-     */
-    let TitleDom = React.createClass( {
-      propTypes: {
-        title: React.PropTypes.string.isRequired,
-        id: React.PropTypes.string.isRequired,
-        url: React.PropTypes.string.isRequired
-      },
-      render: function() {
-        return (
-          <div className={'comment-detail-heading post-heading post-heading-' + this.props.id}>
-            <h1><a href={this.props.url}>{this.props.title}</a></h1>
-          </div>
-        );
-      }
-    } );
-
+    // /**
+    //  * 記事詳細タイトル
+    //  * @private
+    //  * @type {ReactClass}
+    //  */
+    // let TitleDom = React.createClass( {
+    //   propTypes: {
+    //     title: React.PropTypes.string.isRequired,
+    //     id: React.PropTypes.string.isRequired,
+    //     url: React.PropTypes.string.isRequired
+    //   },
+    //   render: function() {
+    //     return (
+    //       <div className={'comment-detail-heading post-heading post-heading-' + this.props.id}>
+    //         <h1><a href={this.props.url}>{this.props.title}</a></h1>
+    //       </div>
+    //     );
+    //   }
+    // } );
+    //
+    // ReactDOM.render(
+    //   <TitleDom
+    //     title={single.title}
+    //     id={String(single.id)}
+    //     url={single.url}
+    //   />,
+    //   this.element
+    // );
     ReactDOM.render(
-      <TitleDom
+      <SingleTitleComponent
         title={single.title}
-        id={String(single.id)}
+        id={single.id}
         url={single.url}
       />,
-      this.element
+      this.element,
     );
   }
 }

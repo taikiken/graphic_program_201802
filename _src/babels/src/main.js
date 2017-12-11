@@ -60,7 +60,7 @@ import ViewCommentSingle from './view/ViewCommentSingle';
 import ViewFirstVisit from './view/ViewFirstVisit';
 
 // single
-import {ViewSingleTitle} from './view/single/ViewSingleTitle';
+import ViewSingleTitle from './view/single/ViewSingleTitle';
 import {ViewSingleVisual} from './view/single/ViewSingleVisual';
 
 // comment

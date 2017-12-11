@@ -13,7 +13,7 @@
 
 // view
 import View from '../View';
-import {SingleDae} from '../../dae/SingleDae';
+// import {SingleDae} from '../../dae/SingleDae';
 
 // // app
 // import {Url} from '../../app/const/Url';
@@ -24,6 +24,7 @@ import {SingleDae} from '../../dae/SingleDae';
 // component
 // @since 2016-09-24
 import { ComponentSingleFooter } from '../../component/singles/ComponentSingleFooter';
+import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -41,7 +42,7 @@ const ReactDOM = self.ReactDOM;
  * <p>記事詳細</p>
  * detail 下部(tag)
  */
-export class ViewSingleFooter extends View {
+export default class ViewSingleFooter extends View {
   /**
    * detail 下部(tag)
    * @param {Element} element single footer root element
@@ -64,8 +65,12 @@ export class ViewSingleFooter extends View {
   }
   /**
    * render 処理を開始します
+   * @param {string} [path=''] option argument
    */
-  start() {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleFooter].start', path);
+    }
     this.render(this._single);
   }
   /**

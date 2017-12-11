@@ -20,12 +20,13 @@ import View from '../View';
 // data
 import {Safety} from '../../data/Safety';
 
-// dae
-import {RelatedDae} from '../../dae/RelatedDae';
+// // dae
+// import {RelatedDae} from '../../dae/RelatedDae';
 
 
 // component
 import { ComponentSingleRelated } from '../../component/singles/ComponentSingleRelated';
+import { Env } from '../../app/Env';
 
 
 // React
@@ -48,7 +49,7 @@ const ReactDOM = self.ReactDOM;
  * `_popIn_recommend` に JS で出力
  * </pre>
  * */
-export class ViewRelated extends View {
+export default class ViewRelated extends View {
   /**
    * 関連記事, ViewSingle から呼び出されます
    * @param {Element} element root element
@@ -71,8 +72,12 @@ export class ViewRelated extends View {
   }
   /**
    * render 処理を開始します
+   * @param {string} [path=''] option argument
    */
-  start() {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewRelated].start', path);
+    }
     this.render(this._related);
   }
   /**

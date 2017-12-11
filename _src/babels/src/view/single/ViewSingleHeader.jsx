@@ -14,8 +14,8 @@
 // view
 import View from '../View';
 
-// dae
-import {SingleDae} from '../../dae/SingleDae';
+// // dae
+// import {SingleDae} from '../../dae/SingleDae';
 
 // app
 import {User} from '../../app/User';
@@ -24,6 +24,7 @@ import {User} from '../../app/User';
 // import {BookmarkNode} from '../../node/bookmark/BookmarkNode';
 
 import { ComponentSingleHeader } from '../../component/singles/ComponentSingleHeader';
+import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -46,7 +47,7 @@ const ReactDOM = self.ReactDOM;
  *   <li>日付</li>
  * </ul>
  */
-export class ViewSingleHeader extends View {
+export default class ViewSingleHeader extends View {
   /**
    * 記事詳細 detail 上部
    * @param {Element} element single header root element
@@ -94,8 +95,12 @@ export class ViewSingleHeader extends View {
   // ---------------------------------------------------
   /**
    * render 処理を開始します
+   * @param {string} [path=''] option argument
    */
-  start() {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleHeader].start', path);
+    }
     this.render(this._single);
   }
   /**

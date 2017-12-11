@@ -22,7 +22,7 @@ import {Message} from '../../app/const/Message';
 import {Widget} from '../../action/sidebar/Widget';
 
 // data
-import {Result} from '../../data/Result';
+// import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
 // dae

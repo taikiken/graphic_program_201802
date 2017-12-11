@@ -12,7 +12,7 @@
 
 
 // view
-import {ViewSingleHeader} from '../../../view/single/ViewSingleHeader';
+import ViewSingleHeader from '../../../view/single/ViewSingleHeader';
 
 // dae
 import {SingleDae} from '../../../dae/SingleDae';
