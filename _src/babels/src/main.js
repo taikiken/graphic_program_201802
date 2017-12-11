@@ -122,8 +122,8 @@ import SPViewFirstVisit from './sp/view/SPViewFirstVisit';
 import SPViewAppBanner from './sp/view/SPViewAppBanner';
 
 // home
-import {SPViewHeadLine} from './sp/view/home/SPViewHeadLine';
-import {SPViewNews} from './sp/view/home/SPViewNews';
+import SPViewHeadLine from './sp/view/home/SPViewHeadLine';
+import SPViewNews from './sp/view/home/SPViewNews';
 
 // category
 // @since 2016-09-20 remove
@@ -137,7 +137,7 @@ import { SPViewCategoryWithSlug } from './sp/view/category/SPViewCategoryWithSlu
 import SPViewArea from './sp/view/category/SPViewArea';
 
 // search
-import {SPViewSearch} from './sp/view/SPViewSearch';
+import SPViewSearch from './sp/view/SPViewSearch';
 
 // Syn.
 import {SPViewSyn} from './sp/view/SPViewSyn';

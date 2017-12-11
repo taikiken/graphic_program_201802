@@ -20,30 +20,37 @@ import { SPComponentHeadlines } from '../../component/headline/SPComponentHeadli
 import {ArticleDae} from '../../../dae/ArticleDae';
 
 // React
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * SP home headline
  */
-export class SPViewHeadLine extends ViewHeadline {
+export default class SPViewHeadLine extends ViewHeadline {
   /**
    * SP home headline
    * @param {Element} element コンテンツ基点Element
    * @param {Object} [option={}] callback 関数をセット
    */
-  constructor( element:Element, option:Object = {} ) {
-    super( element, option );
+  constructor(element, option:Object = {}) {
+    super(element, option);
   }
-
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render( articles:Array ):void {
+  render(articles) {
     // @since 2016-09-16
     // headline output changed
     const list = articles.map((article) => new ArticleDae(article));
-
     ReactDOM.render(
       <SPComponentHeadlines
         list={list}

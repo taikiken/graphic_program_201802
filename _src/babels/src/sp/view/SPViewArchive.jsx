@@ -17,7 +17,7 @@ import View from '../../view/View';
 import {Message} from '../../app/const/Message';
 
 // data
-import {Result} from '../../data/Result';
+// import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
 // dae

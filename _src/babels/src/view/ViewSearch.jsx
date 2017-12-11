@@ -49,7 +49,7 @@ const ReactDOM = self.ReactDOM;
  * @returns {XML} `div.error-container` - 検索結果が見つかりませんでした
  * @since 2017-12-05
  */
-const SearchErrorComponent = () => (
+export const SearchErrorComponent = () => (
   <div className="error-container">
     <h2 className="search-heading mt60">検索結果が見つかりませんでした</h2>
     <p className="mt04">スペルを確認するか、他のキーワードを入力してみてください。</p>
