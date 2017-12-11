@@ -140,7 +140,6 @@ $app->group('/athlete', function () use($app, $ImgPath) {
         }
 
         $banner = $app->model->get_category_by_slug($args['category_slug'], $args['id']);
-        var_dump($banner);
 
         $args['page'] = $app->model->set(array(
             'title'              => 'CRAZY ATHLETES',
