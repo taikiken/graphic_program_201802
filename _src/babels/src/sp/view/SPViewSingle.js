@@ -25,8 +25,8 @@ import View from '../../view/View';
 // @since 2016-09-34
 import Banner from '../../view/Banner';
 
-// dae
-import {SingleDae} from '../../dae/SingleDae';
+// // dae
+// import {SingleDae} from '../../dae/SingleDae';
 
 // node
 // import {BannerNode} from '../../node/single/BannerNode';
@@ -42,7 +42,16 @@ import {SPViewSingleVisual} from './single/SPViewSingleVisual';
 import { SPViewSingles } from './singles/SPViewSingles';
 
 // React
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * SP 記事詳細
@@ -50,14 +59,14 @@ let ReactDOM = self.ReactDOM;
 export class SPViewSingle extends ViewSingle {
   /**
    * SP 記事詳細
-   * @param {Number} id 記事 id
+   * @param {number} id 記事 id
    * @param {Element} element 日付とかインサートする element
    * @param {Element} visualElement メインビジュアル用 element
    * @param {Element} bannerElement バナー用 element
    * @param {Object} [option={}] callback をセットした Object
    */
-  constructor( id:Number, element:Element, visualElement:Element, bannerElement:Element, option:Object = {} ) {
-    super( id, element, { related: null, footer: null }, option );
+  constructor(id, element, visualElement, bannerElement, option:Object = {}) {
+    super(id, element, { related: null, footer: null }, option);
     /**
      * メインビジュアル用 element
      * @type {Element}
@@ -109,15 +118,14 @@ export class SPViewSingle extends ViewSingle {
    * @param {SingleDae} single JSON response
    * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */
-  render( single:SingleDae ):void {
+  render(single) {
     // let single = new SingleDae( response );
-
     // beforeRender call
-    this.executeSafely( View.BEFORE_RENDER, single );
-
-    this.renderHeader( single );
-    this.renderVisual( single );
-    this.renderBanner( single );
+    this.executeSafely(View.BEFORE_RENDER, single);
+    // output
+    this.renderHeader(single);
+    this.renderVisual(single);
+    this.renderBanner(single);
 
     // ga from 2016-06-08
     // ViewSingle.ga( single );
@@ -129,12 +137,11 @@ export class SPViewSingle extends ViewSingle {
    * header 部レンダリング
    * @param {SingleDae} single 記事 SingleDae instance
    */
-  renderHeader( single:SingleDae ):void {
+  renderHeader(single) {
     // header
-    if ( this.header === null ) {
-
-      let viewHeader = new SPViewSingleHeader( this.element, single );
-      viewHeader.on( View.DID_MOUNT, this.boundMount );
+    if (this.header === null) {
+      const viewHeader = new SPViewSingleHeader(this.element, single);
+      viewHeader.on(View.DID_MOUNT, this.boundMount);
       /**
        * SPViewSingleHeader instance
        * @override
@@ -142,39 +149,35 @@ export class SPViewSingle extends ViewSingle {
        */
       this.header = viewHeader;
       viewHeader.start();
-
     } else {
-
-      this.header.render( single );
-
+      this.header.render(single);
     }
   }
   /**
    * visual 部レンダリング
    * @param {SingleDae} single 記事 SingleDae instance
    */
-  renderVisual( single:SingleDae ):void {
+  renderVisual(single) {
     // visual
-    if ( this._visual === null ) {
-      let visualNode = new SPViewSingleVisual( this._visualElement, single );
+    if (this._visual === null) {
+      const visualNode = new SPViewSingleVisual(this._visualElement, single);
       this._visual = visualNode;
       visualNode.start();
     } else {
-      this._visual.render( single );
+      this._visual.render(single);
     }
   }
   /**
    * banner レンダリング
    * @param {SingleDae} single 記事 SingleDae instance
    */
-  renderBanner( single:SingleDae ):void {
+  renderBanner(single) {
     // @since 2016-09-24
     const element = this._bannerElement;
     const component = Banner.sp(single, element);
     if (component === null) {
       return;
     }
-
     ReactDOM.render(component, element);
   }
 }

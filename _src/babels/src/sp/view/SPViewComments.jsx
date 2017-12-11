@@ -34,8 +34,15 @@ import ViewComments from '../../view/ViewComments';
 import SPComponentComments from '../component/single-comment/SPComponentComments';
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**
@@ -448,7 +455,7 @@ export default class SPViewComments extends ViewComments {
   /**
    * 再読み込み
    */
-  reload():void {
+  reload() {
     // console.log('SPViewComment.reload', this.articleId, this.commentsListType);
     /**
      * 既存リストを空にする

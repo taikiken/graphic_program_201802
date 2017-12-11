@@ -253,7 +253,7 @@ export default class SPViewFirstVisit extends ViewFirstVisit {
   /**
    * 初回起動時のサービス紹介 を表示する
    */
-  render():void {
+  render() {
     // // 表示させる
     // let FirstDom = React.createClass( {
     //   getInitialState: function() {

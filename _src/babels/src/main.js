@@ -140,7 +140,7 @@ import SPViewArea from './sp/view/category/SPViewArea';
 import SPViewSearch from './sp/view/SPViewSearch';
 
 // Syn.
-import {SPViewSyn} from './sp/view/SPViewSyn';
+import SPViewSyn from './sp/view/SPViewSyn';
 
 // header
 import {SPViewHeaderUser} from './sp/view/header/SPViewHeaderUser';
