@@ -9,28 +9,39 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
-
 import View from '../View';
 // node
 import {LogoutNode} from '../../node/modal/LogoutNode';
 // event
 import {LogoutStatus} from '../../event/LogoutStatus';
+import { Env } from '../../app/Env';
 
-// react
-let ReactDOM = self.ReactDOM;
+// React
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * logout modal control
  */
-export class ViewLogoutModal extends View {
+export default class ViewLogoutModal extends View {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * logout modal 表示
    * @param {Element} element 親 Element
-   * @param {Function} yesCallback yes / ok click callback
-   * @param {Function} noCallback no / cancel click callback
+   * @param {?Function} [yesCallback=null] yes / ok click callback
+   * @param {?Function} [noCallback=null] no / cancel click callback
    */
-  constructor( element:Element, yesCallback:Function = null, noCallback:Function = null ) {
+  constructor(element, yesCallback = null, noCallback = null) {
     super( element );
     /**
      * modal instance
@@ -56,30 +67,44 @@ export class ViewLogoutModal extends View {
      * @private
      */
     this._status = LogoutStatus.factory();
+    /**
+     * bind onOpen
+     * @type {function}
+     */
+    this.onOpen = this.onOpen.bind(this);
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * @param {Function} callback ok / yes callback
    */
-  set yes( callback:Function ):void {
+  set yes(callback) {
     this._yes = callback;
   }
   /**
    * @param {Function} callback cancel / no callback
    */
-  set no( callback:Function ):void {
+  set no(callback) {
     this._no = callback;
   }
+  // ---------------------------------------------------
+  //  Method
+  // ---------------------------------------------------
   /**
    * rendering 開始
+   * @param {string} [path=''] option argument
    */
-  start():void {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleTitle].start', path);
+    }
     this.render();
   }
   /**
-   * rendering
+   * rendering - {@link LogoutNode}
    */
-  render():void {
-
+  render() {
     if ( this._render === null ) {
       this._render = ReactDOM.render(
         <LogoutNode
@@ -89,23 +114,23 @@ export class ViewLogoutModal extends View {
         this.element
       );
     }
-
-    this._status.on( LogoutStatus.OPEN, this.onOpen.bind( this ) );
-
+    const status = this._status;
+    status.off(LogoutStatus.OPEN, this.onOpen);
+    status.on(LogoutStatus.OPEN, this.onOpen);
   }
   /**
-   * 開く
+   * modal 開く
    */
-  open():void {
-    if ( this._render !== null ) {
-      this._render.updateShow( true );
+  open() {
+    if (this._render !== null) {
+      this._render.updateShow(true);
     }
   }
   /**
    * LogoutStatus.OPEN event handler
    * event が発生したら this.open を実行します
    */
-  onOpen():void {
+  onOpen() {
     // console.log( 'logout open event handler will open logout modal........' );
     this.open();
   }

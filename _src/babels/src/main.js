@@ -79,9 +79,9 @@ import ViewRecommend from './view/sidebar/ViewRecommend';
 import Sidebar from './view/sidebar/Sidebar';
 
 // modal
-import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
-import {ViewLogoutModal} from './view/modal/ViewLogoutModal';
-import {ViewFlushModal} from './view/modal/ViewFlushModal';
+import ViewDeleteModal from './view/modal/ViewDeleteModal';
+import ViewLogoutModal from './view/modal/ViewLogoutModal';
+import ViewFlushModal from './view/modal/ViewFlushModal';
 
 // area
 // @since 2017-09-04

@@ -15,43 +15,67 @@ import View from '../View';
 
 import {MessageStatus} from '../../event/MessageStatus';
 import {CommentDeleteNode} from '../../node/modal/CommentDeleteNode';
+import { Env } from '../../app/Env';
 
 // React
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * コメント削除モーダル
  */
-export class ViewDeleteModal extends View {
+export default class ViewDeleteModal extends View {
   /**
    * コメント削除モーダル
    * @param {Element} element target HTMLElement
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, option:Object = {} ) {
-    super( element, option );
+  constructor(element, option = {}) {
+    super(element, option);
     /**
      * modal instance
      * @type {null|Object}
      * @private
      */
     this._render = null;
+    /**
+     * bind onModal
+     * @type {function}
+     */
+    this.onModal = this.onModal.bind(this);
+    /**
+     * 完了・注意など一時表示メッセージイベント instance
+     * @type {MessageStatus}
+     */
+    this.status = MessageStatus.factory();
   }
   /**
-   * 初期化
+   * 初期化 + {@link MessageStatus}.DELETE event を watch します
+   * @param {string} [path=''] option argument
    */
-  start() {
-    let status = MessageStatus.factory();
-    status.on( MessageStatus.DELETE, this.onModal.bind( this ) );
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleTitle].start', path);
+    }
+    const status = this.status;
+    status.off(MessageStatus.DELETE, this.onModal);
+    status.on(MessageStatus.DELETE, this.onModal);
   }
   /**
    * MessageStatus.DELETE event handler,
    * modal window を open します
    * @param {Object} event MessageStatus.DELETE event instance
    */
-  onModal( event:Object ):void {
-
-    if ( this._render === null ) {
+  onModal(event) {
+    if (this._render === null) {
       this._render = ReactDOM.render(
         <CommentDeleteNode
           id={event.id}
@@ -62,10 +86,7 @@ export class ViewDeleteModal extends View {
         this.element
       );
     } else {
-
-      this._render.updateShow( true, event.id, event.ok, event.cancel, event.type );
-
+      this._render.updateShow(true, event.id, event.ok, event.cancel, event.type);
     }
-
   }
 }

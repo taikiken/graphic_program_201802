@@ -16,36 +16,61 @@ import {MessageStatus} from '../../event/MessageStatus';
 
 // node
 import {FlushNode} from '../../node/modal/FlushNode';
+import { Env } from '../../app/Env';
 
 // React
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * フラッシュ・メッセージ・モーダル
  */
-export class ViewFlushModal extends View {
+export default class ViewFlushModal extends View {
   /**
    * フラッシュ・メッセージ・モーダル
    * @param {Element} element target HTMLElement
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, option:Object = {} ) {
-    super( element, option );
+  constructor(element, option = {}) {
+    super(element, option);
     /**
      * modal instance
      * @type {null|Object}
      * @private
      */
     this._render = null;
+    /**
+     * bind onModal
+     * @type {function}
+     */
+    this.onModal = this.onModal.bind(this);
+    /**
+     * 完了・注意など一時表示メッセージイベント instance
+     * @type {MessageStatus}
+     */
+    this.status = MessageStatus.factory();
   }
   /**
    * 初期化
+   * @param {string} [path=''] option argument
    */
-  start() {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleTitle].start', path);
+    }
     this.render();
 
-    let status = MessageStatus.factory();
-    status.on( MessageStatus.FLUSH, this.onModal.bind( this ) );
+    const status = this.status;
+    status.off(MessageStatus.FLUSH, this.onModal);
+    status.on(MessageStatus.FLUSH, this.onModal);
   }
   /**
    * component 作成
@@ -53,7 +78,7 @@ export class ViewFlushModal extends View {
   render():void {
     this._render = ReactDOM.render(
       <FlushNode />,
-      this.element
+      this.element,
     );
   }
   /**
@@ -61,9 +86,8 @@ export class ViewFlushModal extends View {
    * modal window を open します
    * @param {Object} event MessageStatus.FLUSH event instance
    */
-  onModal( event:Object ):void {
+  onModal(event) {
     // console.log( 'flush modal event ', event );
-    this._render.updateShow( true, event.message, event.kind, event.sp );
-
+    this._render.updateShow(true, event.message, event.kind, event.sp);
   }
 }
