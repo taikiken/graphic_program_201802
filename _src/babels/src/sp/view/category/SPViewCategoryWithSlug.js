@@ -21,7 +21,7 @@ import {Result} from '../../../data/Result';
 
 // dae
 import {ArticleDae} from '../../../dae/ArticleDae';
-import {CategoriesSlugDae} from '../../../dae/caegories/CategoriesSlugDae';
+import {CategoriesSlugDae} from '../../../dae/categories/CategoriesSlugDae';
 
 // view
 import View from '../../../view/View';

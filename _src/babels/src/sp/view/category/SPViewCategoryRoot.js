@@ -23,7 +23,7 @@ import {SPViewVideos} from '../sidebar/SPViewVideos';
 import {SPTabNode} from '../../node/SPTabNode';
 
 // dae
-import {CategoriesSlugDae} from '../../../dae/caegories/CategoriesSlugDae';
+import {CategoriesSlugDae} from '../../../dae/categories/CategoriesSlugDae';
 
 // data
 import {Safety} from '../../../data/Safety';

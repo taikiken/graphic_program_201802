@@ -18,7 +18,7 @@ import {Model} from '../../model/Model';
 import {ModelInterest} from '../../model/settings/ModelInterest';
 
 // dae
-import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
+import {CategoriesDae} from '../../dae/categories/CategoriesDae';
 
 // event
 import {SettingsStatus} from '../../event/SettingsStatus';

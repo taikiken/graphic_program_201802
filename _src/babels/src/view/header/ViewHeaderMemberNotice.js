@@ -51,6 +51,7 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * お知らせ(header)
+ * TODO: React.createClass を止める
  */
 export class ViewHeaderMemberNotice extends View {
   /**

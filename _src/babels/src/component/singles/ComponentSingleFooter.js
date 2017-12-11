@@ -21,7 +21,7 @@ import { Message } from '../../app/const/Message';
 // import { BannerNode } from '../../node/single/BannerNode';
 
 // view
-import { Banner } from '../../view/Banner';
+import Banner from '../../view/Banner';
 
 // React
 const React = self.React;

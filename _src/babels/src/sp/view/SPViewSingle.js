@@ -23,7 +23,7 @@ import { Dom } from '../../app/Dom';
 // view
 import View from '../../view/View';
 // @since 2016-09-34
-import { Banner } from '../../view/Banner';
+import Banner from '../../view/Banner';
 
 // dae
 import {SingleDae} from '../../dae/SingleDae';

@@ -16,12 +16,20 @@ import { Safety } from '../data/Safety';
 // node
 import { BannerNode } from '../node/single/BannerNode';
 
+// React
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+
 /**
  * pc banner を生成し `BannerNode` を出力します
  * {@link BannerNode}
  * @since 2016-09-24
  */
-export class Banner {
+export default class Banner {
   /**
    * pc banner を生成します
    * @param {SingleDae} single 記事詳細 JSON data

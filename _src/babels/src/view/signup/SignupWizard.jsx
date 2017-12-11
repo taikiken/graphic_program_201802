@@ -27,12 +27,12 @@ import {ModelCategories} from '../../model/categoires/ModelCategories';
 import {ModelSocial} from '../../model/sns/ModelSocial';
 
 // dae
-import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
+// import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
 import {UserDae} from '../../dae/UserDae';
 import {StatusDae} from '../../dae/StatusDae';
 
-// data
-import {Result} from '../../data/Result';
+// // data
+// import {Result} from '../../data/Result';
 
 // // node
 // import {HeadingNode} from '../../node/signup/HeadingNode';
@@ -43,20 +43,31 @@ import {SignupStatus} from '../../event/SignupStatus';
 
 // component
 import ComponentSignup from '../../component/signup/ComponentSignup';
+import { Env } from '../../app/Env';
 
 // Sagen
+/**
+ * [library] - Sagen
+ */
 const Sagen = self.Sagen;
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**
  * ユーザー新規登録ウィザード
  * step 1 ~ step 3 画面遷移をコントロールします
  */
-export class SignupWizard extends View {
+export default class SignupWizard extends View {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -65,6 +76,25 @@ export class SignupWizard extends View {
     div.id = 'js-wow-modal-container';
     document.body.appendChild(div);
     return div;
+  }
+  /**
+   * onbeforeunload を bind する
+   */
+  static activateUnload():void {
+    window.addEventListener('beforeunload', SignupWizard.onUnload, false);
+  }
+  /**
+   * onbeforeunload を unbind する
+   */
+  static deactivateUnload():void {
+    window.removeEventListener('beforeunload', SignupWizard.onUnload);
+  }
+  /**
+   * onbeforeunload returnValue へ メッセージを設定する
+   * @param {Event} event onbeforeunload Event instance
+   */
+  static onUnload(event) {
+    event.returnValue = Message.UNLOAD;
   }
   // ---------------------------------------------------
   //  CONSTRUCTOR
@@ -147,23 +177,32 @@ export class SignupWizard extends View {
      * @since 2017-11-13
      */
     this.wow = wow;
+    /**
+     * bind socialDone
+     * @type {function}
+     */
+    this.socialDone = this.socialDone.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
+   * @param {string} [path=''] option argument
    */
-  start():void {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingleTitle].start', path);
+    }
     this.action.start();
   }
   /**
    * Ajax response success
    * @param {CategoriesDae} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  complete( result:CategoriesDae ):void {
+  complete(result) {
     // console.log('SignupWizard.complete', result);
-    this.render( result, this._step );
+    this.render(result, this._step);
   }
   /**
    * Ajax response error
@@ -285,13 +324,13 @@ export class SignupWizard extends View {
   /**
    * component が mount された
    */
-  didMount():void {
+  didMount() {
     // dom mound after
     // SignupStatus event bind
     this._status.on( SignupStatus.SIGNUP_STEP, this.stepChange.bind( this ) );
     // 多分 email のチェックが終わり次のステップに遷移
     // window blur と hash change 監視を開始
-    if ( this._boundHash === null ) {
+    if (this._boundHash === null) {
       this.activateHashChange();
     }
   }
@@ -299,7 +338,7 @@ export class SignupWizard extends View {
    * SignupStatus.SIGNUP_STEP event handler
    * @param {{step: number}} event SignupStatus event object
    */
-  stepChange( event:Object ):void {
+  stepChange(event) {
     // let step = event.step;
     // this._step = step;
     this._step = event.step;
@@ -311,31 +350,12 @@ export class SignupWizard extends View {
   /**
    * hash change event を監視開始
    */
-  activateHashChange():void {
+  activateHashChange() {
     // let boundHash = this.onHash.bind( this );
     const boundHash = this.onHash;
     this._boundHash = boundHash;
 
-    window.addEventListener( 'hashchange', boundHash, false );
-  }
-  /**
-   * onbeforeunload を bind する
-   */
-  static activateUnload():void {
-    window.addEventListener( 'beforeunload', SignupWizard.onUnload, false );
-  }
-  /**
-   * onbeforeunload を unbind する
-   */
-  static deactivateUnload():void {
-    window.removeEventListener( 'beforeunload', SignupWizard.onUnload );
-  }
-  /**
-   * onbeforeunload returnValue へ メッセージを設定する
-   * @param {Event} event onbeforeunload Event instance
-   */
-  static onUnload( event ):void {
-    event.returnValue = Message.UNLOAD;
+    window.addEventListener('hashchange', boundHash, false);
   }
   // /**
   //  * HashChangeEvent event handler, hash が変更された後に呼び出されます
@@ -351,10 +371,10 @@ export class SignupWizard extends View {
   /**
    * HashChangeEvent event handler, hash が変更された後に呼び出されます
    */
-  onHash():void {
-    let hash = Loc.hash;
-    let step = Url.signupStepByHash( hash );
-    this._status.step( step );
+  onHash() {
+    const hash = Loc.hash;
+    const step = Url.signupStepByHash(hash);
+    this._status.step(step);
   }
 
   // ---------------------------------------------
@@ -375,7 +395,7 @@ export class SignupWizard extends View {
    *
    * </pre>
    */
-  social():void {
+  social() {
     // query check
     /*
      https://github.com/undotsushin/undotsushin/issues/334#issuecomment-197217112
@@ -389,13 +409,12 @@ export class SignupWizard extends View {
      http://dev.undotsushin.com/signup/?oauth=twitter
      */
     const queries = Loc.parse();
-    if ( queries !== null && queries.hasOwnProperty( 'oauth' ) ) {
-
+    if (queries !== null && queries.hasOwnProperty('oauth')) {
       const value = queries.oauth;
       // console.log( 'social request ', queries );
       // query value
       // facebook が #(hash) ついていたりして言ってることと違うので チェック項目増やす
-      if ( value.indexOf( 'facebook' ) !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter' ) {
+      if (value.indexOf('facebook') !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter' ) {
         this.socialRequest();
       }
     }
@@ -403,34 +422,32 @@ export class SignupWizard extends View {
   /**
    * API `/api/v1/sessions/social` を行います
    */
-  socialRequest():void {
+  socialRequest() {
     // let boundFail = this.socialFail.bind( this );
-    let callback = {};
-    callback[ Model.COMPLETE ] = this.socialDone.bind( this );
+    const callback = {};
+    callback[Model.COMPLETE] = this.socialDone;
     // callback[ Model.UNDEFINED_ERROR ] = boundFail;
     // callback[ Model.RESPONSE_ERROR ] = boundFail;
-
-    let model = new ModelSocial( callback );
+    const model = new ModelSocial(callback);
     model.start();
   }
   /**
    * API `/api/v1/sessions/social` 成功
    * @param {Result} result 結果セット
    */
-  socialDone( result:Result ):void {
-    let response = result.response;
-
+  socialDone(result) {
+    const response = result.response;
     if ( typeof response === 'undefined' ) {
       // articles undefined
       // JSON に問題がある
-      let error = new Error( Message.undef('[SOCIAL:USER_PROFILE:UNDEFINED]') );
-      this.executeSafely( View.UNDEFINED_ERROR, error );
+      const error = new Error(Message.undef('[SOCIAL:USER_PROFILE:UNDEFINED]'));
+      this.executeSafely(View.UNDEFINED_ERROR, error);
     } else {
-      let status = new StatusDae( result.status );
+      const status = new StatusDae(result.status);
       // console.log( 'socialDone ', status );
-      if ( status.code === 200 ) {
+      if (status.code === 200) {
         // status.code 200 の時に success method を呼び出します
-        this.success( new UserDae( response ) );
+        this.success(new UserDae(response));
       }
     }
   }
@@ -445,7 +462,7 @@ export class SignupWizard extends View {
    * API `/api/v1/sessions/social` 成功後 step 2 へ移動します
    * @param {UserDae} userDae ユーザー情報
    */
-  success( userDae:UserDae ):void {
-    this._status.sns( userDae.userName, userDae.profilePicture, userDae.email, userDae.bio );
+  success(userDae) {
+    this._status.sns(userDae.userName, userDae.profilePicture, userDae.email, userDae.bio);
   }
 }

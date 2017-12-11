@@ -13,7 +13,7 @@
 
 import {Model} from '../Model';
 import {SettingsInterest} from '../../action/settings/SettingsInterest';
-import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
+import {CategoriesDae} from '../../dae/categories/CategoriesDae';
 import {Result} from '../../data/Result';
 
 /**

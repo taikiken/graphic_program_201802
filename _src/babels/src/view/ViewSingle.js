@@ -30,8 +30,8 @@ import { Safety } from '../data/Safety';
 import { SingleDae } from '../dae/SingleDae';
 
 // dae
-import { CategoriesDae } from '../dae/caegories/CategoriesDae';
-import { SlugDae } from '../dae/caegories/SlugDae';
+import { CategoriesDae } from '../dae/categories/CategoriesDae';
+import { SlugDae } from '../dae/categories/SlugDae';
 
 // app
 import { Dom } from '../app/Dom';

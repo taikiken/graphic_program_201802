@@ -14,7 +14,7 @@
 import { SignupStatus } from '../../event/SignupStatus';
 
 // dae
-import { CategoriesDae } from '../../dae/caegories/CategoriesDae';
+import { CategoriesDae } from '../../dae/categories/CategoriesDae';
 
 // node
 import { HeadingNode } from '../../node/signup/HeadingNode';

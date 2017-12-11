@@ -37,6 +37,7 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * 退会 表示
+ * TODO: React.createClass を止める
  */
 export class ViewDeactivate extends View {
   /**

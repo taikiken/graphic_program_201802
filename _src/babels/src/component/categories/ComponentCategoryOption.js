@@ -28,7 +28,7 @@ import { ModelCategoriesSlug } from '../../model/categoires/ModelCategoriesSlug'
 import { Result } from '../../data/Result';
 
 // dae
-import { CategoriesSlugDae } from '../../dae/caegories/CategoriesSlugDae';
+import { CategoriesSlugDae } from '../../dae/categories/CategoriesSlugDae';
 
 // tick
 import { Polling } from '../../tick/Polling';

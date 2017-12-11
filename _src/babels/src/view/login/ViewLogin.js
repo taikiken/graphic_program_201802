@@ -48,6 +48,7 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * Login from を表示します
+ * TODO: React.createClass を止める
  */
 export class ViewLogin extends View {
   /**

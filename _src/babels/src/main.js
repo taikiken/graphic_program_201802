@@ -90,12 +90,12 @@ import ViewArea from './view/ViewArea';
 
 // ----------- users
 // signup
-import {SignupWizard} from './view/signup/SignupWizard';
+import SignupWizard from './view/signup/SignupWizard';
 import {ViewDeactivate} from './view/signup/ViewDeactivate';
 
 // login
 import {ViewLogin} from './view/login/ViewLogin';
-import {ViewLogout} from './view/login/ViewLogout';
+import ViewLogout from './view/login/ViewLogout';
 
 // mypage
 import {ViewUserProfile} from './view/mypage/ViewUserProfile';
