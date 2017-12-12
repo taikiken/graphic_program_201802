@@ -35,7 +35,8 @@ if($q->get_dir()===0){ // 新規
 		data_sql();
 
     $sv[$sn[]="id"]=$g->f("id");
-		$o=new dbutl($TABLE,$sn,$sv);
+    $sv[$sn[]="created_at"]="now()";
+    $o=new dbutl($TABLE,$sn,$sv);
 		$e=$o->update($g->f("id"));
 
 	}
