@@ -54,7 +54,7 @@ const ReactDOM = self.ReactDOM;
  * - 人気記事は 3件ごとに `Component` を挿入しそこで Ajax request を行い記事挿入します
  * @since 2016-09-26
  */
-export class SPViewSingles extends SPViewArchiveInfinite {
+export default class SPViewSingles extends SPViewArchiveInfinite {
   /**
    * SP: 記事詳細の次の記事ブロック表示を行います
    * @param {number} id 記事 ID
@@ -64,7 +64,7 @@ export class SPViewSingles extends SPViewArchiveInfinite {
    * @param {Object} [option={}] callback を設定した Object
    */
   constructor(id, element, moreElement, single, option = {}) {
-    super(element, moreElement, single, option);
+    super(element, moreElement, null, option);
     /**
      * `ReactDOM.render(<SPComponentSingles>)` を保持します
      * @type {?Object}
@@ -122,7 +122,7 @@ export class SPViewSingles extends SPViewArchiveInfinite {
    * API 取得 JSON.response を ArticleDae instance にし保持する配列
    * @return {Array.<ArticleDae>} API 取得 JSON.response を ArticleDae instance にし保持する配列を返します
    */
-  get articlesList():Array {
+  get articlesList() {
     return this._articles;
   }
   // ---------------------------------------------------
@@ -132,7 +132,7 @@ export class SPViewSingles extends SPViewArchiveInfinite {
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done(result):void {
+  done(result) {
     const articles = result.articles;
     if (!Array.isArray(articles) || typeof articles === 'undefined') {
       // articles undefined
@@ -158,8 +158,8 @@ export class SPViewSingles extends SPViewArchiveInfinite {
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error:Error ):void {
-    this.executeSafely( View.RESPONSE_ERROR, error );
+  fail(error) {
+    this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
     // @since 2016-09-28, error で button を非表示へ
@@ -170,7 +170,7 @@ export class SPViewSingles extends SPViewArchiveInfinite {
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render(articles:Array):void {
+  render(articles) {
     // 既存データ用のglobal配列
     const articlesList = this.articles;
 
@@ -180,11 +180,17 @@ export class SPViewSingles extends SPViewArchiveInfinite {
 
     // ------------------------------------------------
     // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
-    articles.forEach((article, i) => {
+    // articles.forEach((article, i) => {
+    //   const dae = new SingleDae(article);
+    //   dae.index = prevLast + i;
+    //   articlesList.push(dae);
+    // } );
+    articles.map((article, i) => {
       const dae = new SingleDae(article);
       dae.index = prevLast + i;
       articlesList.push(dae);
-    } );
+      return article;
+    });
 
     // // this._articleRendered が null の時だけ ReactDOM.render する
     // if (this.articleRendered === null) {
@@ -223,7 +229,7 @@ export class SPViewSingles extends SPViewArchiveInfinite {
         single={this.single}
         sign={User.sign}
       />,
-      this.element
+      this.element,
     );
   }
 }

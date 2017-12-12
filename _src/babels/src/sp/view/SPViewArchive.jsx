@@ -59,6 +59,7 @@ export default class SPViewArchive extends View {
     option = Safety.object(option);
     super(element, option);
     // if ( typeof ActionClass === 'function' ) {
+    // console.log('SPViewArchive ActionClass', ActionClass);
     if (ActionClass) {
       /**
        * Action instance を設定します
@@ -222,7 +223,7 @@ export default class SPViewArchive extends View {
    */
   start(path = '') {
     if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingle].start', path);
+      console.warn('[SPViewArchive].start', path);
     }
     // console.log( '-------------------------- SPViewArchive start------' );
     this.action.next();
@@ -386,6 +387,11 @@ export default class SPViewArchive extends View {
    * @param {boolean} show true の時にボタンを表示させ機能させます
    */
   moreButton(show) {
+    // element check, null あり
+    if (!this.moreElement) {
+      return;
+    }
+    // console.log('SPViewArchive.moreButton', this.moreElement);
     if (this.moreRendered === null) {
       // チェックをパスし実行する
       this.moreRendered = ReactDOM.render(

@@ -43,26 +43,24 @@ const ReactDOM = self.ReactDOM;
  * SP 記事詳細, オススメ記事 一覧
  * @since 2016-06-29
  */
-export class SPViewSingleRecommend extends ViewRecommend {
+export default class SPViewSingleRecommend extends ViewRecommend {
   /**
    * SP 記事詳細, オススメ記事 一覧, PC と違い 10 件ずつ表示
    * @param {Element} element 一覧表示用 element
    * @param {Object} [option={}] callback 関数をセット
    * @param {string} [slug=all] category slug
-   * @param {Number} length SP 記事詳細・人気記事, 記事表示件数
+   * @param {number} length SP 記事詳細・人気記事, 記事表示件数
    */
-  constructor( element:Element, option:Object = {}, slug:string = 'all', length:Number = Length.spRanking ) {
-    length = Safety.integer( length, Length.ranking );
-    super( element, option, slug, length );
+  constructor(element, option = {}, slug = 'all', length = Length.spRanking) {
+    const serializeLength = Safety.integer( length, Length.ranking );
+    super(element, option, slug, serializeLength);
   }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render( articles:Array ):void {
-
-    this.executeSafely( View.BEFORE_RENDER, articles, this.slug );
-
+  render(articles) {
+    this.executeSafely(View.BEFORE_RENDER, articles, this.slug);
     ReactDOM.render(
       <SPRankingNode
         list={articles}

@@ -27,13 +27,22 @@ import { CategoryAuth } from '../../../action/archive/CategoryAuth';
 import { SPComponentSinglesWidgetPopularList } from '../../component/singles/SPComponentSinglesWidgetPopularList';
 
 // React
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**
  * SP: 記事詳細「次の記事一覧」人気記事を出力するためのデータを取得し描画します
  * @since 2016-09-28
  */
-export class SPViewSinglesPopular extends SPViewArchive {
+export default class SPViewSinglesPopular extends SPViewArchive {
   /**
    * 必要なデータを保持します
    * @param {Element} element 出力親コンテナ

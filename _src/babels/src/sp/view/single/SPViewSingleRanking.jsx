@@ -29,34 +29,39 @@ import {Safety} from '../../../data/Safety';
 import {SPRankingNode} from '../../node/single/SPRankingNode';
 
 // React
-// eslint-disable-next-line no-unused-vars
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * SP 記事詳細, 人気記事 一覧
  * @since 2016-06-16
  */
-export class SPViewSingleRanking extends ViewRanking {
+export default class SPViewSingleRanking extends ViewRanking {
   /**
    * SP 記事詳細, 人気記事 一覧, PC と違い 10 件ずつ表示
    * @param {Element} element 一覧表示用 element
    * @param {Object} [option={}] callback 関数をセット
    * @param {string} [slug=all] category slug
-   * @param {Number} length SP 記事詳細・人気記事, 記事表示件数
+   * @param {number} length SP 記事詳細・人気記事, 記事表示件数
    */
-  constructor( element:Element, option:Object = {}, slug:string = 'all', length:Number = Length.spRanking ) {
-    length = Safety.integer( length, Length.spRanking );
-    super( element, option, slug, length );
+  constructor(element, option = {}, slug = 'all', length = Length.spRanking) {
+    const serializeLength = Safety.integer(length, Length.spRanking);
+    super(element, option, slug, serializeLength);
   }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render( articles:Array ):void {
-
-    this.executeSafely( View.BEFORE_RENDER, articles, this.slug );
-
+  render(articles) {
+    this.executeSafely(View.BEFORE_RENDER, articles, this.slug);
     ReactDOM.render(
       <SPRankingNode
         list={articles}

@@ -20,7 +20,7 @@ import ViewSingleHeader from '../../../view/single/ViewSingleHeader';
 import {User} from '../../../app/User';
 
 // dae
-import {SingleDae} from '../../../dae/SingleDae';
+// import {SingleDae} from '../../../dae/SingleDae';
 
 // node
 // import {BookmarkNode} from '../../../node/bookmark/BookmarkNode';
@@ -32,33 +32,39 @@ import {SingleDae} from '../../../dae/SingleDae';
 import { SPComponentSingleHeader } from '../../component/singles/SPComponentSingleHeader';
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
- * <h3>SP 記事詳細(detail) 上部<h3>
- *   <ul>
- *     <li>bookmark</li>
- *     <li>title</li>
- *     <li>投稿者</li>
- *     <li>カテゴリー</li>
- *     <li>日付</li>
- *   </ul>
+ * SP 記事詳細(detail) 上部 - {@link SPComponentSingleHeader}
+ * - bookmark
+ * - title
+ * - 投稿者
+ * - カテゴリー
+ * - 日付
  */
-export class SPViewSingleHeader extends ViewSingleHeader {
-  /**
-   * SP 記事詳細(detail) 上部
-   * @param {Element} element single header root element
-   * @param {SingleDae} single 変換済み JSON data
-   */
-  constructor( element:Element, single:SingleDae ) {
-    super( element, single );
-  }
+export default class SPViewSingleHeader extends ViewSingleHeader {
+  // /**
+  //  * SP 記事詳細(detail) 上部
+  //  * @param {Element} element single header root element
+  //  * @param {SingleDae} single 変換済み JSON data
+  //  */
+  // constructor( element:Element, single:SingleDae ) {
+  //   super( element, single );
+  // }
   /**
    * render します
    * @param {SingleDae} singleDae JSON 変換済みデータ
    */
-  render( singleDae:SingleDae ):void {
+  render(singleDae) {
     // let _this = this;
     //
     // /**
@@ -139,7 +145,7 @@ export class SPViewSingleHeader extends ViewSingleHeader {
     //   }
     // } );
 
-    if ( this.rendered === null ) {
+    if (this.rendered === null) {
       /**
        * SPHeaderDom instance
        * @override
@@ -158,11 +164,8 @@ export class SPViewSingleHeader extends ViewSingleHeader {
         />,
         this.element
       );
-
     } else {
-
-      this.rendered.updateSingle( singleDae, User.sign );
-
+      this.rendered.updateSingle(singleDae, User.sign);
     }
   }
 }

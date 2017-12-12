@@ -11,7 +11,7 @@
  */
 
 // view
-import { SPViewSinglesPopular } from '../../view/singles/SPViewSinglesPopular';
+import SPViewSinglesPopular from '../../view/singles/SPViewSinglesPopular';
 
 // ui
 import { SinglesManager } from '../../../ui/SinglesManager';

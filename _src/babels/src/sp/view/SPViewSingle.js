@@ -35,11 +35,11 @@ import Banner from '../../view/Banner';
 import { Ga } from '../../ga/Ga';
 
 // sp
-import {SPViewSingleHeader} from './single/SPViewSingleHeader';
-import {SPViewSingleVisual} from './single/SPViewSingleVisual';
+import SPViewSingleHeader from './single/SPViewSingleHeader';
+import SPViewSingleVisual from './single/SPViewSingleVisual';
 
 // sp/view/singles
-import { SPViewSingles } from './singles/SPViewSingles';
+import SPViewSingles from './singles/SPViewSingles';
 
 // React
 /* eslint-disable no-unused-vars */

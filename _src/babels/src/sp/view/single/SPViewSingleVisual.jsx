@@ -15,31 +15,40 @@
 import ViewSingleHeader from '../../../view/single/ViewSingleHeader';
 
 // dae
-import {SingleDae} from '../../../dae/SingleDae';
+// import {SingleDae} from '../../../dae/SingleDae';
 
 // node
 import {SPMediaNode} from '../../node/single/SPMediaNode';
 
 // React
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * sp single 記事上メインビジュアル
  */
-export class SPViewSingleVisual extends ViewSingleHeader {
-  /**
-   * sp single 記事上メインビジュアル
-   * @param {Element} element 基点 Element
-   * @param {SingleDae} single 記事 SingleDae instance
-   */
-  constructor( element:Element, single:SingleDae ) {
-    super( element, single );
-  }
+export default class SPViewSingleVisual extends ViewSingleHeader {
+  // /**
+  //  * sp single 記事上メインビジュアル
+  //  * @param {Element} element 基点 Element
+  //  * @param {SingleDae} single 記事 SingleDae instance
+  //  */
+  // constructor( element:Element, single:SingleDae ) {
+  //   super( element, single );
+  // }
   /**
    * render します
    * @param {SingleDae} singleDae JSON 変換済みデータ
    */
-  render( singleDae:SingleDae ):void {
+  render(singleDae) {
     ReactDOM.render(
       <SPMediaNode
         articleId={String(singleDae.id)}

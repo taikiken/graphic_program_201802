@@ -19,42 +19,63 @@ import View from '../../../view/View';
 // component
 // @since 2016-09-24
 import { SPComponentContinueRead } from '../../component/singles/SPComponentContinueRead';
+import { Env } from '../../../app/Env';
 
 // sagen
-let Sagen = self.Sagen;
+/**
+ * [library] - Sagen
+ */
+const Sagen = self.Sagen;
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * 「続きを読む」 ボタン制御
  */
-export class SPViewContinueRead extends View {
+export default class SPViewContinueRead extends View {
   /**
    * SP 記事詳細 「続きを読む」 ボタン制御
    * @param {Element} element single header root element
    * @param {Element} button single header #post-content-read-more element
    */
-  constructor( element:Element, button:Element ) {
-    super( element );
+  constructor(element, button) {
+    super(element);
     /**
      * single header #post-content-read-more element
      * @type {Element}
      * @private
      */
     this._button = button;
+    /**
+     * element - Sagen.Dom instance
+     * @type {*} Sagen.Dom instance
+     */
+    this.dom = new Sagen.Dom(element);
   }
   /**
    * render 処理を開始します
+   * @param {string} [path=''] option argument
    */
-  start():void {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewSingle].start', path);
+    }
     this.render();
   }
   /**
    * render します
    */
-  render():void {
+  render() {
     // let ReadMoreDom = React.createClass( {
     //   propTypes: {
     //     dom: React.PropTypes.object.isRequired
@@ -106,7 +127,7 @@ export class SPViewContinueRead extends View {
     // @since 2016-09-24 changed
     ReactDOM.render(
       <SPComponentContinueRead
-        dom={new Sagen.Dom(this.element)}
+        dom={this.dom}
       />,
       this._button
     );

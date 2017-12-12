@@ -18,8 +18,15 @@ import View from '../../../view/View';
 import SPComponentSinglesRanking from '../../component/singles-option/SPComponentSinglesRanking';
 
 // React
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
 const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**

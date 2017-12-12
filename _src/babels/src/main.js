@@ -148,10 +148,10 @@ import SPViewHeaderSearch from './sp/view/header/SPViewHeaderSearch';
 
 // single
 import SPViewSingle from './sp/view/SPViewSingle';
-import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
-import {SPViewContinueRead} from './sp/view/single/SPViewContinueRead';
-import {SPViewSingleRanking} from './sp/view/single/SPViewSingleRanking';
-import {SPViewSingleRecommend} from './sp/view/single/SPViewSingleRecommend';
+import SPViewSingleHeader from './sp/view/single/SPViewSingleHeader';
+import SPViewContinueRead from './sp/view/single/SPViewContinueRead';
+import SPViewSingleRanking from './sp/view/single/SPViewSingleRanking';
+import SPViewSingleRecommend from './sp/view/single/SPViewSingleRecommend';
 
 // single/comment
 import SPViewComments from './sp/view/SPViewComments';

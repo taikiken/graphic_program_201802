@@ -158,6 +158,9 @@ export default class SPViewArchiveInfinite extends SPViewArchive {
     // console.log('SPViewArchiveInfinite.moreButton', show);
     // 'View More' button root element
     const moreElement = this.moreElement;
+    if (!moreElement) {
+      return;
+    }
     // moreElement 存在チェックを行う
     // Element 型を保証する
     // moreRendered が null の時のみ instance を作成し
@@ -175,7 +178,7 @@ export default class SPViewArchiveInfinite extends SPViewArchive {
           home={this.home}
           slug={this.slug}
         />,
-        moreElement
+        this.moreElement
       );
     } else {
       this.moreRendered.updateShow(show);
