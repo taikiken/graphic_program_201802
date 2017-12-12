@@ -420,7 +420,8 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 
   if($isgetpickupplayerbanner && $categoryid!=""){
     unset($v);
-    $file=sprintf("%s/static/ad/95-%s.dat",$staticfilepath,$categoryid);
+    $repoid = get_repoid_by_categoryid($categoryid);
+    $file=sprintf("%s/static/ad/95-%s.dat",$staticfilepath,$repoid);
     if(file_exists($file)){
       $v=get_contents($file);
       $ad[]=unserialize($v);
@@ -1342,7 +1343,15 @@ function set_partners_info($f){
 	return $s;
 }
 
-
-
+function get_repoid_by_categoryid($categoryid) {
+  global $o;
+  $sql = "SELECT id FROM repo r WHERE rid = 95 AND flag = 1 AND category = {$categoryid} LIMIT 1";
+  $o->query($sql);
+  $res = $o->fetch_array();
+  if($res === false){
+    return null;
+  }
+  return $res['id'];
+}
 
 ?>
