@@ -14,7 +14,7 @@
 import View from '../View';
 
 // view/header
-import {ViewHeaderMember} from './ViewHeaderMember';
+import ViewHeaderMember from './ViewHeaderMember';
 
 // app
 import {Url} from '../../app/const/Url';
@@ -22,6 +22,7 @@ import {User} from '../../app/User';
 
 // event
 import {UserStatus} from '../../event/UserStatus';
+import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -77,7 +78,7 @@ export default class ViewHeaderUser extends View {
      * @type {Function}
      * @private
      */
-    this._boundCallback = this.memberCallback.bind( this );
+    this._boundCallback = this.memberCallback.bind(this);
     /**
      * login user view instance
      * @type {?ViewHeaderMember}
@@ -112,12 +113,15 @@ export default class ViewHeaderUser extends View {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
+   * @param {string} [path=''] option argument
    */
-  start() {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewHeaderUser].start', path);
+    }
     if (User.sign) {
       // login member
       let member = this._member;
-
       if (member !== null) {
         this.dispose();
       }
@@ -169,6 +173,7 @@ export default class ViewHeaderUser extends View {
     //   <UserDom />,
     //   this.element
     // );
+    // console.log('ViewHeaderUser.render -------------------');
     ReactDOM.render(
       <HeaderUserComponent
         signup={Url.signup()}
@@ -176,6 +181,8 @@ export default class ViewHeaderUser extends View {
       />,
       this.element,
     );
+    // execute
+    this.executeSafely(View.DID_MOUNT);
   }
   /**
    * ViewHeaderMember callback 中継
@@ -185,13 +192,15 @@ export default class ViewHeaderUser extends View {
     const member = this._member;
     const callback = this._boundCallback;
     if (member !== null) {
-      member.off( event.type, callback );
+      member.off(event.type, callback);
     }
+    // console.log('ViewHeaderUser.memberCallback', event);
     this.dispatch(event);
 
     if (event.type === View.RESPONSE_ERROR || event.type === View.UNDEFINED_ERROR || event.type === View.EMPTY_ERROR) {
       // token はあるけどユーザー情報が取得できなかった
       // 処理を止めて一般ユーザー扱いにする
+      // console.log('ViewHeaderUser.memberCallback', event);
       this.dispose();
       this.render();
     }

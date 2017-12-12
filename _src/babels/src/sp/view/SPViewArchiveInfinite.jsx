@@ -67,6 +67,11 @@ export default class SPViewArchiveInfinite extends SPViewArchive {
      * @type {Function}
      */
     this.boundMore = this.moreButton.bind(this);
+    /**
+     * bind executeSafely
+     * @type {function}
+     */
+    this.boundSafely = this.executeSafely.bind(this);
   }
   /**
    * dom を render します
@@ -123,8 +128,8 @@ export default class SPViewArchiveInfinite extends SPViewArchive {
           offset={this.request.offset}
           length={this.request.length}
           action={this.action}
-          callback={this.executeSafely.bind(this)}
-          boundMore={this.moreButton.bind(this)}
+          callback={this.boundSafely}
+          boundMore={this.boundMore}
           home={this.home}
           adSp=""
         />,

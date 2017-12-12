@@ -42,6 +42,7 @@ import {ArticleDae} from '../../dae/ArticleDae';
 
 // tick
 import { Polling } from '../../tick/Polling';
+import { Env } from '../../app/Env';
 
 // global object
 // React
@@ -76,28 +77,39 @@ export default class ViewPickup extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor(element, option = {}) {
-    option = Safety.object( option );
-    super( element, option );
-    let ActionClass = User.sign ? PickupAuth : Pickup;
+    option = Safety.object(option);
+    super(element, option);
+    const ActionClass = User.sign ? PickupAuth : Pickup;
     /**
      * Action instance を設定します
      * @override
      * @type {PickupAuth|Pickup}
      */
-    this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new ActionClass(this.done.bind(this), this.fail.bind(this));
     /**
      * 最後のナンバー
      * @type {number}
      * @private
      */
     this._last = 0;
+    const waiting = 1000 * 5;
     /**
      * interval 間隔
      * @type {number}
      * @private
-     * @default 500
+     * @default 5000
      */
-    this._waiting = 1000 * 5;
+    this._waiting = waiting;
+    /**
+     * bind executeSafely
+     * @type {function}
+     */
+    this.boundSafely = this.executeSafely.bind(this);
+    /**
+     * Polling instance
+     * @type {Polling}
+     */
+    this.polling = new Polling(waiting);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -117,14 +129,19 @@ export default class ViewPickup extends View {
    */
   set waiting(milliseconds) {
     this._waiting = milliseconds;
+    this.polling.changePolling(milliseconds);
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
+   * @param {string} [path=''] option argument
    */
-  start() {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewPickup].start', path);
+    }
     this.action.start();
   }
   /**
@@ -182,8 +199,8 @@ export default class ViewPickup extends View {
     ReactDOM.render(
       <ComponentCarousel
         list={list}
-        callback={this.executeSafely.bind(this)}
-        polling={new Polling(this.waiting)}
+        callback={this.boundSafely}
+        polling={this.polling}
         index={0}
         home={this.home}
       />,

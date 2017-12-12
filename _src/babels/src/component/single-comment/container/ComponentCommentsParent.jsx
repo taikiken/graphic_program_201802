@@ -52,6 +52,7 @@ const ComponentCommentsParent = ({
   const sign = User.sign;
   const icon = sign && user ? user.profilePicture : '';
   const userId = sign && user ? String(user.id) : '';
+  // console.log('ComponentCommentsParent', uniqueId, commentsListType);
   // ---
   return (
     <ul className={'comment-list'}>

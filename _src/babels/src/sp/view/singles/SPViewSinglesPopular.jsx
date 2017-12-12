@@ -118,6 +118,11 @@ export default class SPViewSinglesPopular extends SPViewArchive {
      * @type {Array<ArticleDae>}
      */
     this.articles = [];
+    /**
+     * bind executeSafely
+     * @type {function}
+     */
+    this.boundSafely = this.executeSafely.bind(this);
   }
 
   /**
@@ -132,7 +137,7 @@ export default class SPViewSinglesPopular extends SPViewArchive {
       this.articleRendered = ReactDOM.render(
         <SPComponentSinglesWidgetPopularList
           list={list}
-          callback={this.executeSafely.bind(this)}
+          callback={this.boundSafely}
         />,
         this.element
       );

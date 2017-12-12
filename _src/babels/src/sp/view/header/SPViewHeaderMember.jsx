@@ -13,7 +13,7 @@
 
 // view
 import View from '../../../view/View';
-import {ViewHeaderMember} from '../../../view/header/ViewHeaderMember';
+import ViewHeaderMember from '../../../view/header/ViewHeaderMember';
 
 // app
 import {Empty} from '../../../app/const/Empty';

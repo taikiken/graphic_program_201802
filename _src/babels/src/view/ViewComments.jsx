@@ -147,6 +147,7 @@ export default class ViewComments extends View {
      * @since 2016-09-28
      */
     this.boundSafely = this.executeSafely.bind(this);
+    // console.log('ViewComments', id, commentsType);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

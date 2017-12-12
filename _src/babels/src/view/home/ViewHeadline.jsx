@@ -30,6 +30,7 @@ import {Safety} from '../../data/Safety';
 
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
+import { Env } from '../../app/Env';
 
 // // node
 // import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
@@ -97,7 +98,8 @@ export default class ViewHeadline extends View {
    */
   constructor(element, option = {}) {
     option = Safety.object( option );
-    super( element, option );
+    super(element, option);
+    // ---
     const ActionClass = User.sign ? HeadlineAuth : Headline;
     /**
      * Action instance を設定します
@@ -105,11 +107,20 @@ export default class ViewHeadline extends View {
      * @type {HeadlineAuth|Headline}
      */
     this.action = new ActionClass(this.done.bind(this), this.fail.bind(this));
+    /**
+     * bind executeSafely
+     * @type {function}
+     */
+    this.boundSafely = this.executeSafely.bind(this);
   }
   /**
    * Ajax request を開始します
+   * @param {string} [path=''] option argument
    */
-  start() {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewHeadline].start', path);
+    }
     this.action.start();
   }
   /**
@@ -301,7 +312,7 @@ export default class ViewHeadline extends View {
     ReactDOM.render(
       <ComponentHeadlines
         list={list}
-        callback={this.executeSafely.bind(this)}
+        callback={this.boundSafely}
         home={true}
       />,
       this.element

@@ -11,7 +11,7 @@
  */
 
 // view/comment
-import { ViewCommentForm } from '../../view/comment/ViewCommentForm';
+import ViewCommentForm from '../../view/comment/ViewCommentForm';
 
 // view
 import ViewComments from '../../view/ViewComments';

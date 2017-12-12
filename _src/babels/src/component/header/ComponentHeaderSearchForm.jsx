@@ -194,7 +194,7 @@ export default class ComponentHeaderSearchForm extends React.Component {
     }
 
     const { listen } = this.props;
-    const errorClass = this.errors.keyword ? 'error' : '';
+    const errorClass = this.errors.keyword.error ? 'error' : '';
 
     return (
       <div

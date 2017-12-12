@@ -52,14 +52,19 @@ const ReactDOM = self.ReactDOM;
  * - 日付
  */
 export default class SPViewSingleHeader extends ViewSingleHeader {
-  // /**
-  //  * SP 記事詳細(detail) 上部
-  //  * @param {Element} element single header root element
-  //  * @param {SingleDae} single 変換済み JSON data
-  //  */
-  // constructor( element:Element, single:SingleDae ) {
-  //   super( element, single );
-  // }
+  /**
+   * SP 記事詳細(detail) 上部
+   * @param {Element} element single header root element
+   * @param {SingleDae} single 変換済み JSON data
+   */
+  constructor(element, single) {
+    super(element, single);
+    /**
+     * bind executeSafely
+     * @type {function}
+     */
+    this.boundSafely = this.executeSafely.bind(this);
+  }
   /**
    * render します
    * @param {SingleDae} singleDae JSON 変換済みデータ
@@ -160,7 +165,7 @@ export default class SPViewSingleHeader extends ViewSingleHeader {
         <SPComponentSingleHeader
           single={singleDae}
           sign={User.sign}
-          callback={this.executeSafely.bind(this)}
+          callback={this.boundSafely}
         />,
         this.element
       );

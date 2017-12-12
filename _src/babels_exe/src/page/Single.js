@@ -102,6 +102,7 @@ export default class Single {
    * @param {Object} event event object
    */
   static onHeader(event) {
+    // console.log('EX:Single.onHeader event', event);
     _headerUser.off(UT.view.View.BEFORE_RENDER, Single.onHeader);
     _userDae = event.args[0];
     Single.comment();
@@ -112,6 +113,7 @@ export default class Single {
    * @param {Object} event event object
    */
   static before(event) {
+    // console.log('EX:Single.before event', event);
     _viewSingle.off(UT.view.View.BEFORE_RENDER, Single.before);
 
     const single = event.args[0];
@@ -150,6 +152,7 @@ export default class Single {
    */
   static comment() {
     ++_prepared;
+    // console.log('EX:Single.comment _prepared', _prepared);
 
     if (_prepared !== 2) {
       return;
@@ -169,6 +172,7 @@ export default class Single {
 
     // comment form
     const commentFormElement = Dom.commentForm();
+    // console.log('EX:Single.comment commentFormElement', commentFormElement);
     if (commentFormElement !== null) {
       const commentForm = new UT.view.comment.ViewCommentForm(commentFormElement, articleId, picture);
       commentForm.start();
@@ -176,6 +180,7 @@ export default class Single {
 
     // self
     const selfElement = Dom.commentSelf();
+    // console.log('EX:Single.comment selfElement', selfElement);
     if (selfElement !== null) {
       const commentSelf = new ViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
       if (_userDae !== null) {
@@ -186,6 +191,7 @@ export default class Single {
 
     // official
     const officialElement = Dom.commentOfficial();
+    // console.log('EX:Single.comment officialElement', officialElement);
     if (officialElement !== null) {
       const official = new ViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
       if (_userDae !== null) {
@@ -196,6 +202,7 @@ export default class Single {
 
     // normal
     const normalElement = Dom.commentNormal();
+    // console.log('EX:Single.comment normalElement', normalElement);
     if (normalElement !== null) {
       const normal = new ViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
       if (_userDae !== null) {

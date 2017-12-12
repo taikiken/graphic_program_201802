@@ -320,16 +320,16 @@ export default class ViewSingle extends View {
   render(single) {
     // console.log( 'ViewSingle response', response );
     // let single = new SingleDae( response );
-    // console.log( 'ViewSingle beforeRender', single );
+    // console.log('ViewSingle beforeRender', this.id, single);
     // beforeRender call
     this.executeSafely(View.BEFORE_RENDER, single);
 
     // let header, footer;
     // console.log( 'ViewSingle', single );
     // header
-    if ( this._header === null ) {
+    if (this._header === null) {
       const header = new ViewSingleHeader(this.element, single);
-      header.on( View.DID_MOUNT, this._boundMount );
+      header.on(View.DID_MOUNT, this._boundMount);
       this._header = header;
       header.start();
     } else {

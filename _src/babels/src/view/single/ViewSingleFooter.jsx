@@ -62,6 +62,11 @@ export default class ViewSingleFooter extends View {
      * @private
      */
     this._rendered = null;
+    /**
+     * bind executeSafely
+     * @type {function}
+     */
+    this.boundSafely = this.executeSafely.bind(this);
   }
   /**
    * render 処理を開始します
@@ -151,7 +156,7 @@ export default class ViewSingleFooter extends View {
       this._rendered = ReactDOM.render(
         <ComponentSingleFooter
           single={singleDae}
-          callback={this.executeSafely.bind(this)}
+          callback={this.boundSafely}
         />,
         this.element
       );

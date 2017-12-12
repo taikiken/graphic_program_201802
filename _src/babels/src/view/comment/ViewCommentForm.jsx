@@ -20,6 +20,7 @@ import {Safety} from '../../data/Safety';
 
 // import {CommentFormNode} from '../../node/comment/CommentFormNode';
 import ComponentCommentForm from '../../component/single-comment/form/ComponentCommentForm';
+import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -61,8 +62,12 @@ export default class ViewCommentForm extends View {
   }
   /**
    * render start
+   * @param {string} [path=''] option argument
    */
-  start() {
+  start(path = '') {
+    if (Env.NODE_ENV === 'develop') {
+      console.warn('[ViewCommentForm].start', path);
+    }
     this.render(this._articleId);
   }
   /**

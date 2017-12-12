@@ -115,6 +115,16 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
      * @type {?ReactClass}
      */
     this.articleRendered = null;
+    /**
+     * bind 済み moreButton 関数
+     * @type {Function}
+     */
+    this.boundMore = this.moreButton.bind(this);
+    /**
+     * bind executeSafely
+     * @type {function}
+     */
+    this.boundSafely = this.executeSafely.bind(this);
   }
   /**
    * CATEGORY_INFO, ModelCategoriesSlug success event
@@ -325,8 +335,8 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
           offset={this.request.offset}
           length={this.request.length}
           action={this.action}
-          callback={this.executeSafely.bind(this)}
-          boundMore={this.moreButton.bind(this)}
+          callback={this.boundSafely}
+          boundMore={this.boundMore}
           home={this.home}
           adSp={adSp}
         />,
@@ -337,19 +347,19 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
         // ----------------------------------------------
         // GA 計測タグ
         // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
-        Ga.add( new GaData('SPViewCategoryWithSlug.render', 'home_articles', 'view - new', String(1), 0, true) );
+        Ga.add(new GaData('SPViewCategoryWithSlug.render', 'home_articles', 'view - new', String(1), 0, true));
         // ----------------------------------------------
       } else {
         // ----------------------------------------------
         // GA 計測タグ
         // PC/スマホカテゴリー一覧の新着記事
-        Ga.add( new GaData('SPViewCategoryWithSlug.render', `${this.slug}_articles`, 'view - new', String(1), 0, true) );
+        Ga.add(new GaData('SPViewCategoryWithSlug.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
         // ----------------------------------------------
       }
     } else {
       // instance が存在するので
       // state update でコンテナを追加する
-      this.articleRendered.updateList( articlesList, this.request.offset, this.request.length );
+      this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
     }
   }
 }

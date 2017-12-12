@@ -40,8 +40,13 @@ export default class SPViewHeadLine extends ViewHeadline {
    * @param {Element} element コンテンツ基点Element
    * @param {Object} [option={}] callback 関数をセット
    */
-  constructor(element, option:Object = {}) {
+  constructor(element, option = {}) {
     super(element, option);
+    /**
+     * bind executeSafely
+     * @type {function}
+     */
+    this.boundSafely = this.executeSafely.bind(this);
   }
   /**
    * dom を render します
@@ -54,7 +59,7 @@ export default class SPViewHeadLine extends ViewHeadline {
     ReactDOM.render(
       <SPComponentHeadlines
         list={list}
-        callback={this.executeSafely.bind(this)}
+        callback={this.boundSafely}
       />,
       this.element
     );

@@ -178,6 +178,11 @@ export default class ViewArchiveMasonryInfinite extends View {
      * @type {Scroll}
      */
     this.scroll = Scroll.factory();
+    /**
+     * bind executeSafely
+     * @type {function}
+     */
+    this.boundSafely = this.executeSafely.bind(this);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -416,8 +421,8 @@ export default class ViewArchiveMasonryInfinite extends View {
           offset={this.request.offset}
           length={this.request.length}
           action={this.action}
-          callback={this.executeSafely.bind(this)}
-          boundMore={this.moreButton.bind(this)}
+          callback={this.boundSafely}
+          boundMore={this.boundMore}
           masonry={this.useMasonry}
         />,
         element
