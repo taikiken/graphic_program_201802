@@ -27,15 +27,25 @@ import {SPArchiveNode} from '../../node/SPArchiveNode';
 // import {SPMoreViewNode} from '../../node/SPMoreViewNode';
 
 // sp/view
-import { SPComponentMoreButton } from '../../component/articles/SPComponentMoreButton';
+import SPComponentMoreButton from '../../component/articles/SPComponentMoreButton';
 
 // React
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * SP 動画一覧, PC と違いカテゴリと同じく 10件ずつ読み込みます
+ * TODO: future check remove
  */
-export class SPViewVideos extends ViewVideos {
+export default class SPViewVideos extends ViewVideos {
   /**
    * SP 動画一覧
    * @param {Element} element root element
@@ -43,8 +53,8 @@ export class SPViewVideos extends ViewVideos {
    * @param {Object} [option={}] optional event handler
    * @param {string} [slug=all] category slug です
    */
-  constructor( element:Element, moreElement:Element, option:Object = {}, slug:string = 'all' ) {
-    super( element, option, slug, Length.archive );
+  constructor(element, moreElement, option = {}, slug = 'all') {
+    super(element, option, slug, Length.archive);
 
     /**
      * JSON 取得毎に追加します<br>
@@ -80,36 +90,47 @@ export class SPViewVideos extends ViewVideos {
      * @default false
      */
     this._home = false;
+    /**
+     * bind moreButton
+     * @type {function}
+     */
+    this.moreButton = this.moreButton.bind(this);
   }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render( articles:Array ):void {
+  render(articles) {
     // 既存データ用のglobal配列
-    let articlesList = this._articles;
+    const articlesList = this._articles;
 
     // 前回までの配列length
     // sequence な index のために必要
-    let prevLast = this._articles.length;
+    const prevLast = this._articles.length;
 
     // ------------------------------------------------
     // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
-    articles.forEach( function( article, i ) {
+    // articles.forEach( function( article, i ) {
+    //
+    //   let dae = new ArticleDae( article );
+    //   // console.log( 'dae ', dae );
+    //   dae.index = prevLast + i;
+    //   articlesList.push( dae );
+    //
+    // } );
 
-      let dae = new ArticleDae( article );
-      // console.log( 'dae ', dae );
+    articles.map((article, i) => {
+      const dae = new ArticleDae(article);
       dae.index = prevLast + i;
-      articlesList.push( dae );
-
-    } );
+      articlesList.push(dae);
+      return article;
+    });
 
     // 通知
-    this.executeSafely( View.BEFORE_RENDER, articlesList );
+    this.executeSafely(View.BEFORE_RENDER, articlesList);
 
     // this._articleRendered が null の時だけ ReactDOM.render する
-    if ( this._articleRendered === null ) {
-
+    if (this._articleRendered === null) {
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
       this._articleRendered = ReactDOM.render(
         <SPArchiveNode
@@ -118,35 +139,29 @@ export class SPViewVideos extends ViewVideos {
           length={this._request.length}
           action={this.action}
           scope={this}
-          moreButton={this.moreButton.bind(this)}
+          moreButton={this.moreButton}
           home={this._home}
           type={Message.VIDEO}
           adSp=""
         />,
         this.element
       );
-
     } else {
-
       // instance が存在するので
       // state update でコンテナを追加する
-      this._articleRendered.updateList( articlesList, 0, 5 );
-
+      this._articleRendered.updateList(articlesList, 0, 5);
     }
-
   }// render
   /**
    * more button 表示・非表示
-   * @param {Boolean} show more button 表示・非表示 を決定する真偽値
+   * @param {boolean} show more button 表示・非表示 を決定する真偽値
    */
-  moreButton( show:Boolean ):void {
+  moreButton(show) {
     show = !!show;
-
     // _moreRendered が null の時のみ, instance があれば state を update する
     // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
-    if ( this._moreRendered === null ) {
+    if (this._moreRendered === null) {
       // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
-
       // チェックをパスし実行する
       this._moreRendered = ReactDOM.render(
         // <SPMoreViewNode
@@ -167,11 +182,8 @@ export class SPViewVideos extends ViewVideos {
         />,
         this._moreElement
       );
-
     } else {
-
-      this._moreRendered.updateShow( show );
-
+      this._moreRendered.updateShow(show);
     }
   }
 }

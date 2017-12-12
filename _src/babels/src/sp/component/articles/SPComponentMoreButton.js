@@ -31,7 +31,7 @@ const React = self.React;
  * window.bottom が button を超えたら次の読み込みを開始します
  * @since 2016-09-16
  */
-export class SPComponentMoreButton extends React.Component {
+export default class SPComponentMoreButton extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

@@ -29,7 +29,7 @@ import { GaData } from '../../ga/GaData';
 
 // sp/view
 import SPViewArchive from './SPViewArchive';
-import { SPComponentMoreButton } from '../component/articles/SPComponentMoreButton';
+import SPComponentMoreButton from '../component/articles/SPComponentMoreButton';
 
 // sp/node
 // import {SPArchiveNode} from '../node/SPArchiveNode';

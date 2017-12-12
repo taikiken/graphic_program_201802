@@ -16,8 +16,8 @@ import View from '../src/view/View';
 
 // view
 import SPViewCategoryWithSlug from '../src/sp/view/category/SPViewCategoryWithSlug';
-import {SPViewRanking} from '../src/sp/view/sidebar/SPViewRanking';
-import {SPViewVideos} from '../src/sp/view/sidebar/SPViewVideos';
+import SPViewRanking from '../src/sp/view/sidebar/SPViewRanking';
+import SPViewVideos from '../src/sp/view/sidebar/SPViewVideos';
 
 // node
 import {SPTabNode} from '../src/sp/node/SPTabNode';
