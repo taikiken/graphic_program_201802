@@ -13,6 +13,10 @@
   <title><?php echo $page['title']; ?></title>
   <style>
 
+  html,body {
+    overflow: none;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -21,7 +25,8 @@
   }
 
   .wrapper {
-    overflow-y: auto;
+    overflow: none;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     display: flex;
     align-items: center;
