@@ -295,8 +295,8 @@ export default class SPViewHeaderMember extends ViewHeaderMember {
     // when reload
     if (this.reloadFlag) {
       this.reloadFlag = false;
-      clearTimeout( this._timer );
-      this.timer = setTimeout(this.boundReload, 1000 );
+      clearTimeout(this._timer);
+      this.timer = setTimeout(this.boundReload, 1000);
     }
     // component
     ReactDOM.render(

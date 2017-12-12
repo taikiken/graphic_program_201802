@@ -92,11 +92,10 @@ export default class ViewHeaderUser extends View {
      * @private
      */
     this._sign = User.sign;
-
     const userStatus = UserStatus.factory();
-    const boundSign = this.onSign.bind( this );
-    userStatus.on( UserStatus.LOG_IN, boundSign );
-    userStatus.on( UserStatus.LOG_OUT, boundSign );
+    const boundSign = this.onSign.bind(this);
+    userStatus.on(UserStatus.LOG_IN, boundSign);
+    userStatus.on(UserStatus.LOG_OUT, boundSign);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -125,7 +124,6 @@ export default class ViewHeaderUser extends View {
       if (member !== null) {
         this.dispose();
       }
-
       const boundCallback = this._boundCallback;
       member = new ViewHeaderMember(this.element);
       this._member = member;
@@ -137,7 +135,6 @@ export default class ViewHeaderUser extends View {
       member.on(View.EMPTY_ERROR, boundCallback);
       member.on(View.RESPONSE_ERROR, boundCallback);
       member.start();
-
     } else {
       // user menu
       this.render();

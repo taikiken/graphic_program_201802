@@ -62,7 +62,7 @@ export default class ViewArea extends ViewArchiveMasonryInfinite {
    * @param {boolean} pref 都道府県フラッグ
    * @param {Object} [option={}] optional event handler
    */
-  constructor(element, moreElement, area = '', pref = false, option:Object = {}) {
+  constructor(element, moreElement, area = '', pref = false, option = {}) {
     super(element, moreElement, null, option, true);
     // ---
     const done = this.done.bind(this);

@@ -478,10 +478,10 @@ export default class ViewHeaderMember extends View {
     this.executeSafely(View.BEFORE_RENDER, response);
     // --------------------------------------------------
     // when reload
-    if ( this.reloadFlag ) {
+    if (this.reloadFlag) {
       this.reloadFlag = false;
-      clearTimeout( this._timer );
-      this._timer = setTimeout( this._boundReload, 1000 );
+      clearTimeout(this._timer);
+      this._timer = setTimeout(this._boundReload, 1000);
     }
     // component
     ReactDOM.render(
