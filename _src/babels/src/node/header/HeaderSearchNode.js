@@ -28,6 +28,8 @@ let React = self.React;
 /**
  * 検索フォーム
  * @type {ReactClass}
+ * @deprecated 2017-12-12 instead use {@link ComponentHeaderSearchForm}
+ * TODO future remove
  */
 export let HeaderSearchNode = React.createClass( {
   propTypes: {

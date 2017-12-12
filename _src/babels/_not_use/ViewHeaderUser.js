@@ -30,7 +30,7 @@ let ReactDOM = self.ReactDOM;
  * <code>ViewHeaderUser.factory()</code> してください。<br>
  * </P>
  *
- * @ToDo user profile icon, notifications count 取得
+ * - user profile icon, notifications count 取得
  */
 export class ViewHeaderUser extends View {
   /**
@@ -170,13 +170,13 @@ export class ViewHeaderUser extends View {
         };
       },
       render: function() {
-        // ToDo: avatar image, get from JSON
+        // avatar image, get from JSON
         return (
           <div className={'preference ' + this.state.open}>
             <a className="preference-opener" href="#" onClick={this.clickHandler}>
               {
                 /*
-                * ToDo: avatar image 取得方法確認
+                * avatar image 取得方法確認
                 * */
               }
               <span className="user-avatar"><img src="/assets/images/dummy/avatar-40x40.jpg" alt="" /></span>

@@ -12,29 +12,29 @@
 
 
 // parent
-import View from '../../../view/View';
+import View from '../src/view/View';
 
 // view
-import SPViewCategoryWithSlug from './SPViewCategoryWithSlug';
-import {SPViewRanking} from '../sidebar/SPViewRanking';
-import {SPViewVideos} from '../sidebar/SPViewVideos';
+import SPViewCategoryWithSlug from '../src/sp/view/category/SPViewCategoryWithSlug';
+import {SPViewRanking} from '../src/sp/view/sidebar/SPViewRanking';
+import {SPViewVideos} from '../src/sp/view/sidebar/SPViewVideos';
 
 // node
-import {SPTabNode} from '../../node/SPTabNode';
+import {SPTabNode} from '../src/sp/node/SPTabNode';
 
 // dae
-import {CategoriesSlugDae} from '../../../dae/categories/CategoriesSlugDae';
+import {CategoriesSlugDae} from '../src/dae/categories/CategoriesSlugDae';
 
 // data
-import {Safety} from '../../../data/Safety';
+import {Safety} from '../src/data/Safety';
 
 // util
-import {Scroll} from '../../../util/Scroll';
+import {Scroll} from '../src/util/Scroll';
 
 // Ga
-import {Ga} from '../../../ga/Ga';
-import {GaData} from '../../../ga/GaData';
-import { Env } from '../../../app/Env';
+import {Ga} from '../src/ga/Ga';
+import {GaData} from '../src/ga/GaData';
+import { Env } from '../src/app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -50,7 +50,7 @@ const ReactDOM = self.ReactDOM;
 
 /**
  * archive 親コンテナ
- * TODO: React.createClass を止める
+ * @deprecated 2016-09-20 remove
  */
 export class SPViewCategoryRoot extends View {
   /**

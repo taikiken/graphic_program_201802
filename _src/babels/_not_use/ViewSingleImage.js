@@ -49,7 +49,7 @@ export class ViewSingleImage extends View {
 
     // JSON data に不備あり, on 2016-02-10
     // 一時コメントにする
-    // ToDo: JSON が正しくなったらコメント解除
+    // JSON が正しくなったらコメント解除
     if ( !images.original ) {
       return;
     }

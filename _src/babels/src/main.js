@@ -143,8 +143,8 @@ import SPViewSearch from './sp/view/SPViewSearch';
 import SPViewSyn from './sp/view/SPViewSyn';
 
 // header
-import {SPViewHeaderUser} from './sp/view/header/SPViewHeaderUser';
-import {SPViewHeaderSearch} from './sp/view/header/SPViewHeaderSearch';
+import SPViewHeaderUser from './sp/view/header/SPViewHeaderUser';
+import SPViewHeaderSearch from './sp/view/header/SPViewHeaderSearch';
 
 // single
 import {SPViewSingle} from './sp/view/SPViewSingle';
@@ -169,9 +169,135 @@ import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
 /**
  * スポーツブル ライブラリ
  * @module UT
- * @type {{version: string, build: string, app: {App: App, User: User, Router: Router, Dom: Dom, const: {CommentsType: CommentsType}}, util: {Offset: Offset, Scroll: Scroll}, net: {Cookie: Cookie}, model: {Model: Model}, view: {View: View, ViewCategory: ViewCategory, ViewSingle: ViewSingle, ViewTitle: ViewTitle, ViewComments: ViewComments, ViewSearch: ViewSearch, ViewCommentSingle: ViewCommentSingle, ViewFirstVisit: ViewFirstVisit, comment: {ViewCommentForm: ViewCommentForm}, single: {ViewSingleTitle: ViewSingleTitle, ViewSingleVisual: ViewSingleVisual}, header: {ViewHeaderUser: ViewHeaderUser, ViewHeaderSearch: ViewHeaderSearch}, sidebar: {ViewRanking: ViewRanking, ViewVideos: ViewVideos}, home: {ViewHeadline: ViewHeadline, ViewPickup: ViewPickup, ViewNews: ViewNews}, signup: {SignupWizard: SignupWizard, ViewDeactivate: ViewDeactivate}, login: {ViewLogin: ViewLogin, ViewLogout: ViewLogout}, mypage: {ViewUserProfile: ViewUserProfile, ViewBookmarks: ViewBookmarks, ViewActivities: ViewActivities, ViewNotifications: ViewNotifications}, settings: {ViewSettingsIndex: ViewSettingsIndex, ViewSettingsInterest: ViewSettingsInterest}, modal: {ViewDeleteModal: ViewDeleteModal, ViewLogoutModal: ViewLogoutModal, ViewFlushModal: ViewFlushModal}}, sp: {view: {SPViewSyn: SPViewSyn, SPViewComments: SPViewComments, SPViewSingle: SPViewSingle, SPViewSearch: SPViewSearch, SPViewFirstVisit: SPViewFirstVisit, single: {SPViewSingleHeader: SPViewSingleHeader, SPViewReadMore: SPViewReadMore}, comment: {SPViewCommentForm: SPViewCommentForm}, home: {SPViewHeadLine: SPViewHeadLine, SPViewNews: SPViewNews}, category: {SPViewCategoryRoot: SPViewCategoryRoot}, header: {SPViewHeaderUser: SPViewHeaderUser, SPViewHeaderSearch: SPViewHeaderSearch}, mypage: {SPViewUserProfile: SPViewUserProfile, SPViewBookmarks: SPViewBookmarks}}}}}
+ * @type {{
+ *   version: string,
+ *   build: string,
+ *   app: {
+ *     App: App,
+ *     User: User,
+ *     Router: Router,
+ *     Dom: Dom,
+ *     const: {
+ *       CommentsType: CommentsType
+ *      }
+ *    },
+ *    util: {
+ *      Offset: Offset,
+ *      Scroll: Scroll,
+ *      Elements: Elements
+ *    },
+ *    ui: {
+ *      PageTop: PageTop,
+ *      button: {
+ *        TopButton: TopButton
+ *      }
+ *    },
+ *    net: {
+ *      Cookie: Cookie,
+ *      Ajax: Ajax
+ *    },
+ *    model: {
+ *      Model: Model
+ *    },
+ *    view: {
+ *      View: View,
+ *      ViewCategory: ViewCategory,
+ *      ViewSingle: ViewSingle,
+ *      ViewComments: ViewComments,
+ *      ViewSearch: ViewSearch,
+ *      ViewCommentSingle: ViewCommentSingle,
+ *      ViewFirstVisit: ViewFirstVisit,
+ *      ViewArea: ViewArea,
+ *      comment: {
+ *        ViewCommentForm: ViewCommentForm
+ *      },
+ *      single: {
+ *        ViewSingleTitle: ViewSingleTitle,
+ *        ViewSingleVisual: ViewSingleVisual
+ *      },
+ *      header: {
+ *        ViewHeaderUser: ViewHeaderUser,
+ *        ViewHeaderSearch: ViewHeaderSearch
+ *      },
+ *      sidebar: {
+ *        ViewRanking: ViewRanking,
+ *        ViewVideos: ViewVideos,
+ *        ViewRecommend: ViewRecommend,
+ *        Sidebar: Sidebar
+ *      },
+ *      home: {
+ *        ViewHeadline: ViewHeadline,
+ *        ViewPickup: ViewPickup,
+ *        ViewNews: ViewNews
+ *      },
+ *      signup: {
+ *        SignupWizard: SignupWizard,
+ *        ViewDeactivate: ViewDeactivate
+ *      },
+ *      login: {
+ *        ViewLogin: ViewLogin,
+ *        ViewLogout: ViewLogout
+ *      },
+ *      mypage: {
+ *        ViewUserProfile: ViewUserProfile,
+ *        ViewBookmarks: ViewBookmarks,
+ *        ViewActivities: ViewActivities,
+ *        ViewNotifications: ViewNotifications
+ *      },
+ *      settings: {
+ *        ViewSettingsIndex: ViewSettingsIndex,
+ *        ViewSettingsInterest: ViewSettingsInterest
+ *      },
+ *      modal: {
+ *        ViewDeleteModal: ViewDeleteModal,
+ *        ViewLogoutModal: ViewLogoutModal,
+ *        ViewFlushModal: ViewFlushModal}
+ *      },
+ *      sp: {
+ *        view: {
+ *          SPViewSyn: SPViewSyn,
+ *          SPViewComments: SPViewComments,
+ *          SPViewSingle: SPViewSingle,
+ *          SPViewSearch: SPViewSearch,
+ *          SPViewFirstVisit: SPViewFirstVisit,
+ *          SPViewAppBanner: SPViewAppBanner,
+ *          single: {
+ *            SPViewSingleHeader: SPViewSingleHeader,
+ *            SPViewContinueRead: SPViewContinueRead,
+ *            SPViewSingleRanking: SPViewSingleRanking,
+ *            SPViewSingleRecommend: SPViewSingleRecommend
+ *          },
+ *          singles: {
+ *            SPViewSinglesRecommend: SPViewSinglesRecommend,
+ *            SPViewSinglesRanking: SPViewSinglesRanking
+ *          },
+ *          comment: {
+ *            SPViewCommentForm: SPViewCommentForm
+ *          },
+ *          home: {
+ *            SPViewHeadLine: SPViewHeadLine,
+ *            SPViewNews: SPViewNews
+ *          },
+ *          category: {
+ *            SPViewCategory: SPViewCategory,
+ *            SPViewCategoryWithSlug: SPViewCategoryWithSlug,
+ *            SPViewArea: SPViewArea
+ *          },
+ *          header: {
+ *            SPViewHeaderUser: SPViewHeaderUser,
+ *            SPViewHeaderSearch: SPViewHeaderSearch
+ *          },
+ *          mypage: {
+ *            SPViewUserProfile: SPViewUserProfile,
+ *            SPViewBookmarks: SPViewBookmarks
+ *          }
+ *        }
+ *      },
+ *      Ga: Ga
+ *    }
+ *  }
  */
-let UT = {
+const UT = {
   version: '@@version',
   build: '@@buildTime',
   app: {

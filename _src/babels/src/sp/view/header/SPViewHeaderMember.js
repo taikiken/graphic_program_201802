@@ -45,6 +45,7 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * SP header ログイン・メンバー 関連メニュー
+ * TODO: React.createClass を止める
  */
 export class SPViewHeaderMember extends ViewHeaderMember {
   /**
