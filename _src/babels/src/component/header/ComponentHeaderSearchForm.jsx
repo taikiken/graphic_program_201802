@@ -85,7 +85,7 @@ export default class ComponentHeaderSearchForm extends React.Component {
      */
     this.onOpen = this.onOpen.bind(this);
     /**
-     * bind onClOSE
+     * bind onClose
      * @type {function}
      */
     this.onClose = this.onClose.bind(this);
@@ -110,7 +110,7 @@ export default class ComponentHeaderSearchForm extends React.Component {
     const status = this.status;
     if (status) {
       status.off(SearchStatus.OPEN, this.onOpen);
-      status.off(SearchStatus.CLOSE, this.onClOSE);
+      status.off(SearchStatus.CLOSE, this.onClose);
     }
   }
   /**
@@ -168,7 +168,7 @@ export default class ComponentHeaderSearchForm extends React.Component {
     if (status) {
       this.dispose();
       status.on(SearchStatus.OPEN, this.onOpen);
-      status.on(SearchStatus.CLOSE, this.onClOSE);
+      status.on(SearchStatus.CLOSE, this.onClose);
     }
   }
 

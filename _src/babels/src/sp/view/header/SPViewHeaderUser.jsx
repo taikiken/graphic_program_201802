@@ -14,7 +14,7 @@
 // view
 import View from '../../../view/View';
 
-import {SPViewHeaderMember} from './SPViewHeaderMember';
+import SPViewHeaderMember from './SPViewHeaderMember';
 
 // app
 import {User} from '../../../app/User';

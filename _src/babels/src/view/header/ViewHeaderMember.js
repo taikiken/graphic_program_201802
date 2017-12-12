@@ -123,6 +123,10 @@ export default class ViewHeaderMember extends View {
      * @since 2016-09-28
      */
     this.boundSafely = this.executeSafely.bind(this);
+    /**
+     * bound didMount
+     * @type {function}
+     */
     this.boundMount = this.didMount.bind(this);
   }
   // ---------------------------------------------------
@@ -233,6 +237,7 @@ export default class ViewHeaderMember extends View {
    * @param {Error} error Error instance
    */
   fail(error) {
+    // console.log('ViewHeaderMember.error', error);
     this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );

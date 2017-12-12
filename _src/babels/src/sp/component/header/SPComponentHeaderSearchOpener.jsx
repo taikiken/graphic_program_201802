@@ -24,10 +24,17 @@ const Sagen = self.Sagen;
  */
 const React = self.React;
 
+/**
+ * SP: header - 検索フォーム open / close button
+ */
 export default class SPComponentHeaderSearchOpener extends React.Component {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
+  /**
+   * 検索フォームを閉じる時に scroll 値を復元します
+   * @param {number} y target scroll top px value
+   */
   static restore(y) {
     // scrollY が 0 でない時は 復元 しない
     // ユーザーが scroll している可能性がある
@@ -39,9 +46,17 @@ export default class SPComponentHeaderSearchOpener extends React.Component {
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
+  /**
+   * SP: header - 検索フォーム open / close button 準備します
+   * @param {*} props React.props
+   */
   constructor(props) {
     super(props);
     // -----
+    /**
+     * document.body - Sagen.Dom instance
+     * @type {*}
+     */
     this.body = new Sagen.Dom(document.body);
     /**
      * 開いているか真偽値
@@ -83,6 +98,7 @@ export default class SPComponentHeaderSearchOpener extends React.Component {
     // どうも仕様な様子
     // そのため blur 後の scroll 位置が 0 になるのを元に戻すために
     // open 時の scroll 位置を保存し復元する
+    // console.log('SPComponentHeaderSearchOpener.onClick', this.open);
     if (this.open) {
       // open -> close
       this.open = false;
