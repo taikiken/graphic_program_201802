@@ -63,6 +63,8 @@ gulp.task 'html:build', ->
     app + '/**/wbc/**/*.html'
     # @since 2017-11-06 company ignore
     '!' + app + '/**/about/**/company/*.html'
+    # @since 2017-12-08 about/index.html ignore
+    '!' + app + '/**/about/index.html'
   ]
   .pipe $.replaceTask patterns: patterns
   .pipe $.if compress.html, $.htmlmin collapseWhitespace: true
