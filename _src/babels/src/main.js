@@ -147,7 +147,7 @@ import SPViewHeaderUser from './sp/view/header/SPViewHeaderUser';
 import SPViewHeaderSearch from './sp/view/header/SPViewHeaderSearch';
 
 // single
-import {SPViewSingle} from './sp/view/SPViewSingle';
+import SPViewSingle from './sp/view/SPViewSingle';
 import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
 import {SPViewContinueRead} from './sp/view/single/SPViewContinueRead';
 import {SPViewSingleRanking} from './sp/view/single/SPViewSingleRanking';
@@ -163,7 +163,7 @@ import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking'
 
 
 // mypage
-import {SPViewUserProfile} from './sp/view/mypage/SPViewUserProfile';
+import SPViewUserProfile from './sp/view/mypage/SPViewUserProfile';
 import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
 
 /**

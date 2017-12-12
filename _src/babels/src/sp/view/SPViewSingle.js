@@ -56,7 +56,7 @@ const ReactDOM = self.ReactDOM;
 /**
  * SP 記事詳細
  */
-export class SPViewSingle extends ViewSingle {
+export default class SPViewSingle extends ViewSingle {
   /**
    * SP 記事詳細
    * @param {number} id 記事 id
