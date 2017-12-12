@@ -6,7 +6,15 @@
  */
 ?>
 <li class="pl0"><a href="/editdm/">TOP</a></li>
-<?php if(getSorC("usr")!="inhigh" && getSorC("usr")!="kansaifootball"){ ?>
+<?php if(getSorC('is_carousel_headline')==1){
+    //dews特別対応
+    if(empty(getSorC('u_media')) === false && getSorC('u_media') == '67'){ ?>
+            <li><a href="/editdm/repo_n/?cid=49&rid=7">ダンス_カルーセル</a></li>
+    <?php } else { ?>
+        <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
+        <li><a href="/editdm/repo_n/?cid=9&rid=7">TOPピックアップ</a></li>
+    <?php } //endif ?>
+<?php }elseif(getSorC("usr")!="inhigh" && getSorC("usr")!="kansaifootball"){ ?>
     <?php if(getSorC("is_external")!=1){ ?>
         <li><a href="/editdm/ad/?cid=0&nid=0">広告設定</a></li>
         <li><a href="/editdm/repo_n/?cid=8&rid=7">TOPカルーセル</a></li>
@@ -26,9 +34,11 @@
         <li><a href="/editdm/repo_n/?cid=6">会員</a></li>
         <li><a href="/editdm/comment/">コメント</a></li>
         <li><a href="/editdm/link/">記事取得</a></li>
+        <li><a href="/editdm/bulls_picks/">BULL'S PICKS</a></li>
         <li><a href="/editdm/ads/edit">ads.txt設定</a></li>
         <li><a href="/editdm/user/status">会員ステータス</a></li>
-    <?php } ?>
+        <li><a href="/editdm/notice/">お知らせ設定</a></li>
+  <?php } ?>
 <?php }else{ ?>
     <li><a href="/editdm/photo/">フォトアルバム</a></li>
 <?php } ?>

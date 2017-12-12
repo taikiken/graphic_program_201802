@@ -22,6 +22,7 @@ php_value mbstring.language Japanese
 php_value mbstring.internal_encoding UTF-8
 php_value mbstring.http_output UTF-8
 php_value error_reporting 6133
+php_value post_max_size '100M'
 
 
 # for Slim - /app/Slim

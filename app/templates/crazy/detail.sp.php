@@ -112,6 +112,7 @@
     </script>
     <!-- //ad/dfp - pc/rectangle -->
     <!-- ad/npb-sp-anchor -->
+<!--
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push(
@@ -120,6 +121,7 @@
                 enable_page_level_ads: true
             });
     </script>
+-->
     <!-- // ad/npb-sp-anchor -->
     <!-- ga -->
     <script>

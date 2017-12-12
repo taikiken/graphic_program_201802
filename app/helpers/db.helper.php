@@ -242,6 +242,12 @@ SQL_EOL;
     $s=set_articleinfo($f,1,1,1);
     $ad_put=set_advertise($ad,"detail");
 
+      // 関連記事があったらフロントに引き渡す
+      if(false === empty($f["relatedpost"]))
+      {
+          $s["relatedpost"] = $f["relatedpost"];
+      }
+
     // media.video.ad_urlの設定
     if ( $ad_put['vast'] ) :
       $s['media']['video']['vast'] = $ad_put['vast'];
@@ -401,6 +407,21 @@ EOF;
     $this->query($sql);
     while ($f = $this->fetch_array()) {
       $s[] = set_company_news_items($f);
+    }
+    return $s;
+  }
+
+    /**
+     * パートナー情報を取得する = /api/v1/partners/
+     *
+     * @return array
+     */
+  public function get_partners() {
+
+    $sql="select title,t1,img1,company_img1,n,ng_flag from u_media order by n";
+    $this->query($sql);
+    while( $f = $this->fetch_array() ){
+      $s[] = set_partners_info($f);
     }
     return $s;
   }

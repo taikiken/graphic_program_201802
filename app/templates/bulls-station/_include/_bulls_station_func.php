@@ -80,8 +80,8 @@ function bulls_station_json_photo() {
  *
  * @return mixed
  */
-function bulls_station_json_movie($length = 5) {
-  $data = file_get_contents(JSON_MOVIE.'?length='.$length);
+function bulls_station_json_movie($length = 5, $delimiter = '?') {
+  $data = file_get_contents(JSON_MOVIE.$delimiter.'length='.$length);
   $decode = mb_convert_encoding($data, 'UTF8', 'UTF-8,ASCII,JIS,EUC-JP,SJIS-WIN');
   return json_decode($decode);
 }

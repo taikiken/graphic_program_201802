@@ -73,11 +73,14 @@
             <div class="ttl-wrapper">
                 <h2 class="ttl recommend"><i></i>編集部おすすめの記事</h2>
             </div>
+            <div id="Widget_articles-1" class="Widget_articles" data-category="crazy" data-type="recommend"></div>
+        </section>
 
-            <div class="recommend_list">
-                <ul class="thumb_area">
-                </ul>
+        <section class="section_crazy_popular pc_hide">
+            <div class="ttl-wrapper pc_hide">
+                <h2 class="ttl popular"><i></i>人気の記事</h2>
             </div>
+            <div id="Widget_articles-2" class="Widget_articles" data-category="crazy" data-type="ranking"></div>
         </section>
 
       <div id="js-headline"></div>
@@ -88,4 +91,4 @@
 </div><!-- /.body-sec -->
 
 <script src="https://code.jquery.com/jquery-git.min.js"></script>
-<script src="/assets/js/crazy.js"></script>
+<script src="/assets/widgets/articles-index/Widget_articles.js"></script>

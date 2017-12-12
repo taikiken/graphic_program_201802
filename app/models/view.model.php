@@ -393,9 +393,9 @@ class ViewModel {
     else :
       return false;
     endif;
-    
+
     return $side_menu_list;
-    
+
   }
 
 
@@ -554,6 +554,16 @@ class ViewModel {
     return $res;
   }
 
+    /**
+     * パートナー情報を取得する = /api/v1/partners/
+     *
+     * @return array
+     */
+  public function get_partners() {
+
+    $res = $this->db->get_partners();
+    return $res;
+  }
 }
 
 ?>

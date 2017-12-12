@@ -1,3 +1,12 @@
+  <!-- 共同クレジット -->
+  <div style="background-color: #f5f5f5;">
+    <div style="max-width: 1088px; margin: 0 auto;">
+      <p style="text-align: center; color: #999; font-size: 10px; padding-top: 35px; padding-bottom: 35px; max-width: 728px;">
+          Copyright (C) 2017 STATS LLC. All Rights Reserved.<br />
+          Copyright (C) 2017 Kyodo News Digital Co., Ltd. All Rights Reserved.
+      </p>
+    </div>
+  </div>
 
   <footer id="footer-container" class="foot-sec show-for-large">
     <div class="foot-sec-inner">

@@ -73,6 +73,7 @@ endif;
 // ==============================
 
 $ad_url = '';
+$url    = '';
 
 if ( isset($_GET['source']) ) :
 
@@ -98,6 +99,9 @@ endif;
 $ad_rule = '';
 
 if ( $position == 'pre-roll' ) :
+
+    header('location: '.$url);
+    exit();
 
     $ad_rule = <<<__EOL__
 

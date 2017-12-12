@@ -33,11 +33,11 @@
         <link rel="icon" sizes="192x192" href="https://sportsbull.jp/assets/sp/images/common/apple-touch-icon.png">
         <link rel="shortcut icon" href="/favicon.ico">
         <!-- 表示確認用 / -->
-        <link rel="stylesheet" href="/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
-        <link rel="stylesheet" href="/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
+        <link rel="stylesheet" href="https://sportsbull.jp/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
+        <link rel="stylesheet" href="https://sportsbull.jp/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
         <!-- / 表示確認用 -->
-        <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
-        <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
+        <link rel="stylesheet" href="https://sportsbull.jp/assets/css/basic.css" media="only screen and (min-width: 769px)">
+        <link rel="stylesheet" href="https://sportsbull.jp/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
         <!-- optimize -->
         <style>
             .async-hide {
@@ -85,12 +85,13 @@
         <!-- ad/dfp -->
         <!-- ad/appvador -->
         <script>
-            googletag.cmd.push(function()
-            {
-                googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
+            googletag.cmd.push(function() {
+                if ( !(/undotsushin|gunosy|newspass/i.test(window.navigator.userAgent)) ) {
+                    googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
+                    googletag.pubads().enableSingleRequest();
+                    googletag.pubads().collapseEmptyDivs();
+                    googletag.enableServices();
+                }
             });
         </script>
         <!-- //ad/appvador -->
@@ -118,10 +119,10 @@
         <!-- ga -->
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                                    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
             ga('create', 'UA-74679267-1', 'auto');
             ga('require', 'GTM-KJ33JM9');
             ga('require', 'linkid');
@@ -139,9 +140,10 @@
                 }
             </style>
             <script>
-                googletag.cmd.push(function()
-                {
-                    googletag.display('div-gpt-ad-1501126889988-0');
+                googletag.cmd.push(function(){
+                    if ( !(/undotsushin|gunosy|newspass/i.test(window.navigator.userAgent)) ) {
+                        googletag.display('div-gpt-ad-1501126889988-0');
+                    }
                 });
             </script>
             <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
@@ -231,6 +233,13 @@
                             <div id="Widget_univsports_1" data-type="u_soccer" data-event="2017_kantou"></div>
                             <script src="/stats/assets/u_sports/js/Widget_univsports_1.js"></script>
                         </div>
+
+                        <!-- 共同クレジット -->
+                        <p style="text-align: center; color: #999; font-size: 10px; padding-bottom: 35px;">
+                            Copyright (C) 2017 STATS LLC. All Rights Reserved.<br />
+                            Copyright (C) 2017 Kyodo News Digital Co., Ltd. All Rights Reserved.
+                        </p>
+
                         <div class="bnr-foot">
                             <div class="bnr-left">
                                 <!-- /531683568/university_sports_ad/u-footer-rectangle1 -->

@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-    <script src="/assets/js/app_divide.bundle.js"></script>
+    <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true"></script>
+    <script src="/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <title><?php echo $page['player']->body->name?> | スポーツブル / SPORTS BULL</title>
-    <script src="/assets/js/libs/vendor.react.js"></script>
-    <script src="/assets/js/bundle/main.bundle.js"></script>
+    <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
     <link rel="stylesheet" href="https://sportsbull.jp/assets/css/ui.css">
     <meta name="keywords" content="スポーツ,メディア,アスリート,ニュース,動画,sports,media,<?php echo $page['player']->body->name?>">
     <meta name="description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
@@ -112,6 +112,7 @@
     </script>
     <!-- //ad/dfp - pc/rectangle -->
     <!-- ad/npb-sp-anchor -->
+<!--
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push(
@@ -120,6 +121,7 @@
                 enable_page_level_ads: true
             });
     </script>
+-->
     <!-- // ad/npb-sp-anchor -->
     <!-- ga -->
     <script>
@@ -581,7 +583,11 @@
         }
     });
 </script>
+<<<<<<< HEAD
 <script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js" data-label="<?php echo $page['player']->body->name?>"></script>
+=======
+<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js?v=<?php echo $page['version']; ?>" data-label="CRAZY ATHLETES"></script>
+>>>>>>> master
 </body>
 </html>
 <?php

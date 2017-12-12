@@ -76,14 +76,16 @@
   <!-- ad/dfp -->
 
   <!-- ad/appvador -->
-  <script>
-    googletag.cmd.push(function() {
-      googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
-      googletag.pubads().enableSingleRequest();
-      googletag.pubads().collapseEmptyDivs();
-      googletag.enableServices();
-    });
-  </script>
+    <script>
+        googletag.cmd.push(function() {
+            if ( !(/undotsushin|gunosy|newspass/i.test(window.navigator.userAgent)) ) {
+                googletag.defineSlot('/531683568/appvador', [320, 180], 'div-gpt-ad-1501126889988-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.enableServices();
+            }
+        });
+    </script>
   <!-- //ad/appvador -->
 
   <!-- ad/npb-sp-anchor -->
@@ -117,9 +119,13 @@
 <!-- ad/531683568/appvador -->
 <div id='div-gpt-ad-1501126889988-0'>
 <style>#div-gpt-ad-1501126889988-0 * { line-height:0; }</style>
-<script>
-googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0'); });
-</script>
+    <script>
+        googletag.cmd.push(function(){
+            if ( !(/undotsushin|gunosy|newspass/i.test(window.navigator.userAgent)) ) {
+                googletag.display('div-gpt-ad-1501126889988-0');
+            }
+        });
+    </script>
 <script type="text/javascript" src="//cdn.apvdr.com/js/apv-ifbstr.min.js"></script>
 </div>
 <!-- ad/531683568/appvador -->

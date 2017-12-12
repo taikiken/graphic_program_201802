@@ -150,7 +150,7 @@ elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 94 && !preg_match("#/ph
 
 	$sql = sprintf("SELECT COUNT(*) AS n FROM %s%s%s%s", $TABLE, $WHERE, $exuser, $excategory);
 
-}else{
+}elseif($CURRENTDIRECTORY=="notice"){
 	$sql=sprintf("select count(*) as n from %s%s",$TABLE,$WHERE);
 }
 
@@ -187,20 +187,34 @@ elseif ($TABLE == "tbl_player")
 	// 選手一覧
 	$sql = sprintf("SELECT %s FROM %s%s%s%s ORDER BY %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, $orderby, dblm($no, $offset));
 }
-elseif ($CURRENTDIRECTORY == "repo_s" && $_GET["rid"] == 95 && $q->get_dir() == 3) // 注目の選手一覧
+elseif ($TABLE == "notices")
+{
+	$cookie_categoryid = (int)$_COOKIE['excategory'];
+	if(isint($_COOKIE["excategory"])){
+    $WHERE = <<<WHR
+		, categories_notices 
+WHERE
+		{$TABLE}.id = notice_id
+AND
+		category_id = {$cookie_categoryid}
+WHR;
+
+	}
+	// お知らせ一覧
+	$sql = sprintf("SELECT %s FROM %s%s ORDER BY notices.created_at DESC", $FIELD, $TABLE, $WHERE);
+}elseif ($CURRENTDIRECTORY == "repo_s" && $_GET["rid"] == 95 && $q->get_dir() == 3) // 注目の選手一覧
 {
   $sql = <<<SQL
-SELECT 
-    repo.*, u_categories.name AS disp_category 
-FROM 
+SELECT
+    repo.*, u_categories.name AS disp_category
+FROM
     repo LEFT JOIN u_categories ON repo.category = u_categories.id
 WHERE
     rid = 95
 ORDER BY n
 SQL;
 
-}
-else{
+}else{
 	$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
 }
 

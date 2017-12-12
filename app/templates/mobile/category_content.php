@@ -101,14 +101,6 @@
       ?>
 
       <?php
-      # ref. #2104
-      if ( $page['category']['slug'] === 'highschoolbaseball' ) :
-        $hsb_parts = file_get_contents('https://sportsbull.jp/stats/hsb/webview/sp/');
-        echo $hsb_parts;
-      endif;
-      ?>
-
-      <?php
       # ref. #2559
       if ( $page['category']['slug'] === 'basketball' ) :
         $bleague_parts = file_get_contents('https://sportsbull.jp/stats/bleague/webview/sp/');

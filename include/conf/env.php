@@ -226,7 +226,9 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
     $bucket="dev-ublive.sportsbull.jp";
   }elseif (preg_match("/worldsoccer/",$requesturi)) {
 		$bucket="dev-stats.sportsbull.jp";
-	}
+	}else{
+    $bucket="dev-img-sportsbull-jp";
+  }
 endif;
 
 //$staticfilepath=preg_match("/sportsbull.jp/",$domain)?sprintf("s3://%s",$bucket):sprintf("%s/api/ver1",$SERVERPATH);

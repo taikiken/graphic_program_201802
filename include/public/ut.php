@@ -63,6 +63,65 @@ left join (select
 	pref
 from u_area) as t5 on t1.id=t5.pageid";
 
+$articleWithDirectLinktable="
+(select
+	%s
+	id,
+	title,
+	(select body from repo_body where pid=repo_n.id limit 1 offset 0) as body,
+	(select video from u_view where pageid=repo_n.id limit 1 offset 0) as videoflag,
+	t16 as b1,
+	img1,
+	imgflag,
+	(select name from repo where id=d1) as type,
+	d2,
+	d3,
+	t1,
+	m1,
+	m2,
+	t10,t11,t12,t13,t14,t15,
+	a1,a2,a3,a4,a5,a6,
+	streampack,
+	swf as video,
+	youtube,
+	facebook,
+	brightcove,
+	m_time,
+	t8 as videocaption,
+	t9,
+	flag,
+	direct_link_url
+from repo_n where (flag=1 or flag=3)%s) as t1
+
+left join (select
+	id as userid,
+	t1 as url,
+	cid as typeid,
+	title as name,
+	img1 as icon
+from u_media) as t2 on t1.d2=t2.userid
+
+left join (select
+	id as categoryid,
+	name as category,
+	title as categorylabel,
+	name_e as slug,
+	no_image as no_image
+from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
+
+left join (select
+	id as categoryid2,
+	name as category2,
+	title as categorylabel2,
+	name_e as slug2
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2
+
+left join (select
+	pageid,
+	region,
+	pref
+from u_area) as t5 on t1.id=t5.pageid";
+
 $articletable2="
 (select
 	%s
@@ -696,14 +755,18 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	//地域タブ
 	//地域タブのラベル置き換えのためにAPIに地域情報を追加
 	$s["another_categories"]["area"]=array();
-	if(strlen($f["region"])>0){
-		$s["another_categories"]["area"][0]["region"]=$f["region"];
-		if(strlen($f["pref"])>0){
-			$s["another_categories"]["area"][0]["pref"][]=$f["pref"];
-		}else{
-			$s["another_categories"]["area"][0]["pref"]=array();
-		}
-	}
+
+if ($s["categories"][0]["slug"] != 'dance') // hotfix ダンスのみ地域非表示対応
+{
+  if (strlen($f["region"]) > 0) {
+    $s["another_categories"]["area"][0]["region"] = $f["region"];
+    if (strlen($f["pref"]) > 0) {
+      $s["another_categories"]["area"][0]["pref"][] = $f["pref"];
+    } else {
+      $s["another_categories"]["area"][0]["pref"] = array();
+    }
+  }
+}
 	if($s["user"]["id"]==61){
 		//ノアドットの記事の場合は媒体名に変更
 		//IDはノアドットをそのまま継承
@@ -1263,6 +1326,20 @@ function set_company_news_items($f){
     $s["url"]=$f["url"];
 
     return $s;
+}
+
+function set_partners_info($f){
+
+	global $ImgPath;
+
+	$s["partner_name"]=$f["title"];
+	$s["site_url"]=$f["t1"];
+	$s["img_url"] = strlen($f["img1"])>0?sprintf("%s/img/%s",$ImgPath,$f["img1"]):"";
+	$s["company_img_url"] = strlen($f["company_img1"])>0?sprintf("%s/img/%s",$ImgPath,$f["company_img1"]):"";
+	$s["sort_no"] = $f["n"];
+	$s["ng_flag"] = $f["ng_flag"];
+
+	return $s;
 }
 
 
