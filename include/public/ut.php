@@ -425,6 +425,8 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
       $v=get_contents($file);
       $ad[]=unserialize($v);
     }
+
+    $categoryid = get_categoryid_by_playerid($playerid);
   }
   if($categoryid!=""){
 		unset($v);
@@ -1344,6 +1346,17 @@ function get_repoid_by_categoryid($categoryid) {
     return null;
   }
   return $res['id'];
+}
+
+function get_categoryid_by_playerid($playerid) {
+  global $o;
+  $sql = "SELECT category FROM tbl_player WHERE id = {$playerid}";
+  $o->query($sql);
+  $res = $o->fetch_array();
+  if($res === false){
+    return null;
+  }
+  return $res['category'];
 }
 
 ?>
