@@ -220,27 +220,15 @@
                 <?php
                 // ----------------------------------------------------
                 // 記事一覧: pc banner
-                if ($page['banner']['player_banner']['bannerflag'])
-                {
-                  ?>
-                  <a href="<?php echo $page['banner']['player_banner']['pc']['pc_bannerlink']; ?>" target="_blank"
-                     onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['player_banner']['pc']['link']; ?>', true);"><img
-                      src="<?php echo $page['banner']['player_banner']['pc']['pc_bannerimg']; ?>"
-                      alt="<?php echo $page['banner']['player_banner']['bannertext'] ?>"></a>
-                  <?php
-                }
-                else
-                {
-                  ?>
-                  <a href="http://www.mitsuifudosan.co.jp/tokyo2020/" target="_blank"
-                     onclick="UT.Ga.click('category.banner', 'banner_link', 'click', 'http://www.mitsuifudosan.co.jp/tokyo2020/', true);"><img
-                      src="https://img.sportsbull.jp/img/img2016070811545056886100.jpg"
-                      alt="三井不動産『BE THE CHANGE - さぁ、街から世界を変えよう。』" class="sp_hide">
-                    <img src="https://img.sportsbull.jp/img/img2017081510023900588800.jpg"
-                         alt="三井不動産『BE THE CHANGE - さぁ、街から世界を変えよう。』" class="pc_hide"></a>
 
-                  <?php
-                }
+                ?>
+                <a href="<?php echo $page['banner']['player_banner']['pc']['pc_bannerlink']; ?>" target="_blank"
+                   onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['player_banner']['pc']['link']; ?>', true);"><img
+                    src="<?php echo $page['banner']['player_banner']['pc']['pc_bannerimg']; ?>"
+                    alt="<?php echo $page['banner']['player_banner']['bannertext'] ?>"></a>
+
+                <?php
+
                 // eof: 記事一覧: pc banner
                 // ---------------------------------------------------- ?>
               </div><!-- /sponsor-link-->

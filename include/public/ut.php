@@ -369,7 +369,6 @@ function set_advertise($ad,$type){
 	$s["theme"]["background_color"]=strlen($ad["bgcolor"])>0?$ad["bgcolor"]:"";
 	$s["is_show_filter"]=!$ad["sp_showfilter"]?true:false;
 
-  $s["player_banner"]["bannerflag"] = !empty($ad["bannerflag"]) ? $ad["bannerflag"] : '';
   $s["player_banner"]["bannertext"] = !empty($ad["bannertext"]) ? $ad["bannertext"] : '';
   $s["player_banner"]["pc"]["pc_bannerimg"] = !empty($ad["pc_bannerimg"]) ? $ImgPath . '/img/' . $ad["pc_bannerimg"] : '';
   $s["player_banner"]["sp"]["sp_bannerimg"] = !empty($ad["sp_bannerimg"]) ? $ImgPath . '/img/' . $ad["sp_bannerimg"] : '';
@@ -417,6 +416,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 	global $staticfilepath;
 
 	$ad[]=unserialize(get_contents(sprintf("%s/static/ad/0-0.dat",$staticfilepath)));
+  $ad[0]["bannerflag"] = 1; // デフォルトはフラグを持っていないため、持たせる
 
   if($playerid!=""){
     unset($v);
@@ -487,17 +487,6 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 
 			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_android_videotag"])>0)$s["ad_urlandroid"]=$ad[$i]["ad_android_videotag"];
 			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlandroid"]="";
-
-      $s["pc_bannerimg"]=$ad[$i]["pc_bannerimg"];
-      $s["sp_bannerimg"]=$ad[$i]["sp_bannerimg"];
-      $s["ios_bannerimg"]=$ad[$i]["ios_bannerimg"];
-      $s["android_bannerimg"]=$ad[$i]["android_bannerimg"];
-      $s["bannerflag"]=$ad[$i]["bannerflag"];
-      $s["bannertext"]=$ad[$i]["bannertext"];
-      $s["pc_bannerlink"]=$ad[$i]["pc_bannerlink"];
-      $s["sp_bannerlink"]=$ad[$i]["sp_bannerlink"];
-      $s["ios_bannerlink"]=$ad[$i]["ios_bannerlink"];
-      $s["android_bannerlink"]=$ad[$i]["android_bannerlink"];
 		}
 
 		if($i==1){
@@ -538,6 +527,19 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 				elseif($ad[$i]["abodybannerflag"]==2)$s[$_abodybanner[$j]]="";
 			}
 		}
+
+    if (($ad[$i]["bannerflag"]) == 1)
+    {
+      $s["bannertext"] = !empty($ad[$i]["bannertext"]) ? $ad[$i]["bannertext"] : '';
+      $s["pc_bannerimg"] = !empty($ad[$i]["pc_bannerimg"]) ? $ad[$i]["pc_bannerimg"] : '';
+      $s["sp_bannerimg"] = !empty($ad[$i]["sp_bannerimg"]) ? $ad[$i]["sp_bannerimg"] : '';
+      $s["ios_bannerimg"] = !empty($ad[$i]["ios_bannerimg"]) ? $ad[$i]["ios_bannerimg"] : '';
+      $s["android_bannerimg"] = !empty($ad[$i]["android_bannerimg"]) ? $ad[$i]["android_bannerimg"] : '';
+      $s["pc_bannerlink"] = !empty($ad[$i]["pc_bannerlink"]) ? $ad[$i]["pc_bannerlink"] : '';
+      $s["sp_bannerlink"] = !empty($ad[$i]["sp_bannerlink"]) ? $ad[$i]["sp_bannerlink"] : '';
+      $s["ios_bannerlink"] = !empty($ad[$i]["ios_bannerlink"]) ? $ad[$i]["ios_bannerlink"] : '';
+      $s["android_bannerlink"] = !empty($ad[$i]["android_bannerlink"]) ? $ad[$i]["android_bannerlink"] : '';
+    }
 	}
 	return $s;
 }
