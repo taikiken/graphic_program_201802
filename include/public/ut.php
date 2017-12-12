@@ -418,15 +418,6 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 
 	$ad[]=unserialize(get_contents(sprintf("%s/static/ad/0-0.dat",$staticfilepath)));
 
-  if($isgetpickupplayerbanner && $categoryid!=""){
-    unset($v);
-    $repoid = get_repoid_by_categoryid($categoryid);
-    $file=sprintf("%s/static/ad/95-%s.dat",$staticfilepath,$repoid);
-    if(file_exists($file)){
-      $v=get_contents($file);
-      $ad[]=unserialize($v);
-    }
-  }
   if($playerid!=""){
     unset($v);
     $file=sprintf("%s/static/ad/94-%s.dat",$staticfilepath,$playerid);
@@ -434,7 +425,8 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
       $v=get_contents($file);
       $ad[]=unserialize($v);
     }
-  }if($categoryid!=""){
+  }
+  if($categoryid!=""){
 		unset($v);
 		$file=sprintf("%s/static/ad/10-%s.dat",$staticfilepath,$categoryid);
 		if(file_exists($file)){
@@ -442,18 +434,16 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 			$ad[]=unserialize($v);
 		}
 	}
-	// @TODO 注目の選手
-
-  if(isset($playerid)){
+  if ($isgetpickupplayerbanner && $categoryid != "") {
     unset($v);
-    $file=sprintf("%s/static/ad/94-%s.dat",$staticfilepath,$playerid);
-    if(file_exists($file)){
-      $v=get_contents($file);
-      $ad[]=unserialize($v);
+    $repoid = get_repoid_by_categoryid($categoryid);
+    $file = sprintf("%s/static/ad/95-%s.dat", $staticfilepath, $repoid);
+    if (file_exists($file)) {
+      $v = get_contents($file);
+      $ad[] = unserialize($v);
     }
   }
-
-	if($pageid!=""){
+  if($pageid!=""){
 		unset($v);
 		$file=sprintf("%s/static/ad/2-%s.dat",$staticfilepath,$userid);
 		if(file_exists($file)){
