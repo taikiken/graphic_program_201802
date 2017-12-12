@@ -39,5 +39,6 @@ while($result = $o->fetch_array()){
   }
 }
 echo "Youtube動画を利用している記事数:".count($counts)."件";
-
+echo nl2br("\n");
+echo "ダンスカテゴリーの全記事数:".count($id)."件";
 ?>
