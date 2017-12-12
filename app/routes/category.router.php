@@ -22,7 +22,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $ImgPath) {
 
-    $category           = $app->model->get_category_by_slug($args['category_slug']);
+    $category           = $app->model->get_category_by_slug($args['category_slug'], "", true);
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
 
     if ( $args['category_slug'] === 'big6tv' ) :
@@ -138,7 +138,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
   $this->get('/{type:athletes}[/]', function ($request, $response, $args) use ($app, $json) {
     // 選手一覧
-    $category = $app->model->get_category_by_slug($args['category_slug']);
+    $category = $app->model->get_category_by_slug($args['category_slug'],null, true);
     $pickup_players = $app->model->get_pickup_players($category['id']);
     $data = [];
     foreach ($pickup_players as $index => $row) {

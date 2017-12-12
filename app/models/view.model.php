@@ -270,7 +270,7 @@ class ViewModel {
   * @param  string  $slug カテゴリースラッグ
   * @return array   該当カテゴリー情報
   */
-  public function get_category_by_slug($slug, $playerid=null) {
+  public function get_category_by_slug($slug, $playerid=null, $isgetpickupplayerbanner=false) {
 
     if ( $this->default['site_categories'][$slug] || $slug === 'top' || isset($playerid) ) :
 
@@ -288,7 +288,7 @@ class ViewModel {
 //
 //      else :
 
-        $category = $this->db->get_category_by_slug($slug, $playerid);
+        $category = $this->db->get_category_by_slug($slug, $playerid, $isgetpickupplayerbanner);
 
 //      endif;
 

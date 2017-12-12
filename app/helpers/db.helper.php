@@ -148,7 +148,7 @@ END_DOC;
   * @param  string $slug カテゴリースラッグ
   * @return array
   */
-  public function get_category_by_slug( $slug, $playerid=null ) {
+  public function get_category_by_slug( $slug, $playerid=null, $isgetpickupplayerbanner=false ) {
 
 //    if (isset($playerid))
 //    {
@@ -169,7 +169,7 @@ SQL_EOL;
 //    }
     $this->query($sql);
     $f=$this->fetch_array();
-    $s=set_categoriesinfo($f, $playerid);
+    $s=set_categoriesinfo($f, $playerid, $isgetpickupplayerbanner);
 
     return $s;
 

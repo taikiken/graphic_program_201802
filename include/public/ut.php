@@ -353,12 +353,28 @@ function set_advertise($ad,$type){
 	return $s;
 }
 
-function get_advertise($categoryid="",$userid="",$pageid="",$playerid=""){
+function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isgetpickupplayerbanner=false){
 
 	global $staticfilepath;
 
 	$ad[]=unserialize(get_contents(sprintf("%s/static/ad/0-0.dat",$staticfilepath)));
-  if($categoryid!=""){
+
+  if($isgetpickupplayerbanner && $categoryid!=""){
+    unset($v);
+    $file=sprintf("%s/static/ad/95-%s.dat",$staticfilepath,$categoryid);
+    if(file_exists($file)){
+      $v=get_contents($file);
+      $ad[]=unserialize($v);
+    }
+  }
+  if($playerid!=""){
+    unset($v);
+    $file=sprintf("%s/static/ad/94-%s.dat",$staticfilepath,$playerid);
+    if(file_exists($file)){
+      $v=get_contents($file);
+      $ad[]=unserialize($v);
+    }
+  }if($categoryid!=""){
 		unset($v);
 		$file=sprintf("%s/static/ad/10-%s.dat",$staticfilepath,$categoryid);
 		if(file_exists($file)){
@@ -476,7 +492,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid=""){
 	return $s;
 }
 
-function set_categoriesinfo($f, $playerid=null){
+function set_categoriesinfo($f, $playerid=null, $isgetpickupplayerbanner=false){
 
 	global $ImgPath,$domain;
 
@@ -512,7 +528,7 @@ function set_categoriesinfo($f, $playerid=null){
   $s["sp_header"]=strlen($f["sp_header"])>0?sprintf("%s/img/%s",$ImgPath,$f["sp_header"]):"";
 
 
-  $ad=get_advertise($s["id"], "", "", $playerid);
+  $ad=get_advertise($s["id"], "", "", $playerid, $isgetpickupplayerbanner);
 	$ad_put=set_advertise($ad,"list");
 
 	$s=$s+$ad_put;
