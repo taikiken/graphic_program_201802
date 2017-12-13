@@ -55,7 +55,6 @@ import { Snap } from '../ui/Snap';
 import { TopButton } from '../ui/button/TopButton';
 // @since 2016-12-26
 import { Hit } from '../ui/Hit';
-import { Env } from '../app/Env';
 
 /**
  * <p>記事詳細</p>
@@ -174,12 +173,8 @@ export default class ViewSingle extends View {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingle].start', path);
-    }
+  start() {
     this.action.start();
   }
   /**

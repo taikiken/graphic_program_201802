@@ -46,7 +46,6 @@ import { Scroll } from '../util/Scroll';
 // Ga
 import { Ga } from '../ga/Ga';
 import { GaData } from '../ga/GaData';
-import { Env } from '../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -315,12 +314,8 @@ export default class ViewArchiveMasonryInfinite extends View {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingleTitle].start', path);
-    }
+  start() {
     this.action.next();
   }
   /**

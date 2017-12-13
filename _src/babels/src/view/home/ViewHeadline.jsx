@@ -30,7 +30,6 @@ import {Safety} from '../../data/Safety';
 
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
-import { Env } from '../../app/Env';
 
 // // node
 // import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
@@ -115,12 +114,8 @@ export default class ViewHeadline extends View {
   }
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewHeadline].start', path);
-    }
+  start() {
     this.action.start();
   }
   /**

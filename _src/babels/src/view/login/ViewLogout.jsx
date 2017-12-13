@@ -19,7 +19,6 @@ import View from '../View';
 //
 // // util
 // import {Loc} from '../../util/Loc';
-import { Env } from '../../app/Env';
 import ComponentLogout from '../../component/login/ComponentLogout';
 
 // React
@@ -48,12 +47,8 @@ export default class ViewLogout extends View {
   // }
   /**
    * render start
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewLogout].start', path);
-    }
+  start() {
     this.render();
   }
   /**

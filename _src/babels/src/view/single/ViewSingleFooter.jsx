@@ -24,7 +24,6 @@ import View from '../View';
 // component
 // @since 2016-09-24
 import { ComponentSingleFooter } from '../../component/singles/ComponentSingleFooter';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -70,12 +69,8 @@ export default class ViewSingleFooter extends View {
   }
   /**
    * render 処理を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingleFooter].start', path);
-    }
+  start() {
     this.render(this._single);
   }
   /**

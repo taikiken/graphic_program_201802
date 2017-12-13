@@ -14,7 +14,6 @@ import View from '../View';
 import {LogoutNode} from '../../node/modal/LogoutNode';
 // event
 import {LogoutStatus} from '../../event/LogoutStatus';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -93,12 +92,8 @@ export default class ViewLogoutModal extends View {
   // ---------------------------------------------------
   /**
    * rendering 開始
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingleTitle].start', path);
-    }
+  start() {
     this.render();
   }
   /**

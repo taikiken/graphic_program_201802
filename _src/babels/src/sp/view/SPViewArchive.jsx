@@ -30,7 +30,6 @@ import {SPMoreViewNode} from '../node/SPMoreViewNode';
 // Ga
 import {Ga} from '../../ga/Ga';
 import {GaData} from '../../ga/GaData';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -219,15 +218,10 @@ export default class SPViewArchive extends View {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[SPViewArchive].start', path);
-    }
+  start() {
     // console.log( '-------------------------- SPViewArchive start------' );
     this.action.next();
-
   }
   /**
    * Ajax response success

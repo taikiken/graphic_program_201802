@@ -22,7 +22,6 @@ import {User} from '../../app/User';
 
 // event
 import {UserStatus} from '../../event/UserStatus';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -112,12 +111,8 @@ export default class ViewHeaderUser extends View {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewHeaderUser].start', path);
-    }
+  start() {
     if (User.sign) {
       // login member
       let member = this._member;

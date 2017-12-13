@@ -15,7 +15,6 @@ import View from '../View';
 
 import {MessageStatus} from '../../event/MessageStatus';
 import {CommentDeleteNode} from '../../node/modal/CommentDeleteNode';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -59,12 +58,8 @@ export default class ViewDeleteModal extends View {
   }
   /**
    * 初期化 + {@link MessageStatus}.DELETE event を watch します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingleTitle].start', path);
-    }
+  start() {
     const status = this.status;
     status.off(MessageStatus.DELETE, this.onModal);
     status.on(MessageStatus.DELETE, this.onModal);

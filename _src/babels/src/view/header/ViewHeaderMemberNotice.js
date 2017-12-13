@@ -90,9 +90,7 @@ export class ViewHeaderMemberNotice extends View {
    * Ajax request を開始します
    */
   start():void {
-
     this.action.next();
-
   }
   /**
    * Ajax response success

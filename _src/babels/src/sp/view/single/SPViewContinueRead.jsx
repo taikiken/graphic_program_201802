@@ -19,7 +19,6 @@ import View from '../../../view/View';
 // component
 // @since 2016-09-24
 import { SPComponentContinueRead } from '../../component/singles/SPComponentContinueRead';
-import { Env } from '../../../app/Env';
 
 // sagen
 /**
@@ -64,12 +63,8 @@ export default class SPViewContinueRead extends View {
   }
   /**
    * render 処理を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingle].start', path);
-    }
+  start() {
     this.render();
   }
   /**

@@ -34,7 +34,6 @@ import {Scroll} from '../src/util/Scroll';
 // Ga
 import {Ga} from '../src/ga/Ga';
 import {GaData} from '../src/ga/GaData';
-import { Env } from '../src/app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -76,12 +75,8 @@ export class SPViewCategoryRoot extends View {
   }
   /**
    * rendering 開始
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewLogout].start', path);
-    }
+  start() {
     this.render();
   }
   /**

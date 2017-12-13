@@ -19,7 +19,6 @@ import SPViewHeaderMember from './SPViewHeaderMember';
 // app
 import {User} from '../../../app/User';
 import {Url} from '../../../app/const/Url';
-import { Env } from '../../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -76,12 +75,8 @@ export default class SPViewHeaderUser extends View {
   }
   /**
    * rendering 開始
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingle].start', path);
-    }
+  start() {
     this.render();
   }
   /**

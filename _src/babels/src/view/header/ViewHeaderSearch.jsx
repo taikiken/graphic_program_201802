@@ -16,7 +16,6 @@ import View from '../View';
 // node
 // import {HeaderSearchNode} from '../../node/header/HeaderSearchNode';
 import ComponentHeaderSearchForm from '../../component/header/ComponentHeaderSearchForm';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -47,12 +46,8 @@ export default class ViewHeaderSearch extends View {
   // ---------------------------------------------------
   /**
    * render 実行
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewHeaderSearch].start', path);
-    }
+  start() {
     this.render();
   }
   /**

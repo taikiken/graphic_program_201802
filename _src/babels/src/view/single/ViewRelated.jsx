@@ -26,8 +26,6 @@ import {Safety} from '../../data/Safety';
 
 // component
 import { ComponentSingleRelated } from '../../component/singles/ComponentSingleRelated';
-import { Env } from '../../app/Env';
-
 
 // React
 /* eslint-disable no-unused-vars */
@@ -72,12 +70,8 @@ export default class ViewRelated extends View {
   }
   /**
    * render 処理を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewRelated].start', path);
-    }
+  start() {
     this.render(this._related);
   }
   /**

@@ -25,7 +25,6 @@ import {SettingsStatus} from '../../event/SettingsStatus';
 
 // node
 import {SettingsInterestNode} from '../../node/settings/SettingsInterestNode';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -75,12 +74,8 @@ export default class ViewSettingsInterest extends View {
   }
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingleTitle].start', path);
-    }
+  start() {
     this.action.start();
   }
   /**

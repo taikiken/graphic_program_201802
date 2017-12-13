@@ -42,7 +42,6 @@ import {ModelCategoriesSlug} from '../../../model/categoires/ModelCategoriesSlug
 // sp/view
 // import { SPComponentMoreButton } from '../articles/SPComponentMoreButton';
 import { SPComponentArticles } from '../../component/articles/SPComponentArticles';
-import { Env } from '../../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -139,12 +138,8 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[SPViewCategoryWithSlug].start', path);
-    }
+  start() {
     this.action.next();
     this._actionSlug.start();
   }

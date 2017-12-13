@@ -16,7 +16,6 @@ import {MessageStatus} from '../../event/MessageStatus';
 
 // node
 import {FlushNode} from '../../node/modal/FlushNode';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -60,12 +59,8 @@ export default class ViewFlushModal extends View {
   }
   /**
    * 初期化
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingleTitle].start', path);
-    }
+  start() {
     this.render();
 
     const status = this.status;

@@ -17,7 +17,6 @@ import Syn from './Syn';
 
 // app
 import {User} from '../../app/User';
-import { Env } from '../../app/Env';
 
 // node
 import {SPSynItemNode} from '../node/SPSynItemNode';
@@ -76,12 +75,8 @@ export default class SPViewSyn extends View {
   }
   /**
    * rendering 開始
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[SPViewSyn].start', path);
-    }
+  start() {
     this.render();
   }
   /**

@@ -42,7 +42,6 @@ import {ArticleDae} from '../../dae/ArticleDae';
 
 // tick
 import { Polling } from '../../tick/Polling';
-import { Env } from '../../app/Env';
 
 // global object
 // React
@@ -136,12 +135,8 @@ export default class ViewPickup extends View {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewPickup].start', path);
-    }
+  start() {
     this.action.start();
   }
   /**

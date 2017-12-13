@@ -43,7 +43,6 @@ import {SignupStatus} from '../../event/SignupStatus';
 
 // component
 import ComponentSignup from '../../component/signup/ComponentSignup';
-import { Env } from '../../app/Env';
 
 // Sagen
 /**
@@ -188,12 +187,8 @@ export default class SignupWizard extends View {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingleTitle].start', path);
-    }
+  start() {
     this.action.start();
   }
   /**

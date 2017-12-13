@@ -21,7 +21,6 @@ import View from '../View';
 
 // node
 import {MediaNode} from '../../node/single/MediaNode';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -55,12 +54,8 @@ export class ViewSingleVisual extends View {
   }
   /**
    * render 処理を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingleVisual].start', path);
-    }
+  start() {
     this.render();
   }
   /**

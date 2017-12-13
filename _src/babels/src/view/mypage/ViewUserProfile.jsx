@@ -28,7 +28,6 @@ import {Safety} from '../../data/Safety';
 
 // dae
 import {UserDae} from '../../dae/UserDae';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -115,12 +114,8 @@ export default class ViewUserProfile extends View {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingle].start', path);
-    }
+  start() {
     this.action.start();
   }
   /**

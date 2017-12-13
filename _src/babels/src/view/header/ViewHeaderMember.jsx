@@ -40,7 +40,6 @@ import {UserDae} from '../../dae/UserDae';
 // import {LogoutStatus} from '../../event/LogoutStatus';
 // import {CommentStatus} from '../../event/CommentStatus';
 import {SettingsStatus} from '../../event/SettingsStatus';
-import { Env } from '../../app/Env';
 import ComponentHeaderMemberSetting from '../../component/header/ComponentHeaderMemberSetting';
 
 // React
@@ -200,12 +199,8 @@ export default class ViewHeaderMember extends View {
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewHeaderMember].start', path);
-    }
+  start() {
     // console.log('ViewHeaderMember.start');
     this.action.start();
   }

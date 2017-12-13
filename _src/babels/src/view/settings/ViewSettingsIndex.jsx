@@ -25,7 +25,6 @@ import {SettingsIndexNode} from '../../node/settings/SettingsIndexNode';
 
 // event
 import {SettingsStatus} from '../../event/SettingsStatus';
-import { Env } from '../../app/Env';
 
 // Sagen
 /**
@@ -79,12 +78,8 @@ export default class ViewSettingsIndex extends View {
   }
   /**
    * Ajax request を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingleTitle].start', path);
-    }
+  start() {
     this.action.start();
   }
   /**

@@ -24,7 +24,6 @@ import {User} from '../../app/User';
 // import {BookmarkNode} from '../../node/bookmark/BookmarkNode';
 
 import { ComponentSingleHeader } from '../../component/singles/ComponentSingleHeader';
-import { Env } from '../../app/Env';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -95,12 +94,8 @@ export default class ViewSingleHeader extends View {
   // ---------------------------------------------------
   /**
    * render 処理を開始します
-   * @param {string} [path=''] option argument
    */
-  start(path = '') {
-    if (Env.NODE_ENV === 'develop') {
-      console.warn('[ViewSingleHeader].start', path);
-    }
+  start() {
     this.render(this._single);
   }
   /**
