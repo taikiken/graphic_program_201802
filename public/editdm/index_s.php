@@ -124,7 +124,6 @@ while($f=$o->fetch_array($III)){
 for($i=0;$i<count($p);$i++){
 
 ?>
-<tr>
 <td class="menuChild">
 <?php if(strlen($p[$i]["directory4"])>0){ ?><a href="<?=rewrite($p[$i]["directory4"],$p[$i])?>" target="_blank"><img src="/shared/cms/img/icon_browser.gif" alt="<?=str_replace($a[$i],'',$p[$i]["name"])?>インデックスページをブラウザでプレビューする" width="16" height="16" ></a><?php } ?><a href="repo_<?=(!$p[$i]["c_flag"])?"n":"s"?>/?<?=(!$p[$i]["c_flag"])?"c":"r"?>id=<?=$p[$i]["id"]?>" class="folder"><?=str_replace($a[$i],'',$p[$i]["name"])?>情報管理</a>
 </td>
@@ -168,6 +167,13 @@ for($i=0;$i<count($p);$i++){
 </td>
 </tr>
 <?php } ?>
+<tr>
+  <td class="menuChild">
+    <a href="/api/batch/check_youtube.php">ダンスカテゴリーYoutube動画利用数確認</a>
+  </td>
+</tr>
+<tr>
+
 </tbody>
 </table>
 <div id="pageCommand"></div>
