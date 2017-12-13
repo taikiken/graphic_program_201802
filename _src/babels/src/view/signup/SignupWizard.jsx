@@ -70,6 +70,10 @@ export default class SignupWizard extends View {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
+  /**
+   * wow 用 component を出力するための container(Element) `div#js-wow-modal-container` を追加します
+   * @returns {Element} `div#js-wow-modal-container`
+   */
   static prepareWow() {
     const div = document.createElement('div');
     div.id = 'js-wow-modal-container';

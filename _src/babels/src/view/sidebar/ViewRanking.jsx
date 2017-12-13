@@ -62,19 +62,19 @@ export default class ViewRanking extends View {
   get slug() {
     return this._slug;
   }
-  /**
-   * home(index) か否かを表す真偽値
-   * @return {boolean} home(index) か否かを表す真偽値を返します
-   */
-  get home() {
-    return this._home;
-  }
-  /**
-   * @param {boolean} bool home(index) か否かを表す真偽値
-   */
-  set home(bool) {
-    this._home = bool;
-  }
+  // /**
+  //  * home(index) か否かを表す真偽値
+  //  * @return {boolean} home(index) か否かを表す真偽値を返します
+  //  */
+  // get home() {
+  //   return this._home;
+  // }
+  // /**
+  //  * @param {boolean} bool home(index) か否かを表す真偽値
+  //  */
+  // set home(bool) {
+  //   this._home = bool;
+  // }
   /**
    * 記事詳細か否かを表す真偽値
    * @return {boolean} 記事詳細か否かを表す真偽値を返します

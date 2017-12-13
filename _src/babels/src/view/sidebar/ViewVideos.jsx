@@ -57,42 +57,6 @@ const ReactDOM = self.ReactDOM;
  */
 export default class ViewVideos extends View {
   // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * category slug
-   * @return {string} 捜査 slug を返します
-   */
-  get slug() {
-    return this._slug;
-  }
-  /**
-   * home(index) か否かを表す真偽値
-   * @return {boolean} home(index) か否かを表す真偽値を返します
-   */
-  get home() {
-    return this._home;
-  }
-  /**
-   * @param {boolean} bool home(index) か否かを表す真偽値
-   */
-  set home(bool) {
-    this._home = bool;
-  }
-  /**
-   * 記事詳細か否かを表す真偽値
-   * @return {boolean} 記事詳細か否かを表す真偽値を返します
-   */
-  get detail() {
-    return this._detail;
-  }
-  /**
-   * @param {boolean} bool 記事詳細か否かを表す真偽値
-   */
-  set detail(bool) {
-    this._detail = bool;
-  }
-  // ---------------------------------------------------
   // CONSTRUCTOR
   // ---------------------------------------------------
   /**
@@ -142,6 +106,42 @@ export default class ViewVideos extends View {
      * @type {function}
      */
     this.didMount = this.didMount.bind(this);
+  }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * category slug
+   * @return {string} 捜査 slug を返します
+   */
+  get slug() {
+    return this._slug;
+  }
+  // /**
+  //  * home(index) か否かを表す真偽値
+  //  * @return {boolean} home(index) か否かを表す真偽値を返します
+  //  */
+  // get home() {
+  //   return this._home;
+  // }
+  // /**
+  //  * @param {boolean} bool home(index) か否かを表す真偽値
+  //  */
+  // set home(bool) {
+  //   this._home = bool;
+  // }
+  /**
+   * 記事詳細か否かを表す真偽値
+   * @return {boolean} 記事詳細か否かを表す真偽値を返します
+   */
+  get detail() {
+    return this._detail;
+  }
+  /**
+   * @param {boolean} bool 記事詳細か否かを表す真偽値
+   */
+  set detail(bool) {
+    this._detail = bool;
   }
   // ---------------------------------------------------
   //  METHOD
