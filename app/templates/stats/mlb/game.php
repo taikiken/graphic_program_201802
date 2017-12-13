@@ -27,55 +27,59 @@
 
     <section class="main-sec">
 
-    <?php
-    // -----------------------------------------------
-    // GAME: スコアボード + 自動更新
-    ?>
-    <div id="js-mlb-game-score"></div>
+      <?php
+      // -----------------------------------------------
+      // GAME: スコアボード + 自動更新
+      ?>
+      <div id="js-mlb-game-score"></div>
 
-    <div class="stats__banner stats__banner--mlb show-for-large">
-      <!-- /531683568/mlb-stats-ad/mlb-stats-under-header-PC -->
-      <script>
-        googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/mlb-stats-ad/mlb-stats-under-header-PC', [728, 90], 'div-gpt-ad-1499151607828-0').addService(googletag.pubads());
-          googletag.pubads().enableSingleRequest();
-          googletag.enableServices();
-        });
-      </script>
-      <div id='div-gpt-ad-1499151607828-0' style='height:90px; width:728px;'>
-      <script>
-      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1499151607828-0'); });
-      </script>
-      </div>
-      <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-PC -->
-    </div><!-- /.stats__banner -->
+      <div class="stats__banner stats__banner--mlb show-for-large">
+        <!-- /531683568/mlb-stats-ad/mlb-stats-under-header-PC -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/mlb-stats-ad/mlb-stats-under-header-PC', [728, 90], 'div-gpt-ad-1499151607828-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1499151607828-0' style='height:90px; width:728px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1499151607828-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-PC -->
+      </div><!-- /.stats__banner -->
 
-    <div class="stats__banner stats__banner--mlb show-for-small">
-      <!-- /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
-      <script>
-        googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/mlb-stats-ad/mlb-stats-under-header-SP', [320, 50], 'div-gpt-ad-1499151685008-0').addService(googletag.pubads());
-          googletag.pubads().enableSingleRequest();
-          googletag.enableServices();
-        });
-      </script>
-      <div id='div-gpt-ad-1499151685008-0' style='height:50px; width:320px;'>
-      <script>
-      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1499151685008-0'); });
-      </script>
-      </div>
-      <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
-    </div><!-- /.stats__banner -->
+      <div class="stats__banner stats__banner--mlb show-for-small">
+        <!-- /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/mlb-stats-ad/mlb-stats-under-header-SP', [320, 50], 'div-gpt-ad-1499151685008-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1499151685008-0' style='height:50px; width:320px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1499151685008-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/mlb-stats-ad/mlb-stats-under-header-SP -->
+      </div><!-- /.stats__banner -->
 
-    <?php
-    // ------------------------------------------------------------------------
-    // 日程・動的出力
-    ?>
-    <div id="js-mlb-game-info"></div>
-    <script src="/assets/mlb/js/mlb_stats_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
-    <?php
-    // ------------------------------------------------------------------------
-    ?>
+      <?php
+      // ------------------------------------------------------------------------
+      // 日程・動的出力
+      ?>
+      <div id="js-mlb-game-info"></div>
+      <script src="/assets/mlb/js/mlb_stats_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+      <?php
+      // ------------------------------------------------------------------------
+      ?>
+
+      <p class="stats__copyright">Copyright (C) 2017 STATS LLC. All Rights Reserved.<br>
+      Copyright (C) 2017 Kyodo News Digital Co., Ltd. All Rights Reserved.</p>
+
     </section><!-- /.main-sec -->
 
     <section class="side-sec show-for-large">
