@@ -91,7 +91,7 @@ import ViewArea from './view/ViewArea';
 // ----------- users
 // signup
 import SignupWizard from './view/signup/SignupWizard';
-import {ViewDeactivate} from './view/signup/ViewDeactivate';
+import ViewDeactivate from './view/signup/ViewDeactivate';
 
 // login
 import {ViewLogin} from './view/login/ViewLogin';
