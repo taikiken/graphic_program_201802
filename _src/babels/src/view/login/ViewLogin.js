@@ -15,40 +15,49 @@ import View from '../View';
 
 // app
 import {User} from '../../app/User';
-import {ErrorTxt} from '../../app/const/ErrorTxt';
+// import {ErrorTxt} from '../../app/const/ErrorTxt';
 import {Message} from '../../app/const/Message';
 
-// data
-import {Result} from '../../data/Result';
-import {Form} from '../../data/Form';
-import {ErrorMessage} from '../../data/ErrorMessage';
+// // data
+// import {Result} from '../../data/Result';
+// import {Form} from '../../data/Form';
+// import {ErrorMessage} from '../../data/ErrorMessage';
 
 // node
-import {ErrorNode} from '../../node/error/ErrorNode';
+// import {ErrorNode} from '../../node/error/ErrorNode';
 
 // dae
-import {ErrorDae} from '../../dae/error/ErrorDae';
+// import {ErrorDae} from '../../dae/error/ErrorDae';
 import {UserDae} from '../../dae/UserDae';
 import {StatusDae} from '../../dae/StatusDae';
 
 // model
 import {Model} from '../../model/Model';
-import {ModelLogin} from '../../model/login/ModelLogin';
-import {ModelSocial} from '../../model/sns/ModelSocial';
+// import ModelLogin from '../../model/login/ModelLogin';
+import ModelSocial from '../../model/sns/ModelSocial';
 
 // util
 import {Loc} from '../../util/Loc';
 
 // event
 import {MessageStatus} from '../../event/MessageStatus';
+// import ComponentError from '../../component/error/ComponentError';
+import ComponentLogin from '../../component/login/ComponentLogin';
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * Login from を表示します
- * TODO: React.createClass を止める
  */
 export class ViewLogin extends View {
   /**
@@ -56,231 +65,254 @@ export class ViewLogin extends View {
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, option:Object = {} ) {
-    super( element, option );
+  constructor(element, option = {}) {
+    super(element, option);
+    /**
+     * SNS 経由ログイン success
+     * @type {function}
+     */
+    this.socialDone = this.socialDone.bind(this);
+    const callback = {};
+    callback[Model.COMPLETE] = this.socialDone;
+    // callback[ Model.UNDEFINED_ERROR ] = boundFail;
+    // callback[ Model.RESPONSE_ERROR ] = boundFail;
+    /**
+     * SNS ログイン処理します
+     * @type {ModelSocial}
+     */
+    this.model = new ModelSocial(callback);
+    /**
+     * ログイン成功 `flush` message を表示します
+     * @type {MessageStatus}
+     */
+    this.message = MessageStatus.factory();
   }
   /**
    * render start
    */
-  start():void {
+  start() {
     this.render();
   }
   /**
    * フォーム生成を開始します
    */
-  render():void {
-
-    let LoginDom = React.createClass( {
-      getInitialState: function() {
-        /**
-         * ModelLogin instance
-         * @private
-         * @type {null|ModelLogin}
-         * */
-        this.model = null;
-        /**
-         * ModelLogin callback
-         * @private
-         * @type {null|Object}
-         * */
-        this.callback = null;
-
-        /**
-         * form error message 表示用 Object
-         * @private
-         * @type {*}
-         * */
-        this.errors = {
-          password: new ErrorMessage(),
-          email: new ErrorMessage(),
-          user: new ErrorMessage()
-        };
-        /**
-         * MessageStatus instance
-         * @private
-         * @type {MessageStatus}
-         * */
-        this.messageStatus = MessageStatus.factory();
-
-        return {
-          error: false,
-          email: '',
-          password: '',
-          user: ''
-        };
-      },
-      render: function() {
-
-        let errorClass = ( keyName:string ) => {
-          return this.errors[ keyName ].error ? 'error' : '';
-        };
-        let message = ( keyName:string ) => {
-          return this.errors[ keyName ].message;
-        };
-
-        return (
-          <form onSubmit={this.submitHandler} ref="signup" encType="application/x-www-form-urlencoded">
-            <span className={'form-parts ' + errorClass('email')}>
-              <span className="setting-form-mail form-input">
-                <input
-                  type="email"
-                  name="email"
-                  value={this.state.email}
-                  onChange={this.emailChange}
-                  placeholder={Message.PLACEHOLDER_EMAIL}
-                />
-              </span>
-              <ErrorNode message={message('email')} />
-            </span>
-            <span className={'form-parts ' + errorClass('password')}>
-              <span className="setting-form-pw form-input">
-                <input
-                  type="password"
-                  placeholder={Message.PLACEHOLDER_PWD}
-                  name="password"
-                  value={this.state.password}
-                  onChange={this.passwordChange}
-                />
-              </span>
-              <ErrorNode message={message('password')} />
-            </span>
-            {/* button */}
-            <div className={'form-parts form-submit-parts ' + errorClass('user')}>
-              <span className="setting-form-submit mod-btnA01">
-                <input type="submit" value={Message.SUBMIT_LOGIN} />
-              </span>
-              <ErrorNode message={message('user')} />
-            </div>
-          </form>
-        );
-
-      },
-      // -------------------------------------------------------
-      // delegate
-      componentDidMount: function() {
-        if ( this.callback === null ) {
-          let callback = {};
-          this.callback = callback;
-          callback[ Model.COMPLETE ] = this.done;
-          callback[ Model.UNDEFINED_ERROR ] = this.fail;
-          callback[ Model.RESPONSE_ERROR ] = this.fail;
-        }
-      },
-      /*
-      componentWillUnMount: function() {
-
-      },
-      */
-      // -------------------------------------------------------
-      // custom
-
-      // input change
-      emailChange: function( event ) {
-        this.setState( {email: event.target.value} );
-      },
-      passwordChange: function( event ) {
-        this.setState( {password: event.target.value} );
-      },
-      // -------------------------------------------------------
-      // submit
-      submitHandler: function( event:Event ) {
-        event.preventDefault();
-
-        // error 消去
-        this.reset();
-
-        // validate
-        this.validate();
-
-      },
-      validate: function() {
-
-        // empty check
-        let email = this.state.email;
-        let pwd = this.state.password;
-
-        if ( email === '' || pwd === '' ) {
-          this.errors.user.message = ErrorTxt.EMAIL_OR_PWD_EMPTY;
-        } else {
-          this.request();
-        }
-
-      },
-      request: function() {
-        let form = ReactDOM.findDOMNode( this.refs.signup );
-        let formData = Form.element( form );
-
-        let model = this.model;
-        if ( model === null ) {
-          model = new ModelLogin( formData, this.callback );
-          this.model = model;
-        } else {
-          model.data = formData;
-        }
-
-        // ajax start
-        model.start();
-      },
-      // -------------------------------------------------------
-      // after request
-      next: function( token:string ) {
-        // login
-        // token setup
-        if ( User.login( token ) ) {
-          // home
-          // flush message
-          this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
-
-          setTimeout( Loc.index, 500 );
-
-          // Loc.index();
-        }/* else {
-          console.log( 'fail login ...', token );
-        }*/
-
-      },
-      done: function( result:Result ) {
-        if ( result.status.code === 200 ) {
-          // OK
-          // token 取り出し
-          let userDae = new UserDae( result.response );
-          // -> next step
-          this.next( userDae.accessToken );
-        }
-      },
-      fail: function( error:Error ) {
-        let errorDae = new ErrorDae( error.result );
-        if ( errorDae.errors.hasErrors() ) {
-          // errors あり
-          let errors = errorDae.errors;
-          let list = errors.list;
-
-          for ( var key of list ) {
-            this.errors[ key ].message = errors.message( key );
-          }
-
-        } else {
-          // errors なし
-          // status error を表示
-          this.errors.user.message = errorDae.status.userMessage;
-        }
-
-        this.setState( { error: true } );
-      },
-      reset: function() {
-        this.errors.email.reset();
-        this.errors.password.reset();
-        this.errors.user.reset();
-        this.setState( { error: false } );
-      }
-    } );
-
-    // create component
+  render() {
+    //
+    // let LoginDom = React.createClass( {
+    //   getInitialState: function() {
+    //     /**
+    //      * ModelLogin instance
+    //      * @private
+    //      * @type {null|ModelLogin}
+    //      * */
+    //     this.model = null;
+    //     /**
+    //      * ModelLogin callback
+    //      * @private
+    //      * @type {null|Object}
+    //      * */
+    //     this.callback = null;
+    //
+    //     /**
+    //      * form error message 表示用 Object
+    //      * @private
+    //      * @type {*}
+    //      * */
+    //     this.errors = {
+    //       password: new ErrorMessage(),
+    //       email: new ErrorMessage(),
+    //       user: new ErrorMessage()
+    //     };
+    //     /**
+    //      * MessageStatus instance
+    //      * @private
+    //      * @type {MessageStatus}
+    //      * */
+    //     this.messageStatus = MessageStatus.factory();
+    //
+    //     return {
+    //       error: false,
+    //       email: '',
+    //       password: '',
+    //       user: ''
+    //     };
+    //   },
+    //   render: function() {
+    //
+    //     let errorClass = ( keyName:string ) => {
+    //       return this.errors[ keyName ].error ? 'error' : '';
+    //     };
+    //     let message = ( keyName:string ) => {
+    //       return this.errors[ keyName ].message;
+    //     };
+    //
+    //     return (
+    //       <form onSubmit={this.submitHandler} ref="signup" encType="application/x-www-form-urlencoded">
+    //         <span className={'form-parts ' + errorClass('email')}>
+    //           <span className="setting-form-mail form-input">
+    //             <input
+    //               type="email"
+    //               name="email"
+    //               value={this.state.email}
+    //               onChange={this.emailChange}
+    //               placeholder={Message.PLACEHOLDER_EMAIL}
+    //             />
+    //           </span>
+    //           <ComponentError message={message('email')} />
+    //         </span>
+    //         <span className={'form-parts ' + errorClass('password')}>
+    //           <span className="setting-form-pw form-input">
+    //             <input
+    //               type="password"
+    //               placeholder={Message.PLACEHOLDER_PWD}
+    //               name="password"
+    //               value={this.state.password}
+    //               onChange={this.passwordChange}
+    //             />
+    //           </span>
+    //           <ComponentError message={message('password')} />
+    //         </span>
+    //         {/* button */}
+    //         <div className={'form-parts form-submit-parts ' + errorClass('user')}>
+    //           <span className="setting-form-submit mod-btnA01">
+    //             <input type="submit" value={Message.SUBMIT_LOGIN} />
+    //           </span>
+    //           <ComponentError message={message('user')} />
+    //         </div>
+    //       </form>
+    //     );
+    //
+    //   },
+    //   // -------------------------------------------------------
+    //   // delegate
+    //   componentDidMount: function() {
+    //     if ( this.callback === null ) {
+    //       let callback = {};
+    //       this.callback = callback;
+    //       callback[ Model.COMPLETE ] = this.done;
+    //       callback[ Model.UNDEFINED_ERROR ] = this.fail;
+    //       callback[ Model.RESPONSE_ERROR ] = this.fail;
+    //     }
+    //   },
+    //   /*
+    //   componentWillUnMount: function() {
+    //
+    //   },
+    //   */
+    //   // -------------------------------------------------------
+    //   // custom
+    //
+    //   // input change
+    //   emailChange: function( event ) {
+    //     this.setState( {email: event.target.value} );
+    //   },
+    //   passwordChange: function( event ) {
+    //     this.setState( {password: event.target.value} );
+    //   },
+    //   // -------------------------------------------------------
+    //   // submit
+    //   submitHandler: function( event:Event ) {
+    //     event.preventDefault();
+    //
+    //     // error 消去
+    //     this.reset();
+    //
+    //     // validate
+    //     this.validate();
+    //
+    //   },
+    //   validate: function() {
+    //
+    //     // empty check
+    //     let email = this.state.email;
+    //     let pwd = this.state.password;
+    //
+    //     if ( email === '' || pwd === '' ) {
+    //       this.errors.user.message = ErrorTxt.EMAIL_OR_PWD_EMPTY;
+    //     } else {
+    //       this.request();
+    //     }
+    //
+    //   },
+    //   request: function() {
+    //     let form = ReactDOM.findDOMNode( this.refs.signup );
+    //     let formData = Form.element( form );
+    //
+    //     let model = this.model;
+    //     if ( model === null ) {
+    //       model = new ModelLogin( formData, this.callback );
+    //       this.model = model;
+    //     } else {
+    //       model.data = formData;
+    //     }
+    //
+    //     // ajax start
+    //     model.start();
+    //   },
+    //   // -------------------------------------------------------
+    //   // after request
+    //   next: function( token:string ) {
+    //     // login
+    //     // token setup
+    //     if ( User.login( token ) ) {
+    //       // home
+    //       // flush message
+    //       this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
+    //
+    //       setTimeout( Loc.index, 500 );
+    //
+    //       // Loc.index();
+    //     }/* else {
+    //       console.log( 'fail login ...', token );
+    //     }*/
+    //
+    //   },
+    //   done: function( result:Result ) {
+    //     if ( result.status.code === 200 ) {
+    //       // OK
+    //       // token 取り出し
+    //       let userDae = new UserDae( result.response );
+    //       // -> next step
+    //       this.next( userDae.accessToken );
+    //     }
+    //   },
+    //   fail: function( error:Error ) {
+    //     let errorDae = new ErrorDae( error.result );
+    //     if ( errorDae.errors.hasErrors() ) {
+    //       // errors あり
+    //       let errors = errorDae.errors;
+    //       let list = errors.list;
+    //
+    //       for ( var key of list ) {
+    //         this.errors[ key ].message = errors.message( key );
+    //       }
+    //
+    //     } else {
+    //       // errors なし
+    //       // status error を表示
+    //       this.errors.user.message = errorDae.status.userMessage;
+    //     }
+    //
+    //     this.setState( { error: true } );
+    //   },
+    //   reset: function() {
+    //     this.errors.email.reset();
+    //     this.errors.password.reset();
+    //     this.errors.user.reset();
+    //     this.setState( { error: false } );
+    //   }
+    // } );
+    //
+    // // create component
+    // ReactDOM.render(
+    //   <LoginDom />,
+    //   this.element
+    // );
+    // since 2017-12-15
     ReactDOM.render(
-      <LoginDom />,
-      this.element
+      <ComponentLogin />,
+      this.element,
     );
-
 
     // ---------------------------------------------
     // /api/v1/sessions/social を叩く
@@ -295,17 +327,15 @@ export class ViewLogin extends View {
     // なのでいらないかも
     // code は残す
     this.social();
-
   }
 
   // ---------------------------------------------
   // /api/v1/sessions/social を叩く
   // 2016-03-16 追加
-
   /**
    * API request を行うかを query が URL に存在するかで判断します
    */
-  social():void {
+  social() {
     // query check
     /*
      https://github.com/undotsushin/undotsushin/issues/334#issuecomment-197217112
@@ -318,57 +348,48 @@ export class ViewLogin extends View {
      http://dev.undotsushin.com/signup/?oauth=facebook
      http://dev.undotsushin.com/signup/?oauth=twitter
      */
-    let queries = Loc.parse();
-    if ( queries !== null && queries.hasOwnProperty( 'oauth' ) ) {
-
-      let value = queries.oauth;
+    const queries = Loc.parse();
+    if (queries !== null && queries.hasOwnProperty('oauth')) {
+      const value = queries.oauth;
       // console.log( 'social request ', queries );
-      if ( value.indexOf( 'facebook' ) !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter' ) {
+      if (value.indexOf('facebook') !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter') {
         this.socialRequest();
       }
-
     }
   }
   /**
    * API `/api/v1/sessions/social` を行います
    */
-  socialRequest():void {
-    // let boundFail = this.socialFail.bind( this );
-    let callback = {};
-    callback[ Model.COMPLETE ] = this.socialDone.bind( this );
-    // callback[ Model.UNDEFINED_ERROR ] = boundFail;
-    // callback[ Model.RESPONSE_ERROR ] = boundFail;
-
-    let model = new ModelSocial( callback );
-    model.start();
+  socialRequest() {
+    // // let boundFail = this.socialFail.bind( this );
+    // const callback = {};
+    // callback[Model.COMPLETE] = this.socialDone;
+    // // callback[ Model.UNDEFINED_ERROR ] = boundFail;
+    // // callback[ Model.RESPONSE_ERROR ] = boundFail;
+    //
+    // const model = new ModelSocial( callback );
+    // model.start();
+    this.model.start();
   }
 
   /**
    * API `/api/v1/sessions/social` 成功
    * @param {Result} result 結果セット
    */
-  socialDone( result:Result ):void {
-
-    let response = result.response;
-
-    if ( typeof response === 'undefined' ) {
-
+  socialDone(result) {
+    const response = result.response;
+    if (typeof response === 'undefined') {
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[SOCIAL:USER_PROFILE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      const error = new Error('[SOCIAL:USER_PROFILE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
-
     } else {
-
-      let status = new StatusDae( result.status );
-
-      if ( status.code === 200 ) {
-        this.success( new UserDae( response ) );
+      const status = new StatusDae(result.status);
+      if (status.code === 200) {
+        this.success(new UserDae(response));
       }
-
     }
-
   }
   // /**
   //  * API `/api/v1/sessions/social` error
@@ -381,23 +402,21 @@ export class ViewLogin extends View {
    * API `/api/v1/sessions/social` 成功後に token をセットし home へリダイレクトします
    * @param {UserDae} userDae ユーザー情報, token 含んでいます
    */
-  success( userDae:UserDae ):void {
-    let token = userDae.accessToken;
+  success(userDae) {
+    const token = userDae.accessToken;
     // console.log( 'social success ', token, userDae );
     // token setup
-    if ( User.login( token ) ) {
+    if (User.login(token)) {
       // home
       // Loc.index();
       // flush message
       // console.log( 'success continue index  ' );
-      let messageStatus = this.messageStatus;
-      if ( !messageStatus ) {
-        messageStatus = MessageStatus.factory();
-      }
-      messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
-
+      // let messageStatus = this.messageStatus;
+      // if (!messageStatus) {
+      //   messageStatus = MessageStatus.factory();
+      // }
+      this.messageStatus.flush(MessageStatus.message(Message.LOGIN_COMPLETE), MessageStatus.SUCCESS);
       // this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
-
       setTimeout( Loc.index, 500 );
     }
   }

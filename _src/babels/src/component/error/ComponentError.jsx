@@ -17,7 +17,6 @@ const React = self.React;
  * form エラー表示 component
  * @param {string} message error message
  * @returns {?XML} `span.error-message-container`
- * @constructor
  * @since 2017-12-06
  */
 const ComponentError = ({ message }) => {

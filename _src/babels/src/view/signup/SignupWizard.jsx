@@ -24,7 +24,7 @@ import {Loc} from '../../util/Loc';
 // model
 import {Model} from '../../model/Model';
 import {ModelCategories} from '../../model/categoires/ModelCategories';
-import {ModelSocial} from '../../model/sns/ModelSocial';
+import ModelSocial from '../../model/sns/ModelSocial';
 
 // dae
 // import {CategoriesDae} from '../../dae/caegories/CategoriesDae';

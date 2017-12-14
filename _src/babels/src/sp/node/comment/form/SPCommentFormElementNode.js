@@ -19,8 +19,8 @@ import {ModelComment} from '../../../../model/comment/ModelComment';
 import {ModelCommentReply} from '../../../../model/comment/ModelCommentReply';
 import {Model} from '../../../../model/Model';
 
-// node
-import {ErrorNode} from '../../../../node/error/ErrorNode';
+// // node
+// import {ErrorNode} from '../../../../node/error/ErrorNode';
 
 // util
 import {Loc} from '../../../../util/Loc';
@@ -28,6 +28,7 @@ import {Loc} from '../../../../util/Loc';
 // Ga
 import {Ga} from '../../../../ga/Ga';
 import {GaData} from '../../../../ga/GaData';
+import ComponentError from '../../../../component/error/ComponentError';
 
 // React
 let React = self.React;
@@ -130,7 +131,7 @@ export let SPCommentFormElementNode = React.createClass( {
               <div className="comment-form-comment-outer">
                 <div className={'comment-form-comment-inner ' + errorClass( 'body' )}>
                   <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder={Message.PLACEHOLDER_COMMENT} autoFocus="true" />
-                  <ErrorNode message={message('body')} />
+                  <ComponentError message={message('body')} />
                 </div>
               </div>
             </div>
