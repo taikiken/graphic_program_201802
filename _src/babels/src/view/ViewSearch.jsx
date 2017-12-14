@@ -64,7 +64,7 @@ export const SearchErrorComponent = () => (
  *
  * @since 2016-09-16
  */
-export class ViewSearch extends ViewArchiveMasonryInfinite {
+export default class ViewSearch extends ViewArchiveMasonryInfinite {
 // export class ViewSearch extends ViewArchiveMasonry {
   /**
    * 検索ページ 表示

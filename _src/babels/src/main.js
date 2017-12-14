@@ -55,13 +55,13 @@ import ViewHeaderSearch from './view/header/ViewHeaderSearch';
 import ViewCategory from './view/ViewCategory';
 import ViewSingle from './view/ViewSingle';
 // import {ViewTitle} from './view/ViewTitle';
-import {ViewSearch} from './view/ViewSearch';
+import ViewSearch from './view/ViewSearch';
 import ViewCommentSingle from './view/ViewCommentSingle';
 import ViewFirstVisit from './view/ViewFirstVisit';
 
 // single
 import ViewSingleTitle from './view/single/ViewSingleTitle';
-import {ViewSingleVisual} from './view/single/ViewSingleVisual';
+import ViewSingleVisual from './view/single/ViewSingleVisual';
 
 // comment
 import ViewComments from './view/ViewComments';
@@ -70,7 +70,7 @@ import ViewCommentForm from './view/comment/ViewCommentForm';
 // home
 import ViewHeadline from './view/home/ViewHeadline';
 import ViewPickup from './view/home/ViewPickup';
-import {ViewNews} from './view/home/ViewNews';
+import ViewNews from './view/home/ViewNews';
 
 // sidebar
 import ViewRanking from './view/sidebar/ViewRanking';
@@ -155,7 +155,7 @@ import SPViewSingleRecommend from './sp/view/single/SPViewSingleRecommend';
 
 // single/comment
 import SPViewComments from './sp/view/SPViewComments';
-import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
+import SPViewCommentForm from './sp/view/comment/SPViewCommentForm';
 
 // singles-option
 import SPViewSinglesRecommend from './sp/view/singles-option/SPViewSinglesRecommend';

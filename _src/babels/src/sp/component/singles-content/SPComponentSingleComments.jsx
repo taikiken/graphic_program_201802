@@ -11,7 +11,7 @@
  */
 
 // view/comment
-import { SPViewCommentForm } from '../../view/comment/SPViewCommentForm';
+import SPViewCommentForm from '../../view/comment/SPViewCommentForm';
 
 // view
 import SPViewComments from '../../view/SPViewComments';
@@ -21,9 +21,12 @@ import { User } from '../../../app/User';
 import { CommentsType } from '../../../app/const/CommentsType';
 
 // ad
-import { SPComponentSinglesAdBelow } from './SPComponentSinglesAdBelow';
+import SPComponentSinglesAdBelow from './SPComponentSinglesAdBelow';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

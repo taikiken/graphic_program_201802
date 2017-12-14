@@ -37,7 +37,7 @@ const ReactDOM = self.ReactDOM;
 /**
  * PC main visual
  */
-export class ViewSingleVisual extends View {
+export default class ViewSingleVisual extends View {
   /**
    * PC main visual
    * @param {Element} element 基点 element

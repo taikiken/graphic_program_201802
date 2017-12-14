@@ -38,7 +38,7 @@ const ReactDOM = self.ReactDOM;
 /**
  * SP 記事へのコメントフォーム・オープナー
  */
-export class SPViewCommentForm extends ViewCommentForm {
+export default class SPViewCommentForm extends ViewCommentForm {
   // /**
   //  * SP 記事へのコメントフォーム
   //  * @param {Element} element root element
