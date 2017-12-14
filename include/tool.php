@@ -51,10 +51,10 @@ function rtimg($a,$b,$c,$d,$e,$f,$g,$h,$r=1){
 			if(strlen($h[$i])>0){
 				$Tgyh=explode("-",$h[$i]);
 				if($i==0){
-				$ls.=sprintf("<li><b>%s</b>%s<br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li>",
+				$ls.=sprintf("<li><b>%s</b><br>%s<br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li>",
 				$type[$i].":"."記事詳細用",swforimg($c[$i],$b,"",$e.$i),$d,$i,$Tgyh[0],(strlen($Tgyh[0])>0&&strlen($Tgyh[1])>0)?$Tgyh[1]:$Tgyh[0]*0.75,$f,$Tgyh[2],$Tgyh[3],$Tgyh[4],$e.$i,$c[$i],$Tgyh[5]);
 
-				}else{$ls.=sprintf("<li><b>%s</b>%s<br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li>",
+				}else{$ls.=sprintf("<li><b>%s</b><br>%s<br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li>",
 				$type[$i].":".$Tgyh[0]."×".$Tgyh[1],swforimg($c[$i],$b,"",$e.$i),$d,$i,$Tgyh[0],(strlen($Tgyh[0])>0&&strlen($Tgyh[1])>0)?$Tgyh[1]:$Tgyh[0]*0.75,$f,$Tgyh[2],$Tgyh[3],$Tgyh[4],$e.$i,$c[$i],$Tgyh[5]);
 
 				}
