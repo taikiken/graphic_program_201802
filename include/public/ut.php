@@ -416,9 +416,13 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 	global $staticfilepath;
 
 	$ad[]=unserialize(get_contents(sprintf("%s/static/ad/0-0.dat",$staticfilepath)));
-  $ad[0]["bannerflag"] = 1; // デフォルトはフラグを持っていないため、持たせる
-
   if($playerid!=""){
+    unset($v);
+    $file=sprintf("%s/static/ad/94-0.dat",$staticfilepath,$playerid);
+    if(file_exists($file)){
+      $v=get_contents($file);
+      $ad[]=unserialize($v);
+    }
     unset($v);
     $file=sprintf("%s/static/ad/94-%s.dat",$staticfilepath,$playerid);
     if(file_exists($file)){
@@ -437,6 +441,13 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 		}
 	}
   if ($isgetpickupplayerbanner && $categoryid != "") {
+    unset($v);
+    $repoid = get_repoid_by_categoryid($categoryid);
+    $file = sprintf("%s/static/ad/95-0.dat", $staticfilepath, $repoid);
+    if (file_exists($file)) {
+      $v = get_contents($file);
+      $ad[] = unserialize($v);
+    }
     unset($v);
     $repoid = get_repoid_by_categoryid($categoryid);
     $file = sprintf("%s/static/ad/95-%s.dat", $staticfilepath, $repoid);
