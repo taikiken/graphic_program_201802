@@ -31,6 +31,7 @@ import {ArticleDae} from '../../dae/ArticleDae';
 import {BookmarkButtonNode} from '../../node/mypage/BookmarkButtonNode';
 import {MoreViewNode} from '../../node/mypage/MoreViewNode';
 import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
+import ComponentMypageMoreButton from '../../component/mypage/ComponentMypageMoreButton';
 
 // React
 let React = self.React;
@@ -46,14 +47,14 @@ export class ViewBookmarks extends View {
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, moreElement:Element, option:Object = {} ) {
-    super( element, option );
+  constructor(element, moreElement, option = {}) {
+    super(element, option);
     /**
      * Action instance を設定します
      * @override
      * @type {Bookmarks}
      */
-    this.action = new Bookmarks( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Bookmarks(this.done.bind(this), this.fail.bind(this));
     /**
      * more button root element, 'View More'
      * @type {Element}
@@ -84,63 +85,68 @@ export class ViewBookmarks extends View {
      * @protected
      */
     this._request = null;
+    /**
+     * bind afterUpdate
+     * @type {function}
+     */
+    this.afterUpdate = this.afterUpdate.bind(this);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {Element|*} more button root element を返します
+   * @return {Element} more button root element を返します
    */
-  get moreElement():Element {
+  get moreElement() {
     return this._moreElement;
   }
   /**
    * 取得記事(articles)をArticleDae instance 配列を取得します
    * @return {Array.<ArticleDae>} 取得記事(articles)をArticleDae instance 配列を返します
    */
-  get articles():Array {
+  get articles() {
     return this._articles;
   }
   /**
    * ArticleDom instance を取得します
-   * @return {null|Object} ArticleDom instance を返します
+   * @return {?Object} ArticleDom instance を返します
    */
-  get articleRendered():Object {
+  get articleRendered() {
     return this._articleRendered;
   }
   /**
    * ArticleDom instance を設定します
-   * @param {Object} rendered ArticleDom instance
+   * @param {?Object} rendered ArticleDom instance
    */
-  set articleRendered( rendered:Object ):void {
+  set articleRendered(rendered) {
     this._articleRendered = rendered;
   }
   /**
    * response.request object を取得します
-   * @return {null|Object} response.request object を返します
+   * @return {?Object} response.request object を返します
    */
-  get request():Object {
+  get request() {
     return this._request;
   }
   /**
    * response.request object を設定します
-   * @param {Object} request response.request object
+   * @param {?Object} request response.request object
    */
-  set request( request:Object ):void {
+  set request(request) {
     this._request = request;
   }
   /**
    * more button instance を取得します
-   * @return {null|Object} more button instance を返します
+   * @return {?Object} more button instance を返します
    */
-  get moreRendered():Object {
+  get moreRendered() {
     return this._moreRendered;
   }
   /**
    * more button instance を設定します
-   * @param {Object} rendered more button instance
+   * @param {?Object} rendered more button instance
    */
-  set moreRendered( rendered:Object ):void {
+  set moreRendered(rendered ) {
     this._moreRendered = rendered;
   }
   // ---------------------------------------------------
@@ -149,72 +155,59 @@ export class ViewBookmarks extends View {
   /**
    * Ajax request を開始します
    */
-  start():void {
-
+  start() {
     this.action.next();
-
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result:Result ):void {
-
-    let articles = result.articles;
-    if ( typeof articles === 'undefined' ) {
-
+  done(result) {
+    const articles = result.articles;
+    if (typeof articles === 'undefined') {
       // articles undefined
       // JSON に問題がある
-      let error = new Error( Message.undef('[BOOKMARKS:UNDEFINED]') );
-      this.executeSafely( View.UNDEFINED_ERROR, error );
+      const error = new Error(Message.undef('[BOOKMARKS:UNDEFINED]'));
+      this.executeSafely(View.UNDEFINED_ERROR, error);
       // this.showError( error.message );
-
-    } else if ( articles.length === 0 ) {
-
+    } else if (articles.length === 0) {
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( Message.empty('[BOOKMARKS:EMPTY]') );
-      this.executeSafely( View.EMPTY_ERROR, error );
+      const error = new Error(Message.empty('[BOOKMARKS:EMPTY]'));
+      this.executeSafely(View.EMPTY_ERROR, error);
       // this.showError( error.message );
-
     } else {
-
       this._request = result.request;
-      this.render( articles );
-
+      this.render(articles);
     }
-
   }
   /**
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error:Error ):void {
-
-    this.executeSafely( View.RESPONSE_ERROR, error );
+  fail(error) {
+    this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-
   }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError( message:string = '' ):void {
-
-    message = Safety.string( message, '' );
-
-    // Error 時の表示
-    let error = new ViewError( this.element, this.option, message );
-    error.render();
-
-  }
+  // /**
+  //  * ViewError でエラーコンテナを作成します
+  //  * @param {string} message エラーメッセージ
+  //  */
+  // showError( message:string = '' ):void {
+  //
+  //   message = Safety.string( message, '' );
+  //
+  //   // Error 時の表示
+  //   let error = new ViewError( this.element, this.option, message );
+  //   error.render();
+  //
+  // }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
-  render( articles:Array ):void {
-
+  render(articles) {
     // 既存データ用のglobal配列
     let articlesList = this._articles;
 
@@ -371,5 +364,29 @@ export class ViewBookmarks extends View {
 
     }
 
+  }
+  /**
+   * {@link ComponentActivities} 更新後に実行される callback - more button 表示・非表示します
+   * @since 2017-12-
+   */
+  afterUpdate() {
+    // console.log('ViewActivities.afterUpdate', this.action.hasNext());
+    this.moreButton(this.action.hasNext());
+  }
+  /**
+   * {@link ComponentMypageMoreButton} 出力します
+   * @param {boolean} show true: 表示します
+   * @since 2017-12-
+   */
+  moreButton(show = false) {
+    // console.log('ViewActivities.moreButton', show);
+    ReactDOM.render(
+      <ComponentMypageMoreButton
+        show={show}
+        loading=""
+        action={this.action}
+      />,
+      this.moreElement,
+    );
   }
 }

@@ -25,6 +25,7 @@ const React = self.React;
  * @param {UserDae} commentUser {@link ActivityDae}.article {@link NoticeArticleDae}.comments {@link PopularDae},user {@link UserDae}
  * @param {UserDae} me {@link ActivityDae}.user {@link UserDae}
  * @returns {XML} `<strong>自分</strong>` or `<span><strong>{commentUser.userName}</strong>さん</span>`
+ * @since 2017-12-14
  */
 export const who = (commentUser, me) => {
   if (me.id === commentUser.id) {
@@ -43,6 +44,7 @@ export const who = (commentUser, me) => {
  * - bookmark
  * @param {ActivityDae} dae Ajax JSON activities data
  * @returns {XML} `a.activity-link`
+ * @since 2017-12-14
  */
 export const ComponentActivitiesMessage = ({ dae }) => {
   const article = dae.article;

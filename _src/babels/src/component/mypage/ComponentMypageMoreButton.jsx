@@ -11,6 +11,8 @@
  */
 import { Activities } from '../../action/mypage/Activities';
 import { Message } from '../../app/const/Message';
+import { Notice } from '../../action/users/Notice';
+import { Bookmarks } from '../../action/mypage/Bookmarks';
 
 /**
  * [library] - React
@@ -25,12 +27,23 @@ export default class ComponentMypageMoreButton extends React.Component {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
+  /**
+   * React.propTypes
+   * - action {@link Activities}|{@link Notice}|{@link Bookmarks}
+   * @returns {{
+   *   show: boolean,
+   *   loading: string,
+   *   action: *
+   * }} React.propTypes
+   */
   static get propTypes() {
     return {
       show: React.PropTypes.bool.isRequired,
       loading: React.PropTypes.string.isRequired,
       action: React.PropTypes.oneOfType([
         React.PropTypes.instanceOf(Activities).isRequired,
+        React.PropTypes.instanceOf(Notice).isRequired,
+        React.PropTypes.instanceOf(Bookmarks).isRequired,
       ]).isRequired,
     };
   }

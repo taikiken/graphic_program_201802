@@ -10,25 +10,26 @@
  *
  */
 
-
+// view
 import View from '../View';
-// import ViewError from '../error/ViewError';
-
-import {Activities} from '../../action/mypage/Activities';
-
+// action
+import {Notice} from '../../action/users/Notice';
 // app
+// import {Empty} from '../../app/const/Empty';
+// import {NoticeAction} from '../../app/const/NoticeAction';
 import {Message} from '../../app/const/Message';
-
-// // data
-// import {Result} from '../../data/Result';
-// import {Safety} from '../../data/Safety';
-
 // dae
-// import {ArticleDae} from '../../dae/ArticleDae';
-import {ActivitiesDae} from '../../dae/user/ActivitiesDae';
-// import { ActivityDae } from '../../dae/user/ActivityDae';
+import {NotificationsDae} from '../../dae/user/NotificationsDae';
+// import {NoticeDae} from '../../dae/user/NoticeDae';
+// // data
+// import {Safety} from '../../data/Safety';
+// import {Result} from '../../data/Result';
+// event
+import {NoticeStatus} from '../../event/NoticeStatus';
+// model
+import {ModelNoticeRead} from '../../model/notice/ModelNoticeRead';
 import ComponentMypageMoreButton from '../../component/mypage/ComponentMypageMoreButton';
-import ComponentActivities from '../../component/mypage/ComponentActivities';
+import ComponentNotifications from '../../component/mypage/ComponentNotifications';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -43,11 +44,11 @@ const React = self.React;
 const ReactDOM = self.ReactDOM;
 
 /**
- * my page activities 一覧
+ * my page お知らせ 一覧
  */
-export default class ViewActivities extends View {
+export default class ViewNotifications extends View {
   /**
-   * my page bookmark 一覧を表示 + infinite scroll
+   * my page お知らせ 一覧を表示 + infinite scroll
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Object} [option={}] optional event handler
@@ -58,13 +59,13 @@ export default class ViewActivities extends View {
     /**
      * Action instance を設定します
      * @override
-     * @type {Activities}
+     * @type {Notice}
      */
-    this.action = new Activities(this.done.bind(this), this.fail.bind(this));
+    this.action = new Notice(this.done.bind(this), this.fail.bind(this));
     /**
      * more button root element, 'View More'
      * @type {Element}
-     * @private
+     * @protected
      */
     this._moreElement = moreElement;
     /**
@@ -73,38 +74,61 @@ export default class ViewActivities extends View {
      * @private
      */
     this._articles = [];
-    // /**
-    //  * <p>ArticleDom instance を保持します</p>
-    //  * <p>first render を区別するためにも使用します</p>
-    //  * @type {null|Object}
-    //  * @private
-    //  */
-    // this._articleRendered = null;
-    // /**
-    //  * more button instance を保持します
-    //  * @type {null|Object}
-    //  * @private
-    //  */
-    // this._moreRendered = null;
-    // /**
-    //  * response.request object を保持する
-    //  * @type {null|Object}
-    //  * @private
-    //  */
-    // this._request = null;
+    /**
+     * <p>ArticleDom instance を保持します</p>
+     * <p>first render を区別するためにも使用します</p>
+     * @type {null|Object}
+     * @protected
+     */
+    this._articleRendered = null;
+    /**
+     * more button instance を設定します
+     * @param {null|Object} more button instance
+     */
+    this._moreRendered = null;
+    /**
+     * response.request object を保持する
+     * @type {null|Object}
+     * @protected
+     */
+    this._request = null;
+    /**
+     * NoticeStatus instance
+     * @type {NoticeStatus}
+     * @private
+     */
+    this.status = NoticeStatus.factory();
+    /**
+     * bind 済み this.onNoticeUpdate event handler
+     * @type {Function}
+     */
+    this.onNoticeUpdate = this.onNoticeUpdate.bind(this);
+    /**
+     * <p>既読にする</p>
+     * ModelNoticeRead instance
+     * @type {ModelNoticeRead}
+     */
+    this.modelNotice = new ModelNoticeRead();
     /**
      * bind afterUpdate
      * @type {function}
+     * @since 2017-12-14
      */
     this.afterUpdate = this.afterUpdate.bind(this);
+    /**
+     * bind onMount
+     * @type {function}
+     * @since 2017-12-14
+     */
+    this.onMount = this.onMount.bind(this);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {Element|*} more button root element を返します
+   * @return {Element} more button root element を返します
    */
-  get moreElement():Element {
+  get moreElement() {
     return this._moreElement;
   }
   // ---------------------------------------------------
@@ -121,23 +145,24 @@ export default class ViewActivities extends View {
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
   done(result) {
-    const activities = result.response.activities;
-    if (typeof activities === 'undefined') {
+    const response = result.response;
+    // console.log('ViewNotifications.done', result);
+    if (typeof response === 'undefined') {
       // articles undefined
       // JSON に問題がある
-      const error = new Error(Message.undef('[ACTIVITIES:UNDEFINED]'));
-      this.executeSafely( View.UNDEFINED_ERROR, error );
-      // this.showError( error.message );
-    } else if (activities.length === 0) {
-      // articles empty
-      // request, JSON 取得に問題は無かったが data が取得できなかった
-      const error = new Error(Message.empty('[ACTIVITIES:EMPTY]'));
-      this.executeSafely(View.EMPTY_ERROR, error);
+      const error = new Error(Message.undef('[NOTIFICATIONS:UNDEFINED]'));
+      this.executeSafely(View.UNDEFINED_ERROR, error);
       // this.showError( error.message );
     } else {
-      // this._request = result.request;
-      const dae = new ActivitiesDae(result.response);
-      this.render(dae.activities);
+      const notificationsDae = new NotificationsDae(response);
+      if (notificationsDae.notifications.length === 0) {
+        // 配列が空
+        const error = new Error(Message.empty('[NOTIFICATIONS:EMPTY]'));
+        this.executeSafely(View.EMPTY_ERROR, error);
+      } else {
+        this._request = result.request;
+        this.render(notificationsDae.notifications);
+      }
     }
   }
   /**
@@ -145,24 +170,14 @@ export default class ViewActivities extends View {
    * @param {Error} error Error instance
    */
   fail(error) {
+    // console.log('ViewNotifications.fail', error);
     this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
   }
-  // /**
-  //  * ViewError でエラーコンテナを作成します
-  //  * @param {string} message エラーメッセージ
-  //  */
-  // showError(message:string = ''):void {
-  //   message = Safety.string( message, '' );
-  //
-  //   // Error 時の表示
-  //   const error = new ViewError( this.element, this.option, message );
-  //   error.render();
-  // }
   /**
-   * dom を render します
-   * @param {Array.<ActivityDae>} articles JSON responce.articles
+   * お知らせ一覧
+   * @param {Array.<NoticeDae>} articles notificationsDae.notifications
    */
   render(articles) {
     // // 既存データ用のglobal配列
@@ -184,11 +199,6 @@ export default class ViewActivities extends View {
     // // --------------------------------------------
     // // More button
     // // --------------------------------------------
-    // /**
-    //  * more button
-    //  * @private
-    //  * @type {*|Function|ReactClass}
-    //  */
     // let MoreViewDom = React.createClass( {
     //   propTypes: {
     //     show: React.PropTypes.bool.isRequired,
@@ -201,13 +211,10 @@ export default class ViewActivities extends View {
     //     };
     //   },
     //   getInitialState: function() {
+    //     /*
     //     // Rise instance を保持する
-    //     /**
-    //      * Rise instance
-    //      * @private
-    //      * @type {null|Rise}
-    //      */
     //     this.rise = null;
+    //     */
     //
     //     return {
     //       disable: false,
@@ -237,21 +244,8 @@ export default class ViewActivities extends View {
     //     }
     //
     //   },
-    //   /*
-    //   componentDidMount: function() {
-    //
-    //   },
-    //   */
-    //   componentWillUnmount: function() {
-    //     // unmount 時に rise 破棄を行う
-    //     this.destroy();
-    //   },
     //   // -----------------------------------------
     //   // button 関連 custom method
-    //   // rise 関連 event を破棄する
-    //   destroy: function() {
-    //
-    //   },
     //   // 緊急用, button click を残す
     //   handleClick: function( event:Event ) {
     //     event.preventDefault();
@@ -271,6 +265,7 @@ export default class ViewActivities extends View {
     // // ArchiveDom から呼び出す
     // let moreButton = ( show:Boolean, action ) => {
     //
+    //   // console.log( 'moreButton ', show, moreElement );
     //   show = !!show;
     //   // _moreRendered が null の時のみ, instance があれば state を update する
     //   // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
@@ -292,7 +287,7 @@ export default class ViewActivities extends View {
     // };
     //
     // // --------------------------------------------
-    // // activities 親
+    // // お知らせ line
     // // --------------------------------------------
     // let MessageDom = React.createClass( {
     //   propType: {
@@ -300,76 +295,70 @@ export default class ViewActivities extends View {
     //   },
     //   render: function() {
     //
-    //     let dae = this.props.dae;
-    //     // let data = dae.article;
-    //     let article = dae.article;
-    //     let action = dae.action;
+    //     let notice = this.props.dae;
+    //     /*
+    //     let loggedIn = 'user-logged-in';
     //
-    //     // console.log( 'article comment', action, article );
-    //
-    //     let who = ( commentUser, me ) => {
-    //       if ( me.id === commentUser.id ) {
-    //         return <strong>自分</strong>;
-    //       } else {
-    //         // console.log( 'commentUser ', commentUser.userName );
-    //         return <span><strong>{commentUser.userName}</strong>さん</span>;
+    //     let icon = notice.user.profilePicture;
+    //     if ( !icon ) {
+    //       icon = Empty.USER_EMPTY;
+    //       loggedIn = '';
+    //     } else if ( !Safety.isImg( icon ) ) {
+    //       // 画像ファイル名に拡張子がないのがあったので
+    //       // 拡張子チェックを追加
+    //       if ( !Safety.isGraph( icon ) ) {
+    //         icon = Empty.USER_EMPTY;
     //       }
-    //     };
+    //       loggedIn = '';
+    //     }
+    //     */
+    //     let icon = Safety.image( notice.user.profilePicture, Empty.USER_EMPTY );
+    //     let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
     //
-    //     switch ( action ) {
+    //     switch ( notice.action ) {
     //
+    //       // 本来は reply だった
+    //       // API が comment と間違えているのでしょうがなく追加した
     //       case 'comment':
-    //         return (
-    //           <a href={article.comments.url} className="activity-link">
-    //             <div className="activity-content">
-    //             「{article.title}」へ<strong>コメント</strong>しました。
-    //             </div>
-    //             <p className="act-date">{dae.displayDate}</p>
-    //           </a>
-    //         );
-    //
     //       case 'reply':
     //         return (
-    //           <a href={article.reply.url} className="activity-link">
-    //             <div className="activity-content">
-    //               「{article.title}」の{who(article.comments.user, dae.user)}のコメントに<strong>返信</strong>しました。
+    //           <a href={notice.article.reply.url} className="info-link">
+    //             <figure className={'info-user-thumb ' + loggedIn}>
+    //               <img src={Empty.refresh(icon)} alt=""/>
+    //             </figure>
+    //             <div className="info-content">
+    //               {notice.user.userName}さんがあなたの「{notice.article.title}」へのコメントに<strong>{NoticeAction.message( notice.action )}</strong>しました。
     //             </div>
-    //             <p className="act-date">{dae.displayDate}</p>
-    //           </a>
-    //         );
-    //
-    //       case 'good':
-    //         return (
-    //           <a href={article.comments.url} className="activity-link">
-    //             <div className="activity-content">
-    //               「{article.title}」の{who(article.comments.user, dae.user)}のコメントに<strong>GOOD</strong>しました。
-    //             </div>
-    //             <p className="act-date">{dae.displayDate}</p>
+    //             <p className="act-date">{notice.displayDate}</p>
     //           </a>
     //         );
     //
     //       case 'bad':
+    //       case 'good':
     //         return (
-    //           <a href={article.comments.url} className="activity-link">
-    //             <div className="activity-content">
-    //             「{article.title}」の{who(article.comments.user, dae.user)}のコメントに<strong>BAD</strong>しました。
+    //           <a href={notice.article.comments.url} className="info-link">
+    //             <figure className={'info-user-thumb ' + loggedIn}>
+    //               <img src={icon} alt=""/>
+    //             </figure>
+    //             <div className="info-content">
+    //               {notice.user.userName}さんがあなたの「{notice.article.title}」へのコメントに<strong>{NoticeAction.message( notice.action )}</strong>しました。
     //             </div>
-    //             <p className="act-date">{dae.displayDate}</p>
+    //             <p className="act-date">{notice.displayDate}</p>
     //           </a>
     //         );
     //
-    //       case 'bookmark':
+    //       case 'notice':
     //         return (
-    //           <a href={article.url} className="activity-link">
+    //           <a href={notice.url} className="info-link">
     //             <div className="activity-content">
-    //               「{article.title}」を<strong>ブックマーク</strong>しました。
+    //               {notice.body}
     //             </div>
-    //             <p className="act-date">{dae.displayDate}</p>
+    //             <p className="act-date">{notice.displayDate}</p>
     //           </a>
     //         );
     //
     //       default:
-    //         // console.warn(`illegal action.${action}`);
+    //         // console.warn(`illegal action.${notice.action}`);
     //         return null;
     //
     //     }
@@ -377,8 +366,13 @@ export default class ViewActivities extends View {
     //   }
     // } );
     //
-    // let ActivitiesDom = React.createClass( {
+    // // --------------------------------------------
+    // // お知らせ親
+    // // --------------------------------------------
+    // // ReactClass
+    // let NotificationsDom = React.createClass( {
     //   propType: {
+    //     // 表示リスト
     //     list: React.PropTypes.array.isRequired,
     //     // request offset
     //     offset: React.PropTypes.number.isRequired,
@@ -399,14 +393,15 @@ export default class ViewActivities extends View {
     //   render: function() {
     //
     //     return (
-    //       <div className="activity">
-    //         <ul className="activity-list">
+    //
+    //       <div className="info">
+    //         <ul className="info-list">
     //           {
     //             // loop start
     //             this.state.list.map( function( dae ) {
     //
     //               return (
-    //                 <li key={'activity-' + dae.id} className={'board-stacks activity-item activity-item-' + dae.id}>
+    //                 <li key={'info-' + dae.id} className={'info-item info-item-' + dae.id}>
     //                   <MessageDom dae={dae} />
     //                 </li>
     //               );
@@ -417,14 +412,20 @@ export default class ViewActivities extends View {
     //     );
     //
     //   },
+    //   // did mount
+    //   // hasNext を元に More View button の表示非表示を決める
     //   componentDidMount: function() {
-    //     // hasNext を元に More View button の表示非表示を決める
-    //     moreButton( this.props.action.hasNext(), this.props.action );
     //     // console.log( 'hasNext ', this.props.action.hasNext() );
+    //     _this.onMount();
+    //     moreButton( this.props.action.hasNext(), this.props.action );
     //   },
+    //   /*
     //   componentWillUnMount: function() {
     //
     //   },
+    //   */
+    //   // 外部呼び出し口
+    //   // instance を使い update します
     //   updateList: function( list, offset, length ) {
     //     this.setState( { list: list, offset: offset, length: length } );
     //     // hasNext を元に More View button の表示非表示を決める
@@ -446,14 +447,13 @@ export default class ViewActivities extends View {
     //
     // // 通知
     // this.executeSafely( View.BEFORE_RENDER, articlesList );
-    // // console.log( 'articlesList ', articlesList );
     //
     // // this._articleRendered が null の時だけ ReactDOM.render する
     // if ( this._articleRendered === null ) {
     //
     //   // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
     //   this._articleRendered = ReactDOM.render(
-    //     React.createElement( ActivitiesDom, { list: articlesList, offset: this._request.offset, length: this._request.length, action: this.action } ),
+    //     React.createElement( NotificationsDom, { list: articlesList, offset: this._request.offset, length: this._request.length, action: this.action } ),
     //     element
     //   );
     //
@@ -464,27 +464,72 @@ export default class ViewActivities extends View {
     //   this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
     //
     // }
-    // console.log('ViewActivities.render', articles);
+
     // 既存データ用のglobal配列
     const articlesList = this._articles;
     // 前回までの配列length
     // sequence な index のために必要
     const prevLast = this._articles.length;
-    // ------------------------------------------------
-    // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
     articles.map((article, i) => {
       article.index = prevLast + i;
-      articlesList.push(article);
+      articlesList.push( article );
       return article;
     });
-    // output
+    // console.log('ViewNotifications.render articlesList', articlesList);
     ReactDOM.render(
-      <ComponentActivities
+      <ComponentNotifications
         list={articlesList}
-        callback={this.afterUpdate}
+        afterUpdate={this.afterUpdate}
+        afterMount={this.onMount}
       />,
       this.element,
     );
+
+    // 読み込みが終わったら 既読 にする
+    this.clear();
+  }
+  /**
+   * NoticeStatus.UPDATE_COUNT event handler
+   * @param {Object} event NoticeStatus.UPDATE_COUNT event object, event.count が 0 以外の時に reload します
+   */
+  onNoticeUpdate(event) {
+    // お知らせ件数が0の時はreloadしない
+    if (event.count !== 0) {
+      this.reload();
+    }
+  }
+  /**
+   * 再読み込み
+   */
+  reload() {
+    // 既存リストを空にする
+    this._articles = [];
+    // ajax start
+    this.action.reload();
+  }
+  /**
+   * 既読にする
+   */
+  clear() {
+    this.modelNotice.start();
+  }
+  /**
+   * NoticeStatus.UPDATE_COUNT unbind
+   */
+  dispose() {
+    this.status.off(NoticeStatus.UPDATE_COUNT, this.onNoticeUpdate);
+  }
+  /**
+   * main dom が mount されたら呼び出されます
+   * componentDidMount callback
+   */
+  onMount() {
+    // console.log('ViewNotifications.onMount');
+    // const status = NoticeStatus.factory();
+    // this.status = status;
+    this.dispose();
+    // お知らせカウントがアップデートされたら再読み込みを行うので bind する
+    this.status.on(NoticeStatus.UPDATE_COUNT, this.onNoticeUpdate);
   }
   /**
    * {@link ComponentActivities} 更新後に実行される callback - more button 表示・非表示します
@@ -497,7 +542,7 @@ export default class ViewActivities extends View {
   /**
    * {@link ComponentMypageMoreButton} 出力します
    * @param {boolean} show true: 表示します
-   * @since 2017-12-14
+   * @since 2017-12-
    */
   moreButton(show = false) {
     // console.log('ViewActivities.moreButton', show);

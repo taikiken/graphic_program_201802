@@ -25,7 +25,7 @@ export class ActivityDae {
    * @param {Object} activity アクティビティ一覧
    */
   constructor(activity) {
-    activity = Safety.object(activity);
+    const altActivity = Safety.object(activity);
     // // date check
     // if (Safety.check(activity, 'date')) {
     //   /**
@@ -41,26 +41,26 @@ export class ActivityDae {
      * @deprecated instead use article.display_date
      * @type {string}
      */
-    this.formatDate = Safety.check(activity, 'date') ? Format.date(activity.date) : '';
+    this.formatDate = Safety.check(altActivity, 'date') ? Format.date(altActivity.date) : '';
     /**
      * アクティビティ一覧 配列 1 data
      * @type {Object}
      * @protected
      */
-    this._activity = activity;
+    this._activity = altActivity;
     /**
      * activity.user
      * @type {UserDae}
      * @protected
      */
-    this._user = new UserDae(activity.user);
+    this._user = new UserDae(altActivity.user);
     // article
     /**
      * activity.article
      * @type {NoticeArticleDae}
      * @protected
      */
-    this._article = new NoticeArticleDae(activity.article);
+    this._article = new NoticeArticleDae(altActivity.article);
     /**
      * 添え字
      * @type {number}

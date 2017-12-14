@@ -101,7 +101,7 @@ import ViewLogout from './view/login/ViewLogout';
 import ViewUserProfile from './view/mypage/ViewUserProfile';
 import {ViewBookmarks} from './view/mypage/ViewBookmarks';
 import ViewActivities from './view/mypage/ViewActivities';
-import {ViewNotifications} from './view/mypage/ViewNotifications';
+import ViewNotifications from './view/mypage/ViewNotifications';
 
 // settings
 import ViewSettingsIndex from './view/settings/ViewSettingsIndex';
