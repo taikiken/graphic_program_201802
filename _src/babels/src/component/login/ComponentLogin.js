@@ -32,6 +32,7 @@ const React = self.React;
  * - {@link ModelLogin} - ログイン処理 API
  * - {@link ComponentError} - error 表示
  * - {@link ErrorTxt} - error message 定義
+ * @since 2017-12-14
  */
 export default class ComponentLogin extends React.Component {
   // ---------------------------------------------------

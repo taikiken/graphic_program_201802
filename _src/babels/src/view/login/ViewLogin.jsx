@@ -59,7 +59,7 @@ const ReactDOM = self.ReactDOM;
 /**
  * Login from を表示します
  */
-export class ViewLogin extends View {
+export default class ViewLogin extends View {
   /**
    * login form を表示し action/login/Login を行います
    * @param {Element} element root element

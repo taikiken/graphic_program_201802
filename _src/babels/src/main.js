@@ -94,13 +94,13 @@ import SignupWizard from './view/signup/SignupWizard';
 import ViewDeactivate from './view/signup/ViewDeactivate';
 
 // login
-import {ViewLogin} from './view/login/ViewLogin';
+import ViewLogin from './view/login/ViewLogin';
 import ViewLogout from './view/login/ViewLogout';
 
 // mypage
 import ViewUserProfile from './view/mypage/ViewUserProfile';
 import {ViewBookmarks} from './view/mypage/ViewBookmarks';
-import {ViewActivities} from './view/mypage/ViewActivities';
+import ViewActivities from './view/mypage/ViewActivities';
 import {ViewNotifications} from './view/mypage/ViewNotifications';
 
 // settings

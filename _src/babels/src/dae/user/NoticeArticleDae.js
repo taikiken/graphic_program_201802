@@ -22,75 +22,73 @@ export class NoticeArticleDae {
    * お知らせ 記事情報 JSON response.notifications.article
    * @param {Object} [article={}] お知らせ 記事情報
    */
-  constructor( article:Object = {} ) {
-
-    article = Safety.object( article );
+  constructor(article = {}) {
+    const altArticle = Safety.object(article);
     /**
      * response.notifications.article
      * @type {Object}
      * @protected
      */
-    this._article = article;
+    this._article = altArticle;
     /**
      * response.notifications.article.comment
      * @type {PopularDae}
      * @protected
      */
-    this._comment = new PopularDae( article.comment );
+    this._comment = new PopularDae(altArticle.comment);
     /**
      * response.notifications.article.comments
      * @type {PopularDae}
      * @protected
      */
-    this._comments = new PopularDae( article.comments );
+    this._comments = new PopularDae(altArticle.comments);
     /**
      * response.notifications.article.reply
      * @type {PopularDae}
      * @protected
      */
-    this._reply = new PopularDae( article.reply );
-
+    this._reply = new PopularDae(altArticle.reply);
   }
   /**
    * response.notifications.article
-   * @return {Object|*} お知らせ 記事情報 を返します
+   * @return {Object} お知らせ 記事情報 を返します
    */
-  get article():Object {
+  get article() {
     return this._article;
   }
   /**
    * article.title
    * @return {string} 記事タイトル を返します
    */
-  get title():string {
+  get title() {
     return this.article.title;
   }
   /**
    * article.url
    * @return {string} 記事 url を返します
    */
-  get url():string {
+  get url() {
     return this.article.url;
   }
   /**
    * article.comment
-   * @return {PopularDae|*} article.comment を返します
+   * @return {PopularDae} article.comment を返します
    */
-  get comment():PopularDae {
+  get comment() {
     return this._comment;
   }
   /**
    * article.comment
-   * @return {PopularDae|*} article.comment を返します
+   * @return {PopularDae} article.comment を返します
    */
-  get comments():PopularDae {
+  get comments() {
     return this._comments;
   }
   /**
    * article.reply
-   * @return {PopularDae|*} article.reply を返します
+   * @return {PopularDae} article.reply を返します
    */
-  get reply():PopularDae {
+  get reply() {
     return this._reply;
   }
 }
