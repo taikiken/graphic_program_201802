@@ -136,16 +136,16 @@ if ($_GET["cid"] != 94 && $_GET["rid"] != 95)
 	* 注目の選手の広告設定
 	*/
   $a[]=array("head","注目の選手バナー画像設定：（親＞子）カテゴリー ＞ 注目の選手 で継承されますが、子要素の指定は優先されます");
-  $a[]=array("inputradio","バナー表示","focus_bannerflag",array("親の表示設定を継承する","個別にバナーを設定する","バナーを表示しない"));
-  $a[]=array("textfield","ALTテキスト（共通）","focus_bannertext","70","","","");
-  $a[]=array("img","PCバナー画像","focus_pc_bannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
-  $a[]=array("textfield","PCリンク先","focus_pc_bannerlink","100","","","");
-  $a[]=array("img","スマホバナー画像","focus_sp_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
-  $a[]=array("textfield","スマホリンク先","focus_sp_bannerlink","100","","","");
-  $a[]=array("img","iOSバナー画像","focus_ios_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
-  $a[]=array("textfield","iOSリンク先","focus_ios_bannerlink","100","","","");
-  $a[]=array("img","Androidバナー画像","focus_android_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
-  $a[]=array("textfield","Androidリンク先","focus_android_bannerlink","100","","","");
+  $a[]=array("inputradio","バナー表示","pickupplayer_bannerflag",array("親の表示設定を継承する","個別にバナーを設定する","バナーを表示しない"));
+  $a[]=array("textfield","ALTテキスト（共通）","pickupplayer_bannertext","70","","","");
+  $a[]=array("img","PCバナー画像","pickupplayer_pc_bannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("textfield","PCリンク先","pickupplayer_pc_bannerlink","100","","","");
+  $a[]=array("img","スマホバナー画像","pickupplayer_sp_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("textfield","スマホリンク先","pickupplayer_sp_bannerlink","100","","","");
+  $a[]=array("img","iOSバナー画像","pickupplayer_ios_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("textfield","iOSリンク先","pickupplayer_ios_bannerlink","100","","","");
+  $a[]=array("img","Androidバナー画像","pickupplayer_android_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("textfield","Androidリンク先","pickupplayer_android_bannerlink","100","","","");
 
 
 function output(){
