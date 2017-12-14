@@ -124,12 +124,11 @@ while($f=$o->fetch_array()){
 
 
   </select>
+    　｜
   </li>
-
-  <?php } if ($_GET["rid"] == 95) { ?>
-    <div align="right">
-      <a href="../ad/edit/?nid=0&rid=95">デフォルト広告設定</a>
-    </div>
+  <li>
+    <a href="../ad/edit/?nid=0&rid=95">デフォルト広告設定</a>
+  </li>
   <?php } ?>
 <?php }elseif($CURRENTDIRECTORY=="repo_e"){ ?>
 
@@ -158,7 +157,7 @@ while($f=$o->fetch_array()){
 <?php }elseif($CURRENTDIRECTORY=="repo_s"){ ?>
   <?php if ($_GET["rid"] == 95) { ?>
     <div align="right">
-        <a href="../ad/edit/?nid=0&cid=95">デフォルト広告設定</a>
+      <a href="../ad/edit/?nid=10−0&cid=95">デフォルト広告設定</a>
     </div>
   <?php } ?>
 <?php }elseif($CURRENTDIRECTORY=="mail_"){ ?>
