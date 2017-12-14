@@ -571,11 +571,7 @@
         }
     });
 </script>
-<<<<<<< HEAD
-<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js" data-label="<?php echo $page['player']->body->name?>"></script>
-=======
-<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js?v=<?php echo $page['version']; ?>" data-label="CRAZY ATHLETES"></script>
->>>>>>> master
+<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js?v=<?php echo $page['version']; ?>" data-label="<?php echo $page['player']->body->name?>"></script>
 </body>
 </html>
 <?php
