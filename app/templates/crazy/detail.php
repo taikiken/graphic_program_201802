@@ -222,10 +222,10 @@
                 // 記事一覧: pc banner
 
                 ?>
-                <a href="<?php echo $page['banner']['player_banner']['pc']['pc_bannerlink']; ?>" target="_blank"
-                   onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['player_banner']['pc']['link']; ?>', true);"><img
-                    src="<?php echo $page['banner']['player_banner']['pc']['pc_bannerimg']; ?>"
-                    alt="<?php echo $page['banner']['player_banner']['bannertext'] ?>"></a>
+                <a href="<?php echo $page['banner']['banner']['pc']['link']; ?>" target="_blank"
+                   onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['banner']['pc']['link']; ?>', true);"><img
+                    src="<?php echo $page['banner']['banner']['pc']['image']; ?>"
+                    alt="<?php echo $page['banner']['banner']['pc']['text']; ?>"></a>
 
                 <?php
 

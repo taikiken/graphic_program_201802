@@ -222,10 +222,10 @@
                 // 記事一覧: sp banner
 
                 ?>
-                <a href="<?php echo $page['banner']['player_banner']['sp']['sp_bannerlink']; ?>" target="_blank"
-                   onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['sp']['link']; ?>', true);"><img
-                    src="<?php echo $page['banner']['player_banner']['sp']['sp_bannerimg']; ?>"
-                    alt="<?php echo $page['banner']['player_banner']['bannertext'] ?>"></a>
+                <a href="<?php echo $page['banner']['banner']['sp']['link']; ?>" target="_blank"
+                   onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['banner']['sp']['link']; ?>', true);"><img
+                    src="<?php echo $page['banner']['banner']['sp']['image']; ?>"
+                    alt="<?php echo $page['banner']['banner']['sp']['text']; ?>"></a>
 
                 <?php
 

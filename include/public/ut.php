@@ -369,16 +369,6 @@ function set_advertise($ad,$type){
 	$s["theme"]["background_color"]=strlen($ad["bgcolor"])>0?$ad["bgcolor"]:"";
 	$s["is_show_filter"]=!$ad["sp_showfilter"]?true:false;
 
-  $s["player_banner"]["bannertext"] = !empty($ad["bannertext"]) ? $ad["bannertext"] : '';
-  $s["player_banner"]["pc"]["pc_bannerimg"] = !empty($ad["pc_bannerimg"]) ? $ImgPath . '/img/' . $ad["pc_bannerimg"] : '';
-  $s["player_banner"]["sp"]["sp_bannerimg"] = !empty($ad["sp_bannerimg"]) ? $ImgPath . '/img/' . $ad["sp_bannerimg"] : '';
-  $s["player_banner"]["ios"]["ios_bannerimg"] = !empty($ad["ios_bannerimg"]) ? $ImgPath . '/img/' . $ad["ios_bannerimg"] : '';
-  $s["player_banner"]["android"]["android_bannerimg"] = !empty($ad["android_bannerimg"]) ? $ImgPath . '/img/' . $ad["android_bannerimg"] : '';
-  $s["player_banner"]["pc"]["pc_bannerlink"] = !empty($ad["pc_bannerlink"]) ? $ad["pc_bannerlink"] : '';
-  $s["player_banner"]["sp"]["sp_bannerlink"] = !empty($ad["sp_bannerlink"]) ? $ad["sp_bannerlink"] : '';
-  $s["player_banner"]["ios"]["ios_bannerlink"] = !empty($ad["ios_bannerlink"]) ? $ad["ios_bannerlink"] : '';
-  $s["player_banner"]["android"]["android_bannerlink"] = !empty($ad["android_bannerlink"]) ? $ad["android_bannerlink"] : '';
-
 	$listordetail=$type=="detail"?"abody":"";
 	$bannertype=array("pc","sp","ios","android");
 
@@ -479,6 +469,33 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 
 	for($i=0;$i<count($ad);$i++){
 
+    if (isset($playerid))
+    {
+      $ad["bannerflag"] = $ad["player_bannerflag"];
+      $ad["bannertext"] = $ad["player_bannertext"];
+      $ad["pc_bannerimg"] = $ad["player_pc_bannerimg"];
+      $ad["sp_bannerimg"] = $ad["player_sp_bannerimg"];
+      $ad["ios_bannerimg"] = $ad["player_ios_bannerimg"];
+      $ad["android_bannerimg"] = $ad["player_android_bannerimg"];
+      $ad["pc_bannerlink"] = $ad["player_pc_bannerlink"];
+      $ad["sp_bannerlink"] = $ad["player_sp_bannerlink"];
+      $ad["ios_bannerlink"] = $ad["player_ios_bannerlink"];
+      $ad["android_bannerlink"] = $ad["player_android_bannerlink"];
+    }
+    if ($isgetpickupplayerbanner)
+    {
+      $ad["bannerflag"] = $ad["pickupplayer_bannerflag"];
+      $ad["bannertext"] = $ad["pickupplayer_bannertext"];
+      $ad["pc_bannerimg"] = $ad["pickupplayer_pc_bannerimg"];
+      $ad["sp_bannerimg"] = $ad["pickupplayer_sp_bannerimg"];
+      $ad["ios_bannerimg"] = $ad["pickupplayer_ios_bannerimg"];
+      $ad["android_bannerimg"] = $ad["pickupplayer_android_bannerimg"];
+      $ad["pc_bannerlink"] = $ad["pickupplayer_pc_bannerlink"];
+      $ad["sp_bannerlink"] = $ad["pickupplayer_sp_bannerlink"];
+      $ad["ios_bannerlink"] = $ad["pickupplayer_ios_bannerlink"];
+      $ad["android_bannerlink"] = $ad["pickupplayer_android_bannerlink"];
+    }
+
 		if($i==0){
 			$s["vast"]=$ad[$i]["ad_videoid"];
 			$s["ad_urlpc"]=$ad[$i]["ad_pc_videotag"];
@@ -540,19 +557,6 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 				elseif($ad[$i]["abodybannerflag"]==2)$s[$_abodybanner[$j]]="";
 			}
 		}
-
-    if (($ad[$i]["bannerflag"]) == 1)
-    {
-      $s["bannertext"] = !empty($ad[$i]["bannertext"]) ? $ad[$i]["bannertext"] : '';
-      $s["pc_bannerimg"] = !empty($ad[$i]["pc_bannerimg"]) ? $ad[$i]["pc_bannerimg"] : '';
-      $s["sp_bannerimg"] = !empty($ad[$i]["sp_bannerimg"]) ? $ad[$i]["sp_bannerimg"] : '';
-      $s["ios_bannerimg"] = !empty($ad[$i]["ios_bannerimg"]) ? $ad[$i]["ios_bannerimg"] : '';
-      $s["android_bannerimg"] = !empty($ad[$i]["android_bannerimg"]) ? $ad[$i]["android_bannerimg"] : '';
-      $s["pc_bannerlink"] = !empty($ad[$i]["pc_bannerlink"]) ? $ad[$i]["pc_bannerlink"] : '';
-      $s["sp_bannerlink"] = !empty($ad[$i]["sp_bannerlink"]) ? $ad[$i]["sp_bannerlink"] : '';
-      $s["ios_bannerlink"] = !empty($ad[$i]["ios_bannerlink"]) ? $ad[$i]["ios_bannerlink"] : '';
-      $s["android_bannerlink"] = !empty($ad[$i]["android_bannerlink"]) ? $ad[$i]["android_bannerlink"] : '';
-    }
 	}
 	return $s;
 }
