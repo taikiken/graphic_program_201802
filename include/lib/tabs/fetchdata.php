@@ -2,7 +2,7 @@
     <tr>
     <?php
     
-    $sql=sprintf("select name from u_categories where id = %s", $p[$i]["categories_id"]);
+    $sql=sprintf("select name from u_categories where id = %s", $p[$i]["category_id"]);
     $o->query($sql);
     $c_name=$o->fetch_array()["name"];
     

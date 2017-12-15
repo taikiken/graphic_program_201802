@@ -32,7 +32,6 @@ if($q->get_dir()===0){
             
         } else {
             $sv[$sn[]="n"]=sprintf("(select max(n)+1 as n from %s)",$TABLE);
-            $o->query($sql);
         }
 
         $sv[$sn[]="flag"]=1;

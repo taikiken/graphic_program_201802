@@ -13,7 +13,7 @@
     <th scope="col" width="35" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">NG</th>
   <?php } ?>
 
-  <th scope="col" class="t_title"><?php if($TABLE!="tabs")$THIS; ?>タイトル</th>
+  <th scope="col" class="t_title"><?php if($TABLE!="tabs") echo $THIS; ?>タイトル</th>
         <?php if($CURRENTDIRECTORY == "photo"){?>
             <th scope="col" width="55" align="center" class="t_edit<?php if(getSorC("edit")!=1){ ?>_disabled<?php } ?>">画像一覧</th>
         <?php }else{?>
