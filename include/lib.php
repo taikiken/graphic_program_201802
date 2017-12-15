@@ -150,7 +150,7 @@ elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 94 && !preg_match("#/ph
 
 	$sql = sprintf("SELECT COUNT(*) AS n FROM %s%s%s%s", $TABLE, $WHERE, $exuser, $excategory);
 
-}elseif($CURRENTDIRECTORY=="notice"){
+}else{
 	$sql=sprintf("select count(*) as n from %s%s",$TABLE,$WHERE);
 }
 
