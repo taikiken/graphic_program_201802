@@ -171,6 +171,9 @@ SQL;
 if (!empty($f))
 {
   // 定数
+  $domain = "https://" . $_SERVER["HTTP_HOST"];
+  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
+
   $type = $f['type'];
   $text_color = ['#333333', '#333333', ''];
   $background_color = ['#ffffff', '#ffcccc', ''];
@@ -180,9 +183,6 @@ if (!empty($f))
     '',
   ];
   $disp_type = ['notice', 'warning', 'img'];
-
-  $domain = "https://" . $_SERVER["HTTP_HOST"];
-  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
 
   $platform_prefix_list = [
     'pc' 			=> '',
@@ -213,12 +213,10 @@ if (!empty($f))
 }
 else
 {
-  $information = null;
+  $information_list = null;
 }
 
-$categoriesinfo['information'] = $information_list;
-
-$y["response"]=$categoriesinfo;
+$y['response']['information'] = $information_list;
 
 print_json($y,$_SERVER['HTTP_REFERER']);
 
