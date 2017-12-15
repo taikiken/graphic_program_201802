@@ -42,9 +42,19 @@ if($q->get_dir()!=2){
 }
 
 $a[] = array("textfield", "お知らせ内容", "text", "120");
-$a[] = array("textfield", "Link", "link", "120");
-//$a[] = array("textfield", "画像", "img", "120");
-$a[] = array("img", "画像", "img", "780-780-0-0-0-0", "", "", "");
+
+$a[] = array("textfield", "PC Link", "link", "120");
+$a[] = array("img", "PC画像", "img", "780-780-0-0-0-0", "", "", "");
+
+$a[] = array("textfield", "SP Link", "sp_link", "120");
+$a[] = array("img", "SP画像", "sp_img", "780-780-0-0-0-0", "", "", "");
+
+$a[] = array("textfield", "iOS Link", "ios_link", "120");
+$a[] = array("img", "iOS画像", "ios_img", "780-780-0-0-0-0", "", "", "");
+
+$a[] = array("textfield", "android Link", "android_link", "120");
+$a[] = array("img", "android画像", "android_img", "780-780-0-0-0-0", "", "", "");
+
 include $INCLUDEPATH . "print_write.php";
 include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/categories.php";
 
