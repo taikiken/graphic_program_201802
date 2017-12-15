@@ -47,7 +47,7 @@ $urev["同志社大学"]=array("id"=>8,"name"=>"同志社");
 
 $urev["近畿大学"]=array("id"=>9,"name"=>"近畿大");
 $urev["神戸大学"]=array("id"=>10,"name"=>"神戸大");
-$urev["日本大学"]=array("id"=>10,"name"=>"日本大");
+$urev["日本大学"]=array("id"=>11,"name"=>"日本大");
 
 $univ["関東学生3部選抜"]=array("id"=>12,"name"=>"関東学生3部選抜");
 $univ["関西学生Div.3選抜"]=array("id"=>13,"name"=>"関西学生Div.3選抜");
