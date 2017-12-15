@@ -274,7 +274,7 @@ let Step2FormNode = React.createClass( {
                 className="setting-form-picture form-input"
               />
             </div>
-            <ErrorNode message={message('profile_picture')} />
+            <ComponentError message={message('profile_picture')} />
           </div>
         </div>
 

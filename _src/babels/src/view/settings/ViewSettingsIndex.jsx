@@ -55,11 +55,12 @@ export default class ViewSettingsIndex extends View {
    */
   constructor(element, option = {}) {
     super(element, option);
-
+    // ---
+    const boundError = this.error.bind(this);
     const callbacks = {};
     callbacks[Model.COMPLETE] = this.complete.bind(this);
-    // callbacks[Model.UNDEFINED_ERROR] = boundError;
-    // callbacks[Model.RESPONSE_ERROR] = boundError;
+    callbacks[Model.UNDEFINED_ERROR] = boundError;
+    callbacks[Model.RESPONSE_ERROR] = boundError;
     /**
      * コールバック関数を設定する Object
      * @type {{}}
@@ -89,19 +90,22 @@ export default class ViewSettingsIndex extends View {
   complete(result) {
     this.render(result);
   }
-  // /**
-  //  * Ajax response error
-  //  * @param {Error} error Error instance
-  //  */
-  // error( error ):void {
-  //   // console.warn( 'setting index error ', error );
-  // }
+  /**
+   * Ajax response error
+   * @param {Error} error Error instance
+   */
+  error(error) {
+    this.executeSafely(View.RESPONSE_ERROR, error);
+    // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+    // this.showError( error.message );
+    console.warn('ViewSettingsIndex.error', error);
+  }
   /**
    * form 出力
    * @param {UserDae} dae アカウント情報
    */
   render(dae) {
-    // console.log( 'ViewSettingsIndex render ', dae, this.element );
+    console.log( 'ViewSettingsIndex render ', dae, this.element );
     ReactDOM.render(
       <SettingsIndexNode
         email={dae.email}

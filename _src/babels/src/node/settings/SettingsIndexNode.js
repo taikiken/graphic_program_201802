@@ -184,7 +184,7 @@ let SettingInputNode = React.createClass( {
 
     }
 
-    // console.log( 'imgStyle ', imgStyle );
+    console.log( 'SettingInputNode.imgStyle ', imgStyle );
 
     return (
       <form ref="settings" className={'loading-root ' + this.state.loading} encType="multipart/form-data" onSubmit={this.submitHandler}>
@@ -276,7 +276,7 @@ let SettingInputNode = React.createClass( {
                   className="setting-form-picture form-input"
                 />
               </div>
-              <ErrorNode message={message('profile_picture')} />
+              <ComponentError message={message('profile_picture')} />
             </div>
           </div>
         </fieldset>
