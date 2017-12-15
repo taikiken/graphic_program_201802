@@ -105,7 +105,7 @@ export default class ViewSettingsIndex extends View {
    * @param {UserDae} dae アカウント情報
    */
   render(dae) {
-    console.log( 'ViewSettingsIndex render ', dae, this.element );
+    // console.log( 'ViewSettingsIndex render ', dae, this.element );
     ReactDOM.render(
       <SettingsIndexNode
         email={dae.email}

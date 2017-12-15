@@ -184,7 +184,7 @@ let SettingInputNode = React.createClass( {
 
     }
 
-    console.log( 'SettingInputNode.imgStyle ', imgStyle );
+    // console.log( 'SettingInputNode.imgStyle ', imgStyle );
 
     return (
       <form ref="settings" className={'loading-root ' + this.state.loading} encType="multipart/form-data" onSubmit={this.submitHandler}>
