@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2017/12/15 - 14:43
+ * @date 2017/12/15 - 17:10
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -9,11 +9,11 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-import { Empty } from '../../app/const/Empty';
-import { Safety } from '../../data/Safety';
-import ComponentBookmarkButton from './bookmark/ComponentBookmarkButton';
-import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
-import { ArticleDae } from '../../dae/ArticleDae';
+import { ArticleDae } from '../../../dae/ArticleDae';
+import { Empty } from '../../../app/const/Empty';
+import { Safety } from '../../../data/Safety';
+import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import ComponentBookmarkButton from '../../../component/mypage/bookmark/ComponentBookmarkButton';
 
 /**
  * [library] - React
@@ -21,12 +21,11 @@ import { ArticleDae } from '../../dae/ArticleDae';
 const React = self.React;
 
 /**
- * mypage bookmark 一覧を出力します
+ * SP: mypage bookmark 一覧を出力します
  * - {@link ComponentBookmarkButton}
  * - {@link ComponentCategoryLabels}
- * @since 2017-12-15
  */
-export default class ComponentBookmarks extends React.Component {
+export default class SPComponentBookmarks extends React.Component {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -85,7 +84,7 @@ export default class ComponentBookmarks extends React.Component {
     this.props.callback();
   }
   /**
-   * mypage bookmark 一覧 を出力します
+   * SP: mypage bookmark 一覧 を出力します
    * @returns {?XML} `div.bookmarks`
    */
   render() {
@@ -93,10 +92,9 @@ export default class ComponentBookmarks extends React.Component {
     if (!list.length) {
       return null;
     }
-    // ---
     return (
       <div className="bookmarks">
-        <ul className="board-small">
+        <ul className="board">
           {
             list.map((dae, idx) => {
               const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
@@ -105,10 +103,6 @@ export default class ComponentBookmarks extends React.Component {
                   key={`bookmarks-${dae.id}`}
                   className="board-stacks board-item"
                 >
-                  <ComponentBookmarkButton
-                    id={`${dae.id}`}
-                    bookmarked={dae.isBookmarked}
-                  />
                   <a href={dae.url} className="post">
                     <figure className="post-thumb">
                       <img src={thumbnail} alt={dae.title}/>
@@ -125,6 +119,10 @@ export default class ComponentBookmarks extends React.Component {
                       <p className="post-date">{dae.displayDate}</p>
                     </div>
                   </a>
+                  <ComponentBookmarkButton
+                    id={`${dae.id}`}
+                    bookmarked={dae.isBookmarked}
+                  />
                 </li>
               );
             })

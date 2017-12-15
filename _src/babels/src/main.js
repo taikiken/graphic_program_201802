@@ -164,7 +164,7 @@ import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking'
 
 // mypage
 import SPViewUserProfile from './sp/view/mypage/SPViewUserProfile';
-import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
+import SPViewBookmarks from './sp/view/mypage/SPViewBookmarks';
 
 /**
  * スポーツブル ライブラリ

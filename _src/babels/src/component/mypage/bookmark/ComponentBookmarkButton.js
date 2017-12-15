@@ -104,7 +104,7 @@ export default class ComponentBookmarkButton extends React.Component {
    */
   onDone() {
     // loading 解除, 表示更新
-    console.log('ComponentBookmarkButton.onDone');
+    // console.log('ComponentBookmarkButton.onDone');
     this.setState({ loading: '', bookmarked: !this.state.bookmarked });
   }
   /**
@@ -113,7 +113,7 @@ export default class ComponentBookmarkButton extends React.Component {
    */
   onFail() {
     // loading 解除
-    console.log('ComponentBookmarkButton.onFail');
+    // console.log('ComponentBookmarkButton.onFail');
     this.setState({ loading: '' });
   }
   /**
