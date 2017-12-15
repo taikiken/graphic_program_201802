@@ -32,9 +32,8 @@ export class ArticleDae {
    *
    * @param {Object} [article={}] articles配列にセットされている article 記事1件データ
    */
-  constructor( article:Object = {} ) {
-
-    article = Safety.object( article );
+  constructor(article = {}) {
+    article = Safety.object(article);
     /**
      * 取得 JSON articles 配列にセットされている article 記事1件データ
      * @type {Object}
@@ -67,51 +66,51 @@ export class ArticleDae {
      * @type {CategoriesDae}
      * @protected
      */
-    this._categories = new CategoriesDae( article );
+    this._categories = new CategoriesDae(article);
     /**
      * article.media
      * @type {MediaDae}
      * @protected
      */
-    this._media = new MediaDae( article.media );
+    this._media = new MediaDae(article.media);
     /**
      * article.user
      * @type {UserDae}
      * @protected
      */
-    this._user = new UserDae( article.user );
+    this._user = new UserDae(article.user);
     /**
      * article.comments_popular
      * @type {CommentsPopularDae}
      * @protected
      */
-    this._popular = new CommentsPopularDae( article.comments_popular );
+    this._popular = new CommentsPopularDae(article.comments_popular);
     
-    // 整数へ型変換, Safety.integer が Number型のみ受け付けるため
-    let commentsCount = parseInt( article.comments_count, 10 );
+    // 整数へ型変換, Safety.integer が number型のみ受け付けるため
+    let commentsCount = parseInt(article.comments_count, 10);
     // 数値を保証
-    commentsCount = Safety.integer( commentsCount, 0 );
+    commentsCount = Safety.integer(commentsCount, 0);
     /**
      * <p>コメント数</p>
      * article.comments_count
-     * @type {Number}
+     * @type {number}
      * @protected
      */
     this._commentsCount = commentsCount;
 
-    // date check
-    if ( Safety.check( article, 'date' ) ) {
-
-      /**
-       * <p>出力形式日付</p>
-       * article.date
-       * @deprecated instead use article.display_date
-       * @type {string}
-       * @protected
-       */
-      this._formatDate = Format.date( article.date );
-
-    }
+    // // date check
+    // if (Safety.check(article, 'date')) {
+    //
+    //   /**
+    //    * <p>出力形式日付</p>
+    //    * article.date
+    //    * @deprecated instead use article.display_date
+    //    * @type {string}
+    //    * @protected
+    //    */
+    //   this._formatDate = Format.date( article.date );
+    //
+    // }
     /**
      * フラッグ<br>
      * **未使用**
@@ -131,26 +130,26 @@ export class ArticleDae {
   //  METHOD
   // ---------------------------------------------------
   /**
-   * index Number<br>
+   * index number<br>
    * -1 の時は未設定なので使用してはいけない
    * @default -1
-   * @return {Number|*|Number} index Number を返します
+   * @return {number} index number を返します
    */
-  get index():Number {
+  get index() {
     return this._index;
   }
   /**
-   * index Number を設定します
-   * @param {Number} index index Number
+   * index number を設定します
+   * @param {number} index index number
    */
-  set index( index:Number ):void {
+  set index(index) {
     this._index = index;
   }
   /**
    * 記事単1データ
-   * @return {Object|*} article 記事単1データ を返します
+   * @return {Object} article 記事単1データ を返します
    */
-  get article():Object {
+  get article() {
     return this._article;
   }
   // /**
@@ -172,61 +171,61 @@ export class ArticleDae {
   // }
   /**
    * response.categories を CategoriesDae へ
-   * @return {CategoriesDae|*} response.categories を CategoriesDae instance にし返します
+   * @return {CategoriesDae} response.categories を CategoriesDae instance にし返します
    */
-  get categories():CategoriesDae {
+  get categories() {
     return this._categories;
   }
   /**
    * alias commentsTotal
-   * @return {Number} article.comments_count を返します
+   * @return {number} article.comments_count を返します
    */
-  get commentsCount():Number {
+  get commentsCount() {
     return this.commentsTotal;
   }
   /**
    * コメント総数を調べます
-   * @return {Number|*} コメント総数を返します, article.comments_count を返します
+   * @return {number} コメント総数を返します, article.comments_count を返します
    */
-  get commentsTotal():Number {
+  get commentsTotal() {
     return this._commentsCount;
   }
   /**
    * article.comments_popular
-   * @return {CommentsPopularDae|*} article.comments_popular を返します
+   * @return {CommentsPopularDae} article.comments_popular を返します
    */
-  get commentsPopular():CommentsPopularDae {
+  get commentsPopular() {
     return this._popular;
   }
   /**
    * article.date
    * @return {string} article.date
    */
-  get date():string {
+  get date() {
     return this.article.date;
   }
-  /**
-   * article.date をフォーマット<br>
-   * 多分使わない, 代わりに displayDate を使う
-   *
-   * @deprecated instead use displayDate
-   * @return {string} article.date を日本語日付に変換し返します
-   */
-  get formatDate():string {
-    return this._formatDate;
-  }
+  // /**
+  //  * article.date をフォーマット<br>
+  //  * 多分使わない, 代わりに displayDate を使う
+  //  *
+  //  * @deprecated instead use displayDate
+  //  * @return {string} article.date を日本語日付に変換し返します
+  //  */
+  // get formatDate():string {
+  //   return this._formatDate;
+  // }
   /**
    * 画面表示日付
    * @return {string} article.display_date を返します
    */
-  get displayDate():string {
+  get displayDate() {
     return this.article.display_date;
   }
   /**
    * article.description
    * @return {string} article.description を返します
    */
-  get description():string {
+  get description() {
     return this.article.description;
   }
   /**
@@ -239,16 +238,16 @@ export class ArticleDae {
   /**
    * article.is_bookmarked<br>
    * bookmark した / してない
-   * @return {Boolean} article.is_bookmarked を返します
+   * @return {boolean} article.is_bookmarked を返します
    */
-  get isBookmarked():Boolean {
+  get isBookmarked() {
     return this.article.is_bookmarked;
   }
   /**
    * パーソナライズされたニュースは is_recommend(キー名は仮） をたてて「おすすめ」アイコンを表示する
-   * @return {Boolean} パーソナライズされたニュース の真偽値を返します
+   * @return {boolean} パーソナライズされたニュース の真偽値を返します
    */
-  get isRecommend():Boolean {
+  get isRecommend() {
     return this.article.is_recommend;
   }
   // -------------------------
@@ -256,9 +255,9 @@ export class ArticleDae {
   /**
    * New Flag, ※現在は常にFlagがたつように30日に設定
    * @since 2016-05-21
-   * @return {Boolean} New Flag の真偽値を返します
+   * @return {boolean} New Flag の真偽値を返します
    */
-  get isNew():Boolean {
+  get isNew() {
     return this.article.is_new;
   }
   // isNew 追加
@@ -267,7 +266,7 @@ export class ArticleDae {
    * article.media
    * @return {MediaDae} article.media を返します
    */
-  get media():MediaDae {
+  get media() {
     return this._media;
   }
   /**
@@ -275,28 +274,28 @@ export class ArticleDae {
    * video or image のはず
    * @return {string} article.media_type を返します
    */
-  get mediaType():string {
+  get mediaType() {
     return this.article.media_type;
   }
   /**
    * article.title
    * @return {string} article.title を返します
    */
-  get title():string {
+  get title() {
     return this.article.title;
   }
   /**
    * article.url
    * @return {string} article.url を返します
    */
-  get url():string {
+  get url() {
     return this.article.url;
   }
   /**
    * article.user
    * @return {UserDae} article.user を返します
    */
-  get user():UserDae {
+  get user() {
     return this._user;
   }
 }

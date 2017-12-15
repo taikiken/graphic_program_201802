@@ -12,7 +12,7 @@
 
 
 import View from '../../../view/View';
-import {ViewBookmarks} from '../../../view/mypage/ViewBookmarks';
+import ViewBookmarks from '../../../view/mypage/ViewBookmarks';
 
 // app
 import {Empty} from '../../../app/const/Empty';

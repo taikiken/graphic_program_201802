@@ -29,6 +29,7 @@ import {ReactionNode} from '../../node/comment/ReactionNode';
 import {SPNewsAdNode} from '../node/ad/SPNewsAdNode';
 
 import {CommentUserPlusCountNode} from '../../node/comment/CommentUserPlusCountNode';
+// import { ComponentCategoryLabels } from '../../component/categories/ComponentCategoryLabels';
 
 // React
 let React = self.React;
@@ -399,6 +400,15 @@ export let SPArchiveNode = React.createClass( {
                           index={i}
                           anotherCategories={dae.anotherCategories}
                         />
+                        {/*
+                        <ComponentCategoryLabels
+                          categories={dae.categories.all}
+                          id={`archive-label-${dae.id}`}
+                          index={i}
+                          anotherCategories={dae.anotherCategories}
+                          className="category-label-wrapper"
+                        />
+                        */}
                       </p>
                       <p className="post-date">{dae.displayDate}</p>
                       <div className="post-excerpt-text">{dae.description}</div>

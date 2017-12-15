@@ -9,13 +9,45 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+// CategoryLabelNode
 import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
+import { MediaType } from '../../app/const/MediaType';
+import { Message } from '../../app/const/Message';
 
 // app
 // import { Url } from '../../app/const/Url';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
+
+/**
+ * オススメ記事 tag
+ * @param {boolean} need オススメ記事フラッグ
+ * @returns {?XML} オススメ記事 tag
+ */
+const recommendTag = (need) => {
+  if (!need) {
+    return null;
+  }
+  // タグが必要
+  return <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
+};
+
+/**
+ * 動画記事 tag
+ * @param {string} type media type
+ * @returns {?XML} 動画記事 tag
+ */
+const movieTag = (type) => {
+  if (type === MediaType.VIDEO) {
+    return <i className="post-label_movie">Message.LABEL_MOVIE</i>;
+  }
+  return null;
+};
+
 /**
  * p.post-category を出力<br>
  * category 未設定に対応するように `CategoryLabelNode` を置換えます {@link CategoryLabelNode}
@@ -42,6 +74,9 @@ export class ComponentCategoryLabels extends React.Component {
       categories: React.PropTypes.array.isRequired,
       slug: React.PropTypes.string,
       className: React.PropTypes.string,
+      // @since 2016-12-26
+      mediaType: React.PropTypes.string,
+      recommend: React.PropTypes.bool,
       // @since 2017-09-13
       anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae),
     };
@@ -54,6 +89,9 @@ export class ComponentCategoryLabels extends React.Component {
     return {
       slug: '',
       className: 'post-category',
+      // @since 2016-12-26
+      mediaType: '',
+      recommend: false,
       // @since 2017-09-13
       anotherCategories: null,
     };
@@ -99,21 +137,36 @@ export class ComponentCategoryLabels extends React.Component {
    * @return {?XML} p.post-category を返します
    */
   render() {
-    const props = this.props;
-    const categories = props.categories;
-    const anotherCategories = props.anotherCategories;
+    const {
+      categories,
+      anotherCategories,
+      id,
+      index,
+      slug,
+      className,
+      recommend,
+      mediaType,
+    } = this.props;
+    // const categories = props.categories;
+    // const anotherCategories = props.anotherCategories;
 
     if (categories.length === 0 && (!anotherCategories || !anotherCategories.area.has)) {
       return null;
     }
 
-    const id = props.id;
-    const index = props.index;
-    const slug = props.slug || 'x';
-    const className = this.props.className;
+    // const id = props.id;
+    // const index = props.index;
+    // const slug = props.slug || 'x';
+    // const className = this.props.className;
 
     return (
-      <p className={`${className} ${className}-${slug}`}>
+      <p className={`post-category post-category-${slug || 'x'} ${className}`}>
+        {
+          recommendTag(recommend)
+        }
+        {
+          movieTag(mediaType)
+        }
         {
           /* Array<SlugDae> */
           categories.map((category, i) => {

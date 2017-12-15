@@ -28,6 +28,7 @@ let React = self.React;
  * <p>mypage bookmark button<br>
  * PC, SP 共用化するため 汎用化します</p>
  * @type {ReactClass}
+ * @deprecated 2017-12-15 instead use {@link ComponentBookmarkButton}
  */
 export let BookmarkButtonNode = React.createClass( {
   propType: {
