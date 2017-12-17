@@ -41,8 +41,8 @@
   .wrapper header {
     width: 12vw;
     text-align: center;
-    border-right: 1px solid #ccc;
-    padding: 1vw 0;
+    border-right: 1px solid #ddd;
+    padding: 1.8vw 0;
   }
 
   .wrapper header h1 {
@@ -58,13 +58,13 @@
   }
 
   .wrapper li {
-    margin-left: 1.8vw;
+    margin-left: 2vw;
   }
 
   .wrapper ul a {
     display: flex;
     align-items: center;
-    padding: 2vw 0;
+    padding: 2.5vw 0;
   }
 
   .wrapper ul a i {
@@ -72,8 +72,8 @@
     background: #0f3580;
     align-items: center;
     justify-content: center;
-    width: 6vw;
-    height: 6vw;
+    width: 6.2vw;
+    height: 6.2vw;
     border-radius: 50%;
     margin-right: .8vw;
     line-height: 0;
@@ -82,7 +82,7 @@
   .wrapper ul a i svg {
     margin: 0;
     padding: 0;
-    width: 3.5vw;
+    width: 3.6vw;
     fill: transparent;
     stroke-width: 0;
     stroke: #fff;
@@ -193,11 +193,9 @@
 </div>
 
 
-<!--
 <div class="dummy">
   <img src="https://sportsbull.jp/_/stats/stats.png" />
 </div>
--->
 
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden; left: 0; top: 0;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
