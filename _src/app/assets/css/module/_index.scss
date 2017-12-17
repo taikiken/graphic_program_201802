@@ -37,7 +37,7 @@ $z-map: (
   .focus-bnr { z-index: z(focus-bnr);}
   .stats_banner { z-index: z(stats_banner);}
 
-  //ブルちゃん、リニューアルで不要に
+  //ブルちゃん、リニューアルで不要になりました
   // .board-large {
   //   &:before,
   //   &:after {
@@ -64,7 +64,6 @@ $z-map: (
   //   }
   // }
 }
-
 
 
 
@@ -139,7 +138,7 @@ $z-map: (
       // &:nth-child(1), &:nth-child(2) {}
 
       .post {
-        height: 105px - 30;
+        height: 70px;
         padding: 0;
 
         &-thumb {}
@@ -249,11 +248,11 @@ $z-map: (
   border-top: 1px solid $border-primary-color;
   border-bottom: 1px solid $border-primary-color;
 
-  overflow:hidden;
-  overflow-x:scroll;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  overflow:hidden;
+  overflow-x:scroll;
 
   //.stats_banner__heading
   &__heading {
@@ -325,7 +324,6 @@ $z-map: (
       line-height: 1.2;
       font-size: fz(15);
     }
-
   } //.stats_banner__item
 
 

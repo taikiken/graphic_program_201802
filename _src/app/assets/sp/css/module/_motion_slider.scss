@@ -24,12 +24,11 @@
   &-slider {
     position: relative;
     width: 100%;
-    height: $pickup-height;
+    // height: $pickup-height;
     overflow: hidden;
 
     &-inner {
-      width: (560/2)+px;
-      margin: 0 auto;
+      width: 100%;
       overflow: visible;
 
       ul {
@@ -39,18 +38,18 @@
 
       li {
         float: left;
-        width: (560/2)+px;
-        border-right: 5px solid #000;
-        border-left: 5px solid #000;
 
         a {
           position: relative;
           display: block;
-          height: $pickup-anchor-heigt;
+          // height: $pickup-anchor-heigt;
           // background-color: #061533;
+
+          .overlay {
+            width: 100vw;
+          }
         }
 
-        .overlay,
         .post-comment-num {
           display: none;
 
@@ -64,47 +63,58 @@
 
           &-overview {
             position: absolute;
-            bottom: -($pickup-overview-heigt);
-            width: 100%;
-            height: $pickup-overview-heigt;
-            padding: 0.5em perCalc(20) ($posY+18)+px;
-            background-color: #061533;
+            bottom: (36/2)+px;
+
+            // position: absolute;
+            // bottom: -($pickup-overview-heigt);
+            // width: 100%;
+            // height: $pickup-overview-heigt;
+            // padding: 0.5em perCalc(20) ($posY+18)+px;
+            // background-color: #061533;
           }
 
           &-heading {
             height: 1.5em;
+            padding-left: perCalc(20, 750);
             overflow: hidden;
             color: #fff;
-            font-size: fz(26/2);
+            font-weight: bold;
+            font-size: fz(32/2);
           }
 
           &-category {
-            position: absolute;
-            bottom: $posY+px;
-            color: #fff;
-            font-size: fz(20/2);
+            // リニューアルで不要になりました
+            display: none;
+
+            // position: absolute;
+            // bottom: $posY+px;
+            // color: #fff;
+            // font-size: fz(20/2);
           }
 
           &-date,
           &-comment-num {
-            font-size: fz(20/2);
+            // リニューアルで不要になりました
+            display: none;
+
+            // font-size: fz(20/2);
           }
 
-          &-date {
-            // float: left;
-            position: absolute;
-            right: perCalc(20);
-            bottom: $posY+px;
-            color: #999;
-          }
+          // &-date {
+          //   // float: left;
+          //   position: absolute;
+          //   right: perCalc(20);
+          //   bottom: $posY+px;
+          //   color: #999;
+          // }
 
-          &-comment-num {
-            // float: right;
-            padding-left: (36/2)+px;
-            color: #fff;
-            background: url(/assets/sp/images/index/icon-hero-comment.png) 0 center no-repeat;
-            background-size: (26/2)+px;
-          }
+          // &-comment-num {
+          //   // float: right;
+          //   padding-left: (36/2)+px;
+          //   color: #fff;
+          //   background: url(/assets/sp/images/index/icon-hero-comment.png) 0 center no-repeat;
+          //   background-size: (26/2)+px;
+          // }
         }
       }
     } //.hero-slider-inner
@@ -113,43 +123,88 @@
       position: absolute;
       top: 0;
       width: 100%;
+      height: 100%;
 
       .direction {
-        a {
-          position: absolute;
-          display: block;
-          width: (80/2)+px;
-          height: (80/2)+px;
-          margin-top: ($pickup-height/2) - 20;
-          background-position: center center;
-          background-repeat: no-repeat;
-          background-size: (80/2)+px;
-          @include hide-text;
-        }
+        // リニューアルで不要になりました
+        display: none;
 
-        &-prev {
-          left: 20px;
-          background-image: url(/assets/sp/images/index/btn-slider-prev.png);
+        // a {
+        //   position: absolute;
+        //   display: block;
+        //   width: (80/2)+px;
+        //   height: (80/2)+px;
+        //   margin-top: ($pickup-height/2) - 20;
+        //   background-position: center center;
+        //   background-repeat: no-repeat;
+        //   background-size: (80/2)+px;
+        //   @include hide-text;
+        // }
 
-          // for less than 320px display device (iPhone5)
-          @media only screen and (device-width: 320px) {
-            left: 0;
-          }
-        }
+        // &-prev {
+        //   left: 20px;
+        //   background-image: url(/assets/sp/images/index/btn-slider-prev.png);
 
-        &-next {
-          right: 20px;
-          background-image: url(/assets/sp/images/index/btn-slider-next.png);
+        //   // for less than 320px display device (iPhone5)
+        //   @media only screen and (device-width: 320px) {
+        //     left: 0;
+        //   }
+        // }
 
-          // for less than 320px display device (iPhone5)
-          @media only screen and (device-width: 320px) {
-            right: 0;
-          }
-        }
+        // &-next {
+        //   right: 20px;
+        //   background-image: url(/assets/sp/images/index/btn-slider-next.png);
+
+        //   // for less than 320px display device (iPhone5)
+        //   @media only screen and (device-width: 320px) {
+        //     right: 0;
+        //   }
+        // }
       }
 
       .pager {
-        display: none;
+        position: absolute;
+        bottom: (8/2)+px;
+        left: perCalc(20, 750);
+        width: 100%;
+
+        ul {
+          letter-spacing: ls(inline-block);
+        }
+
+        li {
+          display: inline-block;
+          letter-spacing: normal;
+
+          + li {
+            margin-left: (10/2)+px;
+          }
+          // current mark
+          // @since 2017-03-28
+          &.current {
+            a {
+              background-color: $highlight-secondary-color;
+            }
+          }
+        }
+
+        a {
+          display: block;
+          width: (6/2)+px;
+          height: (6/2)+px;
+          background-color: #fff;
+          border-radius: 100%;
+          @include hide-text;
+
+          &.active,
+          &:hover {
+            background-color: $highlight-secondary-color;
+          }
+
+          transition-property: background-color;
+          transition-duration: 0.25s;
+          transition-timing-function: linear;
+        }
       }
     } //.hero-slider-control
   }

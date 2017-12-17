@@ -225,102 +225,11 @@
   // margin-top: (20/2)+px;
   // border-top: 1px solid $border-primary-color;
 
-  .board-item {
-    border-bottom: 1px solid $border-primary-color;
-    padding-right: perCalc(20);
-    padding-left: perCalc(20);
-  }
-
-  // &.column2 {
-  //   margin-top: 0;
-  //   border-top: none;
-
-  //   .board-item {
-  //     float: left;
-  //     width: 50%;
-  //     border-top: 1px solid $border-primary-color;
-  //     border-bottom: none;
-
-  //     &:nth-child(2n) {
-  //       float: right;
-  //     }
-
-  //     .post {
-  //       &-heading {
-  //         min-height: 2.6em;
-  //       }
-  //     }
-  //   }
-  // }
-
-  .post {
-    padding: (20/2)+px 0;
-    overflow: hidden;
-
-    &-heading {
-      line-height: lh(18, 14);
-    }
-
-    &-thumb {
-      float: left;
-      width: (280/2)+px;
-      height: (158/2)+px;
-      margin-right: (20/2)+px;
-      background: #ccc url(/assets/sp/images/common/thumb-noimage-16x9-s.png) center center no-repeat;
-      background-size: 100%;
-      border-radius: (6/2)+px;
-    }
-
-    &-data {
-      overflow: hidden;
-    }
-
-    // .post-label_recommend
-    &-label_recommend {
-      @extend .sp-sprite-common;
-      @include sprite( $common-icon-recommend, inline-block );
-      @include hide-text;
-      vertical-align: middle;
-      margin-right: 2px;
-    }
-
-    // .post-label_movie
-    &-label_movie {
-      @extend .sp-sprite-common;
-      @include sprite( $common-icon-movie, inline-block );
-      @include hide-text;
-      vertical-align: middle;
-      margin-right: 2px;
-    }
-
-    &-category {
-      display: inline-block;
-      // margin-top: 0.25em;
-    }
-
-    &-date {
-      margin-top: 0.25em;
-    }
-  } //.board .post
-
-  .btn-bookmark {
-    // float: right;
-    // margin-top: 20px + 18;
-    // margin-left: 10px;
-    margin-bottom: (20/2)+px;
-  }
-}
-
-
-
-
-
-// [ class^="board-" ] {
-.board {
+  //.board-item
   &-item {
     border-bottom: 1px solid $border-primary-color;
-    padding-right: perCalc(20);
-    padding-left: perCalc(20);
+    padding-right: perCalc(15);
+    padding-left: perCalc(15);
   }
 
   .post {
@@ -336,10 +245,19 @@
       }
     }
 
+    //.post-thumb
     &-thumb {
       position: relative;
+      float: left;
+      width: (280/2)+px;
+      height: (158/2)+px;
+      margin-right: (20/2)+px;
       overflow: hidden;
+      background: #ccc url(/assets/sp/images/common/thumb-noimage-16x9-s.png) center center no-repeat;
+      background-size: 100%;
+      border-radius: (6/2)+px;
 
+      //.post-thumb-overlay-movie
       &-overlay-movie {
         display: block;
         position: absolute;
@@ -350,17 +268,51 @@
       }
     }
 
-    &-data {}
-
-    &-heading {
-      line-height: lh(36, 24);
-      font-weight: bold;
-      font-size: fz(26/2);
+    //.post-data
+    &-data {
+      overflow: hidden;
     }
 
+    //.post-heading
+    &-heading {
+      height: 1em;
+      line-height: 1;
+      margin-top: (18/2)+px;
+      overflow: hidden;
+      font-weight: bold;
+      font-size: fz(32/2);
+    }
+
+    [ class*="post-label_" ] {
+      position: relative;
+      top: -1px;
+      display: inline-block;
+      margin-right: 2px;
+      vertical-align: middle;
+      @extend .sp-sprite-common;
+      @include hide-text;
+    }
+
+    // .post-label_recommend
+    &-label_recommend {
+      @include sprite( $common-icon-recommend );
+    }
+
+    // .post-label_movie
+    &-label_movie {
+      @include sprite( $common-icon-movie );
+    }
+
+    // .post-label_new
+    &-label_new {
+      @include sprite( $common-icon-new );
+    }
+
+    //.post-category
     &-category {
+      display: inline-block;
       line-height: 1em;
-      color: $highlight-color;
+      color: #888;
       font-weight: bold;
       font-size: fz(20/2);
 
@@ -370,12 +322,7 @@
 
       .category-label {
         display: inline-block;
-        //margin-left: 0.5em;
         margin-right: 0.5em;
-
-        //&:first-of-type {
-        //  margin-left: 0;
-        //}
 
         // 地域カテゴリー用アイコン付カテゴリーラベル
         // ref.https://github.com/undotsushin/undotsushin/issues/2318
@@ -396,43 +343,70 @@
             @include hide-text;
           }
         }
-      }
-    }
+      } //.category-label
+    } //.post-category
 
+    //.post-date
     &-date {
-      margin-top: .25em;
-      color: #666;
-      font-size: fz(20/2);
+      //リニューアルで不要になりました
+      display: none;
+
+      // margin-top: 0.25em;
+      // color: #666;
+      // font-size: fz(20/2);
     }
 
+    //.post-excerpt-text
     &-excerpt-text {
-      margin-top: .5em;
-      font-size: fz(22/2);
-      // break させる
-      word-break: break-all
+      //リニューアルで不要になりました
+      display: none;
+
+      // margin-top: .5em;
+      // font-size: fz(22/2);
+      // // break させる
+      // word-break: break-all
     }
-  } // .post
+  } //.board .post
+
+  .btn-bookmark {
+    // float: right;
+    // margin-top: 20px + 18;
+    // margin-left: 10px;
+    margin-bottom: (20/2)+px;
+  }
 }
 
 
 
 
 
-// headline/latest
-// ヘッドライン/新着記事
-.headline,
-.latest {
-  .board-small {
+// headline
+// ヘッドライン
+.headline {
+  padding-top: (10/2)+px;
+  background-color: #eee;
+
+  .board {
+    border-top: 1px solid $border-primary-color;
+    background-color: #fff;
+
     .board-item {
-      // &:nth-child(1), &:nth-child(2) {
-      //   border-top: none;
+      // &:last-child {
+      //   border-bottom: none;
       // }
-      &:last-child {
-        border-bottom: none;
-      }
 
       .post {
-        &-thumb {}
+        padding-top: (10/2)+px;
+        padding-bottom: (10/2)+px;
+
+        &-thumb {
+          width: (100/2)+px;
+          height: (100/2)+px;
+          margin-right: (20/2)+px;
+          background-size: 100%;
+          border-radius: (6/2)+px;
+        }
+
         &-heading {}
         &-category {}
         &-data {}
@@ -443,37 +417,6 @@
         }
       }
     } //.post-list-item
-  }
-
-  //.headline-heading
-  &-heading {
-    background-color: $highlight-secondary-color;
-    text-align: center;
-
-    //.headline-heading-title
-    &-title {
-      display: inline-block;
-      line-height: (60/2)+px;
-      color: #fff;
-      font-weight: bold;
-      font-size: fz(24/2);
-
-      &:before {
-        content: '';
-        @extend .sp-sprite-list;
-        @include sprite( $list-icon-heading, inline-block );
-        @include hide-text;
-        margin-right: (12/2)+px;
-        vertical-align: middle;
-      }
-    }
-  }
-}
-
-.latest {
-  //.headline-heading
-  &-heading {
-    background-color: $highlight-color;
   }
 }
 
