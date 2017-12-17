@@ -54,9 +54,11 @@
 // boadr-large, board-small 共用
 [ class^="board-" ] {
   .post {
-    [ class^="post-label_" ] {
+    [ class*="post-label_" ] {
+      position: relative;
+      top: -2px;
       display: inline-block;
-      margin-right: 5px;
+      margin-right: 4px;
       vertical-align: middle;
     }
 

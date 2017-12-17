@@ -64,6 +64,41 @@ $z-map: (
   }
 }
 
+
+
+
+
+
+//お知らせ
+// https://aws-plus.backlog.jp/view/UNDO_SPBL-281
+.announce {
+  width: $global-inner-width;
+  margin: 0 auto;
+  padding: 8px 0;
+
+  //.announce__item
+  &__item {
+    &:before {
+      content: "";
+      @extend .sprite-index;
+      @include sprite( $index-icon-notice, inline-block );
+      @include hide-text;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    a {
+      @include link-decoration(#333, #333, null, null);
+      font-weight: bold;
+      font-size: fz(13);
+    }
+  }
+} //.announce
+
+
+
+
+
 // 汎用化のため motion_slider へ移動
 // @since 2016-09-20
 //// hero-slider
