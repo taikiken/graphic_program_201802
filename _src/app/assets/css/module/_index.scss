@@ -37,31 +37,32 @@ $z-map: (
   .focus-bnr { z-index: z(focus-bnr);}
   .stats_banner { z-index: z(stats_banner);}
 
-  .board-large {
-    &:before,
-    &:after {
-      content: "";
-      position: absolute;
-      @include hide-text;
-    }
+  //ブルちゃん、リニューアルで不要に
+  // .board-large {
+  //   &:before,
+  //   &:after {
+  //     content: "";
+  //     position: absolute;
+  //     @include hide-text;
+  //   }
 
-    &:before {
-      z-index: -1;
-      top: -214px;
-      left: -135px;
-      width: 394px;
-      height: 537px;
-      background: url(/assets/images/index/bull-bg.png) 0 0 no-repeat;
-    }
+  //   &:before {
+  //     z-index: -1;
+  //     top: -214px;
+  //     left: -135px;
+  //     width: 394px;
+  //     height: 537px;
+  //     background: url(/assets/images/index/bull-bg.png) 0 0 no-repeat;
+  //   }
 
-    &:after {
-      top: 111px;
-      left: -30px;
-      width: 49px;
-      height: 41px;
-      background: url(/assets/images/index/bull-hand.png) 0 0 no-repeat;
-    }
-  }
+  //   &:after {
+  //     top: 111px;
+  //     left: -30px;
+  //     width: 49px;
+  //     height: 41px;
+  //     background: url(/assets/images/index/bull-hand.png) 0 0 no-repeat;
+  //   }
+  // }
 }
 
 
@@ -99,211 +100,42 @@ $z-map: (
 
 
 
-// 汎用化のため motion_slider へ移動
-// @since 2016-09-20
-//// hero-slider
-//// トップページ用 メインビジュアルスライダー
-//.hero {
-//  &-sec {
-//  }
-//  $pickup-height: 400px;
-//
-//  &-slider {
-//    position: relative;
-//    width: 100%;
-//    height: $pickup-height;
-//    background-color: #000;
-//    overflow: hidden;
-//
-//    &-inner {
-//      width: 640px;
-//      margin: 0 auto;
-//      overflow: visible;
-//
-//      ul {
-//        @include clearfix;
-//        width: 200000px;
-//      }
-//
-//      li {
-//        // なぜ消した?
-//        float: left;
-//        width: 640px;
-//
-//        a {
-//          @include link-decoration(#fff, #fff, none, none);
-//          position: relative;
-//          display: block;
-//          width: 100%;
-//          height: $pickup-height;
-//          overflow: hidden;
-//
-//          &:hover {
-//            @include hover-opacity;
-//
-//            .category-label,
-//            .post-heading {
-//              // color: $highlight-secondary-color;
-//            }
-//          }
-//
-//          .overlay {
-//            position: absolute;
-//            bottom: 0;
-//            left: 0;
-//          }
-//
-//          .post {
-//            &-overview {
-//              position: absolute;
-//              bottom: 0;
-//              left: 0;
-//
-//              padding: 0 30px 24px 30px;
-//            }
-//
-//            &-category {
-//              color: $highlight-color;
-//              font-weight: bold;
-//            }
-//
-//            &-heading {
-//              font-weight: bold;
-//              font-size: fz(24);
-//            }
-//
-//            &-date,
-//            &-comment-num {
-//              display: inline-block;
-//              font-size: fz(12);
-//            }
-//
-//            &-comment-num {
-//              margin-left: 10px;
-//              padding-left: 20px;
-//              background: url(/assets/images/index/icon-slider-comment.png) 0 center no-repeat;
-//            }
-//          }
-//        }
-//      }
-//    } //.hero-slider-inner
-//
-//    &-control {
-//      position: absolute;
-//      top: 0;
-//      width: 100%;
-//
-//      .direction {
-//        a {
-//          position: absolute;
-//          display: block;
-//          width: 40px;
-//          height: 40px;
-//          margin-top: ($pickup-height/2) - 20;
-//          background-position: center center;
-//          background-repeat: no-repeat;
-//          @include hide-text;
-//
-//          &:hover {
-//            @include hover-opacity;
-//          }
-//        }
-//
-//        &-prev {
-//          left: 20px;
-//          background-image: url(/assets/images/index/btn-slider-prev.png);
-//        }
-//
-//        &-next {
-//          right: 20px;
-//          background-image: url(/assets/images/index/btn-slider-next.png);
-//        }
-//      }
-//
-//      .pager {
-//        position: absolute;
-//        top: 370px;
-//        left: 50%;
-//        width: 100%;
-//        margin-left: -320px;
-//
-//        ul {
-//          width: 640px;
-//          text-align: center;
-//          letter-spacing: ls(inline-block);
-//        }
-//
-//        li {
-//          display: inline-block;
-//          letter-spacing: normal;
-//
-//          + li {
-//            margin-left: 15px;
-//          }
-//        }
-//
-//        a {
-//          display: block;
-//          width: 6px;
-//          height: 6px;
-//          background-color: #999;
-//          border-radius: 100%;
-//          @include hide-text;
-//
-//          &.active,
-//          &:hover {
-//            background-color: $highlight-secondary-color;
-//          }
-//        }
-//      }
-//    } //.hero-slider-control
-//  }
-//}
-//
-//// ---------------------------
-//// motion slider setting
-//// ---------------------------
-//@import "motion_slider";
-
-
-
-
-
 // headline
 // トップページ ヘッドライン
 .headline {
-  margin-top: 30px;
+  margin-top: 10px;
 
   //.headline-heading
-  &-heading {
-    padding-bottom: 10px;
-    border-bottom: 3px solid #0e357f;
+  // トップページリニューアルで不要になりました
+  // &-heading {
+  //   padding-bottom: 10px;
+  //   border-bottom: 3px solid #0e357f;
 
-    //.headline-title
-    //.headline-ruby
-    &-title, &-ruby {
-      display: inline-block;
-      line-height: 1;
-    }
+  //   //.headline-title
+  //   //.headline-ruby
+  //   &-title, &-ruby {
+  //     display: inline-block;
+  //     line-height: 1;
+  //   }
 
-    //.headline-title
-    &-title img {
-      vertical-align: middle;
-    }
+  //   //.headline-title
+  //   &-title img {
+  //     vertical-align: middle;
+  //   }
 
-    //.headline-ruby
-    &-ruby {
-      margin-left: 8px;
-      color: #333;
-      font-weight: bold;
-      font-size: fz(12);
-    }
-  } //.headline-heading
+  //   //.headline-ruby
+  //   &-ruby {
+  //     margin-left: 8px;
+  //     color: #333;
+  //     font-weight: bold;
+  //     font-size: fz(12);
+  //   }
+  // } //.headline-heading
 
   .board-small.column2 {
     .board-item {
       border-top: none;
-      margin-top: 16px;
+      margin-top: 10px;
       // &:nth-child(1), &:nth-child(2) {}
 
       .post {
@@ -346,42 +178,34 @@ $z-map: (
 
 // sns-pr
 .sns-pr {
-  height: 88px;
-  margin-top: 30px;
-  padding: 20px 26px 0 33px;
-  background: url(/assets/images/index/sns-pr-bg.png) no-repeat 0 0;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid $border-primary-color;
+  border-bottom: 1px solid $border-primary-color;
 
   &-inner {
     display: table;
-    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   dd, dt {
     display: table-cell;
-    height: 40px;
     vertical-align: middle;
   }
 
   dt {
-    width: 596px;
 
     img {
-      vertical-align: middle;
+      display: block;
     }
 
     span {
-      margin-left: 8px;
-      vertical-align: middle;
-    }
-
-    p {
-      color: #333;
+      display: block;
+      margin-top: 0.25em;
       font-weight: bold;
-      font-size: fz(16);
-
-      strong {
-        font-size: fs(22, 16);
-      }
+      font-size: fz(13);
     }
   }
 
@@ -410,22 +234,6 @@ $z-map: (
   a:hover {
     @include hover-opacity;
   }
-
-  // &.now_onair {
-  //   a::after {
-  //     content: "";
-  //     position: absolute;
-  //     top: 0;
-  //     left: 0;
-  //     display: block;
-  //     width: 100%;
-  //     height: 100%;
-  //     @include hide-text;
-  //     background-image: url(/assets/images/index/bnr-sokuhou-161011_onair.gif);
-  //     background-repeat: no-repeat;
-  //     background-position: 0 0;
-  //   }
-  // }
 }
 
 
@@ -435,95 +243,114 @@ $z-map: (
 // stats_banner
 // トップページ 速報&データ
 .stats_banner {
-  margin-top: 30px;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid $border-primary-color;
+  border-bottom: 1px solid $border-primary-color;
 
-  //.stats_banner-heading
-  &-heading {
-    padding-bottom: 10px;
-    border-bottom: 3px solid #0e357f;
+  overflow:hidden;
+  overflow-x:scroll;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    //.stats_banner-title
-    //.stats_banner-ruby
-    &-title, &-ruby {
-      display: inline-block;
-      line-height: 1;
-    }
+  //.stats_banner__heading
+  &__heading {
+    width: 100px;
+    text-align: left;
 
-    //.stats_banner-title
-    &-title {
-
-      img {
-        vertical-align: middle;
-      }
-
-      &:before {
-        content: url("/assets/images/index/icon-stats_bnr-title.png");
-        display: inline-block;
-        margin-right: 8px;
-        vertical-align: middle;
-      }
-    }
-
-    //.stats_banner-ruby
-    &-ruby {
-      margin-left: 8px;
-      color: #333;
+    //.stats_banner__heading__title
+    &__title {
+      line-height: 1.2em;
+      color: #0f3580;
       font-weight: bold;
-      font-size: fz(12);
+      // font-size: 2.7vw;
+      font-size: fz(16);
     }
-  } //.stats_banner-heading
-
-  //.stats_banner-list
-  &-list {
-    margin-top: 20px - 8;
-    overflow: hidden;
   }
 
-  //.stats_banner-item
-  &-item {
-    float: left;
-    margin-top: 8px;
 
-    &:nth-child(2n) {
-      float: right;
+
+  //.stats_banner__list
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    width: 520px;
+
+    * {
+      line-height: 0;
+    }
+  }
+
+  //.stats_banner__item
+  &__item {
+    a {
+      @include link-decoration(#0f3580, #0f3580, none, underline);
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+      font-weight: bold;
     }
 
-    a:hover {
-      @include over-opacity;
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background-color: #0f3580;
     }
 
-    .tablet & {
-      img {
-        width: 360px;
-        border-radius: 6px;
+    svg {
+      margin: 0;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      fill: transparent;
+      stroke-width: 0;
+      stroke: #fff;
+
+      &.icon--baseball  {
+        fill: #fff;
       }
     }
-  }
 
-  //.stats_banner-btn
-  &-btn {
-    margin-top: 8px;
+    span {
+      display: inline-block;
+      line-height: 1.2;
+      font-size: fz(15);
+    }
 
-    //.stats_banner-btn-link
-    &-link {
-      display: block;
-      line-height: 1;
-      padding: 20px 0;
-      background-color: $highlight-color;
+  } //.stats_banner__item
+
+
+
+  //.stats_banner__btn
+  &__btn {
+    width: 84px;
+    margin-left: auto;
+
+    //.stats_banner__btn__link
+    &__link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      border: 2px solid #0f3580;
       border-radius: 6px;
+      font-weight: bold;
       text-align: center;
 
-      span {
-        display: inline-block;
-        width: 219px;
-        height: 15px;
-        background: url(/assets/images/index/icon-stats_bnr-btn.png) 0 0 no-repeat;
-        @include hide-text;
-      }
-
       &:hover {
-        @include over-opacity;
+        background-color: #0f3580;
+        color: #fff;
+        text-decoration: none;
       }
     }
-  }
+  } //.stats_banner__btn
 } // stats_banner

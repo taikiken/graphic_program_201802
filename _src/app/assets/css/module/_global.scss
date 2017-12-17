@@ -816,15 +816,11 @@ textarea {
       }
 
       //.post-date
-      &-date {
-        display: none;
-      }
+      &-date {}
 
       &-category {
         // position: relative;
         line-height: 1;
-        margin-top: 6px;
-        color: #999;
 
         // &:before {
         //   content: '';
