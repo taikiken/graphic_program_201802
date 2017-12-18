@@ -16,7 +16,7 @@ import {Safety} from '../data/Safety';
 // import {Format} from '../util/Format';
 // dae
 // import {CategoryDae} from './CategoryDae';
-import {MediaDae} from './MediaDae';
+import MediaDae from './MediaDae';
 import {UserDae} from './UserDae';
 import {CommentsPopularDae} from './CommentsPopularDae';
 import {CategoriesDae} from './categories/CategoriesDae';

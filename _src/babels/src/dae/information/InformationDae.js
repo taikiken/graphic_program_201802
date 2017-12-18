@@ -109,6 +109,11 @@ export class InformationDataDae {
      */
     this.type = type;
     /**
+     * responce.information.text - お知らせ
+     * @type {string}
+     */
+    this.text = information.text || '';
+    /**
      * テキストの色 ( #あり16進数 )
      * - notice / warning ともに `#333333`
      * @type {string}
