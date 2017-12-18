@@ -582,9 +582,13 @@ $banner-height: 70px;
 
 %foot-sec {
   position: relative;
-  padding-bottom: (204/2)+px;
-  background: #030b1a url(/assets/sp/images/common/footer-bg.png) center bottom no-repeat;
-  background-size: (332/2)+px;
+  border-top: (50/2)+px solid #eee;
+  padding-bottom: (48/2)+px;
+  background-color: #fff;
+
+  .foot-sec-inner {
+    border-top: 1px solid $border-primary-color;
+  }
 
   .foot-breadCrumb {
     width: 100%;
@@ -631,7 +635,7 @@ $banner-height: 70px;
         position: relative;
         top: -1px;
         @extend .sp-sprite-common;
-        @include sprite( $common-breadcrumb-home );
+        // @include sprite( $common-breadcrumb-home );
         display: inline-block;
         margin-right: (10/2)+px;
         font-size: 0;

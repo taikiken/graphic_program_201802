@@ -275,8 +275,8 @@
 
     //.post-heading
     &-heading {
-      height: 1em;
-      line-height: 1;
+      height: 2.75em;
+      line-height: lh(46, 32);
       margin-top: (18/2)+px;
       overflow: hidden;
       font-weight: bold;
@@ -374,6 +374,64 @@
     // margin-left: 10px;
     margin-bottom: (20/2)+px;
   }
+
+  // 時々でてくるデカい子
+  //.board-item--big
+  &-item--big {
+    .post {
+      //.post-thumb
+      &-thumb {
+        position: relative;
+        float: none;
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+        overflow: hidden;
+        background: #ccc url(/assets/sp/images/common/thumb-noimage-16x9.png) center center no-repeat;
+        background-size: 100%;
+        border-radius: (6/2)+px;
+
+        //.post-thumb-overlay-movie
+        &-overlay-movie {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      //.post-data
+      &-data {}
+
+      //.post-heading
+      &-heading {
+        height: auto;
+        overflow: visible;
+      }
+
+      [ class*="post-label_" ] {}
+
+      // .post-label_recommend
+      &-label_recommend {}
+
+      // .post-label_movie
+      &-label_movie {}
+
+      // .post-label_new
+      &-label_new {}
+
+      //.post-category
+      &-category {}
+
+      //.post-date
+      &-date {}
+
+      //.post-excerpt-text
+      &-excerpt-text {}
+    } //.board .post
+  } //.board-item--big
 }
 
 
@@ -407,7 +465,14 @@
           border-radius: (6/2)+px;
         }
 
-        &-heading {}
+        &-heading {
+          height: 1em;
+          line-height: 1;
+          margin-top: (18/2)+px;
+          overflow: hidden;
+          font-weight: bold;
+          font-size: fz(32/2);
+        }
         &-category {}
         &-data {}
 
@@ -516,21 +581,21 @@
 }
 
 .board-btn-viewmore {
-  padding-top: (20/2)+px;
+  border-bottom: 1px solid $border-primary-color;
 
+  //.board-btn-viewmore-lin
   &-link {
     display: block;
-    margin-right: perCalc(20);
-    margin-left: perCalc(20);
     padding: (32/2)+px 0;
-    border-radius: 5px;
-    // background-color: $highlight-color;
-
-    span {
-      @include hide-text;
-    }
+    background-color: #f5f5f5;
+    color: $highlight-color;
+    font-weight: bold;
+    font-size: fz(28/2);
+    text-align: center;
   }
 } //.board-btn-viewmore
+
+
 
 .loading-root {
   position: relative;

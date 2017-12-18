@@ -8,16 +8,54 @@
 
 // sns-pr
 .sns-pr {
-  padding: (20/2)+px perCalc(20);
+  padding-top: (10/2)+px;
+  padding-bottom: (10/2)+px;
+  border-bottom: 1px solid $border-primary-color;
   background-color: #eee;
 
   &-outer {
-    @extend .post-sns-pr;
-    margin-top: 0 !important;
+    width: 100%;
+    padding-top: (20/2)+px;
+    padding-bottom: (20/2)+px;
+    border-top: 1px solid $border-primary-color;
+    border-bottom: 1px solid $border-primary-color;
+    background-color: #fff;
   }
 
   &-inner {
-    @extend .post-sns-pr-inner;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  dt, dd {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  dt {
+    padding-right: (24/2)+px;
+
+    // for iPhone5, 5S
+    @media screen and (max-width: 320px) {
+      padding-right: 0;
+    }
+
+    span {
+      display: block;
+      line-height: 1em;
+      margin-top: (6/2)+px;
+      padding: (48/2)+px 0 0 0;
+      background: url(/assets/sp/images/index/post-sns-logo.png) 0 0 no-repeat;
+      background-size: (356/2)+px;
+      font-weight: bold;
+      font-size: fz(22/2);
+      white-space: nowrap;
+    }
+  }
+
+  dd {
+    width: 71px;
   }
 } //.sns-pr
 
