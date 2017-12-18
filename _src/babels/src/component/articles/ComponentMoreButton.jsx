@@ -86,10 +86,10 @@ export default class ComponentMoreButton extends React.Component {
 
     /**
      * React.state プロパティ
-     * @type {{disable: boolean, show: boolean, loading: string}}
+     * @type {{show: boolean, loading: string}}
      */
     this.state = {
-      disable: false,
+      // disable: false,
       show: props.show,
       loading: props.loading
     };
@@ -273,13 +273,20 @@ export default class ComponentMoreButton extends React.Component {
     // unmount 時に rise 破棄を行う
     this.destroy();
   }
+  componentWillReceiveProps(nextProps) {
+    const { show } = nextProps;
+    if (show !== this.state.show) {
+      this.setState({ show });
+    }
+  }
   /**
    * div.board-btn-viewmore を出力します
    * @return {?XML} div.board-btn-viewmore を返します
    */
   render() {
+    const { show, loading } = this.state;
     // hasNext: true, button を表示する？
-    if (!this.props.action.hasNext()) {
+    if (!show || !this.props.action.hasNext()) {
       // button 表示なし
       return null;
     }
@@ -304,7 +311,7 @@ export default class ComponentMoreButton extends React.Component {
     // }
     // コード最適化する - 2017-12-01
     return (
-      <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
+      <div id="more" className={`board-btn-viewmore loading-root ${loading}`}>
         <a className="board-btn-viewmore-link" href={'#more'} onClick={this.onClick} >
           <span>{Message.BUTTON_VIEW_MORE}</span>
         </a>

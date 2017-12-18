@@ -183,6 +183,11 @@ export default class ViewArchiveMasonryInfinite extends View {
      * @type {function}
      */
     this.boundSafely = this.executeSafely.bind(this);
+    /**
+     * 最初の出力 flag
+     * - false: ga send
+     * @type {boolean}
+     */
     this.firstRendered = false;
   }
   // ---------------------------------------------------
@@ -392,8 +397,8 @@ export default class ViewArchiveMasonryInfinite extends View {
     // sequence な index のために必要
     const prevLast = this.articles.length;
 
-    // 記事挿入 root element
-    const element = this.element;
+    // // 記事挿入 root element
+    // const element = this.element;
     // ------------------------------------------------
 
     // 通知
@@ -548,19 +553,30 @@ export default class ViewArchiveMasonryInfinite extends View {
     //   }
     // }
     // more button 表示ロジック最適化 - 2017-12-01
-    if (this.moreRendered === null) {
-      this.moreRendered = ReactDOM.render(
-        <ComponentMoreButton
-          show={show}
-          action={this.action}
-          element={moreElement}
-          home={this.home}
-          slug={this.slug}
-          afterClick={this.afterClick}
-        />,
-        moreElement
-      );
-    }
-    this.moreRendered.updateShow(show);
+    // if (this.moreRendered === null) {
+    //   this.moreRendered = ReactDOM.render(
+    //     <ComponentMoreButton
+    //       show={show}
+    //       action={this.action}
+    //       element={moreElement}
+    //       home={this.home}
+    //       slug={this.slug}
+    //       afterClick={this.afterClick}
+    //     />,
+    //     moreElement
+    //   );
+    // }
+    // this.moreRendered.updateShow(show);
+    ReactDOM.render(
+      <ComponentMoreButton
+        show={show}
+        action={this.action}
+        element={moreElement}
+        home={this.home}
+        slug={this.slug}
+        afterClick={this.afterClick}
+      />,
+      moreElement,
+    );
   }
 }// class
