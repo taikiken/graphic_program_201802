@@ -14,8 +14,8 @@
 import { Empty } from '../../app/const/Empty';
 import { MediaType } from '../../app/const/MediaType';
 
-// node
-import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
+// // node
+// import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
 
 // util
 import { Elements } from '../../util/Elements';
@@ -27,8 +27,12 @@ import { GaData } from '../../ga/GaData';
 
 // dae
 import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
+import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 // ----------------------------------------
@@ -178,6 +182,7 @@ export class ComponentHeadlineArticle extends React.Component {
             {playMark(this.props.mediaType)}
           </figure>
           <div className="post-data">
+            {/*
             <p className={`post-category post-category-${props.slug}`}>
               <CategoryLabelNode
                 categories={this.props.categories}
@@ -188,11 +193,18 @@ export class ComponentHeadlineArticle extends React.Component {
                 anotherCategories={this.props.anotherCategories}
               />
             </p>
+            */}
+            <ComponentCategoryLabels
+              categories={this.props.categories}
+              id={`headline-label-${this.props.id}`}
+              index={this.props.index}
+              mediaType={this.props.mediaType}
+              recommend={false}
+              anotherCategories={this.props.anotherCategories}
+            />
             <h3
               className="post-heading"
-              ref={(component) => {
-                this.h3 = component;
-              }}
+              ref={(component) => (this.h3 = component)}
             >
               {this.state.title}
             </h3>

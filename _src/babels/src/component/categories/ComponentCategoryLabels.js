@@ -105,6 +105,7 @@ export class ComponentCategoryLabels extends React.Component {
   //  */
   // constructor(props) {
   //   super(props);
+  //   console.log('ComponentCategoryLabels', props.categories);
   // }
   // ---------------------------------------------------
   //  METHOD

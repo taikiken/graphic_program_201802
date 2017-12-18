@@ -22,23 +22,32 @@ import { ComponentArticlePopular } from './ComponentArticlePopular';
 import { Safety } from '../../data/Safety';
 
 // node(ReactClass)
-import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
+// import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
+import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
-const ReactDOM = self.ReactDOM;
+// const ReactDOM = self.ReactDOM;
 
 // imagesLoaded, isotope
+/**
+ * [library] - imagesLoaded
+ */
 const imagesLoaded = self.imagesLoaded;
+/**
+ * [library] - Isotope
+ */
 const Isotope = self.Isotope;
 
 /**
  * 記事一覧 + 無限スクロール + isotope
- *
- * <pre>
- *   <ComponentArticlesMasonryInfinite/>
- * <pre>
- *
+ * - {@link ComponentArticleThumbnail}
+ * - {@link ComponentCategoryLabels}
+ * - {@link ComponentArticlePopular}
+ * 表示後に `Isotope` で `absolute` layout を実行します
  * @since 2016-09-15
  */
 export class ComponentArticlesMasonryInfinite extends React.Component {
@@ -83,7 +92,7 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
      * state option
      * @type {{
      *  arranged: string,
-     *  list: array<ArticleDae>,
+     *  list: Array.<ArticleDae>,
      *  offset: number,
      *  length: number
      * }}
@@ -129,6 +138,7 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
      * @type {function}
      */
     this.boundImages = this.onImages.bind(this);
+    this.boardRout = null;
   }
   // ---------------------------------------------------
   // METHOD
@@ -138,7 +148,8 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
    */
   componentDidUpdate() {
     // isotope 対象 children
-    const boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+    // const boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+    const boardRout = this.boardRout;
     const childNodes = boardRout.childNodes;
     const elements = [];
 
@@ -184,12 +195,25 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
     }
   }
   /**
+   * delegate - before props update
+   * @param {{list: Array.<ArticleDae>, offset: number, length: number}} nextProps React next props
+   */
+  componentWillReceiveProps(nextProps) {
+    const { list, offset, length } = nextProps;
+    if (list || offset !== this.state.offset || length !== this.state.length) {
+      this.setState({ list, offset, length });
+    }
+  }
+  /**
    * div.board-large-column を出力します
    * @return {XML} board-large-column を返します
    */
   render() {
     return (
-      <div ref="boardRout" className="board-large-column">
+      <div
+        ref={(element) => (this.boardRout = element)}
+        className="board-large-column"
+      >
         {
           // loop start
           this.state.list.map((dae, i) => {
@@ -215,6 +239,7 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
                     recommend={dae.isRecommend && this.props.home}
                   />
                   <div className="post-data">
+                    {/*
                     <p className={`post-category post-category-${dae.categories.slugsClasses}`}>
                       <CategoryLabelNode
                         categories={dae.categories.all}
@@ -225,6 +250,15 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
                         anotherCategories={dae.anotherCategories}
                       />
                     </p>
+                    */}
+                    <ComponentCategoryLabels
+                      categories={dae.categories.all}
+                      id={`post-archive-${dae.id}`}
+                      index={i}
+                      mediaType={dae.mediaType}
+                      recommend={dae.isRecommend && this.props.home}
+                      anotherCategories={dae.anotherCategories}
+                    />
                     <h3 className="post-heading">{dae.title}</h3>
                     <p className="post-date">{dae.displayDate}</p>
                     <div className="post-excerpt-text">{dae.description}</div>
@@ -251,11 +285,12 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
    */
   shouldMasonry() {
     // isotope 前準備を実行します
-    const boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+    // const boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+    const boardRout = this.boardRout;
     const childNodes = boardRout.childNodes;
 
     // imagesLoaded を使用し画像ロード完了後に isotope を実行します
-    const img = imagesLoaded( childNodes );
+    const img = imagesLoaded(childNodes);
     // img {imagesLoaded} always event handler unbind するためにインスタンスを保存します
     this.img = img;
     // 画像読み込む完了 event へ bind します
@@ -284,27 +319,30 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
    */
   onImages() {
     // event から event handler を unbind します
-    this.img.off( 'always', this.boundImages);
+    this.img.off('always', this.boundImages);
 
     // isotope を行います
-    let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+    // const boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+    const boardRout = this.boardRout;
     this.isotope = new Isotope(boardRout, {
       itemSelector: '.board-item',
       masonry: {
         // gutter: 30
         // 2016-04-29
-        gutter: 28
+        // gutter: 28
+        // 2017-12-18
+        gutter: 20,
       }
     } );
   }
-  /**
-   * 次の読み込みから表示を更新します
-   * @param {Array} list 表示リスト
-   * @param {number} offset 読み込み開始位置
-   * @param {number} length 読み込み数
-   */
-  updateList(list, offset, length) {
-    // state を変更し appendChild + isotope を行う
-    this.setState({ list, offset, length });
-  }
+  // /**
+  //  * 次の読み込みから表示を更新します
+  //  * @param {Array} list 表示リスト
+  //  * @param {number} offset 読み込み開始位置
+  //  * @param {number} length 読み込み数
+  //  */
+  // updateList(list, offset, length) {
+  //   // state を変更し appendChild + isotope を行う
+  //   this.setState({ list, offset, length });
+  // }
 }

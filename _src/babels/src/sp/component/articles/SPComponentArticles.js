@@ -14,8 +14,8 @@
 import { Message } from '../../../app/const/Message';
 import { Empty } from '../../../app/const/Empty';
 
-// node
-import { CategoryLabelNode } from '../../../node/category/CategoryLabelNode';
+// // node
+// import { CategoryLabelNode } from '../../../node/category/CategoryLabelNode';
 
 // view
 import View from '../../../view/View';
@@ -28,8 +28,12 @@ import { Safety } from '../../../data/Safety';
 
 // sp/view/articles
 import { SPComponentArticleAd } from './SPComponentArticleAd';
+import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -163,6 +167,7 @@ export class SPComponentArticles extends React.Component {
                       <div className="post-data">
                         <h3 className="post-heading">{dae.title}</h3>
                         {recommend}
+                        {/*
                         <p className={`post-category post-category-${slug}`}>
                           <CategoryLabelNode
                             categories={dae.categories.all}
@@ -173,6 +178,15 @@ export class SPComponentArticles extends React.Component {
                             anotherCategories={dae.anotherCategories}
                           />
                         </p>
+                        */}
+                        <ComponentCategoryLabels
+                          categories={dae.categories.all}
+                          id={`archive-label-${dae.id}`}
+                          index={i}
+                          mediaType={dae.mediaType}
+                          recommend={false}
+                          anotherCategories={dae.anotherCategories}
+                        />
                         <p className="post-date">{dae.displayDate}</p>
                       </div>
                     </a>

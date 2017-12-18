@@ -65,6 +65,7 @@ const ReactDOM = self.ReactDOM;
 
 /**
  * archive 一覧を isotope で
+ * - {@link ComponentArticlesMasonryInfinite}
  */
 export default class ViewArchiveMasonryInfinite extends View {
   /**
@@ -182,6 +183,7 @@ export default class ViewArchiveMasonryInfinite extends View {
      * @type {function}
      */
     this.boundSafely = this.executeSafely.bind(this);
+    this.firstRendered = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -395,34 +397,62 @@ export default class ViewArchiveMasonryInfinite extends View {
     // ------------------------------------------------
 
     // 通知
-    this.executeSafely( View.BEFORE_RENDER, articlesList );
+    this.executeSafely(View.BEFORE_RENDER, articlesList);
 
     // ------------------------------------------------
     // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
-    articles.forEach((article, i) => {
+    // articles.forEach((article, i) => {
+    //   const dae = new ArticleDae(article);
+    //   // console.log( 'dae ', dae );
+    //   dae.index = prevLast + i;
+    //   articlesList.push( dae );
+    // } );
+
+    articles.map((article, i) => {
       const dae = new ArticleDae(article);
       // console.log( 'dae ', dae );
       dae.index = prevLast + i;
-      articlesList.push( dae );
-    } );
+      articlesList.push(dae);
+      return article;
+    });
 
-    // this._articleRendered が null の時だけ ReactDOM.render する
-    if (this.articleRendered === null ) {
-      // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      this.articleRendered = ReactDOM.render(
-        <ComponentArticlesMasonryInfinite
-          list={articlesList}
-          home={this.home}
-          offset={this.request.offset}
-          length={this.request.length}
-          action={this.action}
-          callback={this.boundSafely}
-          boundMore={this.boundMore}
-          masonry={this.useMasonry}
-        />,
-        element
-      );
-
+    // // this._articleRendered が null の時だけ ReactDOM.render する
+    // if (this.articleRendered === null ) {
+    //   // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
+    //   this.articleRendered = ReactDOM.render(
+    //     <ComponentArticlesMasonryInfinite
+    //       list={articlesList}
+    //       home={this.home}
+    //       offset={this.request.offset}
+    //       length={this.request.length}
+    //       action={this.action}
+    //       callback={this.boundSafely}
+    //       boundMore={this.boundMore}
+    //       masonry={this.useMasonry}
+    //     />,
+    //     element
+    //   );
+    //
+    //   if (this.home) {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
+    //     Ga.add(new GaData('ViewArchiveMasonryInfinite.render', 'home_articles', 'view - new', String(1), 0, true));
+    //     // ----------------------------------------------
+    //   } else {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     // PC/スマホカテゴリー一覧の新着記事
+    //     Ga.add(new GaData('ViewArchiveMasonryInfinite.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
+    //     // ----------------------------------------------
+    //   }
+    // } else {
+    //   // instance が存在するので
+    //   // state update でコンテナを追加する
+    //   this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
+    // }
+    if (!this.firstRendered) {
+      this.firstRendered = true;
       if (this.home) {
         // ----------------------------------------------
         // GA 計測タグ
@@ -436,11 +466,21 @@ export default class ViewArchiveMasonryInfinite extends View {
         Ga.add(new GaData('ViewArchiveMasonryInfinite.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
         // ----------------------------------------------
       }
-    } else {
-      // instance が存在するので
-      // state update でコンテナを追加する
-      this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
-    }
+    }// first rendered
+    // ---------------------
+    ReactDOM.render(
+      <ComponentArticlesMasonryInfinite
+        list={articlesList}
+        home={this.home}
+        offset={this.request.offset}
+        length={this.request.length}
+        action={this.action}
+        callback={this.boundSafely}
+        boundMore={this.boundMore}
+        masonry={this.useMasonry}
+      />,
+      this.element,
+    );
   }// render
   /**
    * more button の表示・非表示を行います
