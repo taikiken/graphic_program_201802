@@ -11,7 +11,7 @@
  */
 
 // view
-import { SPViewSinglesPopular } from '../../view/singles/SPViewSinglesPopular';
+import SPViewSinglesPopular from '../../view/singles/SPViewSinglesPopular';
 
 // ui
 import { SinglesManager } from '../../../ui/SinglesManager';
@@ -109,11 +109,11 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
    */
   onMount() {
     const snap = new SPSnap(this.refs.popular);
-    snap.init();
+    snap.start();
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     if (!!this.view && !!this.view.reload) {

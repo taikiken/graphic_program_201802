@@ -43,12 +43,13 @@ import {ErrorMessage} from '../../data/ErrorMessage';
 import {Safety} from '../../data/Safety';
 
 // node
-import {ErrorNode} from '../error/ErrorNode';
+// import {ErrorNode} from '../error/ErrorNode';
 import {ChangeAvatarNode} from '../avator/ChangeAvatorNode';
 
 // model
 import {Model} from '../../model/Model';
 import {ModelSignup} from '../../model/signup/ModelSignup';
+import ComponentError from '../../component/error/ComponentError';
 
 // react
 let React = self.React;
@@ -197,7 +198,7 @@ let Step2FormNode = React.createClass( {
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             />
           </span>
-          <ErrorNode message={message('email')} />
+          <ComponentError message={message('email')} />
         </span>
         {/* password */}
         <span className={'form-parts ' + errorClass('password')}>
@@ -210,7 +211,7 @@ let Step2FormNode = React.createClass( {
               onChange={this.passwordChange}
             />
           </span>
-          <ErrorNode message={message('password')} />
+          <ComponentError message={message('password')} />
         </span>
         {/* name */}
         <span className={'form-parts ' + errorClass('name')}>
@@ -223,7 +224,7 @@ let Step2FormNode = React.createClass( {
               onChange={this.nameChange}
             />
           </span>
-          <ErrorNode message={message('name')} />
+          <ComponentError message={message('name')} />
         </span>
         {/* bio */}
         <span className="form-parts">
@@ -273,7 +274,7 @@ let Step2FormNode = React.createClass( {
                 className="setting-form-picture form-input"
               />
             </div>
-            <ErrorNode message={message('profile_picture')} />
+            <ComponentError message={message('profile_picture')} />
           </div>
         </div>
 

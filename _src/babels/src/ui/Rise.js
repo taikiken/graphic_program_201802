@@ -130,8 +130,8 @@ export class Rise extends EventDispatcher {
    * 監視を始めます
    */
   start() {
-    // console.log( '************************ Rise.start' );
     this.stop();
+    // console.log( '************************ Rise.start' );
     this._scroll.on(Scroll.SCROLL, this._boundScroll);
     this._scroll.start();
   }
@@ -151,6 +151,7 @@ export class Rise extends EventDispatcher {
    * @since 2017-04-17
    */
   delayStart(seconds = 0.5) {
+    // console.log('$ise.delayStart', seconds);
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
       this.start();

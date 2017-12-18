@@ -18,7 +18,7 @@ import {MediaType} from '../../app/const/MediaType';
 import {Message} from '../../app/const/Message';
 
 // view
-import {View} from '../../view/View';
+import View from '../../view/View';
 
 // data
 import {Safety} from '../../data/Safety';
@@ -29,6 +29,7 @@ import {ReactionNode} from '../../node/comment/ReactionNode';
 import {SPNewsAdNode} from '../node/ad/SPNewsAdNode';
 
 import {CommentUserPlusCountNode} from '../../node/comment/CommentUserPlusCountNode';
+// import { ComponentCategoryLabels } from '../../component/categories/ComponentCategoryLabels';
 
 // React
 let React = self.React;
@@ -360,16 +361,12 @@ export let SPArchiveNode = React.createClass( {
     let type = this.props.type;
     let adSp = this.props.adSp;
 
-    /**
-     * @TODO: 「新着記事タイトル」
-     */
-
     // dom出力する
     return (
       <div ref="boardRout" className="board-stack board-large">
         {
           // -------------------------------------------
-          // @TODO: 「新着記事タイトル」
+          // TODO: 「新着記事タイトル」
           // -------------------------------------------
           // loop start
           this.state.list.map( function( dae, i ) {
@@ -403,6 +400,15 @@ export let SPArchiveNode = React.createClass( {
                           index={i}
                           anotherCategories={dae.anotherCategories}
                         />
+                        {/*
+                        <ComponentCategoryLabels
+                          categories={dae.categories.all}
+                          id={`archive-label-${dae.id}`}
+                          index={i}
+                          anotherCategories={dae.anotherCategories}
+                          className="category-label-wrapper"
+                        />
+                        */}
                       </p>
                       <p className="post-date">{dae.displayDate}</p>
                       <div className="post-excerpt-text">{dae.description}</div>

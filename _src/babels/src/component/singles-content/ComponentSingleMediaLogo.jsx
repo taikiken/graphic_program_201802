@@ -14,7 +14,7 @@
 import { Message } from '../../app/const/Message';
 
 // view
-import { View } from '../../view/View';
+import View from '../../view/View';
 
 // ga
 import { Ga } from '../../ga/Ga';

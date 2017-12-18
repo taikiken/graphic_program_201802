@@ -15,7 +15,7 @@ import { ComponentPagers } from './ComponentPagers';
 import { ComponentPickupArticles } from './ComponentPickupArticles';
 
 // view
-import { View } from '../../view/View';
+import View from '../../view/View';
 
 // tick
 import { Polling } from '../../tick/Polling';

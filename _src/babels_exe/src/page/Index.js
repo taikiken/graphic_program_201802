@@ -11,35 +11,34 @@
  */
 
 
-import {Header} from './Header';
-import {Sidebar} from './Sidebar';
-let _symbol = Symbol();
+import Header from './Header';
+import Sidebar from './Sidebar';
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * <p>Home(index)</p>
  * 全て static です
  */
-export class Index {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Index is static Class. not use new Index().' );
-
-    }
-  }
+export default class Index {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Index is static Class. not use new Index().' );
+  //
+  //   }
+  // }
   /**
    * home rendering 開始
    */
-  static start():void {
-
+  static start() {
     // header
     Header.start();
 
@@ -73,6 +72,5 @@ export class Index {
 
     // sidebar, slug なし(=all)
     Sidebar.start('all', true);
-
   }
 }

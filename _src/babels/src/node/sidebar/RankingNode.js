@@ -23,6 +23,7 @@ import {GaData} from '../../ga/GaData';
 // node
 import {CategoryLabelNode} from '../category/CategoryLabelNode';
 import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
+// import { ComponentCategoryLabels } from '../../component/categories/ComponentCategoryLabels';
 
 // React
 let React = self.React;
@@ -123,6 +124,15 @@ export const RankingNode = React.createClass( {
                 index={p.index}
                 anotherCategories={p.anotherCategories}
               />
+              {/*
+              <ComponentCategoryLabels
+                categories={p.categories}
+                id={p.id}
+                index={p.index}
+                anotherCategories={p.anotherCategories}
+                className="category-label-wrapper"
+              />
+              */}
             </p>
             <h4 className="post-heading">{p.title}</h4>
             <p className="post-date">{p.date}</p>

@@ -18,7 +18,7 @@ import {ArticleDae} from '../../../dae/ArticleDae';
 // data
 import {Safety} from '../../../data/Safety';
 // view
-import {View} from '../../../view/View';
+import View from '../../../view/View';
 // node
 import {RankingNode} from '../../../node/sidebar/RankingNode';
 

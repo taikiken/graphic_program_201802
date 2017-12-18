@@ -24,6 +24,8 @@ let easing = greensock.easing;
 /**
  * 退会モーダル node
  * @type {ReactClass}
+ * @deprecated 2017-12-13 instead use {@link DeactivateNode}
+ * TODO future remove
  */
 export let DeactivateNode = React.createClass( {
   propTypes: {

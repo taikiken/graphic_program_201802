@@ -33,7 +33,7 @@ import {MessageStatus} from '../../event/MessageStatus';
 import {Model} from '../../model/Model';
 import {ModelInterestEdit} from '../../model/settings/ModelInterestEdit';
 
-import {SlugDae} from '../../dae/caegories/SlugDae';
+import {SlugDae} from '../../dae/categories/SlugDae';
 
 // react
 let React = self.React;

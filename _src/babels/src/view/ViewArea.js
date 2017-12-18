@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-import { ViewArchiveMasonryInfinite } from './ViewArchiveMasonryInfinite';
+import ViewArchiveMasonryInfinite from './ViewArchiveMasonryInfinite';
 import { User } from '../app/User';
 import Area from '../action/area/Area';
 import AreaAuth from '../action/area/AreaAuth';
@@ -62,7 +62,7 @@ export default class ViewArea extends ViewArchiveMasonryInfinite {
    * @param {boolean} pref 都道府県フラッグ
    * @param {Object} [option={}] optional event handler
    */
-  constructor(element, moreElement, area = '', pref = false, option:Object = {}) {
+  constructor(element, moreElement, area = '', pref = false, option = {}) {
     super(element, moreElement, null, option, true);
     // ---
     const done = this.done.bind(this);

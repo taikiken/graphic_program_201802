@@ -11,7 +11,7 @@
  */
 
 // view
-import { ViewSinglesPopular } from '../../view/singles/ViewSinglesPopular';
+import ViewSinglesPopular from '../../view/singles/ViewSinglesPopular';
 
 // ui
 import { SinglesManager } from '../../ui/SinglesManager';
@@ -20,6 +20,9 @@ import { SinglesManager } from '../../ui/SinglesManager';
 import { Snap } from '../../ui/Snap';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -123,7 +126,7 @@ export class ComponentSinglesWidgetPopular extends React.Component {
     // this.view.callback = null;
     const snap = new Snap(this.refs.popular);
     // snap.on(Snap.SNAPPED, this.onSnap.bind(this));
-    snap.init();
+    snap.start();
   }
   // /**
   //  * snap scroll, 一時停止中
@@ -133,7 +136,7 @@ export class ComponentSinglesWidgetPopular extends React.Component {
   // }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     if (!!this.view && !!this.view.reload) {

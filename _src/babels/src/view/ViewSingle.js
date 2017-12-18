@@ -12,26 +12,26 @@
 
 
 // view
-import { View } from './View';
-import { ViewRelated } from './single/ViewRelated';
-import { ViewSingleHeader } from './single/ViewSingleHeader';
-import { ViewSingleFooter } from './single/ViewSingleFooter';
+import View from './View';
+import ViewRelated from './single/ViewRelated';
+import ViewSingleHeader from './single/ViewSingleHeader';
+import ViewSingleFooter from './single/ViewSingleFooter';
 
 // view/singles
-import { ViewSingles } from './singles/ViewSingles';
+import ViewSingles from './singles/ViewSingles';
 
 // action
 import { Single } from '../action/single/Single';
 import { SingleAuth } from '../action/single/SingleAuth';
 
 // data
-import { Result } from '../data/Result';
+// import { Result } from '../data/Result';
 import { Safety } from '../data/Safety';
 import { SingleDae } from '../dae/SingleDae';
 
 // dae
-import { CategoriesDae } from '../dae/caegories/CategoriesDae';
-import { SlugDae } from '../dae/caegories/SlugDae';
+import { CategoriesDae } from '../dae/categories/CategoriesDae';
+import { SlugDae } from '../dae/categories/SlugDae';
 
 // app
 import { Dom } from '../app/Dom';
@@ -69,7 +69,7 @@ import { Hit } from '../ui/Hit';
  * single.start();
  * ```
  */
-export class ViewSingle extends View {
+export default class ViewSingle extends View {
   /**
    * 記事ID で 記事詳細JSONを取得し表示します
    *
@@ -78,9 +78,9 @@ export class ViewSingle extends View {
    * @param {Object} elements root element 関連記事, 各コメント
    * @param {Object} [option={}] optional event handler
    */
-  constructor( id:number, element:Element, elements:Object, option:Object = {} ) {
-    option = Safety.object( option );
-    super( element, option );
+  constructor(id, element, elements, option = {}) {
+    option = Safety.object(option);
+    super(element, option);
     // action
     let ActionClass = User.sign ? SingleAuth : Single;
     /**
@@ -88,7 +88,7 @@ export class ViewSingle extends View {
      * @override
      * @type {SingleAuth|Single}
      */
-    this.action = new ActionClass( id, this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new ActionClass(id, this.done.bind(this), this.fail.bind(this));
     /**
      * footer, related 挿入位置 Element を設定した Object
      * @type {Object} {related: Element, footer: Element}
@@ -101,7 +101,7 @@ export class ViewSingle extends View {
      * @type {Function}
      * @protected
      */
-    this._boundMount = this.headerMount.bind( this );
+    this._boundMount = this.headerMount.bind(this);
     /**
      * related instance
      * @type {null|Object}
@@ -149,23 +149,23 @@ export class ViewSingle extends View {
   // ---------------------------------------------------
   /**
    * header instance
-   * @return {Object|ViewSingleHeader|null} header instance を返します
+   * @return {?ViewSingleHeader} header instance を返します
    */
-  get header():Object {
+  get header() {
     return this._header;
   }
   /**
    * header instance を設定します
-   * @param {Object|ViewSingleHeader} header header instance
+   * @param {?ViewSingleHeader} header header instance
    */
-  set header( header:Object ):void {
+  set header(header) {
     this._header = header;
   }
   /**
    * bind 済み this.headerMount 取得します
    * @return {Function} bind 済み this.headerMount を返します
    */
-  get boundMount():Function {
+  get boundMount() {
     return this._boundMount;
   }
   // ---------------------------------------------------
@@ -174,24 +174,21 @@ export class ViewSingle extends View {
   /**
    * Ajax request を開始します
    */
-  start():void {
+  start() {
     this.action.start();
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result:Result ):void {
-    let response = result.response;
-
-    if ( typeof response === 'undefined' ) {
-
+  done(result) {
+    const response = result.response;
+    if (typeof response === 'undefined') {
       // articles undefined
       // JSON に問題がある
-      let error = new Error( Message.undef('[SINGLE:UNDEFINED]') );
-      this.executeSafely( View.UNDEFINED_ERROR, error );
+      const error = new Error(Message.undef('[SINGLE:UNDEFINED]'));
+      this.executeSafely(View.UNDEFINED_ERROR, error);
       // this.showError( error.message );
-
     } else {
       // @since 2016-09-27, SingleDae instance にし render へ渡すに変更
       const single = new SingleDae(response);
@@ -209,7 +206,7 @@ export class ViewSingle extends View {
       const snap = new Snap(element, true, page);
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
-      snap.init();
+      snap.start();
       // @since 2016-12-26
       // top button / short cut でのスクロールトップ対応
       const hit = new Hit(element);
@@ -269,9 +266,8 @@ export class ViewSingle extends View {
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error:Error ):void {
-
-    this.executeSafely( View.RESPONSE_ERROR, error );
+  fail(error) {
+    this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
     console.warn('error', error);
@@ -304,7 +300,7 @@ export class ViewSingle extends View {
   //
   //   message = Safety.string( message, '' );
   //
-  //   // ToDo: Error 時の表示が決まったら変更する
+  //   // Error 時の表示
   //   /*
   //   let error = new ViewError( this.element, this.option, message );
   //   error.render();
@@ -316,40 +312,40 @@ export class ViewSingle extends View {
    * @param {SingleDae} single JSON response
    * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */
-  render(single:SingleDae):void {
+  render(single) {
     // console.log( 'ViewSingle response', response );
     // let single = new SingleDae( response );
-    // console.log( 'ViewSingle beforeRender', single );
+    // console.log('ViewSingle beforeRender', this.id, single);
     // beforeRender call
-    this.executeSafely( View.BEFORE_RENDER, single );
+    this.executeSafely(View.BEFORE_RENDER, single);
 
-    let header, footer;
+    // let header, footer;
     // console.log( 'ViewSingle', single );
     // header
-    if ( this._header === null ) {
-      header = new ViewSingleHeader( this.element, single );
-      header.on( View.DID_MOUNT, this._boundMount );
+    if (this._header === null) {
+      const header = new ViewSingleHeader(this.element, single);
+      header.on(View.DID_MOUNT, this._boundMount);
       this._header = header;
       header.start();
     } else {
-      this._header.render( single );
+      this._header.render(single);
     }
 
     // footer
-    if ( Safety.isElement( this._elements.footer ) ) {
+    if (Safety.isElement(this._elements.footer)) {
       // footer element が存在する時のみ
-      if ( this._footer === null ) {
-        footer = new ViewSingleFooter( this._elements.footer, single );
+      if (this._footer === null) {
+        const footer = new ViewSingleFooter(this._elements.footer, single);
         this._footer = footer;
         footer.start();
       } else {
-        this._footer.render( single );
+        this._footer.render(single);
       }
     }
 
     // 関連記事 もしもあるなら
-    if ( single.hasRelated ) {
-      this.related( single.related );
+    if (single.hasRelated) {
+      this.related(single.related);
     }
     // ga from 2016-06-08
     // ViewSingle.ga( single );
@@ -362,10 +358,10 @@ export class ViewSingle extends View {
   /**
    * header View.DID_MOUNT event handler
    */
-  headerMount():void {
+  headerMount() {
     // console.log('ViewSingle.headerMount');
-    this._header.off( View.DID_MOUNT, this._boundMount );
-    this.executeSafely( View.DID_MOUNT );
+    this._header.off(View.DID_MOUNT, this._boundMount);
+    this.executeSafely(View.DID_MOUNT);
   }
   /**
    * 関連記事（記事詳細の）
@@ -373,31 +369,24 @@ export class ViewSingle extends View {
    * desktop/p.php
    * `_popIn_recommend` に JS で出力
    * </pre>
-   * @param {Array} related 配列内データ型はRelatedDom
+   * @param {Array} [related=[]] 配列内データ型はRelatedDom
    */
-  related( related:Array = [] ):void {
-    if ( !Safety.isElement( this._elements.related ) ) {
+  related(related = []) {
+    if (!Safety.isElement(this._elements.related)) {
       // element が不正の時は処理しない
       return;
     }
-
-    related = Safety.array( related );
-
+    // related = Safety.array(related);
     // 効率化のために
     // ViewRelated instance が null の時は instance を作成し start を実行する
     // instance が存在するときは render する
-    if ( this._viewRelated === null ) {
-
-      let viewRelated = new ViewRelated( this._elements.related, related );
+    if (this._viewRelated === null) {
+      const viewRelated = new ViewRelated(this._elements.related, related);
       viewRelated.start();
       this._viewRelated = viewRelated;
-
     } else {
-
-      this._viewRelated.render( related );
-
+      this._viewRelated.render(related);
     }
-
   }// related
 
   /**
@@ -407,14 +396,13 @@ export class ViewSingle extends View {
    *
    * @since 2016-06-10
    */
-  static moreExternal():void {
+  static moreExternal() {
     const external = Dom.moreExternal();
-    if ( external === null ) {
+    if (external === null) {
       return;
     }
-
     // ga 準備
-    external.addEventListener( 'click', ViewSingle.onExternal, false );
+    external.addEventListener('click', ViewSingle.onExternal, false);
   }
   /**
    * <p>a#readMore-external click event handler<br>
@@ -434,16 +422,15 @@ export class ViewSingle extends View {
    * @since 2016-06-10
    * @param {Event} event a#readMore-external click event object
    */
-  static onExternal( event:Event ):void {
+  static onExternal(event) {
     const category = 'external_link';
     const action = 'click';
     const label = Safety.string(event.target.href, '');
     const method = 'ViewSingle.onExternal';
-
     // ----------------------------------------------
     // GA 計測タグ
     // 記事詳細で続きを読むのリンク先トラッキング
-    Ga.add( new GaData( method, category, action, label, 0, true ) );
+    Ga.add(new GaData(method, category, action, label, 0, true));
     // ----------------------------------------------
   }
   // ---------------------------------------------------
@@ -472,7 +459,7 @@ export class ViewSingle extends View {
    * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
    * @since 2016-06-08 deprecated, instead use Ga.single
    */
-  static ga( single:SingleDae ):void {
+  static ga(single) {
     let category = 'provider';
     const action = 'view';
     const label = single.user.userName;
@@ -481,18 +468,18 @@ export class ViewSingle extends View {
     // ----------------------------------------------
     // GA 計測タグ
     // 記事詳細の提供元のアクセス数を測定する
-    Ga.add( new GaData( method, category, action, label, 0, true ) );
+    Ga.add(new GaData(method, category, action, label, 0, true));
     // ----------------------------------------------
 
     // category label 送信
     const categories:CategoriesDae = single.categories;
 
     category = 'category';
-    categories.all.map( (value:SlugDae) => {
+    categories.all.map((value:SlugDae) => {
       // ----------------------------------------------
       // GA 計測タグ
       // 記事カテゴリーのアクセス数を測定する
-      Ga.add( new GaData( method, category, action, value.label, 0, true ) );
+      Ga.add(new GaData(method, category, action, value.label, 0, true));
       // ----------------------------------------------
     } );
   }

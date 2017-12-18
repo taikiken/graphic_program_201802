@@ -11,7 +11,7 @@
  */
 
 
-let _symbol = Symbol();
+// const _symbol = Symbol();
 let _mode = 'production';
 
 /**
@@ -25,19 +25,19 @@ let _mode = 'production';
  * </pre>
  */
 export class Env {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Env is static Class. not use new Env().' );
-
-    }
-
-  }
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Env is static Class. not use new Env().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
@@ -45,17 +45,15 @@ export class Env {
    * 現在のモード
    * @return {string} 現在のモードを返します
    */
-  static get mode():string {
-
+  static get mode() {
     return _mode;
-
   }
   /**
    * PRODUCTION
    * @readonly
    * @return {string} 文字列 production を返します
    */
-  static get PRODUCTION():string {
+  static get PRODUCTION() {
     return 'production';
   }
   /**
@@ -63,7 +61,7 @@ export class Env {
    * @readonly
    * @return {string} 文字列 production を返します
    */
-  static get DEVELOP():string {
+  static get DEVELOP() {
     return 'develop';
   }
   /**
@@ -71,7 +69,7 @@ export class Env {
    * @readonly
    * @return {string} 文字列 test を返します
    */
-  static get TEST():string {
+  static get TEST() {
     return 'test';
   }
   /**
@@ -79,7 +77,7 @@ export class Env {
    * @readonly
    * @return {string} 文字列 local を返します
    */
-  static get LOCAL():string {
+  static get LOCAL() {
     return 'local';
   }
 
@@ -89,15 +87,22 @@ export class Env {
    * DEV, dev.undotsushin.com
    * @return {string} 文字列 dev を返します
    */
-  static get DEV():string {
+  static get DEV() {
     return 'dev';
   }
   /**
    * STG, stg.undotsushin.com
    * @return {string} 文字列 stg を返します
    */
-  static get STG():string {
+  static get STG() {
     return 'stg';
+  }
+  /**
+   * process.env.NODE_ENV を取得します
+   * @returns {string} develop / production
+   */
+  static get NODE_ENV() {
+    return '@@nodeEnv';
   }
   // ---------------------------------------------------
   //  METHOD
@@ -105,45 +110,37 @@ export class Env {
   /**
    * ローカルテスト(vagrant)モードにします
    */
-  static local():void {
-
+  static local() {
     _mode = Env.LOCAL;
-
   }
   /**
    * ローカルテストモードにします
    */
-  static test():void {
-
+  static test() {
     _mode = Env.TEST;
-
   }
   /**
    * 開発モードにします
    */
-  static develop():void {
-
+  static develop() {
     _mode = Env.DEVELOP;
-
   }
   /**
    * 実行モードにします
    */
-  static production():void {
-
+  static production() {
     _mode = Env.PRODUCTION;
-
   }
   /**
    * dev 環境にします
    */
-  static dev():void {
+  static dev() {
     _mode = Env.DEV;
   }
   /**
    * stg 環境にします
    */
-  static stg():void {
+  static stg() {
     _mode = Env.STG;
   }
 }

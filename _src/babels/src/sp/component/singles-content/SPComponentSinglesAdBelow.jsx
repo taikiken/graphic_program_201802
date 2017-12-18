@@ -21,7 +21,7 @@ const React = self.React;
  * @TODO: 広告IDが同じで表示できない様子、要確認
  * @since 2016-11-14
  */
-export class SPComponentSinglesAdBelow extends React.Component {
+export default class SPComponentSinglesAdBelow extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

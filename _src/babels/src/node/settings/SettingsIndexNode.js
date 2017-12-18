@@ -34,7 +34,7 @@ import {Safety} from '../../data/Safety';
 import {StatusDae} from '../../dae/StatusDae';
 
 // node
-import {ErrorNode} from '../error/ErrorNode';
+// import {ErrorNode} from '../error/ErrorNode';
 import {ChangeAvatarNode} from '../avator/ChangeAvatorNode';
 
 // event
@@ -44,6 +44,7 @@ import {MessageStatus} from '../../event/MessageStatus';
 // model
 import {Model} from '../../model/Model';
 import {ModelAccountEdit} from '../../model/settings/ModelAccountEdit';
+import ComponentError from '../../component/error/ComponentError';
 
 // react
 let React = self.React;
@@ -183,7 +184,7 @@ let SettingInputNode = React.createClass( {
 
     }
 
-    // console.log( 'imgStyle ', imgStyle );
+    // console.log( 'SettingInputNode.imgStyle ', imgStyle );
 
     return (
       <form ref="settings" className={'loading-root ' + this.state.loading} encType="multipart/form-data" onSubmit={this.submitHandler}>
@@ -199,7 +200,7 @@ let SettingInputNode = React.createClass( {
                 placeholder={Message.PLACEHOLDER_EMAIL}
               />
             </span>
-            <ErrorNode message={message('email')} />
+            <ComponentError message={message('email')} />
           </span>
           {/* password */}
           <span className={'form-parts ' + errorClass('password')}>
@@ -212,7 +213,7 @@ let SettingInputNode = React.createClass( {
                 onChange={this.passwordChange}
               />
             </span>
-            <ErrorNode message={message('password')} />
+            <ComponentError message={message('password')} />
           </span>
           {/* name */}
           <span className={'form-parts ' + errorClass('name')}>
@@ -225,7 +226,7 @@ let SettingInputNode = React.createClass( {
                 onChange={this.nameChange}
               />
             </span>
-            <ErrorNode message={message('name')} />
+            <ComponentError message={message('name')} />
           </span>
           {/* bio */}
           <span className="form-parts">
@@ -275,7 +276,7 @@ let SettingInputNode = React.createClass( {
                   className="setting-form-picture form-input"
                 />
               </div>
-              <ErrorNode message={message('profile_picture')} />
+              <ComponentError message={message('profile_picture')} />
             </div>
           </div>
         </fieldset>

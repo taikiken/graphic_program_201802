@@ -11,7 +11,7 @@
  */
 
 // view
-import { View } from '../../view/View';
+import View from '../../view/View';
 
 // app
 import { Url } from '../../app/const/Url';
@@ -21,7 +21,7 @@ import { Message } from '../../app/const/Message';
 // import { BannerNode } from '../../node/single/BannerNode';
 
 // view
-import { Banner } from '../../view/Banner';
+import Banner from '../../view/Banner';
 
 // React
 const React = self.React;

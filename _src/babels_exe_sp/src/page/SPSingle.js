@@ -12,7 +12,7 @@
 
 
 // ui
-import {SPNav} from '../ui/SPNav';
+import SPNav from '../ui/SPNav';
 
 // let _symbol = Symbol();
 
@@ -31,7 +31,7 @@ let _articleId = 0;
  * <p>Single(detail)記事詳細</p>
  * 全て static です
  */
-export class SPSingle {
+export default class SPSingle {
   // /**
   //  * 記事詳細 singleton class です
   //  * @param {Symbol} target Singleton を実現するための private symbol
@@ -53,12 +53,12 @@ export class SPSingle {
     // header.user
     const profileElement = Dom.profile();
     let headerUser = null;
-    if ( profileElement !== null ) {
-      headerUser = new UT.sp.view.header.SPViewHeaderUser( profileElement );
+    if (profileElement !== null) {
+      headerUser = new UT.sp.view.header.SPViewHeaderUser(profileElement);
       if (UT.app.User.sign) {
         // login user はコメント投稿可能 -> 表示アイコン必要
         _headerUser = headerUser;
-        headerUser.on( UT.view.View.BEFORE_RENDER, SPSingle.onHeader );
+        headerUser.on(UT.view.View.BEFORE_RENDER, SPSingle.onHeader);
       } else {
         // 非ログインユーザーはアイコン取得いらない
         ++_prepared;
@@ -70,9 +70,9 @@ export class SPSingle {
     // ----------------------------
     const singleHeaderElement = Dom.singleHeader();
     if (singleHeaderElement !== null) {
-      const single = new UT.sp.view.SPViewSingle( articleId, singleHeaderElement, Dom.visual(), Dom.userBanner() );
+      const single = new UT.sp.view.SPViewSingle(articleId, singleHeaderElement, Dom.visual(), Dom.userBanner());
       _viewSingle = single;
-      single.on( UT.view.View.BEFORE_RENDER, SPSingle.before );
+      single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
       single.start();
     } else {
       SPSingle.comment();
@@ -91,9 +91,9 @@ export class SPSingle {
    * <p>ユーザー: アイコン, Id 取得のために event を bind し情報を取得します</p>
    * @param {Object} event event object
    */
-  static onHeader( event ):void {
-    _headerUser.off( UT.view.View.BEFORE_RENDER, SPSingle.onHeader );
-    _userDae = event.args[ 0 ];
+  static onHeader(event) {
+    _headerUser.off(UT.view.View.BEFORE_RENDER, SPSingle.onHeader);
+    _userDae = event.args[0];
     SPSingle.comment();
   }
   /**
@@ -102,7 +102,7 @@ export class SPSingle {
    * @param {Object} event event object
    */
   static before(event) {
-    _viewSingle.off( UT.view.View.BEFORE_RENDER, SPSingle.before );
+    _viewSingle.off(UT.view.View.BEFORE_RENDER, SPSingle.before);
     if (!event || !event.args) {
       return;
     }
@@ -166,10 +166,10 @@ export class SPSingle {
    * **非ログイン**
    * <p>記事 Id 必須</p>
    */
-  static comment():void {
+  static comment() {
     ++_prepared;
 
-    if ( _prepared !== 2 ) {
+    if (_prepared !== 2) {
       return;
     }
 
@@ -177,25 +177,25 @@ export class SPSingle {
     // _userDae null check
     //  _userDae.profilePicture undefined check
     let picture = '';
-    if ( _userDae !== null && typeof _userDae.profilePicture !== 'undefined' ) {
+    if (_userDae !== null && typeof _userDae.profilePicture !== 'undefined') {
       picture = _userDae.profilePicture;
     }
 
     // article id
-    let articleId = _articleId;
-    let SPViewComments = UT.sp.view.SPViewComments;
+    const articleId = _articleId;
+    const SPViewComments = UT.sp.view.SPViewComments;
 
     // comment form
-    let commentFormElement = Dom.commentForm();
-    if ( commentFormElement !== null ) {
-      let commentForm = new UT.sp.view.comment.SPViewCommentForm( commentFormElement, articleId, picture );
+    const commentFormElement = Dom.commentForm();
+    if (commentFormElement !== null) {
+      const commentForm = new UT.sp.view.comment.SPViewCommentForm(commentFormElement, articleId, picture);
       commentForm.start();
     }
 
     // self
-    let selfElement = Dom.commentSelf();
-    if ( selfElement !== null ) {
-      let commentSelf = new SPViewComments( articleId, selfElement, UT.app.const.CommentsType.SELF );
+    const selfElement = Dom.commentSelf();
+    if (selfElement !== null) {
+      const commentSelf = new SPViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
       if ( _userDae !== null ) {
         commentSelf.user = _userDae;
       }
@@ -203,20 +203,20 @@ export class SPSingle {
     }
 
     // official
-    let officialElement = Dom.commentOfficial();
-    if ( officialElement !== null ) {
-      let official = new SPViewComments( articleId, officialElement, UT.app.const.CommentsType.OFFICIAL );
-      if ( _userDae !== null ) {
+    const officialElement = Dom.commentOfficial();
+    if (officialElement !== null) {
+      const official = new SPViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
+      if (_userDae !== null) {
         official.user = _userDae;
       }
       official.start();
     }
 
     // normal
-    let normalElement = Dom.commentNormal();
-    if ( normalElement !== null ) {
-      let normal = new SPViewComments( articleId, normalElement, UT.app.const.CommentsType.NORMAL );
-      if ( _userDae !== null ) {
+    const normalElement = Dom.commentNormal();
+    if (normalElement !== null) {
+      const normal = new SPViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
+      if (_userDae !== null) {
         normal.user = _userDae;
       }
       normal.start();

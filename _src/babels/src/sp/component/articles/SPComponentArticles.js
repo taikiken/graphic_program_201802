@@ -18,7 +18,7 @@ import { Empty } from '../../../app/const/Empty';
 import { CategoryLabelNode } from '../../../node/category/CategoryLabelNode';
 
 // view
-import { View } from '../../../view/View';
+import View from '../../../view/View';
 
 // component
 import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';

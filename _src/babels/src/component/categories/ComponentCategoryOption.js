@@ -14,7 +14,7 @@
 import { Dom } from '../../app/Dom';
 
 // view
-import { View } from '../../view/View';
+import View from '../../view/View';
 // view/carousel
 import { ComponentCarousel } from '../carousel/ComponentCarousel';
 // view/categories
@@ -28,7 +28,7 @@ import { ModelCategoriesSlug } from '../../model/categoires/ModelCategoriesSlug'
 import { Result } from '../../data/Result';
 
 // dae
-import { CategoriesSlugDae } from '../../dae/caegories/CategoriesSlugDae';
+import { CategoriesSlugDae } from '../../dae/categories/CategoriesSlugDae';
 
 // tick
 import { Polling } from '../../tick/Polling';

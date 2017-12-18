@@ -11,7 +11,7 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
@@ -21,36 +21,34 @@ let Dom = UT.app.Dom;
  * <p>Sidebar ranking / video 表示</p>
  * 全て static です
  */
-export class SPSidebar {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPSidebar is static Class. not use new SPSidebar().' );
-
-    }
-  }
+export default class SPSidebar {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPSidebar is static Class. not use new SPSidebar().' );
+  //
+  //   }
+  // }
   /**
    * sidebar ranking / video rendering 開始
    * @param {string} [slug=all] category slug
    */
-  static start( slug:string = 'all' ):void {
+  static start(slug = 'all') {
     // ranking
-    let rankingElement = Dom.ranking();
-    if ( rankingElement !== null ) {
-      let ranking = new UT.view.sidebar.ViewRanking( rankingElement, null, slug );
+    const rankingElement = Dom.ranking();
+    if (rankingElement !== null) {
+      const ranking = new UT.view.sidebar.ViewRanking(rankingElement, null, slug);
       ranking.start();
     }
-
     // video
-    let videoElement = Dom.video();
-    if ( videoElement !== null ) {
-      let videos = new UT.view.sidebar.ViewVideos( videoElement, null, slug );
+    const videoElement = Dom.video();
+    if (videoElement !== null) {
+      const videos = new UT.view.sidebar.ViewVideos(videoElement, null, slug);
       videos.start();
     }
-
   }
 }

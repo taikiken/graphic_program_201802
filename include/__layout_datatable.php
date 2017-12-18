@@ -6,7 +6,7 @@
 <?php if($NUMBERINGOFF!=1){ ?>
 <th scope="col" width="45" class="t_numbering<?php if(getSorC("order")!=1){ ?>_disabled<?php } ?>">順番</th>
 <?php } ?>
-  <?php if ($CURRENTDIRECTORY != "company_news") { ?>
+  <?php if ($CURRENTDIRECTORY != "company_news" && $CURRENTDIRECTORY != "notice") { ?>
     <th scope="col" width="35" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">公開</th>
   <?php } ?>
   <?php if($TABLE == "u_media"){ ?>
@@ -37,7 +37,7 @@
 <img src="/shared/cms/img/cmd_ups_disabled.gif" width="13" height="13" alt="一つ上へ入れ替える" ><img src="/shared/cms/img/cmd_downs_disabled.gif" width="13" height="13" alt="一つ下へ入れ替える" >
 -->
 </td>
-      <?php if ($CURRENTDIRECTORY != "company_news") { ?>
+      <?php if ($CURRENTDIRECTORY != "company_news" && $CURRENTDIRECTORY != "notice") { ?>
 
         <td class="display"><?php
           if($CURRENTDIRECTORY == "photo"){

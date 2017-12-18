@@ -97,7 +97,7 @@ export class ComponentSinglesWidgetPopularList extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateList(this.state.list);

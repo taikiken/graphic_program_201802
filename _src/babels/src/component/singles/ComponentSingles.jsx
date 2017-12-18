@@ -11,7 +11,7 @@
  */
 
 // view
-import { View } from '../../view/View';
+import View from '../../view/View';
 
 // app
 import { WidgetType } from '../../app/const/WidgetType';
@@ -312,8 +312,8 @@ export class ComponentSingles extends React.Component {
     const list = state.list;
     const length = list.length;
     // console.log('ComponentSingles.render', length);
-    // @ToDO 条件簡略化可能か調べる
-    // @ToDO 各件数のテスト
+    // 条件簡略化可能か調べる
+    // 各件数のテスト
     if (length === 0) {
       // 続きの記事 0 件
       // オススメ・関連・人気
