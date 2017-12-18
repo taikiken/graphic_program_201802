@@ -23,6 +23,7 @@ import { GaData } from '../../ga/GaData';
 
 // dae
 import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
+import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
 
 // React
 const React = self.React;
@@ -163,6 +164,7 @@ export class ComponentPickupArticle extends React.Component {
           <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
           {videoPlay(props.mediaType)}
           <div className="post-overview">
+            {/*
             <p className={`post-category post-category-${props.slug}`}>
               <CategoryLabelNode
                 categories={props.categories}
@@ -170,6 +172,12 @@ export class ComponentPickupArticle extends React.Component {
                 index={props.index}
               />
             </p>
+            */}
+            <ComponentCategoryLabels
+              categories={props.categories}
+              id={`pickup-label-${props.id}`}
+              index={props.index}
+            />
             <h2 className="post-heading">{props.title}</h2>
             <p className="post-date">{props.date}</p>
             {/*
