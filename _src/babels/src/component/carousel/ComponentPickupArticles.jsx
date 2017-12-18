@@ -128,7 +128,11 @@ export default class ComponentPickupArticles extends React.Component {
    * @return {?XML} カルーセル1記事コンテナを返します
    */
   static makeArticle = (dae, index, clone, home, position) => {
-    const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
+    // const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
+    // @since 2017-12-18 `carousel` 追加になる - 画像ない時の処理落とす
+    // const large = Safety.image(dae.media.images.carousel, dae.media.images.large);
+    const carousel = dae.media.images.carousel || dae.media.images.large;
+    const large = Safety.image(carousel, Empty.IMG_LARGE);
     // console.log('makeArticle', dae, dae.date, typeof dae.date);
     // HeadlineDom instance を使い render
     // iteration key は index を使う

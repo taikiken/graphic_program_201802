@@ -369,20 +369,20 @@ export default class ViewArchiveMasonryInfinite extends View {
     }
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-    // console.warn('error', error);
+    console.warn('ViewArchiveMasonryInfinite.fail', error, this);
   }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError(message = '') {
-    // message = Safety.string( message, '' );
-    //
-    // // Error 時の表示が決まったら変更する
-    // let error = new ViewError( this.element, this.option, message );
-    // error.render();
-    console.warn('ViewArchiveMasonryInfinite.showError', message);
-  }
+  // /**
+  //  * ViewError でエラーコンテナを作成します
+  //  * @param {string} message エラーメッセージ
+  //  */
+  // showError(message = '') {
+  //   // message = Safety.string( message, '' );
+  //   //
+  //   // // Error 時の表示が決まったら変更する
+  //   // let error = new ViewError( this.element, this.option, message );
+  //   // error.render();
+  //   console.warn('ViewArchiveMasonryInfinite.showError', message);
+  // }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
