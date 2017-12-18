@@ -216,6 +216,48 @@
 
 
 
+//お知らせ
+// https://aws-plus.backlog.jp/view/UNDO_SPBL-281
+.announce {
+  //.announce--text
+  &--text {
+    //.announce__inner
+    .announce__inner {
+      padding-right: perCalc(20);
+      padding-left: perCalc(20);
+    }
+
+    padding: (18/2)+px 0;
+
+    //.announce__item__icon
+    .announce__item__icon {
+      width: (28/2)+px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    //.announce__item
+    .announce__item {
+      a {
+        font-weight: bold;
+        font-size: fz(20/2);
+      }
+    }
+  } //.announce--text
+
+
+
+  //.announce--image
+  &--image {
+    width: 100%;
+    text-align: center;
+  }
+} //.announce
+
+
+
+
+
 // board-small
 // 汎用 ニュース一覧
 // github issue#1010 で廃止

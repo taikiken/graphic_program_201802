@@ -7,6 +7,53 @@
 //
 // Styleguide 2.9.0
 
+
+
+
+
+//お知らせ
+// https://aws-plus.backlog.jp/view/UNDO_SPBL-281
+.announce {
+  //.announce__inner
+  &__inner {
+    width: $global-inner-width;
+    margin: 0 auto;
+  }
+
+
+
+  //.announce--text
+  &--text {
+    padding: 8px 0;
+
+    //.announce__item__icon
+    .announce__item__icon {
+      width: 16px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    //.announce__item
+    .announce__item {
+      a {
+        font-weight: bold;
+        font-size: fz(13);
+      }
+    }
+  } //.announce--text
+
+
+
+  //.announce--image
+  &--image {
+    text-align: center;
+  }
+} //.announce
+
+
+
+
+
 // -------------------------------------------------
 // loading
 // -------------------------------------------------
@@ -184,7 +231,7 @@
   .board-item {
     position: absolute;
     top: 99999px;
-    width: 350px;
+    width: 354px;
     margin-top: 30px;
     padding-bottom: 20px;
     background-color: #fff;
@@ -214,10 +261,12 @@
         // padding-left: 20px;
       }
 
-      &-category {}
+      &-category {
+        margin-top: 0.25em;
+      }
 
       &-heading {
-        height: 3em;
+        height: 2.8em;
         line-height: lh(26, 20);
         overflow: hidden;
         font-size: fz(20);
