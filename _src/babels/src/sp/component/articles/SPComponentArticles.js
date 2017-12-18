@@ -142,7 +142,7 @@ export class SPComponentArticles extends React.Component {
               if (dae.isRecommend && props.home) {
                 recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
               }
-              const slug = dae.categories.slug || 'x';
+              // const slug = dae.categories.slug || 'x';
               /*
                @since 2016-12-26
                design 変更に伴い

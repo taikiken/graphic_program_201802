@@ -335,15 +335,15 @@ export default class ViewArchiveMasonryInfinite extends View {
     if ( typeof articles === 'undefined' ) {
       // [ERROR] articles undefined
       // JSON に問題がある
-      let error = new Error( Message.undef('[ARCHIVE:UNDEFINED]') );
-      this.executeSafely( View.UNDEFINED_ERROR, error );
+      const error = new Error( Message.undef('[ARCHIVE:UNDEFINED]') );
+      this.executeSafely(View.UNDEFINED_ERROR, error);
       // this.showError( error.message );
       // @since 2016-09-28, error で button を非表示へ
       this.moreButton(false);
     } else if ( articles.length === 0 ) {
       // [ERROR] articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( Message.empty('[ARCHIVE:EMPTY]') );
+      const error = new Error(Message.empty('[ARCHIVE:EMPTY]'));
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
       // @since 2016-09-28, error で button を非表示へ
@@ -359,7 +359,7 @@ export default class ViewArchiveMasonryInfinite extends View {
    * @param {Error} error Error instance
    */
   fail(error) {
-    this.executeSafely( View.RESPONSE_ERROR, error );
+    this.executeSafely(View.RESPONSE_ERROR, error);
     // @since 2016-09-28, error で button を非表示へ
     // this.moreButton(false);
     // button exist 判定追加
@@ -420,7 +420,7 @@ export default class ViewArchiveMasonryInfinite extends View {
       articlesList.push(dae);
       return article;
     });
-
+    console.log('ViewArchiveMasonryInfinite,.render articles', articlesList);
     // // this._articleRendered が null の時だけ ReactDOM.render する
     // if (this.articleRendered === null ) {
     //   // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する

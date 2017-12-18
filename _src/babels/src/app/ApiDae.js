@@ -32,41 +32,30 @@ import {Query} from '../net/types/Query';
  * @private
  * @static
  */
-let apiRoot = () => {
-
+const apiRoot = () => {
   // let n = parseInt( port, 10 );
-
   switch ( Env.mode ) {
-
     case Env.LOCAL :
       return 'http://192.168.33.50';
-
     case Env.TEST :
       return 'http://www.undotsushin.local';
-
     case Env.DEVELOP :
       // return 'http://dev2.undotsushin.com';
       // dev2 から正常値が返らなくなった 2016-04-25
       return 'https://dev.sportsbull.jp';
-
     // online
     case Env.PRODUCTION :
       return '';
-
     // online
     case Env.DEV :
       return '';
-
     // online
     case Env.STG :
       return '';
-
     default :
       // console.warn( `illegal option: ${Env.mode}. instead use production.` );
       return '';
-
   }
-
 };
 // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=986840481
 // API 一覧より
@@ -76,11 +65,11 @@ let apiRoot = () => {
  * @return {Types} {users:add: Types, users:login: Types, users:logout: Types, users:email: Types, auth:sns: Types, auth:fb: Types, auth:tw: Types, categories: Types, home: Types, self: Types, category: Types, search: Types, single: Types, bookmark:add: Types, bookmark:delete: Types, comment: Types, comment:official: Types, comment:normal: Types, comment:self: Types, comment:single: Types, comment:send: Types, comment:reply: Types, comment:reply:reply: Types, comment:send:delete: Types, comment:reply:delete: Types, comment:good:add: Types, comment:good:delete: Types, comment:bad:add: Types, comment:bad:delete: Types, users:self: Types, users:id: Types, users:self:bookmark: Types, users:self:activities: Types, users:self:notifications: Types, users:self:notifications:read: Types, users:self:notifications:count: Types, users:settings:account: Types, users:settings:account:edit: Types, users:settings:interest: Types, users:settings:interest:edit: Types, users:delete: Types} Types instance を返します
  * @private
  */
-let buildPath = ( root = '' ) => {
+const buildPath = (root = '') => {
   // 共通パス
   // 先頭 protocol + host 部分を develop / production で変える
-  let API_ROOT = root === '' ? apiRoot() : root;
-  let API_PATH = API_ROOT + '/api/v1';
+  const API_ROOT = root === '' ? apiRoot() : root;
+  const API_PATH = `${API_ROOT}/api/v1`;
 
   return {
     // --------------------------------------------
@@ -499,7 +488,7 @@ let buildPath = ( root = '' ) => {
   };
 };
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 /**
  * API リクエスト先
  * @type {{users:add, users:login, users:logout, users:email, auth:sns, auth:fb, auth:tw, categories, home, self, category, search, single, bookmark:add, bookmark:delete, comment, comment:official, comment:normal, comment:self, comment:single, comment:send, comment:reply, comment:reply:reply, comment:send:delete, comment:reply:delete, comment:good:add, comment:good:delete, comment:bad:add, comment:bad:delete, users:self, users:id, users:self:bookmark, users:self:activities, users:self:notifications, users:self:notifications:read, users:self:notifications:count, users:settings:account, users:settings:account:edit, users:settings:interest, users:settings:interest:edit, users:delete}|{users: add, : Types, users: add, : Types, users: add, : Types, users: add, : Types, auth: sns, : Types, auth: sns, : Types, auth: sns, : Types, categories: Types, home: Types, self: Types, category: Types, search: Types, single: Types, bookmark: add, : Types, bookmark: add, : Types, comment: Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, users: add, : Types, users: add, : Types, users: add, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types}}
@@ -520,19 +509,19 @@ let _api = buildPath();
  * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=986840481
  */
 export class ApiDae {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target:Symbol ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'ApiDae is static Class. not use new ApiDae().' );
-
-    }
-
-  }
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target:Symbol ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'ApiDae is static Class. not use new ApiDae().' );
+  //
+  //   }
+  //
+  // }
   /**
    * <p>/api/ 前 domain を再生成します<br>
    * develop, production 切り替えに使用します</p>
@@ -546,26 +535,22 @@ export class ApiDae {
    *
    * @param {string} [root=''] リクエスト・ドメイン
    */
-  static rebuild( root:string = '' ):void {
-    _api = buildPath( root );
+  static rebuild(root = '') {
+    _api = buildPath(root);
   }
   /**
    * api list を取得します
    * @return {Object} 全ての API list を返します
    */
-  static all():Object {
-
+  static all() {
     return _api;
-
   }
   /**
    * 指定キー情報を取得します
    * @param {string} key api key を指定します
    * @return {Types} key に基づいた Types instance を返します
    */
-  static api( key:string ):Types {
-
-    return _api[ key ];
-
+  static api(key) {
+    return _api[key];
   }
 }

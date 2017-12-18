@@ -58,6 +58,7 @@ import ViewSingle from './view/ViewSingle';
 import ViewSearch from './view/ViewSearch';
 import ViewCommentSingle from './view/ViewCommentSingle';
 import ViewFirstVisit from './view/ViewFirstVisit';
+import ViewAnnounce from './view/ViewAnnounce';
 
 // single
 import ViewSingleTitle from './view/single/ViewSingleTitle';
@@ -208,6 +209,7 @@ import SPViewBookmarks from './sp/view/mypage/SPViewBookmarks';
  *      ViewCommentSingle: ViewCommentSingle,
  *      ViewFirstVisit: ViewFirstVisit,
  *      ViewArea: ViewArea,
+ *      ViewAnnounce: ViewAnnounce,
  *      comment: {
  *        ViewCommentForm: ViewCommentForm
  *      },
@@ -338,6 +340,7 @@ const UT = {
     ViewCommentSingle,
     ViewFirstVisit,
     ViewArea,
+    ViewAnnounce,
     comment: {
       ViewCommentForm
     },
