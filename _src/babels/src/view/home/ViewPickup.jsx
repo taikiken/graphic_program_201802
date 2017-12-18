@@ -149,14 +149,14 @@ export default class ViewPickup extends View {
     if ( typeof articles === 'undefined' ) {
       // articles undefined
       // JSON に問題がある
-      let error = new Error( Message.undef('[PICKUP:UNDEFINED]') );
-      this.executeSafely( View.UNDEFINED_ERROR, error );
+      let error = new Error(Message.undef('[PICKUP:UNDEFINED]'));
+      this.executeSafely(View.UNDEFINED_ERROR, error);
       // this.showError( error.message );
-    } else if ( articles.length === 0 ) {
+    } else if (articles.length === 0) {
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( Message.empty('[PICKUP:EMPTY]') );
-      this.executeSafely( View.EMPTY_ERROR, error );
+      let error = new Error(Message.empty('[PICKUP:EMPTY]'));
+      this.executeSafely(View.EMPTY_ERROR, error);
       // this.showError( error.message );
     } else {
       this.render( articles );
@@ -167,7 +167,8 @@ export default class ViewPickup extends View {
    * @param {Error} error Error instance
    */
   fail(error) {
-    this.executeSafely( View.RESPONSE_ERROR, error );
+    this.executeSafely(View.RESPONSE_ERROR, error);
+    console.warn('ViewPickup.fail', error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
   }
@@ -199,7 +200,7 @@ export default class ViewPickup extends View {
         index={0}
         home={this.home}
       />,
-      this.element
+      this.element,
     );
   }// render
 }// class
