@@ -14,7 +14,7 @@
 import { Dom } from '../../../app/Dom';
 
 // view
-import { ComponentCategoryOption } from '../../../component/categories/ComponentCategoryOption';
+import ComponentCategoryOption from '../../../component/categories/ComponentCategoryOption';
 
 // sp/view/categories
 import { SPComponentHeadlineOption } from './SPComponentHeadlineOption';

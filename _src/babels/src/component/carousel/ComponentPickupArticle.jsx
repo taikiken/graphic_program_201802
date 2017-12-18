@@ -11,7 +11,7 @@
  */
 
 // node
-import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
+// import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
 
 // app
 import { Empty } from '../../app/const/Empty';
@@ -23,15 +23,18 @@ import { GaData } from '../../ga/GaData';
 
 // dae
 import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
-import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
+// import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
- * 引数 type が `MediaType.VIDEO` と等しかったら<br>
- *  `img` タグを返します。<br>
- *  それ以外は `null` を返します
+ * {@link ComponentPickupArticle} - thumbnail video play 表示判定処理します
+ * - 引数 type が `MediaType.VIDEO` と等しかったら`img` タグを返します。
+ * - それ以外は `null` を返します
  * @param {string} type JSON response media type
  * @return {XML} `img` タグを返します
  */
@@ -41,7 +44,7 @@ const videoPlay = (type) => type === MediaType.VIDEO ? <img src={Empty.VIDEO_PIC
  * 記事クリックで GA 計測タグを送信します
  * @since 2016-09-15
  */
-export class ComponentPickupArticle extends React.Component {
+export default class ComponentPickupArticle extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -153,7 +156,7 @@ export class ComponentPickupArticle extends React.Component {
   }
   /**
    * カルーセルスライドショー一記事コンテナを作成します
-   * @return {XML} カルーセルスライドショー一記事を返します
+   * @return {XML} カルーセルスライドショー一記事を返します `li.pickup`
    */
   render() {
     const props = this.props;
@@ -173,13 +176,19 @@ export class ComponentPickupArticle extends React.Component {
               />
             </p>
             */}
+            {/*
+            // category remove 2017-12-18
             <ComponentCategoryLabels
               categories={props.categories}
               id={`pickup-label-${props.id}`}
               index={props.index}
             />
+            */}
             <h2 className="post-heading">{props.title}</h2>
+            {/*
+            // post date remove 2017-12-18
             <p className="post-date">{props.date}</p>
+            */}
             {/*
             // @since 2016-10-01 remove comment count
             <p className="post-comment-num">{props.commentsCount}</p>

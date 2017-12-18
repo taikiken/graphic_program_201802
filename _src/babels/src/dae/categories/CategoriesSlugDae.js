@@ -71,7 +71,6 @@ export class CategoriesSlugDae {
     /**
      * JSON.response
      * @type {Object}
-     * @protected
      */
     this.response = altResponse;
     /**
@@ -83,7 +82,6 @@ export class CategoriesSlugDae {
      * - PC版はスライド
      * - スマホ/アプリは冒頭1件を固定表示(スライドしない)
      * @type {PickupDae}
-     * @protected
      * @since 2016-09-13
      */
     this.pickup = new PickupDae(altResponse.pickup);
@@ -91,7 +89,6 @@ export class CategoriesSlugDae {
      * JSON.response.headline
      * 「記事カテゴリー情報」response.headline
      * @type {HeadlineDae}
-     * @protected
      * @since 2016-09-17
      */
     this.headline = new HeadlineDae(altResponse.headline);
@@ -101,7 +98,6 @@ export class CategoriesSlugDae {
      *
      * タイトル横・powered by に表示します - 特定のカテゴリー情報のカテゴリータイトル横に表示する画像
      * @type {BannersDae}
-     * @protected
      * @since 2016-11-02
      */
     this.titleBanner = new BannersDae(altResponse.title_banner);

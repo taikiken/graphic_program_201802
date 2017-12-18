@@ -16,7 +16,7 @@ import { Dom } from '../../app/Dom';
 // view
 import View from '../../view/View';
 // view/carousel
-import { ComponentCarousel } from '../carousel/ComponentCarousel';
+import ComponentCarousel from '../carousel/ComponentCarousel';
 // view/categories
 import { ComponentHeadlineOption } from './ComponentHeadlineOption';
 
@@ -24,8 +24,8 @@ import { ComponentHeadlineOption } from './ComponentHeadlineOption';
 import { Model } from '../../model/Model';
 import { ModelCategoriesSlug } from '../../model/categoires/ModelCategoriesSlug';
 
-// data
-import { Result } from '../../data/Result';
+// // data
+// import { Result } from '../../data/Result';
 
 // dae
 import { CategoriesSlugDae } from '../../dae/categories/CategoriesSlugDae';
@@ -35,12 +35,24 @@ import { Polling } from '../../tick/Polling';
 
 // --------------------------------------------
 // Sagen
+/**
+ * [library] - Sagen
+ */
 const Sagen = self.Sagen;
 
 // Gasane
 // const Polling = self.Gasane.Polling;
 
 // React
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**
@@ -50,12 +62,12 @@ const ReactDOM = self.ReactDOM;
  * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
  * @since 2016-09-17
  */
-export class ComponentCategoryOption extends View {
+export default class ComponentCategoryOption extends View {
   /**
    * category slug を使用し API request を開始します
    * @param {string} [slug=all] category.slug
    */
-  constructor(slug:string = 'all') {
+  constructor(slug = 'all') {
     super(null, null);
 
     // const boundFail = this.fail.bind(this);
@@ -78,14 +90,14 @@ export class ComponentCategoryOption extends View {
   /**
    * request を開始します
    */
-  start():void {
+  start() {
     this.action.start();
   }
   /**
    * API 成功 callback
    * @param {Result} result JSON Result instance
    */
-  done(result:Result):void {
+  done(result) {
     const response = result.response;
     if (typeof response === 'undefined' || response === null) {
       return;
@@ -111,7 +123,7 @@ export class ComponentCategoryOption extends View {
    * 記事一覧に pickup を表示します
    * @param {CategoriesSlugDae} category JSON
    */
-  pickup(category:CategoriesSlugDae):void {
+  pickup(category) {
     const element = Dom.pickup();
     if (element === null) {
       return;
@@ -133,7 +145,7 @@ export class ComponentCategoryOption extends View {
    * 記事一覧に headline を表示します
    * @param {CategoriesSlugDae} category JSON
    */
-  headline(category:CategoriesSlugDae):void {
+  headline(category) {
     const element = Dom.headlineParent();
     if (element === null) {
       return;

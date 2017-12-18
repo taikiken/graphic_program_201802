@@ -19,7 +19,7 @@ import {CategoryAuth} from '../action/archive/CategoryAuth';
 import ViewArchiveMasonryInfinite from './ViewArchiveMasonryInfinite';
 
 // view/categories
-import { ComponentCategoryOption } from '../component/categories/ComponentCategoryOption';
+import ComponentCategoryOption from '../component/categories/ComponentCategoryOption';
 
 // app
 import {User} from '../app/User';

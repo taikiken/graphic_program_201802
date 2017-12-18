@@ -11,7 +11,7 @@
  */
 
 // carousel
-import { ComponentPickupArticle } from './ComponentPickupArticle';
+import ComponentPickupArticle from './ComponentPickupArticle';
 
 // app
 import { Empty } from '../../app/const/Empty';
@@ -28,6 +28,9 @@ import { Touching } from '../../ui/Touching';
 // const Sagen = self.Sagen;
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 // --------------------------------------------
@@ -82,7 +85,7 @@ const React = self.React;
  *  |copy|original|copy|
  * ```
  */
-export class ComponentPickupArticles extends React.Component {
+export default class ComponentPickupArticles extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -335,7 +338,6 @@ export class ComponentPickupArticles extends React.Component {
       // x の方向から next / prev 判定後にスライドを動かす
       this.move(this.dragging);
     }
-
     return false;
   }
 

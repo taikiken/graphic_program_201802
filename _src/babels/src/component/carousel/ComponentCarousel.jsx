@@ -11,8 +11,8 @@
  */
 
 // carousel
-import { ComponentPagers } from './ComponentPagers';
-import { ComponentPickupArticles } from './ComponentPickupArticles';
+import ComponentPagers from './ComponentPagers';
+import ComponentPickupArticles from './ComponentPickupArticles';
 
 // view
 import View from '../../view/View';
@@ -23,12 +23,18 @@ import { Polling } from '../../tick/Polling';
 // --------------------------------------------
 // library
 // Sagen
+/**
+ * [library] - Sagen
+ */
 const Sagen = self.Sagen;
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
-const document = self.document;
+// const document = self.document;
 
 /**
  * pickup コンテナ「カルーセル」スライドショーを実装します
@@ -43,7 +49,7 @@ const document = self.document;
  * - {@link ComponentPickupArticles} が `swipe` 管理を行います
  * @since 2016-09-15
  */
-export class ComponentCarousel extends React.Component {
+export default class ComponentCarousel extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -179,11 +185,12 @@ export class ComponentCarousel extends React.Component {
     // sp: 100%, pc: 640px
     /**
      * 移動量設定値, PC / SP で異なります - SP がレスポンシブ対応するため
-     * - PC: 640(px)
+     * - PC: 640(px) -> 540 on 2017-12-18 ref: UNDO_SPBL-281 【Web】一面のリニューアル / Web - Desktop対応
      * - SP: 280(px)
      * @type {number}
      */
-    this.left = props.sp ? 280 : 640;
+    this.left = props.sp ? 280 : 540;
+    // this.left = props.sp ? 280 : 640;
     /**
      * 移動量単位, PC / SP で異なります - SP がレスポンシブ対応するため
      * - PC: x

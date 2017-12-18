@@ -15,7 +15,7 @@ import Area from '../action/area/Area';
 import AreaAuth from '../action/area/AreaAuth';
 import Pref from '../action/area/Pref';
 import PrefAuth from '../action/area/PrefAuth';
-import { ComponentCategoryOption } from '../component/categories/ComponentCategoryOption';
+import ComponentCategoryOption from '../component/categories/ComponentCategoryOption';
 
 /**
  * 地域一覧 - Ajax request + JSON 後表示します

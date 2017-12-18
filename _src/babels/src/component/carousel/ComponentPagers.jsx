@@ -11,9 +11,12 @@
  */
 
 // carousel
-import { ComponentPager } from './ComponentPager';
+import ComponentPager from './ComponentPager';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -21,7 +24,7 @@ const React = self.React;
  * プロパティ `list` から必要な数だけのページャー {@link ComponentPager} を作成します
  * @since 2016-09-15
  */
-export class ComponentPagers extends React.Component {
+export default class ComponentPagers extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

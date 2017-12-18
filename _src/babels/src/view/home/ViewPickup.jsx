@@ -28,7 +28,7 @@ import {PickupAuth} from '../../action/home/PickupAuth';
 import {Safety} from '../../data/Safety';
 
 // carousel
-import { ComponentCarousel } from '../../component/carousel/ComponentCarousel';
+import ComponentCarousel from '../../component/carousel/ComponentCarousel';
 
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
