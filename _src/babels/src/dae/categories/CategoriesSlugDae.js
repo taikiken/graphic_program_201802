@@ -17,19 +17,20 @@ import {Safety} from '../../data/Safety';
 import {ThemeDae} from '../theme/ThemeDae';
 import {AdDae} from '../theme/AdDae';
 import {BannersDae} from '../banner/BannersDae';
-import {BannerDae} from '../banner/BannerDae';
+// import {BannerDae} from '../banner/BannerDae';
 
 // dae/categories
 import { PickupDae } from './PickupDae';
 import { HeadlineDae } from './HeadlineDae';
+import InformationDae from '../information/InformationDae';
 
 
 /**
  * 記事カテゴリー情報
- *
- * <p>特定のカテゴリー情報を取得する<br>
- * ※主に企画モノの記事一覧ページを生成するにあたり利用する</p>
- *
+ * ```
+ * 特定のカテゴリー情報を取得する
+ * ※主に企画モノの記事一覧ページを生成するにあたり利用する
+ * ```
  * `/api/v1/category/[:category_slug]`
  *
  * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
@@ -42,6 +43,10 @@ export class CategoriesSlugDae {
    */
   constructor(response = {}) {
     const altResponse = Safety.object(response);
+    /**
+     * JSON original
+     * @type {Object}
+     */
     this.origin = response;
     /**
      * response.theme
@@ -100,7 +105,51 @@ export class CategoriesSlugDae {
      * @since 2016-11-02
      */
     this.titleBanner = new BannersDae(altResponse.title_banner);
-    // TODO information 追加する - https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
+    /**
+     * category id
+     * @type {number}
+     */
+    this.id = altResponse.id;
+    /**
+     * category label
+     * @type {string}
+     */
+    this.label = altResponse.label;
+    /**
+     * category slug
+     * @type {string}
+     */
+    this.slug = altResponse.slug;
+    /**
+     * category url
+     * @type {string}
+     */
+    this.url = altResponse.url;
+    /**
+     * category title
+     * @type {string}
+     */
+    this.title = altResponse.title;
+    /**
+     * response description
+     * @type {string}
+     */
+    this.description = altResponse.description;
+    /**
+     * iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ
+     * - true  : 表示する
+     * - false : 表示しない
+     * `response.is_show_filter`
+     * @type {boolean}
+     */
+    this.isShowFilter = altResponse.is_show_filter;
+    /**
+     * response.information
+     * @type {InformationDae}
+     * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
+     * @since 2017-12-18
+     */
+    this.information = new InformationDae(altResponse.information);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -113,34 +162,34 @@ export class CategoriesSlugDae {
   //   return this._response;
   // }
   // from SlugDae
-  /**
-   * category.id
-   * @return {number} category Id を返します
-   */
-  get id() {
-    return this.response.id;
-  }
-  /**
-   * category.label
-   * @return {string} category label を返します
-   */
-  get label() {
-    return this.response.label;
-  }
-  /**
-   * category.slug
-   * @return {string} category slug を返します
-   */
-  get slug() {
-    return this.response.slug;
-  }
-  /**
-   * category.url
-   * @return {string} category url を返します
-   */
-  get url() {
-    return this.response.url;
-  }
+  // /**
+  //  * category.id
+  //  * @return {number} category Id を返します
+  //  */
+  // get id() {
+  //   return this.response.id;
+  // }
+  // /**
+  //  * category.label
+  //  * @return {string} category label を返します
+  //  */
+  // get label() {
+  //   return this.response.label;
+  // }
+  // /**
+  //  * category.slug
+  //  * @return {string} category slug を返します
+  //  */
+  // get slug() {
+  //   return this.response.slug;
+  // }
+  // /**
+  //  * category.url
+  //  * @return {string} category url を返します
+  //  */
+  // get url() {
+  //   return this.response.url;
+  // }
   // /**
   //  * @deprecated instead use titleBanner.[pc|sp]
   //  * category.title_img
@@ -155,20 +204,20 @@ export class CategoriesSlugDae {
   //   console.warn('deprecated instead use titleBanner.[pc|sp]');
   //   return this.response.title_img;
   // }
-  /**
-   * response.title_img
-   * @return {string} response.title_img を返します
-   */
-  get title() {
-    return this.response.title;
-  }
-  /**
-   * response.description
-   * @return {string} response.description を返します
-   */
-  get description() {
-    return this.response.description;
-  }
+  // /**
+  //  * response.title_img
+  //  * @return {string} response.title_img を返します
+  //  */
+  // get title() {
+  //   return this.response.title;
+  // }
+  // /**
+  //  * response.description
+  //  * @return {string} response.description を返します
+  //  */
+  // get description() {
+  //   return this.response.description;
+  // }
   // /**
   //  * response.theme
   //  * @return {ThemeDae} response.theme を ThemeDae instance にし返します
@@ -190,19 +239,19 @@ export class CategoriesSlugDae {
   // get ad():AdDae {
   //   return this._ad;
   // }
-  /**
-   * response.is_show_filter
-   * <pre>
-   * iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ
-   * - true  : 表示する
-   * - false : 表示しない
-   * </pre>
-   * @return {boolean} iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ（真偽値）を返します
-   * @since 2016-06-06
-   */
-  get isShowFilter() {
-    return this.response.is_show_filter;
-  }
+  // /**
+  //  * response.is_show_filter
+  //  * <pre>
+  //  * iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ
+  //  * - true  : 表示する
+  //  * - false : 表示しない
+  //  * </pre>
+  //  * @return {boolean} iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ（真偽値）を返します
+  //  * @since 2016-06-06
+  //  */
+  // get isShowFilter() {
+  //   return this.response.is_show_filter;
+  // }
   // --------------------
   // /**
   //  * 「記事カテゴリー情報」 response.pickup
