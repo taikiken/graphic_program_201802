@@ -16,9 +16,9 @@ import {Safety} from '../data/Safety';
 // const _symbol = Symbol('Dom');
 
 /**
- * <p>React Dom を insert する element</p>
- * <p>document.getElementById で element を取得します</p>
- * <p>全て static です<p>
+ * React Dom を insert する起点 element を取得します
+ * - `document.getElementById` で element を取得します
+ * - 全て static です
  */
 export class Dom {
   // /**
@@ -553,6 +553,7 @@ export class Dom {
   /**
    * 「お知らせ」表示コンテナ を取得します
    * @returns {Element} `div#js-announce-container`
+   * @since 2017-12-18
    */
   static announce() {
     return Dom.get('js-announce-container');

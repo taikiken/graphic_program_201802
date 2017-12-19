@@ -142,8 +142,9 @@ const buildPath = (root = '') => {
     // --------------------------------------------
     // 記事カテゴリー一覧
     // /api/v1/category/[:category_slug]
+    // http://dev.undotsushin.com/api/v1/category/crazy
+    // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
     // @since 2016-09-16
-    // 追加したけど要らなかったかも, `categories` を代用の様子
     'category:slug': new Types(
       new Type(`${API_PATH}/category`),
       new Permalink(),
@@ -494,7 +495,7 @@ const buildPath = (root = '') => {
  * @type {{users:add, users:login, users:logout, users:email, auth:sns, auth:fb, auth:tw, categories, home, self, category, search, single, bookmark:add, bookmark:delete, comment, comment:official, comment:normal, comment:self, comment:single, comment:send, comment:reply, comment:reply:reply, comment:send:delete, comment:reply:delete, comment:good:add, comment:good:delete, comment:bad:add, comment:bad:delete, users:self, users:id, users:self:bookmark, users:self:activities, users:self:notifications, users:self:notifications:read, users:self:notifications:count, users:settings:account, users:settings:account:edit, users:settings:interest, users:settings:interest:edit, users:delete}|{users: add, : Types, users: add, : Types, users: add, : Types, users: add, : Types, auth: sns, : Types, auth: sns, : Types, auth: sns, : Types, categories: Types, home: Types, self: Types, category: Types, search: Types, single: Types, bookmark: add, : Types, bookmark: add, : Types, comment: Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, users: add, : Types, users: add, : Types, users: add, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types}}
  * @private
  */
-let _api = buildPath();
+let apiData = buildPath();
 
 /**
  * <p>Api 詳細情報</p>
@@ -536,14 +537,14 @@ export class ApiDae {
    * @param {string} [root=''] リクエスト・ドメイン
    */
   static rebuild(root = '') {
-    _api = buildPath(root);
+    apiData = buildPath(root);
   }
   /**
    * api list を取得します
    * @return {Object} 全ての API list を返します
    */
   static all() {
-    return _api;
+    return apiData;
   }
   /**
    * 指定キー情報を取得します
@@ -551,6 +552,6 @@ export class ApiDae {
    * @return {Types} key に基づいた Types instance を返します
    */
   static api(key) {
-    return _api[key];
+    return apiData[key];
   }
 }

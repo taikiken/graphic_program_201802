@@ -13,6 +13,7 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
+// import { Safety } from '../../data/Safety';
 // import {Path} from '../../app/const/Path';
 
 /**
@@ -24,7 +25,7 @@ import {Api} from '../../net/Api';
  * /api/v1/category
  * ```
  */
-export class Categories extends Action {
+export default class Categories extends Action {
   /**
    * category 一覧を取得します<br>
    * menu 作成など category 全ての category 一覧が必要な時に使用します

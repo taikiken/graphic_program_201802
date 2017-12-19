@@ -10,10 +10,10 @@
  *
  */
 import View from './View';
-import { Categories } from '../action/categories/Categories';
 import { Message } from '../app/const/Message';
 import { CategoriesSlugDae } from '../dae/categories/CategoriesSlugDae';
 import ComponentAnnounce from '../component/announce/ComponentAnnounce';
+import CategoriesSlug from '../action/categories/CategoriesSlug';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -31,9 +31,22 @@ const ReactDOM = self.ReactDOM;
  * ユーザーへの「お知らせ」を表示します
  */
 export default class ViewAnnounce extends View {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   constructor(element, slug = 'all', option = {}) {
     super(element, option);
-    this.action = new Categories(this.done.bind(this), this.fail.bind(this));
+    this.slug = slug;
+    this.action = new CategoriesSlug(slug, this.done.bind(this), this.fail.bind(this));
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * Ajax request を開始します
+   */
+  start() {
+    this.action.start();
   }
   done(result) {
     const response = result.response;

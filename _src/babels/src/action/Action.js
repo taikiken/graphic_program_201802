@@ -120,6 +120,13 @@ export class Action {
     return this._url;
   }
   /**
+   * url をを設定します
+   * @param {string} url API path
+   */
+  set url(url) {
+    this._url = url;
+  }
+  /**
    * GET|POST|DELETE|PUT form method を返します
    * @return {string|*} method, GET|POST|DELETE|PUT... を返します
    */

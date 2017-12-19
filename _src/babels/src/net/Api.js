@@ -126,11 +126,24 @@ export class Api {
   // ----------------------------------
   // カテゴリー一覧
   /**
-   *
+   * カテゴリー一覧
    * @return {Types} カテゴリー一覧 API をTypes instanceで返します
    */
   static categories() {
     return ApiDae.api('categories');
+  }
+  // ----------------------------------
+  // 特定のカテゴリー情報
+  /**
+   * 特定のカテゴリー情報を取得する
+   * ※主に企画モノの記事一覧ページを生成するにあたり利用する
+   *
+   * `/api/v1/category/[:category_slug]`
+   * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
+   * @returns {Types} 特定のカテゴリー情報
+   */
+  static categorySlug() {
+    return ApiDae.api('category:slug');
   }
   // ----------------------------------
   // home / self
