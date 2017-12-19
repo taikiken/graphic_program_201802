@@ -65,28 +65,6 @@ class S3Module {
 		return $result;
   }
 
-  /*
-   * put
-   */
-  public function putS3Object($body, $key, $type)
-  {
-		$s3client = $this->getS3ClientInstance($this->keyId, $this->secretKey, $this->region);
-		try
-		{
-			$s3client->putObject([
-				'Bucket' 	    => $this->bucketName,
-				'Key'    	    => $key,
-				'Body'        => $body,
-				'ContentType' => $type
-			]);
-			return true;
-		}
-		catch(S3ComponentV3Exception $e)
-		{
-			return false;
-    }
-	}
-
 	/**
 	* 指定したS3上のファイル名のオブジェクトを削除します。
 	*/

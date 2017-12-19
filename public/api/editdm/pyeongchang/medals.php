@@ -57,7 +57,10 @@ function regist_json()
     // upload
     $save_json = json_encode($save_json_array);
     $S3Module = new S3Module();
-    $S3Module->putS3Object(json_encode($save_json_array), '/static/pyeongchang/medal.json', 'application/json');
+
+    $s3 = new S3Module;
+    $s3->createObject(json_encode($save_json_array), 'static/pyeongchang/medal.json', 'application/json');
+    echo sendResponse([]);
   }
 }
 
