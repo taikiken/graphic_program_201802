@@ -133,24 +133,37 @@ textarea {
   .user {
     @include clearfix;
     float: left;
-    margin-top: 11px;
+    margin-top: 12px;
 
-    .btn-signup {
-      @include link-decoration($highlight-color, $highlight-color, none, none);
-      display: table-cell;
-      height: 35px;
-      font-weight: bold;
-      font-size: fz(12);
-      vertical-align: middle;
+    //.user-signup-btn
+    .user-signup-btn {
+      display: table;
 
-      &:before {
-        content: '';
-        @extend .sprite-header;
-        @include sprite( $header-icon-signup, inline-block );
-        @include hide-text;
-        margin-right: 5px;
+      a {
+        display: table-cell;
+        @include link-decoration(#fff, #fff, none, none);
+        font-weight: bold;
+        font-size: fz(13);
         vertical-align: middle;
+
+        &:hover {
+          @include over-opacity;
+        }
       }
+    }
+
+    //.user-signup-btn--login
+    .user-signup-btn--login {
+      padding-right: 20px;
+    }
+
+    //.user-signup-btn--signup
+    .user-signup-btn--signup {
+      display: inline-block;
+      line-height: 30px;
+      padding: 0 16px;
+      border-radius: 15px;
+      background-color: #ad0003;
     }
   }
 
