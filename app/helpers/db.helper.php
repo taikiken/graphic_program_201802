@@ -117,18 +117,8 @@ END_DOC;
     $s = array();
 
     // ユーザーIDを取得
-    //$uid = $this->get_user_id();
-
-    // 並び替えする
-    if( !preg_match("/^[0-9]+$/",$this->uid) || $is_sort == false ) :
-      $sql="select id,name,name_e,img from u_categories where flag=1 order by n";
-
-    else :
-      //$sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$this->uid);
-	  // WBC、六大学を一面の右に固定
-		$sql=sprintf("select id,name,name_e,img,n,2 as interest from u_categories where flag=1 and id in(151) union all (select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories where flag=1 and id not in(150,151)) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid) order by interest desc,n;",$uid);
-
-    endif;
+    $uid = $this->get_user_id();
+    $sql="select tabs.category_id as id , tabs.title as name , t1.name_e , t1.img , tabs.n from tabs inner join u_categories t1 on t1.id=tabs.category_id where tabs.flag=1 and t1.flag=1 order by tabs.n asc;";
 
     //$this->connect();
     $this->query($sql);
@@ -137,6 +127,29 @@ END_DOC;
     }
     //$this->disconnect();
 
+    // 並び替えする
+    if( preg_match("/^[0-9]+$/",$uid) || $is_sort == true ) :
+        //対象となるidを取得
+        $sql=sprintf("select uc.id from u_categories uc inner join u_category uc2 on(uc2.categoryid = uc.id) where uc2.userid = %s;",$uid);
+        $this->query($sql);
+        while( $f = $this->fetch_array() ){
+            $target_list[] = $f;
+        }
+        
+        //対象の配列だけを抽出
+        $interest_list = array();
+        foreach ($s as $key => $value){
+            foreach ($target_list as $t_key => $t_value){
+                if((int)$t_value['id'] === $value['id']){
+                    $interest_list[] = $value;
+                    unset($s[$key]);
+                }
+            }
+        }
+        //抽出した配列と元の配列を結合
+        $s = array_merge($interest_list,$s);
+    endif;
+    
     return $s;
 
   }
