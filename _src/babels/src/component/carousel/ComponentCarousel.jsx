@@ -49,7 +49,7 @@ const React = self.React;
  * @since 2017-12-18 component
  */
 const ComponentCarouselDirection = ({ sp, length, prev, next }) => {
-  console.log('ComponentCarouselDirection sp', sp, length);
+  // console.log('ComponentCarouselDirection sp', sp, length);
   if (sp || length <= 1) {
     return null;
   }

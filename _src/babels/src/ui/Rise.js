@@ -18,7 +18,7 @@ import {Scroll} from '../util/Scroll';
 /**
  * 対象 element bottom が window.bottom を超えたら Event を発生させます
  */
-export class Rise extends EventDispatcher {
+export default class Rise extends EventDispatcher {
   /**
    * 対象 element bottom が window.bottom window.top に contain しているかを監視します
    * @param {Element} element 対象 element
@@ -29,33 +29,28 @@ export class Rise extends EventDispatcher {
     /**
      * 対象 element
      * @type {Element}
-     * @protected
      */
-    this._element = element;
+    this.element = element;
     /**
      * 減産数値
      * @type {Number}
-     * @protected
      */
-    this._offset = offset;
+    this.offset = offset;
     /**
      * getBoundingClientRect を取得するために 引数 element から Offset instance を作成します
      * @type {Offset}
-     * @protected
      */
-    this._dom = new Offset(element);
+    this.dom = new Offset(element);
     /**
      * bind 済み this.onScroll
      * @type {Function}
-     * @protected
      */
-    this._boundScroll = this.onScroll.bind(this);
+    this.boundScroll = this.onScroll.bind(this);
     /**
      * Scroll 監視 instance
      * @type {Scroll|*}
-     * @protected
      */
-    this._scroll = Scroll.factory();
+    this.scroll = Scroll.factory();
     /**
      * 遅延実行 timeout id
      * @type {number}
@@ -76,53 +71,53 @@ export class Rise extends EventDispatcher {
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
-  /**
-   * 処理対象 element
-   * @return {Element} 処理対象 element を返します
-   * @since 2-16-09-30
-   */
-  get element() {
-    return this._element;
-  }
-  /**
-   * 減産数値
-   * @return {Number} 減産数値を返します
-   * @since 2-16-09-30
-   */
-  offset() {
-    return this._offset;
-  }
-  /**
-   * 処理対象 element を Offset instance 変換
-   * @return {Offset} 処理対象 element を Offset instance を返します
-   * @since 2-16-09-30
-   */
-  get dom() {
-    return this._dom;
-  }
-  /**
-   * bind 済み `this.onScroll`
-   * @return {Function} bind 済み `this.onScroll` を返します
-   * @since 2-16-09-30
-   */
-  get boundScroll() {
-    return this._boundScroll;
-  }
-  /**
-   * Scroll 監視 instance
-   * @return {Scroll|*} Scroll 監視 instance を返します
-   * @since 2-16-09-30
-   */
-  get scroll() {
-    return this._scroll;
-  }
-  /**
-   * Scroll 監視 instance を設定します
-   * @param {Scroll|*} scroll Scroll 監視 instance
-   */
-  set scroll(scroll) {
-    this._scroll = scroll;
-  }
+  // /**
+  //  * 処理対象 element
+  //  * @return {Element} 処理対象 element を返します
+  //  * @since 2-16-09-30
+  //  */
+  // get element() {
+  //   return this._element;
+  // }
+  // /**
+  //  * 減産数値
+  //  * @return {Number} 減産数値を返します
+  //  * @since 2-16-09-30
+  //  */
+  // offset() {
+  //   return this._offset;
+  // }
+  // /**
+  //  * 処理対象 element を Offset instance 変換
+  //  * @return {Offset} 処理対象 element を Offset instance を返します
+  //  * @since 2-16-09-30
+  //  */
+  // get dom() {
+  //   return this._dom;
+  // }
+  // /**
+  //  * bind 済み `this.onScroll`
+  //  * @return {Function} bind 済み `this.onScroll` を返します
+  //  * @since 2-16-09-30
+  //  */
+  // get boundScroll() {
+  //   return this._boundScroll;
+  // }
+  // /**
+  //  * Scroll 監視 instance
+  //  * @return {Scroll|*} Scroll 監視 instance を返します
+  //  * @since 2-16-09-30
+  //  */
+  // get scroll() {
+  //   return this._scroll;
+  // }
+  // /**
+  //  * Scroll 監視 instance を設定します
+  //  * @param {Scroll|*} scroll Scroll 監視 instance
+  //  */
+  // set scroll(scroll) {
+  //   this._scroll = scroll;
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -132,15 +127,15 @@ export class Rise extends EventDispatcher {
   start() {
     this.stop();
     // console.log( '************************ Rise.start' );
-    this._scroll.on(Scroll.SCROLL, this._boundScroll);
-    this._scroll.start();
+    this.scroll.on(Scroll.SCROLL, this.boundScroll);
+    this.scroll.start();
   }
   /**
    * 監視を止めます
    */
   stop() {
     // console.log( '------------------------ Rise.stop' );
-    this._scroll.off(Scroll.SCROLL, this._boundScroll);
+    this.scroll.off(Scroll.SCROLL, this.boundScroll);
     // @since 2016-09-16
     // 全ての監視を止めてしまう, 破壊的なので止める
     // this._scroll.stop();
@@ -167,11 +162,12 @@ export class Rise extends EventDispatcher {
     const y = events.y;
     // const windowHeight = window.innerHeight;
     const windowHeight = events.height;
-    const windowBottom = y + windowHeight - this._offset;
+    const windowBottom = y + windowHeight - this.offset;
     // element property
-    const offsetRect = this._dom.offset();
+    const offsetRect = this.dom.offset();
     const elementBottom = y + offsetRect.top + offsetRect.height;
 
+    // console.log('Rise.onScroll', this.element, windowBottom, elementBottom);
     // element.bottom が contain しているかを調べます
     if (windowBottom > elementBottom) {
       this.dispatch({

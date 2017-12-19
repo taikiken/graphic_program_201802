@@ -14,7 +14,7 @@
 import {Message} from '../../app/const/Message';
 
 // ui
-import { Rise } from '../../ui/Rise';
+import Rise from '../../ui/Rise';
 
 // Ga
 import { Ga } from '../../ga/Ga';
@@ -51,7 +51,7 @@ export default class ComponentMoreButton extends React.Component {
       element: React.PropTypes.object.isRequired,
       slug: React.PropTypes.string.isRequired,
       // option, default ''
-      loading: React.PropTypes.string,
+      loading: React.PropTypes.string.isRequired,
       afterClick: React.PropTypes.bool
     };
   }
@@ -70,7 +70,7 @@ export default class ComponentMoreButton extends React.Component {
    */
   static get defaultProps() {
     return {
-      loading: '',
+      // loading: '',
       afterClick: false
     };
   }
@@ -95,10 +95,9 @@ export default class ComponentMoreButton extends React.Component {
     };
     /**
      * Rise instance を保持する
-     * @protected
-     * @type {?Rise}
+     * @type {Rise}
      * */
-    this.rise = null;
+    this.rise = new Rise(props.element);
     /**
      * bind 済み onRise 関数
      * @type {function}
@@ -140,6 +139,7 @@ export default class ComponentMoreButton extends React.Component {
    * @param {Event} event a.onclick event
    */
   onClick(event) {
+    // console.log('ComponentMoreButton.onClick', event);
     event.preventDefault();
     // flag off
     this.afterClick = false;
@@ -152,11 +152,8 @@ export default class ComponentMoreButton extends React.Component {
   destroy() {
     // rise 監視を破棄する
     const rise = this.rise;
-    if (rise !== null) {
-      rise.stop();
-      rise.off(Rise.RISE, this.onRise);
-      this.rise = null;
-    }
+    rise.stop();
+    rise.off(Rise.RISE, this.onRise);
   }
   /**
    * loading 表示 on / off します<br>
@@ -246,13 +243,28 @@ export default class ComponentMoreButton extends React.Component {
    * rise instance が未作成なら作成し監視を始めます
    */
   componentDidMount() {
-    // let rise = this.rise;
-    // console.log('ComponentMoreButton.componentDidMount', this.props);
-    if (this.state.show && this.rise === null) {
-      // mount 後
-      // button が表示されているなら rise 監視を始める
-      const rise = new Rise(this.props.element);
-      this.rise = rise;
+    // // let rise = this.rise;
+    // // console.log('ComponentMoreButton.componentDidMount', this.props);
+    // if (this.state.show && this.rise === null) {
+    //   // mount 後
+    //   // button が表示されているなら rise 監視を始める
+    //   const rise = new Rise(this.props.element);
+    //   this.rise = rise;
+    //   rise.on(Rise.RISE, this.onRise);
+    //   // @since 2016-10-04
+    //   // https://github.com/undotsushin/undotsushin/issues/1141
+    //   // 初回無限スクロールにしないパターンあり
+    //   // if (!this.props.afterClick) {
+    //   if (!this.afterClick) {
+    //     // 初回に限り delay させる
+    //     // this.timer = setTimeout(() => rise.start(), 500);
+    //     // rise.start();
+    //     rise.delayStart(0.5);
+    //   }
+    // }
+    const { show } = this.state;
+    if (show) {
+      const rise = this.rise;
       rise.on(Rise.RISE, this.onRise);
       // @since 2016-10-04
       // https://github.com/undotsushin/undotsushin/issues/1141
@@ -276,12 +288,14 @@ export default class ComponentMoreButton extends React.Component {
   /**
    * delegate - before update props
    * - show property が `state` と違っていたら update します
-   * @param {{show: boolean}} nextProps React.props
+   * @param {{show: boolean, loading: string}} nextProps React.props
    */
   componentWillReceiveProps(nextProps) {
-    const { show } = nextProps;
-    if (show !== this.state.show) {
-      this.setState({ show });
+    const { show, loading } = nextProps;
+    // console.log('ComponentMoreButton.componentWillReceiveProps', nextProps);
+    if (show !== this.state.show || loading !== this.state.loading) {
+      this.setState({ show, loading });
+      this.rise.start();
     }
   }
   /**
@@ -293,6 +307,7 @@ export default class ComponentMoreButton extends React.Component {
     // hasNext: true, button を表示する？
     if (!show || !this.props.action.hasNext()) {
       // button 表示なし
+      this.destroy();
       return null;
     }
     // else {

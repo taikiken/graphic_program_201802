@@ -14,7 +14,7 @@
 import {Message} from '../../../app/const/Message';
 
 // ui
-import { Rise } from '../../../ui/Rise';
+import Rise from '../../../ui/Rise';
 
 // Ga
 import { Ga } from '../../../ga/Ga';
@@ -78,19 +78,18 @@ export default class SPComponentMoreButton extends React.Component {
 
     /**
      * React.state プロパティ
-     * @type {{disable: boolean, show: boolean, loading: string}}
+     * @type {{show: boolean, loading: string}}
      */
     this.state = {
-      disable: false,
+      // disable: false,
       show: props.show,
       loading: props.loading
     };
     /**
      * Rise instance を保持する
-     * @protected
-     * @type {?Rise}
+     * @type {Rise}
      * */
-    this.rise = null;
+    this.rise = new Rise(props.element);
     /**
      * bind 済み onRise 関数
      * @type {function}
@@ -129,24 +128,21 @@ export default class SPComponentMoreButton extends React.Component {
    */
   destroy() {
     // rise 監視を破棄する
-    let rise = this.rise;
-    if (rise !== null) {
-      rise.stop();
-      rise.off(Rise.RISE, this.onRise);
-      rise = null;
-    }
+    const rise = this.rise;
+    rise.stop();
+    rise.off(Rise.RISE, this.onRise);
   }
   /**
    * loading 表示 on / off します<br>
    * on: true, off: false
-   * @param {string} loading CSS class name 'loading' || ''
+   * @param {string} requireLoading CSS class name 'loading' || ''
    */
-  updateLoading(loading) {
-    let rise = this.rise;
-    let loadingClass = '';
-    if (loading && rise !== null) {
+  updateLoading(requireLoading) {
+    const rise = this.rise;
+    let loading = '';
+    if (requireLoading) {
       // loading 中は監視を止める
-      loadingClass = 'loading';
+      loading = 'loading';
 
       rise.stop();
       // next 読み込み開始
@@ -157,7 +153,7 @@ export default class SPComponentMoreButton extends React.Component {
     }
 
     // loading 表示のための css class を追加・削除
-    this.setState({ loading: loadingClass });
+    this.setState({ loading });
   }
 
   /**
@@ -224,13 +220,13 @@ export default class SPComponentMoreButton extends React.Component {
    * rise instance が未作成なら作成し監視を始めます
    */
   componentDidMount() {
-    let rise = this.rise;
+    // let rise = this.rise;
 
-    if (this.state.show && rise === null) {
+    if (this.state.show) {
       // mount 後
       // button が表示されているなら rise 監視を始める
-      rise = new Rise(this.props.element);
-      this.rise = rise;
+      // rise = new Rise(this.props.element);
+      const rise = this.rise;
       rise.on(Rise.RISE, this.onRise);
       rise.start();
     }
@@ -248,9 +244,11 @@ export default class SPComponentMoreButton extends React.Component {
    * @param {{show: boolean}} nextProps React.props
    */
   componentWillReceiveProps(nextProps) {
-    const { show } = nextProps;
-    if (show !== this.state.show) {
-      this.setState({ show });
+    const { show, loading } = nextProps;
+    // console.log('ComponentMoreButton.componentWillReceiveProps', nextProps);
+    if (show !== this.state.show || loading !== this.state.loading) {
+      this.setState({ show, loading });
+      this.rise.start();
     }
   }
   /**
@@ -261,6 +259,7 @@ export default class SPComponentMoreButton extends React.Component {
     const { show, loading } = this.state;
     if (!show) {
       // button 表示なし
+      this.destroy();
       return null;
     }
     // button 表示

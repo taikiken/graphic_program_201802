@@ -153,33 +153,49 @@ export default class SPViewRanking extends ViewRanking {
    * @param {boolean} show more button 表示・非表示 を決定する真偽値
    */
   moreButton(show) {
-    show = !!show;
-    // _moreRendered が null の時のみ, instance があれば state を update する
-    // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
-    if (this._moreRendered === null) {
-      // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
-      // チェックをパスし実行する
-      this._moreRendered = ReactDOM.render(
-        // <SPMoreViewNode
-        //   show={show}
-        //   action={this.action}
-        //   slug={this.slug}
-        //   type="ranking"
-        //   home={this._home}
-        // />,
-        // @since 2016-09-16, more button changed
-        <SPComponentMoreButton
-          show={show}
-          action={this.action}
-          element={this._moreElement}
-          home={this._home}
-          slug={this.slug}
-          type="ranking"
-        />,
-        this._moreElement
-      );
-    } else {
-      this._moreRendered.updateShow(show);
+    // show = !!show;
+    // // _moreRendered が null の時のみ, instance があれば state を update する
+    // // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
+    // if (this._moreRendered === null) {
+    //   // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
+    //   // チェックをパスし実行する
+    //   this._moreRendered = ReactDOM.render(
+    //     // <SPMoreViewNode
+    //     //   show={show}
+    //     //   action={this.action}
+    //     //   slug={this.slug}
+    //     //   type="ranking"
+    //     //   home={this._home}
+    //     // />,
+    //     // @since 2016-09-16, more button changed
+    //     <SPComponentMoreButton
+    //       show={show}
+    //       action={this.action}
+    //       element={this._moreElement}
+    //       home={this._home}
+    //       slug={this.slug}
+    //       type="ranking"
+    //     />,
+    //     this._moreElement
+    //   );
+    // } else {
+    //   this._moreRendered.updateShow(show);
+    // }
+    const moreElement = this._moreElement;
+    if (!moreElement) {
+      return;
     }
+    ReactDOM.render(
+      <SPComponentMoreButton
+        show={show}
+        action={this.action}
+        element={moreElement}
+        home={this._home}
+        slug={this.slug}
+        type="ranking"
+        loading=""
+      />,
+      moreElement,
+    );
   }
 }

@@ -473,6 +473,7 @@ export default class ViewArchiveMasonryInfinite extends View {
       }
     }// first rendered
     // ---------------------
+    // console.log('ViewArchiveMasonryInfinite.render', articlesList);
     ReactDOM.render(
       <ComponentArticlesMasonryInfinite
         list={articlesList}
@@ -567,6 +568,7 @@ export default class ViewArchiveMasonryInfinite extends View {
     //   );
     // }
     // this.moreRendered.updateShow(show);
+    // console.log('ViewArchiveMasonryInfinite.moreButton', show);
     ReactDOM.render(
       <ComponentMoreButton
         show={show}
@@ -575,6 +577,7 @@ export default class ViewArchiveMasonryInfinite extends View {
         home={this.home}
         slug={this.slug}
         afterClick={this.afterClick}
+        loading=""
       />,
       moreElement,
     );

@@ -11,7 +11,7 @@
  */
 
 // ui
-import { Rise } from './Rise';
+import Rise from './Rise';
 
 // util
 import { Elements } from '../util/Elements';

@@ -195,6 +195,7 @@ export default class SPViewArchiveInfinite extends SPViewArchive {
         element={moreElement}
         home={this.home}
         slug={this.slug}
+        loading=""
       />,
       moreElement,
     );
