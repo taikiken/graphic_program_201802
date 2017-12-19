@@ -47,6 +47,7 @@
       }
 
       ul {
+        z-index: 9999;
         @include clearfix;
         position: absolute;
         width: 200000px;
@@ -78,7 +79,7 @@
 
           &-overview {
             position: absolute;
-            bottom: (36/2)+px;
+            bottom: 4vw;
 
             // position: absolute;
             // bottom: -($pickup-overview-heigt);
@@ -90,7 +91,7 @@
 
           &-heading {
             height: 1.5em;
-            padding-left: perCalc(20, 750);
+            padding-left: 2.6vw;
             overflow: hidden;
             color: #fff;
             font-weight: bold;
@@ -137,7 +138,7 @@
     &-control {
       position: absolute;
       top: 0;
-      width: 100%;
+      width: 0;
       height: 100%;
 
       .direction {
@@ -179,9 +180,9 @@
 
       .pager {
         position: absolute;
-        bottom: (8/2)+px;
-        left: perCalc(20, 750);
-        width: 100%;
+        bottom: 2vw;
+        left: 2.6vw;
+        width: 100vw;
 
         ul {
           letter-spacing: ls(inline-block);
