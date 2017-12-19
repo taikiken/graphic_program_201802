@@ -16,7 +16,7 @@
     // ref: UNDO_SPBL-150 【課題管理】一面リニューアル / ユーザーへのお知らせ表示
     ?>
     <div id="js-announce-container"></div>
-    <div id="pickup-container"></div><!-- /pickup -->
+    <div id="pickup-container" style="height: 215px;"></div><!-- /pickup -->
 
     <section class="main-sec">
 <?php

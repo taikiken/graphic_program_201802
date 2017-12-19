@@ -99,19 +99,19 @@ export default class ComponentCarousel extends React.Component {
    * prev / next button container を作成します<br>
    * length が 1 以下の時は表示しません
    * @param {number} length スライド総数
-   * @param {Function} boundPrev bind 済み onPrev
-   * @param {Function} boundNext bind 済み onNext
+   * @param {Function} onPrev bind 済み onPrev
+   * @param {Function} onNext bind 済み onNext
    * @return {?XML} div.direction or null を返します
    */
-  static direction(length, boundPrev, boundNext) {
+  static direction(length, onPrev, onNext) {
     if (length <= 1) {
       return null;
     }
 
     return (
       <div className="direction">
-        <a id="prev" className="direction-prev" href="#prev" onClick={boundPrev}>Prev</a>
-        <a id="next" className="direction-next" href="#next" onClick={boundNext}>Next</a>
+        <a id="prev" className="direction-prev" href="#prev" onClick={onPrev}>Prev</a>
+        <a id="next" className="direction-next" href="#next" onClick={onNext}>Next</a>
       </div>
     );
   }
@@ -200,7 +200,7 @@ export default class ComponentCarousel extends React.Component {
      * - SP: %
      * @type {string}
      */
-    this.unit = props.sp ? '%' : 'px';
+    this.unit = props.sp ? 'vw' : 'px';
     // this.unit = props.sp ? 'px' : 'px';
     /**
      * state option
@@ -231,22 +231,22 @@ export default class ComponentCarousel extends React.Component {
      * bind 済み updateNext
      * @type {function}
      */
-    this.boundUpdate = this.update.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
     /**
      * bind 済み onNext
      * @type {function}
      */
-    this.boundNext = this.onNext.bind(this);
+    this.onNext = this.onNext.bind(this);
     /**
      * bind 済み onPrev
      * @type {function}
      */
-    this.boundPrev = this.onPrev.bind(this);
+    this.onPrev = this.onPrev.bind(this);
     /**
      * bind 済み onPagerClick
      * @type {function}
      */
-    this.boundPager = this.onPagerClick.bind(this);
+    this.onPagerClick = this.onPagerClick.bind(this);
     /**
      * スライドの最終ナンバー
      * @type {number}
@@ -262,34 +262,33 @@ export default class ComponentCarousel extends React.Component {
      * bind 済み next
      * @type {Function}
      */
-    this.bindNext = this.next.bind(this);
+    this.boundNext = this.next.bind(this);
     /**
      * bind 済み prev
      * @type {Function}
      */
-    this.bindPrev = this.prev.bind(this);
+    this.boundPrev = this.prev.bind(this);
     /**
      * bind 済み play
      * @type {Function}
      */
-    this.bindPlay = this.play.bind(this);
+    this.boundPlay = this.play.bind(this);
     /**
-     * bind 済み pause
+     * bind 済み boundPause
      * @type {Function}
      */
-    this.bindPause = this.pause.bind(this);
+    this.bindPause = this.boundPause.bind(this);
     /**
      * bind 済み updateLength, スライド数の通知を受けます
      * @type {Function}
      */
-    this.bindLength = this.updateLength.bind(this);
+    this.boundLength = this.updateLength.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   // --------------------------------------------
   // carousel
-
   /**
    * `ComponentPickupSlider` マウント後通知を受けスライダーコンテナの幅を設定します
    * @param {number} length slider 数
@@ -312,30 +311,30 @@ export default class ComponentCarousel extends React.Component {
    */
   play() {
     // console.log('ComponentCarousel.play', this.position);
-    this.pause();
+    this.boundPause();
     const polling = this.polling;
-    polling.on(Polling.UPDATE, this.boundUpdate);
+    polling.on(Polling.UPDATE, this.onUpdate);
     // polling.start();
   }
   /**
    * Polling.UPDATE event を unbind しアニメーションを停止します
    */
-  pause() {
+  boundPause() {
     const polling = this.polling;
-    polling.off(Polling.UPDATE, this.boundUpdate);
+    polling.off(Polling.UPDATE, this.onUpdate);
     polling.stop();
   }
   /**
-   * Polling.UPDATE event handler<br>
-   * 一定間隔で呼び出され<br>
-   * カルーセルスライドを次のスライドに切替ます
+   * Polling.UPDATE event handler
+   * - 一定間隔で呼び出されます
+   * - カルーセルスライドを次のスライドに切替ます
    */
-  update() {
-    // console.log('ComponentCarousel.update', this.position);
+  onUpdate() {
+    // console.log('ComponentCarousel.onUpdate', this.position);
     this.next();
   }
   /**
-   * next button click event handler, `this.update` を呼び出します
+   * next button click event handler, `this.next` を呼び出します
    * @param {Event} event next button click event
    */
   onNext(event) {
@@ -379,13 +378,13 @@ export default class ComponentCarousel extends React.Component {
   }
   /**
    * 指定 index スライドに移動します<br>
-   * `this.pause()` し一時停止します<br>
+   * `this.boundPause()` し一時停止します<br>
    * スライド位置を調整し `this.setup` を実行しスライド移動を完結します
    * @param {number} index 移動するスライドナンバー
    */
   jump(index) {
     // polling 一時停止
-    this.pause();
+    this.boundPause();
 
     // @type {number}
     const last = this.last;
@@ -546,22 +545,22 @@ export default class ComponentCarousel extends React.Component {
                 list={list}
                 sp={this.props.sp}
                 home={this.props.home}
-                next={this.bindNext}
-                prev={this.bindPrev}
-                play={this.bindPlay}
-                pause={this.bindPause}
-                length={this.bindLength}
+                next={this.boundNext}
+                prev={this.boundPrev}
+                play={this.boundPlay}
+                boundPause={this.bindPause}
+                length={this.boundLength}
                 position={this.state.index}
               />
             </div>
           </div>
           <div className="hero-slider-control">
             {/* prev / next */}
-            {ComponentCarousel.direction(list.length, this.boundPrev, this.boundNext)}
+            {ComponentCarousel.direction(list.length, this.onPrev, this.onNext)}
             {/* pagers */}
             <ComponentPagers
               list={list}
-              onPager={this.boundPager}
+              onPager={this.onPagerClick}
               sp={this.props.sp}
               position={this.state.index}
             />
