@@ -34,10 +34,12 @@ export default class ViewAnnounce extends View {
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
-  constructor(element, slug = 'all', option = {}) {
+  constructor(element, slug = 'all', sp = false, option = {}) {
     super(element, option);
     this.slug = slug;
+    this.sp = sp;
     this.action = new CategoriesSlug(slug, this.done.bind(this), this.fail.bind(this));
+    this.count = 0;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -69,7 +71,7 @@ export default class ViewAnnounce extends View {
     this.executeSafely(View.RESPONSE_ERROR, error);
     console.warn('ViewAnnounce.fail', this.slug, error);
     // category/slug でエラー `404` の時に `slug: all` で再アクセスする
-    if (this.slug !== 'all') {
+    if (this.count < 5 && this.slug !== 'all') {
       this.retry('all');
     }
   }
@@ -78,6 +80,7 @@ export default class ViewAnnounce extends View {
    * @param {string} slug category slug - 変更する slug
    */
   retry(slug) {
+    this.count += 1;
     const action = this.action;
     action.updatePath(slug);
     action.start();
@@ -88,12 +91,12 @@ export default class ViewAnnounce extends View {
    */
   render(response) {
     const dae = new CategoriesSlugDae(response);
-    const pc = dae.information.pc;
-    console.log('ViewAnnounce.render', response, dae, pc);
+    const information = this.sp ? dae.information.sp : dae.information.pc;
+    console.log('ViewAnnounce.render', this.sp, response, dae, information);
     // output
     ReactDOM.render(
       <ComponentAnnounce
-        information={pc}
+        information={information}
       />,
       this.element,
     );

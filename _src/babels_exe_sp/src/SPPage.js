@@ -40,6 +40,7 @@ import SPSearchForm from './header/SPSearchForm';
 // modal
 import SPCommentDelete from './modal/SPCommentDelete';
 import SPFlush from './modal/SPFlush';
+import SPAnnounce from './page/SPAnnounce';
 
 // const _symbol = Symbol();
 /**
@@ -57,7 +58,14 @@ let _scrolled = false;
 let _tween = null;
 
 // UT
+/**
+ * [library] - UT
+ */
 const UT = self.UT;
+/**
+ * [library] - UT.Dom
+ * @type {Dom}
+ */
 const Dom = UT.app.Dom;
 
 /**
@@ -351,6 +359,8 @@ export default class SPPage {
 
     // first
     SPFirstVisit.start();
+    // announce
+    SPAnnounce.start('all');
   }
   /**
    * home, index page
@@ -372,6 +382,8 @@ export default class SPPage {
 
     // first
     SPFirstVisit.start();
+    // announce
+    SPAnnounce.start('all');
   }
   /**
    * category page
@@ -397,6 +409,8 @@ export default class SPPage {
 
     // first
     SPFirstVisit.start();
+    // announce
+    SPAnnounce.start(slug);
   }
   /**
    * single, detail page
@@ -438,6 +452,8 @@ export default class SPPage {
 
     // first
     SPFirstVisit.start();
+    // announce
+    SPAnnounce.start('all');
   }
   /**
    * コメント返信 詳細
@@ -458,6 +474,8 @@ export default class SPPage {
 
     // first
     SPFirstVisit.start();
+    // announce
+    SPAnnounce.start('all');
   }
   /**
    * 検索ページ
@@ -478,6 +496,8 @@ export default class SPPage {
 
     // first
     SPFirstVisit.start();
+    // announce
+    SPAnnounce.start('all');
   }
   // ----------------------------------------------------
   // header, footer いらない
@@ -738,5 +758,7 @@ export default class SPPage {
 
     // first
     SPFirstVisit.start();
+    // announce
+    SPAnnounce.start(slug);
   }
 }
