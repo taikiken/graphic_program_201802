@@ -114,7 +114,7 @@ END_DOC;
   */
   public function get_site_categories( $is_sort = false ) {
 
-    $s = array();
+    $tabs = array();
 
     // ユーザーIDを取得
     $uid = $this->get_user_id();
@@ -123,7 +123,7 @@ END_DOC;
     //$this->connect();
     $this->query($sql);
     while( $f = $this->fetch_array() ){
-      $s[] = set_categoryinfo($f);
+      $tabs[] = set_categoryinfo($f);
     }
     //$this->disconnect();
 
@@ -138,19 +138,19 @@ END_DOC;
 
         //対象の配列だけを抽出
         $interest_list = array();
-        foreach ($s as $key => $value){
+        foreach ($tabs as $key => $value){
             foreach ($target_list as $t_key => $t_value){
                 if((int)$t_value['id'] === $value['id']){
                     $interest_list[] = $value;
-                    unset($s[$key]);
+                    unset($tabs[$key]);
                 }
             }
         }
         //抽出した配列と元の配列を結合
-        $s = array_merge($interest_list,$s);
+        $tabs = array_merge($interest_list,$tabs);
     endif;
 
-    return $s;
+    return $tabs;
 
   }
 
