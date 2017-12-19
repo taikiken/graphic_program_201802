@@ -70,7 +70,6 @@ $IMG[]="../../../prg_img/thumbnail2/";
 $IMG[]="../../../prg_img/thumbnail3/";
 $IMG[]="../../../prg_img/thumbnail4/";
 $IMG[]="../../../prg_img/thumbnail5/";
-$IMG[]="../../../prg_img/thumbnail6/";
 $PDF="../../../prg_img/pdf/";
 
 @mb_language("japanese");
