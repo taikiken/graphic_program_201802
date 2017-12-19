@@ -1,4 +1,3 @@
-<div id="js-announce-container"></div>
 <div id="pickup-container"></div><!-- /pickup -->
 
 <div class="body-sec">
