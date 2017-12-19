@@ -187,9 +187,12 @@ export default class ComponentCarousel extends React.Component {
      * 移動量設定値, PC / SP で異なります - SP がレスポンシブ対応するため
      * - PC: 640(px) -> 540 on 2017-12-18 ref: UNDO_SPBL-281 【Web】一面のリニューアル / Web - Desktop対応
      * - SP: 280(px)
+     * update 2017-12-18
+     * - PC: 540px
+     * - SP 100%
      * @type {number}
      */
-    this.left = props.sp ? 280 : 540;
+    this.left = props.sp ? 100 : 540;
     // this.left = props.sp ? 280 : 640;
     /**
      * 移動量単位, PC / SP で異なります - SP がレスポンシブ対応するため
@@ -197,7 +200,8 @@ export default class ComponentCarousel extends React.Component {
      * - SP: %
      * @type {string}
      */
-    this.unit = props.sp ? 'px' : 'px';
+    this.unit = props.sp ? '%' : 'px';
+    // this.unit = props.sp ? 'px' : 'px';
     /**
      * state option
      * - length - {number} スライド総数
@@ -311,7 +315,7 @@ export default class ComponentCarousel extends React.Component {
     this.pause();
     const polling = this.polling;
     polling.on(Polling.UPDATE, this.boundUpdate);
-    polling.start();
+    // polling.start();
   }
   /**
    * Polling.UPDATE event を unbind しアニメーションを停止します

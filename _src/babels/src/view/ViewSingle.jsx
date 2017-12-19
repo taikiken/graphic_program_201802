@@ -380,7 +380,7 @@ export default class ViewSingle extends View {
    * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */
   render(single) {
-    console.log('ViewSingle.render single', single);
+    // console.log('ViewSingle.render single', single);
     // let single = new SingleDae( response );
     // console.log('ViewSingle beforeRender', this.id, single);
     // beforeRender call
