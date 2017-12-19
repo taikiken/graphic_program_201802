@@ -44,21 +44,20 @@ function regist_json()
     $_GET['bronze']
     ))
   {
-    $params = compact($_GET);
-
     $save_json_array = [
-      'update' => "{$params['target_year']}-{$params['target_month']}-{$params['target_date']} {$params['target_hour']}:{$params['target_minutes']}",
+      'update' => "{$_GET['target_year']}-{$_GET['target_month']}-{$_GET['target_date']} {$_GET['target_hour']}:{$_GET['target_minutes']}",
       'medal' => [
-        'gold' => $params['gold'],
-        'silver' => $params['silver'],
-        'bronze' => $params['bronze'],
+        'gold' => intval($_GET['gold']),
+        'silver' => intval($_GET['silver']),
+        'bronze' => intval($_GET['bronze']),
       ],
-      'total' => intval($params['gold']) + intval($params['silver']) + intval($params['bronze'])
+      'total' => intval($_GET['gold']) + intval($_GET['silver']) + intval($_GET['bronze'])
     ];
 
     // upload
     $save_json = json_encode($save_json_array);
-    sendResponse([]);
+    $S3Module = new S3Module();
+    $S3Module->putS3Object(json_encode($save_json_array), '/static/pyeongchang/medal.json', 'application/json');
   }
 }
 

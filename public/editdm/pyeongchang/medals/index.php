@@ -29,13 +29,20 @@ header("X-XSS-Protection:0;");
   <script src="/shared/cms/ckeditor/ckeditor.js" type="text/javascript"></script>
 
   <?php if($q->get_file()==0||$q->get_file()==1): ?>
-  <script src="//maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
   <script src="/shared/cms/js/<?=$CMSJS?>.php" type="text/javascript"></script>
   <script src="/shared/cms/js/<?=$CMSJS?>.js" type="text/javascript"></script>
   <?php endif; ?>
   <link rel="stylesheet" href="/shared/cms/css/lightbox.css" type="text/css" media="screen" >
 
   <title><?php printf("%s-%s｜%s｜%sWEB サイト管理画面",$THIS,$q->exe_fl(),$PARENT,$SITE); ?></title>
+  <script type="text/javascript">
+    var dir=<?=$q->get_dir()?>;
+    var fil=<?=$q->get_file()?>;
+    var cid=<?=$_GET["cid"]?$_GET["cid"]:0?>;
+    var rid=<?=$_GET["rid"]?$_GET["rid"]:0?>;
+    var cd="<?=$TABLE?>";
+    var ct="<?=date("Y/m/d H:i:s")?>";
+  </script>
 </head>
 <body>
 
@@ -100,19 +107,19 @@ header("X-XSS-Protection:0;");
         </tr>
         <tr>
           <th>金</th>
-          <td><input type="text" maxlength="2" width="50" style="text-align:right;width: 60px;" value="0"/>&nbsp;個</td>
+          <td><input type="text" name="gold" maxlength="2" width="50" style="text-align:right;width: 60px;" value="0"/>&nbsp;個</td>
         </tr>
         <tr>
           <th>銀</th>
-          <td><input type="text" maxlength="2" width="50" style="text-align:right;width: 60px;" value="0"/>&nbsp;個</td>
+          <td><input type="text" name="silver" maxlength="2" width="50" style="text-align:right;width: 60px;" value="0"/>&nbsp;個</td>
         </tr>
         <tr>
           <th>銅</th>
-          <td><input type="text" maxlength="2" width="50" style="text-align:right;width: 60px;" value="0"/>&nbsp;個</td>
+          <td><input type="text" name="bronze" maxlength="2" width="50" style="text-align:right;width: 60px;" value="0"/>&nbsp;個</td>
         </tr>
         <tr>
           <td colspan="2">
-            <a href="javascript:void(0);">
+            <a id="save_json" href="javascript:void(0);">
             保存
             </a>
           </td>
@@ -124,5 +131,25 @@ header("X-XSS-Protection:0;");
 
 <div class="optionselbg"></div>
 
+<script type="text/javascript">
+  $(function(){
+    $("#save_json").click(function(){
+      var data = {};
+      $.each($('select'), function(){
+        data[$(this).attr("name")] = $(this).val();
+      });
+      $.each($('input'), function(){
+        data[$(this).attr("name")] = $(this).val();
+      });
+      data['type'] = 'regist';
+      $.ajax({
+        type: "GET",
+        url: "/api/editdm/pyeongchang/medals.php",
+        data: data,
+        dataType: "json"
+      });
+    });
+  });
+</script>
 </body>
 </html>
