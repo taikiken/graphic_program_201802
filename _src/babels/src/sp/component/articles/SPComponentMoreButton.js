@@ -95,12 +95,12 @@ export default class SPComponentMoreButton extends React.Component {
      * bind 済み onRise 関数
      * @type {function}
      */
-    this.boundRise = this.onRise.bind(this);
+    this.onRise = this.onRise.bind(this);
     /**
      * bind 済み onClick 関数
      * @type {function}
      */
-    this.boundClick = this.onClick.bind(this);
+    this.onClick = this.onClick.bind(this);
     /**
      * 現在のページナンバー<br>
      * 計測タグへ次の（表示する）ページナンバーを送信するために使用します
@@ -112,32 +112,6 @@ export default class SPComponentMoreButton extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  // -----------------------------------------
-  // delegate
-  /**
-   * delegate method, マウントした時にコールされます
-   *
-   * rise instance が未作成なら作成し監視を始めます
-   */
-  componentDidMount() {
-    let rise = this.rise;
-
-    if (this.state.show && rise === null ) {
-      // mount 後
-      // button が表示されているなら rise 監視を始める
-      rise = new Rise(this.props.element);
-      this.rise = rise;
-      rise.on(Rise.RISE, this.boundRise);
-      rise.start();
-    }
-  }
-  /**
-   * unmount 時に rise 破棄を行います
-   */
-  componentWillUnmount() {
-    // unmount 時に rise 破棄を行う
-    this.destroy();
-  }
   // -----------------------------------------
   // button 関連 custom method
   /**
@@ -158,7 +132,7 @@ export default class SPComponentMoreButton extends React.Component {
     let rise = this.rise;
     if (rise !== null) {
       rise.stop();
-      rise.off(Rise.RISE, this.boundRise);
+      rise.off(Rise.RISE, this.onRise);
       rise = null;
     }
   }
@@ -242,23 +216,68 @@ export default class SPComponentMoreButton extends React.Component {
     Ga.add( new GaData('SPComponentMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
+  // -----------------------------------------
+  // delegate
+  /**
+   * delegate method, マウントした時にコールされます
+   *
+   * rise instance が未作成なら作成し監視を始めます
+   */
+  componentDidMount() {
+    let rise = this.rise;
+
+    if (this.state.show && rise === null) {
+      // mount 後
+      // button が表示されているなら rise 監視を始める
+      rise = new Rise(this.props.element);
+      this.rise = rise;
+      rise.on(Rise.RISE, this.onRise);
+      rise.start();
+    }
+  }
+  /**
+   * unmount 時に rise 破棄を行います
+   */
+  componentWillUnmount() {
+    // unmount 時に rise 破棄を行う
+    this.destroy();
+  }
+  /**
+   * delegate - before update props
+   * - show property が `state` と違っていたら update します
+   * @param {{show: boolean}} nextProps React.props
+   */
+  componentWillReceiveProps(nextProps) {
+    const { show } = nextProps;
+    if (show !== this.state.show) {
+      this.setState({ show });
+    }
+  }
   /**
    * div.board-btn-viewmore を出力します
-   * @return {?XML} div.board-btn-viewmore を返します
+   * @return {?XML} `div.board-btn-viewmore` を返します
    */
   render() {
-    // hasNext: true, button を表示する？
-    if ( this.state.show ) {
-      return (
-        <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
-          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
-          <span className="loading-spinner">&nbsp;</span>
-        </div>
-      );
+    const { show, loading } = this.state;
+    if (!show) {
+      // button 表示なし
+      return null;
     }
-
-    // button 表示なし
-    return null;
+    // button 表示
+    return (
+      <div
+        id="more"
+        className={`board-btn-viewmore loading-root ${loading}`}
+      >
+        <a
+          className="board-btn-viewmore-link" href={'#more'}
+          onClick={this.onClick}
+        >
+          <span>{Message.BUTTON_VIEW_MORE}</span>
+        </a>
+        <span className="loading-spinner">&nbsp;</span>
+      </div>
+    );
   }
 }
 //

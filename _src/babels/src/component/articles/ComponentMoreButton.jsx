@@ -273,6 +273,11 @@ export default class ComponentMoreButton extends React.Component {
     // unmount 時に rise 破棄を行う
     this.destroy();
   }
+  /**
+   * delegate - before update props
+   * - show property が `state` と違っていたら update します
+   * @param {{show: boolean}} nextProps React.props
+   */
   componentWillReceiveProps(nextProps) {
     const { show } = nextProps;
     if (show !== this.state.show) {
@@ -281,7 +286,7 @@ export default class ComponentMoreButton extends React.Component {
   }
   /**
    * div.board-btn-viewmore を出力します
-   * @return {?XML} div.board-btn-viewmore を返します
+   * @return {?XML} `div.board-btn-viewmore` を返します
    */
   render() {
     const { show, loading } = this.state;

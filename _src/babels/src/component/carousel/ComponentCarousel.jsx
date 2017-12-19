@@ -19,14 +19,15 @@ import View from '../../view/View';
 
 // tick
 import { Polling } from '../../tick/Polling';
+import { ArticleDae } from '../../dae/ArticleDae';
 
 // --------------------------------------------
 // library
-// Sagen
-/**
- * [library] - Sagen
- */
-const Sagen = self.Sagen;
+// // Sagen
+// /**
+//  * [library] - Sagen
+//  */
+// const Sagen = self.Sagen;
 
 // React
 /**
@@ -35,6 +36,46 @@ const Sagen = self.Sagen;
 const React = self.React;
 
 // const document = self.document;
+
+/**
+ * {@link ComponentCarousel} - next / prev container
+ * - length が 1 以下の時は表示しません
+ * - sp 表示しません
+ * @param {boolean} sp sp flag
+ * @param {number} length carousel 総数
+ * @param {function} prev prev handler
+ * @param {function} next next handler
+ * @returns {?XML} `div.direction`
+ * @since 2017-12-18 component
+ */
+const ComponentCarouselDirection = ({ sp, length, prev, next }) => {
+  console.log('ComponentCarouselDirection sp', sp, length);
+  if (sp || length <= 1) {
+    return null;
+  }
+  return (
+    <div className="direction">
+      <a id="prev" className="direction-prev" href="#prev" onClick={prev}>Prev</a>
+      <a id="next" className="direction-next" href="#next" onClick={next}>Next</a>
+    </div>
+  );
+};
+
+/**
+ * React.propTypes
+ * @type {{
+ *   sp: boolean,
+ *   length: number,
+ *   prev: function,
+ *   next: function
+ * }}
+ */
+ComponentCarouselDirection.propTypes = {
+  sp: React.PropTypes.bool.isRequired,
+  length: React.PropTypes.number.isRequired,
+  prev: React.PropTypes.func.isRequired,
+  next: React.PropTypes.func.isRequired,
+};
 
 /**
  * pickup コンテナ「カルーセル」スライドショーを実装します
@@ -56,14 +97,14 @@ export default class ComponentCarousel extends React.Component {
   /**
    * propTypes
    * - list: pickup articles 配列を元に carousel Dom を作成します
-   * - callback: View.DID_MOUNT を通知するコールバック関数
+   * - safely: View.DID_MOUNT を通知するコールバック関数
    * - polling: interval 管理をします
    * - index: slider 初期値, [default=0]
    * - sp: Sagen.Browser.Mobile.phone 真偽値, true: スマホ
    * - home: true: home（トップページ）, carousel が全ての一覧記事に設置されトップページと微妙に用件が違うためのフラッグ
    * @return {{
    *  list: Array<ArticleDae>,
-   *  callback: Function,
+   *  safely: Function,
    *  polling: Polling,
    *  index: number
    * }} React props
@@ -71,57 +112,60 @@ export default class ComponentCarousel extends React.Component {
   static get propTypes() {
     return {
       // @type {Array<ArticleDae>} - pickup articles 配列を元に carousel Dom を作成します
-      list: React.PropTypes.array.isRequired,
+      // list: React.PropTypes.array.isRequired,
+      list: React.PropTypes.arrayOf(
+        React.PropTypes.instanceOf(ArticleDae).isRequired,
+      ).isRequired,
       // @type {function} - View.DID_MOUNT を通知するコールバック関数
-      callback: React.PropTypes.func.isRequired,
+      safely: React.PropTypes.func.isRequired,
       // @type {Polling} - interval 管理をします
       polling: React.PropTypes.object.isRequired,
       // @type {number} - [index=0] slider 初期値
-      index: React.PropTypes.number,
+      index: React.PropTypes.number.isRequired,
       // @type {boolean} - Sagen.Browser.Mobile.phone 真偽値, true: スマホ
-      sp: React.PropTypes.bool,
+      sp: React.PropTypes.bool.isRequired,
       // @type {boolean} - true: home（トップページ）, carousel が全ての一覧記事に設置されたため
-      home: React.PropTypes.bool
+      home: React.PropTypes.bool.isRequired,
     };
   }
-  /**
-   * defaultProps
-   * @return {{index: number, sp: boolean, home: boolean}} React props
-   */
-  static get defaultProps() {
-    return {
-      index: 0,
-      sp: Sagen.Browser.Mobile.phone(),
-      home: false
-    };
-  }
-  /**
-   * prev / next button container を作成します<br>
-   * length が 1 以下の時は表示しません
-   * @param {number} length スライド総数
-   * @param {Function} onPrev bind 済み onPrev
-   * @param {Function} onNext bind 済み onNext
-   * @return {?XML} div.direction or null を返します
-   */
-  static direction(length, onPrev, onNext) {
-    if (length <= 1) {
-      return null;
-    }
-
-    return (
-      <div className="direction">
-        <a id="prev" className="direction-prev" href="#prev" onClick={onPrev}>Prev</a>
-        <a id="next" className="direction-next" href="#next" onClick={onNext}>Next</a>
-      </div>
-    );
-  }
+  // /**
+  //  * defaultProps
+  //  * @return {{index: number, sp: boolean, home: boolean}} React props
+  //  */
+  // static get defaultProps() {
+  //   return {
+  //     index: 0,
+  //     // sp: Sagen.Browser.Mobile.phone(),
+  //     home: false
+  //   };
+  // }
+  // /**
+  //  * prev / next button container を作成します<br>
+  //  * length が 1 以下の時は表示しません
+  //  * @param {number} length スライド総数
+  //  * @param {Function} onPrev bind 済み onPrev
+  //  * @param {Function} onNext bind 済み onNext
+  //  * @return {?XML} div.direction or null を返します
+  //  */
+  // static direction(length, onPrev, onNext) {
+  //   if (length <= 1) {
+  //     return null;
+  //   }
+  //
+  //   return (
+  //     <div className="direction">
+  //       <a id="prev" className="direction-prev" href="#prev" onClick={onPrev}>Prev</a>
+  //       <a id="next" className="direction-next" href="#next" onClick={onNext}>Next</a>
+  //     </div>
+  //   );
+  // }
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー<br>
-   *  {{list: Array<Element>, callback: Function}} を保持します {@link ComponentCarousel.propTypes}
+   *  {{list: Array<Element>, safely: Function}} を保持します {@link ComponentCarousel.propTypes}
    */
   constructor(props) {
     super(props);
@@ -179,7 +223,7 @@ export default class ComponentCarousel extends React.Component {
     /**
      * slide の総数
      * @type {number}
-     * @since 2017-03-28 JS control
+     * @since 2017-03-28 JS control。
      */
     this.length = length;
     // sp: 100%, pc: 640px
@@ -196,23 +240,23 @@ export default class ComponentCarousel extends React.Component {
     // this.left = props.sp ? 280 : 640;
     /**
      * 移動量単位, PC / SP で異なります - SP がレスポンシブ対応するため
-     * - PC: x
-     * - SP: %
+     * - PC: px
+     * - SP: % -> px -> vw
      * @type {string}
      */
     this.unit = props.sp ? 'vw' : 'px';
     // this.unit = props.sp ? 'px' : 'px';
     /**
      * state option
-     * - length - {number} スライド総数
      * - index - {number} スライド位置 0 ~ ...
-     * - style - {object} スライドを動かすための CSS 設定
-     * @type {{length: number, index: number, style: Object}}
+     * - length - {number} スライド総数 - remove
+     * - style - {object} スライドを動かすための CSS 設定 - remove
+     * @type {{index: number}}
      */
     this.state = {
-      length,
+      // length,
       index: props.index,
-      style: {},
+      // style: {},
     };
     /**
      * animation するための Polling instance
@@ -274,10 +318,10 @@ export default class ComponentCarousel extends React.Component {
      */
     this.boundPlay = this.play.bind(this);
     /**
-     * bind 済み boundPause
+     * bind 済み pause
      * @type {Function}
      */
-    this.bindPause = this.boundPause.bind(this);
+    this.boundPause = this.pause.bind(this);
     /**
      * bind 済み updateLength, スライド数の通知を受けます
      * @type {Function}
@@ -311,15 +355,15 @@ export default class ComponentCarousel extends React.Component {
    */
   play() {
     // console.log('ComponentCarousel.play', this.position);
-    this.boundPause();
+    this.pause();
     const polling = this.polling;
     polling.on(Polling.UPDATE, this.onUpdate);
-    // polling.start();
+    polling.start();
   }
   /**
    * Polling.UPDATE event を unbind しアニメーションを停止します
    */
-  boundPause() {
+  pause() {
     const polling = this.polling;
     polling.off(Polling.UPDATE, this.onUpdate);
     polling.stop();
@@ -378,13 +422,13 @@ export default class ComponentCarousel extends React.Component {
   }
   /**
    * 指定 index スライドに移動します<br>
-   * `this.boundPause()` し一時停止します<br>
+   * `this.pause()` し一時停止します<br>
    * スライド位置を調整し `this.setup` を実行しスライド移動を完結します
    * @param {number} index 移動するスライドナンバー
    */
   jump(index) {
     // polling 一時停止
-    this.boundPause();
+    this.pause();
 
     // @type {number}
     const last = this.last;
@@ -515,10 +559,11 @@ export default class ComponentCarousel extends React.Component {
    * `View.DID_MOUNT` をコールバックに通知し、カルーセルアニメーションを開始します
    */
   componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
+    const { safely, list } = this.props;
+    safely(View.DID_MOUNT);
     // length が 1 以上なら
     // test mode - comment 外す
-    if (this.props.list.length > 1) {
+    if (list.length > 1) {
       // this.setup(0);
       // this.play();
       this.jump(0);
@@ -529,40 +574,48 @@ export default class ComponentCarousel extends React.Component {
    * @return {?XML} カルーセル・コンテナを返します - データがない時は null を返します
    */
   render() {
-    const list = this.props.list;
+    // const list = this.props.list;
+    const { list, sp, home } = this.props;
     if (list.length === 0) {
       // データがない時は表示しない
       return null;
     }
+    const { index } = this.state;
     // JSX
     return (
       <div className="hero-sec">
-        <div className={`hero-slider pickup-container pickup-slider-length-${list.length} slide-${this.state.index}`}>
+        <div className={`hero-slider pickup-container pickup-slider-length-${list.length} slide-${index}`}>
           {/* slider */}
           <div className="hero-slider-inner">
-            <div className="pickup-slider-wrapper" style={this.transform(this.state.index)}>
+            <div className="pickup-slider-wrapper" style={this.transform(index)}>
               <ComponentPickupArticles
                 list={list}
-                sp={this.props.sp}
-                home={this.props.home}
+                sp={sp}
+                home={home}
                 next={this.boundNext}
                 prev={this.boundPrev}
                 play={this.boundPlay}
-                boundPause={this.bindPause}
+                pause={this.boundPause}
                 length={this.boundLength}
-                position={this.state.index}
+                position={index}
               />
             </div>
           </div>
           <div className="hero-slider-control">
             {/* prev / next */}
-            {ComponentCarousel.direction(list.length, this.onPrev, this.onNext)}
+            {/* ComponentCarousel.direction(list.length, this.onPrev, this.onNext) */}
+            <ComponentCarouselDirection
+              sp={sp}
+              length={list.length}
+              prev={this.onPrev}
+              next={this.onNext}
+            />
             {/* pagers */}
             <ComponentPagers
               list={list}
               onPager={this.onPagerClick}
-              sp={this.props.sp}
-              position={this.state.index}
+              sp={sp}
+              position={index}
             />
             {/* hero-slider-control */}
           </div>

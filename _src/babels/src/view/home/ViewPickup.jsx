@@ -55,6 +55,11 @@ const React = self.React;
  * [library] - ReactDOM
  */
 const ReactDOM = self.ReactDOM;
+// Sagen
+/**
+ * [library] - Sagen
+ */
+const Sagen = self.Sagen;
 
 // Gasane
 // let Polling = self.Gasane.Polling;
@@ -109,6 +114,11 @@ export default class ViewPickup extends View {
      * @type {Polling}
      */
     this.polling = new Polling(waiting);
+    /**
+     * sp flag
+     * @type {boolean}
+     */
+    this.sp = Sagen.Browser.Mobile.phone();
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -195,9 +205,10 @@ export default class ViewPickup extends View {
     ReactDOM.render(
       <ComponentCarousel
         list={list}
-        callback={this.boundSafely}
+        safely={this.boundSafely}
         polling={this.polling}
         index={0}
+        sp={this.sp}
         home={this.home}
       />,
       this.element,

@@ -60,7 +60,7 @@ export default class ComponentPager extends React.Component {
      * bind 済み onClick
      * @type {function}
      */
-    this.boundClick = this.onClick.bind(this);
+    this.onClick = this.onClick.bind(this);
     /**
      * pager index
      * @type {number}
@@ -123,7 +123,7 @@ export default class ComponentPager extends React.Component {
     const no = this.index;
     return (
       <li className={`pager-item pager-${no} ${this.state.current}`}>
-        <a href={`#pickup-${no}`} className="pager-link" onClick={this.boundClick} >{no}</a>
+        <a href={`#pickup-${no}`} className="pager-link" onClick={this.onClick} >{no}</a>
       </li>
     );
   }

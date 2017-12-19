@@ -170,23 +170,33 @@ export default class SPViewArchiveInfinite extends SPViewArchive {
     // Element 型を保証する
     // moreRendered が null の時のみ instance を作成し
     // instance があれば state を update する
-    if (this.moreRendered === null) {
-      /**
-       * スクロールしJSON取得トリガーになる[VIEW MORE]button
-       * @type {SPComponentMoreButton}
-       */
-      this.moreRendered = ReactDOM.render(
-        <SPComponentMoreButton
-          show={show}
-          action={this.action}
-          element={moreElement}
-          home={this.home}
-          slug={this.slug}
-        />,
-        this.moreElement
-      );
-    } else {
-      this.moreRendered.updateShow(show);
-    }
+    // if (this.moreRendered === null) {
+    //   /**
+    //    * スクロールしJSON取得トリガーになる[VIEW MORE]button
+    //    * @type {SPComponentMoreButton}
+    //    */
+    //   this.moreRendered = ReactDOM.render(
+    //     <SPComponentMoreButton
+    //       show={show}
+    //       action={this.action}
+    //       element={moreElement}
+    //       home={this.home}
+    //       slug={this.slug}
+    //     />,
+    //     moreElement,
+    //   );
+    // } else {
+    //   this.moreRendered.updateShow(show);
+    // }
+    ReactDOM.render(
+      <SPComponentMoreButton
+        show={show}
+        action={this.action}
+        element={moreElement}
+        home={this.home}
+        slug={this.slug}
+      />,
+      moreElement,
+    );
   }
 }

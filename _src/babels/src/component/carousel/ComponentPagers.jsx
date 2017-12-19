@@ -12,6 +12,7 @@
 
 // carousel
 import ComponentPager from './ComponentPager';
+import { ArticleDae } from '../../dae/ArticleDae';
 
 // React
 /**
@@ -30,13 +31,21 @@ export default class ComponentPagers extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{list: *, onPager: function, sp: boolean, position: number, length: number}} react props
+   * @return {{
+   *   list: *,
+   *   onPager: function,
+   *   position: number,
+   *   length: number
+   * }} react props
    */
   static get propTypes() {
     return {
-      list: React.PropTypes.array.isRequired,
+      // list: React.PropTypes.array.isRequired,
+      list: React.PropTypes.arrayOf(
+        React.PropTypes.instanceOf(ArticleDae).isRequired,
+      ).isRequired,
       onPager: React.PropTypes.func.isRequired,
-      sp: React.PropTypes.bool.isRequired,
+      // sp: React.PropTypes.bool.isRequired,
       // 現在 スライドNo.
       // @since 2017-03-28
       position: React.PropTypes.number.isRequired
@@ -83,8 +92,8 @@ export default class ComponentPagers extends React.Component {
    * @return {XML} カルーセル・ページャーコンテナを返します
    */
   render() {
-    const props = this.props;
-    const list = props.list;
+    const { onPager, list } = this.props;
+    // const list = props.list;
     if (list.length < 2) {
       // slide 数が 2未満の時は表示しない
       return null;
@@ -93,31 +102,51 @@ export default class ComponentPagers extends React.Component {
     const length = list.length;
     // @type {number} - 開始位置
     let index = 0;
-    const onPager = props.onPager;
+    // const onPager = props.onPager;
 
-    if (!props.sp) {
-      return (
-        <div className="pager">
-          <ul className="pager-list">
-            {
-              list.map((article) => {
-                return (
-                  <ComponentPager
-                    key={`pager-${index}`}
-                    id={String(article.id)}
-                    index={index++}
-                    length={length}
-                    onPager={onPager}
-                    position={this.state.position}
-                  />
-                );
-              })
-            }
-          </ul>
-        </div>
-      );
-    } else {
-      return null;
-    }
+    // if (!props.sp) {
+    //   return (
+    //     <div className="pager">
+    //       <ul className="pager-list">
+    //         {
+    //           list.map((article) => {
+    //             return (
+    //               <ComponentPager
+    //                 key={`pager-${index}`}
+    //                 id={String(article.id)}
+    //                 index={index++}
+    //                 length={length}
+    //                 onPager={onPager}
+    //                 position={this.state.position}
+    //               />
+    //             );
+    //           })
+    //         }
+    //       </ul>
+    //     </div>
+    //   );
+    // } else {
+    //   return null;
+    // }
+    return (
+      <div className="pager">
+        <ul className="pager-list">
+          {
+            list.map((article) => {
+              return (
+                <ComponentPager
+                  key={`pager-${article.id}`}
+                  id={String(article.id)}
+                  index={index++}
+                  length={length}
+                  onPager={onPager}
+                  position={this.state.position}
+                />
+              );
+            })
+          }
+        </ul>
+      </div>
+    );
   }
 }
