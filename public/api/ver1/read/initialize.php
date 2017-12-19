@@ -42,7 +42,7 @@ while($f=$o->fetch_array()){
 // 並び替えする
 if(strlen($uid)>0){
     //対象となるidを取得
-    $sql=sprintf("select uc.id from u_categories uc inner join u_category uc2 on(uc2.categoryid = uc.id) where uc2.userid = %s;",$uid);
+    $sql=sprintf("select uc.id from u_categories uc inner join u_category uc2 on uc2.categoryid = uc.id where uc2.userid = %s;",$uid);
     $o->query($sql);
     while($f = $o->fetch_array()){
         $target_list[] = $f;
