@@ -42,7 +42,7 @@ function multiLangTitleField($f){
 function rtimg($a,$b,$c,$d,$e,$f,$g,$h,$r=1){
 	global $imgNo;
 	array_unshift($h,implode("-",$g));
-	$imageHeaders=array("original","medium","thumbnail","large","carousel");
+	$imageHeaders=array("original","medium","thumbnail","large","repro","carousel");
 	$imageHeader="";
 	$ls="";
 	if(strlen($a)>0){
