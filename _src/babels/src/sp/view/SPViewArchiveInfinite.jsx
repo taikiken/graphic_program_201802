@@ -34,7 +34,7 @@ import SPComponentMoreButton from '../component/articles/SPComponentMoreButton';
 // sp/node
 // import {SPArchiveNode} from '../node/SPArchiveNode';
 
-import { SPComponentArticles } from '../component/articles/SPComponentArticles';
+import SPComponentArticles from '../component/articles/SPComponentArticles';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -72,6 +72,23 @@ export default class SPViewArchiveInfinite extends SPViewArchive {
      * @type {function}
      */
     this.boundSafely = this.executeSafely.bind(this);
+    /**
+     * 初回無限スクロールにしないパターン, クリック後に開始します
+     *
+     * ref: UNDO_SPBL-282 【Web】一面のリニューアル / Web - Mobile対応
+     * > 記事一覧の自動無限スクロールやめてPC版同様「VIEW MORE」ボタン配置 (他カテゴリー一覧も同様 )
+     * @see https://aws-plus.backlog.jp/view/UNDO_SPBL-281
+     * @type {boolean}
+     * @default true
+     * @since 2017-12-18
+     */
+    this.afterClick = true;
+    /**
+     * 最初の出力終了 flag
+     * - false: ga send
+     * @type {boolean}
+     */
+    this.firstRendered = false;
   }
   /**
    * dom を render します
@@ -103,39 +120,60 @@ export default class SPViewArchiveInfinite extends SPViewArchive {
     // 通知
     this.executeSafely(View.BEFORE_RENDER, articlesList);
 
-    // this._articleRendered が null の時だけ ReactDOM.render する
-    if (this.articleRendered === null) {
-      // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      /**
-       * SPComponentArticles instance
-       * @type {SPComponentArticles}
-       */
-      this.articleRendered = ReactDOM.render(
-        // <SPArchiveNode
-        //   list={articlesList}
-        //   offset={this.request.offset}
-        //   length={this.request.length}
-        //   action={this.action}
-        //   scope={this}
-        //   moreButton={this.moreButton.bind(this)}
-        //   home={this.home}
-        //   type={Message.NEWS}
-        //   adSp=""
-        // />,
-        // @since 2016-09-21 changed
-        <SPComponentArticles
-          list={articlesList}
-          offset={this.request.offset}
-          length={this.request.length}
-          action={this.action}
-          callback={this.boundSafely}
-          boundMore={this.boundMore}
-          home={this.home}
-          adSp=""
-        />,
-        this.element,
-      );
+    // // this._articleRendered が null の時だけ ReactDOM.render する
+    // if (this.articleRendered === null) {
+    //   // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
+    //   /**
+    //    * SPComponentArticles instance
+    //    * @type {SPComponentArticles}
+    //    */
+    //   this.articleRendered = ReactDOM.render(
+    //     // <SPArchiveNode
+    //     //   list={articlesList}
+    //     //   offset={this.request.offset}
+    //     //   length={this.request.length}
+    //     //   action={this.action}
+    //     //   scope={this}
+    //     //   moreButton={this.moreButton.bind(this)}
+    //     //   home={this.home}
+    //     //   type={Message.NEWS}
+    //     //   adSp=""
+    //     // />,
+    //     // @since 2016-09-21 changed
+    //     <SPComponentArticles
+    //       list={articlesList}
+    //       offset={this.request.offset}
+    //       length={this.request.length}
+    //       action={this.action}
+    //       callback={this.boundSafely}
+    //       boundMore={this.boundMore}
+    //       home={this.home}
+    //       adSp=""
+    //     />,
+    //     this.element,
+    //   );
+    //
+    //   if (this.home) {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
+    //     Ga.add(new GaData('SPViewArchiveInfinite.render', 'home_articles', 'view - new', String(1), 0, true));
+    //     // ----------------------------------------------
+    //   } else {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     // PC/スマホカテゴリー一覧の新着記事
+    //     Ga.add(new GaData('SPViewArchiveInfinite.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
+    //     // ----------------------------------------------
+    //   }
+    // } else {
+    //   // instance が存在するので
+    //   // state update でコンテナを追加する
+    //   this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
+    // }
 
+    if (!this.firstRendered) {
+      this.firstRendered = true;
       if (this.home) {
         // ----------------------------------------------
         // GA 計測タグ
@@ -149,11 +187,22 @@ export default class SPViewArchiveInfinite extends SPViewArchive {
         Ga.add(new GaData('SPViewArchiveInfinite.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
         // ----------------------------------------------
       }
-    } else {
-      // instance が存在するので
-      // state update でコンテナを追加する
-      this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
     }
+    // output
+    ReactDOM.render(
+      // @since 2016-09-21 changed
+      <SPComponentArticles
+        list={articlesList}
+        offset={this.request.offset}
+        length={this.request.length}
+        action={this.action}
+        callback={this.boundSafely}
+        boundMore={this.boundMore}
+        home={this.home}
+        adSp=""
+      />,
+      this.element,
+    );
   }
   /**
    * more button の表示・非表示を行います
@@ -196,6 +245,7 @@ export default class SPViewArchiveInfinite extends SPViewArchive {
         home={this.home}
         slug={this.slug}
         loading=""
+        afterClick={this.afterClick}
       />,
       moreElement,
     );

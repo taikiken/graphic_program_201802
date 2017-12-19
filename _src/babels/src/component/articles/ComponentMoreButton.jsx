@@ -71,7 +71,7 @@ export default class ComponentMoreButton extends React.Component {
   static get defaultProps() {
     return {
       // loading: '',
-      afterClick: false
+      afterClick: false,
     };
   }
   // ---------------------------------------------------
@@ -116,8 +116,8 @@ export default class ComponentMoreButton extends React.Component {
      */
     this.page = 1;
     /**
-     * 初回無限スクロールにしないパターンありの setTimeout id<br>
-     * home(index)無限スクロールは button click 後に行う
+     * 初回無限スクロールにしないパターンありの setTimeout id
+     * - home(index)無限スクロールは button click 後に行う
      * @type {number}
      */
     this.timer = 0;
@@ -170,9 +170,7 @@ export default class ComponentMoreButton extends React.Component {
     if (requireLoading) {
       // loading 中は監視を止める
       loading = 'loading';
-      if (rise) {
-        rise.stop();
-      }
+      rise.stop();
       // next 読み込み開始
       this.props.action.next();
     } else if (rise && !this.afterClick) {
@@ -183,24 +181,24 @@ export default class ComponentMoreButton extends React.Component {
     // loading 表示のための css class を追加・削除
     this.setState({ loading });
   }
-  /**
-   * button 表示・非表示 します
-   * @param {boolean} show button 表示・非表示 フラッグ false: 非表示
-   */
-  updateShow(show) {
-    // destroy 処理戻す - 2017-12-01
-    if (!show) {
-      // button を非表示にするので rise 監視を止める
-      this.destroy();
-    }
-   // else {
-   //    // button 表示, loading 表示を止める
-   //    this.updateLoading(false);
-   // }
-    // 意図不明修正されてた - lint error になるので indent 修正
-    this.updateLoading(false);
-    this.setState({ show });
-  }
+  // /**
+  //  * button 表示・非表示 します
+  //  * @param {boolean} show button 表示・非表示 フラッグ false: 非表示
+  //  */
+  // updateShow(show) {
+  //   // destroy 処理戻す - 2017-12-01
+  //   if (!show) {
+  //     // button を非表示にするので rise 監視を止める
+  //     this.destroy();
+  //   }
+  //  // else {
+  //  //    // button 表示, loading 表示を止める
+  //  //    this.updateLoading(false);
+  //  // }
+  //   // 意図不明修正されてた - lint error になるので indent 修正
+  //   this.updateLoading(false);
+  //   this.setState({ show });
+  // }
   /**
    * Rise.RISE event handler<br>
    * 次 offset JSON を取得する
@@ -332,7 +330,11 @@ export default class ComponentMoreButton extends React.Component {
     // コード最適化する - 2017-12-01
     return (
       <div id="more" className={`board-btn-viewmore loading-root ${loading}`}>
-        <a className="board-btn-viewmore-link" href={'#more'} onClick={this.onClick} >
+        <a
+          className="board-btn-viewmore-link"
+          href={'#more'}
+          onClick={this.onClick}
+        >
           <span>{Message.BUTTON_VIEW_MORE}</span>
         </a>
         <span className="loading-spinner">&nbsp;</span>

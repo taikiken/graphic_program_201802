@@ -32,18 +32,7 @@ include_once __DIR__ . '/_cms_banner.php';
 include_once __DIR__ . '/_stats_banner.php';
 // ------------------------------------------------------------
 ?>
-      <div class="headline-section">
-        <div id="headline-container"></div>
-        <?php
-        /*
-        // @since 2016-10-04
-        // JS SPComponentHeadlines.js へ移動
-        <div class="sponsor-link">
-          <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=42707&targetID=adg_42707&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
-        </div>
-        */
-        ?>
-      </div><!-- /.headline-outer -->
+      <div id="headline-container"></div>
 
       <aside class="sns-pr">
         <div class="sns-pr-outer">
@@ -55,6 +44,8 @@ include_once __DIR__ . '/_stats_banner.php';
           </dl><!-- /.sns-pr-inner -->
         </div><!-- /.sns-pr-outer -->
       </aside><!-- /.sns-pr -->
+
+      <div id="js-headline-last-container"></div>
 
       <div class="latest-section">
         <div id="board-container"></div>

@@ -41,7 +41,7 @@ import {ModelCategoriesSlug} from '../../../model/categoires/ModelCategoriesSlug
 
 // sp/view
 // import { SPComponentMoreButton } from '../articles/SPComponentMoreButton';
-import { SPComponentArticles } from '../../component/articles/SPComponentArticles';
+import SPComponentArticles from '../../component/articles/SPComponentArticles';
 
 // React
 /* eslint-disable no-unused-vars */

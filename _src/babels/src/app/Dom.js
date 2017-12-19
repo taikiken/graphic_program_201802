@@ -60,11 +60,10 @@ export class Dom {
     return Dom.get('whole');
   }
   /**
-   * <p>**SP**<br>
-   * body > .whole を取得します</p>
+   * body > .whole を取得します
    *
-   * SP -> #page<br>
-   * PC -> #whole<br>
+   * - SP -> #page
+   * - PC -> #whole
    *
    * body > div#page Element
    * @return {?Element} whole element を返します
@@ -214,6 +213,14 @@ export class Dom {
    */
   static headline() {
     return Dom.get('headline-container');
+  }
+  /**
+   * home headline - last （大きく表示させる）
+   * @returns {?Element} `div#js-headline-last-container` home headline - last
+   * @since 2017-12-18
+   */
+  static headlineLast() {
+    return Dom.get('js-headline-last-container');
   }
   /**
    * category headline 「注目の記事」

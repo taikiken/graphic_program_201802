@@ -14,13 +14,16 @@
 import { Ad } from '../../../app/const/Ad';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
  * 新着 - 広告タグ {@link SPNewsAdNode}
  * @since 2016-09-21
  */
-export class SPComponentArticleAd extends React.Component {
+export default class SPComponentArticleAd extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -65,10 +68,40 @@ export class SPComponentArticleAd extends React.Component {
      * @type {boolean}
      */
     this.ok = false;
+    /**
+     * `div.news-ad` - 広告挿入先タグ
+     * @type {?Element}
+     */
+    this.newsAd = null;
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * 広告用のタグを作成します
+   * @return {XML} 広告用のタグを返します
+   */
+  ad() {
+    // 広告タグ親コンテナを作成し `script` tag を insert させる
+    this.ok = true;
+    return (
+      <div
+        className={`board-item news-ad news-ad-${this.props.index}`}
+        ref={(element) => (this.newsAd = element)}
+      />
+    );
+  }
+  /**
+   * 広告タグが出力されたら `Ad.makeStream` を実行し `script` tag を挿入します {@link Ad.makeStream}
+   */
+  componentDidMount() {
+    // if (this.ok && !!this.refs.newsAd) {
+    // 2017-12-18 - this.ok: 出力は1回だけ 条件とる - sequence で広告が消える問題対応
+    if (this.newsAd) {
+      // console.log('SPComponentArticleAd.componentDidMount', this.props.adSp);
+      this.newsAd.appendChild(Ad.makeStream(this.props.uniqueId, this.props.adSp));
+    }
+  }
   /**
    * 3番目（添字 2）で「広告タグ」が設定されている時に出力します<br>
    * コンテンツが（添字 2）に届かない時は記事の最後に出力します
@@ -89,10 +122,10 @@ export class SPComponentArticleAd extends React.Component {
     if (!this.props.adSp) {
       return null;
     }
-    // 出力は1回だけ
-    if (this.ok) {
-      return null;
-    }
+    // // 出力は1回だけ
+    // if (this.ok) {
+    //   return null;
+    // }
     // index が 2
     if (this.state.third) {
       return this.ad();
@@ -107,25 +140,5 @@ export class SPComponentArticleAd extends React.Component {
 
     // 条件外
     return null;
-  }
-  /**
-   * 広告用のタグを作成します
-   * @return {XML} 広告用のタグを返します
-   */
-  ad() {
-    // 広告タグ親コンテナを作成し `script` tag を insert させる
-    this.ok = true;
-    return (
-      <div className={`board-item news-ad news-ad-${this.props.index}`} ref="newsAd" />
-    );
-  }
-  /**
-   * 広告タグが出力されたら `Ad.makeStream` を実行し `script` tag を挿入します {@link Ad.makeStream}
-   */
-  componentDidMount() {
-    if (this.ok && !!this.refs.newsAd) {
-      // console.log('SPComponentArticleAd.componentDidMount', this.props.adSp);
-      this.refs.newsAd.appendChild(Ad.makeStream(this.props.uniqueId, this.props.adSp));
-    }
   }
 }

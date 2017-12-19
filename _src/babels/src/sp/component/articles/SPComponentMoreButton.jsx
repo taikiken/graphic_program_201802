@@ -50,20 +50,24 @@ export default class SPComponentMoreButton extends React.Component {
       // option, default ''
       loading: React.PropTypes.string,
       // ranking | movie
-      type: React.PropTypes.string
+      type: React.PropTypes.string,
+      // since 2017-12-18
+      afterClick: React.PropTypes.bool
     };
   }
   /**
-   * defaultProps
+   * React.defaultProps
    *
    * - [loading='']
    * - [type='']
-   * @return {{loading: string, type: string}} React props
+   * - [afterClick=false] - true の時は `click` 後に無限スクロールを始める
+   * @returns {{loading: string, type: string, afterClick: boolean}} React.defaultProps
    */
   static get defaultProps() {
     return {
       loading: '',
-      type: ''
+      type: '',
+      afterClick: false,
     };
   }
   // ---------------------------------------------------
@@ -107,6 +111,19 @@ export default class SPComponentMoreButton extends React.Component {
      * @default 1
      */
     this.page = 1;
+    /**
+     * 初回無限スクロールにしないパターンありの setTimeout id
+     * - home(index)無限スクロールは button click 後に行う
+     * @type {number}
+     * @since 2017-12-18
+     */
+    this.timer = 0;
+    /**
+     * rise 監視を `click` の後に行う flag - pops.afterClick 値を移植
+     * @yupe {boolean}
+     * @since 2017-12-18
+     */
+    this.afterClick = props.afterClick;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -120,6 +137,8 @@ export default class SPComponentMoreButton extends React.Component {
    */
   onClick(event) {
     event.preventDefault();
+    // flag off
+    this.afterClick = false;
     // 読み込み開始
     this.onRise();
   }
@@ -143,34 +162,32 @@ export default class SPComponentMoreButton extends React.Component {
     if (requireLoading) {
       // loading 中は監視を止める
       loading = 'loading';
-
       rise.stop();
       // next 読み込み開始
       this.props.action.next();
-    } else {
-      // loading が終わると監視開始
+    } else if (rise && !this.afterClick) {
+      // loading が終わると監視開始 + afterClick flag 条件加味する(2017-12-18)
       rise.start();
     }
 
     // loading 表示のための css class を追加・削除
     this.setState({ loading });
   }
-
-  /**
-   * button 表示・非表示 します
-   * @param {boolean} show button 表示・非表示 フラッグ false: 非表示
-   */
-  updateShow(show) {
-    if (!show) {
-      // button を非表示にするので rise 監視を止める
-      this.destroy();
-    } else {
-      // button 表示, loading 表示を止める
-      this.updateLoading(false);
-    }
-
-    this.setState({ show });
-  }
+  // /**
+  //  * button 表示・非表示 します
+  //  * @param {boolean} show button 表示・非表示 フラッグ false: 非表示
+  //  */
+  // updateShow(show) {
+  //   if (!show) {
+  //     // button を非表示にするので rise 監視を止める
+  //     this.destroy();
+  //   } else {
+  //     // button 表示, loading 表示を止める
+  //     this.updateLoading(false);
+  //   }
+  //
+  //   this.setState({ show });
+  // }
   /**
    * Rise.RISE event handler<br>
    * 次 offset JSON を取得する
@@ -228,7 +245,13 @@ export default class SPComponentMoreButton extends React.Component {
       // rise = new Rise(this.props.element);
       const rise = this.rise;
       rise.on(Rise.RISE, this.onRise);
-      rise.start();
+      // rise.start();
+      if (!this.afterClick) {
+        // 初回に限り delay させる
+        // this.timer = setTimeout(() => rise.start(), 500);
+        // rise.start();
+        rise.delayStart(0.5);
+      }
     }
   }
   /**

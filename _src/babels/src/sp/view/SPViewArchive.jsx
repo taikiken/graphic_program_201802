@@ -20,28 +20,28 @@ import {Message} from '../../app/const/Message';
 // import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
-// dae
-import {ArticleDae} from '../../dae/ArticleDae';
+// // dae
+// import {ArticleDae} from '../../dae/ArticleDae';
+//
+// // sp.node
+// import {SPArchiveNode} from '../node/SPArchiveNode';
+// import {SPMoreViewNode} from '../node/SPMoreViewNode';
+//
+// // Ga
+// import {Ga} from '../../ga/Ga';
+// import {GaData} from '../../ga/GaData';
 
-// sp.node
-import {SPArchiveNode} from '../node/SPArchiveNode';
-import {SPMoreViewNode} from '../node/SPMoreViewNode';
-
-// Ga
-import {Ga} from '../../ga/Ga';
-import {GaData} from '../../ga/GaData';
-
-// React
-/* eslint-disable no-unused-vars */
-/**
- * [library] - React
- */
-const React = self.React;
-/* eslint-enable no-unused-vars */
-/**
- * [library] - ReactDOM
- */
-const ReactDOM = self.ReactDOM;
+// // React
+// /* eslint-disable no-unused-vars */
+// /**
+//  * [library] - React
+//  */
+// const React = self.React;
+// /* eslint-enable no-unused-vars */
+// /**
+//  * [library] - ReactDOM
+//  */
+// const ReactDOM = self.ReactDOM;
 
 /**
  * SP archive 一覧標示を出力します
@@ -288,117 +288,117 @@ export default class SPViewArchive extends View {
    * @param {Array} articles JSON responce.articles
    */
   render(articles) {
-    // console.log( '**************** SPViewArchive render ', articles );
-    // 既存データ用のglobal配列
-    const articlesList = this._articles;
-
-    // 前回までの配列length
-    // sequence な index のために必要
-    const prevLast = this._articles.length;
-
+    console.warn('SPViewArchive render ', articles);
+    // // 既存データ用のglobal配列
+    // const articlesList = this._articles;
+    //
+    // // 前回までの配列length
+    // // sequence な index のために必要
+    // const prevLast = this._articles.length;
+    //
+    // // // ------------------------------------------------
+    // // let moreButton = ( show:Boolean ):void => {
+    // //   show = !!show;
+    // //   // _moreRendered が null の時のみ state を update する
+    // //   if ( this._moreRendered === null ) {
+    // //     // チェックをパスし実行する
+    // //     this.moreRendered = ReactDOM.render(
+    // //       <SPMoreViewNode
+    // //         show={show}
+    // //         action={this.action}
+    // //         home={this.home}
+    // //         slug={this.slug}
+    // //       />,
+    // //       this.moreElement
+    // //     );
+    // //
+    // //   } else {
+    // //
+    // //     this.moreRendered.updateShow( show );
+    // //
+    // //   }
+    // // };
+    //
     // // ------------------------------------------------
-    // let moreButton = ( show:Boolean ):void => {
-    //   show = !!show;
-    //   // _moreRendered が null の時のみ state を update する
-    //   if ( this._moreRendered === null ) {
-    //     // チェックをパスし実行する
-    //     this.moreRendered = ReactDOM.render(
-    //       <SPMoreViewNode
-    //         show={show}
-    //         action={this.action}
-    //         home={this.home}
-    //         slug={this.slug}
-    //       />,
-    //       this.moreElement
-    //     );
+    // // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
+    // // articles.forEach( function( article, i ) {
+    // //
+    // //   let dae = new ArticleDae( article );
+    // //   // console.log( 'dae ', dae );
+    // //   dae.index = prevLast + i;
+    // //   articlesList.push( dae );
+    // //
+    // // } );
     //
-    //   } else {
-    //
-    //     this.moreRendered.updateShow( show );
-    //
-    //   }
-    // };
-
-    // ------------------------------------------------
-    // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
-    // articles.forEach( function( article, i ) {
-    //
-    //   let dae = new ArticleDae( article );
-    //   // console.log( 'dae ', dae );
+    // articles.map((article, i) => {
+    //   const dae = new ArticleDae(article);
     //   dae.index = prevLast + i;
-    //   articlesList.push( dae );
+    //   articlesList.push(dae);
+    //   return article;
+    // });
     //
-    // } );
-
-    articles.map((article, i) => {
-      const dae = new ArticleDae(article);
-      dae.index = prevLast + i;
-      articlesList.push(dae);
-      return article;
-    });
-
-    // 通知
-    this.executeSafely(View.BEFORE_RENDER, articlesList);
-
-    // this._articleRendered が null の時だけ ReactDOM.render する
-    if (this.articleRendered === null) {
-      // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      this.articleRendered = ReactDOM.render(
-        <SPArchiveNode
-          list={articlesList}
-          offset={this.request.offset}
-          length={this.request.length}
-          action={this.action}
-          scope={this}
-          moreButton={this.moreButton}
-          home={this.home}
-          type={Message.NEWS}
-          adSp=""
-        />,
-        this.element
-      );
-      if (this.home) {
-        // ----------------------------------------------
-        // GA 計測タグ
-        // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
-        Ga.add(new GaData('SPViewArchive.render', 'home_articles', 'view - new', String(1), 0, true));
-        // ----------------------------------------------
-      } else {
-        // ----------------------------------------------
-        // GA 計測タグ
-        // PC/スマホカテゴリー一覧の新着記事
-        Ga.add(new GaData('SPViewArchive.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
-        // ----------------------------------------------
-      }
-    } else {
-      // instance が存在するので
-      // state update でコンテナを追加する
-      this.articleRendered.updateList(articlesList, this._request.offset, this._request.length);
-    }
-  }// render
-  /**
-   * more button の表示・非表示を行います
-   * @param {boolean} show true の時にボタンを表示させ機能させます
-   */
-  moreButton(show) {
-    // element check, null あり
-    if (!this.moreElement) {
-      return;
-    }
-    // console.log('SPViewArchive.moreButton', this.moreElement);
-    if (this.moreRendered === null) {
-      // チェックをパスし実行する
-      this.moreRendered = ReactDOM.render(
-        <SPMoreViewNode
-          show={show}
-          action={this.action}
-          home={this.home}
-          slug={this.slug}
-        />,
-        this.moreElement
-      );
-    } else {
-      this.moreRendered.updateShow(show);
-    }
+    // // 通知
+    // this.executeSafely(View.BEFORE_RENDER, articlesList);
+    //
+    // // this._articleRendered が null の時だけ ReactDOM.render する
+    // if (this.articleRendered === null) {
+    //   // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
+    //   this.articleRendered = ReactDOM.render(
+    //     <SPArchiveNode
+    //       list={articlesList}
+    //       offset={this.request.offset}
+    //       length={this.request.length}
+    //       action={this.action}
+    //       scope={this}
+    //       moreButton={this.moreButton}
+    //       home={this.home}
+    //       type={Message.NEWS}
+    //       adSp=""
+    //     />,
+    //     this.element
+    //   );
+    //   if (this.home) {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
+    //     Ga.add(new GaData('SPViewArchive.render', 'home_articles', 'view - new', String(1), 0, true));
+    //     // ----------------------------------------------
+    //   } else {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     // PC/スマホカテゴリー一覧の新着記事
+    //     Ga.add(new GaData('SPViewArchive.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
+    //     // ----------------------------------------------
+    //   }
+    // } else {
+    //   // instance が存在するので
+    //   // state update でコンテナを追加する
+    //   this.articleRendered.updateList(articlesList, this._request.offset, this._request.length);
+    // }
   }
+  // /**
+  //  * more button の表示・非表示を行います
+  //  * @param {boolean} show true の時にボタンを表示させ機能させます
+  //  */
+  // moreButton(show) {
+  //   // element check, null あり
+  //   if (!this.moreElement) {
+  //     return;
+  //   }
+  //   // console.log('SPViewArchive.moreButton', this.moreElement);
+  //   if (this.moreRendered === null) {
+  //     // チェックをパスし実行する
+  //     this.moreRendered = ReactDOM.render(
+  //       <SPMoreViewNode
+  //         show={show}
+  //         action={this.action}
+  //         home={this.home}
+  //         slug={this.slug}
+  //       />,
+  //       this.moreElement
+  //     );
+  //   } else {
+  //     this.moreRendered.updateShow(show);
+  //   }
+  // }
 }

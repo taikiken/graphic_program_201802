@@ -27,7 +27,7 @@ import { ComponentArticleThumbnail } from '../../../component/articles/Component
 import { Safety } from '../../../data/Safety';
 
 // sp/view/articles
-import { SPComponentArticleAd } from './SPComponentArticleAd';
+import SPComponentArticleAd from './SPComponentArticleAd';
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
 
 // React
@@ -42,7 +42,7 @@ const React = self.React;
  * design 変更に伴う構造変更 旧: {@link SPArchiveNode}
  * @since 2016-09-21
  */
-export class SPComponentArticles extends React.Component {
+export default class SPComponentArticles extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -115,33 +115,52 @@ export class SPComponentArticles extends React.Component {
     this.props.boundMore(this.props.action.hasNext());
   }
   /**
+   * delegate - before props update
+   * @param {{list: Array.<ArticleDae>, offset: number, length: number}} nextProps React next props
+   */
+  componentWillReceiveProps(nextProps) {
+    const { list, offset, length } = nextProps;
+    if (list || offset !== this.state.offset || length !== this.state.length) {
+      this.setState({ list, offset, length });
+      this.props.boundMore(this.props.action.hasNext());
+    }
+  }
+  /**
   /**
    * `headline` コンテンツを出力します
    * @return {?XML} headline` コンテンツを返します
    */
   render() {
-    const props = this.props;
-    const state = this.state;
-    const list = state.list;
+    // const props = this.props;
+    // const state = this.state;
+    // const list = state.list;
+    // const length = list.length;
+    const { list } = this.state;
     const length = list.length;
-
     if (length === 0) {
       return null;
     }
+    const { home, adSp } = this.props;
 
     return(
       <div className="latest">
+        {/*
+        // 2017-12-18 トルツメ
         <div className="latest-heading">
           <h2 className="latest-heading-title">{Message.LATEST_TITLE}</h2>
         </div>
+        */}
         <div className="board">
           {
             list.map((dae, i) => {
               const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
-              let recommend = null;
-              if (dae.isRecommend && props.home) {
-                recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
-              }
+              // let recommend = null;
+              // if (dae.isRecommend && props.home) {
+              //   recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
+              // }
+              const recommend = (dae.isRecommend && home) ?
+                <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i> :
+                null;
               // const slug = dae.categories.slug || 'x';
               /*
                @since 2016-12-26
@@ -195,7 +214,7 @@ export class SPComponentArticles extends React.Component {
                     index={i}
                     length={length}
                     uniqueId={`ad-${dae.mediaType}-${dae.id}`}
-                    adSp={props.adSp}
+                    adSp={adSp}
                     categories={dae.categories}
                   />
                 </div>

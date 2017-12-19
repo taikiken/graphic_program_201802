@@ -52,15 +52,16 @@ export default class SPViewCategory extends SPViewArchiveInfinite {
    * @param {Object} [option={}] optional event handler
    */
   constructor(slug, element, moreElement, option = {}) {
-    super( element, moreElement, null, option );
+    super(element, moreElement, null, option);
     /**
      * Action instance を設定します
+     * - @since 2017-12-18 初回表示件数は仮で12件とする(表示みて調整) ref: UNDO_SPBL-282 【Web】一面のリニューアル / Web - Mobile対応
      * @override
      * @type {CategoryAuth|Category}
      */
     this.action = User.sign ?
-      new CategoryAuth(slug, '', this.done.bind(this), this.fail.bind(this)) :
-      new Category(slug, '', this.done.bind(this), this.fail.bind(this));
+      new CategoryAuth(slug, '', this.done.bind(this), this.fail.bind(this), 0, 12) :
+      new Category(slug, '', this.done.bind(this), this.fail.bind(this), 0, 12);
     /**
      * category slug, ga に使う
      * @override

@@ -26,6 +26,8 @@ const React = self.React;
 /**
  * SP 次を見る VIEW MORE button
  * @type {ReactClass}
+ * @deprecated not use
+ * TODO future remove
  */
 export const SPMoreViewNode = React.createClass( {
   propTypes: {

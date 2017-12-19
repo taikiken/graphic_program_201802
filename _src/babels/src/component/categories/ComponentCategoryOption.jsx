@@ -132,7 +132,7 @@ export default class ComponentCategoryOption extends View {
     ReactDOM.render(
       <ComponentCarousel
         list={category.pickup.articles}
-        callback={this.boundSafety}
+        safely={this.boundSafety}
         polling={new Polling(1000 * 5)}
         index={0}
         sp={Sagen.Browser.Mobile.phone()}

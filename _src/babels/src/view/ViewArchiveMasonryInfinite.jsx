@@ -157,15 +157,16 @@ export default class ViewArchiveMasonryInfinite extends View {
     this.boundMore = this.moreButton.bind(this);
     /**
      * 初回無限スクロールにしないパターン, クリック後に開始します
-     * <pre>
+     * ```
      * 対応は PC版ホームに限り
      * 初回ロード時はVIEW MORE表示
      * VIEW MOREクリックで今の無限スクロールの形（VIEW MORE押す必要なくなる）
-     * </pre>
+     * ```
      *
      * @see https://github.com/undotsushin/undotsushin/issues/1141
      * @type {boolean}
      * @since 2016-10-04
+     * @default false
      */
     this.afterClick = false;
     /**
@@ -184,7 +185,7 @@ export default class ViewArchiveMasonryInfinite extends View {
      */
     this.boundSafely = this.executeSafely.bind(this);
     /**
-     * 最初の出力 flag
+     * 最初の出力終了 flag
      * - false: ga send
      * @type {boolean}
      */

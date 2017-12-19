@@ -36,11 +36,12 @@ export default class ViewArea extends ViewArchiveMasonryInfinite {
    */
   static actionPref(area, done, fail) {
     return User.sign ?
-      new Pref(area, done, fail) :
-      new PrefAuth(area, done, fail);
+      new Pref(area, done, fail, 0, 12) :
+      new PrefAuth(area, done, fail, 0, 12);
   }
   /**
    * 地域 Action instance を作成します
+   * - @since 2017-12-18 初回表示件数は仮で12件とする(表示みて調整) ref: UNDO_SPBL-282 【Web】一面のリニューアル / Web - Mobile対応
    * @param {string} area 地域名称
    * @param {?function} done 成功コールバッック
    * @param {?function} fail 失敗コールバック
@@ -48,8 +49,8 @@ export default class ViewArea extends ViewArchiveMasonryInfinite {
    */
   static actionArea(area, done, fail) {
     return User.sign ?
-      new Area(area, done, fail) :
-      new AreaAuth(area, done, fail);
+      new Area(area, done, fail, 0, 12) :
+      new AreaAuth(area, done, fail, 0, 12);
   }
   // ----------------------------------------
   // CONSTRUCTOR
