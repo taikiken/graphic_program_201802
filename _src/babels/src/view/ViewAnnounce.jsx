@@ -48,6 +48,10 @@ export default class ViewAnnounce extends View {
   start() {
     this.action.start();
   }
+  /**
+   * Ajax success callback
+   * @param {Result} result Ajax JSON data
+   */
   done(result) {
     const response = result.response;
     if (!response) {
@@ -57,13 +61,35 @@ export default class ViewAnnounce extends View {
       this.render(response);
     }
   }
+  /**
+   * Ajax error callback
+   * @param {Error} error Ajax Error
+   */
   fail(error) {
     this.executeSafely(View.RESPONSE_ERROR, error);
-    console.warn('ViewCategories.fail', error);
+    console.warn('ViewAnnounce.fail', this.slug, error);
+    // category/slug でエラー `404` の時に `slug: all` で再アクセスする
+    if (this.slug !== 'all') {
+      this.retry('all');
+    }
   }
+  /**
+   * slug を変更し再アクセスします
+   * @param {string} slug category slug - 変更する slug
+   */
+  retry(slug) {
+    const action = this.action;
+    action.updatePath(slug);
+    action.start();
+  }
+  /**
+   * お知らせを出力します
+   * @param {*} response `result.responce` Ajax JSON.responce - {@link CategoriesSlugDae}
+   */
   render(response) {
     const dae = new CategoriesSlugDae(response);
     const pc = dae.information.pc;
+    console.log('ViewAnnounce.render', response, dae, pc);
     // output
     ReactDOM.render(
       <ComponentAnnounce

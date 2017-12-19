@@ -256,8 +256,8 @@ export class Router extends EventDispatcher {
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {Router} Router instance を返します
    */
-  constructor( target ) {
-    if ( _symbol !== target ) {
+  constructor(target) {
+    if (_symbol !== target) {
       throw new Error( 'Router is static Class. not use new Router(). instead Router.factory()' );
     }
     if (_instance) {

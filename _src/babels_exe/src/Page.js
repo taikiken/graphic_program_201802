@@ -32,6 +32,8 @@ import Settings from './page/Settings';
 import Comment from './page/Comment';
 // since 2017-11-06
 import SignupWow from './page/SignupWow';
+// since 2017-12-18
+import Announce from './page/Announce';
 
 // headers
 import SearchForm from './header/SearchForm';
@@ -57,7 +59,14 @@ let _scrolled = false;
 let _tween = null;
 
 // UT
+/**
+ * [library] - UT
+ */
 const UT = self.UT;
+/**
+ * [library] - UT.Dom
+ * @type {Dom}
+ */
 const Dom = UT.app.Dom;
 
 // let Sagen = self.Sagen;
@@ -312,6 +321,8 @@ export default class Page {
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start('all');
   }
   /**
    * home, index page
@@ -331,6 +342,8 @@ export default class Page {
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start('all');
   }
   /**
    * category page
@@ -354,6 +367,8 @@ export default class Page {
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start(slug);
   }
   /**
    * single, detail page
@@ -391,6 +406,8 @@ export default class Page {
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start('all');
   }
   /**
    * コメント返信 詳細
@@ -409,6 +426,8 @@ export default class Page {
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start('all');
   }
   /**
    * 検索ページ
@@ -427,6 +446,8 @@ export default class Page {
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start('all');
   }
   // ----------------------------------------------------
   // header, footer いらない
@@ -654,5 +675,7 @@ export default class Page {
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start(slug);
   }
 }

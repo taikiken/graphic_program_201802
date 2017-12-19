@@ -420,7 +420,7 @@ export default class ViewArchiveMasonryInfinite extends View {
       articlesList.push(dae);
       return article;
     });
-    console.log('ViewArchiveMasonryInfinite,.render articles', articlesList);
+    // console.log('ViewArchiveMasonryInfinite,.render articles', articlesList);
     // // this._articleRendered が null の時だけ ReactDOM.render する
     // if (this.articleRendered === null ) {
     //   // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する

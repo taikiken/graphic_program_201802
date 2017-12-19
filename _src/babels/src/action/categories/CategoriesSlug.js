@@ -51,4 +51,11 @@ export default class CategoriesSlug extends Categories {
   // get slug():string {
   //   return this._slug;
   // }
+  /**
+   * slug を変更し `path` 更新します
+   * @param {string} slug category slug
+   */
+  updatePath(slug) {
+    this.url = `${this.types.url}/${slug}`;
+  }
 }

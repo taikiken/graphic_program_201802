@@ -16,7 +16,14 @@ import Sidebar from './Sidebar';
 // let _symbol = Symbol();
 
 // UT
+/**
+ * [library] - UT
+ */
 const UT = self.UT;
+/**
+ * [library] - UT.Dom
+ * @type {Dom}
+ */
 const Dom = UT.app.Dom;
 
 /**
