@@ -14,7 +14,7 @@
 import View from '../../view/View';
 
 // view/headlines
-import { ComponentHeadlines } from '../headlines/ComponentHeadlines';
+import ComponentHeadlines from '../headlines/ComponentHeadlines';
 
 // view/categories
 import { ComponentHeadlineAd } from './ComponentHeadlineAd';

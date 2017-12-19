@@ -54,7 +54,7 @@ const playMark = (mediaType) => {
  * headline の 1記事
  * @since 2016-09-17
  */
-export class ComponentHeadlineArticle extends React.Component {
+export default class ComponentHeadlineArticle extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -161,7 +161,7 @@ export class ComponentHeadlineArticle extends React.Component {
     const minHeight = Num.float(parseFloat(h3.style.get('minHeight')));
     const offset = h3.offset();
     const height = Num.float(offset.height);
-    // console.log('minheight', this.props.id, minHeight, height);
+    // console.log('min-height', this.props.id, minHeight, height);
     if (height <= minHeight) {
       return;
     }

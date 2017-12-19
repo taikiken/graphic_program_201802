@@ -41,16 +41,25 @@ const ReactDOM = self.ReactDOM;
  * @param {string} login login url
  * @returns {?XML} `div.user`
  * @constructor
- * @since 2017-12-08
+ * @since 2017-12-08 - update element
  */
 const HeaderUserComponent = ({ signup, login }) => (
   <div className="user">
-    <div className="btn-signup">
-      <a href={signup}>無料登録</a>&nbsp;/&nbsp;<a href={login}>ログイン</a>
+    <div className="user-signup-btn">
+      <a href={login} className="user-signup-btn--login">ログイン</a>
+      <a href={signup} className="user-signup-btn--signup">無料会員登録</a>
     </div>
   </div>
 );
 
+/*
+// old
+<div className="user">
+  <div className="btn-signup">
+    <a href={signup}>無料登録</a>&nbsp;/&nbsp;<a href={login}>ログイン</a>
+  </div>
+</div>
+*/
 /**
  * React.propTypes
  * @type {{signup: string, login: string}}

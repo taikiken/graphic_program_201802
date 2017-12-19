@@ -12,7 +12,7 @@
 
 // view
 import View from '../View';
-import { ComponentHeadlines } from '../../component/headlines/ComponentHeadlines';
+import ComponentHeadlines from '../../component/headlines/ComponentHeadlines';
 
 // app
 // import {Empty} from '../../app/const/Empty';
