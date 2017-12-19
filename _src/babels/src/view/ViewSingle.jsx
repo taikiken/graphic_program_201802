@@ -55,27 +55,65 @@ import { Snap } from '../ui/Snap';
 import { TopButton } from '../ui/button/TopButton';
 // @since 2016-12-26
 import { Hit } from '../ui/Hit';
+// @since 2017-12-18
+import ComponentAnnounce from '../component/announce/ComponentAnnounce';
+
+// React
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
- * <p>記事詳細</p>
- * <p>記事ID で 記事詳細JSONを取得し表示します</p>
+ * 記事詳細,
+ * 記事ID で 記事詳細JSONを取得し表示します
  *
  * ```
- * let elements = {}
+ * const elements = {}
  *  related: document.getElementById('related'),
  *  footer: document.getElementById('footer')
  * }
- * let single = new ViewSingle( articleId, element, elements );
+ * const single = new ViewSingle(articleId, element, elements);
  * single.start();
  * ```
  */
 export default class ViewSingle extends View {
+  // ---------------------------------------------------
+  //  STATIC METHODS
+  // ---------------------------------------------------
+  /**
+   * お知らせを表示します - {@link ComponentAnnounce}
+   * @param {SingleDae} single Ajax JSON 記事 data
+   * @param {boolean} [sp=false] mobile flag
+   */
+  static announce(single, sp = false) {
+    const element = Dom.announce();
+    if (!element) {
+      return;
+    }
+    const information = sp ? single.information.sp : single.information.pc;
+    ReactDOM.render(
+      <ComponentAnnounce
+        information={information}
+      />,
+      element,
+    );
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * 記事ID で 記事詳細JSONを取得し表示します
    *
    * @param {Number} id article id, 記事Id
    * @param {Element} element root element
-   * @param {Object} elements root element 関連記事, 各コメント
+   * @param {{related: Element, footer: Element}} elements related / footer element 関連記事, 各コメント
    * @param {Object} [option={}] optional event handler
    */
   constructor(id, element, elements, option = {}) {
@@ -140,9 +178,34 @@ export default class ViewSingle extends View {
     this.page = null;
     /**
      * SinglesHistory instance
-     * @type {?SinglesHistory}
+     * @type {SinglesHistory}
      */
-    this.manager = null;
+    this.manager = SinglesHistory.factory();
+    /**
+     * TopButton instance
+     * @type {TopButton}
+     */
+    this.topButton = TopButton.factory();
+    /**
+     * bind onTop
+     * @type {function}
+     */
+    this.onTop = this.onTop.bind(this);
+    /**
+     * bind onSnap
+     * @type {function}
+     */
+    this.onSnap = this.onSnap.bind(this);
+    /**
+     * bind onBeat
+     * @type {function}
+     */
+    this.onBeat = this.onBeat.bind(this);
+    /**
+     * bind hitIn
+     * @type {function}
+     */
+    this.hitIn = this.hitIn.bind(this);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -194,29 +257,33 @@ export default class ViewSingle extends View {
       const single = new SingleDae(response);
       // ---------------------------------
       // @since 2016-10-27 pushstate のために
-      const manager = SinglesHistory.factory();
-      this.manager = manager;
+      // const manager = SinglesHistory.factory();
+      const manager = this.manager;
       const page = new Page(single);
       this.page = page;
       manager.setBase(page.url());
       manager.hit(page);
       // snap
       const element = Dom.get('js-current-post');
-      // no scroll animation で snap instance 作成
-      const snap = new Snap(element, true, page);
-      snap.on(Snap.SNAPPED, this.onSnap.bind(this));
-      snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
-      snap.start();
-      // @since 2016-12-26
-      // top button / short cut でのスクロールトップ対応
-      const hit = new Hit(element);
-      hit.on(Hit.COLLISION, this.hitIn.bind(this));
-      hit.start();
+      if (element) {
+        // no scroll animation で snap instance 作成
+        const snap = new Snap(element, true, page);
+        snap.on(Snap.SNAPPED, this.onSnap);
+        snap.on(Snap.BEAT_UP, this.onBeat);
+        snap.start();
+        // @since 2016-12-26
+        // top button / short cut でのスクロールトップ対応
+        const hit = new Hit(element);
+        hit.on(Hit.COLLISION, this.hitIn);
+        hit.start();
+      }
       // ---------------------------------
       // @since 2016-11-16
       // top button
-      const topButton = TopButton.factory();
-      topButton.on(TopButton.COMPLETE, this.onTop.bind(this));
+      // const topButton = TopButton.factory();
+      const topButton = this.topButton;
+      topButton.off(TopButton.COMPLETE, this.onTop);
+      topButton.on(TopButton.COMPLETE, this.onTop);
       // ---------------------------------
       this.render(single);
       this.singles(single);
@@ -270,7 +337,7 @@ export default class ViewSingle extends View {
     this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-    console.warn('error', error);
+    console.warn('ViewSingle.error', this.id, error);
   }
   /**
    * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします
@@ -313,12 +380,15 @@ export default class ViewSingle extends View {
    * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */
   render(single) {
-    // console.log( 'ViewSingle response', response );
+    console.log('ViewSingle.render single', single);
     // let single = new SingleDae( response );
     // console.log('ViewSingle beforeRender', this.id, single);
     // beforeRender call
     this.executeSafely(View.BEFORE_RENDER, single);
-
+    // ------
+    // since 2017-12-18
+    ViewSingle.announce(single);
+    // ------
     // let header, footer;
     // console.log( 'ViewSingle', single );
     // header
@@ -365,10 +435,10 @@ export default class ViewSingle extends View {
   }
   /**
    * 関連記事（記事詳細の）
-   * <pre>
+   * ```
    * desktop/p.php
    * `_popIn_recommend` に JS で出力
-   * </pre>
+   * ```
    * @param {Array} [related=[]] 配列内データ型はRelatedDom
    */
   related(related = []) {
@@ -390,10 +460,9 @@ export default class ViewSingle extends View {
   }// related
 
   /**
-   * <p>a#readMore-external の存在チェックを行い<br>
-   * 存在すれば click で<br>
-   * ga タグを送信します</p>
-   *
+   * a#readMore-external の存在チェックを行います
+   * - 存在すれば click で
+   * - ga タグを送信します
    * @since 2016-06-10
    */
   static moreExternal() {
@@ -405,22 +474,19 @@ export default class ViewSingle extends View {
     external.addEventListener('click', ViewSingle.onExternal, false);
   }
   /**
-   * <p>a#readMore-external click event handler<br>
-   * ga タグを送信します</p>
-   *
-   * https://github.com/undotsushin/undotsushin/issues/738#issuecomment-224794530
-   *
-   * <code>
+   * a#readMore-external click event handler
+   * - ga タグを送信します
+   * @see https://github.com/undotsushin/undotsushin/issues/738#issuecomment-224794530
+   * ```
    * ga('send', {
    * 'hitType': 'event',
    * 'eventCategory': 'external_link',
    * 'eventAction': 'click',
    * 'eventLabel': 'http://〜'
    * });
-   * </code>
-   *
-   * @since 2016-06-10
+   * ```
    * @param {Event} event a#readMore-external click event object
+   * @since 2016-06-10
    */
   static onExternal(event) {
     const category = 'external_link';
@@ -437,8 +503,8 @@ export default class ViewSingle extends View {
   //  STATIC METHODS
   // ---------------------------------------------------
   /**
-   * <p>記事詳細での提供元&カテゴリートラッキング</p>
-   * https://github.com/undotsushin/undotsushin/issues/744
+   * 記事詳細での提供元&カテゴリートラッキング
+   * @see https://github.com/undotsushin/undotsushin/issues/744
    *
    * <pre>
    * 対象スクリーン：/p/ [ 記事ID ]

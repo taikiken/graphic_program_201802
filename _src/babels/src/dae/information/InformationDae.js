@@ -49,11 +49,15 @@ export class InformationNormalize {
     if (type === 'img') {
       return color;
     }
+    const gray = '#333333';
+    if (!color || typeof color !== 'string' || !color.length) {
+      return gray;
+    }
     const firstWord = color.substr(0, 1);
     if (firstWord === '#') {
       return color;
     }
-    return '#333333';
+    return gray;
   }
 
   /**
@@ -66,6 +70,10 @@ export class InformationNormalize {
     if (type === 'img') {
       return color;
     }
+    const white = '#ffffff';
+    if (!color || typeof color !== 'string' || !color.length) {
+      return white;
+    }
     const firstWord = color.substr(0, 1);
     if (firstWord === '#') {
       return color;
@@ -74,7 +82,7 @@ export class InformationNormalize {
       return '#ffcccc';
     }
     // notice
-    return '#ffffff';
+    return white;
   }
 }
 

@@ -126,6 +126,10 @@ export default class SPViewSingle extends ViewSingle {
     this.renderHeader(single);
     this.renderVisual(single);
     this.renderBanner(single);
+    // ---
+    // 2017-12-18 - お知らせ
+    ViewSingle.announce(single, true);
+    // ---
 
     // ga from 2016-06-08
     // ViewSingle.ga( single );
