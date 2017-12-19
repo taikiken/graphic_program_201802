@@ -5,7 +5,7 @@ $WHERE = "";
 
 if($q->get_dir()===0){
     if($q->get_file()===0){
-        
+
         include $INCLUDEPATH."formback.php";
     }elseif($q->get_file()===1){
 
@@ -19,17 +19,17 @@ if($q->get_dir()===0){
         $sql = "select count(*) from ".$TABLE.";";
         $o->query($sql);
         $p=$o->fetch_array();
-        
+
         //Rowが無い
         if($p["count"]==0){
             $sv[$sn[]="n"]=1;
-        
+
         //一覧の最初に追加
         } elseif ($_POST["POSITION"]!=1) {
             $sql="update ".$TABLE." set n=(n+1)";
             $o->query($sql);
             $sv[$sn[]="n"]=1;
-            
+
         } else {
             $sv[$sn[]="n"]=sprintf("(select max(n)+1 as n from %s)",$TABLE);
         }
@@ -43,7 +43,7 @@ if($q->get_dir()===0){
     }
 }elseif($q->get_dir()===1){
     if($q->get_file()===0){
-        
+
         $sql=sprintf("select * from tabs %s where id=%s",$TABLE,$g->f("id"));
         $o->query($sql);
         $p=$o->fetch_array();
@@ -70,7 +70,7 @@ if($q->get_dir()===0){
         $p=$o->fetch_array();
 
         include $INCLUDEPATH."formback.php";
-        
+
     }elseif($q->get_file()===1){
 
         data_conf();

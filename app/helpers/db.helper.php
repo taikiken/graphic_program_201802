@@ -135,7 +135,7 @@ END_DOC;
         while( $f = $this->fetch_array() ){
             $target_list[] = $f;
         }
-        
+
         //対象の配列だけを抽出
         $interest_list = array();
         foreach ($s as $key => $value){
@@ -149,7 +149,7 @@ END_DOC;
         //抽出した配列と元の配列を結合
         $s = array_merge($interest_list,$s);
     endif;
-    
+
     return $s;
 
   }
