@@ -27,23 +27,38 @@
     // height: $pickup-height;
     overflow: hidden;
 
+    @at-root {
+      .pickup-slider-wrapper {
+        position: absolute;
+        top: 0;
+      }
+    }
+
+
     &-inner {
+      position: relative;
       width: 100%;
       overflow: visible;
 
+      &:before {
+        content:"";
+        display: block;
+        padding-top: (320/750*100)+%;
+      }
+
       ul {
         @include clearfix;
+        position: absolute;
         width: 200000px;
       }
 
       li {
         float: left;
+        width: 100vw;
 
         a {
           position: relative;
           display: block;
-          // height: $pickup-anchor-heigt;
-          // background-color: #061533;
 
           .overlay {
             width: 100vw;
@@ -692,6 +707,3 @@
 }
 
 
-.pickup-slider-wrapper {
-  position: absolute;
-}
