@@ -232,8 +232,10 @@
     position: absolute;
     top: 99999px;
     width: 354px;
+    height: 310px;
     margin-top: 30px;
     padding-bottom: 20px;
+    overflow: hidden;
     background-color: #fff;
     // border-bottom: 5px solid #e7e7e7;
 
@@ -334,19 +336,23 @@
   }
 
   .post {
+    display: table;
     height: 105px;
     padding: 15px 0;
     overflow: hidden;
 
     &-thumb {
-      float: left;
+      display: table-cell;
       width: 70px;
       height: 70px;
-      margin-right: 10px;
       border-radius: 3px;
-      overflow: hidden;
+      vertical-align: middle;
       // ref. https://github.com/undotsushin/undotsushin/issues/1244
       // background: #ccc url(/assets/images/common/thumb-noimage-70x70.png) center center no-repeat;
+
+      img {
+        border-radius: 3px;
+      }
 
       &.post-thumb-fill {
         background: none;
@@ -360,7 +366,7 @@
           position: absolute;
           top: 0;
           left: 0;
-          width: 100%;
+          width: 70px;
           height: auto;
         }
       }
@@ -372,7 +378,9 @@
     }
 
     &-data {
-      overflow: hidden;
+      display: table-cell;
+      padding-left: 10px;
+      vertical-align: middle;
     }
 
     &-category {
@@ -604,6 +612,7 @@
     padding-top: 0;
   }
 
+  //.board-btn-viewmore-link
   &-link {
     @include link-decoration(null, #fff, none, none);
     display: block;
