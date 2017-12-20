@@ -157,11 +157,11 @@ END_DOC;
 
     $this->query($sql);
     while( $f = $this->fetch_array() ){
-	$tmp_array["id"]=(int)$f["id"];
-	$tmp_array["label"]=$f["title"];
-	$tmp_array["slug"]=$f["name_e"];
+        $tmp_array["id"]=(int)$f["id"];
+        $tmp_array["label"]=$f["title"];
+        $tmp_array["slug"]=$f["name_e"];
 
-      $tabs[] = set_categoryinfo($tmp_array);
+        $tabs[] = $tmp_array;
     }
 
     // 並び替えする
