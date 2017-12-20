@@ -56,6 +56,8 @@ let React = self.React;
 // } );
 
 /**
+ * @deprecated 2017-12-18 instead use {@link ComponentSidebarRankingArticle}
+ * TODO: future remove
  * <p>人気記事一覧</p>
  * <p>SPに人気記事一覧を記事詳細に追加することになったので共通で使用できるように独立させました</p>
  * @since 2016-06-16

@@ -22,6 +22,7 @@ import { Safety } from '../../data/Safety';
 
 // node
 import { RankingNode } from '../../node/sidebar/RankingNode';
+import ComponentSidebarRankingArticle from './ComponentSidebarRankingArticle';
 
 // React
 const React = self.React;
@@ -114,27 +115,42 @@ export default class ComponentSidebarRanking extends React.Component {
           {
             list.map((article, i) => {
               const dae = new ArticleDae(article);
-              const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
-              const empty = thumbnail === Empty.IMG_SMALL;
-              // console.log('ComponentSidebarRanking', dae.anotherCategories);
-              // RankingNode instance を使い render
+              // const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
+              // const empty = thumbnail === Empty.IMG_SMALL;
+              // // console.log('ComponentSidebarRanking', dae.anotherCategories);
+              // // RankingNode instance を使い render
+              // return (
+              //   <RankingNode
+              //     key={`sidebar-ranking-${dae.id}`}
+              //     index={i}
+              //     id={String( dae.id )}
+              //     categories={dae.categories.all}
+              //     url={dae.url}
+              //     date={dae.displayDate}
+              //     title={dae.title}
+              //     thumbnail={thumbnail}
+              //     empty={empty}
+              //     total={dae.commentsCount}
+              //     home={home}
+              //     detail={detail}
+              //     thisSlug={slug}
+              //     categorySlug={categorySlug}
+              //     anotherCategories={dae.anotherCategories}
+              //   />
+              // );
+              const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
               return (
-                <RankingNode
-                  key={`sidebar-ranking-${dae.id}`}
+                <ComponentSidebarRankingArticle
                   index={i}
-                  id={String( dae.id )}
-                  categories={dae.categories.all}
-                  url={dae.url}
-                  date={dae.displayDate}
-                  title={dae.title}
                   thumbnail={thumbnail}
-                  empty={empty}
-                  total={dae.commentsCount}
+                  categories={dae.categories.all}
+                  title={dae.title}
+                  anotherCategories={dae.anotherCategories}
+                  id={String(dae.id)}
+                  url={dae.url}
                   home={home}
                   detail={detail}
                   thisSlug={slug}
-                  categorySlug={categorySlug}
-                  anotherCategories={dae.anotherCategories}
                 />
               );
             })
