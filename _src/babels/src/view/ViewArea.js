@@ -15,7 +15,7 @@ import Area from '../action/area/Area';
 import AreaAuth from '../action/area/AreaAuth';
 import Pref from '../action/area/Pref';
 import PrefAuth from '../action/area/PrefAuth';
-import ComponentCategoryOption from '../component/categories/ComponentCategoryOption';
+import ViewCategoryOption from './categories/ViewCategoryOption';
 
 /**
  * 地域一覧 - Ajax request + JSON 後表示します
@@ -87,7 +87,7 @@ export default class ViewArea extends ViewArchiveMasonryInfinite {
     this.pref = pref;
     // @since 2016-09-20
     // 記事一覧に pickup, headline を表示させる
-    const categoryOption = new ComponentCategoryOption('area');
+    const categoryOption = new ViewCategoryOption('area');
     categoryOption.start();
   }
 }

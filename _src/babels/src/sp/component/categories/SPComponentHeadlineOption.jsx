@@ -21,6 +21,7 @@ import SPComponentHeadlines from '../headline/SPComponentHeadlines';
 import { RelatedDae } from '../../../dae/RelatedDae';
 import { CategoriesSlugDae } from '../../../dae/categories/CategoriesSlugDae';
 import SPComponentHeadlineArticleLast from '../headline/SPComponentHeadlineArticleLast';
+import { ArticleDae } from '../../../dae/ArticleDae';
 
 // React
 /**
@@ -52,7 +53,10 @@ export default class SPComponentHeadlineOption extends React.Component {
       // articles 配列を元にDomを作成する
       // list: React.PropTypes.array.isRequired,
       list: React.PropTypes.arrayOf(
-        React.PropTypes.instanceOf(RelatedDae).isRequired,
+        React.PropTypes.oneOfType([
+          React.PropTypes.instanceOf(ArticleDae).isRequired,
+          React.PropTypes.instanceOf(RelatedDae).isRequired,
+        ]).isRequired,
       ).isRequired,
       callback: React.PropTypes.func.isRequired,
       home: React.PropTypes.bool.isRequired,
@@ -72,6 +76,7 @@ export default class SPComponentHeadlineOption extends React.Component {
   //  */
   // constructor(props) {
   //   super(props);
+  //   console.log('SPComponentHeadlineOption', props);
   // }
   // ---------------------------------------------------
   //  METHOD

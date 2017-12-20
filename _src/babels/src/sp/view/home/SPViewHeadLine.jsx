@@ -74,13 +74,12 @@ export default class SPViewHeadLine extends ViewHeadline {
       );
     }
     // -------------------------------
-    console.log('SPViewHeadLine.render', list, typeof SPComponentHeadlines, typeof this.boundSafely);
     ReactDOM.render(
       <SPComponentHeadlines
         list={list}
         callback={this.boundSafely}
       />,
-      this.element
+      this.element,
     );
   }// render
 }

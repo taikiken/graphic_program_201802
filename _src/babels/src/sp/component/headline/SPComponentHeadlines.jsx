@@ -23,6 +23,7 @@ import { Empty } from '../../../app/const/Empty';
 import { Safety } from '../../../data/Safety';
 import { ArticleDae } from '../../../dae/ArticleDae';
 import SPComponentHeadlineArticleAd from './SPComponentHeadlineArticleAd';
+import { RelatedDae } from '../../../dae/RelatedDae';
 
 // React
 /**
@@ -57,7 +58,12 @@ export default class SPComponentHeadlines extends React.Component {
     return {
       // Array.<ArticleDae>
       // list: React.PropTypes.array.isRequired,
-      list: React.PropTypes.arrayOf(ArticleDae).isRequired,
+      list: React.PropTypes.arrayOf(
+        React.PropTypes.oneOfType([
+          React.PropTypes.instanceOf(ArticleDae).isRequired,
+          React.PropTypes.instanceOf(RelatedDae).isRequired,
+        ]).isRequired,
+      ).isRequired,
       // executeSafely.bind
       callback: React.PropTypes.func.isRequired,
       home: React.PropTypes.bool,
@@ -87,6 +93,7 @@ export default class SPComponentHeadlines extends React.Component {
   //   super(props);
   //   // ---
   //   this.sponsorLink = null;
+  //   console.log('SPComponentHeadlines', props);
   // }
   // ---------------------------------------------------
   //  METHOD
@@ -128,11 +135,10 @@ export default class SPComponentHeadlines extends React.Component {
   render() {
     const { list, home, archive } = this.props;
 
-    // data なくても広告だけ表示させる
-    // if (list.length === 0) {
-    //   return null;
-    // }
-    console.log('SPComponentHeadlines.render this.props', this.props);
+    if (list.length === 0) {
+      return null;
+    }
+    // console.log('SPComponentHeadlines.render this.props', this.props);
     return (
       <div className="headline-root">
         <div className="headline">

@@ -14,11 +14,11 @@
 import { Dom } from '../../app/Dom';
 
 // view
-import View from '../../view/View';
+import View from '../View';
 // view/carousel
-import ComponentCarousel from '../carousel/ComponentCarousel';
+import ComponentCarousel from '../../component/carousel/ComponentCarousel';
 // view/categories
-import { ComponentHeadlineOption } from './ComponentHeadlineOption';
+import { ComponentHeadlineOption } from '../../component/categories/ComponentHeadlineOption';
 
 // model
 import { Model } from '../../model/Model';
@@ -32,6 +32,7 @@ import { CategoriesSlugDae } from '../../dae/categories/CategoriesSlugDae';
 
 // tick
 import { Polling } from '../../tick/Polling';
+import { Message } from '../../app/const/Message';
 
 // --------------------------------------------
 // Sagen
@@ -62,7 +63,7 @@ const ReactDOM = self.ReactDOM;
  * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
  * @since 2016-09-17
  */
-export default class ComponentCategoryOption extends View {
+export default class ViewCategoryOption extends View {
   /**
    * category slug を使用し API request を開始します
    * @param {string} [slug=all] category.slug
@@ -70,11 +71,11 @@ export default class ComponentCategoryOption extends View {
   constructor(slug = 'all') {
     super(null, null);
 
-    // const boundFail = this.fail.bind(this);
+    const boundFail = this.fail.bind(this);
     const callback = {};
     callback[Model.COMPLETE] = this.done.bind(this);
-    // callback[Model.UNDEFINED_ERROR] = boundFail;
-    // callback[Model.RESPONSE_ERROR] = boundFail;
+    callback[Model.UNDEFINED_ERROR] = boundFail;
+    callback[Model.RESPONSE_ERROR] = boundFail;
 
     /**
      * JSON 取得 action instance
@@ -100,11 +101,13 @@ export default class ComponentCategoryOption extends View {
   done(result) {
     const response = result.response;
     if (typeof response === 'undefined' || response === null) {
+      const error = new Error( Message.undef('[RESULT.RESPONSE:UNDEFINED]') );
+      this.fail(error);
       return;
     }
 
     const category = new CategoriesSlugDae(response);
-    // console.log('ComponentCategoryOption.done', category.pickup, category.headline);
+    // console.log('ViewCategoryOption.done', category.pickup, category.headline);
 
     if (category.pickup.has()) {
       this.pickup(category);
@@ -113,12 +116,14 @@ export default class ComponentCategoryOption extends View {
       this.headline(category);
     }
   }
-  // /**
-  //  * API 失敗 callback
-  //  */
-  // fail():void {
-  //   return;
-  // }
+  /**
+   * API 失敗 callback
+   * @param {Error} error Error instance
+   */
+  fail(error) {
+    this.executeSafely(View.RESPONSE_ERROR, error);
+    console.warn('ViewCategoryOption.fail', error);
+  }
   /**
    * 記事一覧に pickup を表示します
    * @param {CategoriesSlugDae} category JSON

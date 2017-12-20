@@ -19,7 +19,7 @@ import {CategoryAuth} from '../action/archive/CategoryAuth';
 import ViewArchiveMasonryInfinite from './ViewArchiveMasonryInfinite';
 
 // view/categories
-import ComponentCategoryOption from '../component/categories/ComponentCategoryOption';
+import ViewCategoryOption from './categories/ViewCategoryOption';
 
 // app
 import {User} from '../app/User';
@@ -80,7 +80,7 @@ export default class ViewCategory extends ViewArchiveMasonryInfinite {
 
     // @since 2016-09-20
     // 記事一覧に pickup, headline を表示させる
-    const categoryOption = new ComponentCategoryOption(slug);
+    const categoryOption = new ViewCategoryOption(slug);
     categoryOption.start();
   }
 }

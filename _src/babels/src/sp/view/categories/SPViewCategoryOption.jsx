@@ -14,10 +14,10 @@
 import { Dom } from '../../../app/Dom';
 
 // view
-import ComponentCategoryOption from '../../../component/categories/ComponentCategoryOption';
+import ViewCategoryOption from '../../../view/categories/ViewCategoryOption';
 
 // sp/view/categories
-import SPComponentHeadlineOption from './SPComponentHeadlineOption';
+import SPComponentHeadlineOption from '../../component/categories/SPComponentHeadlineOption';
 
 // --------------------------------------------
 // React
@@ -38,7 +38,7 @@ const ReactDOM = self.ReactDOM;
  * {@link SPComponentHeadlineOption}
  * @since 2016-09-24
  */
-export default class SPComponentCategoryOption extends ComponentCategoryOption {
+export default class SPViewCategoryOption extends ViewCategoryOption {
   // /**
   //  * category slug を使用し API request を開始します
   //  * @param {string} [slug=all] category.slug
@@ -55,7 +55,7 @@ export default class SPComponentCategoryOption extends ComponentCategoryOption {
     if (element === null) {
       return;
     }
-
+    // console.log('SPViewCategoryOption.headline', typeof SPComponentHeadlineOption);
     ReactDOM.render(
       <SPComponentHeadlineOption
         list={category.headline.articles}
