@@ -727,7 +727,7 @@ function swforimg($IMG,$f,$alt="",$name=""){
 	$p=$IMG.$f;
 	$t=$p["type"];
 	$s=GetImageSize($IMG.$f);
-	if($s[0]>780){
+	if($s[0]>780 && $s[0]<2000){
 		$s[0]=780;
 		$s[1]=$s[1]*(780/$s[0]);
 	}

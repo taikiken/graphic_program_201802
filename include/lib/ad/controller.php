@@ -120,13 +120,13 @@ if ($_GET["cid"] != 94 && $_GET["rid"] != 95)
     $a[] = array("head", "選手バナー画像設定：（親＞子）デフォルト > カテゴリー ＞ 選手 で継承されますが、子要素の指定は優先されます");
     $a[] = array("inputradio", "バナー表示", "player_bannerflag", array("親の表示設定を継承する", "個別にバナーを設定する", "バナーを表示しない"));
     $a[] = array("textfield", "ALTテキスト（共通）", "player_bannertext", "70", "", "", "");
-    $a[] = array("img", "PCバナー画像", "player_pc_bannerimg", "728-90-0-0-0-0", "", "", $BILLINGUAL);
+    $a[] = array("img", "PCバナー画像", "player_pc_bannerimg", "2000-180-0-0-0-0", "", "", $BILLINGUAL);
     $a[] = array("textfield", "PCリンク先", "player_pc_bannerlink", "100", "", "", "");
-    $a[] = array("img", "スマホバナー画像", "player_sp_bannerimg", "750-234-0-0-0-0", "", "", $BILLINGUAL);
+    $a[] = array("img", "スマホバナー画像", "player_sp_bannerimg", "640-160-0-0-0-0", "", "", $BILLINGUAL);
     $a[] = array("textfield", "スマホリンク先", "player_sp_bannerlink", "100", "", "", "");
-    $a[] = array("img", "iOSバナー画像", "player_ios_bannerimg", "750-234-0-0-0-0", "", "", $BILLINGUAL);
+    $a[] = array("img", "iOSバナー画像", "player_ios_bannerimg", "640-160-0-0-0-0", "", "", $BILLINGUAL);
     $a[] = array("textfield", "iOSリンク先", "player_ios_bannerlink", "100", "", "", "");
-    $a[] = array("img", "Androidバナー画像", "player_android_bannerimg", "750-234-0-0-0-0", "", "", $BILLINGUAL);
+    $a[] = array("img", "Androidバナー画像", "player_android_bannerimg", "640-160-0-0-0-0", "", "", $BILLINGUAL);
     $a[] = array("textfield", "Androidリンク先", "player_android_bannerlink", "100", "", "", "");
     /*
     * 注目の選手の広告設定
@@ -134,13 +134,13 @@ if ($_GET["cid"] != 94 && $_GET["rid"] != 95)
     $a[] = array("head", "注目の選手バナー画像設定：（親＞子）デフォルト > カテゴリー ＞ 注目の選手 で継承されますが、子要素の指定は優先されます");
     $a[] = array("inputradio", "バナー表示", "pickupplayer_bannerflag", array("親の表示設定を継承する", "個別にバナーを設定する", "バナーを表示しない"));
     $a[] = array("textfield", "ALTテキスト（共通）", "pickupplayer_bannertext", "70", "", "", "");
-    $a[] = array("img", "PCバナー画像", "pickupplayer_pc_bannerimg", "728-90-0-0-0-0", "", "", $BILLINGUAL);
+    $a[] = array("img", "PCバナー画像", "pickupplayer_pc_bannerimg", "2000-180-0-0-0-0", "", "", $BILLINGUAL);
     $a[] = array("textfield", "PCリンク先", "pickupplayer_pc_bannerlink", "100", "", "", "");
-    $a[] = array("img", "スマホバナー画像", "pickupplayer_sp_bannerimg", "750-234-0-0-0-0", "", "", $BILLINGUAL);
+    $a[] = array("img", "スマホバナー画像", "pickupplayer_sp_bannerimg", "640-160-0-0-0-0", "", "", $BILLINGUAL);
     $a[] = array("textfield", "スマホリンク先", "pickupplayer_sp_bannerlink", "100", "", "", "");
-    $a[] = array("img", "iOSバナー画像", "pickupplayer_ios_bannerimg", "750-234-0-0-0-0", "", "", $BILLINGUAL);
+    $a[] = array("img", "iOSバナー画像", "pickupplayer_ios_bannerimg", "640-160-0-0-0-0", "", "", $BILLINGUAL);
     $a[] = array("textfield", "iOSリンク先", "pickupplayer_ios_bannerlink", "100", "", "", "");
-    $a[] = array("img", "Androidバナー画像", "pickupplayer_android_bannerimg", "750-234-0-0-0-0", "", "", $BILLINGUAL);
+    $a[] = array("img", "Androidバナー画像", "pickupplayer_android_bannerimg", "640-160-0-0-0-0", "", "", $BILLINGUAL);
     $a[] = array("textfield", "Androidリンク先", "pickupplayer_android_bannerlink", "100", "", "", "");
   }
 }
@@ -152,13 +152,13 @@ elseif ($_GET["cid"] == 94 || $_GET["rid"] == 95)
   $a[]=array("head", $head_val1 . "一覧上バナー画像設定：（親＞子）カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
   $a[]=array("inputradio","バナー表示","bannerflag",array("親の表示設定を継承する","個別にバナーを設定する","バナーを表示しない"));
   $a[]=array("textfield","ALTテキスト（共通）","bannertext","70","","","");
-  $a[]=array("img","PCバナー画像","pc_bannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("img","PCバナー画像","pc_bannerimg","2000-180-0-0-0-0","","",$BILLINGUAL);
   $a[]=array("textfield","PCリンク先","pc_bannerlink","100","","","");
-  $a[]=array("img","スマホバナー画像","sp_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("img","スマホバナー画像","sp_bannerimg","640-160-0-0-0-0","","",$BILLINGUAL);
   $a[]=array("textfield","スマホリンク先","sp_bannerlink","100","","","");
-  $a[]=array("img","iOSバナー画像","ios_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("img","iOSバナー画像","ios_bannerimg","640-160-0-0-0-0","","",$BILLINGUAL);
   $a[]=array("textfield","iOSリンク先","ios_bannerlink","100","","","");
-  $a[]=array("img","Androidバナー画像","android_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+  $a[]=array("img","Androidバナー画像","android_bannerimg","640-160-0-0-0-0","","",$BILLINGUAL);
   $a[]=array("textfield","Androidリンク先","android_bannerlink","100","","","");
 
 }
