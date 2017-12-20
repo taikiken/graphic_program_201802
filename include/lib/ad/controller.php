@@ -112,7 +112,7 @@ if ($_GET["cid"] != 94 && $_GET["rid"] != 95)
 	if($_GET["cid"]!=0)$a[]=array("inputradio","オススメ記事広告表示","ad_android_recommendflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
 	$a[]=array("textfield","オススメ記事広告ID","ad_android_recommendid","20","","","");
 
-  if ($_GET["cid"] == 10)
+  if ($_GET["cid"] == 0 || $_GET["cid"] == 10)
   {
     /*
     * 選手の広告設定
