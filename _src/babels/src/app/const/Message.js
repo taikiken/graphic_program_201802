@@ -356,9 +356,11 @@ export class Message {
   /**
    * button BUTTON_VIEW_MORE, VIEW MORE
    * @return {string} VIEW MORE
+   * @since 2017-12-18 `もっと見る` update
    */
   static get BUTTON_VIEW_MORE():string {
-    return 'VIEW MORE';
+    // return 'VIEW MORE';
+    return 'もっと見る';
   }
 
   // ----

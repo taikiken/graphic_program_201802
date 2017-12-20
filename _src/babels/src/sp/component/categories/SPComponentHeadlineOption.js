@@ -20,6 +20,7 @@ import { ComponentHeadlineAd } from '../../../component/categories/ComponentHead
 import SPComponentHeadlines from '../headline/SPComponentHeadlines';
 import { RelatedDae } from '../../../dae/RelatedDae';
 import { CategoriesSlugDae } from '../../../dae/categories/CategoriesSlugDae';
+import SPComponentHeadlineArticleLast from '../headline/SPComponentHeadlineArticleLast';
 
 // React
 /**
@@ -86,26 +87,30 @@ export class SPComponentHeadlineOption extends React.Component {
    * @return {?XML} 記事一覧 headline を表示するための基本コンテナを返します
    */
   render() {
-    const list = this.props.list;
+    const { list, callback, home, browser, ad, category } = this.props;
     if (list.length === 0) {
       return null;
     }
-
+    const last = list.length > 0 ? list.pop() : null;
     return (
       <div className="headline-section">
         <div className="headline-outer">
           <div id="headline-container">
             <SPComponentHeadlines
               list={list}
-              callback={this.props.callback}
-              home={this.props.home}
+              callback={callback}
+              home={home}
               archive={true}
             />
           </div>
           <ComponentHeadlineAd
-            browser={this.props.browser}
-            ad={this.props.ad}
-            category={this.props.category}
+            browser={browser}
+            ad={ad}
+            category={category}
+          />
+          <SPComponentHeadlineArticleLast
+            dae={last}
+            index={list.length + 1}
           />
         </div>
       </div>

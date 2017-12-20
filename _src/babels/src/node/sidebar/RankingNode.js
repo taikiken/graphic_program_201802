@@ -117,6 +117,7 @@ export const RankingNode = React.createClass( {
             <img src={Empty.THUMB_EMPTY} alt=""/>
           </figure>
           <div className="post-data">
+            <h4 className="post-heading">{p.title}</h4>
             <p className={'post-category post-category-' + slugAll( p.categories )}>
               <CategoryLabelNode
                 categories={p.categories}
@@ -134,7 +135,6 @@ export const RankingNode = React.createClass( {
               />
               */}
             </p>
-            <h4 className="post-heading">{p.title}</h4>
             <p className="post-date">{p.date}</p>
           </div>
         </a>

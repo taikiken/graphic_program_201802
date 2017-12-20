@@ -138,6 +138,10 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
      * @type {function}
      */
     this.boundImages = this.onImages.bind(this);
+    /**
+     * Element - `div.board-large-column`
+     * @type {?Element}
+     */
     this.boardRout = null;
   }
   // ---------------------------------------------------
@@ -251,6 +255,7 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
                       />
                     </p>
                     */}
+                    <h3 className="post-heading">{dae.title}</h3>
                     <ComponentCategoryLabels
                       categories={dae.categories.all}
                       id={`post-archive-${dae.id}`}
@@ -259,9 +264,11 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
                       recommend={dae.isRecommend && this.props.home}
                       anotherCategories={dae.anotherCategories}
                     />
-                    <h3 className="post-heading">{dae.title}</h3>
+                    {/*
+                    // 2017-12-18 トルツメ
                     <p className="post-date">{dae.displayDate}</p>
                     <div className="post-excerpt-text">{dae.description}</div>
+                    */}
                   </div>
                 </a>
                 <ComponentArticlePopular
