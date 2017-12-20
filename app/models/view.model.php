@@ -222,7 +222,7 @@ class ViewModel {
   */
   public function get_site_categories() {
 
-
+/*
     if ( UT_ENV == 'LOCAL' ) :
 
       $categories = file_get_contents($this->default['file_get_url'].'/api/v1/category');
@@ -242,6 +242,13 @@ class ViewModel {
       endif;
 
     endif;
+ */
+
+      if ( $this->default['ua'] == 'desktop' ) :
+        $categories = $this->db->get_site_categories(false);
+      else :
+        $categories = $this->db->get_site_categories(true);
+      endif;
 
     if ( is_array($categories) ) :
       foreach( $categories as $key => $value ) :
