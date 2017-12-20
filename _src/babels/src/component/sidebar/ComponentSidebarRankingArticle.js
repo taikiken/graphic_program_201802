@@ -9,11 +9,12 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+// RankingNode
 // React
 import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
 import { GaData } from '../../ga/GaData';
 import { Ga } from '../../ga/Ga';
-import { Empty } from '../../app/const/Empty';
+// import { Empty } from '../../app/const/Empty';
 import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
 
 /**
@@ -21,7 +22,27 @@ import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
  */
 const React = self.React;
 
+/**
+ * [PC] sidebar - ranking / recommend 記事を出力します
+ */
 export default class ComponentSidebarRankingArticle extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * React.propTypes
+   * - index {number}
+   * - thumbnail {string}
+   * - categories {Array.<*>}
+   * - title {string}
+   * - anotherCategories {AnotherCategoriesDae}
+   * - id {string}
+   * - url {string}
+   * - home {boolean}
+   * - detail {boolean}
+   * - thisSlug {string}
+   * @returns {*} React.propTypes
+   * */
   static get propTypes() {
     return {
       index: React.PropTypes.number.isRequired,
@@ -35,40 +56,63 @@ export default class ComponentSidebarRankingArticle extends React.Component {
       home: React.PropTypes.bool.isRequired,
       detail: React.PropTypes.bool.isRequired,
       thisSlug: React.PropTypes.string.isRequired,
-
-      // slug: React.PropTypes.string,
-      // date: React.PropTypes.string.isRequired,
-      // empty: React.PropTypes.bool.isRequired,
-      // total: React.PropTypes.number.isRequired,
-      // categorySlug: React.PropTypes.string.isRequired,
     };
   }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * [PC] sidebar - ranking / recommend 記事準備します
+   * @param {*} props React.props
+   * */
   constructor(props) {
     super(props);
     // ---
+    /**
+     * bind onClick - ga 送信します
+     * @type {function}
+     * */
     this.onClick = this.onClick.bind(this);
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * home - ga tag 送信します
+   * */
   gaHome() {
     // ----------------------------------------------
     // GA 計測タグ
     const { url, id } = this.props;
-    Ga.add(new GaData('RankingNode.gaHome', 'home_ranking', 'click', url, parseFloat(id)));
+    Ga.add(new GaData('ComponentSidebarRankingArticle.gaHome', 'home_ranking', 'click', url, parseFloat(id)));
     // ----------------------------------------------
   }
+  /**
+   * category - ga tag 送信します
+   * */
   gaCategory() {
     // ----------------------------------------------
     // GA 計測タグ
     const { thisSlug, url, id } = this.props;
-    Ga.add( new GaData('RankingNode.gaCategory', `${thisSlug}_ranking`, 'click', url, parseFloat(id)));
+    Ga.add( new GaData('ComponentSidebarRankingArticle.gaCategory', `${thisSlug}_ranking`, 'click', url, parseFloat(id)));
     // ----------------------------------------------
   }
+  /**
+   * 記事詳細 - ga tag 送信します
+   * */
   gaDetail() {
     // ----------------------------------------------
     // GA 計測タグ
     const { url, id } = this.props;
-    Ga.add( new GaData('RankingNode.gaDetail', 'detail_ranking', 'click', url, parseFloat(id)));
+    Ga.add( new GaData('ComponentSidebarRankingArticle.gaDetail', 'detail_ranking', 'click', url, parseFloat(id)));
     // ----------------------------------------------
   }
+  /**
+   * a.onclick event handler - ga tag 送信します
+   * - `gaHome`
+   * - `gaCategory`
+   * - `gaDetail`
+   * */
   onClick() {
     const { home, detail } = this.props;
     if (home) {
@@ -79,6 +123,10 @@ export default class ComponentSidebarRankingArticle extends React.Component {
       this.gaCategory();
     }
   }
+  /**
+   * sidebar - ranking / recommend 記事を出力します
+   * @returns {XML} `li.board-item` 返します
+   * */
   render() {
     const {
       index,
