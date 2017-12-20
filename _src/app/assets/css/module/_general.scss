@@ -406,6 +406,87 @@
 
 
 
+// headline
+// トップページ ヘッドライン
+.headline {
+  margin-top: 10px;
+
+  //.headline-heading
+  // トップページリニューアルで不要になりました
+  // &-heading {
+  //   padding-bottom: 10px;
+  //   border-bottom: 3px solid #0e357f;
+
+  //   //.headline-title
+  //   //.headline-ruby
+  //   &-title, &-ruby {
+  //     display: inline-block;
+  //     line-height: 1;
+  //   }
+
+  //   //.headline-title
+  //   &-title img {
+  //     vertical-align: middle;
+  //   }
+
+  //   //.headline-ruby
+  //   &-ruby {
+  //     margin-left: 8px;
+  //     color: #333;
+  //     font-weight: bold;
+  //     font-size: fz(12);
+  //   }
+  // } //.headline-heading
+
+  .board-small.column2 {
+    .board-item {
+      border-top: none;
+      margin-top: 10px;
+      // &:nth-child(1), &:nth-child(2) {}
+
+      .post {
+        height: 70px;
+        padding: 0;
+
+        &-thumb {}
+        &-data {}
+        &-category {}
+
+        //.post-heading
+        &-heading {
+          height: 2.4em;
+          overflow: hidden;
+        }
+
+        &-date {}
+
+        &:hover {
+          .post-thumb {}
+          .post-heading {}
+        }
+      }
+    } //.post-list-item
+  }
+}
+
+.headline-outer {
+  position: relative;
+
+  .sponsor-link {
+    // 不要 CSS なので削除, float layout
+    // @see https://github.com/undotsushin/undotsushin/issues/1647
+    // @since 2017-04-10
+    //position: absolute;
+    //bottom: 0;
+    //right: 0;
+
+    @extend %board-small-sponsor-link;
+  }
+}
+
+
+
+
 // 関連ニュース
 // popIn or syn.extension
 .recommend_articles {
