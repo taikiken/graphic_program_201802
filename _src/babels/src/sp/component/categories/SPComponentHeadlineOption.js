@@ -17,9 +17,14 @@ import View from '../../../view/View';
 import { ComponentHeadlineAd } from '../../../component/categories/ComponentHeadlineAd';
 
 // sp/view/headline
-import { SPComponentHeadlines } from '../headline/SPComponentHeadlines';
+import SPComponentHeadlines from '../headline/SPComponentHeadlines';
+import { RelatedDae } from '../../../dae/RelatedDae';
+import { CategoriesSlugDae } from '../../../dae/categories/CategoriesSlugDae';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -31,34 +36,51 @@ export class SPComponentHeadlineOption extends React.Component {
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * propTypes
-   * @return {{list: Array<RelatedDae>, callback: Function, home: boolean, ad: string, browser: string, category: CategoriesSlugDae}} React props
+   * React.propTypes
+   * @return {{
+   *   list: Array.<RelatedDae>,
+   *   callback: Function,
+   *   home: boolean,
+   *   ad: string,
+   *   browser: string,
+   *   category: CategoriesSlugDae
+   * }} React props
    */
   static get propTypes() {
     return {
       // articles 配列を元にDomを作成する
-      list: React.PropTypes.array.isRequired,
+      // list: React.PropTypes.array.isRequired,
+      list: React.PropTypes.arrayOf(
+        React.PropTypes.instanceOf(RelatedDae).isRequired,
+      ).isRequired,
       callback: React.PropTypes.func.isRequired,
       home: React.PropTypes.bool.isRequired,
       ad: React.PropTypes.object.isRequired,
       browser: React.PropTypes.string.isRequired,
       // @type {CategoriesSlugDae}
-      category: React.PropTypes.object.isRequired
+      // category: React.PropTypes.object.isRequired
+      category: React.PropTypes.instanceOf(CategoriesSlugDae).isRequired,
     };
   }
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  /**
-   * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link SPComponentHeadlineOption.propTypes}
-   */
-  constructor(props) {
-    super(props);
-  }
+  // // ---------------------------------------------------
+  // //  CONSTRUCTOR
+  // // ---------------------------------------------------
+  // /**
+  //  * プロパティを保存し必要な関数・変数を準備します
+  //  * @param {Object} props プロパティ {@link SPComponentHeadlineOption.propTypes}
+  //  */
+  // constructor(props) {
+  //   super(props);
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * マウント後に `View.DID_MOUNT` を callback へ通知します
+   */
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
+  }
   /**
    * 記事一覧 headline を表示するための基本コンテナを作成します
    * @return {?XML} 記事一覧 headline を表示するための基本コンテナを返します
@@ -77,6 +99,7 @@ export class SPComponentHeadlineOption extends React.Component {
               list={list}
               callback={this.props.callback}
               home={this.props.home}
+              archive={true}
             />
           </div>
           <ComponentHeadlineAd
@@ -87,11 +110,5 @@ export class SPComponentHeadlineOption extends React.Component {
         </div>
       </div>
     );
-  }
-  /**
-   * マウント後に `View.DID_MOUNT` を callback へ通知します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
   }
 }

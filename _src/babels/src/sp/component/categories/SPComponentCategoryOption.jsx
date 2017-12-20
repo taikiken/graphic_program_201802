@@ -21,6 +21,15 @@ import { SPComponentHeadlineOption } from './SPComponentHeadlineOption';
 
 // --------------------------------------------
 // React
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**
@@ -29,19 +38,19 @@ const ReactDOM = self.ReactDOM;
  * {@link SPComponentHeadlineOption}
  * @since 2016-09-24
  */
-export class SPComponentCategoryOption extends ComponentCategoryOption {
-  /**
-   * category slug を使用し API request を開始します
-   * @param {string} [slug=all] category.slug
-   */
-  constructor(slug:string = 'all') {
-    super(slug);
-  }
+export default class SPComponentCategoryOption extends ComponentCategoryOption {
+  // /**
+  //  * category slug を使用し API request を開始します
+  //  * @param {string} [slug=all] category.slug
+  //  */
+  // constructor(slug = 'all') {
+  //   super(slug);
+  // }
   /**
    * 記事一覧に headline を表示します
    * @param {CategoriesSlugDae} category JSON
    */
-  headline(category):void {
+  headline(category) {
     const element = Dom.headlineParent();
     if (element === null) {
       return;
@@ -56,7 +65,7 @@ export class SPComponentCategoryOption extends ComponentCategoryOption {
         browser="sp"
         category={category}
       />,
-      element
+      element,
     );
   }
 }

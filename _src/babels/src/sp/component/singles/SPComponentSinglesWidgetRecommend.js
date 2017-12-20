@@ -19,7 +19,7 @@ import { Safety } from '../../../data/Safety';
 
 // component
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
-import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
+import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
 
 // ui / snap
 import { SPSnap } from '../../ui/SPSnap';

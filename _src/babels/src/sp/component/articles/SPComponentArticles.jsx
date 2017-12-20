@@ -21,7 +21,7 @@ import { Empty } from '../../../app/const/Empty';
 import View from '../../../view/View';
 
 // component
-import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
+import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
 
 // dara
 import { Safety } from '../../../data/Safety';

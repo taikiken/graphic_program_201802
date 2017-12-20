@@ -11,7 +11,7 @@
  */
 
 // import { SingleDae } from '../../../dae/SingleDae';
-import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
+import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
 
 // data

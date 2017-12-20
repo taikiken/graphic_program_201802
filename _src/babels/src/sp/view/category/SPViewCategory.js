@@ -21,7 +21,7 @@ import {CategoryAuth} from '../../../action/archive/CategoryAuth';
 import {User} from '../../../app/User';
 
 // @since 2016-09-20
-import { SPComponentCategoryOption } from '../../component/categories/SPComponentCategoryOption';
+import SPComponentCategoryOption from '../../component/categories/SPComponentCategoryOption';
 
 /**
  * <p>SP 記事一覧・カテゴリータブデータをリクエストし取得します</p>

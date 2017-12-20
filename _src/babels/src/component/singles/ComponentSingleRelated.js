@@ -21,7 +21,7 @@ import { Safety } from '../../data/Safety';
 import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
 
 // component
-import { ComponentArticleThumbnail } from '../articles/ComponentArticleThumbnail';
+import ComponentArticleThumbnail from '../articles/ComponentArticleThumbnail';
 
 // React
 const React = self.React;

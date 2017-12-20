@@ -14,10 +14,12 @@
 import ViewHeadline from '../../../view/home/ViewHeadline';
 
 // view
-import { SPComponentHeadlines } from '../../component/headline/SPComponentHeadlines';
+import SPComponentHeadlines from '../../component/headline/SPComponentHeadlines';
 
 // dae
 import {ArticleDae} from '../../../dae/ArticleDae';
+import { Dom } from '../../../app/Dom';
+import SPComponentHeadlineArticleLast from '../../component/headline/SPComponentHeadlineArticleLast';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -56,6 +58,23 @@ export default class SPViewHeadLine extends ViewHeadline {
     // @since 2016-09-16
     // headline output changed
     const list = articles.map((article) => new ArticleDae(article));
+    // -------------------------------
+    // since 2017-12-18
+    // `#js-headline-last-container` 取得
+    const lastElement = Dom.headlineLast();
+    // element 存在するときは `list` 配列最後を取り出し表示に使用する
+    const last = lastElement ? list.pop() : null;
+    if (last) {
+      ReactDOM.render(
+        <SPComponentHeadlineArticleLast
+          dae={last}
+          index={list.length + 1}
+        />,
+        lastElement,
+      );
+    }
+    // -------------------------------
+    console.log('SPViewHeadLine.render', list);
     ReactDOM.render(
       <SPComponentHeadlines
         list={list}

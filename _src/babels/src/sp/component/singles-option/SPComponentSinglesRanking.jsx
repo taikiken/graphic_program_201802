@@ -21,7 +21,7 @@ import { Env } from '../../../app/Env';
 import { ArticleDae } from '../../../dae/ArticleDae';
 
 // component
-import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
+import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
 
 // ui

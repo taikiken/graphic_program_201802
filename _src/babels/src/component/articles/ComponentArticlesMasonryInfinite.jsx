@@ -15,7 +15,7 @@ import { Empty } from '../../app/const/Empty';
 
 // view
 import View from '../../view/View';
-import { ComponentArticleThumbnail } from './ComponentArticleThumbnail';
+import ComponentArticleThumbnail from './ComponentArticleThumbnail';
 import { ComponentArticlePopular } from './ComponentArticlePopular';
 
 // data

@@ -20,7 +20,7 @@ import { Safety } from '../../data/Safety';
 
 // component
 import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
-// import { ComponentArticleThumbnail } from '../articles/ComponentArticleThumbnail';
+// import ComponentArticleThumbnail from '../articles/ComponentArticleThumbnail';
 
 // React
 const React = self.React;

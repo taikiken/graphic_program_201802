@@ -14,7 +14,7 @@
 // import { CategoryLabelNode } from '../../../node/category/CategoryLabelNode';
 
 // view
-import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
+import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
 
 // Ga
 import { Ga } from '../../../ga/Ga';
@@ -34,7 +34,7 @@ const React = self.React;
  * sp headline 出力を汎用化
  * @since 2016-09-16
  */
-export class SPComponentHeadlineArticle extends React.Component {
+export default class SPComponentHeadlineArticle extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -81,20 +81,30 @@ export class SPComponentHeadlineArticle extends React.Component {
    * @return {XML} headline 一記事 `li.board-item` を返します
    */
   render() {
-    const props = this.props;
+    const {
+      index,
+      mediaType,
+      thumbnail,
+      title,
+      url,
+      categories,
+      id,
+      anotherCategories,
+      date,
+    } = this.props;
 
     return (
-      <li className={`board-item board-item-${props.index}`}>
-        <a className="post" href={props.url} onClick={this.boundGa}>
+      <div className={`board-item board-item-${index}`}>
+        <a className="post" href={url} onClick={this.boundGa}>
           <ComponentArticleThumbnail
-            mediaType={props.mediaType}
-            thumbnail={props.thumbnail}
-            title={props.title}
+            mediaType={mediaType}
+            thumbnail={thumbnail}
+            title={title}
             recommend={false}
             small={true}
           />
           <div className="post-data">
-            <h3 className="post-heading">{props.title}</h3>
+            <h3 className="post-heading">{title}</h3>
             {/*
             <p className={`post-category post-category-${props.slug || 'x'}`}>
               <CategoryLabelNode
@@ -108,17 +118,17 @@ export class SPComponentHeadlineArticle extends React.Component {
             </p>
             */}
             <ComponentCategoryLabels
-              categories={props.categories}
-              id={`archive-label-${props.id}`}
-              index={props.index}
-              mediaType={props.mediaType}
+              categories={categories}
+              id={`archive-label-${id}`}
+              index={index}
+              mediaType={mediaType}
               recommend={false}
-              anotherCategories={props.anotherCategories}
+              anotherCategories={anotherCategories}
             />
-            <p className="post-date">{props.date}</p>
+            <p className="post-date">{date}</p>
           </div>
         </a>
-      </li>
+      </div>
     );
   }
   /**

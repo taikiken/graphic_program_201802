@@ -9,12 +9,8 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
 // sp/view
 import SPViewCategoryWithSlug from './SPViewCategoryWithSlug';
-
-// sp/component
-// import { SPComponentCategoryOption } from '../../component/categories/SPComponentCategoryOption';
 
 // view
 import ViewArea from '../../../view/ViewArea';
