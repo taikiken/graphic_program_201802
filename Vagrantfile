@@ -42,15 +42,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.hostname = _conf['hostname']
   config.vm.network :private_network, ip: _conf['ip']
-  config.vm.network :forwarded_port, guest: 80, host: 1234
+  config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :forwarded_port, guest: 80, host: 8888
 
   # sync
   # ------------------------------
   # config.vm.synced_folder "./", "/var/www/html"
 
-  config.vm.synced_folder ".", "/vagrant", :mount_options => ['dmode=777', 'fmode=644']
-  config.vm.synced_folder _conf['sync_folder'], _conf['document_root'], :create => "true", :mount_options => ['dmode=777', 'fmode=644']
+  config.vm.synced_folder ".", "/vagrant", :mount_options => ['dmode=755', 'fmode=644']
+  config.vm.synced_folder _conf['sync_folder'], _conf['document_root'], :create => "true", :mount_options => ['dmode=755', 'fmode=644']
 
 
   # plugins
