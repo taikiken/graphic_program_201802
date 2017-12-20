@@ -24,20 +24,21 @@ $key-color: #cc141d;
   }
 
   .headline {
-    // ref. /_src/app/assets/css/module/_index.scss line: 205
-    &-heading {
-      &-title {
-        width: 178px;
-        height: 20px;
-        background: url(/assets/images/common/headline-heading_dark.png) 0 0 no-repeat;
-        @include hide-text;
-        vertical-align: middle;
-      }
+    // リニューアルで不要になりました
+    // // ref. /_src/app/assets/css/module/_index.scss line: 205
+    // &-heading {
+    //   &-title {
+    //     width: 178px;
+    //     height: 20px;
+    //     background: url(/assets/images/common/headline-heading_dark.png) 0 0 no-repeat;
+    //     @include hide-text;
+    //     vertical-align: middle;
+    //   }
 
-      &-ruby {
-        color: #fff;
-      }
-    }
+    //   &-ruby {
+    //     color: #fff;
+    //   }
+    // }
   }
 
   .headline-outer .sponsor-link,
@@ -83,11 +84,11 @@ $key-color: #cc141d;
   }
 
   .widget-ranking-heading-title {
-    @include sprite( $common-side-ranking-heading_newdark );
+    @include sprite( $common-side-ranking-heading_dark );
   }
 
   .widget-recommend-heading-title {
-    @include sprite( $common-side-recommend-heading_newdark );
+    @include sprite( $common-side-recommend-heading_dark );
   }
 
   .widget-ranking-heading-title,
@@ -95,13 +96,13 @@ $key-color: #cc141d;
     display: inline-block;
   }
 
-  .foot-sec {
-    background-color: #000;
+  // .foot-sec {
+  //   background-color: #000;
 
-    .foot-pr {
-      // background-color: #181818;
-    }
-  }
+  //   .foot-sec-inner {
+  //     background-color: #fff;
+  //   }
+  // }
 
   // [ class^="board-" ] {
   .board-small {
@@ -131,7 +132,17 @@ $key-color: #cc141d;
   .board-large {
     .board-item {
       // border-bottom-color: #1b1b1b;
-      // background-color: #111;
+      background-color: transparent;
+    }
+
+    .post {
+      @include link-decoration(#fff, null, none, none);
+
+      &:hover {
+        .post-heading {
+          color: $key-color !important;
+        }
+      }
     }
   }
 
@@ -181,12 +192,19 @@ $key-color: #cc141d;
     }
   }
 
+  .board-btn-viewmore {
+    //.board-btn-viewmore-link
+    &-link {
+      @include link-decoration(#fff, $key-color, none, none);
+      background-color: #222;
+    }
+  }
+
   .loading-root {
     .loading-spinner {
       background-color: #000;
     }
   }
-
 } //.dark
 
 
