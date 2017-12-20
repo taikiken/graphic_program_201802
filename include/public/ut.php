@@ -523,7 +523,6 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 			$ad[]=unserialize($v);
 		}
 	}
-	file_put_contents('/tmp/ad', print_r($ad, true));
 	$_adpc=array("sidebar_top","sidebar_bottom","single_top","single_bottom_left","single_bottom_right");
 	$_adsp=array("sp_list","sp_detail","sp_headline","sp_popular","sp_recommend","ios_list","ios_detail","ios_headline","ios_popular","ios_recommend","android_list","android_detail","android_headline","android_popular","android_recommend");
 	$_banner=array("bannertext","pc_bannerimg","pc_bannerlink","sp_bannerimg","sp_bannerlink","ios_bannerimg","ios_bannerlink","android_bannerimg","android_bannerlink");
