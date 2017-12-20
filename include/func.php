@@ -734,6 +734,7 @@ function swforimg($IMG,$f,$alt="",$name=""){
 	$flg=(strpos($f,"swf"))?0:1;
 
 	if($flg){
+		$s[0] = $s[0] > 780 ? 780 : $s[0];
 		$src=sprintf("<img src=\"%s%s?m=%s\" width=\"%s\" border=\"0\" alt=\"%s\"%s >",$IMG,$f,date("His").(float)microtime(),$s[0],$alt,(strlen($name)>0)?sprintf(" name=\"%s\"",$name):"");
 	}else{
 		$src="<object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" ";
