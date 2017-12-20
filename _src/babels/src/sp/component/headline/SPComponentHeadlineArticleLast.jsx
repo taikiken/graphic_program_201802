@@ -15,17 +15,25 @@ import { Empty } from '../../../app/const/Empty';
 import { Safety } from '../../../data/Safety';
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
 import { ArticleDae } from '../../../dae/ArticleDae';
+import { RelatedDae } from '../../../dae/RelatedDae';
 
 /**
  * [library] - React
  */
 const React = self.React;
 
+/**
+ * SP headline - 死後の記事を大きく表示
+ * @param {ArticleDae} dae JON 記事データ
+ * @param {number} index index
+ * @returns {?XML} `div.headline--last`
+ * @since 2017-12-18
+ */
 const SPComponentHeadlineArticleLast = ({ dae, index }) => {
   if (!dae) {
     return null;
   }
-  const thumbnail = Safety.image(dae.media.images.carousel, Empty.IMG_MIDDLE);
+  const thumbnail = Safety.image(dae.media.images.carousel, Empty.IMG_CAROUSEL);
   return (
     <div className="headline--last">
       <div className="board">
@@ -57,8 +65,15 @@ const SPComponentHeadlineArticleLast = ({ dae, index }) => {
   );
 };
 
+/**
+ * React.propTypes
+ * @type {{dae: [ArticleDae|RelatedDae], index: number}}
+ */
 SPComponentHeadlineArticleLast.propTypes = {
-  dae: React.PropTypes.instanceOf(ArticleDae).isRequired,
+  dae: React.PropTypes.oneOfType([
+    React.PropTypes.instanceOf(ArticleDae).isRequired,
+    React.PropTypes.instanceOf(RelatedDae).isRequired,
+  ]).isRequired,
   index: React.PropTypes.number.isRequired,
 };
 

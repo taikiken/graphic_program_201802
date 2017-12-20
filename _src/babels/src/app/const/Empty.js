@@ -14,10 +14,9 @@
 // let _symbol = Symbol();
 
 /**
- * <p>代替画像パス<br>
- * 記事画像、ユーザーアイコンなど未設定時の代替画像パス</p>
- * <p>全て static です</p>
- *
+ * 代替画像パスを取得します
+ * - 記事画像、ユーザーアイコンなど未設定時の代替画像パス
+ * - 全て static です
  */
 export class Empty {
   // /**
@@ -37,25 +36,27 @@ export class Empty {
   // ---------------------------------------------------
   //  CONST 代わり
   // ---------------------------------------------------
+  // --------------
+  // image
   /**
-   * img thumbnail 代替画像パス
-   * [Ex.] sidebar ranking
+   * img thumbnail 代替画像パス 100x100
+   * - [Ex.] sidebar ranking
    * @return {string} 代替画像パス【sidebar ranking】
    */
   static get THUMB_EMPTY() {
     return '/assets/images/common/thumb-empty-100x100.png';
   }
   /**
-   * img thumbnail 代替画像パス<br>
-   * [Ex.] headline, sidebar image...
+   * img thumbnail 代替画像パス 70x70
+   * - [Ex.] headline, sidebar image...
    * @return {string} 代替画像パス【小】
    */
   static get IMG_SMALL() {
     return '/assets/images/common/thumb-noimage-70x70.png';
   }
   /**
-   * img middle 代替画像パス<br>
-   * [Ex.] 記事一覧<br>
+   * img middle 代替画像パス - 記事一覧用 - 横長 - 16:9
+   * - [Ex.] 記事一覧
    * @return {string} 代替画像パス【記事一覧】
    */
   static get IMG_MIDDLE() {
@@ -65,13 +66,26 @@ export class Empty {
     return '/assets/images/common/thumb-noimage-16x9-s.png';
   }
   /**
-   * img large 代替画像パス<br>
-   * [Ex.] スライドショー<br>
+   * img large 代替画像パス
+   * - [Ex.] スライドショー
+   * @deprecated 2017-12-18 instead use {@link Empty.IMG_CAROUSEL}
    * @return {string} 代替画像パス【スライドショー】
    */
   static get IMG_LARGE() {
     return '/assets/images/common/thumb-pickup-empty.png';
   }
+  /**
+   * img large 代替画像パス - 750x320
+   * - [Ex.] スライドショー
+   * @return {string} 代替画像パス【スライドショー】
+   * @since 2017-12-18
+   */
+  static get IMG_CAROUSEL() {
+    // TODO: 正規画像に差し替える
+    return Empty.IMG_LARGE;
+  }
+  // --------------
+  // video
   /**
    * video thumbnail 代替画像パス【16 x 9】<br>
    * [Ex.] sidebar video...
@@ -112,6 +126,8 @@ export class Empty {
   static get VIDEO_PLAY_SMALL_1X1() {
     return '/assets/images/common/thumb-1x1-play-s.png';
   }
+  // --------------
+  // user
   /**
    * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>
    * [Ex.] コメントとか
@@ -155,7 +171,7 @@ export class Empty {
    * @param {string} path 元のパス
    * @returns {string} パスに?Date.now()をつけて返します
    */
-  static refresh( path:string ) {
+  static refresh(path) {
     return `${path}?${Date.now()}`;
   }
 }

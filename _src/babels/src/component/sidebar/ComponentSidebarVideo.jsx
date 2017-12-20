@@ -100,6 +100,7 @@ const ComponentVideoDom = ({
           <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SMALL} alt="" />
         </figure>
         <div className="post-data">
+          <h4 className="post-heading">{title}</h4>
           {/*
           <p className={`post-category post-category-${slug}`}>
             <CategoryLabelNode
@@ -116,7 +117,6 @@ const ComponentVideoDom = ({
             index={index}
             anotherCategories={anotherCategories}
           />
-          <h4 className="post-heading">{title}</h4>
           <p className="post-date">{date}</p>
         </div>
       </a>
