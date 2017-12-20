@@ -132,7 +132,7 @@ export default class SPComponentHeadlines extends React.Component {
     // if (list.length === 0) {
     //   return null;
     // }
-    console.log('SPComponentHeadlines.render', list);
+    console.log('SPComponentHeadlines.render', this.props);
     return (
       <div className="headline-root">
         <div className="headline">
