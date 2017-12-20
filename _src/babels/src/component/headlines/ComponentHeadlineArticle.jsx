@@ -173,15 +173,31 @@ export default class ComponentHeadlineArticle extends React.Component {
    * @return {XML} headline 1記事を返します
    */
   render() {
-    const props = this.props;
+    const {
+      index,
+      url,
+      title,
+      thumbnail,
+      mediaType,
+      categories,
+      id,
+      anotherCategories,
+      date,
+    } = this.props;
     return (
-      <li className={`board-item board-item-${props.index}`}>
-        <a className="post" href={props.url} onClick={this.boundGa}>
+      <li className={`board-item board-item-${index}`}>
+        <a className="post" href={url} onClick={this.boundGa}>
           <figure className="post-thumb post-thumb-headline">
-            <img src={props.thumbnail} alt={props.title}/>
-            {playMark(this.props.mediaType)}
+            <img src={thumbnail} alt={title}/>
+            {playMark(mediaType)}
           </figure>
           <div className="post-data">
+            <h3
+              className="post-heading"
+              ref={(component) => (this.h3 = component)}
+            >
+              {this.state.title}
+            </h3>
             {/*
             <p className={`post-category post-category-${props.slug}`}>
               <CategoryLabelNode
@@ -195,20 +211,14 @@ export default class ComponentHeadlineArticle extends React.Component {
             </p>
             */}
             <ComponentCategoryLabels
-              categories={this.props.categories}
-              id={`headline-label-${this.props.id}`}
-              index={this.props.index}
-              mediaType={this.props.mediaType}
+              categories={categories}
+              id={`headline-label-${id}`}
+              index={index}
+              mediaType={mediaType}
               recommend={false}
-              anotherCategories={this.props.anotherCategories}
+              anotherCategories={anotherCategories}
             />
-            <h3
-              className="post-heading"
-              ref={(component) => (this.h3 = component)}
-            >
-              {this.state.title}
-            </h3>
-            <p className="post-date">{props.date}</p>
+            <p className="post-date">{date}</p>
           </div>
         </a>
       </li>
