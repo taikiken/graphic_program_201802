@@ -42,6 +42,8 @@ function multiLangTitleField($f){
 function rtimg($a,$b,$c,$d,$e,$f,$g,$h,$r=1){
 	global $imgNo;
 	array_unshift($h,implode("-",$g));
+	$imageHeaders=array("original","medium","thumbnail","large","repro","carousel");
+	$imageHeader="";
 	$ls="";
 	if(strlen($a)>0){
 		$fn=(float)microtime();
@@ -49,8 +51,13 @@ function rtimg($a,$b,$c,$d,$e,$f,$g,$h,$r=1){
 		for($i=0;$i<count($h);$i++){
 			if(strlen($h[$i])>0){
 				$Tgyh=explode("-",$h[$i]);
-				$ls.=sprintf("<li>%s<br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li>",
-				swforimg($c[$i],$b,"",$e.$i),$d,$i,$Tgyh[0],(strlen($Tgyh[0])>0&&strlen($Tgyh[1])>0)?$Tgyh[1]:$Tgyh[0]*0.75,$f,$Tgyh[2],$Tgyh[3],$Tgyh[4],$e.$i,$c[$i],$Tgyh[5]);
+				if($i===0){
+					$imageHeader = $imageHeaders[$i] . ": 記事詳細用";
+				}else{
+					$imageHeader = $imageHeaders[$i] . " : ".$Tgyh[0]." × ".$Tgyh[1];
+				}
+				$ls.=sprintf("<li style=\"float: none !important;\"><p style='line-height: 1.4em; margin-top: 1em;'><b>%s</b></p>%s<br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li>",
+				$imageHeader,swforimg($c[$i],$b,"",$e.$i),$d,$i,$Tgyh[0],(strlen($Tgyh[0])>0&&strlen($Tgyh[1])>0)?$Tgyh[1]:$Tgyh[0]*0.75,$f,$Tgyh[2],$Tgyh[3],$Tgyh[4],$e.$i,$c[$i],$Tgyh[5]);
 			}
 		}
 		$ls.="</ul>";
