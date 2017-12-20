@@ -422,6 +422,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
     $banner_info["sp_bannerlink"] = $dat_array["player_sp_bannerlink"];
     $banner_info["ios_bannerlink"] = $dat_array["player_ios_bannerlink"];
     $banner_info["android_bannerlink"] = $dat_array["player_android_bannerlink"];
+    $ad[]= $banner_info;
   }
 	elseif ($isgetpickupplayerbanner)
   {
@@ -435,8 +436,12 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
     $banner_info["sp_bannerlink"] = $dat_array["pickupplayer_sp_bannerlink"];
     $banner_info["ios_bannerlink"] = $dat_array["pickupplayer_ios_bannerlink"];
     $banner_info["android_bannerlink"] = $dat_array["pickupplayer_android_bannerlink"];
+    $ad[]= $banner_info;
   }
-  $ad[]= $banner_info;
+  else
+	{
+		$ad[]=$dat_array;
+	}
 
 	if($playerid!="") {
 		$categoryid = get_categoryid_by_playerid($playerid);
@@ -486,12 +491,6 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
     }
 	}
   if ($isgetpickupplayerbanner && $categoryid != "") {
-    unset($v);
-    $file = sprintf("%s/static/ad/95-0.dat", $staticfilepath);
-    if (file_exists($file)) {
-      $v = get_contents($file);
-      $ad[] = unserialize($v);
-    }
     unset($v);
     $repoid = get_repoid_by_categoryid($categoryid);
     $file = sprintf("%s/static/ad/95-%s.dat", $staticfilepath, $repoid);

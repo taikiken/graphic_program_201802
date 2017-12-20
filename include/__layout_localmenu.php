@@ -154,12 +154,6 @@ while($f=$o->fetch_array()){
     -->
 	<?php } ?>
 <!--	<li class="ds"><a href="./editall/?<?=$g->g_url()?>" target="_blank">一括編集</a></li>-->
-<?php }elseif($CURRENTDIRECTORY=="repo_s"){ ?>
-  <?php if ($_GET["rid"] == 95) { ?>
-    <div align="right">
-      <a href="../ad/edit/?nid=0&cid=95">デフォルト広告設定</a>
-    </div>
-  <?php } ?>
 <?php }elseif($CURRENTDIRECTORY=="mail_"){ ?>
 	<?php if($N>0){ ?>
 	<li class="ds"><a href="../mail/preview/?fid=<?=$g->f("cid")?>" target="_blank">フォームブロック全体のプレビュー</a></li>
