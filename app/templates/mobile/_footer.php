@@ -98,15 +98,20 @@ if (
     include_once __DIR__."/../_breadcrumb.php"; ?>
     <div class="foot-pr">
       <div class="foot-pr-inner">
-        <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
+        <figure class="foot-pr-figure"><img src="/assets/sp/images/common/footer-overview-figure.png" alt="無料スポーツニュース&amp;動画アプリの決定版！"></figure>
+
         <div class="text-block">
-          <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
+          <h3 class="foot-pr-text"><img src="/assets/sp/images/common/footer-overview-text.png" alt=""></h3>
           <ul class="foot-pr-list">
-            <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
-            <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
+            <li class="foot-pr-item"><a class="foot-pr-link" href="https://app.adjust.com/5je1ts?deep_link=sportsbull%3A%2F%2F" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
+            <li class="foot-pr-item"><a class="foot-pr-link" href="https://app.adjust.com/5je1ts?deep_link=sportsbull%3A%2F%2F" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
           </ul>
         </div>
       </div><!-- /.foot-pr-inner -->
+
+      <div class="foot-pr-btn">
+        <a href="https://app.adjust.com/5je1ts?deep_link=sportsbull%3A%2F%2F" target="_blank">今すぐダウンロード</a>
+      </div><!-- /.foot-pr-btn -->
 
       <div class="fb-page-plugin">
         <div class="fb-page" data-href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/"><a href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/"><?php echo $page['site_name']; ?></a></blockquote></div></div>
@@ -138,24 +143,6 @@ if ($template_name == 'category' || $template_name == 'p') {
 // @since 2017-03-29
 ?>
     </div><!-- /.foot-pr -->
-
-    <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
-
-    <nav class="fnav">
-      <ul>
-        <?php if (0): ?>
-          <li><a href="/about/ads/">広告掲載について</a></li>
-        <?php endif; ?>
-        <li><a href="/about/">サービス紹介</a></li>
-        <li><a href="/about/company/">会社概要</a></li>
-        <li><a href="/about/privacy/">プライバシーポリシー</a></li>
-        <li><a href="/about/terms/">利用規約</a></li>
-        <?php if (0): ?>
-          <li><a href="/about/faq/">FAQ</a></li>
-          <li><a href="/about/contact/">お問い合せ</a></li>
-        <?php endif; ?>
-      </ul>
-    </nav><!-- /.fnav -->
 
     <div class="sns-block">
       <ul>
