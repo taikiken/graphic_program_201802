@@ -268,7 +268,7 @@
       }
 
       &-heading {
-        height: 2.8em;
+        max-height: 2.8em;
         line-height: lh(26, 20);
         overflow: hidden;
         font-size: fz(20);
@@ -325,12 +325,6 @@
 
       &:nth-child(2n) {
         float: right;
-      }
-
-      .post {
-        &-heading {
-          min-height: 2.6em;
-        }
       }
     }
   }
@@ -454,7 +448,7 @@
 
         //.post-heading
         &-heading {
-          height: 2.4em;
+          max-height: 2.6em;
           overflow: hidden;
         }
 
