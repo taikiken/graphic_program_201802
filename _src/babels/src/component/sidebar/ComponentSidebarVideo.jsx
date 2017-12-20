@@ -15,7 +15,7 @@ import { Message } from '../../app/const/Message';
 import { Empty } from '../../app/const/Empty';
 
 // node
-import { RecommendTitleNode } from '../../node/sidebar/RecommendTitleNode';
+// import { RecommendTitleNode } from '../../node/sidebar/RecommendTitleNode';
 // import { RankingNode } from '../../node/sidebar/RankingNode';
 // import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
 
@@ -27,6 +27,7 @@ import { Safety } from '../../data/Safety';
 import { Ga } from '../../ga/Ga';
 import { GaData } from '../../ga/GaData';
 import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
+import ComponentSidebarTitle from './ComponentSidebarTitle';
 
 // React
 /**
@@ -173,9 +174,14 @@ export default class ComponentSidebarVideo extends React.Component {
     return (
       <div className="board-small widget-recommend">
         {/* title */}
+        {/*
         <RecommendTitleNode
           slug={categorySlug}
           label=""
+          title={Message.RECOMMEND_TITLE}
+        />
+        */}
+        <ComponentSidebarTitle
           title={Message.RECOMMEND_TITLE}
         />
         <ul className="board-list">

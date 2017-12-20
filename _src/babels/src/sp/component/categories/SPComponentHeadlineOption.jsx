@@ -32,7 +32,7 @@ const React = self.React;
  * SP: 記事一覧 headline を表示するための基本コンテナを作成します
  * @since 2016-09-20
  */
-export class SPComponentHeadlineOption extends React.Component {
+export default class SPComponentHeadlineOption extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

@@ -543,7 +543,7 @@ export class Dom {
     if (script === null) {
       return '';
     }
-    return script.dataset.label;
+    return script.dataset && script.dataset.label ? script.dataset.label : '';
   }
 
   // --------------------------------------

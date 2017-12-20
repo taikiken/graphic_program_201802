@@ -114,6 +114,7 @@ export default class SPComponentArticleAd extends React.Component {
     // category.slug 'big6tv' search
     // @since 2017-03-15
     const big6tv = this.props.categories.bySlug('big6tv');
+    // console.log('SPComponentArticleAd.render', big6tv, this.props);
     if (big6tv) {
       return null;
     }

@@ -17,7 +17,7 @@ import { Dom } from '../../../app/Dom';
 import ComponentCategoryOption from '../../../component/categories/ComponentCategoryOption';
 
 // sp/view/categories
-import { SPComponentHeadlineOption } from './SPComponentHeadlineOption';
+import SPComponentHeadlineOption from './SPComponentHeadlineOption';
 
 // --------------------------------------------
 // React

@@ -15,8 +15,8 @@ import { Message } from '../../app/const/Message';
 import { Empty } from '../../app/const/Empty';
 
 // node
-import { RecommendTitleNode } from '../../node/sidebar/RecommendTitleNode';
-import { RankingNode } from '../../node/sidebar/RankingNode';
+// import { RecommendTitleNode } from '../../node/sidebar/RecommendTitleNode';
+// import { RankingNode } from '../../node/sidebar/RankingNode';
 
 // dae
 import { ArticleDae } from '../../dae/ArticleDae';
@@ -24,8 +24,12 @@ import { ArticleDae } from '../../dae/ArticleDae';
 // data
 import { Safety } from '../../data/Safety';
 import ComponentSidebarRankingArticle from './ComponentSidebarRankingArticle';
+import ComponentSidebarTitle from './ComponentSidebarTitle';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -72,14 +76,19 @@ export default class ComponentSidebarRecommend extends React.Component {
    * */
   render() {
     // list.length > 0 が保証されている
-    const { list, home, detail, slug, categorySlug } = this.props;
+    const { list, home, detail, slug } = this.props;
     // render
     return (
       <div className="board-small widget-ranking">
         {/* title */}
+        {/*
         <RecommendTitleNode
           slug={categorySlug}
           label=""
+          title={Message.RECOMMEND_TITLE}
+        />
+        */}
+        <ComponentSidebarTitle
           title={Message.RECOMMEND_TITLE}
         />
         <ul className="post-list">

@@ -21,10 +21,13 @@ import { ArticleDae } from '../../dae/ArticleDae';
 import { Safety } from '../../data/Safety';
 
 // node
-import { RankingNode } from '../../node/sidebar/RankingNode';
+// import { RankingNode } from '../../node/sidebar/RankingNode';
 import ComponentSidebarRankingArticle from './ComponentSidebarRankingArticle';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -72,15 +75,22 @@ export default class ComponentSidebarRanking extends React.Component {
    * */
   static title(categorySlug) {
     // category api slug が `all` 以外の時に category.label をタイトルに含める
-    let categoryTitle = '';
-    if ( categorySlug !== 'all' ) {
-      const categoryLabel = Dom.categoryLabel();
-      if (categoryLabel) {
-        categoryTitle = <span className="widget-ranking-heading-ruby-label"> / {categoryLabel}</span>;
-      }
+    // let categoryTitle = '';
+    // if ( categorySlug !== 'all' ) {
+    //   const categoryLabel = Dom.categoryLabel();
+    //   if (categoryLabel) {
+    //     categoryTitle = <span className="widget-ranking-heading-ruby-label"> / {categoryLabel}</span>;
+    //   }
+    // }
+    // // console.log('ComponentSidebarRanking.title', categorySlug, Dom.categoryLabel());
+    // return categoryTitle;
+    if (categorySlug === 'all') {
+      return '';
     }
-    // console.log('ComponentSidebarRanking.title', categorySlug, Dom.categoryLabel());
-    return categoryTitle;
+    const categoryLabel = Dom.categoryLabel();
+    return categoryLabel ?
+      <span className="widget-ranking-heading-ruby-label"> / {categoryLabel}</span> :
+      '';
   }
   // ---------------------------------------------------
   //  METHOD
@@ -141,6 +151,7 @@ export default class ComponentSidebarRanking extends React.Component {
               const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
               return (
                 <ComponentSidebarRankingArticle
+                  key={`sidebar-ranking-${dae.id}`}
                   index={i}
                   thumbnail={thumbnail}
                   categories={dae.categories.all}
