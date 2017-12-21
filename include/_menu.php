@@ -23,7 +23,7 @@ if($q->get_file()!=2){
 
 		<tr class="<?=$m->gv()?>">
 		<td class="confTitle"><?=$TITLE?></td>
-		<td class="confFields"><?=($f_name!="cb")?$m->mn($sv["p_".$m->gv()]):($TITLE!=$m->mn_c($_POST["p_".$m->gv()]))?$m->mn_c($_POST["p_".$m->gv()]):"指定なし"?></td>
+		<td class="confFields"><?=($f_name!="cb")?$m->mn($sv["p_".$m->gv()]):($TITLE==$m->mn_c($_POST["p_".$m->gv()]))?$m->mn_c($_POST["p_".$m->gv()]):"指定なし"?></td>
 		</tr>
 
 	<?php } ?>
@@ -47,7 +47,7 @@ if($q->get_file()!=2){
 
 		<tr class="<?=$m->gv()?>">
 		<td class="confTitle"><?=$TITLE?></td>
-		<td class="confFields"><?=($f_name!="cb")?$m->mn($sv["p_".$m->gv()]):($TITLE!=$m->mn_c($_POST["p_".$m->gv()]))?$m->mn_c($_POST["p_".$m->gv()]):"指定なし"?></td>
+		<td class="confFields"><?=($f_name!="cb")?$m->mn($sv["p_".$m->gv()]):($TITLE==$m->mn_c($_POST["p_".$m->gv()]))?$m->mn_c($_POST["p_".$m->gv()]):"指定なし"?></td>
 		</tr>
 
 	<?php } ?>
@@ -58,7 +58,7 @@ if($q->get_file()!=2){
 
 		<tr class="<?=$m->gv()?>">
 		<td class="confTitle"><?=$TITLE?></td>
-		<td class="confFields"><?=($f_name!="cb")?$m->mn($p[$m->gv()]):($TITLE!=$m->mn_c($p[$m->gv()]))?$m->mn_c($p[$m->gv()]):"指定なし"?></td>
+		<td class="confFields"><?=($f_name!="cb")?$m->mn($p[$m->gv()]):($TITLE==$m->mn_c($p[$m->gv()]))?$m->mn_c($p[$m->gv()]):"指定なし"?></td>
 		</tr>
 
 	<?php } ?>
@@ -66,7 +66,7 @@ if($q->get_file()!=2){
 
 		<tr class="<?=$m->gv()?>">
 		<td class="confTitle"><?=$TITLE?></td>
-		<td class="confFields"><?=($f_name!="cb")?$m->mn($_POST[$m->gv()]):($TITLE!=$m->mn_c($_POST[$m->gv()]))?$m->mn_c($_POST[$m->gv()]):"指定なし"?></td>
+		<td class="confFields"><?=($f_name!="cb")?$m->mn($_POST[$m->gv()]):($TITLE==$m->mn_c($_POST[$m->gv()]))?$m->mn_c($_POST[$m->gv()]):"指定なし"?></td>
 		</tr>
 
 	<?php } ?>
