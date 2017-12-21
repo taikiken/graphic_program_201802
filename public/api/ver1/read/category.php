@@ -240,13 +240,6 @@ SQL;
 
 if (!empty($f))
 {
-  // フルパスで返す
-  $domain = "https://" . $_SERVER["HTTP_HOST"];
-  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
-  // img、linkはnullの場合あるから空にする
-  $f['img'] = isset($f['img']) ? $cf . $f['img'] : '';
-  $f['link'] = isset($f['link']) ? $f['link'] : '';
-
   // 定数
   $type = $f['type'];
   $text_color = ['#333333', '#333333', ''];
@@ -258,30 +251,43 @@ if (!empty($f))
   ];
   $disp_type = ['notice', 'warning', 'img'];
 
+  $domain = "https://" . $_SERVER["HTTP_HOST"];
+  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
 
-  $information = array(
+  $platform_prefix_list = [
+  	'pc' 			=> '',
+		'sp' 			=> 'sp_',
+		'ios'			=> 'ios_',
+		'android' => 'android_',
+	];
 
-    'type'             => $disp_type[$type],
-    'text'             => $f['text'],
-    'text_color'       => $text_color[$type],
-    'background_color' => $background_color[$type],
-    'icon'             => $icon[$type],
-    'img'              => $f['img'],
-    'link'             => $f['link'],
-  );
+  $f['text'] = isset($f['text']) ? $f['text'] : '';
+
+  foreach($platform_prefix_list as $key => $prefix)
+	{
+    // フルパスで返す
+		$img[$key] = isset($f[$prefix . 'img']) ? $cf . $f[$prefix . 'img'] : '';
+		$link[$key] = isset($f[$prefix . 'link']) ? $f[$prefix . 'link'] : '';
+
+    $information_list[$key] = [
+      'type'             => $disp_type[$type],
+      'text'             => $f['text'],
+      'text_color'       => $text_color[$type],
+      'background_color' => $background_color[$type],
+      'icon'             => $icon[$type],
+      'img'              => $img[$key],
+      'link'             => $link[$key],
+    ];
+	}
+
 
 }
 else
 {
-  $information = null;
+  $information_list = null;
 }
 
-$categoriesinfo['information'] = array(
-  'pc'      => $information,
-  'sp'      => $information,
-  'ios'     => $information,
-  'android' => $information,
-);
+$categoriesinfo['information'] = $information_list;
 
 $y["response"]=$categoriesinfo;
 
