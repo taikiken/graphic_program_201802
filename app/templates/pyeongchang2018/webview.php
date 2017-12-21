@@ -1,7 +1,4 @@
 <?php
-<<<<<<< HEAD
-echo 'webview';
-=======
 /**
  * mobile: pyeongchang2018 専用 template - `/pyeongchang2018/webview/`
  * User: @taikiken
@@ -22,4 +19,3 @@ echo 'webview';
 平昌オリンピック - webview
 </body>
 </html>
->>>>>>> feature/UNDO_SPBL-293-php_template
