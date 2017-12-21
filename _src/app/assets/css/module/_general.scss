@@ -55,49 +55,6 @@
 
 
 
-// -------------------------------------------------
-// loading
-// -------------------------------------------------
-.loading-root {
-  position: relative;
-
-  .loading-spinner {
-    display: block;
-    overflow: hidden;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 0;
-    //background: rgba(255, 255, 255, 0.7);
-    background: url("/assets/images/common/preloader.gif") no-repeat center center;
-    opacity: 0;
-  }
-
-  &.loading {
-    min-width: 30px;
-    min-height: 30px;
-
-    .loading-spinner {
-      width: 100%;
-      height: 100%;
-      opacity: 1;
-    }
-  }
-
-  &.disable {
-    .loading-spinner {
-      width: 100%;
-      height: 100%;
-      opacity: 1;
-    }
-  }
-}
-
-
-
-
-
 // board-
 // boadr-large, board-small 共用
 [ class^="board-" ] {
@@ -677,7 +634,7 @@
 
 .board-btn-viewmore {
   clear: both;
-  padding-bottom: 30px;
+  // padding-bottom: 30px;
 
   &.loading-root {
     padding-top: 0;
@@ -703,6 +660,47 @@
   }
 } //.board-btn-viewmore
 
+
+.loading-root {
+  position: relative;
+
+  .loading-spinner {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    //background: rgba(255, 255, 255, 0.7);
+    background: url("/assets/images/common/preloader.gif") no-repeat center center;
+    opacity: 0;
+  }
+
+  &.loading {
+    min-width: 30px;
+    min-height: 30px;
+
+    .board-btn-viewmore-link {
+      background-color: transparent;
+      @include hide-text;
+    }
+
+    .loading-spinner {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+  }
+
+  &.disable {
+    .loading-spinner {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+  }
+}
 
 
 
