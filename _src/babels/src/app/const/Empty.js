@@ -108,6 +108,7 @@ export class Empty {
    * @return {string} Video Play画像パス【Pickup】【640 x 400】
    */
   static get VIDEO_PICKUP_PLAY() {
+    // TODO 正規画像に差し替える
     return '/assets/images/common/thumb-640x400-play.png';
   }
   /**
