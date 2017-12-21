@@ -29,6 +29,24 @@ import { Elements } from '../util/Elements';
  */
 export class Snap extends EventDispatcher {
   // ---------------------------------------------------
+  //  EVENT
+  // ---------------------------------------------------
+  /**
+   * snap 通知イベント
+   * @event SNAPPED
+   * @return {string} snapSnapped
+   */
+  static get SNAPPED() {
+    return 'snapSnapped';
+  }
+  /**
+   * scroll up 中に hit したことを通知するイベント
+   * @return {string} snapBeatUp
+   */
+  static get BEAT_UP() {
+    return 'snapBeatUp';
+  }
+  // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
   /**
@@ -137,24 +155,6 @@ export class Snap extends EventDispatcher {
      * @since 2017-06-19
      */
     this.sp = sp;
-  }
-  // ---------------------------------------------------
-  //  EVENT
-  // ---------------------------------------------------
-  /**
-   * snap 通知イベント
-   * @event SNAPPED
-   * @return {string} snapSnapped
-   */
-  static get SNAPPED() {
-    return 'snapSnapped';
-  }
-  /**
-   * scroll up 中に hit したことを通知するイベント
-   * @return {string} snapBeatUp
-   */
-  static get BEAT_UP() {
-    return 'snapBeatUp';
   }
   // ---------------------------------------------------
   //  METHOD

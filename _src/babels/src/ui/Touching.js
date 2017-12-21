@@ -22,78 +22,17 @@ import { Vectors } from '../util/Vectors';
 // ui
 import { TouchingEvents } from './TouchingEvents';
 
-// private
-const boundStart = Symbol();
-const boundMove = Symbol();
-const boundEnd = Symbol();
-const boundCancel = Symbol();
-const boundBlur = Symbol();
+// // private
+// const boundStart = Symbol();
+// const boundMove = Symbol();
+// const boundEnd = Symbol();
+// const boundCancel = Symbol();
+// const boundBlur = Symbol();
 
 /**
  * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します
  */
 export class Touching extends EventDispatcher {
-  /**
-   * 処理対象 element などを保存します
-   * @param {Element} element 処理対象 Element
-   * @param {boolean} [canceling=false] touchmove 中に `preventDefault` を行う
-   * @param {number} [threshold=10] y 方向閾値
-   */
-  constructor(element, canceling = false, threshold = 10) {
-    super();
-
-    /**
-     * 処理対象 Element
-     * @type {Element}
-     */
-    this.element = element;
-    /**
-     * touchmove 中に `preventDefault` を行うかのフラッグ
-     * @type {boolean}
-     * @default false
-     */
-    this.canceling = canceling;
-    /**
-     * y 方向閾値, default: 10px
-     * @type {number}
-     * @default 10
-     */
-    this.threshold = threshold;
-    /**
-     * bind 済み `onStart`
-     * @type {Function}
-     */
-    this[boundStart] = this.onStart.bind(this);
-    /**
-     * bind 済み `onMove`
-     * @type {Function}
-     */
-    this[boundMove] = this.onMove.bind(this);
-    /**
-     * bind 済み `onEnd`
-     * @type {Function}
-     */
-    this[boundEnd] = this.onEnd.bind(this);
-    /**
-     * bind 済み `onCancel`
-     * @type {Function}
-     */
-    this[boundCancel] = this.onCancel.bind(this);
-    /**
-     * bind 済み `onBlur`
-     * @type {Function}
-     */
-    this[boundBlur] = this.onBlur.bind(this);
-    /**
-     * 位置管理を行う Vectors instance を管理します
-     * @type {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
-     */
-    this.vectors = {
-      start: new Vectors(),
-      end: new Vectors(),
-      moving: [].slice(0)
-    };
-  }
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------
@@ -137,44 +76,157 @@ export class Touching extends EventDispatcher {
   static get TOUCH() {
     return 'touchingTouch';
   }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
+  // ----------------------------------------
+  // STATIC METHOD
+  // ----------------------------------------
   /**
-   * bind 済み `onStart` 関数を取得します
-   * @return {function} bind 済み `onStart` 関数返します
+   * y 方向移動が threshold 以内か判定します
+   * @param {Vectors} pointA スタートポイント(Vectors)
+   * @param {Vectors} pointB エンドポイント(Vectors)
+   * @param {number} threshold 閾値
+   * @return {boolean} true の時は閾値以上なのでスクロール判定になります
    */
-  get boundStart() {
-    return this[boundStart];
+  static scrolling(pointA, pointB, threshold) {
+    const y = pointA.betweenY(pointB);
+    // 正数値にし閾値と比較
+    return Math.abs(y) >= threshold;
   }
   /**
-   * bind 済み `onMove` 関数を取得します
-   * @return {function} bind 済み `onMove` 関数返します
+   * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
+   * @param {MouseEvent|TouchEvent} event down / move / up event object
+   * @return {{x: number, y: number}} pageX / pageY 座標を返します
    */
-  get boundMove() {
-    return this[boundMove];
+  static point(event) {
+    const x = event.pageX;
+    const y = event.pageY;
+
+    // event.pageX / pageY があればそのまま値を返します
+    if (Safety.exist(x) && Safety.exist(y)) {
+      return { x, y };
+    }
+
+    // event.pageX / pageY がない時は TouchEvent の changedTouches から取得します
+    // touch event
+    // @type {TouchList}
+    const touches = event.changedTouches;
+    // touches が取得できない時は 0 をセットし返します
+    if (!Safety.exist(touches)) {
+      return { x: 0, y: 0 };
+    }
+
+    // changedTouches list の先頭データを取り出し pageX / pageY を取得します
+    // @type {Touch}
+    const touch = touches[0];
+    return { x: touch.pageX, y: touch.pageY };
   }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
   /**
-   * bind 済み `onEnd` 関数を取得します
-   * @return {function} bind 済み `onEnd` 関数返します
+   * 処理対象 element などを保存します
+   * @param {Element} element 処理対象 Element
+   * @param {boolean} [canceling=false] touchmove 中に `preventDefault` を行う
+   * @param {number} [threshold=10] y 方向閾値
    */
-  get boundEnd() {
-    return this[boundEnd];
+  constructor(element, canceling = false, threshold = 10) {
+    super();
+
+    /**
+     * 処理対象 Element
+     * @type {Element}
+     */
+    this.element = element;
+    /**
+     * touchmove 中に `preventDefault` を行うかのフラッグ
+     * @type {boolean}
+     * @default false
+     */
+    this.canceling = canceling;
+    /**
+     * y 方向閾値, default: 10px
+     * @type {number}
+     * @default 10
+     */
+    this.threshold = threshold;
+    /**
+     * bind 済み `onStart`
+     * @type {Function}
+     */
+    this.boundStart = this.onStart.bind(this);
+    // this[boundStart] = this.onStart.bind(this);
+    /**
+     * bind 済み `onMove`
+     * @type {Function}
+     */
+    this.boundMove = this.onMove.bind(this);
+    // this[boundMove] = this.onMove.bind(this);
+    /**
+     * bind 済み `onEnd`
+     * @type {Function}
+     */
+    this.boundEnd = this.onEnd.bind(this);
+    // this[boundEnd] = this.onEnd.bind(this);
+    /**
+     * bind 済み `onCancel`
+     * @type {Function}
+     */
+    this.boundCancel = this.onCancel.bind(this);
+    // this[boundCancel] = this.onCancel.bind(this);
+    /**
+     * bind 済み `onBlur`
+     * @type {Function}
+     */
+    this.boundBlur = this.onBlur.bind(this);
+    // this[boundBlur] = this.onBlur.bind(this);
+    /**
+     * 位置管理を行う Vectors instance を管理します
+     * @type {{start: Vectors, end: Vectors, moving: Array.<Vectors>}}
+     */
+    this.vectors = {
+      start: new Vectors(),
+      end: new Vectors(),
+      moving: [].slice(0)
+    };
   }
-  /**
-   * bind 済み `onCancel` 関数を取得します
-   * @return {function} bind 済み `onCancel` 関数返します
-   */
-  get boundCancel() {
-    return this[boundCancel];
-  }
-  /**
-   * bind 済み `onBlur` 関数を取得します
-   * @return {function} bind 済み `onBlur` 関数返します
-   */
-  get boundBlur() {
-    return this[boundBlur];
-  }
+
+  // // ---------------------------------------------------
+  // //  GETTER / SETTER
+  // // ---------------------------------------------------
+  // /**
+  //  * bind 済み `onStart` 関数を取得します
+  //  * @return {function} bind 済み `onStart` 関数返します
+  //  */
+  // get boundStart() {
+  //   return this[boundStart];
+  // }
+  // /**
+  //  * bind 済み `onMove` 関数を取得します
+  //  * @return {function} bind 済み `onMove` 関数返します
+  //  */
+  // get boundMove() {
+  //   return this[boundMove];
+  // }
+  // /**
+  //  * bind 済み `onEnd` 関数を取得します
+  //  * @return {function} bind 済み `onEnd` 関数返します
+  //  */
+  // get boundEnd() {
+  //   return this[boundEnd];
+  // }
+  // /**
+  //  * bind 済み `onCancel` 関数を取得します
+  //  * @return {function} bind 済み `onCancel` 関数返します
+  //  */
+  // get boundCancel() {
+  //   return this[boundCancel];
+  // }
+  // /**
+  //  * bind 済み `onBlur` 関数を取得します
+  //  * @return {function} bind 済み `onBlur` 関数返します
+  //  */
+  // get boundBlur() {
+  //   return this[boundBlur];
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -349,47 +401,5 @@ export class Touching extends EventDispatcher {
 
     return vectors;
   }
-  // ----------------------------------------
-  // STATIC METHOD
-  // ----------------------------------------
-  /**
-   * y 方向移動が threshold 以内か判定します
-   * @param {Vectors} pointA スタートポイント(Vectors)
-   * @param {Vectors} pointB エンドポイント(Vectors)
-   * @param {number} threshold 閾値
-   * @return {boolean} true の時は閾値以上なのでスクロール判定になります
-   */
-  static scrolling(pointA, pointB, threshold) {
-    const y = pointA.betweenY(pointB);
-    // 正数値にし閾値と比較
-    return Math.abs(y) >= threshold;
-  }
-  /**
-   * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
-   * @param {MouseEvent|TouchEvent} event down / move / up event object
-   * @return {{x: number, y: number}} pageX / pageY 座標を返します
-   */
-  static point(event) {
-    const x = event.pageX;
-    const y = event.pageY;
 
-    // event.pageX / pageY があればそのまま値を返します
-    if (Safety.exist(x) && Safety.exist(y)) {
-      return { x, y };
-    }
-
-    // event.pageX / pageY がない時は TouchEvent の changedTouches から取得します
-    // touch event
-    // @type {TouchList}
-    const touches = event.changedTouches;
-    // touches が取得できない時は 0 をセットし返します
-    if (!Safety.exist(touches)) {
-      return { x: 0, y: 0 };
-    }
-
-    // changedTouches list の先頭データを取り出し pageX / pageY を取得します
-    // @type {Touch}
-    const touch = touches[0];
-    return { x: touch.pageX, y: touch.pageY };
-  }
 }

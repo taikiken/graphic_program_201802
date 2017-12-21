@@ -18,39 +18,39 @@ import { WidgetType } from '../app/const/WidgetType';
  * @type {Symbol}
  * @private
  */
-const _symbol = Symbol();
-/**
- * behaviors を保持するための Symbol
- * @type {Symbol}
- */
-const behaviorsSymbol = Symbol();
-/**
- * done を保持するための Symbol
- * @type {Symbol}
- */
-const doneSymbol = Symbol();
-/**
- * single を保持するための Symbol
- * @type {Symbol}
- */
-const singleSymbol = Symbol();
+const singletonSymbol = Symbol('SinglesManager symbol');
+// /**
+//  * behaviors を保持するための Symbol
+//  * @type {Symbol}
+//  */
+// const behaviorsSymbol = Symbol();
+// /**
+//  * done を保持するための Symbol
+//  * @type {Symbol}
+//  */
+// const doneSymbol = Symbol();
+// /**
+//  * single を保持するための Symbol
+//  * @type {Symbol}
+//  */
+// const singleSymbol = Symbol();
 /**
  * popularNext を保持するための Symbol
  * @type {Symbol}
  */
 const popularSymbol = Symbol();
-/**
- * request を保持するための Symbol
- * @type {Symbol}
- */
-const requestSymbol = Symbol();
+// /**
+//  * request を保持するための Symbol
+//  * @type {Symbol}
+//  */
+// const requestSymbol = Symbol();
 /**
  * SinglesManager instance を singleton を保証し保持します
  * @static
  * @type {?SinglesManager}
  * @private
  */
-let _instance = null;
+let singletonInstance = null;
 
 /**
  * 記事詳細・次の記事一覧の間に挟む<br>
@@ -58,28 +58,54 @@ let _instance = null;
  * @since 2016-10-01
  */
 export class SinglesManager {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * singleton instance を生成します
+   * @param {SingleDae} [single=null] JSON single data
+   * @return {SinglesManager} SinglesManager instance を返します
+   */
+  static factory(single):SinglesManager {
+    if (singletonInstance === null) {
+      singletonInstance = new SinglesManager(singletonSymbol, single);
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * singleton
    * @param {Symbol} target singleton を保証するための内部 Symbol
-   * @param {SingleDae} [single=null] 記事詳細 JSON data
+   * @param {?SingleDae} [single=null] 記事詳細 JSON data
    * @return {SinglesManager} 唯一の instance を返します
    */
   constructor(target, single = null) {
-    if (_symbol !== target) {
+    if (singletonSymbol !== target) {
       throw new Error( 'SinglesManager is singleton Class. not use new SinglesManager(). instead SinglesManager.factory()' );
     }
-
-    if (_instance !== null) {
-      return _instance;
+    if (singletonInstance !== null) {
+      return singletonInstance;
     }
+    // ------------------
+    // let singleDae = null;
+    // if (single !== null) {
+    //   singleDae = single;
+    // }
+    // this[singleSymbol] = singleDae;
+    /**
+     * 記事詳細 JSON data
+     * @type {SingleDae}
+     */
+    this.single = single;
 
-    let singleDae = null;
-    if (single !== null) {
-      singleDae = single;
-    }
-    this[singleSymbol] = singleDae;
-
-    this[behaviorsSymbol] = [
+    // this[behaviorsSymbol] = [
+    /**
+     * オススメ記事・関連記事・人気記事を WidgetType constant で保持します
+     * @type {Array.<string>}
+     */
+    this.behaviors = [
       WidgetType.RECOMMEND,
       WidgetType.RELATED,
       WidgetType.POPULAR
@@ -89,9 +115,19 @@ export class SinglesManager {
     done[WidgetType.RECOMMEND] = false;
     done[WidgetType.RELATED] = false;
     done[WidgetType.POPULAR] = false;
-    this[doneSymbol] = done;
+    // this[doneSymbol] = done;
+    /**
+     * オススメ記事・関連記事・人気記事 の出力が終わったかをマークする Object - key: boolean
+     * @type {*}
+     */
+    this.done = done;
 
-    this[requestSymbol] = {
+    // this[requestSymbol] = {
+    /**
+     * 人気記事の `request` Object を保持します
+     * @type {{offset: number, length: number}}
+     */
+    this.request = {
       offset: 0,
       length: 6
     };
@@ -105,8 +141,8 @@ export class SinglesManager {
      */
     this.count = 0;
 
-    _instance = this;
-    return _instance;
+    singletonInstance = this;
+    return singletonInstance;
   }
   // behavior() {
   //
@@ -114,35 +150,35 @@ export class SinglesManager {
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
-  /**
-   * 記事詳細 JSON data
-   * @return {SingleDae} 記事詳細 JSON data を返します
-   */
-  get single() {
-    return this[singleSymbol];
-  }
-  /**
-   * 記事詳細 JSON data を設定します
-   * @param {SingleDae} single 記事詳細 JSON data
-   */
-  set single(single) {
-    this[singleSymbol] = single;
-  }
-  /**
-   * オススメ記事・関連記事・人気記事を WidgetType constant で保持します
-   * @return {Array<string>} オススメ記事・関連記事・人気記事 type 配列を返します
-   */
-  get behaviors():Array {
-    return this[behaviorsSymbol];
-  }
+  // /**
+  //  * 記事詳細 JSON data
+  //  * @return {SingleDae} 記事詳細 JSON data を返します
+  //  */
+  // get single() {
+  //   return this[singleSymbol];
+  // }
+  // /**
+  //  * 記事詳細 JSON data を設定します
+  //  * @param {SingleDae} single 記事詳細 JSON data
+  //  */
+  // set single(single) {
+  //   this[singleSymbol] = single;
+  // }
+  // /**
+  //  * オススメ記事・関連記事・人気記事を WidgetType constant で保持します
+  //  * @return {Array<string>} オススメ記事・関連記事・人気記事 type 配列を返します
+  //  */
+  // get behaviors():Array {
+  //   return this[behaviorsSymbol];
+  // }
 
-  /**
-   * オススメ記事・関連記事・人気記事 の出力が終わったかをマークする Object
-   * @return {Object} オススメ記事・関連記事・人気記事 の出力が終わったかをマークする Object を返します
-   */
-  get done():Object {
-    return this[doneSymbol];
-  }
+  // /**
+  //  * オススメ記事・関連記事・人気記事 の出力が終わったかをマークする Object
+  //  * @return {Object} オススメ記事・関連記事・人気記事 の出力が終わったかをマークする Object を返します
+  //  */
+  // get done():Object {
+  //   return this[doneSymbol];
+  // }
 
   /**
    * 人気記事の次の記事が存在するかの真偽値
@@ -166,13 +202,13 @@ export class SinglesManager {
       }
     }
   }
-  /**
-   * 人気記事の `request` Object を保持します
-   * @return {{offset: number, length: number}} 人気記事の `request` Object を返します
-   */
-  get request():Object {
-    return this[requestSymbol];
-  }
+  // /**
+  //  * 人気記事の `request` Object を保持します
+  //  * @return {{offset: number, length: number}} 人気記事の `request` Object を返します
+  //  */
+  // get request():Object {
+  //   return this[requestSymbol];
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -228,19 +264,5 @@ export class SinglesManager {
   hasRecommend() {
     const single = this.single;
     return !!single && single.recommendArticles.length > 0;
-  }
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * singleton instance を生成します
-   * @param {SingleDae} [single=null] JSON single data
-   * @return {SinglesManager} SinglesManager instance を返します
-   */
-  static factory(single):SinglesManager {
-    if (_instance === null) {
-      _instance = new SinglesManager(_symbol, single);
-    }
-    return _instance;
   }
 }

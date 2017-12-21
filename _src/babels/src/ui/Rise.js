@@ -19,6 +19,19 @@ import {Scroll} from '../util/Scroll';
  * 対象 element bottom が window.bottom を超えたら Event を発生させます
  */
 export default class Rise extends EventDispatcher {
+  // ---------------------------------------------------
+  //  EVENT
+  // ---------------------------------------------------
+  /**
+   * RISE event type
+   * @returns {string} RISE event type `rise` を返します
+   */
+  static get RISE() {
+    return 'rise';
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * 対象 element bottom が window.bottom window.top に contain しているかを監視します
    * @param {Element} element 対象 element
@@ -57,16 +70,6 @@ export default class Rise extends EventDispatcher {
      * @since 2017-04-17
      */
     this.timer = 0;
-  }
-  // ---------------------------------------------------
-  //  EVENT
-  // ---------------------------------------------------
-  /**
-   * RISE event type
-   * @returns {string} RISE event type `rise` を返します
-   */
-  static get RISE() {
-    return 'rise';
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

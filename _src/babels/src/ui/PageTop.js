@@ -23,9 +23,15 @@ import { Offset } from '../util/Offset';
 import { TopButton } from '../ui/button/TopButton';
 
 // TweenMax
+/**
+ * [library] - gsap.TweenLite
+ */
 const TweenLite = self.TweenLite;
 
 // Sagen
+/**
+ * [library] - Sagen
+ */
 const Sagen = self.Sagen;
 
 /**
@@ -36,7 +42,7 @@ export class PageTop {
    * PageTop instance を作成し init 関数をコールします
    */
   static start() {
-    let pageTop = new PageTop();
+    const pageTop = new PageTop();
     pageTop.init();
   }
   // ---------------------------------------------------
@@ -117,7 +123,7 @@ export class PageTop {
   /**
    * click event を bind します
    */
-  init():void {
+  init() {
     const element = Dom.pageTop();
     if (element === null) {
       return;
@@ -157,7 +163,7 @@ export class PageTop {
    * @param {Object} event Scroll.SCROLL event object
    * @since 2016-09-01
    */
-  onScroll(event:Object):void {
+  onScroll(event) {
     // @type {number} - scrollTop
     const y = event.y;
     // @type {number} - window height

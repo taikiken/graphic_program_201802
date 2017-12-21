@@ -34,7 +34,13 @@ let _instance = null;
 let element = null;
 
 // TweenMax
+/**
+ * [library] - gsap.TweenLite
+ */
 const TweenLite = self.TweenLite;
+/**
+ * [library] - gsap.com.greensock.easing
+ */
 const easing = self.com.greensock.easing;
 
 /**
@@ -42,6 +48,41 @@ const easing = self.com.greensock.easing;
  * @since 2016-10-28
  */
 export class TopButton extends EventDispatcher {
+  // ---------------------------------------------------
+  //  EVENT
+  // ---------------------------------------------------
+  /**
+   * top へ戻る scroll animation start event
+   * @event START
+   * @return {string} topButtonStart
+   */
+  static get START() {
+    return 'topButtonStart';
+  }
+  /**
+   * top へ戻る scroll animation complete event
+   * @event COMPLETE
+   * @return {string} topButtonStart
+   */
+  static get COMPLETE() {
+    return 'topButtonComplete';
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * instance を生成します
+   * @return {TopButton} TopButton instance を返します
+   */
+  static factory():TopButton {
+    if (_instance === null) {
+      _instance = new TopButton(_symbol);
+    }
+    return _instance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * singleton
    * @param {Symbol} target singleton を保証する inner Symbol
@@ -65,25 +106,6 @@ export class TopButton extends EventDispatcher {
 
     _instance = this;
     return _instance;
-  }
-  // ---------------------------------------------------
-  //  EVENT
-  // ---------------------------------------------------
-  /**
-   * top へ戻る scroll animation start event
-   * @event START
-   * @return {string} topButtonStart
-   */
-  static get START() {
-    return 'topButtonStart';
-  }
-  /**
-   * top へ戻る scroll animation complete event
-   * @event COMPLETE
-   * @return {string} topButtonStart
-   */
-  static get COMPLETE() {
-    return 'topButtonComplete';
   }
   // ---------------------------------------------------
   //  METHOD
@@ -138,18 +160,5 @@ export class TopButton extends EventDispatcher {
         }
       }
     );
-  }
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {TopButton} TopButton instance を返します
-   */
-  static factory():TopButton {
-    if (_instance === null) {
-      _instance = new TopButton(_symbol);
-    }
-    return _instance;
   }
 }
