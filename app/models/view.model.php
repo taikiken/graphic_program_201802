@@ -322,14 +322,14 @@ class ViewModel {
       foreach( $tabs as $key => $value ) :
 
         # 冒頭に「すべて」を追加
-        if ( $key === 0 ) :
-          $tabsArray['all'] = array(
-            'label'     => 'すべて',
-            'slug'      => 'all',
-            'url'       => $this->default['site_url'].'category/all',
-            'title_img' => '',
-          );
-        endif;
+        // if ( $key === 0 ) :
+        //   $tabsArray['all'] = array(
+        //     'label'     => 'すべて',
+        //     'slug'      => 'all',
+        //     'url'       => $this->default['site_url'].'category/all',
+        //     'title_img' => '',
+        //   );
+        // endif;
 
         $tabsArray[$value['slug']] = $value;
 
