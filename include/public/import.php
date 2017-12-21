@@ -495,7 +495,9 @@ function outimg($oimg,$tumb=1, $parse=true){
 		imgDresize($file,sprintf("%sthumbnail2/%s.%s",$imgp,$fl[0],$p),array(150,150),$p);
 		//2140 repro出力画像サイズ追加
 		imgDresize($file,sprintf("%sthumbnail3/%s.%s",$imgp,$fl[0],$p),array(480,240),$p);
-		imgDresize($file,sprintf("%sthumbnail4/%s.%s",$imgp,$fl[0],$p),array(480,480),$p);
+    imgDresize($file,sprintf("%sthumbnail4/%s.%s",$imgp,$fl[0],$p),array(480,480),$p);
+		//UNDO_SPBL-259 カルーセル新サイズ対応
+		imgDresize($file,sprintf("%sthumbnail5/%s.%s",$imgp,$fl[0],$p),array(750,320),$p);
 	}
 	imgResize($file,sprintf("%sraw/%s.%s",$imgp,$fl[0],$p),980,$p);
 
