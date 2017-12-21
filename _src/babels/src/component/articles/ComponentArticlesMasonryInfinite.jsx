@@ -217,6 +217,7 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
       <div
         ref={(element) => (this.boardRout = element)}
         className="board-large-column"
+        style={{minHeight: '330px'}}
       >
         {
           // loop start

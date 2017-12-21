@@ -24,6 +24,7 @@ import { Ad } from '../../app/const/Ad';
 // data
 import { Safety } from '../../data/Safety';
 import { ArticleDae } from '../../dae/ArticleDae';
+import { RelatedDae } from '../../dae/RelatedDae';
 
 // React
 /**
@@ -49,7 +50,10 @@ export default class ComponentHeadlines extends React.Component {
       // articles 配列を元にDomを作成する
       // list: React.PropTypes.array.isRequired,
       list: React.PropTypes.arrayOf(
-        React.PropTypes.instanceOf(ArticleDae).isRequired,
+        React.PropTypes.oneOfType([
+          React.PropTypes.instanceOf(ArticleDae).isRequired,
+          React.PropTypes.instanceOf(RelatedDae).isRequired,
+        ]).isRequired,
       ).isRequired,
       callback: React.PropTypes.func.isRequired,
       home: React.PropTypes.bool
