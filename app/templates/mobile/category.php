@@ -17,6 +17,9 @@ if ($page['category']['slug'] == 'motorsports') {
 } elseif($page['category']['slug'] == 'crazy') {
     // CRAZY ATHLETES
     include_once __DIR__.'/category_crazy.php';
-} else {
+}  elseif($page['category']['slug'] == 'pyeongchang2018') {
+  // pyeongchang2018
+  include_once __DIR__.'/category_pyeongchang2018.php';
+}  else {
     include_once __DIR__.'/category_content.php';
 }
