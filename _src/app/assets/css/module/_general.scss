@@ -36,6 +36,7 @@
     //.announce__item
     .announce__item {
       a {
+        @include link-decoration(null, null, underline, none);
         font-weight: bold;
         font-size: fz(13);
       }
@@ -49,49 +50,6 @@
     text-align: center;
   }
 } //.announce
-
-
-
-
-
-// -------------------------------------------------
-// loading
-// -------------------------------------------------
-.loading-root {
-  position: relative;
-
-  .loading-spinner {
-    display: block;
-    overflow: hidden;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 0;
-    //background: rgba(255, 255, 255, 0.7);
-    background: url("/assets/images/common/preloader.gif") no-repeat center center;
-    opacity: 0;
-  }
-
-  &.loading {
-    min-width: 30px;
-    min-height: 30px;
-
-    .loading-spinner {
-      width: 100%;
-      height: 100%;
-      opacity: 1;
-    }
-  }
-
-  &.disable {
-    .loading-spinner {
-      width: 100%;
-      height: 100%;
-      opacity: 1;
-    }
-  }
-}
 
 
 
@@ -233,7 +191,7 @@
     top: 99999px;
     width: 354px;
     height: 310px;
-    margin-top: 30px;
+    margin-top: 20px;
     padding-bottom: 20px;
     overflow: hidden;
     background-color: #fff;
@@ -382,7 +340,9 @@
     }
 
     &-heading {
+      max-height: 2.6em;
       line-height: lh(18, 14);
+      overflow: hidden;
       font-size: fz(16);
     }
 
@@ -445,13 +405,7 @@
         &-thumb {}
         &-data {}
         &-category {}
-
-        //.post-heading
-        &-heading {
-          max-height: 2.6em;
-          overflow: hidden;
-        }
-
+        &-heading {}
         &-date {}
 
         &:hover {
@@ -680,7 +634,7 @@
 
 .board-btn-viewmore {
   clear: both;
-  padding-bottom: 30px;
+  // padding-bottom: 30px;
 
   &.loading-root {
     padding-top: 0;
@@ -706,6 +660,47 @@
   }
 } //.board-btn-viewmore
 
+
+.loading-root {
+  position: relative;
+
+  .loading-spinner {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    //background: rgba(255, 255, 255, 0.7);
+    background: url("/assets/images/common/preloader.gif") no-repeat center center;
+    opacity: 0;
+  }
+
+  &.loading {
+    min-width: 30px;
+    min-height: 30px;
+
+    .board-btn-viewmore-link {
+      background-color: transparent;
+      @include hide-text;
+    }
+
+    .loading-spinner {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+  }
+
+  &.disable {
+    .loading-spinner {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+  }
+}
 
 
 
