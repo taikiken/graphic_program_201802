@@ -14,6 +14,8 @@
 //お知らせ
 // https://aws-plus.backlog.jp/view/UNDO_SPBL-281
 .announce {
+  border-bottom: 1px solid #000;
+
   //.announce__inner
   &__inner {
     width: $global-inner-width;
