@@ -80,8 +80,12 @@
 
             //.post-heading
             &-heading {
+              width: 508px;
+              overflow: hidden;
+              text-overflow: ellipsis;
               font-weight: bold;
               font-size: fz(24);
+              white-space: nowrap;
             }
 
             //.post-date

@@ -36,6 +36,7 @@
     //.announce__item
     .announce__item {
       a {
+        @include link-decoration(null, null, underline, none);
         font-weight: bold;
         font-size: fz(13);
       }
@@ -233,7 +234,7 @@
     top: 99999px;
     width: 354px;
     height: 310px;
-    margin-top: 30px;
+    margin-top: 20px;
     padding-bottom: 20px;
     overflow: hidden;
     background-color: #fff;
@@ -382,7 +383,9 @@
     }
 
     &-heading {
+      max-height: 2.6em;
       line-height: lh(18, 14);
+      overflow: hidden;
       font-size: fz(16);
     }
 
@@ -445,13 +448,7 @@
         &-thumb {}
         &-data {}
         &-category {}
-
-        //.post-heading
-        &-heading {
-          max-height: 2.6em;
-          overflow: hidden;
-        }
-
+        &-heading {}
         &-date {}
 
         &:hover {
