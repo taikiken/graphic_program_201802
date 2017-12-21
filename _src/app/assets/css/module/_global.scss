@@ -95,6 +95,10 @@ textarea {
     background-color: #0c2350;
     border-radius: 15px;
 
+    * {
+      box-sizing: border-box;
+    }
+
     input {
       border: none;
       background: transparent;
@@ -103,7 +107,7 @@ textarea {
 
     input[type="text"] {
       float: left;
-      width: 176px;
+      width: 174px;
       padding: 5px 0;
       color: #aaa;
       vertical-align: middle;

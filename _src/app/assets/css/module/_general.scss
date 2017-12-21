@@ -26,20 +26,26 @@
   &--text {
     padding: 8px 0;
 
-    //.announce__item__icon
-    .announce__item__icon {
-      width: 16px;
-      margin-right: 5px;
-      vertical-align: middle;
-    }
-
     //.announce__item
     .announce__item {
+      position: relative;
+      padding-left: 20px;
+      word-break: break-all;
+
       a {
         @include link-decoration(null, null, underline, none);
         font-weight: bold;
         font-size: fz(13);
       }
+    }
+
+    //.announce__item__icon
+    .announce__item__icon {
+      position: absolute;
+      left: 0;
+      width: 16px;
+      // margin-right: 5px;
+      vertical-align: middle;
     }
   } //.announce--text
 
