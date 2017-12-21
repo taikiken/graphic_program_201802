@@ -1,6 +1,32 @@
 <?php
 include $INCLUDEPATH."local.php";
 
+////// 検索対象 //////
+$search_word_category_list =
+  [
+    '平昌五輪'                => 'pyeongchang2018', // 平昌五輪
+    'アジアプロ野球チャンピオン' => 'wbc', // WBC
+  ];
+
+////// このカテゴリだったらタブ追加しない //////
+$exclude = 'tvguide';
+
+// DBオブジェクト作成
+$dbo = new db;
+$dbo->connect();
+$sql = <<<SQL_EOL
+SELECT
+  id
+FROM
+  u_categories
+WHERE
+  name_e = '{$exclude}'
+SQL_EOL;
+
+$dbo->query($sql);
+$exclude_category_id = $dbo->fetch_array()['id'];
+
+
 $force_reload_flag = $_GET['force_reload'] == 1 ? true : false;
 
 // 100件ずつ
@@ -9,12 +35,6 @@ $length = 100;
 $base_datetime = strtotime( '-2 hour');
 
 $search_api = $domain . '/api/v1/articles/search/';
-$search_word_category_list =
-  [
-    '平昌五輪'                => 'pyeongchang2018', // 平昌五輪
-    'アジアプロ野球チャンピオン' => 'wbc', // WBC
-  ];
-
 
 foreach ($search_word_category_list as $search_word => $category_name)
 {
@@ -26,7 +46,7 @@ foreach ($search_word_category_list as $search_word => $category_name)
   $res = json_decode($res, true);
   $count = $res['response']['count'];
 
-  $res = add_category($res['response']['articles'], $category_name, $force_reload_flag, $base_datetime);
+  $res = add_category($res['response']['articles'], $category_name, $force_reload_flag, $base_datetime, $exclude_category_id);
   $is_still_remain = $res['still_remain'];
   unset($res['still_remain']);
   $tab_additional_result[] = $res;
@@ -40,7 +60,7 @@ foreach ($search_word_category_list as $search_word => $category_name)
 
       $res = get_contents($url);
       $res = json_decode($res, true);
-      $res = add_category($res['response']['articles'], $category_name, $force_reload_flag, $base_datetime);
+      $res = add_category($res['response']['articles'], $category_name, $force_reload_flag, $base_datetime, $exclude_category_id);
 
       $is_still_remain = $res['still_remain'];
       unset($res['still_remain']);
@@ -73,7 +93,7 @@ function generate_search_url($domain, $search_word, $offset=0, $length=100)
 
 }
 
-function add_category($article_list, $category_name, $force_reload_flag=false, $base_datetime)
+function add_category($article_list, $category_name, $force_reload_flag=false, $base_datetime, $exclude_category_id)
 {
   $id_list = [];
   $status = 'SQL未実行';
@@ -113,6 +133,8 @@ FROM
 WHERE
   u_categories.name_e = '{$category_name}'
 AND
+  repo_n.m1 <> {$exclude_category_id}
+AND
   repo_n.m2 IS NULL
 AND
   (
@@ -127,6 +149,7 @@ SQL_EOL;
   }
 
   return [
+    'sql'           => $sql, // TODO comment out!!!
     'category_name' => $category_name,
     'status'        => $status,
     'count'         => $updated_row_count,
