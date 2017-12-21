@@ -243,16 +243,6 @@ class ViewModel {
     if ( is_array($categories) ) :
       foreach( $categories as $key => $value ) :
 
-        # 冒頭に「すべて」を追加
-        if ( $key == 0 ) :
-          $categoriesArray['all'] = array(
-            'label'     => 'すべて',
-            'slug'      => 'all',
-            'url'       => $this->default['site_url'].'category/all',
-            'title_img' => '',
-          );
-        endif;
-
         $categoriesArray[$value['slug']] = $value;
 
       endforeach;
