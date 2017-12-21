@@ -50,6 +50,7 @@ const ReactDOM = self.ReactDOM;
 /**
  * archive 親コンテナ
  * @deprecated 2016-09-20 remove
+ * future remove
  */
 export class SPViewCategoryRoot extends View {
   /**

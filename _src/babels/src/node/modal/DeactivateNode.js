@@ -43,6 +43,8 @@ export let DeactivateNode = React.createClass( {
     };
   },
   getInitialState: function() {
+    console.error('[DeactivateNode] deprecated');
+
     return {
       show: this.props.show,
       css: {opacity: 0}

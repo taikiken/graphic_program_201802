@@ -35,6 +35,8 @@ export let CommentMoreViewNode = React.createClass( {
     };
   },
   getInitialState: function() {
+    console.error('[CommentMoreViewNode] deprecated');
+
     return {
       loading: '',
       show: this.props.show,

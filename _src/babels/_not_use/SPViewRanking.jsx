@@ -43,7 +43,7 @@ const ReactDOM = self.ReactDOM;
 
 /**
  * 人気記事 一覧
- * TODO: future check remove
+ * future check remove
  */
 export default class SPViewRanking extends ViewRanking {
   /**

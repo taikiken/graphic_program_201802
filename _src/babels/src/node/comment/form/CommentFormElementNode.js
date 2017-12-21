@@ -100,7 +100,7 @@ export let CommentFormElementNode = React.createClass( {
     this.errors = {
       body: new ErrorMessage()
     };
-
+    console.error('[CommentFormNode] deprecated');
     return {
       error: false,
       loading: '',

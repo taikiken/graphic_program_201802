@@ -90,6 +90,8 @@ export const RankingNode = React.createClass( {
   //   };
   // },
   render: function() {
+    console.error('[RankingNode] deprecated');
+
     let p = this.props;
     let standing = p.index + 1;
     let imgStyle = {

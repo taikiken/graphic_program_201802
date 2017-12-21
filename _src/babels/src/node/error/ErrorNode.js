@@ -24,6 +24,7 @@ export let ErrorNode = React.createClass( {
     message: React.PropTypes.string.isRequired
   },
   render: function() {
+    console.error('[ErrorNode] deprecated');
 
     if ( this.props.message === '' ) {
       return null;

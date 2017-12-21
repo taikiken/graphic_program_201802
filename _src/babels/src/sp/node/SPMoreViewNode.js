@@ -58,6 +58,7 @@ export const SPMoreViewNode = React.createClass( {
      * @private
      */
     this.page = 1;
+    console.error('[SPMoreViewNode] deprecated');
 
     return {
       disable: false,

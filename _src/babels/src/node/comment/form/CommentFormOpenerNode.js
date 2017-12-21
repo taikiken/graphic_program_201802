@@ -40,7 +40,7 @@ export let CommentFormOpenerNode = React.createClass( {
     // ReplyStatus instance
     this.replyStatus = null;
     this.opened = false;
-    
+    console.error('[CommentFormOpenerNode] deprecated');
     return {
       toggle: 'reply'
     };

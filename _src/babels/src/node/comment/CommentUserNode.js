@@ -34,6 +34,8 @@ export let CommentUserNode = React.createClass( {
     displayDate: React.PropTypes.string.isRequired
   },
   render: function() {
+    console.error('[CommentUserNode] deprecated');
+
     return (
       <figure className="comment-user">
         <span className="comment-user-link">

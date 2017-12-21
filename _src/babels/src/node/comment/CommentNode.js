@@ -80,6 +80,7 @@ export const CommentNode = React.createClass( {
   },
   getInitialState: function() {
     this.replyStatus = null;
+    console.error('[CommentNode] deprecated');
 
     return {
       open: this.props.open,

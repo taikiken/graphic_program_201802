@@ -81,6 +81,7 @@ export let SPCommentNode = React.createClass( {
   },
   getInitialState: function() {
     this.replyStatus = null;
+    console.error('[SPCommentNode] deprecated');
 
     return {
       open: this.props.open,

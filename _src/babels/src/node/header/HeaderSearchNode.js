@@ -48,6 +48,7 @@ export let HeaderSearchNode = React.createClass( {
     this.errors = {
       keyword: new ErrorMessage()
     };
+    console.error('[HeaderSearchNode] deprecated');
 
     return {
       focus: '',

@@ -31,6 +31,8 @@ export const RecommendTitleNode = React.createClass( {
     title: React.PropTypes.string
   },
   getDefaultProps: function() {
+    console.error('[RecommendTitleNode] deprecated');
+
     return {
       slug: 'all',
       label: '',

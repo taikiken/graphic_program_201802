@@ -43,7 +43,7 @@ const ReactDOM = self.ReactDOM;
 
 /**
  * SP 動画一覧, PC と違いカテゴリと同じく 10件ずつ読み込みます
- * TODO: future check remove
+ * future check remove
  */
 export default class SPViewVideos extends ViewVideos {
   /**

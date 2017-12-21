@@ -61,6 +61,7 @@ export let CommentFormNode = React.createClass( {
   getInitialState: function() {
     this.replyStatus = null;
     // this.canOpen = true;
+    console.error('[CommentFormNode] deprecated');
 
     return {
       // form 表示初期値, 記事コメント以外は閉じる
