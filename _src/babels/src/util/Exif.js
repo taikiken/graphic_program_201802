@@ -19,13 +19,13 @@ import {EventDispatcher} from '../event/EventDispatcher';
  * @type {symbol}
  * @private
  */
-const _symbol = Symbol('Exif for singleton');
+const symbol = Symbol('Exif for singleton');
 /**
  * singleton Exif instance
  * @type {?Exif}
  * @private
  */
-let _instance = null;
+let singletonInstance = null;
 /**
  * <p>Exif orientation check</p>
  * <p>iOS カメラロール画像からユーザーアイコンを取得すると横向きになるために exif orientation 値を取得し向きを正規化します</p>
@@ -170,7 +170,7 @@ export class Exif extends EventDispatcher {
     let offset = 2;
 
     while (offset < length) {
-      let marker = view.getUint16( offset, false );
+      let marker = view.getUint16(offset, false);
       offset += 2;
 
       if (marker === 0xFFE1) {
@@ -203,10 +203,10 @@ export class Exif extends EventDispatcher {
    * @return {Exif} Exif instance を返します
    */
   static factory() {
-    if (_instance === null) {
-      _instance = new Exif(_symbol);
+    if (singletonInstance === null) {
+      singletonInstance = new Exif(symbol);
     }
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  CONSTRUCTOR
@@ -218,32 +218,33 @@ export class Exif extends EventDispatcher {
    * @return {LogoutStatus} LogoutStatus instance を返します
    */
   constructor(target) {
-    if (_symbol !== target) {
+    if (symbol !== target) {
       throw new Error( 'Exif is static Class. not use new Exif(). instead Exif.factory()' );
     }
-    if (_instance === null) {
-      super();
-      _instance = this;
-      /**
-       * FileReader instance
-       * @type {null|FileReader}
-       * @private
-       */
-      this._reader = null;
-      /**
-       * bind 済み this.onLoad event handler
-       * @type {Function}
-       * @private
-       */
-      this._boundLoad = this.onLoad.bind( this );
-      /**
-       * bind 済み this.onError event handler
-       * @type {Function}
-       * @private
-       */
-      this._boundError = this.onError.bind( this );
+    if (singletonInstance) {
+      return singletonInstance;
     }
-    return _instance;
+    // ---
+    super();
+    /**
+     * FileReader instance
+     * @type {FileReader}
+     * @private
+     */
+    this.fileReader = new FileReader();
+    /**
+     * bind 済み this.onLoad event handler
+     * @type {Function}
+     * @private
+     */
+    this.onLoad = this.onLoad.bind(this);
+    /**
+     * bind 済み this.onError event handler
+     * @type {Function}
+     * @private
+     */
+    this.onError = this.onError.bind(this);
+    return this;
   }
   // ---------------------------------------------------
   //  METHODS
@@ -253,11 +254,13 @@ export class Exif extends EventDispatcher {
    * @param {Blob} file 調査対象ファイル
    */
   orientation(file) {
-    const reader = new FileReader();
-    this._reader = reader;
-    reader.addEventListener('load', this._boundLoad, false);
-    reader.addEventListener('error', this._boundError, false);
-    let part;
+    // const reader = new FileReader();
+    this.dispose();
+    const fileReader = this.fileReader;
+    // this.fileReader = reader;
+    fileReader.addEventListener('load', this.onLoad, false);
+    fileReader.addEventListener('error', this.onError, false);
+    let part = file;
     const end = 64 * 1024;
     // Blob.slice
     // https://developer.mozilla.org/en-US/docs/Web/API/Blob/slice
@@ -270,10 +273,11 @@ export class Exif extends EventDispatcher {
     } else if (typeof file.mozSlice === 'function') {
       // moz(firefox)
       part = file.mozSlice(0, end);
-    } else {
-      part = file;
     }
-    reader.readAsArrayBuffer(part);
+    // else {
+    //   part = file;
+    // }
+    fileReader.readAsArrayBuffer(part);
   }
 
   /**
@@ -301,8 +305,9 @@ export class Exif extends EventDispatcher {
    * event handler を unbind します
    */
   dispose() {
-    this._reader.removeEventListener('load', this._boundLoad);
-    this._reader.removeEventListener('error', this._boundError);
+    const fileReader = this.fileReader;
+    fileReader.removeEventListener('load', this.onLoad);
+    fileReader.removeEventListener('error', this.onError);
   }
 }
 

@@ -15,9 +15,8 @@
 // let _symbol = Symbol();
 
 /**
- * <h3>文字フォーマットに関するUtilityです</h3>
- * 全て static<br>
- * ** 文字を定型に変換します **
+ * 文字フォーマットに関するUtilityです ** 文字を定型に変換します **
+ * - 全て static
  */
 export class Format {
   // /**

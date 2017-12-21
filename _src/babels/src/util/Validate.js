@@ -30,15 +30,15 @@ export class Validate {
   /**
    * email 形式かを調べます
    * @param {string} email メールアドレス
-   * @returns {Boolean} メールアドレス型チェック 真偽値 true: 正しい を返します
+   * @returns {boolean} メールアドレス型チェック 真偽値 true: 正しい を返します
    */
-  static email(email:string) {
+  static email(email) {
     return !!email.match(/^[\w!#$%&'*+\/=?\^_@{}\\|~\-]+([\w!#$%&'*+\/=?\^_{}\\|~\.\-]+)*@([\w][\w\-]*\.)+[\w][\w\-]*$/);
   }
   /**
    * アルファベット, 数字かを調べます
    * @param {string} string 調査対象文字列
-   * @returns {Boolean} 合致するか否かの真偽値を返します
+   * @returns {boolean} 合致するか否かの真偽値を返します
    */
   static alphaNum(string) {
     return !!string.match(/^[a-z0-9]+$/i);
