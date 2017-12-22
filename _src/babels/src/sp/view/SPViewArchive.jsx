@@ -83,16 +83,14 @@ export default class SPViewArchive extends View {
     /**
      * ArticleDom instance を保持します
      * first render を区別するためにも使用します
-     * @type {null|ReactClass}
-     * @protected
+     * @type {?ReactClass}
      */
-    this._articleRendered = null;
+    this.articleRendered = null;
     /**
      * more button instance (SPMoreViewDom) を保持します
-     * @type {null|ReactClass}
-     * @protected
+     * @type {?ReactClass}
      */
-    this._moreRendered = null;
+    this.moreRendered = null;
     /**
      * response.request object を保持する
      * @type {null|Object}
@@ -115,6 +113,10 @@ export default class SPViewArchive extends View {
      * @default all
      */
     this._slug = 'all';
+    /**
+     * bind moreButton
+     * @type {function}
+     */
     this.moreButton = this.moreButton.bind(this);
   }
   // ---------------------------------------------------
@@ -172,20 +174,20 @@ export default class SPViewArchive extends View {
   set articles(responseArticles) {
     this._articles = responseArticles;
   }
-  /**
-   * SPArchiveNode instance を取得します
-   * @return {?ReactClass} SPArchiveNode instance を返します
-   */
-  get articleRendered() {
-    return this._articleRendered;
-  }
-  /**
-   * SPArchiveNode instance を設定します
-   * @param {?ReactClass} article SPArchiveNode instance
-   */
-  set articleRendered(article) {
-    this._articleRendered = article;
-  }
+  // /**
+  //  * SPArchiveNode instance を取得します
+  //  * @return {?ReactClass} SPArchiveNode instance を返します
+  //  */
+  // get articleRendered() {
+  //   return this._articleRendered;
+  // }
+  // /**
+  //  * SPArchiveNode instance を設定します
+  //  * @param {?ReactClass} article SPArchiveNode instance
+  //  */
+  // set articleRendered(article) {
+  //   this._articleRendered = article;
+  // }
   /**
    * response.request object を取得します
    * @return {?Object} response.request object を返します
@@ -200,20 +202,20 @@ export default class SPViewArchive extends View {
   set request(request) {
     this._request = request;
   }
-  /**
-   * more button instance (SPMoreViewDom) を取得します
-   * @return {?ReactClass} more button instance (SPMoreViewDom) を返します
-   */
-  get moreRendered() {
-    return this._moreRendered;
-  }
-  /**
-   * more button instance (SPMoreViewDom) を設定します
-   * @param {?ReactClass} moreRendered more button instance (SPMoreViewDom)
-   */
-  set moreRendered(moreRendered) {
-    this._moreRendered = moreRendered;
-  }
+  // /**
+  //  * more button instance (SPMoreViewDom) を取得します
+  //  * @return {?ReactClass} more button instance (SPMoreViewDom) を返します
+  //  */
+  // get moreRendered() {
+  //   return this._moreRendered;
+  // }
+  // /**
+  //  * more button instance (SPMoreViewDom) を設定します
+  //  * @param {?ReactClass} moreRendered more button instance (SPMoreViewDom)
+  //  */
+  // set moreRendered(moreRendered) {
+  //   this._moreRendered = moreRendered;
+  // }
   // ---------------------------------------------------
   //  Method
   // ---------------------------------------------------
@@ -382,11 +384,11 @@ export default class SPViewArchive extends View {
    * @param {boolean} show true の時にボタンを表示させ機能させます
    */
   moreButton(show) {
+    // console.warn('SPViewArchive.moreButton', this.moreElement);
     // element check, null あり
     if (!this.moreElement) {
       return;
     }
-    // // console.log('SPViewArchive.moreButton', this.moreElement);
     // if (this.moreRendered === null) {
     //   // チェックをパスし実行する
     //   this.moreRendered = ReactDOM.render(

@@ -238,7 +238,7 @@ export default class SPComponentMoreButton extends React.Component {
    */
   componentDidMount() {
     // let rise = this.rise;
-
+    // console.log('SPComponentMoreButton.componentDidMount', this.afterClick);
     if (this.state.show) {
       // mount 後
       // button が表示されているなら rise 監視を始める
