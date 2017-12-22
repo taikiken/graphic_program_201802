@@ -10,7 +10,7 @@
  *
  */
 // app
-import { Dom } from '../../app/Dom';
+import Dom from '../../app/Dom';
 import { Message } from '../../app/const/Message';
 import { Empty } from '../../app/const/Empty';
 

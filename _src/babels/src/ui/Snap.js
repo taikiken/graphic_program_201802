@@ -83,8 +83,8 @@ export class Snap extends EventDispatcher {
      */
     this.boundComplete = this.scrollComplete.bind(this);
     /**
-     * 近接閾値<br>
-     * 閾値以下（接近）になるとスナップします
+     * 近接閾値
+     * - 閾値以下（接近）になるとスナップします
      * @type {number}
      * @since 2016-10-28
      */
@@ -365,13 +365,16 @@ export class Snap extends EventDispatcher {
    * .loaded-post { border-top: 20px; }
    * ```
    * @return {number} top 位置に + するオフセット値 - SP: 80 | PC: 0
-   * @since 2017-06-19 - hotfix
    * @see https://github.com/undotsushin/undotsushin/issues/2078
+   * @since 2017-06-19 - hotfix
+   * @since 2017-12-22 80 to 75
    */
   scrollOffset() {
     // return 0;
     // sp 構造が変更され offset 80 必要になる - on 2017-06-19
-    return this.sp ? 80 : 0;
+    // return this.sp ? 80 : 0;
+    // @since 2017-12-22 80 to 75
+    return this.sp ? 75 : 0;
   }
   /**
    * scroll animation 完了 callback<br>

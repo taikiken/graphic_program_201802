@@ -12,19 +12,18 @@
 
 
 // const _symbol = Symbol();
-let _mode = 'production';
+let modeValue = 'production';
 
 /**
- * <p>local test / develop / production を管理します</p>
- * <p>全て static<br>
- * 動作モードを設定します</p>
- * <pre>
- * production: 実行モード
- * develop: 開発モード（ローカルからのテスト）
- * test: ローカルテストモード
- * </pre>
+ * local test / develop / production を管理します
+ * - 全て static
+ * - 動作モードを設定します
+ *
+ * - production: 実行モード
+ * - develop: 開発モード（ローカルからのテスト）
+ * - test: ローカルテストモード
  */
-export class Env {
+export default class Env {
   // /**
   //  * static class です, instance を作成しません
   //  * @param {Symbol} target Singleton を実現するための private symbol
@@ -46,7 +45,7 @@ export class Env {
    * @return {string} 現在のモードを返します
    */
   static get mode() {
-    return _mode;
+    return modeValue;
   }
   /**
    * PRODUCTION
@@ -111,36 +110,36 @@ export class Env {
    * ローカルテスト(vagrant)モードにします
    */
   static local() {
-    _mode = Env.LOCAL;
+    modeValue = Env.LOCAL;
   }
   /**
    * ローカルテストモードにします
    */
   static test() {
-    _mode = Env.TEST;
+    modeValue = Env.TEST;
   }
   /**
    * 開発モードにします
    */
   static develop() {
-    _mode = Env.DEVELOP;
+    modeValue = Env.DEVELOP;
   }
   /**
    * 実行モードにします
    */
   static production() {
-    _mode = Env.PRODUCTION;
+    modeValue = Env.PRODUCTION;
   }
   /**
    * dev 環境にします
    */
   static dev() {
-    _mode = Env.DEV;
+    modeValue = Env.DEV;
   }
   /**
    * stg 環境にします
    */
   static stg() {
-    _mode = Env.STG;
+    modeValue = Env.STG;
   }
 }

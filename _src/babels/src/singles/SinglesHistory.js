@@ -104,12 +104,12 @@ export class SinglesHistory extends EventDispatcher {
      */
     this.twitterSite = () => twitterSite;
 
-    const pages = NextPages.factory();
+    // const pages = NextPages.factory();
     /**
      * 記事一覧を管理します - NextPages instance
      * @type {NextPages}
      */
-    this.pages = pages;
+    this.pages = NextPages.factory();
 
     let base = '';
     /**

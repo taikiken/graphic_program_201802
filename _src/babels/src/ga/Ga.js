@@ -10,7 +10,7 @@
  *
  */
 
-import {Env} from '../app/Env';
+import Env from '../app/Env';
 import {GaData} from './GaData';
 
 /**

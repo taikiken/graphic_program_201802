@@ -11,7 +11,7 @@
  */
 
 
-import {Env} from './Env';
+import Env from './Env';
 import {Path} from './const/Path';
 import {Types} from '../net/Types';
 import {Type} from '../net/types/Type';
@@ -25,8 +25,8 @@ import {Query} from '../net/types/Query';
 // - IP: 52.69.203.137
 // - HOST: undotsushin.com
 /**
- * <p>API リクエストの ホストをどこにするかを {@link Env}.mode を元に決定します</p>
- * <p>本番サーバーでは ホスト名は不要になります</p>
+ * API リクエストの ホストをどこにするかを {@link Env}.mode を元に決定します
+ *  - 本番サーバーでは ホスト名は不要になります
  *
  * @return {string} API リクエストの ホストをプロトコル付で返します
  * @private
@@ -34,7 +34,7 @@ import {Query} from '../net/types/Query';
  */
 const apiRoot = () => {
   // let n = parseInt( port, 10 );
-  switch ( Env.mode ) {
+  switch (Env.mode) {
     case Env.LOCAL :
       return 'http://192.168.33.50';
     case Env.TEST :
@@ -509,7 +509,7 @@ let apiData = buildPath();
  *
  * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=986840481
  */
-export class ApiDae {
+export default class ApiDae {
   // /**
   //  * static class です, instance を作成しません
   //  * @param {Symbol} target Singleton を実現するための private symbol

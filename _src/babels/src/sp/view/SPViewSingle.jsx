@@ -15,7 +15,7 @@
 import ViewSingle from '../../view/ViewSingle';
 
 // app
-import { Dom } from '../../app/Dom';
+import Dom from '../../app/Dom';
 
 // data
 // import {Safety} from '../../data/Safety';

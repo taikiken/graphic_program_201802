@@ -32,8 +32,8 @@ const _symbol = Symbol('Router instance symbol');
 let _instance = null;
 
 /**
- * <p>location.pathnameから現在地を調べます</p>
- * <p>全て static です</p>
+ * location.pathnameから現在地を調べます
+ * - 全て static です
  *
  * @example
  * var router = Router.factory();
@@ -46,7 +46,7 @@ let _instance = null;
  * router.route();
  *
  */
-export class Router extends EventDispatcher {
+export default class Router extends EventDispatcher {
   // ---------------------------------------------------
   //  STATIC CONST
   // ---------------------------------------------------
@@ -54,28 +54,28 @@ export class Router extends EventDispatcher {
    * event type NOT_FOUND
    * @return {string} NOT_FOUND を返します
    */
-  static get NOT_FOUND():string {
+  static get NOT_FOUND() {
     return 'routeNotFound';
   }
   /**
    * event type AUTHORITY_ERROR
    * @return {string} AUTHORITY_ERROR を返します
    */
-  static get AUTHORITY_ERROR():string {
+  static get AUTHORITY_ERROR() {
     return 'routeAuthorityError';
   }
   /**
    * event type INDEX
    * @return {string} INDEX を返します
    */
-  static get INDEX():string {
+  static get INDEX() {
     return 'routeIndex';
   }
   /**
    * event type CATEGORY
    * @return {string} CATEGORY を返します
    */
-  static get CATEGORY():string {
+  static get CATEGORY() {
     return 'routeCategory';
   }
   /**
@@ -96,56 +96,56 @@ export class Router extends EventDispatcher {
    * event type SINGLE
    * @return {string} SINGLE を返します
    */
-  static get SINGLE():string {
+  static get SINGLE() {
     return 'routeSingle';
   }
   /**
    * event type COMMENT
    * @return {string} COMMENT を返します
    */
-  static get COMMENT():string {
+  static get COMMENT() {
     return 'routeComment';
   }
   /**
    * event type COMMENT_REPLY
    * @return {string} COMMENT_REPLY を返します
    */
-  static get COMMENT_REPLY():string {
+  static get COMMENT_REPLY() {
     return 'routeCommentReply';
   }
   /**
    * event type SEARCH
    * @return {string} SEARCH を返します
    */
-  static get SEARCH():string {
+  static get SEARCH() {
     return 'routeSearch';
   }
   /**
    * event type SIGNUP_LOGIN
    * @return {string} SIGNUP_LOGIN を返します
    */
-  static get SIGNUP_LOGIN():string {
+  static get SIGNUP_LOGIN() {
     return 'routeSignupLogin';
   }
   /**
    * event type SIGNUP
    * @return {string} SIGNUP を返します
    */
-  static get SIGNUP():string {
+  static get SIGNUP() {
     return 'routeSignup';
   }
   /**
    * event type SIGNUP_ACCOUNT
    * @return {string} SIGNUP_ACCOUNT を返します
    */
-  static get SIGNUP_ACCOUNT():string {
+  static get SIGNUP_ACCOUNT() {
     return 'routeSignupAccount';
   }
   /**
    * event type SIGNUP_INTEREST
    * @return {string} SIGNUP_INTEREST を返します
    */
-  static get SIGNUP_INTEREST():string {
+  static get SIGNUP_INTEREST() {
     return 'routeSignupInterest';
   }
   /**
@@ -160,77 +160,77 @@ export class Router extends EventDispatcher {
    * event type LOGIN
    * @return {string} LOGIN を返します
    */
-  static get LOGIN():string {
+  static get LOGIN() {
     return 'routeLogin';
   }
   /**
    * event type LOGOUT
    * @return {string} LOGOUT を返します
    */
-  static get LOGOUT():string {
+  static get LOGOUT() {
     return 'routeLogout';
   }
   /**
    * event type RESET_PASSWORD
    * @return {string} RESET_PASSWORD を返します
    */
-  static get RESET_PASSWORD():string {
+  static get RESET_PASSWORD() {
     return 'routeResetPassword';
   }
   /**
    * event type RESET_PASSWORD_RESETTING
    * @return {string} RESET_PASSWORD_RESETTING を返します
    */
-  static get RESET_PASSWORD_RESETTING():string {
+  static get RESET_PASSWORD_RESETTING() {
     return 'routeResetPasswordResetting';
   }
   /**
    * event type MYPAGE
    * @return {string} MYPAGE を返します
    */
-  static get MYPAGE():string {
+  static get MYPAGE() {
     return 'routeMypage';
   }
   /**
    * event type MYPAGE_ACTIVITIES
    * @return {string} MYPAGE_ACTIVITIES を返します
    */
-  static get MYPAGE_ACTIVITIES():string {
+  static get MYPAGE_ACTIVITIES() {
     return 'routeMypageActivities';
   }
   /**
    * event type NOTIFICATIONS
    * @return {string} NOTIFICATIONS を返します
    */
-  static get NOTIFICATIONS():string {
+  static get NOTIFICATIONS() {
     return 'routeNotifications';
   }
   /**
    * event type SETTING
    * @return {string} SETTING を返します
    */
-  static get SETTING():string {
+  static get SETTING() {
     return 'routeSetting';
   }
   /**
    * event type SETTING_INTEREST
    * @return {string} SETTING_INTEREST を返します
    */
-  static get SETTING_INTEREST():string {
+  static get SETTING_INTEREST() {
     return 'routeSettingInterest';
   }
   /**
    * event type SETTING_SOCIAL
    * @return {string} SETTING_SOCIAL を返します
    */
-  static get SETTING_SOCIAL():string {
+  static get SETTING_SOCIAL() {
     return 'routeSettingSocial';
   }
   /**
    * event type SETTING_DEACTIVATE
    * @return {string} SETTING_DEACTIVATE を返します
    */
-  static get SETTING_DEACTIVATE():string {
+  static get SETTING_DEACTIVATE() {
     return 'routeSettingDeactivate';
   }
   // ---------------------------------------------------
@@ -240,7 +240,7 @@ export class Router extends EventDispatcher {
    * instance を生成します
    * @return {Router} Router instance を返します
    */
-  static factory():Router {
+  static factory() {
     if (_instance === null) {
       _instance = new Router(_symbol);
     }
@@ -531,7 +531,7 @@ export class Router extends EventDispatcher {
   /**
    * single detail page
    */
-  single():void {
+  single() {
     // comment, comment reply 振り分け
     const [articleId, comment, commentId, replyId] = Loc.path.replace('/p/', '').split('/');
     if (!!articleId && Number.isInteger(parseInt(articleId, 10))) {
@@ -541,7 +541,7 @@ export class Router extends EventDispatcher {
         this.comment( articleId, commentId, replyId );
       } else {
         // single page
-        this.dispatch( { type: Router.SINGLE, id: articleId } );
+        this.dispatch({ type: Router.SINGLE, id: articleId });
       }
     } else {
       // article Id ない
@@ -585,7 +585,7 @@ export class Router extends EventDispatcher {
         this.comment( articleId, commentId, replyId );
       } else {
         // single page
-        this.dispatch( { type: Router.SINGLE, id: articleId } );
+        this.dispatch({ type: Router.SINGLE, id: articleId });
       }
     } else {
       // article Id ない
@@ -616,14 +616,14 @@ export class Router extends EventDispatcher {
   /**
    * search 検索 page
    */
-  search():void {
+  search() {
     const [keyword] = Loc.path.replace( /\/search\/|\/search/ig, '' ).split('/');
 
     if (!!keyword) {
-      this.dispatch( { type: Router.SEARCH, keyword: keyword } );
+      this.dispatch({ type: Router.SEARCH, keyword: keyword });
     } else {
       // keyword がない
-      this.dispatch( { type: Router.SEARCH, keyword: '' } );
+      this.dispatch({ type: Router.SEARCH, keyword: '' });
       // this.page404( 'search' );
     }
   }
@@ -655,7 +655,7 @@ export class Router extends EventDispatcher {
     // console.log( 'signup page in fired' );
     // URL 遷移しない
     // 1 page コンテンツ
-    this.dispatch( { type: Router.SIGNUP } );
+    this.dispatch({ type: Router.SIGNUP });
 
   }
   /**
@@ -663,7 +663,7 @@ export class Router extends EventDispatcher {
    * @since 2017-11-06
    */
   signupWow() {
-    this.dispatch( { type: Router.SIGNUP_WOW } );
+    this.dispatch({ type: Router.SIGNUP_WOW });
   }
   /**
    * signup_login URL
@@ -709,7 +709,7 @@ export class Router extends EventDispatcher {
     if ( activities === 'activities' ) {
       this.activities();
     } else {
-      this.dispatch( { type: Router.MYPAGE } );
+      this.dispatch({ type: Router.MYPAGE });
     }
   }
   /**
@@ -733,7 +733,7 @@ export class Router extends EventDispatcher {
    * notifications page
    */
   notifications() {
-    this.dispatch( { type: Router.NOTIFICATIONS } );
+    this.dispatch({ type: Router.NOTIFICATIONS });
     /*
     if ( User.sign ) {
 

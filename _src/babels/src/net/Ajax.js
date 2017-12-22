@@ -11,7 +11,7 @@
  */
 
 // import {Env} from '../app/Env';
-import {Codes} from './../app/Codes';
+import Codes from './../app/Codes';
 // data
 import {Result} from '../data/Result';
 // dae

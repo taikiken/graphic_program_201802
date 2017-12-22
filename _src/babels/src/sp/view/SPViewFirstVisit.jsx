@@ -13,7 +13,7 @@
 import ViewFirstVisit from '../../view/ViewFirstVisit';
 
 // app
-import {Dom} from '../../app/Dom';
+import Dom from '../../app/Dom';
 
 import {Scroll} from '../../util/Scroll';
 

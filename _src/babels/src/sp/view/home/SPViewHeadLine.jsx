@@ -18,7 +18,7 @@ import SPComponentHeadlines from '../../component/headline/SPComponentHeadlines'
 
 // dae
 import {ArticleDae} from '../../../dae/ArticleDae';
-import { Dom } from '../../../app/Dom';
+import Dom from '../../../app/Dom';
 import SPComponentHeadlineArticleLast from '../../component/headline/SPComponentHeadlineArticleLast';
 
 // React

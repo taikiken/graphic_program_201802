@@ -15,7 +15,7 @@ import View from '../../view/View';
 import ViewHeaderMemberNotice from '../../view/header/ViewHeaderMemberNotice';
 import { User } from '../../app/User';
 import { Loc } from '../../util/Loc';
-import { Env } from '../../app/Env';
+import Env from '../../app/Env';
 import { Safety } from '../../data/Safety';
 import { Empty } from '../../app/const/Empty';
 import { Url } from '../../app/const/Url';

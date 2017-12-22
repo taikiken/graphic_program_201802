@@ -20,7 +20,7 @@ import {Safety} from '../data/Safety';
  * - `document.getElementById` で element を取得します
  * - 全て static です
  */
-export class Dom {
+export default class Dom {
   // /**
   //  * <p>PC / SP 共通です<br>
   //  * static class です, instance を作成しません</p>
@@ -50,10 +50,9 @@ export class Dom {
     return element;
   }
   /**
-   * <p>**PC**<br>
-   * body > .whole を取得します</p>
-   *
-   * body > div#whole Element
+   * **PC**
+   * - body > .whole を取得します
+   * - body > div#whole Element
    * @return {?Element} whole element を返します
    */
   static whole() {
@@ -61,10 +60,8 @@ export class Dom {
   }
   /**
    * body > .whole を取得します
-   *
    * - SP -> #page
    * - PC -> #whole
-   *
    * body > div#page Element
    * @return {?Element} whole element を返します
    */

@@ -15,7 +15,7 @@ import { Safety } from '../../../data/Safety';
 
 // app
 import { Empty } from '../../../app/const/Empty';
-import { Env } from '../../../app/Env';
+import Env from '../../../app/Env';
 
 // dae
 import { ArticleDae } from '../../../dae/ArticleDae';
@@ -38,6 +38,9 @@ import SPComponentSingleRankingAd from './ad/SPComponentSingleRankingAd';
 import { Ga } from '../../../ga/Ga';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 // ---------------------------------------------------

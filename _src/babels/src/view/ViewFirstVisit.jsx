@@ -15,7 +15,7 @@
 import View from './View';
 
 // app
-import {Dom} from '../app/Dom';
+import Dom from '../app/Dom';
 
 // net
 import {Cookie} from '../net/Cookie';

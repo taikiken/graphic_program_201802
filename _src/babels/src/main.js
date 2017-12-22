@@ -22,11 +22,11 @@
 
 // -------------------------------------
 // app
-import {App} from './app/App';
+import App from './app/App';
 import {User} from './app/User';
 import {CommentsType} from './app/const/CommentsType';
-import {Dom} from './app/Dom';
-import {Router} from './app/Router';
+import Dom from './app/Dom';
+import Router from './app/Router';
 
 // -------------------------------------
 // util

@@ -34,7 +34,7 @@ import { CategoriesDae } from '../dae/categories/CategoriesDae';
 import { SlugDae } from '../dae/categories/SlugDae';
 
 // app
-import { Dom } from '../app/Dom';
+import Dom from '../app/Dom';
 import { User } from '../app/User';
 import { Message } from '../app/const/Message';
 

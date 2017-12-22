@@ -13,7 +13,7 @@
 // babels_exe から移植
 
 // app
-import { Dom } from '../app/Dom';
+import Dom from '../app/Dom';
 
 // util
 import { Scroll } from '../util/Scroll';

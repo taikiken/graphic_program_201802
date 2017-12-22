@@ -13,13 +13,13 @@
 
 import {Types} from './Types';
 import {User} from './../app/User';
-import {ApiDae} from './../app/ApiDae';
+import ApiDae from './../app/ApiDae';
 
 // const _symbol = Symbol('');
 
 /**
- * <h3>サーバーリクエストAPIを管理します</h3>
- * 全て static
+ * サーバーリクエストAPIを管理します
+ * - 全て static
  */
 export class Api {
   // /**
@@ -37,10 +37,10 @@ export class Api {
   //
   // }
   /**
-   * <p>/api/ 前 domain を再生成します<br>
-   * test, develop 切り替えに使用します</p>
-   * <p><code>Api.rebuild()</code>を直接実行することは推奨しません</p>
-   * <code>App.test(), App.develop(), App.production()</code>を使用してください。
+   * `/api/` 前 domain を再生成します
+   * - test, develop 切り替えに使用します
+   * - `Api.rebuild()` を直接実行することは推奨しません
+   * - `App.test()`, `App.develop()`, `App.production()` を使用してください。
    *
    * @example
    * // develop
@@ -211,9 +211,7 @@ export class Api {
    * @return {Types} detail API をTypes instanceで返します
    */
   static single() {
-
     return ApiDae.api('single');
-
   }
   /**
    * @deprecated instead use Api.single
@@ -241,7 +239,6 @@ export class Api {
    * @return {Types} bookmark API をTypes instanceで返します
    */
   static bookmark(action) {
-
     // bookmark は 登録 or 削除 機能のみ
     // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=1840096099
     switch (action) {
@@ -254,7 +251,6 @@ export class Api {
       default:
         throw new Error(`bookmark illegal action: ${action}`);
     }
-
   }
   // ----------------------------------
   // comment
@@ -375,7 +371,6 @@ export class Api {
 
       default:
         throw new Error( `users illegal action: ${action}.` );
-
     }
   }
   /**

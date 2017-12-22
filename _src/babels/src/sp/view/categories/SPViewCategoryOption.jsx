@@ -11,7 +11,7 @@
  */
 
 // app
-import { Dom } from '../../../app/Dom';
+import Dom from '../../../app/Dom';
 
 // view
 import ViewCategoryOption from '../../../view/categories/ViewCategoryOption';
