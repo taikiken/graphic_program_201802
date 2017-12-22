@@ -243,5 +243,5 @@ EOD;
 if($mes){
   echo "result : Error (".$mes.")";
 }else {
-  echo date("Y/m/d",$today)." と ".date("Y/m/d",$yesterday)." のフォト記事の登録に成功しました";
+  echo date("Y/m/d",$today)." と ".date("Y/m/d",$yesterday)." のフォト記事を登録しました";
 }
