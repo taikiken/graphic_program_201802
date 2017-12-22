@@ -169,6 +169,7 @@ export default class SPComponentHeadlines extends React.Component {
                     mediaType={dae.mediaType}
                     home={home}
                     anotherCategories={dae.anotherCategories}
+                    isNew={dae.isNew || false}
                   />
                 );
               })

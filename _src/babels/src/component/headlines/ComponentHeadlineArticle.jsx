@@ -92,6 +92,7 @@ export default class ComponentHeadlineArticle extends React.Component {
       home: React.PropTypes.bool.isRequired,
       // anotherCategories - 2017-09-14
       anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae).isRequired,
+      // 2017-12-22
       isNew: React.PropTypes.bool.isRequired,
     };
   }
