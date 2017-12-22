@@ -25,7 +25,7 @@ import {Safety} from '../../data/Safety';
 //
 // // sp.node
 // import {SPArchiveNode} from '../node/SPArchiveNode';
-import {SPMoreViewNode} from '../node/SPMoreViewNode';
+// import {SPMoreViewNode} from '../node/SPMoreViewNode';
 import SPComponentMoreButton from '../component/articles/SPComponentMoreButton';
 //
 // // Ga
