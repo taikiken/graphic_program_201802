@@ -22,14 +22,14 @@ import {Loc} from '../util/Loc';
  * @type {Symbol}
  * @private
  */
-const _symbol = Symbol('Router instance symbol');
+const routerSymbol = Symbol('Router instance symbol');
 
 /**
  * Router singleton instance
  * @type {?Router}
  * @private
  */
-let _instance = null;
+let routerInstance = null;
 
 /**
  * location.pathnameから現在地を調べます
@@ -241,10 +241,10 @@ export default class Router extends EventDispatcher {
    * @return {Router} Router instance を返します
    */
   static factory() {
-    if (_instance === null) {
-      _instance = new Router(_symbol);
+    if (routerInstance === null) {
+      routerInstance = new Router(routerSymbol);
     }
-    return _instance;
+    return routerInstance;
   }
   // ---------------------------------------------------
   //  CONSTRUCTOR
@@ -257,11 +257,11 @@ export default class Router extends EventDispatcher {
    * @return {Router} Router instance を返します
    */
   constructor(target) {
-    if (_symbol !== target) {
-      throw new Error( 'Router is static Class. not use new Router(). instead Router.factory()' );
+    if (routerSymbol !== target) {
+      throw new Error('Router is static Class. not use new Router(). instead Router.factory()');
     }
-    if (_instance) {
-      return _instance;
+    if (routerInstance) {
+      return routerInstance;
     }
     // -------------
     super();
@@ -285,7 +285,7 @@ export default class Router extends EventDispatcher {
     this.settings = this.settings.bind(this);
     this.signupWow = this.signupWow.bind(this);
     // -------------
-    this._rule = {
+    this.rule = {
       '/': this.index,
       '/category/': this.category,
       '/area/': this.category,
@@ -389,10 +389,10 @@ export default class Router extends EventDispatcher {
   //   };
   // }
   /**
-   * <code>location.pathname</code> から経路探索を行います
+   * `location.pathname` から経路探索を行います
    */
   route() {
-    const rule = this._rule;
+    const rule = this.rule;
     const path = Loc.path;
     const pathLength = path.length;
     // let found = false;

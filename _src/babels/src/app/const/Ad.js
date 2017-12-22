@@ -12,66 +12,67 @@
  */
 import {Loc} from '../../util/Loc';
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 /**
- * 広告接続先
+ * 広告接続先 を管理します
+ * - static class です, instance を作成しません
  */
 export class Ad {
-  /**
-   * <p>広告接続先 を管理します</p>
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target:Symbol ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Ad is static Class. not use new Ad().' );
-
-    }
-
-  }
+  // /**
+  //  * <p>広告接続先 を管理します</p>
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target:Symbol ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Ad is static Class. not use new Ad().' );
+  //
+  //   }
+  //
+  // }
   /**
    * ID
    * @return {string} __TARGET_ID__ を返します
    */
-  static get ID():string {
+  static get ID() {
     return '__TARGET_ID__';
   }
   // /**
   //  * 株式会社運動通信社 運動通信_SPWeb - 一面 - ヘッドライン下部(フリー型) 40724
   //  * @returns {string} ヘッドライン下部(フリー型)
   //  */
-  // static get SP_40724():string {
+  // static get SP_40724() {
   //   return `${Ad.host()}/sdk/js/adg-script-loader.js?id=35255&targetID=adg_35255&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
   // }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 一覧 - 記事一覧内(フリー型) 40713
    * @returns {string} 一覧 - 記事一覧内(フリー型)
    */
-  static get SP_40713():string {
+  static get SP_40713() {
     return `${Ad.host()}/sdk/js/adg-script-loader.js?id=35244&targetID=${Ad.ID}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
   }
   // /**
   //  * 株式会社運動通信社 運動通信_SPWeb - 詳細 - 記事下(フリー型) 40714
   //  * @returns {string} 詳細 - 記事下(フリー型)
   //  */
-  // static get SP_40714():string {
+  // static get SP_40714() {
   //   return `${Ad.host()}/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
   // }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 詳細 - 公式コメンテーター一覧下(フリー型) 40680
    * @returns {string} 詳細 - 公式コメンテーター一覧下(フリー型)
    */
-  static get SP_40680():string {
+  static get SP_40680() {
     return `${Ad.host()}/sdk/js/adg-script-loader.js?id=35208&targetID=${Ad.ID}&displayid=3&adType=INFEED&async=true&tagver=2.0.0`;
   }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 詳細 - みんなのコメント一覧下(フリー型) 40681
    * @returns {string} 詳細 - みんなのコメント一覧下(フリー型)
    */
-  static get SP_40681():string {
+  static get SP_40681() {
     return `${Ad.host()}/sdk/js/adg-script-loader.js?id=35209&targetID=${Ad.ID}&displayid=3&adType=INFEED&async=true&tagver=2.0.0`;
   }
   // ----------------
@@ -81,7 +82,7 @@ export class Ad {
    * 記事一覧内
    * @returns {string} 記事一覧内 Ad
    */
-  static get SP_NEWS():string {
+  static get SP_NEWS() {
     return Ad.SP_40713;
   }
   /**
@@ -89,7 +90,7 @@ export class Ad {
    * 公式コメンテーター一覧下
    * @returns {string} 公式コメンテーター一覧下 Ad
    */
-  static get SP_OFFICIAL():string {
+  static get SP_OFFICIAL() {
     return Ad.SP_40680;
   }
   /**
@@ -97,7 +98,7 @@ export class Ad {
    * みんなのコメント一覧下
    * @returns {string} みんなのコメント一覧下 Ad
    */
-  static get SP_NORMAL():string {
+  static get SP_NORMAL() {
     return Ad.SP_40681;
   }
   // ---------------------------------------------------
@@ -107,7 +108,7 @@ export class Ad {
    * 接続ホストの プロトコル で socdm の接続先を変えます
    * @return {string} http / https 接続先を返します
    */
-  static host():string {
+  static host() {
     switch ( Loc.protocol ) {
       case 'https:':
         return Ad.ssl();
@@ -120,7 +121,7 @@ export class Ad {
    * `socdm` ssl 接続先を取得します
    * @return {string} `socdm` ssl 接続先 `https://ssl.socdm.com` を返します
    */
-  static ssl():string {
+  static ssl() {
     return 'https://ssl.socdm.com';
   }
   /**
@@ -129,10 +130,10 @@ export class Ad {
    * @param {string} id target element id
    * @returns {Element} script tag を返します
    */
-  static make( path:string, id:string ):Element {
+  static make(path, id) {
     let div = document.createElement('div');
-    let script = document.createElement( 'script' );
-    script.src = path.split( Ad.ID ).join( id );
+    let script = document.createElement('script');
+    script.src = path.split(Ad.ID).join(id);
     div.appendChild(script);
     // return script;
     return div;
@@ -145,9 +146,9 @@ export class Ad {
    * @param {string} ad ストリーム広告 ID
    * @return {Element} div でラップし script tag を返します
    */
-  static makeStream( id:string, ad:string ):Element {
+  static makeStream(id, ad) {
     let div = document.createElement('div');
-    let script = document.createElement( 'script' );
+    let script = document.createElement('script');
     script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=${ad}&targetID=${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
     // @since 2016-10-03 changed
     // @see https://github.com/undotsushin/undotsushin/issues/1125#issuecomment-251032265

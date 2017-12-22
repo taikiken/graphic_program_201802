@@ -42,14 +42,14 @@ export class Url {
    * category slug を置き換えるための定義定数
    * @return {string} category/slug 置き換え文字定数
    */
-  static get CATEGORY_SLUG():string {
+  static get CATEGORY_SLUG() {
     return '__SLUG__';
   }
   /**
    * category slug を使用した url を置き換えるための定義定数
    * @return {string} category url base
    */
-  static get CATEGORY():string {
+  static get CATEGORY() {
     return `/category/${Url.CATEGORY_SLUG}/`;
   }
   // ---------------------------------------------------
@@ -59,7 +59,7 @@ export class Url {
    * URL index
    * @return {string} index url を返します
    */
-  static index():string {
+  static index() {
     return '/';
   }
   /**
@@ -67,31 +67,31 @@ export class Url {
    * @param {string} [slug=all] category slug
    * @return {string} category url を返します
    */
-  static category( slug:string = 'all' ):string {
-    return Url.CATEGORY.replace( Url.CATEGORY_SLUG, slug );
+  static category(slug = 'all') {
+    return Url.CATEGORY.replace(Url.CATEGORY_SLUG, slug);
   }
   /**
    * category ranking url
    * @param {string} [slug=all] category slug
    * @return {string} category ranking url を返します
    */
-  static ranking( slug:string = 'all' ):string {
-    return `${Url.CATEGORY.replace( Url.CATEGORY_SLUG, slug )}ranking/`;
+  static ranking(slug = 'all') {
+    return `${Url.CATEGORY.replace(Url.CATEGORY_SLUG, slug)}ranking/`;
   }
   /**
    * category video url
    * @param {string} [slug=all] category slug
    * @return {string} category video url を返します
    */
-  static video( slug:string = 'all' ):string {
-    return `${Url.CATEGORY.replace( Url.CATEGORY_SLUG, slug )}video/`;
+  static video(slug = 'all') {
+    return `${Url.CATEGORY.replace(Url.CATEGORY_SLUG, slug)}video/`;
   }
   /**
    * 検索ページ url
    * @param {string} keyword 検索ワード
    * @return {*|string} 検索ページ url を返します
    */
-  static search( keyword:string ):string {
+  static search(keyword) {
     return `/search/${keyword}`;
   }
   /**
@@ -99,11 +99,9 @@ export class Url {
    * @param {string} [path=''] path option
    * @return {string} signup url を返します
    */
-  static signup( path:string = '' ):string {
-    let base = '/signup/';
-
+  static signup(path = '') {
+    const base = '/signup/';
     switch ( path ) {
-
       case 'account':
         return `${base}account`;
 
@@ -116,18 +114,15 @@ export class Url {
       default:
         // console.warn( `signup illegal value: ${path}, instead use default` );
         return base;
-
     }
-
   }
   /**
    * step Number から hash を取得します
-   * @param {Number} step wizard step Number, 現在位置
+   * @param {number} step wizard step Number, 現在位置
    * @return {string} location hash にセットする文字列を返します
    */
-  static signupHash( step:Number = 1 ):string {
-
-    switch ( step ) {
+  static signupHash(step:Number = 1) {
+    switch (step) {
 
       case 2:
         return 'account';
@@ -141,18 +136,16 @@ export class Url {
       default:
         // console.warn( `signup illegal value: ${step}, instead use default` );
         return '';
-
     }
   }
 
   /**
    * location.hash から signup step Number を取得します
    * @param {string} [hash=''] location.hash #付き
-   * @return {Number} step Number
+   * @return {number} step Number
    */
-  static signupStepByHash( hash:string = '' ):Number {
-
-    switch ( hash ) {
+  static signupStepByHash(hash = '') {
+    switch (hash) {
 
       case '#account':
         return 2;
@@ -167,15 +160,13 @@ export class Url {
       default:
         // console.warn( `signup illegal value: ${hash}, instead use default` );
         return 1;
-
     }
-
   }
   /**
    * login url
    * @return {string} login url を返します
    */
-  static login():string {
+  static login() {
     return '/login/';
   }
 
@@ -183,7 +174,7 @@ export class Url {
    * logout url
    * @return {string} logout url を返します
    */
-  static logout():string {
+  static logout() {
     return '/logout/';
   }
   /**
@@ -191,7 +182,7 @@ export class Url {
    * https://github.com/undotsushin/undotsushin/commit/6a99fb16401dd80f5ac1a5c9174b9b93a13408af
    * @return {string} signup_login url を返します
    */
-  static signupLogin():string {
+  static signupLogin() {
     return '/signup_login/';
   }
   /**
@@ -199,11 +190,10 @@ export class Url {
    * @param {string} [path=''] path option
    * @return {*} reset_password url を返します
    */
-  static password( path:string = '' ):string {
-    let base = '/reset_password/';
+  static password(path = '') {
+    const base = '/reset_password/';
 
-    switch ( path ) {
-
+    switch (path) {
       case 'resetting':
         return `${base}resetting`;
 
@@ -220,11 +210,10 @@ export class Url {
    * @param {string} [path=''] path option
    * @return {*} mypage url を返します
    */
-  static mypage( path:string = '' ):string {
-    let base = '/mypage/';
+  static mypage(path = '') {
+    const base = '/mypage/';
 
-    switch ( path ) {
-
+    switch (path) {
       case 'activities':
         return `${base}activities`;
 
@@ -235,13 +224,12 @@ export class Url {
         // console.warn( `mypage illegal value: ${path}, instead use default` );
         return base;
     }
-
   }
   /**
    * notifications url
    * @return {string} notifications url を返します
    */
-  static notifications():string {
+  static notifications() {
     return '/notifications/';
   }
   /**
@@ -249,12 +237,10 @@ export class Url {
    * @param {string} [path=''] path option
    * @return {*} settings url を返します
    */
-  static settings( path:string = '' ):string {
-    let base = '/settings/';
+  static settings(path = '') {
+    const base = '/settings/';
 
-
-    switch ( path ) {
-
+    switch (path) {
       case 'interest':
         return `${base}interest`;
 
@@ -271,18 +257,15 @@ export class Url {
         // console.warn( `settings illegal value: ${path}, instead use default` );
         return base;
     }
-
   }
   /**
    * about url
    * @param {string} [path=''] path option
    * @return {*} about url を返します
    */
-  static about( path:string = '' ):string {
-    let base = '/about/';
-
-    switch ( path ) {
-
+  static about(path = '') {
+    const base = '/about/';
+    switch (path) {
       case 'company':
         return `${base}company`;
 
@@ -319,13 +302,12 @@ export class Url {
    * @see https://github.com/undotsushin/undotsushin/issues/1009
    * @return {?string} app banner URL
    */
-  static appBanner():string {
+  static appBanner() {
     if (Browser.iOS.is()) {
       return 'https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8';
     } else if (Browser.Android.is()) {
       return 'https://play.google.com/store/apps/details?id=com.undotsushin';
     }
-
     return null;
   }
   /**
@@ -334,7 +316,7 @@ export class Url {
    * @return {string} Syn.extension JS path を返します
    * @since 2016-09-28
    */
-  static synExtension():string {
+  static synExtension() {
     return '/assets/js/syn.extension-recommend_articles.js';
   }
   /**
@@ -343,7 +325,7 @@ export class Url {
    * @return {string} script` tag 下 `so_dmp.js` パスを返します
    * @since 2016-09-28
    */
-  static soDmp():string {
+  static soDmp() {
     return '//i.socdm.com/s/so_dmp.js?service_id=un_sports';
   }
   /**
@@ -352,7 +334,7 @@ export class Url {
    * @return {string} `/assets/js/pc_popin-recommend.js` を返します
    * @since 2016-09-30
    */
-  static popin():string {
+  static popin() {
     return '/assets/js/pc_popin-recommend.js';
   }
 }

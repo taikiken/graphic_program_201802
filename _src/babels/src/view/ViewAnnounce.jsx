@@ -34,11 +34,35 @@ export default class ViewAnnounce extends View {
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
+  /**
+   * ユーザーへの「お知らせ」準備します
+   * @param {Element} element 基点 Element
+   * @param {string} slug category slug
+   * @param {boolean} [sp=false] sp flag
+   * @param {*} [option={}] callback option
+   */
   constructor(element, slug = 'all', sp = false, option = {}) {
     super(element, option);
+    // ---
+    /**
+     * category slug
+     * @type {string}
+     */
     this.slug = slug;
+    /**
+     * sp flag
+     * @type {boolean}
+     */
     this.sp = sp;
+    /**
+     * Ajax action instance
+     * @type {CategoriesSlug}
+     */
     this.action = new CategoriesSlug(slug, this.done.bind(this), this.fail.bind(this));
+    /**
+     * retry counter
+     * @type {number}
+     */
     this.count = 0;
   }
   // ---------------------------------------------------

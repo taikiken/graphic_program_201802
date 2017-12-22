@@ -12,8 +12,8 @@
 // let _symbol = Symbol();
 
 /**
- * <p>表示文章定義</p>
- * 全て static です
+ * 表示文章定義
+ * - 全て static です
  */
 export class Message {
   // /**

@@ -79,13 +79,14 @@ ComponentCarouselDirection.propTypes = {
 
 /**
  * pickup コンテナ「カルーセル」スライドショーを実装します
- * ```
- * <ComponentCarousel/>
- *    <ComponentPickupArticles/>
- *      <ComponentPickupArticle/>
- *    <ComponentPagers/>
- *      <ComponentPager/>
- * ```
+ *
+ * [Component]
+ * - {@link ComponentCarousel}
+ *   - {@link ComponentPickupArticles}
+ *     - {@link ComponentPickupArticle}
+ *   - {@link ComponentPagers}
+ *     - {@link ComponentPager}
+ *
  * - 本クラス `ComponentCarousel` がコントローラーとして機能します
  * - {@link ComponentPickupArticles} が `swipe` 管理を行います
  * @since 2016-09-15

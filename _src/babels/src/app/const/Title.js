@@ -11,32 +11,39 @@
  */
 
 
-let _symbol = Symbol();
-let _category = {
+// let _symbol = Symbol();
+/**
+ * 各ページのタイトル - 定型句
+ * @type {{all: string, ranking: string, video: string}}
+ * @deprecated not use - PHPでタイトルを出力するので使用しません
+ */
+const categories = {
   all: '新着順',
   ranking: 'ランキング',
   video: '動画'
 };
 
 /**
- * <p>各ページのタイトル<br>template PHPでタイトルを出力するので使用しません</p>
- * **未使用**
+ * 各ページのタイトル, template PHPでタイトルを出力するので使用しません
+ * - **未使用**
+ * @deprecated not use
+ * TODO future remobe
  */
 export class Title {
-  /**
-   * 各ページのタイトル<br>
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Title is static Class. not use new Title().' );
-
-    }
-
-  }
+  // /**
+  //  * 各ページのタイトル<br>
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Title is static Class. not use new Title().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
@@ -44,35 +51,35 @@ export class Title {
    * 検索キーワード置き換え文字列
    * @return {string} 検索キーワード置き換え文字列
    */
-  static get SEARCH_WORD():string {
+  static get SEARCH_WORD() {
     return '|__SEARCH_WORD__|';
   }
   /**
    * カテゴリー slug all のタイトル
    * @return {string} カテゴリー slug all のタイトルを返します
    */
-  static get all():string {
-    return _category.all;
+  static get all() {
+    return categories.all;
   }
   /**
    * カテゴリー type ranking のタイトル
    * @return {string} カテゴリー type ranking のタイトルを返します
    */
-  static get ranking():string {
-    return _category.ranking;
+  static get ranking() {
+    return categories.ranking;
   }
   /**
    * カテゴリー type video のタイトル
    * @return {string} カテゴリー type video のタイトルを返します
    */
-  static get video():string {
-    return _category.video;
+  static get video() {
+    return categories.video;
   }
   /**
    * 検索タイトルの雛形
    * @return {string} 検索タイトルの雛形を返します
    */
-  static get search():string {
+  static get search() {
     return `「${Title.SEARCH_WORD}」の検索結果`;
   }
   // ---------------------------------------------------
@@ -83,16 +90,16 @@ export class Title {
    * @param {string} keyword 検索文字列
    * @return {string} 検索タイトルの雛形 から 検索文字列 を使用しタイトルを生成し返します
    */
-  static searchTitle( keyword:string ):string {
-    return Title.search.replace( Title.SEARCH_WORD, keyword );
+  static searchTitle( keyword ) {
+    return Title.search.replace(Title.SEARCH_WORD, keyword);
   }
   /**
    * カテゴリー記事一覧のタイトル
    * @param {string} slug category slug, type
    * @return {string} category label を返します
    */
-  static categoryTitle( slug:string ):string {
-    return _category[ slug ];
+  static categoryTitle(slug) {
+    return categories[slug];
   }
 }
 
