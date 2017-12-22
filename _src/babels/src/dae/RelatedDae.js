@@ -39,9 +39,8 @@ export class RelatedDae {
     /**
      * JSON.response
      * @type {Object}
-     * @protected
      */
-    this._response = altResponse;
+    this.response = altResponse;
     // /**
     //  * response.category
     //  * @deprecated instead use categories
@@ -61,23 +60,21 @@ export class RelatedDae {
     // // docs には書いてないけど配列も増やしとく, 2016-03-13
     /**
      * response.categories
+     * - カテゴリー配列
      * @since 2016-03-13
      * @type {CategoriesDae}
-     * @protected
      */
-    this._categories = new CategoriesDae(altResponse);
+    this.categories = new CategoriesDae(altResponse);
     /**
      * response.media
      * @type {MediaDae}
-     * @protected
      */
-    this._media = new MediaDae(altResponse.media);
+    this.media = new MediaDae(altResponse.media);
     /**
      * response.user
      * @type {UserDae}
-     * @protected
      */
-    this._user = new UserDae(altResponse.user);
+    this.user = new UserDae(altResponse.user);
     
     // let formatDate;
     //
@@ -97,54 +94,97 @@ export class RelatedDae {
      * response.theme
      * @since 2016-05-31
      * @type {ThemeDae}
-     * @protected
      */
-    this._theme = new ThemeDae( altResponse.theme );
+    this.theme = new ThemeDae(altResponse.theme);
     /**
      * response.banner
      * @since 2016-05-31
      * @type {BannersDae}
-     * @protected
      */
-    this._banner = new BannersDae( altResponse.banner );
+    this.banner = new BannersDae(altResponse.banner);
     /**
      * response.ad
      * @since 2016-05-31
      * @type {AdDae}
-     * @protected
      */
-    this._ad = new AdDae( altResponse.ad );
+    this.ad = new AdDae(altResponse.ad);
     /**
      * `another_categories` value - 地域の詳細
      * @type {AnotherCategoriesDae}
      * @since 2017-09-14
      */
     this.anotherCategories = new AnotherCategoriesDae(altResponse.another_categories);
+    /**
+     * response.id
+     * - 記事 ID
+     * @type {number}
+     */
+    this.id = altResponse.id;
+    /**
+     * response.date
+     * - ISO8601 日付
+     * @type {string}
+     */
+    this.date = altResponse.date;
+    /**
+     * response.display_date
+     * - 表示日付
+     * @type {string}
+     */
+    this.displayDate = altResponse.display_date;
+    /**
+     * response.title
+     * - 記事タイトル
+     * @type {string}
+     */
+    this.title = altResponse.title;
+    /**
+     * response.description
+     * - 記事概要
+     * @type {string}
+     */
+    this.description = altResponse.description;
+    /**
+     * response.url
+     * - 記事URL
+     * @type {string}
+     */
+    this.url = altResponse.url;
+    /**
+     * response.is_bookmarked
+     * @type {boolean}
+     */
+    this.isBookmarked = altResponse.isBookmarked;
+    /**
+     * response.media_type
+     * @type {string}
+     */
+    this.mediaType = altResponse.media_type;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
-  /**
-   * JSON.response
-   * @return {Object|*} JSON.response を返します
-   */
-  get response():Object {
-    return this._response;
-  }
-  /**
-   * response.id
-   * @return {Number} 記事 ID を返します
-   */
-  get id():Number {
-    return this.response.id;
-  }
-  /**
-   * response.date
-   * @return {string} ISO8601 日付を返します
-   */
-  get date():string {
-    return this.response.date;
-  }
+  // /**
+  //  * JSON.response
+  //  * @return {Object|*} JSON.response を返します
+  //  */
+  // get response():Object {
+  //   return this._response;
+  // }
+  // /**
+  //  * response.id
+  //  * @return {Number} 記事 ID を返します
+  //  */
+  // get id():Number {
+  //   return this.response.id;
+  // }
+  // /**
+  //  * response.date
+  //  * @return {string} ISO8601 日付を返します
+  //  */
+  // get date():string {
+  //   return this.response.date;
+  // }
   // /**
   //  * response.date をフォーマットした
   //  * 使わない, displayDateを使用する
@@ -153,27 +193,27 @@ export class RelatedDae {
   // get formatDate():string {
   //   return this._formatDate;
   // }
-  /**
-   * 表示日付
-   * @return {string} article.display_date を返します
-   */
-  get displayDate():string {
-    return this.response.display_date;
-  }
-  /**
-   * response.title
-   * @return {string} 記事タイトル response.description を返します
-   */
-  get title():string {
-    return this.response.title;
-  }
-  /**
-   * response.description
-   * @return {string} 記事概要 response.description を
-   */
-  get description():string {
-    return this.response.description;
-  }
+  // /**
+  //  * 表示日付
+  //  * @return {string} article.display_date を返します
+  //  */
+  // get displayDate():string {
+  //   return this.response.display_date;
+  // }
+  // /**
+  //  * response.title
+  //  * @return {string} 記事タイトル response.description を返します
+  //  */
+  // get title():string {
+  //   return this.response.title;
+  // }
+  // /**
+  //  * response.description
+  //  * @return {string} 記事概要 response.description を
+  //  */
+  // get description():string {
+  //   return this.response.description;
+  // }
   // /**
   //  * response.category
   //  * @deprecated instead use categories
@@ -190,68 +230,68 @@ export class RelatedDae {
   // get category2():CategoryDae {
   //   return this._category2;
   // }
-  /**
-   * response.categories
-   * @return {CategoriesDae} カテゴリー配列 response.categories を CategoriesDae として返します
-   */
-  get categories():CategoriesDae {
-    return this._categories;
-  }
-  /**
-   * response.url
-   * @return {string} 記事URL response.url を返します
-   */
-  get url():string {
-    return this.response.url;
-  }
-  /**
-   * response.is_bookmarked
-   * @return {Boolean} response.is_bookmarked を返します
-   */
-  get isBookmarked():Boolean {
-    return this.response.is_bookmarked;
-  }
-  /**
-   * response.media_type
-   * @return {string} response.media_type を返します
-   */
-  get mediaType():string {
-    return this.response.media_type;
-  }
-  /**
-   * response.media
-   * @return {MediaDae} response.media を MediaDae として返します
-   */
-  get media():MediaDae {
-    return this._media;
-  }
-  /**
-   * response.user
-   * @return {UserDae} response.user を UserDae として返します
-   */
-  get user():UserDae {
-    return this._user;
-  }
+  // /**
+  //  * response.categories
+  //  * @return {CategoriesDae} カテゴリー配列 response.categories を CategoriesDae として返します
+  //  */
+  // get categories():CategoriesDae {
+  //   return this._categories;
+  // }
+  // /**
+  //  * response.url
+  //  * @return {string} 記事URL response.url を返します
+  //  */
+  // get url():string {
+  //   return this.response.url;
+  // }
+  // /**
+  //  * response.is_bookmarked
+  //  * @return {Boolean} response.is_bookmarked を返します
+  //  */
+  // get isBookmarked():Boolean {
+  //   return this.response.is_bookmarked;
+  // }
+  // /**
+  //  * response.media_type
+  //  * @return {string} response.media_type を返します
+  //  */
+  // get mediaType():string {
+  //   return this.response.media_type;
+  // }
+  // /**
+  //  * response.media
+  //  * @return {MediaDae} response.media を MediaDae として返します
+  //  */
+  // get media():MediaDae {
+  //   return this._media;
+  // }
+  // /**
+  //  * response.user
+  //  * @return {UserDae} response.user を UserDae として返します
+  //  */
+  // get user():UserDae {
+  //   return this._user;
+  // }
   // ----------------------------------------------
-  /**
-   * response.theme
-   * @return {ThemeDae} response.theme を ThemeDae として返します
-   */
-  get theme():ThemeDae {
-    return this._theme;
-  }
-  /**
-   * response.banner
-   * @return {BannersDae} response.banner を BannersDae として返します
-   */
-  get banner():BannersDae {
-    return this._banner;
-  }
-  /**
-   * response.ad
-   * @return {AdDae} response.ad を ThemeDae として返します
-   */
-  get ad():AdDae {
-    return this._ad;
-  }
+  // /**
+  //  * response.theme
+  //  * @return {ThemeDae} response.theme を ThemeDae として返します
+  //  */
+  // get theme():ThemeDae {
+  //   return this._theme;
+  // }
+  // /**
+  //  * response.banner
+  //  * @return {BannersDae} response.banner を BannersDae として返します
+  //  */
+  // get banner():BannersDae {
+  //   return this._banner;
+  // }
+  // /**
+  //  * response.ad
+  //  * @return {AdDae} response.ad を ThemeDae として返します
+  //  */
+  // get ad():AdDae {
+  //   return this._ad;
+  // }
 }
