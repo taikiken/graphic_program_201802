@@ -68,7 +68,7 @@ $app->group('/crazy', function () use($app, $ImgPath) {
             'list'               => $data
         ));
 
-        return $this->renderer->render($response, 'crazy/list.php', $args);
+        return $this->renderer->render($response, 'athletes/list.php', $args);
     });
 });
 
