@@ -51,11 +51,7 @@ VALUES
 EOD;
 
     $sql = sprintf($format, $title, $Y, $m, $d, $H, $i, $s, $Y, $m, $d, $H, $i, $s, $time, $time, $time);
-    try{
-      $o->query($sql);
-    }catch(Exception $e){
-      $mes = "記事の登録に失敗しました。";
-    }
+    $o->query($sql);
 
     $f = $o->fetch_array();
     $article_id = $f['id'];
@@ -64,11 +60,7 @@ EOD;
 
     $format = "INSERT INTO repo_body(pid,body) VALUES(%s,'%s')";
     $sql = sprintf($format, $article_id, $body);
-    try{
-      $o->query($sql);
-    }catch(Exception $e){
-      $mes = "記事の登録に失敗しました。";
-    }
+    $o->query($sql);
   }
 
   $format = "DELETE FROM photo WHERE nid=%s";
@@ -211,11 +203,7 @@ EOD;
       imagedestroy($canvas);
 
       $s3 = new S3Module;
-      try{
-        $result = $s3->upload($resize_path, sprintf("photo/%s/%s", $key, $filename));
-      }catch (\Aws\S3\Exception\S3Exception $e){
-        $mes = '画像アップロードに失敗しました';
-      }
+      $result = $s3->upload($resize_path, sprintf("photo/%s/%s", $key, $filename));
       $images[] = $filename;
       unlink($resize_path);
     }
@@ -246,18 +234,14 @@ VALUES
     {$cnt}
 );
 EOD;
-  try{
-    $o->query($sql);
-  }catch(Exception $e) {
-    $mes = 'DBの登録に失敗しました';
-  }
 
+  $o->query($sql);
   $cnt++;
   }
 }
 
-if(isset($mes)){
+if($mes){
   echo "result : Error (".$mes.")";
 }else {
-  echo date("Y/m/d",$today)."と".date("Y/m/d",$yesterday)."のフォト記事の登録に成功しました";
+  echo date("Y/m/d",$today)." と ".date("Y/m/d",$yesterday)." のフォト記事の登録に成功しました";
 }
