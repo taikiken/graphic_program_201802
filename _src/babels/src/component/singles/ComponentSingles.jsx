@@ -31,6 +31,9 @@ import { SinglesManager } from '../../ui/SinglesManager';
 import { Fb } from '../../util/Fb';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

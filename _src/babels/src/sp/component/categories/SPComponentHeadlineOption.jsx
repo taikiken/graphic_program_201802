@@ -14,7 +14,7 @@
 import View from '../../../view/View';
 
 // view/categories
-import { ComponentHeadlineAd } from '../../../component/categories/ComponentHeadlineAd';
+import ComponentHeadlineAd from '../../../component/categories/ComponentHeadlineAd';
 
 // sp/view/headline
 import SPComponentHeadlines from '../headline/SPComponentHeadlines';

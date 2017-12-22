@@ -12,7 +12,7 @@
 import { ArticleDae } from '../../../dae/ArticleDae';
 import { Empty } from '../../../app/const/Empty';
 import { Safety } from '../../../data/Safety';
-import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
 import ComponentBookmarkButton from '../../../component/mypage/bookmark/ComponentBookmarkButton';
 
 /**

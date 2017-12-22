@@ -17,16 +17,19 @@ import View from '../../view/View';
 import ComponentHeadlines from '../headlines/ComponentHeadlines';
 
 // view/categories
-import { ComponentHeadlineAd } from './ComponentHeadlineAd';
+import ComponentHeadlineAd from './ComponentHeadlineAd';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
  * 記事一覧 headline を表示するための基本コンテナを作成します
  * @since 2016-09-20
  */
-export class ComponentHeadlineOption extends React.Component {
+export default class ComponentHeadlineOption extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -53,22 +56,28 @@ export class ComponentHeadlineOption extends React.Component {
       category: React.PropTypes.object.isRequired
     };
   }
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  /**
-   * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentHeadlineOption.propTypes}
-   */
-  constructor(props) {
-    super(props);
-  }
+  // // ---------------------------------------------------
+  // //  CONSTRUCTOR
+  // // ---------------------------------------------------
+  // /**
+  //  * プロパティを保存し必要な関数・変数を準備します
+  //  * @param {Object} props プロパティ {@link ComponentHeadlineOption.propTypes}
+  //  */
+  // constructor(props) {
+  //   super(props);
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
+   * マウント後に `View.DID_MOUNT` を callback へ通知します
+   */
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
+  }
+  /**
    * 記事一覧 headline を表示するための基本コンテナを作成します
-   * @return {?XML} 記事一覧 headline を表示するための基本コンテナを返します
+   * @return {?XML} `div.headline-section` 記事一覧 headline を表示するための基本コンテナを返します
    */
   render() {
     const list = this.props.list;
@@ -94,11 +103,5 @@ export class ComponentHeadlineOption extends React.Component {
         </div>
       </div>
     );
-  }
-  /**
-   * マウント後に `View.DID_MOUNT` を callback へ通知します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
   }
 }

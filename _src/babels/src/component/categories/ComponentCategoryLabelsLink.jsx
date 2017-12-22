@@ -9,51 +9,25 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-// CategoryLabelNode
-import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
-import { MediaType } from '../../app/const/MediaType';
-import { Message } from '../../app/const/Message';
 
 // app
-// import { Url } from '../../app/const/Url';
+import { Url } from '../../app/const/Url';
+
+// dae
+import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
 
 // React
 /**
  * [library] - React
  */
 const React = self.React;
-
-/**
- * オススメ記事 tag
- * @param {boolean} need オススメ記事フラッグ
- * @returns {?XML} オススメ記事 tag
- */
-const recommendTag = (need) => {
-  if (!need) {
-    return null;
-  }
-  // タグが必要
-  return <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
-};
-
-/**
- * 動画記事 tag
- * @param {string} type media type
- * @returns {?XML} 動画記事 tag
- */
-const movieTag = (type) => {
-  if (type === MediaType.VIDEO) {
-    return <i className="post-label_movie">Message.LABEL_MOVIE</i>;
-  }
-  return null;
-};
-
 /**
  * p.post-category を出力<br>
- * category 未設定に対応するように `CategoryLabelNode` を置換えます {@link CategoryLabelNode}
+ * category 未設定に対応するように `CategoryLabelNode` を置換えます {@link CategoryLabelNode}<br>
+ * `ComponentCategoryLabels` {@link ComponentCategoryLabels} の category に link を追加しました
  * @since 2016-09-24
  * */
-export class ComponentCategoryLabels extends React.Component {
+export default class ComponentCategoryLabelsLink extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -74,9 +48,6 @@ export class ComponentCategoryLabels extends React.Component {
       categories: React.PropTypes.array.isRequired,
       slug: React.PropTypes.string,
       className: React.PropTypes.string,
-      // @since 2016-12-26
-      mediaType: React.PropTypes.string,
-      recommend: React.PropTypes.bool,
       // @since 2017-09-13
       anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae),
     };
@@ -88,24 +59,27 @@ export class ComponentCategoryLabels extends React.Component {
   static get defaultProps() {
     return {
       slug: '',
-      className: 'post-category',
-      // @since 2016-12-26
-      mediaType: '',
-      recommend: false,
-      // @since 2017-09-13
-      anotherCategories: null,
+      className: 'post-category'
     };
   }
+  /**
+   * category slug `area` の時のみ `category-label_area` を与えます
+   * @param {string} slug category slug
+   * @returns {string} `area` 用 className
+   * @since 2017-09-08
+   */
+  static areaClassName(slug) {
+    return slug === 'area' ? ' category-label_area' : '';
+  }
   // // ---------------------------------------------------
-  // //  STATIC GETTER / SETTER
+  // //  CONSTRUCTOR
   // // ---------------------------------------------------
   // /**
   //  * プロパティを保存し必要な関数・変数を準備します
-  //  * @param {Object} props プロパティ {@link ComponentCategoryLabels.propTypes}
+  //  * @param {Object} props プロパティ {@link ComponentCategoryLabelsLink.propTypes}
   //  */
   // constructor(props) {
   //   super(props);
-  //   console.log('ComponentCategoryLabels', props.categories);
   // }
   // ---------------------------------------------------
   //  METHOD
@@ -127,7 +101,9 @@ export class ComponentCategoryLabels extends React.Component {
           key={`labels-area-${id}-${index}-${i}`}
           className="category-label category-label_area"
         >
-          {regionDae.region}
+          <a href={`/area/${regionDae.region}/`}>
+            {regionDae.region}
+          </a>
         </span>
       );
     });
@@ -138,39 +114,24 @@ export class ComponentCategoryLabels extends React.Component {
    * @return {?XML} p.post-category を返します
    */
   render() {
-    const {
-      categories,
-      anotherCategories,
-      id,
-      index,
-      slug,
-      className,
-      recommend,
-      mediaType,
-    } = this.props;
-    // const categories = props.categories;
-    // const anotherCategories = props.anotherCategories;
-
-    if (categories.length === 0 && (!anotherCategories || !anotherCategories.area.has)) {
+    const props = this.props;
+    const categories = props.categories;
+    if (categories.length === 0) {
       return null;
     }
 
-    // const id = props.id;
-    // const index = props.index;
-    // const slug = props.slug || 'x';
-    // const className = this.props.className;
+    const id = props.id;
+    const index = props.index;
+    const slug = props.slug || 'x';
+    const className = props.className;
+    const anotherCategories = props.anotherCategories;
 
     return (
-      <p className={`post-category post-category-${slug || 'x'} ${className}`}>
-        {
-          recommendTag(recommend)
-        }
-        {
-          movieTag(mediaType)
-        }
+      <p className={`${className} ${className}-${slug}`}>
         {
           /* Array<SlugDae> */
           categories.map((category, i) => {
+            // console.log('ComponentCategoryLabelsLink', category, anotherCategories);
             if (!category.label) {
               return null;
             }
@@ -179,11 +140,8 @@ export class ComponentCategoryLabels extends React.Component {
             }
             const areaClassName = category.slug === 'area' ? ' category-label_area' : '';
             return (
-              <span
-                key={`labels-${id}-${index}-${i}`}
-                className={`category-label${areaClassName}`}
-              >
-                {category.label}
+              <span key={`labels-${id}-${index}-${i}`} className={`category-label${areaClassName}`}>
+                <a href={Url.category(category.slug)}>{category.label}</a>
               </span>
             );
           })
@@ -208,7 +166,7 @@ export class ComponentCategoryLabels extends React.Component {
 //  *  slug: string
 //  * }}
 //  */
-// ComponentCategoryLabels.propTypes = {
+// ComponentCategoryLabelsLink.propTypes = {
 //   index: React.PropTypes.number.isRequired,
 //   id: React.PropTypes.string.isRequired,
 //   categories: React.PropTypes.array.isRequired,
@@ -219,6 +177,6 @@ export class ComponentCategoryLabels extends React.Component {
 //  * default プロパティ
 //  * @type {{slug: string}}
 //  */
-// ComponentCategoryLabels.defaultProps = {
+// ComponentCategoryLabelsLink.defaultProps = {
 //   slug: ''
 // };

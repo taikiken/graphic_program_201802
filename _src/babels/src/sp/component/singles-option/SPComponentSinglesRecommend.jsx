@@ -12,7 +12,7 @@
 
 // import { SingleDae } from '../../../dae/SingleDae';
 import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
-import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
 
 // data
 import { Safety } from '../../../data/Safety';

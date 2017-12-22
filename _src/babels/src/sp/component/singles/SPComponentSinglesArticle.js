@@ -20,7 +20,7 @@ import { Message } from '../../../app/const/Message';
 import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 
 // component
-import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
+import ComponentCategoryLabelsLink from '../../../component/categories/ComponentCategoryLabelsLink';
 
 // sp/component.singles
 import { SPComponentSinglesArticleMedia } from './SPComponentSinglesArticleMedia';

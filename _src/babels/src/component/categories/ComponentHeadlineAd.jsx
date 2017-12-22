@@ -14,6 +14,9 @@
 import { Ad } from '../../app/const/Ad';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -29,7 +32,7 @@ const React = self.React;
  * @since 2016-09-20
  *
  * */
-export class ComponentHeadlineAd extends React.Component {
+export default class ComponentHeadlineAd extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

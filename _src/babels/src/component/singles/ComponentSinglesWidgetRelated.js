@@ -17,6 +17,9 @@ import { Url } from '../../app/const/Url';
 import { Snap } from '../../ui/Snap';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

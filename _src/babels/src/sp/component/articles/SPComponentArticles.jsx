@@ -28,7 +28,7 @@ import { Safety } from '../../../data/Safety';
 
 // sp/view/articles
 import SPComponentArticleAd from './SPComponentArticleAd';
-import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
 
 // React
 /**

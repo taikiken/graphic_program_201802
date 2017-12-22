@@ -55,7 +55,7 @@ let ReactDOM = self.ReactDOM;
  * |- CommentFormElementNode
  * </pre>
  * @type {ReactClass} コメント送信フォーム
- * @deprecated 2017-12-06 instead use ComponentCommentFormElement
+ * @deprecated 2017-12-06 instead use {@link ComponentCommentFormElement}
  */
 export let CommentFormElementNode = React.createClass( {
   propTypes: {

@@ -15,8 +15,9 @@ import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategories
 import { GaData } from '../../ga/GaData';
 import { Ga } from '../../ga/Ga';
 // import { Empty } from '../../app/const/Empty';
-import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 
+// React
 /**
  * [library] - React
  */

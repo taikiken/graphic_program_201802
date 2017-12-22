@@ -18,7 +18,7 @@ import { Empty } from '../../../app/const/Empty';
 import { Safety } from '../../../data/Safety';
 
 // component
-import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
 import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
 
 // ui / snap

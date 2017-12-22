@@ -13,7 +13,7 @@
 import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
 import { Empty } from '../../../app/const/Empty';
 import { Safety } from '../../../data/Safety';
-import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
 import { ArticleDae } from '../../../dae/ArticleDae';
 import { RelatedDae } from '../../../dae/RelatedDae';
 

@@ -22,14 +22,15 @@ const React = self.React;
  * - link 有り無しで出力を変えます
  * @param {InformationDataDae} information JSON data
  * @returns {?XML} `div.announce`
+ * @since 2017-12-18
  */
 export const ComponentAnnounceImage = ({ information }) => {
   if (!information.img) {
     return null;
   }
-  const bg = information.backgorundColor;
+  const backgroundColor = information.backgorundColor;
   const style = {
-    bg: bg ? { backgroundColor: bg } : {},
+    bg: backgroundColor ? { backgroundColor } : {},
   };
   if (!information.link) {
     // no link
@@ -75,6 +76,7 @@ ComponentAnnounceImage.propTypes = {
  * `information.icon` があれば出力します
  * @param {string} icon icon path
  * @returns {?XML} `img.announce__item__icon`
+ * @since 2017-12-18
  */
 export const ComponentAnnounceIcon = ({ icon }) => {
   if (!icon) {
@@ -95,6 +97,7 @@ ComponentAnnounceIcon.propTypes = {
  * information.link なし 出力をします
  * @param {InformationDataDae} information JSON data
  * @returns {XML} `div.announce__item`
+ * @since 2017-12-18
  */
 export const ComponentAnnounceP = ({ information }) => (
   <p className="announce__item">
@@ -117,6 +120,7 @@ ComponentAnnounceP.propTypes = {
  * information.link あり 出力をします
  * @param {InformationDataDae} information JSON data
  * @returns {XML} `div.announce__item`
+ * @since 2017-12-18
  */
 export const ComponentAnnounceA = ({ information }) => {
   const color = information.textColor;
@@ -152,6 +156,7 @@ ComponentAnnounceA.propTypes = {
  * - information.link なし - {@link ComponentAnnounceP}
  * @param {InformationDataDae} information JSON data
  * @returns {XML} {@link ComponentAnnounceA} or {@link ComponentAnnounceP}
+ * @since 2017-12-18
  */
 export const ComponentAnnounceLink = ({ information }) => {
   if (information.link) {
@@ -182,15 +187,16 @@ ComponentAnnounceLink.propTypes = {
  * - information.text 必須
  * @param {InformationDataDae} information JSON data
  * @returns {?XML} `div.announce`
+ * @since 2017-12-18
  */
 export const ComponentAnnounceText = ({ information }) => {
   // no text
   if (!information.text) {
     return null;
   }
-  const bg = information.backgorundColor;
+  const backgroundColor = information.backgorundColor;
   const style = {
-    bg: bg ? { backgroundColor: bg } : {},
+    bg: backgroundColor ? { backgroundColor } : {},
   };
   return (
     <div

@@ -19,10 +19,13 @@ import { MediaType } from '../../app/const/MediaType';
 import { Safety } from '../../data/Safety';
 
 // component
-import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 // import ComponentArticleThumbnail from '../articles/ComponentArticleThumbnail';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 // ----------------------------------------
 

@@ -19,13 +19,16 @@ import { MediaType } from '../../app/const/MediaType';
 import { Safety } from '../../data/Safety';
 
 // component
-import { ComponentCategoryLabels } from '../../component/categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 // import ComponentArticleThumbnail from '../../component/articles/ComponentArticleThumbnail';
 
 // ui / snap
 import { Snap } from '../../ui/Snap';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 // ----------------------------------------

@@ -20,7 +20,7 @@ import { SPMediaNode } from '../../node/single/SPMediaNode';
 import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 
 // component
-import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
+import ComponentCategoryLabelsLink from '../../../component/categories/ComponentCategoryLabelsLink';
 
 // sp/component.singles
 // import { SPComponentSinglesArticleMedia } from '../singles/SPComponentSinglesArticleMedia';
