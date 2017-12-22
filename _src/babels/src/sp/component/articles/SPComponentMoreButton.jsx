@@ -27,8 +27,8 @@ import { GaData } from '../../../ga/GaData';
 const React = self.React;
 
 /**
- * SP: view more button<br>
- * window.bottom が button を超えたら次の読み込みを開始します
+ * SP: view more button
+ * - window.bottom が button を超えたら次の読み込みを開始します
  * @since 2016-09-16
  */
 export default class SPComponentMoreButton extends React.Component {

@@ -25,23 +25,24 @@ import {Safety} from '../../data/Safety';
 //
 // // sp.node
 // import {SPArchiveNode} from '../node/SPArchiveNode';
-// import {SPMoreViewNode} from '../node/SPMoreViewNode';
+import {SPMoreViewNode} from '../node/SPMoreViewNode';
+import SPComponentMoreButton from '../component/articles/SPComponentMoreButton';
 //
 // // Ga
 // import {Ga} from '../../ga/Ga';
 // import {GaData} from '../../ga/GaData';
 
-// // React
-// /* eslint-disable no-unused-vars */
-// /**
-//  * [library] - React
-//  */
-// const React = self.React;
-// /* eslint-enable no-unused-vars */
-// /**
-//  * [library] - ReactDOM
-//  */
-// const ReactDOM = self.ReactDOM;
+// React
+/* eslint-disable no-unused-vars */
+/**
+ * [library] - React
+ */
+const React = self.React;
+/* eslint-enable no-unused-vars */
+/**
+ * [library] - ReactDOM
+ */
+const ReactDOM = self.ReactDOM;
 
 /**
  * SP archive 一覧標示を出力します
@@ -376,29 +377,37 @@ export default class SPViewArchive extends View {
     //   this.articleRendered.updateList(articlesList, this._request.offset, this._request.length);
     // }
   }
-  // /**
-  //  * more button の表示・非表示を行います
-  //  * @param {boolean} show true の時にボタンを表示させ機能させます
-  //  */
-  // moreButton(show) {
-  //   // element check, null あり
-  //   if (!this.moreElement) {
-  //     return;
-  //   }
-  //   // console.log('SPViewArchive.moreButton', this.moreElement);
-  //   if (this.moreRendered === null) {
-  //     // チェックをパスし実行する
-  //     this.moreRendered = ReactDOM.render(
-  //       <SPMoreViewNode
-  //         show={show}
-  //         action={this.action}
-  //         home={this.home}
-  //         slug={this.slug}
-  //       />,
-  //       this.moreElement
-  //     );
-  //   } else {
-  //     this.moreRendered.updateShow(show);
-  //   }
-  // }
+  /**
+   * more button の表示・非表示を行います
+   * @param {boolean} show true の時にボタンを表示させ機能させます
+   */
+  moreButton(show) {
+    // element check, null あり
+    if (!this.moreElement) {
+      return;
+    }
+    // // console.log('SPViewArchive.moreButton', this.moreElement);
+    // if (this.moreRendered === null) {
+    //   // チェックをパスし実行する
+    //   this.moreRendered = ReactDOM.render(
+    //     <SPMoreViewNode
+    //       show={show}
+    //       action={this.action}
+    //       home={this.home}
+    //       slug={this.slug}
+    //     />,
+    //     this.moreElement
+    //   );
+    // } else {
+    //   this.moreRendered.updateShow(show);
+    // }
+    ReactDOM.render(
+      <SPComponentMoreButton
+        show={show}
+        action={this.action}
+        home={this.home}
+        slug={this.slug}
+      />
+    );
+  }
 }
