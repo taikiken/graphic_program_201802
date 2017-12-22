@@ -124,8 +124,8 @@ while($f=$o->fetch_array()){
 
 
   </select>
-    　｜
   </li>
+
   <?php } ?>
 <?php }elseif($CURRENTDIRECTORY=="repo_e"){ ?>
 
