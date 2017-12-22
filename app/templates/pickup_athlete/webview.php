@@ -37,27 +37,14 @@
             </ul>
         </div>
 
-<!--        <div class="more_btn pc_hide"><a href="/crazy/list/"><i></i>すべての選手を見る</a></div>-->
+        <div class="more_btn pc_hide"><a href="/crazy/list/"><i></i>すべての選手を見る</a></div>
     </section>
-<!--    <section class="section_crazy_popular pc_hide">-->
-<!--        <div class="ttl-wrapper pc_hide">-->
-<!--            <h2 class="ttl popular"><i></i>人気の記事</h2>-->
-<!--        </div>-->
-<!--        <div id="Widget_articles-2" class="Widget_articles" data-category="crazy" data-type="ranking"></div>-->
-<!--    </section>-->
-<!--    <script src="/assets/widgets/articles-index/Widget_articles.js"></script>-->
-
-    <?php
-    // ----------------------------------------------------
-    // 記事一覧: sp banner
-    if ( !empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']) ) :
-      ?>
-      <div class="sponsor-link">
-        <a href="<?php echo $page['category']['banner']['sp']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['sp']['link']; ?>', true);"><img src="<?php echo $page['category']['banner']['sp']['image']; ?>" alt="<?php echo $page['category']['banner']['sp']['text'] ? $page['category']['banner']['sp']['text'] : '' ?>"></a>
-      </div>
-    <?php
-    endif;
-    // eof: 記事一覧: sp banner
-    // ---------------------------------------------------- ?>
+    <section class="section_crazy_popular pc_hide">
+        <div class="ttl-wrapper pc_hide">
+            <h2 class="ttl popular"><i></i>人気の記事</h2>
+        </div>
+        <div id="Widget_articles-2" class="Widget_articles" data-category="crazy" data-type="ranking"></div>
+    </section>
+    <script src="/assets/widgets/articles-index/Widget_articles.js"></script>
     </body>
 </html>

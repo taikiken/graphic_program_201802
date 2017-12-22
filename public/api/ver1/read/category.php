@@ -188,14 +188,6 @@ if(strlen($f["name"])>0){
     );
   endif;
 
-  #crazy
-  # ref. #2559
-  if ( $category === 'crazy' ) :
-    $categoriesinfo['webviews']     = array(
-        '/crazy/webview/',
-    );
-  endif;
-
   // #2080
   if ( $category === 'top' ) :
     $categoriesinfo['webviews'] = array(
