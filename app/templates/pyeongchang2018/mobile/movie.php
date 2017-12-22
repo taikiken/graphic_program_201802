@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 /**
  * mobile: pyeongchang2018 専用 template - `/pyeongchang2018/movie/`
  * User: @taikiken
@@ -72,7 +71,3 @@ include_once __DIR__."/../../mobile/_footer.php";
 // 汎用 debug
 include_once __DIR__."/../../_debug.php";
 ?>
-=======
-
-echo 'movie';
->>>>>>> e17a2c43b... deskとmobileに分けた
