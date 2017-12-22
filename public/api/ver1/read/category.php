@@ -129,6 +129,12 @@ if(strlen($f["name"])>0){
 	$y["status"]["developer_message"]="指定されたカテゴリーは存在しません。";
 }
 
+	if (!empty($category))
+	{
+    $categoriesinfo['webviews']     = array(
+      '/category/' . $category . '/pickup_athletes/webview/',
+    );
+	}
 
   if ( $category === 'big6tv' ) :
 
