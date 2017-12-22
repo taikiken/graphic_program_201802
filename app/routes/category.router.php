@@ -82,6 +82,43 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     return $this->renderer->render($response, "default.php", $args);
   });
 
+  // webviews - /category/:category_slug/pickup_athletes/webview/
+  // ==============================
+  $this->get('/pickup_athletes/webview[/]', function ($request, $response, $args) use ($app, $ImgPath) {
+    $category = $app->model->get_category_by_slug($args['category_slug'], "", true);
+
+    $pickup_players = $app->model->get_pickup_players($category['id'], null, 4);
+    $data = [];
+    foreach ($pickup_players as $index => $row) {
+      $data[] = [
+        'body' => [
+          'no' => $row['id'],
+          'name' => $row['name'],
+          'name_kana' => $row['name_kana'],
+          'competition' => $row['competition'],
+          'description' => $row['description'],
+          'img' => $row['img1'],
+        ],
+      ];
+    }
+    //オブジェクト化する
+    $data = json_decode(json_encode($data));
+
+
+    $args['page'] = $app->model->set(array(
+      'title'              => $category['label'],
+      'og_title'           => $category['label'],
+      'path'               => $args,
+      'template'           => 'webview',
+      'template_classname' => '',
+      'list'               => $data,
+      'category'           => $category,
+
+    ));
+
+    return $this->renderer->render($response, 'pickup_athlete/webview.php', $args);
+
+  });
 
   // カテゴリー/ランキング - /category/:category_slug/ranking/
   // ==============================
