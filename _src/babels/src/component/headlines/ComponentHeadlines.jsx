@@ -148,6 +148,7 @@ export default class ComponentHeadlines extends React.Component {
                   mediaType={dae.mediaType}
                   home={home}
                   anotherCategories={dae.anotherCategories}
+                  isNew={dae.isNew || false}
                 />
               );
             })

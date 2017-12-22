@@ -24,12 +24,33 @@ import { Message } from '../../app/const/Message';
 const React = self.React;
 
 /**
- * オススメ記事 tag
- * @param {boolean} need オススメ記事フラッグ
- * @returns {?XML} オススメ記事 tag
+ * `NEW` icon 表示します
+ * @param {boolean} isNew `NEW` する flag
+ * @return {?XML} `i.post-label_new`
+ * @constructor
  */
-const recommendTag = (need) => {
-  if (!need) {
+export const ComponentIconLatest = ({ isNew }) => {
+  if (!isNew) {
+    return null;
+  }
+  return <i className="post-label_new">{Message.LABEL_LATEST}</i>;
+};
+
+/**
+ * React.propTypes
+ * @type {{recommend: boolean}}
+ */
+ComponentIconLatest.propTypes = {
+  isNew: React.PropTypes.bool.isRequired,
+};
+
+/**
+ * オススメ記事 tag - {@link ComponentCategoryLabels}
+ * @param {boolean} recommend オススメ記事フラッグ
+ * @returns {?XML} オススメ記事 tag `i.post-label_recommend`
+ */
+export const ComponentIconRecommend = ({ recommend }) => {
+  if (!recommend) {
     return null;
   }
   // タグが必要
@@ -37,15 +58,31 @@ const recommendTag = (need) => {
 };
 
 /**
- * 動画記事 tag
- * @param {string} type media type
- * @returns {?XML} 動画記事 tag
+ * React.propTypes
+ * @type {{recommend: boolean}}
  */
-const movieTag = (type) => {
+ComponentIconRecommend.propTypes = {
+  recommend: React.PropTypes.bool.isRequired,
+};
+
+/**
+ * 動画記事 tag - {@link ComponentCategoryLabels}
+ * @param {string} type media type
+ * @returns {?XML} 動画記事 tag `i.post-label_movie`
+ */
+export const ComponentIconMovie = ({ type }) => {
   if (type === MediaType.VIDEO) {
     return <i className="post-label_movie">Message.LABEL_MOVIE</i>;
   }
   return null;
+};
+
+/**
+ * React.propTypes
+ * @type {{type: string}}
+ */
+ComponentIconMovie.propTypes = {
+  type: React.PropTypes.string.isRequired,
 };
 
 /**
@@ -79,6 +116,8 @@ export default class ComponentCategoryLabels extends React.Component {
       recommend: React.PropTypes.bool,
       // @since 2017-09-13
       anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae),
+      // @since 2017-12-22
+      isNew: React.PropTypes.bool,
     };
   }
   /**
@@ -94,6 +133,8 @@ export default class ComponentCategoryLabels extends React.Component {
       recommend: false,
       // @since 2017-09-13
       anotherCategories: null,
+      // @since 2017-12-22
+      isNew: false,
     };
   }
   // // ---------------------------------------------------
@@ -147,6 +188,7 @@ export default class ComponentCategoryLabels extends React.Component {
       className,
       recommend,
       mediaType,
+      isNew,
     } = this.props;
     // const categories = props.categories;
     // const anotherCategories = props.anotherCategories;
@@ -162,12 +204,15 @@ export default class ComponentCategoryLabels extends React.Component {
 
     return (
       <p className={`post-category post-category-${slug || 'x'} ${className}`}>
-        {
-          recommendTag(recommend)
-        }
-        {
-          movieTag(mediaType)
-        }
+        <ComponentIconLatest
+          isNew={isNew}
+        />
+        <ComponentIconRecommend
+          recommend={recommend}
+        />
+        <ComponentIconMovie
+          type={mediaType}
+        />
         {
           /* Array<SlugDae> */
           categories.map((category, i) => {

@@ -70,7 +70,9 @@ export default class ComponentHeadlineArticle extends React.Component {
    *  title: string,
    *  thumbnail: string,
    *  mediaType: string,
-   *  home: bool
+   *  home: bool,
+   *  anotherCategories: AnotherCategoriesDae,
+   *  isNew: bool
    * }} React props
    */
   static get propTypes() {
@@ -90,6 +92,7 @@ export default class ComponentHeadlineArticle extends React.Component {
       home: React.PropTypes.bool.isRequired,
       // anotherCategories - 2017-09-14
       anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae).isRequired,
+      isNew: React.PropTypes.bool.isRequired,
     };
   }
   // ---------------------------------------------------
@@ -183,6 +186,7 @@ export default class ComponentHeadlineArticle extends React.Component {
       id,
       anotherCategories,
       date,
+      isNew,
     } = this.props;
     return (
       <li className={`board-item board-item-${index}`}>
@@ -217,6 +221,7 @@ export default class ComponentHeadlineArticle extends React.Component {
               mediaType={mediaType}
               recommend={false}
               anotherCategories={anotherCategories}
+              isNew={isNew}
             />
             <p className="post-date">{date}</p>
           </div>

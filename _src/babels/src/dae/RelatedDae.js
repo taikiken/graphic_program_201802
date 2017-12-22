@@ -14,7 +14,7 @@
 // 記事詳細 関連記事結果
 
 import {Safety} from '../data/Safety';
-import {Format} from '../util/Format';
+// import {Format} from '../util/Format';
 
 // dae
 // import {CategoryDae} from './CategoryDae';
@@ -34,15 +34,14 @@ export class RelatedDae {
    * 記事詳細 関連記事結果 JSON をセットアップします
    * @param {Object} [response={}] JSON.response
    */
-  constructor( response:Object = {} ) {
-
-    response = Safety.object( response );
+  constructor(response = {}) {
+    const altResponse = Safety.object(response);
     /**
      * JSON.response
      * @type {Object}
      * @protected
      */
-    this._response = response;
+    this._response = altResponse;
     // /**
     //  * response.category
     //  * @deprecated instead use categories
@@ -66,32 +65,32 @@ export class RelatedDae {
      * @type {CategoriesDae}
      * @protected
      */
-    this._categories = new CategoriesDae( response );
+    this._categories = new CategoriesDae(altResponse);
     /**
      * response.media
      * @type {MediaDae}
      * @protected
      */
-    this._media = new MediaDae( response.media );
+    this._media = new MediaDae(altResponse.media);
     /**
      * response.user
      * @type {UserDae}
      * @protected
      */
-    this._user = new UserDae( response.user );
+    this._user = new UserDae(altResponse.user);
     
-    let formatDate;
-
-    // date check
-    if ( Safety.check( response, 'date' ) ) {
-      formatDate = Format.date( response.date );
-    }
-    /**
-     * response.date
-     * @type {string|undefined}
-     * @protected
-     */
-    this._formatDate = formatDate;
+    // let formatDate;
+    //
+    // // date check
+    // if (Safety.check(altResponse, 'date')) {
+    //   formatDate = Format.date(altResponse.date);
+    // }
+    // /**
+    //  * response.date
+    //  * @type {string|undefined}
+    //  * @protected
+    //  */
+    // this._formatDate = formatDate;
 
     // 以下仕様追加 from 2016-05-31
     /**
@@ -100,27 +99,27 @@ export class RelatedDae {
      * @type {ThemeDae}
      * @protected
      */
-    this._theme = new ThemeDae( response.theme );
+    this._theme = new ThemeDae( altResponse.theme );
     /**
      * response.banner
      * @since 2016-05-31
      * @type {BannersDae}
      * @protected
      */
-    this._banner = new BannersDae( response.banner );
+    this._banner = new BannersDae( altResponse.banner );
     /**
      * response.ad
      * @since 2016-05-31
      * @type {AdDae}
      * @protected
      */
-    this._ad = new AdDae( response.ad );
+    this._ad = new AdDae( altResponse.ad );
     /**
      * `another_categories` value - 地域の詳細
      * @type {AnotherCategoriesDae}
      * @since 2017-09-14
      */
-    this.anotherCategories = new AnotherCategoriesDae(response.another_categories);
+    this.anotherCategories = new AnotherCategoriesDae(altResponse.another_categories);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -146,14 +145,14 @@ export class RelatedDae {
   get date():string {
     return this.response.date;
   }
-  /**
-   * response.date をフォーマットした
-   * 使わない, displayDateを使用する
-   * @return {string} response.date を日本語日付に変換し返します
-   */
-  get formatDate():string {
-    return this._formatDate;
-  }
+  // /**
+  //  * response.date をフォーマットした
+  //  * 使わない, displayDateを使用する
+  //  * @return {string} response.date を日本語日付に変換し返します
+  //  */
+  // get formatDate():string {
+  //   return this._formatDate;
+  // }
   /**
    * 表示日付
    * @return {string} article.display_date を返します
