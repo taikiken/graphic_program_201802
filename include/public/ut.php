@@ -442,52 +442,12 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 	{
 		$ad[]=$dat_array;
 	}
-
-	if($playerid!="") {
-		$categoryid = get_categoryid_by_playerid($playerid);
-
-    unset($v);
-    $file=sprintf("%s/static/ad/94-0.dat",$staticfilepath);
-    if(file_exists($file)){
-      $v=get_contents($file);
-      $ad[] = unserialize($v);
-    }
-	}
   if($categoryid!=""){
 		unset($v);
 		$file=sprintf("%s/static/ad/10-%s.dat",$staticfilepath,$categoryid);
 		if(file_exists($file)){
-			$v=get_contents($file);
-      $dat_array=unserialize($v);
-      // デフォルト、カテゴリのときだけキーが違う
-      $banner_info = [];
-      if (isset($playerid))
-      {
-        $banner_info["bannerflag"] = $dat_array["player_bannerflag"];
-        $banner_info["bannertext"] = $dat_array["player_bannertext"];
-        $banner_info["pc_bannerimg"] = $dat_array["player_pc_bannerimg"];
-        $banner_info["sp_bannerimg"] = $dat_array["player_sp_bannerimg"];
-        $banner_info["ios_bannerimg"] = $dat_array["player_ios_bannerimg"];
-        $banner_info["android_bannerimg"] = $dat_array["player_android_bannerimg"];
-        $banner_info["pc_bannerlink"] = $dat_array["player_pc_bannerlink"];
-        $banner_info["sp_bannerlink"] = $dat_array["player_sp_bannerlink"];
-        $banner_info["ios_bannerlink"] = $dat_array["player_ios_bannerlink"];
-        $banner_info["android_bannerlink"] = $dat_array["player_android_bannerlink"];
-      }
-			elseif ($isgetpickupplayerbanner)
-      {
-        $banner_info["bannerflag"] = $dat_array["pickupplayer_bannerflag"];
-        $banner_info["bannertext"] = $dat_array["pickupplayer_bannertext"];
-        $banner_info["pc_bannerimg"] = $dat_array["pickupplayer_pc_bannerimg"];
-        $banner_info["sp_bannerimg"] = $dat_array["pickupplayer_sp_bannerimg"];
-        $banner_info["ios_bannerimg"] = $dat_array["pickupplayer_ios_bannerimg"];
-        $banner_info["android_bannerimg"] = $dat_array["pickupplayer_android_bannerimg"];
-        $banner_info["pc_bannerlink"] = $dat_array["pickupplayer_pc_bannerlink"];
-        $banner_info["sp_bannerlink"] = $dat_array["pickupplayer_sp_bannerlink"];
-        $banner_info["ios_bannerlink"] = $dat_array["pickupplayer_ios_bannerlink"];
-        $banner_info["android_bannerlink"] = $dat_array["pickupplayer_android_bannerlink"];
-      }
-      $ad[]= $banner_info;
+      $v = get_contents($file);
+      $ad[] = unserialize($v);
     }
 	}
   if ($isgetpickupplayerbanner && $categoryid != "") {
