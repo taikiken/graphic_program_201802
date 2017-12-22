@@ -142,7 +142,7 @@ export default class ComponentSidebarRankingArticle extends React.Component {
     const slugs = categories.map(category => category.slug);
 
     return (
-      <li className={`board-item rank-${standing} ranking-${slugs.join('__')}`}>
+      <li className={`board-item rank${standing} ranking-${slugs.join('__')}`}>
         <a
           href={url}
           className="post"
