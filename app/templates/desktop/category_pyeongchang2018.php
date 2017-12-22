@@ -27,6 +27,11 @@ include_once __DIR__.'/_category-heading.php';
 
     <section class="side-sec">
 
+      <?php
+      // `/category/pyeongchang2018/` - 広告表示しない
+      global $on_pyeongchang2018;
+      $on_pyeongchang2018 = true;
+      ?>
       <?php include_once __DIR__."/_sidebar_ad.php"; ?>
 
     </section><!-- /.side-sec -->
