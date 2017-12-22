@@ -17,9 +17,12 @@ import View from '../../view/View';
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 
 // component
-import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
+import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -28,6 +31,23 @@ const React = self.React;
  * @since 2016-09-24
  */
 export class ComponentSingleHeader extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{single: SingleDae, sign: boolean, callback: function}} React props
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      sign: React.PropTypes.bool.isRequired,
+      callback: React.PropTypes.func
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentSingleHeader.propTypes}
@@ -53,6 +73,9 @@ export class ComponentSingleHeader extends React.Component {
       loading: ''
     };
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * delegate, マウント前に呼び出され、 `View.WILL_MOUNT` を発火します
    * */
@@ -112,20 +135,6 @@ export class ComponentSingleHeader extends React.Component {
         </div>
       </div>
     );
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{single: SingleDae, sign: boolean, callback: function}} React props
-   */
-  static get propTypes() {
-    return {
-      single: React.PropTypes.object.isRequired,
-      sign: React.PropTypes.bool.isRequired,
-      callback: React.PropTypes.func
-    };
   }
 }
 

@@ -128,7 +128,7 @@ export default class ComponentLogin extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   // ---------------------------------------------------
-  //  MESSAGE
+  //  METHOD
   // ---------------------------------------------------
   /**
    * input[name=email].onchange event handler - value を更新します

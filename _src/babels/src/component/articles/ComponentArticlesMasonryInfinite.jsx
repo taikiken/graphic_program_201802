@@ -16,14 +16,14 @@ import { Empty } from '../../app/const/Empty';
 // view
 import View from '../../view/View';
 import ComponentArticleThumbnail from './ComponentArticleThumbnail';
-import { ComponentArticlePopular } from './ComponentArticlePopular';
+import ComponentArticlePopular from './ComponentArticlePopular';
 
 // data
 import { Safety } from '../../data/Safety';
 
 // node(ReactClass)
 // import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
-import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 
 // React
 /**

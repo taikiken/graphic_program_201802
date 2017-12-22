@@ -18,7 +18,7 @@ import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 import { MediaNode } from '../../node/single/MediaNode';
 
 // component/categories
-import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
+import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
 
 // component/singles
 // import { ComponentSinglesArticleMedia } from '../singles/ComponentSinglesArticleMedia';

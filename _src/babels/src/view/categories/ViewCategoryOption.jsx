@@ -18,7 +18,7 @@ import View from '../View';
 // view/carousel
 import ComponentCarousel from '../../component/carousel/ComponentCarousel';
 // view/categories
-import { ComponentHeadlineOption } from '../../component/categories/ComponentHeadlineOption';
+import ComponentHeadlineOption from '../../component/categories/ComponentHeadlineOption';
 
 // model
 import { Model } from '../../model/Model';

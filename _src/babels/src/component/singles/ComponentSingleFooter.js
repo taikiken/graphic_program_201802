@@ -24,14 +24,17 @@ import { Message } from '../../app/const/Message';
 import Banner from '../../view/Banner';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
- * 記事詳細下部を出力します<br>
- * 汎用化のために `ViewSingleFooter` {@link ViewSingleFooter} から分離します
+ * 記事詳細下部を出力します
+ * - 汎用化のために `ViewSingleFooter` {@link ViewSingleFooter} から分離します
  *
- * 記事詳細下部, TAG 部分の出力 `div.post-footer`<br>
- * Banner {@link Banner} の出力を行います
+ * 記事詳細下部, TAG 部分の出力 `div.post-footer`
+ * - Banner {@link Banner} の出力を行います
  * @since 2016-09-24
  */
 export class ComponentSingleFooter extends React.Component {

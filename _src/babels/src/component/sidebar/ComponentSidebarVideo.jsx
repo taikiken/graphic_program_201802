@@ -26,7 +26,7 @@ import { ArticleDae } from '../../dae/ArticleDae';
 import { Safety } from '../../data/Safety';
 import { Ga } from '../../ga/Ga';
 import { GaData } from '../../ga/GaData';
-import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 import ComponentSidebarTitle from './ComponentSidebarTitle';
 
 // React

@@ -27,7 +27,7 @@ import { GaData } from '../../ga/GaData';
 
 // dae
 import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
-import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 
 // React
 /**

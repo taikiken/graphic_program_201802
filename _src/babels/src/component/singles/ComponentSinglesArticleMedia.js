@@ -21,6 +21,9 @@ import { MediaImageNode } from '../../node/single/MediaImageNode';
 import { Safety } from '../../data/Safety';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

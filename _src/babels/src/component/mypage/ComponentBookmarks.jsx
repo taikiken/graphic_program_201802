@@ -12,9 +12,10 @@
 import { Empty } from '../../app/const/Empty';
 import { Safety } from '../../data/Safety';
 import ComponentBookmarkButton from './bookmark/ComponentBookmarkButton';
-import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 import { ArticleDae } from '../../dae/ArticleDae';
 
+// React
 /**
  * [library] - React
  */
