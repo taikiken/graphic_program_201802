@@ -126,9 +126,6 @@ while($f=$o->fetch_array()){
   </select>
     　｜
   </li>
-  <li>
-    <a href="../ad/edit/?nid=0&cid=94">デフォルト広告設定</a>
-  </li>
   <?php } ?>
 <?php }elseif($CURRENTDIRECTORY=="repo_e"){ ?>
 
