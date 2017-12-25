@@ -30,10 +30,13 @@ import ComponentCommentUser from '../user/ComponentCommentUser';
 import ComponentCommentContentBody from '../content/ComponentCommentContentBody';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
- * reply container class name を作成します
+ * reply container class name を作成します - {@link ComponentCommentsChildList}
  * @param {number} replyId comment reply id
  * @returns {string} class name を返します
  */

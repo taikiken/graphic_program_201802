@@ -26,6 +26,9 @@ import { UserDae } from '../../../dae/UserDae';
 
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

@@ -20,6 +20,9 @@ import View from '../../view/View';
 import { Ga } from '../../ga/Ga';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

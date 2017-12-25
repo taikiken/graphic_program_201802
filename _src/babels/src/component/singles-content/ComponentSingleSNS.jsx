@@ -17,6 +17,9 @@
 import { MessageSNS } from '../../app/const/MessageSNS';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

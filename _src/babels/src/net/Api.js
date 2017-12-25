@@ -31,7 +31,7 @@ export class Api {
   //
   //   if ( _symbol !== target ) {
   //
-  //     throw new Error( 'Api is static Class. not use new Api().' );
+  //     throw new Error( 'Api is static Class. not use new Api().');
   //
   //   }
   //
@@ -100,18 +100,18 @@ export class Api {
    * @param {string} sns twitter or facebook どちらか
    * @return {Types} SNS OAuth 認証のための遷移URL をTypes instanceで返します
    */
-  static auth( sns:string ) {
-    switch ( sns ) {
+  static auth(sns) {
+    switch (sns) {
       case 'fb':
       case 'facebook':
         return ApiDae.api('auth:fb');
 
       case 'tw':
       case 'twitter':
-        return ApiDae.api( 'auth:tw' );
+        return ApiDae.api('auth:tw');
 
       default:
-        throw new Error( `notice illegal action: ${sns}.` );
+        throw new Error(`notice illegal action: ${sns}.`);
     }
   }
 
@@ -175,7 +175,7 @@ export class Api {
    * @return {Types} category API を Types instance で取得します
    */
   static category() {
-    return ApiDae.api( 'category' );
+    return ApiDae.api('category');
   }
   // ----------------------------------
   // 地域別記事
@@ -202,7 +202,7 @@ export class Api {
    * @return {Types} search API をTypes instanceで返します
    */
   static search() {
-    return ApiDae.api( 'search' );
+    return ApiDae.api('search');
   }
   // ----------------------------------
   // 記事詳細
@@ -218,7 +218,7 @@ export class Api {
    * @return {Types} detail API をTypes instanceで返します
    */
   static detail() {
-    // console.warn( 'Api.detail deprecated. instead use Api.single.' );
+    // console.warn( 'Api.detail deprecated. instead use Api.single.');
     return Api.single();
   }
   // ----------------------------------
@@ -262,49 +262,49 @@ export class Api {
   static comment(action) {
     switch (action) {
       case 'official':
-        return ApiDae.api( 'comment:official' );
+        return ApiDae.api('comment:official');
 
       case 'normal':
-        return ApiDae.api( 'comment:normal' );
+        return ApiDae.api('comment:normal');
 
       case 'self':
-        return ApiDae.api( 'comment:self' );
+        return ApiDae.api('comment:self');
 
       case 'single':
-        return ApiDae.api( 'comment:single' );
+        return ApiDae.api('comment:single');
 
       case 'send':
-        return ApiDae.api( 'comment:send' );
+        return ApiDae.api('comment:send');
 
       case 'reply':
-        return ApiDae.api( 'comment:reply' );
+        return ApiDae.api('comment:reply');
 
       case 'delete':
       case 'send:delete':
-        return ApiDae.api( 'comment:send:delete' );
+        return ApiDae.api('comment:send:delete');
 
       case 'reply:delete':
-        return ApiDae.api( 'comment:reply:delete' );
+        return ApiDae.api('comment:reply:delete');
 
       case 'good:add':
-        return ApiDae.api( 'comment:good:add' );
+        return ApiDae.api('comment:good:add');
 
       case 'good:delete':
-        return ApiDae.api( 'comment:good:delete' );
+        return ApiDae.api('comment:good:delete');
 
       case 'bad:add':
-        return ApiDae.api( 'comment:bad:add' );
+        return ApiDae.api('comment:bad:add');
 
       case 'bad:delete':
-        return ApiDae.api( 'comment:bad:delete' );
+        return ApiDae.api('comment:bad:delete');
 
       case '':
         // コメント一覧全部
-        return ApiDae.api( 'comment' );
+        return ApiDae.api('comment');
 
       default:
         // console.warn( `comment illegal action: ${action}, instead use default` );
-        return ApiDae.api( 'comment' );
+        return ApiDae.api('comment');
     }
   }
   /**
@@ -315,14 +315,14 @@ export class Api {
   static replay(action = '') {
     switch ( action ) {
       case 'delete':
-        return Api.comment( 'reply:delete' );
+        return Api.comment('reply:delete');
 
       case '':
-        return Api.comment( 'reply' );
+        return Api.comment('reply');
 
       default:
         // console.warn( `replay illegal action: ${action}, instead use default` );
-        return Api.comment( 'reply' );
+        return Api.comment('reply');
     }
   }
 
@@ -335,39 +335,39 @@ export class Api {
    * @return {Types} マイページ系 users API を Types instance で返します
    */
   static users(action) {
-    switch ( action ) {
+    switch (action) {
 
       case 'self':
-        return ApiDae.api( 'users:self' );
+        return ApiDae.api('users:self');
 
 
       case 'id':
-        return ApiDae.api( 'users:id' );
+        return ApiDae.api('users:id');
 
       case 'self:bookmark':
-        return ApiDae.api( 'users:self:bookmark' );
+        return ApiDae.api('users:self:bookmark');
 
       /*
        無くなった様子
       case 'id:bookmark':
-        return ApiDae.api( 'users:id:bookmark' );
+        return ApiDae.api('users:id:bookmark');
        */
 
       case 'activities':
       case 'activity':
-        return ApiDae.api( 'users:self:activities' );
+        return ApiDae.api('users:self:activities');
 
       case 'notifications':
       case 'notice':
-        return ApiDae.api( 'users:self:notifications' );
+        return ApiDae.api('users:self:notifications');
 
       case 'notifications:read':
       case 'notice:read':
-        return ApiDae.api( 'users:self:notifications:read' );
+        return ApiDae.api('users:self:notifications:read');
 
       case 'notifications:count':
       case 'notice:count':
-        return ApiDae.api( 'users:self:notifications:count' );
+        return ApiDae.api('users:self:notifications:count');
 
       default:
         throw new Error( `users illegal action: ${action}.` );
@@ -378,19 +378,19 @@ export class Api {
    * @param {string} action path option を指定します read | count | ''
    * @return {Types} お知らせ系 users API を Types instance で返します
    */
-  static notice( action:string = '' ) {
+  static notice(action = '') {
     switch ( action ) {
       case 'read':
-        return Api.users( `notice:${action}` );
+        return Api.users(`notice:${action}`);
 
       case 'count':
-        return Api.users( `notice:${action}` );
+        return Api.users(`notice:${action}`);
 
       case '':
-        return Api.users( 'notice' );
+        return Api.users('notice');
 
       default:
-        throw new Error( `notice illegal action: ${action}.` );
+        throw new Error(`notice illegal action: ${action}.`);
     }
   }
   /**
@@ -398,29 +398,29 @@ export class Api {
    * @param {string} action path option を指定します read | count | ''
    * @return {Types} お知らせ系 users API を Types instance で返します
    */
-  static notifications( action:string ):Types {
-    return Api.notice( action );
+  static notifications(action) {
+    return Api.notice(action);
   }
   /**
    * users:settings API を取得します
    * @param {string} action path option を指定します
    * @return {Types} マイページ系 users:settings API を Types instance で返します
    */
-  static settings( action:string ):Types {
-    switch ( action ) {
+  static settings(action) {
+    switch (action) {
       case 'account':
-        return ApiDae.api( 'users:settings:account' );
+        return ApiDae.api('users:settings:account');
 
       case 'account:edit':
-        return ApiDae.api( 'users:settings:account:edit' );
+        return ApiDae.api('users:settings:account:edit');
 
       case 'interest':
-        return ApiDae.api( 'users:settings:interest' );
+        return ApiDae.api('users:settings:interest');
 
       case 'interest:edit':
-        return ApiDae.api( 'users:settings:interest:edit' );
+        return ApiDae.api('users:settings:interest:edit');
       default:
-        throw new Error( `settings illegal action: ${action}.` );
+        throw new Error(`settings illegal action: ${action}.`);
     }
   }
 }

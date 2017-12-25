@@ -15,6 +15,9 @@
 import ComponentCommentsChildList from './ComponentCommentsChildList';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

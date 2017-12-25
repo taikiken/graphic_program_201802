@@ -46,6 +46,9 @@ import { Page } from '../../singles/head/Page';
 // --------------------
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

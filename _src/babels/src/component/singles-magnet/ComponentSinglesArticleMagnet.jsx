@@ -59,6 +59,9 @@ import { Snap } from '../../ui/Snap';
 // import { IFrameStatus } from '../../event/IFrameStatus';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

@@ -28,6 +28,9 @@ import { Scroll } from '../../util/Scroll';
 import { Validate } from '../../util/Validate';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

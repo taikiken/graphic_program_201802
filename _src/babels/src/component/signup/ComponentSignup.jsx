@@ -21,6 +21,9 @@ import { HeadingNode } from '../../node/signup/HeadingNode';
 import { RootNode } from '../../node/signup/RootNode';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

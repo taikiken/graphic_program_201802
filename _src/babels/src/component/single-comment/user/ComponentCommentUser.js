@@ -13,6 +13,9 @@ import { Empty } from '../../../app/const/Empty';
  */
 // CommentUserNode
 
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

@@ -23,6 +23,9 @@ import { CommentSingleReply } from '../../action/comment/CommentSingleReply';
 
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 // const ReactDOM = self.ReactDOM;
 

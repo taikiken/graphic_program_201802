@@ -14,7 +14,9 @@ import { CommentSingleReply } from '../../action/comment/CommentSingleReply';
 import { CommentSingle } from '../../action/comment/CommentSingle';
 
 // CommentMoreViewNode
-
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

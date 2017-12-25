@@ -11,6 +11,9 @@
  */
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

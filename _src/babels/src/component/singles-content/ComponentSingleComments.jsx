@@ -21,6 +21,9 @@ import { User } from '../../app/User';
 import { CommentsType } from '../../app/const/CommentsType';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

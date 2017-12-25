@@ -13,6 +13,9 @@
 
 import { ReplyStatus } from '../../../event/ReplyStatus';
 
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

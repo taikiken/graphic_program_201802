@@ -15,6 +15,9 @@ import ComponentCommentFormOpener from './ComponentCommentFormOpener';
 import ComponentCommentFormElement from './ComponentCommentFormElement';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
