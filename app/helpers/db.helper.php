@@ -141,6 +141,28 @@ END_DOC;
 
   }
 
+  public function get_pickup_athlete($player_id) {
+
+    $sql = <<<SQL_EOL
+  SELECT
+    id AS no,
+    name,
+    '' AS name_kana,
+    competition,
+    description,
+    img1 AS img
+  FROM
+    tbl_player
+  WHERE 
+    flag = 1
+  AND
+    id = {$player_id}
+SQL_EOL;
+
+    $this->query($sql);
+    $player_info = $this->fetch_array();
+    return $player_info;
+  }
 
   /**
   * カテゴリー情報を取得する = /api/v1/category/{$slug}

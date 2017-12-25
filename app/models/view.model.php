@@ -265,6 +265,21 @@ class ViewModel {
 
 
   /**
+   * json/ca_list.json を置き換える
+   *
+   * @param $player_id
+   * @return array
+   */
+  public function get_pickup_athlete($player_id) {
+
+    $player_info = $this->db->get_pickup_athlete($player_id);
+
+
+    return $player_info;
+  }
+
+
+  /**
   * category - category_slugからカテゴリー情報を取得する
   *
   * @param  string  $slug カテゴリースラッグ

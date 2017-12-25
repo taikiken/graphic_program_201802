@@ -7,16 +7,16 @@
     <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
     <script src="/assets/js/app_divide.bundle.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <title><?php echo $page['player']->body->name?> | スポーツブル / SPORTS BULL</title>
+    <title><?php echo $page['player']['name']?> | スポーツブル / SPORTS BULL</title>
     <script src="/assets/js/libs/vendor.react.js"></script>
     <script src="/assets/js/bundle/main.bundle.js"></script>
     <link rel="stylesheet" href="/assets/sp/css/ui.css">
-    <meta name="keywords" content="スポーツ,メディア,アスリート,ニュース,動画,sports,media,<?php echo $page['player']->body->name?>">
+    <meta name="keywords" content="スポーツ,メディア,アスリート,ニュース,動画,sports,media,<?php echo $page['player']['name']?>">
     <meta name="description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
     <meta property="fb:app_id" content="842032129256034">
     <meta property="og:site_name" content="スポーツブル / SPORTS BULL">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="<?php echo $page['player']->body->name?> | スポーツブル / SPORTS BULL">
+    <meta property="og:title" content="<?php echo $page['player']['name']?> | スポーツブル / SPORTS BULL">
     <meta property="og:image" content="/assets/images/common/og_image.png">
     <meta property="og:url" content="https://sportsbull.jp/">
     <meta property="og:description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
@@ -27,7 +27,7 @@
     <!-- twitter card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@sportsbull_jp">
-    <meta name="twitter:title" content="<?php echo $page['player']->body->name?> | スポーツブル / SPORTS BULL">
+    <meta name="twitter:title" content="<?php echo $page['player']['name']?> | スポーツブル / SPORTS BULL">
     <meta name="twitter:image" content="/assets/images/common/og_image.png">
     <meta name="twitter:url" content="https://sportsbull.jp/">
     <meta name="twitter:description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
@@ -200,17 +200,17 @@
                 <!--  メインコンテンツ ---------------------------------------------------------->
                 <div class="player_profile">
                     <div class="img_area">
-                        <div class="img"><img src="/prg_img/img/<?php echo $page['player']->body->img?>" alt=""></div>
+                        <div class="img"><img src="/prg_img/img/<?php echo $page['player']['img']?>" alt=""></div>
                         <div class="name_area">
-                            <h2 class="name"><?php echo $page['player']->body->name?></h2>
-                            <p class="genre"><?php echo $page['player']->body->competition?></p>
+                            <h2 class="name"><?php echo $page['player']['name']?></h2>
+                            <p class="genre"><?php echo $page['player']['competition']?></p>
                         </div>
                     </div>
 
-                    <?php if(false === empty($page['player']->body->description)):?>
+                    <?php if(false === empty($page['player']['description'])):?>
                     <div class="txt_area">
                         <p class="subttl">PROFILE</p>
-                        <p><?php echo $page['player']->body->description?></p>
+                        <p><?php echo $page['player']['description']?></p>
                     </div>
                     <?php endif;?>
                 </div>
@@ -302,7 +302,7 @@
             <nav class="foot-breadCrumb">
                 <ol itemscope="" itemtype="http://schema.org/breadCrumbList">
                     <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1"></a></li>
-                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name"><?php echo $page['player']->body->name?></span><meta itemprop="position" content="2"></a></li>
+                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name"><?php echo $page['player']['name']?></span><meta itemprop="position" content="2"></a></li>
 
                 </ol>
             </nav>
@@ -418,7 +418,7 @@
         }
     });
 </script>
-<script id="js-exe" src="/assets/js/crazy_athlete_related_sp.bundle.js" data-label="<?php echo $page['player']->body->name?>"></script>
+<script id="js-exe" src="/assets/js/crazy_athlete_related_sp.bundle.js" data-label="<?php echo $page['player']['name']?>"></script>
 </body>
 </html>
 <?php
