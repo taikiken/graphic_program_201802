@@ -122,6 +122,92 @@ if(strlen($f["name"])>0){
 	$y["status"]["user_message"]="";
 	$y["status"]["developer_message"]="";
 
+  // お知らせ
+  $sql = <<<SQL
+SELECT 
+		notices.*
+FROM
+		categories_notices,
+		notices
+WHERE
+ 		category_id = {$category_id}
+AND
+		notice_id = notices.id
+ORDER BY
+		categories_notices.created_at DESC
+LIMIT 1
+SQL;
+
+  $o->query($sql);
+  $f = $o->fetch_array();
+
+// デフォルトのお知らせ取得
+  if (empty($f))
+  {
+    $sql = <<<SQL
+SELECT 
+		notices.*
+FROM
+		categories_notices,
+		notices
+WHERE
+ 		category_id = 0
+AND
+		notice_id = notices.id
+ORDER BY
+		categories_notices.created_at DESC
+LIMIT 1
+SQL;
+
+    $o->query($sql);
+    $f = $o->fetch_array();
+  }
+
+  if (!empty($f))
+  {
+    // フルパスで返す
+    $domain = "https://" . $_SERVER["HTTP_HOST"];
+    $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
+    // img、linkはnullの場合あるから空にする
+    $f['img'] = isset($f['img']) ? $cf . $f['img'] : '';
+    $f['link'] = isset($f['link']) ? $f['link'] : '';
+
+    // 定数
+    $type = $f['type'];
+    $text_color = ['#333333', '#333333', ''];
+    $background_color = ['#ffffff', '#ffcccc', ''];
+    $icon = [
+      $domain . '/information/icon/3x/information__icon__notice.png',
+      $domain . '/information/icon/3x/information__icon__warning.png',
+      '',
+    ];
+    $disp_type = ['notice', 'warning', 'img'];
+
+
+    $information = array(
+
+      'type'             => $disp_type[$type],
+      'text'             => $f['text'],
+      'text_color'       => $text_color[$type],
+      'background_color' => $background_color[$type],
+      'icon'             => $icon[$type],
+      'img'              => $f['img'],
+      'link'             => $f['link'],
+    );
+
+  }
+  else
+  {
+    $information = null;
+  }
+
+  $categoriesinfo['information'] = array(
+    'pc'      => $information,
+    'sp'      => $information,
+    'ios'     => $information,
+    'android' => $information,
+  );
+
 }else{
 
 	$y["status"]["code"]=404;
@@ -193,114 +279,25 @@ if(strlen($f["name"])>0){
 // 1件でもあったら
 $sql = <<<SQL_EOL
   SELECT
-    tbl_player.id 
+    id 
   FROM
-    tbl_player, u_categories
+   u_categories
   WHERE 
-    to_number(tbl_player.category, '9999') = u_categories.id
-  AND
-    tbl_player.flag = 1
-  AND
-    u_categories.name_e = '{$category}'
+    name_e = '{$category}'
 SQL_EOL;
 
 $o->query($sql);
-$count_pickup_athletes = $o->num_rows();
 
-	if (!empty($category) && $count_pickup_athletes > 0)
-	{
-		$categoriesinfo['webviews'][]     = [
-			'/category/' . $category . '/pickup_athletes/webview/',
-		];
-	} else {
-    $categoriesinfo['webviews'] = [];
-	}
+$category_id = $o->fetch_object()->id;
 
-  // お知らせ
-$sql = <<<SQL
-SELECT 
-		notices.*
-FROM
-		categories_notices,
-		notices
-WHERE
- 		category_id = {$category_id}
-AND
-		notice_id = notices.id
-ORDER BY
-		categories_notices.created_at DESC
-LIMIT 1
-SQL;
+$pickup_players = get_pickup_players($category_id);
 
-$o->query($sql);
-$f = $o->fetch_array();
-
-// デフォルトのお知らせ取得
-if (empty($f))
+if (!empty($category) && !empty($pickup_players))
 {
-  $sql = <<<SQL
-SELECT 
-		notices.*
-FROM
-		categories_notices,
-		notices
-WHERE
- 		category_id = 0
-AND
-		notice_id = notices.id
-ORDER BY
-		categories_notices.created_at DESC
-LIMIT 1
-SQL;
-
-  $o->query($sql);
-  $f = $o->fetch_array();
+  $categoriesinfo['webviews'][]     = '/pickup_athletes/' . $category . '/webview/';
+} else {
+  $categoriesinfo['webviews'] = [];
 }
-
-if (!empty($f))
-{
-  // フルパスで返す
-  $domain = "https://" . $_SERVER["HTTP_HOST"];
-  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
-  // img、linkはnullの場合あるから空にする
-  $f['img'] = isset($f['img']) ? $cf . $f['img'] : '';
-  $f['link'] = isset($f['link']) ? $f['link'] : '';
-
-  // 定数
-  $type = $f['type'];
-  $text_color = ['#333333', '#333333', ''];
-  $background_color = ['#ffffff', '#ffcccc', ''];
-  $icon = [
-    $domain . '/information/icon/3x/information__icon__notice.png',
-    $domain . '/information/icon/3x/information__icon__warning.png',
-    '',
-  ];
-  $disp_type = ['notice', 'warning', 'img'];
-
-
-  $information = array(
-
-    'type'             => $disp_type[$type],
-    'text'             => $f['text'],
-    'text_color'       => $text_color[$type],
-    'background_color' => $background_color[$type],
-    'icon'             => $icon[$type],
-    'img'              => $f['img'],
-    'link'             => $f['link'],
-  );
-
-}
-else
-{
-  $information = null;
-}
-
-$categoriesinfo['information'] = array(
-  'pc'      => $information,
-  'sp'      => $information,
-  'ios'     => $information,
-  'android' => $information,
-);
 
 $y["response"]=$categoriesinfo;
 

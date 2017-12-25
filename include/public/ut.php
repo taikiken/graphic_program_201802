@@ -1369,4 +1369,42 @@ function get_categoryid_by_playerid($playerid) {
   return $res['category'];
 }
 
+function get_pickup_players($category_id = null, $player_id = null, $limit = null) {
+  global $o;
+
+  $sql = <<<SQL
+SELECT
+  p.*, MAX(uh.n) AS max_h_n 
+FROM
+    repo
+    INNER JOIN u_categories uc ON repo.category = uc.id
+    INNER JOIN u_headline uh ON uh.cid = repo.id
+    INNER JOIN tbl_player p ON uh.d2 = p.id
+WHERE
+    rid = 95
+    AND repo.flag = 1
+    AND uc.flag = 1
+    AND uh.flag = 1
+    AND p.flag = 1
+SQL;
+
+
+  if ($player_id !== null) {
+    $sql .= " AND p.id = {$player_id}";
+  }
+  if ($category_id !== null) {
+    $sql .= " AND uc.id = '{$category_id}'";
+  }
+  $sql .= ' GROUP BY p.id';
+  $sql .= " ORDER BY max_h_n";
+
+  if ($limit !== null) {
+    $sql .= " LIMIT {$limit}";
+  }
+
+  $o->query($sql);
+
+  var_dump($sql);
+  return $o->fetch_all();
+}
 ?>
