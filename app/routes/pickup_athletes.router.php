@@ -1,0 +1,75 @@
+<?php
+
+
+$categories = $app->model->property('site_categories');
+
+if ( $categories ) :
+
+  // ルーティングのためのスラッグを設定する - 存在しないカテゴリーは404を返す
+  $category_slug = array_keys( $categories );
+
+
+endif;
+
+
+$s3key = 'json/ca_list.json';
+
+$json = $ImgPath . '/' . $s3key;
+$app->group('/pickup_athletes/{category_slug:all|'.join('|',$category_slug).'}', function () use($app, $json, $ImgPath) {
+
+
+
+
+  $this->get('/list[/]', function ($request, $response, $args) use ($app, $json) {
+    // 選手一覧
+    $category = $app->model->get_category_by_slug($args['category_slug'],null, true);
+    $pickup_players = $app->model->get_pickup_players($category['id']);
+    $data = [];
+    foreach ($pickup_players as $index => $row) {
+      $data[] = [
+          'body' => [
+              'no' => $row['id'],
+              'name' => $row['name'],
+              'name_kana' => $row['name_kana'],
+              'competition' => $row['competition'],
+              'description' => $row['description'],
+              'img' => $row['img1'],
+          ],
+      ];
+    }
+    //オブジェクト化する
+    $data = json_decode(json_encode($data));
+
+    // jsonの中身が空の場合404
+    if (empty($data)) {
+      // 404
+      // ------------------------------
+      $args['page'] = $app->model->set([
+          'title' => '404 Not Found',
+          'og_title' => '404 Not Found',
+          'template' => 404,
+      ]);
+      $args['request'] = $request;
+      $args['response'] = $response;
+      if ($app->model->property('ua') === 'desktop') {
+        return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
+      } else {
+        return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
+      }
+    }
+
+    $args['page'] = $app->model->set(array(
+        'title' => $category['label'],
+        'og_title' => $category['label'] . ' | ' . $app->model->property('title'),
+        'path' => $args,
+        'template' => 'category_list',
+        'template_classname' => '',
+        'list' => $data,
+        'category' => $category,
+    ));
+    return $this->renderer->render($response, 'athletes/list.php', $args);
+  });
+});
+
+
+?>

@@ -39,7 +39,7 @@
               </ul>
           </div>
 
-          <div class="more_btn pc_hide"><a href="/category/<?php echo $page['category']['slug']; ?>/athletes/"><i></i>すべての選手を見る</a></div>
+          <div class="more_btn pc_hide"><a href="/pickup_athletes/<?php echo $page['category']['slug']; ?>/list/"><i></i>すべての選手を見る</a></div>
       </section>
       <section class="section_crazy_popular pc_hide">
           <div class="ttl-wrapper pc_hide">
