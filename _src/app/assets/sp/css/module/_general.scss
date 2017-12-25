@@ -236,8 +236,13 @@
       word-break: break-all;
 
       a {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-weight: bold;
         font-size: fz(20/2);
+        white-space: nowrap;
       }
     }
 
