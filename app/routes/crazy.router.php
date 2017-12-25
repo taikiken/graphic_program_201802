@@ -3,13 +3,7 @@
 // stats
 // ==============================
 $app->group('/crazy', function () use($app, $ImgPath) {
-
-    $s3key = 'json/ca_list.json';
-
-    $json = $ImgPath . '/' . $s3key;
-    $data = @file_get_contents($json);
-
-    // webview
+   // webview
     // ==============================
     $this->get('/webview[/]', function () {
       header("Location: /category/crazy/pickup_athletes/webview",TRUE,301);
