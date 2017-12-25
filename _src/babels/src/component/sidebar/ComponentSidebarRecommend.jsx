@@ -119,6 +119,7 @@ export default class ComponentSidebarRecommend extends React.Component {
               const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
               return (
                 <ComponentSidebarRankingArticle
+                  key={`sidebar-recommend-${dae.id}`}
                   index={i}
                   thumbnail={thumbnail}
                   categories={dae.categories.all}
