@@ -287,6 +287,11 @@ SQL;
     );
   endif;
 
+
+  if (!empty($category)) {
+    $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
+  }
+
   $y["response"]=$categoriesinfo;
 
 print_json($y,$_SERVER['HTTP_REFERER']);
