@@ -13,8 +13,17 @@
 
 import {EventDispatcher} from './EventDispatcher';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link MessageStatus} inner symbol
+ * @type {symbol}
+ */
+const messageStatusSymbol = Symbol('MessageStatus symbol');
+/**
+ * {@link MessageStatus} singleton instance
+ * @type {?MessageStatus}
+ * @private
+ */
+let singletonInstance = null;
 
 /**
  * flush message
@@ -27,18 +36,18 @@ export class MessageStatus extends EventDispatcher {
    * @return {*} MessageStatus instance を返します
    */
   constructor( target ) {
-    if ( _symbol !== target ) {
+    if ( messageStatusSymbol !== target ) {
 
       throw new Error( 'MessageStatus is static Class. not use new MessageStatus(). instead MessageStatus.factory()' );
 
     }
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
       super();
-      _instance = this;
+      singletonInstance = this;
     }
 
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  EVENT
@@ -176,12 +185,12 @@ export class MessageStatus extends EventDispatcher {
    */
   static factory():MessageStatus {
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
 
-      _instance = new MessageStatus( _symbol );
+      singletonInstance = new MessageStatus( messageStatusSymbol );
 
     }
 
-    return _instance;
+    return singletonInstance;
   }
 }

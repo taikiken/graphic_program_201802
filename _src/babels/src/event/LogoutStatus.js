@@ -13,8 +13,16 @@
 
 import {EventDispatcher} from './EventDispatcher';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link LogoutStatus} inner symbol
+ * @type {symbol}
+ */
+const logoutStatusSymbol = Symbol('LogoutStatus symbol');
+/**
+ * {@link LogoutStatus} singleton instance
+ * @type {?LogoutStatus}
+ */
+let singletonInstance = null;
 
 /**
  * Logout modal を open / close するための custom Event
@@ -27,18 +35,18 @@ export class LogoutStatus extends EventDispatcher {
    * @return {LogoutStatus} LogoutStatus instance を返します
    */
   constructor( target ) {
-    if ( _symbol !== target ) {
+    if ( logoutStatusSymbol !== target ) {
 
       throw new Error( 'LogoutStatus is static Class. not use new LogoutStatus(). instead LogoutStatus.factory()' );
 
     }
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
       super();
-      _instance = this;
+      singletonInstance = this;
     }
 
-    return _instance;
+    return singletonInstance;
   }
 
   /**
@@ -81,12 +89,12 @@ export class LogoutStatus extends EventDispatcher {
    */
   static factory():LogoutStatus {
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
 
-      _instance = new LogoutStatus( _symbol );
+      singletonInstance = new LogoutStatus( logoutStatusSymbol );
 
     }
 
-    return _instance;
+    return singletonInstance;
   }
 }

@@ -24,7 +24,11 @@ import {Api} from '../../net/Api';
 // data
 import {Safety} from '../../data/Safety';
 
-let _symbol = Symbol();
+/**
+ * {@link Comments} inner Symbol
+ * @type {Symbol}
+ */
+const commentsSymbol = Symbol('Comments symbol');
 
 /**
  * <p>コメント一覧<p>
@@ -45,7 +49,7 @@ export class Comments extends OffsetAuth {
    * @param {Number} [length=10] query length 値
    * */
   constructor( target:Symbol, id:Number, type:string = '', resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.list ) {
-    if ( _symbol !== target ) {
+    if ( commentsSymbol !== target ) {
 
       throw new Error( 'not use new Comments(). instead Comments.all() or Comments.normal() or Comments.official() or Comments.mine()' );
 
@@ -143,7 +147,7 @@ export class Comments extends OffsetAuth {
    * @return {Comments} Comments instanceを返します
    */
   static mine( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( _symbol, id, CommentsType.SELF, resolve, reject );
+    return new Comments( commentsSymbol, id, CommentsType.SELF, resolve, reject );
   }
   /**
    * コメント一覧, 通常ユーザーのコメント
@@ -153,7 +157,7 @@ export class Comments extends OffsetAuth {
    * @return {Comments} Comments instanceを返します
    */
   static normal( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( _symbol, id, CommentsType.NORMAL, resolve, reject );
+    return new Comments( commentsSymbol, id, CommentsType.NORMAL, resolve, reject );
   }
   /**
    * コメント一覧,公式ユーザーのコメント
@@ -163,7 +167,7 @@ export class Comments extends OffsetAuth {
    * @return {Comments} Comments instanceを返します
    */
   static official( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( _symbol, id, CommentsType.OFFICIAL, resolve, reject );
+    return new Comments( commentsSymbol, id, CommentsType.OFFICIAL, resolve, reject );
   }
   /**
    * コメント一覧, 全てのコメント
@@ -173,6 +177,6 @@ export class Comments extends OffsetAuth {
    * @return {Comments} Comments instanceを返します
    */
   static all( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( _symbol, id, CommentsType.ALL, resolve, reject );
+    return new Comments( commentsSymbol, id, CommentsType.ALL, resolve, reject );
   }
 }

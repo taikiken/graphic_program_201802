@@ -13,32 +13,36 @@
 
 import {EventDispatcher} from './EventDispatcher';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link CommentStatus} inner symbol
+ * @type {symbol}
+ */
+const commentStatusSymbol = Symbol('CommentStatus symbol');
+/**
+ * {@link CommentStatus} singleton instance
+ * @type {?CommentStatus}
+ */
+let singletonInstance = null;
 
 /**
  * コメントの good / bad / delete / notice  Event
+ * - Singleton
  */
 export class CommentStatus extends EventDispatcher {
   /**
-   * <h3>Singleton</h3>
-   * <p>コメントの good / bad / delete / notice  Event</p>
+   * コメントの good / bad / delete / notice  Event
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {CommentStatus} CommentStatus instance を返します
    */
   constructor( target ) {
-    if ( _symbol !== target ) {
-
+    if ( commentStatusSymbol !== target ) {
       throw new Error( 'CommentStatus is static Class. not use new CommentStatus(). instead CommentStatus.factory()' );
-
     }
-
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
       super();
-      _instance = this;
+      singletonInstance = this;
     }
-
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  EVENT
@@ -150,12 +154,12 @@ export class CommentStatus extends EventDispatcher {
    */
   static factory():CommentStatus {
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
 
-      _instance = new CommentStatus( _symbol );
+      singletonInstance = new CommentStatus( commentStatusSymbol );
 
     }
 
-    return _instance;
+    return singletonInstance;
   }
 }

@@ -13,9 +13,17 @@
 import {EventDispatcher} from './EventDispatcher';
 
 // Singleton を保証するための Symbol
-const _symbol = Symbol('UserStatus singleton Symbol');
+/**
+ * {@link UserStatus} inner symbol
+ * @type {symbol}
+ */
+const userStatusSymbol = Symbol('UserStatus singleton Symbol');
 // Singleton instance
-let _instance = null;
+/**
+ * {@link UserStatus} singleton instance
+ * @type {?UserStatus}
+ */
+let singletonInstance = null;
 
 /**
  * ログイン / ログアウト を通知
@@ -33,18 +41,18 @@ export class UserStatus extends EventDispatcher {
    * @return {UserStatus} UserStatus インスタンスを返します
    */
   constructor(target) {
-    if (_symbol !== target) {
+    if (userStatusSymbol !== target) {
       throw new Error('UserStatus is static Class. not use new UserStatus().');
     }
-    if (_instance !== null) {
-      return _instance;
+    if (singletonInstance !== null) {
+      return singletonInstance;
     }
     // ------
     // do once
     super();
-    _instance = this;
+    singletonInstance = this;
 
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  method
@@ -88,9 +96,9 @@ export class UserStatus extends EventDispatcher {
    * @return {UserStatus} UserStatus instance を返します
    */
   static factory() {
-    if (_instance === null) {
-      _instance = new UserStatus( _symbol );
+    if (singletonInstance === null) {
+      singletonInstance = new UserStatus( userStatusSymbol );
     }
-    return _instance;
+    return singletonInstance;
   }
 }

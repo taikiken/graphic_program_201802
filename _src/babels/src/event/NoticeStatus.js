@@ -18,13 +18,13 @@ import {EventDispatcher} from './EventDispatcher';
  * @type {symbol}
  * @private
  */
-const _symbol = Symbol('NoticeStatus singleton instance');
+const noticeStatusSymbol = Symbol('NoticeStatus singleton instance');
 /**
  * {@link NoticeStatus} singleton instance
  * @type {?NoticeStatus}
  * @private
  */
-let _instance = null;
+let singletonInstance = null;
 
 /**
  * お知らせ更新を通知するための custom Event
@@ -40,10 +40,10 @@ export class NoticeStatus extends EventDispatcher {
    * @return {NoticeStatus} NoticeStatus instance を返します
    */
   static factory() {
-    if (_instance === null) {
-      _instance = new NoticeStatus(_symbol);
+    if (singletonInstance === null) {
+      singletonInstance = new NoticeStatus(noticeStatusSymbol);
     }
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  EVENT
@@ -65,14 +65,14 @@ export class NoticeStatus extends EventDispatcher {
    * @return {UserStatus} UserStatus インスタンスを返します
    */
   constructor(target) {
-    if (_symbol !== target) {
+    if (noticeStatusSymbol !== target) {
       throw new Error( 'NoticeStatus is static Class. not use new NoticeStatus().' );
     }
-    if (_instance === null) {
+    if (singletonInstance === null) {
       super();
-      _instance = this;
+      singletonInstance = this;
     }
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD

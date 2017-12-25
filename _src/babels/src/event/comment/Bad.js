@@ -14,32 +14,40 @@
 import {EventDispatcher} from '../EventDispatcher';
 import {CommentStatus} from '../CommentStatus';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link Bad} inner symbol
+ * @type {symbol}
+ */
+const badSymbol = Symbol('Bad symbol');
+/**
+ * {@link Bad} singleton instance
+ * @type {?Bad}
+ */
+let singletonInstance = null;
 
 /**
  * コメントの bad
+ * - Singleton
  */
 export class Bad extends EventDispatcher {
   /**
-   * <h3>Singleton</h3>
    * コメントの bad
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {Bad} Bad instance
    */
   constructor( target ) {
-    if ( _symbol !== target ) {
+    if ( badSymbol !== target ) {
 
       throw new Error( 'Bad is static Class. not use new Bad(). instead Bad.factory()' );
 
     }
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
       super();
-      _instance = this;
+      singletonInstance = this;
     }
 
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -87,12 +95,12 @@ export class Bad extends EventDispatcher {
    */
   static factory():Bad {
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
 
-      _instance = new Bad( _symbol );
+      singletonInstance = new Bad( badSymbol );
 
     }
 
-    return _instance;
+    return singletonInstance;
   }
 }

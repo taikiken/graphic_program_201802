@@ -24,8 +24,8 @@ export class Type {
    * @param {string} url API request先
    * @param {string} [method=GET] 'GET', 'POST', 'PUT', 'DELETE'...
    */
-  constructor(url, method = 'GET' ) {
-    method = Safety.string(method, 'GET');
+  constructor(url, method = 'GET') {
+    // method = Safety.string(method, 'GET');
     /**
      * API request先
      * @type {string}
@@ -37,7 +37,8 @@ export class Type {
      * @type {string}
      * @private
      */
-    this._method = method.toUpperCase();
+    this._method = Safety.string(method, 'GET').toUpperCase();
+    // this._method = method.toUpperCase();
 
   }
   // ---------------------------------------------------

@@ -15,8 +15,16 @@ import {EventDispatcher} from './EventDispatcher';
 
 import {Safety} from '../data/Safety';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link SignupStatus} inner symbol
+ * @type {symbol}
+ */
+const signupStatusSymbol = Symbol('SignupStatus symbol');
+/**
+ * {@link SignupStatus} singleton instance
+ * @type {?SignupStatus}
+ */
+let singletonInstance = null;
 
 /**
  * signup wizard status などで使用します
@@ -28,17 +36,17 @@ export class SignupStatus extends EventDispatcher {
    * @return {*} SignupStatus instance を返します
    */
   constructor( target ) {
-    if ( _symbol !== target ) {
+    if ( signupStatusSymbol !== target ) {
 
       throw new Error( 'SignupStatus is static Class. not use new SignupStatus(). instead SignupStatus.factory()' );
 
     }
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
       super();
-      _instance = this;
+      singletonInstance = this;
     }
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  method
@@ -168,12 +176,12 @@ export class SignupStatus extends EventDispatcher {
    */
   static factory():SignupStatus {
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
 
-      _instance = new SignupStatus( _symbol );
+      singletonInstance = new SignupStatus( signupStatusSymbol );
 
     }
 
-    return _instance;
+    return singletonInstance;
   }
 }

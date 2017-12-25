@@ -14,8 +14,16 @@
 import {EventDispatcher} from '../EventDispatcher';
 import {CommentStatus} from '../CommentStatus';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link Good} inner symbol
+ * @type {symbol}
+ */
+const goodSymbol = Symbol('Good symbol');
+/**
+ * {@link Good} singleton instance
+ * @type {?Good}
+ */
+let singletonInstance = null;
 
 /**
  * コメントの good
@@ -28,18 +36,18 @@ export class Good extends EventDispatcher {
    * @return {Good} Good instance
    */
   constructor( target ) {
-    if ( _symbol !== target ) {
+    if ( goodSymbol !== target ) {
 
       throw new Error( 'Good is static Class. not use new Good(). instead Good.factory()' );
 
     }
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
       super();
-      _instance = this;
+      singletonInstance = this;
     }
 
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -87,12 +95,12 @@ export class Good extends EventDispatcher {
    */
   static factory():Good {
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
 
-      _instance = new Good( _symbol );
+      singletonInstance = new Good( goodSymbol );
 
     }
 
-    return _instance;
+    return singletonInstance;
   }
 }

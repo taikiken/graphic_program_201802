@@ -13,8 +13,16 @@
 
 import {EventDispatcher} from './EventDispatcher';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link SettingsStatus} inner symbol
+ * @type {symbol}
+ */
+const settingsStatusSymbol = Symbol('SettingsStatus symbol');
+/**
+ * {@link SettingsStatus} singleton instance
+ * @type {?SettingsStatus}
+ */
+let singletonInstance = null;
 
 /**
  * 設定
@@ -35,17 +43,17 @@ export class SettingsStatus extends EventDispatcher {
    * @return {ReplyStatus} ReplyStatus instance を返します
    */
   constructor( target ) {
-    if ( _symbol !== target ) {
+    if ( settingsStatusSymbol !== target ) {
 
       throw new Error( 'SettingsStatus is static Class. not use new SettingsStatus(). instead SettingsStatus.factory()' );
 
     }
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
       super();
-      _instance = this;
+      singletonInstance = this;
     }
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  EVENT
@@ -87,12 +95,12 @@ export class SettingsStatus extends EventDispatcher {
    */
   static factory():SettingsStatus {
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
 
-      _instance = new SettingsStatus( _symbol );
+      singletonInstance = new SettingsStatus( settingsStatusSymbol );
 
     }
 
-    return _instance;
+    return singletonInstance;
   }
 }

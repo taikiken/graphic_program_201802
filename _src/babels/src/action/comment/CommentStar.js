@@ -18,19 +18,23 @@ import {Safety} from '../../data/Safety';
 import {User} from '../../app/User';
 import {ActionType} from '../../app/const/ActionType';
 
-let _symbol = Symbol();
+/**
+ * {@link CommentStar} inner symbol
+ * @type {symbol}
+ */
+const commentsStarSymbol = Symbol('CommentStar symbol');
 
 /**
- * <p>コメント GOOD / BAD を行います</p>
- * `CommentStar.good` or `CommentStar.bad` でインスタンスを作成します<br>
- * `new CommentStar()` は実行不可です
+ * コメント GOOD / BAD を行います
+ * - `CommentStar.good` or `CommentStar.bad` でインスタンスを作成します
+ * - `new CommentStar()` は実行不可です
  *
  * @example
- * let good = CommentStar.good( 12345 );
+ * const good = CommentStar.good( 12345 );
  * good.add();
  * good.remove();
  *
- * let bad  = CommentStar.bad( 12345 );
+ * const bad  = CommentStar.bad( 12345 );
  * bad.add();
  * bad.remove()
  */
@@ -43,11 +47,9 @@ export class CommentStar extends ActionAuthBehavior {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( target:Symbol, commentId:Number, type:string, resolve:Function = null, reject:Function = null ) {
-    if ( _symbol !== target ) {
-
+  constructor(target:Symbol, commentId:Number, type:string, resolve:Function = null, reject:Function = null) {
+    if (commentsStarSymbol !== target) {
       throw new Error( 'CommentStar is static Class. not use new CommentStar(). instead CommentStar.add, CommentStar.remove' );
-
     }
     // 正規化
     // type は good | bad
@@ -145,7 +147,7 @@ export class CommentStar extends ActionAuthBehavior {
    * @return {CommentStar} comment good instance を返します
    */
   static good( commentId:Number, resolve:Function = null, reject:Function = null ):CommentStar {
-    return new CommentStar( _symbol, commentId, ActionType.GOOD, resolve, reject );
+    return new CommentStar( commentsStarSymbol, commentId, ActionType.GOOD, resolve, reject );
   }
   /**
    * comment bad instance 作成
@@ -155,7 +157,7 @@ export class CommentStar extends ActionAuthBehavior {
    * @return {CommentStar} comment bad instance を返します
    */
   static bad( commentId:Number, resolve:Function = null, reject:Function = null ):CommentStar {
-    return new CommentStar( _symbol, commentId, ActionType.BAD, resolve, reject );
+    return new CommentStar( commentsStarSymbol, commentId, ActionType.BAD, resolve, reject );
   }
 
 }

@@ -13,8 +13,16 @@
 
 import {EventDispatcher} from './EventDispatcher';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link SearchStatus} inner symbol
+ * @type {symbol}
+ */
+const searchStatusSymbol = Symbol('SearchStatus symbol');
+/**
+ * {@link SearchStatus} singleton instance
+ * @type {?SearchStatus}
+ */
+let singletonInstance = null;
 
 /**
  * sp search form open / close するための custom Event
@@ -27,18 +35,18 @@ export class SearchStatus extends EventDispatcher {
    * @return {SearchStatus} SearchStatus instance を返します
    */
   constructor( target ) {
-    if ( _symbol !== target ) {
+    if ( searchStatusSymbol !== target ) {
 
       throw new Error( 'SearchStatus is static Class. not use new SearchStatus(). instead SearchStatus.factory()' );
 
     }
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
       super();
-      _instance = this;
+      singletonInstance = this;
     }
 
-    return _instance;
+    return singletonInstance;
   }
 
   /**
@@ -79,12 +87,12 @@ export class SearchStatus extends EventDispatcher {
    */
   static factory():SearchStatus {
 
-    if ( _instance === null ) {
+    if ( singletonInstance === null ) {
 
-      _instance = new SearchStatus( _symbol );
+      singletonInstance = new SearchStatus( searchStatusSymbol );
 
     }
 
-    return _instance;
+    return singletonInstance;
   }
 }
