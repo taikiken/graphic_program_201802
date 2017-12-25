@@ -47,11 +47,10 @@ if ($page['category']['slug'] == 'all') {
       <?php
       // ----------------------------------------------------
       // 記事一覧: pc banner
-      echo $page['banner'];
-      if ( ($page['banner']['bannerflag']) ) :
+      if ( !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
         ?>
         <div class="sponsor-link mt30">
-          <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['banner']['pc']['link']; ?>', true);"><img src="<?php echo $page['banner']['banner']['pc_bannerimg']; ?>" alt="<?php echo $page['banner']['banner']['pc']['text'] ? $page['banner']['banner']['pc']['text'] : '' ?>"></a>
+          <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['banner']['pc']['link']; ?>', true);"><img src="<?php echo $page['category']['banner']['pc']['image']; ?>" alt="<?php echo $page['banner']['banner']['pc']['text'] ? $page['banner']['banner']['pc']['text'] : '' ?>"></a>
         </div>
         <?php
       endif;
