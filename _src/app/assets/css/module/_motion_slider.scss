@@ -39,6 +39,16 @@
         float: left;
         width: 540px;
 
+        &.current {
+          a {
+            @include opacity(1);
+
+            &:hover {
+              @include hover-opacity;
+            }
+          }
+        }
+
         a {
           @include link-decoration(#fff, #fff, none, none);
           position: relative;
@@ -46,9 +56,10 @@
           width: 100%;
           height: $pickup-height;
           overflow: hidden;
+          @include opacity(0.5);
 
           &:hover {
-            @include hover-opacity;
+            // @include hover-opacity;
 
             .category-label,
             .post-heading {

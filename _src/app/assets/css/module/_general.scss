@@ -14,7 +14,7 @@
 //お知らせ
 // https://aws-plus.backlog.jp/view/UNDO_SPBL-281
 .announce {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid $border-primary-color;
 
   //.announce__inner
   &__inner {
@@ -33,9 +33,14 @@
       word-break: break-all;
 
       a {
-        @include link-decoration(null, null, underline, none);
+        @include link-decoration(null, null, none, none);
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-weight: bold;
         font-size: fz(13);
+        white-space: nowrap;
       }
     }
 

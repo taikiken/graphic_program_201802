@@ -160,6 +160,10 @@ $z-map: (
       font-weight: bold;
       // font-size: 2.7vw;
       font-size: fz(16);
+
+      .safari & {
+        font-size: 15px;
+      }
     }
   }
 
@@ -208,7 +212,7 @@ $z-map: (
       stroke-width: 0;
       stroke: #fff;
 
-      &.icon--baseball  {
+      &.icon--baseball {
         fill: #fff;
       }
     }
@@ -217,6 +221,10 @@ $z-map: (
       display: inline-block;
       line-height: 1.2;
       font-size: fz(15);
+
+      .safari & {
+        font-size: 14px;
+      }
     }
   } //.stats_banner__item
 
