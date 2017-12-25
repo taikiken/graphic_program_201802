@@ -124,7 +124,7 @@ if(strlen($f["name"])>0){
 
 	// お知らせ
   $sql = <<<SQL
-SELECT 
+SELECT
 		notices.*
 FROM
 		categories_notices,
@@ -145,7 +145,7 @@ SQL;
   if (empty($f))
   {
     $sql = <<<SQL
-SELECT 
+SELECT
 		notices.*
 FROM
 		categories_notices,
@@ -211,8 +211,6 @@ SQL;
   }
 
   $categoriesinfo['information'] = $information_list;
-
-  $y["response"]=$categoriesinfo;
 
 }else{
 
@@ -289,6 +287,7 @@ SQL;
     );
   endif;
 
+  $y["response"]=$categoriesinfo;
 
 print_json($y,$_SERVER['HTTP_REFERER']);
 
