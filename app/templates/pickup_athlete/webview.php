@@ -5,7 +5,7 @@
         <meta http-equiv="pragma" content="no-cache">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>インターハイ WebView | SPORTS BULL</title>
+        <title>SPORTS BULL</title>
         <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
         <!-- インターハイ css -->
         <link rel="stylesheet" href="/assets/css/crazy.css">
