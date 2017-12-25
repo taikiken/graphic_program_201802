@@ -129,12 +129,6 @@ if(strlen($f["name"])>0){
 	$y["status"]["developer_message"]="指定されたカテゴリーは存在しません。";
 }
 
-	if (!empty($category))
-	{
-    $categoriesinfo['webviews']     = array(
-      '/category/' . $category . '/pickup_athletes/webview/',
-    );
-	}
 
   if ( $category === 'big6tv' ) :
 
@@ -194,6 +188,33 @@ if(strlen($f["name"])>0){
       '/stats/webview/',
     );
   endif;
+
+
+// 1件でもあったら
+$sql = <<<SQL_EOL
+  SELECT
+    tbl_player.id 
+  FROM
+    tbl_player, u_categories
+  WHERE 
+    to_number(tbl_player.category, '9999') = u_categories.id
+  AND
+    tbl_player.flag = 1
+  AND
+    u_categories.name_e = '{$category}'
+SQL_EOL;
+
+$o->query($sql);
+$count_pickup_athletes = $o->num_rows();
+
+	if (!empty($category) && $count_pickup_athletes > 0)
+	{
+		$categoriesinfo['webviews'][]     = [
+			'/category/' . $category . '/pickup_athletes/webview/',
+		];
+	} else {
+    $categoriesinfo['webviews'] = [];
+	}
 
   // お知らせ
 $sql = <<<SQL
