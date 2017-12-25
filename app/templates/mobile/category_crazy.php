@@ -37,10 +37,10 @@
       <?php
       // ----------------------------------------------------
       // 記事一覧: sp banner
-      if ( !empty($page['sponsor_link']['banner']['sp']['image']) && !empty($page['sponsor_link']['banner']['sp']['link']) ) :
+      if ( !empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']) ) :
         ?>
         <div class="sponsor-link">
-          <a href="<?php echo $page['sponsor_link']['banner']['sp']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['sponsor_link']['banner']['sp']['link']; ?>', true);"><img src="<?php echo $page['sponsor_link']['banner']['sp']['image']; ?>" alt="<?php echo $page['sponsor_link']['banner']['sp']['text'] ? $page['sponsor_link']['banner']['sp']['text'] : '' ?>"></a>
+          <a href="<?php echo $page['category']['banner']['sp']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['sp']['link']; ?>', true);"><img src="<?php echo $page['category']['banner']['sp']['image']; ?>" alt="<?php echo $page['category']['banner']['sp']['text'] ? $page['category']['banner']['sp']['text'] : '' ?>"></a>
         </div>
         <?php
       endif;
