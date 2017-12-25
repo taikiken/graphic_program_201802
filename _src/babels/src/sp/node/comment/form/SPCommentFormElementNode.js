@@ -36,6 +36,8 @@ let ReactDOM = self.ReactDOM;
 
 // comment form
 /**
+ * @deprecated 2017-12-25 instead use {@link SPComponentCommentFormElement}
+ * @TODO future remove
  * <p>[SP]<br>
  * コメント Form Element<br>
  * 入力(textarea)と送信(input:submit)</p>

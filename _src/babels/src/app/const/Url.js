@@ -16,10 +16,10 @@ const Browser = self.Sagen.Browser;
 // let _symbol = Symbol();
 
 /**
- * <p>Page 遷移 URL</p>
- * 全て static です
- * <p>a tag href へハードコードされる URL 定義</p>
- * [参照](https://docs.google.com/spreadsheets/d/1raMO0x5aeG-bk45PK528ib9HUU-Q4DbHq56oxDQ1h7c/)
+ * Page 遷移 URL
+ * - 全て static です
+ * - a tag href へハードコードされる URL 定義
+ * - [参照](https://docs.google.com/spreadsheets/d/1raMO0x5aeG-bk45PK528ib9HUU-Q4DbHq56oxDQ1h7c/)
  * */
 export class Url {
   // /**
@@ -294,11 +294,11 @@ export class Url {
   }
   /**
    * アプリダウンロード URL を取得します
-   * <pre>
+   * ```
    *   ダウンロード先URLは
    *   iOS : https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8
    *   Android : https://play.google.com/store/apps/details?id=com.undotsushin
-   * </pre>
+   * ```
    * @see https://github.com/undotsushin/undotsushin/issues/1009
    * @return {?string} app banner URL
    */
@@ -311,8 +311,8 @@ export class Url {
     return null;
   }
   /**
-   * #1023 Syn.extension, SP「関連記事」script tag<br>
-   * React に script を埋め込むのが困難なため外部スクリプト化しインサートします
+   * ref: #1023 Syn.extension, SP「関連記事」script tag
+   * - React に script を埋め込むのが困難なため外部スクリプト化しインサートします
    * @return {string} Syn.extension JS path を返します
    * @since 2016-09-28
    */
@@ -320,8 +320,8 @@ export class Url {
     return '/assets/js/syn.extension-recommend_articles.js';
   }
   /**
-   * #1023 Syn.extension, SP「関連記事」script tag<br>
-   * `script` tag 下 `so_dmp.js` ロードパス
+   * ref: #1023 Syn.extension, SP「関連記事」script tag
+   * - `script` tag 下 `so_dmp.js` ロードパス
    * @return {string} script` tag 下 `so_dmp.js` パスを返します
    * @since 2016-09-28
    */
@@ -329,8 +329,8 @@ export class Url {
     return '//i.socdm.com/s/so_dmp.js?service_id=un_sports';
   }
   /**
-   * desktop/p.php line.288 ~ 299, JS で出力のために外部JS file へ<br>
-   * React に script を埋め込むのが困難なため外部スクリプト化しインサートします
+   * desktop/p.php line.288 ~ 299, JS で出力のために外部JS file へ
+   * - React に script を埋め込むのが困難なため外部スクリプト化しインサートします
    * @return {string} `/assets/js/pc_popin-recommend.js` を返します
    * @since 2016-09-30
    */

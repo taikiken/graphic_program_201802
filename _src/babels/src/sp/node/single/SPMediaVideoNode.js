@@ -25,11 +25,14 @@ import {VideojsImaNode} from '../../../node/media/VideojsImaNode';
 // ---
 // @since 2016-11-13
 // component
-import { ComponentVideojsImaSingles } from '../../../component/media/ComponentVideojsImaSingles';
+import ComponentVideojsImaSingles from '../../../component/media/ComponentVideojsImaSingles';
 // ---
 
 // React
-let React = self.React;
+/**
+ * [library] - React
+ */
+const React = self.React;
 
 /**
  * SP 記事詳細 HTML5 video
@@ -144,10 +147,11 @@ export let SPMediaVideoNode = React.createClass( {
 
     return (
       <div className="post-kv post-video-kv post-video-fb">
-        <div className="fb-video"
-             data-href={video.facebook}
-             data-allowfullscreen="true"
-             data-width={Content.WIDTH}
+        <div
+          className="fb-video"
+          data-href={video.facebook}
+          data-allowfullscreen="true"
+          data-width={Content.WIDTH}
         />
       </div>
     );

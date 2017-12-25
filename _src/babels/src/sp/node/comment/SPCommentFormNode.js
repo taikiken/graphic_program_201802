@@ -20,6 +20,8 @@ let React = self.React;
 // wrapper dom + form
 /**
  * comment form を表示するための基点 class
+ * @deprecated 2017-12-25 instead use {@link SPComponentCommentForm}
+ * @TODO future remove
  * @type {ReactClass}
  */
 export let SPCommentFormNode = React.createClass( {

@@ -27,7 +27,7 @@ const categories = {
  * 各ページのタイトル, template PHPでタイトルを出力するので使用しません
  * - **未使用**
  * @deprecated not use
- * TODO future remobe
+ * TODO future remove
  */
 export class Title {
   // /**

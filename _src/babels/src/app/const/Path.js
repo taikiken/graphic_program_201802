@@ -103,7 +103,7 @@ export class Path {
    * @return {string} 置き換え後のURLを返します
    */
   static article(url, id) {
-    return url.replace( Path.ARTICLE, String(id) );
+    return url.replace(Path.ARTICLE, String(id));
   }
   /**
    * comment id 挿入し url を完成させます
@@ -112,7 +112,7 @@ export class Path {
    * @return {string} 置き換え後のURLを返します
    */
   static comment(url, id) {
-    return url.replace( Path.COMMENT, String(id) );
+    return url.replace(Path.COMMENT, String(id));
   }
   /**
    * reply id 挿入し url を完成させます
@@ -121,7 +121,7 @@ export class Path {
    * @return {string} 置き換え後のURLを返します
    */
   static reply(url, id) {
-    return url.replace( Path.REPLY, String(id) );
+    return url.replace(Path.REPLY, String(id));
   }
   /**
    * user id 挿入し url を完成させます
@@ -130,6 +130,6 @@ export class Path {
    * @return {string} 置き換え後のURLを返します
    */
   static user(url, id) {
-    return url.replace( Path.USER, String(id) );
+    return url.replace(Path.USER, String(id));
   }
 }

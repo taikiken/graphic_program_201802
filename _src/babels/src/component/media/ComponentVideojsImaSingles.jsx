@@ -18,9 +18,15 @@ import { GaData } from '../../ga/GaData';
 import { Ga } from '../../ga/Ga';
 
 // Sagen
+/**
+ * [library] - Sagen
+ */
 const Sagen = self.Sagen;
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -35,12 +41,17 @@ const React = self.React;
  *
  * @since  2016-11-13
  */
-export class ComponentVideojsImaSingles extends React.Component {
+export default class ComponentVideojsImaSingles extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * propTypes
+   * React.propTypes
+   * - articleId - 記事ID
+   * - video {VideoDae}
+   * - poster {string} poster image
+   * - caption {string} video caption
+   * - playImage {string} play button image path
    * @return {{
    * articleId: string,
    * video: VideoDae,
@@ -117,15 +128,19 @@ export class ComponentVideojsImaSingles extends React.Component {
      * @since 2017-09-22
      */
     this.muteId = 0;
+    /**
+     * bind onScroll
+     * @type {function}
+     */
+    this.onScroll = this.onScroll.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * delegate, マウント後にコールされます
-   *
-   * videojs で動画プレイヤーを作成し
-   * ga 送信します
+   * - videojs で動画プレイヤーを作成します `initPlayer` 実行
+   * - ga 送信します
    *
    * window.onscroll を監視し非表示になったら player を止めます
    */
@@ -133,15 +148,18 @@ export class ComponentVideojsImaSingles extends React.Component {
     this.initPlayer();
   }
   /**
-   * video tag id を生成します<br>
-   * videojs が使用します
-   * @return {string} video tag id, content_video_[記事iD]
+   * video tag id を生成します
+   * - videojs が使用します
+   * @return {string} video tag id, `content_video_[記事iD]`
    */
   videoId() {
     return `content_video_${this.props.articleId}`;
   }
   /**
-   * 動画プレイヤーを作成し ga 送信 window.onscroll 監視を始ます
+   * 動画プレイヤー初期処理を行います
+   * - 動画プレイヤーを作成します
+   * - ga 送信します
+   * - window.onscroll 監視を始ます
    */
   initPlayer() {
     const videojs = self.videojs;
@@ -214,7 +232,8 @@ export class ComponentVideojsImaSingles extends React.Component {
     // bind play / ended for ga
     this.ga(player);
     // bind scroll
-    window.addEventListener('scroll', this.onScroll.bind(this), false);
+    window.removeEventListener('scroll', this.onScroll);
+    window.addEventListener('scroll', this.onScroll, false);
   }
   /**
    * `player.muted(false)` します
@@ -228,13 +247,13 @@ export class ComponentVideojsImaSingles extends React.Component {
     try{
       player.muted(false);
     } catch(e) {
-      console.warn(e);
+      console.warn('ComponentVideojsImaSingles.forSafariMute: l250', e);
       player.play();
     }
   }
   /**
    * Safari 11 ad 対策
-   * [videojs event type](https://github.com/videojs/videojs-contrib-ads/issues/108)
+   * - [videojs event type](https://github.com/videojs/videojs-contrib-ads/issues/108)
    * @param {*} player videojs object
    * @see https://github.com/undotsushin/undotsushin/issues/2503
    * @since 2017-09-22
@@ -251,8 +270,8 @@ export class ComponentVideojsImaSingles extends React.Component {
     player.on(['adended', 'adend'], () => (this.forSafariMute(player)));
   }
   /**
-   * window.onscroll event handler<br>
-   * スクロール位置と video tag の位置をチェックし必要なら再生を止めます
+   * window.onscroll event handler
+   * - スクロール位置と video tag の位置をチェックし必要なら再生を止めます
    */
   onScroll() {
     const player = this.player;
@@ -273,7 +292,6 @@ export class ComponentVideojsImaSingles extends React.Component {
   }
   /**
    * ga tag 送信
-   *
    * - player.play, player.ended を監視します
    * @param {videojs} player videojs object
    */

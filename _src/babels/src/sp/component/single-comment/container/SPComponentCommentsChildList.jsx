@@ -12,7 +12,7 @@
 // SPCommentNode
 
 import { PopularDae } from '../../../../dae/comments/PopularDae';
-import { ReplyDae } from '../../../../dae/comments/ReplyDae';
+// import { ReplyDae } from '../../../../dae/comments/ReplyDae';
 import { Empty } from '../../../../app/const/Empty';
 import { Safety } from '../../../../data/Safety';
 
@@ -23,11 +23,15 @@ import { CommentMenuNode } from '../../../../node/comment/CommentMenuNode';
 // import { CommentContentNode } from '../../../../node/comment/CommentContentNode';
 
 // sp/node/comment
-import { SPCommentFormNode } from '../../../node/comment/SPCommentFormNode';
+// import { SPCommentFormNode } from '../../../node/comment/SPCommentFormNode';
 import ComponentCommentContentBody from '../../../../component/single-comment/content/ComponentCommentContentBody';
 import ComponentCommentUser from '../../../../component/single-comment/user/ComponentCommentUser';
+import SPComponentCommentForm from '../form/SPComponentCommentForm';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -63,7 +67,7 @@ const replyClass = (replyId) => (replyId ? ` comment-content-reply-${replyId}` :
  * @constructor
  */
 const SPComponentCommentsChildList = ({
-                                      commentObject: commentObject,
+                                      commentObject,
                                       sign,
                                       uniqueId,
                                       articleId,
@@ -140,17 +144,31 @@ const SPComponentCommentsChildList = ({
         isBad={comment.isBad}
         url={url}
       />
+      {/*
       <SPCommentFormNode
         uniqueId={`${uniqueId}-form`}
-        icon={icon}
         articleId={articleId}
-        commentId={commentId}
-        commentCount={commentCount}
         sign={sign}
-        parent={parent}
-        independent={independent}
         commentType={commentsListType}
         url={url}
+        icon={icon}
+        commentId={commentId}
+        commentCount={commentCount}
+        parent={parent}
+        independent={independent}
+      />
+      */}
+      <SPComponentCommentForm
+        uniqueId={`${uniqueId}-form`}
+        articleId={articleId}
+        sign={sign}
+        commentType={commentsListType}
+        url={url}
+        icon={icon}
+        commentId={commentId}
+        commentCount={commentCount}
+        parent={parent}
+        independent={independent}
       />
     </div>
   );
@@ -178,7 +196,7 @@ const SPComponentCommentsChildList = ({
 SPComponentCommentsChildList.propTypes = {
   commentObject: React.PropTypes.shape({
     comment: React.PropTypes.instanceOf(PopularDae).isRequired,
-    reply: React.PropTypes.instanceOf(ReplyDae).isRequired
+    // reply: React.PropTypes.instanceOf(ReplyDae).isRequired,
   }).isRequired,
   // ログインの有無
   sign: React.PropTypes.bool.isRequired,

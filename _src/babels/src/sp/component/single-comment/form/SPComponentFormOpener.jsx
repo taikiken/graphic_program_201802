@@ -14,14 +14,19 @@ import { Message } from '../../../../app/const/Message';
 import { Url } from '../../../../app/const/Url';
 
 // sp
-import { SPCommentFormNode } from '../../../node/comment/SPCommentFormNode';
+// import { SPCommentFormNode } from '../../../node/comment/SPCommentFormNode';
+import SPComponentCommentForm from './SPComponentCommentForm';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 // const ReactDOM = self.ReactDOM;
 
 /**
- * 記事への「コメント」投稿用フォームを開くリンク
+ * SP: 記事への「コメント」投稿用フォームを開くリンク
+ * @since 2017-12-25 {@link SPComponentCommentForm} 使用する
  */
 export default class SPComponentFormOpener extends React.Component {
   // ----------------------------------------
@@ -113,37 +118,7 @@ export default class SPComponentFormOpener extends React.Component {
       commentType,
       url,
     } = this.props;
-    if (sign) {
-      if (open) {
-        // open state
-        return (
-          <SPCommentFormNode
-            uniqueId={uniqueId}
-            toggle={toggle}
-            icon={icon}
-            articleId={articleId}
-            sign={sign}
-            independent={independent}
-            parent={parent}
-            commentType={commentType}
-            url={url}
-          />
-        );
-      } else {
-        // close state
-        return (
-          <div className="comment-form-opener">
-            <a
-              className="comment-form-opener-trigger"
-              href="#"
-              onClick={this.onClick}
-            >
-              {Message.COMMENT_SUBMIT}
-            </a>
-          </div>
-        );
-      }
-    } else {
+    if (!sign) {
       // not sign-in
       // 非ログインユーザーはログイン画面へ
       return (
@@ -152,5 +127,46 @@ export default class SPComponentFormOpener extends React.Component {
         </div>
       );
     }
+    if (open) {
+      // open state
+      // return (
+      //   <SPCommentFormNode
+      //     uniqueId={uniqueId}
+      //     articleId={articleId}
+      //     sign={sign}
+      //     commentType={commentType}
+      //     url={url}
+      //     toggle={toggle}
+      //     icon={icon}
+      //     independent={independent}
+      //     parent={parent}
+      //   />
+      // );
+      return (
+        <SPComponentCommentForm
+          uniqueId={uniqueId}
+          articleId={articleId}
+          sign={sign}
+          commentType={commentType}
+          url={url}
+          toggle={toggle}
+          icon={icon}
+          independent={independent}
+          parent={parent}
+        />
+      );
+    }
+    // close state
+    return (
+      <div className="comment-form-opener">
+        <a
+          className="comment-form-opener-trigger"
+          href="#"
+          onClick={this.onClick}
+        >
+          {Message.COMMENT_SUBMIT}
+        </a>
+      </div>
+    );
   }
 }

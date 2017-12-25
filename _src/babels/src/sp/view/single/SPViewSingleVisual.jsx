@@ -56,7 +56,7 @@ export default class SPViewSingleVisual extends ViewSingleHeader {
         media={singleDae.media}
         isShowImage={singleDae.isShowImage}
       />,
-      this.element
+      this.element,
     );
   }
 }

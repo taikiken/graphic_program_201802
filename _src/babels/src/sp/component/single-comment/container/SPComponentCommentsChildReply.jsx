@@ -10,9 +10,13 @@
  *
  */
 
-import { SPCommentNode } from '../../../node/comment/SPCommentNode';
+// import { SPCommentNode } from '../../../node/comment/SPCommentNode';
+import SPComponentCommentsChildList from './SPComponentCommentsChildList';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -41,7 +45,7 @@ const SPComponentCommentsChildReply = ({
                                        commentsListType,
                                        reply,
                                      }) => {
-  // console.log('SPComponentCommentsChildReply total', total, commentsListType, reply.comments);
+  // console.log('SPComponentCommentsChildReply', reply);
   const replyList = reply.comments;
   // data が存在しない時は出力しない
   // total 件数入っていても配列が空の時がある
@@ -58,18 +62,34 @@ const SPComponentCommentsChildReply = ({
           /* independent, open, commentCount 省略 */
           return (
             <li key={`${uniqueId}-${replyComment.id}`} className="comment-item">
+              {/*
               <SPCommentNode
-                uniqueId={`${uniqueId}-${replyComment.id}`}
                 commentDae={{comment: replyComment}}
+                sign={sign}
+                uniqueId={`${uniqueId}-${replyComment.id}`}
+                articleId={articleId}
+                commentUserId={String(replyComment.user.id)}
+                commentsListType={commentsListType}
                 userId={userId}
                 icon={icon}
-                articleId={articleId}
                 commentId={commentId}
                 replyId={String(replyComment.id)}
-                commentUserId={String(replyComment.user.id)}
-                sign={sign}
                 parent={false}
+                url={replyComment.url}
+              />
+              */}
+              <SPComponentCommentsChildList
+                commentObject={{comment: replyComment, reply: null}}
+                sign={sign}
+                uniqueId={`${uniqueId}-${replyComment.id}`}
+                articleId={articleId}
+                commentUserId={String(replyComment.user.id)}
                 commentsListType={commentsListType}
+                userId={userId}
+                icon={icon}
+                commentId={commentId}
+                replyId={String(replyComment.id)}
+                parent={false}
                 url={replyComment.url}
               />
             </li>

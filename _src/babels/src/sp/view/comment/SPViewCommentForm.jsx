@@ -12,7 +12,7 @@
 
 
 import ViewCommentForm from '../../../view/comment/ViewCommentForm';
-import SPComponentFormOpener from '../../component/single-comment/opener/SPComponentFormOpener';
+import SPComponentFormOpener from '../../component/single-comment/form/SPComponentFormOpener';
 
 // // app
 import { User } from '../../../app/User';
