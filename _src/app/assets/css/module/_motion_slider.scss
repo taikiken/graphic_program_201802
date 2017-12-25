@@ -59,7 +59,7 @@
           @include opacity(0.5);
 
           &:hover {
-            @include hover-opacity;
+            // @include hover-opacity;
 
             .category-label,
             .post-heading {
