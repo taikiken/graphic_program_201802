@@ -6,13 +6,13 @@ $app->group('/crazy', function () use($app, $ImgPath) {
    // webview
     // ==============================
     $this->get('/webview[/]', function () {
-      header("Location: /category/crazy/pickup_athletes/webview",TRUE,301);
+      header("Location: /pickup_athletes/crazy/list",TRUE,301);
       exit;
     });
 
     $this->get('/list[/]', function () {
         // 選手詳細ルーティング
-      header("Location: /category/crazy/athletes",TRUE,301);
+      header("Location: /pickup_athletes/crazy/webview",TRUE,301);
       exit;
     });
 });
