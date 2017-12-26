@@ -22,7 +22,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $ImgPath) {
 
-    $category           = $app->model->get_category_by_slug($args['category_slug'], "", true);
+    $category           = $app->model->get_category_by_slug($args['category_slug'], "", false);
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
 
     if ( $args['category_slug'] === 'big6tv' ) :
