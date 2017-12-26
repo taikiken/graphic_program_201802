@@ -219,6 +219,8 @@
 //お知らせ
 // https://aws-plus.backlog.jp/view/UNDO_SPBL-281
 .announce {
+  border-bottom: 1px solid $border-primary-color;
+
   //.announce--text
   &--text {
     padding: (18/2)+px 0;
@@ -536,6 +538,21 @@
     } //.post-list-item
   }
 }
+
+
+
+//.headline--last
+.headline--last {
+  padding-top: (10/2)+px;
+  background-color: #eee;
+
+  .board {
+    border-top: 1px solid $border-primary-color;
+    background-color: #fff;
+  }
+} //.headline--last
+
+
 
 .headline-outer {
   .sponsor-link {
