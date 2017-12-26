@@ -285,6 +285,11 @@ export default class Router extends EventDispatcher {
     this.settings = this.settings.bind(this);
     this.signupWow = this.signupWow.bind(this);
     // -------------
+    /**
+     * router rule list
+     * - pathName: function set
+     * @type {*}
+     */
     this.rule = {
       '/': this.index,
       '/category/': this.category,

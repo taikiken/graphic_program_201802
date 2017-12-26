@@ -184,16 +184,16 @@ export class SinglesManager {
    * 人気記事の次の記事が存在するかの真偽値
    * @return {boolean} 人気記事の次の記事が存在するかの真偽値を返します
    */
-  get popularNext():boolean {
+  get popularNext() {
     return this[popularSymbol];
   }
   /**
    * 人気記事の次の記事が存在するかの真偽値を設定します<br>
    * true の時に `behaviors` 配列が空の時に「人気記事」 `WidgetType.POPULAR` を追加し<br>
    * 記事一覧に「人気記事」を差し込みできるようにします
-   * @param {Boolean} hasNext 人気記事の次の記事が存在するかの真偽値
+   * @param {boolean} hasNext 人気記事の次の記事が存在するかの真偽値
    */
-  set popularNext(hasNext:boolean):void {
+  set popularNext(hasNext) {
     this[popularSymbol] = hasNext;
     if (hasNext) {
       const behaviors = this.behaviors;

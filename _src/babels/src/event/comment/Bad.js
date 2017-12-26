@@ -30,23 +30,35 @@ let singletonInstance = null;
  * - Singleton
  */
 export class Bad extends EventDispatcher {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * instance を生成します
+   * @return {Bad} Bad instance を返します
+   */
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new Bad(badSymbol);
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * コメントの bad
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {Bad} Bad instance
    */
-  constructor( target ) {
-    if ( badSymbol !== target ) {
-
+  constructor(target) {
+    if (badSymbol !== target) {
       throw new Error( 'Bad is static Class. not use new Bad(). instead Bad.factory()' );
-
     }
-
-    if ( singletonInstance === null ) {
+    if (singletonInstance === null) {
       super();
       singletonInstance = this;
     }
-
     return singletonInstance;
   }
   // ---------------------------------------------------
@@ -61,7 +73,7 @@ export class Bad extends EventDispatcher {
    * @param {string} articleId 記事Id
    * @2016-11-05 article ID added
    */
-  fire(type:string, commentId:string, articleId):void {
+  fire(type, commentId, articleId) {
     this.dispatch({ type, commentId, articleId });
   }
   /**
@@ -72,7 +84,7 @@ export class Bad extends EventDispatcher {
    * @param {string} articleId 記事Id
    * @2016-11-05 article ID added
    */
-  add(commentId:string, articleId):void {
+  add(commentId, articleId) {
     this.fire(CommentStatus.BAD_ADD, commentId, articleId);
   }
   /**
@@ -83,24 +95,7 @@ export class Bad extends EventDispatcher {
    * @param {string} articleId 記事Id
    * @2016-11-05 article ID added
    */
-  remove(commentId:string, articleId):void {
+  remove(commentId, articleId) {
     this.fire(CommentStatus.BAD_DELETE, commentId, articleId);
-  }
-  // ---------------------------------------------------
-  //  static method
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {Bad} Bad instance を返します
-   */
-  static factory():Bad {
-
-    if ( singletonInstance === null ) {
-
-      singletonInstance = new Bad( badSymbol );
-
-    }
-
-    return singletonInstance;
   }
 }

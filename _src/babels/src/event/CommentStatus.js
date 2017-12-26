@@ -29,21 +29,6 @@ let singletonInstance = null;
  * - Singleton
  */
 export class CommentStatus extends EventDispatcher {
-  /**
-   * コメントの good / bad / delete / notice  Event
-   * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {CommentStatus} CommentStatus instance を返します
-   */
-  constructor( target ) {
-    if ( commentStatusSymbol !== target ) {
-      throw new Error( 'CommentStatus is static Class. not use new CommentStatus(). instead CommentStatus.factory()' );
-    }
-    if ( singletonInstance === null ) {
-      super();
-      singletonInstance = this;
-    }
-    return singletonInstance;
-  }
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------
@@ -51,57 +36,88 @@ export class CommentStatus extends EventDispatcher {
    * event GOOD_ADD
    * @return {string} goodAdd を返します
    */
-  static get GOOD_ADD():string {
+  static get GOOD_ADD() {
     return 'goodAdd';
   }
   /**
    * event GOOD_DELETE
    * @return {string} goodDelete を返します
    */
-  static get GOOD_DELETE():string {
+  static get GOOD_DELETE() {
     return 'goodDelete';
   }
   /**
    * event BAD_ADD
    * @return {string} badAdd を返します
    */
-  static get BAD_ADD():string {
+  static get BAD_ADD() {
     return 'badAdd';
   }
   /**
    * event BAD_DELETE
    * @return {string} badDelete を返します
    */
-  static get BAD_DELETE():string {
+  static get BAD_DELETE() {
     return 'badDelete';
   }
   /**
    * event COMMENT_DELETE 削除
    * @return {string} commentDelete を返します
    */
-  static get COMMENT_DELETE():string {
+  static get COMMENT_DELETE() {
     return 'commentDelete';
   }
   /**
    * event NOTICE 通報
    * @return {string} commentNotice を返します
    */
-  static get NOTICE():string {
+  static get NOTICE() {
     return 'commentNotice';
   }
   /**
    * event COMMENT_WILL_DELETE 削除
    * @return {string} commentWillDelete を返します
    */
-  static get COMMENT_WILL_DELETE():string {
+  static get COMMENT_WILL_DELETE() {
     return 'commentWillDelete';
   }
   /**
    * event COMMENT_DELETE_MODAL_OPEN, コメント削除モーダルオープン
    * @return {string} commentDeleteModalOpen を返します
    */
-  static get COMMENT_DELETE_MODAL_OPEN():string {
+  static get COMMENT_DELETE_MODAL_OPEN() {
     return 'commentDeleteModalOpen';
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * instance を生成します
+   * @return {CommentStatus} CommentStatus instance を返します
+   */
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new CommentStatus(commentStatusSymbol);
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * コメントの good / bad / delete / notice  Event
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {CommentStatus} CommentStatus instance を返します
+   */
+  constructor(target) {
+    if (commentStatusSymbol !== target) {
+      throw new Error('CommentStatus is static Class. not use new CommentStatus(). instead CommentStatus.factory()');
+    }
+    if (singletonInstance === null) {
+      super();
+      singletonInstance = this;
+    }
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -111,8 +127,8 @@ export class CommentStatus extends EventDispatcher {
    * @param {string} type コメントタイプ
    * @param {string|Number} commentId コメント Id
    */
-  fire( type:string, commentId:string ):void {
-    this.dispatch( { type: type, commentId: commentId } );
+  fire(type, commentId) {
+    this.dispatch({ type, commentId });
   }
   // /**
   //  * コメント削除
@@ -135,31 +151,14 @@ export class CommentStatus extends EventDispatcher {
    * 通報
    * @param {string|Number} commentId コメント Id
    */
-  notice( commentId:string ):void {
-    this.fire( CommentStatus.NOTICE, commentId );
+  notice(commentId) {
+    this.fire(CommentStatus.NOTICE, commentId);
   }
   /**
    * コメント削除モーダルを開くことを通知します
    * @param {string} commentId コメント Id
    */
-  modal( commentId:string ):void {
-    this.fire( CommentStatus.COMMENT_DELETE_MODAL_OPEN, commentId );
-  }
-  // ---------------------------------------------------
-  //  static method
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {CommentStatus} CommentStatus instance を返します
-   */
-  static factory():CommentStatus {
-
-    if ( singletonInstance === null ) {
-
-      singletonInstance = new CommentStatus( commentStatusSymbol );
-
-    }
-
-    return singletonInstance;
+  modal(commentId) {
+    this.fire(CommentStatus.COMMENT_DELETE_MODAL_OPEN, commentId);
   }
 }

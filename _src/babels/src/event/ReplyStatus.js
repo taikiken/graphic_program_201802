@@ -36,35 +36,6 @@ let singletonInstance = null;
  */
 export class ReplyStatus extends EventDispatcher {
   // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {ReplyStatus} ReplyStatus instance を返します
-   */
-  static factory():ReplyStatus {
-    if ( singletonInstance === null ) {
-      singletonInstance = new ReplyStatus( singletonSymbol );
-    }
-    return singletonInstance;
-  }
-  /**
-   * コメント返信フォームの open, close, sending, complete を通知します。
-   *
-   * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {ReplyStatus} ReplyStatus instance を返します
-   */
-  constructor(target) {
-    if (singletonSymbol !== target) {
-      throw new Error( 'ReplyStatus is static Class. not use new ReplyStatus(). instead ReplyStatus.factory()' );
-    }
-    if (singletonInstance === null) {
-      super();
-      singletonInstance = this;
-    }
-    return singletonInstance;
-  }
-  // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------
   /**
@@ -94,6 +65,38 @@ export class ReplyStatus extends EventDispatcher {
    */
   static get COMPLETE() {
     return 'replyComplete';
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * instance を生成します
+   * @return {ReplyStatus} ReplyStatus instance を返します
+   */
+  static factory() {
+    if ( singletonInstance === null ) {
+      singletonInstance = new ReplyStatus( singletonSymbol );
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * コメント返信フォームの open, close, sending, complete を通知します。
+   *
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {ReplyStatus} ReplyStatus instance を返します
+   */
+  constructor(target) {
+    if (singletonSymbol !== target) {
+      throw new Error( 'ReplyStatus is static Class. not use new ReplyStatus(). instead ReplyStatus.factory()' );
+    }
+    if (singletonInstance === null) {
+      super();
+      singletonInstance = this;
+    }
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD

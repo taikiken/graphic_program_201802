@@ -27,10 +27,10 @@ const symbol = Symbol('Exif for singleton');
  */
 let singletonInstance = null;
 /**
- * <p>Exif orientation check</p>
- * <p>iOS カメラロール画像からユーザーアイコンを取得すると横向きになるために exif orientation 値を取得し向きを正規化します</p>
+ * Exif orientation check
+ * - iOS カメラロール画像からユーザーアイコンを取得すると横向きになるために exif orientation 値を取得し向きを正規化します
  *
- * [stackoverflow](http://stackoverflow.com/questions/7584794/accessing-jpeg-exif-rotation-data-in-javascript-on-the-client-side)
+ * ref: [stackoverflow](http://stackoverflow.com/questions/7584794/accessing-jpeg-exif-rotation-data-in-javascript-on-the-client-side)
  */
 export class Exif extends EventDispatcher {
   // ---------------------------------------------------
@@ -44,7 +44,6 @@ export class Exif extends EventDispatcher {
   static get EXIF_ORIENTATION() {
     return 'exifOrientation';
   }
-
   // ---------------------------------------------------
   // orientation 定数
   /**

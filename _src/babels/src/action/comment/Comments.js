@@ -31,95 +31,23 @@ import {Safety} from '../../data/Safety';
 const commentsSymbol = Symbol('Comments symbol');
 
 /**
- * <p>コメント一覧<p>
- * <p>記事ID, token を使いコメント一覧を取得します</p>
+ * コメント一覧を取得します
+ * - 記事ID, token を使いコメント一覧を取得します
  */
 export class Comments extends OffsetAuth {
-  /**
-   * コメント一覧<br>
-   * 記事ID, token を使いコメント一覧を取得します<br>
-   * query に offset, length があります
-   *
-   * @param {Symbol} target Factory pattern のために使用
-   * @param {Number} id コメントを取得する記事ID
-   * @param {string} [type=''] 取得コメント種類, ''|normal|official|self
-   * @param {Function} [resolve=null] Ajax 成功時の callback
-   * @param {Function} [reject=null] Ajax 失敗時の callback
-   * @param {Number} [offset=0] query offset 値
-   * @param {Number} [length=10] query length 値
-   * */
-  constructor( target:Symbol, id:Number, type:string = '', resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.list ) {
-    if ( commentsSymbol !== target ) {
-
-      throw new Error( 'not use new Comments(). instead Comments.all() or Comments.normal() or Comments.official() or Comments.mine()' );
-
-    }
-
-    type = Safety.string( type, '' );
-
-    super( User.token, Api.comment( type ), resolve, reject, offset, length );
-    /**
-     * コメントを取得する記事ID
-     * @type {Number}
-     * @protected
-     */
-    this._id = id;
-  }
-  // ---------------------------------------------------
-  //  METHOD
-  // ---------------------------------------------------
-  // reload 追加
-  /**
-   * **再読み込み**
-   * <p>コメントが送信されたり削除された時に画面を更新するために行います<br>
-   * 先頭(offset=0)から現在読み込まれた位置までを再読み込みします</p>
-   *
-   * <p>読み込み開始時に「再読み込みフラッグ」(this.reloadFlag, this._reload)を true にします</p>
-   */
-  reload():void {
-
-    /**
-     * 再読み込みフラッグ
-     * @override
-     * @type {boolean}
-     */
-    this.reloadFlag = true;
-    let url = `${Path.article( this._url, this.id )}?offset=0&length=${this.offset}`;
-    this.ajax.start( url, this.method, this.boundSuccess, this.boundFail, this.resultClass, this.headers );
-
-  }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * 記事ID
-   * @return {Number|*} 記事IDを返します
-   */
-  get id():Number {
-    return this._id;
-  }
-  /**
-   * url を作成します
-   * @return {string} 作成した url を返します
-   */
-  get url():string {
-    return `${Path.article( this._url, this.id )}?offset=${this.offset}&length=${this.length}`;
-  }
   // ---------------------------------------------------
   //  static METHOD
   // ---------------------------------------------------
   /**
    * 引数 **type** に合わせ Comments instance を作成します
    * @param {string} type 取得コメント種類, CommentsType.SELF|CommentsType.NORMAL|CommentsType.OFFICIAL|CommentsType.ALL が指定可能値です
-   * @param {Number} id コメントを取得する記事ID
+   * @param {number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @return {Comments} Comments instanceを返します
    */
-  static type( type:string, id:Number, resolve:Function = null, reject:Function = null ):Comments {
-
-    switch ( type ) {
-
+  static type(type, id, resolve = null, reject = null) {
+    switch (type) {
       case CommentsType.SELF :
         return Comments.mine( id, resolve, reject );
 
@@ -135,48 +63,112 @@ export class Comments extends OffsetAuth {
       default :
         // console.warn( `Comments type illegal action: ${type}, instead use default` );
         return Comments.all( id, resolve, reject );
-
     }
-
   }
   /**
-   * コメント一覧, 自分のコメント
-   * @param {Number} id コメントを取得する記事ID
+   * コメント一覧, 自分のコメント - {@link CommentsType}.SELF
+   * @param {number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @return {Comments} Comments instanceを返します
    */
-  static mine( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( commentsSymbol, id, CommentsType.SELF, resolve, reject );
+  static mine(id, resolve = null, reject = null ) {
+    return new Comments(commentsSymbol, id, CommentsType.SELF, resolve, reject);
   }
   /**
-   * コメント一覧, 通常ユーザーのコメント
-   * @param {Number} id コメントを取得する記事ID
+   * コメント一覧, 通常ユーザーのコメント - {@link CommentsType}.NORMAL
+   * @param {number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @return {Comments} Comments instanceを返します
    */
-  static normal( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( commentsSymbol, id, CommentsType.NORMAL, resolve, reject );
+  static normal(id, resolve = null, reject = null) {
+    return new Comments(commentsSymbol, id, CommentsType.NORMAL, resolve, reject);
   }
   /**
-   * コメント一覧,公式ユーザーのコメント
-   * @param {Number} id コメントを取得する記事ID
+   * コメント一覧,公式ユーザーのコメント - {@link CommentsType}OFFICIAL
+   * @param {number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @return {Comments} Comments instanceを返します
    */
-  static official( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( commentsSymbol, id, CommentsType.OFFICIAL, resolve, reject );
+  static official(id, resolve = null, reject = null) {
+    return new Comments(commentsSymbol, id, CommentsType.OFFICIAL, resolve, reject);
   }
   /**
    * コメント一覧, 全てのコメント
-   * @param {Number} id コメントを取得する記事ID
+   * @param {number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @return {Comments} Comments instanceを返します
    */
-  static all( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( commentsSymbol, id, CommentsType.ALL, resolve, reject );
+  static all( id, resolve = null, reject = null) {
+    return new Comments(commentsSymbol, id, CommentsType.ALL, resolve, reject);
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * コメント一覧
+   * - 記事ID, token を使いコメント一覧を取得します - {@link User}.token, {@link Api}.comment
+   * - query に offset, length があります
+   * @param {Symbol} target Factory pattern のために使用
+   * @param {number} id コメントを取得する記事ID
+   * @param {string} [type=''] 取得コメント種類, ''|normal|official|self
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @param {number} [offset=0] query offset 値
+   * @param {number} [length=10] query length 値 - {@lik Length}.list
+   * */
+  constructor(target, id, type = '', resolve = null, reject = null, offset = 0, length = Length.list) {
+    if (commentsSymbol !== target) {
+      throw new Error( 'not use new Comments(). instead Comments.all() or Comments.normal() or Comments.official() or Comments.mine()' );
+    }
+    const altType = Safety.string(type, '');
+    // ---
+    super(User.token, Api.comment(altType), resolve, reject, offset, length);
+    /**
+     * コメントを取得する記事ID
+     * @type {number}
+     * @protected
+     */
+    this._id = id;
+  }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * 記事ID
+   * @return {number|*} 記事IDを返します
+   */
+  get id() {
+    return this._id;
+  }
+  /**
+   * url を作成します - {@link Path}.article
+   * @return {string} 作成した url を返します
+   */
+  get url() {
+    return `${Path.article(this._url, this.id)}?offset=${this.offset}&length=${this.length}`;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  // reload 追加
+  /**
+   * 再読み込みを行います
+   * - コメントが送信されたり削除された時に画面を更新するために行います
+   * - 先頭(offset=0)から現在読み込まれた位置までを再読み込みします
+   * - 読み込み開始時に「再読み込みフラッグ」(`this.reloadFlag`, `this._reload`)を true にします
+   */
+  reload() {
+    /**
+     * 再読み込みフラッグ
+     * @override
+     * @type {boolean}
+     */
+    this.reloadFlag = true;
+    let url = `${Path.article( this._url, this.id )}?offset=0&length=${this.offset}`;
+    this.ajax.start( url, this.method, this.boundSuccess, this.boundFail, this.resultClass, this.headers );
   }
 }

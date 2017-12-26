@@ -28,26 +28,26 @@ const TweenLite = greensock.TweenLite;
 const easing = greensock.easing;
 
 /**
- * Singleton を保証するために constructor 引数にする Symbol
+ * {@link Scroll} Singleton を保証するために constructor 引数にする Symbol
  * @type {Symbol}
  * @private
  */
-const _symbol = Symbol('singleton Scroll instance');
+const scrollSymbol = Symbol('singleton Scroll instance');
 
 /**
- * Scroll instance
+ * {@link Scroll} instance
  * @type {?Scroll}
  * @static
  * @private
  */
-let _instance = null;
+let singletonInstance = null;
 /**
- * window.onscroll 監視を始めたかの真偽値
+ * {@link Scroll} - window.onscroll 監視を始めたかの真偽値
  * @type {boolean}
  * @static
  * @private
  */
-let _watch = false;
+let watched = false;
 
 /**
  * scroll に関する処理
@@ -165,10 +165,10 @@ export class Scroll extends EventDispatcher {
    * @return {Scroll} Scroll instance を返します
    */
   static factory() {
-    if (_instance === null) {
-      _instance = new Scroll(_symbol);
+    if (singletonInstance === null) {
+      singletonInstance = new Scroll(scrollSymbol);
     }
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  enable / disable scroll
@@ -192,7 +192,7 @@ export class Scroll extends EventDispatcher {
    */
   static enable(delay = 500) {
     setTimeout(Scroll.activate, delay);
-    _instance.fire();
+    singletonInstance.fire();
   }
   /**
    * scroll 関連イベントハンドラ, 全て止めます
@@ -237,7 +237,7 @@ export class Scroll extends EventDispatcher {
     window.removeEventListener('touchmove', Scroll.disableScroll);
     document.removeEventListener('keydown', Scroll.keyDown);
     // 初期化します
-    _instance.distance = 0;
+    singletonInstance.distance = 0;
   }
   // ---------------------------------------------------
   //  CONSTRUCTOR
@@ -248,16 +248,16 @@ export class Scroll extends EventDispatcher {
    * @returns {Scroll} Scroll instance を返します
    */
   constructor(target:Symbol) {
-    if (_symbol !== target) {
+    if (scrollSymbol !== target) {
       throw new Error( 'Scroll is singleton Class. not use new Scroll(). instead Scroll.factory()' );
     }
 
-    if(_instance !== null) {
-      return _instance;
+    if(singletonInstance !== null) {
+      return singletonInstance;
     }
-
+    // -----
     super();
-    _instance = this;
+    singletonInstance = this;
     /**
      * onScroll 関数 を bind しpublic 変数にします
      * @type {Function}
@@ -281,7 +281,7 @@ export class Scroll extends EventDispatcher {
      */
     this.direction = -1;
 
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -290,8 +290,8 @@ export class Scroll extends EventDispatcher {
    * window scroll 監視を開始します
    */
   start() {
-    if ( !_watch ) {
-      _watch = true;
+    if (!watched) {
+      watched = true;
       window.addEventListener('scroll', this.boundScroll, false);
     }
   }
@@ -301,7 +301,7 @@ export class Scroll extends EventDispatcher {
   stop() {
     // 2016-09-16
     // listener がいなかったら止める
-    _watch = false;
+    watched = false;
     window.removeEventListener('scroll', this.boundScroll);
   }
   /**

@@ -32,19 +32,6 @@ let singletonInstance = null;
  */
 export class IFrameStatus extends EventDispatcher {
   // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * singleton instance を返します
-   * @returns {?IFrameStatus} singleton instance
-   */
-  static factory() {
-    if (singletonInstance === null) {
-      singletonInstance = new IFrameStatus(iframeStatusSymbol);
-    }
-    return singletonInstance;
-  }
-  // ---------------------------------------------------
   //  STATIC EVENT
   // ---------------------------------------------------
   /**
@@ -62,6 +49,19 @@ export class IFrameStatus extends EventDispatcher {
    */
   static get DID_MOUNT() {
     return 'iFrameDidMount';
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * singleton instance を返します
+   * @returns {?IFrameStatus} singleton instance
+   */
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new IFrameStatus(iframeStatusSymbol);
+    }
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  CONSTRUCTOR
@@ -83,8 +83,13 @@ export class IFrameStatus extends EventDispatcher {
     super();
     // instance
     singletonInstance = this;
+    /**
+     * bind onMessage
+     * @type {function}
+     */
+    this.onMessage = this.onMessage.bind(this);
     // event bind
-    window.addEventListener('message', this.onMessage.bind(this), false);
+    window.addEventListener('message', this.onMessage, false);
     return singletonInstance;
   }
   // ---------------------------------------------------

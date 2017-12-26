@@ -18,6 +18,10 @@ import { TagHead } from './head/TagHead';
 import { NextPages } from './head/NextPages';
 
 // History API
+/**
+ * [native code] - History
+ * @type {History}
+ */
 const history = self.history;
 
 /**
@@ -28,18 +32,18 @@ const history = self.history;
 const pushSymbol = Symbol('private method push');
 
 /**
- * singleton instance のためのチェック用 Symbol
+ * {@link SinglesHistory} singleton instance のためのチェック用 Symbol
  * @type {Symbol}
  * @private
  */
-const _symbol = Symbol('SinglesHistory singleton instance');
+const singlesHistorySymbol = Symbol('SinglesHistory singleton instance');
 /**
- * SinglesHistory instance
+ * {@link SinglesHistory} instance
  * @type {?SinglesHistory}
  * @private
  * @static
  */
-let _instance = null;
+let singletonInstance = null;
 
 /**
  * singleton: 記事詳細・次の記事一覧 History API 使用を管理します
@@ -67,11 +71,11 @@ export class SinglesHistory extends EventDispatcher {
    * instance を生成します
    * @return {SinglesHistory} SinglesHistory instance を返します
    */
-  static factory():SinglesHistory {
-    if (_instance === null) {
-      _instance = new SinglesHistory( _symbol );
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new SinglesHistory( singlesHistorySymbol );
     }
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  CONSTRUCTOR
@@ -82,11 +86,11 @@ export class SinglesHistory extends EventDispatcher {
    * @return {SinglesHistory} singleton SinglesHistory instance を返します
    */
   constructor(target) {
-    if (_symbol !== target) {
+    if (singlesHistorySymbol !== target) {
       throw new Error( 'SinglesHistory is static Class. not use new SinglesHistory().' );
     }
-    if (_instance !== null) {
-      return _instance;
+    if (singletonInstance !== null) {
+      return singletonInstance;
     }
     super();
     // head 情報
@@ -145,8 +149,8 @@ export class SinglesHistory extends EventDispatcher {
     // popstate 監視
     // window.addEventListener('popstate', this.onPop.bind(this), false);
 
-    _instance = this;
-    return _instance;
+    singletonInstance = this;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD

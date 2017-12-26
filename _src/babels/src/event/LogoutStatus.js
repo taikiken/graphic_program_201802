@@ -28,41 +28,6 @@ let singletonInstance = null;
  * Logout modal を open / close するための custom Event
  */
 export class LogoutStatus extends EventDispatcher {
-  /**
-   * <h3>Singleton</h3>
-   * <p>Logout modal 用 custom Event</p>
-   * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {LogoutStatus} LogoutStatus instance を返します
-   */
-  constructor( target ) {
-    if ( logoutStatusSymbol !== target ) {
-
-      throw new Error( 'LogoutStatus is static Class. not use new LogoutStatus(). instead LogoutStatus.factory()' );
-
-    }
-
-    if ( singletonInstance === null ) {
-      super();
-      singletonInstance = this;
-    }
-
-    return singletonInstance;
-  }
-
-  /**
-   * OPEN event kick
-   * @param {Function} [ok=null] ok / yes callback
-   * @param {Function} [cancel=null] cancel callback
-   */
-  open( ok:Function = null, cancel:Function = null ):void {
-    this.dispatch( { type: LogoutStatus.OPEN, ok: ok, cancel: cancel } );
-  }
-  /**
-   * CLOSE event kick
-   */
-  close():void {
-    this.dispatch( { type: LogoutStatus.CLOSE } );
-  }
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------
@@ -70,31 +35,62 @@ export class LogoutStatus extends EventDispatcher {
    * OPEN
    * @return {string} logoutOpen を返します
    */
-  static get OPEN():string {
+  static get OPEN() {
     return 'logoutOpen';
   }
   /**
    * CLOSE
    * @return {string} logoutClose を返します
    */
-  static get CLOSE():string {
+  static get CLOSE() {
     return 'logoutClose';
   }
   // ---------------------------------------------------
-  //  static method
+  //  STATIC METHOD
   // ---------------------------------------------------
   /**
    * instance を生成します
    * @return {LogoutStatus} LogoutStatus instance を返します
    */
-  static factory():LogoutStatus {
-
-    if ( singletonInstance === null ) {
-
-      singletonInstance = new LogoutStatus( logoutStatusSymbol );
-
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new LogoutStatus(logoutStatusSymbol);
     }
-
     return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * Logout modal 用 custom Event
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {LogoutStatus} LogoutStatus instance を返します
+   */
+  constructor(target) {
+    if (logoutStatusSymbol !== target) {
+      throw new Error( 'LogoutStatus is static Class. not use new LogoutStatus(). instead LogoutStatus.factory()' );
+    }
+    if (singletonInstance === null) {
+      super();
+      singletonInstance = this;
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * OPEN event kick
+   * @param {Function} [ok=null] ok / yes callback
+   * @param {Function} [cancel=null] cancel callback
+   */
+  open(ok = null, cancel = null) {
+    this.dispatch({ type: LogoutStatus.OPEN, ok, cancel });
+  }
+  /**
+   * CLOSE event kick
+   */
+  close() {
+    this.dispatch({ type: LogoutStatus.CLOSE });
   }
 }

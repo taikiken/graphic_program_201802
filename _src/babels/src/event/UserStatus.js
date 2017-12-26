@@ -35,6 +35,41 @@ let singletonInstance = null;
  *
  *  */
 export class UserStatus extends EventDispatcher {
+  // ---------------------------------------------------
+  //  STATIC CONST
+  // ---------------------------------------------------
+  /**
+   * LOG_IN event
+   * @event LOG_IN
+   * @return {string} LOG_IN event type を返します
+   */
+  static get LOG_IN() {
+    return 'logIn';
+  }
+  /**
+   * LOG_OUT event
+   * @event LOG_OUT
+   * @return {string} LOG_OUT event type を返します
+   */
+  static get LOG_OUT() {
+    return 'logOut';
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * instance を生成します
+   * @return {UserStatus} UserStatus instance を返します
+   */
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new UserStatus( userStatusSymbol );
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * ログイン / ログアウト を通知する SingleTon
    * @param {Symbol} target Singleton を実現するための private symbol
@@ -55,7 +90,7 @@ export class UserStatus extends EventDispatcher {
     return singletonInstance;
   }
   // ---------------------------------------------------
-  //  method
+  //  METHOD
   // ---------------------------------------------------
   /**
    * UserStatus.LOG_IN event を fire します
@@ -68,37 +103,5 @@ export class UserStatus extends EventDispatcher {
    */
   logout() {
     this.dispatch({ type: UserStatus.LOG_OUT, sign: false });
-  }
-  // ---------------------------------------------------
-  //  static const
-  // ---------------------------------------------------
-  /**
-   * LOG_IN event
-   * @event LOG_IN
-   * @return {string} LOG_IN event type を返します
-   */
-  static get LOG_IN() {
-    return 'logIn';
-  }
-  /**
-   * LOG_OUT event
-   * @event LOG_OUT
-   * @return {string} LOG_OUT event type を返します
-   */
-  static get LOG_OUT() {
-    return 'logOut';
-  }
-  // ---------------------------------------------------
-  //  static method
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {UserStatus} UserStatus instance を返します
-   */
-  static factory() {
-    if (singletonInstance === null) {
-      singletonInstance = new UserStatus( userStatusSymbol );
-    }
-    return singletonInstance;
   }
 }
