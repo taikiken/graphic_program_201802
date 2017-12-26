@@ -448,20 +448,31 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 		if(file_exists($file)){
       $v = get_contents($file);
       $dat_array=unserialize($v);
-      // デフォルト、カテゴリのときだけキーが違う
-      $banner_info = [];
 
-      $banner_info["bannerflag"] = $dat_array["player_bannerflag"];
-      $banner_info["bannertext"] = $dat_array["player_bannertext"];
-      $banner_info["pc_bannerimg"] = $dat_array["player_pc_bannerimg"];
-      $banner_info["sp_bannerimg"] = $dat_array["player_sp_bannerimg"];
-      $banner_info["ios_bannerimg"] = $dat_array["player_ios_bannerimg"];
-      $banner_info["android_bannerimg"] = $dat_array["player_android_bannerimg"];
-      $banner_info["pc_bannerlink"] = $dat_array["player_pc_bannerlink"];
-      $banner_info["sp_bannerlink"] = $dat_array["player_sp_bannerlink"];
-      $banner_info["ios_bannerlink"] = $dat_array["player_ios_bannerlink"];
-      $banner_info["android_bannerlink"] = $dat_array["player_android_bannerlink"];
-      $ad[]= $banner_info;
+      // 各カテゴリtop画面用
+			if ($isgetpickupplayerbanner || !empty($playerid))
+			{
+        // デフォルト、カテゴリのときだけキーが違う
+        $banner_info = [];
+
+        $banner_info["bannerflag"] = $dat_array["player_bannerflag"];
+        $banner_info["bannertext"] = $dat_array["player_bannertext"];
+        $banner_info["pc_bannerimg"] = $dat_array["player_pc_bannerimg"];
+        $banner_info["sp_bannerimg"] = $dat_array["player_sp_bannerimg"];
+        $banner_info["ios_bannerimg"] = $dat_array["player_ios_bannerimg"];
+        $banner_info["android_bannerimg"] = $dat_array["player_android_bannerimg"];
+        $banner_info["pc_bannerlink"] = $dat_array["player_pc_bannerlink"];
+        $banner_info["sp_bannerlink"] = $dat_array["player_sp_bannerlink"];
+        $banner_info["ios_bannerlink"] = $dat_array["player_ios_bannerlink"];
+        $banner_info["android_bannerlink"] = $dat_array["player_android_bannerlink"];
+
+        $ad[]= $banner_info;
+			}
+			else
+			{
+        $ad[] = $dat_array;
+			}
+
     }
 	}
   if ($isgetpickupplayerbanner && $categoryid != "") {
