@@ -100,7 +100,8 @@ function searchBack(){
 </tr>
 </table>
 <?php if((($CURRENTDIRECTORY=="repo_n"&&$p["oc"]!=55)||($CURRENTDIRECTORY=="repo_s"&&$p["oc"]!=55))&&$META!=111){ ?><script type="text/javascript">chgExpire(54)</script><?php } ?>
-  <?php if($CURRENTDIRECTORY=="ad" && $g->f("cid")==0 && $g->f("nid")==0){ ?>
+  <?php // デフォルトは親がない include/lib/ad/controller.php にも記述あります
+    if($CURRENTDIRECTORY=="ad" && $g->f("cid")==0 && $g->f("nid")==0){ ?>
     <script>
         $('input:radio[value="0"]').attr("hidden", "hidden");
     </script>

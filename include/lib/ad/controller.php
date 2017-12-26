@@ -118,7 +118,15 @@ if ($_GET["cid"] != 94 && $_GET["rid"] != 95)
     * 選手の広告設定
     */
     $a[] = array("head", "選手バナー画像設定：（親＞子）デフォルト > カテゴリー ＞ 選手 で継承されますが、子要素の指定は優先されます");
-    $a[] = array("inputradio", "バナー表示", "player_bannerflag", array("", "個別にバナーを設定する", "バナーを表示しない"));
+    // デフォルトは親がない include/__layout_footer.php にも記述あります
+    if ($_GET['nid'] == 0)
+    {
+      $a[] = array("inputradio", "バナー表示", "player_bannerflag", array("", "個別にバナーを設定する", "バナーを表示しない"));
+    }
+    else
+    {
+      $a[] = array("inputradio", "バナー表示", "player_bannerflag", array("親の表示設定を継承する", "個別にバナーを設定する", "バナーを表示しない"));
+    }
     $a[] = array("textfield", "ALTテキスト（共通）", "player_bannertext", "70", "", "", "");
     $a[] = array("img", "PCバナー画像", "player_pc_bannerimg", "2000-180-0-0-0-0", "", "", $BILLINGUAL);
     $a[] = array("textfield", "PCリンク先", "player_pc_bannerlink", "100", "", "", "");
@@ -132,7 +140,15 @@ if ($_GET["cid"] != 94 && $_GET["rid"] != 95)
     * 注目の選手の広告設定
     */
     $a[] = array("head", "注目の選手バナー画像設定：（親＞子）デフォルト > カテゴリー ＞ 注目の選手 で継承されますが、子要素の指定は優先されます");
-    $a[] = array("inputradio", "バナー表示", "pickupplayer_bannerflag", array("", "個別にバナーを設定する", "バナーを表示しない"));
+    // デフォルトは親がない include/__layout_footer.php にも記述あります
+    if ($_GET['nid'] == 0)
+		{
+      $a[] = array("inputradio", "バナー表示", "pickupplayer_bannerflag", array("", "個別にバナーを設定する", "バナーを表示しない"));
+    }
+    else
+		{
+      $a[] = array("inputradio", "バナー表示", "pickupplayer_bannerflag", array("親の表示設定を継承する", "個別にバナーを設定する", "バナーを表示しない"));
+    }
     $a[] = array("textfield", "ALTテキスト（共通）", "pickupplayer_bannertext", "70", "", "", "");
     $a[] = array("img", "PCバナー画像", "pickupplayer_pc_bannerimg", "2000-180-0-0-0-0", "", "", $BILLINGUAL);
     $a[] = array("textfield", "PCリンク先", "pickupplayer_pc_bannerlink", "100", "", "", "");
