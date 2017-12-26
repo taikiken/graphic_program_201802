@@ -31,7 +31,7 @@ import { ModelCategoriesSlug } from '../../model/categoires/ModelCategoriesSlug'
 import { CategoriesSlugDae } from '../../dae/categories/CategoriesSlugDae';
 
 // tick
-import { Polling } from '../../tick/Polling';
+import Polling from '../../tick/Polling';
 import { Message } from '../../app/const/Message';
 
 // --------------------------------------------

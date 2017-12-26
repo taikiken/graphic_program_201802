@@ -18,7 +18,7 @@ import ComponentPickupArticles from './ComponentPickupArticles';
 import View from '../../view/View';
 
 // tick
-import { Polling } from '../../tick/Polling';
+import Polling from '../../tick/Polling';
 import { ArticleDae } from '../../dae/ArticleDae';
 
 // --------------------------------------------

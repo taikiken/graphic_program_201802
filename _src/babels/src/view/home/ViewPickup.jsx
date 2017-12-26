@@ -41,7 +41,7 @@ import {ArticleDae} from '../../dae/ArticleDae';
 // import {GaData} from '../../ga/GaData';
 
 // tick
-import { Polling } from '../../tick/Polling';
+import Polling from '../../tick/Polling';
 
 // global object
 // React

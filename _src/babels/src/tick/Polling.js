@@ -15,7 +15,7 @@ import { EventDispatcher } from '../event/EventDispatcher';
 // import { default as Events } from '../event/Events';
 
 // tick
-import { Cycle } from './Cycle';
+import Cycle from './Cycle';
 
 // /**
 //  * private property key, this.update.bind(this) を保存するための Symbol
@@ -52,7 +52,7 @@ import { Cycle } from './Cycle';
  * 一定間隔毎に UPDATE イベントを発生させます
  * @since 2016-11-16
  */
-export class Polling extends EventDispatcher {
+export default class Polling extends EventDispatcher {
   // ----------------------------------------
   // EVENT
   // ----------------------------------------

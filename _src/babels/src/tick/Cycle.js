@@ -64,7 +64,7 @@ let instance = null;
  *
  * @since 2016-11-16
  */
-export class Cycle extends EventDispatcher {
+export default class Cycle extends EventDispatcher {
   // ----------------------------------------
   // EVENT
   // ----------------------------------------

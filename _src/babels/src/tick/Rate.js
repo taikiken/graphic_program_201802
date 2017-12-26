@@ -15,7 +15,7 @@
 // import { default as Events } from '../event/Events';
 
 // tick
-import { Polling } from './Polling';
+import Polling from './Polling';
 
 // /**
 //  * private property key, fps を保存するための Symbol
@@ -50,7 +50,7 @@ import { Polling } from './Polling';
  *
  * @since 2016-11-16
  */
-export class Rate extends Polling {
+export default class Rate extends Polling {
   // ----------------------------------------
   // CONST
   // ----------------------------------------

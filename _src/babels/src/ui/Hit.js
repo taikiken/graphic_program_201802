@@ -17,11 +17,11 @@ import Rise from './Rise';
 import { Elements } from '../util/Elements';
 
 // tick
-import { Scrolling } from '../tick/Scrolling';
-import { Rate } from '../tick/Rate';
+import Scrolling from '../tick/Scrolling';
+import Rate from '../tick/Rate';
 
 /**
- * element と window(Browser) のヒットテストを行います<br>
+ * element と window(Browser) のヒットテストを行います,
  * ヒットした場合は `COLLISION` event を発火し知らせます
  *
  * @example

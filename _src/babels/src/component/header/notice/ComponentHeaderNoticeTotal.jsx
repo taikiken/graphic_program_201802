@@ -11,7 +11,7 @@
  */
 import { Model } from '../../../model/Model';
 import { Length } from '../../../app/const/Length';
-import { Polling } from '../../../tick/Polling';
+import Polling from '../../../tick/Polling';
 import { ModelNoticeCount } from '../../../model/notice/ModelNoticeCount';
 import { NoticeStatus } from '../../../event/NoticeStatus';
 

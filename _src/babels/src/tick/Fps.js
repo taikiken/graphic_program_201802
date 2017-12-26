@@ -14,7 +14,7 @@
 // import { Events } from '../event/Events';
 
 // tick
-import { Polling } from './Polling';
+import Polling from './Polling';
 
 /**
  * private property key, fps を保存するための Symbol

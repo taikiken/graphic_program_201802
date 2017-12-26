@@ -17,7 +17,7 @@ import { EventDispatcher } from '../event/EventDispatcher';
 // import { default as Events } from '../event/Events';
 
 // tick
-import { Rate } from './Rate';
+import Rate from './Rate';
 
 /**
  * new を許可しないための Symbol
@@ -60,7 +60,7 @@ let instance = null;
  *
  * @since 2016-11-16
  * */
-export class Scrolling extends EventDispatcher {
+export default class Scrolling extends EventDispatcher {
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
