@@ -412,7 +412,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
   $banner_info = [];
   if (isset($playerid))
   {
-    $banner_info["bannerflag"] = 1;
+    $banner_info["bannerflag"] = $dat_array["player_bannerflag"];
     $banner_info["bannertext"] = $dat_array["player_bannertext"];
     $banner_info["pc_bannerimg"] = $dat_array["player_pc_bannerimg"];
     $banner_info["sp_bannerimg"] = $dat_array["player_sp_bannerimg"];
@@ -447,7 +447,21 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 		$file=sprintf("%s/static/ad/10-%s.dat",$staticfilepath,$categoryid);
 		if(file_exists($file)){
       $v = get_contents($file);
-      $ad[] = unserialize($v);
+      $dat_array=unserialize($v);
+      // デフォルト、カテゴリのときだけキーが違う
+      $banner_info = [];
+
+      $banner_info["bannerflag"] = $dat_array["player_bannerflag"];
+      $banner_info["bannertext"] = $dat_array["player_bannertext"];
+      $banner_info["pc_bannerimg"] = $dat_array["player_pc_bannerimg"];
+      $banner_info["sp_bannerimg"] = $dat_array["player_sp_bannerimg"];
+      $banner_info["ios_bannerimg"] = $dat_array["player_ios_bannerimg"];
+      $banner_info["android_bannerimg"] = $dat_array["player_android_bannerimg"];
+      $banner_info["pc_bannerlink"] = $dat_array["player_pc_bannerlink"];
+      $banner_info["sp_bannerlink"] = $dat_array["player_sp_bannerlink"];
+      $banner_info["ios_bannerlink"] = $dat_array["player_ios_bannerlink"];
+      $banner_info["android_bannerlink"] = $dat_array["player_android_bannerlink"];
+      $ad[]= $banner_info;
     }
 	}
   if ($isgetpickupplayerbanner && $categoryid != "") {
@@ -541,7 +555,13 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 			}
 		}
 		for($j=0;$j<count($_banner);$j++){
-			if($i!=0){
+			if (isset($playerid) || isset($categoryid))
+			{
+        if($ad[$i]["bannerflag"]==1&&strlen($ad[$i][$_banner[$j]])>0)$s[$_banner[$j]]=$ad[$i][$_banner[$j]];
+				elseif($ad[$i]["bannerflag"]==2)$s[$_banner[$j]]="";
+			}
+			elseif($i!=0)
+			{
 				if($ad[$i]["bannerflag"]==1&&strlen($ad[$i][$_banner[$j]])>0)$s[$_banner[$j]]=$ad[$i][$_banner[$j]];
 				elseif($ad[$i]["bannerflag"]==2)$s[$_banner[$j]]="";
 			}
@@ -1369,6 +1389,29 @@ function get_categoryid_by_playerid($playerid) {
   return $res['category'];
 }
 
+function get_category_slug_by_playerid($playerid) {
+  global $o;
+  $sql = <<<SQL
+SELECT 
+  uc.name_e 
+FROM 
+  tbl_player
+INNER JOIN 
+  u_categories uc 
+ON 
+  to_number(tbl_player.category,'999') = uc.id
+WHERE 
+  tbl_player.id = {$playerid}
+SQL;
+
+  $o->query($sql);
+  $res = $o->fetch_object();
+  if($res === false){
+    return null;
+  }
+  return $res->name_e;
+}
+
 function get_pickup_players($category_id = null, $player_id = null, $limit = null) {
   global $o;
 
@@ -1404,7 +1447,6 @@ SQL;
 
   $o->query($sql);
 
-  var_dump($sql);
   return $o->fetch_all();
 }
 ?>
