@@ -10,6 +10,8 @@
  *
  */
 
+import { Safety } from '../../data/Safety';
+
 /**
  * ref: UNDO_SPBL-150 【課題管理】一面リニューアル / ユーザーへのお知らせ表示
  * `response.information`.[pc|sp|ios|android] データの正規化を行います
@@ -184,6 +186,8 @@ export default class InformationDae {
    * @param {*} information JSON `response.information`
    */
   constructor(information = {}) {
+    // console.log('InformationDae', information);
+    const altResponse = Safety.object(information);
     /**
      * JSON `response.information` original
      * @type {*}
@@ -193,21 +197,21 @@ export default class InformationDae {
      * `response.information.pc`
      * @type {InformationDataDae}
      */
-    this.pc = new InformationDataDae(information.pc);
+    this.pc = new InformationDataDae(altResponse.pc);
     /**
      * `response.information.sp`
      * @type {InformationDataDae}
      */
-    this.sp = new InformationDataDae(information.sp);
+    this.sp = new InformationDataDae(altResponse.sp);
     /**
      * `response.information.ios`
      * @type {InformationDataDae}
      */
-    this.ios = new InformationDataDae(information.ios);
+    this.ios = new InformationDataDae(altResponse.ios);
     /**
      * `response.information.android`
      * @type {InformationDataDae}
      */
-    this.android = new InformationDataDae(information.android);
+    this.android = new InformationDataDae(altResponse.android);
   }
 }

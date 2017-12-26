@@ -146,6 +146,7 @@ export class CategoriesSlugDae {
      * @since 2017-12-18
      */
     this.information = new InformationDae(altResponse.information);
+    // console.log('CategoriesSlugDae', response, altResponse);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -174,7 +175,7 @@ export class CategoriesSlugDae {
   // }
   // /**
   //  * category.slug
-  //  * @return {string} category slug を返します
+  //  * @return {string} categ  ory slug を返します
   //  */
   // get slug() {
   //   return this.response.slug;

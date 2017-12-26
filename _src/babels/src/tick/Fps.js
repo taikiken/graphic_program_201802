@@ -28,6 +28,18 @@ const fpsSymbol = Symbol('save fps number');
  * @since 2016-11-16
  */
 export class Fps extends Polling {
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  /**
+   * フレームレート毎に発生するイベントを取得します
+   * @event UPDATE
+   * @return {string} event, fpsUpdate を返します
+   * @default fpsUpdate
+   */
+  static get UPDATE() {
+    return 'fpsUpdate';
+  }
   /**
    * 引数の frame rate に合わせ UPDATE イベントを発生させます
    * @param {number} [fps=30] frame rate, default: 30
@@ -55,18 +67,6 @@ export class Fps extends Polling {
       target: this,
       currentTarget: this
     };
-  }
-  // ----------------------------------------
-  // EVENT
-  // ----------------------------------------
-  /**
-   * フレームレート毎に発生するイベントを取得します
-   * @event UPDATE
-   * @return {string} event, fpsUpdate を返します
-   * @default fpsUpdate
-   */
-  static get UPDATE() {
-    return 'fpsUpdate';
   }
   // ----------------------------------------
   // GETTER / SETTER
