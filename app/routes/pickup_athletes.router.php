@@ -11,16 +11,12 @@ if ( $categories ) :
 
 endif;
 
-
-$s3key = 'json/ca_list.json';
-
-$json = $ImgPath . '/' . $s3key;
-$app->group('/pickup_athletes/{category_slug:all|'.join('|',$category_slug).'}', function () use($app, $json, $ImgPath) {
+$app->group('/pickup_athletes/{category_slug:all|'.join('|',$category_slug).'}', function () use($app, $ImgPath) {
 
 
 
 
-  $this->get('/list[/]', function ($request, $response, $args) use ($app, $json) {
+  $this->get('/list[/]', function ($request, $response, $args) use ($app) {
     // 選手一覧
     $category = $app->model->get_category_by_slug($args['category_slug'],null, true);
     $pickup_players = $app->model->get_pickup_players($category['id']);
@@ -73,7 +69,7 @@ $app->group('/pickup_athletes/{category_slug:all|'.join('|',$category_slug).'}',
   // webviews - /category/:category_slug/pickup_athletes/webview/
   // ==============================
   $this->get('/webview[/]', function ($request, $response, $args) use ($app, $ImgPath) {
-    $category = $app->model->get_category_by_slug($args['category_slug'], "", true);
+    $category = $app->model->get_category_by_slug($args['category_slug'], null, true);
 
     $pickup_players = $app->model->get_pickup_players($category['id'], null, 4);
     $data = [];
@@ -109,5 +105,56 @@ $app->group('/pickup_athletes/{category_slug:all|'.join('|',$category_slug).'}',
   });
 });
 
+$app->group('/athlete', function () use($app, $ImgPath) {
+  // CRAZY ATHLETE v2.0
+  $this->get('/{id:[0-9]+}[/]', function ($request, $response, $args) use ($app) {
+
+    $id   = $args['id'];
+    $player_info = $app->model->get_pickup_athlete($id);
+
+    if(empty($player_info))
+    {
+      // 404
+      // ------------------------------
+      $args['page'] = $app->model->set([
+        'title'    => '404 Not Found',
+        'og_title' => '404 Not Found',
+        'template' => 404,
+      ]);
+
+      $args['request']  = $request;
+      $args['response'] = $response;
+
+      if($app->model->property('ua') === 'desktop')
+      {
+        return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
+      }
+      else
+      {
+        return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
+      }
+    }
+    $category_slug = get_category_slug_by_playerid($id);
+    $category = $app->model->get_category_by_slug($category_slug, $id, false);
+
+    $args['page'] = $app->model->set(array(
+      'title'              => 'CRAZY ATHLETES',
+      'og_title'           => 'CRAZY ATHLETES | '.$app->model->property('title'),
+      'path'               => $args,
+      'template'           => 'crazy',
+      'template_classname' => '',
+      'player'             => $player_info,
+      'ua'                 => $app->model->property('ua'),
+      'category'           => $category,
+    ));
+
+    if ( $app->model->property('ua') === 'desktop' ) :
+      return $this->renderer->render($response, 'crazy/detail.php', $args);
+    else :
+      return $this->renderer->render($response, 'crazy/detail.sp.php', $args);
+    endif;
+
+  });
+});
 
 ?>
