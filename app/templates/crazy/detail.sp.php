@@ -220,15 +220,15 @@
                 <?php
                 // ----------------------------------------------------
                 // 記事一覧: sp banner
+                if (!empty($page['category']['banner']['sp']['link']) && !empty($page['category']['banner']['sp']['image'])) {
+                  ?>
+                  <a href="<?php echo $page['category']['banner']['sp']['link']; ?>" target="_blank"
+                     onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['sp']['link']; ?>', true);"><img
+                      src="<?php echo $page['category']['banner']['sp']['image']; ?>"
+                      alt="<?php echo $page['category']['banner']['sp']['text']; ?>"></a>
 
-                ?>
-                <a href="<?php echo $page['category']['banner']['sp']['link']; ?>" target="_blank"
-                   onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['sp']['link']; ?>', true);"><img
-                    src="<?php echo $page['category']['banner']['sp']['image']; ?>"
-                    alt="<?php echo $page['category']['banner']['sp']['text']; ?>"></a>
-
-                <?php
-
+                  <?php
+                }
                 // eof: 記事一覧: sp banner
                 // ---------------------------------------------------- ?>
               </div><!-- /sponsor-link-->

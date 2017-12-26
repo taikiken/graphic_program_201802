@@ -220,15 +220,15 @@
                 <?php
                 // ----------------------------------------------------
                 // 記事一覧: pc banner
+                if (!empty($page['category']['banner']['pc']['link']) && !empty($page['category']['banner']['pc']['image'])) {
+                  ?>
+                  <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank"
+                     onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['pc']['link']; ?>', true);"><img
+                      src="<?php echo $page['category']['banner']['pc']['image']; ?>"
+                      alt="<?php echo $page['category']['banner']['pc']['text']; ?>"></a>
 
-                ?>
-                <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank"
-                   onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['pc']['link']; ?>', true);"><img
-                    src="<?php echo $page['category']['banner']['pc']['image']; ?>"
-                    alt="<?php echo $page['category']['banner']['pc']['text']; ?>"></a>
-
-                <?php
-
+                  <?php
+                }
                 // eof: 記事一覧: pc banner
                 // ---------------------------------------------------- ?>
               </div><!-- /sponsor-link-->
