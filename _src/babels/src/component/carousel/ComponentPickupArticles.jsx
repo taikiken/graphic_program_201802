@@ -20,7 +20,7 @@ import { Empty } from '../../app/const/Empty';
 import { Safety } from '../../data/Safety';
 
 // ui
-import { Touching } from '../../ui/Touching';
+import Touching from '../../ui/Touching';
 
 // --------------------------------------------
 // library

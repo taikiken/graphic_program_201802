@@ -16,7 +16,7 @@ import { Vectors } from '../util/Vectors';
  * Touching event object
  * @since 2016-09-17
  */
-export class TouchingEvents {
+export default class TouchingEvents {
   /**
    * Touching event object 各プロパティを設定します
    * @param {string} type event type

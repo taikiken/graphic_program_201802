@@ -22,7 +22,7 @@ import {Validate} from '../../util/Validate';
 import {Exif} from '../../util/Exif';
 
 // ui
-import {Thumbnail} from '../../ui/Thumbnail';
+import Thumbnail from '../../ui/Thumbnail';
 
 // data
 import {Result} from '../../data/Result';

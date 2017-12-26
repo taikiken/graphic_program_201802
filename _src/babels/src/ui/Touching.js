@@ -20,7 +20,7 @@ import { Safety } from '../data/Safety';
 import { Vectors } from '../util/Vectors';
 
 // ui
-import { TouchingEvents } from './TouchingEvents';
+import TouchingEvents from './TouchingEvents';
 
 // // private
 // const boundStart = Symbol();
@@ -32,7 +32,7 @@ import { TouchingEvents } from './TouchingEvents';
 /**
  * Touch event を監視し y方向移動が `threshold` 以内の時に `TOUCH` event を発火します
  */
-export class Touching extends EventDispatcher {
+export default class Touching extends EventDispatcher {
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------

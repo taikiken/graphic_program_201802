@@ -34,7 +34,7 @@ import {Validate} from '../../util/Validate';
 import {Exif} from '../../util/Exif';
 
 // ui
-import {Thumbnail} from '../../ui/Thumbnail';
+import Thumbnail from '../../ui/Thumbnail';
 
 // data
 import {Result} from '../../data/Result';
@@ -653,9 +653,9 @@ let Step2FormNode = React.createClass( {
 
     if ( Array.isArray( errors ) ) {
 
-      for ( var errorObject of errors ) {
+      for ( let errorObject of errors ) {
 
-        for ( var key in errorObject ) {
+        for ( let key in errorObject ) {
 
           if ( errorObject.hasOwnProperty( key ) ) {
             this.errors[ key ].message = errorObject[ key ];

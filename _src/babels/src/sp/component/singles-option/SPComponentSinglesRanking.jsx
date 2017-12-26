@@ -25,7 +25,7 @@ import ComponentArticleThumbnail from '../../../component/articles/ComponentArti
 import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
 
 // ui
-import { Touching } from '../../../ui/Touching';
+import Touching from '../../../ui/Touching';
 
 // event
 import { EventDispatcher } from '../../../event/EventDispatcher';
