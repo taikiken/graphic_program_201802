@@ -295,8 +295,6 @@ $pickup_players = get_pickup_players($category_id);
 if (!empty($category) && !empty($pickup_players))
 {
   $categoriesinfo['webviews'][]     = '/pickup_athletes/' . $category . '/webview/';
-} else {
-  $categoriesinfo['webviews'] = [];
 }
 
 $y["response"]=$categoriesinfo;
