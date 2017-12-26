@@ -1014,8 +1014,8 @@ function get_img($img,$id){
 	global $ImgPath;
 
 	$s=array();
-	$type=array("thumbnail","medium","large","original");
-	$path=array("thumbnail2","thumbnail1","img","raw");
+  $type=array("thumbnail","medium","large","original","carousel");
+	$path=array("thumbnail2","thumbnail1","img","raw","thumbnail5");
 	if(strlen($img)==0)$defimg=sprintf("0%s.jpg",($id%7+1));
 
 	for($i=0;$i<count($path);$i++){

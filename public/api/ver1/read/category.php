@@ -122,9 +122,9 @@ if(strlen($f["name"])>0){
 	$y["status"]["user_message"]="";
 	$y["status"]["developer_message"]="";
 
-  // お知らせ
+	// お知らせ
   $sql = <<<SQL
-SELECT 
+SELECT
 		notices.*
 FROM
 		categories_notices,
@@ -145,7 +145,7 @@ SQL;
   if (empty($f))
   {
     $sql = <<<SQL
-SELECT 
+SELECT
 		notices.*
 FROM
 		categories_notices,
@@ -165,13 +165,6 @@ SQL;
 
   if (!empty($f))
   {
-    // フルパスで返す
-    $domain = "https://" . $_SERVER["HTTP_HOST"];
-    $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
-    // img、linkはnullの場合あるから空にする
-    $f['img'] = isset($f['img']) ? $cf . $f['img'] : '';
-    $f['link'] = isset($f['link']) ? $f['link'] : '';
-
     // 定数
     $type = $f['type'];
     $text_color = ['#333333', '#333333', ''];
@@ -183,30 +176,41 @@ SQL;
     ];
     $disp_type = ['notice', 'warning', 'img'];
 
+    $domain = "https://" . $_SERVER["HTTP_HOST"];
+    $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
 
-    $information = array(
+    $platform_prefix_list = [
+      'pc' 			=> '',
+      'sp' 			=> 'sp_',
+      'ios'			=> 'ios_',
+      'android' => 'android_',
+    ];
 
-      'type'             => $disp_type[$type],
-      'text'             => $f['text'],
-      'text_color'       => $text_color[$type],
-      'background_color' => $background_color[$type],
-      'icon'             => $icon[$type],
-      'img'              => $f['img'],
-      'link'             => $f['link'],
-    );
+    $f['text'] = isset($f['text']) ? $f['text'] : '';
 
+    foreach($platform_prefix_list as $key => $prefix)
+    {
+      // フルパスで返す
+      $img[$key] = isset($f[$prefix . 'img']) ? $cf . $f[$prefix . 'img'] : '';
+      $link[$key] = isset($f[$prefix . 'link']) ? $f[$prefix . 'link'] : '';
+
+      $information_list[$key] = [
+        'type'             => $disp_type[$type],
+        'text'             => $f['text'],
+        'text_color'       => $text_color[$type],
+        'background_color' => $background_color[$type],
+        'icon'             => $icon[$type],
+        'img'              => $img[$key],
+        'link'             => $link[$key],
+      ];
+    }
   }
   else
   {
-    $information = null;
+    $information_list = null;
   }
 
-  $categoriesinfo['information'] = array(
-    'pc'      => $information,
-    'sp'      => $information,
-    'ios'     => $information,
-    'android' => $information,
-  );
+  $categoriesinfo['information'] = $information_list;
 
 }else{
 
@@ -268,6 +272,14 @@ SQL;
     );
   endif;
 
+  #crazy
+  # ref. #2559
+  if ( $category === 'crazy' ) :
+    $categoriesinfo['webviews']     = array(
+        '/crazy/webview/',
+    );
+  endif;
+
   // #2080
   if ( $category === 'top' ) :
     $categoriesinfo['webviews'] = array(
@@ -276,28 +288,11 @@ SQL;
   endif;
 
 
-// 1件でもあったら
-$sql = <<<SQL_EOL
-  SELECT
-    id 
-  FROM
-   u_categories
-  WHERE 
-    name_e = '{$category}'
-SQL_EOL;
+  if (!empty($category)) {
+    $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
+  }
 
-$o->query($sql);
-
-$category_id = $o->fetch_object()->id;
-
-$pickup_players = get_pickup_players($category_id);
-
-if (!empty($category) && !empty($pickup_players))
-{
-  $categoriesinfo['webviews'][]     = '/pickup_athletes/' . $category . '/webview/';
-}
-
-$y["response"]=$categoriesinfo;
+  $y["response"]=$categoriesinfo;
 
 print_json($y,$_SERVER['HTTP_REFERER']);
 

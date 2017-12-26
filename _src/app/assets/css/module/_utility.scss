@@ -26,6 +26,18 @@
   .show-for-sp { display: block !important;}
 }
 
+.other,
+.mobile {
+  .show-for-app { display: none !important;}
+  .hide-for-app { display: inherit !important;}
+}
+
+.undotsushin-ios,
+.undotsushin-android {
+  .show-for-app { display: inherit !important;}
+  .hide-for-app { display: none !important;}
+}
+
 @include screen('large') {
   .show-for-large { display: inherit !important;}
   .hide-for-large,
