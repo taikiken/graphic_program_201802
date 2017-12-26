@@ -14,12 +14,15 @@
 import SPViewSinglesPopular from '../../view/singles/SPViewSinglesPopular';
 
 // ui
-import { SinglesManager } from '../../../ui/SinglesManager';
+import SinglesManager from '../../../ui/SinglesManager';
 
 // ui / snap
 import { SPSnap } from '../../ui/SPSnap';
 
 // React
+/**
+ * [library] - ReactDOM
+ */
 const React = self.React;
 
 /**
@@ -72,28 +75,28 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
     this.id = '';
 
     /**
-     * script tag をインサートする `this.refs.popular` Element<br>
-     * componentDidMount 発火しない問題が解決したのでいらなくなったけど... 残しておく
+     * script tag をインサートする `this.refs.popular` Element
      * @type {?Element}
      */
-    this.popular = null;
+    this.popularElement = null;
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
-   * delegate, マウント後に呼び出されます<br>
-   * `SPViewSinglesPopular` instance を作成し `start` を実行します {@link SPViewSinglesPopular}
+   * delegate, マウント後に呼び出されます
+   * - `SPViewSinglesPopular` instance を作成し `start` を実行します {@link SPViewSinglesPopular}
    * */
   componentDidMount() {
-    if (this.view === null && !!this.refs.popular) {
+    const popularElement = this.popularElement;
+    if (this.view === null && popularElement) {
       // @since 2016-10-03
       // @type {{offset: number, length: number}}
       const request = this.manager.request;
       const offset = request.offset;
 
       // console.log('SPComponentSinglesWidgetPopular.componentDidMount', this.props.index, offset);
-      const view = new SPViewSinglesPopular(this.refs.popular, this.props.sign, offset);
+      const view = new SPViewSinglesPopular(popularElement, this.props.sign, offset);
       this.view = view;
       view.start();
 
@@ -108,7 +111,7 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
    * @since 2016-11-12
    */
   onMount() {
-    const snap = new SPSnap(this.refs.popular);
+    const snap = new SPSnap(this.popularElement);
     snap.start();
   }
   /**
@@ -125,13 +128,18 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
    * @return {XML} div.singles-popular-containers を返します
    */
   build() {
-    const id = `singles-popular-containers-${this.props.index}`;
+    const { index } = this.props;
+    const id = `singles-popular-containers-${index}`;
     this.id = id;
     // console.log('SPComponentSinglesWidgetPopular.build', this.props.index, this.props.strong, id);
     // this.getPopular();
     // AJAX 取得データ出力コンテナを用意
     return (
-      <div id={id} className={`singles-popular-containers singles-popular-containers-${this.props.index}`} ref="popular" />
+      <div
+        id={id}
+        className={`singles-popular-containers singles-popular-containers-${index}`}
+        ref={(element) => (this.popularElement = element)}
+      />
     );
   }
   /**

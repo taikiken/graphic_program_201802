@@ -14,7 +14,7 @@
 import { Content } from '../../app/const/Content';
 
 // ui
-import { Hit } from '../../ui/Hit';
+import Hit from '../../ui/Hit';
 
 // ga
 import { GaData } from '../../ga/GaData';

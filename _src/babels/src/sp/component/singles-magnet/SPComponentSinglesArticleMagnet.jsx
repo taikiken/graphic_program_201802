@@ -26,7 +26,7 @@ import ComponentCategoryLabelsLink from '../../../component/categories/Component
 // import { SPComponentSinglesArticleMedia } from '../singles/SPComponentSinglesArticleMedia';
 
 // ui
-import { Hit } from '../../../ui/Hit';
+import Hit from '../../../ui/Hit';
 
 // view
 // import { ViewSingle } from '../../../view/ViewSingle';
@@ -42,7 +42,7 @@ import { SinglesHistory } from '../../../singles/SinglesHistory';
 import { Page } from '../../../singles/head/Page';
 
 // snap
-import { Snap } from '../../../ui/Snap';
+import Snap from '../../../ui/Snap';
 
 // sp/ui
 // import { SPSnap } from '../../ui/SPSnap';

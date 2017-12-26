@@ -50,11 +50,11 @@ import { SinglesHistory } from '../singles/SinglesHistory';
 import { Page } from '../singles/head/Page';
 
 // snap
-import { Snap } from '../ui/Snap';
+import Snap from '../ui/Snap';
 // @since 2016-11-16
 import { TopButton } from '../ui/button/TopButton';
 // @since 2016-12-26
-import { Hit } from '../ui/Hit';
+import Hit from '../ui/Hit';
 // @since 2017-12-18
 import ComponentAnnounce from '../component/announce/ComponentAnnounce';
 
@@ -87,6 +87,93 @@ export default class ViewSingle extends View {
   // ---------------------------------------------------
   //  STATIC METHODS
   // ---------------------------------------------------
+  /**
+   * 記事詳細での提供元&カテゴリートラッキング
+   *
+   * ```
+   * 対象スクリーン：/p/ [ 記事ID ]
+   * イベントカテゴリ : provider
+   * イベントアクション：view
+   * イベントラベル：[response.user.name]
+   *  APIの response.user.name ex. 運動通信編集部 を設定
+   * ```
+   *
+   * ```
+   * 対象スクリーン：/p/ [ 記事ID ]
+   * イベントカテゴリ : category
+   * イベントアクション：view
+   * イベントラベル：[response.categories.label] ex. 海外サッカー
+   * ```
+   *
+   * @see https://github.com/undotsushin/undotsushin/issues/744
+   * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
+   * @since 2016-06-08 deprecated, instead use Ga.single
+   * @deprecated 2016-10-05, instead use Ga.single {@link Ga.single}
+   */
+  static ga(single) {
+    let category = 'provider';
+    const action = 'view';
+    const label = single.user.userName;
+    const method = 'ViewSingle.ga';
+
+    // ----------------------------------------------
+    // GA 計測タグ
+    // 記事詳細の提供元のアクセス数を測定する
+    Ga.add(new GaData(method, category, action, label, 0, true));
+    // ----------------------------------------------
+
+    // category label 送信
+    const categories:CategoriesDae = single.categories;
+
+    category = 'category';
+    categories.all.map((value:SlugDae) => {
+      // ----------------------------------------------
+      // GA 計測タグ
+      // 記事カテゴリーのアクセス数を測定する
+      Ga.add(new GaData(method, category, action, value.label, 0, true));
+      // ----------------------------------------------
+    } );
+  }
+  /**
+   * a#readMore-external の存在チェックを行います
+   * - 存在すれば click で
+   * - ga タグを送信します
+   * @since 2016-06-10
+   */
+  static moreExternal() {
+    const external = Dom.moreExternal();
+    if (external === null) {
+      return;
+    }
+    // ga 準備
+    external.addEventListener('click', ViewSingle.onExternal, false);
+  }
+  /**
+   * a#readMore-external click event handler
+   * - ga タグを送信します
+   * @see https://github.com/undotsushin/undotsushin/issues/738#issuecomment-224794530
+   * ```
+   * ga('send', {
+   * 'hitType': 'event',
+   * 'eventCategory': 'external_link',
+   * 'eventAction': 'click',
+   * 'eventLabel': 'http://〜'
+   * });
+   * ```
+   * @param {Event} event a#readMore-external click event object
+   * @since 2016-06-10
+   */
+  static onExternal(event) {
+    const category = 'external_link';
+    const action = 'click';
+    const label = Safety.string(event.target.href, '');
+    const method = 'ViewSingle.onExternal';
+    // ----------------------------------------------
+    // GA 計測タグ
+    // 記事詳細で続きを読むのリンク先トラッキング
+    Ga.add(new GaData(method, category, action, label, 0, true));
+    // ----------------------------------------------
+  }
   /**
    * お知らせを表示します - {@link ComponentAnnounce}
    * @param {SingleDae} single Ajax JSON 記事 data
@@ -130,40 +217,33 @@ export default class ViewSingle extends View {
     /**
      * footer, related 挿入位置 Element を設定した Object
      * @type {Object} {related: Element, footer: Element}
-     * @protected
      */
-    this._elements = elements;
+    this.elements = elements;
     /**
-     * <p>mount event handler</p>
-     * <p>bind 済み this.headerMount</p>
+     * mount event handler - bind 済み this.headerMount
      * @type {Function}
-     * @protected
      */
-    this._boundMount = this.headerMount.bind(this);
+    this.boundMount = this.headerMount.bind(this);
     /**
      * related instance
      * @type {null|Object}
-     * @protected
      */
-    this._viewRelated = null;
+    this.viewRelated = null;
     /**
      * header instance
      * @type {null|Object}
-     * @protected
      */
-    this._header = null;
+    this.header = null;
     /**
      * footer instance
      * @type {null|Object}
-     * @protected
      */
-    this._footer = null;
+    this.footer = null;
     /**
      * SPViewSingle | ViewSingle instance
      * @type {?SPViewSingle|?ViewSingle}
-     * @protected
      */
-    this._singles = null;
+    this.viewSingles = null;
 
     /**
      * 記事 ID
@@ -207,32 +287,32 @@ export default class ViewSingle extends View {
      */
     this.hitIn = this.hitIn.bind(this);
   }
+  // // ---------------------------------------------------
+  // //  GETTER / SETTER
+  // // ---------------------------------------------------
+  // /**
+  //  * header instance
+  //  * @return {?ViewSingleHeader} header instance を返します
+  //  */
+  // get header() {
+  //   return this._header;
+  // }
+  // /**
+  //  * header instance を設定します
+  //  * @param {?ViewSingleHeader} header header instance
+  //  */
+  // set header(header) {
+  //   this._header = header;
+  // }
+  // /**
+  //  * bind 済み this.headerMount 取得します
+  //  * @return {Function} bind 済み this.headerMount を返します
+  //  */
+  // get boundMount() {
+  //   return this.boundMount;
+  // }
   // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * header instance
-   * @return {?ViewSingleHeader} header instance を返します
-   */
-  get header() {
-    return this._header;
-  }
-  /**
-   * header instance を設定します
-   * @param {?ViewSingleHeader} header header instance
-   */
-  set header(header) {
-    this._header = header;
-  }
-  /**
-   * bind 済み this.headerMount 取得します
-   * @return {Function} bind 済み this.headerMount を返します
-   */
-  get boundMount() {
-    return this._boundMount;
-  }
-  // ---------------------------------------------------
-  //  METHODS
+  //  METHOD
   // ---------------------------------------------------
   /**
    * Ajax request を開始します
@@ -345,18 +425,18 @@ export default class ViewSingle extends View {
    * @since 2016-09-28
    */
   singles(single) {
-    if (this._singles === null) {
-      // one time, _singles が null の時のみ ViewSingles instance を作成します
+    if (this.viewSingles === null) {
+      // one time, singles が null の時のみ ViewSingles instance を作成します
       const element = Dom.singlesNext();
       const moreElement = Dom.singlesMore();
       if (element !== null && moreElement !== null) {
-        const singles = new ViewSingles(this.id, element, moreElement, single);
-        this._singles = singles;
-        singles.start();
+        const viewSingles = new ViewSingles(this.id, element, moreElement, single);
+        this.viewSingles = viewSingles;
+        viewSingles.start();
       }
     } else {
       // instance がある時は update を実行します
-      this._singles.update();
+      this.viewSingles.update();
     }
   }
   // /**
@@ -392,24 +472,24 @@ export default class ViewSingle extends View {
     // let header, footer;
     // console.log( 'ViewSingle', single );
     // header
-    if (this._header === null) {
+    if (this.header === null) {
       const header = new ViewSingleHeader(this.element, single);
-      header.on(View.DID_MOUNT, this._boundMount);
-      this._header = header;
+      header.on(View.DID_MOUNT, this.boundMount);
+      this.header = header;
       header.start();
     } else {
-      this._header.render(single);
+      this.header.render(single);
     }
 
     // footer
-    if (Safety.isElement(this._elements.footer)) {
+    if (Safety.isElement(this.elements.footer)) {
       // footer element が存在する時のみ
-      if (this._footer === null) {
-        const footer = new ViewSingleFooter(this._elements.footer, single);
-        this._footer = footer;
+      if (this.footer === null) {
+        const footer = new ViewSingleFooter(this.elements.footer, single);
+        this.footer = footer;
         footer.start();
       } else {
-        this._footer.render(single);
+        this.footer.render(single);
       }
     }
 
@@ -430,7 +510,7 @@ export default class ViewSingle extends View {
    */
   headerMount() {
     // console.log('ViewSingle.headerMount');
-    this._header.off(View.DID_MOUNT, this._boundMount);
+    this.header.off(View.DID_MOUNT, this.boundMount);
     this.executeSafely(View.DID_MOUNT);
   }
   /**
@@ -442,7 +522,7 @@ export default class ViewSingle extends View {
    * @param {Array} [related=[]] 配列内データ型はRelatedDom
    */
   related(related = []) {
-    if (!Safety.isElement(this._elements.related)) {
+    if (!Safety.isElement(this.elements.related)) {
       // element が不正の時は処理しない
       return;
     }
@@ -450,103 +530,12 @@ export default class ViewSingle extends View {
     // 効率化のために
     // ViewRelated instance が null の時は instance を作成し start を実行する
     // instance が存在するときは render する
-    if (this._viewRelated === null) {
-      const viewRelated = new ViewRelated(this._elements.related, related);
+    if (this.viewRelated === null) {
+      const viewRelated = new ViewRelated(this.elements.related, related);
       viewRelated.start();
-      this._viewRelated = viewRelated;
+      this.viewRelated = viewRelated;
     } else {
-      this._viewRelated.render(related);
+      this.viewRelated.render(related);
     }
   }// related
-
-  /**
-   * a#readMore-external の存在チェックを行います
-   * - 存在すれば click で
-   * - ga タグを送信します
-   * @since 2016-06-10
-   */
-  static moreExternal() {
-    const external = Dom.moreExternal();
-    if (external === null) {
-      return;
-    }
-    // ga 準備
-    external.addEventListener('click', ViewSingle.onExternal, false);
-  }
-  /**
-   * a#readMore-external click event handler
-   * - ga タグを送信します
-   * @see https://github.com/undotsushin/undotsushin/issues/738#issuecomment-224794530
-   * ```
-   * ga('send', {
-   * 'hitType': 'event',
-   * 'eventCategory': 'external_link',
-   * 'eventAction': 'click',
-   * 'eventLabel': 'http://〜'
-   * });
-   * ```
-   * @param {Event} event a#readMore-external click event object
-   * @since 2016-06-10
-   */
-  static onExternal(event) {
-    const category = 'external_link';
-    const action = 'click';
-    const label = Safety.string(event.target.href, '');
-    const method = 'ViewSingle.onExternal';
-    // ----------------------------------------------
-    // GA 計測タグ
-    // 記事詳細で続きを読むのリンク先トラッキング
-    Ga.add(new GaData(method, category, action, label, 0, true));
-    // ----------------------------------------------
-  }
-  // ---------------------------------------------------
-  //  STATIC METHODS
-  // ---------------------------------------------------
-  /**
-   * 記事詳細での提供元&カテゴリートラッキング
-   * @see https://github.com/undotsushin/undotsushin/issues/744
-   *
-   * <pre>
-   * 対象スクリーン：/p/ [ 記事ID ]
-   * イベントカテゴリ : provider
-   * イベントアクション：view
-   * イベントラベル：[response.user.name]
-   *  APIの response.user.name ex. 運動通信編集部 を設定
-   * </pre>
-   *
-   * <pre>
-   * 対象スクリーン：/p/ [ 記事ID ]
-   * イベントカテゴリ : category
-   * イベントアクション：view
-   * イベントラベル：[response.categories.label] ex. 海外サッカー
-   * </pre>
-   *
-   * @deprecated on 2016-10-05, instead use Ga.single {@link Ga.single}
-   * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
-   * @since 2016-06-08 deprecated, instead use Ga.single
-   */
-  static ga(single) {
-    let category = 'provider';
-    const action = 'view';
-    const label = single.user.userName;
-    const method = 'ViewSingle.ga';
-
-    // ----------------------------------------------
-    // GA 計測タグ
-    // 記事詳細の提供元のアクセス数を測定する
-    Ga.add(new GaData(method, category, action, label, 0, true));
-    // ----------------------------------------------
-
-    // category label 送信
-    const categories:CategoriesDae = single.categories;
-
-    category = 'category';
-    categories.all.map((value:SlugDae) => {
-      // ----------------------------------------------
-      // GA 計測タグ
-      // 記事カテゴリーのアクセス数を測定する
-      Ga.add(new GaData(method, category, action, value.label, 0, true));
-      // ----------------------------------------------
-    } );
-  }
 }

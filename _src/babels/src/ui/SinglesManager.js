@@ -57,7 +57,7 @@ let singletonInstance = null;
  * オススメ記事・関連記事・人気記事の表示管理を行います
  * @since 2016-10-01
  */
-export class SinglesManager {
+export default class SinglesManager {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -118,6 +118,9 @@ export class SinglesManager {
     // this[doneSymbol] = done;
     /**
      * オススメ記事・関連記事・人気記事 の出力が終わったかをマークする Object - key: boolean
+     * - {@link WidgetType}.RECOMMEND
+     * - {@link WidgetType}.RELATED
+     * - {@link WidgetType}.POPULAR
      * @type {*}
      */
     this.done = done;
@@ -125,6 +128,8 @@ export class SinglesManager {
     // this[requestSymbol] = {
     /**
      * 人気記事の `request` Object を保持します
+     * - offset: 0
+     * - length: 6
      * @type {{offset: number, length: number}}
      */
     this.request = {

@@ -14,7 +14,7 @@
 import { EventDispatcher } from '../event/EventDispatcher';
 
 // ui
-import { Hit } from '../ui/Hit';
+import Hit from '../ui/Hit';
 
 // @since 2016-10-28
 import { Scroll } from '../util/Scroll';
@@ -27,7 +27,7 @@ import { Elements } from '../util/Elements';
  * snap scroll を実現します
  * @since 2016-10-29
  */
-export class Snap extends EventDispatcher {
+export default class Snap extends EventDispatcher {
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------

@@ -24,7 +24,7 @@ import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLi
 import { ComponentSinglesArticleMedia } from './ComponentSinglesArticleMedia';
 
 // ui
-import { Hit } from '../../ui/Hit';
+import Hit from '../../ui/Hit';
 
 // util
 import { PageTitle } from '../../util/PageTitle';

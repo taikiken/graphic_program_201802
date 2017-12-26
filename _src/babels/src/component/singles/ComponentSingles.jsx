@@ -25,7 +25,7 @@ import { ComponentSinglesWidget } from './ComponentSinglesWidget';
 import { ComponentSinglesArticleMagnet } from '../singles-magnet/ComponentSinglesArticleMagnet';
 
 // ui
-import { SinglesManager } from '../../ui/SinglesManager';
+import SinglesManager from '../../ui/SinglesManager';
 
 // util
 import { Fb } from '../../util/Fb';
@@ -267,8 +267,9 @@ export class ComponentSingles extends React.Component {
   // ---------------------------------------------------
   // delegate
   /**
-   * delegate, mount 後に呼び出されます<r>
-   * View.DID_MOUNT を発火し、infinite scrollのために       moreButton へ続きがあるかを通知します
+   * delegate, mount 後に呼び出されます
+   * - View.DID_MOUNT を発火します
+   * - infinite scrollのために `moreButton` へ続きがあるかを通知します
    */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);

@@ -30,7 +30,7 @@ import { ComponentSinglesArticleSwitch } from './ComponentSinglesArticleSwitch';
 import { RecordSingleState } from '../singles-content/RecordSingleState';
 
 // ui
-import { Hit } from '../../ui/Hit';
+import Hit from '../../ui/Hit';
 
 // Ga
 import { Ga } from '../../ga/Ga';
@@ -53,7 +53,7 @@ import { PageTitle } from '../../util/PageTitle';
 // import { Offset } from '../../util/Offset';
 
 // snap
-import { Snap } from '../../ui/Snap';
+import Snap from '../../ui/Snap';
 
 // // event
 // import { IFrameStatus } from '../../event/IFrameStatus';
@@ -80,7 +80,6 @@ const React = self.React;
  * コンテナが画面内に現れたら ga 送信を行います {@link Ga.single}
  *
  * 2秒以上見た記事だけ、計測イベントを送信したい に変更されたので待機機能を追加します
- * @see https://github.com/undotsushin/undotsushin/issues/1274
  * ```
  * <ComponentSinglesArticleMagnet/>
  *  <ComponentCategoryLabelsLink/>
@@ -90,16 +89,16 @@ const React = self.React;
  *  <ComponentSinglesArticleMedia/>
  *  <ComponentSinglesArticleSwitch/>
  * ```
- * {@link ComponentCategoryLabelsLink},
- * {@link BookmarkNode},
- * {@link MediaNode},
- * {@link ComponentSinglesArticleMedia},
- * {@link ComponentSinglesArticleSwitch}
+ * - {@link ComponentCategoryLabelsLink}
+ * - {@link BookmarkNode}
+ * - {@link MediaNode}
+ * - {@link ComponentSinglesArticleMedia} - not use
+ * - {@link ComponentSinglesArticleSwitch}
  *
  * @see https://github.com/undotsushin/undotsushin/issues/1201
  * @see https://github.com/undotsushin/undotsushin/issues/1224
+ * @see https://github.com/undotsushin/undotsushin/issues/1274
  * @since 2016-10-28
- *
  * @since 2016-11-14 wait ga send
  */
 export class ComponentSinglesArticleMagnet extends React.Component {
@@ -107,12 +106,11 @@ export class ComponentSinglesArticleMagnet extends React.Component {
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * propTypes
-   *
+   * React.propTypes
    * - @type {SingleDae} single - 記事データ
    * - @type {boolean} sign - ログイン済みユーザーフラッグ, true: ログイン済み
    * - @type {number} index - 次の記事一覧・記事表示順序
-   * @return {{single: SingleDae, sign: boolean, index: number}} React props
+   * @return {{single: SingleDae, sign: boolean, index: number}} React propTypes
    */
   static get propTypes() {
     return {

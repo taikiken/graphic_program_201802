@@ -26,7 +26,7 @@ import ComponentCategoryLabelsLink from '../../../component/categories/Component
 import { SPComponentSinglesArticleMedia } from './SPComponentSinglesArticleMedia';
 
 // ui
-import { Hit } from '../../../ui/Hit';
+import Hit from '../../../ui/Hit';
 
 // util
 import { PageTitle } from '../../../util/PageTitle';

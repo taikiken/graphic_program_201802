@@ -113,7 +113,7 @@ import {Ga} from './ga/Ga';
 
 // ui
 import { TopButton } from './ui/button/TopButton';
-import { PageTop } from './ui/PageTop';
+import PageTop from './ui/PageTop';
 
 // -------------------------------------
 // sp

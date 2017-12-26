@@ -38,7 +38,7 @@ import Rate from '../tick/Rate';
  *
  * @since 2016-09-30
  */
-export class Hit extends Rise {
+export default class Hit extends Rise {
   // ----------------------------------------
   // EVENT
   // ----------------------------------------

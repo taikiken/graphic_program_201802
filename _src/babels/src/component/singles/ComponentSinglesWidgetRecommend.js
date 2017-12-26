@@ -23,7 +23,7 @@ import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 // import ComponentArticleThumbnail from '../../component/articles/ComponentArticleThumbnail';
 
 // ui / snap
-import { Snap } from '../../ui/Snap';
+import Snap from '../../ui/Snap';
 
 // React
 /**
@@ -56,8 +56,8 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * React props
-   * @return {{index: number, single: SingleDae, strong: boolean, sign: boolean}} React props
+   * React.propTypes
+   * @return {{index: number, single: SingleDae, strong: boolean, sign: boolean}} React.propTypes
    */
   static get propTypes() {
     return {
@@ -128,9 +128,7 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
     return (
       <div
         className={`widget-postList widget-postList_recommend-${this.props.index} widget-postList_recommend`}
-        ref={(component) => {
-          this.element = component;
-        }}
+        ref={(component) => (this.element = component)}
       >
         <div className="widget-postList-heading">
           <h2>{Message.RECOMMEND_TITLE}</h2>
