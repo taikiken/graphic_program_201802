@@ -450,7 +450,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
       $dat_array=unserialize($v);
 
       // 各カテゴリtop画面用
-			if ($isgetpickupplayerbanner || !empty($playerid))
+			if (!empty($playerid))
 			{
         // デフォルト、カテゴリのときだけキーが違う
         $banner_info = [];
@@ -468,6 +468,22 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 
         $ad[]= $banner_info;
 			}
+			elseif ($isgetpickupplayerbanner)
+			{
+        $banner_info["bannerflag"] = $dat_array["pickupplayer_bannerflag"];
+        $banner_info["bannertext"] = $dat_array["pickupplayer_bannertext"];
+        $banner_info["pc_bannerimg"] = $dat_array["pickupplayer_pc_bannerimg"];
+        $banner_info["sp_bannerimg"] = $dat_array["pickupplayer_sp_bannerimg"];
+        $banner_info["ios_bannerimg"] = $dat_array["pickupplayer_ios_bannerimg"];
+        $banner_info["android_bannerimg"] = $dat_array["pickupplayer_android_bannerimg"];
+        $banner_info["pc_bannerlink"] = $dat_array["pickupplayer_pc_bannerlink"];
+        $banner_info["sp_bannerlink"] = $dat_array["pickupplayer_sp_bannerlink"];
+        $banner_info["ios_bannerlink"] = $dat_array["pickupplayer_ios_bannerlink"];
+        $banner_info["android_bannerlink"] = $dat_array["pickupplayer_android_bannerlink"];
+
+        $ad[]= $banner_info;
+			}
+
 			else
 			{
         $ad[] = $dat_array;
