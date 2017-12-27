@@ -468,8 +468,11 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 
         $ad[]= $banner_info;
 			}
+			// 注目の選手画面用
 			elseif ($isgetpickupplayerbanner)
 			{
+        $banner_info = [];
+
         $banner_info["bannerflag"] = $dat_array["pickupplayer_bannerflag"];
         $banner_info["bannertext"] = $dat_array["pickupplayer_bannertext"];
         $banner_info["pc_bannerimg"] = $dat_array["pickupplayer_pc_bannerimg"];
@@ -483,7 +486,6 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 
         $ad[]= $banner_info;
 			}
-
 			else
 			{
         $ad[] = $dat_array;
