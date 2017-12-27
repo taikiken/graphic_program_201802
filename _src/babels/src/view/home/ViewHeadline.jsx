@@ -89,6 +89,9 @@ const ReactDOM = self.ReactDOM;
  * ```
  */
 export default class ViewHeadline extends View {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * action/Headline を使い Ajax request 後 element へ dom を作成します
    *
@@ -112,6 +115,9 @@ export default class ViewHeadline extends View {
      */
     this.boundSafely = this.executeSafely.bind(this);
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * Ajax request を開始します
    */
@@ -310,7 +316,7 @@ export default class ViewHeadline extends View {
         callback={this.boundSafely}
         home={true}
       />,
-      this.element
+      this.element,
     );
   }// render
 }

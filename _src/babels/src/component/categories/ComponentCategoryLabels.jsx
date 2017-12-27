@@ -86,6 +86,51 @@ ComponentIconMovie.propTypes = {
 };
 
 /**
+ * headline 専用 カテゴリラベル表示
+ * - ヘッドライン / ヘッドライン上での地域カテゴリ記事は具体的な地域名ではなく「地域」と表示 by 藤森
+ * @param {string} label category label
+ * @returns {?XML} `span.category-label`
+ * @since 2017-12-27
+ */
+export const ComponentCategoryLabelsHeadline = ({ label }) => (
+  <span className="category-label">
+    {label}
+  </span>
+);
+
+/**
+ * React.propTypes
+ * @type {{label: string}}
+ */
+ComponentCategoryLabelsHeadline.propTypes = {
+  label: React.PropTypes.string.isRequired,
+};
+
+// export const ComponentCategoryLabelsRegion = ({ anotherCategories, id, index, headline }) => {
+//   if (headline || !anotherCategories || !anotherCategories.area || !Array.isArray(anotherCategories.area.list)) {
+//     return null;
+//   }
+//   // region
+//   anotherCategories.area.list.map((regionDae, i) => {
+//     return (
+//       <span
+//         key={`labels-area-${id}-${index}-${i}`}
+//         className="category-label category-label_area"
+//       >
+//           {regionDae.region}
+//         </span>
+//     );
+//   });
+// };
+//
+// ComponentCategoryLabelsRegion.propTypes = {
+//   anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae).isRequired,
+//   id: React.PropTypes.string.isRequired,
+//   index: React.PropTypes.number.isRequired,
+//   headline: React.PropTypes.bool.isRequired,
+// };
+
+/**
  * p.post-category を出力<br>
  * category 未設定に対応するように `CategoryLabelNode` を置換えます {@link CategoryLabelNode}
  * @since 2016-09-24
@@ -118,6 +163,8 @@ export default class ComponentCategoryLabels extends React.Component {
       anotherCategories: React.PropTypes.instanceOf(AnotherCategoriesDae),
       // @since 2017-12-22
       isNew: React.PropTypes.bool,
+      // @since 2017-12-28
+      headline: React.PropTypes.bool,
     };
   }
   /**
@@ -135,6 +182,8 @@ export default class ComponentCategoryLabels extends React.Component {
       anotherCategories: null,
       // @since 2017-12-22
       isNew: false,
+      // @since 2017-12-28
+      headline: false,
     };
   }
   // // ---------------------------------------------------
@@ -155,17 +204,19 @@ export default class ComponentCategoryLabels extends React.Component {
    * 地域名称をカテゴリラベルの代わりに出力する
    * @returns {?XML} span.category-label
    * @since 2017-09-15
+   * @since 2017-12-27 headline 表示しない
    */
   renderRegion() {
-    const { anotherCategories, id, index } = this.props;
-    if (!anotherCategories) {
+    const { anotherCategories, id, index, headline } = this.props;
+    if (headline || !anotherCategories) {
       return null;
     }
     // region
     return anotherCategories.area.list.map((regionDae, i) => {
+      const step = i * 1;
       return (
         <span
-          key={`labels-area-${id}-${index}-${i}`}
+          key={`labels-area-${id}-${index}-${step}`}
           className="category-label category-label_area"
         >
           {regionDae.region}
@@ -189,6 +240,7 @@ export default class ComponentCategoryLabels extends React.Component {
       recommend,
       mediaType,
       isNew,
+      headline,
     } = this.props;
     // const categories = props.categories;
     // const anotherCategories = props.anotherCategories;
@@ -214,19 +266,30 @@ export default class ComponentCategoryLabels extends React.Component {
           type={mediaType}
         />
         {
-          /* Array<SlugDae> */
+          /* Array.<SlugDae> */
           categories.map((category, i) => {
+            // no category label
             if (!category.label) {
               return null;
             }
+            // headline - 地域表示を変える - 2017-12-27
+            if (headline) {
+              return (
+                <ComponentCategoryLabelsHeadline
+                  key={`labels-${id}-${index}-${i}`}
+                  label={category.label}
+                />
+              );
+            }
+            // no headline
             if (category.slug === 'area' && (anotherCategories && anotherCategories.area.has)) {
               return null;
             }
-            const areaClassName = category.slug === 'area' ? ' category-label_area' : '';
+            const areaClassName = category.slug === 'area' ? 'category-label_area' : '';
             return (
               <span
                 key={`labels-${id}-${index}-${i}`}
-                className={`category-label${areaClassName}`}
+                className={`category-label ${areaClassName}`}
               >
                 {category.label}
               </span>
@@ -235,6 +298,12 @@ export default class ComponentCategoryLabels extends React.Component {
         }
         {
           this.renderRegion()
+          // <ComponentCategoryLabelsRegion
+          //   anotherCategories={anotherCategories}
+          //   id={id}
+          //   index={index}
+          //   headline={headline}
+          // />
         }
         {
           // pref output

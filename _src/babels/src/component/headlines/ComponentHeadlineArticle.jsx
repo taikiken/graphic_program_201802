@@ -187,7 +187,7 @@ export default class ComponentHeadlineArticle extends React.Component {
       id,
       anotherCategories,
       date,
-      isNew,
+      // isNew,
     } = this.props;
     return (
       <li className={`board-item board-item-${index}`}>
@@ -215,6 +215,10 @@ export default class ComponentHeadlineArticle extends React.Component {
               />
             </p>
             */}
+            {
+              // ComponentCategoryLabels - headline always `NEW` - ヘッドライン / ヘッドライン記事にすべてNEWラベルつける ( PCも同様 ) by 藤森
+              // UNDO_SPBL-282 【Web】一面のリニューアル / Web - Mobile対応 - https://aws-plus.backlog.jp/view/UNDO_SPBL-282
+            }
             <ComponentCategoryLabels
               categories={categories}
               id={`headline-label-${id}`}
@@ -222,7 +226,8 @@ export default class ComponentHeadlineArticle extends React.Component {
               mediaType={mediaType}
               recommend={false}
               anotherCategories={anotherCategories}
-              isNew={isNew}
+              isNew={true}
+              headline={true}
             />
             <p className="post-date">{date}</p>
           </div>
