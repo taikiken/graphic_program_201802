@@ -54,7 +54,7 @@ if ($page['category']['slug'] == 'all') {
           <section class="section_pickup_player">
               <div class="ttl-wrapper">
                   <h2 class="ttl pickup"><i></i>注目のアスリート</h2>
-                  <p class="more"><a href="/category/<?php echo $page['category']['slug'] ?>/athletes/">すべての選手を見る</a></p>
+                  <p class="more"><a href="/pickup_athletes/<?php echo $page['category']['slug'] ?>/list/">すべての選手を見る</a></p>
               </div>
               <div class="pickup_player_list">
                   <ul class="thumb_area">

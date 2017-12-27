@@ -58,7 +58,7 @@
                 </ul>
             </div>
 
-            <div class="more_btn"><a href="/category/<?php echo $page['category']['slug'] ?>/athletes/"><i></i>すべての選手を見る</a></div>
+            <div class="more_btn"><a href="/pickup_athletes/<?php echo $page['category']['slug'] ?>/list/"><i></i>すべての選手を見る</a></div>
         </section>
       <?php endif; ?>
       <?php
