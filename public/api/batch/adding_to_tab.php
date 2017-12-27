@@ -9,9 +9,20 @@ $search_word_category_list =
   ];
 
 ////// このカテゴリだったらタブ追加しない //////
-$exclude_category_list = [
-  'tvguide',
-];
+// 本番DBと開発DBでslug異なる場合がある
+if (preg_match("/cms/", $servername))
+{
+  $exclude_category_list = [
+    'gguide',
+  ];
+}
+else
+{
+  $exclude_category_list = [
+    'tvguide',
+  ];
+}
+
 
 
 
