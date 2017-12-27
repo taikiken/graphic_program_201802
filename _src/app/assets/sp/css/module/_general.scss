@@ -236,14 +236,14 @@
       position: relative;
       padding-left: 20px;
       word-break: break-all;
+      font-weight: bold;
+      font-size: fz(20/2);
 
       a {
         display: block;
         width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-weight: bold;
-        font-size: fz(20/2);
         white-space: nowrap;
       }
     }
@@ -520,12 +520,15 @@
         }
 
         &-heading {
-          height: 1em;
+          width: 100%;
+          height: auto;
           line-height: 1;
           margin-top: (18/2)+px;
           overflow: hidden;
+          text-overflow: ellipsis;
           font-weight: bold;
           font-size: fz(32/2);
+          white-space: nowrap;
         }
         &-category {}
         &-data {}
