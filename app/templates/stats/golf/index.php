@@ -45,10 +45,10 @@
 
       <div class="stats__nav stats__nav--golf">
         <ul class="stats__nav__list">
-          <li class="stats__nav__item_1"><a class="show-for-large" href="./?sj_PageID=pc_2017_schedule_21">国内男子</a><a class="show-for-small" href="./?sj_PageID=sp_2017_schedule_21">国内男子</a></li>
-          <li class="stats__nav__item_2"><a class="show-for-large" href="./?sj_PageID=pc_2017_schedule_23">国内女子</a><a class="show-for-small" href="./?sj_PageID=sp_2017_schedule_23">国内女子</a></li>
+          <li class="stats__nav__item_1"><a class="show-for-large" href="./?sj_PageID=pc_2018_schedule_21">国内男子</a><a class="show-for-small" href="./?sj_PageID=sp_2018_schedule_21">国内男子</a></li>
+          <li class="stats__nav__item_2"><a class="show-for-large" href="./?sj_PageID=pc_2018_schedule_23">国内女子</a><a class="show-for-small" href="./?sj_PageID=sp_2018_schedule_23">国内女子</a></li>
           <li class="stats__nav__item_3"><a class="show-for-large" href="./?sj_PageID=pc_2018_schedule_11">海外男子</a><a class="show-for-small" href="./?sj_PageID=sp_2018_schedule_11">海外男子</a></li>
-          <li class="stats__nav__item_4"><a class="show-for-large" href="./?sj_PageID=pc_2017_schedule_13">海外女子</a><a class="show-for-small" href="./?sj_PageID=sp_2017_schedule_13">海外女子</a></li>
+          <li class="stats__nav__item_4"><a class="show-for-large" href="./?sj_PageID=pc_2018_schedule_13">海外女子</a><a class="show-for-small" href="./?sj_PageID=sp_2018_schedule_13">海外女子</a></li>
         </ul>
       </div>
 
@@ -95,7 +95,7 @@
           if (app) {
             pc = false;
           }
-          var page = pc ? 'pc_2017_schedule_21' : 'sp_2017_schedule_21';
+          var page = pc ? 'pc_2018_schedule_21' : 'sp_2018_schedule_13_schedule_21';
           sj_golf.instance.render({
             'hideBcl' : true,
             'page'    : page
