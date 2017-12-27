@@ -18,7 +18,7 @@ const MEDIA_NAME = 'gorin.jp';
 const SPECIAL_CHAR = 'www.youtube.com/embed';
 # RSSファイル
 #
-#平昌五輪
+#平昌
 //const RSS_FILE = 'http://dev.cocokara-next.com/feed/';
 const RSS_FILE = 'http://dev.ambass.jp/gorinrio/api/rss/undotsushin.xml';
 
@@ -194,6 +194,9 @@ foreach($items as $item)
             $TITLE[] = pg_escape_string($title);
             $item_map['d1']   = 3;
             $item_map['d2']   = $MEDIAID;
+            //カテゴリは平昌五輪固定
+            $item_map['m1'] =165;
+            /*
             if(isset($item->category)) {
 
                 //171206
@@ -212,7 +215,7 @@ foreach($items as $item)
             } else {
                 $item_map['m1'] = 129;
             }
-
+            */
 
 
             $item_map['flag'] = 1;
