@@ -93,7 +93,7 @@ export default class SPComponentHeadlineArticle extends React.Component {
       id,
       anotherCategories,
       date,
-      isNew,
+      // isNew,
     } = this.props;
 
     return (
@@ -127,7 +127,8 @@ export default class SPComponentHeadlineArticle extends React.Component {
               mediaType={mediaType}
               recommend={false}
               anotherCategories={anotherCategories}
-              isNew={isNew}
+              isNew={true}
+              headline={true}
             />
             <p className="post-date">{date}</p>
           </div>
