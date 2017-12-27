@@ -33,8 +33,8 @@ import {Ajax} from '../net/Ajax';
  *
  * @example
  * class Offset extends Action {
- *  constructor( types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive, ResultClass = Result ) {
- *    super( types, resolve, reject );
+ *  constructor(types, resolve = null, reject = null, offset = 0, length = Length.archive, ResultClass = Result) {
+ *    super(types, resolve, reject);
  *  }
  * }
  */
@@ -212,7 +212,7 @@ export class Action {
    */
   success(result) {
     // success
-    const resolve = this._resolve;
+    const resolve = this.resolve;
     if (typeof resolve === 'function') {
       resolve( result );
     }
@@ -223,7 +223,7 @@ export class Action {
    */
   fail(error) {
     // error
-    const reject = this._reject;
+    const reject = this.reject;
     if (typeof reject === 'function') {
       reject( error );
     }
