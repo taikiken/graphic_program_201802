@@ -225,7 +225,7 @@ INSERT INTO photo
 VALUES
 (
     {$article_id},
-    '',
+    '{$title}',
     '{$main}',
     '{$thumb}',
     '{$sp_main}',
