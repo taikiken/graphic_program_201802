@@ -88,7 +88,7 @@ export let SPMediaVideoNode = React.createClass( {
         video={video}
         poster={poster}
         caption={caption}
-        playImage={Empty.VIDEO_PLAY}
+        playImage={Empty.VIDEO_PLAY_SP}
       />
     );
 
@@ -110,7 +110,7 @@ export let SPMediaVideoNode = React.createClass( {
           video={video}
           poster={poster}
           caption={caption}
-          playImage={Empty.VIDEO_PLAY}
+          playImage={Empty.VIDEO_PLAY_SP}
         />
       );
     }
@@ -121,7 +121,7 @@ export let SPMediaVideoNode = React.createClass( {
         video={video}
         poster={poster}
         caption={caption}
-        playImage={Empty.VIDEO_PLAY}
+        playImage={Empty.VIDEO_PLAY_SP}
       />
     );
   },

@@ -247,10 +247,10 @@ let PopularDom = React.createClass( {
     }
 
   }, // render
-  componentDidMount: function() {
-    // mount
-  }
-} );
+  // componentDidMount: function() {
+  //   // mount
+  // }
+});
 
 // ------------------------------------------------
 // 基点 React class
@@ -258,10 +258,10 @@ let PopularDom = React.createClass( {
 // 記事一覧のサムネイル
 /**
  * 記事一覧のサムネイル
- * @type {*|Function|ReactClass}
+ * @type {ReactClass}
  * @private
  */
-let ThumbnailDom = React.createClass( {
+const ThumbnailDom = React.createClass( {
   propType: {
     mediaType: React.PropTypes.string.isRequired,
     thumbnail: React.PropTypes.string.isRequired,
@@ -277,12 +277,12 @@ let ThumbnailDom = React.createClass( {
     };
   },
   render: function() {
-    let mediaType = this.props.mediaType;
+    const mediaType = this.props.mediaType;
 
     // media type で thumbnail 切替
-    if ( mediaType === MediaType.IMAGE ) {
+    if (mediaType === MediaType.IMAGE) {
       // type: image
-      let imgStyle = {
+      const imgStyle = {
         'background': `url(${this.props.thumbnail}) no-repeat center center`,
         'backgroundSize': 'cover'
       };
@@ -299,18 +299,21 @@ let ThumbnailDom = React.createClass( {
            */}
         </figure>
       );
-    } else if ( mediaType === MediaType.VIDEO ) {
+    } else if (mediaType === MediaType.VIDEO) {
       // type: video
       return (
         <figure className={'post-thumb post-thumb-' + mediaType}>
           <img className="video-thumbnail" src={this.props.thumbnail} alt={this.props.title}/>
-          <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} alt="" />
+          <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SP} alt="" />
         </figure>
       );
-    } else {
-      // 該当なし
-      return null;
     }
+    // else {
+    //   // 該当なし
+    //   return null;
+    // }
+    // 該当なし
+    return null;
   }
 } );
 
@@ -320,7 +323,7 @@ let ThumbnailDom = React.createClass( {
  * SP 個別の 記事Dom
  * @type {ReactClass}
  */
-export let SPArchiveNode = React.createClass( {
+export const SPArchiveNode = React.createClass( {
   propTypes: {
     list: React.PropTypes.array,
     // request offset
@@ -354,6 +357,39 @@ export let SPArchiveNode = React.createClass( {
       length: this.props.length
     };
   },
+  // // state 変更し dom が更新された後に呼び出される delegate
+  // componentDidUpdate: function() {
+  // },
+  // dom が表示された後に1度だけ呼び出される delegate
+  componentDidMount: function() {
+    // after mount
+    this.props.scope.executeSafely( View.DID_MOUNT );
+    // hasNext を元に More View button の表示非表示を決める
+    this.props.moreButton( this.props.action.hasNext() );
+  },
+  // // dom が削除される前に呼び出される delegate
+  // componentWillUnmount: function() {
+  // },
+  // -----------------------------------------------------
+  // // 以降 custom
+  // // isotope 前準備
+  // shouldMasonry: function() {
+  // },
+  // // 画像読み込む完了 event handler, isotope を実行
+  // onImages: function() {
+  // },
+  updateList: function(list, offset, length) {
+    // state を変更し appendChild + isotope を行う
+    this.setState({ list: list, offset: offset, length: length });
+    this.props.moreButton(this.props.action.hasNext());
+  },
+  // ,
+  // // didUpdate から呼び出される
+  // appendImages: function() {
+  //   // hasNext を元に More View button の表示非表示を決める
+  //   this.setState( { loading: '' } );
+  //   this.props.moreButton( this.props.action.hasNext() );
+  // }
   render: function() {
     // console.log('SPArchiveNode.render', this.props);
     let home = this.props.home;
@@ -438,39 +474,5 @@ export let SPArchiveNode = React.createClass( {
         }
       </div>
     );
-
   },
-  // // state 変更し dom が更新された後に呼び出される delegate
-  // componentDidUpdate: function() {
-  // },
-  // dom が表示された後に1度だけ呼び出される delegate
-  componentDidMount: function() {
-    // after mount
-    this.props.scope.executeSafely( View.DID_MOUNT );
-    // hasNext を元に More View button の表示非表示を決める
-    this.props.moreButton( this.props.action.hasNext() );
-  },
-  // // dom が削除される前に呼び出される delegate
-  // componentWillUnmount: function() {
-  // },
-  // -----------------------------------------------------
-  // // 以降 custom
-  // // isotope 前準備
-  // shouldMasonry: function() {
-  // },
-  // // 画像読み込む完了 event handler, isotope を実行
-  // onImages: function() {
-  // },
-  updateList: function( list, offset, length ) {
-    // state を変更し appendChild + isotope を行う
-    this.setState( { list: list, offset: offset, length: length } );
-    this.props.moreButton( this.props.action.hasNext() );
-  }
-  // ,
-  // // didUpdate から呼び出される
-  // appendImages: function() {
-  //   // hasNext を元に More View button の表示非表示を決める
-  //   this.setState( { loading: '' } );
-  //   this.props.moreButton( this.props.action.hasNext() );
-  // }
 } );// SPArticleDom

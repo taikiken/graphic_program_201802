@@ -22,6 +22,11 @@ import { MediaType } from '../../app/const/MediaType';
 const React = self.React;
 
 /**
+ * [library] - Sagen
+ */
+const Sagen = self.Sagen;
+
+/**
  * 記事一覧・サムネイル
  * @since 2016-09-16
  */
@@ -67,26 +72,26 @@ export default class ComponentArticleThumbnail extends React.Component {
       small: false
     };
   }
-  // // ---------------------------------------------------
-  // //  CONSTRUCTOR
-  // // ---------------------------------------------------
-  // /**
-  //  * default property を保存し必要な関数・変数を準備します
-  //  * @param {Object} props React props プロパティー {@link ComponentArticleThumbnail.propTypes}
-  //  */
-  // constructor(props) {
-  //   super(props);
-  //
-  //   /**
-  //    * 可変要素
-  //    * @type {{mediaType: string, thumbnail: string, title: string}}
-  //    */
-  //   this.state = {
-  //     mediaType: props.mediaType,
-  //     thumbnail: props.thumbnail,
-  //     title: props.title
-  //   };
-  // }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * default property を保存し必要な関数・変数を準備します
+   * @param {Object} props React props プロパティー {@link ComponentArticleThumbnail.propTypes}
+   */
+  constructor(props) {
+    super(props);
+    // /**
+    //  * 可変要素
+    //  * @type {{mediaType: string, thumbnail: string, title: string}}
+    //  */
+    // this.state = {
+    //   mediaType: props.mediaType,
+    //   thumbnail: props.thumbnail,
+    //   title: props.title
+    // };
+    this.sp = Sagen.Browser.Mobile.phone();
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -111,7 +116,17 @@ export default class ComponentArticleThumbnail extends React.Component {
       </figure>
     );
   }
-
+  /**
+   * video play icon - desktop / mobile で差替える
+   * @param {boolean} small small flag
+   * @returns {string} video play icon path
+   */
+  playIcon(small) {
+    if (this.sp) {
+      return small ? Empty.VIDEO_PLAY_SP_SMALL : Empty.VIDEO_PLAY_SP;
+    }
+    return small ? Empty.VIDEO_PLAY_SMALL : Empty.VIDEO_PLAY;
+  }
   /**
    * media type - video: thumbnail
    * @returns {XML} `figure.post-thumb`
@@ -119,7 +134,8 @@ export default class ComponentArticleThumbnail extends React.Component {
   video() {
     const { small, mediaType, title, thumbnail } = this.props;
     // type: video
-    const icon = small ? Empty.VIDEO_PLAY_SMALL : Empty.VIDEO_PLAY;
+    // const icon = small ? Empty.VIDEO_PLAY_SMALL : Empty.VIDEO_PLAY;
+    const icon = this.playIcon(small);
     return (
       <figure className={`post-thumb post-thumb-${mediaType}`}>
         <img className="video-thumbnail" src={thumbnail} alt={title}/>

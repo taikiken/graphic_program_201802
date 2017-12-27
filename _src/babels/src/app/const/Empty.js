@@ -103,6 +103,30 @@ export class Empty {
     return '/assets/images/common/thumb-16x9-play.png';
   }
   /**
+   * video play button overlay sidebar small【16 x 9】
+   * - [Ex.] sidebar video...
+   * @return {string} Video Play画像パス【小】【16 x 9】
+   */
+  static get VIDEO_PLAY_SMALL() {
+    return '/assets/images/common/thumb-16x9-play-s.png';
+  }
+  /**
+   * SP: video play button overlay【16 x 9】 - `/assets/sp/images/common/thumb-16x9-play.png`
+   * @return {string} Video Play画像パス【16 x 9】 for SP
+   * @since 2017-12-28
+   */
+  static get VIDEO_PLAY_SP() {
+    return '/assets/sp/images/common/thumb-16x9-play.png';
+  }
+  /**
+   * SP: video play button overlay【16 x 9】 small - `/assets/sp/images/common/thumb-16x9-play-s.png`
+   * @return {string} Video Play画像パス【16 x 9】 for SP
+   * @since 2017-12-28
+   */
+  static get VIDEO_PLAY_SP_SMALL() {
+    return '/assets/sp/images/common/thumb-16x9-play-s.png';
+  }
+  /**
    * video play button overlay【640 x 400】
    * - [Ex.] pickup video...
    * @return {string} Video Play画像パス【Pickup】【640 x 400】
@@ -111,14 +135,6 @@ export class Empty {
     // 正規画像に差し替える - update 2017-12-22
     // return '/assets/images/common/thumb-640x400-play.png';
     return '/assets/images/common/thumb-750x320-play.png';
-  }
-  /**
-   * video play button overlay sidebar small【16 x 9】
-   * - [Ex.] sidebar video...
-   * @return {string} Video Play画像パス【小】【16 x 9】
-   */
-  static get VIDEO_PLAY_SMALL() {
-    return '/assets/images/common/thumb-16x9-play-s.png';
   }
   /**
    * video play button overlay sidebar small【1 x 1】
