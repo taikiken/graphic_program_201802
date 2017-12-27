@@ -31,8 +31,11 @@ import {GaData} from '../../../../ga/GaData';
 import ComponentError from '../../../../component/error/ComponentError';
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/**
+ * [library] - React
+ */
+const React = self.React;
+// let ReactDOM = self.ReactDOM;
 
 // comment form
 /**
@@ -92,74 +95,13 @@ export let SPCommentFormElementNode = React.createClass( {
       body: new ErrorMessage()
     };
 
+    this.this.formElement = null;
     return {
       error: false,
       loading: '',
       body: '',
       open: this.props.open
     };
-  },
-  render: function() {
-    if ( !this.props.independent ) {
-      // コメントへのコメント
-      const commentId = this.props.commentId;
-      if (!commentId || commentId === '0') {
-        throw new Error(`need comment Id ${commentId}`);
-      }
-    }
-
-    if (this.state.open || this.props.independent) {
-      // user icon
-      const picture = Safety.image(this.props.icon, Empty.USER_EMPTY);
-      const loggedIn = Safety.same(picture, Empty.USER_EMPTY);
-
-      // inner methods
-      // error 表示する？
-      const errorClass = ( keyName:string ) => {
-        return this.errors[ keyName ].error ? 'error' : '';
-      };
-      // error message を表示する？
-      const message = ( keyName:string ) => {
-        return this.errors[ keyName ].message;
-      };
-
-      let commentForm = this.props.independent ? '' : 'comment-form ';
-
-      return (
-        <div className={`${commentForm}form-root loading-root ${this.state.loading}`}>
-          <form onSubmit={this.onSubmit} ref="form">
-            <div className="comment-form-inner">
-              <i className={'comment-form-user ' + loggedIn}><img src={Empty.refresh(picture)} alt=""/></i>
-              <div className="comment-form-comment-outer">
-                <div className={'comment-form-comment-inner ' + errorClass( 'body' )}>
-                  <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder={Message.PLACEHOLDER_COMMENT} autoFocus="true" />
-                  <ComponentError message={message('body')} />
-                </div>
-              </div>
-            </div>
-
-            <div className="comment-form-submit">
-              <button type="submit">{Message.COMMENT_SUBMIT}</button>
-            </div>
-          </form>
-          {/* <div ref="commentMessage"></div> */}
-          <div className="loading-spinner">&nbsp;</div>
-        </div>
-      );
-    }
-    return null;
-  },
-  // ----------------------------------------
-  // delegate
-  componentDidMount: function() {
-    this.mounted = true;
-    this.listen();
-  },
-  // componentDidUpdate: function() {
-  // },
-  componentWillUnMount: function() {
-    this.mounted = false;
-    this.dispose();
   },
   // ----------------------------------------
   listen: function() {
@@ -281,7 +223,8 @@ export let SPCommentFormElementNode = React.createClass( {
   // ajax start
   sending: function() {
     this.setState({ loading: 'loading' });
-    const formNode = ReactDOM.findDOMNode(this.refs.form);
+    // const formNode = ReactDOM.findDOMNode(this.refs.form);
+    const formNode = this.formElement;
     const formData = Form.element(formNode);
     // console.log( 'sending ===============', this.props.articleId, formNode, formData );
 
@@ -336,5 +279,70 @@ export let SPCommentFormElementNode = React.createClass( {
     // dispose しない - reload しても mount しないから - 2017-12-05
     this.commentDispose();
     this.setState({ loading: '', open: false });
-  }
-} );
+  },
+  // ----------------------------------------
+  // delegate
+  componentDidMount: function() {
+    this.mounted = true;
+    this.listen();
+  },
+  // componentDidUpdate: function() {
+  // },
+  componentWillUnMount: function() {
+    this.mounted = false;
+    this.dispose();
+  },
+  render: function() {
+    if ( !this.props.independent ) {
+      // コメントへのコメント
+      const commentId = this.props.commentId;
+      if (!commentId || commentId === '0') {
+        throw new Error(`need comment Id ${commentId}`);
+      }
+    }
+
+    if (this.state.open || this.props.independent) {
+      // user icon
+      const picture = Safety.image(this.props.icon, Empty.USER_EMPTY);
+      const loggedIn = Safety.same(picture, Empty.USER_EMPTY);
+
+      // inner methods
+      // error 表示する？
+      const errorClass = ( keyName:string ) => {
+        return this.errors[ keyName ].error ? 'error' : '';
+      };
+      // error message を表示する？
+      const message = ( keyName:string ) => {
+        return this.errors[ keyName ].message;
+      };
+
+      let commentForm = this.props.independent ? '' : 'comment-form ';
+
+      return (
+        <div className={`${commentForm}form-root loading-root ${this.state.loading}`}>
+          <form
+            onSubmit={this.onSubmit}
+            ref={(element) => (this.formElement = element)}
+          >
+            <div className="comment-form-inner">
+              <i className={'comment-form-user ' + loggedIn}><img src={Empty.refresh(picture)} alt=""/></i>
+              <div className="comment-form-comment-outer">
+                <div className={'comment-form-comment-inner ' + errorClass( 'body' )}>
+                  <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder={Message.PLACEHOLDER_COMMENT} autoFocus="true" />
+                  <ComponentError message={message('body')} />
+                </div>
+              </div>
+            </div>
+
+            <div className="comment-form-submit">
+              <button type="submit">{Message.COMMENT_SUBMIT}</button>
+            </div>
+          </form>
+          {/* <div ref="commentMessage"></div> */}
+          <div className="loading-spinner">&nbsp;</div>
+        </div>
+      );
+    }
+    return null;
+  },
+});

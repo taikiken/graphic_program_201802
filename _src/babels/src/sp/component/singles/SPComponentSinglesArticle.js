@@ -37,6 +37,9 @@ import { PageTitle } from '../../../util/PageTitle';
 import { Ga } from '../../../ga/Ga';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -44,13 +47,29 @@ const React = self.React;
  * @since 2016-09-28
  */
 export class SPComponentSinglesArticle extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * React.propTypes
+   * @return {{single: SingleDae, sign: boolean, index: number}} React.propTypes
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      sign: React.PropTypes.bool.isRequired,
+      index: React.PropTypes.number.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー {@link SPComponentSinglesArticle.propTypes}
    */
   constructor(props) {
     super(props);
-
     /**
      * React state
      * @type {{single: SingleDae, sign: boolean}}
@@ -76,80 +95,15 @@ export class SPComponentSinglesArticle extends React.Component {
      * @default false
      */
     this.sendGa = false;
+    /**
+     * `div,loaded-post`
+     * @type {?Element}
+     */
+    this.singlesArticle = null;
   }
-  /**
-   * `div.loaded-post` を出力します
-   * @return {?XML} `div.loaded-post` or null を返します
-   * */
-  render() {
-    const single = this.state.single;
-
-    if (!single) {
-      return null;
-    }
-
-    return (
-      <div className={`loaded-post loaded-post-${single.id}`} ref="singlesArticle">
-        {/* div.post-kv */}
-        <div className="single-visual-container" ref="visualElement">
-          {/*
-          <SPMediaNode
-            articleId={String(single.id)}
-            mediaType={single.mediaType}
-            media={single.media}
-            isShowImage={single.isShowImage}
-          />
-          */}
-          <SPComponentSinglesArticleMedia
-            single={single}
-          />
-        </div>
-        <div className="post-detail">
-          {/* title */}
-          <div className={`post-heading post-heading-${single.id}`}>
-            <h1>{single.title}</h1>
-          </div>
-          {/* コンテンツ情報 */}
-          <div className="post-data">
-            <p className="post-author">{single.user.userName}</p>
-
-            <ComponentCategoryLabelsLink
-              index={this.props.index}
-              id={`single-label-${single.id}`}
-              categories={single.categories.all}
-              anotherCategories={single.anotherCategories}
-            />
-
-            <p className="post-date">{single.displayDate}</p>
-            <BookmarkNode
-              sign={this.state.sign}
-              isBookmarked={single.isBookmarked}
-              articleId={String(single.id)}
-            />
-          </div>
-          {/* 本文 */}
-          <div className="post-content">
-            <p>{single.description}</p>
-          </div>
-          {/* link */}
-          <div className="post-content-read-more">
-            <a href={single.url} className="post-content-btn-readMore">{Message.READ_MORE}</a>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  /**
-   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
-   * */
-  componentDidMount() {
-    if (this.hit === null && !!this.refs.singlesArticle) {
-      const hit = new Hit(this.refs.singlesArticle);
-      this.hit = hit;
-      hit.on(Hit.COLLISION, this.boundHit);
-      hit.start();
-    }
-  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * state.single 情報を更新し再描画します
    * @param {SingleDae} single state.single
@@ -210,18 +164,81 @@ export class SPComponentSinglesArticle extends React.Component {
       hit.off(Hit.COLLISION, this.boundHit);
     }
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
   /**
-   * propTypes
-   * @return {{single: SingleDae, sign: boolean, index: number}} React props
-   */
-  static get propTypes() {
-    return {
-      single: React.PropTypes.object.isRequired,
-      sign: React.PropTypes.bool.isRequired,
-      index: React.PropTypes.number.isRequired
-    };
+   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
+   * */
+  componentDidMount() {
+    const singlesArticle = this.singlesArticle;
+    if (this.hit === null && singlesArticle) {
+      const hit = new Hit(singlesArticle);
+      this.hit = hit;
+      hit.on(Hit.COLLISION, this.boundHit);
+      hit.start();
+    }
+  }
+  /**
+   * `div.loaded-post` を出力します
+   * @return {?XML} `div.loaded-post` or null を返します
+   * */
+  render() {
+    const single = this.state.single;
+
+    if (!single) {
+      return null;
+    }
+
+    return (
+      <div
+        className={`loaded-post loaded-post-${single.id}`}
+        ref={(element) => (this.singlesArticle = element)}
+      >
+        {/* div.post-kv */}
+        <div className="single-visual-container" ref="visualElement">
+          {/*
+          <SPMediaNode
+            articleId={String(single.id)}
+            mediaType={single.mediaType}
+            media={single.media}
+            isShowImage={single.isShowImage}
+          />
+          */}
+          <SPComponentSinglesArticleMedia
+            single={single}
+          />
+        </div>
+        <div className="post-detail">
+          {/* title */}
+          <div className={`post-heading post-heading-${single.id}`}>
+            <h1>{single.title}</h1>
+          </div>
+          {/* コンテンツ情報 */}
+          <div className="post-data">
+            <p className="post-author">{single.user.userName}</p>
+
+            <ComponentCategoryLabelsLink
+              index={this.props.index}
+              id={`single-label-${single.id}`}
+              categories={single.categories.all}
+              anotherCategories={single.anotherCategories}
+            />
+
+            <p className="post-date">{single.displayDate}</p>
+            <BookmarkNode
+              sign={this.state.sign}
+              isBookmarked={single.isBookmarked}
+              articleId={String(single.id)}
+            />
+          </div>
+          {/* 本文 */}
+          <div className="post-content">
+            <p>{single.description}</p>
+          </div>
+          {/* link */}
+          <div className="post-content-read-more">
+            <a href={single.url} className="post-content-btn-readMore">{Message.READ_MORE}</a>
+          </div>
+        </div>
+      </div>
+    );
   }
 }

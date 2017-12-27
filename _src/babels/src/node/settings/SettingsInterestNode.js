@@ -15,7 +15,7 @@
 import {Message} from '../../app/const/Message';
 
 // data
-import {Result} from '../../data/Result';
+// import {Result} from '../../data/Result';
 import {Form} from '../../data/Form';
 // import {ErrorMessage} from '../../data/ErrorMessage';
 
@@ -33,18 +33,21 @@ import {MessageStatus} from '../../event/MessageStatus';
 import {Model} from '../../model/Model';
 import {ModelInterestEdit} from '../../model/settings/ModelInterestEdit';
 
-import {SlugDae} from '../../dae/categories/SlugDae';
+// import {SlugDae} from '../../dae/categories/SlugDae';
 
 // react
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/**
+ * [library] - React
+ */
+const React = self.React;
+// const ReactDOM = self.ReactDOM;
 
 /**
- * <p>パーソナライズ設定<br>
- * 興味のある競技</p>
+ * パーソナライズ設定
+ * - 興味のある競技
  * @type {ReactClass}
  */
-export let SettingsInterestNode = React.createClass( {
+export const SettingsInterestNode = React.createClass( {
   propTypes: {
     dae: React.PropTypes.object.isRequired
   },
@@ -55,40 +58,103 @@ export let SettingsInterestNode = React.createClass( {
 
     this.model = null;
     this.callback = null;
-
+    // ---
+    // refs. やめる - 2017-12-27
+    this.settingsElement = null;
+    // ---
     return {
       dae: this.props.dae,
       loading: ''
     };
   },
-  render: function() {
+  submitHandler: function( event:Event ) {
+    event.preventDefault();
+    this.prepareNext();
+  },
+  prepareNext: function():void {
+    // let formData = Form.element( ReactDOM.findDOMNode( this.refs.settings ) );
+    const formData = Form.element(this.settingsElement);
 
-    let categories = this.state.dae.all;
+    let model = this.model;
+    if (model === null) {
+      model = new ModelInterestEdit(formData, this.callback);
+      this.model = model;
+    } else {
+      model.data = formData;
+    }
+    // error 消去
+    this.reset();
+    // ajax start
+    model.start();
+  },
+  next: function() {
+    this.status.dispatch({ type: SettingsStatus.INTEREST_COMPLETE });
+  },
+  done: function(result) {
+    // console.log( 'interest ** done ', result );
+    this.setState({ loading: '' });
+
+    if (result.status.code === 200) {
+      // OK -> next step
+      this.next();
+      // flush message
+      const status = new StatusDae(result.status);
+      this.messageStatus.flush(MessageStatus.message(status.userMessage), MessageStatus.SUCCESS);
+    }
+  },
+  fail: function(/* error:Error */) {
+    // console.log( 'fail', error );
+    this.setState({ loading: '' });
+  },
+  reset: function() {
+    this.setState({ error: false });
+  },
+  componentDidMount: function() {
+    if (this.callback === null) {
+      const callback = {};
+      this.callback = callback;
+      callback[Model.COMPLETE] = this.done;
+      callback[Model.UNDEFINED_ERROR] = this.fail;
+      callback[Model.RESPONSE_ERROR] = this.fail;
+    }
+  },
+  render: function() {
+    const categories = this.state.dae.all;
     /*
     let checkedClass = ( category:SlugDae ):string => {
       return category.isInterest ? 'checked="checked"' : '';
     };
     */
-
     return (
       <div className="interest-setting setting-form">
-        <form ref="settings" className={'loading-root ' + this.state.loading} onSubmit={this.submitHandler}>
+        <form
+          ref={(element) => (this.settingsElement = element)}
+          className={`loading-root ${this.state.loading}`}
+          onSubmit={this.submitHandler}
+        >
           <fieldset className="fieldset-step-3">
             <div className="setting-form-interest">
               <ul className="setting-form-interest-list">
                 {
-                  categories.map( function( category:SlugDae, i ) {
+                  // @param {SlugDae} category
+                  categories.map((category, i) => {
                     return (
-                      <li key={category.slug} className={'setting-form-interest-item interest-item-' + category.slug}>
+                      <li
+                        key={category.slug}
+                        className={`setting-form-interest-item interest-item-${category.slug}`}
+                      >
                         <input
-                          className={'interest-item interest-item-' + i}
+                          className={`interest-item interest-item-${i}`}
                           type="checkbox"
                           name="interest[]"
-                          id={'interest-item-' + category.slug}
+                          id={`interest-item-${category.slug}`}
                           defaultValue={category.id}
                           defaultChecked={category.isInterest ? 'checked' : ''}
                         />
-                        <label htmlFor={'interest-item-' + category.slug} className="setting-form-interest-title">
+                        <label
+                          htmlFor={`interest-item-${category.slug}`}
+                          className="setting-form-interest-title"
+                        >
                           <span>{category.label}</span>
                         </label>
                       </li>
@@ -109,63 +175,11 @@ export let SettingsInterestNode = React.createClass( {
       </div>
     );
   },
-  componentDidMount: function() {
-    if ( this.callback === null ) {
-      let callback = {};
-      this.callback = callback;
-      callback[ Model.COMPLETE ] = this.done;
-      callback[ Model.UNDEFINED_ERROR ] = this.fail;
-      callback[ Model.RESPONSE_ERROR ] = this.fail;
-    }
-  },
   /*
   componentWillUnMount: function() {
     this.dispose();
   },*/
-  submitHandler: function( event:Event ) {
-    event.preventDefault();
-    this.prepareNext();
-  },
-  prepareNext: function():void {
-    let formData = Form.element( ReactDOM.findDOMNode( this.refs.settings ) );
-
-    let model = this.model;
-    if ( model === null ) {
-      model = new ModelInterestEdit( formData, this.callback );
-      this.model = model;
-    } else {
-      model.data = formData;
-    }
-
-    // error 消去
-    this.reset();
-    // ajax start
-    model.start();
-
-  },
-  next: function() {
-    this.status.dispatch( { type: SettingsStatus.INTEREST_COMPLETE } );
-  },
-  done: function( result:Result ) {
-    // console.log( 'interest ** done ', result );
-    this.setState( { loading: '' } );
-
-    if ( result.status.code === 200 ) {
-      // OK -> next step
-      this.next();
-
-      // flush message
-      let status = new StatusDae( result.status );
-      this.messageStatus.flush( MessageStatus.message( status.userMessage ), MessageStatus.SUCCESS );
-    }
-  },
-  fail: function(/* error:Error */) {
-    // console.log( 'fail', error );
-    this.setState( { loading: '' } );
-  },
-  reset: function() {
-    this.setState( { error: false } );
-  }/* ,
+  /* ,
   dispose: function() {
 
   }*/
