@@ -42,7 +42,7 @@ if ($page['category']['slug'] == 'all') {
   ?>
   <div id="pickup-container"></div>
 
-  <div class="body-sec-inner">
+  <div class="body-sec-inner" style="background:#fff;">
     <section class="main-sec">
       <?php
       // ----------------------------------------------------
