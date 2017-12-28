@@ -227,7 +227,7 @@
                         <h2 class="ttl recommend"><i></i>編集部おすすめの記事</h2>
                     </div>
 
-                    <div id="Widget_articles-1" class="Widget_articles" data-category="crazy" data-type="recommend"></div>
+                    <div id="Widget_articles-1" class="Widget_articles" data-category="<?= $page['category']['slug'] ?>" data-type="recommend"></div>
                 </section>
                 <!--  /  recommend   -->
 
@@ -235,7 +235,7 @@
                     <div class="ttl-wrapper pc_hide">
                         <h2 class="ttl popular"><i></i>人気の記事</h2>
                     </div>
-                    <div id="Widget_articles-2" class="Widget_articles" data-category="crazy" data-type="ranking"></div>
+                    <div id="Widget_articles-2" class="Widget_articles" data-category="<?= $page['category']['slug'] ?>" data-type="ranking"></div>
                 </section>
 
                 <!-- / popular  -->
@@ -558,6 +558,6 @@
     });
 </script>
 <script src="/assets/widgets/articles-index/Widget_articles.js"></script>
-<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js?v=<?php echo $page['version']; ?>" data-label="CRAZY ATHLETES"></script>
+<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js?v=<?php echo $page['version']; ?>" data-label="<?= $page['title'] ?>"></script>
 </body>
 </html>
