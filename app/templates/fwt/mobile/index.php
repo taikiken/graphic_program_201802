@@ -39,22 +39,15 @@
   // -----------------------------------------
   ?>
   <link rel="stylesheet" href="/assets/sp/css/<?php echo $page['template_classname']; ?>/ui.css?v=<?php echo $page['version']; ?>">
+  <link href="https://fonts.googleapis.com/css?family=Mukta+Vaani:800" rel="stylesheet">
+
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
-  <script type='text/javascript'>
+  <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+  <script>
     var googletag = googletag || {};
     googletag.cmd = googletag.cmd || [];
-    (function() {
-      var gads = document.createElement('script');
-      gads.async = true;
-      gads.type = 'text/javascript';
-      var useSSL = 'https:' == document.location.protocol;
-      gads.src = (useSSL ? 'https:' : 'http:') +
-        '//www.googletagservices.com/tag/js/gpt.js';
-      var node = document.getElementsByTagName('script')[0];
-      node.parentNode.insertBefore(gads, node);
-    })();
   </script>
 
   <script>
@@ -102,47 +95,47 @@
 // SP カテゴリー
 // ------------------------------------------------
 ?>
-<div id="body-section" class="body-sec">
-  <div class="body-sec-inner">
-    <div class="special-summary">
-      <h1 class="special-summary-heading"><img src="/assets/sp/images/red-bull-box-cart-2017/summary-heading.png" alt="RED BULL BOX CART RACE TOKYO 2017. Akasaka, Tokyo / 2017.10.22 [Sun]"></h1>
-      <p class="special-summary-copy"><img src="/assets/sp/images/red-bull-box-cart-2017/summary-copy.png" alt="アマチュアドライバーが手作りのボックスカートで競う「レッドブル・ボックスカート・レース」をスポーツブルで無料ライブ配信！"></p>
-    </div><!-- /.special-summary -->
 
-    <?php include_once __DIR__."/../live.php"; ?>
-
-    <section class="main-sec">
-
+  <div class="body-sec">
+    <div class="fwt-bg-container">
       <?php
-      // static_contents
-      // ===========================================
-      include_once dirname(__DIR__) . '/_include/_static_contents.php';
-      // ===========================================
+        // static_contents
+        // ===========================================
+        include_once dirname(__DIR__) . '/_include/_static_live.php';
+        // ===========================================
       ?>
 
-    </section><!-- /.main-sec -->
+      <div class="body-sec-inner">
+        <div class="main-sec">
+          <?php
+            // static_contents
+            // ===========================================
+           include_once dirname(__DIR__) . '/_include/_static_main.php';
+            // ===========================================
+          ?>
 
-    <div class="side-sec">
-      <div class="sponsor-link">
-        <!-- /531683568/redbull_ad/box-cart_sp_big-banner -->
-        <script>
-          googletag.cmd.push(function() {
-            googletag.defineSlot('/531683568/redbull_ad/box-cart_sp_big-banner', [320, 96], 'div-gpt-ad-1507615110744-0').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-          });
-        </script>
-        <div id='div-gpt-ad-1507615110744-0' style='height:96px; width:320px;'>
-        <script>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507615110744-0'); });
-        </script>
-        </div>
-        <!-- // /531683568/redbull_ad/box-cart_sp_big-banner -->
-      </div>
-    </div>
+          <div class="fwt--sp-banner">
+            <!-- /531683568/fwt-ad/fwt-sp-rectangle -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/fwt-ad/fwt-sp-rectangle', [300, 250], 'div-gpt-ad-1514459003729-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1514459003729-0' style='height:250px; width:300px;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1514459003729-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/fwt-ad/fwt-sp-rectangle -->
+          </div>
 
-  </div>
-</div><!-- /.body-sec -->
+        </div><!-- /.main-sec -->
+
+      </div><!-- /.body-sec-inner -->
+    </div><!-- /.fwt-bg-container -->
+  </div><!-- /.body-sec -->
 
   <?php
   // app in webview 時に .foot-sec を非表示にする
@@ -225,6 +218,23 @@ endif;
 
 <script src="/assets/js/red-bull-holy-ride.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
+<!-- アコーディオン -->
+<script>
+$(function(){
+  $("#accordion li > div").on("click", function() {
+    $(this).next().slideToggle(200,"swing");
+    $(this).toggleClass("active");
+  });
+});
+
+$(function(){
+  $("#readMore").on("click",function(){
+    $(this).hide();
+    $(this).prev("p").addClass('active');
+  })
+});
+</script>
 
 </body>
 </html>

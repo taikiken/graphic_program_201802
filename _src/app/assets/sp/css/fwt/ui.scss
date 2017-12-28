@@ -16,37 +16,6 @@
 @import "../module/import";
 @import "../layout";
 
-
-
-// common override
-.red-bull-box-cart-2017 {
-  .body-sec,
-  .body-sec-inner {
-    background-color: #fff !important;
-  }
-
-  .main-sec {
-    padding-bottom: (40/2)+px;
-  }
-
-  .side-sec {
-    padding-bottom: (80/2)+px;
-
-    .sponsor-link {
-      > div {
-        width: 100% !important;
-      }
-
-      iframe {
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-      }
-    }
-  }
-}
-
-
 $orange: #e71a0f;
 $gray: #f8fafc;
 
@@ -87,7 +56,7 @@ $gray: #f8fafc;
 }
 
 // common override
-.fwt-2018 {
+.fwt {
   .body-sec,
   .foot-sec {
     background-color: #fff !important;
@@ -105,7 +74,6 @@ $gray: #f8fafc;
       }
     }
   }
-
 
   .body-sec-inner {
     background-image: none;
@@ -167,8 +135,7 @@ $gray: #f8fafc;
 .fwt-intro {
   margin-bottom: 50px;
   &__link-app {
-    margin-top: 20px;
-  a {
+    a {
       @include link-decoration($orange, $orange, underline, none);
       display: inline-block;
       line-height: 40px;
@@ -220,7 +187,7 @@ $gray: #f8fafc;
 }
 
 .fwt--judgeing {
-  @include section;
+  margin-bottom: 20px;
   background: $gray;
   padding: 20px 10px;
   h3 {
@@ -242,6 +209,8 @@ $gray: #f8fafc;
         cursor: pointer;
         position: relative;
         &:after {
+          transition: 0.2s;
+          transform: rotateX(0deg);
           content: '';
           background: url('../../../sp/images/fwt/icon-arrow.png') center center no-repeat;
           display: block;
@@ -252,6 +221,11 @@ $gray: #f8fafc;
           top: 50%;
           margin-top: -10px;
           background-size: contain;
+        }
+        &.active {
+          &:after {
+            transform: rotateX(180deg);
+          }
         }
         img {
           width: inherit;
@@ -279,11 +253,15 @@ $gray: #f8fafc;
   padding-bottom: 50px;
   position: relative;
   &:after {
-    content: url(../../../images/fwt/bg-mountain-gray.png);
+    content: '';
+    background: url('../../../images/fwt/bg-mountain-gray.png') left bottom no-repeat;
+    background-size: contain;
     display: block;
+    width: 400px;
+    height: 200px;
     position: absolute;
-    bottom: -20px;
-    left: 0;
+    bottom: -10px;
+    left: -30px;
   }
   h3 {
     @include title(130px);
@@ -329,11 +307,15 @@ $gray: #f8fafc;
   position: relative;
   margin-bottom: 40px;
   &:after {
-    content: url(../../../images/fwt/bg-mountain-white.png);
+    content: '';
+    background: url('../../../images/fwt/bg-mountain-white.png') left bottom no-repeat;
+    background-size: contain;
     display: block;
+    width: 300px;
+    height: 200px;
     position: absolute;
-    bottom: -10px;
-    left: calc(50% - 360px);
+    bottom: -5px;
+    left: 340px;
   }
   &__inner {
     padding: 60px 0;
@@ -418,78 +400,8 @@ $gray: #f8fafc;
   }
 }
 
-
-//.special-summary
-.special-summary {
-  z-index: 999;
-  position: relative;
-  background: url(/assets/images/red-bull-box-cart-2017/summary-bg.png) 0 0 repeat-x;
-
-  //.special-summary-heading
-  &-heading {
-    position: relative;
-    width: 1090px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 36px;
-    padding-bottom: 24px;
-
-    &:before, &:after {
-      content: "";
-      position: absolute;
-      @include hide-text;
-    }
-
-    &:before {
-      top: -20px;
-      left: -134px;
-      width: 265px;
-      height: 239px;
-      background: url(/assets/images/red-bull-box-cart-2017/summary-figure1.png) 0 0 no-repeat;
-    }
-
-    &:after {
-      top: -8px;
-      right: -32px;
-      width: 210px;
-      height: 149px;
-      background: url(/assets/images/red-bull-box-cart-2017/summary-figure2.png) 0 0 no-repeat;
-    }
-  }
-
-  //.special-summary-copy
-  &-copy {
-    line-height: 1;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #193080;
-  }
-}
-
-//.live-streaming
-.live-streaming {
-  //.live-streaming__container
-  &__container {
-    width: 1090px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  //.live-streaming--sp
-  &--sp {
-    // display: none;
-  }
-}
-
-#liveVideo {
-  width: 1090px;
-  margin-right: auto;
-  margin-left: auto;
-  text-align: center;
-
-  .video_alt {
-    img {
-      width: 100%;
-    }
-  }
+.fwt--sp-banner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }

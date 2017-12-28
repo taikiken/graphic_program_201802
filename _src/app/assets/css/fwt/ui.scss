@@ -54,7 +54,7 @@ $gray: #f8fafc;
 }
 
 // common override
-.fwt-2018 {
+.fwt {
   .body-sec,
   .foot-sec {
     background-color: #fff !important;
@@ -133,7 +133,7 @@ $gray: #f8fafc;
   &__link-app {
     margin-top: 20px;
   a {
-      @include link-decoration($orange, $orange, underline, none);
+      @include link-decoration($orange, $orange, underline, underline);
       display: inline-block;
       line-height: 40px;
       padding-left: 48px;
@@ -152,6 +152,9 @@ $gray: #f8fafc;
   }
   p {
     margin-bottom: 20px;
+  }
+  #readMore {
+    display: none;
   }
   &__movie-wrap {
     position: relative;
@@ -340,78 +343,14 @@ $gray: #f8fafc;
   }
 }
 
-
-//.special-summary
-.special-summary {
-  z-index: 999;
-  position: relative;
-  background: url(/assets/images/red-bull-box-cart-2017/summary-bg.png) 0 0 repeat-x;
-
-  //.special-summary-heading
-  &-heading {
-    position: relative;
-    width: 1090px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 36px;
-    padding-bottom: 24px;
-
-    &:before, &:after {
-      content: "";
-      position: absolute;
-      @include hide-text;
-    }
-
-    &:before {
-      top: -20px;
-      left: -134px;
-      width: 265px;
-      height: 239px;
-      background: url(/assets/images/red-bull-box-cart-2017/summary-figure1.png) 0 0 no-repeat;
-    }
-
-    &:after {
-      top: -8px;
-      right: -32px;
-      width: 210px;
-      height: 149px;
-      background: url(/assets/images/red-bull-box-cart-2017/summary-figure2.png) 0 0 no-repeat;
-    }
-  }
-
-  //.special-summary-copy
-  &-copy {
-    line-height: 1;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #193080;
+.fwt--footer-rectangle {
+  display: flex;
+  justify-content: center;
+  li {
+    padding: 0 10px;
   }
 }
 
-//.live-streaming
-.live-streaming {
-  //.live-streaming__container
-  &__container {
-    width: 1090px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  //.live-streaming--sp
-  &--sp {
-    // display: none;
-  }
-}
-
-#liveVideo {
-  width: 1090px;
-  margin-right: auto;
-  margin-left: auto;
-  text-align: center;
-
-  .video_alt {
-    img {
-      width: 100%;
-    }
-  }
+.fwt--sidebar__skyscraper {
+  margin-top: 20px;
 }
