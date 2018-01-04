@@ -23,8 +23,6 @@
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
 
-  <link rel="stylesheet" href="/assets/css/basic.css" media="only screen and (min-width: 769px)">
-
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
   <link rel="stylesheet" href="/assets/css/<?php echo $page['template_classname']; ?>/ui.css?v=<?php echo $page['version']; ?>">
@@ -119,8 +117,6 @@
           include_once dirname(__DIR__) . '/_include/_static_sidebar.php';
           // ===========================================
         ?>
-
-
 
       </div><!-- /.body-sec-inner -->
     </div><!-- /.fwt-bg-container -->
