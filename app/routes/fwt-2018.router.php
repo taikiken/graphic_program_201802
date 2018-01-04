@@ -16,6 +16,13 @@ $app->group('/fwt',  function () use($app) {
     'template'           => 'index',
     'template_classname' => 'fwt',
     'ua'                 => $app->model->property('ua'),
+
+    // sns
+    'sns'                => array(
+      'twitter'  => 'sportsbull_jp',
+      'facebook' => 'sportsbull',
+      'youtube'  => 'UCKwqba9IWuSKIk3DIpryOHw',
+    ),
   );
 
 
