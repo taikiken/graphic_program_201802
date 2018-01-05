@@ -49,7 +49,7 @@
   if (!$from_webview) :
   ?>
   <div class="fwt-intro__link-app">
-    <a href="https://app.adjust.com/paf496?deep_link=sportsbull%3A%2F%2F" target="_blank">アプリでライブ配信開始の通知を受け取る</a>
+    <a href="https://app.adjust.com/ckq556?deep_link=sportsbull%3A%2F%2F" target="_blank">アプリでライブ配信開始の通知を受け取る</a>
   </div>
   <?php
   endif;

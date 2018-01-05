@@ -125,7 +125,7 @@ $gray: #f8fafc;
     @include notice;
     @include plr;
     color :#515769;
-    margin-bottom: 20px;
+    margin: 10px 0;
   }
   &__movie-wrap {
     @include movie-wrap;
@@ -318,7 +318,7 @@ $gray: #f8fafc;
     left: 340px;
   }
   &__inner {
-    padding: 60px 0;
+    padding: 40px 0 60px;
     h2 {
       @include title(173px);
     }
