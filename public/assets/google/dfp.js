@@ -2,6 +2,13 @@
 var googletag = googletag || {};
 googletag.cmd = googletag.cmd || [];
 
+// ## DFP - update platform
+if ( /undotsushin-ios/i.test(window.navigator.userAgent) ) {
+  SPBL_ENV.platform = 'app_ios';
+} else if ( /undotsushin-android/i.test(window.navigator.userAgent) ) {
+  SPBL_ENV.platform = 'app_android';
+}
+
 // ## DFP - setTargeting
 if ( googletag.pubads ) {
   if ( SPBL_ENV.env ) {

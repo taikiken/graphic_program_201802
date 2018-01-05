@@ -1,16 +1,31 @@
 <?php
 /*
 
-# DFP用環境判定
+# 環境判定用JSオブジェクト
+- 用途 : DFPのターゲティング ( ページの広告に配信用の識別情報を与える )
 ref. https://github.com/undotsushin/undotsushin/pull/2987
 
 */
 $SPBL_ENV = array(
+  # 環境
+  # production | staging | development
   'env'      => '',
+
+  # プラットフォーム(クライアント)
+  # web_desktop | web_mobile | app_ios | app_android
   'platform' => '',
+
+  # ページタイプ
+  # index | category | p など
   'page'     => '',
+
+  # 記事のプライマリーカテゴリのスラッグ ex. crazy
   'category' => '',
+
+  # 記事ID *記事詳細のみ
   'p'        => '',
+
+  # 記事提供元 *記事詳細のみ
   'provider' => '',
 );
 
@@ -70,20 +85,20 @@ if ( isset($page['post']['user']) ) :
   $SPBL_ENV['provider'] = addslashes($page['post']['user']['name']);
 endif;
 
-?>
-  <script>
-  var SPBL_ENV = {
-    'env'      : '<?php echo $SPBL_ENV['env']; ?>',
-    'platform' : '<?php echo $SPBL_ENV['platform']; ?>',
-    'page'     : '<?php echo $SPBL_ENV['page']; ?>',
-    'category' : '<?php echo $SPBL_ENV['category']; ?>',
-    'p'        : '<?php echo $SPBL_ENV['p']; ?>',
-    'provider' : '<?php echo $SPBL_ENV['provider']; ?>'
-  };
 
-  if ( /undotsushin-ios/i.test(window.navigator.userAgent) ) {
-    SPBL_ENV.platform = 'app_ios';
-  } else if ( /undotsushin-android/i.test(window.navigator.userAgent) ) {
-    SPBL_ENV.platform = 'app_android';
-  }
-  </script>
+?>
+<script>
+var SPBL_ENV = {
+  'env'      : '<?php echo $SPBL_ENV['env']; ?>',
+  'platform' : '<?php echo $SPBL_ENV['platform']; ?>',
+  'page'     : '<?php echo $SPBL_ENV['page']; ?>',
+  'category' : '<?php echo $SPBL_ENV['category']; ?>',
+  'p'        : '<?php echo $SPBL_ENV['p']; ?>',
+  'provider' : '<?php echo $SPBL_ENV['provider']; ?>'
+};
+</script>
+<?php
+/*
+※ SPBL_ENV.platform のアプリ判定は、/assets/google/dfp.js で行います
+*/
+?>
