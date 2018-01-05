@@ -82,3 +82,7 @@
   })(window,document.documentElement,'async-hide','dataLayer',4000,
   {'GTM-KJ33JM9':true});</script>
   <?php // Google Optimize ?>
+
+  <?php // #2987 - DFP key-value ?>
+  <?php include_once __DIR__.'/_env.php'; ?>
+  <?php // DFP key-value ?>
