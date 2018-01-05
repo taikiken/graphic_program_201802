@@ -125,20 +125,20 @@
 
 <?php if ($page['ua'] !== 'desktop') : ?>
   <div class="fwt--sp-banner">
-    <!-- /531683568/fwt-ad/fwt-sp-bigbanner1 -->
+    <!-- /531683568/fwt-ad/fwt-sp-bigbanner2 -->
     <script>
       googletag.cmd.push(function() {
-        googletag.defineSlot('/531683568/fwt-ad/fwt-sp-bigbanner1', [320, 50], 'div-gpt-ad-1514458566508-0').addService(googletag.pubads());
+        googletag.defineSlot('/531683568/fwt-ad/fwt-sp-bigbanner2', [320, 50], 'div-gpt-ad-1515139762773-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
     </script>
-    <div id='div-gpt-ad-1514458566508-0' style='height:50px; width:320px;'>
+    <div id='div-gpt-ad-1515139762773-0' style='height:50px; width:320px;'>
     <script>
-    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1514458566508-0'); });
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515139762773-0'); });
     </script>
     </div>
-    <!-- // /531683568/fwt-ad/fwt-sp-bigbanner1 -->
+    <!-- // /531683568/fwt-ad/fwt-sp-bigbanner2 -->
   </div>
 <?php endif; ?>
 

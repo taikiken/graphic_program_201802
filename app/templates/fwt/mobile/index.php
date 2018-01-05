@@ -1,3 +1,14 @@
+<?php
+// app webview かを `?app=(ios|android)` から判定します
+// ==============================
+$from_webview = false;
+if (isset($_GET['app'])) {
+  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
+    $from_webview = true;
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
@@ -32,12 +43,13 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
-  <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
 
   <?php
   endif;
   // -----------------------------------------
   ?>
+   <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
+
   <link rel="stylesheet" href="/assets/sp/css/<?php echo $page['template_classname']; ?>/ui.css?v=<?php echo $page['version']; ?>">
   <link href="https://fonts.googleapis.com/css?family=Mukta+Vaani:800" rel="stylesheet">
 
@@ -127,14 +139,15 @@
             <!-- /531683568/fwt-ad/fwt-sp-rectangle -->
             <script>
               googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/fwt-ad/fwt-sp-rectangle', [300, 250], 'div-gpt-ad-1514459003729-0').addService(googletag.pubads());
+                googletag.defineSlot('/531683568/fwt-ad/fwt-sp-rectangle', [300, 250], 'div-gpt-ad-1515143370843-0').addService(googletag.pubads());
                 googletag.pubads().enableSingleRequest();
                 googletag.enableServices();
               });
             </script>
-            <div id='div-gpt-ad-1514459003729-0' style='height:250px; width:300px;'>
+
+            <div id='div-gpt-ad-1515143370843-0' style='height:250px; width:300px;'>
             <script>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1514459003729-0'); });
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515143370843-0'); });
             </script>
             </div>
             <!-- // /531683568/fwt-ad/fwt-sp-rectangle -->
@@ -145,6 +158,25 @@
       </div><!-- /.body-sec-inner -->
     </div><!-- /.fwt-bg-container -->
   </div><!-- /.body-sec -->
+
+
+      <div class="sponsor-link">
+        <!-- /531683568/redbull_ad/box-cart_sp_big-banner -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/redbull_ad/box-cart_sp_big-banner', [320, 96], 'div-gpt-ad-1507615110744-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1507615110744-0' style='height:96px; width:320px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507615110744-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/redbull_ad/box-cart_sp_big-banner -->
+      </div>
+
 
   <?php
   // app in webview 時に .foot-sec を非表示にする
