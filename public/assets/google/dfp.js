@@ -6,8 +6,6 @@ googletag.cmd = googletag.cmd || [];
 if ( googletag.pubads ) {
   if ( SPBL_ENV.env ) {
     googletag.pubads().setTargeting("env", SPBL_ENV.env);
-  } else {
-
   }
 
   if ( SPBL_ENV.platform ) {

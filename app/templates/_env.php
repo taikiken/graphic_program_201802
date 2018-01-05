@@ -58,13 +58,13 @@ if ( isset($page['category']) ) :
   $SPBL_ENV['category'] = $page['category']['slug'];
 endif;
 
-# p - 記事ID
+# p - 記事ID *記事詳細のみ
 # ------------------------------
 if ( isset($page['post']['id']) ) :
   $SPBL_ENV['p'] = $page['post']['id'];
 endif;
 
-# provider - 記事提供元
+# provider - 記事提供元 *記事詳細のみ
 # ------------------------------
 if ( isset($page['post']['user']) ) :
   $SPBL_ENV['provider'] = addslashes($page['post']['user']['name']);
