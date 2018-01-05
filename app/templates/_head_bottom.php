@@ -1,8 +1,9 @@
 <script>
+// # DFP
 var googletag = googletag || {};
 googletag.cmd = googletag.cmd || [];
 
-// # DFP - setTargeting
+// ## DFP - setTargeting
 if ( SPBL_ENV.env ) {
   googletag.pubads().setTargeting("env", SPBL_ENV.env);
 }
