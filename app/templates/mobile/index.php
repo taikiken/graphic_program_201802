@@ -50,6 +50,10 @@ include_once __DIR__ . '/_stats_banner.php';
       <div class="latest-section">
         <div id="board-container"></div>
         <div id="board-container-more"></div>
+        <?php
+        // since 2018-01-015 - 一面や一覧系の末広告タグ
+        include_once __DIR__ . '/_ad_below_more.php';
+        ?>
       </div>
     </section>
   </div>
