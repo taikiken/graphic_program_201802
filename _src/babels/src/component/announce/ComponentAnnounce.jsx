@@ -11,11 +11,34 @@
  */
 // React
 import { InformationDataDae } from '../../dae/information/InformationDae';
+import { GaData } from '../../ga/GaData';
+import { Ga } from '../../ga/Ga';
 
 /**
  * [library] - React
  */
 const React = self.React;
+
+// -----------------
+// add 2018-01-05
+/**
+ * お知らせのクリックカウントをとる
+ * ```
+ * ga( 'send', {
+ *        hitType        : 'event',
+ *        eventCategory  : 'information',
+ *        eventAction    : 'click',
+ *        eventLabel     : [お知らせのリンク先URL],
+ *        nonInteraction : true
+ *      });
+ * ```
+ * @see https://aws-plus.backlog.jp/view/UNDO_SPBL-281#comment-1185884142
+ * @param {string} url お知らせのリンク先URL
+ */
+export const announceGa = (url) => {
+  Ga.add(new GaData('announceGa', 'information', 'click', url, 0, true));
+};
+// -----------------
 
 /**
  * type: `img` の出力を行います
@@ -32,7 +55,8 @@ export const ComponentAnnounceImage = ({ information }) => {
   const style = {
     bg: backgroundColor ? { backgroundColor } : {},
   };
-  if (!information.link) {
+  const url = information.link;
+  if (!url) {
     // no link
     return (
       <div
@@ -55,7 +79,10 @@ export const ComponentAnnounceImage = ({ information }) => {
     >
       <div className="announce__inner">
         <p className="announce__item">
-          <a href={information.link}>
+          <a
+            href={url}
+            onClick={() => (announceGa(url))}
+          >
             <img src={information.img} alt="" />
           </a>
         </p>
@@ -127,14 +154,16 @@ export const ComponentAnnounceA = ({ information }) => {
   const style = {
     color: color ? { color } : {},
   };
+  const url = information.link;
   return (
     <p className="announce__item">
       <ComponentAnnounceIcon
         icon={information.icon}
       />
       <a
-        href={information.link}
+        href={url}
         style={style.color}
+        onClick={() => (announceGa(url))}
       >
         {information.text}
       </a>
