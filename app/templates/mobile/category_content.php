@@ -98,6 +98,10 @@
       <div id="js-headline"></div>
       <div id="category-container"></div>
       <div id="board-container-more"></div>
+      <?php
+      // since 2018-01-015 - 一面や一覧系の末広告タグ
+      include_once __DIR__ . '/_ad_below_more.php';
+      ?>
     </section><!-- /.main-sec -->
   </div>
 </div><!-- /.body-sec -->
