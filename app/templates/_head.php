@@ -84,5 +84,6 @@
   <?php // Google Optimize ?>
 
   <?php // #2987 - DFP key-value ?>
+  <script src='https://www.googletagservices.com/tag/js/gpt.js'></script>
   <?php include_once __DIR__.'/_env.php'; ?>
   <?php // DFP key-value ?>
