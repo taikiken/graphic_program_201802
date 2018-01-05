@@ -67,24 +67,23 @@ endif;
 # provider - 記事提供元
 # ------------------------------
 if ( isset($page['post']['user']) ) :
-  $SPBL_ENV['provider'] = $page['post']['user']['name'];
+  $SPBL_ENV['provider'] = addslashes($page['post']['user']['name']);
 endif;
 
 ?>
-<script>
-var SPBL_ENV = {
-  'env'      : '<?php echo $SPBL_ENV['env']; ?>',
-  'platform' : '<?php echo $SPBL_ENV['platform']; ?>',
-  'page'     : '<?php echo $SPBL_ENV['page']; ?>',
-  'category' : '<?php echo $SPBL_ENV['category']; ?>',
-  'p'        : '<?php echo $SPBL_ENV['p']; ?>',
-  'provider' : '<?php echo $SPBL_ENV['provider']; ?>'
-};
+  <script>
+  var SPBL_ENV = {
+    'env'      : '<?php echo $SPBL_ENV['env']; ?>',
+    'platform' : '<?php echo $SPBL_ENV['platform']; ?>',
+    'page'     : '<?php echo $SPBL_ENV['page']; ?>',
+    'category' : '<?php echo $SPBL_ENV['category']; ?>',
+    'p'        : '<?php echo $SPBL_ENV['p']; ?>',
+    'provider' : '<?php echo $SPBL_ENV['provider']; ?>'
+  };
 
-var useragent = window.navigator.userAgent;
-if ( /undotsushin-ios/i.test(useragent) ) {
-  SPBL_ENV.platform = 'app_ios';
-} else if ( /undotsushin-android/i.test(useragent) ) {
-  SPBL_ENV.platform = 'app_android';
-}
-</script>
+  if ( /undotsushin-ios/i.test(window.navigator.userAgent) ) {
+    SPBL_ENV.platform = 'app_ios';
+  } else if ( /undotsushin-android/i.test(window.navigator.userAgent) ) {
+    SPBL_ENV.platform = 'app_android';
+  }
+  </script>
