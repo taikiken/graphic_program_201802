@@ -61,9 +61,9 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
   <div class="body-sec">
     <div class="body-sec-inner">
 
-      <section class="main-sec">
+      <section class="main-sec" style="margin-top: 0;">
 
-      <div class="stats__header">
+      <div class="stats__header mb30">
         <h1 class="stats__header__title"><img class="responsive" src="/assets/stats/ua_kansai/images/heading.jpg" alt="関西アメフト 速報&スタッツ" /></h1>
       </div><!-- /.stats__header -->
 

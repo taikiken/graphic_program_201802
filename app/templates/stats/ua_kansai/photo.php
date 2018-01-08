@@ -33,6 +33,10 @@
 
   <?php include_once __DIR__.'/_head.php'; ?>
 
+  <!-- css & js -->
+  <link rel="stylesheet" href="/assets/css/photo/photo.css" media="only screen and (min-width: 769px)">
+  <link rel="stylesheet" href="/assets/css/photo/sp_photo.css" media="only screen and (max-width: 768px)">
+
 </head>
 <body>
 
