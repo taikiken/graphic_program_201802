@@ -6,17 +6,6 @@
  * Time: 18:08
  */
 ?>
-<script>
-  googletag.cmd.push(function() {
-    googletag.defineSlot('/531683568/mobile/mobile_index_bottom', [300, 250], 'div-gpt-ad-1514446255569-0').addService(googletag.pubads());
-    googletag.pubads().enableSingleRequest();
-    googletag.pubads().collapseEmptyDivs();
-    googletag.enableServices();
-  });
-</script>
 <!-- /531683568/mobile/mobile_index_bottom -->
-<div id='div-gpt-ad-1514446255569-0' style='height:250px; width:300px;'>
-  <script>
-    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1514446255569-0'); });
-  </script>
-</div>
+<div id='div-gpt-ad-1514446255569-0'></div>
+<!-- // /531683568/mobile/mobile_index_bottom -->
