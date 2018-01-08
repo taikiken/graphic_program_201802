@@ -26,6 +26,12 @@ $page['category']['slug'] = 'ua_kansai';
 
 <?php include_once __DIR__.'/../../_head_bottom.php'; ?>
 
+<style>
+.body-sec {
+  background:none;
+}
+</style>
+
 <!-- ad/dfp - pc/rectangle -->
 <script>
   googletag.cmd.push(function() {
