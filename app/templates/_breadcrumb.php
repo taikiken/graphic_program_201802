@@ -5,37 +5,42 @@
  * SEO対策 / パンくずリストを設置する #776
  */
 
-if ($page['template'] == 'category') :
-  $BREADCRUMB = array(
-    array(
-      'label' => $page['category']['label'],
-      'path'  => '/category/'.$page['category']['slug'].'/',
-    ),
-  );
+// TODO : controller or model で定義する
+if ( !isset($BREADCRUMB) ) :
 
-elseif ($page['template'] == 'p') :
-  $BREADCRUMB = array(
-    array(
-      'label' => $page['post']['categories'][0]['label'],
-      'path'  => '/category/'.$page['post']['categories'][0]['slug'].'/',
-    ),
-    array(
-      'label' => $page['post']['title'],
-      'path'  => $page['post']['url'],
-    ),
-  );
+  if ($page['template'] == 'category') :
+    $BREADCRUMB = array(
+      array(
+        'label' => $page['category']['label'],
+        'path'  => '/category/'.$page['category']['slug'].'/',
+      ),
+    );
 
-elseif ($page['template'] == 'motorsports') :
-  $BREADCRUMB = array(
-    array(
-      'label' => $page['motorsports']['label'],
-      'path'  => '/category/motorsports/',
-    ),
-    array(
-      'label' => strtoupper($page['motorsports']['url']),
-      'path'  => '/motorsports/'.$page['motorsports']['url'],
-    ),
-  );
+  elseif ($page['template'] == 'p') :
+    $BREADCRUMB = array(
+      array(
+        'label' => $page['post']['categories'][0]['label'],
+        'path'  => '/category/'.$page['post']['categories'][0]['slug'].'/',
+      ),
+      array(
+        'label' => $page['post']['title'],
+        'path'  => $page['post']['url'],
+      ),
+    );
+
+  elseif ($page['template'] == 'motorsports') :
+    $BREADCRUMB = array(
+      array(
+        'label' => $page['motorsports']['label'],
+        'path'  => '/category/motorsports/',
+      ),
+      array(
+        'label' => strtoupper($page['motorsports']['url']),
+        'path'  => '/motorsports/'.$page['motorsports']['url'],
+      ),
+    );
+
+  endif;
 
 endif;
 ?>
