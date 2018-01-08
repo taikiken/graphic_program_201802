@@ -13,33 +13,49 @@ if($q->get_dir()===0){ // 新規
 		include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/ex.php";
 		data_sql();
 
-    $sv[$sn[] = "created_at"] = "now()";
-    $o = new dbutl($TABLE, $sn, $sv);
+    $o = new dbutl($TABLE);
 
     // u_categoriesが混ざっちゃうからカラム指定する
     // ファイルアップロードされてないとないと配列キーimgつくられない
-    if (empty($sv['img'])) {
-      $sv[$sn[] = 'img'] = 'NULL';
-    }
+    if (empty($sv['img'])) $sv[$sn[] = 'img'] = 'NULL';
+    if (empty($sv['sp_img'])) $sv[$sn[] = 'sp_img'] = 'NULL';
+    if (empty($sv['ios_img'])) $sv[$sn[] = 'ios_img'] = 'NULL';
+    if (empty($sv['android_img'])) $sv[$sn[] = 'android_img'] = 'NULL';
+
     $sql = <<<SQL
 INSERT INTO notices(
         type,
         text,
         img,
         link,
-        created_at
+        sp_img,
+        sp_link,
+        ios_img,
+        ios_link,
+        android_img,
+        android_link,
+        created_at,
+        updated_at
         ) 
 VALUES(
         {$sv['type']},
         {$sv['text']},
         {$sv['img']},
         {$sv['link']},
+        {$sv['sp_img']},
+        {$sv['sp_link']},
+        {$sv['ios_img']},
+        {$sv['ios_link']},
+        {$sv['android_img']},
+        {$sv['android_link']},
+        NOW(),
         NOW()
         )
 RETURNING id;
 SQL;
 
     $o->query($sql);
+    file_put_contents('/tmp/sql', $sql);
     $f = $o->fetch_array();
     $notice_id = $f['id'];
 
@@ -73,16 +89,25 @@ SQL;
 		$o=new dbutl($TABLE,$sn,$sv);
 
     // ファイルアップロードされてないとないと配列キーimgつくられない
-    if (empty($sv['img'])) {
-      $sv[$sn[] = 'img'] = 'NULL';
-    }
+    if (empty($sv['img'])) $sv[$sn[] = 'img'] = 'NULL';
+    if (empty($sv['sp_img'])) $sv[$sn[] = 'sp_img'] = 'NULL';
+    if (empty($sv['ios_img'])) $sv[$sn[] = 'ios_img'] = 'NULL';
+    if (empty($sv['android_img'])) $sv[$sn[] = 'android_img'] = 'NULL';
+
 		$sql = <<<SQL
 UPDATE notices 
 set 
         type = {$sv['type']},
         text = {$sv['text']},
         img = {$sv['img']},
-        link = {$sv['link']}
+        link = {$sv['link']},
+        sp_img = {$sv['sp_img']},
+        sp_link = {$sv['sp_link']},
+        ios_img = {$sv['ios_img']},
+        ios_link = {$sv['ios_link']},
+        android_img = {$sv['android_img']},
+        android_link = {$sv['android_link']},
+        updated_at = NOW()
 where id = {$notice_id}
 SQL;
 		$e=$o->query($sql);
@@ -123,6 +148,6 @@ SQL;
 
 	}
 }elseif($q->get_dir()===3){ // 一覧画面
-  $FIELD="*";
+  $FIELD="notices.*";
   // $WHERE はinclude/lib.php に書いてる
 }

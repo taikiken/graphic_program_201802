@@ -71,6 +71,10 @@
 <?php
 // ------------------------------------------------------------------------
 ?>
+
+      <p class="stats__copyright">Copyright (C) 2017 STATS LLC. All Rights Reserved.<br>
+      Copyright (C) 2017 Kyodo News Digital Co., Ltd. All Rights Reserved.</p>
+
     </section><!-- /.main-sec -->
 
     <section class="side-sec show-for-large">
