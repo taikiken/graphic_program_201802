@@ -66,22 +66,16 @@ if (!isset($decoded->update) || !isset($decoded->medal) || !isset($decoded->meda
     <p class="medal_list__date">更新日時：<?php echo $decoded->update; ?></p>
   </header><!-- /.medal_list__header -->
 
-  <table class="medal_list__medals">
-    <tbody>
-      <tr>
-        <td class="medal_list__medal_type medal_list__medal_type--gold"><i class="medal_list__medal_type__icon">金</i><?php echo $decoded->medal->gold; ?></td>
-        <td class="medal_list__medal_type medal_list__medal_type--silver"><i class="medal_list__medal_type__icon">銀</i><?php echo $decoded->medal->silver; ?></td>
-        <td class="medal_list__medal_type medal_list__medal_type--bronze"><i class="medal_list__medal_type__icon">銅</i><?php echo $decoded->medal->bronze; ?></td>
-        <td class="medal_list__medal_total">合計 18</td>
-      </tr>
-    </tbody>
-  </table><!-- /.medal_list__medals -->
+  <div class="medal_list__medals">
+    <table>
+      <tbody>
+        <tr>
+          <td class="medal_list__medal_type medal_list__medal_type--gold"><i class="medal_list__medal_type__icon">金</i><?php echo $decoded->medal->gold; ?></td>
+          <td class="medal_list__medal_type medal_list__medal_type--silver"><i class="medal_list__medal_type__icon">銀</i><?php echo $decoded->medal->silver; ?></td>
+          <td class="medal_list__medal_type medal_list__medal_type--bronze"><i class="medal_list__medal_type__icon">銅</i><?php echo $decoded->medal->bronze; ?></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="medal_list__medal_total">合計<span>18</span></p>
+  </div><!-- /.medal_list__medals -->
 </div><!-- /.medal_list -->
-
-<div>
-  medal
-  <p>update: <?php echo $decoded->update; ?></p>
-  <p>gold: <?php echo $decoded->medal->gold; ?></p>
-  <p>silver: <?php echo $decoded->medal->silver; ?></p>
-  <p>bronze: <?php echo $decoded->medal->bronze; ?></p>
-</div>

@@ -5,6 +5,12 @@
 ?>
 <div id="body-section" class="body-sec">
   <div class="body-sec-inner">
+
+    <?php
+    // medals
+    include_once __DIR__ . '/../pyeongchang2018/module/_pyeongchang2018_medals.php';
+    ?>
+
     <?php
     // ----------------------------------------------------
     // 記事一覧: sp theme.images
