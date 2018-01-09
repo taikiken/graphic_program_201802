@@ -61,20 +61,16 @@ html.mobile .news-ad .adsWrapper .adsImgContainer img {
 temp for renewal
 
 */
-html.mobile .board .post-heading {
+html.mobile .latest .board .post-heading {
   margin-top: 0;
 }
 
-html.mobile .board .post-heading {
-  margin-top: 0;
-}
-
-html.mobile .board .post-thumb {
+html.mobile .latest .board .post-thumb {
   width: 110px;
   height: auto;
 }
 
-html.mobile .board .post-thumb {
-  width: 110px;
+html.mobile .latest .board .board-item--big .post-thumb {
+  width: 100%;
   height: auto;
 }
