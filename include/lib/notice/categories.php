@@ -27,7 +27,8 @@ END_SQL;
                 $o->query($sql);
                 while($f = $o->fetch_array())
                 {
-                    $category_list[]=$f;
+                  if ($f['name'] == 'すべて') $f['name'] = '一面';
+                  $category_list[]=$f;
                 }
 
                 echo generalCheckbox($category_list,4,'u_categories', @join(',', $sv['p_u_categories']));
@@ -113,7 +114,8 @@ END_SQL;
                 $o->query($sql);
                 while($f = $o->fetch_array())
                 {
-                    $category_list[]=$f;
+                  if ($f['name'] == 'すべて') $f['name'] = '一面';
+                  $category_list[]=$f;
                 }
 
                 // チェックボックス初期値用
