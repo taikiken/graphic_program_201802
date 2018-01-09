@@ -191,6 +191,7 @@ SQL;
       'ios'			=> 'ios_',
       'android' => 'android_',
     ];
+    // eof: 定数
 
     $f['text'] = isset($f['text']) ? $f['text'] : '';
 
@@ -200,15 +201,31 @@ SQL;
       $img[$key] = isset($f[$prefix . 'img']) ? $cf . $f[$prefix . 'img'] : '';
       $link[$key] = isset($f[$prefix . 'link']) ? $f[$prefix . 'link'] : '';
 
-      $information_list[$key] = [
-        'type'             => $disp_type[$type],
-        'text'             => $f['text'],
-        'text_color'       => $text_color[$type],
-        'background_color' => $background_color[$type],
-        'icon'             => $icon[$type],
-        'img'              => $img[$key],
-        'link'             => $link[$key],
-      ];
+
+      // 詳細非表示フラグ
+      if ($f['is_hide_detail'] == 1)
+      {
+        $information_list[$key] = [
+          'type'             => '',
+          'text'             => '',
+          'text_color'       => '',
+          'background_color' => '',
+          'icon'             => '',
+          'img'              => '',
+          'link'             => '',
+        ];
+      }
+      else{
+        $information_list[$key] = [
+          'type'             => $disp_type[$type],
+          'text'             => $f['text'],
+          'text_color'       => $text_color[$type],
+          'background_color' => $background_color[$type],
+          'icon'             => $icon[$type],
+          'img'              => $img[$key],
+          'link'             => $link[$key],
+        ];
+      }
     }
 
   }

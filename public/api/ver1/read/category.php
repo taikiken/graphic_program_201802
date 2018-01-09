@@ -185,6 +185,7 @@ SQL;
       'ios'			=> 'ios_',
       'android' => 'android_',
     ];
+    // eof: 定数
 
     $f['text'] = isset($f['text']) ? $f['text'] : '';
 
