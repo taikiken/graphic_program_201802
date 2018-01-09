@@ -303,8 +303,8 @@
     &-thumb {
       position: relative;
       float: left;
-      width: (280/2)+px;
-      height: (158/2)+px;
+      width: 110px;
+      height: auto;
       margin-right: (20/2)+px;
       overflow: hidden;
       background: #ccc url(/assets/sp/images/common/thumb-noimage-16x9-s.png) center center no-repeat;
@@ -331,7 +331,7 @@
     &-heading {
       height: 2.75em;
       line-height: lh(46, 32);
-      margin-top: (18/2)+px;
+      // margin-top: (18/2)+px;
       overflow: hidden;
       font-weight: bold;
       font-size: fz(32/2);

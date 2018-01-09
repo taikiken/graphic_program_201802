@@ -55,22 +55,3 @@ html.mobile .news-ad .adsWrapper .adsImgContainer img {
   width: 100%;
   height: auto;
 }
-
-/*
-
-temp for renewal
-
-*/
-html.mobile .latest .board .post-heading {
-  margin-top: 0;
-}
-
-html.mobile .latest .board .post-thumb {
-  width: 110px;
-  height: auto;
-}
-
-html.mobile .latest .board .board-item--big .post-thumb {
-  width: 100%;
-  height: auto;
-}
