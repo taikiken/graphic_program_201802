@@ -51,6 +51,9 @@ class db{
 	function fetch_object(){
 		return $this->r=@pg_fetch_object ($this->rsc);
 	}
+	function fetch_all(){
+		return $this->r=@pg_fetch_all ($this->rsc);
+	}
 
 	function free_result(){
 		pg_freeresult($this->rsc);

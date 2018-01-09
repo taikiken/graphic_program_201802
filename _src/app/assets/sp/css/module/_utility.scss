@@ -18,10 +18,24 @@
   .hide-for-sp { display: none !important;}
 }
 
-.mobile {
+.mobile,
+.undotsushin-ios,
+.undotsushin-android {
   .show-for-pc,
   .hide-for-pc { display: none !important;}
   .show-for-sp { display: block !important;}
+}
+
+.other,
+.mobile {
+  .show-for-app { display: none !important;}
+  .hide-for-app { display: inherit !important;}
+}
+
+.undotsushin-ios,
+.undotsushin-android {
+  .show-for-app { display: inherit !important;}
+  .hide-for-app { display: none !important;}
 }
 
 @include screen('large') {

@@ -50,6 +50,18 @@ if($q->get_file()===2&&$e){
 </tr>
 </table>
 <?php if(($CURRENTDIRECTORY=="repo_n")&&$META!=111){ ?><script type="text/javascript">chgExpire(54)</script><?php } ?>
+    <?php if($CURRENTDIRECTORY=="notice"){ ?>
+      <script>
+          $('input:radio[name="p_type"]').change(function () {
+              // imgのとき
+              if ($(this).val() == 2) {
+                  $(".files").attr("required", "required");
+              } else {
+                  $(".files").removeAttr("required");
+              }
+          });
+      </script>
+    <?php } ?>
 <?php }elseif($q->get_file()===1){ ?>
 <table width="100%" class="rollover2" cellpadding="0" cellspacing="0">
 <tr>
