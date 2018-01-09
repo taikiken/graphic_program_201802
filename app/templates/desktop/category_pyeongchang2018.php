@@ -13,7 +13,6 @@
 include_once __DIR__.'/_category-heading.php';
 ?>
 <div class="body-sec">
-  平昌オリンピック・カテゴリ・テンプレート
 
   <div class="body-sec-inner">
     <section class="main-sec">
@@ -22,6 +21,8 @@ include_once __DIR__.'/_category-heading.php';
       // medals
       include_once __DIR__ . '/../pyeongchang2018/module/_pyeongchang2018_medals.php';
       ?>
+
+      <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="photo" data-tag="平昌五輪2018フォトギャラリー" data-offset="0"></div>
 
       <div class="board-large">
 
@@ -44,3 +45,5 @@ include_once __DIR__.'/_category-heading.php';
     </section><!-- /.side-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
+
+<script src="/assets/widgets/articles-index/Widget_articles_tag.js"></script>
