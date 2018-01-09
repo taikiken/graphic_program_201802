@@ -58,43 +58,24 @@
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
-  <?php // #1876 - Google Optimize ?>
-  <style>.async-hide { opacity: 0 !important} </style>
-  <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-  h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-  (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-  })(window,document.documentElement,'async-hide','dataLayer',4000,
-  {'GTM-KJ33JM9':true});</script>
-  <?php // Google Optimize ?>
-
-  <script type='text/javascript'>
-    var googletag = googletag || {};
-    googletag.cmd = googletag.cmd || [];
-    (function() {
-      var gads = document.createElement('script');
-      gads.async = true;
-      gads.type = 'text/javascript';
-      var useSSL = 'https:' == document.location.protocol;
-      gads.src = (useSSL ? 'https:' : 'http:') +
-        '//www.googletagservices.com/tag/js/gpt.js';
-      var node = document.getElementsByTagName('script')[0];
-      node.parentNode.insertBefore(gads, node);
-    })();
-  </script>
-
   <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-   ga('create', 'UA-74679267-1', 'auto');
-   ga('require', 'GTM-KJ33JM9');
-   ga('require', 'linkid');
-   ga('require', 'displayfeatures');
-   ga('send', 'pageview');
-
+  var SPBL_ENV = {
+    'env'      : '',
+    'platform' : 'web_mobile',
+    'page'     : 'feature',
+    'category' : 'motersports',
+    'p'        : 'wrc',
+    'provider' : ''
+  };
   </script>
+
+  <!-- google -->
+  <link rel="stylesheet" href="/assets/google/style.css">
+  <script src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+  <script src="/assets/google/dfp.js"></script>
+  <script src="/assets/google/ga.js"></script>
+  <!-- // google -->
+
 </head>
 <body class="appbnr-disable">
 <div id="whole" class="whole dark motorsports motorsports--<?php echo $option_directory; ?>">
@@ -273,48 +254,7 @@
   if (!$from_webview) :
   ?>
   <footer class="foot-sec">
-    <div class="foot-sec-inner">
-      <?php
-      // SEO対策 / パンくずリストを設置する #776
-      include_once __DIR__."/../_breadcrumb.php"; ?>
-      <div class="foot-pr">
-        <div class="foot-pr-inner">
-          <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
-          <div class="text-block">
-            <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
-            <ul class="foot-pr-list">
-              <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
-              <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
-            </ul>
-          </div>
-        </div><!-- /.foot-pr-inner -->
-
-        <div class="fb-page-plugin">
-          <div class="fb-page" data-href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/"><a href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/"><?php echo $page['site_name']; ?></a></blockquote></div></div>
-        </div>
-      </div><!-- /.foot-pr -->
-
-      <div id="js-page_top" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
-
-      <nav class="fnav">
-        <ul>
-          <li><a href="/about/">サービス紹介</a></li>
-          <li><a href="/about/privacy/">プライバシーポリシー</a></li>
-          <li><a href="/about/company/">会社概要</a></li>
-          <li><a href="/about/terms/">利用規約</a></li>
-        </ul>
-      </nav><!-- /.fnav -->
-
-      <div class="sns-block">
-        <ul>
-          <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
-          <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
-          <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
-        </ul>
-      </div><!-- /.sns-block -->
-
-      <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
-    </div><!-- /.foot-sec-inner -->
+    <?php include_once __DIR__."/../../../app/templates/mobile/_footer-sec-inner.php"; ?>
   </footer><!-- /.foot-sec -->
   <?php
   // -----------------------------------------
@@ -327,23 +267,10 @@
 // app in webview 時に .foot-sec を非表示にするので FB いらない
 if (!$from_webview) :
 ?>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '842032129256034',
-      xfbml      : true,
-      version    : 'v2.5'
-    });
-  };
+<!-- for facebook -->
+<script src="/assets/facebook/init.js>"></script>
+<!-- // for facebook -->
 
-  (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/ja_JP/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
 <?php
 endif;
 // -----------------------------------------
