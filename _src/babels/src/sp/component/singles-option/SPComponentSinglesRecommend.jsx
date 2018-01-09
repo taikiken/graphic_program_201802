@@ -11,15 +11,15 @@
  */
 
 // import { SingleDae } from '../../../dae/SingleDae';
-import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
-import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
+import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
 
 // data
 import { Safety } from '../../../data/Safety';
 
 // app
 import { Empty } from '../../../app/const/Empty';
-import { Env } from '../../../app/Env';
+import Env from '../../../app/Env';
 
 // dae
 import { ArticleDae } from '../../../dae/ArticleDae';
@@ -31,6 +31,9 @@ import { Ga } from '../../../ga/Ga';
 import SPComponentSingleRecommendAd from './ad/SPComponentSingleRecommendAd';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

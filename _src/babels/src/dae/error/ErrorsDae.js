@@ -63,8 +63,8 @@ export class ErrorsDae {
     let bank = this._bank;
     let list = this._list;
 
-    for ( var error of errors ) {
-      for ( var key in error ) {
+    for ( let error of errors ) {
+      for ( let key in error ) {
         if ( error.hasOwnProperty( key ) ) {
           bank[ key ] = new Data( key, error[ key ] );
           list.push( key );
@@ -81,7 +81,7 @@ export class ErrorsDae {
     let list = this._list;
     errors = Safety.object( errors );
 
-    for ( var key in errors ) {
+    for ( let key in errors ) {
       if ( errors.hasOwnProperty( key ) ) {
         bank[ key ] = new Data( key, errors[ key ] );
         list.push( key );

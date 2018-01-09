@@ -12,7 +12,7 @@
 
 
 // import {Action} from '../action/Action';
-// import {ViewError} from './error/ViewError';
+// import ViewError from './error/ViewError';
 
 import {EventDispatcher} from '../event/EventDispatcher';
 import {Safety} from '../data/Safety';
@@ -20,16 +20,75 @@ import {Safety} from '../data/Safety';
 /**
  * 表示を行います
  */
-export class View extends EventDispatcher {
+export default class View extends EventDispatcher {
+  // ---------------------------------------------------
+  //  STATIC CONST
+  // ---------------------------------------------------
+  /**
+   * event BEFORE_RENDER<br>
+   * ReactDOM.render 前
+   * @return {string} viewBeforeRender を返します
+   */
+  static get BEFORE_RENDER() {
+    return 'viewBeforeRender';
+  }
+  /**
+   * event WILL_MOUNT<br>
+   * ReactClass.componentWillMount 後
+   * @return {string} viewWillMount を返します
+   */
+  static get WILL_MOUNT() {
+    return 'viewWillMount';
+  }
+  /**
+   * event DID_MOUNT<br>
+   * ReactClass.componentDidMount 後
+   * @return {string} viewDidMount を返します
+   */
+  static get DID_MOUNT() {
+    return 'viewDidMount';
+  }
+  /**
+   * event ERROR_MOUNT
+   * @return {string} viewErrorMount を返します
+   */
+  static get ERROR_MOUNT() {
+    return 'viewErrorMount';
+  }
+  /**
+   * event UNDEFINED_ERROR<br>
+   * Ajax は成功したが設定されるべき key 値が undefined or null の時
+   * @return {string} viewUndefinedError を返します
+   */
+  static get UNDEFINED_ERROR() {
+    return 'viewUndefinedError';
+  }
+  /**
+   * event EMPTY_ERROR<br>
+   * Ajax は成功したが配列であるべき結果が length 0 の時
+   * @return {string} viewEmptyError を返します
+   */
+  static get EMPTY_ERROR() {
+    return 'viewEmptyError';
+  }
+  /**
+   * event RESPONSE_ERROR<br>
+   * Ajax 失敗
+   * @return {string} viewResponseError を返します
+   */
+  static get RESPONSE_ERROR() {
+    return 'viewResponseError';
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * action/Headline を使い Ajax request 後 element へ dom を作成します
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, option:Object = {} ) {
-
-    option = Safety.object( option );
-
+  constructor(element, option = {}) {
+    option = Safety.object(option);
     super();
     /**
      * react JSX を挿入する root element
@@ -70,31 +129,30 @@ export class View extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * root element
-   * @return {Element|*} render root element を返します
+   * @return {Element} render root element を返します
    */
-  get element():Element {
+  get element() {
     return this._element;
   }
-
   /**
    * render root element を設定します
    * @param {Element} element render root element
    */
-  set element( element:Element ):void {
+  set element(element) {
     this._element = element;
   }
   /**
    * callback handler がセットされたObject
-   * @return {Object|*} callback handler がセットされたObjectを返します
+   * @return {Object} callback handler がセットされたObjectを返します
    */
-  get option():Object {
+  get option() {
     return this._option;
   }
   /**
    * callback handler をセットします
    * @param {Object} option callback handler がセットされた Object
    */
-  set option( option:Object ):void {
+  set option(option) {
     this._option = option;
   }
   /**
@@ -108,23 +166,23 @@ export class View extends EventDispatcher {
    * Action instance を設定します
    * @param {*} action Action instance
    */
-  set action( action ):void {
+  set action(action) {
     this._action = action;
   }
   /**
    * home flag
    * @since 2016-09-16
-   * @return {boolean|*} home flag boolean を返します
+   * @return {boolean} home flag boolean を返します
    */
-  get home():Boolean {
+  get home() {
     return this._home;
   }
   /**
    * home flag
    * @since 2016-09-16
-   * @param {Boolean} home flag
+   * @param {boolean} home flag
    */
-  set home( home:Boolean ):void {
+  set home(home) {
     this._home = home;
   }
   // ---------------------------------------------------
@@ -135,77 +193,16 @@ export class View extends EventDispatcher {
    * @param {string} keyName 存在チェックを行う関数キー名
    * @param {*} [args=] 実行関数へ渡す引数, 不特定多数
    */
-  executeSafely( keyName, ...args ):void {
+  executeSafely(keyName, ...args) {
     let option = this.option;
     // console.log( 'executeSafely', keyName, this, args, option, option.hasOwnProperty( keyName ), typeof option[ keyName] );
-    if ( option.hasOwnProperty( keyName ) && typeof option[ keyName] === 'function' ) {
-
+    if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
       // callback 側で通常の引数として取り出せるように apply します
-      option[ keyName ].apply( this, args );
-
+      option[keyName].apply(this, args);
     }
     // console.log( 'executeSafely after if' );
     // listen しているかもしれないので event を発火させる
-    this.dispatch( { type: keyName, args: args } );
+    this.dispatch({ type: keyName, args: args });
     // console.log( 'executeSafely after dispatch' );
-
-  }
-  // ---------------------------------------------------
-  //  CONST
-  // ---------------------------------------------------
-  /**
-   * event BEFORE_RENDER<br>
-   * ReactDOM.render 前
-   * @return {string} viewBeforeRender を返します
-   */
-  static get BEFORE_RENDER():string {
-    return 'viewBeforeRender';
-  }
-  /**
-   * event WILL_MOUNT<br>
-   * ReactClass.componentWillMount 後
-   * @return {string} viewWillMount を返します
-   */
-  static get WILL_MOUNT():string {
-    return 'viewWillMount';
-  }
-  /**
-   * event DID_MOUNT<br>
-   * ReactClass.componentDidMount 後
-   * @return {string} viewDidMount を返します
-   */
-  static get DID_MOUNT():string {
-    return 'viewDidMount';
-  }
-  /**
-   * event ERROR_MOUNT
-   * @return {string} viewErrorMount を返します
-   */
-  static get ERROR_MOUNT():string {
-    return 'viewErrorMount';
-  }
-  /**
-   * event UNDEFINED_ERROR<br>
-   * Ajax は成功したが設定されるべき key 値が undefined or null の時
-   * @return {string} viewUndefinedError を返します
-   */
-  static get UNDEFINED_ERROR():string {
-    return 'viewUndefinedError';
-  }
-  /**
-   * event EMPTY_ERROR<br>
-   * Ajax は成功したが配列であるべき結果が length 0 の時
-   * @return {string} viewEmptyError を返します
-   */
-  static get EMPTY_ERROR():string {
-    return 'viewEmptyError';
-  }
-  /**
-   * event RESPONSE_ERROR<br>
-   * Ajax 失敗
-   * @return {string} viewResponseError を返します
-   */
-  static get RESPONSE_ERROR():string {
-    return 'viewResponseError';
   }
 }

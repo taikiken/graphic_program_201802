@@ -29,7 +29,7 @@
             <p class="ttl_link"><a href="/inhigh/photo/">すべてのフォトギャラリーを見る</a></p>
         </div>
         
-        <div id="js-current-post" class="current-post photo_gallery">
+        <div id="js-current-photo-post" class="current-photo-post photo_gallery">
             <ul class="photo_list">
 <?php echo $photo; ?>
             </ul>

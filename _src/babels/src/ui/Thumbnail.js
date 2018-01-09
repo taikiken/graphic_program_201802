@@ -16,288 +16,280 @@ import {Safety} from '../data/Safety';
 import {Exif} from '../util/Exif';
 
 /**
- * <h2>ユーザーアイコン</h2>
+ * ユーザーアイコン - アバター画像を管理します
  */
-export class Thumbnail extends EventDispatcher {
-  /**
-   * ユーザーアイコン
-   * @param {File} file 名前
-   * @param {Function} load アバター画像
-   * @param {Function} [error=mill] email, twitter 連携はない
-   */
-  constructor( file:File, load:Function = null, error:Function = null ) {
-    super();
-    /**
-     * file 名前
-     * @type {File}
-     * @private
-     */
-    this._file = file;
-    /**
-     * load アバター画像
-     * @type {Function}
-     * @private
-     */
-    this._load = load;
-    /**
-     * email, twitter 連携はない
-     * @type {Function}
-     * @private
-     */
-    this._error = error;
-    /**
-     *
-     * @type {null}
-     * @private
-     */
-    this._reader = null;
-    /**
-     * bind 済み this.onLoad
-     * @type {Function}
-     * @private
-     */
-    this._boundLoad = this.onLoad.bind( this );
-    /**
-     * bind 済み this.onError
-     * @type {Function}
-     * @private
-     */
-    this._boundError = this.onError.bind( this );
-
-    /**
-     * Image instance
-     * @type {null|Image}
-     * @private
-     */
-    this._img = null;
-    /**
-     * bind 済み this.imageLoad
-     * @type {Function}
-     * @private
-     */
-    this._imgLoad = this.imageLoad.bind( this );
-    /**
-     * bind 済み this.imageError
-     * @type {Function}
-     * @private
-     */
-    this._imgError = this.imageError.bind( this );
-    /**
-     * 画像サムネイルを作るための event.target.result
-     * @type {string}
-     * @private
-     */
-    this._result = '';
-    /**
-     * exif を見て回転させるために使用する exif
-     * @type {Exif}
-     * @private
-     */
-    this._exif = Exif.factory();
-    /**
-     * 画像幅
-     * @type {number}
-     * @private
-     * @default 0
-     */
-    this._width = 0;
-    /**
-     * 画像高
-     * @type {number}
-     * @private
-     * @default 0
-     */
-    this._height = 0;
-    /**
-     * 回転
-     * @type {number}
-     * @private
-     * @default -1
-     */
-    this._orientation = -1;
-    /**
-     * 非同期処理の完了フラッグ
-     * @type {number}
-     * @private
-     */
-    this._count = 0;
-    /**
-     * Image.onload Event
-     * @type {null|Event}
-     * @private
-     */
-    this._event = null;
-    /**
-     * bind 済み this.exifLoad
-     * @type {Function}
-     * @private
-     */
-    this._exifLoad = this.exifLoad.bind( this );
-  }
+export default class Thumbnail extends EventDispatcher {
   // ---------------------------------------------------
-  //  Event
+  //  EVENT
   // ---------------------------------------------------
   /**
    * LOAD
    * @return {string} thumbnailLoad を返します
    */
-  static get LOAD():string {
+  static get LOAD() {
     return 'thumbnailLoad';
   }
   /**
    * ERROR
    * @return {string} thumbnailError を返します
    */
-  static get ERROR():string {
+  static get ERROR() {
     return 'thumbnailError';
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * File API が使えるかを調べます
+   * @return {boolean} File API 使用可否真偽値を返します
+   */
+  static detect() {
+    return window.File && window.FileReader && window.FileList && window.Blob;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * ユーザーアイコン管理準備を行います
+   * @param {File} file 名前
+   * @param {?Function} [load=null] アバター画像 load complete callback
+   * @param {?Function} [error=mill] アバター画像 load error callback - email, twitter 連携はない
+   */
+  constructor(file, load = null, error = null) {
+    super();
+    /**
+     * file 名前
+     * @type {File}
+     */
+    this.file = file;
+    /**
+     * load アバター画像
+     * @type {Function}
+     */
+    this.load = load;
+    /**
+     * email, twitter 連携はない
+     * @type {Function}
+     */
+    this.error = error;
+    /**
+     * `FileReader` instance
+     * @type {?FileReader}
+     */
+    this.reader = null;
+    /**
+     * bind 済み this.onLoad
+     * @type {Function}
+     */
+    this.boundLoad = this.onLoad.bind( this );
+    /**
+     * bind 済み this.onError
+     * @type {Function}
+     * @private
+     */
+    this.boundError = this.onError.bind( this );
+
+    /**
+     * Image instance
+     * @type {?Image}
+     * @private
+     */
+    this.img = null;
+    /**
+     * bind 済み this.imageLoad
+     * @type {Function}
+     * @private
+     */
+    this.imgLoad = this.imageLoad.bind( this );
+    /**
+     * bind 済み this.imageError
+     * @type {Function}
+     * @private
+     */
+    this.imgError = this.imageError.bind( this );
+    /**
+     * 画像サムネイルを作るための event.target.result
+     * @type {string}
+     * @private
+     */
+    this.result = '';
+    /**
+     * exif を見て回転させるために使用する exif
+     * @type {Exif}
+     * @private
+     */
+    this.exif = Exif.factory();
+    /**
+     * 画像幅
+     * @type {number}
+     * @private
+     * @default 0
+     */
+    this.width = 0;
+    /**
+     * 画像高
+     * @type {number}
+     * @private
+     * @default 0
+     */
+    this.height = 0;
+    /**
+     * 回転
+     * @type {number}
+     * @private
+     * @default -1
+     */
+    this.orientation = -1;
+    /**
+     * 非同期処理の完了フラッグ
+     * @type {number}
+     * @private
+     */
+    this.count = 0;
+    /**
+     * Image.onload Event
+     * @type {?Event}
+     * @private
+     */
+    this.event = null;
+    /**
+     * bind 済み this.exifLoad
+     * @type {Function}
+     * @private
+     */
+    this.exifLoad = this.exifLoad.bind( this );
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * サムネイルを作ります
+   * - `FileReader` support 必須です
    */
-  make():void {
-    if ( !Thumbnail.detect() ) {
+  make() {
+    if (!Thumbnail.detect()) {
       // console.warn( 'not support browser' );
       return;
     }
-    let file = this._file;
+    const file = this.file;
 
-    if ( !file.type.match( /image.*/ ) ) {
+    if (!file.type.match(/image.*/)) {
       return;
     }
 
-    this._result = '';
-    this._count = 0;
-    this._width = 0;
-    this._height = 0;
-    this._orientation = -1;
-    this._event = null;
+    this.result = '';
+    this.count = 0;
+    this.width = 0;
+    this.height = 0;
+    this.orientation = -1;
+    this.event = null;
 
-    let reader = new FileReader();
-    this._reader = reader;
-    reader.addEventListener( 'load', this._boundLoad, false );
-    reader.addEventListener( 'error', this._boundError, false );
-    reader.readAsDataURL( file );
+    const reader = new FileReader();
+    this.reader = reader;
+    reader.addEventListener('load', this.boundLoad, false);
+    reader.addEventListener('error', this.boundError, false);
+    reader.readAsDataURL(file);
 
     // orientation 調べるために exif 調査
-    let exif = this._exif;
-    exif.on( Exif.EXIF_ORIENTATION, this._exifLoad );
-    exif.orientation( file );
+    const exif = this.exif;
+    exif.off(Exif.EXIF_ORIENTATION, this.exifLoad);
+    exif.on(Exif.EXIF_ORIENTATION, this.exifLoad);
+    exif.orientation(file);
     // console.log( 'Thumb start' );
-
   }
   /**
    * event handler を unbind します
    */
-  dispose():void {
-    let reader = this._reader;
-    if ( reader !== null ) {
-      reader.removeEventListener( 'load', this._boundLoad );
-      reader.removeEventListener( 'error', this._boundError );
+  dispose() {
+    const reader = this.reader;
+    if (reader !== null) {
+      reader.removeEventListener('load', this.boundLoad);
+      reader.removeEventListener('error', this.boundError);
     }
 
-    let img = this._img;
-    if ( img !== null ) {
-      this._img.removeEventListener( 'load', this._imgLoad );
-      this._img.removeEventListener( 'error', this._imgError );
+    const img = this.img;
+    if (img !== null) {
+      img.removeEventListener('load', this.imgLoad);
+      img.removeEventListener('error', this.imgError);
     }
 
-    this._exif.off( Exif.EXIF_ORIENTATION, this._exifLoad );
+    this.exif.off(Exif.EXIF_ORIENTATION, this.exifLoad);
   }
   /**
    * load event handler
    * @param {Event} event load event instance
    */
-  onLoad( event:Event ):void {
+  onLoad(event) {
     // this.dispose();
-
-    let result = event.target.result;
-    if ( !Safety.isBase64( result ) ) {
+    const result = event.target.result;
+    if (!Safety.isBase64(result)) {
       // jpg, png, gif でない時はエラーにする
-      this.onError( event );
+      this.onError(event);
       return;
     }
 
-    this._result = result;
+    this.result = result;
     // image size check
-    let img = new Image();
-    this._img = img;
-    img.addEventListener( 'load', this._imgLoad, false );
-    img.addEventListener( 'error', this._imgError, false );
+    const img = new Image();
+    this.img = img;
+    img.addEventListener('load', this.imgLoad, false);
+    img.addEventListener('error', this.imgError, false);
     img.src = result;
-
     // with / height を調べるために img instance を作成する
     // this.dispatch( {type: Thumbnail.LOAD, img: event.target.result, nativeEvent: event} );
-
   }
   /**
    * error event handler
    * @param {Event} event error event instance
    */
-  onError( event:Event ):void {
+  onError(event) {
     this.dispose();
-    this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0, orientation: this._orientation} );
+    this.dispatch({ type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0, orientation: this.orientation });
   }
-
   /**
    * Image.onload event handler
    * サムネイルの幅・高さを調べるために Image instance を作成し
    * load 後に size を測ります
    * @param {Event} event Image.onload event
    */
-  imageLoad( event:Event ):void {
+  imageLoad(event) {
     // this.dispose();
-    this._width = event.target.width;
-    this._height = event.target.height;
-    this._event = event;
+    this.width = event.target.width;
+    this.height = event.target.height;
+    this.event = event;
     // console.log( 'imageLoad', event );
 
     this.done();
-    // this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: event, width: event.target.width, height: event.target.height} );
+    // this.dispatch( {type: Thumbnail.LOAD, img: this.result, nativeEvent: event, width: event.target.width, height: event.target.height} );
   }
-
   /**
    * Image.onerror event handlers
    * @param {Event} event Image.onerror event
    */
-  imageError( event:Event ):void {
+  imageError(event) {
     this.dispose();
-    this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0, orientation: this._orientation} );
+    this.dispatch({ type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0, orientation: this.orientation });
   }
-
   /**
    * Exif.EXIF_ORIENTATION event  handler
    * Exif 解析終了
    * @param {Object} event Exif.EXIF_ORIENTATION event object
    */
-  exifLoad( event:Object ):void {
-    this._orientation = event.orientation;
+  exifLoad(event) {
+    this.orientation = event.orientation;
     // console.log( 'exifLoad', event );
-
     this.done();
   }
   /**
    * image.onload, exif.onload のどちらも完了したら
    * Thumbnail.LOAD event を発火させる
    */
-  done():void {
-    ++this._count;
-    if ( this._count < 2 ) {
+  done() {
+    ++this.count;
+    if ( this.count < 2 ) {
       return;
     }
     this.dispose();
-    this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: this._event, width: this._width, height: this._height, orientation: this._orientation} );
-  }
-  // ---------------------------------------------------
-  //  STATIC
-  // ---------------------------------------------------
-  /**
-   * File API が使えるかを調べます
-   * @return {Boolean} File API 使用可否真偽値を返します
-   */
-  static detect():Boolean {
-    return window.File && window.FileReader && window.FileList && window.Blob;
+    this.dispatch({ type: Thumbnail.LOAD, img: this.result, nativeEvent: this.event, width: this.width, height: this.height, orientation: this.orientation });
   }
 }

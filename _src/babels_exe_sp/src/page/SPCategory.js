@@ -11,7 +11,7 @@
  */
 /* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
-import {SPHeader} from './SPHeader';
+import SPHeader from './SPHeader';
 // let _symbol = Symbol();
 
 // UT
@@ -22,7 +22,7 @@ const Dom = UT.app.Dom;
  * <p>category 一覧</p>
  * 全て static です
  */
-export class SPCategory {
+export default class SPCategory {
   // /**
   //  * static class です, instance を作成しません
   //  * @param {Symbol} target Singleton を実現するための private symbol
@@ -37,9 +37,9 @@ export class SPCategory {
   /**
    * rendering 開始
    * @param {string} slug category slug
-   * @param {string} [type=''] ranking | video \ '' の 3つ
+   * - param {string} [type=''] ranking | video \ '' の 3つ - not use argument
    */
-  static start(slug, type = '') {
+  static start(slug) {
     // header
     SPHeader.start();
 

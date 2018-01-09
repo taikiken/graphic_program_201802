@@ -11,8 +11,8 @@
  */
 
 import {Model} from '../Model';
-import {CategoriesSlug} from '../../action/categories/CategoriesSlug';
-import {CategoriesSlugDae} from '../../dae/caegories/CategoriesSlugDae';
+import CategoriesSlug from '../../action/categories/CategoriesSlug';
+import {CategoriesSlugDae} from '../../dae/categories/CategoriesSlugDae';
 import {Result} from '../../data/Result';
 
 /**

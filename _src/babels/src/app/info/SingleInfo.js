@@ -10,33 +10,35 @@
  *
  */
 
-import {SingleDae} from '../../dae/SingleDae';
+// import {SingleDae} from '../../dae/SingleDae';
 
-let _symbol = Symbol();
-let _single;
+// let _symbol = Symbol();
+/**
+ * singleton SingleDae - use {@link SingleInfo}
+ * @type {?SingleDae}
+ */
+let singleDae = null;
 
 /**
- * <p>記事詳細情報</p>
- * 全てstaticです<br>
- * <p>
- * {@link SingleDae} を保持します。
- * </p>
+ * 記事詳細情報
+ * - 全てstaticです<br>
+ * - {@link SingleDae} を保持します。
  */
 export class SingleInfo {
-  /**
-   * 記事詳細情報
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target:Symbol ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Article is static Class. not use new Article().' );
-
-    }
-
-  }
+  // /**
+  //  * 記事詳細情報
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target:Symbol ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Article is static Class. not use new Article().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
@@ -44,15 +46,14 @@ export class SingleInfo {
    * 現在表示の記事詳細情報
    * @return {SingleDae} 現在表示の記事詳細情報 SingleDae instance を返します
    */
-  static get dae():SingleDae {
-    return _single;
+  static get dae() {
+    return singleDae;
   }
-
   /**
    * 現在表示の記事詳細情報 を設定します
    * @param {SingleDae} article 現在表示の記事詳細情報 SingleDae instance
    */
-  static set dae( article:SingleDae ):void {
-    _single = article;
+  static set dae(article) {
+    singleDae = article;
   }
 }

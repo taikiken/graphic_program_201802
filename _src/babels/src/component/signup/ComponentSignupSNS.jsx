@@ -12,12 +12,15 @@
 import { Api } from '../../net/Api';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
  * 移設 - from {@link LegendStep1Node}
- * @param {bool} wow Wowma キャンペーン flag
- * @returns {?XML} div > div.linkage-sns
+ * @param {boolean} wow Wowma キャンペーン flag
+ * @returns {?XML} `div > div.linkage-sns`
  * @constructor
  * @since 2017-11-13 Wowma
  */
@@ -45,6 +48,10 @@ const ComponentSignupSNS = ({ wow }) => {
   );
 };
 
+/**
+ * React.propTypes
+ * @type {{wow: boolean}}
+ */
 ComponentSignupSNS.propTypes = {
   wow: React.PropTypes.bool.isRequired,
 };

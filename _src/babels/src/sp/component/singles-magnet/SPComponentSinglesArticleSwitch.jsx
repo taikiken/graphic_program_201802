@@ -35,6 +35,9 @@ import { RecordSingleState } from '../../../component/singles-content/RecordSing
 import { SPComponentSinglesSNSAbove } from '../singles-content/SPComponentSinglesSNSAbove';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

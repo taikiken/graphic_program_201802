@@ -14,8 +14,11 @@
 import {Ad} from '../../../app/const/Ad';
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/**
+ * [library] - React
+ */
+const React = self.React;
+// let ReactDOM = self.ReactDOM;
 
 /**
  * SP 記事一覧 4件目に表示する広告
@@ -53,6 +56,13 @@ export let SPNewsAdNode = React.createClass( {
       third: this.props.index === 2
     };
   },
+  componentDidMount: function() {
+    if (this.ok) {
+      // ReactDOM.findDOMNode( this.refs.news_ad ).appendChild( Ad.make( Ad.SP_NEWS, this.props.uniqueId ) );
+      // ReactDOM.findDOMNode( this.refs.news_ad ).appendChild( Ad.makeStream( this.props.uniqueId, this.props.adSp ) );
+      this.newsAd.appendChild(Ad.makeStream(this.props.uniqueId, this.props.adSp));
+    }
+  },
   render: function() {
     // // ストリーム広告
     // // ID 設定がなかったら出力しない
@@ -61,34 +71,26 @@ export let SPNewsAdNode = React.createClass( {
     // }
     // ad element を返し
     // ok property を true にする
-    let enableAd = () => {
+    const enableAd = () => {
       this.ok = true;
       return (
-        <div className={`news-ad news-ad-${this.props.index}`} ref="news_ad" />
+        <div
+          className={`news-ad news-ad-${this.props.index}`}
+          ref={(element) => (this.newsAd = element)}
+        />
       );
     };
 
-    if ( this.props.enable && this.state.third ) {
-
+    if (this.props.enable && this.state.third) {
       return enableAd();
-
-    } else {
-
-      // enable: true
-      // index が 2に到達しない, コンテンツ量が少ない時にも広告を表示させる
-      // index 2 未満 + 総数 と index が同じ
-      // index は 0始まりなので +1 下駄を履かせて比較する
-      if ( this.props.enable && (this.props.index < 2 && this.props.index + 1 === this.props.length) ) {
-        return enableAd();
-      } else {
-        return null;
-      }
     }
+    // enable: true
+    // index が 2に到達しない, コンテンツ量が少ない時にも広告を表示させる
+    // index 2 未満 + 総数 と index が同じ
+    // index は 0始まりなので +1 下駄を履かせて比較する
+    if (this.props.enable && (this.props.index < 2 && this.props.index + 1 === this.props.length)) {
+      return enableAd();
+    }
+    return null;
   },
-  componentDidMount: function() {
-    if ( this.ok ) {
-      // ReactDOM.findDOMNode( this.refs.news_ad ).appendChild( Ad.make( Ad.SP_NEWS, this.props.uniqueId ) );
-      ReactDOM.findDOMNode( this.refs.news_ad ).appendChild( Ad.makeStream( this.props.uniqueId, this.props.adSp ) );
-    }
-  }
 } );

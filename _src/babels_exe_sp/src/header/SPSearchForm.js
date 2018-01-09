@@ -11,39 +11,38 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * <p>header user information / signup</p>
  * 全て static です
  */
-export class SPSearchForm {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPSearchForm is static Class. not use new SPSearchForm().' );
-
-    }
-  }
+export default class SPSearchForm {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPSearchForm is static Class. not use new SPSearchForm().' );
+  //
+  //   }
+  // }
   /**
    * search form rendering 開始
    */
-  static start():void {
+  static start() {
     // header.user
-    let searchElement = Dom.search();
-    let opener = Dom.searchOpener();
-    if ( searchElement !== null && opener !== null ) {
-      let searchFrom = new UT.sp.view.header.SPViewHeaderSearch( searchElement, opener );
+    const searchElement = Dom.search();
+    const opener = Dom.searchOpener();
+    if (searchElement !== null && opener !== null) {
+      const searchFrom = new UT.sp.view.header.SPViewHeaderSearch(searchElement, opener);
       searchFrom.start();
     }
-
   }
 }

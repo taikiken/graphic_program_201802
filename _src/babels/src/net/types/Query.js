@@ -12,12 +12,11 @@
 
 
 /**
- * <p>Api query option を key ごとに管理します</p>
+ * Api query option を key ごとに管理します
  *
- * <code>?key=value</code>
+ * `?key=value`
  *
- * <p>key, value型, default値, 必須情報...</p>
- *
+ * key, value型, default値, 必須情報...
  * */
 export class Query {
   /**
@@ -26,9 +25,9 @@ export class Query {
    * @param {string} key query key
    * @param {string} type query value type
    * @param {string|Number|null} [defaultValue=null] default value, あれば...
-   * @param {Boolean} [require=false] 必須フラグ
+   * @param {boolean} [require=false] 必須フラグ
    */
-  constructor( key:string, type:string, defaultValue = null, require:Boolean = false ) {
+  constructor(key, type, defaultValue = null, require = false) {
     /**
      * query key
      * @type {string}
@@ -43,51 +42,40 @@ export class Query {
     this._type = type;
     /**
      * 必須フラグ
-     * @type {Boolean}
-     * @private
-     * @protected false
+     * @type {boolean}
+     * @protected
      */
     this._require = require;
     /**
      * default value あれば...
-     * @type {string|Number|null}
+     * @type {?string|?number}
      * @private
-     * @protected null
+     * @protected
      */
     this._value = defaultValue;
-
   }
-
   /**
    * query key が存在するかを調べ真偽値を返します
    * @param {string} key query key
-   * @return {Boolean} query key が存在するかを返します
+   * @return {boolean} query key が存在するかを返します
    */
-  has( key:string ):Boolean {
-
+  has(key) {
     return this._key === key;
-
   }
-
   /**
    * 引数 key が存在すれば Object を返します
    * @param {string} key query key
-   * @return {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
+   * @return {?{key: string, type: string, require: boolean, value: *}} 現在値を返します
    */
-  search( key:string ):Object {
-
-    if ( this.has( key ) ) {
-
+  search(key) {
+    if (this.has(key)) {
       return {
         key: this._key,
         type: this._type,
         require: this._require,
         value: this._value
       };
-
     }
-
     return null;
-
   }
 }

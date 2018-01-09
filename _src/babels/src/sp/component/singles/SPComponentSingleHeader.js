@@ -11,10 +11,10 @@
  */
 
 // view
-import { View } from '../../../view/View';
+import View from '../../../view/View';
 
 // component
-import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
+import ComponentCategoryLabelsLink from '../../../component/categories/ComponentCategoryLabelsLink';
 
 // node
 import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';

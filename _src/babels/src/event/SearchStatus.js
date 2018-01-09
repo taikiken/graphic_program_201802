@@ -13,46 +13,21 @@
 
 import {EventDispatcher} from './EventDispatcher';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link SearchStatus} inner symbol
+ * @type {symbol}
+ */
+const searchStatusSymbol = Symbol('SearchStatus symbol');
+/**
+ * {@link SearchStatus} singleton instance
+ * @type {?SearchStatus}
+ */
+let singletonInstance = null;
 
 /**
  * sp search form open / close するための custom Event
  */
 export class SearchStatus extends EventDispatcher {
-  /**
-   * <h3>Singleton</h3>
-   * <p>検索 form の表示・非表示</p>
-   * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {SearchStatus} SearchStatus instance を返します
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SearchStatus is static Class. not use new SearchStatus(). instead SearchStatus.factory()' );
-
-    }
-
-    if ( _instance === null ) {
-      super();
-      _instance = this;
-    }
-
-    return _instance;
-  }
-
-  /**
-   * OPEN event kick
-   */
-  open():void {
-    this.dispatch( { type: SearchStatus.OPEN } );
-  }
-  /**
-   * CLOSE event kick
-   */
-  close():void {
-    this.dispatch( { type: SearchStatus.CLOSE } );
-  }
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------
@@ -60,31 +35,60 @@ export class SearchStatus extends EventDispatcher {
    * OPEN
    * @return {string} logoutOpen を返します
    */
-  static get OPEN():string {
+  static get OPEN() {
     return 'searchOpen';
   }
   /**
    * CLOSE
    * @return {string} logoutClose を返します
    */
-  static get CLOSE():string {
+  static get CLOSE() {
     return 'searchClose';
   }
   // ---------------------------------------------------
-  //  static method
+  //  STATIC METHOD
   // ---------------------------------------------------
   /**
    * instance を生成します
    * @return {SearchStatus} SearchStatus instance を返します
    */
-  static factory():SearchStatus {
-
-    if ( _instance === null ) {
-
-      _instance = new SearchStatus( _symbol );
-
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new SearchStatus(searchStatusSymbol);
     }
-
-    return _instance;
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * 検索 form の表示・非表示を行います
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {SearchStatus} SearchStatus instance を返します
+   */
+  constructor(target) {
+    if (searchStatusSymbol !== target) {
+      throw new Error( 'SearchStatus is static Class. not use new SearchStatus(). instead SearchStatus.factory()' );
+    }
+    if (singletonInstance === null) {
+      super();
+      singletonInstance = this;
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * OPEN event kick
+   */
+  open() {
+    this.dispatch({ type: SearchStatus.OPEN });
+  }
+  /**
+   * CLOSE event kick
+   */
+  close() {
+    this.dispatch({ type: SearchStatus.CLOSE });
   }
 }
