@@ -268,7 +268,7 @@
 if (!$from_webview) :
 ?>
 <!-- for facebook -->
-<script src="/assets/facebook/init.js>"></script>
+<script src="/assets/facebook/init.js"></script>
 <!-- // for facebook -->
 
 <?php
