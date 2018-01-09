@@ -35,7 +35,8 @@ INSERT INTO notices(
         android_img,
         android_link,
         created_at,
-        updated_at
+        updated_at,
+        is_hide_detail
         ) 
 VALUES(
         {$sv['type']},
@@ -49,7 +50,8 @@ VALUES(
         {$sv['android_img']},
         {$sv['android_link']},
         NOW(),
-        NOW()
+        NOW(),
+        {$sv['is_hide_detail']},
         )
 RETURNING id;
 SQL;
@@ -107,7 +109,8 @@ set
         ios_link = {$sv['ios_link']},
         android_img = {$sv['android_img']},
         android_link = {$sv['android_link']},
-        updated_at = NOW()
+        updated_at = NOW(),
+        is_hide_detail = {$sv['is_hide_detail']}
 where id = {$notice_id}
 SQL;
 		$e=$o->query($sql);
