@@ -167,7 +167,7 @@ END_DOC;
     // 並び替えする
     if( preg_match("/^[0-9]+$/",$uid) || $is_sort === true ) :
         //対象となるidを取得
-        $sql=sprintf("select uc.id from u_categories uc inner join u_category uc2 on(uc2.categoryid = uc.id) where uc2.userid = %s;",$uid);
+        $sql=sprintf("select uc.id from u_categories uc inner join u_category uc2 on(uc2.categoryid = uc.id) where uc2.userid = %s and uc2.flag = 1 order by sort asc;",$uid);
         $this->query($sql);
         while( $f = $this->fetch_array() ){
             $target_list[] = $f;
