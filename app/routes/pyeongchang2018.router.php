@@ -15,6 +15,14 @@ $app->group('/pyeongchang2018', function () use ($app) {
   // ==============================
   $this->get('/photo[/]', function ($request, $response, $args) use ($app) {
 
+    $category = $app->model->get_category_by_slug('pyeongchang2018');
+    $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
+    $template_classname .= ' pyeongchang2018 pyeongchang2018-photo';
+    $args['page'] = $app->model->set(array(
+      'template_classname' => $template_classname,
+      'category' => $category,
+    ));
+
     if ( $app->model->property('ua') === 'desktop' ) :
       return $this->renderer->render($response, '/pyeongchang2018/desktop/photo.php', $args);
     else :
@@ -24,6 +32,14 @@ $app->group('/pyeongchang2018', function () use ($app) {
   // ハイライト一覧
   // ==============================
   $this->get('/movie[/]', function ($request, $response, $args) use ($app) {
+
+    $category = $app->model->get_category_by_slug('pyeongchang2018');
+    $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
+    $template_classname .= ' pyeongchang2018 pyeongchang2018-movie';
+    $args['page'] = $app->model->set(array(
+      'template_classname' => $template_classname,
+      'category' => $category,
+    ));
 
     if ( $app->model->property('ua') === 'desktop' ) :
       return $this->renderer->render($response, '/pyeongchang2018/desktop/movie.php', $args);
