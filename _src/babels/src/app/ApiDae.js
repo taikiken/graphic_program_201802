@@ -61,8 +61,49 @@ const apiRoot = () => {
 // API 一覧より
 /**
  * API リクエスト先を一元管理します
+ * - users:add
+ * - users:login
+ * - users:logout
+ * - users:email
+ * - auth:sns
+ * - auth:fb
+ * - auth:tw
+ * - categories
+ * - home
+ * - self
+ * - category
+ * - search
+ * - single
+ * - bookmark:add
+ * - bookmark:delete
+ * - comment
+ * - comment:official
+ * - comment:normal
+ * - comment:self
+ * - comment:single
+ * - comment:send
+ * - comment:reply
+ * - comment:reply:reply
+ * - comment:send:delete
+ * - comment:reply:delete
+ * - comment:good:add
+ * - comment:good:delete
+ * - comment:bad:add
+ * - comment:bad:delete
+ * - users:self
+ * - users:id
+ * - users:self:bookmark
+ * - users:self:activities
+ * - users:self:notifications
+ * - users:self:notifications:read
+ * - users:self:notifications:count
+ * - users:settings:account
+ * - users:settings:account:edit
+ * - users:settings:interest
+ * - users:settings:interest:edit
+ * - users:delete
  * @param {string} [root=''] '/api/v1' 前につけるプロトコル+ホスト名
- * @return {Types} {users:add: Types, users:login: Types, users:logout: Types, users:email: Types, auth:sns: Types, auth:fb: Types, auth:tw: Types, categories: Types, home: Types, self: Types, category: Types, search: Types, single: Types, bookmark:add: Types, bookmark:delete: Types, comment: Types, comment:official: Types, comment:normal: Types, comment:self: Types, comment:single: Types, comment:send: Types, comment:reply: Types, comment:reply:reply: Types, comment:send:delete: Types, comment:reply:delete: Types, comment:good:add: Types, comment:good:delete: Types, comment:bad:add: Types, comment:bad:delete: Types, users:self: Types, users:id: Types, users:self:bookmark: Types, users:self:activities: Types, users:self:notifications: Types, users:self:notifications:read: Types, users:self:notifications:count: Types, users:settings:account: Types, users:settings:account:edit: Types, users:settings:interest: Types, users:settings:interest:edit: Types, users:delete: Types} Types instance を返します
+ * @return {Types} Types instance を返します
  * @private
  */
 const buildPath = (root = '') => {
@@ -485,7 +526,18 @@ const buildPath = (root = '') => {
       new Permalink(),
       new Queries(),
       true
-    )
+    ),
+    // -----------------
+    // tag select
+    // -----------------
+    // `http://dev.sportsbull.jp/api/v1/articles/tag/?t10=%E5%B9%B3%E6%98%8C%E4%BA%94%E8%BC%AA2018%E3%83%8F%E3%82%A4%E3%83%A9%E3%82%A4%E3%83%88`
+    // @since 2018-01-09
+    'tag:t10': new Types(
+      new Type(`${API_PATH}/articles/tag/?t10=`),
+      new Permalink(),
+      new Queries(),
+      true,
+    ),
   };
 };
 
@@ -498,14 +550,12 @@ const buildPath = (root = '') => {
 let apiData = buildPath();
 
 /**
- * <p>Api 詳細情報</p>
+ * Api 詳細情報
+ * - 全てstaticです
+ * - {@link Api} が呼び出します。
+ * - 直接呼び出し使うことは想定されていません。
  *
- * <p>全てstaticです</p>
- *
- * <p>{@link Api} が呼び出します。<br>
- * 直接呼び出し使うことは想定されていません。</p>
- *
- * <p><code>ApiDae.someMethod</code> を実行しなくてはいけない時は関数設計を見直した方が良いでしょう</p>
+ * `ApiDae.someMethod` を実行しなくてはいけない時は関数設計を見直した方が良いでしょう
  *
  * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=986840481
  */
@@ -524,15 +574,15 @@ export default class ApiDae {
   //
   // }
   /**
-   * <p>/api/ 前 domain を再生成します<br>
-   * develop, production 切り替えに使用します</p>
-   * <p>**注意** 変更の必要がある時は {@link App} 関数を使用してください</p>
+   * `/api/` 前 domain を再生成します
+   * - develop, production 切り替えに使用します
+   * - **注意** 変更の必要がある時は {@link App} 関数を使用してください
    *
-   * 開発環境<br>
-   * <code>App.develop()</code>
+   * **開発環境**
+   * `App.develop()`
    *
-   * 本番環境<br>
-   * <code>App.production()</code>
+   * **本番環境**
+   * `App.production()`
    *
    * @param {string} [root=''] リクエスト・ドメイン
    */

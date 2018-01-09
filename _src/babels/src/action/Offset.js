@@ -18,14 +18,10 @@ import {Length} from '../app/const/Length';
 import {Safety} from '../data/Safety';
 
 /**
- * <p>Ajax 処理を行います</p>
- *
- * <p>offset, length がクエリに必要な場合に使用します</p>
- *
- * <p>Template Pattern として使用し<br>
- * 各 Class で extends して下さい</p>
- *
- * <p>token（認証）が必要な場合は {@link OffsetAuth} を使用します</p>
+ * Ajax 処理を行います
+ * - offset, length がクエリに必要な場合に使用します
+ * - Template Pattern として使用し各 Class で extends して下さい
+ * - token（認証）が必要な場合は {@link OffsetAuth} を使用します
  */
 export class Offset extends Action {
   /**
@@ -34,23 +30,23 @@ export class Offset extends Action {
    * @param {Type} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
-   * @param {Number} [offset=0] query offset 値
-   * @param {Number} [length=10] query length 値
+   * @param {number} [offset=0] query offset 値
+   * @param {number} [length=16] query length 値
    * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
-  constructor( types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive, ResultClass = Result ) {
+  constructor( types:Types, resolve:Function = null, reject:Function = null, offset:number = 0, length:number = Length.archive, ResultClass = Result ) {
     super( types, resolve, reject );
     /**
      * <p>query offset 値<br>
      * リクエスト開始値</p>
-     * @type {Number}
+     * @type {number}
      * @protected
      */
     this._offset = offset;
     /**
      * <p>query length 値<br>
      * リクエスト取得件数</p>
-     * @type {Number}
+     * @type {number}
      * @protected
      */
     this._length = length;
@@ -78,7 +74,7 @@ export class Offset extends Action {
     //
     // /**
     //  * JSON.request, 記事詳細, next が request を持っていないので保持する
-    //  * @type {{offset: Number, length: Number}}
+    //  * @type {{offset: number, length: number}}
     //  * @since 2016-09-28
     //  */
     // this.request = {
@@ -91,44 +87,44 @@ export class Offset extends Action {
   // ---------------------------------------------------
   /**
    * 総件数
-   * @return {Number|*} 総件数(total)件数を返します
+   * @return {number|*} 総件数(total)件数を返します
    */
-  get total():Number {
+  get total():number {
     return this._total;
   }
   /**
    * 総件数(total)件数を設定します
-   * @param {Number} total total件数
+   * @param {number} total total件数
    */
-  set total( total:Number ):void {
+  set total( total:number ):void {
     this._total = total;
   }
   /**
    * 取得件数
-   * @return {Number|*} lengths 取得件数を返します
+   * @return {number|*} lengths 取得件数を返します
    */
-  get length():Number {
+  get length():number {
     return this._length;
   }
   /**
    * length件数を設定します
-   * @param {Number} length length 取得件数
+   * @param {number} length length 取得件数
    */
-  set length( length:Number ):void {
+  set length( length:number ):void {
     this._length = length;
   }
   /**
    * 取得開始位置
-   * @return {Number|*} offset 取得開始位置を返します
+   * @return {number|*} offset 取得開始位置を返します
    */
-  get offset():Number {
+  get offset():number {
     return this._offset;
   }
   /**
    * 取得開始位置を設定します
-   * @param {Number} offset offset 取得開始位置
+   * @param {number} offset offset 取得開始位置
    */
-  set offset( offset:Number ):void {
+  set offset( offset:number ):void {
     this._offset = offset;
   }
   /**
@@ -142,16 +138,16 @@ export class Offset extends Action {
   }
   /**
    * 再読み込み中かどうかを表す真偽値
-   * @return {Boolean|*|boolean} 再読み込み中かどうかを表す真偽値を返します
+   * @return {boolean|*|boolean} 再読み込み中かどうかを表す真偽値を返します
    */
-  get reloadFlag():Boolean {
+  get reloadFlag():boolean {
     return this._reloadFlag;
   }
   /**
    * 再読み込み中フラッグを設定します
-   * @param {Boolean} reload 再読み込み中フラッグ
+   * @param {boolean} reload 再読み込み中フラッグ
    */
-  set reloadFlag( reload:Boolean ):void {
+  set reloadFlag( reload:boolean ):void {
     this._reloadFlag = reload;
   }
   // ---------------------------------------------------
@@ -187,25 +183,23 @@ export class Offset extends Action {
   }
   /**
    * offset 値を加算します
-   * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
+   * @param {number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
    */
-  update( count:Number = this._length ):void {
-
+  update(count:number = this._length):void {
     this.offset += count;
-
   }
   /**
    * 残り数, total から 次の offset を」引いた数
-   * @return {Number} total から 次の offset を」引いた数を返します
+   * @return {number} total から 次の offset を」引いた数を返します
    */
-  rest():Number {
+  rest():number {
     return this.total - this.offset;
   }
   /**
    * 次があるかを調べます
-   * @return {Boolean} 次があるかの真偽値を返します
+   * @return {boolean} 次があるかの真偽値を返します
    */
-  hasNext():Boolean {
+  hasNext() {
     // console.log('hasNext', this.total, this.offset, this.url);
     // _total === -1 の時は常に true
     // total が offset（次の読み込み開始位置）より小さい時に true
@@ -216,7 +210,6 @@ export class Offset extends Action {
    * @param {Result} result Ajax成功結果
    */
   success( result:Result ):void {
-
     // reload フラッグがオフの時は次のリクエストのための offset 値を更新します
     if ( !this.reloadFlag ) {
       this.update( this.length );
@@ -228,7 +221,5 @@ export class Offset extends Action {
     this.total = result.total;
     // success
     super.success( result );
-
   }
-
 }

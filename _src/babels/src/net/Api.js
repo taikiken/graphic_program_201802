@@ -423,4 +423,10 @@ export class Api {
         throw new Error(`settings illegal action: ${action}.`);
     }
   }
+  static tag(tag, date = '') {
+    const path = ApiDae.api('tag:t10');
+    return date ?
+      `${path}${tag}&date=${date}` :
+      `${path}${tag}`;
+  }
 }
