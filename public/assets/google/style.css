@@ -37,11 +37,44 @@ adgene
 */
 
 /* 一面 - ヘッドライン */
-.adgAd_24203 .adgLink .adgTextContainer .adgPr {
+html.mobile .adgLink .adgTextContainer .adgPr {
   color: #888;
 }
 
 /* 一覧 */
-.news-ad .adgAd_17038 .adsWrapper .adsSponsored {
+html.mobile .news-ad .adsWrapper .adsSponsored {
   color: #888;
+}
+
+html.mobile .news-ad .adsWrapper .adsImgContainer {
+  width: 110px;
+  height: auto;
+}
+
+html.mobile .news-ad .adsWrapper .adsImgContainer img {
+  width: 100%;
+  height: auto;
+}
+
+/*
+
+temp for renewal
+
+*/
+html.mobile .board .post-heading {
+  margin-top: 0;
+}
+
+html.mobile .board .post-heading {
+  margin-top: 0;
+}
+
+html.mobile .board .post-thumb {
+  width: 110px;
+  height: auto;
+}
+
+html.mobile .board .post-thumb {
+  width: 110px;
+  height: auto;
 }
