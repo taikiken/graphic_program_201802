@@ -244,6 +244,9 @@
         </div>
         <div class="fwt--related__text-wrap">
           <h3>FWT 2017 ハイライト</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>世界で唯一最大のフリーライドスキー・スノーボードの大会「Freeride World Tour 2018」。日本初開催となる今大会は白馬を開幕戦として、カナダ、アンドラ、オーストリア、スイスと…</p>
+          <?php endif; ?>
           <span class="fwt--related__text-wrap__category">FWT</span>
           <span class="fwt--related__text-wrap__date">1月18日（木） 22:04</span>
         </div>
@@ -256,6 +259,9 @@
         </div>
         <div class="fwt--related__text-wrap">
           <h3>FWT 2017 ハイライト</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>世界で唯一最大のフリーライドスキー・スノーボードの大会「Freeride World Tour 2018」。日本初開催となる今大会は白馬を開幕戦として、カナダ、アンドラ、オーストリア、スイスと…</p>
+          <?php endif; ?>
           <span class="fwt--related__text-wrap__category">FWT</span>
           <span class="fwt--related__text-wrap__date">1月18日（木） 22:04</span>
         </div>
@@ -268,6 +274,9 @@
         </div>
         <div class="fwt--related__text-wrap">
           <h3>FWT 2017 ハイライト</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>世界で唯一最大のフリーライドスキー・スノーボードの大会「Freeride World Tour 2018」。日本初開催となる今大会は白馬を開幕戦として、カナダ、アンドラ、オーストリア、スイスと…</p>
+          <?php endif; ?>
           <span class="fwt--related__text-wrap__category">FWT</span>
           <span class="fwt--related__text-wrap__date">1月18日（木） 22:04</span>
         </div>
@@ -280,6 +289,9 @@
         </div>
         <div class="fwt--related__text-wrap">
           <h3>FWT 2017 ハイライト</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>世界で唯一最大のフリーライドスキー・スノーボードの大会「Freeride World Tour 2018」。日本初開催となる今大会は白馬を開幕戦として、カナダ、アンドラ、オーストリア、スイスと…</p>
+          <?php endif; ?>
           <span class="fwt--related__text-wrap__category">FWT</span>
           <span class="fwt--related__text-wrap__date">1月18日（木） 22:04</span>
         </div>

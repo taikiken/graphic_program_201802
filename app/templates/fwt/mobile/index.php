@@ -159,25 +159,6 @@ if (isset($_GET['app'])) {
     </div><!-- /.fwt-bg-container -->
   </div><!-- /.body-sec -->
 
-
-      <div class="sponsor-link">
-        <!-- /531683568/redbull_ad/box-cart_sp_big-banner -->
-        <script>
-          googletag.cmd.push(function() {
-            googletag.defineSlot('/531683568/redbull_ad/box-cart_sp_big-banner', [320, 96], 'div-gpt-ad-1507615110744-0').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-          });
-        </script>
-        <div id='div-gpt-ad-1507615110744-0' style='height:96px; width:320px;'>
-        <script>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507615110744-0'); });
-        </script>
-        </div>
-        <!-- // /531683568/redbull_ad/box-cart_sp_big-banner -->
-      </div>
-
-
   <?php
   // app in webview 時に .foot-sec を非表示にする
   if (!$from_webview) :

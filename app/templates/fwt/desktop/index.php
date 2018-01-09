@@ -131,6 +131,8 @@
     </div><!-- /.fwt-bg-container -->
   </div><!-- /.body-sec -->
 
+<script src="/assets/js/extremesports.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
 <?php
 
 include_once __DIR__."/../../desktop/_footer.php";

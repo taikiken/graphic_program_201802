@@ -123,6 +123,9 @@ $gray: #f8fafc;
     @include notice;
     color :#515769;
     margin: 15px 0 20px;
+    a {
+      color: $orange;
+    }
   }
   &__movie-wrap {
     @include movie-wrap;

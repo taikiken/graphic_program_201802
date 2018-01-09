@@ -126,6 +126,9 @@ $gray: #f8fafc;
     @include plr;
     color :#515769;
     margin: 10px 0;
+    a {
+      color: $orange;
+    }
   }
   &__movie-wrap {
     @include movie-wrap;
@@ -401,9 +404,9 @@ $gray: #f8fafc;
 }
 
 .fwt--sp-banner {
-  // display: flex;
-  // justify-content: center;
-  // // margin: 0 -120% 20px;
-  // // padding: 10px 120%;
-  // background: #ddd;
+  display: flex;
+  justify-content: center;
+  margin: 0 -120% 20px;
+  padding: 10px 120%;
+  background: #ddd;
 }
