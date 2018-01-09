@@ -14,6 +14,10 @@ include_once __DIR__.'/_category-heading.php';
 ?>
 <div class="body-sec">
   平昌オリンピック・カテゴリ・テンプレート
+  <?php
+  // medals
+  include_once __DIR__ . '/../pyeongchang2018/module/_pyeongchang2018_medals.php';
+  ?>
   <div class="body-sec-inner">
     <section class="main-sec">
       <div class="board-large">
