@@ -60,6 +60,24 @@ if (!isset($decoded->update) || !isset($decoded->medal) || !isset($decoded->meda
 }
 ?>
 
+<div class="medal_list">
+  <header class="medal_list__header">
+    <h2 class="medal_list__heading">日本 メダル獲得数</h2>
+    <p class="medal_list__date">更新日時：2月17日15時17分</p>
+  </header><!-- /.medal_list__header -->
+
+  <tabele class="medal_list__medals">
+    <tbody>
+      <tr>
+        <td class="medal_list__medal_type medal_list__medal_type--gold"><i>3</i></td>
+        <td class="medal_list__medal_type medal_list__medal_type--silver"><i>3</i></td>
+        <td class="medal_list__medal_type medal_list__medal_type--bronze"><i>12</i></td>
+        <td class="medal_list__medal_total">合計 18</td>
+      </tr>
+    </tbody>
+  </tabele><!-- /.medal_list__medals -->
+</div><!-- /.medal_list -->
+
 <div>
   medal
   <p>update: <?php echo $decoded->update; ?></p>
