@@ -42,6 +42,7 @@ $statsItem = array(
     'icon'  => array(
       'slug'    => 'baseball',
       'is_fill' => true,
+      'style'   => '',
     )
   ),
 
@@ -52,6 +53,7 @@ $statsItem = array(
     'icon'  => array(
       'slug'    => 'soccer',
       'is_fill' => false,
+      'style'   => '',
     )
   ),
 
@@ -62,6 +64,7 @@ $statsItem = array(
     'icon'  => array(
       'slug'    => 'basketball',
       'is_fill' => false,
+      'style'   => '',
     )
   ),
 
@@ -72,6 +75,7 @@ $statsItem = array(
     'icon'  => array(
       'slug'    => 'sumo',
       'is_fill' => true,
+      'style'   => 'margin-top: -2px; margin-left: 1px;',
     )
   ),
 
@@ -90,7 +94,7 @@ $statsItem = array(
     <li class="stats_banner__item">
       <a href="<?php echo $value['path']; ?>" title="<?php echo $value['title']; ?>">
         <i>
-          <svg class="icon <?php echo ($value['icon']['is_fill']) ? 'icon--fill' : ''; ?>">
+          <svg class="icon <?php echo ($value['icon']['is_fill']) ? 'icon--fill' : ''; ?>" style="<?php echo $value['icon']['style']; ?>">
             <use xlink:href="#icon-<?php echo $value['icon']['slug']; ?>" />
           </svg>
         </i>

@@ -65,14 +65,15 @@
 
   .stats_banner__item a i {
     display: flex;
-    width: 6.45vw;
-    height: 6.45vw;
+    width: 25px;
+    height: 25px;
     margin-right: .8vw;
   }
 
   .stats_banner__item a svg {
-    width: 3.9vw;
-    height: 3.9vw;
+    width: 15px;
+    height: 15px;
+    margin-left: 0;
   }
 
   .stats_banner__item a span {
