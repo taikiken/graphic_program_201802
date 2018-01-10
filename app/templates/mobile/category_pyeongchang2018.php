@@ -11,6 +11,24 @@
     include_once __DIR__ . '/../pyeongchang2018/module/_pyeongchang2018_medals.php';
     ?>
 
+    <div class="gallery--highlight">
+      <header class="gallery__header">
+        <h2 class="gallery__heading">ハイライト動画</h2>
+        <p class="gallery__link"><a href="/pyeongchang2018/movie/">すべて見る</a></p>
+      </header><!-- /.gallery__header -->
+
+      <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
+    </div><!-- /.gallery--highlight -->
+
+    <div class="gallery--photo">
+      <header class="gallery__header">
+        <h2 class="gallery__heading">フォトギャラリー</h2>
+        <p class="gallery__link"><a href="/pyeongchang2018/photo/">すべて見る</a></p>
+      </header><!-- /.gallery__header -->
+
+      <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="2"></div>
+    </div><!-- /.gallery--photo -->
+
     <?php
     // ----------------------------------------------------
     // 記事一覧: sp theme.images
@@ -80,6 +98,7 @@
     </section><!-- /.main-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
+<<<<<<< HEAD
 <script>
   (function(window) {
     'use strict';
@@ -113,3 +132,7 @@
   }(window));
 
 </script>
+=======
+
+<script src="/assets/widgets/articles-index/Widget_articles_tag.js"></script>
+>>>>>>> 7f1a427c135f5ac9d32aea29ff6720bf1f06e707
