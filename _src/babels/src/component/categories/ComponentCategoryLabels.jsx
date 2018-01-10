@@ -23,26 +23,26 @@ import { Message } from '../../app/const/Message';
  */
 const React = self.React;
 
-/**
- * `NEW` icon 表示します
- * @param {boolean} isNew `NEW` する flag
- * @return {?XML} `i.post-label_new`
- * @constructor
- */
-export const ComponentIconLatest = ({ isNew }) => {
-  if (!isNew) {
-    return null;
-  }
-  return <i className="post-label_new">{Message.LABEL_LATEST}</i>;
-};
+// /**
+//  * `NEW` icon 表示します
+//  * @param {boolean} isNew `NEW` する flag
+//  * @return {?XML} `i.post-label_new`
+//  * @constructor
+//  */
+// export const ComponentIconLatest = ({ isNew }) => {
+//   if (!isNew) {
+//     return null;
+//   }
+//   return <i className="post-label_new">{Message.LABEL_LATEST}</i>;
+// };
 
-/**
- * React.propTypes
- * @type {{recommend: boolean}}
- */
-ComponentIconLatest.propTypes = {
-  isNew: React.PropTypes.bool.isRequired,
-};
+// /**
+//  * React.propTypes
+//  * @type {{recommend: boolean}}
+//  */
+// ComponentIconLatest.propTypes = {
+//   isNew: React.PropTypes.bool.isRequired,
+// };
 
 /**
  * オススメ記事 tag - {@link ComponentCategoryLabels}
@@ -239,7 +239,7 @@ export default class ComponentCategoryLabels extends React.Component {
       className,
       recommend,
       mediaType,
-      isNew,
+      // isNew,
       headline,
     } = this.props;
     // const categories = props.categories;
@@ -256,9 +256,13 @@ export default class ComponentCategoryLabels extends React.Component {
 
     return (
       <p className={`post-category post-category-${slug || 'x'} ${className}`}>
+        {/*
+        // トルツメ - https://aws-plus.backlog.jp/view/UNDO_SPBL-282#comment-1186189063
+        // 「is_new」フラグでつける -> 「全部つける」の変更対応していただいてましたが、うってかわって「全部つけない」になりました..。
         <ComponentIconLatest
           isNew={isNew}
         />
+        */}
         <ComponentIconRecommend
           recommend={recommend}
         />
