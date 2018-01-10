@@ -66,8 +66,8 @@ $statsItem = array(
   ),
 
   array(
-    'title' => '相撲',
-    'label' => '相撲',
+    'title' => '大相撲',
+    'label' => '大相撲',
     'path'  => '/stats/sumo/',
     'icon'  => array(
       'slug'    => 'sumo',
