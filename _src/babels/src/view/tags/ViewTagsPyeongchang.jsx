@@ -141,11 +141,15 @@ export const PyeongchangWidgetComponent = ({ list, type, date}) => {
       <div className="Widget_articles_tag">
         <ul className={`thumbs_list ${className}`}>
           {
-            list.map((article) => (
-              <PyeongchangArticleComponent
-                article={article}
-              />
-            ))
+            list.map((article, index) => {
+              const count = index + 1;
+              return (
+                <PyeongchangArticleComponent
+                  key={`widget-${type}-${date}-${count}`}
+                  article={article}
+                />
+              );
+            })
           }
         </ul>
       </div>

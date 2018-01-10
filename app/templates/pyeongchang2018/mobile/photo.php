@@ -67,8 +67,8 @@ include_once __DIR__."/../../mobile/_header.php";
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
 
-<script src="/assets/widgets/articles-index/Widget_articles_tag.js"></script>
-
+<script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/widgets/articles-index/Widget_articles_tag.js?v=<?php echo $page['version']; ?>"></script>
 <?php
 // 汎用 footer
 include_once __DIR__."/../../mobile/_footer.php";

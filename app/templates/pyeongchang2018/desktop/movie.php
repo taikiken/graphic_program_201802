@@ -16,7 +16,7 @@ include_once __DIR__."/../../desktop/_header.php";
 include_once __DIR__.'../../desktop/_category-heading.php';
 ?>
 <div class="body-sec">
-  平昌オリンピック・ハイライト・テンプレート
+
   <div class="body-sec-inner">
     <section class="main-sec">
       <div class="board-large">
@@ -26,7 +26,6 @@ include_once __DIR__.'../../desktop/_category-heading.php';
 
     <section class="side-sec">
 
-      平昌オリンピック・サイドバー
       <?php include_once __DIR__."/../../desktop/_sidebar_ad.php"; ?>
 
     </section><!-- /.side-sec -->
@@ -44,6 +43,7 @@ include_once __DIR__.'../../desktop/_category-heading.php';
     UT.view.tags.ViewTagsPyeongchang.init();
   }(window));
 </script>
+<script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 // 汎用 footer
