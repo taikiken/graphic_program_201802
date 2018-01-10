@@ -11,14 +11,12 @@
   <meta name="robots" content="noindex,nofollow" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
-<?php if ( $page['ua'] === 'desktop' ) : ?>
-  <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
-<?php else : ?>
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
-<?php endif; ?>
+
   <style>
   html,body {
-    overflow: hidden;
+    width: 100%;
+    height: auto;
   }
 
   * {
