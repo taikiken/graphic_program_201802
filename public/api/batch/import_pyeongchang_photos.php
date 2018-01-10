@@ -100,9 +100,6 @@ WHERE
 EOD;
       $sql = sprintf($format, $img1, $article_id);
       $o->query($sql);
-
-      var_dump($img1);
-      var_dump($sql);
     }
 
     $original_image = imagecreatefromjpeg($img_url);
