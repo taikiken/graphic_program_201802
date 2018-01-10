@@ -69,6 +69,7 @@ include_once __DIR__."/../../mobile/_header.php";
       UT.app.App.develop();
     }
     UT.view.tags.ViewTagsPyeongchang.init();
+    UT.ui.NavCurrent.init(SPBL_ENV.category, SPBL_ENV.platform === 'web_mobile');
   }(window));
 </script>
 

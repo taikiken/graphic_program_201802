@@ -170,6 +170,9 @@ import SPViewBookmarks from './sp/view/mypage/SPViewBookmarks';
 // tag
 import ViewTagsPyeongchang from './view/tags/ViewTagsPyeongchang';
 
+// util
+import NavCurrent from './ui/NavCurrent';
+
 /**
  * スポーツブル ライブラリ
  * @module UT
@@ -324,8 +327,9 @@ const UT = {
   ui: {
     PageTop,
     button: {
-      TopButton
-    }
+      TopButton,
+    },
+    NavCurrent,
   },
   net: {
     Cookie,
