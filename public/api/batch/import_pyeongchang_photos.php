@@ -44,9 +44,9 @@ EOD;
     $time = date('Y-m-d H:i:s', $date);
     $format = <<<EOD
 INSERT INTO repo_n(
-  cid,title,m1,m2,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,flag,m_time,u_time,a_time,bodyflag,d1,d2)
+  cid,title,m1,m2,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,flag,m_time,u_time,a_time,bodyflag,d1,d2,t10)
 VALUES
-  (1,'%s',164,159,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',1,'%s','%s','%s',169,4,10)
+  (1,'%s',164,159,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',1,'%s','%s','%s',169,4,10,'平昌五輪2018フォトギャラリー')
   RETURNING id;
 EOD;
 
