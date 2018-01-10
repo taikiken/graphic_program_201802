@@ -11,6 +11,15 @@
 
 /*
 
+# ホームのスタッツ導線
+
+- @require : /assets/css/ui.css
+- PC / SP / WebView 共通
+
+
+## 表示定義
+
+```
 $statsItem = array(
   array(
     'title' => 'サッカー日本代表', // マウスオーバー時のtooltipタイトル
@@ -22,6 +31,7 @@ $statsItem = array(
     )
   ),
 );
+```
 
 */
 $statsItem = array(
@@ -32,6 +42,7 @@ $statsItem = array(
     'icon'  => array(
       'slug'    => 'baseball',
       'is_fill' => true,
+      'style'   => '',
     )
   ),
 
@@ -42,6 +53,7 @@ $statsItem = array(
     'icon'  => array(
       'slug'    => 'soccer',
       'is_fill' => false,
+      'style'   => '',
     )
   ),
 
@@ -52,16 +64,18 @@ $statsItem = array(
     'icon'  => array(
       'slug'    => 'basketball',
       'is_fill' => false,
+      'style'   => '',
     )
   ),
 
   array(
-    'title' => '相撲',
-    'label' => '相撲',
+    'title' => '大相撲',
+    'label' => '大相撲',
     'path'  => '/stats/sumo/',
     'icon'  => array(
       'slug'    => 'sumo',
       'is_fill' => true,
+      'style'   => 'margin-top: -2px; margin-left: 1px;',
     )
   ),
 
@@ -70,7 +84,9 @@ $statsItem = array(
 ?>
 <aside class="stats_banner">
   <div class="stats_banner__heading">
-    <h2 class="stats_banner__heading__title">速報&amp;データ</h2>
+    <h2 class="stats_banner__heading__title">
+      速報&amp;<?php echo ( $page['ua'] !== 'desktop' ) ? '<br />' : ''; ?>データ
+    </h2>
   </div><!-- /.stats_banner__heading -->
 
   <ul class="stats_banner__list">
@@ -78,7 +94,7 @@ $statsItem = array(
     <li class="stats_banner__item">
       <a href="<?php echo $value['path']; ?>" title="<?php echo $value['title']; ?>">
         <i>
-          <svg class="icon <?php echo ($value['icon']['is_fill']) ? 'icon--fill' : ''; ?>">
+          <svg class="icon <?php echo ($value['icon']['is_fill']) ? 'icon--fill' : ''; ?>" style="<?php echo $value['icon']['style']; ?>">
             <use xlink:href="#icon-<?php echo $value['icon']['slug']; ?>" />
           </svg>
         </i>
@@ -92,7 +108,7 @@ $statsItem = array(
     <a class="stats_banner__btn__link" href="/stats/"><span>すべて</span></a>
   </div><!-- /.stats_banner__btn -->
 
-  <?php include_once __DIR__.'/../_svg.php'; ?>
+  <?php include_once __DIR__.'/../../../_svg.php'; ?>
 
 </aside><!-- /.stats_banner -->
 <?php
