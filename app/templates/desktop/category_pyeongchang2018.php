@@ -40,24 +40,7 @@ include_once __DIR__.'/_category-heading.php';
         <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="photo" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="4"></div>
       </div><!-- /.gallery--photo -->
 
-      <div class="headline">
-        <div class="headline-outer">
-          <div id="headline-container"></div><!-- /headline -->
-          <?php
-          /*
-           // ComponentHeadlines.js へ移動
-          ?>
-          <div class="sponsor-link">
-            <!--
-            株式会社運動通信社 運動通信_PC_WEB_デスクトップ - 一面 - ヘッドライン下部 39882
-            -->
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=34481&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-          </div>
-          <?php
-          */
-          ?>
-        </div><!-- /.headline-outer -->
-      </div><!-- /.headline -->
+      <div id="js-headline"></div>
 
       <aside class="sns-pr">
         <dl class="sns-pr-inner">
