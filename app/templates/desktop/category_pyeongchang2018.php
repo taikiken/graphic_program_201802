@@ -28,7 +28,7 @@ include_once __DIR__.'/_category-heading.php';
           <p class="gallery__link"><a href="/pyeongchang2018/movie/">すべての動画を見る</a></p>
         </header><!-- /.gallery__header -->
 
-        <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="video" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
+        <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
       </div><!-- /.gallery--highlight -->
 
       <div class="gallery--photo">
@@ -37,7 +37,7 @@ include_once __DIR__.'/_category-heading.php';
           <p class="gallery__link"><a href="/pyeongchang2018/photo/">すべてのフォトギャラリーを見る</a></p>
         </header><!-- /.gallery__header -->
 
-        <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="photo" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="4"></div>
+        <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="4"></div>
       </div><!-- /.gallery--photo -->
 
       <div id="js-headline"></div>
