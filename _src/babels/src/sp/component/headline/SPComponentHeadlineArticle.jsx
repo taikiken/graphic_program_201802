@@ -95,7 +95,7 @@ export default class SPComponentHeadlineArticle extends React.Component {
       date,
       // isNew,
     } = this.props;
-
+    // console.log('SPComponentHeadlineArticle.render', mediaType);
     return (
       <div className={`board-item board-item-${index}`}>
         <a className="post" href={url} onClick={this.boundGa}>

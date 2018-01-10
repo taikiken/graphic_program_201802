@@ -53,9 +53,63 @@
       // eof: 記事一覧: sp banner
       // ---------------------------------------------------- ?>
 
-      <div id="js-headline"></div>
+      <?php
+      // ------------------------------
+      // 平昌だけイレギュラー index と同じ
+      ?>
+      <div id="headline-container"></div>
+
+      <aside class="sns-pr">
+        <div class="sns-pr-outer">
+          <dl class="sns-pr-inner">
+            <dt><span>いいねして最新ニュースをチェック！</span></dt>
+            <dd>
+              <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            </dd>
+          </dl><!-- /.sns-pr-inner -->
+        </div><!-- /.sns-pr-outer -->
+      </aside><!-- /.sns-pr -->
+
+      <div id="js-headline-last-container"></div>
+      <?php
+      // イレギュラー終わり
+      // ------------------------------
+      ?>
       <div id="category-container"></div>
       <div id="board-container-more"></div>
     </section><!-- /.main-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
+<script>
+  (function(window) {
+    'use strict';
+    var UT = window.UT;
+    var element = UT.app.Dom.headline();
+    if (!element) {
+      return;
+    }
+    var SPBL_ENV = window.SPBL_ENV || {};
+    if (SPBL_ENV.env === 'development' && location.hostname.indexOf('sportsbull.jp') === -1) {
+      UT.app.App.develop();
+    }
+    var slug = SPBL_ENV.category;
+    var Model = UT.model.Model;
+    var vewHeadline = new UT.sp.view.home.SPViewHeadLine(element);
+    function done(events) {
+      var dae = events.args.shift() || {};
+      var headline = dae.headline || {};
+      var articles = headline.articles || [];
+      console.log('done', articles);
+      vewHeadline.render(articles);
+    }
+    function fail(events) {
+      console.log('error', events, slug);
+    }
+    var model = new UT.model.ModelCategoriesSlug(slug);
+    model.on(Model.COMPLETE, done);
+    model.on(Model.RESPONSE_ERROR, fail);
+    model.start();
+
+  }(window));
+
+</script>

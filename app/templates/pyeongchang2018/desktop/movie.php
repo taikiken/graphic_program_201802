@@ -37,7 +37,6 @@ include_once __DIR__.'../../desktop/_category-heading.php';
     'use strict';
     var UT = window.UT;
     var SPBL_ENV = window.SPBL_ENV || {};
-    console.log('window.SPBL_ENV', SPBL_ENV);
     if (SPBL_ENV.env === 'development' && location.hostname.indexOf('sportsbull.jp') === -1) {
       UT.app.App.develop();
     }

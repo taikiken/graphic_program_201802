@@ -150,7 +150,7 @@ export class ArticleDae {
      * - bookmark した / してない
      * @type {boolean}
      */
-    this.isBookmarked = altArticle.is_bookmarked;
+    this.isBookmarked = altArticle.isBookmarked || altArticle.is_bookmarked;
     /**
      * article.is_recommend
      * - パーソナライズされたニュースは is_recommend(キー名は仮）をたてて「おすすめ」アイコンを表示する
@@ -169,7 +169,7 @@ export class ArticleDae {
      * - video or image
      * @type {string}
      */
-    this.mediaType = altArticle.media_type;
+    this.mediaType = altArticle.mediaType || altArticle.media_type;
     /**
      * article.title
      * @type {string}

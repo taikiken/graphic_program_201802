@@ -167,11 +167,14 @@ import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking'
 import SPViewUserProfile from './sp/view/mypage/SPViewUserProfile';
 import SPViewBookmarks from './sp/view/mypage/SPViewBookmarks';
 
-// tag
+// tag - for 平昌
 import ViewTagsPyeongchang from './view/tags/ViewTagsPyeongchang';
 
-// util
+// util - for 平昌
 import NavCurrent from './ui/NavCurrent';
+
+// model - for 平昌
+import { ModelCategoriesSlug } from './model/categoires/ModelCategoriesSlug';
 
 /**
  * スポーツブル ライブラリ
@@ -336,7 +339,8 @@ const UT = {
     Ajax,
   },
   model: {
-    Model
+    Model,
+    ModelCategoriesSlug,
   },
   view: {
     View,
