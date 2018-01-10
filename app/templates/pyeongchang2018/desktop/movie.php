@@ -38,7 +38,7 @@ include_once __DIR__.'../../desktop/_category-heading.php';
     'use strict';
     var UT = window.UT;
     console.log('window.SPBL_ENV', window.SPBL_ENV);
-    if (window.SPBL_ENV.env === 'development') {
+    if (window.SPBL_ENV.env === 'development' && location.hostname.indexOf('sportsbull.jp') === -1) {
       UT.app.App.develop();
     }
     UT.view.tags.ViewTagsPyeongchang.init();
