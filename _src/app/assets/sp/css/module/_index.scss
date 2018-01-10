@@ -183,7 +183,8 @@
       stroke-width: 0;
       stroke: #fff;
 
-      &.icon--baseball  {
+      // 塗りつぶし用 ex. baseball / sumo
+      &.icon--fill  {
         fill: #fff;
       }
     }
