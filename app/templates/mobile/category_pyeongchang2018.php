@@ -113,23 +113,22 @@
     var slug = SPBL_ENV.category;
     var Model = UT.model.Model;
     var vewHeadline = new UT.sp.view.home.SPViewHeadLine(element);
+    var model = new UT.model.ModelCategoriesSlug(slug);
     function done(events) {
       var dae = events.args.shift() || {};
       var headline = dae.headline || {};
       var articles = headline.articles || [];
-      console.log('done', articles);
+      // console.log('done', articles);
+      vewHeadline.archive = true;
       vewHeadline.render(articles);
     }
     function fail(events) {
       console.log('error', events, slug);
     }
-    var model = new UT.model.ModelCategoriesSlug(slug);
     model.on(Model.COMPLETE, done);
     model.on(Model.RESPONSE_ERROR, fail);
     model.start();
-
   }(window));
-
 </script>
 
 <script src="/assets/widgets/articles-index/Widget_articles_tag.js?v=<?php echo $page['version']; ?>"></script>

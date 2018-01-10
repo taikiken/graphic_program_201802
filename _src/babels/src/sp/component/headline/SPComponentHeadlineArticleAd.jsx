@@ -16,13 +16,24 @@ import { Ad } from '../../../app/const/Ad';
  */
 const React = self.React;
 
+/**
+ * SP - 記事に広告を挿入します
+ */
 export default class SPComponentHeadlineArticleAd extends React.Component {
+  /**
+   * React.propTypes
+   * @returns {{home: boolean, archive: boolean}} React.propTypes
+   */
   static get propTypes() {
     return {
       home: React.PropTypes.bool.isRequired,
       archive: React.PropTypes.bool.isRequired,
     };
   }
+  /**
+   * SP - 記事に広告を挿入します
+   * @param {*} props React.props
+   */
   constructor(props) {
     super(props);
     /**
@@ -31,6 +42,10 @@ export default class SPComponentHeadlineArticleAd extends React.Component {
      */
     this.sponsorLink = null;
   }
+  /**
+   * delegate - after mount
+   * - 広告 tag `script` 挿入します
+   */
   componentDidMount() {
     const element = this.sponsorLink;
     if (!element) {
@@ -42,6 +57,10 @@ export default class SPComponentHeadlineArticleAd extends React.Component {
     div.appendChild(script);
     element.appendChild(div);
   }
+  /**
+   * 広告用コンテナを作成します
+   * @returns {?XML} `div.board-item.sponsor-link`
+   */
   render() {
     const { home, archive } = this.props;
     if (home || archive) {

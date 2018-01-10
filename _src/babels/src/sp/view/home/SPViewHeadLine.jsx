@@ -49,6 +49,11 @@ export default class SPViewHeadLine extends ViewHeadline {
      * @type {function}
      */
     this.boundSafely = this.executeSafely.bind(this);
+    /**
+     * 公国非表示 flag - true: 広告なし
+     * @type {boolean}
+     */
+    this.archive = false;
   }
   /**
    * dom を render します
@@ -78,6 +83,7 @@ export default class SPViewHeadLine extends ViewHeadline {
       <SPComponentHeadlines
         list={list}
         callback={this.boundSafely}
+        archive={this.archive}
       />,
       this.element,
     );
