@@ -132,5 +132,5 @@
 
 </script>
 
-<script src="/assets/widgets/articles-index/Widget_articles_tag.js"></script>
+<script src="/assets/widgets/articles-index/Widget_articles_tag.js?v=<?php echo $page['version']; ?>"></script>
 
