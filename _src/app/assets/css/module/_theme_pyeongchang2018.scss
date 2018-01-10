@@ -120,4 +120,154 @@
     }
   } //.medal_list
 
+
+
+
+  //.gallery--highlight
+  //.gallery--photo
+  [class*="gallery--"] {
+    margin-top: 20px;
+    border-top: 4px solid #ddd;
+
+    .gallery__header {
+      display: table;
+      width: 100%;
+      height: 58px;
+    }
+
+    .gallery__heading {
+      display: table-cell;
+      vertical-align: middle;
+      font-weight: bold;
+      font-size: fz(16);
+
+      &:before {
+        content: "";
+        position: relative;
+        top: -1px;
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        margin-right: 5px;
+        background-position: 0 center;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+        @include hide-text;
+      }
+    } //.gallery__heading
+
+    .gallery__link {
+      display: table-cell;
+      padding-right: 8px;
+      text-align: right;
+      vertical-align: middle;
+
+      a {
+        @include link-decoration(#333, #333, none, none);
+        display: inline-block;
+        font-weight: bold;
+        font-size: fz(13);
+
+        &:after {
+          content: "";
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          margin-left: 2px;
+          border-top: 2px solid #333;
+          border-right: 2px solid #333;
+          transform: rotate(45deg);
+          @include hide-text;
+        }
+      }
+    } //.gallery__link
+  }
+
+  //.gallery--highlight
+  .gallery--highlight {
+    .gallery__heading:before {
+      background-image: url(/assets/images/pyeongchang2018/icon-highlight_heading.png);
+    }
+  }
+
+  //.gallery--photo
+  .gallery--photo {
+    .gallery__heading:before {
+      background-image: url(/assets/images/pyeongchang2018/icon-photo_heading.png);
+    }
+  }
+
+
+
+  //.articles-widget
+  .articles-widget {
+    width: 736px;
+
+    .thumbs_list {
+      overflow: hidden;
+
+      li {
+        float: left;
+        width: 174px;
+        margin-right: 10px;
+      }
+
+      img {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      &.video {
+        figure {
+          position: relative;
+
+          &:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            @include opacity(0.2);
+          }
+
+          &:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 34px;
+            height: 34px;
+            background: url(/assets/images/pyeongchang2018/icon-play.png) 0 0 no-repeat;
+            @include hide-text;
+          }
+        } //figure
+
+        a:hover {
+          figure:before {
+            @include hover-opacity(0);
+          }
+        }
+      } //&.video
+
+      &.photo{
+        li {
+          padding: 3px;
+          background-color: #e7e7e7;
+        }
+
+        a:hover {
+
+          img {
+            display: inline-block;
+          }
+
+          img {
+            display: inline-block;
+            @include hover-opacity(0.75);
+          }
+        }
+      } //&.photo
+    } //.thumbs_list
+  } //.articles-widget
 } //.whole.pyeongchang2018

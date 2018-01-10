@@ -20,6 +20,7 @@
 
       .medal_list__heading {
         display: table-cell;
+        padding-left: perCalc(15, 750);
         vertical-align: middle;
         font-weight: bold;
         font-size: fz(28/2);
@@ -42,7 +43,7 @@
       .medal_list__date {
         display: table-cell;
         text-align: right;
-        padding-right: 10px;
+        padding-right: perCalc(15, 750);
         font-size: fz(20/2);
         vertical-align: middle;
       }
@@ -125,5 +126,10 @@
     }
   } //.medal_list
 
+
+
+  [class*="gallery--"] {
+    margin-top: 20px;
+  }
 
 } //.whole.pyeongchang2018
