@@ -181,7 +181,7 @@
         @include link-decoration(#333, #333, none, none);
         display: inline-block;
         font-weight: bold;
-        font-size: fz(13);
+        font-size: fz(24/2);
 
         &:after {
           content: "";
@@ -196,6 +196,16 @@
         }
       }
     } //.gallery__link
+
+    //.gallery__date
+    .gallery__date {
+      display: table-cell;
+      padding-right: perCalc(15, 750);
+      font-weight: bold;
+      font-size: fz(24/2);
+      text-align: right;
+      vertical-align: middle;
+    } //.gallery__date
   }
   //.gallery--highlight
   //.gallery--photo
@@ -227,9 +237,6 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      // width: 100%;
-      // border-collapse:separate;
-      // border-spacing: 10px 0;
 
       li {
         width: perCalc(350, 720);
@@ -298,7 +305,7 @@
       .thumbs_list.text{
         figure {
           position: relative;
-          padding: 3px;
+          padding: (44/2)+px (8/2)+px;
           background-color: #e7e7e7;
 
           &:before {

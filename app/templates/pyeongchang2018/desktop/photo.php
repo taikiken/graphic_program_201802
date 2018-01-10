@@ -15,7 +15,13 @@ include_once __DIR__."/../../desktop/_header.php";
 // PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
 include_once __DIR__.'../../desktop/_category-heading.php';
 ?>
+
 <div class="body-sec">
+
+  <div class="special-summary">
+    <h1 class="special-summary-heading"><img src="/assets/images/pyeongchang2018/special-summary.jpg" alt="平昌五輪"></h1>
+  </div><!-- /.special-summary -->
+
   <div class="body-sec-inner">
     <section class="main-sec">
       <div class="board-large">
@@ -23,10 +29,10 @@ include_once __DIR__.'../../desktop/_category-heading.php';
         <div class="gallery--photo">
           <header class="gallery__header">
             <h2 class="gallery__heading">フォトギャラリー</h2>
-            <p class="gallery__link">2/9~2/25</p>
+            <p class="gallery__date">2018年2月9日 - 25日</p>
           </header><!-- /.gallery__header -->
 
-          <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="photo" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="9999"></div>
+          <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="9999"></div>
         </div>
 
       </div><!-- /.board-large -->
