@@ -226,7 +226,7 @@ export default class ComponentHeadlineArticle extends React.Component {
               mediaType={mediaType}
               recommend={false}
               anotherCategories={anotherCategories}
-              isNew={true}
+              isNew={false}
               headline={true}
             />
             <p className="post-date">{date}</p>
