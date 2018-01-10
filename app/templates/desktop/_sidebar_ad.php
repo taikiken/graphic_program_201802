@@ -1,6 +1,5 @@
 <?php
 // `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
-global $on_pyeongchang2018;
 ?>
 <?php
 //2017/7/14追加

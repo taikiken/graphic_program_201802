@@ -18,16 +18,16 @@ include_once __DIR__.'../../desktop/_category-heading.php';
 <div class="body-sec">
   平昌オリンピック・ハイライト・テンプレート
   <div class="body-sec-inner">
-    <div class="board-large">
+    <section class="main-sec">
+      <div class="board-large">
+        <div id="js-pyeongchang-highlight-container"></div>
+      </div><!-- /.board-large -->
+    </section><!-- /.main-sec -->
 
-      <div id="board-container"></div><!--/archive-->
-
-      <div id="board-container-more"></div><!--/archive-more-->
-
-    </div><!-- /.board-large -->
     <section class="side-sec">
 
       平昌オリンピック・サイドバー
+      <?php include_once __DIR__."/../../desktop/_sidebar_ad.php"; ?>
 
     </section><!-- /.side-sec -->
   </div><!-- /.body-sec-inner -->

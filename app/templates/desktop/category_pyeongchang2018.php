@@ -83,7 +83,6 @@ include_once __DIR__.'/_category-heading.php';
 
       <?php
       // `/category/pyeongchang2018/` - 広告表示しない
-      global $on_pyeongchang2018;
       $on_pyeongchang2018 = true;
       ?>
       <?php include_once __DIR__."/_sidebar_ad.php"; ?>

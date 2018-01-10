@@ -21,6 +21,7 @@ $app->group('/pyeongchang2018', function () use ($app) {
     $args['page'] = $app->model->set(array(
       'template_classname' => $template_classname,
       'category' => $category,
+      'template' => 'category',
     ));
 
     if ( $app->model->property('ua') === 'desktop' ) :
@@ -39,6 +40,7 @@ $app->group('/pyeongchang2018', function () use ($app) {
     $args['page'] = $app->model->set(array(
       'template_classname' => $template_classname,
       'category' => $category,
+      'template' => 'category',
     ));
 
     if ( $app->model->property('ua') === 'desktop' ) :

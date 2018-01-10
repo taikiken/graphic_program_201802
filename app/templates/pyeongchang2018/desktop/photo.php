@@ -18,20 +18,31 @@ include_once __DIR__.'../../desktop/_category-heading.php';
 <div class="body-sec">
   平昌オリンピック・photo・テンプレート
   <div class="body-sec-inner">
-    <div class="board-large">
+    <section class="main-sec">
+      <div class="board-large">
 
-      <div id="board-container"></div><!--/archive-->
+        <div class="gallery--photo">
+          <header class="gallery__header">
+            <h2 class="gallery__heading">フォトギャラリー</h2>
+            <p class="gallery__link">2/9~2/25</p>
+          </header><!-- /.gallery__header -->
 
-      <div id="board-container-more"></div><!--/archive-more-->
+          <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="photo" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="9999"></div>
+        </div>
 
-    </div><!-- /.board-large -->
+      </div><!-- /.board-large -->
+    </section><!-- /.main-sec -->
+
     <section class="side-sec">
 
       平昌オリンピック・サイドバー
+      <?php include_once __DIR__."/../../desktop/_sidebar_ad.php"; ?>
 
     </section><!-- /.side-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
+
+  <script src="/assets/widgets/articles-index/Widget_articles_tag.js"></script>
 
 <?php
 // 汎用 footer
