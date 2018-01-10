@@ -58,12 +58,15 @@ $decoded = json_decode($encoded);
 if (!isset($decoded->update) || !isset($decoded->medal) || !isset($decoded->medal->gold) || !isset($decoded->medal->silver) || !isset($decoded->medal->bronze)) {
   exit;
 }
+
+// date format
+$medal_date = DateTime::createFromFormat('Y-m-d H:i', $decoded->update);
 ?>
 
 <div class="medal_list">
   <header class="medal_list__header">
     <h2 class="medal_list__heading">日本 メダル獲得数</h2>
-    <p class="medal_list__date">更新日時：<?php echo $decoded->update; ?></p>
+    <p class="medal_list__date">更新日時：<?php echo $medal_date->format('Y年m月d日 H時i分'); ?></p>
   </header><!-- /.medal_list__header -->
 
   <div class="medal_list__medals">
@@ -76,6 +79,9 @@ if (!isset($decoded->update) || !isset($decoded->medal) || !isset($decoded->meda
         </tr>
       </tbody>
     </table>
-    <p class="medal_list__medal_total">合計<span>18</span></p>
+    <p class="medal_list__medal_total">合計<span><?php
+        // 合計メダル数
+        echo $decoded->medal->gold + $decoded->medal->silver + $decoded->medal->bronze;
+        ?></span></p>
   </div><!-- /.medal_list__medals -->
 </div><!-- /.medal_list -->
