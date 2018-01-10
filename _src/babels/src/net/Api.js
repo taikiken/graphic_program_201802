@@ -423,10 +423,12 @@ export class Api {
         throw new Error(`settings illegal action: ${action}.`);
     }
   }
-  static tag(tag, date = '') {
-    const path = ApiDae.api('tag:t10');
-    return date ?
-      `${path}${tag}&date=${date}` :
-      `${path}${tag}`;
+  /**
+   * `tag:t10` tag 取得 API
+   * @returns {string} tag API を返します
+   * @since 2018-01-09
+   */
+  static tag() {
+    return ApiDae.api('tag:t10');
   }
 }

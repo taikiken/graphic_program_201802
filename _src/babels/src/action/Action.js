@@ -80,6 +80,12 @@ export class Action {
      */
     this._url = types.url;
     /**
+     * `this._url` の代りに使用する Api path property
+     * @type {string}
+     * @since 2018-01-10
+     */
+    this.path = types.url;
+    /**
      * API リクエスト時の method( GET, POST, PUT, DELETE )を types 引数から取り出します
      * @type {string}
      * @protected

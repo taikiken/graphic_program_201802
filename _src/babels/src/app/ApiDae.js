@@ -32,7 +32,7 @@ import {Query} from '../net/types/Query';
  * @private
  * @static
  */
-const apiRoot = () => {
+export const apiRoot = () => {
   // let n = parseInt( port, 10 );
   switch (Env.mode) {
     case Env.LOCAL :
@@ -106,7 +106,7 @@ const apiRoot = () => {
  * @return {Types} Types instance を返します
  * @private
  */
-const buildPath = (root = '') => {
+export const buildPath = (root = '') => {
   // 共通パス
   // 先頭 protocol + host 部分を develop / production で変える
   const API_ROOT = root === '' ? apiRoot() : root;

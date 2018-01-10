@@ -10,7 +10,7 @@
  *
  */
 import { Offset } from '../Offset';
-import { Length } from '../../app/const/Length';
+// import { Length } from '../../app/const/Length';
 import { Api } from '../../net/Api';
 
 /**
@@ -26,10 +26,10 @@ export default class Tags extends Offset {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @param {number} [offset=0] query offset 値
-   * @param {number} [length=16] query length 値
+   * @param {number} [length=4] query length 値
    */
-  constructor(tag, date = '', resolve = null, reject = null, offset = 0, length = Length.archive) {
-    super(Api.tag(tag, date), resolve, reject, offset, length);
+  constructor(tag, date = '', resolve = null, reject = null, offset = 0, length = 4) {
+    super(Api.tag(), resolve, reject, offset, length);
     /**
      * 検索対象タグ
      * @type {string}
@@ -48,13 +48,14 @@ export default class Tags extends Offset {
    * @return {string} 作成した url を返します
    */
   get url() {
-    return `${this._url}&offset=${this.offset}&length=${this.length}`;
+    const query = this.date ? `${this.tag}&date=${this.date}` : this.tag;
+    return `${this.path}${query}&offset=${this.offset}&length=${this.length}`;
   }
-  /**
-   * has next - 常に `false`
-   * @returns {boolean} 次があるかの真偽値を返します
-   */
-  hasNext() {
-    return false;
-  }
+  // /**
+  //  * has next - 常に `false`
+  //  * @returns {boolean} 次があるかの真偽値を返します
+  //  */
+  // hasNext() {
+  //   return true;
+  // }
 }
