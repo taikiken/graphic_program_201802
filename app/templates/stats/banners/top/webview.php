@@ -11,6 +11,12 @@
   <meta name="robots" content="noindex,nofollow" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
+<?php if ( $page['ua'] === 'desktop' ) : ?>
+  <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
+<?php else : ?>
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+<?php endif; ?>
+
   <style>
   html,body {
     overflow: hidden;
@@ -130,85 +136,14 @@
     font-style: normal;
   }
 
-  .dummy img {
-    width: 100%;
-    height: auto;
-    line-height: 0;
+  .stats_banner__item svg.icon--fill {
+    fill : #fff;
   }
-
   </style>
 </head>
 <body>
 
-<div class="wrapper">
-  <header>
-    <h1>
-      速報&<br />データ
-    </h1>
-  </header>
-  <ul>
-    <li>
-      <a href="https://sportsbull.jp/stats/npb/">
-        <i>
-          <svg class="icon icon--fill">
-            <use xlink:href="#icon-baseball" />
-          </svg>
-        </i>
-        <span>
-          プロ野球
-        </span>
-      </a>
-    </li>
-    <li>
-      <a href="https://sportsbull.jp/sokuhou/">
-        <i>
-          <svg class="icon">
-            <use xlink:href="#icon-soccer" />
-          </svg>
-        </i>
-        <span>
-          サッカー<br />日本代表
-        </span>
-      </a>
-    </li>
-    <li>
-      <a href="https://sportsbull.jp/stats/bleague/">
-        <i>
-          <svg class="icon">
-            <use xlink:href="#icon-basketball" />
-          </svg>
-        </i>
-        <span>
-          Bリーグ
-        </span>
-      </a>
-    </li>
-    <li>
-      <a href="https://sportsbull.jp/stats/sumo/">
-        <i>
-          <svg class="icon icon--fill">
-            <use xlink:href="#icon-sumo" />
-          </svg>
-        </i>
-        <span>
-          相撲
-        </span>
-      </a>
-    </li>
-  </ul>
-  <p>
-    <a href="/stats/">
-      <span>
-        <em>
-          すべて
-        </em>
-      </span>
-    </a>
-  </p>
-</div>
-
-<?php include_once __DIR__.'/../../../_svg.php'; ?>
-
+<?php include_once __DIR__.'/_stats_banner.php'; ?>
 
 </body>
 </html>
