@@ -167,6 +167,9 @@ import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking'
 import SPViewUserProfile from './sp/view/mypage/SPViewUserProfile';
 import SPViewBookmarks from './sp/view/mypage/SPViewBookmarks';
 
+// tag
+import ViewTagsPyeongchang from './view/tags/ViewTagsPyeongchang';
+
 /**
  * スポーツブル ライブラリ
  * @module UT
@@ -385,7 +388,10 @@ const UT = {
       ViewDeleteModal,
       ViewLogoutModal,
       ViewFlushModal
-    }
+    },
+    tags: {
+      ViewTagsPyeongchang,
+    },
   },
   sp: {
     view: {
