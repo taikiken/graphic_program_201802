@@ -98,7 +98,6 @@
     </section><!-- /.main-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
-<<<<<<< HEAD
 <script>
   (function(window) {
     'use strict';
@@ -132,7 +131,6 @@
   }(window));
 
 </script>
-=======
 
 <script src="/assets/widgets/articles-index/Widget_articles_tag.js"></script>
->>>>>>> 7f1a427c135f5ac9d32aea29ff6720bf1f06e707
+
