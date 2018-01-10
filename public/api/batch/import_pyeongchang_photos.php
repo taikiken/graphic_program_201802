@@ -74,6 +74,8 @@ EOD;
   $pickup_img_name = '/^PK' . date('Ymd', $date) . '[0-9]*/';
   $pattern = '/^PK' . date('Ymd', $date) . '[0-9]*_TF_JPG_00_UTF8.xml/';
 
+  $img1 = '';
+
   foreach ($result as $file_info) {
     $file = explode(',', $file_info);
 
@@ -85,6 +87,23 @@ EOD;
     $filename = $file_name[0] . '_BI_JPG_00.jpg';
 
     $img_url = "http://limret:limret0@tmdatag.kyodonews.jp/06KK579001/GZ_TX4_UTF8/photo/" . $filename;
+
+    if(empty($img1)){
+      $img1 = outimg($img_url,1,false);
+      $format =<<<EOD
+UPDATE
+  repo_n
+SET
+  img1 = '%s'
+WHERE
+  id = '%s';
+EOD;
+      $sql = sprintf($format, $img1, $article_id);
+      $o->query($sql);
+
+      var_dump($img1);
+      var_dump($sql);
+    }
 
     $original_image = imagecreatefromjpeg($img_url);
     $ext = 'jpg';
