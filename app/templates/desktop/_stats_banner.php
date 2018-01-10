@@ -8,6 +8,65 @@
 // @see https://github.com/undotsushin/undotsushin/issues/2080
 // @since 2017-06-26
 // @since 2017-12-18 update
+
+/*
+
+$statsItem = array(
+  array(
+    'title' => 'サッカー日本代表', // マウスオーバー時のtooltipタイトル
+    'label' => 'サッカー<br />日本代表', // 実表記
+    'path'  => '/sokuhou/', // リンク先
+    'icon'  => array(
+      'slug'    => 'soccer', // 表示アイコン
+      'is_fill' => false // svgをfillするか
+    )
+  ),
+);
+
+*/
+$statsItem = array(
+  array(
+    'title' => 'プロ野球',
+    'label' => 'プロ野球',
+    'path'  => '/stats/npb/',
+    'icon'  => array(
+      'slug'    => 'baseball',
+      'is_fill' => true,
+    )
+  ),
+
+  array(
+    'title' => 'サッカー日本代表',
+    'label' => 'サッカー<br />日本代表',
+    'path'  => '/sokuhou/',
+    'icon'  => array(
+      'slug'    => 'soccer',
+      'is_fill' => false,
+    )
+  ),
+
+  array(
+    'title' => 'Bリーグ',
+    'label' => 'Bリーグ',
+    'path'  => '/stats/bleague/',
+    'icon'  => array(
+      'slug'    => 'basketball',
+      'is_fill' => false,
+    )
+  ),
+
+  array(
+    'title' => '相撲',
+    'label' => '相撲',
+    'path'  => '/stats/sumo/',
+    'icon'  => array(
+      'slug'    => 'sumo',
+      'is_fill' => true,
+    )
+  ),
+
+);
+
 ?>
 <aside class="stats_banner">
   <div class="stats_banner__heading">
@@ -15,46 +74,18 @@
   </div><!-- /.stats_banner__heading -->
 
   <ul class="stats_banner__list">
+    <?php foreach( $statsItem as $key => $value ) : ?>
     <li class="stats_banner__item">
-      <a href="/stats/npb/">
+      <a href="<?php echo $value['path']; ?>" title="<?php echo $value['title']; ?>">
         <i>
-          <svg class="icon icon--fill">
-            <use xlink:href="#icon-baseball" />
+          <svg class="icon <?php echo ($value['icon']['is_fill']) ? 'icon--fill' : ''; ?>">
+            <use xlink:href="#icon-<?php echo $value['icon']['slug']; ?>" />
           </svg>
         </i>
-        <span>プロ野球</span>
+        <span><?php echo $value['label']; ?></span>
       </a>
     </li>
-    <li class="stats_banner__item">
-      <a href="/sokuhou/">
-        <i>
-          <svg class="icon">
-            <use xlink:href="#icon-soccer" />
-          </svg>
-        </i>
-        <span>サッカー<br />日本代表</span>
-      </a>
-    </li>
-    <li class="stats_banner__item">
-      <a href="/stats/bleague/">
-        <i>
-          <svg class="icon">
-            <use xlink:href="#icon-basketball" />
-          </svg>
-        </i>
-        <span>Bリーグ</span>
-      </a>
-    </li>
-    <li class="stats_banner__item">
-      <a href="/stats/u_rugby/kantou/">
-        <i>
-          <svg class="icon">
-            <use xlink:href="#icon-football" />
-          </svg>
-        </i>
-        <span>関西学生<br />アメフト</span>
-      </a>
-    </li>
+    <?php endforeach; ?>
   </ul><!-- /.stats_banner__list -->
 
   <div class="stats_banner__btn">
