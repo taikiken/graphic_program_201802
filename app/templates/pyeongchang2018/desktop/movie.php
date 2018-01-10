@@ -18,6 +18,11 @@ include_once __DIR__.'../../desktop/_category-heading.php';
 <div class="body-sec">
 
   <div class="body-sec-inner">
+
+    <div class="special-summary">
+      <h1 class="special-summary-heading"><img src="/assets/images/pyeongchang2018/special-summary.jpg" alt=""></h1>
+    </div><!-- /.special-summary -->
+
     <section class="main-sec">
       <div class="board-large">
         <div id="js-pyeongchang-highlight-container"></div>
