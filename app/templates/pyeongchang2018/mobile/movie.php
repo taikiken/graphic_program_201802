@@ -55,12 +55,22 @@ include_once __DIR__."/../../mobile/_header.php";
       // eof: 記事一覧: sp banner
       // ---------------------------------------------------- ?>
 
-      <div id="js-headline"></div>
-      <div id="category-container"></div>
-      <div id="board-container-more"></div>
+      <div id="js-pyeongchang-highlight-container"></div>
     </section><!-- /.main-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
+
+<script>
+  (function(window) {
+    'use strict';
+    var UT = window.UT;
+    console.log('window.SPBL_ENV', window.SPBL_ENV);
+    if (window.SPBL_ENV.env === 'development') {
+      UT.app.App.develop();
+    }
+    UT.view.tags.ViewTagsPyeongchang.init();
+  }(window));
+</script>
 
 <?php
 // 汎用 footer

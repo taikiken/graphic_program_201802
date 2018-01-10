@@ -55,12 +55,19 @@ include_once __DIR__."/../../mobile/_header.php";
       // eof: 記事一覧: sp banner
       // ---------------------------------------------------- ?>
 
-      <div id="js-headline"></div>
-      <div id="category-container"></div>
-      <div id="board-container-more"></div>
+      <div class="gallery--photo">
+        <header class="gallery__header">
+          <h2 class="gallery__heading">フォトギャラリー</h2>
+          <p class="gallery__link">2/9~2/25</p>
+        </header><!-- /.gallery__header -->
+
+        <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="photo" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="9999"></div>
+      </div>
     </section><!-- /.main-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
+
+<script src="/assets/widgets/articles-index/Widget_articles_tag.js"></script>
 
 <?php
 // 汎用 footer
