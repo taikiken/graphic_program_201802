@@ -23,12 +23,110 @@ import { GaData } from '../../../ga/GaData';
 // dae
 import AnotherCategoriesDae from '../../../dae/another-categories/AnotherCategoriesDae';
 import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
+import { Empty } from '../../../app/const/Empty';
+import { MediaType } from '../../../app/const/MediaType';
 
 // React
 /**
  * [library] - React
  */
 const React = self.React;
+
+/**
+ * SP - headline thumbnail video
+ * @param {string} mediaType video or image
+ * @param {string} title 記事タイトル
+ * @param {string} thumbnail thumbnail path
+ * @returns {XML} `figure.post-thumb`
+ * @since 2018-01-11
+ */
+export const SPComponentHeadlineArticleThumbnailVideo = ({ mediaType, title, thumbnail }) => (
+  <figure className={`post-thumb post-thumb-${mediaType}`}>
+    <img className="video-thumbnail" src={thumbnail} alt={title}/>
+    <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" />
+  </figure>
+);
+
+/**
+ * React.popTypes
+ * @type {{mediaType: string, title: string, thumbnail: string}}
+ */
+SPComponentHeadlineArticleThumbnailVideo.propTypes = {
+  mediaType: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string.isRequired,
+  thumbnail: React.PropTypes.string.isRequired,
+};
+
+/**
+ * SP - headline thumbnail image
+ * @param {string} mediaType video or image
+ * @param {string} title 記事タイトル
+ * @param {string} thumbnail thumbnail path
+ * @returns {XML} `figure.post-thumb`
+ * @since 2018-01-11
+ */
+export const SPComponentHeadlineArticleThumbnailImage = ({ mediaType, title, thumbnail }) => (
+  <figure className={`post-thumb post-thumb-${mediaType}`}>
+    <img src={thumbnail} alt={title} />
+  </figure>
+);
+
+/**
+ * React.popTypes
+ * @type {{mediaType: string, title: string, thumbnail: string}}
+ */
+SPComponentHeadlineArticleThumbnailImage.propTypes = {
+  mediaType: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string.isRequired,
+  thumbnail: React.PropTypes.string.isRequired,
+};
+
+/**
+ * SP - headline thumbnail video or image
+ * @param {string} mediaType video or image
+ * @param {string} title 記事タイトル
+ * @param {string} thumbnail thumbnail path
+ * @returns {?XML} `figure.post-thumb`
+ * @since 2018-01-11
+ */
+export const SPComponentHeadlineArticleThumbnail = ({ mediaType, title, thumbnail }) => {
+  switch (mediaType) {
+    case MediaType.IMAGE: {
+      // image
+      return (
+        <SPComponentHeadlineArticleThumbnailImage
+          mediaType={mediaType}
+          title={title}
+          thumbnail={thumbnail}
+        />
+      );
+    }
+    case MediaType.VIDEO: {
+      // video
+      return (
+        <SPComponentHeadlineArticleThumbnailVideo
+          mediaType={mediaType}
+          title={title}
+          thumbnail={thumbnail}
+        />
+      );
+    }
+    default: {
+      // 該当なし
+      return null;
+    }
+  }
+};
+
+/**
+ * React.popTypes
+ * @type {{mediaType: string, title: string, thumbnail: string}}
+ */
+SPComponentHeadlineArticleThumbnail.propTypes = {
+  mediaType: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string.isRequired,
+  thumbnail: React.PropTypes.string.isRequired,
+};
 
 /**
  * sp headline 出力を汎用化
@@ -99,12 +197,19 @@ export default class SPComponentHeadlineArticle extends React.Component {
     return (
       <div className={`board-item board-item-${index}`}>
         <a className="post" href={url} onClick={this.boundGa}>
+          {/*
           <ComponentArticleThumbnail
             mediaType={mediaType}
             thumbnail={thumbnail}
             title={title}
             recommend={false}
             small={true}
+          />
+          */}
+          <SPComponentHeadlineArticleThumbnail
+            mediaType={mediaType}
+            title={title}
+            thumbnail={thumbnail}
           />
           <div className="post-data">
             <h3 className="post-heading">{title}</h3>
