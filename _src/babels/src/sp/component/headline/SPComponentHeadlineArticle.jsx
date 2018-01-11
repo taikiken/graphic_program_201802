@@ -14,7 +14,7 @@
 // import { CategoryLabelNode } from '../../../node/category/CategoryLabelNode';
 
 // view
-import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
+// import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
 
 // Ga
 import { Ga } from '../../../ga/Ga';
