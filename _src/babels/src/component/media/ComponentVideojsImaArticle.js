@@ -308,7 +308,7 @@ export class ComponentVideojsImaArticle extends React.Component {
     const Ads = self.Ads;
     if (!Ads) {
       setTimeout(() => {
-        this.iPadInitPlayer();
+        this.iPhoneInitPlayer();
       }, 25);
     }
     const vast = this.props.video.adUrl.sp;
