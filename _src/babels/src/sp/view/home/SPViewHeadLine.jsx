@@ -43,7 +43,9 @@ export default class SPViewHeadLine extends ViewHeadline {
    * @param {Object} [option={}] callback 関数をセット
    */
   constructor(element, option = {}) {
-    super(element, option);
+    // since 2018-01-11
+    // 第三引数 sp - true 追加
+    super(element, option, true);
     /**
      * bind executeSafely
      * @type {function}
