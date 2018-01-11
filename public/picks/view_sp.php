@@ -32,12 +32,12 @@
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <?php
-    $page['template']         = 'feature';
-    $page['category']['slug'] = 'picks';
-    $page['p']                = 'sportsbull';
-  ?>
   <?php include_once __DIR__.'/../../app/templates/_env.php'; ?>
+  <script>
+    SPBL_ENV.page     = 'feature';
+    SPBL_ENV.category = 'picks';
+    SPBL_ENV.p        = 'sportsbull';
+  </script>
 
   <link rel="canonical" href="https://sportsbull.jp/picks/">
   <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>

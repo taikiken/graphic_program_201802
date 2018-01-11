@@ -40,13 +40,12 @@
   // -----------------------------------------
   ?>
 
-  <?php
-    $page['template']         = 'feature';
-    $page['category']['slug'] = 'picks';
-    $page['p']                = 'au';
-  ?>
   <?php include_once __DIR__.'/../../../app/templates/_env.php'; ?>
-
+  <script>
+    SPBL_ENV.page     = 'feature';
+    SPBL_ENV.category = 'picks';
+    SPBL_ENV.p        = 'au';
+  </script>
 
   <?php
   // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
