@@ -13,25 +13,26 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
+// import { Safety } from '../../data/Safety';
 // import {Path} from '../../app/const/Path';
 
 /**
- * <p>カテゴリー一覧 - 記事のカテゴリー自体の取得<br>
- * category 一覧を取得します</p>
+ * カテゴリー一覧 - 記事のカテゴリー自体の取得
+ * category 一覧を取得します
  *
  * ```
  * GET
  * /api/v1/category
  * ```
  */
-export class Categories extends Action {
+export default class Categories extends Action {
   /**
    * category 一覧を取得します<br>
    * menu 作成など category 全ての category 一覧が必要な時に使用します
-   * @param {Function} [resolve=null] Ajax 成功時の callback
-   * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @param {?function} [resolve=null] Ajax 成功時の callback
+   * @param {?function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( resolve:Function = null, reject:Function = null ) {
-    super( Api.categories(), resolve, reject );
+  constructor(resolve = null, reject = null ) {
+    super(Api.categories(), resolve, reject);
   }
 }

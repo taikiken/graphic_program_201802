@@ -100,7 +100,7 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
     // snap
     if (this.target) {
       const snap = new SPSnap(this.target);
-      snap.init();
+      snap.start();
     }
   }
   /**
@@ -112,7 +112,7 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateIndex(this.state.index);

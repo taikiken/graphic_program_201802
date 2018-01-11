@@ -10,16 +10,16 @@
  *
  */
 
-import {Env} from '../app/Env';
+import Env from '../app/Env';
 import {GaData} from './GaData';
 
 /**
  * 送信データをストックします<br>
  * `ga` 存在が確認できたら順に送信を開始します
- * @type {Array<GaData>}
+ * @type {Array.<GaData>}
  * @private
  */
-let _requests:Array<GaData> = [];
+let gaRequests = [];
 
 /**
  * ga: イベント トラッキング
@@ -46,34 +46,34 @@ export class Ga {
    * @const PAGEVIEW
    * @return {string} 'pageview' を返します
    */
-  static get PAGEVIEW():string {
+  static get PAGEVIEW() {
     return 'pageview';
   }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
   /**
-   * <p>外部からトラッキングコード送信ができるようにします</p>
-   * <p>GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842</p>
-   * @since 2016-06-22
+   * 外部からトラッキングコード送信ができるようにします
+   * - ref: GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
    * @param {string} method 発生場所（関数名）
    * @param {string} category 必須 通常は接点に使用されたオブジェクト（例: Video）
    * @param {string} action 必須 接点の種類（例: play）
    * @param {string} label イベントの分類に便利です（例: Fall Campaign）
-   * @param {Boolean} [eventInteraction=false] オプション イベントをインタラクション以外のイベントとして送信できます。その場合、nonInteraction フィールドを true に指定します（send コマンドの fieldsObject を使用）
+   * @param {boolean} [eventInteraction=false] オプション イベントをインタラクション以外のイベントとして送信できます。その場合、nonInteraction フィールドを true に指定します（send コマンドの fieldsObject を使用）
+   * @since 2016-06-22
    */
-  static click( method:string, category:string, action:string, label:string, eventInteraction:Boolean = false ):void {
+  static click(method, category, action, label, eventInteraction = false) {
     // ----------------------------------------------
     // GA 計測タグ
-    Ga.add( new GaData( method, category, action, label, 0, eventInteraction ) );
+    Ga.add(new GaData(method, category, action, label, 0, eventInteraction));
     // ----------------------------------------------
   }
   /**
    * 送信予約
    * @param {GaData} data 送信するデータ
    */
-  static add( data:GaData ):void {
-    _requests.push( data );
+  static add(data) {
+    gaRequests.push(data);
     Ga.send();
   }
 
@@ -84,7 +84,7 @@ export class Ga {
    * @param {string} [title=''] 記事タイトル
    * @since 2016-11-15 title added
    */
-  static addPage(id, method, title = ''):void {
+  static addPage(id, method, title = '') {
     const data = new GaData(method);
     data.hitType = Ga.PAGEVIEW;
     data.setPage(id, title);
@@ -94,12 +94,12 @@ export class Ga {
    * 送信実行
    * global object `ga` 存在をチェックし送信する
    */
-  static send():void {
+  static send() {
     // ga 存在チェック
-    let ga = self.ga;
-    if ( typeof ga === 'undefined' ) {
+    const ga = self.ga;
+    if (typeof ga === 'undefined') {
       // ga undefined
-      setTimeout( Ga.send, 25 );
+      setTimeout(Ga.send, 25);
       return;
     }
 
@@ -112,13 +112,14 @@ export class Ga {
     // mode flag
     const production = Env.mode === Env.PRODUCTION;
     // _requests 配列の値を全て
-    while( _requests.length > 0 ) {
-      let data:GaData = _requests.shift();
+    while(gaRequests.length > 0) {
+      // @type {GaData}
+      const data = gaRequests.shift();
       // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
-      Ga.tracking( ga, data );
+      Ga.tracking(ga, data);
       if (!production) {
         // Env.PRODUCTION 以外は開発ログを出力します
-        console.warn( `${data.method}: ga, send, `, data);
+        console.warn(`${data.method}: ga, send, `, data);
       }
     }
   }
@@ -154,15 +155,15 @@ export class Ga {
    * @param {GaData} data 送信する GaData Object
    * @return {*} ga 戻り値を返します
    */
-  static tracking( ga:Function, data:GaData ):void {
+  static tracking(ga, data) {
     if (data.page !== null) {
       return Ga.page(ga, data);
     }
-    if ( data.eventInteraction ) {
-      return ga( 'send', data.hitType, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue, GaData.nonInteraction() );
+    if (data.eventInteraction) {
+      return ga('send', data.hitType, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue, GaData.nonInteraction());
     }
 
-    return ga( 'send', data.hitType, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+    return ga('send', data.hitType, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue);
   }
   /**
    * Web版記事詳細無限スクロールに `hitType: 'pageview'` 追加送信
@@ -173,7 +174,7 @@ export class Ga {
    * @return {*} ga 戻り値を返します
    * @since 2016-10-05
    */
-  static page(ga:Function, data:GaData) {
+  static page(ga, data) {
     const sending = { hitType: data.hitType, page: data.page };
     if (data.title !== '') {
       sending.title = data.title;
@@ -181,29 +182,29 @@ export class Ga {
     return ga('send', sending);
   }
   /**
-   * <p>記事詳細での提供元&カテゴリートラッキング</p>
-   * https://github.com/undotsushin/undotsushin/issues/744
+   * 記事詳細での提供元&カテゴリートラッキング
+   * @see https://github.com/undotsushin/undotsushin/issues/744
    *
-   * <pre>
+   * ```
    * 対象スクリーン：/p/ [ 記事ID ]
    * イベントカテゴリ : provider
    * イベントアクション：view
    * イベントラベル：[response.user.name]
    *  APIの response.user.name ex. 運動通信編集部 を設定
-   * </pre>
+   * ```
    *
-   * <pre>
+   * ```
    * 対象スクリーン：/p/ [ 記事ID ]
    * イベントカテゴリ : category
    * イベントアクション：view
    * イベントラベル：[response.categories.label] ex. 海外サッカー
-   * </pre>
+   * ```
    *
    * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
    * @param {string} method 発生場所関数名
    * @since 2016-10-05 ViewSingle から移動
    */
-  static single(single, method = 'Ga.single'):void {
+  static single(single, method = 'Ga.single') {
     let category = 'provider';
     const action = 'view';
     const label = single.user.userName;

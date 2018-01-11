@@ -11,37 +11,37 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
-let Sagen = self.Sagen;
+const Sagen = self.Sagen;
 
 /**
  * メインメニューにかテゴリースラッグを追加
  */
-export class Nav {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Nav is static Class. not use new Nav().' );
-
-    }
-  }
+export default class Nav {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Nav is static Class. not use new Nav().' );
+  //
+  //   }
+  // }
   /**
    * global menu へ slug を css class として挿入
    * @param {string} slug category slug
    */
-  static start( slug:string = 'all' ):void {
-    let target = Dom.get( slug );
+  static start(slug = 'all') {
+    const target = Dom.get( slug );
     if ( target !== null ) {
-      Sagen.Dom.addClass( target, 'current' );
+      Sagen.Dom.addClass(target, 'current');
     }
   }
 }

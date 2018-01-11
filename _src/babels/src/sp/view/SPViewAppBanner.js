@@ -275,7 +275,7 @@ let timer = 0;
  * @see https://github.com/undotsushin/undotsushin/issues/1009
  * @since 2017-05-17
  */
-class AppBanner {
+export class AppBanner {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -425,7 +425,7 @@ class AppBanner {
  * 実行互換のために {@link SPViewAppBanner.init} のみ残し他は削除しました
  * @since 2017-05-17
  */
-export class SPViewAppBanner {
+export default class SPViewAppBanner {
   /**
    * {@link Cookie.APP_BANNER} が無い時 SPViewAppBanner を render しマウントします
    * @param {Element} element div#js-header-appbnr-container

@@ -17,13 +17,16 @@ import {MediaImageNode} from '../../../node/single/MediaImageNode';
 import {SPMediaVideoNode} from './SPMediaVideoNode';
 
 // React
-let React = self.React;
+/**
+ * [library] - React
+ */
+const React = self.React;
 
 /**
  * SP 記事詳細 上部 メインビジュアル（画像・動画）
  * @type {ReactClass}
  */
-export let SPMediaNode = React.createClass( {
+export const SPMediaNode = React.createClass( {
   propTypes: {
     // response.id (記事 Id)
     articleId: React.PropTypes.string.isRequired,
@@ -43,26 +46,25 @@ export let SPMediaNode = React.createClass( {
     };
   },
   render: function() {
-
-    let mediaType = this.props.mediaType;
-    let media = this.props.media;
+    // let mediaType = this.props.mediaType;
+    // let media = this.props.media;
+    const { mediaType, media, isShowImage, articleId, index } = this.props;
 
     // 2016-06-06
     // 記事詳細で画像を表示しない
-    if ( !this.props.isShowImage ) {
+    if (!isShowImage) {
       return null;
     }
-
-    if ( mediaType === MediaType.IMAGE ) {
+    if (mediaType === MediaType.IMAGE) {
       // image type
       return (
         <MediaImageNode
           images={media.images}
         />
       );
-    } else if ( mediaType === MediaType.VIDEO ) {
+    } else if (mediaType === MediaType.VIDEO) {
       // may be video
-      if ( !media.video || ( !media.video.url && !media.video.youtube && !media.video.facebook ) ) {
+      if (!media.video || (!media.video.url && !media.video.youtube && !media.video.facebook)) {
         // not correct video, instead use images
         return (
           <MediaImageNode
@@ -73,9 +75,9 @@ export let SPMediaNode = React.createClass( {
         // show video
         return (
           <SPMediaVideoNode
-            articleId={this.props.articleId}
+            articleId={articleId}
             media={media}
-            index={this.props.index}
+            index={index}
           />
         );
       }

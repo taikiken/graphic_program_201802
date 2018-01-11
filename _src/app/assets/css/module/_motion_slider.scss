@@ -16,7 +16,7 @@
 .hero {
   &-sec {
   }
-  $pickup-height: 400px;
+  $pickup-height: 230px;
 
   &-slider {
     position: relative;
@@ -26,7 +26,7 @@
     overflow: hidden;
 
     &-inner {
-      width: 640px;
+      width: 540px;
       margin: 0 auto;
       overflow: visible;
 
@@ -36,9 +36,18 @@
       }
 
       li {
-        // なぜ消した?
         float: left;
-        width: 640px;
+        width: 540px;
+
+        &.current {
+          a {
+            @include opacity(1);
+
+            &:hover {
+              @include hover-opacity;
+            }
+          }
+        }
 
         a {
           @include link-decoration(#fff, #fff, none, none);
@@ -47,9 +56,10 @@
           width: 100%;
           height: $pickup-height;
           overflow: hidden;
+          @include opacity(0.5);
 
           &:hover {
-            @include hover-opacity;
+            // @include hover-opacity;
 
             .category-label,
             .post-heading {
@@ -61,57 +71,99 @@
             position: absolute;
             bottom: 0;
             left: 0;
+            width: 100%;
           }
 
           .post {
+            //.post-overview
             &-overview {
               position: absolute;
               bottom: 0;
               left: 0;
 
-              padding: 0 30px 24px 30px;
+              padding: 0 16px 24px;
             }
 
+            //.post-category
             &-category {
-              color: #999;
-              font-weight: bold;
+              display: none;
             }
 
+            //.post-heading
             &-heading {
+              width: 508px;
+              overflow: hidden;
+              text-overflow: ellipsis;
               font-weight: bold;
               font-size: fz(24);
+              white-space: nowrap;
             }
 
+            //.post-date
+            //.post-comment-num
             &-date,
             &-comment-num {
-              display: inline-block;
-              font-size: fz(12);
+              display: none;
             }
+          } //.post
 
-            &-comment-num {
-              margin-left: 10px;
-              padding-left: 20px;
-              background: url(/assets/images/index/icon-slider-comment.png) 0 center no-repeat;
-            }
-          }
+          // リニューアルで不要になりました
+          // .post {
+          //   //.post-overview
+          //   &-overview {
+          //     position: absolute;
+          //     bottom: 0;
+          //     left: 0;
+
+          //     padding: 0 30px 24px 30px;
+          //   }
+
+          //   //.post-category
+          //   &-category {
+          //     color: #999;
+          //     font-weight: bold;
+          //   }
+
+          //   //.post-heading
+          //   &-heading {
+          //     font-weight: bold;
+          //     font-size: fz(24);
+          //   }
+
+          //   //.post-date
+          //   //.post-comment-num
+          //   &-date,
+          //   &-comment-num {
+          //     display: inline-block;
+          //     font-size: fz(12);
+          //   }
+
+          //   //.post-comment-num
+          //   &-comment-num {
+          //     margin-left: 10px;
+          //     padding-left: 20px;
+          //     background: url(/assets/images/index/icon-slider-comment.png) 0 center no-repeat;
+          //   }
+          // } //.post
         }
       }
     } //.hero-slider-inner
 
+
+
     &-control {
       position: absolute;
       top: 0;
-      width: 100%;
+      left: 50%;
+      width: 540px;
+      margin-left: -270px;
+
 
       .direction {
         a {
           position: absolute;
-          display: block;
-          width: 40px;
-          height: 40px;
           margin-top: ($pickup-height/2) - 20;
-          background-position: center center;
-          background-repeat: no-repeat;
+          @extend .sprite-index;
           @include hide-text;
 
           &:hover {
@@ -120,64 +172,19 @@
         }
 
         &-prev {
-          left: 20px;
-          background-image: url(/assets/images/index/btn-slider-prev.png);
+          left: -48px;
+          @include sprite( $index-btn-slider-prev );
         }
 
         &-next {
-          right: 20px;
-          background-image: url(/assets/images/index/btn-slider-next.png);
+          right: -48px;
+          @include sprite( $index-btn-slider-next );
         }
       }
-
-      // 階層が深すぎるので取り出す
-      // @since 2017-03-28
-      //.pager {
-      //  position: absolute;
-      //  top: 370px;
-      //  left: 50%;
-      //  width: 100%;
-      //  margin-left: -320px;
-      //
-      //  ul {
-      //    width: 640px;
-      //    text-align: center;
-      //    letter-spacing: ls(inline-block);
-      //  }
-      //
-      //  li {
-      //    display: inline-block;
-      //    letter-spacing: normal;
-      //
-      //    + li {
-      //      margin-left: 15px;
-      //    }
-      //    // current mark
-      //    // @since 2017-03-28
-      //    &.current {
-      //      a {
-      //        background-color: $highlight-secondary-color;
-      //      }
-      //    }
-      //  }
-      //
-      //  a {
-      //    display: block;
-      //    width: 6px;
-      //    height: 6px;
-      //    background-color: #999;
-      //    border-radius: 100%;
-      //    @include hide-text;
-      //
-      //    &.active,
-      //    &:hover {
-      //      background-color: $highlight-secondary-color;
-      //    }
-      //  }
-      //}
     } //.hero-slider-control
   }
 }
+
 // max 10 から無限にカルーセル増やす仕様変更に対応するために CSS animation から JS へ変更する
 // @see https://github.com/undotsushin/undotsushin/issues/1481
 // @see https://github.com/undotsushin/undotsushin/issues/1462
@@ -763,13 +770,13 @@
 // pager style
 .pager {
   position: absolute;
-  top: 370px;
+  top: 204px;
   left: 50%;
   width: 100%;
-  margin-left: -320px;
+  margin-left: -270px;
 
   ul {
-    width: 640px;
+    width: 540px;
     text-align: center;
     letter-spacing: ls(inline-block);
   }
@@ -779,7 +786,7 @@
     letter-spacing: normal;
 
     + li {
-      margin-left: 15px;
+      margin-left: 10px;
     }
     // current mark
     // @since 2017-03-28
@@ -809,6 +816,10 @@
   }
 }
 
+
+
+
+
 // ---------------------------------------------------------------------
 // cover setting
 // @since 2017-03-28
@@ -817,7 +828,7 @@
 // #pickup-container
 // carousel slide container
 #pickup-container {
-  $slider-width: 640px;
+  $slider-width: 540px;
 
   .hero-slider-inner {
     position: relative;

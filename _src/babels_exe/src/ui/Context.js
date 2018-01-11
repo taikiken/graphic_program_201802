@@ -10,26 +10,26 @@
  *
  */
 
-let _symbol = Symbol();
+// const _symbol = Symbol();
 
 /**
  * img tag 上での right click を禁止します
  */
-export class Context {
-  /**
-   * right click を禁止 singleton class です
-   * @static
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-      throw new Error( 'Context is static Class. not use new Single().' );
-    }
-  }
+export default class Context {
+  // /**
+  //  * right click を禁止 singleton class です
+  //  * @static
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //     throw new Error( 'Context is static Class. not use new Single().' );
+  //   }
+  // }
   /**
    * document.body で contextmenu を listener します
    */
-  static disable():void {
+  static disable() {
     document.body.addEventListener( 'contextmenu', Context.onContext, false );
     document.body.addEventListener( 'mousedown', Context.onContext, false );
     document.body.addEventListener( 'selectstart', Context.onContext, false );
@@ -40,7 +40,7 @@ export class Context {
    * <code>event.preventDefault()</code>, <code>event.stopPropagation()</code> を行います</p>
    * @param {Event} event document.body contextmenu event
    */
-  static onContext( event:Event ):void {
+  static onContext(event) {
     if ( event.target.nodeName.toLowerCase() === 'img' || event.currentTarget.nodeName.toLowerCase() === 'img' ) {
       event.preventDefault();
       event.stopPropagation();

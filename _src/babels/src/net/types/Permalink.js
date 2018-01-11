@@ -12,26 +12,26 @@
 
 
 /**
- * <p>Types.url へ追加可能なpathがあるかどうかを管理します</p>
+ * Types.url へ追加可能なpathがあるかどうかを管理します
  *
  * ```
  * new Permalink( [ 'category', '' ] );
  * ```
  *
- * <p>searchのようにどんなワードでも良い場合は "*" を指定します</p>
+ * searchのようにどんなワードでも良い場合は "*" を指定します
  *
  * ```
- *new Permalink( [ '*' ] );
+ * new Permalink(['*']);
  * ```
  */
 export class Permalink {
   /**
    * パスオプションを指定、ない時は空配列
    *
-   * @param {Array} [paths] 追加 path を配列で設定
-   * @param {Boolean} [need=false] 追加 path が必須かを設定します。 true: 必須, false: オプション
+   * @param {Array.<string>} [paths=[]] 追加 path を配列で設定
+   * @param {boolean} [need=false] 追加 path が必須かを設定します。 true: 必須, false: オプション
    */
-  constructor( paths:Array<string> = [], need:Boolean = false ) {
+  constructor(paths = [], need = false) {
     /**
      * 追加 path を配列で設定
      * @type {Array.<string>}
@@ -40,7 +40,7 @@ export class Permalink {
     this._paths = paths;
     /**
      * 追加 path が必須かを設定します
-     * @type {Boolean}
+     * @type {boolean}
      * @private
      */
     this._need = need;
@@ -50,43 +50,32 @@ export class Permalink {
   // ---------------------------------------------------
   /**
    * オプションパスが必須かのプロパティ
-   * @return {Boolean} オプションパスが必須かどうかを返します true: 必須
+   * @return {boolean} オプションパスが必須かどうかを返します true: 必須
    */
-  get require():Boolean {
-
+  get require() {
     return this._need;
-
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * option path 数
-   * @return {Number} paths数を返します
+   * @return {number} paths数を返します
    */
-  length():Number {
-
+  length() {
     return this._paths.length;
-
   }
-
   /**
    * @param {string} path 調べたいオプションパス
-   * @return {Boolean} 指定パスが存在するかの真偽値を返します
+   * @return {boolean} 指定パスが存在するかの真偽値を返します
    */
-  has( path:string ):Boolean {
-
-    let paths = this._paths;
-    let result = paths.indexOf( path ) !== -1;
-
-    if ( !result ) {
-
-      result = paths.indexOf( '*' ) !== -1;
-
+  has(path) {
+    const paths = this._paths;
+    let result = paths.indexOf(path) !== -1;
+    if (!result) {
+      result = paths.indexOf('*') !== -1;
     }
-
     return result;
-
   }
 
 }

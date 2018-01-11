@@ -22,10 +22,10 @@ import {Validate} from '../../util/Validate';
 import {Exif} from '../../util/Exif';
 
 // ui
-import {Thumbnail} from '../../ui/Thumbnail';
+import Thumbnail from '../../ui/Thumbnail';
 
 // data
-import {Result} from '../../data/Result';
+// import {Result} from '../../data/Result';
 import {Form} from '../../data/Form';
 import {ErrorMessage} from '../../data/ErrorMessage';
 import {Safety} from '../../data/Safety';
@@ -34,7 +34,7 @@ import {Safety} from '../../data/Safety';
 import {StatusDae} from '../../dae/StatusDae';
 
 // node
-import {ErrorNode} from '../error/ErrorNode';
+// import {ErrorNode} from '../error/ErrorNode';
 import {ChangeAvatarNode} from '../avator/ChangeAvatorNode';
 
 // event
@@ -44,23 +44,30 @@ import {MessageStatus} from '../../event/MessageStatus';
 // model
 import {Model} from '../../model/Model';
 import {ModelAccountEdit} from '../../model/settings/ModelAccountEdit';
+import ComponentError from '../../component/error/ComponentError';
 
 // react
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/**
+ * [library] - React
+ */
+const React = self.React;
+// const ReactDOM = self.ReactDOM;
 
 // Sagen
-let Sagen = self.Sagen;
+/**
+ * [library] - Sagen
+ */
+const Sagen = self.Sagen;
 
 // ------------------------------------------
 // 設定 基本情報 表示 / 変更
 // ------------------------------------------
 /**
  * 設定 基本情報 form element
- * @type {*|Function|ReactClass}
+ * @type {ReactClass}
  * @private
  */
-let SettingInputNode = React.createClass( {
+const SettingInputNode = React.createClass( {
   propTypes: {
     empty: React.PropTypes.string,
     avatar: React.PropTypes.string,
@@ -91,7 +98,7 @@ let SettingInputNode = React.createClass( {
       email: new ErrorMessage(),
       password: new ErrorMessage(),
       name: new ErrorMessage(),
-      profile_picture: new ErrorMessage()
+      profilePicture: new ErrorMessage()
     };
     this.ie = Sagen.Browser.IE.is();
     this.callback = null;
@@ -103,276 +110,127 @@ let SettingInputNode = React.createClass( {
     // avatar rotate
     this.rotate = 0;
     this.timer = 0;
+    // ---
+    // refs. やめる - 2017-12-27
+    this.settingsElement = null;
+    // ---
+    const {
+      email,
+      password,
+      name,
+      bio,
+      avatar,
+      sp,
+      size,
+    } = this.props;
 
     return {
       entered: false,
       error: false,
 
-      email: this.props.email,
-      password: this.props.password,
-      name: this.props.name,
-      bio: this.props.bio,
+      email,
+      password,
+      name,
+      bio,
       // input[type="file"] 入力値
       picture: '',
       // 入力済みの profile picture path
-      avatar: this.props.avatar,
-      size: this.props.sp ? 90 : this.props.size,
-      loading: ''
+      avatar,
+      size: sp ? 90 : size,
+      loading: '',
     };
-  },
-  render: function() {
-
-    let zoneEntered = this.state.entered ? 'entered' : '';
-
-    let errorClass = ( keyName:string ) => {
-      return this.errors[ keyName ].error ? 'error' : '';
-    };
-    let message = ( keyName:string ) => {
-      return this.errors[ keyName ].message;
-    };
-
-    let stageClass = () => {
-      // return this.props.avatar !== this.state.avatar ? 'show-thumbnail' : '';
-      // input:file を常に有効にする
-      return '';
-    };
-
-    let avatar = Safety.image( this.state.avatar, Empty.SETTING_AVATAR );
-    let loggedIn = Safety.same( avatar, Empty.SETTING_AVATAR );
-    if ( !Safety.isBase64(avatar) ) {
-      avatar = Empty.refresh(avatar);
-    }
-
-    let imgStyle = {
-      // 'background': `url(${avatar}) no-repeat center center`,
-      'backgroundImage': `url(${avatar})`,
-      'backgroundRepeat': 'no-repeat',
-      'backgroundPosition': 'center center',
-      'backgroundSize': 'cover'
-    };
-
-    if ( this.width !== 0 && this.height !== 0 ) {
-
-      let size = this.state.size;
-      let width = this.width;
-      let height = this.height;
-      let bgWidth, bgHeight;
-
-      if ( width > height ) {
-        // width が大きい
-        bgHeight = size;
-        bgWidth = Math.ceil( bgHeight / height * width );
-      } else if ( width < height ) {
-        // width が小さい
-        bgWidth = size;
-        bgHeight = Math.ceil( bgWidth / width * height );
-      } else {
-        // width, height 等しい
-        bgWidth = size;
-        bgHeight = size;
-      }
-
-      imgStyle.backgroundSize = `${bgWidth}px ${bgHeight}px`;
-
-    }
-
-    // orientation
-    if ( this.rotate !== 0 ) {
-
-      imgStyle.transform = `rotate(${this.rotate}deg)`;
-
-    }
-
-    // console.log( 'imgStyle ', imgStyle );
-
-    return (
-      <form ref="settings" className={'loading-root ' + this.state.loading} encType="multipart/form-data" onSubmit={this.submitHandler}>
-        <fieldset className="fieldset-step-2">
-          {/* email */}
-          <span className={`form-parts ${errorClass('email')}`}>
-            <span className="setting-form-mail form-input">
-              <input
-                type="text"
-                name="email"
-                value={this.state.email}
-                onChange={this.emailChange}
-                placeholder={Message.PLACEHOLDER_EMAIL}
-              />
-            </span>
-            <ErrorNode message={message('email')} />
-          </span>
-          {/* password */}
-          <span className={'form-parts ' + errorClass('password')}>
-            <span className="setting-form-pw form-input">
-              <input
-                type="password"
-                placeholder={Message.PLACEHOLDER_PWD}
-                name="password"
-                value={this.state.password}
-                onChange={this.passwordChange}
-              />
-            </span>
-            <ErrorNode message={message('password')} />
-          </span>
-          {/* name */}
-          <span className={'form-parts ' + errorClass('name')}>
-            <span className="setting-form-name form-input">
-              <input
-                type="text"
-                placeholder={Message.PLACEHOLDER_NAME}
-                name="name"
-                value={this.state.name}
-                onChange={this.nameChange}
-              />
-            </span>
-            <ErrorNode message={message('name')} />
-          </span>
-          {/* bio */}
-          <span className="form-parts">
-            <span className={'setting-form-job form-input'}>
-              <input
-                type="text"
-                placeholder={Message.PLACEHOLDER_BIO}
-                name="bio"
-                value={this.state.bio}
-                onChange={this.bioChange}
-              />
-            </span>
-          </span>
-
-          {/* profile_picture */}
-          <div className={'setting-form-avatar ' + stageClass()}>
-            <h2 className="setting-form-avatar-heading">{Message.PLACEHOLDER_PICTURE}</h2>
-            <div className={'form-parts ' + errorClass('profile_picture')}>
-              <div
-                className={'setting-form-avatar-dropArea ' + zoneEntered}
-                onDragOver={this.handleDragOver}
-                onDragEnter={this.handleDragEnter}
-                onDragLeave={this.handleDragLeave}
-                onDrop={this.handleDrop}
-              >
-                <div className={'avatar-stage'}>
-                  <sapn className={`avatar-container ${loggedIn}`}>
-                    <span className="avatar-block" style={imgStyle}>
-                      <img src={Empty.THUMB_EMPTY} alt=""/>
-                      {/*
-                      横長画像だと下が切れる問題
-                      <img src={avatar} alt=""/>
-                      */}
-                    </span>
-                  </sapn>
-                  <ChangeAvatarNode
-                    show={this.props.avatar !== this.state.avatar}
-                    handler={this.avatarChangeHandler}
-                  />
-                </div>
-                <input
-                  type="file"
-                  name="profile_picture"
-                  accept="image/*"
-                  value={this.state.picture}
-                  onChange={this.pictureChange}
-                  className="setting-form-picture form-input"
-                />
-              </div>
-              <ErrorNode message={message('profile_picture')} />
-            </div>
-          </div>
-        </fieldset>
-        {/* button */}
-        <div className="form-parts">
-          <span className="setting-form-submit mod-btnB01">
-            <input type="submit" value={Message.BUTTON_SAVE} />
-          </span>
-        </div>
-        <div className="loading-spinner" />
-      </form>
-    );
-
-  },
-  // -------------------------------------------------------
-  // delegate
-  componentDidMount: function() {
-    if ( this.callback === null ) {
-      let callback = {};
-      this.callback = callback;
-      callback[ Model.COMPLETE ] = this.done;
-      callback[ Model.UNDEFINED_ERROR ] = this.fail;
-      callback[ Model.RESPONSE_ERROR ] = this.fail;
-    }
-  },
-  componentWillUnMount: function() {
-    this.dispose();
   },
   // -------------------------------------------------------
   // input changes
   // password
-  emailChange: function( event ) {
-    this.setState( {email: event.target.value} );
+  emailChange: function(event) {
+    this.setState({ email: event.target.value });
   },
   // password
-  passwordChange: function( event ) {
-    this.setState( {password: event.target.value} );
+  passwordChange: function(event) {
+    this.setState({ password: event.target.value });
   },
   // name
-  nameChange: function( event ) {
-    this.setState( {name: event.target.value} );
+  nameChange: function(event) {
+    this.setState({ name: event.target.value });
   },
   // bio
-  bioChange: function( event ) {
-    this.setState( {bio: event.target.value} );
+  bioChange: function(event) {
+    this.setState({ bio: event.target.value });
+  },
+  disposeThumbnailEvent: function() {
+    const thumbnail = this.thumbnail;
+    if (thumbnail) {
+      thumbnail.off(Thumbnail.LOAD, this.avatarLoad);
+      thumbnail.off(Thumbnail.ERROR, this.avatarError);
+    }
   },
   // file
-  pictureChange: function( event ) {
+  pictureChange: function(event) {
     // console.log( 'pictureChange ', event );
-    let inputFile = event.target.value;
-    this.errors.profile_picture.reset();
+    const inputFile = event.target.value;
+    this.errors.profilePicture.reset();
 
-    if ( inputFile === '' ) {
+    if (inputFile === '') {
       return;
     }
 
-    if ( !Safety.isImg( inputFile ) ) {
+    if (!Safety.isImg(inputFile)) {
       // this.messageStatus.flush( MessageStatus.message( 'プロフィール写真に使用可能な画像は .png, .jpg, .gif です。' ), MessageStatus.ERROR, this.props.sp );
-      this.errors.profile_picture.message = ErrorTxt.INVALID_IMAGE;
-      this.setState( {picture: ''} );
+      this.errors.profilePicture.message = ErrorTxt.INVALID_IMAGE;
+      this.setState({ picture: '' });
       return;
     }
 
     // this.picture = inputFile;
-    this.setState( {picture: inputFile} );
+    this.setState({ picture: inputFile });
 
-    if ( !Thumbnail.detect() ) {
+    if (!Thumbnail.detect()) {
       // not support FileReader
       return;
     }
 
-    if ( inputFile !== '' ) {
+    // if (inputFile !== '') {
+    //
+    //   let files:FileList = event.target.files;
+    //
+    //   if ( files !== null && typeof files !== 'undefined' && typeof files.length !== 'undefined' && files.length > 0 ) {
+    //     this.thumbnail = null;
+    //     let thumbnail = new Thumbnail( files[ 0 ] );
+    //     this.thumbnail = thumbnail;
+    //     thumbnail.on( Thumbnail.LOAD, this.avatarLoad );
+    //     thumbnail.on( Thumbnail.ERROR, this.avatarError );
+    //
+    //     // this.width = 0;
+    //     // this.height = 0;
+    //     // this.rotate = 0;
+    //
+    //     thumbnail.make();
+    //
+    //   }
+    // }
+    const files = event.target.files;
 
-      let files:FileList = event.target.files;
-
-      if ( files !== null && typeof files !== 'undefined' && typeof files.length !== 'undefined' && files.length > 0 ) {
-        this.thumbnail = null;
-        let thumbnail = new Thumbnail( files[ 0 ] );
-        this.thumbnail = thumbnail;
-        thumbnail.on( Thumbnail.LOAD, this.avatarLoad );
-        thumbnail.on( Thumbnail.ERROR, this.avatarError );
-
-        // this.width = 0;
-        // this.height = 0;
-        // this.rotate = 0;
-
-        thumbnail.make();
-
-      }
+    // if (files !== null && typeof files !== 'undefined' && typeof files.length !== 'undefined' && files.length > 0 ) {
+    if (files && typeof files.length !== 'undefined' && files.length > 0) {
+      this.disposeThumbnailEvent();
+      this.thumbnail = null;
+      const thumbnail = new Thumbnail(files[0]);
+      this.thumbnail = thumbnail;
+      thumbnail.on(Thumbnail.LOAD, this.avatarLoad);
+      thumbnail.on(Thumbnail.ERROR, this.avatarError);
+      // this.width = 0;
+      // this.height = 0;
+      // this.rotate = 0;
+      thumbnail.make();
     }
   },
   // -------------------------------------------------------
   // thumbnail make
   // after picture change
-  avatarLoad: function( event:Object ):void {
+  avatarLoad: function(event) {
     this.avatarDispose();
-    clearTimeout( this.timer );
+    clearTimeout(this.timer);
 
     this.avatarClear();
 
@@ -387,29 +245,31 @@ let SettingInputNode = React.createClass( {
     //   _this.setState( { avatar: event.img } );
     // }, 50 );
 
-    this.timer = setTimeout( () => {
+    this.timer = setTimeout(() => {
       this.width = event.width;
       this.height = event.height;
-      this.rotate = this.avatarRotate( event.orientation );
-
-      this.setState( { avatar: event.img } );
-    }, 50 );
-
+      this.rotate = this.avatarRotate(event.orientation);
+      this.setState({ avatar: event.img });
+    }, 50);
     // this.width = event.width;
     // this.height = event.height;
     // this.rotate = this.avatarRotate( event.orientation );
     //
     // this.setState( { avatar: event.img } );
   },
-  avatarClear: function():void {
+  avatarClear: function() {
     this.width = 0;
     this.height = 0;
     this.rotate = 0;
-
     this.setState( { avatar: Empty.USER_EMPTY } );
   },
-  avatarRotate: function( rotate:Number ):Number {
-    if ( rotate < 0 ) {
+  /**
+   * rotate check
+   * @param {number} rotate rotate state No.
+   * @return {number} rotate degree 返します
+   */
+  avatarRotate: function(rotate) {
+    if (rotate < 0) {
       return 0;
     }
 
@@ -439,34 +299,31 @@ let SettingInputNode = React.createClass( {
   },
   // -------------------------------------------------------
   // drag / drop
-
   // drag over
-  handleDragOver: function( event:Event ) {
+  handleDragOver: function(event) {
     event.preventDefault();
     // console.log( 'drag start---------' );
   },
   // drag enter
-  handleDragEnter: function( event ) {
-    if ( this.ie ) {
+  handleDragEnter: function(event) {
+    if (this.ie) {
       event.preventDefault();
       return;
     }
-
-    this.setState( { entered: true } );
+    this.setState({ entered: true });
   },
   // drag leave
-  handleDragLeave: function( event ) {
-    if ( this.ie ) {
+  handleDragLeave: function(event) {
+    if (this.ie) {
       event.preventDefault();
       return;
     }
-
-    this.setState( { entered: false } );
+    this.setState({ entered: false });
   },
   // drop
-  handleDrop: function( event ) {
+  handleDrop: function(event) {
     // console.log( 'drop ++++++++++++', event );
-    if ( this.ie ) {
+    if (this.ie) {
       event.preventDefault();
       return;
     }
@@ -474,30 +331,30 @@ let SettingInputNode = React.createClass( {
     // check file type
     let files;
 
-    if ( event.dataTransfer !== null && typeof event.dataTransfer !== 'undefined' ) {
+    if (event.dataTransfer !== null && typeof event.dataTransfer !== 'undefined') {
       files = event.dataTransfer.files;
-    } else if ( event.target !== null && event.target !== 'undefined' ) {
+    } else if (event.target !== null && event.target !== 'undefined') {
       files = event.target.files;
     }
 
-    if ( files !== null && typeof files !== 'undefined' && typeof files.length !== 'undefined' && files.length > 0 ) {
+    // if (files !== null && typeof files !== 'undefined' && typeof files.length !== 'undefined' && files.length > 0) {
+    if (files && typeof files.length !== 'undefined' && files.length > 0) {
       // files 有効
-      let file = files[ 0 ];
+      const file = files[0];
 
-      if ( file.type.match( /image.*/ ) ) {
+      if (file.type.match(/image.*/) ) {
         // image file,
         // input type files の drop へ event を送る
-        this.setState( { entered: false } );
-
+        this.setState({ entered: false });
       } else {
         // illegal stop all
         event.preventDefault();
-        this.setState( { entered: false } );
+        this.setState({ entered: false });
       }
     } else {
       // illegal stop all
       event.preventDefault();
-      this.setState( { entered: false } );
+      this.setState({ entered: false });
     }
 
   },
@@ -505,104 +362,104 @@ let SettingInputNode = React.createClass( {
   // submit click 通知
   submitHandler: function( event:Event ) {
     event.preventDefault();
-    this.setState( { loading: 'loading' } );
+    this.setState({ loading: 'loading' });
     this.prepareNext();
   },
   // validate
-  prepareNext: function():void {
+  prepareNext: function() {
     // error 消去
     this.reset();
 
     let count = 0;
-    let errors = this.errors;
+    const errors = this.errors;
+    const { email, password, name } = this.state;
 
     // email
-    let email = this.state.email;
-    if ( email === '' ) {
+    // const email = this.state.email;
+    if (email === '') {
       errors.email.message = ErrorTxt.EMAIL_EMPTY;
       ++count;
-    } else if ( !Validate.email( email ) ) {
+    } else if (!Validate.email(email)) {
       errors.email.message = ErrorTxt.EMAIL_INVALID;
       ++count;
     }
 
     // password
-    let password = this.state.password;
-    if ( password !== '' ) {
+    // let password = this.state.password;
+    if (password !== '') {
       // 入力があった時だけ validate します
-      if ( password.length < 8 ) {
+      if (password.length < 8) {
         errors.password.message = ErrorTxt.PASSWORD_SHORT;
         ++count;
-      } else if ( !Validate.alphaNum( password ) ) {
+      } else if (!Validate.alphaNum(password)) {
         errors.password.message = ErrorTxt.PASSWORD_INVALID;
         ++count;
       }
     }
 
     // name
-    let name = this.state.name;
-    if ( name === '' ) {
+    // let name = this.state.name;
+    if (name === '') {
       errors.name.message = ErrorTxt.NAME_EMPTY;
       ++count;
     }
 
     // error がない時だけ
-    if ( count === 0 ) {
+    if (count === 0) {
       // error がないのでリクエストする
       this.request();
     } else {
       // エラー表示
       this.error();
     }
-
   },
   // request
   request: function():void {
-    let formData = Form.element( ReactDOM.findDOMNode( this.refs.settings ) );
-
+    // const formData = Form.element( ReactDOM.findDOMNode( this.refs.settings ) );
+    const formData = Form.element(this.settingsElement);
+    // model instance
     let model = this.model;
-    if ( model === null ) {
-      model = new ModelAccountEdit( formData, this.callback );
+    if (model === null) {
+      model = new ModelAccountEdit(formData, this.callback);
       this.model = model;
     } else {
       model.data = formData;
     }
-
     // ajax start
     model.start();
   },
   next: function() {
     // next step
-    this.status.dispatch( { type: SettingsStatus.ACCOUNT_COMPLETE } );
+    this.status.dispatch({ type: SettingsStatus.ACCOUNT_COMPLETE });
   },
   // ---------------------------------------------------
   // avatar change click
   // from ChangeAvatar
   avatarChangeHandler: function() {
-    this.setState( { picture: '', avatar: this.props.avatar } );
+    this.setState({ picture: '', avatar: this.props.avatar });
   },
   // ---------------------------------------------------
   error: function() {
     // input error
     // show error
-    this.setState( { error: true, loading: '' } );
+    this.setState({ error: true, loading: '' });
   },
-  done: function( result:Result ) {
+  done: function(result) {
     // console.log( 'done ', result );
-    this.setState( { loading: '' } );
+    this.setState({ loading: '' });
 
-    if ( result.status.code === 200 ) {
+    if (result.status.code === 200) {
       // OK -> next step
       this.next();
 
       // flush message
-      let status = new StatusDae( result.status );
-      this.messageStatus.flush( MessageStatus.message( status.userMessage ), MessageStatus.SUCCESS, this.props.sp );
+      const status = new StatusDae(result.status);
+      this.messageStatus.flush(MessageStatus.message(status.userMessage), MessageStatus.SUCCESS, this.props.sp);
     }
   },
-  fail: function( error:Object ) {
+  fail: function(error) {
     // console.log( 'fail ', error.errors, error.result );
-    this.setState( { loading: '' } );
+    this.setState({ loading: '' });
 
     let errors;
     // error,
@@ -610,50 +467,237 @@ let SettingInputNode = React.createClass( {
     // null error になることがあるので try 文で実行する
     try {
       errors = error.result.response.errors;
-    } catch ( e ) {
+    } catch (e) {
+      console.warn('[SettingInputNode].fail l.465', e);
       return;
     }
-    
-    if ( Array.isArray( errors ) ) {
 
-      for ( var errorObject of errors ) {
-
-        for ( var key in errorObject ) {
-
-          if ( errorObject.hasOwnProperty( key ) ) {
-            this.errors[ key ].message = errorObject[ key ];
-          }
-
-        }// for in
-
-      }// for of
-
-    }// if ( Array.isArray( errors ) )
-    this.setState( { error: true } );
+    // if ( Array.isArray( errors ) ) {
+    //
+    //   for ( var errorObject of errors ) {
+    //
+    //     for ( var key in errorObject ) {
+    //
+    //       if ( errorObject.hasOwnProperty( key ) ) {
+    //         this.errors[ key ].message = errorObject[ key ];
+    //       }
+    //
+    //     }// for in
+    //
+    //   }// for of
+    //
+    // }// if ( Array.isArray( errors ) )
+    if (Array.isArray(errors)) {
+      errors.map((errorObject) => {
+        const list = Object.keys(errorObject);
+        list.map((key) => (this.errors[key].message = errorObject[key]));
+      });
+    }
+    this.setState({ error: true });
   },
   reset: function() {
     this.errors.email.reset();
     this.errors.password.reset();
     this.errors.name.reset();
-    this.errors.profile_picture.reset();
-    this.setState( { error: false } );
+    this.errors.profilePicture.reset();
+    this.setState({ error: false });
   },
-  dispose: function() {
+  // dispose: function() {
+  //
+  // },
+  // -------------------------------------------------------
+  // delegate
+  componentDidMount: function() {
+    if (this.callback === null) {
+      const callback = {};
+      this.callback = callback;
+      callback[Model.COMPLETE] = this.done;
+      callback[Model.UNDEFINED_ERROR] = this.fail;
+      callback[Model.RESPONSE_ERROR] = this.fail;
+    }
+  },
+  // componentWillUnMount: function() {
+  //   this.dispose();
+  // },
+  render: function() {
+    const zoneEntered = this.state.entered ? 'entered' : '';
+    // @param {string} keyName
+    const errorClass = (keyName) => {
+      return this.errors[keyName].error ? 'error' : '';
+    };
+    // @param {string} keyName
+    const message = (keyName) => {
+      return this.errors[keyName].message;
+    };
 
-  }
-} );
+    const stageClass = () => {
+      // return this.props.avatar !== this.state.avatar ? 'show-thumbnail' : '';
+      // input:file を常に有効にする
+      return '';
+    };
+
+    let avatar = Safety.image(this.state.avatar, Empty.SETTING_AVATAR);
+    const loggedIn = Safety.same(avatar, Empty.SETTING_AVATAR);
+    if (!Safety.isBase64(avatar)) {
+      avatar = Empty.refresh(avatar);
+    }
+
+    const imgStyle = {
+      // 'background': `url(${avatar}) no-repeat center center`,
+      'backgroundImage': `url(${avatar})`,
+      'backgroundRepeat': 'no-repeat',
+      'backgroundPosition': 'center center',
+      'backgroundSize': 'cover'
+    };
+
+    if (this.width !== 0 && this.height !== 0) {
+      const size = this.state.size;
+      const width = this.width;
+      const height = this.height;
+      let bgWidth, bgHeight;
+
+      if (width > height) {
+        // width が大きい
+        bgHeight = size;
+        bgWidth = Math.ceil((bgHeight / height) * width);
+      } else if (width < height) {
+        // width が小さい
+        bgWidth = size;
+        bgHeight = Math.ceil((bgWidth / width) * height);
+      } else {
+        // width, height 等しい
+        bgWidth = size;
+        bgHeight = size;
+      }
+      imgStyle.backgroundSize = `${bgWidth}px ${bgHeight}px`;
+    }
+
+    // orientation
+    if (this.rotate !== 0) {
+      imgStyle.transform = `rotate(${this.rotate}deg)`;
+    }
+
+    // console.log( 'SettingInputNode.imgStyle ', imgStyle );
+
+    return (
+      <form
+        ref={(element) => (this.settingsElement = element)}
+        className={`loading-root ${this.state.loading}`}
+        encType="multipart/form-data"
+        onSubmit={this.submitHandler}
+      >
+        <fieldset className="fieldset-step-2">
+          {/* email */}
+          <span className={`form-parts ${errorClass('email')}`}>
+            <span className="setting-form-mail form-input">
+              <input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.emailChange}
+                placeholder={Message.PLACEHOLDER_EMAIL}
+              />
+            </span>
+            <ComponentError message={message('email')} />
+          </span>
+          {/* password */}
+          <span className={`form-parts ${errorClass('password')}`}>
+            <span className="setting-form-pw form-input">
+              <input
+                type="password"
+                placeholder={Message.PLACEHOLDER_PWD}
+                name="password"
+                value={this.state.password}
+                onChange={this.passwordChange}
+              />
+            </span>
+            <ComponentError message={message('password')} />
+          </span>
+          {/* name */}
+          <span className={`form-parts ${errorClass('name')}`}>
+            <span className="setting-form-name form-input">
+              <input
+                type="text"
+                placeholder={Message.PLACEHOLDER_NAME}
+                name="name"
+                value={this.state.name}
+                onChange={this.nameChange}
+              />
+            </span>
+            <ComponentError message={message('name')} />
+          </span>
+          {/* bio */}
+          <span className="form-parts">
+            <span className={'setting-form-job form-input'}>
+              <input
+                type="text"
+                placeholder={Message.PLACEHOLDER_BIO}
+                name="bio"
+                value={this.state.bio}
+                onChange={this.bioChange}
+              />
+            </span>
+          </span>
+
+          {/* profile_picture */}
+          <div className={`setting-form-avatar ${stageClass()}`}>
+            <h2 className="setting-form-avatar-heading">{Message.PLACEHOLDER_PICTURE}</h2>
+            <div className={`form-parts ${errorClass('profilePicture')}`}>
+              <div
+                className={`setting-form-avatar-dropArea ${zoneEntered}`}
+                onDragOver={this.handleDragOver}
+                onDragEnter={this.handleDragEnter}
+                onDragLeave={this.handleDragLeave}
+                onDrop={this.handleDrop}
+              >
+                <div className={'avatar-stage'}>
+                  <sapn className={`avatar-container ${loggedIn}`}>
+                    <span className="avatar-block" style={imgStyle}>
+                      <img src={Empty.THUMB_EMPTY} alt=""/>
+                      {/*
+                      横長画像だと下が切れる問題
+                      <img src={avatar} alt=""/>
+                      */}
+                    </span>
+                  </sapn>
+                  <ChangeAvatarNode
+                    show={this.props.avatar !== this.state.avatar}
+                    handler={this.avatarChangeHandler}
+                  />
+                </div>
+                <input
+                  type="file"
+                  name="profile_picture"
+                  accept="image/*"
+                  value={this.state.picture}
+                  onChange={this.pictureChange}
+                  className="setting-form-picture form-input"
+                />
+              </div>
+              <ComponentError message={message('profilePicture')} />
+            </div>
+          </div>
+        </fieldset>
+        {/* button */}
+        <div className="form-parts">
+          <span className="setting-form-submit mod-btnB01">
+            <input type="submit" value={Message.BUTTON_SAVE} />
+          </span>
+        </div>
+        <div className="loading-spinner" />
+      </form>
+    );
+
+  },
+});
 
 /**
- * <p>基本情報設定 基底 React Component</p>
- *
- * <pre>
- *   SettingsIndexNode
- *      SettingInputNode
- * </pre>
- *
+ * 基本情報設定 基底 React Component
+ * - {@link SettingsIndexNode}
+ *   - {@link SettingInputNode}
  * @type {ReactClass}
  */
-export let SettingsIndexNode = React.createClass( {
+export const SettingsIndexNode = React.createClass( {
   propTypes: {
     email: React.PropTypes.string.isRequired,
     password: React.PropTypes.string,

@@ -38,7 +38,13 @@ import { Loc } from '../../util/Loc';
 import ComponentWowCompleteModal from '../modal/ComponentWowCompleteModal';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
+/**
+ * [library] - ReactDOM
+ */
 const ReactDOM = self.ReactDOM;
 
 /**

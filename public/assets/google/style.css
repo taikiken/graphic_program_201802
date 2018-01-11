@@ -18,3 +18,40 @@
 ## Google DFP
 
 */
+
+/* /531683568/mobile/mobile_index_bottom */
+#div-gpt-ad-1514446255569-0 {
+  box-sizing  : content-box;
+  background  : #eee;
+  padding-top : 25px;
+  width       : 100%;
+  height      : 250px;
+  text-align  : center;
+}
+
+
+/*
+
+adgene
+
+*/
+
+/* 一面 - ヘッドライン */
+html.mobile .adgLink .adgTextContainer .adgPr {
+  color: #888;
+}
+
+/* 一覧 */
+html.mobile .news-ad .adsWrapper .adsSponsored {
+  color: #888;
+}
+
+html.mobile .news-ad .adsWrapper .adsImgContainer {
+  width: 110px;
+  height: auto;
+}
+
+html.mobile .news-ad .adsWrapper .adsImgContainer img {
+  width: 100%;
+  height: auto;
+}

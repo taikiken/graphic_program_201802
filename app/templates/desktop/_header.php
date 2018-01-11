@@ -242,7 +242,14 @@ if (
   </div><!-- /.dialogue-notice -->
 
   */?>
+  <?php
+  // since 2017-12-18
+  // お知らせ表示
+  // ref: UNDO_SPBL-150 【課題管理】一面リニューアル / ユーザーへのお知らせ表示
+  ?>
+  <div id="js-announce-container"></div>
 <?php
 endif;
 // header 表示条件 end
 ?>
+
