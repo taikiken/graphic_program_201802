@@ -20,7 +20,7 @@ import {Safety} from '../../../data/Safety';
 
 // node
 import {HTML5VideoNode} from '../../../node/media/HTML5VideoNode';
-import {VideojsImaNode} from '../../../node/media/VideojsImaNode';
+// import {VideojsImaNode} from '../../../node/media/VideojsImaNode';
 
 // ---
 // @since 2016-11-13
@@ -44,14 +44,12 @@ export let SPMediaVideoNode = React.createClass( {
     media: React.PropTypes.object.isRequired
   },
   render: function() {
-
-    let media = this.props.media;
-
+    const media = this.props.media;
     // 2016-02-22
     // api JSON が最新版に対応していないので
     // やむおえずの対応
-    let type = media.video.type || media.video.player;
-
+    const type = media.video.type || media.video.player;
+    // console.log('SPMediaVideoNode.render type', type);
     switch ( type ) {
 
       case VideoType.BRIGHTCOVE:
@@ -71,9 +69,7 @@ export let SPMediaVideoNode = React.createClass( {
         // console.warn(`illegal type and player. type: ${type}`);
         // break;
         return null;
-
     }
-
   },
   video: function( media ) {
 
@@ -104,8 +100,19 @@ export let SPMediaVideoNode = React.createClass( {
     // @since 2016-11-13
     if (this.props.index < 0) {
       // 記事詳細先頭
+      // console.log('SPMediaVideoNode.videojsima use VideojsImaNode', this.props);
+      // return (
+      //   <VideojsImaNode
+      //     articleId={this.props.articleId}
+      //     video={video}
+      //     poster={poster}
+      //     caption={caption}
+      //     playImage={Empty.VIDEO_PLAY_SP}
+      //   />
+      // );
+      // since 2018-01-11 fix change component
       return (
-        <VideojsImaNode
+        <ComponentVideojsImaSingles
           articleId={this.props.articleId}
           video={video}
           poster={poster}
