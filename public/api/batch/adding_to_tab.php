@@ -4,7 +4,7 @@ include $INCLUDEPATH."local.php";
 ////// 検索対象 //////
 $search_word_category_list =
   [
-//    '平昌五輪'                => 'pyeongchang2018', // 平昌五輪
+    '平昌五輪'                => 'pyeongchang2018', // 平昌五輪
     'アジアプロ野球チャンピオン' => 'wbc', // WBC
   ];
 
