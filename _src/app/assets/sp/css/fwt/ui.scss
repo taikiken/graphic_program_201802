@@ -125,7 +125,7 @@ $gray: #f8fafc;
     @include notice;
     @include plr;
     color :#515769;
-    margin: 10px 0;
+    margin-bottom: 10px;
     a {
       color: $orange;
     }
@@ -315,7 +315,7 @@ $gray: #f8fafc;
     background-size: contain;
     display: block;
     width: 300px;
-    height: 200px;
+    height: 80px;
     position: absolute;
     bottom: -5px;
     left: 340px;
@@ -342,6 +342,7 @@ $gray: #f8fafc;
             // word-wrap: break-word;
             a {
               color: $orange;
+              display: block;
             }
           }
         }
@@ -380,7 +381,7 @@ $gray: #f8fafc;
           padding-left: 10px;
           h3 {
             font-weight: bold;
-            font-size: 16px;
+            font-size: 12px;
             margin-bottom: 10px;
           }
           p {
@@ -391,9 +392,10 @@ $gray: #f8fafc;
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
+            font-size: 10px;
           }
           &__date {
-            font-size: 12px;
+            font-size: 10px;
             color: #999999;
             display: block;
           }

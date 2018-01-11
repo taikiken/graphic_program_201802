@@ -67,9 +67,6 @@ if (isset($_GET['app'])) {
 
   <?php include_once __DIR__.'/../../_head_bottom.php'; ?>
 
-<script>
-  console.log(SPBL_ENV);
-</script>
 </head>
 <body class="appbnr-disable">
 <div class="whole <?php echo $page['template_classname']; ?>">
@@ -77,7 +74,7 @@ if (isset($_GET['app'])) {
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <header class="head-sec">
+  <header class="head-sec app_hidden">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->

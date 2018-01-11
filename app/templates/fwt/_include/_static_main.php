@@ -237,13 +237,15 @@
   </div>
 </section>
 
+<?php
+/*
 <section class="fwt--related">
   <h2><img src="../assets/images/fwt/related-heading.png" alt="RELATED">関連記事</h2>
   <ul>
     <li>
-      <a href="/p/250549/">
+      <a href="/p/250565/">
         <div class="fwt--related__image-wrap">
-          <img src="https://img.sportsbull.jp/thumbnail1/img2018011121450861041200.png" alt="">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011123291658879000.png" alt="">
         </div>
         <div class="fwt--related__text-wrap">
           <h3>【100秒動画】FWTも認める世界級パウダースノー白馬村</h3>
@@ -251,24 +253,26 @@
           <p>「FWT」から「世界最高水準の雪山があり、1月の大会が開催できる世界で唯一のスキーリゾート」とも言われている長野県白馬村。白馬村での大会※開催を前に白馬の魅力と「FWT」の凄さが解る100秒動画が公開された。誰もが興奮する圧巻の100秒、この冬だからこそ体感してほしい。</p>
           <?php endif; ?>
           <span class="fwt--related__text-wrap__category">FWT</span>
-          <span class="fwt--related__text-wrap__date">1月11日（木） 21:30</span>
+          <span class="fwt--related__text-wrap__date">1月11日（木） 23:26</span>
         </div>
       </a>
     </li>
     <li>
-      <a href="/p/250537/">
+      <a href="/p/250564/">
         <div class="fwt--related__image-wrap">
-          <img src="https://img.sportsbull.jp/thumbnail1/img2018011121172189921800.png" alt="">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011123260774225000.png" alt="">
         </div>
         <div class="fwt--related__text-wrap">
           <h3>【100秒動画】初心者でもわかるFWT</h3>
           <?php if ($page['ua'] === 'desktop') : ?>
-          <p>年々進化し続ける「FWT（Freeride World Tour）」が2018年1月、長野県白馬村※で開催される。運命の大一番を前に「FWT」解説動画が公開。FWT初心者にも入門編として解りやすい100秒動画となっている。</p>
+          <p>年々進化し続ける「FWT（Freeride World 年々進化し続ける「FWT（Freeride World Tour）」が2018年1月、長野県白馬村※で開催される。運命の大一番を前に「FWT」解説動画が公開。FWT初心者にも入門編として解りやすい100秒動画となっている。</p>
           <?php endif; ?>
           <span class="fwt--related__text-wrap__category">FWT</span>
-          <span class="fwt--related__text-wrap__date">1月11日（木） 21:07</span>
+          <span class="fwt--related__text-wrap__date">1月11日（木） 23:24</span>
         </div>
       </a>
     </li>
   </ul>
 </section>
+*/
+?>
