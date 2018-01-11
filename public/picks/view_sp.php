@@ -33,9 +33,9 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   <?php
-    $SPBL_ENV['template'] = 'feature';
-    $SPBL_ENV['category'] = 'picks';
-    $SPBL_ENV['p']        = 'sportsbull';
+    $page['template'] = 'feature';
+    $page['category'] = 'picks';
+    $page['p']        = 'sportsbull';
   ?>
   <?php include_once __DIR__.'/../../app/templates/_env.php'; ?>
 
