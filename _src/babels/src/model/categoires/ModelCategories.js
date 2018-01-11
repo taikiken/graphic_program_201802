@@ -14,7 +14,7 @@
 import {Model} from '../Model';
 
 // action
-import {Categories} from '../../action/categories/Categories';
+import Categories from '../../action/categories/Categories';
 // dae
 import {CategoriesDae} from '../../dae/categories/CategoriesDae';
 // data
