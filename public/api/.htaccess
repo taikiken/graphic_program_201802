@@ -88,6 +88,9 @@ RewriteRule ^v1/category/([a-z0-9]+) /api/ver1/read/category.php?category=$1 [L]
 RewriteRule ^v1/category /api/ver1/read/categorylist.php [L]
 RewriteRule ^v1/category_static /api/ver1/static/category.json [L]
 
+#COMPETITION
+RewriteRule ^v1/competition/([0-9]+) /api/ver1/read/competition.php?id=$1 [L]
+
 #INITIALIZE
 RewriteRule ^v1/initialize /api/ver1/read/initialize.php [L]
 

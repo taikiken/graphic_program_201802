@@ -287,6 +287,50 @@ SQL;
     );
   endif;
 
+  // UNDO_SPBL-309
+  if ( $category === 'parasports' ) :
+    $week_list = array( '日', '月', '火', '水', '木', '金', '土');
+
+    $sql = <<<SQL
+SELECT 
+    cmp.* ,
+    sports.name as sport_name
+FROM
+    competitions cmp
+INNER JOIN
+    u_categories uc ON cmp.category_id = uc.id
+LEFT JOIN
+    sports ON cmp.sport_id = sports.id
+WHERE
+    uc.name_e = '{$category}'
+AND
+    cmp.is_public IS TRUE 
+ORDER BY
+    start_date_time DESC;
+SQL;
+
+    $o->query($sql);
+    foreach ($o->fetch_all() as $f) {
+
+      $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
+      $f['sport_id'] = !empty($f['sport_id']) ? $f['sport_id'] . '.png' : '';
+
+      $DateTime = new DateTime($f['start_date_time']);
+      $start_date = $DateTime->format('m月d日');
+      $day_of_week = $week_list[(int)$DateTime->format('w')];
+      $start_date = $start_date . '（' . $day_of_week .'）';
+
+      $categoriesinfo['board'][] = [
+        'sport_name'        => $f['sport_name'],
+        'competition_name'  => $f['name'],
+        'start_date_time'   => $start_date,
+        'icon'              => $f['sport_id'],
+        'link'              => '/result/' . $f['id'] . '/',
+      ];
+    }
+
+  endif;
+
 
   if (!empty($category)) {
     $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
