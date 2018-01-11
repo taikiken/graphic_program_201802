@@ -6,14 +6,14 @@
       <!-- /531683568/fwt-ad/fwt-sidebar-rectangle -->
       <script>
         googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/fwt-ad/fwt-sidebar-rectangle', [300, 250], 'div-gpt-ad-1514452795199-0').addService(googletag.pubads());
+          googletag.defineSlot('/531683568/fwt-ad/fwt-sidebar-rectangle', [300, 250], 'div-gpt-ad-1515647154550-0').addService(googletag.pubads());
           googletag.pubads().enableSingleRequest();
           googletag.enableServices();
         });
       </script>
-      <div id='div-gpt-ad-1514452795199-0' style='height:250px; width:300px;'>
+      <div id='div-gpt-ad-1515647154550-0' style='height:250px; width:300px;'>
       <script>
-      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1514452795199-0'); });
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515647154550-0'); });
       </script>
       </div>
       <!-- // /531683568/fwt-ad/fwt-sidebar-rectangle -->
@@ -56,14 +56,14 @@
       <!-- /531683568/fwt-ad/fwt-pc-sidebar-600-300 -->
       <script>
         googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/fwt-ad/fwt-pc-sidebar-600-300', [300, 600], 'div-gpt-ad-1514459374281-0').addService(googletag.pubads());
+          googletag.defineSlot('/531683568/fwt-ad/fwt-pc-sidebar-600-300', [300, 600], 'div-gpt-ad-1515646969328-0').addService(googletag.pubads());
           googletag.pubads().enableSingleRequest();
           googletag.enableServices();
         });
       </script>
-      <div id='div-gpt-ad-1514459374281-0' style='height:600px; width:300px;'>
+      <div id='div-gpt-ad-1515646969328-0' style='height:600px; width:300px;'>
       <script>
-      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1514459374281-0'); });
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515646969328-0'); });
       </script>
       </div>
       <!-- // /531683568/fwt-ad/fwt-pc-sidebar-600-300 -->

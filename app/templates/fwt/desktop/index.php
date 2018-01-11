@@ -25,6 +25,7 @@
 
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/libs/jquery2/jquery.min.js?v="></script>
   <link rel="stylesheet" href="/assets/css/<?php echo $page['template_classname']; ?>/ui.css?v=<?php echo $page['version']; ?>">
   <link href="https://fonts.googleapis.com/css?family=Mukta+Vaani:800" rel="stylesheet">
 
@@ -85,36 +86,40 @@
 
           <ul class="fwt--footer-rectangle">
             <li>
+
               <!-- /531683568/fwt-ad/fwt-pc-footer-rectangle1 -->
               <script>
                 googletag.cmd.push(function() {
-                  googletag.defineSlot('/531683568/fwt-ad/fwt-pc-footer-rectangle1', [300, 250], 'div-gpt-ad-1514450812075-0').addService(googletag.pubads());
+                  googletag.defineSlot('/531683568/fwt-ad/fwt-pc-footer-rectangle1', [300, 250], 'div-gpt-ad-1515647523981-0').addService(googletag.pubads());
                   googletag.pubads().enableSingleRequest();
                   googletag.enableServices();
                 });
               </script>
-              <div id='div-gpt-ad-1514450812075-0' style='height:250px; width:300px;'>
+              <div id='div-gpt-ad-1515647523981-0' style='height:250px; width:300px;'>
               <script>
-              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1514450812075-0'); });
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515647523981-0'); });
               </script>
               </div>
               <!-- // /531683568/fwt-ad/fwt-pc-footer-rectangle1 -->
+
             </li>
             <li>
+
               <!-- /531683568/fwt-ad/fwt-pc-footer-rectangle2 -->
               <script>
                 googletag.cmd.push(function() {
-                  googletag.defineSlot('/531683568/fwt-ad/fwt-pc-footer-rectangle2', [300, 250], 'div-gpt-ad-1514451248461-0').addService(googletag.pubads());
+                  googletag.defineSlot('/531683568/fwt-ad/fwt-pc-footer-rectangle2', [300, 250], 'div-gpt-ad-1515647582515-0').addService(googletag.pubads());
                   googletag.pubads().enableSingleRequest();
                   googletag.enableServices();
                 });
               </script>
-              <div id='div-gpt-ad-1514451248461-0' style='height:250px; width:300px;'>
+              <div id='div-gpt-ad-1515647582515-0' style='height:250px; width:300px;'>
               <script>
-              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1514451248461-0'); });
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515647582515-0'); });
               </script>
               </div>
               <!-- // /531683568/fwt-ad/fwt-pc-footer-rectangle2 -->
+
             </li>
           </ul>
 
@@ -132,6 +137,57 @@
   </div><!-- /.body-sec -->
 
 <script src="/assets/js/extremesports.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
+<?php
+// # パンくずリスト
+// ==============================
+  $BREADCRUMB = array(
+    array(
+      'label' => 'Freeride World Tour 2018 ライブ配信',
+      'path'  => '/fwt/'
+    ),
+  );
+?>
+
+
+<script>
+// ▼文字列を省略して「…」を付与
+jQuery(function($) {
+  $('.fwt--related p').each(function() {
+    var $target = $(this);
+    // オリジナルの文章を取得する
+    var html = $target.html();
+    // 対象の要素を、高さにautoを指定し非表示で複製する
+    var $clone = $target.clone();
+    $clone
+      .css({
+        display: 'none',
+        position : 'absolute',
+        overflow : 'visible'
+      })
+      .width($target.width())
+      .height('auto');
+    // DOMを一旦追加
+    $target.after($clone);
+    // 指定した高さになるまで、1文字ずつ消去していく
+    while((html.length > 0) && ($clone.height() > $target.height())) {
+      html = html.substr(0, html.length - 1);
+      $clone.html(html + '...');
+    }
+    // 文章を入れ替えて、複製した要素を削除する
+    $target.html($clone.html());
+    $clone.remove();
+  });
+});
+</script>
+
+<style>
+.fwt--related p {
+  overflow: hidden;
+  width: 428px;
+  height: 4.5em;
+}
+</style>
 
 <?php
 

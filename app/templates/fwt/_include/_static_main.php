@@ -8,23 +8,25 @@
  */
 ?>
 
-
 <div class="fwt-intro">
 
   <?php if ($page['ua'] == 'desktop') : ?>
-  <script>
-    googletag.cmd.push(function() {
-      googletag.defineSlot('/531683568/fwt-ad/fwt-pc-bigbanner', [728, 90], 'div-gpt-ad-1514452403302-0').addService(googletag.pubads());
-      googletag.pubads().enableSingleRequest();
-      googletag.enableServices();
-    });
-  </script>
-  <div id='div-gpt-ad-1514452403302-0' style='height:90px; width:728px;'>
-  <script>
-  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1514452403302-0'); });
-  </script>
-  </div>
-  <!-- // /531683568/fwt-ad/fwt-pc-bigbanner -->
+
+		<!-- /531683568/fwt-ad/fwt-pc-bigbanner -->
+		<script>
+		  googletag.cmd.push(function() {
+		    googletag.defineSlot('/531683568/fwt-ad/fwt-pc-bigbanner', [728, 90], 'div-gpt-ad-1515647345812-0').addService(googletag.pubads());
+		    googletag.pubads().enableSingleRequest();
+		    googletag.enableServices();
+		  });
+		</script>
+		<div id='div-gpt-ad-1515647345812-0' style='height:90px; width:728px;'>
+		<script>
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515647345812-0'); });
+		</script>
+		</div>
+		<!-- // /531683568/fwt-ad/fwt-pc-bigbanner -->
+
   <?php else : ?>
     <div class="fwt--sp-banner">
       <!-- /531683568/fwt-ad/fwt-sp-bigbanner1 -->
@@ -48,7 +50,7 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <div class="fwt-intro__link-app">
+  <div class="fwt-intro__link-app app_hidden">
     <a href="https://app.adjust.com/ckq556?deep_link=sportsbull%3A%2F%2F" target="_blank">アプリでライブ配信開始の通知を受け取る</a>
   </div>
   <?php
@@ -57,6 +59,7 @@
   ?>
 
 </div>
+
 <section class="fwt--about">
   <h2><img src="../assets/images/fwt/about-heading.png" alt="ABOUT">FWTとは</h2>
   <p>
@@ -68,7 +71,7 @@
   </p>
   <img id="readMore" src="../assets/sp/images/fwt/text-read-more.png" alt="READ MORE">
   <div class="fwt--about__movie-wrap">
-    <iframe src="https://www.youtube.com/embed/-m6LoUNYZhQ" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/-m6LoUNYZhQ?showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
   </div>
 </section>
 
@@ -99,7 +102,7 @@
         <h5>流動性</h5>
       </div>
       <div class="fwt--judgeing__text-wrap">
-        <p>ストップ・アンド・ゴーが多すぎるライダーは減点されます。最初から最後まで、長いトラバースや、ラインを失うこと、登って逆戻りした場合は減点となります。また、ジャンプの前に長い時間ストップした場合も原点になります。</p>
+        <p>ストップ・アンド・ゴーが多すぎるライダーは減点されます。最初から最後まで、長いトラバースや、ラインを失うこと、登って逆戻りした場合は減点となります。また、ジャンプの前に長い時間ストップした場合も減点になります。</p>
       </div>
     </li>
     <li>
@@ -108,7 +111,7 @@
         <h5>ジャンプ</h5>
       </div>
       <div class="fwt--judgeing__text-wrap">
-        <p>ストップ・アンド・ゴーが多すぎるライダーは減点されます。最初から最後まで、長いトラバースや、ラインを失うこと、登って逆戻りした場合は減点となります。また、ジャンプの前に長い時間ストップした場合も原点になります。</p>
+        <p>ジャンプは、フリーライドの大会で非常に重要な要素です。クールなスタイルとアグレッシブなジャンプは大きく加点されます。大きさ、入り方、空中でのトリック着地、全体的なコントロールが採点の基準になります。</p>
       </div>
     </li>
     <li>
@@ -117,7 +120,7 @@
         <h5>技術</h5>
       </div>
       <div class="fwt--judgeing__text-wrap">
-        <p>ストップ・アンド・ゴーが多すぎるライダーは減点されます。最初から最後まで、長いトラバースや、ラインを失うこと、登って逆戻りした場合は減点となります。また、ジャンプの前に長い時間ストップした場合も原点になります。</p>
+        <p>アルペンスキーや基礎スキーで言われるスキーの技術のことです。コントロールを失った際にそれがライダーの技術不足が原因であった場合、このセクションが減点されます。他の選手がターンを刻んでいた箇所で横滑りを行ったりすることも減点対象です。</p>
       </div>
     </li>
   </ul>
@@ -153,7 +156,7 @@
     </li>
     <li>
       <img src="../assets/images/fwt/feature-figure2.jpg" alt="楠泰 輔">
-      <div class="fwt--featured__name-jp">楠泰 輔</div>
+      <div class="fwt--featured__name-jp">楠 泰輔</div>
       <div class="fwt--featured__name-en">Taisuke Kusunoki</div>
       <div class="fwt--featured__type">SKI</div>
     </li>
@@ -226,7 +229,7 @@
         </tr>
         <tr>
           <th>WEB</th>
-          <td><a href="http://www.freerideworldtour.com/" target="_blank">http://www.freerideworldtour.com/</a></td>
+          <td><a href="http://www.freerideworldtour.com/" target="_blank">FWT公式サイト(英語)</a></td>
         </tr>
       </tbody>
     </table>
@@ -238,62 +241,32 @@
   <h2><img src="../assets/images/fwt/related-heading.png" alt="RELATED">関連記事</h2>
   <ul>
     <li>
-      <a href="">
+      <a href="/p/250549/">
         <div class="fwt--related__image-wrap">
-          <img src="../assets/images/fwt/tmb_article.jpg" alt="">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011121450861041200.png" alt="">
         </div>
         <div class="fwt--related__text-wrap">
-          <h3>FWT 2017 ハイライト</h3>
+          <h3>【100秒動画】FWTも認める世界級パウダースノー白馬村</h3>
           <?php if ($page['ua'] === 'desktop') : ?>
-          <p>世界で唯一最大のフリーライドスキー・スノーボードの大会「Freeride World Tour 2018」。日本初開催となる今大会は白馬を開幕戦として、カナダ、アンドラ、オーストリア、スイスと…</p>
+          <p>「FWT」から「世界最高水準の雪山があり、1月の大会が開催できる世界で唯一のスキーリゾート」とも言われている長野県白馬村。白馬村での大会※開催を前に白馬の魅力と「FWT」の凄さが解る100秒動画が公開された。誰もが興奮する圧巻の100秒、この冬だからこそ体感してほしい。</p>
           <?php endif; ?>
           <span class="fwt--related__text-wrap__category">FWT</span>
-          <span class="fwt--related__text-wrap__date">1月18日（木） 22:04</span>
+          <span class="fwt--related__text-wrap__date">1月11日（木） 21:30</span>
         </div>
       </a>
     </li>
     <li>
-      <a href="">
+      <a href="/p/250537/">
         <div class="fwt--related__image-wrap">
-          <img src="../assets/images/fwt/tmb_article.jpg" alt="">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011121172189921800.png" alt="">
         </div>
         <div class="fwt--related__text-wrap">
-          <h3>FWT 2017 ハイライト</h3>
+          <h3>【100秒動画】初心者でもわかるFWT</h3>
           <?php if ($page['ua'] === 'desktop') : ?>
-          <p>世界で唯一最大のフリーライドスキー・スノーボードの大会「Freeride World Tour 2018」。日本初開催となる今大会は白馬を開幕戦として、カナダ、アンドラ、オーストリア、スイスと…</p>
+          <p>年々進化し続ける「FWT（Freeride World Tour）」が2018年1月、長野県白馬村※で開催される。運命の大一番を前に「FWT」解説動画が公開。FWT初心者にも入門編として解りやすい100秒動画となっている。</p>
           <?php endif; ?>
           <span class="fwt--related__text-wrap__category">FWT</span>
-          <span class="fwt--related__text-wrap__date">1月18日（木） 22:04</span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <div class="fwt--related__image-wrap">
-          <img src="../assets/images/fwt/tmb_article.jpg" alt="">
-        </div>
-        <div class="fwt--related__text-wrap">
-          <h3>FWT 2017 ハイライト</h3>
-          <?php if ($page['ua'] === 'desktop') : ?>
-          <p>世界で唯一最大のフリーライドスキー・スノーボードの大会「Freeride World Tour 2018」。日本初開催となる今大会は白馬を開幕戦として、カナダ、アンドラ、オーストリア、スイスと…</p>
-          <?php endif; ?>
-          <span class="fwt--related__text-wrap__category">FWT</span>
-          <span class="fwt--related__text-wrap__date">1月18日（木） 22:04</span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <div class="fwt--related__image-wrap">
-          <img src="../assets/images/fwt/tmb_article.jpg" alt="">
-        </div>
-        <div class="fwt--related__text-wrap">
-          <h3>FWT 2017 ハイライト</h3>
-          <?php if ($page['ua'] === 'desktop') : ?>
-          <p>世界で唯一最大のフリーライドスキー・スノーボードの大会「Freeride World Tour 2018」。日本初開催となる今大会は白馬を開幕戦として、カナダ、アンドラ、オーストリア、スイスと…</p>
-          <?php endif; ?>
-          <span class="fwt--related__text-wrap__category">FWT</span>
-          <span class="fwt--related__text-wrap__date">1月18日（木） 22:04</span>
+          <span class="fwt--related__text-wrap__date">1月11日（木） 21:07</span>
         </div>
       </a>
     </li>
