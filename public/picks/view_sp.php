@@ -33,9 +33,9 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   <?php
-    $page['template'] = 'feature';
-    $page['category'] = 'picks';
-    $page['p']        = 'sportsbull';
+    $page['template']         = 'feature';
+    $page['category']['slug'] = 'picks';
+    $page['p']                = 'sportsbull';
   ?>
   <?php include_once __DIR__.'/../../app/templates/_env.php'; ?>
 

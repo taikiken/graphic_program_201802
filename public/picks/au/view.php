@@ -41,9 +41,9 @@
   ?>
 
   <?php
-    $page['template'] = 'feature';
-    $page['category'] = 'picks';
-    $page['p']        = 'au';
+    $page['template']         = 'feature';
+    $page['category']['slug'] = 'picks';
+    $page['p']                = 'au';
   ?>
   <?php include_once __DIR__.'/../../../app/templates/_env.php'; ?>
 
