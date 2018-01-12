@@ -68,6 +68,7 @@ export class ComponentSingles extends React.Component {
       home: React.PropTypes.bool.isRequired,
       // login 済みかのフラッグ
       sign: React.PropTypes.bool.isRequired,
+      // 2018-01-12 sp flag 追加 - 平昌で powered by image path 違うため
       sp: React.PropTypes.bool.isRequired,
     };
   }

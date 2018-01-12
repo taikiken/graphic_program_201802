@@ -131,7 +131,7 @@ export default class ViewSingles extends ViewArchiveMasonryInfinite {
     // this.firstRendered = false;
     // this.secondRendered = false;
     /**
-     * sp flag
+     * sp flag 追加 - 平昌で powered by image path 違うため
      * @type {boolean}
      * @since 2018-01-12
      */

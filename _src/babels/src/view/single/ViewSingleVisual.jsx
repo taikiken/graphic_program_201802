@@ -9,8 +9,6 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
-
 // 2016-03-15
 // design 変更により タイトル と メイン画像 を分離出力する必要が出たので作成する
 
@@ -20,7 +18,7 @@ import View from '../View';
 // import {SingleDae} from '../../dae/SingleDae';
 
 // node
-import {MediaNode} from '../../node/single/MediaNode';
+// import {MediaNode} from '../../node/single/MediaNode';
 import ComponentMedia from '../../component/media/ComponentMedia';
 
 // React
@@ -52,8 +50,13 @@ export default class ViewSingleVisual extends View {
      * @type {SingleDae}
      */
     this.single = single;
+    /**
+     * sp flag - 平昌 powered by 画像パス切替に使用します
+     * @type {boolean}
+     * @since 2018-01-12
+     */
     this.sp = sp;
-    console.log('ViewSingleVisual single', single);
+    // console.log('ViewSingleVisual single', single);
   }
   /**
    * render 処理を開始します

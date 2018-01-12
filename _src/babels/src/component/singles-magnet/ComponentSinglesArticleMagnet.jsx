@@ -15,7 +15,7 @@
 
 // node
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
-import { MediaNode } from '../../node/single/MediaNode';
+// import { MediaNode } from '../../node/single/MediaNode';
 
 // component/categories
 import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
@@ -119,6 +119,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
       single: React.PropTypes.object.isRequired,
       sign: React.PropTypes.bool.isRequired,
       index: React.PropTypes.number.isRequired,
+      // 2018-01-12 sp flag 追加 - 平昌で powered by image path 違うため
       sp: React.PropTypes.bool.isRequired,
     };
   }

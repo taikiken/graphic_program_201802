@@ -28,12 +28,12 @@ const React = self.React;
  */
 export const ComponentMediaImagePowered = ({ single, sp }) => {
   const keywords = single.keywords.keywords;
-  console.log('ComponentMediaImagePowered keywords', keywords);
+  // console.log('ComponentMediaImagePowered keywords', keywords);
   if (!keywords || !Array.isArray(keywords) || !keywords.length) {
     return null;
   }
   const pyeongchang2018 = keywords.some((keyword) => (keyword === '平昌五輪2018ハイライト'));
-  console.log('ComponentMediaImagePowered', pyeongchang2018);
+  console.log('ComponentMediaImagePowered', pyeongchang2018, keywords);
   if (!pyeongchang2018) {
     return null;
   }
@@ -95,7 +95,7 @@ const ComponentMediaImage = ({ images, single, sp }) => {
   // 画像がない記事の時にセットされているのは
   // large と medium と thumbnail らしい
   // original から large と medium と順に探していく
-  console.log('ComponentMediaImage images', images);
+  // console.log('ComponentMediaImage images', images);
   // 1. original
   let original = Safety.image(images.original, '');
   // 2. large

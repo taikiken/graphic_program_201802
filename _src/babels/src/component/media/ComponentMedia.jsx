@@ -16,6 +16,7 @@ import ComponentMediaImage from './ComponentMediaImage';
 
 // node
 import { MediaVideoNode } from '../../node/single/MediaVideoNode';
+import { SingleDae } from '../../dae/SingleDae';
 // import { ImagesDae } from '../../dae/theme/ImagesDae';
 // import { VideoDae } from '../../dae/media/VideoDae';
 
@@ -24,6 +25,18 @@ import { MediaVideoNode } from '../../node/single/MediaVideoNode';
  */
 const React = self.React;
 
+/**
+ * 記事詳細メインビジュアル出力制御を行います
+ * - mediaType で分岐処理を行います
+ * @param {string} articleId 記事ID
+ * @param {string} mediaType media type, image / video
+ * @param {*} media media object
+ * @param {boolean} isShowImage 2016-06-06 記事詳細で画像を表示するかどうか flag
+ * @param {SingleDae} single 記事詳細データ
+ * @param {number} index 記事表示位置, -1: 記事詳細先頭
+ * @param {boolean} sp sp flag - powered by 画像パス切り替えに使用します
+ * @return {?XML} {@link ComponentMediaImage} or {@link MediaVideoNode}
+ */
 const ComponentMedia = ({
                           articleId,
                           mediaType,
@@ -35,9 +48,7 @@ const ComponentMedia = ({
                           index,
                           sp,
                              }) => {
-  console.log('ComponentMedia', articleId, isShowImage, mediaType, sp, media.images);
   // 2016-06-06
-  // 記事詳細で画像を表示しない
   if (!isShowImage) {
     return null;
   }
@@ -45,6 +56,8 @@ const ComponentMedia = ({
   const images = media.images;
   // @type {VideoDae}
   const video = media.video;
+  // 記事詳細で画像を表示しない
+  console.log('ComponentMedia', articleId, isShowImage, mediaType, sp, images);
   // output
   switch (mediaType) {
     case MediaType.IMAGE: {
@@ -84,6 +97,17 @@ const ComponentMedia = ({
   }
 };
 
+/**
+ * React.propTypes
+ * @type {{
+ *   articleId: string,
+ *   mediaType: string,
+ *   media: object,
+ *   isShowImage: boolean,
+ *   index: number,
+ *   sp: boolean
+ * }}
+ */
 ComponentMedia.propTypes = {
   articleId: React.PropTypes.string.isRequired,
   mediaType: React.PropTypes.string.isRequired,
@@ -94,6 +118,7 @@ ComponentMedia.propTypes = {
   // @since 2016-11-13
   index: React.PropTypes.number.isRequired,
   sp: React.PropTypes.bool.isRequired,
+  single: React.PropTypes.instanceOf(SingleDae).isRequired,
   // images: React.PropTypes.instanceOf(ImagesDae).isRequired,
   // video: React.PropTypes.instanceOf(VideoDae).isRequired,
 };
