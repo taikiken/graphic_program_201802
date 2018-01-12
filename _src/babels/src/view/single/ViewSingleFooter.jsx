@@ -142,21 +142,28 @@ export default class ViewSingleFooter extends View {
     //     this.setState( { single: single } );
     //   }
     // } );
-    if (this._rendered === null) {
-      // this._rendered = ReactDOM.render(
-      //   React.createElement( FooterDom, { single: singleDae } ),
-      //   element
-      // );
-      // @since 2016-09-24 changed
-      this._rendered = ReactDOM.render(
-        <ComponentSingleFooter
-          single={singleDae}
-          callback={this.boundSafely}
-        />,
-        this.element
-      );
-    } else {
-      this._rendered.updateSingle( singleDae );
-    }
+    // if (this._rendered === null) {
+    //   // this._rendered = ReactDOM.render(
+    //   //   React.createElement( FooterDom, { single: singleDae } ),
+    //   //   element
+    //   // );
+    //   // @since 2016-09-24 changed
+    //   this._rendered = ReactDOM.render(
+    //     <ComponentSingleFooter
+    //       single={singleDae}
+    //       callback={this.boundSafely}
+    //     />,
+    //     this.element
+    //   );
+    // } else {
+    //   this._rendered.updateSingle( singleDae );
+    // }
+    ReactDOM.render(
+      <ComponentSingleFooter
+        single={singleDae}
+        callback={this.boundSafely}
+      />,
+      this.element,
+    );
   }
 }

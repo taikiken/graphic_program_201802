@@ -165,19 +165,25 @@ export default class ViewRelated extends View {
     // } );
 
     // 関連記事 dom 生成
-    if (this._rendered === null) {
-      // this._rendered = ReactDOM.render(
-      //   React.createElement( ArticleDom, { list: related } ),
-      //   element
-      // );
-      this._rendered = ReactDOM.render(
-        <ComponentSingleRelated
-          list={related}
-        />,
-        this.element,
-      );
-    } else {
-      this._rendered.updateList(related);
-    }
+    // if (this._rendered === null) {
+    //   // this._rendered = ReactDOM.render(
+    //   //   React.createElement( ArticleDom, { list: related } ),
+    //   //   element
+    //   // );
+    //   this._rendered = ReactDOM.render(
+    //     <ComponentSingleRelated
+    //       list={related}
+    //     />,
+    //     this.element,
+    //   );
+    // } else {
+    //   this._rendered.updateList(related);
+    // }
+    ReactDOM.render(
+      <ComponentSingleRelated
+        list={related}
+      />,
+      this.element,
+    );
   }
 }

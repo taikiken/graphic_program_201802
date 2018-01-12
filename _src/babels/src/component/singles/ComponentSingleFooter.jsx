@@ -22,6 +22,7 @@ import { Message } from '../../app/const/Message';
 
 // view
 import Banner from '../../view/Banner';
+import { SingleDae } from '../../dae/SingleDae';
 
 // React
 /**
@@ -47,7 +48,8 @@ export class ComponentSingleFooter extends React.Component {
    */
   static get propTypes() {
     return {
-      single: React.PropTypes.object.isRequired,
+      // single: React.PropTypes.object.isRequired,
+      single: React.PropTypes.instanceOf(SingleDae).isRequired,
       callback: React.PropTypes.func.isRequired
     };
   }
@@ -78,11 +80,19 @@ export class ComponentSingleFooter extends React.Component {
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
   }
+  // /**
+  //  * 記事詳細下部を更新します
+  //  * @param {SingleDae} single 更新する SingleDae instance
+  //  * */
+  // updateSingle(single) {
+  //   this.setState({ single });
+  // }
   /**
-   * 記事詳細下部を更新します
-   * @param {SingleDae} single 更新する SingleDae instance
-   * */
-  updateSingle(single) {
+   * delegate - update props to setState
+   * @param {{single: SingleDae}} nextProps next React.props
+   */
+  componentWillReceiveProps(nextProps) {
+    const { single } = nextProps;
     this.setState({ single });
   }
   /**
@@ -124,7 +134,10 @@ export class ComponentSingleFooter extends React.Component {
             {
               keywords.keywords.map((keyword, i) => {
                 return (
-                  <li key={`keyword-${i}`} className="post-tags-item">
+                  <li
+                    key={`keyword-${i}`}
+                    className="post-tags-item"
+                  >
                     {/* link は 検索パターンにしています */}
                     <a href={Url.search(keyword)}>{keyword}</a>
                   </li>

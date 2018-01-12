@@ -179,24 +179,31 @@ export default class ViewSingleHeader extends View {
     //     this.setState( { single: single, sign: sign } );
     //   }
     // } );
-
-    if (this._rendered === null) {
-      // this._rendered = ReactDOM.render(
-      //   React.createElement( HeaderDom, { single: singleDae, sign: User.sign } ),
-      //   element
-      // );
-      // @since 2016-09-24 changed
-      this._rendered = ReactDOM.render(
-        <ComponentSingleHeader
-          single={singleDae}
-          sign={User.sign}
-          callback={this.boundSafely}
-        />,
-        this.element
-      );
-    } else {
-      this._rendered.updateSingle(singleDae, User.sign);
-    }
-
+    //
+    // if (this._rendered === null) {
+    //   // this._rendered = ReactDOM.render(
+    //   //   React.createElement( HeaderDom, { single: singleDae, sign: User.sign } ),
+    //   //   element
+    //   // );
+    //   // @since 2016-09-24 changed
+    //   this._rendered = ReactDOM.render(
+    //     <ComponentSingleHeader
+    //       single={singleDae}
+    //       sign={User.sign}
+    //       callback={this.boundSafely}
+    //     />,
+    //     this.element
+    //   );
+    // } else {
+    //   this._rendered.updateSingle(singleDae, User.sign);
+    // }
+    ReactDOM.render(
+      <ComponentSingleHeader
+        single={singleDae}
+        sign={User.sign}
+        callback={this.boundSafely}
+      />,
+      this.element,
+    );
   }// render
 }
