@@ -78,7 +78,7 @@ export default class SPComponentHeadlineOption extends React.Component {
   //  */
   // constructor(props) {
   //   super(props);
-  //   console.log('SPComponentHeadlineOption', props);
+  //   // console.log('SPComponentHeadlineOption', props);
   // }
   // ---------------------------------------------------
   //  METHOD

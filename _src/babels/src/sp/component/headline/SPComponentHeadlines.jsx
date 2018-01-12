@@ -67,7 +67,7 @@ export default class SPComponentHeadlines extends React.Component {
       ).isRequired,
       // executeSafely.bind
       callback: React.PropTypes.func.isRequired,
-      ad: React.PropTypes.instanceOf(AdDae).isRequired,
+      ad: React.PropTypes.instanceOf(AdDae),
       home: React.PropTypes.bool,
       archive: React.PropTypes.bool,
     };
@@ -82,6 +82,7 @@ export default class SPComponentHeadlines extends React.Component {
     return {
       home: false,
       archive: false,
+      ad: new AdDae({}),
     };
   }
   // // ---------------------------------------------------
