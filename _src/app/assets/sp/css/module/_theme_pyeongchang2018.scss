@@ -224,6 +224,23 @@
   //.gallery--highlight
   //.gallery--photo
 
+  //.gallery__header--top
+  .gallery__header--top {
+    border-top: 1px solid #ddd;
+  } //.gallery__header--top
+
+  &.pyeongchang2018-movie .gallery__header--top {
+    border-bottom: none;
+  }
+
+  &.pyeongchang2018-photo .gallery--photo {
+    border-top: 1px solid #ddd;
+
+    &:before {
+      display: none;
+    }
+  }
+
   //.gallery--highlight
   .gallery--highlight,
   &.pyeongchang2018-movie .gallery__header--top {
@@ -457,10 +474,10 @@
   //.sponsor-link
   .sponsor-link {
     padding-top: 8px;
-    padding-left: 8px;
+    padding-bottom: 8px;
     background-color: #eee;
 
-    > div > div {
+    > div {
       margin-right: auto;
       margin-left: auto;
     }
