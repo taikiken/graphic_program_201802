@@ -130,6 +130,7 @@
     margin-top: 20px;
     border-top: 4px solid #ddd;
 
+    @at-root {
     .gallery__header {
       display: table;
       width: 100%;
@@ -200,12 +201,28 @@
       text-align: right;
       vertical-align: middle;
     } //.gallery__date
+
+    //.gallery__header__logo
+    .gallery__header__logo {
+      display: table-cell;
+      padding-right: 8px;
+      text-align: right;
+      vertical-align: middle;
+    } //.gallery__header__logo
+    } //at-root
   }
   //.gallery--highlight
   //.gallery--photo
 
+  //.gallery__header--top
+  .gallery__header--top {
+    margin-top: 20px;
+    border-top: 4px solid #ddd;
+  } //.gallery__header--top
+
   //.gallery--highlight
-  .gallery--highlight {
+  .gallery--highlight,
+  &.pyeongchang2018-movie .gallery__header--top {
     .gallery__heading:before {
       background-image: url(/assets/images/pyeongchang2018/icon-highlight_heading.png);
     }
@@ -354,6 +371,27 @@
 
   //.widget-pyeongchang-highlight
   .widget-pyeongchang-highlight {
+    //.gallery--highlight
+    .gallery--highlight {
+      margin-top: 0;
+      border-top: 1px solid #ddd;
+
+      //.gallery__header
+      .gallery__header {
+        height: auto;
+        padding-top: 10px;
+      }
+
+      //.gallery__heading
+      .gallery__heading {
+        font-size: fz(14);
+
+        &:before {
+          display: none;
+        }
+      }
+    } //.gallery--highlight
+
     //.Widget_articles_tag
     .Widget_articles_tag {
       //.thumbs_list
@@ -365,6 +403,7 @@
       //.widget-item
       .widget-item {
         width: 174px;
+        margin-top: 12px;
         margin-right: 10px;
         background-color: #f5f5f5;
 
@@ -427,4 +466,24 @@
       } //.widget-item
     } //.Widget_articles_tag
   } //.widget-pyeongchang-highlight
+
+  //.sponsor-link
+  .sponsor-link {
+    margin-top: 20px;
+
+    &.column2 {
+      margin-top: 30px;
+      text-align: center;
+      letter-spacing: ls( inline-block );
+      vertical-align: top;
+
+      .sponsor-link-item {
+        display: inline-block;
+        margin-right: 15px;
+        margin-left: 15px;
+        letter-spacing: normal;
+        vertical-align:top;
+      }
+    }
+  } //.sponsor-link
 } //.whole.pyeongchang2018

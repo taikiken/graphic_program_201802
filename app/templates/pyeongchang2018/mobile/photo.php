@@ -17,6 +17,23 @@ include_once __DIR__."/../../mobile/_header.php";
       <h1 class="special-summary-heading"><img src="/assets/sp/images/pyeongchang2018/special-summary.jpg" alt="平昌五輪"></h1>
     </div><!-- /.special-summary -->
 
+    <div class="sponsor-link">
+      <!-- /531683568/pyeongchang_ad/pyeongchang_sp_bigbanner -->
+      <script>
+        googletag.cmd.push(function() {
+          googletag.defineSlot('/531683568/pyeongchang_ad/pyeongchang_sp_bigbanner', [320, 50], 'div-gpt-ad-1515758071055-0').addService(googletag.pubads());
+          googletag.pubads().enableSingleRequest();
+          googletag.enableServices();
+        });
+      </script>
+      <div id='div-gpt-ad-1515758071055-0' style='height:50px; width:320px;'>
+      <script>
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515758071055-0'); });
+      </script>
+      </div>
+      <!-- // /531683568/pyeongchang_ad/pyeongchang_sp_bigbanner -->
+    </div><!-- /.sponsor-link -->
+
     <?php
     // ----------------------------------------------------
     // 記事一覧: sp theme.images
@@ -104,6 +121,23 @@ include_once __DIR__."/../../mobile/_header.php";
 
         <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
       </div><!-- /.gallery--highlight -->
+
+      <div class="sponsor-link">
+        <!-- /531683568/pyeongchang_ad/pyeongchang_sp_rectangle -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/pyeongchang_ad/pyeongchang_sp_rectangle', [300, 250], 'div-gpt-ad-1515758097610-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1515758097610-0' style='height:250px; width:300px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515758097610-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/pyeongchang_ad/pyeongchang_sp_rectangle -->
+      </div><!-- /.sponsor-link -->
     </section><!-- /.main-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->

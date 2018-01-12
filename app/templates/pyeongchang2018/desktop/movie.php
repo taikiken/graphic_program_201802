@@ -24,11 +24,48 @@ include_once __DIR__.'../../desktop/_category-heading.php';
     </div><!-- /.special-summary -->
 
     <section class="main-sec">
+      <div class="sponsor-link">
+        <!-- /531683568/pyeongchang_ad/pyeongchang_pc_bigbanner1 -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/pyeongchang_ad/pyeongchang_pc_bigbanner1', [728, 90], 'div-gpt-ad-1515757963600-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1515757963600-0' style='height:90px; width:728px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515757963600-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/pyeongchang_ad/pyeongchang_pc_bigbanner1 -->
+      </div><!-- /.sponsor-link -->
+
+      <header class="gallery__header gallery__header--top">
+        <h2 class="gallery__heading">ハイライト動画</h2>
+        <p class="gallery__header__logo"><img src="/assets/images/pyeongchang2018/icon-powerdby_gorinjp.png" alt="Powerd by gorin.jp"></p>
+      </header><!-- /.gallery__header -->
+
       <div class="board-large">
         <div id="js-pyeongchang-highlight-container"></div>
       </div><!-- /.board-large -->
 
-      <div>広告バナー</div>
+      <div class="sponsor-link">
+        <!-- /531683568/pyeongchang_ad/pyeongchang_pc_bigbanner2 -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/pyeongchang_ad/pyeongchang_pc_bigbanner2', [728, 90], 'div-gpt-ad-1515757998552-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1515757998552-0' style='height:90px; width:728px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515757998552-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/pyeongchang_ad/pyeongchang_pc_bigbanner2 -->
+      </div><!-- /.sponsor-link -->
 
       <div id="js-headline"></div>
 
@@ -48,7 +85,40 @@ include_once __DIR__.'../../desktop/_category-heading.php';
         <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="4"></div>
       </div><!-- /.gallery--photo -->
 
-      <div>広告バナー</div>
+      <div class="sponsor-link column2">
+        <div class="sponsor-link-item">
+          <!-- /531683568/pyeongchang_ad/pyeongchang_pc_rectangle1 -->
+          <script>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/pyeongchang_ad/pyeongchang_pc_rectangle1', [300, 250], 'div-gpt-ad-1515758023658-0').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-1515758023658-0' style='height:250px; width:300px;'>
+          <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515758023658-0'); });
+          </script>
+          </div>
+          <!-- // /531683568/pyeongchang_ad/pyeongchang_pc_rectangle1 -->
+        </div><!-- /.sponsor-link-item -->
+        <div class="sponsor-link-item">
+          <!-- /531683568/pyeongchang_ad/pyeongchang_pc_rectangle2 -->
+          <script>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/pyeongchang_ad/pyeongchang_pc_rectangle2', [300, 250], 'div-gpt-ad-1515758047885-0').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-1515758047885-0' style='height:250px; width:300px;'>
+          <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515758047885-0'); });
+          </script>
+          </div>
+          <!-- // /531683568/pyeongchang_ad/pyeongchang_pc_rectangle2 -->
+        </div><!-- /.sponsor-link-item -->
+      </div><!-- /.sponsor-link -->
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
