@@ -17,8 +17,19 @@ import { AdDae } from '../../../dae/theme/AdDae';
  */
 const React = self.React;
 
+/**
+ * SP - home headline 広告専用 component
+ * - 広告を出力します
+ * @since 2018-01-12
+ */
 export default class SPComponentHomeHeadlineArticleAd extends React.Component {
-
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * React.propTypes
+   * @returns {{ad: AdDae}} React.propTypes
+   */
   static get propTypes() {
     return {
       ad: React.PropTypes.instanceOf(AdDae).isRequired,
@@ -27,6 +38,10 @@ export default class SPComponentHomeHeadlineArticleAd extends React.Component {
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
+  /**
+   * SP - home headline 広告準備します
+   * @param {*} props React.pops
+   */
   constructor(props) {
     super(props);
     /**
@@ -38,14 +53,21 @@ export default class SPComponentHomeHeadlineArticleAd extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * 広告タグを挿入します
+   * @param {string} id 広告タグ
+   */
   ad(id) {
     const element = this.sponsorLink;
     const div = document.createElement('div');
-    const script = document.createElement( 'script' );
+    const script = document.createElement('script');
     script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=INFEED&async=false&async=true&tagver=2.0.0`;
     div.appendChild(script);
     element.appendChild(div);
   }
+  /**
+   * delegate - after mount
+   */
   componentDidMount() {
     const element = this.sponsorLink;
     if (!element) {
@@ -57,11 +79,11 @@ export default class SPComponentHomeHeadlineArticleAd extends React.Component {
     }
     this.ad(ad.mobile.sp.headline);
   }
+  /**
+   * delegate 出力します
+   * @return {?XML} `div.board-item.sponsor-link`
+   */
   render() {
-    const { home, archive } = this.props;
-    if (home || archive) {
-      return null;
-    }
     return (
       <div className="board-item sponsor-link">
         <div ref={(element) => (this.sponsorLink = element)} />
