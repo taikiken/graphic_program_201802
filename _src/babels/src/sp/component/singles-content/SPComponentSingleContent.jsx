@@ -17,9 +17,9 @@ import { SPComponentSingleComments } from './SPComponentSingleComments';
 
 
 // component/singles-content
-import { ComponentSinglePost } from '../../../component/singles-content/ComponentSinglePost';
+import ComponentSinglePost from '../../../component/singles-content/ComponentSinglePost';
 // import { ComponentSingleAd } from '../../../component/singles-content/ComponentSingleAd';
-import { ComponentSingleProvider } from '../../../component/singles-content/ComponentSingleProvider';
+import ComponentSingleProvider from '../../../component/singles-content/ComponentSingleProvider';
 
 // component/singles
 import ComponentSingleFooter from '../../../component/singles/ComponentSingleFooter';

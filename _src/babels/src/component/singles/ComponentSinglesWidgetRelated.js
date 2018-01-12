@@ -27,7 +27,7 @@ const React = self.React;
  * - `popin.js` を使用し出力します
  * @since 2016-09-28
  */
-export class ComponentSinglesWidgetRelated extends React.Component {
+export default class ComponentSinglesWidgetRelated extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

@@ -60,7 +60,7 @@ import { PageTitle } from '../../../util/PageTitle';
 
 
 // component/singles-content record
-import { RecordSingleState } from '../../../component/singles-content/RecordSingleState';
+import RecordSingleState from '../../../component/singles-content/RecordSingleState';
 
 // React
 /**

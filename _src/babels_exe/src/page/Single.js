@@ -19,7 +19,15 @@ import Nav from '../ui/Nav';
 // let _symbol = Symbol();
 
 // UT
+/**
+ * [library] - UT
+ * @type {UT}
+ */
 const UT = self.UT;
+/**
+ * [library] - UT.app.Dom
+ * @type {Dom}
+ */
 const Dom = UT.app.Dom;
 
 /**
@@ -54,8 +62,8 @@ let innerViewSingle = null;
 let innerHeaderUser = null;
 
 /**
- * <p>Single(detail)記事詳細</p>
- * 全て static です
+ * Single(detail)記事詳細
+ * - 全て static です
  */
 export default class Single {
   // /**

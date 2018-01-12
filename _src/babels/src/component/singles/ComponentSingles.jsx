@@ -18,11 +18,11 @@ import { WidgetType } from '../../app/const/WidgetType';
 
 // component
 // import { ComponentSinglesWidgetOption } from './ComponentSinglesWidgetOption';
-import { ComponentSinglesWidget } from './ComponentSinglesWidget';
+import ComponentSinglesWidget from './ComponentSinglesWidget';
 
 // 記事本文
 // import { ComponentSinglesArticle } from './ComponentSinglesArticle';
-import { ComponentSinglesArticleMagnet } from '../singles-magnet/ComponentSinglesArticleMagnet';
+import ComponentSinglesArticleMagnet from '../singles-magnet/ComponentSinglesArticleMagnet';
 
 // ui
 import SinglesManager from '../../ui/SinglesManager';

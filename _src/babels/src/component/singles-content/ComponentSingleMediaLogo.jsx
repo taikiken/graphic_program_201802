@@ -26,8 +26,9 @@ import { Ga } from '../../ga/Ga';
 const React = self.React;
 
 /**
- * 媒体ロゴ<br>
- * PC, SP 兼用です
+ * @TODO future remove - not use
+ * 媒体ロゴ
+ * - PC, SP 兼用です
  * @since 2016-09-25
  */
 export class ComponentSingleMediaLogo extends React.Component {
@@ -37,7 +38,6 @@ export class ComponentSingleMediaLogo extends React.Component {
    */
   constructor(props) {
     super(props);
-
     /**
      * React state
      * @type {{single: SingleDae}}

@@ -24,10 +24,10 @@ import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLi
 // import { ComponentSinglesArticleMedia } from '../singles/ComponentSinglesArticleMedia';
 
 // since 2016-11-04
-import { ComponentSinglesArticleSwitch } from './ComponentSinglesArticleSwitch';
+import ComponentSinglesArticleSwitch from './ComponentSinglesArticleSwitch';
 
 // component/singles-content record
-import { RecordSingleState } from '../singles-content/RecordSingleState';
+import RecordSingleState from '../singles-content/RecordSingleState';
 
 // ui
 import Hit from '../../ui/Hit';
@@ -102,7 +102,7 @@ const React = self.React;
  * @since 2016-10-28
  * @since 2016-11-14 wait ga send
  */
-export class ComponentSinglesArticleMagnet extends React.Component {
+export default class ComponentSinglesArticleMagnet extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

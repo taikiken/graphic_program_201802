@@ -14,9 +14,9 @@
 import { Message } from '../../../app/const/Message';
 
 // component/singles
-import { ComponentSinglesArticleExcerpt } from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
+import ComponentSinglesArticleExcerpt from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
 
-import { ComponentSingleSNS } from '../../../component/singles-content/ComponentSingleSNS';
+import ComponentSingleSNS from '../../../component/singles-content/ComponentSingleSNS';
 
 // component/singles-content
 import { SPComponentSingleContent } from '../singles-content/SPComponentSingleContent';
@@ -31,7 +31,7 @@ import { Validate } from '../../../util/Validate';
 import { SinglesHistory } from '../../../singles/SinglesHistory';
 
 // component/singles-content record
-import { RecordSingleState } from '../../../component/singles-content/RecordSingleState';
+import RecordSingleState from '../../../component/singles-content/RecordSingleState';
 import { SPComponentSinglesSNSAbove } from '../singles-content/SPComponentSinglesSNSAbove';
 
 // React

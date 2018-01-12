@@ -27,58 +27,12 @@ import { Safety } from '../../data/Safety';
 const React = self.React;
 
 /**
- * 記事詳細・次の記事一覧のメインビジュアル<br>
- * 動画が次々再生されてウザイので img 置き換えた
+ * @TODO future remove - not use
+ * 記事詳細・次の記事一覧のメインビジュアル
+ * - 動画が次々再生されてウザイので img 置き換えた
  * @since 2016-09-30
  */
 export class ComponentSinglesArticleMedia extends React.Component {
-  /**
-   * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ComponentSinglesArticle.propTypes}
-   */
-  constructor(props) {
-    super(props);
-
-    /**
-     * React state
-     * @type {{single: SingleDae}}
-     */
-    this.state = {
-      single: props.single
-    };
-  }
-  /**
-   * メインビジュアルを出力します
-   * @return {?XML} video / image を返します
-   */
-  render() {
-    const single = this.state.single;
-    if (!single) {
-      return null;
-    }
-
-    const mediaType = single.mediaType;
-
-    if (mediaType === MediaType.VIDEO) {
-      return ComponentSinglesArticleMedia.video(single);
-    }
-
-    return ComponentSinglesArticleMedia.image(single);
-  }
-  /**
-   * state.sign 情報を更新し再描画します
-   * @param {boolean} sign state.sign
-   */
-  updateSign(sign) {
-    this.setState({ sign });
-  }
-  /**
-   * 表示の元になる情報を更新せず表示系を更新します
-   * - 不要かも
-   */
-  reload() {
-    this.updateSingle(this.state.single);
-  }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -135,5 +89,58 @@ export class ComponentSinglesArticleMedia extends React.Component {
     return {
       single: React.PropTypes.object.isRequired
     };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * default property を保存し必要な関数・変数を準備します
+   * @param {Object} props React props プロパティー {@link ComponentSinglesArticle.propTypes}
+   */
+  constructor(props) {
+    super(props);
+
+    /**
+     * React state
+     * @type {{single: SingleDae}}
+     */
+    this.state = {
+      single: props.single
+    };
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * メインビジュアルを出力します
+   * @return {?XML} video / image を返します
+   */
+  render() {
+    const single = this.state.single;
+    if (!single) {
+      return null;
+    }
+
+    const mediaType = single.mediaType;
+
+    if (mediaType === MediaType.VIDEO) {
+      return ComponentSinglesArticleMedia.video(single);
+    }
+
+    return ComponentSinglesArticleMedia.image(single);
+  }
+  /**
+   * state.sign 情報を更新し再描画します
+   * @param {boolean} sign state.sign
+   */
+  updateSign(sign) {
+    this.setState({ sign });
+  }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * - 不要かも
+   */
+  reload() {
+    this.updateSingle(this.state.single);
   }
 }
