@@ -48,9 +48,9 @@ export default class ViewSingleVisual extends View {
     /**
      * 記事詳細 API 取得 JSON を SingleDae instance とし保存し利用します
      * @type {SingleDae}
-     * @protected
      */
-    this._single = single;
+    this.single = single;
+    console.log('ViewSingleVisual single', single);
   }
   /**
    * render 処理を開始します
@@ -62,7 +62,7 @@ export default class ViewSingleVisual extends View {
    * render します
    */
   render() {
-    const single = this._single;
+    const single = this.single;
 
     ReactDOM.render(
       <MediaNode
@@ -71,6 +71,8 @@ export default class ViewSingleVisual extends View {
         media={single.media}
         isShowImage={single.isShowImage}
         index={0}
+        // 2018-01-12 追加する
+        single={single}
       />,
       this.element,
     );

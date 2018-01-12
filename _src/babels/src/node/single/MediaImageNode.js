@@ -12,11 +12,13 @@
 
 
 import {Safety} from '../../data/Safety';
+import { SingleDae } from '../../dae/SingleDae';
 
 // React
 let React = self.React;
 
 /**
+ * @deprecated 2018-01-12 instead use {@link ComponentMediaImage}
  * <p>記事詳細 メイン・画像</p>
  * <p>original から large と medium と順に探していく</p>
  *
@@ -24,7 +26,9 @@ let React = self.React;
  */
 export let MediaImageNode = React.createClass( {
   propTypes: {
-    images: React.PropTypes.object.isRequired
+    images: React.PropTypes.object.isRequired,
+    // 2018-01-12 - 平昌: タグで powered by 出す必要があるので追加する
+    single: React.PropTypes.instanceOf(SingleDae).isRequired,
   },
   render: function() {
     let images = this.props.images;

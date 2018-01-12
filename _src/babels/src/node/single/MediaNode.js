@@ -15,22 +15,22 @@ import {MediaType} from '../../app/const/MediaType';
 
 import {MediaImageNode} from './MediaImageNode';
 import {MediaVideoNode} from './MediaVideoNode';
+import { SingleDae } from '../../dae/SingleDae';
 
 // React
-let React = self.React;
+/**
+ * [library] - React
+ * @type {*}
+ */
+const React = self.React;
 
 /**
- * <p>記事詳細 メインビジュアル<br>
- * 画像・動画 切替て表示します</p>
+ * 記事詳細 メインビジュアル
+ * - 画像・動画 切替て表示します
+ * - media_type で切り替えます
  *
- * <p>media_type で切り替えます</p>
- *
- * ```
- * <MediaNode/>
- *  <MediaImageNode />
- *  or
- *  <MediaVideoNode />
- * ```
+ * - {@link MediaNode}
+ *   - {@link MediaImageNode} or {@link MediaVideoNode}
  * @type {ReactClass}
  */
 export let MediaNode = React.createClass( {
@@ -40,50 +40,54 @@ export let MediaNode = React.createClass( {
     media: React.PropTypes.object.isRequired,
     // 2016-06-06 記事詳細で画像を表示するかどうか
     isShowImage: React.PropTypes.bool.isRequired,
+    // 2018-01-12 - 平昌: タグで powered by 出す必要があるので追加する
+    single: React.PropTypes.instanceOf(SingleDae).isRequired,
     // 記事表示位置, -1: 記事詳細先頭
     // @since 2016-11-13
     index: React.PropTypes.number
   },
   render: function() {
-
-    let mediaType = this.props.mediaType;
-    let media = this.props.media;
+    const { mediaType, media, isShowImage, articleId, index, single } = this.props;
 
     // 2016-06-06
     // 記事詳細で画像を表示しない
-    if ( !this.props.isShowImage ) {
+    if (!isShowImage) {
       return null;
     }
 
-    if ( mediaType === MediaType.IMAGE ) {
+    if (mediaType === MediaType.IMAGE) {
       // image type
       return (
         <MediaImageNode
           images={media.images}
+          single={single}
         />
       );
-    } else if ( mediaType === MediaType.VIDEO ) {
+    } else if (mediaType === MediaType.VIDEO) {
       // may be video
-      if ( !media.video || ( !media.video.url && !media.video.youtube && !media.video.facebook ) ) {
+      if (!media.video || (!media.video.url && !media.video.youtube && !media.video.facebook)) {
         // not correct video, instead use images
         return (
           <MediaImageNode
             images={media.images}
+            single={single}
           />
         );
       } else {
         // show video
         return (
           <MediaVideoNode
-            articleId={this.props.articleId}
+            articleId={articleId}
             media={media}
-            index={this.props.index}
+            index={index}
           />
         );
       }
-    } else {
-      // illegal
-      return null;
     }
+    // else {
+    //   // illegal
+    //   return null;
+    // }
+    return null;
   }
 } );
