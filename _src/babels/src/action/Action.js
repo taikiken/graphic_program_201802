@@ -80,9 +80,10 @@ export class Action {
      */
     this._url = types.url;
     /**
-     * `this._url` の代りに使用する Api path property
+     * API path を types 引数から取り出します
+     * - alias - `this._url`
      * @type {string}
-     * @since 2018-01-10
+     * @since 2018-01-11
      */
     this.path = types.url;
     /**
@@ -128,6 +129,7 @@ export class Action {
    */
   set url(url) {
     this._url = url;
+    this.path = url;
   }
   /**
    * GET|POST|DELETE|PUT form method を返します

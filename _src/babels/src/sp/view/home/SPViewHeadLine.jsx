@@ -20,6 +20,7 @@ import SPComponentHeadlines from '../../component/headline/SPComponentHeadlines'
 import {ArticleDae} from '../../../dae/ArticleDae';
 import Dom from '../../../app/Dom';
 import SPComponentHeadlineArticleLast from '../../component/headline/SPComponentHeadlineArticleLast';
+import { AdDae } from '../../../dae/theme/AdDae';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -41,19 +42,18 @@ export default class SPViewHeadLine extends ViewHeadline {
    * SP home headline
    * @param {Element} element コンテンツ基点Element
    * @param {Object} [option={}] callback 関数をセット
+   * @param {AdDae} [ad=null] headline - home `all` AdDae
    */
-  constructor(element, option = {}) {
-    super(element, option);
+  constructor(element, option = {}, ad = null) {
+    // since 2018-01-11
+    // 第三引数 sp - true 追加
+    super(element, option, true);
     /**
      * bind executeSafely
      * @type {function}
      */
     this.boundSafely = this.executeSafely.bind(this);
-    /**
-     * 公国非表示 flag - true: 広告なし
-     * @type {boolean}
-     */
-    this.archive = false;
+    this.ad = ad || new AdDae({});
   }
   /**
    * dom を render します
@@ -83,7 +83,7 @@ export default class SPViewHeadLine extends ViewHeadline {
       <SPComponentHeadlines
         list={list}
         callback={this.boundSafely}
-        archive={this.archive}
+        ad={this.ad}
       />,
       this.element,
     );
