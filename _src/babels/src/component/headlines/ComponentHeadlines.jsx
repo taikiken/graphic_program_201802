@@ -144,7 +144,7 @@ export default class ComponentHeadlines extends React.Component {
         ]).isRequired,
       ).isRequired,
       callback: React.PropTypes.func.isRequired,
-      category: React.PropTypes.instanceOf(CategoriesSlugDae).isRequired,
+      category: React.PropTypes.instanceOf(CategoriesSlugDae),
       home: React.PropTypes.bool
     };
   }
@@ -154,7 +154,8 @@ export default class ComponentHeadlines extends React.Component {
    */
   static get defaultProps() {
     return {
-      home: false
+      home: false,
+      category: new CategoriesSlugDae({}),
     };
   }
   // ---------------------------------------------------
