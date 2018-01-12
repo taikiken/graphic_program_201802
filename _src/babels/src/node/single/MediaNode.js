@@ -46,7 +46,7 @@ export let MediaNode = React.createClass( {
     index: React.PropTypes.number
   },
   render: function() {
-    console.warn('MediaNode deprecated instead use ComponentMedia');
+    console.warn('MediaNode deprecated instead use ComponentMedia', this.props.articleId);
     let mediaType = this.props.mediaType;
     let media = this.props.media;
 

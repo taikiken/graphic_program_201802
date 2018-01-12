@@ -43,14 +43,16 @@ export default class ViewSingleVisual extends View {
    * PC main visual
    * @param {Element} element 基点 element
    * @param {SingleDae} single SingleDae instance
+   * @param {boolean} [sp=false] sp flag
    */
-  constructor(element, single) {
+  constructor(element, single, sp = false) {
     super(element);
     /**
      * 記事詳細 API 取得 JSON を SingleDae instance とし保存し利用します
      * @type {SingleDae}
      */
     this.single = single;
+    this.sp = sp;
     console.log('ViewSingleVisual single', single);
   }
   /**
@@ -81,11 +83,14 @@ export default class ViewSingleVisual extends View {
       <ComponentMedia
         articleId={String(single.id)}
         mediaType={single.mediaType}
+        // video={single.media.video}
+        // images={single.media.images}
         media={single.media}
         isShowImage={single.isShowImage}
         index={0}
         // 2018-01-12 追加する
         single={single}
+        sp={this.sp}
       />,
       this.element,
     );

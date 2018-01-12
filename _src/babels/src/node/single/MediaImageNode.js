@@ -32,6 +32,7 @@ export let MediaImageNode = React.createClass( {
   },
   render: function() {
     let images = this.props.images;
+    console.warn('MediaNode deprecated instead use ComponentMediaImage', images);
 
     // 約束が違う
     // 画像がない記事の時にセットされているのは
