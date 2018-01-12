@@ -14,6 +14,9 @@
 import { MediaType } from '../../app/const/MediaType';
 import ComponentMediaImage from './ComponentMediaImage';
 
+// node
+import {MediaVideoNode} from '../../node/single/MediaVideoNode';
+
 /**
  * [library] - React
  */
@@ -68,4 +71,15 @@ const ComponentMedia = ({
   }
 };
 
-export default ComponentMediaImage;
+ComponentMedia.propTypes = {
+  articleId: React.PropTypes.string.isRequired,
+  mediaType: React.PropTypes.string.isRequired,
+  media: React.PropTypes.object.isRequired,
+  // 2016-06-06 記事詳細で画像を表示するかどうか
+  isShowImage: React.PropTypes.bool.isRequired,
+  // 記事表示位置, -1: 記事詳細先頭
+  // @since 2016-11-13
+  index: React.PropTypes.number.isRequired,
+};
+
+export default ComponentMedia;

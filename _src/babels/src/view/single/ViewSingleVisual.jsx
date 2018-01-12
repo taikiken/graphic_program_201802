@@ -21,6 +21,7 @@ import View from '../View';
 
 // node
 import {MediaNode} from '../../node/single/MediaNode';
+import ComponentMedia from '../../component/media/ComponentMedia';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -64,8 +65,20 @@ export default class ViewSingleVisual extends View {
   render() {
     const single = this.single;
 
+    // ReactDOM.render(
+    //   <MediaNode
+    //     articleId={String(single.id)}
+    //     mediaType={single.mediaType}
+    //     media={single.media}
+    //     isShowImage={single.isShowImage}
+    //     index={0}
+    //     // 2018-01-12 追加する
+    //     single={single}
+    //   />,
+    //   this.element,
+    // );
     ReactDOM.render(
-      <MediaNode
+      <ComponentMedia
         articleId={String(single.id)}
         mediaType={single.mediaType}
         media={single.media}
