@@ -13,6 +13,15 @@ include_once __DIR__."/../../mobile/_header.php";
 ?>
 <div id="body-section" class="body-sec">
   <div class="body-sec-inner">
+    <div class="special-summary">
+      <h1 class="special-summary-heading"><img src="/assets/sp/images/pyeongchang2018/special-summary.jpg" alt="平昌五輪"></h1>
+    </div><!-- /.special-summary -->
+
+    <header class="gallery__header gallery__header--top">
+      <h2 class="gallery__heading">ハイライト動画</h2>
+      <p class="gallery__header__logo"><img src="/assets/sp/images/pyeongchang2018/icon-powerdby_gorinjp.png" alt="Powerd by gorin.jp"></p>
+    </header><!-- /.gallery__header -->
+
     <?php
     // ----------------------------------------------------
     // 記事一覧: sp theme.images
