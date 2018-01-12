@@ -56,6 +56,43 @@ include_once __DIR__."/../../mobile/_header.php";
       // ---------------------------------------------------- ?>
 
       <div id="js-pyeongchang-highlight-container"></div>
+
+      <?php
+      // ------------------------------
+      // 平昌だけイレギュラー index と同じ
+      ?>
+      <div id="headline-container"></div>
+
+      <aside class="sns-pr">
+        <div class="sns-pr-outer">
+          <dl class="sns-pr-inner">
+            <dt><span>いいねして最新ニュースをチェック！</span></dt>
+            <dd>
+              <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            </dd>
+          </dl><!-- /.sns-pr-inner -->
+        </div><!-- /.sns-pr-outer -->
+      </aside><!-- /.sns-pr -->
+
+      <div id="js-headline-last-container"></div>
+      <?php
+      // イレギュラー終わり
+      // ------------------------------
+      ?>
+
+      <?php
+      // medals
+      include_once __DIR__ . '/../module/_pyeongchang2018_medals.php';
+      ?>
+
+      <div class="gallery--photo">
+        <header class="gallery__header">
+          <h2 class="gallery__heading">フォトギャラリー</h2>
+          <p class="gallery__link"><a href="/pyeongchang2018/photo/">すべて見る</a></p>
+        </header><!-- /.gallery__header -->
+
+        <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="2"></div>
+      </div><!-- /.gallery--photo -->
     </section><!-- /.main-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
@@ -74,7 +111,7 @@ include_once __DIR__."/../../mobile/_header.php";
 </script>
 
 <script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>
-
+<script src="/assets/widgets/articles-index/Widget_articles_tag.js?v=<?php echo $page['version']; ?>"></script>
 <?php
 // 汎用 footer
 include_once __DIR__."/../../mobile/_footer.php";

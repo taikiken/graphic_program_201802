@@ -65,8 +65,45 @@ include_once __DIR__."/../../mobile/_header.php";
           <p class="gallery__date">2018年2月9日 - 25日</p>
         </header><!-- /.gallery__header -->
 
-        <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="9999"></div>
-      </div>
+        <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="9999"></div>
+      </div><!-- /.allery--photo -->
+
+      <?php
+      // ------------------------------
+      // 平昌だけイレギュラー index と同じ
+      ?>
+      <div id="headline-container"></div>
+
+      <aside class="sns-pr">
+        <div class="sns-pr-outer">
+          <dl class="sns-pr-inner">
+            <dt><span>いいねして最新ニュースをチェック！</span></dt>
+            <dd>
+              <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            </dd>
+          </dl><!-- /.sns-pr-inner -->
+        </div><!-- /.sns-pr-outer -->
+      </aside><!-- /.sns-pr -->
+
+      <div id="js-headline-last-container"></div>
+      <?php
+      // イレギュラー終わり
+      // ------------------------------
+      ?>
+
+      <?php
+      // medals
+      include_once __DIR__ . '/../module/_pyeongchang2018_medals.php';
+      ?>
+
+      <div class="gallery--highlight">
+        <header class="gallery__header">
+          <h2 class="gallery__heading">ハイライト動画</h2>
+          <p class="gallery__link"><a href="/pyeongchang2018/movie/">すべて見る</a></p>
+        </header><!-- /.gallery__header -->
+
+        <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
+      </div><!-- /.gallery--highlight -->
     </section><!-- /.main-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->

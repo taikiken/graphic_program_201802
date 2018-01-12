@@ -34,8 +34,29 @@ include_once __DIR__.'../../desktop/_category-heading.php';
 
           <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="9999"></div>
         </div>
-
       </div><!-- /.board-large -->
+
+      <div>広告バナー</div>
+
+      <div id="js-headline"></div>
+
+      <div class="mt20">
+        <?php
+        // medals
+        include_once __DIR__ . '/../module/_pyeongchang2018_medals.php';
+        ?>
+      </div>
+
+      <div class="gallery--highlight">
+        <header class="gallery__header">
+          <h2 class="gallery__heading">ハイライト動画</h2>
+          <p class="gallery__link"><a href="/pyeongchang2018/movie/">すべての動画を見る</a></p>
+        </header><!-- /.gallery__header -->
+
+        <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
+      </div><!-- /.gallery--highlight -->
+
+      <div>広告バナー</div>
     </section><!-- /.main-sec -->
 
     <section class="side-sec">

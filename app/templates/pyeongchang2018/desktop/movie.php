@@ -27,6 +27,28 @@ include_once __DIR__.'../../desktop/_category-heading.php';
       <div class="board-large">
         <div id="js-pyeongchang-highlight-container"></div>
       </div><!-- /.board-large -->
+
+      <div>広告バナー</div>
+
+      <div id="js-headline"></div>
+
+      <div class="mt20">
+        <?php
+        // medals
+        include_once __DIR__ . '/../module/_pyeongchang2018_medals.php';
+        ?>
+      </div>
+
+      <div class="gallery--photo">
+        <header class="gallery__header">
+          <h2 class="gallery__heading">フォトギャラリー</h2>
+          <p class="gallery__link"><a href="/pyeongchang2018/photo/">すべてのフォトギャラリーを見る</a></p>
+        </header><!-- /.gallery__header -->
+
+        <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="4"></div>
+      </div><!-- /.gallery--photo -->
+
+      <div>広告バナー</div>
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
@@ -36,6 +58,8 @@ include_once __DIR__.'../../desktop/_category-heading.php';
     </section><!-- /.side-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
+
+<script src="/assets/widgets/articles-index/Widget_articles_tag.js"></script>
 
 <script>
   (function(window) {
