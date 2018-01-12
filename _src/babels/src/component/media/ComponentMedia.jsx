@@ -35,7 +35,7 @@ const ComponentMedia = ({
                           index,
                           sp,
                              }) => {
-  console.log('ComponentMedia', articleId, isShowImage, mediaType, sp, single);
+  console.log('ComponentMedia', articleId, isShowImage, mediaType, sp, media.images);
   // 2016-06-06
   // 記事詳細で画像を表示しない
   if (!isShowImage) {

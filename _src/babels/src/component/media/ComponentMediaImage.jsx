@@ -42,7 +42,7 @@ export const ComponentMediaImagePowered = ({ single, sp }) => {
     '/assets/images/pyeongchang2018/icon-powerdby_gorinjp.png';
 
   return (
-    <span className="pyeongchang2018-powered-by">
+    <span className="powered-by pyeongchang2018-powered-by">
       <img src={src} alt="" />
     </span>
   );
@@ -106,7 +106,7 @@ const ComponentMediaImage = ({ images, single, sp }) => {
   if (original === '') {
     original = Safety.image(images.medium, '');
   }
-  console.log('ComponentMediaImage', original, images);
+  console.log('ComponentMediaImage original, single.id', original, single.id, images);
   // exist check
   if (original === '') {
     // no image or no correct image extension

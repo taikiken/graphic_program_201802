@@ -54,6 +54,7 @@ import { PageTitle } from '../../util/PageTitle';
 
 // snap
 import Snap from '../../ui/Snap';
+import ComponentMedia from '../media/ComponentMedia';
 
 // // event
 // import { IFrameStatus } from '../../event/IFrameStatus';
@@ -110,13 +111,15 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * - @type {SingleDae} single - 記事データ
    * - @type {boolean} sign - ログイン済みユーザーフラッグ, true: ログイン済み
    * - @type {number} index - 次の記事一覧・記事表示順序
-   * @return {{single: SingleDae, sign: boolean, index: number}} React propTypes
+   * - @type {boolean} sp - sp flag
+   * @return {{single: SingleDae, sign: boolean, index: number, sp: boolean}} React propTypes
    */
   static get propTypes() {
     return {
       single: React.PropTypes.object.isRequired,
       sign: React.PropTypes.bool.isRequired,
-      index: React.PropTypes.number.isRequired
+      index: React.PropTypes.number.isRequired,
+      sp: React.PropTypes.bool.isRequired,
     };
   }
   // ---------------------------------------------------
@@ -524,12 +527,23 @@ export class ComponentSinglesArticleMagnet extends React.Component {
             </div>
           </div>
           {/* media */}
+          {/*
            <MediaNode
              articleId={String(single.id)}
              mediaType={single.mediaType}
              media={single.media}
              isShowImage={single.isShowImage}
              index={this.state.index}
+           />
+           */}
+           <ComponentMedia
+             articleId={String(single.id)}
+             mediaType={single.mediaType}
+             media={single.media}
+             isShowImage={single.isShowImage}
+             index={this.state.index}
+             sp={this.props.sp}
+             single={single}
            />
           {/*
           <ComponentSinglesArticleMedia

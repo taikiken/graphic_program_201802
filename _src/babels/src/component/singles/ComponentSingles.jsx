@@ -67,7 +67,8 @@ export class ComponentSingles extends React.Component {
       // home container かのフラッグ
       home: React.PropTypes.bool.isRequired,
       // login 済みかのフラッグ
-      sign: React.PropTypes.bool.isRequired
+      sign: React.PropTypes.bool.isRequired,
+      sp: React.PropTypes.bool.isRequired,
     };
   }
   // ---------------------------------------------------
@@ -311,7 +312,7 @@ export class ComponentSingles extends React.Component {
    * @return {XML} div.singles-root を返します
    */
   render() {
-    const props = this.props;
+    const { sign, sp } = this.props;
     const state = this.state;
     const list = state.list;
     const length = list.length;
@@ -336,8 +337,9 @@ export class ComponentSingles extends React.Component {
                 <ComponentSinglesArticleMagnet
                   key={`singles-article-${single.id}`}
                   single={single}
-                  sign={props.sign}
+                  sign={sign}
                   index={index}
+                  sp={sp}
                 />
               );
             })
@@ -356,8 +358,9 @@ export class ComponentSingles extends React.Component {
                   <ComponentSinglesArticleMagnet
                     key={`singles-article-${single.id}`}
                     single={single}
-                    sign={props.sign}
+                    sign={sign}
                     index={index}
+                    sp={sp}
                   />
                   {
                     this.next(index)
@@ -390,8 +393,9 @@ export class ComponentSingles extends React.Component {
                   <ComponentSinglesArticleMagnet
                     key={`singles-article-${single.id}`}
                     single={single}
-                    sign={props.sign}
+                    sign={sign}
                     index={index}
+                    sp={sp}
                   />
                   {
                     this.next(index)
@@ -420,8 +424,9 @@ export class ComponentSingles extends React.Component {
                 <ComponentSinglesArticleMagnet
                   key={`singles-article-${single.id}`}
                   single={single}
-                  sign={props.sign}
+                  sign={sign}
                   index={index}
+                  sp={sp}
                 />
                 {
                   this.next(index)
