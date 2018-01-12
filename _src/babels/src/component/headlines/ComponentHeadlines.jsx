@@ -103,7 +103,7 @@ export default class ComponentHeadlines extends React.Component {
     }
     const div = document.createElement('div');
     const script = document.createElement('script');
-    script.src = `${Ad.ssl()}/sdk/js/adg-script-loader.js?id=34481&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`;
+    script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=34481&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`;
     div.appendChild(script);
     element.appendChild(div);
   }
@@ -118,7 +118,7 @@ export default class ComponentHeadlines extends React.Component {
     if (list.length === 0) {
       return null;
     }
-
+    console.log('ComponentHeadlines.render', list);
     // const home = this.props.home;
 
     return (
@@ -130,7 +130,7 @@ export default class ComponentHeadlines extends React.Component {
           <span className="headline-heading-ruby">{Message.HEADLINE_TITLE}</span>
         </div>
         */}
-        <ul className="board-small column2">
+        <div className="board-small column2">
           {
             list.map((dae, i) => {
               const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
@@ -153,10 +153,10 @@ export default class ComponentHeadlines extends React.Component {
               );
             })
           }
-          <li className="board-item sponsor-link">
+          <div className="board-item sponsor-link">
             <div ref={(element) => (this.sponsorLink = element)} />
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     );
   }

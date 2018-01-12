@@ -22,6 +22,7 @@ import { RelatedDae } from '../../../dae/RelatedDae';
 import { CategoriesSlugDae } from '../../../dae/categories/CategoriesSlugDae';
 import SPComponentHeadlineArticleLast from '../headline/SPComponentHeadlineArticleLast';
 import { ArticleDae } from '../../../dae/ArticleDae';
+import { AdDae } from '../../../dae/theme/AdDae';
 
 // React
 /**
@@ -60,7 +61,8 @@ export default class SPComponentHeadlineOption extends React.Component {
       ).isRequired,
       callback: React.PropTypes.func.isRequired,
       home: React.PropTypes.bool.isRequired,
-      ad: React.PropTypes.object.isRequired,
+      // ad: React.PropTypes.object.isRequired,
+      ad: React.PropTypes.instanceOf(AdDae).isRequired,
       browser: React.PropTypes.string.isRequired,
       // @type {CategoriesSlugDae}
       // category: React.PropTypes.object.isRequired

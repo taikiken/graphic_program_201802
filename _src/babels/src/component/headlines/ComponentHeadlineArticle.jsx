@@ -190,7 +190,7 @@ export default class ComponentHeadlineArticle extends React.Component {
       // isNew,
     } = this.props;
     return (
-      <li className={`board-item board-item-${index}`}>
+      <div className={`board-item board-item-${index}`}>
         <a className="post" href={url} onClick={this.boundGa}>
           <figure className="post-thumb post-thumb-headline">
             <img src={thumbnail} alt={title}/>
@@ -232,7 +232,7 @@ export default class ComponentHeadlineArticle extends React.Component {
             <p className="post-date">{date}</p>
           </div>
         </a>
-      </li>
+      </div>
     );
   }
   /**

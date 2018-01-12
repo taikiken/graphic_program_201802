@@ -12,6 +12,7 @@
 
 // app
 import { Ad } from '../../../app/const/Ad';
+import { CategoriesDae } from '../../../dae/categories/CategoriesDae';
 
 // React
 /**
@@ -41,8 +42,8 @@ export default class SPComponentArticleAd extends React.Component {
       uniqueId: React.PropTypes.string.isRequired,
       // ストリーム広告
       adSp: React.PropTypes.string.isRequired,
-      // @type {CategoriesDae} - since 2017-03-15
-      categories: React.PropTypes.object.isRequired,
+      // categories: React.PropTypes.object.isRequired,
+      categories: React.PropTypes.instanceOf(CategoriesDae).isRequired,
     };
   }
   // ---------------------------------------------------
@@ -103,8 +104,8 @@ export default class SPComponentArticleAd extends React.Component {
     }
   }
   /**
-   * 3番目（添字 2）で「広告タグ」が設定されている時に出力します<br>
-   * コンテンツが（添字 2）に届かない時は記事の最後に出力します
+   * 1. 3番目（添字 2）で「広告タグ」が設定されている時に出力します
+   * 1. コンテンツが（添字 2）に届かない時は記事の最後に出力します
    * @return {?XML} 広告 tag を返します
    */
   render() {

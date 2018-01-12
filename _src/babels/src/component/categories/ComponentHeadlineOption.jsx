@@ -95,11 +95,13 @@ export default class ComponentHeadlineOption extends React.Component {
               home={this.props.home}
             />
           </div>
+          {/*
           <ComponentHeadlineAd
             browser={this.props.browser}
             ad={this.props.ad}
             category={this.props.category}
           />
+          */}
         </div>
       </div>
     );

@@ -67,7 +67,7 @@ export default class SPComponentArticles extends React.Component {
       // home or not
       home: React.PropTypes.bool.isRequired,
       // ストリーム広告
-      adSp: React.PropTypes.string.isRequired
+      adSp: React.PropTypes.string.isRequired,
     };
   }
   // ---------------------------------------------------

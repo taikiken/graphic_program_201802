@@ -133,7 +133,8 @@ export default class SPComponentHeadlines extends React.Component {
    * @return {?XML} `div.headline-root` あるいは null を返します
    */
   render() {
-    const { list, home, archive } = this.props;
+    // const { list, home, archive } = this.props;
+    const { list, home } = this.props;
 
     if (list.length === 0) {
       return null;
@@ -179,10 +180,12 @@ export default class SPComponentHeadlines extends React.Component {
               <div ref={(element) => (this.sponsorLink = element)} />
             </div>
             */}
+            {/*
             <SPComponentHeadlineArticleAd
               home={home}
               archive={archive}
             />
+            */}
           </div>
         </div>
       </div>
