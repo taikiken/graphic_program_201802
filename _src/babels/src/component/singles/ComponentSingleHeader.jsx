@@ -31,7 +31,7 @@ const React = self.React;
  * 汎用化のために `ViewSingleHeader` {@link ViewSingleHeader} から分離します
  * @since 2016-09-24
  */
-export class ComponentSingleHeader extends React.Component {
+export default class ComponentSingleHeader extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

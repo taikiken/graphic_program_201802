@@ -22,7 +22,7 @@ import { ComponentSinglePost } from '../../../component/singles-content/Componen
 import { ComponentSingleProvider } from '../../../component/singles-content/ComponentSingleProvider';
 
 // component/singles
-import { ComponentSingleFooter } from '../../../component/singles/ComponentSingleFooter';
+import ComponentSingleFooter from '../../../component/singles/ComponentSingleFooter';
 
 // util
 // import { Fb } from '../../../util/Fb';

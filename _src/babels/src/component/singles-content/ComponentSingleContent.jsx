@@ -18,7 +18,7 @@ import { ComponentSingleComments } from './ComponentSingleComments';
 import { ComponentSingleProvider } from './ComponentSingleProvider';
 
 // component/singles
-import { ComponentSingleFooter } from '../singles/ComponentSingleFooter';
+import ComponentSingleFooter from '../singles/ComponentSingleFooter';
 
 // util
 // import { Fb } from '../../util/Fb';

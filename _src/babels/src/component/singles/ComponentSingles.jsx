@@ -40,7 +40,7 @@ const React = self.React;
  *  desktop: 記事詳細「次の記事一覧」親コンポーネント
  * @since 2016-09-30
  */
-export class ComponentSingles extends React.Component {
+export default class ComponentSingles extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

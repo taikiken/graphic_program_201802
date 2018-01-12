@@ -23,7 +23,7 @@ import {User} from '../../app/User';
 // node
 // import {BookmarkNode} from '../../node/bookmark/BookmarkNode';
 
-import { ComponentSingleHeader } from '../../component/singles/ComponentSingleHeader';
+import ComponentSingleHeader from '../../component/singles/ComponentSingleHeader';
 
 // React
 /* eslint-disable no-unused-vars */

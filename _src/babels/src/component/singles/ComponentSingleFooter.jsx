@@ -38,7 +38,7 @@ const React = self.React;
  * - Banner {@link Banner} の出力を行います
  * @since 2016-09-24
  */
-export class ComponentSingleFooter extends React.Component {
+export default class ComponentSingleFooter extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

@@ -23,7 +23,7 @@ import View from '../View';
 
 // component
 // @since 2016-09-24
-import { ComponentSingleFooter } from '../../component/singles/ComponentSingleFooter';
+import ComponentSingleFooter from '../../component/singles/ComponentSingleFooter';
 
 // React
 /* eslint-disable no-unused-vars */

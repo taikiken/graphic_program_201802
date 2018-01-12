@@ -42,7 +42,7 @@ const React = self.React;
  * ```
  * @since 2016-09-24
  */
-export class ComponentSingleRelated extends React.Component {
+export default class ComponentSingleRelated extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

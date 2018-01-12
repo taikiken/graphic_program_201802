@@ -25,7 +25,7 @@ import {Safety} from '../../data/Safety';
 
 
 // component
-import { ComponentSingleRelated } from '../../component/singles/ComponentSingleRelated';
+import ComponentSingleRelated from '../../component/singles/ComponentSingleRelated';
 
 // React
 /* eslint-disable no-unused-vars */

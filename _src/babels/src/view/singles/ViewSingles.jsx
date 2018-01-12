@@ -27,7 +27,7 @@ import { SinglesAuth } from '../../action/singles/SinglesAuth';
 import { SingleDae } from '../../dae/SingleDae';
 
 // component
-import { ComponentSingles } from '../../component/singles/ComponentSingles';
+import ComponentSingles from '../../component/singles/ComponentSingles';
 
 // import { ComponentMoreButton } from '../../component/articles/ComponentMoreButton';
 
