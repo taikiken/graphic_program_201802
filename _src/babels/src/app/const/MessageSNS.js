@@ -19,42 +19,42 @@ export class MessageSNS {
    * FACEBOOK
    * @return {string} facebook を返します
    */
-  static get FACEBOOK():string {
+  static get FACEBOOK() {
     return 'facebook';
   }
   /**
    * TWEET
    * @return {string} ツイート を返します
    */
-  static get TWEET():string {
+  static get TWEET() {
     return 'ツイート';
   }
   /**
    * GOOGLE_PLUS
    * @return {string} Google+ を返します
    */
-  static get GOOGLE_PLUS():string {
+  static get GOOGLE_PLUS() {
     return 'Google+';
   }
   /**
    * SEND_LINE
    * @return {string} LINEへ送る を返します
    */
-  static get SEND_LINE():string {
+  static get SEND_LINE() {
     return 'LINEへ送る';
   }
   /**
    * VIA, twitter url `&via=` に使用します
    * @return {string} sportsbull_jp を返します
    */
-  static get VIA():string {
+  static get VIA() {
     return 'sportsbull_jp';
   }
   /**
    * FB_IMG_ALT, like image alt tag value
    * @return {string} SPORTS BULLをいいねして最新ニュースをチェック！ を返します
    */
-  static get FB_IMG_ALT():string {
+  static get FB_IMG_ALT() {
     return 'SPORTS BULLをいいねして最新ニュースをチェック！';
   }
 }

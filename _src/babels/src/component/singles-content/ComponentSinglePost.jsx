@@ -24,6 +24,9 @@ import { Ga } from '../../ga/Ga';
 import { ComponentSinglePostBody } from './ComponentSinglePostBody';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

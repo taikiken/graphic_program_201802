@@ -9,29 +9,33 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
+// VideojsImaNode
 // app
 import { Content } from '../../app/const/Content';
 
 // ui
-import { Hit } from '../../ui/Hit';
+import Hit from '../../ui/Hit';
 
 // ga
 import { GaData } from '../../ga/GaData';
 import { Ga } from '../../ga/Ga';
 
 // Sagen
+/**
+ * [library] - Sagen
+ */
 const Sagen = self.Sagen;
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
  * alias VideojsImaNode
- *
- * 記事詳細・先頭の動画
- *
- * 画面から見切れたら動画再生を止める
+ * - 記事詳細・先頭の動画
+ * - 画面から見切れたら動画再生を止める
  * @since 2016-11-14
  */
 export class ComponentVideojsImaArticle extends React.Component {
@@ -304,7 +308,7 @@ export class ComponentVideojsImaArticle extends React.Component {
     const Ads = self.Ads;
     if (!Ads) {
       setTimeout(() => {
-        this.iPadInitPlayer();
+        this.iPhoneInitPlayer();
       }, 25);
     }
     const vast = this.props.video.adUrl.sp;

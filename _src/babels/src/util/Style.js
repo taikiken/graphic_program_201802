@@ -11,14 +11,18 @@
  */
 
 // Sagen.Dom class
+/**
+ * [library] - Sagen.Dom
+ * @type {Dom}
+ */
 const Dom = self.Sagen.Dom;
 
-/**
- * オリジナルの element.style.cssText を保持するための Symbol
- * @private
- * @type {Symbol}
- */
-const cssSymbol = Symbol('current style.cssText');
+// /**
+//  * オリジナルの element.style.cssText を保持するための Symbol
+//  * @private
+//  * @type {Symbol}
+//  */
+// const cssSymbol = Symbol('current style.cssText');
 
 /**
  * Element の style を操作します
@@ -35,18 +39,23 @@ export class Style {
      */
     this.element = element;
     // @type {string} - オリジナルの element.style.cssText を保持します
-    this[cssSymbol] = this.current();
+    // this[cssSymbol] = this.current();
+    /**
+     * instance 作成時の style.cssText
+     * @type {string}
+     */
+    this.origin = this.current();
   }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * instance 作成時の style.cssText
-   * @return {string} instance 作成時の style.cssText を返します
-   */
-  get origin() {
-    return this[cssSymbol];
-  }
+  // // ---------------------------------------------------
+  // //  GETTER / SETTER
+  // // ---------------------------------------------------
+  // /**
+  //  * instance 作成時の style.cssText
+  //  * @return {string} instance 作成時の style.cssText を返します
+  //  */
+  // get origin() {
+  //   return this[cssSymbol];
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -67,7 +76,8 @@ export class Style {
   set(css, update = false) {
     // 更新依頼ありの時のみ書換える
     if (update) {
-      this[cssSymbol] = css;
+      // this[cssSymbol] = css;
+      this.origin = css;
     }
     // 存在チェック
     const element = this.element;

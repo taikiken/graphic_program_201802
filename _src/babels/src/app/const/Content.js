@@ -11,27 +11,27 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 /**
- * <p>コンテンツ属性(attribute)</p>
- * 全て static です
+ * コンテンツ属性(attribute)
+ * - 全て static です
  */
 export class Content {
-  /**
-   * <p>コンテンツ属性</p>
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'MediaType is static Class. not use new MediaType().' );
-
-    }
-
-  }
+  // /**
+  //  * <p>コンテンツ属性</p>
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'MediaType is static Class. not use new MediaType().' );
+  //
+  //   }
+  //
+  // }
   /**
    * コンテンツ幅
    * @return {Number} コンテンツ幅を返します 710

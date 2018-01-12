@@ -21,12 +21,12 @@ export class GaData {
    * @param {string} [eventCategory=''] 必須 通常は接点に使用されたオブジェクト（例: Video）
    * @param {string} [eventAction=''] 必須 接点の種類（例: play）
    * @param {string} [eventLabel=''] オプション イベントの分類に便利です（例: Fall Campaign）
-   * @param {Number} [eventValue=0] オプション イベントの分類に便利です（例: Fall Campaign）
-   * @param {Boolean} [eventInteraction=false] オプション イベントをインタラクション以外のイベントとして送信できます。その場合、nonInteraction フィールドを true に指定します（send コマンドの fieldsObject を使用）
+   * @param {number} [eventValue=0] オプション イベントに関連する数値（例: 42）
+   * @param {boolean} [eventInteraction=false] オプション イベントをインタラクション以外のイベントとして送信できます。その場合、nonInteraction フィールドを true に指定します（send コマンドの fieldsObject を使用）
    * @param {string} [hitType=event] 必須 hitType value
    * @param {?string} [page=null] オプション 記事詳細無限スクロール時に in view 記事の ID 送信に使用します
    */
-  constructor(method:string, eventCategory:string = '', eventAction:string = '', eventLabel:string = '', eventValue:Number = 0, eventInteraction:Boolean = false, hitType = 'event', page = null) {
+  constructor(method, eventCategory = '', eventAction = '', eventLabel = '', eventValue = 0, eventInteraction = false, hitType = 'event', page = null) {
     // Object.assign( this, {method, eventCategory, eventAction, eventLabel, eventValue, eventInteraction} );
     /**
      * 発生場所（関数名）
@@ -50,12 +50,12 @@ export class GaData {
     this.eventLabel = eventLabel;
     /**
      * オプション イベントの分類に便利です（例: Fall Campaign）
-     * @type {Number}
+     * @type {number}
      */
     this.eventValue = eventValue;
     /**
      * オプション イベントをインタラクション以外のイベントとして送信できます。その場合、nonInteraction フィールドを true に指定します（send コマンドの fieldsObject を使用）
-     * @type {Boolean}
+     * @type {boolean}
      */
     this.eventInteraction = eventInteraction;
     /**
@@ -67,8 +67,7 @@ export class GaData {
     this.hitType = hitType;
     /**
      * オプション 記事詳細無限スクロール時に in view 記事の ID 送信に使用します
-     *
-     * `/p/6789/`
+     * - `/p/6789/`
      *
      * @type {?string}
      * @since 2016-10-05
@@ -101,7 +100,7 @@ export class GaData {
    * nonInteraction フィールドを true に指定した Object を取得します
    * @return {{nonInteraction: boolean}} nonInteraction フィールドを true に指定した Object を返します
    */
-  static nonInteraction():Object {
+  static nonInteraction() {
     return { nonInteraction: true };
   }
 }

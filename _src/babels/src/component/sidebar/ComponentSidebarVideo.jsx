@@ -15,9 +15,9 @@ import { Message } from '../../app/const/Message';
 import { Empty } from '../../app/const/Empty';
 
 // node
-import { RecommendTitleNode } from '../../node/sidebar/RecommendTitleNode';
+// import { RecommendTitleNode } from '../../node/sidebar/RecommendTitleNode';
 // import { RankingNode } from '../../node/sidebar/RankingNode';
-import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
+// import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
 
 // dae
 import { ArticleDae } from '../../dae/ArticleDae';
@@ -26,8 +26,13 @@ import { ArticleDae } from '../../dae/ArticleDae';
 import { Safety } from '../../data/Safety';
 import { Ga } from '../../ga/Ga';
 import { GaData } from '../../ga/GaData';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
+import ComponentSidebarTitle from './ComponentSidebarTitle';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 // ----------------------------------------------
 
@@ -68,7 +73,6 @@ const gaSend = (home, detail, url, id, thisSlug) => {
  * @param {AnotherCategoriesDae} anotherCategories 地域名称
  * @param {string} categorySlug category.slug
  * @returns {XML} li.board-item
- * @constructor
  */
 const ComponentVideoDom = ({
                              index,
@@ -97,6 +101,8 @@ const ComponentVideoDom = ({
           <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SMALL} alt="" />
         </figure>
         <div className="post-data">
+          <h4 className="post-heading">{title}</h4>
+          {/*
           <p className={`post-category post-category-${slug}`}>
             <CategoryLabelNode
               categories={categories}
@@ -105,7 +111,13 @@ const ComponentVideoDom = ({
               anotherCategories={anotherCategories}
             />
           </p>
-          <h4 className="post-heading">{title}</h4>
+          */}
+          <ComponentCategoryLabels
+            categories={categories}
+            id={`videos-label-${id}`}
+            index={index}
+            anotherCategories={anotherCategories}
+          />
           <p className="post-date">{date}</p>
         </div>
       </a>
@@ -162,9 +174,14 @@ export default class ComponentSidebarVideo extends React.Component {
     return (
       <div className="board-small widget-recommend">
         {/* title */}
+        {/*
         <RecommendTitleNode
           slug={categorySlug}
           label=""
+          title={Message.RECOMMEND_TITLE}
+        />
+        */}
+        <ComponentSidebarTitle
           title={Message.RECOMMEND_TITLE}
         />
         <ul className="board-list">

@@ -51,12 +51,23 @@ const sp = Sagen.Browser.Mobile.phone();
 
 /**
  * スライド幅
- * - PC: 640
- * - SP: 240;
+ * - PC: 640 -> 540
+ * - SP: 240 -> 100
  * @private
  * @type {number}
+ * @since 2018-01-09 update with
  */
-const width = sp ? 280 : 640;
+const width = sp ? 100 : 540;
+// const width = sp ? 280 : 640;
+
+/**
+ * 移動量単位, PC / SP で異なります - SP がレスポンシブ対応するため
+ * - PC: px
+ * - SP: % -> px -> vw
+ * @type {string}
+ * @since 2018-01-09
+ */
+const unit = sp ? 'vw' : 'px';
 
 /**
  * carousel を HTMLElement が存在する状態で実装する準備を行います
@@ -114,7 +125,7 @@ export default class Prepare {
       pager.start();
     }
     // carousel init & start
-    const carousel = new Carousel(width, length, wrapper);
+    const carousel = new Carousel(width, length, wrapper, unit);
     carousel.start();
     // only sp - swipe
     if (sp) {
@@ -135,7 +146,7 @@ export default class Prepare {
    */
   static css(length) {
     const style = document.createElement('style');
-    const rule = document.createTextNode(`#js-pickup-slider{width: ${length * width}px;}`);
+    const rule = document.createTextNode(`#js-pickup-slider{width: ${length * width}${unit};}`);
     style.media = 'screen';
     style.type = 'text/css';
     if (style.styleSheet) {
@@ -170,10 +181,12 @@ export default class Prepare {
       // li が 0 の時は実装しない
       return false;
     }
-    let pagers = null;
-    if (!sp) {
-      pagers = Prepare.pager(length);
-    }
+    // let pagers = null;
+    // if (!sp) {
+    //   pagers = Prepare.pager(length);
+    // }
+    // @since 208-01-09 sp pager ありへ変更
+    const pagers = Prepare.pager(length);
     const { prev, next } = Prepare.direction(length);
     // style insert
     Prepare.css(count);
@@ -233,7 +246,7 @@ export default class Prepare {
     const fragment = document.createDocumentFragment();
     // first element へ `current` class 追加するフラッグ
     let isCurrent = true;
-    // TODO: Array.map へ変更する
+    // Array.map へ変更する -> しない -> IE Array.from 使えないので
     for (const article of articles) {
       const clone = article.cloneNode(true);
       // 表示するコンテンツのみ
@@ -262,7 +275,9 @@ export default class Prepare {
   static pager(length) {
     // mobile phone pager なし
     // 1件 pager なし
-    if (sp || length === 1) {
+    // if (sp || length === 1) {
+    // sp も pager あり
+    if (length === 1) {
       return null;
     }
     // pager root element

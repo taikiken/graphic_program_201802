@@ -17,24 +17,11 @@
  * @since 2016-11-15
  */
 export class PageTitle {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
   /**
-   * 記事タイトル、記事カテゴリラベル
-   * @param {string} title 記事タイトル
-   * @param {string} [label=''] 記事カテゴリラベル(primary)
-   */
-  constructor(title, label = '') {
-    /**
-     * 記事タイトル
-     * @return {string} 記事タイトル
-     */
-    this.article = () => title;
-    /**
-     * 記事カテゴリラベル
-     * @return {string} 記事カテゴリラベル
-     */
-    this.label = () => label;
-  }
-  /**
+   /**
    * タイトル区切り文字
    * @return {string} ' | ' を返します
    */
@@ -48,6 +35,29 @@ export class PageTitle {
   static get SITE() {
     return 'スポーツブル / SPORTS BULL';
   }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * 記事タイトル、記事カテゴリラベル
+   * @param {string} title 記事タイトル
+   * @param {string} [label=''] 記事カテゴリラベル(primary)
+   */
+  constructor(title, label = '') {
+    /**
+     * 記事タイトル
+     * @type {string}
+     */
+    this.article = title;
+    /**
+     * 記事カテゴリラベル
+     * @type {string}
+     */
+    this.label = label;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * ga 用送信タイトル（擬似ページタイトル）を取得します
    * ```
@@ -56,8 +66,8 @@ export class PageTitle {
    * @return {string} ga 用送信タイトル
    */
   title() {
-    let title = `${this.article()}`;
-    const label = this.label();
+    let title = `${this.article}`;
+    const label = this.label;
     if (label) {
       title += `${PageTitle.DIVIDER}${label}`;
     }

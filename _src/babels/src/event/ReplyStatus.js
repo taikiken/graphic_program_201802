@@ -13,8 +13,16 @@
 
 import {EventDispatcher} from './EventDispatcher';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link ReplyStatus} - inner symbol
+ * @type {symbol}
+ */
+const singletonSymbol = Symbol('ReplyStatus singleton inner symbol');
+/**
+ * {@link ReplyStatus} singleton instance
+ * @type {?ReplyStatus}
+ */
+let singletonInstance = null;
 
 /**
  * コメント返信フォーム custom event
@@ -27,25 +35,6 @@ let _instance = null;
  *
  */
 export class ReplyStatus extends EventDispatcher {
-  /**
-   * コメント返信フォームの open, close, sending, complete を通知します。
-   *
-   * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {ReplyStatus} ReplyStatus instance を返します
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'ReplyStatus is static Class. not use new ReplyStatus(). instead ReplyStatus.factory()' );
-
-    }
-
-    if ( _instance === null ) {
-      super();
-      _instance = this;
-    }
-    return _instance;
-  }
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------
@@ -53,29 +42,61 @@ export class ReplyStatus extends EventDispatcher {
    * event OPEN
    * @return {string} replyOpen を返します
    */
-  static get OPEN():string {
+  static get OPEN() {
     return 'replyOpen';
   }
   /**
    * event CLOSE
    * @return {string} replyClose を返します
    */
-  static get CLOSE():string {
+  static get CLOSE() {
     return 'replyClose';
   }
   /**
    * event START
    * @return {string} replyStart を返します
    */
-  static get START():string {
+  static get START() {
     return 'replyStart';
   }
   /**
    * event COMPLETE
    * @return {string} replyComplete を返します
    */
-  static get COMPLETE():string {
+  static get COMPLETE() {
     return 'replyComplete';
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * instance を生成します
+   * @return {ReplyStatus} ReplyStatus instance を返します
+   */
+  static factory() {
+    if ( singletonInstance === null ) {
+      singletonInstance = new ReplyStatus( singletonSymbol );
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * コメント返信フォームの open, close, sending, complete を通知します。
+   *
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {ReplyStatus} ReplyStatus instance を返します
+   */
+  constructor(target) {
+    if (singletonSymbol !== target) {
+      throw new Error( 'ReplyStatus is static Class. not use new ReplyStatus(). instead ReplyStatus.factory()' );
+    }
+    if (singletonInstance === null) {
+      super();
+      singletonInstance = this;
+    }
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -84,22 +105,22 @@ export class ReplyStatus extends EventDispatcher {
    * open event を発火します
    * @param {string} id comment id, form 設置 ID, 要 Page 内ユニーク
    */
-  open( id:string ):void {
-    this.dispatch( { type: ReplyStatus.OPEN, id: id } );
+  open(id) {
+    this.dispatch({ type: ReplyStatus.OPEN, id });
   }
   /**
    * close event を発火します
    * @param {string} id comment id, form 設置 ID, 要 Page 内ユニーク
    */
-  close( id:string ):void {
-    this.dispatch( { type: ReplyStatus.CLOSE, id: id } );
+  close(id) {
+    this.dispatch({ type: ReplyStatus.CLOSE, id });
   }
   /**
    * start event を発火します
    * @param {string} id comment id, form 設置 ID, 要 Page 内ユニーク
    */
-  start( id:string ):void {
-    this.dispatch( { type: ReplyStatus.START, id: id } );
+  start(id) {
+    this.dispatch({ type: ReplyStatus.START, id });
   }
   /**
    * complete event を発火します
@@ -110,24 +131,8 @@ export class ReplyStatus extends EventDispatcher {
    * @param {string} articleId 記事ID 識別子として追加
    * @since 2016-11-05 articleId added
    */
-  complete(id:string, kind:string = '', articleId = ''):void {
+  complete(id, kind = '', articleId = '') {
+    // console.log('ReplyStatus.complete', id, kind, articleId);
     this.dispatch({ type: ReplyStatus.COMPLETE, id, kind, articleId });
-  }
-  // ---------------------------------------------------
-  //  static method
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {ReplyStatus} ReplyStatus instance を返します
-   */
-  static factory():ReplyStatus {
-
-    if ( _instance === null ) {
-
-      _instance = new ReplyStatus( _symbol );
-
-    }
-
-    return _instance;
   }
 }

@@ -43,11 +43,11 @@ $border-color: #585959;
   }
 
   .widget-ranking-heading-title {
-    @include sprite( $common-side-ranking-heading_big6 );
+    @include sprite( $common-side-ranking-heading_dark );
   }
 
   .widget-recommend-heading-title {
-    @include sprite( $common-side-recommend-heading_big6 );
+    @include sprite( $common-side-recommend-heading_dark );
   }
 
   .widget-ranking-heading-title,
@@ -58,8 +58,8 @@ $border-color: #585959;
   .foot-sec {
     background-color: #000;
 
-    .foot-pr {
-      // background-color: #181818;
+    .foot-sec-inner {
+      background-color: #fff;
     }
   }
 
@@ -91,7 +91,17 @@ $border-color: #585959;
   .board-large {
     .board-item {
       // border-bottom-color: #1b1b1b;
-      // background-color: #111;
+      background-color: transparent;
+    }
+
+    .post {
+      @include link-decoration(#fff, null, none, none);
+
+      &:hover {
+        .post-heading {
+          color: $key-color !important;
+        }
+      }
     }
   }
 
@@ -141,12 +151,19 @@ $border-color: #585959;
     }
   }
 
+  .board-btn-viewmore {
+    //.board-btn-viewmore-link
+    &-link {
+      @include link-decoration(#fff, $key-color, none, none);
+      background-color: #222;
+    }
+  }
+
   .loading-root {
     .loading-spinner {
       background-color: #000;
     }
   }
-
 } //.theme_big6
 
 
@@ -647,19 +664,20 @@ $border-color: #585959;
 
 
 
-// .headline-heading
-// 新着記事
-.whole.theme_big6 {
-  .headline-heading {
-    margin-top: 60px;
-    border-bottom-color: $key-color;
+// リニューアルで不要になりました
+// // .headline-heading
+// // 新着記事
+// .whole.theme_big6 {
+//   .headline-heading {
+//     margin-top: 60px;
+//     border-bottom-color: $key-color;
 
-    // .headline-heading-ruby
-    &-ruby {
-      color: #bcb8ad;
-    }
-  }
-}
+//     // .headline-heading-ruby
+//     &-ruby {
+//       color: #bcb8ad;
+//     }
+//   }
+// }
 
 
 

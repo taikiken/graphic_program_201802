@@ -144,6 +144,10 @@ patterns = [
     match: 'copyright'
     replacement: 'Parachute'
   }
+  {
+    match: 'nodeEnv'
+    replacement: process.env.NODE_ENV || 'development'
+  }
 ]
 
 # ------------------------------------------------------
