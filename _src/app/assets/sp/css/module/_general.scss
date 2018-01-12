@@ -558,11 +558,12 @@
 
 
 
-.headline-outer {
+#headline-container {
   .sponsor-link {
-    // padding-right: perCalc(20);
-    // padding-left: perCalc(20);
-    // border-top: 1px solid $border-primary-color;
+    &.board-item {
+      padding-right: 0;
+      padding-left: 0;
+    }
 
     .adgLink,
     .adsWrapper {
