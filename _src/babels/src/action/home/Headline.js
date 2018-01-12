@@ -13,7 +13,7 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
-import {Length} from '../../app/const/Length';
+// import {Length} from '../../app/const/Length';
 
 /**
  * Home headline（注目ニュース）
@@ -54,8 +54,10 @@ export class Headline extends Action {
    * @return {string} headline API url を返します
    */
   get url() {
-    return this.sp ?
-      `${this.path}/headline` :
-      `${this.path}/headline?offset=0&length=${Length.headline}`;
+    // return this.sp ?
+    //   `${this.path}/headline` :
+    //   `${this.path}/headline?offset=0&length=${Length.headline}`;
+    // 件数無制限にします - 2018-01-12
+    return `${this.path}/headline`;
   }
 }

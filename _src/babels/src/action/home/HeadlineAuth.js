@@ -14,7 +14,7 @@
 import {ActionAuth} from '../ActionAuth';
 import {Api} from '../../net/Api';
 import {User} from '../../app/User';
-import {Length} from '../../app/const/Length';
+// import {Length} from '../../app/const/Length';
 
 /**
  * Home headline（注目ニュース）
@@ -57,8 +57,10 @@ export class HeadlineAuth extends ActionAuth {
    */
   get url() {
     // return `${this._url}/headline?offset=0&length=${Length.headline}`;
-    return this.sp ?
-      `${this.path}/headline` :
-      `${this.path}/headline?offset=0&length=${Length.headline}`;
+    // return this.sp ?
+    //   `${this.path}/headline` :
+    //   `${this.path}/headline?offset=0&length=${Length.headline}`;
+    // 件数無制限にします - 2018-01-12
+    return `${this.path}/headline`;
   }
 }
