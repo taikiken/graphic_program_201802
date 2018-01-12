@@ -558,7 +558,8 @@
 
 
 
-#headline-container {
+#headline-container, // トップページ用
+.headline-outer { //カテゴリー一覧用
   .sponsor-link {
     &.board-item {
       padding-right: 0;
