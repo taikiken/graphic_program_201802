@@ -298,4 +298,4 @@ export let VideojsImaNode = React.createClass( {
     const gaData = new GaData('VideojsImaNode.tracking', 'video', action, url);
     Ga.add(gaData);
   }
-} );
+});

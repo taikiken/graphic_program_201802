@@ -64,6 +64,12 @@
           .overlay {
             width: 100vw;
           }
+
+          .overlay-play {
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
         }
 
         .post-comment-num {

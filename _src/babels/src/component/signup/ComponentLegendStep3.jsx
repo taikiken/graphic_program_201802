@@ -331,7 +331,10 @@ export class ComponentStep3Form extends React.Component {
             {
               categories.map((category, i) => {
                 return (
-                  <li key={category.slug} className={`setting-form-interest-item interest-item-${category.slug}`}>
+                  <li
+                    key={category.slug}
+                    className={`setting-form-interest-item interest-item-${category.slug}`}
+                  >
                     <input
                       className={`interest-item interest-item-${i}`}
                       type="checkbox"

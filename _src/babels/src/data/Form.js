@@ -45,7 +45,7 @@ export class Form {
     //   form.append( data.key, data.value );
     //
     // }
-    option.map((data) => (form.append(data)));
+    option.map((data) => (form.append(data.key, data.value)));
     return form;
   }
   /**
