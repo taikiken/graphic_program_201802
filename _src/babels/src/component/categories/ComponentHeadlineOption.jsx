@@ -15,9 +15,10 @@ import View from '../../view/View';
 
 // view/headlines
 import ComponentHeadlines from '../headlines/ComponentHeadlines';
+import { CategoriesSlugDae } from '../../dae/categories/CategoriesSlugDae';
 
-// view/categories
-import ComponentHeadlineAd from './ComponentHeadlineAd';
+// // view/categories
+// import ComponentHeadlineAd from './ComponentHeadlineAd';
 
 // React
 /**
@@ -34,15 +35,15 @@ export default class ComponentHeadlineOption extends React.Component {
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * propTypes
-   * @return {{
+   * React.propTypes
+   * @returns {{
    *  list: Array<RelatedDae>,
    *  callback: Function,
    *  home: boolean,
    *  ad: string,
    *  browser: string,
    *  category: CategoriesSlugDae
-   * }} React props
+   * }} React propTypes
    */
   static get propTypes() {
     return {
@@ -53,7 +54,8 @@ export default class ComponentHeadlineOption extends React.Component {
       ad: React.PropTypes.object.isRequired,
       browser: React.PropTypes.string.isRequired,
       // @type {CategoriesSlugDae}
-      category: React.PropTypes.object.isRequired
+      // category: React.PropTypes.object.isRequired,
+      category: React.PropTypes.instanceOf(CategoriesSlugDae).isRequired,
     };
   }
   // // ---------------------------------------------------
@@ -80,19 +82,20 @@ export default class ComponentHeadlineOption extends React.Component {
    * @return {?XML} `div.headline-section` 記事一覧 headline を表示するための基本コンテナを返します
    */
   render() {
-    const list = this.props.list;
+    const { list, callback, home, category } = this.props;
     if (list.length === 0) {
       return null;
     }
-
+    // console.log('ComponentHeadlineOption.render category', category);
     return (
       <div className="headline-section">
         <div className="headline-outer">
           <div id="headline-container">
             <ComponentHeadlines
               list={list}
-              callback={this.props.callback}
-              home={this.props.home}
+              callback={callback}
+              home={home}
+              category={category}
             />
           </div>
           {/*

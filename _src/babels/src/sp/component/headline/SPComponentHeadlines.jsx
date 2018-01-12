@@ -22,7 +22,6 @@ import { Empty } from '../../../app/const/Empty';
 // data
 import { Safety } from '../../../data/Safety';
 import { ArticleDae } from '../../../dae/ArticleDae';
-import SPComponentHeadlineArticleAd from './SPComponentHeadlineArticleAd';
 import { RelatedDae } from '../../../dae/RelatedDae';
 
 // React
