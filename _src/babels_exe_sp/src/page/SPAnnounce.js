@@ -28,13 +28,14 @@ export default class SPAnnounce {
   /**
    * category 情報から「お知らせ」を取得し表示します
    * @param {string} slug category slug
+   * @param {*} option callback list
    */
-  static start(slug) {
+  static start(slug, option = {}) {
     const element = Dom.announce();
     if (!element) {
       return;
     }
-    const announce = new UT.view.ViewAnnounce(element, slug, true);
+    const announce = new UT.view.ViewAnnounce(element, slug, true, option);
     announce.start();
   }
 }

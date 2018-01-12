@@ -23,6 +23,8 @@ import { Empty } from '../../../app/const/Empty';
 import { Safety } from '../../../data/Safety';
 import { ArticleDae } from '../../../dae/ArticleDae';
 import { RelatedDae } from '../../../dae/RelatedDae';
+import SPComponentHomeHeadlineArticleAd from './SPComponentHomeHeadlineArticleAd';
+import { AdDae } from '../../../dae/theme/AdDae';
 
 // React
 /**
@@ -36,7 +38,7 @@ const React = self.React;
  *   - {@link SPComponentHeadlineArticle}
  *     - {@link ComponentArticleThumbnail}
  *     - {@link ComponentCategoryLabels}
- * - {@link SPComponentHeadlineArticleAd}
+ * - {@link SPComponentHomeHeadlineArticleAd}
  *
  * @since 2016-09-16
  */
@@ -65,6 +67,7 @@ export default class SPComponentHeadlines extends React.Component {
       ).isRequired,
       // executeSafely.bind
       callback: React.PropTypes.func.isRequired,
+      ad: React.PropTypes.instanceOf(AdDae).isRequired,
       home: React.PropTypes.bool,
       archive: React.PropTypes.bool,
     };
@@ -133,7 +136,7 @@ export default class SPComponentHeadlines extends React.Component {
    */
   render() {
     // const { list, home, archive } = this.props;
-    const { list, home } = this.props;
+    const { list, home, ad } = this.props;
 
     if (list.length === 0) {
       return null;
@@ -179,12 +182,9 @@ export default class SPComponentHeadlines extends React.Component {
               <div ref={(element) => (this.sponsorLink = element)} />
             </div>
             */}
-            {/*
-            <SPComponentHeadlineArticleAd
-              home={home}
-              archive={archive}
+            <SPComponentHomeHeadlineArticleAd
+              ad={ad}
             />
-            */}
           </div>
         </div>
       </div>
