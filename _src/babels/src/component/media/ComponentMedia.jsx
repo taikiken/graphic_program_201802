@@ -15,8 +15,9 @@ import { MediaType } from '../../app/const/MediaType';
 import ComponentMediaImage from './ComponentMediaImage';
 
 // node
-import { MediaVideoNode } from '../../node/single/MediaVideoNode';
+// import { MediaVideoNode } from '../../node/single/MediaVideoNode';
 import { SingleDae } from '../../dae/SingleDae';
+import ComponentMediaVideoSwitch from './ComponentMediaVideoSwitch';
 // import { ImagesDae } from '../../dae/theme/ImagesDae';
 // import { VideoDae } from '../../dae/media/VideoDae';
 
@@ -82,12 +83,20 @@ const ComponentMedia = ({
         );
       }
       // show video
+      // return (
+      //   <MediaVideoNode
+      //     articleId={articleId}
+      //     media={media}
+      //     index={index}
+      //     sp={sp}
+      //   />
+      // );
       return (
-        <MediaVideoNode
+        <ComponentMediaVideoSwitch
           articleId={articleId}
-          media={media}
+          video={media.video}
+          images={media.images}
           index={index}
-          sp={sp}
         />
       );
     }

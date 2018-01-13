@@ -20,7 +20,8 @@ import {MediaVideoNode} from './MediaVideoNode';
 let React = self.React;
 
 /**
- * @deprecated 2018-01-22 instead use {@link ComponentMedia}
+ * @deprecated 2018-01-12 instead use {@link ComponentMedia}
+ * @TODO future remove
  * <p>記事詳細 メインビジュアル<br>
  * 画像・動画 切替て表示します</p>
  *
