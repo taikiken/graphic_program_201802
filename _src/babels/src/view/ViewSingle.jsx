@@ -455,7 +455,7 @@ export default class ViewSingle extends View {
   //
   // }
   /**
-   * dom を render します<br>
+   * dom を render します
    * @param {SingleDae} single JSON response
    * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */

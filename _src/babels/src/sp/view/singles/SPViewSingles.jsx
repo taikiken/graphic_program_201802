@@ -33,7 +33,7 @@ import { Message } from '../../../app/const/Message';
 import { SingleDae } from '../../../dae/SingleDae';
 
 // sp/component/singles
-import { SPComponentSingles } from '../../component/singles/SPComponentSingles';
+import SPComponentSingles from '../../component/singles/SPComponentSingles';
 
 // React
 /* eslint-disable no-unused-vars */

@@ -22,6 +22,7 @@ import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 
 // component
 import ComponentArticleThumbnail from '../articles/ComponentArticleThumbnail';
+import { RelatedDae } from '../../dae/RelatedDae';
 
 // React
 /**
@@ -30,18 +31,36 @@ import ComponentArticleThumbnail from '../articles/ComponentArticleThumbnail';
 const React = self.React;
 
 /**
- * 「関連記事」を出力します<br>
- * 記事詳細汎用化のためにコンポーネント化します<br>
- * ViewRelated {@link ViewRelated}
+ * 「関連記事」を出力します
+ * - 記事詳細汎用化のためにコンポーネント化します
+ * - ViewRelated {@link ViewRelated}
  *
  * **desktop では使用しない**
- * <pre>
+ * ```
  * desktop/p.php
  * `_popIn_recommend` に JS で出力
- * </pre>
+ * ```
  * @since 2016-09-24
  */
-export class ComponentSingleRelated extends React.Component {
+export default class ComponentSingleRelated extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: array<RelatedDae>}} React props
+   */
+  static get propTypes() {
+    return {
+      // list: React.PropTypes.array.isRequired,
+      list: React.PropTypes.arrayOf(
+        React.PropTypes.instanceOf(RelatedDae).isRequired,
+      ).isRequired,
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentSingleRelated.propTypes}
@@ -56,6 +75,24 @@ export class ComponentSingleRelated extends React.Component {
     this.state = {
       list: props.list
     };
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  // /**
+  //  * list を更新します
+  //  * @param {Array<RelatedDae>} list 表示する関連記事配列
+  //  */
+  // updateList(list) {
+  //   this.setState({ list });
+  // }
+  /**
+   * delegate - update props to setState
+   * @param {{single: Array.<RelatedDae>}} nextProps next React.props
+   */
+  componentWillReceiveProps(nextProps) {
+    const { list } = nextProps;
+    this.setState({ list });
   }
   /**
    * state.list を元に `div.related-post` を出力します<br>
@@ -113,25 +150,6 @@ export class ComponentSingleRelated extends React.Component {
         </ul>
       </div>
     );
-  }
-  /**
-   * list を更新します
-   * @param {Array<RelatedDae>} list 表示する関連記事配列
-   */
-  updateList(list) {
-    this.setState({ list });
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{list: array<RelatedDae>}} React props
-   */
-  static get propTypes() {
-    return {
-      list: React.PropTypes.array.isRequired
-    };
   }
 }
 //

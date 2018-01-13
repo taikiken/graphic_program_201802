@@ -24,7 +24,7 @@ import { Category } from '../../../action/archive/Category';
 import { CategoryAuth } from '../../../action/archive/CategoryAuth';
 
 // sp/component
-import { SPComponentSinglesWidgetPopularList } from '../../component/singles/SPComponentSinglesWidgetPopularList';
+import SPComponentSinglesWidgetPopularList from '../../component/singles/SPComponentSinglesWidgetPopularList';
 
 // React
 /* eslint-disable no-unused-vars */

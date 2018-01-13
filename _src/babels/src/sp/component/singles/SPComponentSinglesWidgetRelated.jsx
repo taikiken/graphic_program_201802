@@ -17,6 +17,9 @@ import { Url } from '../../../app/const/Url';
 import { SPSnap } from '../../ui/SPSnap';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -24,7 +27,7 @@ const React = self.React;
  * Syn.extension.js を使用し出力します
  * @since 2016-09-28
  */
-export class SPComponentSinglesWidgetRelated extends React.Component {
+export default class SPComponentSinglesWidgetRelated extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

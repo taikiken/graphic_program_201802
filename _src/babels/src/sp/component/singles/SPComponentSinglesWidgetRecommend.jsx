@@ -25,6 +25,9 @@ import ComponentArticleThumbnail from '../../../component/articles/ComponentArti
 import { SPSnap } from '../../ui/SPSnap';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -32,7 +35,7 @@ const React = self.React;
  * 記事詳細 JSON.response.recommend_articles から出力します
  * @since 2016-09-28
  */
-export class SPComponentSinglesWidgetRecommend extends React.Component {
+export default class SPComponentSinglesWidgetRecommend extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

@@ -18,6 +18,7 @@ import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 
 // component
 import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
+import { SingleDae } from '../../dae/SingleDae';
 
 // React
 /**
@@ -30,7 +31,7 @@ const React = self.React;
  * 汎用化のために `ViewSingleHeader` {@link ViewSingleHeader} から分離します
  * @since 2016-09-24
  */
-export class ComponentSingleHeader extends React.Component {
+export default class ComponentSingleHeader extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -40,7 +41,8 @@ export class ComponentSingleHeader extends React.Component {
    */
   static get propTypes() {
     return {
-      single: React.PropTypes.object.isRequired,
+      // single: React.PropTypes.object.isRequired,
+      single: React.PropTypes.instanceOf(SingleDae).isRequired,
       sign: React.PropTypes.bool.isRequired,
       callback: React.PropTypes.func
     };
@@ -62,7 +64,6 @@ export class ComponentSingleHeader extends React.Component {
      *  sign: boolean,
      *  status: boolean,
      *  bookmarked: string,
-     *  loading: string
      * }}
      * */
     this.state = {
@@ -70,7 +71,7 @@ export class ComponentSingleHeader extends React.Component {
       sign: props.sign,
       status: props.single.isBookmarked,
       bookmarked: props.single.isBookmarked ? 'bookmarked enable' : '',
-      loading: ''
+      // loading: ''
     };
   }
   // ---------------------------------------------------
@@ -94,12 +95,20 @@ export class ComponentSingleHeader extends React.Component {
       safety(View.DID_MOUNT);
     }
   }
+  // /**
+  //  * React state, single と sign を更新します
+  //  * @param {SingleDae} single 記事詳細 JSON データ
+  //  * @param {boolean} sign ユーザーがログイン済みかの真偽値
+  //  * */
+  // updateSingle(single, sign) {
+  //   this.setState({ single, sign });
+  // }
   /**
-   * React state, single と sign を更新します
-   * @param {SingleDae} single 記事詳細 JSON データ
-   * @param {boolean} sign ユーザーがログイン済みかの真偽値
-   * */
-  updateSingle(single, sign) {
+   * delegate - update props to setState
+   * @param {{single: SingleDae, sign: boolean}} nextProps next React.props
+   */
+  componentWillReceiveProps(nextProps) {
+    const { single, sign } = nextProps;
     this.setState({ single, sign });
   }
   /**

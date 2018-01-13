@@ -38,7 +38,7 @@ const React = self.React;
  * - 画面から見切れたら動画再生を止める
  * @since 2016-11-14
  */
-export class ComponentVideojsImaArticle extends React.Component {
+export default class ComponentVideojsImaArticle extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -310,6 +310,7 @@ export class ComponentVideojsImaArticle extends React.Component {
       setTimeout(() => {
         this.iPhoneInitPlayer();
       }, 25);
+      return;
     }
     const vast = this.props.video.adUrl.sp;
     const adUrl = vast !== '' ? vast + Date.now() : '';

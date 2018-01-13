@@ -14,9 +14,9 @@
 import { WidgetType } from '../../app/const/WidgetType';
 
 // component
-import { ComponentSinglesWidgetRecommend } from './ComponentSinglesWidgetRecommend';
-import { ComponentSinglesWidgetPopular } from './ComponentSinglesWidgetPopular';
-import { ComponentSinglesWidgetRelated } from './ComponentSinglesWidgetRelated';
+import ComponentSinglesWidgetRecommend from './ComponentSinglesWidgetRecommend';
+import ComponentSinglesWidgetPopular from './ComponentSinglesWidgetPopular';
+import ComponentSinglesWidgetRelated from './ComponentSinglesWidgetRelated';
 
 // React
 /**
@@ -29,7 +29,7 @@ const React = self.React;
  * 出力 Component を「記事詳細」index を元に判断します
  * @since 2016-09-30
  */
-export class ComponentSinglesWidget extends React.Component {
+export default class ComponentSinglesWidget extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

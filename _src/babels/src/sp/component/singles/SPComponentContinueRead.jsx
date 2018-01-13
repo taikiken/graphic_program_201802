@@ -14,13 +14,16 @@
 import { Message } from '../../../app/const/Message';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
  * SP: 記事詳細「続きを読む」ボタンを汎用化のために `SPViewContinueRead` {@link SPViewContinueRead} から分離します
  * @since 2016-09-24
  */
-export class SPComponentContinueRead extends React.Component {
+export default class SPComponentContinueRead extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link SPComponentContinueRead.propTypes}
