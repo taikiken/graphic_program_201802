@@ -22,17 +22,20 @@ import ComponentCategoryLabels from '../../../component/categories/ComponentCate
 import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
- * SP: 記事詳細・次の記事一覧 > 人気記事一覧<br>
- * `SPComponentSinglesWidgetPopular` mount 後<br>
- * `SPViewSinglesPopular` で AJAX request を行いレスポンス取得後出力を開始します
+ * SP: 記事詳細・次の記事一覧 > 人気記事一覧
+ * - `SPComponentSinglesWidgetPopular` mount 後
+ * - `SPViewSinglesPopular` で AJAX request を行いレスポンス取得後出力を開始します
  * {@link SPComponentSinglesWidgetPopular}
  * {@link SPViewSinglesPopular}
  * @since 2016-09-28
  */
-export class SPComponentSinglesWidgetPopularList extends React.Component {
+export default class SPComponentSinglesWidgetPopularList extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link SPComponentSinglesWidgetPopularList.propTypes}

@@ -20,14 +20,17 @@ import ComponentCategoryLabelsLink from '../../../component/categories/Component
 import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
- * 記事詳細::div.post-heading 以下上部コンテンツを出力します<br>
- * 汎用化のために `SPViewSingleHeader` {@link SPViewSingleHeader} から分離します
+ * 記事詳細::div.post-heading 以下上部コンテンツを出力します
+ * - 汎用化のために `SPViewSingleHeader` {@link SPViewSingleHeader} から分離します
  * @since 2016-09-24
  */
-export class SPComponentSingleHeader extends React.Component {
+export default class SPComponentSingleHeader extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

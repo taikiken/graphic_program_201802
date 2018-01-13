@@ -19,7 +19,7 @@ import ComponentSinglesArticleExcerpt from '../../../component/singles-magnet/Co
 import ComponentSingleSNS from '../../../component/singles-content/ComponentSingleSNS';
 
 // component/singles-content
-import { SPComponentSingleContent } from '../singles-content/SPComponentSingleContent';
+import SPComponentSingleContent from '../singles-content/SPComponentSingleContent';
 // import { SPComponentSinglesSNSBelow } from '../singles-content/SPComponentSinglesSNSBelow';
 
 // // util
@@ -32,7 +32,7 @@ import { SinglesHistory } from '../../../singles/SinglesHistory';
 
 // component/singles-content record
 import RecordSingleState from '../../../component/singles-content/RecordSingleState';
-import { SPComponentSinglesSNSAbove } from '../singles-content/SPComponentSinglesSNSAbove';
+import SPComponentSinglesSNSAbove from '../singles-content/SPComponentSinglesSNSAbove';
 
 // React
 /**
@@ -45,7 +45,7 @@ const React = self.React;
  * 「続きを読む」クリックで本文を表示します
  * @since 2016-11-11
  */
-export class SPComponentSinglesArticleSwitch extends React.Component {
+export default class SPComponentSinglesArticleSwitch extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

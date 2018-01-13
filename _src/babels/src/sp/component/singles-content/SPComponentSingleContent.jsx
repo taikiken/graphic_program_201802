@@ -11,9 +11,9 @@
  */
 
 // sp/component/singles-content
-import { SPComponentSinglesSNSAbove } from './SPComponentSinglesSNSAbove';
+import SPComponentSinglesSNSAbove from './SPComponentSinglesSNSAbove';
 // import { SPComponentSinglesSNSBelow } from './SPComponentSinglesSNSBelow';
-import { SPComponentSingleComments } from './SPComponentSingleComments';
+import SPComponentSingleComments from './SPComponentSingleComments';
 
 
 // component/singles-content
@@ -28,6 +28,9 @@ import ComponentSingleFooter from '../../../component/singles/ComponentSingleFoo
 // import { Fb } from '../../../util/Fb';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -56,7 +59,7 @@ const React = self.React;
  * {@link SPComponentSinglesAdBelow},
  * {@link SPViewComments},
  */
-export class SPComponentSingleContent extends React.Component {
+export default class SPComponentSingleContent extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

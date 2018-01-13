@@ -29,7 +29,7 @@ const React = self.React;
  * SP: 記事詳細「次の記事一覧」人気記事を出力します
  * @since 2016-09-28
  */
-export class SPComponentSinglesWidgetPopular extends React.Component {
+export default class SPComponentSinglesWidgetPopular extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

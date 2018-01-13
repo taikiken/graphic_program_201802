@@ -18,8 +18,8 @@ import { WidgetType } from '../../../app/const/WidgetType';
 
 // component
 // import { SPComponentSinglesWidgetOption } from './SPComponentSinglesWidgetOption';
-import { SPComponentSinglesWidget } from './SPComponentSinglesWidget';
-import { SPComponentSinglesArticleMagnet } from '../singles-magnet/SPComponentSinglesArticleMagnet';
+import SPComponentSinglesWidget from './SPComponentSinglesWidget';
+import SPComponentSinglesArticleMagnet from '../singles-magnet/SPComponentSinglesArticleMagnet';
 
 // ui
 import SinglesManager from '../../../ui/SinglesManager';
@@ -69,7 +69,7 @@ const React = self.React;
  * - {@link SinglesAuth}
  * @since 2016-09-28
  */
-export class SPComponentSingles extends React.Component {
+export default class SPComponentSingles extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

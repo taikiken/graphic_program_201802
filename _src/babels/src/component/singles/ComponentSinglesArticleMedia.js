@@ -27,6 +27,7 @@ import { Safety } from '../../data/Safety';
 const React = self.React;
 
 /**
+ * @deprecated dont use
  * @TODO future remove - not use
  * 記事詳細・次の記事一覧のメインビジュアル
  * - 動画が次々再生されてウザイので img 置き換えた

@@ -29,7 +29,7 @@ import {User} from '../../../app/User';
 
 // component
 // @since 2016-09-24
-import { SPComponentSingleHeader } from '../../component/singles/SPComponentSingleHeader';
+import SPComponentSingleHeader from '../../component/singles/SPComponentSingleHeader';
 
 // React
 /* eslint-disable no-unused-vars */

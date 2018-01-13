@@ -14,11 +14,14 @@
 import { WidgetType } from '../../../app/const/WidgetType';
 
 // sp/component
-import { SPComponentSinglesWidgetRecommend } from './SPComponentSinglesWidgetRecommend';
-import { SPComponentSinglesWidgetPopular } from './SPComponentSinglesWidgetPopular';
-import { SPComponentSinglesWidgetRelated } from './SPComponentSinglesWidgetRelated';
+import SPComponentSinglesWidgetRecommend from './SPComponentSinglesWidgetRecommend';
+import SPComponentSinglesWidgetPopular from './SPComponentSinglesWidgetPopular';
+import SPComponentSinglesWidgetRelated from './SPComponentSinglesWidgetRelated';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -35,7 +38,7 @@ const React = self.React;
  * ```
  * @since 2016-09-28
  */
-export class SPComponentSinglesWidget extends React.Component {
+export default class SPComponentSinglesWidget extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

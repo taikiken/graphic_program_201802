@@ -15,10 +15,12 @@ import { MediaType } from '../../../app/const/MediaType';
 import { Empty } from '../../../app/const/Empty';
 
 // node
-import { MediaImageNode } from '../../../node/single/MediaImageNode';
+// import { MediaImageNode } from '../../../node/single/MediaImageNode';
 
 // data
 import { Safety } from '../../../data/Safety';
+import ComponentMediaImage from '../../../component/media/ComponentMediaImage';
+import { SingleDae } from '../../../dae/SingleDae';
 
 // React
 const React = self.React;
@@ -30,7 +32,72 @@ const React = self.React;
  * @see https://github.com/undotsushin/undotsushin/issues/1158
  * @since 2016-10-05
  */
-export class SPComponentSinglesArticleMedia extends React.Component {
+export default class SPComponentSinglesArticleMedia extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{single: SingleDae}} React props
+   */
+  static get propTypes() {
+    return {
+      // single: React.PropTypes.object.isRequired,
+      single: React.PropTypes.instanceOf(SingleDae).isRequired,
+    };
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * media_type: `video` の出力
+   * @param {SingleDae} single 記事データ
+   * @return {XML} div.post-kv を返します
+   */
+  static video(single) {
+    const images = single.media.images;
+    let poster = Safety.image(images.original, '');
+    if (poster === '') {
+      poster = Safety.image(images.thumbnail, Empty.VIDEO_THUMBNAIL);
+    }
+    const caption = single.media.video.caption || '';
+    let figCaption = '';
+    if (caption !== '') {
+      figCaption = <figcaption className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
+    }
+
+    return (
+      <div className="post-kv post-video-kv">
+        <figure className="post-single-figure video-container">
+          <div className="video-thumbnail-container">
+            <img src={Empty.VIDEO_THUMBNAIL} alt=""/>
+            <img src={poster} alt="" className="post-single-image video-image"/>
+            <span className="video-play-btn"><a href={single.url}><img src={Empty.VIDEO_THUMBNAIL} alt=""/></a></span>
+          </div>
+          {figCaption}
+        </figure>
+      </div>
+    );
+  }
+  /**
+   * media_type: `image` の出力 `MediaImageNode` を使用します {@link MediaImageNode}
+   * @param {SingleDae} single 記事データ
+   * @return {XML} MediaImageNode を返します
+   */
+  static image(single) {
+    // return (
+    //   <MediaImageNode
+    //     images={single.media.images}
+    //   />
+    // );
+    return (
+      <ComponentMediaImage
+        images={single.media.images}
+        single={single}
+        sp={true}
+      />
+    );
+  }
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー {@link SPComponentSinglesArticleMedia.propTypes}
@@ -77,62 +144,5 @@ export class SPComponentSinglesArticleMedia extends React.Component {
    */
   reload() {
     this.updateSingle(this.state.single);
-  }
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * media_type: `video` の出力
-   * @param {SingleDae} single 記事データ
-   * @return {XML} div.post-kv を返します
-   */
-  static video(single) {
-    const images = single.media.images;
-    let poster = Safety.image(images.original, '');
-    if (poster === '') {
-      poster = Safety.image(images.thumbnail, Empty.VIDEO_THUMBNAIL);
-    }
-    const caption = single.media.video.caption || '';
-    let figCaption = '';
-    if (caption !== '') {
-      figCaption = <figcaption className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
-    }
-
-    return (
-      <div className="post-kv post-video-kv">
-        <figure className="post-single-figure video-container">
-          <div className="video-thumbnail-container">
-            <img src={Empty.VIDEO_THUMBNAIL} alt=""/>
-            <img src={poster} alt="" className="post-single-image video-image"/>
-            <span className="video-play-btn"><a href={single.url}><img src={Empty.VIDEO_THUMBNAIL} alt=""/></a></span>
-          </div>
-          {figCaption}
-        </figure>
-      </div>
-    );
-  }
-  /**
-   * media_type: `image` の出力 `MediaImageNode` を使用します {@link MediaImageNode}
-   * @param {SingleDae} single 記事データ
-   * @return {XML} MediaImageNode を返します
-   */
-  static image(single) {
-    return (
-      <MediaImageNode
-        images={single.media.images}
-      />
-    );
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{single: SingleDae}} React props
-   */
-  static get propTypes() {
-    return {
-      single: React.PropTypes.object.isRequired
-    };
   }
 }
