@@ -134,7 +134,7 @@ export class ArticleDae {
      * 画面表示日付 - article.display_date
      * @type {string}
      */
-    this.displayDate = altArticle.display_date;
+    this.displayDate = altArticle.display_date || altArticle.displayDate;
     /**
      * article.description
      * @type {string}

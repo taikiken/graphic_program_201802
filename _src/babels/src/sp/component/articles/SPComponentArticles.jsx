@@ -29,6 +29,7 @@ import { Safety } from '../../../data/Safety';
 // sp/view/articles
 import SPComponentArticleAd from './SPComponentArticleAd';
 import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
+import { CategoriesSlugDae } from '../../../dae/categories/CategoriesSlugDae';
 
 // React
 /**
@@ -67,7 +68,12 @@ export default class SPComponentArticles extends React.Component {
       // home or not
       home: React.PropTypes.bool.isRequired,
       // ストリーム広告
-      adSp: React.PropTypes.string.isRequired,
+      // adSp: React.PropTypes.string.isRequired,
+      // adSp: React.PropTypes.instanceOf(CategoriesSlugDae).isRequired,
+      adSp: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.instanceOf(CategoriesSlugDae),
+      ]).isRequired,
     };
   }
   // ---------------------------------------------------
@@ -89,6 +95,7 @@ export default class SPComponentArticles extends React.Component {
       offset: props.offset,
       length: props.length
     };
+    // console.log('SPComponentArticles props', props);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -141,6 +148,7 @@ export default class SPComponentArticles extends React.Component {
       return null;
     }
     const { home, adSp } = this.props;
+    const ad = adSp.ad ? adSp.ad.sp : adSp;
 
     return(
       <div className="latest">
@@ -214,7 +222,7 @@ export default class SPComponentArticles extends React.Component {
                     index={i}
                     length={length}
                     uniqueId={`ad-${dae.mediaType}-${dae.id}`}
-                    adSp={adSp}
+                    adSp={ad || ''}
                     categories={dae.categories}
                   />
                 </div>

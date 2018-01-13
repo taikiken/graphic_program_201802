@@ -19,7 +19,6 @@ import ViewSingleHeader from '../../../view/single/ViewSingleHeader';
 
 // node
 import {SPMediaNode} from '../../node/single/SPMediaNode';
-import ComponentMedia from '../../../component/media/ComponentMedia';
 
 // React
 /* eslint-disable no-unused-vars */

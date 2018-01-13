@@ -33,7 +33,7 @@ export const ComponentMediaImagePowered = ({ single, sp }) => {
     return null;
   }
   const pyeongchang2018 = keywords.some((keyword) => (keyword === '平昌五輪2018ハイライト'));
-  console.log('ComponentMediaImagePowered', pyeongchang2018, keywords);
+  // console.log('ComponentMediaImagePowered', pyeongchang2018, keywords);
   if (!pyeongchang2018) {
     return null;
   }
@@ -106,7 +106,7 @@ const ComponentMediaImage = ({ images, single, sp }) => {
   if (original === '') {
     original = Safety.image(images.medium, '');
   }
-  console.log('ComponentMediaImage original, single.id', original, single.id, images);
+  // console.log('ComponentMediaImage original, single.id', original, single.id, images);
   // exist check
   if (original === '') {
     // no image or no correct image extension
