@@ -444,10 +444,9 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     }
 
     return (
-      <div className={`loaded-post loaded-post-${single.id}`} ref={
-        (component) => {
-          this.singlesArticle = component;
-        }}
+      <div
+        className={`loaded-post loaded-post-${single.id}`}
+        ref={(component) => (this.singlesArticle = component)}
       >
         {/* div.post-kv */}
         <div className="single-visual-container" ref="visualElement">
@@ -457,6 +456,8 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
             media={single.media}
             isShowImage={single.isShowImage}
             index={index}
+            sp={true}
+            single={single}
           />
           {/*
            <SPComponentSinglesArticleMedia

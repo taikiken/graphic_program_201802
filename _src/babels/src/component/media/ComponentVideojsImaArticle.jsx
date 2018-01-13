@@ -310,6 +310,7 @@ export default class ComponentVideojsImaArticle extends React.Component {
       setTimeout(() => {
         this.iPhoneInitPlayer();
       }, 25);
+      return;
     }
     const vast = this.props.video.adUrl.sp;
     const adUrl = vast !== '' ? vast + Date.now() : '';

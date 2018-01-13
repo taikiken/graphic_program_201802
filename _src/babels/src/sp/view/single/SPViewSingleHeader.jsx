@@ -150,27 +150,35 @@ export default class SPViewSingleHeader extends ViewSingleHeader {
     //   }
     // } );
 
-    if (this.rendered === null) {
-      /**
-       * SPHeaderDom instance
-       * @override
-       * @type {*}
-       */
-      // this.rendered = ReactDOM.render(
-      //   React.createElement( SPHeaderDom, { single: singleDae, sign: User.sign } ),
-      //   this.element
-      // );
-      // @since 2016-09-24 changed
-      this.rendered = ReactDOM.render(
-        <SPComponentSingleHeader
-          single={singleDae}
-          sign={User.sign}
-          callback={this.boundSafely}
-        />,
-        this.element
-      );
-    } else {
-      this.rendered.updateSingle(singleDae, User.sign);
-    }
+    // if (this.rendered === null) {
+    //   /**
+    //    * SPHeaderDom instance
+    //    * @override
+    //    * @type {*}
+    //    */
+    //   // this.rendered = ReactDOM.render(
+    //   //   React.createElement( SPHeaderDom, { single: singleDae, sign: User.sign } ),
+    //   //   this.element
+    //   // );
+    //   // @since 2016-09-24 changed
+    //   this.rendered = ReactDOM.render(
+    //     <SPComponentSingleHeader
+    //       single={singleDae}
+    //       sign={User.sign}
+    //       callback={this.boundSafely}
+    //     />,
+    //     this.element
+    //   );
+    // } else {
+    //   this.rendered.updateSingle(singleDae, User.sign);
+    // }
+    ReactDOM.render(
+      <SPComponentSingleHeader
+        single={singleDae}
+        sign={User.sign}
+        callback={this.boundSafely}
+      />,
+      this.element,
+    );
   }
 }

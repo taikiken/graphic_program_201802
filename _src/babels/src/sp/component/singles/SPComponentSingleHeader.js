@@ -28,6 +28,23 @@ const React = self.React;
  * @since 2016-09-24
  */
 export class SPComponentSingleHeader extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{single: SingleDae, sign: boolean, callback: function}} React props
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      sign: React.PropTypes.bool.isRequired,
+      callback: React.PropTypes.func.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentSingleHeader.propTypes}
@@ -53,6 +70,9 @@ export class SPComponentSingleHeader extends React.Component {
       loading: ''
     };
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * delegate, マウント前に呼び出され、 `View.WILL_MOUNT` を発火します
    * */
@@ -65,12 +85,20 @@ export class SPComponentSingleHeader extends React.Component {
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
   }
+  // /**
+  //  * React state, single と sign を更新します
+  //  * @param {SingleDae} single 記事詳細 JSON データ
+  //  * @param {boolean} sign ユーザーがログイン済みかの真偽値
+  //  * */
+  // updateSingle(single, sign) {
+  //   this.setState({ single, sign });
+  // }
   /**
-   * React state, single と sign を更新します
-   * @param {SingleDae} single 記事詳細 JSON データ
-   * @param {boolean} sign ユーザーがログイン済みかの真偽値
-   * */
-  updateSingle(single, sign) {
+   * delegate - update props to setState
+   * @param {{single: SingleDae, sign: boolean}} nextProps next React.props
+   */
+  componentWillReceiveProps(nextProps) {
+    const { single, sign } = nextProps;
     this.setState({ single, sign });
   }
   /**
@@ -113,20 +141,6 @@ export class SPComponentSingleHeader extends React.Component {
         </div>
       </div>
     );
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{single: SingleDae, sign: boolean, callback: function}} React props
-   */
-  static get propTypes() {
-    return {
-      single: React.PropTypes.object.isRequired,
-      sign: React.PropTypes.bool.isRequired,
-      callback: React.PropTypes.func.isRequired
-    };
   }
 }
 

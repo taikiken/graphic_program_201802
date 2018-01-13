@@ -34,7 +34,7 @@ const React = self.React;
  * @since 2018-01-13
  */
 const ComponentMediaVideoSwitch = ({ articleId, video, images, index }) => {
-  // console.log('ComponentMediaVideoSwitch', articleId, video, images);
+  console.log('ComponentMediaVideoSwitch', articleId, images);
   // const video = media.video || {};
   const type = video.type || video.player;
   // 分岐

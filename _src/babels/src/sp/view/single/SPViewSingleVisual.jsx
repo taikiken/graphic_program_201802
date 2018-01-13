@@ -19,6 +19,7 @@ import ViewSingleHeader from '../../../view/single/ViewSingleHeader';
 
 // node
 import {SPMediaNode} from '../../node/single/SPMediaNode';
+import ComponentMedia from '../../../component/media/ComponentMedia';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -55,8 +56,22 @@ export default class SPViewSingleVisual extends ViewSingleHeader {
         mediaType={singleDae.mediaType}
         media={singleDae.media}
         isShowImage={singleDae.isShowImage}
+        sp={true}
+        single={this.single}
       />,
       this.element,
     );
+    // ReactDOM.render(
+    //   <ComponentMedia
+    //     articleId={String(singleDae.id)}
+    //     mediaType={singleDae.mediaType}
+    //     media={singleDae.media}
+    //     isShowImage={singleDae.isShowImage}
+    //     index={-1}
+    //     sp={true}
+    //     single={this.single}
+    //   />,
+    //   this.element,
+    // );
   }
 }
