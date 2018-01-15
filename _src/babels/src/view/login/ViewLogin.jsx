@@ -16,7 +16,7 @@ import View from '../View';
 // app
 import {User} from '../../app/User';
 // import {ErrorTxt} from '../../app/const/ErrorTxt';
-import {Message} from '../../app/const/Message';
+// import {Message} from '../../app/const/Message';
 
 // // data
 // import {Result} from '../../data/Result';
@@ -28,19 +28,19 @@ import {Message} from '../../app/const/Message';
 
 // dae
 // import {ErrorDae} from '../../dae/error/ErrorDae';
-import {UserDae} from '../../dae/UserDae';
-import {StatusDae} from '../../dae/StatusDae';
+// import {UserDae} from '../../dae/UserDae';
+// import {StatusDae} from '../../dae/StatusDae';
 
 // model
-import {Model} from '../../model/Model';
+// import {Model} from '../../model/Model';
 // import ModelLogin from '../../model/login/ModelLogin';
-import ModelSocial from '../../model/sns/ModelSocial';
+// import ModelSocial from '../../model/sns/ModelSocial';
 
 // util
-import {Loc} from '../../util/Loc';
+import { Loc } from '../../util/Loc';
 
 // event
-import {MessageStatus} from '../../event/MessageStatus';
+// import {MessageStatus} from '../../event/MessageStatus';
 // import ComponentError from '../../component/error/ComponentError';
 import ComponentLogin from '../../component/login/ComponentLogin';
 
@@ -60,6 +60,23 @@ const ReactDOM = self.ReactDOM;
  * Login from を表示します
  */
 export default class ViewLogin extends View {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * login 済みユーザーを `top` へ転送します
+   * > クライアントサイドで cookie 有無みてトップに転送、という処理を行えば解消かもしれません
+   * @see https://aws-plus.backlog.jp/view/UNDO_SPBL-361#comment-1186530819
+   * @since 2018-01-15
+   */
+  static checkLogin() {
+    if (User.sign) {
+      setTimeout(Loc.index, 500);
+    }
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * login form を表示し action/login/Login を行います
    * @param {Element} element root element
@@ -67,30 +84,36 @@ export default class ViewLogin extends View {
    */
   constructor(element, option = {}) {
     super(element, option);
-    /**
-     * SNS 経由ログイン success
-     * @type {function}
-     */
-    this.socialDone = this.socialDone.bind(this);
-    const callback = {};
-    callback[Model.COMPLETE] = this.socialDone;
-    // callback[ Model.UNDEFINED_ERROR ] = boundFail;
-    // callback[ Model.RESPONSE_ERROR ] = boundFail;
-    /**
-     * SNS ログイン処理します
-     * @type {ModelSocial}
-     */
-    this.model = new ModelSocial(callback);
-    /**
-     * ログイン成功 `flush` message を表示します
-     * @type {MessageStatus}
-     */
-    this.message = MessageStatus.factory();
+    // /**
+    //  * SNS 経由ログイン success
+    //  * @type {function}
+    //  */
+    // this.socialDone = this.socialDone.bind(this);
+    // const callback = {};
+    // callback[Model.COMPLETE] = this.socialDone;
+    // // callback[ Model.UNDEFINED_ERROR ] = boundFail;
+    // // callback[ Model.RESPONSE_ERROR ] = boundFail;
+    // /**
+    //  * SNS ログイン処理します
+    //  * @type {ModelSocial}
+    //  */
+    // this.model = new ModelSocial(callback);
+    // /**
+    //  * ログイン成功 `flush` message を表示します
+    //  * @type {MessageStatus}
+    //  */
+    // this.message = MessageStatus.factory();
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * render start
    */
   start() {
+    // 2018-01-15 - facebook login 後にトップへ遷移しない問題へ対応するため追加
+    ViewLogin.checkLogin();
+    // ----
     this.render();
   }
   /**
@@ -326,101 +349,100 @@ export default class ViewLogin extends View {
      */
     // なのでいらないかも
     // code は残す
-    this.social();
+    // this.social();
   }
-
-  // ---------------------------------------------
-  // /api/v1/sessions/social を叩く
-  // 2016-03-16 追加
-  /**
-   * API request を行うかを query が URL に存在するかで判断します
-   */
-  social() {
-    // query check
-    /*
-     https://github.com/undotsushin/undotsushin/issues/334#issuecomment-197217112
-
-     リンク先
-     http://dev.undotsushin.com/api/v1/auth/facebook
-     http://dev.undotsushin.com/api/v1/auth/twitter
-
-     リダイレクトURL
-     http://dev.undotsushin.com/signup/?oauth=facebook
-     http://dev.undotsushin.com/signup/?oauth=twitter
-     */
-    const queries = Loc.parse();
-    if (queries !== null && queries.hasOwnProperty('oauth')) {
-      const value = queries.oauth;
-      // console.log( 'social request ', queries );
-      if (value.indexOf('facebook') !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter') {
-        this.socialRequest();
-      }
-    }
-  }
-  /**
-   * API `/api/v1/sessions/social` を行います
-   */
-  socialRequest() {
-    // // let boundFail = this.socialFail.bind( this );
-    // const callback = {};
-    // callback[Model.COMPLETE] = this.socialDone;
-    // // callback[ Model.UNDEFINED_ERROR ] = boundFail;
-    // // callback[ Model.RESPONSE_ERROR ] = boundFail;
-    //
-    // const model = new ModelSocial( callback );
-    // model.start();
-    console.log('ViewLogin.socialRequest', this.model);
-    this.model.start();
-  }
-
-  /**
-   * API `/api/v1/sessions/social` 成功
-   * @param {Result} result 結果セット
-   */
-  socialDone(result) {
-    console.log('ViewLogin.socialDone', result);
-    const response = result.response;
-    if (typeof response === 'undefined') {
-      // articles undefined
-      // JSON に問題がある
-      const error = new Error('[SOCIAL:USER_PROFILE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
-      this.executeSafely( View.UNDEFINED_ERROR, error );
-      // this.showError( error.message );
-    } else {
-      const status = new StatusDae(result.status);
-      if (status.code === 200) {
-        this.success(new UserDae(response));
-      }
-    }
-  }
+  // // ---------------------------------------------
+  // // /api/v1/sessions/social を叩く
+  // // 2016-03-16 追加
   // /**
-  //  * API `/api/v1/sessions/social` error
-  //  * @param {Object} error error instance
+  //  * API request を行うかを query が URL に存在するかで判断します
   //  */
-  // socialFail( error ):void {
-  //   // console.log( 'Social error ', error );
+  // social() {
+  //   // query check
+  //   /*
+  //    https://github.com/undotsushin/undotsushin/issues/334#issuecomment-197217112
+  //
+  //    リンク先
+  //    http://dev.undotsushin.com/api/v1/auth/facebook
+  //    http://dev.undotsushin.com/api/v1/auth/twitter
+  //
+  //    リダイレクトURL
+  //    http://dev.undotsushin.com/signup/?oauth=facebook
+  //    http://dev.undotsushin.com/signup/?oauth=twitter
+  //    */
+  //   const queries = Loc.parse();
+  //   if (queries !== null && queries.hasOwnProperty('oauth')) {
+  //     const value = queries.oauth;
+  //     // console.log( 'social request ', queries );
+  //     if (value.indexOf('facebook') !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter') {
+  //       this.socialRequest();
+  //     }
+  //   }
   // }
-  /**
-   * API `/api/v1/sessions/social` 成功後に token をセットし home へリダイレクトします
-   * @param {UserDae} userDae ユーザー情報, token 含んでいます
-   */
-  success(userDae) {
-    const token = userDae.accessToken;
-    console.log('ViewLogin.success', token, User.login(token));
-    // console.log( 'social success ', token, userDae );
-    // token setup
-    if (User.login(token)) {
-      // home
-      // Loc.index();
-      // flush message
-      // console.log( 'success continue index  ' );
-      // let messageStatus = this.messageStatus;
-      // if (!messageStatus) {
-      //   messageStatus = MessageStatus.factory();
-      // }
-      this.messageStatus.flush(MessageStatus.message(Message.LOGIN_COMPLETE), MessageStatus.SUCCESS);
-      // this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
-      setTimeout( Loc.index, 500 );
-    }
-  }
+  // /**
+  //  * API `/api/v1/sessions/social` を行います
+  //  */
+  // socialRequest() {
+  //   // // let boundFail = this.socialFail.bind( this );
+  //   // const callback = {};
+  //   // callback[Model.COMPLETE] = this.socialDone;
+  //   // // callback[ Model.UNDEFINED_ERROR ] = boundFail;
+  //   // // callback[ Model.RESPONSE_ERROR ] = boundFail;
+  //   //
+  //   // const model = new ModelSocial( callback );
+  //   // model.start();
+  //   console.log('ViewLogin.socialRequest', this.model);
+  //   this.model.start();
+  // }
+  //
+  // /**
+  //  * API `/api/v1/sessions/social` 成功
+  //  * @param {Result} result 結果セット
+  //  */
+  // socialDone(result) {
+  //   console.log('ViewLogin.socialDone', result);
+  //   const response = result.response;
+  //   if (typeof response === 'undefined') {
+  //     // articles undefined
+  //     // JSON に問題がある
+  //     const error = new Error('[SOCIAL:USER_PROFILE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+  //     this.executeSafely( View.UNDEFINED_ERROR, error );
+  //     // this.showError( error.message );
+  //   } else {
+  //     const status = new StatusDae(result.status);
+  //     if (status.code === 200) {
+  //       this.success(new UserDae(response));
+  //     }
+  //   }
+  // }
+  // // /**
+  // //  * API `/api/v1/sessions/social` error
+  // //  * @param {Object} error error instance
+  // //  */
+  // // socialFail( error ):void {
+  // //   // console.log( 'Social error ', error );
+  // // }
+  // /**
+  //  * API `/api/v1/sessions/social` 成功後に token をセットし home へリダイレクトします
+  //  * @param {UserDae} userDae ユーザー情報, token 含んでいます
+  //  */
+  // success(userDae) {
+  //   const token = userDae.accessToken;
+  //   console.log('ViewLogin.success', token, User.login(token));
+  //   // console.log( 'social success ', token, userDae );
+  //   // token setup
+  //   if (User.login(token)) {
+  //     // home
+  //     // Loc.index();
+  //     // flush message
+  //     // console.log( 'success continue index  ' );
+  //     // let messageStatus = this.messageStatus;
+  //     // if (!messageStatus) {
+  //     //   messageStatus = MessageStatus.factory();
+  //     // }
+  //     this.messageStatus.flush(MessageStatus.message(Message.LOGIN_COMPLETE), MessageStatus.SUCCESS);
+  //     // this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
+  //     setTimeout( Loc.index, 500 );
+  //   }
+  // }
 }

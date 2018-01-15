@@ -64,8 +64,8 @@ export class User {
     return User.token !== null;
   }
   /**
-   * sign in / out 状態を表します<br>
-   * true: sign in です
+   * sign in / out 状態を表します
+   * - true: sign in です
    * @param {boolean} bool sign in / out 状態の真偽値, true: sign in
    */
   static set sign(bool) {
