@@ -29,6 +29,7 @@ import { Safety } from '../../../data/Safety';
 // sp/view/articles
 import SPComponentArticleAd from './SPComponentArticleAd';
 import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
+import { CategoriesSlugDae } from '../../../dae/categories/CategoriesSlugDae';
 
 // React
 /**
@@ -93,7 +94,12 @@ export default class SPComponentArticles extends React.Component {
       // home or not
       home: React.PropTypes.bool.isRequired,
       // ストリーム広告
-      adSp: React.PropTypes.string.isRequired,
+      // adSp: React.PropTypes.string.isRequired,
+      // adSp: React.PropTypes.instanceOf(CategoriesSlugDae).isRequired,
+      adSp: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.instanceOf(CategoriesSlugDae),
+      ]).isRequired,
     };
   }
   // ---------------------------------------------------
