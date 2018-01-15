@@ -162,7 +162,8 @@ export default class ViewCategoryOption extends View {
         list={category.headline.articles}
         callback={this.boundSafety}
         home={false}
-        ad={category.headline.ad}
+        // ad={category.headline.ad}
+        ad={category.ad}
         browser={browser}
         category={category}
       />,
