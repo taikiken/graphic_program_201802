@@ -50,6 +50,11 @@ $app->group('/pyeongchang2018', function () use ($app) {
       'template_classname' => $template_classname,
       'category' => $category,
       'template' => 'category',
+      'title'       => '平昌五輪 ハイライト動画',
+      'keywords' => '平昌五輪,ハイライト動画,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
+      'og_description' => '平昌五輪 ハイライト動画見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
+      'og_title'    => '平昌五輪 ハイライト動画'.' | '.$app->model->property('title_short'),
+      'og_url'         => $app->model->property('site_url').'pyeongchang2018/movie/',
     ));
 
     if ( $app->model->property('ua') === 'desktop' ) :
