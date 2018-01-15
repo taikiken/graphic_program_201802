@@ -73,7 +73,7 @@ $articles=array();
 for($i=0;$i<count($p);$i++){
 
 	$l="";
-	
+	$related_links = [];
 	if(in_array($p[$i]["d2"],$RELATEDLINK_ALLOWED)){
 		$ulink=array();
 		$sql=sprintf("select title,link from u_link where pid=%s order by n",$p[$i]["id"]);
@@ -83,12 +83,15 @@ for($i=0;$i<count($p);$i++){
 			$l="<p>関連リンク<br>";
 			for($j=0;$j<count($ulink);$j++){
 				if(strlen($ulink[$j]["title"])>0)$l.=sprintf("<a href=\"%s\" target=\"_blank\">%s</a><br>",$ulink[$j]["title"],$ulink[$j]["link"]);
+				$related_links[] = [
+					'label' => $ulink[$j]["link"],
+					'url' => $ulink[$j]["title"],
+				];
 			}
 			$l.="</p>";
 		}
 		$p[$i]["relatedpost"]=$l;
 	}
-
 	$ad=get_advertise($p[$i]["m1"],$p[$i]["userid"],$p[$i]["id"]);
 	$s=set_articleinfo($p[$i],1);
 	
@@ -101,7 +104,7 @@ for($i=0;$i<count($p);$i++){
 	unset($s["vast"]);
 	unset($s["ad_urlpc"]);
 	unset($s["ad_urlsp"]);
-	
+	$s['related_links'] = $related_links;
 	$s["recommend_articles"]=$crazyRelatedArticles;
 	if($_REQUEST["api"]!="next")$s["related_articles"]=$relatedPosts;
 	$articles[]=$s;
