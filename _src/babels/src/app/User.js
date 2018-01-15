@@ -105,7 +105,7 @@ export class User {
     }
     // save
     const result = Cookie.save(token);
-    console.log('User.login ', result, token);
+    // console.log('User.login ', result, token);
     User.sign = result;
     return result;
   }

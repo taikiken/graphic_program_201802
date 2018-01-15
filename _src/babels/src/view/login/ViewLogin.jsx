@@ -58,6 +58,8 @@ const ReactDOM = self.ReactDOM;
 
 /**
  * Login from を表示します
+ * - login 済みユーザーは `top` へリダイレクトさせます - 2018-01-15
+ * - facebook ログイン後処理を行います
  */
 export default class ViewLogin extends View {
   // ---------------------------------------------------
@@ -391,7 +393,7 @@ export default class ViewLogin extends View {
     //
     // const model = new ModelSocial( callback );
     // model.start();
-    console.log('ViewLogin.socialRequest', this.model);
+    // console.log('ViewLogin.socialRequest', this.model);
     this.model.start();
   }
 
@@ -400,7 +402,7 @@ export default class ViewLogin extends View {
    * @param {Result} result 結果セット
    */
   socialDone(result) {
-    console.log('ViewLogin.socialDone', result);
+    // console.log('ViewLogin.socialDone', result);
     const response = result.response;
     if (typeof response === 'undefined') {
       // articles undefined
@@ -428,7 +430,7 @@ export default class ViewLogin extends View {
    */
   success(userDae) {
     const token = userDae.accessToken;
-    console.log('ViewLogin.success', token, User.login(token));
+    // console.log('ViewLogin.success', token, User.login(token));
     // console.log( 'social success ', token, userDae );
     // token setup
     if (User.login(token)) {
@@ -441,10 +443,14 @@ export default class ViewLogin extends View {
       //   messageStatus = MessageStatus.factory();
       // }
       // flush message で処理が止まるので外す
-      // this.messageStatus.flush(MessageStatus.message(Message.LOGIN_COMPLETE), MessageStatus.SUCCESS);
-      console.log('ViewLogin.success after login');
+      try {
+        this.messageStatus.flush(MessageStatus.message(Message.LOGIN_COMPLETE), MessageStatus.SUCCESS);
+      } catch (error) {
+        console.warn('ViewLogin.success', error);
+      }
+      // console.log('ViewLogin.success after login');
       setTimeout(Loc.index, 500);
-      throw new Error('ViewLogin.success after login');
+      // throw new Error('ViewLogin.success after login');
     }
   }
 }
