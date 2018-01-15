@@ -123,7 +123,7 @@
       vewHeadline.render(articles);
     }
     function fail(events) {
-      console.log('error', events, slug);
+      console.warn('error', events, slug);
     }
     model.on(Model.COMPLETE, done);
     model.on(Model.RESPONSE_ERROR, fail);

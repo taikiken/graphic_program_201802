@@ -149,7 +149,33 @@ include_once __DIR__."/../../mobile/_header.php";
     'use strict';
     var UT = window.UT;
     var SPBL_ENV = window.SPBL_ENV || {};
+    if (SPBL_ENV.env === 'development' && location.hostname.indexOf('sportsbull.jp') === -1) {
+      UT.app.App.develop();
+    }
     UT.ui.NavCurrent.init(SPBL_ENV.category, SPBL_ENV.platform === 'web_mobile');
+    // headline
+    var element = UT.app.Dom.headline();
+    if (!element) {
+      return;
+    }
+    var slug = 'pyeongchang2018';
+    var Model = UT.model.Model;
+    var vewHeadline = new UT.sp.view.home.SPViewHeadLine(element);
+    var model = new UT.model.ModelCategoriesSlug(slug);
+    function done(events) {
+      var dae = events.args.shift() || {};
+      var headline = dae.headline || {};
+      var articles = headline.articles || [];
+      // console.log('done', articles);
+      vewHeadline.archive = true;
+      vewHeadline.render(articles);
+    }
+    function fail(events) {
+      console.warn('error', events, slug);
+    }
+    model.on(Model.COMPLETE, done);
+    model.on(Model.RESPONSE_ERROR, fail);
+    model.start();
   }(window));
 </script>
 <?php
