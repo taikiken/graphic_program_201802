@@ -237,8 +237,6 @@
   </div>
 </section>
 
-<?php
-/*
 <section class="fwt--related">
   <h2><img src="../assets/images/fwt/related-heading.png" alt="RELATED">関連記事</h2>
   <ul>
@@ -274,5 +272,3 @@
     </li>
   </ul>
 </section>
-*/
-?>

@@ -12,6 +12,7 @@ class ViewModel {
     'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
 
     'site_categories'    => '', // ナビ用サイトカテゴリー DBから取得
+    'site_tabs'    => '', // タブ表示用 DBから取得
 
     // page
     'title'              => 'スポーツブル (スポブル)', // デフォルトタイトル
@@ -146,6 +147,8 @@ class ViewModel {
     // サイト内のグロナビ用カテゴリーを取得
     $this->default['site_categories'] = $this->get_site_categories();
 
+    // 表示タブを取得
+    $this->default['site_tabs'] = $this->get_site_tabs();
 
     // version
     $this->default['version']         = $this->get_version();
@@ -219,7 +222,7 @@ class ViewModel {
   */
   public function get_site_categories() {
 
-
+/*
     if ( UT_ENV == 'LOCAL' ) :
 
       $categories = file_get_contents($this->default['file_get_url'].'/api/v1/category');
@@ -239,19 +242,16 @@ class ViewModel {
       endif;
 
     endif;
+ */
+
+      if ( $this->default['ua'] == 'desktop' ) :
+        $categories = $this->db->get_site_categories(false);
+      else :
+        $categories = $this->db->get_site_categories(true);
+      endif;
 
     if ( is_array($categories) ) :
       foreach( $categories as $key => $value ) :
-
-        # 冒頭に「すべて」を追加
-        if ( $key == 0 ) :
-          $categoriesArray['all'] = array(
-            'label'     => 'すべて',
-            'slug'      => 'all',
-            'url'       => $this->default['site_url'].'category/all',
-            'title_img' => '',
-          );
-        endif;
 
         $categoriesArray[$value['slug']] = $value;
 
@@ -305,6 +305,41 @@ class ViewModel {
   }
 
 
+  /**
+  * category  - サイト内に表示するタブを取得する
+  *
+  * @return array  タブ一覧の配列
+  */
+  public function get_site_tabs() {
+
+    if ( $this->default['ua'] === 'desktop' ) :
+      $tabs = $this->db->get_site_tabs(false);
+    else :
+      $tabs = $this->db->get_site_tabs(true);
+    endif;
+
+    if ( is_array($tabs) ) :
+      foreach( $tabs as $key => $value ) :
+
+        # 冒頭に「すべて」を追加
+        // if ( $key === 0 ) :
+        //   $tabsArray['all'] = array(
+        //     'label'     => 'すべて',
+        //     'slug'      => 'all',
+        //     'url'       => $this->default['site_url'].'category/all',
+        //     'title_img' => '',
+        //   );
+        // endif;
+
+        $tabsArray[$value['slug']] = $value;
+
+      endforeach;
+
+      return $tabsArray;
+
+    endif;
+
+  }
 
   /**
   * post - 詳細ページで記事IDから記事情報を取得する
