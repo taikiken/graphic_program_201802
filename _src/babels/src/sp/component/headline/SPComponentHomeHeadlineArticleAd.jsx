@@ -84,6 +84,10 @@ export default class SPComponentHomeHeadlineArticleAd extends React.Component {
    * @return {?XML} `div.board-item.sponsor-link`
    */
   render() {
+    const { ad } = this.props;
+    if (!ad) {
+      return null;
+    }
     return (
       <div className="board-item sponsor-link">
         <div ref={(element) => (this.sponsorLink = element)} />
