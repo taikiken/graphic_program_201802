@@ -434,20 +434,7 @@ export default class ViewLogin extends View {
     // console.log( 'social success ', token, userDae );
     // token setup
     if (User.login(token)) {
-      // home
-      // Loc.index();
-      // flush message
-      // console.log( 'success continue index  ' );
-      // let messageStatus = this.messageStatus;
-      // if (!messageStatus) {
-      //   messageStatus = MessageStatus.factory();
-      // }
-      // flush message で処理が止まるので外す
-      try {
-        this.messageStatus.flush(MessageStatus.message(Message.LOGIN_COMPLETE), MessageStatus.SUCCESS);
-      } catch (error) {
-        console.warn('ViewLogin.success', error);
-      }
+      this.message.flush(MessageStatus.message(Message.LOGIN_COMPLETE), MessageStatus.SUCCESS);
       // console.log('ViewLogin.success after login');
       setTimeout(Loc.index, 500);
       // throw new Error('ViewLogin.success after login');
