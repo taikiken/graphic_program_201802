@@ -85,7 +85,7 @@ export default class SPComponentHomeHeadlineArticleAd extends React.Component {
    */
   render() {
     const { ad } = this.props;
-    if (!ad) {
+    if (!ad.mobile.sp.headline) {
       return null;
     }
     return (
