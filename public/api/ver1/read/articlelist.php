@@ -229,9 +229,9 @@ if(strlen($api)>0){
 					if($_REQUEST["offset"]<count($category)){
 						$category=implode(",",$category);
 						$sql=sprintf("select *,1 as recommend from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id in(%s)",$category)));
-						$sql.=sprintf(" union all select *,0 as recommend from %s order by recommend desc, m_time desc,id%s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m1!=152 and m1!=162 and m_time > now() - interval '3 day'",$category)),$limit);
+						$sql.=sprintf(" union all select *,0 as recommend from %s order by recommend desc, m_time desc,id%s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m1!=152 and m1!=161 and m_time > now() - interval '3 day'",$category)),$limit);
 					}else{
-						$sql=sprintf("select * from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m1!=152 and m1!=162 and m_time > now() - interval '3 day'"),$length,$offset);
+						$sql=sprintf("select * from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m1!=152 and m1!=161 and m_time > now() - interval '3 day'"),$length,$offset);
 					}
 					
 				}else{
