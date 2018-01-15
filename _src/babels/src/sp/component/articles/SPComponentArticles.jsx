@@ -37,6 +37,32 @@ import ComponentCategoryLabels from '../../../component/categories/ComponentCate
 const React = self.React;
 
 /**
+ * home と isREcommend flag が true の時に `recommend` 表示します
+ * @param {boolean} isRecommend recommend flag
+ * @param {boolean} home home flag
+ * @return {?XML} `i.post-label_recommend`
+ */
+export const SPComponentRecommend = ({ isRecommend, home }) => {
+  if (!isRecommend || !home) {
+    return null;
+  }
+  return (
+    <i className="post-label_recommend">
+      {Message.LABEL_RECOMMEND}
+    </i>
+  );
+};
+
+/**
+ * React.propTypes
+ * @type {{isRecommend: boolean, home: boolean}}
+ */
+SPComponentRecommend.propTypes = {
+  isRecommend: React.PropTypes.bool.isRequired,
+  home: React.PropTypes.bool.isRequired,
+};
+
+/**
  * 新着記事 in SPORTS BULL
  *
  * design 変更に伴う構造変更 旧: {@link SPArchiveNode}
@@ -141,6 +167,7 @@ export default class SPComponentArticles extends React.Component {
       return null;
     }
     const { home, adSp } = this.props;
+    const adId = adSp.ad ? adSp.ad.sp : adSp;
 
     return(
       <div className="latest">
@@ -158,9 +185,9 @@ export default class SPComponentArticles extends React.Component {
               // if (dae.isRecommend && props.home) {
               //   recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
               // }
-              const recommend = (dae.isRecommend && home) ?
-                <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i> :
-                null;
+              // const recommend = (dae.isRecommend && home) ?
+              //   <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i> :
+              //   null;
               // const slug = dae.categories.slug || 'x';
               /*
                @since 2016-12-26
@@ -185,7 +212,7 @@ export default class SPComponentArticles extends React.Component {
                       />
                       <div className="post-data">
                         <h3 className="post-heading">{dae.title}</h3>
-                        {recommend}
+                        {/* recommend */}
                         {/*
                         <p className={`post-category post-category-${slug}`}>
                           <CategoryLabelNode
@@ -198,6 +225,10 @@ export default class SPComponentArticles extends React.Component {
                           />
                         </p>
                         */}
+                        <SPComponentRecommend
+                          isRecommend={dae.isRecommend}
+                          home={home}
+                        />
                         <ComponentCategoryLabels
                           categories={dae.categories.all}
                           id={`archive-label-${dae.id}`}
@@ -214,7 +245,7 @@ export default class SPComponentArticles extends React.Component {
                     index={i}
                     length={length}
                     uniqueId={`ad-${dae.mediaType}-${dae.id}`}
-                    adSp={adSp}
+                    adSp={adId || ''}
                     categories={dae.categories}
                   />
                 </div>
