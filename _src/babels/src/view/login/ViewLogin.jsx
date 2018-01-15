@@ -369,6 +369,7 @@ export default class ViewLogin extends View {
     //
     // const model = new ModelSocial( callback );
     // model.start();
+    console.log('ViewLogin.socialRequest', this.model);
     this.model.start();
   }
 
@@ -377,6 +378,7 @@ export default class ViewLogin extends View {
    * @param {Result} result 結果セット
    */
   socialDone(result) {
+    console.log('ViewLogin.socialDone', result);
     const response = result.response;
     if (typeof response === 'undefined') {
       // articles undefined
@@ -404,6 +406,7 @@ export default class ViewLogin extends View {
    */
   success(userDae) {
     const token = userDae.accessToken;
+    console.log('ViewLogin.success', token, User.login(token));
     // console.log( 'social success ', token, userDae );
     // token setup
     if (User.login(token)) {
