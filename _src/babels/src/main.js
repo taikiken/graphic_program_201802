@@ -175,6 +175,8 @@ import NavCurrent from './ui/NavCurrent';
 
 // model - for 平昌
 import { ModelCategoriesSlug } from './model/categoires/ModelCategoriesSlug';
+// view/categories/headline
+import ViewCategoryOption from './view/categories/ViewCategoryOption';
 
 /**
  * スポーツブル ライブラリ
@@ -399,6 +401,9 @@ const UT = {
     },
     tags: {
       ViewTagsPyeongchang,
+    },
+    categories: {
+      ViewCategoryOption,
     },
   },
   sp: {
