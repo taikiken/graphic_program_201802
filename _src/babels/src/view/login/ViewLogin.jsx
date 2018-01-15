@@ -37,7 +37,7 @@ import {Model} from '../../model/Model';
 import ModelSocial from '../../model/sns/ModelSocial';
 
 // util
-import {Loc} from '../../util/Loc';
+import { Loc } from '../../util/Loc';
 
 // event
 import {MessageStatus} from '../../event/MessageStatus';
@@ -58,8 +58,27 @@ const ReactDOM = self.ReactDOM;
 
 /**
  * Login from を表示します
+ * - login 済みユーザーは `top` へリダイレクトさせます - 2018-01-15
+ * - facebook ログイン後処理を行います
  */
 export default class ViewLogin extends View {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * login 済みユーザーを `top` へ転送します
+   * > クライアントサイドで cookie 有無みてトップに転送、という処理を行えば解消かもしれません
+   * @see https://aws-plus.backlog.jp/view/UNDO_SPBL-361#comment-1186530819
+   * @since 2018-01-15
+   */
+  static checkLogin() {
+    if (User.sign) {
+      setTimeout(Loc.index, 500);
+    }
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * login form を表示し action/login/Login を行います
    * @param {Element} element root element
@@ -87,10 +106,16 @@ export default class ViewLogin extends View {
      */
     this.message = MessageStatus.factory();
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * render start
    */
   start() {
+    // 2018-01-15 - facebook login 後にトップへ遷移しない問題へ対応するため追加
+    ViewLogin.checkLogin();
+    // ----
     this.render();
   }
   /**
@@ -328,7 +353,6 @@ export default class ViewLogin extends View {
     // code は残す
     this.social();
   }
-
   // ---------------------------------------------
   // /api/v1/sessions/social を叩く
   // 2016-03-16 追加
@@ -369,6 +393,7 @@ export default class ViewLogin extends View {
     //
     // const model = new ModelSocial( callback );
     // model.start();
+    // console.log('ViewLogin.socialRequest', this.model);
     this.model.start();
   }
 
@@ -377,12 +402,13 @@ export default class ViewLogin extends View {
    * @param {Result} result 結果セット
    */
   socialDone(result) {
+    // console.log('ViewLogin.socialDone', result);
     const response = result.response;
     if (typeof response === 'undefined') {
       // articles undefined
       // JSON に問題がある
       const error = new Error('[SOCIAL:USER_PROFILE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
-      this.executeSafely( View.UNDEFINED_ERROR, error );
+      this.executeSafely(View.UNDEFINED_ERROR, error);
       // this.showError( error.message );
     } else {
       const status = new StatusDae(result.status);
@@ -404,20 +430,14 @@ export default class ViewLogin extends View {
    */
   success(userDae) {
     const token = userDae.accessToken;
+    // console.log('ViewLogin.success', token, User.login(token));
     // console.log( 'social success ', token, userDae );
     // token setup
     if (User.login(token)) {
-      // home
-      // Loc.index();
-      // flush message
-      // console.log( 'success continue index  ' );
-      // let messageStatus = this.messageStatus;
-      // if (!messageStatus) {
-      //   messageStatus = MessageStatus.factory();
-      // }
-      this.messageStatus.flush(MessageStatus.message(Message.LOGIN_COMPLETE), MessageStatus.SUCCESS);
-      // this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
-      setTimeout( Loc.index, 500 );
+      this.message.flush(MessageStatus.message(Message.LOGIN_COMPLETE), MessageStatus.SUCCESS);
+      // console.log('ViewLogin.success after login');
+      setTimeout(Loc.index, 500);
+      // throw new Error('ViewLogin.success after login');
     }
   }
 }

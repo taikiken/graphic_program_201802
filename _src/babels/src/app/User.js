@@ -64,8 +64,8 @@ export class User {
     return User.token !== null;
   }
   /**
-   * sign in / out 状態を表します<br>
-   * true: sign in です
+   * sign in / out 状態を表します
+   * - true: sign in です
    * @param {boolean} bool sign in / out 状態の真偽値, true: sign in
    */
   static set sign(bool) {
@@ -94,20 +94,19 @@ export class User {
    * @return {boolean} login が成功したかを返します
    */
   static login(token) {
-    token = Safety.string(token, '');
+    // token = Safety.string(token, '');
     // token が正常値なのかを調べる
     // 少なくとも, 文字型で空でない
     const altToken = Safety.string(token, '');
     if (altToken === '') {
       // token が不正値
-      // console.warn( `illegal token. [${token}]` );
+      console.warn(`illegal token. [${token}]`);
       return false;
     }
     // save
     const result = Cookie.save(token);
-    // console.log( 'login ', result );
+    // console.log('User.login ', result, token);
     User.sign = result;
-    
     return result;
   }
   /**
