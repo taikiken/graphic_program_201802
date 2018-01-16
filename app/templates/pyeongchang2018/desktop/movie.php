@@ -136,14 +136,8 @@ include_once __DIR__.'../../desktop/_category-heading.php';
     'use strict';
     var UT = window.UT;
     var SPBL_ENV = window.SPBL_ENV || {};
-    if (SPBL_ENV.env === 'development' && location.hostname.indexOf('sportsbull.jp') === -1) {
-      UT.app.App.develop();
-    }
     UT.view.tags.ViewTagsPyeongchang.init();
     UT.ui.NavCurrent.init(SPBL_ENV.category, SPBL_ENV.platform === 'web_mobile');
-    // headline
-    var headline = new UT.view.categories.ViewCategoryOption('pyeongchang2018');
-    headline.start();
   }(window));
 </script>
 <script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>

@@ -116,11 +116,26 @@ const sidebar = (slug) => {
   recommend(slug);
 };
 
+const headline = (slug) => {
+  // headline
+  const headlineOption = new UT.view.categories.ViewCategoryOption(slug);
+  headlineOption.start();
+};
+
+/**
+ * desktop 処理します
+ * @param {string} slug category slug - SPBL_ENV.category
+ */
 const desktop = (slug) => {
   sidebar(slug);
   related(slug);
+  headline(slug);
 };
 
+/**
+ * mobile 処理します
+ * @param {string} slug category slug - SPBL_ENV.category
+ */
 const mobile = (slug) => {
   related(slug);
 };
