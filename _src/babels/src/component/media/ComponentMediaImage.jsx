@@ -106,7 +106,7 @@ const ComponentMediaImage = ({ images, single, sp }) => {
   if (original === '') {
     original = Safety.image(images.medium, '');
   }
-  console.log('ComponentMediaImage original, single.id', original, single.id, images);
+  // console.log('ComponentMediaImage original, single.id', original, single.id, images);
   // exist check
   if (original === '') {
     // no image or no correct image extension
