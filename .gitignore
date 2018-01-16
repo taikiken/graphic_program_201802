@@ -165,3 +165,4 @@ _src/bower_exports/react-14.0.7
 # db_dump
 # ==============================
 ut_devnew-201801152129.dump
+/ut.dump
