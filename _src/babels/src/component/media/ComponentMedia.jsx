@@ -58,7 +58,7 @@ const ComponentMedia = ({
   // @type {VideoDae}
   const video = media.video;
   // 記事詳細で画像を表示しない
-  // console.log('ComponentMedia', articleId, images);
+  console.log('ComponentMedia', articleId, images);
   // output
   switch (mediaType) {
     case MediaType.IMAGE: {
