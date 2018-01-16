@@ -417,7 +417,7 @@ export default class ViewSingle extends View {
     this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-    console.warn('ViewSingle.error', this.id, error);
+    console.warn('ViewSingle.fail', this.id, error);
   }
   /**
    * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします
