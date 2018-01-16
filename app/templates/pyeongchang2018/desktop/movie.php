@@ -131,6 +131,7 @@ include_once __DIR__.'../../desktop/_category-heading.php';
 
 <script src="/assets/widgets/articles-index/Widget_articles_tag.js"></script>
 
+<script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script>
   (function(window) {
     'use strict';
@@ -140,7 +141,6 @@ include_once __DIR__.'../../desktop/_category-heading.php';
     UT.ui.NavCurrent.init(SPBL_ENV.category, SPBL_ENV.platform === 'web_mobile');
   }(window));
 </script>
-<script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 // 汎用 footer
