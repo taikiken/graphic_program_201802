@@ -47,6 +47,20 @@ $week_list = array('日', '月', '火', '水', '木', '金', '土');
 $day_of_week = $week_list[(int)$DateTime->format('w')];
 $end_date = $end_date . '（' . $day_of_week . '）';
 
+$articles = [];
+$article_id_list = [
+  284543,
+  284559,
+  284088,
+];
+$article_ids_sql = implode(' OR id = ', $article_id_list);
+$sql = sprintf("select * from %s", sprintf($articletable, set_isbookmark($uid), sprintf(" and (id = %s)", $article_ids_sql)));
+$o->query($sql);
+
+while ($f = $o->fetch_array()){
+  $articles[] = $f;
+}
+
 $response = [
   'competition_name'  => $f['name'],
   'sport_name'        => $f['sport_name'],
