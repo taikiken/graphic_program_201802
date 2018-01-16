@@ -116,16 +116,18 @@ SQL;
         $article_ids_sql = implode(' OR id = ', $value);
         $sql = sprintf("select * from %s", sprintf($articletable, set_isbookmark($uid), sprintf(" and (id = %s)", $article_ids_sql)));
         $o->query($sql);
+        $p = [];
         while ($f = $o->fetch_array()){
             $p[] = $f;
           }
+        $s = [];
         include "public/articlecomments.php";
         $articles = $s;
-
         if($key === 'highlight_movie'){
             $response['pc']['photo_gallery']      = $articles;
             for($i=count($articles);$i>$max_count_sp;$i--){
-                unset($articles[i]);
+                unset($articles[$i-1]);
+                var_dump($i-1);
             }
             $response['sp']['photo_gallery']      = $articles;
 
@@ -138,7 +140,7 @@ SQL;
         if($key === 'photo_gallery'){
             $response['pc']['photo_gallery']      = $articles;
             for($i=count($articles);$i>$max_count_sp;$i--){
-                unset($articles[i]);
+                unset($articles[$i-1]);
             }
             $response['sp']['photo_gallery']      = $articles;
 
