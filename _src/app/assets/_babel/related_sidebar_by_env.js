@@ -14,6 +14,7 @@
 // - 関連ニュース
 // - オススメ動画
 // - オススメ記事
+// - headline - `js-headline` container (sp / desktop) : category 使用タイプ
 
 // const SPBL_ENV
 const SPBL_ENV = self.SPBL_ENV;
@@ -151,6 +152,7 @@ const mobile = (slug) => {
   headlineSp(slug);
 };
 
+// SPBL_ENV から category を取得する - slug で使用可能
 if (SPBL_ENV.category) {
   host();
   const sp = SPBL_ENV.platform === 'web_mobile';
