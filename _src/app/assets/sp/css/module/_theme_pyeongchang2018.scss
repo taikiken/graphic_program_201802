@@ -129,6 +129,25 @@
 
 
 
+
+
+  //記事詳細ページ
+  //.post-single
+  .pyeongchang2018-powered-by {
+    margin-top: 4px;
+    margin-left: perCalc(15, 750);
+    margin-right: perCalc(15, 750);
+
+    img {
+      width: (210/2)+px;
+    }
+  }
+  //.post-single
+
+
+
+
+
   //.gallery--highlight
   //.gallery--photo
   [class*="gallery--"] {
