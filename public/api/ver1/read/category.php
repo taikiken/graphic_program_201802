@@ -289,6 +289,16 @@ SQL;
 
   // UNDO_SPBL-309
   if ( $category === 'parasports' ) :
+    $category_id = 128;
+    $file = sprintf("%s/static/board/%s.json", $ImgPath, $category_id);
+    $json = json_decode(get_contents($file), TRUE);
+    $number = $json['period'];
+    $categoriesinfo['board']['number'] = $number;
+
+    $now_date_time = new DateTime();
+    $old_date_time = $now_date_time->modify('-'.$number.' days')->format('Y-m-d');
+    $now_date_time = new DateTime();
+    $new_date_time = $now_date_time->modify('+'.$number.' days')->format('Y-m-d');
     $week_list = array( '日', '月', '火', '水', '木', '金', '土');
 
     $sql = <<<SQL
@@ -304,7 +314,11 @@ LEFT JOIN
 WHERE
     uc.name_e = '{$category}'
 AND
-    cmp.is_public IS TRUE 
+    cmp.is_public IS TRUE
+AND
+    start_date_time >= '{$old_date_time}'
+AND
+    start_date_time <  '{$new_date_time}'
 ORDER BY
     start_date_time DESC;
 SQL;
@@ -312,21 +326,33 @@ SQL;
     $o->query($sql);
     foreach ($o->fetch_all() as $f) {
 
-      $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
-      $f['sport_id'] = !empty($f['sport_id']) ? $f['sport_id'] . '.png' : '';
+        $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
+        $f['sport_id'] = !empty($f['sport_id']) ? $f['sport_id'] . '.png' : '';
 
-      $DateTime = new DateTime($f['start_date_time']);
-      $start_date = $DateTime->format('m月d日');
-      $day_of_week = $week_list[(int)$DateTime->format('w')];
-      $start_date = $start_date . '（' . $day_of_week .'）';
+        $DateTime = new DateTime($f['start_date_time']);
+        $start_date = $DateTime->format('m月d日');
+        $day_of_week = $week_list[(int)$DateTime->format('w')];
+        $start_date = $start_date . '（' . $day_of_week .'）';
 
-      $categoriesinfo['board'][] = [
-        'sport_name'        => $f['sport_name'],
-        'competition_name'  => $f['name'],
-        'start_date_time'   => $start_date,
-        'icon'              => $f['sport_id'],
-        'link'              => '/result/' . $f['id'] . '/',
-      ];
+        if(!is_null($f['end_date_time'])){
+            $DateTime = new DateTime($f['end_date_time']);
+            $end_date = $DateTime->format('m月d日');
+            $day_of_week = $week_list[(int)$DateTime->format('w')];
+            $end_date = $end_date . '（' . $day_of_week . '）';
+            $key_date = $start_date . ' 〜 ' . $end_date;
+        } else {
+            $end_date = null;
+            $key_date = $start_date;
+        }
+
+        $categoriesinfo['board'][$key_date][] = [
+          'sport_name'          => $f['sport_name'],
+          'competition_name'    => $f['name'],
+          'start_date_time'     => $start_date,
+          'end_date_time'       => $end_date,
+          'icon'                => $f['sport_id'],
+          'link'                => '/result/' . $f['id'] . '/',
+        ];
     }
 
   endif;

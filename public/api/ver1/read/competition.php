@@ -119,17 +119,16 @@ SQL;
         $p = [];
         while ($f = $o->fetch_array()){
             $p[] = $f;
-          }
+        }
         $s = [];
         include "public/articlecomments.php";
         $articles = $s;
         if($key === 'highlight_movie'){
-            $response['pc']['photo_gallery']      = $articles;
+            $response['pc']['highlight_movie']      = $articles;
             for($i=count($articles);$i>$max_count_sp;$i--){
                 unset($articles[$i-1]);
-                var_dump($i-1);
             }
-            $response['sp']['photo_gallery']      = $articles;
+            $response['sp']['highlight_movie']      = $articles;
 
         }
         if($key === 'news'){
