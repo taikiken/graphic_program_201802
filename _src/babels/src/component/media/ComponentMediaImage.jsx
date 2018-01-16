@@ -42,9 +42,9 @@ export const ComponentMediaImagePowered = ({ single, sp }) => {
     '/assets/images/pyeongchang2018/icon-powerdby_gorinjp.png';
 
   return (
-    <span className="powered-by pyeongchang2018-powered-by">
+    <p className="powered-by pyeongchang2018-powered-by">
       <img src={src} alt="" />
-    </span>
+    </p>
   );
 };
 
@@ -122,14 +122,14 @@ const ComponentMediaImage = ({ images, single, sp }) => {
           alt=""
           className="post-single-image"
         />
-        <ComponentMediaImagePowered
-          single={single}
-          sp={sp}
-        />
         <ComponentMediaImageFigcaption
           caption={caption}
         />
       </figure>
+      <ComponentMediaImagePowered
+        single={single}
+        sp={sp}
+      />
     </div>
   );
 };
