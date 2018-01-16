@@ -178,6 +178,9 @@ import { ModelCategoriesSlug } from './model/categoires/ModelCategoriesSlug';
 // view/categories/headline
 import ViewCategoryOption from './view/categories/ViewCategoryOption';
 
+// sp/view/categories
+import SPViewCategoryOption from './sp/view/categories/SPViewCategoryOption';
+
 /**
  * スポーツブル ライブラリ
  * @module UT
@@ -443,6 +446,9 @@ const UT = {
       mypage: {
         SPViewUserProfile,
         SPViewBookmarks
+      },
+      categories: {
+        SPViewCategoryOption
       },
     },
   },

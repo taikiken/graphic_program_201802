@@ -123,6 +123,16 @@ const headline = (slug) => {
 };
 
 /**
+ * SP headline
+ * @param {string} slug category slug
+ */
+const headlineSp = (slug) => {
+  // headline
+  const headlineOption = new UT.sp.view.categories.SPViewCategoryOption(slug);
+  headlineOption.start();
+};
+
+/**
  * desktop 処理します
  * @param {string} slug category slug - SPBL_ENV.category
  */
@@ -138,6 +148,7 @@ const desktop = (slug) => {
  */
 const mobile = (slug) => {
   related(slug);
+  headlineSp(slug);
 };
 
 if (SPBL_ENV.category) {
