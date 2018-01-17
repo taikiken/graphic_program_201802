@@ -135,11 +135,15 @@ export default class ComponentArticleThumbnail extends React.Component {
     const { small, mediaType, title, thumbnail } = this.props;
     // type: video
     // const icon = small ? Empty.VIDEO_PLAY_SMALL : Empty.VIDEO_PLAY;
+    // @since 2018-01-15
+    // design 変更に伴い figure内にspanを追加
     const icon = this.playIcon(small);
     return (
       <figure className={`post-thumb post-thumb-${mediaType}`}>
-        <img className="video-thumbnail" src={thumbnail} alt={title}/>
-        <img className="post-thumb-overlay-movie type-movie" src={icon} alt="" />
+        <span>
+          <img className="video-thumbnail" src={thumbnail} alt={title}/>
+          <img className="post-thumb-overlay-movie type-movie" src={icon} alt="" />
+        </span>
       </figure>
     );
   }
@@ -187,6 +191,7 @@ export default class ComponentArticleThumbnail extends React.Component {
     // }
     // media type で thumbnail 切替
     // since 2017-12-18 switch-case 変更
+    // console.log('ComponentArticleThumbnail.render', this.props);
     switch (mediaType) {
       case MediaType.IMAGE: {
         // image

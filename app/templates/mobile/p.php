@@ -26,11 +26,6 @@
 
     <section class="main-sec">
       <?php
-      // パンくずメニュー
-      // @since 2017-09-11
-      include_once __DIR__ . '/p_breadcrumb.php';
-      // ---------------------------------------------------- ?>
-      <?php
       /*
         @since 2016-11-10
         History API + snap scroll するために現在記事をすべてラップするコンテナ追加
@@ -39,28 +34,21 @@
       ?>
       <div id="js-current-post" class="current-post">
 
-        <?php if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
-          // #1602 - VK brightcove
-          include_once __DIR__."/../specific/_player.php";
-        else :
-          // 通常画像 or 動画 ?>
-          <?php if(!isset($_GET['id'])):
-            // メインイメージ
-            ?>
-            <div id="single-visual-container"></div>
-          <?php endif;?>
-        <?php endif; ?>
-
         <div class="post-detail">
 
-          <div id="single-header-container"></div>
+          <div id="single-header-container">
+
+          </div>
+          <?php
+          // ----------------------------------------------------
+          // 記事詳細: pc 媒体ロゴ
+          // @since 2017-09-11 別ファイルにします
+          // include_once __DIR__ . '/p_provider_logo.php';
+          // eof: 記事詳細: pc 媒体ロゴ
+          // ---------------------------------------------------- ?>
 
           <div class="post-sns">
             <div class="post-sns-list">
-              <div class="post-sns-fixed">
-                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
-              </div>
-
               <div class="post-sns-flex">
                 <div class="post-sns-flex-inner">
                   <ul class="post-sns-flex-list">
@@ -88,97 +76,80 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div><!-- /.post-sns -->
 
-          <?php if ( $page['post']['is_readmore'] ) : ?>
-
-            <div id="post-content-container" class="post-content">
-
-              <p>
-                <?php echo $page['post']['description']; ?>
-              </p>
-
-              <p class="post-content-readMore">
-                <a id="readMore-external" class="post-content-readMore-btn" href="<?php echo $page['post']['readmore']['url']; ?>" target="_blank">続きを読む(外部サイトへ)</a>
-              </p>
-
-            </div>
-
-          <?php else : ?>
-
-            <?php
-            /*
-            // https://github.com/undotsushin/undotsushin/issues/1115#issuecomment-251271866
-            // `記事詳細での「続きを読む」を廃止` の対応でお願いします！
-            // @since 2016-10-04
-            <div id="post-content-container" class="post-content excerpt hidden">
-              <?php print_r($page['post']['body']); ?>
-            </div><!-- /.post-content -->
-            <div id="post-content-read-more" class="post-content-read-more"></div>
-            */
-            ?>
-            <div id="post-content-container" class="post-content">
-              <?php if(count($page['photo']) > 0):
-                // @since 2017-09-11 - メンテナンス性を上げるため `photo` 別ファイルにします
-                include_once __DIR__ . '/p_photo.php';
+          <?php if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
+            // #1602 - VK brightcove
+            include_once __DIR__."/../specific/_player.php";
+          else :
+            // 通常画像 or 動画 ?>
+              <?php if(!isset($_GET['id'])):
+              // メインイメージ
               ?>
-              <?php else:?>
-                <?php print_r($page['post']['body']); ?>
-              <?php endif;?>
-            </div><!-- /.post-content -->
-
-            <?php // ref. #1876 ?>
-            <!-- /531683568/mobile/mobile_detail_body_bottom -->
-            <script>
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/mobile/mobile_detail_body_bottom', [300, 50], 'div-gpt-ad-1496897689545-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
-              });
-            </script>
-
-            <div id='div-gpt-ad-1496897689545-0' style='height:50px; width:300px; text-align: center; margin: 20px auto;'>
-            <script>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496897689545-0'); });
-            </script>
-            </div>
-            <!-- // /531683568/mobile/mobile_detail_body_bottom -->
-
+              <div id="single-visual-container"></div>
+            <?php endif;?>
           <?php endif; ?>
 
-          <?php
-          // ----------------------------------------------------
-          // アプリ導線
-          ?>
-          <div class="post-pr_app">
-            <a href="https://app.adjust.com/lac3f2?deep_link=sportsbull%3A%2F%2F" target="_blank">
-              <div class="post-pr_app-inner">
-                <h3 class="post-pr_app-heading">40種類を超えるスポーツニュースや速報を完全無料でアプリで見放題！</h3>
-                <ul class="post-pr_app-list">
-                  <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-ios.png" alt="App Store"></li>
-                  <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-android.png" alt="Google play"></li>
-                </ul><!-- /.post-pr_app-list -->
-              </div><!-- /.post-pr_app-inner -->
-            </a>
-          </div><!-- /.post-pr_app -->
+          <div id="post-content-container" class="post-content restricted">
+            <?php if(count($page['photo']) > 0):
+              // @since 2017-09-11 - メンテナンス性を上げるため `photo` 別ファイルにします
+              include_once __DIR__ . '/p_photo.php';
+            ?>
+            <?php else:?>
+              <?php print_r($page['post']['body']); ?>
+            <?php endif;?>
 
-          <?php
-          // ----------------------------------------------------
-          // 記事詳細: pc 媒体ロゴ
-          // @since 2017-09-11 別ファイルにします
-          include_once __DIR__ . '/p_provider_logo.php';
-          // eof: 記事詳細: pc 媒体ロゴ
-          // ---------------------------------------------------- ?>
+            <div class="external-link">
+              <div class="external-link-heading">
+                <h2>外部リンク</h2>
+                <p class="provider-name">Full-Count</p>
+              </div>
+              <ul>
+                <li><a href="#hoge">差別行為のグリエルを「救った」と米紙が称賛「ダルビッシュがヒーロー」</a></li>
+                <li><a href="#hoge">差別行為のグリエルに厳しい声 ヤ軍傘下加藤も失望「野球界ではよく起こる」</a></li>
+                <li><a href="#hoge">グリエルに人種差別疑惑</a></li>
+                <li><a href="#hoge">差別行為のグリエルに厳しい声 ヤ軍傘下加藤も失望「野球界ではよく起こる」</a></li>
+                <li><a href="#hoge">グリエルに人種差別疑惑</a></li>
+              </ul>
+            </div>
+
+            <div class="single-more-container">
+              <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">アプリで読む</a></p>
+              <p id="btn-more-web"><span>ウェブで読む</span></p>
+            </div>
+            <script>
+              var bodyElement = document.getElementById('post-content-container');
+              var bodyP = document.querySelectorAll('#post-content-container > p');
+              var bodyLen = bodyP.length;
+              var halfIndex = Math.round(bodyLen / 2) - 1;
+              var btnContainer = bodyElement.querySelector('.single-more-container');
+              var btnMore = bodyElement.querySelector('#btn-more-web');
+              btnMore.addEventListener('touchend', function(){
+                bodyElement.classList.remove('restricted');
+                btnContainer.parentNode.removeChild(btnContainer);
+              });
+              if(bodyLen >= 6) {
+                var div = document.createElement('div');
+                var target = bodyP[halfIndex];
+                div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
+                target.parentNode.insertBefore(div, target.nextSibling);
+                googletag.cmd.push(function() {
+                  googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert').addService(googletag.pubads());
+                  googletag.enableServices();
+                  googletag.pubads().collapseEmptyDivs();
+                  googletag.display("ad-gpt-article-detail-body-insert");
+                });
+              }
+            </script>
+          </div><!-- /.post-content -->
+
+          <?php // ref. #1876 ?>
+          <!-- /531683568/mobile/mobile_detail_body_bottom -->
 
           <div id="post-content-banner"></div>
 
           <div class="post-sns">
             <div class="post-sns-list">
-              <div class="post-sns-fixed">
-                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
-              </div>
-
               <div class="post-sns-flex">
                 <div class="post-sns-flex-inner">
                   <ul class="post-sns-flex-list">
@@ -207,54 +178,48 @@
               </div>
             </div><!-- /.post-sns-list -->
           </div><!-- /.post-sns -->
-
+          <!-- /531683568/mobile/mobile_detail_after -->
+          <script>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/mobile/mobile_detail_comment_top', [300, 250], 'div-gpt-ad-mobile_detail_after').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.pubads().collapseEmptyDivs();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-mobile_detail_after' style='text-align: center; margin: 20px auto; height:250px; width:300px;'>
+          <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-mobile_detail_after'); });
+          </script>
+          </div>
+          <!-- // /531683568/mobile/mobile_detail_after -->
         </div><!-- /.post-detail -->
+        <?php
+        // ------------------------------------
+        // Facebook 「いいね」
+        ?>
+        <div class="pr_fb">
+          <h4 class="pr_fb-heading">
+            <img src="/assets/sp/images/detail/post-sns-logo.png" alt="SPORTS BULL">
+            <small class="pr_f  b-heading-item">いいねして最新ニュースをチェック！</small>
+          </h4>
+          <div class="post-sns-fixed">
+            <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+          </div>
+        </div>
 
-        <div class="comment">
-
-          <div id="comment-self-container"></div>
-
-          <div id="comment-official-container"></div>
-
-          <div id="comment-normal-container"></div>
-
-          <?php
-          /*
-           * https://github.com/undotsushin/undotsushin/issues/720
-           * 広告 / PC版画像バナー広告をDFP管理下にする
-           */
-          // ------------------------------------
-          if ( $page['ad']['sp'] ) :
-            ?>
-            <div class="sponsor-link_commentLower">
-              <?php
-              /*
-               # 保険のために original を残します
-               # ToDo: いつか削除
-              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
-              */ ?>
-
-              <!-- /531683568/mobile/mobile_detail_comment_top -->
-              <script>
-                googletag.cmd.push(function() {
-                  googletag.defineSlot('/531683568/mobile/mobile_detail_comment_top', [300, 250], 'div-gpt-ad-1501838642824-0').addService(googletag.pubads());
-                  googletag.pubads().enableSingleRequest();
-                  googletag.pubads().collapseEmptyDivs();
-                  googletag.enableServices();
-                });
-              </script>
-              <div id='div-gpt-ad-1501838642824-0' style='text-align: center; margin: 20px auto; height:250px; width:300px;'>
-              <script>
-              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501838642824-0'); });
-              </script>
-              </div>
-              <!-- // /531683568/mobile/mobile_detail_comment_top -->
-            </div>
-          <?php endif; ?>
-
-          <div id="comment-form-container"></div>
-
-        </div><!-- /.comment -->
+        <?php
+        // --------------------------------------------------------------
+        // 各SNSの公式ページへのリンク
+        ?>
+        <div class="link-sns">
+          <ul>
+            <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
+            <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
+            <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
+            <li class="sns-ig"><a href="https://www.imgrum.one/sportsbull_official" target="_blank">instagram</a></li>
+          </ul>
+        </div>
       </div><!-- /.current-post-->
       <?php
       // --------------------------------------------------------------
@@ -266,35 +231,85 @@
       // TODO: よく読まれている記事 carousel - sidebar: ranking
       ?>
       <div id="widget-ranking-container"></div>
+
       <?php
       // ------------------------------------
-      // Facebook 「いいね」
+      // TODO: ヘッドライン
       ?>
-      <div class="pr_fb">
-        <h4 class="pr_fb-heading"><span class="pr_fb-heading-item">毎日500本以上の最新スポーツニュースを配信 Facebookにいいね!して情報を受け取ろう!</span></h4>
-        <div class="pr_fb-btn">
-          <div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
-        </div>
-      </div>
+      <div id="headline-container"></div>
+      <!-- <div id="js-headline"></div> -->
+
       <?php
       // ------------------------------------
       // TODO: おすすめの記事 - sidebar: recommend
       ?>
       <div id="widget-recommend-list-container"></div>
-      <?php
-      // --------------------------------------------------------------
-      ?>
-      <?php
-      /*
-      @since 2016-09-28
-      記事詳細の次の記事
-      div#js-singles-container 内に「記事一覧」「オススメ記事」「人気記事」「関連記事」を記入
-       */
-      ?>
-      <div class="singles-next">
-        <div id="js-singles-container"></div>
-        <div id="js-singles-more"></div>
+
+      <!-- /531683568/mobile/mobile_recommend_after -->
+      <script>
+        googletag.cmd.push(function() {
+          googletag.defineSlot('/531683568/mobile/mobile_detail_comment_top', [300, 250], 'div-gpt-ad-mobile_recommend_after').addService(googletag.pubads());
+          googletag.pubads().enableSingleRequest();
+          googletag.pubads().collapseEmptyDivs();
+          googletag.enableServices();
+        });
+      </script>
+      <div id='div-gpt-ad-mobile_recommend_after' style='text-align: center; margin: 20px auto; height:250px; width:300px;'>
+      <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-mobile_recommend_after'); });
+      </script>
       </div>
+      <!-- // /531683568/mobile/mobile_recommend_after -->
+
+      <?php
+      // ----------------------------------------------------
+      // アプリ導線
+      ?>
+      <div class="post-pr_app">
+        <a href="https://app.adjust.com/lac3f2?deep_link=sportsbull%3A%2F%2F" target="_blank">
+          <div class="post-pr_app-inner">
+            <h3 class="post-pr_app-heading">40種類を超えるスポーツニュースや速報を完全無料でアプリで見放題！</h3>
+            <ul class="post-pr_app-list">
+              <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-ios.png" alt="App Store"></li>
+              <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-android.png" alt="Google play"></li>
+            </ul><!-- /.post-pr_app-list -->
+          </div><!-- /.post-pr_app-inner -->
+        </a>
+      </div><!-- /.post-pr_app -->
+
+      <?php
+      // ------------------------------------
+      // TODO: 新着記事
+      ?>
+      <div id="widget-news-list-container">
+        <div class="mod-headingA01">
+          <h2>
+            <img src="/assets/sp/images/detail/ttl_news.png" alt="NEWS"/>
+            <?php print_r($page['post']['category']['label']); ?>の新着記事
+          </h2>
+        </div>
+        <div class="board">
+          <div id="board-container"></div>
+          <div id="board-container-more"></div>
+        </div>
+      </div>
+
+      <!-- /531683568/mobile/mobile_news_after -->
+      <script>
+        googletag.cmd.push(function() {
+          googletag.defineSlot('/531683568/mobile/mobile_detail_comment_top', [300, 250], 'div-gpt-ad-mobile_news_after').addService(googletag.pubads());
+          googletag.pubads().enableSingleRequest();
+          googletag.pubads().collapseEmptyDivs();
+          googletag.enableServices();
+        });
+      </script>
+      <div id='div-gpt-ad-mobile_news_after' style='text-align: center; margin: 20px auto; height:250px; width:300px;'>
+      <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-mobile_news_after'); });
+      </script>
+      </div>
+      <!-- // /531683568/mobile/mobile_news_after -->
+
 
       <?php
       /*

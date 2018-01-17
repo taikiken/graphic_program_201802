@@ -49,7 +49,13 @@ const BoardAd = ({ index, slug }) => {
   }
   // 2 or 5件目
   // |0|ad|1|2|ad|3|4|
-  if (index === 1 || index === 3) {
+  // if (index === 1 || index === 3) {
+  /**
+   * @since 2018-01-15
+   * design変更に伴い
+   * Ad広告を一番最後だけに表示に変更
+   */
+  if (index === 4) {
     // output
     // console.log('BoardAd', index);
     return (
@@ -157,10 +163,18 @@ const SPComponentSinglesRecommend = ({ list, slug }) => {
   }
   // ---
   // render
+  /**
+   * @since 2018-01-15
+   * design変更に伴い
+   * h2を変更 + BoardAdとBoardItemの順番を変更
+   */
   return (
     <div className="widget-postList widget-postList_popular">
       <div className="mod-headingA01">
-        <h2>あなたにおすすめの記事</h2>
+        <h2>
+          <img src="/assets/sp/images/detail/ttl_recommend.png" alt="RECOMMEND"/>
+          あなたにおすすめの記事
+        </h2>
       </div>
       <div className="board">
         {
@@ -171,14 +185,14 @@ const SPComponentSinglesRecommend = ({ list, slug }) => {
                 key={`sp-singles-recommend-${dae.id}`}
                 className={`singles-recommend-${index}`}
               >
-                <BoardAd
-                  index={index}
-                  slug={slug}
-                />
                 <BoardItem
                   key={`singles-widget-post-list-recommend-${single.id}`}
                   single={dae}
                   index={index}
+                />
+                <BoardAd
+                  index={index}
+                  slug={slug}
                 />
               </div>
             );

@@ -264,7 +264,13 @@ const CarouselAd = ({ slug, index, length }) => {
   if (slug === 'big6tv') {
     return null;
   }
-  if (index === 1 || index === 3 || (length === 1 || length === 2)) {
+  /**
+   * @since 2018-01-15
+   * design変更に伴い
+   * Ad広告を一番最後だけに表示に変更
+   */
+  // if (index === 1 || index === 3 || (length === 1 || length === 2)) {
+  if (index === 4) {
     // console.log('CarouselAd output *******');
     containers += 1;
     return (
@@ -706,10 +712,18 @@ const SPComponentSinglesRanking = ({ list, slug, label }) => {
   const articles = list.map(article => (new ArticleDae(article)));
   // console.log('SPComponentSinglesRanking', list, slug, label, Array.isArray(list), list.length, articles);
   // ---
+  /**
+   * @since 2018-01-15
+   * design変更に伴い
+   * h2を変更
+   */
   return (
     <div className="widget-post-carousel">
       <div className="mod-headingA01">
-        <h2>{label}のよく読まれている記事</h2>
+        <h2>
+          <img src="/assets/sp/images/detail/ttl_ranking.png" alt="RANKING"/>
+          人気の記事 / {label}
+        </h2>
       </div>
       <div className="widget-post-carousel-outer">
         <div className="widget-post-carousel-center">
