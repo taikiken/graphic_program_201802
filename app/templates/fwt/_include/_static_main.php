@@ -241,6 +241,81 @@
   <h2><img src="../assets/images/fwt/related-heading.png" alt="RELATED">関連記事</h2>
   <ul>
     <li>
+      <a href="/p/252931/">
+        <div class="fwt--related__image-wrap">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011712471473590000.png" alt="">
+        </div>
+        <div class="fwt--related__text-wrap">
+          <h3>【動画】FWTスゴい映像 空撮 スノーボード女子</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>FWT（Freeride World Tour）へ参加する選手達は、専用のヘリコプターで頂上に向かう。2018年、長野県白馬村でも開催されるFWT。白馬での大会を前に”ヘリコプター撮影されたスノーボード女子”映像が公開中。FWTの動画では、迫力満点のウィンターショーを体感できる。</p>
+          <?php endif; ?>
+          <span class="fwt--related__text-wrap__category">FWT</span>
+          <span class="fwt--related__text-wrap__date">1月16日（火） 19:35</span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/p/252930/">
+        <div class="fwt--related__image-wrap">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011712373439364800.png" alt="">
+        </div>
+        <div class="fwt--related__text-wrap">
+          <h3>【動画】FWTスゴい映像 空撮 スキー女子</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>FWT（Freeride World Tour）へ参加する選手達は、専用のヘリコプターで頂上に向かう。2018年、長野県白馬村でも開催されるFWT。白馬での大会を前に”ヘリコプター撮影されたスキー女子”映像が公開中。FWTの動画では、迫力満点のウィンターショーを体感できる。</p>
+          <?php endif; ?>
+          <span class="fwt--related__text-wrap__category">FWT</span>
+          <span class="fwt--related__text-wrap__date">1月16日（火） 19:34</span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/p/252929/">
+        <div class="fwt--related__image-wrap">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011712293430398800.png" alt="">
+        </div>
+        <div class="fwt--related__text-wrap">
+          <h3>【動画】FWTスゴい映像 空撮 スキー男子</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>FWT（Freeride World Tour）へ参加する選手達は、専用のヘリコプターで頂上に向かう。2018年、長野県白馬村でも開催されるFWT。白馬での大会を前に”ヘリコプター撮影されたスキー男子”映像が公開中。FWTの動画では、迫力満点のウィンターショーを体感できる。</p>
+          <?php endif; ?>
+          <span class="fwt--related__text-wrap__category">FWT</span>
+          <span class="fwt--related__text-wrap__date">1月16日（火） 19:32</span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/p/252928/">
+        <div class="fwt--related__image-wrap">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011712511269734400.png" alt="">
+        </div>
+        <div class="fwt--related__text-wrap">
+          <h3>【動画】FWTスゴい映像 2017男子スノーボード優勝者 トラビス・ライス(Travis Rice)</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>FWTには世界中から強者が参戦するが、過去の大会映像からもその凄さを体感できる。スノーボード男子で優勝したトラビスライス(Travis Rice)の動画は圧巻だ。世界最高峰とも言われる彼のパフォーマンスは、極上のウィンターショーである。</p>
+          <?php endif; ?>
+          <span class="fwt--related__text-wrap__category">FWT</span>
+          <span class="fwt--related__text-wrap__date">1月16日（火） 19:28</span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/p/252924/">
+        <div class="fwt--related__image-wrap">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011712041579823800.png" alt="">
+        </div>
+        <div class="fwt--related__text-wrap">
+          <h3>【動画】FWTスゴい映像 選手の目線カメラ</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>FWT（Freeride World Tour）は、ごく僅かな選手達によってアラスカで開催された大会が起源と言われている。2018年、長野県白馬村でも開催されるFWT。白馬での大会を前に”選手の目線から撮影”された迫力満点の秘蔵映像が公開された。</p>
+          <?php endif; ?>
+          <span class="fwt--related__text-wrap__category">FWT</span>
+          <span class="fwt--related__text-wrap__date">1月16日（火） 19:23</span>
+        </div>
+      </a>
+    </li>
+    <li>
       <a href="/p/252821/">
         <div class="fwt--related__image-wrap">
           <img src="https://img.sportsbull.jp/thumbnail1/img2018011616172552431000.png" alt="">
