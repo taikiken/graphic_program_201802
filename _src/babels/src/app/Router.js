@@ -466,7 +466,7 @@ export default class Router extends EventDispatcher {
    * @param {string} [where=''] 発火場所
    */
   page404(where = '') {
-    console.warn('Router 404', where);
+    // console.warn('Router 404', where);
     this.dispatch( { type: Router.NOT_FOUND, where: where } );
   }
   /**
