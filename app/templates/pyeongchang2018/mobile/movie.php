@@ -52,8 +52,6 @@ include_once __DIR__."/../../mobile/_header.php";
       <p class="gallery__header__logo"><img src="/assets/sp/images/pyeongchang2018/icon-powerdby_gorinjp.png" alt="Powerd by gorin.jp"></p>
     </header><!-- /.gallery__header -->
 
-    <div id="pickup-container"></div><!-- /pickup -->
-
     <?php
     // SP版 Powerd by エリアの追加
     // https://github.com/undotsushin/undotsushin/issues/1211

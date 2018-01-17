@@ -47,8 +47,6 @@ include_once __DIR__."/../../mobile/_header.php";
       <!-- // /531683568/pyeongchang_ad/pyeongchang_sp_bigbanner -->
     </div><!-- /.sponsor-link -->
 
-    <div id="pickup-container"></div><!-- /pickup -->
-
     <?php
     // SP版 Powerd by エリアの追加
     // https://github.com/undotsushin/undotsushin/issues/1211

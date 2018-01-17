@@ -13,6 +13,18 @@
 include_once __DIR__.'/_category-heading.php';
 ?>
 <div class="body-sec">
+  <?php
+  // ----------------------------------------------------
+  // 冒頭画像
+  // 記事一覧: pc theme.images
+  if ( $page['theme']['images']['pc'] ) : ?>
+    <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page[ 'theme' ][ 'background_color' ] : ''; ?>">
+      <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['pc']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+    </div>
+    <?php
+  endif;
+  // eof: 記事一覧: pc theme.images
+  // ---------------------------------------------------- ?>
 
   <div class="body-sec-inner">
     <section class="main-sec">
