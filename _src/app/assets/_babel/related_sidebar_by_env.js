@@ -56,6 +56,21 @@ const related = (slug) => {
 };
 
 /**
+ * SP: 関連ニュースを出力します
+ * @param {string} slug category slug
+ */
+const relatedSp = (slug) => {
+  const element = UT.app.Dom.board();
+  const elementMore = UT.app.Dom.boardMore();
+  if (!element || !elementMore) {
+    return;
+  }
+  // 関連ニュース出力
+  const archive = new UT.sp.view.category.SPViewCategoryWithSlug(slug, element, elementMore);
+  archive.start();
+};
+
+/**
  * div#widget-ranking-container
  * @param {string} slug category slug
  * @param {{}} [option={}] request class callback 引数
@@ -148,7 +163,7 @@ const desktop = (slug) => {
  * @param {string} slug category slug - SPBL_ENV.category
  */
 const mobile = (slug) => {
-  related(slug);
+  relatedSp(slug);
   headlineSp(slug);
 };
 
