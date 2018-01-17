@@ -121,6 +121,12 @@
     }
   } //.medal_list
 
+  //カテゴリートップ
+  .main-sec {
+    > .medal_list:first-child {
+      margin-top: 30px;
+    }
+  }
 
 
 
@@ -498,4 +504,11 @@
       }
     }
   } //.sponsor-link
+
+  //カテゴリートップ
+  .main-sec {
+    > .sponsor-link:first-child {
+      margin-top: 30px;
+    }
+  }
 } //.whole.pyeongchang2018
