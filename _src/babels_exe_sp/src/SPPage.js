@@ -382,8 +382,8 @@ export default class SPPage {
 
     // first
     SPFirstVisit.start();
-    // announce
-    SPAnnounce.start('all');
+    // // announce
+    // SPAnnounce.start('all');
   }
   /**
    * category page
@@ -591,7 +591,7 @@ export default class SPPage {
     // SPSidebar.start();
     SPHeader.start();
 
-    if ( UT.app.User.sign ) {
+    if (UT.app.User.sign) {
       // login only
       SPUserProfile.ext();
       SPBookmarks.start();

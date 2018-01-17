@@ -80,6 +80,13 @@ export class Action {
      */
     this._url = types.url;
     /**
+     * API path を types 引数から取り出します
+     * - alias - `this._url`
+     * @type {string}
+     * @since 2018-01-11
+     */
+    this.path = types.url;
+    /**
      * API リクエスト時の method( GET, POST, PUT, DELETE )を types 引数から取り出します
      * @type {string}
      * @protected
@@ -122,6 +129,7 @@ export class Action {
    */
   set url(url) {
     this._url = url;
+    this.path = url;
   }
   /**
    * GET|POST|DELETE|PUT form method を返します

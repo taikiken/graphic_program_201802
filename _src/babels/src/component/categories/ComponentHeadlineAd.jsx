@@ -12,6 +12,9 @@
 
 // app
 import { Ad } from '../../app/const/Ad';
+// import { HeadlineAdDae } from '../../dae/categories/HeadlineAdDae';
+import { CategoriesSlugDae } from '../../dae/categories/CategoriesSlugDae';
+import { AdDae } from '../../dae/theme/AdDae';
 
 // React
 /**
@@ -22,15 +25,59 @@ const React = self.React;
 /**
  * 一面以外の headline ad
  *
- * <pre>
+ * ```
  * ヘッドライン最下部に広告が設定できる
  * response.headline.ad の該当製品の値でアドジェネ広告を差し込む、この値がなければ広告は表示しない
- * </pre>
+ * ```
+ *
+ * - big6tv を除外
+ * ```
+ * 六大学 / 広告表示 調整（Web） #1546
+ * > アドネットワーク関連の広告（ネイティブアド？）を消したい
+ * ```
+ * [ad] 構成変更 - [#1554](https://github.com/undotsushin/undotsushin/issues/1544#issuecomment-286534040)
+ * - 記事一覧：article_list
+ * - 記事詳細：article_detail
+ * - ヘッドラインニュース：headline_list
+ * - オススメ記事：popular_list
+ * - 人気記事：reccomend_list
+ * ```
+ * "ad":{
+ * "ios"     : "33504",
+ * "android" : "34424",
+ * "sp"      : "35244",
+ * "pc"      : {
+ *   "sidebar_top"    : "pc_sidebar_top",
+ *   "sidebar_bottom" : "pc_sidebar_bottom"
+ * },
+ * "mobile"  : {
+ *   "sp" : {
+ *     "article_list"   : "35244",
+ *     "article_detail" : "35245",
+ *     "headline_list"  : "35244",
+ *     "popular_list"   : "35244","reccomend_list" : "35244"
+ *   },
+ *   "ios" : {
+ *     "article_list"   : "33504",
+ *     "article_detail" : "33505",
+ *     "headline_list"  : "33504",
+ *     "popular_list"   : "33504",
+ *     "reccomend_list" : "33504"
+ *   },
+ *   "android" : {
+ *     "article_list"   : "34424",
+ *     "article_detail" : "34425",
+ *     "headline_list"  : "34424",
+ *     "popular_list"   : "34424",
+ *     "reccomend_list" : "34424"
+ *   },
+ *  }
+ * }
+ * ```
  * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
  * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
  *
  * @since 2016-09-20
- *
  * */
 export default class ComponentHeadlineAd extends React.Component {
   // ---------------------------------------------------
@@ -38,14 +85,16 @@ export default class ComponentHeadlineAd extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes`
-   * @return {{browser: string, ad: HeadlineAdDae, category: CategoriesSlugDae}} React props
+   * @return {{browser: string, ad: AdDae, category: CategoriesSlugDae}} React props
    */
   static get propTypes() {
     return {
       browser: React.PropTypes.string.isRequired,
-      ad: React.PropTypes.object.isRequired,
+      // ad: React.PropTypes.object.isRequired,
+      ad: React.PropTypes.instanceOf(AdDae).isRequired,
       // @since 2017-03-28
-      category: React.PropTypes.object
+      // category: React.PropTypes.object,
+      category: React.PropTypes.instanceOf(CategoriesSlugDae),
     };
   }
   /**
@@ -54,7 +103,7 @@ export default class ComponentHeadlineAd extends React.Component {
    */
   static get defaultProps() {
     return {
-      category: {}
+      category: new CategoriesSlugDae({}),
     };
   }
   // ---------------------------------------------------
@@ -79,16 +128,16 @@ export default class ComponentHeadlineAd extends React.Component {
   // ------------------------------------
   /**
    * big6tv を除外するために特定します
-   * <pre>
+   * ```
    * 六大学 / 広告表示 調整（Web） #1546
    * > アドネットワーク関連の広告（ネイティブアド？）を消したい
-   * </pre>
+   * ```
    * @return {boolean} true: big6tv
    * @see https://github.com/undotsushin/undotsushin/issues/1546
    * @since 2017-03-15
    */
   isBig6Tv() {
-    const category = this.props.category;
+    const { category } = this.props;
     return category.slug === 'big6tv';
   }
   /**
@@ -113,27 +162,31 @@ export default class ComponentHeadlineAd extends React.Component {
     if (this.isBig6Tv()) {
       return;
     }
-    const id = this.props.ad.sp;
+    const { ad } = this.props;
+    // console.log('ComponentHeadlineAd.sp ad', ad);
+    const id = ad.mobile.sp.headline;
     if (!id) {
       return;
     }
-
     this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`);
   }
   /**
    * pc: アドジェネ広告を差し込む、この値がなければ広告は表示しない
+   * @deprecated dont use this - pc headline 広告 API 経由でデータはこない
    */
   pc() {
-    // big6tv は広告非表示
-    if (this.isBig6Tv()) {
-      return;
-    }
-    const id = this.props.ad.pc;
-    if (!id) {
-      return;
-    }
-
-    this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`);
+    console.warn('ComponentHeadlineAd.pc deprecated - dont use this', this.props.category);
+    // // big6tv は広告非表示
+    // if (this.isBig6Tv()) {
+    //   return;
+    // }
+    // const id = this.props.ad.pc;
+    // // console.log('ComponentHeadlineAd.pc id', id, this.props);
+    // if (!id) {
+    //   return;
+    // }
+    //
+    // this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`);
   }
   // ------
   // delegate
@@ -141,16 +194,20 @@ export default class ComponentHeadlineAd extends React.Component {
    * div.sponsor-link マウント後に「アドジェネ広告」タグを作成します
    */
   componentDidMount() {
-    switch (this.props.browser) {
-      case 'sp': {
-        this.sp();
-        break;
-      }
-      case 'pc':
-      default: {
-        this.pc();
-        break;
-      }
+    // switch (this.props.browser) {
+    //   case 'sp': {
+    //     this.sp();
+    //     break;
+    //   }
+    //   case 'pc':
+    //   default: {
+    //     this.pc();
+    //     break;
+    //   }
+    // }
+    // 2018-01-12 - sp 専用に変更する
+    if (this.props.browser === 'sp') {
+      this.sp();
     }
   }
   /**
@@ -158,28 +215,26 @@ export default class ComponentHeadlineAd extends React.Component {
    * @return {?XML} アドジェネ広告を返す, 無い時は null を返します
    */
   render() {
-    switch (this.props.browser) {
-      case 'sp': {
-        if (!this.props.ad.sp) {
-          return null;
-        }
-        break;
-      }
-      case 'pc':
-      default: {
-        if (!this.props.ad.pc) {
-          return null;
-        }
-        break;
-      }
-    }
+    // switch (this.props.browser) {
+    //   case 'sp': {
+    //     if (!this.props.ad.sp) {
+    //       return null;
+    //     }
+    //     break;
+    //   }
+    //   case 'pc':
+    //   default: {
+    //     if (!this.props.ad.pc) {
+    //       return null;
+    //     }
+    //     break;
+    //   }
+    // }
 
     return (
       <div
         className="sponsor-link"
-        ref={(component) => {
-          this.sponsorLink = component;
-        }}
+        ref={(component) => (this.sponsorLink = component)}
       />
     );
   }

@@ -117,6 +117,8 @@ export default class ViewAnnounce extends View {
     const dae = new CategoriesSlugDae(response);
     const information = this.sp ? dae.information.sp : dae.information.pc;
     // console.log('ViewAnnounce.render', this.sp, response, dae, information);
+    // 通知
+    this.executeSafely(View.BEFORE_RENDER, dae);
     // output
     ReactDOM.render(
       <ComponentAnnounce

@@ -91,10 +91,9 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
     this._resultArticles = null;
     /**
      * ModelCategoriesSlug 取得結果を保持します
-     * @type {null|Object}
-     * @private
+     * @type {?CategoriesSlugDae}
      */
-    this._categoryInfo = null;
+    this.categoryInfo = null;
     /**
      * ModelCategoriesSlug, Category の取得を待つためのフラッグとして使用します
      * @type {number}
@@ -209,7 +208,7 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
     }
 
     const categoryInfo = new CategoriesSlugDae( response );
-    this._categoryInfo = categoryInfo;
+    this.categoryInfo = categoryInfo;
     this.executeSafely(SPViewCategoryWithSlug.CATEGORY_INFO, categoryInfo);
     this.wait();
   }
@@ -244,11 +243,13 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
   render(articles) {
     // ストリーム広告 ID
     // @since 2016-09-20, categoryInfo null の時があるので変更
-    const categoryInfo = this._categoryInfo;
-    let adSp = '';
-    if (!!categoryInfo && !!categoryInfo.ad && !!categoryInfo.ad.sp) {
-      adSp = categoryInfo.ad.sp;
-    }
+    // const categoryInfo = this.categoryInfo;
+    // let adSp = '';
+    // if (!!categoryInfo && !!categoryInfo.ad && !!categoryInfo.ad.sp) {
+    //   adSp = categoryInfo.ad.sp;
+    // }
+    const categoryInfo = this.categoryInfo;
+    const adSp = categoryInfo && categoryInfo.ad && categoryInfo.ad.sp ? categoryInfo.ad.sp : new CategoriesSlugDae({});
     // let adSp = categoryInfo.ad.sp;
     // if ( !adSp ) {
     //   adSp = '';
