@@ -295,7 +295,7 @@ export default class Router extends EventDispatcher {
       '/category/': this.category,
       '/area/': this.category,
       '/p/': this.single,
-      '/a/': this.single,
+      '/a/': this.singleA,
       '/search/': this.search,
       // '/search': this.search,
       '/signup_login/': this.signupLogin,
@@ -466,7 +466,7 @@ export default class Router extends EventDispatcher {
    * @param {string} [where=''] 発火場所
    */
   page404(where = '') {
-    // console.log( '404 ', where );
+    console.warn('Router 404', where);
     this.dispatch( { type: Router.NOT_FOUND, where: where } );
   }
   /**
@@ -543,7 +543,7 @@ export default class Router extends EventDispatcher {
       // article Id 存在
       if (comment === 'comment') {
         // in comment
-        this.comment( articleId, commentId, replyId );
+        this.comment(articleId, commentId, replyId);
       } else {
         // single page
         this.dispatch({ type: Router.SINGLE, id: articleId });
@@ -582,12 +582,13 @@ export default class Router extends EventDispatcher {
    * `/a/` な個別ページ
    */
   singleA() {
-    const [articleId, comment, commentId, replyId] = Loc.path.replace( '/a/', '' ).split('/');
+    const [articleId, comment, commentId, replyId] = Loc.path.replace('/a/', '').split('/');
+    // console.log('Router.singleA', articleId, comment, commentId, replyId);
     if (!!articleId && Number.isInteger(parseInt(articleId, 10))) {
       // article Id 存在
       if (comment === 'comment') {
         // in comment
-        this.comment( articleId, commentId, replyId );
+        this.comment(articleId, commentId, replyId);
       } else {
         // single page
         this.dispatch({ type: Router.SINGLE, id: articleId });
@@ -622,7 +623,7 @@ export default class Router extends EventDispatcher {
    * search 検索 page
    */
   search() {
-    const [keyword] = Loc.path.replace( /\/search\/|\/search/ig, '' ).split('/');
+    const [keyword] = Loc.path.replace(/\/search\/|\/search/ig, '').split('/');
 
     if (!!keyword) {
       this.dispatch({ type: Router.SEARCH, keyword: keyword });
@@ -656,12 +657,10 @@ export default class Router extends EventDispatcher {
 
     }
     */
-
     // console.log( 'signup page in fired' );
     // URL 遷移しない
     // 1 page コンテンツ
     this.dispatch({ type: Router.SIGNUP });
-
   }
   /**
    * signup-wow
@@ -692,7 +691,7 @@ export default class Router extends EventDispatcher {
    * reset_password page
    */
   password() {
-    const [option] = Loc.path.replace( /\/reset_password\/|\/reset_password/ig, '' ).split('/');
+    const [option] = Loc.path.replace(/\/reset_password\/|\/reset_password/ig, '').split('/');
 
     if (option === 'resetting') {
       this.passwordResetting();
@@ -710,7 +709,7 @@ export default class Router extends EventDispatcher {
    * mypage
    */
   mypage() {
-    const [activities] = Loc.path.replace( /\/mypage\/|\/mypage/ig, '' ).split('/');
+    const [activities] = Loc.path.replace(/\/mypage\/|\/mypage/ig, '').split('/');
     if ( activities === 'activities' ) {
       this.activities();
     } else {
@@ -754,7 +753,7 @@ export default class Router extends EventDispatcher {
    * settings page
    */
   settings() {
-    const [option] = Loc.path.replace( /\/settings\/|\/settings/ig, '' ).split('/');
+    const [option] = Loc.path.replace(/\/settings\/|\/settings/ig, '').split('/');
     // console.log( 'settings option ', option );
     switch (option) {
       case 'interest':
