@@ -161,11 +161,22 @@ import SPViewCommentForm from './sp/view/comment/SPViewCommentForm';
 // singles-option
 import SPViewSinglesRecommend from './sp/view/singles-option/SPViewSinglesRecommend';
 import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking';
+import SPViewSinglesHeadline from './sp/view/singles-option/SPViewSinglesHeadLine';
+import SPViewSinglesWithSlug from './sp/view/singles-option/SPViewSinglesWithSlug';
 
 
 // mypage
 import SPViewUserProfile from './sp/view/mypage/SPViewUserProfile';
 import SPViewBookmarks from './sp/view/mypage/SPViewBookmarks';
+
+// tag - for 平昌
+import ViewTagsPyeongchang from './view/tags/ViewTagsPyeongchang';
+
+// util - for 平昌
+import NavCurrent from './ui/NavCurrent';
+
+// model - for 平昌
+import { ModelCategoriesSlug } from './model/categoires/ModelCategoriesSlug';
 
 /**
  * スポーツブル ライブラリ
@@ -321,15 +332,17 @@ const UT = {
   ui: {
     PageTop,
     button: {
-      TopButton
-    }
+      TopButton,
+    },
+    NavCurrent,
   },
   net: {
     Cookie,
     Ajax,
   },
   model: {
-    Model
+    Model,
+    ModelCategoriesSlug,
   },
   view: {
     View,
@@ -385,7 +398,10 @@ const UT = {
       ViewDeleteModal,
       ViewLogoutModal,
       ViewFlushModal
-    }
+    },
+    tags: {
+      ViewTagsPyeongchang,
+    },
   },
   sp: {
     view: {
@@ -404,6 +420,8 @@ const UT = {
       singles: {
         SPViewSinglesRecommend,
         SPViewSinglesRanking,
+        SPViewSinglesHeadline,
+        SPViewSinglesWithSlug
       },
       comment: {
         SPViewCommentForm
