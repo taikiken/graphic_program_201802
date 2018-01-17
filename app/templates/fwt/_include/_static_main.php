@@ -241,6 +241,51 @@
   <h2><img src="../assets/images/fwt/related-heading.png" alt="RELATED">関連記事</h2>
   <ul>
     <li>
+      <a href="/p/252821/">
+        <div class="fwt--related__image-wrap">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011616172552431000.png" alt="">
+        </div>
+        <div class="fwt--related__text-wrap">
+          <h3>【動画】FWTスゴい映像 2017男子スキー優勝者 楠太輔</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>2018年も長野県白馬村で開催されるFWT。この大会では、日本人の活躍も注目されている。2017年のFWTでは、楠太輔(くすのき・たいすけ）が スキー男子で優勝。大自然で戦う侍スキーヤーは、怖いもの知らず。楠の大胆な滑走から燃えたぎる大和魂を感じてほしい。</p>
+          <?php endif; ?>
+          <span class="fwt--related__text-wrap__category">FWT</span>
+          <span class="fwt--related__text-wrap__date">1月16日（火） 16:09</span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/p/252810/">
+        <div class="fwt--related__image-wrap">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011615250592581500.png" alt="">
+        </div>
+        <div class="fwt--related__text-wrap">
+          <h3>【動画】FWTスゴい映像 2017女子スキー優勝者 エリザベス ゲリッツェン（Elisabeth Gerritzen）</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>2018年も長野県白馬村で開催されるFWT。特に女性スキーヤーの活躍は、過去大会でも世界的に賞賛された。2017年開催のFWTスキー女子では、Elisabeth Gerritzen（エリザベス ゲリッツェン）が70.67で優勝。彼女のアグレッシブな滑走は、誰もが圧倒されるだろう。</p>
+          <?php endif; ?>
+          <span class="fwt--related__text-wrap__category">FWT</span>
+          <span class="fwt--related__text-wrap__date">1月16日（火） 15:23</span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/p/252779/">
+        <div class="fwt--related__image-wrap">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011613093617755800.png" alt="">
+        </div>
+        <div class="fwt--related__text-wrap">
+          <h3>【動画】FWTスゴい映像 2017女子スノーボード優勝者 アンナ オロバ (Anna Orlova)</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <p>FWTには世界中から強者が参戦するが、過去の大会映像からもその凄さを体感できる。スノーボード女子で優勝したアンナ オロバ (Anna Orlova) の動画は圧巻だ。完全無料スポーツアプリ「スポーツブル」では、2018年1月20日から1月27日に開催されるフリーライドスキー・スノーボード世界選手権FWT「Freeride World Tour Hakuba, Japan 2018 - The Winter Begins」を無料ライブ配信※する。</p>
+          <?php endif; ?>
+          <span class="fwt--related__text-wrap__category">FWT</span>
+          <span class="fwt--related__text-wrap__date">1月16日（火） 13:04</span>
+        </div>
+      </a>
+    </li>
+    <li>
       <a href="/p/250565/">
         <div class="fwt--related__image-wrap">
           <img src="https://img.sportsbull.jp/thumbnail1/img2018011123291658879000.png" alt="">
