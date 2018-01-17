@@ -7,6 +7,19 @@
   <div class="body-sec-inner">
 
     <?php
+    // ----------------------------------------------------
+    // 記事一覧: sp theme.images
+    if ( $page['theme']['images']['sp'] ) :
+      ?>
+      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['category']['theme']['background_color'] : ''; ?>">
+        <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+      </div>
+      <?php
+    endif;
+    // eof: 記事一覧: sp theme.images
+    // ---------------------------------------------------- ?>
+
+    <?php
     // medals
     include_once __DIR__ . '/../pyeongchang2018/module/_pyeongchang2018_medals.php';
     ?>
@@ -28,19 +41,6 @@
 
       <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="2"></div>
     </div><!-- /.gallery--photo -->
-
-    <?php
-    // ----------------------------------------------------
-    // 記事一覧: sp theme.images
-    if ( $page['theme']['images']['sp'] ) :
-      ?>
-      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['category']['theme']['background_color'] : ''; ?>">
-        <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
-      </div>
-      <?php
-    endif;
-    // eof: 記事一覧: sp theme.images
-    // ---------------------------------------------------- ?>
     <div id="pickup-container"></div><!-- /pickup -->
 
     <?php

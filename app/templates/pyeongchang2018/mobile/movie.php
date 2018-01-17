@@ -17,6 +17,19 @@ include_once __DIR__."/../../mobile/_header.php";
       <h1 class="special-summary-heading"><img src="/assets/sp/images/pyeongchang2018/special-summary.jpg" alt="平昌五輪"></h1>
     </div><!-- /.special-summary -->
 
+    <?php
+    // ----------------------------------------------------
+    // 記事一覧: sp theme.images
+    if ( $page['theme']['images']['sp'] ) :
+      ?>
+      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['category']['theme']['background_color'] : ''; ?>">
+        <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+      </div>
+    <?php
+    endif;
+    // eof: 記事一覧: sp theme.images
+    // ---------------------------------------------------- ?>
+
     <div class="sponsor-link">
       <!-- /531683568/pyeongchang_ad/pyeongchang_sp_bigbanner -->
       <script>
@@ -39,18 +52,6 @@ include_once __DIR__."/../../mobile/_header.php";
       <p class="gallery__header__logo"><img src="/assets/sp/images/pyeongchang2018/icon-powerdby_gorinjp.png" alt="Powerd by gorin.jp"></p>
     </header><!-- /.gallery__header -->
 
-    <?php
-    // ----------------------------------------------------
-    // 記事一覧: sp theme.images
-    if ( $page['theme']['images']['sp'] ) :
-      ?>
-      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['category']['theme']['background_color'] : ''; ?>">
-        <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
-      </div>
-    <?php
-    endif;
-    // eof: 記事一覧: sp theme.images
-    // ---------------------------------------------------- ?>
     <div id="pickup-container"></div><!-- /pickup -->
 
     <?php

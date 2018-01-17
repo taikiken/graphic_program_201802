@@ -10,7 +10,6 @@
 .whole.pyeongchang2018 {
   .medal_list {
     padding-bottom: (40/2)+px;
-    border-top: 4px solid #ddd;
     border-bottom: 1px solid #ddd;
 
     //.medal_list__header
@@ -126,6 +125,26 @@
       }
     }
   } //.medal_list
+
+
+
+  //.pyeongchang2018-movie
+  //.pyeongchang2018-photo
+  &.pyeongchang2018-movie,
+  &.pyeongchang2018-photo {
+    .medal_list {
+      &:before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: (10/2)+px;
+        background-color: #eee;
+        border-bottom: 1px solid #ddd;
+      }
+    }
+  }
+  //.pyeongchang2018-movie
+  //.pyeongchang2018-photo
 
 
 
