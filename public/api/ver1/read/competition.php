@@ -34,7 +34,7 @@ SQL;
 $o->query($sql);
 $f = $o->fetch_array();
 
-if(!empty($f)){
+if(strlen($f["name"])>0){
     $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
     $f['sport_id'] = !empty($f['sport_id']) ? $f['sport_id'] . '.png' : '';
 
