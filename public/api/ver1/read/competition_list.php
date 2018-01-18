@@ -8,14 +8,29 @@ $year = bind($_REQUEST["year"]);
 
 $y = [];
 $response = [];
+$recent_flag = false;
 $response_flag = false;
 $week_list = array('日', '月', '火', '水', '木', '金', '土');
 $max_type = 3;
 
-$now_date_time = new DateTime($year.'-01-01');
-$old_date_time = $now_date_time->format('Y-m-d');
-$new_date_time = $now_date_time->modify('+1 year')->format('Y-m-d');
+if($year !== '0'){
+    //年での絞り込み
+    $now_date_time = new DateTime($year.'-01-01');
+    $old_date_time = $now_date_time->format('Y-m-d');
+    $new_date_time = $now_date_time->modify('+1 year')->format('Y-m-d');
+}else{
+    //直近の絞り込み
+    $category_id = 128;
+    $file = sprintf("%s/static/board/%s.json", $ImgPath, $category_id);
+    $json = json_decode(get_contents($file), TRUE);
+    $number = $json['period'];
+    $now_date_time = new DateTime();
+    $old_date_time = $now_date_time->modify('-'.$number.' day')->format('Y-m-d');
+    $now_date_time = new DateTime();
+    $new_date_time = $now_date_time->modify('+'.$number.' day')->format('Y-m-d');
 
+    $response['number'] = $number;
+}
 $o = new db;
 $o->connect();
 
@@ -48,7 +63,7 @@ ORDER BY
 
 $o->query($sql);
 foreach ($o->fetch_all() as $f) {
-    if($response_flag == false) {$response_flag = true ;}
+    if($response_flag === false) {$response_flag = true ;}
 
     $active_list = [];
     $type_list = [];
@@ -74,19 +89,20 @@ foreach ($o->fetch_all() as $f) {
     }
 
     //結果のactive確認
-    $active_list[] = (strpos(get_headers($ImgPath . $f['file'])[0],'OK')) ? true : false;
+    $active_list['result'] = (strpos(get_headers($ImgPath . $f['file'])[0],'OK')) ? true : false;
 
     //概要はactiveにする
-    $active_list[] = true;
+    $active_list['summary'] = true;
 
     //各記事のactive確認
+    $types = array('highlight_movie', 'news', 'photo_gallery');
     $sql = sprintf('select distinct type from articles_competitions where competition_id = %s order by type asc;',$f['id']);
     $o->query($sql);
     while ($fetch = $o->fetch_array()){
         $type_list[] = $fetch['type'];
     }
     for($i=0;$i<$max_type;$i++){
-        $active_list[] = (in_array($i+1,$type_list)) ? true : false;
+        $active_list[$types[$i]] = (in_array($i+1,$type_list)) ? true : false;
     }
 
     $response['list'][$key_date][] = [
@@ -103,25 +119,11 @@ foreach ($o->fetch_all() as $f) {
 }
 
     if($response_flag){
-            //開始日
-        $sql=sprintf("select start_date_time from competitions");
-        $o->query($sql);
-        while($f=$o->fetch_array()){
-            $DateTime = new DateTime($f['start_date_time']);
-            $year_list[] = $DateTime->format('Y');
-        }
-
-        $sql=sprintf("select name from sports");
-        $o->query($sql);
-        while($f=$o->fetch_array()){$sports_list[]=$f['name'];}
-        
-        $response['year'] = array_values(array_unique($year_list));
-        $response['sports'] = $sports_list;
-
         $y["status"]["code"] = 200;
         $y["status"]["user_message"] = "";
         $y["status"]["developer_message"] = "";
         $y["response"] = $response;
+        
     }else{
         $y["status"]["code"] = 404;
         $y["status"]["user_message"] = "指定された大会は存在しません。";

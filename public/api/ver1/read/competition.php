@@ -85,6 +85,7 @@ WHERE
 AND
     acmp.is_public IS TRUE
 ORDER BY
+    acmp.type ASC,
     acmp.created_at ASC;
 SQL;
     $o->query($sql);
@@ -123,7 +124,9 @@ SQL;
         $s = [];
         include "public/articlecomments.php";
         $articles = $s;
+        
         if($key === 'highlight_movie'){
+            for($i=0;$i<count($articles);$i++){ $articles[$i]['is_movie'] = true; }
             $response['pc']['highlight_movie']      = $articles;
             for($i=count($articles);$i>$max_count_sp;$i--){
                 unset($articles[$i-1]);
@@ -132,11 +135,13 @@ SQL;
 
         }
         if($key === 'news'){
+            for($i=0;$i<count($articles);$i++){ $articles[$i]['is_movie'] = false; }
             $response['pc']['news']      = $articles;
             $response['sp']['news']      = $articles;
-
+            
         }
         if($key === 'photo_gallery'){
+            for($i=0;$i<count($articles);$i++){ $articles[$i]['is_movie'] = false; }
             $response['pc']['photo_gallery']      = $articles;
             for($i=count($articles);$i>$max_count_sp;$i--){
                 unset($articles[$i-1]);
