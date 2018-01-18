@@ -14,20 +14,25 @@ import {Safety} from '../../data/Safety';
 
 // node
 import {ReactionNode} from './ReactionNode';
-import {CommentFormNode} from './CommentFormNode';
+// import {CommentFormNode} from './CommentFormNode';
 import {CommentMenuNode} from './CommentMenuNode';
-import {CommentUserNode} from './CommentUserNode';
-import {CommentContentNode} from './CommentContentNode';
+// import {CommentUserNode} from './CommentUserNode';
+// import {CommentContentNode} from './CommentContentNode';
+import ComponentCommentUser from '../../component/single-comment/user/ComponentCommentUser';
+import ComponentCommentForm from '../../component/single-comment/form/ComponentCommentForm';
+import ComponentCommentContentBody from '../../component/single-comment/content/ComponentCommentContentBody';
 
 // React
-let React = self.React;
+const React = self.React;
 
 /**
  * <p>記事詳細 > コメント一覧 node を作成します</p>
+ * TODO: future remove
  * @class CommentNode
  * @type {Function}
+ * @deprecated 2017-12-06 instead use {@link ComponentCommentsChildList}
  */
-export let CommentNode = React.createClass( {
+export const CommentNode = React.createClass( {
   propTypes: {
     // unique id（識別のために必要）
     uniqueId: React.PropTypes.string.isRequired,
@@ -75,6 +80,7 @@ export let CommentNode = React.createClass( {
   },
   getInitialState: function() {
     this.replyStatus = null;
+    console.error('[CommentNode] deprecated');
 
     return {
       open: this.props.open,
@@ -82,6 +88,7 @@ export let CommentNode = React.createClass( {
     };
   },
   render: function() {
+    // console.log('CommentNode.render', this.props.uniqueId);
     let commentDae = this.props.commentDae;
     let comment = commentDae.comment;
     let sign = this.props.sign;
@@ -110,6 +117,7 @@ export let CommentNode = React.createClass( {
           url={this.props.url}
         />
         {/* figure.comment-user */}
+        {/*
         <CommentUserNode
           loggedIn={loggedIn}
           picture={picture}
@@ -117,8 +125,23 @@ export let CommentNode = React.createClass( {
           bio={comment.user.bio || ''}
           displayDate={comment.displayDate}
         />
+        */}
+        <ComponentCommentUser
+          loggedIn={loggedIn}
+          picture={picture}
+          userName={comment.user.userName}
+          bio={comment.user.bio || ''}
+          displayDate={comment.displayDate}
+        />
         {/* div.comment-content */}
+        {/*
         <CommentContentNode
+          content={comment.body}
+          commentId={this.props.commentId}
+          replyClass={replyClass(this.props.replyId)}
+        />
+        */}
+        <ComponentCommentContentBody
           content={comment.body}
           commentId={this.props.commentId}
           replyClass={replyClass(this.props.replyId)}
@@ -135,6 +158,7 @@ export let CommentNode = React.createClass( {
           isBad={comment.isBad}
           url={this.props.url}
         />
+        {/*
         <CommentFormNode
           uniqueId={this.props.uniqueId}
           icon={this.props.icon}
@@ -147,13 +171,24 @@ export let CommentNode = React.createClass( {
           commentType={this.props.commentsListType}
           url={this.props.url}
         />
+        */}
+        <ComponentCommentForm
+          uniqueId={this.props.uniqueId}
+          articleId={this.props.articleId}
+          sign={sign}
+          commentType={this.props.commentsListType}
+          url={this.props.url}
+        />
       </div>
     );
   },
   // componentDidMount: function() {
   //
   // },
-  // componentWillUnmount: function() {
+  // componentWillUnMount: function() {
   //
   // }
+  // componentWillReceiveProps: function(nextProps) {
+  //   console.log('CommentNode.componentWillReceiveProps', this.props.uniqueId, nextProps);
+  // },
 } );

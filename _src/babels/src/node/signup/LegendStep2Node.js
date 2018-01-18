@@ -34,7 +34,7 @@ import {Validate} from '../../util/Validate';
 import {Exif} from '../../util/Exif';
 
 // ui
-import {Thumbnail} from '../../ui/Thumbnail';
+import Thumbnail from '../../ui/Thumbnail';
 
 // data
 import {Result} from '../../data/Result';
@@ -43,29 +43,36 @@ import {ErrorMessage} from '../../data/ErrorMessage';
 import {Safety} from '../../data/Safety';
 
 // node
-import {ErrorNode} from '../error/ErrorNode';
+// import {ErrorNode} from '../error/ErrorNode';
 import {ChangeAvatarNode} from '../avator/ChangeAvatorNode';
 
 // model
 import {Model} from '../../model/Model';
 import {ModelSignup} from '../../model/signup/ModelSignup';
+import ComponentError from '../../component/error/ComponentError';
 
 // react
-let React = self.React;
+/**
+ * [library] - React
+ */
+const React = self.React;
 
 // Sagen
-let Sagen = self.Sagen;
+/**
+ * [library] - Sagen
+ */
+const Sagen = self.Sagen;
 
 
 // ------------------------------------------
 // step 2 入力フォーム
 // ------------------------------------------
 /**
- * <p>新規登録 step 2 form parts</p>
+ * 新規登録 step 2 form parts
  * @private
  * @type {ReactClass}
  */
-let Step2FormNode = React.createClass( {
+const Step2FormNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     avatar: React.PropTypes.string,
@@ -89,7 +96,7 @@ let Step2FormNode = React.createClass( {
       email: new ErrorMessage(),
       password: new ErrorMessage(),
       name: new ErrorMessage(),
-      profile_picture: new ErrorMessage()
+      profilePicture: new ErrorMessage()
     };
     this.ie = Sagen.Browser.IE.is();
     this.callback = null;
@@ -197,7 +204,7 @@ let Step2FormNode = React.createClass( {
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             />
           </span>
-          <ErrorNode message={message('email')} />
+          <ComponentError message={message('email')} />
         </span>
         {/* password */}
         <span className={'form-parts ' + errorClass('password')}>
@@ -210,7 +217,7 @@ let Step2FormNode = React.createClass( {
               onChange={this.passwordChange}
             />
           </span>
-          <ErrorNode message={message('password')} />
+          <ComponentError message={message('password')} />
         </span>
         {/* name */}
         <span className={'form-parts ' + errorClass('name')}>
@@ -223,7 +230,7 @@ let Step2FormNode = React.createClass( {
               onChange={this.nameChange}
             />
           </span>
-          <ErrorNode message={message('name')} />
+          <ComponentError message={message('name')} />
         </span>
         {/* bio */}
         <span className="form-parts">
@@ -241,7 +248,7 @@ let Step2FormNode = React.createClass( {
         {/* profile_picture */}
         <div className={'setting-form-avatar ' + stageClass()}>
           <h2 className="setting-form-avatar-heading">{Message.PLACEHOLDER_PICTURE}</h2>
-          <div className={'form-parts ' + errorClass('profile_picture')}>
+          <div className={'form-parts ' + errorClass('profilePicture')}>
             <div
               className={'setting-form-avatar-dropArea ' + zoneEntered}
               onDragOver={this.handleDragOver}
@@ -266,14 +273,14 @@ let Step2FormNode = React.createClass( {
               </div>
               <input
                 type="file"
-                name="profile_picture"
+                name="profilePicture"
                 accept="image/*"
                 value={this.state.picture}
                 onChange={this.pictureChange}
                 className="setting-form-picture form-input"
               />
             </div>
-            <ErrorNode message={message('profile_picture')} />
+            <ComponentError message={message('profilePicture')} />
           </div>
         </div>
 
@@ -364,7 +371,7 @@ let Step2FormNode = React.createClass( {
   // file
   pictureChange: function( event ) {
     let inputFile = event.target.value;
-    this.errors.profile_picture.reset();
+    this.errors.profilePicture.reset();
 
     if ( inputFile === '' ) {
       return;
@@ -372,7 +379,7 @@ let Step2FormNode = React.createClass( {
 
     if ( !Safety.isImg( inputFile ) ) {
       // this.messageStatus.flush( MessageStatus.message( 'プロフィール写真に使用可能な画像は .png, .jpg, .gif です。' ), MessageStatus.ERROR, this.props.sp );
-      this.errors.profile_picture.message = ErrorTxt.INVALID_IMAGE;
+      this.errors.profilePicture.message = ErrorTxt.INVALID_IMAGE;
       this.setState( {picture: ''} );
       return;
     }
@@ -652,9 +659,9 @@ let Step2FormNode = React.createClass( {
 
     if ( Array.isArray( errors ) ) {
 
-      for ( var errorObject of errors ) {
+      for ( let errorObject of errors ) {
 
-        for ( var key in errorObject ) {
+        for ( let key in errorObject ) {
 
           if ( errorObject.hasOwnProperty( key ) ) {
             this.errors[ key ].message = errorObject[ key ];
@@ -670,7 +677,7 @@ let Step2FormNode = React.createClass( {
   reset: function() {
     this.errors.password.reset();
     this.errors.name.reset();
-    this.errors.profile_picture.reset();
+    this.errors.profilePicture.reset();
     this.setState( { error: false } );
   },
   dispose: function() {
@@ -679,14 +686,12 @@ let Step2FormNode = React.createClass( {
 } );
 
 /**
- * <p>「新規会員登録」入力フォームコンテナ<br>
- * 基本情報設定</p>
- *
- * **signup step 2**
- *
+ * 「新規会員登録」入力フォームコンテナ
+ * - 基本情報設定
+ * - **signup step 2**
  * @type {ReactClass}
  */
-export let LegendStep2Node = React.createClass( {
+export const LegendStep2Node = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     getForm: React.PropTypes.func.isRequired,
@@ -709,8 +714,44 @@ export let LegendStep2Node = React.createClass( {
       picture: ''
     };
   },
+  // // -----------------------------------------------------------
+  // // form event handler
+  // inputChange( /* event:Event */ ):void {
+  //   // console.log( 'input event ', event );
+  // },
+  // -----------------------------------------------------------
+  // SignupStatus event handler
+  // @param {Object} event
+  stepChange: function(event) {
+    this.updateStep(event.step);
+  },
+  // @param {number} step
+  updateStep: function(step) {
+    this.setState({ step });
+  },
+  // @param {Object} event
+  emailChange: function(event) {
+    this.updateEmail(event.email);
+  },
+  // @param {string} email
+  updateEmail: function(email) {
+    // console.log( 'updateEmail ', email );
+    this.setState({ email });
+  },
+  // -----------------------------------------------------------
+  // delegate
+  componentDidMount: function() {
+    this.status.on(SignupStatus.SIGNUP_STEP, this.stepChange);
+    this.status.on(SignupStatus.SIGNUP_EMAIL, this.emailChange);
+  },
+  componentWillUnMount: function() {
+    this.status.off(SignupStatus.SIGNUP_STEP, this.stepChange);
+    this.status.off(SignupStatus.SIGNUP_EMAIL, this.emailChange);
+  },
+  shouldComponentUpdate: function(nextProps, nextState) {
+    return this.state.email !== nextState.email || this.props.step === nextState.step;
+  },
   render: function() {
-
     // console.log( 'render step 2 email ', this.state.email );
     return (
       <div className="fieldset-container fieldset-container-2">
@@ -723,39 +764,5 @@ export let LegendStep2Node = React.createClass( {
         />
       </div>
     );
-
   },
-  // -----------------------------------------------------------
-  // delegate
-  componentDidMount: function() {
-    this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
-    this.status.on( SignupStatus.SIGNUP_EMAIL, this.emailChange );
-  },
-  componentWillUnMount: function() {
-    this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
-    this.status.off( SignupStatus.SIGNUP_EMAIL, this.emailChange );
-  },
-  shouldComponentUpdate: function( nextProps, nextState ) {
-    return this.state.email !== nextState.email || this.props.step === nextState.step;
-  },
-  // -----------------------------------------------------------
-  // form event handler
-  inputChange( /* event:Event */ ):void {
-    // console.log( 'input event ', event );
-  },
-  // -----------------------------------------------------------
-  // SignupStatus event handler
-  stepChange: function( event:Object ):void {
-    this.updateStep( event.step );
-  },
-  updateStep: function( step:Number ):void {
-    this.setState( { step: step } );
-  },
-  emailChange: function( event:Object ):void {
-    this.updateEmail( event.email );
-  },
-  updateEmail: function( email:string ):void {
-    // console.log( 'updateEmail ', email );
-    this.setState( { email: email } );
-  }
-} );
+});

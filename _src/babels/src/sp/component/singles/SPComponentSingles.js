@@ -11,7 +11,7 @@
  */
 
 // view
-import { View } from '../../../view/View';
+import View from '../../../view/View';
 
 // app
 import { WidgetType } from '../../../app/const/WidgetType';
@@ -22,52 +22,51 @@ import { SPComponentSinglesWidget } from './SPComponentSinglesWidget';
 import { SPComponentSinglesArticleMagnet } from '../singles-magnet/SPComponentSinglesArticleMagnet';
 
 // ui
-import { SinglesManager } from '../../../ui/SinglesManager';
+import SinglesManager from '../../../ui/SinglesManager';
 
 // util
 import { Fb } from '../../../util/Fb';
 
 // React
+/**
+ * [library] - ReactDOM
+ */
 const React = self.React;
 
 /**
  * SP: 記事詳細「次の記事一覧」親コンポーネント
- * <pre>
+ * ```
  * SPViewSingle -> SPViewSingles -> SPComponentSingles
  * の順で呼び出されます
  * 使用 Action class は
  * Singles or SinglesAuth になります
- * </pre>
+ * ```
  *
- * ```
- * <SPComponentSingles>
- *   <SPComponentSinglesArticle>
- *   <SPComponentSinglesWidget>
- *     <SPComponentSinglesWidgetRecommend>
- *     <SPComponentSinglesWidgetRelated>
- *     <SPComponentSinglesWidgetPopular>
- * ```
+ * - {@link SPComponentSingles}
+ *   - {@link SPComponentSinglesArticle}
+ *   - {@link SPComponentSinglesWidget}
+ *     - {@link SPComponentSinglesWidgetRecommend}
+ *     - {@link SPComponentSinglesWidgetRelated}
+ *     - {@link SPComponentSinglesWidgetPopular}
  *
  * `SPComponentSinglesWidgetOption` 経由の場合
  *
- * ```
- * <SPComponentSingles>
- *   <SPComponentSinglesArticle>
- *   <SPComponentSinglesWidgetOption>
- *     <SPComponentSinglesWidget>
- *       <SPComponentSinglesWidgetRecommend>
- *       <SPComponentSinglesWidgetRelated>
- *       <SPComponentSinglesWidgetPopular>
- * ```
+ * - {@link SPComponentSingles}
+ *   - {@link SPComponentSinglesArticle}
+ *   - {@link SPComponentSinglesWidgetOption}
+ *     - {@link SPComponentSinglesWidget}
+ *       - {@link SPComponentSinglesWidgetRecommend}
+ *       - {@link SPComponentSinglesWidgetRelated}
+ *       - {@link SPComponentSinglesWidgetPopular}
  *
  * ```
  * SPComponentSinglesWidgetPopular -> SPViewSinglesPopular -> CategoryAuth | Category
  * ```
  *
- * {@link SPViewSingle}
- * {@link SPViewSingles}
- * {@link Singles}
- * {@link SinglesAuth}
+ * - {@link SPViewSingle}
+ * - {@link SPViewSingles}
+ * - {@link Singles}
+ * - {@link SinglesAuth}
  * @since 2016-09-28
  */
 export class SPComponentSingles extends React.Component {
@@ -281,7 +280,7 @@ export class SPComponentSingles extends React.Component {
   // }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     const state = this.state;
@@ -342,8 +341,8 @@ export class SPComponentSingles extends React.Component {
     const list = state.list;
     const length = list.length;
 
-    // @ToDO 条件簡略化可能か調べる
-    // @ToDO 各件数のテスト
+    // 条件簡略化可能か調べる
+    // 各件数のテスト
     if (length === 0) {
       // 続きの記事 0 件
       // オススメ・関連・人気

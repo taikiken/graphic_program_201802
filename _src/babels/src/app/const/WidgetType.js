@@ -15,21 +15,21 @@ export class WidgetType {
    * RECOMMEND, オススメ記事
    * @return {string} widget-postList_recommend を返します
    */
-  static get RECOMMEND():string {
+  static get RECOMMEND() {
     return 'widget-postList_recommend';
   }
   /**
    * POPULAR, 人気記事
    * @return {string} widget-postList_popular を返します
    */
-  static get POPULAR():string {
+  static get POPULAR() {
     return 'widget-postList_popular';
   }
   /**
    * RELATED, 関連記事
    * @return {string} widget-postList_related を返します
    */
-  static get RELATED():string {
+  static get RELATED() {
     return 'widget-postList_related';
   }
 }

@@ -10,7 +10,7 @@
  *
  */
 
-import {Dom} from '../../app/Dom';
+import Dom from '../../app/Dom';
 
 // sagen
 let Sagen = self.Sagen;

@@ -92,6 +92,7 @@ gulp.task 'sp:sprite:build', ->
           orientation: setting.sprite.option
           margin: 0
           split: true
+          cachebuster: true
           'dimension': [
             {ratio: 1, dpi: 72}
             {ratio: 2, dpi: 192}
@@ -129,6 +130,7 @@ gulp.task 'sp:sprite:build:shell', ->
           orientation: setting.sprite.option
           margin: 0
           split: true
+          cachebuster: true
           'dimension': [
             {ratio: 1, dpi: 72}
             {ratio: 2, dpi: 192}

@@ -12,35 +12,51 @@
 
 
 /**
- * singleton instance のためのチェック用 Symbol
+ * {@link NextPages} singleton instance のためのチェック用 Symbol
  * @type {Symbol}
  * @private
  */
-const _symbol = Symbol('NextPages singleton instance');
+const nextPagesSymbol = Symbol('NextPages singleton instance');
 /**
- * NextPages instance
+ * {@link NextPages} instance
  * @type {?NextPages}
  * @private
  * @static
  */
-let _instance = null;
+let singletonInstance = null;
 
 /**
  * 記事詳細・次の記事一覧データを保存します
  * @since 2016-10-27
  */
 export class NextPages {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * instance を生成します
+   * @return {NextPages} SinglesHistory instance を返します
+   */
+  static factory():NextPages {
+    if (singletonInstance === null) {
+      singletonInstance = new NextPages(nextPagesSymbol);
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * singleton
    * @param {Symbol} target single ton を保証するためのインナーシンボル
    * @return {?NextPages} NextPages instance
    */
   constructor(target) {
-    if (_symbol !== target) {
+    if (nextPagesSymbol !== target) {
       throw new Error( 'NextPages is static Class. not use new NextPages().' );
     }
-    if (_instance !== null) {
-      return _instance;
+    if (singletonInstance !== null) {
+      return singletonInstance;
     }
     const pages = {};
     /**
@@ -58,8 +74,8 @@ export class NextPages {
      */
     this.list = () => list;
 
-    _instance = this;
-    return _instance;
+    singletonInstance = this;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -122,18 +138,5 @@ export class NextPages {
    */
   top() {
     return this.list[0];
-  }
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {NextPages} SinglesHistory instance を返します
-   */
-  static factory():NextPages {
-    if (_instance === null) {
-      _instance = new NextPages(_symbol);
-    }
-    return _instance;
   }
 }

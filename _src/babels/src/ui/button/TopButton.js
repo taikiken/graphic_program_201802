@@ -13,28 +13,34 @@
 import { EventDispatcher } from '../../event/EventDispatcher';
 
 /**
- * singleton instance のためのチェック用 Symbol
+ * {@link TopButton} singleton instance のためのチェック用 Symbol
  * @type {Symbol}
  * @private
  */
-const _symbol = Symbol('TopButton singleton instance');
+const topButtonSymbol = Symbol('TopButton singleton instance');
 /**
- * TopButton instance
+ * {@link TopButton} instance
  * @type {?TopButton}
  * @private
  * @static
  */
-let _instance = null;
+let singletonInstance = null;
 
 /**
- * button element
+ * button element - {@link TopButton}
  * @type {?Element}
  * @default null
  */
 let element = null;
 
 // TweenMax
+/**
+ * [library] - gsap.TweenLite
+ */
 const TweenLite = self.TweenLite;
+/**
+ * [library] - gsap.com.greensock.easing
+ */
 const easing = self.com.greensock.easing;
 
 /**
@@ -42,30 +48,6 @@ const easing = self.com.greensock.easing;
  * @since 2016-10-28
  */
 export class TopButton extends EventDispatcher {
-  /**
-   * singleton
-   * @param {Symbol} target singleton を保証する inner Symbol
-   * @return {?TopButton} singleton instance
-   */
-  constructor(target) {
-    if (_symbol !== target) {
-      throw new Error( 'TopButton is static Class. not use new TopButton().' );
-    }
-    if (_instance !== null) {
-      return _instance;
-    }
-    super();
-    // -------------------
-    // one time setting
-    /**
-     * animation 可能かの flag
-     * @type {boolean}
-     */
-    this.can = true;
-
-    _instance = this;
-    return _instance;
-  }
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------
@@ -86,6 +68,51 @@ export class TopButton extends EventDispatcher {
     return 'topButtonComplete';
   }
   // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * instance を生成します
+   * @return {TopButton} TopButton instance を返します
+   */
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new TopButton(topButtonSymbol);
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * singleton
+   * @param {Symbol} target singleton を保証する inner Symbol
+   * @return {?TopButton} singleton instance
+   */
+  constructor(target) {
+    if (topButtonSymbol !== target) {
+      throw new Error( 'TopButton is static Class. not use new TopButton().' );
+    }
+    if (singletonInstance !== null) {
+      return singletonInstance;
+    }
+    super();
+    // -------------------
+    // one time setting
+    /**
+     * animation 可能かの flag
+     * @type {boolean}
+     */
+    this.can = true;
+    /**
+     * bind onClick
+     * @type {function}
+     */
+    this.onClick = this.onClick.bind(this);
+
+    singletonInstance = this;
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
@@ -97,7 +124,7 @@ export class TopButton extends EventDispatcher {
       return;
     }
     element = target;
-    element.addEventListener('click', this.onClick.bind(this));
+    element.addEventListener('click', this.onClick, false);
   }
   /**
    * click event handler
@@ -138,18 +165,5 @@ export class TopButton extends EventDispatcher {
         }
       }
     );
-  }
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {TopButton} TopButton instance を返します
-   */
-  static factory():TopButton {
-    if (_instance === null) {
-      _instance = new TopButton(_symbol);
-    }
-    return _instance;
   }
 }

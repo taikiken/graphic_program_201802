@@ -12,31 +12,8 @@
  * HTMLElement 要素にアクセスするヘルパー
  */
 export class Offset {
-  /**
-   * element 要素処理ヘルパー
-   * @param {Element} element 処理対象 Element
-   */
-  constructor( element:Element ) {
-    /**
-     * element 処理対象 Element
-     * @type {Element}
-     * @private
-     */
-    this._element = element;
-  }
-
   // ---------------------------------------------------
-  //  METHOD
-  // ---------------------------------------------------
-  /**
-   * getBoundingClientRect を計算します
-   * @returns {ClientRect} getBoundingClientRect を返します
-   */
-  offset():ClientRect {
-    return Offset.offset( this._element );
-  }
-  // ---------------------------------------------------
-  //  static METHOD
+  //  STATIC METHOD
   // ---------------------------------------------------
   /**
    * getBoundingClientRect を計算します
@@ -49,7 +26,31 @@ export class Offset {
    * @param {Element} element 処理対象 Element
    * @returns {ClientRect} getBoundingClientRect を返します
    */
-  static offset( element:Element ):ClientRect {
+  static offset(element) {
     return element.getBoundingClientRect();
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * element 要素処理ヘルパー
+   * @param {Element} element 処理対象 Element
+   */
+  constructor( element:Element ) {
+    /**
+     * element 処理対象 Element
+     * @type {Element}
+     */
+    this.element = element;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * getBoundingClientRect を計算します
+   * @returns {ClientRect} getBoundingClientRect を返します
+   */
+  offset() {
+    return Offset.offset(this.element);
   }
 }

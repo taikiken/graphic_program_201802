@@ -22,13 +22,10 @@ export class ActivitiesDae {
    * アクティビティ一覧配列
    * @param {Object} [response={}] JSON response
    */
-  constructor( response:Object = {} ) {
-
-    response = Safety.object( response );
-
-    let activities = response.activities;
-    activities = Safety.array( activities );
-
+  constructor(response = {}) {
+    const altResponse = Safety.object(response);
+    // let activities = response.activities;
+    const activities = Safety.array(altResponse.activities);
     // let list = [];
     // activities.forEach( function( activity ) {
     //
@@ -42,7 +39,7 @@ export class ActivitiesDae {
      * @type {Object}
      * @protected
      */
-    this._response = response;
+    this._response = altResponse;
     /**
      * response.activities を 1件づつ ActivityDae instance にし格納します
      * @type {Array<ActivityDae>}
@@ -52,31 +49,31 @@ export class ActivitiesDae {
   }
   /**
    * JSON response
-   * @return {Object|*} JSON response を返します
+   * @return {Object} JSON response を返します
    */
-  get response():Object {
+  get response() {
     return this._response;
   }
   /**
    * response.activities
    * @return {Array<ActivityDae>} JSON response.activities を返します
    */
-  get activities():Array<ActivityDae> {
+  get activities() {
     return this._activities;
   }
   /**
    * response.count
-   * @return {Number} count を返します
+   * @return {number} count を返します
    */
-  get total():Number {
+  get total() {
     return this.response.count;
   }
   /**
    * alias total
    * response.count
-   * @return {Number} count を返します
+   * @return {number} count を返します
    */
-  get count():Number {
+  get count() {
     return this.total;
   }
 }

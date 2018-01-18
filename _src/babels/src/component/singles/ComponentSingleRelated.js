@@ -18,12 +18,15 @@ import { Empty } from '../../app/const/Empty';
 import { Safety } from '../../data/Safety';
 
 // node
-import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 
 // component
-import { ComponentArticleThumbnail } from '../articles/ComponentArticleThumbnail';
+import ComponentArticleThumbnail from '../articles/ComponentArticleThumbnail';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

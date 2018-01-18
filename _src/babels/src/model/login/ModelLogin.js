@@ -13,34 +13,32 @@
 
 import {Model} from '../Model';
 import {ModelBehavior} from '../ModelBehavior';
-import {Result} from '../../data/Result';
+// import {Result} from '../../data/Result';
 import {Login} from '../../action/login/Login';
 
 /**
  * Login action を実行します
  */
-export class ModelLogin extends ModelBehavior {
+export default class ModelLogin extends ModelBehavior {
   /**
    * input data を使用し Login action を実行します
-   * @param {FormData} formData login FormData
+   * @param {?FormData} [formData=null] login FormData
    * @param {Object} [option={}] optional event handler
    */
-  constructor( formData:FormData, option:Object = {} ) {
-    super( formData, option );
+  constructor(formData = null, option = {}) {
+    super(formData, option);
     /**
      * Action instance を設定します
      * @override
      * @type {Login}
      */
-    this.action = new Login( formData, this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Login(formData, this.done.bind(this), this.fail.bind(this));
   }
   /**
    * Ajax request を開始します
    */
-  start():void {
-
+  start() {
     this.action.start();
-
   }
   // ---------------------------------------------------
   //  METHOD
@@ -49,32 +47,23 @@ export class ModelLogin extends ModelBehavior {
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result:Result ):void {
-
-    let response = result.response;
-
-    if ( typeof response === 'undefined' ) {
-
+  done(result) {
+    const response = result.response;
+    if (typeof response === 'undefined') {
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[LOGIN:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( Model.UNDEFINED_ERROR, error );
-
+      const error = new Error('[LOGIN:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+      this.executeSafely(Model.UNDEFINED_ERROR, error);
     } else {
-
       // 成功 callback
-      this.executeSafely( Model.COMPLETE, result );
-
+      this.executeSafely(Model.COMPLETE, result);
     }
-
   }
   /**
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error ):void {
-
-    this.executeSafely( Model.RESPONSE_ERROR, error );
-
+  fail(error) {
+    this.executeSafely(Model.RESPONSE_ERROR, error);
   }
 }

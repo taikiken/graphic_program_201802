@@ -9,11 +9,22 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
+/**
+ * [library] - React
+ */
 const React = self.React;
 
+/**
+ * [library] - com.greensock
+ */
 const greensock = self.com.greensock;
+/**
+ * [library] - com.greensock.TweenLite
+ */
 const TweenLite = greensock.TweenLite;
+/**
+ * [library] - com.greensock.easing
+ */
 const easing = greensock.easing;
 
 /**

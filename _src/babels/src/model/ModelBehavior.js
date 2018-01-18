@@ -34,8 +34,9 @@ export class ModelBehavior extends Model {
    * @param {FormData} formData POST form data
    * @param {Object} [option={}] optional event handler
    */
-  constructor( formData:FormData = null, option:Object = {} ) {
-    super( option );
+  constructor(formData = null, option = {}) {
+    super(option);
+    // ---
     /**
      * 送信する serialize された form data
      * @type {FormData}
@@ -48,18 +49,16 @@ export class ModelBehavior extends Model {
   // ---------------------------------------------------
   /**
    * FormData
-   * @return {FormData|*} 設定された FormData を返します
+   * @return {FormData} 設定された FormData を返します
    */
-  get data():FormData {
+  get data() {
     return this.action.data;
-    // return this._data;
   }
   /**
    * FormData を設定します
    * @param {FormData} formData 設定する FormData
    */
-  set data( formData:FormData ):void {
+  set data(formData) {
     this.action.data = formData;
-    // this._data = formData;
   }
 }

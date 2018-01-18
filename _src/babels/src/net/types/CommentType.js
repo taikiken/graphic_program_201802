@@ -14,27 +14,25 @@
 import {Query} from './Query';
 
 /**
- * <p>記事詳細でのコメント一覧表示のリクエスト・オプションです<p>
+ * 記事詳細でのコメント一覧表示のリクエスト・オプションです
  *
- * <code>/api/1/comments/article/{:article_id}[/type]</code>
- * <pre>
+ * `/api/1/comments/article/{:article_id}[/type]`
+ *
  * 取得するコメントタイプ
  * - なし    : すべてのユーザーのコメント
  * - normal : 通常ユーザーのコメント
  * - official : 公式ユーザーのコメント
  * - self : 自分のコメント
  * - [commend_id] : 特定のコメントのみ
- * </pre>
- *
  */
 export class CommentType extends Query {
   /**
    * 記事詳細でのコメント一覧表示のリクエスト・オプション
    * @param {string} key dog|cat|food のように | 区切りでオプションをつなげます
-   * @param {Boolean} [require=false] 必須真偽値
+   * @param {boolean} [require=false] 必須真偽値
    */
-  constructor( key:string, require:Boolean = false ) {
-    super( key, 'string', '', require );
+  constructor(key, require = false) {
+    super(key, 'string', '', require);
     // 'dog|cat' を分割する
     /**
      * key(dog|cat|food...)を '|' で分割します
@@ -46,12 +44,10 @@ export class CommentType extends Query {
   /**
    * Query override して使います
    * @param {string} key query key
-   * @return {Boolean} query key が存在するかを返します
+   * @return {boolean} query key が存在するかを返します
    */
-  has( key:string ):Boolean {
-
-    return this._keys.indexOf( key ) !== -1;
-
+  has(key:string) {
+    return this._keys.indexOf(key) !== -1;
   }
 
 }

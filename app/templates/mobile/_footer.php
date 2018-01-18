@@ -3,6 +3,8 @@
 // footer 表示条件 start
 $template_name = $page['template'];
 
+// TODO : in_array()判定など
+
 if (
   $template_name == 'index' ||
   $template_name == '404' ||
@@ -92,82 +94,9 @@ if (
 </div><!--/#side-menu-container-->
 
 <footer class="foot-sec">
-  <div class="foot-sec-inner">
-    <?php
-    // SEO対策 / パンくずリストを設置する #776
-    include_once __DIR__."/../_breadcrumb.php"; ?>
-    <div class="foot-pr">
-      <div class="foot-pr-inner">
-        <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
-        <div class="text-block">
-          <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
-          <ul class="foot-pr-list">
-            <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
-            <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
-          </ul>
-        </div>
-      </div><!-- /.foot-pr-inner -->
-
-      <div class="fb-page-plugin">
-        <div class="fb-page" data-href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/"><a href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/"><?php echo $page['site_name']; ?></a></blockquote></div></div>
-      </div>
-<?php
-// 六大学 / 広告表示 調整（Web） #1546
-// > アドネットワーク関連の広告（ネイティブアド？）を消したい
-// @see https://github.com/undotsushin/undotsushin/issues/1546
-// category.slug 'big6tv' search
-global $template_big6tb;
-$in_big6tv = $template_big6tb;
-// 記事詳細 + big6tv でも広告非表示
-/*
-今回でいうと、一覧、詳細ともに
-
-$page['category']['slug'] == 'big6tv'
-
-プライマリカテゴリーが big6tv = big6tvテーマが適応される一覧&詳細
-で広告非表示としていただいてよいかと思いますー
-@see https://github.com/undotsushin/undotsushin/pull/1731#pullrequestreview-28563047
-*/
-if ($template_name == 'category' || $template_name == 'p') {
-  $page_category = $page['category'];
-  if (isset($page_category) && $page_category['slug'] == 'big6tv') {
-    $in_big6tv = true;
-  }
-}
-// @see https://github.com/undotsushin/undotsushin/issues/1546#issuecomment-290283445
-// @since 2017-03-29
-?>
-    </div><!-- /.foot-pr -->
-
-    <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
-
-    <nav class="fnav">
-      <ul>
-        <?php if (0): ?>
-          <li><a href="/about/ads/">広告掲載について</a></li>
-        <?php endif; ?>
-        <li><a href="/about/">サービス紹介</a></li>
-        <li><a href="/about/company/">会社概要</a></li>
-        <li><a href="/about/privacy/">プライバシーポリシー</a></li>
-        <li><a href="/about/terms/">利用規約</a></li>
-        <?php if (0): ?>
-          <li><a href="/about/faq/">FAQ</a></li>
-          <li><a href="/about/contact/">お問い合せ</a></li>
-        <?php endif; ?>
-      </ul>
-    </nav><!-- /.fnav -->
-
-    <div class="sns-block">
-      <ul>
-        <li class="sns-fb"><a href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/" target="_blank">facebook</a></li>
-        <li class="sns-tw"><a href="https://twitter.com/<?php echo $page['sns']['twitter']; ?>" target="_blank">twitter</a></li>
-        <li class="sns-yt"><a href="https://www.youtube.com/channel/<?php echo $page['sns']['youtube']; ?>" target="_blank">youtube</a></li>
-      </ul>
-    </div><!-- /.sns-block -->
-
-    <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
-  </div><!-- /.foot-sec-inner -->
+  <?php include_once __DIR__.'/_footer-sec-inner.php'; ?>
 </footer><!-- /.foot-sec -->
+
   <?php
 } else if (
   $template_name == 'signup' ||

@@ -145,6 +145,17 @@
 <script src="/assets/js/<?php echo $page['template_classname']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
+// # パンくずリスト
+// ==============================
+  $BREADCRUMB = array(
+    array(
+      'label' => 'GO BIG 2017 - All JAPAN FMX CHAMPIONSHIP 2017 ライブ配信',
+      'path'  => '/go-big/'
+    ),
+  );
+?>
+
+<?php
 
 include_once __DIR__."/../../desktop/_footer.php";
 include_once __DIR__."/../../_debug.php";
