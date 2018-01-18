@@ -122,6 +122,96 @@ if(strlen($f["name"])>0){
 	$y["status"]["user_message"]="";
 	$y["status"]["developer_message"]="";
 
+	// お知らせ
+  $sql = <<<SQL
+SELECT
+		notices.*
+FROM
+		categories_notices,
+		notices
+WHERE
+ 		category_id = {$category_id}
+AND
+		notice_id = notices.id
+ORDER BY
+		categories_notices.created_at DESC
+LIMIT 1
+SQL;
+
+  $o->query($sql);
+  $f = $o->fetch_array();
+
+// デフォルトのお知らせ取得
+  if (empty($f))
+  {
+    $sql = <<<SQL
+SELECT
+		notices.*
+FROM
+		categories_notices,
+		notices
+WHERE
+ 		category_id = 0
+AND
+		notice_id = notices.id
+ORDER BY
+		categories_notices.created_at DESC
+LIMIT 1
+SQL;
+
+    $o->query($sql);
+    $f = $o->fetch_array();
+  }
+
+  if (!empty($f))
+  {
+    // 定数
+    $type = $f['type'];
+    $text_color = ['#333333', '#333333', ''];
+    $background_color = ['#ffffff', '#ffcccc', ''];
+    $icon = [
+      $domain . '/information/icon/3x/information__icon__notice.png',
+      $domain . '/information/icon/3x/information__icon__warning.png',
+      '',
+    ];
+    $disp_type = ['notice', 'warning', 'img'];
+
+    $domain = "https://" . $_SERVER["HTTP_HOST"];
+    $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
+
+    $platform_prefix_list = [
+      'pc' 			=> '',
+      'sp' 			=> 'sp_',
+      'ios'			=> 'ios_',
+      'android' => 'android_',
+    ];
+
+    $f['text'] = isset($f['text']) ? $f['text'] : '';
+
+    foreach($platform_prefix_list as $key => $prefix)
+    {
+      // フルパスで返す
+      $img[$key] = isset($f[$prefix . 'img']) ? $cf . $f[$prefix . 'img'] : '';
+      $link[$key] = isset($f[$prefix . 'link']) ? $f[$prefix . 'link'] : '';
+
+      $information_list[$key] = [
+        'type'             => $disp_type[$type],
+        'text'             => $f['text'],
+        'text_color'       => $text_color[$type],
+        'background_color' => $background_color[$type],
+        'icon'             => $icon[$type],
+        'img'              => $img[$key],
+        'link'             => $link[$key],
+      ];
+    }
+  }
+  else
+  {
+    $information_list = null;
+  }
+
+  $categoriesinfo['information'] = $information_list;
+
 }else{
 
 	$y["status"]["code"]=404;
@@ -197,93 +287,12 @@ if(strlen($f["name"])>0){
     );
   endif;
 
-  // お知らせ
-$sql = <<<SQL
-SELECT 
-		notices.*
-FROM
-		categories_notices,
-		notices
-WHERE
- 		category_id = {$category_id}
-AND
-		notice_id = notices.id
-ORDER BY
-		categories_notices.created_at DESC
-LIMIT 1
-SQL;
 
-$o->query($sql);
-$f = $o->fetch_array();
+  if (!empty($category)) {
+    $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
+  }
 
-// デフォルトのお知らせ取得
-if (empty($f))
-{
-  $sql = <<<SQL
-SELECT 
-		notices.*
-FROM
-		categories_notices,
-		notices
-WHERE
- 		category_id = 0
-AND
-		notice_id = notices.id
-ORDER BY
-		categories_notices.created_at DESC
-LIMIT 1
-SQL;
-
-  $o->query($sql);
-  $f = $o->fetch_array();
-}
-
-if (!empty($f))
-{
-  // フルパスで返す
-  $domain = "https://" . $_SERVER["HTTP_HOST"];
-  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
-  // img、linkはnullの場合あるから空にする
-  $f['img'] = isset($f['img']) ? $cf . $f['img'] : '';
-  $f['link'] = isset($f['link']) ? $f['link'] : '';
-
-  // 定数
-  $type = $f['type'];
-  $text_color = ['#333333', '#333333', ''];
-  $background_color = ['#ffffff', '#ffcccc', ''];
-  $icon = [
-    $domain . '/information/icon/3x/information__icon__notice.png',
-    $domain . '/information/icon/3x/information__icon__warning.png',
-    '',
-  ];
-  $disp_type = ['notice', 'warning', 'img'];
-
-
-  $information = array(
-
-    'type'             => $disp_type[$type],
-    'text'             => $f['text'],
-    'text_color'       => $text_color[$type],
-    'background_color' => $background_color[$type],
-    'icon'             => $icon[$type],
-    'img'              => $f['img'],
-    'link'             => $f['link'],
-  );
-
-}
-else
-{
-  $information = null;
-}
-
-$categoriesinfo['information'] = array(
-  'pc'      => $information,
-  'sp'      => $information,
-  'ios'     => $information,
-  'android' => $information,
-);
-
-$y["response"]=$categoriesinfo;
+  $y["response"]=$categoriesinfo;
 
 print_json($y,$_SERVER['HTTP_REFERER']);
 

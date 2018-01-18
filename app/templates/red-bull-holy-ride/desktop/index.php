@@ -145,6 +145,17 @@
 <script src="/assets/js/red-bull-holy-ride.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
+// # パンくずリスト
+// ==============================
+  $BREADCRUMB = array(
+    array(
+      'label' => 'RED BULL HOLY RIDE 2017 ライブ配信',
+      'path'  => '/red-bull-holy-ride/'
+    ),
+  );
+?>
+
+<?php
 
 include_once __DIR__."/../../desktop/_footer.php";
 include_once __DIR__."/../../_debug.php";

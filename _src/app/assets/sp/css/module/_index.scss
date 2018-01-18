@@ -6,212 +6,56 @@
 //
 // Styleguide 2.3.0
 
-// _motion_slider.scss へ汎用化のため移動
-//// hero-sec
-//// トップページ メインビジュアル
-//.hero {
-//  $pickup-height: 275px;
-//
-//  &-sec {
-//    background-color: #000;
-//  }
-//
-//  &-slider {
-//    position: relative;
-//    width: 100%;
-//    height: $pickup-height;
-//    overflow: hidden;
-//
-//    &-inner {
-//      width: (560/2)+px;
-//      margin: 0 auto;
-//      overflow: visible;
-//
-//      ul {
-//        @include clearfix;
-//        width: 200000px;
-//      }
-//
-//      li {
-//        float: left;
-//        width: (560/2)+px;
-//        border-right: 5px solid #000;
-//        border-left: 5px solid #000;
-//
-//        a {
-//          position: relative;
-//          display: block;
-//          height: (360/2)+px;
-//          // background-color: #061533;
-//        }
-//
-//        .overlay,
-//        .post-comment-num {
-//          display: none;
-//        }
-//
-//        .post {
-//          $posY: 20/2;
-//
-//          &-overview {
-//            position: absolute;
-//            bottom: -(190/2)+px;
-//            width: 100%;
-//            height: (190/2)+px;
-//            padding: (28/2)+px perCalc(20) ($posY+18)+px;
-//            background-color: #061533;
-//          }
-//
-//          &-heading {
-//            height: 40px;
-//            overflow: hidden;
-//            color: #fff;
-//            font-size: fz(26/2);
-//          }
-//
-//          &-category {
-//            position: absolute;
-//            bottom: $posY+px;
-//            color: #fff;
-//            font-size: fz(20/2);
-//          }
-//
-//          &-date,
-//          &-comment-num {
-//            font-size: fz(20/2);
-//          }
-//
-//          &-date {
-//            // float: left;
-//            position: absolute;
-//            right: perCalc(20);
-//            bottom: $posY+px;
-//            color: #999;
-//          }
-//
-//          &-comment-num {
-//            // float: right;
-//            padding-left: (36/2)+px;
-//            color: #fff;
-//            background: url(/assets/sp/images/index/icon-hero-comment.png) 0 center no-repeat;
-//            background-size: (26/2)+px;
-//          }
-//        }
-//      }
-//    } //.hero-slider-inner
-//
-//    &-control {
-//      position: absolute;
-//      top: 0;
-//      width: 100%;
-//
-//      .direction {
-//        a {
-//          position: absolute;
-//          display: block;
-//          width: (80/2)+px;
-//          height: (80/2)+px;
-//          margin-top: ($pickup-height/2) - 20;
-//          background-position: center center;
-//          background-repeat: no-repeat;
-//          background-size: (80/2)+px;
-//          @include hide-text;
-//        }
-//
-//        &-prev {
-//          left: 20px;
-//          background-image: url(/assets/sp/images/index/btn-slider-prev.png);
-//        }
-//
-//        &-next {
-//          right: 20px;
-//          background-image: url(/assets/sp/images/index/btn-slider-next.png);
-//        }
-//      }
-//
-//      .pager {
-//        display: none;
-//      }
-//    } //.hero-slider-control
-//  }
-//}
-
-
-
-
-
-// _general.scss へ汎用化のため移動
-// headline
-// トップページ ヘッドライン
-// .headline {
-//   .board-small {
-//     .board-item {
-//       // &:nth-child(1), &:nth-child(2) {
-//       //   border-top: none;
-//       // }
-//       &:last-child {
-//         border-bottom: none;
-//       }
-
-//       .post {
-//         &-thumb {}
-//         &-heading {}
-//         &-category {}
-//         &-data {}
-
-//         &:hover {
-//           .post-thumb {}
-//           .post-heading {}
-//         }
-//       }
-//     } //.post-list-item
-//   }
-// }
-
-// .headline-outer {
-//   .sponsor-link {
-//     padding-right: perCalc(20);
-//     padding-left: perCalc(20);
-//     border-top: 1px solid $border-primary-color;
-
-//     .adgLink,
-//     .adsWrapper {
-//       height: auto !important;
-//     }
-
-//     .adsImgContainer,
-//     .adsBody {
-//       vertical-align: top !important;
-//     }
-
-//     .adsImgContainer {
-//       width: 70px !important;
-//       height: auto !important;
-//       min-height: 60px;
-//       padding: 0 !important;
-//       padding-right: 10px !important;
-//     }
-
-//     .adsBody {}
-//   }
-// }
-
-
-
-
-
 // sns-pr
 .sns-pr {
-  padding: (20/2)+px perCalc(20);
+  padding-top: (10/2)+px;
+  // padding-bottom: (10/2)+px;
+  // border-bottom: 1px solid $border-primary-color;
   background-color: #eee;
 
   &-outer {
-    @extend .post-sns-pr;
-    margin-top: 0 !important;
+    width: 100%;
+    padding-top: (20/2)+px;
+    padding-bottom: (20/2)+px;
+    border-top: 1px solid $border-primary-color;
+    border-bottom: 1px solid $border-primary-color;
+    background-color: #fff;
   }
 
   &-inner {
-    @extend .post-sns-pr-inner;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  dt, dd {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  dt {
+    padding-right: (24/2)+px;
+
+    // for iPhone5, 5S
+    @media screen and (max-width: 320px) {
+      padding-right: 0;
+    }
+
+    span {
+      display: block;
+      line-height: 1em;
+      margin-top: (6/2)+px;
+      padding: (48/2)+px 0 0 0;
+      background: url(/assets/sp/images/index/post-sns-logo.png) 0 0 no-repeat;
+      background-size: (356/2)+px;
+      font-weight: bold;
+      font-size: fz(22/2);
+      white-space: nowrap;
+    }
+  }
+
+  dd {
+    width: 71px;
   }
 } //.sns-pr
 
@@ -226,27 +70,14 @@
 //   <a href="https://sportsbull.jp/sokuhou/?utm_source=SPORTS%20BULL&utm_content=20161011&utm_campaign=sokuhou&utm_medium=banner"><img src="/assets/sp/images/dummy/bnr-sokuhou.png" alt=""></a>
 // </div>
 .focus-bnr {
+  padding: (10/2)+px perCalc(15, 750);
+  background-color: #eee;
+
   a {
     position: relative;
     display: block;
+    text-align: center;
   }
-
-  // &.now_onair {
-  //   a::after {
-  //     content: "";
-  //     position: absolute;
-  //     top: 0;
-  //     left: 0;
-  //     display: block;
-  //     width: 100%;
-  //     height: 100%;
-  //     @include hide-text;
-  //     background-image: url(/assets/sp/images/index/bnr-sokuhou-161011_onair.gif);
-  //     background-repeat: no-repeat;
-  //     background-position: 0 0;
-  //     background-size: cover;
-  //   }
-  // }
 }
 
 
@@ -256,38 +87,45 @@
 // stats_banner
 // トップページ 速報&データ
 .stats_banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: (10/2)+px;
+  padding-bottom: (10/2)+px;
+  overflow:hidden;
+  overflow-x:scroll;
+  border-top: 1px solid $border-primary-color;
+  border-bottom: 1px solid $border-primary-color;
 
-  //.stats_banner-heading
-  &-heading {
-    background-color: $highlight-color;
+  * {
+    line-height: 0;
+  }
+
+
+  //.stats_banner__heading
+  &__heading {
+    width: 11vw;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+    border-right: 1px solid $border-primary-color;
     text-align: center;
 
-    //.stats_banner-title
-    &-title {
-      display: inline-block;
-      line-height: (60/2)+px;
-      color: #fff;
+    //.stats_banner__title
+    &__title {
+      line-height: 1.2em;
+      color: #0f3580;
       font-weight: bold;
-      font-size: fz(24/2);
-
-      &:before {
-        content: "";
-        display: inline-block;
-        width: (48/2)+px;
-        height: (30/2)+px;
-        margin-right: 4px;
-        background: url(/assets/sp/images/index/icon-stats_bnr-title.png) 0 0 no-repeat;
-        background-size: (48/2)+px;
-        vertical-align: middle;
-      }
+      font-size: 2.8vw;
     }
   } //.stats_banner-heading
 
-  //.stats_banner-list
-  &-list {
-    padding-bottom: 2px;
-    overflow: hidden;
-    background-color: #030b1a;
+  //.stats_banner__list
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    width: 75vw;
   }
 
   //.stats_banner-item
@@ -313,56 +151,74 @@
     }
   }
 
-  // 2017-07-19 不要
-  // ref. https://github.com/undotsushin/undotsushin/issues/2149
-  // .webview & {
-  //   //#js-stats_banner-list
-  //   #js-stats_banner-list {
-  //     background-color: #030b1a;
-  //   }
+  //.stats_banner__item
+  &__item {
+    width: 72vw;
 
-  //   //.stats_banner-list
-  //   .stats_banner-list {
-  //     width: (640/2)+px;
-  //     margin-right: auto;
-  //     margin-left: auto;
-  //   }
-
-  //   //.stats_banner-item
-  //   .stats_banner-item {
-  //     // border-right: none;
-
-  //     &:nth-child(2n) {
-  //       // border-left: none;
-  //     }
-
-  //     img {
-  //       width: 159px;
-  //     }
-  //   }
-  // }
-
-  //.stats_banner-btn
-  &-btn {
-    padding: (20/2)+px perCalc(16, 750);
-
-    //.stats_banner-btn-link
-    &-link {
-      @include link-decoration(#fff, #fff, none, none);
-      display: block;
-      line-height: 1;
-      padding: (24/2)+px 0;
-      background-color: $highlight-color;
-      border-radius: 5px;
+    a {
+      @include link-decoration(#0f3580, #0f3580, none, none);
+      display: flex;
+      align-items: center;
+      padding: 2vw 0 2vw 1vw;
       font-weight: bold;
-      font-size: fz(24/2);
+    }
+
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 6vw;
+      height: 6vw;
+      margin-right: 1vw;
+      border-radius: 50%;
+      background-color: #0f3580;
+    }
+
+    svg {
+      margin: 0;
+      padding: 0;
+      width: 3.8vw;
+      height: 3.8vw;
+      fill: transparent;
+      stroke-width: 0;
+      stroke: #fff;
+
+      // 塗りつぶし用 ex. baseball / sumo
+      &.icon--fill  {
+        fill: #fff;
+      }
+    }
+
+    span {
+      display: inline-block;
+      line-height: 1.2;
+      font-size: 2vw;
+      white-space: nowrap;
+    }
+  } //.stats_banner__item
+
+  //.stats_banner__btn
+  &__btn {
+    width: 13vw;
+    margin-left: 1vw;
+
+    //.stats_banner__btn__link
+    &__link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 11vw;
+      height: 6vw;
+      border: 1px solid #0f3580;
+      border-radius: (6/2)+px;
+      font-weight: bold;
+      font-size: 2vw;
       text-align: center;
 
-      span {
-        display: inline-block;
-        padding-left: (30/2)+px;
-        background: url(/assets/sp/images/index/icon-stats_bnr-btn.png) 0 center no-repeat;
-        background-size: (20/2)+px;
+      &:hover {
+        background-color: #0f3580;
+        color: #fff;
+        text-decoration: none;
       }
     }
   }

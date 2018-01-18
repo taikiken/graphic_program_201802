@@ -11,36 +11,36 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * アクティビティーズ
  */
-export class Activities {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Activities is static Class. not use new Activities().' );
-
-    }
-  }
+export default class Activities {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Activities is static Class. not use new Activities().' );
+  //
+  //   }
+  // }
   /**
    * rendering 開始
    */
   static start():void {
-    let element = Dom.board();
-    let elementMore = Dom.boardMore();
-    if ( element !== null && elementMore !== null ) {
+    const element = Dom.board();
+    const elementMore = Dom.boardMore();
+    if (element !== null && elementMore !== null) {
       // list
-      let archive = new UT.view.mypage.ViewActivities( element, elementMore );
+      const archive = new UT.view.mypage.ViewActivities(element, elementMore);
       archive.start();
     }
   }

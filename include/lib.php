@@ -152,6 +152,8 @@ elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 94 && !preg_match("#/ph
 
 }elseif($CURRENTDIRECTORY=="notice"){
 	$sql=sprintf("select count(*) as n from %s%s",$TABLE,$WHERE);
+}elseif($CURRENTDIRECTORY=="tabs"){
+	$sql=sprintf("select count(*) as n from %s",$TABLE);
 }
 
 
@@ -186,6 +188,8 @@ elseif ($TABLE == "tbl_player")
 {
 	// 選手一覧
 	$sql = sprintf("SELECT %s FROM %s%s%s%s ORDER BY %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, $orderby, dblm($no, $offset));
+}elseif(preg_match("#/photo/#",$_SERVER["REQUEST_URI"])){
+	$sql=sprintf("select %s from %s%s order by coalesce(always_update_flag,0) desc, n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
 }
 elseif ($TABLE == "notices")
 {

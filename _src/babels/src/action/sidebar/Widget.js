@@ -20,33 +20,33 @@ import {Length} from '../../app/const/Length';
 // data
 import {Safety} from '../../data/Safety';
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 /**
- * <p>Sidebar, ranking / video 一覧表示</p>
- * <p>全て static</p>
- * <p>{@link Ranking}, {@link Videos} インスタンスを作成します</p>
+ * Sidebar, ranking / video 一覧表示
+ * - 全て static
+ * - {@link Ranking}, {@link Videos} インスタンスを作成します
  *
  * @example
  * // ranking instance
- * let ranking = Widget.ranking();
+ * const ranking = Widget.ranking();
  * // video instance
- * let video = Widget.video();
+ * const video = Widget.video();
  */
 export class Widget {
-  /**
-   * static class です、instance を作成できません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Widget is not new Widget().' );
-
-    }
-
-  }
+  // /**
+  //  * static class です、instance を作成できません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Widget is not new Widget().' );
+  //
+  //   }
+  //
+  // }
   /**
    * Ranking instance を作成し length を 5にセットします
    * @param {string} [slug=all] category slug です

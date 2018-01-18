@@ -60,6 +60,8 @@ textarea {
 // 2. global header
 // ----------------------------------------------------------------------------------------------------------------------------------------
 %head-sec {
+  background-color: #0f3580;
+
   .head-sec-inner {
     @include clearfix;
     position: relative;
@@ -83,17 +85,19 @@ textarea {
 
   #head-search-container {
     float: left;
-    width: 300px;
+    width: 220px;
   }
 
   .head-search {
     @include clearfix;
-    // float: left;
-    // width: 300px;
-    margin-top: 10px;
+    margin-top: 12px;
     padding: 0 14px;
-    background-color: #eee;
+    background-color: #0c2350;
     border-radius: 15px;
+
+    * {
+      box-sizing: border-box;
+    }
 
     input {
       border: none;
@@ -103,8 +107,9 @@ textarea {
 
     input[type="text"] {
       float: left;
-      width: 250px;
+      width: 174px;
       padding: 5px 0;
+      color: #aaa;
       vertical-align: middle;
       font-weight: bold;
       font-size: fz(12);
@@ -132,24 +137,37 @@ textarea {
   .user {
     @include clearfix;
     float: left;
-    margin-top: 8px;
+    margin-top: 12px;
 
-    .btn-signup {
-      @include link-decoration($highlight-color, $highlight-color, none, none);
-      display: table-cell;
-      height: 35px;
-      font-weight: bold;
-      font-size: fz(12);
-      vertical-align: middle;
+    //.user-signup-btn
+    .user-signup-btn {
+      display: table;
 
-      &:before {
-        content: '';
-        @extend .sprite-header;
-        @include sprite( $header-icon-signup, inline-block );
-        @include hide-text;
-        margin-right: 5px;
+      a {
+        display: table-cell;
+        @include link-decoration(#fff, #fff, none, none);
+        font-weight: bold;
+        font-size: fz(13);
         vertical-align: middle;
+
+        &:hover {
+          @include over-opacity;
+        }
       }
+    }
+
+    //.user-signup-btn--login
+    .user-signup-btn--login {
+      padding-right: 20px;
+    }
+
+    //.user-signup-btn--signup
+    .user-signup-btn--signup {
+      display: inline-block;
+      line-height: 30px;
+      padding: 0 16px;
+      border-radius: 15px;
+      background-color: #ad0003;
     }
   }
 
@@ -164,18 +182,21 @@ textarea {
     position: relative;
     float: left;
 
+    //.notice-opener
     &-opener {
       @include link-decoration(null, null, none, none);
     }
 
+    //.notice-icon
     &-icon {
-      @extend .sprite-common;
-      @include sprite( $common-icon-notice );
+      @extend .sprite-header;
+      @include sprite( $header-icon-notice );
     }
 
+    //.notice-num
     &-num {
       position: absolute;
-      top: -5px;
+      top: -8px;
       right: -10px;
       display: block;
       width: 20px;
@@ -190,6 +211,7 @@ textarea {
       text-align: center;
     }
 
+    //.notice-menu
     &-menu {
       z-index: 9999;
       display: block;
@@ -284,20 +306,20 @@ textarea {
       &-opener {
         position: relative;
         display: block;
-        width: 35px;
-        height: 35px;
+        width: 30px;
+        height: 30px;
         overflow: hidden;
         border-radius: 100%;
         background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
-        background-size: 35px;
+        background-size: 30px;
       }
 
       &-avatar {
         display: block;
 
         img {
-          width: 35px;
-          height: 35px;
+          width: 30px;
+          height: 30px;
           border-radius: 100%;
         }
 
@@ -399,40 +421,43 @@ textarea {
 
 // global navigation
 %gnav-sec {
-  background: #111 url(/assets/images/common/gnav-bg.png) 0 0 repeat-x;
+  // background: #111 url(/assets/images/common/gnav-bg.png) 0 0 repeat-x;
+  background-color: #0d1320;
 
   ul {
     width: $global-inner-width;
     margin: 0 auto;
+    padding: 6px 0 8px;
     letter-spacing: ls( inline-block );
   }
 
   li {
     display: inline-block;
-    padding: 0 10px 0 0;
+    padding: 0 8px 0 6px;
+    background: url(/assets/images/common/gnav-bg.png) right center no-repeat;
     text-align: center;
     vertical-align: middle;
     letter-spacing: normal;
 
-    // &:last-child {
-    //   padding-right: 0;
-    //   background: none;
-    // }
+    &:last-child {
+      padding-right: 0;
+      background: none;
+    }
   }
 
   a {
     display: block;
-    max-height: 40px;
+    // max-height: 40px;
     // line-height: 40px;
-    padding: 10px 0 12px;
+    padding: 6px 0 6px;
     // padding: 10px 8px 12px;
-    @include link-decoration(#ccc, $highlight-secondary-color, none, none);
+    @include link-decoration(#fff, $highlight-secondary-color, none, none);
     font-weight: bold;
-    // font-size: fz(12);
+    font-size: fz(12);
     white-space: nowrap;
 
     &:hover {
-      padding-bottom: 10px;
+      padding-bottom: 4px;
       border-bottom: 2px solid $highlight-secondary-color;
       color: $highlight-secondary-color;
     }
@@ -440,7 +465,7 @@ textarea {
 
   .current {
     a {
-      padding-bottom: 10px;
+      padding-bottom: 4px;
       border-bottom: 2px solid $highlight-secondary-color;
       color: $highlight-secondary-color;
     }
@@ -457,22 +482,23 @@ textarea {
 // global footer
 %foot-sec {
   position: relative;
-  padding-top: 20px;
-  background-color: #f5f5f5;
+  // margin-top: 30px;
+  // background-color: #f5f5f5;
 
   .foot-sec-inner {
-    background: #061533 url(/assets/images/common/footer-bg.png) no-repeat center bottom;
+    border-top: 1px solid $border-primary-color;
+    // background: #061533 url(/assets/images/common/footer-bg.png) no-repeat center bottom;
   }
 
   .foot-breadCrumb {
-    background-color: #030b1a;
+    // background-color: #030b1a;
     // border-bottom: 1px solid #333;
 
     ol {
       list-style: none;
       width: $global-inner-width;
       margin: 0 auto;
-      padding: 20px 0;
+      padding: 20px 0 32px;
       line-height: 18px;
 
       li {
@@ -481,7 +507,8 @@ textarea {
 
         a {
           display: inline-block;
-          @include link-decoration(#666, #fff, none, none);
+          @include link-decoration(#666, #666, none, underline);
+          font-weight: bold;
           font-size: fz(12);
           letter-spacing: normal;
 
@@ -490,6 +517,7 @@ textarea {
             @extend .sprite-common;
             @include sprite( $common-breadcrumb-arrow );
             display: inline-block;
+            margin-top: -3px;
             margin-right: 5px;
             margin-left: 8px;
             font-size: 0;
@@ -498,24 +526,27 @@ textarea {
         }
       }
 
-      li:first-child a {
-        position: relative;
-        padding-left: 25px;
+      // li:first-child a {
+      //   position: relative;
+      //   padding-left: 25px;
 
-        &:before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          @extend .sprite-common;
-          @include sprite( $common-breadcrumb-home );
-          line-height: 18px;
-          font-size: 0;
-        }
-      }
+      //   &:before {
+      //     content: '';
+      //     position: absolute;
+      //     top: 0;
+      //     left: 0;
+      //     @extend .sprite-common;
+      //     @include sprite( $common-breadcrumb-home );
+      //     line-height: 18px;
+      //     font-size: 0;
+      //   }
+      // }
 
       li:last-child a {
-        color: #fff;
+        &:hover {
+          cursor: default;
+          text-decoration: none;
+        }
 
         &:after {
           display: none;
@@ -525,13 +556,14 @@ textarea {
   }
 
   .foot-pr {
-    background-color: #030b1a;
+    border-bottom: 1px solid $border-primary-color;
 
+    //.foot-pr-inner
     &-inner {
       @include clearfix;
       width: $global-inner-width;
       margin: 0 auto;
-      padding-bottom: 32px;
+      padding-bottom: 24px;
     }
 
     figure {
@@ -541,24 +573,24 @@ textarea {
     .text-block {
       @include clearfix;
       float: left;
-      width: 470px;
-      margin-left: 17px;
+      width: 270px;
+      margin-left: 24px;
     }
 
-    &-logo {
-      float: left;
-    }
+    //.foot-pr-logo
+    &-logo {}
 
+    //.foot-pr-btn
     &-btn {
       @include clearfix;
-      float: left;
-      margin: 13px 0 0 14px;
+      // float: left;
+      margin-top: 8px;
 
       li {
         float: left;
 
         + li {
-          margin-left: 10px;
+          margin-left: 12px;
         }
       }
 
@@ -567,11 +599,10 @@ textarea {
       }
     }
 
+    //.foot-pr-text
     &-text {
-      clear: both;
-      line-height: lh(22,14);
-      padding-top: 20px;
-      color: #fff;
+      line-height: lh(20,14);
+      margin-top: 16px;
     }
 
     .fb-page-plugin {
@@ -583,7 +614,7 @@ textarea {
   .pagetop {
     position: absolute;
     right: 30px;
-    top: -60px;
+    top: -70px;
 
     a {
       display: block;
@@ -617,33 +648,25 @@ textarea {
   .fnav-block {
     @include clearfix;
     width: $global-inner-width;
-    height: 134px;
     margin: 0 auto;
   }
 
   .fnav {
-    float: left;
-    margin-top: 30px;
-
-    &-logo {
-      line-height: 0;
-    }
+    margin-top: 40px;
 
     ul {
-      margin-top: 16px;
       letter-spacing: ls(inline-block);
+      text-align: center;
 
       li {
         display: inline-block;
+        margin-right: 12px;
+        margin-left: 12px;
         letter-spacing: normal;
-
-        + li {
-          margin-left: 24px;
-        }
       }
 
       a {
-        @include link-decoration(#fff, #666, none, underline);
+        @include link-decoration(#666, #666, none, underline);
         font-weight: bold;
         font-size: fz(12);
       }
@@ -651,8 +674,7 @@ textarea {
   } // fnav
 
   .sns-block {
-    float: right;
-    margin: 50px 100px 0 0;
+    margin-top: 20px;
 
     ul {
       text-align: center;
@@ -693,11 +715,11 @@ textarea {
   } //.sns-block
 
   .copyright {
-    clear: both;
-    padding-top: 16px;
+    margin: 40px 0;
     color: #ccc;
     font-weight: bold;
     font-size: fz(10);
+    text-align: center;
   } //.copyright
 }
 
@@ -711,7 +733,9 @@ textarea {
 %side-sec {
   .sponsor-link {
     &.nadir {
-      margin-top: 30px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid $border-primary-color;
     }
   }
 
@@ -732,8 +756,8 @@ textarea {
     }
 
     &-heading {
-      padding-bottom: 5px;
-      border-bottom: 3px solid #0e357f;
+      padding-top: 16px;
+      border-top: 1px solid $border-primary-color;
 
       &-title, &-ruby {
         display: inline-block;
@@ -750,7 +774,7 @@ textarea {
         margin-left: 5px;
         color: #333;
         font-weight: bold;
-        font-size: fz(11);
+        font-size: fz(10);
       }
     } // .widget-ranking-heading
 
@@ -766,7 +790,12 @@ textarea {
       &-thumb {}
       &-data {}
       &-category {}
-      &-heading {}
+
+      //.post-heading
+      &-heading {
+        font-size: fz(14);
+      }
+
       &-date {}
       &:hover {
         .post-heading {}
@@ -787,36 +816,34 @@ textarea {
         content: '';
         z-index: 999;
         position: absolute;
-        top: -3px;
-        left: -3px;
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        background-color: $highlight-secondary-color;
-        border-radius: 100%;
-        color: #fff;
-        font-weight: bold;
-        font-size: fz(10);
-        text-align: center;
-        // background-repeat: no-repeat;
-        // background-position: 0 0;
+        top: -5px;
+        left: -5px;
+        @extend .sprite-common;
+        @include hide-text;
       }
 
     }
 
     .post {
-      &-thumb {}
-
-      &-data {
-        float: right;
-        width: 220px;
-        overflow: visible;
+      &-thumb {
+        width: 124px;
+        height: auto;
       }
 
+      //.post-data
+      &-data {
+        display: table-cell;
+        padding-left: 10px;
+        vertical-align: middle;
+      }
+
+      //.post-date
+      &-date {}
+
+      //.post-category
       &-category {
         // position: relative;
         line-height: 1;
-        margin-bottom: .25em;
 
         // &:before {
         //   content: '';
@@ -833,12 +860,26 @@ textarea {
       }
     }
 
-    @for $i from 1 through 5 {
-      .rank#{$i}:before {
-        content: '#{$i}';
-        // background-image: url(/assets/images/common/side-ranking-icon-num#{$i}.png);
-      }
+    .rank1:before {
+      @include sprite( $common-ranking-icon-num1 );
     }
+
+    .rank2:before {
+      @include sprite( $common-ranking-icon-num2 );
+    }
+
+    .rank3:before {
+      @include sprite( $common-ranking-icon-num3 );
+    }
+
+    .rank4:before {
+      @include sprite( $common-ranking-icon-num4 );
+    }
+
+    .rank5:before {
+      @include sprite( $common-ranking-icon-num5 );
+    }
+
   } //.widget-ranking
 
   .widget-recommend {
@@ -858,6 +899,17 @@ textarea {
         img {
           width: 100%;
         }
+      }
+
+      //.post-date
+      &-date {
+        display: none;
+      }
+
+      &-category {
+        line-height: 1;
+        margin-top: 6px;
+        color: #999;
       }
     }
   } //.widget-recommend

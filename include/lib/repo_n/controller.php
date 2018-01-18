@@ -35,6 +35,30 @@ if($q->get_dir()===0){
 
 		data_sql();
 
+		//カテゴリー データ整形
+		if($g->f("cid") == 10){
+			//webviewを１つにまとめてjsonencodeする
+			$webview_keys = [
+				'webview-pc',
+				'webview-sp',
+				'webview-ios',
+				'webview-android'
+			];
+			$webview = [];
+			$sn_temp = $sn;
+			foreach($sn_temp as $sn_index => $sn_value){
+				if(in_array($sn_value, $webview_keys)){
+					//"webview-"を取り除いてセット 値はすでにencodeされているので一度decodeする
+					$webview[str_replace('webview-', '', $sn_value)] = json_decode($sv[$sn_value]);
+					unset($sn[$sn_index]);
+					unset($sv[$sn_value]);
+				}
+			}
+			//連番振り直し
+			$sn = array_merge($sn);
+			$sv[$sn[]='webview'] = "'".json_encode($webview)."'";
+		}
+
 		if(count($sn)>0){
 
 			if($TABLE!="repo_n"&&$TABLE!="u_member"&&$_POST["POSITION"]!=1){

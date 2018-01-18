@@ -81,7 +81,9 @@ export class EventDispatcher {
       }
 
     }
-
+    // if (type === 'replyComplete') {
+    //   console.log('replyComplete - listener', listener);
+    // }
   }
   /**
    * event type からリスナー関数を remove します<br>

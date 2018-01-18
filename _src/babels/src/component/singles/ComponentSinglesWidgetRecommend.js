@@ -19,13 +19,16 @@ import { MediaType } from '../../app/const/MediaType';
 import { Safety } from '../../data/Safety';
 
 // component
-import { ComponentCategoryLabels } from '../../component/categories/ComponentCategoryLabels';
-// import { ComponentArticleThumbnail } from '../../component/articles/ComponentArticleThumbnail';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
+// import ComponentArticleThumbnail from '../../component/articles/ComponentArticleThumbnail';
 
 // ui / snap
-import { Snap } from '../../ui/Snap';
+import Snap from '../../ui/Snap';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 // ----------------------------------------
@@ -53,8 +56,8 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * React props
-   * @return {{index: number, single: SingleDae, strong: boolean, sign: boolean}} React props
+   * React.propTypes
+   * @return {{index: number, single: SingleDae, strong: boolean, sign: boolean}} React.propTypes
    */
   static get propTypes() {
     return {
@@ -104,7 +107,7 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
     if (this.element !== null) {
       const snap = new Snap(this.element);
       // snap.on(Snap.SNAPPED, this.onSnap.bind(this));
-      snap.init();
+      snap.start();
     }
   }
   // onSnap() {
@@ -125,9 +128,7 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
     return (
       <div
         className={`widget-postList widget-postList_recommend-${this.props.index} widget-postList_recommend`}
-        ref={(component) => {
-          this.element = component;
-        }}
+        ref={(component) => (this.element = component)}
       >
         <div className="widget-postList-heading">
           <h2>{Message.RECOMMEND_TITLE}</h2>
@@ -186,7 +187,7 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateSingle(this.state.single);

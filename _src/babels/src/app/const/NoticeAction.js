@@ -11,8 +11,12 @@
  */
 
 
-let _symbol = Symbol();
-let _message = {
+// let _symbol = Symbol();
+/**
+ * お知らせ定型文
+ * @type {{comment: string, reply: string, good: string, bad: string, notice: string}}
+ */
+const messages = {
   comment: '返信',
   reply: '返信',
   good: 'Good',
@@ -20,23 +24,24 @@ let _message = {
   notice: '通知'
 };
 /**
- * <p>お知らせ定型文</p>
+ * お知らせ定型文
+ * - static class です
  */
 export class NoticeAction {
-  /**
-   * お知らせ定型文<br>
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'NoticeAction is static Class. not use new NoticeAction().' );
-
-    }
-
-  }
+  // /**
+  //  * お知らせ定型文<br>
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'NoticeAction is static Class. not use new NoticeAction().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
@@ -51,7 +56,7 @@ export class NoticeAction {
    * @param {string} action アクティビティの種類
    * @return {string} action に対応するメッセージ を返します
    */
-  static message( action:string ):string {
-    return _message[ action ];
+  static message(action) {
+    return messages[action];
   }
 }

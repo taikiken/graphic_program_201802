@@ -21,7 +21,7 @@ const Dom = UT.app.Dom;
  * <p>ユーザー登録, signup wizard</p>
  * 全て static です
  */
-export class Signup {
+export default class Signup {
   // /**
   //  * signup wizard (3 step) singleton class です
   //  * @param {Symbol} target Singleton を実現するための private symbol
@@ -36,7 +36,7 @@ export class Signup {
   /**
    * rendering 開始
    */
-  static start():void {
+  static start() {
     const signupElement = Dom.signup();
     // console.log('Signup.start', signupElement);
     if ( signupElement !== null ) {

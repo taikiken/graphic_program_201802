@@ -18,7 +18,9 @@ let React = self.React;
 // --------------------------------------------
 /**
  * コメント[More View] button + 残件数表示
+ * TODO: future remove
  * @type {ReactClass}
+ * @deprecated 2017-12-06 instead use {@link ComponentCommentMoreView}
  */
 export let CommentMoreViewNode = React.createClass( {
   propTypes: {
@@ -33,6 +35,8 @@ export let CommentMoreViewNode = React.createClass( {
     };
   },
   getInitialState: function() {
+    console.error('[CommentMoreViewNode] deprecated');
+
     return {
       loading: '',
       show: this.props.show,

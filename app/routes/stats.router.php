@@ -288,29 +288,43 @@ $app->group('/stats', function () use($app) {
 
           $season = '';
           $edition_id = '';
-          $breadarray = [
-            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
-            '<a itemprop="item" href="/stats/worldsoccer/',
-            $league,
-            '/">',
-            '<span itemprop="name">',
-            $page['league'][$league],
-            '</span>',
-            '<meta itemprop="position" content="3"> </a>',
-            '</li>',
-            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
-            '<a itemprop="item" href="/stats/worldsoccer/',
-            $league,
-            '/',
-            $args['category'],
-            '">',
-            '<span itemprop="name">',
-            $page['category'][$args['category']]['title'],
-            '</span>',
-            '<meta itemprop="position" content="4"> </a>',
-            '</li>',
-          ];
-          $breadcrumb = implode('', $breadarray);
+
+          // $breadarray = [
+          //   '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+          //   '<a itemprop="item" href="/stats/worldsoccer/',
+          //   $league,
+          //   '/">',
+          //   '<span itemprop="name">',
+          //   $page['league'][$league],
+          //   '</span>',
+          //   '<meta itemprop="position" content="3"> </a>',
+          //   '</li>',
+          //
+          //   '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+          //   '<a itemprop="item" href="/stats/worldsoccer/',
+          //   $league,
+          //   '/',
+          //   $args['category'],
+          //   '">',
+          //   '<span itemprop="name">',
+          //   $page['category'][$args['category']]['title'],
+          //   '</span>',
+          //   '<meta itemprop="position" content="4"> </a>',
+          //   '</li>',
+          // ];
+
+          $breadarray = array(
+            array(
+              'label' => $page['league'][$league],
+              'path'  => '/stats/worldsoccer/'.$league.'/',
+            ),
+            array(
+              'label' => $page['category'][$args['category']]['title'],
+              'path'  => '/stats/worldsoccer/'.$league.'/'.$args['category'],
+            ),
+          );
+
+          $breadcrumb = $breadarray;
 
           if (!empty(file_get_contents($edition_list_json, false, null, 0, 1))){
             $edition_list_json = json_decode(file_get_contents($edition_list_json));
@@ -422,42 +436,58 @@ $app->group('/stats', function () use($app) {
             $away_team = @$away_team ?: '未定';
             $title = $home_team.' vs '.$away_team.' - '.$match_date;
           }
-          $breadarray = [
-            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
-            '<a itemprop="item" href="/stats/worldsoccer/',
-            $league,
-            '/">',
-            '<span itemprop="name">',
-            $page['league'][$league],
-            '</span>',
-            '<meta itemprop="position" content="3"> </a>',
-            '</li>',
+          // $breadarray = [
+          //   '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+          //   '<a itemprop="item" href="/stats/worldsoccer/',
+          //   $league,
+          //   '/">',
+          //   '<span itemprop="name">',
+          //   $page['league'][$league],
+          //   '</span>',
+          //   '<meta itemprop="position" content="3"> </a>',
+          //   '</li>',
+          //
+          //   '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+          //   '<a itemprop="item" href="/stats/worldsoccer/',
+          //   $league,
+          //   '/schedule">',
+          //   '<span itemprop="name">',
+          //   '日程・結果',
+          //   '</span>',
+          //   '<meta itemprop="position" content="4"> </a>',
+          //   '</li>',
+          //
+          //   '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+          //   '<a itemprop="item" href="/stats/worldsoccer/',
+          //   $league,
+          //   '/schedule/',
+          //   $edition_id,
+          //   '-',
+          //   $match_id,
+          //   '/">',
+          //   '<span itemprop="name">',
+          //   $title,
+          //   '</span>',
+          //   '<meta itemprop="position" content="5"> </a>',
+          //   '</li>',
+          // ];
+          // $breadcrumb = implode('', $breadarray);
 
-            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
-            '<a itemprop="item" href="/stats/worldsoccer/',
-            $league,
-            '/schedule">',
-            '<span itemprop="name">',
-            '日程・結果',
-            '</span>',
-            '<meta itemprop="position" content="4"> </a>',
-            '</li>',
-
-            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
-            '<a itemprop="item" href="/stats/worldsoccer/',
-            $league,
-            '/schedule/',
-            $edition_id,
-            '-',
-            $match_id,
-            '/">',
-            '<span itemprop="name">',
-            $title,
-            '</span>',
-            '<meta itemprop="position" content="5"> </a>',
-            '</li>',
-          ];
-          $breadcrumb = implode('', $breadarray);
+          $breadarray = array(
+            array(
+              'label' => $page['league'][$league],
+              'path'  => '/stats/worldsoccer/'.$league.'/',
+            ),
+            array(
+              'label' => '日程・結果',
+              'path'  => '/stats/worldsoccer/'.$league.'/schedule/',
+            ),
+            array(
+              'label' => $title,
+              'path'  => '/stats/worldsoccer/'.$league.'/schedule/'.$edition_id.'-'.$match_id.'/',
+            ),
+          );
+          $breadcrumb = $breadarray;
 
           $args['page'] = $app->model->set(array(
             'title'              => $title.' - '.$page['league'][$league] . $page['category'][$args['category']]['title'].' | '.$page['title'],
@@ -527,42 +557,59 @@ $app->group('/stats', function () use($app) {
           );
           $widget_id = $widget_id_map[$league];
 
-          $breadarray = [
-            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
-            '<a itemprop="item" href="/stats/worldsoccer/',
-            $league,
-            '/">',
-            '<span itemprop="name">',
-            $page['league'][$league],
-            '</span>',
-            '<meta itemprop="position" content="3"> </a>',
-            '</li>',
+          // $breadarray = [
+          //   '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+          //   '<a itemprop="item" href="/stats/worldsoccer/',
+          //   $league,
+          //   '/">',
+          //   '<span itemprop="name">',
+          //   $page['league'][$league],
+          //   '</span>',
+          //   '<meta itemprop="position" content="3"> </a>',
+          //   '</li>',
+          //
+          //   '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+          //   '<a itemprop="item" href="/stats/worldsoccer/',
+          //   $league,
+          //   '/team">',
+          //   '<span itemprop="name">',
+          //   'チーム一覧',
+          //   '</span>',
+          //   '<meta itemprop="position" content="4"> </a>',
+          //   '</li>',
+          //
+          //   '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
+          //   '<a itemprop="item" href="/stats/worldsoccer/',
+          //   $league,
+          //   '/team/',
+          //   $edition_id,
+          //   '-',
+          //   $team_id,
+          //   '/">',
+          //   '<span itemprop="name">',
+          //   $team,
+          //   '</span>',
+          //   '<meta itemprop="position" content="5"> </a>',
+          //   '</li>',
+          // ];
+          // $breadcrumb = implode('', $breadarray);
 
-            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
-            '<a itemprop="item" href="/stats/worldsoccer/',
-            $league,
-            '/team">',
-            '<span itemprop="name">',
-            'チーム一覧',
-            '</span>',
-            '<meta itemprop="position" content="4"> </a>',
-            '</li>',
+          $breadarray = array(
+            array(
+              'label' => $page['league'][$league],
+              'path'  => '/stats/worldsoccer/'.$league.'/',
+            ),
+            array(
+              'label' => 'チーム一覧',
+              'path'  => '/stats/worldsoccer/'.$league.'/team/',
+            ),
+            array(
+              'label' => $team,
+              'path'  => '/stats/worldsoccer/'.$league.'/team/'.$edition_id.'-'.$team_id.'/',
+            ),
+          );
+          $breadcrumb = $breadarray;
 
-            '<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">',
-            '<a itemprop="item" href="/stats/worldsoccer/',
-            $league,
-            '/team/',
-            $edition_id,
-            '-',
-            $team_id,
-            '/">',
-            '<span itemprop="name">',
-            $team,
-            '</span>',
-            '<meta itemprop="position" content="5"> </a>',
-            '</li>',
-          ];
-          $breadcrumb = implode('', $breadarray);
 
           $args['page'] = $app->model->set(array(
             'title'              => $team.' - '.$page['league'][$league].' - '.$page['category'][$args['category']]['title'].' | '.$page['title'],
