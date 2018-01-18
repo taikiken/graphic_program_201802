@@ -68,7 +68,8 @@ foreach ($o->fetch_all() as $f) {
     $active_list = [];
     $type_list = [];
     $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
-    $f['sport_id'] = !empty($f['sport_id']) ? $f['sport_id'] . '.png' : '';
+    $f['file'] = !empty($f['file']) ? $ImgPath.$f['file'] : '';
+    $f['icon'] = !empty($f['icon']) ? $ImgPath.$f['icon'] : '';
 
     //開始日
     $DateTime = new DateTime($f['start_date_time']);
@@ -109,7 +110,7 @@ foreach ($o->fetch_all() as $f) {
         'id'                => $f['id'],
         'competition_name'  => $f['name'],
         'sport_name'        => $f['sport_name'],
-        'icon'              => $f['sport_id'],
+        'icon'              => $f['icon'],
         'start_date_time'   => $start_date,
         'end_date_time'     => $end_date,
         'file'              => $f['file'],
