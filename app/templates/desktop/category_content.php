@@ -50,7 +50,7 @@ if ($page['category']['slug'] == 'all') {
       if ( !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
         ?>
         <div class="sponsor-link mt30">
-          <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['pc']['link']; ?>', true);"><img src="<?php echo $page['category']['banner']['pc']['image']; ?>" alt="<?php echo $page['category']['banner']['pc']['text'] ? $page['category']['banner']['pc']['text'] : '' ?>"></a>
+          <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['pc']['link']; ?>', true);"><img src="<?php echo $page['category']['banner']['pc']['image']; ?>" alt="<?php echo $page['category']['banner']['pc']['text'] ? $page['category']['banner']['pc']['text'] : '' ?>" style="max-width:100%;" /></a>
         </div>
         <?php
       endif;
@@ -89,7 +89,7 @@ if ($page['category']['slug'] == 'all') {
       ?>
 
       <?php
-      # ref. #2321 
+      # ref. #2321
       if ( $page['category']['slug'] === 'americanfootball' ) :
         include_once __DIR__.'/../stats/ua_kansai/desktop/index.php';
       endif;

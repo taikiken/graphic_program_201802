@@ -30,8 +30,8 @@ export let SPSynItemNode = React.createClass( {
     sign: React.PropTypes.bool.isRequired,
     // did mount を通知する callback method
     callback: React.PropTypes.func.isRequired,
-    // LogoutNode instance
-    modal: React.PropTypes.object.isRequired
+    // // LogoutNode instance
+    // modal: React.PropTypes.object.isRequired
   },
   render: function() {
     if ( this.props.sign ) {

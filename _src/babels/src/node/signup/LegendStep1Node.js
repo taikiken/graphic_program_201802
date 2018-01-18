@@ -34,7 +34,7 @@ import {Model} from '../../model/Model';
 import {ModelUserDetect} from '../../model/signup/ModelUserDetect';
 
 // node
-import {ErrorNode} from '../error/ErrorNode';
+// import {ErrorNode} from '../error/ErrorNode';
 
 // // Api
 // import {Api} from '../../net/Api';
@@ -44,6 +44,7 @@ import {ErrorNode} from '../error/ErrorNode';
 // import {GaData} from '../../ga/GaData';
 
 import ComponentSignupSNS from '../../component/signup/ComponentSignupSNS';
+import ComponentError from '../../component/error/ComponentError';
 
 // React
 const React = self.React;
@@ -94,7 +95,7 @@ let Step1FormNode = React.createClass( {
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             />
           </span>
-          <ErrorNode message={message('errorEmail')} />
+          <ComponentError message={message('errorEmail')} />
         </span>
         <span className="form-parts align-right">
           <span className="setting-form-submit mod-btnA01">

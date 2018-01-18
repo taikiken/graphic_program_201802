@@ -16,14 +16,14 @@ import { Vectors } from '../util/Vectors';
  * Touching event object
  * @since 2016-09-17
  */
-export class TouchingEvents {
+export default class TouchingEvents {
   /**
    * Touching event object 各プロパティを設定します
    * @param {string} type event type
    * @param {Event} origin 発生時のオリジナルイベント
-   * @param {Vectors} current 現在の位置
-   * @param {Vectors} between 前回位置との差
-   * @param {boolean} scrolling scroll したかの真偽値, true: scroll している
+   * @param {Vectors} [current=new Vectors()] 現在の位置
+   * @param {Vectors} [between=new Vectors()] 前回位置との差
+   * @param {boolean} [scrolling=false] scroll したかの真偽値, true: scroll している
    */
   constructor(type, origin, current = new Vectors(), between = new Vectors(), scrolling = false) {
     /**

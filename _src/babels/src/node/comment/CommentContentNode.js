@@ -16,6 +16,7 @@ let React = self.React;
 /**
  * コメント本文部分を表示
  * @type {ReactClass}
+ * @deprecated 2017-12-07 instead use {@link ComponentCommentContentBody}
  */
 export let CommentContentNode = React.createClass( {
   propTypes: {

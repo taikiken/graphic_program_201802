@@ -11,44 +11,44 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * マイページ
  */
-export class SPUserProfile {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPUserProfile is static Class. not use new SPUserProfile().' );
-
-    }
-  }
+export default class SPUserProfile {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPUserProfile is static Class. not use new SPUserProfile().' );
+  //
+  //   }
+  // }
   /**
    * rendering 開始
    */
-  static start():void {
-    let element = Dom.userProfile();
-    if ( element !== null ) {
-      let profile = new UT.sp.view.mypage.SPViewUserProfile( element );
+  static start() {
+    const element = Dom.userProfile();
+    if (element !== null) {
+      const profile = new UT.sp.view.mypage.SPViewUserProfile(element);
       profile.start();
     }
   }
   /**
    * sp mypage profile start
    */
-  static ext():void {
-    let element = Dom.userProfileEx();
-    if ( element !== null ) {
-      let profile = new UT.view.mypage.ViewUserProfile( element );
+  static ext() {
+    const element = Dom.userProfileEx();
+    if (element !== null) {
+      const profile = new UT.view.mypage.ViewUserProfile(element);
       profile.start();
     }
   }

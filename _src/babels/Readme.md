@@ -7,7 +7,7 @@ global object
 出力クラスリスト
 
 ```
-let UT = {
+const UT = {
   version: '@@version',
   build: '@@buildTime',
   app: {
@@ -15,111 +15,126 @@ let UT = {
     App: App,
     // Codes: Codes,
     User: User,
-    Router: Router,
-    Dom: Dom,
+    Router,
+    Dom,
     const: {
-      CommentsType: CommentsType
+      CommentsType
     }
   },
   util: {
-    Offset: Offset,
-    Scroll: Scroll
+    Offset,
+    Scroll,
+    Elements,
+  },
+  ui: {
+    PageTop,
+    button: {
+      TopButton
+    }
   },
   net: {
-    Cookie: Cookie
+    Cookie,
+    Ajax,
   },
   model: {
-    Model: Model
+    Model
   },
   view: {
-    View: View,
-    ViewCategory: ViewCategory,
-    ViewSingle: ViewSingle,
-    // ViewTitle: ViewTitle,
-    ViewComments: ViewComments,
-    ViewSearch: ViewSearch,
-    ViewCommentSingle: ViewCommentSingle,
-    ViewFirstVisit: ViewFirstVisit,
+    View,
+    ViewCategory,
+    ViewSingle,
+    ViewComments,
+    ViewSearch,
+    ViewCommentSingle,
+    ViewFirstVisit,
+    ViewArea,
     comment: {
-      ViewCommentForm: ViewCommentForm
+      ViewCommentForm
     },
     single: {
-      ViewSingleTitle: ViewSingleTitle,
-      ViewSingleVisual: ViewSingleVisual
+      ViewSingleTitle,
+      ViewSingleVisual
     },
     header: {
-      ViewHeaderUser: ViewHeaderUser,
-      ViewHeaderSearch: ViewHeaderSearch
+      ViewHeaderUser,
+      ViewHeaderSearch
     },
     sidebar: {
-      ViewRanking: ViewRanking,
-      ViewVideos: ViewVideos,
-      ViewRecommend: ViewRecommend,
-      Sidebar: Sidebar
+      ViewRanking,
+      ViewVideos,
+      ViewRecommend,
+      Sidebar
     },
     home: {
-      ViewHeadline: ViewHeadline,
-      ViewPickup: ViewPickup,
-      ViewNews: ViewNews
+      ViewHeadline,
+      ViewPickup,
+      ViewNews
     },
     signup: {
-      SignupWizard: SignupWizard,
-      ViewDeactivate: ViewDeactivate
+      SignupWizard,
+      ViewDeactivate
     },
     login: {
-      ViewLogin: ViewLogin,
-      ViewLogout: ViewLogout
+      ViewLogin,
+      ViewLogout
     },
     mypage: {
-      ViewUserProfile: ViewUserProfile,
-      ViewBookmarks: ViewBookmarks,
-      ViewActivities: ViewActivities,
-      ViewNotifications: ViewNotifications
+      ViewUserProfile,
+      ViewBookmarks,
+      ViewActivities,
+      ViewNotifications
     },
     settings: {
-      ViewSettingsIndex: ViewSettingsIndex,
-      ViewSettingsInterest: ViewSettingsInterest
+      ViewSettingsIndex,
+      ViewSettingsInterest
     },
     modal: {
-      ViewDeleteModal: ViewDeleteModal,
-      ViewLogoutModal: ViewLogoutModal,
-      ViewFlushModal: ViewFlushModal
+      ViewDeleteModal,
+      ViewLogoutModal,
+      ViewFlushModal
     }
   },
   sp: {
     view: {
-      SPViewSyn: SPViewSyn,
-      SPViewComments: SPViewComments,
-      SPViewSingle: SPViewSingle,
-      SPViewSearch: SPViewSearch,
-      SPViewFirstVisit: SPViewFirstVisit,
+      SPViewSyn,
+      SPViewComments,
+      SPViewSingle,
+      SPViewSearch,
+      SPViewFirstVisit,
+      SPViewAppBanner,
       single: {
-        SPViewSingleHeader: SPViewSingleHeader,
-        SPViewReadMore: SPViewReadMore,
-        SPViewSingleRanking: SPViewSingleRanking,
-        SPViewSingleRecommend: SPViewSingleRecommend
+        SPViewSingleHeader,
+        SPViewContinueRead,
+        SPViewSingleRanking,
+        SPViewSingleRecommend
+      },
+      singles: {
+        SPViewSinglesRecommend,
+        SPViewSinglesRanking,
       },
       comment: {
-        SPViewCommentForm: SPViewCommentForm
+        SPViewCommentForm
       },
       home: {
-        SPViewHeadLine: SPViewHeadLine,
-        SPViewNews: SPViewNews
+        SPViewHeadLine,
+        SPViewNews
       },
       category: {
-        SPViewCategoryRoot: SPViewCategoryRoot
+        SPViewCategory,
+        SPViewCategoryWithSlug,
+        SPViewArea,
       },
       header: {
-        SPViewHeaderUser: SPViewHeaderUser,
-        SPViewHeaderSearch: SPViewHeaderSearch
+        SPViewHeaderUser,
+        SPViewHeaderSearch
       },
       mypage: {
-        SPViewUserProfile: SPViewUserProfile,
-        SPViewBookmarks: SPViewBookmarks
-      }
-    }
+        SPViewUserProfile,
+        SPViewBookmarks
+      },
+    },
   },
-  Ga: Ga
+  Ga,
 };
 ```
 

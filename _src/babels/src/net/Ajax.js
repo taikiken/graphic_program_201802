@@ -11,19 +11,16 @@
  */
 
 // import {Env} from '../app/Env';
-import {Codes} from './../app/Codes';
+import Codes from './../app/Codes';
 // data
 import {Result} from '../data/Result';
 // dae
 import {StatusDae} from '../dae/StatusDae';
 
 /**
- * <p>非同期通信でJSONを取得します<br>
- * Fetch API を使用し通信を行います</p>
- *
- * <p>Action 系 Class で extends し使用します</p>
- * **直接実行することはありません**
- *
+ * 非同期通信でJSONを取得します
+ * - Fetch API を使用し通信を行います
+ * - Action 系 Class で extends し使用します - **直接実行することはありません**
  * @see https://github.com/github/fetch
  * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
  */
@@ -33,9 +30,8 @@ export class Ajax {
    */
   constructor() {
     /**
-     * <p>Ajax request 実行可否判断 flag<br>
-     * 二重送信を防止するために使用します</p>
-     *
+     * Ajax request 実行可否判断 flag
+     * - 二重送信を防止するために使用します
      * - true: 実行可能
      * - false: 実行不可
      * @type {boolean}
@@ -47,11 +43,11 @@ export class Ajax {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * <p>リクエストが可能かを取得します<br>
-   * W click などで二重送信になるのを防ぎます</p>
-   * @return {Boolean} 実行可否 flag を返します
+   * リクエストが可能かを取得します
+   * - W click などで二重送信になるのを防ぎます
+   * @return {boolean} 実行可否 flag を返します
    */
-  get can():Boolean {
+  get can() {
     return this._can;
   }
   // ---------------------------------------------------
@@ -67,7 +63,7 @@ export class Ajax {
    * @param {Object} [headers=null] headers option, Authorization token など...
    * @param {FormData} [formData=null] FormData Object
    */
-  start( url, method, resolve, reject, ResultClass = Result, headers:Object = null, formData:FormData = null ):void {
+  start(url, method, resolve, reject, ResultClass = Result, headers = null, formData = null) {
     const fetch = self.fetch;
     // let _this = this;
 
@@ -158,13 +154,13 @@ export class Ajax {
   /**
    * 実行可否 flag を true にします
    */
-  enable():void {
+  enable() {
     this._can = true;
   }
   /**
    * 実行可否 flag を false にします
    */
-  disable():void {
+  disable() {
     this._can = false;
   }
 

@@ -11,15 +11,18 @@
  */
 
 // React
-let React = self.React;
+/**
+ * [library] - React
+ */
+const React = self.React;
 
 // play button
 /**
- * <p>HTML5 video play button<br>
- * click で動画を再生し button 非表示にします</p>
- * @type {*|Function|ReactClass}
+ * HTML5 video play button
+ * - click で動画を再生し button 非表示にします
+ * @type {ReactClass}
  */
-export let VideoPlayNode = React.createClass( {
+export const VideoPlayNode = React.createClass( {
   propTypes: {
     playImage: React.PropTypes.string.isRequired,
     callback: React.PropTypes.func.isRequired,
@@ -33,7 +36,7 @@ export let VideoPlayNode = React.createClass( {
   },
   render: function() {
     // SP 表示しない
-    if ( this.props.phone ) {
+    if (this.props.phone) {
       return null;
     }
 

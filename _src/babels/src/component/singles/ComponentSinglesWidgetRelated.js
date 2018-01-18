@@ -14,14 +14,17 @@
 import { Url } from '../../app/const/Url';
 
 // ui / snap
-import { Snap } from '../../ui/Snap';
+import Snap from '../../ui/Snap';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
- * PC: 記事詳細・次の記事一覧 > 関連記事一覧<br>
- * popin.js を使用し出力します
+ * PC: 記事詳細・次の記事一覧 > 関連記事一覧
+ * - `popin.js` を使用し出力します
  * @since 2016-09-28
  */
 export class ComponentSinglesWidgetRelated extends React.Component {
@@ -29,8 +32,11 @@ export class ComponentSinglesWidgetRelated extends React.Component {
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * プロパティ
-   * @return {{index: number, strong: boolean}} React.props
+   * React.propTypes - プロパティ
+   * - index - 記事表示順序
+   * - strong - 記事出力順番に関係なく出力するかのフラッグ
+   * - single - 記事詳細該当記事の {@link SingleDae}
+   * @return {{index: number, strong: boolean, single: SingleDae}} React.propTypes
    */
   static get propTypes() {
     return {
@@ -76,6 +82,11 @@ export class ComponentSinglesWidgetRelated extends React.Component {
       index: props.index,
       single: props.single
     };
+    /**
+     * `div.singles-related-scripts`
+     * @type {?Element}
+     */
+    this.relatedElement = null;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -84,11 +95,12 @@ export class ComponentSinglesWidgetRelated extends React.Component {
    * delegate, マウント後に呼び出され script tag をインサートします
    * */
   componentDidMount() {
-    if (!!this.refs.related) {
-      ComponentSinglesWidgetRelated.insert(this.refs.related);
+    const relatedElement = this.relatedElement;
+    if (relatedElement) {
+      ComponentSinglesWidgetRelated.insert(relatedElement);
       // snap
-      const snap = new Snap(this.refs.related);
-      snap.init();
+      const snap = new Snap(relatedElement);
+      snap.start();
     }
   }
   /**
@@ -101,7 +113,10 @@ export class ComponentSinglesWidgetRelated extends React.Component {
       <div className={`widget-postList widget-postList_related widget-postList_related-${this.props.index} singles-related-containers`}>
         <div id="_popIn_category" style={{display: 'none'}}>{this.state.single.categories.labels}</div>
         <div id="_popIn_recommend" />
-        <div className="singles-related-scripts" ref="related" />
+        <div
+          className="singles-related-scripts"
+          ref={(element) => (this.relatedElement = element)}
+        />
       </div>
     );
   }
@@ -121,7 +136,7 @@ export class ComponentSinglesWidgetRelated extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateIndex(this.state.index);
@@ -132,18 +147,18 @@ export class ComponentSinglesWidgetRelated extends React.Component {
    * @return {?XML} `div.singles-recommend-containers` or null を返します
    */
   render() {
-    const props = this.props;
+    const { strong, index } = this.props;
 
-    if (props.strong) {
+    if (strong) {
       return this.build();
     }
 
     // 0 始まり index を
     // 3 の倍数チェックのために 1 足します
     // `x % 3 === 0` するために
-    const index = props.index + 1;
+    const addedIndex = index + 1;
 
-    if (index % 3 !== 0) {
+    if (addedIndex % 3 !== 0) {
       return null;
     }
 

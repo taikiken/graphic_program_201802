@@ -28,7 +28,7 @@ issue 147: [記事本文（通常 / YouTube / Facebook 動画）: 開発 (Backen
     class="video-js"
     controls
     style="width: 640px; height: 360px;"></video>
-    <script src="//players.brightcove.net/3948005094001/default_default/index.min.js"></script> 
+    <script src="//players.brightcove.net/3948005094001/default_default/index.min.js"></script>
 
 ### Facebook
 
@@ -41,29 +41,13 @@ issue 147: [記事本文（通常 / YouTube / Facebook 動画）: 開発 (Backen
 
 [issues/151](https://github.com/undotsushin/undotsushin/issues/151#issuecomment-188093173)
 
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '842032129256034',
-          xfbml      : true,
-          version    : 'v2.5'
-        });
-      };
-    
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/ja_JP/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
+    <script src="/assets/facebook/init.js"></script>
     
 **表示するDOMを出力 `{your-video-post-url}` が APIの facebookの中身**
 
     <div class="fb-video" data-href="https://www.facebook.com/facebook/videos/10153231379946729/"
       data-allowfullscreen="true" data-width="500"></div>
-      
+
 ### YouTube
 
     <iframe width="640" height="360" src="https://www.youtube.com/embed/Ro-_cbfdrYE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>

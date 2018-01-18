@@ -11,15 +11,18 @@
  */
 
 // view
-import { ViewSinglesPopular } from '../../view/singles/ViewSinglesPopular';
+import ViewSinglesPopular from '../../view/singles/ViewSinglesPopular';
 
 // ui
-import { SinglesManager } from '../../ui/SinglesManager';
+import SinglesManager from '../../ui/SinglesManager';
 
 // ui / snap
-import { Snap } from '../../ui/Snap';
+import Snap from '../../ui/Snap';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -31,8 +34,8 @@ export class ComponentSinglesWidgetPopular extends React.Component {
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * React props
-   * @return {{index: number, strong: boolean, sign: boolean}} React props
+   * React.propTypes
+   * @return {{index: number, strong: boolean, sign: boolean}} React.propTypes
    */
   static get propTypes() {
     return {
@@ -78,6 +81,11 @@ export class ComponentSinglesWidgetPopular extends React.Component {
      * @type {SinglesManager}
      */
     this.manager = SinglesManager.factory();
+    /**
+     * `div.singles-popular-containers` container
+     * @type {?Element}
+     */
+    this.popularElement = null;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -88,7 +96,8 @@ export class ComponentSinglesWidgetPopular extends React.Component {
    * */
   componentDidMount() {
     // this.props.callback(View.DID_MOUNT);
-    if (this.view === null && !!this.refs.popular) {
+    const popularElement = this.popularElement;
+    if (this.view === null && popularElement) {
       // // 人気記事は「次の記事」 9 件以降で 3件毎に登場する
       // const index = this.props.index + 1;
       // // 人気記事は 6件表示する
@@ -104,7 +113,7 @@ export class ComponentSinglesWidgetPopular extends React.Component {
       const offset = request.offset;
 
       // console.log('ComponentSinglesWidgetPopular.componentDidMount', this.props.index, offset);
-      const view = new ViewSinglesPopular(this.refs.popular, this.props.sign, offset, request.length);
+      const view = new ViewSinglesPopular(popularElement, this.props.sign, offset, request.length);
       // view.callback = this.onMount.bind(this);
       this.view = view;
       view.start();
@@ -121,9 +130,9 @@ export class ComponentSinglesWidgetPopular extends React.Component {
    */
   onMount() {
     // this.view.callback = null;
-    const snap = new Snap(this.refs.popular);
+    const snap = new Snap(this.popularElement);
     // snap.on(Snap.SNAPPED, this.onSnap.bind(this));
-    snap.init();
+    snap.start();
   }
   // /**
   //  * snap scroll, 一時停止中
@@ -133,7 +142,7 @@ export class ComponentSinglesWidgetPopular extends React.Component {
   // }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     if (!!this.view && !!this.view.reload) {
@@ -147,7 +156,10 @@ export class ComponentSinglesWidgetPopular extends React.Component {
   build() {
     // AJAX 取得データ出力コンテナを用意
     return (
-      <div className={`singles-popular-containers singles-popular-containers-${this.props.index}`} ref="popular" />
+      <div
+        className={`singles-popular-containers singles-popular-containers-${this.props.index}`}
+        ref={(element) => (this.popularElement = element)}
+      />
     );
   }
   /**

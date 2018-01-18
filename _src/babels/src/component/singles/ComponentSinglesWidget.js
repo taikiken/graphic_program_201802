@@ -19,6 +19,9 @@ import { ComponentSinglesWidgetPopular } from './ComponentSinglesWidgetPopular';
 import { ComponentSinglesWidgetRelated } from './ComponentSinglesWidgetRelated';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -27,6 +30,27 @@ const React = self.React;
  * @since 2016-09-30
  */
 export class ComponentSinglesWidget extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{index: number, single: SingleDae, type: string, strong: boolean, sign: boolean}} React props
+   */
+  static get propTypes() {
+    return {
+      // 記事表示順序
+      index: React.PropTypes.number.isRequired,
+      // SingleDae - 記事詳細データ recommend_articles 抽出
+      single: React.PropTypes.object.isRequired,
+      // widget type
+      type: React.PropTypes.string.isRequired,
+      // 記事出力順番に関係なく出力するかのフラッグ
+      strong: React.PropTypes.bool.isRequired,
+      // ログイン済みかのフラッグ
+      sign: React.PropTypes.bool.isRequired
+    };
+  }
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentSinglesWidget.propTypes}
@@ -45,24 +69,6 @@ export class ComponentSinglesWidget extends React.Component {
       strong: props.strong,
       sign: props.sign
     };
-  }
-  /**
-   * オススメ記事・関連記事・人気記事 を出力します
-   * @return {XML} ComponentSinglesWidgetRecommend|ComponentSinglesWidgetRelated|ComponentSinglesWidgetRelated
-   */
-  render() {
-    switch (this.state.type) {
-      case WidgetType.RECOMMEND: {
-        return this.recommend();
-      }
-      case WidgetType.RELATED: {
-        return this.related();
-      }
-      case WidgetType.POPULAR:
-      default: {
-        return this.popular();
-      }
-    }
   }
   /**
    * オススメ記事
@@ -105,25 +111,22 @@ export class ComponentSinglesWidget extends React.Component {
     );
     // return null;
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
   /**
-   * propTypes
-   * @return {{index: number, single: SingleDae, type: string, strong: boolean, sign: boolean}} React props
+   * オススメ記事・関連記事・人気記事 を出力します
+   * @return {XML} ComponentSinglesWidgetRecommend|ComponentSinglesWidgetRelated|ComponentSinglesWidgetRelated
    */
-  static get propTypes() {
-    return {
-      // 記事表示順序
-      index: React.PropTypes.number.isRequired,
-      // SingleDae - 記事詳細データ recommend_articles 抽出
-      single: React.PropTypes.object.isRequired,
-      // widget type
-      type: React.PropTypes.string.isRequired,
-      // 記事出力順番に関係なく出力するかのフラッグ
-      strong: React.PropTypes.bool.isRequired,
-      // ログイン済みかのフラッグ
-      sign: React.PropTypes.bool.isRequired
-    };
+  render() {
+    switch (this.state.type) {
+      case WidgetType.RECOMMEND: {
+        return this.recommend();
+      }
+      case WidgetType.RELATED: {
+        return this.related();
+      }
+      case WidgetType.POPULAR:
+      default: {
+        return this.popular();
+      }
+    }
   }
 }

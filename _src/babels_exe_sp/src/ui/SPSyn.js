@@ -20,7 +20,7 @@ const Dom = UT.app.Dom;
 /**
  * Syn. menu + open / close UI
  */
-export class SPSyn {
+export default class SPSyn {
   // /**
   //  * static class です, instance を作成しません
   //  * @param {Symbol} target Singleton を実現するための private symbol

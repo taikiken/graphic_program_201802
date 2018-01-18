@@ -15,7 +15,7 @@ endif;
 $s3key = 'json/ca_list.json';
 
 $json = $ImgPath . '/' . $s3key;
-$app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app, $json, $ImgPath) {
+$app->group('/category/{category_slug:[^all]|'.join('|',$category_slug).'}', function () use($app, $json, $ImgPath) {
 
 
   // 各カテゴリートップ - /category/:category_slug/

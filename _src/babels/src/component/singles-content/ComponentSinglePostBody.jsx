@@ -14,6 +14,9 @@
 import { IFrameStatus } from '../../event/IFrameStatus';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

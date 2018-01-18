@@ -10,48 +10,52 @@
  *
  */
 
-import {Categories} from './Categories';
-import {Safety} from '../../data/Safety';
+import Categories from './Categories';
+// import {Safety} from '../../data/Safety';
 
 /**
- * <p>引数 slug のカテゴリ情報を取得します</p>
+ * 引数 slug のカテゴリ情報を取得します
  *
  * `/api/v1/category/[:category_slug]`
  *
  * @since 2016-05-28
  */
-export class CategoriesSlug extends Categories {
+export default class CategoriesSlug extends Categories {
   /**
    * 引数 slug のカテゴリ情報を取得し<br>
    * カテゴリ特有のデザイン、レイアウトへ対応します
    *
-   * @param {string} [slug] category slug
-   * @param {Function} [resolve=null] Ajax 成功時の callback
-   * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @param {string} [slug=all] category slug
+   * @param {?function} [resolve=null] Ajax 成功時の callback
+   * @param {?function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( slug:string, resolve:Function = null, reject:Function = null ) {
-    slug = Safety.string( slug, 'all' );
-    super( resolve, reject );
+  constructor(slug = 'all', resolve = null, reject = null) {
+    super(resolve, reject);
     /**
      * category slug
      * @type {string}
-     * @protected
      */
-    this._slug = slug;
+    this.slug = slug;
     // override url property
     // /api/v1/category/[:category_slug]
     /**
      * API path
      * @type {string}
-     * @protected
      */
-    this._url = `${this._types.url}/${slug}`;
+    this.url = `${this.types.url}/${slug}`;
   }
+  // /**
+  //  * category slug を取得します
+  //  * @return {string|*} category slug を返します
+  //  */
+  // get slug():string {
+  //   return this._slug;
+  // }
   /**
-   * category slug を取得します
-   * @return {string|*} category slug を返します
+   * slug を変更し `path` 更新します
+   * @param {string} slug category slug
    */
-  get slug():string {
-    return this._slug;
+  updatePath(slug) {
+    this.url = `${this.types.url}/${slug}`;
   }
 }

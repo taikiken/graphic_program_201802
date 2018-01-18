@@ -15,16 +15,21 @@ import { Message } from '../../app/const/Message';
 import { Empty } from '../../app/const/Empty';
 
 // node
-import { RecommendTitleNode } from '../../node/sidebar/RecommendTitleNode';
-import { RankingNode } from '../../node/sidebar/RankingNode';
+// import { RecommendTitleNode } from '../../node/sidebar/RecommendTitleNode';
+// import { RankingNode } from '../../node/sidebar/RankingNode';
 
 // dae
 import { ArticleDae } from '../../dae/ArticleDae';
 
 // data
 import { Safety } from '../../data/Safety';
+import ComponentSidebarRankingArticle from './ComponentSidebarRankingArticle';
+import ComponentSidebarTitle from './ComponentSidebarTitle';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -71,39 +76,60 @@ export default class ComponentSidebarRecommend extends React.Component {
    * */
   render() {
     // list.length > 0 が保証されている
-    const { list, home, detail, slug, categorySlug } = this.props;
+    const { list, home, detail, slug } = this.props;
     // render
     return (
       <div className="board-small widget-ranking">
         {/* title */}
+        {/*
         <RecommendTitleNode
           slug={categorySlug}
           label=""
+          title={Message.RECOMMEND_TITLE}
+        />
+        */}
+        <ComponentSidebarTitle
           title={Message.RECOMMEND_TITLE}
         />
         <ul className="post-list">
           {
             list.map((article, i) => {
               const dae = new ArticleDae(article);
-              const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
-              const empty = thumbnail === Empty.IMG_SMALL;
+              // const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
+              // const empty = thumbnail === Empty.IMG_SMALL;
+              // return (
+              //   <RankingNode
+              //     key={`sidebar-recommend-${dae.id}`}
+              //     index={i}
+              //     id={String( dae.id )}
+              //     categories={dae.categories.all}
+              //     url={dae.url}
+              //     date={dae.displayDate}
+              //     title={dae.title}
+              //     thumbnail={thumbnail}
+              //     empty={empty}
+              //     total={dae.commentsCount}
+              //     home={home}
+              //     detail={detail}
+              //     thisSlug={slug}
+              //     categorySlug={categorySlug}
+              //     anotherCategories={dae.anotherCategories}
+              //   />
+              // );
+              const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
               return (
-                <RankingNode
+                <ComponentSidebarRankingArticle
                   key={`sidebar-recommend-${dae.id}`}
                   index={i}
-                  id={String( dae.id )}
-                  categories={dae.categories.all}
-                  url={dae.url}
-                  date={dae.displayDate}
-                  title={dae.title}
                   thumbnail={thumbnail}
-                  empty={empty}
-                  total={dae.commentsCount}
+                  categories={dae.categories.all}
+                  title={dae.title}
+                  anotherCategories={dae.anotherCategories}
+                  id={String(dae.id)}
+                  url={dae.url}
                   home={home}
                   detail={detail}
                   thisSlug={slug}
-                  categorySlug={categorySlug}
-                  anotherCategories={dae.anotherCategories}
                 />
               );
             })

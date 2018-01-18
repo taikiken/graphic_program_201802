@@ -13,7 +13,7 @@
 // babels_exe から移植
 
 // app
-import { Dom } from '../app/Dom';
+import Dom from '../app/Dom';
 
 // util
 import { Scroll } from '../util/Scroll';
@@ -23,20 +23,26 @@ import { Offset } from '../util/Offset';
 import { TopButton } from '../ui/button/TopButton';
 
 // TweenMax
+/**
+ * [library] - gsap.TweenLite
+ */
 const TweenLite = self.TweenLite;
 
 // Sagen
+/**
+ * [library] - Sagen
+ */
 const Sagen = self.Sagen;
 
 /**
  * page top に戻る
  */
-export class PageTop {
+export default class PageTop {
   /**
    * PageTop instance を作成し init 関数をコールします
    */
   static start() {
-    let pageTop = new PageTop();
+    const pageTop = new PageTop();
     pageTop.init();
   }
   // ---------------------------------------------------
@@ -49,60 +55,52 @@ export class PageTop {
     /**
      * bind 済み this.onScroll
      * @type {Function}
-     * @private
      * @since 2016-09-01
      */
-    this._boundScroll = this.onScroll.bind( this );
+    this.boundScroll = this.onScroll.bind( this );
     /**
      * div#pageTop Element
      * @type {?Element}
-     * @private
      * @since 2016-09-01
      */
-    this._element = null;
+    this.element = null;
     /**
      * div#pageTop Sagen.Dom instance
      * @type {?Sagen.Dom}
-     * @private
      * @since 2016-09-01
      */
-    this._dom = null;
+    this.dom = null;
     /**
      * div#footer-container Element
      * @type {?Element}
-     * @private
      * @since 2016-09-01
      */
-    this._footer = null;
+    this.footer = null;
     /**
      * div#footer-container Offset instance
      * @type {?Offset}
-     * @private
      * @since 2016-09-01
      */
-    this._footerOffset = null;
+    this.footerOffset = null;
     /**
      * Scroll instance
      * @type {Scroll}
-     * @private
      * @since 2016-09-01
      */
-    this._scroll = Scroll.factory();
+    this.scroll = Scroll.factory();
 
     /**
      * Dom.whole() を Offset instance として保存します
      * @type {?Offset}
-     * @private
      */
-    this._wholeOffset = null;
+    this.wholeOffset = null;
 
     /**
      * fade animation 中フラッグ
      * @type {boolean}
-     * @private
-     * @default false
+\     * @default false
      */
-    this._inFade = false;
+    this.inFade = false;
 
     /**
      * click で top へ戻るアニメーションを
@@ -117,13 +115,13 @@ export class PageTop {
   /**
    * click event を bind します
    */
-  init():void {
+  init() {
     const element = Dom.pageTop();
     if (element === null) {
       return;
     }
     // element.addEventListener( 'click', this.onClick.bind( this ), false );
-    this._element = element;
+    this.element = element;
     this.topButton.init(element);
 
     const footer = Dom.footer();
@@ -131,7 +129,7 @@ export class PageTop {
       return;
     }
 
-    this._footer = footer;
+    this.footer = footer;
 
     this.initRise();
   }
@@ -141,15 +139,15 @@ export class PageTop {
    */
   initRise() {
     // @type {Sagen.Dom}
-    this._dom = new Sagen.Dom(this._element);
+    this.dom = new Sagen.Dom(this.element);
     // @type {Offset} - footer offset
-    this._footerOffset = new Offset(this._footer);
+    this.footerOffset = new Offset(this.footer);
     // @type {Offset} - whole offset
-    this._wholeOffset = new Offset(Dom.whole());
+    this.wholeOffset = new Offset(Dom.whole());
 
     // scroll event 監視開始
-    const scroll = this._scroll;
-    scroll.on( Scroll.SCROLL, this._boundScroll );
+    const scroll = this.scroll;
+    scroll.on(Scroll.SCROLL, this.boundScroll);
     scroll.start();
   }
   /**
@@ -157,7 +155,7 @@ export class PageTop {
    * @param {Object} event Scroll.SCROLL event object
    * @since 2016-09-01
    */
-  onScroll(event:Object):void {
+  onScroll(event) {
     // @type {number} - scrollTop
     const y = event.y;
     // @type {number} - window height
@@ -176,8 +174,8 @@ export class PageTop {
     // fixed / free
     // whole の高さから footer の高さを引い値が 下端 以下になったら absolute にする
     // footer よりボタンが飛び出ている 30px を加算する
-    const offset = this._footerOffset.offset();
-    const whole = this._wholeOffset.offset();
+    const offset = this.footerOffset.offset();
+    const whole = this.wholeOffset.offset();
     const checkHeight = whole.height - offset.height + 30;
 
     // console.log('offset', checkHeight, bottom, checkHeight <= bottom);
@@ -188,21 +186,21 @@ export class PageTop {
     }
   }
   /**
-   * ボタンを表示します
+   * ボタンを表示します - fadein
    * @return {boolean} 表示すると true を返します
    */
   show() {
-    if (this._inFade) {
+    if (this.inFade) {
       return false;
     }
 
-    const dom = this._dom;
+    const dom = this.dom;
     if (!dom.hasClass('blind')) {
       return false;
     }
 
-    this._inFade = true;
-    const element = this._element;
+    this.inFade = true;
+    const element = this.element;
 
     element.style.cssText = 'opacity: 0;';
     const target = {
@@ -222,7 +220,7 @@ export class PageTop {
         },
         onComplete: () => {
           element.style.cssText = '';
-          this._inFade = false;
+          this.inFade = false;
         }
       }
     );
@@ -230,21 +228,21 @@ export class PageTop {
     return true;
   }
   /**
-   * ボタンを非表示にします
+   * ボタンを非表示にします - fadeout
    * @return {boolean} 非表示にすると true を返します
    */
   hide() {
-    if (this._inFade) {
+    if (this.inFade) {
       return false;
     }
 
-    const dom = this._dom;
+    const dom = this.dom;
     if (dom.hasClass('blind')) {
       return false;
     }
 
-    this._inFade = true;
-    const element = this._element;
+    this.inFade = true;
+    const element = this.element;
     const target = {
       step: 1
     };
@@ -262,7 +260,7 @@ export class PageTop {
             dom.addClass('fixed');
           }
           element.style.cssText = '';
-          this._inFade = false;
+          this.inFade = false;
         }
       }
     );
@@ -274,7 +272,7 @@ export class PageTop {
    * @return {boolean} absolute にすると true を返します
    */
   free() {
-    const dom = this._dom;
+    const dom = this.dom;
     if (dom.hasClass('fixed')) {
       dom.removeClass('fixed');
       return true;
@@ -287,7 +285,7 @@ export class PageTop {
    * @return {boolean} fixed にすると true を返します
    */
   sticky() {
-    const dom = this._dom;
+    const dom = this.dom;
     if (!dom.hasClass('fixed')) {
       dom.addClass('fixed');
       return true;
