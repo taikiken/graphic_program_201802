@@ -61,6 +61,7 @@ export class Page {
       const splits = url.split('/');
       const prefix = Array.isArray(splits) && splits.length >= 4 ? splits[3] : 'p';
       const path = prefix.length === 1 ? prefix : 'p';
+      // console.log('Page.url', url, path);
       // return `/p/${singleDae.id}/`;
       return `/${path}/${singleDae.id}/`;
       // return singleDae.url;

@@ -425,18 +425,25 @@ export default class ViewSingle extends View {
    * @since 2016-09-28
    */
   singles(single) {
-    if (this.viewSingles === null) {
-      // one time, singles が null の時のみ ViewSingles instance を作成します
-      const element = Dom.singlesNext();
-      const moreElement = Dom.singlesMore();
-      if (element !== null && moreElement !== null) {
-        const viewSingles = new ViewSingles(this.id, element, moreElement, single);
-        this.viewSingles = viewSingles;
-        viewSingles.start();
-      }
-    } else {
-      // instance がある時は update を実行します
-      this.viewSingles.update();
+    // if (this.viewSingles === null) {
+    //   // one time, singles が null の時のみ ViewSingles instance を作成します
+    //   const element = Dom.singlesNext();
+    //   const moreElement = Dom.singlesMore();
+    //   if (element !== null && moreElement !== null) {
+    //     const viewSingles = new ViewSingles(this.id, element, moreElement, single);
+    //     this.viewSingles = viewSingles;
+    //     viewSingles.start();
+    //   }
+    // } else {
+    //   // instance がある時は update を実行します
+    //   this.viewSingles.update();
+    // }
+    const element = Dom.singlesNext();
+    const moreElement = Dom.singlesMore();
+    if (element !== null && moreElement !== null) {
+      const viewSingles = new ViewSingles(this.id, element, moreElement, single);
+      this.viewSingles = viewSingles;
+      viewSingles.start();
     }
   }
   // /**
