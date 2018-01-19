@@ -9,35 +9,35 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * 最初の1回表示
  */
-export class FirstVisit {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'FirstVisit is static Class. not use new FirstVisit().' );
-
-    }
-  }
+export default class FirstVisit {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'FirstVisit is static Class. not use new FirstVisit().' );
+  //
+  //   }
+  // }
   /**
    * rendering 開始
    */
-  static start():void {
-    let element = Dom.modal();
-    if ( element !== null ) {
+  static start() {
+    const element = Dom.modal();
+    if (element !== null) {
       // list
-      let first = new UT.view.ViewFirstVisit( element );
+      const first = new UT.view.ViewFirstVisit(element);
       first.start();
     }
   }

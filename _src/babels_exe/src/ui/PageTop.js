@@ -27,12 +27,12 @@ const Sagen = window.Sagen;
 /**
  * page top に戻る
  */
-export class PageTop {
+export default class PageTop {
   /**
    * PageTop instance を作成し init 関数をコールします
    */
   static start():void {
-    let pageTop = new PageTop();
+    const pageTop = new PageTop();
     pageTop.init();
   }
   // ---------------------------------------------------
@@ -131,7 +131,7 @@ export class PageTop {
   /**
    * click event を bind します
    */
-  init():void {
+  init() {
     const element = Dom.pageTop();
     // console.log('PageTop.init', element);
     if (element === null) {
@@ -140,14 +140,11 @@ export class PageTop {
     // element.addEventListener( 'click', this.onClick.bind( this ), false );
     this._element = element;
     this.topButton.init(element);
-
     const footer = Dom.footer();
     if (footer === null) {
       return;
     }
-
     this._footer = footer;
-
     this.initRise();
   }
   // /**
@@ -228,7 +225,6 @@ export class PageTop {
       this.hide();
       return;
     }
-
     // fixed / free
     // whole の高さから footer の高さを引い値が 下端 以下になったら absolute にする
     // footer よりボタンが飛び出ている 30px を加算する
@@ -251,20 +247,16 @@ export class PageTop {
     if (this._inFade) {
       return false;
     }
-
     const dom = this._dom;
     if (!dom.hasClass('blind')) {
       return false;
     }
-
     this._inFade = true;
     const element = this._element;
-
     element.style.cssText = 'opacity: 0;';
     const target = {
       step: 0
     };
-
     TweenLite.to(
       target,
       0.5,
@@ -282,7 +274,6 @@ export class PageTop {
         }
       }
     );
-
     return true;
   }
   /**
@@ -293,18 +284,15 @@ export class PageTop {
     if (this._inFade) {
       return false;
     }
-
     const dom = this._dom;
     if (dom.hasClass('blind')) {
       return false;
     }
-
     this._inFade = true;
     const element = this._element;
     const target = {
       step: 1
     };
-
     TweenLite.to(
       target,
       0.5, {
@@ -322,7 +310,6 @@ export class PageTop {
         }
       }
     );
-
     return true;
   }
   /**
@@ -335,7 +322,6 @@ export class PageTop {
       dom.removeClass('fixed');
       return true;
     }
-
     return false;
   }
   /**
@@ -348,7 +334,6 @@ export class PageTop {
       dom.addClass('fixed');
       return true;
     }
-
     return true;
   }
 }

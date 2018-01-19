@@ -20,23 +20,26 @@ import { Message } from '../../../app/const/Message';
 import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 
 // component
-import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
+import ComponentCategoryLabelsLink from '../../../component/categories/ComponentCategoryLabelsLink';
 
 // sp/component.singles
 import { SPComponentSinglesArticleMedia } from './SPComponentSinglesArticleMedia';
 
 // ui
-import { Hit } from '../../../ui/Hit';
+import Hit from '../../../ui/Hit';
 
 // util
 import { PageTitle } from '../../../util/PageTitle';
 
 // view
-// import { ViewSingle } from '../../../view/ViewSingle';
+// import ViewSingle from '../../../view/ViewSingle';
 
 import { Ga } from '../../../ga/Ga';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -44,13 +47,29 @@ const React = self.React;
  * @since 2016-09-28
  */
 export class SPComponentSinglesArticle extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * React.propTypes
+   * @return {{single: SingleDae, sign: boolean, index: number}} React.propTypes
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      sign: React.PropTypes.bool.isRequired,
+      index: React.PropTypes.number.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー {@link SPComponentSinglesArticle.propTypes}
    */
   constructor(props) {
     super(props);
-
     /**
      * React state
      * @type {{single: SingleDae, sign: boolean}}
@@ -76,6 +95,86 @@ export class SPComponentSinglesArticle extends React.Component {
      * @default false
      */
     this.sendGa = false;
+    /**
+     * `div,loaded-post`
+     * @type {?Element}
+     */
+    this.singlesArticle = null;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * state.single 情報を更新し再描画します
+   * @param {SingleDae} single state.single
+   */
+  updateSingle(single) {
+    this.setState({ single });
+  }
+  /**
+   * state.sign 情報を更新し再描画します
+   * @param {boolean} sign state.sign
+   */
+  updateSign(sign) {
+    this.setState({ sign });
+  }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * - 不要かも
+   */
+  reload() {
+    this.updateSingle(this.state.single);
+  }
+  // --------------------------------------------------
+  /**
+   * Hit.COLLISION event handler
+   * @param {Object} events Hit.COLLISION event object
+   */
+  onHit(events) {
+    if (this.sendGa) {
+      return;
+    }
+
+    const rect = events.rect;
+    const top = rect.top;
+
+    if (Math.abs(top) <= 50) {
+      this.sendGa = true;
+      // ViewSingle.ga(this.state.single);
+      // @since 2016-10-05
+      const single = this.state.single;
+      // 遅延実行させるために第三引数 delay: true 追加します
+      // @since 2016-11-14
+      Ga.single(single, `SPComponentSinglesArticle.onHit single: ${single.id}`);
+      // ---------------------
+      // https://github.com/undotsushin/undotsushin/issues/1151
+      // @since  2016-11-15 title added
+      const page = new PageTitle(single.title, single.categories.label);
+      Ga.addPage(single.id, `SPComponentSinglesArticle.onHit addPage: ${single.id}`, page.title());
+      // ---------------------
+      this.dispose();
+    }
+  }
+  /**
+   * Hit.COLLISION event handler を unbind します
+   */
+  dispose() {
+    const hit = this.hit;
+    if (hit !== null) {
+      hit.off(Hit.COLLISION, this.boundHit);
+    }
+  }
+  /**
+   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
+   * */
+  componentDidMount() {
+    const singlesArticle = this.singlesArticle;
+    if (this.hit === null && singlesArticle) {
+      const hit = new Hit(singlesArticle);
+      this.hit = hit;
+      hit.on(Hit.COLLISION, this.boundHit);
+      hit.start();
+    }
   }
   /**
    * `div.loaded-post` を出力します
@@ -89,7 +188,10 @@ export class SPComponentSinglesArticle extends React.Component {
     }
 
     return (
-      <div className={`loaded-post loaded-post-${single.id}`} ref="singlesArticle">
+      <div
+        className={`loaded-post loaded-post-${single.id}`}
+        ref={(element) => (this.singlesArticle = element)}
+      >
         {/* div.post-kv */}
         <div className="single-visual-container" ref="visualElement">
           {/*
@@ -138,90 +240,5 @@ export class SPComponentSinglesArticle extends React.Component {
         </div>
       </div>
     );
-  }
-  /**
-   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
-   * */
-  componentDidMount() {
-    if (this.hit === null && !!this.refs.singlesArticle) {
-      const hit = new Hit(this.refs.singlesArticle);
-      this.hit = hit;
-      hit.on(Hit.COLLISION, this.boundHit);
-      hit.start();
-    }
-  }
-  /**
-   * state.single 情報を更新し再描画します
-   * @param {SingleDae} single state.single
-   */
-  updateSingle(single) {
-    this.setState({ single });
-  }
-  /**
-   * state.sign 情報を更新し再描画します
-   * @param {boolean} sign state.sign
-   */
-  updateSign(sign) {
-    this.setState({ sign });
-  }
-  /**
-   * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
-   */
-  reload() {
-    this.updateSingle(this.state.single);
-  }
-  // --------------------------------------------------
-  /**
-   * Hit.COLLISION event handler
-   * @param {Object} events Hit.COLLISION event object
-   */
-  onHit(events) {
-    if (this.sendGa) {
-      return;
-    }
-
-    const rect = events.rect;
-    const top = rect.top;
-
-    if (Math.abs(top) <= 50) {
-      this.sendGa = true;
-      // ViewSingle.ga(this.state.single);
-      // @since 2016-10-05
-      const single = this.state.single;
-      // 遅延実行させるために第三引数 delay: true 追加します
-      // @since 2016-11-14
-      Ga.single(single, `SPComponentSinglesArticle.onHit single: ${single.id}`);
-      // ---------------------
-      // https://github.com/undotsushin/undotsushin/issues/1151
-      // @since  2016-11-15 title added
-      const page = new PageTitle(single.title, single.categories.label);
-      Ga.addPage(single.id, `SPComponentSinglesArticle.onHit addPage: ${single.id}`, page.title());
-      // ---------------------
-      this.dispose();
-    }
-  }
-  /**
-   * Hit.COLLISION event handler を unbind します
-   */
-  dispose() {
-    const hit = this.hit;
-    if (hit !== null) {
-      hit.off(Hit.COLLISION, this.boundHit);
-    }
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{single: SingleDae, sign: boolean, index: number}} React props
-   */
-  static get propTypes() {
-    return {
-      single: React.PropTypes.object.isRequired,
-      sign: React.PropTypes.bool.isRequired,
-      index: React.PropTypes.number.isRequired
-    };
   }
 }

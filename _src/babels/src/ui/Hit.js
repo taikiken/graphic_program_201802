@@ -11,17 +11,17 @@
  */
 
 // ui
-import { Rise } from './Rise';
+import Rise from './Rise';
 
 // util
 import { Elements } from '../util/Elements';
 
 // tick
-import { Scrolling } from '../tick/Scrolling';
-import { Rate } from '../tick/Rate';
+import Scrolling from '../tick/Scrolling';
+import Rate from '../tick/Rate';
 
 /**
- * element と window(Browser) のヒットテストを行います<br>
+ * element と window(Browser) のヒットテストを行います,
  * ヒットした場合は `COLLISION` event を発火し知らせます
  *
  * @example
@@ -38,35 +38,7 @@ import { Rate } from '../tick/Rate';
  *
  * @since 2016-09-30
  */
-export class Hit extends Rise {
-  /**
-   * 処理対象 element を保存します
-   * @param {Element} element 処理対象 element
-   */
-  constructor(element) {
-    super(element, 0);
-
-    /**
-     * 処理対象 element を Elements instance にし保存します
-     * @type {Elements}
-     */
-    this.elements = new Elements(element);
-
-     // Scrolling へ変更する
-    const scrolling = Scrolling.factory();
-    scrolling.rate = new Rate(Rate.RATE_5);
-    /**
-     * Scroll 監視インスタンス
-     * @type {Scrolling}
-     */
-    this.scroll = scrolling;
-    /**
-     * start flag
-     * @type {boolean}
-     * @default false
-     */
-    this.started = false;
-  }
+export default class Hit extends Rise {
   // ----------------------------------------
   // EVENT
   // ----------------------------------------
@@ -85,48 +57,6 @@ export class Hit extends Rise {
    */
   static get NO_COLLISION():string {
     return 'hitNoCollision';
-  }
-  // ----------------------------------------
-  // METHOD
-  // ----------------------------------------
-  /**
-   * Scroll 監視を始めます
-   */
-  start() {
-    if (this.started) {
-      return;
-    }
-    this.started = true;
-    const scrolling = this.scroll;
-    scrolling.on(Scrolling.UPDATE, this.boundScroll);
-    scrolling.start();
-  }
-  /**
-   * Scroll 監視を止めます
-   */
-  stop() {
-    this.scroll.off(Scrolling.UPDATE, this.boundScroll);
-  }
-  /**
-   * Scrolling.UPDATE event handler
-   * @param {Object} events Scrolling.UPDATE event object
-   * {{
-   *  type: string,
-   *  originalEvent: Event,
-   *  y: number,
-   *  height: number,
-   *  moving: number,
-   *  changed: boolean
-   * }}
-   */
-  onScroll(events) {
-    const rect = this.elements.offset();
-    const test = Hit.test(events.height, this.elements.offset());
-    if (test) {
-      this.dispatch({ rect, events, type: Hit.COLLISION });
-    } else {
-      this.dispatch({ rect, events, type: Hit.NO_COLLISION });
-    }
   }
   // ----------------------------------------
   // STATIC METHOD
@@ -170,5 +100,83 @@ export class Hit extends Rise {
     }
     // return
     return hit.top || hit.bottom || hit.contain || hit.include;
+  }
+  // ----------------------------------------
+  // CONSTRUCTOR
+  // ----------------------------------------
+  /**
+   * 処理対象 element を保存します
+   * @param {Element} element 処理対象 element
+   */
+  constructor(element) {
+    super(element, 0);
+
+    /**
+     * 処理対象 element を Elements instance にし保存します
+     * @type {Elements}
+     */
+    this.elements = new Elements(element);
+
+     // Scrolling へ変更する
+    const scrolling = Scrolling.factory();
+    scrolling.rate = new Rate(Rate.RATE_5);
+    /**
+     * Scroll 監視インスタンス
+     * @type {Scrolling}
+     */
+    this.scroll = scrolling;
+    /**
+     * start flag
+     * @type {boolean}
+     * @default false
+     */
+    this.started = false;
+    /**
+     * bind 済み this.onScroll
+     * @type {Function}
+     */
+    this.boundScroll = this.onScroll.bind(this);
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * Scroll 監視を始めます
+   */
+  start() {
+    if (this.started) {
+      return;
+    }
+    this.started = true;
+    const scrolling = this.scroll;
+    scrolling.on(Scrolling.UPDATE, this.boundScroll);
+    scrolling.start();
+  }
+  /**
+   * Scroll 監視を止めます
+   */
+  stop() {
+    this.scroll.off(Scrolling.UPDATE, this.boundScroll);
+  }
+  /**
+   * Scrolling.UPDATE event handler
+   * @param {Object} events Scrolling.UPDATE event object
+   * {{
+   *  type: string,
+   *  originalEvent: Event,
+   *  y: number,
+   *  height: number,
+   *  moving: number,
+   *  changed: boolean
+   * }}
+   */
+  onScroll(events) {
+    const rect = this.elements.offset();
+    const test = Hit.test(events.height, this.elements.offset());
+    if (test) {
+      this.dispatch({ rect, events, type: Hit.COLLISION });
+    } else {
+      this.dispatch({ rect, events, type: Hit.NO_COLLISION });
+    }
   }
 }

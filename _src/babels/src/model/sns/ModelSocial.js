@@ -17,64 +17,53 @@ import {Model} from '../Model';
 import {Social} from '../../action/sns/Social';
 // dae
 // import {UserDae} from '../../dae/UserDae';
-// data
-import {Result} from '../../data/Result';
+// // data
+// import {Result} from '../../data/Result';
 
 /**
  * ソーシャル経由のログイン
  */
-export class ModelSocial extends Model {
+export default class ModelSocial extends Model {
   /**
    * ソーシャル経由のログイン action を実行します
    * @param {Object} [option={}] optional event handler
    */
-  constructor( option:Object = {} ) {
-    super( option );
+  constructor(option = {}) {
+    super(option);
     /**
      * Action instance を設定します
      * @override
      * @type {Social}
      */
-    this.action = new Social( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Social(this.done.bind(this), this.fail.bind(this));
   }
   /**
    * Ajax request を開始します
    */
-  start():void {
-
+  start() {
     this.action.start();
-
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result:Result ):void {
-
-    let response = result.response;
-
-    if ( typeof response === 'undefined' ) {
-
+  done(result) {
+    const response = result.response;
+    if (typeof response === 'undefined') {
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[USER_SELF:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( Model.UNDEFINED_ERROR, error );
-
+      const error = new Error('[USER_SELF:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+      this.executeSafely(Model.UNDEFINED_ERROR, error);
     } else {
-
       // 成功 callback
-      this.executeSafely( Model.COMPLETE, result );
-
+      this.executeSafely(Model.COMPLETE, result);
     }
-
   }
   /**
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error ):void {
-
-    this.executeSafely( Model.RESPONSE_ERROR, error );
-
+  fail(error) {
+    this.executeSafely(Model.RESPONSE_ERROR, error);
   }
 }

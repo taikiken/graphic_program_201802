@@ -11,8 +11,8 @@
  */
 /* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
-import {Header} from './Header';
-import {Sidebar} from './Sidebar';
+import Header from './Header';
+import Sidebar from './Sidebar';
 // let _symbol = Symbol();
 
 // UT
@@ -23,7 +23,7 @@ const Dom = UT.app.Dom;
  * <p>category 一覧</p>
  * 全て static です
  */
-export class Category {
+export default class Category {
   // /**
   //  * static class です, instance を作成しません
   //  * @param {Symbol} target Singleton を実現するための private symbol
@@ -38,22 +38,22 @@ export class Category {
   /**
    * rendering 開始
    * @param {string} slug category slug
-   * @param {string} [type=''] ranking | video \ '' の 3つ
+   * - param {string} [type=''] ranking | video \ '' の 3つ - 不要になった argument
    * @since 2017-09-04
    */
-  static start(slug, type = '' ) {
+  static start(slug) {
     // header
     Header.start();
 
-    let element = Dom.board();
-    let elementMore = Dom.boardMore();
+    const element = Dom.board();
+    const elementMore = Dom.boardMore();
 
-    if ( element !== null && elementMore !== null ) {
+    if (element !== null && elementMore !== null) {
       // list
-      let archive = new UT.view.ViewCategory( slug, element, elementMore );
+      const archive = new UT.view.ViewCategory(slug, element, elementMore);
       archive.start();
       // sidebar
-      Sidebar.start( slug );
+      Sidebar.start(slug);
       // title
       // console.log( 'type', slug, type );
     }
@@ -78,8 +78,6 @@ export class Category {
       archive.start();
       // sidebar
       Sidebar.start(slug);
-      // title
-      // console.log( 'type', slug, type );
     }
   }
 }

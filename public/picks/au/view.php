@@ -39,6 +39,14 @@
   endif;
   // -----------------------------------------
   ?>
+
+  <?php include_once __DIR__.'/../../../app/templates/_env.php'; ?>
+  <script>
+    SPBL_ENV.page     = 'feature';
+    SPBL_ENV.category = 'picks';
+    SPBL_ENV.p        = 'au';
+  </script>
+
   <?php
   // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
   // @since 2017-08-21
@@ -47,43 +55,19 @@
   <link rel="stylesheet" href="/assets/sp/css/picks/au/ui.css?v=<?php echo $page['version']; ?>">
   <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
 
-  <script type='text/javascript'>
-    var googletag = googletag || {};
-    googletag.cmd = googletag.cmd || [];
-    (function() {
-      var gads = document.createElement('script');
-      gads.async = true;
-      gads.type = 'text/javascript';
-      var useSSL = 'https:' == document.location.protocol;
-      gads.src = (useSSL ? 'https:' : 'http:') +
-        '//www.googletagservices.com/tag/js/gpt.js';
-      var node = document.getElementsByTagName('script')[0];
-      node.parentNode.insertBefore(gads, node);
-    })();
+  <?php include_once __DIR__.'/../../../app/templates/_head_bottom.php'; ?>
 
+  <script type='text/javascript'>
     googletag.cmd.push(function() {
       var mapping = googletag.sizeMapping().
         addSize([0, 0], [320, 100]).
         build();
-
       googletag.defineSlot('/531683568/au_servicetop_header', [320, 100], 'div-gpt-ad-1495692694051-0').defineSizeMapping(mapping).addService(googletag.pubads());
       googletag.defineSlot('/531683568/au_servicetop_footer', [320, 100], 'div-gpt-ad-1495692509848-0').addService(googletag.pubads());
       googletag.pubads().enableSingleRequest();
       googletag.pubads().collapseEmptyDivs();
       googletag.enableServices();
     });
-  </script>
-
-  <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-   ga('create', 'UA-74679267-1', 'auto');
-   ga('require', 'linkid');
-   ga('require', 'displayfeatures');
-   ga('send', 'pageview');
   </script>
 
 </head>
@@ -245,23 +229,11 @@
 // if (!$from_webview) :
 if (0) :
 ?>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '842032129256034',
-      xfbml      : true,
-      version    : 'v2.5'
-    });
-  };
 
-  (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/ja_JP/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+<!-- for facebook -->
+<script src="/assets/facebook/init.js?v=<?php echo $page['version']; ?>"></script>
+<!-- // for facebook -->
+
 <?php
 endif;
 // -----------------------------------------

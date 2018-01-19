@@ -11,34 +11,53 @@
  */
 
 
-import {SPHeader} from './SPHeader';
-let _symbol = Symbol();
+import SPHeader from './SPHeader';
+import SPAnnounce from './SPAnnounce';
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
- * <p>Home(index)</p>
- * 全て static です
+ * Home(index)
+ * - 全て static です
  */
-export class SPIndex {
+export default class SPIndex {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPIndex is static Class. not use new SPIndex().' );
+  //
+  //   }
+  // }
   /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
+   * home headline - ad id 取得のために announce API 取得後に実行します
+   * @param {*} dae CategorySlugDae
+   * @since 2018-01-12
    */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPIndex is static Class. not use new SPIndex().' );
-
+  static afterAnnounce(dae) {
+    // console.log('SPIndex.afterAnnounce', dae);
+    // ---------------------------------------------------------
+    // headline
+    const headlineElement = Dom.headline();
+    if (headlineElement !== null) {
+      let headline = new UT.sp.view.home.SPViewHeadLine(headlineElement, {}, dae.ad);
+      headline.start();
     }
   }
   /**
    * home rendering 開始
    */
-  static start():void {
-
+  static start() {
+    // announce
+    const option = {};
+    option[UT.view.View.BEFORE_RENDER] = SPIndex.afterAnnounce;
+    SPAnnounce.start('all', option);
     // header
     SPHeader.start();
 
@@ -51,20 +70,20 @@ export class SPIndex {
       pickup.start();
     }
 
-    // ---------------------------------------------------------
-    // headline
-    let headlineElement = Dom.headline();
-    if ( headlineElement !== null ) {
-      let headline = new UT.sp.view.home.SPViewHeadLine( headlineElement );
-      headline.start();
-    }
+    // // ---------------------------------------------------------
+    // // headline
+    // const headlineElement = Dom.headline();
+    // if (headlineElement !== null) {
+    //   let headline = new UT.sp.view.home.SPViewHeadLine(headlineElement);
+    //   headline.start();
+    // }
 
     // ---------------------------------------------------------
     // news
-    let boardElement = Dom.board();
-    let moreElement = Dom.boardMore();
-    if ( boardElement !== null && moreElement !== null ) {
-      let archive = new UT.sp.view.home.SPViewNews( boardElement, moreElement );
+    const boardElement = Dom.board();
+    const moreElement = Dom.boardMore();
+    if (boardElement !== null && moreElement !== null) {
+      const archive = new UT.sp.view.home.SPViewNews(boardElement, moreElement);
       archive.start();
     }
 

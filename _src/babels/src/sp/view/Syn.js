@@ -23,18 +23,34 @@ import {Ga} from '../../ga/Ga';
 import {GaData} from '../../ga/GaData';
 
 // jQuery
-let $ = self.jQuery;
+/**
+ * [library] - jQuery
+ */
+const $ = self.jQuery;
 
 // Synapse
-let Synapse = self.Synapse;
+/**
+ * [library] - Synapse
+ */
+const Synapse = self.Synapse;
 
 // Sagen
-let Sagen = self.Sagen;
+/**
+ * [library] - Sagen
+ */
+const Sagen = self.Sagen;
 
 // Gasane
-let Gasane = self.Gasane;
+/**
+ * [library] - Gasane
+ */
+const Gasane = self.Gasane;
 
-let parts = {
+/**
+ * class names
+ * @type {{page: string, service: string, box: string, logo: string, sideMenu: string, bg: string, list: string, toggle: string, modal: string}}
+ */
+const parts = {
   page: 'page',
   service: 'synapse-service-list',
   box: 'synapse-service-list-outer-box',
@@ -52,13 +68,13 @@ let parts = {
 /**
  * Syn.menu
  */
-export class Syn {
+export default class Syn {
   /**
    * Syn. menu を作成し open / close animation を実装します
    * @param {Element} button #menu-opener element
    * @param {Element} side #side-menu-container element
    */
-  constructor( button:Element, side:Element ) {
+  constructor(button, side) {
     /**
      * element#menu-opener, menu を開くボタン
      * @type {Element}
@@ -76,14 +92,14 @@ export class Syn {
      * @type {HTMLElement|jQuery}
      * @private
      */
-    this._$side = $( side );
+    this._$side = $(side);
     /**
      * #side-menu-container element を Sagen.Dom instance へ
      * addClass とか getStyle とかできるから
      * @type {Sagen.Dom}
      * @private
      */
-    this._sideDom = new Sagen.Dom( side );
+    this._sideDom = new Sagen.Dom(side);
     /**
      * Synapse.Menu instance, Syn. menu のコントローラー（多分）
      * @type {null|Synapse.Menu}
@@ -117,14 +133,14 @@ export class Syn {
      * @type {Function}
      * @private
      */
-    this._boundUpdate = this.update.bind( this );
+    this._boundUpdate = this.update.bind(this);
     /**
      * 連続実行(update)するための Fps instance
      * fps 1 で実行されます
      * @type {Gasane.Fps}
      * @private
      */
-    this._fps = new Gasane.Fps( 1 );
+    this._fps = new Gasane.Fps(1);
     /**
      * $adg.ads.trackShowEvent を 1回だけ行うためのフラッグ
      * @type {boolean}
@@ -170,14 +186,43 @@ export class Syn {
      * @private
      */
     this._bg = null;
+    /**
+     * bind onLoad
+     * @type {function}
+     */
+    this.onLoad = this.onLoad.bind(this);
+    /**
+     * bind onNotice
+     * @type {function}
+     */
+    this.onNotice = this.onNotice.bind(this);
+    /**
+     * bind buttonClick
+     * @type {function}
+     */
+    this.buttonClick = this.buttonClick.bind(this);
+    /**
+     * bind bgClick
+     * @type {function}
+     */
+    this.bgClick = this.bgClick.bind(this);
+    /**
+     * timer id - motion
+     * @type {number}
+     */
+    this.motionTimer = 0;
+    /**
+     * timer id - scroll
+     * @type {number}
+     */
+    this.scrollTImer = 0;
   }
   /**
    * 初期処理, after DOMReady で実行のこと
    */
-  init():void {
+  init() {
     // $adg.listener event handler set
     this.initAd();
-
     // -------------------------------------------------------------------------
     // 以下通常処理
     this._listDom = new Sagen.Dom( document.getElementById( parts.list ) );
@@ -185,100 +230,95 @@ export class Syn {
     this._page = document.getElementById( parts.page );
     this._bg = document.getElementById( parts.bg );
 
-    if ( Syn.test() ) {
+    if (Syn.test()) {
       // ログレベルの指定。出荷時は指定しない
       Synapse.Logger.logLevel = Synapse.Logger.DEBUG;
-
       // エンドポイントの指定。出荷時は指定しない
       Synapse.endpoint = 'https://synapse-api.stg.bitcellar.net';
     }
 
     // メニューインスタンスの作成
     // name: undotsushin_side_menu で作成
-    let menu = new Synapse.Menu('undotsushin_side_menu');
+    const menu = new Synapse.Menu('undotsushin_side_menu');
     this._menu = menu;
-    menu.addListener( 'service_list_load', this.onLoad.bind( this ) );
-    menu.addListener( 'service_notification_load', this.onNotice.bind( this ) );
-
+    menu.addListener('service_list_load', this.onLoad);
+    menu.addListener('service_notification_load', this.onNotice);
     menu.init();
-
     // open / close
     // button
-    this._button.addEventListener( 'click', this.buttonClick.bind( this ), false );
-
+    this._button.addEventListener('click', this.buttonClick, false);
     // bg
-    this._bg.addEventListener( 'click', this.bgClick.bind( this ), false );
+    this._bg.addEventListener('click', this.bgClick, false);
   }
   // ---------------------------------------------------------------------------------
   /**
    * $adg.listener event handler を設定する
    * https://github.com/bitcellar/synapse-sdk/blob/master/ad/Browser/Readme.md#%E5%AE%9F%E8%A3%85%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB
    */
-  initAd():void {
+  initAd() {
     const $adg = self.$adg;
 
     // $adg 存在チェック
-    if ( !$adg || !$adg.listener ) {
+    if (!$adg || !$adg.listener) {
       setTimeout( () => {
         this.initAd();
       }, 25 );
       return;
     }
-
     const adg = this._adg;
-    window.addEventListener( $adg.listener.loaded, adg.loaded, false );
-    window.addEventListener( $adg.listener.failed, adg.failed, false );
+    window.addEventListener($adg.listener.loaded, adg.loaded, false);
+    window.addEventListener($adg.listener.failed, adg.failed, false);
   }
 
   /**
    * $adg.listener.loaded event handler
    */
-  adgLoaded():void {
+  adgLoaded() {
     this.adgDispose();
     // flag ON
     this._$adgComing = true;
 
     // https://github.com/undotsushin/undotsushin/issues/704#issuecomment-221199981
     // inview event を追加する
-    this._$side.on( 'inview', ( event, isInView ) => {
+    this._$side.on('inview', (event, isInView) => {
       if (isInView) {
         this.adTrack();
       }
-    } );
+    });
   }
   /**
    * $adg.listener.failed event handler
    */
-  adgFailed():void {
+  adgFailed() {
     this.adgDispose();
   }
   /**
    * $adg.listener event handler を removeEventListener する
    */
-  adgDispose():void {
+  adgDispose() {
     const $adg = self.$adg;
     const adg = this._adg;
-    window.removeEventListener( $adg.listener.loaded, adg.loaded );
-    window.removeEventListener( $adg.listener.failed, adg.failed );
+    window.removeEventListener($adg.listener.loaded, adg.loaded);
+    window.removeEventListener($adg.listener.failed, adg.failed);
   }
   // ---------------------------------------------------------------------------------
   /**
    * service_list_load event listener
    */
   onLoad():void {
-    let menu = this._menu;
-    let serviceList = document.getElementById( parts.service );
+    const menu = this._menu;
+    const serviceList = document.getElementById( parts.service );
     this._ready = true;
 
     // console.log( 'service_list_load ', menu.serviceList.serviceListItems.length );
 
     menu.serviceList.serviceListItems.forEach( function( item ) {
-      var listElement = document.createElement( 'li' );
-      var itemElement = item.toHTMLElement();
+      const listElement = document.createElement('li');
+      const itemElement = item.toHTMLElement();
 
       // inview は、オブジェクトの各辺が描画領域に入ると報告されるが、そのうち最初の1回だけ
       // 受け取れるようにフラグを立てて管理する。
-      var firstInView = false;
+      let firstInView = false;
 
       // メニューの各アイテムがビューに入ったことをトラッキングする
       $(itemElement).on('inview', function(event, isInView) {
@@ -297,15 +337,19 @@ export class Syn {
     });
 
     // メニューがあるときだけメニューエリアとロゴを表示させる
-    let listItems = menu.serviceList.serviceListItems;
-
-    if ( listItems !== null && typeof listItems !== 'undefined' && listItems.length > 0 ) {
-
-      document.getElementById( parts.box ).style.cssText = 'display: block;';
-      document.getElementById( parts.logo ).style.cssText = 'display: block;';
-
+    const listItems = menu.serviceList.serviceListItems;
+    if (listItems !== null && typeof listItems !== 'undefined' && listItems.length > 0) {
+      const box = document.getElementById(parts.box);
+      if (box) {
+        box.style.cssText = 'display: block;';
+      }
+      const logo = document.getElementById(parts.logo);
+      if (logo) {
+        logo.style.cssText = 'display: block;';
+      }
+      // document.getElementById(parts.box).style.cssText = 'display: block;';
+      // document.getElementById(parts.logo).style.cssText = 'display: block;';
     }
-
     // @since 2016-11-10
     // https://github.com/undotsushin/undotsushin/issues/1290
     // Syn.menu の自動オープンやめる（Web） #1290
@@ -313,13 +357,12 @@ export class Syn {
     // ---
     // 訪問経験があるかを調べる
     // this.visitCheck();
-
   }
   /**
    * 訪問経験があるかを調べ, cookie がなかったら menu を開く
    */
   visitCheck() {
-    if ( !Syn.visited() ) {
+    if (!Syn.visited()) {
       // cookie が無いので menu を open する
       this.open( this._side, this._sideDom );
     }
@@ -327,54 +370,47 @@ export class Syn {
   /**
    * service_notification_load event listener
    */
-  onNotice():void {
+  onNotice() {
     // 通知が存在する場合としない場合で、通知ボタンのクラスを変える
-    if ( this._menu.serviceNotification.serviceNotificationItems.length > 0 ) {
-
+    if (this._menu.serviceNotification.serviceNotificationItems.length > 0) {
       this._toggleDom.addClass('has-notification');
-
     } else {
-
       this._toggleDom.removeClass('has-notification');
-
     }
   }
   /**
    * button click event handler
    * @param {Event} event click event
    */
-  buttonClick( event:Event ):void {
+  buttonClick(event) {
     event.preventDefault();
-
     if ( this._motion ) {
       // animation 中 -> 何もしない
       return;
     }
+    const side = this._side;
+    const sideDom = this._sideDom;
 
-    let side = this._side;
-    let sideDom = this._sideDom;
-
-    if ( sideDom.hasClass( 'open' ) ) {
+    if (sideDom.hasClass('open')) {
       // open -> close
-      this.close( side, sideDom );
+      this.close(side, sideDom);
       // ga
       Syn.gaSend('close');
     } else {
       // close -> open
-      this.open( side, sideDom );
+      this.open(side, sideDom);
       // ga
       Syn.gaSend('open');
     }
-
   }
   /**
    * bg click event handler
    * @param {Event} event bg click event
    */
-  bgClick( event:Event ):void {
+  bgClick(event) {
     event.preventDefault();
     // open -> close
-    this.close( this._side, this._sideDom );
+    this.close(this._side, this._sideDom);
     // ga
     Syn.gaSend('close');
   }
@@ -383,9 +419,9 @@ export class Syn {
    * @param {Element} side side-menu-container element
    * @param {Sagen.Dom} sideDom side-menu-container Dom instance
    */
-  open( side:Element, sideDom:Sagen.Dom ):void {
+  open(side, sideDom) {
     this._motion = true;
-    let _this = this;
+    // let _this = this;
 
     // cookie set
     // menu を開くと cookie expire を延長
@@ -396,16 +432,20 @@ export class Syn {
     // Syn.visit();
 
     // 500ms 後に motion flag を false にします
-    setTimeout( function() {
-      _this._motion = false;
-    }, 500 );
+    // setTimeout( function() {
+    //   _this._motion = false;
+    // }, 500 );
+    clearTimeout(this.motionTimer);
+    this.motionTimer = setTimeout(() => {
+      this._motion = false;
+    }, 500);
 
     // open 時の scroll y position 保存
     this._y = Scroll.y;
 
     // scroll 0 位置に移動
     // menu top を表示するため
-    Scroll.motion( 0, 0.4 );
+    Scroll.motion(0, 0.4);
 
     // メニューを開いたことをトラッキングする
     this._menu.trackShowEvent();
@@ -415,13 +455,13 @@ export class Syn {
     // 外側のコンテナをでっかくする
     side.style.cssText = 'height: 9999px';
     // height 設定
-    this.setHeight( side );
+    this.setHeight(side);
 
     // $adg.ads.trackShowEvent を 1回だけ実行
     this.adTrack();
 
     // fps start
-    this._fps.on( Gasane.Fps.ENTER_FRAME, this._boundUpdate );
+    this._fps.on(Gasane.Fps.ENTER_FRAME, this._boundUpdate);
     this._fps.start();
   }
   /**
@@ -429,41 +469,37 @@ export class Syn {
    * https://github.com/bitcellar/synapse-sdk/blob/master/ad/Browser/Readme.md
    * https://github.com/undotsushin/undotsushin/issues/704#issuecomment-219010900
    */
-  adTrack():void {
+  adTrack() {
     // $adg.listener.loaded を待つ
-    if ( !this._$adgComing ) {
+    if (!this._$adgComing) {
       return;
     }
     // 1回だけ
-    if( this._firstAd ) {
+    if(this._firstAd) {
       return;
     }
-
     const $adg = self.$adg;
-
-    if ( !$adg || !$adg.ads || typeof $adg.ads.trackShowEvent !== 'function' ) {
+    if (!$adg || !$adg.ads || typeof $adg.ads.trackShowEvent !== 'function') {
       return;
     }
-
     // https://github.com/bitcellar/synapse-sdk/blob/master/ad/Browser/Readme.md
     // https://github.com/undotsushin/undotsushin/issues/704#issuecomment-219010900
     this._firstAd = true;
     $adg.ads.trackShowEvent();
-
     // track 送ったので inview event を unbind します
-    this._$side.off( 'inview' );
+    this._$side.off('inview');
   }
   /**
    * menu open 時に高さをセットします
    * @param {Element} side side menu
    */
-  setHeight( side:Element ):void {
+  setHeight(side) {
     // wrapper ul の高さ px 付き
     let heightPx = this._listDom.style( 'height' );
     let height = parseInt( heightPx, 10 );
-    let windowHeight = parseInt( window.innerHeight, 10 );
+    const windowHeight = parseInt(window.innerHeight, 10);
 
-    if ( height < windowHeight || !this._ready ) {
+    if (height < windowHeight || !this._ready) {
       // Syn.menu が読み込まれない or menu 高さが window 高さ以下の時は
       // window 高さ + 100px にする
       height = windowHeight + 100;
@@ -480,90 +516,96 @@ export class Syn {
    * @param {Element} side side-menu-container element
    * @param {Sagen.Dom} sideDom side-menu-container Dom instance
    */
-  close( side:Element, sideDom:Sagen.Dom ):void {
+  close(side, sideDom) {
     this._motion = true;
     let _this = this;
 
     sideDom.addClass( 'closing' );
 
-    Scroll.motion( _this._y, 0.2, 0.2 );
+    Scroll.motion(_this._y, 0.2, 0.2);
 
-    setTimeout( function() {
-      _this._motion = false;
-      sideDom.removeClass( 'closing' );
-      sideDom.removeClass( 'open' );
+    // setTimeout( function() {
+    //   _this._motion = false;
+    //   sideDom.removeClass( 'closing' );
+    //   sideDom.removeClass( 'open' );
+    //   side.style.cssText = '';
+    //   _this._page.style.cssText = '';
+    // }, 400 );
+    clearTimeout(this.scrollTImer);
+    this.scrollTImer = setTimeout(() => {
+      this._motion = false;
+      sideDom.removeClass('closing');
+      sideDom.removeClass('open');
       side.style.cssText = '';
-      _this._page.style.cssText = '';
-    }, 400 );
+      this._page.style.cssText = '';
+    }, 400);
 
-    this._fps.off( Gasane.Fps.ENTER_FRAME, this._boundUpdate );
-
+    this._fps.off(Gasane.Fps.ENTER_FRAME, this._boundUpdate);
   }
 
   /**
    * Fps.ENTER_FRAME handler
    * 高さを計算します
    */
-  update():void {
-    this.setHeight( this._side );
+  update() {
+    this.setHeight(this._side);
   }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
   /**
    * 自身の script tag src query syn を探し '1' か否かを調べ真偽値を返します
-   * @return {Boolean} syn=1 かの真偽値を返します
+   * @return {boolean} syn=1 かの真偽値を返します
    */
-  static test():Boolean {
-    let scripts = document.getElementsByTagName( 'head' )[ 0 ].getElementsByTagName( 'script' );
+  static test() {
+    const scripts = document.getElementsByTagName('head')[0].getElementsByTagName('script');
     let search;
 
-    for ( let script of scripts ) {
-      if ( !script.src || script.src.indexOf( 'main.bundle.js' ) === -1 ) {
+    for (let script of scripts) {
+      if (!script.src || script.src.indexOf('main.bundle.js') === -1) {
         continue;
       }
 
-      let src = script.src;
+      const src = script.src;
       search = src.split('?' ).pop();
     }
     // console.log( 'test search ', search );
-    if ( typeof search === 'undefined' || search === '' ) {
+    if (typeof search === 'undefined' || search === '') {
       return false;
     }
 
-    let queries = Loc.parse( search );
+    const queries = Loc.parse(search);
     // console.log( 'test queries ', queries );
-    if ( !queries.hasOwnProperty( 'syn' ) ) {
+    if (!queries.hasOwnProperty('syn')) {
       return false;
     } else {
       return queries.syn === '1';
     }
-
   }
   /**
    * 訪問経験があるかを cookie から調べます
-   * @return {Boolean} 訪問経験があるかの真偽値を返します
+   * @return {boolean} 訪問経験があるかの真偽値を返します
    */
-  static visited():Boolean {
-    return parseInt( Cookie.get( Cookie.SYN ), 10 ) === 1;
+  static visited() {
+    return parseInt(Cookie.get( Cookie.SYN ), 10) === 1;
   }
   /**
    * 訪問 cookie をセットします
-   * @return {Boolean} セット成功可否を返します
+   * @return {boolean} セット成功可否を返します
    */
-  static visit():Boolean {
+  static visit() {
     // 2 weeks set
-    return Cookie.save( '1', Cookie.SYN, Time.later( 14 ) );
+    return Cookie.save('1', Cookie.SYN, Time.later(14));
   }
   /**
    * GA 計測タグ を送信します
    * @param {string} mode open | close どちらk
    */
-  static gaSend( mode:string ):void {
+  static gaSend(mode) {
     // ----------------------------------------------
     // GA 計測タグ
     // Syn.menu表示 / Syn.menuクローズ
-    Ga.add( new GaData('Syn.gaSend', 'sidemenu', mode, '', 0, true ) );
+    Ga.add(new GaData('Syn.gaSend', 'sidemenu', mode, '', 0, true));
     // ----------------------------------------------
   }
 }

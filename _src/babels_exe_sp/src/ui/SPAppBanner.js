@@ -10,19 +10,19 @@
  *
  */
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * アプリバナーを表示します
  */
-export class SPAppBanner {
+export default class SPAppBanner {
   /**
    * アプリバーナーレンダリングを開始します
    */
-  static start():void {
-    let element = Dom.appBanner();
-    if ( element !== null ) {
+  static start() {
+    const element = Dom.appBanner();
+    if (element !== null) {
       UT.sp.view.SPViewAppBanner.init(element, true);
     }
   }

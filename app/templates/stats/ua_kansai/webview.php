@@ -1,4 +1,4 @@
-<?php include __DIR__."/inc.php"; 
+<?php include __DIR__."/inc.php";
 include __DIR__."/getData.php";
 $recentArray = getData::getScheduleRecent();
 ?>
@@ -13,20 +13,15 @@ $recentArray = getData::getScheduleRecent();
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
   <link rel="stylesheet" href="/assets/css/photo/parts_sp.css">
   <link rel="stylesheet" href="/assets/stats/ua_kansai/css/style.css">
-  <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
-  <script>
-    var googletag = googletag || {};
-    googletag.cmd = googletag.cmd || [];
-  </script>
 </head>
 
 <body style="height: auto;">
 
 <div class="sub_head_wrapper" style="margin-top: 0;">
-  <h2 class="sub_head_title"><i></i>関西学生アメリカンフットボールリーグ</h2>  
+  <h2 class="sub_head_title"><i></i>関西学生アメリカンフットボールリーグ</h2>
 </div>
-                       
-<!-- section_highlight_movie -->                      
+
+<!-- section_highlight_movie -->
 <section class="section_interhigh_highlight">
   <div class="ttl-wrapper">
     <h2 class="ttl highlight"><i></i>全試合ダイジェスト動画</h2>
@@ -46,12 +41,12 @@ $recentArray = getData::getScheduleRecent();
   <div class="ttl-wrapper">
     <h2 class="ttl calender"><i></i>直近の日程・結果</h2>
   </div>
-    
+
   <div class="af-schedule">
   <?php echo $recentArray ?>
   </div>
 
-  <p class="section_btn"><a href="/stats/ua_kansai/"><i></i>すべて日程・結果を見る</a></p>  
+  <p class="section_btn"><a href="/stats/ua_kansai/"><i></i>すべて日程・結果を見る</a></p>
 </section>
 
 <!-- section_photogallery -->
@@ -59,14 +54,14 @@ $recentArray = getData::getScheduleRecent();
   <div class="ttl-wrapper">
     <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
   </div>
-    
+
   <div id="js-current-post" class="current-post photo_gallery">
     <ul class="photo_list">
 <?php echo $photo; ?>
     </ul>
   </div>
 
-  <p class="section_btn"><a href="/stats/ua_kansai/photo/"><i></i>すべてのフォトギャラリーを見る</a></p>  
+  <p class="section_btn"><a href="/stats/ua_kansai/photo/"><i></i>すべてのフォトギャラリーを見る</a></p>
 </section>
 
 

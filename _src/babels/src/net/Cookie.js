@@ -13,27 +13,27 @@
 
 import {Safety} from '../data/Safety';
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 /**
  * cookie を取得・削除・設定します
- * 全て static です
+ * - 全て static です
  */
 export class Cookie {
-  /**
-   * cookie を取得・削除・設定します
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Cookie is static Class. not use new Cookie().' );
-
-    }
-
-  }
+  // /**
+  //  * cookie を取得・削除・設定します
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Cookie is static Class. not use new Cookie().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
@@ -42,7 +42,7 @@ export class Cookie {
    * @const TARGET
    * @return {string} cookie key name を返します
    */
-  static get TARGET():string {
+  static get TARGET() {
     return 'auth_token';
   }
   /**
@@ -50,7 +50,7 @@ export class Cookie {
    * @const SYN
    * @return {string} Syn. menu を開いた時にセットする cookie name を返します
    */
-  static get SYN():string {
+  static get SYN() {
     return 'visited';
   }
   /**
@@ -58,7 +58,7 @@ export class Cookie {
    * @const EVER_BEEN
    * @return {string} been 初めての訪問 cookie name を返します
    */
-  static get EVER_BEEN():string {
+  static get EVER_BEEN() {
     return 'been';
   }
 
@@ -66,7 +66,7 @@ export class Cookie {
    * @const APP_BANNER
    * @return {string} app_banner アプリバーアナー cookie name を返します
    */
-  static get APP_BANNER():string {
+  static get APP_BANNER() {
     return 'app_banner';
   }
   // ---------------------------------------------------
@@ -77,7 +77,7 @@ export class Cookie {
    * @param {string} keyName cookie key name
    * @return {string|null} cookie 値を返します、取得できない時は null を返します
    */
-  static get( keyName:string ) {
+  static get(keyName) {
     // console.log( 'get ', keyName, document.cookie.replace( new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent( keyName ).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1') );
     return decodeURIComponent( document.cookie.replace( new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent( keyName ).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1') ) || null;
   }
@@ -88,15 +88,14 @@ export class Cookie {
    * @param {Date} [end] expires date 90days 1000 * 60 * 60 * 24 * 90
    * @param {string} [path='/'] cookie 指定したパスが設定されます
    * @param {string} [domain=''] ドメイン, 特定するときは example.com or subdomain.example.com と指定します。 default は **現在のドメイン**
-   * @param {Boolean} [secure=false] https通信のときのみ、クッキーが送信されます
-   * @return {Boolean} 保存 成功か否かの真偽値 を返します
+   * @param {boolean} [secure=false] https通信のときのみ、クッキーが送信されます
+   * @return {boolean} 保存 成功か否かの真偽値 を返します
    */
-  static save( value:string, keyName:string = Cookie.TARGET, end:Date = new Date( Date.now() + (1000 * 60 * 60 * 24 * 90) ), path:string = '/', domain:string = '', secure:Boolean = false ):Boolean {
-
-    value = Safety.string( value, '' );
-    keyName = Safety.string( keyName, Cookie.TARGET );
-    path = Safety.string( path, '/' );
-    domain = Safety.string( domain, '' );
+  static save(value, keyName = Cookie.TARGET, end = new Date(Date.now() + (1000 * 60 * 60 * 24 * 90)), path = '/', domain = '', secure = false) {
+    value = Safety.string(value, '');
+    keyName = Safety.string(keyName, Cookie.TARGET);
+    path = Safety.string(path, '/');
+    domain = Safety.string(domain, '');
 
     path = path !== '' ? `; path=${path}` : '';
     domain = domain !== '' ? `; domain=${domain}` : '';
@@ -106,26 +105,25 @@ export class Cookie {
     // console.log( 'save ', value, keyName, end.toUTCString(), domain, path, secure );
     document.cookie = `${encodeURIComponent(keyName)}=${encodeURIComponent(value)}; expires=${end.toUTCString()}${domain}${path}${secureSetting}`;
     return true;
-
   }
   /**
    * 指定名称の cookie が存在するかを調べます
    * @param {string} keyName 調査対象 cookie 名称
-   * @return {Boolean} cookie が存在するかの真偽値 を返します
+   * @return {boolean} cookie が存在するかの真偽値 を返します
    */
-  static has( keyName:string ):Boolean {
-    return Cookie.get( keyName ) !== null;
+  static has(keyName) {
+    return Cookie.get(keyName) !== null;
   }
   /**
    * 指定名称の cookie を削除します
    * @param {string} keyName cookie 名称
    * @param {string} [path='/'] cookie 指定したパスが設定されます
    * @param {string} [domain=''] ドメイン, 特定するときは example.com or subdomain.example.com と指定します。 default は **現在のドメイン**
-   * @return {Boolean} 削除 成功か否かの真偽値 を返します
+   * @return {boolean} 削除 成功か否かの真偽値 を返します
    */
-  static remove( keyName:string = Cookie.TARGET, path:string = '/', domain:string = '' ):Boolean {
-    if ( Cookie.has( keyName ) ) {
-      return Cookie.save( '', keyName, new Date(), path, domain );
+  static remove(keyName = Cookie.TARGET, path = '/', domain = '') {
+    if (Cookie.has(keyName) ) {
+      return Cookie.save('', keyName, new Date(), path, domain);
     }
     return false;
   }

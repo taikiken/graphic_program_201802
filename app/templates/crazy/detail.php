@@ -36,6 +36,9 @@
     <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
     <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
     <link rel="shortcut icon" href="/favicon.ico">
+
+    <?php include_once __DIR__.'/../_env.php'; ?>
+
     <!-- 表示確認用 / -->
     <link rel="stylesheet" href="/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
     <link rel="stylesheet" href="/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
@@ -44,51 +47,9 @@
     <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
     <link rel="stylesheet" href="/assets/css/player.css">
     <link rel="stylesheet" href="/assets/css/crazy.css">
-    <!-- optimize -->
-    <style>
-        .async-hide {
-            opacity: 0 !important
-        }
-    </style>
-    <script>
-        (function(a, s, y, n, c, h, i, d, e)
-        {
-            s.className += ' ' + y;
-            h.start = 1 * new Date;
-            h.end = i = function()
-            {
-                s.className = s.className.replace(RegExp(' ?' + y), '')
-            };
-            (a[n] = a[n] || []).hide = h;
-            setTimeout(function()
-            {
-                i();
-                h.end = null
-            }, c);
-            h.timeout = c;
-        })(window, document.documentElement, 'async-hide', 'dataLayer', 4000,
-            {
-                'GTM-KJ33JM9': true
-            });
-    </script>
-    <!-- //optimize -->
-    <!-- ad/dfp -->
-    <script type='text/javascript'>
-        var googletag = googletag ||
-            {};
-        googletag.cmd = googletag.cmd || [];
-        (function()
-        {
-            var gads = document.createElement('script');
-            gads.async = true;
-            gads.type = 'text/javascript';
-            var useSSL = 'https:' == document.location.protocol;
-            gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
-            var node = document.getElementsByTagName('script')[0];
-            node.parentNode.insertBefore(gads, node);
-        })();
-    </script>
-    <!-- ad/dfp -->
+
+    <?php include_once __DIR__.'/../_head_bottom.php'; ?>
+
     <!-- ad/appvador -->
     <script>
         googletag.cmd.push(function()
@@ -123,28 +84,7 @@
     </script>
 -->
     <!-- // ad/npb-sp-anchor -->
-    <!-- ga -->
-    <script>
-        (function(i, s, o, g, r, a, m)
-        {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function()
-            {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-74679267-1', 'auto');
-        ga('require', 'GTM-KJ33JM9');
-        ga('require', 'linkid');
-        ga('require', 'displayfeatures');
-        ga('send', 'pageview');
-    </script>
-    <!-- //ga -->
+
 </head>
 <body>
 <!-- ad/531683568/appvador -->
@@ -178,12 +118,12 @@
         <ul>
             <li id="home" class="gnav-home"><a href="/">一面</a></li>
 
-            <?php foreach( $page['site_categories'] as $category ) {
+            <?php foreach( $page['site_tabs'] as $tab ) {
                 // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
                 // タブの表示順はAPI通りにする
                 ?>
-                <li id="<?php echo $category['slug']; ?>" class="gnav-<?php echo $category['slug']; ?>">
-                    <a href="/category/<?php echo $category['slug']; ?>/"><?php echo $category['label']; ?></a>
+                <li id="<?php echo $tab['slug']; ?>" class="gnav-<?php echo $tab['slug']; ?>">
+                    <a href="/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
                 </li>
             <?php }//foreach ?>
         </ul>
@@ -200,17 +140,17 @@
                 <!--  メインコンテンツ ---------------------------------------------------------->
                 <div class="player_profile">
                     <div class="img_area">
-                        <div class="img"><img src="/prg_img/img/<?php echo $page['player']['img']?>" alt=""></div>
+                        <div class="img"><img src="/prg_img/img/<?php echo $page['player']->body->img?>" alt=""></div>
                         <div class="name_area">
-                            <h2 class="name"><?php echo $page['player']['name']?></h2>
-                            <p class="genre"><?php echo $page['player']['competition']?></p>
+                            <h2 class="name"><?php echo $page['player']->body->name?></h2>
+                            <p class="genre"><?php echo $page['player']->body->competition?></p>
                         </div>
                     </div>
 
-                    <?php if(false === empty($page['player']['description'])):?>
+                    <?php if(false === empty($page['player']->body->description)):?>
                     <div class="txt_area">
                         <p class="subttl">PROFILE</p>
-                        <p><?php echo $page['player']['description']?></p>
+                        <p><?php echo $page['player']->body->description?></p>
                     </div>
                     <?php endif;?>
                 </div>
@@ -500,30 +440,11 @@
     <!-- /.foot-sec -->
 </div>
 <!-- /.whole -->
+
 <!-- for facebook -->
-<script>
-    window.fbAsyncInit = function()
-    {
-        FB.init(
-            {
-                appId: '842032129256034',
-                xfbml: true,
-                version: 'v2.5'
-            });
-    };
-    (function(d, s, id)
-    {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id))
-        {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/ja_JP/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+<script src="/assets/facebook/init.js?v=<?php echo $page['version']; ?>"></script>
+<!-- // for facebook -->
+
 <script src="/assets/js/global.bundle.js"></script>
 <script src="https://code.jquery.com/jquery-git.min.js"></script>
 <script src="/assets/js/crazy.js"></script>

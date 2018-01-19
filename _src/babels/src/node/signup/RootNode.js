@@ -22,19 +22,20 @@ import {LegendStep2Node} from './LegendStep2Node';
 import { ComponentLegendStep3 } from '../../component/signup/ComponentLegendStep3';
 
 // React
-const React = self.React;
-const ReactDOM = self.ReactDOM;
 /**
- * <p>「新規会員登録」 main HTML</p>
+ * [library] - React
+ */
+const React = self.React;
+// const ReactDOM = self.ReactDOM;
+/**
+ * 「新規会員登録」 main HTML
  *
- * <pre>
- *  <RootNode />
- *    <SignupHeadingNode />
- *    <form />
- *      <LegendStep1 />
- *      <LegendStep2 />
- *      <LegendStep3 />
- * </pre>
+ * - {@link RootNode}
+ *   - {@link SignupHeadingNode}
+ *   - form
+ *     - {@link LegendStep1Node}
+ *     - {@link LegendStep2Node}
+ *     - {@link ComponentLegendStep3}
  *
  * @type {ReactClass}
  * */
@@ -53,7 +54,8 @@ export const RootNode = React.createClass( {
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
-
+    // refs. やめる - 2017-12-27
+    this.signupElement = null;
     return {
       step: this.props.step,
       email1: '',
@@ -61,50 +63,55 @@ export const RootNode = React.createClass( {
     };
   },
   componentDidMount: function() {
-    this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
+    this.status.on(SignupStatus.SIGNUP_STEP, this.stepChange);
   },
   componentWillUnMount: function() {
-    this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
+    this.status.off(SignupStatus.SIGNUP_STEP, this.stepChange);
     this.dispose();
   },
-  shouldComponentUpdate: function( nextProps, nextState ) {
+  shouldComponentUpdate: function(nextProps, nextState) {
     return this.state.step !== nextState.step;
   },
   // submit / button が押された時の Event handler
   // SignupHeadingNode の表示状態を切り替えるため
-  submitHandler: function( event:Event ):void {
+  // @param {object} event
+  submitHandler: function(event) {
     event.preventDefault();
-    this.status.submit( this.state.step );
+    this.status.submit(this.state.step);
   },
   // SIGNUP_STEP event handler
   // form 表示切り替えるため
-  stepChange: function( event:Object ):void {
+  // @param {object} event
+  stepChange: function(event) {
     this.updateStep( event.step );
   },
   // state.step を切り替える
-  updateStep: function( step:Number ):void {
-    this.setState( { step: step } );
+  // @param {number} step
+  updateStep: function(step) {
+    this.setState({ step });
   },
   // from node を返します
-  getForm: function():Element {
-    return ReactDOM.findDOMNode( this.refs.signup );
+  getForm: function() {
+    // return ReactDOM.findDOMNode( this.refs.signup );
+    return this.signupElement;
   },
   // -----------------------------------------------
   // email を step1 と step2 で同じする
-  email1Change: function( email:string ):void {
+  // @param {string} email
+  email1Change: function(email) {
     // email 1 が変更されたので email 2 へ通知する
     // console.log( 'email1Change ', email );
-    this.setState( { email2: email } );
+    this.setState({ email2: email });
   },
-  email2Change: function( email:string ):void {
+  // @param {string} email
+  email2Change: function(email) {
     // email 2 が変更されたので email 1 へ通知する
     // console.log( 'email2Change ', email );
-    this.setState( { email1: email } );
+    this.setState({ email1: email });
   },
   // -----------------------------------------------
   render: function() {
-
-    let stepClassSelector = ( step ) => {
+    const stepClassSelector = (step) => {
       // console.log( 'stepClassSelector ', step );
       switch (step) {
         case 2:
@@ -122,9 +129,15 @@ export const RootNode = React.createClass( {
     return (
       <div className="body-sec">
         <div className="body-sec-inner">
-          <SignupHeadingNode step={this.state.step} />
+          <SignupHeadingNode
+            step={this.state.step}
+          />
           <div className={stepClassSelector(this.state.step)}>
-            <form ref="signup" encType="multipart/form-data" onSubmit={this.submitHandler}>
+            <form
+              ref={(element) => (this.signupElement = element)}
+              encType="multipart/form-data"
+              onSubmit={this.submitHandler}
+            >
               <LegendStep1Node
                 step={this.props.step}
                 changeEmail={this.email1Change}

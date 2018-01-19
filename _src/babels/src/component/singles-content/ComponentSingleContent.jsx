@@ -24,6 +24,9 @@ import { ComponentSingleFooter } from '../singles/ComponentSingleFooter';
 // import { Fb } from '../../util/Fb';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

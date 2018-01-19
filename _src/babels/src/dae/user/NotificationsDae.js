@@ -22,12 +22,10 @@ export class NotificationsDae {
    * お知らせ JSON response
    * @param {Object} [response={}] JSON response
    */
-  constructor( response:Object = {} ) {
-
-    response = Safety.object( response );
-
-    let notifications = response.notifications;
-    notifications = Safety.array( notifications );
+  constructor(response = {}) {
+    const altResponse = Safety.object(response);
+    // let notifications = altResponse.notifications;
+    const notifications = Safety.array(altResponse.notifications);
     // let list = [];
     // notifications.forEach( function( notice ) {
     //
@@ -41,42 +39,41 @@ export class NotificationsDae {
      * @type {Object}
      * @protected
      */
-    this._response = response;
+    this._response = altResponse;
     /**
      * response.notifications を 1件づつ NoticeDae instance とし格納します
      * @type {Array<NoticeDae>}
      * @protected
      */
     this._notifications = list;
-
   }
   /**
    * JSON response
-   * @return {Object|*} JSON response を返します
+   * @return {Object} JSON response を返します
    */
-  get response():Object {
+  get response() {
     return this._response;
   }
   /**
    * response.notifications
-   * @return {Array<NoticeDae>} JSON response.notifications を返します
+   * @return {Array.<NoticeDae>} JSON response.notifications を返します
    */
-  get notifications():Array<NoticeDae> {
+  get notifications() {
     return this._notifications;
   }
   /**
    * response.count
-   * @return {Number} count を返します
+   * @return {number} count を返します
    */
-  get total():Number {
+  get total() {
     return this.response.count;
   }
   /**
    * alias total
    * response.count
-   * @return {Number} count を返します
+   * @return {number} count を返します
    */
-  get count():Number {
+  get count() {
     return this.total;
   }
 }

@@ -14,110 +14,25 @@
 
 import {EventDispatcher} from '../event/EventDispatcher';
 
-let _symbol = Symbol();
-let _instance = null;
 /**
- * <p>Exif orientation check</p>
- * <p>iOS カメラロール画像からユーザーアイコンを取得すると横向きになるために exif orientation 値を取得し向きを正規化します</p>
+ * Exif singleton を保証するための inner Symbol
+ * @type {symbol}
+ * @private
+ */
+const symbol = Symbol('Exif for singleton');
+/**
+ * singleton Exif instance
+ * @type {?Exif}
+ * @private
+ */
+let singletonInstance = null;
+/**
+ * Exif orientation check
+ * - iOS カメラロール画像からユーザーアイコンを取得すると横向きになるために exif orientation 値を取得し向きを正規化します
  *
- * [stackoverflow](http://stackoverflow.com/questions/7584794/accessing-jpeg-exif-rotation-data-in-javascript-on-the-client-side)
+ * ref: [stackoverflow](http://stackoverflow.com/questions/7584794/accessing-jpeg-exif-rotation-data-in-javascript-on-the-client-side)
  */
 export class Exif extends EventDispatcher {
-  /**
-   * <p>Exif orientation check</p>
-   * @static
-   * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {LogoutStatus} LogoutStatus instance を返します
-   */
-  constructor( target:Symbol ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Exif is static Class. not use new Exif(). instead Exif.factory()' );
-
-    }
-
-    if ( _instance === null ) {
-      super();
-      _instance = this;
-      /**
-       * FileReader instance
-       * @type {null|FileReader}
-       * @private
-       */
-      this._reader = null;
-      /**
-       * bind 済み this.onLoad event handler
-       * @type {Function}
-       * @private
-       */
-      this._boundLoad = this.onLoad.bind( this );
-      /**
-       * bind 済み this.onError event handler
-       * @type {Function}
-       * @private
-       */
-      this._boundError = this.onError.bind( this );
-    }
-
-    return _instance;
-  }
-  /**
-   * FileReader.readAsArrayBuffer で 引数(file) load 後に exif orientation を調べます
-   * @param {Blob} file 調査対象ファイル
-   */
-  orientation( file:Blob ):Number {
-    let reader = new FileReader();
-    this._reader = reader;
-    reader.addEventListener( 'load', this._boundLoad, false );
-    reader.addEventListener( 'error', this._boundError, false );
-    let part;
-    let end = 64 * 1024;
-    // Blob.slice
-    // https://developer.mozilla.org/en-US/docs/Web/API/Blob/slice
-    if (typeof file.slice === 'function') {
-      // normal
-      part = file.slice(0, end);
-    } else if (typeof file.webkitSlice === 'function') {
-      // webkit
-      part = file.webkitSlice(0, end);
-    } else if (typeof file.mozSlice === 'function') {
-      // moz(firefox)
-      part = file.mozSlice(0, end);
-    } else {
-      part = file;
-    }
-
-    reader.readAsArrayBuffer(part);
-  }
-
-  /**
-   * reader.readAsArrayBuffer onload event handler
-   * @param {Event} event reader.readAsArrayBuffer onload event
-   */
-  onLoad( event:Event ):void {
-    this.dispose();
-    let orientation = Exif.parse( event.target.result );
-    this.dispatch({type: Exif.EXIF_ORIENTATION, orientation: orientation});
-    /*
-    -2: not jpeg
-    -1: not defined
-    */
-  }
-  /**
-   * reader.readAsArrayBuffer onerror event handler
-   * orientation -1(not defined) を返します
-   */
-  onError():void {
-    this.dispose();
-    this.dispatch({type: Exif.EXIF_ORIENTATION, orientation: -1});
-  }
-  /**
-   * event handler を unbind します
-   */
-  dispose():void {
-    this._reader.removeEventListener( 'load', this._boundLoad );
-    this._reader.removeEventListener( 'error', this._boundError );
-  }
   // ---------------------------------------------------
   //  CONST
   // ---------------------------------------------------
@@ -126,10 +41,9 @@ export class Exif extends EventDispatcher {
    * 解析終了時のイベント
    * @return {string} exifOrientation を返します
    */
-  static get EXIF_ORIENTATION():string {
+  static get EXIF_ORIENTATION() {
     return 'exifOrientation';
   }
-
   // ---------------------------------------------------
   // orientation 定数
   /**
@@ -137,7 +51,7 @@ export class Exif extends EventDispatcher {
    * .jpg / .jpeg ではありません
    * @return {number} -2 を返します
    */
-  static get NOT_JPG():Number {
+  static get NOT_JPG() {
     return -2;
   }
   /**
@@ -145,7 +59,7 @@ export class Exif extends EventDispatcher {
    * 見つかりませんでした
    * @return {number} -1 を返します
    */
-  static get NOT_DEFINED():Number {
+  static get NOT_DEFINED() {
     return -1;
   }
 
@@ -157,7 +71,7 @@ export class Exif extends EventDispatcher {
    * ノーマル（正対）
    * @return {number} 0 を返します
    */
-  static get CW():Number {
+  static get CW() {
     return 0;
   }
   /**
@@ -165,7 +79,7 @@ export class Exif extends EventDispatcher {
    * ノーマル（正対）
    * @return {number} 0 を返します
    */
-  static get CW_0():Number {
+  static get CW_0() {
     return 0;
   }
   /**
@@ -173,7 +87,7 @@ export class Exif extends EventDispatcher {
    * 90度回転
    * @return {number} 8 を返します
    */
-  static get CW_90():Number {
+  static get CW_90() {
     return 8;
   }
   /**
@@ -181,7 +95,7 @@ export class Exif extends EventDispatcher {
    * 180度回転
    * @return {number} 3 を返します
    */
-  static get CW_180():Number {
+  static get CW_180() {
     return 3;
   }
   /**
@@ -189,7 +103,7 @@ export class Exif extends EventDispatcher {
    * 270度回転
    * @return {number} 6 を返します
    */
-  static get CW_270():Number {
+  static get CW_270() {
     return 6;
   }
 
@@ -201,7 +115,7 @@ export class Exif extends EventDispatcher {
    * 反転・ノーマル（正対）
    * @return {number} 2 を返します
    */
-  static get UPSIDE_CW():Number {
+  static get UPSIDE_CW() {
     return 2;
   }
   /**
@@ -209,7 +123,7 @@ export class Exif extends EventDispatcher {
    * 反転・ノーマル（正対）
    * @return {number} 2 を返します
    */
-  static get UPSIDE_CW_0():Number {
+  static get UPSIDE_CW_0() {
     return 2;
   }
   /**
@@ -217,7 +131,7 @@ export class Exif extends EventDispatcher {
    * 反転・90度回転
    * @return {number} 7 を返します
    */
-  static get UPSIDE_CW_90():Number {
+  static get UPSIDE_CW_90() {
     return 7;
   }
   /**
@@ -225,7 +139,7 @@ export class Exif extends EventDispatcher {
    * 反転・180度回転
    * @return {number} 4 を返します
    */
-  static get UPSIDE_CW_180():Number {
+  static get UPSIDE_CW_180() {
     return 4;
   }
   /**
@@ -233,7 +147,7 @@ export class Exif extends EventDispatcher {
    * 反転・270度回転
    * @return {number} 5 を返します
    */
-  static get UPSIDE_CW_270():Number {
+  static get UPSIDE_CW_270() {
     return 5;
   }
 
@@ -245,38 +159,37 @@ export class Exif extends EventDispatcher {
    * @param {*} result reader.readAsArrayBuffer の event.target.result
    * @return {number} 解析結果を返します
    */
-  static parse( result ):Number {
-    let view = new DataView( result );
-    if ( view.getUint16(0, false) !== 0xFFD8 ) {
+  static parse(result) {
+    const view = new DataView(result);
+    if (view.getUint16(0, false) !== 0xFFD8) {
       // not jpg
       return -2;
     }
-
-    let length = view.byteLength;
+    const length = view.byteLength;
     let offset = 2;
 
-    while ( offset < length ) {
-      let marker = view.getUint16( offset, false );
+    while (offset < length) {
+      let marker = view.getUint16(offset, false);
       offset += 2;
 
-      if ( marker === 0xFFE1 ) {
-        if ( view.getUint32( offset += 2, false ) !== 0x45786966 ) {
+      if (marker === 0xFFE1) {
+        if (view.getUint32(offset += 2, false) !== 0x45786966) {
           return -1;
         }
 
-        let little = view.getUint16( offset += 6, false ) === 0x4949;
+        const little = view.getUint16(offset += 6, false) === 0x4949;
         offset += view.getUint32(offset + 4, little);
 
-        let tags = view.getUint16(offset, little);
+        const tags = view.getUint16(offset, little);
         offset += 2;
 
-        for ( let i = 0; i < tags; i++ ) {
-          if ( view.getUint16(offset + (i * 12), little) === 0x0112 ) {
+        for (let i = 0; i < tags; i++) {
+          if (view.getUint16(offset + (i * 12), little) === 0x0112) {
             return view.getUint16(offset + (i * 12) + 8, little);
           }
         }// for
 
-      } else if ( (marker & 0xFF00) !== 0xFF00 ) {
+      } else if ((marker & 0xFF00) !== 0xFF00) {
         break;
       } else {
         offset += view.getUint16(offset, false);
@@ -288,15 +201,112 @@ export class Exif extends EventDispatcher {
    * instance を生成します
    * @return {Exif} Exif instance を返します
    */
-  static factory():Exif {
-
-    if ( _instance === null ) {
-
-      _instance = new Exif( _symbol );
-
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new Exif(symbol);
     }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * <p>Exif orientation check</p>
+   * @static
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {LogoutStatus} LogoutStatus instance を返します
+   */
+  constructor(target) {
+    if (symbol !== target) {
+      throw new Error( 'Exif is static Class. not use new Exif(). instead Exif.factory()' );
+    }
+    if (singletonInstance) {
+      return singletonInstance;
+    }
+    // ---
+    super();
+    /**
+     * FileReader instance
+     * @type {FileReader}
+     * @private
+     */
+    this.fileReader = new FileReader();
+    /**
+     * bind 済み this.onLoad event handler
+     * @type {Function}
+     * @private
+     */
+    this.onLoad = this.onLoad.bind(this);
+    /**
+     * bind 済み this.onError event handler
+     * @type {Function}
+     * @private
+     */
+    this.onError = this.onError.bind(this);
+    return this;
+  }
+  // ---------------------------------------------------
+  //  METHODS
+  // ---------------------------------------------------
+  /**
+   * FileReader.readAsArrayBuffer で 引数(file) load 後に exif orientation を調べます
+   * @param {Blob} file 調査対象ファイル
+   */
+  orientation(file) {
+    // const reader = new FileReader();
+    this.dispose();
+    const fileReader = this.fileReader;
+    // this.fileReader = reader;
+    fileReader.addEventListener('load', this.onLoad, false);
+    fileReader.addEventListener('error', this.onError, false);
+    let part = file;
+    const end = 64 * 1024;
+    // Blob.slice
+    // https://developer.mozilla.org/en-US/docs/Web/API/Blob/slice
+    if (typeof file.slice === 'function') {
+      // normal
+      part = file.slice(0, end);
+    } else if (typeof file.webkitSlice === 'function') {
+      // webkit
+      part = file.webkitSlice(0, end);
+    } else if (typeof file.mozSlice === 'function') {
+      // moz(firefox)
+      part = file.mozSlice(0, end);
+    }
+    // else {
+    //   part = file;
+    // }
+    fileReader.readAsArrayBuffer(part);
+  }
 
-    return _instance;
+  /**
+   * reader.readAsArrayBuffer onload event handler
+   * @param {Event} event reader.readAsArrayBuffer onload event
+   */
+  onLoad(event) {
+    this.dispose();
+    const orientation = Exif.parse(event.target.result);
+    this.dispatch({ type: Exif.EXIF_ORIENTATION, orientation: orientation });
+    /*
+    -2: not jpeg
+    -1: not defined
+    */
+  }
+  /**
+   * reader.readAsArrayBuffer onerror event handler
+   * orientation -1(not defined) を返します
+   */
+  onError() {
+    this.dispose();
+    this.dispatch({ type: Exif.EXIF_ORIENTATION, orientation: -1 });
+  }
+  /**
+   * event handler を unbind します
+   */
+  dispose() {
+    const fileReader = this.fileReader;
+    fileReader.removeEventListener('load', this.onLoad);
+    fileReader.removeEventListener('error', this.onError);
   }
 }
 

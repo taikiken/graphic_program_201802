@@ -21,6 +21,9 @@ import { MediaImageNode } from '../../node/single/MediaImageNode';
 import { Safety } from '../../data/Safety';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -71,7 +74,7 @@ export class ComponentSinglesArticleMedia extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateSingle(this.state.single);

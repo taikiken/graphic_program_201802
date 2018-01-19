@@ -11,9 +11,9 @@
  */
 
 
-import {Type} from './types/Type';
-import {Permalink} from './types/Permalink';
-import {Queries} from './types/Queries';
+// import {Type} from './types/Type';
+// import {Permalink} from './types/Permalink';
+// import {Queries} from './types/Queries';
 
 /**
  * API url, path option, query 情報を保持します
@@ -24,95 +24,78 @@ export class Types {
    * @param {Type} type Type instance, url, method を 保持します
    * @param {Permalink} permalink Permalink instance, Types.url へ追加可能なpathがあるかどうかを管理します
    * @param {Queries} queries Queries instance, Query{key: value} を配列で管理します
-   * @param {Boolean} [auth=false] 認証が必要か否かの真偽値
+   * @param {boolean} [auth=false] 認証が必要か否かの真偽値
    */
-  constructor( type:Type, permalink:Permalink, queries:Queries, auth:Boolean = false ) {
+  constructor(type, permalink, queries, auth = false) {
     /**
      * url, method を 保持する Type instance
      * @type {Type}
-     * @protected
      */
-    this._type = type;
+    this.type = type;
     /**
      * Permalink instance, Types.url へ追加可能なpathがあるかどうかを管理します
      * @type {Permalink}
-     * @protected
      */
-    this._permalink = permalink;
+    this.permalink = permalink;
     /**
      * Queries instance, Query{key: value} を配列で管理します
      * @type {Queries}
-     * @protected
      */
-    this._queries = queries;
+    this.queries = queries;
     /**
      * 認証が必要か否かの真偽値
-     * @type {Boolean}
-     * @private
+     * @type {boolean}
      */
-    this._auth = auth;
-
+    this.auth = auth;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
-  /**
-   * Type instance
-   * @return {Type} Type instance を返します
-   */
-  get type():Type {
-
-    return this._type;
-
-  }
+  // /**
+  //  * Type instance
+  //  * @return {Type} Type instance を返します
+  //  */
+  // get type() {
+  //   return this._type;
+  // }
 
   /**
    * Ajax request url
    * @return {string} url を返します
    */
-  get url():string {
-
-    return this._type.url;
-
+  get url() {
+    return this.type.url;
   }
-
   /**
    * request method
    * POST|GET|PUT|DELETE
    * @return {string} method を返します
    */
-  get method():string {
-
-    return this._type.method;
+  get method() {
+    return this.type.method;
   }
 
-  /**
-   * Permalink instance
-   * @return {Permalink} Permalink instance を返します
-   */
-  get permalink():Permalink {
+  // /**
+  //  * Permalink instance
+  //  * @return {Permalink} Permalink instance を返します
+  //  */
+  // get permalink() {
+  //   return this._permalink;
+  // }
 
-    return this._permalink;
+  // /**
+  //  * Queries instance
+  //  * @return {Queries} Queries instance を返します
+  //  */
+  // get queries() {
+  //   return this._queries;
+  // }
 
-  }
-
-  /**
-   * Queries instance
-   * @return {Queries} Queries instance を返します
-   */
-  get queries():Queries {
-
-    return this._queries;
-
-  }
-
-  /**
-   * 認証が必要か否
-   * @return {Boolean} 認証が必要か否かの真偽値を返します。 true: 必要
-   */
-  get auth() {
-
-    return this._auth;
-
-  }
+  // /**
+  //  * 認証が必要か否
+  //  * @return {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
+  //  */
+  // get auth() {
+  //   return this._auth;
+  // }
 }

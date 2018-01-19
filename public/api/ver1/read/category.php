@@ -183,6 +183,15 @@ SQL;
     ];
     $disp_type = ['notice', 'warning', 'img'];
 
+    $domain = "https://" . $_SERVER["HTTP_HOST"];
+    $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
+
+    $platform_prefix_list = [
+      'pc' 			=> '',
+      'sp' 			=> 'sp_',
+      'ios'			=> 'ios_',
+      'android' => 'android_',
+    ];
 
     $f['text'] = isset($f['text']) ? $f['text'] : '';
 

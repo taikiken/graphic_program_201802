@@ -9,163 +9,179 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
-
-let _symbol = Symbol();
+//
+//
+// let _symbol = Symbol();
 
 /**
- * <p>代替画像パス<br>
- * 記事画像、ユーザーアイコンなど未設定時の代替画像パス</p>
- * <p>全て static です</p>
- *
+ * 代替画像パスを取得します
+ * - 記事画像、ユーザーアイコンなど未設定時の代替画像パス
+ * - 全て static です
  */
 export class Empty {
-  /**
-   * 代替画像パス
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Empty is static Class. not use new Empty().' );
-
-    }
-
-  }
+  // /**
+  //  * 代替画像パス
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Empty is static Class. not use new Empty().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  CONST 代わり
   // ---------------------------------------------------
+  // --------------
+  // image
   /**
-   * img thumbnail 代替画像パス
-   * [Ex.] sidebar ranking
+   * img thumbnail 代替画像パス 100x100
+   * - [Ex.] sidebar ranking
    * @return {string} 代替画像パス【sidebar ranking】
    */
-  static get THUMB_EMPTY():string {
+  static get THUMB_EMPTY() {
     return '/assets/images/common/thumb-empty-100x100.png';
   }
   /**
-   * img thumbnail 代替画像パス<br>
-   * [Ex.] headline, sidebar image...
+   * img thumbnail 代替画像パス 70x70
+   * - [Ex.] headline, sidebar image...
    * @return {string} 代替画像パス【小】
    */
-  static get IMG_SMALL():string {
-
+  static get IMG_SMALL() {
     return '/assets/images/common/thumb-noimage-70x70.png';
-
   }
   /**
-   * img middle 代替画像パス<br>
-   * [Ex.] 記事一覧<br>
+   * img middle 代替画像パス - 記事一覧用 - 横長 - 16:9
+   * - [Ex.] 記事一覧
    * @return {string} 代替画像パス【記事一覧】
    */
-  static get IMG_MIDDLE():string {
+  static get IMG_MIDDLE() {
     // return '/assets/images/common/thumb-noimage-340x150.png';
     // @since 2016-09-01
     // https://github.com/undotsushin/undotsushin/issues/1053
     return '/assets/images/common/thumb-noimage-16x9-s.png';
   }
   /**
-   * img large 代替画像パス<br>
-   * [Ex.] スライドショー<br>
+   * img large 代替画像パス
+   * - [Ex.] スライドショー
+   * @deprecated 2017-12-18 instead use {@link Empty.IMG_CAROUSEL}
    * @return {string} 代替画像パス【スライドショー】
    */
-  static get IMG_LARGE():string {
-
+  static get IMG_LARGE() {
     return '/assets/images/common/thumb-pickup-empty.png';
-
   }
   /**
-   * video thumbnail 代替画像パス【16 x 9】<br>
-   * [Ex.] sidebar video...
+   * img large 代替画像パス - 750x320
+   * - [Ex.] スライドショー
+   * @return {string} 代替画像パス【スライドショー】
+   * @since 2017-12-18
+   */
+  static get IMG_CAROUSEL() {
+    // 正規画像に差し替える - 2017-12-22
+    return '/assets/images/common/thumb-750x320.png';
+  }
+  // --------------
+  // video
+  /**
+   * video thumbnail 代替画像パス【16 x 9】
+   * - [Ex.] sidebar video...
    * @return {string} 代替画像パス【16 x 9】
    */
-  static get VIDEO_THUMBNAIL():string {
-
+  static get VIDEO_THUMBNAIL() {
     return '/assets/images/common/thumb-16x9.png';
-
   }
   /**
-   * video play button overlay【16 x 9】<br>
-   * [Ex.] sidebar video...
+   * video play button overlay【16 x 9】
+   * - [Ex.] sidebar video...
    * @return {string} Video Play画像パス【16 x 9】
    */
-  static get VIDEO_PLAY():string {
-
+  static get VIDEO_PLAY() {
     return '/assets/images/common/thumb-16x9-play.png';
-
   }
   /**
-   * video play button overlay【640 x 400】<br>
-   * [Ex.] pickup video...
-   * @return {string} Video Play画像パス【Pickup】【640 x 400】
-   */
-  static get VIDEO_PICKUP_PLAY():string {
-
-    return '/assets/images/common/thumb-640x400-play.png';
-
-  }
-  /**
-   * video play button overlay sidebar small【16 x 9】<br>
-   * [Ex.] sidebar video...
+   * video play button overlay sidebar small【16 x 9】
+   * - [Ex.] sidebar video...
    * @return {string} Video Play画像パス【小】【16 x 9】
    */
-  static get VIDEO_PLAY_SMALL():string {
-
+  static get VIDEO_PLAY_SMALL() {
     return '/assets/images/common/thumb-16x9-play-s.png';
-
   }
   /**
-   * video play button overlay sidebar small【1 x 1】<br>
-   * [Ex.] headline video...
+   * SP: video play button overlay【16 x 9】 - `/assets/sp/images/common/thumb-16x9-play.png`
+   * @return {string} Video Play画像パス【16 x 9】 for SP
+   * @since 2017-12-28
+   */
+  static get VIDEO_PLAY_SP() {
+    return '/assets/sp/images/common/thumb-16x9-play.png';
+  }
+  /**
+   * SP: video play button overlay【16 x 9】 small - `/assets/sp/images/common/thumb-16x9-play-s.png`
+   * @return {string} Video Play画像パス【16 x 9】 for SP
+   * @since 2017-12-28
+   */
+  static get VIDEO_PLAY_SP_SMALL() {
+    return '/assets/sp/images/common/thumb-16x9-play-s.png';
+  }
+  /**
+   * video play button overlay【640 x 400】
+   * - [Ex.] pickup video...
+   * @return {string} Video Play画像パス【Pickup】【640 x 400】
+   */
+  static get VIDEO_PICKUP_PLAY() {
+    // 正規画像に差し替える - update 2017-12-22
+    // return '/assets/images/common/thumb-640x400-play.png';
+    return '/assets/images/common/thumb-750x320-play.png';
+  }
+  /**
+   * video play button overlay sidebar small【1 x 1】
+   * - [Ex.] headline video...
    * @return {string} Video Play画像パス【小】【1x1】
    */
-  static get VIDEO_PLAY_SMALL_1X1():string {
-
+  static get VIDEO_PLAY_SMALL_1X1() {
     return '/assets/images/common/thumb-1x1-play-s.png';
-
   }
+  // --------------
+  // user
   /**
-   * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>
-   * [Ex.] コメントとか
+   * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)
+   * - [Ex.] コメントとか
    * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
    */
-  static get USER_PICTURE():string {
-
+  static get USER_PICTURE() {
     return '/assets/images/common/thumb-user.png';
-
   }
   /**
-   * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)<br>
-   * [Ex.] コメントとか
+   * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)
+   * - [Ex.] コメントとか
    * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
    */
-  static get USER_PICTURE_FEATURE():string {
-
+  static get USER_PICTURE_FEATURE() {
     return '/assets/images/common/thumb-user-feature.png';
-
   }
   /**
-   * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)透明<br>
-   * [Ex.] コメントとか
+   * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)透明
+   * - [Ex.] コメントとか
    * @return {string} 代替透明画像パス ユーザー・プロファイル・アイコン
    */
-  static get USER_EMPTY():string {
+  static get USER_EMPTY() {
     return '/assets/images/common/thumb-user-empty.png';
   }
   /**
    * ユーザー登録 sample avatar
    * @return {string} sample avatar image path
    */
-  static get SETTING_AVATAR():string {
+  static get SETTING_AVATAR() {
     return '/assets/images/setting/thumb-avatar.png';
   }
   /**
    * hero-slider カバーグラデーション画像
    * @return {string} hero-slider カバーグラデーション画像パスを返します
    */
-  static get KV_OVERLAY():string {
+  static get KV_OVERLAY() {
     return '/assets/images/index/kv-overlay.png';
   }
   /**
@@ -173,7 +189,7 @@ export class Empty {
    * @param {string} path 元のパス
    * @returns {string} パスに?Date.now()をつけて返します
    */
-  static refresh( path:string ):string {
+  static refresh(path) {
     return `${path}?${Date.now()}`;
   }
 }

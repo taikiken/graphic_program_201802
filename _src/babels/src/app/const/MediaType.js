@@ -11,27 +11,27 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 /**
- * <p>記事メディアタイプ<br>IMAGE|VIDEO があります</p>
- * 全て static です
+ * 記事メディアタイプ<br>IMAGE|VIDEO があります
+ * - 全て static です
  */
 export class MediaType {
-  /**
-   * 記事メディアタイプ<br>
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'MediaType is static Class. not use new MediaType().' );
-
-    }
-
-  }
+  // /**
+  //  * 記事メディアタイプ<br>
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'MediaType is static Class. not use new MediaType().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  CONST
   // ---------------------------------------------------
@@ -39,14 +39,14 @@ export class MediaType {
    * IMAGE 画像記事
    * @return {string} image を返します
    */
-  static get IMAGE():string {
+  static get IMAGE() {
     return 'image';
   }
   /**
    * VIDEO 動画記事
    * @return {string} video を返します
    */
-  static get VIDEO():string {
+  static get VIDEO() {
     return 'video';
   }
 }

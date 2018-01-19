@@ -6,6 +6,12 @@
 <div id="body-section" class="body-sec">
   <div class="body-sec-inner">
     <?php
+    // since 2017-12-18
+    // お知らせ表示
+    // ref: UNDO_SPBL-150 【課題管理】一面リニューアル / ユーザーへのお知らせ表示
+    ?>
+    <div id="js-announce-container"></div>
+    <?php
     // ----------------------------------------------------
     // 記事一覧: sp theme.images
     if ( $page['theme']['images']['sp'] ) :
@@ -111,6 +117,10 @@
       <div id="js-headline"></div>
       <div id="category-container"></div>
       <div id="board-container-more"></div>
+      <?php
+      // since 2018-01-015 - 一面や一覧系の末広告タグ
+      include_once __DIR__ . '/_ad_below_more.php';
+      ?>
     </section><!-- /.main-sec -->
   </div>
 </div><!-- /.body-sec -->
