@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
 </head>
 <body>
-<div class="whole pyeongchang2018">
+<div class="whole pyeongchang2018" style="min-height: 755px;">
   <?php
   // medals
   include_once __DIR__ . '/../pyeongchang2018/module/_pyeongchang2018_medals.php';
@@ -43,22 +43,5 @@
   </div><!-- /.gallery--photo -->
 </div><!-- /.whole -->
 <script src="/assets/widgets/articles-index/Widget_articles_tag.js?v=<?php echo $page['version']; ?>"></script>
-<script>
-(function(window) {
-  'use strict';
-  function onLoad() {
-    window.removeEventListener('load', onLoad);
-    var webkit = window.webkit || {};
-    var messageHandlers = webkit.messageHandlers || {};
-    var onLoadComplete = messageHandlers.onLoadComplete || {};
-    var postMessage = onLoadComplete.postMessage;
-    // console.log('postMessage', postMessage);
-    if (typeof postMessage === 'function') {
-      window.webkit.messageHandlers.onLoadComplete.postMessage('');
-    }
-  }
-  window.addEventListener('load', onLoad, false);
-}(window));
-</script>
 </body>
 </html>
