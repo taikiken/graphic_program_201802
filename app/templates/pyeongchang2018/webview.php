@@ -43,5 +43,22 @@
   </div><!-- /.gallery--photo -->
 </div><!-- /.whole -->
 <script src="/assets/widgets/articles-index/Widget_articles_tag.js?v=<?php echo $page['version']; ?>"></script>
+<script>
+(function(window) {
+  'use strict';
+  function onLoad() {
+    window.removeEventListener('load', onLoad);
+    var webkit = window.webkit || {};
+    var messageHandlers = webkit.messageHandlers || {};
+    var onLoadComplete = messageHandlers.onLoadComplete || {};
+    var postMessage = onLoadComplete.postMessage;
+    // console.log('postMessage', postMessage);
+    if (typeof postMessage === 'function') {
+      window.webkit.messageHandlers.onLoadComplete.postMessage('');
+    }
+  }
+  window.addEventListener('load', onLoad, false);
+}(window));
+</script>
 </body>
 </html>
