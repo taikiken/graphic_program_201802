@@ -241,6 +241,20 @@
   <h2><img src="../assets/images/fwt/related-heading.png" alt="RELATED">関連記事</h2>
   <ul>
     <li>
+      <a href="/a/254210/">
+        <div class="fwt--related__image-wrap">
+          <img src="https://img.sportsbull.jp/thumbnail1/img2018011917340171469100.jpg" alt="">
+        </div>
+        <div class="fwt--related__text-wrap">
+          <h3>【フォトギャラリー】Freeride World Tour Hakuba, Japan 2018</h3>
+          <?php if ($page['ua'] === 'desktop') : ?>
+          <?php endif; ?>
+          <span class="fwt--related__text-wrap__category">FWT</span>
+          <span class="fwt--related__text-wrap__date">1月19日（金） 17:32</span>
+        </div>
+      </a>
+    </li>
+    <li>
       <a href="/p/252931/">
         <div class="fwt--related__image-wrap">
           <img src="https://img.sportsbull.jp/thumbnail1/img2018011712471473590000.png" alt="">
