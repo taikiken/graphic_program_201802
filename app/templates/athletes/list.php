@@ -479,6 +479,6 @@
     });
 </script>
 <script src="/assets/widgets/articles-index/Widget_articles.js"></script>
-<script id="js-exe" src="/assets/js/crazy_athlete_related.bundle.js?v=<?php echo $page['version']; ?>" data-label="<?= $page['title'] ?>"></script>
+<script id="js-exe" src="/assets/js/related_sidebar_by_dataset.bundle.js?v=<?php echo $page['version']; ?>" data-label="<?= $page['title'] ?>" data-slug="<?= $page['category']['slug'] ?>"></script>
 </body>
 </html>
