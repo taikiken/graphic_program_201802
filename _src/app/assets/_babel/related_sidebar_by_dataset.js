@@ -130,7 +130,8 @@ const recommend = (slug, option = {}) => {
     return;
   }
   // videos
-  const archive = new UT.view.sidebar.ViewRecommend(element, option, slug);
+  // const archive = new UT.view.sidebar.ViewRecommend(element, option, slug);
+  const archive = new UT.view.sidebar.ViewVideos(element, option, slug);
   archive.start();
 };
 
