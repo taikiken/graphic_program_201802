@@ -69,5 +69,26 @@
 <path d="M15.916 7.505c0.007-0.078 0.011-0.168 0.011-0.26 0-1.372-0.925-2.527-2.186-2.877l-0.021-0.005c0.065 0.235 0.102 0.505 0.102 0.784 0 0.086-0.004 0.17-0.010 0.254l0.001-0.011c-0.135 1.538-1.416 2.735-2.977 2.735-0.096 0-0.19-0.005-0.284-0.013l0.012 0.001c-0.19-0.016-0.365-0.049-0.534-0.097l0.019 0.005c0.361 1.273 1.513 2.19 2.88 2.19 1.55 0 2.825-1.181 2.974-2.692l0.001-0.012z"></path>
 <path d="M0.976 31.022c-0.221-0.217-0.358-0.52-0.358-0.854s0.137-0.636 0.358-0.854l22.59-22.573c0.218-0.218 0.52-0.354 0.854-0.354 0.667 0 1.207 0.541 1.207 1.207 0 0.333-0.135 0.635-0.354 0.854v0l-22.59 22.572c-0.217 0.221-0.52 0.358-0.854 0.358s-0.636-0.137-0.854-0.358l-0-0z"></path>
 </symbol>
+<symbol id="icon-tennis" viewBox="0 0 32 32">
+<title>tennis</title>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M9.873 11.543c-0.483 3.739-0.488 9.152-1.315 9.984"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M7.205 26.719l-2.563-1.287"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M21.078 22.038c-3.727 0.555-9.746 0.555-10.617 1.403l-1.365 1.365-2.54-1.287"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M4.243 30.658c-0.555 0.555-1.664 0.366-2.463-0.438s-0.998-1.903-0.438-2.485 1.664-0.366 2.463 0.438 0.998 1.925 0.438 2.485z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M5.331 28.594l-0.815 0.815"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M10.023 11.565c-0.003 0.092-0.005 0.2-0.005 0.309 0 2.795 1.12 5.328 2.935 7.176l-0.001-0.002c3.938 3.938 10.711 3.955 14.877-0.211s4.155-10.944 0.216-14.882c-1.882-1.809-4.443-2.923-7.264-2.923-1.287 0-2.519 0.232-3.658 0.655l0.073-0.024"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M25.937 6.063l-10.877 10.883"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M27.712 8.914l-9.801 9.807"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M27.995 13.263l-5.741 5.735"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M23.086 4.288l-4.055 4.055"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M18.787 9.796l7.222 7.216"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M18.787 5.314l8.62 8.625"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M21.772 3.833l6.401 6.396"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M16.646 12.126l6.285 6.29"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M13.917 13.873l5.303 5.303"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M16.48 6.606c0 2.837-2.3 5.136-5.136 5.136s-5.136-2.3-5.136-5.136c0-2.837 2.3-5.136 5.136-5.136v0c2.835 0.003 5.133 2.301 5.136 5.136v0z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M7.449 3.256c1.657 0.567 2.827 2.111 2.827 3.929 0 0.551-0.107 1.076-0.302 1.557l0.010-0.028"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0468" d="M15.409 3.467c-2.357 1.542-1.72 4.476-1.72 4.476"></path>
+</symbol>
 </defs>
 </svg>
