@@ -57,6 +57,13 @@
         padding-right: perCalc(15, 750);
         font-size: fz(20/2);
         vertical-align: middle;
+
+        .date-year {
+          // for iPhone5, 5S
+          @media screen and (max-width: 320px) {
+            display: none;
+          }
+        }
       }
     } //.medal_list__header
 
