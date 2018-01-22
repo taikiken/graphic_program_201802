@@ -91,7 +91,8 @@
     position: relative;
     width: $global-inner-width;
     margin: 0 auto;
-    background: #fff url(/assets/images/common/bg-bodysec.png) repeat-y center 0;
+    background-color: #fff;
+    // background: #fff url(/assets/images/common/bg-bodysec.png) repeat-y center 0;
   }
 
   .main-sec {
