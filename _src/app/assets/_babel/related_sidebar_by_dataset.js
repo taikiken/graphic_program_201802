@@ -129,9 +129,15 @@ const recommend = (slug, option = {}) => {
   if (!element) {
     return;
   }
+  // - slugの値が”crazy”であれば今まで通りのAPI`https://dev.sportsbull.jp/api/v1/articles/category/crazy/recommend?offset=0&length=5` を使用し、”crazy”以外であれば、今回対応いただいたAPIを使用する処理が良いのかと思います
+  // - CRAZY ATHLETESだけが特別処理となっているようですので、上記のような対応になってしまうとの認識です。
+  // - https://undo-tsushin.slack.com/archives/G8VNV9Z7T/p1516598892000052
   // videos
   // const archive = new UT.view.sidebar.ViewRecommend(element, option, slug);
-  const archive = new UT.view.sidebar.ViewVideos(element, option, slug);
+  // const archive = new UT.view.sidebar.ViewVideos(element, option, slug);
+  const archive = slug === 'crazy' ?
+    new UT.view.sidebar.ViewRecommend(element, option, slug) :
+    new UT.view.sidebar.ViewVideos(element, option, slug);
   archive.start();
 };
 
