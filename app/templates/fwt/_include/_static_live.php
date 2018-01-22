@@ -9,7 +9,7 @@
 </div>
 <div class="fwt-streaming">
   <!-- 動画配信前 -->
-    <img src="/assets/images/fwt/poster-Announce.jpg" alt="2018.01.20 – 27 10:30 ライブ配信">
+    <img src="/assets/images/fwt/poster-Decision.jpg" alt="">
   <!-- 動画配信中
   <div class="fwt-streaming__movie-wrap">
     <iframe src="https://www.youtube.com/embed/VAww1AsbYZA?showinfo=0" frameborder="0" allowfullscreen></iframe>
