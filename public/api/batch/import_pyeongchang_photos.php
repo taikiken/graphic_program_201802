@@ -11,63 +11,19 @@ $dates = [
 ];
 $titles = [];
 $mes = '';
+
+// 接続テスト　廃止
+//$base_url = "http://limret:limret0@tmdatag.kyodonews.jp/06KK579001/GZ_TX4_UTF8/";
+// 1/31まで
+$base_url = "http://sportsbull01:sportsbull01@tmdatag.kyodonews.jp/06KK583001/GZ_TX4_UTF8/";
+// 2/1から　本番アカウント
+//$base_url = "http://sportsbull02:sportsbull02@tmdatag.kyodonews.jp/06KK58302/GZ_TX4_UTF8/";
+
+
+
 foreach($dates as $key => $date) {
 
-  $title = "平昌五輪" . date("Y/m/d", $date);
-  $cnt=1;
-  $o = new db;
-  $o->connect();
-  $format = <<<EOD
-SELECT
-  id,
-  title
-FROM
-  repo_n
-WHERE
-  title = '%s';
-EOD;
-  $sql = sprintf($format, $title);
-  $o->query($sql);
-
-  $f = $o->fetch_array();
-  $title_checker = $f['title'];
-
-  if (!empty($title_checker)) {
-    $article_id = $f['id'];
-  } else {
-    $Y = date('Y', $date);
-    $m = date('m', $date);
-    $d = date('d', $date);
-    $H = date('H', $date);
-    $i = date('i', $date);
-    $s = date('s', $date);
-    $time = date('Y-m-d H:i:s', $date);
-    $format = <<<EOD
-INSERT INTO repo_n(
-  cid,title,m1,m2,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,flag,m_time,u_time,a_time,bodyflag,d1,d2,t10)
-VALUES
-  (1,'%s',165,159,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',1,'%s','%s','%s',169,4,10,'平昌五輪2018フォトギャラリー')
-  RETURNING id;
-EOD;
-
-    $sql = sprintf($format, $title, $Y, $m, $d, $H, $i, $s, $Y, $m, $d, $H, $i, $s, $time, $time, $time);
-    $o->query($sql);
-
-    $f = $o->fetch_array();
-    $article_id = $f['id'];
-
-    $body = "平昌五輪 " . date("Y/m/d", $date) . " のフォトギャラリー";
-
-    $format = "INSERT INTO repo_body(pid,body) VALUES(%s,'%s')";
-    $sql = sprintf($format, $article_id, $body);
-    $o->query($sql);
-  }
-
-  $format = "DELETE FROM photo WHERE nid=%s";
-  $sql = sprintf($format, $article_id);
-  $o->query($sql);
-
-  $url = "http://limret:limret0@tmdatag.kyodonews.jp/06KK579001/GZ_TX4_UTF8/recvfile1";
+  $url = $base_url."recvfile1";
   $result = file_get_contents($url);
   $result = preg_split('/[\s]/', $result);
 
@@ -81,12 +37,69 @@ EOD;
 
     if (preg_match($pattern, $file[1])) {
       preg_match($pickup_img_name, $file[1], $file_name);
+
+      if(empty($article_id)) {
+
+        $title = "平昌五輪" . date("Y/m/d", $date);
+        $cnt = 1;
+        $o = new db;
+        $o->connect();
+        $format = <<<EOD
+SELECT
+  id,
+  title
+FROM
+  repo_n
+WHERE
+  title = '%s';
+EOD;
+        $sql = sprintf($format, $title);
+        $o->query($sql);
+
+        $f = $o->fetch_array();
+        $title_checker = $f['title'];
+
+        if (!empty($title_checker)) {
+          $article_id = $f['id'];
+        } else {
+          $Y = date('Y', $date);
+          $m = date('m', $date);
+          $d = date('d', $date);
+          $H = date('H', $date);
+          $i = date('i', $date);
+          $s = date('s', $date);
+          $time = date('Y-m-d H:i:s', $date);
+          $format = <<<EOD
+INSERT INTO repo_n(
+  cid,title,m1,m2,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,flag,m_time,u_time,a_time,imgflag,bodyflag,d1,d2,t10)
+VALUES
+  (1,'%s',165,159,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',1,'%s','%s','%s',168,169,4,10,'平昌五輪2018フォトギャラリー')
+  RETURNING id;
+EOD;
+
+          $sql = sprintf($format, $title, $Y, $m, $d, $H, $i, $s, $Y, $m, $d, $H, $i, $s, $time, $time, $time);
+          $o->query($sql);
+
+          $f = $o->fetch_array();
+          $article_id = $f['id'];
+
+          $body = "平昌五輪 " . date("Y/m/d", $date) . " のフォトギャラリー";
+
+          $format = "INSERT INTO repo_body(pid,body) VALUES(%s,'%s')";
+          $sql = sprintf($format, $article_id, $body);
+          $o->query($sql);
+        }
+
+        $format = "DELETE FROM photo WHERE nid=%s";
+        $sql = sprintf($format, $article_id);
+        $o->query($sql);
+      }
     } else {
       continue;
     }
     $filename = $file_name[0] . '_BI_JPG_00.jpg';
 
-    $img_url = "http://limret:limret0@tmdatag.kyodonews.jp/06KK579001/GZ_TX4_UTF8/photo/" . $filename;
+    $img_url = $base_url."photo/" . $filename;
 
     if(empty($img1)){
       $img1 = outimg($img_url,1,false);
@@ -254,6 +267,7 @@ EOD;
   $o->query($sql);
   $cnt++;
   }
+  unset($article_id);
 }
 
 if($mes){
