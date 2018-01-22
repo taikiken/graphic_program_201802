@@ -66,7 +66,7 @@ $medal_date = DateTime::createFromFormat('Y-m-d H:i', $decoded->update);
 <div class="medal_list">
   <header class="medal_list__header">
     <h2 class="medal_list__heading">日本 メダル獲得数</h2>
-    <p class="medal_list__date">更新日時：<?php echo $medal_date->format('Y年m月d日 H時i分'); ?></p>
+    <p class="medal_list__date">更新日時：<?php echo $medal_date->format('\<\s\p\a\n\ \c\l\a\s\s\=\"\d\a\t\e\-\y\e\a\r\"\>Y年\<\/\s\p\a\n\>m月d日 H時i分'); ?></p>
   </header><!-- /.medal_list__header -->
 
   <div class="medal_list__medals">
