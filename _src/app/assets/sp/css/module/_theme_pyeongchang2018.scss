@@ -7,6 +7,17 @@
 //
 // Styleguide 2.19.0
 
+.whole.pyeongchang2018-movie,
+.whole.pyeongchang2018-photo {
+  .header-sticky + .body-sec {
+    margin-top: 0;
+  }
+
+  .gnav-sec {
+    display: none;
+  }
+}
+
 .whole.pyeongchang2018 {
   .medal_list {
     padding-bottom: (40/2)+px;
