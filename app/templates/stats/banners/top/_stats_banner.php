@@ -27,7 +27,7 @@ $statsItem = array(
     'path'  => '/sokuhou/', // リンク先
     'icon'  => array(
       'slug'    => 'soccer', // 表示アイコン
-      'is_fill' => false // svgをfillするか
+      'is_fill' => false // svgをfillするか - アイコンによって異なる。「よくわかんないけどアイコン表示されない..」という方はtrueにしてみてください。
     )
   ),
 );
@@ -46,12 +46,23 @@ $statsItem = array(
     )
   ),
 
+  // array(
+  //   'title' => 'サッカー日本代表',
+  //   'label' => 'サッカー<br />日本代表',
+  //   'path'  => '/sokuhou/',
+  //   'icon'  => array(
+  //     'slug'    => 'soccer',
+  //     'is_fill' => false,
+  //     'style'   => '',
+  //   )
+  // ),
+
   array(
-    'title' => 'サッカー日本代表',
-    'label' => 'サッカー<br />日本代表',
-    'path'  => '/sokuhou/',
+    'title' => 'テニス全豪OP',
+    'label' => 'テニス<br />全豪OP',
+    'path'  => '/stats/tennis/',
     'icon'  => array(
-      'slug'    => 'soccer',
+      'slug'    => 'tennis',
       'is_fill' => false,
       'style'   => '',
     )
