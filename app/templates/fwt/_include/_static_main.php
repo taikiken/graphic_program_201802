@@ -60,6 +60,7 @@
 
 </div>
 
+<!--
 <div class="fwt--info">
   <p>現在天候の影響で競技開始が遅延しています。</p>
 </div>
@@ -81,6 +82,7 @@
   </table>
   <p>※ スケジュールは、当日の進行により変更になる可能性があります。</p>
 </section>
+-->
 
 <section class="fwt--about">
   <h2><img src="../assets/images/fwt/about-heading.png" alt="ABOUT">FWTとは</h2>
