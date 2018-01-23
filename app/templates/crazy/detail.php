@@ -140,19 +140,19 @@
                 <!--  メインコンテンツ ---------------------------------------------------------->
                 <div class="player_profile">
                     <div class="img_area">
-                        <div class="img"><img src="/prg_img/img/<?php echo $page['player']->body->img?>" alt=""></div>
+                        <div class="img"><img src="/prg_img/img/<?php echo $page['player']['img']?>" alt=""></div>
                         <div class="name_area">
-                            <h2 class="name"><?php echo $page['player']->body->name?></h2>
-                            <p class="genre"><?php echo $page['player']->body->competition?></p>
+                            <h2 class="name"><?php echo $page['player']['name']?></h2>
+                            <p class="genre"><?php echo $page['player']['competition']?></p>
                         </div>
                     </div>
 
-                    <?php if(false === empty($page['player']->body->description)):?>
-                    <div class="txt_area">
-                        <p class="subttl">PROFILE</p>
-                        <p><?php echo $page['player']->body->description?></p>
-                    </div>
-                    <?php endif;?>
+                  <?php if(false === empty($page['player']['description'])):?>
+                      <div class="txt_area">
+                          <p class="subttl">PROFILE</p>
+                          <p><?php echo $page['player']['description']?></p>
+                      </div>
+                  <?php endif;?>
                 </div>
                 <!-- / player_profile  -->
 
