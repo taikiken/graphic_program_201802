@@ -18,8 +18,8 @@ import { Empty } from '../../../app/const/Empty';
 import { Safety } from '../../../data/Safety';
 
 // component
-import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
-import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
+import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
+import ComponentArticleThumbnail from '../../../component/articles/ComponentArticleThumbnail';
 
 // React
 const React = self.React;
@@ -110,7 +110,7 @@ export class SPComponentSinglesWidgetPopularList extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateList(this.state.list);

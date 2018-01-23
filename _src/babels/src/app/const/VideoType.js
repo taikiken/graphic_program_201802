@@ -11,27 +11,27 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 /**
- * <p>動画タイプ<br>YOUTUBE|FACEBOOK</p>
- * 全て static です
+ * 動画タイプ - YOUTUBE|FACEBOOK
+ * - 全て static です
  */
 export class VideoType {
-  /**
-   * 動画タイプ<br>
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'VideoType is static Class. not use new VideoType().' );
-
-    }
-
-  }
+  // /**
+  //  * 動画タイプ<br>
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'VideoType is static Class. not use new VideoType().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  CONST
   // ---------------------------------------------------
@@ -39,28 +39,28 @@ export class VideoType {
    * BRIGHTCOVE, mp4ファイル
    * @return {string} brightcove を返します
    */
-  static get BRIGHTCOVE():string {
+  static get BRIGHTCOVE() {
     return 'brightcove';
   }
   /**
    * VIDEOJSIMA, mp4ファイル
    * @return {string} videojsima を返します
    */
-  static get VIDEOJSIMA():string {
+  static get VIDEOJSIMA() {
     return 'videojsima';
   }
   /**
    * YOUTUBE, Youtube ID
    * @return {string} youtube を返します
    */
-  static get YOUTUBE():string {
+  static get YOUTUBE() {
     return 'youtube';
   }
   /**
    * FACEBOOK, facebook 動画URL
    * @return {string} facebook を返します
    */
-  static get FACEBOOK():string {
+  static get FACEBOOK() {
     return 'facebook';
   }
 }

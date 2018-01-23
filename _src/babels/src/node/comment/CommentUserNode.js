@@ -21,8 +21,9 @@ let React = self.React;
  * CommentNode
  * |- CommentUserNode
  * </pre>
- *
+ * TODO: future remove
  * @type {ReactClass}
+ * @deprecated 2017-12-07 instead use {@link ComponentCommentUser}
  */
 export let CommentUserNode = React.createClass( {
   propTypes: {
@@ -33,6 +34,8 @@ export let CommentUserNode = React.createClass( {
     displayDate: React.PropTypes.string.isRequired
   },
   render: function() {
+    console.error('[CommentUserNode] deprecated');
+
     return (
       <figure className="comment-user">
         <span className="comment-user-link">

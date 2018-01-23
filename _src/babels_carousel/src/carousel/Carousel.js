@@ -33,17 +33,19 @@ export default class Carousel {
    * @param {number} width スライド幅 - sp / pc 幅違います（固定値）
    * @param {number} length スライド数
    * @param {Element} wrapper div#js-pickup-slider-wrapper - transform target
+   * @param {string} unit 単位
    */
-  constructor(width, length, wrapper) {
+  constructor(width, length, wrapper, unit) {
     if (length === 2) {
       // 2 件の時は4件としてコード運用する - 循環アニメーション実現のため
       length = 4;
     }
     /**
      * 移動量設定値, PC / SP で異なります - 共用するため
-     * - PC: 640(px)
-     * - SP: 280(px)
+     * - PC: 640(px) -> 540px
+     * - SP: 280(px) -> 100vw
      * @type {number}
+     * @since 2018-01-09 update
      */
     this.left = width;
     /**
@@ -116,6 +118,11 @@ export default class Carousel {
      * @type {function}
      */
     this.onResume = this.onResume.bind(this);
+    /**
+     * transform 単位
+     * @type {string}
+     */
+    this.unit = unit;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -365,7 +372,8 @@ export default class Carousel {
       return 'translateX(0)';
     }
     // duplicate | スライド | duplicate, なので left 方向へ負（マイナス）オフセットする
-    return `translateX(${(-this.left * index) - (this.left * this.length)}px)`;
+    return `translateX(${(-this.left * index) - (this.left * this.length)}${this.unit})`;
+    // return `translateX(${(-this.left * index) - (this.left * this.length)}px)`;
   }
   /**
    * CSS transform style を計算します

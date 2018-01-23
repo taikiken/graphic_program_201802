@@ -14,85 +14,84 @@
 import {EventDispatcher} from '../EventDispatcher';
 import {CommentStatus} from '../CommentStatus';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link Good} inner symbol
+ * @type {symbol}
+ */
+const goodSymbol = Symbol('Good symbol');
+/**
+ * {@link Good} singleton instance
+ * @type {?Good}
+ */
+let singletonInstance = null;
 
 /**
  * コメントの good
  */
 export class Good extends EventDispatcher {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
   /**
-   * <h3>Singleton</h3>
+   * instance を生成します
+   * @return {Good} Good instance を返します
+   */
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new Good(goodSymbol);
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
    * コメントの good
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {Good} Good instance
    */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
+  constructor(target) {
+    if (goodSymbol !== target) {
       throw new Error( 'Good is static Class. not use new Good(). instead Good.factory()' );
-
     }
-
-    if ( _instance === null ) {
+    if (singletonInstance === null) {
       super();
-      _instance = this;
+      singletonInstance = this;
     }
-
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * イベント強制発火
-   * <p>page 内に複数の記事詳細が存在するようになるため<br>
-   * 記事IDを識別子として加える</p>
+   * - page 内に複数の記事詳細が存在するようになるため記事IDを識別子として加える
    * @param {string} type コメントタイプ
    * @param {string|Number} commentId コメント Id
    * @param {string} articleId 記事Id
    * @2016-11-05 article ID added
    */
-  fire(type:string, commentId:string, articleId):void {
+  fire(type, commentId, articleId) {
     this.dispatch({ type, commentId, articleId });
   }
   /**
    * good する
-   * <p>page 内に複数の記事詳細が存在するようになるため<br>
-   * 記事IDを識別子として加える</p>
+   * - page 内に複数の記事詳細が存在するようになるため記事IDを識別子として加える</p>
    * @param {string} commentId コメントId
    * @param {string} articleId 記事Id
    * @2016-11-05 article ID added
    */
-  add(commentId:string, articleId):void {
+  add(commentId:string, articleId) {
     this.fire(CommentStatus.GOOD_ADD, commentId, articleId);
   }
   /**
    * good を外す
-   * <p>page 内に複数の記事詳細が存在するようになるため<br>
-   * 記事IDを識別子として加える</p>
+   * - page 内に複数の記事詳細が存在するようになるため記事IDを識別子として加える</p>
    * @param {string} commentId コメントId
    * @param {string} articleId 記事Id
    * @2016-11-05 article ID added
    */
-  remove(commentId:string, articleId):void {
+  remove(commentId, articleId) {
     this.fire(CommentStatus.GOOD_DELETE, commentId, articleId);
-  }
-  // ---------------------------------------------------
-  //  static method
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {Good} Good instance を返します
-   */
-  static factory():Good {
-
-    if ( _instance === null ) {
-
-      _instance = new Good( _symbol );
-
-    }
-
-    return _instance;
   }
 }

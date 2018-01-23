@@ -11,36 +11,36 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 // Sagen
-let Sagen = self.Sagen;
+const Sagen = self.Sagen;
 
 /**
  * <p>メインメニューにカテゴリースラッグを CSS class として追加します</p>
  * <p>メニューのカレント表示に使用しますs</p>
  */
-export class SPNav {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPNav is static Class. not use new SPNav().' );
-
-    }
-  }
+export default class SPNav {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPNav is static Class. not use new SPNav().' );
+  //
+  //   }
+  // }
   /**
    * global menu へ slug を css class として挿入
    * @param {string} slug category slug
    */
-  static start( slug:string = 'all' ):void {
+  static start(slug = 'all') {
     /*
     let nav = Dom.nav();
     if ( nav !== null && slug !== null && typeof slug !== 'undefined' ) {
@@ -49,17 +49,17 @@ export class SPNav {
     }
     */
     // li#slug へ .current をつける
-    let target = Dom.get( slug );
-    if ( target !== null ) {
-      Sagen.Dom.addClass( target, 'current' );
-      SPNav.position( target );
+    const target = Dom.get(slug);
+    if (target !== null ) {
+      Sagen.Dom.addClass(target, 'current');
+      SPNav.position(target);
     }
   }
   /**
    * current 位置をいい感じにする
    * @param {Element} target li element
    */
-  static position( target:Element ):void {
+  static position(target:Element) {
     /*
     コンテナ状況
 
@@ -74,10 +74,10 @@ export class SPNav {
         li#slug
      */
     // gnav-sec-inner
-    let inner = Dom.navInner();
+    const inner = Dom.navInner();
     // ul#gnav-sec-list
-    let ul = Dom.navList();
-    if ( inner === null || ul === null ) {
+    const ul = Dom.navList();
+    if (inner === null || ul === null) {
       // 不正値なので処理しない
       return;
     }
@@ -86,23 +86,23 @@ export class SPNav {
     // 正確なwidthを取得するため
     ul.style.cssText = 'display: table;';
     // offset 取得
-    let ulOffset = UT.util.Offset.offset( ul );
+    const ulOffset = UT.util.Offset.offset(ul);
     // ul 元に戻す
     ul.style.cssText = '';
 
     // ul width
-    let ulWidth = ulOffset.width;
+    const ulWidth = ulOffset.width;
     // li offset
-    let targetOffset = UT.util.Offset.offset( target );
+    const targetOffset = UT.util.Offset.offset(target);
     // window width
-    let windowWidth = window.innerWidth;
+    const windowWidth = window.innerWidth;
 
     // 移動させる距離
-    let left = targetOffset.left;
-    let rightEnd = targetOffset.right;
+    const left = targetOffset.left;
+    const rightEnd = targetOffset.right;
 
     // li全体がwindow 内なら何もしない
-    if ( rightEnd < windowWidth ) {
+    if (rightEnd < windowWidth) {
       // window 内なので何もしない
       return;
     }
@@ -110,10 +110,10 @@ export class SPNav {
     // 左端につかないように調整する
     let altLeft = left - 10;
 
-    let right = ulWidth - altLeft - windowWidth;
+    const right = ulWidth - altLeft - windowWidth;
 
     // window 右端から離れ無いように調整する
-    if ( right < 0 ) {
+    if (right < 0) {
       altLeft = altLeft + right;
       // right = 0;
     }

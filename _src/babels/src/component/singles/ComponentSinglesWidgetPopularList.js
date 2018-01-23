@@ -19,10 +19,13 @@ import { MediaType } from '../../app/const/MediaType';
 import { Safety } from '../../data/Safety';
 
 // component
-import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
-// import { ComponentArticleThumbnail } from '../articles/ComponentArticleThumbnail';
+import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
+// import ComponentArticleThumbnail from '../articles/ComponentArticleThumbnail';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 // ----------------------------------------
 
@@ -97,7 +100,7 @@ export class ComponentSinglesWidgetPopularList extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateList(this.state.list);

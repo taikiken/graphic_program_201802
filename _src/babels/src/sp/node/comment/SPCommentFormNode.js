@@ -10,8 +10,9 @@
  *
  */
 
-import {CommentFormOpenerNode} from '../../../node/comment/form/CommentFormOpenerNode';
+// import {CommentFormOpenerNode} from '../../../node/comment/form/CommentFormOpenerNode';
 import {SPCommentFormElementNode} from './form/SPCommentFormElementNode';
+import ComponentCommentFormOpener from '../../../component/single-comment/form/ComponentCommentFormOpener';
 
 // React
 let React = self.React;
@@ -19,6 +20,8 @@ let React = self.React;
 // wrapper dom + form
 /**
  * comment form を表示するための基点 class
+ * @deprecated 2017-12-25 instead use {@link SPComponentCommentForm}
+ * @TODO future remove
  * @type {ReactClass}
  */
 export let SPCommentFormNode = React.createClass( {
@@ -127,12 +130,19 @@ export let SPCommentFormNode = React.createClass( {
 
       return (
         <div className={commentClass + ' comment-root'}>
+          {/*
           <CommentFormOpenerNode
             uniqueId={this.props.uniqueId}
             independent={this.props.independent}
             staticMessage={staticMessage}
             actionMessage={actionMessage}
             callback={this.openerClick}
+          />
+          */}
+          <ComponentCommentFormOpener
+            uniqueId={this.props.uniqueId}
+            independent={this.props.independent}
+            actionMessage={actionMessage}
           />
           <SPCommentFormElementNode
             uniqueId={this.props.uniqueId}
@@ -164,6 +174,6 @@ export let SPCommentFormNode = React.createClass( {
     // textarea value
     this.setState( { body: event.target.value } );
   },
-  openerClick: function( /* status:string */ ) {
-  }
+  // openerClick: function( /* status:string */ ) {
+  // }
 } );

@@ -11,16 +11,19 @@
  */
 
 // view/comment
-import { ViewCommentForm } from '../../view/comment/ViewCommentForm';
+import ViewCommentForm from '../../view/comment/ViewCommentForm';
 
 // view
-import { ViewComments } from '../../view/ViewComments';
+import ViewComments from '../../view/ViewComments';
 
 // app
 import { User } from '../../app/User';
 import { CommentsType } from '../../app/const/CommentsType';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -68,6 +71,26 @@ export class ComponentSingleComments extends React.Component {
       sign: props.sign,
       index: props.index
     };
+    /**
+     * `div.comment-self-container`
+     * @type {?Element}
+     */
+    this.commentSelf = null;
+    /**
+     * `div.comment-official-container`
+     * @type {?Element}
+     */
+    this.commentOfficial = null;
+    /**
+     * `div.comment-normal-container`
+     * @type {?Element}
+     */
+    this.commentNormal = null;
+    /**
+     * `div.comment-form-container`
+     * @type {?Element}
+     */
+    this.commentForm = null;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -103,7 +126,7 @@ export class ComponentSingleComments extends React.Component {
    * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   mine(info) {
-    const comment = new ViewComments(this.state.single.id, this.refs.commentSelf, CommentsType.SELF);
+    const comment = new ViewComments(this.state.single.id, this.commentSelf, CommentsType.SELF);
     comment.user = info;
     comment.start();
   }
@@ -112,7 +135,7 @@ export class ComponentSingleComments extends React.Component {
    * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   official(info) {
-    const comment = new ViewComments(this.state.single.id, this.refs.commentOfficial, CommentsType.OFFICIAL);
+    const comment = new ViewComments(this.state.single.id, this.commentOfficial, CommentsType.OFFICIAL);
     comment.user = info;
     comment.start();
   }
@@ -121,7 +144,7 @@ export class ComponentSingleComments extends React.Component {
    * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   normal(info) {
-    const comment = new ViewComments(this.state.single.id, this.refs.commentNormal, CommentsType.NORMAL);
+    const comment = new ViewComments(this.state.single.id, this.commentNormal, CommentsType.NORMAL);
     comment.user = info;
     comment.start();
   }
@@ -130,7 +153,7 @@ export class ComponentSingleComments extends React.Component {
    * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   form(info) {
-    const comment = new ViewCommentForm(this.refs.commentForm, this.state.single.id, info.profilePicture);
+    const comment = new ViewCommentForm(this.commentForm, this.state.single.id, info.profilePicture);
     comment.start();
   }
   /**
@@ -147,10 +170,22 @@ export class ComponentSingleComments extends React.Component {
     // ログインユーザーのみ表示します
     return (
       <div className={`comment comment-${this.state.single.id}`}>
-        <div className="comment-self-container" ref="commentSelf" />
-        <div className="comment-official-container" ref="commentOfficial" />
-        <div className="comment-normal-container" ref="commentNormal" />
-        <div className="comment-form-container" ref="commentForm" />
+        <div
+          className="comment-self-container"
+          ref={(element) => (this.commentSelf = element)}
+        />
+        <div
+          className="comment-official-container"
+          ref={(element) => (this.commentOfficial = element)}
+        />
+        <div
+          className="comment-normal-container"
+          ref={(element) => (this.commentNormal = element)}
+        />
+        <div
+          className="comment-form-container"
+          ref={(element) => (this.commentForm = element)}
+        />
       </div>
     );
   }

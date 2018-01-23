@@ -11,28 +11,28 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 /**
- * <p>コメント種類(action)<br>
- * ADD|DELETE|GOOD|BAD があります</p>
- * <p>全て static </p>
+ * コメント種類(action)
+ * - ADD|DELETE|GOOD|BAD があります
+ * - 全て static
  */
 export class ActionType {
-  /**
-   * コメント種類(action)
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'CommentsType is static Class. not use new CommentsType().' );
-
-    }
-
-  }
+  // /**
+  //  * コメント種類(action)
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'CommentsType is static Class. not use new CommentsType().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  CONST
   // ---------------------------------------------------

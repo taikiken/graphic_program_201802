@@ -17,26 +17,68 @@
  * PICKUP - Carousel articles, 記事数無制限変更になったのでリクエスト数を変更する
  * @type {number}
  * @private
+ * @default 9999
  * @since 2017-04-10
  */
-let _pickup = 9999;
+let valuePickup = 9999;
 // 最終データ(last 1)を CM にするために 6件 -> 5件 にする
-let _headline = 5;
-let _ranking = 5;
-let _video = 5;
-let _archive = 16;
+/**
+ * headline 件数
+ * @type {number}
+ * @private
+ * @default 5
+ */
+let valueHeadline = 5;
+/**
+ * sidebar ranking 件数
+ * @type {number}
+ * @private
+ * @default 5
+ */
+let valueRanking = 5;
+/**
+ * sidebar recommend video 件数
+ * @type {number}
+ * @private
+ * @default 5
+ */
+let valueVideo = 5;
+/**
+ * 一覧出力件数
+ * @type {number}
+ * @private
+ * @default 16
+ */
+let valueArchive = 16;
 // データが少ない時用
 // let _archive = 2;
-let _list = 10;
-let _max = 999;
-
-// polling 間隔
-let _interval = 1000 * 60;
+/**
+ * mypage 一覧件数
+ * @type {number}
+ * @private
+ * @default 10
+ */
+let valueList = 10;
+/**
+ * 最大値
+ * @type {number}
+ * @private
+ * @default 999
+ */
+let valueMax = 999;
 
 /**
- * <p>offset length default value<br>
- * Ajax request 時の query, length の default value です</p>
- * <p>全て static です</p>
+ * polling 間隔
+ * @type {number}
+ * @private
+ * @default 1000 * 60 (1m.)
+ */
+let valueInterval = 1000 * 60;
+
+/**
+ * offset length default value
+ * - Ajax request 時の query, length の default value です
+ * - 全て static です
  */
 export class Length {
   // /**
@@ -55,38 +97,38 @@ export class Length {
   /**
    * home pickup
    * @default 5
-   * @return {Number} pickup default 取得数を返します
+   * @return {number} pickup default 取得数を返します
    */
   static get pickup() {
-    return _pickup;
+    return valuePickup;
   }
   /**
    * home pickup, length を設定します
-   * @param {Number} value pickup default 取得数
+   * @param {number} value pickup default 取得数
    */
   static set pickup(value):void {
     if (Number.isInteger(value)) {
-      _pickup = value;
+      valuePickup = value;
     } else {
-      throw new Error( `pickup: integer required. ${value}` );
+      throw new Error(`pickup: integer required. ${value}`);
     }
   }
   // --- headline
   /**
    * home headline
    * @default 5
-   * @return {Number} headline default 取得数を返します
+   * @return {number} headline default 取得数を返します
    */
   static get headline() {
-    return _headline;
+    return valueHeadline;
   }
   /**
    * home headline, length を設定します
-   * @param {Number} value headline default 取得数
+   * @param {number} value headline default 取得数
    */
   static set headline(value) {
     if (Number.isInteger(value)) {
-      _headline = value;
+      valueHeadline = value;
     } else {
       throw new Error(`headline: integer required. ${value}`);
     }
@@ -95,18 +137,18 @@ export class Length {
   /**
    * sidebar ranking
    * @default 5
-   * @return {Number} ranking default 取得数を返します
+   * @return {number} ranking default 取得数を返します
    */
   static get ranking() {
-    return _ranking;
+    return valueRanking;
   }
   /**
    * sidebar ranking, length を設定します
-   * @param {Number} value ranking default 取得数
+   * @param {number} value ranking default 取得数
    */
   static set ranking(value) {
-    if ( Number.isInteger(value) ) {
-      _ranking = value;
+    if (Number.isInteger(value)) {
+      valueRanking = value;
     } else {
       throw new Error(`ranking: integer required. ${value}`);
     }
@@ -126,18 +168,18 @@ export class Length {
   /**
    * sidebar video
    * @default 5
-   * @return {Number} video default 取得数を返します
+   * @return {number} video default 取得数を返します
    */
   static get video() {
-    return _video;
+    return valueVideo;
   }
   /**
    * sidebar video, length を設定します
-   * @param {Number} value video default 取得数
+   * @param {number} value video default 取得数
    */
   static set video(value) {
     if ( Number.isInteger(value)) {
-      _video = value;
+      valueVideo = value;
     } else {
       throw new Error(`video: integer required. ${value}`);
     }
@@ -146,18 +188,18 @@ export class Length {
   /**
    * 記事一覧
    * @default 16
-   * @return {Number} archive default 取得数を返します
+   * @return {number} archive default 取得数を返します
    */
   static get archive() {
-    return _archive;
+    return valueArchive;
   }
   /**
    * 記事一覧, length を設定します
-   * @param {Number} value archive default 取得数
+   * @param {number} value archive default 取得数
    */
   static set archive(value) {
     if (Number.isInteger(value)) {
-      _archive = value;
+      valueArchive = value;
     } else {
       throw new Error(`archive: integer required. ${value}`);
     }
@@ -166,18 +208,18 @@ export class Length {
   /**
    * mypage 一覧
    * @default 10
-   * @return {Number} archive default 取得数を返します
+   * @return {number} archive default 取得数を返します
    */
   static get list() {
-    return _list;
+    return valueList;
   }
   /**
    * mypage 一覧, length を設定します
-   * @param {Number} value archive default 取得数
+   * @param {number} value archive default 取得数
    */
   static set list(value) {
     if (Number.isInteger(value)) {
-      _list = value;
+      valueList = value;
     } else {
       throw new Error(`archive: integer required. ${value}`);
     }
@@ -185,27 +227,27 @@ export class Length {
   // --- max
   /**
    * 最大値
-   * @return {Number} length 最大値を返します
+   * @return {number} length 最大値を返します
    */
   static get max() {
-    return _max;
+    return valueMax;
   }
   // --- interval
   /**
    * polling 間隔(ms)
    * @default 1000 * 60
-   * @return {Number} interval(ms) を返します
+   * @return {number} interval(ms) を返します
    */
   static get interval() {
-    return _interval;
+    return valueInterval;
   }
   /**
    * polling 間隔(ms) を設定します
-   * @param {Number} value interval ms
+   * @param {number} value interval ms
    */
   static set interval(value) {
     if (Number.isInteger(value)) {
-      _interval = value;
+      valueInterval = value;
     } else {
       throw new Error(`interval: integer required. ${value}`);
     }

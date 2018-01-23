@@ -312,6 +312,17 @@ include_once __DIR__."/../_include/_bulls_station_func.php";
 ?>
 
 <?php
+// # パンくずリスト
+// ==============================
+  $BREADCRUMB = array(
+    array(
+      'label' => '番組紹介 - BULL\'S STATION',
+      'path'  => '/bulls-station/'
+    ),
+  );
+?>
+
+<?php
 
 include_once __DIR__."/../../desktop/_footer.php";
 include_once __DIR__."/../../_debug.php";

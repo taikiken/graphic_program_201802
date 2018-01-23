@@ -289,9 +289,9 @@ SQL;
   endif;
 
 
-  if (!empty($category)) {
-    $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
-  }
+  // if (!empty($category)) {
+  //   $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
+  // }
 
   $y["response"]=$categoriesinfo;
 

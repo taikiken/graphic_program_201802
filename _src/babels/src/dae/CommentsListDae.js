@@ -15,24 +15,22 @@ import {CommentsDae} from './comments/CommentsDae';
 import {Safety} from '../data/Safety';
 
 /**
- * <p>コメント一覧表示</p>
- * <p>再帰的に処理する必要があったため少々複雑な処理工程を辿ります</p>
+ * コメント一覧表示,
+ * 再帰的に処理する必要があったため少々複雑な処理工程を辿ります
  *
- * 1. CommentsListDae
- * 1. CommentsDae
- * 1. PopularDae
- * 1. ReplyDae
- * 1. CommentsPopularDae
- *
- * @todo example
+ * - {@link CommentsListDae}
+ * - {@link CommentsDae}
+ * - {@link PopularDae}
+ * - {@link ReplyDae}
+ * - {@link CommentsPopularDae}
  * */
 export class CommentsListDae {
   /**
    * コメント一覧表示 reply 含む
    * @param {Object} response JSON.response
    */
-  constructor( response:Object = {} ) {
-    response = Safety.object( response );
+  constructor(response = {}) {
+    response = Safety.object(response);
     /**
      * JSON.response
      * @type {Object}
@@ -45,7 +43,7 @@ export class CommentsListDae {
      * @type {CommentsDae}
      * @protected
      */
-    this._comments = new CommentsDae( response.comments );
+    this._comments = new CommentsDae(response.comments);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -54,28 +52,28 @@ export class CommentsListDae {
    * JSON.response
    * @return {Object|*} JSON.response を返します
    */
-  get response():Object {
+  get response() {
     return this._response;
   }
   /**
    * 総コメント数
-   * @return {Number} response.count を返します
+   * @return {number} response.count を返します
    */
-  get total():Number {
+  get total() {
     return this.response.count;
   }
   /**
    * alias this.total
-   * @return {Number} response.count を返します
+   * @return {number} response.count を返します
    */
-  get count():Number {
+  get count() {
     return this.total;
   }
   /**
    * response.comments
-   * @return {CommentsDae|*} response.comments を CommentsDae instance に内包し返します
+   * @return {CommentsDae} response.comments を CommentsDae instance に内包し返します
    */
-  get comments():CommentsDae {
+  get comments() {
     return this._comments;
   }
 }

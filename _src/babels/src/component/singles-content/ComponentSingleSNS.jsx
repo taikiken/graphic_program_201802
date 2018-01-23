@@ -11,12 +11,15 @@
  */
 //
 // // view
-// import { View } from '../../view/View';
+// import View from '../../view/View';
 
 // app
 import { MessageSNS } from '../../app/const/MessageSNS';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**

@@ -11,33 +11,32 @@
  */
 
 
-let _symbol = Symbol();
-let _mode = 'production';
+// const _symbol = Symbol();
+let modeValue = 'production';
 
 /**
- * <p>local test / develop / production を管理します</p>
- * <p>全て static<br>
- * 動作モードを設定します</p>
- * <pre>
- * production: 実行モード
- * develop: 開発モード（ローカルからのテスト）
- * test: ローカルテストモード
- * </pre>
+ * local test / develop / production を管理します
+ * - 全て static
+ * - 動作モードを設定します
+ *
+ * - production: 実行モード
+ * - develop: 開発モード（ローカルからのテスト）
+ * - test: ローカルテストモード
  */
-export class Env {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Env is static Class. not use new Env().' );
-
-    }
-
-  }
+export default class Env {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Env is static Class. not use new Env().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
@@ -45,17 +44,15 @@ export class Env {
    * 現在のモード
    * @return {string} 現在のモードを返します
    */
-  static get mode():string {
-
-    return _mode;
-
+  static get mode() {
+    return modeValue;
   }
   /**
    * PRODUCTION
    * @readonly
    * @return {string} 文字列 production を返します
    */
-  static get PRODUCTION():string {
+  static get PRODUCTION() {
     return 'production';
   }
   /**
@@ -63,7 +60,7 @@ export class Env {
    * @readonly
    * @return {string} 文字列 production を返します
    */
-  static get DEVELOP():string {
+  static get DEVELOP() {
     return 'develop';
   }
   /**
@@ -71,7 +68,7 @@ export class Env {
    * @readonly
    * @return {string} 文字列 test を返します
    */
-  static get TEST():string {
+  static get TEST() {
     return 'test';
   }
   /**
@@ -79,7 +76,7 @@ export class Env {
    * @readonly
    * @return {string} 文字列 local を返します
    */
-  static get LOCAL():string {
+  static get LOCAL() {
     return 'local';
   }
 
@@ -89,15 +86,22 @@ export class Env {
    * DEV, dev.undotsushin.com
    * @return {string} 文字列 dev を返します
    */
-  static get DEV():string {
+  static get DEV() {
     return 'dev';
   }
   /**
    * STG, stg.undotsushin.com
    * @return {string} 文字列 stg を返します
    */
-  static get STG():string {
+  static get STG() {
     return 'stg';
+  }
+  /**
+   * process.env.NODE_ENV を取得します
+   * @returns {string} develop / production
+   */
+  static get NODE_ENV() {
+    return '@@nodeEnv';
   }
   // ---------------------------------------------------
   //  METHOD
@@ -105,45 +109,37 @@ export class Env {
   /**
    * ローカルテスト(vagrant)モードにします
    */
-  static local():void {
-
-    _mode = Env.LOCAL;
-
+  static local() {
+    modeValue = Env.LOCAL;
   }
   /**
    * ローカルテストモードにします
    */
-  static test():void {
-
-    _mode = Env.TEST;
-
+  static test() {
+    modeValue = Env.TEST;
   }
   /**
    * 開発モードにします
    */
-  static develop():void {
-
-    _mode = Env.DEVELOP;
-
+  static develop() {
+    modeValue = Env.DEVELOP;
   }
   /**
    * 実行モードにします
    */
-  static production():void {
-
-    _mode = Env.PRODUCTION;
-
+  static production() {
+    modeValue = Env.PRODUCTION;
   }
   /**
    * dev 環境にします
    */
-  static dev():void {
-    _mode = Env.DEV;
+  static dev() {
+    modeValue = Env.DEV;
   }
   /**
    * stg 環境にします
    */
-  static stg():void {
-    _mode = Env.STG;
+  static stg() {
+    modeValue = Env.STG;
   }
 }

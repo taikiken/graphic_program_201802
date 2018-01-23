@@ -14,9 +14,9 @@
 import {Safety} from '../../data/Safety';
 
 /**
- * <p>method / url 2つのpropertyを持ちます</p>
- * method: POST | GET
- * utl: API request先
+ * method / url 2つのpropertyを持ちます
+ * - method: POST | GET
+ * - utl: API request先
  */
 export class Type {
   /**
@@ -24,9 +24,8 @@ export class Type {
    * @param {string} url API request先
    * @param {string} [method=GET] 'GET', 'POST', 'PUT', 'DELETE'...
    */
-  constructor( url:string, method:string = 'GET' ) {
-
-    method = Safety.string( method, 'GET' );
+  constructor(url, method = 'GET') {
+    // method = Safety.string(method, 'GET');
     /**
      * API request先
      * @type {string}
@@ -38,7 +37,8 @@ export class Type {
      * @type {string}
      * @private
      */
-    this._method = method.toUpperCase();
+    this._method = Safety.string(method, 'GET').toUpperCase();
+    // this._method = method.toUpperCase();
 
   }
   // ---------------------------------------------------
@@ -48,60 +48,46 @@ export class Type {
    * API request先
    * @return {string} API request先を返します
    */
-  get url():string {
-
+  get url() {
     return this._url;
-
   }
 
   /**
    * API request先を設定します
    * @param {string} url API request先
    */
-  set url( url:string ):void {
-
+  set url(url) {
     this._url = url;
-
   }
 
   /**
    * method POST|GET|PUT|DELETE
    * @return {string} POST | GET を返します
    */
-  get method():string {
-
+  get method() {
     return this._method;
-
   }
 
   /**
    * 'GET', 'POST', 'PUT', 'DELETE'... を設定します
    * @param {string} method 'GET', 'POST', 'PUT', 'DELETE'...
    */
-  set method( method:string ):void {
-
+  set method(method) {
     let methodUpper = method.toUpperCase();
-
-    if ( !Type.validate( methodUpper ) ) {
-
+    if (!Type.validate(methodUpper)) {
       methodUpper = 'GET';
-
     }
-
     this._method = methodUpper;
-
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * @param {string} method method type
-   * @return {Boolean} method type を検証し真偽値を返します
+   * @return {boolean} method type を検証し真偽値を返します
    */
-  static validate( method:string ):Boolean {
-
-    return [ 'GET', 'POST', 'PUT', 'DELETE' ].indexOf( method ) !== -1;
-
+  static validate(method) {
+    return ['GET', 'POST', 'PUT', 'DELETE'].indexOf(method) !== -1;
   }
 
 }
