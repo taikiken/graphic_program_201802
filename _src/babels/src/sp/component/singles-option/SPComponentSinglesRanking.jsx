@@ -259,7 +259,7 @@ let containers = 0;
  * @constructor
  * @since 2017-09-13
  */
-const CarouselAd = ({ slug, index, length }) => {
+const CarouselAd = ({ slug, index }) => {
   // console.log('CarouselAd', slug, index, length);
   if (slug === 'big6tv') {
     return null;

@@ -18,7 +18,7 @@ import SPComponentSinglesHeadlines from '../../component/singles-option/SPCompon
 
 // dae
 import {ArticleDae} from '../../../dae/ArticleDae';
-import Dom from '../../../app/Dom';
+// import Dom from '../../../app/Dom';
 import { AdDae } from '../../../dae/theme/AdDae';
 
 // React

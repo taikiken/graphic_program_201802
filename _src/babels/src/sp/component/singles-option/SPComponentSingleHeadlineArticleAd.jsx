@@ -77,6 +77,7 @@ export default class SPComponentSingleHeadlineArticleAd extends React.Component 
     if (ad === null) {
       return;
     }
+    // console.log('this.props', this.props);
     this.ad(ad);
   }
   /**
@@ -84,10 +85,15 @@ export default class SPComponentSingleHeadlineArticleAd extends React.Component 
    * @return {?XML} `div.board-item.sponsor-link`
    */
   render() {
-    return (
-      <div className="board-item sponsor-link">
-        <div ref={(element) => (this.sponsorLink = element)} />
-      </div>
-    );
+    const { ad } = this.props;
+    if (ad === null) {
+      return null;
+    } else {
+      return (
+        <div className="board-item sponsor-link">
+          <div ref={(element) => (this.sponsorLink = element)} />
+        </div>
+      );
+    }
   }
 }

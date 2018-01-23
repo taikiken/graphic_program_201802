@@ -172,8 +172,10 @@ export default class SPComponentSingleNews extends React.Component {
     if (length === 0) {
       return null;
     }
-    const { home, adSp } = this.props;
-    const adId = adSp.ad ? adSp.ad.sp : adSp;
+
+    const { home } = this.props;
+    // const { home, adSp } = this.props;
+    // const adId = adSp.ad ? adSp.ad.sp : adSp;
 
     return(
       <div className="latest">
@@ -207,7 +209,7 @@ export default class SPComponentSingleNews extends React.Component {
                */
 
               // デザイン変更での広告表示のテスト用
-              const AdAddIndex = ((i + 1) % 3 === 0 && i <= 11)? 54993 + (i + 1) / 3 - 1 : null;
+              const AdAddIndex = ( ( i + 1 ) % 3 === 0 && i <= 11 ) ? String(54993 + ( i + 1 ) / 3 - 1) : null;
 
               return (
                 <div key={`latest-${dae.id}`} className="latest-line">

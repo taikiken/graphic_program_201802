@@ -167,7 +167,13 @@ export default class SPComponentSinglesHeadlines extends React.Component {
               list.map((dae, i) => {
                 // const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
                 const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.THUMB_EMPTY);
-                const adID = (i === 0)? 35245 : (i === 3)? 42707 : null;
+                // const adID = ( i === 0 ) ? 35245 : ( i === 3 ) ? 42707 : null;
+                let adID = null;
+                if( i === 0 ) {
+                  adID = 35245;
+                } else if( i === 3 ) {
+                  adID = 42707;
+                }
                 if(i < 5) {
                   return (
                     <div className="headline__wrapper">
@@ -191,6 +197,8 @@ export default class SPComponentSinglesHeadlines extends React.Component {
                       />
                     </div>
                   );
+                } else {
+                  return null;
                 }
               })
             }
