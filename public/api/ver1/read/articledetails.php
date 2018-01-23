@@ -141,11 +141,21 @@ AND
 		notice_id = notices.id
 ORDER BY
 		categories_notices.created_at DESC
-LIMIT 1
 SQL;
 
   $o->query($sql);
-  $f = $o->fetch_array();
+  $notice_list = $o->fetch_all();
+
+  // お知らせ登録順(CMS上、上のもの優先)にループまわして、該当があれば そちらを採用して以降ループをbreak
+  // -- 記事詳細では最新のお知らせ順から「詳細表示なし」であれば他のお知らせに該当カテゴリ「詳細表示あり」がないかあたる
+  foreach ($notice_list as $notice)
+  {
+    if ($notice['is_hide_detail'] != 1)
+    {
+      $f = $notice;
+      break;
+    }
+  }
 
 // デフォルトのお知らせ取得
   if (empty($f))
@@ -201,31 +211,15 @@ SQL;
       $img[$key] = isset($f[$prefix . 'img']) ? $cf . $f[$prefix . 'img'] : '';
       $link[$key] = isset($f[$prefix . 'link']) ? $f[$prefix . 'link'] : '';
 
-
-      // 詳細非表示フラグ
-      if ($f['is_hide_detail'] == 1)
-      {
-        $information_list[$key] = [
-          'type'             => '',
-          'text'             => '',
-          'text_color'       => '',
-          'background_color' => '',
-          'icon'             => '',
-          'img'              => '',
-          'link'             => '',
-        ];
-      }
-      else{
-        $information_list[$key] = [
-          'type'             => $disp_type[$type],
-          'text'             => $f['text'],
-          'text_color'       => $text_color[$type],
-          'background_color' => $background_color[$type],
-          'icon'             => $icon[$type],
-          'img'              => $img[$key],
-          'link'             => $link[$key],
-        ];
-      }
+      $information_list[$key] = [
+        'type'             => $disp_type[$type],
+        'text'             => $f['text'],
+        'text_color'       => $text_color[$type],
+        'background_color' => $background_color[$type],
+        'icon'             => $icon[$type],
+        'img'              => $img[$key],
+        'link'             => $link[$key],
+      ];
     }
 
   }
