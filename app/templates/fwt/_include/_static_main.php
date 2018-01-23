@@ -60,6 +60,28 @@
 
 </div>
 
+<div class="fwt--info">
+  <p>現在天候の影響で競技開始が遅延しています。</p>
+</div>
+
+<section class="fwt--timetable">
+  <table>
+    <tbody>
+      <tr>
+        <th>8:15</th>
+        <td>競技開始
+          <div>スノーボード男子→スキー男子→スノーボード女子→スキー女子</div>
+        </td>
+      </tr>
+      <tr>
+        <th>11:30</th>
+        <td>競技終了予定</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>※ スケジュールは、当日の進行により変更になる可能性があります。</p>
+</section>
+
 <section class="fwt--about">
   <h2><img src="../assets/images/fwt/about-heading.png" alt="ABOUT">FWTとは</h2>
   <p>
