@@ -24,8 +24,10 @@
   }
 }
 
-.whole.pyeongchang2018-movie,
-.whole.pyeongchang2018-photo {
+.undotsushin-ios .whole.pyeongchang2018-movie,
+.undotsushin-android .whole.pyeongchang2018-movie,
+.undotsushin-ios .whole.pyeongchang2018-photo,
+.undotsushin-android .whole.pyeongchang2018-photo {
   .header-sticky + .body-sec {
     margin-top: 0;
   }
