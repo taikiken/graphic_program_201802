@@ -95,6 +95,16 @@ export default class Single {
       single.start();
     }
 
+    // ---------------------------------------------------------
+    // headline
+    const headlineElement = Dom.headline();
+    console.log('headlineElement', headlineElement);
+    if (headlineElement !== null) {
+      const headline = new UT.view.home.ViewHeadline(headlineElement);
+      headline.home = true;
+      headline.start();
+    }
+
   }
   /**
    * header View.BEFORE_RENDER event handler

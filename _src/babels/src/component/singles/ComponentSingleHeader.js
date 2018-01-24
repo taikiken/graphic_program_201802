@@ -17,7 +17,10 @@ import View from '../../view/View';
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 
 // component
-import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
+// import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
+
+// ga
+import { Ga } from '../../ga/Ga';
 
 // React
 /**
@@ -103,29 +106,80 @@ export class ComponentSingleHeader extends React.Component {
     this.setState({ single, sign });
   }
   /**
+   * 記事提供元ロゴクリック event handler, ga 送信
+   */
+  logoClick() {
+    const link = this.state.single.user.logo.link;
+    Ga.click('provider-logo', 'provider_link', 'click', link, true);
+  }
+  /**
+   * 記事提供元ロゴ表示
+   * @param {LogoDae} logo 記事提供元情報
+   * @return {?XML} 画像がある時のみタグを返します
+   */
+  logo(logo) {
+    const img = logo.img;
+    // ロゴがなかったら表示しない
+    if (!img) {
+      return null;
+    }
+    const link = logo.link;
+    if (!link) {
+      // リンク(url)がなかったらロゴだけ表示
+      return (
+        <i className="provider-logo">
+          <img src={img} alt=""/>
+        </i>
+      );
+    }
+    // リンク付き出力
+    // クリックで ga 送信するので `onClick` を仕込みます
+    return (
+      <a href={link} target="_blank" onClick={this.boundLogo}>
+        <i className="provider-logo">
+          <img src={img} alt=""/>
+        </i>
+      </a>
+    );
+  }
+  /**
    * 記事詳細上部 `header` を出力します
    * @return {XML} 記事詳細上部 `header` を返します
    * */
   render() {
     const single = this.state.single;
     // console.log('ComponentSingleHeader.render', single);
+    const user = single.user;
+    // @type {string}
+    const userName = user.userName;
+    // @type {LogoDae}
+    const logo = user.logo;
+    // 提供元名称とロゴがなかったら表示しない
+    if (!userName && !logo.img) {
+      return null;
+    }
     return (
       <div className="single-header-root">
         <div className={`post-heading post-heading-${single.id}`}>
           <h1>{single.title}</h1>
         </div>
-        <ComponentCategoryLabelsLink
+        {/* <ComponentCategoryLabelsLink
           index={0}
           id={`single-label-${single.id}`}
           categories={single.categories.all}
           className="category-heading"
           anotherCategories={single.anotherCategories}
-        />
+        /> */}
         <div className="post-data">
-          <div className="f-left">
+          {/* <div className="f-left">
             <p className="post-author">{single.user.userName}</p>
             <p className="post-date">{single.displayDate}</p>
-          </div>
+          </div> */}
+          <p className="post-text">
+            <span className="post-date">{single.displayDate}</span>
+            <span className="post-category">{single.categories.label}</span>
+          </p>
+          <p className="post-logo">{this.logo(logo)}</p>
           {/* div.f-right (bookmark: on / off) */}
           <BookmarkNode
             sign={this.state.sign}

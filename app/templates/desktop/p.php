@@ -29,13 +29,8 @@
 
           <div class="post-sns">
             <ul class="post-sns-list">
-              <li class="post-sns-item post-sns-item_fbgood">
-                <div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-              </li>
               <?php
-
               // PC版はjsで行うのでTwitter textをencodeしない = 「/」対策
-
               ?>
               <li class="post-sns-item post-sns-item_fb">
                 <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">facebook</a>
@@ -45,22 +40,12 @@
                   <span>ツイート</span>
                 </a>
               </li>
-              <li class="post-sns-item post-sns-item_gt">
-                <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a>
-              </li>
               <li class="post-sns-item post-sns-item_line">
-                <div class="line-it-button" style="display: none;" data-type="share-d" data-lang="ja"></div><script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async"　defer="defer"></script>
+                <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                  <span>LINEへ送る</span>
+                </a>
               </li>
             </ul>
-
-            <div class="post-sns-pr">
-              <dl class="post-sns-pr-inner">
-                <dt><img src="/assets/images/detail/post-sns-lead.png" alt="SPORTS BULLをいいねして最新ニュースをチェック！"></dt>
-                <dd>
-                  <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-                </dd>
-              </dl><!-- /.post-sns-pr-inner -->
-            </div><!-- /.post-sns-pr -->
           </div><!-- /.post-sns -->
 
 
@@ -141,57 +126,10 @@
           ?>
           </div><!-- /.post-content -->
 
-          <?php
-          // ----------------------------------------------------
-          // 記事詳細: pc 媒体ロゴ
-          if ( !empty( $page['post'] ) && !empty( $page['post']['user'] ) ) :
-
-            $is_post_usr_logo = !empty( $page['post']['user']['logo'] );
-
-            $post_user_logo_link = '';
-            if ( $is_post_usr_logo && !empty( $page['post']['user']['logo']['link'] ) ) {
-              $post_user_logo_link = $page['post']['user']['logo']['link'];
-            }
-            ?>
-            <div class="provider mt30">
-              <?php
-              // user.logo.image
-              if ( $is_post_usr_logo && !empty( $page['post']['user']['logo']['img'] ) ) :
-                if ( empty($post_user_logo_link) ) :
-                  // link が存在しないので画像だけ表示します ?>
-                  <i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i>
-                <?php else: // link + image を表示 ?>
-                  <a href="<?php echo $post_user_logo_link; ?>" target="_blank" onclick="UT.Ga.click('provider-logo', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>', true);"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
-                <?php endif; ?>
-              <?php endif; //----[image] ?>
-              <div class="provider-data">
-                <?php
-                // user.name
-                if ( !empty($page['post']['user']['name']) ) : ?>
-                  <p class="provider-name"><?php echo $page['post']['user']['name']; ?></p>
-                <?php endif; //----[name]
-
-                // user.logo.link
-                // link が存在する時のみ表示します
-                if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) : ?>
-                  <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank" onclick="UT.Ga.click('provider-url', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>', true);">ウェブサイト</a></p>
-                <?php endif; //----[link] ?>
-              </div>
-            </div><!-- /.provider -->
-          <?php endif;
-          // eof: 記事詳細: pc 媒体ロゴ
-          // ---------------------------------------------------- ?>
-          <div id="single-footer-container"></div>
-
           <div class="post-sns">
             <ul class="post-sns-list">
-              <li class="post-sns-item post-sns-item_fbgood">
-                <div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-              </li>
               <?php
-
               // PC版はjsで行うのでTwitter textをencodeしない = 「/」対策
-
               ?>
               <li class="post-sns-item post-sns-item_fb">
                 <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">facebook</a>
@@ -201,24 +139,54 @@
                   <span>ツイート</span>
                 </a>
               </li>
-              <li class="post-sns-item post-sns-item_gt">
-                <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a>
-              </li>
               <li class="post-sns-item post-sns-item_line">
-                <div class="line-it-button" style="display: none;" data-type="share-d" data-lang="ja"></div>
+                <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                  <span>LINEへ送る</span>
+                </a>
               </li>
             </ul>
-
-            <div class="post-sns-pr">
-              <dl class="post-sns-pr-inner">
-                <dt><img src="/assets/images/detail/post-sns-lead.png" alt="SPORTS BULLSPORTS BULLをいいねして最新ニュースをチェック！"></dt>
-                <dd>
-                  <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-                </dd>
-              </dl><!-- /.post-sns-pr-inner -->
-            </div><!-- /.post-sns-pr -->
           </div><!-- /.post-sns -->
 
+          <div class="post-sns-pr">
+            <dl class="post-sns-pr-inner">
+              <dt><img src="/assets/images/detail/post-sns-lead.png" alt="SPORTS BULLSPORTS BULLをいいねして最新ニュースをチェック！"></dt>
+              <dd>
+                <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+              </dd>
+            </dl><!-- /.post-sns-pr-inner -->
+            <div class="link-sns">
+              <ul>
+                <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
+                <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
+                <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
+                <li class="sns-ig"><a href="https://www.imgrum.one/sportsbull_official" target="_blank">instagram</a></li>
+              </ul>
+            </div>
+          </div><!-- /.post-sns-pr -->
+
+          <div class="external-link">
+              <div class="external-link-heading">
+                <h2>外部リンク</h2>
+                <p class="provider-name">Full-Count</p>
+              </div>
+              <ul>
+                <li><a href="#hoge">関連リンクが入ります</a></li>
+                <li><a href="#hoge">関連リンクが入ります関連リンクが入ります</a></li>
+                <li><a href="#hoge">関連リンクが入ります関連リンクが入ります関連リンクが入ります関連リンクが入ります関連リンクが入ります関連リンクが入ります関連リンクが入ります</a></li>
+                <li><a href="#hoge">関連リンクが入ります関連リンクが入ります関連リンクが入ります</a></li>
+                <li><a href="#hoge">関連リンクが入ります</a></li>
+              </ul>
+            </div>
+
+
+          <div id="single-footer-container"></div>
+
+          <!-- <div class="headline">
+            <div class="headline-outer">
+              <div id="headline-container"></div>
+            </div>
+          </div> -->
+          <div id="js-headline"></div>
 
           <?php
           /*
@@ -284,19 +252,24 @@
           // ------------------------------------ ?>
 
         </div><!-- /.post-detail -->
+
         <div class="comment">
-
           <div id="comment-self-container"></div>
-
           <div id="comment-official-container"></div>
-
           <div id="comment-normal-container"></div>
-
           <div id="comment-form-container"></div>
-
         </div><!-- /.comment -->
       </div><!-- /.current-post-->
 
+
+
+
+      <?php
+      /*
+       @since 2018-01-23 無限スクロール廃止のために以下削除します
+      */
+      if (0):
+      ?>
       <?php
       /*
       @since 2016-09-28
@@ -308,13 +281,6 @@
         <div id="js-singles-container"></div>
         <div id="js-singles-more"></div>
       </div>
-
-      <?php
-      /*
-       @since 2016-09-39 記事詳細の次の記事のために以下削除します
-      */
-      if (0):
-      ?>
       <!-- #310 popin ebmed code  -->
       <?php if ( $page['category']['label'] ) : ?>
       <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>

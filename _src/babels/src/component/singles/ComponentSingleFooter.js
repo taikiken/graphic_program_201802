@@ -119,7 +119,7 @@ export class ComponentSingleFooter extends React.Component {
         {component}
         {/* TAGS */}
         <div className="post-tags">
-          <h2 className="post-tags-heading">{Message.TAGS_TITLE}</h2>
+          <h2 className="post-tags-heading">タグ</h2>
           <ul className="post-tags-list">
             {
               keywords.keywords.map((keyword, i) => {
