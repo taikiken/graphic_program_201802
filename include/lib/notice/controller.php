@@ -51,7 +51,7 @@ VALUES(
         {$sv['android_link']},
         NOW(),
         NOW(),
-        {$sv['is_hide_detail']},
+        {$sv['is_hide_detail']}
         )
 RETURNING id;
 SQL;
