@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/03/09 - 22:03
+ * @date 2016/03/10 - 14:21
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -10,81 +10,67 @@
  *
  */
 
-// parent
-import ViewHeadline from '../../../view/home/ViewHeadline';
+// sp/view
+import SPViewArchiveInfinite from '../SPViewArchiveInfinite';
 
-// view
-import SPComponentSinglesHeadlines from '../../component/singles-option/SPComponentSinglesHeadlines';
+// action
+import {Category} from '../../../action/archive/Category';
+import {CategoryAuth} from '../../../action/archive/CategoryAuth';
 
-// dae
-import {ArticleDae} from '../../../dae/ArticleDae';
-// import Dom from '../../../app/Dom';
-import { AdDae } from '../../../dae/theme/AdDae';
+// app
+import {User} from '../../../app/User';
 
-// React
-/* eslint-disable no-unused-vars */
-/**
- * [library] - React
- */
-const React = self.React;
-/* eslint-enable no-unused-vars */
-/**
- * [library] - ReactDOM
- */
-const ReactDOM = self.ReactDOM;
+// @since 2016-09-20
+import SPViewCategoryOption from '../categories/SPViewCategoryOption';
 
 /**
- * SP home headline
+ * <p>SP 記事一覧・カテゴリータブデータをリクエストし取得します</p>
+ * SPViewCategoryRoot > CategoryRootDom から call されます
+ * **update: 2016-0912**
+ *
+ * - タブが廃止
+ * - 新着記事のみ
+ * - PICKUP, HEADLINE 追加
+ *
+ * 次のように変更します
+ *
+ * - exe から直接実行
+ * - headline, pickup 取得機能実装
+ *
+ * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
+ * @see https://github.com/undotsushin/undotsushin/issues/1010
+ * @see https://github.com/undotsushin/undotsushin/issues/1095
  */
-export default class SPViewSinglesHeadLine extends ViewHeadline {
+export default class SPViewSinglesHeadLine extends SPViewArchiveInfinite {
+// export class SPViewCategory extends SPViewArchive {
+// @since 2016-09-16 parent class changed
   /**
-   * SP home headline
-   * @param {Element} element コンテンツ基点Element
-   * @param {Object} [option={}] callback 関数をセット
-   * @param {AdDae} [ad=null] headline - home `all` AdDae
+   * SP category 一覧
+   * @param {string} slug category slug
+   * @param {Element} element root element, Ajax result を配置する
+   * @param {Element} moreElement more button root element, 'View More' を配置する
+   * @param {Object} [option={}] optional event handler
    */
-  constructor(element, option = {}, ad = null) {
-    // since 2018-01-11
-    // 第三引数 sp - true 追加
-    super(element, option, true);
+  constructor(slug, element, moreElement, option = {}) {
+    super(element, moreElement, null, option);
     /**
-     * bind executeSafely
-     * @type {function}
+     * Action instance を設定します
+     * - @since 2017-12-18 初回表示件数は仮で12件とする(表示みて調整) ref: UNDO_SPBL-282 【Web】一面のリニューアル / Web - Mobile対応
+     * @override
+     * @type {CategoryAuth|Category}
      */
-    this.boundSafely = this.executeSafely.bind(this);
-    this.ad = ad || new AdDae({});
+    this.action = User.sign ?
+      new CategoryAuth(slug, '', this.done.bind(this), this.fail.bind(this), 0, 12) :
+      new Category(slug, '', this.done.bind(this), this.fail.bind(this), 0, 12);
+    /**
+     * category slug, ga に使う
+     * @override
+     * @type {CategoryAuth|Category}
+     */
+    this.slug = slug;
+    // @since 2016-09-20
+    // 記事一覧に pickup, headline を表示させる
+    const categoryOption = new SPViewCategoryOption(slug);
+    categoryOption.start();
   }
-  /**
-   * dom を render します
-   * @param {Array} articles JSON responce.articles
-   */
-  render(articles) {
-    // @since 2016-09-16
-    // headline output changed
-    const list = articles.map((article) => new ArticleDae(article));
-    // -------------------------------
-    // since 2017-12-18
-    // `#js-headline-last-container` 取得
-    // const lastElement = Dom.headlineLast();
-    // element 存在するときは `list` 配列最後を取り出し表示に使用する
-    // const last = lastElement ? list.pop() : null;
-    // if (last) {
-    //   ReactDOM.render(
-    //     <SPComponentHeadlineArticleLast
-    //       dae={last}
-    //       index={list.length + 1}
-    //     />,
-    //     lastElement,
-    //   );
-    // }
-    // -------------------------------
-    ReactDOM.render(
-      <SPComponentSinglesHeadlines
-        list={list}
-        callback={this.boundSafely}
-        ad={this.ad}
-      />,
-      this.element,
-    );
-  }// render
 }

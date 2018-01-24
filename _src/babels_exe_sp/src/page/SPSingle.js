@@ -135,7 +135,7 @@ export default class SPSingle {
     // SPSingle.optionHeadline(slug);
     // -----------------------
     SPSingle.optionNews(slug);
-    SPSingle.optionHeadline();
+    // SPSingle.optionHeadline();
     SPSingle.optionBodyAction();
   }
   // /**
@@ -276,14 +276,14 @@ export default class SPSingle {
    * @param {string} slug category.slug
    * @since 2018-01-16
    */
-  static optionHeadline() {
-    // console.log('SPSingle.optionHeadline');
-    const headlineElement = Dom.headline();
-    if (headlineElement) {
-      const headline = new UT.sp.view.singles.SPViewSinglesHeadline(headlineElement);
-      headline.start();
-    }
-  }
+  // static optionHeadline() {
+  //   // console.log('SPSingle.optionHeadline');
+  //   const headlineElement = Dom.headline();
+  //   if (headlineElement) {
+  //     const headline = new UT.sp.view.singles.SPViewSinglesHeadline(headlineElement);
+  //     headline.start();
+  //   }
+  // }
 
   static optionBodyAction() {
     // console.log('SPSingle.optionReadmore');

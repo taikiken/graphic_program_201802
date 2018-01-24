@@ -54,6 +54,7 @@ import ViewHeaderSearch from './view/header/ViewHeaderSearch';
 
 import ViewCategory from './view/ViewCategory';
 import ViewSingle from './view/ViewSingle';
+
 // import {ViewTitle} from './view/ViewTitle';
 import ViewSearch from './view/ViewSearch';
 import ViewCommentSingle from './view/ViewCommentSingle';
@@ -63,6 +64,7 @@ import ViewAnnounce from './view/ViewAnnounce';
 // single
 import ViewSingleTitle from './view/single/ViewSingleTitle';
 import ViewSingleVisual from './view/single/ViewSingleVisual';
+import ViewSingleHeadline from './view/single/ViewSingleHeadline';
 
 // comment
 import ViewComments from './view/ViewComments';
@@ -348,7 +350,8 @@ const UT = {
     },
     single: {
       ViewSingleTitle,
-      ViewSingleVisual
+      ViewSingleVisual,
+      ViewSingleHeadline
     },
     header: {
       ViewHeaderUser,

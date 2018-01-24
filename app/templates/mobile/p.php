@@ -236,8 +236,8 @@
       // ------------------------------------
       // TODO: ヘッドライン
       ?>
-      <div id="headline-container"></div>
-      <!-- <div id="js-headline"></div> -->
+      <!-- <div id="headline-container"></div> -->
+      <div id="js-headline"></div>
 
       <?php
       // ------------------------------------

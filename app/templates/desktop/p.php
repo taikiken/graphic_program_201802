@@ -250,7 +250,9 @@
           endif;
           // eof: single bottom
           // ------------------------------------ ?>
-
+          <div class="board-large">
+            <div id="board-container"></div><!--/archive-->
+          </div><!-- /.board-large -->
         </div><!-- /.post-detail -->
 
         <div class="comment">

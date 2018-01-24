@@ -54,7 +54,7 @@ export default class Single {
    * @param {number} articleId 記事 Id (:article_id)
    */
   static start(articleId) {
-
+    const slug = SPBL_ENV.category;
     // header
     // header.user
     const profileElement = Dom.profile();
@@ -97,13 +97,29 @@ export default class Single {
 
     // ---------------------------------------------------------
     // headline
-    const headlineElement = Dom.headline();
-    console.log('headlineElement', headlineElement);
-    if (headlineElement !== null) {
-      const headline = new UT.view.home.ViewHeadline(headlineElement);
-      headline.home = true;
-      headline.start();
+    // const headlineElement = Dom.headlineParent();
+    // const archiveElement = Dom.board();
+    // if (headlineElement !== null) {
+    //   const headline = new UT.view.single.ViewSingleHeadline(slug, archiveElement, null);
+    // }
+
+
+    const archiveElement = Dom.board();
+    if (archiveElement !== null) {
+      const archive = new UT.view.single.ViewSingleHeadline(slug, archiveElement, null);
+      archive.start();
     }
+
+    // ---------------------------------------------------------
+    // news
+    // const boardElement = Dom.board();
+    // // const moreElement = Dom.boardMore();
+    // if (boardElement !== null) {
+    //   console.log('boardElement', slug);
+    //   const archive = new UT.view.home.ViewNews(slug, boardElement, null);
+    //   // archive.home = true;
+    //   archive.start();
+    // }
 
   }
   /**
