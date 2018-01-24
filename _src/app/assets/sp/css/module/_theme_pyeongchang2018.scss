@@ -7,6 +7,23 @@
 //
 // Styleguide 2.19.0
 
+.pyeongchang2018-webview {
+  @media screen and (min-width:320px) {
+    // for iphone5
+    min-height: 710px;
+  }
+
+  @media screen and (min-width:321px) and ( max-width:375px) {
+    // for iphone7
+    min-height: 752px;
+  }
+
+  @media screen and (min-width:376px) {
+    // for iphone7 plus
+    min-height: 784px;
+  }
+}
+
 .whole.pyeongchang2018-movie,
 .whole.pyeongchang2018-photo {
   .header-sticky + .body-sec {

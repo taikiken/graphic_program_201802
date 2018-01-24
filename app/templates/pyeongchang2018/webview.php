@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
 </head>
 <body>
-<div class="whole pyeongchang2018" style="min-height: 755px;">
+<div class="whole pyeongchang2018 pyeongchang2018-webview">
   <?php
   // medals
   include_once __DIR__ . '/../pyeongchang2018/module/_pyeongchang2018_medals.php';
