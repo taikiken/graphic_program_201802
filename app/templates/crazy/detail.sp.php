@@ -11,7 +11,7 @@
 
     <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
     <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
-    <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
+    <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
 
     <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
     <meta name="description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
