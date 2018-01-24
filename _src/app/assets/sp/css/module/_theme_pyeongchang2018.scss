@@ -7,23 +7,6 @@
 //
 // Styleguide 2.19.0
 
-.pyeongchang2018-webview {
-  @media screen and (min-width:320px) {
-    // for iphone5
-    height: 710px;
-  }
-
-  @media screen and (min-width:321px) and ( max-width:375px) {
-    // for iphone7
-    height: 752px;
-  }
-
-  @media screen and (min-width:376px) {
-    // for iphone7 plus
-    height: 784px;
-  }
-}
-
 .undotsushin-ios .whole.pyeongchang2018-movie,
 .undotsushin-android .whole.pyeongchang2018-movie,
 .undotsushin-ios .whole.pyeongchang2018-photo,

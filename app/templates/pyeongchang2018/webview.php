@@ -16,6 +16,25 @@
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>"></script>
   <title><?php echo $page['title']; ?></title>
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+  <style>
+    @media screen and (min-width:320px) {
+      .pyeongchang2018-webview {
+        height: 710px;
+      }
+    }
+
+    @media screen and (min-width:321px) and ( max-width:375px) {
+      .pyeongchang2018-webview {
+        height: 752px;
+      }
+    }
+
+    @media screen and (min-width:376px) {
+      .pyeongchang2018-webview {
+        height: 784px;
+      }
+    }
+  </style>
 </head>
 <body>
 <div class="whole pyeongchang2018 pyeongchang2018-webview">
