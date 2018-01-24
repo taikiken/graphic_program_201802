@@ -165,9 +165,8 @@ include_once __DIR__."/../../mobile/_header.php";
       var dae = events.args.shift() || {};
       var headline = dae.headline || {};
       var articles = headline.articles || [];
-      // console.log('done', articles);
       vewHeadline.archive = true;
-      vewHeadline.render(articles);
+      vewHeadline.renderByRelated(articles);
     }
     function fail(events) {
       console.warn('error', events, slug);

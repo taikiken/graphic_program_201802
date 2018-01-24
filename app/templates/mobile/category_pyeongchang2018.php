@@ -118,9 +118,8 @@
       var dae = events.args.shift() || {};
       var headline = dae.headline || {};
       var articles = headline.articles || [];
-      // console.log('done', articles);
       vewHeadline.archive = true;
-      vewHeadline.render(articles);
+      vewHeadline.renderByRelated(articles);
     }
     function fail(events) {
       console.warn('error', events, slug);
