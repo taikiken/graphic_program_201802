@@ -258,7 +258,7 @@
                     </li>
                     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                         <a itemprop="item" href="./">
-                            <span itemprop="name"><?= $page['title'] ?></span>
+                            <span itemprop="name"><?= $page['category']['tab_label'] ?></span>
                             <meta itemprop="position" content="2" />
                         </a>
                     </li>
