@@ -18,7 +18,7 @@ FROM
 WHERE
     flag = 1
 OR
-    name_e = 'all'
+    name_e = 'top'
 ORDER BY n
 ;
 END_SQL;
@@ -27,8 +27,7 @@ END_SQL;
                 $o->query($sql);
                 while($f = $o->fetch_array())
                 {
-                  if ($f['name'] == 'すべて') $f['name'] = '一面';
-                  $category_list[]=$f;
+                    $category_list[]=$f;
                 }
 
                 echo generalCheckbox($category_list,4,'u_categories', @join(',', $sv['p_u_categories']));
@@ -105,7 +104,7 @@ FROM
 WHERE
     flag = 1
 OR
-    name_e = 'all'
+    name_e = 'top'
 ORDER BY n
 ;
 END_SQL;
@@ -114,8 +113,7 @@ END_SQL;
                 $o->query($sql);
                 while($f = $o->fetch_array())
                 {
-                  if ($f['name'] == 'すべて') $f['name'] = '一面';
-                  $category_list[]=$f;
+                    $category_list[]=$f;
                 }
 
                 // チェックボックス初期値用

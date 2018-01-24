@@ -211,19 +211,21 @@ for($i=0;$i<count($p);$i++){
 	}	
 }
 
-// 一面のお知らせ取得 slugは"all"
+// 一面のお知らせ取得 slugは"top"
 $sql = <<<SQL
-SELECT
-		notices.*
+SELECT notices.*
 FROM
-		categories_notices,
-		notices
+  notices
+  INNER JOIN
+  categories_notices ON notices.id = notice_id
+  INNER JOIN
+  u_categories ON category_id = u_categories.id
 WHERE
- 		category_id = 148
-AND
-		notice_id = notices.id
+  name_e = 'top'
+  AND
+  notice_id = notices.id
 ORDER BY
-		categories_notices.created_at DESC
+  categories_notices.created_at DESC
 LIMIT 1
 SQL;
 
