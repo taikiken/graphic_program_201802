@@ -85,7 +85,7 @@ ComponentMediaImageFigcaption.propTypes = {
 
 /**
  * 記事詳細上部メインビジュアルの画像を出力します
- * @param {{original: string, large: string, midium: string}} images 画像パスリスト
+ * @param {{original: string, large: string, medium: string}} images 画像パスリスト
  * @param {SingleDae} single 記事詳細データ
  * @param {boolean} sp flag
  * @returns {?XML} `div.post-kv`
@@ -95,6 +95,7 @@ const ComponentMediaImage = ({ images, single, sp }) => {
   // 画像がない記事の時にセットされているのは
   // large と medium と thumbnail らしい
   // original から large と medium と順に探していく
+  // 1 件目だけ React.propTypes 判定で `warning` でる
   // console.log('ComponentMediaImage images', images);
   // 1. original
   let original = Safety.image(images.original, '');
