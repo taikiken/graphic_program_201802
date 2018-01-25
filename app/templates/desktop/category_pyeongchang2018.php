@@ -78,7 +78,10 @@ include_once __DIR__.'/_category-heading.php';
 
       <?php
       // `/category/pyeongchang2018/` - 広告表示しない
-      $on_pyeongchang2018 = true;
+      // https://aws-plus.backlog.jp/view/UNDO_SPBL-294#comment-1187451605
+      // 元の広告が出る状態にもどして - 2018/01/25 13:24:03
+//      $on_pyeongchang2018 = true;
+      $on_pyeongchang2018 = false;
       ?>
       <?php include_once __DIR__."/_sidebar_ad.php"; ?>
 
