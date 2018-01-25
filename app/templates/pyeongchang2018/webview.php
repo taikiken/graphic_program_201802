@@ -42,7 +42,9 @@
   // medals
   include_once __DIR__ . '/../pyeongchang2018/module/_pyeongchang2018_medals.php';
   ?>
-
+  <?php
+  /*
+  ?>
   <div class="gallery--highlight">
     <header class="gallery__header">
       <h2 class="gallery__heading">ハイライト動画</h2>
@@ -51,7 +53,9 @@
 
     <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
   </div><!-- /.gallery--highlight -->
-
+  <?php
+  */
+  ?>
   <div class="gallery--photo">
     <header class="gallery__header">
       <h2 class="gallery__heading">フォトギャラリー</h2>

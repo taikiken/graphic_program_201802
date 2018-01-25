@@ -111,7 +111,11 @@ include_once __DIR__."/../../mobile/_header.php";
       // medals
       include_once __DIR__ . '/../module/_pyeongchang2018_medals.php';
       ?>
-
+      <?php
+      /*
+      // https://aws-plus.backlog.jp/view/UNDO_SPBL-296#comment-1187520933
+      // リリース時にタブとWebViewのハイライトブロックを、非表示
+      ?>
       <div class="gallery--highlight">
         <header class="gallery__header">
           <h2 class="gallery__heading">ハイライト動画</h2>
@@ -120,7 +124,9 @@ include_once __DIR__."/../../mobile/_header.php";
 
         <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
       </div><!-- /.gallery--highlight -->
-
+      <?php
+      */
+      ?>
       <div class="sponsor-link">
         <!-- /531683568/pyeongchang_ad/pyeongchang_sp_rectangle -->
         <script>
