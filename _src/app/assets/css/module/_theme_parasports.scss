@@ -116,7 +116,7 @@
           background-color: #474e5c;
 
           &:hover {
-            @include hover-opacity;
+            @include hover-opacity(0.85);
           }
         } //.paraboard__widjet__list__game__link
 
