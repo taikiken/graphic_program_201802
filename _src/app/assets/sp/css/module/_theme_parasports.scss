@@ -181,7 +181,7 @@
           right: 20px;
           transform: translateY(-50%);
 
-          span {
+          i {
             color: #fff;
             font-weight: bold;
             font-size: fz(13);
@@ -200,7 +200,7 @@
               transform: rotate(45deg);
               @include hide-text;
             }
-          } // span
+          } // i
         } //.paraboard__widjet__list__game__btn
       } //.paraboard__widjet__list__game
     } //.paraboard__widjet__list
@@ -212,9 +212,272 @@
 
   //.paraboard__header
   .paraboard__header {
-    height: 60px;
-    margin-top: 40px;
-    border-top: 4px solid #ddd;
+    &:before {
+      content: "";
+      display: block;
+      height: (10/2)+px;
+      border-bottom: 1px solid #ddd;
+      background-color: #eee;
+    }
+
+    //.paraboard__header__heading
+    &__heading {
+      display: table-cell;
+      width: 100vw;
+      height: (100/2)+px;
+      border-bottom: 1px solid #ddd;
+      font-weight: bold;
+      font-size: fz(32/2);
+      text-align: center;
+      vertical-align: middle;
+    } //.paraboard__header__heading
+
+    //.paraboard__header__search
+    &__search {
+      margin-top: (20/2)+px;
+      padding-right: perCalc(15, 750);
+      padding-left: perCalc(15, 750);
+
+      //.paraboard__header__search__type
+      &__type {
+        display: table-cell;
+
+        //.paraboard__header__search__type--event
+        &--event {
+          width: perCalc(520, 720);
+
+          .paraboard__header__search__select__container {
+            width: perCalc(430, 520);
+          }
+        }
+
+        //.paraboard__header__search__type--year
+        &--year {
+          width: perCalc(200, 720);
+          text-align: right;
+
+          .paraboard__header__search__select__container {
+            width: perCalc(160, 200);
+          }
+        }
+
+        //.paraboard__header__search__type__heading
+        &__heading {
+          font-weight: bold;
+          font-size: fz(24/2);
+        }
+      } //.paraboard__header__search__type
+
+      //.paraboard__header__search__select__container
+      &__select__container {
+        position: relative;
+        display: inline-block;
+      }
+
+      //.paraboard__header__search__select
+      &__select {
+        appearance: none;
+        width: 100%;
+        line-height: 1;
+        padding: 6px (50/2)+px 6px 6px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #eee;
+        font-weight: bold;
+        font-size: fz(24/2);
+
+        &::-ms-expand {
+          display: none;
+        }
+
+        //.paraboard__header__search__select__label
+        &__label:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          right: 5px;
+          width: 6px;
+          height: 6px;
+          margin-top: -3px;
+          border-bottom: 2px solid #e83851;
+          border-left: 2px solid #e83851;
+          transform: rotate(-45deg) translateY(-50%);
+          @include hide-text;
+        }
+      } //.paraboard__header__search__select
+    } //.paraboard__header__search
   } //.paraboard__header
+
+
+
+  //.paraboard__list
+  .paraboard__list {
+    width: 100%;
+    margin-top: (20/2)+px;
+    border-top: 1px solid #ddd;
+
+    //.paraboard__list__date
+    &__date {
+      font-size: fz(24/2);
+    } //.paraboard__list__date
+
+    //.paraboard__list__game
+    &__game {
+      border-bottom: 1px solid #ddd;
+
+      //.paraboard__list__game__link
+      &__link {
+        position: relative;
+        display: block;
+        padding: (16/2)+px perCalc(15, 750);
+        @include link-decoration(#333, #333, none, none);
+      } //.paraboard__list__game__link
+
+      //.paraboard__list__game__header
+      &__header {
+        position: relative;
+        width: perCalc(670, 720);
+        padding-left: (70/2)+px;
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          display: inline-block;
+          width: (60/2)+px;
+          height: (60/2)+px;
+          margin-top: -15px;
+          background-position: 0 0;
+          background-repeat: no-repeat;
+          background-size: (60/2)+px;
+          @include hide-text;
+        }
+
+        &.paraboard__list__icon--basketball:before {
+          background-image: url(/assets/sp/images/para-board/icon-basketball.png);
+        }
+
+        &.paraboard__list__icon--goalball:before {
+          background-image: url(/assets/sp/images/para-board/icon-goalball.png);
+        }
+
+        &.paraboard__list__icon--rugby:before {
+          background-image: url(/assets/sp/images/para-board/icon-rugby.png);
+        }
+
+        &.paraboard__list__icon--soccer:before {
+          background-image: url(/assets/sp/images/para-board/icon-soccer.png);
+        }
+
+        &.paraboard__list__icon--swimming:before {
+          background-image: url(/assets/sp/images/para-board/icon-swimming.png);
+        }
+
+        &.paraboard__list__icon--tennis:before {
+          background-image: url(/assets/sp/images/para-board/icon-tennis.png);
+        }
+
+        &.paraboard__list__icon--track:before {
+          background-image: url(/assets/sp/images/para-board/icon-track.png);
+        }
+
+        &.paraboard__list__icon--volleyball:before {
+          background-image: url(/assets/sp/images/para-board/icon-volleyball.png);
+        }
+
+
+
+        //.paraboard__list__game__header__category
+        &__category {
+          font-weight: bold;
+          color: #000;
+          font-size: fz(24/2);
+        }
+
+        //.paraboard__list__game__header__heading
+        &__heading {
+          line-height: 1.2;
+          color: #000;
+          font-weight: bold;
+          font-size: fz(28/2);
+        }
+      } //.paraboard__list__game__header
+
+
+
+      //.paraboard__list__game__status
+      &__status {
+        display: none;
+
+        // margin-top: 20px;
+
+        // //.paraboard__list__game__status__list
+        // &__list {
+        //   letter-spacing: ls(inline-block);
+        // }
+
+        // //.paraboard__list__game__status__item
+        // &__item {
+        //   display: inline-block;
+        //   letter-spacing: normal;
+
+        //   + .paraboard__list__game__status__item {
+        //     margin-left: 10px;
+        //   }
+        // }
+
+        // [class*="paraboard__list__game__status__item--"] {
+        //   cursor: default;
+        //   display: inline-block;
+        //   width: 100px;
+        //   line-height: 1;
+        //   padding-top: 10px;
+        //   padding-bottom: 10px;
+        //   background-color: #f5f5f5;
+        //   color: #ccc;
+        //   font-weight: bold;
+        //   font-size: fz(13);
+        //   text-align: center;
+
+        //   &.enable {
+        //     color: #474e5c;
+        //   }
+        // }
+      } //.paraboard__list__game__status
+
+
+
+      //.paraboard__list__game__btn
+      &__btn {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+
+        i {
+          color: #fff;
+          font-weight: bold;
+          font-size: fz(13);
+          @include hide-text;
+
+          &:after {
+            content: "";
+            position: relative;
+            top: -1px;
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            margin-left: 4px;
+            border-top: 2px solid #e83851;
+            border-right: 2px solid #e83851;
+            transform: rotate(45deg);
+            @include hide-text;
+          }
+        } // i
+
+      } //.paraboard__list__game__btn
+    } //.paraboard__list__game
+  } //.paraboard__list
 
 } //.whole.parasports
