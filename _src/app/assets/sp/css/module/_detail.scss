@@ -505,8 +505,10 @@
 
   // post-sns
   .post-sns {
-    margin: #{(30/2)+px} -500% 0;
-    padding: 0 500%;
+    // margin: #{(30/2)+px} -500% 0;
+    // padding: 0 500%;
+    margin-top: 15px;
+    margin-left: 0 !important;
     // padding: (40/2)+px 500% 0;
     // border-top: 1px solid $border-primary-color;
 
@@ -533,12 +535,15 @@
         width: 100%;
         justify-content: space-between;
       }
-
+      post-sns-flex-list {
+        margin-left: 0 !important;
+      }
       .post-sns-item {
         // display: table-cell;
         width: perCalc(220, 690);
         height: (60/2)+px;
-
+        list-style: none !important;
+        margin-left: 0 !important;
         &:first-child {
           // padding-left: perCalc(10, 450);
         }
@@ -1337,6 +1342,12 @@ body {
   }
   // 外部リンクここまで
 
+  .widget-post-carousel-item-root {
+    padding: 0;
+    .widget-post-carousel-item {
+      padding: 0 8px;
+    }
+  }
   .widget-post-carousel-list .widget-post-carousel-item-root a .post-data .post-category {;
     background-color: transparent;
     height: auto;
@@ -1352,6 +1363,13 @@ body {
     justify-content: space-between;
     display: flex;
     flex-direction: column;
+  }
+  #headline-container .headline .board .board-item .post-data {
+    width: calc(100% - 60px);
+  }
+  .headline-outer .sponsor-link {
+    border-top: none;
+    padding: 0 2%;
   }
 }
 html.mobile .adgLink .adgTextContainer .adgPr,

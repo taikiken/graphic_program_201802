@@ -63,7 +63,7 @@ const ReactDOM = self.ReactDOM;
  * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
  * @since 2016-09-17
  */
-export default class ViewCategoryOption extends View {
+export default class ViewSingleHeadlineOption extends View {
   /**
    * category slug を使用し API request を開始します
    * @param {string} [slug=all] category.slug

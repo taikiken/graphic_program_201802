@@ -11,7 +11,7 @@
  */
 
 // parent
-import SPViewCategory from '../category/SPViewCategory';
+import SPViewSingleHeadline from '../singles/SPViewSingleHeadline';
 
 // app
 import {Message} from '../../../app/const/Message';
@@ -61,7 +61,7 @@ const ReactDOM = self.ReactDOM;
  *
  * @since 2016-06-06
  */
-export default class SPViewSinglesWithSlug extends SPViewCategory {
+export default class SPViewSinglesWithSlug extends SPViewSingleHeadline {
   /**
    * SP category 一覧
    * @param {string} slug category slug
@@ -127,10 +127,10 @@ export default class SPViewSinglesWithSlug extends SPViewCategory {
   /**
    * CATEGORY_INFO, ModelCategoriesSlug success event
    * @event CATEGORY_INFO
-   * @return {string} spViewCategoryWidthSlugCategoryInfo event type
+   * @return {string} SPViewSingleHeadlineWidthSlugCategoryInfo event type
    */
   static get CATEGORY_INFO():string {
-    return 'spViewCategoryWidthSlugCategoryInfo';
+    return 'SPViewSingleHeadlineWidthSlugCategoryInfo';
   }
   // ---------------------------------------------------
   //  Method

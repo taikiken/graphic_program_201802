@@ -46,7 +46,7 @@ import { Safety } from '../../data/Safety';
  */
 // export class ViewCategory extends ViewArchiveMasonry {
 // @since 2016-09-16 parent class changed
-export default class ViewCategory extends ViewArchiveMasonryInfinite {
+export default class ViewSingleHeadline extends ViewArchiveMasonryInfinite {
   /**
    * category 一覧表示 要 **slug**
    * @param {string} slug category slug, default 'all'

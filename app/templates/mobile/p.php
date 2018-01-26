@@ -99,6 +99,38 @@
               <?php print_r($page['post']['body']); ?>
             <?php endif;?>
 
+
+            <div class="post-sns">
+              <div class="post-sns-list">
+                <div class="post-sns-flex">
+                  <div class="post-sns-flex-inner">
+                    <ul class="post-sns-flex-list">
+                      <li class="post-sns-item post-sns-item_fb">
+                        <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" target="_blank">
+                          <span>facebook</span>
+                        </a>
+                      </li>
+                      <?php
+
+                      // スマホ版はTwitter textをencodeする
+
+                      ?>
+                      <li class="post-sns-item post-sns-item_tw">
+                        <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=<?php echo $page['sns']['twitter']; ?>" target="_blank">
+                          <span>ツイート</span>
+                        </a>
+                      </li>
+                      <li class="post-sns-item post-sns-item_line">
+                        <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                          <span>LINEへ送る</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div><!-- /.post-sns-list -->
+            </div><!-- /.post-sns -->
+
             <div class="external-link">
               <div class="external-link-heading">
                 <h2>外部リンク</h2>
@@ -148,36 +180,6 @@
 
           <div id="post-content-banner"></div>
 
-          <div class="post-sns">
-            <div class="post-sns-list">
-              <div class="post-sns-flex">
-                <div class="post-sns-flex-inner">
-                  <ul class="post-sns-flex-list">
-                    <li class="post-sns-item post-sns-item_fb">
-                      <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" target="_blank">
-                        <span>facebook</span>
-                      </a>
-                    </li>
-                    <?php
-
-                    // スマホ版はTwitter textをencodeする
-
-                    ?>
-                    <li class="post-sns-item post-sns-item_tw">
-                      <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=<?php echo $page['sns']['twitter']; ?>" target="_blank">
-                        <span>ツイート</span>
-                      </a>
-                    </li>
-                    <li class="post-sns-item post-sns-item_line">
-                      <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
-                        <span>LINEへ送る</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div><!-- /.post-sns-list -->
-          </div><!-- /.post-sns -->
           <!-- /531683568/mobile/mobile_detail_after -->
           <script>
             googletag.cmd.push(function() {
