@@ -79,6 +79,7 @@ export default class Index {
 
     // sidebar, slug なし(=all)
     // Sidebar.start('all', true);
+    // UNDO_SPBL-401 【Web】一面リニューアル / 「TOP」でのカテゴリーAPIの問い合わせ先変更
     Sidebar.start('top', true);
   }
 }

@@ -343,7 +343,9 @@ export default class Page {
     // first
     FirstVisit.start();
     // announce
-    Announce.start('all');
+    // Announce.start('all');
+    // UNDO_SPBL-401 【Web】一面リニューアル / 「TOP」でのカテゴリーAPIの問い合わせ先変更
+    Announce.start('top');
   }
   /**
    * category page

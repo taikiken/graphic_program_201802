@@ -57,7 +57,9 @@ export default class SPIndex {
     // announce
     const option = {};
     option[UT.view.View.BEFORE_RENDER] = SPIndex.afterAnnounce;
-    SPAnnounce.start('all', option);
+    // SPAnnounce.start('all', option);
+    // UNDO_SPBL-401 【Web】一面リニューアル / 「TOP」でのカテゴリーAPIの問い合わせ先変更
+    SPAnnounce.start('top', option);
     // header
     SPHeader.start();
 
