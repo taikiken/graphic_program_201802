@@ -10,13 +10,14 @@ import { Url } from '../../../app/const/Url';
 // import { BannerNode } from '../../node/single/BannerNode';
 
 // view
-import Banner from '../../../view/Banner';
+// import Banner from '../../../view/Banner';
 
 // React
 /**
  * [library] - React
  */
-const React = self.React;
+// const React = self.React;
+const ReactDOM = self.ReactDOM;
 
 /**
  * 記事詳細下部を出力します
@@ -27,13 +28,6 @@ const React = self.React;
  * @since 2016-09-24
  */
 export default class SPViewSingleTags extends View {
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  /**
-   * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentSingleFooter.propTypes}
-   */
   constructor(keywords, element) {
     super(element);
     /**
@@ -51,10 +45,7 @@ export default class SPViewSingleTags extends View {
   start() {
     this.render();
   }
-  /**
-   * `div.post-footer` を出力します
-   * @return {XML} `div.post-footer` を返します
-   * */
+
   render() {
     const keywords = this.keywords;
 
