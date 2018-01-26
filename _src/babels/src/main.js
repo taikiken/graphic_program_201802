@@ -155,6 +155,7 @@ import SPViewSingleHeader from './sp/view/single/SPViewSingleHeader';
 import SPViewContinueRead from './sp/view/single/SPViewContinueRead';
 import SPViewSingleRanking from './sp/view/single/SPViewSingleRanking';
 import SPViewSingleRecommend from './sp/view/single/SPViewSingleRecommend';
+import SPViewSingleTags from './sp/view/single/SPViewSingleTags';
 
 // single/comment
 import SPViewComments from './sp/view/SPViewComments';
@@ -404,7 +405,8 @@ const UT = {
         SPViewSingleHeader,
         SPViewContinueRead,
         SPViewSingleRanking,
-        SPViewSingleRecommend
+        SPViewSingleRecommend,
+        SPViewSingleTags
       },
       singles: {
         SPViewSinglesRecommend,

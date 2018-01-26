@@ -535,7 +535,7 @@
         width: 100%;
         justify-content: space-between;
       }
-      post-sns-flex-list {
+      .post-sns-flex-list {
         margin-left: 0 !important;
       }
       .post-sns-item {
@@ -1341,6 +1341,84 @@ body {
     }
   }
   // 外部リンクここまで
+
+  // post-tags
+  .post-tags {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+
+    @at-root {
+      &-heading,
+      &-list {
+        // display: table-cell;
+        // vertical-align: top;
+        margin: 0 !important;
+      }
+
+      &-heading {
+        // @extend .sprite-detail;
+        // @include sprite( $detail-heading-tag );
+        // @include hide-text;
+        font-size: 13px;
+        font-weight: bold;
+        color: #333333;
+      }
+
+      &-list {
+        padding-left: 10px;
+        letter-spacing: ls( inline-block );
+      }
+
+      &-item {
+        display: inline-block;
+        letter-spacing: normal;
+        margin-left: 0 !important;
+        a {
+          background-color: #f5f5f5;
+          border: 1px solid #ddd;
+          border-radius: 2px;
+          padding: 0 5px;
+          height: 26px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 13px;
+        }
+
+        & + .post-tags-item {
+          margin-left: 10px !important;
+        }
+
+        a {
+          @include link-decoration(null, null, none, underline);
+        }
+      }
+    }
+  } //.post-tags
+
+  // DFPバナー
+  .bnr-dfp {
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee !important;
+  }
+  #ad-gpt-article-detail-recommend-bottom, #ad-gpt-article-detail-footer {
+    margin-top: -6px;
+    margin-bottom: 0;
+    border-top: none;
+  }
+
+  .foot-sec {
+    border-top: none;
+  }
 
   .widget-post-carousel-item-root {
     padding: 0;

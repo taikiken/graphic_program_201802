@@ -112,6 +112,7 @@ export default class SPSingle {
     }
     const slug = single.categories.slug;
     const label = single.categories.label;
+    const keyword = single.keywords.keywords;
 
     // nav current
     SPNav.start(slug);
@@ -134,8 +135,8 @@ export default class SPSingle {
     // SPSingle.optionHeadline(slug);
     // -----------------------
     SPSingle.optionNews(slug);
-    // SPSingle.optionHeadline();
     SPSingle.optionBodyAction();
+    SPSingle.optionTag(keyword);
   }
   // /**
   //  * 記事詳細下部・人気記事
@@ -270,6 +271,16 @@ export default class SPSingle {
       news.start();
     }
   }
+
+  static optionTag(keyword) {
+    // console.log('SPSingle.optionTag', keyword);
+    const tagElement = Dom.singleFooter();
+    if (tagElement) {
+      const tag = new UT.sp.view.single.SPViewSingleTags(keyword, tagElement);
+      tag.start();
+    }
+  }
+
   /**
    * single のヘッドライン carousel
    * @param {string} slug category.slug

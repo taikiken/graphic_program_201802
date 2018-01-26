@@ -33,12 +33,8 @@
       */
       ?>
       <div id="js-current-post" class="current-post">
-
         <div class="post-detail">
-
-          <div id="single-header-container">
-
-          </div>
+          <div id="single-header-container"></div>
           <?php
           // ----------------------------------------------------
           // 記事詳細: pc 媒体ロゴ
@@ -145,10 +141,15 @@
               </ul>
             </div>
 
+            <div id="single-footer-container"></div>
+
+            <div id="post-content-banner"></div>
+
             <div class="single-more-container">
               <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">アプリで読む</a></p>
               <p id="btn-more-web"><span>ウェブで読む</span></p>
             </div>
+
             <script>
               var bodyElement = document.getElementById('post-content-container');
               var bodyP = document.querySelectorAll('#post-content-container > p');
@@ -177,26 +178,25 @@
 
           <?php // ref. #1876 ?>
           <!-- /531683568/mobile/mobile_detail_body_bottom -->
-
-          <div id="post-content-banner"></div>
-
-          <!-- /531683568/mobile/mobile_detail_after -->
-          <script>
-            googletag.cmd.push(function() {
-              googletag.defineSlot('/531683568/mobile/mobile_detail_comment_top', [300, 250], 'div-gpt-ad-mobile_detail_after').addService(googletag.pubads());
-              googletag.pubads().enableSingleRequest();
-              googletag.pubads().collapseEmptyDivs();
-              googletag.enableServices();
-            });
-          </script>
-          <div id='div-gpt-ad-mobile_detail_after' style='text-align: center; margin: 20px auto; height:250px; width:300px;'>
-          <script>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-mobile_detail_after'); });
-          </script>
-          </div>
-          <!-- // /531683568/mobile/mobile_detail_after -->
         </div><!-- /.post-detail -->
-        <?php
+
+        <!-- /531683568/article-detail/article-detail-body-bottom/ -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/article-detail/article-detail-body-bottom/', [300, 250], 'ad-gpt-article-detail-body-bottom').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.pubads().collapseEmptyDivs();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp">
+        <script>
+          googletag.cmd.push(function() { googletag.display('ad-gpt-article-detail-body-bottom'); });
+        </script>
+        </div>
+        <!-- // /531683568/article-detail/article-detail-body-bottom/ -->
+
+      <?php
         // ------------------------------------
         // Facebook 「いいね」
         ?>
@@ -250,15 +250,15 @@
       <!-- /531683568/mobile/mobile_recommend_after -->
       <script>
         googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/mobile/mobile_detail_comment_top', [300, 250], 'div-gpt-ad-mobile_recommend_after').addService(googletag.pubads());
+          googletag.defineSlot('/531683568/article-detail/article-detail-recommend-bottom/', [300, 250], 'ad-gpt-article-detail-recommend-bottom').addService(googletag.pubads());
           googletag.pubads().enableSingleRequest();
           googletag.pubads().collapseEmptyDivs();
           googletag.enableServices();
         });
       </script>
-      <div id='div-gpt-ad-mobile_recommend_after' style='text-align: center; margin: 20px auto; height:250px; width:300px;'>
+      <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp">
       <script>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-mobile_recommend_after'); });
+        googletag.cmd.push(function() { googletag.display('ad-gpt-article-detail-recommend-bottom'); });
       </script>
       </div>
       <!-- // /531683568/mobile/mobile_recommend_after -->
@@ -299,16 +299,16 @@
       <!-- /531683568/mobile/mobile_news_after -->
       <script>
         googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/mobile/mobile_detail_comment_top', [300, 250], 'div-gpt-ad-mobile_news_after').addService(googletag.pubads());
+          googletag.defineSlot('/531683568/article-detail/article-detail-footer/', [300, 250], 'ad-gpt-article-detail-footer').addService(googletag.pubads());
           googletag.pubads().enableSingleRequest();
           googletag.pubads().collapseEmptyDivs();
           googletag.enableServices();
         });
       </script>
-      <div id='div-gpt-ad-mobile_news_after' style='text-align: center; margin: 20px auto; height:250px; width:300px;'>
-      <script>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-mobile_news_after'); });
-      </script>
+      <div id='ad-gpt-article-detail-footer' class="bnr-dfp">
+        <script>
+          googletag.cmd.push(function() { googletag.display('ad-gpt-article-detail-footer'); });
+        </script>
       </div>
       <!-- // /531683568/mobile/mobile_news_after -->
 
