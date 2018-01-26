@@ -34,7 +34,7 @@
       ?>
       <div id="js-current-post" class="current-post">
         <div class="post-detail">
-          <div id="single-header-container"></div>
+        <div id="single-header-container"></div>
           <?php
           // ----------------------------------------------------
           // 記事詳細: pc 媒体ロゴ
@@ -43,36 +43,59 @@
           // eof: 記事詳細: pc 媒体ロゴ
           // ---------------------------------------------------- ?>
 
-          <div class="post-sns">
-            <div class="post-sns-list">
-              <div class="post-sns-flex">
-                <div class="post-sns-flex-inner">
-                  <ul class="post-sns-flex-list">
-                    <li class="post-sns-item post-sns-item_fb">
-                      <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" target="_blank">
-                        <span>facebook</span>
-                      </a>
-                    </li>
-                    <?php
-
-                    // スマホ版はTwitter textをencodeする
-
-                    ?>
-                    <li class="post-sns-item post-sns-item_tw">
-                      <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=<?php echo $page['sns']['twitter']; ?>" target="_blank">
-                        <span>ツイート</span>
-                      </a>
-                    </li>
-                    <li class="post-sns-item post-sns-item_line">
-                      <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
-                        <span>LINEへ送る</span>
-                      </a>
-                    </li>
-                  </ul>
+          <?php if ( !$page['ua_app'] ) : ?>
+            <div class="post-sns">
+              <div class="post-sns-list">
+                <div class="post-sns-flex">
+                  <div class="post-sns-flex-inner">
+                    <ul class="post-sns-flex-list">
+                      <li class="post-sns-item post-sns-item_fb">
+                        <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" target="_blank">
+                          <span>facebook</span>
+                        </a>
+                      </li>
+                      <li class="post-sns-item post-sns-item_tw">
+                        <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=<?php echo $page['sns']['twitter']; ?>" target="_blank">
+                          <span>ツイート</span>
+                        </a>
+                      </li>
+                      <li class="post-sns-item post-sns-item_line">
+                        <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                          <span>LINEへ送る</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div><!-- /.post-sns -->
+            </div><!-- /.post-sns -->
+          <?php else: ?>
+            <div class="post-sns">
+              <div class="post-sns-list">
+                <div class="post-sns-flex">
+                  <div class="post-sns-flex-inner">
+                    <ul class="post-sns-flex-list">
+                      <li class="post-sns-item post-sns-item_fb">
+                        <a href="javascript:void(0);" onclick="window.JsInterface.onFacebookShare();">
+                          <span>facebook</span>
+                        </a>
+                      </li>
+                      <li class="post-sns-item post-sns-item_tw">
+                      <a href="javascript:void(0);" onclick="window.JsInterface.onTwitterShare();">
+                          <span>ツイート</span>
+                        </a>
+                      </li>
+                      <li class="post-sns-item post-sns-item_line">
+                      <a href="javascript:void(0);" onclick="window.JsInterface.onLineShare();">
+                          <span>LINEへ送る</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /.post-sns -->
+          <?php endif; ?>
 
           <?php if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
             // #1602 - VK brightcove
@@ -95,37 +118,59 @@
               <?php print_r($page['post']['body']); ?>
             <?php endif;?>
 
-
-            <div class="post-sns">
-              <div class="post-sns-list">
-                <div class="post-sns-flex">
-                  <div class="post-sns-flex-inner">
-                    <ul class="post-sns-flex-list">
-                      <li class="post-sns-item post-sns-item_fb">
-                        <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" target="_blank">
-                          <span>facebook</span>
-                        </a>
-                      </li>
-                      <?php
-
-                      // スマホ版はTwitter textをencodeする
-
-                      ?>
-                      <li class="post-sns-item post-sns-item_tw">
-                        <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=<?php echo $page['sns']['twitter']; ?>" target="_blank">
-                          <span>ツイート</span>
-                        </a>
-                      </li>
-                      <li class="post-sns-item post-sns-item_line">
-                        <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
-                          <span>LINEへ送る</span>
-                        </a>
-                      </li>
-                    </ul>
+            <?php if ( !$page['ua_app'] ) : ?>
+              <div class="post-sns">
+                <div class="post-sns-list">
+                  <div class="post-sns-flex">
+                    <div class="post-sns-flex-inner">
+                      <ul class="post-sns-flex-list">
+                        <li class="post-sns-item post-sns-item_fb">
+                          <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" target="_blank">
+                            <span>facebook</span>
+                          </a>
+                        </li>
+                        <li class="post-sns-item post-sns-item_tw">
+                          <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=<?php echo $page['sns']['twitter']; ?>" target="_blank">
+                            <span>ツイート</span>
+                          </a>
+                        </li>
+                        <li class="post-sns-item post-sns-item_line">
+                          <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                            <span>LINEへ送る</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div><!-- /.post-sns-list -->
-            </div><!-- /.post-sns -->
+              </div><!-- /.post-sns -->
+            <?php else: ?>
+              <div class="post-sns">
+                <div class="post-sns-list">
+                  <div class="post-sns-flex">
+                    <div class="post-sns-flex-inner">
+                      <ul class="post-sns-flex-list">
+                        <li class="post-sns-item post-sns-item_fb">
+                          <a href="javascript:void(0);" onclick="window.JsInterface.onFacebookShare();">
+                            <span>facebook</span>
+                          </a>
+                        </li>
+                        <li class="post-sns-item post-sns-item_tw">
+                        <a href="javascript:void(0);" onclick="window.JsInterface.onTwitterShare();">
+                            <span>ツイート</span>
+                          </a>
+                        </li>
+                        <li class="post-sns-item post-sns-item_line">
+                        <a href="javascript:void(0);" onclick="window.JsInterface.onLineShare();">
+                            <span>LINEへ送る</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /.post-sns -->
+            <?php endif; ?>
 
             <div class="external-link">
               <div class="external-link-heading">
@@ -200,15 +245,17 @@
         // ------------------------------------
         // Facebook 「いいね」
         ?>
-        <div class="pr_fb">
-          <h4 class="pr_fb-heading">
-            <img src="/assets/sp/images/detail/post-sns-logo.png" alt="SPORTS BULL">
-            <small class="pr_f  b-heading-item">いいねして最新ニュースをチェック！</small>
-          </h4>
-          <div class="post-sns-fixed">
-            <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+        <?php if ( !$page['ua_app'] ) : ?>
+          <div class="pr_fb">
+            <h4 class="pr_fb-heading">
+              <img src="/assets/sp/images/detail/post-sns-logo.png" alt="SPORTS BULL">
+              <small class="pr_f  b-heading-item">いいねして最新ニュースをチェック！</small>
+            </h4>
+            <div class="post-sns-fixed">
+              <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+            </div>
           </div>
-        </div>
+        <?php endif; ?>
 
         <?php
         // --------------------------------------------------------------
@@ -245,7 +292,12 @@
       // ------------------------------------
       // TODO: おすすめの記事 - sidebar: recommend
       ?>
-      <div id="widget-recommend-list-container"></div>
+      <?php if ( $page['category']['slug'] == 'crazy' ) : ?>
+        <p>分岐テスト</p>
+        <div id="widget-recommend-list-container"></div>
+      <?php else: ?>
+        <div id="widget-recommend-list-container"></div>
+      <?php endif; ?>
 
       <!-- /531683568/mobile/mobile_recommend_after -->
       <script>
@@ -267,17 +319,19 @@
       // ----------------------------------------------------
       // アプリ導線
       ?>
-      <div class="post-pr_app">
-        <a href="https://app.adjust.com/lac3f2?deep_link=sportsbull%3A%2F%2F" target="_blank">
-          <div class="post-pr_app-inner">
-            <h3 class="post-pr_app-heading">40種類を超えるスポーツニュースや速報を完全無料でアプリで見放題！</h3>
-            <ul class="post-pr_app-list">
-              <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-ios.png" alt="App Store"></li>
-              <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-android.png" alt="Google play"></li>
-            </ul><!-- /.post-pr_app-list -->
-          </div><!-- /.post-pr_app-inner -->
-        </a>
-      </div><!-- /.post-pr_app -->
+      <?php if ( !$page['ua_app'] ) : ?>
+        <div class="post-pr_app">
+          <a href="https://app.adjust.com/lac3f2?deep_link=sportsbull%3A%2F%2F" target="_blank">
+            <div class="post-pr_app-inner">
+              <h3 class="post-pr_app-heading">40種類を超えるスポーツニュースや速報を完全無料でアプリで見放題！</h3>
+              <ul class="post-pr_app-list">
+                <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-ios.png" alt="App Store"></li>
+                <li class="post-pr_app-item"><img src="/assets/sp/images/detail/pr_app-btn-android.png" alt="Google play"></li>
+              </ul><!-- /.post-pr_app-list -->
+            </div><!-- /.post-pr_app-inner -->
+          </a>
+        </div><!-- /.post-pr_app -->
+      <?php endif; ?>
 
       <?php
       // ------------------------------------
