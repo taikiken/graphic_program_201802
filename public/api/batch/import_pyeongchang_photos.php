@@ -15,9 +15,9 @@ $mes = '';
 // 接続テスト　廃止
 //$base_url = "http://limret:limret0@tmdatag.kyodonews.jp/06KK579001/GZ_TX4_UTF8/";
 // 1/31まで
-$base_url = "http://sportsbull01:sportsbull01@tmdatag.kyodonews.jp/06KK583001/GZ_TX4_UTF8/";
+//$base_url = "http://sportsbull01:sportsbull01@tmdatag.kyodonews.jp/06KK583001/GZ_TX4_UTF8/";
 // 2/1から　本番アカウント
-//$base_url = "http://sportsbull02:sportsbull02@tmdatag.kyodonews.jp/06KK58302/GZ_TX4_UTF8/";
+$base_url = "http://sportsbull02:sportsbull02@tmdatag.kyodonews.jp/06KK58302/GZ_TX4_UTF8/";
 
 
 
