@@ -78,6 +78,7 @@ export default class Index {
     }
 
     // sidebar, slug なし(=all)
-    Sidebar.start('all', true);
+    // Sidebar.start('all', true);
+    Sidebar.start('top', true);
   }
 }

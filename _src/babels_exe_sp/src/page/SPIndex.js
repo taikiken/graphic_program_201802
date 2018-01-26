@@ -86,6 +86,5 @@ export default class SPIndex {
       const archive = new UT.sp.view.home.SPViewNews(boardElement, moreElement);
       archive.start();
     }
-
   }
 }
