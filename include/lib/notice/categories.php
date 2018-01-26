@@ -17,6 +17,8 @@ FROM
     u_categories
 WHERE
     flag = 1
+OR
+    name_e = 'top'
 ORDER BY n
 ;
 END_SQL;
@@ -101,6 +103,8 @@ FROM
     u_categories
 WHERE
     flag = 1
+OR
+    name_e = 'top'
 ORDER BY n
 ;
 END_SQL;
