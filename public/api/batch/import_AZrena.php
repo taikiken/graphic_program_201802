@@ -17,7 +17,7 @@ const SPECIAL_CHAR = 'www.youtube.com/embed';
 #
 #
 //const RSS_FILE = 'http://dev.cocokara-next.com/feed/';
-const RSS_FILE = 'https://azrena.com/feed/';
+const RSS_FILE = 'https://azrena.com/?feed=sportsbull';
 
 $o = new db;
 $o->connect();
