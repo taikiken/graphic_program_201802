@@ -568,7 +568,64 @@
         background-image: url(/assets/images/para-board/icon-volleyball.png);
       }
     } //.paraboard__detail__header__category
+
+    &.result_enable {
+      .paraboard__detail__header__heading {
+        margin-top: 20px;
+      }
+
+      .paraboard__detail__btn__result {
+        display: block;
+      }
+    }
   } //.paraboard__detail__header
+
+
+
+  //.paraboard__detail__btn__result
+  .paraboard__detail__btn__result {
+    display: none;
+
+    margin-top: 16px;
+    text-align: center;
+
+    //.paraboard__detail__btn__result__link
+    &__link {
+      @include link-decoration(#fff, #fff, none, none);
+      position: relative;
+      display: inline-block;
+      width: 220px - 4;
+      line-height: 50px;
+      border: 2px solid #e83851;
+      background-color: #e83851;
+      font-weight: bold;
+      font-size: fz(15);
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin-top: -4px;
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
+        transform: rotate(45deg);
+        @include hide-text;
+      }
+
+      &:hover {
+        background-color: #fff;
+        color: #e83851;
+
+        &:after {
+          border-color: #e83851;
+        }
+      }
+    } //.paraboard__detail__btn__result__link
+  } //.paraboard__detail__btn__result
 
 
 
