@@ -102,11 +102,11 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_kansai/",$requesturi) ||
       preg_match("/ub_kansaibig6/",$requesturi) ||
       preg_match("/ub_tohto/",$requesturi)) {
-      $bucket="ublive.sportsbull.jp";
+      $bucket="stg-ublive.sportsbull.jp";
     }elseif (preg_match("/worldsoccer/",$requesturi)) {
-      $bucket="stats.sportsbull.jp";
+      $bucket="stg-stats.sportsbull.jp";
     }else{
-      $bucket="img-sportsbull-jp";
+      $bucket="stg-img-sportsbull-jp";
     }
 
 	}elseif(preg_match("/cms/",$servername)){
