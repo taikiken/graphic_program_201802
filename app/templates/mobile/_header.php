@@ -23,7 +23,6 @@
   $template_name == '404' ||
   $template_name == 'category' ||
   $template_name == 'p' ||
-  $template_name == 'comment' ||
   $template_name == 'search' ||
   $template_name == 'signup_login' ||
   $template_name == 'settings' ||
@@ -129,7 +128,7 @@ if ( !empty( $page['template_classname'] ) ) {
   $whole_classes[] = $page['template_classname'];
 }
 // 記事詳細
-if ( $page['template'] == 'p' || $page['template'] == 'comment') {
+if ( $page['template'] == 'p' ) {
   // 記事詳細へ識別 CSS class 追加
   $whole_classes[] = 'post-single';
 
@@ -169,7 +168,7 @@ if ( $template_name == 'category' ) {
 
 
 <?php // #1860 記事詳細アンカー広告
-if ( $page['template'] == 'p' || $page['template'] == 'comment') :
+if ( $page['template'] == 'p' ) :
   if ( $page['post']['is_sponserd'] === false ) :
     echo <<<__EOL__
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

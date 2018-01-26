@@ -284,17 +284,7 @@
           // ------------------------------------ ?>
 
         </div><!-- /.post-detail -->
-        <div class="comment">
 
-          <div id="comment-self-container"></div>
-
-          <div id="comment-official-container"></div>
-
-          <div id="comment-normal-container"></div>
-
-          <div id="comment-form-container"></div>
-
-        </div><!-- /.comment -->
       </div><!-- /.current-post-->
 
       <?php

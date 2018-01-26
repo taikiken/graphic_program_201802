@@ -210,51 +210,6 @@
 
         </div><!-- /.post-detail -->
 
-        <div class="comment">
-
-          <div id="comment-self-container"></div>
-
-          <div id="comment-official-container"></div>
-
-          <div id="comment-normal-container"></div>
-
-          <?php
-          /*
-           * https://github.com/undotsushin/undotsushin/issues/720
-           * 広告 / PC版画像バナー広告をDFP管理下にする
-           */
-          // ------------------------------------
-          if ( $page['ad']['sp'] ) :
-            ?>
-            <div class="sponsor-link_commentLower">
-              <?php
-              /*
-               # 保険のために original を残します
-               # ToDo: いつか削除
-              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
-              */ ?>
-
-              <!-- /531683568/mobile/mobile_detail_comment_top -->
-              <script>
-                googletag.cmd.push(function() {
-                  googletag.defineSlot('/531683568/mobile/mobile_detail_comment_top', [300, 250], 'div-gpt-ad-1501838642824-0').addService(googletag.pubads());
-                  googletag.pubads().enableSingleRequest();
-                  googletag.pubads().collapseEmptyDivs();
-                  googletag.enableServices();
-                });
-              </script>
-              <div id='div-gpt-ad-1501838642824-0' style='text-align: center; margin: 20px auto; height:250px; width:300px;'>
-              <script>
-              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501838642824-0'); });
-              </script>
-              </div>
-              <!-- // /531683568/mobile/mobile_detail_comment_top -->
-            </div>
-          <?php endif; ?>
-
-          <div id="comment-form-container"></div>
-
-        </div><!-- /.comment -->
       </div><!-- /.current-post-->
       <?php
       // --------------------------------------------------------------

@@ -10,7 +10,6 @@ if (
   $template_name == '404' ||
   $template_name == 'category' ||
   $template_name == 'p' ||
-  $template_name == 'comment' ||
   $template_name == 'search' ||
   $template_name == 'signup_login' ||
   $template_name == 'settings' ||
@@ -193,7 +192,7 @@ endif;
 ?>
 
 <?php // #1992 - Teads
-if ( $page['template'] == 'p' || $page['template'] == 'comment') :
+if ( $page['template'] == 'p') :
   if ( $page['post']['is_sponserd'] === false ) :
     echo <<<__EOL__
 <script type="text/javascript">
