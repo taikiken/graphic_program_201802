@@ -96,43 +96,19 @@
     <tbody>
       <tr class="end">
         <th>1.20 - 27</th>
-        <td>Hakuba, <span class="country">Japan</span></td>
+        <td>日本</td>
       </tr>
       <tr class="next">
         <th>2.3 - 9</th>
-        <td>Golden BC, <span class="country">Canada</span></td>
+        <td>カナダ</td>
       </tr>
       <tr>
         <th>3.1 - 7</th>
-        <td>Vallnord-Arcalís, <span class="country">Andorra</span></td>
+        <td>アンドラ</td>
       </tr>
       <tr>
         <th>3.9 - 15</th>
-        <td>Fieberbrunn, <span class="country">Austria</span></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<section class="fwt--schedule">
-  <h3><img src="../assets/images/fwt/schedule-heading.png" alt="SCHEDULE">大会スケジュール</h2>
-  <table>
-    <tbody>
-      <tr class="end">
-        <th>1.20 - 27</th>
-        <td><span class="country">日本</span></span></td>
-      </tr>
-      <tr class="next">
-        <th>2.3 - 9</th>
-        <td><span class="country">カナダ</span></td>
-      </tr>
-      <tr>
-        <th>3.1 - 7</th>
-        <td><span class="country">アンドラ</span></td>
-      </tr>
-      <tr>
-        <th>3.9 - 15</th>
-        <td><span class="country">オーストリア</span></td>
+        <td>オーストリア</td>
       </tr>
     </tbody>
   </table>

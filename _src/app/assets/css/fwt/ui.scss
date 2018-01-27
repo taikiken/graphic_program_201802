@@ -206,7 +206,6 @@ $gray: #f8fafc;
         font-size: 20px;
         margin-bottom: 20px;
         border-bottom: 1px solid rgba(81, 87, 105,0.2);
-        padding-left: 10px;
         &.end {
           opacity: 0.3;
           td {
@@ -247,16 +246,12 @@ $gray: #f8fafc;
         td {
           font-weight: bold;
           padding: 10px 0;
-          font-size: 16px;
-          .country {
-            font-size: 20px;
-          }
-
+          font-size: 20px;
         }
       }
     }
   }
-  p {
+  .notice {
     @include notice;
   }
 }
