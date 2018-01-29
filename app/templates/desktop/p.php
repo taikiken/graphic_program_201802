@@ -170,19 +170,12 @@
             </div>
           </div><!-- /.post-sns-pr -->
 
-          <?php if(!empty($page['post']['related_links'])) { ?>
+          <?php if(!empty($page['post']["relatedpost"])) { ?>
             <div class="external-link">
                 <div class="external-link-heading">
-                  <h2>外部リンク</h2>
                   <p class="provider-name"><a href="<?= $page['post']['user']['logo']['link'] ?>" target="_blank"><?= $page['post']['user']['name'] ?></a></p>
                 </div>
-                <ul>
-                  <?php
-                  foreach ($page['post']['related_links'] as $related_link) {
-                    echo '<li><a href="' . $related_link['url'] . '">' . $related_link['label'] . '</a></li>';
-                  }
-                  ?>
-                </ul>
+                  <?= $page['post']["relatedpost"]; ?>
               </div>
           <?php } ?>
 
