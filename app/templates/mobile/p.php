@@ -109,7 +109,11 @@
             <?php endif;?>
           <?php endif; ?>
 
-          <div id="post-content-container" class="post-content restricted">
+          <?php if ( !$page['ua_app'] ) : ?>
+            <div id="post-content-container" class="post-content restricted">
+          <?php else:?>
+            <div id="post-content-container" class="post-content">
+          <?php endif;?>
             <?php if(count($page['photo']) > 0):
               // @since 2017-09-11 - メンテナンス性を上げるため `photo` 別ファイルにします
               include_once __DIR__ . '/p_photo.php';
@@ -192,10 +196,12 @@
 
             <div id="post-content-banner"></div>
 
-            <div class="single-more-container">
-              <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">アプリで読む</a></p>
-              <p id="btn-more-web"><span>ウェブで読む</span></p>
-            </div>
+            <?php if ( !$page['ua_app'] ) : ?>
+              <div class="single-more-container">
+                <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">アプリで読む</a></p>
+                <p id="btn-more-web"><span>ウェブで読む</span></p>
+              </div>
+            <?php endif; ?>
 
             <script>
               var bodyElement = document.getElementById('post-content-container');

@@ -467,6 +467,9 @@
   // sponsor-link
   .sponsor-link {
     margin-top: 20px;
+    &:empty {
+      display: none;
+    }
 
     & + .post-tags {
       margin-top: 20px;

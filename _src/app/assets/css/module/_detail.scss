@@ -419,6 +419,9 @@
   // sponsor-link
   .sponsor-link {
     margin-top: 20px;
+    &:empty {
+      display: none;
+    }
 
     &.column2 {
       margin-top: 30px;
