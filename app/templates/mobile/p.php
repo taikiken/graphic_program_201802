@@ -193,7 +193,7 @@
             <div id="post-content-banner"></div>
 
             <div class="single-more-container">
-              <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">アプリで読む</a></p>
+              <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2Fp%2F<?php echo $page['post']['id']; ?>%2F">アプリで読む</a></p>
               <p id="btn-more-web"><span>ウェブで読む</span></p>
             </div>
 
