@@ -185,6 +185,7 @@ SQL;
       'ios'			=> 'ios_',
       'android' => 'android_',
     ];
+    // eof: 定数
 
     $f['text'] = isset($f['text']) ? $f['text'] : '';
 
@@ -288,9 +289,9 @@ SQL;
   endif;
 
 
-  if (!empty($category)) {
-    $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
-  }
+  // if (!empty($category)) {
+  //   $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
+  // }
 
   $y["response"]=$categoriesinfo;
 

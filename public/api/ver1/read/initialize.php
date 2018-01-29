@@ -211,6 +211,76 @@ for($i=0;$i<count($p);$i++){
 	}	
 }
 
+// 一面のお知らせ取得 slugは"top"
+$sql = <<<SQL
+SELECT notices.*
+FROM
+  notices
+  INNER JOIN
+  categories_notices ON notices.id = notice_id
+  INNER JOIN
+  u_categories ON category_id = u_categories.id
+WHERE
+  name_e = 'top'
+  AND
+  notice_id = notices.id
+ORDER BY
+  categories_notices.created_at DESC
+LIMIT 1
+SQL;
+
+$o->query($sql);
+$f = $o->fetch_array();
+
+if (!empty($f))
+{
+  // 定数
+  $type = $f['type'];
+  $text_color = ['#333333', '#333333', ''];
+  $background_color = ['#ffffff', '#ffcccc', ''];
+  $icon = [
+    $domain . '/information/icon/3x/information__icon__notice.png',
+    $domain . '/information/icon/3x/information__icon__warning.png',
+    '',
+  ];
+  $disp_type = ['notice', 'warning', 'img'];
+
+  $domain = "https://" . $_SERVER["HTTP_HOST"];
+  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
+
+  $platform_prefix_list = [
+    'pc' 			=> '',
+    'sp' 			=> 'sp_',
+    'ios'			=> 'ios_',
+    'android' => 'android_',
+  ];
+  // eof: 定数
+
+  $f['text'] = isset($f['text']) ? $f['text'] : '';
+
+  foreach($platform_prefix_list as $key => $prefix)
+  {
+    // フルパスで返す
+    $img[$key] = isset($f[$prefix . 'img']) ? $cf . $f[$prefix . 'img'] : '';
+    $link[$key] = isset($f[$prefix . 'link']) ? $f[$prefix . 'link'] : '';
+
+    $information_list[$key] = [
+      'type'             => $disp_type[$type],
+      'text'             => $f['text'],
+      'text_color'       => $text_color[$type],
+      'background_color' => $background_color[$type],
+      'icon'             => $icon[$type],
+      'img'              => $img[$key],
+      'link'             => $link[$key],
+    ];
+  }
+}
+else
+{
+  $information_list = null;
+}
+$s['information'] = $information_list;
+
 $y["response"]=$s;
 print_json($y,$_SERVER['HTTP_REFERER']);
 

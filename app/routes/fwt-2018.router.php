@@ -7,6 +7,7 @@ $app->group('/fwt',  function () use($app) {
   $page = array(
     'title'              => 'Freeride World Tour 2018 ライブ配信',
     'site_name'          => 'スポーツブル (スポブル)',
+    'version'            => '201801230923',
     'og_type'            => 'article',
     'og_title'           => 'Freeride World Tour 2018 ライブ配信 | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'fwt/',
