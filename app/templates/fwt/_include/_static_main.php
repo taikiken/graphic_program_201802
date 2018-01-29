@@ -50,9 +50,11 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
+
   <div class="fwt-intro__link-app app_hidden">
     <a href="https://app.adjust.com/ckq556?deep_link=sportsbull%3A%2F%2F" target="_blank">アプリでライブ配信開始の通知を受け取る</a>
   </div>
+
   <?php
   endif;
   // -----------------------------------------
@@ -64,8 +66,12 @@
 <div class="fwt--info">
   <p>現在天候の影響で競技開始が遅延しています。</p>
 </div>
+-->
 
 <section class="fwt--timetable">
+  <h3><img src="../assets/images/fwt/timetable-heading.png" alt="TIMETABLE">タイムテーブル</h2>
+  <p>開催日及びタイムテーブルにつきましては、決まり次第このページでお知らせいたします。</p>
+  <!--
   <table>
     <tbody>
       <tr>
@@ -80,9 +86,34 @@
       </tr>
     </tbody>
   </table>
-  <p>※ スケジュールは、当日の進行により変更になる可能性があります。</p>
-</section>
+  <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
 -->
+</section>
+
+<section class="fwt--schedule">
+  <h3><img src="../assets/images/fwt/schedule-heading.png" alt="SCHEDULE">大会スケジュール</h2>
+  <table>
+    <tbody>
+      <tr class="end">
+        <th>1.20 - 27</th>
+        <td>日本</td>
+      </tr>
+      <tr class="next">
+        <th>2.3 - 9</th>
+        <td>カナダ</td>
+      </tr>
+      <tr>
+        <th>3.1 - 7</th>
+        <td>アンドラ</td>
+      </tr>
+      <tr>
+        <th>3.9 - 15</th>
+        <td>オーストリア</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
 
 <section class="fwt--about">
   <h2><img src="../assets/images/fwt/about-heading.png" alt="ABOUT">FWTとは</h2>
@@ -169,6 +200,7 @@
   </div>
 <?php endif; ?>
 
+<!--
 <section class="fwt--featured">
   <h3><img src="../assets/images/fwt/featured-heading.png" alt="FEATURED">注目選手</h3>
   <ul>
@@ -225,7 +257,9 @@
     </li>
   </ul>
 </section>
+-->
 
+<!--
 <section class="fwt--overview">
   <div class="fwt--overview__inner">
     <h2><img src="../assets/images/fwt/overview-heading.png" alt="OVERVIEW">イベント概要</h2>
@@ -260,6 +294,7 @@
     <p>※ ライブ配信時間は大会期間中（2018年1月20日～ 27日）の天候や積雪の状態により決定し、前日までにこのページで発表します。</p>
   </div>
 </section>
+-->
 
 <section class="fwt--related">
   <h2><img src="../assets/images/fwt/related-heading.png" alt="RELATED">関連記事</h2>

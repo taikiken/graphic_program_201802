@@ -141,11 +141,21 @@ AND
 		notice_id = notices.id
 ORDER BY
 		categories_notices.created_at DESC
-LIMIT 1
 SQL;
 
   $o->query($sql);
-  $f = $o->fetch_array();
+  $notice_list = $o->fetch_all();
+
+  // お知らせ登録順(CMS上、上のもの優先)にループまわして、該当があれば そちらを採用して以降ループをbreak
+  // -- 記事詳細では最新のお知らせ順から「詳細表示なし」であれば他のお知らせに該当カテゴリ「詳細表示あり」がないかあたる
+  foreach ($notice_list as $notice)
+  {
+    if ($notice['is_hide_detail'] != 1)
+    {
+      $f = $notice;
+      break;
+    }
+  }
 
 // デフォルトのお知らせ取得
   if (empty($f))
@@ -191,6 +201,7 @@ SQL;
       'ios'			=> 'ios_',
       'android' => 'android_',
     ];
+    // eof: 定数
 
     $f['text'] = isset($f['text']) ? $f['text'] : '';
 
