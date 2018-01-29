@@ -164,20 +164,21 @@
             </div>
           </div><!-- /.post-sns-pr -->
 
-          <div class="external-link">
-              <div class="external-link-heading">
-                <h2>外部リンク</h2>
-                <p class="provider-name">Full-Count</p>
+          <?php if(!empty($page['post']['related_links'])) { ?>
+            <div class="external-link">
+                <div class="external-link-heading">
+                  <h2>外部リンク</h2>
+                  <p class="provider-name"><?= $page['post']['user']['name'] ?></p>
+                </div>
+                <ul>
+                  <?php
+                  foreach ($page['post']['related_links'] as $related_link) {
+                    echo '<li><a href="' . $related_link['url'] . '">' . $related_link['label'] . '</a></li>';
+                  }
+                  ?>
+                </ul>
               </div>
-              <ul>
-                <li><a href="#hoge">関連リンクが入ります</a></li>
-                <li><a href="#hoge">関連リンクが入ります関連リンクが入ります</a></li>
-                <li><a href="#hoge">関連リンクが入ります関連リンクが入ります関連リンクが入ります関連リンクが入ります関連リンクが入ります関連リンクが入ります関連リンクが入ります</a></li>
-                <li><a href="#hoge">関連リンクが入ります関連リンクが入ります関連リンクが入ります</a></li>
-                <li><a href="#hoge">関連リンクが入ります</a></li>
-              </ul>
-            </div>
-
+          <?php } ?>
 
           <div id="single-footer-container"></div>
 

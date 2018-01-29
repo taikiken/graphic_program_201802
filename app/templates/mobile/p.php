@@ -172,19 +172,21 @@
               </div><!-- /.post-sns -->
             <?php endif; ?>
 
-            <div class="external-link">
-              <div class="external-link-heading">
-                <h2>外部リンク</h2>
-                <p class="provider-name">Full-Count</p>
+            <?php if(!empty($page['post']['related_links'])) { ?>
+              <div class="external-link">
+                <div class="external-link-heading">
+                  <h2>外部リンク</h2>
+                  <p class="provider-name"><?= $page['post']['user']['name'] ?></p>
+                </div>
+                <ul>
+                  <?php
+                  foreach ($page['post']['related_links'] as $related_link) {
+                    echo '<li><a href="' . $related_link['url'] . '">' . $related_link['label'] . '</a></li>';
+                  }
+                  ?>
+                </ul>
               </div>
-              <ul>
-                <li><a href="#hoge">差別行為のグリエルを「救った」と米紙が称賛「ダルビッシュがヒーロー」</a></li>
-                <li><a href="#hoge">差別行為のグリエルに厳しい声 ヤ軍傘下加藤も失望「野球界ではよく起こる」</a></li>
-                <li><a href="#hoge">グリエルに人種差別疑惑</a></li>
-                <li><a href="#hoge">差別行為のグリエルに厳しい声 ヤ軍傘下加藤も失望「野球界ではよく起こる」</a></li>
-                <li><a href="#hoge">グリエルに人種差別疑惑</a></li>
-              </ul>
-            </div>
+            <?php } ?>
 
             <div id="single-footer-container"></div>
 
