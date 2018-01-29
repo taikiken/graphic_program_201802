@@ -48,26 +48,9 @@
             </ul>
           </div><!-- /.post-sns -->
 
-
-          <?php
-          /*
-           * https://github.com/undotsushin/undotsushin/issues/720
-           * 広告 / PC版画像バナー広告をDFP管理下にする
-           */
-          if ( $page['ad']['pc']['single_top'] ) :
-          // ------------------------------------
-          // single top
-          ?>
-          <div class="sponsor-link w728">
-
-            <?php
-            /*
-            # pc_single_top
-            */
-            ?>
-            <script type='text/javascript'>
+          <div class="sponsor-link w728"><script type='text/javascript'>
               googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/<?php echo $page['ad']['pc']['single_top']; ?>', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
+                googletag.defineSlot('/531683568/pc_single_top', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
                 googletag.pubads().enableSingleRequest();
                 googletag.pubads().collapseEmptyDivs();
                 googletag.enableServices();
@@ -78,9 +61,7 @@
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_single_top'); });
             </script>
             </div>
-
           </div>
-          <?php endif; ?>
 
           <?php
             // #1602 - VK brightcove
@@ -124,6 +105,31 @@
               endif;
           endif;
           ?>
+          <script>
+            var bodyP = document.querySelectorAll('.post-detail .post-content > p');
+            var bodyLen = bodyP.length;
+            var halfIndex = Math.round(bodyLen / 2) - 1;
+            if(bodyLen >= 6) {
+              var div_wrapper = document.createElement('div');
+              var target = bodyP[halfIndex];
+              div_wrapper.setAttribute('id', 'ad-gpt-article-detail-body-wrapper');
+              target.parentNode.insertBefore(div_wrapper, target.nextSibling);
+              var wrap = document.getElementById('ad-gpt-article-detail-body-wrapper');
+              wrap.insertAdjacentHTML('afterbegin','<div id="ad-gpt-article-detail-body-insert-left"></div><div id="ad-gpt-article-detail-body-insert-right"></div>');
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert-left').addService(googletag.pubads());
+                googletag.enableServices();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.display("ad-gpt-article-detail-body-insert-left");
+              });
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert-right').addService(googletag.pubads());
+                googletag.enableServices();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.display("ad-gpt-article-detail-body-insert-right");
+              });
+            }
+          </script>
           </div><!-- /.post-content -->
 
           <div class="post-sns">
@@ -168,7 +174,7 @@
             <div class="external-link">
                 <div class="external-link-heading">
                   <h2>外部リンク</h2>
-                  <p class="provider-name"><?= $page['post']['user']['name'] ?></p>
+                  <p class="provider-name"><a href="<?= $page['post']['user']['logo']['link'] ?>" target="_blank"><?= $page['post']['user']['name'] ?></a></p>
                 </div>
                 <ul>
                   <?php
@@ -180,88 +186,73 @@
               </div>
           <?php } ?>
 
+          <!-- タグの表示 -->
           <div id="single-footer-container"></div>
 
-          <!-- <div class="headline">
-            <div class="headline-outer">
-              <div id="headline-container"></div>
-            </div>
-          </div> -->
-          <div id="js-headline"></div>
 
-          <?php
-          /*
-           * https://github.com/undotsushin/undotsushin/issues/720
-           * 広告 / PC版画像バナー広告をDFP管理下にする
-           */
-          // ------------------------------------
-          // single bottom
-          if ( $page['ad']['pc']['single_bottom_left'] || $page['ad']['pc']['single_bottom_right'] ) : ?>
-          <div class="sponsor-link">
-            <div class="sponsor-link column2">
-
-              <?php if ( $page['ad']['pc']['single_bottom_left'] ) : ?>
-              <div class="sponsor-link-item">
-                <?php
-                /*
-                # 保険のために original を残します
-                # ToDo: いつか削除
-                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35119&targetID=adg_35119&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
-                */ ?>
-                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_left']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_left']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
-              </div>
-              <?php endif; ?>
-
-
-              <?php if ( $page['ad']['pc']['single_bottom_right'] ) : ?>
-              <div class="sponsor-link-item">
-
-                <!-- 531683568/syn_marketplace/viewable -->
-                <script>
-                  googletag.cmd.push(function() {
-                    googletag.defineSlot('/531683568/syn_marketplace/viewable', [300, 250], 'div-gpt-ad-1498628891915-0').addService(googletag.pubads());
-                    googletag.pubads().enableSingleRequest();
-                    googletag.pubads().collapseEmptyDivs();
-                    googletag.enableServices();
-                  });
-                </script>
-                <div id='div-gpt-ad-1498628891915-0' style='height:250px; width:300px;'>
-                <script>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498628891915-0'); });
-                </script>
-                </div>
-                <!-- //531683568/syn_marketplace/viewable -->
-
-                <?php
-                /*
-                # 保険のために original を残します
-                # ToDo: いつか削除
-                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35120&targetID=adg_35120&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
-                */ ?>
-                <?php /*
-                #2058 のため一旦非表示に
-                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_right']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_right']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
-                */ ?>
-              </div>
-              <?php endif; ?>
-
+          <div class="sponsor-link w728"><script type='text/javascript'>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/pc_single_bottom', [728, 90], 'div-gpt-ad-pc_single_bottom').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-pc_single_bottom' style='height:90px; width:728px;'>
+            <script type='text/javascript'>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_single_bottom'); });
+            </script>
             </div>
           </div>
-          <?php
-          endif;
-          // eof: single bottom
-          // ------------------------------------ ?>
+
+          <!-- ヘッドラインの表示 -->
+          <div id="js-headline"></div>
+
+
+          <div id="ad-gpt-article-detail-headlinebottom-wrapper">
+            <div id="ad-gpt-article-detail-headlinebottom-insert-left"></div>
+            <div id="ad-gpt-article-detail-headlinebottom-insert-right"></div>
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-headlinebottom-insert-left').addService(googletag.pubads());
+                googletag.enableServices();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.display("ad-gpt-article-detail-headlinebottom-insert-left");
+              });
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-headlinebottom-insert-right').addService(googletag.pubads());
+                googletag.enableServices();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.display("ad-gpt-article-detail-headlinebottom-insert-right");
+              });
+            </script>
+          </div>
+
           <div class="board-large">
             <div id="board-container"></div><!--/archive-->
           </div><!-- /.board-large -->
-        </div><!-- /.post-detail -->
 
-        <div class="comment">
-          <div id="comment-self-container"></div>
-          <div id="comment-official-container"></div>
-          <div id="comment-normal-container"></div>
-          <div id="comment-form-container"></div>
-        </div><!-- /.comment -->
+
+          <div id="ad-gpt-article-detail-boardbottom-wrapper">
+            <div id="ad-gpt-article-detail-boardbottom-insert-left"></div>
+            <div id="ad-gpt-article-detail-boardbottom-insert-right"></div>
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-boardbottom-insert-left').addService(googletag.pubads());
+                googletag.enableServices();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.display("ad-gpt-article-detail-boardbottom-insert-left");
+              });
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-boardbottom-insert-right').addService(googletag.pubads());
+                googletag.enableServices();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.display("ad-gpt-article-detail-boardbottom-insert-right");
+              });
+            </script>
+          </div>
+
+        </div><!-- /.post-detail -->
       </div><!-- /.current-post-->
 
 

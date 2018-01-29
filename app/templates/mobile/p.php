@@ -176,7 +176,7 @@
               <div class="external-link">
                 <div class="external-link-heading">
                   <h2>外部リンク</h2>
-                  <p class="provider-name"><?= $page['post']['user']['name'] ?></p>
+                  <p class="provider-name"><a href="<?= $page['post']['user']['logo']['link'] ?>" target="_blank"><?= $page['post']['user']['name'] ?></a></p>
                 </div>
                 <ul>
                   <?php
