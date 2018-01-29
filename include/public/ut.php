@@ -410,7 +410,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
   $dat_array=unserialize($v);
   // デフォルト、カテゴリのときだけキーが違う
   $banner_info = [];
-  if (isset($playerid))
+  if ($playerid != "")
   {
     $banner_info["bannerflag"] = $dat_array["player_bannerflag"];
     $banner_info["bannertext"] = $dat_array["player_bannertext"];
@@ -424,7 +424,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
     $banner_info["android_bannerlink"] = $dat_array["player_android_bannerlink"];
     $ad[]= $banner_info;
   }
-	elseif ($isgetpickupplayerbanner)
+	elseif ($isgetpickupplayerbanner != "")
   {
     $banner_info["bannerflag"] = 1;
     $banner_info["bannertext"] = $dat_array["pickupplayer_bannertext"];
@@ -442,7 +442,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 	{
 		$ad[]=$dat_array;
 	}
-  if($categoryid!=""){
+  if ($categoryid != "") {
 		unset($v);
 		$file=sprintf("%s/static/ad/10-%s.dat",$staticfilepath,$categoryid);
 		if(file_exists($file)){
@@ -450,7 +450,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
       $dat_array=unserialize($v);
 
       // 各カテゴリtop画面用
-			if (!empty($playerid))
+      if ($playerid != "")
 			{
         // デフォルト、カテゴリのときだけキーが違う
         $banner_info = [];
@@ -502,7 +502,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
       $ad[] = unserialize($v);
     }
   }
-  if($playerid!=""){
+  if ($playerid != "") {
     unset($v);
     $file=sprintf("%s/static/ad/94-%s.dat",$staticfilepath,$playerid);
     if(file_exists($file)){
@@ -511,7 +511,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
 
     }
 	}
-  if($pageid!=""){
+  if ($pageid != "") {
 		unset($v);
 		$file=sprintf("%s/static/ad/2-%s.dat",$staticfilepath,$userid);
 		if(file_exists($file)){
