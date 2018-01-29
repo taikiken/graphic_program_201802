@@ -1277,6 +1277,7 @@ body {
       background-size: auto 36px;
       background-position: right bottom;
     }
+    // .widget-postList .board a .post-data
     .widget-postList {
       .board {
         .board-item-ad-wrapper {
@@ -1293,6 +1294,11 @@ body {
                 }
               }
             }
+          }
+        }
+        a {
+          .post-data {
+            padding-left: 0;
           }
         }
       }
