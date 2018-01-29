@@ -424,7 +424,7 @@ function get_advertise($categoryid="",$userid="",$pageid="",$playerid="", $isget
     $banner_info["android_bannerlink"] = $dat_array["player_android_bannerlink"];
     $ad[]= $banner_info;
   }
-	elseif ($isgetpickupplayerbanner != "")
+	elseif ($isgetpickupplayerbanner)
   {
     $banner_info["bannerflag"] = 1;
     $banner_info["bannertext"] = $dat_array["pickupplayer_bannertext"];
