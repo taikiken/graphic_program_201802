@@ -31,6 +31,7 @@ $app->group('/pyeongchang2018', function () use ($app) {
       'og_description' => '平昌五輪 フォトギャラリー見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
       'og_title'    => '平昌五輪 フォトギャラリー'.' | '.$app->model->property('title_short'),
       'og_url'         => $app->model->property('site_url').'pyeongchang2018/photo/',
+      'og_image'       => $app->model->property('site_url').'assets/images/pyeongchang2018/og_image.jpg',
     ));
 
     if ( $app->model->property('ua') === 'desktop' ) :
@@ -55,6 +56,7 @@ $app->group('/pyeongchang2018', function () use ($app) {
       'og_description' => '平昌五輪 ハイライト動画見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
       'og_title'    => '平昌五輪 ハイライト動画'.' | '.$app->model->property('title_short'),
       'og_url'         => $app->model->property('site_url').'pyeongchang2018/movie/',
+      'og_image'       => $app->model->property('site_url').'assets/images/pyeongchang2018/og_image.jpg',
     ));
 
     if ( $app->model->property('ua') === 'desktop' ) :
