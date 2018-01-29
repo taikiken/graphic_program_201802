@@ -1,7 +1,4 @@
 <?php
-
-ini_set('display_errors', true);
-
 include $INCLUDEPATH . "conf/config.php";
 include $INCLUDEPATH . $DB . ".php";
 include $INCLUDEPATH . "func.php";
@@ -19,7 +16,6 @@ if($SORC==1){
 		setcookie($cv[$i],"",time()-3600,"/");
 	}
 }
-
 $CURRENTPATH = $_SERVER["SCRIPT_FILENAME"];
 if (strpos($CURRENTPATH, $ADPATH)) {
     include $INCLUDEPATH . "dbutl.php";
@@ -45,12 +41,28 @@ if (strpos($CURRENTPATH, $ADPATH)) {
     header('Cache-Control: no-cache="set-cookie", no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 }
 
-if (isset($_GET["jwt"])) {
 
+if (isset($_GET["jwt"])) {
     //JWT APIでユーザを取得
+    $domainMap = [
+        'undotsushin.local' => 'vagrant.for.mac.localhost',
+        'dev.sportsbull.jp' => null,
+        'stg.sportsbull.jp' => null,
+        'sportsbull.jp' => null,
+    ];
+
+    $host = null;
+    if(isset($domainMap[$_SERVER['SERVER_NAME']])){
+        $host = $domainMap[$_SERVER['SERVER_NAME'] ];
+    }
+    if($host === null){
+        echo 'この環境から実行するAPIのドメインが未定義です。';
+        exit;
+    }
+
     $curl = curl_init();
     // 共通のオプション
-    $url = 'http://vagrant.for.mac.localhost/api/jwt/me';
+    $url = ( empty($_SERVER['HTTPS']) ? 'http://' : 'https://' )."{$host}/api/jwt/me";
     $data = ['token' => $_GET["jwt"]];
     $header = ['Content-Type: application/json', 'X-Requested-With: XMLHttpRequest',];
     curl_setopt($curl, CURLOPT_URL, $url);
