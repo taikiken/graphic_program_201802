@@ -233,10 +233,10 @@
           <!-- /531683568/mobile/mobile_detail_body_bottom -->
         </div><!-- /.post-detail -->
 
-        <!-- /531683568/article-detail/article-detail-body-bottom/ -->
+        <!-- /531683568/article-detail/article-detail-body-bottom -->
         <script>
           googletag.cmd.push(function() {
-            googletag.defineSlot('/531683568/article-detail/article-detail-body-bottom/', [300, 250], 'ad-gpt-article-detail-body-bottom').addService(googletag.pubads());
+            googletag.defineSlot('/531683568/article-detail/article-detail-body-bottom', [300, 250], 'ad-gpt-article-detail-body-bottom').addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.pubads().collapseEmptyDivs();
             googletag.enableServices();
@@ -247,7 +247,7 @@
           googletag.cmd.push(function() { googletag.display('ad-gpt-article-detail-body-bottom'); });
         </script>
         </div>
-        <!-- // /531683568/article-detail/article-detail-body-bottom/ -->
+        <!-- // /531683568/article-detail/article-detail-body-bottom -->
 
       <?php
         // ------------------------------------
@@ -310,7 +310,7 @@
       <!-- /531683568/mobile/mobile_recommend_after -->
       <script>
         googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/article-detail/article-detail-recommend-bottom/', [300, 250], 'ad-gpt-article-detail-recommend-bottom').addService(googletag.pubads());
+          googletag.defineSlot('/531683568/article-detail/article-detail-recommend-bottom', [300, 250], 'ad-gpt-article-detail-recommend-bottom').addService(googletag.pubads());
           googletag.pubads().enableSingleRequest();
           googletag.pubads().collapseEmptyDivs();
           googletag.enableServices();
@@ -361,7 +361,7 @@
       <!-- /531683568/mobile/mobile_news_after -->
       <script>
         googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/article-detail/article-detail-footer/', [300, 250], 'ad-gpt-article-detail-footer').addService(googletag.pubads());
+          googletag.defineSlot('/531683568/article-detail/article-detail-footer', [300, 250], 'ad-gpt-article-detail-footer').addService(googletag.pubads());
           googletag.pubads().enableSingleRequest();
           googletag.pubads().collapseEmptyDivs();
           googletag.enableServices();
