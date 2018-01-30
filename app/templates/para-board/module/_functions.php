@@ -89,7 +89,7 @@ function api_outline() {
 
 // JSON decode します
 function data_decode($result) {
-  return $result ? json_decode($result) : null;
+  return $result ? json_decode($result, true) : null;
 }
 
 // パラボードで使用する大会の一覧を取得する
