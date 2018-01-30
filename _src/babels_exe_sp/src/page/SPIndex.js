@@ -46,7 +46,7 @@ export default class SPIndex {
     // headline
     const headlineElement = Dom.headline();
     if (headlineElement !== null) {
-      let headline = new UT.sp.view.home.SPViewHeadLine(headlineElement, {}, dae.ad);
+      const headline = new UT.sp.view.home.SPViewHeadLine(headlineElement, {}, dae.ad);
       headline.start();
     }
   }
@@ -68,7 +68,7 @@ export default class SPIndex {
     // @since 2016-09-15
     const pickupElement = Dom.pickup();
     if (pickupElement !== null) {
-      let pickup = new UT.view.home.ViewPickup(pickupElement);
+      const pickup = new UT.view.home.ViewPickup(pickupElement);
       pickup.start();
     }
 
