@@ -12,7 +12,7 @@ $app->group('/para-board', function () use($app) {
 
     if($app->model->property('ua') === 'desktop')
     {
-      return $tis->renderer->render($response, 'para-board/desktop/index.php', $args);
+      return $this->renderer->render($response, 'para-board/desktop/index.php', $args);
     }
     else
     {
