@@ -485,7 +485,17 @@ const buildPath = (root = '') => {
       new Permalink(),
       new Queries(),
       true
-    )
+    ),
+    // --------------------------------------------
+    // パラスポーツ
+    // @since 2018-01-30
+    // --------------------------------------------
+    'competition:recent': new Types(
+      new Type(`${API_PATH}/competition_list/recent`, 'GET' ),
+      new Permalink(),
+      new Queries(),
+      true,
+    ),
   };
 };
 
