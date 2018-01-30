@@ -156,7 +156,34 @@ if(strlen($api)>0){
 			*/
 			
 		}
-	
+	}elseif($api==='media'){
+		$mediaId = null;
+		if(isset($_REQUEST["media"]) && $_REQUEST["media"] !== null){
+			$mediaId = bind($_REQUEST["media"]);
+			$type = bind($_REQUEST["type"]);
+			$o->query("select id from u_categories where name_e = 'photo'");
+			$f = $o->fetch_array();
+			$photoCategoryId = $f['id'];
+			//抽出条件の組み立て
+			$addConditions = ["", "d2 = '{$mediaId}'"];
+			switch ($type) {
+				case 'photo':
+					$addConditions[] = "( m1 = '{$f['id']}' or m2 = '{$photoCategoryId}' )";
+					break;
+				case 'video':
+					$addConditions[] = "( SELECT video FROM u_view WHERE pageid = repo_n.id LIMIT 1 ) = 1";
+					break;
+				case 'news':
+					$addConditions[] = "( m1 IS NULL or m1 <> '{$photoCategoryId}' )";
+					$addConditions[] = "( m2 IS NULL or m2 <> '{$photoCategoryId}' )";
+					$addConditions[] = "COALESCE( (SELECT video FROM u_view WHERE pageid = repo_n.id LIMIT 1), 0) <> 1";
+					break;
+				default:
+				//nothing
+			}
+			$sql = sprintf("select * from %s%s", sprintf($articletable2, set_isbookmark($uid), implode(' and ', $addConditions), " order by m_time,id desc", $limit), " order by m_time,id desc");
+			$nsql = "select count(id) as n from repo_n where flag=1". implode(' and ', $addConditions);
+		}
 	}elseif($api==="search"){
 
 		$q=set_condition($_REQUEST["q"]);
