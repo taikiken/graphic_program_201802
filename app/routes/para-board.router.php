@@ -5,7 +5,7 @@ $app->group('/para-board', function () use($app) {
   // ==============================
   $app->get('[/]', function ($request, $response, $args) use ($app) {
 
-    $category = $app->model->get_category_by_slug('parasposts');
+    $category = $app->model->get_category_by_slug('parasports');
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
     $template_classname .= ' parasposts';
 
@@ -37,7 +37,7 @@ $app->group('/para-board', function () use($app) {
   // ==============================
   $app->get('/{sports_id:all|[0-9]+}/{year:[0-9]+}[/]', function ($request, $response, $args) use ($app) {
 
-    $category = $app->model->get_category_by_slug('parasposts');
+    $category = $app->model->get_category_by_slug('parasports');
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
     $template_classname .= ' parasposts';
 
@@ -72,7 +72,7 @@ $app->group('/para-board', function () use($app) {
   $app->get('/{competition_id:[0-9]+}[/]', function ($request, $response, $args) use ($app) {
 
 
-    $category = $app->model->get_category_by_slug('parasposts');
+    $category = $app->model->get_category_by_slug('parasports');
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
     $template_classname .= ' parasposts';
 

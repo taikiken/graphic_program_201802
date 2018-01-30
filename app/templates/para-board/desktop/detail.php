@@ -4,3 +4,6 @@
  * @since 2018-01-30
  */
 ?>
+<?php
+var_dump($page);
+?>
