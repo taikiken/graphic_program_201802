@@ -775,7 +775,7 @@ $app->group('/stats', function () use($app) {
           $season_name = $year . $season_jp;
           $short_season_name = substr($season_name, 2);
 
-          $league_name = '関西大学野球';
+          $league_name = '関西学生野球';
           $team_and_date = implode('', [
             $visitor,
             ' vs ',
