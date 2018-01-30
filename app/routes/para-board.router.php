@@ -12,7 +12,7 @@ $app->group('/para-board', function () use($app) {
 
     if($app->model->property('ua') === 'desktop')
     {
-      return $this->renderer->render($response, 'para-board/desktop/index.php', $args);
+      return $tis->renderer->render($response, 'para-board/desktop/index.php', $args);
     }
     else
     {
@@ -70,14 +70,8 @@ $app->group('/para-board', function () use($app) {
     ));
 
 
-    if($app->model->property('ua') === 'desktop')
-    {
-      return $this->renderer->render($response, 'para-board/desktop/webview.php', $args);
-    }
-    else
-    {
-      return $this->renderer->render($response, 'para-board/mobile/webview.php', $args);
-    }
+    return $this->renderer->render($response, 'para-board/webview.php', $args);
+
 
   });
 });
