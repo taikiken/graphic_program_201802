@@ -36,14 +36,14 @@ if (!empty($response)) :
     foreach ($para_list as $para_date => $para_games) :
       $th_rowspan = count($para_games);
 
-//      $tr_index = 0;
       // tr loop
       foreach ($para_games as $para_game) :
     ?>
       <tr>
         <td class="paraboard__widjet__list__game">
           <a href="/para-board/<?php echo $para_game['id']; ?>" class="paraboard__widjet__list__game__link">
-            <header class="paraboard__widjet__list__game__header paraboard__widjet__list__icon--basketball">
+            <header class="paraboard__widjet__list__game__header">
+              <span class="paraboard__widjet__list__icon"><img src="<?php echo $para_game['icon']; ?>" alt=""></span>
               <p class="paraboard__widjet__list__date"><?php echo $para_date; ?></p>
               <p class="paraboard__widjet__list__game__header__category">
                 <?php
@@ -61,7 +61,6 @@ if (!empty($response)) :
         </td>
       </tr>
       <?php
-//      $tr_index += 1;
       endforeach;
       // /tr
       ?>
