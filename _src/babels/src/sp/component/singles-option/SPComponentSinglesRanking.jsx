@@ -28,10 +28,10 @@ import ComponentCategoryLabels from '../../../component/categories/ComponentCate
 import Touching from '../../../ui/Touching';
 
 // event
-import { EventDispatcher } from '../../../event/EventDispatcher';
+// import { EventDispatcher } from '../../../event/EventDispatcher';
 
 // component
-import RankingCarouselManager from './ranking-carousel/RankingCarouselManager';
+// import RankingCarouselManager from './ranking-carousel/RankingCarouselManager';
 import SPComponentSingleRankingAd from './ad/SPComponentSingleRankingAd';
 
 // ga
@@ -43,206 +43,6 @@ import { Ga } from '../../../ga/Ga';
  */
 const React = self.React;
 
-// ---------------------------------------------------
-/**
- * swipe 処理を行います
- * - {@link Touching}
- * @since 2017-09-13
- */
-export class Swipe extends EventDispatcher {
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * SWIPE_LEFT
-   * @returns {string} swipeLeft
-   */
-  static get SWIPE_LEFT() {
-    return 'swipeLeft';
-  }
-  /**
-   * SWIPE_RIGHT
-   * @returns {string} swipeRight
-   */
-  static get SWIPE_RIGHT() {
-    return 'swipeRight';
-  }
-  /**
-   * DRAGGING
-   * @returns {string} dragging
-   */
-  static get DRAGGING() {
-    return 'dragging';
-  }
-  /**
-   * CANCEL
-   * @returns {string} swipeCancel
-   */
-  static get CANCEL() {
-    return 'swipeCancel';
-  }
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  /**
-   * swipe 処理を始めます
-   * @param {Element} element target element
-   * @param {number} limit 移動限界 px
-   */
-  constructor(element, limit = 140) {
-    super();
-    // ---
-    /**
-     * touch event 処理インスタンス
-     * @type {Touching}
-     */
-    this.touching = new Touching(element, false, 1);
-    /**
-     * bind onStart - Touching.START event handler
-     * @type {function}
-     */
-    this.onStart = this.onStart.bind(this);
-    /**
-     * bind onMove - Touching.MOVE event handler
-     * @type {function}
-     */
-    this.onMove = this.onMove.bind(this);
-    /**
-     * bind onEnd - Touching.END event handler
-     * @type {function}
-     */
-    this.onEnd = this.onEnd.bind(this);
-    /**
-     * bind onCancel - Touching.CANCEL event handler
-     * @type {function}
-     */
-    this.onCancel = this.onCancel.bind(this);
-    /**
-     * drag 移動 px - 積算
-     * @type {number}
-     */
-    this.dragging = 0;
-    /**
-     * 移動限界 px
-     * @type {number}
-     */
-    this.limit = limit;
-  }
-  // ---------------------------------------------------
-  //  METHOD
-  // ---------------------------------------------------
-  /**
-   * 処理開始します
-   * - Touching.START watch
-   */
-  start() {
-    const touching = this.touching;
-    touching.on(Touching.START, this.onStart);
-    touching.init();
-  }
-  /**
-   * {@link Touching} event 監視します
-   * - MOVE
-   * - END
-   * - CANCEL
-   */
-  activate() {
-    const touching = this.touching;
-    touching.on(Touching.MOVE, this.onMove);
-    touching.on(Touching.END, this.onEnd);
-    touching.on(Touching.CANCEL, this.onCancel);
-  }
-  /**
-   * {@link Touching} event 監視「解除」します
-   * - MOVE
-   * - END
-   * - CANCEL
-   */
-  dispose() {
-    const touching = this.touching;
-    touching.off(Touching.MOVE, this.onMove);
-    touching.off(Touching.END, this.onEnd);
-    touching.off(Touching.CANCEL, this.onCancel);
-  }
-  /**
-   * リセット - drag 積算 0 にします
-   */
-  reset() {
-    this.dragging = 0;
-  }
-  /**
-   * drag 通知します - Swipe.DRAGGIN
-   * @param {number} x 移動 px 積算
-   */
-  drag(x) {
-    this.dispatch({ type: Swipe.DRAGGING, x });
-  }
-  /**
-   * Touching.END 後の swipe 判定します
-   */
-  move() {
-    const x = this.dragging;
-    let type = Swipe.SWIPE_LEFT;
-    if (x > 0) {
-      // prev
-      type = Swipe.SWIPE_RIGHT;
-    }
-    // console.log('Swipe.move', type, x);
-    this.dispatch({ type, x });
-  }
-  /**
-   * Touching.START event handler
-   * - reset
-   * - dispose
-   * - activate
-   */
-  onStart() {
-    this.reset();
-    this.dispose();
-    this.activate();
-  }
-  /**
-   * Touching.MOVE event handler
-   * - `events.between.x` を `dragging` へ加算します
-   * - drag 通知します
-   * @param {{between: {x: number}}} events Touching.MOVE event
-   */
-  onMove(events) {
-    let dragging = this.dragging;
-    dragging += events.between.x;
-    if (Math.abs(dragging) > this.limit) {
-      this.onEnd();
-      return;
-    }
-    this.dragging = dragging;
-    this.drag(this.dragging);
-  }
-  /**
-   * Touching.END event handelr
-   * - 閾値チェックし `onCancel` or `move` を実行します
-   */
-  onEnd() {
-    this.dispose();
-    const absX = Math.abs(this.dragging);
-    // 閾値チェック
-    if (absX < 10) {
-      // 元に戻す
-      this.onCancel();
-    } else {
-      // swipe
-      this.move();
-    }
-  }
-  /**
-   * Touching.CANCEL event handler
-   * - drag 処理中止を通知します
-   */
-  onCancel() {
-    this.reset();
-    this.dispose();
-    this.dispatch({ type: Swipe.CANCEL });
-  }
-}
 // ---------------------------------------------------
 /**
  * 広告を含む carousel length をカウントします
@@ -272,7 +72,7 @@ const CarouselAd = ({ slug, index }) => {
   // if (index === 1 || index === 3 || (length === 1 || length === 2)) {
   if (index === 4) {
     // console.log('CarouselAd output *******');
-    containers += 1;
+    // containers += 1;
     return (
       <SPComponentSingleRankingAd
         index={index}
@@ -445,201 +245,18 @@ class SPRankingCarousel extends React.Component {
      * @type {number}
      */
     this.width = 150;
-    /**
-     * bind onPrev - Swipe.SWIPE_RIGHT event handler
-     * @type {function}
-     */
-    this.onPrev = this.onPrev.bind(this);
-    /**
-     * bind onNext - Swipe.SWIPE_LEFT event handler
-     * @type {function}
-     */
-    this.onNext = this.onNext.bind(this);
-    // this.onStart = this.onStart.bind(this);
-    /**
-     * bind onDragging - Swipe.DRAGGING event handler
-     * @type {function}
-     */
-    this.onDragging = this.onDragging.bind(this);
-    /**
-     * bind onCancel - Swipe.CANCEL event handler
-     * @type {function}
-     */
-    this.onCancel = this.onCancel.bind(this);
-    // console.log('SPRankingCarousel', props);
+
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * carousel 処理を開始します
-   * - 初期値 (0) へ移動します
-   * - carousel 関連イベントを watch します
-   * - 広告を含めた実際数へ `length`, `last` update します
-   * TODO: RankingCarouselManager 移行確認後に削除する
-   */
-  start() {
-    this.jump(0);
-    // ---
-    const slide = this.slide;
-    if (slide) {
-      const swipe = new Swipe(slide);
-      swipe.on(Swipe.DRAGGING, this.onDragging);
-      swipe.on(Swipe.CANCEL, this.onCancel);
-      swipe.on(Swipe.SWIPE_LEFT, this.onNext);
-      swipe.on(Swipe.SWIPE_RIGHT, this.onPrev);
-      swipe.start();
-    }
-    // ---
-    this.length = containers;
-    this.last = containers - 1;
-    // console.log('SPRankingCarousel.start', this.state, containers);
-  }
-  // ---------------------------------------------------
-  /**
-   * Swipe.SWIPE_RIGHT event handler
-   * - slide index 0: `onCancel` 実行
-   * - `prev` 実行
-   */
-  onPrev() {
-    // console.log('SPRankingCarousel.onPrev', this.index);
-    if (this.index !== 0) {
-      // 先頭は prev しない
-      this.prev();
-    } else {
-      this.onCancel();
-    }
-  }
-  /**
-   * Swipe.SWIPE_LEFT event handler
-   * - slide index `last`: `onCancel` 実行
-   * - `next` 実行
-   */
-  onNext() {
-    // console.log('SPRankingCarousel.onNext', this.index, this.last);
-    if (this.index !== this.last) {
-      // last は next しない
-      this.next();
-    } else {
-      this.onCancel();
-    }
-  }
-  // ---------------------------------------------------
-  /**
-   * Swipe.DRAGGING event handler - drag 処理をします
-   * - state: left update します - motion: false
-   * @param {{x: number}} events Swipe.DRAGGING event
-   */
-  onDragging(events) {
-    const left = events.x;
-    this.setState( { left, motion: false } );
-  }
-  /**
-   * drag cancel - left: 0, motion: true します
-   */
-  onCancel() {
-    this.setState( { left: 0, motion: true } );
-  }
-  // ---------------------------------------------------
-  /**
-   * 前のスライド処理
-   * - index: 0 - `onCancel`
-   * - `jump`
-   */
-  prev() {
-    let index = this.index;
-    index -= 1;
-    // console.log('SPRankingCarousel.prev', index);
-    if (index >= 0) {
-      this.jump(index);
-    } else {
-      this.onCancel();
-    }
-  }
-  /**
-   * 次のスライド処理
-   * - index: last - `onCancel`
-   * - `jump`
-   */
-  next() {
-    let index = this.index;
-    index += 1;
-    // console.log('SPRankingCarousel.next', index);
-    if (index <= this.last) {
-      this.jump(index);
-    } else {
-      this.onCancel();
-    }
-  }
-  /**
-   * スライド移動
-   * - index update
-   * - `translateX` - x value 計算
-   * - setState: x, left: 0, motion: true
-   * @param {number} index 移動先
-   */
-  jump(index) {
-    this.index = index;
-    const x = this.translateX(index);
-    // console.log('SPRankingCarousel.jump', index, x);
-    this.setState({ x, left: 0, motion: true });
-  }
-  // ---------------------------------------------------
-  // carousel move
-  /**
-   * スライド移動 x value を計算します
-   * @param {number} index 移動先スライド番号
-   * @returns {number} x value
-   */
-  translateX(index) {
-    return -this.width * index;
-  }
-  /**
-   * transform style を作成します
-   * @param {number} [duration=0.32] transition duration second
-   * @returns {{transform: string, transition: string}} transform style
-   */
-  transform(duration = 0.32) {
-    const x = `translateX(${this.state.x}px)`;
-    return {
-      transform: x,
-      // WebkitTransform: x,
-      transition: `transform ${duration}s ease-out`,
-      // WebkitTransition: `-webkit-transform ${duration}s ease-out`,
-    };
-  }
-  // ---------------------------------------------------
-  // swipe - before drag
-  /**
-   * drag style を作成します
-   * @param {number} left 移動量 px
-   * @param {number} [duration=0.31] transition duration second
-   * @returns {{left: string}} drag style
-   */
-  dragging(left, duration = 0.31) {
-    const style = {
-      left: `${left}px`,
-    };
-    if (this.state.motion) {
-      style.transition = `left ${duration}s linear`;
-    }
-    return style;
-  }
+
   // ---------------------------------------------------
   /**
    * mount 後 length 1 を超えていたら `start` 実行します
    */
   componentDidMount() {
-    if (this.props.length > 1) {
-      // carousel 1 を超えていたら実装を開始する
-      // this.start();
-      // -------------------------------
-      // React.state 使用しない
-      const slide = this.slide;
-      const swipe = new Swipe(slide);
-      RankingCarouselManager.setup(this.wrapper, slide, swipe, containers);
-      swipe.start();
-    }
+
   }
   /**
    * 出力します
@@ -656,12 +273,12 @@ class SPRankingCarousel extends React.Component {
     return (
       <div
         className="widget-post-carousel-wrapper"
-        style={this.transform()}
+        // style={this.transform()}
         ref={element => (this.wrapper = element)}
       >
         <div
           className="widget-post-carousel-list"
-          style={this.dragging(this.state.left)}
+          // style={this.dragging(this.state.left)}
           ref={element => (this.slide = element)}
         >
           {

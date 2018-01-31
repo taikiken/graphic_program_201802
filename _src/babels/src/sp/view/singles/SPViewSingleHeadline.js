@@ -60,8 +60,8 @@ export default class SPViewSingleHeadline extends SPViewArchiveInfinite {
      * @type {CategoryAuth|Category}
      */
     this.action = User.sign ?
-      new CategoryAuth(slug, '', this.done.bind(this), this.fail.bind(this), 0, 12) :
-      new Category(slug, '', this.done.bind(this), this.fail.bind(this), 0, 12);
+      new CategoryAuth(slug, '', this.done.bind(this), this.fail.bind(this), 0, 32) :
+      new Category(slug, '', this.done.bind(this), this.fail.bind(this), 0, 32);
     /**
      * category slug, ga に使う
      * @override

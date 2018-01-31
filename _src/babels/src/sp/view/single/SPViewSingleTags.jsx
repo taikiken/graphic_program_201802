@@ -49,6 +49,10 @@ export default class SPViewSingleTags extends View {
   render() {
     const keywords = this.keywords;
 
+    if(!keywords.length) {
+      return null;
+    }
+
     ReactDOM.render(
       <div className="post-footer">
         {/* TAGS */}
