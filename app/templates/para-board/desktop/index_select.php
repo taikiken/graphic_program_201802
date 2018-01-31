@@ -21,10 +21,12 @@ include_once __DIR__.'../../desktop/_category-heading.php';
   <div class="body-sec-inner">
 
     <?php
-    // form + list
+    // form
     $para_schedule_id = $page['para_sports_id'];
     $para_schedule_year_index = -1;
     $para_schedule_year = $page['para_year'];
+    include_once __DIR__ . '/_index_form.php';
+    // list
     include_once __DIR__ . '/_index_list.php';
     ?>
 

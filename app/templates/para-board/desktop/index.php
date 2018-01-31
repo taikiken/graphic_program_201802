@@ -21,9 +21,13 @@ include_once __DIR__.'../../desktop/_category-heading.php';
   <div class="body-sec-inner">
 
     <?php
-    // form + list
+    // form
     $para_schedule_id = 0;
     $para_schedule_year_index = 0;
+    // form
+    include_once __DIR__ . '/_index_form.php';
+    // list
+    $para_query_option = 'recent';
     include_once __DIR__ . '/_index_list.php';
     ?>
 

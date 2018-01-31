@@ -9,161 +9,84 @@
 // para-sports module
 include_once __DIR__ . '/../module/_functions.php';
 
-// pull-down data - select - option from `/api/v1/competition_pulldown`
-$pull_down = get_pull_down();
-$pull_down_response = $pull_down['response'];
+$para_data = $para_query_option == 'recent' ? get_recent() : get_recent_id_year($para_schedule_id, $para_schedule_year);
+$para_data_response = $para_data['response'];
 
 // [A]
-if (!empty($pull_down_response)) :
-  $pull_down_response_sports = $pull_down_response['sports'];
-  $pull_down_response_year = $pull_down_response['year'];
+if (!empty($para_data_response)) :
+  $para_data_response_list = $para_data_response['list'];
 
   // [B]
-  if (is_array($pull_down_response_sports) || is_array($pull_down_response_year)) :
-    $para_schedule_year_selected_index = 0;
+  if (is_array($para_data_response_list) && count($para_data_response_list) > 0) :
 ?>
-<form action="javascript:void(0)" class="paraboard__selector" id="js-paraboard__selector">
-<!--<form action="" name="paraboard__selector" class="paraboard__selector" id="js-paraboard__selector">-->
-  <?php
-  // 日程・結果一覧
-  ?>
-  <header class="paraboard__header">
-    <h2 class="paraboard__header__heading">日程・結果一覧</h2>
-    <div class="paraboard__header__search">
+  <table class="paraboard__list">
+    <tbody>
     <?php
     // [C]
-    if (is_array($pull_down_response_sports) && count($pull_down_response_sports) > 0) :
+    foreach ($para_data_response_list as $para_date => $para_games) :
+      $th_rowspan = count($para_games);
+
+      $tr_index = 0;
+      // [D]
+      // tr loop
+      foreach ($para_games as $para_game) :
+        $para_active_flags = $para_game['active_flag'];
     ?>
-    <div class="paraboard__header__search__type paraboard__header__search__type--event">
-      <span class="paraboard__header__search__type__heading">競技</span>
-      <div class="paraboard__header__search__select__container">
-        <label class="paraboard__header__search__select__label">
-          <select name="sports_id" class="paraboard__header__search__select paraboard__header__search__select--event">
+        <tr>
           <?php
-          // response.sports
-          foreach ($pull_down_response_sports as $para_id => $para_sports) :
-            $selected_id = $para_id == $para_schedule_id;
-          ?>
-            <option value="<?php echo $para_id; ?>"<?php
-            echo $selected_id ? ' selected' : '';
-            ?>><?php echo $para_sports; ?></option>
+          // th
+          if ($tr_index == 0) :
+            ?>
+            <th class="paraboard__list__date"<?php echo $th_rowspan != 1 ? ' rowspan="' . $th_rowspan . '"' : '' ?>>
+              <?php
+              echo $para_date;
+              ?>
+            </th>
           <?php
-          endforeach;
+          endif;
+          // /th
           ?>
-          </select>
-        </label>
-      </div>
-    </div>
+          <td class="paraboard__list__game">
+            <header class="paraboard__list__game__header">
+              <span class="paraboard__widjet__list__icon"><img src="<?php echo $para_game['icon']; ?>" alt=""></span>
+              <p class="paraboard__list__game__header__category">
+                <?php
+                echo $para_game['sport_name'];
+                ?>
+              </p>
+              <h4 class="paraboard__list__game__header__heading">
+                <?php
+                echo $para_game['competition_name'];
+                ?>
+              </h4>
+            </header>
+            <div class="paraboard__list__game__status">
+              <ul class="paraboard__list__game__status__list">
+                <li class="paraboard__list__game__status__item"><span class="paraboard__list__game__status__item--result<?php echo $para_active_flags['result'] ? ' enable' : ''; ?>">結果</span></li>
+                <li class="paraboard__list__game__status__item"><span class="paraboard__list__game__status__item--overview<?php echo $para_active_flags['summary'] ? ' enable' : ''; ?>">概要</span></li>
+                <li class="paraboard__list__game__status__item"><span class="paraboard__list__game__status__item--movie<?php echo $para_active_flags['highlight_movie'] ? ' enable' : ''; ?>">動画</span></li>
+                <li class="paraboard__list__game__status__item"><span class="paraboard__list__game__status__item--post<?php echo $para_active_flags['news'] ? ' enable' : ''; ?>">記事</span></li>
+                <li class="paraboard__list__game__status__item"><span class="paraboard__list__game__status__item--photo<?php echo $para_active_flags['photo_gallery'] ? ' enable' : ''; ?>">フォト</span></li>
+              </ul><!-- /.paraboard__list__game__status__list -->
+            </div>
+            <div class="paraboard__list__game__btn">
+              <a href="/para-board/<?php echo $para_game['id']; ?>/<?php echo $para_game['current_year']; ?>" class="paraboard__list__game__btn__link">
+                <i>詳しく見る</i>
+              </a>
+            </div>
+          </td>
+        </tr>
+      <?php
+        $tr_index += 1;
+      endforeach;
+      // [/D]
+      ?>
     <?php
-    endif;
+    endforeach;
     // [/C]
     ?>
-    <?php
-    // [D]
-    if (is_array($pull_down_response_year) && count($pull_down_response_year) > 0) :
-    ?>
-      <div class="paraboard__header__search__type paraboard__header__search__type--year">
-        <span class="paraboard__header__search__type__heading">年</span>
-        <div class="paraboard__header__search__select__container">
-          <label class="paraboard__header__search__select__label">
-            <select name="year" class="paraboard__header__search__select paraboard__header__search__select--year">
-            <?php
-            // response.year
-            foreach ($pull_down_response_year as $para_index => $para_year) :
-              if ($para_schedule_year_index >= 0) {
-                $para_schedule_year_selected_index = $para_index;
-                $selected_year = $para_index == $para_schedule_year_index;
-              } else {
-                $para_schedule_year_selected_index = $para_index;
-                $selected_year = $para_year == $para_schedule_year;
-              }
-            ?>
-              <option value="<?php echo $para_year; ?>"<?php
-              echo $selected_year ? ' selected' : '';
-              ?>><?php echo $para_year; ?>年</option>
-            <?php
-            endforeach;
-            ?>
-            </select>
-          </label>
-        </div><!-- /.paraboard__header__search__select__container -->
-      </div>
-    <?php
-    endif;
-    // [/D]
-    ?>
-      <div class="xxxxxxxxxxx">
-        <input type="submit" value="選択する" class="xxxxxxx" />
-      </div>
-    </div>
-  </header>
-</form>
-<script>
-  (function(window) {
-    'use strict';
-    var document = window.document;
-    var selected = {
-      id: "<?php echo $para_schedule_id; ?>",
-      year: "<?php echo $para_schedule_year_selected_index; ?>",
-    };
-    var initial = {
-      id: null,
-      year: null,
-    };
-    function onSubmit(event) {
-      var formData = new FormData(event.target);
-      // console.log('onSubmit', formData, formData.get('sports_id'), formData.get('year'));
-      var id = formData.get('sports_id');
-      var year = formData.get('year');
-      if (id === initial.id && year === initial.year) {
-        return;
-      }
-      location.href = '/para-board/' + id + '/' + year + '/';
-    }
-    function selectedYear(form) {
-      const index = parseInt(selected.year, 10);
-      if (isNaN(index)) {
-        return;
-      }
-      var element = form.querySelector('select[name="year"]');
-      if (!element) {
-        return;
-      }
-      var options = element.getElementsByTagName('option');
-      options[index].selected = true;
-    }
-    function selectedId(form, id, name) {
-      const index = parseInt(selected.id, 10);
-      if (isNaN(index)) {
-        return;
-      }
-      var element = form.querySelector('select[name="sports_id"]');
-      if (!element) {
-        return;
-      }
-      var options = element.getElementsByTagName('option');
-      options[index].selected = true;
-    }
-    function init() {
-      var form = document.getElementById('js-paraboard__selector');
-      if (!form) {
-        return;
-      }
-      // ---
-      selectedId(form);
-      selectedYear(form);
-      // ---
-      var formData = new FormData(form);
-      initial.id = formData.get('sports_id');
-      initial.year = formData.get('year');
-      console.log('initial', initial);
-      // ---
-      form.addEventListener('submit', onSubmit, false);
-    }
-    init();
-  }(window));
-
-</script>
+    </tbody>
+  </table>
   <?php
   endif;
   // [/B]
