@@ -483,7 +483,7 @@ function outimg($oimg,$tumb=1, $parse=true){
 	file_put_contents($file,$img);
 
 	// 画像圧縮
-	if (checkFileType($file) == 'jpg')
+	if (exif_imagetype($file) == IMAGETYPE_JPEG)
 	{
     $filepath_array = explode('/' , $file);
     $img_name = $filepath_array[count($filepath_array) - 1];
