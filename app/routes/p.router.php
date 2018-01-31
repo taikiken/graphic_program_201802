@@ -11,7 +11,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     $post = $app->model->get_post($args['article_id']);
 
     if ( $post && !empty($post['id']) ) :
-//      var_dump($post['related_links']); exit;
 
       // 記事のプライマリーカテゴリーを取得
       $category = array();
