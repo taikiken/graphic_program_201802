@@ -823,4 +823,27 @@
       }
     }
   } //.paraboard__gallery
+
+
+
+  //.gallery__list
+  .gallery__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    //.gallery__list__item
+    &__item {
+      width: 354px;
+      margin-right: 13px;
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
+
+    //.gallery__list__figure
+    &__figure {
+      text-align: center;
+    }
+  } //.gallery__list
 } //.whole.parasports
