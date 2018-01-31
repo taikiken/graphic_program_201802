@@ -11,6 +11,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     $post = $app->model->get_post($args['article_id']);
 
     if ( $post && !empty($post['id']) ) :
+//      var_dump($post['related_links']); exit;
 
       // 記事のプライマリーカテゴリーを取得
       $category = array();
@@ -59,6 +60,19 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         $syn_extension = 'selfonly';
       endif;
 
+      // 関連リンク作成
+    $search = ['<p>関連リンク<br>', '<p>', '</p>'];
+    $relatedpost = str_replace($search, '', $post['relatedpost']);
+    $relatedpost = explode('<br>', $relatedpost);
+    $related_links = [];
+    foreach ($relatedpost as $row)
+    {
+      if (!empty($row))
+      {
+        $related_links[] = $row;
+      }
+    }
+
       $args['page'] = $app->model->set(array(
         'title'          => $post['title'].' | '.$category['label'],
         'og_title'       => $post['title'].' | '.$app->model->property('title_short'),
@@ -79,7 +93,8 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
         'category'       => $category,
         'post'           => $post,
-        'photo'          => $photo
+        'photo'          => $photo,
+        'related_links'  => $related_links
       ));
 
 

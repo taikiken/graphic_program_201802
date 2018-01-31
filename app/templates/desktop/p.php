@@ -170,7 +170,7 @@
             </div>
           </div><!-- /.post-sns-pr -->
 
-          <?php if(!empty($page['post']['related_links'])) { ?>
+          <?php if(!empty($page['related_links'])) { ?>
             <div class="external-link">
                 <div class="external-link-heading">
                   <h2>外部リンク</h2>
@@ -178,8 +178,8 @@
                 </div>
                 <ul>
                   <?php
-                  foreach ($page['post']['related_links'] as $related_link) {
-                    echo '<li><a href="' . $related_link['url'] . '">' . $related_link['label'] . '</a></li>';
+                  foreach ($page['related_links'] as $row) {
+                    echo '<li>'. $row .'</li>';
                   }
                   ?>
                 </ul>
