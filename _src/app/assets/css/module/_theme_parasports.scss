@@ -263,6 +263,11 @@
         }
       } //.paraboard__header__search__type
 
+      //.paraboard__header__search__select__container
+      &__select__container {
+        display: inline-block;
+      }
+
       //.paraboard__header__search__select
       &__select {
         appearance: none;
@@ -293,6 +298,31 @@
           @include hide-text;
         }
       } //.paraboard__header__search__select
+
+
+
+      //.paraboard__header__search__btn
+      &__btn {
+        display: inline-block;
+        margin-left: 12px;
+
+        //.paraboard__header__search__btn__submit
+        &__submit {
+          appearance: none;
+          width: 80px;
+          line-height: 28px;
+          border: none;
+          border-radius: 4px;
+          background-color: #e83851;
+          color: #fff;
+          font-weight: bold;
+          font-size: fz(14);
+
+          &:hover {
+            @include hover-opacity(0.8);
+          }
+        } //.paraboard__header__search__btn__submit
+      } //.paraboard__header__search__btn
     } //.paraboard__header__search
   } //.paraboard__header
 
@@ -707,7 +737,7 @@
     //.gallery--post
     //.gallery--photo
     [class*="gallery--"] {
-      margin-top: 20px;
+      margin-top: 40px;
       border-top: 4px solid #ddd;
 
       @at-root {
@@ -715,6 +745,7 @@
         display: table;
         width: 100%;
         height: 58px;
+        border-bottom: 1px solid #ddd;
       }
 
       .gallery__heading {
@@ -834,6 +865,7 @@
     //.gallery__list__item
     &__item {
       width: 354px;
+      margin-top: 20px;
       margin-right: 13px;
 
       &:nth-child(3n) {
@@ -846,4 +878,121 @@
       text-align: center;
     }
   } //.gallery__list
+
+
+
+  //.gallery--highlight
+  .gallery--highlight {
+    //.gallery__list__figure
+    .gallery__list__figure {
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        @include opacity(0.2);
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 49px;
+        height: 49px;
+        background: url(/assets/images/para-board/icon-play.png) 0 0 no-repeat;
+        @include hide-text;
+      }
+    }  //.gallery__list__figure
+
+
+    //.gallery__list__link
+    .gallery__list__link:hover {
+      .gallery__list__figure:before {
+        @include hover-opacity(0);
+      }
+    }
+  } //.gallery--highlight
+
+
+
+  //.gallery--post
+  .gallery--post {
+    .gallery__list__link {
+      @include link-decoration(null, null, none, none);
+
+      &:hover {
+        .gallery__list__figure:before {
+          @include hover-opacity(0.2);
+        }
+      }
+    }
+
+    //.gallery__list__figure
+    .gallery__list__figure {
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        @include opacity(0);
+      }
+    }
+
+    //.gallery__list__heading
+    .gallery__list__heading {
+      line-height: lh(26, 20);
+      margin-top: 4px;
+      color: #333;
+      font-weight: bold;
+      font-size: fz(18);
+    }
+
+    //.gallery__list__category
+    .gallery__list__category {
+      line-height: 1.2;
+      margin-top: 4px;
+      color: #888;
+      font-size: fz(12);
+    }
+  } //.gallery--post
+
+
+
+  //.gallery--photo
+  .gallery--photo {
+    margin-bottom: 40px;
+
+    //.gallery__list
+    .gallery__list {
+      align-items: stretch;
+    } //.gallery__list
+
+    //.gallery__list__item
+    .gallery__list__item {
+      display: flex;
+      align-items: center;
+      padding: 7px;
+      background-color: #f5f5f5;
+    } //.gallery__list__item
+
+    ///gallery__list__link
+    .gallery__list__link {
+      &:hover {
+        @include hover-opacity(0.8);
+      }
+    } //.gallery__list__link
+
+    //.gallery__list__figure
+    .gallery__list__figure {
+      width: 340px;
+    } //.gallery__list__figure
+  }
 } //.whole.parasports
