@@ -74,7 +74,9 @@
   .post-single-figure {
     text-align: center;
     img {
+      width: auto;
       max-width: 225px;
+      max-height: 150px;
     }
     .caption {
       text-align: left;
@@ -1081,8 +1083,9 @@ body {
     >div {
       background-color: #fff;
       margin-top: 0;
-      margin-bottom: 5px;
+      // margin-bottom: 5px;
       border-top: 1px solid #ddd;
+      border-bottom: 5px solid #eee;
       &:nth-of-type(1) {
         border-top: none;
       }
@@ -1093,7 +1096,7 @@ body {
     }
   }
   .current-post {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ddd !important;
     margin-bottom: 5px;
   }
 
@@ -1118,6 +1121,23 @@ body {
         color: #333333;
         font-size: 11px;
         font-weight: bold;
+      }
+    }
+    &.app {
+      border-bottom: none;
+      padding-top: 25px;
+      padding-bottom: 0;
+      .pr_fb-heading {
+        margin-right: 0;
+        align-items: center;
+        small {
+          font-feature-settings: "palt";
+          letter-spacing: 1px;
+        }
+      }
+      &+.link-sns {
+        padding-top: 15px;
+        padding-bottom: 15px;
       }
     }
   }// .pr_fb（本文下のFaceBookいいねボタン）
@@ -1428,8 +1448,9 @@ body {
   }
   #ad-gpt-article-detail-recommend-bottom, #ad-gpt-article-detail-footer {
     margin-top: -6px;
-    margin-bottom: 0;
+    // margin-bottom: 0;
     border-top: none;
+    border-bottom: none;
   }
 
   #single-visual-container {

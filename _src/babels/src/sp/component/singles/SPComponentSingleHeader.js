@@ -24,7 +24,7 @@ import View from '../../../view/View';
 // import ComponentCategoryLabelsLink from '../../../component/categories/ComponentCategoryLabelsLink';
 
 // node
-import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
+// import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 
 // ga
 import { Ga } from '../../../ga/Ga';
@@ -177,11 +177,15 @@ export class SPComponentSingleHeader extends React.Component {
             </div>
           */}
           {/* div.f-right (bookmark: on / off) */}
-          <BookmarkNode
+          {/*
+            design 変更に伴い
+            post-date以外をコメントアウト
+            @since 2018-01-31
+            <BookmarkNode
             sign={this.state.sign}
             isBookmarked={this.state.status}
             articleId={String(single.id)}
-          />
+          /> */}
         </div>
       </div>
     );

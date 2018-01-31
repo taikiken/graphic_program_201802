@@ -253,17 +253,17 @@
         // ------------------------------------
         // Facebook 「いいね」
         ?>
-        <?php if ( !$page['ua_app'] ) : ?>
-          <div class="pr_fb">
+          <div class="pr_fb <?php if ( $page['ua_app'] ) echo 'app'; ?>">
             <h4 class="pr_fb-heading">
               <img src="/assets/sp/images/detail/post-sns-logo.png" alt="SPORTS BULL">
               <small class="pr_f  b-heading-item">いいねして最新ニュースをチェック！</small>
             </h4>
-            <div class="post-sns-fixed">
-              <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
-            </div>
+            <?php if ( !$page['ua_app'] ) : ?>
+              <div class="post-sns-fixed">
+                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+              </div>
+            <?php endif; ?>
           </div>
-        <?php endif; ?>
 
         <?php
         // --------------------------------------------------------------

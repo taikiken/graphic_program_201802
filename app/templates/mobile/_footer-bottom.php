@@ -58,7 +58,13 @@ if ( $page['apiRoot'] != '' ) :
 </script>
  */
 ?>
+<?php
+if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'facebook' ) :
+?>
 <script src="/assets/js/fb-video.js?v=<?php echo $page['version']; ?>"></script>
+<?php
+endif;
+?>
 <?php
 if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
 ?>
