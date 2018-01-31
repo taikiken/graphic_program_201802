@@ -22,6 +22,8 @@ include_once __DIR__.'../../desktop/_category-heading.php';
 
     <?php
     // form + list
+    $para_schedule_id = 0;
+    $para_schedule_year_index = 0;
     include_once __DIR__ . '/_index_list.php';
     ?>
 

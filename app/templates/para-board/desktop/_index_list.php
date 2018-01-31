@@ -20,6 +20,7 @@ if (!empty($pull_down_response)) :
 
   // [B]
   if (is_array($pull_down_response_sports) || is_array($pull_down_response_year)) :
+    $para_schedule_year_selected_index = 0;
 ?>
 <form action="javascript:void(0)" class="paraboard__selector" id="js-paraboard__selector">
 <!--<form action="" name="paraboard__selector" class="paraboard__selector" id="js-paraboard__selector">-->
@@ -41,8 +42,11 @@ if (!empty($pull_down_response)) :
           <?php
           // response.sports
           foreach ($pull_down_response_sports as $para_id => $para_sports) :
+            $selected_id = $para_id == $para_schedule_id;
           ?>
-            <option value="<?php echo $para_id; ?>"><?php echo $para_sports; ?></option>
+            <option value="<?php echo $para_id; ?>"<?php
+            echo $selected_id ? ' selected' : '';
+            ?>><?php echo $para_sports; ?></option>
           <?php
           endforeach;
           ?>
@@ -65,9 +69,18 @@ if (!empty($pull_down_response)) :
             <select name="year" class="paraboard__header__search__select paraboard__header__search__select--year">
             <?php
             // response.year
-            foreach ($pull_down_response_year as $para_year) :
+            foreach ($pull_down_response_year as $para_index => $para_year) :
+              if ($para_schedule_year_index >= 0) {
+                $para_schedule_year_selected_index = $para_index;
+                $selected_year = $para_index == $para_schedule_year_index;
+              } else {
+                $para_schedule_year_selected_index = $para_index;
+                $selected_year = $para_year == $para_schedule_year;
+              }
             ?>
-              <option value="<?php echo $para_year; ?>"><?php echo $para_year; ?>年</option>
+              <option value="<?php echo $para_year; ?>"<?php
+              echo $selected_year ? ' selected' : '';
+              ?>><?php echo $para_year; ?>年</option>
             <?php
             endforeach;
             ?>
@@ -89,16 +102,62 @@ if (!empty($pull_down_response)) :
   (function(window) {
     'use strict';
     var document = window.document;
+    var selected = {
+      id: "<?php echo $para_schedule_id; ?>",
+      year: "<?php echo $para_schedule_year_selected_index; ?>",
+    };
+    var initial = {
+      id: null,
+      year: null,
+    };
     function onSubmit(event) {
       var formData = new FormData(event.target);
       // console.log('onSubmit', formData, formData.get('sports_id'), formData.get('year'));
-      location.href = '/para-board/' + formData.get('sports_id') + '/' + formData.get('year');
+      var id = formData.get('sports_id');
+      var year = formData.get('year');
+      if (id === initial.id && year === initial.year) {
+        return;
+      }
+      location.href = '/para-board/' + id + '/' + year + '/';
+    }
+    function selectedYear(form) {
+      const index = parseInt(selected.year, 10);
+      if (isNaN(index)) {
+        return;
+      }
+      var element = form.querySelector('select[name="year"]');
+      if (!element) {
+        return;
+      }
+      var options = element.getElementsByTagName('option');
+      options[index].selected = true;
+    }
+    function selectedId(form, id, name) {
+      const index = parseInt(selected.id, 10);
+      if (isNaN(index)) {
+        return;
+      }
+      var element = form.querySelector('select[name="sports_id"]');
+      if (!element) {
+        return;
+      }
+      var options = element.getElementsByTagName('option');
+      options[index].selected = true;
     }
     function init() {
       var form = document.getElementById('js-paraboard__selector');
       if (!form) {
         return;
       }
+      // ---
+      selectedId(form);
+      selectedYear(form);
+      // ---
+      var formData = new FormData(form);
+      initial.id = formData.get('sports_id');
+      initial.year = formData.get('year');
+      console.log('initial', initial);
+      // ---
       form.addEventListener('submit', onSubmit, false);
     }
     init();

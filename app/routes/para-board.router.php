@@ -51,8 +51,8 @@ $app->group('/para-board', function () use($app) {
       'og_title'       => '日程一覧 - PARA BOARD' . ' | ' .$app->model->property('title_short'),
       'og_url'         => $app->model->property('site_url') . 'para-board/',
       'og_image'       => 'XXXXX',
-      'sports_id'      => $args['sports_id'],
-      'year'           => $args['year'],
+      'para_sports_id'      => $args['sports_id'],
+      'para_year'           => $args['year'],
     ));
 
 
