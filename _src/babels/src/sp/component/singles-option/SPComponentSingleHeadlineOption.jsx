@@ -14,17 +14,17 @@
 import View from '../../../view/View';
 
 // view/categories
-import ComponentHeadlineAd from '../../../component/categories/ComponentHeadlineAd';
+// import ComponentHeadlineAd from '../../../component/categories/ComponentHeadlineAd';
 
 // sp/view/headline
 // import SPComponentHeadlines from '../headline/SPComponentHeadlines';
 import SPComponentSinglesHeadlines from './SPComponentSinglesHeadlines';
 import { RelatedDae } from '../../../dae/RelatedDae';
 import { CategoriesSlugDae } from '../../../dae/categories/CategoriesSlugDae';
-import SPComponentHeadlineArticleLast from '../headline/SPComponentHeadlineArticleLast';
+// import SPComponentHeadlineArticleLast from '../headline/SPComponentHeadlineArticleLast';
 import { ArticleDae } from '../../../dae/ArticleDae';
 
-import SPComponentSingleHeadlineArticleAd from './SPComponentSingleHeadlineArticleAd';
+// import SPComponentSingleHeadlineArticleAd from './SPComponentSingleHeadlineArticleAd';
 import { AdDae } from '../../../dae/theme/AdDae';
 
 // React
@@ -109,11 +109,11 @@ export default class SPComponentHeadlineOption extends React.Component {
    * @return {?XML} 記事一覧 headline を表示するための基本コンテナを返します
    */
   render() {
-    const { list, callback, home, browser, ad, category } = this.props;
+    const { list, callback, home } = this.props;
     if (list.length === 0) {
       return null;
     }
-    const last = list.length > 0 ? list.pop() : null;
+    // const last = list.length > 0 ? list.pop() : null;
     return (
       <div className="headline-section">
         <div className="headline-outer">

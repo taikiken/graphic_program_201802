@@ -15,7 +15,7 @@ import View from '../../view/View';
 
 // app
 import { Url } from '../../app/const/Url';
-import { Message } from '../../app/const/Message';
+// import { Message } from '../../app/const/Message';
 
 // // node
 // import { BannerNode } from '../../node/single/BannerNode';

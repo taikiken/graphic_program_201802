@@ -25,7 +25,7 @@ import ComponentArticleThumbnail from '../../../component/articles/ComponentArti
 import ComponentCategoryLabels from '../../../component/categories/ComponentCategoryLabels';
 
 // ui
-import Touching from '../../../ui/Touching';
+// import Touching from '../../../ui/Touching';
 
 // event
 // import { EventDispatcher } from '../../../event/EventDispatcher';
@@ -48,7 +48,7 @@ const React = self.React;
  * 広告を含む carousel length をカウントします
  * @type {number}
  */
-let containers = 0;
+// let containers = 0;
 
 /**
  * carousel の 広告
@@ -128,7 +128,7 @@ const ga = (href, event = null) => {
  * @since 2017-09-13
  */
 const CarouselItem = ({ single, index }) => {
-  containers += 1;
+  // containers += 1;
   const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
   return (
     <div className="widget-post-carousel-item">
@@ -265,7 +265,7 @@ class SPRankingCarousel extends React.Component {
    * @returns {XML} div.widget-post-carousel-wrapper
    */
   render() {
-    containers = 0;
+    // containers = 0;
     const { articles, slug, length } = this.props;
     // const { articles } = this.props;
     // console.log('SPRankingCarousel.render', this.state);

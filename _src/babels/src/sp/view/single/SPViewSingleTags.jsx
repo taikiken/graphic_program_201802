@@ -53,27 +53,29 @@ export default class SPViewSingleTags extends View {
       return null;
     }
 
-    ReactDOM.render(
-      <div className="post-footer">
-        {/* TAGS */}
-        <div className="post-tags">
-          <h2 className="post-tags-heading">タグ</h2>
-          <ul className="post-tags-list">
-            {
-              keywords.map((keyword, i) => {
-                return (
-                  <li key={`keyword-${i}`} className="post-tags-item">
-                    {/* link は 検索パターンにしています */}
-                    <a href={Url.search(keyword)}>{keyword}</a>
-                  </li>
-                );
-              })
-            }
-          </ul>
+    return (
+      ReactDOM.render(
+        <div className="post-footer">
+          {/* TAGS */}
+          <div className="post-tags">
+            <h2 className="post-tags-heading">タグ</h2>
+            <ul className="post-tags-list">
+              {
+                keywords.map((keyword, i) => {
+                  return (
+                    <li key={`keyword-${i}`} className="post-tags-item">
+                      {/* link は 検索パターンにしています */}
+                      <a href={Url.search(keyword)}>{keyword}</a>
+                    </li>
+                  );
+                })
+              }
+            </ul>
+          </div>
         </div>
-      </div>
-      ,
-      this.element
+        ,
+        this.element
+      )
     );
   }
 }
