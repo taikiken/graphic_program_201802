@@ -21,10 +21,10 @@ while($f=$o->fetch_array()){
 }
 if($response_flag){
 
-    $sports_list[] = 'すべて';
-    $sql=sprintf("select name from sports");
+    $sports_list['0'] = 'すべて';
+    $sql=sprintf("select id, name from sports");
     $o->query($sql);
-    while($f=$o->fetch_array()){$sports_list[]=$f['name'];}
+    while($f=$o->fetch_array()){$sports_list[$f['id']]=$f['name'];}
 
     $response['year'] = array_values(array_unique($year_list));
     $response['sports'] = $sports_list;
