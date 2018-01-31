@@ -66,9 +66,21 @@ $competition_response_photo = $competition_response_pc['photo_gallery'];
         <p class="gallery__link hide"><a href="/pyeongchang2018/movie/">すべての動画を見る</a></p>
       </header><!-- /.gallery__header -->
 
-      <?php
-      // TODO - output - tag できたら
-      ?>
+      <ul class="gallery__list">
+        <?php
+        foreach ($competition_response_highlight as $gallery) :
+        ?>
+        <li class="gallery__list__item">
+          <a href="<?php echo $gallery['url']; ?>" class="gallery__list__link">
+            <figure class="gallery__list__figure">
+              <img src="<?php echo $gallery['media']['images']['medium']; ?>" alt="">
+            </figure>
+          </a>
+        </li>
+        <?php
+        endforeach; 
+        ?>
+      </ul>
     </div>
   <?php
   endif;
@@ -83,9 +95,40 @@ $competition_response_photo = $competition_response_pc['photo_gallery'];
         <p class="gallery__link hide"><a href="/pyeongchang2018/">すべての記事を見る</a></p>
       </header><!-- /.gallery__header -->
 
-      <?php
-      // TODO - output - tag できたら
-      ?>
+      <ul class="gallery__list">
+        <?php
+        foreach ($competition_response_highlight as $gallery) :
+        ?>
+        <li class="gallery__list__item">
+          <a href="<?php echo $gallery['url']; ?>" class="gallery__list__link">
+            <figure class="gallery__list__figure">
+              <img src="<?php echo $gallery['media']['images']['medium']; ?>" alt="">
+            </figure>
+            <div class="gallery__list__data">
+              <h3 class="gallery__list__heading"><?php echo $gallery['title']; ?></h3>
+              <?php
+              $gallery_categories = $gallery['categories'];
+              if (is_array($gallery_categories) && count($gallery_categories) > 0) :
+                $category_labels = array();
+                foreach ($gallery_categories as $gallery_category) {
+                  $category_labels[] = $gallery_category['label'];
+                }
+              ?>
+              <p class="gallery__list__category">
+                <?php
+                echo join(', ', $category_labels);
+                ?>
+              </p>
+              <?php
+              endif;
+              ?>
+            </div>
+          </a>
+        </li>
+        <?php
+        endforeach;
+        ?>
+      </ul>
     </div>
   <?php
   endif;
@@ -100,9 +143,40 @@ $competition_response_photo = $competition_response_pc['photo_gallery'];
         <p class="gallery__link hide"><a href="/pyeongchang2018/photo/">すべてのフォトギャラリーを見る</a></p>
       </header><!-- /.gallery__header -->
 
-      <?php
-      // TODO - output - tag できたら
-      ?>
+      <ul class="gallery__list">
+        <?php
+        foreach ($competition_response_photo as $gallery) :
+          ?>
+          <li class="gallery__list__item">
+            <a href="<?php echo $gallery['url']; ?>" class="gallery__list__link">
+              <figure class="gallery__list__figure">
+                <img src="<?php echo $gallery['media']['images']['medium']; ?>" alt="">
+              </figure>
+              <div class="gallery__list__data">
+                <h3 class="gallery__list__heading"><?php echo $gallery['title']; ?></h3>
+                <?php
+                $gallery_categories = $gallery['categories'];
+                if (is_array($gallery_categories) && count($gallery_categories) > 0) :
+                  $category_labels = array();
+                  foreach ($gallery_categories as $gallery_category) {
+                    $category_labels[] = $gallery_category['label'];
+                  }
+                  ?>
+                  <p class="gallery__list__category">
+                    <?php
+                    echo join(', ', $category_labels);
+                    ?>
+                  </p>
+                <?php
+                endif;
+                ?>
+              </div>
+            </a>
+          </li>
+        <?php
+        endforeach;
+        ?>
+      </ul>
     </div>
   <?php
   endif;
