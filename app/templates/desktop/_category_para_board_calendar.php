@@ -1,6 +1,6 @@
 <?php
 /**
- * パラボード 日程一覧 - desktop
+ * パラボード 日程一覧 - desktop - category top
  * category 一覧へ insert
  * @since 2018-01-30
  */
