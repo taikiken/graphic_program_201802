@@ -181,3 +181,8 @@ function competition_summary_tr($data, $title) {
 // 汎用 footer
 include_once __DIR__."/../../desktop/_footer.php";
 ?>
+
+<?php
+// 汎用 debug
+include_once __DIR__."/../../_debug.php";
+?>
