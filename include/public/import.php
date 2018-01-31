@@ -483,11 +483,14 @@ function outimg($oimg,$tumb=1, $parse=true){
 	file_put_contents($file,$img);
 
 	// 画像圧縮
-  $filepath_array = explode('/' , $file);
-  $img_name = $filepath_array[count($filepath_array) - 1];
-  exec(sprintf('mv %s /tmp/%s', $file, $img_name));
-  exec(sprintf('cjpeg -optimize -quality 70 /tmp/%s > %s', $img_name, $file));
-  unlink('/tmp/' . $img_name);
+	if (checkFileType($file) == 'jpg')
+	{
+    $filepath_array = explode('/' , $file);
+    $img_name = $filepath_array[count($filepath_array) - 1];
+    exec(sprintf('mv %s /tmp/%s', $file, $img_name));
+    exec(sprintf('cjpeg -optimize -quality 70 /tmp/%s > %s', $img_name, $file));
+    unlink('/tmp/' . $img_name);
+	}
 
 	$size=getimagesize($file);
 	if(!$size)return "";
