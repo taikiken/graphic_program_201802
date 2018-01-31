@@ -34,6 +34,15 @@ include_once __DIR__.'../../desktop/_category-heading.php';
   </div>
 
 </div>
+<script>
+  (function(window) {
+    'use strict';
+    var UT = window.UT;
+    var SPBL_ENV = window.SPBL_ENV || {};
+    // TODO - UNDO_SPBL-293 - 平昌マージ後にコメントはずす
+    // UT.ui.NavCurrent.init(SPBL_ENV.category, SPBL_ENV.platform === 'web_mobile');
+  }(window));
+</script>
 
 <?php
 // 汎用 footer

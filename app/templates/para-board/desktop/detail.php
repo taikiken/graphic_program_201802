@@ -46,12 +46,14 @@ if (!empty($competition_response)) :
 </header>
 
 <?php
+$competition_response_pc = $competition_response['pc'];
+
 // ハイライト動画
-$competition_response_highlight = $competition_response['highlight_movie'];
+$competition_response_highlight = $competition_response_pc['highlight_movie'];
 // 記事
-$competition_response_news = $competition_response['news'];
+$competition_response_news = $competition_response_pc['news'];
 // フォトギャラリー
-$competition_response_photo = $competition_response['photo_gallery'];
+$competition_response_photo = $competition_response_pc['photo_gallery'];
 ?>
 <div class="paraboard__gallery">
   <?php
