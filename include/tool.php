@@ -761,7 +761,7 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 	global $domain;
 
 	// 画像圧縮
-  if (checkFileType($filename) == 'jpg') {
+  if (exif_imagetype($filename) == IMAGETYPE_JPEG) {
     $filepath_array = explode('/', $RAWIMG . $filename);
     $img_name = $filepath_array[count($filepath_array) - 1];
     exec(sprintf('mv %s /tmp/%s', $RAWIMG . $filename, $img_name));
