@@ -100,70 +100,69 @@ if (!empty($pull_down_response)) :
   </header>
 </form>
 <script>
-  (function(window) {
-    'use strict';
-    var document = window.document;
-    var selected = {
-      id: "<?php echo $para_schedule_id; ?>",
-      year: "<?php echo $para_schedule_year_selected_index; ?>",
-    };
-    var initial = {
-      id: null,
-      year: null,
-    };
-    function onSubmit(event) {
-      event.preventDefault();
-      var formData = new FormData(event.target);
-      var id = formData.get('sports_id');
-      var year = formData.get('year');
-      if (id === initial.id && year === initial.year) {
-        return;
-      }
-      console.log('onSubmit', '/para-board/' + id + '/' + year + '/');
-      location.pathname = '/para-board/' + id + '/' + year + '/';
+(function(window) {
+  'use strict';
+  var document = window.document;
+  var selected = {
+    id: "<?php echo $para_schedule_id; ?>",
+    year: "<?php echo $para_schedule_year_selected_index; ?>",
+  };
+  var initial = {
+    id: null,
+    year: null,
+  };
+  function onSubmit(event) {
+    event.preventDefault();
+    var formData = new FormData(event.target);
+    var id = formData.get('sports_id');
+    var year = formData.get('year');
+    if (id === initial.id && year === initial.year) {
+      return;
     }
-    function selectedYear(form) {
-      const index = parseInt(selected.year, 10);
-      if (isNaN(index)) {
-        return;
-      }
-      var element = form.querySelector('select[name="year"]');
-      if (!element) {
-        return;
-      }
-      var options = element.getElementsByTagName('option');
-      options[index].selected = true;
+    console.log('onSubmit', '/para-board/' + id + '/' + year + '/');
+    location.pathname = '/para-board/' + id + '/' + year + '/';
+  }
+  function selectedYear(form) {
+    const index = parseInt(selected.year, 10);
+    if (isNaN(index)) {
+      return;
     }
-    function selectedId(form, id, name) {
-      const index = parseInt(selected.id, 10);
-      if (isNaN(index)) {
-        return;
-      }
-      var element = form.querySelector('select[name="sports_id"]');
-      if (!element) {
-        return;
-      }
-      var options = element.getElementsByTagName('option');
-      options[index].selected = true;
+    var element = form.querySelector('select[name="year"]');
+    if (!element) {
+      return;
     }
-    function init() {
-      var form = document.getElementById('js-paraboard__selector');
-      if (!form) {
-        return;
-      }
-      // ---
-      selectedId(form);
-      selectedYear(form);
-      // ---
-      var formData = new FormData(form);
-      initial.id = formData.get('sports_id');
-      initial.year = formData.get('year');
-      // ---
-      form.addEventListener('submit', onSubmit, false);
+    var options = element.getElementsByTagName('option');
+    options[index].selected = true;
+  }
+  function selectedId(form) {
+    const index = parseInt(selected.id, 10);
+    if (isNaN(index)) {
+      return;
     }
-    init();
-  }(window));
-
+    var element = form.querySelector('select[name="sports_id"]');
+    if (!element) {
+      return;
+    }
+    var options = element.getElementsByTagName('option');
+    options[index].selected = true;
+  }
+  function init() {
+    var form = document.getElementById('js-paraboard__selector');
+    if (!form) {
+      return;
+    }
+    // ---
+    selectedId(form);
+    selectedYear(form);
+    // ---
+    var formData = new FormData(form);
+    initial.id = formData.get('sports_id');
+    initial.year = formData.get('year');
+    // ---
+    form.addEventListener('submit', onSubmit, false);
+  }
+  init();
+}(window));
 </script>
   <?php
   endif;

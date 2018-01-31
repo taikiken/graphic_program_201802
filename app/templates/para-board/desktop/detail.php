@@ -5,5 +5,177 @@
  */
 ?>
 <?php
-var_dump($page);
+// 汎用 header
+include_once __DIR__."/../../desktop/_header.php";
+?>
+<?php
+// PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
+include_once __DIR__.'../../desktop/_category-heading.php';
+?>
+
+<?php
+$competition_response = $page['competition_response'];
+
+// [A]
+if (!empty($competition_response)) :
+  $competition_response_file = $competition_response['file'];
+  $competition_response_file_enable = !empty($competition_response_file);
+  $competition_response_file_class = $competition_response_file_enable ? ' result_enable' : '';
+?>
+
+<header class="paraboard__detail__header<?php echo $competition_response_file_class; ?>">
+  <div class="paraboard__detail__header__outer">
+    <div class="paraboard__detail__header__inner">
+      <p class="paraboard__detail__header__logo"><img src="/assets/images/para-board/detail-heading.png" alt="PARA BOARD"></p>
+      <h1 class="paraboard__detail__header__heading"><?php echo $competition_response['competition_name']; ?></h1>
+      <p class="paraboard__detail__header__category paraboard__detail__header__category--basketball"><?php echo $competition_response['sport_name']; ?></p>
+
+      <?php
+      // [B]
+      if ($competition_response_file_enable) :
+      ?>
+      <div class="paraboard__detail__btn__result">
+        <a class="paraboard__detail__btn__result__link" href="<?php echo $competition_response_file; ?>" target="_blank">結果を見る</a>
+      </div>
+      <?php
+      endif;
+      // [/B]
+      ?>
+    </div>
+  </div>
+</header>
+
+<?php
+// ハイライト動画
+$competition_response_highlight = $competition_response['highlight_movie'];
+// 記事
+$competition_response_news = $competition_response['news'];
+// フォトギャラリー
+$competition_response_photo = $competition_response['photo_gallery'];
+?>
+<div class="paraboard__gallery">
+  <?php
+  // ハイライト動画
+  if (is_array($competition_response_highlight) && count($competition_response_highlight) > 0) :
+  ?>
+    <div class="gallery--highlight">
+      <header class="gallery__header">
+        <h2 class="gallery__heading">ハイライト動画</h2>
+        <p class="gallery__link hide"><a href="/pyeongchang2018/movie/">すべての動画を見る</a></p>
+      </header><!-- /.gallery__header -->
+
+      <?php
+      // TODO - output - tag できたら
+      ?>
+    </div>
+  <?php
+  endif;
+  ?>
+  <?php
+  // 記事
+  if (is_array($competition_response_news) && count($competition_response_news) > 0) :
+  ?>
+    <div class="gallery--post">
+      <header class="gallery__header">
+        <h2 class="gallery__heading">記事</h2>
+        <p class="gallery__link hide"><a href="/pyeongchang2018/">すべての記事を見る</a></p>
+      </header><!-- /.gallery__header -->
+
+      <?php
+      // TODO - output - tag できたら
+      ?>
+    </div>
+  <?php
+  endif;
+  ?>
+  <?php
+  // フォトギャラリー
+  if (is_array($competition_response_photo) && count($competition_response_photo) > 0) :
+  ?>
+    <div class="gallery--photo">
+      <header class="gallery__header">
+        <h2 class="gallery__heading">フォトギャラリー</h2>
+        <p class="gallery__link hide"><a href="/pyeongchang2018/photo/">すべてのフォトギャラリーを見る</a></p>
+      </header><!-- /.gallery__header -->
+
+      <?php
+      // TODO - output - tag できたら
+      ?>
+    </div>
+  <?php
+  endif;
+  ?>
+</div>
+
+<?php
+endif;
+// [/A]
+?>
+
+<?php
+// 大会概要
+function competition_summary_tr($data, $title) {
+  $tr = '';
+  if (!empty($data)) :
+    $tr .= '<tr>';
+    $tr .= '<th class="paraboard__detail__overview__th">' . $title . '</th>';
+    $tr .= '<td class="paraboard__detail__overview__td">' . $data . '</td>';
+    $tr .= '</tr>';
+  endif;
+  return $tr;
+}
+?>
+
+<div class="body-sec-inner">
+  <div class="paraboard__detail__overview">
+    <h2 class="paraboard__detail__overview__heading">大会概要</h2>
+    <table class="paraboard__detail__overview__table">
+      <tbody>
+      <?php
+      echo competition_summary_tr($competition_response['competition_name'],'大会名');
+      echo competition_summary_tr($competition_response['sport_name'],'競技名');
+      echo competition_summary_tr($competition_response['period'],'開催日');
+      echo competition_summary_tr($competition_response['organizer'],'主催者');
+      echo competition_summary_tr($competition_response['collaborator'],'協力者');
+      echo competition_summary_tr($competition_response['sponsor'],'後援');
+      echo competition_summary_tr($competition_response['venue'],'会場名');
+      echo competition_summary_tr($competition_response['qualification'],'参加資格');
+      echo competition_summary_tr($competition_response['regulation'],'規定');
+      $competition_response_provider_name = $competition_response['provider_name'];
+      $competition_response_provider_url = $competition_response['provider_url'];
+      if (!empty($competition_response_provider_name)) :
+      ?>
+      <tr>
+        <th class="paraboard__detail__overview__th">提供団体</th>
+        <td class="paraboard__detail__overview__td">
+          <?php
+          if (!empty($competition_response_provider_url)) :
+          ?>
+            <a href="<?php echo $competition_response_provider_url; ?>" target="_blank">
+          <?php
+          endif;
+          ?>
+          <?php
+          echo $competition_response_provider_name;
+          ?>
+          <?php
+          if (!empty($competition_response_provider_url)) :
+          ?>
+            </a>
+          <?php
+          endif;
+          ?>
+        </td>
+      </tr>
+      <?php
+      endif;
+      ?>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<?php
+// 汎用 footer
+include_once __DIR__."/../../desktop/_footer.php";
 ?>
