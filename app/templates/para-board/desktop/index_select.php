@@ -1,6 +1,6 @@
 <?php
 /**
- * パラボード 日程一覧 - desktop
+ * パラボード 日程一覧: 抽出時 - desktop
  * @since 2018-01-30
  */
 ?>
@@ -22,6 +22,7 @@ include_once __DIR__.'../../desktop/_category-heading.php';
 
     <?php
     // form + list
+    var_dump($page);
     include_once __DIR__ . '/_index_list.php';
     ?>
 
