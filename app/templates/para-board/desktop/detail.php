@@ -217,6 +217,7 @@ function competition_summary_tr($data, $title) {
       echo competition_summary_tr($competition_response['venue'],'会場名');
       echo competition_summary_tr($competition_response['qualification'],'参加資格');
       echo competition_summary_tr($competition_response['regulation'],'規定');
+      // [提供団体]
       $competition_response_provider_name = $competition_response['provider_name'];
       $competition_response_provider_url = $competition_response['provider_url'];
       if (!empty($competition_response_provider_name)) :
@@ -245,6 +246,7 @@ function competition_summary_tr($data, $title) {
       </tr>
       <?php
       endif;
+      // [/提供団体]
       ?>
       </tbody>
     </table>
