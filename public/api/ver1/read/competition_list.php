@@ -3,15 +3,21 @@
 include "local.php";
 include "public/check.php";
 
-$sport_id = bind($_REQUEST["sport_id"]);
-$year = bind($_REQUEST["year"]);
-
 $y = [];
 $response = [];
 $recent_flag = false;
 $response_flag = false;
 $week_list = array('日', '月', '火', '水', '木', '金', '土');
 $max_type = 3;
+
+$sport_id = bind($_REQUEST["sport_id"]);
+if($_REQUEST["year"] === "current"){
+    $year = date("Y");
+    $response['current_year'] = $year;
+}
+ else {
+    $year = bind($_REQUEST["year"]);
+}
 
 if($year !== '0'){
     //年での絞り込み
