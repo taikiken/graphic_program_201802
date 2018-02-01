@@ -215,10 +215,12 @@
               var halfIndex = Math.round(bodyLen / 2) - 1;
               var btnContainer = bodyElement.querySelector('.single-more-container');
               var btnMore = bodyElement.querySelector('#btn-more-web');
-              btnMore.addEventListener('touchend', function(){
-                bodyElement.classList.remove('restricted');
-                btnContainer.parentNode.removeChild(btnContainer);
-              });
+              if ( btnMore ) {
+                btnMore.addEventListener('touchend', function(){
+                  bodyElement.classList.remove('restricted');
+                  btnContainer.parentNode.removeChild(btnContainer);
+                });
+              }
               if(bodyLen >= 6) {
                 var div = document.createElement('div');
                 var target = bodyP[halfIndex];
