@@ -187,6 +187,7 @@ export default class ComponentArticleThumbnail extends React.Component {
     // }
     // media type で thumbnail 切替
     // since 2017-12-18 switch-case 変更
+    // console.log('ComponentArticleThumbnail.render', this.props);
     switch (mediaType) {
       case MediaType.IMAGE: {
         // image

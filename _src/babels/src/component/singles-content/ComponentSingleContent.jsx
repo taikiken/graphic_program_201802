@@ -11,14 +11,14 @@
  */
 
 // component/singles-content
-import { ComponentSinglePost } from './ComponentSinglePost';
-import { ComponentSingleSNS } from './ComponentSingleSNS';
-import { ComponentSingleAd } from './ComponentSingleAd';
-import { ComponentSingleComments } from './ComponentSingleComments';
-import { ComponentSingleProvider } from './ComponentSingleProvider';
+import ComponentSinglePost from './ComponentSinglePost';
+import ComponentSingleSNS from './ComponentSingleSNS';
+import ComponentSingleAd from './ComponentSingleAd';
+import ComponentSingleComments from './ComponentSingleComments';
+import ComponentSingleProvider from './ComponentSingleProvider';
 
 // component/singles
-import { ComponentSingleFooter } from '../singles/ComponentSingleFooter';
+import ComponentSingleFooter from '../singles/ComponentSingleFooter';
 
 // util
 // import { Fb } from '../../util/Fb';
@@ -58,7 +58,7 @@ const React = self.React;
  * {@link ViewCommentForm},
  * @since 2016-11-04
  */
-export class ComponentSingleContent extends React.Component {
+export default class ComponentSingleContent extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

@@ -417,7 +417,7 @@ export default class ViewSingle extends View {
     this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-    console.warn('ViewSingle.error', this.id, error);
+    console.warn('ViewSingle.fail', this.id, error);
   }
   /**
    * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします
@@ -455,7 +455,7 @@ export default class ViewSingle extends View {
   //
   // }
   /**
-   * dom を render します<br>
+   * dom を render します
    * @param {SingleDae} single JSON response
    * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */
