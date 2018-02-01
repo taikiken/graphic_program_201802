@@ -28,10 +28,12 @@ $para_data_response_list = $para_data_response['list'];
 
       // tr loop
       foreach ($para_games as $para_game) :
-        ?>
+//        var_dump($para_game);
+//        echo '----------------<br>';
+      ?>
         <tr>
           <td class="paraboard__list__game">
-            <a href="/para-board/<?php echo $para_game['id']; ?>/<?php echo $para_game['current_year']; ?>/" class="paraboard__list__game__link">
+            <a href="/para-board/<?php echo $para_game['id']; ?>/<?php echo $para_game['current_year']; ?>" class="paraboard__list__game__link">
               <header class="paraboard__list__game__header">
                 <span class="paraboard__list__icon"><img src="<?php echo $para_game['icon']; ?>" alt=""></span>
                 <p class="paraboard__list__date"><?php echo $para_date; ?></p>
