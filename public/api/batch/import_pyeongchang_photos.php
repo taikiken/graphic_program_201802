@@ -10,7 +10,14 @@ $dates = [
   'yesterday' => $yesterday
 ];
 $titles = [];
+$list = [];
+$item_id = '';
+$modify = '';
 $mes = '';
+$id_pattern = '/<NewsItemId>(.*)<\/NewsItemId>/';
+$modify_pattern = '/<InModifyInfo>(.*)<\/InModifyInfo>/';
+
+$count=0;
 
 // 接続テスト　廃止
 //$base_url = "http://limret:limret0@tmdatag.kyodonews.jp/06KK579001/GZ_TX4_UTF8/";
@@ -18,8 +25,6 @@ $mes = '';
 //$base_url = "http://sportsbull01:sportsbull01@tmdatag.kyodonews.jp/06KK583001/GZ_TX4_UTF8/";
 // 2/1から　本番アカウント
 $base_url = "http://sportsbull02:sportsbull02@tmdatag.kyodonews.jp/06KK583002/GZ_TX4_UTF8/";
-
-
 
 foreach($dates as $key => $date) {
 
@@ -29,9 +34,32 @@ foreach($dates as $key => $date) {
 
   $pickup_img_name = '/^PK' . date('Ymd', $date) . '[0-9]*/';
   $pattern = '/^PK' . date('Ymd', $date) . '[0-9]*_TF_JPG_00_UTF8.xml/';
-
   $img1 = '';
 
+  // 新規・差し替え・削除のリスト作成
+  foreach($result as $file_info) {
+    $file = explode(',', $file_info);
+    preg_match($pickup_img_name, $file[1], $file_name);
+
+    if(preg_match($pattern, $file[1])===0){
+      continue;
+    }
+
+    $content = file_get_contents($base_url.date('Ymd',$date).'/'.$file[1]);
+    preg_match($id_pattern, $content, $item_id);
+    preg_match($modify_pattern, $content, $modify);
+
+    $item_id = substr($item_id[1],0,21);
+    $modify = $modify[1];
+
+    if($modify == "新規" || $modify == "差し替え電文"){
+      $list[$item_id] = $file_name[0] . '_BI_JPG_00.jpg';
+    } else if($modify == "訂正") {
+      $list[$item_id] = null;
+    }
+  }
+
+  // 記事作成と画像保存処理
   foreach ($result as $file_info) {
     $file = explode(',', $file_info);
 
@@ -97,7 +125,18 @@ EOD;
     } else {
       continue;
     }
+
     $filename = $file_name[0] . '_BI_JPG_00.jpg';
+
+    // 上で作ったリストの中に同一のファイル名がない場合は、画像登録処理をスキップする。
+    $skip_flag = true;
+    foreach($list as $key => $val){
+      if($val === $filename){
+        $skip_flag = false;
+        continue;
+      }
+    }
+    if($skip_flag){continue;}
 
     $img_url = $base_url."photo/" . $filename;
 
@@ -267,6 +306,7 @@ EOD;
   $o->query($sql);
   $cnt++;
   }
+  unset($list);
   unset($article_id);
 }
 
