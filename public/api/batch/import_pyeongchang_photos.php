@@ -17,7 +17,7 @@ $mes = '';
 // 1/31まで
 //$base_url = "http://sportsbull01:sportsbull01@tmdatag.kyodonews.jp/06KK583001/GZ_TX4_UTF8/";
 // 2/1から　本番アカウント
-$base_url = "http://sportsbull02:sportsbull02@tmdatag.kyodonews.jp/06KK58302/GZ_TX4_UTF8/";
+$base_url = "http://sportsbull02:sportsbull02@tmdatag.kyodonews.jp/06KK583002/GZ_TX4_UTF8/";
 
 
 
