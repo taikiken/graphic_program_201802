@@ -40,6 +40,17 @@ if ( googletag.pubads ) {
 document.addEventListener("DOMContentLoaded", function(event) {
 
   /**
+  *
+  * config
+  *
+  */
+  googletag.cmd.push(function() {
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().collapseEmptyDivs();
+    googletag.enableServices();
+  });
+
+  /**
   * DFPDefileSlot
   *
   * @param  string  slot - DFPのID
@@ -167,16 +178,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
     'ad-gpt-article-detail-footer'
   );
 
-
-  /**
-  *
-  * show
-  *
-  */
-  googletag.cmd.push(function() {
-    googletag.pubads().enableSingleRequest();
-    googletag.pubads().collapseEmptyDivs();
-    googletag.enableServices();
-  });
 
 });
