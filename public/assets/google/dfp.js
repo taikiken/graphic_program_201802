@@ -37,24 +37,53 @@ if ( googletag.pubads ) {
 }
 
 
-
-googletag.cmd.push(function() {
-  // /531683568/mobile/mobile_index_bottom
-  googletag.defineSlot('/531683568/mobile/mobile_index_bottom', [300, 250], 'div-gpt-ad-1514446255569-0').addService(googletag.pubads());
-
-
-  googletag.pubads().enableSingleRequest();
-  googletag.pubads().collapseEmptyDivs();
-  googletag.enableServices();
-});
-
-
-
 document.addEventListener("DOMContentLoaded", function(event) {
+
+  /**
+  * DFPDefileSlot
+  *
+  * @param  string  slot - DFPのID
+  * @param  array   size - 枠のサイズ
+  * @param  string  target - 表示するDIV
+  */
+
+  var DFPDefileSlot = function( slot, size, target ) {
+    if ( document.getElementById( target ) !== null ) {
+
+      googletag.cmd.push(function() {
+        googletag.defineSlot( slot, size, target ).addService(googletag.pubads());
+      });
+
+      googletag.cmd.push(function() {
+        googletag.display( target );
+      });
+
+    }
+  };
+
+
+  /**
+  *
+  * run
+  *
+  */
+  // mobile - list- bottom
+  DFPDefileSlot(
+    '/531683568/mobile/mobile_index_bottom',
+    [300, 250],
+    'div-gpt-ad-1514446255569-0'
+  );
+
+
+  /**
+  *
+  * show
+  *
+  */
   googletag.cmd.push(function() {
-
-    // /531683568/mobile/mobile_index_bottom
-    googletag.display('div-gpt-ad-1514446255569-0');
-
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().collapseEmptyDivs();
+    googletag.enableServices();
   });
+
 });
