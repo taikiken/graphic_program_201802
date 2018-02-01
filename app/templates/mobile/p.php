@@ -231,7 +231,7 @@
         </div><!-- /.post-detail -->
 
 
-        <? /*
+        <?php /*
         DFP - mobile / 記事詳細本文下 ( フォロー上 ) レクタングル
         */ ?>
         <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp"></div>
@@ -295,7 +295,7 @@
         <div id="widget-recommend-list-container"></div>
       <?php endif; ?>
 
-      <? /*
+      <?php /*
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */ ?>
       <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
@@ -336,7 +336,7 @@
       </div>
 
 
-      <? /*
+      <?php /*
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */ ?>
       <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>

@@ -192,7 +192,7 @@
           <div id="js-headline"></div>
 
 
-          <? /*
+          <?php /*
           DFP - headline bottom ダブルレクタングル
           */ ?>
           <div id="ad-gpt-article-detail-headlinebottom-wrapper">
@@ -206,7 +206,7 @@
           </div><!-- /.board-large -->
 
 
-          <? /*
+          <?php /*
           DFP - bottom ダブルレクタングル
           */ ?>
           <div id="ad-gpt-article-detail-boardbottom-wrapper">
