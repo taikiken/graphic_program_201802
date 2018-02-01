@@ -15,9 +15,7 @@
 <?php
 include_once __DIR__ . '/../para-board/module/_functions.php';
 
-//$api_result = get_recent();
-// TODO 404 になるのでテスト用にデータが存在する API を使う
-$api_result = get_recent_id_year(0, 2018);
+$api_result = get_recent();
 $response = $api_result['response'];
 if (!empty($response)) :
 ?>
@@ -40,7 +38,7 @@ if (!empty($response)) :
     ?>
       <tr>
         <td class="paraboard__widjet__list__game">
-          <a href="/para-board/<?php echo $para_game['id']; ?>/<?php echo $para_game['current_year']; ?>/" class="paraboard__widjet__list__game__link">
+          <a href="/para-board/<?php echo $para_game['id']; ?>/<?php echo $para_game['current_year']; ?>" class="paraboard__widjet__list__game__link">
             <header class="paraboard__widjet__list__game__header">
               <span class="paraboard__widjet__list__icon"><img src="<?php echo $para_game['icon']; ?>" alt=""></span>
               <p class="paraboard__widjet__list__date"><?php echo $para_date; ?></p>

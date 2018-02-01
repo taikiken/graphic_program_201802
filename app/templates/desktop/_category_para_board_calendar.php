@@ -8,9 +8,7 @@
 <?php
 include_once __DIR__ . '/../para-board/module/_functions.php';
 
-//$api_result = get_recent();
-// TODO 404 になるのでテスト用にデータが存在する API を使う
-$api_result = get_recent_id_year(0, 2018);
+$api_result = get_recent();
 $response = $api_result['response'];
 if (!empty($response)) :
 ?>

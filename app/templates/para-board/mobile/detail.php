@@ -145,8 +145,10 @@ $competition_response_photo = $competition_response_pc['photo_gallery'];
             ?>
             <li class="gallery__list__item">
               <a href="<?php echo $gallery['url']; ?>" class="gallery__list__link">
-                <figure class="gallery__list__figure">
-                  <img src="<?php echo $gallery['media']['images']['medium']; ?>" alt="">
+                <figure class="gallery__list__figure" style="background-image: url(<?php
+                echo $gallery['media']['images']['medium'];
+                ?>);">
+<!--                  <img src="--><?php //echo $gallery['media']['images']['medium']; ?><!--" alt="">-->
                 </figure>
                 <div class="gallery__list__data">
                   <h3 class="gallery__list__heading"><?php echo $gallery['title']; ?></h3>
