@@ -318,6 +318,10 @@
           font-weight: bold;
           font-size: fz(14);
 
+          &::-ms-expand {
+            display: none;
+          }
+
           &:hover {
             @include hover-opacity(0.8);
           }
