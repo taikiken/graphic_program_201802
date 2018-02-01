@@ -190,12 +190,12 @@ endif;
 
 <?php
 // 大会概要
-function competition_summary_tr($data, $title) {
+function competition_summary_tr($providor_name, $title) {
   $tr = '';
-  if (!empty($data)) :
+  if (!empty($providor_name)) :
     $tr .= '<tr>';
     $tr .= '<th class="paraboard__detail__overview__th">' . $title . '</th>';
-    $tr .= '<td class="paraboard__detail__overview__td">' . $data . '</td>';
+    $tr .= '<td class="paraboard__detail__overview__td">' . $providor_name . '</td>';
     $tr .= '</tr>';
   endif;
   return $tr;

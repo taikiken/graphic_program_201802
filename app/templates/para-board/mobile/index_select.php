@@ -22,9 +22,9 @@ include_once __DIR__."/../../mobile/_header.php";
     $para_schedule_year_index = -1;
     $para_schedule_year = $page['para_year'];
     // form
-//    include_once __DIR__ . '/_index_form.php';
+    include_once __DIR__ . '/../desktop/_index_form.php';
     // list
-//    include_once __DIR__ . '/_index_list.php';
+    include_once __DIR__ . '/_index_list.php';
     ?>
   </div>
 </div>
