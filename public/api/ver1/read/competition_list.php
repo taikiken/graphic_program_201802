@@ -111,6 +111,11 @@ foreach ($o->fetch_all() as $f) {
     for($i=0;$i<$max_type;$i++){
         $active_list[$types[$i]] = (in_array($i+1,$type_list)) ? true : false;
     }
+    // iconはバケットから
+    if (!empty($f['icon']))
+    {
+      $f['icon'] = $ImgPath . $f['icon'];
+    }
 
     $response['list'][$key_date][] = [
         'id'                => $f['id'],
