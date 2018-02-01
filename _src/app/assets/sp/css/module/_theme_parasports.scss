@@ -692,6 +692,10 @@
       color: #fff;
       font-size: fz(28/2);
     }
+
+    a {
+      @include link-decoration(#fff, #fff, underline, underline);
+    }
   } //.paraboard__detail__overview
 
 

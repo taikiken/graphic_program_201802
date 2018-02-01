@@ -708,6 +708,10 @@
       font-size: fz(13);
       vertical-align: top;
     }
+
+    a {
+      @include link-decoration(#fff, #fff, underline, none);
+    }
   } //.paraboard__detail__overview
 
 
