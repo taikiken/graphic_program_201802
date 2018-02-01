@@ -1,7 +1,7 @@
 <?php
 /**
  * パラボード 日程一覧 - desktop
- * - 汎用 - form + list
+ * - 汎用 - list
  * @since 2018-01-30
  */
 ?>

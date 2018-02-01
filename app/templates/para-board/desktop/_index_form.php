@@ -1,6 +1,6 @@
 <?php
 /**
- * パラボード 日程一覧 - desktop
+ * パラボード 日程一覧 - desktop + mobile（兼用します）
  * - 汎用 - form
  * @since 2018-01-30
  */
@@ -23,7 +23,7 @@ if (!empty($pull_down_response)) :
     $para_schedule_year_selected_index = 0;
 ?>
 <form action="javascript:void(0)" class="paraboard__selector" id="js-paraboard__selector">
-<!--<form action="" name="paraboard__selector" class="paraboard__selector" id="js-paraboard__selector">-->
+
   <?php
   // 日程・結果一覧
   ?>
