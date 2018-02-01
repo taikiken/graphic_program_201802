@@ -28,7 +28,14 @@ include_once __DIR__."/../../mobile/_header.php";
     ?>
   </div>
 </div>
-
+<script>
+(function(window) {
+  'use strict';
+  var UT = window.UT;
+  var SPBL_ENV = window.SPBL_ENV || {};
+  UT.ui.NavCurrent.init(SPBL_ENV.category, SPBL_ENV.platform === 'web_mobile');
+}(window));
+</script>
 <?php
 // 汎用 footer
 include_once __DIR__."/../../mobile/_footer.php";

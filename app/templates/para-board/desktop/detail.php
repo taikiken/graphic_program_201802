@@ -255,7 +255,14 @@ function competition_summary_tr($providor_name, $title) {
     </table>
   </div>
 </div>
-
+<script>
+(function(window) {
+  'use strict';
+  var UT = window.UT;
+  var SPBL_ENV = window.SPBL_ENV || {};
+  UT.ui.NavCurrent.init(SPBL_ENV.category, SPBL_ENV.platform === 'web_mobile');
+}(window));
+</script>
 <?php
 // 汎用 footer
 include_once __DIR__."/../../desktop/_footer.php";
