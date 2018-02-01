@@ -36,7 +36,6 @@ $f = $o->fetch_array();
 
 if(strlen($f["name"])>0){
     $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
-    $f['sport_id'] = !empty($f['sport_id']) ? $f['sport_id'] . '.png' : '';
 
     //開始日
     $DateTime = new DateTime($f['start_date_time']);
@@ -50,10 +49,20 @@ if(strlen($f["name"])>0){
     $day_of_week = $week_list[(int)$DateTime->format('w')];
     $end_date = $end_date . '（' . $day_of_week . '）';
 
+  // icon, pdfはバケットから
+  if (!empty($f['file']))
+  {
+    $f['file'] = $ImgPath . $f['file'];
+  }
+  if (!empty($f['icon']))
+  {
+    $f['icon'] = $ImgPath . $f['icon'];
+  }
+
     $response = [
         'competition_name'  => $f['name'],
         'sport_name'        => $f['sport_name'],
-        'icon'              => $f['sport_id'],
+        'icon'              => $f['icon'],
         'period'            => $start_date . ' 〜 ' . $end_date,
         'organizer'         => $f['organizer'],
         'collaborator'      => $f['collaborator'],
