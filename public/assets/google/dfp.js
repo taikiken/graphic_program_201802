@@ -137,6 +137,35 @@ document.addEventListener("DOMContentLoaded", function(event) {
   );
 
 
+  // ## detail
+  // ------------------------------
+  // body insert
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-mobile-rectangle-A',
+    [300, 250],
+    'ad-gpt-article-detail-body-insert'
+  );
+
+  // body bottom
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-mobile-rectangle-B',
+    [300, 250],
+    'ad-gpt-article-detail-body-bottom'
+  );
+
+  // recommend bottom
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-mobile-rectangle-C',
+    [300, 250],
+    'ad-gpt-article-detail-recommend-bottom'
+  );
+
+  // bottom
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-mobile-rectangle-D',
+    [300, 250],
+    'ad-gpt-article-detail-footer'
+  );
 
 
   /**

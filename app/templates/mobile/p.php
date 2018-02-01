@@ -203,6 +203,11 @@
               </div>
             <?php endif; ?>
 
+            <?php
+            /*
+            DFP - 記事本文中差し込み広告
+            */
+            ?>
             <script>
               var bodyElement = document.getElementById('post-content-container');
               var bodyP = document.querySelectorAll('#post-content-container > p');
@@ -219,35 +224,18 @@
                 var target = bodyP[halfIndex];
                 div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
                 target.parentNode.insertBefore(div, target.nextSibling);
-                googletag.cmd.push(function() {
-                  googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert').addService(googletag.pubads());
-                  googletag.enableServices();
-                  googletag.pubads().collapseEmptyDivs();
-                  googletag.display("ad-gpt-article-detail-body-insert");
-                });
               }
             </script>
           </div><!-- /.post-content -->
 
-          <?php // ref. #1876 ?>
-          <!-- /531683568/mobile/mobile_detail_body_bottom -->
         </div><!-- /.post-detail -->
 
-        <!-- /531683568/article-detail/article-detail-body-bottom -->
-        <script>
-          googletag.cmd.push(function() {
-            googletag.defineSlot('/531683568/article-detail/article-detail-body-bottom', [300, 250], 'ad-gpt-article-detail-body-bottom').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.pubads().collapseEmptyDivs();
-            googletag.enableServices();
-          });
-        </script>
-        <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp">
-        <script>
-          googletag.cmd.push(function() { googletag.display('ad-gpt-article-detail-body-bottom'); });
-        </script>
-        </div>
-        <!-- // /531683568/article-detail/article-detail-body-bottom -->
+
+        <? /*
+        DFP - mobile / 記事詳細本文下 ( フォロー上 ) レクタングル
+        */ ?>
+        <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp"></div>
+
 
       <?php
         // ------------------------------------
@@ -307,21 +295,10 @@
         <div id="widget-recommend-list-container"></div>
       <?php endif; ?>
 
-      <!-- /531683568/mobile/mobile_recommend_after -->
-      <script>
-        googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/article-detail/article-detail-recommend-bottom', [300, 250], 'ad-gpt-article-detail-recommend-bottom').addService(googletag.pubads());
-          googletag.pubads().enableSingleRequest();
-          googletag.pubads().collapseEmptyDivs();
-          googletag.enableServices();
-        });
-      </script>
-      <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp">
-      <script>
-        googletag.cmd.push(function() { googletag.display('ad-gpt-article-detail-recommend-bottom'); });
-      </script>
-      </div>
-      <!-- // /531683568/mobile/mobile_recommend_after -->
+      <? /*
+      DFP - mobile / 記事詳細おすすめ記事下レクタングル
+      */ ?>
+      <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
 
       <?php
       // ----------------------------------------------------
@@ -358,21 +335,11 @@
         </div>
       </div>
 
-      <!-- /531683568/mobile/mobile_news_after -->
-      <script>
-        googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/article-detail/article-detail-footer', [300, 250], 'ad-gpt-article-detail-footer').addService(googletag.pubads());
-          googletag.pubads().enableSingleRequest();
-          googletag.pubads().collapseEmptyDivs();
-          googletag.enableServices();
-        });
-      </script>
-      <div id='ad-gpt-article-detail-footer' class="bnr-dfp">
-        <script>
-          googletag.cmd.push(function() { googletag.display('ad-gpt-article-detail-footer'); });
-        </script>
-      </div>
-      <!-- // /531683568/mobile/mobile_news_after -->
+
+      <? /*
+      DFP - mobile / 記事詳細おすすめ記事下レクタングル
+      */ ?>
+      <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>
 
 
       <?php
