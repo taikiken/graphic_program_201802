@@ -64,15 +64,79 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   /**
   *
-  * run
+  * define
   *
   */
-  // mobile - list- bottom
+
+  // # desktop
+  // ==============================
+
+  // ## desktop - detail
+  // ------------------------------
+  // title bottom
+  DFPDefileSlot(
+    '/531683568/article-detail/article-deital-desktop-bigbanner-A',
+    [728, 90],
+    'div-gpt-ad-article-deital-desktop-bigbanner-A'
+  );
+
+  // body insert - left
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-A',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-A'
+  );
+
+  // body insert - right
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-B',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-B'
+  );
+
+  // headline bottom - left
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-C',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-C'
+  );
+
+  // headline bottom - left
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-D',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-D'
+  );
+
+
+  // bottom - left
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-E',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-E'
+  );
+
+  // bottom - right
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-F',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-F'
+  );
+
+
+  // # mobile
+  // ==============================
+
+  // ## index & list
+  // ------------------------------
+  // list- bottom
   DFPDefileSlot(
     '/531683568/mobile/mobile_index_bottom',
     [300, 250],
     'div-gpt-ad-1514446255569-0'
   );
+
+
 
 
   /**

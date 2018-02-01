@@ -48,19 +48,9 @@
             </ul>
           </div><!-- /.post-sns -->
 
-          <div class="sponsor-link w728"><script type='text/javascript'>
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/pc_single_top', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
-              });
-            </script>
-            <div id='div-gpt-ad-pc_single_top' style='height:90px; width:728px;'>
-            <script type='text/javascript'>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_single_top'); });
-            </script>
-            </div>
+          <div class="sponsor-link w728">
+            <?php /* DFP */ ?>
+            <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' style='height:90px; width:728px;'></div>
           </div>
 
           <?php
@@ -105,6 +95,11 @@
               endif;
           endif;
           ?>
+
+          <?php
+          /*
+          DFP - 記事本文中差し込み広告
+          */ ?>
           <script>
             var bodyP = document.querySelectorAll('.post-detail .post-content > p');
             var bodyLen = bodyP.length;
@@ -115,19 +110,7 @@
               div_wrapper.setAttribute('id', 'ad-gpt-article-detail-body-wrapper');
               target.parentNode.insertBefore(div_wrapper, target.nextSibling);
               var wrap = document.getElementById('ad-gpt-article-detail-body-wrapper');
-              wrap.insertAdjacentHTML('afterbegin','<div id="ad-gpt-article-detail-body-insert-left"></div><div id="ad-gpt-article-detail-body-insert-right"></div>');
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert-left').addService(googletag.pubads());
-                googletag.enableServices();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display("ad-gpt-article-detail-body-insert-left");
-              });
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert-right').addService(googletag.pubads());
-                googletag.enableServices();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display("ad-gpt-article-detail-body-insert-right");
-              });
+              wrap.insertAdjacentHTML('afterbegin','<div id="div-gpt-ad-article-detail-desktop-rectangle-A"></div><div id="div-gpt-ad-article-detail-desktop-rectangle-B"></div>');
             }
           </script>
           </div><!-- /.post-content -->
@@ -209,47 +192,26 @@
           <div id="js-headline"></div>
 
 
+          <? /*
+          DFP - headline bottom ダブルレクタングル
+          */ ?>
           <div id="ad-gpt-article-detail-headlinebottom-wrapper">
-            <div id="ad-gpt-article-detail-headlinebottom-insert-left"></div>
-            <div id="ad-gpt-article-detail-headlinebottom-insert-right"></div>
-            <script>
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-headlinebottom-insert-left').addService(googletag.pubads());
-                googletag.enableServices();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display("ad-gpt-article-detail-headlinebottom-insert-left");
-              });
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-headlinebottom-insert-right').addService(googletag.pubads());
-                googletag.enableServices();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display("ad-gpt-article-detail-headlinebottom-insert-right");
-              });
-            </script>
+            <div id="div-gpt-ad-article-detail-desktop-rectangle-C"></div>
+            <div id="div-gpt-ad-article-detail-desktop-rectangle-D"></div>
           </div>
+
 
           <div class="board-large">
             <div id="board-container"></div><!--/archive-->
           </div><!-- /.board-large -->
 
 
+          <? /*
+          DFP - bottom ダブルレクタングル
+          */ ?>
           <div id="ad-gpt-article-detail-boardbottom-wrapper">
-            <div id="ad-gpt-article-detail-boardbottom-insert-left"></div>
-            <div id="ad-gpt-article-detail-boardbottom-insert-right"></div>
-            <script>
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-boardbottom-insert-left').addService(googletag.pubads());
-                googletag.enableServices();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display("ad-gpt-article-detail-boardbottom-insert-left");
-              });
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-boardbottom-insert-right').addService(googletag.pubads());
-                googletag.enableServices();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display("ad-gpt-article-detail-boardbottom-insert-right");
-              });
-            </script>
+            <div id="div-gpt-ad-article-detail-desktop-rectangle-E"></div>
+            <div id="div-gpt-ad-article-detail-desktop-rectangle-F"></div>
           </div>
 
         </div><!-- /.post-detail -->
