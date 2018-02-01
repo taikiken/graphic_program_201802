@@ -9,8 +9,6 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
-
 // 2016-03-15
 // design 変更により タイトル と メイン画像 を分離出力する必要が出たので作成する
 
@@ -20,7 +18,8 @@ import View from '../View';
 // import {SingleDae} from '../../dae/SingleDae';
 
 // node
-import {MediaNode} from '../../node/single/MediaNode';
+// import {MediaNode} from '../../node/single/MediaNode';
+import ComponentMedia from '../../component/media/ComponentMedia';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -42,15 +41,22 @@ export default class ViewSingleVisual extends View {
    * PC main visual
    * @param {Element} element 基点 element
    * @param {SingleDae} single SingleDae instance
+   * @param {boolean} [sp=false] sp flag
    */
-  constructor(element, single) {
+  constructor(element, single, sp = false) {
     super(element);
     /**
      * 記事詳細 API 取得 JSON を SingleDae instance とし保存し利用します
      * @type {SingleDae}
-     * @protected
      */
-    this._single = single;
+    this.single = single;
+    /**
+     * sp flag - 平昌 powered by 画像パス切替に使用します
+     * @type {boolean}
+     * @since 2018-01-12
+     */
+    this.sp = sp;
+    // console.log('ViewSingleVisual single', single);
   }
   /**
    * render 処理を開始します
@@ -62,15 +68,32 @@ export default class ViewSingleVisual extends View {
    * render します
    */
   render() {
-    const single = this._single;
+    const single = this.single;
 
+    // ReactDOM.render(
+    //   <MediaNode
+    //     articleId={String(single.id)}
+    //     mediaType={single.mediaType}
+    //     media={single.media}
+    //     isShowImage={single.isShowImage}
+    //     index={0}
+    //     // 2018-01-12 追加する
+    //     single={single}
+    //   />,
+    //   this.element,
+    // );
     ReactDOM.render(
-      <MediaNode
+      <ComponentMedia
         articleId={String(single.id)}
         mediaType={single.mediaType}
+        // video={single.media.video}
+        // images={single.media.images}
         media={single.media}
         isShowImage={single.isShowImage}
         index={0}
+        // 2018-01-12 追加する
+        single={single}
+        sp={this.sp}
       />,
       this.element,
     );

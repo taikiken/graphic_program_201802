@@ -23,7 +23,7 @@ import {User} from '../../app/User';
 // node
 // import {BookmarkNode} from '../../node/bookmark/BookmarkNode';
 
-import { ComponentSingleHeader } from '../../component/singles/ComponentSingleHeader';
+import ComponentSingleHeader from '../../component/singles/ComponentSingleHeader';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -38,13 +38,11 @@ const React = self.React;
 const ReactDOM = self.ReactDOM;
 
 /**
- * <h3>記事詳細(detail) 上部<h3>
- * <ul>
- *   <li>bookmark</li>
- *   <li>title</li>
- *   <li>投稿者</li>
- *   <li>日付</li>
- * </ul>
+ * 記事詳細(detail) 上部
+ * - bookmark
+ * - title
+ * - 投稿者
+ * - 日付
  */
 export default class ViewSingleHeader extends View {
   /**
@@ -53,42 +51,41 @@ export default class ViewSingleHeader extends View {
    * @param {SingleDae} single 変換済み JSON data
    */
   constructor(element, single) {
-    super( element );
+    super(element);
     /**
      * 変換済み JSON data
      * @type {SingleDae}
-     * @private
      */
-    this._single = single;
-    /**
-     * HeaderDom instance
-     * @type {?ComponentSingleHeader|*}
-     * @private
-     */
-    this._rendered = null;
+    this.single = single;
+    // /**
+    //  * HeaderDom instance
+    //  * @type {?ComponentSingleHeader|*}
+    //  * @private
+    //  */
+    // this._rendered = null;
     /**
      * bound executeSafely
      * @type {function}
      */
     this.boundSafely = this.executeSafely.bind(this);
   }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * HeaderDom instance を取得します
-   * @return {?ComponentSingleHeader} HeaderDom instance を返します
-   */
-  get rendered() {
-    return this._rendered;
-  }
-  /**
-   * HeaderDom instance を設定します
-   * @param {?ComponentSingleHeader} rendered HeaderDom instance
-   */
-  set rendered(rendered) {
-    this._rendered = rendered;
-  }
+  // // ---------------------------------------------------
+  // //  GETTER / SETTER
+  // // ---------------------------------------------------
+  // /**
+  //  * HeaderDom instance を取得します
+  //  * @return {?ComponentSingleHeader} HeaderDom instance を返します
+  //  */
+  // get rendered() {
+  //   return this._rendered;
+  // }
+  // /**
+  //  * HeaderDom instance を設定します
+  //  * @param {?ComponentSingleHeader} rendered HeaderDom instance
+  //  */
+  // set rendered(rendered) {
+  //   this._rendered = rendered;
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -96,7 +93,7 @@ export default class ViewSingleHeader extends View {
    * render 処理を開始します
    */
   start() {
-    this.render(this._single);
+    this.render(this.single);
   }
   /**
    * render します
@@ -179,24 +176,31 @@ export default class ViewSingleHeader extends View {
     //     this.setState( { single: single, sign: sign } );
     //   }
     // } );
-
-    if (this._rendered === null) {
-      // this._rendered = ReactDOM.render(
-      //   React.createElement( HeaderDom, { single: singleDae, sign: User.sign } ),
-      //   element
-      // );
-      // @since 2016-09-24 changed
-      this._rendered = ReactDOM.render(
-        <ComponentSingleHeader
-          single={singleDae}
-          sign={User.sign}
-          callback={this.boundSafely}
-        />,
-        this.element
-      );
-    } else {
-      this._rendered.updateSingle(singleDae, User.sign);
-    }
-
+    //
+    // if (this._rendered === null) {
+    //   // this._rendered = ReactDOM.render(
+    //   //   React.createElement( HeaderDom, { single: singleDae, sign: User.sign } ),
+    //   //   element
+    //   // );
+    //   // @since 2016-09-24 changed
+    //   this._rendered = ReactDOM.render(
+    //     <ComponentSingleHeader
+    //       single={singleDae}
+    //       sign={User.sign}
+    //       callback={this.boundSafely}
+    //     />,
+    //     this.element
+    //   );
+    // } else {
+    //   this._rendered.updateSingle(singleDae, User.sign);
+    // }
+    ReactDOM.render(
+      <ComponentSingleHeader
+        single={singleDae}
+        sign={User.sign}
+        callback={this.boundSafely}
+      />,
+      this.element,
+    );
   }// render
 }
