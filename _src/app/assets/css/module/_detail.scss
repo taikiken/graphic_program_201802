@@ -752,7 +752,9 @@
   }
 
   .board-large {
+    border-top: 1px solid #ddd;
     margin-top: 20px;
+    padding-top: 20px;
     .board-large-column {
       display: flex;
       justify-content: space-between;

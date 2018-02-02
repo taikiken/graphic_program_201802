@@ -1558,6 +1558,7 @@ html.mobile .adgLink .adgTextContainer .adgPr,
 // @since 2018-01-15
 #post-content-container {
   position: relative;
+  margin-bottom: 10px;
   &.restricted {
     height: 190px;
     overflow: hidden;

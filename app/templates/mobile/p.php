@@ -265,10 +265,16 @@
       // TODO: おすすめの記事 - sidebar: recommend
       ?>
       <?php if ( $page['category']['slug'] == 'crazy' ) : ?>
-        <p>分岐テスト</p>
         <div id="widget-recommend-list-container"></div>
       <?php else: ?>
-        <div id="widget-recommend-list-container"></div>
+        <div id="_popIn_recommend_2"></div>
+        <script type="text/javascript">
+            (function() {
+                var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+            })();
+        </script>
       <?php endif; ?>
 
       <?php /*
