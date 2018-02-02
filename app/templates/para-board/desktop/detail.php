@@ -193,12 +193,26 @@ endif;
 
 <?php
 // 大会概要
-function competition_summary_tr($providor_name, $title) {
+function competition_summary_tr($provider_name, $title, $option_name = null) {
   $tr = '';
-  if (!empty($providor_name)) :
+  if (!empty($provider_name) || !empty($option_name)) :
     $tr .= '<tr>';
     $tr .= '<th class="paraboard__detail__overview__th">' . $title . '</th>';
-    $tr .= '<td class="paraboard__detail__overview__td">' . $providor_name . '</td>';
+    $tr .= '<td class="paraboard__detail__overview__td">';
+    if (!empty($provider_name)) :
+      $tr .= $provider_name;
+      if (!empty($option_name)) :
+        $tr .= ' / ' . $option_name;
+      endif;
+    else:
+      if (!empty($option_name)) :
+        $tr .= $option_name;
+      endif;
+    endif;
+    if (!empty($option_name)) :
+      $tr .= '' . $option_name;
+    endif;
+    $tr .= '</td>';
     $tr .= '</tr>';
   endif;
   return $tr;
@@ -216,7 +230,7 @@ function competition_summary_tr($providor_name, $title) {
       echo competition_summary_tr($competition_response['period'],'開催日');
       echo competition_summary_tr($competition_response['organizer'],'主催者');
       echo competition_summary_tr($competition_response['collaborator'],'協力者');
-      echo competition_summary_tr($competition_response['sponsor'],'後援');
+      echo competition_summary_tr($competition_response['sponsor'],'後援', $competition_response['cosponsor']);
       echo competition_summary_tr($competition_response['venue'],'会場名');
       echo competition_summary_tr($competition_response['qualification'],'参加資格');
       echo competition_summary_tr($competition_response['regulation'],'規定');

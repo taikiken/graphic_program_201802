@@ -46,7 +46,7 @@ if (!empty($response)) :
         // /th
         ?>
         <td class="paraboard__widjet__list__game">
-          <a href="/para-board/<?php echo $para_game['id']; ?>/<?php echo $para_game['current_year']; ?>/" class="paraboard__widjet__list__game__link">
+          <a href="/para-board/<?php echo $para_game['id']; ?>/" class="paraboard__widjet__list__game__link">
             <header class="paraboard__widjet__list__game__header">
               <span class="paraboard__widjet__list__icon"><img src="<?php echo $para_game['icon']; ?>" alt=""></span>
               <p class="paraboard__widjet__list__game__header__category">
