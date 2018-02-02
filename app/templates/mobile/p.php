@@ -408,35 +408,4 @@
   } else {
     showContentDFP();
   }
-
-  const windowHeight = window.innerHeight;
-  var listDFP = [
-    'article-detail-body-bottom',
-    'article-detail-recommend-bottom',
-    'article-detail-footer'
-  ];
-  var showDFP = function(name) {
-    googletag.cmd.push(function() {
-      googletag.defineSlot('/531683568/article-detail/' + name, [300, 250], 'ad-gpt-' + name).addService(googletag.pubads());
-      googletag.pubads().enableSingleRequest();
-      googletag.pubads().collapseEmptyDivs();
-      googletag.enableServices();
-      googletag.display('ad-gpt-' + name);
-    });
-  }
-  var windowOffsetY = window.pageYOffset;
-  var setDFP = function() {
-    var pos = window.pageYOffset;
-    for(var i in listDFP) {
-      var y = document.getElementById('ad-gpt-' + listDFP[i]).getBoundingClientRect().y - 400;
-      if(pos >= y) {
-        showDFP(listDFP[i]);
-        listDFP.splice(i, 1);
-      }
-    }
-    if(!listDFP.length) {
-      window.removeEventListener('touchmove', setDFP, true);
-    }
-  }
-  window.addEventListener('touchmove', setDFP, true);
 </script>

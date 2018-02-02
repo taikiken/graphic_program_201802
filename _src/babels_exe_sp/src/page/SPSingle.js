@@ -283,7 +283,6 @@ export default class SPSingle {
 
 
   static scroll(keyword, slug, label) {
-    const windowHeight = window.innerHeight;
     const windowOffsetY = window.pageYOffset;
     const y = -400;
     let widget = {
@@ -330,17 +329,20 @@ export default class SPSingle {
       }
     };
 
+
     widget.recommend.element = Dom.recommend();
-    widget.recommend.rect = widget.recommend.element.getBoundingClientRect();
-    widget.recommend.y = windowOffsetY + widget.recommend.rect.top + y;
-    widget.show.recommend = (pos)=> {
-      // console.log(pos, widget.recommend.y);
-      if (pos >= widget.recommend.y && widget.recommend.element) {
-        widget.recommend.ut = new UT.sp.view.singles.SPViewSinglesRecommend(widget.recommend.element, slug);
-        widget.recommend.ut.start();
-        delete widget.show.recommend;
-      }
-    };
+    if(widget.recommend.element) {
+      widget.recommend.rect = widget.recommend.element.getBoundingClientRect();
+      widget.recommend.y = windowOffsetY + widget.recommend.rect.top + y;
+      widget.show.recommend = (pos)=> {
+        // console.log(pos, widget.recommend.y);
+        if (pos >= widget.recommend.y && widget.recommend.element) {
+          widget.recommend.ut = new UT.sp.view.singles.SPViewSinglesRecommend(widget.recommend.element, slug);
+          widget.recommend.ut.start();
+          delete widget.show.recommend;
+        }
+      };
+    }
 
     let showCnt = Object.keys(widget.show).length;
 
