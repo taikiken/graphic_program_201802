@@ -10,7 +10,7 @@ include $INCLUDEPATH.'public/import.php';
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-$MEDIAID = 73;
+$MEDIAID = 71;
 const MEDIA_NAME = 'AZrena';
 const SPECIAL_CHAR = 'www.youtube.com/embed';
 # RSSファイル
