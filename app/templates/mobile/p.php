@@ -202,15 +202,42 @@
                 <p id="btn-more-web"><span>ウェブで読む</span></p>
               </div>
             <?php endif; ?>
+
+            <?php
+            /*
+            DFP - 記事本文中差し込み広告
+            */
+            ?>
+            <script>
+              var bodyElement = document.getElementById('post-content-container');
+              var bodyP = document.querySelectorAll('#post-content-container > p');
+              var bodyLen = bodyP.length;
+              var halfIndex = Math.round(bodyLen / 2) - 1;
+              var btnContainer = bodyElement.querySelector('.single-more-container');
+              var btnMore = bodyElement.querySelector('#btn-more-web');
+              if ( btnMore ) {
+                btnMore.addEventListener('touchend', function(){
+                  bodyElement.classList.remove('restricted');
+                  btnContainer.parentNode.removeChild(btnContainer);
+                });
+              }
+              if(bodyLen >= 6) {
+                var div = document.createElement('div');
+                var target = bodyP[halfIndex];
+                div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
+                target.parentNode.insertBefore(div, target.nextSibling);
+              }
+            </script>
           </div><!-- /.post-content -->
 
-          <?php // ref. #1876 ?>
-          <!-- /531683568/mobile/mobile_detail_body_bottom -->
         </div><!-- /.post-detail -->
 
-        <!-- /531683568/article-detail/article-detail-body-bottom -->
+
+        <?php /*
+        DFP - mobile / 記事詳細本文下 ( フォロー上 ) レクタングル
+        */ ?>
         <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp"></div>
-        <!-- // /531683568/article-detail/article-detail-body-bottom -->
+
 
       <?php
         // ------------------------------------
@@ -270,9 +297,10 @@
         <div id="widget-recommend-list-container"></div>
       <?php endif; ?>
 
-      <!-- /531683568/mobile/article-detail-recommend-bottom -->
+      <?php /*
+      DFP - mobile / 記事詳細おすすめ記事下レクタングル
+      */ ?>
       <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
-      <!-- // /531683568/mobile/article-detail-recommend-bottom -->
 
       <?php
       // ----------------------------------------------------
@@ -309,9 +337,11 @@
         </div>
       </div>
 
-      <!-- /531683568/mobile/article-detail-footer -->
+
+      <?php /*
+      DFP - mobile / 記事詳細おすすめ記事下レクタングル
+      */ ?>
       <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>
-      <!-- // /531683568/mobile/article-detail-footer -->
 
 
       <?php
@@ -369,65 +399,3 @@
     </section><!-- /.main-sec -->
   </div>
 </div><!-- /.body-sec -->
-<script>
-  var bodyElement = document.getElementById('post-content-container');
-  var bodyP = document.querySelectorAll('#post-content-container > p');
-  var bodyLen = bodyP.length;
-  var halfIndex = Math.round(bodyLen / 2) - 1;
-  var btnContainer = bodyElement.querySelector('.single-more-container');
-  var btnMore = bodyElement.querySelector('#btn-more-web');
-  var showContentDFP = function() {
-    if(bodyLen >= 6) {
-      var div = document.createElement('div');
-      var target = bodyP[halfIndex];
-      div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
-      target.parentNode.insertBefore(div, target.nextSibling);
-      googletag.cmd.push(function() {
-        googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert').addService(googletag.pubads());
-        googletag.enableServices();
-        googletag.pubads().collapseEmptyDivs();
-        googletag.display("ad-gpt-article-detail-body-insert");
-      });
-    }
-  }
-  if(btnMore) {
-    btnMore.addEventListener('touchend', function(){
-      bodyElement.classList.remove('restricted');
-      btnContainer.parentNode.removeChild(btnContainer);
-      showContentDFP();
-    });
-  } else {
-    showContentDFP();
-  }
-
-  const windowHeight = window.innerHeight;
-  var listDFP = [
-    'article-detail-body-bottom',
-    'article-detail-recommend-bottom',
-    'article-detail-footer'
-  ];
-  var showDFP = function(name) {
-    googletag.cmd.push(function() {
-      googletag.defineSlot('/531683568/article-detail/' + name, [300, 250], 'ad-gpt-' + name).addService(googletag.pubads());
-      googletag.pubads().enableSingleRequest();
-      googletag.pubads().collapseEmptyDivs();
-      googletag.enableServices();
-      googletag.display('ad-gpt-' + name);
-    });
-  }
-  var windowOffsetY = window.pageYOffset;
-  var setDFP = function() {
-    var pos = window.pageYOffset;
-    for(var i in listDFP) {
-      var y = document.getElementById('ad-gpt-' + listDFP[i]).getBoundingClientRect().y - 400;
-      if(pos >= y) {
-        showDFP(listDFP[i]);
-        listDFP.splice(i, 1);
-      }
-    }
-    if(!listDFP.length) {
-      window.removeEventListener('touchmove', setDFP, true);
-    }
-  }
-  window.addEventListener('touchmove', setDFP, true);
-</script>
