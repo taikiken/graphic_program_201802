@@ -68,8 +68,8 @@ export default class ViewSingleHeadline extends ViewArchiveMasonryInfinite {
      * @type {CategoryAuth|Category}
      */
     this.action = User.sign ?
-      new CategoryAuth(argsSlug, '', this.done.bind(this), this.fail.bind(this), 0, 10) :
-      new Category(argsSlug, '', this.done.bind(this), this.fail.bind(this), 0, 10);
+      new CategoryAuth(argsSlug, '', this.done.bind(this), this.fail.bind(this), 0, 32) :
+      new Category(argsSlug, '', this.done.bind(this), this.fail.bind(this), 0, 32);
     /**
      * category slug
      * @override
