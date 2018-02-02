@@ -149,6 +149,113 @@ $gray: #f8fafc;
   }
 }
 
+.fwt--info {
+  background: #f8fafc;
+  margin-bottom: 20px;
+  padding: 10px 0;
+  p {
+    color: $orange;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+.fwt--timetable {
+  margin-bottom: 50px;
+  h3 {
+    @include title;
+  }
+  table {
+    width: 100%;
+    tbody {
+      tr {
+        display: flex;
+        flex-direction: column;
+        font-size: 20px;
+        margin-bottom: 20px;
+        border-left: 2px solid #e71a0e;
+        padding-left: 10px;
+        th {
+          color: $orange;
+          font-weight: bold;
+        }
+        td {
+          font-weight: bold;
+          div {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  .notice {
+    @include notice;
+  }
+}
+
+.fwt--schedule {
+  margin-bottom: 50px;
+  h3 {
+    @include title;
+  }
+  table {
+    width: 100%;
+    tbody {
+      tr {
+        font-size: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(81, 87, 105,0.2);
+        &.end {
+          opacity: 0.3;
+          td {
+            &:after {
+              display: inline-block;
+              content: '終了';
+              color: #fff;
+              background: #4d4d4d;
+              font-size: 10px;
+              padding: 1px 5px;
+              margin-left: 10px;
+              vertical-align: text-bottom;
+            }
+          }
+        }
+        &.next {
+          td {
+            &:after {
+              display: inline-block;
+              content: 'NEXT';
+              color: #fff;
+              background: $orange;
+              font-size: 10px;
+              padding: 1px 5px;
+              margin-left: 10px;
+              font-family: 'Mukta Vaani';
+              vertical-align: text-bottom;
+            }
+          }
+        }
+        th {
+          width: 1px;
+          white-space: nowrap;
+          color: $orange;
+          font-weight: bold;
+          padding: 10px 20px 10px 0;
+        }
+        td {
+          font-weight: bold;
+          padding: 10px 0;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  .notice {
+    @include notice;
+  }
+}
+
 .fwt--about {
   @include section;
   h2 {
