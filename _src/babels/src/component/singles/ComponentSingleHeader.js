@@ -14,7 +14,7 @@
 import View from '../../view/View';
 
 // node
-import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
+// import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 
 // component
 // import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
@@ -181,11 +181,11 @@ export class ComponentSingleHeader extends React.Component {
           </p>
           <p className="post-logo">{this.logo(logo)}</p>
           {/* div.f-right (bookmark: on / off) */}
-          <BookmarkNode
+          {/* <BookmarkNode
             sign={this.state.sign}
             isBookmarked={this.state.status}
             articleId={String(single.id)}
-          />
+          /> */}
         </div>
       </div>
     );
