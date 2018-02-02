@@ -11,7 +11,9 @@ $dates = [
 ];
 $titles = [];
 $list = [];
+$save_files =[];
 $item_id = '';
+$article_id = '';
 $modify = '';
 $mes = '';
 $id_pattern = '/<NewsItemId>(.*)<\/NewsItemId>/';
@@ -133,7 +135,8 @@ EOD;
     foreach($list as $key => $val){
       if($val === $filename){
         $skip_flag = false;
-        continue;
+        $save_files[] = $filename;
+        break;
       }
     }
     if($skip_flag){continue;}
@@ -305,6 +308,14 @@ EOD;
 
   $o->query($sql);
   $cnt++;
+  }
+  if(empty($save_files)){
+    $format = "DELETE FROM repo_n WHERE id=%s";
+    $sql = sprintf($format, $article_id);
+    $o->query($sql);
+    $format = "DELETE FROM repo_body WHERE pid=%s";
+    $sql = sprintf($format, $article_id);
+    $o->query($sql);
   }
   unset($list);
   unset($article_id);
