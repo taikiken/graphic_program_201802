@@ -202,31 +202,6 @@
                 <p id="btn-more-web"><span>ウェブで読む</span></p>
               </div>
             <?php endif; ?>
-
-            <script>
-              var bodyElement = document.getElementById('post-content-container');
-              var bodyP = document.querySelectorAll('#post-content-container > p');
-              var bodyLen = bodyP.length;
-              var halfIndex = Math.round(bodyLen / 2) - 1;
-              var btnContainer = bodyElement.querySelector('.single-more-container');
-              var btnMore = bodyElement.querySelector('#btn-more-web');
-              btnMore.addEventListener('touchend', function(){
-                bodyElement.classList.remove('restricted');
-                btnContainer.parentNode.removeChild(btnContainer);
-              });
-              if(bodyLen >= 6) {
-                var div = document.createElement('div');
-                var target = bodyP[halfIndex];
-                div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
-                target.parentNode.insertBefore(div, target.nextSibling);
-                googletag.cmd.push(function() {
-                  googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert').addService(googletag.pubads());
-                  googletag.enableServices();
-                  googletag.pubads().collapseEmptyDivs();
-                  googletag.display("ad-gpt-article-detail-body-insert");
-                });
-              }
-            </script>
           </div><!-- /.post-content -->
 
           <?php // ref. #1876 ?>
@@ -234,19 +209,7 @@
         </div><!-- /.post-detail -->
 
         <!-- /531683568/article-detail/article-detail-body-bottom -->
-        <script>
-          googletag.cmd.push(function() {
-            googletag.defineSlot('/531683568/article-detail/article-detail-body-bottom', [300, 250], 'ad-gpt-article-detail-body-bottom').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.pubads().collapseEmptyDivs();
-            googletag.enableServices();
-          });
-        </script>
-        <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp">
-        <script>
-          googletag.cmd.push(function() { googletag.display('ad-gpt-article-detail-body-bottom'); });
-        </script>
-        </div>
+        <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp"></div>
         <!-- // /531683568/article-detail/article-detail-body-bottom -->
 
       <?php
@@ -307,21 +270,9 @@
         <div id="widget-recommend-list-container"></div>
       <?php endif; ?>
 
-      <!-- /531683568/mobile/mobile_recommend_after -->
-      <script>
-        googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/article-detail/article-detail-recommend-bottom', [300, 250], 'ad-gpt-article-detail-recommend-bottom').addService(googletag.pubads());
-          googletag.pubads().enableSingleRequest();
-          googletag.pubads().collapseEmptyDivs();
-          googletag.enableServices();
-        });
-      </script>
-      <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp">
-      <script>
-        googletag.cmd.push(function() { googletag.display('ad-gpt-article-detail-recommend-bottom'); });
-      </script>
-      </div>
-      <!-- // /531683568/mobile/mobile_recommend_after -->
+      <!-- /531683568/mobile/article-detail-recommend-bottom -->
+      <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
+      <!-- // /531683568/mobile/article-detail-recommend-bottom -->
 
       <?php
       // ----------------------------------------------------
@@ -358,21 +309,9 @@
         </div>
       </div>
 
-      <!-- /531683568/mobile/mobile_news_after -->
-      <script>
-        googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/article-detail/article-detail-footer', [300, 250], 'ad-gpt-article-detail-footer').addService(googletag.pubads());
-          googletag.pubads().enableSingleRequest();
-          googletag.pubads().collapseEmptyDivs();
-          googletag.enableServices();
-        });
-      </script>
-      <div id='ad-gpt-article-detail-footer' class="bnr-dfp">
-        <script>
-          googletag.cmd.push(function() { googletag.display('ad-gpt-article-detail-footer'); });
-        </script>
-      </div>
-      <!-- // /531683568/mobile/mobile_news_after -->
+      <!-- /531683568/mobile/article-detail-footer -->
+      <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>
+      <!-- // /531683568/mobile/article-detail-footer -->
 
 
       <?php
@@ -430,3 +369,65 @@
     </section><!-- /.main-sec -->
   </div>
 </div><!-- /.body-sec -->
+<script>
+  var bodyElement = document.getElementById('post-content-container');
+  var bodyP = document.querySelectorAll('#post-content-container > p');
+  var bodyLen = bodyP.length;
+  var halfIndex = Math.round(bodyLen / 2) - 1;
+  var btnContainer = bodyElement.querySelector('.single-more-container');
+  var btnMore = bodyElement.querySelector('#btn-more-web');
+  var showContentDFP = function() {
+    if(bodyLen >= 6) {
+      var div = document.createElement('div');
+      var target = bodyP[halfIndex];
+      div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
+      target.parentNode.insertBefore(div, target.nextSibling);
+      googletag.cmd.push(function() {
+        googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert').addService(googletag.pubads());
+        googletag.enableServices();
+        googletag.pubads().collapseEmptyDivs();
+        googletag.display("ad-gpt-article-detail-body-insert");
+      });
+    }
+  }
+  if(btnMore) {
+    btnMore.addEventListener('touchend', function(){
+      bodyElement.classList.remove('restricted');
+      btnContainer.parentNode.removeChild(btnContainer);
+      showContentDFP();
+    });
+  } else {
+    showContentDFP();
+  }
+
+  const windowHeight = window.innerHeight;
+  var listDFP = [
+    'article-detail-body-bottom',
+    'article-detail-recommend-bottom',
+    'article-detail-footer'
+  ];
+  var showDFP = function(name) {
+    googletag.cmd.push(function() {
+      googletag.defineSlot('/531683568/article-detail/' + name, [300, 250], 'ad-gpt-' + name).addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.pubads().collapseEmptyDivs();
+      googletag.enableServices();
+      googletag.display('ad-gpt-' + name);
+    });
+  }
+  var windowOffsetY = window.pageYOffset;
+  var setDFP = function() {
+    var pos = window.pageYOffset;
+    for(var i in listDFP) {
+      var y = document.getElementById('ad-gpt-' + listDFP[i]).getBoundingClientRect().y - 400;
+      if(pos >= y) {
+        showDFP(listDFP[i]);
+        listDFP.splice(i, 1);
+      }
+    }
+    if(!listDFP.length) {
+      window.removeEventListener('touchmove', setDFP, true);
+    }
+  }
+  window.addEventListener('touchmove', setDFP, true);
+</script>

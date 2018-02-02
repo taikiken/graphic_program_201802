@@ -1073,7 +1073,7 @@ body {
 .post-single {
   div, p {
     &:empty {
-      display: none;
+      // display: none;
     }
   }
   .body-sec-inner {
