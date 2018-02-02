@@ -169,24 +169,9 @@
               </div>
           <?php } ?>
 
-          <!-- タグの表示 -->
+          <!-- タグ & 記事下バナーの表示 -->
           <div id="single-footer-container"></div>
 
-
-          <div class="sponsor-link w728"><script type='text/javascript'>
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/pc_single_bottom', [728, 90], 'div-gpt-ad-pc_single_bottom').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
-              });
-            </script>
-            <div id='div-gpt-ad-pc_single_bottom' style='height:90px; width:728px;'>
-            <script type='text/javascript'>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_single_bottom'); });
-            </script>
-            </div>
-          </div>
 
           <!-- ヘッドラインの表示 -->
           <div id="js-headline"></div>
