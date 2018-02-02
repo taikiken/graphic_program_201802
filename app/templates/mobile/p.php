@@ -267,14 +267,39 @@
       <?php if ( $page['category']['slug'] == 'crazy' ) : ?>
         <div id="widget-recommend-list-container"></div>
       <?php else: ?>
-        <div id="_popIn_recommend_2"></div>
-        <script type="text/javascript">
-            (function() {
-                var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-                pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-            })();
-        </script>
+        <?php
+        /*
+
+        # popin
+        - 収益計算用にSPとWebViewでタグ異なる
+        - 同一カテゴリのみ表示するため、`<div id="_popIn_category"></div>` でカテゴリー情報を付与する
+
+        */
+        ?>
+        <?php if ( $page['category']['label'] ) : ?>
+        <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
+        <?php endif; ?>
+
+        <?php if ( !$page['ua_app'] ) : ?>
+          <div id="_popIn_recommend_2"></div>
+          <script type="text/javascript">
+              (function() {
+                  var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                  pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
+                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+              })();
+          </script>
+        <?php else : ?>
+          <div id="_popIn_recommend"></div>
+          <script type="text/javascript">
+              (function() {
+                  var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                  pa.src = window.location.protocol + "//api.popin.cc/searchbox/sportsbull_app.js";
+                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+              })();
+          </script>
+        <?php endif; ?>
+
       <?php endif; ?>
 
       <?php /*
