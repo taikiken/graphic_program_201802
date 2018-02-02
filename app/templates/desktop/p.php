@@ -199,6 +199,28 @@
             <div id="div-gpt-ad-article-detail-desktop-rectangle-F"></div>
           </div>
 
+
+          <?php
+          /*
+
+          # popin - desktop用
+
+          */
+          ?>
+          <?php if ( $page['category']['label'] ) : ?>
+          <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
+          <?php endif; ?>
+          <div class="board-large">
+            <div id="_popIn_recommend_2"></div>
+            <script type="text/javascript">
+                (function() {
+                    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                    pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+                })();
+            </script>
+          </div><!-- /.board-large -->
+
         </div><!-- /.post-detail -->
       </div><!-- /.current-post-->
 
