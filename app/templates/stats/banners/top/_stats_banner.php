@@ -46,27 +46,27 @@ $statsItem = array(
     )
   ),
 
-  // array(
-  //   'title' => 'サッカー日本代表',
-  //   'label' => 'サッカー<br />日本代表',
-  //   'path'  => '/sokuhou/',
-  //   'icon'  => array(
-  //     'slug'    => 'soccer',
-  //     'is_fill' => false,
-  //     'style'   => '',
-  //   )
-  // ),
-
   array(
-    'title' => 'テニス全豪OP',
-    'label' => 'テニス<br />全豪OP',
-    'path'  => '/stats/tennis/',
+    'title' => 'サッカー日本代表',
+    'label' => 'サッカー<br />日本代表',
+    'path'  => '/sokuhou/',
     'icon'  => array(
-      'slug'    => 'tennis',
+      'slug'    => 'soccer',
       'is_fill' => false,
       'style'   => '',
     )
   ),
+
+  // array(
+  //   'title' => 'テニス全豪OP',
+  //   'label' => 'テニス<br />全豪OP',
+  //   'path'  => '/stats/tennis/',
+  //   'icon'  => array(
+  //     'slug'    => 'tennis',
+  //     'is_fill' => false,
+  //     'style'   => '',
+  //   )
+  // ),
 
   array(
     'title' => 'Bリーグ',
