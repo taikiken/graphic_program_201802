@@ -8,12 +8,12 @@
   </div>
 </div>
 <div class="fwt-streaming">
-  <!-- 動画配信前 -->
-    <img src="/assets/images/fwt/poster-Cancel.jpg" alt="">
-  <!-- 動画配信中
+  <!-- 動画配信前
+    <img src="/assets/images/fwt/poster-Cancel.jpg" alt=""> -->
+  <!-- 動画配信中 -->
   <div class="fwt-streaming__movie-wrap">
-    <iframe src="https://www.youtube.com/embed/rpjFvFYGyXs?showinfo=0" frameborder="0" allowfullscreen></iframe>
-  </div> -->
+    <iframe src="https://www.youtube.com/embed/kMy5STjWfl4?showinfo=0" frameborder="0" allowfullscreen></iframe>
+  </div>
 
   <!-- テスト用ライブ動画
   <div class="fwt-streaming__movie-wrap">
