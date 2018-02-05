@@ -375,6 +375,7 @@ export default class Page {
    * @param {Object} event Router event object
    */
   static single(event) {
+    // console.log('Page.single', event);
     const articleId = event.id;
     // page top
     PageTop.start();
