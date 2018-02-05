@@ -127,5 +127,6 @@ s.parentNode.insertBefore(bs, s);
 </script>
 <?php endif; ?>
 
+<script src="/assets/google/dfp.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>
