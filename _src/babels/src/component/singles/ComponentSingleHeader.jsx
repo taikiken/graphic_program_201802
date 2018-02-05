@@ -14,11 +14,13 @@
 import View from '../../view/View';
 
 // node
-import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
+// import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 
 // component
-import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
-import { SingleDae } from '../../dae/SingleDae';
+// import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
+
+// ga
+import { Ga } from '../../ga/Ga';
 
 // React
 /**
@@ -31,7 +33,7 @@ const React = self.React;
  * 汎用化のために `ViewSingleHeader` {@link ViewSingleHeader} から分離します
  * @since 2016-09-24
  */
-export default class ComponentSingleHeader extends React.Component {
+export class ComponentSingleHeader extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -41,8 +43,7 @@ export default class ComponentSingleHeader extends React.Component {
    */
   static get propTypes() {
     return {
-      // single: React.PropTypes.object.isRequired,
-      single: React.PropTypes.instanceOf(SingleDae).isRequired,
+      single: React.PropTypes.object.isRequired,
       sign: React.PropTypes.bool.isRequired,
       callback: React.PropTypes.func
     };
@@ -64,6 +65,7 @@ export default class ComponentSingleHeader extends React.Component {
      *  sign: boolean,
      *  status: boolean,
      *  bookmarked: string,
+     *  loading: string
      * }}
      * */
     this.state = {
@@ -71,7 +73,7 @@ export default class ComponentSingleHeader extends React.Component {
       sign: props.sign,
       status: props.single.isBookmarked,
       bookmarked: props.single.isBookmarked ? 'bookmarked enable' : '',
-      // loading: ''
+      loading: ''
     };
   }
   // ---------------------------------------------------
@@ -95,21 +97,50 @@ export default class ComponentSingleHeader extends React.Component {
       safety(View.DID_MOUNT);
     }
   }
-  // /**
-  //  * React state, single と sign を更新します
-  //  * @param {SingleDae} single 記事詳細 JSON データ
-  //  * @param {boolean} sign ユーザーがログイン済みかの真偽値
-  //  * */
-  // updateSingle(single, sign) {
-  //   this.setState({ single, sign });
-  // }
   /**
-   * delegate - update props to setState
-   * @param {{single: SingleDae, sign: boolean}} nextProps next React.props
-   */
-  componentWillReceiveProps(nextProps) {
-    const { single, sign } = nextProps;
+   * React state, single と sign を更新します
+   * @param {SingleDae} single 記事詳細 JSON データ
+   * @param {boolean} sign ユーザーがログイン済みかの真偽値
+   * */
+  updateSingle(single, sign) {
     this.setState({ single, sign });
+  }
+  /**
+   * 記事提供元ロゴクリック event handler, ga 送信
+   */
+  logoClick() {
+    const link = this.state.single.user.logo.link;
+    Ga.click('provider-logo', 'provider_link', 'click', link, true);
+  }
+  /**
+   * 記事提供元ロゴ表示
+   * @param {LogoDae} logo 記事提供元情報
+   * @return {?XML} 画像がある時のみタグを返します
+   */
+  logo(logo) {
+    const img = logo.img;
+    // ロゴがなかったら表示しない
+    if (!img) {
+      return null;
+    }
+    const link = logo.link;
+    if (!link) {
+      // リンク(url)がなかったらロゴだけ表示
+      return (
+        <i className="provider-logo">
+          <img src={img} alt=""/>
+        </i>
+      );
+    }
+    // リンク付き出力
+    // クリックで ga 送信するので `onClick` を仕込みます
+    return (
+      <a href={link} target="_blank" onClick={this.boundLogo}>
+        <i className="provider-logo">
+          <img src={img} alt=""/>
+        </i>
+      </a>
+    );
   }
   /**
    * 記事詳細上部 `header` を出力します
@@ -118,29 +149,43 @@ export default class ComponentSingleHeader extends React.Component {
   render() {
     const single = this.state.single;
     // console.log('ComponentSingleHeader.render', single);
+    const user = single.user;
+    // @type {string}
+    const userName = user.userName;
+    // @type {LogoDae}
+    const logo = user.logo;
+    // 提供元名称とロゴがなかったら表示しない
+    if (!userName && !logo.img) {
+      return null;
+    }
     return (
       <div className="single-header-root">
         <div className={`post-heading post-heading-${single.id}`}>
           <h1>{single.title}</h1>
         </div>
-        <ComponentCategoryLabelsLink
+        {/* <ComponentCategoryLabelsLink
           index={0}
           id={`single-label-${single.id}`}
           categories={single.categories.all}
           className="category-heading"
           anotherCategories={single.anotherCategories}
-        />
+        /> */}
         <div className="post-data">
-          <div className="f-left">
+          {/* <div className="f-left">
             <p className="post-author">{single.user.userName}</p>
             <p className="post-date">{single.displayDate}</p>
-          </div>
+          </div> */}
+          <p className="post-text">
+            <span className="post-date">{single.displayDate}</span>
+            <span className="post-category">{single.categories.label}</span>
+          </p>
+          <p className="post-logo">{this.logo(logo)}</p>
           {/* div.f-right (bookmark: on / off) */}
-          <BookmarkNode
+          {/* <BookmarkNode
             sign={this.state.sign}
             isBookmarked={this.state.status}
             articleId={String(single.id)}
-          />
+          /> */}
         </div>
       </div>
     );

@@ -102,11 +102,11 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_kansai/",$requesturi) ||
       preg_match("/ub_kansaibig6/",$requesturi) ||
       preg_match("/ub_tohto/",$requesturi)) {
-      $bucket="ublive.sportsbull.jp";
+      $bucket="stg-ublive.sportsbull.jp";
     }elseif (preg_match("/worldsoccer/",$requesturi)) {
-      $bucket="stats.sportsbull.jp";
+      $bucket="stg-stats.sportsbull.jp";
     }else{
-      $bucket="img-sportsbull-jp";
+      $bucket="stg-img-sportsbull-jp";
     }
 
 	}elseif(preg_match("/cms/",$servername)){
@@ -195,10 +195,10 @@ if(preg_match("/undotsushin/",$servername)){
 // - :8888 - vagrant local network port
 if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'undotsushin.local' || $_SERVER['SERVER_PORT'] == '8080' || $_SERVER['SERVER_PORT'] == '8888' ) :
   $staticfileimport=0;
-  $DBNAME="ut";
+  $DBNAME="ut_devnew";
   $DBUSR="ut";
   $DBPWD="ut";
-  $DBHOST="localhost";
+  $DBHOST="undo-dev.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
   $DBPORT=5432;
   $SERVERPATH="/vagrant/public";
   $USERS="/vagrant/public/users";
