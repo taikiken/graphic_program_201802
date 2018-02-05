@@ -36,6 +36,7 @@ SPORTIVA	http://cms.sportsbull.jp/api/batch/import_sportiva.php
 */
 
 if(preg_match("/dev/",$_SERVER["SERVER_NAME"]))$s=str_replace("cms","dev",$s);
+if(preg_match("/stg/",$_SERVER["SERVER_NAME"]))$s=str_replace("cms","stg",$s);
 $s=explode("\n",$s);
 for($i=0;$i<count($s);$i++){
 	$s[$i]=trim($s[$i]);
