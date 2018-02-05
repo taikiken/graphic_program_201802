@@ -55,3 +55,84 @@ html.mobile .news-ad .adsWrapper .adsImgContainer img {
   width: 100%;
   height: auto;
 }
+
+
+/*
+# 記事詳細 - 関連系記事表示内広告
+- 人気記事 - ID     : adg_54992
+- おすすめ記事 - ID : adg_54994
+- ニュース記事 - ID : adg_54994
+*/
+html.mobile #widget-ranking-container .adg-i-ico-wrapper,
+html.mobile #widget-recommend-list-container .adg-i-ico-wrapper,
+html.mobile #widget-news-list-container .adg-i-ico-wrapper {
+  display: block;
+  width: 100%;
+  margin-right: 0;
+}
+
+html.mobile #widget-ranking-container .adgLink,
+html.mobile #widget-recommend-list-container .adgLink,
+html.mobile #widget-news-list-container .adgLink {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+html.mobile #widget-ranking-container .adgLink .adgImageBox,
+html.mobile #widget-recommend-list-container .adgLink .adgImageBox,
+html.mobile #widget-news-list-container .adgLink .adgImageBox {
+  width: 110px;
+  height: auto;
+  margin: 0;
+}
+
+html.mobile #widget-ranking-container .adgLink .adgImageBox img.adgImage,
+html.mobile #widget-recommend-list-container .adgLink .adgImageBox img.adgImage,
+html.mobile #widget-news-list-container .adgLink .adgImageBox img.adgImage {
+  width: 110px;
+  height: auto;
+  border-radius: 3px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+html.mobile #widget-ranking-container .adgLink .adgBody,
+html.mobile #widget-recommend-list-container .adgLink .adgBody,
+html.mobile #widget-news-list-container .adgLink .adgBody {
+  margin-top: 0;
+  width: calc(100% - 120px);
+  padding: 0 0 0 10px;
+}
+
+html.mobile #widget-ranking-container .adg-i-ico-wrapper .adg-i-ico,
+html.mobile #widget-recommend-list-container .adg-i-ico-wrapper .adg-i-ico {
+  top: auto;
+  bottom: 0;
+}
+
+html.mobile #widget-news-list-container .adg-i-ico-wrapper .adg-i-ico {
+  top: auto;
+  bottom: 10px;
+}
+
+
+html.mobile #widget-ranking-container .adgLink .adgBody .adgTitle,
+html.mobile #widget-recommend-list-container .adgLink .adgBody .adgTitle,
+html.mobile #widget-news-list-container .adgLink .adgBody .adgTitle {
+  font-size: 16px;
+  line-height: 1.4;
+  height: auto;
+}
+
+html.mobile #widget-ranking-container .adgLink .adgBody .adgPrBox,
+html.mobile #widget-recommend-list-container .adgLink .adgBody .adgPrBox,
+html.mobile #widget-news-list-container .adgLink .adgBody .adgPrBox {
+  color: #888;
+}
+
+html.mobile #widget-ranking-container .adgLink .adgBody .adgSponsor,
+html.mobile #widget-recommend-list-container .adgLink .adgBody .adgSponsor,
+html.mobile #widget-news-list-container .adgLink .adgBody .adgSponsor {
+  display: none;
+}
