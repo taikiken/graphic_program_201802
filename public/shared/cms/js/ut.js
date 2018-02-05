@@ -330,7 +330,7 @@ function ut_init(){
 				$.ajax({
 					type: "POST",
 					url: "/editdm/module/gettitle.php",
-					data: {"id" : $("[name='p_d2']").val(), "cid" : cid},
+					data: {"id" : $("[name='p_d2']").val(), "cid" : cid, "rid" : rid},
 					//data: "id="+$("[name='p_d2']").val(),
 					success: function(m){
 						prevtitle=m;
@@ -409,6 +409,10 @@ function ut_init(){
 				key="."+key.replace(/flag/,"id");
 			}else if(key.match(/^(sidebar|single)_/)){
 				key="."+key.replace(/flag/,"");
+			}else if(key.match(/^pickupplayer/)){
+				key=".pickupplayer_bannertext,.pickupplayer_pc_bannerimg,.pickupplayer_sp_bannerimg,.pickupplayer_ios_bannerimg,.pickupplayer_android_bannerimg,.pickupplayer_pc_bannerlink,.pickupplayer_sp_bannerlink,.pickupplayer_ios_bannerlink,.pickupplayer_android_bannerlink";
+			}else if(key.match(/^player/)){
+				key=".player_bannertext,.player_pc_bannerimg,.player_sp_bannerimg,.player_ios_bannerimg,.player_android_bannerimg,.player_pc_bannerlink,.player_sp_bannerlink,.player_ios_bannerlink,.player_android_bannerlink";
 			}else if(key.match(/^banner/)){
 				key=".bannertext,.pc_bannerimg,.pc_bannerlink,.sp_bannerimg,.sp_bannerlink,.android_bannerimg,.android_bannerlink,.ios_bannerimg,.ios_bannerlink";
 			}else if(key.match(/^abodybanner/)){
