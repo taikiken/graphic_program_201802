@@ -284,7 +284,7 @@ export default class SPSingle {
 
   static scroll(keyword, slug, label) {
     const windowOffsetY = window.pageYOffset;
-    const y = -400;
+    // const y = -400;
     let widget = {
       tag: {},
       ranking: {},
@@ -293,76 +293,61 @@ export default class SPSingle {
       show: {}
     };
     widget.tag.element = Dom.singleFooter();
-    widget.tag.rect = widget.tag.element.getBoundingClientRect();
-    widget.tag.y = windowOffsetY + widget.tag.rect.top + y;
-    widget.show.tag = (pos)=> {
-      // console.log(pos, widget.tag.y);
-      if (pos >= widget.tag.y && widget.tag.element) {
-        widget.tag.ut = new UT.sp.view.single.SPViewSingleTags(keyword, widget.tag.element);
-        widget.tag.ut.start();
-        delete widget.show.tag;
-      }
+    widget.show.tag = ()=> {
+      widget.tag.ut = new UT.sp.view.single.SPViewSingleTags(keyword, widget.tag.element);
+      widget.tag.ut.start();
+      delete widget.show.tag;
     };
 
     widget.ranking.element = Dom.ranking();
-    widget.ranking.rect = widget.ranking.element.getBoundingClientRect();
-    widget.ranking.y = windowOffsetY + widget.ranking.rect.top + y;
-    widget.show.ranking = (pos)=> {
-      // console.log(pos, widget.ranking.y);
-      if (pos >= widget.ranking.y && widget.ranking.element) {
-        widget.ranking.ut = new UT.sp.view.singles.SPViewSinglesRanking(widget.ranking.element, slug, label);
-        widget.ranking.ut.start();
-        delete widget.show.ranking;
-      }
+    widget.show.ranking = ()=> {
+      widget.ranking.ut = new UT.sp.view.singles.SPViewSinglesRanking(widget.ranking.element, slug, label);
+      widget.ranking.ut.start();
+      delete widget.show.ranking;
     };
 
     widget.news.element = Dom.board();
-    widget.news.headline = Dom.headlineParent();
-    widget.news.rect = widget.news.headline.getBoundingClientRect();
-    widget.news.y = windowOffsetY + widget.news.rect.top + y;
-    widget.show.news = (pos)=> {
-      // console.log(pos, widget.news.y);
-      if (pos >= widget.news.y && widget.news.element) {
-        widget.news.ut = new UT.sp.view.singles.SPViewSinglesWithSlug(slug, widget.news.element, null);
-        widget.news.ut.start();
-        delete widget.show.news;
-      }
+    widget.show.news = ()=> {
+      widget.news.ut = new UT.sp.view.singles.SPViewSinglesWithSlug(slug, widget.news.element, null);
+      widget.news.ut.start();
+      delete widget.show.news;
     };
 
 
     widget.recommend.element = Dom.recommend();
     if(widget.recommend.element) {
-      widget.recommend.rect = widget.recommend.element.getBoundingClientRect();
-      widget.recommend.y = windowOffsetY + widget.recommend.rect.top + y;
-      widget.show.recommend = (pos)=> {
-        // console.log(pos, widget.recommend.y);
-        if (pos >= widget.recommend.y && widget.recommend.element) {
-          widget.recommend.ut = new UT.sp.view.singles.SPViewSinglesRecommend(widget.recommend.element, slug);
-          widget.recommend.ut.start();
-          delete widget.show.recommend;
-        }
+      widget.show.recommend = ()=> {
+        widget.recommend.ut = new UT.sp.view.singles.SPViewSinglesRecommend(widget.recommend.element, slug);
+        widget.recommend.ut.start();
+        delete widget.show.recommend;
       };
     }
 
-    let showCnt = Object.keys(widget.show).length;
+    // let showCnt = Object.keys(widget.show).length;
 
-    const showWidget = ()=> {
-      // let pos = window.pageYOffset - windowHeight;
-      let pos = window.pageYOffset;
-      if(showCnt) {
-        for (let key in widget.show) {
-          if ({}.hasOwnProperty.call(widget.show, key)) {
-            widget.show[key](pos);
-          }
+    // const showWidget = ()=> {
+    //   // let pos = window.pageYOffset - windowHeight;
+    //   let pos = window.pageYOffset;
+    //   if(showCnt) {
+    //     for (let key in widget.show) {
+    //       if ({}.hasOwnProperty.call(widget.show, key)) {
+    //         widget.show[key](pos);
+    //       }
+    //     }
+    //     showCnt = Object.keys(widget.show).length;
+    //   } else {
+    //     window.removeEventListener('touchmove', showWidget, true);
+    //   }
+    // };
+
+    // window.addEventListener('touchmove', showWidget, true);
+
+    window.addEventListener('load', ()=>{
+      for (let key in widget.show) {
+        if ({}.hasOwnProperty.call(widget.show, key)) {
+          widget.show[key]();
         }
-        showCnt = Object.keys(widget.show).length;
-      } else {
-        window.removeEventListener('touchmove', showWidget, true);
       }
-    };
-
-    window.addEventListener('touchmove', showWidget, true);
-
-    showWidget();
+    });
   }
 }
