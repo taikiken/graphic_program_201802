@@ -1,0 +1,1289 @@
+@charset "UTF-8";
+@import url("/assets/css/ui.css") all and (min-width: 641px);
+@import url("/assets/sp/css/ui.css") all and (max-width: 640px);
+/* 汎用クラス */
+[class^="mark"] {
+  padding-left: 15px;
+  background: no-repeat left .5em;
+}
+
+.mark1 {
+  background-image: url(../img/share/mark_1.gif);
+}
+
+.mark2 {
+  background-image: url(../img/share/mark_2.gif);
+}
+
+.mark3 {
+  background-image: url(../img/share/mark_3.gif);
+}
+
+.mark4 {
+  background-image: url(../img/share/mark_4.gif);
+}
+
+.mark5 {
+  background-image: url(../img/share/mark_5.gif);
+}
+
+.opacity {
+  opacity: 0.75;
+  -moz-opacity: 0.75;
+  filter: alpha(opacity=75);
+  -ms-filter: "alpha(opacity=75)";
+}
+
+.opacity_rev {
+  opacity: 1;
+  -moz-opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-filter: "alpha(opacity=100)";
+}
+
+.inline_block {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+.table_cell {
+  display: table-cell;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: middle;
+}
+
+.fr,
+.imgR {
+  float: right;
+  margin-left: 10px;
+}
+
+.fl,
+.imgL {
+  float: left;
+  margin-right: 10px;
+}
+
+.imgC,
+.tC,
+.btn {
+  text-align: center;
+}
+
+.imgC {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tR,
+.sign {
+  text-align: right;
+}
+
+.box_size {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ts_none {
+  -webkit-text-shadow: none !important;
+  -moz-text-shadow: none !important;
+  -ms-text-shadow: none !important;
+  -o-text-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.bs_none {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -ms-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.hover_anime {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+/* line-Box */
+.line_box {
+  letter-spacing: -.40em;
+}
+
+/* line-Box none */
+.line_box_none {
+  letter-spacing: normal;
+}
+
+/* img-Replace */
+.img_replace {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* img-Replace none */
+.img_replace_none {
+  text-indent: inherit;
+  white-space: normal;
+  overflow: auto;
+}
+
+/* img-Fit */
+.img_fit {
+  width: 100%;
+  height: auto;
+}
+
+/* img-Baseline */
+.img_baseline {
+  vertical-align: top;
+  vertical-align: bottom;
+}
+
+/* clearfix */
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* clearfix */
+#content {
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  box-align: stretch;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  -o-align-items: stretch;
+  align-items: stretch;
+  -ms-flex-align: stretch;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-direction: row;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  box-pack: start;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  -o-justify-content: flex-start;
+  justify-content: flex-start;
+  -ms-flex-pack: start;
+}
+
+#content aside .news h2 {
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  box-align: stretch;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  -o-align-items: stretch;
+  align-items: stretch;
+  -ms-flex-align: stretch;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-direction: row;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  box-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+}
+
+main article section.event_start, main article section.event_end, main article section.time_line3, main article section.event_id_7, main article section.BeforeTheGame {
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-direction: row;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  box-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+}
+
+#content aside .news h2 {
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-direction: row;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  box-pack: start;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  -o-justify-content: flex-start;
+  justify-content: flex-start;
+  -ms-flex-pack: start;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  color: #333;
+  font-family: "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+figure {
+  line-height: 0;
+}
+
+a:hover img {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  opacity: 0.6;
+}
+
+/*-------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++
+	SPモード
++++++++++++++++++++++++++++++++++++++++++++++++++++
+-------------------------------------------------*/
+/*-------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++
+	/SPモード
++++++++++++++++++++++++++++++++++++++++++++++++++++
+-------------------------------------------------*/
+.is-show-pc {
+  display: block;
+}
+
+.is-show-sp {
+  display: none;
+}
+
+.foot-sec {
+  background-color: #000 !important;
+  padding-top: 30px;
+}
+
+@media screen and (max-width: 640px) {
+  .foot-sec {
+    padding-top: 0px;
+  }
+
+  .is-show-pc {
+    display: none;
+  }
+
+  .is-show-sp {
+    display: block;
+  }
+
+  .fb-page .fb_iframe_widget span {
+    width: 100% !important;
+  }
+
+  .fb-page .fb_iframe_widget span iframe {
+    width: 100% !important;
+  }
+}
+#testButton {
+  font-size: 20px;
+  font-size: 1.25rem;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: block;
+  color: #000;
+  background-color: #ccc;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  background-image: url("/sokuhou/img/bg_mv.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center 45px;
+}
+
+#wrapper > header {
+  height: 490px;
+  width: 100%;
+  position: relative;
+}
+#wrapper > header .pageTitle {
+  background-color: #fff;
+  line-height: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+}
+#wrapper > header .pageTitle .logo img {
+  height: auto;
+  width: 190px;
+}
+#wrapper > header h1 {
+  height: 130px;
+  width: 551px;
+  position: absolute;
+  top: 100px;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+#wrapper > header .fixtures {
+  height: 100px;
+  width: 820px;
+  margin: 210px auto 0;
+  display: table;
+}
+#wrapper > header .fixtures > p {
+  display: table-cell;
+  vertical-align: middle;
+}
+#wrapper > header .fixtures > p img, #wrapper > header .fixtures > p span {
+  vertical-align: middle;
+}
+#wrapper > header .fixtures > p:nth-of-type(1) {
+  text-align: left;
+  height: auto;
+  width: 220px;
+  font-size: 24px;
+}
+#wrapper > header .fixtures > p:nth-of-type(1) img {
+  margin-left: 20px;
+}
+#wrapper > header .fixtures > p:nth-of-type(2) {
+  text-align: center;
+}
+#wrapper > header .fixtures > p:nth-last-of-type(1) {
+  text-align: right;
+  height: auto;
+  width: 220px;
+  font-size: 24px;
+}
+#wrapper > header .fixtures > p:nth-last-of-type(1) img {
+  margin-right: 20px;
+}
+#wrapper > header .fixtures .score {
+  font-size: 30px;
+  font-family: Helvetica, "Helvetica Neue";
+  line-height: 1;
+  font-weight: bold;
+}
+#wrapper > header .fixtures .score span {
+  font-family: Helvetica, "Helvetica Neue";
+  font-size: 110px;
+  line-height: 1;
+  font-weight: bold;
+}
+#wrapper > header .fixtures .score span:nth-of-type(1) {
+  margin-right: 20px;
+}
+#wrapper > header .fixtures .score span:nth-of-type(2) {
+  margin-left: 20px;
+}
+#wrapper > header .stadium {
+  height: 1em;
+  width: 820px;
+  position: absolute;
+  top: 375px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  text-align: center;
+  font-size: 16px;
+}
+#wrapper > header .state {
+  font-size: 18px;
+  display: block;
+  height: auto;
+  width: auto;
+  line-height: 1;
+  position: absolute;
+  top: 406px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  text-align: center;
+}
+#wrapper > header .state span {
+  display: inline-block;
+  border: 2px solid #e1e1e1;
+  padding: 10px;
+  font-weight: bold;
+}
+#wrapper > header:after {
+  content: '';
+  display: block;
+  height: 30px;
+  width: 54px;
+  background-image: url("/sokuhou/img/icon_live.png");
+  background-repeat: no-repeat;
+  background-size: 54px 30px;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+#content {
+  margin: 0 auto;
+  height: auto;
+  width: 1090px;
+}
+#content aside {
+  height: auto;
+  width: 300px;
+  margin-left: 30px;
+}
+#content aside .banner, #content aside .news {
+  margin-bottom: 20px;
+}
+#content aside .banner .sp, #content aside .news .sp {
+  display: none;
+}
+#content aside .banner:nth-of-type(2) {
+  display: none;
+}
+#content aside .news {
+  background-color: #fff;
+}
+#content aside .news h2 {
+  font-size: 14px;
+  height: 40px;
+  width: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  background-color: #071f41;
+}
+#content aside .news ul li {
+  border-bottom: 1px solid  #e9e9e9;
+}
+#content aside .news ul li:last-child {
+  border-bottom: none;
+}
+#content aside .news ul li a {
+  padding: 20px 50px 20px 12px;
+  display: block;
+  color: #555;
+  line-height: 1.5;
+  font-size: 14px;
+  position: relative;
+  text-decoration: none;
+}
+#content aside .news ul li a:after {
+  content: '';
+  height: 10px;
+  width: 6px;
+  background-image: url("/sokuhou/img/awr_1.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  right: 20px;
+  bottom: 0;
+  margin: auto;
+}
+#content aside .news ul li a:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
+
+main {
+  position: relative;
+  height: 100%;
+  width: 760px;
+}
+main article {
+  position: relative;
+  background-color: #082956;
+  height: 100%;
+  width: 760px;
+  overflow: hidden;
+}
+main article:before {
+  content: '';
+  display: block;
+  height: 10000px;
+  width: 2px;
+  background-color: #cc141d;
+  margin: auto;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  left: 0;
+}
+main article section {
+  margin-bottom: 20px;
+  position: relative;
+}
+main article section::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+main article section:first-child:not(.time_line3) {
+  padding-top: 20px;
+}
+main article section:first-child:not(.time_line3):before {
+  top: 0;
+}
+main article section:last-child {
+  margin-bottom: 0;
+}
+main article section.hide_true {
+  display: none;
+}
+main article section.event_start, main article section.event_end, main article section.time_line3, main article section.event_id_7, main article section.BeforeTheGame {
+  background-color: #071f41;
+  background-image: none;
+  height: 80px;
+  width: 100%;
+}
+main article section.event_start:before, main article section.event_start:after, main article section.event_end:before, main article section.event_end:after, main article section.time_line3:before, main article section.time_line3:after, main article section.event_id_7:before, main article section.event_id_7:after, main article section.BeforeTheGame:before, main article section.BeforeTheGame:after {
+  display: none;
+}
+main article section .text {
+  font-size: 14px;
+}
+main article section.BeforeTheGame {
+  padding-top: 0 !important;
+  height: 100px;
+  width: 100%;
+  border-top: 4px solid #cc141d;
+}
+main article section.BeforeTheGame .text {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+main article section.BeforeTheGame .text em {
+  display: block;
+  padding-top: 5px;
+}
+main article section.BeforeTheGame .text em:before {
+  content: '';
+  display: inline-block;
+  background-image: url("/sokuhou/img/icon_whistle.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 20px 15px;
+  height: 15px;
+  width: 20px;
+  margin-right: 10px;
+}
+main article section.time_line1, main article section.time_line2 {
+  min-height: 40px;
+  padding-bottom: 40px;
+}
+main article section.time_line1 .title, main article section.time_line2 .title {
+  display: none;
+}
+main article section.time_line1 .time, main article section.time_line2 .time {
+  height: auto;
+  width: 320px;
+  line-height: 1.5;
+  font-size: 14px;
+}
+main article section.time_line1 .text, main article section.time_line2 .text {
+  height: auto;
+  width: 320px;
+  line-height: 1.5;
+  font-size: 14px;
+}
+main article section.time_line1 .time {
+  float: left;
+  position: relative;
+  left: 410px;
+}
+main article section.time_line1 .text {
+  float: right;
+  text-align: right;
+  position: relative;
+  right: 410px;
+}
+main article section.time_line2 .text {
+  float: left;
+  position: relative;
+  left: 410px;
+}
+main article section.time_line2 .time {
+  float: right;
+  text-align: right;
+  position: relative;
+  right: 410px;
+}
+main article section.time_line3:before, main article section.time_line3:after, main article section.event_id_7:before, main article section.event_id_7:after, main article section.BeforeTheGame:before, main article section.BeforeTheGame:after {
+  content: '';
+  display: block;
+  height: 22px;
+  width: 34px;
+  background-size: 34px 22px;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+main article section.time_line3:before, main article section.event_id_7:before, main article section.BeforeTheGame:before {
+  background-image: url("/sokuhou/img/img_flag_jp.png");
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+main article section.time_line3:after, main article section.event_id_7:after, main article section.BeforeTheGame:after {
+  background-image: url("/sokuhou/img/img_flag_iq.png");
+  right: 20px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+main article section.event_id_1 .time, main article section.event_id_1 .text, main article section.event_id_7 .time, main article section.event_id_7 .text, main article section.event_id_9 .time, main article section.event_id_9 .text {
+  width: 360px;
+}
+main article section.event_id_1 .time, main article section.event_id_7 .time, main article section.event_id_9 .time {
+  font-size: 0;
+  background-image: url("/sokuhou/img/txt_kickoff.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  height: 15px;
+  width: 300px;
+}
+main article section.event_id_1 .text:before, main article section.event_id_7 .text:before, main article section.event_id_9 .text:before {
+  content: '';
+  display: inline-block;
+  background-image: url("/sokuhou/img/icon_whistle.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 20px 15px;
+  height: 15px;
+  width: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  position: relative;
+  top: 4px;
+}
+main article section.event_id_1 .time {
+  background-size: 60px 15px;
+}
+main article section.event_id_7 .time {
+  background-image: url("/sokuhou/img/txt_halftime.png");
+  background-size: 72px 15px;
+}
+main article section.event_id_9 .time {
+  background-image: url("/sokuhou/img/txt_fulltime.png");
+  background-size: 70px 15px;
+}
+main article section.event_id_7, main article section.event_id_9 {
+  margin-bottom: 60px;
+}
+main article section.event_id_2:before {
+  content: '';
+  display: block;
+  background-color: #082956;
+  background-image: url("/sokuhou/img/icon_shoes.png");
+  background-repeat: no-repeat;
+  background-position: center 20px;
+  background-size: 23px 20px;
+  height: 60px;
+  width: 40px;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+main article section.event_id_3:before {
+  content: '';
+  display: block;
+  background-color: #082956;
+  background-image: url("/sokuhou/img/icon_ball.png");
+  background-repeat: no-repeat;
+  background-position: center 20px;
+  background-size: 20px 20px;
+  height: 60px;
+  width: 40px;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+main article section.event_id_3 .text:before {
+  content: 'GOAL!!';
+  display: block;
+  font-family: Helvetica, "Helvetica Neue";
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1;
+  padding-top: 0;
+  padding-bottom: 0.2em;
+}
+main article section.event_id_4:before {
+  content: '';
+  display: block;
+  background-color: #082956;
+  background-image: url("/sokuhou/img/icon_card_y.png");
+  background-repeat: no-repeat;
+  background-position: center 20px;
+  background-size: 16px 20px;
+  height: 60px;
+  width: 40px;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+main article section.event_id_5:before {
+  content: '';
+  display: block;
+  background-color: #082956;
+  background-image: url("/sokuhou/img/icon_card_r.png");
+  background-repeat: no-repeat;
+  background-position: center 20px;
+  background-size: 16px 20px;
+  height: 60px;
+  width: 40px;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+main article section.event_id_6 {
+  padding-bottom: 20px;
+  background-color: transparent;
+}
+main article section.event_id_6 .time {
+  display: none;
+}
+main article section.event_id_6:before, main article section.event_id_6:after {
+  display: none;
+}
+main article section.event_id_6 .text {
+  float: none;
+  text-align: center;
+  background-color: #082956;
+  position: static;
+  height: auto;
+  width: 100%;
+  padding-top: 0;
+  padding-bottom: 10px;
+  margin-top: -20px;
+}
+main article section.event_id_6 .text:before {
+  content: '';
+  display: block;
+  background-color: #082956;
+  background-image: url("/sokuhou/img/icon_timer.png");
+  background-repeat: no-repeat;
+  background-position: center 20px;
+  background-size: 19px 23px;
+  height: 45px;
+  width: 40px;
+  margin: 0 auto 3px;
+}
+main article section.event_id_8:before {
+  content: '';
+  display: block;
+  background-color: #082956;
+  background-image: url("/sokuhou/img/icon_change.png");
+  background-repeat: no-repeat;
+  background-position: center 20px;
+  background-size: 22px 20px;
+  height: 60px;
+  width: 40px;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+main article section.event_id_1 .time:before {
+  content: '';
+  display: block !important;
+  height: 20px;
+  width: 2px;
+  background-color: #082956;
+  margin: 0 auto;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  bottom: auto;
+  left: 0;
+}
+main article section.event_id_7 .time:before {
+  content: '';
+  display: block !important;
+  height: 20px;
+  width: 2px;
+  background-color: #082956;
+  margin: 0 auto;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  bottom: auto;
+  left: 0;
+}
+main article section.event_id_7 .time:after {
+  content: '';
+  display: block !important;
+  height: 20px;
+  width: 2px;
+  background-color: #082956;
+  margin: 0 auto;
+  position: absolute;
+  top: auto;
+  right: 0;
+  bottom: -20px;
+  left: 0;
+}
+main article section.event_id_9 .time:after {
+  content: '';
+  display: block !important;
+  height: 20px;
+  width: 2px;
+  background-color: #082956;
+  margin: 0 auto;
+  position: absolute;
+  top: auto;
+  right: 0;
+  bottom: -20px;
+  left: 0;
+}
+
+/*-------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++
+	SPモード
++++++++++++++++++++++++++++++++++++++++++++++++++++
+-------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+  body {
+    background-size: auto 220px;
+  }
+
+  #wrapper > header {
+    height: 362px;
+    width: 100%;
+  }
+  #wrapper > header .pageTitle .logo img {
+    height: auto;
+    width: 140px;
+  }
+  #wrapper > header h1 {
+    height: 65px;
+    width: 275px;
+    top: 70px;
+  }
+  #wrapper > header h1 img {
+    height: 65px;
+    width: 275px;
+  }
+  #wrapper > header .fixtures {
+    height: auto;
+    width: 100%;
+    position: absolute;
+    top: 155px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  #wrapper > header .fixtures .flag {
+    width: 60px !important;
+    vertical-align: top !important;
+  }
+  #wrapper > header .fixtures .flag img {
+    height: auto;
+    width: 60px;
+    margin: 0 !important;
+    display: block;
+    position: absolute;
+    top: 0;
+  }
+  #wrapper > header .fixtures .flag span {
+    font-size: 10px;
+    display: block;
+    margin-top: 50px;
+    text-align: center;
+  }
+  #wrapper > header .fixtures .flag.jp {
+    left: 0;
+  }
+  #wrapper > header .fixtures .flag.iq {
+    right: 0;
+  }
+  #wrapper > header .fixtures .score {
+    font-size: 15px;
+    position: relative;
+    top: -10px;
+  }
+  #wrapper > header .fixtures .score span {
+    font-size: 55px;
+  }
+  #wrapper > header .stadium {
+    height: auto;
+    width: 100%;
+    font-size: 10px;
+    top: 205px;
+  }
+  #wrapper > header .state {
+    top: 225px;
+    font-size: 12px;
+    text-align: center;
+  }
+  #wrapper > header .state span {
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  #wrapper > header:after {
+    height: 25px;
+    width: 45px;
+    background-size: 45px 25px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  #content {
+    height: auto;
+    width: 100%;
+    display: block;
+  }
+  #content main {
+    height: auto;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  #content main article {
+    height: auto;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  #content main article:before {
+    content: '';
+    display: block;
+    height: 10000px;
+    width: 2px;
+    background-color: #cc141d;
+    margin: auto;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    left: 0;
+  }
+  #content main article section {
+    -webkit-box-align: top;
+    -moz-box-align: top;
+    box-align: top;
+    -webkit-align-items: top;
+    -moz-align-items: top;
+    -ms-align-items: top;
+    -o-align-items: top;
+    align-items: top;
+    -ms-flex-align: top;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    box-direction: normal;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-direction: row;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    box-pack: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    padding: 20px;
+    margin-bottom: 0;
+  }
+  #content main article section .time, #content main article section .text {
+    float: none;
+    left: auto;
+    right: auto;
+    font-size: 12px;
+  }
+  #content main article section.BeforeTheGame {
+    padding-bottom: 0 !important;
+    height: 80px;
+  }
+  #content main article section.BeforeTheGame .text {
+    font-size: 14px;
+  }
+  #content main article section.BeforeTheGame .text em img {
+    height: auto;
+    width: 64px;
+  }
+  #content main article section.time_line1, #content main article section.time_line2 {
+    background-color: transparent;
+  }
+  #content main article section.time_line1:before, #content main article section.time_line2:before {
+    background-position: center 20px;
+    top: 0;
+  }
+  #content main article section.time_line1 .time {
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    box-ordinal-group: 2;
+    -webkit-order: 2;
+    -moz-order: 2;
+    order: 2;
+    -ms-flex-order: 2;
+    text-align: left;
+    padding-left: 20px;
+  }
+  #content main article section.time_line1 .text {
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    box-ordinal-group: 1;
+    -webkit-order: 1;
+    -moz-order: 1;
+    order: 1;
+    -ms-flex-order: 1;
+    padding-right: 20px;
+    text-align: right;
+  }
+  #content main article section.time_line2 .time {
+    text-align: right;
+    padding-right: 20px;
+  }
+  #content main article section.time_line2 .text {
+    padding-left: 20px;
+    text-align: left;
+  }
+  #content main article section.event_id_2.commonNext {
+    margin-bottom: 40px;
+  }
+  #content main article section.event_id_6 .text {
+    padding-right: 0;
+    text-align: center;
+  }
+  #content main article section.event_id_1, #content main article section.event_id_7, #content main article section.event_id_9 {
+    width: auto;
+  }
+  #content main article section.event_id_1 .time, #content main article section.event_id_7 .time, #content main article section.event_id_9 .time {
+    margin-left: -25px;
+    text-indent: -10000px;
+    overflow: hidden;
+    background-position: right center;
+    height: 20px;
+  }
+  #content main article section.event_id_1 .time {
+    background-size: 44.5px 11px;
+  }
+  #content main article section.event_id_7 .time {
+    background-size: 53.5px 11px;
+  }
+  #content main article section.event_id_9 .time {
+    background-size: 52.5px 11px;
+  }
+  #content main article section.event_id_7 + section {
+    padding-top: 60px;
+  }
+  #content main article section.event_id_9 + section {
+    margin-top: 40px;
+    margin-bottom: 25px;
+  }
+  #content main article section.event_id_3 .text:before {
+    font-size: 20px;
+  }
+  #content aside {
+    height: auto;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-top: 15px;
+    margin-left: 0;
+  }
+  #content aside .banner:nth-of-type(1) {
+    position: absolute;
+    top: 275px;
+    left: 0;
+    height: auto;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    text-align: center;
+  }
+  #content aside .banner:nth-of-type(1) img {
+    height: auto;
+    width: 100%;
+    max-width: 345px;
+    max-height: 70px;
+  }
+  #content aside .banner img {
+    display: none;
+  }
+  #content aside .banner img.sp {
+    display: inline-block;
+  }
+  #content aside .banner:nth-of-type(2) {
+    display: block;
+  }
+  #content aside .banner:nth-of-type(2) img {
+    height: auto;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 374px) {
+  #content main article section.time_line3:before, #content main article section.time_line3:after {
+    display: none;
+  }
+}
+/*-------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++
+	/SPモード
++++++++++++++++++++++++++++++++++++++++++++++++++++
+-------------------------------------------------*/

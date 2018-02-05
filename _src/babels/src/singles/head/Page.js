@@ -56,7 +56,14 @@ export class Page {
       //   return singleDae.url.replace('https://dev.sportsbull.jp', '');
       // }
       // return singleDae.url;
-      return `/p/${singleDae.id}/`;
+      // /p/, /a/ ... あるので singleDae.url から取得する
+      const url = singleDae.url;
+      const splits = url.split('/');
+      const prefix = Array.isArray(splits) && splits.length >= 4 ? splits[3] : 'p';
+      const path = prefix.length === 1 ? prefix : 'p';
+      // console.log('Page.url', url, path);
+      // return `/p/${singleDae.id}/`;
+      return `/${path}/${singleDae.id}/`;
       // return singleDae.url;
     };
     /**
