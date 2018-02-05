@@ -59,11 +59,13 @@ if ( $page['apiRoot'] != '' ) :
  */
 ?>
 <?php
-if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'facebook' ) :
-?>
-<script src="/assets/js/fb-video.js?v=<?php echo $page['version']; ?>"></script>
-<?php
-endif;
+if( $page['ua_app'] ) {
+  if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'facebook' ) {
+    echo '<script src="/assets/js/fb-video.js?v='.$page['version'].'"></script>';
+  }
+} else {
+  echo '<script src="/assets/js/fb-video.js?v='.$page['version'].'"></script>';
+}
 ?>
 <?php
 if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
