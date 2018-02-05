@@ -422,9 +422,7 @@
     btnMore.addEventListener('touchend', function(){
       bodyElement.classList.remove('restricted');
       btnContainer.parentNode.removeChild(btnContainer);
-      showContentDFP();
     });
-  } else {
-    showContentDFP();
   }
+  showContentDFP();
 </script>
