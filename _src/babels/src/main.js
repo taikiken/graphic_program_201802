@@ -167,6 +167,20 @@ import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking'
 import SPViewUserProfile from './sp/view/mypage/SPViewUserProfile';
 import SPViewBookmarks from './sp/view/mypage/SPViewBookmarks';
 
+// tag - for 平昌
+import ViewTagsPyeongchang from './view/tags/ViewTagsPyeongchang';
+
+// util - for 平昌
+import NavCurrent from './ui/NavCurrent';
+
+// model - for 平昌
+import { ModelCategoriesSlug } from './model/categoires/ModelCategoriesSlug';
+// view/categories/headline
+import ViewCategoryOption from './view/categories/ViewCategoryOption';
+
+// sp/view/categories
+import SPViewCategoryOption from './sp/view/categories/SPViewCategoryOption';
+
 /**
  * スポーツブル ライブラリ
  * @module UT
@@ -321,15 +335,17 @@ const UT = {
   ui: {
     PageTop,
     button: {
-      TopButton
-    }
+      TopButton,
+    },
+    NavCurrent,
   },
   net: {
     Cookie,
     Ajax,
   },
   model: {
-    Model
+    Model,
+    ModelCategoriesSlug,
   },
   view: {
     View,
@@ -385,7 +401,13 @@ const UT = {
       ViewDeleteModal,
       ViewLogoutModal,
       ViewFlushModal
-    }
+    },
+    tags: {
+      ViewTagsPyeongchang,
+    },
+    categories: {
+      ViewCategoryOption,
+    },
   },
   sp: {
     view: {
@@ -424,6 +446,9 @@ const UT = {
       mypage: {
         SPViewUserProfile,
         SPViewBookmarks
+      },
+      categories: {
+        SPViewCategoryOption
       },
     },
   },

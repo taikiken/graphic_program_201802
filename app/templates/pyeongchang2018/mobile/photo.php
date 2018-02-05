@@ -13,6 +13,10 @@ include_once __DIR__."/../../mobile/_header.php";
 ?>
 <div id="body-section" class="body-sec">
   <div class="body-sec-inner">
+    <div class="special-summary">
+      <h1 class="special-summary-heading"><img src="/assets/sp/images/pyeongchang2018/special-summary.jpg" alt="平昌五輪"></h1>
+    </div><!-- /.special-summary -->
+
     <?php
     // ----------------------------------------------------
     // 記事一覧: sp theme.images
@@ -25,7 +29,23 @@ include_once __DIR__."/../../mobile/_header.php";
     endif;
     // eof: 記事一覧: sp theme.images
     // ---------------------------------------------------- ?>
-    <div id="pickup-container"></div><!-- /pickup -->
+
+    <div class="sponsor-link">
+      <!-- /531683568/pyeongchang_ad/pyeongchang_sp_bigbanner -->
+      <script>
+        googletag.cmd.push(function() {
+          googletag.defineSlot('/531683568/pyeongchang_ad/pyeongchang_sp_bigbanner', [320, 50], 'div-gpt-ad-1515758071055-0').addService(googletag.pubads());
+          googletag.pubads().enableSingleRequest();
+          googletag.enableServices();
+        });
+      </script>
+      <div id='div-gpt-ad-1515758071055-0' style='height:50px; width:320px;'>
+      <script>
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515758071055-0'); });
+      </script>
+      </div>
+      <!-- // /531683568/pyeongchang_ad/pyeongchang_sp_bigbanner -->
+    </div><!-- /.sponsor-link -->
 
     <?php
     // SP版 Powerd by エリアの追加
@@ -55,13 +75,113 @@ include_once __DIR__."/../../mobile/_header.php";
       // eof: 記事一覧: sp banner
       // ---------------------------------------------------- ?>
 
-      <div id="js-headline"></div>
-      <div id="category-container"></div>
-      <div id="board-container-more"></div>
+      <div class="gallery--photo">
+        <header class="gallery__header">
+          <h2 class="gallery__heading">フォトギャラリー</h2>
+          <p class="gallery__date">2018年2月9日 - 25日</p>
+        </header><!-- /.gallery__header -->
+
+        <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="9999"></div>
+      </div><!-- /.allery--photo -->
+
+      <?php
+      // ------------------------------
+      // 平昌だけイレギュラー index と同じ
+      ?>
+      <div id="headline-container"></div>
+
+      <aside class="sns-pr">
+        <div class="sns-pr-outer">
+          <dl class="sns-pr-inner">
+            <dt><span>いいねして最新ニュースをチェック！</span></dt>
+            <dd>
+              <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            </dd>
+          </dl><!-- /.sns-pr-inner -->
+        </div><!-- /.sns-pr-outer -->
+      </aside><!-- /.sns-pr -->
+
+      <div id="js-headline-last-container"></div>
+      <?php
+      // イレギュラー終わり
+      // ------------------------------
+      ?>
+
+      <?php
+      // medals
+      include_once __DIR__ . '/../module/_pyeongchang2018_medals.php';
+      ?>
+      <?php
+      /*
+      // https://aws-plus.backlog.jp/view/UNDO_SPBL-296#comment-1187520933
+      // リリース時にタブとWebViewのハイライトブロックを、非表示
+      ?>
+      <div class="gallery--highlight">
+        <header class="gallery__header">
+          <h2 class="gallery__heading">ハイライト動画</h2>
+          <p class="gallery__link"><a href="/pyeongchang2018/movie/">すべて見る</a></p>
+        </header><!-- /.gallery__header -->
+
+        <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
+      </div><!-- /.gallery--highlight -->
+      <?php
+      */
+      ?>
+      <div class="sponsor-link">
+        <!-- /531683568/pyeongchang_ad/pyeongchang_sp_rectangle -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/pyeongchang_ad/pyeongchang_sp_rectangle', [300, 250], 'div-gpt-ad-1515758097610-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1515758097610-0' style='height:250px; width:300px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515758097610-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/pyeongchang_ad/pyeongchang_sp_rectangle -->
+      </div><!-- /.sponsor-link -->
     </section><!-- /.main-sec -->
   </div><!-- /.body-sec-inner -->
 </div><!-- /.body-sec -->
 
+<script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/widgets/articles-index/Widget_articles_tag.js?v=<?php echo $page['version']; ?>"></script>
+<script>
+  (function(window) {
+    'use strict';
+    var UT = window.UT;
+    var SPBL_ENV = window.SPBL_ENV || {};
+    if (SPBL_ENV.env === 'development' && location.hostname.indexOf('sportsbull.jp') === -1) {
+      UT.app.App.develop();
+    }
+    UT.ui.NavCurrent.init(SPBL_ENV.category, SPBL_ENV.platform === 'web_mobile');
+    // headline
+    var element = UT.app.Dom.headline();
+    if (!element) {
+      return;
+    }
+    var slug = 'pyeongchang2018';
+    var Model = UT.model.Model;
+    var vewHeadline = new UT.sp.view.home.SPViewHeadLine(element);
+    var model = new UT.model.ModelCategoriesSlug(slug);
+    function done(events) {
+      var dae = events.args.shift() || {};
+      var headline = dae.headline || {};
+      var articles = headline.articles || [];
+      vewHeadline.archive = true;
+      vewHeadline.renderByRelated(articles);
+    }
+    function fail(events) {
+      console.warn('error', events, slug);
+    }
+    model.on(Model.COMPLETE, done);
+    model.on(Model.RESPONSE_ERROR, fail);
+    model.start();
+  }(window));
+</script>
 <?php
 // 汎用 footer
 include_once __DIR__."/../../mobile/_footer.php";
