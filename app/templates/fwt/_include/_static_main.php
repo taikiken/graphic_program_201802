@@ -70,7 +70,19 @@
 
 <section class="fwt--timetable">
   <h3><img src="../assets/images/fwt/timetable-heading.png" alt="TIMETABLE">タイムテーブル</h2>
-  <p>開催日及びタイムテーブルにつきましては、決まり次第このページでお知らせいたします。</p>
+    <p>
+      カナダ大会の実施日時が下記のとおり決定しました。<br />
+      <br />
+      <strong style="font-size: 16px; color: #e71a0f;">
+        日本時間:2月6日(火) 深夜0時30分頃から
+      </strong><br />
+        現地時間:2月5日(月) 8時30分頃から<br />
+      <br />
+      ライブ配信まではしばらくお待ち下さい。
+    </p>
+    <br />
+    <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
+  <!-- <p>開催日及びタイムテーブルにつきましては、決まり次第このページでお知らせいたします。</p> -->
   <!--
   <table>
     <tbody>
