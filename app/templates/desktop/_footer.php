@@ -9,7 +9,6 @@ if (
   $template_name == '404' ||
   $template_name == 'category' ||
   $template_name == 'p' ||
-  $template_name == 'comment' ||
   $template_name == 'search' ||
   $template_name == 'settings' ||
   $template_name == 'settings.social' ||
@@ -91,7 +90,7 @@ if ( $page['apiRoot'] != '' ) :
 
 
 <?php // #1992 - Teads
-if ( $page['template'] == 'p' || $page['template'] == 'comment') :
+if ( $page['template'] == 'p' ) :
   if ( $page['post']['is_sponserd'] === false ) :
     echo <<<__EOL__
 <script type="text/javascript">
@@ -127,6 +126,5 @@ s.parentNode.insertBefore(bs, s);
 </script>
 <?php endif; ?>
 
-<script src="/assets/google/dfp.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>
