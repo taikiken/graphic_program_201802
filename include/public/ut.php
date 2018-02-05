@@ -701,7 +701,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 
 	$s["description"]=get_summary($f["b1"],$f["body"]);
 
-	if(strlen($f["relatedpost"])>0)$body.=$f["relatedpost"];
+	//if(strlen($f["relatedpost"])>0)$body.=$f["relatedpost"];
 	if($type==1){
 
 		$s["body"]=urlmodify($body);
