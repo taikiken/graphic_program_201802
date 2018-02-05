@@ -1,3 +1,7 @@
+
+
+
+
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
@@ -323,31 +327,25 @@ export default class SPSingle {
       };
     }
 
-    // let showCnt = Object.keys(widget.show).length;
+    let showCnt = Object.keys(widget.show).length;
 
-    // const showWidget = ()=> {
-    //   // let pos = window.pageYOffset - windowHeight;
-    //   let pos = window.pageYOffset;
-    //   if(showCnt) {
-    //     for (let key in widget.show) {
-    //       if ({}.hasOwnProperty.call(widget.show, key)) {
-    //         widget.show[key](pos);
-    //       }
-    //     }
-    //     showCnt = Object.keys(widget.show).length;
-    //   } else {
-    //     window.removeEventListener('touchmove', showWidget, true);
-    //   }
-    // };
-
-    // window.addEventListener('touchmove', showWidget, true);
-
-    window.addEventListener('load', ()=>{
-      for (let key in widget.show) {
-        if ({}.hasOwnProperty.call(widget.show, key)) {
-          widget.show[key]();
+    const showWidget = ()=> {
+      // let pos = window.pageYOffset - windowHeight;
+      let pos = window.pageYOffset;
+      if(showCnt) {
+        for (let key in widget.show) {
+          if ({}.hasOwnProperty.call(widget.show, key)) {
+            widget.show[key]();
+          }
         }
+        showCnt = Object.keys(widget.show).length;
+      } else {
+        window.removeEventListener('touchmove', showWidget, true);
       }
-    });
+    };
+
+    window.addEventListener('touchmove', showWidget, true);
+
+    // showWidget();
   }
 }
