@@ -159,6 +159,7 @@ export default class SPComponentHeadlines extends React.Component {
               list.map((dae, i) => {
                 // const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
                 const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.THUMB_EMPTY);
+                // console.log('SPComponentHeadlines.render.map date', dae.mediaType, dae);
                 return (
                   <SPComponentHeadlineArticle
                     key={`headline-${dae.id}`}

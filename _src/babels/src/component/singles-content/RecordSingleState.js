@@ -22,7 +22,7 @@ const storage = {};
  * 記事詳細状態を保持・返却します
  * @since 2017-04-17
  */
-export class RecordSingleState {
+export default class RecordSingleState {
   /**
    * 状態を保存します
    * @param {String|Number} id ユニークID

@@ -295,7 +295,7 @@ export default class Router extends EventDispatcher {
       '/category/': this.category,
       '/area/': this.category,
       '/p/': this.single,
-      '/a/': this.single,
+      '/a/': this.singleA,
       '/search/': this.search,
       // '/search': this.search,
       '/signup_login/': this.signupLogin,
@@ -466,7 +466,7 @@ export default class Router extends EventDispatcher {
    * @param {string} [where=''] 発火場所
    */
   page404(where = '') {
-    // console.log( '404 ', where );
+    // console.warn('Router 404', where);
     this.dispatch( { type: Router.NOT_FOUND, where: where } );
   }
   /**
@@ -692,7 +692,7 @@ export default class Router extends EventDispatcher {
    * reset_password page
    */
   password() {
-    const [option] = Loc.path.replace( /\/reset_password\/|\/reset_password/ig, '' ).split('/');
+    const [option] = Loc.path.replace(/\/reset_password\/|\/reset_password/ig, '').split('/');
 
     if (option === 'resetting') {
       this.passwordResetting();
@@ -710,7 +710,7 @@ export default class Router extends EventDispatcher {
    * mypage
    */
   mypage() {
-    const [activities] = Loc.path.replace( /\/mypage\/|\/mypage/ig, '' ).split('/');
+    const [activities] = Loc.path.replace(/\/mypage\/|\/mypage/ig, '').split('/');
     if ( activities === 'activities' ) {
       this.activities();
     } else {
@@ -754,7 +754,7 @@ export default class Router extends EventDispatcher {
    * settings page
    */
   settings() {
-    const [option] = Loc.path.replace( /\/settings\/|\/settings/ig, '' ).split('/');
+    const [option] = Loc.path.replace(/\/settings\/|\/settings/ig, '').split('/');
     // console.log( 'settings option ', option );
     switch (option) {
       case 'interest':
