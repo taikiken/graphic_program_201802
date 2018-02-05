@@ -18,7 +18,7 @@ import View from '../../../view/View';
 
 // component
 // @since 2016-09-24
-import { SPComponentContinueRead } from '../../component/singles/SPComponentContinueRead';
+import SPComponentContinueRead from '../../component/singles/SPComponentContinueRead';
 
 // sagen
 /**

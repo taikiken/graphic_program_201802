@@ -19,7 +19,7 @@ import {Content} from '../../../app/const/Content';
 import {Safety} from '../../../data/Safety';
 
 // node
-import {HTML5VideoNode} from '../../../node/media/HTML5VideoNode';
+// import {HTML5VideoNode} from '../../../node/media/HTML5VideoNode';
 // import {VideojsImaNode} from '../../../node/media/VideojsImaNode';
 
 // ---
@@ -35,6 +35,7 @@ import ComponentVideojsImaSingles from '../../../component/media/ComponentVideoj
 const React = self.React;
 
 /**
+ * @TODO component + jsx
  * SP 記事詳細 HTML5 video
  * @type {ReactClass}
  */
@@ -71,29 +72,29 @@ export let SPMediaVideoNode = React.createClass( {
         return null;
     }
   },
-  video: function( media ) {
-
-    let images = media.images;
-    let video = media.video;
-    let caption = video.caption || '';
-    let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
-
-    // HTML5 video
-    return (
-      <HTML5VideoNode
-        video={video}
-        poster={poster}
-        caption={caption}
-        playImage={Empty.VIDEO_PLAY_SP}
-      />
-    );
-
-  },
-  videojsima: function( media ) {
-    let images = media.images;
-    let video = media.video;
-    let caption = video.caption || '';
-    let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
+  // video: function( media ) {
+  //
+  //   let images = media.images;
+  //   let video = media.video;
+  //   let caption = video.caption || '';
+  //   let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
+  //
+  //   // HTML5 video
+  //   return (
+  //     <HTML5VideoNode
+  //       video={video}
+  //       poster={poster}
+  //       caption={caption}
+  //       playImage={Empty.VIDEO_PLAY_SP}
+  //     />
+  //   );
+  //
+  // },
+  videojsima: function(media) {
+    const images = media.images;
+    const video = media.video;
+    const caption = video.caption || '';
+    const poster = Safety.image(images.medium, Empty.VIDEO_THUMBNAIL);
 
     // props.index で出力 class を切替えます
     // 次の記事一覧で動画を表示するために
@@ -132,9 +133,8 @@ export let SPMediaVideoNode = React.createClass( {
       />
     );
   },
-  youtube: function( media ) {
-    let video = media.video;
-
+  youtube: function(media) {
+    const video = media.video;
     return (
       <div className="post-kv post-video-kv post-video-kv-yt">
         <img className="yt-video-size" src={Empty.VIDEO_THUMBNAIL} alt=""/>
@@ -149,9 +149,8 @@ export let SPMediaVideoNode = React.createClass( {
       </div>
     );
   },
-  facebook: function( media ) {
-    let video = media.video;
-
+  facebook: function(media) {
+    const video = media.video;
     return (
       <div className="post-kv post-video-kv post-video-fb">
         <div

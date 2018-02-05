@@ -17,8 +17,7 @@ import View from '../../view/View';
 // import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 
 // component
-import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
-import { SingleDae } from '../../dae/SingleDae';
+// import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
 
 // ga
 import { Ga } from '../../ga/Ga';
@@ -34,7 +33,7 @@ const React = self.React;
  * 汎用化のために `ViewSingleHeader` {@link ViewSingleHeader} から分離します
  * @since 2016-09-24
  */
-export default class ComponentSingleHeader extends React.Component {
+export class ComponentSingleHeader extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -44,8 +43,7 @@ export default class ComponentSingleHeader extends React.Component {
    */
   static get propTypes() {
     return {
-      // single: React.PropTypes.object.isRequired,
-      single: React.PropTypes.instanceOf(SingleDae).isRequired,
+      single: React.PropTypes.object.isRequired,
       sign: React.PropTypes.bool.isRequired,
       callback: React.PropTypes.func
     };
@@ -67,6 +65,7 @@ export default class ComponentSingleHeader extends React.Component {
      *  sign: boolean,
      *  status: boolean,
      *  bookmarked: string,
+     *  loading: string
      * }}
      * */
     this.state = {
@@ -74,7 +73,7 @@ export default class ComponentSingleHeader extends React.Component {
       sign: props.sign,
       status: props.single.isBookmarked,
       bookmarked: props.single.isBookmarked ? 'bookmarked enable' : '',
-      // loading: ''
+      loading: ''
     };
   }
   // ---------------------------------------------------
@@ -98,20 +97,12 @@ export default class ComponentSingleHeader extends React.Component {
       safety(View.DID_MOUNT);
     }
   }
-  // /**
-  //  * React state, single と sign を更新します
-  //  * @param {SingleDae} single 記事詳細 JSON データ
-  //  * @param {boolean} sign ユーザーがログイン済みかの真偽値
-  //  * */
-  // updateSingle(single, sign) {
-  //   this.setState({ single, sign });
-  // }
   /**
-   * delegate - update props to setState
-   * @param {{single: SingleDae, sign: boolean}} nextProps next React.props
-   */
-  componentWillReceiveProps(nextProps) {
-    const { single, sign } = nextProps;
+   * React state, single と sign を更新します
+   * @param {SingleDae} single 記事詳細 JSON データ
+   * @param {boolean} sign ユーザーがログイン済みかの真偽値
+   * */
+  updateSingle(single, sign) {
     this.setState({ single, sign });
   }
   /**
@@ -159,9 +150,14 @@ export default class ComponentSingleHeader extends React.Component {
     const single = this.state.single;
     // console.log('ComponentSingleHeader.render', single);
     const user = single.user;
+    // @type {string}
+    const userName = user.userName;
     // @type {LogoDae}
     const logo = user.logo;
-    // console.log('ComponentSingleHeader.render', single);
+    // 提供元名称とロゴがなかったら表示しない
+    if (!userName && !logo.img) {
+      return null;
+    }
     return (
       <div className="single-header-root">
         <div className={`post-heading post-heading-${single.id}`}>
@@ -175,15 +171,15 @@ export default class ComponentSingleHeader extends React.Component {
           anotherCategories={single.anotherCategories}
         /> */}
         <div className="post-data">
-        <p className="post-text">
-            <span className="post-date">{single.displayDate}</span>
-            <span className="post-category">{single.categories.label}</span>
-          </p>
-          <p className="post-logo">{this.logo(logo)}</p>
           {/* <div className="f-left">
             <p className="post-author">{single.user.userName}</p>
             <p className="post-date">{single.displayDate}</p>
           </div> */}
+          <p className="post-text">
+            <span className="post-date">{single.displayDate}</span>
+            <span className="post-category">{single.categories.label}</span>
+          </p>
+          <p className="post-logo">{this.logo(logo)}</p>
           {/* div.f-right (bookmark: on / off) */}
           {/* <BookmarkNode
             sign={this.state.sign}

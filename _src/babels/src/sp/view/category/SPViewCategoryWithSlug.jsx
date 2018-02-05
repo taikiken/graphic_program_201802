@@ -56,8 +56,8 @@ const React = self.React;
 const ReactDOM = self.ReactDOM;
 
 /**
- * SP category 一覧を表示します<br>
- * 広告をAPIでコントロール可能にします
+ * SP category 一覧を表示します
+ * - 広告をAPIでコントロール可能にします
  *
  * @since 2016-06-06
  */
@@ -91,10 +91,9 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
     this._resultArticles = null;
     /**
      * ModelCategoriesSlug 取得結果を保持します
-     * @type {null|Object}
-     * @private
+     * @type {?CategoriesSlugDae}
      */
-    this._categoryInfo = null;
+    this.categoryInfo = null;
     /**
      * ModelCategoriesSlug, Category の取得を待つためのフラッグとして使用します
      * @type {number}
@@ -124,6 +123,11 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
      * @type {function}
      */
     this.boundSafely = this.executeSafely.bind(this);
+    /**
+     * ga 送信 flag
+     * @type {boolean}
+     */
+    this.gaSent = false;
   }
   /**
    * CATEGORY_INFO, ModelCategoriesSlug success event
@@ -209,7 +213,7 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
     }
 
     const categoryInfo = new CategoriesSlugDae( response );
-    this._categoryInfo = categoryInfo;
+    this.categoryInfo = categoryInfo;
     this.executeSafely(SPViewCategoryWithSlug.CATEGORY_INFO, categoryInfo);
     this.wait();
   }
@@ -244,11 +248,13 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
   render(articles) {
     // ストリーム広告 ID
     // @since 2016-09-20, categoryInfo null の時があるので変更
-    const categoryInfo = this._categoryInfo;
-    let adSp = '';
-    if (!!categoryInfo && !!categoryInfo.ad && !!categoryInfo.ad.sp) {
-      adSp = categoryInfo.ad.sp;
-    }
+    // const categoryInfo = this.categoryInfo;
+    // let adSp = '';
+    // if (!!categoryInfo && !!categoryInfo.ad && !!categoryInfo.ad.sp) {
+    //   adSp = categoryInfo.ad.sp;
+    // }
+    const categoryInfo = this.categoryInfo;
+    const adSp = categoryInfo && categoryInfo.ad && categoryInfo.ad.sp ? categoryInfo.ad.sp : new CategoriesSlugDae({});
     // let adSp = categoryInfo.ad.sp;
     // if ( !adSp ) {
     //   adSp = '';
@@ -309,35 +315,69 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
     // 通知
     this.executeSafely(View.BEFORE_RENDER, articlesList);
 
-    // this._articleRendered が null の時だけ ReactDOM.render する
-    if (this.articleRendered === null) {
-      // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      this.articleRendered = ReactDOM.render(
-        // <SPArchiveNode
-        //   list={articlesList}
-        //   offset={this.request.offset}
-        //   length={this.request.length}
-        //   action={this.action}
-        //   scope={this}
-        //   moreButton={moreButton}
-        //   home={this.home}
-        //   type={Message.NEWS}
-        //   adSp={adSp}
-        // />,
-        // @since 2016-09-21 changed
-        <SPComponentArticles
-          list={articlesList}
-          offset={this.request.offset}
-          length={this.request.length}
-          action={this.action}
-          callback={this.boundSafely}
-          boundMore={this.boundMore}
-          home={this.home}
-          adSp={adSp}
-        />,
-        this.element
-      );
+    // // this._articleRendered が null の時だけ ReactDOM.render する
+    // if (this.articleRendered === null) {
+    //   // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
+    //   this.articleRendered = ReactDOM.render(
+    //     // <SPArchiveNode
+    //     //   list={articlesList}
+    //     //   offset={this.request.offset}
+    //     //   length={this.request.length}
+    //     //   action={this.action}
+    //     //   scope={this}
+    //     //   moreButton={moreButton}
+    //     //   home={this.home}
+    //     //   type={Message.NEWS}
+    //     //   adSp={adSp}
+    //     // />,
+    //     // @since 2016-09-21 changed
+    //     <SPComponentArticles
+    //       list={articlesList}
+    //       offset={this.request.offset}
+    //       length={this.request.length}
+    //       action={this.action}
+    //       callback={this.boundSafely}
+    //       boundMore={this.boundMore}
+    //       home={this.home}
+    //       adSp={adSp}
+    //     />,
+    //     this.element
+    //   );
+    //
+    //   if (this.home) {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
+    //     Ga.add(new GaData('SPViewCategoryWithSlug.render', 'home_articles', 'view - new', String(1), 0, true));
+    //     // ----------------------------------------------
+    //   } else {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     // PC/スマホカテゴリー一覧の新着記事
+    //     Ga.add(new GaData('SPViewCategoryWithSlug.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
+    //     // ----------------------------------------------
+    //   }
+    // } else {
+    //   // instance が存在するので
+    //   // state update でコンテナを追加する
+    //   this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
+    // }
 
+    ReactDOM.render(
+      <SPComponentArticles
+        list={articlesList}
+        offset={this.request.offset}
+        length={this.request.length}
+        action={this.action}
+        callback={this.boundSafely}
+        boundMore={this.boundMore}
+        home={this.home}
+        adSp={adSp}
+      />,
+      this.element,
+    );
+    if (!this.gaSent) {
+      this.gaSent = true;
       if (this.home) {
         // ----------------------------------------------
         // GA 計測タグ
@@ -351,10 +391,6 @@ export default class SPViewCategoryWithSlug extends SPViewCategory {
         Ga.add(new GaData('SPViewCategoryWithSlug.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
         // ----------------------------------------------
       }
-    } else {
-      // instance が存在するので
-      // state update でコンテナを追加する
-      this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
     }
   }
 }

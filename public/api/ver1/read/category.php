@@ -185,6 +185,7 @@ SQL;
       'ios'			=> 'ios_',
       'android' => 'android_',
     ];
+    // eof: 定数
 
     $f['text'] = isset($f['text']) ? $f['text'] : '';
 
@@ -280,6 +281,13 @@ SQL;
     );
   endif;
 
+  // #UNDO_SPBL-293
+  if ( $category === 'pyeongchang2018' ) :
+    $categoriesinfo['webviews']     = array(
+      '/pyeongchang2018/webview/',
+    );
+  endif;
+
   // #2080
   if ( $category === 'top' ) :
     $categoriesinfo['webviews'] = array(
@@ -288,9 +296,9 @@ SQL;
   endif;
 
 
-  if (!empty($category)) {
-    $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
-  }
+  // if (!empty($category)) {
+  //   $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
+  // }
 
   $y["response"]=$categoriesinfo;
 

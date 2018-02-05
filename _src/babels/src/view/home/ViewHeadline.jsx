@@ -51,7 +51,7 @@ const React = self.React;
 const ReactDOM = self.ReactDOM;
 
 /**
- * <p>home > headline（注目ニュース）を表示します。</p>
+ * home > headline（注目ニュース）を表示します。
  *
  * 1. JSON取得(Ajax)
  * 1. Dom作成 by React
@@ -97,8 +97,9 @@ export default class ViewHeadline extends View {
    *
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [sp=false] sp flag - 取得件数が異なる為に使用します
    */
-  constructor(element, option = {}) {
+  constructor(element, option = {}, sp = false) {
     option = Safety.object( option );
     super(element, option);
     // ---
@@ -108,12 +109,18 @@ export default class ViewHeadline extends View {
      * @override
      * @type {HeadlineAuth|Headline}
      */
-    this.action = new ActionClass(this.done.bind(this), this.fail.bind(this));
+    this.action = new ActionClass(this.done.bind(this), this.fail.bind(this), sp);
     /**
      * bind executeSafely
      * @type {function}
      */
     this.boundSafely = this.executeSafely.bind(this);
+    /**
+     * sp flag - headline 取得件数が異なる為に使用します
+     * @type {boolean}
+     * @since 2018-01-11
+     */
+    this.sp = sp;
   }
   // ---------------------------------------------------
   //  METHOD

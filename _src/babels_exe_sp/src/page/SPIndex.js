@@ -12,6 +12,7 @@
 
 
 import SPHeader from './SPHeader';
+import SPAnnounce from './SPAnnounce';
 // let _symbol = Symbol();
 
 // UT
@@ -19,8 +20,8 @@ const UT = self.UT;
 const Dom = UT.app.Dom;
 
 /**
- * <p>Home(index)</p>
- * 全て static です
+ * Home(index)
+ * - 全て static です
  */
 export default class SPIndex {
   // /**
@@ -35,9 +36,30 @@ export default class SPIndex {
   //   }
   // }
   /**
+   * home headline - ad id 取得のために announce API 取得後に実行します
+   * @param {*} dae CategorySlugDae
+   * @since 2018-01-12
+   */
+  static afterAnnounce(dae) {
+    // console.log('SPIndex.afterAnnounce', dae);
+    // ---------------------------------------------------------
+    // headline
+    const headlineElement = Dom.headline();
+    if (headlineElement !== null) {
+      const headline = new UT.sp.view.home.SPViewHeadLine(headlineElement, {}, dae.ad);
+      headline.start();
+    }
+  }
+  /**
    * home rendering 開始
    */
   static start() {
+    // announce
+    const option = {};
+    option[UT.view.View.BEFORE_RENDER] = SPIndex.afterAnnounce;
+    // SPAnnounce.start('all', option);
+    // UNDO_SPBL-401 【Web】一面リニューアル / 「TOP」でのカテゴリーAPIの問い合わせ先変更
+    SPAnnounce.start('top', option);
     // header
     SPHeader.start();
 
@@ -46,17 +68,17 @@ export default class SPIndex {
     // @since 2016-09-15
     const pickupElement = Dom.pickup();
     if (pickupElement !== null) {
-      let pickup = new UT.view.home.ViewPickup(pickupElement);
+      const pickup = new UT.view.home.ViewPickup(pickupElement);
       pickup.start();
     }
 
-    // ---------------------------------------------------------
-    // headline
-    const headlineElement = Dom.headline();
-    if (headlineElement !== null) {
-      let headline = new UT.sp.view.home.SPViewHeadLine(headlineElement);
-      headline.start();
-    }
+    // // ---------------------------------------------------------
+    // // headline
+    // const headlineElement = Dom.headline();
+    // if (headlineElement !== null) {
+    //   let headline = new UT.sp.view.home.SPViewHeadLine(headlineElement);
+    //   headline.start();
+    // }
 
     // ---------------------------------------------------------
     // news
@@ -66,6 +88,5 @@ export default class SPIndex {
       const archive = new UT.sp.view.home.SPViewNews(boardElement, moreElement);
       archive.start();
     }
-
   }
 }

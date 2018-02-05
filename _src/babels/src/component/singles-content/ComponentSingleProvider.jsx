@@ -26,7 +26,7 @@ const React = self.React;
  * `/app/template/[desktop|mobile]/p.php` から移植しました
  * @since 2016-11-05
  */
-export class ComponentSingleProvider extends React.Component {
+export default class ComponentSingleProvider extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
