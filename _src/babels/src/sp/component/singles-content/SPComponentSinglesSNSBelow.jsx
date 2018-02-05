@@ -15,9 +15,14 @@ import { MessageSNS } from '../../../app/const/MessageSNS';
 
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
+ * @deprecated dont use
+ * @TODO future remove
  * mobile: single SNS 下部
  */
 export class SPComponentSinglesSNSBelow extends React.Component {

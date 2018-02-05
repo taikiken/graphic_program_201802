@@ -46,7 +46,7 @@ export default class SPIndex {
     // headline
     const headlineElement = Dom.headline();
     if (headlineElement !== null) {
-      let headline = new UT.sp.view.home.SPViewHeadLine(headlineElement, {}, dae.ad);
+      const headline = new UT.sp.view.home.SPViewHeadLine(headlineElement, {}, dae.ad);
       headline.start();
     }
   }
@@ -57,7 +57,9 @@ export default class SPIndex {
     // announce
     const option = {};
     option[UT.view.View.BEFORE_RENDER] = SPIndex.afterAnnounce;
-    SPAnnounce.start('all', option);
+    // SPAnnounce.start('all', option);
+    // UNDO_SPBL-401 【Web】一面リニューアル / 「TOP」でのカテゴリーAPIの問い合わせ先変更
+    SPAnnounce.start('top', option);
     // header
     SPHeader.start();
 
@@ -66,7 +68,7 @@ export default class SPIndex {
     // @since 2016-09-15
     const pickupElement = Dom.pickup();
     if (pickupElement !== null) {
-      let pickup = new UT.view.home.ViewPickup(pickupElement);
+      const pickup = new UT.view.home.ViewPickup(pickupElement);
       pickup.start();
     }
 
@@ -86,6 +88,5 @@ export default class SPIndex {
       const archive = new UT.sp.view.home.SPViewNews(boardElement, moreElement);
       archive.start();
     }
-
   }
 }

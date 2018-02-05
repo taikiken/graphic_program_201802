@@ -11,6 +11,9 @@
  */
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /*
@@ -87,12 +90,14 @@ export default class SPComponentSingleRecommendAd extends React.Component {
   /**
    * div.widget-post-carousel-item
    * @returns {XML} div.widget-post-carousel-item + 広告タグ
+   * @since 2018-01-15
+   * design変更に伴いclassName="bord-item-ad"をclassName="widget-post-carousel-item widget-post-carousel-item-ad"に変更
    */
   render() {
     return (
       <div className="board-item board-item-ad-wrapper">
         <div
-          className="bord-item-ad"
+          className="widget-post-carousel-item widget-post-carousel-item-ad"
           ref={(element) => (this.container = element)}
         />
       </div>

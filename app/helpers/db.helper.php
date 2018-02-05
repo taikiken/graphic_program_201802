@@ -262,7 +262,7 @@ END_DOC;
       $this->query($sql);
       while($ee=$this->fetch_array())$p[]=$ee;
       if(count($p)>0){
-        $l="<p>関連リンク<br>";
+        $l="<p>外部リンク<br>";
         for($i=0;$i<count($p);$i++){
           if(strlen($p[$i]["title"])>0)$l.=sprintf("<a href=\"%s\" target=\"_blank\">%s</a><br>",$p[$i]["title"],$p[$i]["link"]);
         }

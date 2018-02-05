@@ -20,7 +20,7 @@ const React = self.React;
  * 記事詳細・次の記事一覧の記事（省略分）
  * @since 2016-11-04
  */
-export class ComponentSinglesArticleExcerpt extends React.Component {
+export default class ComponentSinglesArticleExcerpt extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

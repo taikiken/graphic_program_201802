@@ -38,6 +38,12 @@
   ) {
     $page_has_header = true;
   }
+
+  // アプリ判定
+  if ( $page['ua_app'] ) {
+    $page_has_header = false;
+  }
+
   ?>
 <?php
 if ($page_has_header) :

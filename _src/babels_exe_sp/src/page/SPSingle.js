@@ -1,3 +1,7 @@
+
+
+
+
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
@@ -112,6 +116,7 @@ export default class SPSingle {
     }
     const slug = single.categories.slug;
     const label = single.categories.label;
+    const keyword = single.keywords.keywords;
 
     // nav current
     SPNav.start(slug);
@@ -126,8 +131,16 @@ export default class SPSingle {
     // SPSingle.singleRecommend(slug);
     // -----------------------
     // since 2017-09-13
-    SPSingle.optionRecommend(slug);
-    SPSingle.optionRanking(slug, label);
+    // SPSingle.optionRecommend(slug);
+    // SPSingle.optionRanking(slug, label);
+    // -----------------------
+    // 2018-01-16 新着ニュース、ヘッドライン表示追加
+    // SPSingle.optionNews(slug);
+    // SPSingle.optionHeadline(slug);
+    // -----------------------
+    // SPSingle.optionNews(slug);
+    // SPSingle.optionTag(keyword);
+    SPSingle.scroll(keyword, slug, label);
   }
   // /**
   //  * 記事詳細下部・人気記事
@@ -227,26 +240,112 @@ export default class SPSingle {
    * @param {string} slug category.slug
    * @since 2017-09-13
    */
-  static optionRecommend(slug) {
-    // console.log('SPSingle.optionRecommend', slug);
-    const recommendElement = Dom.recommend();
-    if (recommendElement) {
-      const recommend = new UT.sp.view.singles.SPViewSinglesRecommend(recommendElement, slug);
-      recommend.start();
-    }
-  }
+  // static optionRecommend(slug) {
+  //   // console.log('SPSingle.optionRecommend', slug);
+  //   const recommendElement = Dom.recommend();
+  //   if (recommendElement) {
+  //     const recommend = new UT.sp.view.singles.SPViewSinglesRecommend(recommendElement, slug);
+  //     recommend.start();
+  //   }
+  // }
   /**
    * single のよく読まれている記事 carousel
    * @param {string} slug category.slug
    * @param {string} label category.label
    * @since 2017-09-13
    */
-  static optionRanking(slug, label) {
-    // console.log('SPSingle.optionRecommend', slug, label);
-    const rankingElement = Dom.ranking();
-    if (rankingElement) {
-      const ranking = new UT.sp.view.singles.SPViewSinglesRanking(rankingElement, slug, label);
-      ranking.start();
+  // static optionRanking(slug, label) {
+  //   // console.log('SPSingle.optionRecommend', slug, label);
+  //   const rankingElement = Dom.ranking();
+  //   if (rankingElement) {
+  //     const ranking = new UT.sp.view.singles.SPViewSinglesRanking(rankingElement, slug, label);
+  //     ranking.start();
+  //   }
+  // }
+  /**
+   * single の新着ニュース carousel
+   * @param {string} slug category.slug
+   * @since 2018-01-16
+   */
+  // static optionNews(slug) {
+  //   // console.log('SPSingle.optionNews', slug);
+  //   const newsElement = Dom.board();
+  //   if (newsElement) {
+  //     const news = new UT.sp.view.singles.SPViewSinglesWithSlug(slug, newsElement, null);
+  //     news.start();
+  //   }
+  // }
+
+  // static optionTag(keyword) {
+  //   // console.log('SPSingle.optionTag', keyword);
+  //   // const tagElement = Dom.singleFooter();
+  //   // if (tagElement) {
+  //   //   const tag = new UT.sp.view.single.SPViewSingleTags(keyword, tagElement);
+  //   //   tag.start();
+  //   // }
+  // }
+
+
+  static scroll(keyword, slug, label) {
+    const windowOffsetY = window.pageYOffset;
+    // const y = -400;
+    let widget = {
+      tag: {},
+      ranking: {},
+      news: {},
+      recommend: {},
+      show: {}
+    };
+    widget.tag.element = Dom.singleFooter();
+    widget.show.tag = ()=> {
+      widget.tag.ut = new UT.sp.view.single.SPViewSingleTags(keyword, widget.tag.element);
+      widget.tag.ut.start();
+      delete widget.show.tag;
+    };
+
+    widget.ranking.element = Dom.ranking();
+    widget.show.ranking = ()=> {
+      widget.ranking.ut = new UT.sp.view.singles.SPViewSinglesRanking(widget.ranking.element, slug, label);
+      widget.ranking.ut.start();
+      delete widget.show.ranking;
+    };
+
+    widget.news.element = Dom.board();
+    widget.show.news = ()=> {
+      widget.news.ut = new UT.sp.view.singles.SPViewSinglesWithSlug(slug, widget.news.element, null);
+      widget.news.ut.start();
+      delete widget.show.news;
+    };
+
+
+    widget.recommend.element = Dom.recommend();
+    if(widget.recommend.element) {
+      widget.show.recommend = ()=> {
+        widget.recommend.ut = new UT.sp.view.singles.SPViewSinglesRecommend(widget.recommend.element, slug);
+        widget.recommend.ut.start();
+        delete widget.show.recommend;
+      };
     }
+
+    let showCnt = Object.keys(widget.show).length;
+
+    const showWidget = ()=> {
+      // let pos = window.pageYOffset - windowHeight;
+      let pos = window.pageYOffset;
+      if(showCnt) {
+        for (let key in widget.show) {
+          if ({}.hasOwnProperty.call(widget.show, key)) {
+            widget.show[key]();
+          }
+        }
+        showCnt = Object.keys(widget.show).length;
+      } else {
+        window.removeEventListener('touchmove', showWidget, true);
+      }
+    };
+
+    window.addEventListener('touchmove', showWidget, true);
+
+    // showWidget();
   }
 }

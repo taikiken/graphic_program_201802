@@ -14,12 +14,12 @@
 import { Message } from '../../../app/const/Message';
 
 // component/singles
-import { ComponentSinglesArticleExcerpt } from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
+import ComponentSinglesArticleExcerpt from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
 
-import { ComponentSingleSNS } from '../../../component/singles-content/ComponentSingleSNS';
+import ComponentSingleSNS from '../../../component/singles-content/ComponentSingleSNS';
 
 // component/singles-content
-import { SPComponentSingleContent } from '../singles-content/SPComponentSingleContent';
+import SPComponentSingleContent from '../singles-content/SPComponentSingleContent';
 // import { SPComponentSinglesSNSBelow } from '../singles-content/SPComponentSinglesSNSBelow';
 
 // // util
@@ -31,8 +31,8 @@ import { Validate } from '../../../util/Validate';
 import { SinglesHistory } from '../../../singles/SinglesHistory';
 
 // component/singles-content record
-import { RecordSingleState } from '../../../component/singles-content/RecordSingleState';
-import { SPComponentSinglesSNSAbove } from '../singles-content/SPComponentSinglesSNSAbove';
+import RecordSingleState from '../../../component/singles-content/RecordSingleState';
+import SPComponentSinglesSNSAbove from '../singles-content/SPComponentSinglesSNSAbove';
 
 // React
 /**
@@ -45,7 +45,7 @@ const React = self.React;
  * 「続きを読む」クリックで本文を表示します
  * @since 2016-11-11
  */
-export class SPComponentSinglesArticleSwitch extends React.Component {
+export default class SPComponentSinglesArticleSwitch extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

@@ -1,4 +1,7 @@
 <?php
+// `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
+?>
+<?php
 //2017/7/14追加
 //ref. https://github.com/undotsushin/undotsushin/issues/1914
 //モータースポーツ専用のレクタングル広告
@@ -64,9 +67,11 @@ if ($template_name == 'category' || $template_name == 'p') {
 <?php
 // `/big6tv`
 // 記事詳細 + big6tv - 広告トル
+// `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
 if (
     !$single_big6tv &&
-    $page['template'] != 'motorsports'
+    $page['template'] != 'motorsports' &&
+    !$on_pyeongchang2018
   ) :
 ?>
           <?php
@@ -161,7 +166,8 @@ endif;
             <?php
             // not big6tv の時のみ広告を表示する
             // @since 2017-03-15
-            if (!$in_big6tv) :
+            // `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
+            if (!$in_big6tv && !$on_pyeongchang2018) :
             ?>
               <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
                 <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
@@ -180,11 +186,20 @@ endif;
           // https://github.com/undotsushin/undotsushin/issues/862#issuecomment-229568814
           if ( $page['category']['slug'] !== 'crazy' ) :
           ?>
-          <div id="widget-recommend-container"></div><!--/videos-->
+
+          <div id="_popIn_recommend_2"></div>
+            <script type="text/javascript">
+                (function() {
+                    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                    pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+                })();
+            </script>
             <?php
             // not big6tv の時のみ広告を表示する
             // @since 2017-03-15
-            if (!$in_big6tv) :
+            // `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
+            if (!$in_big6tv && !$on_pyeongchang2018) :
             ?>
               <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
                 <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
@@ -199,7 +214,8 @@ endif;
 <?php
 // not big6tv の時のみ広告を表示する
 // @since 2017-03-15
-if (!$in_big6tv) :
+// `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
+if (!$in_big6tv && !$on_pyeongchang2018) :
 ?>
           <?php
           // ------------------------------------

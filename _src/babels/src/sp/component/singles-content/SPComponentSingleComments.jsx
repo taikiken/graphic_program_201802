@@ -33,7 +33,7 @@ const React = self.React;
  * 次の記事一覧・コメント表示
  * @since 2016-11-05
  */
-export class SPComponentSingleComments extends React.Component {
+export default class SPComponentSingleComments extends React.Component {
   // -------------------------- -------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
