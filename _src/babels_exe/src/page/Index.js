@@ -79,5 +79,10 @@ export default class Index {
 
     // sidebar, slug なし(=all)
     Sidebar.start('all', true);
+    // sidebar `all` のまま
+    // > サイドバーは全件の意味で all から取得
+    // https://aws-plus.backlog.jp/view/UNDO_SPBL-401#comment-1187834201
+    // // UNDO_SPBL-401 【Web】一面リニューアル / 「TOP」でのカテゴリーAPIの問い合わせ先変更
+    // Sidebar.start('top', true);
   }
 }
