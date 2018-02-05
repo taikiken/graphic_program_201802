@@ -27,7 +27,7 @@ import { SinglesAuth } from '../../action/singles/SinglesAuth';
 import { SingleDae } from '../../dae/SingleDae';
 
 // component
-import { ComponentSingles } from '../../component/singles/ComponentSingles';
+import ComponentSingles from '../../component/singles/ComponentSingles';
 
 // import { ComponentMoreButton } from '../../component/articles/ComponentMoreButton';
 
@@ -85,8 +85,9 @@ export default class ViewSingles extends ViewArchiveMasonryInfinite {
    * @param {Element} moreElement more button 挿入 Element
    * @param {SingleDae} single 記事詳細取得 JSON を SingleDae instance にしています
    * @param {Object} [option={}] callback を設定した Object
+   * @param {boolean} [sp=false] sp flag
    */
-  constructor(id, element, moreElement, single, option = {}) {
+  constructor(id, element, moreElement, single, option = {}, sp = false) {
     // element, moreElement, ActionClass, option, isotope
     super(element, moreElement, null, option, false);
 
@@ -129,6 +130,12 @@ export default class ViewSingles extends ViewArchiveMasonryInfinite {
     this.articleRendered = null;
     // this.firstRendered = false;
     // this.secondRendered = false;
+    /**
+     * sp flag 追加 - 平昌で powered by image path 違うため
+     * @type {boolean}
+     * @since 2018-01-12
+     */
+    this.sp = sp;
   }
   /**
    * Ajax response success
@@ -220,6 +227,7 @@ export default class ViewSingles extends ViewArchiveMasonryInfinite {
         single={this.single}
         home={false}
         sign={User.sign}
+        sp={this.sp}
       />,
       this.element
     );

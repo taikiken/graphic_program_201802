@@ -160,3 +160,9 @@ _src/bower_exports/react-14.0.7
 # 番組表 JSON
 # ==============================
 /public/picks/gguide.json
+
+
+# db_dump
+# ==============================
+ut_devnew-201801152129.dump
+/ut.dump

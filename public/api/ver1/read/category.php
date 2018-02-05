@@ -281,6 +281,13 @@ SQL;
     );
   endif;
 
+  // #UNDO_SPBL-293
+  if ( $category === 'pyeongchang2018' ) :
+    $categoriesinfo['webviews']     = array(
+      '/pyeongchang2018/webview/',
+    );
+  endif;
+
   // #2080
   if ( $category === 'top' ) :
     $categoriesinfo['webviews'] = array(
