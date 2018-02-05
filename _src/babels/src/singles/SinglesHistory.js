@@ -177,6 +177,7 @@ export class SinglesHistory extends EventDispatcher {
     // 書換えURLが初期(base)URLなら `hash` を復元する
     // @since 2017-06-01
     const hash = url === this.base() ? this.hash : '';
+    // console.log('SinglesHistory.replace', url, page, hash, this.extra);
     history.replaceState(page.info(), page.title(), `${url}${hash}${this.extra}`);
     this.head().replace(page);
   }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SPORTS BULL</title>
+  <script>
+
+    var val = getUrlVars();
+
+    if (val.id === "170331") {
+      window.location.replace(getCampaignURL("https://sportsbull.jp/p/112808/", val));
+    }
+    else if (val.id === "170328") {
+      window.location.replace("https://sportsbull.jp/p/111942/?utm_source=aust&utm_campaign=sokuhou&utm_medium=sokuhou&utm_content=20170328");
+    }
+    else if (val.id === "170323") {
+      window.location.replace("https://sportsbull.jp/p/110321/?utm_source=aust&utm_campaign=sokuhou&utm_medium=sokuhou&utm_content=20170323");
+    }
+    else {
+      window.location.replace("https://sportsbull.jp/category/soccer/");
+    }
+
+    function getUrlVars() {
+
+      var vars = [], max = 0, hash = "", array = "";
+      var url = window.location.search;
+
+      hash  = url.slice(1).split('&');
+      max = hash.length;
+
+      for (var i = 0; i < max; i++) {
+        array = hash[i].split('=');
+        vars.push(array[0]);
+        vars[array[0]] = array[1];
+      }
+
+      return vars;
+    }
+
+    function getCampaignURL(url, options) {
+
+      var val = "";
+
+      if (options.utm_source) {
+        val += "&utm_source=" + options.utm_source;
+      }
+
+      if (options.utm_campaign) {
+        val += "&utm_campaign=" + options.utm_campaign;
+      }
+
+      if (options.utm_medium) {
+        val += "&utm_medium=" + options.utm_medium;
+      }
+
+      if (options.utm_content) {
+        val += "&utm_content=" + options.utm_content;
+      }
+
+      if (val) {
+        url = url + "?" + val.substr(1);
+      }
+
+      // console.log(url, options);
+
+      return url;
+    }
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=https://sportsbull.jp/category/soccer/">
+  </noscript>
+</head>
+<body>
+</body>
+</html>

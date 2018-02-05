@@ -53,14 +53,14 @@ import Snap from '../../../ui/Snap';
 // import { ComponentSinglesArticleExcerpt } from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
 
 // sp/component/singles-magnet
-import { SPComponentSinglesArticleSwitch } from './SPComponentSinglesArticleSwitch';
+import SPComponentSinglesArticleSwitch from './SPComponentSinglesArticleSwitch';
 
 // util
 import { PageTitle } from '../../../util/PageTitle';
 
 
 // component/singles-content record
-import { RecordSingleState } from '../../../component/singles-content/RecordSingleState';
+import RecordSingleState from '../../../component/singles-content/RecordSingleState';
 
 // React
 /**
@@ -87,7 +87,7 @@ const React = self.React;
  * @see https://github.com/undotsushin/undotsushin/issues/1224
  * @since 2016-11-10
  */
-export class SPComponentSinglesArticleMagnet extends React.Component {
+export default class SPComponentSinglesArticleMagnet extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -444,10 +444,9 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     }
 
     return (
-      <div className={`loaded-post loaded-post-${single.id}`} ref={
-        (component) => {
-          this.singlesArticle = component;
-        }}
+      <div
+        className={`loaded-post loaded-post-${single.id}`}
+        ref={(component) => (this.singlesArticle = component)}
       >
         {/* div.post-kv */}
         <div className="single-visual-container" ref="visualElement">
@@ -457,6 +456,8 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
             media={single.media}
             isShowImage={single.isShowImage}
             index={index}
+            sp={true}
+            single={single}
           />
           {/*
            <SPComponentSinglesArticleMedia

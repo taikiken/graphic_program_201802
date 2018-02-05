@@ -69,7 +69,8 @@
       text-align: left;
       margin-top: 8px;
       // spのみ左右に余白
-      padding: 0 3.125%;
+      padding-right: perCalc(15, 750);
+      padding-left: perCalc(15, 750);
 
       font-size: fz(20/2);
     }

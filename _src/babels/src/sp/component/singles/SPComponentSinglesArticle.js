@@ -23,7 +23,7 @@ import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 import ComponentCategoryLabelsLink from '../../../component/categories/ComponentCategoryLabelsLink';
 
 // sp/component.singles
-import { SPComponentSinglesArticleMedia } from './SPComponentSinglesArticleMedia';
+import SPComponentSinglesArticleMedia from './SPComponentSinglesArticleMedia';
 
 // ui
 import Hit from '../../../ui/Hit';
@@ -43,6 +43,7 @@ import { Ga } from '../../../ga/Ga';
 const React = self.React;
 
 /**
+ * @TODO future remove - not use
  * SP: 記事詳細「次の記事」一覧を出力します
  * @since 2016-09-28
  */
