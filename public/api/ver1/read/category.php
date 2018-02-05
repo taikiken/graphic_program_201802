@@ -165,6 +165,13 @@ SQL;
 
   if (!empty($f))
   {
+    // フルパスで返す
+    $domain = "https://" . $_SERVER["HTTP_HOST"];
+    $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
+    // img、linkはnullの場合あるから空にする
+    $f['img'] = isset($f['img']) ? $cf . $f['img'] : '';
+    $f['link'] = isset($f['link']) ? $f['link'] : '';
+
     // 定数
     $type = $f['type'];
     $text_color = ['#333333', '#333333', ''];
