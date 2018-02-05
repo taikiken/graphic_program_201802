@@ -416,12 +416,12 @@
       var target = bodyP[halfIndex];
       div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
       target.parentNode.insertBefore(div, target.nextSibling);
-      googletag.cmd.push(function() {
-        googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert').addService(googletag.pubads());
-        googletag.enableServices();
-        googletag.pubads().collapseEmptyDivs();
-        googletag.display("ad-gpt-article-detail-body-insert");
-      });
+      // googletag.cmd.push(function() {
+      //   googletag.defineSlot('/531683568/article-detail/article-detail-body-insert', [300, 250], 'ad-gpt-article-detail-body-insert').addService(googletag.pubads());
+      //   googletag.enableServices();
+      //   googletag.pubads().collapseEmptyDivs();
+      //   googletag.display("ad-gpt-article-detail-body-insert");
+      // });
     }
   }
   if(btnMore) {

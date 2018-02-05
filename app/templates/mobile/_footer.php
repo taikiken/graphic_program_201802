@@ -120,6 +120,5 @@ if (
 
 <?php include __DIR__.'/_footer-bottom.php'; ?>
 
-<script src="/assets/google/dfp.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>
