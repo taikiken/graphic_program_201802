@@ -417,7 +417,7 @@ export default class ViewSingle extends View {
     this.executeSafely(View.RESPONSE_ERROR, error);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-    console.warn('ViewSingle.error', this.id, error);
+    console.warn('ViewSingle.fail', this.id, error);
   }
   /**
    * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします
@@ -425,18 +425,25 @@ export default class ViewSingle extends View {
    * @since 2016-09-28
    */
   singles(single) {
-    if (this.viewSingles === null) {
-      // one time, singles が null の時のみ ViewSingles instance を作成します
-      const element = Dom.singlesNext();
-      const moreElement = Dom.singlesMore();
-      if (element !== null && moreElement !== null) {
-        const viewSingles = new ViewSingles(this.id, element, moreElement, single);
-        this.viewSingles = viewSingles;
-        viewSingles.start();
-      }
-    } else {
-      // instance がある時は update を実行します
-      this.viewSingles.update();
+    // if (this.viewSingles === null) {
+    //   // one time, singles が null の時のみ ViewSingles instance を作成します
+    //   const element = Dom.singlesNext();
+    //   const moreElement = Dom.singlesMore();
+    //   if (element !== null && moreElement !== null) {
+    //     const viewSingles = new ViewSingles(this.id, element, moreElement, single);
+    //     this.viewSingles = viewSingles;
+    //     viewSingles.start();
+    //   }
+    // } else {
+    //   // instance がある時は update を実行します
+    //   this.viewSingles.update();
+    // }
+    const element = Dom.singlesNext();
+    const moreElement = Dom.singlesMore();
+    if (element !== null && moreElement !== null) {
+      const viewSingles = new ViewSingles(this.id, element, moreElement, single);
+      this.viewSingles = viewSingles;
+      viewSingles.start();
     }
   }
   // /**
@@ -455,7 +462,7 @@ export default class ViewSingle extends View {
   //
   // }
   /**
-   * dom を render します<br>
+   * dom を render します
    * @param {SingleDae} single JSON response
    * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */

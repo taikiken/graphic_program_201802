@@ -29,37 +29,34 @@ export class Type {
     /**
      * API request先
      * @type {string}
-     * @protected
      */
-    this._url = url;
+    this.url = url;
+    // this._url = url;
     /**
      * Ajax request method, 'GET', 'POST', 'PUT', 'DELETE'... **全て大文字** に変換し保存します
      * @type {string}
      * @private
      */
     this._method = Safety.string(method, 'GET').toUpperCase();
-    // this._method = method.toUpperCase();
-
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
-  /**
-   * API request先
-   * @return {string} API request先を返します
-   */
-  get url() {
-    return this._url;
-  }
-
-  /**
-   * API request先を設定します
-   * @param {string} url API request先
-   */
-  set url(url) {
-    this._url = url;
-  }
-
+  // /**
+  //  * API request先
+  //  * @return {string} API request先を返します
+  //  */
+  // get url() {
+  //   return this._url;
+  // }
+  //
+  // /**
+  //  * API request先を設定します
+  //  * @param {string} url API request先
+  //  */
+  // set url(url) {
+  //   this._url = url;
+  // }
   /**
    * method POST|GET|PUT|DELETE
    * @return {string} POST | GET を返します
@@ -67,7 +64,6 @@ export class Type {
   get method() {
     return this._method;
   }
-
   /**
    * 'GET', 'POST', 'PUT', 'DELETE'... を設定します
    * @param {string} method 'GET', 'POST', 'PUT', 'DELETE'...

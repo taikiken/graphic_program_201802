@@ -15,7 +15,7 @@
 
 // node
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
-import { MediaNode } from '../../node/single/MediaNode';
+// import { MediaNode } from '../../node/single/MediaNode';
 
 // component/categories
 import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
@@ -24,10 +24,10 @@ import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLi
 // import { ComponentSinglesArticleMedia } from '../singles/ComponentSinglesArticleMedia';
 
 // since 2016-11-04
-import { ComponentSinglesArticleSwitch } from './ComponentSinglesArticleSwitch';
+import ComponentSinglesArticleSwitch from './ComponentSinglesArticleSwitch';
 
 // component/singles-content record
-import { RecordSingleState } from '../singles-content/RecordSingleState';
+import RecordSingleState from '../singles-content/RecordSingleState';
 
 // ui
 import Hit from '../../ui/Hit';
@@ -54,6 +54,7 @@ import { PageTitle } from '../../util/PageTitle';
 
 // snap
 import Snap from '../../ui/Snap';
+import ComponentMedia from '../media/ComponentMedia';
 
 // // event
 // import { IFrameStatus } from '../../event/IFrameStatus';
@@ -101,7 +102,7 @@ const React = self.React;
  * @since 2016-10-28
  * @since 2016-11-14 wait ga send
  */
-export class ComponentSinglesArticleMagnet extends React.Component {
+export default class ComponentSinglesArticleMagnet extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -110,13 +111,16 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * - @type {SingleDae} single - 記事データ
    * - @type {boolean} sign - ログイン済みユーザーフラッグ, true: ログイン済み
    * - @type {number} index - 次の記事一覧・記事表示順序
-   * @return {{single: SingleDae, sign: boolean, index: number}} React propTypes
+   * - @type {boolean} sp - sp flag
+   * @return {{single: SingleDae, sign: boolean, index: number, sp: boolean}} React propTypes
    */
   static get propTypes() {
     return {
       single: React.PropTypes.object.isRequired,
       sign: React.PropTypes.bool.isRequired,
-      index: React.PropTypes.number.isRequired
+      index: React.PropTypes.number.isRequired,
+      // 2018-01-12 sp flag 追加 - 平昌で powered by image path 違うため
+      sp: React.PropTypes.bool.isRequired,
     };
   }
   // ---------------------------------------------------
@@ -190,6 +194,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
      * @since 2016-10-27
      */
     this.manager = SinglesHistory.factory();
+    // console.log('ComponentSinglesArticleMagnet', props.index, props.single);
     /**
      * ページ情報書換えデータを `SingleDae` から生成します
      * {@link SingleDae}
@@ -524,12 +529,23 @@ export class ComponentSinglesArticleMagnet extends React.Component {
             </div>
           </div>
           {/* media */}
+          {/*
            <MediaNode
              articleId={String(single.id)}
              mediaType={single.mediaType}
              media={single.media}
              isShowImage={single.isShowImage}
              index={this.state.index}
+           />
+           */}
+           <ComponentMedia
+             articleId={String(single.id)}
+             mediaType={single.mediaType}
+             media={single.media}
+             isShowImage={single.isShowImage}
+             index={this.state.index}
+             sp={this.props.sp}
+             single={single}
            />
           {/*
           <ComponentSinglesArticleMedia

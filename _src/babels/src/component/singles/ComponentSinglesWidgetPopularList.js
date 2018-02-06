@@ -46,7 +46,7 @@ const playMark = (mediaType) => {
  * PC: 記事詳細・人気の記事一覧を出力します
  * @since 2016-09-30
  */
-export class ComponentSinglesWidgetPopularList extends React.Component {
+export default class ComponentSinglesWidgetPopularList extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

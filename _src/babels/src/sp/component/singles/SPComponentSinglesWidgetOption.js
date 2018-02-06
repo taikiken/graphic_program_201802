@@ -14,7 +14,7 @@
 import { WidgetType } from '../../../app/const/WidgetType';
 
 // component
-import { SPComponentSinglesWidget } from './SPComponentSinglesWidget';
+import SPComponentSinglesWidget from './SPComponentSinglesWidget';
 
 // React
 /**
@@ -23,6 +23,8 @@ import { SPComponentSinglesWidget } from './SPComponentSinglesWidget';
 const React = self.React;
 
 /**
+ * @deprecated dont use
+ * @TODO future remove
  * SP: 記事詳細「次の記事一覧」 > オススメ記事・関連記事・人気記事<br>
  * 出力 Component を「記事詳細」index を元に判断します
  * @since 2016-09-28

@@ -14,7 +14,7 @@
 import { WidgetType } from '../../app/const/WidgetType';
 
 // component
-import { ComponentSinglesWidget } from './ComponentSinglesWidget';
+import ComponentSinglesWidget from './ComponentSinglesWidget';
 
 // React
 /**
@@ -23,6 +23,7 @@ import { ComponentSinglesWidget } from './ComponentSinglesWidget';
 const React = self.React;
 
 /**
+ * @TODO future remove - not use
  * PC: 記事詳細「次の記事一覧」 > オススメ記事・関連記事・人気記事<br>
  * 出力 Component を「記事詳細」index を元に判断します
  * @since 2016-09-30
