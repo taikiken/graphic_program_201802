@@ -201,7 +201,13 @@ export default class SPComponentHeaderMemberSetting extends React.Component {
     return (
       <div className="user">
         <div className="preference">
+          {/*
+          UNDO_SPBL-403 【Web】記事ブックマーク / コメント機能の廃止にともなう対応
+          ログイン後のユーザーアイコンのリンク先を /settings/ に
+          2018-02-06
           <a href={Url.notifications()} className="preference-opener">
+          */}
+          <a href={Url.settings()} className="preference-opener">
             {/*
                  画像を変えてもファイル名が変わらない
                  キャッシュ問題を回避するためにDate.nowを加える
