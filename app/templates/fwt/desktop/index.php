@@ -57,6 +57,9 @@
    ga('send', 'pageview');
 
   </script>
+<?php
+include_once __DIR__ . '/../../_env.php';
+?>
 </head>
 <body>
 <div id="whole" class="whole <?php echo $page['template_classname']; ?>">
@@ -136,7 +139,7 @@
     </div><!-- /.fwt-bg-container -->
   </div><!-- /.body-sec -->
 
-<script src="/assets/js/extremesports.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 // # パンくずリスト

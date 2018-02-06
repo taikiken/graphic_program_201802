@@ -4,6 +4,7 @@
 // ==============================
 $app->group('/fwt',  function () use($app) {
 
+  $category = $app->model->get_category_by_slug('extremesports');
   $page = array(
     'title'              => 'Freeride World Tour 2018 ライブ配信',
     'site_name'          => 'スポーツブル (スポブル)',
@@ -17,6 +18,7 @@ $app->group('/fwt',  function () use($app) {
     'template'           => 'index',
     'template_classname' => 'fwt',
     'ua'                 => $app->model->property('ua'),
+    'category'           => $category,
   );
 
 
