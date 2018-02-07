@@ -198,7 +198,11 @@
 
             <div id="single-footer-container"></div>
 
-            <div id="post-content-banner"></div>
+            <?php if ( !$page['ua_app'] ) : ?>
+              <div id="post-content-banner"></div>
+            <?php else: ?>
+              <div id="post-content-banner" onclick="window.JsInterface.onBannerClick();"></div>
+            <?php endif; ?>
 
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="single-more-container">
@@ -428,7 +432,8 @@
 
     </section><!-- /.main-sec -->
   </div>
-</div><!-- /.body-sec --><script>
+</div><!-- /.body-sec -->
+<script>
   var bodyElement = document.getElementById('post-content-container');
   var bodyP = document.querySelectorAll('#post-content-container > p');
   var bodyLen = bodyP.length;
@@ -451,4 +456,13 @@
     });
   }
   showContentDFP();
+  <?php if ( $page['ua_app'] ) : ?>
+    var visual = document.getElementById('single-visual-container');
+    visual.addEventListener('touchstart', function(){
+      var video = visual.querySelector('.video-wrapper');
+      if(video) {
+        window.JsInterface.onMovieTap();
+      }
+    })
+  <?php endif; ?>
 </script>
