@@ -210,7 +210,7 @@
         <?php /*
         DFP - mobile / 記事詳細本文下 ( フォロー上 ) レクタングル
         */ ?>
-        <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp"></div>
+        <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp" data-adgene-id="/531683568/article-detail/article-detail-mobile-rectangle-B"></div>
 
 
       <?php
@@ -323,7 +323,7 @@
       <?php /*
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */ ?>
-      <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
+      <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp" data-adgene-id="/531683568/article-detail/article-detail-mobile-rectangle-C"></div>
 
       <?php
       // ----------------------------------------------------
@@ -364,8 +364,7 @@
       <?php /*
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */ ?>
-      <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>
-
+      <div id='ad-gpt-article-detail-footer' class="bnr-dfp" data-adgene-id="/531683568/article-detail/article-detail-mobile-rectangle-D"></div>
 
       <?php
       /*
@@ -433,6 +432,8 @@
       var div = document.createElement('div');
       var target = bodyP[halfIndex];
       div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
+      div.setAttribute('data-adgene-id', '/531683568/article-detail/article-detail-mobile-rectangle-A');
+      div.classList.add('bnr-dfp');
       target.parentNode.insertBefore(div, target.nextSibling);
     }
   }

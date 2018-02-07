@@ -7,5 +7,5 @@
  */
 ?>
 <!-- /531683568/mobile/mobile_index_bottom -->
-<div id='div-gpt-ad-1514446255569-0'></div>
+<div id='div-gpt-ad-1514446255569-0' class="bnr-dfp" data-adgene-id="/531683568/mobile/mobile_index_bottom"></div>
 <!-- // /531683568/mobile/mobile_index_bottom -->

@@ -41,30 +41,6 @@ $key-color: #cc141d;
     // }
   }
 
-  .headline-outer .sponsor-link,
-  .sponsor-link-ranking,
-  .sponsor-link-recommend {
-    // ref. /_src/app/assets/css/module/_index.scss line: 254
-    // ref. /_src/app/assets/css/_layout.scss line: 973
-    .adgLink {
-      .adsDescription {
-        color: #fff;
-      }
-
-      &:hover {
-        .adsDescription {
-          color: $key-color !important;
-        }
-      }
-    }
-
-    .adsTitle {
-      &,
-      .adsSponsored {
-        color: #bcb8ad !important;
-      }
-    }
-  }
 
   .widget-ranking,
   .widget-recommend {
@@ -105,42 +81,69 @@ $key-color: #cc141d;
   // }
 
   // [ class^="board-" ] {
-  .board-small {
-    .post {
-      @include link-decoration(#fff, #fff, none, none);
+  .side-sec {
 
-      &-date {
-        color: #999;
+    .headline-outer .sponsor-link,
+    .sponsor-link-ranking,
+    .sponsor-link-recommend {
+      // ref. /_src/app/assets/css/module/_index.scss line: 254
+      // ref. /_src/app/assets/css/_layout.scss line: 973
+      .adgLink {
+        .adsDescription {
+          color: #fff;
+        }
+
+        &:hover {
+          .adsDescription {
+            color: $key-color !important;
+          }
+        }
       }
 
-      &-heading {
-        color: #fff;
-      }
-
-      &-category {
-        color: #bcb8ad;
-      }
-
-      &:hover {
-        .post-heading {
-          color: $key-color !important;
+      .adsTitle {
+        &,
+        .adsSponsored {
+          color: #bcb8ad !important;
         }
       }
     }
-  }
+    .board-small {
+      .post {
+        @include link-decoration(#fff, #fff, none, none);
 
-  .board-large {
-    .board-item {
-      // border-bottom-color: #1b1b1b;
-      background-color: transparent;
+        &-date {
+          color: #999;
+        }
+
+        &-heading {
+          color: #fff;
+        }
+
+        &-category {
+          color: #bcb8ad;
+        }
+
+        &:hover {
+          .post-heading {
+            color: $key-color !important;
+          }
+        }
+      }
     }
 
-    .post {
-      @include link-decoration(#fff, null, none, none);
+    .board-large {
+      .board-item {
+        // border-bottom-color: #1b1b1b;
+        background-color: transparent;
+      }
 
-      &:hover {
-        .post-heading {
-          color: $key-color !important;
+      .post {
+        @include link-decoration(#fff, null, none, none);
+
+        &:hover {
+          .post-heading {
+            color: $key-color !important;
+          }
         }
       }
     }

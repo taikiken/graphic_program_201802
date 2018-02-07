@@ -464,6 +464,11 @@
       display: block;
       margin-top: 21px;
     }
+    .bnr-dfp {
+      background: none !important;
+      border: none;
+      padding: 0;
+    }
   } //.post-content
 
   // sponsor-link
@@ -1303,6 +1308,7 @@ body {
     // .widget-postList .board a .post-data
     .widget-postList {
       .board {
+        border-bottom: none;
         .board-item-ad-wrapper {
           #medibasspContainer {
             >div {
