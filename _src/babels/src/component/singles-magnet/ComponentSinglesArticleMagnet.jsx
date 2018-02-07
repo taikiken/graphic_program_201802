@@ -194,6 +194,7 @@ export default class ComponentSinglesArticleMagnet extends React.Component {
      * @since 2016-10-27
      */
     this.manager = SinglesHistory.factory();
+    // console.log('ComponentSinglesArticleMagnet', props.index, props.single);
     /**
      * ページ情報書換えデータを `SingleDae` から生成します
      * {@link SingleDae}
