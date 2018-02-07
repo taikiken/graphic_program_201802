@@ -265,7 +265,17 @@
       // TODO: おすすめの記事 - sidebar: recommend
       ?>
       <?php if ( $page['category']['slug'] == 'crazy' ) : ?>
-        <div id="widget-recommend-list-container"></div>
+        <div class="widget-recommend">
+          <div class="widget-postList widget-postList_popular">
+            <div class="mod-headingA01">
+              <h2>
+                <img src="/assets/sp/images/detail/ttl_recommend.png" alt="RECOMMEND"/>
+                あなたにおすすめの記事
+              </h2>
+            </div>
+            <div id="widget-recommend-list-container"></div>
+          </div>
+        </div>
       <?php else: ?>
         <?php
         /*
@@ -277,29 +287,37 @@
         */
         ?>
         <?php if ( $page['category']['label'] ) : ?>
-        <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
+          <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
         <?php endif; ?>
-
-        <?php if ( !$page['ua_app'] ) : ?>
-          <div id="_popIn_recommend_2"></div>
-          <script type="text/javascript">
-              (function() {
-                  var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-                  pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
-                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-              })();
-          </script>
-        <?php else : ?>
-          <div id="_popIn_recommend"></div>
-          <script type="text/javascript">
-              (function() {
-                  var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-                  pa.src = window.location.protocol + "//api.popin.cc/searchbox/sportsbull_app.js";
-                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-              })();
-          </script>
-        <?php endif; ?>
-
+        <div class="widget-recommend">
+          <div class="widget-postList widget-postList_popular">
+            <div class="mod-headingA01">
+              <h2>
+                <img src="/assets/sp/images/detail/ttl_recommend.png" alt="RECOMMEND"/>
+                あなたにおすすめの記事
+              </h2>
+            </div>
+            <?php if ( !$page['ua_app'] ) : ?>
+              <div id="_popIn_recommend_2"></div>
+              <script type="text/javascript">
+                  (function() {
+                      var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                      pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
+                      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+                  })();
+              </script>
+            <?php else : ?>
+              <div id="_popIn_recommend"></div>
+              <script type="text/javascript">
+                  (function() {
+                      var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                      pa.src = window.location.protocol + "//api.popin.cc/searchbox/sportsbull_app.js";
+                      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+                  })();
+              </script>
+            <?php endif; ?>
+          </div>
+        </div>
       <?php endif; ?>
 
       <?php /*

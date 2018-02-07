@@ -17,11 +17,8 @@ import View from '../../view/View';
 // import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 
 // component
-import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
+// import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
 import { SingleDae } from '../../dae/SingleDae';
-
-// ga
-import { Ga } from '../../ga/Ga';
 
 // React
 /**
@@ -159,9 +156,14 @@ export default class ComponentSingleHeader extends React.Component {
     const single = this.state.single;
     // console.log('ComponentSingleHeader.render', single);
     const user = single.user;
+    // @type {string}
+    const userName = user.userName;
     // @type {LogoDae}
     const logo = user.logo;
-    // console.log('ComponentSingleHeader.render', single);
+    // 提供元名称とロゴがなかったら表示しない
+    if (!userName && !logo.img) {
+      return null;
+    }
     return (
       <div className="single-header-root">
         <div className={`post-heading post-heading-${single.id}`}>
@@ -175,15 +177,11 @@ export default class ComponentSingleHeader extends React.Component {
           anotherCategories={single.anotherCategories}
         /> */}
         <div className="post-data">
-        <p className="post-text">
+          <p className="post-text">
             <span className="post-date">{single.displayDate}</span>
             <span className="post-category">{single.categories.label}</span>
           </p>
           <p className="post-logo">{this.logo(logo)}</p>
-          {/* <div className="f-left">
-            <p className="post-author">{single.user.userName}</p>
-            <p className="post-date">{single.displayDate}</p>
-          </div> */}
           {/* div.f-right (bookmark: on / off) */}
           {/* <BookmarkNode
             sign={this.state.sign}
