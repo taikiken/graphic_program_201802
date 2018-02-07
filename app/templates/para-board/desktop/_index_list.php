@@ -48,7 +48,7 @@ if (!empty($para_data_response)) :
           ?>
           <td class="paraboard__list__game">
             <header class="paraboard__list__game__header">
-              <span class="paraboard__widjet__list__icon"><img src="<?php echo $para_game['icon']; ?>" alt=""></span>
+              <span class="paraboard__list__icon"><img src="<?php echo $para_game['icon']; ?>" alt=""></span>
               <p class="paraboard__list__game__header__category">
                 <?php
                 echo $para_game['sport_name'];
