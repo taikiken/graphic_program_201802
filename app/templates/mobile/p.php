@@ -10,7 +10,11 @@
     // お知らせ表示
     // ref: UNDO_SPBL-150 【課題管理】一面リニューアル / ユーザーへのお知らせ表示
     ?>
-    <div id="js-announce-container"></div>
+    <?php if ( !$page['ua_app'] ) : ?>
+      <div id="js-announce-container"></div>
+    <?php else: ?>
+      <div id="js-announce-container" onclick="window.JsInterface.onInformationTap();"></div>
+    <?php endif; ?>
     <?php
     // ----------------------------------------------------
     // 記事詳細: sp
@@ -199,7 +203,11 @@
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="single-more-container">
                 <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2Fp%2F<?php echo $page['post']['id']; ?>%2F">アプリで読む</a></p>
-                <p id="btn-more-web"><span>ウェブで読む</span></p>
+                <?php if ( !$page['ua_app'] ) : ?>
+                  <p id="btn-more-web"><span>ウェブで読む</span></p>
+                <?php else: ?>
+                  <p id="btn-more-web" onclick="window.JsInterface.onExternalLinkTap();"><span>ウェブで読む</span></p>
+                <?php endif; ?>
               </div>
             <?php endif; ?>
           </div><!-- /.post-content -->
@@ -210,7 +218,7 @@
         <?php /*
         DFP - mobile / 記事詳細本文下 ( フォロー上 ) レクタングル
         */ ?>
-        <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp" data-adgene-id="/531683568/article-detail/article-detail-mobile-rectangle-B"></div>
+        <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp"></div>
 
 
       <?php
@@ -323,7 +331,7 @@
       <?php /*
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */ ?>
-      <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp" data-adgene-id="/531683568/article-detail/article-detail-mobile-rectangle-C"></div>
+      <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
 
       <?php
       // ----------------------------------------------------
@@ -364,7 +372,7 @@
       <?php /*
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */ ?>
-      <div id='ad-gpt-article-detail-footer' class="bnr-dfp" data-adgene-id="/531683568/article-detail/article-detail-mobile-rectangle-D"></div>
+      <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>
 
       <?php
       /*
@@ -432,7 +440,6 @@
       var div = document.createElement('div');
       var target = bodyP[halfIndex];
       div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
-      div.setAttribute('data-adgene-id', '/531683568/article-detail/article-detail-mobile-rectangle-A');
       div.classList.add('bnr-dfp');
       target.parentNode.insertBefore(div, target.nextSibling);
     }
