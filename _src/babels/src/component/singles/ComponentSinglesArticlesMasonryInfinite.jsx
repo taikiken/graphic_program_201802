@@ -273,7 +273,6 @@ export class ComponentSinglesArticlesMasonryInfinite extends React.Component {
         );
       }
     });
-    console.log(boardItems);
     return (
       <div
         ref={(element) => (this.boardRout = element)}
