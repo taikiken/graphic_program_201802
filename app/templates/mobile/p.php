@@ -126,12 +126,16 @@
 
             <?php else:?>
               <?php if ( $page['post']['is_readmore'] ) : ?>
-                 <p><?php echo $page['post']['description']; ?></p>
-                 <p style="text-align: center; font-weight: bold;">
-                   <a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" onclick="ga('send', 'event', 'external_link', 'click', '<?php echo $page['post']['readmore']['url']; ?>', 0, {nonInteraction: true});">
-                     続きを読む(外部サイトへ)
-                   </a>
-                 </p>
+                <?php if ( $page['post']['description'] ) : ?>
+                <p>
+                  <?php echo $page['post']['description']; ?>
+                </p>
+                <?php endif; ?>
+                <p style="text-align: center; font-weight: bold;">
+                  <a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" onclick="ga('send', 'event', 'external_link', 'click', '<?php echo $page['post']['readmore']['url']; ?>', 0, {nonInteraction: true});">
+                    続きを読む(外部サイトへ)
+                  </a>
+                </p>
               <?php else : ?>
                 <?php print_r($page['post']['body']); ?>
               <?php endif; ?>
