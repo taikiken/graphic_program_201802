@@ -775,6 +775,7 @@
         display: flex;
         max-height: 199px;
         align-items: center;
+        overflow: hidden;
         img {
           object-fit: cover;
         }
