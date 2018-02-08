@@ -484,7 +484,9 @@
     });
   }
   showContentDFP();
+
   <?php if ( $page['ua_app'] ) : ?>
+
     var visual = document.getElementById('single-visual-container');
     visual.addEventListener('touchstart', function(){
       var video = visual.querySelector('.video-wrapper');
@@ -492,5 +494,19 @@
         window.JsInterface.onMovieTap();
       }
     })
+
+
+    // WebView load 検証用
+    var WebViewCallback = function() {
+      // hide loading for app
+      window.JsInterface.onDocumentReady();
+    };
+    if ( document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll) ) {
+      WebViewCallback();
+    } else {
+      document.addEventListener("DOMContentLoaded", callback);
+    }
+
   <?php endif; ?>
+
 </script>
