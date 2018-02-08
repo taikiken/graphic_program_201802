@@ -16,7 +16,7 @@ import {CategoryAuth} from '../../action/archive/CategoryAuth';
 
 // view
 // import ViewArchiveMasonry from './ViewArchiveMasonry';
-import ViewArchiveMasonryInfinite from '../ViewArchiveMasonryInfinite';
+import ViewSingleArchiveMasonryInfinite from './ViewSingleArchiveMasonryInfinite';
 
 // view/categories
 import ViewSingleHeadlineOption from './ViewSingleHeadlineOption';
@@ -46,7 +46,7 @@ import { Safety } from '../../data/Safety';
  */
 // export class ViewCategory extends ViewArchiveMasonry {
 // @since 2016-09-16 parent class changed
-export default class ViewSingleHeadline extends ViewArchiveMasonryInfinite {
+export default class ViewSingleHeadline extends ViewSingleArchiveMasonryInfinite {
   /**
    * category 一覧表示 要 **slug**
    * @param {string} slug category slug, default 'all'

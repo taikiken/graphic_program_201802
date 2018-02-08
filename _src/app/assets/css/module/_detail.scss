@@ -771,6 +771,14 @@
       &:nth-child(-n+2) {
         margin-top: 0;
       }
+      .post-thumb {
+        display: flex;
+        max-height: 199px;
+        align-items: center;
+        img {
+          object-fit: cover;
+        }
+      }
     }
   }
 
