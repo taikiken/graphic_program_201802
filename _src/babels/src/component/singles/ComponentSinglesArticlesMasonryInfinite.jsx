@@ -25,7 +25,7 @@ import { Safety } from '../../data/Safety';
 // import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
 import ComponentCategoryLabels from '../categories/ComponentCategoryLabels';
 
-import ComponentSingleNewsAd from '../singles-content/ComponentSingleNewsAd';
+// import ComponentSingleNewsAd from '../singles-content/ComponentSingleNewsAd';
 
 // React
 /**
@@ -222,14 +222,14 @@ export class ComponentSinglesArticlesMasonryInfinite extends React.Component {
       const commentsPopular = dae.commentsPopular;
       const commentsTotal = dae.commentsCount;
       const thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
-      const AdAddIndex = (()=>{
-        let id = null;
-        if( ( i + 1 ) % 3 === 0 && i <= 31 ) {
-          id = Number(this.state.ad[adIndex]);
-          adIndex++;
-        }
-        return id;
-      })();
+      // const AdAddIndex = (()=>{
+      //   let id = null;
+      //   if( ( i + 1 ) % 3 === 0 && i <= 31 ) {
+      //     id = Number(this.state.ad[adIndex]);
+      //     adIndex++;
+      //   }
+      //   return id;
+      // })();
       boardItems.push(
         <div key={`archive-${dae.id}`} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
           <a className="post" href={dae.url}>
@@ -262,16 +262,16 @@ export class ComponentSinglesArticlesMasonryInfinite extends React.Component {
           />
         </div>
       );
-      if(AdAddIndex) {
-        boardItems.push(
-          <div key={`archive-adgene-${dae.id}`} className={`board-item board-item-adgene`}>
-            <ComponentSingleNewsAd
-              ad={AdAddIndex}
-              category={this.props.category}
-            />
-          </div>
-        );
-      }
+      // if(AdAddIndex) {
+      //   boardItems.push(
+      //     <div key={`archive-adgene-${dae.id}`} className={`board-item board-item-adgene`}>
+      //       <ComponentSingleNewsAd
+      //         ad={AdAddIndex}
+      //         category={this.props.category}
+      //       />
+      //     </div>
+      //   );
+      // }
     });
     return (
       <div
