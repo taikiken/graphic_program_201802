@@ -32,64 +32,106 @@
 
 /*
 
+## POPIN
+
+*/
+
+html.mobile .widget-recommend ._popIn_recommend_container,
+html.android .widget-recommend ._popIn_recommend_container {
+  display: none;
+}
+
+html.mobile .widget-recommend ._popIn_recommend_credit,
+html.android .widget-recommend ._popIn_recommend_credit {
+  margin-top: 40px;
+}
+
+
+
+/*
+
 adgene
 
 */
 
 /* 一面 - ヘッドライン */
-html.mobile .adgLink .adgTextContainer .adgPr {
+html.mobile .adgLink .adgTextContainer .adgPr,
+html.android .adgLink .adgTextContainer .adgPr
+{
   color: #888;
 }
 
 /* 一覧 */
-html.mobile .news-ad .adsWrapper .adsSponsored {
+html.mobile .news-ad .adsWrapper .adsSponsored,
+html.android .news-ad .adsWrapper .adsSponsored
+{
   color: #888;
 }
 
-html.mobile .news-ad .adsWrapper .adsImgContainer {
+html.mobile .news-ad .adsWrapper .adsImgContainer,
+html.android .news-ad .adsWrapper .adsImgContainer {
   width: 110px;
   height: auto;
 }
 
-html.mobile .news-ad .adsWrapper .adsImgContainer img {
+html.mobile .news-ad .adsWrapper .adsImgContainer img,
+html.android .news-ad .adsWrapper .adsImgContainer img
+{
   width: 100%;
   height: auto;
 }
 
 
 /*
-# 記事詳細 - 関連系記事表示内広告
+# 記事詳細 - 関連系記事表示内広告 - パターン1
 - 人気記事 - ID     : adg_54992
 - おすすめ記事 - ID : adg_54994
 - ニュース記事 - ID : adg_54994
+- html.mobile - iOS / html.android - Android
 */
 html.mobile #widget-ranking-container .adg-i-ico-wrapper,
+html.android #widget-ranking-container .adg-i-ico-wrapper,
 html.mobile #widget-recommend-list-container .adg-i-ico-wrapper,
-html.mobile #widget-news-list-container .adg-i-ico-wrapper {
+html.android #widget-recommend-list-container .adg-i-ico-wrapper,
+html.mobile #widget-news-list-container .adg-i-ico-wrapper,
+html.android #widget-news-list-container .adg-i-ico-wrapper
+{
   display: block;
   width: 100%;
   margin-right: 0;
 }
 
 html.mobile #widget-ranking-container .adgLink,
+html.android #widget-ranking-container .adgLink,
 html.mobile #widget-recommend-list-container .adgLink,
-html.mobile #widget-news-list-container .adgLink {
+html.android #widget-recommend-list-container .adgLink,
+html.mobile #widget-news-list-container .adgLink,
+html.android #widget-news-list-container .adgLink
+{
   display: flex;
   position: relative;
   width: 100%;
 }
 
 html.mobile #widget-ranking-container .adgLink .adgImageBox,
+html.android #widget-ranking-container .adgLink .adgImageBox,
 html.mobile #widget-recommend-list-container .adgLink .adgImageBox,
-html.mobile #widget-news-list-container .adgLink .adgImageBox {
+html.android #widget-recommend-list-container .adgLink .adgImageBox,
+html.mobile #widget-news-list-container .adgLink .adgImageBox,
+html.android #widget-news-list-container .adgLink .adgImageBox
+{
   width: 110px;
   height: auto;
   margin: 0;
 }
 
 html.mobile #widget-ranking-container .adgLink .adgImageBox img.adgImage,
+html.android #widget-ranking-container .adgLink .adgImageBox img.adgImage,
 html.mobile #widget-recommend-list-container .adgLink .adgImageBox img.adgImage,
-html.mobile #widget-news-list-container .adgLink .adgImageBox img.adgImage {
+html.android #widget-recommend-list-container .adgLink .adgImageBox img.adgImage,
+html.mobile #widget-news-list-container .adgLink .adgImageBox img.adgImage,
+html.android #widget-news-list-container .adgLink .adgImageBox img.adgImage
+{
   width: 110px;
   height: auto;
   border-radius: 3px;
@@ -98,41 +140,132 @@ html.mobile #widget-news-list-container .adgLink .adgImageBox img.adgImage {
 }
 
 html.mobile #widget-ranking-container .adgLink .adgBody,
+html.android #widget-ranking-container .adgLink .adgBody,
 html.mobile #widget-recommend-list-container .adgLink .adgBody,
-html.mobile #widget-news-list-container .adgLink .adgBody {
+html.android #widget-recommend-list-container .adgLink .adgBody,
+html.mobile #widget-news-list-container .adgLink .adgBody,
+html.android #widget-news-list-container .adgLink .adgBody
+{
   margin-top: 0;
   width: calc(100% - 120px);
   padding: 0 0 0 10px;
 }
 
 html.mobile #widget-ranking-container .adg-i-ico-wrapper .adg-i-ico,
-html.mobile #widget-recommend-list-container .adg-i-ico-wrapper .adg-i-ico {
+html.android #widget-ranking-container .adg-i-ico-wrapper .adg-i-ico,
+html.mobile #widget-recommend-list-container .adg-i-ico-wrapper .adg-i-ico,
+html.android #widget-recommend-list-container .adg-i-ico-wrapper .adg-i-ico
+{
   top: auto;
   bottom: 0;
 }
 
-html.mobile #widget-news-list-container .adg-i-ico-wrapper .adg-i-ico {
+html.mobile #widget-news-list-container .adg-i-ico-wrapper .adg-i-ico,
+html.android #widget-news-list-container .adg-i-ico-wrapper .adg-i-ico
+{
   top: auto;
   bottom: 10px;
 }
 
 
 html.mobile #widget-ranking-container .adgLink .adgBody .adgTitle,
+html.android #widget-ranking-container .adgLink .adgBody .adgTitle,
 html.mobile #widget-recommend-list-container .adgLink .adgBody .adgTitle,
-html.mobile #widget-news-list-container .adgLink .adgBody .adgTitle {
+html.android #widget-recommend-list-container .adgLink .adgBody .adgTitle,
+html.mobile #widget-news-list-container .adgLink .adgBody .adgTitle,
+html.android #widget-news-list-container .adgLink .adgBody .adgTitle
+{
   font-size: 16px;
   line-height: 1.4;
   height: auto;
 }
 
 html.mobile #widget-ranking-container .adgLink .adgBody .adgPrBox,
+html.android #widget-ranking-container .adgLink .adgBody .adgPrBox,
 html.mobile #widget-recommend-list-container .adgLink .adgBody .adgPrBox,
-html.mobile #widget-news-list-container .adgLink .adgBody .adgPrBox {
+html.android #widget-recommend-list-container .adgLink .adgBody .adgPrBox,
+html.mobile #widget-news-list-container .adgLink .adgBody .adgPrBox,
+html.android #widget-news-list-container .adgLink .adgBody .adgPrBox
+{
   color: #888;
 }
 
 html.mobile #widget-ranking-container .adgLink .adgBody .adgSponsor,
+html.android #widget-ranking-container .adgLink .adgBody .adgSponsor,
 html.mobile #widget-recommend-list-container .adgLink .adgBody .adgSponsor,
-html.mobile #widget-news-list-container .adgLink .adgBody .adgSponsor {
+html.android #widget-recommend-list-container .adgLink .adgBody .adgSponsor,
+html.mobile #widget-news-list-container .adgLink .adgBody .adgSponsor,
+html.android #widget-news-list-container .adgLink .adgBody .adgSponsor
+{
   display: none;
+}
+
+
+/*
+# 記事詳細 - 関連系記事表示内広告 - パターン2
+- html.mobile - iOS / html.android - Android
+*/
+html.mobile .post-single .news-ad .adsWrapper
+{
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+}
+
+html.mobile .post-single .news-ad .adsImgContainer
+{
+  margin-right: 10px;
+  float: left;
+}
+
+html.mobile .post-single .news-ad .adsImgContainer img
+{
+  width: 110px;
+  height: 62px;
+  object-fit: cover;
+}
+
+html.mobile .post-single .news-ad .adsTitle
+{
+  width: auto;
+  font-size: 16px;
+}
+
+html.mobile #category-container .news-ad .adsTitle
+{
+  font-size: 16px;
+}
+
+
+html.mobile .post-single .news-ad .adsSponsored
+{
+  display: block;
+  font-weight: normal;
+  width: 50%;
+  float: left;
+  margin-top: 1em;
+  font-size: 10px;
+}
+
+html.mobile #category-container .news-ad .adsDescription,
+html.mobile .post-single .news-ad .adsDescription
+{
+  display: none;
+}
+
+html.mobile .post-single .news-ad .adsButton
+{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+html.mobile .post-single .news-ad .adsButtonText
+{
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 3px;
+  color: #888;
+  font-size: 8px;
+  padding: 4px 8px;
 }
