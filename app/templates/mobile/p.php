@@ -495,20 +495,18 @@
       }
     })
 
+
     // WebView load 検証用
-    var callback = function() {
-      var body = document.getElementById('single-header-container');
-      body.insertAdjacentHTML('beforebegin','<div style="text-align: center; color:#f00;">onDocumentReady</div>');
+    var WebViewCallback = function() {
+      // hide loading for app
       window.JsInterface.onDocumentReady();
     };
-
     if ( document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll) ) {
-      callback();
+      WebViewCallback();
     } else {
       document.addEventListener("DOMContentLoaded", callback);
     }
 
   <?php endif; ?>
-
 
 </script>
