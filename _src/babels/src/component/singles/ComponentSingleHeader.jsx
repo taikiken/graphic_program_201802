@@ -20,6 +20,9 @@ import View from '../../view/View';
 // import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
 import { SingleDae } from '../../dae/SingleDae';
 
+// Ga
+import { Ga } from '../../ga/Ga';
+
 // React
 /**
  * [library] - React

@@ -72,9 +72,9 @@ export default class SPSingle {
       }
     }
     // ----------------------------
-    const singleHeaderElement = Dom.singleHeader();
-    if (singleHeaderElement !== null) {
-      const single = new UT.sp.view.SPViewSingle(articleId, singleHeaderElement, Dom.visual(), Dom.userBanner());
+    const singleVisualElement = Dom.visual();
+    if (singleVisualElement !== null) {
+      const single = new UT.sp.view.SPViewSingle(articleId, Dom.singleHeader(), singleVisualElement, Dom.userBanner());
       _viewSingle = single;
       single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
       single.start();

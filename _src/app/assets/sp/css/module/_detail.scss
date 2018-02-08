@@ -1129,6 +1129,7 @@ body {
         color: #333333;
         font-size: 11px;
         font-weight: bold;
+        white-space: nowrap;
       }
     }
     &.app {
@@ -1568,12 +1569,19 @@ html.mobile .adgLink .adgTextContainer .adgPr,
 #post-content-container {
   position: relative;
   margin-bottom: 10px;
+  // min-height: 350px;
   &.restricted {
     height: 190px;
     overflow: hidden;
   }
+  &.noevent {
+    a {
+      pointer-events: none !important;
+    }
+  }
   .single-more-container {
     position: absolute;
+    z-index: 2;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -1585,6 +1593,9 @@ html.mobile .adgLink .adgTextContainer .adgPr,
     background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 75%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 75%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    a {
+      pointer-events: auto !important;
+    }
   }
   #btn-more-app, #btn-more-web {
     height: 50px;

@@ -23,13 +23,20 @@ if ( $page['apiRoot'] != '' ) :
 </script>
 <?php endif; ?>
 <script src="/assets/sp/js/bundle/sp-exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
 <?php
 // 一面タブからの導線を増やす #2080
 // @see https://github.com/undotsushin/undotsushin/issues/2080
 // @since 2017-06-26
+//
+// WebView 記事詳細の時は不要
 ?>
-<script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
-<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<?php if ( !$page['ua_app'] && $page['template'] !== 'p' ) : ?>
+  <script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<?php endif; ?>
+
+
 <?php
 // ------------------------------------------------------------
 ?>
@@ -71,32 +78,18 @@ if( $page['ua_app'] ) {
 if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
 ?>
 <script>
-  $(window).on('resize',function(){
-    var player = videojs.getPlayers().content_video;
-    player.width(window.innerWidth);
-    player.height(Math.ceil( window.innerWidth / 16 * 9 ));
+  window.addEventListener('resize', function () {
+    if ( videojs ) {
+      var player = videojs.getPlayers().content_video;
+      player.width(window.innerWidth);
+      player.height(Math.ceil( window.innerWidth / 16 * 9 ));
+    }
   });
 </script>
 <?php
 endif;
 ?>
 
-<?php // #1992 - Teads
-if ( $page['template'] == 'p' || $page['template'] == 'comment') :
-  if ( $page['post']['is_sponserd'] === false ) :
-    echo <<<__EOL__
-<script type="text/javascript">
-    var amp_med = '2000801';
-    var amp_site = '100000667';
-    var amp_frame = '100004185';
-    var amp_rurl = document.referrer;
-    var amp_send = location.protocol + '//afs.adjust-net.jp/adserver/sp/ads_v.js?' + Math.random();
-    document.write("<scr" + "ipt type='text/javascript' src='" + amp_send + "'></scr" + "ipt>");
-</script>
-__EOL__;
-  endif;
-endif;
-?>
 
 <!-- #2737 対応 -->
 <?php if ($template_name == 'index') : ?>

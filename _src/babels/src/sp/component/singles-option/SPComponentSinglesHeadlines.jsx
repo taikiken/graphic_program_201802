@@ -137,9 +137,7 @@ export default class SPComponentSinglesHeadlines extends React.Component {
    */
   render() {
     // const { list, home, archive } = this.props;
-    const { list, home } = this.props;
-    // const ad = [35245, 42707];
-
+    const { list, home, ad } = this.props;
     if (list.length === 0) {
       return null;
     }
@@ -167,12 +165,11 @@ export default class SPComponentSinglesHeadlines extends React.Component {
               list.map((dae, i) => {
                 // const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
                 const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.THUMB_EMPTY);
-                // const adID = ( i === 0 ) ? 35245 : ( i === 3 ) ? 42707 : null;
                 let adID = null;
                 if( i === 0 ) {
-                  adID = 35245;
+                  adID = Number(ad[0]);
                 } else if( i === 3 ) {
-                  adID = 42707;
+                  adID = Number(ad[1]);
                 }
                 if(i < 5) {
                   return (

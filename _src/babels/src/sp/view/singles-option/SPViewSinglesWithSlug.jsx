@@ -248,8 +248,8 @@ export default class SPViewSinglesWithSlug extends SPViewSingleHeadline {
     // if (!!categoryInfo && !!categoryInfo.ad && !!categoryInfo.ad.sp) {
     //   adSp = categoryInfo.ad.sp;
     // }
-    const categoryInfo = this.categoryInfo;
-    const adSp = categoryInfo && categoryInfo.ad && categoryInfo.ad.sp ? categoryInfo.ad.sp : new CategoriesSlugDae({});
+    // const categoryInfo = this.categoryInfo;
+    // const adSp = categoryInfo && categoryInfo.ad && categoryInfo.ad.sp ? categoryInfo.ad.sp : new CategoriesSlugDae({});
     // let adSp = categoryInfo.ad.sp;
     // if ( !adSp ) {
     //   adSp = '';
@@ -313,6 +313,8 @@ export default class SPViewSinglesWithSlug extends SPViewSingleHeadline {
     // this._articleRendered が null の時だけ ReactDOM.render する
     if (this.articleRendered === null) {
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
+
+      const adgeneid = this.element.getAttribute('data-adgene-id').split(',');
       this.articleRendered = ReactDOM.render(
         // <SPArchiveNode
         //   list={articlesList}
@@ -334,7 +336,7 @@ export default class SPViewSinglesWithSlug extends SPViewSingleHeadline {
           callback={this.boundSafely}
           boundMore={this.boundMore}
           home={this.home}
-          adSp={adSp}
+          adSp={adgeneid}
         />,
         this.element
       );

@@ -38,7 +38,23 @@
       ?>
       <div id="js-current-post" class="current-post">
         <div class="post-detail">
-        <div id="single-header-container"></div>
+        <div class="sp-single-header">
+          <div class="post-heading">
+            <h1><?php echo $page['post']['title']; ?></h1>
+          </div>
+          <div class="post-data">
+            <p class="post-text">
+              <span class="post-date"><?php echo $page['post']['display_date'] ?></span>
+              <span class="post-category"><?php echo $page['post']['category']['label'] ?></span>
+            </p>
+            <?php if ( $page['post']['user']['logo']['link'] ) : ?>
+              <p class="post-logo"><a href="<?php echo $page['post']['user']['logo']['link']; ?>"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt="<?php echo $page['post']['user']['name']; ?>"></i></a></p>
+            <?php else: ?>
+              <p class="post-logo"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt="<?php echo $page['post']['user']['name']; ?>"></i></p>
+            <?php endif; ?>
+          </div>
+        </div>
+        <!-- <div id="single-header-container"></div> -->
           <?php
           // ----------------------------------------------------
           // 記事詳細: pc 媒体ロゴ
@@ -260,7 +276,7 @@
           <div class="pr_fb <?php if ( $page['ua_app'] ) echo 'app'; ?>">
             <h4 class="pr_fb-heading">
               <img src="/assets/sp/images/detail/post-sns-logo.png" alt="SPORTS BULL">
-              <small class="pr_f  b-heading-item">いいねして最新ニュースをチェック！</small>
+              <small class="pr_f b-heading-item" style="white-space: nowrap;">いいねして最新ニュースをチェック！</small>
             </h4>
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="post-sns-fixed">
@@ -298,7 +314,7 @@
       // TODO: ヘッドライン
       ?>
       <!-- <div id="headline-container"></div> -->
-      <div id="js-headline"></div>
+      <div id="js-headline" data-adgene-id="35245,42707"></div>
 
       <?php
       // ------------------------------------
@@ -395,7 +411,7 @@
           </h2>
         </div>
         <div class="board">
-          <div id="board-container"></div>
+          <div id="board-container" data-adgene-id="54993,54994,35245,42707"></div>
           <div id="board-container-more"></div>
         </div>
       </div>
@@ -478,8 +494,12 @@
     }
   }
   if(btnMore) {
+    bodyElement.classList.add('noevent');
     btnMore.addEventListener('touchend', function(){
       bodyElement.classList.remove('restricted');
+      setTimeout(() => {
+        bodyElement.classList.remove('noevent');
+      }, 300);
       btnContainer.parentNode.removeChild(btnContainer);
     });
   }

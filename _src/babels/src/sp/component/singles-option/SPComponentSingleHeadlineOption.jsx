@@ -109,7 +109,7 @@ export default class SPComponentHeadlineOption extends React.Component {
    * @return {?XML} 記事一覧 headline を表示するための基本コンテナを返します
    */
   render() {
-    const { list, callback, home } = this.props;
+    const { list, callback, home, ad } = this.props;
     if (list.length === 0) {
       return null;
     }
@@ -123,6 +123,7 @@ export default class SPComponentHeadlineOption extends React.Component {
               callback={callback}
               home={home}
               archive={true}
+              ad = {ad}
             />
           </div>
           {/* <ComponentHeadlineAd
