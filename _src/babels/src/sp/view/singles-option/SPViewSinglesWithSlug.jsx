@@ -243,7 +243,7 @@ export default class SPViewSinglesWithSlug extends SPViewSingleHeadline {
   render(articles) {
     // ストリーム広告 ID
     // @since 2016-09-20, categoryInfo null の時があるので変更
-    // const categoryInfo = this.categoryInfo;
+    const categoryInfo = this.categoryInfo;
     // let adSp = '';
     // if (!!categoryInfo && !!categoryInfo.ad && !!categoryInfo.ad.sp) {
     //   adSp = categoryInfo.ad.sp;
@@ -254,7 +254,7 @@ export default class SPViewSinglesWithSlug extends SPViewSingleHeadline {
     // if ( !adSp ) {
     //   adSp = '';
     // }
-    // console.log( '**** categoryInfo ', categoryInfo );
+    console.log( '**** categoryInfo ', categoryInfo );
     // 既存データ用のglobal配列
     const articlesList = this.articles;
     // 前回までの配列length
@@ -337,6 +337,7 @@ export default class SPViewSinglesWithSlug extends SPViewSingleHeadline {
           boundMore={this.boundMore}
           home={this.home}
           adSp={adgeneid}
+          category={categoryInfo.label}
         />,
         this.element
       );

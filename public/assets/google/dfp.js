@@ -183,8 +183,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var messageHandlers = webkit.messageHandlers || {};
   var onLoadComplete = messageHandlers.onLoadComplete || {};
   var postMessage = onLoadComplete.postMessage;
-   if ( typeof postMessage === 'function' ) {
-     window.webkit.messageHandlers.onLoadComplete.postMessage('');
-   }
+  if ( typeof postMessage === 'function' ) {
+    window.webkit.messageHandlers.onLoadComplete.postMessage('');
+    (window.onload = function() {
+      setTimeout(function() {
+        window.webkit.messageHandlers.onLoadComplete.postMessage('');
+      }, 3000);
+    });
+  }
 
 });
