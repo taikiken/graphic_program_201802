@@ -125,14 +125,27 @@
             ?>
 
             <?php else:?>
+              <?
+              /*
+
+              # is_readmoe : 一部の記事ではサマリのみで詳細は外部サイトで
+
+              */?>
               <?php if ( $page['post']['is_readmore'] ) : ?>
                 <?php if ( $page['post']['description'] ) : ?>
                 <p>
                   <?php echo $page['post']['description']; ?>
                 </p>
                 <?php endif; ?>
+                <?php
+                if ( !$page['ua_app'] ) :
+                  $onExternalLinkTapEvents = "ga('send', 'event', 'external_link', 'click', '".$page['post']['readmore']['url']."', 0, {nonInteraction: true});";
+                else :
+                  $onExternalLinkTapEvents = "window.JsInterface.onExternalLinkTap();";
+                endif;
+                ?>
                 <p style="text-align: center; font-weight: bold;">
-                  <a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" onclick="ga('send', 'event', 'external_link', 'click', '<?php echo $page['post']['readmore']['url']; ?>', 0, {nonInteraction: true});">
+                  <a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" onclick="<?php echo $onExternalLinkTapEvents; ?>">
                     続きを読む(外部サイトへ)
                   </a>
                 </p>
@@ -225,7 +238,7 @@
                 <?php if ( !$page['ua_app'] ) : ?>
                   <p id="btn-more-web"><span>ウェブで読む</span></p>
                 <?php else: ?>
-                  <p id="btn-more-web" onclick="window.JsInterface.onExternalLinkTap();"><span>ウェブで読む</span></p>
+                  <p id="btn-more-web"><span>ウェブで読む</span></p>
                 <?php endif; ?>
               </div>
             <?php endif; ?>
