@@ -50,7 +50,7 @@
 
           <div class="sponsor-link w728">
             <?php /* DFP */ ?>
-            <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' style='height:90px; width:728px;'></div>
+            <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' class="bnr-dfp" style='height:90px; width:728px;'></div>
           </div>
 
           <?php
@@ -110,7 +110,7 @@
               div_wrapper.setAttribute('id', 'ad-gpt-article-detail-body-wrapper');
               target.parentNode.insertBefore(div_wrapper, target.nextSibling);
               var wrap = document.getElementById('ad-gpt-article-detail-body-wrapper');
-              wrap.insertAdjacentHTML('afterbegin','<div id="div-gpt-ad-article-detail-desktop-rectangle-A"></div><div id="div-gpt-ad-article-detail-desktop-rectangle-B"></div>');
+              wrap.insertAdjacentHTML('afterbegin','<div id="div-gpt-ad-article-detail-desktop-rectangle-A" class="bnr-dfp"></div><div id="div-gpt-ad-article-detail-desktop-rectangle-B" class="bnr-dfp"></div>');
             }
           </script>
           </div><!-- /.post-content -->
@@ -181,13 +181,13 @@
           DFP - headline bottom ダブルレクタングル
           */ ?>
           <div id="ad-gpt-article-detail-headlinebottom-wrapper">
-            <div id="div-gpt-ad-article-detail-desktop-rectangle-C"></div>
-            <div id="div-gpt-ad-article-detail-desktop-rectangle-D"></div>
+            <div id="div-gpt-ad-article-detail-desktop-rectangle-C" class="bnr-dfp"></div>
+            <div id="div-gpt-ad-article-detail-desktop-rectangle-D" class="bnr-dfp"></div>
           </div>
 
 
           <div class="board-large">
-            <div id="board-container"></div><!--/archive-->
+            <div id="board-container" data-adgene-id="54994,54993,35245,42707"></div><!--/archive-->
           </div><!-- /.board-large -->
 
 
@@ -195,8 +195,8 @@
           DFP - bottom ダブルレクタングル
           */ ?>
           <div id="ad-gpt-article-detail-boardbottom-wrapper">
-            <div id="div-gpt-ad-article-detail-desktop-rectangle-E"></div>
-            <div id="div-gpt-ad-article-detail-desktop-rectangle-F"></div>
+            <div id="div-gpt-ad-article-detail-desktop-rectangle-E" class="bnr-dfp"></div>
+            <div id="div-gpt-ad-article-detail-desktop-rectangle-F" class="bnr-dfp"></div>
           </div>
 
 

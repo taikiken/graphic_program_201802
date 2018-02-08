@@ -38,7 +38,7 @@ const ReactDOM = self.ReactDOM;
  * {@link SPComponentHeadlineOption}
  * @since 2016-09-24
  */
-export default class SPViewCategoryOption extends ViewCategoryOption {
+export default class SPViewSingleHeadlineOption extends ViewCategoryOption {
   // /**
   //  * category slug を使用し API request を開始します
   //  * @param {string} [slug=all] category.slug
@@ -52,16 +52,19 @@ export default class SPViewCategoryOption extends ViewCategoryOption {
    */
   headline(category) {
     const element = Dom.headlineParent();
+    let adgeneid = [];
     if (element === null) {
       return;
+    } else {
+      adgeneid = element.getAttribute('data-adgene-id').split(',');
     }
-    // console.log('SPViewCategoryOption.headline', typeof SPComponentHeadlineOption);
+    // console.log('SPViewSingleHeadlineOption.headline', typeof SPComponentHeadlineOption);
     ReactDOM.render(
       <SPComponentSingleHeadlineOption
         list={category.headline.articles}
         callback={this.boundSafety}
         home={false}
-        ad={category.headline.ad}
+        ad={adgeneid}
         browser="sp"
         category={category}
       />,

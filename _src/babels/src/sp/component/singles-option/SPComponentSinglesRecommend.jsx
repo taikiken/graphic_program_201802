@@ -169,36 +169,28 @@ const SPComponentSinglesRecommend = ({ list, slug }) => {
    * h2を変更 + BoardAdとBoardItemの順番を変更
    */
   return (
-    <div className="widget-postList widget-postList_popular">
-      <div className="mod-headingA01">
-        <h2>
-          <img src="/assets/sp/images/detail/ttl_recommend.png" alt="RECOMMEND"/>
-          あなたにおすすめの記事
-        </h2>
-      </div>
-      <div className="board">
-        {
-          list.map((single, index) => {
-            const dae = new ArticleDae(single);
-            return (
-              <div
-                key={`sp-singles-recommend-${dae.id}`}
-                className={`singles-recommend-${index}`}
-              >
-                <BoardItem
-                  key={`singles-widget-post-list-recommend-${single.id}`}
-                  single={dae}
-                  index={index}
-                />
-                <BoardAd
-                  index={index}
-                  slug={slug}
-                />
-              </div>
-            );
-          })
-        }
-      </div>
+    <div className="board">
+      {
+        list.map((single, index) => {
+          const dae = new ArticleDae(single);
+          return (
+            <div
+              key={`sp-singles-recommend-${dae.id}`}
+              className={`singles-recommend-${index}`}
+            >
+              <BoardItem
+                key={`singles-widget-post-list-recommend-${single.id}`}
+                single={dae}
+                index={index}
+              />
+              <BoardAd
+                index={index}
+                slug={slug}
+              />
+            </div>
+          );
+        })
+      }
     </div>
   );
 };

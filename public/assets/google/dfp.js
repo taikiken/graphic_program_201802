@@ -178,5 +178,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     'ad-gpt-article-detail-footer'
   );
 
+  // for app
+  var webkit = window.webkit || {};
+  var messageHandlers = webkit.messageHandlers || {};
+  var onLoadComplete = messageHandlers.onLoadComplete || {};
+  var postMessage = onLoadComplete.postMessage;
+   if ( typeof postMessage === 'function' ) {
+     window.webkit.messageHandlers.onLoadComplete.postMessage('');
+   }
 
 });

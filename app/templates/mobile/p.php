@@ -10,7 +10,11 @@
     // お知らせ表示
     // ref: UNDO_SPBL-150 【課題管理】一面リニューアル / ユーザーへのお知らせ表示
     ?>
-    <div id="js-announce-container"></div>
+    <?php if ( !$page['ua_app'] ) : ?>
+      <div id="js-announce-container"></div>
+    <?php else: ?>
+      <div id="js-announce-container" onclick="window.JsInterface.onInformationTap();"></div>
+    <?php endif; ?>
     <?php
     // ----------------------------------------------------
     // 記事詳細: sp
@@ -34,7 +38,23 @@
       ?>
       <div id="js-current-post" class="current-post">
         <div class="post-detail">
-        <div id="single-header-container"></div>
+        <div class="sp-single-header">
+          <div class="post-heading">
+            <h1><?php echo $page['post']['title']; ?></h1>
+          </div>
+          <div class="post-data">
+            <p class="post-text">
+              <span class="post-date"><?php echo $page['post']['display_date'] ?></span>
+              <span class="post-category"><?php echo $page['post']['category']['label'] ?></span>
+            </p>
+            <?php if ( $page['post']['user']['logo']['link'] ) : ?>
+              <p class="post-logo"><a href="<?php echo $page['post']['user']['logo']['link']; ?>"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt="<?php echo $page['post']['user']['name']; ?>"></i></a></p>
+            <?php else: ?>
+              <p class="post-logo"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt="<?php echo $page['post']['user']['name']; ?>"></i></p>
+            <?php endif; ?>
+          </div>
+        </div>
+        <!-- <div id="single-header-container"></div> -->
           <?php
           // ----------------------------------------------------
           // 記事詳細: pc 媒体ロゴ
@@ -114,12 +134,40 @@
           <?php else:?>
             <div id="post-content-container" class="post-content">
           <?php endif;?>
+
             <?php if(count($page['photo']) > 0):
               // @since 2017-09-11 - メンテナンス性を上げるため `photo` 別ファイルにします
               include_once __DIR__ . '/p_photo.php';
             ?>
+
             <?php else:?>
-              <?php print_r($page['post']['body']); ?>
+              <?
+              /*
+
+              # is_readmoe : 一部の記事ではサマリのみで詳細は外部サイトで
+
+              */?>
+              <?php if ( $page['post']['is_readmore'] ) : ?>
+                <?php if ( $page['post']['description'] ) : ?>
+                <p>
+                  <?php echo $page['post']['description']; ?>
+                </p>
+                <?php endif; ?>
+                <?php
+                if ( !$page['ua_app'] ) :
+                  $onExternalLinkTapEvents = "ga('send', 'event', 'external_link', 'click', '".$page['post']['readmore']['url']."', 0, {nonInteraction: true});";
+                else :
+                  $onExternalLinkTapEvents = "window.JsInterface.onExternalLinkTap();";
+                endif;
+                ?>
+                <p style="text-align: center; font-weight: bold;">
+                  <a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" onclick="<?php echo $onExternalLinkTapEvents; ?>">
+                    続きを読む(外部サイトへ)
+                  </a>
+                </p>
+              <?php else : ?>
+                <?php print_r($page['post']['body']); ?>
+              <?php endif; ?>
             <?php endif;?>
 
             <?php if ( !$page['ua_app'] ) : ?>
@@ -194,12 +242,20 @@
 
             <div id="single-footer-container"></div>
 
-            <div id="post-content-banner"></div>
+            <?php if ( !$page['ua_app'] ) : ?>
+              <div id="post-content-banner"></div>
+            <?php else: ?>
+              <div id="post-content-banner" onclick="window.JsInterface.onBannerClick();"></div>
+            <?php endif; ?>
 
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="single-more-container">
                 <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2Fp%2F<?php echo $page['post']['id']; ?>%2F">アプリで読む</a></p>
-                <p id="btn-more-web"><span>ウェブで読む</span></p>
+                <?php if ( !$page['ua_app'] ) : ?>
+                  <p id="btn-more-web"><span>ウェブで読む</span></p>
+                <?php else: ?>
+                  <p id="btn-more-web"><span>ウェブで読む</span></p>
+                <?php endif; ?>
               </div>
             <?php endif; ?>
           </div><!-- /.post-content -->
@@ -258,14 +314,24 @@
       // TODO: ヘッドライン
       ?>
       <!-- <div id="headline-container"></div> -->
-      <div id="js-headline"></div>
+      <div id="js-headline" data-adgene-id="35245,42707"></div>
 
       <?php
       // ------------------------------------
       // TODO: おすすめの記事 - sidebar: recommend
       ?>
       <?php if ( $page['category']['slug'] == 'crazy' ) : ?>
-        <div id="widget-recommend-list-container"></div>
+        <div class="widget-recommend">
+          <div class="widget-postList widget-postList_popular">
+            <div class="mod-headingA01">
+              <h2>
+                <img src="/assets/sp/images/detail/ttl_recommend.png" alt="RECOMMEND"/>
+                あなたにおすすめの記事
+              </h2>
+            </div>
+            <div id="widget-recommend-list-container"></div>
+          </div>
+        </div>
       <?php else: ?>
         <?php
         /*
@@ -277,29 +343,37 @@
         */
         ?>
         <?php if ( $page['category']['label'] ) : ?>
-        <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
+          <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
         <?php endif; ?>
-
-        <?php if ( !$page['ua_app'] ) : ?>
-          <div id="_popIn_recommend_2"></div>
-          <script type="text/javascript">
-              (function() {
-                  var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-                  pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
-                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-              })();
-          </script>
-        <?php else : ?>
-          <div id="_popIn_recommend"></div>
-          <script type="text/javascript">
-              (function() {
-                  var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-                  pa.src = window.location.protocol + "//api.popin.cc/searchbox/sportsbull_app.js";
-                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-              })();
-          </script>
-        <?php endif; ?>
-
+        <div class="widget-recommend">
+          <div class="widget-postList widget-postList_popular">
+            <div class="mod-headingA01">
+              <h2>
+                <img src="/assets/sp/images/detail/ttl_recommend.png" alt="RECOMMEND"/>
+                あなたにおすすめの記事
+              </h2>
+            </div>
+            <?php if ( !$page['ua_app'] ) : ?>
+              <div id="_popIn_recommend_2"></div>
+              <script type="text/javascript">
+                  (function() {
+                      var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                      pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
+                      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+                  })();
+              </script>
+            <?php else : ?>
+              <div id="_popIn_recommend"></div>
+              <script type="text/javascript">
+                  (function() {
+                      var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                      pa.src = window.location.protocol + "//api.popin.cc/searchbox/sportsbull_app.js";
+                      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+                  })();
+              </script>
+            <?php endif; ?>
+          </div>
+        </div>
       <?php endif; ?>
 
       <?php /*
@@ -337,7 +411,7 @@
           </h2>
         </div>
         <div class="board">
-          <div id="board-container"></div>
+          <div id="board-container" data-adgene-id="54993,54994,35245,42707"></div>
           <div id="board-container-more"></div>
         </div>
       </div>
@@ -347,7 +421,6 @@
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */ ?>
       <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>
-
 
       <?php
       /*
@@ -403,7 +476,8 @@
 
     </section><!-- /.main-sec -->
   </div>
-</div><!-- /.body-sec --><script>
+</div><!-- /.body-sec -->
+<script>
   var bodyElement = document.getElementById('post-content-container');
   var bodyP = document.querySelectorAll('#post-content-container > p');
   var bodyLen = bodyP.length;
@@ -415,14 +489,44 @@
       var div = document.createElement('div');
       var target = bodyP[halfIndex];
       div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
+      div.classList.add('bnr-dfp');
       target.parentNode.insertBefore(div, target.nextSibling);
     }
   }
   if(btnMore) {
+    bodyElement.classList.add('noevent');
     btnMore.addEventListener('touchend', function(){
       bodyElement.classList.remove('restricted');
+      setTimeout(() => {
+        bodyElement.classList.remove('noevent');
+      }, 300);
       btnContainer.parentNode.removeChild(btnContainer);
     });
   }
   showContentDFP();
+
+  <?php if ( $page['ua_app'] ) : ?>
+
+    var visual = document.getElementById('single-visual-container');
+    visual.addEventListener('touchstart', function(){
+      var video = visual.querySelector('.video-wrapper');
+      if(video) {
+        window.JsInterface.onMovieTap();
+      }
+    })
+
+
+    // WebView load 検証用
+    var WebViewCallback = function() {
+      // hide loading for app
+      window.JsInterface.onDocumentReady();
+    };
+    if ( document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll) ) {
+      WebViewCallback();
+    } else {
+      document.addEventListener("DOMContentLoaded", WebViewCallback);
+    }
+
+  <?php endif; ?>
+
 </script>
