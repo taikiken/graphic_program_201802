@@ -6,8 +6,7 @@ include $INCLUDEPATH."local.php";
 
 $o=new db;
 $o->connect();
-
-if ($_POST["cid"] == 96)
+if ($_POST["rid"] == 95)
 {
     // 注目の選手
     $sql = sprintf("select id, name as title from tbl_player where id = %s", $_POST["id"]);
