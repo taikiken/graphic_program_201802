@@ -20,21 +20,24 @@
     @media screen and (min-width:320px) {
       .pyeongchang2018-webview {
         /*height: 710px;*/
-        height: 415px;
+        /*height: 415px;*/
+        height: 547px;
       }
     }
 
     @media screen and (min-width:321px) and ( max-width:375px) {
       .pyeongchang2018-webview {
         /*height: 752px;*/
-        height: 430px;
+        /*height: 430px;*/
+        height: 576px;
       }
     }
 
     @media screen and (min-width:376px) {
       .pyeongchang2018-webview {
         /*height: 784px;*/
-        height: 440px;
+        /*height: 440px;*/
+        height: 597px;
       }
     }
   </style>
