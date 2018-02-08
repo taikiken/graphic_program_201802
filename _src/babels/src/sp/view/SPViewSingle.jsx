@@ -123,7 +123,7 @@ export default class SPViewSingle extends ViewSingle {
     // beforeRender call
     this.executeSafely(View.BEFORE_RENDER, single);
     // output
-    this.renderHeader(single);
+    // this.renderHeader(single);
     this.renderVisual(single);
     this.renderBanner(single);
     // ---
