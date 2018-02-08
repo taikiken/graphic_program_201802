@@ -1,3 +1,4 @@
+
 <?php
 // --------------------------------------------------------
 //  記事詳細
@@ -404,12 +405,6 @@
       // TODO: 新着記事
       ?>
       <div id="widget-news-list-container">
-        <div class="mod-headingA01">
-          <h2>
-            <img src="/assets/sp/images/detail/ttl_news.png" alt="NEWS"/>
-            <?php print_r($page['post']['category']['label']); ?>の新着記事
-          </h2>
-        </div>
         <div class="board">
           <div id="board-container" data-adgene-id="54993,54994,35245,42707"></div>
           <div id="board-container-more"></div>

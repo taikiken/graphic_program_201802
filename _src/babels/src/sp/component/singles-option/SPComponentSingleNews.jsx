@@ -1,3 +1,4 @@
+
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
@@ -173,66 +174,87 @@ export default class SPComponentSingleNews extends React.Component {
       return null;
     }
 
-    const { home, adSp } = this.props;
+    const { home, adSp, category } = this.props;
     let adIndex = 0;
 
     return(
-      <div className="latest">
-        {/*
-        // 2017-12-18 トルツメ
-        <div className="latest-heading">
-          <h2 className="latest-heading-title">{Message.LATEST_TITLE}</h2>
+      <div>
+        <div className="mod-headingA01">
+          <h2>
+            <img src="/assets/sp/images/detail/ttl_news.png" alt="NEWS"/>
+            {category}の新着記事
+          </h2>
         </div>
-        */}
-        <div className="board">
-          {
-            list.map((dae, i) => {
-              const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
-              // let recommend = null;
-              // if (dae.isRecommend && props.home) {
-              //   recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
-              // }
-              // const recommend = (dae.isRecommend && home) ?
-              //   <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i> :
-              //   null;
-              // const slug = dae.categories.slug || 'x';
-              /*
-               @since 2016-12-26
-               design 変更に伴い
-               CategoryLabelNode へ追加
-               mediaType={dae.mediaType}
-               recommend={dae.isRecommend && this.props.home}
+        <div className="latest">
+          {/*
+          // 2017-12-18 トルツメ
+          <div className="latest-heading">
+            <h2 className="latest-heading-title">{Message.LATEST_TITLE}</h2>
+          </div>
+          */}
+          <div className="board">
+            {
+              list.map((dae, i) => {
+                const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
+                // let recommend = null;
+                // if (dae.isRecommend && props.home) {
+                //   recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
+                // }
+                // const recommend = (dae.isRecommend && home) ?
+                //   <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i> :
+                //   null;
+                // const slug = dae.categories.slug || 'x';
+                /*
+                @since 2016-12-26
+                design 変更に伴い
+                CategoryLabelNode へ追加
+                mediaType={dae.mediaType}
+                recommend={dae.isRecommend && this.props.home}
 
-               sp は recommend 位置が PC と元々異なっていたので今回の変更から除外、
-               recommend: false 固定にし対応します
-               */
+                sp は recommend 位置が PC と元々異なっていたので今回の変更から除外、
+                recommend: false 固定にし対応します
+                */
 
-              const AdAddIndex = (()=>{
-                let id = null;
-                if( ( i + 1 ) % 3 === 0 && i <= 31 ) {
-                  id = Number(adSp[adIndex]);
-                  adIndex++;
-                }
-                return id;
-              })();
+                const AdAddIndex = (()=>{
+                  let id = null;
+                  if( ( i + 1 ) % 3 === 0 && i <= 31 ) {
+                    id = Number(adSp[adIndex]);
+                    adIndex++;
+                  }
+                  return id;
+                })();
 
-              return (
-                <div key={`latest-${dae.id}`} className="latest-line">
-                  <div key={`latest-${dae.id}`} className="board-item">
-                    <a href={dae.url} className="post">
-                      <ComponentArticleThumbnail
-                        mediaType={dae.mediaType}
-                        thumbnail={thumbnail}
-                        title={dae.title}
-                        recommend={false}
-                        small={true}
-                      />
-                      <div className="post-data">
-                        <h3 className="post-heading">{dae.title}</h3>
-                        {/* recommend */}
-                        {/*
-                        <p className={`post-category post-category-${slug}`}>
-                          <CategoryLabelNode
+                return (
+                  <div key={`latest-${dae.id}`} className="latest-line">
+                    <div key={`latest-${dae.id}`} className="board-item">
+                      <a href={dae.url} className="post">
+                        <ComponentArticleThumbnail
+                          mediaType={dae.mediaType}
+                          thumbnail={thumbnail}
+                          title={dae.title}
+                          recommend={false}
+                          small={true}
+                        />
+                        <div className="post-data">
+                          <h3 className="post-heading">{dae.title}</h3>
+                          {/* recommend */}
+                          {/*
+                          <p className={`post-category post-category-${slug}`}>
+                            <CategoryLabelNode
+                              categories={dae.categories.all}
+                              id={`archive-label-${dae.id}`}
+                              index={i}
+                              mediaType={dae.mediaType}
+                              recommend={false}
+                              anotherCategories={dae.anotherCategories}
+                            />
+                          </p>
+                          */}
+                          <SPComponentRecommend
+                            isRecommend={dae.isRecommend}
+                            home={home}
+                          />
+                          <ComponentCategoryLabels
                             categories={dae.categories.all}
                             id={`archive-label-${dae.id}`}
                             index={i}
@@ -240,36 +262,23 @@ export default class SPComponentSingleNews extends React.Component {
                             recommend={false}
                             anotherCategories={dae.anotherCategories}
                           />
-                        </p>
-                        */}
-                        <SPComponentRecommend
-                          isRecommend={dae.isRecommend}
-                          home={home}
-                        />
-                        <ComponentCategoryLabels
-                          categories={dae.categories.all}
-                          id={`archive-label-${dae.id}`}
-                          index={i}
-                          mediaType={dae.mediaType}
-                          recommend={false}
-                          anotherCategories={dae.anotherCategories}
-                        />
-                        <p className="post-date">{dae.displayDate}</p>
-                      </div>
-                    </a>
+                          <p className="post-date">{dae.displayDate}</p>
+                        </div>
+                      </a>
+                    </div>
+                    <SPComponentSingleNewsAd
+                      index={i}
+                      length={length}
+                      uniqueId={`ad-${dae.mediaType}-${dae.id}`}
+                      // adSp={adId || ''}
+                      adSp={AdAddIndex}
+                      categories={dae.categories}
+                    />
                   </div>
-                  <SPComponentSingleNewsAd
-                    index={i}
-                    length={length}
-                    uniqueId={`ad-${dae.mediaType}-${dae.id}`}
-                    // adSp={adId || ''}
-                    adSp={AdAddIndex}
-                    categories={dae.categories}
-                  />
-                </div>
-              );
-            })
-          }
+                );
+              })
+            }
+          </div>
         </div>
       </div>
     );
