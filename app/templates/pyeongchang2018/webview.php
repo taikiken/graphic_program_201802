@@ -21,7 +21,7 @@
       .pyeongchang2018-webview {
         /*height: 710px;*/
         /*height: 415px;*/
-        height: 547px;
+        height: 526px;
       }
     }
 
@@ -29,7 +29,7 @@
       .pyeongchang2018-webview {
         /*height: 752px;*/
         /*height: 430px;*/
-        height: 576px;
+        height: 555px;
       }
     }
 
@@ -37,7 +37,7 @@
       .pyeongchang2018-webview {
         /*height: 784px;*/
         /*height: 440px;*/
-        height: 597px;
+        height: 576px;
       }
     }
   </style>
