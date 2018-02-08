@@ -37,12 +37,14 @@
 */
 
 html.mobile .widget-recommend ._popIn_recommend_container,
-html.android .widget-recommend ._popIn_recommend_container {
+html.android .widget-recommend ._popIn_recommend_container
+{
   display: none;
 }
 
 html.mobile .widget-recommend ._popIn_recommend_credit,
-html.android .widget-recommend ._popIn_recommend_credit {
+html.android .widget-recommend ._popIn_recommend_credit
+{
   margin-top: 40px;
 }
 
@@ -205,39 +207,45 @@ html.android #widget-news-list-container .adgLink .adgBody .adgSponsor
 # 記事詳細 - 関連系記事表示内広告 - パターン2
 - html.mobile - iOS / html.android - Android
 */
-html.mobile .post-single .news-ad .adsWrapper
+html.mobile .post-single .news-ad .adsWrapper,
+html.android .post-single .news-ad .adsWrapper
 {
   padding-left: 0;
   padding-right: 0;
   position: relative;
 }
 
-html.mobile .post-single .news-ad .adsImgContainer
+html.mobile .post-single .news-ad .adsImgContainer,
+html.android .post-single .news-ad .adsImgContainer
 {
   margin-right: 10px;
   float: left;
 }
 
-html.mobile .post-single .news-ad .adsImgContainer img
+html.mobile .post-single .news-ad .adsImgContainer img,
+html.android .post-single .news-ad .adsImgContainer img
 {
   width: 110px;
   height: 62px;
   object-fit: cover;
 }
 
-html.mobile .post-single .news-ad .adsTitle
+html.mobile .post-single .news-ad .adsTitle,
+html.android .post-single .news-ad .adsTitle
 {
   width: auto;
   font-size: 16px;
 }
 
-html.mobile #category-container .news-ad .adsTitle
+html.mobile #category-container .news-ad .adsTitle,
+html.android #category-container .news-ad .adsTitle
 {
   font-size: 16px;
 }
 
 
-html.mobile .post-single .news-ad .adsSponsored
+html.mobile .post-single .news-ad .adsSponsored,
+html.android .post-single .news-ad .adsSponsored
 {
   display: block;
   font-weight: normal;
@@ -248,19 +256,23 @@ html.mobile .post-single .news-ad .adsSponsored
 }
 
 html.mobile #category-container .news-ad .adsDescription,
-html.mobile .post-single .news-ad .adsDescription
+html.android #category-container .news-ad .adsDescription,
+html.mobile .post-single .news-ad .adsDescription,
+html.android .post-single .news-ad .adsDescription
 {
   display: none;
 }
 
-html.mobile .post-single .news-ad .adsButton
+html.mobile .post-single .news-ad .adsButton,
+html.android .post-single .news-ad .adsButton
 {
   position: absolute;
   right: 10px;
   bottom: 10px;
 }
 
-html.mobile .post-single .news-ad .adsButtonText
+html.mobile .post-single .news-ad .adsButtonText,
+html.android .post-single .news-ad .adsButtonText
 {
   border: 1px solid #ccc;
   background: #fff;
