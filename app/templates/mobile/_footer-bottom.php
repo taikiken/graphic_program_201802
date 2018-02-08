@@ -78,10 +78,12 @@ if( $page['ua_app'] ) {
 if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
 ?>
 <script>
-  $(window).on('resize',function(){
-    var player = videojs.getPlayers().content_video;
-    player.width(window.innerWidth);
-    player.height(Math.ceil( window.innerWidth / 16 * 9 ));
+  window.addEventListener('resize', function () {
+    if ( videojs ) {
+      var player = videojs.getPlayers().content_video;
+      player.width(window.innerWidth);
+      player.height(Math.ceil( window.innerWidth / 16 * 9 ));
+    }
   });
 </script>
 <?php
