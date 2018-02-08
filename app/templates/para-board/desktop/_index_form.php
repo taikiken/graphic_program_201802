@@ -93,9 +93,9 @@ if (!empty($pull_down_response)) :
     endif;
     // [/D]
     ?>
-      <div class="xxxxxxxxxxx">
-        <input type="submit" value="選択する" class="xxxxxxx" />
-      </div>
+      <div class="paraboard__header__search__btn">
+        <input type="submit" value="検索" class="paraboard__header__search__btn__submit" />
+      </div><!-- /.paraboard__header__search__btn -->
     </div>
   </header>
 </form>
