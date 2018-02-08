@@ -276,7 +276,7 @@
           <div class="pr_fb <?php if ( $page['ua_app'] ) echo 'app'; ?>">
             <h4 class="pr_fb-heading">
               <img src="/assets/sp/images/detail/post-sns-logo.png" alt="SPORTS BULL">
-              <small class="pr_f  b-heading-item">いいねして最新ニュースをチェック！</small>
+              <small class="pr_f b-heading-item" style="white-space: nowrap;">いいねして最新ニュースをチェック！</small>
             </h4>
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="post-sns-fixed">
