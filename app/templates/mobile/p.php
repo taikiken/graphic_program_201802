@@ -504,7 +504,7 @@
     if ( document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll) ) {
       WebViewCallback();
     } else {
-      document.addEventListener("DOMContentLoaded", callback);
+      document.addEventListener("DOMContentLoaded", WebViewCallback);
     }
 
   <?php endif; ?>
