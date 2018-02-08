@@ -464,6 +464,11 @@
       display: block;
       margin-top: 21px;
     }
+    .bnr-dfp {
+      background: none !important;
+      border: none;
+      padding: 0;
+    }
   } //.post-content
 
   // sponsor-link
@@ -758,6 +763,9 @@
         height: auto;
         // background-color: transparent;
         background: none;
+        max-height: 66px;
+        display: flex;
+        align-items: center;
         img {
           border-radius: 3px;
         }
@@ -1250,7 +1258,7 @@ body {
     }
   }
   // ランキングのスタイル
-  #widget-ranking-container {
+  #widget-ranking-container, .widget-ranking {
     .mod-headingA01 {
       background-image: url(/assets/sp/images/detail/bg_ttl_01.png);
       background-size: auto 33px;
@@ -1291,7 +1299,7 @@ body {
       }
     }
   }
-  #widget-recommend-list-container {
+  #widget-recommend-list-container, .widget-recommend {
     .mod-headingA01 {
       background-image: url(/assets/sp/images/detail/bg_ttl_03.png);
       background-size: auto 36px;
@@ -1300,6 +1308,7 @@ body {
     // .widget-postList .board a .post-data
     .widget-postList {
       .board {
+        border-bottom: none;
         .board-item-ad-wrapper {
           #medibasspContainer {
             >div {

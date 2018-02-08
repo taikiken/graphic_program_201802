@@ -10,7 +10,11 @@
     // お知らせ表示
     // ref: UNDO_SPBL-150 【課題管理】一面リニューアル / ユーザーへのお知らせ表示
     ?>
-    <div id="js-announce-container"></div>
+    <?php if ( !$page['ua_app'] ) : ?>
+      <div id="js-announce-container"></div>
+    <?php else: ?>
+      <div id="js-announce-container" onclick="window.JsInterface.onInformationTap();"></div>
+    <?php endif; ?>
     <?php
     // ----------------------------------------------------
     // 記事詳細: sp
@@ -194,12 +198,20 @@
 
             <div id="single-footer-container"></div>
 
-            <div id="post-content-banner"></div>
+            <?php if ( !$page['ua_app'] ) : ?>
+              <div id="post-content-banner"></div>
+            <?php else: ?>
+              <div id="post-content-banner" onclick="window.JsInterface.onBannerClick();"></div>
+            <?php endif; ?>
 
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="single-more-container">
                 <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2Fp%2F<?php echo $page['post']['id']; ?>%2F">アプリで読む</a></p>
-                <p id="btn-more-web"><span>ウェブで読む</span></p>
+                <?php if ( !$page['ua_app'] ) : ?>
+                  <p id="btn-more-web"><span>ウェブで読む</span></p>
+                <?php else: ?>
+                  <p id="btn-more-web" onclick="window.JsInterface.onExternalLinkTap();"><span>ウェブで読む</span></p>
+                <?php endif; ?>
               </div>
             <?php endif; ?>
           </div><!-- /.post-content -->
@@ -265,7 +277,17 @@
       // TODO: おすすめの記事 - sidebar: recommend
       ?>
       <?php if ( $page['category']['slug'] == 'crazy' ) : ?>
-        <div id="widget-recommend-list-container"></div>
+        <div class="widget-recommend">
+          <div class="widget-postList widget-postList_popular">
+            <div class="mod-headingA01">
+              <h2>
+                <img src="/assets/sp/images/detail/ttl_recommend.png" alt="RECOMMEND"/>
+                あなたにおすすめの記事
+              </h2>
+            </div>
+            <div id="widget-recommend-list-container"></div>
+          </div>
+        </div>
       <?php else: ?>
         <?php
         /*
@@ -277,29 +299,37 @@
         */
         ?>
         <?php if ( $page['category']['label'] ) : ?>
-        <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
+          <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
         <?php endif; ?>
-
-        <?php if ( !$page['ua_app'] ) : ?>
-          <div id="_popIn_recommend_2"></div>
-          <script type="text/javascript">
-              (function() {
-                  var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-                  pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
-                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-              })();
-          </script>
-        <?php else : ?>
-          <div id="_popIn_recommend"></div>
-          <script type="text/javascript">
-              (function() {
-                  var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-                  pa.src = window.location.protocol + "//api.popin.cc/searchbox/sportsbull_app.js";
-                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-              })();
-          </script>
-        <?php endif; ?>
-
+        <div class="widget-recommend">
+          <div class="widget-postList widget-postList_popular">
+            <div class="mod-headingA01">
+              <h2>
+                <img src="/assets/sp/images/detail/ttl_recommend.png" alt="RECOMMEND"/>
+                あなたにおすすめの記事
+              </h2>
+            </div>
+            <?php if ( !$page['ua_app'] ) : ?>
+              <div id="_popIn_recommend_2"></div>
+              <script type="text/javascript">
+                  (function() {
+                      var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                      pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
+                      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+                  })();
+              </script>
+            <?php else : ?>
+              <div id="_popIn_recommend"></div>
+              <script type="text/javascript">
+                  (function() {
+                      var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                      pa.src = window.location.protocol + "//api.popin.cc/searchbox/sportsbull_app.js";
+                      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+                  })();
+              </script>
+            <?php endif; ?>
+          </div>
+        </div>
       <?php endif; ?>
 
       <?php /*
@@ -347,7 +377,6 @@
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */ ?>
       <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>
-
 
       <?php
       /*
@@ -403,7 +432,8 @@
 
     </section><!-- /.main-sec -->
   </div>
-</div><!-- /.body-sec --><script>
+</div><!-- /.body-sec -->
+<script>
   var bodyElement = document.getElementById('post-content-container');
   var bodyP = document.querySelectorAll('#post-content-container > p');
   var bodyLen = bodyP.length;
@@ -415,6 +445,7 @@
       var div = document.createElement('div');
       var target = bodyP[halfIndex];
       div.setAttribute('id', 'ad-gpt-article-detail-body-insert');
+      div.classList.add('bnr-dfp');
       target.parentNode.insertBefore(div, target.nextSibling);
     }
   }
@@ -425,4 +456,13 @@
     });
   }
   showContentDFP();
+  <?php if ( $page['ua_app'] ) : ?>
+    var visual = document.getElementById('single-visual-container');
+    visual.addEventListener('touchstart', function(){
+      var video = visual.querySelector('.video-wrapper');
+      if(video) {
+        window.JsInterface.onMovieTap();
+      }
+    })
+  <?php endif; ?>
 </script>
