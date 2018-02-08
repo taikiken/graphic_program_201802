@@ -32,7 +32,12 @@ function textset($movieflag,$movieurl,$img,$txt,$caption){
     </a>
   </p>
 END_DOC;
-		$e=sprintf("<br><div style=\"position:relative;\"><a href=\"%s\" target=\"_blank\"><img src=\"/prg_img/raw/%s\" style=\"width:100%s; height:auto;\"/><i style=\"display:block;position:absolute;top:0; left:0; right:0;bottom:0; z-index:1; width:100%s; height:100%s; background:url(/assets/images/common/thumb-16x9-play.png) center center no-repeat; background-size:cover;\"></i></a></div>{$external_link}<div style=\"font-size:12px;padding-top:5px;\"><span>%s</span></div>%s",
+
+    $gorin_image =<<<END_DOC
+    <p class="powered-by pyeongchang2018-powered-by"><img src="/assets/images/pyeongchang2018/icon-powerdby_gorinjp.png" alt=""></p>
+END_DOC;
+
+		$e=sprintf("<br><div style=\"position:relative;\"><a href=\"%s\" target=\"_blank\"><img src=\"/prg_img/raw/%s\" style=\"width:100%s; height:auto;\"/><i style=\"display:block;position:absolute;top:0; left:0; right:0;bottom:0; z-index:1; width:100%s; height:100%s; background:url(/assets/images/common/thumb-16x9-play.png) center center no-repeat; background-size:cover;\"></i></a></div>{$gorin_image}{$external_link}<div style=\"font-size:12px;padding-top:5px;\"><span>%s</span></div>%s",
 		$movieurl, $img,"%","%","%",$caption,$txt);
 		$s["imgflag"]=168;
 		$s["title"]="【動画】".$s["title"];
