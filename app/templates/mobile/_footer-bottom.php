@@ -23,13 +23,20 @@ if ( $page['apiRoot'] != '' ) :
 </script>
 <?php endif; ?>
 <script src="/assets/sp/js/bundle/sp-exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
 <?php
 // 一面タブからの導線を増やす #2080
 // @see https://github.com/undotsushin/undotsushin/issues/2080
 // @since 2017-06-26
+//
+// WebView 記事詳細の時は不要
 ?>
-<script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
-<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<?php if ( !$page['ua_app'] && $page['template'] !== 'p' ) : ?>
+  <script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<?php endif; ?>
+
+
 <?php
 // ------------------------------------------------------------
 ?>
