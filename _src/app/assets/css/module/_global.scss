@@ -176,6 +176,8 @@ textarea {
   .notice-container {
     float: left;
     margin-top: 6px;
+    // UNDO_SPBL-403-abolish-comment
+    display: none;
   }
 
   .notice {
@@ -348,6 +350,10 @@ textarea {
           @at-root {
             &-item {
               border-bottom: 1px solid $border-primary-color;
+              // UNDO_SPBL-403-abolish-comment
+              &:first-child {
+                display: none;
+              }
 
               &:last-child {
                 border-bottom: none;
