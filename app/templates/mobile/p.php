@@ -118,12 +118,23 @@
           <?php else:?>
             <div id="post-content-container" class="post-content">
           <?php endif;?>
+
             <?php if(count($page['photo']) > 0):
               // @since 2017-09-11 - メンテナンス性を上げるため `photo` 別ファイルにします
               include_once __DIR__ . '/p_photo.php';
             ?>
+
             <?php else:?>
-              <?php print_r($page['post']['body']); ?>
+              <?php if ( $page['post']['is_readmore'] ) : ?>
+                 <p><?php echo $page['post']['description']; ?></p>
+                 <p style="text-align: center; font-weight: bold;">
+                   <a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" onclick="ga('send', 'event', 'external_link', 'click', '<?php echo $page['post']['readmore']['url']; ?>', 0, {nonInteraction: true});">
+                     続きを読む(外部サイトへ)
+                   </a>
+                 </p>
+              <?php else : ?>
+                <?php print_r($page['post']['body']); ?>
+              <?php endif; ?>
             <?php endif;?>
 
             <?php if ( !$page['ua_app'] ) : ?>
