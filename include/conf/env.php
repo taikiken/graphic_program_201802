@@ -92,8 +92,8 @@ if(preg_match("/undotsushin/",$servername)){
 		$USERS="/var/www/sportsbull.jp/stg/public/users";
 
 		$domain="https://stg.sportsbull.jp";
-		$ImgPath="https://img.sportsbull.jp";
-		$UserImgPath="https://img.sportsbull.jp";
+		$ImgPath="https://stg-img.sportsbull.jp";
+		$UserImgPath="https://stg-img.sportsbull.jp";
 
 		$LSCMS="legendsstadium";
 
