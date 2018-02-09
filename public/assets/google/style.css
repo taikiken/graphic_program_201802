@@ -257,8 +257,12 @@ html.android .post-single .adsWrapper
   padding-left: 0;
   padding-right: 0;
   position: relative;
-  cursor: pointer;
 }
+
+/* html.mobile .post-single .adsWrapper {
+  cursor: pointer;
+} */
+
 
 html.mobile .post-single .adsImgContainer,
 html.android .post-single .adsImgContainer
@@ -315,7 +319,7 @@ html.mobile .post-single .adsButton,
 html.android .post-single .adsButton
 {
   position: absolute;
-  right: 10px;
+  right: 0px;
   bottom: 10px;
 }
 
@@ -328,4 +332,18 @@ html.android .post-single .adsButtonText
   color: #888;
   font-size: 8px;
   padding: 4px 8px;
+}
+
+
+html.mobile .post-single #headline-container .adsButton,
+html.android .post-single #headline-container .adsButton
+{
+  display: block !important;
+  bottom: 8px;
+  right: 2%;
+}
+
+html.mobile .post-single #headline-container .adsButtonText,
+html.android .post-single #headline-container .adsButtonText {
+  padding: 2px 4px;
 }
