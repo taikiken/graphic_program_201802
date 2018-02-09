@@ -72,15 +72,19 @@ export default class SPSingle {
       }
     }
     // ----------------------------
-    const singleVisualElement = Dom.visual();
-    if (singleVisualElement !== null) {
-      const single = new UT.sp.view.SPViewSingle(articleId, Dom.singleHeader(), singleVisualElement, Dom.userBanner());
-      _viewSingle = single;
-      single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
-      single.start();
-    } else {
-      SPSingle.comment();
-    }
+    const single = new UT.sp.view.SPViewSingle(articleId, Dom.singleHeader(), Dom.visual(), Dom.userBanner());
+    _viewSingle = single;
+    single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
+    single.start();
+    // const singleVisualElement = Dom.visual();
+    // if (singleVisualElement !== null) {
+    //   const single = new UT.sp.view.SPViewSingle(articleId, Dom.singleHeader(), singleVisualElement, Dom.userBanner());
+    //   _viewSingle = single;
+    //   single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
+    //   single.start();
+    // } else {
+    //   SPSingle.comment();
+    // }
     // ----------------------------
     // read more
     const post = Dom.post();
@@ -121,7 +125,7 @@ export default class SPSingle {
     // nav current
     SPNav.start(slug);
     // comment
-    SPSingle.comment();
+    // SPSingle.comment();
     // -----------------------
     // 2016-09-28 記事詳細の次の記事のために以下削除
     // @see `/app/template/mobile/p.php#L.289`
@@ -287,7 +291,7 @@ export default class SPSingle {
 
 
   static scroll(keyword, slug, label) {
-    const windowOffsetY = window.pageYOffset;
+    // const windowOffsetY = window.pageYOffset;
     // const y = -400;
     let widget = {
       tag: {},
@@ -331,7 +335,7 @@ export default class SPSingle {
 
     const showWidget = ()=> {
       // let pos = window.pageYOffset - windowHeight;
-      let pos = window.pageYOffset;
+      // let pos = window.pageYOffset;
       if(showCnt) {
         for (let key in widget.show) {
           if ({}.hasOwnProperty.call(widget.show, key)) {

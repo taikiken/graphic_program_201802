@@ -254,7 +254,6 @@ export default class SPViewSinglesWithSlug extends SPViewSingleHeadline {
     // if ( !adSp ) {
     //   adSp = '';
     // }
-    console.log( '**** categoryInfo ', categoryInfo );
     // 既存データ用のglobal配列
     const articlesList = this.articles;
     // 前回までの配列length

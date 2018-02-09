@@ -48,6 +48,15 @@ html.android .widget-recommend ._popIn_recommend_credit
   margin-top: 40px;
 }
 
+html.undotsushin-ios .widget-recommend ._popIn_recommend_credit,
+html.undotsushin-android .widget-recommend ._popIn_recommend_credit
+{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-right: 10px;
+}
+
+
 
 
 /*
