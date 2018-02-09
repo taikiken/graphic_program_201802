@@ -198,6 +198,7 @@ export default class ViewTagsPyeongchang extends View {
    */
   static get history() {
     return [
+      20180208,
       20180209,
       20180210,
       20180211,
@@ -215,10 +216,10 @@ export default class ViewTagsPyeongchang extends View {
       20180223,
       20180224,
       20180225,
-      20180226,
-      20180227,
-      20180228,
-      20180229,
+      // 20180226,
+      // 20180227,
+      // 20180228,
+      // 20180229,
     ];
   }
   // ---------------------------------------------------
