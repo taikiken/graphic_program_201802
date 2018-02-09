@@ -93,6 +93,33 @@ html.android .news-ad .adsWrapper .adsImgContainer img
 }
 
 
+html.mobile .post-single #headline-container .adsWrapper .adsImgContainer .adsImg,
+html.android .post-single #headline-container .adsWrapper .adsImgContainer .adsImg
+{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+html.mobile .post-single #headline-container .sponsor-link .adgLink .adgImgContainer .adgImg,
+html.android .post-single #headline-container .sponsor-link .adgLink .adgImgContainer .adgImg
+{
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: cover;
+}
+
+
+html.mobile .post-single #headline-container .sponsor-link .adgLink .adgTextContainer .adgTitle,
+html.android .post-single #headline-container .sponsor-link .adgLink .adgTextContainer .adgTitle
+{
+  -webkit-line-clamp: 1;
+  margin-top: 9px;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+
 /*
 # 記事詳細 - 関連系記事表示内広告 - パターン1
 - 人気記事 - ID     : adg_54992
@@ -110,6 +137,11 @@ html.android #widget-news-list-container .adg-i-ico-wrapper
   display: block;
   width: 100%;
   margin-right: 0;
+}
+
+html.mobile #widget-news-list-container #medibasspContainer a,
+html.android #widget-news-list-container #medibasspContainer a {
+  display: table;
 }
 
 html.mobile #widget-ranking-container .adgLink,
@@ -171,12 +203,15 @@ html.android #widget-recommend-list-container .adg-i-ico-wrapper .adg-i-ico
   bottom: 0;
 }
 
+
 html.mobile #widget-news-list-container .adg-i-ico-wrapper .adg-i-ico,
 html.android #widget-news-list-container .adg-i-ico-wrapper .adg-i-ico
 {
   top: auto;
   bottom: 10px;
 }
+
+
 
 
 html.mobile #widget-ranking-container .adgLink .adgBody .adgTitle,
@@ -216,45 +251,47 @@ html.android #widget-news-list-container .adgLink .adgBody .adgSponsor
 # 記事詳細 - 関連系記事表示内広告 - パターン2
 - html.mobile - iOS / html.android - Android
 */
-html.mobile .post-single .news-ad .adsWrapper,
-html.android .post-single .news-ad .adsWrapper
+html.mobile .post-single .adsWrapper,
+html.android .post-single .adsWrapper
 {
   padding-left: 0;
   padding-right: 0;
   position: relative;
 }
 
-html.mobile .post-single .news-ad .adsImgContainer,
-html.android .post-single .news-ad .adsImgContainer
+html.mobile .post-single .adsImgContainer,
+html.android .post-single .adsImgContainer
 {
   margin-right: 10px;
   float: left;
+  line-height: 1;
+  width: auto;
 }
 
-html.mobile .post-single .news-ad .adsImgContainer img,
-html.android .post-single .news-ad .adsImgContainer img
+html.mobile .post-single .adsImgContainer img,
+html.android .post-single .adsImgContainer img
 {
   width: 110px;
   height: 62px;
   object-fit: cover;
 }
 
-html.mobile .post-single .news-ad .adsTitle,
-html.android .post-single .news-ad .adsTitle
+html.mobile .post-single .adsTitle,
+html.android .post-single .adsTitle
 {
   width: auto;
   font-size: 16px;
 }
 
-html.mobile #category-container .news-ad .adsTitle,
-html.android #category-container .news-ad .adsTitle
+html.mobile #category-container .adsTitle,
+html.android #category-container .adsTitle
 {
   font-size: 16px;
 }
 
 
-html.mobile .post-single .news-ad .adsSponsored,
-html.android .post-single .news-ad .adsSponsored
+html.mobile .post-single .adsSponsored,
+html.android .post-single .adsSponsored
 {
   display: block;
   font-weight: normal;
@@ -262,26 +299,27 @@ html.android .post-single .news-ad .adsSponsored
   float: left;
   margin-top: 1em;
   font-size: 10px;
+  color: #888;
 }
 
-html.mobile #category-container .news-ad .adsDescription,
-html.android #category-container .news-ad .adsDescription,
-html.mobile .post-single .news-ad .adsDescription,
-html.android .post-single .news-ad .adsDescription
+html.mobile #category-container .adsDescription,
+html.android #category-container .adsDescription,
+html.mobile .post-single .adsDescription,
+html.android .post-single .adsDescription
 {
   display: none;
 }
 
-html.mobile .post-single .news-ad .adsButton,
-html.android .post-single .news-ad .adsButton
+html.mobile .post-single .adsButton,
+html.android .post-single .adsButton
 {
   position: absolute;
   right: 10px;
   bottom: 10px;
 }
 
-html.mobile .post-single .news-ad .adsButtonText,
-html.android .post-single .news-ad .adsButtonText
+html.mobile .post-single .adsButtonText,
+html.android .post-single .adsButtonText
 {
   border: 1px solid #ccc;
   background: #fff;
