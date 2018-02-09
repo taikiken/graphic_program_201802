@@ -197,15 +197,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // adgene click
 // ------------------------------
-// var clickEventName = window.ontouchstart === null ? "ontouchstart" : "click";
-document.addEventListener('click', function(event) {
-  var a, href, parent;
-  parent = event.target.closest('.adsWrapper');
-  if ( parent ) {
-    a = parent.querySelector('a');
-    if ( a ) {
-      href = a.getAttribute('href');
-      window.open(href);
+var clickEventName = window.ontouchstart === null ? "ontouchstart" : "click";
+if ( SPBL_ENV.platform !== 'app_android' ) {
+  document.addEventListener(clickEventName, function(event) {
+    var a, href, parent;
+    parent = event.target.closest('.adsWrapper');
+    if ( parent ) {
+      a = parent.querySelector('a');
+      if ( a ) {
+        href = a.getAttribute('href');
+        window.open(href);
+      }
     }
-  }
-}, false);
+  }, false);
+}

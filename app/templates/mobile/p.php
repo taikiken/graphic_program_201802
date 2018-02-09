@@ -358,6 +358,8 @@
         <?php if ( $page['category']['label'] ) : ?>
           <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
         <?php endif; ?>
+
+        <?php if ( $page['ua_app'] !== 'Android' ) : ?>
         <div class="widget-recommend">
           <div class="widget-postList widget-postList_popular">
             <div class="mod-headingA01">
@@ -387,12 +389,17 @@
             <?php endif; ?>
           </div>
         </div>
+        <?php endif; ?>
+
       <?php endif; ?>
+
 
       <?php /*
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */ ?>
+      <?php if ( $page['ua_app'] !== 'Android' ) : ?>
       <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
+      <?php endif; ?>
 
       <?php
       // ----------------------------------------------------
