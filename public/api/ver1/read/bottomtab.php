@@ -61,13 +61,14 @@ if(true){
                         $tmp_child[] = [
                             'dispName'  => $child,
                             'unread'    => false,
-                            'icon'      => $ImgPath.'xxxxxx/xxxxx/xxxx/icon.png',
-                            'url'       => '/category/slug'
+                            'icon'      => $ImgPath.'/xxxxxx/xxxxx/livescore/icon.png',
+                            'url'       => '/stats/xxxxxx'
                         ];
                     }
                     $tmp_response['parent'][] = [
-                            'dispName' => $parent,
-                            'child' => $tmp_child
+                            'dispName'  => $parent,
+                            'img'       => $ImgPath.'xxxxxx/xxxxx/xxxx/bar.png',
+                            'child'     => $tmp_child
                         ];
                 }
                 break;
@@ -83,13 +84,14 @@ if(true){
                         $tmp_child[] = [
                             'dispName'  => $child,
                             'unread'    => false,
-                            'icon'      => $ImgPath.'xxxxxx/xxxxx/xxxx/icon.png',
+                            'icon'      => $ImgPath.'/xxxxxx/xxxxx/sports/icon.png',
                             'url'       => '/category/slug'
                         ];
                     }
                     $tmp_response['parent'][] = [
-                            'dispName' => $parent,
-                            'child' => $tmp_child
+                            'dispName'  => $parent,
+                            'img'       => $ImgPath.'xxxxxx/xxxxx/xxxx/bar.png',
+                            'child'     => $tmp_child
                         ];
                 }
                 break;

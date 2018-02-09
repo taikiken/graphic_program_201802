@@ -107,5 +107,5 @@ RewriteRule ^v1/auth/twitter /api/ver1/auth/twitter.php [L]
 RewriteRule ^download/([0-9]+)/([rawx0-9]+) /api/tool/img_download.php?id=$1&size=$2 [L]
 
 #BUTTOM_TAB
-RewriteRule ^v1/buttomtab /api/ver1/read/buttomtab.php [L]
+RewriteRule ^v1/bottomtab /api/ver1/read/bottomtab.php [L]
 
