@@ -20,21 +20,24 @@
     @media screen and (min-width:320px) {
       .pyeongchang2018-webview {
         /*height: 710px;*/
-        height: 415px;
+        /*height: 415px;*/
+        height: 526px;
       }
     }
 
     @media screen and (min-width:321px) and ( max-width:375px) {
       .pyeongchang2018-webview {
         /*height: 752px;*/
-        height: 430px;
+        /*height: 430px;*/
+        height: 555px;
       }
     }
 
     @media screen and (min-width:376px) {
       .pyeongchang2018-webview {
         /*height: 784px;*/
-        height: 440px;
+        /*height: 440px;*/
+        height: 576px;
       }
     }
   </style>
@@ -46,7 +49,7 @@
   include_once __DIR__ . '/../pyeongchang2018/module/_pyeongchang2018_medals.php';
   ?>
   <?php
-  /*
+  // highlight
   ?>
   <div class="gallery--highlight">
     <header class="gallery__header">
@@ -57,7 +60,8 @@
     <div id="Widget_articles_tag-1" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
   </div><!-- /.gallery--highlight -->
   <?php
-  */
+  // トルツメ解除 - UNDO_SPBL-436 【課題管理】【バックエンド】【WEB】平昌オリンピック コンテンツ制作 : リリース後対応
+  // ----
   ?>
   <div class="gallery--photo">
     <header class="gallery__header">
