@@ -13,14 +13,15 @@ set_time_limit(0);
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-$MEDIAID = 78;
+$MEDIAID = 27;
 const MEDIA_NAME = 'gorin.jp';
 const SPECIAL_CHAR = 'www.youtube.com/embed';
 # RSSファイル
 #
 #平昌
 //const RSS_FILE = 'http://dev.cocokara-next.com/feed/';
-const RSS_FILE = 'https://test.gorin.jp/staticapi/rss/sportsbull.xml';
+// const RSS_FILE = 'https://test.gorin.jp/staticapi/rss/sportsbull.xml';
+const RSS_FILE = 'https://www.gorin.jp/staticapi/rss/sportsbull.xml';
 
 $o = new db;
 $o->connect();
