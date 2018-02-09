@@ -190,6 +190,7 @@ export default class SPComponentSinglesHeadlines extends React.Component {
                         isNew={dae.isNew || false}
                       />
                       <SPComponentSingleHeadlineArticleAd
+                        index={i}
                         ad={adID}
                       />
                     </div>

@@ -48,6 +48,8 @@ export default class SPComponentSingleHeadlineArticleAd extends React.Component 
      * div.sponsor-link 広告タグ挿入 Element
      * @type {?Element}
      */
+    this.index = this.props.index;
+    this.id = this.props.ad;
     this.sponsorLink = null;
   }
   // ---------------------------------------------------
@@ -61,7 +63,7 @@ export default class SPComponentSingleHeadlineArticleAd extends React.Component 
     const element = this.sponsorLink;
     const div = document.createElement('div');
     const script = document.createElement('script');
-    script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=INFEED&async=false&async=true&tagver=2.0.0`;
+    script.src = `https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=${this.id}&targetID=${this.id + '_' + this.index}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
     div.appendChild(script);
     element.appendChild(div);
   }

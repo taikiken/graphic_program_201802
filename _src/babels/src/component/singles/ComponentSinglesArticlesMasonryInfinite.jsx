@@ -216,7 +216,7 @@ export class ComponentSinglesArticlesMasonryInfinite extends React.Component {
    * @return {XML} board-large-column を返します
    */
   render() {
-    let adIndex = 0;
+    // let adIndex = 0;
     let boardItems = [];
     this.state.list.forEach((dae, i) => {
       const commentsPopular = dae.commentsPopular;

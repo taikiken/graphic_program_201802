@@ -58,6 +58,7 @@ export default class SPViewSinglesRanking extends ViewRanking {
   render(articles) {
     // console.log('SPViewSinglesRanking.render', articles);
     // fire View.BEFORE_RENDER
+    const adgeneid = this.element.getAttribute('data-adgene-id');
     this.executeSafely(View.BEFORE_RENDER, articles, this.slug, this.label);
     // render
     ReactDOM.render(
@@ -65,6 +66,7 @@ export default class SPViewSinglesRanking extends ViewRanking {
         list={articles}
         slug={this.slug}
         label={this.label}
+        ad={adgeneid}
       />,
       this.element,
     );

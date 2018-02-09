@@ -183,62 +183,62 @@ export default class SPSingle {
    * **非ログイン**
    * <p>記事 Id 必須</p>
    */
-  // static comment() {
-  //   ++_prepared;
+  static comment() {
+    ++_prepared;
 
-  //   if (_prepared !== 2) {
-  //     return;
-  //   }
+    if (_prepared !== 2) {
+      return;
+    }
 
-  //   // user icon
-  //   // _userDae null check
-  //   //  _userDae.profilePicture undefined check
-  //   let picture = '';
-  //   if (_userDae !== null && typeof _userDae.profilePicture !== 'undefined') {
-  //     picture = _userDae.profilePicture;
-  //   }
+    // user icon
+    // _userDae null check
+    //  _userDae.profilePicture undefined check
+    let picture = '';
+    if (_userDae !== null && typeof _userDae.profilePicture !== 'undefined') {
+      picture = _userDae.profilePicture;
+    }
 
-  //   // article id
-  //   const articleId = _articleId;
-  //   const SPViewComments = UT.sp.view.SPViewComments;
+    // article id
+    const articleId = _articleId;
+    const SPViewComments = UT.sp.view.SPViewComments;
 
-  //   // comment form
-  //   const commentFormElement = Dom.commentForm();
-  //   if (commentFormElement !== null) {
-  //     const commentForm = new UT.sp.view.comment.SPViewCommentForm(commentFormElement, articleId, picture);
-  //     commentForm.start();
-  //   }
+    // comment form
+    const commentFormElement = Dom.commentForm();
+    if (commentFormElement !== null) {
+      const commentForm = new UT.sp.view.comment.SPViewCommentForm(commentFormElement, articleId, picture);
+      commentForm.start();
+    }
 
-  //   // self
-  //   const selfElement = Dom.commentSelf();
-  //   if (selfElement !== null) {
-  //     const commentSelf = new SPViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
-  //     if ( _userDae !== null ) {
-  //       commentSelf.user = _userDae;
-  //     }
-  //     commentSelf.start();
-  //   }
+    // self
+    const selfElement = Dom.commentSelf();
+    if (selfElement !== null) {
+      const commentSelf = new SPViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
+      if ( _userDae !== null ) {
+        commentSelf.user = _userDae;
+      }
+      commentSelf.start();
+    }
 
-  //   // official
-  //   const officialElement = Dom.commentOfficial();
-  //   if (officialElement !== null) {
-  //     const official = new SPViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
-  //     if (_userDae !== null) {
-  //       official.user = _userDae;
-  //     }
-  //     official.start();
-  //   }
+    // official
+    const officialElement = Dom.commentOfficial();
+    if (officialElement !== null) {
+      const official = new SPViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
+      if (_userDae !== null) {
+        official.user = _userDae;
+      }
+      official.start();
+    }
 
-  //   // normal
-  //   const normalElement = Dom.commentNormal();
-  //   if (normalElement !== null) {
-  //     const normal = new SPViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
-  //     if (_userDae !== null) {
-  //       normal.user = _userDae;
-  //     }
-  //     normal.start();
-  //   }
-  // }
+    // normal
+    const normalElement = Dom.commentNormal();
+    if (normalElement !== null) {
+      const normal = new SPViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
+      if (_userDae !== null) {
+        normal.user = _userDae;
+      }
+      normal.start();
+    }
+  }
   /**
    * single のおすすめ記事
    * @param {string} slug category.slug
@@ -291,7 +291,7 @@ export default class SPSingle {
 
 
   static scroll(keyword, slug, label) {
-    const windowOffsetY = window.pageYOffset;
+    // const windowOffsetY = window.pageYOffset;
     // const y = -400;
     let widget = {
       tag: {},
@@ -335,7 +335,7 @@ export default class SPSingle {
 
     const showWidget = ()=> {
       // let pos = window.pageYOffset - windowHeight;
-      let pos = window.pageYOffset;
+      // let pos = window.pageYOffset;
       if(showCnt) {
         for (let key in widget.show) {
           if ({}.hasOwnProperty.call(widget.show, key)) {

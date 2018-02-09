@@ -49,7 +49,7 @@
                 <span class="post-category"><?php echo $page['post']['category']['label'] ?></span>
               </p>
               <?php if ( $page['post']['user']['logo']['link'] ) : ?>
-                <p class="post-logo"><a href="<?php echo $page['post']['user']['logo']['link']; ?>"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt="<?php echo $page['post']['user']['name']; ?>"></i></a></p>
+                <p class="post-logo"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt="<?php echo $page['post']['user']['name']; ?>"></i></a></p>
               <?php else: ?>
                 <p class="post-logo"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt="<?php echo $page['post']['user']['name']; ?>"></i></p>
               <?php endif; ?>
@@ -308,14 +308,22 @@
       // ------------------------------------
       // TODO: よく読まれている記事 carousel - sidebar: ranking
       ?>
-      <div id="widget-ranking-container"></div>
+      <?php if ( $page['ua_app'] ) : ?>
+      <div id="widget-ranking-container" data-adgene-id="59626"></div>
+      <?php else: ?>
+      <div id="widget-ranking-container" data-adgene-id="59630"></div>
+      <?php endif; ?>
 
       <?php
       // ------------------------------------
       // TODO: ヘッドライン
       ?>
       <!-- <div id="headline-container"></div> -->
-      <div id="js-headline" data-adgene-id="35245,42707"></div>
+      <?php if ( $page['ua_app'] ) : ?>
+      <div id="js-headline" data-adgene-id="59625,59625"></div>
+      <?php else: ?>
+      <div id="js-headline" data-adgene-id="59629,59629"></div>
+      <?php endif; ?>
 
       <?php
       // ------------------------------------
@@ -330,7 +338,11 @@
                 あなたにおすすめの記事
               </h2>
             </div>
-            <div id="widget-recommend-list-container"></div>
+            <?php if ( $page['ua_app'] ) : ?>
+              <div id="widget-recommend-list-container" data-adgene-id="59624,59624"></div>
+            <?php else: ?>
+              <div id="widget-recommend-list-container" data-adgene-id="59628,59628"></div>
+            <?php endif; ?>
           </div>
         </div>
       <?php else: ?>
@@ -406,7 +418,11 @@
       ?>
       <div id="widget-news-list-container">
         <div class="board">
-          <div id="board-container" data-adgene-id="54993,54994,35245,42707"></div>
+          <?php if ( $page['ua_app'] ) : ?>
+          <div id="board-container" data-adgene-id="59623,59623,59623,59623,59623,59623,59623,59623"></div>
+          <?php else: ?>
+          <div id="board-container" data-adgene-id="59627,59627,59627,59627,59627,59627,59627,59627"></div>
+          <?php endif; ?>
           <div id="board-container-more"></div>
         </div>
       </div>
