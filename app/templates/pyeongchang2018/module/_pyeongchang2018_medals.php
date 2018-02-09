@@ -79,9 +79,17 @@ $medal_date = DateTime::createFromFormat('Y-m-d H:i', $decoded->update);
         </tr>
       </tbody>
     </table>
+    <?php
+    /*
+     https://aws-plus.backlog.jp/view/UNDO_SPBL-436#comment-1189116446
+    // 合計メダル数 トルツメ
+    ?>
     <p class="medal_list__medal_total">合計<span><?php
         // 合計メダル数
         echo $decoded->medal->gold + $decoded->medal->silver + $decoded->medal->bronze;
         ?></span></p>
+    <?php
+    */
+    ?>
   </div><!-- /.medal_list__medals -->
 </div><!-- /.medal_list -->
