@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 // adgene click
 // ------------------------------
 var clickEventName = window.ontouchstart === null ? "ontouchstart" : "click";
-if ( SPBL_ENV.platform !== 'app_android' ) {
+if ( SPBL_ENV.platform === 'web_mobile' ) {
   document.addEventListener(clickEventName, function(event) {
     var a, href, parent;
     parent = event.target.closest('.adsWrapper');
