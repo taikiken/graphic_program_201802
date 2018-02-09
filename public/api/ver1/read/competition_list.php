@@ -103,7 +103,7 @@ foreach ($o->fetch_all() as $f) {
 
     //各記事のactive確認
     $types = array('highlight_movie', 'news', 'photo_gallery');
-    $sql = sprintf('select distinct type from articles_competitions where competition_id = %s order by type asc;',$f['id']);
+    $sql = sprintf('select distinct type from competition_articles where competition_id = %s order by type asc;',$f['id']);
     $o->query($sql);
     while ($fetch = $o->fetch_array()){
         $type_list[] = $fetch['type'];

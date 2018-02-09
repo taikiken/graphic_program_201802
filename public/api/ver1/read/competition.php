@@ -89,7 +89,7 @@ SELECT
     acmp.article_id,
     acmp.type
 FROM
-    articles_competitions acmp
+    competition_articles acmp
 WHERE
     acmp.competition_id = {$id}
 AND
@@ -120,6 +120,14 @@ SQL;
                 break;
         }
     }
+
+    //初期値設定
+    $response['pc']['highlight_movie'] = [];
+    $response['sp']['highlight_movie'] = [];
+    $response['pc']['news'] = [];
+    $response['sp']['news'] = [];
+    $response['pc']['photo_gallery'] = [];
+    $response['sp']['photo_gallery'] = [];
 
     //取得したidから記事データ取得
     foreach ($articles_list as $key => $value) {
