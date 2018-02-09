@@ -584,49 +584,60 @@
       font-weight: bold;
       font-size: fz(16);
 
-      &:before {
-        content: "";
+      //.paraboard__detail__header__category__icon
+      &__icon {
         display: inline-block;
-        width: 40px;
-        height: 40px;
         margin-right: 6px;
-        background-position: 0 0;
-        background-repeat: no-repeat;
-        @include hide-text;
         vertical-align: middle;
+
+        img {
+          width: 40px;
+        }
       }
 
-      &.paraboard__detail__header__category--basketball:before {
-        background-image: url(/assets/images/para-board/icon-basketball.png);
-      }
+      // &:before {
+      //   content: "";
+      //   display: inline-block;
+      //   width: 40px;
+      //   height: 40px;
+      //   margin-right: 6px;
+      //   background-position: 0 0;
+      //   background-repeat: no-repeat;
+      //   @include hide-text;
+      //   vertical-align: middle;
+      // }
 
-      &.paraboard__detail__header__category--goalball:before {
-        background-image: url(/assets/images/para-board/icon-goalball.png);
-      }
+      // &.paraboard__detail__header__category--basketball:before {
+      //   background-image: url(/assets/images/para-board/icon-basketball.png);
+      // }
 
-      &.paraboard__detail__header__category--rugby:before {
-        background-image: url(/assets/images/para-board/icon-rugby.png);
-      }
+      // &.paraboard__detail__header__category--goalball:before {
+      //   background-image: url(/assets/images/para-board/icon-goalball.png);
+      // }
 
-      &.paraboard__detail__header__category--soccer:before {
-        background-image: url(/assets/images/para-board/icon-soccer.png);
-      }
+      // &.paraboard__detail__header__category--rugby:before {
+      //   background-image: url(/assets/images/para-board/icon-rugby.png);
+      // }
 
-      &.paraboard__detail__header__category--swimming:before {
-        background-image: url(/assets/images/para-board/icon-swimming.png);
-      }
+      // &.paraboard__detail__header__category--soccer:before {
+      //   background-image: url(/assets/images/para-board/icon-soccer.png);
+      // }
 
-      &.paraboard__detail__header__category--tennis:before {
-        background-image: url(/assets/images/para-board/icon-tennis.png);
-      }
+      // &.paraboard__detail__header__category--swimming:before {
+      //   background-image: url(/assets/images/para-board/icon-swimming.png);
+      // }
 
-      &.paraboard__detail__header__category--track:before {
-        background-image: url(/assets/images/para-board/icon-track.png);
-      }
+      // &.paraboard__detail__header__category--tennis:before {
+      //   background-image: url(/assets/images/para-board/icon-tennis.png);
+      // }
 
-      &.paraboard__detail__header__category--volleyball:before {
-        background-image: url(/assets/images/para-board/icon-volleyball.png);
-      }
+      // &.paraboard__detail__header__category--track:before {
+      //   background-image: url(/assets/images/para-board/icon-track.png);
+      // }
+
+      // &.paraboard__detail__header__category--volleyball:before {
+      //   background-image: url(/assets/images/para-board/icon-volleyball.png);
+      // }
     } //.paraboard__detail__header__category
 
     &.result_enable {

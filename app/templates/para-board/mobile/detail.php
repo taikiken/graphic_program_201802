@@ -26,8 +26,8 @@ $competition_response_file_enable = !empty($competition_response_file);
   <p class="paraboard__detail__header__logo"><img src="/assets/images/para-board/detail-heading.png" alt="PARA BOARD"></p>
   <h1 class="paraboard__detail__header__heading"><?php echo $competition_response['competition_name']; ?></h1>
   <p class="paraboard__detail__header__category">
-    <span class="paraboard__detail__header__category_icon"><img src="<?php echo $competition_response['icon']; ?>" alt=""></span>
-    <span class="paraboard__detail__header__category_label"><?php echo $competition_response['sport_name']; ?></span>
+    <span class="paraboard__detail__header__category__icon"><img src="<?php echo $competition_response['icon']; ?>" alt=""></span>
+    <span class="paraboard__detail__header__category__label"><?php echo $competition_response['sport_name']; ?></span>
   </p>
 </header>
 <?php
