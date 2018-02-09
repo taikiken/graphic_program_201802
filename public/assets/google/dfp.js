@@ -193,3 +193,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
 });
+
+
+// adgene click
+// ------------------------------
+var clickEventName = window.ontouchend === null ? "touchend" : "click";
+document.addEventListener(clickEventName, function(event) {
+  var a, href, parent;
+  parent = event.target.closest('.adsWrapper');
+  if ( parent ) {
+    a = parent.querySelector('a');
+    if ( a ) {
+      href = a.getAttribute('href');
+      window.location = href;
+    }
+  }
+}, false);
