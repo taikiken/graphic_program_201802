@@ -173,6 +173,10 @@ for($i=0;$i<count($p);$i++){
   </td>
 </tr>
 <tr>
+<td class="menuChild">
+  <a href="/editdm/pyeongchang/medals">平昌五輪メダル</a>
+</td>
+</tr>
 
 </tbody>
 </table>

@@ -51,7 +51,7 @@ const playMark = (mediaType) => {
  * 記事詳細 JSON.response.recommend_articles から出力します
  * @since 2016-09-30
  */
-export class ComponentSinglesWidgetRecommend extends React.Component {
+export default class ComponentSinglesWidgetRecommend extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

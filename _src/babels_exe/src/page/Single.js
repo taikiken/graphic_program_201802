@@ -19,7 +19,15 @@ import Nav from '../ui/Nav';
 // let _symbol = Symbol();
 
 // UT
+/**
+ * [library] - UT
+ * @type {UT}
+ */
 const UT = self.UT;
+/**
+ * [library] - UT.app.Dom
+ * @type {Dom}
+ */
 const Dom = UT.app.Dom;
 
 /**
@@ -27,15 +35,35 @@ const Dom = UT.app.Dom;
  * @type {number}
  * @private
  */
-let _prepared = 0;
-let _singleDae = null;
-let _userDae = null;
-let _viewSingle = null;
-let _headerUser = null;
+let innerPrepared = 0;
+/**
+ * SingleDae
+ * @type {?*}
+ * @private
+ */
+let innerSingleDae = null;
+/**
+ * UserDae
+ * @type {?*}
+ * @private
+ */
+let innerUserDae = null;
+/**
+ * ViewSingle
+ * @type {?*}
+ * @private
+ */
+let innerViewSingle = null;
+/**
+ * HeaderUser
+ * @type {?*}
+ * @private
+ */
+let innerHeaderUser = null;
 
 /**
- * <p>Single(detail)記事詳細</p>
- * 全て static です
+ * Single(detail)記事詳細
+ * - 全て static です
  */
 export default class Single {
   // /**
@@ -54,26 +82,25 @@ export default class Single {
    * @param {number} articleId 記事 Id (:article_id)
    */
   static start(articleId) {
-
     // header
     // header.user
     const profileElement = Dom.profile();
     let headerUser = null;
     if (profileElement !== null) {
-      headerUser = new UT.view.header.ViewHeaderUser( profileElement );
+      headerUser = new UT.view.header.ViewHeaderUser(profileElement);
       if (UT.app.User.sign) {
         // login user はコメント投稿可能 -> 表示アイコン必要
-        _headerUser = headerUser;
-        headerUser.on( UT.view.View.BEFORE_RENDER, Single.onHeader );
+        innerHeaderUser = headerUser;
+        headerUser.on(UT.view.View.BEFORE_RENDER, Single.onHeader);
       } else {
         // 非ログインユーザーはアイコン取得いらない
-        ++_prepared;
+        ++innerPrepared;
       }
       headerUser.start();
 
       const modalElement = Dom.logoutModal();
       if (modalElement !== null) {
-        const modal = new UT.view.modal.ViewLogoutModal( modalElement );
+        const modal = new UT.view.modal.ViewLogoutModal(modalElement);
         modal.start();
       }
     }
@@ -90,7 +117,7 @@ export default class Single {
 
     if (singleHeaderElement !== null && elements.footer !== null) {
       const single = new UT.view.ViewSingle(articleId, singleHeaderElement, elements);
-      _viewSingle = single;
+      innerViewSingle = single;
       single.on(UT.view.View.BEFORE_RENDER, Single.before);
       single.start();
     }
@@ -98,26 +125,26 @@ export default class Single {
   }
   /**
    * header View.BEFORE_RENDER event handler
-   * <p>ユーザー: アイコン, Id 取得のために event を bind し情報を取得します</p>
+   * - ユーザー: アイコン, Id 取得のために event を bind し情報を取得します
    * @param {Object} event event object
    */
   static onHeader(event) {
     // console.log('EX:Single.onHeader event', event);
-    _headerUser.off(UT.view.View.BEFORE_RENDER, Single.onHeader);
-    _userDae = event.args[0];
+    innerHeaderUser.off(UT.view.View.BEFORE_RENDER, Single.onHeader);
+    innerUserDae = event.args[0];
     Single.comment();
   }
   /**
    * single View.BEFORE_RENDER event handler
-   * <p>記事所属カテゴリ取得のために event を bind</p>
+   * - 記事所属カテゴリ取得のために event を bind
    * @param {Object} event event object
    */
   static before(event) {
     // console.log('EX:Single.before event', event);
-    _viewSingle.off(UT.view.View.BEFORE_RENDER, Single.before);
+    innerViewSingle.off(UT.view.View.BEFORE_RENDER, Single.before);
 
     const single = event.args[0];
-    _singleDae = single;
+    innerSingleDae = single;
 
     // let slug = single.category.slug;
     // let slug = single.categories.all[0].slug;
@@ -145,16 +172,16 @@ export default class Single {
   }
   /**
    * **ログイン**
-   * <p>ユーザー情報, 記事 Id 必須</p>
+   * - ユーザー情報, 記事 Id 必須
    *
    * **非ログイン**
-   * <p>記事 Id 必須</p>
+   * - 記事 Id 必須
    */
   static comment() {
-    ++_prepared;
+    ++innerPrepared;
     // console.log('EX:Single.comment _prepared', _prepared);
 
-    if (_prepared !== 2) {
+    if (innerPrepared !== 2) {
       return;
     }
 
@@ -162,12 +189,12 @@ export default class Single {
     // _userDae null check
     //  _userDae.profilePicture undefined check
     let picture = '';
-    if (_userDae !== null && typeof _userDae.profilePicture !== 'undefined') {
-      picture = _userDae.profilePicture;
+    if (innerUserDae !== null && typeof innerUserDae.profilePicture !== 'undefined') {
+      picture = innerUserDae.profilePicture;
     }
 
     // article id
-    const articleId = _singleDae.id;
+    const articleId = innerSingleDae.id;
     const ViewComments = UT.view.ViewComments;
 
     // comment form
@@ -183,8 +210,8 @@ export default class Single {
     // console.log('EX:Single.comment selfElement', selfElement);
     if (selfElement !== null) {
       const commentSelf = new ViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
-      if (_userDae !== null) {
-        commentSelf.user = _userDae;
+      if (innerUserDae !== null) {
+        commentSelf.user = innerUserDae;
       }
       commentSelf.start();
     }
@@ -194,8 +221,8 @@ export default class Single {
     // console.log('EX:Single.comment officialElement', officialElement);
     if (officialElement !== null) {
       const official = new ViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
-      if (_userDae !== null) {
-        official.user = _userDae;
+      if (innerUserDae !== null) {
+        official.user = innerUserDae;
       }
       official.start();
     }
@@ -205,8 +232,8 @@ export default class Single {
     // console.log('EX:Single.comment normalElement', normalElement);
     if (normalElement !== null) {
       const normal = new ViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
-      if (_userDae !== null) {
-        normal.user = _userDae;
+      if (innerUserDae !== null) {
+        normal.user = innerUserDae;
       }
       normal.start();
     }

@@ -109,6 +109,11 @@ export default class SPComponentArticleAd extends React.Component {
    * @return {?XML} 広告 tag を返します
    */
   render() {
+    // ストリーム広告
+    // ID 設定がなかったら出力しない
+    if (!this.props.adSp) {
+      return null;
+    }
     // 六大学 / 広告表示 調整（Web） #1546
     // > アドネットワーク関連の広告（ネイティブアド？）を消したい
     // @see https://github.com/undotsushin/undotsushin/issues/1546
@@ -117,11 +122,6 @@ export default class SPComponentArticleAd extends React.Component {
     const big6tv = this.props.categories.bySlug('big6tv');
     // console.log('SPComponentArticleAd.render', big6tv, this.props);
     if (big6tv) {
-      return null;
-    }
-    // ストリーム広告
-    // ID 設定がなかったら出力しない
-    if (!this.props.adSp) {
       return null;
     }
     // // 出力は1回だけ

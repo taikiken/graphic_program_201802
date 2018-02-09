@@ -52,6 +52,7 @@ import { Page } from '../../singles/head/Page';
 const React = self.React;
 
 /**
+ * @TODO future remove - not use
  * PC: 記事詳細「次の記事」一覧を出力します
  *
  * <pre>

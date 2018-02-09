@@ -20,6 +20,8 @@ import {MediaVideoNode} from './MediaVideoNode';
 let React = self.React;
 
 /**
+ * @deprecated 2018-01-12 instead use {@link ComponentMedia}
+ * @TODO future remove
  * <p>記事詳細 メインビジュアル<br>
  * 画像・動画 切替て表示します</p>
  *
@@ -45,7 +47,7 @@ export let MediaNode = React.createClass( {
     index: React.PropTypes.number
   },
   render: function() {
-
+    console.warn('MediaNode deprecated instead use ComponentMedia', this.props.articleId);
     let mediaType = this.props.mediaType;
     let media = this.props.media;
 

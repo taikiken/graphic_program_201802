@@ -63,6 +63,7 @@ export default class SPViewHeadLine extends ViewHeadline {
     // @since 2016-09-16
     // headline output changed
     const list = articles.map((article) => new ArticleDae(article));
+    // console.log('SPViewHeadLine.render', articles, list);
     // -------------------------------
     // since 2017-12-18
     // `#js-headline-last-container` 取得
@@ -88,4 +89,35 @@ export default class SPViewHeadLine extends ViewHeadline {
       this.element,
     );
   }// render
+  /**
+   * 平昌 - home と同じ特殊レイアウト用の出力関数
+   * @param {Array.<RelatedDae>} list 出力リスト - 変換済み
+   * @since 2018-01-21
+   */
+  renderByRelated(list) {
+    // -------------------------------
+    // since 2017-12-18
+    // `#js-headline-last-container` 取得
+    const lastElement = Dom.headlineLast();
+    // element 存在するときは `list` 配列最後を取り出し表示に使用する
+    const last = lastElement ? list.pop() : null;
+    if (last) {
+      ReactDOM.render(
+        <SPComponentHeadlineArticleLast
+          dae={last}
+          index={list.length + 1}
+        />,
+        lastElement,
+      );
+    }
+    // -------------------------------
+    ReactDOM.render(
+      <SPComponentHeadlines
+        list={list}
+        callback={this.boundSafely}
+        ad={this.ad}
+      />,
+      this.element,
+    );
+  }
 }

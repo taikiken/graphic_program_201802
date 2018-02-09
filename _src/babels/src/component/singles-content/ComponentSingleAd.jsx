@@ -24,7 +24,7 @@ const React = self.React;
  * @TODO: 広告IDが同じで表示できない様子、要確認
  * @since 2016-11-04
  */
-export class ComponentSingleAd extends React.Component {
+export default class ComponentSingleAd extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

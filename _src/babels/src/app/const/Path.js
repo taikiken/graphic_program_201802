@@ -93,6 +93,14 @@ export class Path {
   static get USER() {
     return Path.USER_ID;
   }
+  /**
+   * TAG_DATE - 平昌オリンピック tag select
+   * @returns {string} TAG_DATE を返します
+   * @since 2018-01-09 平昌オリンピック tag select
+   */
+  static get TAG_DATE() {
+    return 'TAG_DATE';
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------

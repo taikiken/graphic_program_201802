@@ -14,7 +14,7 @@ use Guzzle\Http\EntityBody;
 */
 
 class S3Module {
-	
+
 	private $bucket = "";
 	// AWSのキー名
 	private $keyId = "";
@@ -29,9 +29,9 @@ class S3Module {
 	* 空の場合、ファイルが存在しない時は例外が発生します。
 	* $uploadFileNameにはアップロード後のファイル名を指定します。
 	*/
-	
+
 	public function upload($localFilePath, $uploadFileName) {
-		
+
 		// パスのチェック　ファイルパスが空ではないか？
 		if (empty($localFilePath)) {
 			throw new Exception('ファイルアップロード::パスが見つかりません。');
@@ -63,13 +63,13 @@ class S3Module {
 		// ファイルを置く。
 		$result = $s3Object->putObject($uploadInfo);
 		return $result;
-	}
+  }
 
 	/**
 	* 指定したS3上のファイル名のオブジェクトを削除します。
 	*/
 	public function delete($s3FileName) {
-		
+
 		// パスのチェック　ファイルパスが空ではないか？
 		if (empty($s3FileName)) {
 			throw new Exception('ファイル削除::S3ファイル名が見つかりません。');
@@ -140,7 +140,7 @@ class S3Module {
 	* regionは使っているリージョンを設定する。
 	*/
 	private function getS3ClientInstance($keyId, $secretKey, $region, $sdkVersion = 'latest') {
-		
+
 		global $bucket;
 
 		// 設定配列を作っています。S3オブジェクト生成用のオプションです。
@@ -211,7 +211,7 @@ $client = new Aws\S3\S3Client([
 $client->registerStreamWrapper();
 
 function s3upload($from,$to){
-	global $domain;	
+	global $domain;
 	if($domain=="http://ut")return;
 	$s3i=new S3Module;
 	return $s3i->upload($from,$to);
