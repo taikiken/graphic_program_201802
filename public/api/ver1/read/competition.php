@@ -5,8 +5,7 @@ include "public/check.php";
 
 $id = bind($_REQUEST["id"]);
 
-$y = [];
-$response = [];
+$response = null;
 $week_list = array('日', '月', '火', '水', '木', '金', '土');
 
 $o = new db;
@@ -34,7 +33,7 @@ SQL;
 $o->query($sql);
 $f = $o->fetch_array();
 
-if(strlen($f["name"])>0){
+if($f){
     $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
 
     //開始日
@@ -168,17 +167,9 @@ SQL;
 
         }
     }
-
-    $y["status"]["code"] = 200;
-    $y["status"]["user_message"] = "";
-    $y["status"]["developer_message"] = "";
-    $y["response"] = $response;
-
-} else {
-    $y["status"]["code"] = 404;
-    $y["status"]["user_message"] = "指定された大会は存在しません。";
-    $y["status"]["developer_message"] = "指定された大会は存在しません。";
 }
+
+    $y["response"] = $response;
 
 print_json($y, $_SERVER['HTTP_REFERER']);
 

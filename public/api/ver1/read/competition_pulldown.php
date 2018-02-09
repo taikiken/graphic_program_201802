@@ -3,8 +3,7 @@
 include "local.php";
 include "public/check.php";
 
-$y = [];
-$response = [];
+$response = null;
 $response_flag = false;
 
 $o = new db;
@@ -29,15 +28,10 @@ if($response_flag){
     $response['year'] = array_values(array_unique($year_list));
     $response['sports'] = $sports_list;
 
-    $y["status"]["code"] = 200;
-    $y["status"]["user_message"] = "";
-    $y["status"]["developer_message"] = "";
-    $y["response"] = $response;
-}else{
-    $y["status"]["code"] = 404;
-    $y["status"]["user_message"] = "大会情報が存在しません。";
-    $y["status"]["developer_message"] = "大会情報が存在しません。。";
 }
+
+$y["response"] = $response;
+
 print_json($y, $_SERVER['HTTP_REFERER']);
 
 ?>

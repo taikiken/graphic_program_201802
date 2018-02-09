@@ -3,8 +3,7 @@
 include "local.php";
 include "public/check.php";
 
-$y = [];
-$response = [];
+$response = null;
 $recent_flag = false;
 $response_flag = false;
 $week_list = array('日', '月', '火', '水', '木', '金', '土');
@@ -69,7 +68,6 @@ ORDER BY
 
 $o->query($sql);
 foreach ($o->fetch_all() as $f) {
-    if($response_flag === false) {$response_flag = true ;}
 
     $active_list = [];
     $type_list = [];
@@ -125,17 +123,8 @@ foreach ($o->fetch_all() as $f) {
 
 }
 
-    if($response_flag){
-        $y["status"]["code"] = 200;
-        $y["status"]["user_message"] = "";
-        $y["status"]["developer_message"] = "";
-        $y["response"] = $response;
-        
-    }else{
-        $y["status"]["code"] = 404;
-        $y["status"]["user_message"] = "指定された大会は存在しません。";
-        $y["status"]["developer_message"] = "指定された大会は存在しません。";
-    }
+$y["response"] = $response;
+
 print_json($y, $_SERVER['HTTP_REFERER']);
 
 ?>
