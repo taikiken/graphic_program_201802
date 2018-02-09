@@ -12,7 +12,7 @@
     <img src="/assets/images/fwt/poster-Cancel.jpg" alt=""> -->
   <!-- 動画配信中 -->
   <div class="fwt-streaming__movie-wrap">
-    <iframe src="https://www.youtube.com/embed/kMy5STjWfl4?showinfo=0" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/CFvhWe9RIjA?showinfo=0" frameborder="0" allowfullscreen></iframe>
   </div>
 
   <!-- テスト用ライブ動画
