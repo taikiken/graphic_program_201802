@@ -59,7 +59,7 @@ const React = self.React;
  * @constructor
  * @since 2017-09-13
  */
-const CarouselAd = ({ slug, index }) => {
+const CarouselAd = ({ slug, index, ad }) => {
   // console.log('CarouselAd', slug, index, length);
   if (slug === 'big6tv') {
     return null;
@@ -76,6 +76,7 @@ const CarouselAd = ({ slug, index }) => {
     return (
       <SPComponentSingleRankingAd
         index={index}
+        ad={ad}
       />
     );
   }
@@ -266,7 +267,7 @@ class SPRankingCarousel extends React.Component {
    */
   render() {
     // containers = 0;
-    const { articles, slug, length } = this.props;
+    const { articles, slug, length, ad } = this.props;
     // const { articles } = this.props;
     // console.log('SPRankingCarousel.render', this.state);
     // return null;
@@ -296,6 +297,7 @@ class SPRankingCarousel extends React.Component {
                     slug={slug}
                     index={index}
                     length={length}
+                    ad={ad}
                   />
                 </span>
               );
@@ -322,7 +324,7 @@ class SPRankingCarousel extends React.Component {
  * @constructor
  * @since 2017-09-13
  */
-const SPComponentSinglesRanking = ({ list, slug, label }) => {
+const SPComponentSinglesRanking = ({ list, slug, label, ad }) => {
   if (!Array.isArray(list) || !list.length) {
     return null;
   }
@@ -349,6 +351,7 @@ const SPComponentSinglesRanking = ({ list, slug, label }) => {
             slug={slug}
             length={articles.length}
             last={articles.length - 1}
+            ad={ad}
           />
         </div>
       </div>
