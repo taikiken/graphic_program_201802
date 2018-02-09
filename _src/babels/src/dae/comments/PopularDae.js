@@ -25,32 +25,36 @@ export class PopularDae {
    * article.comments_popular:[]
    * @param {Object} [comment={}] response.comment Object
    */
-  constructor( comment:Object = {} ) {
-
-    comment = Safety.object( comment );
-
-    if ( Safety.check( comment, 'date' ) ) {
-      /**
-       * comment.date
-       * @deprecated instead use article.display_date
-       * @type {string}
-       * @protected
-       */
-      this._formatDate = Format.date( comment.date );
-
-    }
+  constructor(comment = {}) {
+    const altComment = Safety.object( comment );
+    // if (Safety.check(altComment, 'date')) {
+    //   /**
+    //    * comment.date
+    //    * @deprecated instead use article.display_date
+    //    * @type {string}
+    //    * @protected
+    //    */
+    //   this._formatDate = Format.date(altComment.date);
+    //
+    // }
+    /**
+     * comment.date
+     * @deprecated instead use article.display_date
+     * @type {string}
+     */
+    this.formatDate = Safety.check(altComment, 'date') ? Format.date(altComment.date) : '';
     /**
      * comments_popular.user
      * @type {UserDae}
      * @protected
      */
-    this._user = new UserDae( comment.user );
+    this._user = new UserDae(altComment.user);
     /**
      * response.comment
      * @type {Object}
      * @protected
      */
-    this._comment = comment;
+    this._comment = altComment;
 
   }
   // ---------------------------------------------------
@@ -58,45 +62,45 @@ export class PopularDae {
   // ---------------------------------------------------
   /**
    * response.comment
-   * @return {Object|*} comment Object を返します
+   * @return {Object} comment Object を返します
    */
-  get comment():Object {
+  get comment() {
     return this._comment;
   }
   /**
-   * @return {Number} comment.id を返します
+   * @return {number} comment.id を返します
    */
-  get id():Number {
+  get id() {
     return this.comment.id;
   }
   /**
    * comment.date
    * @return {string} ISO8601 日付を返します
    */
-  get date():string {
+  get date() {
     return this.comment.date;
   }
-  /**
-   * comment.date をフォーマット **使用しない** <br>
-   * displayDate を使用します
-   * @deprecated instead use displayDate
-   * @return {string} ISO8601 を日本語形式日付にし返します
-   */
-  get formatDate():string {
-    return this._formatDate;
-  }
+  // /**
+  //  * comment.date をフォーマット **使用しない** <br>
+  //  * displayDate を使用します
+  //  * @deprecated instead use displayDate
+  //  * @return {string} ISO8601 を日本語形式日付にし返します
+  //  */
+  // get formatDate():string {
+  //   return this._formatDate;
+  // }
   /**
    * 表示日付
    * @return {string} 相対日付返します
    */
-  get displayDate():string {
+  get displayDate() {
     return this.comment.display_date;
   }
   /**
    * comment.body
    * @return {string} コメント本文を返します
    */
-  get body():string {
+  get body() {
     return this.comment.body;
   }
   /**
@@ -105,62 +109,62 @@ export class PopularDae {
    * タグがない様子
    * @return {string} エスケープされたコメント本文を返します
    */
-  get bodyEscape():string {
+  get bodyEscape() {
     return this.comment.body_escape;
   }
   /**
    * alias isLike
-   * @return {Boolean} 自分がGood済みかどうか を返します
+   * @return {boolean} 自分がGood済みかどうか を返します
    */
-  get isGood():Boolean {
+  get isGood() {
     return this.isLike;
   }
   /**
    * comment.is_like
-   * @return {Boolean} 自分がGood済みかどうか を返します
+   * @return {boolean} 自分がGood済みかどうか を返します
    */
-  get isLike():Boolean {
+  get isLike() {
     return this.comment.is_like;
   }
   /**
    * comment.is_bad
-   * @return {Boolean} 自分がBad済みかどうか を返します
+   * @return {boolean} 自分がBad済みかどうか を返します
    */
-  get isBad():Boolean {
+  get isBad() {
     return this.comment.is_bad;
   }
   /**
-   * @return {Number} Good数 を返します
+   * @return {number} Good数 を返します
    */
-  get good():Number {
+  get good() {
     return this.comment.like;
   }
   /**
    * this.good alias
-   * @return {Number} Good数 を返します
+   * @return {number} Good数 を返します
    */
-  get like():Number {
+  get like() {
     return this.good;
   }
   /**
    * comment.bad
-   * @return {Number|Number} Bad数 を返します
+   * @return {number|number} Bad数 を返します
    */
-  get bad():Number {
+  get bad() {
     return this.comment.bad;
   }
   /**
    * comment.url
    * @return {string} コメント詳細のURLを返します
    */
-  get url():string {
+  get url() {
     return this.comment.url;
   }
   /**
    * comment.user
-   * @return {UserDae|*} comment した user 情報を返します
+   * @return {UserDae} comment した user 情報を返します
    */
-  get user():UserDae {
+  get user() {
     return this._user;
   }
 }// class

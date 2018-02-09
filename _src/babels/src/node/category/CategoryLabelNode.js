@@ -46,7 +46,7 @@ const movie = (type) => {
 };
 
 /**
- * @deprecated 2016-09-24 instead use ComponentCategoryLabels
+ * @deprecated 2016-09-24 instead use {@link ComponentCategoryLabels}
  * <p>記事が所属するカテゴリー名称を表示します</p>
  * <p>.category-label-wrapper カテゴリー表示</p>
  *

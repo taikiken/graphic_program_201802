@@ -16,6 +16,8 @@ import {Message} from '../../app/const/Message';
 let React = self.React;
 
 /**
+ * @deprecated 2017-12-18 instead use {@link ComponentSidebarTitle}
+ * TODO future remove
  * <p>sidebar recommend title</p>
  * <p>オススメ動画 / おすすめ記事 で共通なので</p>
  * @type {*|Function}
@@ -29,6 +31,8 @@ export const RecommendTitleNode = React.createClass( {
     title: React.PropTypes.string
   },
   getDefaultProps: function() {
+    console.error('[RecommendTitleNode] deprecated');
+
     return {
       slug: 'all',
       label: '',

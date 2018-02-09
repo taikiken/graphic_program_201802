@@ -22,11 +22,11 @@
 
 // -------------------------------------
 // app
-import {App} from './app/App';
+import App from './app/App';
 import {User} from './app/User';
 import {CommentsType} from './app/const/CommentsType';
-import {Dom} from './app/Dom';
-import {Router} from './app/Router';
+import Dom from './app/Dom';
+import Router from './app/Router';
 
 // -------------------------------------
 // util
@@ -47,41 +47,42 @@ import {Model} from './model/Model';
 
 // -------------------------------------
 // view
-import {View} from './view/View';
+import View from './view/View';
 
-import {ViewHeaderUser} from './view/header/ViewHeaderUser';
-import {ViewHeaderSearch} from './view/header/ViewHeaderSearch';
+import ViewHeaderUser from './view/header/ViewHeaderUser';
+import ViewHeaderSearch from './view/header/ViewHeaderSearch';
 
-import {ViewCategory} from './view/ViewCategory';
-import {ViewSingle} from './view/ViewSingle';
+import ViewCategory from './view/ViewCategory';
+import ViewSingle from './view/ViewSingle';
 // import {ViewTitle} from './view/ViewTitle';
-import {ViewSearch} from './view/ViewSearch';
-import {ViewCommentSingle} from './view/ViewCommentSingle';
-import {ViewFirstVisit} from './view/ViewFirstVisit';
+import ViewSearch from './view/ViewSearch';
+import ViewCommentSingle from './view/ViewCommentSingle';
+import ViewFirstVisit from './view/ViewFirstVisit';
+import ViewAnnounce from './view/ViewAnnounce';
 
 // single
-import {ViewSingleTitle} from './view/single/ViewSingleTitle';
-import {ViewSingleVisual} from './view/single/ViewSingleVisual';
+import ViewSingleTitle from './view/single/ViewSingleTitle';
+import ViewSingleVisual from './view/single/ViewSingleVisual';
 
 // comment
-import {ViewComments} from './view/ViewComments';
-import {ViewCommentForm} from './view/comment/ViewCommentForm';
+import ViewComments from './view/ViewComments';
+import ViewCommentForm from './view/comment/ViewCommentForm';
 
 // home
-import {ViewHeadline} from './view/home/ViewHeadline';
-import {ViewPickup} from './view/home/ViewPickup';
-import {ViewNews} from './view/home/ViewNews';
+import ViewHeadline from './view/home/ViewHeadline';
+import ViewPickup from './view/home/ViewPickup';
+import ViewNews from './view/home/ViewNews';
 
 // sidebar
-import {ViewRanking} from './view/sidebar/ViewRanking';
-import {ViewVideos} from './view/sidebar/ViewVideos';
-import {ViewRecommend} from './view/sidebar/ViewRecommend';
-import {Sidebar} from './view/sidebar/Sidebar';
+import ViewRanking from './view/sidebar/ViewRanking';
+import ViewVideos from './view/sidebar/ViewVideos';
+import ViewRecommend from './view/sidebar/ViewRecommend';
+import Sidebar from './view/sidebar/Sidebar';
 
 // modal
-import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
-import {ViewLogoutModal} from './view/modal/ViewLogoutModal';
-import {ViewFlushModal} from './view/modal/ViewFlushModal';
+import ViewDeleteModal from './view/modal/ViewDeleteModal';
+import ViewLogoutModal from './view/modal/ViewLogoutModal';
+import ViewFlushModal from './view/modal/ViewFlushModal';
 
 // area
 // @since 2017-09-04
@@ -90,72 +91,72 @@ import ViewArea from './view/ViewArea';
 
 // ----------- users
 // signup
-import {SignupWizard} from './view/signup/SignupWizard';
-import {ViewDeactivate} from './view/signup/ViewDeactivate';
+import SignupWizard from './view/signup/SignupWizard';
+import ViewDeactivate from './view/signup/ViewDeactivate';
 
 // login
-import {ViewLogin} from './view/login/ViewLogin';
-import {ViewLogout} from './view/login/ViewLogout';
+import ViewLogin from './view/login/ViewLogin';
+import ViewLogout from './view/login/ViewLogout';
 
 // mypage
-import {ViewUserProfile} from './view/mypage/ViewUserProfile';
-import {ViewBookmarks} from './view/mypage/ViewBookmarks';
-import {ViewActivities} from './view/mypage/ViewActivities';
-import {ViewNotifications} from './view/mypage/ViewNotifications';
+import ViewUserProfile from './view/mypage/ViewUserProfile';
+import ViewBookmarks from './view/mypage/ViewBookmarks';
+import ViewActivities from './view/mypage/ViewActivities';
+import ViewNotifications from './view/mypage/ViewNotifications';
 
 // settings
-import {ViewSettingsIndex} from './view/settings/ViewSettingsIndex';
-import {ViewSettingsInterest} from './view/settings/ViewSettingsInterest';
+import ViewSettingsIndex from './view/settings/ViewSettingsIndex';
+import ViewSettingsInterest from './view/settings/ViewSettingsInterest';
 
 // ----------- ga
 import {Ga} from './ga/Ga';
 
 // ui
 import { TopButton } from './ui/button/TopButton';
-import { PageTop } from './ui/PageTop';
+import PageTop from './ui/PageTop';
 
 // -------------------------------------
 // sp
 
 // sp/view
-import { SPViewFirstVisit } from './sp/view/SPViewFirstVisit';
-import { SPViewAppBanner } from './sp/view/SPViewAppBanner';
+import SPViewFirstVisit from './sp/view/SPViewFirstVisit';
+import SPViewAppBanner from './sp/view/SPViewAppBanner';
 
 // home
-import {SPViewHeadLine} from './sp/view/home/SPViewHeadLine';
-import {SPViewNews} from './sp/view/home/SPViewNews';
+import SPViewHeadLine from './sp/view/home/SPViewHeadLine';
+import SPViewNews from './sp/view/home/SPViewNews';
 
 // category
 // @since 2016-09-20 remove
 // import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
 // @since 2016-0920
-import { SPViewCategory } from './sp/view/category/SPViewCategory';
+import SPViewCategory from './sp/view/category/SPViewCategory';
 // SPViewCategoryWithSlug が多分正解
-import { SPViewCategoryWithSlug } from './sp/view/category/SPViewCategoryWithSlug';
+import SPViewCategoryWithSlug from './sp/view/category/SPViewCategoryWithSlug';
 
 // 2017-09-04 - area
 import SPViewArea from './sp/view/category/SPViewArea';
 
 // search
-import {SPViewSearch} from './sp/view/SPViewSearch';
+import SPViewSearch from './sp/view/SPViewSearch';
 
 // Syn.
-import {SPViewSyn} from './sp/view/SPViewSyn';
+import SPViewSyn from './sp/view/SPViewSyn';
 
 // header
-import {SPViewHeaderUser} from './sp/view/header/SPViewHeaderUser';
-import {SPViewHeaderSearch} from './sp/view/header/SPViewHeaderSearch';
+import SPViewHeaderUser from './sp/view/header/SPViewHeaderUser';
+import SPViewHeaderSearch from './sp/view/header/SPViewHeaderSearch';
 
 // single
-import {SPViewSingle} from './sp/view/SPViewSingle';
-import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
-import {SPViewContinueRead} from './sp/view/single/SPViewContinueRead';
-import {SPViewSingleRanking} from './sp/view/single/SPViewSingleRanking';
-import {SPViewSingleRecommend} from './sp/view/single/SPViewSingleRecommend';
+import SPViewSingle from './sp/view/SPViewSingle';
+import SPViewSingleHeader from './sp/view/single/SPViewSingleHeader';
+import SPViewContinueRead from './sp/view/single/SPViewContinueRead';
+import SPViewSingleRanking from './sp/view/single/SPViewSingleRanking';
+import SPViewSingleRecommend from './sp/view/single/SPViewSingleRecommend';
 
 // single/comment
-import {SPViewComments} from './sp/view/SPViewComments';
-import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
+import SPViewComments from './sp/view/SPViewComments';
+import SPViewCommentForm from './sp/view/comment/SPViewCommentForm';
 
 // singles-option
 import SPViewSinglesRecommend from './sp/view/singles-option/SPViewSinglesRecommend';
@@ -163,15 +164,156 @@ import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking'
 
 
 // mypage
-import {SPViewUserProfile} from './sp/view/mypage/SPViewUserProfile';
-import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
+import SPViewUserProfile from './sp/view/mypage/SPViewUserProfile';
+import SPViewBookmarks from './sp/view/mypage/SPViewBookmarks';
+
+// tag - for 平昌
+import ViewTagsPyeongchang from './view/tags/ViewTagsPyeongchang';
+
+// util - for 平昌
+import NavCurrent from './ui/NavCurrent';
+
+// model - for 平昌
+import { ModelCategoriesSlug } from './model/categoires/ModelCategoriesSlug';
+// view/categories/headline
+import ViewCategoryOption from './view/categories/ViewCategoryOption';
+
+// sp/view/categories
+import SPViewCategoryOption from './sp/view/categories/SPViewCategoryOption';
 
 /**
  * スポーツブル ライブラリ
  * @module UT
- * @type {{version: string, build: string, app: {App: App, User: User, Router: Router, Dom: Dom, const: {CommentsType: CommentsType}}, util: {Offset: Offset, Scroll: Scroll}, net: {Cookie: Cookie}, model: {Model: Model}, view: {View: View, ViewCategory: ViewCategory, ViewSingle: ViewSingle, ViewTitle: ViewTitle, ViewComments: ViewComments, ViewSearch: ViewSearch, ViewCommentSingle: ViewCommentSingle, ViewFirstVisit: ViewFirstVisit, comment: {ViewCommentForm: ViewCommentForm}, single: {ViewSingleTitle: ViewSingleTitle, ViewSingleVisual: ViewSingleVisual}, header: {ViewHeaderUser: ViewHeaderUser, ViewHeaderSearch: ViewHeaderSearch}, sidebar: {ViewRanking: ViewRanking, ViewVideos: ViewVideos}, home: {ViewHeadline: ViewHeadline, ViewPickup: ViewPickup, ViewNews: ViewNews}, signup: {SignupWizard: SignupWizard, ViewDeactivate: ViewDeactivate}, login: {ViewLogin: ViewLogin, ViewLogout: ViewLogout}, mypage: {ViewUserProfile: ViewUserProfile, ViewBookmarks: ViewBookmarks, ViewActivities: ViewActivities, ViewNotifications: ViewNotifications}, settings: {ViewSettingsIndex: ViewSettingsIndex, ViewSettingsInterest: ViewSettingsInterest}, modal: {ViewDeleteModal: ViewDeleteModal, ViewLogoutModal: ViewLogoutModal, ViewFlushModal: ViewFlushModal}}, sp: {view: {SPViewSyn: SPViewSyn, SPViewComments: SPViewComments, SPViewSingle: SPViewSingle, SPViewSearch: SPViewSearch, SPViewFirstVisit: SPViewFirstVisit, single: {SPViewSingleHeader: SPViewSingleHeader, SPViewReadMore: SPViewReadMore}, comment: {SPViewCommentForm: SPViewCommentForm}, home: {SPViewHeadLine: SPViewHeadLine, SPViewNews: SPViewNews}, category: {SPViewCategoryRoot: SPViewCategoryRoot}, header: {SPViewHeaderUser: SPViewHeaderUser, SPViewHeaderSearch: SPViewHeaderSearch}, mypage: {SPViewUserProfile: SPViewUserProfile, SPViewBookmarks: SPViewBookmarks}}}}}
+ * @type {{
+ *   version: string,
+ *   build: string,
+ *   app: {
+ *     App: App,
+ *     User: User,
+ *     Router: Router,
+ *     Dom: Dom,
+ *     const: {
+ *       CommentsType: CommentsType
+ *      }
+ *    },
+ *    util: {
+ *      Offset: Offset,
+ *      Scroll: Scroll,
+ *      Elements: Elements
+ *    },
+ *    ui: {
+ *      PageTop: PageTop,
+ *      button: {
+ *        TopButton: TopButton
+ *      }
+ *    },
+ *    net: {
+ *      Cookie: Cookie,
+ *      Ajax: Ajax
+ *    },
+ *    model: {
+ *      Model: Model
+ *    },
+ *    view: {
+ *      View: View,
+ *      ViewCategory: ViewCategory,
+ *      ViewSingle: ViewSingle,
+ *      ViewComments: ViewComments,
+ *      ViewSearch: ViewSearch,
+ *      ViewCommentSingle: ViewCommentSingle,
+ *      ViewFirstVisit: ViewFirstVisit,
+ *      ViewArea: ViewArea,
+ *      ViewAnnounce: ViewAnnounce,
+ *      comment: {
+ *        ViewCommentForm: ViewCommentForm
+ *      },
+ *      single: {
+ *        ViewSingleTitle: ViewSingleTitle,
+ *        ViewSingleVisual: ViewSingleVisual
+ *      },
+ *      header: {
+ *        ViewHeaderUser: ViewHeaderUser,
+ *        ViewHeaderSearch: ViewHeaderSearch
+ *      },
+ *      sidebar: {
+ *        ViewRanking: ViewRanking,
+ *        ViewVideos: ViewVideos,
+ *        ViewRecommend: ViewRecommend,
+ *        Sidebar: Sidebar
+ *      },
+ *      home: {
+ *        ViewHeadline: ViewHeadline,
+ *        ViewPickup: ViewPickup,
+ *        ViewNews: ViewNews
+ *      },
+ *      signup: {
+ *        SignupWizard: SignupWizard,
+ *        ViewDeactivate: ViewDeactivate
+ *      },
+ *      login: {
+ *        ViewLogin: ViewLogin,
+ *        ViewLogout: ViewLogout
+ *      },
+ *      mypage: {
+ *        ViewUserProfile: ViewUserProfile,
+ *        ViewBookmarks: ViewBookmarks,
+ *        ViewActivities: ViewActivities,
+ *        ViewNotifications: ViewNotifications
+ *      },
+ *      settings: {
+ *        ViewSettingsIndex: ViewSettingsIndex,
+ *        ViewSettingsInterest: ViewSettingsInterest
+ *      },
+ *      modal: {
+ *        ViewDeleteModal: ViewDeleteModal,
+ *        ViewLogoutModal: ViewLogoutModal,
+ *        ViewFlushModal: ViewFlushModal}
+ *      },
+ *      sp: {
+ *        view: {
+ *          SPViewSyn: SPViewSyn,
+ *          SPViewComments: SPViewComments,
+ *          SPViewSingle: SPViewSingle,
+ *          SPViewSearch: SPViewSearch,
+ *          SPViewFirstVisit: SPViewFirstVisit,
+ *          SPViewAppBanner: SPViewAppBanner,
+ *          single: {
+ *            SPViewSingleHeader: SPViewSingleHeader,
+ *            SPViewContinueRead: SPViewContinueRead,
+ *            SPViewSingleRanking: SPViewSingleRanking,
+ *            SPViewSingleRecommend: SPViewSingleRecommend
+ *          },
+ *          singles: {
+ *            SPViewSinglesRecommend: SPViewSinglesRecommend,
+ *            SPViewSinglesRanking: SPViewSinglesRanking
+ *          },
+ *          comment: {
+ *            SPViewCommentForm: SPViewCommentForm
+ *          },
+ *          home: {
+ *            SPViewHeadLine: SPViewHeadLine,
+ *            SPViewNews: SPViewNews
+ *          },
+ *          category: {
+ *            SPViewCategory: SPViewCategory,
+ *            SPViewCategoryWithSlug: SPViewCategoryWithSlug,
+ *            SPViewArea: SPViewArea
+ *          },
+ *          header: {
+ *            SPViewHeaderUser: SPViewHeaderUser,
+ *            SPViewHeaderSearch: SPViewHeaderSearch
+ *          },
+ *          mypage: {
+ *            SPViewUserProfile: SPViewUserProfile,
+ *            SPViewBookmarks: SPViewBookmarks
+ *          }
+ *        }
+ *      },
+ *      Ga: Ga
+ *    }
+ *  }
  */
-let UT = {
+const UT = {
   version: '@@version',
   build: '@@buildTime',
   app: {
@@ -193,15 +335,17 @@ let UT = {
   ui: {
     PageTop,
     button: {
-      TopButton
-    }
+      TopButton,
+    },
+    NavCurrent,
   },
   net: {
     Cookie,
     Ajax,
   },
   model: {
-    Model
+    Model,
+    ModelCategoriesSlug,
   },
   view: {
     View,
@@ -212,6 +356,7 @@ let UT = {
     ViewCommentSingle,
     ViewFirstVisit,
     ViewArea,
+    ViewAnnounce,
     comment: {
       ViewCommentForm
     },
@@ -256,7 +401,13 @@ let UT = {
       ViewDeleteModal,
       ViewLogoutModal,
       ViewFlushModal
-    }
+    },
+    tags: {
+      ViewTagsPyeongchang,
+    },
+    categories: {
+      ViewCategoryOption,
+    },
   },
   sp: {
     view: {
@@ -295,6 +446,9 @@ let UT = {
       mypage: {
         SPViewUserProfile,
         SPViewBookmarks
+      },
+      categories: {
+        SPViewCategoryOption
       },
     },
   },

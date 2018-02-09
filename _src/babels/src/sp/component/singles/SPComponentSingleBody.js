@@ -14,12 +14,16 @@
 import { Message } from '../../../app/const/Message';
 
 // view
-import { View } from '../../../view/View';
+import View from '../../../view/View';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
+ * @TODO future remove - not use
  * SP: 記事詳細本文および省略分を表示します
  * @since 2016-09-25
  */

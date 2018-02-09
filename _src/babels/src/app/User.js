@@ -25,7 +25,7 @@ import {Safety} from '../data/Safety';
 // // let _sign = false;
 
 /**
- * ログインユーザー情報
+ * ログインユーザー情報 - {@link User}
  * @type {?UserDae}
  * @private
  * @since 2016-11-05
@@ -33,8 +33,8 @@ import {Safety} from '../data/Safety';
 let information = null;
 
 /**
- * <p>ユーザー情報を管理します</p>
- * <p>全てstaticです</p>
+ * ユーザー情報を管理します
+ * - 全てstaticです
  */
 export class User {
   // /**
@@ -55,44 +55,35 @@ export class User {
   // ---------------------------------------------------
   /**
    * sign in / out 状態を表します
-   * @return {Boolean} sign in / out 状態を返します
+   * @return {boolean} sign in / out 状態を返します
    */
-  static get sign():Boolean {
-
+  static get sign() {
     // return _sign;
     // 開発フェーズは簡易的に変数管理していたが
     // cookie token 管理へ移行する
     return User.token !== null;
-
   }
   /**
-   * sign in / out 状態を表します<br>
-   * true: sign in です
-   * @param {Boolean} bool sign in / out 状態の真偽値, true: sign in
+   * sign in / out 状態を表します
+   * - true: sign in です
+   * @param {boolean} bool sign in / out 状態の真偽値, true: sign in
    */
-  static set sign( bool:Boolean ) {
-
-    bool = !!bool;
-
+  static set sign(bool) {
+    // bool = !!bool;
     //
-    if ( bool ) {
-
+    if (bool) {
       UserStatus.factory().login();
-
     } else {
-
       UserStatus.factory().logout();
-
     }
-
   }
   /**
    * cookie より user token を取り出します<br>
    * 見つからない時は null になります
    * @return {string|null} token を返します, 見つからない時はnullを返します
    */
-  static get token():string {
-    return Cookie.get( Cookie.TARGET );
+  static get token() {
+    return Cookie.get(Cookie.TARGET);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -100,48 +91,45 @@ export class User {
   /**
    * ログイン設定をします
    * @param {string} token 開発中の引数はオプション扱いです
-   * @return {Boolean} login が成功したかを返します
+   * @return {boolean} login が成功したかを返します
    */
-  static login( token:string ):Boolean {
-    token = Safety.string( token, '' );
-
+  static login(token) {
+    // token = Safety.string(token, '');
     // token が正常値なのかを調べる
     // 少なくとも, 文字型で空でない
-    let altToken = Safety.string( token, '' );
-    if ( altToken === '' ) {
+    const altToken = Safety.string(token, '');
+    if (altToken === '') {
       // token が不正値
-      // console.warn( `illegal token. [${token}]` );
+      console.warn(`illegal token. [${token}]`);
       return false;
     }
-
-    let result = Cookie.save( token );
-    // console.log( 'login ', result );
+    // save
+    const result = Cookie.save(token);
+    // console.log('User.login ', result, token);
     User.sign = result;
-    
     return result;
   }
   /**
-   * ログアウト処理を行います<br>
-   * token を cookie から削除します
+   * ログアウト処理を行います
+   * - token を cookie から削除します
    */
-  static logout():void {
-    Cookie.remove( Cookie.TARGET );
+  static logout() {
+    Cookie.remove(Cookie.TARGET);
     User.sign = false;
   }
   /**
    * ログイン・非ログインを確認します
-   * <p>ログイン（token発見）時は login 処理を行います</p>
+   * - ログイン（token発見）時は login 処理を行います
    */
-  static init():void {
-    let token = User.token;
+  static init() {
+    const token = User.token;
     // console.log( `user init token [${token !== ''}]` );
-    if ( token === null || typeof token === 'undefined' || token === '' ) {
+    if (token === null || typeof token === 'undefined' || token === '') {
       User.sign = false;
     } else {
-      User.login( token );
+      User.login(token);
     }
   }
-
   /**
    * ログインユーザー情報
    * @return {UserDae} ログインユーザー情報を返します

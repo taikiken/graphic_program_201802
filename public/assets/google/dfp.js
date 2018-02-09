@@ -35,3 +35,26 @@ if ( googletag.pubads ) {
     googletag.pubads().setTargeting("provider", SPBL_ENV.provider);
   }
 }
+
+
+
+googletag.cmd.push(function() {
+  // /531683568/mobile/mobile_index_bottom
+  googletag.defineSlot('/531683568/mobile/mobile_index_bottom', [300, 250], 'div-gpt-ad-1514446255569-0').addService(googletag.pubads());
+
+
+  googletag.pubads().enableSingleRequest();
+  googletag.pubads().collapseEmptyDivs();
+  googletag.enableServices();
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  googletag.cmd.push(function() {
+
+    // /531683568/mobile/mobile_index_bottom
+    googletag.display('div-gpt-ad-1514446255569-0');
+
+  });
+});

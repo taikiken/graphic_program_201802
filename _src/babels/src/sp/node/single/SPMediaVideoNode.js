@@ -19,19 +19,23 @@ import {Content} from '../../../app/const/Content';
 import {Safety} from '../../../data/Safety';
 
 // node
-import {HTML5VideoNode} from '../../../node/media/HTML5VideoNode';
-import {VideojsImaNode} from '../../../node/media/VideojsImaNode';
+// import {HTML5VideoNode} from '../../../node/media/HTML5VideoNode';
+// import {VideojsImaNode} from '../../../node/media/VideojsImaNode';
 
 // ---
 // @since 2016-11-13
 // component
-import { ComponentVideojsImaSingles } from '../../../component/media/ComponentVideojsImaSingles';
+import ComponentVideojsImaSingles from '../../../component/media/ComponentVideojsImaSingles';
 // ---
 
 // React
-let React = self.React;
+/**
+ * [library] - React
+ */
+const React = self.React;
 
 /**
+ * @TODO component + jsx
  * SP 記事詳細 HTML5 video
  * @type {ReactClass}
  */
@@ -41,14 +45,12 @@ export let SPMediaVideoNode = React.createClass( {
     media: React.PropTypes.object.isRequired
   },
   render: function() {
-
-    let media = this.props.media;
-
+    const media = this.props.media;
     // 2016-02-22
     // api JSON が最新版に対応していないので
     // やむおえずの対応
-    let type = media.video.type || media.video.player;
-
+    const type = media.video.type || media.video.player;
+    // console.log('SPMediaVideoNode.render type', type);
     switch ( type ) {
 
       case VideoType.BRIGHTCOVE:
@@ -68,46 +70,55 @@ export let SPMediaVideoNode = React.createClass( {
         // console.warn(`illegal type and player. type: ${type}`);
         // break;
         return null;
-
     }
-
   },
-  video: function( media ) {
-
-    let images = media.images;
-    let video = media.video;
-    let caption = video.caption || '';
-    let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
-
-    // HTML5 video
-    return (
-      <HTML5VideoNode
-        video={video}
-        poster={poster}
-        caption={caption}
-        playImage={Empty.VIDEO_PLAY}
-      />
-    );
-
-  },
-  videojsima: function( media ) {
-    let images = media.images;
-    let video = media.video;
-    let caption = video.caption || '';
-    let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
+  // video: function( media ) {
+  //
+  //   let images = media.images;
+  //   let video = media.video;
+  //   let caption = video.caption || '';
+  //   let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
+  //
+  //   // HTML5 video
+  //   return (
+  //     <HTML5VideoNode
+  //       video={video}
+  //       poster={poster}
+  //       caption={caption}
+  //       playImage={Empty.VIDEO_PLAY_SP}
+  //     />
+  //   );
+  //
+  // },
+  videojsima: function(media) {
+    const images = media.images;
+    const video = media.video;
+    const caption = video.caption || '';
+    const poster = Safety.image(images.medium, Empty.VIDEO_THUMBNAIL);
 
     // props.index で出力 class を切替えます
     // 次の記事一覧で動画を表示するために
     // @since 2016-11-13
     if (this.props.index < 0) {
       // 記事詳細先頭
+      // console.log('SPMediaVideoNode.videojsima use VideojsImaNode', this.props);
+      // return (
+      //   <VideojsImaNode
+      //     articleId={this.props.articleId}
+      //     video={video}
+      //     poster={poster}
+      //     caption={caption}
+      //     playImage={Empty.VIDEO_PLAY_SP}
+      //   />
+      // );
+      // since 2018-01-11 fix change component
       return (
-        <VideojsImaNode
+        <ComponentVideojsImaSingles
           articleId={this.props.articleId}
           video={video}
           poster={poster}
           caption={caption}
-          playImage={Empty.VIDEO_PLAY}
+          playImage={Empty.VIDEO_PLAY_SP}
         />
       );
     }
@@ -118,13 +129,12 @@ export let SPMediaVideoNode = React.createClass( {
         video={video}
         poster={poster}
         caption={caption}
-        playImage={Empty.VIDEO_PLAY}
+        playImage={Empty.VIDEO_PLAY_SP}
       />
     );
   },
-  youtube: function( media ) {
-    let video = media.video;
-
+  youtube: function(media) {
+    const video = media.video;
     return (
       <div className="post-kv post-video-kv post-video-kv-yt">
         <img className="yt-video-size" src={Empty.VIDEO_THUMBNAIL} alt=""/>
@@ -139,15 +149,15 @@ export let SPMediaVideoNode = React.createClass( {
       </div>
     );
   },
-  facebook: function( media ) {
-    let video = media.video;
-
+  facebook: function(media) {
+    const video = media.video;
     return (
       <div className="post-kv post-video-kv post-video-fb">
-        <div className="fb-video"
-             data-href={video.facebook}
-             data-allowfullscreen="true"
-             data-width={Content.WIDTH}
+        <div
+          className="fb-video"
+          data-href={video.facebook}
+          data-allowfullscreen="true"
+          data-width={Content.WIDTH}
         />
       </div>
     );

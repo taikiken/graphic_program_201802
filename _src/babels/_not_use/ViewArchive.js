@@ -20,8 +20,8 @@ import {Empty} from '../app/const/Empty';
 import {User} from '../app/User';
 
 // view
-import {View} from './View';
-import {ViewError} from './error/ViewError';
+import View from './View';
+import ViewError from './error/ViewError';
 // action
 // import {Headline} from '../action/home/Headline';
 // data
@@ -174,7 +174,7 @@ export class ViewArchive extends View {
 
     message = Safety.string( message, '' );
 
-    // ToDo: Error 時の表示が決まったら変更する
+    // Error 時の表示が決まったら変更する
     let error = new ViewError( this.element, this.option, message );
     error.render();
 

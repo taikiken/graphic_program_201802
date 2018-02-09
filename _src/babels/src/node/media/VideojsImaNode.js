@@ -13,25 +13,31 @@
 import {Content} from '../../app/const/Content';
 
 // node
-import {VideoPlayNode} from './VideoPlayNode';
-import {VideoCaptionNode} from './VideoCaptionNode';
+// import {VideoPlayNode} from './VideoPlayNode';
+// import {VideoCaptionNode} from './VideoCaptionNode';
 
 // ga
 import {GaData} from '../../ga/GaData';
 import {Ga} from '../../ga/Ga';
 
 // Sagen
+/**
+ * [library] - Sagen
+ */
 const Sagen = self.Sagen;
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/**
+ * [library] - React
+ */
+const React = self.React;
+// let ReactDOM = self.ReactDOM;
 
 // main video tag
 /**
- * <p>記事詳細上部動画 HTML5 video</p>
+ * 記事詳細上部動画 HTML5 video
  * @type {ReactClass}
- * @deprecated instead use ComponentVideojsImaArticle
+ * @deprecated instead use {@link ComponentVideojsImaArticle}
  */
 export let VideojsImaNode = React.createClass( {
   propTypes: {
@@ -40,7 +46,7 @@ export let VideojsImaNode = React.createClass( {
     poster: React.PropTypes.string.isRequired,
     caption: React.PropTypes.string.isRequired,
     playImage: React.PropTypes.string.isRequired,
-    showPlay: React.PropTypes.bool
+    showPlay: React.PropTypes.bool,
   },
   getDefaultProps: function() {
     return {
@@ -48,6 +54,10 @@ export let VideojsImaNode = React.createClass( {
     };
   },
   getInitialState: function() {
+    /**
+     * video element
+     * @type {?Element}
+     */
     this.videoElement = null;
     /**
      * スマホかを表す真偽値
@@ -62,18 +72,26 @@ export let VideojsImaNode = React.createClass( {
     };
   },
   render: function() {
-    let video = this.props.video;
-    let poster = this.props.poster;
-    let caption = this.props.caption;
-    let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
-    let width = this.phone ? window.innerWidth : Content.WIDTH;
-    let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
+    // let video = this.props.video;
+    // let poster = this.props.poster;
+    const { video, poster } = this.props;
+    // let caption = this.props.caption;
+    const url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
+    const width = this.phone ? window.innerWidth : Content.WIDTH;
+    const height = this.phone ? Math.ceil(width / (16 * 9)) : Content.HD_HEIGHT;
     if (navigator.userAgent.match(/iPhone/i)) {
       return(
         <div className="post-kv post-video-kv">
           <div id="mainContainer">
-            <video id="content_video" className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
-              <source src={url} type="application/x-mpegURL"></source>
+            <video
+              id="content_video"
+              className="video-js vjs-default-skin vjs-big-play-centered"
+              poster={poster} width={`${width}px`}
+              height={`${height}px`}
+              ref={(element) => (this.videoElement = element)}
+              controls
+            >
+              <source src={url} type="application/x-mpegURL" />
             </video>
           </div>
         </div>
@@ -81,122 +99,138 @@ export let VideojsImaNode = React.createClass( {
     } else {
       return(
         <div id="mainContainer">
-            <video id="content_video" className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
-              <source src={url} type="application/x-mpegURL"></source>
-            </video>
+          <video
+            id="content_video"
+            className="video-js vjs-default-skin vjs-big-play-centered"
+            poster={poster}
+            width={`${width}px`}
+            height={`${height}px`}
+            ref={(element) => (this.videoElement = element)}
+            controls
+          >
+            <source src={url} type="application/x-mpegURL" />
+          </video>
         </div>
       );
     }
   },
   componentDidMount: function() {
-    let vast = Sagen.Browser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
-    let adUrl = vast !== '' ? vast + Date.now() : '';
-
+    const vast = Sagen.Browser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
+    const adUrl = vast !== '' ? vast + Date.now() : '';
+    const videojs = self.videojs;
     /* Player initialized. */
     if (navigator.userAgent.match(/iPhone/i)) {
 
-      let videoId='content_video';
-      let player = videojs(videoId, {preload: 'none'});
-      let option = {
+      const videoId = 'content_video';
+      const player = videojs(videoId, { preload: 'none' });
+      const option = {
         id: videoId,
         adTagUrl: adUrl,
         nativeControlsForTouch: false,
-        showControlsForJSAds:false
+        showControlsForJSAds: false,
       };
       player.ima(option);
-
-
       // player.ima.initializeAdDisplayContainer();
       // player.ima.requestAds();
-      document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
-      document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
-
+      // -------
+      // 2107-12-25 code ES2016 対応させる
+      // document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
+      // document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
+      const imaAdContainer = document.getElementById(`#${videoId}_ima-ad-container`);
+      if (!imaAdContainer) {
+        return;
+      }
+      const imaAdContainerDiv = imaAdContainer.querySelector('> div');
+      if (!imaAdContainerDiv) {
+        return;
+      }
+      imaAdContainer.setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
+      imaAdContainerDiv.setAttribute('style', 'display:none');
+      // ------- [/end code ES2016 対応させる]
       player.one('click', function() {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
 
         player.play();
       });
-
-
-      let url = this.props.video.url.sd;
+      const url = this.props.video.url.sd;
       player.one('play', function() {
-        let gaData = new GaData('SPComponentSinglesArticleMedia.tracking', 'video', 'begin', url);
+        const gaData = new GaData('SPComponentSinglesArticleMedia.tracking', 'video', 'begin', url);
         Ga.add(gaData);
-
       });
       player.one('ended', function() {
-        let gaData = new GaData('SPComponentSinglesArticleMedia.tracking', 'video', 'complete', url);
+        const gaData = new GaData('SPComponentSinglesArticleMedia.tracking', 'video', 'complete', url);
         Ga.add(gaData);
       });
+      const video = document.getElementById(videoId);
 
-
-      var video=document.getElementById(videoId);
-
-      window.addEventListener('scroll', function () {
-        let videoWidth = window.innerWidth;
-        let videoHeight = Math.ceil( videoWidth / 16 * 9 );
-
-        var elemTop = video.getBoundingClientRect().top;
-        var elemBottom = video.getBoundingClientRect().bottom;
-
-        var isVisible = (elemTop >= - videoHeight) && (elemBottom <= window.innerHeight + videoHeight);
-
-        if(isVisible){
-          //player.play();
-        }else {
+      window.addEventListener('scroll', function() {
+        const videoWidth = window.innerWidth;
+        const videoHeight = Math.ceil( videoWidth / 16 * 9 );
+        const elemTop = video.getBoundingClientRect().top;
+        const elemBottom = video.getBoundingClientRect().bottom;
+        const isVisible = (elemTop >= -videoHeight) && (elemBottom <= window.innerHeight + videoHeight);
+        // 2017-12-25 if empty block 修正する
+        // if (isVisible) {
+        //   // player.play();
+        // }else {
+        //   player.pause();
+        //   player.ima.pauseAd();
+        // }
+        if (!isVisible) {
           player.pause();
           player.ima.pauseAd();
         }
+        // -------- [end if empty block 修正する]
       }, false);
-
     } else {
-
-      let videoElement = ReactDOM.findDOMNode( this.refs.video );
-      this.videoElement = videoElement;
-      videoElement.addEventListener( 'play', this.onPlay );
-      videoElement.addEventListener( 'ended', this.onEnded );
-      videoElement.addEventListener( 'pause', this.onPause );
-
-      let player = videojs('content_video', {preload: 'none'});
-      let option = {
+      // let videoElement = ReactDOM.findDOMNode( this.refs.video );
+      const videoElement = this.videoElement;
+      if (!videoElement) {
+        return;
+      }
+      // this.videoElement = videoElement;
+      videoElement.addEventListener('play', this.onPlay, false);
+      videoElement.addEventListener('ended', this.onEnded, false);
+      videoElement.addEventListener('pause', this.onPause, false);
+      const player = videojs('content_video', { preload: 'none' });
+      const option = {
         id: 'content_video',
-        adTagUrl: adUrl
+        adTagUrl: adUrl,
       };
-
       player.ima(option);
-
       document.querySelector('#content_video_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute;');
-
       player.on('play', function() {
-        document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
+        document.querySelector('.vjs-big-play-button').setAttribute('style', 'display:none !important');
       });
-      /*player.on('pause', function() {
+      /*
+      player.on('pause', function() {
         document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', 'display:block !important');
-      });*/
-      if(!Sagen.Browser.Mobile.is()){ //for PC: autoplay on load
-        document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important;');
+      });
+      */
+      if (!Sagen.Browser.Mobile.is()) {
+        // for PC: autoplay on load
+        document.querySelector('.vjs-big-play-button').setAttribute('style', 'display:none !important;');
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-
-      } else { //for Mobile: click to play
-
+      } else {
+        // for Mobile: click to play
         if (navigator.userAgent.match(/iPad/i)) {
-          //document.querySelector(".vjs-big-play-button").setAttribute('style', 'display: !important;');
-          let videoElement = document.querySelector('#content_video_html5_api');
-          this.videoElement = videoElement;
-          videoElement.addEventListener( 'play', this.onPlay );
-          videoElement.addEventListener( 'ended', this.onEnded );
-          videoElement.addEventListener( 'pause', this.onPause );
+          // document.querySelector(".vjs-big-play-button").setAttribute('style', 'display: !important;');
+          // const videoElement = document.querySelector('#content_video_html5_api');
+          const contentVideoHtml5Api = document.querySelector('#content_video_html5_api');
+          this.videoElement = contentVideoHtml5Api;
+          contentVideoHtml5Api.addEventListener('play', this.onPlay, false);
+          contentVideoHtml5Api.addEventListener('ended', this.onEnded, false);
+          contentVideoHtml5Api.addEventListener('pause', this.onPause, false);
 
           player.ima.initializeAdDisplayContainer();
-          //player.ima.requestAds();
-
+          // player.ima.requestAds();
           player.one('click', function() {
             player.ima.initializeAdDisplayContainer();
             player.ima.requestAds();
-            var adContainer = document.getElementById('content_video_ima-ad-container');
+            const adContainer = document.getElementById('content_video_ima-ad-container');
             adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
             player.play();
           });
@@ -208,62 +242,60 @@ export let VideojsImaNode = React.createClass( {
           });
         }
       }
-
-      //pause video when player out view port
-      var video = document.getElementById('content_video');
-
-      var playerVisted = false;
-      window.addEventListener('scroll', function () {
+      // pause video when player out view port
+      const video = document.getElementById('content_video');
+      let playerVisited = false;
+      window.addEventListener('scroll', function() {
+        let videoHeight = 0;
         if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          var videoWidth = window.innerWidth;
-          var videoHeight = Math.ceil( videoWidth / 16 * 9 );
+          const videoWidth = window.innerWidth;
+          videoHeight = Math.ceil(videoWidth / (16 * 9));
         }else{
-          var videoHeight = parseInt(Content.HD_HEIGHT, 10);
+          videoHeight = parseInt(Content.HD_HEIGHT, 10);
         }
-        var elemTop = video.getBoundingClientRect().top;
-        var elemBottom = video.getBoundingClientRect().bottom;
-        var isVisible = (elemTop >= -videoHeight) && (elemBottom <= window.innerHeight + videoHeight);
+        const elemTop = video.getBoundingClientRect().top;
+        const elemBottom = video.getBoundingClientRect().bottom;
+        const isVisible = (elemTop >= -videoHeight) && (elemBottom <= window.innerHeight + videoHeight);
 
-        if(isVisible && playerVisted === false){
-          playerVisted = true;
+        if (isVisible && playerVisited === false) {
+          playerVisited = true;
         }
-        if(!isVisible && playerVisted){
+        if (!isVisible && playerVisited) {
           player.pause();
           player.ima.pauseAd();
-        }else{
-          // player.ima.resumeAd();
         }
+        // else{
+        //   // player.ima.resumeAd();
+        // }
       }, false);
-
-
     }
   },
   componentWillUnMount: function() {
-    let videoElement = this.videoElement;
-    videoElement.removeEventListener( 'ended', this.onEnded );
-    videoElement.removeEventListener( 'pause', this.onPause );
+    const videoElement = this.videoElement;
+    videoElement.removeEventListener('ended', this.onEnded);
+    videoElement.removeEventListener('pause', this.onPause);
   },
-  onPlay: function( /* event */ ) {
+  onPlay: function(/* event */) {
     if ( !this.playing ) {
       this.playing = true;
-      this.tracking( 'begin' );
+      this.tracking('begin');
     }
   },
-  onEnded: function( /* event */ ) {
+  onEnded: function(/* event */) {
     if ( this.playing ) {
       this.playing = false;
       this.tracking( 'complete' );
     }
     this.setState( { showPlay: true } );
   },
-  onPause: function( /* event */ ) {
+  onPause: function(/* event */) {
     // console.log( 'onPause', event );
     // this.setState( { showPlay: true } );
   },
-  tracking: function( action ) {
-    let video = this.props.video;
-    let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
-    let gaData = new GaData( 'VideojsImaNode.tracking', 'video', action, url );
-    Ga.add( gaData );
+  tracking: function(action) {
+    const video = this.props.video;
+    const url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
+    const gaData = new GaData('VideojsImaNode.tracking', 'video', action, url);
+    Ga.add(gaData);
   }
-} );
+});

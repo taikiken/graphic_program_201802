@@ -13,9 +13,17 @@
 import {EventDispatcher} from './EventDispatcher';
 
 // Singleton を保証するための Symbol
-const _symbol = Symbol('UserStatus singleton Symbol');
+/**
+ * {@link UserStatus} inner symbol
+ * @type {symbol}
+ */
+const userStatusSymbol = Symbol('UserStatus singleton Symbol');
 // Singleton instance
-let _instance = null;
+/**
+ * {@link UserStatus} singleton instance
+ * @type {?UserStatus}
+ */
+let singletonInstance = null;
 
 /**
  * ログイン / ログアウト を通知
@@ -27,42 +35,8 @@ let _instance = null;
  *
  *  */
 export class UserStatus extends EventDispatcher {
-  /**
-   * ログイン / ログアウト を通知する SingleTon
-   * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {UserStatus} UserStatus インスタンスを返します
-   */
-  constructor(target) {
-    if (_symbol !== target) {
-      throw new Error('UserStatus is static Class. not use new UserStatus().');
-    }
-    if (_instance !== null) {
-      return _instance;
-    }
-    // ------
-    // do once
-    super();
-    _instance = this;
-
-    return _instance;
-  }
   // ---------------------------------------------------
-  //  method
-  // ---------------------------------------------------
-  /**
-   * UserStatus.LOG_IN event を fire します
-   */
-  login() {
-    this.dispatch({ type: UserStatus.LOG_IN, sign: true });
-  }
-  /**
-   * UserStatus.LOG_OUT event を fire します
-   */
-  logout() {
-    this.dispatch({ type: UserStatus.LOG_OUT, sign: false });
-  }
-  // ---------------------------------------------------
-  //  static const
+  //  STATIC CONST
   // ---------------------------------------------------
   /**
    * LOG_IN event
@@ -81,16 +55,53 @@ export class UserStatus extends EventDispatcher {
     return 'logOut';
   }
   // ---------------------------------------------------
-  //  static method
+  //  STATIC METHOD
   // ---------------------------------------------------
   /**
    * instance を生成します
    * @return {UserStatus} UserStatus instance を返します
    */
   static factory() {
-    if (_instance === null) {
-      _instance = new UserStatus( _symbol );
+    if (singletonInstance === null) {
+      singletonInstance = new UserStatus( userStatusSymbol );
     }
-    return _instance;
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * ログイン / ログアウト を通知する SingleTon
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {UserStatus} UserStatus インスタンスを返します
+   */
+  constructor(target) {
+    if (userStatusSymbol !== target) {
+      throw new Error('UserStatus is static Class. not use new UserStatus().');
+    }
+    if (singletonInstance !== null) {
+      return singletonInstance;
+    }
+    // ------
+    // do once
+    super();
+    singletonInstance = this;
+
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * UserStatus.LOG_IN event を fire します
+   */
+  login() {
+    this.dispatch({ type: UserStatus.LOG_IN, sign: true });
+  }
+  /**
+   * UserStatus.LOG_OUT event を fire します
+   */
+  logout() {
+    this.dispatch({ type: UserStatus.LOG_OUT, sign: false });
   }
 }

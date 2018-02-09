@@ -11,8 +11,7 @@
  */
 
 // sp/view
-// import {SPViewArchive} from './../SPViewArchive';
-import { SPViewArchiveInfinite } from './../SPViewArchiveInfinite';
+import SPViewArchiveInfinite from '../SPViewArchiveInfinite';
 
 // action
 import {Category} from '../../../action/archive/Category';
@@ -22,7 +21,7 @@ import {CategoryAuth} from '../../../action/archive/CategoryAuth';
 import {User} from '../../../app/User';
 
 // @since 2016-09-20
-import { SPComponentCategoryOption } from '../../component/categories/SPComponentCategoryOption';
+import SPViewCategoryOption from '../categories/SPViewCategoryOption';
 
 /**
  * <p>SP 記事一覧・カテゴリータブデータをリクエストし取得します</p>
@@ -42,9 +41,9 @@ import { SPComponentCategoryOption } from '../../component/categories/SPComponen
  * @see https://github.com/undotsushin/undotsushin/issues/1010
  * @see https://github.com/undotsushin/undotsushin/issues/1095
  */
+export default class SPViewCategory extends SPViewArchiveInfinite {
 // export class SPViewCategory extends SPViewArchive {
 // @since 2016-09-16 parent class changed
-export class SPViewCategory extends SPViewArchiveInfinite {
   /**
    * SP category 一覧
    * @param {string} slug category slug
@@ -52,28 +51,26 @@ export class SPViewCategory extends SPViewArchiveInfinite {
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Object} [option={}] optional event handler
    */
-  constructor( slug:string, element:Element, moreElement:Element, option:Object = {} ) {
-    super( element, moreElement, null, option );
-
+  constructor(slug, element, moreElement, option = {}) {
+    super(element, moreElement, null, option);
     /**
      * Action instance を設定します
+     * - @since 2017-12-18 初回表示件数は仮で12件とする(表示みて調整) ref: UNDO_SPBL-282 【Web】一面のリニューアル / Web - Mobile対応
      * @override
      * @type {CategoryAuth|Category}
      */
     this.action = User.sign ?
-      new CategoryAuth( slug, '', this.done.bind( this ), this.fail.bind( this ) ) :
-      new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
-
+      new CategoryAuth(slug, '', this.done.bind(this), this.fail.bind(this), 0, 12) :
+      new Category(slug, '', this.done.bind(this), this.fail.bind(this), 0, 12);
     /**
      * category slug, ga に使う
      * @override
      * @type {CategoryAuth|Category}
      */
     this.slug = slug;
-
     // @since 2016-09-20
     // 記事一覧に pickup, headline を表示させる
-    const categoryOption = new SPComponentCategoryOption(slug);
+    const categoryOption = new SPViewCategoryOption(slug);
     categoryOption.start();
   }
 }

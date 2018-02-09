@@ -12,121 +12,150 @@
 
 
 // import {Header} from './Header';
-import {Sidebar} from './Sidebar';
+import Sidebar from './Sidebar';
 
 // ui
-import {Nav} from '../ui/Nav';
-let _symbol = Symbol();
+import Nav from '../ui/Nav';
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
-
-let _prepared = 0;
-let _singleDae = null;
-let _userDae = null;
-let _viewSingle = null;
-let _headerUser = null;
+/**
+ * [library] - UT
+ * @type {UT}
+ */
+const UT = self.UT;
+/**
+ * [library] - UT.app.Dom
+ * @type {Dom}
+ */
+const Dom = UT.app.Dom;
 
 /**
- * <p>Single(detail)記事詳細</p>
- * 全て static です
+ * 処理終了 counter
+ * @type {number}
+ * @private
  */
-export class Single {
-  /**
-   * 記事詳細 singleton class です
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
+let innerPrepared = 0;
+/**
+ * SingleDae
+ * @type {?*}
+ * @private
+ */
+let innerSingleDae = null;
+/**
+ * UserDae
+ * @type {?*}
+ * @private
+ */
+let innerUserDae = null;
+/**
+ * ViewSingle
+ * @type {?*}
+ * @private
+ */
+let innerViewSingle = null;
+/**
+ * HeaderUser
+ * @type {?*}
+ * @private
+ */
+let innerHeaderUser = null;
 
-      throw new Error( 'Single is static Class. not use new Single().' );
-
-    }
-  }
+/**
+ * Single(detail)記事詳細
+ * - 全て static です
+ */
+export default class Single {
+  // /**
+  //  * 記事詳細 singleton class です
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Single is static Class. not use new Single().' );
+  //
+  //   }
+  // }
   /**
    * 記事詳細, 上部 / 下部 rendering 開始
-   * @param {Number} articleId 記事 Id (:article_id)
+   * @param {number} articleId 記事 Id (:article_id)
    */
-  static start( articleId:Number ):void {
-
+  static start(articleId) {
     // header
     // header.user
-    let profileElement = Dom.profile();
-    let headerUser;
-    if ( profileElement !== null ) {
-      headerUser = new UT.view.header.ViewHeaderUser( profileElement );
-      if ( UT.app.User.sign ) {
-
+    const profileElement = Dom.profile();
+    let headerUser = null;
+    if (profileElement !== null) {
+      headerUser = new UT.view.header.ViewHeaderUser(profileElement);
+      if (UT.app.User.sign) {
         // login user はコメント投稿可能 -> 表示アイコン必要
-        _headerUser = headerUser;
-        headerUser.on( UT.view.View.BEFORE_RENDER, Single.onHeader );
-
+        innerHeaderUser = headerUser;
+        headerUser.on(UT.view.View.BEFORE_RENDER, Single.onHeader);
       } else {
-
         // 非ログインユーザーはアイコン取得いらない
-        ++_prepared;
-
+        ++innerPrepared;
       }
       headerUser.start();
 
-      let modalElement = Dom.logoutModal();
-      if ( modalElement !== null ) {
-        let modal = new UT.view.modal.ViewLogoutModal( modalElement );
+      const modalElement = Dom.logoutModal();
+      if (modalElement !== null) {
+        const modal = new UT.view.modal.ViewLogoutModal(modalElement);
         modal.start();
       }
     }
 
     // single page
     // related いらなくる予定
-    let elements = {
+    const elements = {
       // related なしへ
       related: null, // Dom.related(),
       footer: Dom.singleFooter()
     };
 
-    let singleHeaderElement = Dom.singleHeader();
+    const singleHeaderElement = Dom.singleHeader();
 
-    if ( singleHeaderElement !== null && elements.footer !== null ) {
-      let single = new UT.view.ViewSingle( articleId, singleHeaderElement, elements );
-      _viewSingle = single;
-      single.on( UT.view.View.BEFORE_RENDER, Single.before );
+    if (singleHeaderElement !== null && elements.footer !== null) {
+      const single = new UT.view.ViewSingle(articleId, singleHeaderElement, elements);
+      innerViewSingle = single;
+      single.on(UT.view.View.BEFORE_RENDER, Single.before);
       single.start();
     }
 
   }
   /**
    * header View.BEFORE_RENDER event handler
-   * <p>ユーザー: アイコン, Id 取得のために event を bind し情報を取得します</p>
+   * - ユーザー: アイコン, Id 取得のために event を bind し情報を取得します
    * @param {Object} event event object
    */
-  static onHeader( event ):void {
-    _headerUser.off( UT.view.View.BEFORE_RENDER, Single.onHeader );
-    _userDae = event.args[ 0 ];
+  static onHeader(event) {
+    // console.log('EX:Single.onHeader event', event);
+    innerHeaderUser.off(UT.view.View.BEFORE_RENDER, Single.onHeader);
+    innerUserDae = event.args[0];
     Single.comment();
   }
   /**
    * single View.BEFORE_RENDER event handler
-   * <p>記事所属カテゴリ取得のために event を bind</p>
+   * - 記事所属カテゴリ取得のために event を bind
    * @param {Object} event event object
    */
-  static before( event ):void {
+  static before(event) {
+    // console.log('EX:Single.before event', event);
+    innerViewSingle.off(UT.view.View.BEFORE_RENDER, Single.before);
 
-    _viewSingle.off( UT.view.View.BEFORE_RENDER, Single.before );
-
-    let single = event.args[ 0 ];
-    _singleDae = single;
+    const single = event.args[0];
+    innerSingleDae = single;
 
     // let slug = single.category.slug;
     // let slug = single.categories.all[0].slug;
-    let slug = single.categories.slug;
+    const slug = single.categories.slug;
     // let label = single.category.label;
 
     // main visual
-    let element = Dom.visual();
-    if ( element !== null ) {
+    const element = Dom.visual();
+    if (element !== null) {
       // console.log( 'start main visual ', element );
-      let visual = new UT.view.single.ViewSingleVisual( element, single );
+      const visual = new UT.view.single.ViewSingleVisual(element, single);
       visual.start();
     }
 
@@ -134,24 +163,25 @@ export class Single {
 
     // sidebar
     // slug: category, is home
-    Sidebar.start( slug, false );
+    Sidebar.start(slug, false);
 
     // nav current
-    Nav.start( slug );
+    Nav.start(slug);
 
     Single.comment();
   }
   /**
    * **ログイン**
-   * <p>ユーザー情報, 記事 Id 必須</p>
+   * - ユーザー情報, 記事 Id 必須
    *
    * **非ログイン**
-   * <p>記事 Id 必須</p>
+   * - 記事 Id 必須
    */
-  static comment():void {
-    ++_prepared;
+  static comment() {
+    ++innerPrepared;
+    // console.log('EX:Single.comment _prepared', _prepared);
 
-    if ( _prepared !== 2 ) {
+    if (innerPrepared !== 2) {
       return;
     }
 
@@ -159,50 +189,53 @@ export class Single {
     // _userDae null check
     //  _userDae.profilePicture undefined check
     let picture = '';
-    if ( _userDae !== null && typeof _userDae.profilePicture !== 'undefined' ) {
-      picture = _userDae.profilePicture;
+    if (innerUserDae !== null && typeof innerUserDae.profilePicture !== 'undefined') {
+      picture = innerUserDae.profilePicture;
     }
 
     // article id
-    let articleId = _singleDae.id;
-    let ViewComments = UT.view.ViewComments;
+    const articleId = innerSingleDae.id;
+    const ViewComments = UT.view.ViewComments;
 
     // comment form
-    let commentFormElement = Dom.commentForm();
-    if ( commentFormElement !== null ) {
-      let commentForm = new UT.view.comment.ViewCommentForm( commentFormElement, articleId, picture );
+    const commentFormElement = Dom.commentForm();
+    // console.log('EX:Single.comment commentFormElement', commentFormElement);
+    if (commentFormElement !== null) {
+      const commentForm = new UT.view.comment.ViewCommentForm(commentFormElement, articleId, picture);
       commentForm.start();
     }
 
     // self
-    let selfElement = Dom.commentSelf();
-    if ( selfElement !== null ) {
-      let commentSelf = new ViewComments( articleId, selfElement, UT.app.const.CommentsType.SELF );
-      if ( _userDae !== null ) {
-        commentSelf.user = _userDae;
+    const selfElement = Dom.commentSelf();
+    // console.log('EX:Single.comment selfElement', selfElement);
+    if (selfElement !== null) {
+      const commentSelf = new ViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
+      if (innerUserDae !== null) {
+        commentSelf.user = innerUserDae;
       }
       commentSelf.start();
     }
 
     // official
-    let officialElement = Dom.commentOfficial();
-    if ( officialElement !== null ) {
-      let official = new ViewComments( articleId, officialElement, UT.app.const.CommentsType.OFFICIAL );
-      if ( _userDae !== null ) {
-        official.user = _userDae;
+    const officialElement = Dom.commentOfficial();
+    // console.log('EX:Single.comment officialElement', officialElement);
+    if (officialElement !== null) {
+      const official = new ViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
+      if (innerUserDae !== null) {
+        official.user = innerUserDae;
       }
       official.start();
     }
 
     // normal
-    let normalElement = Dom.commentNormal();
-    if ( normalElement !== null ) {
-      let normal = new ViewComments( articleId, normalElement, UT.app.const.CommentsType.NORMAL );
-      if ( _userDae !== null ) {
-        normal.user = _userDae;
+    const normalElement = Dom.commentNormal();
+    // console.log('EX:Single.comment normalElement', normalElement);
+    if (normalElement !== null) {
+      const normal = new ViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
+      if (innerUserDae !== null) {
+        normal.user = innerUserDae;
       }
       normal.start();
     }
-
   }
 }

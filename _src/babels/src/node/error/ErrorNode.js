@@ -16,12 +16,15 @@ let React = self.React;
 /**
  * form エラー表示用 node
  * @type {ReactClass}
+ * @deprecated 2107-12-15 instead use {@link ComponentError}
+ * TODO future remove
  */
 export let ErrorNode = React.createClass( {
   propTypes: {
     message: React.PropTypes.string.isRequired
   },
   render: function() {
+    console.error('[ErrorNode] deprecated');
 
     if ( this.props.message === '' ) {
       return null;

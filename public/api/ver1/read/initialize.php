@@ -32,17 +32,34 @@ if(strlen($uid)>0){
 	$s["user"]=(object)array();
 }
 
-if(strlen($uid)==0){
-	$sql="select id,name,name_e,img from u_categories where flag=1 order by n";
-}else{
-	$sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories where flag=1) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$uid);
-	// 一面の右に固定 IDを二箇所指定する
-	//$sql=sprintf("select id,name,name_e,img,n,2 as interest from u_categories where flag=1 and id in(151) union all (select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories where flag=1 and id not in(151)) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid) order by interest desc,n;",$uid);
-}
+$sql="select tabs.category_id as id , tabs.title as name , t1.name_e , t1.img , tabs.n from tabs inner join u_categories t1 on t1.id=tabs.category_id where tabs.flag=1 and t1.flag=1 order by tabs.n asc;";
 
 $o->query($sql);
 while($f=$o->fetch_array()){
 	$s["cateories"][]=set_categoryinfo($f,"",0);
+}
+
+// 並び替えする
+if(strlen($uid)>0){
+    //対象となるidを取得
+    $sql=sprintf("select uc1.id from (u_categories uc1 inner join u_category uc2 on uc2.categoryid = uc1.id) inner join tabs on uc1.id = tabs.category_id where uc2.userid = %s and uc2.flag = 1 order by tabs.n asc;",$uid);
+    $o->query($sql);
+    while($f = $o->fetch_array()){
+        $target_list[] = $f;
+    }
+
+    //対象の配列だけを抽出
+    $interest_list = array();
+    foreach ($s["cateories"] as $key => $value){
+        foreach ($target_list as $t_key => $t_value){
+            if((int)$t_value['id'] === $value['id']){
+                $interest_list[] = $value;
+                unset($s["cateories"][$key]);
+            }
+        }
+    }
+    //抽出した配列と元の配列を結合
+    $s["cateories"] = array_merge($interest_list,$s["cateories"]);
 }
 
 if(strlen($uid)>0){
@@ -193,6 +210,76 @@ for($i=0;$i<count($p);$i++){
 		$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"]=array();
 	}	
 }
+
+// 一面のお知らせ取得 slugは"top"
+$sql = <<<SQL
+SELECT notices.*
+FROM
+  notices
+  INNER JOIN
+  categories_notices ON notices.id = notice_id
+  INNER JOIN
+  u_categories ON category_id = u_categories.id
+WHERE
+  name_e = 'top'
+  AND
+  notice_id = notices.id
+ORDER BY
+  categories_notices.created_at DESC
+LIMIT 1
+SQL;
+
+$o->query($sql);
+$f = $o->fetch_array();
+
+if (!empty($f))
+{
+  // 定数
+  $type = $f['type'];
+  $text_color = ['#333333', '#333333', ''];
+  $background_color = ['#ffffff', '#ffcccc', ''];
+  $icon = [
+    $domain . '/information/icon/3x/information__icon__notice.png',
+    $domain . '/information/icon/3x/information__icon__warning.png',
+    '',
+  ];
+  $disp_type = ['notice', 'warning', 'img'];
+
+  $domain = "https://" . $_SERVER["HTTP_HOST"];
+  $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
+
+  $platform_prefix_list = [
+    'pc' 			=> '',
+    'sp' 			=> 'sp_',
+    'ios'			=> 'ios_',
+    'android' => 'android_',
+  ];
+  // eof: 定数
+
+  $f['text'] = isset($f['text']) ? $f['text'] : '';
+
+  foreach($platform_prefix_list as $key => $prefix)
+  {
+    // フルパスで返す
+    $img[$key] = isset($f[$prefix . 'img']) ? $cf . $f[$prefix . 'img'] : '';
+    $link[$key] = isset($f[$prefix . 'link']) ? $f[$prefix . 'link'] : '';
+
+    $information_list[$key] = [
+      'type'             => $disp_type[$type],
+      'text'             => $f['text'],
+      'text_color'       => $text_color[$type],
+      'background_color' => $background_color[$type],
+      'icon'             => $icon[$type],
+      'img'              => $img[$key],
+      'link'             => $link[$key],
+    ];
+  }
+}
+else
+{
+  $information_list = null;
+}
+$s['information'] = $information_list;
 
 $y["response"]=$s;
 print_json($y,$_SERVER['HTTP_REFERER']);

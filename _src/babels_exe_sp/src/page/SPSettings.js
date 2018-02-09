@@ -10,57 +10,55 @@
  *
  */
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * ユーザー設定
  */
-export class SPSettings {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPSettings is static Class. not use new SPSettings().' );
-
-    }
-  }
+export default class SPSettings {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPSettings is static Class. not use new SPSettings().' );
+  //
+  //   }
+  // }
   /**
    * 基本情報設定
    */
-  static account():void {
-    let settings = Dom.settings();
-
-    if ( settings !== null ) {
-      let setting = new UT.view.settings.ViewSettingsIndex( settings );
+  static account() {
+    const settings = Dom.settings();
+    if (settings !== null) {
+      const setting = new UT.view.settings.ViewSettingsIndex(settings);
       setting.start();
     }
   }
   /**
    * パーソナライズ設定
    */
-  static interest():void {
-    let settings = Dom.settings();
-
-    if ( settings !== null ) {
-      let setting = new UT.view.settings.ViewSettingsInterest( settings );
+  static interest() {
+    const settings = Dom.settings();
+    if (settings !== null) {
+      const setting = new UT.view.settings.ViewSettingsInterest(settings);
       setting.start();
     }
   }
   /**
    * 退会
    */
-  static deactivate():void {
-    let settings = Dom.settings();
-    let modal = Dom.deactivateModal();
-    if ( settings !== null && modal !== null ) {
-      let deactivate = new UT.view.signup.ViewDeactivate( settings, modal );
+  static deactivate() {
+    const settings = Dom.settings();
+    const modal = Dom.deactivateModal();
+    if (settings !== null && modal !== null) {
+      const deactivate = new UT.view.signup.ViewDeactivate(settings, modal);
       deactivate.start();
     }
   }

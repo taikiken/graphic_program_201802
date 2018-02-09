@@ -18,19 +18,19 @@ import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 // import { MediaNode } from '../../node/single/MediaNode';
 
 // component/categories
-import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
+import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
 
 // component/singles
 import { ComponentSinglesArticleMedia } from './ComponentSinglesArticleMedia';
 
 // ui
-import { Hit } from '../../ui/Hit';
+import Hit from '../../ui/Hit';
 
 // util
 import { PageTitle } from '../../util/PageTitle';
 
 // view
-// import { ViewSingle } from '../../view/ViewSingle';
+// import ViewSingle from '../../view/ViewSingle';
 
 // Ga
 import { Ga } from '../../ga/Ga';
@@ -46,9 +46,13 @@ import { Page } from '../../singles/head/Page';
 // --------------------
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
+ * @TODO future remove - not use
  * PC: 記事詳細「次の記事」一覧を出力します
  *
  * <pre>
@@ -130,22 +134,15 @@ export class ComponentSinglesArticle extends React.Component {
      * @since 2016-10-27
      */
     this.page = new Page(props.single);
+    /**
+     *
+     * @type {?Element}
+     */
+    this.singlesArticle = null;
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
-   * */
-  componentDidMount() {
-    // Hit instance を作成し監視を開始します
-    if (this.hit === null && !!this.refs.singlesArticle) {
-      const hit = new Hit(this.refs.singlesArticle);
-      this.hit = hit;
-      hit.on(Hit.COLLISION, this.boundHit);
-      hit.start();
-    }
-  }
   /**
    * state.single 情報を更新し再描画します
    * @param {SingleDae} single state.single
@@ -162,7 +159,7 @@ export class ComponentSinglesArticle extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateSingle(this.state.single);
@@ -181,15 +178,18 @@ export class ComponentSinglesArticle extends React.Component {
    *  moving: number,
    *  changed: boolean,
    *  rect: Object}} events Hit events
+   *  @see https://github.com/undotsushin/undotsushin/issues/1151
+   *  @since 2016-10-05
+   *  @since 2016-11-15 title added
    */
   onHit(events) {
     if (this.sendGa) {
       return;
     }
-
+    // send ga check
     const rect = events.rect;
     const top = rect.top;
-
+    // near by 50bx
     if (Math.abs(top) <= 50) {
       this.sendGa = true;
       // ViewSingle.ga(this.state.single);
@@ -198,7 +198,7 @@ export class ComponentSinglesArticle extends React.Component {
       Ga.single(single, `ComponentSinglesArticle.onHit single: ${single.id}`);
       // ---------------------
       // https://github.com/undotsushin/undotsushin/issues/1151
-      // @since  2016-11-15 title added
+      // @since 2016-11-15 title added
       const page = new PageTitle(single.title, single.categories.label);
       Ga.addPage(single.id, `ComponentSinglesArticle.onHit addPage: ${single.id}`, page.title());
       // ---------------------
@@ -215,27 +215,43 @@ export class ComponentSinglesArticle extends React.Component {
     }
   }
   /**
+   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
+   * */
+  componentDidMount() {
+    const singlesArticle = this.singlesArticle;
+    // Hit instance を作成し監視を開始します
+    if (this.hit === null && singlesArticle) {
+      const hit = new Hit(singlesArticle);
+      this.hit = hit;
+      hit.on(Hit.COLLISION, this.boundHit);
+      hit.start();
+    }
+  }
+  /**
    * 記事詳細・次の記事一覧 > 記事を出力します
    * @return {?XML} div.loaded-post or null を返します
    * */
   render() {
-    const single = this.state.single;
-
+    const { single, sign } = this.state;
     if (!single) {
       return null;
     }
-
+    const { index } = this.props;
+    // ----
+    // output
     return (
-      <div className="loaded-post" ref="singlesArticle">
+      <div
+        className="loaded-post"
+        ref={(element) => (this.singlesArticle = element)}
+      >
         <div className="post-detail">
           {/* header */}
           <div className="single-header-root">
             <div className={`post-heading post-heading-${single.id}`}>
               <h1>{single.title}</h1>
             </div>
-
             <ComponentCategoryLabelsLink
-              index={this.props.index}
+              index={index}
               id={`single-label-${single.id}`}
               categories={single.categories.all}
               className="category-heading"
@@ -249,7 +265,7 @@ export class ComponentSinglesArticle extends React.Component {
               </div>
               {/* div.f-right (bookmark: on / off) */}
               <BookmarkNode
-                sign={this.state.sign}
+                sign={sign}
                 isBookmarked={single.isBookmarked}
                 articleId={String(single.id)}
               />

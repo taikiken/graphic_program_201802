@@ -11,7 +11,7 @@
  */
 
 
-import {View} from './View';
+import View from './View';
 
 // React
 let React = self.React;

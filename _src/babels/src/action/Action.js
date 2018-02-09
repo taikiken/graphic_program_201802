@@ -16,27 +16,25 @@ import {Safety} from '../data/Safety';
 
 // net
 import {Ajax} from '../net/Ajax';
-import {Types} from '../net/Types';
+// import {Types} from '../net/Types';
 
 // interface
 // 基本機能を設定し Interface として使用します
 
 /**
- * <p>Ajax 処理を行います</p>
+ * Ajax 処理を行います
  *
- * <p>Ajax 処理を行う Template Pattern として使用し<br>
- * 各 Class で extends （継承）します</p>
+ * Ajax 処理を行う Template Pattern として使用し
+ * 各実装 Class で extends （継承）します
  *
- * <p>token（認証）が必要な場合は {@link ActionAuth} を使用します</p>
- *
- * <p>データ送信を伴う (POST, PUT, DELETE)場合は {@link ActionBehavior}, {@link ActionAuthBehavior} を使用します</p>
- *
- * <p>リクエストに offset, length が必要な時は {@link Offset} Class を継承します</p>
+ * - token（認証）が必要な場合は {@link ActionAuth} を使用します
+ * - データ送信を伴う (POST, PUT, DELETE)場合は {@link ActionBehavior}, {@link ActionAuthBehavior} を使用します
+ * - リクエストに offset, length が必要な時は {@link Offset} Class を継承します
  *
  * @example
  * class Offset extends Action {
- *  constructor( types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive, ResultClass = Result ) {
- *    super( types, resolve, reject );
+ *  constructor(types, resolve = null, reject = null, offset = 0, length = Length.archive, ResultClass = Result) {
+ *    super(types, resolve, reject);
  *  }
  * }
  */
@@ -45,11 +43,11 @@ export class Action {
    * Ajax 処理, query なし<br>
    * 1回だけのリクエストに使用します
    * @param {Types} types Types instance, Ajax request に使用します
-   * @param {Function} [resolve=null] Ajax 成功時の callback
-   * @param {Function} [reject=null] Ajax 失敗時の callback
-   * @param {*|Result} [ResultClass=Result] 成功結果をセットします
+   * @param {?Function} [resolve=null] Ajax 成功時の callback
+   * @param {?Function} [reject=null] Ajax 失敗時の callback
+   * @param {Result} [ResultClass=Result] 成功結果をセットします
    */
-  constructor( types:Types, resolve:Function = null, reject:Function = null, ResultClass = Result ) {
+  constructor(types, resolve = null, reject = null, ResultClass = Result) {
     /**
      * API url, path option, query 情報を引数から保持します
      * @type {Types}
@@ -58,13 +56,13 @@ export class Action {
     this._types = types;
     /**
      * Ajax 成功時の callback を引数から保持します
-     * @type {Function}
+     * @type {?Function}
      * @protected
      */
     this._resolve = resolve;
     /**
      * Ajax 失敗時の callback を引数から保持します
-     * @type {Function}
+     * @type {?Function}
      * @protected
      */
     this._reject = reject;
@@ -81,6 +79,13 @@ export class Action {
      * @protected
      */
     this._url = types.url;
+    /**
+     * API path を types 引数から取り出します
+     * - alias - `this._url`
+     * @type {string}
+     * @since 2018-01-11
+     */
+    this.path = types.url;
     /**
      * API リクエスト時の method( GET, POST, PUT, DELETE )を types 引数から取り出します
      * @type {string}
@@ -99,15 +104,14 @@ export class Action {
      * @type {Function}
      * @protected
      */
-    this._boundSuccess = this.success.bind( this );
+    this._boundSuccess = this.success.bind(this);
     /**
      * <p>Ajax 失敗時の callback<br>
      * this.fail を bind します</p>
      * @type {Function}
      * @protected
      */
-    this._boundFail = this.fail.bind( this );
-
+    this._boundFail = this.fail.bind(this);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -116,50 +120,57 @@ export class Action {
    * url を作成します
    * @return {string} 作成した url を返します
    */
-  get url():string {
+  get url() {
     return this._url;
+  }
+  /**
+   * url をを設定します
+   * @param {string} url API path
+   */
+  set url(url) {
+    this._url = url;
+    this.path = url;
   }
   /**
    * GET|POST|DELETE|PUT form method を返します
    * @return {string|*} method, GET|POST|DELETE|PUT... を返します
    */
-  get method():string {
+  get method() {
     return this._method;
   }
   /**
-   * <p>Types instance, Ajax request に使用します<br>
-   * path, method 情報などが格納されています<p>
+   * Types instance, Ajax request に使用します
+   * - path, method 情報などが格納されています
    * @return {Types} Ajax request に使用する Types instance を返します
    */
-  get types():Types {
+  get types() {
     return this._types;
   }
   /**
-   * <p>引数 resolve から設定された Ajax 成功時のコールバック関数<br>
-   * 成功時に call します</p>
-   * @return {Function} 引数 resolve から設定された Ajax 成功時のコールバック関数を返します
+   * 引数 resolve から設定された Ajax 成功時のコールバック関数
+   * - 成功時に call します
+   * @return {?Function} 引数 resolve から設定された Ajax 成功時のコールバック関数を返します
    */
-  get resolve():Function {
+  get resolve() {
     return this._resolve;
   }
   /**
-   *  <p>引数 reject から設定された Ajax 失敗時のコールバック関数<br>
-   * 失敗時に call します</p>
-   * @return {Function} 引数 reject から設定された Ajax 失敗時のコールバック関数を返します
+   * 引数 reject から設定された Ajax 失敗時のコールバック関数
+   * - 失敗時に call します
+   * @return {?Function} 引数 reject から設定された Ajax 失敗時のコールバック関数を返します
    */
-  get reject():Function {
+  get reject() {
     return this._reject;
   }
   /**
-   * <p>Ajax instance<br>
-   * API リクエスト時に使用します</p>
-   *
+   * Ajax instance
+   * API リクエスト時に使用します
    * @example
    * this.ajax.start(url, method, resolve, reject, ResultClass, headers, formData);
    *
    * @return {Ajax} API リクエスト時に使用する Ajax instance を返します
    */
-  get ajax():Ajax {
+  get ajax() {
     return this._ajax;
   }
   // /**
@@ -170,26 +181,26 @@ export class Action {
   //   this._ajax = ajax;
   // }
   /**
-   * <p>このクラスの Ajax 成功時のコールバック関数</p>
-   * <p>Ajax Class から成功時に call されます</p>
+   * このクラスの Ajax 成功時のコールバック関数
+   * - Ajax Class から成功時に call されます
    * @return {Function} このクラスの Ajax 成功時のコールバック関数を返します
    */
-  get boundSuccess():Function {
+  get boundSuccess() {
     return this._boundSuccess;
   }
   /**
-   * <p>このクラスの Ajax 失敗時のコールバック関数</p>
-   * <p>Ajax Class から失敗時に call されます</p>
+   * このクラスの Ajax 失敗時のコールバック関数
+   * - Ajax Class から失敗時に call されます
    * @return {Function} このクラスの Ajax 失敗時のコールバック関数を返します
    */
-  get boundFail():Function {
+  get boundFail() {
     return this._boundFail;
   }
   /**
    * 成功結果をセットする data Class
-   * @return {*|Result} 成功結果をセットする data Class を返します
+   * @return {Result} 成功結果をセットする data Class を返します
    */
-  get resultClass():Function {
+  get resultClass() {
     return this._resultClass;
   }
   // ---------------------------------------------------
@@ -199,29 +210,29 @@ export class Action {
    * Ajax request を開始します
    * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
    */
-  start( method:string = this.method ):void {
-    method = Safety.string( method, this.method );
-    this.ajax.start( this.url, method, this.boundSuccess, this.boundFail, this.resultClass );
+  start(method = this.method) {
+    method = Safety.string(method, this.method);
+    this.ajax.start(this.url, method, this.boundSuccess, this.boundFail, this.resultClass);
   }
   /**
    * Ajax success callback
-   * @param {Result} result Ajax成功結果
+   * @param {Result} result Ajax成功結果 data
    */
-  success( result:Result ):void {
+  success(result) {
     // success
-    const resolve = this._resolve;
-    if ( typeof resolve === 'function' ) {
+    const resolve = this.resolve;
+    if (typeof resolve === 'function') {
       resolve( result );
     }
   }
   /**
    * Ajax error callback
-   * @param {Error} error Ajax失敗結果
+   * @param {Error} error Ajax失敗結果 Error instance
    */
-  fail( error:Error ):void {
+  fail(error) {
     // error
-    const reject = this._reject;
-    if ( typeof reject === 'function' ) {
+    const reject = this.reject;
+    if (typeof reject === 'function') {
       reject( error );
     }
   }

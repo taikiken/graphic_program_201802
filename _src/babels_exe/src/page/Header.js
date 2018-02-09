@@ -11,44 +11,43 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * <p>header user information / signup</p>
  * 全て static です
  */
-export class Header {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Header is static Class. not use new Header().' );
-
-    }
-  }
+export default class Header {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Header is static Class. not use new Header().' );
+  //
+  //   }
+  // }
   /**
    * header rendering 開始
    */
-  static start():void {
+  static start() {
     // header.user
-    let element = Dom.profile();
-    if ( element !== null ) {
-      let headerUser = new UT.view.header.ViewHeaderUser( element );
+    const element = Dom.profile();
+    if (element !== null) {
+      const headerUser = new UT.view.header.ViewHeaderUser(element);
       headerUser.start();
 
-      let modalElement = Dom.logoutModal();
-      if ( modalElement !== null ) {
-        let modal = new UT.view.modal.ViewLogoutModal( modalElement );
+      const modalElement = Dom.logoutModal();
+      if (modalElement !== null) {
+        const modal = new UT.view.modal.ViewLogoutModal(modalElement);
         modal.start();
       }
     }
-
   }
 }

@@ -20,13 +20,13 @@ import { SPMediaNode } from '../../node/single/SPMediaNode';
 import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 
 // component
-import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
+import ComponentCategoryLabelsLink from '../../../component/categories/ComponentCategoryLabelsLink';
 
 // sp/component.singles
 // import { SPComponentSinglesArticleMedia } from '../singles/SPComponentSinglesArticleMedia';
 
 // ui
-import { Hit } from '../../../ui/Hit';
+import Hit from '../../../ui/Hit';
 
 // view
 // import { ViewSingle } from '../../../view/ViewSingle';
@@ -42,7 +42,7 @@ import { SinglesHistory } from '../../../singles/SinglesHistory';
 import { Page } from '../../../singles/head/Page';
 
 // snap
-import { Snap } from '../../../ui/Snap';
+import Snap from '../../../ui/Snap';
 
 // sp/ui
 // import { SPSnap } from '../../ui/SPSnap';
@@ -53,16 +53,19 @@ import { Snap } from '../../../ui/Snap';
 // import { ComponentSinglesArticleExcerpt } from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
 
 // sp/component/singles-magnet
-import { SPComponentSinglesArticleSwitch } from './SPComponentSinglesArticleSwitch';
+import SPComponentSinglesArticleSwitch from './SPComponentSinglesArticleSwitch';
 
 // util
 import { PageTitle } from '../../../util/PageTitle';
 
 
 // component/singles-content record
-import { RecordSingleState } from '../../../component/singles-content/RecordSingleState';
+import RecordSingleState from '../../../component/singles-content/RecordSingleState';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -84,7 +87,7 @@ const React = self.React;
  * @see https://github.com/undotsushin/undotsushin/issues/1224
  * @since 2016-11-10
  */
-export class SPComponentSinglesArticleMagnet extends React.Component {
+export default class SPComponentSinglesArticleMagnet extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -221,6 +224,12 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
      * @since 2017-04-17
      */
     this.boundBeat = this.onBeat.bind(this);
+    /**
+     * reserve 済み flag
+     * @type {boolean}
+     * @since 2017-12-22
+     */
+    this.reserved = false;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -241,7 +250,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
+   * - 不要かも
    */
   reload() {
     this.updateSingle(this.state.single);
@@ -249,14 +258,16 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
   // --------------------------------------------------
   /**
    * Hit.COLLISION event handler
-   * @param {Object} events Hit.COLLISION event object
+   * - events `{rect: DOMRect, events: {…}, type: "hitCollision", target: Hit}`
+   * - events.rect `top: number, bottom: number, width: number, height: number, left: number, right: number, top: number, x: number, y: number`
+   * @param {Object} events {@link Hit}.COLLISION event object
    */
   hitIn(events) {
     const rect = events.rect;
     const top = rect.top;
-
+    // console.log('SPComponentSinglesArticleMagnet.hitIn', events);
     // 近接 50px 以内で ga 送信します
-    if (Math.abs(top) <= 50) {
+    if (!this.reserved && Math.abs(top) <= 50) {
       // 予約します
       // @since 2016-11-14
       this.reserve();
@@ -279,10 +290,11 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
       return;
     }
     this.waiting = true;
+    this.reserved = true;
     this.timer = setTimeout(() => {
       this.ga();
     }, 1000 * 2);
-    // console.log('reserve', this.props.single.id, this.timer, Date.now());
+    // console.log('SPComponentSinglesArticleMagnet.reserve', this.props.single.id, this.timer, Date.now());
   }
   /**
    * 表示されなくなったので ga 送信をキャンセルします
@@ -297,6 +309,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     }
     clearTimeout(this.timer);
     this.waiting = false;
+    this.reserved = false;
     // console.log('cancel', this.props.single.id, this.timer, Date.now());
   }
   /**
@@ -424,17 +437,16 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
    * @return {?XML} `div.loaded-post` or null を返します
    * */
   render() {
-    const single = this.state.single;
+    const { single, index, sign } = this.state;
 
     if (!single) {
       return null;
     }
 
     return (
-      <div className={`loaded-post loaded-post-${single.id}`} ref={
-        (component) => {
-          this.singlesArticle = component;
-        }}
+      <div
+        className={`loaded-post loaded-post-${single.id}`}
+        ref={(component) => (this.singlesArticle = component)}
       >
         {/* div.post-kv */}
         <div className="single-visual-container" ref="visualElement">
@@ -443,7 +455,9 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
             mediaType={single.mediaType}
             media={single.media}
             isShowImage={single.isShowImage}
-            index={this.state.index}
+            index={index}
+            sp={true}
+            single={single}
           />
           {/*
            <SPComponentSinglesArticleMedia
@@ -461,7 +475,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
             <p className="post-author">{single.user.userName}</p>
 
             <ComponentCategoryLabelsLink
-              index={this.props.index}
+              index={index}
               id={`single-label-${single.id}`}
               categories={single.categories.all}
               anotherCategories={single.anotherCategories}
@@ -469,7 +483,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
 
             <p className="post-date">{single.displayDate}</p>
             <BookmarkNode
-              sign={this.state.sign}
+              sign={sign}
               isBookmarked={single.isBookmarked}
               articleId={String(single.id)}
             />
@@ -477,8 +491,8 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
           {/* 本文 */}
           <SPComponentSinglesArticleSwitch
             single={single}
-            sign={this.state.sign}
-            index={this.state.index}
+            sign={sign}
+            index={index}
             page={this.page}
           />
         </div>

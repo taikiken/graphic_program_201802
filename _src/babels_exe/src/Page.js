@@ -10,42 +10,63 @@
  *
  */
 
+// ui
+import PageTop from './ui/PageTop';
+import Nav from './ui/Nav';
+import FirstVisit from './ui/FirstVisit';
+import Context from './ui/Context';
 
-import {PageTop} from './ui/PageTop';
-import {Nav} from './ui/Nav';
-import {FirstVisit} from './ui/FirstVisit';
-import {Context} from './ui/Context';
-
-import {Index} from './page/Index';
-import {Category} from './page/Category';
-import {Single} from './page/Single';
-import {Search} from './page/Search';
-import {Signup} from './page/Signup';
-import {UserProfile} from './page/UserProfile';
-import {Sidebar} from './page/Sidebar';
-import {Header} from './page/Header';
-import {Bookmarks} from './page/Bookmarks';
-import {Activities} from './page/Activities';
-import {Notifications} from './page/Notifications';
-import {Settings} from './page/Settings';
-import {Comment} from './page/Comment';
-
-import {SearchForm} from './header/SearchForm';
-
-import {CommentDelete} from './modal/CommentDelete';
-import {Flush} from './modal/Flush';
-
+// page
+import Index from './page/Index';
+import Category from './page/Category';
+import Single from './page/Single';
+import Search from './page/Search';
+import Signup from './page/Signup';
+import UserProfile from './page/UserProfile';
+import Sidebar from './page/Sidebar';
+import Header from './page/Header';
+import Bookmarks from './page/Bookmarks';
+import Activities from './page/Activities';
+import Notifications from './page/Notifications';
+import Settings from './page/Settings';
+import Comment from './page/Comment';
 // since 2017-11-06
 import SignupWow from './page/SignupWow';
+// since 2017-12-18
+import Announce from './page/Announce';
+
+// headers
+import SearchForm from './header/SearchForm';
+
+// modal
+import CommentDelete from './modal/CommentDelete';
+import Flush from './modal/Flush';
+
 
 // let _symbol = Symbol();
+/**
+ * scroll flag
+ * @type {boolean}
+ * @private
+ */
+let _scrolled = false;
 
-let _scrolled:Boolean = false;
-
+/**
+ * `Scroll.sticky` 戻り値 TweenLite insatnce
+ * @type {?TweenLite}
+ * @private
+ */
 let _tween = null;
 
 // UT
+/**
+ * [library] - UT
+ */
 const UT = self.UT;
+/**
+ * [library] - UT.Dom
+ * @type {Dom}
+ */
 const Dom = UT.app.Dom;
 
 // let Sagen = self.Sagen;
@@ -56,7 +77,7 @@ const Dom = UT.app.Dom;
  * url に沿ったページ作成 Class をコールします</p>
  * 全て static です
  */
-export class Page {
+export default class Page {
   // /**
   //  * static class です, instance を作成しません
   //  * @param {Symbol} target Singleton を実現するための private symbol
@@ -71,15 +92,16 @@ export class Page {
   /**
    * Page 初期化, UT.app.Router event を listen します
    */
-  static init():void {
-
+  static init() {
     // 右クリック禁止
     Context.disable();
 
     // page 上部に貼り付ける
     Page.bindScroll();
-    setTimeout( Page.reserveSticky, 25);
-    
+    // setTimeout(Page.reserveSticky, 25);
+    // 2frame へ - 2017-12-04
+    setTimeout(Page.reserveSticky, 32);
+
     // user login check
     UT.app.User.init();
 
@@ -90,31 +112,31 @@ export class Page {
     Flush.start();
 
     // router
-    let Router = UT.app.Router;
-    let router = Router.factory();
+    const Router = UT.app.Router;
+    const router = Router.factory();
 
     Page.router = router;
 
     // index
-    router.on( Router.INDEX, Page.index );
+    router.on(Router.INDEX, Page.index);
     // category
-    router.on( Router.CATEGORY, Page.category );
+    router.on(Router.CATEGORY, Page.category);
     // single(detail|p)
-    router.on( Router.SINGLE, Page.single );
+    router.on(Router.SINGLE, Page.single);
     // search
-    router.on( Router.SEARCH, Page.search );
+    router.on(Router.SEARCH, Page.search);
 
     // comment
-    router.on( Router.COMMENT, Page.comment );
-    router.on( Router.COMMENT_REPLY, Page.commentReply );
+    router.on(Router.COMMENT, Page.comment);
+    router.on(Router.COMMENT_REPLY, Page.commentReply);
 
     // 管理系
     // signup
-    router.on( Router.SIGNUP, Page.signup );
+    router.on(Router.SIGNUP, Page.signup);
     // login
-    router.on( Router.LOGIN, Page.login );
+    router.on(Router.LOGIN, Page.login);
     // logout
-    router.on( Router.LOGOUT, Page.logout );
+    router.on(Router.LOGOUT, Page.logout);
     /*
     // reset_password
     router.on( Router.RESET_PASSWORD, Page.password );
@@ -122,24 +144,24 @@ export class Page {
     router.on( Router.RESET_PASSWORD_RESETTING, Page.passwordResetting );
     */
     // mypage
-    router.on( Router.MYPAGE, Page.mypage );
+    router.on(Router.MYPAGE, Page.mypage);
     // mypage/activities
-    router.on( Router.MYPAGE_ACTIVITIES, Page.activities );
+    router.on(Router.MYPAGE_ACTIVITIES, Page.activities);
     // notifications
-    router.on( Router.NOTIFICATIONS, Page.notifications );
+    router.on(Router.NOTIFICATIONS, Page.notifications);
     // settings
-    router.on( Router.SETTING, Page.settings );
+    router.on(Router.SETTING, Page.settings);
     // settings/interest
-    router.on( Router.SETTING_INTEREST, Page.interest );
+    router.on(Router.SETTING_INTEREST, Page.interest);
 
     // settings/social
-    router.on( Router.SETTING_SOCIAL, Page.social );
+    router.on(Router.SETTING_SOCIAL, Page.social);
 
     // settings/deactivate
-    router.on( Router.SETTING_DEACTIVATE, Page.deactivate );
+    router.on(Router.SETTING_DEACTIVATE, Page.deactivate);
 
     // 404
-    router.on( Router.NOT_FOUND, Page.notFound );
+    router.on(Router.NOT_FOUND, Page.notFound);
 
     // area - from 2017-09-04
     router.on(Router.CATEGORY_AREA, Page.area);
@@ -153,7 +175,7 @@ export class Page {
   /**
    * scroll, wheel を監視し event が発生したら sticky をキャンセルする
    */
-  static bindScroll():void {
+  static bindScroll() {
     // scroll event listen
     window.addEventListener('scroll', Page.onScroll, false);
     window.addEventListener('wheel', Page.onScroll, false);
@@ -166,7 +188,7 @@ export class Page {
    * scroll, wheel 監視をキャンセルし
    * body style を空にする
    */
-  static disposeScroll():void {
+  static disposeScroll() {
     _scrolled = true;
     // load event unbind
     window.removeEventListener( 'load', Page.sticky );
@@ -180,7 +202,7 @@ export class Page {
     document.body.removeEventListener('touchend', Page.onTouchEnd);
 
     document.body.style.cssText = '';
-    if ( _tween !== null ) {
+    if (_tween !== null) {
       _tween.kill();
       _tween = null;
     }
@@ -189,28 +211,28 @@ export class Page {
   /**
    * touchstart で touchmove 監視
    */
-  static onTouchStart():void {
+  static onTouchStart() {
     // console.log( 'onTouchStart', arguments );
     document.body.addEventListener('touchmove', Page.onScroll, false);
   }
   /**
    * touchend で touchmove 監視キャンセル
    */
-  static onTouchEnd():void {
+  static onTouchEnd() {
     // console.log( 'onTouchEnd', arguments );
     document.body.removeEventListener('touchmove', Page.onScroll);
   }
   /**
    * scroll 関連 event handler
    */
-  static onScroll():void {
+  static onScroll() {
     Page.disposeScroll();
   }
   /**
    * window.onload での stickyを予約する
    */
-  static reserveSticky():void {
-    window.addEventListener( 'load', Page.sticky, false );
+  static reserveSticky() {
+    window.addEventListener('load', Page.sticky, false);
 
     if (!_scrolled) {
       // fixed にして貼り付ける
@@ -220,11 +242,11 @@ export class Page {
   /**
    * scroll 位置を top に戻す
    */
-  static sticky():void {
-    window.removeEventListener( 'load', Page.sticky );
+  static sticky() {
+    window.removeEventListener('load', Page.sticky);
     // ユーザーがスクロールしたらキャンセルする
     if ( !_scrolled ) {
-      _tween = UT.util.Scroll.sticky( 0.1, 1, null, Page.disposeScroll, true );
+      _tween = UT.util.Scroll.sticky(0.1, 1, null, Page.disposeScroll, true);
     } else {
       Page.disposeScroll();
     }
@@ -232,53 +254,53 @@ export class Page {
   /**
    * event unbind
    */
-  static dispose():void {
+  static dispose() {
     let Router = UT.app.Router;
     let router = Page.router;
 
     // index
-    router.off( Router.INDEX, Page.index );
+    router.off(Router.INDEX, Page.index);
     // category
-    router.off( Router.CATEGORY, Page.category );
+    router.off(Router.CATEGORY, Page.category);
     // single(detail|p)
-    router.off( Router.SINGLE, Page.single );
+    router.off(Router.SINGLE, Page.single);
     // search
-    router.off( Router.SEARCH, Page.search );
+    router.off(Router.SEARCH, Page.search);
 
     // comment
-    router.off( Router.COMMENT, Page.comment );
-    router.off( Router.COMMENT_REPLY, Page.commentReply );
+    router.off(Router.COMMENT, Page.comment);
+    router.off(Router.COMMENT_REPLY, Page.commentReply);
 
     // 管理系
     // signup
-    router.off( Router.SIGNUP, Page.signup );
+    router.off(Router.SIGNUP, Page.signup);
     // login
-    router.off( Router.LOGIN, Page.login );
+    router.off(Router.LOGIN, Page.login);
     // logout
-    router.off( Router.LOGOUT, Page.logout );
+    router.off(Router.LOGOUT, Page.logout);
 
     // mypage
-    router.off( Router.MYPAGE, Page.mypage );
+    router.off(Router.MYPAGE, Page.mypage);
     // mypage/activities
-    router.off( Router.MYPAGE_ACTIVITIES, Page.activities );
+    router.off(Router.MYPAGE_ACTIVITIES, Page.activities);
     // notifications
-    router.off( Router.NOTIFICATIONS, Page.notifications );
+    router.off(Router.NOTIFICATIONS, Page.notifications);
     // settings
-    router.off( Router.SETTING, Page.settings );
+    router.off(Router.SETTING, Page.settings);
     // settings/interest
-    router.off( Router.SETTING_INTEREST, Page.interest );
+    router.off(Router.SETTING_INTEREST, Page.interest);
 
     // settings/social
-    router.off( Router.SETTING_SOCIAL, Page.social );
+    router.off(Router.SETTING_SOCIAL, Page.social);
 
     // settings/deactivate
-    router.off( Router.SETTING_DEACTIVATE, Page.deactivate );
+    router.off(Router.SETTING_DEACTIVATE, Page.deactivate);
 
     // area
     router.off(Router.CATEGORY_AREA, Page.area);
 
     // 404
-    router.off( Router.NOT_FOUND, Page.notFound );
+    router.off(Router.NOT_FOUND, Page.notFound);
     // signup-wow from 2017-11-06
     router.off(Router.SIGNUP_WOW, Page.signupWow);
   }
@@ -299,11 +321,13 @@ export class Page {
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start('all');
   }
   /**
    * home, index page
    */
-  static index():void {
+  static index() {
     // page top
     PageTop.start();
     // search from
@@ -311,50 +335,56 @@ export class Page {
     // index
     Index.start();
     // nav
-    Nav.start( 'home' );
+    Nav.start('home');
 
     // event unbind
     Page.dispose();
 
     // first
     FirstVisit.start();
+    // announce
+    // Announce.start('all');
+    // UNDO_SPBL-401 【Web】一面リニューアル / 「TOP」でのカテゴリーAPIの問い合わせ先変更
+    Announce.start('top');
   }
   /**
    * category page
    * @param {Object} event Router event object
    */
-  static category( event:Object ):void {
-
-    let slug = event.slug;
-    let type = event.slugType;
+  static category(event) {
+    const slug = event.slug;
+    // const type = event.slugType;
     // page top
     PageTop.start();
     // search from
     SearchForm.start();
     // category
-    Category.start( slug, type );
+    // Category.start(slug, type);
+    Category.start(slug);
     // nav
-    Nav.start( slug );
+    Nav.start(slug);
 
     // event unbind
     Page.dispose();
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start(slug);
   }
   /**
    * single, detail page
    * @param {Object} event Router event object
    */
-  static single( event:Object ):void {
-
-    let articleId = event.id;
+  static single(event) {
+    // console.log('Page.single', event);
+    const articleId = event.id;
     // page top
     PageTop.start();
     // search from
     SearchForm.start();
     // single
-    Single.start( articleId );
+    Single.start(articleId);
 
     // event unbind
     Page.dispose();
@@ -366,45 +396,47 @@ export class Page {
    * コメント詳細
    * @param {Object} event Router event object
    */
-  static comment( event:Object ):void {
-
+  static comment(event) {
     // page top
     PageTop.start();
     // search from
     SearchForm.start();
 
-    Comment.user( 'comment', event.article, event.comment );
+    Comment.user('comment', event.article, event.comment);
 
     // event unbind
     Page.dispose();
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start('all');
   }
   /**
    * コメント返信 詳細
    * @param {Object} event Router event object
    */
-  static commentReply( event:Object ):void {
-
+  static commentReply(event) {
     // page top
     PageTop.start();
     // search from
     SearchForm.start();
 
-    Comment.user( 'reply', event.article, event.comment, event.article );
+    Comment.user('reply', event.article, event.comment, event.article);
 
     // event unbind
     Page.dispose();
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start('all');
   }
   /**
    * 検索ページ
    * @param {Object} event Router.SEARCH event object
    */
-  static search( event:Object ):void {
+  static search(event) {
     // page top
     PageTop.start();
     // search from
@@ -417,13 +449,15 @@ export class Page {
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start('all');
   }
   // ----------------------------------------------------
   // header, footer いらない
   /**
    * signup page
    */
-  static signup():void {
+  static signup() {
     Signup.start();
   }
   /**
@@ -436,10 +470,10 @@ export class Page {
   /**
    * login page
    */
-  static login():void {
-    let loginElement = Dom.login();
-    if ( loginElement !== null ) {
-      let login = new UT.view.login.ViewLogin( loginElement );
+  static login() {
+    const loginElement = Dom.login();
+    if (loginElement !== null) {
+      const login = new UT.view.login.ViewLogin(loginElement);
       login.start();
     }
 
@@ -450,7 +484,7 @@ export class Page {
   /**
    * logout
    */
-  static logout():void {
+  static logout() {
     // page top
     PageTop.start();
     // search from
@@ -460,9 +494,9 @@ export class Page {
     Header.start();
 
     if ( UT.app.User.sign ) {
-      let logoutElement = Dom.logout();
-      if ( logoutElement !== null ) {
-        let logout = new UT.view.login.ViewLogout( logoutElement );
+      const logoutElement = Dom.logout();
+      if (logoutElement !== null) {
+        const logout = new UT.view.login.ViewLogout(logoutElement);
         logout.start();
       }
     }
@@ -485,7 +519,7 @@ export class Page {
   /**
    * マイページ, index（ブックマーク一覧）
    */
-  static mypage():void {
+  static mypage() {
     // page top
     PageTop.start();
     // search from
@@ -494,7 +528,7 @@ export class Page {
     Sidebar.start();
     Header.start();
 
-    if ( UT.app.User.sign ) {
+    if (UT.app.User.sign) {
       // login only
       UserProfile.start();
       Bookmarks.start();
@@ -506,7 +540,7 @@ export class Page {
   /**
    * マイページ / アクティビティーズ一覧
    */
-  static activities():void {
+  static activities() {
     // page top
     PageTop.start();
     // search from
@@ -515,7 +549,7 @@ export class Page {
     Sidebar.start();
     Header.start();
 
-    if ( UT.app.User.sign ) {
+    if (UT.app.User.sign) {
       // login only
       UserProfile.start();
       Activities.start();
@@ -527,7 +561,7 @@ export class Page {
   /**
    * マイページ / お知らせ一覧
    */
-  static notifications():void {
+  static notifications() {
     // page top
     PageTop.start();
     // search from
@@ -549,7 +583,7 @@ export class Page {
   /**
    * 設定 基本情報設定
    */
-  static settings():void {
+  static settings() {
     // page top
     PageTop.start();
     // search from
@@ -558,7 +592,7 @@ export class Page {
     Sidebar.start();
     Header.start();
 
-    if ( UT.app.User.sign ) {
+    if (UT.app.User.sign) {
       // login only
       Settings.account();
     }
@@ -569,7 +603,7 @@ export class Page {
   /**
    * 設定 パーソナライズ設定 興味のある競技
    */
-  static interest():void {
+  static interest() {
     // page top
     PageTop.start();
     // search from
@@ -578,7 +612,7 @@ export class Page {
     Sidebar.start();
     Header.start();
 
-    if ( UT.app.User.sign ) {
+    if (UT.app.User.sign) {
       // login only
       Settings.interest();
     }
@@ -589,7 +623,7 @@ export class Page {
   /**
    * 設定 ソーシャル連携
    */
-  static social():void {
+  static social() {
     // page top
     PageTop.start();
     // search from
@@ -603,7 +637,7 @@ export class Page {
   /**
    * 退会
    */
-  static deactivate():void {
+  static deactivate() {
     // page top
     PageTop.start();
     // search from
@@ -612,7 +646,7 @@ export class Page {
     Sidebar.start();
     Header.start();
 
-    if ( UT.app.User.sign ) {
+    if (UT.app.User.sign) {
       // login only
       Settings.deactivate();
     }
@@ -621,7 +655,7 @@ export class Page {
     Page.dispose();
   }
   /**
-   * 地域別記事 - category like 表示
+   * 地域別記事 - category のように 表示
    * @param {Object} event Router event object
    * @since 2017-09-04
    */
@@ -644,5 +678,7 @@ export class Page {
 
     // first
     FirstVisit.start();
+    // announce
+    Announce.start(slug);
   }
 }

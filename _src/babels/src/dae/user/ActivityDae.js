@@ -24,77 +24,87 @@ export class ActivityDae {
    * アクティビティ一覧 配列 1 data
    * @param {Object} activity アクティビティ一覧
    */
-  constructor( activity:Object ) {
-    activity = Safety.object( activity );
-
-    // date check
-    if ( Safety.check( activity, 'date' ) ) {
-      /**
-       * activity.date
-       * @deprecated instead use article.display_date
-       * @type {string}
-       * @protected
-       */
-      this._formatDate = Format.date( activity.date );
-
-    }
+  constructor(activity) {
+    const altActivity = Safety.object(activity);
+    // // date check
+    // if (Safety.check(activity, 'date')) {
+    //   /**
+    //    * activity.date
+    //    * @deprecated instead use article.display_date
+    //    * @type {string}
+    //    * @protected
+    //    */
+    //   this._formatDate = Format.date( activity.date );
+    // }
+    /**
+     * activity.date
+     * @deprecated instead use article.display_date
+     * @type {string}
+     */
+    this.formatDate = Safety.check(altActivity, 'date') ? Format.date(altActivity.date) : '';
     /**
      * アクティビティ一覧 配列 1 data
      * @type {Object}
      * @protected
      */
-    this._activity = activity;
+    this._activity = altActivity;
     /**
      * activity.user
      * @type {UserDae}
      * @protected
      */
-    this._user = new UserDae( activity.user );
+    this._user = new UserDae(altActivity.user);
     // article
     /**
      * activity.article
      * @type {NoticeArticleDae}
      * @protected
      */
-    this._article = new NoticeArticleDae( activity.article );
+    this._article = new NoticeArticleDae(altActivity.article);
+    /**
+     * 添え字
+     * @type {number}
+     * @default 0
+     * @since 2017-12-14
+     */
+    this.index = 0;
   }
   /**
    * response.notifications
-   * @return {Object|*} JSON response.notifications 配列単独データ を返します
+   * @return {Object} JSON response.notifications 配列単独データ を返します
    */
-  get activity():Object {
+  get activity() {
     return this._activity;
   }
-
   /**
    * activity.id
-   * @return {Number} activity id を返します
+   * @return {number} activity id を返します
    */
-  get id():Number {
+  get id() {
     return this.activity.id;
   }
   /**
    * activity.date
    * @return {string} ISO8601 日付を返します
    */
-  get date():string {
+  get date() {
     return this.activity.date;
   }
-  /**
-   * <p>activity.date をフォーマット</p>
-   * **使用しません** <br>
-   * 代わりに displayDate使用
-   * @deprecated instead use displayDate使用
-   * @return {string} ISO8601 を日本語形式日付にし返します
-   */
-  get formatDate():string {
-    return this._formatDate;
-  }
+  // /**
+  //  * <p>activity.date をフォーマット</p>
+  //  * **使用しません** <br>
+  //  * 代わりに displayDate使用
+  //  * @deprecated instead use displayDate使用
+  //  * @return {string} ISO8601 を日本語形式日付にし返します
+  //  */
+  // get formatDate() {
+  //   return this._formatDate;
+  // }
   /**
    * 表示日付
    * @return {string} 相対日付返します
    */
-  get displayDate():string {
+  get displayDate() {
     return this.activity.display_date;
   }
   /**
@@ -107,21 +117,21 @@ export class ActivityDae {
    *
    * @return {string} アクティビティの種類を返します
    */
-  get action():string {
+  get action() {
     return this.activity.action;
   }
   /**
    * activity.user
-   * @return {UserDae|*} 誰からの通知かユーザー情報を返します
+   * @return {UserDae} 誰からの通知かユーザー情報を返します
    */
-  get user():UserDae {
+  get user() {
     return this._user;
   }
   /**
    * activity.article
-   * @return {NoticeArticleDae|*} 対象記事情報を返します
+   * @return {NoticeArticleDae} 対象記事情報を返します
    */
-  get article():NoticeArticleDae {
+  get article() {
     return this._article;
   }
 }

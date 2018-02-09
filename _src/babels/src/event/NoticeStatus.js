@@ -13,8 +13,18 @@
 
 import {EventDispatcher} from './EventDispatcher';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link NoticeStatus} singleton instance を保証するための inner Symbol
+ * @type {symbol}
+ * @private
+ */
+const noticeStatusSymbol = Symbol('NoticeStatus singleton instance');
+/**
+ * {@link NoticeStatus} singleton instance
+ * @type {?NoticeStatus}
+ * @private
+ */
+let singletonInstance = null;
 
 /**
  * お知らせ更新を通知するための custom Event
@@ -22,24 +32,18 @@ let _instance = null;
  * var status = NoticeStatus.factory();
  * */
 export class NoticeStatus extends EventDispatcher {
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
   /**
-   * お知らせ更新 を通知する SingleTon
-   *
-   * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {UserStatus} UserStatus インスタンスを返します
+   * instance を生成します
+   * @return {NoticeStatus} NoticeStatus instance を返します
    */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'NoticeStatus is static Class. not use new NoticeStatus().' );
-
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new NoticeStatus(noticeStatusSymbol);
     }
-
-    if ( _instance === null ) {
-      super();
-      _instance = this;
-    }
-    return _instance;
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  EVENT
@@ -52,30 +56,33 @@ export class NoticeStatus extends EventDispatcher {
     return 'noticeUpdateCount';
   }
   // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * お知らせ更新 を通知する SingleTon
+   *
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {UserStatus} UserStatus インスタンスを返します
+   */
+  constructor(target) {
+    if (noticeStatusSymbol !== target) {
+      throw new Error( 'NoticeStatus is static Class. not use new NoticeStatus().' );
+    }
+    if (singletonInstance === null) {
+      super();
+      singletonInstance = this;
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * お知らせが更新 Event を発火させます
    * @param {Number} count お知らせ件数
    */
-  update( count:Number ):void {
-    this.dispatch( { type: NoticeStatus.UPDATE_COUNT, count: count } );
+  update(count) {
+    this.dispatch({ type: NoticeStatus.UPDATE_COUNT, count });
   }
-  // ---------------------------------------------------
-  //  static method
-  // ---------------------------------------------------
-  /**
-   * instance を生成します
-   * @return {NoticeStatus} NoticeStatus instance を返します
-   */
-  static factory():NoticeStatus {
 
-    if ( _instance === null ) {
-
-      _instance = new NoticeStatus( _symbol );
-
-    }
-
-    return _instance;
-  }
 }

@@ -141,6 +141,55 @@ END_DOC;
 
   }
 
+  /**
+  * 表示するタブの一覧を取得する
+  *
+  * @param  bool $is_sort 好きな競技でフィルタした結果を返すならtrue * PC版はソートしない
+  * @return array
+  */
+  public function get_site_tabs( $is_sort = false ) {
+
+    $tabs = array();
+
+    // ユーザーIDを取得
+    $uid = $this->get_user_id();
+    $sql="select tabs.category_id as id , tabs.title , t1.name_e , tabs.n from tabs inner join u_categories t1 on t1.id=tabs.category_id where tabs.flag=1 and t1.flag=1 order by tabs.n asc;";
+
+    $this->query($sql);
+    while( $f = $this->fetch_array() ){
+        $tmp_array["id"]=(int)$f["id"];
+        $tmp_array["label"]=$f["title"];
+        $tmp_array["slug"]=$f["name_e"];
+
+        $tabs[] = $tmp_array;
+    }
+
+    // 並び替えする
+    if( preg_match("/^[0-9]+$/",$uid) || $is_sort === true ) :
+        //対象となるidを取得
+        $sql=sprintf("select uc1.id from (u_categories uc1 inner join u_category uc2 on uc2.categoryid = uc1.id) inner join tabs on uc1.id = tabs.category_id where uc2.userid = %s and uc2.flag = 1 order by tabs.n asc;",$uid);
+        $this->query($sql);
+        while( $f = $this->fetch_array() ){
+            $target_list[] = $f;
+        }
+
+        //対象の配列だけを抽出
+        $interest_list = array();
+        foreach ($tabs as $key => $value){
+            foreach ($target_list as $t_key => $t_value){
+                if((int)$t_value['id'] === $value['id']){
+                    $interest_list[] = $value;
+                    unset($tabs[$key]);
+                }
+            }
+        }
+        //抽出した配列と元の配列を結合
+        $tabs = array_merge($interest_list,$tabs);
+    endif;
+
+    return $tabs;
+
+  }
 
   /**
   * カテゴリー情報を取得する = /api/v1/category/{$slug}

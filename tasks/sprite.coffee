@@ -181,6 +181,7 @@ gulp.task 'sprite:build', ->
           orientation: setting.sprite.option
           margin: 0
           split: true
+          cachebuster: true
         # node 6.2.1 拡張子切り替えができない
         # $.if 拡張子切り替えができないので全て img/sprite へ書き出す
         .pipe $.if( '*.png', gulp.dest( dir.sprite.img ), gulp.dest( dir.sprite.css ) )
@@ -217,6 +218,7 @@ gulp.task 'sprite:build:shell', ->
           orientation: setting.sprite.option
           margin: 0
           split: true
+          cachebuster: true
         # node 6.2.1 拡張子切り替えができない
         # $.if 拡張子切り替えができないので全て img/sprite へ書き出す
         .pipe $.if( '*.png', gulp.dest( dir.sprite.img ), gulp.dest( dir.sprite.css ) )

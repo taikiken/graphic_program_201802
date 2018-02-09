@@ -11,7 +11,7 @@
  */
 
 // ui
-import { Snap } from '../../ui/Snap';
+import Snap from '../../ui/Snap';
 
 // util
 import { Elements } from '../../util/Elements';
@@ -20,6 +20,9 @@ import { Elements } from '../../util/Elements';
  * 記事詳細・次の記事一覧 mobile snap, offset 値を加算します
  */
 export class SPSnap extends Snap {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * hit instance を作成し event handler を設定します
    * @param {Element} element 対象 element
@@ -34,6 +37,9 @@ export class SPSnap extends Snap {
      */
     this.sticky = new Elements(document.querySelector('div.header-sticky'));
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * top 位置に + するオフセット値<br>
    * div.header-sticky height - loaded_post.border-top-width 分 offset します

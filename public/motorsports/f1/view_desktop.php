@@ -40,48 +40,31 @@
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
 
+  <script>
+  var SPBL_ENV = {
+    'env'      : '',
+    'platform' : 'web_desktop',
+    'page'     : 'feature',
+    'category' : 'motersports',
+    'p'        : 'f1',
+    'provider' : ''
+  };
+  </script>
+
+
   <link rel="canonical" href="https://sportsbull.jp/motorsports/<?php echo $option_directory; ?>/">
   <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
 
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
-  <?php // #1876 - Google Optimize ?>
-  <style>.async-hide { opacity: 0 !important} </style>
-  <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-  h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-  (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-  })(window,document.documentElement,'async-hide','dataLayer',4000,
-  {'GTM-KJ33JM9':true});</script>
-  <?php // Google Optimize ?>
+  <!-- google -->
+  <link rel="stylesheet" href="/assets/google/style.css">
+  <script src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+  <script src="/assets/google/dfp.js"></script>
+  <script src="/assets/google/ga.js"></script>
+  <!-- // google -->
 
-  <script type='text/javascript'>
-    var googletag = googletag || {};
-    googletag.cmd = googletag.cmd || [];
-    (function() {
-      var gads = document.createElement('script');
-      gads.async = true;
-      gads.type = 'text/javascript';
-      var useSSL = 'https:' == document.location.protocol;
-      gads.src = (useSSL ? 'https:' : 'http:') +
-        '//www.googletagservices.com/tag/js/gpt.js';
-      var node = document.getElementsByTagName('script')[0];
-      node.parentNode.insertBefore(gads, node);
-    })();
-  </script>
-
-  <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-   ga('create', 'UA-74679267-1', 'auto');
-   ga('require', 'GTM-KJ33JM9');
-   ga('require', 'linkid');
-   ga('require', 'displayfeatures');
-   ga('send', 'pageview');
-  </script>
 </head>
 <body>
 

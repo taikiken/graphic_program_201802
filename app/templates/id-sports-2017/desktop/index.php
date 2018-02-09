@@ -243,6 +243,17 @@
 <script src="/assets/js/<?php echo $page['dir_name']; ?>.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
+// # パンくずリスト
+// ==============================
+  $BREADCRUMB = array(
+    array(
+      'label' => '第1回知的障がい者スポーツ交流プログラム',
+      'path'  => '/id-sports-2017/'
+    ),
+  );
+?>
+
+<?php
 
 include_once __DIR__."/../../desktop/_footer.php";
 include_once __DIR__."/../../_debug.php";

@@ -14,17 +14,38 @@
 import { WidgetType } from '../../app/const/WidgetType';
 
 // component
-import { ComponentSinglesWidget } from './ComponentSinglesWidget';
+import ComponentSinglesWidget from './ComponentSinglesWidget';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
+ * @TODO future remove - not use
  * PC: 記事詳細「次の記事一覧」 > オススメ記事・関連記事・人気記事<br>
  * 出力 Component を「記事詳細」index を元に判断します
  * @since 2016-09-30
  */
 export class ComponentSinglesWidgetOption extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * React props
+   * @return {{single: SingleDae, sign: boolean, index: number}} React props
+   */
+  static get propTypes() {
+    return {
+      // SingleDae - 記事詳細データ recommend_articles 抽出
+      single: React.PropTypes.object.isRequired,
+      // ログイン済みかのフラッグ
+      sign: React.PropTypes.bool.isRequired,
+      // 記事表示順序
+      index: React.PropTypes.number.isRequired
+    };
+  }
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentSinglesWidgetOption.propTypes}
@@ -40,6 +61,20 @@ export class ComponentSinglesWidgetOption extends React.Component {
       sign: props.sign,
       index: props.index
     };
+  }
+  /**
+   * 表示を更新します
+   * @param {SingleDae} single 更新する SingleDae
+   */
+  updateSingle(single) {
+    this.setState({ single });
+  }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * - 不要かも
+   */
+  reload() {
+    this.updateSingle(this.state.single);
   }
   /**
    * state.index が 3 の倍数の時に `ComponentSinglesWidget` {@link ComponentSinglesWidget} を使用します
@@ -80,37 +115,6 @@ export class ComponentSinglesWidgetOption extends React.Component {
         type={type}
       />
     );
-  }
-  /**
-   * 表示を更新します
-   * @param {SingleDae} single 更新する SingleDae
-   */
-  updateSingle(single) {
-    this.setState({ single });
-  }
-  /**
-   * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
-   */
-  reload() {
-    this.updateSingle(this.state.single);
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * React props
-   * @return {{single: SingleDae, sign: boolean, index: number}} React props
-   */
-  static get propTypes() {
-    return {
-      // SingleDae - 記事詳細データ recommend_articles 抽出
-      single: React.PropTypes.object.isRequired,
-      // ログイン済みかのフラッグ
-      sign: React.PropTypes.bool.isRequired,
-      // 記事表示順序
-      index: React.PropTypes.number.isRequired
-    };
   }
 }
 

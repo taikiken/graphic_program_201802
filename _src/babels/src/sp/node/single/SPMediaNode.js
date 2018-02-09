@@ -13,17 +13,23 @@
 
 import {MediaType} from '../../../app/const/MediaType';
 
-import {MediaImageNode} from '../../../node/single/MediaImageNode';
+// import {MediaImageNode} from '../../../node/single/MediaImageNode';
 import {SPMediaVideoNode} from './SPMediaVideoNode';
+import { SingleDae } from '../../../dae/SingleDae';
+import ComponentMediaImage from '../../../component/media/ComponentMediaImage';
 
 // React
-let React = self.React;
+/**
+ * [library] - React
+ */
+const React = self.React;
 
 /**
+ * @TODO component + .jsx する
  * SP 記事詳細 上部 メインビジュアル（画像・動画）
  * @type {ReactClass}
  */
-export let SPMediaNode = React.createClass( {
+export const SPMediaNode = React.createClass( {
   propTypes: {
     // response.id (記事 Id)
     articleId: React.PropTypes.string.isRequired,
@@ -33,7 +39,10 @@ export let SPMediaNode = React.createClass( {
     isShowImage: React.PropTypes.bool.isRequired,
     // 記事表示位置, -1: 記事詳細先頭
     // @since 2016-11-13
-    index: React.PropTypes.number
+    index: React.PropTypes.number,
+    // 2018-01-13
+    sp: React.PropTypes.bool.isRequired,
+    single: React.PropTypes.instanceOf(SingleDae).isRequired,
   },
   // @default -1
   // @since 2016-11-13
@@ -43,39 +52,52 @@ export let SPMediaNode = React.createClass( {
     };
   },
   render: function() {
-
-    let mediaType = this.props.mediaType;
-    let media = this.props.media;
+    // let mediaType = this.props.mediaType;
+    // let media = this.props.media;
+    const { mediaType, media, isShowImage, articleId, index, single, sp } = this.props;
 
     // 2016-06-06
     // 記事詳細で画像を表示しない
-    if ( !this.props.isShowImage ) {
+    if (!isShowImage) {
       return null;
     }
-
-    if ( mediaType === MediaType.IMAGE ) {
-      // image type
+    if (mediaType === MediaType.IMAGE) {
+      // // image type
+      // return (
+      //   <MediaImageNode
+      //     images={media.images}
+      //   />
+      // );
       return (
-        <MediaImageNode
+        <ComponentMediaImage
           images={media.images}
+          single={single}
+          sp={sp}
         />
       );
-    } else if ( mediaType === MediaType.VIDEO ) {
+    } else if (mediaType === MediaType.VIDEO) {
       // may be video
-      if ( !media.video || ( !media.video.url && !media.video.youtube && !media.video.facebook ) ) {
+      if (!media.video || (!media.video.url && !media.video.youtube && !media.video.facebook)) {
         // not correct video, instead use images
+        // return (
+        //   <MediaImageNode
+        //     images={media.images}
+        //   />
+        // );
         return (
-          <MediaImageNode
+          <ComponentMediaImage
             images={media.images}
+            single={single}
+            sp={sp}
           />
         );
       } else {
         // show video
         return (
           <SPMediaVideoNode
-            articleId={this.props.articleId}
+            articleId={articleId}
             media={media}
-            index={this.props.index}
+            index={index}
           />
         );
       }

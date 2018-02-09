@@ -20,46 +20,29 @@
   <!-- favicon -->
   <link rel="shortcut icon" href="/favicon.ico">
 
+  <script>
+  var SPBL_ENV = {
+    'env'      : '',
+    'platform' : '',
+    'page'     : 'stats',
+    'category' : 'big6tv',
+    'p'        : '',
+    'provider' : ''
+  };
+  </script>
+
   <link rel="canonical" href="https://sportsbull.jp/big6tv/">
   <script src="/assets/js/libs/vendor.react.js?v=d56cb17f"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=d56cb17f"></script>
   <link rel="stylesheet" href="/assets/css/ui.css?v=d56cb17f">
 
-  <script type='text/javascript'>
-    var googletag = googletag || {};
-    googletag.cmd = googletag.cmd || [];
-    (function() {
-      var gads = document.createElement('script');
-      gads.async = true;
-      gads.type = 'text/javascript';
-      var useSSL = 'https:' == document.location.protocol;
-      gads.src = (useSSL ? 'https:' : 'http:') +
-        '//www.googletagservices.com/tag/js/gpt.js';
-      var node = document.getElementsByTagName('script')[0];
-      node.parentNode.insertBefore(gads, node);
-    })();
-  </script>
+  <!-- google -->
+  <link rel="stylesheet" href="/assets/google/style.css">
+  <script src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+  <script src="/assets/google/dfp.js"></script>
+  <script src="/assets/google/ga.js"></script>
+  <!-- // google -->
 
-    <style>.async-hide { opacity: 0 !important} </style>
-  <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-  h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-  (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-  })(window,document.documentElement,'async-hide','dataLayer',4000,
-  {'GTM-KJ33JM9':true});</script>
-
-  <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-   ga('create', 'UA-74679267-1', 'auto');
-   ga('require', 'GTM-KJ33JM9');
-   ga('require', 'linkid');
-   ga('require', 'displayfeatures');
-   ga('send', 'pageview');
-
-  </script>
 </head>
 <body>
 <div id="whole" class="whole theme_big6">
@@ -1412,86 +1395,76 @@
 
 
 
-  <footer id="footer-container" class="foot-sec">
-    <div class="foot-sec-inner">
-      <nav class="foot-breadCrumb">
-  <ol itemscope itemtype="http://schema.org/breadCrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
+<footer id="footer-container" class="foot-sec">
+  <div class="foot-sec-inner">
+
+    <nav class="foot-breadCrumb">
+      <ol itemscope itemtype="http://schema.org/breadCrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/category/big6tv/"><span itemprop="name">BIG6.TV (東京六大学野球)</span><meta itemprop="position" content="2" /></a></li>
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/big6tv/2017s/"><span itemprop="name">2017春季リーグ</span><meta itemprop="position" content="2" /></a></li>
       </ol>
-</nav>
-      <div class="foot-pr">
-        <div class="foot-pr-inner">
-          <figure><img src="/assets/images/common/footer-overview-figure.png" alt=""></figure>
+    </nav>
 
-          <div class="text-block">
-            <h3 class="foot-pr-logo"><img src="/assets/images/common/footer-overview-logo.png" alt="SPORTS BULL アプリ版(iPhone/Android)"></h3>
-            <ul class="foot-pr-btn">
-              <li><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
-              <li><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
-            </ul>
-            <p class="foot-pr-text">話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「スポーツ・ブル」。高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
-          </div><!-- /.text-block -->
+    <div class="foot-pr">
+      <div class="foot-pr-inner">
+        <figure><img src="/assets/images/common/footer-overview-figure.png" alt=""></figure>
 
-          <div class="fb-page-plugin">
-            <div class="fb-page" data-href="https://www.facebook.com/sportsbull/" data-width="400" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sportsbull/"><a href="https://www.facebook.com/sportsbull/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
-          </div>
-        </div><!-- /.foot-pr-inner -->
-      </div><!-- /.foot-pr -->
-
-      <div id="pageTop" class="pagetop fixed blind"><a href="#"><span>このページの先頭へ<img src="/assets/images/sprite/sprite-footer.png" role="presentation"></span></a></div>
-
-      <div class="fnav-block">
-        <nav class="fnav">
-          <h3 class="fnav-logo"><img src="/assets/images/common/footer-fnav-logo.png" alt="SPORTS BULL"></h3>
-          <ul>
-                        <li><a href="/about/">サービス紹介</a></li>
-            <li><a href="/about/company/">会社概要</a></li>
-            <li><a href="/about/privacy/">プライバシーポリシー</a></li>
-            <li><a href="/about/terms/">利用規約</a></li>
-                                  </ul>
-        </nav><!-- /.fnav -->
-
-        <div class="sns-block">
-          <ul>
-            <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
-            <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
-            <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
+        <div class="text-block">
+          <h3 class="foot-pr-logo"><img src="/assets/images/common/footer-overview-logo.png" alt="SPORTS BULL アプリ版(iPhone/Android)"></h3>
+          <ul class="foot-pr-btn">
+            <li><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
           </ul>
-        </div><!-- /.sns-block -->
+          <p class="foot-pr-text">話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「スポーツ・ブル」。高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
+        </div><!-- /.text-block -->
 
-        <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
-      </div><!-- /.fnav-block -->
-    </div><!-- /.foot-sec-inner -->
-  </footer><!-- /.foot-sec -->
+        <div class="fb-page-plugin">
+          <div class="fb-page" data-href="https://www.facebook.com/sportsbull/" data-width="400" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sportsbull/"><a href="https://www.facebook.com/sportsbull/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
+        </div>
+      </div><!-- /.foot-pr-inner -->
+    </div><!-- /.foot-pr -->
+
+    <div id="pageTop" class="pagetop fixed blind"><a href="#"><span>このページの先頭へ<img src="/assets/images/sprite/sprite-footer.png" role="presentation"></span></a></div>
+
+    <div class="fnav-block">
+      <nav class="fnav">
+        <h3 class="fnav-logo"><img src="/assets/images/common/footer-fnav-logo.png" alt="SPORTS BULL"></h3>
+        <ul>
+          <li><a href="/about/">サービス紹介</a></li>
+          <li><a href="/about/company/">会社概要</a></li>
+          <li><a href="/about/privacy/">プライバシーポリシー</a></li>
+          <li><a href="/about/terms/">利用規約</a></li>
+        </ul>
+      </nav><!-- /.fnav -->
+
+      <div class="sns-block">
+        <ul>
+          <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
+          <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
+          <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
+        </ul>
+      </div><!-- /.sns-block -->
+
+      <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
+    </div><!-- /.fnav-block -->
+  </div><!-- /.foot-sec-inner -->
+</footer><!-- /.foot-sec -->
+
 </div><!-- /.whole -->
+
 <div id="modal-container"></div>
 <div id="logout-modal-container"></div>
 <div id="deactivate-modal-container"></div>
 <div id="flush-modal-container"></div>
 <script id="js-exe"src="/assets/js/bundle/exe.bundle.js?v=d56cb17f"></script>
 <script src="/assets/js/bundle/banners_with_json.bundle.js?v=d56cb17f"></script>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '842032129256034',
-      xfbml      : true,
-      version    : 'v2.5'
-    });
-  };
 
-  (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/ja_JP/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+<!-- for facebook -->
+<script src="/assets/facebook/init.js?"></script>
+<!-- // for facebook -->
+
 <script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
-
-
 
 </body>
 </html>
