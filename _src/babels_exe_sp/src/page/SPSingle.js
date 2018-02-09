@@ -72,15 +72,19 @@ export default class SPSingle {
       }
     }
     // ----------------------------
-    const singleVisualElement = Dom.visual();
-    if (singleVisualElement !== null) {
-      const single = new UT.sp.view.SPViewSingle(articleId, Dom.singleHeader(), singleVisualElement, Dom.userBanner());
-      _viewSingle = single;
-      single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
-      single.start();
-    } else {
-      SPSingle.comment();
-    }
+    const single = new UT.sp.view.SPViewSingle(articleId, Dom.singleHeader(), Dom.visual(), Dom.userBanner());
+    _viewSingle = single;
+    single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
+    single.start();
+    // const singleVisualElement = Dom.visual();
+    // if (singleVisualElement !== null) {
+    //   const single = new UT.sp.view.SPViewSingle(articleId, Dom.singleHeader(), singleVisualElement, Dom.userBanner());
+    //   _viewSingle = single;
+    //   single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
+    //   single.start();
+    // } else {
+    //   SPSingle.comment();
+    // }
     // ----------------------------
     // read more
     const post = Dom.post();
@@ -121,7 +125,7 @@ export default class SPSingle {
     // nav current
     SPNav.start(slug);
     // comment
-    SPSingle.comment();
+    // SPSingle.comment();
     // -----------------------
     // 2016-09-28 記事詳細の次の記事のために以下削除
     // @see `/app/template/mobile/p.php#L.289`
@@ -179,62 +183,62 @@ export default class SPSingle {
    * **非ログイン**
    * <p>記事 Id 必須</p>
    */
-  static comment() {
-    ++_prepared;
+  // static comment() {
+  //   ++_prepared;
 
-    if (_prepared !== 2) {
-      return;
-    }
+  //   if (_prepared !== 2) {
+  //     return;
+  //   }
 
-    // user icon
-    // _userDae null check
-    //  _userDae.profilePicture undefined check
-    let picture = '';
-    if (_userDae !== null && typeof _userDae.profilePicture !== 'undefined') {
-      picture = _userDae.profilePicture;
-    }
+  //   // user icon
+  //   // _userDae null check
+  //   //  _userDae.profilePicture undefined check
+  //   let picture = '';
+  //   if (_userDae !== null && typeof _userDae.profilePicture !== 'undefined') {
+  //     picture = _userDae.profilePicture;
+  //   }
 
-    // article id
-    const articleId = _articleId;
-    const SPViewComments = UT.sp.view.SPViewComments;
+  //   // article id
+  //   const articleId = _articleId;
+  //   const SPViewComments = UT.sp.view.SPViewComments;
 
-    // comment form
-    const commentFormElement = Dom.commentForm();
-    if (commentFormElement !== null) {
-      const commentForm = new UT.sp.view.comment.SPViewCommentForm(commentFormElement, articleId, picture);
-      commentForm.start();
-    }
+  //   // comment form
+  //   const commentFormElement = Dom.commentForm();
+  //   if (commentFormElement !== null) {
+  //     const commentForm = new UT.sp.view.comment.SPViewCommentForm(commentFormElement, articleId, picture);
+  //     commentForm.start();
+  //   }
 
-    // self
-    const selfElement = Dom.commentSelf();
-    if (selfElement !== null) {
-      const commentSelf = new SPViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
-      if ( _userDae !== null ) {
-        commentSelf.user = _userDae;
-      }
-      commentSelf.start();
-    }
+  //   // self
+  //   const selfElement = Dom.commentSelf();
+  //   if (selfElement !== null) {
+  //     const commentSelf = new SPViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
+  //     if ( _userDae !== null ) {
+  //       commentSelf.user = _userDae;
+  //     }
+  //     commentSelf.start();
+  //   }
 
-    // official
-    const officialElement = Dom.commentOfficial();
-    if (officialElement !== null) {
-      const official = new SPViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
-      if (_userDae !== null) {
-        official.user = _userDae;
-      }
-      official.start();
-    }
+  //   // official
+  //   const officialElement = Dom.commentOfficial();
+  //   if (officialElement !== null) {
+  //     const official = new SPViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
+  //     if (_userDae !== null) {
+  //       official.user = _userDae;
+  //     }
+  //     official.start();
+  //   }
 
-    // normal
-    const normalElement = Dom.commentNormal();
-    if (normalElement !== null) {
-      const normal = new SPViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
-      if (_userDae !== null) {
-        normal.user = _userDae;
-      }
-      normal.start();
-    }
-  }
+  //   // normal
+  //   const normalElement = Dom.commentNormal();
+  //   if (normalElement !== null) {
+  //     const normal = new SPViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
+  //     if (_userDae !== null) {
+  //       normal.user = _userDae;
+  //     }
+  //     normal.start();
+  //   }
+  // }
   /**
    * single のおすすめ記事
    * @param {string} slug category.slug
