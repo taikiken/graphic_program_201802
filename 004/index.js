@@ -5,9 +5,11 @@ let path = require('path'); // パス操作を行うモジュール
 let d = new Date();
 let f = formatDate(d);
 
+console.log('__dirname', __dirname);
 // 実行中のスクリプトからの相対パスを取得
 // __dirname は実行中のスクリプトの絶対パス
 // path.join でパスを正しく連結できる
+// @see https://nodejs.org/docs/latest/api/path.html#path_path_join_paths
 let p = path.join(__dirname, 'out.txt');
 
 fs.writeFile(p, f, (error) => {

@@ -1,0 +1,50 @@
+{
+  "name": "graphic_program_201802",
+  "version": "1.0.0",
+  "description": "School Graphic samples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taikiken/graphic_program_201802.git"
+  },
+  "keywords": [
+    "ES2015"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/taikiken/graphic_program_201802/issues"
+  },
+  "homepage": "https://github.com/taikiken/graphic_program_201802#readme",
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current",
+            "browsers": [
+              "last 2 versions",
+              "Safari >= 7",
+              "Explorer >= 9",
+              "last 4 Edge versions",
+              "ChromeAndroid >= 18.0",
+              "Android >= 2",
+              "iOS >= 7.0"
+            ]
+          },
+          "useBuiltIns": true
+        }
+      ]
+    ],
+    "ignore": [
+      "node_modules"
+    ],
+    "plugins": [
+      "transform-class-properties"
+    ]
+  }
+}

@@ -20,8 +20,8 @@
 //     return y + delimiter + m + delimiter + d + ' ' + h + ':' + i + ':' + s;
 // }
 
-// import fs from 'fs';
-const fs = require('fs');5
+import fs from 'fs';
+// const fs = require('fs');5
 
 /**
  * Date 型のデータをフォーマットして返す
