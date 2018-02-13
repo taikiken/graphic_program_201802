@@ -11,12 +11,15 @@
  */
 //
 // // view
-// import { View } from '../../view/View';
+// import View from '../../view/View';
 
 // app
 import { MessageSNS } from '../../app/const/MessageSNS';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -27,7 +30,7 @@ const React = self.React;
  * `/app/template/[desktop|mobile]/p.php` から移植しました
  * @since 2016-09-25
  */
-export class ComponentSingleSNS extends React.Component {
+export default class ComponentSingleSNS extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

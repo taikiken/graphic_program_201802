@@ -10,7 +10,7 @@
  *
  */
 // app
-import { Dom } from '../../app/Dom';
+import Dom from '../../app/Dom';
 import { Message } from '../../app/const/Message';
 import { Empty } from '../../app/const/Empty';
 
@@ -21,9 +21,13 @@ import { ArticleDae } from '../../dae/ArticleDae';
 import { Safety } from '../../data/Safety';
 
 // node
-import { RankingNode } from '../../node/sidebar/RankingNode';
+// import { RankingNode } from '../../node/sidebar/RankingNode';
+import ComponentSidebarRankingArticle from './ComponentSidebarRankingArticle';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -71,15 +75,22 @@ export default class ComponentSidebarRanking extends React.Component {
    * */
   static title(categorySlug) {
     // category api slug が `all` 以外の時に category.label をタイトルに含める
-    let categoryTitle = '';
-    if ( categorySlug !== 'all' ) {
-      const categoryLabel = Dom.categoryLabel();
-      if (categoryLabel) {
-        categoryTitle = <span className="widget-ranking-heading-ruby-label"> / {categoryLabel}</span>;
-      }
+    // let categoryTitle = '';
+    // if ( categorySlug !== 'all' ) {
+    //   const categoryLabel = Dom.categoryLabel();
+    //   if (categoryLabel) {
+    //     categoryTitle = <span className="widget-ranking-heading-ruby-label"> / {categoryLabel}</span>;
+    //   }
+    // }
+    // // console.log('ComponentSidebarRanking.title', categorySlug, Dom.categoryLabel());
+    // return categoryTitle;
+    if (categorySlug === 'all') {
+      return '';
     }
-    // console.log('ComponentSidebarRanking.title', categorySlug, Dom.categoryLabel());
-    return categoryTitle;
+    const categoryLabel = Dom.categoryLabel();
+    return categoryLabel ?
+      <span className="widget-ranking-heading-ruby-label"> / {categoryLabel}</span> :
+      '';
   }
   // ---------------------------------------------------
   //  METHOD
@@ -114,27 +125,43 @@ export default class ComponentSidebarRanking extends React.Component {
           {
             list.map((article, i) => {
               const dae = new ArticleDae(article);
-              const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
-              const empty = thumbnail === Empty.IMG_SMALL;
-              // console.log('ComponentSidebarRanking', dae.anotherCategories);
-              // RankingNode instance を使い render
+              // const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
+              // const empty = thumbnail === Empty.IMG_SMALL;
+              // // console.log('ComponentSidebarRanking', dae.anotherCategories);
+              // // RankingNode instance を使い render
+              // return (
+              //   <RankingNode
+              //     key={`sidebar-ranking-${dae.id}`}
+              //     index={i}
+              //     id={String( dae.id )}
+              //     categories={dae.categories.all}
+              //     url={dae.url}
+              //     date={dae.displayDate}
+              //     title={dae.title}
+              //     thumbnail={thumbnail}
+              //     empty={empty}
+              //     total={dae.commentsCount}
+              //     home={home}
+              //     detail={detail}
+              //     thisSlug={slug}
+              //     categorySlug={categorySlug}
+              //     anotherCategories={dae.anotherCategories}
+              //   />
+              // );
+              const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
               return (
-                <RankingNode
+                <ComponentSidebarRankingArticle
                   key={`sidebar-ranking-${dae.id}`}
                   index={i}
-                  id={String( dae.id )}
-                  categories={dae.categories.all}
-                  url={dae.url}
-                  date={dae.displayDate}
-                  title={dae.title}
                   thumbnail={thumbnail}
-                  empty={empty}
-                  total={dae.commentsCount}
+                  categories={dae.categories.all}
+                  title={dae.title}
+                  anotherCategories={dae.anotherCategories}
+                  id={String(dae.id)}
+                  url={dae.url}
                   home={home}
                   detail={detail}
                   thisSlug={slug}
-                  categorySlug={categorySlug}
-                  anotherCategories={dae.anotherCategories}
                 />
               );
             })

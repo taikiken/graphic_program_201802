@@ -11,26 +11,29 @@
  */
 
 // view/comment
-import { SPViewCommentForm } from '../../view/comment/SPViewCommentForm';
+import SPViewCommentForm from '../../view/comment/SPViewCommentForm';
 
 // view
-import { SPViewComments } from '../../view/SPViewComments';
+import SPViewComments from '../../view/SPViewComments';
 
 // app
 import { User } from '../../../app/User';
 import { CommentsType } from '../../../app/const/CommentsType';
 
 // ad
-import { SPComponentSinglesAdBelow } from './SPComponentSinglesAdBelow';
+import SPComponentSinglesAdBelow from './SPComponentSinglesAdBelow';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
  * 次の記事一覧・コメント表示
  * @since 2016-11-05
  */
-export class SPComponentSingleComments extends React.Component {
+export default class SPComponentSingleComments extends React.Component {
   // -------------------------- -------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -71,6 +74,26 @@ export class SPComponentSingleComments extends React.Component {
       sign: props.sign,
       index: props.index
     };
+    /**
+     * `div.comment-self-container`
+     * @type {?Element}
+     */
+    this.commentSelf = null;
+    /**
+     * `div.comment-official-container`
+     * @type {?Element}
+     */
+    this.commentOfficial = null;
+    /**
+     * `div.comment-normal-container`
+     * @type {?Element}
+     */
+    this.commentNormal = null;
+    /**
+     * `div.comment-form-container`
+     * @type {?Element}
+     */
+    this.commentForm = null;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -106,7 +129,7 @@ export class SPComponentSingleComments extends React.Component {
    * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   mine(info) {
-    const comment = new SPViewComments(this.state.single.id, this.refs.commentSelf, CommentsType.SELF);
+    const comment = new SPViewComments(this.state.single.id, this.commentSelf, CommentsType.SELF);
     comment.user = info;
     comment.start();
   }
@@ -115,7 +138,7 @@ export class SPComponentSingleComments extends React.Component {
    * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   official(info) {
-    const comment = new SPViewComments(this.state.single.id, this.refs.commentOfficial, CommentsType.OFFICIAL);
+    const comment = new SPViewComments(this.state.single.id, this.commentOfficial, CommentsType.OFFICIAL);
     comment.user = info;
     comment.start();
   }
@@ -124,7 +147,7 @@ export class SPComponentSingleComments extends React.Component {
    * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   normal(info) {
-    const comment = new SPViewComments(this.state.single.id, this.refs.commentNormal, CommentsType.NORMAL);
+    const comment = new SPViewComments(this.state.single.id, this.commentNormal, CommentsType.NORMAL);
     comment.user = info;
     comment.start();
   }
@@ -133,7 +156,7 @@ export class SPComponentSingleComments extends React.Component {
    * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   form(info) {
-    const comment = new SPViewCommentForm(this.refs.commentForm, this.state.single.id, info.profilePicture);
+    const comment = new SPViewCommentForm(this.commentForm, this.state.single.id, info.profilePicture);
     comment.start();
   }
   /**
@@ -147,14 +170,26 @@ export class SPComponentSingleComments extends React.Component {
     // ログインユーザーのみ表示します
     return (
       <div className={`comment comment-${this.state.single.id}`}>
-        <div className="comment-self-container" ref="commentSelf" />
-        <div className="comment-official-container" ref="commentOfficial" />
-        <div className="comment-normal-container" ref="commentNormal" />
+        <div
+          className="comment-self-container"
+          ref={(element) => (this.commentSelf = element)}
+        />
+        <div
+          className="comment-official-container"
+          ref={(element) => (this.commentOfficial = element)}
+        />
+        <div
+          className="comment-normal-container"
+          ref={(element) => (this.commentNormal = element)}
+        />
         <SPComponentSinglesAdBelow
           ad={this.state.single.ad}
           index={this.state.index}
         />
-        <div className="comment-form-container" ref="commentForm" />
+        <div
+          className="comment-form-container"
+          ref={(element) => (this.commentForm = element)}
+        />
       </div>
     );
   }

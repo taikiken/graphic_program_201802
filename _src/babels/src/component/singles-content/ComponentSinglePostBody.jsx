@@ -14,13 +14,16 @@
 import { IFrameStatus } from '../../event/IFrameStatus';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
  * 「続きを読む」iframe 対応
  * @since 2017-04-17
  */
-export class ComponentSinglePostBody extends React.Component {
+export default class ComponentSinglePostBody extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

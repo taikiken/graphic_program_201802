@@ -33,17 +33,16 @@ import {Safety} from '../data/Safety';
 export class Model extends EventDispatcher {
   /**
    * View がない Api request, 親クラス
-   *
-   * @param {Object} [option={}] optional event handler
+   * @param {?Object} [option={}] optional event handler
    */
-  constructor( option:Object = {} ) {
-    option = Safety.object( option );
+  constructor(option = {}) {
+    const safetyOption = Safety.object(option);
     super();
     /**
      * callback をセットした Object
      *
      * @example
-     * let option = {
+     * const option = {
      *  Model.UNDEFINED_ERROR: () => {},
      *  Model.EMPTY_ERROR: () => {},
      *  Model.RESPONSE_ERROR: () => {},
@@ -53,7 +52,7 @@ export class Model extends EventDispatcher {
      * @type {Object}
      * @protected
      */
-    this._option = option;
+    this._option = safetyOption;
     /**
      * action Class が設定されます
      * @type {*}
@@ -67,9 +66,9 @@ export class Model extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * callback handler がセットされたObject
-   * @return {Object|*} callback handler がセットされたObjectを返します
+   * @return {Object} callback handler がセットされたObjectを返します
    */
-  get option():Object {
+  get option() {
     return this._option;
   }
 
@@ -77,7 +76,7 @@ export class Model extends EventDispatcher {
    * callback handler をセットします
    * @param {Object} option callback handler がセットされた Object
    */
-  set option( option:Object ):void {
+  set option(option) {
     this._option = option;
   }
   /**
@@ -102,19 +101,14 @@ export class Model extends EventDispatcher {
    * @param {string} keyName 存在チェックを行う関数キー名
    * @param {*} [args=] 実行関数への引数
    */
-  executeSafely( keyName, ...args ):void {
-
-    let option = this.option;
+  executeSafely(keyName, ...args) {
+    const option = this.option;
     // console.log( 'executeSafely ', keyName, option.hasOwnProperty( keyName ), option, args );
-    if ( option.hasOwnProperty( keyName ) && typeof option[ keyName ] === 'function' ) {
-
+    if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
       // callback 側で通常の引数として取り出せるように apply します
-      option[ keyName ].apply( this, args );
-
+      option[keyName].apply(this, args);
     }
-
     this.dispatch( { type: keyName, args: args } );
-
   }
   // ---------------------------------------------------
   //  CONST
@@ -124,7 +118,7 @@ export class Model extends EventDispatcher {
    * Ajax は成功, 存在すべき key が無い or 値が null
    * @return {string} modelUndefinedError を返します
    */
-  static get UNDEFINED_ERROR():string {
+  static get UNDEFINED_ERROR() {
     return 'modelUndefinedError';
   }
   /**
@@ -132,7 +126,7 @@ export class Model extends EventDispatcher {
    * Ajax は成功, 存在すべき値は配列で存在するが length 0
    * @return {string} modelEmptyError を返します
    */
-  static get EMPTY_ERROR():string {
+  static get EMPTY_ERROR() {
     return 'modelEmptyError';
   }
   /**
@@ -140,7 +134,7 @@ export class Model extends EventDispatcher {
    * Ajax 失敗
    * @return {string} modelResponseError を返します
    */
-  static get RESPONSE_ERROR():string {
+  static get RESPONSE_ERROR() {
     return 'modelResponseError';
   }
   /**
@@ -149,7 +143,7 @@ export class Model extends EventDispatcher {
    * action 終了後 success 時に使用します
    * @return {string} modelComplete を返します
    */
-  static get COMPLETE():string {
+  static get COMPLETE() {
     return 'modelComplete';
   }
 }

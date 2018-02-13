@@ -1,0 +1,519 @@
+@import "../../../../scss/asset";
+@import "../sprite";
+
+// Theme pyeongchang2018
+//
+// design module pyeongchang2018 theme
+//
+// Styleguide 2.19.0
+
+.whole.pyeongchang2018 {
+  .medal_list {
+    margin-top: 20px;
+    border-top: 4px solid #ddd;
+
+    //.medal_list__header
+    &__header {
+      display: table;
+      width: 100%;
+      height: 56px;
+
+      .medal_list__heading {
+        display: table-cell;
+        vertical-align: middle;
+        font-weight: bold;
+        font-size: fz(16);
+
+        &:before {
+          content: "";
+          position: relative;
+          top: -2px;
+          display: inline-block;
+          width: 26px;
+          height: 26px;
+          margin-right: 5px;
+          background: url(/assets/images/pyeongchang2018/icon-medal_heading.png) 0 0 no-repeat;
+          vertical-align: middle;
+          @include hide-text;
+        }
+      }
+
+      .medal_list__date {
+        display: table-cell;
+        text-align: right;
+        padding-right: 10px;
+        font-size: fz(12);
+        vertical-align: middle;
+      }
+    } //.medal_list__header
+
+
+
+    //.medal_list__medals
+    &__medals {
+      @include clearfix;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+
+      table {
+        float: left;
+        // width: 75%;
+        width: 100%;
+      }
+
+      td {
+        width: 33.3333%;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        background: url(/assets/images/pyeongchang2018/medal-bgline.png) right center no-repeat;
+        background-size: 1px 75%;
+        font-weight: bold;
+        font-size: fz(16);
+        text-align: center;
+
+        &:last-child {
+          background: none;
+        }
+      }
+
+      //.medal_list__medal_type
+      .medal_list__medal_type {
+        //.medal_list__medal_type__icon
+        &__icon {
+          content: "";
+          position: relative;
+          top: -2px;
+          display: inline-block;
+          width: 32px;
+          height: 32px;
+          margin-right: 20px;
+          background-position: 0 0;
+          background-repeat: no-repeat;
+          vertical-align: middle;
+          @include hide-text;
+        }
+      }
+
+      .medal_list__medal_type--gold {
+        .medal_list__medal_type__icon {
+          background-image: url(/assets/images/pyeongchang2018/icon-medal_gold.png);
+        }
+      }
+
+      .medal_list__medal_type--silver {
+        .medal_list__medal_type__icon {
+          background-image: url(/assets/images/pyeongchang2018/icon-medal_silver.png);
+        }
+      }
+
+      .medal_list__medal_type--bronze {
+        .medal_list__medal_type__icon {
+          background-image: url(/assets/images/pyeongchang2018/icon-medal_bronze.png);
+        }
+      }
+
+      //.medal_list__medal_total
+      // .medal_list__medal_total {
+      //   float: right;
+      //   width: 25%;
+      //   line-height: 32px;
+      //   padding-top: 8px;
+      //   padding-bottom: 8px;
+      //   font-weight: bold;
+      //   font-size: fz(16);
+      //   text-align: center;
+      // }
+    }
+  } //.medal_list
+
+  //カテゴリートップ
+  .main-sec {
+    > .medal_list:first-child {
+      margin-top: 30px;
+    }
+  }
+
+
+
+
+  //記事詳細ページ
+  //.post-single
+  .pyeongchang2018-powered-by {
+    margin-top: 4px;
+  }
+  //.post-single
+
+
+
+
+
+  //.gallery--highlight
+  //.gallery--photo
+  [class*="gallery--"] {
+    margin-top: 20px;
+    border-top: 4px solid #ddd;
+
+    @at-root {
+    .gallery__header {
+      display: table;
+      width: 100%;
+      height: 58px;
+    }
+
+    .gallery__heading {
+      display: table-cell;
+      vertical-align: middle;
+      font-weight: bold;
+      font-size: fz(16);
+
+      &:before {
+        content: "";
+        position: relative;
+        top: -1px;
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        margin-right: 5px;
+        background-position: 0 center;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+        @include hide-text;
+      }
+    } //.gallery__heading
+
+    .gallery__link {
+      display: table-cell;
+      padding-right: 8px;
+      text-align: right;
+      vertical-align: middle;
+
+      a {
+        @include link-decoration(#333, #333, none, none);
+        display: inline-block;
+        font-weight: bold;
+        font-size: fz(13);
+
+        &:after {
+          content: "";
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          margin-left: 2px;
+          border-top: 2px solid #333;
+          border-right: 2px solid #333;
+          transform: rotate(45deg);
+          @include hide-text;
+        }
+
+        &:hover {
+          color: #000;
+
+          &:after {
+            border-color: #000;
+          }
+        }
+      }
+    } //.gallery__link
+
+    //.gallery__date
+    .gallery__date {
+      display: table-cell;
+      padding-right: 8px;
+      font-weight: bold;
+      font-size: fz(13);
+      text-align: right;
+      vertical-align: middle;
+    } //.gallery__date
+
+    //.gallery__header__logo
+    .gallery__header__logo {
+      display: table-cell;
+      padding-right: 8px;
+      text-align: right;
+      vertical-align: middle;
+    } //.gallery__header__logo
+    } //at-root
+  }
+  //.gallery--highlight
+  //.gallery--photo
+
+  //.gallery__header--top
+  .gallery__header--top {
+    margin-top: 20px;
+    border-top: 4px solid #ddd;
+  } //.gallery__header--top
+
+  //.gallery--highlight
+  .gallery--highlight,
+  &.pyeongchang2018-movie .gallery__header--top {
+    .gallery__heading:before {
+      background-image: url(/assets/images/pyeongchang2018/icon-highlight_heading.png);
+    }
+  }
+
+  //.gallery--photo
+  .gallery--photo {
+    .gallery__heading:before {
+      background-image: url(/assets/images/pyeongchang2018/icon-photo_heading.png);
+    }
+  }
+
+
+
+  //.articles-widget
+  .articles-widget {
+    // width: 746px;
+    // margin-left: -10px;
+
+    .thumbs_list {
+      display: flex;
+      flex-wrap: wrap;
+      // justify-content: space-between;
+      // display: table;
+      // width: 100%;
+      // border-collapse:separate;
+      // border-spacing: 10px 0;
+
+      li {
+        // display: table-cell;
+        width: 174px;
+        margin-right: 10px;
+        // vertical-align: top;
+
+        &:nth-child(4n) {
+          margin-right: 0;
+        }
+      }
+
+      img {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      a {
+        @include link-decoration(null, null, none, none);
+      }
+    } //.thumbs_list
+  } //.articles-widget
+
+  //.gallery--highlight
+  .gallery--highlight {
+    .articles-widget {
+      .thumbs_list.text{
+        li {
+          background-color: #f5f5f5;
+        }
+
+        figure {
+          position: relative;
+
+          &:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            @include opacity(0.2);
+          }
+
+          &:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 34px;
+            height: 34px;
+            background: url(/assets/images/pyeongchang2018/icon-play.png) 0 0 no-repeat;
+            @include hide-text;
+          }
+        }
+
+        .title {
+          width: 154px;
+          margin: 10px auto;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-weight: bold;
+          font-size: fz(12);
+          text-align: center;
+          white-space: nowrap;
+        }
+
+        a:hover {
+          figure:before {
+            @include hover-opacity(0);
+          }
+        }
+      } //.thumbs_list.text
+    } //.articles-widget
+  } //.gallery--highlight
+
+  //.gallery--photo
+  .gallery--photo {
+    .articles-widget {
+      .thumbs_list.text{
+        figure {
+          position: relative;
+          padding: 20px 3px;
+          background-color: #e7e7e7;
+
+          &:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            @include opacity(0);
+          }
+        }
+
+        .title {
+          width: 154px;
+          margin: 10px auto;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-weight: bold;
+          font-size: fz(12);
+          text-align: center;
+          white-space: nowrap;
+        }
+
+        a:hover {
+          figure:before {
+            @include hover-opacity(0.2);
+          }
+        }
+      } //.thumbs_list.text
+    } //.articles-widget
+  } //.gallery--photo
+
+
+
+
+
+  //.widget-pyeongchang-highlight
+  .widget-pyeongchang-highlight {
+    //.gallery--highlight
+    .gallery--highlight {
+      margin-top: 0;
+      border-top: 1px solid #ddd;
+
+      //.gallery__header
+      .gallery__header {
+        height: auto;
+        padding-top: 10px;
+      }
+
+      //.gallery__heading
+      .gallery__heading {
+        font-size: fz(14);
+
+        &:before {
+          display: none;
+        }
+      }
+    } //.gallery--highlight
+
+    //.Widget_articles_tag
+    .Widget_articles_tag {
+      //.thumbs_list
+      .thumbs_list {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      //.widget-item
+      .widget-item {
+        width: 174px;
+        margin-top: 12px;
+        margin-right: 10px;
+        background-color: #f5f5f5;
+
+        &:nth-child(4n) {
+          margin-right: 0;
+        }
+
+        img {
+          width: 100%;
+          max-width: 100%;
+        }
+
+        a {
+          @include link-decoration(null, null, none, none);
+
+          &:hover {
+            .widget-item-figure:before {
+              @include hover-opacity(0);
+            }
+          }
+        }
+
+        //.widget-item-figure
+        &-figure {
+          position: relative;
+
+          &:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            @include opacity(0.2);
+          }
+
+          &:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 34px;
+            height: 34px;
+            background: url(/assets/images/pyeongchang2018/icon-play.png) 0 0 no-repeat;
+            @include hide-text;
+          }
+        } //.widget-item-figure
+
+        //.widget-item-title
+        &-title {
+          width: 154px;
+          margin: 10px auto;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-weight: bold;
+          font-size: fz(12);
+          text-align: center;
+          white-space: nowrap;
+        } //.widget-item-title
+      } //.widget-item
+    } //.Widget_articles_tag
+  } //.widget-pyeongchang-highlight
+
+  //.sponsor-link
+  .sponsor-link {
+    margin-top: 20px;
+
+    &.column2 {
+      margin-top: 30px;
+      text-align: center;
+      letter-spacing: ls( inline-block );
+      vertical-align: top;
+
+      .sponsor-link-item {
+        display: inline-block;
+        margin-right: 15px;
+        margin-left: 15px;
+        letter-spacing: normal;
+        vertical-align:top;
+      }
+    }
+  } //.sponsor-link
+
+  //カテゴリートップ
+  .main-sec {
+    > .sponsor-link:first-child {
+      margin-top: 30px;
+    }
+  }
+} //.whole.pyeongchang2018

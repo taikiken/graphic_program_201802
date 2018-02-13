@@ -11,36 +11,36 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * <p>header user information / signup</p>
  * 全て static です
  */
-export class SPHeader {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPHeader is static Class. not use new SPHeader().' );
-
-    }
-  }
+export default class SPHeader {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPHeader is static Class. not use new SPHeader().' );
+  //
+  //   }
+  // }
   /**
    * header rendering 開始
    */
-  static start():void {
+  static start() {
     // header.user
-    let element = Dom.profile();
-    if ( element !== null ) {
-      let headerUser = new UT.sp.view.header.SPViewHeaderUser( element );
+    const element = Dom.profile();
+    if (element !== null) {
+      const headerUser = new UT.sp.view.header.SPViewHeaderUser(element);
       headerUser.start();
     }
   }

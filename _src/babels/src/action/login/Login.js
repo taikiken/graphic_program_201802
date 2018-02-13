@@ -22,12 +22,12 @@ import {Api} from '../../net/Api';
 export class Login extends ActionBehavior {
   /**
    * login を行います
-   * @param {FormData} formData FormData email, password
-   * @param {Function} [resolve=null] Ajax 成功時の callback
-   * @param {Function} [reject=null] Ajax 失敗時の callback
-   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
+   * @param {?FormData} [formData=null] FormData email, password
+   * @param {?Function} [resolve=null] Ajax 成功時の callback
+   * @param {?Function} [reject=null] Ajax 失敗時の callback
+   * @param {Result} [ResultClass=Result] 成功結果をセットする data class
    */
-  constructor( formData:FormData = null, resolve:Function = null, reject:Function = null, ResultClass = Result ) {
-    super( Api.login(), formData, resolve, reject, ResultClass );
+  constructor(formData = null, resolve = null, reject = null, ResultClass = Result) {
+    super(Api.login(), formData, resolve, reject, ResultClass);
   }
 }

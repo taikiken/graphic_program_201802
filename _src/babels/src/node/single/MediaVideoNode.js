@@ -23,27 +23,28 @@ import {HTML5VideoNode} from '../media/HTML5VideoNode';
 // ---
 // @since 2016-11-13
 // component
-import { ComponentVideojsImaSingles } from '../../component/media/ComponentVideojsImaSingles';
-import { ComponentVideojsImaArticle } from '../../component/media/ComponentVideojsImaArticle';
+import ComponentVideojsImaSingles from '../../component/media/ComponentVideojsImaSingles';
+import ComponentVideojsImaArticle from '../../component/media/ComponentVideojsImaArticle';
 // ---
 
 // React
-let React = self.React;
+/**
+ * [library] - React
+ */
+const React = self.React;
 
 /**
- * <p>記事詳細 メイン・動画切替<br>
- * YouTube, Facebook</p>
+ * @deprecated 2018-01-13 instead use {@link ComponentMediaVideoSwitch}
+ * @TODO future remove
+ * 記事詳細 メイン・動画切替
+ * - YouTube
+ * - Facebook
  *
- * ```
- * <HTML5VideoNode />
- * or
- * <VideojsImaNode />
- * or
- * <iframe youtube/>
- * or
- * <div class="fb-video"/>
- * ```
- *
+ * [component]
+ * - {@link HTML5VideoNode}
+ * - {@link VideojsImaNode} -> {@link ComponentVideojsImaArticle}
+ * - `<iframe youtube />`
+ * - `<div class="fb-video" />`
  * @type {ReactClass}
  */
 export let MediaVideoNode = React.createClass( {
@@ -55,43 +56,39 @@ export let MediaVideoNode = React.createClass( {
     index: React.PropTypes.number.isRequired
   },
   render: function() {
-
-    let media = this.props.media;
-
+    console.warn('MediaVideoNode deprecated. instead use ComponentMediaVideoSwitch');
+    const media = this.props.media;
     // 2016-02-22
     // api JSON が最新版に対応していないので
     // やむおえずの対応
-    let type = media.video.type || media.video.player;
+    const type = media.video.type || media.video.player;
 
-    switch ( type ) {
+    switch (type) {
 
       case VideoType.BRIGHTCOVE:
         // return this.video( media );
-        return this.videojsima( media );
+        return this.videojsima(media);
 
       case VideoType.VIDEOJSIMA:
-        return this.videojsima( media );
+        return this.videojsima(media);
 
       case VideoType.YOUTUBE:
-        return this.youtube( media );
+        return this.youtube(media);
 
       case VideoType.FACEBOOK:
-        return this.facebook( media );
+        return this.facebook(media);
 
       default:
         // console.warn(`illegal type and player. type: ${type}`);
         // break;
         return null;
-
     }
-
   },
-  video: function( media ) {
-
-    let images = media.images;
-    let video = media.video;
-    let caption = video.caption || '';
-    let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
+  video: function(media) {
+    const images = media.images;
+    const video = media.video;
+    const caption = video.caption || '';
+    const poster = Safety.image(images.medium, Empty.VIDEO_THUMBNAIL);
 
     // HTML5 video
     return (
@@ -105,10 +102,10 @@ export let MediaVideoNode = React.createClass( {
 
   },
   videojsima: function( media ) {
-    let images = media.images;
-    let video = media.video;
-    let caption = video.caption || '';
-    let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
+    const images = media.images;
+    const video = media.video;
+    const caption = video.caption || '';
+    const poster = Safety.image(images.medium, Empty.VIDEO_THUMBNAIL);
 
     // props.index で出力 class を切替えます
     // 次の記事一覧で動画を表示するために
@@ -150,7 +147,7 @@ export let MediaVideoNode = React.createClass( {
     );
   },
   youtube: function( media ) {
-    let video = media.video;
+    const video = media.video;
 
     return (
       <div className="post-kv">
@@ -165,14 +162,15 @@ export let MediaVideoNode = React.createClass( {
     );
   },
   facebook: function( media ) {
-    let video = media.video;
+    const video = media.video;
 
     return (
       <div className="post-kv">
-        <div className="fb-video"
-             data-href={video.facebook}
-             data-allowfullscreen="true"
-             data-width={Content.WIDTH}
+        <div
+          className="fb-video"
+          data-href={video.facebook}
+          data-allowfullscreen="true"
+          data-width={Content.WIDTH}
         />
       </div>
     );

@@ -11,33 +11,36 @@
  */
 
 // view
-import { View } from '../../view/View';
+import View from '../../view/View';
 
 // app
 import { WidgetType } from '../../app/const/WidgetType';
 
 // component
 // import { ComponentSinglesWidgetOption } from './ComponentSinglesWidgetOption';
-import { ComponentSinglesWidget } from './ComponentSinglesWidget';
+import ComponentSinglesWidget from './ComponentSinglesWidget';
 
 // 記事本文
 // import { ComponentSinglesArticle } from './ComponentSinglesArticle';
-import { ComponentSinglesArticleMagnet } from '../singles-magnet/ComponentSinglesArticleMagnet';
+import ComponentSinglesArticleMagnet from '../singles-magnet/ComponentSinglesArticleMagnet';
 
 // ui
-import { SinglesManager } from '../../ui/SinglesManager';
+import SinglesManager from '../../ui/SinglesManager';
 
 // util
 import { Fb } from '../../util/Fb';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
  *  desktop: 記事詳細「次の記事一覧」親コンポーネント
  * @since 2016-09-30
  */
-export class ComponentSingles extends React.Component {
+export default class ComponentSingles extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -64,7 +67,9 @@ export class ComponentSingles extends React.Component {
       // home container かのフラッグ
       home: React.PropTypes.bool.isRequired,
       // login 済みかのフラッグ
-      sign: React.PropTypes.bool.isRequired
+      sign: React.PropTypes.bool.isRequired,
+      // 2018-01-12 sp flag 追加 - 平昌で powered by image path 違うため
+      sp: React.PropTypes.bool.isRequired,
     };
   }
   // ---------------------------------------------------
@@ -264,8 +269,9 @@ export class ComponentSingles extends React.Component {
   // ---------------------------------------------------
   // delegate
   /**
-   * delegate, mount 後に呼び出されます<r>
-   * View.DID_MOUNT を発火し、infinite scrollのために       moreButton へ続きがあるかを通知します
+   * delegate, mount 後に呼び出されます
+   * - View.DID_MOUNT を発火します
+   * - infinite scrollのために `moreButton` へ続きがあるかを通知します
    */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
@@ -307,13 +313,13 @@ export class ComponentSingles extends React.Component {
    * @return {XML} div.singles-root を返します
    */
   render() {
-    const props = this.props;
+    const { sign, sp } = this.props;
     const state = this.state;
     const list = state.list;
     const length = list.length;
     // console.log('ComponentSingles.render', length);
-    // @ToDO 条件簡略化可能か調べる
-    // @ToDO 各件数のテスト
+    // 条件簡略化可能か調べる
+    // 各件数のテスト
     if (length === 0) {
       // 続きの記事 0 件
       // オススメ・関連・人気
@@ -332,8 +338,9 @@ export class ComponentSingles extends React.Component {
                 <ComponentSinglesArticleMagnet
                   key={`singles-article-${single.id}`}
                   single={single}
-                  sign={props.sign}
+                  sign={sign}
                   index={index}
+                  sp={sp}
                 />
               );
             })
@@ -352,8 +359,9 @@ export class ComponentSingles extends React.Component {
                   <ComponentSinglesArticleMagnet
                     key={`singles-article-${single.id}`}
                     single={single}
-                    sign={props.sign}
+                    sign={sign}
                     index={index}
+                    sp={sp}
                   />
                   {
                     this.next(index)
@@ -386,8 +394,9 @@ export class ComponentSingles extends React.Component {
                   <ComponentSinglesArticleMagnet
                     key={`singles-article-${single.id}`}
                     single={single}
-                    sign={props.sign}
+                    sign={sign}
                     index={index}
+                    sp={sp}
                   />
                   {
                     this.next(index)
@@ -416,8 +425,9 @@ export class ComponentSingles extends React.Component {
                 <ComponentSinglesArticleMagnet
                   key={`singles-article-${single.id}`}
                   single={single}
-                  sign={props.sign}
+                  sign={sign}
                   index={index}
+                  sp={sp}
                 />
                 {
                   this.next(index)

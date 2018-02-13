@@ -12,16 +12,16 @@
 
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
-let TweenLite = self.TweenLite;
-let easing = self.com.greensock.easing;
+const TweenLite = self.TweenLite;
+const easing = self.com.greensock.easing;
 
 /**
  * page top に戻る
  */
-export class SPPageTop {
+export default class SPPageTop {
   /**
    * page top に戻る motion
    */
@@ -49,14 +49,14 @@ export class SPPageTop {
   /**
    * click event を bind します
    */
-  init():void {
+  init() {
     const element = Dom.pageTop();
     // resposive 残骸で pageTop が 2 Element 存在することがある
     // #js-page_top を sp は優先にする
     // @since 2017-10-23
     const pagetop = Dom.jsPageTop();
     // console.log('SPPageTop.init', element, pagetop);
-    if ( element !== null ) {
+    if (element !== null) {
       const container = pagetop || element;
       // console.log('SPPageTop.init container', container);
       container.addEventListener('click', this.onClick, false);
@@ -68,7 +68,7 @@ export class SPPageTop {
    *
    * @param {Event} event native event, click event
    */
-  onClick( event:Event ):void {
+  onClick(event) {
     event.preventDefault();
     // console.log('SPPageTop.onClick', this._can);
     // click 不可のときは処理しない
@@ -76,7 +76,7 @@ export class SPPageTop {
       return;
     }
 
-    let complete = this._boundComplete;
+    // const complete = this._boundComplete;
     this._can = false;
 
     // scrolling
@@ -90,7 +90,9 @@ export class SPPageTop {
         },
         // easing
         ease: easing.Power4.easeInOut,
-        onComplete: complete
+        onComplete: () => {
+          this._can = true;
+        },
       }
     );
   }
@@ -98,14 +100,14 @@ export class SPPageTop {
    * <p>page top motion complete<br>
    * click 管理フラッグを true にします</p>
    * */
-  onComplete():void {
+  onComplete() {
     this._can = true;
   }
   /**
    * PageTop instance を作成し init 関数をコールします
    */
-  static start():void {
-    let pageTop = new SPPageTop();
+  static start() {
+    const pageTop = new SPPageTop();
     pageTop.init();
   }
 }

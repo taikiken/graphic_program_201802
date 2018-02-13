@@ -44,9 +44,9 @@ export default class View {
   }
   /**
    * {@link Ajax} request を開始します
-   * @param {string} path request path
+   * @param {string} [path=''] request path
    */
-  start(path) {
+  start(path = '') {
     this.ajax.start(path, this.resolve, this.reject);
   }
   /**
@@ -54,13 +54,13 @@ export default class View {
    * @param {object} data JSON data
    */
   resolve(data) {
-    console.warn('View.resolve', data);
+    console.warn('View.resolve', data, this.sp);
   }
   /**
    * @link Ajax} promise error handler - 継承クラスで override します
    * @param {Error} error Ajax ERROR instance
    */
   reject(error) {
-    console.warn('View.reject', error);
+    console.warn('View.reject', error, this.sp);
   }
 }

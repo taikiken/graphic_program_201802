@@ -25,59 +25,59 @@
  *
  */
 export class Receiver {
-  /**
-   * <p>View callback の定型<br>
-   * instance を作成し callback をカスタマイズします<p>
-   *
-   */
-  constructor() {}
+  // /**
+  //  * <p>View callback の定型<br>
+  //  * instance を作成し callback をカスタマイズします<p>
+  //  *
+  //  */
+  // constructor() {}
   /**
    * ReactDOM.render 前に呼び出されます
    * @param {Object} event Event object
    */
-  beforeRender( event:Object ):void {
-    // console.log( 'beforeRender', event );
+  beforeRender(event) {
+    console.warn('Receiver.beforeRender', event, this);
   }
   /**
    * React.componentWillMount callback
    * @param {Object} event Event object
    */
-  willMount( event:Object ):void {
-    // console.log( 'willMount', event );
+  willMount(event) {
+    console.warn('Receiver.willMount', event, this);
   }
   /**
    * React.componentDidMount callback
    * @param {Object} event Event object
    */
-  didMount( event:Object ):void {
-    // console.log( 'didMount', event );
+  didMount(event) {
+    console.warn('Receiver.didMount', event, this);
   }
   /**
    * データが見つからない時に呼び出されます
    * @param {Error} error エラーインスタンス
    */
-  undefinedError( error ):void {
-    // console.log( 'undefinedError', error );
+  undefinedError(error) {
+    console.warn('Receiver.undefinedError', error, this);
   }
   /**
    * データが空の時に呼び出されます
    * @param {Error} error エラーインスタンス
    */
-  emptyError( error ):void {
-    // console.log( 'beforeRender', error );
+  emptyError(error) {
+    console.warn('Receiver.emptyError', error, this);
   }
   /**
    * 処理中にエラーが起きた時に呼び出されます
    * @param {Error} error エラーインスタンス
    */
-  responseError( error ):void {
-    // console.log( 'responseError', error );
+  responseError(error) {
+    console.warn('Receiver.responseError', error, this);
   }
   /**
    * エラーDOMがマウントされた時に呼び出されます
    * @param {Error} error エラーインスタンス
    */
-  errorMount( error ):void {
-    // console.log( 'errorMount', error );
+  errorMount(error) {
+    console.warn('Receiver.errorMount', error, this);
   }
 }

@@ -14,36 +14,23 @@ import { EventDispatcher } from './EventDispatcher';
 
 // private
 /**
- * singleton を保証する Symbol
+ * singleton を保証する Symbol - {@link IFrameStatus}
  * @type {Symbol}
  * @private
  */
-const _symbol = Symbol('IFrameStatus singleton Symbol');
+const iframeStatusSymbol = Symbol('IFrameStatus singleton Symbol');
 /**
  * IFrameStatus instance - singleton
  * @type {?IFrameStatus}
  * @private
  */
-let _instance = null;
+let singletonInstance = null;
 
 /**
  * iframe 内部関数からの通知を `window.onmessage` から取得します
  * @since 2017-04-17
  */
 export class IFrameStatus extends EventDispatcher {
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * singleton instance を返します
-   * @returns {?IFrameStatus} singleton instance
-   */
-  static factory() {
-    if (_instance === null) {
-      _instance = new IFrameStatus(_symbol);
-    }
-    return _instance;
-  }
   // ---------------------------------------------------
   //  STATIC EVENT
   // ---------------------------------------------------
@@ -64,6 +51,19 @@ export class IFrameStatus extends EventDispatcher {
     return 'iFrameDidMount';
   }
   // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * singleton instance を返します
+   * @returns {?IFrameStatus} singleton instance
+   */
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new IFrameStatus(iframeStatusSymbol);
+    }
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
   /**
@@ -72,20 +72,25 @@ export class IFrameStatus extends EventDispatcher {
    * @returns {?IFrameStatus} singleton
    */
   constructor(target) {
-    if (_symbol !== target) {
+    if (iframeStatusSymbol !== target) {
       throw new Error( 'CommentStatus is static Class. not use new IFrameStatus(). instead IFrameStatus.factory()' );
     }
-    if (_instance) {
-      return _instance;
+    if (singletonInstance) {
+      return singletonInstance;
     }
     // ---
     // once
     super();
     // instance
-    _instance = this;
+    singletonInstance = this;
+    /**
+     * bind onMessage
+     * @type {function}
+     */
+    this.onMessage = this.onMessage.bind(this);
     // event bind
-    window.addEventListener('message', this.onMessage.bind(this), false);
-    return _instance;
+    window.addEventListener('message', this.onMessage, false);
+    return singletonInstance;
   }
   // ---------------------------------------------------
   //  METHOD

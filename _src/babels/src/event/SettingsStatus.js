@@ -13,8 +13,16 @@
 
 import {EventDispatcher} from './EventDispatcher';
 
-let _symbol = Symbol();
-let _instance = null;
+/**
+ * {@link SettingsStatus} inner symbol
+ * @type {symbol}
+ */
+const settingsStatusSymbol = Symbol('SettingsStatus symbol');
+/**
+ * {@link SettingsStatus} singleton instance
+ * @type {?SettingsStatus}
+ */
+let singletonInstance = null;
 
 /**
  * 設定
@@ -27,26 +35,6 @@ let _instance = null;
  * var settingsStatus = SettingsStatus.factory();
  */
 export class SettingsStatus extends EventDispatcher {
-  /**
-   * 設定
-   * ユーザー情報更新の custom Event
-   *
-   * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {ReplyStatus} ReplyStatus instance を返します
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SettingsStatus is static Class. not use new SettingsStatus(). instead SettingsStatus.factory()' );
-
-    }
-
-    if ( _instance === null ) {
-      super();
-      _instance = this;
-    }
-    return _instance;
-  }
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------
@@ -54,45 +42,60 @@ export class SettingsStatus extends EventDispatcher {
    * ACCOUNT_COMPLETE
    * @return {string} settingsAccountComplete
    */
-  static get ACCOUNT_COMPLETE():string {
+  static get ACCOUNT_COMPLETE() {
     return 'settingsAccountComplete';
   }
   /**
    * ACCOUNT_ERROR
    * @return {string} settingsAccountError
    */
-  static get ACCOUNT_ERROR():string {
+  static get ACCOUNT_ERROR() {
     return 'settingsAccountError';
   }
   /**
    * INTEREST_COMPLETE
    * @return {string} settingsInterestComplete
    */
-  static get INTEREST_COMPLETE():string {
+  static get INTEREST_COMPLETE() {
     return 'settingsInterestComplete';
   }
   /**
    * INTEREST_ERROR
    * @return {string} settingsInterestError
    */
-  static get INTEREST_ERROR():string {
+  static get INTEREST_ERROR() {
     return 'settingsInterestError';
   }
   // ---------------------------------------------------
-  //  static method
+  //  STATIC METHOD
   // ---------------------------------------------------
   /**
    * instance を生成します
    * @return {SettingsStatus} SettingsStatus instance を返します
    */
-  static factory():SettingsStatus {
-
-    if ( _instance === null ) {
-
-      _instance = new SettingsStatus( _symbol );
-
+  static factory() {
+    if (singletonInstance === null) {
+      singletonInstance = new SettingsStatus(settingsStatusSymbol);
     }
-
-    return _instance;
+    return singletonInstance;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * 設定 - ユーザー情報更新の custom Event
+   *
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {ReplyStatus} ReplyStatus instance を返します
+   */
+  constructor(target) {
+    if (settingsStatusSymbol !== target) {
+      throw new Error( 'SettingsStatus is static Class. not use new SettingsStatus(). instead SettingsStatus.factory()' );
+    }
+    if (singletonInstance === null) {
+      super();
+      singletonInstance = this;
+    }
+    return singletonInstance;
   }
 }

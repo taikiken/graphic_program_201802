@@ -9,13 +9,13 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-import { ViewArchiveMasonryInfinite } from './ViewArchiveMasonryInfinite';
+import ViewArchiveMasonryInfinite from './ViewArchiveMasonryInfinite';
 import { User } from '../app/User';
 import Area from '../action/area/Area';
 import AreaAuth from '../action/area/AreaAuth';
 import Pref from '../action/area/Pref';
 import PrefAuth from '../action/area/PrefAuth';
-import { ComponentCategoryOption } from '../component/categories/ComponentCategoryOption';
+import ViewCategoryOption from './categories/ViewCategoryOption';
 
 /**
  * 地域一覧 - Ajax request + JSON 後表示します
@@ -36,11 +36,12 @@ export default class ViewArea extends ViewArchiveMasonryInfinite {
    */
   static actionPref(area, done, fail) {
     return User.sign ?
-      new Pref(area, done, fail) :
-      new PrefAuth(area, done, fail);
+      new Pref(area, done, fail, 0, 12) :
+      new PrefAuth(area, done, fail, 0, 12);
   }
   /**
    * 地域 Action instance を作成します
+   * - @since 2017-12-18 初回表示件数は仮で12件とする(表示みて調整) ref: UNDO_SPBL-282 【Web】一面のリニューアル / Web - Mobile対応
    * @param {string} area 地域名称
    * @param {?function} done 成功コールバッック
    * @param {?function} fail 失敗コールバック
@@ -48,8 +49,8 @@ export default class ViewArea extends ViewArchiveMasonryInfinite {
    */
   static actionArea(area, done, fail) {
     return User.sign ?
-      new Area(area, done, fail) :
-      new AreaAuth(area, done, fail);
+      new Area(area, done, fail, 0, 12) :
+      new AreaAuth(area, done, fail, 0, 12);
   }
   // ----------------------------------------
   // CONSTRUCTOR
@@ -62,7 +63,7 @@ export default class ViewArea extends ViewArchiveMasonryInfinite {
    * @param {boolean} pref 都道府県フラッグ
    * @param {Object} [option={}] optional event handler
    */
-  constructor(element, moreElement, area = '', pref = false, option:Object = {}) {
+  constructor(element, moreElement, area = '', pref = false, option = {}) {
     super(element, moreElement, null, option, true);
     // ---
     const done = this.done.bind(this);
@@ -86,7 +87,7 @@ export default class ViewArea extends ViewArchiveMasonryInfinite {
     this.pref = pref;
     // @since 2016-09-20
     // 記事一覧に pickup, headline を表示させる
-    const categoryOption = new ComponentCategoryOption('area');
+    const categoryOption = new ViewCategoryOption('area');
     categoryOption.start();
   }
 }

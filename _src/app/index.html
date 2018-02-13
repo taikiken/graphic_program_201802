@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
@@ -10,8 +10,8 @@
   <!-- sns ogp -->
   <meta property="og:title" content="[pagetitle] | SPORTS BULL">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://undotsushin.com/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://undotsushin.com/">
+  <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
+  <meta property="og:url" content="https://sportsbull.jp/">
   <meta property="og:description" content="説明文">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -71,11 +71,10 @@
         <div id="user-profile-container">
 
           <div class="user">
-            <div class="btn-signup">
-              <a href="/signup/">無料登録</a>
-              /
-              <a href="/login/">ログイン</a>
-            </div>
+            <div class="user-signup-btn">
+              <a class="user-signup-btn--login" href="/login/">ログイン</a>
+              <a class="user-signup-btn--signup" href="/signup/">無料会員登録</a>
+            </div><!-- /.btn-signup -->
           </div><!-- /.user -->
 
           <div class="user">
@@ -190,26 +189,39 @@
   .success -> #43e18a グリーン
   -->
 
+  <div class="announce announce--text" style="background-color: #fff;">
+    <div class="announce__inner">
+      <p class="announce__item">
+        <img class="announce__item__icon" src="https://dev.sportsbull.jp/information/icon/3x/information__icon__notice.png" alt="">
+        <a href="hoge" style="color: #333333;">スポブルアプリ3日利用で5,000円分のクーポンが当たる！</a>
+      </p>
+    </div><!-- /.announce__inner -->
+  </div><!-- /.announce -->
+
+  <div class="announce announce--image" style="background-color: #fff;">
+    <div class="announce__inner">
+      <p class="announce__item"><a href="hoge"><img src="/assets/images/dummy/bnr-sokuhou.png" alt=""></a></p>
+    </div><!-- /.announce__inner -->
+  </div><!-- /.announce -->
+
   <div class="hero-sec">
     <div class="hero-slider">
       <div class="hero-slider-inner">
         <ul>
           <li>
-            <a href="hoge">
+            <a href="hoge" style="background: url('/assets/images/dummy/kv1.jpg') 50% 50% / cover no-repeat;">
               <img class="overlay" src="/assets/images/index/kv-overlay.png" alt="">
-              <img src="/assets/images/dummy/kv1.jpg" alt="">
               <div class="post-overview">
                 <p class="post-category">海外サッカー</p>
-                <h2 class="post-heading">全角４８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトルが入りますタイトルが…</h2>
+                <h2 class="post-heading">ド軍ナインがダルビッシュの心揺さぶる円陣ド軍ナインがダルビッシュの心揺さぶる円陣</h2>
                 <p class="post-date">12月18日(金) 22:04</p>
                 <p class="post-comment-num">9999</p>
               </div><!-- /.post-overview -->
             </a>
           </li>
           <li>
-            <a href="hoge">
+            <a href="hoge" style="background: url('/assets/images/dummy/kv2.jpg') 50% 50% / cover no-repeat;">
               <img class="overlay" src="/assets/images/index/kv-overlay.png" alt="">
-              <img src="/assets/images/dummy/kv2.jpg" alt="">
               <div class="post-overview">
                 <p class="post-category">海外サッカー</p>
                 <h2 class="post-heading">タイトル１行の場合タイトル１行の場合</h2>
@@ -219,12 +231,11 @@
             </a>
           </li>
           <li>
-            <a href="hoge">
+            <a href="hoge" style="background: url('/assets/images/dummy/kv3.jpg') 50% 50% / cover no-repeat;">
               <img class="overlay" src="/assets/images/index/kv-overlay.png" alt="">
-              <img src="/assets/images/dummy/kv3.jpg" alt="">
               <div class="post-overview">
                 <p class="post-category">海外サッカー</p>
-                <h2 class="post-heading">全角４８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトルが入りますタイトルが…</h2>
+                <h2 class="post-heading">タイトル１行の場合タイトル１行の場合</h2>
                 <p class="post-date">12月18日(金) 22:04</p>
                 <p class="post-comment-num">9999</p>
               </div><!-- /.post-overview -->
@@ -255,44 +266,126 @@
   <div class="body-sec">
     <div class="body-sec-inner">
       <section class="main-sec">
-        <aside class="stats_banner">
-          <div class="stats_banner-heading">
-            <h2 class="stats_banner-heading-title"><img src="/assets/images/index/stats_bnr-heading.png" alt="Breaking News &amp; Stats"></h2>
-            <span class="stats_banner-heading-ruby">速報 &amp; データ</span>
-          </div><!-- /.stats_banner-heading -->
-
-          <ul class="stats_banner-list">
-            <li class="stats_banner-item"><a href="/stats/npb/"><img src="/assets/images/stats/banners/top_bnr-baseball_pro.jpg" alt="プロ野球 速報&amp;データを見る"></a></li>
-            <li class="stats_banner-item"><a href="/jleague/match/"><img src="/assets/images/stats/banners/top_bnr-soccer_jleague.jpg" alt="Jリーグ 速報&amp;データを見る"></a></li>
-            <li class="stats_banner-item"><a href="http://sportsbull.jp/stats/tennis/"><img src="/assets/images/stats/banners/top_bnr-tennis.jpg" alt="テニス 速報&amp;データを見る"></a></li>
-            <li class="stats_banner-item"><a href="http://sportsbull.jp/stats/golf/"><img src="/assets/images/stats/banners/top_bnr-golf.jpg" alt="ゴルフ 速報&amp;データを見る"></a></li>
-          </ul><!-- /.stats_banner-list -->
-
-          <div class="stats_banner-btn">
-            <a class="stats_banner-btn-link" href="/stats/"><span>すべての速報&amp;データを見る</span></a>
-          </div><!-- /.stats_banner-btn -->
-        </aside><!-- /.stats_banner -->
-
         <div class="focus-bnr">
           <a href="https://sportsbull.jp/sokuhou/?utm_source=SPORTS%20BULL&utm_content=20161011&utm_campaign=sokuhou&utm_medium=banner"><img src="/assets/images/dummy/bnr-sokuhou.png" alt=""></a>
         </div><!-- /.focus-bnr -->
 
-        <div class="headline">
-          <div class="headline-heading">
-            <h2 class="headline-heading-title"><img src="/assets/images/common/headline-heading.png" alt="HEADLINE NEWS"></h2>
-            <span class="headline-heading-ruby">注目のニュース</span>
-          </div>
+        <aside class="stats_banner">
+          <div class="stats_banner__heading">
+            <h2 class="stats_banner__heading__title">速報&amp;データ</h2>
+          </div><!-- /.stats_banner__heading -->
 
+          <ul class="stats_banner__list">
+            <li class="stats_banner__item">
+              <a href="/stats/npb/">
+                <i>
+                  <svg class="icon icon--baseball">
+                    <use xlink:href="#icon-baseball" />
+                  </svg>
+                </i>
+                <span>プロ野球</span>
+              </a>
+            </li>
+            <li class="stats_banner__item">
+              <a href="/sokuhou/">
+                <i>
+                  <svg class="icon">
+                    <use xlink:href="#icon-soccer" />
+                  </svg>
+                </i>
+                <span>サッカー<br />日本代表</span>
+              </a>
+            </li>
+            <li class="stats_banner__item">
+              <a href="/stats/bleague/">
+                <i>
+                  <svg class="icon">
+                    <use xlink:href="#icon-basketball" />
+                  </svg>
+                </i>
+                <span>Bリーグ</span>
+              </a>
+            </li>
+            <li class="stats_banner__item">
+              <a href="/stats/u_rugby/kantou/">
+                <i>
+                  <svg class="icon">
+                    <use xlink:href="#icon-football" />
+                  </svg>
+                </i>
+                <span>関西学生<br />アメフト</span>
+              </a>
+            </li>
+          </ul><!-- /.stats_banner__list -->
+
+          <div class="stats_banner__btn">
+            <a class="stats_banner__btn__link" href="/stats/"><span>すべて</span></a>
+          </div><!-- /.stats_banner__btn -->
+
+          <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+          <symbol id="icon-baseball" viewBox="0 0 64 64">
+          <title>baseball</title>
+          <path d="M32 64c-17.645 0-32-14.355-32-32s14.355-32 32-32 32 14.355 32 32-14.355 32-32 32zM32 4.096c-15.387 0-27.904 12.517-27.904 27.904s12.517 27.904 27.904 27.904 27.904-12.517 27.904-27.904-12.517-27.904-27.904-27.904z"></path>
+          <path d="M50.423 50.365c-0.188 0-0.366-0.011-0.544-0.055-0.177-0.034-0.355-0.089-0.521-0.155s-0.333-0.155-0.477-0.255c-0.155-0.1-0.3-0.222-0.421-0.344-0.133-0.133-0.244-0.266-0.344-0.421s-0.188-0.311-0.255-0.477c-0.077-0.166-0.122-0.344-0.166-0.521-0.034-0.178-0.044-0.366-0.044-0.544s0.011-0.366 0.044-0.543c0.044-0.178 0.089-0.344 0.166-0.522 0.067-0.166 0.155-0.322 0.255-0.477 0.1-0.144 0.211-0.288 0.344-0.421 0.122-0.122 0.266-0.244 0.421-0.344 0.144-0.1 0.311-0.177 0.477-0.255 0.166-0.067 0.344-0.122 0.521-0.155 0.355-0.067 0.721-0.067 1.076 0 0.178 0.033 0.355 0.088 0.522 0.155 0.166 0.078 0.333 0.155 0.477 0.255 0.155 0.1 0.3 0.222 0.421 0.344 0.133 0.133 0.244 0.277 0.344 0.421 0.1 0.155 0.188 0.311 0.255 0.477 0.078 0.178 0.122 0.344 0.167 0.522 0.033 0.177 0.044 0.366 0.044 0.543s-0.011 0.366-0.044 0.544c-0.044 0.177-0.089 0.355-0.167 0.521-0.067 0.166-0.155 0.322-0.255 0.477s-0.211 0.288-0.344 0.421c-0.122 0.122-0.266 0.244-0.421 0.344-0.144 0.1-0.31 0.188-0.477 0.255s-0.344 0.122-0.522 0.155c-0.178 0.044-0.355 0.055-0.532 0.055z"></path>
+          <path d="M44.51 42.854v0 0c-0.588-1.409 0.089-3.039 1.509-3.616v0c1.42-0.588 3.040 0.089 3.617 1.509v0c0.588 1.42-0.089 3.039-1.509 3.616v0c-0.344 0.145-0.699 0.211-1.054 0.211v0c-1.087 0-2.119-0.644-2.563-1.72zM42.613 35.7v0 0c-0.188-1.52 0.876-2.918 2.396-3.106v0c1.519-0.199 2.917 0.876 3.106 2.396v0c0.2 1.52-0.876 2.907-2.396 3.106v0c-0.122 0.011-0.233 0.022-0.355 0.022v0c-1.375 0-2.573-1.020-2.751-2.418zM45.009 31.406c-1.52-0.189-2.585-1.587-2.396-3.095v0c0.2-1.52 1.587-2.596 3.106-2.407v0c1.52 0.199 2.596 1.586 2.396 3.106v0c-0.178 1.398-1.375 2.419-2.751 2.419v0c-0.111 0-0.233 0-0.355-0.022zM46.018 24.761c-1.42-0.577-2.096-2.196-1.509-3.616v0c0.577-1.42 2.196-2.097 3.617-1.509v0c1.42 0.576 2.096 2.196 1.509 3.616v0c-0.433 1.076-1.475 1.719-2.563 1.719v0c-0.355 0-0.71-0.066-1.054-0.211z"></path>
+          <path d="M50.423 19.181c-0.188 0-0.366-0.022-0.544-0.056s-0.355-0.088-0.521-0.155-0.333-0.155-0.477-0.255c-0.155-0.1-0.3-0.222-0.421-0.344-0.133-0.133-0.244-0.267-0.344-0.421s-0.188-0.311-0.255-0.477c-0.077-0.166-0.122-0.344-0.166-0.522-0.034-0.177-0.044-0.366-0.044-0.543s0.011-0.366 0.044-0.544c0.044-0.177 0.089-0.355 0.166-0.521 0.067-0.166 0.155-0.322 0.255-0.477 0.1-0.144 0.211-0.288 0.344-0.421 0.122-0.122 0.266-0.244 0.421-0.344 0.144-0.1 0.311-0.188 0.477-0.255s0.344-0.122 0.521-0.155c0.355-0.067 0.721-0.067 1.076 0 0.178 0.034 0.355 0.089 0.522 0.155s0.333 0.155 0.477 0.255c0.155 0.1 0.3 0.222 0.421 0.344 0.133 0.133 0.244 0.277 0.344 0.421 0.1 0.155 0.188 0.311 0.255 0.477 0.078 0.166 0.122 0.344 0.167 0.521 0.033 0.178 0.044 0.366 0.044 0.544s-0.011 0.366-0.044 0.543c-0.044 0.178-0.089 0.355-0.167 0.522-0.067 0.166-0.155 0.322-0.255 0.477s-0.211 0.288-0.344 0.421c-0.122 0.122-0.266 0.244-0.421 0.344-0.144 0.1-0.31 0.189-0.477 0.255s-0.344 0.122-0.522 0.155c-0.178 0.034-0.355 0.056-0.532 0.056z"></path>
+          <path d="M13.582 50.365c-0.732 0-1.442-0.3-1.964-0.81-0.51-0.521-0.81-1.231-0.81-1.964s0.3-1.442 0.81-1.964c1.032-1.031 2.895-1.031 3.927 0 0.51 0.522 0.81 1.231 0.81 1.964s-0.3 1.442-0.81 1.964c-0.522 0.51-1.231 0.81-1.964 0.81z"></path>
+          <path d="M15.867 44.363c-1.409-0.577-2.086-2.196-1.509-3.616v0c0.588-1.42 2.208-2.085 3.628-1.509v0c1.409 0.588 2.086 2.207 1.509 3.616v0c-0.444 1.076-1.476 1.72-2.574 1.72v0c-0.344 0-0.71-0.067-1.054-0.211zM18.285 38.095c-1.519-0.199-2.596-1.586-2.407-3.106v0c0.2-1.52 1.587-2.596 3.106-2.396v0c1.519 0.188 2.596 1.587 2.396 3.106v0c-0.177 1.398-1.375 2.418-2.74 2.418v0c-0.122 0-0.244-0.011-0.355-0.022zM15.878 29.010c-0.188-1.52 0.888-2.907 2.407-3.106v0c1.509-0.189 2.907 0.887 3.095 2.396v0c0.2 1.531-0.876 2.918-2.396 3.106v0c-0.122 0.022-0.244 0.022-0.355 0.022v0c-1.375 0-2.563-1.020-2.751-2.419zM14.358 23.253c-0.577-1.42 0.1-3.040 1.509-3.616v0c1.42-0.588 3.039 0.088 3.628 1.509v0c0.577 1.42-0.1 3.039-1.52 3.616v0c-0.344 0.145-0.699 0.211-1.043 0.211v0c-1.098 0-2.13-0.643-2.574-1.719z"></path>
+          <path d="M13.582 19.181c-0.732 0-1.442-0.3-1.964-0.81-0.122-0.133-0.244-0.267-0.344-0.421s-0.188-0.311-0.255-0.477-0.122-0.344-0.155-0.522c-0.033-0.177-0.055-0.366-0.055-0.543 0-0.732 0.3-1.442 0.81-1.964 1.032-1.032 2.895-1.032 3.927 0 0.51 0.521 0.81 1.231 0.81 1.964 0 0.178-0.022 0.366-0.056 0.543s-0.088 0.355-0.155 0.522-0.155 0.322-0.255 0.477c-0.1 0.155-0.222 0.288-0.344 0.421-0.522 0.51-1.231 0.81-1.964 0.81z"></path>
+          </symbol>
+          <symbol id="icon-basketball" viewBox="0 0 64 64">
+          <title>basketball</title>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M61.893 31.945c0 16.527-13.421 29.948-29.948 29.948s-29.948-13.421-29.948-29.948c0-16.527 13.421-29.948 29.948-29.948 16.638 0 29.948 13.421 29.948 29.948z"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M10.87 53.13c-1.664-1.664 6.433-12.534 18.080-24.291 7.099-7.099 13.976-12.867 18.523-15.972"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M53.13 53.13c-3.438 3.438-15.639-3.328-27.397-14.974-6.877-6.877-12.090-13.976-14.419-19.3"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M56.014 31.945c-7.986 0.222-21.962 1.775-27.951 8.43-4.215 4.659-2.44 10.87-0.111 15.418"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M27.73 8.541c-1.331 6.544-4.104 16.527-9.761 21.407-3.549 3.106-7.432 3.66-10.426 3.438"></path>
+          </symbol>
+          <symbol id="icon-football" viewBox="0 0 64 64">
+          <title>football</title>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M41.262 2.551c7.875 4.991 15.307 12.312 20.187 20.187-1.331 9.428-5.657 18.523-12.867 25.844-10.094 10.094-23.626 14.419-36.825 13.088-2.44-0.222-5.546-0.998-6.988-2.44-1.553-1.553-2.218-4.548-2.44-6.988-0.111-0.887-0.111-1.664-0.222-2.551"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M61.893 14.087c0-0.776-0.111-1.553-0.222-2.329-0.222-2.44-0.998-5.546-2.44-6.988-1.553-1.553-4.659-2.218-7.099-2.551-13.088-1.22-26.731 3.106-36.714 13.199-7.321 7.321-11.646 16.416-12.977 25.844 4.991 7.875 12.312 15.307 20.298 20.187"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M43.036 20.853l-22.184 22.295"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M34.828 21.518l7.542 7.542"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M21.518 34.828l7.542 7.542"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M28.173 28.173l7.542 7.542"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M31.39 4.991c11.203 5.546 21.962 16.305 27.508 27.508"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M4.991 31.501c5.546 11.203 16.305 21.962 27.508 27.508"></path>
+          </symbol>
+          <symbol id="icon-soccer" viewBox="0 0 64 64">
+          <title>soccer</title>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M24.402 42.815l-4.77-14.53 12.312-8.984 12.423 8.984-4.77 14.53z"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M24.957 8.097l6.988 2.773 6.988-2.773"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M53.685 20.409l-0.998 6.988 4.215 5.879"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M50.912 48.25l-7.432 1.442-4.326 6.1"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M13.532 48.25l6.988 1.442 3.882 5.546"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M7.099 33.719l4.215-6.322-1.109-7.432"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M31.945 10.87v8.43"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M52.686 27.397l-8.319 0.887"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M43.48 49.691l-3.882-6.877"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M20.52 49.691l3.882-6.877"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M11.314 27.397l8.319 0.887"></path>
+          <path stroke-width="4.0953" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" d="M61.893 31.945c0 16.527-13.421 29.948-29.948 29.948s-29.948-13.421-29.948-29.948c0-16.527 13.421-29.948 29.948-29.948 16.638 0 29.948 13.421 29.948 29.948z"></path>
+          </symbol>
+          </defs>
+          </svg>
+        </aside><!-- /.stats_banner -->
+
+        <div class="headline">
           <ul class="board-small column2">
             <li class="board-item">
               <a class="post" href="hoge">
-                <figure class="post-thumb post-thumb-headline"><img src="/assets/images/dummy/thumb-70x70_1.jpg" alt=""></figure>
+                <figure class="post-thumb post-thumb-headline">
+                  <img class="video-thumbnail" src="/assets/images/dummy/thumb-70x70_1.jpg" alt="">
+                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-1x1-play-s.png" alt="">
+                </figure>
                 <div class="post-data">
+                  <h3 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h3>
                   <p class="post-category">
                     <i class="post-label_movie">動画</i>
                     野球
                   </p>
-                  <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
                   <p class="post-date">12月18日(金) 22:04</p>
                 </div><!-- /.post-data -->
               </a>
@@ -301,8 +394,8 @@
               <a class="post" href="hoge">
                 <figure class="post-thumb post-thumb-headline"><img src="/assets/images/dummy/thumb-70x70_2.jpg" alt=""></figure>
                 <div class="post-data">
+                  <h3 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h3>
                   <p class="post-category">MLB</p>
-                  <h3 class="post-heading">タイトル１行の場合タイトルが入ります</h3>
                   <p class="post-date">12月18日(金) 22:04</p>
                 </div><!-- /.post-data -->
               </a>
@@ -311,8 +404,8 @@
               <a class="post" href="hoge">
                 <figure class="post-thumb post-thumb-headline"><img src="/assets/images/dummy/thumb-70x70_3.jpg" alt=""></figure>
                 <div class="post-data">
+                  <h3 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h3>
                   <p class="post-category">格闘技</p>
-                  <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
                   <p class="post-date">12月18日(金) 22:04</p>
                 </div><!-- /.post-data -->
               </a>
@@ -321,8 +414,8 @@
               <a class="post" href="hoge">
                 <figure class="post-thumb post-thumb-headline"><img src="/assets/images/dummy/thumb-70x70_4.jpg" alt=""></figure>
                 <div class="post-data">
+                  <h3 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h3>
                   <p class="post-category">ラグビー</p>
-                  <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
                   <p class="post-date">12月18日(金) 22:04</p>
                 </div><!-- /.post-data -->
               </a>
@@ -331,8 +424,8 @@
               <a class="post" href="hoge">
                 <figure class="post-thumb post-thumb-headline"><img src="/assets/images/dummy/thumb-70x70_5.jpg" alt=""></figure>
                 <div class="post-data">
+                  <h3 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h3>
                   <p class="post-category">モータースポーツ</p>
-                  <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
                   <p class="post-date">12月18日(金) 22:04</p>
                 </div><!-- /.post-data -->
               </a>
@@ -341,8 +434,8 @@
               <a class="post" href="hoge">
                 <figure class="post-thumb post-thumb-headline">&nbsp;</figure>
                 <div class="post-data">
+                  <h3 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h3>
                   <p class="post-category">海外サッカー</p>
-                  <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
                   <p class="post-date">12月18日(金) 22:04</p>
                 </div><!-- /.post-data -->
               </a>
@@ -353,7 +446,7 @@
         <aside class="sns-pr">
           <dl class="sns-pr-inner">
             <dt>
-              <p><img src="/assets/images/index/sns-pr-logo.png" alt="SPORTS BULL"><span>を<strong>いいね</strong>して最新ニュースをチェック！</span></p>
+              <p><img src="/assets/images/index/sns-pr-logo.png" alt="SPORTS BULL"><span>いいねして最新ニュースをチェック！</span></p>
             </dt>
             <dd>
               <div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
@@ -371,12 +464,12 @@
                     <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-16x9-play.png" alt="">
                   </figure>
                   <div class="post-data">
+                    <h2 class="post-heading">全角３２文字タイトルが入りますタイトルが入りますタイトルが入り…</h2>
                     <p class="post-category">
                       <i class="post-label_recommend">おすすめ記事</i>
                       <i class="post-label_movie">動画</i>
                       海外サッカー
                     </p>
-                    <h2 class="post-heading">全角３２文字タイトルが入りますタイトルが入りますタイトルが入り…</h2>
                     <p class="post-date">12月18日(金) 22:04</p>
                     <p class="post-excerpt-text">複数のクラブからコンタクトがあったアンチェロッティは、今シーズン限りでのペップ退任が濃厚となったバイエルンと3年契約と結ぶ見込。</p>
                   </div>
@@ -417,7 +510,10 @@
           </div><!-- /#board-container -->
 
           <div id="board-container-more">
-            <div class="board-btn-viewmore"><a class="board-btn-viewmore-link" href="hoge"><span>VIEW MORE</span></a></div>
+            <div class="board-btn-viewmore loading-root loading">
+              <a class="board-btn-viewmore-link" href="#more"><span>もっと見る</span></a>
+              <span class="loading-spinner">&nbsp;</span>
+            </div>
           </div><!-- /#board-container-more -->
         </div><!-- /.board-large -->
       </section><!-- /.main-sec -->
@@ -436,22 +532,22 @@
           <ul class="post-list">
             <li class="board-item rank1">
               <a class="post" href="hoge">
-                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_1.jpg" alt=""></figure>
+                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-16x9-s_1.jpg" alt=""></figure>
 
                 <div class="post-data">
+                  <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
                   <p class="post-category">海外サッカー</p>
-                  <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
                   <p class="post-date">12月18日(金) 19:00</p>
                 </div>
               </a>
             </li>
             <li class="board-item rank2">
               <a class="post" href="hoge">
-                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_2.jpg" alt=""></figure>
+                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-16x9-s_2.jpg" alt=""></figure>
 
                 <div class="post-data">
+                  <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
                   <p class="post-category">海外サッカー</p>
-                  <h4 class="post-heading">タイトル１行の場合</h4>
                   <p class="post-date">12月18日(金) 19:00</p>
                 </div>
               </a>
@@ -461,30 +557,30 @@
                 <figure class="post-thumb">&nbsp;</figure>
 
                 <div class="post-data">
+                  <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
                   <p class="post-category">大相撲</p>
-                  <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
                   <p class="post-date">12月18日(金) 19:00</p>
                 </div>
               </a>
             </li>
             <li class="board-item rank4">
               <a class="post" href="hoge">
-                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_4.jpg" alt=""></figure>
+                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-16x9-s_4.jpg" alt=""></figure>
 
                 <div class="post-data">
+                  <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
                   <p class="post-category">ゴルフ</p>
-                  <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
                   <p class="post-date">12月18日(金) 19:00</p>
                 </div>
               </a>
             </li>
             <li class="board-item rank5">
               <a class="post" href="hoge">
-                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_5.jpg" alt=""></figure>
+                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-16x9-s_5.jpg" alt=""></figure>
 
                 <div class="post-data">
+                  <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
                   <p class="post-category">海外サッカー</p>
-                  <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
                   <p class="post-date">12月18日(金) 19:00</p>
                 </div>
               </a>
@@ -507,8 +603,11 @@
                 </figure>
 
                 <div class="post-data">
-                  <p class="post-category">海外サッカー</p>
                   <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
+                  <p class="post-category">
+                    <i class="post-label_movie">動画</i>
+                    海外サッカー
+                  </p>
                   <p class="post-date">12月18日(金) 19:00</p>
                 </div>
               </a>
@@ -521,8 +620,11 @@
                 </figure>
 
                 <div class="post-data">
-                  <p class="post-category">テニス</p>
                   <h4 class="post-heading">タイトル１行の場合</h4>
+                  <p class="post-category">
+                    <i class="post-label_movie">動画</i>
+                    テニス
+                  </p>
                   <p class="post-date">12月18日(金) 19:00</p>
                 </div>
               </a>
@@ -535,8 +637,11 @@
                 </figure>
 
                 <div class="post-data">
-                  <p class="post-category">バスケットボール</p>
                   <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
+                  <p class="post-category">
+                    <i class="post-label_movie">動画</i>
+                    バスケットボール
+                  </p>
                   <p class="post-date">12月18日(金) 19:00</p>
                 </div>
               </a>
@@ -549,9 +654,12 @@
                 </figure>
 
                 <div class="post-data">
-                  <p class="post-category">バレー</p>
                   <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
+                  <p class="post-category">
+                    <i class="post-label_movie">動画</i>
+                    バレー
                   <p class="post-date">12月18日(金) 19:00</p>
+                  </p>
                 </div>
               </a>
             </li>
@@ -563,8 +671,11 @@
                 </figure>
 
                 <div class="post-data">
-                  <p class="post-category">柔道</p>
                   <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
+                  <p class="post-category">
+                    <i class="post-label_movie">動画</i>
+                    柔道
+                  </p>
                   <p class="post-date">12月18日(金) 19:00</p>
                 </div>
               </a>
@@ -597,7 +708,7 @@
               <li><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
               <li><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
             </ul>
-            <p class="foot-pr-text">話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「スポーツ・ブル」。高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
+            <p class="foot-pr-text">話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「SPORTS BULL」。高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。</p>
           </div><!-- /.text-block -->
 
           <div class="fb-page-plugin">
@@ -610,7 +721,6 @@
 
       <div class="fnav-block">
         <nav class="fnav">
-          <h3 class="fnav-logo"><img src="/assets/images/common/footer-fnav-logo.png" alt="SPORTS BULL"></h3>
           <ul>
             <li><a href="/about/">サービス紹介</a></li>
             <li><a href="/about/company/">会社概要</a></li>

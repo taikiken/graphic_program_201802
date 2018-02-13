@@ -23,6 +23,7 @@ import {GaData} from '../../ga/GaData';
 // node
 import {CategoryLabelNode} from '../category/CategoryLabelNode';
 import AnotherCategoriesDae from '../../dae/another-categories/AnotherCategoriesDae';
+// import { ComponentCategoryLabels } from '../../component/categories/ComponentCategoryLabels';
 
 // React
 let React = self.React;
@@ -55,6 +56,8 @@ let React = self.React;
 // } );
 
 /**
+ * @deprecated 2017-12-18 instead use {@link ComponentSidebarRankingArticle}
+ * TODO: future remove
  * <p>人気記事一覧</p>
  * <p>SPに人気記事一覧を記事詳細に追加することになったので共通で使用できるように独立させました</p>
  * @since 2016-06-16
@@ -87,6 +90,8 @@ export const RankingNode = React.createClass( {
   //   };
   // },
   render: function() {
+    console.error('[RankingNode] deprecated');
+
     let p = this.props;
     let standing = p.index + 1;
     let imgStyle = {
@@ -116,6 +121,7 @@ export const RankingNode = React.createClass( {
             <img src={Empty.THUMB_EMPTY} alt=""/>
           </figure>
           <div className="post-data">
+            <h4 className="post-heading">{p.title}</h4>
             <p className={'post-category post-category-' + slugAll( p.categories )}>
               <CategoryLabelNode
                 categories={p.categories}
@@ -123,8 +129,16 @@ export const RankingNode = React.createClass( {
                 index={p.index}
                 anotherCategories={p.anotherCategories}
               />
+              {/*
+              <ComponentCategoryLabels
+                categories={p.categories}
+                id={p.id}
+                index={p.index}
+                anotherCategories={p.anotherCategories}
+                className="category-label-wrapper"
+              />
+              */}
             </p>
-            <h4 className="post-heading">{p.title}</h4>
             <p className="post-date">{p.date}</p>
           </div>
         </a>

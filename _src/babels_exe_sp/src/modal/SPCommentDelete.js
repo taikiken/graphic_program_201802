@@ -11,34 +11,34 @@
  */
 
 
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 // UT
-let UT = self.UT;
-let Dom = UT.app.Dom;
+const UT = self.UT;
+const Dom = UT.app.Dom;
 
 /**
  * コメント削除モーダル
  */
-export class SPCommentDelete {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'SPCommentDelete is static Class. not use new SPCommentDelete().' );
-
-    }
-  }
+export default class SPCommentDelete {
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'SPCommentDelete is static Class. not use new SPCommentDelete().' );
+  //
+  //   }
+  // }
   /**
    * comment delete confirm modal 準備
    */
-  static start():void {
-    let element = Dom.modal();
-    if ( element !== null ) {
-      let commentDelete = new UT.view.modal.ViewDeleteModal( element );
+  static start() {
+    const element = Dom.modal();
+    if (element !== null) {
+      const commentDelete = new UT.view.modal.ViewDeleteModal(element);
       commentDelete.start();
     }
   }

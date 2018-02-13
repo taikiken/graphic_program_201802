@@ -11,8 +11,7 @@
  */
 
 // sp/view
-// import {SPViewArchive} from '../SPViewArchive';
-import { SPViewArchiveInfinite } from '../SPViewArchiveInfinite';
+import SPViewArchiveInfinite from '../SPViewArchiveInfinite';
 
 // app
 import {User} from '../../../app/User';
@@ -26,24 +25,25 @@ import {News} from '../../../action/home/News';
  */
 // export class SPViewNews extends SPViewArchive {
 // @since 2016-09-16 parent class changed
-export class SPViewNews extends SPViewArchiveInfinite {
+export default class SPViewNews extends SPViewArchiveInfinite {
   /**
    * home news, token 付き・無し を切替
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, moreElement:Element, option:Object = {} ) {
+  constructor(element, moreElement, option = {}) {
     // console.log('SPViewNews', element, moreElement);
-    super( element, moreElement, null, option );
+    super(element, moreElement, null, option);
     /**
      * Action instance
+     * - @since 2017-12-18 初回表示件数は仮で12件とする(表示みて調整) ref: UNDO_SPBL-282 【Web】一面のリニューアル / Web - Mobile対応
      * @override
      * @type {NewsAuth|News}
      */
     this.action = User.sign ?
-      new NewsAuth( this.done.bind( this ), this.fail.bind( this ) ) :
-      new News( this.done.bind( this ), this.fail.bind( this ) );
+      new NewsAuth(this.done.bind(this), this.fail.bind(this), 0, 12) :
+      new News(this.done.bind(this), this.fail.bind(this), 0, 12);
     /**
      * home flag, home の時のみ true
      * 「おすすめ」ラベル表示に使用

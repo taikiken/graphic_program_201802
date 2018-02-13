@@ -14,13 +14,13 @@
 import { Message } from '../../app/const/Message';
 
 // component/singles
-import { ComponentSinglesArticleExcerpt } from './ComponentSinglesArticleExcerpt';
+import ComponentSinglesArticleExcerpt from './ComponentSinglesArticleExcerpt';
 
 // component/singles-content
-import { ComponentSingleContent } from '../singles-content/ComponentSingleContent';
-import { ComponentSingleSNS } from '../singles-content/ComponentSingleSNS';
+import ComponentSingleContent from '../singles-content/ComponentSingleContent';
+import ComponentSingleSNS from '../singles-content/ComponentSingleSNS';
 // state record
-import { RecordSingleState } from '../singles-content/RecordSingleState';
+import RecordSingleState from '../singles-content/RecordSingleState';
 
 // // util
 import { Scroll } from '../../util/Scroll';
@@ -28,6 +28,9 @@ import { Scroll } from '../../util/Scroll';
 import { Validate } from '../../util/Validate';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -35,7 +38,7 @@ const React = self.React;
  * 「続きを読む」クリックで本文を表示します
  * @since 2016-11-04
  */
-export class ComponentSinglesArticleSwitch extends React.Component {
+export default class ComponentSinglesArticleSwitch extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

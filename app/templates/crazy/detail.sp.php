@@ -8,9 +8,11 @@
     <script src="/assets/js/app_divide.bundle.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <title>CRAZY ATHLETES | スポーツブル / SPORTS BULL</title>
-    <script src="/assets/js/libs/vendor.react.js"></script>
-    <script src="/assets/js/bundle/main.bundle.js"></script>
-    <link rel="stylesheet" href="/assets/sp/css/ui.css">
+
+    <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+    <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+
     <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
     <meta name="description" content="スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
     <meta property="fb:app_id" content="842032129256034">
@@ -36,6 +38,9 @@
     <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
     <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
     <link rel="shortcut icon" href="/favicon.ico">
+
+    <?php include_once __DIR__.'/../_env.php'; ?>
+
     <!-- 表示確認用 / -->
     <link rel="stylesheet" href="/assets/css/tmp/head_foot_demo.css" media="only screen and (min-width: 769px)">
     <link rel="stylesheet" href="/assets/sp/css/tmp/head_foot_demo.css" media="only screen and (max-width: 768px)">
@@ -44,51 +49,9 @@
     <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
     <link rel="stylesheet" href="/assets/css/player.css">
     <link rel="stylesheet" href="/assets/css/crazy.css">
-    <!-- optimize -->
-    <style>
-        .async-hide {
-            opacity: 0 !important
-        }
-    </style>
-    <script>
-        (function(a, s, y, n, c, h, i, d, e)
-        {
-            s.className += ' ' + y;
-            h.start = 1 * new Date;
-            h.end = i = function()
-            {
-                s.className = s.className.replace(RegExp(' ?' + y), '')
-            };
-            (a[n] = a[n] || []).hide = h;
-            setTimeout(function()
-            {
-                i();
-                h.end = null
-            }, c);
-            h.timeout = c;
-        })(window, document.documentElement, 'async-hide', 'dataLayer', 4000,
-            {
-                'GTM-KJ33JM9': true
-            });
-    </script>
-    <!-- //optimize -->
-    <!-- ad/dfp -->
-    <script type='text/javascript'>
-        var googletag = googletag ||
-            {};
-        googletag.cmd = googletag.cmd || [];
-        (function()
-        {
-            var gads = document.createElement('script');
-            gads.async = true;
-            gads.type = 'text/javascript';
-            var useSSL = 'https:' == document.location.protocol;
-            gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
-            var node = document.getElementsByTagName('script')[0];
-            node.parentNode.insertBefore(gads, node);
-        })();
-    </script>
-    <!-- ad/dfp -->
+
+    <?php include_once __DIR__.'/../_head_bottom.php'; ?>
+
     <!-- ad/appvador -->
     <script>
         googletag.cmd.push(function()
@@ -123,28 +86,7 @@
     </script>
 -->
     <!-- // ad/npb-sp-anchor -->
-    <!-- ga -->
-    <script>
-        (function(i, s, o, g, r, a, m)
-        {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function()
-            {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-74679267-1', 'auto');
-        ga('require', 'GTM-KJ33JM9');
-        ga('require', 'linkid');
-        ga('require', 'displayfeatures');
-        ga('send', 'pageview');
-    </script>
-    <!-- //ga -->
+
 </head>
 <body>
 <!-- ad/531683568/appvador -->
@@ -178,12 +120,12 @@
         <ul>
             <li id="home" class="gnav-home"><a href="/">一面</a></li>
 
-            <?php foreach( $page['site_categories'] as $category ) {
+            <?php foreach( $page['site_tabs'] as $tab ) {
                 // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
                 // タブの表示順はAPI通りにする
                 ?>
-                <li id="<?php echo $category['slug']; ?>" class="gnav-<?php echo $category['slug']; ?>">
-                    <a href="/category/<?php echo $category['slug']; ?>/"><?php echo $category['label']; ?></a>
+                <li id="<?php echo $tab['slug']; ?>" class="gnav-<?php echo $tab['slug']; ?>">
+                    <a href="/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
                 </li>
             <?php }//foreach ?>
         </ul>
@@ -285,80 +227,28 @@
         </div>
     </div>
     <!-- /.body-sec -->
-    <footer class="foot-sec">
-        <div class="foot-sec-inner">
-            <nav class="foot-breadCrumb">
-                <ol itemscope="" itemtype="http://schema.org/breadCrumbList">
-                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1"></a></li>
-                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="/category/crazy"><span itemprop="name">CRAZY ATHLETES</span><meta itemprop="position" content="2"></a></li>
 
-                </ol>
-            </nav>
-            <div class="foot-pr">
-                <div class="foot-pr-inner">
-                    <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
-                    <div class="text-block">
-                        <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
-                        <ul class="foot-pr-list">
-                            <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&amp;ls=1&amp;mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store"></a></li>
-                            <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
-                        </ul>
-                    </div>
-                </div><!-- /.foot-pr-inner -->
+    <?php
+    // # footer
+    // ==============================
+      $BREADCRUMB = array(
+        array(
+          'label' => 'CRAZY ATHLETES',
+          'path'  => './'
+        ),
+      );
 
-                <div class="fb-page-plugin">
-                    <div class="fb-page fb_iframe_widget fb_iframe_widget_fluid" data-href="https://www.facebook.com/sportsbull/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="adapt_container_width=true&amp;app_id=842032129256034&amp;container_width=300&amp;height=154&amp;hide_cover=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fsportsbull%2F&amp;locale=ja_JP&amp;sdk=joey&amp;show_facepile=true&amp;small_header=true&amp;width=500"><span style="vertical-align: bottom; width: 300px; height: 154px;"><iframe name="f3949bbef554a48" width="500px" height="154px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:page Facebook Social Plugin" src="https://www.facebook.com/v2.5/plugins/page.php?adapt_container_width=true&amp;app_id=842032129256034&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2F0sTQzbapM8j.js%3Fversion%3D42%23cb%3Df12404fb9226c0c%26domain%3Dsportsbull.jp%26origin%3Dhttps%253A%252F%252Fsportsbull.jp%252Ff1f0eb6ab11b638%26relation%3Dparent.parent&amp;container_width=300&amp;height=154&amp;hide_cover=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fsportsbull%2F&amp;locale=ja_JP&amp;sdk=joey&amp;show_facepile=true&amp;small_header=true&amp;width=500" style="border: none; visibility: visible; width: 300px; height: 154px;" class=""></iframe></span></div>
-                </div>
-            </div><!-- /.foot-pr -->
+      // footer dom
+      include_once __DIR__.'/../_footer-responsive.php';
+    ?>
 
-            <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
-
-            <nav class="fnav">
-                <ul>
-                    <li><a href="/about/">サービス紹介</a></li>
-                    <li><a href="/about/company/">会社概要</a></li>
-                    <li><a href="/about/privacy/">プライバシーポリシー</a></li>
-                    <li><a href="/about/terms/">利用規約</a></li>
-                </ul>
-            </nav><!-- /.fnav -->
-
-            <div class="sns-block">
-                <ul>
-                    <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
-                    <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
-                    <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
-                </ul>
-            </div><!-- /.sns-block -->
-
-            <p class="copyright">Copyright © SPORTS BULL All rights reserved.</p>
-        </div><!-- /.foot-sec-inner -->
-    </footer><!-- /.foot-sec -->
 </div>
 <!-- /.whole -->
+
 <!-- for facebook -->
-<script>
-    window.fbAsyncInit = function()
-    {
-        FB.init(
-            {
-                appId: '842032129256034',
-                xfbml: true,
-                version: 'v2.5'
-            });
-    };
-    (function(d, s, id)
-    {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id))
-        {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/ja_JP/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+<script src="/assets/facebook/init.js?v=<?php echo $page['version']; ?>"></script>
+<!-- // for facebook -->
+
 <script src="/assets/js/global.bundle.js"></script>
 <script src="https://code.jquery.com/jquery-git.min.js"></script>
 <script src="/assets/js/crazy.js"></script>

@@ -20,7 +20,9 @@ let React = self.React;
 // wrapper dom + form
 /**
  * <p>comment form を表示するための基点 class</p>
+ * TODO: future remove
  * @type {ReactClass}
+ * @deprecated 2017-12-06 instead use {@link ComponentCommentForm}
  */
 export let CommentFormNode = React.createClass( {
   propTypes: {
@@ -59,6 +61,7 @@ export let CommentFormNode = React.createClass( {
   getInitialState: function() {
     this.replyStatus = null;
     // this.canOpen = true;
+    console.error('[CommentFormNode] deprecated');
 
     return {
       // form 表示初期値, 記事コメント以外は閉じる
@@ -156,7 +159,7 @@ export let CommentFormNode = React.createClass( {
   componentDidMount: function() {
 
   },
-  componentWillUnmount: function() {
+  componentWillUnMount: function() {
 
   },
   */

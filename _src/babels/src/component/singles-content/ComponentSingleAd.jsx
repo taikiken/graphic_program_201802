@@ -11,6 +11,9 @@
  */
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 /**
@@ -21,7 +24,7 @@ const React = self.React;
  * @TODO: 広告IDが同じで表示できない様子、要確認
  * @since 2016-11-04
  */
-export class ComponentSingleAd extends React.Component {
+export default class ComponentSingleAd extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -63,29 +66,38 @@ export class ComponentSingleAd extends React.Component {
      * @type {string}
      */
     this.id = `adg_${props.ad.sp}_${props.index}`;
+    /**
+     * left - `sponsor-link-item`
+     * @type {?Element}
+     */
+    this.leftContainer = null;
+    /**
+     * right - `sponsor-link-item`
+     * @type {?Element}
+     */
+    this.rightContainer = null;
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
-   * delegate, マウント後に呼び出されます<br>
-   * `JSON.response.ad.pc.single_bottom_left`,
-   * `JSON.response.ad.pc.single_bottom_right` を使用し<br>
-   * script tag を挿入します
+   * delegate, マウント後に呼び出されます
+   * - `JSON.response.ad.pc.single_bottom_left` - `this.leftScript` script tag を挿入します
+   * - `JSON.response.ad.pc.single_bottom_right` - `this.rightScript` script tag を挿入します
    */
   componentDidMount() {
     // 左広告
-    if (this.refs.leftContainer) {
+    if (this.leftContainer) {
       this.leftScript();
     }
     // 右広告
-    if (this.refs.rightContainer) {
+    if (this.rightContainer) {
       this.rightScript();
     }
   }
   /**
-   * 左広告, `JSON.response.ad.pc.single_bottom_left`<br>
-   * componentDidMount からコールされます
+   * 左広告, `JSON.response.ad.pc.single_bottom_left`
+   * - componentDidMount からコールされます
    */
   leftScript() {
     // 広告ID
@@ -101,11 +113,11 @@ export class ComponentSingleAd extends React.Component {
     div.appendChild(script);
     // React が script tag の appendChild を許可しないので
     // div tag でラップして挿入しています
-    this.refs.leftContainer.appendChild(div);
+    this.leftContainer.appendChild(div);
   }
   /**
-   * 右広告, `JSON.response.ad.pc.single_bottom_right`<br>
-   * componentDidMount からコールされます
+   * 右広告, `JSON.response.ad.pc.single_bottom_right`
+   * - componentDidMount からコールされます
    */
   rightScript() {
     const right = this.state.ad.singleBottomRight;
@@ -114,11 +126,11 @@ export class ComponentSingleAd extends React.Component {
     script.src = this.scriptSrc.split('__AD_ID__').join(right)
       .split('__TARGET_ID__').join(`${this.id}_right`);
     div.appendChild(script);
-    this.refs.rightContainer.appendChild(div);
+    this.rightContainer.appendChild(div);
   }
   /**
    * 左：広告タグ(script)挿入用親コンテナを生成します
-   * @return {?XML} div.sponsor-link-item or null
+   * @return {?XML} `div.sponsor-link-item` or null
    */
   left() {
     const left = this.state.ad.singleBottomLeft;
@@ -126,12 +138,16 @@ export class ComponentSingleAd extends React.Component {
       return null;
     }
     return (
-      <div id={`${this.id}_left`} className="sponsor-link-item" ref="leftContainer"/>
+      <div
+        id={`${this.id}_left`}
+        className="sponsor-link-item"
+        ref={(element) => (this.leftContainer = element)}
+      />
     );
   }
   /**
    * 右：広告タグ(script)挿入用親コンテナを生成します
-   * @return {?XML} div.sponsor-link-item or null
+   * @return {?XML} `div.sponsor-link-item` or null
    */
   right() {
     const right = this.state.ad.singleBottomRight;
@@ -139,12 +155,16 @@ export class ComponentSingleAd extends React.Component {
       return null;
     }
     return (
-      <div id={`${this.id}_right`} className="sponsor-link-item" ref="rightContainer"/>
+      <div
+        id={`${this.id}_right`}
+        className="sponsor-link-item"
+        ref={(element) => (this.rightContainer = element)}
+      />
     );
   }
   /**
    * 記事本文下広告, div.sponsor-link
-   * @return {?XML} div.sponsor-link or null
+   * @return {?XML} `div.sponsor-link` or null
    */
   render() {
     const ad = this.state.ad;

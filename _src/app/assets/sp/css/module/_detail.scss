@@ -69,7 +69,8 @@
       text-align: left;
       margin-top: 8px;
       // spのみ左右に余白
-      padding: 0 3.125%;
+      padding-right: perCalc(15, 750);
+      padding-left: perCalc(15, 750);
 
       font-size: fz(20/2);
     }
@@ -612,54 +613,6 @@
       }
     }
   }
-
-  // post-sns-pr
-  @at-root {
-    .post-sns-pr {
-      width: 100%;
-      margin-top: (20/2)+px;
-      padding: (26/2)+px (36/2)+px;
-      border: (6/2)+px solid $highlight-color;
-      border-radius: 6px;
-      background-color: #fff;
-
-      &-inner {
-        display: table;
-        margin-right: auto;
-        margin-left: auto;
-      }
-
-      dt, dd {
-        display: table-cell;
-        vertical-align: middle;
-      }
-
-      dt {
-        padding-right: (24/2)+px;
-
-        // for iPhone5, 5S
-        @media screen and (max-width: 320px) {
-          padding-right: 0;
-        }
-
-        span {
-          display: block;
-          line-height: 1em;
-          margin-top: (6/2)+px;
-          padding: (48/2)+px 0 0 0;
-          background: url(/assets/sp/images/detail/post-sns-logo.png) 0 0 no-repeat;
-          background-size: (356/2)+px;
-          font-weight: bold;
-          font-size: fz(22/2);
-          white-space: nowrap;
-        }
-      }
-
-      dd {
-        width: 71px;
-      }
-    } // .post-sns-pr
-  } // at-root
 }// post-detail
 
 //// category-label

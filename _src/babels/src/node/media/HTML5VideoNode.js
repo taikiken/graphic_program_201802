@@ -17,18 +17,29 @@ import {VideoPlayNode} from './VideoPlayNode';
 import {VideoCaptionNode} from './VideoCaptionNode';
 
 // Sagen
+/**
+ * [library] - Sagen
+ */
 const Sagen = self.Sagen;
 
 // React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
+/**
+ * [library] - React
+ */
+const React = self.React;
+// /**
+//  * [library] - ReactDOM
+//  */
+// const ReactDOM = self.ReactDOM;
 
 // main video tag
 /**
- * <p>記事詳細上部動画 HTML5 video</p>
+ * @deprecated dont use
+ * @TODO future remove - not use
+ * 記事詳細上部動画 HTML5 video
  * @type {ReactClass}
  */
-export let HTML5VideoNode = React.createClass( {
+export const HTML5VideoNode = React.createClass( {
   propTypes: {
     // VideoDae
     video: React.PropTypes.object.isRequired,
@@ -44,59 +55,72 @@ export let HTML5VideoNode = React.createClass( {
   },
   getInitialState: function() {
     this.videoElement = null;
+    this.sp = Sagen.Browser.Mobile.phone();
 
     return {
       showPlay: this.props.showPlay,
       video: this.props.video
     };
   },
+  playClick: function( event ) {
+    event.preventDefault();
+    // console.log( 'playClick' );
+    this.video.play();
+    this.setState({ showPlay: false });
+  },
+  onEnded: function( /* event */ ) {
+    // console.log( 'onEnded', event );
+    this.setState({ showPlay: true });
+  },
+  componentDidMount: function() {
+    // let videoElement = ReactDOM.findDOMNode( this.refs.video );
+    const videoElement = this.videoElement;
+    // this.videoElement = videoElement;
+    if (videoElement) {
+      videoElement.addEventListener('ended', this.onEnded, false);
+      // videoElement.addEventListener('pause', this.onPause, false);
+    }
+  },
+  componentWillUnMount: function() {
+    const videoElement = this.videoElement;
+    if (videoElement) {
+      videoElement.removeEventListener('ended', this.onEnded);
+      // videoElement.removeEventListener('pause', this.onPause);
+    }
+  },
   render: function() {
-    let video = this.props.video;
-    let poster = this.props.poster;
-    let caption = this.props.caption;
-    let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
+    // let video = this.props.video;
+    // let poster = this.props.poster;
+    // let caption = this.props.caption;
+    const { video, poster, caption, playImage } = this.props;
+    const url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
 
     return (
       <div className="post-kv post-video-kv">
         <div className="video-container">
-          <video poster={poster} width={Content.WIDTH} height={Content.HD_HEIGHT} preload="none" controls ref="video">
+          <video
+            poster={poster}
+            width={Content.WIDTH}
+            height={Content.HD_HEIGHT}
+            preload="none"
+            controls
+            ref={(element) => (this.videoElement = element)}
+          >
             <source src={url} type="video/mp4"/>
           </video>
           <VideoPlayNode
-            playImage={this.props.playImage}
+            playImage={playImage}
             callback={this.playClick}
             showPlay={this.state.showPlay}
+            phone={this.sp}
           />
         </div>
         <VideoCaptionNode caption={caption} />
       </div>
     );
   },
-  componentDidMount: function() {
-
-    let videoElement = ReactDOM.findDOMNode( this.refs.video );
-    this.videoElement = videoElement;
-    videoElement.addEventListener( 'ended', this.onEnded, false );
-    videoElement.addEventListener( 'pause', this.onPause, false );
-
-  },
-  componentWillUnMount: function() {
-    let videoElement = this.videoElement;
-    videoElement.removeEventListener( 'ended', this.onEnded );
-    videoElement.removeEventListener( 'pause', this.onPause );
-  },
-  playClick: function( event ) {
-    event.preventDefault();
-    // console.log( 'playClick' );
-    this.video.play();
-    this.setState( { showPlay: false } );
-  },
-  onEnded: function( /* event */ ) {
-    // console.log( 'onEnded', event );
-    this.setState( { showPlay: true } );
-  },
-  onPause: function( /* event */ ) {
-    // console.log( 'onPause', event );
-    // this.setState( { showPlay: true } );
-  }
-} );
+  // onPause: function( /* event */ ) {
+  //   // console.log( 'onPause', event );
+  //   // this.setState( { showPlay: true } );
+  // }
+});
