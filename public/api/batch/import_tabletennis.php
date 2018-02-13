@@ -12,7 +12,7 @@ include $INCLUDEPATH.'public/import.php';
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-$MEDIAID = 73;
+$MEDIAID = 80;
 const MEDIA_NAME = 'テレビ東京卓球ニュース';
 $MEDIANAME = MEDIA_NAME;
 
@@ -211,7 +211,7 @@ foreach($items as $item)
 			$sqla[] = makesql($item_map, 0);
 			$sqla[] = sprintf("INSERT INTO repo_body(pid, body) VALUES(CURRVAL('repo_n_id_seq'),'%s');", $modbody);
 			$sqla[] = relatedlink_New($related_links);
-			$sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref}');";
+//			$sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref}');";
 		}
 	}
 
