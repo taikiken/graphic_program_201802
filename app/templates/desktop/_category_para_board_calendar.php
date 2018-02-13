@@ -9,10 +9,7 @@
 include_once __DIR__ . '/../para-board/module/_functions.php';
 
 $api_result = get_recent();
-echo '<!--';
-var_dump($api_result);
 $response = $api_result['response'];
-echo '-->';
 if (!empty($response)) :
 ?>
 <div class="paraboard__widget">
