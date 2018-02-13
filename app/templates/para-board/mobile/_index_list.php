@@ -28,8 +28,6 @@ $para_data_response_list = $para_data_response['list'];
 
       // tr loop
       foreach ($para_games as $para_game) :
-//        var_dump($para_game);
-//        echo '----------------<br>';
       ?>
         <tr>
           <td class="paraboard__list__game">

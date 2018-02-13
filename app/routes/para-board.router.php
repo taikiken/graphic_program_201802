@@ -19,6 +19,12 @@ $app->group('/para-board', function () use($app) {
       'og_title'       => '日程一覧 - PARA BOARD' . ' | ' .$app->model->property('title_short'),
       'og_url'         => $app->model->property('site_url') . 'para-board/',
       'og_image'       => 'XXXXX',
+      'para_breadcrumbs' => array(
+        array(
+          'label' => 'パラボード',
+          'path'  => '/para-board/',
+        ),
+      ),
     ));
 
 
@@ -51,8 +57,14 @@ $app->group('/para-board', function () use($app) {
       'og_title'       => '日程一覧 - PARA BOARD' . ' | ' .$app->model->property('title_short'),
       'og_url'         => $app->model->property('site_url') . 'para-board/',
       'og_image'       => 'XXXXX',
-      'para_sports_id'      => $args['sports_id'],
-      'para_year'           => $args['year'],
+      'para_sports_id' => $args['sports_id'],
+      'para_year'      => $args['year'],
+      'para_breadcrumbs' => array(
+        array(
+          'label' => 'パラボード',
+          'path'  => '/para-board/',
+        ),
+      ),
     ));
 
 
@@ -91,6 +103,16 @@ $app->group('/para-board', function () use($app) {
       'og_image'       => 'XXXXX',
       'competition_id' => $args['competition_id'],
       'competition_response' => $competition_response,
+      'para_breadcrumbs' => array(
+        array(
+          'label' => 'パラボード',
+          'path'  => '/para-board/',
+        ),
+        array(
+          'label' => $competition_response['competition_name'],
+          'path'  => '/para-board/' . $args['competition_id'] . '/',
+        ),
+      ),
     ));
 
 

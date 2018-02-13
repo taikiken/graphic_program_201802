@@ -14,7 +14,6 @@ include_once __DIR__."/../../mobile/_header.php";
     <div class="special-summary">
       <h1 class="special-summary-heading"><img src="/assets/sp/images/para-board/special-summary.jpg" alt="パラボード"></h1>
     </div>
-    パラボード 日程一覧 /id/year/
     <?php
     // 日程・結果一覧
     // form
