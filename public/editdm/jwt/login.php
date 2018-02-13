@@ -46,7 +46,7 @@ if (isset($_GET["jwt"])) {
     //JWT APIでユーザを取得
     $domainMap = [
         'undotsushin.local' => 'vagrant.for.mac.localhost',
-        'dev.sportsbull.jp' => null,
+        'dev.sportsbull.jp' => 'dev-cms2.sportsbull.jp',
         'stg.sportsbull.jp' => null,
         'sportsbull.jp' => null,
     ];
