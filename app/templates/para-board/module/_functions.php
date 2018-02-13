@@ -4,41 +4,41 @@
  * @since 2018-01-30
  */
 
-// 動作環境取得
-// ==============================
-// vagrant forwarded_port - 8080ポートからのアクセスならローカル
-if ( $_SERVER['SERVER_PORT'] == '8080' ) :
-  define('BULLS_STATION_ENV', 'LOCAL');
-
-elseif ( $_SERVER['SERVER_PORT'] == '8888' ) :
-  define('BULLS_STATION_ENV', 'LOCAL');
-
-else :
-
-  switch( $_SERVER['SERVER_NAME'] ) :
-
-    # vagrant - local IP
-    case '192.168.33.50' :
-      define('BULLS_STATION_ENV', 'LOCAL');
-      break;
-
-    # vagrant - hostname
-    case 'undotsushin.local' :
-    case 'sportsbull.local'  :
-      define('BULLS_STATION_ENV', 'LOCAL');
-      break;
-
-    case 'dev.sportsbull.jp' :
-      define('BULLS_STATION_ENV', 'DEV');
-      break;
-
-    # www -  〜 4/1 t2.small : 4/1 〜 production
-    default :
-      define('BULLS_STATION_ENV', 'PRODUCTION');
-
-  endswitch;
-
-endif;
+//// 動作環境取得
+//// ==============================
+//// vagrant forwarded_port - 8080ポートからのアクセスならローカル
+//if ( $_SERVER['SERVER_PORT'] == '8080' ) :
+//  define('BULLS_STATION_ENV', 'LOCAL');
+//
+//elseif ( $_SERVER['SERVER_PORT'] == '8888' ) :
+//  define('BULLS_STATION_ENV', 'LOCAL');
+//
+//else :
+//
+//  switch( $_SERVER['SERVER_NAME'] ) :
+//
+//    # vagrant - local IP
+//    case '192.168.33.50' :
+//      define('BULLS_STATION_ENV', 'LOCAL');
+//      break;
+//
+//    # vagrant - hostname
+//    case 'undotsushin.local' :
+//    case 'sportsbull.local'  :
+//      define('BULLS_STATION_ENV', 'LOCAL');
+//      break;
+//
+//    case 'dev.sportsbull.jp' :
+//      define('BULLS_STATION_ENV', 'DEV');
+//      break;
+//
+//    # www -  〜 4/1 t2.small : 4/1 〜 production
+//    default :
+//      define('BULLS_STATION_ENV', 'PRODUCTION');
+//
+//  endswitch;
+//
+//endif;
 
 // API 一覧
 // ==============================
@@ -54,20 +54,18 @@ define('COMPETITION_OUTLINE', '/api/v1/competition/');
 
 // API 取得 METHOD
 // ==============================
-function hostname() {
-  return BULLS_STATION_ENV == 'LOCAL' ? 'https://dev.sportsbull.jp' : $page['file_get_url'];
-}
+define('FILE_GET_URL', $page['file_get_url']);
 
 // ------------------------
 // API PATH
 // パラボードで使用する大会の一覧を取得する
 function api_recent() {
-  return hostname() . COMPETITION_RECENT;
+  return FILE_GET_URL . COMPETITION_RECENT;
 }
 
 // スポーツと西暦での絞り込み
 function api_recent_id_year($sport_id, $year) {
-  $path = hostname() . COMPETITION_RECENT_ID_YEAR . $sport_id;
+  $path = FILE_GET_URL . COMPETITION_RECENT_ID_YEAR . $sport_id;
   if ( !empty( $year ) ) {
     $path .= '/' . $year;
   }
@@ -76,12 +74,12 @@ function api_recent_id_year($sport_id, $year) {
 
 // パラボード 大会一覧ページのプルダウンに使用する
 function api_pull_down() {
-  return hostname() . COMPETITION_PULL_DOWN;
+  return FILE_GET_URL . COMPETITION_PULL_DOWN;
 }
 
 // パラボード 大会概要ページの情報を取得する
 function api_outline() {
-  return hostname() . COMPETITION_OUTLINE;
+  return FILE_GET_URL . COMPETITION_OUTLINE;
 }
 
 // ------------------------
