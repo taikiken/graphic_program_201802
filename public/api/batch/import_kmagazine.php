@@ -12,7 +12,7 @@ include $INCLUDEPATH.'public/import.php';
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-$MEDIAID = 79;
+$MEDIAID = 72;
 const MEDIA_NAME = 'Kmagazine';
 $MEDIANAME = MEDIA_NAME;
 
