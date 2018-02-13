@@ -34,6 +34,8 @@ const React = self.React;
 
 // main video tag
 /**
+ * @deprecated dont use
+ * @TODO future remove - not use
  * 記事詳細上部動画 HTML5 video
  * @type {ReactClass}
  */

@@ -24,7 +24,7 @@ import {HTML5VideoNode} from '../media/HTML5VideoNode';
 // @since 2016-11-13
 // component
 import ComponentVideojsImaSingles from '../../component/media/ComponentVideojsImaSingles';
-import { ComponentVideojsImaArticle } from '../../component/media/ComponentVideojsImaArticle';
+import ComponentVideojsImaArticle from '../../component/media/ComponentVideojsImaArticle';
 // ---
 
 // React
@@ -34,6 +34,8 @@ import { ComponentVideojsImaArticle } from '../../component/media/ComponentVideo
 const React = self.React;
 
 /**
+ * @deprecated 2018-01-13 instead use {@link ComponentMediaVideoSwitch}
+ * @TODO future remove
  * 記事詳細 メイン・動画切替
  * - YouTube
  * - Facebook
@@ -54,6 +56,7 @@ export let MediaVideoNode = React.createClass( {
     index: React.PropTypes.number.isRequired
   },
   render: function() {
+    console.warn('MediaVideoNode deprecated. instead use ComponentMediaVideoSwitch');
     const media = this.props.media;
     // 2016-02-22
     // api JSON が最新版に対応していないので

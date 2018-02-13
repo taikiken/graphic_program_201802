@@ -121,6 +121,7 @@ export default class SPComponentArticles extends React.Component {
       offset: props.offset,
       length: props.length
     };
+    // console.log('SPComponentArticles props', props);
   }
   // ---------------------------------------------------
   //  METHOD
