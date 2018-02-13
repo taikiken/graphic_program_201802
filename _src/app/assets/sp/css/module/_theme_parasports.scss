@@ -8,7 +8,7 @@
 // Styleguide 2.20.0
 
 .whole.parasports {
-  .paraboard__widjet {
+  .paraboard__widget {
 
     &:before {
       content: "";
@@ -19,17 +19,17 @@
       @include hide-text;
     }
 
-    //.paraboard__widjet__header
+    //.paraboard__widget__header
     &__header {
       background-color: #474e5c;
 
-      //.paraboard__widjet__header__sub
+      //.paraboard__widget__header__sub
       &__sub {
         display: table;
         width: 100%;
         height: (100/2)+px;
 
-        //.paraboard__widjet__header__sub__heading
+        //.paraboard__widget__header__sub__heading
         &__heading {
           display: table-cell;
           line-height: 1.2;
@@ -46,7 +46,7 @@
           }
         }
 
-        //.paraboard__widjet__header__sub__btn
+        //.paraboard__widget__header__sub__btn
         &__btn {
           display: table-cell;
           padding-right: perCalc(15, 750);
@@ -76,43 +76,43 @@
               @include hide-text;
             }
           } // a
-        } //.paraboard__widjet__header__sub__btn
-      } //.paraboard__widjet__header__sub
-    } //.paraboard__widjet__header
+        } //.paraboard__widget__header__sub__btn
+      } //.paraboard__widget__header__sub
+    } //.paraboard__widget__header
 
 
 
-    //.paraboard__widjet__list
+    //.paraboard__widget__list
     &__list {
       border-top: 1px solid #3b3f46;
       width: 100%;
 
-      //.paraboard__widjet__list__date
+      //.paraboard__widget__list__date
       &__date {
         color: #fff;
         font-size: fz(24/2);
-      } //.paraboard__widjet__list__date
+      } //.paraboard__widget__list__date
 
-      //.paraboard__widjet__list__game
+      //.paraboard__widget__list__game
       &__game {
         border-bottom: 1px solid #3b3f46;
 
-        //.paraboard__widjet__list__game__link
+        //.paraboard__widget__list__game__link
         &__link {
           position: relative;
           display: block;
           padding: (16/2)+px perCalc(15, 750);
           @include link-decoration(null, null, none, none);
           background-color: #474e5c;
-        } //.paraboard__widjet__list__game__link
+        } //.paraboard__widget__list__game__link
 
-        //.paraboard__widjet__list__game__header
+        //.paraboard__widget__list__game__header
         &__header {
           position: relative;
           padding-left: (70/2)+px;
 
-          //.paraboard__widjet__list__icon
-          .paraboard__widjet__list__icon {
+          //.paraboard__widget__list__icon
+          .paraboard__widget__list__icon {
             position: absolute;
             top: 50%;
             left: 0;
@@ -139,55 +139,55 @@
           //   @include hide-text;
           // }
 
-          // &.paraboard__widjet__list__icon--basketball:before {
+          // &.paraboard__widget__list__icon--basketball:before {
           //   background-image: url(/assets/sp/images/para-board/icon-basketball.png);
           // }
 
-          // &.paraboard__widjet__list__icon--goalball:before {
+          // &.paraboard__widget__list__icon--goalball:before {
           //   background-image: url(/assets/sp/images/para-board/icon-goalball.png);
           // }
 
-          // &.paraboard__widjet__list__icon--rugby:before {
+          // &.paraboard__widget__list__icon--rugby:before {
           //   background-image: url(/assets/sp/images/para-board/icon-rugby.png);
           // }
 
-          // &.paraboard__widjet__list__icon--soccer:before {
+          // &.paraboard__widget__list__icon--soccer:before {
           //   background-image: url(/assets/sp/images/para-board/icon-soccer.png);
           // }
 
-          // &.paraboard__widjet__list__icon--swimming:before {
+          // &.paraboard__widget__list__icon--swimming:before {
           //   background-image: url(/assets/sp/images/para-board/icon-swimming.png);
           // }
 
-          // &.paraboard__widjet__list__icon--tennis:before {
+          // &.paraboard__widget__list__icon--tennis:before {
           //   background-image: url(/assets/sp/images/para-board/icon-tennis.png);
           // }
 
-          // &.paraboard__widjet__list__icon--track:before {
+          // &.paraboard__widget__list__icon--track:before {
           //   background-image: url(/assets/sp/images/para-board/icon-track.png);
           // }
 
-          // &.paraboard__widjet__list__icon--volleyball:before {
+          // &.paraboard__widget__list__icon--volleyball:before {
           //   background-image: url(/assets/sp/images/para-board/icon-volleyball.png);
           // }
 
-          //.paraboard__widjet__list__game__header__category
+          //.paraboard__widget__list__game__header__category
           &__category {
             color: #fff;
             font-weight: bold;
             font-size: fz(24/2);
-          } //.paraboard__widjet__list__game__header__category
+          } //.paraboard__widget__list__game__header__category
 
-          //.paraboard__widjet__list__game__header__heading
+          //.paraboard__widget__list__game__header__heading
           &__heading {
             line-height: 1.2;
             color: #fff;
             font-weight: bold;
             font-size: fz(28/2);
-          } //.paraboard__widjet__list__game__header__heading
-        } //.paraboard__widjet__list__game__header
+          } //.paraboard__widget__list__game__header__heading
+        } //.paraboard__widget__list__game__header
 
-        //.paraboard__widjet__list__game__btn
+        //.paraboard__widget__list__game__btn
         &__btn {
           position: absolute;
           top: 50%;
@@ -214,10 +214,10 @@
               @include hide-text;
             }
           } // i
-        } //.paraboard__widjet__list__game__btn
-      } //.paraboard__widjet__list__game
-    } //.paraboard__widjet__list
-  } //.paraboard__widjet
+        } //.paraboard__widget__list__game__btn
+      } //.paraboard__widget__list__game
+    } //.paraboard__widget__list
+  } //.paraboard__widget
 
 
 
