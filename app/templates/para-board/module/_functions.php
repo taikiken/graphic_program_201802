@@ -55,7 +55,7 @@ define('COMPETITION_OUTLINE', '/api/v1/competition/');
 // API 取得 METHOD
 // ==============================
 function hostname() {
-  return BULLS_STATION_ENV == 'LOCAL' ? 'https://dev.sportsbull.jp' : '';
+  return BULLS_STATION_ENV == 'LOCAL' ? 'https://dev.sportsbull.jp' : 'https://' . $page['hostname'];
 }
 
 // ------------------------
