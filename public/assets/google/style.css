@@ -93,6 +93,13 @@ html.android .news-ad .adsWrapper .adsImgContainer img
 }
 
 
+html.mobile .post-single #headline-container .sponsor-link,
+html.android .post-single #headline-container .sponsor-link
+{
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 html.mobile .post-single #headline-container .adsWrapper .adsImgContainer .adsImg,
 html.android .post-single #headline-container .adsWrapper .adsImgContainer .adsImg
 {
