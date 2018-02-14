@@ -66,7 +66,7 @@ $border-color: #585959;
   // [ class^="board-" ] {
   .board-small {
     .post {
-      @include link-decoration(#fff, #fff, none, none);
+      @include link-decoration(#333, #333, none, none);
 
       &-date {
         color: #999;
@@ -95,11 +95,11 @@ $border-color: #585959;
     }
 
     .post {
-      @include link-decoration(#fff, null, none, none);
+      @include link-decoration(#333, null, none, none);
 
       &:hover {
         .post-heading {
-          color: $key-color !important;
+          color: #0e357f !important;
         }
       }
     }
