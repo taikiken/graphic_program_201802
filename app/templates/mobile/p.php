@@ -1,8 +1,45 @@
-
 <?php
 // --------------------------------------------------------
 //  記事詳細
 // --------------------------------------------------------
+
+
+/*
+
+# 広告設定
+- スポンサードカテゴリであれば広告は表示しない
+
+*/
+
+// スポンサーカテゴリ判定
+$is_sponserd = $post['is_sponserd'];
+
+// 広告IDモデル
+$adId = array(
+  'adgene' => array(
+    'ranking'   => '', // 人気記事
+    'headline'  => '', // ヘッドライン
+    'recommend' => '', // おすすめ記事 - CRAZYのみ
+    'news'      => '', // 新着記事
+  ),
+);
+
+// アプリとスマホでアドジェネIDかえる
+if ( !$is_sponserd ) :
+  if ( $page['ua_app'] ) :
+    $adIds['adgene']['ranking']   = '59626';
+    $adIds['adgene']['headline']  = '59625,59625';
+    $adIds['adgene']['recommend'] = '59624,59624';
+    $adIds['adgene']['news']      = '59623,59623,59623,59623,59623,59623,59623,59623';
+  else :
+    $adIds['adgene']['ranking']   = '59630';
+    $adIds['adgene']['headline']  = '59629,59629';
+    $adIds['adgene']['recommend'] = '59628,59628';
+    $adIds['adgene']['news']      = '59627,59627,59627,59627,59627,59627,59627,59627';
+  endif;
+
+endif;
+
 ?>
 <div class="body-sec">
   <div class="body-sec-inner">
@@ -266,6 +303,7 @@
 
         <?php /*
         DFP - mobile / 記事詳細本文下 ( フォロー上 ) レクタングル
+        - スポンサーカテゴリでも表示として常にスポンサーレクタングル広告を表示する
         */ ?>
         <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp"></div>
 
@@ -308,22 +346,14 @@
       // ------------------------------------
       // よく読まれている記事 carousel - sidebar: ranking
       ?>
-      <?php if ( $page['ua_app'] ) : ?>
-      <div id="widget-ranking-container" data-adgene-id="59626"></div>
-      <?php else: ?>
-      <div id="widget-ranking-container" data-adgene-id="59630"></div>
-      <?php endif; ?>
+      <div id="widget-ranking-container" data-adgene-id="<?php echo $adIds['adgene']['ranking']; ?>"></div>
 
       <?php
       // ------------------------------------
       // ヘッドライン
       ?>
       <!-- <div id="headline-container"></div> -->
-      <?php if ( $page['ua_app'] ) : ?>
-      <div id="js-headline" data-adgene-id="59625,59625"></div>
-      <?php else: ?>
-      <div id="js-headline" data-adgene-id="59629,59629"></div>
-      <?php endif; ?>
+      <div id="js-headline" data-adgene-id="<?php echo $adIds['adgene']['headline']; ?>"></div>
 
       <?php
       // ------------------------------------
@@ -338,11 +368,7 @@
                 あなたにおすすめの記事
               </h2>
             </div>
-            <?php if ( $page['ua_app'] ) : ?>
-              <div id="widget-recommend-list-container" data-adgene-id="59624,59624"></div>
-            <?php else: ?>
-              <div id="widget-recommend-list-container" data-adgene-id="59628,59628"></div>
-            <?php endif; ?>
+            <div id="widget-recommend-list-container" data-adgene-id="<?php echo $adIds['adgene']['recommend']; ?>"></div>
           </div>
         </div>
       <?php else: ?>
@@ -395,9 +421,7 @@
       <?php /*
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */ ?>
-      <?php if ( $page['ua_app'] !== 'Android' ) : ?>
       <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
-      <?php endif; ?>
 
       <?php
       // ----------------------------------------------------
@@ -423,11 +447,7 @@
       ?>
       <div id="widget-news-list-container">
         <div class="board">
-          <?php if ( $page['ua_app'] ) : ?>
-          <div id="board-container" data-adgene-id="59623,59623,59623,59623,59623,59623,59623,59623"></div>
-          <?php else: ?>
-          <div id="board-container" data-adgene-id="59627,59627,59627,59627,59627,59627,59627,59627"></div>
-          <?php endif; ?>
+          <div id="board-container" data-adgene-id="<?php echo $adIds['adgene']['news']; ?>"></div>
           <div id="board-container-more"></div>
         </div>
       </div>
@@ -438,57 +458,6 @@
       */ ?>
       <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>
 
-      <?php
-      /*
-       @since 2016-09-28 記事詳細の次の記事のために以下削除します
-      */
-      if (0):
-      ?>
-        <div id="widget-recommend-list-container"></div><!--/recommend-->
-        <div id="widget-ranking-container"></div><!--/ranking-->
-
-        <?php
-        #1023 - このコードのままproductionだしてもヨイように検証完了まで分岐かいとく
-        ?>
-        <?php if ( UT_ENV !== 'PRODUCTION' ) : ?>
-        <!-- #1023 Syn.extension  -->
-        <div id="logly-lift-4227758" class="recommend_articles"></div>
-        <script charset="UTF-8">
-          (function(){
-            var _lgy_lw = document.createElement("script");
-            _lgy_lw.type = "text/javascript";
-            _lgy_lw.charset = "UTF-8";
-            _lgy_lw.async = true;
-            _lgy_lw.src= (("https:" == document.location.protocol) ? "https://" : "http://")+"l.logly.co.jp/lift_widget.js?adspot_id=4227758";
-            var _lgy_lw_0 = document.getElementsByTagName("script")[0];
-            _lgy_lw_0.parentNode.insertBefore(_lgy_lw, _lgy_lw_0);
-          })();
-        </script>
-        <script type="text/javascript" src="//i.socdm.com/s/so_dmp.js?service_id=un_sports"></script>
-        <!-- //#1023 Syn.extension  -->
-
-        <?php else : ?>
-
-        <!-- #310 popin embed code  -->
-        <?php if ( $page['category']['label'] ) : ?>
-        <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
-        <?php endif; ?>
-        <div id="_popIn_recommend" class="recommend_articles"></div>
-        <script type="text/javascript">
-          (function() {
-            var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-                pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-          })();
-        </script>
-        <!-- //#310 popin ebmed code  -->
-
-        <?php endif; ?>
-
-      <?php
-      endif;
-      // 削除 eof
-      ?>
 
     </section><!-- /.main-sec -->
   </div>
