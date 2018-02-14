@@ -71,7 +71,13 @@ $app->group('/pickup_athletes/{category_slug:all|'.join('|',$category_slug).'}',
   $this->get('/webview[/]', function ($request, $response, $args) use ($app, $ImgPath) {
     $category = $app->model->get_category_by_slug($args['category_slug'], null, true);
 
-    $pickup_players = $app->model->get_pickup_players($category['id'], null, 4);
+    /**
+     * /category/crazy/ で表示する4件固定対応
+     * @return array
+     */
+//    $pickup_players = $app->model->get_pickup_players($category['id'], null, 4);
+    $pickup_players = $app->model->get_pickup_players_ca_top();
+
     $data = [];
     foreach ($pickup_players as $index => $row) {
       $data[] = [
