@@ -73,7 +73,7 @@ $border-color: #585959;
       }
 
       &-heading {
-        color: #333;
+        color: #fff;
       }
 
       &-category {
@@ -82,7 +82,7 @@ $border-color: #585959;
 
       &:hover {
         .post-heading {
-          color: #0e357f!important;
+          color: $key-color !important;
         }
       }
     }
@@ -99,7 +99,7 @@ $border-color: #585959;
 
       &:hover {
         .post-heading {
-          color: #0e357f!important;
+          color: #0e357f !important;
         }
       }
     }
