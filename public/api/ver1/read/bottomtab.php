@@ -8,112 +8,132 @@ $o->connect();
 
 $response = [];
 
-$type = array('home','livescore','sports');
+$type = array('home','livescore','category');
 
-$liv_base_chi = array('プロ野球','MLB','東京六大学野球','東都大学野球','関西六大学野球','関西大学野球');
-$liv_socc_chi = array('Jリーグ','サッカー日本代表','海外サッカー','大学サッカー','高校サッカー');
-$liv_bask_chi = array('Bリーグ','大学バスケ','高校バスケ');
-$liv_moto_chi = array('F1','SGT','WEC','WRC');
-$liv_othe_chi = array('その他1','その他2','その他3','その他4');
-$livescore = array(
-    '野球' => $liv_base_chi,
-    'サッカー' => $liv_socc_chi,
-    'バスケットボール' => $liv_bask_chi,
-    'モータースポーツ' => $liv_moto_chi,
-    'その他' => $liv_othe_chi
-);
+foreach ($type as $value) {
 
-$cat_pick_chi = array('CRAZY ATHLETES','BULL\'STATION',' BULL\' PICS','バーチャル高校野球','インターハイ','六大学野球');
-$cat_comp_chi = array(
-    '野球全て','プロ野球','MLB','高校野球',
-    'サッカー全て','サッカー日本代表','Jサッカー','海外サッカー',
-    'バレーボール','バスケットボール','NBA','Bリーグ',
-    'テニス','ゴルフ','モータースポーツ','相撲',
-    '格闘技','クライミング','その他1','その他2'
-    );
-$category = array(
-    'ピックアップ' => $cat_pick_chi,
-    '競技・種目' => $cat_comp_chi
-);
+    $tmp_relationList = [];
+    $tmp_response = [];
 
+    switch ($value){
+        case 'home':
+            $tmp_response = [
+                'unread' => false
+            ];
+            break;
 
-if(true){
+        case 'livescore':
+            $tmp_response = [
+                'unread' => false
+            ];
 
-    foreach ($type as $value) {
+$sql = <<<SQL
+SELECT
+    parent.id AS parent_id,
+    parent.name AS parent_name,
+    parent.icon AS parent_icon,
+    parent.sort_no AS parent_sort_no,
+    child.id,
+    child.name,
+    child.link,
+    child.icon,
+    child.sort_no
+FROM bottom_tab_nodes node
+INNER JOIN bottom_tab_categories child
+    ON node.bottom_tab_id = child.id
+INNER JOIN bottom_tab_categories parent
+    ON node.parent_tab_id = parent.id
+WHERE type = 1
+ORDER BY parent.sort_no ASC, child.sort_no ASC
+SQL;
 
-        $tmp_response = [];
-        $tmp_child = [];
-
-        switch ($value){
-            case 'home':
-                $tmp_response = [
-                    'unread' => false
-                ];
-                break;
-
-            case 'livescore':
-                $tmp_response = [
-                    'unread' => false
-                ];
-
-                foreach ($livescore as $parent => $children) {
-                    foreach ($children as $child) {
-                        $tmp_child[] = [
-                            'dispName'  => $child,
-                            'unread'    => false,
-                            'icon'      => $ImgPath.'/xxxxxx/xxxxx/livescore/icon.png',
-                            'url'       => '/stats/xxxxxx'
-                        ];
-                    }
-                    $tmp_response['parent'][] = [
-                            'dispName'  => $parent,
-                            'img'       => $ImgPath.'xxxxxx/xxxxx/xxxx/bar.png',
-                            'child'     => $tmp_child
-                        ];
+            $o->query($sql);
+            while($f=$o->fetch_array()){
+                if(empty($tmp_relationList[$f['parent_id']])){
+                    //親が未登録なら登録する
+                    $tmp_relationList[$f['parent_id']] = [
+                        'dispName'  => $f['parent_name'],
+                        'icon'      => $ImgPath.$f['parent_icon']
+                    ];
                 }
-                break;
-                
-            case 'sports':
+                //子を登録する
+                $tmp_relationList[$f['parent_id']]['child'][] =[
+                        'dispName'  => $f['name'],
+                        'unread'    => false,
+                        'icon'      => $ImgPath.$f['icon'],
+                        'link'      => $f['link']
+                    ];
+            }
+            //表示用に整形する
+            foreach ($tmp_relationList as $parent) {
+                $tmp_response['parent'][] = [
+                        'dispName'  => $parent['dispName'],
+                        'img'       => $parent['icon'],
+                        'child'     => $parent['child']
+                    ];
+            }
+            break;
 
-                $tmp_response = [
-                    'unread' => false
-                ];
 
-                foreach ($category as $parent => $children) {
-                    foreach ($children as $child) {
-                        $tmp_child[] = [
-                            'dispName'  => $child,
-                            'unread'    => false,
-                            'icon'      => $ImgPath.'/xxxxxx/xxxxx/sports/icon.png',
-                            'url'       => '/category/slug'
-                        ];
-                    }
-                    $tmp_response['parent'][] = [
-                            'dispName'  => $parent,
-                            'img'       => $ImgPath.'xxxxxx/xxxxx/xxxx/bar.png',
-                            'child'     => $tmp_child
-                        ];
+        case 'category':
+
+            $tmp_response = [
+                'unread' => false
+            ];
+
+$sql = <<<SQL
+SELECT
+    parent.id AS parent_id,
+    parent.name AS parent_name,
+    parent.icon AS parent_icon,
+    parent.sort_no AS parent_sort_no,
+    child.id,
+    child.name,
+    child.link,
+    child.icon,
+    child.sort_no
+FROM bottom_tab_nodes node
+INNER JOIN bottom_tab_livescores child
+    ON node.bottom_tab_id = child.id
+INNER JOIN bottom_tab_livescores parent
+    ON node.parent_tab_id = parent.id
+WHERE type = 2
+ORDER BY parent.sort_no ASC, child.sort_no ASC
+SQL;
+
+            $o->query($sql);
+            while($f=$o->fetch_array()){
+                if(empty($tmp_relationList[$f['parent_id']])){
+                    //親が未登録なら登録する
+                    $tmp_relationList[$f['parent_id']] = [
+                        'dispName'  => $f['parent_name'],
+                        'icon'      => $ImgPath.$f['parent_icon']
+                    ];
                 }
-                break;
-        }
+                //子を登録する
+                $tmp_relationList[$f['parent_id']]['child'][] =[
+                        'dispName'  => $f['name'],
+                        'unread'    => false,
+                        'icon'      => $ImgPath.$f['icon'],
+                        'link'      => $f['link']
+                    ];
+            }
 
-        $response[$value] = $tmp_response;
+            foreach ($tmp_relationList as $parent) {
+                $tmp_response['parent'][] = [
+                        'dispName'  => $parent['dispName'],
+                        'img'       => $parent['icon'],
+                        'child'     => $parent['child']
+                    ];
+            }
+            break;
     }
 
 
-
-
-
-    $y['status']['code'] = 200;
-    $y['status']['user_message'] = '';
-    $y['status']['developer_message'] = '';
-    $y['response'] = $response;
-
-} else {
-    $y['status']['code'] = 404;
-    $y['status']['user_message'] = '取得に失敗しました。';
-    $y['status']['developer_message'] = '取得に失敗しました。';
+    $response[$value] = $tmp_response;
 }
+
+    $y['response'] = $response;
 
 print_json($y,$_SERVER['HTTP_REFERER']);
 
