@@ -20,21 +20,22 @@ const SPECIAL_CHAR = 'www.youtube.com/embed';
 #
 #平昌
 //const RSS_FILE = 'http://dev.cocokara-next.com/feed/';
-const RSS_FILE = 'http://dev.ambass.jp/gorinrio/api/rss/undotsushin.xml';
+// const RSS_FILE = 'https://test.gorin.jp/staticapi/rss/sportsbull.xml';
+const RSS_FILE = 'https://www.gorin.jp/staticapi/rss/sportsbull.xml';
 
 $o = new db;
 $o->connect();
 /**/
- $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from repo_e where nid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from repo_n where d2={$MEDIAID};";
- $o->query($sql);
+//  $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
+//  $o->query($sql);
+//  $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
+//  $o->query($sql);
+//  $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
+//  $o->query($sql);
+//  $sql = "delete from repo_e where nid in (select id from repo_n where d2={$MEDIAID});";
+//  $o->query($sql);
+//  $sql = "delete from repo_n where d2={$MEDIAID};";
+//  $o->query($sql);
 
 //exit;
 

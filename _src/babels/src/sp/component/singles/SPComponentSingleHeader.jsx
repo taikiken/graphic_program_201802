@@ -10,6 +10,13 @@
  *
  */
 
+
+/**
+ * 提供元のロゴ表示部分を /_src/babels/src/component/singles-content/ComponentSingleProvider.jsx から移植
+ * @since 2018-01-15
+ */
+
+
 // view
 import View from '../../../view/View';
 
@@ -75,6 +82,11 @@ export default class SPComponentSingleHeader extends React.Component {
       bookmarked: props.single.isBookmarked ? 'bookmarked enable' : '',
       loading: ''
     };
+    /**
+     * bound logoClick
+     * @type {function}
+     */
+    this.boundLogo = this.logoClick.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -152,8 +164,14 @@ export default class SPComponentSingleHeader extends React.Component {
     const single = this.state.single;
     // @type {UserDae} - 記事オーナー情報
     const user = single.user;
+    // @type {string}
+    const userName = user.userName;
     // @type {LogoDae}
     const logo = user.logo;
+    // 提供元名称とロゴがなかったら表示しない
+    if (!userName && !logo.img) {
+      return null;
+    }
     return (
       <div className="sp-single-header">
         <div className={`post-heading post-heading-${single.id}`}>
@@ -190,7 +208,11 @@ export default class SPComponentSingleHeader extends React.Component {
             </div>
           */}
           {/* div.f-right (bookmark: on / off) */}
-          {/* <BookmarkNode
+          {/*
+            design 変更に伴い
+            post-date以外をコメントアウト
+            @since 2018-01-31
+            <BookmarkNode
             sign={this.state.sign}
             isBookmarked={this.state.status}
             articleId={String(single.id)}

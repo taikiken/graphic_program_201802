@@ -27,7 +27,7 @@ $statsItem = array(
     'path'  => '/sokuhou/', // リンク先
     'icon'  => array(
       'slug'    => 'soccer', // 表示アイコン
-      'is_fill' => false // svgをfillするか
+      'is_fill' => false // svgをfillするか - アイコンによって異なる。「よくわかんないけどアイコン表示されない..」という方はtrueにしてみてください。
     )
   ),
 );
@@ -56,6 +56,17 @@ $statsItem = array(
       'style'   => '',
     )
   ),
+
+  // array(
+  //   'title' => 'テニス全豪OP',
+  //   'label' => 'テニス<br />全豪OP',
+  //   'path'  => '/stats/tennis/',
+  //   'icon'  => array(
+  //     'slug'    => 'tennis',
+  //     'is_fill' => false,
+  //     'style'   => '',
+  //   )
+  // ),
 
   array(
     'title' => 'Bリーグ',

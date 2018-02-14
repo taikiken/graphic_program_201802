@@ -106,7 +106,7 @@
             <div class="body-sec">
                 <div class="body-sec-inner">
                     <section class="main-sec">
-                       
+
 <!--  インターハイ メインコンテンツ ---------------------------------------------------------->
 <?php
 
@@ -137,18 +137,18 @@ while($f=$db->fetch_array()){
                             <h2 class="ttl photo"><i></i>フォトギャラリー</h2>
                             <p class="ttl_date"><?php echo $start; ?> - <?php echo $end; ?></p>
                         </div>
-                        
+
                         <div id="js-current-post" class="current-post photo_gallery">
                             <ul class="photo_list">
 <?php echo $photo; ?>
                             </ul>
                         </div>
-                        
+
                         <div class="btn_area">
                             <div class="btn btn_another"><a href="/inhigh/highlight"><i class="icon_movie"></i>動画特集を見る</a></div>
                             <div class="btn btn_back"><a href="/category/inhigh">インターハイトップへ戻る</a></div>
                         </div>
-                        
+
                         <div class="content_bottom_bnr">
                             <a class="show-for-large" href="http://www.inter-high-school.tv/" target="_blank">
                                 <img src="/assets/images/inhigh/PC_Banner_01B.jpg">
@@ -157,7 +157,7 @@ while($f=$db->fetch_array()){
                                 <img src="/assets/images/inhigh/SP_Banner_01B.jpg">
                             </a>
                         </div>
-                        
+
 
 <!-- / インターハイ メインコンテンツ ---------------------------------------------------------->
 
@@ -216,10 +216,11 @@ while($f=$db->fetch_array()){
             <footer id="footer-container" class="foot-sec show-for-large">
                 <div class="foot-sec-inner">
                     <nav class="foot-breadCrumb">
-                        <ol itemscope itemtype="http://schema.org/breadCrumbList">
-                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">ページタイトル</span><meta itemprop="position" content="2" /></a></li>
-                        </ol>
+                      <ol itemscope itemtype="http://schema.org/breadCrumbList">
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/category/inhigh/"><span itemprop="name">インターハイ</span><meta itemprop="position" content="2" /></a></li>
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/inhigh/photo/"><span itemprop="name">インターハイ フォトギャラリー</span><meta itemprop="position" content="3" /></a></li>
+                      </ol>
                     </nav><!-- /.foot-breadCrumb -->
                     <div class="foot-pr">
                         <div class="foot-pr-inner">
@@ -260,40 +261,47 @@ while($f=$db->fetch_array()){
                 </div><!-- /.foot-sec-inner -->
             </footer><!-- /.foot-sec -->
             <footer class="foot-sec show-for-small">
-                <div class="foot-sec-inner">
-                    <div class="foot-pr">
-                        <div class="foot-pr-inner">
-                            <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
-                            <div class="text-block">
-                                <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
-                                <ul class="foot-pr-list">
-                                    <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
-                                    <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
-                                </ul>
-                            </div>
-                        </div><!-- /.foot-pr-inner -->
-                        <div class="fb-page-plugin">
-                            <div class="fb-page" data-href="https://www.facebook.com/sportsbull/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sportsbull/"><a href="https://www.facebook.com/sportsbull/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
-                        </div>
-                    </div><!-- /.foot-pr -->
-                    <div id="js-page_top" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
-                    <nav class="fnav">
-                        <ul>
-                            <li><a href="/about/">サービス紹介</a></li>
-                            <li><a href="/about/privacy/">プライバシーポリシー</a></li>
-                            <li><a href="/about/company/">会社概要</a></li>
-                            <li><a href="/about/terms/">利用規約</a></li>
-                        </ul>
-                    </nav><!-- /.fnav -->
-                    <div class="sns-block">
-                        <ul>
-                            <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
-                            <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
-                            <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
-                        </ul>
-                    </div><!-- /.sns-block -->
-                    <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
-                </div><!-- /.foot-sec-inner -->
+              <div class="foot-sec-inner">
+                <nav class="foot-breadCrumb">
+                  <ol itemscope itemtype="http://schema.org/breadCrumbList">
+                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
+                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/category/inhigh/"><span itemprop="name">インターハイ</span><meta itemprop="position" content="2" /></a></li>
+                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/inhigh/photo/"><span itemprop="name">インターハイ フォトギャラリー</span><meta itemprop="position" content="3" /></a></li>
+                  </ol>
+                </nav><!-- /.foot-breadCrumb -->
+
+                <div class="foot-pr">
+                  <div class="foot-pr-inner">
+                    <figure class="foot-pr-figure"><img src="/assets/sp/images/common/footer-overview-figure.png" alt="無料スポーツニュース&amp;動画アプリの決定版！"></figure>
+
+                    <div class="text-block">
+                      <h3 class="foot-pr-text"><img src="/assets/sp/images/common/footer-overview-text.png" alt=""></h3>
+                      <ul class="foot-pr-list">
+                        <li class="foot-pr-item"><a class="foot-pr-link" href="https://app.adjust.com/5je1ts?deep_link=sportsbull%3A%2F%2F" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
+                        <li class="foot-pr-item"><a class="foot-pr-link" href="https://app.adjust.com/5je1ts?deep_link=sportsbull%3A%2F%2F" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
+                      </ul>
+                    </div>
+                  </div><!-- /.foot-pr-inner -->
+
+                  <div class="foot-pr-btn">
+                    <a href="https://app.adjust.com/5je1ts?deep_link=sportsbull%3A%2F%2F" target="_blank">今すぐダウンロード</a>
+                  </div><!-- /.foot-pr-btn -->
+
+                  <div class="fb-page-plugin">
+                    <div class="fb-page" data-href="https://www.facebook.com/sportsbull/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sportsbull/"><a href="https://www.facebook.com/sportsbull/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
+                  </div>
+                </div><!-- /.foot-pr -->
+
+                <div class="sns-block">
+                  <ul>
+                    <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
+                    <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
+                    <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
+                  </ul>
+                </div><!-- /.sns-block -->
+
+                <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
+              </div><!-- /.foot-sec-inner -->
             </footer><!-- /.foot-sec -->
         </div><!-- /.whole -->
         <!-- for facebook -->

@@ -21,7 +21,7 @@ import { GaData } from '../../ga/GaData';
 import { Ga } from '../../ga/Ga';
 
 // component/single-content
-import { ComponentSinglePostBody } from './ComponentSinglePostBody';
+import ComponentSinglePostBody from './ComponentSinglePostBody';
 
 // React
 /**
@@ -36,7 +36,7 @@ const React = self.React;
  * `/app/template/[desktop|mobile]/p.php` から移植しました
  * @since 2016-09-25
  */
-export class ComponentSinglePost extends React.Component {
+export default class ComponentSinglePost extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

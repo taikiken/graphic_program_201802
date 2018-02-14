@@ -17,10 +17,15 @@ import View from '../../view/View';
 import { MessageSNS } from '../../app/const/MessageSNS';
 
 // React
+/**
+ * [library] - React
+ */
 const React = self.React;
 
 
 /**
+ * @deprecated dont use
+ * @TODO future remove
  * SP: 記事詳細下部 SNS ブロック
  * @since 2016-09-27
  */
