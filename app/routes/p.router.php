@@ -60,17 +60,17 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
       endif;
 
       // 関連リンク作成
-    $search = ['<p>外部リンク<br>', '<p>', '</p>'];
-    $relatedpost = str_replace($search, '', $post['relatedpost']);
-    $relatedpost = explode('<br>', $relatedpost);
-    $related_links = [];
-    foreach ($relatedpost as $row)
-    {
-      if (!empty($row))
+      $search = ['<p>関連リンク<br>', '<p>', '</p>'];
+      $relatedpost = str_replace($search, '', $post['relatedpost']);
+      $relatedpost = explode('<br>', $relatedpost);
+      $related_links = [];
+      foreach ($relatedpost as $row)
       {
-        $related_links[] = $row;
+        if (!empty($row))
+        {
+          $related_links[] = $row;
+        }
       }
-    }
 
       $args['page'] = $app->model->set(array(
         'title'          => $post['title'].' | '.$category['label'],

@@ -180,6 +180,10 @@ export default class ComponentSingleHeader extends React.Component {
           anotherCategories={single.anotherCategories}
         /> */}
         <div className="post-data">
+          {/* <div className="f-left">
+            <p className="post-author">{single.user.userName}</p>
+            <p className="post-date">{single.displayDate}</p>
+          </div> */}
           <p className="post-text">
             <span className="post-date">{single.displayDate}</span>
             <span className="post-category">{single.categories.label}</span>

@@ -48,10 +48,16 @@
             </ul>
           </div><!-- /.post-sns -->
 
+          <?php
+          /*
+          DFP - desktop / タイトル下
+          */
+          ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
           <div class="sponsor-link w728">
-            <?php /* DFP */ ?>
             <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' class="bnr-dfp" style='height:90px; width:728px;'></div>
           </div>
+          <?php endif; ?>
 
           <?php
             // #1602 - VK brightcove
@@ -100,19 +106,21 @@
           /*
           DFP - 記事本文中差し込み広告
           */ ?>
-          <script>
-            var bodyP = document.querySelectorAll('.post-detail .post-content > p');
-            var bodyLen = bodyP.length;
-            var halfIndex = Math.round(bodyLen / 2) - 1;
-            if(bodyLen >= 6) {
-              var div_wrapper = document.createElement('div');
-              var target = bodyP[halfIndex];
-              div_wrapper.setAttribute('id', 'ad-gpt-article-detail-body-wrapper');
-              target.parentNode.insertBefore(div_wrapper, target.nextSibling);
-              var wrap = document.getElementById('ad-gpt-article-detail-body-wrapper');
-              wrap.insertAdjacentHTML('afterbegin','<div id="div-gpt-ad-article-detail-desktop-rectangle-A" class="bnr-dfp"></div><div id="div-gpt-ad-article-detail-desktop-rectangle-B" class="bnr-dfp"></div>');
-            }
-          </script>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
+            <script>
+              var bodyP = document.querySelectorAll('.post-detail .post-content > p');
+              var bodyLen = bodyP.length;
+              var halfIndex = Math.round(bodyLen / 2) - 1;
+              if(bodyLen >= 6) {
+                var div_wrapper = document.createElement('div');
+                var target = bodyP[halfIndex];
+                div_wrapper.setAttribute('id', 'ad-gpt-article-detail-body-wrapper');
+                target.parentNode.insertBefore(div_wrapper, target.nextSibling);
+                var wrap = document.getElementById('ad-gpt-article-detail-body-wrapper');
+                wrap.insertAdjacentHTML('afterbegin','<div id="div-gpt-ad-article-detail-desktop-rectangle-A" class="bnr-dfp"></div><div id="div-gpt-ad-article-detail-desktop-rectangle-B" class="bnr-dfp"></div>');
+              }
+            </script>
+          <?php endif; ?>
           </div><!-- /.post-content -->
 
           <div class="post-sns">
@@ -177,27 +185,34 @@
           <div id="js-headline"></div>
 
 
-          <?php /*
+          <?php
+          /*
           DFP - headline bottom ダブルレクタングル
-          */ ?>
-          <div id="ad-gpt-article-detail-headlinebottom-wrapper">
-            <div id="div-gpt-ad-article-detail-desktop-rectangle-C" class="bnr-dfp"></div>
-            <div id="div-gpt-ad-article-detail-desktop-rectangle-D" class="bnr-dfp"></div>
-          </div>
-
+          */
+          ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
+            <div id="ad-gpt-article-detail-headlinebottom-wrapper">
+              <div id="div-gpt-ad-article-detail-desktop-rectangle-C" class="bnr-dfp"></div>
+              <div id="div-gpt-ad-article-detail-desktop-rectangle-D" class="bnr-dfp"></div>
+            </div>
+          <?php endif; ?>
 
           <div class="board-large">
-            <div id="board-container" data-adgene-id="54994,54993,35245,42707"></div><!--/archive-->
+            <div id="board-container" data-adgene-id=""></div><!--/archive-->
           </div><!-- /.board-large -->
 
 
-          <?php /*
+          <?php
+          /*
           DFP - bottom ダブルレクタングル
-          */ ?>
+          */
+          ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
           <div id="ad-gpt-article-detail-boardbottom-wrapper">
             <div id="div-gpt-ad-article-detail-desktop-rectangle-E" class="bnr-dfp"></div>
             <div id="div-gpt-ad-article-detail-desktop-rectangle-F" class="bnr-dfp"></div>
           </div>
+          <?php endif; ?>
 
 
           <?php
@@ -224,43 +239,6 @@
         </div><!-- /.post-detail -->
       </div><!-- /.current-post-->
 
-
-
-
-      <?php
-      /*
-       @since 2018-01-23 無限スクロール廃止のために以下削除します
-      */
-      if (0):
-      ?>
-      <?php
-      /*
-      @since 2016-09-28
-      記事詳細の次の記事
-      div#js-singles-container 内に「記事一覧」「オススメ記事」「人気記事」「関連記事」を記入
-       */
-      ?>
-      <div class="singles-next">
-        <div id="js-singles-container"></div>
-        <div id="js-singles-more"></div>
-      </div>
-      <!-- #310 popin ebmed code  -->
-      <?php if ( $page['category']['label'] ) : ?>
-      <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
-      <?php endif; ?>
-      <div id="_popIn_recommend" class="recommend_articles"></div>
-      <script type="text/javascript">
-        (function() {
-          var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-              pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-        })();
-      </script>
-      <!-- //#310 popin embed code  -->
-      <?php
-      endif;
-      // 削除 eof
-      ?>
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
