@@ -48,10 +48,16 @@
             </ul>
           </div><!-- /.post-sns -->
 
+          <?php
+          /*
+          DFP - desktop / タイトル下
+          */
+          ?>
+          <?php if ( !$post['is_sponserd'] ) : ?>
           <div class="sponsor-link w728">
-            <?php /* DFP */ ?>
             <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' class="bnr-dfp" style='height:90px; width:728px;'></div>
           </div>
+          <?php endif; ?>
 
           <?php
             // #1602 - VK brightcove
@@ -100,19 +106,21 @@
           /*
           DFP - 記事本文中差し込み広告
           */ ?>
-          <script>
-            var bodyP = document.querySelectorAll('.post-detail .post-content > p');
-            var bodyLen = bodyP.length;
-            var halfIndex = Math.round(bodyLen / 2) - 1;
-            if(bodyLen >= 6) {
-              var div_wrapper = document.createElement('div');
-              var target = bodyP[halfIndex];
-              div_wrapper.setAttribute('id', 'ad-gpt-article-detail-body-wrapper');
-              target.parentNode.insertBefore(div_wrapper, target.nextSibling);
-              var wrap = document.getElementById('ad-gpt-article-detail-body-wrapper');
-              wrap.insertAdjacentHTML('afterbegin','<div id="div-gpt-ad-article-detail-desktop-rectangle-A" class="bnr-dfp"></div><div id="div-gpt-ad-article-detail-desktop-rectangle-B" class="bnr-dfp"></div>');
-            }
-          </script>
+          <?php if ( !$post['is_sponserd'] ) : ?>
+            <script>
+              var bodyP = document.querySelectorAll('.post-detail .post-content > p');
+              var bodyLen = bodyP.length;
+              var halfIndex = Math.round(bodyLen / 2) - 1;
+              if(bodyLen >= 6) {
+                var div_wrapper = document.createElement('div');
+                var target = bodyP[halfIndex];
+                div_wrapper.setAttribute('id', 'ad-gpt-article-detail-body-wrapper');
+                target.parentNode.insertBefore(div_wrapper, target.nextSibling);
+                var wrap = document.getElementById('ad-gpt-article-detail-body-wrapper');
+                wrap.insertAdjacentHTML('afterbegin','<div id="div-gpt-ad-article-detail-desktop-rectangle-A" class="bnr-dfp"></div><div id="div-gpt-ad-article-detail-desktop-rectangle-B" class="bnr-dfp"></div>');
+              }
+            </script>
+          <?php endif; ?>
           </div><!-- /.post-content -->
 
           <div class="post-sns">
@@ -177,27 +185,34 @@
           <div id="js-headline"></div>
 
 
-          <?php /*
+          <?php
+          /*
           DFP - headline bottom ダブルレクタングル
-          */ ?>
-          <div id="ad-gpt-article-detail-headlinebottom-wrapper">
-            <div id="div-gpt-ad-article-detail-desktop-rectangle-C" class="bnr-dfp"></div>
-            <div id="div-gpt-ad-article-detail-desktop-rectangle-D" class="bnr-dfp"></div>
-          </div>
-
+          */
+          ?>
+          <?php if ( !$post['is_sponserd'] ) : ?>
+            <div id="ad-gpt-article-detail-headlinebottom-wrapper">
+              <div id="div-gpt-ad-article-detail-desktop-rectangle-C" class="bnr-dfp"></div>
+              <div id="div-gpt-ad-article-detail-desktop-rectangle-D" class="bnr-dfp"></div>
+            </div>
+          <?php endif; ?>
 
           <div class="board-large">
-            <div id="board-container" data-adgene-id="54994,54993,35245,42707"></div><!--/archive-->
+            <div id="board-container"></div><!--/archive-->
           </div><!-- /.board-large -->
 
 
-          <?php /*
+          <?php
+          /*
           DFP - bottom ダブルレクタングル
-          */ ?>
+          */
+          ?>
+          <?php if ( !$post['is_sponserd'] ) : ?>
           <div id="ad-gpt-article-detail-boardbottom-wrapper">
             <div id="div-gpt-ad-article-detail-desktop-rectangle-E" class="bnr-dfp"></div>
             <div id="div-gpt-ad-article-detail-desktop-rectangle-F" class="bnr-dfp"></div>
           </div>
+          <?php endif; ?>
 
 
           <?php
