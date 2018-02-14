@@ -8,7 +8,7 @@
 
 # 広告設定
 - スポンサードカテゴリであれば広告は表示しない
-- スポンサードカテゴリ = $post['is_sponserd'] = true
+- スポンサードカテゴリ = $page['post']['is_sponserd'] = true
 
 */
 
@@ -23,7 +23,7 @@ $adId = array(
 );
 
 // アプリとスマホでアドジェネIDかえる
-if ( !$post['is_sponserd'] ) :
+if ( !$page['post']['is_sponserd'] ) :
   if ( $page['ua_app'] ) :
     $adIds['adgene']['ranking']   = '59626';
     $adIds['adgene']['headline']  = '59625,59625';
@@ -303,7 +303,7 @@ endif;
         DFP - mobile / 記事詳細本文下 ( フォロー上 ) レクタングル
         */
         ?>
-        <?php if ( !$post['is_sponserd'] ) : ?>
+        <?php if ( !$page['post']['is_sponserd'] ) : ?>
           <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp"></div>
         <?php endif; ?>
 
@@ -423,7 +423,7 @@ endif;
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
       */
       ?>
-      <?php if ( !$post['is_sponserd'] ) : ?>
+      <?php if ( !$page['post']['is_sponserd'] ) : ?>
         <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
       <?php endif; ?>
 
@@ -497,7 +497,7 @@ endif;
     });
   }
 
-  <?php if ( !$post['is_sponserd'] ) : ?>
+  <?php if ( !$page['post']['is_sponserd'] ) : ?>
     showContentDFP();
   <?php endif; ?>
 

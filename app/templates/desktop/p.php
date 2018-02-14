@@ -53,7 +53,7 @@
           DFP - desktop / タイトル下
           */
           ?>
-          <?php if ( !$post['is_sponserd'] ) : ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
           <div class="sponsor-link w728">
             <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' class="bnr-dfp" style='height:90px; width:728px;'></div>
           </div>
@@ -106,7 +106,7 @@
           /*
           DFP - 記事本文中差し込み広告
           */ ?>
-          <?php if ( !$post['is_sponserd'] ) : ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
             <script>
               var bodyP = document.querySelectorAll('.post-detail .post-content > p');
               var bodyLen = bodyP.length;
@@ -190,7 +190,7 @@
           DFP - headline bottom ダブルレクタングル
           */
           ?>
-          <?php if ( !$post['is_sponserd'] ) : ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
             <div id="ad-gpt-article-detail-headlinebottom-wrapper">
               <div id="div-gpt-ad-article-detail-desktop-rectangle-C" class="bnr-dfp"></div>
               <div id="div-gpt-ad-article-detail-desktop-rectangle-D" class="bnr-dfp"></div>
@@ -207,7 +207,7 @@
           DFP - bottom ダブルレクタングル
           */
           ?>
-          <?php if ( !$post['is_sponserd'] ) : ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
           <div id="ad-gpt-article-detail-boardbottom-wrapper">
             <div id="div-gpt-ad-article-detail-desktop-rectangle-E" class="bnr-dfp"></div>
             <div id="div-gpt-ad-article-detail-desktop-rectangle-F" class="bnr-dfp"></div>
