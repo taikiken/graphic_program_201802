@@ -57,6 +57,22 @@ html.undotsushin-android .widget-recommend ._popIn_recommend_credit
 }
 
 
+html.undotsushin-ios #_popIn_about_inner,
+html.undotsushin-android #_popIn_about_inner
+{
+  width: 90vw !important;
+  margin-left: -45vw !important;
+  top: 40% !important;
+  height: 550px !important;
+}
+
+html.undotsushin-ios #_popIn_about_inner iframe,
+html.undotsushin-android #_popIn_about_inner iframe
+{
+  width: 86vw !important;
+  height: 550px !important;
+}
+
 
 
 /*
