@@ -25,7 +25,8 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
       $template_classname = $template_classname . ' theme_big6';
     endif;
 
-    $pickup_players = $app->model->get_pickup_players($category['id'], null, 4);
+//    $pickup_players = $app->model->get_pickup_players($category['id'], null, 4);
+    $pickup_players = $app->model->get_pickup_players_ca_top();
     $data = [];
     foreach ($pickup_players as $index => $row) {
       $data[] = [

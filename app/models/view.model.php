@@ -593,6 +593,14 @@ class ViewModel {
     return $this->db->get_pickup_players($category_id, $player_id, $limit);
   }
 
+  /**
+   * /category/crazy/ で表示する4件固定対応
+   * @return array
+   */
+  public function get_pickup_players_ca_top() {
+    return $this->db->get_pickup_players_ca_top();
+  }
+
 /**
    * プレスリリース一覧
    * @return array
