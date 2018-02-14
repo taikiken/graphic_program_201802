@@ -254,6 +254,7 @@ html.android #widget-news-list-container .adgLink .adgBody .adgSponsor
 html.mobile .post-single .adsWrapper,
 html.android .post-single .adsWrapper
 {
+  display: block;
   padding-left: 0;
   padding-right: 0;
   position: relative;
@@ -315,16 +316,16 @@ html.android .post-single .adsDescription
   display: none;
 }
 
-html.mobile .post-single .adsButton,
-html.android .post-single .adsButton
+html.mobile .post-single .adsWrapper .adsButton,
+html.android .post-single .adsWrapper .adsButton
 {
   position: absolute;
   right: 0px;
   bottom: 10px;
 }
 
-html.mobile .post-single .adsButtonText,
-html.android .post-single .adsButtonText
+html.mobile .post-single .adsWrapper .adsButton .adsButtonText,
+html.android .post-single .adsWrapper .adsButton .adsButtonText
 {
   border: 1px solid #ccc;
   background: #fff;
@@ -339,7 +340,7 @@ html.mobile .post-single #headline-container .adsButton,
 html.android .post-single #headline-container .adsButton
 {
   display: block !important;
-  bottom: 8px;
+  bottom: 6px;
   right: 2%;
 }
 
