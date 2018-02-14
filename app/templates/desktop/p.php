@@ -198,7 +198,7 @@
           <?php endif; ?>
 
           <div class="board-large">
-            <div id="board-container"></div><!--/archive-->
+            <div id="board-container" data-adgene-id=""></div><!--/archive-->
           </div><!-- /.board-large -->
 
 
