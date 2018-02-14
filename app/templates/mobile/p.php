@@ -8,11 +8,9 @@
 
 # 広告設定
 - スポンサードカテゴリであれば広告は表示しない
+- スポンサードカテゴリ = $post['is_sponserd'] = true
 
 */
-
-// スポンサーカテゴリ判定
-$is_sponserd = $post['is_sponserd'];
 
 // 広告IDモデル
 $adId = array(
@@ -25,7 +23,7 @@ $adId = array(
 );
 
 // アプリとスマホでアドジェネIDかえる
-if ( !$is_sponserd ) :
+if ( !$post['is_sponserd'] ) :
   if ( $page['ua_app'] ) :
     $adIds['adgene']['ranking']   = '59626';
     $adIds['adgene']['headline']  = '59625,59625';
@@ -301,11 +299,14 @@ endif;
         </div><!-- /.post-detail -->
 
 
-        <?php /*
+        <?php
+        /*
         DFP - mobile / 記事詳細本文下 ( フォロー上 ) レクタングル
-        - スポンサーカテゴリでも表示として常にスポンサーレクタングル広告を表示する
-        */ ?>
-        <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp"></div>
+        */
+        ?>
+        <?php if ( !$post['is_sponserd'] ) : ?>
+          <div id='ad-gpt-article-detail-body-bottom' class="bnr-dfp"></div>
+        <?php endif; ?>
 
 
       <?php
@@ -418,10 +419,15 @@ endif;
       <?php endif; ?>
 
 
-      <?php /*
+      <?php
+      /*
       DFP - mobile / 記事詳細おすすめ記事下レクタングル
-      */ ?>
-      <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
+      */
+      ?>
+      <?php if ( !$post['is_sponserd'] ) : ?>
+        <div id='ad-gpt-article-detail-recommend-bottom' class="bnr-dfp"></div>
+      <?php endif; ?>
+
 
       <?php
       // ----------------------------------------------------
@@ -453,9 +459,12 @@ endif;
       </div>
 
 
-      <?php /*
-      DFP - mobile / 記事詳細おすすめ記事下レクタングル
-      */ ?>
+      <?php
+      /*
+      DFP - mobile / 記事詳細新着記事下レクタングル
+      - スポンサーカテゴリでも表示として常にスポンサーレクタングル広告を表示する
+      */
+      ?>
       <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>
 
 
@@ -488,7 +497,10 @@ endif;
       btnContainer.parentNode.removeChild(btnContainer);
     });
   }
-  showContentDFP();
+
+  <?php if ( !$post['is_sponserd'] ) : ?>
+    showContentDFP();
+  <?php endif; ?>
 
   <?php if ( $page['ua_app'] ) : ?>
 
@@ -500,10 +512,8 @@ endif;
       }
     })
 
-
-    // WebView load 検証用
+    // WebView hide loading
     var WebViewCallback = function() {
-      // hide loading for app
       window.JsInterface.onDocumentReady();
     };
     if ( document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll) ) {
