@@ -66,7 +66,7 @@ $border-color: #585959;
   // [ class^="board-" ] {
   .board-small {
     .post {
-      @include link-decoration(#333, #333, none, none);
+      @include link-decoration(#fff, #fff, none, none);
 
       &-date {
         color: #999;
@@ -95,11 +95,30 @@ $border-color: #585959;
     }
 
     .post {
-      @include link-decoration(#333, null, none, none);
+      @include link-decoration(#fff, null, none, none);
 
       &:hover {
         .post-heading {
-          color: #0e357f !important;
+          color: $key-color !important;
+        }
+      }
+    }
+  }
+
+  &.post-single {
+    .board-large {
+      .board-item {
+        // border-bottom-color: #1b1b1b;
+        background-color: transparent;
+      }
+
+      .post {
+        @include link-decoration(#333, null, none, none);
+
+        &:hover {
+          .post-heading {
+            color: #0e357f !important;
+          }
         }
       }
     }
