@@ -306,7 +306,7 @@
       ?>
       <?php
       // ------------------------------------
-      // TODO: よく読まれている記事 carousel - sidebar: ranking
+      // よく読まれている記事 carousel - sidebar: ranking
       ?>
       <?php if ( $page['ua_app'] ) : ?>
       <div id="widget-ranking-container" data-adgene-id="59626"></div>
@@ -316,7 +316,7 @@
 
       <?php
       // ------------------------------------
-      // TODO: ヘッドライン
+      // ヘッドライン
       ?>
       <!-- <div id="headline-container"></div> -->
       <?php if ( $page['ua_app'] ) : ?>
@@ -327,7 +327,7 @@
 
       <?php
       // ------------------------------------
-      // TODO: おすすめの記事 - sidebar: recommend
+      // おすすめの記事 - sidebar: recommend
       ?>
       <?php if ( $page['category']['slug'] == 'crazy' ) : ?>
         <div class="widget-recommend">
@@ -359,7 +359,6 @@
           <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
         <?php endif; ?>
 
-        <?php if ( $page['ua_app'] !== 'Android' ) : ?>
         <div class="widget-recommend">
           <div class="widget-postList widget-postList_popular">
             <div class="mod-headingA01">
@@ -389,7 +388,6 @@
             <?php endif; ?>
           </div>
         </div>
-        <?php endif; ?>
 
       <?php endif; ?>
 
@@ -421,7 +419,7 @@
 
       <?php
       // ------------------------------------
-      // TODO: 新着記事
+      // 新着記事
       ?>
       <div id="widget-news-list-container">
         <div class="board">
