@@ -52,8 +52,7 @@ SQL;
                 if(empty($tmp_relationList[$f['parent_id']])){
                     //親が未登録なら登録する
                     $tmp_relationList[$f['parent_id']] = [
-                        'dispName'  => $f['parent_name'],
-                        'icon'      => $ImgPath.$f['parent_icon']
+                        'dispName'  => $f['parent_name']
                     ];
                 }
                 //子を登録する
@@ -68,7 +67,6 @@ SQL;
             foreach ($tmp_relationList as $parent) {
                 $tmp_response['parent'][] = [
                         'dispName'  => $parent['dispName'],
-                        'img'       => $parent['icon'],
                         'child'     => $parent['child']
                     ];
             }
@@ -106,8 +104,7 @@ SQL;
                 if(empty($tmp_relationList[$f['parent_id']])){
                     //親が未登録なら登録する
                     $tmp_relationList[$f['parent_id']] = [
-                        'dispName'  => $f['parent_name'],
-                        'icon'      => $ImgPath.$f['parent_icon']
+                        'dispName'  => $f['parent_name']
                     ];
                 }
                 //子を登録する
@@ -122,7 +119,6 @@ SQL;
             foreach ($tmp_relationList as $parent) {
                 $tmp_response['parent'][] = [
                         'dispName'  => $parent['dispName'],
-                        'img'       => $parent['icon'],
                         'child'     => $parent['child']
                     ];
             }
