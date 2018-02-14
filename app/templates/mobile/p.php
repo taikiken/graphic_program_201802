@@ -12,7 +12,7 @@
 
 */
 
-// 広告IDモデル
+// 広告ID配列 *表示件数分IDをカンマ区切りで
 $adId = array(
   'adgene' => array(
     'ranking'   => '', // 人気記事
@@ -35,7 +35,6 @@ if ( !$post['is_sponserd'] ) :
     $adIds['adgene']['recommend'] = '59628,59628';
     $adIds['adgene']['news']      = '59627,59627,59627,59627,59627,59627,59627,59627';
   endif;
-
 endif;
 
 ?>
