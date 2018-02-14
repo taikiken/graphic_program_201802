@@ -21,7 +21,7 @@ while($f=$o->fetch_array()){
 
 function get_index(){
 	
-	$xml="https://stg.golfnetwork.co.jp/rss/column2.xml 135";
+	$xml="https://golf:3652@stg.golfnetwork.co.jp/rss/column2.xml 135";
 
 	$file=explode("\n",$xml);
 	for($i=0;$i<count($file);$i++){
