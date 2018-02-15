@@ -236,7 +236,7 @@ foreach($items as $item)
             }
         }
         if(! empty($region)) {
-//            $sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref}');";
+            $sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref}');";
         }
     }
     if($sqla){
