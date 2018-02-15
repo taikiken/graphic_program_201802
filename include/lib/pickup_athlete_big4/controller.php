@@ -10,52 +10,41 @@ if($q->get_dir()===0){ // 新規
 	}elseif($q->get_file()===1){
 
 		data_conf();
-	}elseif($q->get_file()===2){
+	}elseif($q->get_file()===2) {
+    include $INCLUDEPATH . "lib/" . $CURRENTDIRECTORY . "/ex.php";
+    data_sql();
 
-		include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/ex.php";
+    // カテゴリ番号取得
+    $o = new dbutl($TABLE);
 
-		data_sql();
+    $sql = <<<SQL
+SELECT d1
+FROM u_headline
+WHERE cid = {$g->f("cid")}
+AND qid = {$g->f("rid")}
+LIMIT 1
+SQL;
+
+    $o->query($sql);
+    $f = $o->fetch_array();
+    $category_id = $f['d1'];
+
+    $sort_no = $sv['sort_no'] + 1;
+    $sql = <<<SQL
+INSERT INTO pickup_athletes_big4
+VALUES(
+{$category_id},
+{$sv['d2']}::INTEGER ,
+{$sort_no},
+NOW()
+)
+SQL;
+
+    $e = $o->query($sql);
+
+  }
 
 
-		if(count($sn)>0){
-
-			if ($TABLE != "tbl_player")
-			{
-				// 選手の登録ではない場合
-				if(isset($_GET["qid"]))$sv[$sn[]="rid"]=$g->f("qid");
-				if(isset($_GET["rid"]))$sv[$sn[]="qid"]=$g->f("rid");
-				$sv[$sn[]="cid"]=$g->f("cid");
-			}
-
-			$sv[$sn[]="u_time"]="now()";
-
-			if($MULTILANG==0){
-				$sv[$sn[]="flag"]=0;
-			}else{
-				for($i=0;$i<count($LANG);$i++)$sv[$sn[]="flag".$LANG[$i]]=0;
-			}
-
-			$o=new dbutl($TABLE,$sn,$sv);
-			$e=$o->insert();
-
-			/* 運動通信会員カテゴリー */
-			if($TABLE=="u_member"){
-				$id=$e;
-				$category=@explode(",",str_replace("'","",$sv["t20"]));
-				if(count($category)>0){
-					for($i=0;$i<count($category);$i++){
-						$s[]=sprintf("insert into u_category(userId,categoryId,flag,regitime) values(%s,%s,1,now());",$id,$category[$i]);
-					}
-					$s=implode("\n",$s);
-					$o->query($s);
-				}
-			}elseif($TABLE=="u_categories"){
-				$sql=sprintf("insert into u_latestpost(m1,pageid) select currval('%s_id_seq'),0;",$TABLE);
-				$o->query($sql);
-			}
-		}
-
-	}
 }elseif($q->get_dir()===1){  // 編集
 	if($q->get_file()===0){
 
