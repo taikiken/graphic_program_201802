@@ -279,15 +279,7 @@ SQL;
       '/stats/bleague/webview/app/',
     );
   endif;
-
-  #crazy
-  # ref. #2559
-  if ( $category === 'crazy' ) :
-    $categoriesinfo['webviews']     = array(
-        '/crazy/webview/',
-    );
-  endif;
-
+  
   // #UNDO_SPBL-293
   if ( $category === 'pyeongchang2018' ) :
     $categoriesinfo['webviews']     = array(
