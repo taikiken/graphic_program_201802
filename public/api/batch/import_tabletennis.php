@@ -69,7 +69,6 @@ foreach($items as $item)
     $title = (string)$item->title;
     $region = (string)$item->area;
     $pref   = (string)$item->pref;
-    $i = 0;
     $pref_explode = explode(",",$pref);
     $body = (string)$item->description;
     $modbody = modifytag_New(
