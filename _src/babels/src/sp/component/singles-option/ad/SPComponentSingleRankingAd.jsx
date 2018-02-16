@@ -73,6 +73,10 @@ export default class SPComponentSingleRankingAd extends React.Component {
   componentDidMount() {
     if (this.container) {
       // console.log('SPComponentSingleRankingAd.componentDidMount', this.container);
+      const { ad } = this.props;
+      if (!ad) {
+        return;
+      }
       this.ad();
     }
   }
