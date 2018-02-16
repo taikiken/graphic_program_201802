@@ -14,26 +14,19 @@ if($q->get_dir()===0){ // 新規
     include $INCLUDEPATH . "lib/" . $CURRENTDIRECTORY . "/ex.php";
     data_sql();
 
-    // カテゴリ番号取得
     $o = new dbutl($TABLE);
+    $u_headline_id = get_u_headline_id($g->f("cid"), $g->f("rid"));
 
+    $sort_no = (int)str_replace("'", "", $sv['sort_no']) + 1;
     $sql = <<<SQL
-SELECT d1
-FROM u_headline
-WHERE cid = {$g->f("cid")}
-AND qid = {$g->f("rid")}
-LIMIT 1
-SQL;
-
-    $o->query($sql);
-    $f = $o->fetch_array();
-    $category_id = $f['d1'];
-
-    $sort_no = $sv['sort_no'] + 1;
-    $sql = <<<SQL
-INSERT INTO pickup_athletes_big4
+INSERT INTO pickup_athletes_big4(
+u_headline_id, 
+player_id, 
+sort_no, 
+created_at
+)
 VALUES(
-{$category_id},
+{$u_headline_id},
 {$sv['d2']}::INTEGER ,
 {$sort_no},
 NOW()
@@ -48,178 +41,73 @@ SQL;
 }elseif($q->get_dir()===1){  // 編集
 	if($q->get_file()===0){
 
-		if ($g->f("rid") == 95) { // 注目の選手
-      $sql=sprintf("select * from %s where id=%s",$TABLE,$g->f("nid"));
 
-    } else {
-      $sql=sprintf("select *,(select body from repo_body where pid=%s.id) as body from %s where id=%s",$TABLE,$TABLE,$g->f("nid"));
-    }
+      $sql= <<<SQL
+SELECT u_headline_id, player_id, sort_no -1
+FROM pickup_athletes_big4
+WHERE player_id = {$g->f("nid")}::INTEGER
+SQL;
 
 		$o->query($sql);
 		$p=$o->fetch_array();
-
-		//カテゴリー
-		if($g->f("cid") == 10){
-			//webviewをjson_decode & 整形
-			$webview_keys = [
-				'webview-pc',
-				'webview-sp',
-				'webview-ios',
-				'webview-android'
-			];
-			$webview = json_decode($p['webview'], true);
-			foreach($webview_keys as $key){
-				$json_key = str_replace('webview-', '', $key);
-				if($p['webview'] !== null){
-					$p[] = empty($webview[$json_key]) ? null : implode(',', $webview[$json_key]);
-					$p[$key] = empty($webview[$json_key]) ? null : implode(',', $webview[$json_key]);
-				}
-			}
-		}
-
-		if($TABLE=="repo_n"){
-			$sql=sprintf("select title,link,(n+1) as n from u_link where pid=%s order by n",$g->f("nid"));
-			$o->query($sql);
-			while($f=$o->fetch_array()){
-				$p["t".$f["n"]]=$f["link"];
-				$p["b".$f["n"]]=$f["title"];
-			}
-		}elseif($TABLE=="u_media"){
-			$sql=sprintf("select * from u_banner where cid=%s and type=1",$g->f("nid"));
-			$o->query($sql);
-			$f=$o->fetch_array();
-
-			$p["alt"]=$f["alt"];
-			$p["pcimg"]=$f["pcimg"];
-			$p["pclink"]=$f["pclink"];
-			$p["spimg"]=$f["spimg"];
-			$p["splink"]=$f["splink"];
-		}
-		if($_POST["search"]==1){
-			data_conf();
-			$SEARCH=$sv;
-		}
 
 		include $INCLUDEPATH."formback.php";
 	}elseif($q->get_file()===1){
 
 		data_conf();
 	}elseif($q->get_file()===2){
-
 		include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/ex.php";
-
 		data_sql();
 
-		$sv[$sn[]="u_time"]="now()";
+    $o = new dbutl($TABLE);
+    $u_headline_id = get_u_headline_id($g->f("cid"), $g->f("rid"));
 
-		//カテゴリー データ整形
-		if($g->f("cid") == 10){
-			//webviewを１つにまとめてjsonencodeする
-			$webview_keys = [
-				'webview-pc',
-				'webview-sp',
-				'webview-ios',
-				'webview-android'
-			];
-			$webview = [];
-			$sn_temp = $sn;
-			foreach($sn_temp as $sn_index => $sn_value){
-				if(in_array($sn_value, $webview_keys)){
-					//"webview-"を取り除いてセット 値はすでにencodeされているので一度decodeする
-					$webview[str_replace('webview-', '', $sn_value)] = json_decode($sv[$sn_value]);
-					unset($sn[$sn_index]);
-					unset($sv[$sn_value]);
-				}
-			}
-			//連番振り直し
-			$sn = array_merge($sn);
-			$sv[$sn[]='webview'] = "'".json_encode($webview)."'";
-		}
-
-		$o=new dbutl($TABLE,$sn,$sv);
-		$e=$o->update($g->f("nid"));
-
-		// 選手情報更新の場合は実施しない
-		if ($g->f("cid") != 94)
-		{
-			create_article_json($g->f("nid"), true);
-
-			if($g->f("cid")!=1||$g->f("cid")!=6){
-				if(strlen($_POST["POSITION"])>0){
-					$sql=sprintf("update %s set n=n-1 where cid=%s and n>(select n from %s where id=%s)",$TABLE,$TABLE,$g->f("cid"),$g->f("nid"));
-					$o->query($sql);
-					$sql=sprintf("update %s set n=n+1 where cid=%s and n>(select n from %s where id=%s)",$TABLE,$TABLE,$g->f("cid"),$_POST["POSITION"]);
-					$o->query($sql);
-					$sql=sprintf("update %s set n=(select n+1 from %s where id=%s) where id=%s",$TABLE,$TABLE,$_POST["POSITION"],$g->f("nid"));
-					$o->query($sql);
-				}
-			}
-		}
-
-		/* 運動通信会員カテゴリー */
-		if($TABLE=="u_member"){
-
-			$id=$g->f("nid");
-
-			$category=str_replace("'","",$sv["t20"]);
-			$sql=sprintf("update u_category set flag=0,regitime=now() where userId=%s and categoryid not in(%s)",$id,$category);
-			$o->query($sql);
-			$sql=sprintf("update u_category set flag=1,regitime=now() where userId=%s and categoryid in(%s)",$id,$category);
-			$o->query($sql);
-
-			$category=@explode(",",$category);
-			if(count($category)>0&&$category!=$p){
-				for($i=0;$i<count($category);$i++){
-					$s[]=sprintf("insert into u_category(userId,categoryId,flag,regitime) select %s,%s,1,now() where not exists (select 1 from u_category where userid=%s and categoryid=%s);",$id,$category[$i],$id,$category[$i]);
-				}
-				$sql=implode("\n",$s);
-				$o->query($sql);
-			}
-		}
+    $sort_no = (int)str_replace("'", "", $sv['sort_no']) + 1;
+    $sql = <<<SQL
+UPDATE pickup_athletes_big4
+SET 
+u_headline_id = {$u_headline_id}, 
+player_id = {$sv['d2']}::INTEGER, 
+sort_no = {$sort_no}, 
+updated_at = NOW()
+WHERE player_id = {$g->f("nid")}::INTEGER
+SQL;
+    $e=$o->query($sql);
 
 	}
 }elseif($q->get_dir()===2){ // 削除
 	if($q->get_file()===0){
 
-		$sql=sprintf("select *,(select body from repo_body where pid=%s.id) as body from %s where id=%s",$TABLE,$TABLE,$g->f("nid"));
-		$o->query($sql);
-		$p=$o->fetch_array();
+    $o = new dbutl($TABLE);
 
-		if($TABLE=="repo_n"){
-			$sql=sprintf("select title,link,n from u_link where pid=%s order by n",$g->f("nid"));
-			$o->query($sql);
-			while($f=$o->fetch_array()){
-				$p["t".$f["n"]]=$f["link"];
-				$p["b".$f["n"]]=$f["title"];
-			}
-		}elseif($TABLE=="u_media"){
-			$sql=sprintf("select * from u_banner where cid=%s and type=1",$g->f("nid"));
-			$o->query($sql);
-			$f=$o->fetch_array();
+    $sql = <<<SQL
+SELECT ply.*, sort_no
+FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.u_headline_id = uh.id
+  INNER JOIN tbl_player ply ON big4.player_id = ply.id
+WHERE uh.cid = 96 AND uh.qid = {$g->f("rid")}
+AND big4.player_id = {$g->f("nid")}
+SQL;
 
-			$p["alt"]=$f["alt"];
-			$p["pcimg"]=$f["pcimg"];
-			$p["pclink"]=$f["pclink"];
-			$p["spimg"]=$f["spimg"];
-			$p["splink"]=$f["splink"];
-		}
+    $o->query($sql);
+    $p=$o->fetch_array();
+    include $INCLUDEPATH."formback.php";
 
 	}elseif($q->get_file()===1){
-
 		data_conf();
+
 	}elseif($q->get_file()===2){
 
 		include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/ex.php";
+    $o=new dbutl($TABLE);
+    $u_headline_id = get_u_headline_id($g->f("cid"), $g->f("rid"));
 
-		if($g->f("cid")!=1||$g->f("qid")!=2){
-			$sql=sprintf("select n from %s where id=%s",$TABLE,$g->f("nid"));
-			$o->query($sql);
-			$n=$o->fetch_array();
-			$sql=sprintf("update %s set n=n-1 where n>=%s and cid=%s",$TABLE,$n["n"],$g->f("cid"));
-			$o->query($sql);
-		}
-		$o=new dbutl($TABLE);
-		$e=$o->remove($g->f("nid"));
+		$sql = <<<SQL
+DELETE FROM pickup_athletes_big4
+WHERE u_headline_id = {$u_headline_id}
+AND player_id = {$g->f("nid")}::INTEGER
+SQL;
+
+    $e=$o->query($sql);
 
 	}
 }elseif($q->get_dir()===4){
@@ -233,7 +121,7 @@ SQL;
 
   $sql = <<<SQL
 SELECT ply.*, sort_no
-FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.category_id = uh.d1
+FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.u_headline_id = uh.id
   INNER JOIN tbl_player ply ON big4.player_id = ply.id
 WHERE uh.cid = 96 AND uh.qid = {$g->f("rid")}
 GROUP BY ply.id, ply.name, ply.name_kana, ply.competition, ply.description, ply.n, ply.flag, ply.img1, ply.link_word,
@@ -242,8 +130,8 @@ ORDER BY sort_no
 SQL;
 
   $o->query($sql);
-  $III=0;
 
+  $III=0;
   while($f=$o->fetch_array($III)){
     $p[]=$f;
     $III++;

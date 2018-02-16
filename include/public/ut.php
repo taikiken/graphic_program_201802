@@ -1497,4 +1497,21 @@ EOF;
     $o->query($sql);
     return $o->fetch_all();
   }
+
+  function get_u_headline_id($cid, $rid)
+	{
+    global $o;
+
+    $sql = <<<SQL
+SELECT id
+FROM u_headline
+WHERE cid = {$cid}
+AND qid = {$rid}
+LIMIT 1
+SQL;
+
+    $o->query($sql);
+    $f = $o->fetch_array();
+    return $f['id'];
+	}
 ?>
