@@ -190,6 +190,12 @@ export class Empty {
    * @returns {string} パスに?Date.now()をつけて返します
    */
   static refresh(path) {
-    return `${path}?${Date.now()}`;
+    // すでに query がついている可能性あり
+    if (path.indexOf('?') !== -1) {
+      // クエリあり
+      return `${path}_v=${Date.now()}`;
+    }
+    // クエリなし
+    return `${path}?_v=${Date.now()}`;
   }
 }
