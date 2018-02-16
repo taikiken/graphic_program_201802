@@ -76,7 +76,7 @@ export default class SPComponentSingleHeadlineArticleAd extends React.Component 
       return;
     }
     const { ad } = this.props;
-    if (ad === null) {
+    if (!ad) {
       return;
     }
     // console.log('this.props', this.props);
