@@ -1,6 +1,6 @@
 <?php
 
-$target="2017a";
+$target="2018s";
 preg_match("/([0-9]{4})([a-z]{1})/",$target,$match);
 $year=$match[1];
 $season=$match[2]=="a"?"autumn":"spring";
