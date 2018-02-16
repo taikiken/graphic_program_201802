@@ -1436,7 +1436,7 @@ SQL;
   return $res->name_e;
 }
 
-function get_pickup_players($category_id = null, $player_id = null, $limit = null) {
+function get_pickup_players($category_id = null, $player_id = null, $limit = null, $big4_flag = false) {
   global $o;
 
   $sql = <<<SQL
@@ -1447,6 +1447,15 @@ FROM
     INNER JOIN u_categories uc ON repo.category = uc.id
     INNER JOIN u_headline uh ON uh.cid = repo.id
     INNER JOIN tbl_player p ON uh.d2 = p.id
+SQL;
+
+  if ($big4_flag)
+	{
+		$sql .= ' INNER JOIN pickup_athletes_big4 big4 ON uh.id = big4.u_headline_id ';
+	}
+
+  $sql .= <<<SQL
+  
 WHERE
     rid = 95
     AND repo.flag = 1
@@ -1462,9 +1471,20 @@ SQL;
   if ($category_id !== null) {
     $sql .= " AND uc.id = '{$category_id}'";
   }
+  if ($big4_flag) {
+    $sql .= " AND p.id = big4.player_id";
+  }
   $sql .= ' GROUP BY p.id, p.name, p.name_kana, p.competition, p.description, p.n, p.flag, p.img1, p.link_word, p.category,
   p.og_img, p.seo_description, p.seo_keyword, p.m_time, p.u_time';
-  $sql .= " ORDER BY max_h_n";
+
+  if ($big4_flag)
+  {
+    $sql .= " ,big4.sort_no ORDER BY big4.sort_no";
+  }
+  else
+	{
+		$sql .= " ORDER BY max_h_n";
+  }
 
   if ($limit !== null) {
     $sql .= " LIMIT {$limit}";
@@ -1475,28 +1495,6 @@ SQL;
   return $o->fetch_all();
 }
 
-  /**
-   * /category/crazy/ で表示する4件固定対応
-   * @return array
-   */
-  function get_pickup_players_ca_top() {
-    global $o;
-
-    $sql = <<<EOF
-SELECT p.*
-FROM u_headline uh
-  INNER JOIN tbl_player p ON uh.d2 = p.id
-WHERE d2 IN (21, 9, 16, 20)
-GROUP BY p.id, p.name, p.name_kana, p.competition, p.description, p.n, p.flag, p.img1, p.link_word, p.category,
-  p.og_img, p.seo_description, p.seo_keyword, p.m_time, p.u_time, uh.d2
-ORDER BY CASE WHEN d2 = 21
-  THEN 1
-         ELSE d2 END
-EOF;
-
-    $o->query($sql);
-    return $o->fetch_all();
-  }
 
   function get_u_headline_id($cid, $rid)
 	{
