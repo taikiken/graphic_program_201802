@@ -71,18 +71,6 @@ foreach($items as $item)
     $pref   = (string)$item->pref;
     $i = 0;
     $pref_explode = explode(",",$pref);
-    foreach($pref_explode as $prefs_explode){
-        if ($i === 0){
-           $pref_explode_head2 = $prefs_explode;
-        }
-        else{
-            $pref_explode_head2 = $pref_explode_head2.",".$prefs_explode;
-        }
-        if ($i === 1){
-            break;
-        }
-        $i = $i + 1;
-    }
     $body = (string)$item->description;
     $modbody = modifytag_New(
         str_replace('<p>&nbsp;</p>', '',
@@ -250,7 +238,7 @@ foreach($items as $item)
             }
         }
         if(! empty($region)) {
-            $sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref_explode_head2}');";
+            $sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref_explode[0]}');";
         }
     }
     if($sqla){
