@@ -4,6 +4,7 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=53;
+$MEDIANAME="MELOS −メロス−";
 
 $o=new db;
 $o->connect();
@@ -134,8 +135,6 @@ for($i=0;$i<count($data);$i++)
 
 	if(strlen($f["id"])>0){
 		
-		var_dump(array("title"=>$s["title"],"update"=>$s["a_time"],"original"=>$f["a_time"]));
-		
 		if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 			if(strlen($s["t30"])>0){
 				if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
@@ -165,7 +164,7 @@ for($i=0;$i<count($data);$i++)
 			//削除フラグがあればスキップ
 		}
 
-
+                $TITLE[] = pg_escape_string($data[$i]["title"]);
 		$s["d1"]=3;
 		$s["d2"]=$MEDIAID;
 		$s["m4"]=$data[$i]["media"]=="flash"?131:132; /* 速報 */
@@ -189,6 +188,6 @@ for($i=0;$i<count($data);$i++)
 
 }
 
-die(count($data) ." articles are fetched");
+include $INCLUDEPATH.'public/display.php';
 
 ?>
