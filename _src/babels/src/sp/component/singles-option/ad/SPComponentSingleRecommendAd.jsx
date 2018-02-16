@@ -68,6 +68,10 @@ export default class SPComponentSingleRecommendAd extends React.Component {
    * mount delegate - ad 発行します
    */
   componentDidMount() {
+    const { ad } = this.props;
+    if (!ad) {
+      return;
+    }
     if (this.container) {
       // console.log('SPComponentSingleRecommendAd.componentDidMount', this.container);
       this.ad();
