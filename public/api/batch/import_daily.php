@@ -72,7 +72,7 @@ for($i=0;$i<count($data);$i++){
 	$s["t9"]=$data[$i]["link"];
 	$s["t7"]=$data[$i]["guid"];
 
-	if(strlen($data[$i]["title"])>0)$k[]=$data[$i]["title"];
+	if(strlen($data[$i]["keyword"])>0)$k[]=$data[$i]["keyword"];
 	$keyword=implode(",",$k);
 	$s["keyword"]=$keyword;
 
