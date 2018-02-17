@@ -545,11 +545,65 @@
 
 
 
+  //.paraboard__detail__logo_block
+  .paraboard__detail__logo_block {
+    margin: 0 -500em;
+    padding: 0 500em;
+    background-color: #2d3137;
+
+    //.paraboard__detail__logo_block__inner
+    &__inner {
+      display: table;
+      width: 1090px;
+      height: 60px;
+      margin: 0 auto;
+    }
+
+    //.paraboard__detail__logo_block__logo
+    &__logo {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    //.paraboard__detail__logo_block__btn
+    &__btn {
+      display: table-cell;
+      text-align: right;
+      vertical-align: middle;
+
+      //.paraboard__detail__logo_block__btn__link
+      &__link {
+        @include link-decoration(#e83851, #e83851, none, underline);
+        display: inline-block;
+        font-weight: bold;
+        font-size: fz(14);
+
+        &:after {
+          content: "";
+          position: relative;
+          top: -1px;
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          margin-left: 4px;
+          border-top: 2px solid #e83851;
+          border-right: 2px solid #e83851;
+          transform: rotate(45deg);
+          @include hide-text;
+        }
+      }
+    }
+  }
+
+
+
+
+
   //.paraboard__detail__header
   .paraboard__detail__header {
     margin: 0 -500em;
     padding: 0 500em;
-    background: #3b3f46 url(/assets/images/para-board/detail-heading-bg.png) center center no-repeat;
+    background-color: #3b3f46;
 
     //.paraboard__detail__header__outer
     &__outer {

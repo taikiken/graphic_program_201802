@@ -4,10 +4,137 @@
  * @since 2018-01-30
  */
 ?>
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
+  <meta charset="UTF-8">
+
+
+<?php include_once __DIR__."/../../_head.php"; ?>
+
+    <?php if(count($page['photo']) > 0):?>
+
+        <link rel="stylesheet" href="/assets/css/style_sp.css?v=<?php echo $page['version']; ?>">
+        <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
+    <?php endif;?>
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+  <?php
+  // header 表示条件 設定
+  $template_name = $page['template'];
+
+  $page_has_header = false;
+
+  if (
+  $template_name == 'index' ||
+  $template_name == '404' ||
+  $template_name == 'category' ||
+  $template_name == 'p' ||
+  $template_name == 'comment' ||
+  $template_name == 'search' ||
+  $template_name == 'signup_login' ||
+  $template_name == 'settings' ||
+  $template_name == 'settings.social' ||
+  $template_name == 'settings.account' ||
+  $template_name == 'settings.interest' ||
+  $template_name == 'settings.deactivate' ||
+  $template_name == 'mypage' ||
+  $template_name == 'mypage.activities' ||
+  $template_name == 'notifications' ||
+  $template_name == 'logout' ||
+  $template_name == 'crazy'
+  ) {
+    $page_has_header = true;
+  }
+  ?>
 <?php
-// 汎用 header
-include_once __DIR__."/../../mobile/_header.php";
+if ($page_has_header) :
+# ---------------------------------------------------------------------------
+# Syn. require module
 ?>
+<script src="/assets/sp/js/libs/synapse/synapse.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
+<?php
+# end of Syn. require module
+# ---------------------------------------------------------------------------
+endif;
+?>
+<?php
+// app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+// @since 2017-08-21
+?>
+<script src="/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <?php
+  /*
+   Syn. menu end point 本番環境では
+    ```
+    /assets/js/bundle/main.bundle.js?syn=1
+    ```
+    ?syn=1 を削除してください
+    テストの時はつけてください
+   */
+  ?>
+  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
+<?php include_once __DIR__.'/../../_head_bottom.php'; ?>
+
+<?php
+// .whole へ追加する CSS class を設定します
+$whole_classes = array();
+
+// $page['template_classname'] に設定されている CSS class を追加します
+if ( !empty( $page['template_classname'] ) ) {
+  $whole_classes[] = $page['template_classname'];
+}
+// 記事詳細
+if ( $page['template'] == 'p' || $page['template'] == 'comment') {
+  // 記事詳細へ識別 CSS class 追加
+  $whole_classes[] = 'post-single';
+
+  // theme 設定 class を追加
+  // JSON レスポンスの theme.base を CSS class へ追加します
+  if ( $page['theme' ]['base'] ) {
+    $whole_classes[] = ['theme']['base'];
+  }
+}
+
+// in category
+if ( $template_name == 'category' ) {
+  // @since 2016-09-01
+  // https://github.com/undotsushin/undotsushin/issues/1053
+  $whole_classes[] = 'layout-list';
+  // ---[end 2016-09-01]---
+
+  // template_classname があれば
+  if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
+    $whole_classes[] = $page['template_classname'];
+  }
+
+  // @see https://github.com/undotsushin/undotsushin/issues/1891#issuecomment-298291706
+  // @since 2017-05-08 - category slug を追加する
+  $whole_classes[] = $page['category']['slug'];
+} elseif ( $template_name == 'index' ) {
+  // @since 2016-09-01
+  // https://github.com/undotsushin/undotsushin/issues/1053
+  $whole_classes[] = 'home';
+  // ---[end 2016-09-01]---
+} elseif ( $template_name == 'p' ) {
+  // @see https://github.com/undotsushin/undotsushin/issues/1891#issuecomment-298291706
+  // @since 2017-05-08 - category slug を追加する
+  $whole_classes[] = $page['category']['slug'];
+}
+?>
+
+</head>
+<body>
+<div id="page" class="whole <?php echo join( ' ', $whole_classes);?>">
+
+<header class="head-sec">
+  <div class="head-sec-inner">
+    <h1><a href="/">SPORTS BULL</a></h1>
+  </div><!-- /.head-sec-inner -->
+</header><!-- /.head-sec -->
 
 <div class="body-sec">
 <?php
@@ -22,8 +149,14 @@ $competition_response_file_enable = !empty($competition_response_file);
 <?php
 // header
 ?>
+<div class="paraboard__detail__logo_block">
+  <p class="paraboard__detail__logo_block__logo"><a href="/para-board/"><img src="/assets/sp/images/para-board/detail-heading.png" alt="PARA BOARD"></a></p>
+  <div class="paraboard__detail__logo_block__btn">
+    <a class="paraboard__detail__logo_block__btn__link" href="/para-board/">日程・結果一覧</a>
+  </div><!-- /.paraboard__detail__logo_block__btn -->
+</div><!-- /.paraboard__detail__logo_block -->
+
 <header class="paraboard__detail__header">
-  <p class="paraboard__detail__header__logo"><img src="/assets/images/para-board/detail-heading.png" alt="PARA BOARD"></p>
   <h1 class="paraboard__detail__header__heading"><?php echo $competition_response['competition_name']; ?></h1>
   <p class="paraboard__detail__header__category">
     <span class="paraboard__detail__header__category__icon"><img src="<?php echo $competition_response['icon']; ?>" alt=""></span>

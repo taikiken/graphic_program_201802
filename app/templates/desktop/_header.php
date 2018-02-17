@@ -248,6 +248,12 @@ if (
   // ref: UNDO_SPBL-150 【課題管理】一面リニューアル / ユーザーへのお知らせ表示
   ?>
   <div id="js-announce-container"></div>
+<?php else : ?>
+  <header class="head-sec">
+    <div class="head-sec-inner">
+      <h1><a href="/">SPORTS BULL</a></h1>
+    </div><!-- /.head-sec-inner -->
+  </header><!-- /.head-sec -->
 <?php
 endif;
 // header 表示条件 end

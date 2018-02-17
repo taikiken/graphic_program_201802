@@ -7,7 +7,7 @@
 //
 // Styleguide 2.20.0
 
-.whole.parasports {
+.whole.parasposts {
   .paraboard__widget {
 
     &:before {
@@ -101,7 +101,7 @@
         &__link {
           position: relative;
           display: block;
-          padding: (16/2)+px perCalc(15, 750);
+          padding: (16/2)+px (60/2)+px (16/2)+px perCalc(15, 750);
           @include link-decoration(null, null, none, none);
           background-color: #474e5c;
         } //.paraboard__widget__list__game__link
@@ -538,30 +538,71 @@
 
 
 
+  //.paraboard__detail__logo_block
+  .paraboard__detail__logo_block {
+    display: table;
+    width: 100%;
+    height: (90/2)+px;
+    background-color: #2d3137;
+
+    //.paraboard__detail__logo_block__logo
+    &__logo {
+      display: table-cell;
+      vertical-align: middle;
+      padding-left: perCalc(36, 750);
+
+      img {
+        width: (200/2)+px;
+        vertical-align: middle;
+      }
+    }
+
+    //.paraboard__detail__logo_block__btn
+    &__btn {
+      display: table-cell;
+      padding-right: perCalc(36, 750);
+      text-align: right;
+      vertical-align: middle;
+
+      //.paraboard__detail__logo_block__btn__link
+      &__link {
+        @include link-decoration(#e83851, #e83851, none, none);
+        display: inline-block;
+        font-weight: bold;
+        font-size: fz(24/2);
+
+        &:after {
+          content: "";
+          position: relative;
+          top: -1px;
+          display: inline-block;
+          width: 5px;
+          height: 5px;
+          margin-left: 4px;
+          border-top: 2px solid #e83851;
+          border-right: 2px solid #e83851;
+          transform: rotate(45deg);
+          @include hide-text;
+        }
+      }
+    }
+  }
+
+
+
+
+
   //.paraboard__detail__header
   .paraboard__detail__header {
     position: relative;
     padding: (48/2)+px perCalc(15, 750) (32/2)+px;
-    background: #474e5c url(/assets/sp/images/para-board/detail-heading-bg_left.png) left center no-repeat;
+    background-color: #474e5c;
     background-size: auto 100%;
     text-align: center;
-
-    &:before {
-      position: absolute;
-      top: 0;
-      right: 0;
-      content: "";
-      width: 100%;
-      height: 100%;
-      background: url(/assets/sp/images/para-board/detail-heading-bg_right.png) right center no-repeat;
-      background-size: auto 100%;
-      z-index: 1;
-    }
 
     //.paraboard__detail__header__logo
     &__logo {
       position: relative;
-      z-index: 2;
       line-height: 1;
 
       img {
