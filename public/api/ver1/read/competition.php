@@ -25,7 +25,7 @@ WHERE
 AND
     cmp.is_public IS TRUE
 AND
-    cmp.is_delete IS FALSE
+    cmp.deleted_at IS NULL
 ORDER BY
     start_date_time DESC;
 SQL;

@@ -51,7 +51,7 @@ LEFT JOIN
 WHERE
     cmp.is_public IS TRUE
 AND
-    cmp.is_delete IS FALSE
+    cmp.deleted_at IS NULL
 AND
     start_date_time >= '{$old_date_time}'
 AND
