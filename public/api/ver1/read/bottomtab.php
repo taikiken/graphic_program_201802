@@ -31,12 +31,14 @@ $sql = <<<SQL
 SELECT
     parent.id AS parent_id,
     parent.name AS parent_name,
-    parent.icon AS parent_icon,
     parent.sort_no AS parent_sort_no,
     child.id,
     child.name,
     child.link,
     child.icon,
+    child.icon_sp,
+    child.icon_ios,
+    child.icon_android,
     child.sort_no
 FROM bottom_tab_nodes node
 INNER JOIN bottom_tab_categories child
@@ -60,6 +62,9 @@ SQL;
                         'dispName'  => $f['name'],
                         'unread'    => false,
                         'icon'      => $ImgPath.$f['icon'],
+                        'icon_sp'      => $ImgPath.$f['icon_sp'],
+                        'icon_ios'      => $ImgPath.$f['icon_ios'],
+                        'icon_android'      => $ImgPath.$f['icon_android'],
                         'link'      => $f['link']
                     ];
             }
@@ -83,12 +88,14 @@ $sql = <<<SQL
 SELECT
     parent.id AS parent_id,
     parent.name AS parent_name,
-    parent.icon AS parent_icon,
     parent.sort_no AS parent_sort_no,
     child.id,
     child.name,
     child.link,
     child.icon,
+    child.icon_sp,
+    child.icon_ios,
+    child.icon_android,
     child.sort_no
 FROM bottom_tab_nodes node
 INNER JOIN bottom_tab_livescores child
@@ -112,6 +119,9 @@ SQL;
                         'dispName'  => $f['name'],
                         'unread'    => false,
                         'icon'      => $ImgPath.$f['icon'],
+                        'icon_sp'      => $ImgPath.$f['icon_sp'],
+                        'icon_ios'      => $ImgPath.$f['icon_ios'],
+                        'icon_android'      => $ImgPath.$f['icon_android'],
                         'link'      => $f['link']
                     ];
             }
