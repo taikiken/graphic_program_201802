@@ -118,6 +118,15 @@ if (!empty($competition_response)) :
 
 <div class="body-sec">
 
+<div class="paraboard__detail__logo_block">
+  <div class="paraboard__detail__logo_block__inner">
+    <p class="paraboard__detail__logo_block__logo"><a href="/para-board/"><img src="/assets/images/para-board/detail-heading.png" alt="PARA BOARD"></a></p>
+    <div class="paraboard__detail__logo_block__btn">
+      <a class="paraboard__detail__logo_block__btn__link" href="/para-board/">日程・結果一覧</a>
+    </div><!-- /.paraboard__detail__logo_block__btn -->
+  </div><!-- /.paraboard__detail__logo_block__inner -->
+</div><!-- /.paraboard__detail__logo_block -->
+
 <header class="paraboard__detail__header<?php echo $competition_response_file_class; ?>">
   <div class="paraboard__detail__header__outer">
     <div class="paraboard__detail__header__inner">
