@@ -12,6 +12,6 @@ RewriteRule ^schedule$ /api/ver1/static/big6tv2017s_schedule.json [L]
 # live
 RewriteRule ^live$ /api/big6tv/live.php [L]
 # live - 2017autumn
-RewriteRule ^live/2017a$ /api/big6tv/live.php [L]
+RewriteRule ^live/(20[0-9]{2}[as])$ /api/big6tv/live.php?season=$1 [L]
 # live - json
 # RewriteRule ^live$ /api/ver1/static/big6live.json [L]
