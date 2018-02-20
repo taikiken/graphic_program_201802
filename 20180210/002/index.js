@@ -21,7 +21,7 @@
 // }
 
 // import fs from 'fs';
-const fs = require('fs');5
+const fs = require('fs');
 
 /**
  * Date 型のデータをフォーマットして返す
