@@ -172,7 +172,7 @@ $div=ceil($N/$offset);
 
 if($TABLE=="repo_n"&&!preg_match("#/photo/#",$_SERVER["REQUEST_URI"])){
 	if(!$_COOKIE["orderby"]&&!$_COOKIE["exuser"]&&!$_COOKIE["excategory"]){
-		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE," desc",dblm($no,$offset));
+		$sql=sprintf("select %s from %s%s order by coalesce(always_update_flag,0) desc, n%s %s ",$FIELD,$TABLE,$WHERE," desc",dblm($no,$offset));
 		setcookie("orderby","",time()-3600,"/editdm/");
 	}else{
 		$sql=sprintf("select %s from %s%s%s%s order by %s %s",$FIELD,$TABLE,$WHERE,$exuser,$excategory,$orderby,dblm($no,$offset));
