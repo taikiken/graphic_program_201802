@@ -91,8 +91,6 @@ FROM
     competition_articles acmp
 WHERE
     acmp.competition_id = {$id}
-AND
-    acmp.is_public IS TRUE
 ORDER BY
     acmp.type ASC,
     acmp.created_at ASC;
