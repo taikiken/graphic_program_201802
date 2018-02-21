@@ -41,16 +41,18 @@ SQL;
 }elseif($q->get_dir()===1){  // 編集
 	if($q->get_file()===0){
 
-
+	  // カテゴリidをd1にしないといけない
       $sql= <<<SQL
-SELECT u_headline_id, player_id, sort_no
+SELECT u_headline_id, d1, sort_no
 FROM pickup_athletes_big4
+INNER JOIN u_headline uh ON u_headline_id = uh.id
 WHERE player_id = {$g->f("id")}::INTEGER
 SQL;
 
 		$o->query($sql);
 		$p=$o->fetch_array();
     $p['sort_no'] = $p['sort_no'] - 1;
+    $p['d2'] = $g->f("id"); // 選手IDをd2にしないといけない
 
 		include $INCLUDEPATH."formback.php";
 	}elseif($q->get_file()===1){
@@ -71,7 +73,7 @@ u_headline_id = {$u_headline_id},
 player_id = {$sv['d2']}::INTEGER, 
 sort_no = {$sort_no}, 
 updated_at = NOW()
-WHERE player_id = {$g->f("nid")}::INTEGER
+WHERE player_id = {$g->f("id")}::INTEGER
 SQL;
     $e=$o->query($sql);
 
@@ -86,7 +88,7 @@ SELECT ply.*, sort_no
 FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.u_headline_id = uh.id
   INNER JOIN tbl_player ply ON big4.player_id = ply.id
 WHERE uh.cid = 96 AND uh.qid = {$g->f("rid")}
-AND big4.player_id = {$g->f("nid")}
+AND big4.player_id = {$g->f("id")}
 SQL;
 
     $o->query($sql);
@@ -105,7 +107,7 @@ SQL;
 		$sql = <<<SQL
 DELETE FROM pickup_athletes_big4
 WHERE u_headline_id = {$u_headline_id}
-AND player_id = {$g->f("nid")}::INTEGER
+AND player_id = {$g->f("id")}::INTEGER
 SQL;
 
     $e=$o->query($sql);
