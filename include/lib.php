@@ -161,7 +161,7 @@ $sql = <<<SQL
 SELECT COUNT(ply.id) AS n
 FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.u_headline_id = uh.id
   INNER JOIN tbl_player ply ON big4.player_id = ply.id
-WHERE uh.cid = 96 AND uh.qid = {$g->f("rid")}
+WHERE uh.cid = {$g->f("cid")} AND uh.qid = {$g->f("rid")}
 SQL;
 
 }
