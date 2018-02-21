@@ -53,17 +53,19 @@
         <link rel="stylesheet" href="/stats/assets/univbb/css/style.css">
         <!-- CSS -->
         <!-- Player original CSS-->
-        <link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video-js.css" rel="stylesheet">
+        <!--<link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video-js.css" rel="stylesheet">-->
         <!-- Video switcher CSS -->
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-resolution-switcher/0.4.2/videojs-resolution-switcher.css">
+        <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-resolution-switcher/0.4.2/videojs-resolution-switcher.css">-->
         <!-- Google IMA CSS -->
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.css" />
+        <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.css" />-->
         <!-- Player skin custom CSS -->
-        <link href="/stats/assets/univbb/css/videojs.custom.css" rel="stylesheet">
+        <!--<link href="/stats/assets/univbb/css/videojs.custom.css" rel="stylesheet">-->
         <!-- Player skin custom CSS for Ads -->
-        <link rel="stylesheet" href="/stats/assets/univbb/css/videojs.ima.css" />
-        <link rel="stylesheet" href="/stats/assets/univbb/css/video.css" />
+        <!--<link rel="stylesheet" href="/stats/assets/univbb/css/videojs.ima.css" />
+        <link rel="stylesheet" href="/stats/assets/univbb/css/video.css" />-->
+
         <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.css" /> -->
+        <link rel="stylesheet" href="/stats/assets/univbb/css/videoPlayer.css" />
         <!-- Javascript -->
 
         <script>
@@ -100,7 +102,8 @@
         <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.js"></script> -->
         <script src="/big6tv/js/libs.js"></script>
         <!-- Google Analytics -->
-        <script src="/big6tv/js/videojs.ga.js"></script>
+        <!--<script src="/big6tv/js/videojs.ga.js"></script>-->
+        <script src="/big6tv/js/videoPlayer.js"></script>
 
         <!-- google -->
         <link rel="stylesheet" href="/assets/google/style.css">
@@ -173,12 +176,17 @@
                                 <img src="/big6tv/img/pc_bg6tv_live.jpg" alt="big6.TV Presented by OPEN HOUSE">
                             </picture>
                         </div> -->
-                        <div id="liveVideo">
+                        <!--<div id="liveVideo">
                             <p class="video_alt"></p>
                             <div class="video__wrapper">
                                 <video id="content_video" class="video-js vjs-default-skin" preload="none" controls playsinline></video>
                             </div>
                             <script src="/big6tv/js/vplayer.js"></script>
+                        </div>-->
+                        <div id="VideoPlayer">
+                            <div class="inner_container"></div>
+                            <div id="placeHolder"></div>
+                            <script src="js/videoPlayer.js"></script>
                         </div>
                         <p class="live-help">
                             動画の再生がうまくいかない場合は<a href="/big6tv/help/" style="color:red !important;">ヘルプ</a>をご覧ください。
