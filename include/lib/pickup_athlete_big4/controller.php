@@ -43,13 +43,14 @@ SQL;
 
 
       $sql= <<<SQL
-SELECT u_headline_id, player_id, sort_no -1
+SELECT u_headline_id, player_id, sort_no
 FROM pickup_athletes_big4
-WHERE player_id = {$g->f("nid")}::INTEGER
+WHERE player_id = {$g->f("id")}::INTEGER
 SQL;
 
 		$o->query($sql);
 		$p=$o->fetch_array();
+    $p['sort_no'] = $p['sort_no'] - 1;
 
 		include $INCLUDEPATH."formback.php";
 	}elseif($q->get_file()===1){
