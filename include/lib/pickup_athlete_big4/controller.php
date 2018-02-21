@@ -137,7 +137,7 @@ SQL;
 SELECT ply.*, sort_no
 FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.u_headline_id = uh.id
   INNER JOIN tbl_player ply ON big4.player_id = ply.id
-WHERE uh.cid = 96 AND uh.qid = {$g->f("rid")}
+WHERE uh.cid = {$g->f("cid")} AND uh.qid = {$g->f("rid")}
 GROUP BY ply.id, ply.name, ply.name_kana, ply.competition, ply.description, ply.n, ply.flag, ply.img1, ply.link_word,
   ply.category, ply.og_img, ply.seo_description, ply.seo_keyword, ply.m_time, ply.u_time, big4.sort_no
 ORDER BY sort_no
