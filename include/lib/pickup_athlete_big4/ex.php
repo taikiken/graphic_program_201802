@@ -30,8 +30,9 @@ while($FPI=$o->fetch_array($YII)){
 
 include $INCLUDEPATH."print_write.php";
 
-if(!$q->get_dir()==2){
-	$a=array("表示設定","flag",array("表示","非表示"),"");
+
+if ($q->get_dir() != 2) {
+  $a=array("表示設定","flag",array("表示","非表示"),"");
   $a[] = array("inputradio", "表示順", "sort_no", array("1", "2", "3", "4"), "", "", "", "");
   include $INCLUDEPATH."print_write.php";
 
