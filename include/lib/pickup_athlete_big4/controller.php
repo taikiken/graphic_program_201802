@@ -94,16 +94,18 @@ SQL;
 
     $o = new dbutl($TABLE);
 
+    // カテゴリidをd1にしないといけない
     $sql = <<<SQL
-SELECT ply.*, sort_no
+SELECT ply.name, d1, sort_no
 FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.u_headline_id = uh.id
   INNER JOIN tbl_player ply ON big4.player_id = ply.id
-WHERE uh.cid = 96 AND uh.qid = {$g->f("rid")}
+WHERE uh.cid = {$g->f("cid")} AND uh.qid = {$g->f("rid")}
 AND big4.player_id = {$g->f("id")}
 SQL;
 
     $o->query($sql);
     $p=$o->fetch_array();
+    $p['d2'] = $g->f("id"); // 選手IDをd2にしないといけない
     include $INCLUDEPATH."formback.php";
 
 	}elseif($q->get_file()===1){
@@ -123,12 +125,6 @@ SQL;
 
     $e=$o->query($sql);
 
-	}
-}elseif($q->get_dir()===4){
-	if($q->get_file()===0){
-		include $INCLUDEPATH."formback.php";
-	}elseif($q->get_file()===1){
-		include $INCLUDEPATH."search.php";
 	}
 }elseif($q->get_dir()===3){ // 一覧画面
   $o = new dbutl($TABLE);
