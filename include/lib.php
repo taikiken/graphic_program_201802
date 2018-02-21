@@ -152,12 +152,10 @@ elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 94 && !preg_match("#/ph
 
 }elseif($CURRENTDIRECTORY=="notice"){
 	$sql=sprintf("select count(*) as n from %s%s",$TABLE,$WHERE);
-}elseif($CURRENTDIRECTORY=="tabs"){
-	$sql=sprintf("select count(*) as n from %s",$TABLE);
 }
 elseif ($CURRENTDIRECTORY=="pickup_athlete_big4")
 {
-$sql = <<<SQL
+  $sql = <<<SQL
 SELECT COUNT(ply.id) AS n
 FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.u_headline_id = uh.id
   INNER JOIN tbl_player ply ON big4.player_id = ply.id
@@ -165,7 +163,9 @@ WHERE uh.cid = {$g->f("cid")} AND uh.qid = {$g->f("rid")}
 SQL;
 
 }
-
+elseif($CURRENTDIRECTORY=="tabs"){
+	$sql=sprintf("select count(*) as n from %s",$TABLE);
+}
 
 
 $o->query($sql);
