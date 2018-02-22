@@ -19,7 +19,7 @@
     height: 60px;
     color: #fff;
     font-weight: 700;
-    border-top: 4px solid #0e357f;
+    border-top: 4px solid #cc141d;
     padding: 0 20px
   }
 
@@ -129,7 +129,7 @@
     margin-bottom: 10px;
     height: 160px;
     width: 160px;
-    border: 2px solid #0e357f;
+    border: 2px solid #cc141d;
     background-color: #000
   }
 
@@ -167,7 +167,7 @@
   }
 
   .pickup_player_list .thumb_area li a:hover .txt_area .name {
-    color: #0e357f
+    color: #cc141d
   }
 
   .pickup_player_list .thumb_area li .txt_area p {
