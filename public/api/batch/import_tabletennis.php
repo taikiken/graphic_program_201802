@@ -10,7 +10,15 @@ include $INCLUDEPATH.'public/import.php';
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-$MEDIAID = 80;
+if(UT_ENV == 'PRODUCTION' || UT_ENV == 'STAGING')
+{
+  $MEDIAID = 74;
+}
+else
+{
+  $MEDIAID = 80;
+
+}
 const MEDIA_NAME = 'テレビ東京卓球ニュース';
 $MEDIANAME = MEDIA_NAME;
 const SPECIAL_CHAR = 'www.youtube.com/embed';
@@ -22,18 +30,18 @@ const RSS_FILE = 'http://www.tv-tokyo.co.jp/tabletennis/sportsbull_rss.xml';
 
 $o = new db;
 $o->connect();
-/*
- $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from repo_e where nid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from repo_n where d2={$MEDIAID};";
- $o->query($sql);
-*/
+
+// $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from repo_e where nid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from repo_n where d2={$MEDIAID};";
+// $o->query($sql);
+
  //exit;
 
 $sql = sprintf("SELECT id,name,name_e,yobi FROM u_categories WHERE flag=1 AND id NOT IN(%s) ORDER BY id DESC",implode(",", $excategory));
