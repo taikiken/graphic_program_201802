@@ -23,11 +23,10 @@
 // @since 2016-01-13
 // hotfix @see https://github.com/undotsushin/undotsushin/issues/1468
 //if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
-// @since 2016-01-13
-// hotfix だと記事一覧の動画が再生できない
-// 記事詳細かつサッカーカテゴリーではない -> ファイル読み込む
-// @see https://undo-tsushin.slack.com/archives/product-web/p1484298774000116
-if ( $page['template'] == 'p' && $page['category']['slug'] != 'soccer' ) :
+if ( $page['template'] == 'p'
+  && $page['post']['media']['video']['player'] == 'brightcove'
+  && $page['post']['media_vk_refid'] == ''
+) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
 ?>
@@ -110,7 +109,7 @@ if ( !empty( $page['template_classname'] ) ) {
   $whole_classes[] = $page['template_classname'];
 }
 // 記事詳細
-if ( $template_name == 'p' || $template_name == 'comment' ) {
+if ( $template_name == 'p' ) {
 
   // 記事詳細へ識別 CSS class 追加
   $whole_classes[] = 'post-single';
@@ -158,7 +157,6 @@ if (
   $template_name == '404' ||
   $template_name == 'category' ||
   $template_name == 'p' ||
-  $template_name == 'comment' ||
   $template_name == 'search' ||
   $template_name == 'settings' ||
   $template_name == 'settings.social' ||
