@@ -74,6 +74,11 @@ html.undotsushin-android #_popIn_about_inner iframe
 }
 
 
+html:not(.mobile):not(.android) ._popIn_recommend_credit
+{
+  padding: 20px 0;
+}
+
 
 /*
 
