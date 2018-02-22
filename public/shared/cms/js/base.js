@@ -455,6 +455,23 @@ $(function(){
 				u=u.replace("{X}",2);
 			}
 
+            var path = location.pathname ;
+            if ( path.match(/pickup_athlete_big4/)) {
+                u = "SELECT\n" +
+                    "  p.id, p.name AS title,\n" +
+                    "  MAX(uh.n) AS max_h_n\n" +
+                    "FROM repo\n" +
+                    "  INNER JOIN u_categories uc ON repo.category = uc.id\n" +
+                    "  INNER JOIN u_headline uh ON uh.cid = repo.id\n" +
+                    "  INNER JOIN tbl_player p ON uh.d2 = p.id\n" +
+                    "WHERE rid = 95 AND repo.flag = 1 AND uc.flag = 1 AND uh.flag = 1 AND p.flag = 1 AND uc.id = '" + p[0].replace(/[^0-9]/g, "") + "'\n" +
+                    "GROUP BY p.id, p.name, p.name_kana, p.competition, p.description, p.n, p.flag, p.img1, p.link_word, p.category,\n" +
+                    "  p.og_img, p.seo_description, p.seo_keyword, p.m_time, p.u_time\n" +
+                    "ORDER BY max_h_n";
+            }
+
+            console.log(u);
+
 			$.ajax({
 				type: "POST",
 				url: "/editdm/module/importdata.php",

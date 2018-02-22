@@ -25,3 +25,5 @@ $THIS = 'カテゴリTOPに表示する選手';
 $l[] = sprintf("<li class=\"root\"><a href=\"%s\">%s</a></li>", $ADPATH, "メインメニュー");
 $l[] = sprintf("<li><a href=\"%srepo_s/?rid=95\">%s</a></li>", $ADPATH, '注目の選手');
 $l[] = sprintf("<li>%s</li>", $REPONNAME);
+
+$NUMBERINGOFF=1;
