@@ -4,12 +4,14 @@
 // Theme Dark
 //
 // design module Dark theme
+// body直下のdivに class="whole dark 〜" が付与される
 //
 // Styleguide 2.17.0
 
 $key-color: #cc141d;
 
 .whole.dark {
+
   .body-sec {
     background-color: #000;
 
@@ -23,25 +25,9 @@ $key-color: #cc141d;
     }
   }
 
-  .headline {
-    // リニューアルで不要になりました
-    // // ref. /_src/app/assets/css/module/_index.scss line: 205
-    // &-heading {
-    //   &-title {
-    //     width: 178px;
-    //     height: 20px;
-    //     background: url(/assets/images/common/headline-heading_dark.png) 0 0 no-repeat;
-    //     @include hide-text;
-    //     vertical-align: middle;
-    //   }
 
-    //   &-ruby {
-    //     color: #fff;
-    //   }
-    // }
-  }
-
-
+  // サイドバーウィジェット系
+  // ------------------------------
   .widget-ranking,
   .widget-recommend {
     &-heading,
@@ -72,105 +58,6 @@ $key-color: #cc141d;
     display: inline-block;
   }
 
-  // .foot-sec {
-  //   background-color: #000;
-
-  //   .foot-sec-inner {
-  //     background-color: #fff;
-  //   }
-  // }
-
-  // [ class^="board-" ] {
-  .side-sec {
-
-    .headline-outer .sponsor-link,
-    .sponsor-link-ranking,
-    .sponsor-link-recommend {
-      // ref. /_src/app/assets/css/module/_index.scss line: 254
-      // ref. /_src/app/assets/css/_layout.scss line: 973
-      .adgLink {
-        .adsDescription {
-          color: #fff;
-        }
-
-        &:hover {
-          .adsDescription {
-            color: $key-color !important;
-          }
-        }
-      }
-
-      .adsTitle {
-        &,
-        .adsSponsored {
-          color: #bcb8ad !important;
-        }
-      }
-    }
-    .board-small {
-      .post {
-        @include link-decoration(#fff, #fff, none, none);
-
-        &-date {
-          color: #999;
-        }
-
-        &-heading {
-          color: #fff;
-        }
-
-        &-category {
-          color: #bcb8ad;
-        }
-
-        &:hover {
-          .post-heading {
-            color: $key-color !important;
-          }
-        }
-      }
-    }
-
-    .board-large {
-      .board-item {
-        // border-bottom-color: #1b1b1b;
-        background-color: transparent;
-      }
-
-      .post {
-        @include link-decoration(#fff, null, none, none);
-
-        &:hover {
-          .post-heading {
-            color: $key-color !important;
-          }
-        }
-      }
-    }
-  }
-
-  // .sponsor-link-ranking,
-  // .sponsor-link-recommend {
-  //   .adgLink {
-  //     .adsDescription {
-  //       color: #fff !important;
-  //     }
-
-  //     &:hover {
-  //       .adsDescription {
-  //         color: $key-color !important;
-  //       }
-  //     }
-  //   }
-
-  //   .adsTitle {
-  //     &,
-  //     .adsSponsored {
-  //       color: $key-color !important;
-  //     }
-  //   }
-  // }
-
   .widget-postList {
     .post {
       @include link-decoration(#333, #333, none, none);
@@ -195,6 +82,83 @@ $key-color: #cc141d;
     }
   }
 
+
+  // 一覧系 & アドジェネ広告
+  // ==============================
+  &.layout-list,
+  .side-sec {
+
+    // アドジェネ広告 - 一覧ヘッドラインとサイドバー
+    // ------------------------------
+    .adgLink {
+      .adsBody .adsDescription {
+        color: #fff;
+      }
+
+      &:hover {
+        .adsBody .adsDescription {
+          color: $key-color !important;
+        }
+      }
+
+      .adsBody .adsTitle {
+        &,
+        .adsSponsored {
+          color: #bcb8ad !important;
+        }
+      }
+    }
+
+
+    // 記事誘導 - 一覧とサイドバー
+    // ------------------------------
+    .board-small {
+      .post {
+        @include link-decoration(#fff, #fff, none, none);
+
+        &-date {
+          color: #999;
+        }
+
+        &-heading {
+          color: #fff;
+        }
+
+        &-category {
+          color: #bcb8ad;
+        }
+
+        &:hover {
+          .post-heading {
+            color: $key-color !important;
+          }
+        }
+      }
+    }
+
+
+    .board-large {
+      .board-item {
+        // border-bottom-color: #1b1b1b;
+        background-color: transparent;
+      }
+
+      .post {
+        @include link-decoration(#fff, null, none, none);
+
+        &:hover {
+          .post-heading {
+            color: $key-color !important;
+          }
+        }
+      }
+    }
+
+  }
+
+
+  // もっとみる
+  // ------------------------------
   .board-btn-viewmore {
     //.board-btn-viewmore-link
     &-link {
@@ -209,14 +173,11 @@ $key-color: #cc141d;
       background-image: url("/assets/images/common/preloader_dark.gif");
     }
   }
-} //.dark
 
 
 
-
-
-// post-single
-.whole.dark {
+  // 記事詳細
+  // ------------------------------
   &.post-single {
     .body-sec {
       background-color: #000;
@@ -226,14 +187,11 @@ $key-color: #cc141d;
       }
     }
   }
-}
 
 
 
-
-
-// related-post
-.whole.dark {
+  // 関連記事
+  // ------------------------------
   .related-post {
     .post {
       @include link-decoration(#333, #333, none, none);
@@ -243,4 +201,5 @@ $key-color: #cc141d;
       color: #666;
     }
   }
+
 }
