@@ -830,6 +830,7 @@
   .paraboard__gallery {
     width: 1090px;
     margin-right: auto;
+    margin-bottom: 40px;
     margin-left: auto;
 
     //.gallery--highlight
@@ -1006,6 +1007,10 @@
         background: url(/assets/images/para-board/icon-play.png) 0 0 no-repeat;
         @include hide-text;
       }
+
+      img {
+        width: 100%;
+      }
     }  //.gallery__list__figure
 
 
@@ -1061,13 +1066,16 @@
       color: #888;
       font-size: fz(12);
     }
+
+    img {
+      width: 100%;
+    }
   } //.gallery--post
 
 
 
   //.gallery--photo
   .gallery--photo {
-    margin-bottom: 40px;
 
     //.gallery__list
     .gallery__list {
@@ -1093,5 +1101,10 @@
     .gallery__list__figure {
       width: 340px;
     } //.gallery__list__figure
+
+    //.gallery__list__data
+    .gallery__list__data {
+      display: none;
+    } //.gallery__list__data
   }
 } //.whole.parasports

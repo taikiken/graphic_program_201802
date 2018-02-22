@@ -1111,6 +1111,11 @@
       background-repeat: no-repeat;
       background-size: contain;
     } //.gallery__list__figure
+
+    //.gallery__list__data
+    .gallery__list__data {
+      display: none;
+    } //.gallery__list__data
   } //.gallery--photo
 
 } //.whole.parasports

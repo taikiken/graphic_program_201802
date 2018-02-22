@@ -396,8 +396,15 @@ function competition_summary_tr($provider_name, $title, $option_name = null) {
       ?>
       </tbody>
     </table>
-  </div>
-</div>
+  </div><!-- /.paraboard__detail__overview -->
+
+  <div class="paraboard__detail__powerdby">
+    <p>Powered by<br />
+    <strong>一般社団法人日本FIDバスケットボール連盟</strong></p>
+  </div><!-- /.paraboard__detail__powerdby -->
+</div><!-- /.body-sec-inner -->
+
+</div><!-- /.body-sec -->
 <script>
 (function(window) {
   'use strict';
