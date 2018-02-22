@@ -31,16 +31,16 @@ const RSS_FILE = 'http://www.tv-tokyo.co.jp/tabletennis/sportsbull_rss.xml';
 $o = new db;
 $o->connect();
 
- $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from repo_e where nid in (select id from repo_n where d2={$MEDIAID});";
- $o->query($sql);
- $sql = "delete from repo_n where d2={$MEDIAID};";
- $o->query($sql);
+// $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from repo_e where nid in (select id from repo_n where d2={$MEDIAID});";
+// $o->query($sql);
+// $sql = "delete from repo_n where d2={$MEDIAID};";
+// $o->query($sql);
 
  //exit;
 
