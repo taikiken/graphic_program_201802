@@ -7,12 +7,13 @@ if($q->get_dir()===0){ // 新規
 	if($q->get_file()===0){
 
 	  // 選手カテゴリの初期値
-    $sql = <<<SQL
-SELECT d1
-FROM u_headline
-WHERE cid = {$g->f("cid")}
-AND qid = {$g->f("rid")}
-SQL;
+    // カテゴリidをd1にしないといけない
+    $sql="select category as d1 from repo where id=".$g->f("cid");
+    $o->query($sql);
+    $p=$o->fetch_array();
+    $o->query($sql);
+    $p=$o->fetch_array();
+
     $o->query($sql);
     $p=$o->fetch_array();
 
