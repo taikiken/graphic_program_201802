@@ -47,15 +47,26 @@ $statsItem = array(
   ),
 
   array(
-    'title' => 'サッカー日本代表',
-    'label' => 'サッカー<br />日本代表',
-    'path'  => '/sokuhou/',
+    'title' => 'Jリーグ',
+    'label' => 'Jリーグ',
+    'path'  => '/jleague/match/',
     'icon'  => array(
       'slug'    => 'soccer',
       'is_fill' => false,
       'style'   => '',
     )
   ),
+
+  // array(
+  //   'title' => 'サッカー日本代表',
+  //   'label' => 'サッカー<br />日本代表',
+  //   'path'  => '/sokuhou/',
+  //   'icon'  => array(
+  //     'slug'    => 'soccer',
+  //     'is_fill' => false,
+  //     'style'   => '',
+  //   )
+  // ),
 
   // array(
   //   'title' => 'テニス全豪OP',
