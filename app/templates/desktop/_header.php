@@ -26,12 +26,8 @@
 // @since 2016-01-13
 // hotfix @see https://github.com/undotsushin/undotsushin/issues/1468
 //if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
-// @since 2016-01-13
-// hotfix だと記事一覧の動画が再生できない
-// 記事詳細かつサッカーカテゴリーではない -> ファイル読み込む
-// @see https://undo-tsushin.slack.com/archives/product-web/p1484298774000116
 if ( $page['template'] == 'p'
-  && $page['category']['slug'] != 'soccer'
+  && $page['post']['media']['video']['player'] == 'brightcove'
   && $page['post']['media_vk_refid'] == ''
 ) :
   // brightcove code をここに
@@ -252,4 +248,3 @@ if (
 endif;
 // header 表示条件 end
 ?>
-
