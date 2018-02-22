@@ -14,10 +14,6 @@ if($q->get_dir()===0){ // 新規
     $o->query($sql);
     $p=$o->fetch_array();
 
-    $o->query($sql);
-    $p=$o->fetch_array();
-
-
 		include $INCLUDEPATH."formback.php";
 	}elseif($q->get_file()===1){
 
@@ -54,8 +50,14 @@ SQL;
 	if($q->get_file()===0){
 
 	  // カテゴリidをd1にしないといけない
+    $sql="select category as d1 from repo where id=".$g->f("cid");
+    $o->query($sql);
+    $p=$o->fetch_array();
+    $o->query($sql);
+    $repo=$o->fetch_array();
+
       $sql= <<<SQL
-SELECT u_headline_id, d1, sort_no
+SELECT u_headline_id, sort_no
 FROM pickup_athletes_big4
 INNER JOIN u_headline uh ON u_headline_id = uh.id
 WHERE player_id = {$g->f("id")}::INTEGER
@@ -64,6 +66,7 @@ SQL;
 		$o->query($sql);
 		$p=$o->fetch_array();
     $p['sort_no'] = $p['sort_no'] - 1;
+    $p['d1'] = $repo['d1']; // カテゴリidをd1にしないといけない
     $p['d2'] = $g->f("id"); // 選手IDをd2にしないといけない
 
 		include $INCLUDEPATH."formback.php";
@@ -96,6 +99,12 @@ SQL;
     $o = new dbutl($TABLE);
 
     // カテゴリidをd1にしないといけない
+    $sql="select category as d1 from repo where id=".$g->f("cid");
+    $o->query($sql);
+    $p=$o->fetch_array();
+    $o->query($sql);
+    $repo=$o->fetch_array();
+
     $sql = <<<SQL
 SELECT ply.name, d1, sort_no
 FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.u_headline_id = uh.id
@@ -106,6 +115,7 @@ SQL;
 
     $o->query($sql);
     $p=$o->fetch_array();
+    $p['d1'] = $repo['d1']; // カテゴリidをd1にしないといけない
     $p['d2'] = $g->f("id"); // 選手IDをd2にしないといけない
     include $INCLUDEPATH."formback.php";
 
