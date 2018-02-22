@@ -30,7 +30,7 @@ const RSS_FILE = 'http://www.tv-tokyo.co.jp/tabletennis/sportsbull_rss.xml';
 
 $o = new db;
 $o->connect();
-/*
+
  $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
  $o->query($sql);
  $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
@@ -41,7 +41,7 @@ $o->connect();
  $o->query($sql);
  $sql = "delete from repo_n where d2={$MEDIAID};";
  $o->query($sql);
-*/
+
  //exit;
 
 $sql = sprintf("SELECT id,name,name_e,yobi FROM u_categories WHERE flag=1 AND id NOT IN(%s) ORDER BY id DESC",implode(",", $excategory));
