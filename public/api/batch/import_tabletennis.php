@@ -10,7 +10,15 @@ include $INCLUDEPATH.'public/import.php';
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-$MEDIAID = 80;
+if(UT_ENV == 'PRODUCTION' || UT_ENV == 'STAGING')
+{
+  $MEDIAID = 74;
+}
+else
+{
+  $MEDIAID = 80;
+
+}
 const MEDIA_NAME = 'テレビ東京卓球ニュース';
 $MEDIANAME = MEDIA_NAME;
 const SPECIAL_CHAR = 'www.youtube.com/embed';
