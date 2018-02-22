@@ -124,7 +124,11 @@ function searchBack(){
 </tr>
 </table>
 <?php } ?>
-
+  <?php if($CURRENTDIRECTORY=="pickup_athlete_big4"){ ?>
+    <script>
+        $('input[name=p_d1]').hide();
+    </script>
+  <?php } ?>
 <?php }elseif($q->get_dir()===2){ ?>
 
 <?php if($q->get_file()===0){ ?>

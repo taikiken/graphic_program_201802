@@ -470,8 +470,6 @@ $(function(){
                     "ORDER BY max_h_n";
             }
 
-            console.log(u);
-
 			$.ajax({
 				type: "POST",
 				url: "/editdm/module/importdata.php",
