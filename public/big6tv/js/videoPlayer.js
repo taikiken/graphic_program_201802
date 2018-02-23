@@ -1,49 +1,74 @@
 'use strict';
 
-var myPlayer;
-var playerHTML;
-var videoId;
-var accountId = '5704890303001';
-var playerId = 'r1Zn0fWf4f';
-var playerData = {
-  'accountId': accountId,
-  'playerId': playerId,
-  'videoId': videoId
+const result = document.querySelector('#placeHolder');
+const accountId = '5704890303001';
+const playerId  = 'r1Zn0fWf4f';
+let playerHTML;
+let scriptFlg = false;
+let json = [];
+let data = {
+	lastupdate: '',
+	live: {
+		alt: {
+			large: '',
+			medium: ''
+		},
+		error: {
+			large: '',
+			medium: ''
+		},
+		interval: '',
+		isPlaying: false,
+		video: {
+			id: ''
+		}
+	}
 };
-
-var getJson = function getJson() {
-  var req = new XMLHttpRequest();
-  req.onreadystatechange = function () {
-    if (req.readyState == 4 && req.status == 200) {
-      Response = eval("(" + req.response + ")");
-      console.log(Response);
-      videoId = Response.live.video.id;
-      var playerData = { 'accountId': accountId, 'playerId': playerId, 'videoId': videoId };
-
-      // Dynamically build the player video element
-      playerHTML = '<video id=\"myPlayerID\" data-video-id=\"' + playerData.videoId + '\" data-account=\"' + playerData.accountId + '\" data-player=\"' + playerData.playerId + '\" data-embed=\"default\" class=\"video-js\" controls width=\"1090px\" height=\"613.13px\"></video>';
-      // Inject the player code into the DOM
-      document.getElementById('placeHolder').innerHTML = playerHTML;
-      // Add and execute the player script tag
-      var s = document.createElement('script');
-      s.src = "//players.brightcove.net/" + playerData.accountId + "/" + playerData.playerId + "_default/index.min.js";
-      // Add the script tag to the document
-      document.body.appendChild(s);
-      // Call a function to play the video once player's JavaScropt loaded
-      s.onload = callback;
+let getJson = () => {
+  $.ajax({
+	type:"GET",
+    url: 'https://dev.sportsbull.jp/api/big6tv/live/2018s',
+    cache: false,
+    timeout: 10000
+  }).then(
+    (json) => {
+		data.lastupdate = json.response.lastupdat;
+		data.live.alt.large = json.response.live.alt.large;
+		data.live.alt.medium = json.response.live.alt.medium;
+		data.live.error.large = json.response.live.error.large;
+		data.live.error.medium = json.response.live.error.medium;
+		data.live.interval = json.response.live.interval;
+		data.live.isPlaying = json.response.live.isPlaying;
+		data.live.video.id = json.response.live.video.id;
+		if (data.live.isPlaying) {
+			let playerHTML = `<video id=\"myPlayerID\" class=\"video-js\" data-video-id=\"${data.live.video.id}\" data-account=\"${accountId}\" data-player=\"${playerId}\" data-embed=\"default\" controls width=\"728\" height=\"410\" >`;
+			result.innerHTML = playerHTML;
+			let scriptTag = document.createElement('script');
+			scriptTag.src = `\/\/players.brightcove.net\/${accountId}\/${playerId}_default\/index.min.js`;
+			if (!scriptFlg) {
+				document.body.appendChild(scriptTag);
+				scriptFlg= true
+			}
+			scriptTag.onload = callback;
+			console.log(data.live.interval * 1000);
+		} else {
+			let liveBeforeImg = `<img src=\"${data.live.alt.large}\">`
+			result.innerHTML = liveBeforeImg;
+		}
+    },
+    () => {
+      console.log('failed load')
+	  let loadErrorImg = `<img src=\"${data.live.error.large}\">`;
+	  result.innerHTML = loadErrorImg;
     }
-  };
-  req.open("GET", "/json/live.json", false);
-  req.send(null);
+  )
 };
 
-// +++ Initialize the player and start the video +++
-function callback() {
-  myPlayer = videojs('myPlayerID');
-  myPlayer.play();
+let callback = () => {
+	videojs('myPlayerID').on('ads-ad-ended', function( evt ){
+		let myPlayer = this;
+		myPlayer.play();
+	});
 };
 
-window.onload = function () {
-  getJson();
-};
-//# sourceMappingURL=videoPlayer.js.map
+getJson();
