@@ -7,7 +7,7 @@ $app->group('/para-board', function () use($app) {
 
     $category = $app->model->get_category_by_slug('parasports');
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
-    $template_classname .= ' parasposts';
+    $template_classname .= ' parasports';
 
     $args['page'] = $app->model->set(array(
       'template_classname' => $template_classname,
@@ -45,7 +45,7 @@ $app->group('/para-board', function () use($app) {
 
     $category = $app->model->get_category_by_slug('parasports');
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
-    $template_classname .= ' parasposts';
+    $template_classname .= ' parasports';
 
     $args['page'] = $app->model->set(array(
       'template_classname' => $template_classname,
