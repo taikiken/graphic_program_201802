@@ -1471,9 +1471,7 @@ SQL;
   if ($category_id !== null) {
     $sql .= " AND uc.id = '{$category_id}'";
   }
-  if ($big4_flag) {
-    $sql .= " AND p.id = big4.player_id";
-  }
+
   $sql .= ' GROUP BY p.id, p.name, p.name_kana, p.competition, p.description, p.n, p.flag, p.img1, p.link_word, p.category,
   p.og_img, p.seo_description, p.seo_keyword, p.m_time, p.u_time';
 
@@ -1496,7 +1494,7 @@ SQL;
 }
 
 
-  function get_u_headline_id($cid, $rid)
+  function get_u_headline_id($cid, $rid, $player_id)
 	{
     global $o;
 
@@ -1505,7 +1503,7 @@ SELECT id
 FROM u_headline
 WHERE cid = {$cid}
 AND qid = {$rid}
-LIMIT 1
+AND d2 = {$player_id}
 SQL;
 
     $o->query($sql);
