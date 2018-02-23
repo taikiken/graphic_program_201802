@@ -203,7 +203,7 @@ $competition_response_photo = $competition_response_pc['photo_gallery'];
 
       <ul class="gallery__list">
         <?php
-        foreach ($competition_response_highlight as $gallery) :
+        foreach ($competition_response_news as $gallery) :
         ?>
         <li class="gallery__list__item">
           <a href="<?php echo $gallery['url']; ?>" class="gallery__list__link">

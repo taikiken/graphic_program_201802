@@ -9,7 +9,7 @@
 // para-sports module
 include_once __DIR__ . '/../module/_functions.php';
 
-$para_data = $para_query_option == 'recent' ? get_recent() : get_recent_id_year($para_schedule_id, $para_schedule_year);
+$para_data = $para_query_option == 'recent' ? get_recent_all() : get_recent_id_year($para_schedule_id, $para_schedule_year);
 $para_data_response = $para_data['response'];
 
 // [A]

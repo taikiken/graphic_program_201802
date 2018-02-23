@@ -100,6 +100,11 @@ function get_recent_id_year($sport_id = 0, $year = '') {
   return data_decode( file_get_contents( api_recent_id_year( $sport_id, $year ) ) );
 }
 
+// 全件データ
+function get_recent_all() {
+  return get_recent_id_year(0, 'current');
+}
+
 // パラボード 大会一覧ページのプルダウンに使用する
 function get_pull_down() {
   return data_decode( file_get_contents( api_pull_down() ) );
