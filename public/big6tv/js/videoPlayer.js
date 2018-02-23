@@ -77,5 +77,14 @@ var callback = function callback() {
 		myPlayer.play();
 	});
 };
+
+var getUserAgent = function getUserAgent() {
+	var ua = window.navigator.userAgent;
+	console.log(ua);
+	if (ua === 'undotsushin-ios' || ua === 'undotsushin-android') {
+		$('#VideoPlayer').hide();
+	};
+};
 getJson();
+getUserAgent();
 //# sourceMappingURL=videoPlayer.js.map
