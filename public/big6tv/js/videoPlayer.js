@@ -6,6 +6,7 @@ var playerId = 'r1Zn0fWf4f';
 var playerHTML = void 0;
 var flg = true;
 var initLoad = false;
+var videoLoaded = false;
 var json = [];
 var data = {
 	lastupdate: '',
@@ -47,16 +48,18 @@ var getJson = function getJson() {
 		if (data.live.isPlaying) {
 			if (!flg) {
 				location.reload();
-			} else {
+			} else if (data.live.isPlaying && flg && !videoLoaded) {
+				var _playerHTML = '<video id="myPlayerID" class="video-js" data-video-id="' + data.live.video.id + '" data-account="' + accountId + '" data-player="' + playerId + '" data-embed="default" controls width="728" height="410" >';
+				result.innerHTML = _playerHTML;
 				var scriptTag = document.createElement('script');
 				scriptTag.src = '//players.brightcove.net/' + accountId + '/' + playerId + '_default/index.min.js';
 				document.body.appendChild(scriptTag);
 				scriptTag.onload = function () {
 					callback();
 				};
+				videoLoaded = true;
 			}
 		} else {
-
 			var liveBeforeImg = '<img src="' + data.live.alt.large + '">';
 			flg = data.live.isPlaying;
 			result.innerHTML = liveBeforeImg;
