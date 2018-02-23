@@ -40,6 +40,11 @@ if($q->get_file()===2&&$e){
 ?>
 
 <?php if($q->get_dir()===0){ ?>
+  <?php if($CURRENTDIRECTORY=="pickup_athlete_big4"){ ?>
+    <script>
+        $('input[name=p_d1]').hide();
+    </script>
+  <?php } ?>
 
 <?php if($q->get_file()===0){ ?>
 <table width="100%" class="rollover2" cellpadding="0" cellspacing="0">
