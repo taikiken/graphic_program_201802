@@ -143,8 +143,10 @@ if (!empty($pull_down_response)) :
     if (!element) {
       return;
     }
-    var options = element.getElementsByTagName('option');
-    options[index].selected = true;
+    var option = element.querySelector('option[value="' + index + '"]');
+    if (option) {
+      option.selected = true;
+    }
   }
   function init() {
     var form = document.getElementById('js-paraboard__selector');
