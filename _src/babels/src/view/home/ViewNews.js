@@ -24,9 +24,6 @@ import { Length } from '../../app/const/Length';
 import {NewsAuth} from '../../action/home/NewsAuth';
 import {News} from '../../action/home/News';
 
-// import {Category} from '../../action/archive/Category';
-// import {CategoryAuth} from '../action/archive/CategoryAuth';
-
 /**
  * home news 一覧表示
  */
@@ -39,9 +36,8 @@ export default class ViewNews extends ViewArchiveMasonryInfinite {
    * @param {Object} [option={}] optional event handler
    * @param {boolean} [useMasonry=true] isotope を行うかの
    */
-  constructor(slug, element, moreElement, option = {}, useMasonry = true) {
+  constructor(element, moreElement, option = {}, useMasonry = true) {
     super(element, moreElement, null, option, useMasonry);
-    // this.slug = 'soccer';
     /**
      * Action instance を設定します
      * @override
@@ -56,7 +52,7 @@ export default class ViewNews extends ViewArchiveMasonryInfinite {
      * home flag, おすすめ ラベル表示するかしないかに使用
      * @type {boolean}
      */
-    // this.home = true;
+    this.home = true;
     /**
      * 初回無限スクロールにしないパターン, クリック後に開始します
      * <pre>
