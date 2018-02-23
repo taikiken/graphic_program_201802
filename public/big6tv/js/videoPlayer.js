@@ -80,11 +80,9 @@ var callback = function callback() {
 
 var getUserAgent = function getUserAgent() {
 	var ua = window.navigator.userAgent;
-	console.log(ua);
-	if (ua === 'undotsushin-ios' || ua === 'undotsushin-android') {
-		$('#VideoPlayer').hide();
+	if (!(ua === 'undotsushin-ios') && !(ua === 'undotsushin-android')) {
+		getJson();
 	};
 };
-getJson();
 getUserAgent();
 //# sourceMappingURL=videoPlayer.js.map
