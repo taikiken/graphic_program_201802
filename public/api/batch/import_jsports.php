@@ -20,18 +20,18 @@ while($f=$o->fetch_array()){
 }
 
 function get_index(){
-	
-	$xml="http://www.jsports.co.jp/press/column/category/07/rss2.xml 118
-	http://www.jsports.co.jp/press/column/category/01/rss2.xml 113
-	http://www.jsports.co.jp/press/column/category/02/rss2.xml 114
-	http://www.jsports.co.jp/press/column/category/03/rss2.xml 120
-	http://www.jsports.co.jp/press/column/category/05/rss2.xml 125
-	http://www.jsports.co.jp/press/column/category/06/rss2.xml 127
-	http://www.jsports.co.jp/press/column/category/09/rss2.xml 115
-	http://www.jsports.co.jp/press/column/category/10/rss2.xml 124
-	http://www.jsports.co.jp/press/column/category/12/rss2.xml 129
-	http://www.jsports.co.jp/press/column/category/19/rss2.xml 129
-	http://www.jsports.co.jp/press/column/category/90/rss2.xml 129";
+
+	$xml="https://www.jsports.co.jp/press/column/category/07/rss2.xml 118
+	https://www.jsports.co.jp/press/column/category/01/rss2.xml 113
+	https://www.jsports.co.jp/press/column/category/02/rss2.xml 114
+	https://www.jsports.co.jp/press/column/category/03/rss2.xml 120
+	https://www.jsports.co.jp/press/column/category/05/rss2.xml 125
+	https://www.jsports.co.jp/press/column/category/06/rss2.xml 127
+	https://www.jsports.co.jp/press/column/category/09/rss2.xml 115
+	https://www.jsports.co.jp/press/column/category/10/rss2.xml 124
+	https://www.jsports.co.jp/press/column/category/12/rss2.xml 129
+	https://www.jsports.co.jp/press/column/category/19/rss2.xml 129
+	https://www.jsports.co.jp/press/column/category/90/rss2.xml 129";
 
 	$file=explode("\n",$xml);
 	for($i=0;$i<count($file);$i++){
@@ -45,7 +45,7 @@ function get_index(){
 $data=get_index();
 
 while(list($k,$v)=each($data)){
-	
+
 	unset($s);
 	$d=$v["channel"]["item"];
 
@@ -56,16 +56,16 @@ while(list($k,$v)=each($data)){
 	}
 
 	for($i=0;$i<count($d);$i++){
-		
+
 		$s["m1"]=137;
 		$s["m2"]=$k;
 		$s["title"]=$d[$i]["title"];
 		$s["t9"]=$d[$i]["link"];
 		$s["t7"]=$d[$i]["link"];
-		
+
 		$body=sprintf("<p>%s</p>",str_replace("\n","<br>",str_replace("\n\n","</p><p>",$d[$i]["description"])));
 		$modbody=pg_escape_string($body);
-		
+
 		$datetime=date("Y-m-d H:i:s",strtotime($d[$i]["pubDate"]));
 		$s["m_time"]=$datetime;
 		$s["u_time"]=$datetime;
@@ -78,9 +78,9 @@ while(list($k,$v)=each($data)){
 		$sql=sprintf("select * from repo_n where d2=%s and t7='%s'",$MEDIAID,$s["t7"]);
 		$o->query($sql);
 		$f=$o->fetch_array();
-		
+
 		unset($sqla);
-		
+
 		if(strlen($f["id"])>0){
 			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
@@ -93,7 +93,7 @@ while(list($k,$v)=each($data)){
 				$sqla[]=makesql($s,$f["id"]);
 				$sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);
 			}
-		}else{	
+		}else{
 
 			$TITLE[]=pg_escape_string($s["title"]);
 
@@ -112,7 +112,7 @@ while(list($k,$v)=each($data)){
 
 			$sqla=implode("\n",$sqla);
 			$o->query($sqla);
-		    
+
 			if(!isset($f["id"])){
 				$sql="select currval('repo_n_id_seq') as id";
 				$o->query($sql);
@@ -120,8 +120,8 @@ while(list($k,$v)=each($data)){
 				$id=$f["id"];
 			}else{
 				$id=$f["id"];
-			}			
-			
+			}
+
 			$file=sprintf("%s/api/ver1/static/ad/1-%s.dat",$SERVERPATH,$id);
     		if($vs=get_contents($file)){
 				$vs=unserialize($vs);
@@ -131,8 +131,8 @@ while(list($k,$v)=each($data)){
 			s3upload($file,sprintf("static/ad/1-%s.dat",$id));
 		}
 	}
-	
-	
+
+
 }
 
 include $INCLUDEPATH."public/display.php";

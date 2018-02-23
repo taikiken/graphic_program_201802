@@ -50,7 +50,7 @@ if ($page['category']['slug'] == 'all') {
       if ( !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
         ?>
         <div class="sponsor-link mt30">
-          <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['category']['banner']['pc']['link']; ?>', true);"><img src="<?php echo $page['category']['banner']['pc']['image']; ?>" alt="<?php echo $page['category']['banner']['pc']['text'] ? $page['category']['banner']['pc']['text'] : '' ?>"></a>
+          <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank" onclick="UT.Ga.click('category.banner', 'banner_link', 'click', '<?php echo $page['banner']['banner']['pc']['link']; ?>', true);"><img src="<?php echo $page['category']['banner']['pc']['image']; ?>" alt="<?php echo $page['banner']['banner']['pc']['text'] ? $page['banner']['banner']['pc']['text'] : '' ?>"></a>
         </div>
         <?php
       endif;
@@ -68,7 +68,7 @@ if ($page['category']['slug'] == 'all') {
         <section class="section_crazy_pickup">
             <div class="ttl-wrapper">
                 <h2 class="ttl pickup"><i></i>注目のアスリート</h2>
-                <p class="more sp_hide"><a href="/category/crazy/athletes/">すべての選手を見る</a></p>
+                <p class="more sp_hide"><a href="/pickup_athletes/crazy/list/">すべての選手を見る</a></p>
             </div>
 
             <div class="pickup_player_list">
@@ -85,7 +85,7 @@ if ($page['category']['slug'] == 'all') {
                 </ul>
             </div>
 
-            <div class="more_btn pc_hide"><a href="/category/crazy/athletes/"><i></i>すべての選手を見る</a></div>
+            <div class="more_btn pc_hide"><a href="/pickup_athletes/crazy/list/"><i></i>すべての選手を見る</a></div>
         </section>
 
 

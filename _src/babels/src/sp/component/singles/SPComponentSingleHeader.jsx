@@ -10,14 +10,24 @@
  *
  */
 
+
+/**
+ * 提供元のロゴ表示部分を /_src/babels/src/component/singles-content/ComponentSingleProvider.jsx から移植
+ * @since 2018-01-15
+ */
+
+
 // view
 import View from '../../../view/View';
 
 // component
-import ComponentCategoryLabelsLink from '../../../component/categories/ComponentCategoryLabelsLink';
+// import ComponentCategoryLabelsLink from '../../../component/categories/ComponentCategoryLabelsLink';
 
 // node
-import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
+// import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
+
+// ga
+import { Ga } from '../../../ga/Ga';
 
 // React
 /**
@@ -72,6 +82,11 @@ export default class SPComponentSingleHeader extends React.Component {
       bookmarked: props.single.isBookmarked ? 'bookmarked enable' : '',
       loading: ''
     };
+    /**
+     * bound logoClick
+     * @type {function}
+     */
+    this.boundLogo = this.logoClick.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -105,20 +120,77 @@ export default class SPComponentSingleHeader extends React.Component {
     this.setState({ single, sign });
   }
   /**
+   * 記事提供元ロゴクリック event handler, ga 送信
+   */
+  logoClick() {
+    const link = this.state.single.user.logo.link;
+    Ga.click('provider-logo', 'provider_link', 'click', link, true);
+  }
+  /**
+   * 記事提供元ロゴ表示
+   * @param {LogoDae} logo 記事提供元情報
+   * @return {?XML} 画像がある時のみタグを返します
+   */
+  logo(logo) {
+    const img = logo.img;
+    // ロゴがなかったら表示しない
+    if (!img) {
+      return null;
+    }
+    const link = logo.link;
+    if (!link) {
+      // リンク(url)がなかったらロゴだけ表示
+      return (
+        <i className="provider-logo">
+          <img src={img} alt=""/>
+        </i>
+      );
+    }
+    // リンク付き出力
+    // クリックで ga 送信するので `onClick` を仕込みます
+    return (
+      <a href={link} target="_blank" onClick={this.boundLogo}>
+        <i className="provider-logo">
+          <img src={img} alt=""/>
+        </i>
+      </a>
+    );
+  }
+  /**
    * 記事詳細上部 `header` を出力します
    * @return {XML} 記事詳細上部 `header` を返します
    * */
   render() {
     const single = this.state.single;
+    // @type {UserDae} - 記事オーナー情報
+    const user = single.user;
+    // @type {string}
+    const userName = user.userName;
+    // @type {LogoDae}
+    const logo = user.logo;
+    // 提供元名称とロゴがなかったら表示しない
+    if (!userName && !logo.img) {
+      return null;
+    }
     return (
       <div className="sp-single-header">
         <div className={`post-heading post-heading-${single.id}`}>
           <h1>{single.title}</h1>
         </div>
         <div className="post-data">
-          <div className="f-left">
+          <p className="post-text">
+            <span className="post-date">{single.displayDate}</span>
+            <span className="post-category">{single.categories.label}</span>
+          </p>
+          <p className="post-logo">{this.logo(logo)}</p>
+          {/*
+            design 変更に伴い
+            post-date以外をコメントアウト
+            @since 2018-01-15
+
+            <div className="f-left">
             <p className="post-author">{single.user.userName}</p>
-            {/*
+
             <p className="post-category">
               <CategoryLabelNodeLink
                 categories={single.categories.all}
@@ -126,21 +198,25 @@ export default class SPComponentSingleHeader extends React.Component {
                 index={1}
               />
             </p>
-           */}
+
             <ComponentCategoryLabelsLink
               index={1}
               id={`single-label-${single.id}`}
               categories={single.categories.all}
               anotherCategories={single.anotherCategories}
             />
-            <p className="post-date">{single.displayDate}</p>
-          </div>
+            </div>
+          */}
           {/* div.f-right (bookmark: on / off) */}
-          <BookmarkNode
+          {/*
+            design 変更に伴い
+            post-date以外をコメントアウト
+            @since 2018-01-31
+            <BookmarkNode
             sign={this.state.sign}
             isBookmarked={this.state.status}
             articleId={String(single.id)}
-          />
+          /> */}
         </div>
       </div>
     );

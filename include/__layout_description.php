@@ -7,14 +7,17 @@ if($CURRENTDIRECTORY=="repo_n"){
 			// 選手
 			$TITLEFIELDNAME = "name";
 			break;
-		case 96:
-			// 注目選手
-			$TITLEFIELDNAME = "d2";
-			break;
 		default:
 			$TITLEFIELDNAME = multiLangTitle("title");
 			break;
 	}
+  if ($_GET['rid'] == 95 && $q->get_dir() == 1) { // 注目の選手 編集画面のみ
+    $TITLEFIELDNAME = "d2";
+    $sql = sprintf("select name from tbl_player where id=%s", $p[$TITLEFIELDNAME]);
+    $o->query($sql);
+    $fetch_tbl_player = $o->fetch_array();
+    $p[$TITLEFIELDNAME] = $p[$TITLEFIELDNAME] . ': ' . $fetch_tbl_player['name'];
+  }
 }elseif($CURRENTDIRECTORY=="mail"){
 	$TITLEFIELDNAME="subject";
 }elseif($CURRENTDIRECTORY=="mailtemplate"){
@@ -67,7 +70,7 @@ if($CURRENTDIRECTORY=="repo_n"){
 		<?php }elseif($q->get_dir()===1){ ?>
 		<?php if($q->get_file()===0){ ?>
 
-			<?php if ($_GET["cid"] == 94) { ?>
+			<?php if ($_GET["cid"] == 94 || $_GET["rid"] == 95) { ?>
 				<?php // 選手の広告設定の場合 ?>
 				<p>「<?= $THIS ?>」の<?= $PARENT ?> を<?=$q->exe_fl() ?>します。</p>
 			<?php } else { ?>
@@ -77,7 +80,7 @@ if($CURRENTDIRECTORY=="repo_n"){
 
 		<?php }elseif($q->get_file()===1){ ?>
 
-			<?php if ($_GET["cid"] == 94) { ?>
+			<?php if ($_GET["cid"] == 94 || $_GET["rid"] == 95) { ?>
 				<?php // 選手の広告設定の場合 ?>
 				<p>「<?= $THIS ?>」の<?= $PARENT ?> を下記の内容で<?= $q->exe_fl() ?>します。</p>
 			<?php } else { ?>
