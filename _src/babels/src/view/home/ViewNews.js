@@ -41,7 +41,6 @@ export default class ViewNews extends ViewArchiveMasonryInfinite {
    */
   constructor(slug, element, moreElement, option = {}, useMasonry = true) {
     super(element, moreElement, null, option, useMasonry);
-    console.log(slug);
     // this.slug = 'soccer';
     /**
      * Action instance を設定します
