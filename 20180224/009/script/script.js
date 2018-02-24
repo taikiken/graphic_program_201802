@@ -7,7 +7,7 @@
     let randomHeight; // 高さに対する乱数
     let randomSpeed;  // 速度に対する乱数
 
-    const CIRCLE_COUNT = 20; // 円の個数
+    const CIRCLE_COUNT = 200; // 円の個数
     const CIRCLE_RADIUS = 10;
     const CIRCLE_COLOR = 'rgba(255, 0, 255, 0.8)';
 
@@ -27,7 +27,11 @@
             // Math.random を用いると乱数（ランダムな値）を得ることができる
             // JavaScript の実装では、乱数は 0.0 ～ 1.0 未満の値が取得できる
             randomHeight[i] = Math.random() * window.innerHeight;
-            randomSpeed[i] = Math.random();
+            let random = Math.random() || 0.001;
+            random += -0.5;
+            random = random || 0.001;
+            // randomSpeed[i] = Math.random();
+            randomSpeed[i] = random;
             gui.log(i + ': ' + randomSpeed[i]);
         }
 

@@ -9,7 +9,7 @@
     let img;
 
     const IMAGE_DRAW_COUNT = 10;
-    const IMAGE_SIZE = 200;
+    const IMAGE_SIZE = 200 * 0.5;
 
     window.addEventListener('load', () => {
         gui = new Gui();

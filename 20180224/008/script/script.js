@@ -30,8 +30,8 @@
         let x = nowTime % w / w;
 
         // 正規化した X 要素を使ってイージングを行い、w を掛けてもとのスケールに戻す
-        x = easeInCubic(x) * w;
-        // x = easeOutCubic(x) * w;
+        // x = easeInCubic(x) * w;
+        x = easeOutCubic(x) * w;
 
         let y = window.innerHeight / 2;
 
@@ -42,6 +42,7 @@
         requestAnimationFrame(render);
     }
 
+    // http://gizma.com/easing/
     // in を ease する
     function easeInCubic(t){
         return t * t * t;
@@ -49,7 +50,7 @@
 
     // out を ease する
     function easeOutCubic(t){
-        return (--t) * t * t + 1;
+        return ((--t) * t * t) + 1;
     }
 
     /**
