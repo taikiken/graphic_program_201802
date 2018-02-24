@@ -46,7 +46,7 @@
          */
         fill(){
             this.ctx.fillRect(0, 0, this.canvas.width / 2, this.canvas.height / 2);
-            gui.log('run fillRect');
+            gui.log(`run fillRect width: ${this.canvas.width / 2}, height: ${this.canvas.height / 2}`);
         }
         /**
          * canvas の大きさをウィンドウサイズに揃える
