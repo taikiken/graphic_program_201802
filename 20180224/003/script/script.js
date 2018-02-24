@@ -7,6 +7,22 @@
         cu = new CanvasUtil(document.getElementById('canvas'));
         cu.matchSize();
         cu.clear();
+      // サークル（円）を描画する命令を利用
+      cu.fillCircle(
+        100,
+        100,
+        200,
+        'rgba(0, 255, 0, 0.5)',
+        Math.PI * 1.5,
+      );
+      cu.fillCircle(
+        200,
+        100,
+        200,
+        'rgba(0, 255, 0, 0.5)',
+        Math.PI * 1.5,
+        true,
+      );
         cu.fillRect(
             50,
             100,
@@ -50,12 +66,13 @@
          * @param {number} rad - 円の半径
          * @param {string} [color] - 塗りつぶす色（CSS Style）
          */
-        fillCircle(x, y, rad, color){
+        fillCircle(x, y, rad, color, arc = Math.PI * 2, mode = false){
             if(color != null){
                 this.ctx.fillStyle = color;
             }
             this.ctx.beginPath();
-            this.ctx.arc(x, y, rad, 0, Math.PI * 2, false);
+            // this.ctx.arc(x, y, rad, 0, Math.PI * 2, false);
+            this.ctx.arc(x, y, rad, 0, arc, mode);
             this.ctx.closePath();
             this.ctx.fill();
             gui.log(`x = ${x}, y = ${y}, radius = ${rad}`);
