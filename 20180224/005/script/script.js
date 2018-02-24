@@ -32,9 +32,18 @@
         // 任意の文字列を描画する命令を利用
         cu.fillText(
             'canvas2d fill text',
-            window.innerWidth / 2,
+            // window.innerWidth / 2,
+            10,
             window.innerHeight / 2,
             null,
+            'italic bold 64px sans-serif',
+            'rgba(0, 0, 0, 0.5)'
+        );
+        cu.fillText(
+            'canvas2d fill text',
+            window.innerWidth / 3,
+            window.innerHeight / 3,
+            128,
             'italic bold 32px sans-serif',
             'rgba(0, 0, 0, 0.5)'
         );
@@ -64,7 +73,7 @@
          * @param {string} text - 描画する文字列
          * @param {number} x - 文字列描画の基準位置の x 座標
          * @param {number} y - 文字列描画の基準位置の y 座標
-         * @param {number} [maxWidth] - 文字列を描画できる最大幅
+         * @param {?number} [maxWidth] - 文字列を描画できる最大幅
          * @param {string} [font] - フォントの指定（CSS Style）
          * @param {string} [color] - 塗りつぶす色（CSS Style）
          */
