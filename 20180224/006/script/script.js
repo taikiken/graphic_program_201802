@@ -23,6 +23,12 @@
     function render(){
         // 現在の進行時間を取得
         nowTime = Date.now() - startTime;
+      nowTime *= 0.1;
+
+      if (nowTime > window.innerWidth) {
+            nowTime = 0;
+            startTime = Date.now();
+        }
 
         // 一度 canvas をクリア
         cu.clear();
@@ -35,7 +41,7 @@
             'rgba(255, 0, 255, 0.8)'
         );
 
-        gui.text({time: nowTime});
+        gui.text({time: nowTime, h: (window.innerHeight / 2) + Math.sin(nowTime)});
 
         // 自分自身を再帰的に呼び出す
         requestAnimationFrame(render);
