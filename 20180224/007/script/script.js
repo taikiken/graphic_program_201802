@@ -24,9 +24,14 @@
         nowTime = Date.now() - startTime;
         cu.clear();
 
+        // 時間で speed コントロールが可能
+        // nowTime *= 0.25;
+
+
         // % 演算子を使って除算の剰余を求めることができる
         // 経過時間をウィンドウ幅＋円の半径２個で除算し、その剰余を求める
         // ※ なぜ円の半径２個を足しているのだろう？
+        // @see http://school.souhonzan.org/201802/002/
         let x = nowTime % (window.innerWidth + CIRCLE_RADIUS * 2);
 
         // X 座標から円の半径を引く
@@ -41,6 +46,9 @@
         requestAnimationFrame(render);
     }
 
+  window.addEventListener('resize', () => {
+    cu.matchSize();
+  });
     /**
      * canvas 2d context を操作するクラス
      * @class
