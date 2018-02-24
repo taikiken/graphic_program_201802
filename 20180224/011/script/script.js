@@ -50,7 +50,7 @@
             cu.drawImage(img, x, y, IMAGE_SIZE, IMAGE_SIZE);
         }
 
-        requestAnimationFrame(render);
+        // requestAnimationFrame(render);
     }
 
     function easeInCubic(t){
