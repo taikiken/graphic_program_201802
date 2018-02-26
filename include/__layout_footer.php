@@ -131,6 +131,8 @@ function searchBack(){
 <?php } ?>
   <?php if($CURRENTDIRECTORY=="pickup_athlete_big4"){ ?>
     <script>
+
+        // $('input[name=p_d1]').prop("disabled", true);
         $('input[name=p_d1]').hide();
         $('input[name=p_d2]').prop("disabled", true);
         $('input[name=p_d2]').css('color','#ccc');
