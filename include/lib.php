@@ -156,9 +156,9 @@ elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 94 && !preg_match("#/ph
 elseif ($CURRENTDIRECTORY=="pickup_athlete_big4")
 {
   $sql = <<<SQL
-SELECT COUNT(ply.id) AS n
+SELECT COUNT(big4.u_headline_id) AS n
 FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.u_headline_id = uh.id
-  INNER JOIN tbl_player ply ON big4.player_id = ply.id
+  INNER JOIN tbl_player ply ON uh.d2 = ply.id
 WHERE uh.cid = {$g->f("cid")} AND uh.qid = {$g->f("rid")}
 SQL;
 
