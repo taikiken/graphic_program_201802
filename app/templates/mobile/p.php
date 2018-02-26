@@ -319,7 +319,7 @@ endif;
             </h4>
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="post-sns-fixed">
-                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
               </div>
             <?php endif; ?>
           </div>
