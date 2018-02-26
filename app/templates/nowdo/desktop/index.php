@@ -194,7 +194,6 @@ include_once __DIR__ . '/../../_env.php';
           <div class="contents_inner">
             <h2 class="section_ttl">メールフォームから応募する</h2>
             <p class="copy">ご応募の方は、下記必要事項を明記して「応募する」ボタンを押してください。</p>
-            <form action="http://www.test.com" method="post">
               <div class="form_area_wrap">
                 <ul class="tab">
                   <li class="select">コーチ募集</li>
@@ -202,6 +201,7 @@ include_once __DIR__ . '/../../_env.php';
                 </ul>
                 <div class="form_content">
                   <div class="form_block">
+                    <form action="javascript://" method="post">
                     <table>
                       <tr>
                         <th>
@@ -291,7 +291,7 @@ include_once __DIR__ . '/../../_env.php';
                         <td>
                           <select name="sex" class="width03" required>
                             <option value="" selected></option>
-                            <option value="1">男性</option>
+                            <option value="0">男性</option>
                             <option value="1">女性</option>
                           </select>
                         </td>
@@ -487,7 +487,7 @@ include_once __DIR__ . '/../../_env.php';
                       <tr>
                         <th>取得資格</th>
                         <td>
-                          <textarea name="" id="" cols="30" rows="10" required></textarea>
+                          <textarea name="license" id="license" cols="30" rows="10" required></textarea>
                         </td>
                       </tr>
                       <tr>
@@ -499,8 +499,10 @@ include_once __DIR__ . '/../../_env.php';
                     <div class="entry_btn">
                       <button type="submit" id="button_submit" class="contact-form__submit">応募する</button>
                     </div>
+                    </form>
                   </div>
                   <div class="form_block">
+                    <form action="javascript://" method="post">
                     <table>
                       <tr>
                         <th>
@@ -515,7 +517,7 @@ include_once __DIR__ . '/../../_env.php';
                           <label for="">代表者氏名</label>
                         </th>
                         <td>
-                          <input type="text" id="name1" name="name1" class="width02" required>
+                          <input type="text" id="name2" name="name2" class="width02" required>
                         </td>
                       </tr>
                       <tr>
@@ -596,10 +598,10 @@ include_once __DIR__ . '/../../_env.php';
                     <div class="entry_btn">
                       <button type="submit" id="button_submit" class="contact-form__submit">応募する</button>
                     </div>
+                    </form>
                   </div>
                 </div>
               </div>
-            </form>
           </div>
         </section>
         <!-- /.section_05 -->
@@ -643,6 +645,7 @@ include_once __DIR__ . '/../../_env.php';
   </script>
 
 <script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="./assets/form/form.js"></script>
 
 <?php
 // # パンくずリスト
