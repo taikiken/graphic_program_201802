@@ -1,5 +1,12 @@
 'use strict';
 
+var api = void 0;
+var pageUrl = location.href;
+if (pageUrl.match(/sportsbull.s3/)) {
+	api = 'https://dev.sportsbull.jp/api/big6tv/live/2018s';
+} else {
+	api = '/api/big6tv/live/2018s';
+}
 var result = document.querySelector('#placeHolder');
 var accountId = '5704890303001';
 var playerId = 'r1Zn0fWf4f';
@@ -29,7 +36,7 @@ var data = {
 var getJson = function getJson() {
 	$.ajax({
 		type: "GET",
-		url: 'https://dev.sportsbull.jp/api/big6tv/live/2018s',
+		url: api,
 		cache: false,
 		timeout: 10000
 	}).then(function (json) {
@@ -49,7 +56,7 @@ var getJson = function getJson() {
 			if (!flg) {
 				location.reload();
 			} else if (data.live.isPlaying && flg && !videoLoaded) {
-				var _playerHTML = '<video id="myPlayerID" class="video-js" data-video-id="' + data.live.video.id + '" data-account="' + accountId + '" data-player="' + playerId + '" data-embed="default" data-application-id controls" >';
+				var _playerHTML = '<video id="myPlayerID" class="video-js" data-video-id="' + data.live.video.id + '" data-account="' + accountId + '" data-player="' + playerId + '" data-embed="default" data-application-id controls >';
 				result.innerHTML = _playerHTML;
 				var scriptTag = document.createElement('script');
 				scriptTag.src = '//players.brightcove.net/' + accountId + '/' + playerId + '_default/index.min.js';
