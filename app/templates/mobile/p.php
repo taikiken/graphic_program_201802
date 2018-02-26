@@ -497,6 +497,12 @@ endif;
     });
   }
 
+  if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
+    bodyElement.classList.remove('restricted');
+    bodyElement.classList.remove('noevent');
+    btnContainer.parentNode.removeChild(btnContainer);
+  }
+
   <?php if ( !$page['post']['is_sponserd'] ) : ?>
     showContentDFP();
   <?php endif; ?>
