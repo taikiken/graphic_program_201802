@@ -49,7 +49,7 @@ var getJson = function getJson() {
 			if (!flg) {
 				location.reload();
 			} else if (data.live.isPlaying && flg && !videoLoaded) {
-				var _playerHTML = '<video id="myPlayerID" class="video-js" data-video-id="' + data.live.video.id + '" data-account="' + accountId + '" data-player="' + playerId + '" data-embed="default" controls width="728" height="410" >';
+				var _playerHTML = '<video id="myPlayerID" class="video-js" data-video-id="' + data.live.video.id + '" data-account="' + accountId + '" data-player="' + playerId + '" data-embed="default" data-application-id controls" >';
 				result.innerHTML = _playerHTML;
 				var scriptTag = document.createElement('script');
 				scriptTag.src = '//players.brightcove.net/' + accountId + '/' + playerId + '_default/index.min.js';
