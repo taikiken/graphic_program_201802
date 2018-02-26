@@ -133,6 +133,9 @@ function searchBack(){
     <script>
         $('input[name=p_d1]').prop("disabled", true);
         $('input[name=p_d2]').prop("disabled", true);
+        $('input[name=p_d1]').css('color','#ccc');
+        $('input[name=p_d2]').css('color','#ccc');
+
     </script>
     <?php echo "<input type=\"hidden\" name=\"p_d1\" value=\"{$p['d1']}\" >\n" ?>
     <?php echo "<input type=\"hidden\" name=\"p_d2\" value=\"{$p['d2']}\" >\n" ?>
