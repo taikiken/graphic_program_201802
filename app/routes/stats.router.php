@@ -639,7 +639,7 @@ $app->group('/stats', function () use($app) {
   // ヒットする文字列だけ
   $this->group('/{league:ub_kansai|ub_kansaibig6|ub_tohto}', function ($request, $response, $args) use ($app) {
 
-    $this->get('/2017a/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
+    $this->get('/{season:20[0-9]{2}[as]}/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
 
       $request_uri = $_SERVER['REQUEST_URI'];
       $url = explode('/', $request_uri);

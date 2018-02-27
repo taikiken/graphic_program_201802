@@ -13,8 +13,8 @@ $app->group('/{slug:big6tv}', function () use ($app) {
 
   // game
   // ==============================
-  $this->get('/2017a/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
-
+  $this->get('/{season:20[0-9]{2}[as]}/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
+      
     $url = explode('/', $_SERVER['REQUEST_URI']);
     $league = $url[1];
     $season = $url[2];
@@ -113,7 +113,7 @@ $app->group('/{slug:big6tv}', function () use ($app) {
       'template' => 'webview',
       'template_classname' => '',
     ));
-
+    
 
     // debug用に不要なmodel削除
     // unset($args['page']['site_categories']);
@@ -121,9 +121,11 @@ $app->group('/{slug:big6tv}', function () use ($app) {
     // unset($args['page']['category']);
     // unset($args['page']['post']);
 
-
+    //include/conf/config.php
+    global $BIG6TV_SEASON;
     // 直近のスケジュール表を取得する
-    $big6tvSchedule = @file_get_contents($app->model->property('file_get_url') . '/api/big6tv/schedule');
+    $big6tvSchedule = @file_get_contents($app->model->property('file_get_url') . '/api/big6tv/schedule'.$BIG6TV_SEASON);
+    
 
 
     // ゲームを日付でフラットに
@@ -182,7 +184,7 @@ $app->group('/{slug:big6tv}', function () use ($app) {
     $args['page']['big6tv']['scheduleLatest'] = $gameData;
 
     // ランキングデータを取得する
-    $big6tvRanking = @file_get_contents($app->model->property('file_get_url') . '/api/big6tv/ranking');
+    $big6tvRanking = @file_get_contents($app->model->property('file_get_url') . '/api/big6tv/ranking'.$BIG6TV_SEASON);
     $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
 
     return $this->renderer->render($response, 'big6tv/webview.php', $args);
