@@ -96,9 +96,9 @@ if (empty($season)) //legacy
     endif;
 }else{
     if ( UT_ENV !== 'PRODUCTION' ) :
-      $json = 'https://dev-img.sportsbull.jp/static/big6/' . $season . '/ranking.csv';
+      $file = 'https://dev-img.sportsbull.jp/static/big6/' . $season . '/ranking.csv';
     else:
-      $json = 'https://img.sportsbull.jp/static/big6/' . $season . '/ranking.csv';
+      $file = 'https://img.sportsbull.jp/static/big6/' . $season . '/ranking.csv';
     endif;
 }
 
