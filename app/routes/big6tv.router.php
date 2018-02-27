@@ -18,7 +18,7 @@ $app->group('/{slug:big6tv}', function () use ($app) {
     $current_year = date("Y");
     $season_year = substr($args['season'], 0, 4);
     // データの無いシーズンを指定した場合404
-    if($season_year < "2016" || $current_year < $season_year )
+    if($season_year <= "2016" || $current_year < $season_year )
     {
         // 404
         // ------------------------------
