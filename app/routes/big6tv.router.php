@@ -14,6 +14,32 @@ $app->group('/{slug:big6tv}', function () use ($app) {
   // game
   // ==============================
   $this->get('/{season:20[0-9]{2}[as]}/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
+
+    $current_year = date("Y");
+    $season_year = substr($args['season'], 0, 4);
+    // データの無いシーズンを指定した場合404
+    if($season_year < "2016" || $current_year < $season_year )
+    {
+        // 404
+        // ------------------------------
+        $args['page'] = $app->model->set([
+            'title'    => '404 Not Found',
+            'og_title' => '404 Not Found',
+            'template' => 404,
+        ]);
+
+        $args['request']  = $request;
+        $args['response'] = $response;
+
+        if($app->model->property('ua') === 'desktop')
+        {
+            return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
+        }
+        else
+        {
+            return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
+        }
+    }
       
     $url = explode('/', $_SERVER['REQUEST_URI']);
     $league = $url[1];
