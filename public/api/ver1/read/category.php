@@ -223,7 +223,7 @@ SQL;
 
   if ( $category === 'big6tv' ) :
 
-    $categoriesinfo['live']          = '/api/big6tv/live';
+    $categoriesinfo['live']          = '/api/big6tv/live/'.$BIG6TV_SEASON;
     $categoriesinfo['live_interval'] = 20;
     $categoriesinfo['webviews']      = array(
       '/big6tv/webview/',

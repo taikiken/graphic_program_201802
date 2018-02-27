@@ -2,8 +2,10 @@ Options FollowSymLinks Includes
 RewriteEngine on
 RewriteBase /
 
-# ranking
+# ranking 2017
 RewriteRule ^ranking$ /api/big6tv/ranking.php [L]
+# ranking 2018s
+RewriteRule ^ranking/(20[0-9]{2}[as])$ /api/big6tv/ranking.php?season=$1 [L]
 
 # schedule
 #RewriteRule ^schedule$ /api/big6tv/schedule.php [L]
