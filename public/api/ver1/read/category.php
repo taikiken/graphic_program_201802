@@ -279,13 +279,13 @@ SQL;
       '/stats/bleague/webview/app/',
     );
   endif;
-  
-  // #UNDO_SPBL-293
-  if ( $category === 'pyeongchang2018' ) :
-    $categoriesinfo['webviews']     = array(
-      '/pyeongchang2018/webview/',
-    );
-  endif;
+
+  // https://aws-plus.backlog.jp/view/UNDO_SPBL-484#comment-1190761405
+  // if ( $category === 'pyeongchang2018' ) :
+  //   $categoriesinfo['webviews']     = array(
+  //     '/pyeongchang2018/webview/',
+  //   );
+  // endif;
 
   // #2080
   if ( $category === 'top' ) :
@@ -298,12 +298,12 @@ SQL;
 // 1件でもあったら
 $sql = <<<SQL_EOL
   SELECT
-    id 
+    id
   FROM
    u_categories
-  WHERE 
+  WHERE
     name_e = '{$category}'
-  
+
 SQL_EOL;
 
 $o->query($sql);
