@@ -51,9 +51,6 @@ if($_GET["cid"]==1){
 }
 if ($_GET["cid"] == 94)
 {
-	/*
-	 * 選手の広告設定については仕様が決まるまで表示しない
-	 *
 	//
 	// 選手
 	//
@@ -66,7 +63,20 @@ if ($_GET["cid"] == 94)
 
 	$THIS = $f["name"];
 	$PARENT = "広告設定";
-*/
+}
+if ($_GET["rid"] == 95)
+{
+	//
+	// 注目の選手
+	//
+	$sql = sprintf("select name from repo where id = %s", $_GET["nid"]);
+	$o->query($sql);
+	$f = $o->fetch_array();
+
+	$TITLE = "注目の選手";
+
+	$THIS = $f["name"];
+	$PARENT = "広告設定";
 }
 
 if($_GET["cid"]!=0){

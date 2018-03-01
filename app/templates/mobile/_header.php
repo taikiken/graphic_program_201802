@@ -6,11 +6,11 @@
 
 <?php include_once __DIR__."/../_head.php"; ?>
 
-    <?php if(count($page['photo']) > 0):?>
+  <?php if(count($page['photo']) > 0):?>
+    <link rel="stylesheet" href="/assets/css/style_sp.css?v=<?php echo $page['version']; ?>">
+    <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
+  <?php endif;?>
 
-        <link rel="stylesheet" href="/assets/css/style_sp.css?v=<?php echo $page['version']; ?>">
-        <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
-    <?php endif;?>
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
   <?php
   // header 表示条件 設定
@@ -23,7 +23,6 @@
   $template_name == '404' ||
   $template_name == 'category' ||
   $template_name == 'p' ||
-  $template_name == 'comment' ||
   $template_name == 'search' ||
   $template_name == 'signup_login' ||
   $template_name == 'settings' ||
@@ -39,6 +38,12 @@
   ) {
     $page_has_header = true;
   }
+
+  // アプリ判定
+  if ( $page['ua_app'] ) {
+    $page_has_header = false;
+  }
+
   ?>
 <?php
 if ($page_has_header) :
@@ -53,23 +58,24 @@ if ($page_has_header) :
 # ---------------------------------------------------------------------------
 endif;
 ?>
+
 <?php
 // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
 // @since 2017-08-21
 ?>
 <script src="/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
-  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
-  <?php
-  /*
-   Syn. menu end point 本番環境では
-    ```
-    /assets/js/bundle/main.bundle.js?syn=1
-    ```
-    ?syn=1 を削除してください
-    テストの時はつけてください
-   */
-  ?>
-  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+<?php
+/*
+ Syn. menu end point 本番環境では
+  ```
+  /assets/js/bundle/main.bundle.js?syn=1
+  ```
+  ?syn=1 を削除してください
+  テストの時はつけてください
+ */
+?>
+<script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php include_once __DIR__.'/../_head_bottom.php'; ?>
 
@@ -85,12 +91,8 @@ endif;
 // @since 2016-01-13
 // hotfix @see https://github.com/undotsushin/undotsushin/issues/1468
 //if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
-// @since 2016-01-13
-// hotfix だと記事一覧の動画が再生できない
-// 記事詳細かつサッカーカテゴリーではない -> ファイル読み込む
-// @see https://undo-tsushin.slack.com/archives/product-web/p1484298774000116
 if ( $page['template'] == 'p'
-  && $page['category']['slug'] != 'soccer'
+  && $page['post']['media']['video']['player'] == 'brightcove'
   && $page['post']['media_vk_refid'] == ''
 ) :
   // brightcove code をここに
@@ -129,7 +131,7 @@ if ( !empty( $page['template_classname'] ) ) {
   $whole_classes[] = $page['template_classname'];
 }
 // 記事詳細
-if ( $page['template'] == 'p' || $page['template'] == 'comment') {
+if ( $page['template'] == 'p' ) {
   // 記事詳細へ識別 CSS class 追加
   $whole_classes[] = 'post-single';
 
@@ -169,7 +171,7 @@ if ( $template_name == 'category' ) {
 
 
 <?php // #1860 記事詳細アンカー広告
-if ( $page['template'] == 'p' || $page['template'] == 'comment') :
+if ( $page['template'] == 'p' ) :
   if ( $page['post']['is_sponserd'] === false ) :
     echo <<<__EOL__
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
