@@ -108,7 +108,7 @@ if($CURRENTDIRECTORY=="repo_n"&&$_GET["cid"]==1&&!preg_match("#/photo/#",$_SERVE
 	}elseif($_COOKIE["orderby"]=="sold"){
 		$orderby=sprintf("m_time");
 	}else{
-		$orderby="n desc";
+		$orderby="id desc";
 	}
 
 	$sql=sprintf("select count(*) as n from %s%s%s%s",$TABLE,$WHERE,$exuser,$excategory);

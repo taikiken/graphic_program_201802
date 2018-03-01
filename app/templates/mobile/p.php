@@ -319,7 +319,7 @@ endif;
             </h4>
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="post-sns-fixed">
-                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
               </div>
             <?php endif; ?>
           </div>
@@ -495,7 +495,21 @@ endif;
       }, 300);
       btnContainer.parentNode.removeChild(btnContainer);
     });
+
+    if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
+      bodyElement.classList.remove('restricted');
+      bodyElement.classList.remove('noevent');
+      btnContainer.parentNode.removeChild(btnContainer);
+    }
   }
+
+    <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
+      bodyElement.classList.remove('restricted');
+      setTimeout(() => {
+        bodyElement.classList.remove('noevent');
+      }, 300);
+      btnContainer.parentNode.removeChild(btnContainer);
+    <?php endif; ?>
 
   <?php if ( !$page['post']['is_sponserd'] ) : ?>
     showContentDFP();
