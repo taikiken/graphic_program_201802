@@ -627,10 +627,55 @@ include_once __DIR__ . '/../../_env.php';
       return false;
     });
   });
+
+	$(function(){
+		
+		$(".form_block").each(function(){
+			$(this).prepend("<div class='message'><p></p></div>");
+			$(".message").hide();
+		});
+		
+		$("form").submit(function(){
+			
+			var active=0;
+			for(var i=0;i<$(".tab li").length;i++){
+				if($(".tab li:eq("+i+")").attr("class").match(/select/)){
+					active=i;
+					break;
+				}
+			}
+			
+			$("input,textarea,select",this).prop("readonly",true);
+			$("button",this).prop("disabled",true);
+			$(this).fadeTo(100,0.5);
+			$(".form_block:eq("+active+") .message").hide();
+			var height=$(this).height();
+			var aform=$(this);
+			
+			$.ajax({
+				data:$(this).serialize()+"&ftype="+active,
+				type:"POST",
+				url:"submit.php",
+				success:function(m){
+					if(m.error){
+						$("input,textarea,select",aform).prop("readonly",false);
+						$("button",aform).prop("disabled",false);
+						$(aform).fadeTo(100,1);
+						$(".form_block:eq("+active+") .message").css({"color":"#D43400","lineHeight":"3em","fontWeight":"bold"});
+					}else{
+						$(aform).hide();
+						$(".form_block:eq("+active+")").height(height);
+					}
+					$(".form_block:eq("+active+") .message").html(m.message).show();
+					$('body,html').animate({scrollTop:$(".section_05").offset().top},500);
+				}
+			});
+		});
+	});
+
   </script>
 
 <script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>
-<script src="./assets/form/form.js"></script>
 
 <?php
 // # パンくずリスト
