@@ -503,6 +503,14 @@ endif;
     }
   }
 
+    <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
+      bodyElement.classList.remove('restricted');
+      setTimeout(() => {
+        bodyElement.classList.remove('noevent');
+      }, 300);
+      btnContainer.parentNode.removeChild(btnContainer);
+    <?php endif; ?>
+
   <?php if ( !$page['post']['is_sponserd'] ) : ?>
     showContentDFP();
   <?php endif; ?>
