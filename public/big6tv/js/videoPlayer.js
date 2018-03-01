@@ -2,10 +2,14 @@
 
 var api = void 0;
 var pageUrl = location.href;
-if (pageUrl.match(/sportsbull.s3/)) {
+if (pageUrl.match(/sportsbull.s3/) || pageUrl.match(/localhost/)) {
 	api = 'https://dev.sportsbull.jp/api/big6tv/live/2018s';
+} else if (pageUrl.match(/dev.sportsbull.jp/)) {
+	api = '//dev.sportsbull.jp/api/big6tv/live/2018s';
+} else if (pageUrl.match(/stg.sportsbull.jp/)) {
+	api = '//stg.sportsbull.jp/api/big6tv/live/2018s';
 } else {
-	api = '/api/big6tv/live/2018s';
+	api = '//sportsbull.jp/api/big6tv/live/2018s';
 }
 var result = document.querySelector('#placeHolder');
 var accountId = '5704890303001';
