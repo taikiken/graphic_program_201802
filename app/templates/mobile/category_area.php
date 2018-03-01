@@ -46,12 +46,6 @@
     ?>
     <section class="main-sec">
       <?php
-      // 注目のアスリート
-      // ----------------------------------------------------
-      if(empty($page['list']) === false) :
-        include_once __DIR__.'/_category-pickup_player.php';
-      endif;
-
       // ----------------------------------------------------
       // 記事一覧: sp banner
       if ( !empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']) ) :
@@ -66,6 +60,12 @@
       <?php
       // 地域一覧
       include_once __DIR__ . '/category_area_map.php';
+
+      // 注目のアスリート
+      // ----------------------------------------------------
+      if(empty($page['list']) === false) :
+        include_once __DIR__.'/_category-pickup_player.php';
+      endif;
       ?>
 
       <div id="js-headline"></div>
