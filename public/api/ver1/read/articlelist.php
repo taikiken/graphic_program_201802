@@ -165,7 +165,10 @@ if(strlen($api)>0){
 			$f = $o->fetch_array();
 			$photoCategoryId = $f['id'];
 			//抽出条件の組み立て
-			$addConditions = ["", "d2 = '{$mediaId}'"];
+			$addConditions = ["",];
+			if($mediaId !== 'all'){
+				$addConditions[] = "d2 = '{$mediaId}'";
+			}
 			switch ($type) {
 				case 'photo':
 					$addConditions[] = "( m1 = '{$f['id']}' or m2 = '{$photoCategoryId}' )";
