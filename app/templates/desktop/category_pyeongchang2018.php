@@ -30,6 +30,12 @@ include_once __DIR__.'/_category-heading.php';
     <section class="main-sec">
 
       <?php
+      // 注目のアスリート
+      // ----------------------------------------------------
+      if(empty($page['list']) === false) :
+        include_once __DIR__.'/_category-pickup_player.php';
+      endif;
+
       // medals
       include_once __DIR__ . '/../pyeongchang2018/module/_pyeongchang2018_medals.php';
       ?>
