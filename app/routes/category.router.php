@@ -11,32 +11,45 @@ if ( $categories ) :
 
 endif;
 
-
-$s3key = 'json/ca_list.json';
-
-$json = $ImgPath . '/' . $s3key;
-$app->group('/category/{category_slug:[^all]|'.join('|',$category_slug).'}', function () use($app, $json, $ImgPath) {
+$app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app, $ImgPath) {
 
 
   // 各カテゴリートップ - /category/:category_slug/
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $ImgPath) {
 
-    $category           = $app->model->get_category_by_slug($args['category_slug']);
+    $category           = $app->model->get_category_by_slug($args['category_slug'], "", false);
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
 
     if ( $args['category_slug'] === 'big6tv' ) :
       $template_classname = $template_classname . ' theme_big6';
     endif;
 
+    /**
+     * /category/crazy/ で表示する4件固定対応
+     * @return array
+     */
+    if ($args['category_slug'] == 'crazy'){
+      $pickup_players = $app->model->get_pickup_players_ca_top();
+    }
+    else{
+      $pickup_players = $app->model->get_pickup_players($category['id'], null, 4);
+    }
     $data = [];
-      if ( $args['category_slug'] === 'crazy' ) :
-          $s3key = 'json/ca_picup_list.json';
-
-          $json = $ImgPath . '/' . $s3key;
-          $data = @file_get_contents($json);
-          $data = json_decode($data);
-      endif;
+    foreach ($pickup_players as $index => $row) {
+      $data[] = [
+          'body' => [
+              'no' => $row['id'],
+              'name' => $row['name'],
+              'name_kana' => $row['name_kana'],
+              'competition' => $row['competition'],
+              'description' => $row['description'],
+              'img' => $row['img1'],
+          ],
+      ];
+    }
+    //オブジェクト化する
+    $data = json_decode(json_encode($data));
 
     $args['page'] = $app->model->set(array(
       'title'              => $category['label'],
@@ -127,49 +140,6 @@ $app->group('/category/{category_slug:[^all]|'.join('|',$category_slug).'}', fun
     return $this->renderer->render($response, "default.php", $args);
 
   });
-
-    // CRAZY ATHLETE v2.0
-    $this->get('/{type:athletes}[/]', function ($request, $response, $args) use ($app, $json) {
-        // 選手詳細ルーティング
-
-        $data = @file_get_contents($json);
-
-        // jsonの中身が空の場合404
-        if(empty($data))
-        {
-            // 404
-            // ------------------------------
-            $args['page'] = $app->model->set([
-                'title'    => '404 Not Found',
-                'og_title' => '404 Not Found',
-                'template' => 404,
-            ]);
-
-            $args['request']  = $request;
-            $args['response'] = $response;
-
-            if($app->model->property('ua') === 'desktop')
-            {
-                return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
-            }
-            else
-            {
-                return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
-            }
-        }
-
-        $data = json_decode($data);
-        $args['page'] = $app->model->set(array(
-            'title'              => 'CRAZY ATHLETES',
-            'og_title'           => 'CRAZY ATHLETES | '.$app->model->property('title'),
-            'path'               => $args,
-            'template'           => 'category_list',
-            'template_classname' => '',
-            'list'               => $data
-        ));
-
-        return $this->renderer->render($response, 'crazy/list.php', $args);
-    });
 
   // webviews - /category/:category_slug/webviews/:slug  ref. #1918
   // ==============================

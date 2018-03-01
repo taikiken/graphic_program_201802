@@ -18,11 +18,10 @@ import View from '../../view/View';
 
 // component
 // import ComponentCategoryLabelsLink from '../categories/ComponentCategoryLabelsLink';
-
-// ga
-import { Ga } from '../../ga/Ga';
-
 import { SingleDae } from '../../dae/SingleDae';
+
+// Ga
+import { Ga } from '../../ga/Ga';
 
 // React
 /**

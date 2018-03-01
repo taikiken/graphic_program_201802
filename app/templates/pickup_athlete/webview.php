@@ -5,7 +5,7 @@
         <meta http-equiv="pragma" content="no-cache">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>インターハイ WebView | SPORTS BULL</title>
+        <title>SPORTS BULL</title>
         <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
         <!-- インターハイ css -->
         <link rel="stylesheet" href="/assets/css/crazy.css">
@@ -37,7 +37,7 @@
             </ul>
         </div>
 
-        <div class="more_btn pc_hide"><a href="/crazy/list/"><i></i>すべての選手を見る</a></div>
+        <div class="more_btn pc_hide"><a href="/pickup_athletes/<?php echo $page['category']['slug']; ?>/list/"><i></i>すべての選手を見る</a></div>
     </section>
     <section class="section_crazy_popular pc_hide">
         <div class="ttl-wrapper pc_hide">

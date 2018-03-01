@@ -10,7 +10,6 @@ if (
   $template_name == '404' ||
   $template_name == 'category' ||
   $template_name == 'p' ||
-  $template_name == 'comment' ||
   $template_name == 'search' ||
   $template_name == 'signup_login' ||
   $template_name == 'settings' ||

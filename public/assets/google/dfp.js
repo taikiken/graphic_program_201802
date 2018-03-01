@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   // bottom
   DFPDefileSlot(
-    '/531683568/article-detail/article-detail-mobile-rectangle-D',
+    '/531683568/article-detail/article-detailp-mobile-rectangle-D',
     [300, 250],
     'ad-gpt-article-detail-footer'
   );

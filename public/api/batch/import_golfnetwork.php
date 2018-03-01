@@ -20,7 +20,7 @@ while($f=$o->fetch_array()){
 }
 
 function get_index(){
-	
+
 	$xml="https://www.golfnetwork.co.jp/rss/column2.xml 135";
 
 	$file=explode("\n",$xml);
@@ -35,10 +35,10 @@ function get_index(){
 $data=get_index();
 
 while(list($k,$v)=each($data)){
-	
+
 	unset($s);
 	$d=$v["channel"]["item"];
-	
+
 	if($v["channel"]["item"]["title"]){
 		$entry=$v["channel"]["item"];
 		unset($d);
@@ -46,16 +46,16 @@ while(list($k,$v)=each($data)){
 	}
 
 	for($i=0;$i<count($d);$i++){
-		
+
 		$s["m1"]=$k;
 		$s["m2"]=116;
 		$s["title"]=$d[$i]["title"];
 		$s["t9"]=$d[$i]["link"];
 		$s["t7"]=$d[$i]["link"];
-		
+
 		$body=sprintf("<p>%s</p>",str_replace("\n","<br>",str_replace("\n\n","</p><p>",$d[$i]["description"])));
 		$modbody=pg_escape_string($body);
-		
+
 		$datetime=date("Y-m-d H:i:s",strtotime($d[$i]["pubDate"]));
 		$s["m_time"]=$datetime;
 		$s["u_time"]=$datetime;
@@ -68,9 +68,9 @@ while(list($k,$v)=each($data)){
 		$sql=sprintf("select * from repo_n where d2=%s and t7='%s'",$MEDIAID,$s["t7"]);
 		$o->query($sql);
 		$f=$o->fetch_array();
-		
+
 		unset($sqla);
-		
+
 		if(strlen($f["id"])>0){
 			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
@@ -102,7 +102,7 @@ while(list($k,$v)=each($data)){
 
 			$sqla=implode("\n",$sqla);
 			$o->query($sqla);
-		    
+
 			if(!isset($f["id"])){
 				$sql="select currval('repo_n_id_seq') as id";
 				$o->query($sql);
@@ -110,8 +110,8 @@ while(list($k,$v)=each($data)){
 				$id=$f["id"];
 			}else{
 				$id=$f["id"];
-			}			
-			
+			}
+
 			$file=sprintf("%s/api/ver1/static/ad/1-%s.dat",$SERVERPATH,$id);
     		if($vs=get_contents($file)){
 				$vs=unserialize($vs);

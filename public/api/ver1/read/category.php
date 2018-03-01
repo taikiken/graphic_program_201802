@@ -165,6 +165,13 @@ SQL;
 
   if (!empty($f))
   {
+    // フルパスで返す
+    $domain = "https://" . $_SERVER["HTTP_HOST"];
+    $cf = $bucket=="img-sportsbull-jp" ? 'https://img.sportsbull.jp/raw/' : 'https://dev-img.sportsbull.jp/raw/';
+    // img、linkはnullの場合あるから空にする
+    $f['img'] = isset($f['img']) ? $cf . $f['img'] : '';
+    $f['link'] = isset($f['link']) ? $f['link'] : '';
+
     // 定数
     $type = $f['type'];
     $text_color = ['#333333', '#333333', ''];
@@ -273,20 +280,12 @@ SQL;
     );
   endif;
 
-  #crazy
-  # ref. #2559
-  if ( $category === 'crazy' ) :
-    $categoriesinfo['webviews']     = array(
-        '/crazy/webview/',
-    );
-  endif;
-
-  // #UNDO_SPBL-293
-  if ( $category === 'pyeongchang2018' ) :
-    $categoriesinfo['webviews']     = array(
-      '/pyeongchang2018/webview/',
-    );
-  endif;
+  // https://aws-plus.backlog.jp/view/UNDO_SPBL-484#comment-1190761405
+  // if ( $category === 'pyeongchang2018' ) :
+  //   $categoriesinfo['webviews']     = array(
+  //     '/pyeongchang2018/webview/',
+  //   );
+  // endif;
 
   // #2080
   if ( $category === 'top' ) :
@@ -296,11 +295,29 @@ SQL;
   endif;
 
 
-  // if (!empty($category)) {
-  //   $categoriesinfo['webviews'][] = '/category/' . $category . '/pickup_athletes/webview/';
-  // }
+// 1件でもあったら
+$sql = <<<SQL_EOL
+  SELECT
+    id
+  FROM
+   u_categories
+  WHERE
+    name_e = '{$category}'
 
-  $y["response"]=$categoriesinfo;
+SQL_EOL;
+
+$o->query($sql);
+
+$category_id = $o->fetch_object()->id;
+
+$pickup_players = get_pickup_players($category_id);
+
+if (!empty($category) && !empty($pickup_players))
+{
+  $categoriesinfo['webviews'][]     = '/pickup_athletes/' . $category . '/webview/';
+}
+
+$y["response"]=$categoriesinfo;
 
 print_json($y,$_SERVER['HTTP_REFERER']);
 

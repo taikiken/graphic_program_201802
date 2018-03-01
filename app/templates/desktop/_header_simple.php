@@ -109,7 +109,7 @@ if ( !empty( $page['template_classname'] ) ) {
   $whole_classes[] = $page['template_classname'];
 }
 // 記事詳細
-if ( $template_name == 'p' || $template_name == 'comment' ) {
+if ( $template_name == 'p' ) {
 
   // 記事詳細へ識別 CSS class 追加
   $whole_classes[] = 'post-single';
@@ -157,7 +157,6 @@ if (
   $template_name == '404' ||
   $template_name == 'category' ||
   $template_name == 'p' ||
-  $template_name == 'comment' ||
   $template_name == 'search' ||
   $template_name == 'settings' ||
   $template_name == 'settings.social' ||
