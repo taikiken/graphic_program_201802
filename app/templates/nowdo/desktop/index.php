@@ -8,6 +8,7 @@
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/libs/jquery2/jquery.min.js?v="></script>
+  <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
   <link rel="stylesheet" href="/assets/css/<?php echo $page['dir_name']; ?>/nowdo.css?v=<?php echo $page['version']; ?>">
 
   <script type='text/javascript'>
@@ -655,7 +656,7 @@ include_once __DIR__ . '/../../_env.php';
 			$.ajax({
 				data:$(this).serialize()+"&ftype="+active,
 				type:"POST",
-				url:"submit.php",
+				url:"./submit/",
 				success:function(m){
 					if(m.error){
 						$("input,textarea,select",aform).prop("readonly",false);
