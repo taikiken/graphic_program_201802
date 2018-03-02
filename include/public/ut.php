@@ -1473,7 +1473,7 @@ SQL;
   }
 
   $sql .= ' GROUP BY p.id, p.name, p.name_kana, p.competition, p.description, p.n, p.flag, p.img1, p.link_word, p.category,
-  p.og_img, p.seo_description, p.seo_keyword, p.m_time, p.u_time';
+  p.og_img, p.seo_description, p.seo_keyword, p.m_time, p.u_time, p.category_sub';
 
   if ($big4_flag)
   {
