@@ -844,7 +844,8 @@ export default class ComScore extends Component {
   // ----------------------------------------
   /**
    * スコアボードを出力します
-   * section.mlb_live__scoreboard__section
+   * - section.mlb_live__scoreboard__section
+   * - info.spring(JSON.is_spring) key 対応追加 from 2018-03-02
    * @returns {?XML} section.mlb_live__scoreboard__section
    */
   render() {
