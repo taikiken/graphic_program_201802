@@ -1488,7 +1488,7 @@ FROM u_headline uh
   INNER JOIN tbl_player p ON uh.d2 = p.id
 WHERE d2 IN (21, 9, 16, 20)
 GROUP BY p.id, p.name, p.name_kana, p.competition, p.description, p.n, p.flag, p.img1, p.link_word, p.category,
-  p.og_img, p.seo_description, p.seo_keyword, p.m_time, p.u_time, uh.d2
+  p.og_img, p.seo_description, p.seo_keyword, p.m_time, p.u_time, uh.d2, p.category_sub
 ORDER BY CASE WHEN d2 = 21
   THEN 1
          ELSE d2 END
