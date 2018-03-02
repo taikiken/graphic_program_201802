@@ -24,6 +24,7 @@ $adId = array(
 
 // アプリとスマホでアドジェネIDかえる
 if ( !$page['post']['is_sponserd'] ) :
+
   if ( $page['ua_app'] ) :
     $adIds['adgene']['ranking']   = '59626';
     $adIds['adgene']['headline']  = '59625,59625';
@@ -35,6 +36,7 @@ if ( !$page['post']['is_sponserd'] ) :
     $adIds['adgene']['recommend'] = '59628,59628';
     $adIds['adgene']['news']      = '59627,59627,59627,59627,59627,59627,59627,59627';
   endif;
+
 endif;
 
 ?>
@@ -512,7 +514,7 @@ endif;
     <?php endif; ?>
 
   <?php if ( !$page['post']['is_sponserd'] ) : ?>
-    showContentDFP();
+    // showContentDFP();
   <?php endif; ?>
 
   <?php if ( $page['ua_app'] ) : ?>
@@ -538,3 +540,14 @@ endif;
   <?php endif; ?>
 
 </script>
+
+<?php
+/*
+
+ref. UNDO_SPBL-478 【課題管理】記事詳細本文中差し込み広告をTeadsにする
+- 記事詳細本文差し込みの代わりにTeadsを表示
+
+*/
+if ( !$page['post']['is_sponserd'] ) : ?>
+<script src="//a.teads.tv/page/80648/tag" async="true"></script>
+<?php endif; ?>

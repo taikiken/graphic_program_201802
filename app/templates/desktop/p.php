@@ -105,7 +105,7 @@
           <?php
           /*
           DFP - 記事本文中差し込み広告
-          */ ?>
+          - Teadsで代替 ref. UNDO_SPBL-478
           <?php if ( !$page['post']['is_sponserd'] ) : ?>
             <script>
               var bodyP = document.querySelectorAll('.post-detail .post-content > p');
@@ -121,6 +121,7 @@
               }
             </script>
           <?php endif; ?>
+          */ ?>
           </div><!-- /.post-content -->
 
           <div class="post-sns">
@@ -249,3 +250,14 @@
 
   </div>
 </div><!-- /.body-sec -->
+
+<?php
+/*
+
+ref. UNDO_SPBL-478 【課題管理】記事詳細本文中差し込み広告をTeadsにする
+- 記事詳細本文差し込みの代わりにTeadsを表示
+
+*/
+if ( !$page['post']['is_sponserd'] ) : ?>
+<script src="//a.teads.tv/page/80647/tag" async="true"></script>
+<?php endif; ?>
