@@ -48,7 +48,7 @@ $app->group('/nowdo',  function () use($app) {
   });
 
 
-  $this->get('/submit[/]', function ($request, $response, $args) use ($app) {
+  $this->post('/submit[/]', function ($request, $response, $args) use ($app) {
 
     return $this->renderer->render($response, 'nowdo/submit.php', $args);
 
