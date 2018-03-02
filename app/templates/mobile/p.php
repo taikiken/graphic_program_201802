@@ -24,6 +24,7 @@ $adId = array(
 
 // アプリとスマホでアドジェネIDかえる
 if ( !$page['post']['is_sponserd'] ) :
+
   if ( $page['ua_app'] ) :
     $adIds['adgene']['ranking']   = '59626';
     $adIds['adgene']['headline']  = '59625,59625';
@@ -35,6 +36,7 @@ if ( !$page['post']['is_sponserd'] ) :
     $adIds['adgene']['recommend'] = '59628,59628';
     $adIds['adgene']['news']      = '59627,59627,59627,59627,59627,59627,59627,59627';
   endif;
+
 endif;
 
 ?>
@@ -319,7 +321,7 @@ endif;
             </h4>
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="post-sns-fixed">
-                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+                <div class="post-sns-item_fbgood"><div class="fb-like" data-href="https://www.facebook.com/sportsbull/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
               </div>
             <?php endif; ?>
           </div>
@@ -495,10 +497,24 @@ endif;
       }, 300);
       btnContainer.parentNode.removeChild(btnContainer);
     });
+
+    if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
+      bodyElement.classList.remove('restricted');
+      bodyElement.classList.remove('noevent');
+      btnContainer.parentNode.removeChild(btnContainer);
+    }
   }
 
+    <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
+      bodyElement.classList.remove('restricted');
+      setTimeout(() => {
+        bodyElement.classList.remove('noevent');
+      }, 300);
+      btnContainer.parentNode.removeChild(btnContainer);
+    <?php endif; ?>
+
   <?php if ( !$page['post']['is_sponserd'] ) : ?>
-    showContentDFP();
+    // showContentDFP();
   <?php endif; ?>
 
   <?php if ( $page['ua_app'] ) : ?>
@@ -524,3 +540,14 @@ endif;
   <?php endif; ?>
 
 </script>
+
+<?php
+/*
+
+ref. UNDO_SPBL-478 【課題管理】記事詳細本文中差し込み広告をTeadsにする
+- 記事詳細本文差し込みの代わりにTeadsを表示
+
+*/
+if ( !$page['post']['is_sponserd'] ) : ?>
+<script src="//a.teads.tv/page/80648/tag" async="true"></script>
+<?php endif; ?>
