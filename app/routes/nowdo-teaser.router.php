@@ -39,12 +39,6 @@ $app->group('/nowdo',  function () use($app) {
   // ==============================
   // $this->get('/live[/]', function ($request, $response, $args) use ($app, $page) {
 
-  $this->post('/submit[/]', function ($request, $response, $args) use ($app) {
-
-    return $this->renderer->render($response, 'nowdo/submit.php', $args);
-
-  });
-
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
 
     $args['path'] = $args;
@@ -54,6 +48,11 @@ $app->group('/nowdo',  function () use($app) {
 
   });
 
+  $this->post('/submit[/]', function ($request, $response, $args) use ($app) {
+
+    return $this->renderer->render($response, 'nowdo/submit.php', $args);
+
+  });
 
 });
 
