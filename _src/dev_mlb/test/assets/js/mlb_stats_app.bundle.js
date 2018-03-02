@@ -42926,7 +42926,7 @@ exports.default = Games;
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  * 0.2.2
- * buildTime: 2018-3-2 16:44:54
+ * buildTime: 2018-3-2 19:52:53
  */
 // use strict は本来不要でエラーになる
 // 無いと webpack.optimize.UglifyJsPlugin がコメントを全部削除するので記述する
@@ -86396,18 +86396,17 @@ var ComInfo = function (_Component) {
           member = _props3.member,
           team = _props3.team,
           innings = _props3.innings;
-      // @since 2018-03-03 - オープン戦は表示しない
-
-      if (info.spring) {
-        return null;
-      }
       // console.log('ComInfo.render info, member, team', info, member, team);
+
       if (!info || !member || !team || !innings) {
         return this.empty();
         // return null;
       } else if (!team.ids.length || !team.list.length) {
         // data 不正
         return this.empty();
+      } else if (info.spring) {
+        // @since 2018-03-03 - オープン戦は表示しない
+        return null;
       }
       // render
       return _react2.default.createElement(
@@ -90368,7 +90367,8 @@ var ComScore = function (_Component) {
     // ----------------------------------------
     /**
      * スコアボードを出力します
-     * section.mlb_live__scoreboard__section
+     * - section.mlb_live__scoreboard__section
+     * - info.spring(JSON.is_spring) key 対応追加 from 2018-03-02
      * @returns {?XML} section.mlb_live__scoreboard__section
      */
 
