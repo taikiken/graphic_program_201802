@@ -39,7 +39,7 @@ var getJson = function getJson() {
             if (windowWidth > 768) {
                 imageTag = '<a href="/sportsbull.jp/big6tv/2018s/"><img src="/img/bnr_offair.png"></a>';
             } else {
-                imageTag = '<a href="/sportsbull.jp/big6tv/2018s/"><img src="/img/bnr_onair_sp.png"></a>';
+                imageTag = '<a href="/sportsbull.jp/big6tv/2018s/"><img src="/img/bnr_offair_sp.png"></a>';
             }
             insertElement.innerHTML = imageTag;
         }
