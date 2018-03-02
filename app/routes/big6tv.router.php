@@ -53,9 +53,9 @@ $app->group('/{slug:big6tv}', function () use ($app) {
     ];
     $s3key = implode('/', $arr);
 
-    $S3Module = new S3Module;
-    $json = $S3Module->getUrl($s3key);
 
+    global $bucket;
+    $json = sprintf("https://%s/%s",$bucket,$s3key);
     // jsonからタイトルつくる
     // フロントはいつでも本番のバケットのjson取得してる
     // ルーティングではUT_ENVみてバケット分けている
