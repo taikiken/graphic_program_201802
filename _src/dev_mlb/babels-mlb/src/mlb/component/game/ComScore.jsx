@@ -882,6 +882,7 @@ export default class ComScore extends Component {
           auto={this.onAuto}
           manual={this.onManual}
           reload={this.onReload}
+          spring={info.spring}
         />
       </section>
     );

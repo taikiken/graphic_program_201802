@@ -420,9 +420,14 @@ export default class ComInfo extends Component {
   /**
    * tab 切替親コンテナ
    * @returns {?XML} div#js-info-container
+   * @since 2018-03-03 オープン戦は表示しない
    */
   render() {
     const { info, member, team, innings } = this.props;
+    // @since 2018-03-03 - オープン戦は表示しない
+    if (info.spring) {
+      return null;
+    }
     // console.log('ComInfo.render info, member, team', info, member, team);
     if (!info || !member || !team || !innings) {
       return this.empty();
