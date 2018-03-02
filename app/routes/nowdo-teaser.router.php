@@ -43,11 +43,14 @@ $app->group('/nowdo',  function () use($app) {
     $args['path'] = $args;
     $args['page'] = $page;
 
-    if ( $app->model->property('ua') === 'desktop' ) :
-      return $this->renderer->render($response, 'nowdo/desktop/index.php', $args);
-    else :
-      return $this->renderer->render($response, 'nowdo/desktop/index.php', $args);
-    endif;
+    return $this->renderer->render($response, 'nowdo/desktop/index.php', $args);
+
+  });
+
+
+  $this->get('/submit[/]', function ($request, $response, $args) use ($app) {
+
+    return $this->renderer->render($response, 'nowdo/submit.php', $args);
 
   });
 
