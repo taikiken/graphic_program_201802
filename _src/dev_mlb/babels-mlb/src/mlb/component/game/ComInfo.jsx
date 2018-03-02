@@ -424,10 +424,6 @@ export default class ComInfo extends Component {
    */
   render() {
     const { info, member, team, innings } = this.props;
-    // @since 2018-03-03 - オープン戦は表示しない
-    if (info.spring) {
-      return null;
-    }
     // console.log('ComInfo.render info, member, team', info, member, team);
     if (!info || !member || !team || !innings) {
       return this.empty();
@@ -435,6 +431,9 @@ export default class ComInfo extends Component {
     } else if (!team.ids.length || !team.list.length) {
       // data 不正
       return this.empty();
+    } else if (info.spring) {
+      // @since 2018-03-03 - オープン戦は表示しない
+      return null;
     }
     // render
     return (
