@@ -109,6 +109,12 @@ include_once __DIR__.'/_category-heading.php';
       </div><!-- /.guideboard -->
 
       <?php
+      // 注目のアスリート
+      // ----------------------------------------------------
+      if(empty($page['list']) === false) :
+        include_once __DIR__.'/_category-pickup_player.php';
+      endif;
+
       // ----------------------------------------------------
       // 記事一覧: pc banner
       if ( !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
