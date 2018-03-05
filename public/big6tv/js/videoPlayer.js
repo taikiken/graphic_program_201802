@@ -37,6 +37,7 @@ var data = {
 		}
 	}
 };
+
 var getJson = function getJson() {
 	$.ajax({
 		type: "GET",
@@ -57,29 +58,49 @@ var getJson = function getJson() {
 			setInterval(getJson, data.live.interval * 1000);
 		}
 		if (data.live.isPlaying) {
-			if (!flg) {
-				location.reload();
-			} else if (data.live.isPlaying && flg && !videoLoaded) {
-				var _playerHTML = '<video id="myPlayerID" class="video-js" data-video-id="' + data.live.video.id + '" data-account="' + accountId + '" data-player="' + playerId + '" data-embed="default" data-application-id controls >';
-				result.innerHTML = _playerHTML;
-				var scriptTag = document.createElement('script');
-				scriptTag.src = '//players.brightcove.net/' + accountId + '/' + playerId + '_default/index.min.js';
-				document.body.appendChild(scriptTag);
-				scriptTag.onload = function () {
-					callback();
-				};
+			if (!videoLoaded) {
+				mountVideoDom();
 				videoLoaded = true;
 			}
 		} else {
 			var liveBeforeImg = '<img src="' + data.live.alt.large + '">';
 			flg = data.live.isPlaying;
 			result.innerHTML = liveBeforeImg;
+			if (!flg) {
+				videoLoaded = false;
+				var videoScript = document.getElementById('videoScript');
+				if (videoScript) {
+					videoScript.remove();
+				} else {
+					console.log('no video script');
+				}
+			}
 		}
 	}, function () {
 		console.log('failed load');
 		var loadErrorImg = '<img src="' + data.live.error.large + '">';
 		result.innerHTML = loadErrorImg;
 	});
+};
+
+var mountVideoDom = function mountVideoDom() {
+	var playerHTML = '<video id="myPlayerID" class="video-js" data-video-id="' + data.live.video.id + '" data-account="' + accountId + '" data-player="' + playerId + '" data-embed="default" data-application-id controls >';
+	result.innerHTML = playerHTML;
+	var scriptTag = document.createElement('script');
+	scriptTag.src = '//players.brightcove.net/' + accountId + '/' + playerId + '_default/index.min.js';
+	scriptTag.id = 'videoScript';
+	document.body.appendChild(scriptTag);
+	scriptTag.onload = function () {
+		callback();
+		videojs('myPlayerID').ready(function () {
+			var myPlayer = this;
+			myPlayer.on('error', function () {
+				var errorHTML = '<img src="' + data.live.error.large + '">';
+				result.innerHTML = errorHTML;
+				videoLoaded = false;
+			});
+		});
+	};
 };
 
 var callback = function callback() {
