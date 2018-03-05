@@ -107,9 +107,11 @@ if($q->get_dir()==3){
           </ul>
         </div><!-- End topicPath -->
         <?php if($q->get_dir()==3){ ?>
+          <?php if(!$CURRENTDIRECTORY=='pickup_athlete_big4'){ ?>
           <div id="helpExp">
             <p><img src="/shared/cms/img/cmd_up.gif" alt="一つ上へ" width="13" height="13" >は並び順を一つ上に、<img src="/shared/cms/img/cmd_down.gif" alt="一つ下へ" width="13" height="13" >は一つ下に入れ替えます。<img src="/shared/cms/img/cmd_active.gif" alt="表示" width="13" height="13" >は公開に、<img src="/shared/cms/img/cmd_disactive.gif" alt="非表示" width="13" height="13" >は非公開に設定されていることを表し、それぞれクリックで切り替えます。</p>
           </div><!-- End helpExp -->
+          <?php } ?>
         <?php }elseif($q->get_dir()==1){ ?>
           <div id="loadingDiv"><p class="swtxt">画像をリサイズしています.....</p></div>
         <?php } ?>

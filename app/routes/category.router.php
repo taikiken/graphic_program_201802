@@ -27,14 +27,9 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
     /**
      * /category/crazy/ で表示する4件固定対応
-     * @return array
      */
-    if ($args['category_slug'] == 'crazy'){
-      $pickup_players = $app->model->get_pickup_players_ca_top();
-    }
-    else{
-      $pickup_players = $app->model->get_pickup_players($category['id'], null, 4);
-    }
+    $pickup_players = $app->model->get_pickup_players($category['id'], null, 4, true);
+
     $data = [];
     foreach ($pickup_players as $index => $row) {
       $data[] = [
