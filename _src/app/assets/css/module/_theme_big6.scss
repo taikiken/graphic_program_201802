@@ -105,6 +105,25 @@ $border-color: #585959;
     }
   }
 
+  &.post-single {
+    .board-large {
+      .board-item {
+        // border-bottom-color: #1b1b1b;
+        background-color: transparent;
+      }
+
+      .post {
+        @include link-decoration(#333, null, none, none);
+
+        &:hover {
+          .post-heading {
+            color: #0e357f !important;
+          }
+        }
+      }
+    }
+  }
+
   .sponsor-link-ranking,
   .sponsor-link-recommend {
     .adgLink {

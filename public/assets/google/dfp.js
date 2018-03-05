@@ -37,24 +37,159 @@ if ( googletag.pubads ) {
 }
 
 
-
-googletag.cmd.push(function() {
-  // /531683568/mobile/mobile_index_bottom
-  googletag.defineSlot('/531683568/mobile/mobile_index_bottom', [300, 250], 'div-gpt-ad-1514446255569-0').addService(googletag.pubads());
-
-
-  googletag.pubads().enableSingleRequest();
-  googletag.pubads().collapseEmptyDivs();
-  googletag.enableServices();
-});
-
-
-
 document.addEventListener("DOMContentLoaded", function(event) {
+
+  /**
+  *
+  * config
+  *
+  */
   googletag.cmd.push(function() {
-
-    // /531683568/mobile/mobile_index_bottom
-    googletag.display('div-gpt-ad-1514446255569-0');
-
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().collapseEmptyDivs();
+    googletag.enableServices();
   });
+
+  /**
+  * DFPDefileSlot
+  *
+  * @param  string  slot - DFPのID
+  * @param  array   size - 枠のサイズ
+  * @param  string  target - 表示するDIV
+  */
+
+  var DFPDefileSlot = function( slot, size, target ) {
+    if ( document.getElementById( target ) !== null ) {
+
+      googletag.cmd.push(function() {
+        googletag.defineSlot( slot, size, target ).addService(googletag.pubads());
+      });
+
+      googletag.cmd.push(function() {
+        googletag.display( target );
+      });
+
+    }
+  };
+
+
+  /**
+  *
+  * define
+  *
+  */
+
+  // # desktop
+  // ==============================
+
+  // ## desktop - detail
+  // ------------------------------
+  // title bottom
+  DFPDefileSlot(
+    '/531683568/article-detail/article-deital-desktop-bigbanner-A',
+    [728, 90],
+    'div-gpt-ad-article-deital-desktop-bigbanner-A'
+  );
+
+  // body insert - left
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-A',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-A'
+  );
+
+  // body insert - right
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-B',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-B'
+  );
+
+  // headline bottom - left
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-C',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-C'
+  );
+
+  // headline bottom - left
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-D',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-D'
+  );
+
+
+  // bottom - left
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-E',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-E'
+  );
+
+  // bottom - right
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-desktop-rectangle-F',
+    [300, 250],
+    'div-gpt-ad-article-detail-desktop-rectangle-F'
+  );
+
+
+  // # mobile
+  // ==============================
+
+  // ## index & list
+  // ------------------------------
+  // list- bottom
+  DFPDefileSlot(
+    '/531683568/mobile/mobile_index_bottom',
+    [300, 250],
+    'div-gpt-ad-1514446255569-0'
+  );
+
+
+  // ## detail
+  // ------------------------------
+  // body insert
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-mobile-rectangle-A',
+    [300, 250],
+    'ad-gpt-article-detail-body-insert'
+  );
+
+  // body bottom
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-mobile-rectangle-B',
+    [300, 250],
+    'ad-gpt-article-detail-body-bottom'
+  );
+
+  // recommend bottom
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-mobile-rectangle-C',
+    [300, 250],
+    'ad-gpt-article-detail-recommend-bottom'
+  );
+
+  // bottom
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detailp-mobile-rectangle-D',
+    [300, 250],
+    'ad-gpt-article-detail-footer'
+  );
+
+  // for app
+  var webkit = window.webkit || {};
+  var messageHandlers = webkit.messageHandlers || {};
+  var onLoadComplete = messageHandlers.onLoadComplete || {};
+  var postMessage = onLoadComplete.postMessage;
+  if ( typeof postMessage === 'function' ) {
+    window.webkit.messageHandlers.onLoadComplete.postMessage('');
+    (window.onload = function() {
+      setTimeout(function() {
+        window.webkit.messageHandlers.onLoadComplete.postMessage('');
+      }, 3000);
+    });
+  }
+
 });

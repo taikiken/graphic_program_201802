@@ -33,14 +33,7 @@
 
         <?php include_once __DIR__."/_app_body.php"; ?>
 
-        <?php if ( $page['post']['is_sponserd'] === false ) : ?>
-        <!-- /531683568/app_webview/app_webview_article_bottom -->
-        <div id='div-gpt-ad-1507098798348-0' style='height:250px; width:300px; margin: 20px auto;'>
-        <script>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507098798348-0'); });
-        </script>
-        </div>
-        <?php endif; ?>
+
 
       </div><?php //.post-detail ?>
 
