@@ -12,7 +12,7 @@
   2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
 
   <div class="intro__banner">
-    <a href="hoge" target="_blank"><img class="show-for-pc" src="/assets/images/red-bull-crashed-ice-2018/banner-crashedice.jpg" alt="Red Bull TV"><img class="show-for-sp" src="/assets/sp/images/red-bull-crashed-ice-2018/banner-crashedice.jpg" alt="Red Bull TV"></a>
+    <a href="https://www.redbull.com/jp-ja/events/red-bull-crashed-ice-edmonton" target="_blank"><img class="show-for-pc" src="/assets/images/red-bull-crashed-ice-2018/banner-crashedice.jpg" alt="Red Bull TV"><img class="show-for-sp" src="/assets/sp/images/red-bull-crashed-ice-2018/banner-crashedice.jpg" alt="Red Bull TV"></a>
   </div>
 
   <div class="intro__link__app"><a href="https://app.adjust.com/paf496?deep_link=sportsbull%3A%2F%2F" target="_blank">アプリでライブ配信開始の通知を受け取る</a></div>
@@ -162,7 +162,7 @@
       </tr>
       <tr>
         <th>WEB</th>
-        <td>http://crashedice.redbull.com/ja_INT</td>
+        <td><a href="http://crashedice.redbull.com/ja_INT" taeget="_blank">http://crashedice.redbull.com/ja_INT</a></td>
       </tr>
     </tbody>
   </table><!-- /.overview__data -->
@@ -219,7 +219,7 @@
     <h4 class="related__topics__heading"><img class="show-for-pc" src="/assets/images/red-bull-crashed-ice-2018/related-topics-heading.png" alt="外部記事"><img class="show-for-sp" src="/assets/sp/images/red-bull-crashed-ice-2018/related-topics-heading.png" alt="外部記事"></h4>
 
     <div class="related__topics__post">
-      <a href="hoge" target="_blank">
+      <a href="https://www.redbull.com/jp-ja/crashed-ice-basic-knowledge" target="_blank">
         <figure class="related__topics__post__thumb"><img src="/assets/images/red-bull-crashed-ice-2018/related-topics-thumb1.jpg" alt=""></figure>
         <div class="related__topics__post__text">
           <h5><span>【５分で学べる】</span><br />
@@ -229,7 +229,7 @@
     </div><!-- /.related__topics__post -->
 
     <div class="related__topics__post">
-      <a href="hoge" target="_blank">
+      <a href="https://www.redbull.com/jp-ja/crashed-ice-junko-yamamoto-interview" target="_blank">
         <figure class="related__topics__post__thumb"><img src="/assets/images/red-bull-crashed-ice-2018/related-topics-thumb2.jpg" alt=""></figure>
         <div class="related__topics__post__text">
           <h5><span>【Red Bull Crashed Ice】 タイヘンなのは氷上だけじゃない？</span><br />
@@ -239,7 +239,7 @@
     </div><!-- /.related__topics__post -->
 
     <div class="related__topics__post">
-      <a href="hoge" target="_blank">
+      <a href="https://www.redbull.com/jp-ja/red-bull-crashed-ice-2-big-busters-interview" target="_blank">
         <figure class="related__topics__post__thumb"><img src="/assets/images/red-bull-crashed-ice-2018/related-topics-thumb3.jpg" alt=""></figure>
         <div class="related__topics__post__text">
           <h5><span>【ならず者アスリート登場？】</span><br />
@@ -249,7 +249,7 @@
     </div><!-- /.related__topics__post -->
 
     <div class="related__topics__post">
-      <a href="hoge">
+      <a href="https://www.redbull.com/jp-ja/insiders-red-bull-crashed-ice-pov" target="_blank">
         <figure class="related__topics__post__thumb"><img src="/assets/images/red-bull-crashed-ice-2018/related-topics-thumb4.jpg" alt=""></figure>
         <div class="related__topics__post__text">
           <h5>Red Bull Crashed Iceを試してみた</h5>
