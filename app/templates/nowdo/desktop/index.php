@@ -179,7 +179,6 @@ include_once __DIR__ . '/../../_env.php';
         </section>
         <!-- /.section_03 -->
         <section class="section_04" id="recruit">
-          <div class="dot_filter"></div>
           <div class="txt_block">
             <h2 class="section_ttl"><img src="../assets/images/nowdo/section_ttl_04.png" alt="RECRUIT"></h2>
             <p class="section_copy">コーチ・施設を募集します</p>
