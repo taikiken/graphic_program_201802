@@ -498,12 +498,19 @@ endif;
       btnContainer.parentNode.removeChild(btnContainer);
     });
 
-    if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
+    // # UNDO_SPBL-495
+    // if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
       bodyElement.classList.remove('restricted');
       bodyElement.classList.remove('noevent');
       btnContainer.parentNode.removeChild(btnContainer);
-    }
+    // }
+
   }
+
+  <?php
+  /*
+
+  # UNDO_SPBL-495 で「続き表示」はすべての環境でなしとする
 
     <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
       bodyElement.classList.remove('restricted');
@@ -512,6 +519,9 @@ endif;
       }, 300);
       btnContainer.parentNode.removeChild(btnContainer);
     <?php endif; ?>
+
+  */
+  ?>
 
   <?php if ( !$page['post']['is_sponserd'] ) : ?>
     // showContentDFP();
