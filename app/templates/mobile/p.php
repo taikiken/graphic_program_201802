@@ -281,7 +281,8 @@ endif;
               <div id="post-content-banner" onclick="window.JsInterface.onBannerClick();"></div>
             <?php endif; ?>
 
-            <?/*
+            <?php
+            /*
 
             # UNDO_SPBL-495 で「続き表示」はすべての環境でなしとする
 
@@ -295,6 +296,7 @@ endif;
                 <?php endif; ?>
               </div>
             <?php endif; ?>
+
             */
             ?>
 
