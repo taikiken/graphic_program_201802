@@ -15,7 +15,7 @@
     <a href="https://www.redbull.com/jp-ja/events/red-bull-crashed-ice-edmonton" target="_blank"><img class="show-for-pc" src="/assets/images/red-bull-crashed-ice-2018/banner-crashedice.jpg" alt="Red Bull TV"><img class="show-for-sp" src="/assets/sp/images/red-bull-crashed-ice-2018/banner-crashedice.jpg" alt="Red Bull TV"></a>
   </div>
 
-  <div class="intro__link__app"><a href="https://app.adjust.com/paf496?deep_link=sportsbull%3A%2F%2F" target="_blank">アプリでライブ配信開始の通知を受け取る</a></div>
+  <div class="intro__link__app"><a href="https://app.adjust.com/aftzbz" target="_blank">アプリでライブ配信開始の通知を受け取る</a></div>
 
   <div class="intro__timetable">
     <table>
