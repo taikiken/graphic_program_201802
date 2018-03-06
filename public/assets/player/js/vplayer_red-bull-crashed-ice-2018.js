@@ -168,9 +168,9 @@ var count = 0;
 var videoLoad = function videoLoad() {
   // --- [2017-10-18]
   var hostname = location.hostname;
-  var api = 'https://dev-img.sportsbull.jp/static/boxcart/live.json';
+  var api = 'https://dev-img.sportsbull.jp/static/crashedice/live.json';
   if (hostname === 'sportsbull.jp' || hostname === 'stg.sportsbull.jp') {
-    api = 'https://img.sportsbull.jp/static/boxcart/live.json';
+    api = 'https://img.sportsbull.jp/static/crashedice/live.json';
   }
   // ---
   var time = getTime();
