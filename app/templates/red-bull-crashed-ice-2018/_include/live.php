@@ -7,8 +7,8 @@
 
 $live = array(
   // liveAPIのエンドポイント
-  // https://github.com/undotsushin/undotsushin/issues/2415#issuecomment-333852219
-  'endpoint' => UT_ENV !== 'PRODUCTION' ? "'https://dev-img.sportsbull.jp/static/boxcart/live.json'" : "'https://img.sportsbull.jp/static/boxcart/live.json'"
+  // https://aws-plus.backlog.jp/view/UNDO_SPBL-479#comment-1190993637
+  'endpoint' => UT_ENV !== 'PRODUCTION' ? "'https://dev-img.sportsbull.jp/static/crashedice/live.json'" : "'https://img.sportsbull.jp/static/crashedice/live.json'"
 );
 
 ?>

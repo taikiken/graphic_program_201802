@@ -75,14 +75,16 @@
         </div><!-- /.special-summary-inner -->
       </div><!-- /.special-summary -->
 
-      <div class="live-streaming__container">
-        <div class="live-streaming">
-          <img src="/assets/sp/images/red-bull-crashed-ice-2018/live_streaming-poster.jpg" alt="">
-        </div><!-- /.live-streaming -->
-      </div><!-- /.live-streaming__container -->
+      <?php /*
+        <div class="live-streaming__container">
+          <div class="live-streaming">
+            <img src="/assets/sp/images/red-bull-crashed-ice-2018/live_streaming-poster.jpg" alt="">
+          </div><!-- /.live-streaming -->
+        </div><!-- /.live-streaming__container -->
+      */ ?>
 
       <?php
-        //include_once __DIR__."/_include/live.php";
+        include_once __DIR__."/_include/live.php";
       ?>
 
       <section class="main-sec">
@@ -98,20 +100,20 @@
 
       <div class="side-sec">
         <div class="sponsor-link">
-          <!-- /531683568/redbull_ad/box-cart_sp_big-banner -->
+          <!-- /531683568/redbull_ad/crashed-ice-sp-rectangle -->
           <script>
             googletag.cmd.push(function() {
-              googletag.defineSlot('/531683568/redbull_ad/box-cart_sp_big-banner', [320, 96], 'div-gpt-ad-1507615110744-0').addService(googletag.pubads());
+              googletag.defineSlot('/531683568/redbull_ad/crashed-ice-sp-rectangle', [300, 250], 'div-gpt-ad-1520248035299-0').addService(googletag.pubads());
               googletag.pubads().enableSingleRequest();
               googletag.enableServices();
             });
           </script>
-          <div id='div-gpt-ad-1507615110744-0' style='height:96px; width:320px;'>
+          <div id='div-gpt-ad-1520248035299-0' style='height:250px; width:300px;'>
           <script>
-          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507615110744-0'); });
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1520248035299-0'); });
           </script>
           </div>
-          <!-- // /531683568/redbull_ad/box-cart_sp_big-banner -->
+          <!-- // /531683568/redbull_ad/crashed-ice-sp-rectangle -->
         </div>
       </div>
 

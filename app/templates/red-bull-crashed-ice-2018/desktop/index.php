@@ -75,14 +75,16 @@ include_once __DIR__ . '/../../_env.php';
       </div><!-- /.special-summary-inner -->
     </div><!-- /.special-summary -->
 
-    <div class="live-streaming__container">
-      <div class="live-streaming">
-        <img src="/assets/images/red-bull-crashed-ice-2018/live_streaming-poster.jpg" alt="">
-      </div><!-- /.live-streaming -->
-    </div><!-- /.live-streaming__container -->
+    <?php /*
+      <div class="live-streaming__container">
+        <div class="live-streaming">
+          <img src="/assets/images/red-bull-crashed-ice-2018/live_streaming-poster.jpg" alt="">
+        </div><!-- /.live-streaming -->
+      </div><!-- /.live-streaming__container -->
+    */ ?>
 
     <?php
-      //include_once __DIR__."/_include/live.php";
+      include_once __DIR__."/_include/live.php";
     ?>
 
     <div class="body-sec-inner">
@@ -95,26 +97,60 @@ include_once __DIR__ . '/../../_env.php';
         // ===========================================
         ?>
 
+        <div class="sponsor-link column2">
+          <div class="sponsor-link-item">
+            <!-- /531683568/redbull_ad/crashed-ice-pc-footer-rectangle1 -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/redbull_ad/crashed-ice-pc-footer-rectangle1', [300, 250], 'div-gpt-ad-1520248301324-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1520248301324-0' style='height:250px; width:300px;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1520248301324-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/redbull_ad/crashed-ice-pc-footer-rectangle1 -->
+          </div>
+          <div class="sponsor-link-item">
+            <!-- /531683568/redbull_ad/crashed-ice-pc-footer-rectangle2 -->
+            <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/531683568/redbull_ad/crashed-ice-pc-footer-rectangle2', [300, 250], 'div-gpt-ad-1520248336389-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+              });
+            </script>
+            <div id='div-gpt-ad-1520248336389-0' style='height:250px; width:300px;'>
+            <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1520248336389-0'); });
+            </script>
+            </div>
+            <!-- // /531683568/redbull_ad/crashed-ice-pc-footer-rectangle2 -->
+          </div>
+        </div><!-- /.sponsor-link -->
       </section><!-- /.main-sec -->
 
       <section class="side-sec">
         <div id="sidebar-moving-container">
 
           <div class="sponsor-link">
-            <!-- /531683568/redbull_ad/box-cart_pc_recrangle -->
+            <!-- /531683568/redbull_ad/crashed-ice-sidebar-rectangle -->
             <script>
               googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/redbull_ad/box-cart_pc_recrangle', [300, 250], 'div-gpt-ad-1507615192340-0').addService(googletag.pubads());
+                googletag.defineSlot('/531683568/redbull_ad/crashed-ice-sidebar-rectangle', [300, 250], 'div-gpt-ad-1520248097904-0').addService(googletag.pubads());
                 googletag.pubads().enableSingleRequest();
                 googletag.enableServices();
               });
             </script>
-            <div id='div-gpt-ad-1507615192340-0' style='height:250px; width:300px;'>
+            <div id='div-gpt-ad-1520248097904-0' style='height:250px; width:300px;'>
             <script>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507615192340-0'); });
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1520248097904-0'); });
             </script>
             </div>
-            <!-- // /531683568/redbull_ad/box-cart_pc_recrangle -->
+            <!-- // /531683568/redbull_ad/crashed-ice-sidebar-rectangle -->
           </div>
 
           <div class="app-bnr">
