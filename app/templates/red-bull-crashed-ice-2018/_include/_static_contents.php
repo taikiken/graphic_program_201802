@@ -90,7 +90,7 @@
   </div><!-- /.about__text -->
 
   <div class="about__movie">
-    <a href="hoge"><img src="/assets/images/red-bull-crashed-ice-2018/about-movie-poster.jpg" alt=""></a>
+    <iframe width="1280" height="720" src="https://www.redbullcontentpool.com/embed/video/5a93d33e204d940094cc8497?_=1520301608727&lang=en" frameborder="0" allowfullscreen></iframe>
   </div><!-- /.about__movie -->
 
   <div class="about__featured">
