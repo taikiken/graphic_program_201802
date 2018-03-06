@@ -54,7 +54,7 @@ window.PLAYER_API_ENDPOINT = <?php echo $live['endpoint']; ?>;
 
 <script src="/assets/player/js/libs.js"></script>
 <script src="/assets/player/js/videojs.ga.js"></script>
-<script src="/assets/player/js/vplayer_red-bull-box-cart-2017.js"></script>
+<script src="/assets/player/js/vplayer_red-bull-crashed-ice-2018.js"></script>
 
 <div id="liveVideo">
   <p class="video_alt"></p>
