@@ -84,7 +84,7 @@ include_once __DIR__ . '/../../_env.php';
     */ ?>
 
     <?php
-      include_once __DIR__."/_include/live.php";
+      include_once dirname(__DIR__) . "/_include/live.php";
     ?>
 
     <div class="body-sec-inner">

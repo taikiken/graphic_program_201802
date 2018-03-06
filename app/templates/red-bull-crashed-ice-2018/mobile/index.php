@@ -84,7 +84,7 @@
       */ ?>
 
       <?php
-        include_once __DIR__."/_include/live.php";
+        include_once dirname(__DIR__) . "/_include/live.php";
       ?>
 
       <section class="main-sec">
