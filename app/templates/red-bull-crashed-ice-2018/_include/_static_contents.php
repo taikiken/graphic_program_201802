@@ -186,6 +186,10 @@
 </div><!-- /.crashedice--overview -->
 
 <div class="crashedice--related crashedice__container">
+
+  <?php
+  /* 関連記事
+
   <h2 class="related__heading"><img class="show-for-pc" src="/assets/images/red-bull-crashed-ice-2018/related-heading.png" alt="関連記事"><img class="show-for-sp" src="/assets/sp/images/red-bull-crashed-ice-2018/related-heading.png" alt="関連記事"></h2>
 
   <div class="related__post">
@@ -231,6 +235,9 @@
       </div><!-- /.related__post__text -->
     </a>
   </div><!-- /.related__post -->
+
+  */
+  ?>
 
   <div class="related__topics">
     <h4 class="related__topics__heading"><img class="show-for-pc" src="/assets/images/red-bull-crashed-ice-2018/related-topics-heading.png" alt="外部記事"><img class="show-for-sp" src="/assets/sp/images/red-bull-crashed-ice-2018/related-topics-heading.png" alt="外部記事"></h4>
