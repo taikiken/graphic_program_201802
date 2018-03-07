@@ -14,7 +14,7 @@
 
 // page layout
 @import "../module/import";
-@import "../layout";
+//@import "../layout";
 
 //.undotsushin-ios,
 //.undotsushin-android {
@@ -128,6 +128,8 @@ $line_color:#999;
         
         .foot-sec{
             .foot-pr{
+                border-bottom: none;
+                
                 figure, .text-block{
                     float: none;
                 }
@@ -136,14 +138,15 @@ $line_color:#999;
                     width: 280px;
                     margin: 6px auto 0;
                 }
+                
+                .fb-page-plugin{
+                    float: none;
+                    width: auto;
+                }
             }
             
             .foot-pr-inner{
                 width: auto;
-            }
-
-            .sns-block ul a{
-                background-size: inherit;
             }
         } 
         
