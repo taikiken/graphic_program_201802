@@ -9,6 +9,8 @@
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/libs/jquery2/jquery.min.js?v="></script>
   <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+    <link rel="stylesheet" href="/assets/css/basic.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
+    <link rel="stylesheet" href="/assets/sp/css/basic.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
   <link rel="stylesheet" href="/assets/css/<?php echo $page['dir_name']; ?>/nowdo.css?v=<?php echo $page['version']; ?>">
 
   <script type='text/javascript'>

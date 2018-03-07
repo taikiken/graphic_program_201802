@@ -16,7 +16,6 @@
 @import "../module/import";
 @import "../layout";
 
-
 //.undotsushin-ios,
 //.undotsushin-android {
 //    .head-sec, .foot-sec {
@@ -113,7 +112,7 @@ $line_color:#999;
         }
     }
     
-    @media only screen and (min-width: 769px){
+    @media only screen and (max-width: 768px){
         &.whole {
             min-width: inherit;
         }
@@ -121,7 +120,22 @@ $line_color:#999;
         .head-sec .head-sec-inner {
             position: relative;
             width: auto;
+            
+            h1 a{
+                background-size: inherit;
+            }
         }
+        
+        .foot-sec{
+            .foot-pr-inner{
+                width: auto;
+            }
+
+            .sns-block ul a{
+                background-size: inherit;
+            }
+        } 
+        
     }
     
 /*  mainimg_wrap ------------------------------ */
@@ -1250,6 +1264,7 @@ $line_color:#999;
         }
         
         @media screen and (max-width: 768px){
+            background: url(../../images/nowdo/sp_recruit_bg.png) no-repeat top center;
             margin-top: 50px;
             padding-bottom: 70px;
             background-size: cover;
