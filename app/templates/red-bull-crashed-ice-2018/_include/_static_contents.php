@@ -179,7 +179,7 @@
       </tr>
       <tr>
         <th>WEB</th>
-        <td><a href="http://crashedice.redbull.com/ja_INT" taeget="_blank">http://crashedice.redbull.com/ja_INT</a></td>
+        <td><a href="http://crashedice.redbull.com/ja_INT" target="_blank">http://crashedice.redbull.com/ja_INT</a></td>
       </tr>
     </tbody>
   </table><!-- /.overview__data -->
@@ -187,57 +187,18 @@
 
 <div class="crashedice--related crashedice__container">
 
-  <?php
-  /* 関連記事
-
   <h2 class="related__heading"><img class="show-for-pc" src="/assets/images/red-bull-crashed-ice-2018/related-heading.png" alt="関連記事"><img class="show-for-sp" src="/assets/sp/images/red-bull-crashed-ice-2018/related-heading.png" alt="関連記事"></h2>
 
   <div class="related__post">
-    <a href="hoge" class="movie">
-      <figure class="related__post__thumb"><span><img src="/assets/images/red-bull-crashed-ice-2018/related-thumb1.jpg" alt=""></span></figure>
+    <a href="https://sportsbull.jp/p/277380/">
+      <figure class="related__post__thumb"><span><img src="https://img.sportsbull.jp/thumbnail1/img2018030613183432960800.png" alt=""></span></figure>
       <div class="related__post__text">
-        <h3 class="related__post__heading">Red Bull Crashed Ice, Marseille</h3>
-        <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-        <p class="related__post__date">3月3日（木） 22:04</p>
+        <h3 class="related__post__heading">2018.3.11(sun)12:00〜 スポブル無料ライブ配信 [RedBull CRASHED ICE] カナダ大会</h3>
+        <p class="related__post__text">[RedBull CRASHED ICE] という世界的なウィンターレースをご存知だろうか。[RedBull CRASHED ICE] とは、アイスホッケー、ダウンヒルスキー、スノーボードクロスの要素を取り入れた競技のこと。「アイスクロス・ダウンヒル」世界選手権ATSXレッドブル・クラッシュドアイス・ワールドチャンピオンシップが2018シーズンも激アツ開催中。開幕戦は、2018年1月20日（日本時間21日）にアメリカ・セントポールで行われた。日本から唯一参戦していた女子アイスホッケー選手・山本純子に注目が集まるが、山崎は開幕戦となるアメリカ ・セントポール大会を10位でフィニッシュ。</p>
+        <p class="related__post__date">3月6日（火） 12:56</p>
       </div><!-- /.related__post__text -->
     </a>
   </div><!-- /.related__post -->
-
-  <div class="related__post">
-    <a href="hoge" class="movie">
-      <figure class="related__post__thumb"><span><img src="/assets/images/red-bull-crashed-ice-2018/related-thumb2.jpg" alt=""></span></figure>
-      <div class="related__post__text">
-        <h3 class="related__post__heading">Red Bull Crashed Ice, Jyväskylä</h3>
-        <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-        <p class="related__post__date">3月3日（木） 22:04</p>
-      </div><!-- /.related__post__text -->
-    </a>
-  </div><!-- /.related__post -->
-
-  <div class="related__post">
-    <a href="hoge" class="movie">
-      <figure class="related__post__thumb"><span><img src="/assets/images/red-bull-crashed-ice-2018/related-thumb3.jpg" alt=""></span></figure>
-      <div class="related__post__text">
-        <h3 class="related__post__heading">Red Bull Crashed Ice, Saint Paul</h3>
-        <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-        <p class="related__post__date">3月3日（木） 22:04</p>
-      </div><!-- /.related__post__text -->
-    </a>
-  </div><!-- /.related__post -->
-
-  <div class="related__post">
-    <a href="hoge" class="movie">
-      <figure class="related__post__thumb"><span><img src="/assets/images/red-bull-crashed-ice-2018/related-thumb4.jpg" alt=""></span></figure>
-      <div class="related__post__text">
-        <h3 class="related__post__heading">Red Bull Crashed Ice, Saint Paul</h3>
-        <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-        <p class="related__post__date">3月3日（木） 22:04</p>
-      </div><!-- /.related__post__text -->
-    </a>
-  </div><!-- /.related__post -->
-
-  */
-  ?>
 
   <div class="related__topics">
     <h4 class="related__topics__heading"><img class="show-for-pc" src="/assets/images/red-bull-crashed-ice-2018/related-topics-heading.png" alt="外部記事"><img class="show-for-sp" src="/assets/sp/images/red-bull-crashed-ice-2018/related-topics-heading.png" alt="外部記事"></h4>
