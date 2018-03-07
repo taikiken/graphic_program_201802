@@ -307,6 +307,10 @@ class ViewModel {
 
 //      endif;
 
+      if($slug === "big6tv"){
+          $category['banner']['pc']['image'] = str_replace("/img/", "/raw/", $category['banner']['pc']['image']);
+      }
+
       // すべての場合はlabel/titleが空なのですべてをセット
       if ( !$category['label'] ) :
         $category['label'] = 'すべて';
@@ -589,17 +593,10 @@ class ViewModel {
    * @param int $player_id     tbl_player.id
    * @return array
    */
-  public function get_pickup_players($category_id = null, $player_id = null, $limit = null) {
-    return $this->db->get_pickup_players($category_id, $player_id, $limit);
+  public function get_pickup_players($category_id = null, $player_id = null, $limit = null, $big4_flag = false) {
+    return $this->db->get_pickup_players($category_id, $player_id, $limit, $big4_flag);
   }
 
-  /**
-   * /category/crazy/ で表示する4件固定対応
-   * @return array
-   */
-  public function get_pickup_players_ca_top() {
-    return $this->db->get_pickup_players_ca_top();
-  }
 
 /**
    * プレスリリース一覧

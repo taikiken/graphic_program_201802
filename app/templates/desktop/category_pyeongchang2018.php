@@ -58,6 +58,14 @@ include_once __DIR__.'/_category-heading.php';
         <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018フォトギャラリー" data-offset="0" data-length="4"></div>
       </div><!-- /.gallery--photo -->
 
+      <?php
+      // 注目のアスリート
+      // ----------------------------------------------------
+      if(empty($page['list']) === false) :
+        include_once __DIR__.'/_category-pickup_player.php';
+      endif;
+      ?>
+
       <div id="js-headline"></div>
 
       <aside class="sns-pr">
