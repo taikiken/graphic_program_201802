@@ -35,6 +35,7 @@
   <script src="/assets/js/libs/vendor.react.js?v=d56cb17f"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=d56cb17f"></script>
   <link rel="stylesheet" href="/assets/css/ui.css?v=d56cb17f">
+  <link rel="stylesheet" href="/stats/assets/univbb/css/styleUpdate.css">
 
   <!-- google -->
   <link rel="stylesheet" href="/assets/google/style.css">
