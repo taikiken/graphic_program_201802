@@ -67,7 +67,7 @@ include_once __DIR__ . '/../../_env.php';
             <div class="main_text_wrap">
               <p class="main_copy_01"><img src="../assets/images/nowdo/main_copy_01.png" alt="今すぐ どこでも あなたを目標に近づけるパーソナルトレーニング"></p>
               <h1 class="main_ttl"><img src="../assets/images/nowdo/main_logo.png" alt="NowDo supported by SPORTS BULL"></h1>
-              <p class="main_copy_02"><img src="../assets/images/nowdo/main_copy_02.png" alt="2018年春のリリースに伴い、サッカーコーチ・サッカー関連施設を募集します。"></p>
+              <p class="main_copy_02"><img src="../assets/images/nowdo/main_copy_02.png" alt="2018年春のリリースに伴い、サッカートレーナー・サッカー関連施設を募集します。"></p>
               <div class="anchor_btn"><a href="#recruit"><span>応募はこちら</span><span>応募はこちら</span></a></div>
             </div>
             <!-- /.id_sports2017__summary__text -->
@@ -81,7 +81,7 @@ include_once __DIR__ . '/../../_env.php';
           <div class="contents_inner">
             <h2 class="section_ttl"><img src="../assets/images/nowdo/section_ttl_01.png" alt="Now Doとは？"></h2>
             <p class="description_copy">Now Doは今すぐ、どこでもあなたを目標に近づけるパーソナルトレーニングサービスです。
-              <br>あなたのために一流プロアスリートが考案したトレーニングメニューを厳選されたコーチが提供します。
+              <br>あなたのために一流プロアスリートが考案したトレーニングメニューを厳選されたトレーナーが提供します。
               <br>サッカースクールなどでは実現できない個人技術の向上にコミットします。</p>
             <div class="press_release_wrap">
               <h3 class="sub_ttl"><span>プレスリリース</span></h3>
@@ -116,8 +116,8 @@ include_once __DIR__ . '/../../_env.php';
               <div class="dot_filter"></div>
               <div class="txt_wrap">
                 <div class="num"><img src="../assets/images/nowdo/vision_num_02.png" alt="02"></div>
-                <h3 class="block_copy">コーチの質、<br class="br_hide">生活の向上</h3>
-                <p>コーチングプログラム、
+                <h3 class="block_copy">トレーナーの質、<br class="br_hide">生活の向上</h3>
+                <p>トレーニングプログラム、
                   <br>スキルの向上とサービス提供機会の
                   <br>向上に貢献する。</p>
               </div>
@@ -159,10 +159,10 @@ include_once __DIR__ . '/../../_env.php';
                 <div class="txt">
                   <p class="article_ttl"><img src="../assets/images/nowdo/nowdo_logo.png" alt="Now Do">を
                     <br class="pc_hide">始めたきっかけ </p>
-                  <p class="copy">サッカースクールを運営する上で見えたきた課題を
+                  <p class="copy">サッカースクールを運営する上で見えてきた課題を
                     <br>解決する手段としてNowDoを始めます。</p>
                 </div>
-                <p class="sp_copy pc_hide">サッカースクールを運営する上で見えたきた課題を
+                <p class="sp_copy pc_hide">サッカースクールを運営する上で見えてきた課題を
                   <br>解決する手段としてNowDoを始めます。</p>
               </article>
               <article>
@@ -183,10 +183,10 @@ include_once __DIR__ . '/../../_env.php';
         <section class="section_04" id="recruit">
           <div class="txt_block">
             <h2 class="section_ttl"><img src="../assets/images/nowdo/section_ttl_04.png" alt="RECRUIT"></h2>
-            <p class="section_copy">コーチ・施設を募集します</p>
+            <p class="section_copy">トレーナー・施設を募集します</p>
             <p class="txt">Now Doは私たちと一緒にユーザーに高いレベルの
               <br>パーソナルトレーニングを提供してくれる
-              <br>サッカーコーチとサッカー関連施設を
+              <br>サッカートレーナーとサッカー関連施設を
               <br class="pc_hide">募集しています。</p>
             <p class="link"><a href="http://nowdo.jp/" target="_blank">Now Do(株) 公式サイトはこちら</a></p>
           </div>
@@ -198,7 +198,7 @@ include_once __DIR__ . '/../../_env.php';
             <p class="copy">ご応募の方は、下記必要事項を明記して「応募する」ボタンを押してください。</p>
               <div class="form_area_wrap">
                 <ul class="tab">
-                  <li class="select">コーチ募集</li>
+                  <li class="select">トレーナー募集</li>
                   <li>施設募集</li>
                 </ul>
                         <div class="form_content">
@@ -208,7 +208,7 @@ include_once __DIR__ . '/../../_env.php';
                                    <tr>
                                        <th><label for="">氏　　名</label></th>
                                        <td><input type="text" id="name1" name="name1" placeholder="姓" class="width01 mr" required> <input type="text" id="name2" name="name2" placeholder="名" class="width01" required></td>
-                                   </tr>                                   
+                                   </tr>
 
                                    <tr>
                                        <th><label for="">住　　所</label></th>
@@ -263,12 +263,12 @@ include_once __DIR__ . '/../../_env.php';
                                                <option value="46">鹿児島県</option>
                                                <option value="47">沖縄県</option>
                                            </select>
-                                           
+
                                            <input type="text" id="city" name="city" placeholder="市区町村" class="width01" required><br>
                                            <input type="text" id="address" name="address" placeholder="番地・ビル名" class="width02" required>
                                        </td>
                                    </tr>
-                                   
+
                                    <tr>
                                        <th>電話番号</th>
                                        <td><input type="text" id="tel" name="tel" class="width02" required></td>
@@ -281,7 +281,7 @@ include_once __DIR__ . '/../../_env.php';
 
                                    <tr>
                                        <th>性　　別</th>
-                                       
+
                                        <td>
                                            <select name="sex" class="width03" required>
                                                <option value="" selected></option>
@@ -427,8 +427,8 @@ include_once __DIR__ . '/../../_env.php';
                                                <option value="2028">2028</option>
                                                <option value="2029">2029</option>
                                                <option value="2030">2030</option>
-                                           </select> <span>年</span> 
-                                           
+                                           </select> <span>年</span>
+
                                            <select name="month" class="width03" required>
                                                <option value="">-</option>
                                                <option value="1">1</option>
@@ -443,8 +443,8 @@ include_once __DIR__ . '/../../_env.php';
                                                <option value="10">10</option>
                                                <option value="11">11</option>
                                                <option value="12">12</option>
-                                           </select> <span>月</span> 
-                                           
+                                           </select> <span>月</span>
+
                                            <select name="day" class="width03" required>
                                                <option value="">-</option>
                                                <option value="1">1</option>
@@ -488,7 +488,7 @@ include_once __DIR__ . '/../../_env.php';
                                    </tr>
 
                                    <tr>
-                                       <th>コーチ歴</th>
+                                       <th>指導歴</th>
                                        <td><input type="text" id="coach" name="coach" class="width03" required> <span>年</span></td>
                                    </tr>
                                </table>
@@ -503,13 +503,13 @@ include_once __DIR__ . '/../../_env.php';
                                     <tr>
                                         <th><label for="">施 設 名</label></th>
                                         <td><input type="text" id="_name1" name="_name1" class="width02" required></td>
-                                    </tr>  
-                                   
-                                   
+                                    </tr>
+
+
                                     <tr>
                                         <th><label for="">代表者氏名</label></th>
                                         <td><input type="text" id="_name2" name="_name2" class="width02" required></td>
-                                    </tr>                                   
+                                    </tr>
 
                                     <tr>
                                         <th><label for="">住　　所</label></th>
@@ -631,14 +631,14 @@ include_once __DIR__ . '/../../_env.php';
   });
 
 	$(function(){
-		
+
 		$(".form_block").each(function(){
 			$(this).prepend("<div class='message'><p></p></div>");
 			$(".message").hide();
 		});
-		
+
 		$("form").submit(function(){
-			
+
 			var active=0;
 			for(var i=0;i<$(".tab li").length;i++){
 				if($(".tab li:eq("+i+")").attr("class").match(/select/)){
@@ -646,14 +646,14 @@ include_once __DIR__ . '/../../_env.php';
 					break;
 				}
 			}
-			
+
 			$("input,textarea,select",this).prop("readonly",true);
 			$("button",this).prop("disabled",true);
 			$(this).fadeTo(100,0.5);
 			$(".form_block:eq("+active+") .message").hide();
 			var height=$(this).height();
 			var aform=$(this);
-			
+
 			$.ajax({
 				data:$(this).serialize()+"&ftype="+active,
 				type:"POST",
