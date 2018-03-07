@@ -24,6 +24,7 @@
 
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/libs/jquery2/jquery.min.js?v="></script>
   <link rel="stylesheet" href="/assets/css/<?php echo $page['template_classname']; ?>/ui.css?v=<?php echo $page['version']; ?>">
 
   <script type='text/javascript'>
@@ -192,6 +193,53 @@ include_once __DIR__ . '/../../_env.php';
   </div><!-- /.body-sec -->
 
 <script src="/assets/js/red-bull-crashed-ice-2018.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
+<script>
+// ▼文字列を省略して「…」を付与
+jQuery(function($) {
+  $('.related__post p.related__post__text').each(function() {
+    var $target = $(this);
+    // オリジナルの文章を取得する
+    var html = $target.html();
+    // 対象の要素を、高さにautoを指定し非表示で複製する
+    var $clone = $target.clone();
+    $clone
+      .css({
+        //display: 'none',
+        //position : 'absolute',
+        position : 'fixed',
+        top : 0,
+        left:0,
+        //overflow : 'visible'
+      })
+      .width($target.width())
+      .height('4.5em');
+    // DOMを一旦追加
+    $target.after($clone);
+    // 指定した高さになるまで、1文字ずつ消去していく
+    while((html.length > 0) && ($clone.height() < $target.height())) {
+      html = html.substr(0, html.length - 1);
+      //$clone.html(html + '...');
+      $target.html(html + '...');
+    }
+    // 文章を入れ替えて、複製した要素を削除する
+    //$target.html($clone.html());
+    $clone.remove();
+  });
+});
+</script>
+
+<style>
+
+.related__post p.related__post__text {
+  overflow: hidden;
+  width: 414px;
+  height: 4.5em!important;
+}
+
+
+</style>
+
 
 <?php
 // # パンくずリスト
