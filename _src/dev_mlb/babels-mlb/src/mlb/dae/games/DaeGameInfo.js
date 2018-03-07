@@ -536,5 +536,12 @@ export default class DaeGameInfo {
      * @type {number}
      */
     this.innings = board.visitor.scores.innings;
+    /**
+     * オープン戦 flag
+     * @type {boolean}
+     * @since 2019-03-02
+     * @see https://aws-plus.backlog.jp/view/UNDO_SPBL-470
+     */
+    this.spring = origin.is_spring;
   }
 }
