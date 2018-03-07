@@ -677,6 +677,9 @@ include_once __DIR__ . '/../../_env.php';
 
   </script>
 
+    <!-- for facebook -->
+    <script src="/assets/facebook/init.js?"></script>
+    <!-- // for facebook -->
 <script src="/assets/js/related_sidebar_by_env.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php

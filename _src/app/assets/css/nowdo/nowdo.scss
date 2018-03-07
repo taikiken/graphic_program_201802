@@ -127,6 +127,17 @@ $line_color:#999;
         }
         
         .foot-sec{
+            .foot-pr{
+                figure, .text-block{
+                    float: none;
+                }
+                
+                .text-block{
+                    width: 280px;
+                    margin: 6px auto 0;
+                }
+            }
+            
             .foot-pr-inner{
                 width: auto;
             }
