@@ -1,0 +1,651 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss_sp/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss_sp/style/reset";
+@import "../../../../../scss_sp/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+
+
+// common override
+.red-bull-crashed-ice-2018 {
+  .body-sec,
+  .body-sec-inner {
+    background-color: #fff !important;
+  }
+
+  .main-sec {
+    padding-bottom: (40/2)+px;
+  }
+
+  .side-sec {
+    padding-bottom: (80/2)+px;
+
+    .sponsor-link {
+      > div {
+        width: 100% !important;
+      }
+
+      iframe {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+  }
+
+  .foot-sec {
+    border-top: none;
+  }
+}
+
+
+
+
+
+//.special-summary
+.special-summary {
+  position: relative;
+  height: (232/2)+px;
+  background: url(/assets/sp/images/red-bull-crashed-ice-2018/summary-bg.jpg) center 0 no-repeat;
+  background-size: cover;
+
+  //.special-summary-heading
+  &-heading {
+    position: absolute;
+    top: (10/2)+px;
+    left: 3.125vw;
+
+    img {
+      width: (240/2)+px;
+    }
+  }
+
+  //.special-summary-copy1
+  &-copy1 {
+    position: absolute;
+    top: (164/2)+px;
+    left: 3.125vw;
+
+    img {
+      width: (514/2)+px;
+    }
+  }
+
+  //.special-summary-copy2
+  &-copy2 {
+    position: absolute;
+    top: (16/2)+px;
+    right: 2.5vw;
+
+    img {
+      width: (44/2)+px;
+    }
+  }
+}
+
+
+
+
+
+//.live-streaming
+.live-streaming {}
+
+#liveVideo {
+  text-align: center;
+}
+
+
+
+
+
+//container setting
+.crashedice__container {
+  padding-top: (40/2)+px;
+  padding-bottom: (40/2)+px;
+}
+
+
+
+
+
+//.crashedice--intro
+.crashedice--intro {
+  padding-top: (30/2)+px;
+
+  .intro__catch {
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+    font-weight: bold;
+    font-size: (24/2)+px;
+  }
+
+  .intro__link__app {
+    margin-top: (32/2)+px;
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+    text-align: center;
+
+    .undotsushin-ios &,
+    .undotsushin-android & {
+      display: none;
+    }
+
+    a {
+      @include link-decoration(#001a72, #001a72, underline, underline);
+      display: inline-block;
+      line-height: (80/2)+px;
+      padding-left: (100/2)+px;
+      background: url(/assets/sp/images/red-bull-crashed-ice-2018/intro-app_icon.png) 0 0 no-repeat;
+      background-size: (80/2)+px;
+      font-weight: bold;
+      font-size: (28/2)+px;
+    }
+
+    @include screen('small') {
+      a {
+        font-size: (24/2)+px;
+      }
+    }
+  }
+
+  .intro__timetable {
+    margin-top: (32/2)+px;
+
+    table {
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: (10/2)+px 3.125vw;
+      font-weight: bold;
+      font-size: (24/2)+px;
+      vertical-align: top;
+    }
+
+    th {
+      width: 23.125vw;
+      color: #0a1a72;
+      white-space: nowrap;
+    }
+
+    td {
+      padding-left: 0;
+
+      span {
+        font-size: 10px;
+      }
+    }
+
+    tr:nth-child(odd) {
+      th, td {
+        background-color: #e9f3fb;
+      }
+    }
+
+    //.intro__timetable__note
+    &__note {
+      margin: (12/2)+px 3.125vw 0;
+      font-size: 10px;
+    }
+  }
+
+  .intro__banner {
+    margin-top: (32/2)+px;
+
+    img {
+      // border: 1px solid #eee;
+    }
+  }
+
+  .intro__widjet_twitter {
+    height: 200px;
+    margin-top: (40/2)+px;
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+    overflow: hidden;
+  }
+} //.crashedice--intro
+
+
+
+
+//.crashedice--about
+.crashedice--about {
+  position: relative;
+  background: url(/assets/sp/images/red-bull-crashed-ice-2018/about-bg2.png) center 0 repeat-y;
+  background-size: 100%;
+  margin-top: (16/2)+px;
+  margin-bottom: (16/2)+px;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: (16/2)+px;
+    background-size: 100%;
+    @include hide-text;
+  }
+
+  &:before {
+    top: -(16/2)+px;
+    left: 0;
+    background: url(/assets/sp/images/red-bull-crashed-ice-2018/about-bg1.png) center 0 no-repeat;
+  }
+
+  &:after {
+    bottom: -(16/2)+px;
+    left: 0;
+    background: url(/assets/sp/images/red-bull-crashed-ice-2018/about-bg3.png) center 0 no-repeat;
+  }
+
+  .about__heading {
+    line-height: 1;
+    margin-left: 3.125vw;
+    margin-bottom: (32/2)+px;
+
+    img {
+      width: (400/2)+px;
+    }
+  }
+
+  .about__text {
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+
+    p {
+      color: #515769;
+      font-size: (24/2)+px;
+    }
+
+    p + p {
+      margin-top: 1em;
+    }
+  }
+
+  .about__movie {
+    position: relative;
+    margin-top: (32/2)+px;
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+
+    &:before {
+      content: "";
+      display: block;
+      padding-top: (728/1280*100)+%;
+    }
+
+    iframe {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    a {
+      position: relative;
+      display: block;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: (90/2)+px;
+        height: (90/2)+px;
+        transform: translate(-50%, -50%);
+        background: url(/assets/sp/images/red-bull-crashed-ice-2018/about-movie-icon_play.png) 0 0 no-repeat;
+        background-size: (90/2)+px;
+        @include hide-text;
+      }
+    }
+  }
+
+  //.about__featured
+  .about__featured {
+    margin-top: (40/2)+px;
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+
+    //.about__featured__heading
+    &__heading {
+      line-height: 1;
+      margin-bottom: 4px;
+
+      img {
+        width: (420/2)+px;
+      }
+    }
+
+    //.about__featured__list
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    //.about__featured__item
+    &__item {
+      width: 29.375vw;
+      margin-top: 20px;
+      margin-right: 2.65625vw;
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+
+      figure {
+        img {
+          width: 132px;
+        }
+      }
+
+      h4 {
+        margin-top: 12px;
+        font-weight: bold;
+        font-size: (24/2)+px;
+      }
+
+      p {
+        margin-top: 4px;
+        font-size: (20/2)+px;
+
+        &.country {
+          margin-top: 6px;
+          color: #e50b43;
+        }
+      }
+    }
+  } //.about__featured
+
+} //.crashedice--about
+
+
+
+
+
+//.crashedice--overview
+.crashedice--overview {
+
+  .overview__heading {
+    position: relative;
+    line-height: 1;
+    margin-left: 3.125vw;
+    margin-bottom: (40/2)+px;
+
+    img {
+      width: (424/2)+px;
+    }
+  }
+
+  .overview__data {
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+
+    th,
+    td {
+      padding-bottom: 0.5em;
+      vertical-align: top;
+      font-size: (24/2)+px;
+    }
+
+    th {
+      padding-right: (16/2)+px;
+      border-right: 1px solid #69ace5;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    td {
+      padding-left: (24/2)+px;
+
+      a {
+        @include link-decoration(#0a1a72, #0a1a72, null, null);
+      }
+    }
+
+  }
+} //.crashedice--overview
+
+
+
+
+
+//.crashedice--related
+.crashedice--related {
+  position: relative;
+  background: url(/assets/sp/images/red-bull-crashed-ice-2018/related-bg2.png) center 0 repeat-y;
+  background-size: 100%;
+  margin-top: (16/2)+px;
+  margin-bottom: (16/2)+px;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: (16/2)+px;
+    background-size: 100%;
+    @include hide-text;
+  }
+
+  &:before {
+    top: -(16/2)+px;
+    left: 0;
+    background: url(/assets/sp/images/red-bull-crashed-ice-2018/related-bg1.png) center 0 no-repeat;
+  }
+
+  &:after {
+    bottom: -(16/2)+px;
+    left: 0;
+    background: url(/assets/sp/images/red-bull-crashed-ice-2018/related-bg3.png) center 0 no-repeat;
+  }
+
+  .related__heading {
+    position: relative;
+    margin-left: 3.125vw;
+    line-height: 1;
+    margin-bottom: (20/2)+px;
+
+    img {
+      width: (352/2)+px;
+    }
+  }
+
+  .related__post {
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+
+    + .related__post {
+      border-top: 1px solid #d2e6f7;
+    }
+
+    a {
+      @include link-decoration(null, null, none, none);
+      display: table;
+      padding-top: (20/2)+px;
+      padding-bottom: (20/2)+px;
+    }
+
+    //.related__post__thumb
+    //.related__post__text
+    &__thumb,
+    &__text {
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    //.related__post__thumb
+    &__thumb {
+      width: perCalc(280, 600);
+      padding-right: perCalc(20, 600);
+    }
+
+    a.movie {
+      .related__post__thumb span {
+        position: relative;
+        display: inline-block;
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: (60/2)+px;
+          height: (60/2)+px;
+          transform: translate(-50%, -50%);
+          background: url(/assets/sp/images/red-bull-crashed-ice-2018/related-icon_play.png) 0 0 no-repeat;
+          background-size: (60/2)+px;
+          @include hide-text;
+        }
+      }
+    }
+
+    //.related__post__text
+    &__text {
+
+      .related__post__heading {
+        color: #0a1a72;
+        font-weight: bold;
+        font-size: (24/2)+px;
+      }
+
+      .related__post__text {
+        display: none;
+      }
+
+      .related__post__category {
+        margin-top: 0.75em;
+        color: #001a72;
+        font-weight: bold;
+        font-size: (20/2)+px;
+      }
+
+      .related__post__date {
+        margin-top: 2em;
+        color: #999;
+        font-size: (20/2)+px;
+      }
+    } //.related__post__text
+
+  } //.related__post
+
+  //.related__topics
+  .related__topics {
+    margin-top: (20/2)+px;
+
+    //.related__topics__heading
+    &__heading {
+      line-height: 1;
+      padding-bottom: 8px;
+      margin-left: 3.125vw;
+
+      img {
+        width: (242/2)+px;
+      }
+    }
+
+    //.related__topics__post
+    &__post {
+      margin-left: 3.125vw;
+
+      a {
+        @include link-decoration(null, null, none, none);
+        display: table;
+        width: 100%;
+        margin-top: 12px;
+        background: url(/assets/sp/images/red-bull-crashed-ice-2018/related-topics-bg.png) 0 0 no-repeat;
+        // transition: background-color 0.2s;
+
+        &:hover {
+          @include opacity(0.8);
+          // background-color: #10151e;
+        }
+      }
+
+      //.related__topics__post__thumb
+      //.related__topics__post__text
+      &__thumb,
+      &__text {
+        display: table-cell;
+      }
+
+      //.related__topics__post__thumb
+      &__thumb {
+        position: relative;
+        width: (96/2)+px !important;
+        height: (96/2)+px;
+        overflow: hidden;
+        vertical-align: top;
+
+        img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: auto;
+          max-width: initial;
+          height: 100%;
+        }
+      }
+
+      //.related__topics__post__text
+      &__text {
+        padding: 2px (12/2)+px;
+        vertical-align: middle;
+
+        h5 {
+          width: 240px;
+          color: #0a1a72;
+          font-weight: bold;
+          font-size: (24/2)+px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          span {
+            font-size: (10/2)+px;
+          }
+        }
+      }
+    } //.related__topics__post
+  } //.related__topics
+} //.crashedice--related
+
+
+
+
+
+//.boxcart--jasrac
+.boxcart--jasrac {
+  padding-right: 3.125vw;
+  padding-left: 3.125vw;
+  padding-bottom: 0;
+  // text-align: right;
+
+  .jasrac__num {
+    display: inline-block;
+    line-height: (50/2)+px;
+    padding-left: (60/2)+px;
+    background: url(/assets/images/red-bull-box-cart-2017/jasrac-logo.jpg) 0 0 no-repeat;
+    background-size: (50/2)+px;
+    font-size: 10px;
+  }
+} //.boxcart--jasrac

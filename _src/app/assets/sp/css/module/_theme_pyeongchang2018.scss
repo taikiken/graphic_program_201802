@@ -22,7 +22,7 @@
 
 .whole.pyeongchang2018 {
   .medal_list {
-    padding-bottom: (40/2)+px;
+    // padding-bottom: (40/2)+px;
     border-bottom: 1px solid #ddd;
 
     //.medal_list__header
@@ -77,7 +77,7 @@
       table {
         width: 100%;
         border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
+        // border-bottom: 1px solid #ddd;
       }
 
       td {
@@ -132,17 +132,17 @@
       }
 
       //.medal_list__medal_total
-      .medal_list__medal_total {
-        line-height: 1;
-        margin-top: (40/2)+px;
-        font-weight: bold;
-        font-size: fz(36/2);
-        text-align: center;
+      // .medal_list__medal_total {
+      //   line-height: 1;
+      //   margin-top: (40/2)+px;
+      //   font-weight: bold;
+      //   font-size: fz(36/2);
+      //   text-align: center;
 
-        span {
-          margin-left: (40/2)+px;
-        }
-      }
+      //   span {
+      //     margin-left: (40/2)+px;
+      //   }
+      // }
     }
   } //.medal_list
 

@@ -1,5 +1,9 @@
 <?php
 
+if ($_GET["rid"] == "95") { // 注目の選手
+  $a[]=array("textfield","タイトル","name","45","","",$BILLINGUAL);
+}
+
 if(!isset($_GET["cid"])){
 	$sql="select * from editor where cid=".$QS." and flag=1 and directory='rid' order by n";
 }else{
@@ -11,7 +15,7 @@ $YII=0;
 $XX=1;
 
 while($FPI=$o->fetch_array($YII)){
-	$a[]=array($FPI["f_type"],$FPI["d_name"],$FPI["f_name"],$FPI["f_size"],$FPI["f_option"],$FPI["f_comment"],$FPI["bill"],$FPI["f_option2"],$FPI["f_option3"],$FPI["f_option4"],$FPI["f_option5"]);
+	$a[]=array($FPI["f_type"],$FPI["d_name"],$FPI["f_name"],$FPI["f_size"],$FPI["f_option"],$FPI["f_comment"],$FPI["bill"],$FPI["f_option2"],$FPI["f_option3"],$FPI["f_option4"],$FPI["f_option5"],$FPI["f_option6"]);
 	$YII++;
 }
 

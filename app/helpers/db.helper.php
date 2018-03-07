@@ -190,6 +190,28 @@ END_DOC;
     return $tabs;
 
   }
+  public function get_pickup_athlete($player_id) {
+
+    $sql = <<<SQL_EOL
+  SELECT
+    id AS no,
+    name,
+    '' AS name_kana,
+    competition,
+    description,
+    img1 AS img
+  FROM
+    tbl_player
+  WHERE 
+    flag = 1
+  AND
+    id = {$player_id}
+SQL_EOL;
+
+    $this->query($sql);
+    $player_info = $this->fetch_array();
+    return $player_info;
+  }
 
   /**
   * カテゴリー情報を取得する = /api/v1/category/{$slug}
@@ -197,12 +219,28 @@ END_DOC;
   * @param  string $slug カテゴリースラッグ
   * @return array
   */
-  public function get_category_by_slug( $slug ) {
+  public function get_category_by_slug( $slug, $playerid=null, $isgetpickupplayerbanner=false ) {
 
-    $sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e,no_image,og_image,seo_desc,seo_key from u_categories where name_e='%s'",$slug);
+//    if (isset($playerid))
+//    {
+      $sql=<<<SQL_EOL
+SELECT 
+u_categories.id,u_categories.name,u_categories.title,u_categories.url,u_categories.img,u_categories.url1,u_categories.img1,u_categories.alt,u_categories.description,name_e,u_categories.no_image,u_categories.og_image,seo_desc,u_categories.seo_key,
+repo.img1 AS pc_header, repo.img2 AS sp_header
+FROM u_categories
+LEFT JOIN repo ON u_categories.id = repo.category
+WHERE name_e= '{$slug}'
+SQL_EOL;
+
+
+//    else
+//    {
+//      $sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e,no_image,og_image,seo_desc,seo_key from u_categories where name_e='%s'",$slug);
+//
+//    }
     $this->query($sql);
     $f=$this->fetch_array();
-    $s=set_categoriesinfo($f);
+    $s=set_categoriesinfo($f, $playerid, $isgetpickupplayerbanner);
 
     return $s;
 
@@ -262,7 +300,7 @@ END_DOC;
       $this->query($sql);
       while($ee=$this->fetch_array())$p[]=$ee;
       if(count($p)>0){
-        $l="<p>関連リンク<br>";
+        $l="<p>外部リンク<br>";
         for($i=0;$i<count($p);$i++){
           if(strlen($p[$i]["title"])>0)$l.=sprintf("<a href=\"%s\" target=\"_blank\">%s</a><br>",$p[$i]["title"],$p[$i]["link"]);
         }
@@ -374,6 +412,57 @@ END_DOC;
 
   }
 
+  /**
+   * 与えられた条件で選手を取得する
+   * @param int $category_id tbl_player.category
+   * @param int $player_id   tbl_player.id
+   */
+  public function get_players($category_id = null, $player_id = null) {
+    $sql = 'SELECT * FROM tbl_player WHERE flag = 1';
+    if($player_id !== null){
+      $sql .= " AND id = {$player_id}";
+    }
+    if($category_id !== null){
+      $sql .= " AND category = {$category_id}";
+    }
+    $sql .= " ORDER BY n";
+
+    $this->query($sql);
+    return $this->fetch_all();
+  }
+
+  /**
+   * 与えられた条件で注目の選手を取得する
+   * @param int $category_id   tbl_player.category
+   * @param int $player_id     tbl_player.id
+   * @param boolean $is_unique 重複する選手を削除するかどうか（どのヘッドラインに属する選手が返るかは不明）
+   * @param int $limit         取得する選手の件数上限
+   * @return array
+   */
+//  public function get_pickup_players($category_id = null, $player_id = null, $limit = null) {
+//    $sql = "SELECT p.*, MAX(h.n) AS max_h_n FROM repo r"
+//            . " LEFT JOIN u_headline h ON r.id = h.cid"
+//            . " LEFT JOIN tbl_player p ON h.d2 = p.id"
+//            . " WHERE r.rid = 95 AND r.flag = 1 AND h.flag = 1 AND p.flag = 1";
+//    if($player_id !== null){
+//      $sql .= " AND p.id = {$player_id}";
+//    }
+//    if($category_id !== null){
+//      $sql .= " AND r.category = '{$category_id}'";
+//    }
+//    $sql .= " GROUP BY p.id ORDER BY max_h_n";
+//    if($limit !== null) {
+//      $sql .= " LIMIT {$limit}";
+//    }
+//
+//    $this->query($sql);
+//    return $this->fetch_all();
+//  }
+
+  public function get_pickup_players($category_id = null, $player_id = null, $limit = null, $big4_flag = false) {
+
+    return get_pickup_players($category_id, $player_id, $limit, $big4_flag) ;
+  }
 
   /**
    * プレスリリース一覧
