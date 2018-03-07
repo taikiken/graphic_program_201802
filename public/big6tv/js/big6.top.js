@@ -1,5 +1,12 @@
 'use strict';
 
+var loadImg = function loadImg() {
+    var agent = navigator.userAgent;
+    if (agent.match(/undotsushin-ios/) || agent.match(/undotsushin-android/)) {
+        window.webkit.messageHandlers.onLoadComplete.postMessage("");
+    };
+};
+
 (function () {
     'use strict';
 
@@ -44,33 +51,25 @@
                 // console.log('中継中', imgLoaded)
                 if (!imgLoaded) {
                     if (windowWidth > 768) {
-                        imageTag = '<a href="/sportsbull.jp/big6tv/live/2018s/"><img src="/img/bnr_onair.png"></a>';
+                        imageTag = '<a href="/big6tv/live/2018s/"><img src="/img/bnr_onair.png" onload="loadImg()"></a>';
                     } else {
-                        imageTag = '<a href="/sportsbull.jp/big6tv/live/2018s/"><img src="/img/bnr_onair_sp.png"></a>';
+                        imageTag = '<a href="/big6tv/live/2018s/"><img src="/img/bnr_onair_sp.png" onload="loadImg()"></a>';
                     }
                     insertElement.innerHTML = imageTag;
                     imgLoaded = true;
                     // console.log('中継中　画像埋め込み後', imgLoaded)
-                    if (ua === 'undotsushin-ios' || ua === 'undotsushin-android') {
-                        // console.log('appだよ')
-                        window.webkit.messageHandlers.onLoadComplete.postMessage("");
-                    }
                 }
             } else {
                 // console.log('中継中じゃない',imgLoaded)
                 if (!imgLoaded) {
                     if (windowWidth > 768) {
-                        imageTag = '<a href="/sportsbull.jp/big6tv/2018s/"><img src="/img/bnr_offair.png"></a>';
+                        imageTag = '<a href="/big6tv/2018s/"><img src="/img/bnr_offair.png" onload="loadImg()"></a>';
                     } else {
-                        imageTag = '<a href="/sportsbull.jp/big6tv/2018s/"><img src="/img/bnr_offair_sp.png"></a>';
+                        imageTag = '<a href="/big6tv/2018s/"><img src="/img/bnr_offair_sp.png" onload="loadImg()"></a>';
                     }
                     insertElement.innerHTML = imageTag;
                     imgLoaded = true;
                     // console.log('中継中じゃない 画像埋め込み後', imgLoaded)
-                    if (ua === 'undotsushin-ios' || ua === 'undotsushin-android') {
-                        // console.log('appだよ')
-                        window.webkit.messageHandlers.onLoadComplete.postMessage("");
-                    }
                 }
             }
         });
