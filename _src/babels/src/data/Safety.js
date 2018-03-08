@@ -33,6 +33,13 @@ export class Safety {
   //
   // }
   /**
+   * NOT_EMPTY, 登録済みデータある時の className
+   * @return {string} user-logged-in を返します
+   */
+  static get NOT_EMPTY() {
+    return 'user-logged-in';
+  }
+  /**
    * object に keyName が存在することと type があっているかを調べます
    * @param {Object} object 調査対象 Object
    * @param {string} keyName 調査対象キー名称
@@ -116,12 +123,18 @@ export class Safety {
   }
   /**
    * ファイル名から拡張子を取得します
+   * - ファイル名にクエリが付くことがあるの消去後拡張子を取得します - 2018-02-15
    * @param {string} fileName 取得したいファイル名称
    * @returns {string} ファイル名の拡張子を返します
+   * @see https://aws-plus.backlog.jp/view/UNDO_SPBL-452
+   * @since 2018-02-15 path query clean
    */
   static getExtension(fileName) {
+    // @since 2018-02-15
+    // 画像パスにクエリが付くことがあるので消去する
+    const cleanPath = fileName.replace(/\?.*$/, '');
     // http://stackoverflow.com/questions/190852/how-can-i-get-file-extensions-with-javascript
-    const split = fileName.split('.');
+    const split = cleanPath.split('.');
     if (split.length === 1 || (split[0] === '' && split.length === 2) ) {
       // console.warn( `not correct file name. ${fileName}` );
       return '';
@@ -131,9 +144,9 @@ export class Safety {
   // ----------------------------------------------------------
   // 画像パスが正規かチェックする
   /**
-   * 使用可能なbase64 file かを調べます
+   * 使用可能な base64 file かを調べます
    * @param {string} fileName 調査対象ファイル名
-   * @return {boolean} jpeg / png の時に true を返します
+   * @return {boolean} jpeg / png / jpg / gif の時に true を返します
    */
   static isBase64(fileName) {
     return fileName.indexOf('data:image/jpeg;base64') !== -1 ||
@@ -146,13 +159,12 @@ export class Safety {
    * @param {string} fileName 調査対象ファイル名
    * @returns {boolean} 'jpg', 'png', 'jpeg', 'gif' のいづれかに該当するかの真偽値を返します
    */
-  static isImg(fileName:string) {
+  static isImg(fileName) {
     // base64
-    if (Safety.isBase64(fileName) ) {
+    if (Safety.isBase64(fileName)) {
       return true;
     }
     // 拡張子チェック
-    // return ['jpg', 'png', 'jpeg', 'gif', 'svg'].indexOf( Safety.getExtension( fileName ) ) !== -1;
     return ['jpg', 'png', 'jpeg', 'gif'].indexOf(Safety.getExtension(fileName)) !== -1;
   }
   /**
@@ -181,18 +193,10 @@ export class Safety {
       // 拡張子チェック・アウト
       if (!Safety.isGraph(altPath)) {
         return defaultPath;
-      } else {
-        return altPath;
       }
+      return altPath;
     }
     return altPath;
-  }
-  /**
-   * NOT_EMPTY, 登録済みデータある時の className
-   * @return {string} user-logged-in を返します
-   */
-  static get NOT_EMPTY() {
-    return 'user-logged-in';
   }
   /**
    * path と empty を比較し異なっていれば notSame を返します
@@ -212,14 +216,6 @@ export class Safety {
    * @return {boolean} 引数が正規なものかをチェックし true / false を返します
    */
   static normalize(target, allowed) {
-    // var bool = false;
-    // for ( var value of allowed ) {
-    //   if ( target === value ) {
-    //     bool = true;
-    //     break;
-    //   }
-    // }
-    // return bool;
     return allowed.some((value) => (target === value));
   }
   /**
