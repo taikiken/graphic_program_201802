@@ -42,7 +42,6 @@
 
   <script src="/assets/js/app_ua_detector.bundle.js"></script>
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=d56cb17f">
-  <link rel="stylesheet" href="/stats/assets/univbb/css/styleUpdate.css">
 
   <!-- google -->
   <link rel="stylesheet" href="/assets/google/style.css">
