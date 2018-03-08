@@ -120,10 +120,6 @@ $line_color:#999;
         .head-sec .head-sec-inner {
             position: relative;
             width: auto;
-            
-            h1 a{
-                background-size: inherit;
-            }
         }
         
         .foot-sec{
@@ -1519,6 +1515,11 @@ $line_color:#999;
                     height: 45px;
                     line-height: 45px;
                     padding: 0 10px;
+                    
+                    +span{
+                        height: 45px;
+                        line-height: 45px;
+                    }
                 }
 
                 .width03{
