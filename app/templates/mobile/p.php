@@ -333,7 +333,7 @@ endif;
             <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
             <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
             <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
-            <li class="sns-ig"><a href="https://www.imgrum.one/sportsbull_official" target="_blank">instagram</a></li>
+            <li class="sns-ig"><a href="https://www.instagram.com/sportsbull_official" target="_blank">instagram</a></li>
           </ul>
         </div>
       </div><!-- /.current-post-->
