@@ -86,21 +86,11 @@ function retrieve_remote_file_time($url){
 
 // run
 // ==============================
-$season = $_GET["season"];
-if (empty($season)) //legacy
-{
-    if ( UT_ENV !== 'PRODUCTION' ) :
-      $file = 'https://dev-img.sportsbull.jp/static/big6/2017/autumn/ranking.csv';
-    else:
-      $file = 'https://img.sportsbull.jp/static/big6/2017/autumn/ranking.csv';
-    endif;
-}else{
-    if ( UT_ENV !== 'PRODUCTION' ) :
-      $file = 'https://dev-img.sportsbull.jp/static/big6/' . $season . '/ranking.csv';
-    else:
-      $file = 'https://img.sportsbull.jp/static/big6/' . $season . '/ranking.csv';
-    endif;
-}
+if ( UT_ENV !== 'PRODUCTION' ) :
+  $file = 'https://dev-img.sportsbull.jp/static/big6/2017/autumn/ranking.csv';
+else:
+  $file = 'https://img.sportsbull.jp/static/big6/2017/autumn/ranking.csv';
+endif;
 
 $response      = getCsvConvertArray($file);
 $lastUpdate    = retrieve_remote_file_time($file);
