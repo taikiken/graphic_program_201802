@@ -1,5 +1,6 @@
 <?php
-include $INCLUDEPATH."local.php";
+
+include $INCLUDEPATH . "local.php";
 
 // DBオブジェクト作成
 $dbo = new db;
@@ -16,11 +17,10 @@ WHERE (m1=165 OR m2=165)
 AND
   flag=1;
 SQL_EOL;
-    $dbo->query($sql);
-    $updated_row_count_pyeongchang_flag1 = $dbo->affected_rows2();
-    $status = 'SQL実行';
+$dbo->query($sql);
+$updated_row_count_pyeongchang_flag1 = $dbo->affected_rows2();
 
-  $sql = <<<SQL_EOL
+$sql = <<<SQL_EOL
 UPDATE
   repo_n
 SET
@@ -31,9 +31,9 @@ WHERE
 AND
   flag=3;
 SQL_EOL;
+$dbo->query($sql);
+$updated_row_count_pyeongchang_flag3 = $dbo->affected_rows2();
 
-    $dbo->query($sql);
-    $updated_row_count_pyeongchang_flag1 = $dbo->affected_rows2();
-    $status = 'SQL実行';
-
-print_json($res, $_SERVER['HTTP_REFERER']);
+echo "flagが1のレコードを" . $updated_row_count_pyeongchang_flag1 . "件更新しました。";
+echo "<br>";
+echo "flagが3のレコードを" . $updated_row_count_pyeongchang_flag3 . "件更新しました。";
