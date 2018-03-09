@@ -60,6 +60,12 @@
       <?php
       // 地域一覧
       include_once __DIR__ . '/category_area_map.php';
+
+      // 注目のアスリート
+      // ----------------------------------------------------
+      if(empty($page['list']) === false) :
+        include_once __DIR__.'/_category-pickup_player.php';
+      endif;
       ?>
 
       <div id="js-headline"></div>
