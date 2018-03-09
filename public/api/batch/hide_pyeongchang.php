@@ -31,11 +31,10 @@ foreach ($search_word_category_list as $search_word => $category_name)
 $res = [];
 
 }
-function add_category($article_list, $category_name, $force_reload_flag=false, $base_datetime, $exclude_category_id_list)
-{
+
     $sql = <<<SQL_EOL
 UPDATE 
-    repo_n 
+  repo_n
 SET
   direct_link_url = '平昌記事の一時退避flag1',
   flag = 2 
@@ -62,7 +61,7 @@ SQL_EOL;
     $dbo->query($sql);
     $updated_row_count_pyeongchang_flag1 = $dbo->affected_rows2();
     $status = 'SQL実行';
-}
+
 print_json($res, $_SERVER['HTTP_REFERER']);
 
 
