@@ -194,8 +194,19 @@
       <figure class="related__post__thumb"><span><img src="https://img.sportsbull.jp/thumbnail1/img2018030613183432960800.png" alt=""></span></figure>
       <div class="related__post__text">
         <h3 class="related__post__heading">2018.3.11(sun)12:00〜 スポブル無料ライブ配信 [RedBull CRASHED ICE] カナダ大会</h3>
-        <p class="related__post__text">[RedBull CRASHED ICE] という世界的なウィンターレースをご存知だろうか。[RedBull CRASHED ICE] とは、アイスホッケー、ダウンヒルスキー、スノーボードクロスの要素を取り入れた競技のこと。「アイスクロス・ダウンヒル」世界選手権ATSXレッドブル・クラッシュドアイス・ワールドチャンピオンシップが2018シーズンも激アツ開催中。開幕戦は、2018年1月20日（日本時間21日）にアメリカ・セントポールで行われた。日本から唯一参戦していた女子アイスホッケー選手・山本純子に注目が集まるが、山崎は開幕戦となるアメリカ ・セントポール大会を10位でフィニッシュ。</p>
+        <p class="related__post__text">[RedBull CRASHED ICE] という世界的なウィンターレースをご存知だろうか。[RedBull CRASHED ICE] とは、アイスホッケー、ダウンヒルスキー、スノーボードクロスの要素を取り入れた競技のこと。</p>
         <p class="related__post__date">3月6日（火） 12:56</p>
+      </div><!-- /.related__post__text -->
+    </a>
+  </div><!-- /.related__post -->
+
+  <div class="related__post">
+    <a href="https://sportsbull.jp/p/278377/" class="movie">
+      <figure class="related__post__thumb"><span><img src="https://img.sportsbull.jp/thumbnail1/img2018030816105449856400.png" alt=""></span></figure>
+      <div class="related__post__text">
+        <h3 class="related__post__heading">【動画】激アツ映像 [RedBull CRASHED ICE] 2018.3.11(sun)12:00「スポブル」無料ライブ配信</h3>
+        <p class="related__post__text">RedBull JAPAN公式Instagramで公開中の[※RedBull CRASHED ICE] 滑走動画が話題になっている。プレイヤー目線で撮影された動画は、まるでジェットコースターに乗っているかのようなスピード感。</p>
+        <p class="related__post__date">3月8日（木） 16:09</p>
       </div><!-- /.related__post__text -->
     </a>
   </div><!-- /.related__post -->
