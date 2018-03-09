@@ -166,11 +166,7 @@ endif;
             <?php endif;?>
           <?php endif; ?>
 
-          <?php if ( !$page['ua_app'] ) : ?>
-            <div id="post-content-container" class="post-content restricted">
-          <?php else:?>
-            <div id="post-content-container" class="post-content">
-          <?php endif;?>
+          <div id="post-content-container" class="post-content">
 
             <?php if(count($page['photo']) > 0):
               // @since 2017-09-11 - メンテナンス性を上げるため `photo` 別ファイルにします
@@ -285,6 +281,11 @@ endif;
               <div id="post-content-banner" onclick="window.JsInterface.onBannerClick();"></div>
             <?php endif; ?>
 
+            <?php
+            /*
+
+            # UNDO_SPBL-495 で「続き表示」はすべての環境でなしとする
+
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="single-more-container">
                 <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2Fp%2F<?php echo $page['post']['id']; ?>%2F">アプリで読む</a></p>
@@ -295,6 +296,10 @@ endif;
                 <?php endif; ?>
               </div>
             <?php endif; ?>
+
+            */
+            ?>
+
           </div><!-- /.post-content -->
 
         </div><!-- /.post-detail -->
@@ -498,12 +503,19 @@ endif;
       btnContainer.parentNode.removeChild(btnContainer);
     });
 
-    if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
+    // # UNDO_SPBL-495
+    // if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
       bodyElement.classList.remove('restricted');
       bodyElement.classList.remove('noevent');
       btnContainer.parentNode.removeChild(btnContainer);
-    }
+    // }
+
   }
+
+  <?php
+  /*
+
+  # UNDO_SPBL-495 で「続き表示」はすべての環境でなしとする
 
     <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
       bodyElement.classList.remove('restricted');
@@ -512,6 +524,9 @@ endif;
       }, 300);
       btnContainer.parentNode.removeChild(btnContainer);
     <?php endif; ?>
+
+  */
+  ?>
 
   <?php if ( !$page['post']['is_sponserd'] ) : ?>
     // showContentDFP();
