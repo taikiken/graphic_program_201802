@@ -35,6 +35,8 @@
     .sponsor-link {
       > div {
         width: 100% !important;
+        display: flex;
+        justify-content: center;
       }
 
       iframe {
@@ -106,7 +108,19 @@
   text-align: center;
 }
 
-
+//.redbulltv
+.redbulltv__container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  iframe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
 
 
 
