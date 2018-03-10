@@ -30,6 +30,7 @@
         cu.fillCircle(centerX, centerY, CIRCLE_RADIUS, CIRCLE_CENTER_COLOR);
 
         // 経過時間を % 演算し、度数として利用する
+        // degrees: 0 to 359
         let degrees = Math.floor(nowTime) % 360;
 
         // 度数をラジアンに変換する
@@ -37,7 +38,9 @@
 
         // 変換したラジアンを用いてサインとコサインを求める
         // ※ 100 倍しているのはどうしてだろう？
+        // y
         let s = Math.sin(radians) * 100;
+        // x
         let c = Math.cos(radians) * 100;
 
         // サインとコサインから得た値を中心座標に加え、円を描画
