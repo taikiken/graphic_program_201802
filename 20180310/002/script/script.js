@@ -50,14 +50,14 @@
         let c = Math.cos(radians) * 100;
         let x = centerX + c;
         let y = centerY + s;
-        // let y2 = centerY + c;
+        let y2 = centerY + c;
 
         // サインとコサインの円運動をそのまま描く
         cu.fillCircle(x, y, CIRCLE_RADIUS, CIRCLE_COLOR);
 
         // 水平方向に等速移動する円を描く
         cu.fillCircle(globalX, y, CIRCLE_RADIUS, LINE_COLOR);
-        // cu.fillCircle(globalX, y2, CIRCLE_RADIUS, LINE_COLOR2);
+        cu.fillCircle(globalX, y2, CIRCLE_RADIUS, LINE_COLOR2);
 
         gui.text({radian: radians, sin: s / 100, cos: c / 100});
 

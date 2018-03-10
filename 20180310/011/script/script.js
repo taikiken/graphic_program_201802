@@ -9,7 +9,7 @@
 
     const CIRCLE_RADIUS = 10;
     const CIRCLE_SPEED = 2;
-    const CIRCLE_COLOR = 'rgba(255, 64, 0, 0.8)';
+    const CIRCLE_COLOR = 'rgba(255, 64, 0, 0.25)';
     const CIRCLE_CENTER_COLOR = 'rgba(0, 0, 255, 0.8)';
 
     window.addEventListener('load', () => {
@@ -28,13 +28,22 @@
             let normal = Vector.calcNormal(x, y);
 
             // 正規化した向きをパラメータに持つ Ball インスタンスを生成する
-            balls.push(new Ball(
+            // balls.push(new Ball(
+            //     window.innerWidth / 2,
+            //     window.innerHeight / 2,
+            //     normal.x,
+            //     normal.y,
+            //     CIRCLE_SPEED + (CIRCLE_SPEED * Math.random())
+            // ));
+            [0, 0, 0, 0, 0, 0, 0, 0].map(() => {
+              balls.push(new Ball(
                 window.innerWidth / 2,
                 window.innerHeight / 2,
                 normal.x,
                 normal.y,
-                CIRCLE_SPEED
-            ));
+                CIRCLE_SPEED + (CIRCLE_SPEED * Math.random())
+              ));
+            });
         }, false);
 
         // ボールはクリックするたびに増えるようにしたいので配列を利用
@@ -60,7 +69,8 @@
 
             // 移動後の座標に円を描く
             let p = ball.getPosition();
-            cu.fillCircle(p.x, p.y, CIRCLE_RADIUS, CIRCLE_COLOR);
+            // cu.fillCircle(p.x, p.y, CIRCLE_RADIUS, CIRCLE_COLOR);
+            cu.fillCircle(p.x, p.y, CIRCLE_RADIUS, ball.color);
 
             // もし画面の端に到達していたら進行方向をリセットして止める
             if(p.x < 0 || p.x > window.innerWidth ||

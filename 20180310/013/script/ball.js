@@ -25,7 +25,9 @@ class Ball {
         this.velocityY = vy;
         this.speed = speed;
         this.color = color;
-        this.life = Ball.maxLife;
+        const life = Ball.maxLife + (Math.floor(Ball.maxLife * Math.random()));
+        this.life = life;
+        this.born = life;
     }
     /**
      * XY 座標を設定する

@@ -18,6 +18,9 @@ class Ball {
         this.velocityX = vx;
         this.velocityY = vy;
         this.speed = speed;
+        const green = Math.floor(Math.random() * 255);
+        console.log('green', green);
+        this.color = `rgba(255, ${green}, 0, 0.25)`;
     }
     /**
      * XY 座標を設定する

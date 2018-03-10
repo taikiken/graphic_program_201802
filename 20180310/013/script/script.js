@@ -8,7 +8,7 @@
     let balls;
 
     const FIRE_MAX_LIFE = Ball.maxLife;
-    const FIRE_COUNT = 15;
+    const FIRE_COUNT = 15 * 10;
     const FIRE_RADIUS = 30;
     const FIRE_MIN_SPEED = 4;
     const FIRE_ADD_SPEED = 6;
@@ -72,12 +72,16 @@
 
         // すべてのボールの位置を更新する
         balls.map((ball, index) => {
+            if (!ball) {
+                return;
+            }
             // ボールを動かす
             ball.move();
 
             // ボールを描く
             let position = ball.getPosition();
-            let life = ball.getLife() / FIRE_MAX_LIFE;
+            // let life = ball.getLife() / FIRE_MAX_LIFE;
+            let life = ball.getLife() / ball.born;
             let color = ball.getColor();
             cu.fillCircle(
                 position.x,
@@ -88,7 +92,8 @@
 
             // ボールのライフが無くなったら配列から削除する
             if(ball.getLife() === 0){
-                balls.splice(index, 1);
+                // balls.splice(index, 1);
+              balls[index] = null;
             }
         });
 
