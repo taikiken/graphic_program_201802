@@ -297,21 +297,21 @@ include_once __DIR__ . '/../../_env.php';
                                            <select name="year" class="width04" required>
                                                <option value="">-</option>
 <?php for($i=1950;$i<=2000;$i++){ ?>
-                                               <option value="<?=$i?>"><?=$i?</option>
+                                               <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 <?php } ?>
                                            </select> <span>年</span>
 
                                            <select name="month" class="width03" required>
                                                <option value="">-</option>
 <?php for($i=1;$i<=12;$i++){ ?>
-                                               <option value="<?=$i?>"><?=$i?</option>
+                                               <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 <?php } ?>
                                            </select> <span>月</span>
 
                                            <select name="day" class="width03" required>
                                                <option value="">-</option>
 <?php for($i=1;$i<=31;$i++){ ?>
-                                               <option value="<?=$i?>"><?=$i?</option>
+                                               <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 <?php } ?>
                                            </select> <span>日</span>
                                        </td>
