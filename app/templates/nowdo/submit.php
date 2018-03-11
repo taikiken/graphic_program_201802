@@ -23,7 +23,7 @@ if($_POST["ftype"]==="0"){
 		else ${$k}=$v;
 	}
 	
-	$subject="【Now Do】トレーナー応募いただきありがとうございます";
+	$subject="【Now Do】トレーナーご応募いただきありがとうございます";
 	$contents="
 		$name1 $name2 様
 		
@@ -58,7 +58,7 @@ if($_POST["ftype"]==="0"){
 		else ${preg_replace("/^_/","",$k)}=$v;
 	}
 	
-	$subject="【Now Do】施設応募いただきありがとうございます";
+	$subject="【Now Do】ご応募いただきありがとうございます";
 	$contents="
 		$name1 $name2 様
 		
@@ -94,7 +94,7 @@ if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
 		$res["message"]="有効なメールアドレスを入力してください。";
 	}else{
 		$res["error"]=0;
-		$res["message"]="ご応募いただき、誠にありがとうございます。<br>自動返信メールを送信いたしましたの内容のご確認をお願いいたします。";
+		$res["message"]="ご応募いただき、誠にありがとうございます。<br>自動返信メールを送信いたしましたので内容のご確認をお願いいたします。";
 	}
 }
 
