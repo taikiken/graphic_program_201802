@@ -1493,7 +1493,6 @@ SQL;
   return $o->fetch_all();
 }
 
-
 function get_u_headline_id($cid, $rid, $player_id)
 {
   global $o;
