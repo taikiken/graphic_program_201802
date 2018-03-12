@@ -41,9 +41,9 @@ SELECT
     child.icon_android,
     child.sort_no
 FROM bottom_tab_nodes node
-INNER JOIN bottom_tab_categories child
+INNER JOIN bottom_tab_livescores child
     ON node.bottom_tab_id = child.id
-INNER JOIN bottom_tab_categories parent
+INNER JOIN bottom_tab_livescores parent
     ON node.parent_tab_id = parent.id
 WHERE type = 1
 ORDER BY parent.sort_no ASC, child.sort_no ASC
@@ -98,9 +98,9 @@ SELECT
     child.icon_android,
     child.sort_no
 FROM bottom_tab_nodes node
-INNER JOIN bottom_tab_livescores child
+INNER JOIN bottom_tab_categories child
     ON node.bottom_tab_id = child.id
-INNER JOIN bottom_tab_livescores parent
+INNER JOIN bottom_tab_categories parent
     ON node.parent_tab_id = parent.id
 WHERE type = 2
 ORDER BY parent.sort_no ASC, child.sort_no ASC
