@@ -6,6 +6,13 @@
             alt="<?= mod_HTML($p[$i]["name"]) ?>ページをブラウザでプレビューする" width="16" height="16"></a><?php } ?>
         <a href="<?= ($p[$i]["c_flag"] != 1) ? sprintf("%srepo_n/?cid=%s&rid=%s", $ADPATH, $p[$i]["id"], $PARAM["rid"]) : sprintf("?cid=%s&rid=%s", $PARAM["rid"], $p[$i]["id"]) ?>" class="folder"><?= mod_HTML($p[$i]["name"]) ?> (<?php echo isset($p[$i]["category"]) ? $p[$i]["disp_category"] : 'カテゴリー未設定' ?>)</a>
       </td>
+      <?php if ($PARAM["rid"] == 95) { ?>
+        <td width="75">
+          <a href="/editdm/pickup_athlete_big4/?cid=<?= $p[$i]["id"] ?>&<?= $g->g_url() ?>" class=" toe">ピックアップ</a>
+        </td>
+      <?php } ?>
+      <td width="75">
+        <a href="/editdm/pickup_athlete_big4/?cid=<?= $p[$i]["id"] ?>&<?= $g->g_url() ?>" class=" toe">ピックアップ</a>
       <td width="75">
         <a href="../ad/?nid=<?= $p[$i]["id"] ?>&<?= $g->g_url() ?>" class=" toe">
           <img src="/shared/cms/img/file.png" width="17" height="16">広告設定
