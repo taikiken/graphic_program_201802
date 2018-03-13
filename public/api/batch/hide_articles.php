@@ -120,8 +120,9 @@ SQL_EOL;
     $status = 'SQL実行';
   }
   return [
-    'status' => $status,
-    'count' => $updated_row_count,
-    'still_remain' => $is_still_remain,
+    'article_id_list' => $id_list,
+    'status'          => $status,
+    'count'           => $updated_row_count,
+    'still_remain'    => $is_still_remain,
   ];
 }
