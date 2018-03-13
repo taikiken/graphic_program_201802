@@ -75,6 +75,8 @@ function hide_articles($article_list, $force_reload_flag = false, $base_datetime
   $id_list = [];
   $status = 'SQL未実行';
   $updated_row_count = 0;
+  $is_still_remain = !empty($article_list) ? true : false;
+
   foreach ($article_list as $article)
   {
     if ($article['category']['slug'] == $slug || $article['category2']['slug'] == $slug )
@@ -93,7 +95,6 @@ function hide_articles($article_list, $force_reload_flag = false, $base_datetime
       }
     }
   }
-  $is_still_remain = !empty($id_list) ? true : false;
 
   if ($is_still_remain)
   {
