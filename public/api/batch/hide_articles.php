@@ -96,7 +96,7 @@ function hide_articles($article_list, $force_reload_flag = false, $base_datetime
     }
   }
 
-  if ($is_still_remain)
+  if (!empty($id_list))
   {
     $sql_id_list = implode(' OR repo_n.id = ', $id_list);
     // DBオブジェクト作成
