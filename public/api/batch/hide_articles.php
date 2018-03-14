@@ -23,12 +23,12 @@ $domain .= $_SERVER['SERVER_NAME'];
 $search_word = urlencode($search_word);
 $url = generate_search_url($domain, $search_word, 0, $length);
 
-$res = get_contents($url);
-$res = json_decode($res, true);
-$count = $res['response']['count'];
+$search_result = get_contents($url);
+$search_result = json_decode($search_result, true);
+$count = $search_result['response']['count'];
 
 // 初回
-$res = hide_articles($res['response']['articles'], $is_force, $base_datetime, $slug);
+$res = hide_articles($search_result['response']['articles'], $is_force, $base_datetime, $slug);
 $is_still_remain = $res['still_remain'];
 unset($res['still_remain']);
 $hide_result[] = $res;
@@ -40,18 +40,19 @@ if ($is_still_remain) {
 
     $url = generate_search_url($domain, $search_word, $offset, $length);
 
-    $res = get_contents($url);
-    $res = json_decode($res, true);
-    $res = hide_articles($res['response']['articles'], $is_force, $base_datetime, $slug);
+    $search_result = get_contents($url);
+    $search_result = json_decode($search_result, true);
+    $res = hide_articles($search_result['response']['articles'], $is_force, $base_datetime, $slug);
 
     $is_still_remain = $res['still_remain'];
     unset($res['still_remain']);
+    $hide_result[] = $res;
 
     if ($is_still_remain == false) break;
   }
 }
 
-print_json($res, $_SERVER['HTTP_REFERER']);
+print_json($hide_result, $_SERVER['HTTP_REFERER']);
 
 
 
