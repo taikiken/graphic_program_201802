@@ -44,6 +44,7 @@ $sql = <<<SQL
 SELECT 
     cmp.* ,
     sports.name as sport_name
+    sports.icon as sport_icon
 FROM
     competitions cmp
 LEFT JOIN
@@ -73,7 +74,7 @@ foreach ($o->fetch_all() as $f) {
     $type_list = [];
     $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
     $f['file'] = !empty($f['file']) ? $ImgPath.$f['file'] : '';
-    $f['icon'] = !empty($f['icon']) ? $ImgPath.$f['icon'] : '';
+    $f['sport_icon'] = !empty($f['sport_icon']) ? $ImgPath.$f['sport_icon'] : '';
 
     //開始日
     $DateTime = new DateTime($f['start_date_time']);
@@ -114,7 +115,7 @@ foreach ($o->fetch_all() as $f) {
         'id'                => $f['id'],
         'competition_name'  => $f['name'],
         'sport_name'        => $f['sport_name'],
-        'icon'              => $f['icon'],
+        'icon'              => $f['sport_icon'],
         'start_date_time'   => $start_date,
         'end_date_time'     => $end_date,
         'file'              => $f['file'],

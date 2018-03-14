@@ -16,6 +16,7 @@ $sql = <<<SQL
 SELECT 
     cmp.* ,
     sports.name as sport_name
+    sports.icon as sport_icon
 FROM
     competitions cmp
 LEFT JOIN
@@ -53,15 +54,15 @@ if($f){
   {
     $f['file'] = $ImgPath . $f['file'];
   }
-  if (!empty($f['icon']))
+  if (!empty($f['sport_icon']))
   {
-    $f['icon'] = $ImgPath . $f['icon'];
+    $f['sport_icon'] = $ImgPath . $f['sport_icon'];
   }
 
     $response = [
         'competition_name'  => $f['name'],
         'sport_name'        => $f['sport_name'],
-        'icon'              => $f['icon'],
+        'icon'              => $f['sport_icon'],
         'period'            => $start_date . ' 〜 ' . $end_date,
         'organizer'         => $f['organizer'],
         'collaborator'      => $f['collaborator'],
