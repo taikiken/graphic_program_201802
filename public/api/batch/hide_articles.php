@@ -12,7 +12,7 @@ $search_word = $_GET['search'];
 $slug = $_GET['slug'];
 
 // 100件ずつ
-$length = $is_force ? 500 : 100;
+$length = 100;
 // 2時間以内の記事を対象にする
 $base_datetime = strtotime('-2 hour');
 
@@ -33,8 +33,8 @@ $is_still_remain = $res['still_remain'];
 unset($res['still_remain']);
 $hide_result[] = $res;
 
-// まだ残ってるときのみ実行
-if ($is_still_remain) {
+// 全件実行フラグのみ実行
+if ($is_force) {
   for ($offset = $length; $offset <= $count; $offset = $offset + $length)
   {
 
