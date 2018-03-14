@@ -23,7 +23,7 @@ $domain .= $_SERVER['SERVER_NAME'];
 $search_word = urlencode($search_word);
 $url = generate_search_url($domain, $search_word, 0, $length);
 
-$search_result = get_contents($url);
+$search_result = file_get_contents($url);
 $search_result = json_decode($search_result, true);
 $count = $search_result['response']['count'];
 
@@ -40,7 +40,7 @@ if ($is_force) {
 
     $url = generate_search_url($domain, $search_word, $offset, $length);
 
-    $search_result = get_contents($url);
+    $search_result = file_get_contents($url);
     $search_result = json_decode($search_result, true);
     $res = hide_articles($search_result['response']['articles'], $is_force, $base_datetime, $slug);
 
