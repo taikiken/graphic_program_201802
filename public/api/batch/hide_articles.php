@@ -2,14 +2,14 @@
 
 if (empty($_GET['search']) || empty($_GET['slug']))
 {
-  print_json('パラメータ不正', $_SERVER['HTTP_REFERER']);
+  echo 'パラメータ不正';
 }
 
 include $INCLUDEPATH . "local.php";
 
 $is_force = $_GET['force'] == 1 ? true : false;
 $search_word = $_GET['search'];
-$slug = $_GET['slug'];
+$slug_list = explode(',', $_GET['slug']);
 
 // 100件ずつ
 $length = 100;
@@ -28,7 +28,7 @@ $search_result = json_decode($search_result, true);
 $count = $search_result['response']['count'];
 
 // 初回
-$res = hide_articles($search_result['response']['articles'], $is_force, $base_datetime, $slug);
+$res = hide_articles($search_result['response']['articles'], $is_force, $base_datetime, $slug_list);
 $is_still_remain = $res['still_remain'];
 unset($res['still_remain']);
 $hide_result[] = $res;
@@ -42,7 +42,7 @@ if ($is_force) {
 
     $search_result = file_get_contents($url);
     $search_result = json_decode($search_result, true);
-    $res = hide_articles($search_result['response']['articles'], $is_force, $base_datetime, $slug);
+    $res = hide_articles($search_result['response']['articles'], $is_force, $base_datetime, $slug_list);
 
     $is_still_remain = $res['still_remain'];
     unset($res['still_remain']);
@@ -71,7 +71,7 @@ function generate_search_url($domain, $search_word, $offset = 0, $length = 100)
 }
 
 
-function hide_articles($article_list, $force_reload_flag = false, $base_datetime, $slug)
+function hide_articles($article_list, $force_reload_flag = false, $base_datetime, $slug_list)
 {
   $id_list = [];
   $status = 'SQL未実行';
@@ -80,18 +80,21 @@ function hide_articles($article_list, $force_reload_flag = false, $base_datetime
 
   foreach ($article_list as $article)
   {
-    if ($article['category']['slug'] == $slug || $article['category2']['slug'] == $slug )
+    foreach ($slug_list as $slug)
     {
-      if ($force_reload_flag)
+      if ($article['category']['slug'] == $slug || $article['category2']['slug'] == $slug)
       {
-        $id_list[] = $article['id'];
-      }
-      else // 2時間以内の記事のみ
-      {
-        date_default_timezone_set('Asia/Tokyo');
-        if (strtotime($article['date']) > $base_datetime)
+        if ($force_reload_flag)
         {
           $id_list[] = $article['id'];
+        }
+        else // 2時間以内の記事のみ
+        {
+          date_default_timezone_set('Asia/Tokyo');
+          if (strtotime($article['date']) > $base_datetime)
+          {
+            $id_list[] = $article['id'];
+          }
         }
       }
     }
