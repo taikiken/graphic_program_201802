@@ -235,6 +235,13 @@
 
 
 
+  //.special-summary
+  .special-summary {
+    background-color: #474f5b;
+  }
+
+
+
   //.paraboard__header
   .paraboard__header {
     display: table;
@@ -780,9 +787,8 @@
     //.paraboard__detail__overview__th
     &__th {
       width: perCalc(90, 728);
-      line-height: lh(40, 13);
-      padding-right: 10px;
-      padding-left: 10px;
+      line-height: 2;
+      padding: 8px 10px;
       color: #fff;
       font-weight: bold;
       font-size: fz(13);
@@ -791,9 +797,8 @@
 
     //.paraboard__detail__overview__td
     &__td {
-      line-height: lh(40, 13);
-      padding-right: 10px;
-      padding-left: 10px;
+      line-height: 2;
+      padding: 8px 10px;
       color: #fff;
       font-weight: bold;
       font-size: fz(13);
@@ -818,6 +823,11 @@
 
     strong {
       color: #e83851;
+      font-size: fs(16, 12);
+    }
+
+    a {
+      @include link-decoration(#e83851, #e83851, none, underline);
       font-size: fs(16, 12);
     }
   } //.paraboard__detail__powerdby

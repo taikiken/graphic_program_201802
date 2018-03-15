@@ -791,6 +791,11 @@
       color: #e83851;
       font-size: fs(26, 20);
     }
+
+    a {
+      @include link-decoration(#e83851, #e83851, underline, underline);
+      font-size: fs(26, 20);
+    }
   } //.paraboard__detail__powerdby
 
 
