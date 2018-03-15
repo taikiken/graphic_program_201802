@@ -94,11 +94,13 @@ export const SPMediaNode = React.createClass( {
       } else {
         // show video
         return (
-          <SPMediaVideoNode
-            articleId={articleId}
-            media={media}
-            index={index}
-          />
+          <div className="video-wrapper">
+            <SPMediaVideoNode
+              articleId={articleId}
+              media={media}
+              index={index}
+            />
+          </div>
         );
       }
     } else {

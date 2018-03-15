@@ -54,6 +54,7 @@ import ViewHeaderSearch from './view/header/ViewHeaderSearch';
 
 import ViewCategory from './view/ViewCategory';
 import ViewSingle from './view/ViewSingle';
+
 // import {ViewTitle} from './view/ViewTitle';
 import ViewSearch from './view/ViewSearch';
 import ViewCommentSingle from './view/ViewCommentSingle';
@@ -63,6 +64,7 @@ import ViewAnnounce from './view/ViewAnnounce';
 // single
 import ViewSingleTitle from './view/single/ViewSingleTitle';
 import ViewSingleVisual from './view/single/ViewSingleVisual';
+import ViewSingleHeadline from './view/single/ViewSingleHeadline';
 
 // comment
 import ViewComments from './view/ViewComments';
@@ -153,6 +155,7 @@ import SPViewSingleHeader from './sp/view/single/SPViewSingleHeader';
 import SPViewContinueRead from './sp/view/single/SPViewContinueRead';
 import SPViewSingleRanking from './sp/view/single/SPViewSingleRanking';
 import SPViewSingleRecommend from './sp/view/single/SPViewSingleRecommend';
+import SPViewSingleTags from './sp/view/single/SPViewSingleTags';
 
 // single/comment
 import SPViewComments from './sp/view/SPViewComments';
@@ -161,6 +164,8 @@ import SPViewCommentForm from './sp/view/comment/SPViewCommentForm';
 // singles-option
 import SPViewSinglesRecommend from './sp/view/singles-option/SPViewSinglesRecommend';
 import SPViewSinglesRanking from './sp/view/singles-option/SPViewSinglesRanking';
+import SPViewSinglesHeadline from './sp/view/singles-option/SPViewSinglesHeadLine';
+import SPViewSinglesWithSlug from './sp/view/singles-option/SPViewSinglesWithSlug';
 
 
 // mypage
@@ -362,7 +367,8 @@ const UT = {
     },
     single: {
       ViewSingleTitle,
-      ViewSingleVisual
+      ViewSingleVisual,
+      ViewSingleHeadline
     },
     header: {
       ViewHeaderUser,
@@ -421,11 +427,14 @@ const UT = {
         SPViewSingleHeader,
         SPViewContinueRead,
         SPViewSingleRanking,
-        SPViewSingleRecommend
+        SPViewSingleRecommend,
+        SPViewSingleTags
       },
       singles: {
         SPViewSinglesRecommend,
         SPViewSinglesRanking,
+        SPViewSinglesHeadline,
+        SPViewSinglesWithSlug
       },
       comment: {
         SPViewCommentForm

@@ -9,7 +9,7 @@
   $carousel-height: 170px;
 
   width: 100%;
-  margin-top: (40/2)+px;
+  // margin-top: (40/2)+px;
   // 左右をクロップする
   overflow: hidden;
 
@@ -30,40 +30,157 @@
   // .widget-post-carousel-center
   &-center {
     position: relative;
-    margin: 0 perCalc(20);
+    // margin: 0 perCalc(20);
   }
 
   // carousel move target
   // wrapper
   // .widget-post-carousel-wrapper
   &-wrapper {
-    position: absolute;
-    left: 0;
-    top: 0;
+    // position: absolute;
+    // left: 0;
+    // top: 0;
   }
 
   // swipe target
   // ul
   //.widget-post-carousel-list
+  // &-list {
   &-list {
-    position: absolute;
-    left: 0;
-    top: 0;
-    //width: 50000px;
-    width: $carousel-width * 7;
-    //margin-left: perCalc(20);
-    letter-spacing: ls(inline-block);
-  }
-
-  //.widget-post-carousel-item
-  &-item {
-    //list-style: none;
-    display: inline-block;
-    width: $carousel-width - (20px * 0.5);
-    margin-right: (20/2)+px;
-    vertical-align: top;
-    letter-spacing: normal;
-  }
+    width: 100%;
+    .widget-post-carousel-item-root {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0 8px;
+        border: none;
+        margin-right: 0;
+        border-bottom: 1px solid #ddd;
+        background: none;
+        position: relative;
+        display: block;
+        &:nth-child(5) {
+            display: block;
+        }
+        &:before {
+            content: '';
+            display: block;
+            background-image: url(/assets/widgets/articles-index/img/sprite-ranking.png);
+            background-size: 25px 111px;
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            top: 5px;
+            // left: 5px;
+            left: calc(8px - 5px);
+            z-index: 2;
+        }
+        &:nth-child(n + 4) {
+            &:before {
+                width: 18px;
+                height: 18px;
+            }
+        }
+        @for $i from 1 through 10 {
+            &:nth-child(#{$i}) {
+                &:before {
+                    @if $i < 4 {
+                        background-position-y: -25px * ($i - 1);
+                    } @else {
+                        background-position-y: -18px * ($i - 4) - 75;
+                    }
+                }
+            }
+        }
+        a {
+            padding: 12px 0;
+            display: flex;
+            width: 100%;
+            .post-thumb {
+              position: relative;
+                width: 110px;
+                height: auto;
+                background-color: transparent;
+                img {
+                  border-radius: 3px;
+                }
+                &:after {
+                    width: 100%;
+                    height: auto;
+                    background-position: 0 0;
+                }
+            }
+            .post-data {
+                width: calc(100% - 120px);
+                padding: 0 0 0 10px;
+                .post-heading {
+                    font-size: 16px;
+                    line-height: 1.4;
+                    height: 2.8em;
+                    overflow: hidden;
+                }
+                .post-category {
+                  width: 27px;
+                    height: 14px;
+                    background-color: #0e357f;
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 3px;
+                    .category-label  {
+                      margin-right: 0;
+                        font-size: 10px;
+                        color: #fff;
+                        line-height: 1;
+                        transform-origin: center center;
+                        transform: scale(.8);
+                    }
+                }
+                .post-date {
+                  display: none;
+                }
+            }
+        }
+        .widget-post-carousel-item-ad {
+          border-top: 1px solid #ddd;
+          // display: none;
+          .gunosy-ads-rendered {
+            >div {
+              width: 100%;
+              a {
+                display: flex;
+                .adgImageBox {
+                  position: relative;
+                  width: 110px;
+                  height: auto;
+                  background-color: transparent;
+                  img {
+                    border-radius: 3px;
+                    width: 100%;
+                    height: auto;
+                    min-height: 1px;
+                  }
+                }
+                .adgBody {
+                  width: calc(100% - 120px);
+                  padding: 0 0 0 10px;
+                  margin-top: 0;
+                  .adgTitle {
+                    font-size: 16px;
+                    line-height: 1.4;
+                    height: auto;
+                    overflow: hidden;
+                  }
+                  .adgPrBox {
+                    display: none;
+                  }
+                  .adgSponsor {}
+                }
+              }
+            }
+          }
+        }
+    }
+}
 
 
 
@@ -94,7 +211,7 @@
 
     //.post-data
     &-data {
-      margin-top: (20/2)+px;
+      // margin-top: (20/2)+px;
     }
 
     //.post-heading

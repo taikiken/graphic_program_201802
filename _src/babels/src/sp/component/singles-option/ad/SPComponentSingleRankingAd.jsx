@@ -62,10 +62,7 @@ export default class SPComponentSingleRankingAd extends React.Component {
      * ```
      * @type {{first: string, second: string}}
      */
-    this.src = {
-      first: '//i.socdm.com/sdk/js/adg-script-loader.js?id=54991&targetID=adg_54991&displayid=3&adType=INFEED&async=true&tagver=2.0.0',
-      second: '//i.socdm.com/sdk/js/adg-script-loader.js?id=54992&targetID=adg_54992&displayid=3&adType=INFEED&async=true&tagver=2.0.0',
-    };
+    this.src = `https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=${this.props.ad}&targetID=${this.props.ad + '_0'}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -76,6 +73,10 @@ export default class SPComponentSingleRankingAd extends React.Component {
   componentDidMount() {
     if (this.container) {
       // console.log('SPComponentSingleRankingAd.componentDidMount', this.container);
+      const { ad } = this.props;
+      if (!ad) {
+        return;
+      }
       this.ad();
     }
   }
@@ -85,10 +86,11 @@ export default class SPComponentSingleRankingAd extends React.Component {
   ad() {
     // console.log('SPComponentSingleRankingAd.ad ------------');
     const container = this.container;
-    const { index } = this.props;
+    // const { index } = this.props;
     const div = document.createElement('div');
     const script = document.createElement( 'script' );
-    script.src = index === 1 ? this.src.first : this.src.second;
+    // script.src = index === 1 ? this.src.first : this.src.second;
+    script.src = this.src;
     div.appendChild(script);
     container.appendChild(div);
     // console.log('SPComponentSingleRankingAd.ad', container);
