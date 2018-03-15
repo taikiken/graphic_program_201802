@@ -43,7 +43,7 @@ $o->connect();
 $sql = <<<SQL
 SELECT 
     cmp.* ,
-    sports.name as sport_name
+    sports.name as sport_name,
     sports.icon as sport_icon
 FROM
     competitions cmp
@@ -74,7 +74,7 @@ foreach ($o->fetch_all() as $f) {
     $type_list = [];
     $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
     $f['file'] = !empty($f['file']) ? $ImgPath.$f['file'] : '';
-    $f['sport_icon'] = !empty($f['sport_icon']) ? $ImgPath.$f['sport_icon'] : '';
+    $f['sport_icon'] = !empty($f['sport_icon']) ? $ImgPath.'/static/sports/icon/'.$f['sport_icon'] : '';
 
     //開始日
     $DateTime = new DateTime($f['start_date_time']);

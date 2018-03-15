@@ -15,7 +15,7 @@ $o->connect();
 $sql = <<<SQL
 SELECT 
     cmp.* ,
-    sports.name as sport_name
+    sports.name as sport_name,
     sports.icon as sport_icon
 FROM
     competitions cmp
@@ -56,7 +56,7 @@ if($f){
   }
   if (!empty($f['sport_icon']))
   {
-    $f['sport_icon'] = $ImgPath . $f['sport_icon'];
+    $f['sport_icon'] = $ImgPath . '/static/sports/icon/' . $f['sport_icon'];
   }
 
     $response = [
