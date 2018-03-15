@@ -337,6 +337,14 @@ function competition_summary_tr($provider_name, $title, $option_name = null) {
       echo competition_summary_tr($competition_response['venue'],'会場名');
       echo competition_summary_tr($competition_response['qualification'],'参加資格');
       echo competition_summary_tr($competition_response['regulation'],'規定');
+      ?>
+      <?php
+      /*
+       トツツメ
+      https://docs.google.com/spreadsheets/d/1ahLCFd9GzHFU3QGQBkBDpkpG2bUq0yo253ABZcbwjkQ/edit#gid=0
+      powered by
+        今提供団体に設定されているテキストとリンクにする。
+        提供団体を削除する。
       // [提供団体]
       $competition_response_provider_name = $competition_response['provider_name'];
       $competition_response_provider_url = $competition_response['provider_url'];
@@ -367,15 +375,40 @@ function competition_summary_tr($provider_name, $title, $option_name = null) {
       <?php
       endif;
       // [/提供団体]
+      */
       ?>
       </tbody>
     </table>
   </div><!-- /.paraboard__detail__overview -->
-
+  <?php
+  // [提供団体]
+  $competition_response_provider_name = $competition_response['provider_name'];
+  $competition_response_provider_url = $competition_response['provider_url'];
+  if (!empty($competition_response_provider_name)) :
+  ?>
   <div class="paraboard__detail__powerdby">
     <p>Powered by<br />
-    <strong>一般社団法人日本FIDバスケットボール連盟</strong></p>
+    <?php
+    if (!empty($competition_response_provider_url)) :
+    ?>
+      <a href="<?php echo $competition_response_provider_url; ?>" target="_blank">
+    <?php
+    endif;
+    ?>
+        <strong><?php echo $competition_response_provider_name; ?></strong>
+    <?php
+    if (!empty($competition_response_provider_url)) :
+    ?>
+      </a>
+    <?php
+    endif;
+    ?>
+    </p>
   </div><!-- /.paraboard__detail__powerdby -->
+  <?php
+  endif;
+  // [/提供団体]
+  ?>
 </div><!-- /.body-sec-inner -->
 
 </div><!-- /.body-sec -->
