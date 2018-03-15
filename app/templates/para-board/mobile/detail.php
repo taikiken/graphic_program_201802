@@ -317,8 +317,6 @@ $competition_response_photo = $competition_response_pc['photo_gallery'];
 endif;
 // [/A]
 ?>
-</div>
-
 
 <?php
 // 大会概要
