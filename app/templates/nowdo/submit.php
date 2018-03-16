@@ -1,7 +1,5 @@
 <?php
 
-include "local.php";
-
 $mail["from"] ="saegusa@usuk.jp";
 $mail["reply"]="saegusa@usuk.jp";
 $mail["bcc"]  ="saegusa@kiito.co.jp";
