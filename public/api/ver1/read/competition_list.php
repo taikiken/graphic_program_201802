@@ -95,7 +95,7 @@ foreach ($o->fetch_all() as $f) {
     }
 
     //結果のactive確認
-    $active_list['result'] = (strpos(get_headers($ImgPath . $f['file'])[0],'OK')) ? true : false;
+    $active_list['result'] = (strpos(get_headers($f['file'])[0],'OK')) ? true : false;
 
     //概要はactiveにする
     $active_list['summary'] = true;
