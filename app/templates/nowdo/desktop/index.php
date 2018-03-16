@@ -191,7 +191,7 @@ include_once __DIR__ . '/../../_env.php';
             <p class="link"><a href="http://nowdo.jp/" target="_blank">Now Do(株) 公式サイトはこちら</a></p>
           </div>
         </section>
-        <!-- /.section_04 -->
+        <!-- /.section_05 -->
         <section class="section_05">
           <div class="contents_inner">
             <h2 class="section_ttl">メールフォームから応募する</h2>
@@ -206,126 +206,43 @@ include_once __DIR__ . '/../../_env.php';
                                <form action="javascript://" method="post">
                                <table>
                                    <tr>
-                                       <th><label for="">氏　　名</label></th>
+                                       <th><label for="name1">氏名<span class="required">必須</span></label></th>
                                        <td><input type="text" id="name1" name="name1" placeholder="姓" class="width01 mr" required> <input type="text" id="name2" name="name2" placeholder="名" class="width01" required></td>
                                    </tr>
 
                                    <tr>
-                                       <th><label for="">住　　所</label></th>
-                                       <td><input type="text" id="postcode" name="postcode" placeholder="郵便番号" pattern="\d{3}-?\d{4}" class="width01" onKeyUp="AjaxZip3.zip2addr(this,'','prefectures','city','address');" required><br>
-                                           <select name="prefectures" class="width01 mr" required>
-                                               <option value="" selected>都道府県</option>
-                                               <option value="1">北海道</option>
-                                               <option value="2">青森県</option>
-                                               <option value="3">岩手県</option>
-                                               <option value="4">宮城県</option>
-                                               <option value="5">秋田県</option>
-                                               <option value="6">山形県</option>
-                                               <option value="7">福島県</option>
-                                               <option value="8">茨城県</option>
-                                               <option value="9">栃木県</option>
-                                               <option value="10">群馬県</option>
-                                               <option value="11">埼玉県</option>
-                                               <option value="12">千葉県</option>
-                                               <option value="13">東京都</option>
-                                               <option value="14">神奈川県</option>
-                                               <option value="15">新潟県</option>
-                                               <option value="16">富山県</option>
-                                               <option value="17">石川県</option>
-                                               <option value="18">福井県</option>
-                                               <option value="19">山梨県</option>
-                                               <option value="20">長野県</option>
-                                               <option value="21">岐阜県</option>
-                                               <option value="22">静岡県</option>
-                                               <option value="23">愛知県</option>
-                                               <option value="24">三重県</option>
-                                               <option value="25">滋賀県</option>
-                                               <option value="26">京都府</option>
-                                               <option value="27">大阪府</option>
-                                               <option value="28">兵庫県</option>
-                                               <option value="29">奈良県</option>
-                                               <option value="30">和歌山県</option>
-                                               <option value="31">鳥取県</option>
-                                               <option value="32">島根県</option>
-                                               <option value="33">岡山県</option>
-                                               <option value="34">広島県</option>
-                                               <option value="35">山口県</option>
-                                               <option value="36">徳島県</option>
-                                               <option value="37">香川県</option>
-                                               <option value="38">愛媛県</option>
-                                               <option value="39">高知県</option>
-                                               <option value="40">福岡県</option>
-                                               <option value="41">佐賀県</option>
-                                               <option value="42">長崎県</option>
-                                               <option value="43">熊本県</option>
-                                               <option value="44">大分県</option>
-                                               <option value="45">宮崎県</option>
-                                               <option value="46">鹿児島県</option>
-                                               <option value="47">沖縄県</option>
-                                           </select>
-
-                                           <input type="text" id="city" name="city" placeholder="市区町村" class="width01" required><br>
-                                           <input type="text" id="address" name="address" placeholder="番地・ビル名" class="width02" required>
-                                       </td>
-                                   </tr>
-
-                                   <tr>
-                                       <th>電話番号</th>
-                                       <td><input type="text" id="tel" name="tel" class="width02" required></td>
-                                   </tr>
-
-                                   <tr>
-                                       <th>メールアドレス</th>
+                                       <th><label for="email">Eメール<span class="required">必須</span></label></th>
                                        <td><input type="text" id="email" name="email" class="width02" required></td>
                                    </tr>
 
                                    <tr>
-                                       <th>性　　別</th>
+                                       <th><label for="tel">電話番号</label></th>
+                                       <td><input type="text" id="tel" name="tel" class="width02"></td>
+                                   </tr>
 
+                                   <tr>
+                                       <th>性別<span class="required">必須</span></th>
                                        <td>
-                                           <select name="sex" class="width03" required>
-                                               <option value="" selected></option>
-                                               <option value="0">男性</option>
-                                               <option value="1">女性</option>
-                                           </select>
+											<input type="radio" value="男" name="sex" id="sex01" required><label for="sex01">男</label>
+                                            <input type="radio" value="女" name="sex" id="sex02" required><label for="sex02">女</label>
                                         </td>
                                    </tr>
 
                                    <tr>
-                                       <th>生年月日</th>
-                                       <td>
-                                           <select name="year" class="width04" required>
-                                               <option value="">-</option>
-<?php for($i=1950;$i<=2000;$i++){ ?>
-                                               <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-<?php } ?>
-                                           </select> <span>年</span>
-
-                                           <select name="month" class="width03" required>
-                                               <option value="">-</option>
-<?php for($i=1;$i<=12;$i++){ ?>
-                                               <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-<?php } ?>
-                                           </select> <span>月</span>
-
-                                           <select name="day" class="width03" required>
-                                               <option value="">-</option>
-<?php for($i=1;$i<=31;$i++){ ?>
-                                               <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-<?php } ?>
-                                           </select> <span>日</span>
-                                       </td>
+                                       <th><label for="license">取得資格</label></th>
+                                       <td><textarea name="license" id="license" cols="30" rows="10" placeholder="例) oooo協会指導ライセンスB級"></textarea></td>
                                    </tr>
 
                                    <tr>
-                                       <th>取得資格</th>
-                                       <td><textarea name="license" id="license" cols="30" rows="10" required></textarea></td>
+                                       <th><label for="history01">コーチ歴<br>指導カテゴリー</label></th>
+                                       <td><textarea name="history01" id="history01" cols="30" rows="10" placeholder="例) xxxサッカースクールコーチ5年&#10;例) xxxサッカークラブ U-18 監督 3年"></textarea></td>
                                    </tr>
 
                                    <tr>
-                                       <th>指導歴</th>
-                                       <td><input type="text" id="coach" name="coach" class="width03" required> <span>年</span></td>
+                                       <th><label for="history02">競技歴</label></th>
+                                       <td><textarea name="history02" id="history02" cols="30" rows="10" placeholder="例) xxxサッカーチーム U-18、xxxサッカーチームトップ"></textarea></td>
                                    </tr>
+
                                </table>
                                 <div class="entry_btn">
                                     <button type="submit" id="button_submit" class="contact-form__submit">応募する</button>
@@ -336,85 +253,41 @@ include_once __DIR__ . '/../../_env.php';
                                 <form action="javascript://" method="post">
                                 <table>
                                     <tr>
-                                        <th><label for="">施 設 名</label></th>
-                                        <td><input type="text" id="_name1" name="_name1" class="width02" required></td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <th><label for="">代表者氏名</label></th>
-                                        <td><input type="text" id="_name2" name="_name2" class="width02" required></td>
+                                        <th><label for="_name0">施設名称<span class="required">必須</span></label></th>
+                                        <td><input type="text" id="_name0" name="_name0" class="width02" required></td>
                                     </tr>
 
                                     <tr>
-                                        <th><label for="">住　　所</label></th>
+                                        <th><label for="_name1">担当者名<span class="required">必須</span></label></th>
+                                       <td><input type="text" id="_name1" name="_name1" placeholder="姓" class="width01 mr" required> <input type="text" id="_name2" name="_name2" placeholder="名" class="width01" required></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th><label for="_postcode">住所<span class="required">必須</span></label></th>
                                         <td><input type="text" id="_postcode" name="_postcode" placeholder="郵便番号" pattern="\d{3}-?\d{4}" required onKeyUp="AjaxZip3.zip2addr(this,'','_prefectures','_city','_address');"><br>
-
                                             <select name="_prefectures" class="width01 mr" required>
-                                                <option value="" selected>都道府県</option>
-                                                <option value="1">北海道</option>
-                                                <option value="2">青森県</option>
-                                                <option value="3">岩手県</option>
-                                                <option value="4">宮城県</option>
-                                                <option value="5">秋田県</option>
-                                                <option value="6">山形県</option>
-                                                <option value="7">福島県</option>
-                                                <option value="8">茨城県</option>
-                                                <option value="9">栃木県</option>
-                                                <option value="10">群馬県</option>
-                                                <option value="11">埼玉県</option>
-                                                <option value="12">千葉県</option>
-                                                <option value="13">東京都</option>
-                                                <option value="14">神奈川県</option>
-                                                <option value="15">新潟県</option>
-                                                <option value="16">富山県</option>
-                                                <option value="17">石川県</option>
-                                                <option value="18">福井県</option>
-                                                <option value="19">山梨県</option>
-                                                <option value="20">長野県</option>
-                                                <option value="21">岐阜県</option>
-                                                <option value="22">静岡県</option>
-                                                <option value="23">愛知県</option>
-                                                <option value="24">三重県</option>
-                                                <option value="25">滋賀県</option>
-                                                <option value="26">京都府</option>
-                                                <option value="27">大阪府</option>
-                                                <option value="28">兵庫県</option>
-                                                <option value="29">奈良県</option>
-                                                <option value="30">和歌山県</option>
-                                                <option value="31">鳥取県</option>
-                                                <option value="32">島根県</option>
-                                                <option value="33">岡山県</option>
-                                                <option value="34">広島県</option>
-                                                <option value="35">山口県</option>
-                                                <option value="36">徳島県</option>
-                                                <option value="37">香川県</option>
-                                                <option value="38">愛媛県</option>
-                                                <option value="39">高知県</option>
-                                                <option value="40">福岡県</option>
-                                                <option value="41">佐賀県</option>
-                                                <option value="42">長崎県</option>
-                                                <option value="43">熊本県</option>
-                                                <option value="44">大分県</option>
-                                                <option value="45">宮崎県</option>
-                                                <option value="46">鹿児島県</option>
-                                                <option value="47">沖縄県</option>
+                                                <option value="" selected>都道府県</option><option value="1">北海道</option><option value="2">青森県</option><option value="3">岩手県</option><option value="4">宮城県</option><option value="5">秋田県</option><option value="6">山形県</option><option value="7">福島県</option><option value="8">茨城県</option><option value="9">栃木県</option><option value="10">群馬県</option><option value="11">埼玉県</option><option value="12">千葉県</option><option value="13">東京都</option><option value="14">神奈川県</option><option value="15">新潟県</option><option value="16">富山県</option><option value="17">石川県</option><option value="18">福井県</option><option value="19">山梨県</option><option value="20">長野県</option><option value="21">岐阜県</option><option value="22">静岡県</option><option value="23">愛知県</option>
+                                                <option value="24">三重県</option><option value="25">滋賀県</option><option value="26">京都府</option><option value="27">大阪府</option><option value="28">兵庫県</option><option value="29">奈良県</option><option value="30">和歌山県</option><option value="31">鳥取県</option><option value="32">島根県</option><option value="33">岡山県</option><option value="34">広島県</option><option value="35">山口県</option><option value="36">徳島県</option><option value="37">香川県</option><option value="38">愛媛県</option><option value="39">高知県</option><option value="40">福岡県</option><option value="41">佐賀県</option><option value="42">長崎県</option><option value="43">熊本県</option><option value="44">大分県</option><option value="45">宮崎県</option><option value="46">鹿児島県</option><option value="47">沖縄県</option>
                                             </select>
-
                                             <input type="text" id="_city" name="_city" placeholder="市区町村" class="width01" required><br>
                                             <input type="text" id="_address" name="_address" placeholder="番地・ビル名" class="width02" required>
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <th>電話番号</th>
-                                        <td><input type="text" id="_tel" name="_tel"  class="width02" required></td>
+                                        <th><label for="_email">Eメール<span class="required">必須</span></label></th>
+                                        <td><input type="text" id="_email" name="_email" class="width02" required></td>
                                     </tr>
 
                                     <tr>
-                                        <th>メールアドレス</th>
-                                        <td><input type="text" id="_email" name="_email" class="width02" required></td>
+                                        <th><label for="_tel">電話番号<span class="required">必須</span></label></th>
+                                        <td><input type="text" id="_tel" name="_tel"  class="width02" required></td>
                                     </tr>
+
+                                   <tr>
+                                       <th><label for="_note">備考</label></th>
+                                       <td><textarea name="_note" id="_note" cols="30" rows="10" placeholder=""></textarea></td>
+                                   </tr>
 
                                 </table>
                                 <div class="entry_btn">
@@ -425,7 +298,7 @@ include_once __DIR__ . '/../../_env.php';
                         </div>
               </div>
           </div>
-        </section>
+          </section>
         <!-- /.section_05 -->
       </div>
     </div>

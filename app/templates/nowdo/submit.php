@@ -1,5 +1,7 @@
 <?php
 
+include "local.php";
+
 $mail["from"] ="saegusa@usuk.jp";
 $mail["reply"]="saegusa@usuk.jp";
 $mail["bcc"]  ="saegusa@kiito.co.jp";
@@ -11,23 +13,23 @@ $prefs=array("1"=>"北海道","2"=>"青森県","3"=>"岩手県","4"=>"宮城県"
 			"29"=>"奈良県","30"=>"和歌山県","31"=>"鳥取県","32"=>"島根県","33"=>"岡山県","34"=>"広島県","35"=>"山口県",
 			"36"=>"徳島県","37"=>"香川県","38"=>"愛媛県","39"=>"高知県","40"=>"福岡県","41"=>"佐賀県","42"=>"長崎県",
 			"43"=>"熊本県","44"=>"大分県","45"=>"宮崎県","46"=>"鹿児島県","47"=>"沖縄県");
-$sexs=array("0"=>"男","1"=>"女");
 
 if($_POST["ftype"]==="0"){
 		
 	foreach($_POST as $k=>$v){
 		$v=preg_replace("/(\r\n|\r)/m","\n",$v);
-		if($k=="sex")${$k}=$sexs[$v];
-		elseif($k=="prefectures")$pref=$prefs[$v];
-		elseif($k=="license")$license=preg_replace("/\n/m","\n　　　　　　　　 ",trim($v));
+		if(strlen($v)==0)$v="-";
+		if($k=="license")$license=preg_replace("/\n/m","\n　　　　　　　　 ",trim($v));
+		elseif($k=="history01")$history01=preg_replace("/\n/m","\n　　　　　　　　 ",trim($v));
+		elseif($k=="history02")$history02=preg_replace("/\n/m","\n　　　　　　　　 ",trim($v));
 		else ${$k}=$v;
 	}
 	
-	$subject="【Now Do】トレーナーご応募いただきありがとうございます";
+	$subject="【Now Do】コーチの応募をいただきありがとうございます";
 	$contents="
 		$name1 $name2 様
 		
-		この度は、Now Do トレーナー募集にご応募いただき、誠にありがとうございます。
+		この度は、Now Do コーチ募集にご応募いただき、誠にありがとうございます。
 		
 		本メールは、応募フォームからご連絡いただいた方に自動で返信を差し上げています。
 		
@@ -36,14 +38,13 @@ if($_POST["ftype"]==="0"){
 		3営業日以内に担当者よりご返信いたしますので、今しばらくお待ちください。
 		
 		
-		氏名　　　　　： $name1 $name2
-		住所　　　　　： 〒$postcode $pref $city $address 
-		電話番号　　　： $tel
-		メールアドレス： $email
+		氏名　　　　　： $name1 $name2 
+		Ｅメール　　　： $email 
+		電話番号　　　： $tel 
 		性別　　　　　： $sex 
-		生年月日　　　： $year 年 $month 月 $day 日
-		取得資格　　　： $license
-		コーチ歴　　　： $coach 年
+		取得資格　　　： $license 
+		コーチ歴　　　： $history01 
+		競技歴　　　　： $history02 
 		
 		
 		--------------
@@ -54,13 +55,15 @@ if($_POST["ftype"]==="0"){
 	
 	foreach($_POST as $k=>$v){
 		$v=preg_replace("/(\r\n|\r)/m","\n",$v);
-		if($k=="prefectures")$_pref=$prefs[$v];
+		if(strlen($v)==0)$v="-";
+		if($k=="_prefectures")$pref=$prefs[$v];
+		elseif($k=="note")$note=preg_replace("/\n/m","\n　　　　　　　　 ",trim($v));
 		else ${preg_replace("/^_/","",$k)}=$v;
 	}
 	
-	$subject="【Now Do】ご応募いただきありがとうございます";
+	$subject="【Now Do】施設の応募をいただきありがとうございます";
 	$contents="
-		$name1 $name2 様
+		$name0 $name1 様
 		
 		この度は、Now Do 施設募集にご応募いただき、誠にありがとうございます。
 		
@@ -70,11 +73,12 @@ if($_POST["ftype"]==="0"){
 		
 		3営業日以内に担当者よりご返信いたしますので、今しばらくお待ちください。
 		
-		施設名　　　　： $name1 
-		代表者氏名　　： $name2 
+		施設名称　　　： $name0 
+		担当者名　　　： $name1 $name2 
 		住所　　　　　： 〒$postcode $pref $city $address 
+		Ｅメール　　　： $email
 		電話番号　　　： $tel
-		メールアドレス： $email
+		備考　　　　　： $note
 		
 		
 		--------------
@@ -94,7 +98,7 @@ if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
 		$res["message"]="有効なメールアドレスを入力してください。";
 	}else{
 		$res["error"]=0;
-		$res["message"]="ご応募いただき、誠にありがとうございます。<br>自動返信メールを送信いたしましたので内容のご確認をお願いいたします。";
+		$res["message"]="ご応募いただき、誠にありがとうございます。<br>自動返信メールを送信いたしましたの内容のご確認をお願いいたします。";
 	}
 }
 
