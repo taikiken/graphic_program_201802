@@ -18,7 +18,10 @@ pkg = require './package.json'
 gulp = require 'gulp'
 $ = do require 'gulp-load-plugins'
 del = require 'del'
-sprity = require 'sprity'
+try
+  sprity = require 'sprity'
+catch e
+  console.log('sprity not found');
 argv = require( 'yargs' ).argv
 bowerFiles = require 'main-bower-files'
 runSequence = require 'run-sequence'
