@@ -1509,4 +1509,5 @@ SQL;
   $f = $o->fetch_array();
   return $f['id'];
 }
+
 ?>
