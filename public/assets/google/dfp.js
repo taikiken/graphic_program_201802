@@ -178,6 +178,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     'ad-gpt-article-detail-footer'
   );
 
+  // on title CMerTV
+  DFPDefileSlot(
+    '/531683568/article-detail/article-detail-mobile-on-title-movie',
+    [MISSING_WIDTH, MISSING_HEIGHT],
+    'div-gpt-ad-1521457341792-0'
+  );
+
   // for app
   var webkit = window.webkit || {};
   var messageHandlers = webkit.messageHandlers || {};
