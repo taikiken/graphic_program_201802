@@ -282,7 +282,7 @@ echo get_entries("record",0,$db);
                 FB.init({
                     appId      : '842032129256034',
                     xfbml      : true,
-                    version    : 'v2.5'
+                    version    : 'v2.11'
                 });
             };
             (function(d, s, id){

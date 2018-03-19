@@ -157,7 +157,7 @@
                 <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
                 <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
                 <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
-                <li class="sns-ig"><a href="https://www.imgrum.one/sportsbull_official" target="_blank">instagram</a></li>
+                <li class="sns-ig"><a href="https://www.instagram.com/sportsbull_official" target="_blank">instagram</a></li>
               </ul>
             </div>
           </div><!-- /.post-sns-pr -->
@@ -165,7 +165,7 @@
           <?php if(!empty($page['related_links'])) { ?>
             <div class="external-link">
                 <div class="external-link-heading">
-                  <h2>関連リンク</h2>
+                  <h2>外部リンク</h2>
                   <p class="provider-name"><a href="<?= $page['post']['user']['logo']['link'] ?>" target="_blank"><?= $page['post']['user']['name'] ?></a></p>
                 </div>
                 <ul>
