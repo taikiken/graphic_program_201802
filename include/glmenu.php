@@ -39,6 +39,7 @@
         <li><a href="/editdm/user/status">会員ステータス</a></li>
         <li><a href="/editdm/notice/">お知らせ設定</a></li>
         <li><a href="/editdm/tabs">メニュータブ設定</a></li>
+        <li><a href="/editdm/sidemenu/edit">サイドメニュー設定</a></li>
   <?php } ?>
 <?php }else{ ?>
     <li><a href="/editdm/photo/">フォトアルバム</a></li>
