@@ -100,10 +100,10 @@
                                 <a href="/category/big6tv/">TOP</a>
                             </li>
                             <li>
-                                <a href="/big6tv/live/2017a/">ライブ配信</a>
+                                <a href="/big6tv/live/<?=$season?>/">ライブ配信</a>
                             </li>
                             <li class="active">
-                                <a href="/big6tv/2017a/">日程・結果</a>
+                                <a href="/big6tv/<?=$season?>/">日程・結果</a>
                             </li>
                         </ul>
                         <div id="univbb-widget2" data-type="big6" data-league="big6tv" data-season="<?php echo $page['season']; ?>" data-id="<?php echo $page['gameid']; ?>"></div>
@@ -180,7 +180,7 @@
                 ),
                 array(
                   'label' => $page['season_name'].'季リーグ',
-                  'path'  => '/big6tv/2017a'
+                  'path'  => '/big6tv/'.$season
                 ),
                 array(
                   'label' => $page['team_and_date'],
