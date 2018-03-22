@@ -125,7 +125,7 @@ SQL;
                         'link'      => $f['link']
                     ];
             }
-
+            //表示用に整形する
             foreach ($tmp_relationList as $parent) {
                 $tmp_response['parent'][] = [
                         'dispName'  => $parent['dispName'],
