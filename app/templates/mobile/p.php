@@ -166,7 +166,11 @@ endif;
             <?php endif;?>
           <?php endif; ?>
 
-          <div id="post-content-container" class="post-content">
+          <?php if ( !$page['ua_app'] ) : ?>
+            <div id="post-content-container" class="post-content restricted">
+          <?php else:?>
+            <div id="post-content-container" class="post-content">
+          <?php endif;?>
 
             <?php if(count($page['photo']) > 0):
               // @since 2017-09-11 - メンテナンス性を上げるため `photo` 別ファイルにします
@@ -260,7 +264,7 @@ endif;
             <?php if(!empty($page['related_links'])) { ?>
               <div class="external-link">
                 <div class="external-link-heading">
-                  <h2>関連リンク</h2>
+                  <h2>外部リンク</h2>
                   <p class="provider-name"><a href="<?= $page['post']['user']['logo']['link'] ?>" target="_blank"><?= $page['post']['user']['name'] ?></a></p>
                 </div>
                 <ul>
@@ -281,14 +285,10 @@ endif;
               <div id="post-content-banner" onclick="window.JsInterface.onBannerClick();"></div>
             <?php endif; ?>
 
-            <?php
-            /*
-
-            # UNDO_SPBL-495 で「続き表示」はすべての環境でなしとする
-
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="single-more-container">
-                <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2Fp%2F<?php echo $page['post']['id']; ?>%2F">アプリで読む</a></p>
+                <p id="btn-more-app"><a href="
+https://app.adjust.com/pca491">アプリで読む</a></p>
                 <?php if ( !$page['ua_app'] ) : ?>
                   <p id="btn-more-web"><span>ウェブで読む</span></p>
                 <?php else: ?>
@@ -296,9 +296,6 @@ endif;
                 <?php endif; ?>
               </div>
             <?php endif; ?>
-
-            */
-            ?>
 
           </div><!-- /.post-content -->
 
@@ -340,7 +337,7 @@ endif;
             <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
             <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
             <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
-            <li class="sns-ig"><a href="https://www.imgrum.one/sportsbull_official" target="_blank">instagram</a></li>
+            <li class="sns-ig"><a href="https://www.instagram.com/sportsbull_official" target="_blank">instagram</a></li>
           </ul>
         </div>
       </div><!-- /.current-post-->
@@ -503,30 +500,22 @@ endif;
       btnContainer.parentNode.removeChild(btnContainer);
     });
 
-    // # UNDO_SPBL-495
-    // if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
+    if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
       bodyElement.classList.remove('restricted');
       bodyElement.classList.remove('noevent');
       btnContainer.parentNode.removeChild(btnContainer);
-    // }
+    }
 
   }
 
-  <?php
-  /*
+  <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
+    bodyElement.classList.remove('restricted');
+    setTimeout(() => {
+      bodyElement.classList.remove('noevent');
+    }, 300);
+    btnContainer.parentNode.removeChild(btnContainer);
+  <?php endif; ?>
 
-  # UNDO_SPBL-495 で「続き表示」はすべての環境でなしとする
-
-    <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
-      bodyElement.classList.remove('restricted');
-      setTimeout(() => {
-        bodyElement.classList.remove('noevent');
-      }, 300);
-      btnContainer.parentNode.removeChild(btnContainer);
-    <?php endif; ?>
-
-  */
-  ?>
 
   <?php if ( !$page['post']['is_sponserd'] ) : ?>
     // showContentDFP();

@@ -51,7 +51,7 @@ if ( $page['apiRoot'] != '' ) :
     FB.init({
       appId      : '842032129256034',
       xfbml      : true,
-      version    : 'v2.5'
+      version    : 'v2.11'
     });
   };
 
