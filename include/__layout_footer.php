@@ -40,6 +40,11 @@ if($q->get_file()===2&&$e){
 ?>
 
 <?php if($q->get_dir()===0){ ?>
+  <?php if($CURRENTDIRECTORY=="pickup_athlete_big4"){ ?>
+    <script>
+        $('input[name=p_d1]').hide();
+    </script>
+  <?php } ?>
 
 <?php if($q->get_file()===0){ ?>
 <table width="100%" class="rollover2" cellpadding="0" cellspacing="0">
@@ -124,7 +129,17 @@ function searchBack(){
 </tr>
 </table>
 <?php } ?>
+  <?php if($CURRENTDIRECTORY=="pickup_athlete_big4"){ ?>
+    <script>
+        $('input[name=p_d1]').hide();
+        $('input[name=p_d2]').prop("disabled", true);
+        $('input[name=p_d2]').css('color','#ccc');
 
+    </script>
+    <?php echo "<input type=\"hidden\" name=\"p_d1\" value=\"{$p['d1']}\" >\n" ?>
+    <?php echo "<input type=\"hidden\" name=\"p_d2\" value=\"{$p['d2']}\" >\n" ?>
+    ※ 選手の変更は出来ません
+  <?php } ?>
 <?php }elseif($q->get_dir()===2){ ?>
 
 <?php if($q->get_file()===0){ ?>

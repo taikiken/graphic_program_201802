@@ -57,7 +57,7 @@ $loginurl="/signup/?oauth=facebook";
 $fb = new Facebook\Facebook([
 	'app_id' => $appid,
 	'app_secret' => $appsc,
-	'default_graph_version' => 'v2.5',
+	'default_graph_version' => 'v2.11',
 ]);
 
 ?>

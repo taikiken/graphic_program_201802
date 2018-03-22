@@ -23,15 +23,6 @@
                   <div style="font-size:0.8em">
                     <?php print_r($page['post']['body']); ?>
 
-                    <?php if ( !empty($page['related_links']) ) : ?>
-                      <h5>関連リンク</h5>
-                      <ul>
-                        <?php foreach ($page['related_links'] as $row) : ?>
-                          <li><?php echo $row; ?></li>
-                        <?php endforeach; ?>
-                      </ul>
-                    <?php endif; ?>
-
                   </div>
               <?php endif;?>
 
