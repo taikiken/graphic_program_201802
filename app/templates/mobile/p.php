@@ -49,7 +49,7 @@ ref. UNDO_SPBL-506【課題管理】【WEB】CMerTVの広告を設定する
 
 */
 if ( !$page['post']['is_sponserd'] ) : ?>
-<div id='div-gpt-ad-1521457341792-0' class="bnr-dfp"></div>
+<div id='div-gpt-ad-1521457341792-0' style="top:75px;"></div>
 <?php endif; ?>
 
   <div class="body-sec-inner">
@@ -177,7 +177,11 @@ if ( !$page['post']['is_sponserd'] ) : ?>
             <?php endif;?>
           <?php endif; ?>
 
-          <div id="post-content-container" class="post-content">
+          <?php if ( !$page['ua_app'] ) : ?>
+            <div id="post-content-container" class="post-content restricted">
+          <?php else:?>
+            <div id="post-content-container" class="post-content">
+          <?php endif;?>
 
             <?php if(count($page['photo']) > 0):
               // @since 2017-09-11 - メンテナンス性を上げるため `photo` 別ファイルにします
@@ -292,14 +296,10 @@ if ( !$page['post']['is_sponserd'] ) : ?>
               <div id="post-content-banner" onclick="window.JsInterface.onBannerClick();"></div>
             <?php endif; ?>
 
-            <?php
-            /*
-
-            # UNDO_SPBL-495 で「続き表示」はすべての環境でなしとする
-
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="single-more-container">
-                <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2Fp%2F<?php echo $page['post']['id']; ?>%2F">アプリで読む</a></p>
+                <p id="btn-more-app"><a href="
+https://app.adjust.com/pca491">アプリで読む</a></p>
                 <?php if ( !$page['ua_app'] ) : ?>
                   <p id="btn-more-web"><span>ウェブで読む</span></p>
                 <?php else: ?>
@@ -307,9 +307,6 @@ if ( !$page['post']['is_sponserd'] ) : ?>
                 <?php endif; ?>
               </div>
             <?php endif; ?>
-
-            */
-            ?>
 
           </div><!-- /.post-content -->
 
@@ -514,30 +511,22 @@ if ( !$page['post']['is_sponserd'] ) : ?>
       btnContainer.parentNode.removeChild(btnContainer);
     });
 
-    // # UNDO_SPBL-495
-    // if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
+    if ( SPBL_ENV.platform === 'app_ios' || SPBL_ENV.platform === 'app_android' ) {
       bodyElement.classList.remove('restricted');
       bodyElement.classList.remove('noevent');
       btnContainer.parentNode.removeChild(btnContainer);
-    // }
+    }
 
   }
 
-  <?php
-  /*
+  <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
+    bodyElement.classList.remove('restricted');
+    setTimeout(() => {
+      bodyElement.classList.remove('noevent');
+    }, 300);
+    btnContainer.parentNode.removeChild(btnContainer);
+  <?php endif; ?>
 
-  # UNDO_SPBL-495 で「続き表示」はすべての環境でなしとする
-
-    <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
-      bodyElement.classList.remove('restricted');
-      setTimeout(() => {
-        bodyElement.classList.remove('noevent');
-      }, 300);
-      btnContainer.parentNode.removeChild(btnContainer);
-    <?php endif; ?>
-
-  */
-  ?>
 
   <?php if ( !$page['post']['is_sponserd'] ) : ?>
     // showContentDFP();

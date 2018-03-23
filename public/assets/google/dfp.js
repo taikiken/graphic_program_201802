@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // on title CMerTV
   DFPDefileSlot(
     '/531683568/article-detail/article-detail-mobile-on-title-movie',
-    [MISSING_WIDTH, MISSING_HEIGHT],
+    [1, 1],
     'div-gpt-ad-1521457341792-0'
   );
 
