@@ -419,24 +419,6 @@
   // sponsor-link
   .sponsor-link {
     margin-top: 20px;
-    &:empty {
-      display: none;
-    }
-
-    &.column2 {
-      margin-top: 30px;
-      text-align: center;
-      letter-spacing: ls( inline-block );
-      vertical-align: top;
-
-      .sponsor-link-item {
-        display: inline-block;
-        margin-right: 15px;
-        margin-left: 15px;
-        letter-spacing: normal;
-        vertical-align:top;
-      }
-    }
 
     & + .post-tags {
       margin-top: 20px;

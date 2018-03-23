@@ -29,6 +29,7 @@ RALLYPLUS.NET	 https://cms.sportsbull.jp/api/batch/import_rallyplus.php
 六大学連盟-順位表	http://cms.sportsbull.jp/api/batch/output_big6standing.php
 六大学連盟-日程	http://cms.sportsbull.jp/api/batch/output_big6schedule.php
 テレビ東京卓球ニュース	https://cms.sportsbull.jp/api/batch/import_tabletennis.php
+KPI	https://cms.sportsbull.jp/api/batch/import_kmagazine.php
 ";
 
 /*

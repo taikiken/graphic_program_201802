@@ -459,19 +459,11 @@ SQL_EOL;
 //    return $this->fetch_all();
 //  }
 
-  public function get_pickup_players($category_id = null, $player_id = null, $limit = null) {
+  public function get_pickup_players($category_id = null, $player_id = null, $limit = null, $big4_flag = false) {
 
-    return get_pickup_players($category_id, $player_id, $limit) ;
+    return get_pickup_players($category_id, $player_id, $limit, $big4_flag) ;
   }
 
-  /**
-   * /category/crazy/ で表示する4件固定対応
-   * @return array
-   */
-  public function get_pickup_players_ca_top() {
-
-    return get_pickup_players_ca_top();
-  }
   /**
    * プレスリリース一覧
    * @return array

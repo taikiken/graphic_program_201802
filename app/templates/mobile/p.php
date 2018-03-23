@@ -24,6 +24,7 @@ $adId = array(
 
 // アプリとスマホでアドジェネIDかえる
 if ( !$page['post']['is_sponserd'] ) :
+
   if ( $page['ua_app'] ) :
     $adIds['adgene']['ranking']   = '59626';
     $adIds['adgene']['headline']  = '59625,59625';
@@ -35,6 +36,7 @@ if ( !$page['post']['is_sponserd'] ) :
     $adIds['adgene']['recommend'] = '59628,59628';
     $adIds['adgene']['news']      = '59627,59627,59627,59627,59627,59627,59627,59627';
   endif;
+
 endif;
 
 ?>
@@ -262,7 +264,7 @@ endif;
             <?php if(!empty($page['related_links'])) { ?>
               <div class="external-link">
                 <div class="external-link-heading">
-                  <h2>関連リンク</h2>
+                  <h2>外部リンク</h2>
                   <p class="provider-name"><a href="<?= $page['post']['user']['logo']['link'] ?>" target="_blank"><?= $page['post']['user']['name'] ?></a></p>
                 </div>
                 <ul>
@@ -285,7 +287,8 @@ endif;
 
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="single-more-container">
-                <p id="btn-more-app"><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2Fp%2F<?php echo $page['post']['id']; ?>%2F">アプリで読む</a></p>
+                <p id="btn-more-app"><a href="
+https://app.adjust.com/pca491">アプリで読む</a></p>
                 <?php if ( !$page['ua_app'] ) : ?>
                   <p id="btn-more-web"><span>ウェブで読む</span></p>
                 <?php else: ?>
@@ -293,6 +296,7 @@ endif;
                 <?php endif; ?>
               </div>
             <?php endif; ?>
+
           </div><!-- /.post-content -->
 
         </div><!-- /.post-detail -->
@@ -333,7 +337,7 @@ endif;
             <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
             <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
             <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
-            <li class="sns-ig"><a href="https://www.imgrum.one/sportsbull_official" target="_blank">instagram</a></li>
+            <li class="sns-ig"><a href="https://www.instagram.com/sportsbull_official" target="_blank">instagram</a></li>
           </ul>
         </div>
       </div><!-- /.current-post-->
@@ -501,18 +505,20 @@ endif;
       bodyElement.classList.remove('noevent');
       btnContainer.parentNode.removeChild(btnContainer);
     }
+
   }
 
-    <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
-      bodyElement.classList.remove('restricted');
-      setTimeout(() => {
-        bodyElement.classList.remove('noevent');
-      }, 300);
-      btnContainer.parentNode.removeChild(btnContainer);
-    <?php endif; ?>
+  <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
+    bodyElement.classList.remove('restricted');
+    setTimeout(() => {
+      bodyElement.classList.remove('noevent');
+    }, 300);
+    btnContainer.parentNode.removeChild(btnContainer);
+  <?php endif; ?>
+
 
   <?php if ( !$page['post']['is_sponserd'] ) : ?>
-    showContentDFP();
+    // showContentDFP();
   <?php endif; ?>
 
   <?php if ( $page['ua_app'] ) : ?>
@@ -538,3 +544,14 @@ endif;
   <?php endif; ?>
 
 </script>
+
+<?php
+/*
+
+ref. UNDO_SPBL-478 【課題管理】記事詳細本文中差し込み広告をTeadsにする
+- 記事詳細本文差し込みの代わりにTeadsを表示
+
+*/
+if ( !$page['post']['is_sponserd'] ) : ?>
+<script src="//a.teads.tv/page/80648/tag" async="true"></script>
+<?php endif; ?>

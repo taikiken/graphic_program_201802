@@ -420,6 +420,7 @@ export default class ComInfo extends Component {
   /**
    * tab 切替親コンテナ
    * @returns {?XML} div#js-info-container
+   * @since 2018-03-03 オープン戦は表示しない
    */
   render() {
     const { info, member, team, innings } = this.props;
@@ -430,6 +431,9 @@ export default class ComInfo extends Component {
     } else if (!team.ids.length || !team.list.length) {
       // data 不正
       return this.empty();
+    } else if (info.spring) {
+      // @since 2018-03-03 - オープン戦は表示しない
+      return null;
     }
     // render
     return (
