@@ -49,7 +49,7 @@ ref. UNDO_SPBL-506【課題管理】【WEB】CMerTVの広告を設定する
 
 */
 if ( !$page['post']['is_sponserd'] ) : ?>
-<div id='div-gpt-ad-1521457341792-0' style="top:75px;"></div>
+<div id='div-gpt-ad-1521457341792-0'></div>
 <?php endif; ?>
 
   <div class="body-sec-inner">
