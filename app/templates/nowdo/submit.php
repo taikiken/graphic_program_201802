@@ -1,9 +1,5 @@
 <?php
 
-$mail["from"] ="saegusa@usuk.jp";
-$mail["reply"]="saegusa@usuk.jp";
-$mail["bcc"]  ="saegusa@kiito.co.jp";
-
 $prefs=array("1"=>"北海道","2"=>"青森県","3"=>"岩手県","4"=>"宮城県","5"=>"秋田県","6"=>"山形県","7"=>"福島県",
 			"8"=>"茨城県","9"=>"栃木県","10"=>"群馬県","11"=>"埼玉県","12"=>"千葉県","13"=>"東京都","14"=>"神奈川県",
 			"15"=>"新潟県","16"=>"富山県","17"=>"石川県","18"=>"福井県","19"=>"山梨県","20"=>"長野県","21"=>"岐阜県",
@@ -13,7 +9,11 @@ $prefs=array("1"=>"北海道","2"=>"青森県","3"=>"岩手県","4"=>"宮城県"
 			"43"=>"熊本県","44"=>"大分県","45"=>"宮崎県","46"=>"鹿児島県","47"=>"沖縄県");
 
 if($_POST["ftype"]==="0"){
-		
+	
+	$mail["from"] ="recruit_trainer@nowdo.jp";
+	$mail["reply"]="recruit_trainer@nowdo.jp";
+	$mail["bcc"]  ="recruit_trainer@nowdo.jp";
+	
 	foreach($_POST as $k=>$v){
 		$v=preg_replace("/(\r\n|\r)/m","\n",$v);
 		if(strlen($v)==0)$v="-";
@@ -45,11 +45,19 @@ if($_POST["ftype"]==="0"){
 		競技歴　　　　： $history02 
 		
 		
-		--------------
-		株式会社Now Do
+		■━━━━━━━━━━━━━━━━━
+		SOLTILO Now Do 株式会社
+		Now Do 事業部
+		E-mail: recruit_trainer@nowdo.jp
+		HP    : https://nowdo.sportsbull.jp/
+		━━━━━━━━━━━━━━━━━■
 	";
 	
 }else{
+	
+	$mail["from"] ="contact_facility@nowdo.jp";
+	$mail["reply"]="contact_facility@nowdo.jp";
+	$mail["bcc"]  ="contact_facility@nowdo.jp";
 	
 	foreach($_POST as $k=>$v){
 		$v=preg_replace("/(\r\n|\r)/m","\n",$v);
@@ -79,8 +87,12 @@ if($_POST["ftype"]==="0"){
 		備考　　　　　： $note
 		
 		
-		--------------
-		株式会社Now Do
+		■━━━━━━━━━━━━━━━━━
+		SOLTILO Now Do 株式会社
+		Now Do 事業部
+		E-mail: contact_facility@nowdo.jp
+		HP    : https://nowdo.sportsbull.jp/
+		━━━━━━━━━━━━━━━━━■
 	";
 }
 
