@@ -6,7 +6,7 @@ include "public/check.php";
 $o=new db;
 $o->connect();
 
-$uid=auth();
+$uid=0;
 
 if(strlen($uid)>0){
 
