@@ -90,6 +90,7 @@ RewriteRule ^v1/category_static /api/ver1/static/category.json [L]
 
 #INITIALIZE
 RewriteRule ^v1/initialize /api/ver1/read/initialize.php [L]
+RewriteRule ^v2/initialize /api/ver2/read/initialize.php [L]
 
 #LOGIN
 RewriteRule ^v1/sessions/social /api/ver1/write/login_social.php [L]
