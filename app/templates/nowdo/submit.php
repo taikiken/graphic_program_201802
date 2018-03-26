@@ -1,5 +1,19 @@
 <?php
 
+function _sendmail($to,$subject,$body,$from,$reply,$bcc=null){
+	
+	$sbj="=?iso-2022-jp?B?".base64_encode(mb_convert_encoding($subject,"JIS","UTF-8"))."?=";
+	$msg=stripslashes($body);
+	$msg=addslashes($msg);
+	$msg=mb_convert_encoding($msg,"JIS","UTF-8");
+	$header="From:=?iso-2022-jp?B?".base64_encode(mb_convert_encoding("Now Do","JIS","UTF-8"))."?=<".$from.">\n";
+  	$header.="Bcc: ".$bcc."\n";
+	$header.="Reply-To:".$reply."\n";
+	$header.="Return-Path:".$from."\n";
+	$header.="Content-Type:text/plain;charset=\"ISO-2022-JP\"";
+	return mail($to,$sbj,$msg,$header,sprintf("-f%s",$from));
+}
+
 $prefs=array("1"=>"北海道","2"=>"青森県","3"=>"岩手県","4"=>"宮城県","5"=>"秋田県","6"=>"山形県","7"=>"福島県",
 			"8"=>"茨城県","9"=>"栃木県","10"=>"群馬県","11"=>"埼玉県","12"=>"千葉県","13"=>"東京都","14"=>"神奈川県",
 			"15"=>"新潟県","16"=>"富山県","17"=>"石川県","18"=>"福井県","19"=>"山梨県","20"=>"長野県","21"=>"岐阜県",
@@ -102,7 +116,7 @@ if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
 }else{
 	$mail["to"]=$email;
 	$body=preg_replace("/\t/","",$contents);	
-	$e=sendmail($mail["to"],$subject,$body,$mail["from"],$mail["reply"],$mail["bcc"]);
+	$e=_sendmail($mail["to"],$subject,$body,$mail["from"],$mail["reply"],$mail["bcc"]);
 	if(!$e){
 		$res["error"]=1;
 		$res["message"]="有効なメールアドレスを入力してください。";
