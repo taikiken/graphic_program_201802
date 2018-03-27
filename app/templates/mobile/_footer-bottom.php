@@ -112,7 +112,7 @@ s.parentNode.insertBefore(bs, s);
 
 
 <?php // UNDO_SPBL-512 - ダンスカテゴリ詳細ではappbnrださない ?>
-<?php if ($page['category']['slug'] === 'dance' && $page['template'] === 'p' ) { ?>
+<?php if ($page['category']['slug'] === 'dance' && $page['template'] === 'p' ) : ?>
 <script>
   Sagen.Dom.removeClass(document.body, 'appbnr-enable');
 </script>
