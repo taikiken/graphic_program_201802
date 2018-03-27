@@ -109,14 +109,20 @@ s.parentNode.insertBefore(bs, s);
 })();
 -->
 </script>
+<?php endif; ?>
 
 
 <?php // UNDO_SPBL-512 - ダンスカテゴリ詳細ではappbnrださない ?>
 <?php if ($page['category']['slug'] === 'dance' && $page['template'] === 'p' ) : ?>
 <script>
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("js-header-appbnr-container").remove();
   Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+});
 </script>
-<?php endif; ?>
-
-
+<style>
+.header-sticky + .body-sec {
+  margin-top: 65px;
+}
+</style>
 <?php endif; ?>
