@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 </script>
 <style>
 .header-sticky + .body-sec {
-  margin-top: 65px;
+  margin-top: 75px;
 }
 </style>
 <?php endif; ?>
