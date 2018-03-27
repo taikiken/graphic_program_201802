@@ -287,8 +287,7 @@ endif;
 
             <?php if ( !$page['ua_app'] ) : ?>
               <div class="single-more-container">
-                <p id="btn-more-app"><a href="
-https://app.adjust.com/pca491">アプリで読む</a></p>
+                <p id="btn-more-app"><a href="https://app.adjust.com/pca491">アプリで読む</a></p>
                 <?php if ( !$page['ua_app'] ) : ?>
                   <p id="btn-more-web"><span>ウェブで読む</span></p>
                 <?php else: ?>
@@ -506,7 +505,21 @@ https://app.adjust.com/pca491">アプリで読む</a></p>
       btnContainer.parentNode.removeChild(btnContainer);
     }
 
+    if ( /iP(hone|od|ad)/.test( window.navigator.platform ) ) {
+      var protocol, btnApp;
+      btnApp = bodyElement.querySelector('#btn-more-app > a');
+      if ( btnApp ) {
+        if ( !(/dev|stg/i.test(window.location.host)) ) {
+          protocol = 'sportsbull';
+        } else {
+          protocol = 'sportsbull-dev';
+        }
+        btnApp.href = btnApp.href + '?deep_link =' + protocol + '://action?url=' + window.location.href
+      }
+    }
+
   }
+
 
   <?php if ( !$page['ua_app'] && ($page['post']['id'] == 270808 || $page['post']['id'] == 270809 || $page['post']['id'] == 270810) ) : ?>
     bodyElement.classList.remove('restricted');
