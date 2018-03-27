@@ -505,7 +505,7 @@ endif;
       btnContainer.parentNode.removeChild(btnContainer);
     }
 
-    if ( /iP(hone|od|ad)/.test( window.navigator.platform ) ) {
+    if ( /iP(hone|(o|a)d)/.test(navigator.userAgent) ) {
       var protocol, btnApp;
       btnApp = bodyElement.querySelector('#btn-more-app > a');
       if ( btnApp ) {
@@ -514,7 +514,7 @@ endif;
         } else {
           protocol = 'sportsbull-dev';
         }
-        btnApp.href = btnApp.href + '?deep_link =' + protocol + '://action?url=' + window.location.href
+        btnApp.href = btnApp.href + '?deep_link=' + protocol + '://action?url=' + window.location.href
       }
     }
 
