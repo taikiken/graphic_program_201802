@@ -5,7 +5,7 @@ include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=58;
 $MEDIANAME="クライマーズ";
-$rssfile="http://climbers-web.jp/feed-sportsbull/";
+$rssfile="https://climbers-web.jp/feed-sportsbull/";
 //$rssfile="http://climbers:climing@climbers.warpjapan.com/feed-sportsbull/";
 
 function modifyhtml($s){
