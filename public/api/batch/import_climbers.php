@@ -103,8 +103,9 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$s["t1".$cnt]=esc($tag[$cnt]);
 		}
 	}
-
-	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
+    
+    $https_delet= '%'.substr($data["channel"]["item"][$i]["guid"],5);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7 like '%s'",$MEDIAID,$https_delet);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
