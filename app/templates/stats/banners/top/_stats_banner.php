@@ -47,6 +47,17 @@ $statsItem = array(
   ),
 
   array(
+    'title' => 'MLB',
+    'label' => 'MLB',
+    'path'  => '/stats/mlb/',
+    'icon'  => array(
+      'slug'    => 'baseball',
+      'is_fill' => true,
+      'style'   => '',
+    )
+  ),
+
+  array(
     'title' => 'Jリーグ',
     'label' => 'Jリーグ',
     'path'  => '/jleague/match/',
@@ -90,16 +101,16 @@ $statsItem = array(
     )
   ),
 
-  array(
-    'title' => '大相撲',
-    'label' => '大相撲',
-    'path'  => '/stats/sumo/',
-    'icon'  => array(
-      'slug'    => 'sumo',
-      'is_fill' => true,
-      'style'   => 'margin-top: -2px; margin-left: 1px;',
-    )
-  ),
+  // array(
+  //   'title' => '大相撲',
+  //   'label' => '大相撲',
+  //   'path'  => '/stats/sumo/',
+  //   'icon'  => array(
+  //     'slug'    => 'sumo',
+  //     'is_fill' => true,
+  //     'style'   => 'margin-top: -2px; margin-left: 1px;',
+  //   )
+  // ),
 
 );
 
