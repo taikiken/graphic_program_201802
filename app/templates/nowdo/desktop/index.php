@@ -177,6 +177,18 @@ include_once __DIR__ . '/../../_env.php';
                   <br>将来的には様々な分野でのマッチングを促進します。</p>
               </article>
             </div>
+            
+              <div class="coo_message">
+                  <p class="sub_copy">鈴木良介COOメッセージ</p>
+                  <div class="coo_message_area">
+                      <div class="img"><img src="assets/images/nowdo/coo_photo.png" alt=""></div>
+                      <div class="txt_area">
+                          <p>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります</p>
+                          <p class="link"><a href="" target="_blank">インタビュー記事はこちら</a></p>
+                      </div>
+                  </div>
+              </div>
+              
           </div>
         </section>
         <!-- /.section_03 -->
