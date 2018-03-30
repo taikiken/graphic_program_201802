@@ -1067,7 +1067,7 @@ $line_color:#999;
         }
         
         .coo_message{
-            margin-top: 40px;
+            margin-top: 80px;
 
             .coo_message_area{
                 display: flex;
@@ -1096,6 +1096,7 @@ $line_color:#999;
                             display: inline-block;
                             position: relative;
                             font-weight: bold;
+                            font-size: 20px;
 
                             &:before, &:after{
                                 content: "";
@@ -1208,6 +1209,10 @@ $line_color:#999;
 
                         .link{
                             margin-top: 10px;
+                            
+                            a{
+                                font-size: 16px;
+                            }
                         }
                     }
                 }
