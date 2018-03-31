@@ -108,7 +108,16 @@
               </tr>
               <tr>
                 <th>役員</th>
-                <td>代表取締役 黒飛功二朗</td>
+                <td class="company__overview__data__member">
+                  <dt>代表取締役社長</dt><dd>黒飛功二朗</dd>
+                  <dt>取締役</dt><dd>蒔平 ゆき</dd>
+                  <dt>取締役</dt><dd>熊谷 裕佑</dd>
+                  <dt>社外取締役</dt><dd>加藤 貴士</dd>
+                  <dt>社外取締役</dt><dd>先崎 博文</dd>
+                  <dt>社外取締役</dt><dd>中村 大輔</dd>
+                  <dt>執行役員</dt><dd>高石 雄大</dd>
+                  <dt>監査役</dt><dd>熊倉 次郎</dd>
+                </td>
               </tr>
               <tr>
                 <th>事業内容</th>

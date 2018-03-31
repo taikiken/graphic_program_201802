@@ -106,6 +106,15 @@
           padding-right: 30px;
           font-weight: bold;
         }
+        td {
+          dt {
+            display: inline-block;
+            float: left;
+          }
+          dd {
+            margin-left: 120px;
+          }
+        }
       }
     }
 
@@ -137,6 +146,20 @@
         th {
           margin-top: (30/2)+px;
           font-weight: bold;
+        }
+        td {
+          dt {
+            display: inline-block;
+            float: left;
+          }
+          dd {
+            margin-left: 120px;
+            text-align: left;
+          }
+        }
+        &__member {
+          display: table!important;
+          margin: auto;
         }
       }
     }
