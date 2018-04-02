@@ -95,7 +95,33 @@ class ViewModel {
     'args'               => '',
 
     // version - #789 静的ファイルのバージョン
-    'version'            => ''
+    'version'            => '',
+
+    'conditional'        => array(
+      'html_start'    => true, // <!DOCTYPE〜
+
+      'head'          => true,
+      'head_assets'   => true, // css & js
+      'head_viewport' => true, // viewport
+      'head_seo'      => true, // keyword & description
+      'head_ogp'      => true, // fb:ogp, twitter:card
+      'head_icon'     => true, // apple-touch-icon
+      'head_bottom'   => true,
+      'head_video'    => true, // streampack video code
+
+      'header'        => true,
+      'header_dom'    => true, // <header>
+
+      'gnav'          => true,
+      'gnav_dom'      => true, // <nav>
+
+      'footer'        => true,
+      'footer_dom'    => true, // <footer>
+      'footer_modal'  => true,
+      'footer_script' => true,
+
+      'html_end'      => true,
+    ),
 
   );
 
