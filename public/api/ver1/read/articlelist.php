@@ -179,7 +179,7 @@ if(strlen($api)>0){
 				case 'news':
 					$addConditions[] = "( m1 IS NULL or m1 <> '{$photoCategoryId}' )";
 					$addConditions[] = "( m2 IS NULL or m2 <> '{$photoCategoryId}' )";
-					$addConditions[] = "COALESCE( (SELECT video FROM u_view WHERE pageid = repo_n.id LIMIT 1), 0) <> 1";
+					$addConditions[] = "(repo_n.videoflag <> 173 OR repo_n.videoflag IS NULL) AND brightcove IS NULL AND swf IS NULL AND youtube IS NULL AND facebook IS null";
 					break;
 				default:
 				//nothing
