@@ -246,8 +246,8 @@ include_once __DIR__ . '/../../_env.php';
                                    </tr>
 
                                    <tr>
-                                       <th><label for="history01">コーチ歴<br>指導カテゴリー</label></th>
-                                       <td><textarea name="history01" id="history01" cols="30" rows="10" placeholder="例) xxxサッカースクールコーチ5年&#10;例) xxxサッカークラブ U-18 監督 3年"></textarea></td>
+                                       <th><label for="history01">トレーナー歴<br>指導カテゴリー</label></th>
+                                       <td><textarea name="history01" id="history01" cols="30" rows="10" placeholder="例) xxxサッカースクールトレーナー5年&#10;例) xxxサッカークラブ U-18 監督 3年"></textarea></td>
                                    </tr>
 
                                    <tr>
