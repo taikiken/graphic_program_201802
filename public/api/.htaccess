@@ -97,6 +97,7 @@ RewriteRule ^v1/competition_pulldown /api/ver1/read/competition_pulldown.php [L]
 
 #INITIALIZE
 RewriteRule ^v1/initialize /api/ver1/read/initialize.php [L]
+RewriteRule ^v2/initialize /api/ver2/read/initialize.php [L]
 
 #LOGIN
 RewriteRule ^v1/sessions/social /api/ver1/write/login_social.php [L]
