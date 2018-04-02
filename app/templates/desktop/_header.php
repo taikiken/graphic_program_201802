@@ -116,24 +116,25 @@ if ( $template_name == 'category' ) {
 
 <?php
 // header 表示条件
-if (
-  $template_name == 'index' ||
-  $template_name == '404' ||
-  $template_name == 'category' ||
-  $template_name == 'p' ||
-  $template_name == 'search' ||
-  $template_name == 'settings' ||
-  $template_name == 'settings.social' ||
-  $template_name == 'settings.account' ||
-  $template_name == 'settings.interest' ||
-  $template_name == 'settings.deactivate' ||
-  $template_name == 'mypage' ||
-  $template_name == 'mypage.activities' ||
-  $template_name == 'notifications' ||
-  $template_name == 'logout' ||
-  $template_name == 'crazy'
-) :
-?>
+$has_header = array(
+  'index',
+  '404',
+  'category',
+  'p',
+  'search',
+  'settings',
+  'settings.social',
+  'settings.account',
+  'settings.interest',
+  'settings.deactivate',
+  'mypage',
+  'mypage.activities',
+  'notifications',
+  'logout',
+  'crazy'
+);
+
+if ( in_array($page['template'], $has_header, true) ) : ?>
   <header id="header-container" class="head-sec">
     <div class="head-sec-inner">
       <aside class="f-left clearfix">
