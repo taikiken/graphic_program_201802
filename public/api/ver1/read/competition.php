@@ -5,6 +5,9 @@ include "public/check.php";
 
 $id = bind($_REQUEST["id"]);
 
+$file_bucket_path = '/static/board/result_pdf/';
+$icon_bucket_path = '/static/sports/icon/';
+
 $response = null;
 $week_list = array('日', '月', '火', '水', '木', '金', '土');
 
@@ -52,11 +55,11 @@ if($f){
   // icon, pdfはバケットから
   if (!empty($f['file']))
   {
-    $f['file'] = $ImgPath . $f['file'];
+    $f['file'] = $ImgPath . $file_bucket_path. $f['file'];
   }
   if (!empty($f['sport_icon']))
   {
-    $f['sport_icon'] = $ImgPath . '/static/sports/icon/' . $f['sport_icon'];
+    $f['sport_icon'] = $ImgPath . $icon_bucket_path . $f['sport_icon'];
   }
 
     $response = [

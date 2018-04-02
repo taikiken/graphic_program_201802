@@ -9,6 +9,10 @@ $response_flag = false;
 $week_list = array('日', '月', '火', '水', '木', '金', '土');
 $max_type = 3;
 
+
+$file_bucket_path = '/static/board/result_pdf/';
+$icon_bucket_path = '/static/sports/icon/';
+
 $sport_id = bind($_REQUEST["sport_id"]);
 if($_REQUEST["year"] === "current"){
     $year = date("Y");
@@ -73,8 +77,8 @@ foreach ($o->fetch_all() as $f) {
     $active_list = [];
     $type_list = [];
     $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
-    $f['file'] = !empty($f['file']) ? $ImgPath.$f['file'] : '';
-    $f['sport_icon'] = !empty($f['sport_icon']) ? $ImgPath.'/static/sports/icon/'.$f['sport_icon'] : '';
+    $f['file'] = !empty($f['file']) ? $ImgPath.$file_bucket_path.$f['file'] : '';
+    $f['sport_icon'] = !empty($f['sport_icon']) ? $ImgPath.$icon_bucket_path.$f['sport_icon'] : '';
 
     //開始日
     $DateTime = new DateTime($f['start_date_time']);
