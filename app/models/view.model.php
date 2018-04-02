@@ -307,6 +307,10 @@ class ViewModel {
 
 //      endif;
 
+      if($slug === "big6tv"){
+          $category['banner']['pc']['image'] = str_replace("/img/", "/raw/", $category['banner']['pc']['image']);
+      }
+
       // すべての場合はlabel/titleが空なのですべてをセット
       if ( !$category['label'] ) :
         $category['label'] = 'すべて';

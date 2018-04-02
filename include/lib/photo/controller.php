@@ -203,7 +203,10 @@ END_DOC;
 
         $gBILL=getBill();
         $FIELD="*";
-        $WHERE=" where m1=" . $f['id'] . ' OR m2=' . $f['id'];
+        $WHERE=" where (m1=" . $f['id'] . ' OR m2=' . $f['id'] . ")";
+        if (false === empty(getSorC('is_external')) && false === empty(getSorC('u_media'))) {
+          $WHERE .= ' AND d1 = 3 AND d2 IN (' . getSorC('u_media') . ')';
+        }
     }
 }
 
