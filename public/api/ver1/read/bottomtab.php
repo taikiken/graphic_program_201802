@@ -9,6 +9,7 @@ $o->connect();
 $response = [];
 
 $type = array('home','livescore','category');
+$icon_bucket_path = '/static/bottomtab/icon/';
 
 foreach ($type as $value) {
 
@@ -61,10 +62,10 @@ SQL;
                 $tmp_relationList[$f['parent_id']]['child'][] =[
                         'dispName'  => $f['name'],
                         'unread'    => false,
-                        'icon'      => $ImgPath.$f['icon'],
-                        'icon_sp'      => $ImgPath.$f['icon_sp'],
-                        'icon_ios'      => $ImgPath.$f['icon_ios'],
-                        'icon_android'      => $ImgPath.$f['icon_android'],
+                        'icon'      => $ImgPath.$icon_bucket_path.$f['icon'],
+                        'icon_sp'      => $ImgPath.$icon_bucket_path.$f['icon_sp'],
+                        'icon_ios'      => $ImgPath.$icon_bucket_path.$f['icon_ios'],
+                        'icon_android'      => $ImgPath.$icon_bucket_path.$f['icon_android'],
                         'link'      => $f['link']
                     ];
             }
@@ -118,10 +119,10 @@ SQL;
                 $tmp_relationList[$f['parent_id']]['child'][] =[
                         'dispName'  => $f['name'],
                         'unread'    => false,
-                        'icon'      => $ImgPath.$f['icon'],
-                        'icon_sp'      => $ImgPath.$f['icon_sp'],
-                        'icon_ios'      => $ImgPath.$f['icon_ios'],
-                        'icon_android'      => $ImgPath.$f['icon_android'],
+                        'icon'      => $ImgPath.$icon_bucket_path.$f['icon'],
+                        'icon_sp'      => $ImgPath.$icon_bucket_path.$f['icon_sp'],
+                        'icon_ios'      => $ImgPath.$icon_bucket_path.$f['icon_ios'],
+                        'icon_android'      => $ImgPath.$icon_bucket_path.$f['icon_android'],
                         'link'      => $f['link']
                     ];
             }
