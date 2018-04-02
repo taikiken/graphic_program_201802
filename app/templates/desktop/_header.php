@@ -114,9 +114,12 @@ if ( $template_name == 'category' ) {
 <body>
 <div id="whole" class="whole <?php echo join( ' ', $whole_classes);?>">
 
+
 <?php
-// header 表示条件
-$has_header = array(
+
+// header & gnav 表示条件
+// TODO - model側でやりたい
+$conditional_header = array(
   'index',
   '404',
   'category',
@@ -134,7 +137,14 @@ $has_header = array(
   'crazy'
 );
 
-if ( in_array($page['template'], $has_header, true) ) : ?>
+if ( !in_array($page['template'], $conditional_header, true) ) :
+  $page['conditional']['header'] = false;
+  $page['conditional']['gnav']   = false;
+endif;
+
+?>
+
+<?php if ( $page['conditional']['header'] ) : ?>
   <header id="header-container" class="head-sec">
     <div class="head-sec-inner">
       <aside class="f-left clearfix">
@@ -148,7 +158,10 @@ if ( in_array($page['template'], $has_header, true) ) : ?>
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
+<?php endif; ?>
 
+
+<?php if ( $page['conditional']['gnav'] ) : ?>
   <nav id="global-nav-container" class="gnav-sec">
     <ul>
       <li id="home" class="gnav-home"><a href="/">TOP</a></li>
@@ -163,28 +176,30 @@ if ( in_array($page['template'], $has_header, true) ) : ?>
       <?php }//foreach ?>
     </ul>
   </nav><!-- /.gnav-sec -->
+<?php endif; ?>
 
-  <?php /*
 
-  #205 - backend フラッシュメッセージ対応完までview側の表示コメントアウト
-
-  <div id="dialogue-notice" class="dialogue-notice">
-    <div class="dialogue-notice-inner">
-      <div id="dialogue-notice-info" class="dialogue-notice-info">
-        <p>パスワードが違います</p>
-      </div>
-      <div id="dialogue-notice-btn-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice">CLOSE</a></div>
-    </div>
-  </div><!-- /.dialogue-notice -->
-
-  */?>
+<?php if ( $page['conditional']['announce'] ) :?>
   <?php
   // since 2017-12-18
   // お知らせ表示
   // ref: UNDO_SPBL-150 【課題管理】一面リニューアル / ユーザーへのお知らせ表示
   ?>
   <div id="js-announce-container"></div>
-<?php
-endif;
-// header 表示条件 end
-?>
+<?php endif; ?>
+
+
+<?php /*
+
+#205 - backend フラッシュメッセージ対応完までview側の表示コメントアウト
+
+<div id="dialogue-notice" class="dialogue-notice">
+  <div class="dialogue-notice-inner">
+    <div id="dialogue-notice-info" class="dialogue-notice-info">
+      <p>パスワードが違います</p>
+    </div>
+    <div id="dialogue-notice-btn-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice">CLOSE</a></div>
+  </div>
+</div><!-- /.dialogue-notice -->
+
+*/?>
