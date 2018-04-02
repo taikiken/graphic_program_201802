@@ -108,7 +108,7 @@ if($CURRENTDIRECTORY=="repo_n"&&$_GET["cid"]==1&&!preg_match("#/photo/#",$_SERVE
 	}elseif($_COOKIE["orderby"]=="sold"){
 		$orderby=sprintf("m_time");
 	}else{
-		$orderby="n desc";
+		$orderby="id desc";
 	}
 
 	$sql=sprintf("select count(*) as n from %s%s%s%s",$TABLE,$WHERE,$exuser,$excategory);
@@ -152,10 +152,20 @@ elseif ($CURRENTDIRECTORY == "repo_n" && $_GET["cid"] == 94 && !preg_match("#/ph
 
 }elseif($CURRENTDIRECTORY=="notice"){
 	$sql=sprintf("select count(*) as n from %s%s",$TABLE,$WHERE);
-}elseif($CURRENTDIRECTORY=="tabs"){
+}
+elseif ($CURRENTDIRECTORY=="pickup_athlete_big4")
+{
+  $sql = <<<SQL
+SELECT COUNT(big4.u_headline_id) AS n
+FROM pickup_athletes_big4 big4 INNER JOIN u_headline uh ON big4.u_headline_id = uh.id
+  INNER JOIN tbl_player ply ON uh.d2 = ply.id
+WHERE uh.cid = {$g->f("cid")} AND uh.qid = {$g->f("rid")}
+SQL;
+
+}
+elseif($CURRENTDIRECTORY=="tabs"){
 	$sql=sprintf("select count(*) as n from %s",$TABLE);
 }
-
 
 
 $o->query($sql);
@@ -172,7 +182,7 @@ $div=ceil($N/$offset);
 
 if($TABLE=="repo_n"&&!preg_match("#/photo/#",$_SERVER["REQUEST_URI"])){
 	if(!$_COOKIE["orderby"]&&!$_COOKIE["exuser"]&&!$_COOKIE["excategory"]){
-		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE," desc",dblm($no,$offset));
+		$sql=sprintf("select %s from %s%s order by id%s %s ",$FIELD,$TABLE,$WHERE," desc",dblm($no,$offset));
 		setcookie("orderby","",time()-3600,"/editdm/");
 	}else{
 		$sql=sprintf("select %s from %s%s%s%s order by %s %s",$FIELD,$TABLE,$WHERE,$exuser,$excategory,$orderby,dblm($no,$offset));
@@ -189,14 +199,14 @@ elseif ($TABLE == "tbl_player")
 	// 選手一覧
 	$sql = sprintf("SELECT %s FROM %s%s%s%s ORDER BY %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, $orderby, dblm($no, $offset));
 }elseif(preg_match("#/photo/#",$_SERVER["REQUEST_URI"])){
-	$sql=sprintf("select %s from %s%s order by coalesce(always_update_flag,0) desc, n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
+	$sql=sprintf("select %s from %s%s order by coalesce(always_update_flag,0) desc, id%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
 }
 elseif ($TABLE == "notices")
 {
 	$cookie_categoryid = (int)$_COOKIE['excategory'];
 	if(isint($_COOKIE["excategory"])){
     $WHERE = <<<WHR
-		, categories_notices 
+		, categories_notices
 WHERE
 		{$TABLE}.id = notice_id
 AND
@@ -206,6 +216,17 @@ WHR;
 	}
 	// お知らせ一覧
 	$sql = sprintf("SELECT %s FROM %s%s ORDER BY notices.created_at DESC", $FIELD, $TABLE, $WHERE);
+}elseif ($CURRENTDIRECTORY == "repo_s" && $_GET["rid"] == 95 && $q->get_dir() == 3) // 注目の選手一覧
+{
+  $sql = <<<SQL
+SELECT
+    repo.*, u_categories.name AS disp_category
+FROM
+    repo LEFT JOIN u_categories ON repo.category = u_categories.id
+WHERE
+    rid = 95
+ORDER BY n
+SQL;
 
 }else{
 	$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));

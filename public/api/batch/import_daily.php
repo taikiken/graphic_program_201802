@@ -4,6 +4,7 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=47;
+$MEDIANAME="デイリースポーツ";
 
 $o=new db;
 $o->connect();
@@ -72,7 +73,7 @@ for($i=0;$i<count($data);$i++){
 	$s["t9"]=$data[$i]["link"];
 	$s["t7"]=$data[$i]["guid"];
 
-	if(strlen($data[$i]["title"])>0)$k[]=$data[$i]["title"];
+	if(strlen($data[$i]["keyword"])>0)$k[]=$data[$i]["keyword"];
 	$keyword=implode(",",$k);
 	$s["keyword"]=$keyword;
 
@@ -163,7 +164,7 @@ for($i=0;$i<count($data);$i++){
 			//削除フラグがあればスキップ
 		}
 
-
+                $TITLE[] = pg_escape_string($data[$i]["title"]);
 		$s["d1"]=3;
 		$s["d2"]=$MEDIAID;
 		$s["m4"]=$data[$i]["media"]=="flash"?131:132; /* 速報 */
@@ -191,6 +192,6 @@ for($i=0;$i<count($data);$i++){
 
 }
 
-die(count($data) ." articles are fetched");
+include $INCLUDEPATH.'public/display.php';
 
 ?>

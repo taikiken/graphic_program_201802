@@ -47,15 +47,37 @@ $statsItem = array(
   ),
 
   array(
-    'title' => 'サッカー日本代表',
-    'label' => 'サッカー<br />日本代表',
-    'path'  => '/sokuhou/',
+    'title' => 'MLB',
+    'label' => 'MLB',
+    'path'  => '/stats/mlb/',
+    'icon'  => array(
+      'slug'    => 'baseball',
+      'is_fill' => true,
+      'style'   => '',
+    )
+  ),
+
+  array(
+    'title' => 'Jリーグ',
+    'label' => 'Jリーグ',
+    'path'  => '/jleague/match/',
     'icon'  => array(
       'slug'    => 'soccer',
       'is_fill' => false,
       'style'   => '',
     )
   ),
+
+  // array(
+  //   'title' => 'サッカー日本代表',
+  //   'label' => 'サッカー<br />日本代表',
+  //   'path'  => '/sokuhou/',
+  //   'icon'  => array(
+  //     'slug'    => 'soccer',
+  //     'is_fill' => false,
+  //     'style'   => '',
+  //   )
+  // ),
 
   // array(
   //   'title' => 'テニス全豪OP',
@@ -79,16 +101,16 @@ $statsItem = array(
     )
   ),
 
-  array(
-    'title' => '大相撲',
-    'label' => '大相撲',
-    'path'  => '/stats/sumo/',
-    'icon'  => array(
-      'slug'    => 'sumo',
-      'is_fill' => true,
-      'style'   => 'margin-top: -2px; margin-left: 1px;',
-    )
-  ),
+  // array(
+  //   'title' => '大相撲',
+  //   'label' => '大相撲',
+  //   'path'  => '/stats/sumo/',
+  //   'icon'  => array(
+  //     'slug'    => 'sumo',
+  //     'is_fill' => true,
+  //     'style'   => 'margin-top: -2px; margin-left: 1px;',
+  //   )
+  // ),
 
 );
 

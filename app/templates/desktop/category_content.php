@@ -41,9 +41,17 @@ if ($page['category']['slug'] == 'all') {
   // 2. ピックアップが設定できる
   ?>
   <div id="pickup-container"></div>
-
   <div class="body-sec-inner">
     <section class="main-sec">
+
+      <?php
+      // 注目のアスリート
+      // ----------------------------------------------------
+      if(empty($page['list']) === false) :
+        include_once __DIR__.'/_category-pickup_player.php';
+      endif;
+      ?>
+
       <?php
       // ----------------------------------------------------
       // 記事一覧: pc banner

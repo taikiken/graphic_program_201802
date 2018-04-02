@@ -167,17 +167,19 @@ for($i=0;$i<count($p);$i++){
 </td>
 </tr>
 <?php } ?>
+<?php if(getSorC("alv")=="51"){ ?>
 <tr>
   <td class="menuChild">
     <a href="/api/batch/check_youtube.php">ダンスカテゴリーYoutube動画利用数確認</a>
   </td>
 </tr>
 <tr>
-<td class="menuChild">
-  <a href="/editdm/pyeongchang/medals">平昌五輪メダル</a>
-</td>
+  <td class="menuChild">
+    <a href="/editdm/pyeongchang/medals">平昌五輪メダル</a>
+  </td>
 </tr>
 
+<?php } ?>
 </tbody>
 </table>
 <div id="pageCommand"></div>

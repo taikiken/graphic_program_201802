@@ -55,7 +55,7 @@
         <section class="section_crazy_pickup">
             <div class="ttl-wrapper">
                 <h2 class="ttl pickup"><i></i>注目のアスリート</h2>
-                <p class="more sp_hide"><a href="/category/crazy/athletes/">すべての選手を見る</a></p>
+                <p class="more sp_hide"><a href="/pickup_athletes/crazy/list/">すべての選手を見る</a></p>
             </div>
 
             <div class="pickup_player_list">
@@ -72,7 +72,7 @@
                 </ul>
             </div>
 
-            <div class="more_btn pc_hide"><a href="/category/crazy/athletes/"><i></i>すべての選手を見る</a></div>
+            <div class="more_btn pc_hide"><a href="/pickup_athletes/crazy/list/"><i></i>すべての選手を見る</a></div>
         </section>
 
         <section class="section_crazy_recommend">

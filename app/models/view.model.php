@@ -265,32 +265,51 @@ class ViewModel {
 
 
   /**
+   * json/ca_list.json を置き換える
+   *
+   * @param $player_id
+   * @return array
+   */
+  public function get_pickup_athlete($player_id) {
+
+    $player_info = $this->db->get_pickup_athlete($player_id);
+
+
+    return $player_info;
+  }
+
+
+  /**
   * category - category_slugからカテゴリー情報を取得する
   *
   * @param  string  $slug カテゴリースラッグ
   * @return array   該当カテゴリー情報
   */
-  public function get_category_by_slug($slug) {
+  public function get_category_by_slug($slug, $playerid=null, $isgetpickupplayerbanner=false) {
 
-    if ( $this->default['site_categories'][$slug] || $slug === 'top' ) :
+    if ( $this->default['site_categories'][$slug] || $slug === 'top' || isset($playerid) ) :
 
+//
+//      if ( UT_ENV == 'LOCAL' ) :
+//
+//        $category = $this->default['site_categories'][$slug];
+//        $response = file_get_contents($this->default['file_get_url'].'/api/v1/category/'.$slug);
+//
+//        if ( $response ) :
+//          $category = json_decode($response, true)['response'];
+//        else :
+//          return false;
+//        endif;
+//
+//      else :
 
-      if ( UT_ENV == 'LOCAL' ) :
+        $category = $this->db->get_category_by_slug($slug, $playerid, $isgetpickupplayerbanner);
 
-        $category = $this->default['site_categories'][$slug];
-        $response = file_get_contents($this->default['file_get_url'].'/api/v1/category/'.$slug);
+//      endif;
 
-        if ( $response ) :
-          $category = json_decode($response, true)['response'];
-        else :
-          return false;
-        endif;
-
-      else :
-
-        $category = $this->db->get_category_by_slug($slug);
-
-      endif;
+      if($slug === "big6tv"){
+          $category['banner']['pc']['image'] = str_replace("/img/", "/raw/", $category['banner']['pc']['image']);
+      }
 
       // すべての場合はlabel/titleが空なのですべてをセット
       if ( !$category['label'] ) :
@@ -558,7 +577,28 @@ class ViewModel {
 
   }
 
+
   /**
+   * 与えられた条件で選手を取得する
+   * @param int $category_id tbl_player.category
+   * @param int $player_id   tbl_player.id
+   */
+  public function get_players($category_id = null, $player_id = null) {
+    return $this->db->get_players($category_id, $player_id);
+  }
+
+  /**
+   * 与えられた条件で注目の選手を取得する
+   * @param string $category_slug tbl_player.category
+   * @param int $player_id     tbl_player.id
+   * @return array
+   */
+  public function get_pickup_players($category_id = null, $player_id = null, $limit = null, $big4_flag = false) {
+    return $this->db->get_pickup_players($category_id, $player_id, $limit, $big4_flag);
+  }
+
+
+/**
    * プレスリリース一覧
    * @return array
    */

@@ -29,13 +29,8 @@
 
           <div class="post-sns">
             <ul class="post-sns-list">
-              <li class="post-sns-item post-sns-item_fbgood">
-                <div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-              </li>
               <?php
-
               // PC版はjsで行うのでTwitter textをencodeしない = 「/」対策
-
               ?>
               <li class="post-sns-item post-sns-item_fb">
                 <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">facebook</a>
@@ -45,55 +40,22 @@
                   <span>ツイート</span>
                 </a>
               </li>
-              <li class="post-sns-item post-sns-item_gt">
-                <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a>
-              </li>
               <li class="post-sns-item post-sns-item_line">
-                <div class="line-it-button" style="display: none;" data-type="share-d" data-lang="ja"></div><script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async"　defer="defer"></script>
+                <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                  <span>LINEへ送る</span>
+                </a>
               </li>
             </ul>
-
-            <div class="post-sns-pr">
-              <dl class="post-sns-pr-inner">
-                <dt><img src="/assets/images/detail/post-sns-lead.png" alt="SPORTS BULLをいいねして最新ニュースをチェック！"></dt>
-                <dd>
-                  <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-                </dd>
-              </dl><!-- /.post-sns-pr-inner -->
-            </div><!-- /.post-sns-pr -->
           </div><!-- /.post-sns -->
-
 
           <?php
           /*
-           * https://github.com/undotsushin/undotsushin/issues/720
-           * 広告 / PC版画像バナー広告をDFP管理下にする
-           */
-          if ( $page['ad']['pc']['single_top'] ) :
-          // ------------------------------------
-          // single top
+          DFP - desktop / タイトル下
+          */
           ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
           <div class="sponsor-link w728">
-
-            <?php
-            /*
-            # pc_single_top
-            */
-            ?>
-            <script type='text/javascript'>
-              googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/<?php echo $page['ad']['pc']['single_top']; ?>', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
-              });
-            </script>
-            <div id='div-gpt-ad-pc_single_top' style='height:90px; width:728px;'>
-            <script type='text/javascript'>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_single_top'); });
-            </script>
-            </div>
-
+            <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' class="bnr-dfp" style='height:90px; width:728px;'></div>
           </div>
           <?php endif; ?>
 
@@ -139,59 +101,33 @@
               endif;
           endif;
           ?>
-          </div><!-- /.post-content -->
 
           <?php
-          // ----------------------------------------------------
-          // 記事詳細: pc 媒体ロゴ
-          if ( !empty( $page['post'] ) && !empty( $page['post']['user'] ) ) :
-
-            $is_post_usr_logo = !empty( $page['post']['user']['logo'] );
-
-            $post_user_logo_link = '';
-            if ( $is_post_usr_logo && !empty( $page['post']['user']['logo']['link'] ) ) {
-              $post_user_logo_link = $page['post']['user']['logo']['link'];
-            }
-            ?>
-            <div class="provider mt30">
-              <?php
-              // user.logo.image
-              if ( $is_post_usr_logo && !empty( $page['post']['user']['logo']['img'] ) ) :
-                if ( empty($post_user_logo_link) ) :
-                  // link が存在しないので画像だけ表示します ?>
-                  <i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i>
-                <?php else: // link + image を表示 ?>
-                  <a href="<?php echo $post_user_logo_link; ?>" target="_blank" onclick="UT.Ga.click('provider-logo', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>', true);"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
-                <?php endif; ?>
-              <?php endif; //----[image] ?>
-              <div class="provider-data">
-                <?php
-                // user.name
-                if ( !empty($page['post']['user']['name']) ) : ?>
-                  <p class="provider-name"><?php echo $page['post']['user']['name']; ?></p>
-                <?php endif; //----[name]
-
-                // user.logo.link
-                // link が存在する時のみ表示します
-                if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) : ?>
-                  <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank" onclick="UT.Ga.click('provider-url', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>', true);">ウェブサイト</a></p>
-                <?php endif; //----[link] ?>
-              </div>
-            </div><!-- /.provider -->
-          <?php endif;
-          // eof: 記事詳細: pc 媒体ロゴ
-          // ---------------------------------------------------- ?>
-          <div id="single-footer-container"></div>
+          /*
+          DFP - 記事本文中差し込み広告
+          - Teadsで代替 ref. UNDO_SPBL-478
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
+            <script>
+              var bodyP = document.querySelectorAll('.post-detail .post-content > p');
+              var bodyLen = bodyP.length;
+              var halfIndex = Math.round(bodyLen / 2) - 1;
+              if(bodyLen >= 6) {
+                var div_wrapper = document.createElement('div');
+                var target = bodyP[halfIndex];
+                div_wrapper.setAttribute('id', 'ad-gpt-article-detail-body-wrapper');
+                target.parentNode.insertBefore(div_wrapper, target.nextSibling);
+                var wrap = document.getElementById('ad-gpt-article-detail-body-wrapper');
+                wrap.insertAdjacentHTML('afterbegin','<div id="div-gpt-ad-article-detail-desktop-rectangle-A" class="bnr-dfp"></div><div id="div-gpt-ad-article-detail-desktop-rectangle-B" class="bnr-dfp"></div>');
+              }
+            </script>
+          <?php endif; ?>
+          */ ?>
+          </div><!-- /.post-content -->
 
           <div class="post-sns">
             <ul class="post-sns-list">
-              <li class="post-sns-item post-sns-item_fbgood">
-                <div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-              </li>
               <?php
-
               // PC版はjsで行うのでTwitter textをencodeしない = 「/」対策
-
               ?>
               <li class="post-sns-item post-sns-item_fb">
                 <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">facebook</a>
@@ -201,137 +137,109 @@
                   <span>ツイート</span>
                 </a>
               </li>
-              <li class="post-sns-item post-sns-item_gt">
-                <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a>
-              </li>
               <li class="post-sns-item post-sns-item_line">
-                <div class="line-it-button" style="display: none;" data-type="share-d" data-lang="ja"></div>
+                <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                  <span>LINEへ送る</span>
+                </a>
               </li>
             </ul>
-
-            <div class="post-sns-pr">
-              <dl class="post-sns-pr-inner">
-                <dt><img src="/assets/images/detail/post-sns-lead.png" alt="SPORTS BULLSPORTS BULLをいいねして最新ニュースをチェック！"></dt>
-                <dd>
-                  <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-                </dd>
-              </dl><!-- /.post-sns-pr-inner -->
-            </div><!-- /.post-sns-pr -->
           </div><!-- /.post-sns -->
+
+          <div class="post-sns-pr">
+            <dl class="post-sns-pr-inner">
+              <dt><img src="/assets/images/detail/post-sns-lead.png" alt="SPORTS BULLSPORTS BULLをいいねして最新ニュースをチェック！"></dt>
+              <dd>
+                <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+              </dd>
+            </dl><!-- /.post-sns-pr-inner -->
+            <div class="link-sns">
+              <ul>
+                <li class="sns-fb"><a href="https://www.facebook.com/sportsbull/" target="_blank">facebook</a></li>
+                <li class="sns-tw"><a href="https://twitter.com/sportsbull_jp" target="_blank">twitter</a></li>
+                <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
+                <li class="sns-ig"><a href="https://www.instagram.com/sportsbull_official" target="_blank">instagram</a></li>
+              </ul>
+            </div>
+          </div><!-- /.post-sns-pr -->
+
+          <?php if(!empty($page['related_links'])) { ?>
+            <div class="external-link">
+                <div class="external-link-heading">
+                  <h2>外部リンク</h2>
+                  <p class="provider-name"><a href="<?= $page['post']['user']['logo']['link'] ?>" target="_blank"><?= $page['post']['user']['name'] ?></a></p>
+                </div>
+                <ul>
+                  <?php
+                  foreach ($page['related_links'] as $row) {
+                    echo '<li>'. $row .'</li>';
+                  }
+                  ?>
+                </ul>
+              </div>
+          <?php } ?>
+
+          <!-- タグ & 記事下バナーの表示 -->
+          <div id="single-footer-container"></div>
+
+
+          <!-- ヘッドラインの表示 -->
+          <div id="js-headline"></div>
 
 
           <?php
           /*
-           * https://github.com/undotsushin/undotsushin/issues/720
-           * 広告 / PC版画像バナー広告をDFP管理下にする
-           */
-          // ------------------------------------
-          // single bottom
-          if ( $page['ad']['pc']['single_bottom_left'] || $page['ad']['pc']['single_bottom_right'] ) : ?>
-          <div class="sponsor-link">
-            <div class="sponsor-link column2">
-
-              <?php if ( $page['ad']['pc']['single_bottom_left'] ) : ?>
-              <div class="sponsor-link-item">
-                <?php
-                /*
-                # 保険のために original を残します
-                # ToDo: いつか削除
-                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35119&targetID=adg_35119&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
-                */ ?>
-                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_left']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_left']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
-              </div>
-              <?php endif; ?>
-
-
-              <?php if ( $page['ad']['pc']['single_bottom_right'] ) : ?>
-              <div class="sponsor-link-item">
-
-                <!-- 531683568/syn_marketplace/viewable -->
-                <script>
-                  googletag.cmd.push(function() {
-                    googletag.defineSlot('/531683568/syn_marketplace/viewable', [300, 250], 'div-gpt-ad-1498628891915-0').addService(googletag.pubads());
-                    googletag.pubads().enableSingleRequest();
-                    googletag.pubads().collapseEmptyDivs();
-                    googletag.enableServices();
-                  });
-                </script>
-                <div id='div-gpt-ad-1498628891915-0' style='height:250px; width:300px;'>
-                <script>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1498628891915-0'); });
-                </script>
-                </div>
-                <!-- //531683568/syn_marketplace/viewable -->
-
-                <?php
-                /*
-                # 保険のために original を残します
-                # ToDo: いつか削除
-                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35120&targetID=adg_35120&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
-                */ ?>
-                <?php /*
-                #2058 のため一旦非表示に
-                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_right']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_right']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
-                */ ?>
-              </div>
-              <?php endif; ?>
-
+          DFP - headline bottom ダブルレクタングル
+          */
+          ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
+            <div id="ad-gpt-article-detail-headlinebottom-wrapper">
+              <div id="div-gpt-ad-article-detail-desktop-rectangle-C" class="bnr-dfp"></div>
+              <div id="div-gpt-ad-article-detail-desktop-rectangle-D" class="bnr-dfp"></div>
             </div>
-          </div>
+          <?php endif; ?>
+
+          <div class="board-large">
+            <div id="board-container" data-adgene-id=""></div><!--/archive-->
+          </div><!-- /.board-large -->
+
+
           <?php
-          endif;
-          // eof: single bottom
-          // ------------------------------------ ?>
+          /*
+          DFP - bottom ダブルレクタングル
+          */
+          ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
+          <div id="ad-gpt-article-detail-boardbottom-wrapper">
+            <div id="div-gpt-ad-article-detail-desktop-rectangle-E" class="bnr-dfp"></div>
+            <div id="div-gpt-ad-article-detail-desktop-rectangle-F" class="bnr-dfp"></div>
+          </div>
+          <?php endif; ?>
+
+
+          <?php
+          /*
+
+          # popin - desktop用
+
+          */
+          ?>
+          <?php if ( $page['category']['label'] ) : ?>
+          <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
+          <?php endif; ?>
+          <div class="board-large">
+            <div id="_popIn_recommend_2"></div>
+            <script type="text/javascript">
+                (function() {
+                    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                    pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+                })();
+            </script>
+          </div><!-- /.board-large -->
 
         </div><!-- /.post-detail -->
-        <div class="comment">
-
-          <div id="comment-self-container"></div>
-
-          <div id="comment-official-container"></div>
-
-          <div id="comment-normal-container"></div>
-
-          <div id="comment-form-container"></div>
-
-        </div><!-- /.comment -->
       </div><!-- /.current-post-->
 
-      <?php
-      /*
-      @since 2016-09-28
-      記事詳細の次の記事
-      div#js-singles-container 内に「記事一覧」「オススメ記事」「人気記事」「関連記事」を記入
-       */
-      ?>
-      <div class="singles-next">
-        <div id="js-singles-container"></div>
-        <div id="js-singles-more"></div>
-      </div>
-
-      <?php
-      /*
-       @since 2016-09-39 記事詳細の次の記事のために以下削除します
-      */
-      if (0):
-      ?>
-      <!-- #310 popin ebmed code  -->
-      <?php if ( $page['category']['label'] ) : ?>
-      <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
-      <?php endif; ?>
-      <div id="_popIn_recommend" class="recommend_articles"></div>
-      <script type="text/javascript">
-        (function() {
-          var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-              pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-        })();
-      </script>
-      <!-- //#310 popin embed code  -->
-      <?php
-      endif;
-      // 削除 eof
-      ?>
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
@@ -342,3 +250,14 @@
 
   </div>
 </div><!-- /.body-sec -->
+
+<?php
+/*
+
+ref. UNDO_SPBL-478 【課題管理】記事詳細本文中差し込み広告をTeadsにする
+- 記事詳細本文差し込みの代わりにTeadsを表示
+
+*/
+if ( !$page['post']['is_sponserd'] ) : ?>
+<script src="//a.teads.tv/page/80647/tag" async="true"></script>
+<?php endif; ?>
