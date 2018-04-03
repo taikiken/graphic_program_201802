@@ -6,8 +6,6 @@ $app->group('/go-big',  function () use($app) {
 
   $page = array(
     'title'              => 'GO BIG 2017 - All JAPAN FMX CHAMPIONSHIP 2017 ライブ配信',
-    'site_name'          => 'スポーツブル (スポブル)',
-    'og_type'            => 'article',
     'og_title'           => 'GO BIG 2017 - All JAPAN FMX CHAMPIONSHIP 2017 ライブ配信 | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'go-big/',
     'og_image'           => $app->model->property('site_url').'assets/images/go-big/ogp.png',
@@ -15,7 +13,6 @@ $app->group('/go-big',  function () use($app) {
     'keywords'           => 'GO BIG 2017,FMX,スポブル,ライブ配信,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
     'template'           => 'index',
     'template_classname' => 'go-big',
-    'ua'                 => $app->model->property('ua'),
   );
 
 

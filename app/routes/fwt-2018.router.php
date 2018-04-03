@@ -7,9 +7,6 @@ $app->group('/fwt',  function () use($app) {
   $category = $app->model->get_category_by_slug('extremesports');
   $page = array(
     'title'              => 'Freeride World Tour 2018 ライブ配信',
-    'site_name'          => 'スポーツブル (スポブル)',
-    'version'            => '201802062230',
-    'og_type'            => 'article',
     'og_title'           => 'Freeride World Tour 2018 ライブ配信 | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'fwt/',
     'og_image'           => $app->model->property('site_url').'assets/images/fwt/ogp.png',
@@ -18,13 +15,6 @@ $app->group('/fwt',  function () use($app) {
     'category'           => $category,
     'template'           => 'category',
     'template_classname' => 'fwt',
-    'ua'                 => $app->model->property('ua'),
-    'app_id'             => '842032129256034',
-    'sns'                => array(
-      'twitter'  => 'sportsbull_jp',
-      'facebook' => 'sportsbull',
-      'youtube'  => 'UCKwqba9IWuSKIk3DIpryOHw',
-    ),
   );
 
 

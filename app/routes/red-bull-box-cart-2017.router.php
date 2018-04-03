@@ -6,8 +6,6 @@ $app->group('/red-bull-box-cart-2017',  function () use($app) {
 
   $page = array(
     'title'              => 'RED BULL BOX CART RACE 2017 ライブ配信',
-    'site_name'          => 'スポーツブル (スポブル)',
-    'og_type'            => 'article',
     'og_title'           => 'RED BULL BOX CART RACE 2017 ライブ配信 | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'red-bull-box-cart-2017/',
     'og_image'           => $app->model->property('site_url').'assets/images/red-bull-box-cart-2017/ogp.png',
@@ -15,7 +13,6 @@ $app->group('/red-bull-box-cart-2017',  function () use($app) {
     'keywords'           => 'RED BULL,レッドブル,BOX CART RACE 2017,スポブル,ライブ配信,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
     'template'           => 'index',
     'template_classname' => 'red-bull-box-cart-2017',
-    'ua'                 => $app->model->property('ua'),
   );
 
 

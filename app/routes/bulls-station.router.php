@@ -6,8 +6,6 @@ $app->group('/{slug:bulls-station}',  function () use($app) {
 
   $page = array(
     'title'              => '番組紹介 - BULL\'S STATION',
-    'site_name'          => $app->model->property('title'),
-    'og_type'            => 'article',
     'og_title'           => '番組紹介 - BULL\'S STATION | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'bulls-station/',
     'og_image'           => $app->model->property('site_url').'assets/images/bulls-station/ogp.jpg',
@@ -16,7 +14,6 @@ $app->group('/{slug:bulls-station}',  function () use($app) {
     'template'           => 'index',
     'template_classname' => 'bulls-station',
     'dir_name'           => 'bulls-station',
-    'ua'                 => $app->model->property('ua'),
   );
 
   // index

@@ -6,8 +6,6 @@ $app->group('/{slug:red-bull-holy-ride}',  function () use($app) {
 
   $page = array(
     'title'              => 'RED BULL HOLY RIDE 2017 ライブ配信',
-    'site_name'          => 'スポーツブル / SPORTS BULL',
-    'og_type'            => 'article',
     'og_title'           => 'RED BULL HOLY RIDE 2017 ライブ配信 | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'red-bull-holy-ride/',
     'og_image'           => $app->model->property('site_url').'assets/images/red-bull-holy-ride/ogp.png',
@@ -15,8 +13,6 @@ $app->group('/{slug:red-bull-holy-ride}',  function () use($app) {
     'keywords'           => 'RED BULL,レッドブル,HOLY RIDE 2017,ライブ配信,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
     'template'           => 'index',
     'template_classname' => 'red-bull-holy-ride',
-    // add ua - 2017-08-16 by @taikiken - live.php l.16 判定に使用する
-    'ua'                 => $app->model->property('ua'),
   );
 
   // index
