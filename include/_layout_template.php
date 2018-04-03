@@ -143,35 +143,10 @@ if($q->get_dir()==3){
                   </a>
                 </div>
               <?php } ?>
-                <?php if ($CURRENTDIRECTORY == "tabs") { ?>
-                  <div class = "newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>">
-                    <a href="/api/batch/output_footer_sp_html.php">
-                      <span>sp用footer</span>
-                    </a>
-                  </div>
-                  <div class = "newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>">
-                    <a href="/api/batch/output_tabs_sp_html.php">
-                      <span>sp用header</span>
-                    </a>
-                  </div>
-
-                  <div class = "newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>">
-                    <a href="/api/batch/output_footer_html.php">
-                      <span>pc用footer</span>
-                    </a>
-                  </div>
-
-                  <div class = "newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>">
-                    <a href="/api/batch/output_tabs_html.php">
-                      <span>pc用header</span>
-                    </a>
-                  </div>
-                <?php } ?>
-
-              <?php } ?>
+            <?php } ?>
             <?php include $INCLUDEPATH."__layout_localmenu.php"; ?>
-            </div><!-- End pageController -->
-          <?php } ?>
+          </div><!-- End pageController -->
+        <?php } ?>
         <?php if($CURRENTDIRECTORY=="css_editor"&&$q->get_file()==0){ ?>
           <div id="pageController">
             <ul class="controllMenu">
