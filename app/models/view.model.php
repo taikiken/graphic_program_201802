@@ -98,29 +98,29 @@ class ViewModel {
     'version'            => '',
 
     'conditional'        => array(
-      'html_start'    => true, // <!DOCTYPE〜
-
-      'head'          => true,
-      'head_assets'   => true, // css & js
-      'head_viewport' => true, // viewport
-      'head_seo'      => true, // keyword & description
-      'head_ogp'      => true, // fb:ogp, twitter:card
-      'head_icon'     => true, // apple-touch-icon
-      'head_bottom'   => true,
-      'head_video'    => true, // streampack video code
-
-      'header'        => true,
-      'header_dom'    => true, // <header>
-
-      'gnav'          => true,
-      'gnav_dom'      => true, // <nav>
-
-      'footer'        => true,
-      'footer_dom'    => true, // <footer>
-      'footer_modal'  => true,
-      'footer_script' => true,
-
-      'html_end'      => true,
+      'html_start'       => true, // <!DOCTYPE〜
+      'head'             => true, // <head>
+      'head_title'       => true, // <title>
+      'head_sagen'       => true, // sagen.js
+      'head_assets'      => true, // css & js
+      'head_viewport'    => true, // viewport
+      'head_seo'         => true, // keyword & description
+      'head_ogp'         => true, // fb:ogp, twitter:card
+      'head_canonical'   => true, // canonical
+      'head_syn'         => true, // synextbot
+      'head_icon'        => true, // apple-touch-icon
+      'head_bottom'      => true,
+      'head_video'       => true, // streampack video code
+      'body_start'       => true, // </head><body>
+      'whole'            => true, // <div class="whole">
+      'header'           => true, // <header>
+      'gnav'             => true, // <nav>
+      'announce'         => true, // <announce>
+      'footer'           => true,
+      'footer_copyright' => false, // <footer>
+      'footer_modal'     => true,
+      'footer_script'    => true,
+      'html_end'         => true,
     ),
 
   );

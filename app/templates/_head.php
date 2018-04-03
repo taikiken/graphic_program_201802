@@ -10,6 +10,7 @@
 <?php endif; ?>
 
 
+<?php if ( $page['conditional']['head_title'] ) : ?>
   <title><?php
     if ( $page['template'] == 'index' ) :
       echo $page['site_name'];
@@ -17,8 +18,12 @@
       echo strip_tags($page['title']).' | '.$page['site_name'];
     endif;
   ?></title>
+<?php endif; ?>
 
+
+<?php if ( $page['conditional']['head_sagen'] ) : ?>
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
+<?php endif; ?>
 
 
 <?php if ( $page['conditional']['head_seo'] ) : ?>
@@ -59,20 +64,25 @@
 <?php endif; ?>
 
 
+<?php if ( $page['conditional']['head_canonical'] ) : ?>
 <?php if ( $page['canonical'] ) : ?>
   <link rel="canonical" href="<?php echo $page['canonical']; ?>">
 <?php elseif ( $page['og_url'] ) : ?>
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
 <?php endif; ?>
+<?php endif; ?>
 
+
+<?php if ( $page['conditional']['head_syn'] ) : ?>
   <!-- syndot -->
-<?php if ( $page['template'] === 'p' ) : ?>
-  <meta name="synextbot" content="<?php echo $page['syn_extension']; ?>">
-<?php if ( $page['syn_thumbnail'] ) : ?>
-  <meta property="syndot:thumbnail" content="<?php echo $page['syn_thumbnail']; ?>">
-<?php endif; ?>
-<?php endif; ?>
+  <?php if ( $page['template'] === 'p' ) : ?>
+    <meta name="synextbot" content="<?php echo $page['syn_extension']; ?>">
+    <?php if ( $page['syn_thumbnail'] ) : ?>
+      <meta property="syndot:thumbnail" content="<?php echo $page['syn_thumbnail']; ?>">
+    <?php endif; ?>
+  <?php endif; ?>
   <!-- //syndot -->
+<?php endif; ?>
 
 
 <?php if ( $page['conditional']['head_icon'] ) : ?>

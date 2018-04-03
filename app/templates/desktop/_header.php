@@ -18,8 +18,11 @@ endif;
     <link rel="stylesheet" href="/assets/css/style_pc.css?v=<?php echo $page['version']; ?>">
     <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
   <?php endif;?>
-
-  <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
+  <?php if ( $page['template'] === 'inc' ) : ?>
+    <link rel="stylesheet" href="/assets/css/inc.css?v=<?php echo $page['version']; ?>">
+  <?php else : ?>
+    <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
+  <?php endif; ?>
 <?php endif; ?>
 
 
