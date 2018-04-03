@@ -174,12 +174,12 @@ if(strlen($api)>0){
 					$addConditions[] = "( m1 = '{$f['id']}' or m2 = '{$photoCategoryId}' )";
 					break;
 				case 'video':
-					 $addConditions[] = "( repo_n.videoflag=173 OR brightcove IS NOT NULL OR swf IS NOT NULL OR youtube IS NOT NULL OR facebook IS NOT null )";
+					 $addConditions[] = "( repo_n.videoflag=173 OR brightcove IS NOT NULL OR swf IS NOT NULL OR youtube IS NOT NULL OR facebook IS NOT null OR streampack IS NOT NULL)";
 					break;
 				case 'news':
 					$addConditions[] = "( m1 IS NULL or m1 <> '{$photoCategoryId}' )";
 					$addConditions[] = "( m2 IS NULL or m2 <> '{$photoCategoryId}' )";
-					$addConditions[] = "(repo_n.videoflag <> 173 OR repo_n.videoflag IS NULL) AND brightcove IS NULL AND swf IS NULL AND youtube IS NULL AND facebook IS null";
+					$addConditions[] = "(repo_n.videoflag <> 173 OR repo_n.videoflag IS NULL) AND brightcove IS NULL AND swf IS NULL AND youtube IS NULL AND facebook IS NULL AND streampack IS NULL";
 					break;
 				default:
 				//nothing
