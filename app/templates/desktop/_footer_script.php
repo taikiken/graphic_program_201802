@@ -1,0 +1,78 @@
+<script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<?php
+/*
+ * $page['apiRoot'] を元に API request 先を決定します
+ * php側で任意の apiRoot が 設定されている時に
+ * UT.app.App.develop(); を行います
+ *
+*/
+if ( $page['apiRoot'] != '' ) :
+  // develop mode
+  // dev, stg, local から起動の時のみ script tag を有効にします
+?>
+<script>
+( function () {
+
+  'use strict';
+
+  var UT = self.UT;
+  // リクエスト先を変更します
+//  UT.app.App.develop( 'https://dev.sportsbull.jp' );
+  UT.app.App.develop();
+
+}() );
+</script>
+<?php endif; ?>
+<script id="js-exe"<?php echo !empty($page['category']['label']) ? ' data-label="' . $page['category']['label'] . '" ' : ''; ?>src="/assets/js/bundle/exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
+
+<?php
+// 一面タブからの導線を増やす #2080
+// @see https://github.com/undotsushin/undotsushin/issues/2080
+// @since 2017-06-26
+?>
+<script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
+<script src="/assets/facebook/init.js?v=<?php echo $page['version']; ?>"></script>
+<script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
+
+
+<?php // #1992 - Teads
+if ( $page['template'] == 'p' ) :
+  if ( $page['post']['is_sponserd'] === false ) :
+    echo <<<__EOL__
+<script type="text/javascript">
+    var amp_med = '2000801';
+    var amp_site = '2001028';
+    var amp_frame = '2009107';
+    var amp_rurl = document.referrer;
+    var amp_send = location.protocol + '//ads.adjust-net.jp/adserver/ad/ads_v.js?' + Math.random();
+    document.write("<scr" + "ipt type='text/javascript' src='" + amp_send + "'></scr" + "ipt>");
+</script>
+__EOL__;
+  endif;
+endif;
+?>
+
+<!-- #2737 対応 -->
+<?php if ($page['template'] === 'index') : ?>
+<script type="text/javascript" class="microad_blade_track">
+<!--
+var microad_blade_jp = microad_blade_jp || { 'params' : new Array(), 'complete_map' : new Object() };
+(function() {
+var param = {'co_account_id' : '17645', 'group_id' : '', 'country_id' : '1', 'ver' : '2.1.0'};
+microad_blade_jp.params.push(param);
+var src = (location.protocol == 'https:')
+? 'https://d-cache.microad.jp/js/blade_track_jp.js' : 'http://d-cache.microad.jp/js/blade_track_jp.js';
+var bs = document.createElement('script');
+bs.type = 'text/javascript'; bs.async = true;
+bs.charset = 'utf-8'; bs.src = src;
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(bs, s);
+})();
+-->
+</script>
+<?php endif; ?>
