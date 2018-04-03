@@ -23,8 +23,8 @@ $app->group('/{slug:red-bull-holy-ride}',  function () use($app) {
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
 
-    $args['path'] = $args;
-    $args['page'] = $page;
+    $app->model->property('path', $args);
+    $args['page'] = $app->model->set($page);
 
     if ( $app->model->property('ua') === 'desktop' ) :
       return $this->renderer->render($response, 'red-bull-holy-ride/desktop/index.php', $args);

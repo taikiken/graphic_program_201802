@@ -30,8 +30,8 @@ $app->group('/red-bull-box-cart-2017',  function () use($app) {
   // $this->get('/live[/]', function ($request, $response, $args) use ($app, $page) {
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
 
-    $args['path'] = $args;
-    $args['page'] = $page;
+    $app->model->property('path', $args);
+    $args['page'] = $app->model->set($page);
 
     if ( $app->model->property('ua') === 'desktop' ) :
       return $this->renderer->render($response, 'red-bull-box-cart-2017/desktop/index.php', $args);
