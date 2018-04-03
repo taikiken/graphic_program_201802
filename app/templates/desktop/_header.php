@@ -81,15 +81,15 @@ endif;
 ?>
 
 <?php if ( $page['conditional']['header'] ) : ?>
-  <header id="header-container" class="head-sec">
-    <div class="head-sec-inner">
-      <aside class="f-left clearfix">
+  <header id="header-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-sec">
+    <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
+      <aside class="<?php echo $page['html_prefix']; ?>head-sec-left">
         <div id="head-search-container"></div><!-- /.head-search -->
       </aside>
 
       <h1><a href="/">スポーツブル（スポブル）</a></h1>
 
-      <aside class="f-right clearfix">
+      <aside class="<?php echo $page['html_prefix']; ?>head-sec-right">
         <div id="user-profile-container"></div><!--/.user-profile-container-->
       </aside>
     </div><!-- /.head-sec-inner -->
@@ -98,15 +98,15 @@ endif;
 
 
 <?php if ( $page['conditional']['gnav'] ) : ?>
-  <nav id="global-nav-container" class="gnav-sec">
+  <nav id="global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
     <ul>
-      <li id="home" class="gnav-home"><a href="/">TOP</a></li>
+      <li id="home"><a href="/">TOP</a></li>
 
       <?php foreach( $page['site_tabs'] as $tab ) {
         // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
         // タブの表示順はAPI通りにする
         ?>
-        <li id="<?php echo $tab['slug']; ?>" class="gnav-<?php echo $tab['slug']; ?>">
+        <li id="<?php echo $tab['slug']; ?>">
           <a href="/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
         </li>
       <?php }//foreach ?>

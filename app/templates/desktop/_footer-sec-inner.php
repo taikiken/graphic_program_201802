@@ -45,6 +45,6 @@
       </ul>
     </div><!-- /.sns-block -->
 
-    <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
+    <p class="<?php echo $page['html_prefix']; ?>copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
   </div><!-- /.fnav-block -->
 </div><!-- /.foot-sec-inner -->

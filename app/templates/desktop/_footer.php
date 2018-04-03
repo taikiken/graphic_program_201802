@@ -40,14 +40,14 @@ endif;
 ?>
 
 <?php if ( $page['conditional']['footer'] ) : ?>
-  <footer id="footer-container" class="foot-sec">
+  <footer id="footer-container" class="SPBL_common <?php echo $page['html_prefix']; ?>foot-sec">
     <?php include_once __DIR__.'/_footer-sec-inner.php'; ?>
   </footer><!-- /.foot-sec -->
 <?php endif; ?>
 
 
 <?php if ( $page['conditional']['footer_copyright'] ) : ?>
-  <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
+  <p class="SPBL_common <?php echo $page['html_prefix']; ?>copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
 <?php endif; ?>
 
 

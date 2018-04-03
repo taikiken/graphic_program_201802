@@ -103,7 +103,8 @@ $app->group('/inc', function () use ($app) {
         break;
       default:
       $conditional = array(
-        'whole'            => false, // <div class="whole">
+        'whole'    => false,
+        'announce' => false,
       );
     endswitch;
 
@@ -145,6 +146,7 @@ $app->group('/inc', function () use ($app) {
       'conditional' => $conditional,
       'query'       => $query,
       'path'        => $args,
+      'html_prefix' => 'SPBL_',
     ));
 
     return $this->renderer->render($response, 'inc.php', $args);

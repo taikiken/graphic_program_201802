@@ -123,6 +123,8 @@ class ViewModel {
       'html_end'         => true,
     ),
 
+    'html_prefix' => '', // HTMLのid/classの接頭, テンプレ書き換え後に`SPBL_`になる予定
+
   );
 
   var $db;
