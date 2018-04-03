@@ -44,7 +44,7 @@ endif;
 ?>
 
 <?php if ( $page['conditional']['sidemenu'] ) : ?>
-<div id="side-menu-container">
+<div id="side-menu-container" class="SPBL_common">
   <div id="side-menu-bg"></div>
   <div id='side-menu'>
     <ul id="side-menu-list">
@@ -114,14 +114,14 @@ endif;
 
 
 <?php if ( $page['conditional']['footer'] ) : ?>
-<footer class="foot-sec">
+<footer class="SPBL_common <?php echo $page['html_prefix']; ?>foot-sec">
   <?php include_once __DIR__.'/_footer-sec-inner.php'; ?>
 </footer><!-- /.foot-sec -->
 <?php endif; ?>
 
 
 <?php if ( $page['conditional']['footer_copyright'] ) : ?>
-  <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
+  <p class="SPBL_common <?php echo $page['html_prefix']; ?>copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
 <?php endif; ?>
 
 

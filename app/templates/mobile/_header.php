@@ -126,7 +126,7 @@ endif;
 
 
 <?php if ( $page['conditional']['header'] ) : ?>
-<div id="js-header-appbnr-container">
+<div id="js-header-appbnr-container" class="SPBL_common <?php echo $page['html_prefix']; ?>header-appbnr-container">
   <div class="header-appbnr">
     <div class="header-appbnr-link">
       <?php
@@ -150,8 +150,10 @@ endif;
     </div><!-- /.header-appbnr-link -->
   </div><!-- /.header-appbnr -->
 </div>
-<div class="header-sticky">
-  <header class="head-sec">
+
+
+<div class="SPBL_common <?php echo $page['html_prefix']; ?>header-sticky">
+  <header class="<?php echo $page['html_prefix']; ?>head-sec">
     <div class="head-sec-inner">
       <h1><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a></h1>
 
@@ -159,15 +161,19 @@ endif;
         <a id="side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
       </div>
 
-      <aside class="f-right clearfix">
+      <aside class="head-sec-inner-right">
         <span id="search-container-opener"></span>
 
         <div id="user-profile-container"></div><!--/.user-profile-container-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
-  <div id="head-search-container"></div>
-  <nav id="global-nav-container" class="gnav-sec">
+
+
+  <div id="head-search-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-search-container"></div>
+
+
+  <nav id="global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
     <div id="gnav-sec-inner" class="gnav-sec-inner">
       <ul id="gnav-sec-list">
         <li id="home" class="gnav-home"><a href="/">TOP</a></li>
@@ -183,5 +189,6 @@ endif;
       </ul>
     </div><!-- /.gnav-sec-inner -->
   </nav><!-- /.gnav-sec -->
+
 </div><!--/.header-sticky-->
 <?php endif; ?>

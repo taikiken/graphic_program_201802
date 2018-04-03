@@ -5,7 +5,7 @@
 
 /*
 
-# common
+# inc
 
 - header & footer 共通パーツ用
 
@@ -27,7 +27,6 @@
 
 // 1. head section
 // ----------------------------------------------------------------------------------------------------------------------------------------
-
 $prefix : 'SPBL_';
 
 @mixin hover-opacity($opacity:.75) {
@@ -35,6 +34,13 @@ $prefix : 'SPBL_';
   transition: opacity ease-out .4s;
   @content;
 }
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 
 @import "sprite";
 
@@ -50,7 +56,31 @@ $prefix : 'SPBL_';
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   -moz-font-feature-settings: "liga", "kern";
+
+  a {
+    @include link-decoration($highlight-color, $highlight-color, none, underline);
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    outline: none;
+  }
+
+  input,
+  textarea {
+    color: #333;
+  }
+
+  img {
+    &.responsive {
+      display: none;
+    }
+  }
+
 }
+
 
 @import "module/global_header";
 .SPBL_head-sec {
