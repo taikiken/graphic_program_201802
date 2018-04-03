@@ -91,8 +91,8 @@ endif;
 ?>
 
 
-<!-- #2737 対応 -->
 <?php if ($template_name == 'index') : ?>
+<!-- #2737 対応 -->
 <script type="text/javascript" class="microad_blade_track">
 <!--
 var microad_blade_jp = microad_blade_jp || { 'params' : new Array(), 'complete_map' : new Object() };

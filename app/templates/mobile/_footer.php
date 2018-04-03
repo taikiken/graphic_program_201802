@@ -3,28 +3,47 @@
 // footer 表示条件 start
 $template_name = $page['template'];
 
-// TODO : in_array()判定など
+$conditional_sidemenu = array(
+  'index',
+  '404',
+  'category',
+  'p',
+  'search',
+  'signup_login',
+  'settings',
+  'settings.social',
+  'settings.account',
+  'settings.interest',
+  'settings.deactivate',
+  'mypage',
+  'mypage.activities',
+  'notifications',
+  'logout',
+  'motorsports', // mortorsports 条件を追加 - `/public/motorsports/motorsports_model.php` on 2017-07-06
+  'inc',
+);
 
-if (
-  $template_name == 'index' ||
-  $template_name == '404' ||
-  $template_name == 'category' ||
-  $template_name == 'p' ||
-  $template_name == 'search' ||
-  $template_name == 'signup_login' ||
-  $template_name == 'settings' ||
-  $template_name == 'settings.social' ||
-  $template_name == 'settings.account' ||
-  $template_name == 'settings.interest' ||
-  $template_name == 'settings.deactivate' ||
-  $template_name == 'mypage' ||
-  $template_name == 'mypage.activities' ||
-  $template_name == 'notifications' ||
-  $template_name == 'logout' ||
-  // mortorsports 条件を追加 - `/public/motorsports/motorsports_model.php` on 2017-07-06
-  $template_name == 'motorsports'
-) {
+
+if ( !in_array($page['template'], $conditional_sidemenu, true) ) :
+  $page['conditional']['footer']   = false;
+  $page['conditional']['sidemenu'] = false;
+endif;
+
+$conditional_copyright = array(
+  'signup',
+  'login',
+  'logout',
+  'reset_password',
+  'reset_password.resetting',
+);
+
+if ( in_array($page['template'], $conditional_copyright, true) ) :
+  $page['conditional']['footer_copyright'] = true;
+endif;
+
 ?>
+
+<?php if ( $page['conditional']['sidemenu'] ) : ?>
 <div id="side-menu-container">
   <div id="side-menu-bg"></div>
   <div id='side-menu'>
@@ -91,33 +110,40 @@ if (
     </ul>
   </div><!--/#side-menu-->
 </div><!--/#side-menu-container-->
+<?php endif; ?>
 
+
+<?php if ( $page['conditional']['footer'] ) : ?>
 <footer class="foot-sec">
   <?php include_once __DIR__.'/_footer-sec-inner.php'; ?>
 </footer><!-- /.foot-sec -->
+<?php endif; ?>
 
-  <?php
-} else if (
-  $template_name == 'signup' ||
-  $template_name == 'login' ||
-  $template_name == 'logout' ||
-  $template_name == 'reset_password' ||
-  $template_name == 'reset_password.resetting'
-) {
-?>
+
+<?php if ( $page['conditional']['footer_copyright'] ) : ?>
   <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
-<?php
-}// end if
-// footer 表示条件 end
-// ------------------------------------------------------
-?>
+<?php endif; ?>
+
+
+<?php if ( $page['conditional']['whole'] ) : ?>
 </div><!-- /.whole -->
+<?php endif; ?>
+
+
+<?php if ( $page['conditional']['footer_modal'] ) : ?>
 <div id="modal-container"></div>
 <div id="logout-modal-container"></div>
 <div id="deactivate-modal-container"></div>
 <div id="flush-modal-container"></div>
+<?php endif; ?>
 
-<?php include __DIR__.'/_footer-bottom.php'; ?>
 
+<?php if ( $page['conditional']['footer_script'] ) :
+  include __DIR__.'/_footer-bottom.php';
+endif; ?>
+
+
+<?php if ( $page['conditional']['html_end'] ) : ?>
 </body>
 </html>
+<?php endif; ?>

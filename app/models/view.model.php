@@ -116,11 +116,12 @@ class ViewModel {
       'header'           => true, // <header>
       'gnav'             => true, // <nav>
       'announce'         => true, // <announce>
-      'footer'           => true,
-      'footer_copyright' => false, // <footer>
-      'footer_modal'     => true,
-      'footer_script'    => true,
-      'html_end'         => true,
+      'sidemenu'         => true, // sp - sidemenu
+      'footer'           => true, // <footer>
+      'footer_copyright' => false, // small footer
+      'footer_modal'     => true, // modal dom
+      'footer_script'    => true, // js
+      'html_end'         => true, // </html>
     ),
 
     'html_prefix' => '', // HTMLのid/classの接頭, テンプレ書き換え後に`SPBL_`になる予定

@@ -12,6 +12,7 @@ $app->group('/inc', function () use ($app) {
   // ==============================
   $this->get('/{parts:all|head|header|footer}/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}[/]',  function ($request, $response, $args) use ($app) {
 
+    // ref. app/models/view.model.php
     $conditional = $app->model->property('conditional');
 
     // parts
@@ -20,26 +21,27 @@ $app->group('/inc', function () use ($app) {
       case 'head':
 
         $conditional = array(
-          'html_start'       => false, // <!DOCTYPE〜
+          'html_start'       => false,
           'head'             => true,
-          'head_title'       => false, // <title>
-          'head_sagen'       => false, // sagen.js
-          'head_assets'      => true, // css & js
-          'head_viewport'    => true, // viewport
-          'head_seo'         => false, // keyword & description
-          'head_ogp'         => false, // fb:ogp, twitter:card
-          'head_canonical'   => false, // canonical
-          'head_syn'         => false, // synextbot
-          'head_icon'        => true, // apple-touch-icon
+          'head_title'       => false,
+          'head_sagen'       => false,
+          'head_assets'      => true,
+          'head_viewport'    => true,
+          'head_seo'         => false,
+          'head_ogp'         => false,
+          'head_canonical'   => false,
+          'head_syn'         => false,
+          'head_icon'        => true,
           'head_bottom'      => true,
-          'head_video'       => false, // streampack video code
-          'body_start'       => false, // </head><body>
-          'whole'            => false, // <div class="whole">
-          'header'           => false, // <header>
-          'gnav'             => false, // <nav>
-          'announce'         => false, // <announce>
+          'head_video'       => false,
+          'body_start'       => false,
+          'whole'            => false,
+          'header'           => false,
+          'gnav'             => false,
+          'announce'         => false,
+          'sidemenu'         => true,
           'footer'           => false,
-          'footer_copyright' => false, // <footer>
+          'footer_copyright' => false,
           'footer_modal'     => false,
           'footer_script'    => false,
           'html_end'         => false,
@@ -48,26 +50,27 @@ $app->group('/inc', function () use ($app) {
         break;
       case 'header':
         $conditional = array(
-          'html_start'       => false, // <!DOCTYPE〜
+          'html_start'       => false,
           'head'             => false,
-          'head_title'       => false, // <title>
-          'head_sagen'       => false, // sagen.js
-          'head_assets'      => false, // css & js
-          'head_viewport'    => false, // viewport
-          'head_seo'         => false, // keyword & description
-          'head_ogp'         => false, // fb:ogp, twitter:card
-          'head_canonical'   => false, // canonical
-          'head_syn'         => false, // synextbot
-          'head_icon'        => false, // apple-touch-icon
+          'head_title'       => false,
+          'head_sagen'       => false,
+          'head_assets'      => false,
+          'head_viewport'    => false,
+          'head_seo'         => false,
+          'head_ogp'         => false,
+          'head_canonical'   => false,
+          'head_syn'         => false,
+          'head_icon'        => false,
           'head_bottom'      => false,
-          'head_video'       => false, // streampack video code
-          'body_start'       => false, // </head><body>
-          'whole'            => false, // <div class="whole">
-          'header'           => true, // <header>
-          'gnav'             => true, // <nav>
-          'announce'         => true, // <announce>
+          'head_video'       => false,
+          'body_start'       => false,
+          'whole'            => false,
+          'header'           => true,
+          'gnav'             => true,
+          'announce'         => true,
+          'sidemenu'         => false,
           'footer'           => false,
-          'footer_copyright' => false, // <footer>
+          'footer_copyright' => false,
           'footer_modal'     => false,
           'footer_script'    => false,
           'html_end'         => false,
@@ -76,25 +79,26 @@ $app->group('/inc', function () use ($app) {
         break;
       case 'footer':
         $conditional = array(
-          'html_start'       => false, // <!DOCTYPE〜
+          'html_start'       => false,
           'head'             => false,
-          'head_title'       => false, // <title>
-          'head_sagen'       => false, // sagen.js
-          'head_assets'      => false, // css & js
-          'head_viewport'    => false, // viewport
-          'head_seo'         => false, // keyword & description
-          'head_ogp'         => false, // fb:ogp, twitter:card
-          'head_canonical'   => false, // canonical
-          'head_syn'         => false, // synextbot
-          'head_icon'        => false, // apple-touch-icon
+          'head_title'       => false,
+          'head_sagen'       => false,
+          'head_assets'      => false,
+          'head_viewport'    => false,
+          'head_seo'         => false,
+          'head_ogp'         => false,
+          'head_canonical'   => false,
+          'head_syn'         => false,
+          'head_icon'        => false,
           'head_bottom'      => false,
-          'head_video'       => false, // streampack video code
-          'body_start'       => false, // </head><body>
-          'whole'            => false, // <div class="whole">
-          'header'           => false, // <header>
-          'gnav'             => false, // <nav>
-          'announce'         => false, // <announce>
-          'footer'           => true, // <footer>
+          'head_video'       => false,
+          'body_start'       => false,
+          'whole'            => false,
+          'header'           => false,
+          'gnav'             => false,
+          'announce'         => false,
+          'sidemenu'         => true,
+          'footer'           => true,
           'footer_copyright' => false,
           'footer_modal'     => true,
           'footer_script'    => true,
