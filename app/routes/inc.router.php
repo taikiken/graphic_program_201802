@@ -67,7 +67,7 @@ $app->group('/inc', function () use ($app) {
           'whole'            => false,
           'header'           => true,
           'gnav'             => true,
-          'announce'         => true,
+          'announce'         => false,
           'sidemenu'         => false,
           'footer'           => false,
           'footer_copyright' => false,
