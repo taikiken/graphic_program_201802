@@ -145,14 +145,25 @@ if($q->get_dir()==3){
               <?php } ?>
                 <?php if ($CURRENTDIRECTORY == "tabs") { ?>
                   <div class = "newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>">
-                    <a href="/api/batch/output_tabs_html">
-                      <span>sp用html生成</span>
+                    <a href="/api/batch/output_foooter_sp_html.php">
+                      <span>sp用footer</span>
+                    </a>
+                  </div>
+                  <div class = "newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>">
+                    <a href="/api/batch/output_tabs_sp_html.php">
+                      <span>sp用header</span>
                     </a>
                   </div>
 
                   <div class = "newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>">
-                    <a href="/api/batch/output_tabs_html">
-                      <span>pc用html生成</span>
+                    <a href="/api/batch/output_footer_html.php">
+                      <span>pc用footer</span>
+                    </a>
+                  </div>
+
+                  <div class = "newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>">
+                    <a href="/api/batch/output_tabs_html.php">
+                      <span>pc用header</span>
                     </a>
                   </div>
                 <?php } ?>

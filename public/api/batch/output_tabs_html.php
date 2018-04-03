@@ -3,10 +3,10 @@ include "local.php";
 include "public/import.php";
 
 // DBオブジェクト作成
-$dbo = new db;
-$dbo->connect();
+  $dbo = new db;
+  $dbo->connect();
 
-$sql =<<<EOD
+  $sql = <<<EOD
  SELECT
    u_categories.name AS tabs_name,
    u_categories.name_e AS tabs_name_e
@@ -21,21 +21,21 @@ $sql =<<<EOD
  ORDER BY
    tabs.n
 EOD;
-$dbo->query($sql);
+  $dbo->query($sql);
 
-$list = "";
-while ($f = $dbo->fetch_array()){
-  $text = <<<_EOD
+  $list = "";
+  while ($f = $dbo->fetch_array()) {
+    $text = <<<_EOD
     <li id="bull-{$f['tabs_name_e']}" class="bull-gnav-{$f['tabs_name_e']}">
       <a href="/category/{$f['tabs_name_e']}/">{$f['tabs_name']}</a>
     </li>
 
 _EOD;
 
-  $list = $list . $text;
+    $list = $list . $text;
 
-}
-$file = <<<_EOD
+  }
+  $file = <<<_EOD
 <div id="bull-header-container" class="bull-head-sec">
   <div class="bull-head-sec-inner">
     <aside class="bull-f-left clearfix">
@@ -61,15 +61,4 @@ $file = <<<_EOD
 <div id="bull-pickup-container"></div><!-- /pickup -->
 _EOD;
 
-echo $file;
-
-$filename = 'pc_header.html';
-
-file_put_contents($filename,$file);
-
-header("Cache-Control: private",false);
-header("Content-Type: application/force-download");
-header("Content-Disposition: attachment; filename=$filename");
-header("Content-Length:". strlen($filename));
-
-readfile($filename);
+  echo $file;

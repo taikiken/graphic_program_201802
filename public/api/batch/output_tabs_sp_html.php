@@ -62,14 +62,3 @@ $file = <<<_EOD
 _EOD;
 
 echo $file;
-
-$filename = 'sp_header.html';
-
-file_put_contents($filename,$file);
-
-header("Cache-Control: private",false);
-header("Content-Type: application/force-download");
-header("Content-Disposition: attachment; filename=$filename");
-header("Content-Length:". strlen($filename));
-
-readfile($filename);
