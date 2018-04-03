@@ -145,7 +145,7 @@ if($q->get_dir()==3){
               <?php } ?>
                 <?php if ($CURRENTDIRECTORY == "tabs") { ?>
                   <div class = "newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>">
-                    <a href="/api/batch/output_foooter_sp_html.php">
+                    <a href="/api/batch/output_footer_sp_html.php">
                       <span>sp用footer</span>
                     </a>
                   </div>
