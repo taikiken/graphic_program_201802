@@ -60,9 +60,9 @@
   <script type='text/javascript'>
     googletag.cmd.push(function() {
       var mapping = googletag.sizeMapping().
-        addSize([0, 0], [320, 100]).
+        addSize([0, 0], [320, 50]).
         build();
-      googletag.defineSlot('/531683568/au_servicetop_header', [320, 100], 'div-gpt-ad-1495692694051-0').defineSizeMapping(mapping).addService(googletag.pubads());
+      googletag.defineSlot('/531683568/au_servicetop_header', [320, 50], 'div-gpt-ad-1495692694051-0').defineSizeMapping(mapping).addService(googletag.pubads());
       googletag.defineSlot('/531683568/au_servicetop_footer', [320, 100], 'div-gpt-ad-1495692509848-0').addService(googletag.pubads());
       googletag.pubads().enableSingleRequest();
       googletag.pubads().collapseEmptyDivs();
