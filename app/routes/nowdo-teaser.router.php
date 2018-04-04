@@ -7,9 +7,6 @@ $app->group('/nowdo',  function () use($app) {
   $category = $app->model->get_category_by_slug('extremesports');
   $page = array(
     'title'              => 'Now Do',
-    'site_name'          => 'スポーツブル (スポブル)',
-    'version'            => '201802062230',
-    'og_type'            => 'article',
     'og_title'           => 'Now Do | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'nowdo/',
     'og_image'           => $app->model->property('site_url').'assets/images/nowdo/ogp.jpg',
@@ -19,13 +16,6 @@ $app->group('/nowdo',  function () use($app) {
     'template'           => 'category',
     'dir_name'           => 'nowdo',
     'template_classname' => 'nowdo_all_wrap',
-    'ua'                 => $app->model->property('ua'),
-    'app_id'             => '842032129256034',
-    'sns'                => array(
-      'twitter'  => 'sportsbull_jp',
-      'facebook' => 'sportsbull',
-      'youtube'  => 'UCKwqba9IWuSKIk3DIpryOHw',
-    ),
   );
 
 
@@ -41,8 +31,8 @@ $app->group('/nowdo',  function () use($app) {
 
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
 
-    $args['path'] = $args;
-    $args['page'] = $page;
+  $app->model->property('path', $args);
+  $args['page'] = $app->model->set($page);
 
     return $this->renderer->render($response, 'nowdo/desktop/index.php', $args);
 
