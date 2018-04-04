@@ -60,8 +60,7 @@ if($_POST["ftype"]==="0"){
 		
 		
 		■━━━━━━━━━━━━━━━━━
-		SOLTILO Now Do 株式会社
-		Now Do 事業部
+		Now Do 株式会社
 		E-mail: recruit_trainer@nowdo.jp
 		HP    : https://nowdo.sportsbull.jp/
 		━━━━━━━━━━━━━━━━━■
@@ -102,8 +101,7 @@ if($_POST["ftype"]==="0"){
 		
 		
 		■━━━━━━━━━━━━━━━━━
-		SOLTILO Now Do 株式会社
-		Now Do 事業部
+		Now Do 株式会社
 		E-mail: contact_facility@nowdo.jp
 		HP    : https://nowdo.sportsbull.jp/
 		━━━━━━━━━━━━━━━━━■
