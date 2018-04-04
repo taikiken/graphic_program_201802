@@ -351,14 +351,18 @@ $line_color:#999;
         }
 
         .main_text_wrap{
-            margin-right: 20px;
+            margin-right: 20%;
             margin-top: 8.5%;
-            width: 69%;
+            width: 60%;
             position: relative;
             z-index: 3;
 
             .main_copy_01{
-                margin-bottom: 7%;
+                margin-bottom: 15%;
+            }
+
+            .main_copy_02{
+                margin: 0 -4%;
             }
 
             .main_ttl{
@@ -368,17 +372,17 @@ $line_color:#999;
 
         .anchor_btn{
             margin-top: 8%;
-            width: 62%;
+            width: 50%;
 
             a{
-                font-size: 13px;
+                font-size: 14px;
                 height: 35px;
                 line-height: 35px;
                 width: 100%;
 
                 span{
-                    height: 35px;
-                    line-height: 35px;
+                    height: 45px;
+                    line-height: 45px;
                     width: 100%;
 
                     &:nth-child(1) {
