@@ -88,8 +88,8 @@ include_once __DIR__ . '/../../_env.php';
               <ul class="press_release_list">
                 <li>
                   <dl>
-                    <dt>2018年2月20日</dt>
-                    <dd><a href="">Now Do supported by SPORTS BULLサービス開始予定</a></dd>
+                    <dt>2018年4月5日</dt>
+                    <dd><a href="/p/335340/">スポーツブルが本田圭佑 CEO が立ち上げるスポーツマッチングサービス「Now Do」の共同運営を開始</a></dd>
                   </dl>
                 </li>
               </ul>
@@ -141,7 +141,7 @@ include_once __DIR__ . '/../../_env.php';
             <h2 class="section_ttl"><img src="../assets/images/nowdo/section_ttl_03.png" alt="MESSAGE"></h2>
             <p class="sub_copy">本田圭佑CEOメッセージ</p>
             <div class="message_video_wrap">
-              <iframe width="960" height="540" src="https://www.youtube.com/embed/oi2lBGDK-tM?rel=0" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+              <iframe width="960" height="540" src="https://www.youtube.com/embed/0fzaHlIG2qY?rel=0" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
             </div>
             <div class="message_others_wrap">
               <article>
@@ -177,18 +177,25 @@ include_once __DIR__ . '/../../_env.php';
                   <br>将来的には様々な分野でのマッチングを促進します。</p>
               </article>
             </div>
-            
-              <div class="coo_message">
-                  <p class="sub_copy">鈴木良介COOメッセージ</p>
-                  <div class="coo_message_area">
-                      <div class="img"><img src="../assets/images/nowdo/coo_photo.png" alt=""></div>
-                      <div class="txt_area">
-                          <p>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります</p>
-                          <p class="link"><a href="" target="_blank">インタビュー記事はこちら</a></p>
-                      </div>
+
+            <div class="coo_message">
+              <p class="sub_copy sub_copy_coo">鈴木良介COO</p>
+              <div class="coo_message_area">
+                  <div class="img"><img src="../assets/images/nowdo/coo_photo.png" alt=""></div>
+                  <div class="txt_area">
+                      <p>
+                        <span class="name">
+                          鈴木 良介（すずき りょうすけ）<br />
+                          Now Do株式会社 取締役副社長<br />
+                        </span>
+                        1981年、東京都出身。本田圭佑と共に2010年から国内外でサッカークリニックなどを開催。2012年にはSOLTILO FAMILIA SOCCER SCHOOLを本田と共に立ち上げ全国76校にわたる国内外でサッカースクール、施設運営事業を行うSOLTILO 株式会社を設立。取締役副社長に就任。<br />
+                        今回のNow Do株式会社の取締役副社長に加えて、スポーツ競技におけるセンシング技術を使った(ウェアラブル)IoT事業ビジネスを展開するKnows株式会社、2019年4月からスタートする 幕張ベイエリア内の 認可保育園、インターナショナルスクールの経営を行うSOLTILO CCC株式会社の代表取締役社長も務める。
+                      </p>
                   </div>
               </div>
-              
+              <p class="link"><a href="/p/336016/">Now Do社の取締役副社長 鈴木氏とスポーツブル代表黒飛が語る、 Now Doビジネスとは？</a></p>
+            </div>
+
           </div>
         </section>
         <!-- /.section_03 -->
@@ -366,7 +373,7 @@ include_once __DIR__ . '/../../_env.php';
 					break;
 				}
 			}
-			
+
 			$("input,textarea,select",this).prop("readonly",true);
 			$("button",this).prop("disabled",true);
 			$(this).fadeTo(100,0.5);
