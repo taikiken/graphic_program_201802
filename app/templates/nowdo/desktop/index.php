@@ -89,7 +89,7 @@ include_once __DIR__ . '/../../_env.php';
                 <li>
                   <dl>
                     <dt>2018年4月5日</dt>
-                    <dd><a href="/p/335340/">スポーツブルが本田圭佑 CEO が立ち上げるスポーツマッチングサービス「Now Do」の共同運営を開始</a></dd>
+                    <dd><a href="/p/292521/">スポーツブルが本田圭佑 CEO が立ち上げるスポーツマッチングサービス「Now Do」の共同運営を開始</a></dd>
                   </dl>
                 </li>
               </ul>
@@ -193,7 +193,7 @@ include_once __DIR__ . '/../../_env.php';
                       </p>
                   </div>
               </div>
-              <p class="link"><a href="/p/336016/">Now Do社の取締役副社長 鈴木氏とスポーツブル代表黒飛が語る、 Now Doビジネスとは？</a></p>
+              <p class="link"><a href="/p/293190/">Now Do社の取締役副社長 鈴木氏とスポーツブル代表黒飛が語る、 Now Doビジネスとは？</a></p>
             </div>
 
           </div>
