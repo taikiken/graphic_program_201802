@@ -1,7 +1,7 @@
 <?php
 
 function _sendmail($to,$subject,$body,$from,$reply,$bcc=null){
-	
+
 	$sbj="=?iso-2022-jp?B?".base64_encode(mb_convert_encoding($subject,"JIS","UTF-8"))."?=";
 	$msg=stripslashes($body);
 	$msg=addslashes($msg);
@@ -23,11 +23,11 @@ $prefs=array("1"=>"北海道","2"=>"青森県","3"=>"岩手県","4"=>"宮城県"
 			"43"=>"熊本県","44"=>"大分県","45"=>"宮崎県","46"=>"鹿児島県","47"=>"沖縄県");
 
 if($_POST["ftype"]==="0"){
-	
+
 	$mail["from"] ="recruit_trainer@nowdo.jp";
 	$mail["reply"]="recruit_trainer@nowdo.jp";
 	$mail["bcc"]  ="recruit_trainer@nowdo.jp";
-	
+
 	foreach($_POST as $k=>$v){
 		$v=preg_replace("/(\r\n|\r)/m","\n",$v);
 		if(strlen($v)==0)$v="-";
@@ -36,42 +36,42 @@ if($_POST["ftype"]==="0"){
 		elseif($k=="history02")$history02=preg_replace("/\n/m","\n　　　　　　　　 ",trim($v));
 		else ${$k}=$v;
 	}
-	
+
 	$subject="【Now Do】トレーナーの応募をいただきありがとうございます";
 	$contents="
 		$name1 $name2 様
-		
+
 		この度は、Now Do トレーナー募集にご応募いただき、誠にありがとうございます。
-		
+
 		本メールは、応募フォームからご連絡いただいた方に自動で返信を差し上げています。
-		
+
 		以下の内容でご応募承りましたのでご確認お願いいたします。
-		
+
 		3営業日以内に担当者よりご返信いたしますので、今しばらくお待ちください。
-		
-		
-		氏名　　　　　： $name1 $name2 
-		Ｅメール　　　： $email 
-		電話番号　　　： $tel 
-		性別　　　　　： $sex 
-		取得資格　　　： $license 
-		トレーナー歴　： $history01 
-		競技歴　　　　： $history02 
-		
-		
+
+
+		氏名　　　　　： $name1 $name2
+		Ｅメール　　　： $email
+		電話番号　　　： $tel
+		性別　　　　　： $sex
+		取得資格　　　： $license
+		トレーナー歴　： $history01
+		競技歴　　　　： $history02
+
+
 		■━━━━━━━━━━━━━━━━━
 		Now Do 株式会社
 		E-mail: recruit_trainer@nowdo.jp
-		HP    : https://nowdo.sportsbull.jp/
+		HP    : http://nowdo.jp/
 		━━━━━━━━━━━━━━━━━■
 	";
-	
+
 }else{
-	
+
 	$mail["from"] ="contact_facility@nowdo.jp";
 	$mail["reply"]="contact_facility@nowdo.jp";
 	$mail["bcc"]  ="contact_facility@nowdo.jp";
-	
+
 	foreach($_POST as $k=>$v){
 		$v=preg_replace("/(\r\n|\r)/m","\n",$v);
 		if(strlen($v)==0)$v="-";
@@ -79,31 +79,31 @@ if($_POST["ftype"]==="0"){
 		elseif($k=="note")$note=preg_replace("/\n/m","\n　　　　　　　　 ",trim($v));
 		else ${preg_replace("/^_/","",$k)}=$v;
 	}
-	
+
 	$subject="【Now Do】施設の応募をいただきありがとうございます";
 	$contents="
 		$name0 $name1 様
-		
+
 		この度は、Now Do 施設募集にご応募いただき、誠にありがとうございます。
-		
+
 		本メールは、応募フォームからご連絡いただいた方に自動で返信を差し上げています。
-		
+
 		以下の内容でご応募承りましたのでご確認お願いいたします。
-		
+
 		3営業日以内に担当者よりご返信いたしますので、今しばらくお待ちください。
-		
-		施設名称　　　： $name0 
-		担当者名　　　： $name1 $name2 
-		住所　　　　　： 〒$postcode $pref $city $address 
+
+		施設名称　　　： $name0
+		担当者名　　　： $name1 $name2
+		住所　　　　　： 〒$postcode $pref $city $address
 		Ｅメール　　　： $email
 		電話番号　　　： $tel
 		備考　　　　　： $note
-		
-		
+
+
 		■━━━━━━━━━━━━━━━━━
 		Now Do 株式会社
 		E-mail: contact_facility@nowdo.jp
-		HP    : https://nowdo.sportsbull.jp/
+		HP    : http://nowdo.jp/
 		━━━━━━━━━━━━━━━━━■
 	";
 }
@@ -113,14 +113,14 @@ if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
 	$res["message"]="正しいメールアドレスを入力してください。";
 }else{
 	$mail["to"]=$email;
-	$body=preg_replace("/\t/","",$contents);	
+	$body=preg_replace("/\t/","",$contents);
 	$e=_sendmail($mail["to"],$subject,$body,$mail["from"],$mail["reply"],$mail["bcc"]);
 	if(!$e){
 		$res["error"]=1;
 		$res["message"]="有効なメールアドレスを入力してください。";
 	}else{
 		$res["error"]=0;
-		$res["message"]="ご応募いただき、誠にありがとうございます。<br>自動返信メールを送信いたしましたの内容のご確認をお願いいたします。";
+		$res["message"]="ご応募いただき、誠にありがとうございます。<br>自動返信メールを送信いたしましたので内容のご確認をお願いいたします。";
 	}
 }
 
