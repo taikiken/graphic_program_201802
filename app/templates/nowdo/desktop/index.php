@@ -67,7 +67,7 @@ include_once __DIR__ . '/../../_env.php';
             <div class="main_text_wrap">
               <p class="main_copy_01"><img src="../assets/images/nowdo/main_copy_01.png" alt="今すぐ どこでも あなたを目標に近づけるパーソナルトレーニング"></p>
               <h1 class="main_ttl"><img src="../assets/images/nowdo/main_logo.png" alt="NowDo supported by SPORTS BULL"></h1>
-              <p class="main_copy_02"><img src="../assets/images/nowdo/main_copy_02.png" alt="2018年春のリリースに伴い、サッカートレーナー・サッカー関連施設を募集します。"></p>
+              <p class="main_copy_02"><img src="../assets/images/nowdo/main_copy_02.png" alt="2018年夏前のリリースに伴い、サッカートレーナー・サッカー関連施設を募集します。"></p>
               <div class="anchor_btn"><a href="#recruit"><span>応募はこちら</span><span>応募はこちら</span></a></div>
             </div>
             <!-- /.id_sports2017__summary__text -->

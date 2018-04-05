@@ -10,7 +10,7 @@ $app->group('/nowdo',  function () use($app) {
     'og_title'           => 'Now Do | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'nowdo/',
     'og_image'           => $app->model->property('site_url').'assets/images/nowdo/ogp.jpg',
-    'og_description'     => '2018年春「Now Do supported by SPORTS BULL」リリース予定。Now Doは今すぐ、どこでもあなたを目標に近づけるパーソナルトレーニングサービスです。あなたのために一流プロアスリートが考案したトレーニングメニューを厳選されたトレーナーが提供します。サッカースクールなどでは実現できない個人技術の向上にコミットします。',
+    'og_description'     => '2018年夏前「Now Do supported by SPORTS BULL」リリース予定。Now Doは今すぐ、どこでもあなたを目標に近づけるパーソナルトレーニングサービスです。あなたのために一流プロアスリートが考案したトレーニングメニューを厳選されたトレーナーが提供します。サッカースクールなどでは実現できない個人技術の向上にコミットします。',
     'keywords'           => 'Now Do,ナウドゥ,本田圭佑,サッカー,スポブル,ライブ配信,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
     'category'           => $category,
     'template'           => 'category',
