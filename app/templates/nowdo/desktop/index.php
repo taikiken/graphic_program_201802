@@ -1,3 +1,14 @@
+<?php
+// app webview かを `?app=(ios|android)` から判定します
+// ==============================
+$from_webview = false;
+if (isset($_GET['app'])) {
+  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
+    $from_webview = true;
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
@@ -47,11 +58,19 @@ include_once __DIR__ . '/../../_env.php';
 </head>
 <body>
 <div id="whole" class="whole <?php echo $page['template_classname']; ?>">
+  <?php
+  // app in webview 時に非表示にする
+  if (!$from_webview) :
+  ?>
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
+  <?php
+  endif;
+  // -----------------------------------------
+  ?>
 
   <div class="body-sec">
     <div class="body-sec-inner">
@@ -421,10 +440,18 @@ include_once __DIR__ . '/../../_env.php';
   );
 ?>
 
+  <?php
+  // app in webview 時に非表示にする
+  if (!$from_webview) :
+  ?>
+    <?php
+      include_once __DIR__."/../../_footer-responsive.php";
+    ?>
+  <?php
+    endif;
+  // -----------------------------------------
+  ?>
 
-<?php
-
-include_once __DIR__."/../../_footer-responsive.php";
-include_once __DIR__."/../../_debug.php";
-
-?>
+  <?php
+    include_once __DIR__."/../../_debug.php";
+  ?>
