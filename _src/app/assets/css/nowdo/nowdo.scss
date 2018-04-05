@@ -224,8 +224,9 @@ $line_color:#999;
 //        transform: translateX(-50%) translateY(-50%);
         max-width: 1280px;
         margin: 0 auto;
-        display: flex;
-        justify-content: flex-end;
+        display: block;
+//        display: flex;
+//        justify-content: flex-end;
         z-index: 5;
         padding-bottom: 180px;
     }
