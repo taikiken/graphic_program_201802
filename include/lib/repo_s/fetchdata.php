@@ -12,8 +12,6 @@
         </td>
       <?php } ?>
       <td width="75">
-        <a href="/editdm/pickup_athlete_big4/?cid=<?= $p[$i]["id"] ?>&<?= $g->g_url() ?>" class=" toe">ピックアップ</a>
-      <td width="75">
         <a href="../ad/?nid=<?= $p[$i]["id"] ?>&<?= $g->g_url() ?>" class=" toe">
           <img src="/shared/cms/img/file.png" width="17" height="16">広告設定
         </a>
