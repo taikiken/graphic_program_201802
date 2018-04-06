@@ -67,9 +67,10 @@ if ($page['category']['slug'] == 'all') {
 
       <?php
       // para board check - `parasports`
-      if ( $page['category']['slug'] === 'parasports' ) :
-        include_once __DIR__.'/_category_para_board_calendar.php';
-      endif;
+// なんか非表示する - 2018-04-06
+//      if ( $page['category']['slug'] === 'parasports' ) :
+//        include_once __DIR__.'/_category_para_board_calendar.php';
+//      endif;
       ?>
 
 
