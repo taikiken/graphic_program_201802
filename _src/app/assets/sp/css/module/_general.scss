@@ -911,6 +911,110 @@
 
 
 
+// 下タブ
+// ref. https://aws-plus.backlog.jp/view/UNDO_SPBL-432
+//.nadir_tab
+.nadir_tab {
+  z-index: 99999;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+
+  //.nadir_tab-list
+  &-list {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  //.nadir_tab-item
+  &-item {
+    &.current {
+      .nadir_tab-link {
+        color: #0f3580;
+
+        i svg {
+          fill: #0f3580;
+        }
+      }
+    }
+  }
+
+  //.nadir_tab-link
+  &-link {
+    @include link-decoration(#929291, #929291, null, null);
+    display: inline-block;
+    font-weight: bold;
+    font-size: (20/2)+px;
+    text-align: center;
+
+    i {
+      display: flex;
+      align-items: center;
+      width: (60/2)+px;
+      height: (60/2)+px;
+      margin-right: auto;
+      margin-left: auto;
+
+      svg {
+        fill: #999;
+      }
+
+      // &:before {
+      //   content: "";
+      //   display: block;
+      //   width: (44/2)+px;
+      //   height: (44/2)+px;
+      //   margin-right: auto;
+      //   margin-left: auto;
+      //   background-position: center center;
+      //   background-repeat: no-repeat;
+      //   background-size: contain;
+      // }
+    }
+  }
+
+  // .nadir_tab-item_home {
+  //   .nadir_tab-link {
+  //     i:before {
+  //       background-image: url(/assets/sp/images/common/nadir_tab-icon-home.svg);
+  //     }
+  //   }
+  // }
+
+  // .nadir_tab-item_live {
+  //   .nadir_tab-link {
+  //     i:before {
+  //       background-image: url(/assets/sp/images/common/nadir_tab-icon-live.svg);
+  //     }
+  //   }
+  // }
+
+  // .nadir_tab-item_category {
+  //   .nadir_tab-link {
+  //     i:before {
+  //       background-image: url(/assets/sp/images/common/nadir_tab-icon-category.svg);
+  //     }
+  //   }
+  // }
+
+  // .nadir_tab-item_nowdo {
+  //   .nadir_tab-link {
+  //     i:before {
+  //       background-image: url(/assets/sp/images/common/nadir_tab-icon-nowdo.svg);
+  //     }
+  //   }
+  // }
+
+}  //.nadir_tab
+
+
+
+
+
 // mod-btnA01
 .mod-btnA01 {
   input[ type="submit" ],
