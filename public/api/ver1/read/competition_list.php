@@ -3,12 +3,15 @@
 include "local.php";
 include "public/check.php";
 
-$y = [];
-$response = [];
+$response = null;
 $recent_flag = false;
 $response_flag = false;
 $week_list = array('日', '月', '火', '水', '木', '金', '土');
 $max_type = 3;
+
+
+$file_bucket_path = '/static/board/result_pdf/';
+$icon_bucket_path = '/static/sports/icon/';
 
 $sport_id = bind($_REQUEST["sport_id"]);
 if($_REQUEST["year"] === "current"){
@@ -44,7 +47,8 @@ $o->connect();
 $sql = <<<SQL
 SELECT 
     cmp.* ,
-    sports.name as sport_name
+    sports.name as sport_name,
+    sports.icon as sport_icon
 FROM
     competitions cmp
 LEFT JOIN
@@ -52,7 +56,7 @@ LEFT JOIN
 WHERE
     cmp.is_public IS TRUE
 AND
-    cmp.is_delete IS FALSE
+    cmp.deleted_at IS NULL
 AND
     start_date_time >= '{$old_date_time}'
 AND
@@ -69,13 +73,12 @@ ORDER BY
 
 $o->query($sql);
 foreach ($o->fetch_all() as $f) {
-    if($response_flag === false) {$response_flag = true ;}
 
     $active_list = [];
     $type_list = [];
     $f['sport_name'] = !empty($f['sport_name']) ? $f['sport_name'] : '';
-    $f['file'] = !empty($f['file']) ? $ImgPath.$f['file'] : '';
-    $f['icon'] = !empty($f['icon']) ? $ImgPath.$f['icon'] : '';
+    $f['file'] = !empty($f['file']) ? $ImgPath.$file_bucket_path.$f['file'] : '';
+    $f['sport_icon'] = !empty($f['sport_icon']) ? $ImgPath.$icon_bucket_path.$f['sport_icon'] : '';
 
     //開始日
     $DateTime = new DateTime($f['start_date_time']);
@@ -96,14 +99,14 @@ foreach ($o->fetch_all() as $f) {
     }
 
     //結果のactive確認
-    $active_list['result'] = (strpos(get_headers($ImgPath . $f['file'])[0],'OK')) ? true : false;
+    $active_list['result'] = (strpos(get_headers($f['file'])[0],'OK')) ? true : false;
 
     //概要はactiveにする
     $active_list['summary'] = true;
 
     //各記事のactive確認
     $types = array('highlight_movie', 'news', 'photo_gallery');
-    $sql = sprintf('select distinct type from articles_competitions where competition_id = %s order by type asc;',$f['id']);
+    $sql = sprintf('select distinct type from competition_articles where competition_id = %s order by type asc;',$f['id']);
     $o->query($sql);
     while ($fetch = $o->fetch_array()){
         $type_list[] = $fetch['type'];
@@ -116,7 +119,7 @@ foreach ($o->fetch_all() as $f) {
         'id'                => $f['id'],
         'competition_name'  => $f['name'],
         'sport_name'        => $f['sport_name'],
-        'icon'              => $f['icon'],
+        'icon'              => $f['sport_icon'],
         'start_date_time'   => $start_date,
         'end_date_time'     => $end_date,
         'file'              => $f['file'],
@@ -125,17 +128,8 @@ foreach ($o->fetch_all() as $f) {
 
 }
 
-    if($response_flag){
-        $y["status"]["code"] = 200;
-        $y["status"]["user_message"] = "";
-        $y["status"]["developer_message"] = "";
-        $y["response"] = $response;
-        
-    }else{
-        $y["status"]["code"] = 404;
-        $y["status"]["user_message"] = "指定された大会は存在しません。";
-        $y["status"]["developer_message"] = "指定された大会は存在しません。";
-    }
+$y["response"] = $response;
+
 print_json($y, $_SERVER['HTTP_REFERER']);
 
 ?>

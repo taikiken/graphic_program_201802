@@ -38,6 +38,10 @@ export default class ComScoreRefresh extends Component {
     auto: PropTypes.func.isRequired,
     manual: PropTypes.func.isRequired,
     reload: PropTypes.func.isRequired,
+    spring: PropTypes.bool,
+  };
+  static defaultProps = {
+    spring: false,
   };
   // ----------------------------------------
   // CONSTRUCTOR
@@ -181,7 +185,11 @@ export default class ComScoreRefresh extends Component {
    * @returns {XML} nav.mlb_live__reload
    */
   render() {
-    const { status, date } = this.props;
+    const { status, date, spring } = this.props;
+    // @since 2018-03-03 - オープン戦は表示しない
+    if (spring) {
+      return null;
+    }
     // console.log('ComScoreRefresh.render', status, date);
     let showRefresh = false;
     let showReload = false;

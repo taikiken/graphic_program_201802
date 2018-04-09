@@ -23,11 +23,14 @@ Number Web 全文	 http://cms.sportsbull.jp/api/batch/import_number_full.php
 ベースボールゲート	 http://cms.sportsbull.jp/api/batch/import_baseballgate.php
 フルカウント	 http://cms.sportsbull.jp/api/batch/import_fullcount.php
 ラグビー共和国	 http://cms.sportsbull.jp/api/batch/import_rugby.php
-RALLYPLUS.NET	 https://dev.sportsbull.jp/api/batch/import_rallyplus.php
+RALLYPLUS.NET	 https://cms.sportsbull.jp/api/batch/import_rallyplus.php
 レジェンドスタジアム	http://cms.sportsbull.jp/api/batch/import_legendsstadium.php
 レスポンス	 http://cms.sportsbull.jp/api/batch/import_response.php
 六大学連盟-順位表	http://cms.sportsbull.jp/api/batch/output_big6standing.php
 六大学連盟-日程	http://cms.sportsbull.jp/api/batch/output_big6schedule.php
+テレビ東京卓球ニュース	https://cms.sportsbull.jp/api/batch/import_tabletennis.php
+KPI	https://cms.sportsbull.jp/api/batch/import_kmagazine.php
+CLIMBERS	https://cms.sportsbull.jp/api/batch/import_climbers.php
 ";
 
 /*
@@ -36,6 +39,7 @@ SPORTIVA	http://cms.sportsbull.jp/api/batch/import_sportiva.php
 */
 
 if(preg_match("/dev/",$_SERVER["SERVER_NAME"]))$s=str_replace("cms","dev",$s);
+if(preg_match("/stg/",$_SERVER["SERVER_NAME"]))$s=str_replace("cms","stg",$s);
 $s=explode("\n",$s);
 for($i=0;$i<count($s);$i++){
 	$s[$i]=trim($s[$i]);

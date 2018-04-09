@@ -287,7 +287,7 @@ include_once __DIR__."/_include/_bulls_station_func.php";
           FB.init({
               appId      : '842032129256034',
               xfbml      : true,
-              version    : 'v2.5'
+              version    : 'v2.11'
           });
       };
       (function(d, s, id){

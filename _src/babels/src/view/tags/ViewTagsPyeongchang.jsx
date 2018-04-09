@@ -322,7 +322,7 @@ export default class ViewTagsPyeongchang extends View {
    * @param {Error} error Ajax error
    */
   fail(error) {
-    console.warn('ViewTagsPyeongchang.fail', error, this);
+    console.warn('ViewTagsPyeongchang.fail', error, this.type);
   }
   /**
    * Ajax data を使用し widget を出力します

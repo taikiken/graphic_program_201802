@@ -165,18 +165,21 @@ if(strlen($api)>0){
 			$f = $o->fetch_array();
 			$photoCategoryId = $f['id'];
 			//抽出条件の組み立て
-			$addConditions = ["", "d2 = '{$mediaId}'"];
+			$addConditions = ["",];
+			if($mediaId !== 'all'){
+				$addConditions[] = "d2 = '{$mediaId}'";
+			}
 			switch ($type) {
 				case 'photo':
 					$addConditions[] = "( m1 = '{$f['id']}' or m2 = '{$photoCategoryId}' )";
 					break;
 				case 'video':
-					$addConditions[] = "( SELECT video FROM u_view WHERE pageid = repo_n.id LIMIT 1 ) = 1";
+					 $addConditions[] = "( repo_n.videoflag=173 OR brightcove IS NOT NULL OR swf IS NOT NULL OR youtube IS NOT NULL OR facebook IS NOT null OR streampack IS NOT NULL)";
 					break;
 				case 'news':
 					$addConditions[] = "( m1 IS NULL or m1 <> '{$photoCategoryId}' )";
 					$addConditions[] = "( m2 IS NULL or m2 <> '{$photoCategoryId}' )";
-					$addConditions[] = "COALESCE( (SELECT video FROM u_view WHERE pageid = repo_n.id LIMIT 1), 0) <> 1";
+					$addConditions[] = "(repo_n.videoflag <> 173 OR repo_n.videoflag IS NULL) AND brightcove IS NULL AND swf IS NULL AND youtube IS NULL AND facebook IS NULL AND streampack IS NULL";
 					break;
 				default:
 				//nothing

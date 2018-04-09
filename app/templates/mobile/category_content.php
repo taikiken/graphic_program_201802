@@ -39,8 +39,10 @@
     }
     ?>
     <section class="main-sec">
+      <?php if(empty($page['list']) === false) :
+        include_once __DIR__.'/_category-pickup_player.php';
+       endif;
 
-      <?php
       // ----------------------------------------------------
       // 記事一覧: sp banner
       if ( !empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']) ) :

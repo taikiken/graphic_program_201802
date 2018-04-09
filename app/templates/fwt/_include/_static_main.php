@@ -71,14 +71,16 @@
 <section class="fwt--timetable">
   <h3><img src="../assets/images/fwt/timetable-heading.png" alt="TIMETABLE">タイムテーブル</h2>
     <p>
-      白馬大会はカナダに会場を変更して実施されることになりました。<br />
-      <br />
+      <!-- 白馬大会はカナダに会場を変更して実施されることになりました。<br />
+      <br /> -->
       <strong style="font-size: 16px; color: #e71a0f;">
-        日本時間:2月7日(水) 深夜0時30分頃から
+        日本時間:4月1日(日) 22時00分頃から
       </strong><br />
-        現地時間:2月56日(火) 8時30分頃から<br />
-      <br />
-      ライブ配信まではしばらくお待ち下さい。
+        現地時間:4月1日(日) 14時00分頃から<br />
+        <br />
+        競技は男子→女子の順に開催されます。<br />
+        男子終了後に女子に切り替わらない場合はページを再読み込みしてください。
+      <!-- <br />ライブ配信まではしばらくお待ち下さい。 -->
     </p>
     <br />
     <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
@@ -110,17 +112,21 @@
         <th>1.20 - 27</th>
         <td>日本</td>
       </tr>
-      <tr class="next">
+      <tr class="end">
         <th>2.3 - 9</th>
         <td>カナダ</td>
       </tr>
-      <tr>
+      <tr class="end">
         <th>3.1 - 7</th>
         <td>アンドラ</td>
       </tr>
-      <tr>
+      <tr class="end">
         <th>3.9 - 15</th>
         <td>オーストリア</td>
+      </tr>
+      <tr>
+        <th>3.31 - 4.8</th>
+        <td>スイス</td>
       </tr>
     </tbody>
   </table>

@@ -96,4 +96,7 @@ $GET_AU_TMP_PICKS_API = '/api/editdm/bulls-picks/au/tmp';
 $POST_AU_TMP_PICKS_API = '/api/editdm/bulls-picks/au/tmp/update';
 $AU_ARCHIVE_PICKS_TO_PRODUCTION_API = '/api/editdm/bulls-picks/au/2prd';
 
+//六大学のシーズンを記載
+$BIG6TV_SEASON = '2018s';
+
 ?>

@@ -760,6 +760,16 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 	global $RAWIMG;
 	global $domain;
 
+	// 画像圧縮
+  if (exif_imagetype($RAWIMG . $filename) == IMAGETYPE_JPEG)
+  {
+    $filepath_array = explode('/', $RAWIMG . $filename);
+    $img_name = $filepath_array[count($filepath_array) - 1];
+    exec(sprintf('mv %s /tmp/%s', $RAWIMG . $filename, $img_name));
+    exec(sprintf('cjpeg -optimize -quality 70 /tmp/%s > %s', $img_name, $RAWIMG . $filename));
+    unlink('/tmp/' . $img_name);
+  }
+
 	if(strlen($type)==0)$type=substr($filename,-3,3);
 	if(strlen($size)==0)$size=getimagesize($RAWIMG.$filename);
 

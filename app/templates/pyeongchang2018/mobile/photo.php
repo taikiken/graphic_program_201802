@@ -112,7 +112,6 @@ include_once __DIR__."/../../mobile/_header.php";
       include_once __DIR__ . '/../module/_pyeongchang2018_medals.php';
       ?>
       <?php
-      /*
       // https://aws-plus.backlog.jp/view/UNDO_SPBL-296#comment-1187520933
       // リリース時にタブとWebViewのハイライトブロックを、非表示
       ?>
@@ -125,7 +124,8 @@ include_once __DIR__."/../../mobile/_header.php";
         <div id="Widget_articles_tag-2" class="Widget_articles_tag" data-style="text" data-tag="平昌五輪2018ハイライト" data-offset="0" data-length="4"></div>
       </div><!-- /.gallery--highlight -->
       <?php
-      */
+      // トルツメ解除 - UNDO_SPBL-436 【課題管理】【バックエンド】【WEB】平昌オリンピック コンテンツ制作 : リリース後対応
+      // ----
       ?>
       <div class="sponsor-link">
         <!-- /531683568/pyeongchang_ad/pyeongchang_sp_rectangle -->

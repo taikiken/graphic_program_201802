@@ -1,4 +1,4 @@
- <?php if ( $page['post']['is_readmore'] ) :
+          <?php if ( $page['post']['is_readmore'] ) :
           // -------------------------- [記事本文] --------------------------
           ?>
           <div id="post-content-container" class="post-content post-content_app">
@@ -22,6 +22,7 @@
               else:?>
                   <div style="font-size:0.8em">
                     <?php print_r($page['post']['body']); ?>
+
                   </div>
               <?php endif;?>
 

@@ -389,6 +389,11 @@ div.synapse_logo {
 .side-menu-ut-nav-logout i { @include sprite( $common-icon-side-logout, inline-block ); }
 .side-menu-ut-nav-about i { @include sprite( $common-icon-side-about, inline-block ); }
 
+// UNDO_SPBL-403-abolish-comment
+.side-menu-ut-nav-mypage {
+  display: none;
+}
+
 .sidemenu_container,
 .sidemenu_container_single {
   position: relative;

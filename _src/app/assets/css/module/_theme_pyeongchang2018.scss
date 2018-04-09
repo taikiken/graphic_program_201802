@@ -57,7 +57,8 @@
 
       table {
         float: left;
-        width: 75%;
+        // width: 75%;
+        width: 100%;
       }
 
       td {
@@ -69,6 +70,10 @@
         font-weight: bold;
         font-size: fz(16);
         text-align: center;
+
+        &:last-child {
+          background: none;
+        }
       }
 
       //.medal_list__medal_type
@@ -108,16 +113,16 @@
       }
 
       //.medal_list__medal_total
-      .medal_list__medal_total {
-        float: right;
-        width: 25%;
-        line-height: 32px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        font-weight: bold;
-        font-size: fz(16);
-        text-align: center;
-      }
+      // .medal_list__medal_total {
+      //   float: right;
+      //   width: 25%;
+      //   line-height: 32px;
+      //   padding-top: 8px;
+      //   padding-bottom: 8px;
+      //   font-weight: bold;
+      //   font-size: fz(16);
+      //   text-align: center;
+      // }
     }
   } //.medal_list
 

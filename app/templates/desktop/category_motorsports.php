@@ -46,6 +46,14 @@ if ($page['category']['slug'] == 'all') {
     <section class="main-sec">
 
       <?php
+      // 注目のアスリート
+      // ----------------------------------------------------
+      if(empty($page['list']) === false) :
+        include_once __DIR__.'/_category-pickup_player.php';
+      endif;
+      ?>
+
+      <?php
       // ----------------------------------------------------
       // 記事一覧: pc banner
       if ( !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
@@ -78,7 +86,7 @@ if ($page['category']['slug'] == 'all') {
     endif;
       // eof: 記事一覧: pc banner
       // ---------------------------------------------------- ?>
-      
+
       <?php
       // motor sports navigation
       // @since 2017-05-26

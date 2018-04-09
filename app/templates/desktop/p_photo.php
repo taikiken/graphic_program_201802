@@ -21,11 +21,6 @@
             <?php endforeach;?>
         </ul>
     </div>
-    <?php
-    if(false === empty($page['post']['relatedpost'])):
-        echo $page['post']['relatedpost'];
-    endif;
-    ?>
 <?php else:?>
     <div id="detail-photoalbum">
         <nav class="nav-photoalbum">
@@ -113,9 +108,4 @@
         </ul>
     </div>
 
-    <?php
-    if(false === empty($page['post']['relatedpost'])):
-        echo $page['post']['relatedpost'];
-    endif;
-    ?>
 <?php endif;?>
