@@ -1,0 +1,1127 @@
+@import "../../../../../scss_sp/asset";
+@import "../sprite";
+
+// Theme parasports
+//
+// design module parasports theme
+//
+// Styleguide 2.20.0
+
+.whole.parasports {
+  .paraboard__widget {
+
+    &:before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: (10/2)+px;
+      background-color: #eee;
+      @include hide-text;
+    }
+
+    //.paraboard__widget__header
+    &__header {
+      background-color: #474e5c;
+
+      //.paraboard__widget__header__sub
+      &__sub {
+        display: table;
+        width: 100%;
+        height: (100/2)+px;
+
+        //.paraboard__widget__header__sub__heading
+        &__heading {
+          display: table-cell;
+          line-height: 1.2;
+          padding-left: perCalc(15, 750);
+          vertical-align: middle;
+          color: #fff;
+          font-weight: bold;
+          font-size: fz(32/2);
+
+          span {
+            display: block;
+            font-weight: normal;
+            font-size: fs(20, 32);
+          }
+        }
+
+        //.paraboard__widget__header__sub__btn
+        &__btn {
+          display: table-cell;
+          padding-right: perCalc(15, 750);
+          text-align: right;
+          vertical-align: middle;
+
+          a {
+            @include link-decoration(#fff, #fff, none, none);
+            display: inline-block;
+            padding: (12/2)+px (16/2)+px (12/2)+px (24/2)+px;
+            border-radius: 3px;
+            background-color: #e83851;
+            font-weight: bold;
+            font-size: fz(24/2);
+
+            &:after {
+              content: "";
+              position: relative;
+              top: -1px;
+              display: inline-block;
+              width: 5px;
+              height: 5px;
+              margin-left: 4px;
+              border-top: 2px solid #fff;
+              border-right: 2px solid #fff;
+              transform: rotate(45deg);
+              @include hide-text;
+            }
+          } // a
+        } //.paraboard__widget__header__sub__btn
+      } //.paraboard__widget__header__sub
+    } //.paraboard__widget__header
+
+
+
+    //.paraboard__widget__list
+    &__list {
+      border-top: 1px solid #3b3f46;
+      width: 100%;
+
+      //.paraboard__widget__list__date
+      &__date {
+        color: #fff;
+        font-size: fz(24/2);
+      } //.paraboard__widget__list__date
+
+      //.paraboard__widget__list__game
+      &__game {
+        border-bottom: 1px solid #3b3f46;
+        background-color: #474e5c;
+
+        //.paraboard__widget__list__game__link
+        &__link {
+          position: relative;
+          display: block;
+          padding: (16/2)+px (60/2)+px (16/2)+px perCalc(15, 750);
+          @include link-decoration(null, null, none, none);
+          background-color: #474e5c;
+        } //.paraboard__widget__list__game__link
+
+        //.paraboard__widget__list__game__header
+        &__header {
+          position: relative;
+          padding-left: (70/2)+px;
+
+          //.paraboard__widget__list__icon
+          .paraboard__widget__list__icon {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            display: inline-block;
+            margin-top: -15px;
+
+            img {
+              width: (60/2)+px;
+            }
+          }
+
+          // &:before {
+          //   content: "";
+          //   position: absolute;
+          //   top: 50%;
+          //   left: 0;
+          //   display: inline-block;
+          //   width: (60/2)+px;
+          //   height: (60/2)+px;
+          //   margin-top: -15px;
+          //   background-position: 0 0;
+          //   background-repeat: no-repeat;
+          //   background-size: (60/2)+px;
+          //   @include hide-text;
+          // }
+
+          // &.paraboard__widget__list__icon--basketball:before {
+          //   background-image: url(/assets/sp/images/para-board/icon-basketball.png);
+          // }
+
+          // &.paraboard__widget__list__icon--goalball:before {
+          //   background-image: url(/assets/sp/images/para-board/icon-goalball.png);
+          // }
+
+          // &.paraboard__widget__list__icon--rugby:before {
+          //   background-image: url(/assets/sp/images/para-board/icon-rugby.png);
+          // }
+
+          // &.paraboard__widget__list__icon--soccer:before {
+          //   background-image: url(/assets/sp/images/para-board/icon-soccer.png);
+          // }
+
+          // &.paraboard__widget__list__icon--swimming:before {
+          //   background-image: url(/assets/sp/images/para-board/icon-swimming.png);
+          // }
+
+          // &.paraboard__widget__list__icon--tennis:before {
+          //   background-image: url(/assets/sp/images/para-board/icon-tennis.png);
+          // }
+
+          // &.paraboard__widget__list__icon--track:before {
+          //   background-image: url(/assets/sp/images/para-board/icon-track.png);
+          // }
+
+          // &.paraboard__widget__list__icon--volleyball:before {
+          //   background-image: url(/assets/sp/images/para-board/icon-volleyball.png);
+          // }
+
+          //.paraboard__widget__list__game__header__category
+          &__category {
+            color: #fff;
+            font-weight: bold;
+            font-size: fz(24/2);
+          } //.paraboard__widget__list__game__header__category
+
+          //.paraboard__widget__list__game__header__heading
+          &__heading {
+            line-height: 1.2;
+            color: #fff;
+            font-weight: bold;
+            font-size: fz(28/2);
+          } //.paraboard__widget__list__game__header__heading
+        } //.paraboard__widget__list__game__header
+
+        //.paraboard__widget__list__game__btn
+        &__btn {
+          position: absolute;
+          top: 50%;
+          right: 20px;
+          transform: translateY(-50%);
+
+          i {
+            color: #fff;
+            font-weight: bold;
+            font-size: fz(13);
+            @include hide-text;
+
+            &:after {
+              content: "";
+              position: relative;
+              top: -1px;
+              display: inline-block;
+              width: 5px;
+              height: 5px;
+              margin-left: 4px;
+              border-top: 2px solid #e83851;
+              border-right: 2px solid #e83851;
+              transform: rotate(45deg);
+              @include hide-text;
+            }
+          } // i
+        } //.paraboard__widget__list__game__btn
+      } //.paraboard__widget__list__game
+    } //.paraboard__widget__list
+  } //.paraboard__widget
+
+
+
+
+
+  //.paraboard__header
+  .paraboard__header {
+    &:before {
+      content: "";
+      display: block;
+      height: (10/2)+px;
+      border-bottom: 1px solid #ddd;
+      background-color: #eee;
+    }
+
+    //.paraboard__header__heading
+    &__heading {
+      display: table-cell;
+      width: 100vw;
+      height: (100/2)+px;
+      border-bottom: 1px solid #ddd;
+      font-weight: bold;
+      font-size: fz(32/2);
+      text-align: center;
+      vertical-align: middle;
+    } //.paraboard__header__heading
+
+    //.paraboard__header__search
+    &__search {
+      display: table;
+      width: 100%;
+      margin-top: (20/2)+px;
+
+      //.paraboard__header__search__type
+      &__type {
+        display: table-cell;
+
+        //.paraboard__header__search__type--event
+        &--event {
+          width: 50vw;
+          padding-left: 2vw;
+
+          .paraboard__header__search__select__container {
+            width: 39vw;
+          }
+        }
+
+        //.paraboard__header__search__type--year
+        &--year {
+          width: 30vw;
+          padding-left: 2.5vw;
+
+          .paraboard__header__search__select__container {
+            width: 21vw;
+          }
+        }
+
+        //.paraboard__header__search__type__heading
+        &__heading {
+          font-weight: bold;
+          font-size: fz(24/2);
+        }
+      } //.paraboard__header__search__type
+
+      //.paraboard__header__search__select__container
+      &__select__container {
+        position: relative;
+        display: inline-block;
+      }
+
+      //.paraboard__header__search__select
+      &__select {
+        appearance: none;
+        width: 100%;
+        line-height: 1;
+        padding: 6px (50/2)+px 6px 6px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #eee;
+        font-weight: bold;
+        font-size: fz(24/2);
+
+        &::-ms-expand {
+          display: none;
+        }
+
+        //.paraboard__header__search__select__label
+        &__label:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          right: 5px;
+          width: 6px;
+          height: 6px;
+          margin-top: -3px;
+          border-bottom: 2px solid #e83851;
+          border-left: 2px solid #e83851;
+          transform: rotate(-45deg) translateY(-50%);
+          @include hide-text;
+        }
+      } //.paraboard__header__search__select
+
+
+
+      //.paraboard__header__search__btn
+      &__btn {
+        display: table-cell;
+        width: 20vw;
+        padding-right: 2vw;
+        text-align: right;
+
+        //.paraboard__header__search__btn__submit
+        &__submit {
+          appearance: none;
+          width: 16vw;
+          line-height: 26px;
+          border: none;
+          border-radius: 4px;
+          background-color: #e83851;
+          color: #fff;
+          font-weight: bold;
+          font-size: fz(24/2);
+
+          &::-ms-expand {
+            display: none;
+          }
+        } //.paraboard__header__search__btn__submit
+      }
+    } //.paraboard__header__search
+  } //.paraboard__header
+
+
+
+  //.paraboard__list
+  .paraboard__list {
+    width: 100%;
+    margin-top: (20/2)+px;
+    border-top: 1px solid #ddd;
+
+    //.paraboard__list__date
+    &__date {
+      font-size: fz(24/2);
+    } //.paraboard__list__date
+
+    //.paraboard__list__game
+    &__game {
+      border-bottom: 1px solid #ddd;
+
+      //.paraboard__list__game__link
+      &__link {
+        position: relative;
+        display: block;
+        padding: (16/2)+px perCalc(15, 750);
+        @include link-decoration(#333, #333, none, none);
+      } //.paraboard__list__game__link
+
+      //.paraboard__list__game__header
+      &__header {
+        position: relative;
+        width: perCalc(670, 720);
+        padding-left: (70/2)+px;
+
+        //.paraboard__list__icon
+        .paraboard__list__icon {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          display: inline-block;
+          margin-top: -15px;
+
+          img {
+            width: (60/2)+px;
+          }
+        }
+
+        // &:before {
+        //   content: "";
+        //   position: absolute;
+        //   top: 50%;
+        //   left: 0;
+        //   display: inline-block;
+        //   width: (60/2)+px;
+        //   height: (60/2)+px;
+        //   margin-top: -15px;
+        //   background-position: 0 0;
+        //   background-repeat: no-repeat;
+        //   background-size: (60/2)+px;
+        //   @include hide-text;
+        // }
+
+        // &.paraboard__list__icon--basketball:before {
+        //   background-image: url(/assets/sp/images/para-board/icon-basketball.png);
+        // }
+
+        // &.paraboard__list__icon--goalball:before {
+        //   background-image: url(/assets/sp/images/para-board/icon-goalball.png);
+        // }
+
+        // &.paraboard__list__icon--rugby:before {
+        //   background-image: url(/assets/sp/images/para-board/icon-rugby.png);
+        // }
+
+        // &.paraboard__list__icon--soccer:before {
+        //   background-image: url(/assets/sp/images/para-board/icon-soccer.png);
+        // }
+
+        // &.paraboard__list__icon--swimming:before {
+        //   background-image: url(/assets/sp/images/para-board/icon-swimming.png);
+        // }
+
+        // &.paraboard__list__icon--tennis:before {
+        //   background-image: url(/assets/sp/images/para-board/icon-tennis.png);
+        // }
+
+        // &.paraboard__list__icon--track:before {
+        //   background-image: url(/assets/sp/images/para-board/icon-track.png);
+        // }
+
+        // &.paraboard__list__icon--volleyball:before {
+        //   background-image: url(/assets/sp/images/para-board/icon-volleyball.png);
+        // }
+
+
+
+        //.paraboard__list__game__header__category
+        &__category {
+          font-weight: bold;
+          color: #000;
+          font-size: fz(24/2);
+        }
+
+        //.paraboard__list__game__header__heading
+        &__heading {
+          line-height: 1.2;
+          color: #000;
+          font-weight: bold;
+          font-size: fz(28/2);
+        }
+      } //.paraboard__list__game__header
+
+
+
+      //.paraboard__list__game__status
+      &__status {
+        display: none;
+
+        // margin-top: 20px;
+
+        // //.paraboard__list__game__status__list
+        // &__list {
+        //   letter-spacing: ls(inline-block);
+        // }
+
+        // //.paraboard__list__game__status__item
+        // &__item {
+        //   display: inline-block;
+        //   letter-spacing: normal;
+
+        //   + .paraboard__list__game__status__item {
+        //     margin-left: 10px;
+        //   }
+        // }
+
+        // [class*="paraboard__list__game__status__item--"] {
+        //   cursor: default;
+        //   display: inline-block;
+        //   width: 100px;
+        //   line-height: 1;
+        //   padding-top: 10px;
+        //   padding-bottom: 10px;
+        //   background-color: #f5f5f5;
+        //   color: #ccc;
+        //   font-weight: bold;
+        //   font-size: fz(13);
+        //   text-align: center;
+
+        //   &.enable {
+        //     color: #474e5c;
+        //   }
+        // }
+      } //.paraboard__list__game__status
+
+
+
+      //.paraboard__list__game__btn
+      &__btn {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+
+        i {
+          color: #fff;
+          font-weight: bold;
+          font-size: fz(13);
+          @include hide-text;
+
+          &:after {
+            content: "";
+            position: relative;
+            top: -1px;
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            margin-left: 4px;
+            border-top: 2px solid #e83851;
+            border-right: 2px solid #e83851;
+            transform: rotate(45deg);
+            @include hide-text;
+          }
+        } // i
+
+      } //.paraboard__list__game__btn
+    } //.paraboard__list__game
+  } //.paraboard__list
+
+
+
+
+
+  //.paraboard__detail__logo_block
+  .paraboard__detail__logo_block {
+    display: table;
+    width: 100%;
+    height: (90/2)+px;
+    background-color: #2d3137;
+
+    //.paraboard__detail__logo_block__logo
+    &__logo {
+      display: table-cell;
+      vertical-align: middle;
+      padding-left: perCalc(36, 750);
+
+      img {
+        width: (200/2)+px;
+        vertical-align: middle;
+      }
+    }
+
+    //.paraboard__detail__logo_block__btn
+    &__btn {
+      display: table-cell;
+      padding-right: perCalc(36, 750);
+      text-align: right;
+      vertical-align: middle;
+
+      //.paraboard__detail__logo_block__btn__link
+      &__link {
+        @include link-decoration(#e83851, #e83851, none, none);
+        display: inline-block;
+        font-weight: bold;
+        font-size: fz(24/2);
+
+        &:after {
+          content: "";
+          position: relative;
+          top: -1px;
+          display: inline-block;
+          width: 5px;
+          height: 5px;
+          margin-left: 4px;
+          border-top: 2px solid #e83851;
+          border-right: 2px solid #e83851;
+          transform: rotate(45deg);
+          @include hide-text;
+        }
+      }
+    }
+  }
+
+
+
+
+
+  //.paraboard__detail__header
+  .paraboard__detail__header {
+    position: relative;
+    padding: (48/2)+px perCalc(15, 750) (32/2)+px;
+    background-color: #474e5c;
+    background-size: auto 100%;
+    text-align: center;
+
+    //.paraboard__detail__header__logo
+    &__logo {
+      position: relative;
+      line-height: 1;
+
+      img {
+        width: (162/2)+px;
+      }
+    }
+
+    //.paraboard__detail__header__heading
+    &__heading {
+      position: relative;
+      z-index: 3;
+      line-height: lh(42, 32);
+      margin-top: (28/2)+px;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(32/2);
+    }
+
+    //.paraboard__detail__header__category
+    &__category {
+      position: relative;
+      z-index: 4;
+      margin-top: (24/2)+px;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(24/2);
+
+      //.paraboard__detail__header__category__icon
+      &__icon {
+        display: inline-block;
+        margin-right: (8/2)+px;
+        vertical-align: middle;
+
+        img {
+          width: (60/2)+px;
+        }
+      }
+
+      // &:before {
+      //   content: "";
+      //   display: inline-block;
+      //   width: (60/2)+px;
+      //   height: (60/2)+px;
+      //   margin-right: (12/2)+px;
+      //   background-position: 0 0;
+      //   background-repeat: no-repeat;
+      //   background-size: (60/2)+px;
+      //   @include hide-text;
+      //   vertical-align: middle;
+      // }
+
+      // &.paraboard__detail__header__category--basketball:before {
+      //   background-image: url(/assets/sp/images/para-board/icon-basketball.png);
+      // }
+
+      // &.paraboard__detail__header__category--goalball:before {
+      //   background-image: url(/assets/sp/images/para-board/icon-goalball.png);
+      // }
+
+      // &.paraboard__detail__header__category--rugby:before {
+      //   background-image: url(/assets/sp/images/para-board/icon-rugby.png);
+      // }
+
+      // &.paraboard__detail__header__category--soccer:before {
+      //   background-image: url(/assets/sp/images/para-board/icon-soccer.png);
+      // }
+
+      // &.paraboard__detail__header__category--swimming:before {
+      //   background-image: url(/assets/sp/images/para-board/icon-swimming.png);
+      // }
+
+      // &.paraboard__detail__header__category--tennis:before {
+      //   background-image: url(/assets/sp/images/para-board/icon-tennis.png);
+      // }
+
+      // &.paraboard__detail__header__category--track:before {
+      //   background-image: url(/assets/sp/images/para-board/icon-track.png);
+      // }
+
+      // &.paraboard__detail__header__category--volleyball:before {
+      //   background-image: url(/assets/sp/images/para-board/icon-volleyball.png);
+      // }
+    } //.paraboard__detail__header__category
+
+  } //.paraboard__detail__header
+
+
+
+  //.paraboard__detail__btn__result
+  .paraboard__detail__btn__result {
+    display: none;
+    padding: (10/2)+px perCalc(15, 750) 0;
+    background-color: #eee;
+    text-align: center;
+
+    &.result_enable {
+      display: block;
+    }
+
+    //.paraboard__detail__btn__result__link
+    &__link {
+      @include link-decoration(#fff, #fff, none, none);
+      position: relative;
+      display: block;
+      line-height: (120/2)+px;
+      border-radius: 4px;
+      background-color: #e83851;
+      font-weight: bold;
+      font-size: fz(32/2);
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin-top: -4px;
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
+        transform: rotate(45deg);
+        @include hide-text;
+      }
+    } //.paraboard__detail__btn__result__link
+  } //.paraboard__detail__btn__result
+
+
+
+  //.paraboard__detail__overview
+  .paraboard__detail__overview {
+    padding-top: (50/2)+px;
+    background-color: #e83851;
+
+    //.paraboard__detail__overview__heading
+    &__heading {
+      line-height: 1;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(32/2);
+      text-align: center;
+    }
+
+    //.paraboard__detail__overview__table
+    &__table {
+      display: block;
+      width: 100%;
+      margin-top: (50/2)+px;
+    }
+
+    //.paraboard__detail__overview__th
+    &__th {
+      display: block;
+      padding: (36/2)+px perCalc(15, 750) 0;
+      border-top: 1px solid #cf3248;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(28/2);
+    }
+
+    //.paraboard__detail__overview__td
+    &__td {
+      display: block;
+      padding: 0 perCalc(15, 750) (36/2)+px;
+      color: #fff;
+      font-size: fz(28/2);
+    }
+
+    a {
+      @include link-decoration(#fff, #fff, underline, underline);
+    }
+  } //.paraboard__detail__overview
+
+
+
+  //.paraboard__detail__powerdby
+  .paraboard__detail__powerdby {
+    padding-top: (42/2)+px;
+    background-color: #eee;
+    color: #474e5c;
+    font-weight: bold;
+    font-size: fz(20/2);
+    text-align: center;
+
+    strong {
+      color: #e83851;
+      font-size: fs(26, 20);
+    }
+
+    a {
+      @include link-decoration(#e83851, #e83851, underline, underline);
+      font-size: fs(26, 20);
+    }
+  } //.paraboard__detail__powerdby
+
+
+
+
+
+  //.paraboard__gallery
+  .paraboard__gallery {
+    //.gallery--highlight
+    //.gallery--post
+    //.gallery--photo
+    [class*="gallery--"] {
+      &:before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: (10/2)+px;
+        background-color: #eee;
+        border-bottom: 1px solid #ddd;
+      }
+
+      @at-root {
+      .gallery__header {
+        display: table;
+        width: 100%;
+        height: (96/2)+px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .gallery__heading {
+        display: table-cell;
+        padding-left: perCalc(15, 750);
+        vertical-align: middle;
+        font-weight: bold;
+        font-size: fz(28/2);
+
+        &:before {
+          content: "";
+          position: relative;
+          top: -1px;
+          display: inline-block;
+          width: (46/2)+px;
+          height: (46/2)+px;
+          margin-right: 4px;
+          background-position: 0 center;
+          background-repeat: no-repeat;
+          background-size: (46/2)+px;
+          vertical-align: middle;
+          @include hide-text;
+        }
+      } //.gallery__heading
+
+      .gallery__link {
+        display: table-cell;
+        padding-right: perCalc(15, 750);
+        text-align: right;
+        vertical-align: middle;
+
+        a {
+          @include link-decoration(#333, #333, none, none);
+          display: inline-block;
+          font-weight: bold;
+          font-size: fz(24/2);
+
+          &:after {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            // margin-left: 2px;
+            border-top: 2px solid #333;
+            border-right: 2px solid #333;
+            transform: rotate(45deg);
+            @include hide-text;
+          }
+        }
+      } //.gallery__link
+
+      //.gallery__date
+      .gallery__date {
+        display: table-cell;
+        padding-right: perCalc(15, 750);
+        font-weight: bold;
+        font-size: fz(24/2);
+        text-align: right;
+        vertical-align: middle;
+      } //.gallery__date
+
+      //.gallery__header__logo
+      .gallery__header__logo {
+        display: table-cell;
+        padding-right: perCalc(15, 750);
+        text-align: right;
+        vertical-align: middle;
+
+        img {
+          width: (210/2)+px;
+        }
+      } //.gallery__header__logo
+      } //at-root
+    }
+    //.gallery--highlight
+    //.gallery--post
+    //.gallery--photo
+
+    //.gallery__header--top
+    .gallery__header--top {
+      border-top: 1px solid #ddd;
+    } //.gallery__header--top
+
+    &.pyeongchang2018-movie .gallery__header--top {
+      border-bottom: none;
+    }
+
+    &.pyeongchang2018-photo .gallery--photo {
+      border-top: 1px solid #ddd;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    //.gallery--highlight
+    .gallery--highlight,
+    &.parasports-movie .gallery__header--top {
+      .gallery__heading:before {
+        background-image: url(/assets/sp/images/para-board/icon-highlight_heading.png);
+      }
+    }
+
+    //.gallery--post
+    .gallery--post {
+      .gallery__heading:before {
+        background-image: url(/assets/sp/images/para-board/icon-post_heading.png);
+      }
+    }
+
+    //.gallery--photo
+    .gallery--photo {
+      .gallery__heading:before {
+        background-image: url(/assets/sp/images/para-board/icon-photo_heading.png);
+      }
+    }
+  } //.paraboard__gallery
+
+
+
+
+
+  //.gallery--highlight
+  //.gallery--photo
+  .gallery--highlight,
+  .gallery--photo {
+    //.gallery__list
+    .gallery__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-right: 2vw;
+      margin-left: 2vw;
+      padding-bottom: (20/2)+px;
+
+      //.gallery__list__item
+      &__item {
+        width: 46vw;
+        margin-top: (20/2)+px;
+
+        &:nth-child(3n) {
+          margin-right: 0;
+        }
+      }
+
+      //.gallery__list__figure
+      &__figure {
+        text-align: center;
+      }
+    } //.gallery__list
+  }
+  //.gallery--highlight
+  //.gallery--photo
+
+  //.gallery--highlight
+  .gallery--highlight {
+    //.gallery__list__figure
+    .gallery__list__figure {
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        background-color: #000;
+        @include opacity(0.2);
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: (60/2)+px;
+        height: (60/2)+px;
+        background: url(/assets/sp/images/para-board/icon-play.png) 0 0 no-repeat;
+        background-size: (60/2)+px;
+        @include hide-text;
+      }
+
+      img {
+        border-radius: 4px;
+      }
+    }  //.gallery__list__figure
+  } //.gallery--highlight
+
+  //.gallery--post
+  .gallery--post {
+    //.gallery__list
+    .gallery__list {
+      margin-right: 2vw;
+      margin-left: 2vw;
+
+      //.gallery__list__item
+      &__item {
+        margin-top: (20/2)+px;
+        padding-bottom: (20/2)+px;
+        border-bottom: 1px solid #eee;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      } //.gallery__list__item
+
+      //.gallery__list__link
+      &__link {
+        @include link-decoration(null, null, none, none);
+        display: table;
+        width: 100%;
+      } //.gallery__list__link
+
+      //.gallery__list__figure
+      //.gallery__list__data
+      .gallery__list__figure,
+      .gallery__list__data {
+        display: table-cell;
+        vertical-align: middle;
+      }
+      //.gallery__list__figure
+      //.gallery__list__data
+
+      //.gallery__list__figure
+      .gallery__list__figure {
+        width: 30vw;
+
+        img {
+          border-radius: 4px;
+        }
+      } //.gallery__list__figure
+
+      //.gallery__list__data
+      .gallery__list__data {
+        padding-left: 2.2vw;
+      } //.gallery__list__data
+
+      //.gallery__list__heading
+      .gallery__list__heading {
+        line-height: lh(46, 32);
+        color: #333;
+        font-weight: bold;
+        font-size: fz(32/2);
+      }
+
+      //.gallery__list__category
+      .gallery__list__category {
+        margin-top: 2px;
+        color: #888;
+        font-size: fz(20/2);
+      }
+    } //.gallery__list
+  } //.gallery--post
+
+  //.gallery--photo
+  .gallery--photo {
+    //.gallery__list
+    .gallery__list {
+      align-items: stretch;
+    } //.gallery__list
+
+    //.gallery__list__item
+    .gallery__list__item {
+      display: flex;
+      align-items: center;
+      padding: (8/2)+px;
+      background-color: #f5f5f5;
+    } //.gallery__list__item
+
+    .gallery__list__link {
+      position: relative;
+      display: block;
+      width: 100%;
+
+      &:before {
+        content:"";
+        display: block;
+        padding-top: 45vw;
+      }
+    }
+
+    //.gallery__list__figure
+    .gallery__list__figure {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    } //.gallery__list__figure
+
+    //.gallery__list__data
+    .gallery__list__data {
+      display: none;
+    } //.gallery__list__data
+  } //.gallery--photo
+
+} //.whole.parasports

@@ -166,3 +166,8 @@ _src/bower_exports/react-14.0.7
 # ==============================
 ut_devnew-201801152129.dump
 /ut.dump
+/package.json.original
+/tasks-sp/_sp-webpack.coffee
+/tasks/_vendor.coffee
+/tasks/_sprite.coffee
+/tasks-sp/_sp-webpack.coffee
