@@ -26,8 +26,8 @@ const React = self.React;
  */
 const ComponentSignupSNS = ({ wow }) => {
   // wow flag
-  const note = wow ? <p className="wowma-attention">【注意！】Wowma !クーポンはTwitterとFacebook でのご登録では受け取れません。<br />
-    下の入力欄にメールアドレスを入力し、ご登録をお願いいたします。</p> : '';
+  // `br` で改行しない
+  const note = wow ? <p className="wowma-attention">【注意！】Wowma !クーポンはTwitterとFacebook でのご登録では受け取れません。<br />下の入力欄にメールアドレスを入力し、ご登録をお願いいたします。</p> : '';
   // 移設 - from LegendStep1Node.js
   return (
     <div className="react-linkage-sns">
