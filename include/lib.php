@@ -164,9 +164,12 @@ SQL;
 
 }
 elseif($CURRENTDIRECTORY=="tabs"){
+
 	$sql=sprintf("select count(*) as n from %s",$TABLE);
 }
-
+elseif($CURRENTDIRECTORY=="bottom_tabs_category"){
+	$sql=sprintf("select count(DISTINCT bottom_tab_id) as n from bottom_tab_nodes where parent_tab_id is null and bottom_tab_id in (select id from bottom_tab_categories)");
+}
 
 $o->query($sql);
 $f=$o->fetch_array();
@@ -227,8 +230,11 @@ WHERE
     rid = 95
 ORDER BY n
 SQL;
-
-}else{
+}
+elseif ($TABLE=="bottom_tab_categories") {
+$sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "id", dblm($no, $offset));
+}
+else{
 	$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
 }
 

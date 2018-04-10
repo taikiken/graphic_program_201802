@@ -38,6 +38,8 @@ if($CURRENTDIRECTORY=="repo_n"){
 	$TITLEFIELDNAME="title";
 }elseif($CURRENTDIRECTORY=="notice"){
 	$TITLEFIELDNAME="body";
+}elseif($CURRENTDIRECTORY=="bottom_tabs_category"){
+	$TITLEFIELDNAME="body";
 }
 
 ?>
