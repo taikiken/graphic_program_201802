@@ -101,7 +101,13 @@ export default class SPComponentArticleAd extends React.Component {
     // 2017-12-18 - this.ok: 出力は1回だけ 条件とる - sequence で広告が消える問題対応
     if (this.newsAd) {
       // console.log('SPComponentArticleAd.componentDidMount', this.props.adSp);
-      this.newsAd.appendChild(Ad.makeStream(this.props.uniqueId, this.props.adSp));
+      // this.newsAd.appendChild(Ad.makeStream(this.props.uniqueId, this.props.adSp));
+      const {
+        uniqueId,
+        adSp,
+        index,
+      } = this.props;
+      this.newsAd.appendChild(Ad.makeStreamEach(uniqueId, adSp, index));
     }
   }
   // /**
@@ -144,6 +150,16 @@ export default class SPComponentArticleAd extends React.Component {
   //   // 条件外
   //   return null;
   // }
+  /**
+   * 5 件毎に広告タグを挿入します
+   * - 記事が 4 件未満の時は最後に強制的に出力させます
+   * - ストリーム広告 ID 無い時は出力しません
+   * - 六大学 / 広告表示 しません
+   * - #ref - UNDO_SPBL-509 【課題管理】スマホ版の記事一覧の無限スクロール広告表示対応
+   * @returns {?XML} 広告 tag を返します
+   * @see https://aws-plus.backlog.jp/view/UNDO_SPBL-509
+   * @since 2018-04-10
+   */
   render() {
     const {
       adSp,

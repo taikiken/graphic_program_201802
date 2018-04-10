@@ -156,10 +156,20 @@ export class Ad {
     div.appendChild(script);
     return div;
   }
-  static makeStreamEach(id, ad) {
+  /**
+   * ストリーム広告をscript tag を生成し返します - 1p. に複数表示するために `targetID` をユニークにします
+   * - #ref - UNDO_SPBL-509 【課題管理】スマホ版の記事一覧の無限スクロール広告表示対応
+   * @param {string} id target element id
+   * @param {string} ad ストリーム広告 ID
+   * @param {number} index 添字 - ユニーク ID にするために使用します
+   * @returns {HTMLDivElement} div でラップし script tag を返します
+   * @see https://aws-plus.backlog.jp/view/UNDO_SPBL-509
+   * @since 2018-04-10
+   */
+  static makeStreamEach(id, ad, index) {
     const div = document.createElement('div');
     const script = document.createElement('script');
-    script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=${ad}&targetID=${id}_${Date.now()}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
+    script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=${ad}&targetID=${id}_${index}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
     // @since 2016-10-03 changed
     // @see https://github.com/undotsushin/undotsushin/issues/1125#issuecomment-251032265
     // script.src = 'http://i.socdm.com/sdk/js/adg-script-loader.js?id=42708&targetID=adg_42708&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
