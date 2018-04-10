@@ -131,8 +131,8 @@ export class Ad {
    * @returns {Element} script tag を返します
    */
   static make(path, id) {
-    let div = document.createElement('div');
-    let script = document.createElement('script');
+    const div = document.createElement('div');
+    const script = document.createElement('script');
     script.src = path.split(Ad.ID).join(id);
     div.appendChild(script);
     // return script;
@@ -147,14 +147,23 @@ export class Ad {
    * @return {Element} div でラップし script tag を返します
    */
   static makeStream(id, ad) {
-    let div = document.createElement('div');
-    let script = document.createElement('script');
+    const div = document.createElement('div');
+    const script = document.createElement('script');
     script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=${ad}&targetID=${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
     // @since 2016-10-03 changed
     // @see https://github.com/undotsushin/undotsushin/issues/1125#issuecomment-251032265
     // script.src = 'http://i.socdm.com/sdk/js/adg-script-loader.js?id=42708&targetID=adg_42708&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
     div.appendChild(script);
-    // return script;
+    return div;
+  }
+  static makeStreamEach(id, ad) {
+    const div = document.createElement('div');
+    const script = document.createElement('script');
+    script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=${ad}&targetID=${id}_${Date.now()}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
+    // @since 2016-10-03 changed
+    // @see https://github.com/undotsushin/undotsushin/issues/1125#issuecomment-251032265
+    // script.src = 'http://i.socdm.com/sdk/js/adg-script-loader.js?id=42708&targetID=adg_42708&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
+    div.appendChild(script);
     return div;
   }
 }
