@@ -154,7 +154,7 @@ export default class SPComponentArticleAd extends React.Component {
    * 5 件毎に広告タグを挿入します
    * - 記事が 4 件未満の時は最後に強制的に出力させます
    * - ストリーム広告 ID 無い時は出力しません
-   * - 六大学 / 広告表示 しません
+   * - 六大学 / 広告表示 しません - 注意！
    * - #ref - UNDO_SPBL-509 【課題管理】スマホ版の記事一覧の無限スクロール広告表示対応
    * @returns {?XML} 広告 tag を返します
    * @see https://aws-plus.backlog.jp/view/UNDO_SPBL-509
