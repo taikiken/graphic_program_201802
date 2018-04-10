@@ -74,6 +74,7 @@ export default class SPComponentArticleAd extends React.Component {
      * @type {?Element}
      */
     this.newsAd = null;
+    console.log('SPComponentArticleAd', props);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -143,4 +144,21 @@ export default class SPComponentArticleAd extends React.Component {
     // 条件外
     return null;
   }
+  // render() {
+  //   // ストリーム広告
+  //   // ID 設定がなかったら出力しない
+  //   if (!this.props.adSp) {
+  //     return null;
+  //   }
+  //   // 六大学 / 広告表示 調整（Web） #1546
+  //   // > アドネットワーク関連の広告（ネイティブアド？）を消したい
+  //   // @see https://github.com/undotsushin/undotsushin/issues/1546
+  //   // category.slug 'big6tv' search
+  //   // @since 2017-03-15
+  //   const big6tv = this.props.categories.bySlug('big6tv');
+  //   // console.log('SPComponentArticleAd.render', big6tv, this.props);
+  //   if (big6tv) {
+  //     return null;
+  //   }
+  // }
 }
