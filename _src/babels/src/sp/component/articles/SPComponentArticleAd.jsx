@@ -74,7 +74,7 @@ export default class SPComponentArticleAd extends React.Component {
      * @type {?Element}
      */
     this.newsAd = null;
-    console.log('SPComponentArticleAd', props);
+    // console.log('SPComponentArticleAd', props);
   }
   // ---------------------------------------------------
   //  METHOD
