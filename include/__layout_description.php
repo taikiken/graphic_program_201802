@@ -40,8 +40,9 @@ if($CURRENTDIRECTORY=="repo_n"){
 	$TITLEFIELDNAME="body";
 }elseif($CURRENTDIRECTORY=="bottom_tabs_category"){
 	$TITLEFIELDNAME="body";
+}elseif($CURRENTDIRECTORY=="bottom_tabs_nodes"){
+	$TITLEFIELDNAME="body";
 }
-
 ?>
 <?php if($q->get_dir()==3){ ?>
 <p><?=$PARENT?>に<?=$N?>件の<?=$THIS?>が登録されております。</p>

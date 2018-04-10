@@ -170,6 +170,10 @@ elseif($CURRENTDIRECTORY=="tabs"){
 elseif($CURRENTDIRECTORY=="bottom_tabs_category"){
 	$sql=sprintf("select count(DISTINCT bottom_tab_id) as n from bottom_tab_nodes where parent_tab_id is null and bottom_tab_id in (select id from bottom_tab_categories)");
 }
+elseif($CURRENTDIRECTORY=="bottom_tabs_nodes"){
+    $parent_id = $_GET['parent_tab_id'];
+	$sql=sprintf("SELECT COUNT(*) AS n FROM bottom_tab_nodes WHERE parent_tab_id = %s AND bottom_tab_id IN (SELECT id FROM bottom_tab_categories)",$parent_id);
+}
 
 $o->query($sql);
 $f=$o->fetch_array();
@@ -231,7 +235,10 @@ WHERE
 ORDER BY n
 SQL;
 }
-elseif ($TABLE=="bottom_tab_categories") {
+elseif ($CURRENTDIRECTORY=="bottom_tabs_category") {
+$sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "id", dblm($no, $offset));
+}
+elseif ($CURRENTDIRECTORY=="bottom_tabs_nodes") {
 $sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "id", dblm($no, $offset));
 }
 else{
