@@ -338,6 +338,7 @@ export default class ComponentVideojsImaSingles extends React.Component {
             width={`${width}px`}
             height={`${height}px`}
             controls="controls"
+            playsInline="true"
           >
               <source
                 src={url}
