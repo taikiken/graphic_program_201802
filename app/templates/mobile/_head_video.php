@@ -17,21 +17,17 @@ if ( $page['template'] == 'p'
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
   ?>
+  <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
+  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
+  <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
 
-  <link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video-js.css" rel="stylesheet">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-resolution-switcher/0.4.2/videojs-resolution-switcher.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.css" />
-  <link href="//iplay-demo.s3.amazonaws.com/samples/big6p/videojs.custom.css" rel="stylesheet">
-  <link rel="stylesheet" href="//iplay-demo.s3.amazonaws.com/samples/big6p/videojs.ima.css" />
-
-  <script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.5.0/videojs-contrib-hls.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-resolution-switcher/0.4.2/videojs-resolution-switcher.js"></script>
-
+  <script src="//vjs.zencdn.net/5.3/video.min.js"></script>
   <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.js"></script>
-  <script src="//iplay-demo.s3.amazonaws.com/samples/big6p/videojs.ima.js"></script>
 
+  <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
 
 <?php elseif($page['category']['slug'] == 'crazy'): ?>
 <link rel="stylesheet" href="/assets/css/crazy.css">
