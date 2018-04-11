@@ -214,7 +214,7 @@ export default class ComponentVideojsImaSingles extends React.Component {
       // 記事詳細マルチプレイヤー・動画再生時に広告リクエスト
       player.ima.initializeAdDisplayContainer();
       player.ima.requestAds();
-      adContainer.querySelector('div').style.display = "block";
+      adContainer.querySelector('div').style.display = 'block';
       // ---
       player.play();
     });
@@ -338,7 +338,7 @@ export default class ComponentVideojsImaSingles extends React.Component {
             width={`${width}px`}
             height={`${height}px`}
             controls="controls"
-            playsInline="true"
+            playsInline="playsInline"
           >
               <source
                 src={url}
