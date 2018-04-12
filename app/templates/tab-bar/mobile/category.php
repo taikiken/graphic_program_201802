@@ -1,6 +1,6 @@
 <?php
 /**
- * 速報・データ ページ - mobile
+ * 競技・種目 ページ - mobile
  * @since 2018-04-11
  */
 ?>
@@ -140,14 +140,7 @@
 // 速報・データ
 // response['category']['parent']
 // -----------------------------------------------------------------
-function tab_name_by_slug($name) {
-  switch ($name) {
-    case 'ピックアップ': return 'pickup';
-    case '競技・種目':
-    default:
-      return 'category';
-  }
-}
+include_once __DIR__."/../module/functions.php";
 
 $tab_response = $page['tab_response'];
 // 出力条件 [A]
@@ -162,7 +155,7 @@ if (isset($tab_response) && isset($tab_response['category']) && is_array($tab_re
       $categories = $tab_response['category']['parent'];
       foreach ($categories as $category) :
         $dispName = $category['dispName'];
-        $dispSlug = tab_name_by_slug($dispName);
+        $dispSlug = tab_category_slug_by_label($dispName);
         $children = $category['child'];
         // データチェック [B]
         if (

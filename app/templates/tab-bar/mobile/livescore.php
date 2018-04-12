@@ -140,17 +140,7 @@
 // 速報・データ
 // response['livescore']['parent']
 // -----------------------------------------------------------------
-function tab_name_by_slug($name) {
-  switch ($name) {
-    case '野球': return 'baseball';
-    case 'サッカー': return 'soccer';
-    case 'バスケットボール': return 'basketball';
-    case 'モータースポーツ': return 'motorsports';
-    case 'その他':
-    default:
-      return 'other';
-  }
-}
+include_once __DIR__."/../module/functions.php";
 
 $tab_response = $page['tab_response'];
 
@@ -166,7 +156,7 @@ if (isset($tab_response) && isset($tab_response['livescore']) && is_array($tab_r
       $livescore_list = $tab_response['livescore']['parent'];
       foreach ($livescore_list as $livescore) :
         $dispName = $livescore['dispName'];
-        $dispSlug = tab_name_by_slug($dispName);
+        $dispSlug = tab_live_slug_by_label($dispName);
         $children = $livescore['child'];
         // データチェック [B]
         if (
