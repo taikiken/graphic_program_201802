@@ -57,5 +57,20 @@ endif;
       endforeach;
     endif;
     ?>
+    <?php
+    // @since 2018-02-13 - /para-board/ イレギュラー breadcrumb を使用するので追加する
+    // https://aws-plus.backlog.jp/view/UNDO_SPBL-307#comment-1189460146
+    if (isset($page['para_breadcrumbs'])) :
+      $crumb_key = $key + 2;
+      foreach ($page['para_breadcrumbs'] as $para_breadcrumb) :
+        $crumb_key += 1;
+    ?>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo $para_breadcrumb['path']; ?>"><span itemprop="name"><?php echo $para_breadcrumb['label']; ?></span>
+        <meta itemprop="position" content="<?php echo $crumb_key; ?>" /></a></li>
+    <?php
+      endforeach;
+    endif;
+    // para_breadcrumbs
+    ?>
   </ol>
 </nav>

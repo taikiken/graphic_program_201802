@@ -98,6 +98,12 @@
       ?>
 
       <div id="js-headline"></div>
+      <?php
+      // para board check - `parasports`
+      if ( $page['category']['slug'] === 'parasports' ) :
+        include_once __DIR__.'/_category_para_board_calendar.php';
+      endif;
+      ?>
       <div id="category-container"></div>
       <div id="board-container-more"></div>
       <?php

@@ -73,6 +73,14 @@ if ($page['category']['slug'] == 'all') {
       ?>
       <div id="js-headline"></div>
 
+      <?php
+      // para board check - `parasports`
+// なんか非表示する - 2018-04-06
+//      if ( $page['category']['slug'] === 'parasports' ) :
+//        include_once __DIR__.'/_category_para_board_calendar.php';
+//      endif;
+      ?>
+
 
       <?php if ( $page['category']['slug'] === 'big6tv' ) : ?>
         <?php include_once __DIR__.'/../../../public/big6tv/category/index.html'; ?>

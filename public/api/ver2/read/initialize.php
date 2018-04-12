@@ -26,11 +26,9 @@ if(strlen($uid)>0){
 		$n++;
 	}
 	$f["interest"]=$category;
-	$s["user"]=set_userinfo($f,1);
-
-}else{
-	$s["user"]=(object)array();
 }
+$s["user"]=(object)array();
+
 
 $sql="select tabs.category_id as id , tabs.title as name , t1.name_e , t1.img , tabs.n from tabs inner join u_categories t1 on t1.id=tabs.category_id where tabs.flag=1 and t1.flag=1 order by tabs.n asc;";
 
