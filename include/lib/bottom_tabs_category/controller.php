@@ -115,7 +115,7 @@ if($q->get_dir()===0){
     }
 }elseif($q->get_dir()===2){
     if($q->get_file()===0){
-        $sql=sprintf("select * from tabs %s where id=%s",$TABLE,$g->f("id"));
+        $sql=sprintf("select * from %s where id=%s",$TABLE,$g->f("id"));
         $o->query($sql);
         $p=$o->fetch_array();
 
@@ -128,14 +128,16 @@ if($q->get_dir()===0){
 
         include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/ex.php";
 
-        $sql=sprintf("select n from %s where id=%s",$TABLE,$g->f("id"));
+        $sql=sprintf("select sort_no from %s where id=%s",$TABLE,$g->f("id"));
         $o->query($sql);
         $n=$o->fetch_array();
 
-        $sql=sprintf("update %s set n=n-1 where n>=%s",$TABLE,$n["n"]);
+        $sql=sprintf("update %s set sort_no=sort_no-1 where sort_no>=%s",$TABLE,$n["sort_no"]);
         $o->query($sql);
 
         $o=new dbutl($TABLE);
+        $e=$o->remove($g->f("id"));
+        $o=new dbutl($TABLE2);
         $e=$o->remove($g->f("id"));
     }
 }elseif($q->get_dir()===3){
