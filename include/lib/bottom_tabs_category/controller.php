@@ -1,6 +1,8 @@
 <?php
 
 $TABLE = "bottom_tab_categories";
+$TABLE2 = "bottom_tab_nodes";
+$nodes_column =['bottom_tab_id','parent_tab_id','type','created_at'];
 $WHERE = " WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS NULL )";
 
 if($q->get_dir()===0){
@@ -26,20 +28,52 @@ if($q->get_dir()===0){
 
         //一覧の最初に追加
         } elseif ($_POST["POSITION"]!=1) {
-            $sql="update ".$TABLE." set n=(n+1)";
-            $o->query($sql);
-            $sv[$sn[]="n"]=1;
+            $sv[$sn[]="sort_no"] = 1;
 
         } else {
-            $sv[$sn[]="n"]=sprintf("(select max(n)+1 as n from %s)",$TABLE);
+            $sv[$sn[]="sort_no"]=sprintf("(select max(sort_no)+1 as n from %s)",$TABLE);
         }
 
-        $sv[$sn[]="flag"]=1;
-        $sv[$sn[]="create_at"]="now()";
-        $sv[$sn[]="update_at"]="now()";
-
-        $o=new dbutl($TABLE,$sn,$sv);
+        $sv[$sn[]="created_at"]="now()";
+        $sv[$sn[]="updated_at"]="now()";
+        foreach ($sv as $bottm_tab =>$value){
+            if ($bottm_tab === "u_categories"){
+            }
+            elseif ($bottm_tab === "n") {
+            $bottm_tabs['sort_no'] = $value;
+        }
+            else{
+                $bottm_tabs[$bottm_tab]= $value;
+            }
+        }
+        foreach ($sn as $bottm_tab_category=>$value){
+            if ($value <> "u_categories"){
+                $bottm_tab_categories[$bottm_tab_category] = $value;
+            }
+        }
+        $o=new dbutl($TABLE,$bottm_tab_categories,$bottm_tabs);
         $e=$o->insert();
+        $sql ="SELECT MAX(id) FROM bottom_tab_categories ";
+        $o->query($sql);
+        $p=$o->fetch_array();
+        foreach ($nodes_column as $nodes_value => $value) {
+            if ($value === 'bottom_tab_id') {
+                $nodes_values[$value] = $p['max'];
+            } elseif ($value === 'parent_tab_id') {
+                if ($sv['u_categories'] === null) {
+                    $nodes_values[$value] = 'null';
+                }
+                else {
+                    $nodes_values[$value] = $sv['u_categories'];
+                }
+            } elseif ($value === 'type') {
+                $nodes_values[$value] = 1;
+            } else {
+                $nodes_values[$value] = "now()";
+            }
+        }
+        $o_new = new dbutl($TABLE2,$nodes_column,$nodes_values);
+        $e2=$o_new->insert();
     }
 }elseif($q->get_dir()===1){
     if($q->get_file()===0){
