@@ -117,6 +117,7 @@ if (
 <div id="deactivate-modal-container"></div>
 <div id="flush-modal-container"></div>
 
+<?php include __DIR__.'/_sticky_tab_menu.php'; ?>
 <?php include __DIR__.'/_footer-bottom.php'; ?>
 
 </body>
