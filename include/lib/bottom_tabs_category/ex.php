@@ -19,6 +19,7 @@ if($q->get_dir()!=2){
 
 
 }
+$a[]=array("parent","62","rb",6,"","","","","","","","category_id");
 
 $a[] = array("textfield", "名称", "name", "120");
 
@@ -33,7 +34,6 @@ $a[] = array("textfield", "アイコン(iOS)", "icon_ios", "120");
 $a[] = array("textfield", "アイコン(Android)", "icon_android", "120");
 
 include $INCLUDEPATH . "print_write.php";
-include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/categories.php";
 include $INCLUDEPATH."_pageaddition.php";
 
 ?>

@@ -19,10 +19,12 @@ class m{
 	function mt(){
 		$III=0;
 
-		if($this->id!=20){
-			$sql="select id,name from pm_ where flag=1 and cid=".$this->id." order by n";
-		}else{
+		if($this->id==20){
 			$sql="select id,name from u_categories where name_e not in('all','top') order by n";
+		}elseif ($this->id==62) {
+			$sql ="SELECT id, name FROM bottom_tab_categories WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS NULL ) ORDER BY id";
+		}else{
+			$sql="select id,name from pm_ where flag=1 and cid=".$this->id." order by n";
 		}
 		$this->o->query($sql);
 		while($f=$this->o->fetch_array($III)){
@@ -35,10 +37,13 @@ class m{
 		if($e==""){
 			$sql="select name from pm where id=".$this->id;
 		}else{
-			if($this->id!=20){
-				$sql="select name from pm_ where id=".$e;
-			}else{
+			if($this->id==20){
 				$sql="select name from u_categories where id=".$e;
+			}elseif ($this->id==62) {
+				$sql="select name from bottom_tab_categories where id=".$e;
+			}
+			else{
+				$sql="select name from pm_ where id=".$e;
 			}
 		}
 		$this->o->query($sql);
@@ -47,10 +52,13 @@ class m{
 	}
 	function ms($e){
 		if($e){
-			if($this->id!=20){
-				$sql="select name from pm_ where id=".$e;
-			}else{
+			if($this->id==20){
 				$sql="select name from u_categories where id=".$e;
+			}elseif ($this->id==62) {
+				$sql="select name from bottom_tab_categories where id=".$e;
+			}
+			else{
+				$sql="select name from pm_ where id=".$e;
 			}
 			$this->o->query($sql);
 			$f=$this->o->fetch_array();
@@ -74,10 +82,13 @@ class m{
 				$e[$I]="id=".$e[$I];
 			}
 			$e=implode(" or ",$e);
-			if($this->id!=20){
-				$sql="select name from pm_ where ".$e." order by n";
-			}else{
+			if($this->id==20){
 				$sql="select name from u_categories where " . $e . " order by n";
+			}elseif ($this->id==62) {
+				$sql="select name from bottom_tab_categories where " . $e . " order by sort_no";
+			}
+			else{
+				$sql="select name from pm_ where ".$e." order by n";
 			}
 			$this->o->query($sql);
 			$IIII=0;

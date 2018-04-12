@@ -39,7 +39,7 @@ if($CURRENTDIRECTORY=="repo_n"){
 }elseif($CURRENTDIRECTORY=="notice"){
 	$TITLEFIELDNAME="body";
 }elseif($CURRENTDIRECTORY=="bottom_tabs_category"){
-	$TITLEFIELDNAME="body";
+	$TITLEFIELDNAME="name";
 }elseif($CURRENTDIRECTORY=="bottom_tabs_nodes"){
 	$TITLEFIELDNAME="body";
 }

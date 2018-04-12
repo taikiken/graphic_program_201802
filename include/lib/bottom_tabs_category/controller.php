@@ -37,7 +37,7 @@ if($q->get_dir()===0){
         $sv[$sn[]="created_at"]="now()";
         $sv[$sn[]="updated_at"]="now()";
         foreach ($sv as $bottm_tab =>$value){
-            if ($bottm_tab === "u_categories"){
+            if ($bottm_tab === "category_id"){
             }
             elseif ($bottm_tab === "n") {
             $bottm_tabs['sort_no'] = $value;
@@ -47,7 +47,7 @@ if($q->get_dir()===0){
             }
         }
         foreach ($sn as $bottm_tab_category=>$value){
-            if ($value <> "u_categories"){
+            if ($value <> "category_id"){
                 $bottm_tab_categories[$bottm_tab_category] = $value;
             }
         }
@@ -60,11 +60,11 @@ if($q->get_dir()===0){
             if ($value === 'bottom_tab_id') {
                 $nodes_values[$value] = $p['max'];
             } elseif ($value === 'parent_tab_id') {
-                if ($sv['u_categories'] === null) {
+                if ($sv['category_id'] === null) {
                     $nodes_values[$value] = 'null';
                 }
                 else {
-                    $nodes_values[$value] = $sv['u_categories'];
+                    $nodes_values[$value] = $sv['category_id'];
                 }
             } elseif ($value === 'type') {
                 $nodes_values[$value] = 1;
@@ -78,7 +78,7 @@ if($q->get_dir()===0){
 }elseif($q->get_dir()===1){
     if($q->get_file()===0){
 
-        $sql=sprintf("select * from tabs %s where id=%s",$TABLE,$g->f("id"));
+        $sql=sprintf("select * from %s where id=%s",$TABLE,$g->f("id"));
         $o->query($sql);
         $p=$o->fetch_array();
 
