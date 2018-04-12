@@ -180,7 +180,8 @@ if (isset($tab_response) && isset($tab_response['category']) && is_array($tab_re
         ?>
           <li class="menu-item">
             <a href="<?php echo $child['link']; ?>" class="menu-item">
-              <img src="<?php echo $child['icon']; ?>" alt=""><?php echo $child['dispName']; ?>
+              <span class="menu-item-icon"><img src="<?php echo $child['icon']; ?>" alt=""></span>
+              <span class="menu-item-label"><?php echo $child['dispName']; ?></span>
             </a>
           </li>
         <?php

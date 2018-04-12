@@ -153,6 +153,7 @@ function tab_name_by_slug($name) {
 }
 
 $tab_response = $page['tab_response'];
+
 // 出力条件 [A]
 if (isset($tab_response) && isset($tab_response['livescore']) && is_array($tab_response['livescore']['parent']) && count($tab_response['livescore']['parent'])) :
 ?>
@@ -183,7 +184,8 @@ if (isset($tab_response) && isset($tab_response['livescore']) && is_array($tab_r
         ?>
           <li class="menu-item">
             <a href="<?php echo $child['link']; ?>" class="menu-item">
-              <img src="<?php echo $child['icon']; ?>" alt=""><?php echo $child['dispName']; ?>
+              <span class="menu-item-icon"><img src="<?php echo $child['icon']; ?>" alt=""></span>
+              <span class="menu-item-label"><?php echo $child['dispName']; ?></span>
             </a>
           </li>
         <?php
