@@ -92,9 +92,25 @@ if($q->get_dir()===0){
 
         data_sql();
 
-        $sv[$sn[]="update_at"]="now()";
+        $sv[$sn[]="updated_at"]="now()";
+        foreach ($sv as $bottm_tab => $value) {
+            if ($bottm_tab === "category_id") {
 
-        $o=new dbutl($TABLE,$sn,$sv);
+            } elseif ($bottm_tab === "n") {
+                $bottm_tabs['sort_no'] = $value;
+            } else {
+                $bottm_tabs[$bottm_tab] = $value;
+            }
+        }
+        foreach ($sn as $bottm_tab_category => $value) {
+            if($value == "updated_at") {
+                $bottm_tab_categories[$bottm_tab_category -1] = $value;
+            }
+            elseif ($value <> "category_id") {
+                $bottm_tab_categories[$bottm_tab_category] = $value;
+            }
+        }
+        $o = new dbutl($TABLE, $bottm_tab_categories, $bottm_tabs);
         $e=$o->update($g->f("id"));
     }
 }elseif($q->get_dir()===2){
