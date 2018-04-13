@@ -4,12 +4,12 @@
   // margin-top: 30px;
   // background-color: #f5f5f5;
 
-  .foot-sec-inner {
+  .#{$prefix}foot-sec-inner {
     border-top: 1px solid $border-primary-color;
     // background: #061533 url(/assets/images/common/footer-bg.png) no-repeat center bottom;
   }
 
-  .foot-breadCrumb {
+  .#{$prefix}foot-breadCrumb {
     // background-color: #030b1a;
     // border-bottom: 1px solid #333;
 
@@ -74,63 +74,57 @@
     }
   }
 
-  .foot-pr {
+  .#{$prefix}foot-pr {
     border-bottom: 1px solid $border-primary-color;
-
-    //.foot-pr-inner
-    &-inner {
-      @include clearfix;
-      width: $global-inner-width;
-      margin: 0 auto;
-      padding-bottom: 24px;
-    }
 
     figure {
       float: left;
     }
 
-    .text-block {
+    .#{$prefix}text-block {
       @include clearfix;
       float: left;
       width: 270px;
       margin-left: 24px;
     }
+  }
 
-    //.foot-pr-logo
-    &-logo {}
+  //.foot-pr-inner
+  .#{$prefix}foot-pr-inner {
+    @include clearfix;
+    width: $global-inner-width;
+    margin: 0 auto;
+    padding-bottom: 24px;
+  }
 
-    //.foot-pr-btn
-    &-btn {
-      @include clearfix;
-      // float: left;
-      margin-top: 8px;
+  .#{$prefix}foot-pr-btn {
+    @include clearfix;
+    // float: left;
+    margin-top: 8px;
 
-      li {
-        float: left;
-
-        + li {
-          margin-left: 12px;
-        }
+    li {
+      float: left;
+      + li {
+        margin-left: 12px;
       }
-
-      a:hover {
-        @include hover-opacity;
-      }
     }
 
-    //.foot-pr-text
-    &-text {
-      line-height: lh(20,14);
-      margin-top: 16px;
+    a:hover {
+      @include hover-opacity;
     }
+  }
 
-    .fb-page-plugin {
-      float: right;
-      width: 400px;
-    }
-  } // foot-pr
+  .#{$prefix}foot-pr-text {
+    line-height: lh(20,14);
+    margin-top: 16px;
+  }
 
-  .pagetop {
+  .#{$prefix}fb-page-plugin {
+    float: right;
+    width: 400px;
+  }
+
+  .#{$prefix}pagetop {
     position: absolute;
     right: 30px;
     top: -70px;
@@ -164,13 +158,13 @@
     }
   } // pagetop
 
-  .fnav-block {
+  .#{$prefix}fnav-block {
     @include clearfix;
     width: $global-inner-width;
     margin: 0 auto;
   }
 
-  .fnav {
+  .#{$prefix}fnav {
     margin-top: 40px;
 
     ul {
@@ -192,7 +186,7 @@
     }
   } // fnav
 
-  .sns-block {
+  .#{$prefix}sns-block {
     margin-top: 20px;
 
     ul {
@@ -218,15 +212,15 @@
         }
       }
 
-      .sns-tw a {
+      .#{$prefix}sns-tw a {
         @include sprite( $footer-icon-sns-tw );
       }
 
-      .sns-fb a {
+      .#{$prefix}sns-fb a {
         @include sprite( $footer-icon-sns-fb );
       }
 
-      .sns-yt a {
+      .#{$prefix}sns-yt a {
         @include sprite( $footer-icon-sns-yt );
       }
 
