@@ -42,6 +42,8 @@ if($CURRENTDIRECTORY=="repo_n"){
 	$TITLEFIELDNAME="name";
 }elseif($CURRENTDIRECTORY=="bottom_tabs_nodes"){
 	$TITLEFIELDNAME="body";
+}elseif($CURRENTDIRECTORY=="bottom_tabs_livescore"){
+	$TITLEFIELDNAME="name";
 }
 ?>
 <?php if($q->get_dir()==3){ ?>
