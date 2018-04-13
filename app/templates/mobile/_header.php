@@ -53,7 +53,7 @@ endif;
   <?php endif;?>
 
   <?php if ( $page['template'] === 'inc' ) : ?>
-    <link rel="stylesheet" href="/inc/assets/<?php echo $page['directory']; ?>/mobile/inc.css?v=<?php echo $page['version']; ?>">
+    <link rel="stylesheet" href="/inc/assets/<?php echo $page['directory']; ?>/mobile/inc.css/?v=<?php echo $page['version']; ?>">
   <?php else : ?>
     <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
   <?php endif; ?>
