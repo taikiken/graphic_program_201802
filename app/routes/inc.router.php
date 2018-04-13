@@ -174,7 +174,8 @@ $app->group('/inc', function () use ($app) {
       if ( $file ) :
         $replace_pairs = array(
           'url(/' => 'url(https://sportsbull.jp/',
-          '}#'    => '}#SBPL_',
+          '#head' => '#SPBL_head',
+          '#side' => '#SPBL_side',
         );
         $file = strtr($file, $replace_pairs);
 
