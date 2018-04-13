@@ -149,6 +149,7 @@ $app->group('/inc', function () use ($app) {
       'template'    => 'inc',
       'category'    => $category,
       'conditional' => $conditional,
+      'directory'   => $args['cateogry'],
       'query'       => $query,
       'path'        => $args,
       'html_prefix' => 'SPBL_',
@@ -175,8 +176,10 @@ $app->group('/inc', function () use ($app) {
           'url(/'     => 'url(https://sportsbull.jp/',
         );
         $file = strtr($file, $replace_pairs);
-        print_r($file);
-        return $file;
+
+        return $response->withStatus(200)
+                ->withHeader('Content-Type', 'text/css')
+                ->write($file);
       endif;
 
     endif;
