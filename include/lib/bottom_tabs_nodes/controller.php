@@ -110,6 +110,21 @@ if($q->get_dir()===0){
 
         $o = new dbutl($TABLE, $bottm_tab_categories, $bottm_tabs);
         $e=$o->update($g->f("id"));
+        foreach ($nodes_column as $nodes_column_update =>$value){
+            if ($value === "parent_tab_id"){
+                $nodes_column_updates[$nodes_column_update-1] = $value;
+            }
+        }
+        foreach ($sv as $nodes_value =>$value){
+            if ($nodes_value == "category_id"){
+                $nodes_values['parent_tab_id'] = $value;
+            }
+        }
+        $sql = "select id from ".$TABLE2." where type = 1 AND bottom_tab_id=".$g->f("id").";";
+        $o->query($sql);
+        $p=$o->fetch_array();
+        $o = new dbutl($TABLE2, $nodes_column_updates, $nodes_values);
+        $e=$o->update($p['id']);
     }
 }elseif($q->get_dir()===2){
     if($q->get_file()===0){
