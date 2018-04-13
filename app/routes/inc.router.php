@@ -157,6 +157,33 @@ $app->group('/inc', function () use ($app) {
     return $this->renderer->render($response, 'inc.php', $args);
   });
 
+
+  // file
+  // ==============================
+  $this->get('/assets/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}/{file:inc.css}[/]',  function ($request, $response, $args) use ($app) {
+
+    $path = '';
+    if ( $args['device'] === 'mobile' ) :
+      $path = 'sp/';
+    endif;
+
+    if ( $args['file'] === 'inc.css' ) :
+      $file = @file_get_contents($app->model->property('site_url').'assets/'.$path.'css/inc.css');
+
+      if ( $file ) :
+        $replace_pairs = array(
+          'url(/'     => 'url(https://sportsbull.jp/',
+        );
+        $file = strtr($file, $replace_pairs);
+        print_r($file);
+        return $file;
+      endif;
+
+    endif;
+
+  });
+
+
 });
 
 ?>
