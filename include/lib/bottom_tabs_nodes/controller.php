@@ -60,12 +60,7 @@ if($q->get_dir()===0){
             if ($value === 'bottom_tab_id') {
                 $nodes_values[$value] = $p['max'];
             } elseif ($value === 'parent_tab_id') {
-                if ($sv['category_id'] === null) {
-                    $nodes_values[$value] = 'null';
-                }
-                else {
-                    $nodes_values[$value] = $sv['category_id'];
-                }
+                $nodes_values[$value] =$_GET['parent_tab_id'];
             } elseif ($value === 'type') {
                 $nodes_values[$value] = 1;
             } else {
@@ -95,21 +90,24 @@ if($q->get_dir()===0){
         $sv[$sn[]="updated_at"]="now()";
         foreach ($sv as $bottm_tab => $value) {
             if ($bottm_tab === "category_id") {
-
-            } elseif ($bottm_tab === "n") {
-                $bottm_tabs['sort_no'] = $value;
             } else {
                 $bottm_tabs[$bottm_tab] = $value;
             }
         }
         foreach ($sn as $bottm_tab_category => $value) {
             if($value == "updated_at") {
-                $bottm_tab_categories[$bottm_tab_category -1] = $value;
+                $bottm_tab_categories[$bottm_tab_category-1] = $value;
             }
             elseif ($value <> "category_id") {
-                $bottm_tab_categories[$bottm_tab_category] = $value;
+                if ($sv['category_id'] === "null"){
+                    $bottm_tab_categories[$bottm_tab_category] = $value;
+                }
+                else{
+                    $bottm_tab_categories[$bottm_tab_category-1] = $value;
+                }
             }
         }
+
         $o = new dbutl($TABLE, $bottm_tab_categories, $bottm_tabs);
         $e=$o->update($g->f("id"));
     }
