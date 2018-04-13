@@ -44,7 +44,7 @@ if ( !isset($BREADCRUMB) ) :
 
 endif;
 ?>
-<nav class="foot-breadCrumb">
+<nav class="<?php echo $page['html_prefix']; ?>foot-breadCrumb">
   <ol itemscope itemtype="http://schema.org/breadCrumbList">
     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
     <?php
