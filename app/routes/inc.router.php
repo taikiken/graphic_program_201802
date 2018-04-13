@@ -173,10 +173,18 @@ $app->group('/inc', function () use ($app) {
 
       if ( $file ) :
         $replace_pairs = array(
-          'url(/' => 'url(https://sportsbull.jp/',
-          '#head' => '#SPBL_head',
-          '#side' => '#SPBL_side',
+          'url(/'        => 'url(https://sportsbull.jp/',
+          '#head'        => '#SPBL_head',
+          '#side'        => '#SPBL_side',
+          '#skiplinkSec' => '#SPBL_skiplinkSec',
+          '#endMainAnc'  => '#SPBL_endMainAnc',
+          '#mainAnc'     => '#SPBL_mainAnc',
+          '#naviAnc'     => '#SPBL_naviAnc',
+          '#user'        => '#SPBL_user',
+          '#adg'         => '#SPBL_adg',
+          '#synapse'     => '#SPBL_synapse',
         );
+
         $file = strtr($file, $replace_pairs);
 
         return $response->withStatus(200)
