@@ -4,6 +4,7 @@ $TABLE = "bottom_tab_categories";
 $TABLE2 = "bottom_tab_nodes";
 $nodes_column =['bottom_tab_id','parent_tab_id','type','created_at'];
 $WHERE = " WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS NULL )";
+$NUMBERINGOFF=1;
 
 if($q->get_dir()===0){
     if($q->get_file()===0){
