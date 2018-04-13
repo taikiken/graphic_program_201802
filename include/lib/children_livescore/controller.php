@@ -1,9 +1,9 @@
 <?php
-
-$TABLE = "bottom_tab_livescores";
+$parent_id = $_GET['parent_tab_id'];
 $TABLE2 = "bottom_tab_nodes";
 $nodes_column =['bottom_tab_id','parent_tab_id','type','created_at'];
-$WHERE = " WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS NULL AND type=2 )";
+$TABLE = "bottom_tab_livescores";
+$WHERE = " WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id = $parent_id and type=2)";
 $NUMBERINGOFF=1;
 
 if($q->get_dir()===0){
@@ -54,21 +54,16 @@ if($q->get_dir()===0){
         }
         $o=new dbutl($TABLE,$bottm_tab_categories,$bottm_tabs);
         $e=$o->insert();
-        $sql ="SELECT MAX(id) FROM bottom_tab_livescores ";
+        $sql ="SELECT MAX(id) FROM bottom_tab_categories ";
         $o->query($sql);
         $p=$o->fetch_array();
         foreach ($nodes_column as $nodes_value => $value) {
             if ($value === 'bottom_tab_id') {
                 $nodes_values[$value] = $p['max'];
             } elseif ($value === 'parent_tab_id') {
-                if ($sv['category_id'] === null) {
-                    $nodes_values[$value] = 'null';
-                }
-                else {
-                    $nodes_values[$value] = $sv['category_id'];
-                }
+                $nodes_values[$value] =$_GET['parent_tab_id'];
             } elseif ($value === 'type') {
-                $nodes_values[$value] = 2;
+                $nodes_values[$value] = 1;
             } else {
                 $nodes_values[$value] = "now()";
             }
@@ -96,23 +91,41 @@ if($q->get_dir()===0){
         $sv[$sn[]="updated_at"]="now()";
         foreach ($sv as $bottm_tab => $value) {
             if ($bottm_tab === "category_id") {
-
-            } elseif ($bottm_tab === "n") {
-                $bottm_tabs['sort_no'] = $value;
             } else {
                 $bottm_tabs[$bottm_tab] = $value;
             }
         }
         foreach ($sn as $bottm_tab_category => $value) {
             if($value == "updated_at") {
-                $bottm_tab_categories[$bottm_tab_category -1] = $value;
+                $bottm_tab_categories[$bottm_tab_category-1] = $value;
             }
             elseif ($value <> "category_id") {
-                $bottm_tab_categories[$bottm_tab_category] = $value;
+                if ($sv['category_id'] === "null"){
+                    $bottm_tab_categories[$bottm_tab_category] = $value;
+                }
+                else{
+                    $bottm_tab_categories[$bottm_tab_category-1] = $value;
+                }
             }
         }
+
         $o = new dbutl($TABLE, $bottm_tab_categories, $bottm_tabs);
         $e=$o->update($g->f("id"));
+        foreach ($nodes_column as $nodes_column_update =>$value){
+            if ($value === "parent_tab_id"){
+                $nodes_column_updates[$nodes_column_update-1] = $value;
+            }
+        }
+        foreach ($sv as $nodes_value =>$value){
+            if ($nodes_value == "category_id"){
+                $nodes_values['parent_tab_id'] = $value;
+            }
+        }
+        $sql = "select id from ".$TABLE2." where type = 1 AND bottom_tab_id=".$g->f("id").";";
+        $o->query($sql);
+        $p=$o->fetch_array();
+        $o = new dbutl($TABLE2, $nodes_column_updates, $nodes_values);
+        $e=$o->update($p['id']);
     }
 }elseif($q->get_dir()===2){
     if($q->get_file()===0){

@@ -22,8 +22,10 @@ class m{
 		if($this->id==20){
 			$sql="select id,name from u_categories where name_e not in('all','top') order by n";
 		}elseif ($this->id==62) {
-			$sql ="SELECT id, name FROM bottom_tab_categories WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS NULL ) ORDER BY id";
-		}else{
+			$sql ="SELECT id, name FROM bottom_tab_categories WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS NULL and type=1 ) ORDER BY id";
+		}elseif ($this->id==63) {
+			$sql ="SELECT id, name FROM bottom_tab_livescores WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS NULL and type=2) ORDER BY id";
+        }else{
 			$sql="select id,name from pm_ where flag=1 and cid=".$this->id." order by n";
 		}
 		$this->o->query($sql);
@@ -41,8 +43,9 @@ class m{
 				$sql="select name from u_categories where id=".$e;
 			}elseif ($this->id==62) {
 				$sql="select name from bottom_tab_categories where id=".$e;
-			}
-			else{
+			}elseif ($this->id==63) {
+				$sql="select name from bottom_tab_livescores where id=".$e;
+            }else{
 				$sql="select name from pm_ where id=".$e;
 			}
 		}
@@ -57,6 +60,9 @@ class m{
 			}elseif ($this->id==62) {
 				$sql="select name from bottom_tab_categories where id=".$e;
 			}
+            elseif ($this->id==63) {
+				$sql="select name from bottom_tab_livescores where id=".$e;
+            }
 			else{
 				$sql="select name from pm_ where id=".$e;
 			}
@@ -86,6 +92,8 @@ class m{
 				$sql="select name from u_categories where " . $e . " order by n";
 			}elseif ($this->id==62) {
 				$sql="select name from bottom_tab_categories where " . $e . " order by sort_no";
+			}elseif ($this->id==63) {
+				$sql="select name from bottom_tab_livescores where " . $e . " order by sort_no";
 			}
 			else{
 				$sql="select name from pm_ where ".$e." order by n";
