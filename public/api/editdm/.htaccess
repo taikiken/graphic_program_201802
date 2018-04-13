@@ -14,3 +14,10 @@ RewriteRule ^bulls-picks/au/([0-9]{2})/([0-9]{2})$ /api/editdm/bulls_picks/get_p
 RewriteRule ^bulls-picks/au/tmp$ /api/editdm/bulls_picks/get_picks_xml.php?au&tmp [L]
 RewriteRule ^bulls-picks/au/tmp/update$ /api/editdm/bulls_picks/post_tmp_picks_xml.php?au [L]
 RewriteRule ^bulls-picks/au/2prd/([0-9]{2})/([0-9]{2})$ /api/editdm/bulls_picks/archive_to_production_picks_xml.php?date=$1$2&au [L]
+
+#TOUR OF JAPAN
+RewriteRule ^tour-of-japan$ /api/editdm/tour_of_japan/get_toj_json.php [L]
+RewriteRule ^tour-of-japan/([0-9]{2})/([0-9]{2})$ /api/editdm/tour_of_japan/get_toj_json.php?date=$1/$2 [L]
+RewriteRule ^tour-of-japan/tmp$ /api/editdm/tour_of_japan/get_toj_json.php?tmp [L]
+RewriteRule ^tour-of-japan/tmp/update$ /api/editdm/tour_of_japan/post_tmp_toj_json.php [L]
+RewriteRule ^tour-of-japan/2prd/([0-9]{2})/([0-9]{2})$ /api/editdm/tour_of_japan/archive_to_production_toj_json.php?date=$1$2 [L]
