@@ -126,7 +126,8 @@ endif;
 
 
 <?php if ( $page['conditional']['header'] ) : ?>
-<div id="js-header-appbnr-container" class="SPBL_common <?php echo $page['html_prefix']; ?>header-appbnr-container">
+<?php if ( $page['conditional']['header_appbnr'] ) : ?>
+<div id="js-header-appbnr-container" class="SPBL_common header-appbnr-container">
   <div class="header-appbnr">
     <div class="header-appbnr-link">
       <?php
@@ -150,18 +151,18 @@ endif;
     </div><!-- /.header-appbnr-link -->
   </div><!-- /.header-appbnr -->
 </div>
-
+<?php endif; ?>
 
 <div class="SPBL_common <?php echo $page['html_prefix']; ?>header-sticky">
   <header class="<?php echo $page['html_prefix']; ?>head-sec">
-    <div class="head-sec-inner">
+    <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
       <h1><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a></h1>
 
-      <div id="menu-opener" class="menu-opener">
+      <div id="menu-opener" class="<?php echo $page['html_prefix']; ?>menu-opener">
         <a id="side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
       </div>
 
-      <aside class="head-sec-inner-right">
+      <aside class="<?php echo $page['html_prefix']; ?>head-sec-inner-right">
         <span id="search-container-opener"></span>
 
         <div id="user-profile-container"></div><!--/.user-profile-container-->
@@ -174,15 +175,15 @@ endif;
 
 
   <nav id="global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
-    <div id="gnav-sec-inner" class="gnav-sec-inner">
+    <div id="gnav-sec-inner" class="<?php echo $page['html_prefix']; ?>gnav-sec-inner">
       <ul id="gnav-sec-list">
-        <li id="home" class="gnav-home"><a href="/">TOP</a></li>
+        <li id="home" class="<?php echo $page['html_prefix']; ?>gnav-home"><a href="/">TOP</a></li>
 
         <?php foreach( $page['site_tabs'] as $tab ) {
           // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
           // タブの表示順はAPI通りにする
           ?>
-          <li id="<?php echo $tab['slug']; ?>" class="gnav-<?php echo $tab['slug']; ?>">
+          <li id="<?php echo $tab['slug']; ?>" class="<?php echo $page['html_prefix']; ?>gnav-<?php echo $tab['slug']; ?>">
             <a href="/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
           </li>
         <?php }//foreach ?>

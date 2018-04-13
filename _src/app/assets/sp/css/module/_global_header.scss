@@ -1,5 +1,5 @@
 // アプリダウンロードバナー
-
+// 外部向けheaderでは appbnrださないことにします
 %header-appbnr {
   // default 非表示
   display: none;
@@ -162,7 +162,7 @@ $banner-height: 70px;
 
 // .head-sec
 %head-sec {
-  .head-sec-inner {
+  .#{$prefix}head-sec-inner {
     @include clearfix;
     position: relative;
     height: (80/2)+px;
@@ -183,12 +183,12 @@ $banner-height: 70px;
   }
 
 
-  .head-sec-inner-right {
+  .#{$prefix}head-sec-inner-right {
     float: right;
     @include clearfix;
   }
 
-
+  // react 生成なのでjsとあわせて修正
   .head-search-opener {
     float: left;
     line-height: 0;
@@ -200,7 +200,7 @@ $banner-height: 70px;
 
 
 
-  .menu-opener {
+  .#{$prefix}menu-opener {
     position: absolute;
     width: (88/2)+px;
     height: (80/2)+px;

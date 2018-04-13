@@ -114,6 +114,7 @@ class ViewModel {
       'body_start'       => true, // </head><body>
       'whole'            => true, // <div class="whole">
       'header'           => true, // <header>
+      'header_appbnr'    => true, // sp用冒頭のアプリバナー
       'gnav'             => true, // <nav>
       'announce'         => true, // <announce>
       'sidemenu'         => true, // sp - sidemenu
