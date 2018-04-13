@@ -91,11 +91,11 @@ div.synapse_logo {
 
 
 
-.side-menu-ut-nav {
+.#{$prefix}side-menu-ut-nav {
   padding-left: 12px;
 }
 
-.side-menu-ut-nav-link {
+.#{$prefix}side-menu-ut-nav-link {
   @include link-decoration($highlight-color, $highlight-color, none, none);
   // position: relative;
   // top: 2px;
@@ -123,67 +123,68 @@ div.synapse_logo {
   }
 }
 
-.side-menu-ut-nav-home i { @include sprite( $common-icon-side-home, inline-block ); }
-.side-menu-ut-nav-login i,
-.side-menu-ut-nav-mypage i { @include sprite( $common-icon-side-mypage, inline-block ); }
-.side-menu-ut-nav-config i { @include sprite( $common-icon-side-config, inline-block ); }
-.side-menu-ut-nav-logout i { @include sprite( $common-icon-side-logout, inline-block ); }
-.side-menu-ut-nav-about i { @include sprite( $common-icon-side-about, inline-block ); }
+.#{$prefix}side-menu-ut-nav-home i { @include sprite( $common-icon-side-home, inline-block ); }
+.#{$prefix}side-menu-ut-nav-login i,
+.#{$prefix}side-menu-ut-nav-mypage i { @include sprite( $common-icon-side-mypage, inline-block ); }
+.#{$prefix}side-menu-ut-nav-config i { @include sprite( $common-icon-side-config, inline-block ); }
+.#{$prefix}side-menu-ut-nav-logout i { @include sprite( $common-icon-side-logout, inline-block ); }
+.#{$prefix}side-menu-ut-nav-about i { @include sprite( $common-icon-side-about, inline-block ); }
 
 // UNDO_SPBL-403-abolish-comment
-.side-menu-ut-nav-mypage {
+.#{$prefix}side-menu-ut-nav-mypage {
   display: none;
 }
 
-.sidemenu_container,
-.sidemenu_container_single {
+.#{$prefix}sidemenu_container,
+.#{$prefix}sidemenu_container_single {
   position: relative;
   padding: 12px 8px;
   border-bottom: 1px solid #eee;
+
+  .#{$prefix}sidemenu_icon,
+  .#{$prefix}sidemenu_icon {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    float: left;
+  }
+
+  .#{$prefix}sidemenu_title,
+  .#{$prefix}sidemenu_title {
+    line-height: 1.2em;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .#{$prefix}sidemenu_title_single,
+  .#{$prefix}sidemenu_title_single {
+    line-height: 1em;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 16px;
+  }
 }
 
-.sidemenu_container a {
+.#{$prefix}sidemenu_container a {
   text-decoration: none;
 }
 
-.sidemenu_container_single a {
+.#{$prefix}sidemenu_container_single a {
   text-decoration: none;
   display: flex;
   align-items:center;
 }
 
-.sidemenu_container img.sidemenu_icon,
-.sidemenu_container_single img.sidemenu_icon {
-  width: 40px;
-  height: 40px;
-  padding: 8px;
-  float: left;
-}
 
-.sidemenu_container div.sidemenu_title,
-.sidemenu_container_single div.sidemenu_title {
-  line-height: 1.2em;
-  margin-right: 20px;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.sidemenu_container div.sidemenu_title_single,
-.sidemenu_container_single div.sidemenu_title_single {
-  line-height: 1em;
-  margin-right: 20px;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.sidemenu_container div.sidemenu_caption {
+.#{$prefix}sidemenu_container div.#{$prefix}sidemenu_caption {
   line-height: 1.2em;
   margin-top: 0.25em;
   margin-right: 20px;
   font-size: 12px;
 }
 
-.sidemenu-list-title {
+.#{$prefix}sidemenu-list-title {
   padding: 3px 18px;
   background-color:#aaa;
   color:#fff;
