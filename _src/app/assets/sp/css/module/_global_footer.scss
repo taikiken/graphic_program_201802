@@ -4,11 +4,11 @@
   padding-bottom: (48/2)+px;
   background-color: #fff;
 
-  .foot-sec-inner {
+  .#{$prefix}foot-sec-inner {
     border-top: 1px solid $border-primary-color;
   }
 
-  .foot-breadCrumb {
+  .#{$prefix}foot-breadCrumb {
     width: 100%;
     height: (70/2)+px;
     overflow: hidden;
@@ -55,20 +55,8 @@
     }
   }
 
-  .foot-pr {
-    //.foot-pr-inner
-    &-inner {
-      padding-top: (40/2)+px;
-    }
-
-    //.foot-pr-figure
-    &-figure {
-      width: (556/2)+px;
-      margin-right: auto;
-      margin-left: auto;
-    }
-
-    .text-block {
+  .#{$prefix}foot-pr {
+    .#{$prefix}text-block {
       position: relative;
       width: (560/2)+px;
       margin: (12/2)+px auto 0;
@@ -87,60 +75,73 @@
         @include hide-text;
       }
     }
+  }
 
-    //.foot-pr-text
-    &-text {}
+  //.foot-pr-inner
+  .#{$prefix}foot-pr-inner{
+    padding-top: (40/2)+px;
+  }
 
-    //.foot-pr-list
-    &-list {
-      @include clearfix;
-      margin-top: (10/2)+px;
+  //.foot-pr-figure
+  .#{$prefix}foot-pr-figure {
+    width: (556/2)+px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  //.foot-pr-text
+  .#{$prefix}foot-pr-text {}
+
+  //.foot-pr-list
+  .#{$prefix}foot-pr-list {
+    @include clearfix;
+    margin-top: (10/2)+px;
+  }
+
+  //.foot-pr-item
+  .#{$prefix}foot-pr-item {
+    float: left;
+    width: perCalc(206, 430);
+
+    + li {
+      float: right;
     }
+  }
 
-    //.foot-pr-item
-    &-item {
-      float: left;
-      width: perCalc(206, 430);
+  //.foot-pr-btn
+  .#{$prefix}foot-pr-btn {
+    margin-top: (40/2)+px;
+    padding-bottom: (20/2)+px;
+    border-bottom: 1px solid $border-primary-color;
+    background-color: #eee;
 
-      + li {
-        float: right;
-      }
-    }
-
-    //.foot-pr-btn
-    &-btn {
-      margin-top: (40/2)+px;
-      padding-bottom: (20/2)+px;
-      border-bottom: 1px solid $border-primary-color;
-      background-color: #eee;
-
-      a {
-        display: block;
-        line-height: 1;
-        padding-top: (32/2)+px;
-        padding-bottom: (32/2)+px;
-        background-color: $highlight-color;
-        color: #fff;
-        font-weight: bold;
-        font-size: fz(32/2);
-        text-align: center;
-      }
-    }
-
-    .fb-page-plugin {
-      margin-top: (20/2)+px;
-      padding-right: perCalc(20);
-      padding-left: perCalc(20);
-
+    a {
+      display: block;
+      line-height: 1;
+      padding-top: (32/2)+px;
+      padding-bottom: (32/2)+px;
+      background-color: $highlight-color;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(32/2);
       text-align: center;
     }
+  }
 
-    .fb-page {
-      width: 100% !important;
-    }
-  } // foot-pr
+  .#{$prefix}fb-page-plugin {
+    margin-top: (20/2)+px;
+    padding-right: perCalc(20);
+    padding-left: perCalc(20);
 
-  .sns-block {
+    text-align: center;
+  }
+
+  .#{$prefix}fb-page {
+    width: 100% !important;
+  }
+
+
+  .#{$prefix}sns-block {
     margin-top: (50/2)+px;
 
     ul {
@@ -162,22 +163,22 @@
         @include hide-text;
       }
 
-      .sns-tw a {
+      .#{$prefix}sns-tw a {
         @include sprite( $footer-icon-sns-tw );
       }
 
-      .sns-fb a {
+      .#{$prefix}sns-fb a {
         @include sprite( $footer-icon-sns-fb );
       }
 
-      .sns-yt a {
+      .#{$prefix}sns-yt a {
         @include sprite( $footer-icon-sns-yt );
       }
 
     }
   } //.sns-block
 
-  .copyright {
+  .#{$prefix}copyright {
     padding-top: (50/2)+px;
     color: #666;
     font-weight: bold;
