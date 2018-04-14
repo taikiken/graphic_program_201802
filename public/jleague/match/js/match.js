@@ -1,4 +1,11 @@
 (function() {
+	
+	if ( location.hostname.match(/dev./)) {
+		jsondevurl = "dev-";
+	} else {
+		jsondevurl = "";
+	}
+	
 	var year;
 	var master,league = [],occasionArray=[],leagueId = 2,month,teamId,teamGroup = [];//occasion;
 	Array.prototype.getLastVal = function (){ return this[this.length -1];}
@@ -25,7 +32,10 @@
 				}
 			}
 		}
-		req.open('GET', "https://jlive.sportsbull.jp/json/v1/year.json");
+/*
+		req.open('GET', "https://dev-jlive.sportsbull.jp/json/v1/year.json");
+*/
+		req.open('GET', "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/year.json");
 		req.send(null);
 	}();
 	var getMaster = function(){
@@ -44,14 +54,21 @@
 				}
 			}
 		}
-		req.open('GET', "https://jlive.sportsbull.jp/json/v1/"+year+"/jleague/master.json");
+/*
+		req.open('GET', "https://dev-jlive.sportsbull.jp/json/v1/"+year+"/jleague/master.json");
+*/
+		req.open('GET', "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/"+year+"/jleague/master.json");
 		req.send(null);
 	};
 	
 	var getData = function(id,year,month,team,occasion){
-		var url = "https://jlive.sportsbull.jp/api/v1/jleague/schedule.php?";
+/*
+		var url = "https://dev-jlive.sportsbull.jp/api/v1/jleague/schedule.php?";
+*/
+		var url = "https://"+jsondevurl+"jlive.sportsbull.jp/api/v1/jleague/schedule.php?";
 		var l = id ? id:"",y = year ? year:"",m = month ? month:"",t = team ? team:"",o = occasion ? "&occasion="+occasion:"";
 		var req = new XMLHttpRequest(),data = {};
+	
 		req.onreadystatechange = function(){
 			if( this.readyState == 4 && this.status == 200 ){
 				if( this.response ){
@@ -74,7 +91,7 @@
 			elm.innerHTML = "";
 			elm2 = document.createElement('p');
 			elm2.classList.add("not-applicable");
-			elm2.innerText = "該当する試合がございません。";
+			elm2.innerText = "該当データはありません。配信されるまでお待ち下さい。";
 			elm.appendChild(elm2);
 		}
 		
