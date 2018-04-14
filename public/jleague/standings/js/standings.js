@@ -1,4 +1,11 @@
 (function() {
+	
+	if ( location.hostname.match(/dev./)) {
+		jsondevurl = "dev-";
+	} else {
+		jsondevurl = "";
+	}
+	
 	var year;
 	var master,league = [];
 	var setting = function(){
@@ -19,7 +26,7 @@
 				}
 			}
 		}
-		req.open('GET', "https://jlive.sportsbull.jp/json/v1/year.json");
+		req.open('GET', "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/year.json");
 		req.send(null);
 	}();
 	var getMaster = function(){
@@ -38,7 +45,7 @@
 				setting();
 			}
 		}
-		req.open('GET', "https://jlive.sportsbull.jp/json/v1/"+year+"/jleague/master.json");
+		req.open('GET', "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/"+year+"/jleague/master.json");
 		req.send(null);
 	};
 
@@ -56,12 +63,37 @@
 		req.onreadystatechange = function(){
 			if( this.readyState == 4 && this.status == 200 ){
 				if( this.response ){
+					//未配信時のメッセージを削除
+					var notData = document.querySelector(".not-applicable");
+					if (notData) {
+						notData.remove();
+					}
 					data = JSON.parse(req.response);
 					callBack(data.response,leagueId);
 				}
 			}
+			//未配信時のメッセージを表示
+			else if( this.readyState == 4 && this.status != 200 ){
+				var elm = document.querySelector(".ttl-h2");
+				var notData = document.querySelector(".not-applicable");
+				if (notData) {
+					notData.innerHTML = "";
+				} else {
+					notData = document.createElement('p');
+					notData.classList.add("not-applicable");
+					notData.innerText = "該当データはありません。配信されるまでお待ち下さい。";
+					elm.parentNode.insertBefore(notData, elm.nextElementSibling);
+					var elmYmd = document.querySelector(".txt-note-gray");
+					elmYmd.innerText = "";
+				}
+				//elm.innerHTML = "Ｊ１参入プレーオフ";
+				document.getElementById('league').style.display="none";
+				document.getElementById('cup').style.display="none";
+				document.getElementById('notice-j1league').style.display="none";
+				document.getElementById('notice-j2league').style.display="none";
+			}
 		}
-		req.open('GET', 'https://jlive.sportsbull.jp/json/v1/'+year+'/jleague/ranking/'+leagueId+'.json');
+		req.open("GET", "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/"+year+"/jleague/ranking/"+leagueId+".json");
 		req.send(null);
 	};
 	
@@ -79,9 +111,30 @@
 			e = document.getElementById('cup');
 			e.style.display="block";
 			insertElm.innerHTML = '';
-			var clone = e.children,clone1 = clone[0].cloneNode(true),clone2 = clone[1].cloneNode(true);
-			if (clone[2]) {
+			var clone = e.children;
+			var clone1 = clone[0].cloneNode(true), clone2 = clone[1].cloneNode(true);
+			var clone3 = clone[0].cloneNode(true), clone4 = clone[1].cloneNode(true);
+			var clone5 = clone[0].cloneNode(true), clone6 = clone[1].cloneNode(true);
+			var clone7 = clone[0].cloneNode(true), clone8 = clone[1].cloneNode(true);
+			if (clone[8]) {
+				clone[8].parentNode.removeChild(clone[8]);
+			}
+			if (clone[7]) {
+				clone[7].parentNode.removeChild(clone[7]);
+			}
+			if (clone[6]) {
+				clone[6].parentNode.removeChild(clone[6]);
+			}
+			if (clone[5]) {
+				clone[5].parentNode.removeChild(clone[5]);
+			}
+			if (clone[4]) {
+				clone[4].parentNode.removeChild(clone[4]);
+			}
+			if (clone[3]) {
 				clone[3].parentNode.removeChild(clone[3]);
+			}
+			if (clone[2]) {
 				clone[2].parentNode.removeChild(clone[2]);
 			}
 			group = data.standing[0].group;
@@ -103,10 +156,40 @@
 			}
 			
 		}
+		var i_cup = 1;
 		for(var key in data.standing) {
 			if (league == "cup" && data.standing[key].group != group ) {
-				insertElm = clone2.querySelector("tbody");
 				group = data.standing[key].group;
+				if ( i_cup == 1 ) {
+					insertElm = clone2.querySelector("tbody");
+					clone1.innerHTML = group;
+					e = document.getElementById('cup');
+					e.appendChild(clone1);
+					e.appendChild(clone2);
+					i_cup = i_cup + 1;
+				} else if ( i_cup == 2 ) {
+					insertElm = clone4.querySelector("tbody");
+					clone3.innerHTML = group;
+					e = document.getElementById('cup');
+					e.appendChild(clone3);
+					e.appendChild(clone4);
+					i_cup = i_cup + 1;
+				} else if ( i_cup == 3 ) {
+					insertElm = clone6.querySelector("tbody");
+					clone5.innerHTML = group;
+					e = document.getElementById('cup');
+					e.appendChild(clone5);
+					e.appendChild(clone6);
+					i_cup = i_cup+ 1;
+				} else if ( i_cup == 4 ) {
+					insertElm = clone8.querySelector("tbody");
+					clone7.innerHTML = group;
+					e = document.getElementById('cup');
+					e.appendChild(clone7);
+					e.appendChild(clone8);
+					i_cup = i_cup+ 1;
+				}
+				insertElm.innerHTML = '';
 			}
 			row = createStandingsRow(data.standing[key]);
 			insertElm.appendChild(row);
@@ -117,10 +200,6 @@
 				tr[key-i].classList.add('standings-bg-red');
 			}
 		}else if (league == "cup") {
-			clone1.innerHTML = group;
-			e = document.getElementById('cup');
-			e.appendChild(clone1);
-			e.appendChild(clone2);
 		}else{
 			var tr = insertElm.querySelectorAll("tr");
 			tr[0].classList.add('standings-bg-yellow');
@@ -256,6 +335,9 @@
 				break ;
 			}
 		}
+		//リーグ名称を一覧の名称に設定（未配信時の対応）
+		var leagueName = document.querySelector(".ttl-h2");
+		leagueName.innerHTML = elm[i].innerHTML;
 		getData(league[i],year);
 	}
 	var sort = function(){
