@@ -33,7 +33,7 @@ if($q->get_file()!=2){
 
 		<tr class="<?=$m->gv()?>">
 		<td<?php if(strlen($_COMMENT)>0){ ?> rowspan="2"<?php } ?> class="inputTitle"><?=$TITLE?></td>
-		<td class="inputFields"><?=$m->$f_name($p[$m->gv()])?></td>
+		<td class="inputFields"><?=$m->$f_name($p2['parent_tab_id'])?></td>
 		</tr>
         <?php if(strlen($_COMMENT)>0){ ?>
 		<tr>

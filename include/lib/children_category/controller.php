@@ -77,6 +77,9 @@ if($q->get_dir()===0){
         $sql=sprintf("select * from %s where id=%s",$TABLE,$g->f("id"));
         $o->query($sql);
         $p=$o->fetch_array();
+        $sql = "select * from ".$TABLE2." where type = 1 AND bottom_tab_id=".$g->f("id").";";
+        $o->query($sql);
+        $p2=$o->fetch_array();
 
         include $INCLUDEPATH."formback.php";
     }elseif($q->get_file()===1){
