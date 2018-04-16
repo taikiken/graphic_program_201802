@@ -1,4 +1,11 @@
 (function() {
+	
+	if ( location.hostname.match(/dev./)) {
+		jsondevurl = "dev-";
+	} else {
+		jsondevurl = "";
+	}
+	
 	var year,teamId,master;
 	var setting = function(){
 		getDataSchedule("0",year,"0",teamId);//(leagueId,year,month,team,occasion)
@@ -32,7 +39,7 @@
 				}
 			}
 		}
-		req.open('GET', "https://jlive.sportsbull.jp/json/v1/year.json");
+		req.open('GET', "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/year.json");
 		req.send(null);
 	}();
 	var getMaster = function(){
@@ -46,7 +53,7 @@
 				}
 			}
 		}
-		req.open('GET', "https://jlive.sportsbull.jp/json/v1/"+year+"/jleague/master.json");
+		req.open('GET', "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/"+year+"/jleague/master.json");
 		req.send(null);
 	};
 	var getDate = function(date){
@@ -59,7 +66,7 @@
 		return wday;
 	}
 	var getDataSchedule = function(id,year,month,team,occasion){
-		var url = "https://jlive.sportsbull.jp/api/v1/jleague/schedule.php?";
+		var url = "https://"+jsondevurl+"jlive.sportsbull.jp/api/v1/jleague/schedule.php?";
 		var l = id ? id:"",y = year ? year:"",m = month ? month:"",t = team ? team:"",o = occasion ? "&occasion="+occasion:"";
 		var req = new XMLHttpRequest(),data = {};
 		req.onreadystatechange = function(){
@@ -75,7 +82,7 @@
 	}
 	var getDataDirectory = function(year,teamId){
 		var y = year,id = teamId;
-		var url = "https://jlive.sportsbull.jp/json/v1/"+y+"/jleague/team/"+id+"/player.json";
+		var url = "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/"+y+"/jleague/team/"+id+"/player.json";
 		var req = new XMLHttpRequest(),data = {};
 		req.onreadystatechange = function(){
 			if( this.readyState == 4 && this.status == 200 ){
@@ -95,7 +102,7 @@
 	//年度選択があるため分ける
 	var getDataTeamInfo = function(year,teamId,logOnry){
 		var y = year,id = teamId;
-		var url = "https://jlive.sportsbull.jp/json/v1/"+y+"/jleague/team/"+id+"/info.json";
+		var url = "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/"+y+"/jleague/team/"+id+"/info.json";
 		var req = new XMLHttpRequest(),data = {};
 		req.onreadystatechange = function(){
 			if( this.readyState == 4 && this.status == 200 ){

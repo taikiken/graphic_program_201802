@@ -1,4 +1,11 @@
 (function() {
+	
+	if ( location.hostname.match(/dev./)) {
+		jsondevurl = "dev-";
+	} else {
+		jsondevurl = "";
+	}
+	
 	var iframeDoc,baseCreateFlg = true;
 	var year;
 	var master,league = [];
@@ -197,7 +204,7 @@
 				}
 			}
 		}
-		req.open('GET', "https://jlive.sportsbull.jp/json/v1/year.json");
+		req.open('GET', "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/year.json");
 		req.send(null);
 	}();
 	var getMaster = function(){
@@ -222,7 +229,7 @@
 				
 			}
 		}
-		req.open('GET', "https://jlive.sportsbull.jp/json/v1/"+year+"/jleague/master.json");
+		req.open('GET', "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/"+year+"/jleague/master.json");
 		req.send(null);
 	};
 
@@ -245,7 +252,7 @@
 				}
 			}
 		}
-		req.open('GET', 'https://jlive.sportsbull.jp/json/v1/'+year+'/jleague/ranking/'+leagueId+'.json');
+		req.open('GET', 'https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/'+year+'/jleague/ranking/'+leagueId+'.json');
 		req.send(null);
 	};
 	
