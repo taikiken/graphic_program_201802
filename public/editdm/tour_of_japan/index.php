@@ -102,16 +102,14 @@ if($q->get_dir()==3){
       </div><!-- End pageDescription -->
       <div class="row">
         <div class="col-sm-12">
-          <a href="/editdm/tour_of_japan/edit/"> > スポーツブル 編集</a>
-          <p>アーカイブ検索: <input type="text" id="toj-datepicker" readonly></p><br/>
+          <a href="/editdm/tour_of_japan/edit/"> > ツアーオブジャパン 編集</a>
 
           <div class="card bg-light mb-6">
-            <div class="card-header" id="toj-card-header">反映中のスポーツブル live.json</div>
+            <div class="card-header" id="toj-card-header">ツアーオブジャパン live.json</div>
             <div class="card-body">
               <pre class="card-text"><code id="toj-json" class="language-html" data-lang="html"></code></pre>
             </div>
           </div>
-          <input type="button" class="btn btn-secondary btn-block" value="スポーツブル 本番反映" onclick="archive2prd();"/>
         </div>
       </div>
 
@@ -130,20 +128,11 @@ if($q->get_dir()==3){
     // 初回
     getJson(get_api);
 
-    // アーカイブ検索
-    $('#toj-datepicker').change(function () {
-        var archive_api = get_api + '/' + document.getElementById('toj-datepicker').value;
-        getJson(archive_api);
-        var title = document.getElementById('toj-datepicker').value;
-        $('#toj-card-header').text(title + 'のスポーツブル アーカイブ');
-
-    });
-
-    function jsonPreview(data, au_flag) {
+    function jsonPreview(data) {
           $('#toj-json').text(data);
     }
-    function getJson(url, au_flag=false) {
-        jsonPreview('読み込み中です...', au_flag);
+    function getJson(url) {
+        jsonPreview('読み込み中です...');
 
         $.ajax({
             url: url,
@@ -151,42 +140,11 @@ if($q->get_dir()==3){
             dateType: 'json',
             timeout: 10000,
             success: function (data) {
-                jsonPreview(data, au_flag)
+                jsonPreview(data)
             },
             error: function () {
                 // リロード
-                if (au_flag) {
-                    getJson(url, au_flag);
-                } else {
-                    getJson(url);
-                }
-            }
-        });
-    }
-
-    // 本番反映
-    function archive2prd(au_flag = false) {
-
-        var date = document.getElementById('toj-datepicker').value;
-        var api = "<?= $ARCHIVE_TOJ_TO_PRODUCTION_API ?>"
-
-        api = api + '/' + date;
-        console.log(api);
-
-        $.ajax({
-            url: api,
-            type: 'GET',
-            dateType: 'json',
-            timeout: 10000,
-            success: function (data) {
-                if (data.existArchivedJson == false) {
-                    alert('アーカイブファイルが存在しません。');
-                } else {
-                    alert('本番反映しました。');
-                }
-            },
-            error: function () {
-                alert('反映に失敗しました。');
+                getJson(url);
             }
         });
     }

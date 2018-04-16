@@ -13,56 +13,25 @@ if (preg_match("/cms/",$servername) ||
 
 // run
 // ==============================
-  $res = 'ファイルが存在しません';
 
-    if (isset($_GET['tmp']))
-    {
-      $tmp_filename = $TMP_TOJ;
-
-      if (json_decode($tmp_filename)) {
-        $res = file_get_contents($tmp_filename);
-      }
-
-    }
-    elseif (isset($_GET['date']))
-    {
-      $archive_filename = $ARCHIVE_TOJ;
+      $toj = $TOJ_FILENAME;
 
       $S3Module = new S3Module;
-      $date = mb_ereg_replace('[^0-9]', '', $_GET['date']);
-      $url = $S3Module->getUrl(str_replace('{date}', $date, $archive_filename));
+      $url = $S3Module->getUrl($toj);
       if ($bucket=="img-sportsbull-jp")
       {
         $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
       }
 
-      if (json_decode($url))
-      {
-        $res = file_get_contents($url);
+      $file = file_get_contents($url);
+      $res = json_decode($file);
+
+      if(empty($res)){
+        $res = 'ファイルが存在しません';
+        echo $res;
+      } else {
+
       }
-
-    }
-    else
-    {
-      $picks = $TOJ_FILENAME;
-
-      $S3Module = new S3Module;
-      $url = $S3Module->getUrl($picks);
-      if ($bucket=="img-sportsbull-jp")
-      {
-        $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
-      }
-
-      if (json_decode($url))
-      {
-        $res = file_get_contents($url);
-      }
-
-    }
-
-  // print
-  // ------------------------------
-    echo $res;
 }
 else
 {

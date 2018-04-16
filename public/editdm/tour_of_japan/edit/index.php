@@ -52,17 +52,6 @@ if($q->get_dir()==3){
   <link rel="stylesheet" href="/shared/cms/css/lightbox.css" type="text/css" media="screen" >
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-    <?php
-      $array_month_day = explode('/', $date);
-    ?>
-      $( function() {
-          $( "#datepicker" ).datepicker({
-              setDate : "<?php echo $date ?>/<?php echo date('Y')?>",
-              dateFormat : "mm/dd",
-          });
-      } );
-  </script>
 
   <title><?php printf("%s-%s｜%s｜%sWEB サイト管理画面",$THIS,$q->exe_fl(),$PARENT,$SITE); ?></title>
 </head>
@@ -101,81 +90,72 @@ if($q->get_dir()==3){
         <?php include $INCLUDEPATH."__layout_description.php"; ?>
       </div><!-- End pageDescription -->
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
           <table border="0" cellspacing="0" cellpadding="0" summary="<?=$THIS?><?=($q->get_dir()===3)?"一覧":sprintf("%s項目",$q->exe_fl())?>" class="listTable">
             <tbody>
             <!-- フォーム -->
-
-            <tr class="date">
-              <td class="inputTitle">日付</td>
-              <td class="inputFields">
-                <div class="clearfix  fl langs">
-                  <input type="text" id="datepicker" style="width:210px;" name="p_date0"
-                         value="<?php echo $date; ?>" class="in q0" readonly="readonly"></div>
-              </td>
-            </tr>
             <?php
               echo <<<EOT
-<tr class="id{$articles_itr}">
+<tr class="alt-large">
   <td class="inputTitle">デスクトップ画像のURL</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width:210px;" name="p_id0{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
+    <input type="text" style="width: 500px; line-height: 20px; height: 20px;" name="p_alt-large" value="{$val["alt-large"]}" class="in q0" ></div>
   </td>
 </tr>
 EOT;
 
             echo <<<EOT
-<tr class="id{$articles_itr}">
+<tr class="alt-medium">
   <td class="inputTitle">モバイル画像のURL</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width:210px;" name="p_id0{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
+    <input type="text" style="width: 500px; line-height: 20px; height: 20px;" name="p_alt-medium" value="{$val["alt-medium"]}" class="in q0" ></div>
   </td>
 </tr>
 EOT;
             echo <<<EOT
-<tr class="id{$articles_itr}">
+<tr class="error-large">
   <td class="inputTitle">デスクトップエラー時の画像のURL</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width:210px;" name="p_id0{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
+    <input type="text" style="width: 500px; line-height: 20px; height: 20px;" name="p_error-large" value="{$val["error-large"]}" class="in q0" ></div>
   </td>
 </tr>
 EOT;
             echo <<<EOT
-<tr class="id{$articles_itr}">
-  <td class="inputTitle">モバイルエラー時の画像のRL</td>
+<tr class="error-medium">
+  <td class="inputTitle">モバイルエラー時の画像のURL</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width:210px;" name="p_id0{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
+    <input type="text" style="width: 500px; line-height: 20px; height: 20px;" name="p_error-medium" value="{$val["error-medium"]}" class="in q0" ></div>
   </td>
 </tr>
 EOT;
             echo <<<EOT
-<tr class="id{$articles_itr}">
+<tr class="interval">
   <td class="inputTitle">ポーリング</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width:210px;" name="p_id0{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
+    <input type="text" style="width: 500px; line-height: 20px; height: 20px;" name="p_interval" value="{$val["interval"]}" class="in q0" ></div>
   </td>
 </tr>
 EOT;
             echo <<<EOT
-<tr class="id{$articles_itr}">
+<tr class="isPlaying">
   <td class="inputTitle">ライブステータス</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width:210px;" name="p_id0{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
+    <input type="text" style="width: 500px; line-height: 20px; height: 20px;" name="p_isPlaying" value="{$val["isPlaying"]}" class="in q0" ></div>
   </td>
 </tr>
 EOT;
             echo <<<EOT
-<tr class="id{$articles_itr}">
+<tr class="video_id">
   <td class="inputTitle">ブライトコープvideoID</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width:210px;" name="p_id0{$articles_itr}" value="{$ids[$articles_itr]}" class="in q0" ></div>
+    <input type="text" style="width: 500px; line-height: 20px; height: 20px;" name="p_video_id" value="{$val["video_id"]}" class="in q0" ></div>
   </td>
 </tr>
 EOT;
@@ -186,14 +166,6 @@ EOT;
             <!-- End フォーム -->
             </tbody>
           </table>
-        </div>
-        <div class="col-sm-6">
-          <div class="card bg-light mb-3">
-            <div class="card-header">プレビュー</div>
-            <div class="card-body">
-              <pre class="card-text"><code id="preview-xml" class="language-html" data-lang="html"></code></pre>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -207,118 +179,5 @@ EOT;
 </div>
 <div class="optionselbg"></div>
 
-<script type="text/javascript">
-    var get_tmp_api = "<?=$GET_TMP_TOJ_API?>";
-    var post_api = "<?=$POST_TMP_TOJ_API?>";
-    postXml(post_api, get_tmp_api); // 初回
-
-    $('.in').change(function () {
-        postXml(post_api, get_tmp_api);
-    });
-
-    // フォームクリア
-    $('#datepicker').change(function () {
-        var date = $('#datepicker').val();
-
-        if ("<?php echo $date; ?>" != date){
-            $('.in').val('');
-            $('#datepicker').val(date) // 日付はクリアしたくなかった
-        }
-    });
-
-
-        function getJson(url) {
-        $('#preview-xml').empty(); // 初期化
-
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dateType: 'json',
-            timeout: 10000,
-            success: function (data) {
-                $('#preview-xml').text(data);
-            },
-            error: function () {
-                var sorry = '読み込めませんでした...';
-                $('#preview-xml').text(sorry);
-            }
-        });
-    }
-
-    function postXml(post_api, get_tmp_api) {
-        var data = $('form').serializeArray();
-
-        $.ajax({
-            url: post_api,
-            type: 'POST',
-            cache: false,
-            data: data,
-        }).done(function(){
-            getJson(get_tmp_api); // post後の内容をgetしたい
-
-        }).fail(function(jqXHR, textStatus, errorThrown){
-            console.log('failed');
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        });
-    }
-
-
-    function moveUp(article_id) {
-        if (article_id > 0) {
-            var serialize = $('form').serializeArray();
-            var form_values = {};
-            for (i in serialize) {
-                var key = serialize[i]["name"];
-                var value = serialize[i]["value"];
-                form_values[key] = value;
-            }
-
-            var prev_article_id = article_id - 1;
-            // 移動元から移動先へ
-            document.getElementsByName('p_id0' + prev_article_id)[0].value = form_values['p_id0' + article_id];
-            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment0' + prev_article_id + comment_itr)[0].value = form_values['p_comment0' + article_id + comment_itr];
-            }
-            // 移動先の内容を移動元へ
-            document.getElementsByName('p_id0' + article_id)[0].value = form_values['p_id0' + prev_article_id];
-            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment0' + article_id + comment_itr)[0].value = form_values['p_comment0' + prev_article_id + comment_itr];
-            }
-
-            postXml(post_api, get_tmp_api); // プレビューに反映
-        }
-    }
-
-
-    function moveDown(article_id) {
-        if (article_id < 4) {
-            var serialize = $('form').serializeArray();
-            var form_values = {};
-            for (i in serialize) {
-                var key = serialize[i]["name"];
-                var value = serialize[i]["value"];
-                form_values[key] = value;
-            }
-
-            var next_article_id = article_id + 1;
-            // 移動元から移動先へ
-            document.getElementsByName('p_id0' + next_article_id)[0].value = form_values['p_id0' + article_id];
-            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment0' + next_article_id + comment_itr)[0].value = form_values['p_comment0' + article_id + comment_itr];
-            }
-            // 移動先の内容を移動元へ
-            document.getElementsByName('p_id0' + article_id)[0].value = form_values['p_id0' + next_article_id];
-            for (comment_itr = 0; comment_itr < 3; comment_itr++) {
-                document.getElementsByName('p_comment0' + article_id + comment_itr)[0].value = form_values['p_comment0' + next_article_id + comment_itr];
-            }
-
-            postXml(post_api, get_tmp_api); // プレビューに反映
-        }
-    }
-
-
-</script>
 </body>
 </html>
