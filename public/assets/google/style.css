@@ -129,6 +129,7 @@ html.mobile #headline-container .sponsor-link .adsSponsored,
 html.android #headline-container .sponsor-link .adsSponsored
 {
   margin-top: 5px;
+  font-weight: bold;
 }
 
 html.mobile #headline-container .sponsor-link .adsButton,
