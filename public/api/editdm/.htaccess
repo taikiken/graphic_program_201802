@@ -19,3 +19,8 @@ RewriteRule ^bulls-picks/au/2prd/([0-9]{2})/([0-9]{2})$ /api/editdm/bulls_picks/
 RewriteRule ^tour-of-japan$ /api/editdm/tour_of_japan/get_toj_json.php [L]
 RewriteRule ^tour-of-japan/tmp$ /api/editdm/tour_of_japan/get_toj_json.php?tmp [L]
 RewriteRule ^tour-of-japan/tmp/update$ /api/editdm/tour_of_japan/post_tmp_toj_json.php [L]
+
+#BIG6 LIVE
+RewriteRule ^big6-live$ /api/editdm/big6_live/get_big6_json.php [L]
+RewriteRule ^big6-live/tmp$ /api/editdm/big6_live/get_big6_json.php?tmp [L]
+RewriteRule ^big6-live/tmp/update$ /api/editdm/big6_live/post_tmp_big6_json.php [L]

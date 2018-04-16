@@ -44,6 +44,7 @@
         <li><a href="/editdm/sidemenu/edit">サイドメニュー設定</a></li>
         <li><a href="/editdm/stats_pickup">サッカー代表戦バナー設定</a></li>
         <li><a href="/editdm/tour_of_japan/">TOUR OF JAPAN</a></li>
+         <li><a href="/editdm/big6_live/">BIG6 LIVE</a></li>
   <?php } ?>
 <?php }else{ ?>
     <li><a href="/editdm/photo/">フォトアルバム</a></li>

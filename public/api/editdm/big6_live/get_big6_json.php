@@ -1,0 +1,57 @@
+<?php
+
+date_default_timezone_set('Asia/Tokyo');
+setlocale(LC_ALL, 'ja_JP.UTF-8');
+
+$servername=$_SERVER["SERVER_NAME"];
+if (preg_match("/cms/",$servername) ||
+  preg_match("/dev/",$servername))
+{
+  include_once __DIR__."/../../../../include/conf/config.php";
+  include_once __DIR__."/../../../../app/helpers/env.helper.php";
+  include_once __DIR__ . "/../../../../include/aws.php";
+
+// run
+// ==============================
+
+      $toj = $TOJ_FILENAME;
+
+      $S3Module = new S3Module;
+      $url = $S3Module->getUrl($toj);
+      if ($bucket=="img-sportsbull-jp")
+      {
+        $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
+      }
+
+      $file = file_get_contents($url);
+      $res = json_decode($file);
+
+      if(empty($res)){
+        $res = 'ファイルが存在しません';
+        echo $res;
+      } else {
+        $json =<<<_EOD
+{
+    lastupdate: {$res->lastupdate}
+    live: 
+        alt: 
+            large: {$res->live->alt->large}
+            medium: {$res->live->alt->medium}
+        error:
+            large: {$res->live->error->large}
+            medium: {$res->live->error->medium}
+        interval: {$res->live->interval}
+        isPlaying: {$res->live->isPlaying}
+        video:
+            id: {$res->live->video->id}
+}        
+_EOD;
+
+        echo $json;
+      }
+}
+else
+{
+  header('Location: ' . '/', true, 301);
+  exit;
+}
