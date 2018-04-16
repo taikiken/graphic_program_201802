@@ -54,7 +54,7 @@ if($q->get_dir()===0){
         }
         $o=new dbutl($TABLE,$bottm_tab_categories,$bottm_tabs);
         $e=$o->insert();
-        $sql ="SELECT MAX(id) FROM bottom_tab_categories ";
+        $sql ="SELECT MAX(id) FROM bottom_tab_livescores ";
         $o->query($sql);
         $p=$o->fetch_array();
         foreach ($nodes_column as $nodes_value => $value) {
@@ -63,7 +63,7 @@ if($q->get_dir()===0){
             } elseif ($value === 'parent_tab_id') {
                 $nodes_values[$value] =$_GET['parent_tab_id'];
             } elseif ($value === 'type') {
-                $nodes_values[$value] = 1;
+                $nodes_values[$value] = 2;
             } else {
                 $nodes_values[$value] = "now()";
             }
@@ -121,7 +121,7 @@ if($q->get_dir()===0){
                 $nodes_values['parent_tab_id'] = $value;
             }
         }
-        $sql = "select id from ".$TABLE2." where type = 1 AND bottom_tab_id=".$g->f("id").";";
+        $sql = "select id from ".$TABLE2." where type = 2 AND bottom_tab_id=".$g->f("id").";";
         $o->query($sql);
         $p=$o->fetch_array();
         $o = new dbutl($TABLE2, $nodes_column_updates, $nodes_values);
