@@ -81,8 +81,10 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
   window.addEventListener('resize', function () {
     if ( videojs ) {
       var player = videojs.getPlayers().content_video;
-      player.width(window.innerWidth);
-      player.height(Math.ceil( window.innerWidth / 16 * 9 ));
+      if ( player ) {
+        player.width(window.innerWidth);
+        player.height(Math.ceil( window.innerWidth / 16 * 9 ));
+      }
     }
   });
 </script>
