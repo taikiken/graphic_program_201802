@@ -89,13 +89,14 @@
     .menu-link {
       @include link-decoration(#000, #000, null, null);
       position: relative;
-      display: block;
+      display: flex;
+      align-items: center;
       padding-top: 15px;
       padding-bottom: 15px;
       // padding-left: 25px;
       font-weight: bold;
       font-size: (24/2)+px;
-      white-space: nowrap;
+      // white-space: nowrap;
 
       // &:before {
       //   content: "";
@@ -129,6 +130,9 @@
         @include hide-text;
       }
     } //.menu-link
+
+    .menu-link-label {
+    } //.menu-link-label
 
     // @include prc-each( baseball, soccer, basketball, motorsports ) {
     //   &.category-#{$arg} {
