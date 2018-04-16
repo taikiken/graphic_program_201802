@@ -85,6 +85,34 @@ html:not(.mobile):not(.android) ._popIn_recommend_credit
 adgene
 
 */
+html.mobile .adsWrapper,
+html.android .adsWrapper
+{
+  display: block;
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+}
+
+html.mobile .adsWrapper .adsDescription,
+html.android .adsWrapper .adsDescription
+{
+  display: none !important;
+}
+
+html.mobile .headline-outer .adsWrapper .adsButton,
+html.android .headline-outer .adsWrapper .adsButton,
+html.mobile .news-ad .adsWrapper .adsButton,
+html.android .news-ad .adsWrapper .adsButton
+{
+  position: absolute;
+  left: auto;
+  width: auto;
+  height: auto;
+  top: auto;
+  right: 0px;
+  bottom: 10px;
+}
 
 /* 一面 - ヘッドライン */
 html.mobile .adgLink .adgTextContainer .adgPr,
@@ -92,6 +120,27 @@ html.android .adgLink .adgTextContainer .adgPr
 {
   color: #888;
 }
+
+html.mobile #headline-container .sponsor-link .adsTitle,
+html.android #headline-container .sponsor-link .adsTitle
+{}
+
+html.mobile #headline-container .sponsor-link .adsSponsored,
+html.android #headline-container .sponsor-link .adsSponsored
+{
+  margin-top: 5px;
+}
+
+html.mobile #headline-container .sponsor-link .adsButton,
+html.android #headline-container .sponsor-link .adsButton
+{
+  display: block !important;
+  position: absolute;
+  width: auto;
+  right: 10px;
+  bottom: 10px;
+}
+
 
 /* 一覧 */
 html.mobile .news-ad .adsWrapper .adsSponsored,
@@ -101,7 +150,8 @@ html.android .news-ad .adsWrapper .adsSponsored
 }
 
 html.mobile .news-ad .adsWrapper .adsImgContainer,
-html.android .news-ad .adsWrapper .adsImgContainer {
+html.android .news-ad .adsWrapper .adsImgContainer
+{
   width: 110px;
   height: auto;
 }
@@ -111,26 +161,43 @@ html.android .news-ad .adsWrapper .adsImgContainer img
 {
   width: 100%;
   height: auto;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+html.mobile .news-ad .adsWrapper .adsTitle,
+html.mobile .news-ad .adsWrapper .adsTitle
+{
+  font-size: 16px;
+  width: auto;
+  line-height: 1.5;
+  overflow: hidden;
+  font-weight: 700;
 }
 
 
-html.mobile .post-single #headline-container .sponsor-link,
-html.android .post-single #headline-container .sponsor-link
+
+/* headline */
+html.mobile .headline-outer .sponsor-link,
+html.android .headline-outer .sponsor-link,
+html.mobile #headline-container .sponsor-link,
+html.android #headline-container .sponsor-link
 {
   padding-top: 0;
   padding-bottom: 0;
 }
 
-html.mobile .post-single #headline-container .adsWrapper .adsImgContainer .adsImg,
-html.android .post-single #headline-container .adsWrapper .adsImgContainer .adsImg
-{
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-}
+/* adsImg */
+html.mobile .headline-outer .adsWrapper .adsImgContainer .adsImg,
+html.mobile #headline-container .adsWrapper .adsImgContainer .adsImg,
+html.android .headline-outer .adsWrapper .adsImgContainer .adsImg,
+html.android #headline-container .adsWrapper .adsImgContainer .adsImg,
 
-html.mobile .post-single #headline-container .sponsor-link .adgLink .adgImgContainer .adgImg,
-html.android .post-single #headline-container .sponsor-link .adgLink .adgImgContainer .adgImg
+/* adgImg */
+html.mobile .headline-outer .sponsor-link .adgLink .adgImgContainer .adgImg,
+html.mobile #headline-container .sponsor-link .adgLink .adgImgContainer .adgImg,
+html.android .headline-outer .sponsor-link .adgLink .adgImgContainer .adgImg,
+html.android #headline-container .sponsor-link .adgLink .adgImgContainer .adgImg
 {
   width: 50px !important;
   height: 50px !important;
@@ -138,13 +205,28 @@ html.android .post-single #headline-container .sponsor-link .adgLink .adgImgCont
 }
 
 
-html.mobile .post-single #headline-container .sponsor-link .adgLink .adgTextContainer .adgTitle,
-html.android .post-single #headline-container .sponsor-link .adgLink .adgTextContainer .adgTitle
+html.mobile .headline-outer .sponsor-link .adgLink .adgTextContainer .adgTitle,
+html.android .headline-outer .sponsor-link .adgLink .adgTextContainer .adgTitle,
+html.mobile #headline-container .sponsor-link .adgLink .adgTextContainer .adgTitle,
+html.android #headline-container .sponsor-link .adgLink .adgTextContainer .adgTitle
 {
+  margin-top: 0;
   -webkit-line-clamp: 1;
   margin-top: 9px;
   margin-bottom: 5px;
   line-height: 1.2;
+}
+
+html.mobile .headline-outer .sponsor-link .adsTitle,
+html.android .headline-outer .sponsor-link .adsTitle
+{
+  margin-top: 0;
+}
+
+html.mobile .headline-outer .sponsor-link .adsButton,
+html.android .headline-outer .sponsor-link .adsButton {
+  display: block !important;
+  right: 10px;
 }
 
 
@@ -204,10 +286,11 @@ html.mobile #widget-news-list-container .adgLink .adgImageBox img.adgImage,
 html.android #widget-news-list-container .adgLink .adgImageBox img.adgImage
 {
   width: 110px;
-  height: auto;
+  height: 62px;
   border-radius: 3px;
   max-width: 100%;
   max-height: 100%;
+  object-fit: cover;
 }
 
 html.mobile #widget-ranking-container .adgLink .adgBody,
@@ -279,22 +362,14 @@ html.android #widget-news-list-container .adgLink .adgBody .adgSponsor
 # 記事詳細 - 関連系記事表示内広告 - パターン2
 - html.mobile - iOS / html.android - Android
 */
-html.mobile .post-single .adsWrapper,
-html.android .post-single .adsWrapper
-{
-  display: block;
-  padding-left: 0;
-  padding-right: 0;
-  position: relative;
-}
 
 /* html.mobile .post-single .adsWrapper {
   cursor: pointer;
 } */
 
 
-html.mobile .post-single .adsImgContainer,
-html.android .post-single .adsImgContainer
+html.mobile .post-single .adsWrapper .adsImgContainer,
+html.android .post-single .adsWrapper .adsImgContainer
 {
   margin-right: 10px;
   float: left;
@@ -302,8 +377,8 @@ html.android .post-single .adsImgContainer
   width: auto;
 }
 
-html.mobile .post-single .adsImgContainer img,
-html.android .post-single .adsImgContainer img
+html.mobile .post-single .adsWrapper .adsImgContainer img,
+html.android .post-single .adsWrapper .adsImgContainer img
 {
   width: 110px;
   height: 62px;
@@ -321,6 +396,7 @@ html.mobile #category-container .adsTitle,
 html.android #category-container .adsTitle
 {
   font-size: 16px;
+  margin-bottom: 1.8em;
 }
 
 
@@ -336,24 +412,9 @@ html.android .post-single .adsSponsored
   color: #888;
 }
 
-html.mobile #category-container .adsDescription,
-html.android #category-container .adsDescription,
-html.mobile .post-single .adsDescription,
-html.android .post-single .adsDescription
-{
-  display: none;
-}
 
-html.mobile .post-single .adsWrapper .adsButton,
-html.android .post-single .adsWrapper .adsButton
-{
-  position: absolute;
-  right: 0px;
-  bottom: 10px;
-}
-
-html.mobile .post-single .adsWrapper .adsButton .adsButtonText,
-html.android .post-single .adsWrapper .adsButton .adsButtonText
+html.mobile .adsWrapper .adsButton .adsButtonText,
+html.android .adsWrapper .adsButton .adsButtonText
 {
   border: 1px solid #ccc;
   background: #fff;
