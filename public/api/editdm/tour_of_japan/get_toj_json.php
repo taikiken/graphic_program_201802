@@ -30,7 +30,24 @@ if (preg_match("/cms/",$servername) ||
         $res = 'ファイルが存在しません';
         echo $res;
       } else {
+        $json =<<<_EOD
+{
+    lastupdate: {$res->lastupdate}
+    live: 
+        alt: 
+            large: {$res->live->alt->large}
+            medium: {$res->live->alt->medium}
+        error:
+            large: {$res->live->error->large}
+            medium: {$res->live->error->medium}
+        interval: {$res->live->interval}
+        isPlaying: {$res->live->isPlaying}
+        video:
+            id: {$res->live->video->id}
+}        
+_EOD;
 
+        echo $json;
       }
 }
 else
