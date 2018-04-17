@@ -817,6 +817,12 @@ $highlight-color: #033583;
       display: none;
     }
   }
+  #SJ_mlb-ranking {
+    #SJ_tabs-area,
+    .SJ_sub-header {
+      display: none;
+    }
+  }
 
   // MLBグローバルメニュー
   .SJ_for-pc .SJ_sub-header-mlb {
