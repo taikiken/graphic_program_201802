@@ -102,6 +102,51 @@ $highlight-color: #033583;
   }
 }
 
+//.stats__local__nav
+.stats__local__nav {
+  margin-bottom: 10px;
+  //.stats__nav__list
+  &__list {
+    width: 100%;
+    display: flex;
+    border: 2px solid $highlight-color;
+    border-radius: 4px;
+  }
+
+  [class^="stats__local__nav__item"] {
+    flex-grow: 1;
+
+    &:last-child {
+      a {
+        border-right: none;
+      }
+    }
+  }
+
+  a {
+    @include link-decoration($highlight-color, #fff, none, none);
+    display: block;
+    line-height: 1;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-right: 1px solid #efefef;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+
+    &.show-for-large {
+      display: block !important;
+    }
+    &.current,
+    &:hover {
+      border-right-color: $highlight-color;
+      background-color: $highlight-color;
+      color: #fff;
+    }
+  }
+}
+
 // .stats__copyright
 .stats__copyright {
   margin-bottom: 35px;
@@ -760,6 +805,18 @@ $highlight-color: #033583;
 
 
   // for MLB
+  #SJ_mlb-list {
+      #SJ_tabs-area,
+      #SJ_tabs-personal,
+      .SJ_sub-header {
+      display: none;
+    }
+  }
+  #SJ_mlb-players {
+    .SJ_sub-header {
+      display: none;
+    }
+  }
 
   // MLBグローバルメニュー
   .SJ_for-pc .SJ_sub-header-mlb {
@@ -894,8 +951,6 @@ $highlight-color: #033583;
     }
   } // .SJ_sub-header-mlb
 
-
-
   //ナビ : 試合結果/順位/個人成績
   #SJ_mlb-list > ul#SJ_tabs-area.SJ_tabs.SJ_tabs-select.SJ_ul-ratio-3 {
     > li:nth-child(1) {
@@ -914,7 +969,6 @@ $highlight-color: #033583;
       width: 50%;
     }
   }
-
 
   // 試合結果 ex.https://sportsbull.jp/stats/mlb/schedule/?sdc_page_code=GameResult&sdc_subpage_code=&game_global_id=1704294&sports_code=sbmlb&operation_mode=
   #SJ_mlb-result {
