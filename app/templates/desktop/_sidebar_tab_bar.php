@@ -74,9 +74,9 @@ if (isset($tab_response)) :
         foreach ($category_children as $child) :
         ?>
           <li class="menu-item">
-            <a href="<?php echo $child['link']; ?>" class="menu-item">
-              <span class="menu-item-icon"><img src="<?php echo $child['icon']; ?>" alt=""></span>
-              <span class="menu-item-label"><?php echo $child['dispName']; ?></span>
+            <a href="<?php echo $child['link']; ?>" class="menu-link">
+              <span class="menu-link-icon"><img src="<?php echo $child['icon']; ?>" alt=""></span>
+              <span class="menu-link-label"><?php echo $child['dispName']; ?></span>
             </a>
           </li>
         <?php
@@ -111,9 +111,9 @@ if (isset($tab_response)) :
             foreach ($live_children as $child) :
             ?>
               <li class="menu-item">
-                <a href="<?php echo $child['link']; ?>" class="menu-item">
-                  <span class="menu-item-icon"><img src="<?php echo $child['icon']; ?>" alt=""></span>
-                  <span class="menu-item-label"><?php echo $child['dispName']; ?></span>
+                <a href="<?php echo $child['link']; ?>" class="menu-link">
+                  <span class="menu-link-icon"><img src="<?php echo $child['icon']; ?>" alt=""></span>
+                  <span class="menu-link-label"><?php echo $child['dispName']; ?></span>
                 </a>
               </li>
             <?php
