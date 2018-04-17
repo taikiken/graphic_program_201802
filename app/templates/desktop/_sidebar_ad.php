@@ -160,6 +160,15 @@ endif;
           ) : ?>
             <div id="widget-recommend-list-container"></div><!--/recommend-->
           <?php endif; ?>
+
+
+
+<?php
+// @since 2018-04-10
+// tab bar
+include_once __DIR__ . '/_sidebar_tab_bar.php';
+?>
+
           <div id="widget-ranking-container"></div><!--/ranking-->
 
           <?php if ( $page['category']['slug'] !== 'crazy' ) : ?>
@@ -237,10 +246,4 @@ if (!$in_big6tv && !$on_pyeongchang2018) :
 endif;
 // not big6tv の時のみ広告を表示する
 // --------------------------------
-?>
-
-<?php
-// @since 2018-04-10
-// tab bar
-include_once __DIR__ . '/_sidebar_tab_bar.php';
 ?>

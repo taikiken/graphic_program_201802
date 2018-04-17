@@ -9,8 +9,35 @@
 <?php
 include_once __DIR__."/../tab-bar/module/functions.php";
 
+// helper
+// ==============================
+$helpers = glob('../../helpers/*.helper.php');
+foreach ($helpers as $helper) {
+  require $helper;
+}
+
+// models
+// ==============================
+$models = glob('../../app/models/*.model.php');
+foreach ($models as $model) {
+  require $model;
+}
+
+// # DB
+// ==============================
+include_once "local.php";
+include_once "public/check.php";
+
+// 初期化＋DB接続
+$o = new dbForTemplate;
+$o->connect();
+
+// set app
+// ==============================
+$model = new ViewModel($o);
+
 // /api/v1/bottomtab
-$tab_data = @file_get_contents($app->model->property('file_get_url') . '/api/v1/bottomtab/');
+$tab_data = @file_get_contents($model->property('file_get_url') . '/api/v1/bottomtab/');
 $tab_response = json_decode($tab_data, true)['response'];
 
 // 出力条件 - all [A]
@@ -113,4 +140,5 @@ if (isset($tab_response)) :
 <?php
 endif;
 // 出力条件 - all [/A]
+
 ?>

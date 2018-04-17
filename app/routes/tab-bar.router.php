@@ -32,7 +32,6 @@ $app->group('/tab-bar', function () use($app) {
     {
       return $this->renderer->render($response, 'tab-bar/mobile/livescore.php', $args);
     }
-    // desktop 無い
   });
 
   // 競技・種目 ページ - `category`
@@ -65,11 +64,10 @@ $app->group('/tab-bar', function () use($app) {
     // desktop 無い
   });
 
-  // webview
-  // ==============================
-  $this->get('/webview[/]', function ($request, $response, $args) use ($app) {
-
-    return $this->renderer->render($response, 'tab-bar/webview.php', $args);
-    // desktop 無い
-  });
+//  // webview
+//  // ==============================
+//  $this->get('/webview[/]', function ($request, $response, $args) use ($app) {
+//
+//    return $this->renderer->render($response, 'tab-bar/webview.php', $args);
+//  });
 });
