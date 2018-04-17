@@ -1,6 +1,6 @@
 <?php
 if($q->get_dir()!==0){
-$a[]=array("parent","63","rb",6,"","","","","","","","category_id");
+$a[]=array("parent","63","rb",6,"","","","","","","","parent_id");
 }
 $a[] = array("textfield", "名称", "name", "120");
 $a[] = array("textfield", "リンク", "link", "120");

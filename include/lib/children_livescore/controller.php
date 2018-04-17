@@ -38,7 +38,7 @@ if($q->get_dir()===0){
         $sv[$sn[]="created_at"]="now()";
         $sv[$sn[]="updated_at"]="now()";
         foreach ($sv as $bottm_tab =>$value){
-            if ($bottm_tab === "category_id"){
+            if ($bottm_tab === "parent_id"){
             }
             elseif ($bottm_tab === "n") {
             $bottm_tabs['sort_no'] = $value;
@@ -48,7 +48,7 @@ if($q->get_dir()===0){
             }
         }
         foreach ($sn as $bottm_tab_category=>$value){
-            if ($value <> "category_id"){
+            if ($value <> "parent_id"){
                 $bottm_tab_categories[$bottm_tab_category] = $value;
             }
         }
@@ -93,7 +93,7 @@ if($q->get_dir()===0){
 
         $sv[$sn[]="updated_at"]="now()";
         foreach ($sv as $bottm_tab => $value) {
-            if ($bottm_tab === "category_id") {
+            if ($bottm_tab === "parent_id") {
             } else {
                 $bottm_tabs[$bottm_tab] = $value;
             }
@@ -102,8 +102,8 @@ if($q->get_dir()===0){
             if($value == "updated_at") {
                 $bottm_tab_categories[$bottm_tab_category-1] = $value;
             }
-            elseif ($value <> "category_id") {
-                if ($sv['category_id'] === "null"){
+            elseif ($value <> "parent_id") {
+                if ($sv['parent_id'] === "null"){
                     $bottm_tab_categories[$bottm_tab_category] = $value;
                 }
                 else{
@@ -120,7 +120,7 @@ if($q->get_dir()===0){
             }
         }
         foreach ($sv as $nodes_value =>$value){
-            if ($nodes_value == "category_id"){
+            if ($nodes_value == "parent_id"){
                 $nodes_values['parent_tab_id'] = $value;
             }
         }
@@ -131,7 +131,14 @@ if($q->get_dir()===0){
         $e=$o->update($p['id']);
     }
 }elseif($q->get_dir()===2){
+    $sql = "select * from ".$TABLE2." where type = 2 AND bottom_tab_id=".$g->f("id").";";
+    $o->query($sql);
+    $parent_id=$o->fetch_array();
+    $sql = "select name from ".$TABLE." where id=".$parent_id['parent_tab_id'].";";
+    $o->query($sql);
+    $p2=$o->fetch_array();
     if($q->get_file()===0){
+
         $sql=sprintf("select * from %s where id=%s",$TABLE,$g->f("id"));
         $o->query($sql);
         $p=$o->fetch_array();
