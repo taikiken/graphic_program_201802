@@ -120,6 +120,51 @@ $bg-color_gray: #e6e6e6;
   }
 }
 
+//.stats__local__nav
+.stats__local__nav {
+  padding: 0 perCalc(20, 750) (40/2)+px;
+  margin-bottom: 10px;
+  //.stats__nav__list
+  &__list {
+    width: 100%;
+    display: flex;
+    border: 2px solid $highlight-color;
+    border-radius: 4px;
+  }
+
+  [class^="stats__local__nav__item"] {
+    flex-grow: 1;
+
+    &:last-child {
+      a {
+        border-right: none;
+      }
+    }
+  }
+
+  a {
+    @include link-decoration($highlight-color, #fff, none, none);
+    display: block;
+    line-height: 1;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-right: 1px solid #efefef;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+
+    &.show-for-large {
+      display: block !important;
+    }
+    &.current {
+      border-right-color: $highlight-color;
+      background-color: $highlight-color;
+      color: #fff;
+    }
+  }
+}
+
 // .stats__nav--tennis
 .stats__nav--tennis {
   [class^="stats__nav__item"] {
@@ -864,6 +909,27 @@ $bg-color_gray: #e6e6e6;
 
 
   // for MLB
+  #SJ_mlb-list {
+      #SJ_tabs-area,
+      #SJ_tabs-personal,
+      .SJ_h1,
+      .SJ_sub-header {
+      display: none;
+    }
+  }
+  #SJ_mlb-players {
+    .SJ_sub-header,
+    .SJ_h1 {
+      display: none;
+    }
+  }
+  #SJ_mlb-ranking {
+    #SJ_tabs-area,
+    .SJ_sub-header {
+      display: none;
+    }
+  }
+
   #SJ_mlb-list,
   #SJ_mlb-result,
   #SJ_mlb-ranking,
