@@ -238,3 +238,9 @@ endif;
 // not big6tv の時のみ広告を表示する
 // --------------------------------
 ?>
+
+<?php
+// @since 2018-04-10
+// tab bar
+include_once __DIR__ . '/_sidebar_tab_bar.php';
+?>
