@@ -2,10 +2,15 @@
 
 //#2820 Crazy for Racing動画記事API作成
 //slug=>tag で指定
+//UNDO_SPBL-565 サッカー日本代表用のタグ追加
 $categories=array(
 	"station"=>"ブルステオフショットムービー",
 	"cfr_interview"=>"CFRインタビュー",
-	"cfr_report"=>"CFR体験レポート"
+	"cfr_report"=>"CFR体験レポート",
+	"samurai_blue"=>"サッカー日本代表ハイライト",
+	"futsal_women"=>"サッカー女子フットサル代表ハイライト",
+	"soccer_under"=>"サッカーアンダーハイライト",
+	"soccer_movie"=>"サッカー動画"
 );
 
 include "local.php";
