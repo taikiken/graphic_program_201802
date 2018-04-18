@@ -12,6 +12,9 @@
   <?php if($TABLE == "u_media"){ ?>
     <th scope="col" width="35" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">NG</th>
   <?php } ?>
+      <?php if($TABLE == "bottom_tab_categories" or $TABLE== "bottom_tab_livescores"){ ?>
+    <th scope="col" width="50" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">表示順</th>
+  <?php }?>
 
   <th scope="col" class="t_title"><?php if($TABLE!="tabs") echo $THIS; ?>タイトル</th>
         <?php if($CURRENTDIRECTORY == "photo"){?>
@@ -51,6 +54,12 @@
         }
         ?></td>
       <?php } ?>
+        
+      <?php if($TABLE == "bottom_tab_categories" or $TABLE== "bottom_tab_livescores"){ ?>
+    <td scope="col" width="50" style="text-align: center;" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">
+        <button type="button" data-this-id="<?php echo $p[$i]['id']; ?>" class="js-sort-swap" style="width: 90%; margin: auto;">↑</button>
+    </td>
+  <?php }?>
 
   <?php if($TABLE == "u_media"){ ?>
   <td class="display">
@@ -113,3 +122,53 @@
 <?php } ?>
 
 <?php } ?>
+<script type="text/javascript">
+var swap_lock = false;
+$('.js-sort-swap:first').prop('disabled', true);
+$('.js-sort-swap').on('click', function(){
+    if(swap_lock === true){
+        return;
+    }
+    swap_lock = true;
+    buttonLock(true);
+    
+    var tr = $(this).closest('tr');
+    var id = $(this).data('thisId');
+    var beforeId = tr.prev().find('.js-sort-swap').data('thisId');
+//    console.log(id, beforeId);
+//    return;
+    $.ajax({
+        url: "/api/editdm/user/sort_no.php",
+        data: {
+            'id[]': [id,beforeId]
+        },
+        dataType: "json",
+        type    : "POST",
+    }).done(function(data){
+        tableRowSwap(tr, tr.prev());
+    }).fail(function(data){
+        if(data.responseJSON !== undefined){
+            alert(data.responseJSON.user_message);
+        } else {
+            alert('予期せぬエラーが発生しました');
+        }
+    }).complete(function(){
+        swap_lock = false;
+        buttonLock(false);
+    });
+})
+function buttonLock(isLock){
+    if(isLock){
+        $('.js-sort-swap').prop('disabled', true);
+    } else {
+        $('.js-sort-swap:not(:first)').prop('disabled', false);
+    }
+}
+function tableRowSwap(tr, before){
+    var tr_style = tr.attr('style');
+    var before_style = before.attr('style');
+    tr.attr('style', before_style);
+    before.attr('style', tr_style);
+    before.before(tr);
+}
+</script>
