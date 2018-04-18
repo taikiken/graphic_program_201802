@@ -7,7 +7,7 @@ $a[] = array("textfield", "デスクトップエラー時の画像のURL", "erro
 $a[] = array("textfield", "モバイルエラー時の画像のURL", "error-medium", "30", "", "");
 $a[] = array("textfield", "ポーリング(秒)", "interval", "30", "", "");
 $a[] = array("textfield", "ライブステータス", "isPlaying", "30", "", "");
-$a[] = array("textfield", "ブライトコープvideoID", "video_id", array("非公開", "公開"), "", "");
+$a[] = array("textfield", "ブライトコープvideoID", "video_id", "30", "", "");
 
 include $INCLUDEPATH."print_write.php";
 

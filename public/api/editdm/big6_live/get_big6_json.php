@@ -14,10 +14,10 @@ if (preg_match("/cms/",$servername) ||
 // run
 // ==============================
 
-      $toj = $TOJ_FILENAME;
+      $big6 = $BIG6_FILENAME;
 
       $S3Module = new S3Module;
-      $url = $S3Module->getUrl($toj);
+      $url = $S3Module->getUrl($big6);
       if ($bucket=="img-sportsbull-jp")
       {
         $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
@@ -30,20 +30,107 @@ if (preg_match("/cms/",$servername) ||
         $res = 'ファイルが存在しません';
         echo $res;
       } else {
+        $res = $res->response;
+        $isPlaying = $res->live->isPlaying == true ? "true" : "false";
+        $source_default = [];
+        $source_sp_default = [];
+        for($count = 0;$count < 5;$count++){
+          $source_default[$count] = $res->live->video->sources[$count]->default ? "true" : "false";
+        }
+        for($count = 0;$count < 4;$count++){
+          $source_sp_default[$count] = $res->live->video->sources_sp[$count]->default ? "true" : "false";
+        }
         $json =<<<_EOD
 {
-    lastupdate: {$res->lastupdate}
-    live: 
-        alt: 
-            large: {$res->live->alt->large}
-            medium: {$res->live->alt->medium}
-        error:
-            large: {$res->live->error->large}
-            medium: {$res->live->error->medium}
-        interval: {$res->live->interval}
-        isPlaying: {$res->live->isPlaying}
-        video:
-            id: {$res->live->video->id}
+    response: 
+    {
+        lastupdate: {$res->lastupdate},
+        live:
+        { 
+            alt: 
+            {
+                large: {$res->live->alt->large}
+                medium: {$res->live->alt->medium}
+            },
+            error:
+            {
+                large: {$res->live->error->large}
+                medium: {$res->live->error->medium}
+            },
+            interval: {$res->live->interval}
+            isPlaying: {$isPlaying}
+            video:
+            {
+                id: {$res->live->video->id}
+                ad_url:
+                {
+                    android: {$res->live->video->ad_url->android}
+                    ios: {$res->live->video->ad_url->ios}
+                    pc: {$res->live->video->ad_url->pc}
+                    sp: {$res->live->video->ad_url->sp}
+                },
+                source: {$res->live->video->source}
+                sources:
+                [
+                    {
+                      label: {$res->live->video->sources[0]->label}
+                      default: {$source_default[0]}
+                      res: {$res->live->video->sources[0]->res}
+                      url: {$res->live->video->sources[0]->url}
+                    }
+                ],
+                [
+                    {
+                      label: {$res->live->video->sources[1]->label}
+                      default: {$source_default[1]}
+                      res: {$res->live->video->sources[1]->res}
+                      url: {$res->live->video->sources[1]->url}
+                    }
+                ],
+                [
+                    {
+                      label: {$res->live->video->sources[2]->label}
+                      default: {$source_default[2]}
+                      res: {$res->live->video->sources[2]->res}
+                      url: {$res->live->video->sources[2]->url}
+                    }
+                ],
+                [
+                    {
+                      label: {$res->live->video->sources[3]->label}
+                      default: {$source_default[3]}
+                      res: {$res->live->video->sources[3]->res}
+                      url: {$res->live->video->sources[3]->url}
+                    }
+                ]
+                sources_sp:
+                [
+                    {
+                      label: {$res->live->video->sources_sp[0]->label}
+                      default: {$source_sp_default[0]}
+                      res: {$res->live->video->sources_sp[0]->res}
+                      url: {$res->live->video->sources_sp[0]->url}
+                    }
+                ],
+                [
+                    {
+                      label: {$res->live->video->sources_sp[1]->label}
+                      default: {$source_sp_default[1]}
+                      res: {$res->live->video->sources_sp[1]->res}
+                      url: {$res->live->video->sources_sp[1]->url}
+                    }
+                ],
+                [
+                    {
+                      label: {$res->live->video->sources_sp[2]->label}
+                      default: {$source_sp_default[2]}
+                      res: {$res->live->video->sources_sp[2]->res}
+                      url: {$res->live->video->sources_sp[2]->url}
+                    }
+                ],
+            }
+        }
+    }
 }        
 _EOD;
 

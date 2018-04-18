@@ -17,6 +17,7 @@ if($q->get_dir()==3){
   include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/controller.php";
 }
 
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -95,7 +96,11 @@ if($q->get_dir()==3){
             <tbody>
             <!-- フォーム -->
             <?php
-              echo <<<EOT
+            echo <<<EOT
+<th colspan="2" class="inputHeader" scope="row">live設定</th>
+EOT;
+
+            echo <<<EOT
 <tr class="alt-large">
   <td class="inputTitle">デスクトップ画像のURL</td>
   <td class="inputFields">
@@ -141,15 +146,30 @@ EOT;
   </td>
 </tr>
 EOT;
+            if($val["isPlaying"]){
+              $isPlaying = "checked=\"checked\"";
+              $isNotPlaying = null;
+            } else {
+              $isPlaying = null;
+              $isNotPlaying = "checked=\"checked\"";
+            }
+
             echo <<<EOT
 <tr class="isPlaying">
   <td class="inputTitle">ライブステータス</td>
   <td class="inputFields">
     <div class="clearfix  fl langs">
-    <input type="text" style="width: 500px; line-height: 20px; height: 20px;" name="p_isPlaying" value="{$val["isPlaying"]}" class="in q0" ></div>
+    <input type="radio" style="line-height: 20px; height: 20px;" name="p_isPlaying" value="1" class="in q0" {$isPlaying}>中継中
+    <input type="radio" style="line-height: 20px; height: 20px;" name="p_isPlaying" value="0" class="in q0" {$isNotPlaying}>中継中でない
+    </div>
   </td>
 </tr>
 EOT;
+
+            echo <<<EOT
+<th colspan="2" class="inputHeader" scope="row">ブライトコープ設定</th>
+EOT;
+
             echo <<<EOT
 <tr class="video_id">
   <td class="inputTitle">ブライトコープvideoID</td>

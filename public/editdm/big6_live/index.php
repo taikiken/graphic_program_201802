@@ -102,7 +102,7 @@ if($q->get_dir()==3){
       </div><!-- End pageDescription -->
       <div class="row">
         <div class="col-sm-12">
-          <a href="/editdm/tour_of_japan/edit/"> > BIG6 LIVE 編集</a>
+          <a href="/editdm/big6_live/edit/"> > BIG6 LIVE 編集</a>
 
           <div class="card bg-light mb-6">
             <div class="card-header" id="big6-card-header">BIG6 LIVE live.json</div>
