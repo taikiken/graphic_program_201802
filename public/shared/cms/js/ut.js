@@ -473,49 +473,6 @@ function ut_init(){
 		});
 
 	}
-	else if (cd == "bottom_tab_categories")
-	{
-		/*
-		 * 競技タブの親タブ
-		 */
-		// 競技タブの子タブ編集で、競技タブ設定項目に「チェックを解除」項目を追加
-		$(".inputTitle").each(function()
-		{
-			if ($(this).html() == "競技タブ設定")
-			{
-				$(this).append("<span class='kaijo'>チェックを解除</span>");
-			}
-		});
-
-		// 「チェックを解除」項目選択時にカテゴリーのチェックを解除
-		$(".kaijo").click(function()
-		{
-			$("input", $(this).parent().siblings(".inputFields")).prop("checked", false);
-		});
-
-	}
-
-	else if (cd == "bottom_tab_livescores")
-	{
-		/*
-		 * 速報タブの親タブ
-		 */
-		// 速報タブの子タブ編集で、速報タブ設定項目に「チェックを解除」項目を追加
-		$(".inputTitle").each(function()
-		{
-			if ($(this).html() == "速報タブ設定")
-			{
-				$(this).append("<span class='kaijo'>チェックを解除</span>");
-			}
-		});
-
-		// 「チェックを解除」項目選択時にカテゴリーのチェックを解除
-		$(".kaijo").click(function()
-		{
-			$("input", $(this).parent().siblings(".inputFields")).prop("checked", false);
-		});
-
-	}
 
 	if(location.href.match(/repo_s\/\?rid=2/)){
 		$(".newEntry").hide();
