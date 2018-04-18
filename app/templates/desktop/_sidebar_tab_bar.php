@@ -97,9 +97,11 @@ if (isset($tab_response)) :
     // 出力条件 - livescore [D]
     if (isset($livescore_list) && is_array($livescore_list['parent']) && count($livescore_list['parent'])) :
       $live_scores = $livescore_list['parent'];
+
       // loop -live
       foreach ($live_scores as $live) :
-        $live_children = $live_scores['child'];
+        $live_children = $live['child'];
+
         // 出力条件 - category - child [E]
         if (is_array($live_children) && count($live_children)) :
     ?>
