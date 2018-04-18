@@ -931,6 +931,31 @@
   }
 
   //.nadir_tab-item
+  @include prc-each( home, menu-livescore, menu-category ) {
+    .#{$arg} & {
+      .nadir_tab-item__#{$arg} {
+        .nadir_tab-link {
+          color: #0f3580;
+
+          i svg {
+            fill: #0f3580;
+          }
+        }
+      }
+    }
+  }
+  .menu-category & {
+    .nadir_tab-item__category {
+      .nadir_tab-link {
+        color: #0f3580;
+
+        i svg {
+          fill: #0f3580;
+        }
+      }
+    }
+  }
+
   &-item {
     &.current {
       .nadir_tab-link {
