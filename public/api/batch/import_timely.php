@@ -5,7 +5,7 @@ include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=24;
 $MEDIANAME="Timely";
-$rssfile="http://timely-web.jp/feed/undo.xml";
+$rssfile="https://timely-web.jp/feed/undo.xml";
 
 $o=new db;
 $o->connect();
@@ -21,16 +21,16 @@ if($data["channel"]["item"]["guid"]){
 }
 
 for($i=0;$i<count($data["channel"]["item"]);$i++){
-	
+
 	unset($s);
-	
+
 	$s["title"]=$data["channel"]["item"][$i]["title"];
 	$s["t9"]=$data["channel"]["item"][$i]["link"];
 	$s["t7"]=$data["channel"]["item"][$i]["guid"];
-	
+
 	$body=$data["channel"]["item"][$i]["description"];
 	$modbody=str_replace("\'","''",preg_replace("/(\r|\n|\t)/","",$data["channel"]["item"][$i]["description"]));
-	
+
 	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
 	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
 	$s["a_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["lastUpdate"]));
@@ -41,7 +41,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 
 	$keyword=key_merge($data["channel"]["item"][$i]["keyword"]);
 	$s["keyword"]=$keyword;
-	
+
 	$tag=categorymatching($exword,$keyword);
 	if(count($tag)>0){
 		for($cnt=0;$cnt<count($tag);$cnt++){
@@ -53,9 +53,9 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
-	
+
 	unset($sqla);
-		
+
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
 			if($s["a_time"]!=$f["a_time"]){
@@ -88,7 +88,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["n"]="(select max(n)+1 from repo_n where cid=1)";
-			
+
 			if(strlen($s["t30"])>0)$s["img1"]=outimg($s["t30"]);
 			splittime($s["m_time"],$s["a_time"]);
 			$sqla[]=makesql($s,0);
