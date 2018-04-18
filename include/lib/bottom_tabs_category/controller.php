@@ -19,7 +19,7 @@ if($q->get_dir()===0){
 
         data_sql();
 
-        $sql = "select count(*) from ".$TABLE.";";
+        $sql = "select count(*) from ".$TABLE.$WHERE.";";
         $o->query($sql);
         $p=$o->fetch_array();
 
@@ -29,10 +29,12 @@ if($q->get_dir()===0){
 
         //一覧の最初に追加
         } elseif ($_POST["POSITION"]!=1) {
-            $sv[$sn[]="sort_no"] = 1;
+            $sql="update ".$TABLE." set sort_no=(sort_no+1) ".$WHERE;
+            $o->query($sql);
+            $sv[$sn[]="sort_no"]=1;
 
         } else {
-            $sv[$sn[]="sort_no"]=sprintf("(select max(sort_no)+1 as n from %s)",$TABLE);
+            $sv[$sn[]="sort_no"]=sprintf("(select max(sort_no)+1 as n from %s %s)",$TABLE,$WHERE);
         }
 
         $sv[$sn[]="created_at"]="now()";
