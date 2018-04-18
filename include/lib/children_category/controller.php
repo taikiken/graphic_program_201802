@@ -4,6 +4,7 @@ $TABLE2 = "bottom_tab_nodes";
 $nodes_column =['bottom_tab_id','parent_tab_id','type','created_at'];
 $TABLE = "bottom_tab_categories";
 $WHERE = " WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id = $parent_id and type=1)";
+$WHERE2 = " WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS not NULL AND type=1 )";
 $NUMBERINGOFF=1;
 
 if($q->get_dir()===0){
@@ -28,11 +29,12 @@ if($q->get_dir()===0){
             $sv[$sn[]="n"]=1;
 
         //一覧の最初に追加
-        } elseif ($_POST["POSITION"]!=1) {
-            $sv[$sn[]="sort_no"] = 1;
-
+        } elseif ($_POST["POSITION"] != 1) {
+            $sql = "update " . $TABLE . " set sort_no=(sort_no+1) " . $WHERE2;
+            $o->query($sql);
+            $sv[$sn[]="sort_no"]=1;
         } else {
-            $sv[$sn[]="sort_no"]=sprintf("(select max(sort_no)+1 as n from %s)",$TABLE);
+            $sv[$sn[]="sort_no"]=sprintf("(select max(sort_no)+1 as n from %s %s)",$TABLE,$WHERE2);
         }
 
         $sv[$sn[]="created_at"]="now()";
