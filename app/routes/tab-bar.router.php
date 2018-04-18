@@ -19,12 +19,12 @@ $app->group('/tab-bar', function () use($app) {
     $args['page'] = $app->model->set(array(
       'template_classname' => $template_classname,
       'template'       => 'category',
-      'title'          => 'XXX',
-      'keywords'       => 'XXX',
-      'og_description' => 'XXX',
-      'og_title'       => 'XXX',
-      'og_url'         => 'XXX',
-      'og_image'       => 'XXX',
+      'title'          => '速報・データ',
+      'keywords'       => $app->model->property('keywords'),
+      'og_description' => $app->model->property('og_description'),
+      'og_title'       => '速報・データ | '.$app->model->property('title_short'),
+      'og_url'         => $app->model->property('site_url').'tab-bar/livescore/',
+      'og_image'       => $app->model->property('og_image'),
       'tab_response'   => $tab_response,
     ));
 
@@ -48,12 +48,12 @@ $app->group('/tab-bar', function () use($app) {
     $args['page'] = $app->model->set(array(
       'template_classname' => $template_classname,
       'template'       => 'category',
-      'title'          => 'XXX',
-      'keywords'       => 'XXX',
-      'og_description' => 'XXX',
-      'og_title'       => 'XXX',
-      'og_url'         => 'XXX',
-      'og_image'       => 'XXX',
+      'title'          => '競技・種目 | '.$app->model->property('title'),
+      'keywords'       => $app->model->property('keywords'),
+      'og_description' => $app->model->property('og_description'),
+      'og_title'       => '競技・種目 | '.$app->model->property('title_short'),
+      'og_url'         => $app->model->property('site_url').'tab-bar/category/',
+      'og_image'       => $app->model->property('og_image'),
       'tab_response'   => $tab_response,
     ));
 
