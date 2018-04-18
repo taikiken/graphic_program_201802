@@ -931,7 +931,7 @@
   }
 
   //.nadir_tab-item
-  @include prc-each( home, menu-livescore, menu-category ) {
+  @include prc-each( home, menu-livescore, menu-category, nowdo ) {
     .#{$arg} & {
       .nadir_tab-item__#{$arg} {
         .nadir_tab-link {

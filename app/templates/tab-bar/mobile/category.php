@@ -128,7 +128,7 @@
 
 </head>
 <body>
-<div id="page" class="whole <?php echo join( ' ', $whole_classes);?>">
+<div id="page" class="whole <?php echo join( ' ', $whole_classes);?> menu-category">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1>速報・データ</h1>

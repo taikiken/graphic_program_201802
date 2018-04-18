@@ -92,6 +92,11 @@ if (
   </div><!--/#side-menu-->
 </div><!--/#side-menu-container-->
 
+<?php
+  // 下タブ ref. https://aws-plus.backlog.jp/view/UNDO_SPBL-432
+  include __DIR__ . '/_footer_sticky_tab_menu.php';
+?>
+
 <footer class="foot-sec">
   <?php include_once __DIR__.'/_footer-sec-inner.php'; ?>
 </footer><!-- /.foot-sec -->
@@ -117,7 +122,6 @@ if (
 <div id="deactivate-modal-container"></div>
 <div id="flush-modal-container"></div>
 
-<?php include __DIR__ . '/_footer_sticky_tab_menu.php'; ?>
 <?php include __DIR__.'/_footer-bottom.php'; ?>
 
 </body>

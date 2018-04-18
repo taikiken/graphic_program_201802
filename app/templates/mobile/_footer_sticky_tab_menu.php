@@ -9,7 +9,7 @@
 ?>
 <nav class="nadir_tab">
   <ul class="nadir_tab-list">
-    <li class="nadir_tab-item current">
+    <li class="nadir_tab-item nadir_tab-item__home">
       <a class="nadir_tab-link" href="/">
         <i>
           <svg class="nadir_tab-icon_home" viewBox="0 0 152.4 152.4" width="44px" height="44px" xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +19,7 @@
         ホーム
       </a>
     </li>
-    <li class="nadir_tab-item">
+    <li class="nadir_tab-item nadir_tab-item__menu-livescore">
       <a class="nadir_tab-link" href="/tab-bar/livescore/">
         <i>
           <svg class="nadir_tab-icon_live" viewBox="0 0 147.76 147.12" width="44px" height="44px" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@
         速報
       </a>
     </li>
-    <li class="nadir_tab-item">
+    <li class="nadir_tab-item nadir_tab-item__menu-category">
       <a class="nadir_tab-link" href="/tab-bar/category/">
         <i>
           <svg class="nadir_tab-icon_category" viewBox="0 0 137.21 137.18" width="44px" height="44px" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +39,7 @@
         競技
       </a>
     </li>
-    <li class="nadir_tab-item">
+    <li class="nadir_tab-item nadir_tab-item__nowdo">
       <a class="nadir_tab-link" href="/nowdo/">
         <i>
           <svg class="nadir_tab-icon_nowdo" viewBox="0 0 15 14" width="44px" height="44px" xmlns="http://www.w3.org/2000/svg">
