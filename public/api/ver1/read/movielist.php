@@ -63,7 +63,7 @@ if($y["status"]["code"]===200){
 	
 	$tag=$categories[$category];
 	
-	$nsql=sprintf("select count(*) as n from repo_n where flag=1 and t10='%s'",$tag);
+	$nsql=sprintf("select count(*) as n from repo_n where flag=1 and (t10='%s' or t11='%s' or t12='%s' or t13='%s' or t14='%s' or t15='%s')",$tag,$tag,$tag,$tag,$tag,$tag);
 	$o->query($nsql);
 	$f=$o->fetch_array();
 	$count=$f["n"];
