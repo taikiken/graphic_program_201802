@@ -242,16 +242,16 @@ ORDER BY n
 SQL;
 }
 elseif ($CURRENTDIRECTORY=="bottom_tabs_category") {
-$sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "id", dblm($no, $offset));
+$sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "sort_no", dblm($no, $offset));
 }
 elseif ($CURRENTDIRECTORY=="children_category") {
-$sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "id", dblm($no, $offset));
+$sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "sort_no", dblm($no, $offset));
 }
 elseif ($CURRENTDIRECTORY=="bottom_tabs_livescore") {
-$sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "id", dblm($no, $offset));
+$sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "sort_no", dblm($no, $offset));
 }
 elseif ($CURRENTDIRECTORY=="children_livescore") {
-$sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "id", dblm($no, $offset));
+$sql = sprintf("select %s from %s%s%s%s order by %s %s", $FIELD, $TABLE, $WHERE, $exuser, $excategory, "sort_no", dblm($no, $offset));
 }
 else{
 	$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log"||preg_match("#/photo/#",$_SERVER["REQUEST_URI"]))?" desc":"",dblm($no,$offset));
