@@ -105,8 +105,8 @@ if (isset($tab_response)) :
         // 出力条件 - category - child [E]
         if (is_array($live_children) && count($live_children)) :
     ?>
-          <div class="menu-container category-<?php echo tab_live_slug_by_label($child['dispName']); ?>">
-            <h2 class="menu-heading"><?php echo $child['dispName']; ?>　速報・データ</h2>
+          <div class="menu-container category-<?php echo tab_live_slug_by_label($live['dispName']); ?>">
+            <h2 class="menu-heading"><?php echo $live['dispName']; ?>　速報・データ</h2>
             <ul class="menu-list">
             <?php
             // loop - live - child
