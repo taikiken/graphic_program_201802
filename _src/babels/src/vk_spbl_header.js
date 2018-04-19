@@ -15,10 +15,14 @@
 
 import vk from './vk';
 import { Url } from './app/const/Url';
+import { User } from './app/User';
 
 // -----------------------------------------------
 // VK 用の header 機能を提供します
 // -----------------------------------------------
+
+// login check
+User.init();
 
 // vk detect
 const names = location.hostname.split('.');

@@ -52,9 +52,11 @@ export default class SPViewHeaderSearch extends ViewHeaderSearch {
    * @param {Element} element insert parent element
    * @param {Element} buttonElement opener button
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2-18-04-19 vk header - flag 追加
    */
-  constructor(element, buttonElement, option = {}) {
-    super(element, option);
+  constructor(element, buttonElement, option = {}, vk = false) {
+    super(element, option, vk);
     /**
      * opener button
      * @type {Element}

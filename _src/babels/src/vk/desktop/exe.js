@@ -10,12 +10,12 @@
  *
  */
 import Dom from '../../app/Dom';
-import { User } from '../../app/User';
 import ViewHeaderSearch from '../../view/header/ViewHeaderSearch';
 // import ViewDeleteModal from '../../view/modal/ViewDeleteModal';
 import ViewFlushModal from '../../view/modal/ViewFlushModal';
 import ViewHeaderUser from '../../view/header/ViewHeaderUser';
 import ViewLogoutModal from '../../view/modal/ViewLogoutModal';
+import PageTop from '../../ui/PageTop';
 
 
 // VK desktop 実行ファイル
@@ -83,12 +83,13 @@ const modalFlush = () => {
  * vk - desktop 実行します
  */
 const desktop = () => {
-  // login check
-  User.init();
+  // page top
+  const pageTop = new PageTop();
+  pageTop.init();
   // modal 準備
   // modalDelete();
   modalFlush();
-  // header - use
+  // header - user
   header();
   // 検索フォーム
   search();

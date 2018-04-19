@@ -57,9 +57,11 @@ export default class SPViewHeaderUser extends View {
    * ログイン / 非ログイン でメニューを変更</p>
    * @param {Element} element insert root element
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2-18-04-19 vk header - flag 追加
    */
-  constructor(element, option = {}) {
-    super(element, option);
+  constructor(element, option = {}, vk = false) {
+    super(element, option, vk);
     /**
      * bind 済み this.memberCallback
      * @type {Function}
