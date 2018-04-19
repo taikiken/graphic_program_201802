@@ -10,7 +10,12 @@ include $_include . 'postgre.php';
 include $_include . 'func.php';
 $o = new db;
 $o->connect();
-
+if ($_POST['table'] == 1){
+    $table = "bottom_tab_categories";
+}
+elseif ($_POST['table'] == 2) {
+    $table = "bottom_tab_livescores";
+}
 if (count($_POST['id']) !== 2) {
     $status=array(
 			"code"=>400,
@@ -21,7 +26,7 @@ if (count($_POST['id']) !== 2) {
         sendResponse($status);
 }
 
-$sql = "select id, sort_no from bottom_tab_categories where id in (" . implode(',', $_POST['id']) . ")";
+$sql = "select c.id, c.sort_no, n.parent_tab_id, n.type from ".$table." c left join bottom_tab_nodes n on c.id = n.bottom_tab_id where c.id in (" . implode(',', $_POST['id']) . ")";
 $o->query($sql);
 $rows = $o->fetch_all();
 
@@ -35,13 +40,30 @@ if (count($rows) !== 2) {
 		);
     sendResponse($status);
 }
-
+if ($rows[0]['parent_tab_id'] !== $rows[1]['parent_tab_id']){echo $rows[0]['parent_tab_id'];echo "<br>";echo $rows[1]['parent_tab_id'];
+    $status=array(
+			"code"=>400,
+			"message_type"=>"error",
+			"user_message"=>"存在ないidが選択されています。",
+			"developer_message"=>"reaction値に不正値がある。"
+		);
+    sendResponse($status);
+}
+if ($rows[0]['type'] !== $rows[1]['type']){
+    $status=array(
+			"code"=>400,
+			"message_type"=>"error",
+			"user_message"=>"存在ないidが選択されています。",
+			"developer_message"=>"reaction値に不正値がある。"
+		);
+    sendResponse($status);
+}
 $temp_sort_no = $rows[0]['sort_no'];
 $rows[0]['sort_no'] = $rows[1]['sort_no'];
 $rows[1]['sort_no'] = $temp_sort_no;
 
 foreach ($rows as $row) {
-    $update = sprintf("update bottom_tab_categories set sort_no = %s where id = %s", $row['sort_no'], $row['id']);
+    $update = sprintf("update %s set sort_no = %s where id = %s",$table, $row['sort_no'], $row['id']);
     $o->query($update);
 }
 $status=array(

@@ -57,7 +57,7 @@
         
       <?php if($TABLE == "bottom_tab_categories" or $TABLE== "bottom_tab_livescores"){ ?>
     <td scope="col" width="50" style="text-align: center;" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">
-        <button type="button" data-this-id="<?php echo $p[$i]['id']; ?>" class="js-sort-swap" style="width: 90%; margin: auto;">↑</button>
+        <button type="button" data-this-id="<?php echo $p[$i]['id']; ?>" data-this-table="<?php echo $type; ?>" class="js-sort-swap" style="width: 90%; margin: auto;">↑</button>
     </td>
   <?php }?>
 
@@ -135,12 +135,14 @@ $('.js-sort-swap').on('click', function(){
     var tr = $(this).closest('tr');
     var id = $(this).data('thisId');
     var beforeId = tr.prev().find('.js-sort-swap').data('thisId');
+    var table = $(this).data('thisTable'); 
 //    console.log(id, beforeId);
 //    return;
     $.ajax({
         url: "/api/editdm/user/sort_no.php",
         data: {
-            'id[]': [id,beforeId]
+            'id[]': [id,beforeId],
+            'table': table
         },
         dataType: "json",
         type    : "POST",
