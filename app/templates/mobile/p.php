@@ -568,11 +568,3 @@ ref. UNDO_SPBL-478 【課題管理】記事詳細本文中差し込み広告をT
 if ( !$page['post']['is_sponserd'] ) : ?>
 <script src="//a.teads.tv/page/80648/tag" async="true"></script>
 <?php endif; ?>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-setTimeout(function(){ 
-  $(".vjs-tech").attr("playsinline", ""); 
-  }, 1000);
-</script>
