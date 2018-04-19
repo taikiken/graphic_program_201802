@@ -43,11 +43,18 @@
       <div class="stats__nav stats__nav--mlb">
         <ul class="stats__nav__list">
           <li class="stats__nav__item_1"><a href="/stats/mlb/">日程・結果</a></li>
-          <li class="stats__nav__item_2"><a href="/stats/mlb/standing/">順位表</a></li>
+          <li class="stats__nav__item_2 current"><a href="/stats/mlb/standing/">順位表</a></li>
           <li class="stats__nav__item_3"><a href="/stats/mlb/leaders/">個人成績</a></li>
           <li class="stats__nav__item_4"><a href="/stats/mlb/playerlist/">日本人成績</a></li>
         </ul>
       </div><!-- /.stats__nav -->
+
+      <div class="stats__local__nav stats__local__nav--mlb">
+        <ul class="stats__local__nav__list">
+          <li class="stats__local__nav__item_1"><a href="/stats/mlb/standing/" class="stats__local__nav__item_link">アメリカンリーグ</a></li>
+          <li class="stats__local__nav__item_2"><a href="/stats/mlb/standing/?sdc_page_code=Standing&sdc_subpage_code=&game_type_id=1&league_code=2&sports_code=sbmlb&operation_mode=" class="stats__local__nav__item_link">ナショナルリーグ</a></li>
+        </ul>
+      </div><!-- /.stats__local__nav -->
 
       <link rel="stylesheet" href="//front.sports-digican.com/statics/css/common-sp.css" />
       <link rel="stylesheet" href="//front.sports-digican.com/statics/C00037/css/sdc-parts.css" />
@@ -125,6 +132,35 @@
 </div><!-- /.body-sec -->
 
 <script src="/assets/js/stats_mlb.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
+
+<!-- アリーグ・ナリーグを判定し、stats__local__navにcurrentを付与 -->
+<script>
+  // URLのパラメータを取得
+  var urlParam = location.search.substring(1);
+  var paramArray = [];
+
+  // URLにパラメータが存在する場合
+  if(urlParam) {
+    // 「&」が含まれている場合は「&」で分割
+    var param = urlParam.split('&');
+
+    // 用意した配列にパラメータを格納
+    for (i = 0; i < param.length; i++) {
+      var paramItem = param[i].split('=');
+      paramArray[paramItem[0]] = paramItem[1];
+    }
+  }
+
+  var leagueLink = document.getElementsByClassName('stats__local__nav__item_link');
+
+  // パラメータleague_codeを判定する
+  if (paramArray.league_code == '2') {
+    leagueLink[1].classList.add('current');
+  } else {
+    leagueLink[0].classList.add('current');
+  }
+</script>
 
 <?php
 /*
