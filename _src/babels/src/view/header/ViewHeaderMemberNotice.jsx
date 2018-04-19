@@ -68,9 +68,11 @@ export default class ViewHeaderMemberNotice extends View {
    * お知らせ(header) for login member
    * @param {Element} element insert root element
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2-18-04-19 vk header - flag 追加
    */
-  constructor(element, option = {}) {
-    super(element, option);
+  constructor(element, option = {}, vk = false) {
+    super(element, option, vk);
     // ----
     /**
      * Action instance を設定します
@@ -598,6 +600,7 @@ export default class ViewHeaderMemberNotice extends View {
         safely={this.executeSafely}
         mount={this.onMount}
         dispose={this.dispose}
+        vk={this.vk}
       />,
       this.element,
     );

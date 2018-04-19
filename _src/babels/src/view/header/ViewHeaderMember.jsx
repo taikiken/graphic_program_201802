@@ -64,9 +64,10 @@ export default class ViewHeaderMember extends View {
    *
    * @param {Element} element insert root element
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    */
-  constructor(element, option = {} ) {
-    super(element, option);
+  constructor(element, option = {}, vk = false) {
+    super(element, option, vk);
     /**
      * Action instance を設定します
      * @override
@@ -485,6 +486,7 @@ export default class ViewHeaderMember extends View {
         userName={response.userName}
         safely={this.boundSafely}
         did={this.boundMount}
+        vk={this.vk}
       />,
       this.element,
     );

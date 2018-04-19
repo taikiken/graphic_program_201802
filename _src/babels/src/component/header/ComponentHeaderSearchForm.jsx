@@ -28,22 +28,26 @@ export default class ComponentHeaderSearchForm extends React.Component {
   // ---------------------------------------------------
   /**
    * React.propTypes
-   * @returns {{listen: boolean, show: boolean}} React.propTypes
+   * - vk: since 2018-04-19 - vk header
+   * @returns {{listen: boolean, show: boolean, vk: boolean}} React.propTypes
    */
   static get propTypes() {
     return {
       listen: React.PropTypes.bool,
       show: React.PropTypes.bool,
+      vk: React.PropTypes.bool,
     };
   }
   /**
    * React.defaultProps
-   * @returns {{listen: boolean, show: boolean}} listen: false, show: true
+   * - vk: since 2018-04-19 - vk header
+   * @returns {{listen: boolean, show: boolean, vk: boolean}} listen: false, show: true
    */
   static get defaultProps() {
     return {
       listen: false,
       show: true,
+      vk: false,
     };
   }
   // ---------------------------------------------------

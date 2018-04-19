@@ -129,7 +129,9 @@ export default class ViewHeaderUser extends View {
         this.dispose();
       }
       const boundCallback = this._boundCallback;
-      member = new ViewHeaderMember(this.element);
+      // @since 2018-04-19 vk flag 追加
+      member = new ViewHeaderMember(this.element, {}, this.vk);
+      // member = new ViewHeaderMember(this.element);
       this._member = member;
       member.on(View.BEFORE_RENDER, boundCallback);
       member.on(View.WILL_MOUNT, boundCallback);

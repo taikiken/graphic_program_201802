@@ -11,14 +11,14 @@
  */
 
 // net
-import {Cookie} from '../net/Cookie';
+import { Cookie } from '../net/Cookie';
 
 // event
 // import {Env} from './Env';
-import {UserStatus} from '../event/UserStatus';
+import { UserStatus } from '../event/UserStatus';
 
 // data
-import {Safety} from '../data/Safety';
+import { Safety } from '../data/Safety';
 
 //
 // let _symbol = Symbol();
@@ -29,6 +29,7 @@ import {Safety} from '../data/Safety';
  * @type {?UserDae}
  * @private
  * @since 2016-11-05
+ * @since 2018-04-19 val header - sub domain 取得可能な cookie set
  */
 let information = null;
 
@@ -90,8 +91,10 @@ export class User {
   // ---------------------------------------------------
   /**
    * ログイン設定をします
+   * - since 2018-04-19 subdomain 取得可能なように domain 指定する
    * @param {string} token 開発中の引数はオプション扱いです
    * @return {boolean} login が成功したかを返します
+   * @since 2018-04-19 vk header - domain 指定 `.sportsbull.jp`
    */
   static login(token) {
     // token = Safety.string(token, '');
@@ -104,7 +107,8 @@ export class User {
       return false;
     }
     // save
-    const result = Cookie.save(token);
+    // @since 2018-04-19 subdomain 取得可能なように domain 指定する
+    const result = Cookie.save(token, Cookie.TARGET, new Date(Date.now() + (1000 * 60 * 60 * 24 * 90)), '/', '.sportsbull.jp');
     // console.log('User.login ', result, token);
     User.sign = result;
     return result;

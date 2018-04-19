@@ -35,7 +35,13 @@ export default class ComponentHeaderMemberSetting extends React.Component {
   // ---------------------------------------------------
   /**
    * React.propTypes
-   * @returns {{userName: string, icon: string, safely: function, did: function}}
+   * @returns {{
+   *    userName: string,
+   *    icon: string,
+   *    safely: function,
+   *    did: function,
+   *    vk: boolean
+   * }}
    * React.propTypes
    */
   static get propTypes() {
@@ -44,6 +50,7 @@ export default class ComponentHeaderMemberSetting extends React.Component {
       icon: React.PropTypes.string.isRequired,
       safely: React.PropTypes.func.isRequired,
       did: React.PropTypes.func.isRequired,
+      vk: React.PropTypes.bool.isRequired,
     };
   }
   // ---------------------------------------------------
@@ -209,7 +216,8 @@ export default class ComponentHeaderMemberSetting extends React.Component {
     // ---
     const noticeElement = this.noticeElement;
     if (noticeElement) {
-      const notice = new ViewHeaderMemberNotice(noticeElement);
+      const notice = new ViewHeaderMemberNotice(noticeElement, {}, this.props.vk);
+      // const notice = new ViewHeaderMemberNotice(noticeElement);
       notice.start();
     }
     const commentStatus = this.commentStatus;

@@ -37,9 +37,11 @@ export default class ViewFlushModal extends View {
    * フラッシュ・メッセージ・モーダル
    * @param {Element} element target HTMLElement
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2-18-04-19 vk header - flag 追加
    */
-  constructor(element, option = {}) {
-    super(element, option);
+  constructor(element, option = {}, vk = false) {
+    super(element, option, vk);
     /**
      * modal instance
      * @type {null|Object}

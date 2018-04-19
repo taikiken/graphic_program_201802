@@ -11,7 +11,7 @@
  */
 
 
-import {Safety} from '../data/Safety';
+import { Safety } from '../data/Safety';
 
 // let _symbol = Symbol();
 

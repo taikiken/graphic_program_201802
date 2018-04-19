@@ -14,8 +14,8 @@
 // import {Action} from '../action/Action';
 // import ViewError from './error/ViewError';
 
-import {EventDispatcher} from '../event/EventDispatcher';
-import {Safety} from '../data/Safety';
+import { EventDispatcher } from '../event/EventDispatcher';
+import { Safety } from '../data/Safety';
 
 /**
  * 表示を行います
@@ -86,8 +86,10 @@ export default class View extends EventDispatcher {
    * action/Headline を使い Ajax request 後 element へ dom を作成します
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2-18-04-19 vk header - flag 追加
    */
-  constructor(element, option = {}) {
+  constructor(element, option = {}, vk = false) {
     option = Safety.object(option);
     super();
     /**
@@ -123,6 +125,12 @@ export default class View extends EventDispatcher {
      * @since 2016-09-28
      */
     this.boundSafely = this.executeSafely.bind(this);
+    /**
+     * VK（バーチャル甲子園）flag
+     * @type {boolean}
+     * @since 2018-04-19 - VK header
+     */
+    this.vk = vk;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

@@ -16,6 +16,14 @@ const Browser = self.Sagen.Browser;
 // let _symbol = Symbol();
 
 /**
+ * request host(protocol + host)
+ * @private
+ * @type {string}
+ * @since 2018-04-19 - vk header
+ */
+let host = 'https://sportsbull.jp';
+
+/**
  * Page 遷移 URL
  * - 全て static です
  * - a tag href へハードコードされる URL 定義
@@ -51,6 +59,23 @@ export class Url {
    */
   static get CATEGORY() {
     return `/category/${Url.CATEGORY_SLUG}/`;
+  }
+  // ---------------------------------------------------
+  /**
+   * request host(protocol + host) 取得します
+   * @returns {string} protocol + host
+   * @since 2018-04-19 - vk header
+   */
+  static get host() {
+    return host;
+  }
+  /**
+   * request host(protocol + host) を設定します
+   * @param {string} hostname request host(protocol + host)
+   * @since 2018-04-19 - vk header
+   */
+  static set host(hostname) {
+    host = hostname;
   }
   // ---------------------------------------------------
   //  METHOD
