@@ -39,11 +39,12 @@ const ReactDOM = self.ReactDOM;
  * {@link ViewHeaderUser} - header user 関連メニュー - ログイン / 非ログイン でメニューを変更
  * @param {string} signup signup url
  * @param {string} login login url
+ * @param {boolean} vk vk flag
  * @returns {?XML} `div.user`
  * @constructor
  * @since 2017-12-08 - update element
  */
-const HeaderUserComponent = ({ signup, login }) => (
+const HeaderUserComponent = ({ signup, login, vk }) => (
   <div className="user">
     <div className="user-signup-btn">
       <a href={login} className="user-signup-btn--login">ログイン</a>
@@ -62,11 +63,12 @@ const HeaderUserComponent = ({ signup, login }) => (
 */
 /**
  * React.propTypes
- * @type {{signup: string, login: string}}
+ * @type {{signup: string, login: string, vk: boolean}}
  */
 HeaderUserComponent.propTypes = {
   signup: React.PropTypes.string.isRequired,
   login: React.PropTypes.string.isRequired,
+  vk: React.PropTypes.bool.isRequired,
 };
 
 /**
@@ -151,36 +153,11 @@ export default class ViewHeaderUser extends View {
    * 非メンバー Dom を生成します
    */
   render() {
-    //
-    // let _this = this;
-    //
-    // let UserDom = React.createClass( {
-    //   render: function() {
-    //
-    //     return (
-    //       <div className="user">
-    //         <div className="btn-signup">
-    //           <a href={Url.signup()}>無料登録</a>&nbsp;/&nbsp;<a href={Url.login()}>ログイン</a>
-    //         </div>
-    //       </div>
-    //     );
-    //   },
-    //   componentDidMount: function() {
-    //
-    //     _this.executeSafely( View.DID_MOUNT );
-    //
-    //   }
-    // } );
-    //
-    // ReactDOM.render(
-    //   <UserDom />,
-    //   this.element
-    // );
-    // console.log('ViewHeaderUser.render -------------------');
     ReactDOM.render(
       <HeaderUserComponent
         signup={Url.signup()}
         login={Url.login()}
+        vk={this.vk}
       />,
       this.element,
     );

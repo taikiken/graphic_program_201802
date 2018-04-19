@@ -74,7 +74,9 @@ export default class ViewFlushModal extends View {
    */
   render():void {
     this._render = ReactDOM.render(
-      <FlushNode />,
+      <FlushNode
+        vk={this.vk}
+      />,
       this.element,
     );
   }

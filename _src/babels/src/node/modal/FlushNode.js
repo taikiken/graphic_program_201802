@@ -10,28 +10,28 @@
  *
  */
 
-import {MessageStatus} from '../../event/MessageStatus';
+import { MessageStatus } from '../../event/MessageStatus';
 // import {Message} from '../../app/const/Message';
 
 // util
-import {Scroll} from '../../util/Scroll';
+import { Scroll } from '../../util/Scroll';
 //
 // // Sagen
 // let Sagen = self.Sagen;
 
 // React
-let React = self.React;
+const React = self.React;
 
 // tween
-let greensock = self.com.greensock;
-let TweenLite = greensock.TweenLite;
-let easing = greensock.easing;
+const greensock = self.com.greensock;
+const TweenLite = greensock.TweenLite;
+const easing = greensock.easing;
 
 /**
  * Flush modal を表示します
  * @type {*|Function|ReactClass}
  */
-export let FlushNode = React.createClass( {
+export const FlushNode = React.createClass( {
   propTypes: {
     show: React.PropTypes.bool,
     type: React.PropTypes.string,
@@ -58,38 +58,9 @@ export let FlushNode = React.createClass( {
       css: {opacity: 0}
     };
   },
-  render: function() {
-    let position = () => {
-      if ( this.top !== 0 ) {
-        return { top: `${this.top}px` };
-      } else {
-        return { opacity: 1 };
-      }
-    };
-    // console.log( 'render ', this.state.show, position() );
-    if ( !this.state.show ) {
-      return null;
-    } else {
-      return (
-        <div className="modal-dialogue modal-dialogue_delete" style={this.state.css}>
-          <div className="flush-modal-bg modal-bg" />
-          <div className={`flush-dialogue dialogue-notice ${this.state.type}`} style={position()}>
-            <div className="dialogue-notice-inner">
-              <div className="dialogue-notice-info">{this.state.message}</div>
-            </div>
-          </div>
-        </div>
-      );
-    }
-  },
-  // componentDidMount: function() {
-  //   if ( this.status === null ) {
-  //     this.status = MessageStatus.factory();
-  //   }
-  // },
   openModal: function() {
-    let object = { opacity: 0 };
-    let _this = this;
+    const object = { opacity: 0 };
+    const _this = this;
 
     TweenLite.to(
       object,
@@ -108,8 +79,8 @@ export let FlushNode = React.createClass( {
     );
   },
   closeModal: function( delay:Number = 0 ) {
-    let object = { opacity: 1 };
-    let _this = this;
+    const object = { opacity: 1 };
+    const _this = this;
 
     TweenLite.to(
       object,
@@ -139,5 +110,29 @@ export let FlushNode = React.createClass( {
     if ( show ) {
       this.openModal();
     }
-  }
-} );
+  },
+  render: function() {
+    const position = () => {
+      if ( this.top !== 0 ) {
+        return { top: `${this.top}px` };
+      } else {
+        return { opacity: 1 };
+      }
+    };
+    // console.log( 'render ', this.state.show, position() );
+    if ( !this.state.show ) {
+      return null;
+    } else {
+      return (
+        <div className="modal-dialogue modal-dialogue_delete" style={this.state.css}>
+          <div className="flush-modal-bg modal-bg" />
+          <div className={`flush-dialogue dialogue-notice ${this.state.type}`} style={position()}>
+            <div className="dialogue-notice-inner">
+              <div className="dialogue-notice-info">{this.state.message}</div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  },
+});
