@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2018 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2018/04/19 - 12:49
+ * @date 2018/04/19 - 14:54
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -10,10 +10,12 @@
  *
  */
 
-// vk mobile 実行ファイル
+import desktop from './desktop/exe';
+import mobile from './mobile/exe';
 
-const mobile = () => {
-  console.log('mobile');
+const vk = {
+  desktop,
+  mobile,
 };
 
-export default mobile();
+export default vk;

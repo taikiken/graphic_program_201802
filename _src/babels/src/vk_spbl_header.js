@@ -13,6 +13,14 @@
  */
 'use strict';
 
+import vk from './vk';
+
 // -----------------------------------------------
 // VK 用の header 機能を提供します
 // -----------------------------------------------
+const Sagen = self.Sagen;
+if (Sagen.Browser.Mobile.is()) {
+  vk.mobile();
+} else {
+  vk.desktop();
+}

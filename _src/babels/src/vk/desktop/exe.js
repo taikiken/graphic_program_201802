@@ -21,7 +21,7 @@ import ViewLogoutModal from '../../view/modal/ViewLogoutModal';
 // VK desktop 実行ファイル
 
 /**
- * header user information / 検索フォーム
+ * 検索フォーム
  */
 const search = () => {
   const element = Dom.search();
@@ -79,6 +79,9 @@ const modalFlush = () => {
   }
 };
 
+/**
+ * vk - desktop 実行します
+ */
 const desktop = () => {
   // login check
   User.init();
