@@ -10,10 +10,10 @@ include $_include . 'postgre.php';
 include $_include . 'func.php';
 $o = new db;
 $o->connect();
-if ($_POST['table'] == 1){
+if ($_POST['type'] == 1){
     $table = "bottom_tab_categories";
 }
-elseif ($_POST['table'] == 2) {
+elseif ($_POST['type'] == 2) {
     $table = "bottom_tab_livescores";
 }
 if (count($_POST['id']) !== 2) {
@@ -26,7 +26,8 @@ if (count($_POST['id']) !== 2) {
         sendResponse($status);
 }
 
-$sql = "select c.id, c.sort_no, n.parent_tab_id, n.type from ".$table." c left join bottom_tab_nodes n on c.id = n.bottom_tab_id where c.id in (" . implode(',', $_POST['id']) . ")";
+$sql = "select c.id, c.sort_no, n.parent_tab_id, n.type from ".$table." c left join bottom_tab_nodes n on c.id = n.bottom_tab_id "
+        . "where c.id in (" . implode(',', $_POST['id']) . ") and type=".$_POST['type'];
 $o->query($sql);
 $rows = $o->fetch_all();
 

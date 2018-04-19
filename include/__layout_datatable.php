@@ -142,7 +142,7 @@ $('.js-sort-swap').on('click', function(){
         url: "/api/editdm/user/sort_no.php",
         data: {
             'id[]': [id,beforeId],
-            'table': table
+            'type': table
         },
         dataType: "json",
         type    : "POST",
