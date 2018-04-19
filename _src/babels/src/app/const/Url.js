@@ -109,10 +109,15 @@ export class Url {
   /**
    * signup url
    * @param {string} [path=''] path option
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {string} signup url を返します
    */
-  static signup(path = '') {
-    const base = '/signup/';
+  static signup(path = '', vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    const base = `${Url.host}/signup/`;
     switch ( path ) {
       case 'account':
         return `${base}account`;
@@ -176,10 +181,15 @@ export class Url {
   }
   /**
    * login url
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {string} login url を返します
    */
-  static login() {
-    return '/login/';
+  static login(vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    return `${Url.host}/login/`;
   }
 
   /**
@@ -252,6 +262,9 @@ export class Url {
    */
   static settings(path = '', vk = false) {
     // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
     const base = `${Url.host}/settings/`;
     // const base = '/settings/';
 

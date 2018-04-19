@@ -27,6 +27,7 @@ import { SettingsStatus } from '../../event/SettingsStatus';
 
 // component
 import ComponentHeaderMemberSetting from '../../component/header/ComponentHeaderMemberSetting';
+import { Empty } from '../../app/const/Empty';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -164,6 +165,8 @@ export default class ViewHeaderMember extends View {
     // vk flag true の時は実行しない
     if (this.action) {
       this.action.start();
+    } else if (this.vk) {
+      this.vkRender();
     }
   }
   /**
@@ -250,5 +253,21 @@ export default class ViewHeaderMember extends View {
     clearTimeout(this._timer);
     this.reloadFlag = true;
     this.start();
+  }
+  /**
+   * VK 専用・ログインユーザーheader 表示
+   * @since 2018-04-19 VK（バーチャル甲子園）flag
+   */
+  vkRender() {
+    ReactDOM.render(
+      <ComponentHeaderMemberSetting
+        icon={Empty.USER_EMPTY}
+        userName=""
+        safely={this.boundSafely}
+        did={this.boundMount}
+        vk={this.vk}
+      />,
+      this.element,
+    );
   }
 }
