@@ -9,7 +9,7 @@ $o->connect();
 $response = [];
 
 $type = array('home','livescore','category');
-$icon_bucket_path = '/static/bottomtab/icon/';
+$icon_bucket_path = '/assets/images/common/';
 
 foreach ($type as $value) {
 
