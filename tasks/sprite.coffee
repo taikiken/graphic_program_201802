@@ -80,6 +80,10 @@ option = setting.sprite.option
   sprite 階層の directory 名称から sprite 画像を生成する
 ###
 spriteTask = ( name ) ->
+  if !sprity
+    console.log('spriteTask: sprity not found - do nothing')
+    return
+
   orientation = option[ name ] || 'binary-tree'
   return sprity.src
     src: sprite + '/' + name + '/*.*'
@@ -101,6 +105,10 @@ spriteTask = ( name ) ->
 # sprite:make
 # sprite 階層をパース（除く css）
 gulp.task 'sprite:make', ->
+  if !sprity
+    console.log('sprite:make: sprity not found - do nothing')
+    return
+
   return fs.readdir sprite, (err, files) ->
     if err
       console.error err
@@ -119,6 +127,10 @@ gulp.task 'sprite:make', ->
 # ToDo: 出力 scss を _sprite.scss へ concat を自動化
 #
 gulp.task 'sprite:one', ->
+  if !sprity
+    console.log('sprite:one: sprity not found - do nothing')
+    return
+
   name = argv.name || argv.n
   orientation = argv.orientation || argv.o || 'binary-tree'
   return sprity.src
@@ -163,6 +175,10 @@ gulp.task 'sprite:css:concat', ->
 cssPath = dir.sprite.img.replace app, ''
 #gulp.task 'sprite:build', ->
 gulp.task 'sprite:build', ->
+  if !sprity
+    console.log('sprite:build: sprity not found - do nothing')
+    return;
+
   # sprite directory が空の時走るとエラーになるので
   # fs 一度ファイルがあるのか見る
   fs.readdir sprite, (err, files) ->
@@ -200,6 +216,10 @@ gulp.task 'sprite:build', ->
 cssPath = dir.sprite.img.replace app, ''
 #gulp.task 'sprite:build', ->
 gulp.task 'sprite:build:shell', ->
+  if !sprity
+    console.log('sprite:build:shell: sprity not found - do nothing')
+    return
+
 # sprite directory が空の時走るとエラーになるので
 # fs 一度ファイルがあるのか見る
   fs.readdir sprite, (err, files) ->

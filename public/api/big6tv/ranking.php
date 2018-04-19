@@ -156,11 +156,8 @@ foreach( $response as $key => $value ) :
 endforeach;
 
 $result   = array(
-  'response' => array(
-    'timezone'   => date_default_timezone_get(),
     'lastupdate' => $lastUpdate,
     'ranking'    => $ranking,
-  )
 );
 
 

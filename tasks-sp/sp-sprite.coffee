@@ -72,6 +72,9 @@ sp = dir.sp
 # 今回は 「ルート相対」
 
 gulp.task 'sp:sprite:build', ->
+  if !sprity
+    console.log('sp:sprite:build: sprity not found - do nothing')
+    return
 # sprite directory が空の時走るとエラーになるので
 # fs 一度ファイルがあるのか見る
   fs.readdir sprite, (err, files) ->
@@ -110,6 +113,9 @@ gulp.task 'sp:sprite:build', ->
 # 出力後別タスクでコピーと削除を行う
 
 gulp.task 'sp:sprite:build:shell', ->
+  if !sprity
+    console.log('sp:sprite:build:shell: sprity not found - do nothing')
+    return
 # sprite directory が空の時走るとエラーになるので
 # fs 一度ファイルがあるのか見る
   fs.readdir sprite, (err, files) ->
