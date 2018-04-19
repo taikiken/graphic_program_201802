@@ -10,7 +10,6 @@ $response = [];
 
 $type = array('home','livescore','category');
 $icon_bucket_path = '/assets/images/common/';
-var_dump($servername);exit;
 
 foreach ($type as $value) {
 
