@@ -9,7 +9,7 @@ $o->connect();
 $response = [];
 
 $type = array('home','livescore','category');
-$icon_bucket_path = '/assets/images/common/';
+$icon_server_path = 'https://'.$servername.'/assets/images/common/';
 
 foreach ($type as $value) {
 
@@ -62,10 +62,10 @@ SQL;
                 $tmp_relationList[$f['parent_id']]['child'][] =[
                         'dispName'  => $f['name'],
                         'unread'    => false,
-                        'icon'      => $servername.$icon_bucket_path.$f['icon'],
-                        'icon_sp'      => $servername.$icon_bucket_path.$f['icon_sp'],
-                        'icon_ios'      => $servername.$icon_bucket_path.$f['icon_ios'],
-                        'icon_android'      => $servername.$icon_bucket_path.$f['icon_android'],
+                        'icon'      => $icon_server_path.$f['icon'],
+                        'icon_sp'      => $icon_server_path.$f['icon_sp'],
+                        'icon_ios'      => $icon_server_path.$f['icon_ios'],
+                        'icon_android'      => $icon_server_path.$f['icon_android'],
                         'link'      => $f['link']
                     ];
             }
@@ -119,10 +119,10 @@ SQL;
                 $tmp_relationList[$f['parent_id']]['child'][] =[
                         'dispName'  => $f['name'],
                         'unread'    => false,
-                        'icon'      => $servername.$icon_bucket_path.$f['icon'],
-                        'icon_sp'      => $servername.$icon_bucket_path.$f['icon_sp'],
-                        'icon_ios'      => $servername.$icon_bucket_path.$f['icon_ios'],
-                        'icon_android'      => $servername.$icon_bucket_path.$f['icon_android'],
+                        'icon'      => $icon_server_path.$f['icon'],
+                        'icon_sp'      => $icon_server_path.$f['icon_sp'],
+                        'icon_ios'      => $icon_server_path.$f['icon_ios'],
+                        'icon_android'      => $icon_server_path.$f['icon_android'],
                         'link'      => $f['link']
                     ];
             }
