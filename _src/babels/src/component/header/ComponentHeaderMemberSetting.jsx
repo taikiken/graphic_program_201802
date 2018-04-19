@@ -246,7 +246,7 @@ export default class ComponentHeaderMemberSetting extends React.Component {
    * */
   render() {
     const { userName, icon, open } = this.state;
-    const iconImg = Safety.image(icon, Empty.USER_EMPTY);
+    const iconImg = `${Url.host}${Safety.image(icon, Empty.USER_EMPTY)}`;
     const loggedIn = Safety.same(iconImg, Empty.USER_EMPTY);
     // console.log('ComponentHeaderMemberSetting.render', userName, icon, open);
     return (
@@ -268,8 +268,11 @@ export default class ComponentHeaderMemberSetting extends React.Component {
           </a>
           <nav className="preference-menu">
             <ul className="dropMenu">
+              {/*
+              2018-04-19 トルツメ - display: none になってた
               <li className="dropMenu-item"><a className="dropMenu-link" href={Url.mypage()}>ブックマーク<br />アクティビティ</a></li>
-              <li className="dropMenu-item"><a className="dropMenu-link" href={Url.settings()}>設定</a></li>
+              */}
+              <li className="dropMenu-item"><a className="dropMenu-link" href={Url.settings('', this.props.vk)}>設定</a></li>
               <li className="dropMenu-item"><a className="dropMenu-link" href="#" onClick={this.onLogoutClick}>ログアウト</a></li>
             </ul>
           </nav>

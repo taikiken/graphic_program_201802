@@ -14,10 +14,19 @@
 'use strict';
 
 import vk from './vk';
+import { Url } from './app/const/Url';
 
 // -----------------------------------------------
 // VK 用の header 機能を提供します
 // -----------------------------------------------
+
+// vk detect
+const names = location.hostname.split('.');
+if (names[0] === 'vk') {
+  Url.host = 'https://sportsbull.jp';
+}
+
+// execute
 const Sagen = self.Sagen;
 if (Sagen.Browser.Mobile.is()) {
   vk.mobile();

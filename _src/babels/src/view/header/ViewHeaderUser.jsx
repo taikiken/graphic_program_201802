@@ -53,14 +53,6 @@ const HeaderUserComponent = ({ signup, login, vk }) => (
   </div>
 );
 
-/*
-// old
-<div className="user">
-  <div className="btn-signup">
-    <a href={signup}>無料登録</a>&nbsp;/&nbsp;<a href={login}>ログイン</a>
-  </div>
-</div>
-*/
 /**
  * React.propTypes
  * @type {{signup: string, login: string, vk: boolean}}
@@ -80,9 +72,11 @@ export default class ViewHeaderUser extends View {
    * ログイン / 非ログイン でメニューを変更
    * @param {Element} element insert root element
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2-18-04-19 vk header - flag 追加
    */
-  constructor(element, option = {}) {
-    super(element, option);
+  constructor(element, option = {}, vk = false) {
+    super(element, option, vk);
     /**
      * bind 済み this.memberCallback
      * @type {Function}

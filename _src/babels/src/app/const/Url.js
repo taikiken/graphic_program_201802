@@ -13,15 +13,14 @@
 
 const Browser = self.Sagen.Browser;
 
-// let _symbol = Symbol();
-
 /**
  * request host(protocol + host)
+ * - 実行ファイルから全ての処理に先んじて設定します
  * @private
  * @type {string}
  * @since 2018-04-19 - vk header
  */
-let host = 'https://sportsbull.jp';
+let host = '';
 
 /**
  * Page 遷移 URL
@@ -30,19 +29,6 @@ let host = 'https://sportsbull.jp';
  * - [参照](https://docs.google.com/spreadsheets/d/1raMO0x5aeG-bk45PK528ib9HUU-Q4DbHq56oxDQ1h7c/)
  * */
 export class Url {
-  // /**
-  //  * <h4>Page 遷移 URL</h4>
-  //  * @param {Symbol} target Singleton を実現するための private symbol
-  //  */
-  // constructor( target:Symbol ) {
-  //
-  //   if ( _symbol !== target ) {
-  //
-  //     throw new Error( 'Url is static Class. not use new Url().' );
-  //
-  //   }
-  //
-  // }
   // ---------------------------------------------------
   //  CONST 代わり
   // ---------------------------------------------------
@@ -71,6 +57,7 @@ export class Url {
   }
   /**
    * request host(protocol + host) を設定します
+   * - 実行ファイルから全ての処理に先んじて設定します
    * @param {string} hostname request host(protocol + host)
    * @since 2018-04-19 - vk header
    */
@@ -260,10 +247,13 @@ export class Url {
   /**
    * settings url
    * @param {string} [path=''] path option
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {*} settings url を返します
    */
-  static settings(path = '') {
-    const base = '/settings/';
+  static settings(path = '', vk = false) {
+    // vk - 絶対パスを返す
+    const base = `${Url.host}/settings/`;
+    // const base = '/settings/';
 
     switch (path) {
       case 'interest':
