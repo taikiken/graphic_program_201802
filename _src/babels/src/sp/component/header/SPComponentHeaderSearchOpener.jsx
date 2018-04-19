@@ -32,6 +32,16 @@ export default class SPComponentHeaderSearchOpener extends React.Component {
   //  STATIC METHOD
   // ---------------------------------------------------
   /**
+   * React.propTypes
+   * - vk: since 2018-04-19 - vk header
+   * @returns {{vk: boolean}} React.propTypes
+   */
+  static get propTypes() {
+    return {
+      vk: React.PropTypes.bool.isRequired,
+    };
+  }
+  /**
    * 検索フォームを閉じる時に scroll 値を復元します
    * @param {number} y target scroll top px value
    */

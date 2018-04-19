@@ -62,7 +62,7 @@ export default class SPViewHeaderSearch extends ViewHeaderSearch {
      * @type {Element}
      * @private
      */
-    this._button = buttonElement;
+    this.button = buttonElement;
   }
   /**
    * header 検索フォームを生成します
@@ -70,108 +70,21 @@ export default class SPViewHeaderSearch extends ViewHeaderSearch {
    * - {@link SPComponentHeaderSearchOpener}
    */
   render() {
-    // // search form
-    // ReactDOM.render(
-    //   <HeaderSearchNode
-    //     listen={true}
-    //     show={false}
-    //   />,
-    //   this.element
-    // );
-
     // search form
     ReactDOM.render(
       <ComponentHeaderSearchForm
         listen={true}
         show={false}
+        vk={this.vk}
       />,
       this.element,
     );
-
-    // // search form opener
-    // /**
-    //  * 検索コンテナ(form)を open / close
-    //  * @private
-    //  * @type {*|Function|ReactClass}
-    //  */
-    // let ButtonDom = React.createClass( {
-    //   propTypes: {
-    //     body: React.PropTypes.object.isRequired
-    //   },
-    //   render: function() {
-    //     return (
-    //       <a className="head-search-opener" href="#" onClick={this.clickHandler}>{Message.OPENER_SEARCH}</a>
-    //     );
-    //   },
-    //   componentDidMount: function() {
-    //     /**
-    //      * 開いているか真偽値
-    //      * @private
-    //      * @type {Boolean}
-    //      */
-    //     this.open = false;
-    //     /**
-    //      * SearchStatus instance
-    //      * @private
-    //      * @type {SearchStatus}
-    //      */
-    //     this.status = SearchStatus.factory();
-    //     /**
-    //      * scroll top
-    //      * @default 0
-    //      * @private
-    //      * @type {number}
-    //      */
-    //     this.y = 0;
-    //   },
-    //   clickHandler: function( event:Event ):void {
-    //     event.preventDefault();
-    //     /*
-    //     iOS
-    //     fixed 内の input に focus すると
-    //     fixed -> absolute に変わる
-    //     どうも仕様な様子
-    //     そのため blur 後の scroll 位置が 0 になるのを元に戻すために
-    //     open 時の scroll 位置を保存し復元する
-    //     */
-    //     if ( this.open ) {
-    //       // open -> close
-    //       this.open = false;
-    //       this.props.body.removeClass( 'search-form-open' );
-    //       this.status.close();
-    //       // scroll 位置を復元する
-    //       // Scroll.motion( this.y, 0.1, 0.025 );
-    //       this.restoreY( this.y );
-    //     } else {
-    //       // close -> open
-    //       this.open = true;
-    //       // scroll 位置を保存する
-    //       this.y = Scroll.y;
-    //       this.props.body.addClass( 'search-form-open' );
-    //       this.status.open();
-    //     }
-    //   },
-    //   restoreY: function( y:Number ):void {
-    //     // scrollY が 0 でない時は 復元 しない
-    //     // ユーザーが scroll している可能性がある
-    //     if ( Scroll.y !== 0 ) {
-    //       return;
-    //     }
-    //
-    //     Scroll.motion( y, 0.1, 0.025 );
-    //   }
-    // } );
-    //
-    // ReactDOM.render(
-    //   <ButtonDom
-    //     body={new Sagen.Dom( document.body )}
-    //   />,
-    //   this._button
-    // );
     // search form opener button
     ReactDOM.render(
-      <SPComponentHeaderSearchOpener />,
-      this._button
+      <SPComponentHeaderSearchOpener
+        vk={this.vk}
+      />,
+      this.button
     );
   }
 }

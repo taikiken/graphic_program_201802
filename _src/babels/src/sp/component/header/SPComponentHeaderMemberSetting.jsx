@@ -42,6 +42,7 @@ export default class SPComponentHeaderMemberSetting extends React.Component {
       icon: React.PropTypes.string.isRequired,
       safely: React.PropTypes.func.isRequired,
       did: React.PropTypes.func.isRequired,
+      vk: React.PropTypes.bool.isRequired,
     };
   }
   // ---------------------------------------------------
@@ -196,8 +197,11 @@ export default class SPComponentHeaderMemberSetting extends React.Component {
   render() {
     const { total, icon, userName } = this.state;
     const noticeStyle = total === 0 ? { display: 'none' } : { display: 'block' };
-    const iconImg = Safety.image(icon, Empty.USER_EMPTY);
-    const loggedIn = Safety.same(iconImg, Empty.USER_EMPTY);
+    // const iconImg = Safety.image(icon, Empty.USER_EMPTY);
+    // const loggedIn = Safety.same(iconImg, Empty.USER_EMPTY);
+    // vk 絶対パス - 2018-04-19
+    const iconImg = `${Url.host}${Safety.image(icon, Empty.USER_EMPTY)}`;
+    const loggedIn = Safety.same(iconImg, `${Url.host}${Empty.USER_EMPTY}`);
     return (
       <div className="user">
         <div className="preference">

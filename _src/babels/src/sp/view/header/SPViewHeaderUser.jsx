@@ -17,8 +17,8 @@ import View from '../../../view/View';
 import SPViewHeaderMember from './SPViewHeaderMember';
 
 // app
-import {User} from '../../../app/User';
-import {Url} from '../../../app/const/Url';
+import { User } from '../../../app/User';
+import { Url } from '../../../app/const/Url';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -53,8 +53,8 @@ export const SPHeaderNormalUserComponent = () => (
  */
 export default class SPViewHeaderUser extends View {
   /**
-   * <p>SP header user 関連メニュー<br>
-   * ログイン / 非ログイン でメニューを変更</p>
+   * SP header user 関連メニュー
+   * - ログイン / 非ログイン でメニューを変更
    * @param {Element} element insert root element
    * @param {Object} [option={}] optional event handler
    * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
@@ -95,7 +95,7 @@ export default class SPViewHeaderUser extends View {
    * ログインユーザー
    */
   member() {
-    const headerMember = new SPViewHeaderMember(this.element);
+    const headerMember = new SPViewHeaderMember(this.element, {}, this.vk);
     this._member = headerMember;
 
     const boundCallback = this._boundCallback;
@@ -112,25 +112,11 @@ export default class SPViewHeaderUser extends View {
    * 非ログインユーザー
    */
   user() {
-    // // 非ログインユーザー
-    // let UserDom = React.createClass( {
-    //   render: function() {
-    //     return (
-    //       <div className="user">
-    //         <div className="preference">
-    //           <a href={Url.signupLogin()} className="preference-opener"><span className="preference-avatar">&nbsp;</span></a>
-    //         </div>
-    //       </div>
-    //     );
-    //   }
-    // } );
-    //
-    // ReactDOM.render(
-    //   <UserDom/>,
-    //   this.element
-    // );
+    // 非ログインユーザー
     ReactDOM.render(
-      <SPHeaderNormalUserComponent />,
+      <SPHeaderNormalUserComponent
+        vk={this.vk}
+      />,
       this.element
     );
   }
@@ -150,7 +136,8 @@ export default class SPViewHeaderUser extends View {
       // token はあるけどユーザー情報が取得できなかった
       // 処理を止めて一般ユーザー扱いにする
       this.dispose();
-      this.render();
+      // this.render();
+      this.user();
     }
   }
   /**
