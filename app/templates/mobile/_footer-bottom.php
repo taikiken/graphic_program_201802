@@ -112,8 +112,8 @@ s.parentNode.insertBefore(bs, s);
 <?php endif; ?>
 
 
-<?php // UNDO_SPBL-512 - ダンスカテゴリ詳細ではappbnrださない ?>
-<?php if ($page['category']['slug'] === 'dance' && $page['template'] === 'p' ) : ?>
+<?php // UNDO_SPBL-512 - 野球カテゴリ詳細ではappbnrださない ?>
+<?php if ($page['category']['slug'] === 'baseball' && $page['template'] === 'p' ) : ?>
 <script>
 document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("js-header-appbnr-container").remove();
