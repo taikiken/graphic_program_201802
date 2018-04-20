@@ -6,6 +6,7 @@ $TABLE = "bottom_tab_categories";
 $WHERE = " WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id = $parent_id and type=1)";
 $WHERE2 = " WHERE id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS not NULL AND type=1 )";
 $NUMBERINGOFF=1;
+$type = 1;
 
 if($q->get_dir()===0){
     if($q->get_file()===0){
@@ -153,8 +154,8 @@ if($q->get_dir()===0){
 
         $o=new dbutl($TABLE);
         $e=$o->remove($g->f("id"));
-        $o=new dbutl($TABLE2);
-        $e=$o->remove($g->f("id"));
+        $sql = sprintf("delete from bottom_tab_nodes where bottom_tab_id=%s and type=%s",$g->f("id"),$type);
+        $o->query($sql);
     }
 }elseif($q->get_dir()===3){
     $FIELD="*";

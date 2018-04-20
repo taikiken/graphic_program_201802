@@ -129,8 +129,8 @@ if($q->get_dir()===0){
             $o->query($sql);
             $o=new dbutl($TABLE);
             $e=$o->remove($g->f("id"));
-            $o=new dbutl($TABLE2);
-            $e=$o->remove($g->f("id"));
+            $sql = sprintf("delete from bottom_tab_nodes where bottom_tab_id=%s and type=%s",$g->f("id"),$type);
+            $o->query($sql);
         }
     }
 }elseif($q->get_dir()===3){
