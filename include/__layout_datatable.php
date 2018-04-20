@@ -122,6 +122,7 @@
 <?php } ?>
 
 <?php } ?>
+<?php if($TABLE == "bottom_tab_categories" or $TABLE== "bottom_tab_livescores"){ ?>
 <script type="text/javascript">
 var swap_lock = false;
 $('.js-sort-swap:first').prop('disabled', true);
@@ -174,3 +175,4 @@ function tableRowSwap(tr, before){
     before.before(tr);
 }
 </script>
+<?php }?>
