@@ -108,10 +108,12 @@ export default class Dom {
   }
   /**
    * header search from opener
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} search-container-opener element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static searchOpener() {
-    return Dom.get('search-container-opener');
+  static searchOpener(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}search-container-opener`);
   }
   // --------------------------------------
   // footer
@@ -501,8 +503,8 @@ export default class Dom {
   // SP category
   // tab 表示・非表示で class（category）を与えるために...
   /**
-   * div.body-sec<br>
-   * SP: tab 表示・非表示で class（category）を与えるために...
+   * div.body-sec
+   * - SP: tab 表示・非表示で class（category）を与えるために...
    * @return {?Element} div.body-sec
    */
   static bodySection() {
@@ -511,8 +513,8 @@ export default class Dom {
   // --------------------------------------
   // 記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738
   /**
-   * <p>記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738</p>
-   * で ga するために a#readMore-external へのクリックで送信します
+   * 記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738
+   * - ga するために a#readMore-external へのクリックで送信します
    * @return {?Element} a#readMore-external
    */
   static moreExternal() {
@@ -544,10 +546,12 @@ export default class Dom {
   // アプリバナー
   /**
    * アプリバナー格納 Element を取得します
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} div#js-header-appbnr-container
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static appBanner() {
-    return Dom.get('js-header-appbnr-container');
+  static appBanner(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}js-header-appbnr-container`);
   }
   // --------------------------------------
   // announce - 2017-12-18

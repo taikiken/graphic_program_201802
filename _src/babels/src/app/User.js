@@ -20,10 +20,6 @@ import { UserStatus } from '../event/UserStatus';
 // data
 import { Safety } from '../data/Safety';
 
-//
-// let _symbol = Symbol();
-// // let _sign = false;
-
 /**
  * ログインユーザー情報 - {@link User}
  * @type {?UserDae}
@@ -38,19 +34,6 @@ let information = null;
  * - 全てstaticです
  */
 export class User {
-  // /**
-  //  * static class です, instance を作成しません
-  //  * @param {Symbol} target Singleton を実現するための private symbol
-  //  */
-  // constructor( target ) {
-  //
-  //   if ( _symbol !== target ) {
-  //
-  //     throw new Error( 'User is static Class. not use new User().' );
-  //
-  //   }
-  //
-  // }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
@@ -108,7 +91,7 @@ export class User {
     }
     // save
     // @since 2018-04-19 subdomain 取得可能なように domain 指定する
-    const result = Cookie.save(token, Cookie.TARGET, new Date(Date.now() + (1000 * 60 * 60 * 24 * 90)), '/', '.sportsbull.jp');
+    const result = Cookie.save(token, Cookie.TARGET, new Date(Date.now() + (1000 * 60 * 60 * 24 * 90)), '/', Cookie.COOKIE_DOMAIN);
     // console.log('User.login ', result, token);
     User.sign = result;
     return result;

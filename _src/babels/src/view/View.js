@@ -135,6 +135,7 @@ export default class View extends EventDispatcher {
     /**
      * selector(className) prefix
      * @type {string}
+     * @since 2018-04-19 - VK header
      */
     this.prefix = VK.prefix(vk);
   }

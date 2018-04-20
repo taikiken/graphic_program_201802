@@ -21,7 +21,7 @@ import SPPageTop from '../../sp/ui/SPPageTop';
  * header
  */
 const header = () => {
-  const element = Dom.profile();
+  const element = Dom.profile(true);
   if (element) {
     const view = new SPViewHeaderUser(element, {}, true);
     view.start();
@@ -32,8 +32,8 @@ const header = () => {
  * 検索フォーム
  */
 const search = () => {
-  const element = Dom.search();
-  const opener = Dom.searchOpener();
+  const element = Dom.search(true);
+  const opener = Dom.searchOpener(true);
   if (element && opener) {
     const view = new SPViewHeaderSearch(element, opener, {}, true);
     view.start();
@@ -44,7 +44,7 @@ const search = () => {
  * アプリケーションバナー
  */
 const appBanner = () => {
-  const element = Dom.appBanner();
+  const element = Dom.appBanner(true);
   if (element) {
     SPViewAppBanner.init(element, true, true);
   }
@@ -64,11 +64,11 @@ const appBanner = () => {
 /**
  * page top 戻るアニメーション
  */
-const pageTop = () => {
+const top = () => {
   // responsive 残骸で pageTop が 2 Element 存在することがある
   // #js-page_top を sp は優先にする
   // @since 2017-10-23
-  const element = Dom.jsPageTop() || Dom.pageTop();
+  const element = Dom.jsPageTop(true) || Dom.pageTop(true);
   if (element) {
     const ui = new SPPageTop(element);
     ui.start();
@@ -80,7 +80,7 @@ const pageTop = () => {
  */
 const mobile = () => {
   // page top
-  pageTop();
+  top();
   // // modal 準備
   // modalFlush();
   // app banner

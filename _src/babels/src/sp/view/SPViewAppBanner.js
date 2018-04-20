@@ -15,6 +15,7 @@ import { Cookie } from '../../net/Cookie';
 
 // util
 import { Scroll } from '../../util/Scroll';
+import VK from '../../vk/VK';
 
 // Sagen
 /**
@@ -35,6 +36,12 @@ let headerSticky = null;
  */
 let timer = 0;
 
+/**
+ * selector(className) prefix
+ * @type {string}
+ * @since 2018-04-19 - VK header
+ */
+let prefix = '';
 /**
  * アプリダウンロードの動線を改善 #1009
  *
@@ -108,25 +115,25 @@ export class AppBanner {
    */
   static visible(view = false) {
     if (view) {
-      if (Sagen.Dom.hasClass(document.body, 'appbnr-invisible')) {
-        Sagen.Dom.removeClass(document.body, 'appbnr-invisible');
+      if (Sagen.Dom.hasClass(document.body, `${prefix}appbnr-invisible`)) {
+        Sagen.Dom.removeClass(document.body, `${prefix}appbnr-invisible`);
         AppBanner.refresh();
       }
     } else {
-      Sagen.Dom.addClass(document.body, 'appbnr-invisible');
+      Sagen.Dom.addClass(document.body, `${prefix}appbnr-invisible`);
     }
   }
   /**
    * document.body へ `.appbnr-enable` を追加します
    */
   static enable() {
-    Sagen.Dom.addClass(document.body, 'appbnr-enable');
+    Sagen.Dom.addClass(document.body, `${prefix}appbnr-enable`);
   }
   /**
    * document.body から `.appbnr-enable` を削除します
    */
   static free() {
-    Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+    Sagen.Dom.removeClass(document.body, `${prefix}appbnr-enable`);
   }
   // ---------------------------------------------------
   //  CONSTRUCTOR
@@ -164,7 +171,14 @@ export class AppBanner {
      * @type {boolean}
      */
     this.vk = vk;
-    const headers = document.getElementsByClassName('header-sticky');
+    prefix = VK.prefix(vk);
+    // /**
+    //  * selector(className) prefix
+    //  * @type {string}
+    //  * @since 2018-04-19 - VK header
+    //  */
+    // this.prefix = prefix;
+    const headers = document.getElementsByClassName(`${prefix}header-sticky`);
     // console.log('AppBanner headers', headers);
     if (headers && headers.length) {
       headerSticky = headers[0];
@@ -200,7 +214,7 @@ export class AppBanner {
     if (!show) {
       // 1 week cookie save
       // ***開発時コメントにします**
-      Cookie.save('1', Cookie.APP_BANNER, new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)));
+      Cookie.save('1', Cookie.APP_BANNER, new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)), '/', Cookie.COOKIE_DOMAIN);
       // console.log('Cookie', Cookie.APP_BANNER, Cookie.get(Cookie.APP_BANNER));
       AppBanner.free();
     } else {

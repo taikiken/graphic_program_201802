@@ -19,6 +19,7 @@ import SPViewHeaderMember from './SPViewHeaderMember';
 // app
 import { User } from '../../../app/User';
 import { Url } from '../../../app/const/Url';
+import VK from '../../../vk/VK';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -35,18 +36,30 @@ const ReactDOM = self.ReactDOM;
 /**
  * SP - 非ログインユーザー header area Element
  * - login / ユーザー登録リンクを出力します
+ * @param {string} prefix - selector prefix - vk 必要
  * @returns {XML} `div.user`
  * @constructor
  */
-export const SPHeaderNormalUserComponent = () => (
-  <div className="user">
-    <div className="preference">
-      <a href={Url.signupLogin()} className="preference-opener">
-        <span className="preference-avatar">&nbsp;</span>
+export const SPHeaderNormalUserComponent = ({ prefix }) => (
+  <div className={`${prefix}user`}>
+    <div className={`${prefix}preference`}>
+      <a
+        href={Url.signupLogin()}
+        className={`${prefix}preference-opener`}
+      >
+        <span className={`${prefix}preference-avatar`}>&nbsp;</span>
       </a>
     </div>
   </div>
 );
+
+/**
+ * React.propTypes
+ * @type {{prefix: string}}
+ */
+SPHeaderNormalUserComponent.propTypes = {
+  prefix: React.PropTypes.string.isRequired,
+};
 
 /**
  * SP header user 関連メニュー
@@ -95,18 +108,21 @@ export default class SPViewHeaderUser extends View {
    * ログインユーザー
    */
   member() {
-    const headerMember = new SPViewHeaderMember(this.element, {}, this.vk);
-    this._member = headerMember;
+    // VK 表示しない
+    if (!this.vk) {
+      const headerMember = new SPViewHeaderMember(this.element, {}, this.vk);
+      this._member = headerMember;
 
-    const boundCallback = this._boundCallback;
-    headerMember.on(View.BEFORE_RENDER, boundCallback);
-    headerMember.on(View.WILL_MOUNT, boundCallback);
-    headerMember.on(View.DID_MOUNT, boundCallback);
-    headerMember.on(View.ERROR_MOUNT, boundCallback);
-    headerMember.on(View.UNDEFINED_ERROR, boundCallback);
-    headerMember.on(View.EMPTY_ERROR, boundCallback);
-    headerMember.on(View.RESPONSE_ERROR, boundCallback);
-    headerMember.start();
+      const boundCallback = this._boundCallback;
+      headerMember.on(View.BEFORE_RENDER, boundCallback);
+      headerMember.on(View.WILL_MOUNT, boundCallback);
+      headerMember.on(View.DID_MOUNT, boundCallback);
+      headerMember.on(View.ERROR_MOUNT, boundCallback);
+      headerMember.on(View.UNDEFINED_ERROR, boundCallback);
+      headerMember.on(View.EMPTY_ERROR, boundCallback);
+      headerMember.on(View.RESPONSE_ERROR, boundCallback);
+      headerMember.start();
+    }
   }
   /**
    * 非ログインユーザー
@@ -115,7 +131,7 @@ export default class SPViewHeaderUser extends View {
     // 非ログインユーザー
     ReactDOM.render(
       <SPHeaderNormalUserComponent
-        vk={this.vk}
+        prefix={VK.prefix(this.vk)}
       />,
       this.element
     );

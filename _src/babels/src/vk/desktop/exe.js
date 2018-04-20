@@ -57,6 +57,7 @@ const header = () => {
   }
 };
 
+// 運用していないので modal いらない
 // /**
 //  * コメント削除モーダル
 //  */
@@ -86,14 +87,15 @@ const header = () => {
  */
 const top = () => {
   // page top
-  const pageTop = new PageTop(true);
-  pageTop.init();
+  const ui = new PageTop(true);
+  ui.init();
 };
 
 /**
  * vk - desktop 実行します
  */
 const desktop = () => {
+  // page top
   top();
   // modal 準備
   // modalDelete();
