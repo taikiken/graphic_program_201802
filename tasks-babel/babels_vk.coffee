@@ -128,6 +128,8 @@ dependencies.push dir.src + '/babels_carousel/dependencies/gsap/src/minified/Twe
 
 gulp.task 'vk:concat:dev', ->
   clone = dependencies.slice(0)
+  clone.push dir.src + '/bower_exports/react/react.js'
+  clone.push dir.src + '/bower_exports/react/react-dom.js'
   clone.push dir.src + '/babels/dest/vk_spbl_header.bundle.js'
 
   return gulp.src clone
@@ -140,6 +142,8 @@ gulp.task 'vk:concat:dev', ->
 # concat build
 gulp.task 'vk:concat:build', ->
   clone = dependencies.slice(0)
+  clone.push dir.src + '/bower_exports/react/react.min.js'
+  clone.push dir.src + '/bower_exports/react/react-dom.min.js'
   clone.push dir.src + '/babels/dest/vk_spbl_header.bundle.js'
 #  console.log clone
   return gulp.src clone
