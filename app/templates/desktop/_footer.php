@@ -40,7 +40,7 @@ endif;
 ?>
 
 <?php if ( $page['conditional']['footer'] ) : ?>
-  <footer id="footer-container" class="SPBL_common <?php echo $page['html_prefix']; ?>foot-sec">
+  <footer id="<?php echo $page['html_prefix']; ?>footer-container" class="SPBL_common <?php echo $page['html_prefix']; ?>foot-sec">
     <?php include_once __DIR__.'/_footer-sec-inner.php'; ?>
   </footer><!-- /.foot-sec -->
 <?php endif; ?>
