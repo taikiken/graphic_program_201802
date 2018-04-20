@@ -22,7 +22,7 @@
 
 
 <?php if ( $page['conditional']['head_sagen'] ) : ?>
-  <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
 <?php endif; ?>
 
 
@@ -94,10 +94,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     */
   ?>
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $page['site_url_uts']; ?>/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="<?php echo $page['site_url_uts']; ?>/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="icon" sizes="192x192" href="<?php echo $page['site_url_uts']; ?>/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="shortcut icon" href="<?php echo $page['site_url_uts']; ?>/favicon.ico">
 <?php endif; ?>
 
 
