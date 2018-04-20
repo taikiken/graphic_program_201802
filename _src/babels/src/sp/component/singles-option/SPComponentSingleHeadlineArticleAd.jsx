@@ -9,7 +9,8 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-import { Ad } from '../../../app/const/Ad';
+// 未使用 class import しない
+// import { Ad } from '../../../app/const/Ad';
 import { AdDae } from '../../../dae/theme/AdDae';
 // React
 /**
@@ -55,6 +56,14 @@ export default class SPComponentSingleHeadlineArticleAd extends React.Component 
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /* eslint-disable no-unused-vars */
+  // 引数 id の使用が無い warning 出るので抑制しておく
+  // - 冗長な気がする
+  // render - this.props.ad null check 済み
+  // componentDidMount - this.props.ad check 要らない
+  // ad - this.id -> 引数 id
+  // - 文字列 + 演算子でつながない
+  // ${this.id + '_' + this.index} -> ${id}_${this.index}
   /**
    * 広告タグを挿入します
    * @param {string} id 広告タグ
@@ -67,6 +76,7 @@ export default class SPComponentSingleHeadlineArticleAd extends React.Component 
     div.appendChild(script);
     element.appendChild(div);
   }
+  /* eslint-enable no-unused-vars */
   /**
    * delegate - after mount
    */
