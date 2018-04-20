@@ -122,21 +122,25 @@ export default class ViewHeaderUser extends View {
       if (member !== null) {
         this.dispose();
       }
-      const boundCallback = this._boundCallback;
-      // @since 2018-04-19 vk flag 追加
-      member = new ViewHeaderMember(this.element, {}, this.vk);
-      // member = new ViewHeaderMember(this.element);
-      this._member = member;
-      member.on(View.BEFORE_RENDER, boundCallback);
-      member.on(View.WILL_MOUNT, boundCallback);
-      member.on(View.DID_MOUNT, boundCallback);
-      member.on(View.ERROR_MOUNT, boundCallback);
-      member.on(View.UNDEFINED_ERROR, boundCallback);
-      member.on(View.EMPTY_ERROR, boundCallback);
-      member.on(View.RESPONSE_ERROR, boundCallback);
-      member.start();
+      // since 2018-04-20
+      // VK - login user メニュー無し
+      if (!this.vk) {
+        const boundCallback = this._boundCallback;
+        // @since 2018-04-19 vk flag 追加
+        member = new ViewHeaderMember(this.element, {}, this.vk);
+        // member = new ViewHeaderMember(this.element);
+        this._member = member;
+        member.on(View.BEFORE_RENDER, boundCallback);
+        member.on(View.WILL_MOUNT, boundCallback);
+        member.on(View.DID_MOUNT, boundCallback);
+        member.on(View.ERROR_MOUNT, boundCallback);
+        member.on(View.UNDEFINED_ERROR, boundCallback);
+        member.on(View.EMPTY_ERROR, boundCallback);
+        member.on(View.RESPONSE_ERROR, boundCallback);
+        member.start();
+      }
     } else {
-      // user menu
+      // not member - user menu
       this.render();
       this.dispose();
     }

@@ -137,7 +137,7 @@ export default class ComponentHeaderSearchForm extends React.Component {
       this.errors.keyword.message = '***';
       this.setState({ error: true });
     } else {
-      location.href = Url.search(this.state.keyword);
+      location.href = Url.search(this.state.keyword, this.props.vk);
     }
   }
   /**

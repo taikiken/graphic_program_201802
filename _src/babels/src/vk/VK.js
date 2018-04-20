@@ -10,15 +10,16 @@
  *
  */
 
+let prefix = '';
+
 /**
  * VK - 設定ファイル
  */
 export default class VK {
-  /**
-   * vk class prefix
-   * @returns {string} `SPBL_` prefix で使用します
-   */
-  static get PREFIX() {
-    return 'SPBL_';
+  static get prefix() {
+    return prefix;
+  }
+  static set prefix(dataPrefix) {
+    prefix = dataPrefix;
   }
 }

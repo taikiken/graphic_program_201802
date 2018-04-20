@@ -35,15 +35,16 @@ export const FlushNode = React.createClass( {
   propTypes: {
     show: React.PropTypes.bool,
     type: React.PropTypes.string,
-    message: React.PropTypes.element
+    message: React.PropTypes.element,
+    vk: React.PropTypes.bool,
   },
   getDefaultProps: function() {
     return {
       show: false,
       // info | error | success の 3種類
       type: 'info',
-
-      message: <p>&nbsp;</p>
+      message: <p>&nbsp;</p>,
+      vk: false,
     };
   },
   getInitialState: function() {

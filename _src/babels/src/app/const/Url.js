@@ -101,10 +101,16 @@ export class Url {
   /**
    * 検索ページ url
    * @param {string} keyword 検索ワード
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {*|string} 検索ページ url を返します
    */
-  static search(keyword) {
-    return `/search/${keyword}`;
+  static search(keyword, vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    return `${Url.host}/search/${keyword}`;
+    // return `/search/${keyword}`;
   }
   /**
    * signup url
@@ -359,10 +365,16 @@ export class Url {
   /**
    * desktop/p.php line.288 ~ 299, JS で出力のために外部JS file へ
    * - React に script を埋め込むのが困難なため外部スクリプト化しインサートします
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {string} `/assets/js/pc_popin-recommend.js` を返します
    * @since 2016-09-30
    */
-  static popin() {
-    return '/assets/js/pc_popin-recommend.js';
+  static popin(vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    return `${Url.host}/assets/js/pc_popin-recommend.js`;
+    // return '/assets/js/pc_popin-recommend.js';
   }
 }

@@ -48,7 +48,7 @@
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2018/04/19 - 12:41
-	 * buildTime: 2018-4-19 15:33:03
+	 * buildTime: 2018-4-20 15:41:08
 	 * @license MIT
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -63,17 +63,79 @@
 
 	var _vk2 = _interopRequireDefault(_vk);
 
+	var _VK = __webpack_require__(166);
+
+	var _VK2 = _interopRequireDefault(_VK);
+
+	var _Url = __webpack_require__(105);
+
+	var _User = __webpack_require__(113);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// -----------------------------------------------
 	// VK 用の header 機能を提供します
 	// -----------------------------------------------
-	var Sagen = self.Sagen;
-	if (Sagen.Browser.Mobile.is()) {
-	  _vk2.default.mobile();
-	} else {
-	  _vk2.default.desktop();
-	}
+
+	var device = function device(Sagen) {
+	  // execute
+	  if (Sagen.Browser.Mobile.is()) {
+	    _vk2.default.mobile();
+	  } else {
+	    _vk2.default.desktop();
+	  }
+	};
+
+	var user = function user() {
+	  // login check
+	  _User.User.init();
+	};
+
+	var sagen = function sagen(Sagen, selector) {
+	  Sagen.start(selector);
+	  Sagen.Device.init();
+	};
+
+	var init = function init(selector) {
+	  var script = document.getElementById(selector);
+	  if (!script) {
+	    return false;
+	  }
+	  // ---
+	  var domain = script.dataset.domain || '';
+	  var prefix = script.dataset.prefix || '';
+	  _Url.Url.host = domain;
+	  _VK2.default.prefix = prefix;
+	  return true;
+	};
+
+	/**
+	 * VK - header 対応
+	 * - `script#SPBL_header` 必須 - 引数 `selector` での対応も可能
+	 * - script[data-domain] - option, default: '', リクエスト絶対パス使用
+	 * - script[data-prefix] - option, default: '', css className prefix
+	 * @param {string} [selector=SPBL_header] script tag ID
+	 */
+	var main = function main() {
+	  var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'SPBL_header';
+
+	  if (!init(selector)) {
+	    return;
+	  }
+	  var Sagen = self.Sagen;
+	  sagen(Sagen, selector);
+	  user();
+	  device(Sagen);
+	};
+
+	main();
+
+	var SPBL_VK = {
+	  build: '2018-4-20 15:41:08',
+	  main: main
+	};
+
+	self.SPBL_VK = SPBL_VK;
 
 /***/ }),
 /* 1 */
@@ -89,7 +151,7 @@
 
 	var _exe2 = _interopRequireDefault(_exe);
 
-	var _exe3 = __webpack_require__(172);
+	var _exe3 = __webpack_require__(150);
 
 	var _exe4 = _interopRequireDefault(_exe3);
 
@@ -128,23 +190,25 @@
 
 	var _Dom2 = _interopRequireDefault(_Dom);
 
-	var _User = __webpack_require__(84);
-
-	var _ViewHeaderSearch = __webpack_require__(103);
+	var _ViewHeaderSearch = __webpack_require__(84);
 
 	var _ViewHeaderSearch2 = _interopRequireDefault(_ViewHeaderSearch);
 
-	var _ViewFlushModal = __webpack_require__(110);
+	var _ViewFlushModal = __webpack_require__(107);
 
 	var _ViewFlushModal2 = _interopRequireDefault(_ViewFlushModal);
 
-	var _ViewHeaderUser = __webpack_require__(114);
+	var _ViewHeaderUser = __webpack_require__(111);
 
 	var _ViewHeaderUser2 = _interopRequireDefault(_ViewHeaderUser);
 
-	var _ViewLogoutModal = __webpack_require__(170);
+	var _ViewLogoutModal = __webpack_require__(145);
 
 	var _ViewLogoutModal2 = _interopRequireDefault(_ViewLogoutModal);
+
+	var _PageTop = __webpack_require__(147);
+
+	var _PageTop2 = _interopRequireDefault(_PageTop);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -153,6 +217,8 @@
 	/**
 	 * 検索フォーム
 	 */
+
+	// import ViewDeleteModal from '../../view/modal/ViewDeleteModal';
 	/**
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
@@ -176,8 +242,6 @@
 	/**
 	 * ログインユーザーのログアウトモーダル
 	 */
-
-	// import ViewDeleteModal from '../../view/modal/ViewDeleteModal';
 	var modalLogout = function modalLogout() {
 	  var element = _Dom2.default.logoutModal();
 	  if (element) {
@@ -226,12 +290,13 @@
 	 * vk - desktop 実行します
 	 */
 	var desktop = function desktop() {
-	  // login check
-	  _User.User.init();
+	  // page top
+	  var pageTop = new _PageTop2.default();
+	  pageTop.init();
 	  // modal 準備
 	  // modalDelete();
 	  modalFlush();
-	  // header - use
+	  // header - user
 	  header();
 	  // 検索フォーム
 	  search();
@@ -2849,406 +2914,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.User = undefined;
 
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Cookie = __webpack_require__(85);
-
-	var _UserStatus = __webpack_require__(86);
-
-	var _Safety = __webpack_require__(24);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	//
-	// let _symbol = Symbol();
-	// // let _sign = false;
-
-	/**
-	 * ログインユーザー情報 - {@link User}
-	 * @type {?UserDae}
-	 * @private
-	 * @since 2016-11-05
-	 * @since 2018-04-19 val header - sub domain 取得可能な cookie set
-	 */
-
-
-	// event
-	// import {Env} from './Env';
-	var information = null;
-
-	/**
-	 * ユーザー情報を管理します
-	 * - 全てstaticです
-	 */
-
-
-	// data
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/12 - 15:54
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	// net
-
-	var User = exports.User = function () {
-	  function User() {
-	    (0, _classCallCheck3.default)(this, User);
-	  }
-
-	  (0, _createClass3.default)(User, null, [{
-	    key: 'login',
-
-	    // ---------------------------------------------------
-	    //  METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * ログイン設定をします
-	     * - since 2018-04-19 subdomain 取得可能なように domain 指定する
-	     * @param {string} token 開発中の引数はオプション扱いです
-	     * @return {boolean} login が成功したかを返します
-	     * @since 2018-04-19 vk header - domain 指定 `.sportsbull.jp`
-	     */
-	    value: function login(token) {
-	      // token = Safety.string(token, '');
-	      // token が正常値なのかを調べる
-	      // 少なくとも, 文字型で空でない
-	      var altToken = _Safety.Safety.string(token, '');
-	      if (altToken === '') {
-	        // token が不正値
-	        console.warn('illegal token. [' + token + ']');
-	        return false;
-	      }
-	      // save
-	      // @since 2018-04-19 subdomain 取得可能なように domain 指定する
-	      var result = _Cookie.Cookie.save(token, _Cookie.Cookie.TARGET, new Date(Date.now() + 1000 * 60 * 60 * 24 * 90), '/', '.sportsbull.jp');
-	      // console.log('User.login ', result, token);
-	      User.sign = result;
-	      return result;
-	    }
-	    /**
-	     * ログアウト処理を行います
-	     * - token を cookie から削除します
-	     */
-
-	  }, {
-	    key: 'logout',
-	    value: function logout() {
-	      _Cookie.Cookie.remove(_Cookie.Cookie.TARGET);
-	      User.sign = false;
-	    }
-	    /**
-	     * ログイン・非ログインを確認します
-	     * - ログイン（token発見）時は login 処理を行います
-	     */
-
-	  }, {
-	    key: 'init',
-	    value: function init() {
-	      var token = User.token;
-	      // console.log( `user init token [${token !== ''}]` );
-	      if (token === null || typeof token === 'undefined' || token === '') {
-	        User.sign = false;
-	      } else {
-	        User.login(token);
-	      }
-	    }
-	    /**
-	     * ログインユーザー情報
-	     * @return {UserDae} ログインユーザー情報を返します
-	     * @since 2016-11-05
-	     */
-
-	  }, {
-	    key: 'info',
-	    value: function info() {
-	      return information;
-	    }
-	    /**
-	     * ログインユーザー情報を設定します
-	     * @param {UserDae} info ログインユーザー情報
-	     * @since 2016-11-05
-	     */
-
-	  }, {
-	    key: 'setInfo',
-	    value: function setInfo(info) {
-	      information = info;
-	    }
-	  }, {
-	    key: 'sign',
-
-	    // /**
-	    //  * static class です, instance を作成しません
-	    //  * @param {Symbol} target Singleton を実現するための private symbol
-	    //  */
-	    // constructor( target ) {
-	    //
-	    //   if ( _symbol !== target ) {
-	    //
-	    //     throw new Error( 'User is static Class. not use new User().' );
-	    //
-	    //   }
-	    //
-	    // }
-	    // ---------------------------------------------------
-	    //  GETTER / SETTER
-	    // ---------------------------------------------------
-	    /**
-	     * sign in / out 状態を表します
-	     * @return {boolean} sign in / out 状態を返します
-	     */
-	    get: function get() {
-	      // return _sign;
-	      // 開発フェーズは簡易的に変数管理していたが
-	      // cookie token 管理へ移行する
-	      return User.token !== null;
-	    }
-	    /**
-	     * sign in / out 状態を表します
-	     * - true: sign in です
-	     * @param {boolean} bool sign in / out 状態の真偽値, true: sign in
-	     */
-	    ,
-	    set: function set(bool) {
-	      // bool = !!bool;
-	      //
-	      if (bool) {
-	        _UserStatus.UserStatus.factory().login();
-	      } else {
-	        _UserStatus.UserStatus.factory().logout();
-	      }
-	    }
-	    /**
-	     * cookie より user token を取り出します<br>
-	     * 見つからない時は null になります
-	     * @return {string|null} token を返します, 見つからない時はnullを返します
-	     */
-
-	  }, {
-	    key: 'token',
-	    get: function get() {
-	      return _Cookie.Cookie.get(_Cookie.Cookie.TARGET);
-	    }
-	  }]);
-	  return User;
-	}();
-
-/***/ }),
-/* 85 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Cookie = undefined;
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(24);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// let _symbol = Symbol();
-
-	/**
-	 * cookie を取得・削除・設定します
-	 * - 全て static です
-	 */
-	var Cookie = exports.Cookie = function () {
-	  function Cookie() {
-	    (0, _classCallCheck3.default)(this, Cookie);
-	  }
-
-	  (0, _createClass3.default)(Cookie, null, [{
-	    key: 'get',
-
-	    // ---------------------------------------------------
-	    //  METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * cookie value を取得します
-	     * @param {string} keyName cookie key name
-	     * @return {string|null} cookie 値を返します、取得できない時は null を返します
-	     */
-	    value: function get(keyName) {
-	      // console.log( 'get ', keyName, document.cookie.replace( new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent( keyName ).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1') );
-	      return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(keyName).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
-	    }
-	    /**
-	     * cookie を保存します
-	     * @param {string} value 保存値
-	     * @param {string} [keyName=Cookie.TARGET] cookie 名称
-	     * @param {Date} [end] expires date 90days 1000 * 60 * 60 * 24 * 90
-	     * @param {string} [path='/'] cookie 指定したパスが設定されます
-	     * @param {string} [domain=''] ドメイン, 特定するときは example.com or subdomain.example.com と指定します。 default は **現在のドメイン**
-	     * @param {boolean} [secure=false] https通信のときのみ、クッキーが送信されます
-	     * @return {boolean} 保存 成功か否かの真偽値 を返します
-	     */
-
-	  }, {
-	    key: 'save',
-	    value: function save(value) {
-	      var keyName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Cookie.TARGET;
-	      var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Date(Date.now() + 1000 * 60 * 60 * 24 * 90);
-	      var path = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '/';
-	      var domain = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
-	      var secure = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
-
-	      value = _Safety.Safety.string(value, '');
-	      keyName = _Safety.Safety.string(keyName, Cookie.TARGET);
-	      path = _Safety.Safety.string(path, '/');
-	      domain = _Safety.Safety.string(domain, '');
-
-	      path = path !== '' ? '; path=' + path : '';
-	      domain = domain !== '' ? '; domain=' + domain : '';
-	      var secureSetting = secure ? '; secure' : '';
-
-	      // cookie へ保存
-	      // console.log( 'save ', value, keyName, end.toUTCString(), domain, path, secure );
-	      document.cookie = encodeURIComponent(keyName) + '=' + encodeURIComponent(value) + '; expires=' + end.toUTCString() + domain + path + secureSetting;
-	      return true;
-	    }
-	    /**
-	     * 指定名称の cookie が存在するかを調べます
-	     * @param {string} keyName 調査対象 cookie 名称
-	     * @return {boolean} cookie が存在するかの真偽値 を返します
-	     */
-
-	  }, {
-	    key: 'has',
-	    value: function has(keyName) {
-	      return Cookie.get(keyName) !== null;
-	    }
-	    /**
-	     * 指定名称の cookie を削除します
-	     * @param {string} keyName cookie 名称
-	     * @param {string} [path='/'] cookie 指定したパスが設定されます
-	     * @param {string} [domain=''] ドメイン, 特定するときは example.com or subdomain.example.com と指定します。 default は **現在のドメイン**
-	     * @return {boolean} 削除 成功か否かの真偽値 を返します
-	     */
-
-	  }, {
-	    key: 'remove',
-	    value: function remove() {
-	      var keyName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Cookie.TARGET;
-	      var path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '/';
-	      var domain = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-
-	      if (Cookie.has(keyName)) {
-	        return Cookie.save('', keyName, new Date(), path, domain);
-	      }
-	      return false;
-	    }
-	  }, {
-	    key: 'TARGET',
-
-	    // /**
-	    //  * cookie を取得・削除・設定します
-	    //  * static class です, instance を作成しません
-	    //  * @param {Symbol} target Singleton を実現するための private symbol
-	    //  */
-	    // constructor( target ) {
-	    //
-	    //   if ( _symbol !== target ) {
-	    //
-	    //     throw new Error( 'Cookie is static Class. not use new Cookie().' );
-	    //
-	    //   }
-	    //
-	    // }
-	    // ---------------------------------------------------
-	    //  GETTER / SETTER
-	    // ---------------------------------------------------
-	    /**
-	     * token cookie name
-	     * @const TARGET
-	     * @return {string} cookie key name を返します
-	     */
-	    get: function get() {
-	      return 'auth_token';
-	    }
-	    /**
-	     * Syn. menu を開いた時にセットする cookie name
-	     * @const SYN
-	     * @return {string} Syn. menu を開いた時にセットする cookie name を返します
-	     */
-
-	  }, {
-	    key: 'SYN',
-	    get: function get() {
-	      return 'visited';
-	    }
-	    /**
-	     * 初めての訪問 cookie name
-	     * @const EVER_BEEN
-	     * @return {string} been 初めての訪問 cookie name を返します
-	     */
-
-	  }, {
-	    key: 'EVER_BEEN',
-	    get: function get() {
-	      return 'been';
-	    }
-
-	    /**
-	     * @const APP_BANNER
-	     * @return {string} app_banner アプリバーアナー cookie name を返します
-	     */
-
-	  }, {
-	    key: 'APP_BANNER',
-	    get: function get() {
-	      return 'app_banner';
-	    }
-	  }]);
-	  return Cookie;
-	}(); /**
-	      * Copyright (c) 2011-2016 inazumatv.com, inc.
-	      * @author (at)taikiken / http://inazumatv.com
-	      * @date 2016/01/27 - 18:48
-	      *
-	      * Distributed under the terms of the MIT license.
-	      * http://www.opensource.org/licenses/mit-license.html
-	      *
-	      * This notice shall be included in all copies or substantial portions of the Software.
-	      *
-	      */
-
-/***/ }),
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.UserStatus = undefined;
-
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -3256,41 +2923,37 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
 	var _createClass2 = __webpack_require__(5);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _symbol = __webpack_require__(69);
+	var _View2 = __webpack_require__(95);
 
-	var _symbol2 = _interopRequireDefault(_symbol);
+	var _View3 = _interopRequireDefault(_View2);
 
-	var _EventDispatcher2 = __webpack_require__(97);
+	var _ComponentHeaderSearchForm = __webpack_require__(102);
+
+	var _ComponentHeaderSearchForm2 = _interopRequireDefault(_ComponentHeaderSearchForm);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// Singleton を保証するための Symbol
+	// React
+	/* eslint-disable no-unused-vars */
 	/**
-	 * {@link UserStatus} inner symbol
-	 * @type {symbol}
-	 */
-	var userStatusSymbol = (0, _symbol2.default)('UserStatus singleton Symbol');
-	// Singleton instance
-	/**
-	 * {@link UserStatus} singleton instance
-	 * @type {?UserStatus}
+	 * [library] - React
 	 */
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/02 - 20:54
+	 * @date 2016/02/18 - 15:01
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -3299,143 +2962,93 @@
 	 *
 	 */
 
-	var singletonInstance = null;
+	var React = self.React;
+	/* eslint-enable no-unused-vars */
+	/**
+	 * [library] - ReactDOM
+	 */
+
+
+	// node
+	// import {HeaderSearchNode} from '../../node/header/HeaderSearchNode';
+	var ReactDOM = self.ReactDOM;
 
 	/**
-	 * ログイン / ログアウト を通知
-	 *
-	 * Singleton class です `new` 演算子での instance 作成はできません
-	 *
-	 * @example
-	 * const userStatus = UserStatus.factory();
-	 *
-	 *  */
+	 * 検索フォーム
+	 */
 
-	var UserStatus = exports.UserStatus = function (_EventDispatcher) {
-	  (0, _inherits3.default)(UserStatus, _EventDispatcher);
-	  (0, _createClass3.default)(UserStatus, null, [{
-	    key: 'factory',
+	var ViewHeaderSearch = function (_View) {
+	  (0, _inherits3.default)(ViewHeaderSearch, _View);
 
-	    // ---------------------------------------------------
-	    //  STATIC METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * instance を生成します
-	     * @return {UserStatus} UserStatus instance を返します
-	     */
-	    value: function factory() {
-	      if (singletonInstance === null) {
-	        singletonInstance = new UserStatus(userStatusSymbol);
-	      }
-	      return singletonInstance;
-	    }
-	    // ---------------------------------------------------
-	    //  CONSTRUCTOR
-	    // ---------------------------------------------------
-	    /**
-	     * ログイン / ログアウト を通知する SingleTon
-	     * @param {Symbol} target Singleton を実現するための private symbol
-	     * @return {UserStatus} UserStatus インスタンスを返します
-	     */
-
-	  }, {
-	    key: 'LOG_IN',
-
-	    // ---------------------------------------------------
-	    //  STATIC CONST
-	    // ---------------------------------------------------
-	    /**
-	     * LOG_IN event
-	     * @event LOG_IN
-	     * @return {string} LOG_IN event type を返します
-	     */
-	    get: function get() {
-	      return 'logIn';
-	    }
-	    /**
-	     * LOG_OUT event
-	     * @event LOG_OUT
-	     * @return {string} LOG_OUT event type を返します
-	     */
-
-	  }, {
-	    key: 'LOG_OUT',
-	    get: function get() {
-	      return 'logOut';
-	    }
-	  }]);
-
-	  function UserStatus(target) {
-	    var _ret2;
-
-	    (0, _classCallCheck3.default)(this, UserStatus);
-
-	    if (userStatusSymbol !== target) {
-	      throw new Error('UserStatus is static Class. not use new UserStatus().');
-	    }
-	    if (singletonInstance !== null) {
-	      var _ret;
-
-	      return _ret = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret);
-	    }
-	    // ------
-	    // do once
-
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (UserStatus.__proto__ || (0, _getPrototypeOf2.default)(UserStatus)).call(this));
-
-	    singletonInstance = _this;
-
-	    return _ret2 = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
+	  function ViewHeaderSearch() {
+	    (0, _classCallCheck3.default)(this, ViewHeaderSearch);
+	    return (0, _possibleConstructorReturn3.default)(this, (ViewHeaderSearch.__proto__ || (0, _getPrototypeOf2.default)(ViewHeaderSearch)).apply(this, arguments));
 	  }
-	  // ---------------------------------------------------
-	  //  METHOD
-	  // ---------------------------------------------------
-	  /**
-	   * UserStatus.LOG_IN event を fire します
-	   */
 
+	  (0, _createClass3.default)(ViewHeaderSearch, [{
+	    key: 'start',
 
-	  (0, _createClass3.default)(UserStatus, [{
-	    key: 'login',
-	    value: function login() {
-	      this.dispatch({ type: UserStatus.LOG_IN, sign: true });
+	    // /**
+	    //  * 検索フォーム + ロケーション遷移
+	    //  * @param {Element} element insert parent element
+	    //  * @param {Object} [option={}] optional event handler
+	    //  */
+	    // constructor(element, option = {}) {
+	    //   super(element, option);
+	    // }
+	    // ---------------------------------------------------
+	    //  Method
+	    // ---------------------------------------------------
+	    /**
+	     * render 実行
+	     */
+	    value: function start() {
+	      this.render();
 	    }
 	    /**
-	     * UserStatus.LOG_OUT event を fire します
+	     * HTMLElement を生成します
 	     */
 
 	  }, {
-	    key: 'logout',
-	    value: function logout() {
-	      this.dispatch({ type: UserStatus.LOG_OUT, sign: false });
+	    key: 'render',
+	    value: function render() {
+	      // ReactDOM.render(
+	      //   <HeaderSearchNode />,
+	      //   this.element
+	      // );
+	      ReactDOM.render(React.createElement(_ComponentHeaderSearchForm2.default, {
+	        vk: this.vk
+	      }), this.element);
 	    }
 	  }]);
-	  return UserStatus;
-	}(_EventDispatcher2.EventDispatcher);
+	  return ViewHeaderSearch;
+	}(_View3.default);
+
+	exports.default = ViewHeaderSearch;
 
 /***/ }),
-/* 87 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(88), __esModule: true };
+	module.exports = { "default": __webpack_require__(86), __esModule: true };
 
 /***/ }),
-/* 88 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(89);
+	__webpack_require__(87);
 	module.exports = __webpack_require__(11).Object.getPrototypeOf;
 
 
 /***/ }),
-/* 89 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.2.9 Object.getPrototypeOf(O)
 	var toObject = __webpack_require__(63);
 	var $getPrototypeOf = __webpack_require__(62);
 
-	__webpack_require__(90)('getPrototypeOf', function () {
+	__webpack_require__(88)('getPrototypeOf', function () {
 	  return function getPrototypeOf(it) {
 	    return $getPrototypeOf(toObject(it));
 	  };
@@ -3443,7 +3056,7 @@
 
 
 /***/ }),
-/* 90 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// most Object methods by ES6 should accept primitives
@@ -3459,7 +3072,7 @@
 
 
 /***/ }),
-/* 91 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3481,14 +3094,14 @@
 	};
 
 /***/ }),
-/* 92 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _setPrototypeOf = __webpack_require__(93);
+	var _setPrototypeOf = __webpack_require__(91);
 
 	var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
 
@@ -3519,30 +3132,30 @@
 	};
 
 /***/ }),
-/* 93 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(94), __esModule: true };
+	module.exports = { "default": __webpack_require__(92), __esModule: true };
 
 /***/ }),
-/* 94 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(95);
+	__webpack_require__(93);
 	module.exports = __webpack_require__(11).Object.setPrototypeOf;
 
 
 /***/ }),
-/* 95 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.3.19 Object.setPrototypeOf(O, proto)
 	var $export = __webpack_require__(9);
-	$export($export.S, 'Object', { setPrototypeOf: __webpack_require__(96).set });
+	$export($export.S, 'Object', { setPrototypeOf: __webpack_require__(94).set });
 
 
 /***/ }),
-/* 96 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// Works with __proto__ only. Old v8 can't work with null proto objects.
@@ -3573,7 +3186,316 @@
 
 
 /***/ }),
-/* 97 */
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(85);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _EventDispatcher2 = __webpack_require__(96);
+
+	var _Safety = __webpack_require__(24);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 表示を行います
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 14:37
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// import {Action} from '../action/Action';
+	// import ViewError from './error/ViewError';
+
+	var View = function (_EventDispatcher) {
+	  (0, _inherits3.default)(View, _EventDispatcher);
+	  (0, _createClass3.default)(View, null, [{
+	    key: 'BEFORE_RENDER',
+
+	    // ---------------------------------------------------
+	    //  STATIC CONST
+	    // ---------------------------------------------------
+	    /**
+	     * event BEFORE_RENDER<br>
+	     * ReactDOM.render 前
+	     * @return {string} viewBeforeRender を返します
+	     */
+	    get: function get() {
+	      return 'viewBeforeRender';
+	    }
+	    /**
+	     * event WILL_MOUNT<br>
+	     * ReactClass.componentWillMount 後
+	     * @return {string} viewWillMount を返します
+	     */
+
+	  }, {
+	    key: 'WILL_MOUNT',
+	    get: function get() {
+	      return 'viewWillMount';
+	    }
+	    /**
+	     * event DID_MOUNT<br>
+	     * ReactClass.componentDidMount 後
+	     * @return {string} viewDidMount を返します
+	     */
+
+	  }, {
+	    key: 'DID_MOUNT',
+	    get: function get() {
+	      return 'viewDidMount';
+	    }
+	    /**
+	     * event ERROR_MOUNT
+	     * @return {string} viewErrorMount を返します
+	     */
+
+	  }, {
+	    key: 'ERROR_MOUNT',
+	    get: function get() {
+	      return 'viewErrorMount';
+	    }
+	    /**
+	     * event UNDEFINED_ERROR<br>
+	     * Ajax は成功したが設定されるべき key 値が undefined or null の時
+	     * @return {string} viewUndefinedError を返します
+	     */
+
+	  }, {
+	    key: 'UNDEFINED_ERROR',
+	    get: function get() {
+	      return 'viewUndefinedError';
+	    }
+	    /**
+	     * event EMPTY_ERROR<br>
+	     * Ajax は成功したが配列であるべき結果が length 0 の時
+	     * @return {string} viewEmptyError を返します
+	     */
+
+	  }, {
+	    key: 'EMPTY_ERROR',
+	    get: function get() {
+	      return 'viewEmptyError';
+	    }
+	    /**
+	     * event RESPONSE_ERROR<br>
+	     * Ajax 失敗
+	     * @return {string} viewResponseError を返します
+	     */
+
+	  }, {
+	    key: 'RESPONSE_ERROR',
+	    get: function get() {
+	      return 'viewResponseError';
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+	    /**
+	     * action/Headline を使い Ajax request 後 element へ dom を作成します
+	     * @param {Element} element root element
+	     * @param {Object} [option={}] optional event handler
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	     * @since 2-18-04-19 vk header - flag 追加
+	     */
+
+	  }]);
+
+	  function View(element) {
+	    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	    var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+	    (0, _classCallCheck3.default)(this, View);
+
+	    option = _Safety.Safety.object(option);
+
+	    /**
+	     * react JSX を挿入する root element
+	     * @type {Element}
+	     * @protected
+	     */
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (View.__proto__ || (0, _getPrototypeOf2.default)(View)).call(this));
+
+	    _this._element = element;
+	    /**
+	     * event 名称をキーにしセットした event handler(callback) Object
+	     * @type {Object}
+	     * @protected
+	     */
+	    _this._option = option;
+	    /**
+	     * Action Class instance
+	     * @type {null|*}
+	     * @protected
+	     */
+	    _this._action = null;
+	    /**
+	     * 表示されているページが home(index) かを識別する flag
+	     * @since 2016-09-16
+	     * @type {boolean}
+	     * @protected
+	     * @default false
+	     */
+	    _this._home = false;
+
+	    /**
+	     * bind 済み executeSafely
+	     * @type {function}
+	     * @since 2016-09-28
+	     */
+	    _this.boundSafely = _this.executeSafely.bind(_this);
+	    /**
+	     * VK（バーチャル甲子園）flag
+	     * @type {boolean}
+	     * @since 2018-04-19 - VK header
+	     */
+	    _this.vk = vk;
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * root element
+	   * @return {Element} render root element を返します
+	   */
+
+
+	  (0, _createClass3.default)(View, [{
+	    key: 'executeSafely',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * option Object に kyeName が存在し型が function かを調べ関数を実行します
+	     * @param {string} keyName 存在チェックを行う関数キー名
+	     * @param {*} [args=] 実行関数へ渡す引数, 不特定多数
+	     */
+	    value: function executeSafely(keyName) {
+	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        args[_key - 1] = arguments[_key];
+	      }
+
+	      var option = this.option;
+	      // console.log( 'executeSafely', keyName, this, args, option, option.hasOwnProperty( keyName ), typeof option[ keyName] );
+	      if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
+	        // callback 側で通常の引数として取り出せるように apply します
+	        option[keyName].apply(this, args);
+	      }
+	      // console.log( 'executeSafely after if' );
+	      // listen しているかもしれないので event を発火させる
+	      this.dispatch({ type: keyName, args: args });
+	      // console.log( 'executeSafely after dispatch' );
+	    }
+	  }, {
+	    key: 'element',
+	    get: function get() {
+	      return this._element;
+	    }
+	    /**
+	     * render root element を設定します
+	     * @param {Element} element render root element
+	     */
+	    ,
+	    set: function set(element) {
+	      this._element = element;
+	    }
+	    /**
+	     * callback handler がセットされたObject
+	     * @return {Object} callback handler がセットされたObjectを返します
+	     */
+
+	  }, {
+	    key: 'option',
+	    get: function get() {
+	      return this._option;
+	    }
+	    /**
+	     * callback handler をセットします
+	     * @param {Object} option callback handler がセットされた Object
+	     */
+	    ,
+	    set: function set(option) {
+	      this._option = option;
+	    }
+	    /**
+	     * Action instance
+	     * @return {*} Action instance を返します
+	     */
+
+	  }, {
+	    key: 'action',
+	    get: function get() {
+	      return this._action;
+	    }
+	    /**
+	     * Action instance を設定します
+	     * @param {*} action Action instance
+	     */
+	    ,
+	    set: function set(action) {
+	      this._action = action;
+	    }
+	    /**
+	     * home flag
+	     * @since 2016-09-16
+	     * @return {boolean} home flag boolean を返します
+	     */
+
+	  }, {
+	    key: 'home',
+	    get: function get() {
+	      return this._home;
+	    }
+	    /**
+	     * home flag
+	     * @since 2016-09-16
+	     * @param {boolean} home flag
+	     */
+	    ,
+	    set: function set(home) {
+	      this._home = home;
+	    }
+	  }]);
+	  return View;
+	}(_EventDispatcher2.EventDispatcher);
+
+	exports.default = View;
+
+/***/ }),
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3583,7 +3505,7 @@
 	});
 	exports.EventDispatcher = undefined;
 
-	var _getIterator2 = __webpack_require__(98);
+	var _getIterator2 = __webpack_require__(97);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
 
@@ -3916,26 +3838,26 @@
 	}();
 
 /***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(98), __esModule: true };
+
+/***/ }),
 /* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(99), __esModule: true };
+	__webpack_require__(64);
+	__webpack_require__(53);
+	module.exports = __webpack_require__(99);
+
 
 /***/ }),
 /* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(64);
-	__webpack_require__(53);
-	module.exports = __webpack_require__(100);
-
-
-/***/ }),
-/* 100 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	var anObject = __webpack_require__(16);
-	var get = __webpack_require__(101);
+	var get = __webpack_require__(100);
 	module.exports = __webpack_require__(11).getIterator = function (it) {
 	  var iterFn = get(it);
 	  if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
@@ -3944,10 +3866,10 @@
 
 
 /***/ }),
-/* 101 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var classof = __webpack_require__(102);
+	var classof = __webpack_require__(101);
 	var ITERATOR = __webpack_require__(61)('iterator');
 	var Iterators = __webpack_require__(58);
 	module.exports = __webpack_require__(11).getIteratorMethod = function (it) {
@@ -3958,7 +3880,7 @@
 
 
 /***/ }),
-/* 102 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
@@ -3987,7 +3909,7 @@
 
 
 /***/ }),
-/* 103 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3996,7 +3918,7 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -4004,128 +3926,7 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(91);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _View2 = __webpack_require__(104);
-
-	var _View3 = _interopRequireDefault(_View2);
-
-	var _ComponentHeaderSearchForm = __webpack_require__(105);
-
-	var _ComponentHeaderSearchForm2 = _interopRequireDefault(_ComponentHeaderSearchForm);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// React
-	/* eslint-disable no-unused-vars */
-	/**
-	 * [library] - React
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/18 - 15:01
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var React = self.React;
-	/* eslint-enable no-unused-vars */
-	/**
-	 * [library] - ReactDOM
-	 */
-
-
-	// node
-	// import {HeaderSearchNode} from '../../node/header/HeaderSearchNode';
-	var ReactDOM = self.ReactDOM;
-
-	/**
-	 * 検索フォーム
-	 */
-
-	var ViewHeaderSearch = function (_View) {
-	  (0, _inherits3.default)(ViewHeaderSearch, _View);
-
-	  function ViewHeaderSearch() {
-	    (0, _classCallCheck3.default)(this, ViewHeaderSearch);
-	    return (0, _possibleConstructorReturn3.default)(this, (ViewHeaderSearch.__proto__ || (0, _getPrototypeOf2.default)(ViewHeaderSearch)).apply(this, arguments));
-	  }
-
-	  (0, _createClass3.default)(ViewHeaderSearch, [{
-	    key: 'start',
-
-	    // /**
-	    //  * 検索フォーム + ロケーション遷移
-	    //  * @param {Element} element insert parent element
-	    //  * @param {Object} [option={}] optional event handler
-	    //  */
-	    // constructor(element, option = {}) {
-	    //   super(element, option);
-	    // }
-	    // ---------------------------------------------------
-	    //  Method
-	    // ---------------------------------------------------
-	    /**
-	     * render 実行
-	     */
-	    value: function start() {
-	      this.render();
-	    }
-	    /**
-	     * HTMLElement を生成します
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      // ReactDOM.render(
-	      //   <HeaderSearchNode />,
-	      //   this.element
-	      // );
-	      ReactDOM.render(React.createElement(_ComponentHeaderSearchForm2.default, {
-	        vk: this.vk
-	      }), this.element);
-	    }
-	  }]);
-	  return ViewHeaderSearch;
-	}(_View3.default);
-
-	exports.default = ViewHeaderSearch;
-
-/***/ }),
-/* 104 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _getPrototypeOf = __webpack_require__(87);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -4133,326 +3934,17 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _EventDispatcher2 = __webpack_require__(97);
+	var _ErrorMessage = __webpack_require__(103);
 
-	var _Safety = __webpack_require__(24);
+	var _SearchStatus = __webpack_require__(104);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _Url = __webpack_require__(105);
 
-	/**
-	 * 表示を行います
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/22 - 14:37
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	// import {Action} from '../action/Action';
-	// import ViewError from './error/ViewError';
-
-	var View = function (_EventDispatcher) {
-	  (0, _inherits3.default)(View, _EventDispatcher);
-	  (0, _createClass3.default)(View, null, [{
-	    key: 'BEFORE_RENDER',
-
-	    // ---------------------------------------------------
-	    //  STATIC CONST
-	    // ---------------------------------------------------
-	    /**
-	     * event BEFORE_RENDER<br>
-	     * ReactDOM.render 前
-	     * @return {string} viewBeforeRender を返します
-	     */
-	    get: function get() {
-	      return 'viewBeforeRender';
-	    }
-	    /**
-	     * event WILL_MOUNT<br>
-	     * ReactClass.componentWillMount 後
-	     * @return {string} viewWillMount を返します
-	     */
-
-	  }, {
-	    key: 'WILL_MOUNT',
-	    get: function get() {
-	      return 'viewWillMount';
-	    }
-	    /**
-	     * event DID_MOUNT<br>
-	     * ReactClass.componentDidMount 後
-	     * @return {string} viewDidMount を返します
-	     */
-
-	  }, {
-	    key: 'DID_MOUNT',
-	    get: function get() {
-	      return 'viewDidMount';
-	    }
-	    /**
-	     * event ERROR_MOUNT
-	     * @return {string} viewErrorMount を返します
-	     */
-
-	  }, {
-	    key: 'ERROR_MOUNT',
-	    get: function get() {
-	      return 'viewErrorMount';
-	    }
-	    /**
-	     * event UNDEFINED_ERROR<br>
-	     * Ajax は成功したが設定されるべき key 値が undefined or null の時
-	     * @return {string} viewUndefinedError を返します
-	     */
-
-	  }, {
-	    key: 'UNDEFINED_ERROR',
-	    get: function get() {
-	      return 'viewUndefinedError';
-	    }
-	    /**
-	     * event EMPTY_ERROR<br>
-	     * Ajax は成功したが配列であるべき結果が length 0 の時
-	     * @return {string} viewEmptyError を返します
-	     */
-
-	  }, {
-	    key: 'EMPTY_ERROR',
-	    get: function get() {
-	      return 'viewEmptyError';
-	    }
-	    /**
-	     * event RESPONSE_ERROR<br>
-	     * Ajax 失敗
-	     * @return {string} viewResponseError を返します
-	     */
-
-	  }, {
-	    key: 'RESPONSE_ERROR',
-	    get: function get() {
-	      return 'viewResponseError';
-	    }
-	    // ---------------------------------------------------
-	    //  CONSTRUCTOR
-	    // ---------------------------------------------------
-	    /**
-	     * action/Headline を使い Ajax request 後 element へ dom を作成します
-	     * @param {Element} element root element
-	     * @param {Object} [option={}] optional event handler
-	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
-	     * @since 2-18-04-19 vk header - flag 追加
-	     */
-
-	  }]);
-
-	  function View(element) {
-	    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-	    var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-	    (0, _classCallCheck3.default)(this, View);
-
-	    option = _Safety.Safety.object(option);
-
-	    /**
-	     * react JSX を挿入する root element
-	     * @type {Element}
-	     * @protected
-	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (View.__proto__ || (0, _getPrototypeOf2.default)(View)).call(this));
-
-	    _this._element = element;
-	    /**
-	     * event 名称をキーにしセットした event handler(callback) Object
-	     * @type {Object}
-	     * @protected
-	     */
-	    _this._option = option;
-	    /**
-	     * Action Class instance
-	     * @type {null|*}
-	     * @protected
-	     */
-	    _this._action = null;
-	    /**
-	     * 表示されているページが home(index) かを識別する flag
-	     * @since 2016-09-16
-	     * @type {boolean}
-	     * @protected
-	     * @default false
-	     */
-	    _this._home = false;
-
-	    /**
-	     * bind 済み executeSafely
-	     * @type {function}
-	     * @since 2016-09-28
-	     */
-	    _this.boundSafely = _this.executeSafely.bind(_this);
-	    /**
-	     * VK（バーチャル甲子園）flag
-	     * @type {boolean}
-	     * @since 2018-04-19 - VK header
-	     */
-	    _this.vk = vk;
-	    return _this;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * root element
-	   * @return {Element} render root element を返します
-	   */
-
-
-	  (0, _createClass3.default)(View, [{
-	    key: 'executeSafely',
-
-	    // ---------------------------------------------------
-	    //  METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * option Object に kyeName が存在し型が function かを調べ関数を実行します
-	     * @param {string} keyName 存在チェックを行う関数キー名
-	     * @param {*} [args=] 実行関数へ渡す引数, 不特定多数
-	     */
-	    value: function executeSafely(keyName) {
-	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-	        args[_key - 1] = arguments[_key];
-	      }
-
-	      var option = this.option;
-	      // console.log( 'executeSafely', keyName, this, args, option, option.hasOwnProperty( keyName ), typeof option[ keyName] );
-	      if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
-	        // callback 側で通常の引数として取り出せるように apply します
-	        option[keyName].apply(this, args);
-	      }
-	      // console.log( 'executeSafely after if' );
-	      // listen しているかもしれないので event を発火させる
-	      this.dispatch({ type: keyName, args: args });
-	      // console.log( 'executeSafely after dispatch' );
-	    }
-	  }, {
-	    key: 'element',
-	    get: function get() {
-	      return this._element;
-	    }
-	    /**
-	     * render root element を設定します
-	     * @param {Element} element render root element
-	     */
-	    ,
-	    set: function set(element) {
-	      this._element = element;
-	    }
-	    /**
-	     * callback handler がセットされたObject
-	     * @return {Object} callback handler がセットされたObjectを返します
-	     */
-
-	  }, {
-	    key: 'option',
-	    get: function get() {
-	      return this._option;
-	    }
-	    /**
-	     * callback handler をセットします
-	     * @param {Object} option callback handler がセットされた Object
-	     */
-	    ,
-	    set: function set(option) {
-	      this._option = option;
-	    }
-	    /**
-	     * Action instance
-	     * @return {*} Action instance を返します
-	     */
-
-	  }, {
-	    key: 'action',
-	    get: function get() {
-	      return this._action;
-	    }
-	    /**
-	     * Action instance を設定します
-	     * @param {*} action Action instance
-	     */
-	    ,
-	    set: function set(action) {
-	      this._action = action;
-	    }
-	    /**
-	     * home flag
-	     * @since 2016-09-16
-	     * @return {boolean} home flag boolean を返します
-	     */
-
-	  }, {
-	    key: 'home',
-	    get: function get() {
-	      return this._home;
-	    }
-	    /**
-	     * home flag
-	     * @since 2016-09-16
-	     * @param {boolean} home flag
-	     */
-	    ,
-	    set: function set(home) {
-	      this._home = home;
-	    }
-	  }]);
-	  return View;
-	}(_EventDispatcher2.EventDispatcher);
-
-	exports.default = View;
-
-/***/ }),
-/* 105 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _getPrototypeOf = __webpack_require__(87);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(91);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _ErrorMessage = __webpack_require__(106);
-
-	var _SearchStatus = __webpack_require__(107);
-
-	var _Url = __webpack_require__(108);
-
-	var _Message = __webpack_require__(109);
+	var _Message = __webpack_require__(106);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4725,7 +4217,7 @@
 	exports.default = ComponentHeaderSearchForm;
 
 /***/ }),
-/* 106 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4828,7 +4320,7 @@
 	}();
 
 /***/ }),
-/* 107 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4838,7 +4330,7 @@
 	});
 	exports.SearchStatus = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -4846,7 +4338,7 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -4854,7 +4346,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -4862,7 +4354,7 @@
 
 	var _symbol2 = _interopRequireDefault(_symbol);
 
-	var _EventDispatcher2 = __webpack_require__(97);
+	var _EventDispatcher2 = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4988,7 +4480,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 108 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5022,15 +4514,14 @@
 
 	var Browser = self.Sagen.Browser;
 
-	// let _symbol = Symbol();
-
 	/**
 	 * request host(protocol + host)
+	 * - 実行ファイルから全ての処理に先んじて設定します
 	 * @private
 	 * @type {string}
 	 * @since 2018-04-19 - vk header
 	 */
-	var host = 'https://sportsbull.jp';
+	var host = '';
 
 	/**
 	 * Page 遷移 URL
@@ -5110,6 +4601,7 @@
 	    /**
 	     * signup url
 	     * @param {string} [path=''] path option
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
 	     * @return {string} signup url を返します
 	     */
 
@@ -5117,8 +4609,13 @@
 	    key: 'signup',
 	    value: function signup() {
 	      var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+	      var vk = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-	      var base = '/signup/';
+	      // vk - 絶対パスを返す
+	      if (!vk) {
+	        Url.host = '';
+	      }
+	      var base = Url.host + '/signup/';
 	      switch (path) {
 	        case 'account':
 	          return base + 'account';
@@ -5192,13 +4689,20 @@
 	    }
 	    /**
 	     * login url
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
 	     * @return {string} login url を返します
 	     */
 
 	  }, {
 	    key: 'login',
 	    value: function login() {
-	      return '/login/';
+	      var vk = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      // vk - 絶対パスを返す
+	      if (!vk) {
+	        Url.host = '';
+	      }
+	      return Url.host + '/login/';
 	    }
 
 	    /**
@@ -5285,6 +4789,7 @@
 	    /**
 	     * settings url
 	     * @param {string} [path=''] path option
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
 	     * @return {*} settings url を返します
 	     */
 
@@ -5292,8 +4797,14 @@
 	    key: 'settings',
 	    value: function settings() {
 	      var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+	      var vk = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-	      var base = '/settings/';
+	      // vk - 絶対パスを返す
+	      if (!vk) {
+	        Url.host = '';
+	      }
+	      var base = Url.host + '/settings/';
+	      // const base = '/settings/';
 
 	      switch (path) {
 	        case 'interest':
@@ -5412,19 +4923,6 @@
 	  }, {
 	    key: 'CATEGORY_SLUG',
 
-	    // /**
-	    //  * <h4>Page 遷移 URL</h4>
-	    //  * @param {Symbol} target Singleton を実現するための private symbol
-	    //  */
-	    // constructor( target:Symbol ) {
-	    //
-	    //   if ( _symbol !== target ) {
-	    //
-	    //     throw new Error( 'Url is static Class. not use new Url().' );
-	    //
-	    //   }
-	    //
-	    // }
 	    // ---------------------------------------------------
 	    //  CONST 代わり
 	    // ---------------------------------------------------
@@ -5459,6 +4957,7 @@
 	    }
 	    /**
 	     * request host(protocol + host) を設定します
+	     * - 実行ファイルから全ての処理に先んじて設定します
 	     * @param {string} hostname request host(protocol + host)
 	     * @since 2018-04-19 - vk header
 	     */
@@ -5471,7 +4970,7 @@
 	}();
 
 /***/ }),
-/* 109 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6220,7 +5719,7 @@
 	}();
 
 /***/ }),
-/* 110 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6229,7 +5728,7 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6241,21 +5740,21 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(104);
+	var _View2 = __webpack_require__(95);
 
 	var _View3 = _interopRequireDefault(_View2);
 
-	var _MessageStatus = __webpack_require__(111);
+	var _MessageStatus = __webpack_require__(108);
 
-	var _FlushNode = __webpack_require__(112);
+	var _FlushNode = __webpack_require__(109);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6369,7 +5868,7 @@
 	exports.default = ViewFlushModal;
 
 /***/ }),
-/* 111 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6379,7 +5878,7 @@
 	});
 	exports.MessageStatus = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6387,7 +5886,7 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -6395,7 +5894,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -6403,7 +5902,7 @@
 
 	var _symbol2 = _interopRequireDefault(_symbol);
 
-	var _EventDispatcher2 = __webpack_require__(97);
+	var _EventDispatcher2 = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6674,7 +6173,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 112 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6684,9 +6183,9 @@
 	});
 	exports.FlushNode = undefined;
 
-	var _MessageStatus = __webpack_require__(111);
+	var _MessageStatus = __webpack_require__(108);
 
-	var _Scroll = __webpack_require__(113);
+	var _Scroll = __webpack_require__(110);
 
 	//
 	// // Sagen
@@ -6840,7 +6339,7 @@
 	});
 
 /***/ }),
-/* 113 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6850,7 +6349,7 @@
 	});
 	exports.Scroll = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6858,7 +6357,7 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -6866,7 +6365,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -6874,7 +6373,7 @@
 
 	var _symbol2 = _interopRequireDefault(_symbol);
 
-	var _EventDispatcher2 = __webpack_require__(97);
+	var _EventDispatcher2 = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7322,7 +6821,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 114 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7331,7 +6830,7 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -7343,27 +6842,27 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(104);
+	var _View2 = __webpack_require__(95);
 
 	var _View3 = _interopRequireDefault(_View2);
 
-	var _ViewHeaderMember = __webpack_require__(115);
+	var _ViewHeaderMember = __webpack_require__(112);
 
 	var _ViewHeaderMember2 = _interopRequireDefault(_ViewHeaderMember);
 
-	var _Url = __webpack_require__(108);
+	var _Url = __webpack_require__(105);
 
-	var _User = __webpack_require__(84);
+	var _User = __webpack_require__(113);
 
-	var _UserStatus = __webpack_require__(86);
+	var _UserStatus = __webpack_require__(115);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7405,15 +6904,13 @@
 	 * {@link ViewHeaderUser} - header user 関連メニュー - ログイン / 非ログイン でメニューを変更
 	 * @param {string} signup signup url
 	 * @param {string} login login url
-	 * @param {boolean} vk vk flag
 	 * @returns {?XML} `div.user`
 	 * @constructor
 	 * @since 2017-12-08 - update element
 	 */
 	var HeaderUserComponent = function HeaderUserComponent(_ref) {
 	  var signup = _ref.signup,
-	      login = _ref.login,
-	      vk = _ref.vk;
+	      login = _ref.login;
 	  return React.createElement(
 	    'div',
 	    { className: 'user' },
@@ -7434,22 +6931,13 @@
 	  );
 	};
 
-	/*
-	// old
-	<div className="user">
-	  <div className="btn-signup">
-	    <a href={signup}>無料登録</a>&nbsp;/&nbsp;<a href={login}>ログイン</a>
-	  </div>
-	</div>
-	*/
 	/**
 	 * React.propTypes
-	 * @type {{signup: string, login: string, vk: boolean}}
+	 * @type {{signup: string, login: string}}
 	 */
 	HeaderUserComponent.propTypes = {
 	  signup: React.PropTypes.string.isRequired,
-	  login: React.PropTypes.string.isRequired,
-	  vk: React.PropTypes.bool.isRequired
+	  login: React.PropTypes.string.isRequired
 	};
 
 	/**
@@ -7464,9 +6952,12 @@
 	   * ログイン / 非ログイン でメニューを変更
 	   * @param {Element} element insert root element
 	   * @param {Object} [option={}] optional event handler
+	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	   * @since 2-18-04-19 vk header - flag 追加
 	   */
 	  function ViewHeaderUser(element) {
 	    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	    var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 	    (0, _classCallCheck3.default)(this, ViewHeaderUser);
 
 	    /**
@@ -7474,7 +6965,7 @@
 	     * @type {Function}
 	     * @private
 	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (ViewHeaderUser.__proto__ || (0, _getPrototypeOf2.default)(ViewHeaderUser)).call(this, element, option));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (ViewHeaderUser.__proto__ || (0, _getPrototypeOf2.default)(ViewHeaderUser)).call(this, element, option, vk));
 
 	    _this._boundCallback = _this.memberCallback.bind(_this);
 	    /**
@@ -7548,8 +7039,8 @@
 	    key: 'render',
 	    value: function render() {
 	      ReactDOM.render(React.createElement(HeaderUserComponent, {
-	        signup: _Url.Url.signup(),
-	        login: _Url.Url.login(),
+	        signup: _Url.Url.signup('', this.vk),
+	        login: _Url.Url.login(this.vk),
 	        vk: this.vk
 	      }), this.element);
 	      // execute
@@ -7625,7 +7116,7 @@
 	exports.default = ViewHeaderUser;
 
 /***/ }),
-/* 115 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7634,7 +7125,7 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -7646,21 +7137,21 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(104);
+	var _View2 = __webpack_require__(95);
 
 	var _View3 = _interopRequireDefault(_View2);
 
-	var _User = __webpack_require__(84);
+	var _User = __webpack_require__(113);
 
-	var _Message = __webpack_require__(109);
+	var _Message = __webpack_require__(106);
 
 	var _UsersSelf = __webpack_require__(116);
 
@@ -7672,6 +7163,8 @@
 
 	var _ComponentHeaderMemberSetting2 = _interopRequireDefault(_ComponentHeaderMemberSetting);
 
+	var _Empty = __webpack_require__(144);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// React
@@ -7681,34 +7174,8 @@
 	 */
 
 
-	// util
-	// import {Loc} from '../../util/Loc';
+	// component
 
-	// model
-	// import ViewLogoutModal from '../modal/ViewLogoutModal';
-
-	// event
-	// import {LogoutStatus} from '../../event/LogoutStatus';
-	// import {CommentStatus} from '../../event/CommentStatus';
-
-
-	// action
-
-	// import {ViewHeaderMemberNotice} from './ViewHeaderMemberNotice';
-
-	// app
-	// import {Empty} from '../../app/const/Empty';
-	// import {Url} from '../../app/const/Url';
-	var React = self.React;
-	/* eslint-enable no-unused-vars */
-	/**
-	 * [library] - ReactDOM
-	 */
-
-
-	// data
-	// import {Result} from '../../data/Result';
-	// import {Safety} from '../../data/Safety';
 
 	// dae
 	/**
@@ -7723,22 +7190,37 @@
 	 *
 	 */
 
+	var React = self.React;
+	/* eslint-enable no-unused-vars */
+	/**
+	 * [library] - ReactDOM
+	 */
+
+
+	// event
+
+
+	// action
+
+
+	// app
 	var ReactDOM = self.ReactDOM;
 
 	/**
 	 * header ログイン・メンバー 関連メニュー
+	 * @since 2018-04-19 VK（バーチャル甲子園）flag
 	 */
 
 	var ViewHeaderMember = function (_View) {
 	  (0, _inherits3.default)(ViewHeaderMember, _View);
 
 	  /**
-	   * <p>header ログイン・メンバー 関連メニュー<br>
-	   * アイコン+drop down menu 表示</p>
+	   * header ログイン・メンバー 関連メニュー
+	   * - アイコン+drop down menu 表示
 	   *
 	   * @param {Element} element insert root element
 	   * @param {Object} [option={}] optional event handler
-	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
 	   */
 	  function ViewHeaderMember(element) {
 	    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -7747,12 +7229,14 @@
 
 	    /**
 	     * Action instance を設定します
+	     * - vk flag: true の時は作成しない
 	     * @override
-	     * @type {UsersSelf}
+	     * @type {?UsersSelf}
 	     */
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (ViewHeaderMember.__proto__ || (0, _getPrototypeOf2.default)(ViewHeaderMember)).call(this, element, option, vk));
 
-	    _this.action = new _UsersSelf.UsersSelf(_this.done.bind(_this), _this.fail.bind(_this));
+	    _this.action = !vk ? new _UsersSelf.UsersSelf(_this.done.bind(_this), _this.fail.bind(_this)) : null;
+	    // this.action = new UsersSelf(this.done.bind(this), this.fail.bind(this));
 	    /**
 	     * SettingDom instance
 	     * @type {null|Object}
@@ -7790,12 +7274,6 @@
 	     * @protected
 	     */
 	    _this._boundReload = _this.reload.bind(_this);
-	    // /**
-	    //  * ViewLogoutModal インスタンス
-	    //  * @type {null|Object|ViewLogoutModal}
-	    //  * @protected
-	    //  */
-	    // this._modal = null;
 	    /**
 	     * bind 済み executeSafely
 	     * @type {function}
@@ -7812,34 +7290,6 @@
 	  // ---------------------------------------------------
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
-	  // /**
-	  //  * SettingDom instance
-	  //  * @return {?Object} SettingDom instance を返します
-	  //  */
-	  // get component() {
-	  //   return this._component;
-	  // }
-	  // /**
-	  //  * SettingDom instance を設定します
-	  //  * @param {?Object} component SettingDom instance
-	  //  */
-	  // set component(component) {
-	  //   this._component = component;
-	  // }
-	  // /**
-	  //  * ViewLogoutModal インスタンスを取得します
-	  //  * @return {ViewLogoutModal} ViewLogoutModal インスタンスを返します
-	  //  */
-	  // get model() {
-	  //   return this._modal;
-	  // }
-	  // /**
-	  //  * ViewLogoutModal インスタンスを設定します
-	  //  * @param {ViewLogoutModal} modal ViewLogoutModal instance
-	  //  */
-	  // set modal(modal) {
-	  //   this._modal = modal;
-	  // }
 	  /**
 	   * リロードフラッグ を取得します
 	   * @return {boolean} リロードフラッグを返します
@@ -7857,7 +7307,13 @@
 	     */
 	    value: function start() {
 	      // console.log('ViewHeaderMember.start');
-	      this.action.start();
+	      // this.action.start();
+	      // vk flag true の時は実行しない
+	      if (this.action) {
+	        this.action.start();
+	      } else if (this.vk) {
+	        this.vkRender();
+	      }
 	    }
 	    /**
 	     * Ajax response success
@@ -7906,233 +7362,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render(response) {
-	      // console.log('ViewHeaderMember.render', response);
-	      //
-	      // const dae = response;
-	      // // let _this = this;
-	      //
-	      // // console.log( '******** ---------- ********** ViewHeaderMember ', dae );
-	      // this.executeSafely(View.BEFORE_RENDER, dae);
-	      //
-	      // // --------------------------------------------------
-	      // // user setting
-	      // /**
-	      //  * user setting
-	      //  * @private
-	      //  * @type {ReactClass}
-	      //  */
-	      // let SettingDom = React.createClass( {
-	      //   propTypes: {
-	      //     userName: React.PropTypes.string.isRequired,
-	      //     icon: React.PropTypes.string.isRequired
-	      //   },
-	      //   getInitialState: function() {
-	      //     /**
-	      //      * time out id
-	      //      * @private
-	      //      * @type {number}
-	      //      */
-	      //     this.timer = 0;
-	      //     /**
-	      //      * ViewLogoutModal instance
-	      //      * @private
-	      //      * @type {null|ViewLogoutModal}
-	      //      */
-	      //     this.modal = null;
-	      //     /**
-	      //      * LogoutStatus instance
-	      //      * @private
-	      //      * @type {LogoutStatus}
-	      //      */
-	      //     this.status = LogoutStatus.factory();
-	      //     /**
-	      //      * CommentStatus instance
-	      //      * @private
-	      //      * @type {CommentStatus}
-	      //      */
-	      //     this.commentStatus = CommentStatus.factory();
-	      //     /**
-	      //      * time out id by refresh
-	      //      * @private
-	      //      * @type {number}
-	      //      */
-	      //     this.refreshTimer = 0;
-	      //
-	      //     return {
-	      //       open: 'close',
-	      //       userName: this.props.userName,
-	      //       icon: this.props.icon
-	      //     };
-	      //   },
-	      //   render: function() {
-	      //
-	      //     let userName = this.state.userName;
-	      //     let icon = Safety.image( this.state.icon, Empty.USER_EMPTY );
-	      //     let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
-	      //
-	      //     return (
-	      //       <div className="user">
-	      //         <div className="notice-container" ref="notice" />
-	      //
-	      //         <div className={'preference ' + this.state.open}>
-	      //           <a className="preference-opener" href="#" onClick={this.clickHandler}>
-	      //             {/*
-	      //               画像を変えてもファイル名が変わらない
-	      //               キャッシュ問題を回避するためにDate.nowを加える
-	      //               通常もキャッシュが効かない〜
-	      //             */}
-	      //             <span className={'preference-avatar ' + loggedIn}><img src={Empty.refresh(icon)} alt={userName} /></span>
-	      //           </a>
-	      //
-	      //           <nav className="preference-menu">
-	      //             <ul className="dropMenu">
-	      //               <li className="dropMenu-item"><a className="dropMenu-link" href={Url.mypage()}>ブックマーク<br />アクティビティ</a></li>
-	      //               <li className="dropMenu-item"><a className="dropMenu-link" href={Url.settings()}>設定</a></li>
-	      //               <li className="dropMenu-item"><a className="dropMenu-link" href="#" onClick={this.logoutHandler}>ログアウト</a></li>
-	      //             </ul>
-	      //           </nav>
-	      //         </div>
-	      //       </div>
-	      //     );
-	      //   },
-	      //   componentDidMount: function() {
-	      //
-	      //     // callback
-	      //     _this.executeSafely( View.DID_MOUNT );
-	      //     _this.didMount();
-	      //
-	      //     // notice make
-	      //     let noticeNode = ReactDOM.findDOMNode(this.refs.notice);
-	      //     let notice = new ViewHeaderMemberNotice( noticeNode );
-	      //     notice.start();
-	      //
-	      //     this.commentStatus.on( CommentStatus.COMMENT_DELETE_MODAL_OPEN, this.otherModalOpen );
-	      //   },
-	      //   componentWillUnmount: function() {
-	      //     this.destroy();
-	      //   },
-	      //   // -------------------------------------------------------
-	      //   // 以降 custom method
-	      //
-	      //   // icon click で drop menu open / close
-	      //   clickHandler: function( event ) {
-	      //
-	      //     event.preventDefault();
-	      //     this.toggleState();
-	      //
-	      //   },
-	      //   // document.body.onClick event handler
-	      //   // drop menu open 後に 領域外 click で閉じるため
-	      //   bodyClick: function() {
-	      //
-	      //     if ( this.state.open === 'open' ) {
-	      //
-	      //       // document.body が a より先に反応する
-	      //       // native event bind と React 経由の違いかも
-	      //       // body click 後の処理を遅延させる, 多分気づかない程度
-	      //       this.timer = setTimeout( this.toggleState, 100 );
-	      //
-	      //     }
-	      //
-	      //   },
-	      //   // open / close toggle
-	      //   toggleState: function() {
-	      //
-	      //     this.destroy();
-	      //
-	      //     if ( this.state.open === 'close' ) {
-	      //       // close -> open
-	      //       // document.body へ click event handler bind
-	      //       this.setState( { open: 'open' } );
-	      //       document.body.addEventListener( 'click', this.bodyClick, false );
-	      //     } else {
-	      //       // open -> close
-	      //       this.setState( { open: 'close' } );
-	      //     }
-	      //
-	      //   },
-	      //   // timer cancel
-	      //   // body.click unbind
-	      //   // 後処理
-	      //   destroy: function() {
-	      //
-	      //     // body click からの遅延処理を clear する
-	      //     // timer を 0 にし error にならないようにする
-	      //     clearTimeout( this.timer );
-	      //     this.timer = 0;
-	      //     // document.body からclick event handler unbind
-	      //     document.body.removeEventListener( 'click', this.bodyClick );
-	      //
-	      //   },
-	      //   // body click 再セット <- modal close の後
-	      //   activate: function() {
-	      //     document.body.addEventListener( 'click', this.bodyClick, false );
-	      //   },
-	      //   // -----------------------------
-	      //   // logout click -> open modal
-	      //   logoutHandler: function( event:Event ):void {
-	      //     event.preventDefault();
-	      //     event.stopPropagation();
-	      //
-	      //     this.destroy();
-	      //     this.status.open( this.callbackOk, this.callbackCancel );
-	      //
-	      //   },
-	      //   // yes ->logout
-	      //   callbackOk: function() {
-	      //     User.logout();
-	      //     Loc.index();
-	      //   },
-	      //   // no -> body click を bind する
-	      //   // 何もないところを click した時のため
-	      //   callbackCancel: function() {
-	      //     this.activate();
-	      //   },
-	      //   // 他のmodalが開いたので閉じる
-	      //   otherModalOpen: function() {
-	      //     if ( this.state.open === 'open' ) {
-	      //       // open -> close
-	      //       this.destroy();
-	      //       this.setState( { open: 'close' } );
-	      //     }
-	      //   },
-	      //   updateUser: function( icon, userName ) {
-	      //     // console.log( 'user update state ', userName );
-	      //     // clearTimeout( this.refreshTimer );
-	      //     // this.setState( { icon: Empty.USER_EMPTY, userName: userName } );
-	      //     //
-	      //     // let me = this;
-	      //     //
-	      //     // this.refreshTimer = setTimeout(
-	      //     //   function() {
-	      //     //     console.log( 'user update state refresh -----', userName );
-	      //     //     me.setState( { icon: icon, userName: userName } );
-	      //     //   },
-	      //     //   50
-	      //     // );
-	      //     // console.log( 'icon ', icon );
-	      //     this.setState( { icon: icon, userName: userName } );
-	      //   }
-	      // } );
-	      //
-	      // // --------------------------------------------------
-	      // // when reload
-	      // if ( this.reloadFlag ) {
-	      //   this.reloadFlag = false;
-	      //   clearTimeout( this._timer );
-	      //   this._timer = setTimeout( this._boundReload, 1000 );
-	      // }
-	      // // --------------------------------------------------
-	      // // user root
-	      // if ( this.component === null ) {
-	      //   this.component = ReactDOM.render(
-	      //     <SettingDom icon={dae.profilePicture} userName={dae.userName} />,
-	      //     this.element
-	      //   );
-	      // } else {
-	      //   this.component.updateUser( dae.profilePicture, dae.userName );
-	      // }
-
 	      // --------------------------------------------------
 	      this.executeSafely(_View3.default.BEFORE_RENDER, response);
 	      // --------------------------------------------------
@@ -8158,13 +7387,6 @@
 	  }, {
 	    key: 'didMount',
 	    value: function didMount() {
-	      // let settingStatus = this._settingStatus;
-	      //
-	      // if ( settingStatus === null ) {
-	      //   settingStatus = SettingsStatus.factory();
-	      //   this._settingStatus = settingStatus;
-	      //   settingStatus.on( SettingsStatus.ACCOUNT_COMPLETE, this._boundComplete );
-	      // }
 	      var settingStatus = this.settingStatus;
 	      settingStatus.off(_SettingsStatus.SettingsStatus.ACCOUNT_COMPLETE, this._boundComplete);
 	      settingStatus.on(_SettingsStatus.SettingsStatus.ACCOUNT_COMPLETE, this._boundComplete);
@@ -8192,6 +7414,22 @@
 	      clearTimeout(this._timer);
 	      this.reloadFlag = true;
 	      this.start();
+	    }
+	    /**
+	     * VK 専用・ログインユーザーheader 表示
+	     * @since 2018-04-19 VK（バーチャル甲子園）flag
+	     */
+
+	  }, {
+	    key: 'vkRender',
+	    value: function vkRender() {
+	      ReactDOM.render(React.createElement(_ComponentHeaderMemberSetting2.default, {
+	        icon: _Empty.Empty.USER_EMPTY,
+	        userName: '',
+	        safely: this.boundSafely,
+	        did: this.boundMount,
+	        vk: this.vk
+	      }), this.element);
 	    }
 	  }, {
 	    key: 'reloadFlag',
@@ -8241,6 +7479,579 @@
 	exports.default = ViewHeaderMember;
 
 /***/ }),
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.User = undefined;
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Cookie = __webpack_require__(114);
+
+	var _UserStatus = __webpack_require__(115);
+
+	var _Safety = __webpack_require__(24);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//
+	// let _symbol = Symbol();
+	// // let _sign = false;
+
+	/**
+	 * ログインユーザー情報 - {@link User}
+	 * @type {?UserDae}
+	 * @private
+	 * @since 2016-11-05
+	 * @since 2018-04-19 val header - sub domain 取得可能な cookie set
+	 */
+
+
+	// event
+	// import {Env} from './Env';
+	var information = null;
+
+	/**
+	 * ユーザー情報を管理します
+	 * - 全てstaticです
+	 */
+
+
+	// data
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/12 - 15:54
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// net
+
+	var User = exports.User = function () {
+	  function User() {
+	    (0, _classCallCheck3.default)(this, User);
+	  }
+
+	  (0, _createClass3.default)(User, null, [{
+	    key: 'login',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * ログイン設定をします
+	     * - since 2018-04-19 subdomain 取得可能なように domain 指定する
+	     * @param {string} token 開発中の引数はオプション扱いです
+	     * @return {boolean} login が成功したかを返します
+	     * @since 2018-04-19 vk header - domain 指定 `.sportsbull.jp`
+	     */
+	    value: function login(token) {
+	      // token = Safety.string(token, '');
+	      // token が正常値なのかを調べる
+	      // 少なくとも, 文字型で空でない
+	      var altToken = _Safety.Safety.string(token, '');
+	      if (altToken === '') {
+	        // token が不正値
+	        console.warn('illegal token. [' + token + ']');
+	        return false;
+	      }
+	      // save
+	      // @since 2018-04-19 subdomain 取得可能なように domain 指定する
+	      var result = _Cookie.Cookie.save(token, _Cookie.Cookie.TARGET, new Date(Date.now() + 1000 * 60 * 60 * 24 * 90), '/', '.sportsbull.jp');
+	      // console.log('User.login ', result, token);
+	      User.sign = result;
+	      return result;
+	    }
+	    /**
+	     * ログアウト処理を行います
+	     * - token を cookie から削除します
+	     */
+
+	  }, {
+	    key: 'logout',
+	    value: function logout() {
+	      _Cookie.Cookie.remove(_Cookie.Cookie.TARGET);
+	      User.sign = false;
+	    }
+	    /**
+	     * ログイン・非ログインを確認します
+	     * - ログイン（token発見）時は login 処理を行います
+	     */
+
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var token = User.token;
+	      // console.log( `user init token [${token !== ''}]` );
+	      if (token === null || typeof token === 'undefined' || token === '') {
+	        User.sign = false;
+	      } else {
+	        User.login(token);
+	      }
+	    }
+	    /**
+	     * ログインユーザー情報
+	     * @return {UserDae} ログインユーザー情報を返します
+	     * @since 2016-11-05
+	     */
+
+	  }, {
+	    key: 'info',
+	    value: function info() {
+	      return information;
+	    }
+	    /**
+	     * ログインユーザー情報を設定します
+	     * @param {UserDae} info ログインユーザー情報
+	     * @since 2016-11-05
+	     */
+
+	  }, {
+	    key: 'setInfo',
+	    value: function setInfo(info) {
+	      information = info;
+	    }
+	  }, {
+	    key: 'sign',
+
+	    // /**
+	    //  * static class です, instance を作成しません
+	    //  * @param {Symbol} target Singleton を実現するための private symbol
+	    //  */
+	    // constructor( target ) {
+	    //
+	    //   if ( _symbol !== target ) {
+	    //
+	    //     throw new Error( 'User is static Class. not use new User().' );
+	    //
+	    //   }
+	    //
+	    // }
+	    // ---------------------------------------------------
+	    //  GETTER / SETTER
+	    // ---------------------------------------------------
+	    /**
+	     * sign in / out 状態を表します
+	     * @return {boolean} sign in / out 状態を返します
+	     */
+	    get: function get() {
+	      // return _sign;
+	      // 開発フェーズは簡易的に変数管理していたが
+	      // cookie token 管理へ移行する
+	      return User.token !== null;
+	    }
+	    /**
+	     * sign in / out 状態を表します
+	     * - true: sign in です
+	     * @param {boolean} bool sign in / out 状態の真偽値, true: sign in
+	     */
+	    ,
+	    set: function set(bool) {
+	      // bool = !!bool;
+	      //
+	      if (bool) {
+	        _UserStatus.UserStatus.factory().login();
+	      } else {
+	        _UserStatus.UserStatus.factory().logout();
+	      }
+	    }
+	    /**
+	     * cookie より user token を取り出します<br>
+	     * 見つからない時は null になります
+	     * @return {string|null} token を返します, 見つからない時はnullを返します
+	     */
+
+	  }, {
+	    key: 'token',
+	    get: function get() {
+	      return _Cookie.Cookie.get(_Cookie.Cookie.TARGET);
+	    }
+	  }]);
+	  return User;
+	}();
+
+/***/ }),
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Cookie = undefined;
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(24);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// let _symbol = Symbol();
+
+	/**
+	 * cookie を取得・削除・設定します
+	 * - 全て static です
+	 */
+	var Cookie = exports.Cookie = function () {
+	  function Cookie() {
+	    (0, _classCallCheck3.default)(this, Cookie);
+	  }
+
+	  (0, _createClass3.default)(Cookie, null, [{
+	    key: 'get',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * cookie value を取得します
+	     * @param {string} keyName cookie key name
+	     * @return {string|null} cookie 値を返します、取得できない時は null を返します
+	     */
+	    value: function get(keyName) {
+	      // console.log( 'get ', keyName, document.cookie.replace( new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent( keyName ).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1') );
+	      return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(keyName).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+	    }
+	    /**
+	     * cookie を保存します
+	     * @param {string} value 保存値
+	     * @param {string} [keyName=Cookie.TARGET] cookie 名称
+	     * @param {Date} [end] expires date 90days 1000 * 60 * 60 * 24 * 90
+	     * @param {string} [path='/'] cookie 指定したパスが設定されます
+	     * @param {string} [domain=''] ドメイン, 特定するときは example.com or subdomain.example.com と指定します。 default は **現在のドメイン**
+	     * @param {boolean} [secure=false] https通信のときのみ、クッキーが送信されます
+	     * @return {boolean} 保存 成功か否かの真偽値 を返します
+	     */
+
+	  }, {
+	    key: 'save',
+	    value: function save(value) {
+	      var keyName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Cookie.TARGET;
+	      var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Date(Date.now() + 1000 * 60 * 60 * 24 * 90);
+	      var path = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '/';
+	      var domain = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+	      var secure = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+
+	      value = _Safety.Safety.string(value, '');
+	      keyName = _Safety.Safety.string(keyName, Cookie.TARGET);
+	      path = _Safety.Safety.string(path, '/');
+	      domain = _Safety.Safety.string(domain, '');
+
+	      path = path !== '' ? '; path=' + path : '';
+	      domain = domain !== '' ? '; domain=' + domain : '';
+	      var secureSetting = secure ? '; secure' : '';
+
+	      // cookie へ保存
+	      // console.log( 'save ', value, keyName, end.toUTCString(), domain, path, secure );
+	      document.cookie = encodeURIComponent(keyName) + '=' + encodeURIComponent(value) + '; expires=' + end.toUTCString() + domain + path + secureSetting;
+	      return true;
+	    }
+	    /**
+	     * 指定名称の cookie が存在するかを調べます
+	     * @param {string} keyName 調査対象 cookie 名称
+	     * @return {boolean} cookie が存在するかの真偽値 を返します
+	     */
+
+	  }, {
+	    key: 'has',
+	    value: function has(keyName) {
+	      return Cookie.get(keyName) !== null;
+	    }
+	    /**
+	     * 指定名称の cookie を削除します
+	     * @param {string} keyName cookie 名称
+	     * @param {string} [path='/'] cookie 指定したパスが設定されます
+	     * @param {string} [domain=''] ドメイン, 特定するときは example.com or subdomain.example.com と指定します。 default は **現在のドメイン**
+	     * @return {boolean} 削除 成功か否かの真偽値 を返します
+	     */
+
+	  }, {
+	    key: 'remove',
+	    value: function remove() {
+	      var keyName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Cookie.TARGET;
+	      var path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '/';
+	      var domain = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+	      if (Cookie.has(keyName)) {
+	        return Cookie.save('', keyName, new Date(), path, domain);
+	      }
+	      return false;
+	    }
+	  }, {
+	    key: 'TARGET',
+
+	    // /**
+	    //  * cookie を取得・削除・設定します
+	    //  * static class です, instance を作成しません
+	    //  * @param {Symbol} target Singleton を実現するための private symbol
+	    //  */
+	    // constructor( target ) {
+	    //
+	    //   if ( _symbol !== target ) {
+	    //
+	    //     throw new Error( 'Cookie is static Class. not use new Cookie().' );
+	    //
+	    //   }
+	    //
+	    // }
+	    // ---------------------------------------------------
+	    //  GETTER / SETTER
+	    // ---------------------------------------------------
+	    /**
+	     * token cookie name
+	     * @const TARGET
+	     * @return {string} cookie key name を返します
+	     */
+	    get: function get() {
+	      return 'auth_token';
+	    }
+	    /**
+	     * Syn. menu を開いた時にセットする cookie name
+	     * @const SYN
+	     * @return {string} Syn. menu を開いた時にセットする cookie name を返します
+	     */
+
+	  }, {
+	    key: 'SYN',
+	    get: function get() {
+	      return 'visited';
+	    }
+	    /**
+	     * 初めての訪問 cookie name
+	     * @const EVER_BEEN
+	     * @return {string} been 初めての訪問 cookie name を返します
+	     */
+
+	  }, {
+	    key: 'EVER_BEEN',
+	    get: function get() {
+	      return 'been';
+	    }
+
+	    /**
+	     * @const APP_BANNER
+	     * @return {string} app_banner アプリバーアナー cookie name を返します
+	     */
+
+	  }, {
+	    key: 'APP_BANNER',
+	    get: function get() {
+	      return 'app_banner';
+	    }
+	  }]);
+	  return Cookie;
+	}(); /**
+	      * Copyright (c) 2011-2016 inazumatv.com, inc.
+	      * @author (at)taikiken / http://inazumatv.com
+	      * @date 2016/01/27 - 18:48
+	      *
+	      * Distributed under the terms of the MIT license.
+	      * http://www.opensource.org/licenses/mit-license.html
+	      *
+	      * This notice shall be included in all copies or substantial portions of the Software.
+	      *
+	      */
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UserStatus = undefined;
+
+	var _getPrototypeOf = __webpack_require__(85);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _symbol = __webpack_require__(69);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	var _EventDispatcher2 = __webpack_require__(96);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// Singleton を保証するための Symbol
+	/**
+	 * {@link UserStatus} inner symbol
+	 * @type {symbol}
+	 */
+	var userStatusSymbol = (0, _symbol2.default)('UserStatus singleton Symbol');
+	// Singleton instance
+	/**
+	 * {@link UserStatus} singleton instance
+	 * @type {?UserStatus}
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/02 - 20:54
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	var singletonInstance = null;
+
+	/**
+	 * ログイン / ログアウト を通知
+	 *
+	 * Singleton class です `new` 演算子での instance 作成はできません
+	 *
+	 * @example
+	 * const userStatus = UserStatus.factory();
+	 *
+	 *  */
+
+	var UserStatus = exports.UserStatus = function (_EventDispatcher) {
+	  (0, _inherits3.default)(UserStatus, _EventDispatcher);
+	  (0, _createClass3.default)(UserStatus, null, [{
+	    key: 'factory',
+
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * instance を生成します
+	     * @return {UserStatus} UserStatus instance を返します
+	     */
+	    value: function factory() {
+	      if (singletonInstance === null) {
+	        singletonInstance = new UserStatus(userStatusSymbol);
+	      }
+	      return singletonInstance;
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+	    /**
+	     * ログイン / ログアウト を通知する SingleTon
+	     * @param {Symbol} target Singleton を実現するための private symbol
+	     * @return {UserStatus} UserStatus インスタンスを返します
+	     */
+
+	  }, {
+	    key: 'LOG_IN',
+
+	    // ---------------------------------------------------
+	    //  STATIC CONST
+	    // ---------------------------------------------------
+	    /**
+	     * LOG_IN event
+	     * @event LOG_IN
+	     * @return {string} LOG_IN event type を返します
+	     */
+	    get: function get() {
+	      return 'logIn';
+	    }
+	    /**
+	     * LOG_OUT event
+	     * @event LOG_OUT
+	     * @return {string} LOG_OUT event type を返します
+	     */
+
+	  }, {
+	    key: 'LOG_OUT',
+	    get: function get() {
+	      return 'logOut';
+	    }
+	  }]);
+
+	  function UserStatus(target) {
+	    var _ret2;
+
+	    (0, _classCallCheck3.default)(this, UserStatus);
+
+	    if (userStatusSymbol !== target) {
+	      throw new Error('UserStatus is static Class. not use new UserStatus().');
+	    }
+	    if (singletonInstance !== null) {
+	      var _ret;
+
+	      return _ret = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	    }
+	    // ------
+	    // do once
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (UserStatus.__proto__ || (0, _getPrototypeOf2.default)(UserStatus)).call(this));
+
+	    singletonInstance = _this;
+
+	    return _ret2 = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * UserStatus.LOG_IN event を fire します
+	   */
+
+
+	  (0, _createClass3.default)(UserStatus, [{
+	    key: 'login',
+	    value: function login() {
+	      this.dispatch({ type: UserStatus.LOG_IN, sign: true });
+	    }
+	    /**
+	     * UserStatus.LOG_OUT event を fire します
+	     */
+
+	  }, {
+	    key: 'logout',
+	    value: function logout() {
+	      this.dispatch({ type: UserStatus.LOG_OUT, sign: false });
+	    }
+	  }]);
+	  return UserStatus;
+	}(_EventDispatcher2.EventDispatcher);
+
+/***/ }),
 /* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8251,7 +8062,7 @@
 	});
 	exports.UsersSelf = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -8259,11 +8070,11 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -8271,7 +8082,7 @@
 
 	var _Api = __webpack_require__(125);
 
-	var _User = __webpack_require__(84);
+	var _User = __webpack_require__(113);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8320,7 +8131,7 @@
 	});
 	exports.ActionAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -8332,17 +8143,17 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Action2 = __webpack_require__(118);
 
-	var _User = __webpack_require__(84);
+	var _User = __webpack_require__(113);
 
 	var _Token = __webpack_require__(123);
 
@@ -9709,7 +9520,7 @@
 
 	var _Types = __webpack_require__(124);
 
-	var _User = __webpack_require__(84);
+	var _User = __webpack_require__(113);
 
 	var _ApiDae = __webpack_require__(126);
 
@@ -12297,7 +12108,7 @@
 	});
 	exports.SettingsStatus = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -12305,7 +12116,7 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -12313,7 +12124,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -12321,7 +12132,7 @@
 
 	var _symbol2 = _interopRequireDefault(_symbol);
 
-	var _EventDispatcher2 = __webpack_require__(97);
+	var _EventDispatcher2 = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12462,7 +12273,7 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -12470,7 +12281,7 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -12478,7 +12289,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -12486,17 +12297,13 @@
 
 	var _CommentStatus = __webpack_require__(142);
 
-	var _View = __webpack_require__(104);
+	var _View = __webpack_require__(95);
 
 	var _View2 = _interopRequireDefault(_View);
 
-	var _ViewHeaderMemberNotice = __webpack_require__(143);
+	var _User = __webpack_require__(113);
 
-	var _ViewHeaderMemberNotice2 = _interopRequireDefault(_ViewHeaderMemberNotice);
-
-	var _User = __webpack_require__(84);
-
-	var _Loc = __webpack_require__(169);
+	var _Loc = __webpack_require__(143);
 
 	var _Env = __webpack_require__(127);
 
@@ -12504,14 +12311,22 @@
 
 	var _Safety = __webpack_require__(24);
 
-	var _Empty = __webpack_require__(160);
+	var _Empty = __webpack_require__(144);
 
-	var _Url = __webpack_require__(108);
+	var _Url = __webpack_require__(105);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
 	 * [library] - React
+	 */
+
+	// import ViewHeaderMemberNotice from '../../view/header/ViewHeaderMemberNotice';
+	var React = self.React;
+
+	/**
+	 * header - member setting menu
+	 * - for login user
 	 */
 	/**
 	 * Copyright (c) 2011-2017 inazumatv.com, inc.
@@ -12523,12 +12338,6 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
-	 */
-	var React = self.React;
-
-	/**
-	 * header - member setting menu
-	 * - for login user
 	 */
 
 	var ComponentHeaderMemberSetting = function (_React$Component) {
@@ -12613,11 +12422,35 @@
 	     * @type {function}
 	     * */
 	    _this.onClick = _this.onClick.bind(_this);
+	    /**
+	     * bound onBodyClick
+	     * @type {any}
+	     */
 	    _this.onBodyClick = _this.onBodyClick.bind(_this);
+	    /**
+	     * bound onLogoutClick
+	     * @type {any}
+	     */
 	    _this.onLogoutClick = _this.onLogoutClick.bind(_this);
+	    /**
+	     * bound onOk
+	     * @type {any}
+	     */
 	    _this.onOk = _this.onOk.bind(_this);
+	    /**
+	     * bound onCancel
+	     * @type {any}
+	     */
 	    _this.onCancel = _this.onCancel.bind(_this);
+	    /**
+	     * bound onOtherModalOpen
+	     * @type {any}
+	     */
 	    _this.onOtherModalOpen = _this.onOtherModalOpen.bind(_this);
+	    /**
+	     * `div.notice-container`
+	     * @type {?Element}
+	     */
 	    _this.noticeElement = null;
 	    return _this;
 	  }
@@ -12761,14 +12594,19 @@
 	          did = _props.did;
 
 	      safely(_View2.default.DID_MOUNT);
-	      did();
-	      // ---
-	      var noticeElement = this.noticeElement;
-	      if (noticeElement) {
-	        var notice = new _ViewHeaderMemberNotice2.default(noticeElement, {}, this.props.vk);
-	        // const notice = new ViewHeaderMemberNotice(noticeElement);
-	        notice.start();
+	      // 判定追加する - 2018-04-19
+	      if (did) {
+	        did();
 	      }
+	      // ---
+	      // 2018-04-18 トルツメ - display: none になってる
+	      // const noticeElement = this.noticeElement;
+	      // if (noticeElement) {
+	      //   const notice = new ViewHeaderMemberNotice(noticeElement, {}, this.props.vk);
+	      //   // const notice = new ViewHeaderMemberNotice(noticeElement);
+	      //   notice.start();
+	      // }
+	      // ---
 	      var commentStatus = this.commentStatus;
 	      commentStatus.off(_CommentStatus.CommentStatus.COMMENT_DELETE_MODAL_OPEN, this.onOtherModalOpen);
 	      commentStatus.on(_CommentStatus.CommentStatus.COMMENT_DELETE_MODAL_OPEN, this.onOtherModalOpen);
@@ -12811,9 +12649,10 @@
 	          userName = _state.userName,
 	          icon = _state.icon,
 	          open = _state.open;
+	      // vk 絶対パス - 2018-04-19
 
-	      var iconImg = _Safety.Safety.image(icon, _Empty.Empty.USER_EMPTY);
-	      var loggedIn = _Safety.Safety.same(iconImg, _Empty.Empty.USER_EMPTY);
+	      var iconImg = '' + _Url.Url.host + _Safety.Safety.image(icon, _Empty.Empty.USER_EMPTY);
+	      var loggedIn = _Safety.Safety.same(iconImg, '' + _Url.Url.host + _Empty.Empty.USER_EMPTY);
 	      // console.log('ComponentHeaderMemberSetting.render', userName, icon, open);
 	      return React.createElement(
 	        'div',
@@ -12847,7 +12686,7 @@
 	                { className: 'dropMenu-item' },
 	                React.createElement(
 	                  'a',
-	                  { className: 'dropMenu-link', href: _Url.Url.mypage() },
+	                  { className: 'dropMenu-link', href: '#' },
 	                  '\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF',
 	                  React.createElement('br', null),
 	                  '\u30A2\u30AF\u30C6\u30A3\u30D3\u30C6\u30A3'
@@ -12858,7 +12697,7 @@
 	                { className: 'dropMenu-item' },
 	                React.createElement(
 	                  'a',
-	                  { className: 'dropMenu-link', href: _Url.Url.settings() },
+	                  { className: 'dropMenu-link', href: _Url.Url.settings('', this.props.vk) },
 	                  '\u8A2D\u5B9A'
 	                )
 	              ),
@@ -12893,7 +12732,7 @@
 	});
 	exports.LogoutStatus = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -12901,7 +12740,7 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -12909,7 +12748,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -12917,7 +12756,7 @@
 
 	var _symbol2 = _interopRequireDefault(_symbol);
 
-	var _EventDispatcher2 = __webpack_require__(97);
+	var _EventDispatcher2 = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13058,7 +12897,7 @@
 	});
 	exports.CommentStatus = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -13066,7 +12905,7 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -13074,7 +12913,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -13082,7 +12921,7 @@
 
 	var _symbol2 = _interopRequireDefault(_symbol);
 
-	var _EventDispatcher2 = __webpack_require__(97);
+	var _EventDispatcher2 = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13310,10 +13149,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _getPrototypeOf = __webpack_require__(87);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	exports.Loc = undefined;
 
 	var _classCallCheck2 = __webpack_require__(4);
 
@@ -13323,47 +13159,19 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _Url = __webpack_require__(105);
 
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _View2 = __webpack_require__(104);
-
-	var _View3 = _interopRequireDefault(_View2);
-
-	var _Message = __webpack_require__(109);
-
-	var _Notice = __webpack_require__(144);
-
-	var _NotificationsDae = __webpack_require__(152);
-
-	var _NoticeStatus = __webpack_require__(157);
-
-	var _ComponentHeaderNotice = __webpack_require__(158);
-
-	var _ComponentHeaderNotice2 = _interopRequireDefault(_ComponentHeaderNotice);
+	var _Safety = __webpack_require__(24);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// React
-	/* eslint-disable no-unused-vars */
 	/**
-	 * [library] - React
+	 * location に関する utility
 	 */
-
-
-	// event
-
-
-	// action
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/08 - 19:46
+	 * @date 2016/01/13 - 21:40
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -13372,190 +13180,277 @@
 	 *
 	 */
 
-	// parent
-	var React = self.React;
-	/* eslint-enable no-unused-vars */
-	/**
-	 * [library] - ReactDOM
-	 */
+	var Loc = exports.Loc = function () {
+	  (0, _createClass3.default)(Loc, null, [{
+	    key: 'hashClean',
 
-
-	// tick
-	// import { Polling } from '../../tick/Polling';
-
-
-	// dae
-
-
-	// app
-	var ReactDOM = self.ReactDOM;
-
-	/**
-	 * お知らせ(header)
-	 * - バッジ
-	 * - お知らせ一覧 + リンク
-	 */
-
-	var ViewHeaderMemberNotice = function (_View) {
-	  (0, _inherits3.default)(ViewHeaderMemberNotice, _View);
-
-	  /**
-	   * お知らせ(header) for login member
-	   * @param {Element} element insert root element
-	   * @param {Object} [option={}] optional event handler
-	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
-	   * @since 2-18-04-19 vk header - flag 追加
-	   */
-	  function ViewHeaderMemberNotice(element) {
-	    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-	    var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-	    (0, _classCallCheck3.default)(this, ViewHeaderMemberNotice);
-
-	    // ----
 	    /**
-	     * Action instance を設定します
-	     * @override
-	     * @type {Notice}
+	     * hash を消去します
 	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (ViewHeaderMemberNotice.__proto__ || (0, _getPrototypeOf2.default)(ViewHeaderMemberNotice)).call(this, element, option, vk));
-
-	    _this.action = new _Notice.Notice(_this.done.bind(_this), _this.fail.bind(_this), 0, 5);
-	    /**
-	     * bind 済み this.onNoticeUpdate event handler
-	     * @type {Function}
-	     */
-	    _this.onNoticeUpdate = _this.onNoticeUpdate.bind(_this);
-	    /**
-	     * bind onMount
-	     * @type {function}
-	     */
-	    _this.onMount = _this.onMount.bind(_this);
-	    /**
-	     * bind dispose
-	     * @type {function}
-	     */
-	    _this.dispose = _this.dispose.bind(_this);
-	    /**
-	     * bind executeSafely
-	     * @type {function}
-	     */
-	    _this.executeSafely = _this.executeSafely.bind(_this);
-	    /**
-	     * お知らせ更新通知マネージャー instance
-	     * @type {NoticeStatus}
-	     */
-	    _this.status = _NoticeStatus.NoticeStatus.factory();
-	    return _this;
-	  }
-	  /**
-	   * Ajax request を開始します
-	   */
-
-
-	  (0, _createClass3.default)(ViewHeaderMemberNotice, [{
-	    key: 'start',
-	    value: function start() {
-	      this.action.next();
-	    }
-	    /**
-	     * Ajax response success
-	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
-	     */
-
-	  }, {
-	    key: 'done',
-	    value: function done(result) {
-	      var response = result.response;
-	      if (typeof response === 'undefined') {
-	        // articles undefined
-	        // JSON に問題がある
-	        var error = new Error(_Message.Message.undef('[MEMBER:NOTICE:UNDEFINED]'));
-	        this.executeSafely(_View3.default.UNDEFINED_ERROR, error);
-	        // this.showError( error.message );
-	      } else {
-	        this.render(response);
+	    value: function hashClean() {
+	      Loc.hash = '';
+	      var path = Loc.path;
+	      var hashIndex = path.lastIndexOf('#');
+	      if (hashIndex !== -1) {
+	        Loc.path = path.substring(0, hashIndex - 1);
 	      }
 	    }
 	    /**
-	     * Ajax response error
-	     * @param {Error} error Error instance
+	     * url の query 文字列
+	     * @return {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
 	     */
 
 	  }, {
-	    key: 'fail',
-	    value: function fail(error) {
-	      this.executeSafely(_View3.default.RESPONSE_ERROR, error);
-	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
-	      // this.showError( error.message );
+	    key: 'hashStrip',
+
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * hash(#example)から`#`をとります
+	     * @param {string} hash hash文字列
+	     * @return {string} hash文字列から#を削除した文字列を返します
+	     */
+	    value: function hashStrip() {
+	      var hash = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Loc.hash;
+
+	      hash = _Safety.Safety.string(hash, Loc.hash);
+	      return hash.replace(/^[#\/]|\s+$/g, '');
 	    }
 	    /**
-	     * お知らせ  ログインメンバー Dom を生成します
-	     * @param {Object} responseObj JSON response
+	     * pathnameを/で分解します
+	     * @param {string} [pathname=Loc.pathname] location.pathname, host なしの path
+	     * @return {Array.<string>} pathname を `/` で分解し配列にし返します
 	     */
 
 	  }, {
-	    key: 'render',
-	    value: function render(responseObj) {
-	      var notificationsDae = new _NotificationsDae.NotificationsDae(responseObj);
-	      ReactDOM.render(React.createElement(_ComponentHeaderNotice2.default, {
-	        response: notificationsDae,
-	        safely: this.executeSafely,
-	        mount: this.onMount,
-	        dispose: this.dispose,
-	        vk: this.vk
-	      }), this.element);
+	    key: 'resolve',
+	    value: function resolve() {
+	      var pathname = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Loc.path;
+
+	      pathname = _Safety.Safety.string(pathname, Loc.path);
+	      return pathname.split('/');
 	    }
 	    /**
-	     * NoticeStatus.UPDATE_COUNT unbind
+	     * location.search を key: value へ分解します
+	     * @param {string} search location.search型文字列
+	     * @return {*} search を key: value へ分解し Object で返します
 	     */
 
 	  }, {
-	    key: 'dispose',
-	    value: function dispose() {
-	      this.status.off(_NoticeStatus.NoticeStatus.UPDATE_COUNT, this.onNoticeUpdate);
-	    }
-	    /**
-	     * main dom が mount されたら呼び出されます
-	     * componentDidMount callback
-	     */
+	    key: 'parse',
+	    value: function parse() {
+	      var search = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Loc.search;
 
-	  }, {
-	    key: 'onMount',
-	    value: function onMount() {
-	      // const status = NoticeStatus.factory();
-	      var status = this.status;
-	      // this._status = status;
-	      status.off(_NoticeStatus.NoticeStatus.UPDATE_COUNT, this.onNoticeUpdate);
-	      status.on(_NoticeStatus.NoticeStatus.UPDATE_COUNT, this.onNoticeUpdate);
-	    }
-	    /**
-	     * NoticeStatus.UPDATE_COUNT event handler
-	     * @param {Object} event NoticeStatus.UPDATE_COUNT event object, event.count が 0 以外の時に reload します
-	     */
-
-	  }, {
-	    key: 'onNoticeUpdate',
-	    value: function onNoticeUpdate(event) {
-	      // お知らせ件数が0の時はreloadしない
-	      if (event.count !== 0) {
-	        this.reload();
+	      search = _Safety.Safety.string(search, Loc.search);
+	      // 引数が文字でない時は処理しない
+	      if (typeof search !== 'string' || search.length === 0) {
+	        return null;
 	      }
+
+	      search = search.replace('&amp;', '&');
+	      var vars = search.split('&');
+	      var results = {};
+
+	      // for ( let val of vars ) {
+	      //
+	      //   let pair = val.split( '=' );
+	      //   if ( Array.isArray( pair ) && pair.length === 2 ) {
+	      //
+	      //     results[ pair[ 0 ] ] = pair[ 1 ];
+	      //
+	      //   }
+	      //
+	      // }
+	      vars.map(function (val) {
+	        var pair = val.split('=');
+	        if (Array.isArray(pair) && pair.length === 2) {
+	          results[pair[0]] = pair[1];
+	        }
+	      });
+	      return results;
 	    }
 	    /**
-	     * 再読み込み
+	     * host が local かを調べます
+	     * @return {boolean} host が local の時に true を返します
 	     */
 
 	  }, {
-	    key: 'reload',
-	    value: function reload() {
-	      // ajax start
-	      this.action.reload();
+	    key: 'isLocal',
+	    value: function isLocal() {
+	      var host = Loc.host;
+	      return host.indexOf('192.168') === 0 || host.indexOf('0.0.0.0') === 0 || host.indexOf('localhost') === 0 || host.indexOf('127.0.0.1') === 0;
+	    }
+	    /**
+	     * index(home) へ遷移します
+	     */
+
+	  }, {
+	    key: 'index',
+	    value: function index() {
+	      Loc.current = _Url.Url.index();
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+	    /**
+	     * search を調べたい時に instance を作成します
+	     */
+
+	  }, {
+	    key: 'current',
+
+	    // ---------------------------------------------------
+	    //  GETTER / SETTER
+	    // ---------------------------------------------------
+	    /**
+	     * location.href
+	     * @return {string} location.href を返します
+	     */
+	    get: function get() {
+	      return self.location.href;
+	    }
+	    /**
+	     * location.href へ href をセット遷移させます
+	     * @param {string} href 遷移先パス
+	     */
+	    ,
+	    set: function set(href) {
+	      self.location.href = href;
+	    }
+	    /**
+	     * @return {string} location.pathname(urlからprotocol+hostを除く)を返します
+	     */
+
+	  }, {
+	    key: 'path',
+	    get: function get() {
+	      return self.location.pathname;
+	    }
+	    /**
+	     * location.pathname をセットします
+	     * @param {string} path 設定する pathname
+	     */
+	    ,
+	    set: function set(path) {
+	      self.location.pathname = path;
+	    }
+	    /**
+	     * location.hash
+	     * @return {string} location.hashを返します
+	     */
+
+	  }, {
+	    key: 'hash',
+	    get: function get() {
+	      return self.location.hash;
+	    }
+	    /**
+	     * location.hashを設定します
+	     * @param {string} hash 設定する hash
+	     */
+	    ,
+	    set: function set(hash) {
+	      self.location.hash = hash;
+	    }
+	  }, {
+	    key: 'search',
+	    get: function get() {
+	      return self.location.search.substring(1);
+	    }
+	    /**
+	     * location.host
+	     * @return {string} host name + port number を返します
+	     */
+
+	  }, {
+	    key: 'host',
+	    get: function get() {
+	      // host + port number
+	      return self.location.host;
+	    }
+	    /**
+	     * location.hostname
+	     * @return {string} host name だけを返します
+	     */
+
+	  }, {
+	    key: 'hostname',
+	    get: function get() {
+	      // host only
+	      return self.location.hostname;
+	    }
+	    /**
+	     * location.port
+	     * @return {string} port number を返します
+	     */
+
+	  }, {
+	    key: 'port',
+	    get: function get() {
+	      // port number
+	      return self.location.port;
+	    }
+	    /**
+	     * location.protocol
+	     * @return {string} ocation.protocol を返します
+	     */
+
+	  }, {
+	    key: 'protocol',
+	    get: function get() {
+	      return location.protocol;
 	    }
 	  }]);
-	  return ViewHeaderMemberNotice;
-	}(_View3.default);
 
-	exports.default = ViewHeaderMemberNotice;
+	  function Loc() {
+	    (0, _classCallCheck3.default)(this, Loc);
+
+	    /**
+	     * url の query 文字列
+	     * @type {null|string}
+	     */
+	    this.search = null;
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * 文字列を query 型として parse します
+	   * @param {string} [search=''] key: value にしたい search型 文字列
+	   * @return {Loc} instance を返します
+	   */
+
+
+	  (0, _createClass3.default)(Loc, [{
+	    key: 'parse',
+	    value: function parse() {
+	      var search = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+	      search = _Safety.Safety.string(search, '');
+	      this.search = Loc.parse(search);
+	      return this;
+	    }
+	    /**
+	     * search value を keyから探します
+	     * @param {string} key search name
+	     * @return {?string} string|undefined|null で結果を返します
+	     */
+
+	  }, {
+	    key: 'find',
+	    value: function find(key) {
+	      var search = this.search;
+	      // if (search === null) {
+	      //   return null;
+	      // }
+	      //
+	      // return search[key];
+	      return search ? search[key] : null;
+	    }
+	  }]);
+	  return Loc;
+	}();
 
 /***/ }),
 /* 144 */
@@ -13566,11 +13461,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Notice = undefined;
-
-	var _getPrototypeOf = __webpack_require__(87);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	exports.Empty = undefined;
 
 	var _classCallCheck2 = __webpack_require__(4);
 
@@ -13580,31 +13471,12 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _OffsetAuth2 = __webpack_require__(145);
-
-	var _Api = __webpack_require__(125);
-
-	var _User = __webpack_require__(84);
-
-	var _Length = __webpack_require__(151);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
-	 * お知らせ(header / 一覧) を表示します
-	 */
-	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/09 - 19:56
+	 * @date 2016/01/23 - 15:53
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -13612,48 +13484,250 @@
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
 	 */
+	//
+	//
+	// let _symbol = Symbol();
 
-	var Notice = exports.Notice = function (_OffsetAuth) {
-	  (0, _inherits3.default)(Notice, _OffsetAuth);
-
-	  /**
-	   * お知らせ一覧を取得
-	   * @param {Function} [resolve=null] Ajax 成功時の callback
-	   * @param {Function} [reject=null] Ajax 失敗時の callback
-	   * @param {Number} [offset=0] query offset 値
-	   * @param {Number} [length=10] query length 値
-	   */
-	  function Notice() {
-	    var resolve = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-	    var reject = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	    var offset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-	    var length = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _Length.Length.list;
-	    (0, _classCallCheck3.default)(this, Notice);
-	    return (0, _possibleConstructorReturn3.default)(this, (Notice.__proto__ || (0, _getPrototypeOf2.default)(Notice)).call(this, _User.User.token, _Api.Api.notice(''), resolve, reject, offset, length));
+	/**
+	 * 代替画像パスを取得します
+	 * - 記事画像、ユーザーアイコンなど未設定時の代替画像パス
+	 * - 全て static です
+	 */
+	var Empty = exports.Empty = function () {
+	  function Empty() {
+	    (0, _classCallCheck3.default)(this, Empty);
 	  }
-	  // reload 追加
-	  /**
-	   * 再読み込み
-	   * お知らせを擬似リアルタイムに更新するのに使用します
-	   * アプリケーションは「お知らせ数取得間隔（60s）」で発火する通知イベントを listen し reload させます
-	   */
 
+	  (0, _createClass3.default)(Empty, null, [{
+	    key: 'refresh',
 
-	  (0, _createClass3.default)(Notice, [{
-	    key: 'reload',
-	    value: function reload() {
-	      /**
-	       * 再読み込みフラッグ
-	       * @override
-	       * @type {boolean}
-	       */
-	      this.reloadFlag = true;
-	      var url = this._url + '?offset=0&length=' + this.offset;
-	      this.ajax.start(url, this.method, this.boundSuccess, this.boundFail, this.resultClass, this.headers);
+	    /**
+	     * キャッシュさせないパスを生成します
+	     * @param {string} path 元のパス
+	     * @returns {string} パスに?Date.now()をつけて返します
+	     */
+	    value: function refresh(path) {
+	      return path + '?' + Date.now();
+	    }
+	  }, {
+	    key: 'THUMB_EMPTY',
+
+	    // /**
+	    //  * 代替画像パス
+	    //  * static class です, instance を作成しません
+	    //  * @param {Symbol} target Singleton を実現するための private symbol
+	    //  */
+	    // constructor( target ) {
+	    //
+	    //   if ( _symbol !== target ) {
+	    //
+	    //     throw new Error( 'Empty is static Class. not use new Empty().' );
+	    //
+	    //   }
+	    //
+	    // }
+	    // ---------------------------------------------------
+	    //  CONST 代わり
+	    // ---------------------------------------------------
+	    // --------------
+	    // image
+	    /**
+	     * img thumbnail 代替画像パス 100x100
+	     * - [Ex.] sidebar ranking
+	     * @return {string} 代替画像パス【sidebar ranking】
+	     */
+	    get: function get() {
+	      return '/assets/images/common/thumb-empty-100x100.png';
+	    }
+	    /**
+	     * img thumbnail 代替画像パス 70x70
+	     * - [Ex.] headline, sidebar image...
+	     * @return {string} 代替画像パス【小】
+	     */
+
+	  }, {
+	    key: 'IMG_SMALL',
+	    get: function get() {
+	      return '/assets/images/common/thumb-noimage-70x70.png';
+	    }
+	    /**
+	     * img middle 代替画像パス - 記事一覧用 - 横長 - 16:9
+	     * - [Ex.] 記事一覧
+	     * @return {string} 代替画像パス【記事一覧】
+	     */
+
+	  }, {
+	    key: 'IMG_MIDDLE',
+	    get: function get() {
+	      // return '/assets/images/common/thumb-noimage-340x150.png';
+	      // @since 2016-09-01
+	      // https://github.com/undotsushin/undotsushin/issues/1053
+	      return '/assets/images/common/thumb-noimage-16x9-s.png';
+	    }
+	    /**
+	     * img large 代替画像パス
+	     * - [Ex.] スライドショー
+	     * @deprecated 2017-12-18 instead use {@link Empty.IMG_CAROUSEL}
+	     * @return {string} 代替画像パス【スライドショー】
+	     */
+
+	  }, {
+	    key: 'IMG_LARGE',
+	    get: function get() {
+	      return '/assets/images/common/thumb-pickup-empty.png';
+	    }
+	    /**
+	     * img large 代替画像パス - 750x320
+	     * - [Ex.] スライドショー
+	     * @return {string} 代替画像パス【スライドショー】
+	     * @since 2017-12-18
+	     */
+
+	  }, {
+	    key: 'IMG_CAROUSEL',
+	    get: function get() {
+	      // 正規画像に差し替える - 2017-12-22
+	      return '/assets/images/common/thumb-750x320.png';
+	    }
+	    // --------------
+	    // video
+	    /**
+	     * video thumbnail 代替画像パス【16 x 9】
+	     * - [Ex.] sidebar video...
+	     * @return {string} 代替画像パス【16 x 9】
+	     */
+
+	  }, {
+	    key: 'VIDEO_THUMBNAIL',
+	    get: function get() {
+	      return '/assets/images/common/thumb-16x9.png';
+	    }
+	    /**
+	     * video play button overlay【16 x 9】
+	     * - [Ex.] sidebar video...
+	     * @return {string} Video Play画像パス【16 x 9】
+	     */
+
+	  }, {
+	    key: 'VIDEO_PLAY',
+	    get: function get() {
+	      return '/assets/images/common/thumb-16x9-play.png';
+	    }
+	    /**
+	     * video play button overlay sidebar small【16 x 9】
+	     * - [Ex.] sidebar video...
+	     * @return {string} Video Play画像パス【小】【16 x 9】
+	     */
+
+	  }, {
+	    key: 'VIDEO_PLAY_SMALL',
+	    get: function get() {
+	      return '/assets/images/common/thumb-16x9-play-s.png';
+	    }
+	    /**
+	     * SP: video play button overlay【16 x 9】 - `/assets/sp/images/common/thumb-16x9-play.png`
+	     * @return {string} Video Play画像パス【16 x 9】 for SP
+	     * @since 2017-12-28
+	     */
+
+	  }, {
+	    key: 'VIDEO_PLAY_SP',
+	    get: function get() {
+	      return '/assets/sp/images/common/thumb-16x9-play.png';
+	    }
+	    /**
+	     * SP: video play button overlay【16 x 9】 small - `/assets/sp/images/common/thumb-16x9-play-s.png`
+	     * @return {string} Video Play画像パス【16 x 9】 for SP
+	     * @since 2017-12-28
+	     */
+
+	  }, {
+	    key: 'VIDEO_PLAY_SP_SMALL',
+	    get: function get() {
+	      return '/assets/sp/images/common/thumb-16x9-play-s.png';
+	    }
+	    /**
+	     * video play button overlay【640 x 400】
+	     * - [Ex.] pickup video...
+	     * @return {string} Video Play画像パス【Pickup】【640 x 400】
+	     */
+
+	  }, {
+	    key: 'VIDEO_PICKUP_PLAY',
+	    get: function get() {
+	      // 正規画像に差し替える - update 2017-12-22
+	      // return '/assets/images/common/thumb-640x400-play.png';
+	      return '/assets/images/common/thumb-750x320-play.png';
+	    }
+	    /**
+	     * video play button overlay sidebar small【1 x 1】
+	     * - [Ex.] headline video...
+	     * @return {string} Video Play画像パス【小】【1x1】
+	     */
+
+	  }, {
+	    key: 'VIDEO_PLAY_SMALL_1X1',
+	    get: function get() {
+	      return '/assets/images/common/thumb-1x1-play-s.png';
+	    }
+	    // --------------
+	    // user
+	    /**
+	     * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)
+	     * - [Ex.] コメントとか
+	     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
+	     */
+
+	  }, {
+	    key: 'USER_PICTURE',
+	    get: function get() {
+	      return '/assets/images/common/thumb-user.png';
+	    }
+	    /**
+	     * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)
+	     * - [Ex.] コメントとか
+	     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
+	     */
+
+	  }, {
+	    key: 'USER_PICTURE_FEATURE',
+	    get: function get() {
+	      return '/assets/images/common/thumb-user-feature.png';
+	    }
+	    /**
+	     * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)透明
+	     * - [Ex.] コメントとか
+	     * @return {string} 代替透明画像パス ユーザー・プロファイル・アイコン
+	     */
+
+	  }, {
+	    key: 'USER_EMPTY',
+	    get: function get() {
+	      return '/assets/images/common/thumb-user-empty.png';
+	    }
+	    /**
+	     * ユーザー登録 sample avatar
+	     * @return {string} sample avatar image path
+	     */
+
+	  }, {
+	    key: 'SETTING_AVATAR',
+	    get: function get() {
+	      return '/assets/images/setting/thumb-avatar.png';
+	    }
+	    /**
+	     * hero-slider カバーグラデーション画像
+	     * @return {string} hero-slider カバーグラデーション画像パスを返します
+	     */
+
+	  }, {
+	    key: 'KV_OVERLAY',
+	    get: function get() {
+	      return '/assets/images/index/kv-overlay.png';
 	    }
 	  }]);
-	  return Notice;
-	}(_OffsetAuth2.OffsetAuth);
+	  return Empty;
+	}();
 
 /***/ }),
 /* 145 */
@@ -13664,9 +13738,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.OffsetAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -13678,41 +13751,42 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(146);
+	var _View2 = __webpack_require__(95);
 
-	var _Length = __webpack_require__(151);
+	var _View3 = _interopRequireDefault(_View2);
 
-	var _Token = __webpack_require__(123);
+	var _LogoutNode = __webpack_require__(146);
 
-	var _Safety = __webpack_require__(24);
-
-	var _Result = __webpack_require__(119);
-
-	var _Types = __webpack_require__(124);
+	var _LogoutStatus = __webpack_require__(141);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// React
+	/* eslint-disable no-unused-vars */
 	/**
-	 * <p>Ajax 処理を行います</p>
-	 *
-	 * <p>offset, length がクエリに必要でかつ<br>
-	 * token あり（要認証） Ajax 処理を行います<p>
-	 *
-	 * <p>Template Pattern として使用します<br>
-	 * 各 Class で extends して下さい</p>
+	 * [library] - React
 	 */
+
+	// node
+	var React = self.React;
+	/* eslint-enable no-unused-vars */
+	/**
+	 * [library] - ReactDOM
+	 */
+
+	// event
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/27 - 18:05
+	 * @date 2016/03/08 - 19:25
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -13720,81 +13794,143 @@
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
 	 */
+	var ReactDOM = self.ReactDOM;
 
-	var OffsetAuth = exports.OffsetAuth = function (_Offset) {
-	  (0, _inherits3.default)(OffsetAuth, _Offset);
+	/**
+	 * logout modal control
+	 */
 
+	var ViewLogoutModal = function (_View) {
+	  (0, _inherits3.default)(ViewLogoutModal, _View);
+
+	  // ---------------------------------------------------
+	  //  CONSTRUCTOR
+	  // ---------------------------------------------------
 	  /**
-	   * **要認証** Ajax 処理, queryあり<br>
-	   * **Next 読込** がある時に使用します
-	   *
-	   * @param {string} token Authorization token
-	   * @param {Types} types Types instance, Ajax request に使用します
-	   * @param {Function} [resolve=null] Ajax 成功時の callback
-	   * @param {Function} [reject=null] Ajax 失敗時の callback
-	   * @param {Number} [offset=0] query offset 値
-	   * @param {Number} [length=16] query length 値
-	   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
+	   * logout modal 表示
+	   * @param {Element} element 親 Element
+	   * @param {?Function} [yesCallback=null] yes / ok click callback
+	   * @param {?Function} [noCallback=null] no / cancel click callback
+	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	   * @since 2-18-04-19 vk header - flag 追加
 	   */
-	  function OffsetAuth(token, types) {
-	    var resolve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-	    var reject = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-	    var offset = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-	    var length = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _Length.Length.archive;
-	    var ResultClass = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _Result.Result;
-	    (0, _classCallCheck3.default)(this, OffsetAuth);
+	  function ViewLogoutModal(element) {
+	    var yesCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	    var noCallback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	    var vk = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+	    (0, _classCallCheck3.default)(this, ViewLogoutModal);
 
 	    /**
-	     * <p>token ありリクエストに使用する Fetch.Header object</p>
-	     * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-	     * @type {Object}
-	     * @protected
+	     * modal instance
+	     * @type {null|Object}
+	     * @private
 	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (OffsetAuth.__proto__ || (0, _getPrototypeOf2.default)(OffsetAuth)).call(this, types, resolve, reject, offset, length, ResultClass));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (ViewLogoutModal.__proto__ || (0, _getPrototypeOf2.default)(ViewLogoutModal)).call(this, element, {}, vk));
 
-	    _this._headers = _Token.Token.token(token);
+	    _this._render = null;
+	    /**
+	     * yes / ok click callback
+	     * @type {Function}
+	     * @private
+	     */
+	    _this._yes = yesCallback;
+	    /**
+	     * no / cancel click callback
+	     * @type {Function}
+	     * @private
+	     */
+	    _this._no = noCallback;
+	    /**
+	     * LogoutStatus instance
+	     * @type {LogoutStatus}
+	     * @private
+	     */
+	    _this._status = _LogoutStatus.LogoutStatus.factory();
+	    /**
+	     * bind onOpen
+	     * @type {function}
+	     */
+	    _this.onOpen = _this.onOpen.bind(_this);
 	    return _this;
 	  }
 	  // ---------------------------------------------------
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * <p>token ありリクエストに使用する Fetch.Header object</p>
-	   * <p>{@link Token} Class `Token.token` 関数で作成します</p>
-	   * @return {Object} headers へセットする Object を返します
+	   * @param {Function} callback ok / yes callback
 	   */
 
 
-	  (0, _createClass3.default)(OffsetAuth, [{
-	    key: 'next',
+	  (0, _createClass3.default)(ViewLogoutModal, [{
+	    key: 'start',
 
 	    // ---------------------------------------------------
-	    //  METHOD
+	    //  Method
 	    // ---------------------------------------------------
 	    /**
-	     * 次の読込を開始します<br>
-	     * start の代わりに使用します
-	     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
+	     * rendering 開始
 	     */
-	    value: function next() {
-	      var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.method;
+	    value: function start() {
+	      this.render();
+	    }
+	    /**
+	     * rendering - {@link LogoutNode}
+	     */
 
-	      // next data があるかないかを調べます
-	      // next がある時は Ajax を実行します
-	      if (this.hasNext()) {
-	        method = _Safety.Safety.string(method, this.method);
-	        this.ajax.start(this.url, method, this.boundSuccess, this.boundFail, this.resultClass, this.headers);
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this._render === null) {
+	        this._render = ReactDOM.render(React.createElement(_LogoutNode.LogoutNode, {
+	          ok: this._yes,
+	          cancel: this._no
+	        }), this.element);
+	      }
+	      var status = this._status;
+	      status.off(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
+	      status.on(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
+	    }
+	    /**
+	     * modal 開く
+	     */
+
+	  }, {
+	    key: 'open',
+	    value: function open() {
+	      if (this._render !== null) {
+	        this._render.updateShow(true);
 	      }
 	    }
+	    /**
+	     * LogoutStatus.OPEN event handler
+	     * event が発生したら this.open を実行します
+	     */
+
 	  }, {
-	    key: 'headers',
-	    get: function get() {
-	      return this._headers;
+	    key: 'onOpen',
+	    value: function onOpen() {
+	      // console.log( 'logout open event handler will open logout modal........' );
+	      this.open();
+	    }
+	  }, {
+	    key: 'yes',
+	    set: function set(callback) {
+	      this._yes = callback;
+	    }
+	    /**
+	     * @param {Function} callback cancel / no callback
+	     */
+
+	  }, {
+	    key: 'no',
+	    set: function set(callback) {
+	      this._no = callback;
 	    }
 	  }]);
-	  return OffsetAuth;
-	}(_Offset2.Offset);
-	// import {User} from '../app/User';
+	  return ViewLogoutModal;
+	}(_View3.default);
+
+	exports.default = ViewLogoutModal;
 
 /***/ }),
 /* 146 */
@@ -13805,9 +13941,1385 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.LogoutNode = undefined;
+
+	var _Message = __webpack_require__(106);
+
+	var _User = __webpack_require__(113);
+
+	var _Loc = __webpack_require__(143);
+
+	var _LogoutStatus = __webpack_require__(141);
+
+	// React
+
+
+	// util
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/03/08 - 19:06
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// app
+	var React = self.React;
+
+	// tween
+
+
+	// event
+	var greensock = self.com.greensock;
+	var TweenLite = greensock.TweenLite;
+	var easing = greensock.easing;
+
+	/**
+	 * Logout modal
+	 * @type {ReactClass}
+	 */
+	var LogoutNode = exports.LogoutNode = React.createClass({
+	  displayName: 'LogoutNode',
+
+	  propTypes: {
+	    // ok click callback
+	    ok: React.PropTypes.func,
+	    // cancel click callback
+	    cancel: React.PropTypes.func,
+	    // LogoutStatus event handler を bind する
+	    listen: React.PropTypes.bool
+	  },
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      ok: null,
+	      cancel: null,
+	      type: 'logout',
+	      // PC: 不要(false), SP: 要(true)
+	      // 設計が悪く PC, SP で実装方法が変わってしまった
+	      // PC true にすると二重にマウントされる...かも
+	      listen: false
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    this.status = null;
+	    this.ok = null;
+	    this.cancel = null;
+
+	    return {
+	      show: false,
+	      css: { opacity: 0 }
+	    };
+	  },
+	  render: function render() {
+
+	    if (this.state.show) {
+	      return React.createElement(
+	        'div',
+	        { className: 'modal-dialogue modal-dialogue_delete', ref: 'modalContainer', style: this.state.css },
+	        React.createElement('div', { className: 'modal-bg', onClick: this.cancelClick }),
+	        React.createElement(
+	          'div',
+	          { className: 'modal-dialogue-contents ' + this.props.type },
+	          React.createElement(
+	            'a',
+	            { href: '#', className: 'modal-dialogue-close', onClick: this.cancelClick },
+	            _Message.Message.BUTTON_CLOSE
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'lead' },
+	            _Message.Message.LOGOUT
+	          ),
+	          React.createElement(
+	            'ul',
+	            { className: 'btn-block' },
+	            React.createElement(
+	              'li',
+	              { className: 'btn-item' },
+	              React.createElement(
+	                'a',
+	                { href: '#', className: 'btn-link btn-link_cancel', onClick: this.cancelClick },
+	                _Message.Message.BUTTON_NO
+	              )
+	            ),
+	            React.createElement(
+	              'li',
+	              { className: 'btn-item' },
+	              React.createElement(
+	                'a',
+	                { href: '#', className: 'btn-link btn-link_submit', onClick: this.okClick },
+	                _Message.Message.BUTTON_YES
+	              )
+	            )
+	          )
+	        )
+	      );
+	    } else {
+	      // not show
+	      return null;
+	    }
+	  },
+	  componentDidMount: function componentDidMount() {
+	    if (this.props.listen) {
+	      var status = _LogoutStatus.LogoutStatus.factory();
+	      this.status = status;
+	      status.on(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
+	      status.on(_LogoutStatus.LogoutStatus.CLOSE, this.onClose);
+	    }
+	  },
+	  componentWillUnMount: function componentWillUnMount() {
+	    var status = this.status;
+	    if (status !== null) {
+	      status.off(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
+	      status.off(_LogoutStatus.LogoutStatus.CLOSE, this.onClose);
+	      this.status = null;
+	    }
+	  },
+	  cancelClick: function cancelClick(event) {
+	    event.preventDefault();
+	    if (typeof this.cancel === 'function') {
+	      this.cancel();
+	    } else if (typeof this.props.cancel === 'function') {
+	      this.props.cancel();
+	    }
+	    this.closeModal();
+	  },
+	  okClick: function okClick(event) {
+	    event.preventDefault();
+	    if (typeof this.ok === 'function') {
+	      this.ok();
+	    } else if (typeof this.props.ok === 'function') {
+	      this.props.ok();
+	    } else {
+	      // this.ok, this.props.ok どちらも function でなかったら
+	      // logout 処理を行う
+	      _User.User.logout();
+	      _Loc.Loc.index();
+	    }
+	    this.closeModal(0.5);
+	  },
+	  openModal: function openModal() {
+	    var object = { opacity: 0 };
+	    var _this = this;
+
+	    TweenLite.to(object, 0.5, {
+	      opacity: 1,
+	      easing: easing.Linear.easeNone,
+	      onUpdate: function onUpdate() {
+	        _this.setState({ css: { opacity: object.opacity } });
+	      },
+	      onComplete: function onComplete() {
+	        _this.setState({ css: { opacity: 1 } });
+	      }
+	    });
+	  },
+	  closeModal: function closeModal() {
+	    var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+	    var object = { opacity: 1 };
+	    var _this = this;
+
+	    TweenLite.to(object, 0.5, {
+	      delay: delay,
+	      opacity: 0,
+	      easing: easing.Linear.easeNone,
+	      onUpdate: function onUpdate() {
+	        _this.setState({ css: { opacity: object.opacity } });
+	      },
+	      onComplete: function onComplete() {
+	        _this.setState({ css: { opacity: 0 }, show: false });
+	      }
+	    });
+	  },
+	  updateShow: function updateShow(show) {
+	    this.setState({ show: show });
+	    if (show) {
+	      this.openModal();
+	    }
+	  },
+	  onOpen: function onOpen(event) {
+	    this.ok = event.ok;
+	    this.cancel = event.cancel;
+	    this.updateShow(true);
+	  },
+	  onClose: function onClose() {
+	    this.ok = null;
+	    this.cancel = null;
+	  }
+	});
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Dom = __webpack_require__(3);
+
+	var _Dom2 = _interopRequireDefault(_Dom);
+
+	var _Scroll = __webpack_require__(110);
+
+	var _Offset = __webpack_require__(148);
+
+	var _TopButton = __webpack_require__(149);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// TweenMax
+	/**
+	 * [library] - gsap.TweenLite
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/17 - 18:14
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// babels_exe から移植
+
+	// app
+	var TweenLite = self.TweenLite;
+
+	// Sagen
+	/**
+	 * [library] - Sagen
+	 */
+
+
+	// ui
+
+
+	// util
+	var Sagen = self.Sagen;
+
+	/**
+	 * page top に戻る
+	 */
+
+	var PageTop = function () {
+	  (0, _createClass3.default)(PageTop, null, [{
+	    key: 'start',
+
+	    /**
+	     * PageTop instance を作成し init 関数をコールします
+	     */
+	    value: function start() {
+	      var pageTop = new PageTop();
+	      pageTop.init();
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+	    /**
+	     * page top に戻る motion
+	     */
+
+	  }]);
+
+	  function PageTop() {
+	    (0, _classCallCheck3.default)(this, PageTop);
+
+	    /**
+	     * bind 済み this.onScroll
+	     * @type {Function}
+	     * @since 2016-09-01
+	     */
+	    this.boundScroll = this.onScroll.bind(this);
+	    /**
+	     * div#pageTop Element
+	     * @type {?Element}
+	     * @since 2016-09-01
+	     */
+	    this.element = null;
+	    /**
+	     * div#pageTop Sagen.Dom instance
+	     * @type {?Sagen.Dom}
+	     * @since 2016-09-01
+	     */
+	    this.dom = null;
+	    /**
+	     * div#footer-container Element
+	     * @type {?Element}
+	     * @since 2016-09-01
+	     */
+	    this.footer = null;
+	    /**
+	     * div#footer-container Offset instance
+	     * @type {?Offset}
+	     * @since 2016-09-01
+	     */
+	    this.footerOffset = null;
+	    /**
+	     * Scroll instance
+	     * @type {Scroll}
+	     * @since 2016-09-01
+	     */
+	    this.scroll = _Scroll.Scroll.factory();
+
+	    /**
+	     * Dom.whole() を Offset instance として保存します
+	     * @type {?Offset}
+	     */
+	    this.wholeOffset = null;
+
+	    /**
+	     * fade animation 中フラッグ
+	     * @type {boolean}
+	    \     * @default false
+	     */
+	    this.inFade = false;
+
+	    /**
+	     * click で top へ戻るアニメーションを
+	     * @type {TopButton}開始します
+	     * @since 2016-10-28
+	     */
+	    this.topButton = _TopButton.TopButton.factory();
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * click event を bind します
+	   */
+
+
+	  (0, _createClass3.default)(PageTop, [{
+	    key: 'init',
+	    value: function init() {
+	      var element = _Dom2.default.pageTop();
+	      if (element === null) {
+	        return;
+	      }
+	      // element.addEventListener( 'click', this.onClick.bind( this ), false );
+	      this.element = element;
+	      this.topButton.init(element);
+
+	      var footer = _Dom2.default.footer();
+	      if (footer === null) {
+	        return;
+	      }
+
+	      this.footer = footer;
+
+	      this.initRise();
+	    }
+	    /**
+	     * fixed / absolute 切替表示初期処理
+	     * @since 2016-09-01
+	     */
+
+	  }, {
+	    key: 'initRise',
+	    value: function initRise() {
+	      // @type {Sagen.Dom}
+	      this.dom = new Sagen.Dom(this.element);
+	      // @type {Offset} - footer offset
+	      this.footerOffset = new _Offset.Offset(this.footer);
+	      // @type {Offset} - whole offset
+	      this.wholeOffset = new _Offset.Offset(_Dom2.default.whole());
+
+	      // scroll event 監視開始
+	      var scroll = this.scroll;
+	      scroll.on(_Scroll.Scroll.SCROLL, this.boundScroll);
+	      scroll.start();
+	    }
+	    /**
+	     * Scroll.SCROLL event handler
+	     * @param {Object} event Scroll.SCROLL event object
+	     * @since 2016-09-01
+	     */
+
+	  }, {
+	    key: 'onScroll',
+	    value: function onScroll(event) {
+	      // @type {number} - scrollTop
+	      var y = event.y;
+	      // @type {number} - window height
+	      var height = window.innerHeight;
+	      // @type {number} - browser 下端
+	      var bottom = y + height;
+
+	      // scrollTop 280px 以上でボタン表示
+	      if (y >= 280) {
+	        this.show();
+	      } else {
+	        this.hide();
+	        return;
+	      }
+
+	      // fixed / free
+	      // whole の高さから footer の高さを引い値が 下端 以下になったら absolute にする
+	      // footer よりボタンが飛び出ている 30px を加算する
+	      var offset = this.footerOffset.offset();
+	      var whole = this.wholeOffset.offset();
+	      var checkHeight = whole.height - offset.height + 30;
+
+	      // console.log('offset', checkHeight, bottom, checkHeight <= bottom);
+	      if (checkHeight <= bottom) {
+	        this.free();
+	      } else {
+	        this.sticky();
+	      }
+	    }
+	    /**
+	     * ボタンを表示します - fadein
+	     * @return {boolean} 表示すると true を返します
+	     */
+
+	  }, {
+	    key: 'show',
+	    value: function show() {
+	      var _this = this;
+
+	      if (this.inFade) {
+	        return false;
+	      }
+
+	      var dom = this.dom;
+	      if (!dom.hasClass('blind')) {
+	        return false;
+	      }
+
+	      this.inFade = true;
+	      var element = this.element;
+
+	      element.style.cssText = 'opacity: 0;';
+	      var target = {
+	        step: 0
+	      };
+
+	      TweenLite.to(target, 0.5, {
+	        step: 1,
+	        onStart: function onStart() {
+	          dom.removeClass('blind');
+	        },
+	        onUpdate: function onUpdate() {
+	          element.style.cssText = 'opacity: ' + target.step + ';';
+	        },
+	        onComplete: function onComplete() {
+	          element.style.cssText = '';
+	          _this.inFade = false;
+	        }
+	      });
+
+	      return true;
+	    }
+	    /**
+	     * ボタンを非表示にします - fadeout
+	     * @return {boolean} 非表示にすると true を返します
+	     */
+
+	  }, {
+	    key: 'hide',
+	    value: function hide() {
+	      var _this2 = this;
+
+	      if (this.inFade) {
+	        return false;
+	      }
+
+	      var dom = this.dom;
+	      if (dom.hasClass('blind')) {
+	        return false;
+	      }
+
+	      this.inFade = true;
+	      var element = this.element;
+	      var target = {
+	        step: 1
+	      };
+
+	      TweenLite.to(target, 0.5, {
+	        step: 0,
+	        onUpdate: function onUpdate() {
+	          element.style.cssText = 'opacity: ' + target.step + ';';
+	        },
+	        onComplete: function onComplete() {
+	          dom.addClass('blind');
+	          if (!dom.hasClass('fixed')) {
+	            dom.addClass('fixed');
+	          }
+	          element.style.cssText = '';
+	          _this2.inFade = false;
+	        }
+	      });
+
+	      return true;
+	    }
+	    /**
+	     * absolute にします
+	     * @return {boolean} absolute にすると true を返します
+	     */
+
+	  }, {
+	    key: 'free',
+	    value: function free() {
+	      var dom = this.dom;
+	      if (dom.hasClass('fixed')) {
+	        dom.removeClass('fixed');
+	        return true;
+	      }
+
+	      return false;
+	    }
+	    /**
+	     * fixed にします
+	     * @return {boolean} fixed にすると true を返します
+	     */
+
+	  }, {
+	    key: 'sticky',
+	    value: function sticky() {
+	      var dom = this.dom;
+	      if (!dom.hasClass('fixed')) {
+	        dom.addClass('fixed');
+	        return true;
+	      }
+
+	      return true;
+	    }
+	  }]);
+	  return PageTop;
+	}();
+
+	exports.default = PageTop;
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.Offset = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/08
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 */
+
+	/**
+	 * HTMLElement 要素にアクセスするヘルパー
+	 */
+	var Offset = exports.Offset = function () {
+	  (0, _createClass3.default)(Offset, null, [{
+	    key: "offset",
+
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * getBoundingClientRect を計算します
+	     *
+	     * ```
+	     * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}
+	     * ```
+	     *
+	     * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+	     * @param {Element} element 処理対象 Element
+	     * @returns {ClientRect} getBoundingClientRect を返します
+	     */
+	    value: function offset(element) {
+	      return element.getBoundingClientRect();
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+	    /**
+	     * element 要素処理ヘルパー
+	     * @param {Element} element 処理対象 Element
+	     */
+
+	  }]);
+
+	  function Offset(element) {
+	    (0, _classCallCheck3.default)(this, Offset);
+
+	    /**
+	     * element 処理対象 Element
+	     * @type {Element}
+	     */
+	    this.element = element;
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * getBoundingClientRect を計算します
+	   * @returns {ClientRect} getBoundingClientRect を返します
+	   */
+
+
+	  (0, _createClass3.default)(Offset, [{
+	    key: "offset",
+	    value: function offset() {
+	      return Offset.offset(this.element);
+	    }
+	  }]);
+	  return Offset;
+	}();
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.TopButton = undefined;
+
+	var _getPrototypeOf = __webpack_require__(85);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _symbol = __webpack_require__(69);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	var _EventDispatcher2 = __webpack_require__(96);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * {@link TopButton} singleton instance のためのチェック用 Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	var topButtonSymbol = (0, _symbol2.default)('TopButton singleton instance');
+	/**
+	 * {@link TopButton} instance
+	 * @type {?TopButton}
+	 * @private
+	 * @static
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/10/28 - 23:57
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	var singletonInstance = null;
+
+	/**
+	 * button element - {@link TopButton}
+	 * @type {?Element}
+	 * @default null
+	 */
+	var element = null;
+
+	// TweenMax
+	/**
+	 * [library] - gsap.TweenLite
+	 */
+	var TweenLite = self.TweenLite;
+	/**
+	 * [library] - gsap.com.greensock.easing
+	 */
+	var easing = self.com.greensock.easing;
+
+	/**
+	 * ページの先頭へ移動するアニメーションを実装します
+	 * @since 2016-10-28
+	 */
+
+	var TopButton = exports.TopButton = function (_EventDispatcher) {
+	  (0, _inherits3.default)(TopButton, _EventDispatcher);
+	  (0, _createClass3.default)(TopButton, null, [{
+	    key: 'factory',
+
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * instance を生成します
+	     * @return {TopButton} TopButton instance を返します
+	     */
+	    value: function factory() {
+	      if (singletonInstance === null) {
+	        singletonInstance = new TopButton(topButtonSymbol);
+	      }
+	      return singletonInstance;
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+	    /**
+	     * singleton
+	     * @param {Symbol} target singleton を保証する inner Symbol
+	     * @return {?TopButton} singleton instance
+	     */
+
+	  }, {
+	    key: 'START',
+
+	    // ---------------------------------------------------
+	    //  EVENT
+	    // ---------------------------------------------------
+	    /**
+	     * top へ戻る scroll animation start event
+	     * @event START
+	     * @return {string} topButtonStart
+	     */
+	    get: function get() {
+	      return 'topButtonStart';
+	    }
+	    /**
+	     * top へ戻る scroll animation complete event
+	     * @event COMPLETE
+	     * @return {string} topButtonStart
+	     */
+
+	  }, {
+	    key: 'COMPLETE',
+	    get: function get() {
+	      return 'topButtonComplete';
+	    }
+	  }]);
+
+	  function TopButton(target) {
+	    var _ret2;
+
+	    (0, _classCallCheck3.default)(this, TopButton);
+
+	    if (topButtonSymbol !== target) {
+	      throw new Error('TopButton is static Class. not use new TopButton().');
+	    }
+	    if (singletonInstance !== null) {
+	      var _ret;
+
+	      return _ret = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	    }
+
+	    // -------------------
+	    // one time setting
+	    /**
+	     * animation 可能かの flag
+	     * @type {boolean}
+	     */
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (TopButton.__proto__ || (0, _getPrototypeOf2.default)(TopButton)).call(this));
+
+	    _this.can = true;
+	    /**
+	     * bind onClick
+	     * @type {function}
+	     */
+	    _this.onClick = _this.onClick.bind(_this);
+
+	    singletonInstance = _this;
+	    return _ret2 = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * click event を target element へ設定します
+	   * @param {Element} target page top animation を設定する element
+	   */
+
+
+	  (0, _createClass3.default)(TopButton, [{
+	    key: 'init',
+	    value: function init(target) {
+	      if (element !== null) {
+	        return;
+	      }
+	      element = target;
+	      element.addEventListener('click', this.onClick, false);
+	    }
+	    /**
+	     * click event handler
+	     * animation が可能なら開始する
+	     * @param {Event} event click event
+	     */
+
+	  }, {
+	    key: 'onClick',
+	    value: function onClick(event) {
+	      event.preventDefault();
+	      if (this.can) {
+	        this.go();
+	      }
+	    }
+	    /**
+	     * scroll animation を開始します
+	     */
+
+	  }, {
+	    key: 'go',
+	    value: function go() {
+	      var _this2 = this;
+
+	      if (!this.can) {
+	        return;
+	      }
+	      this.can = false;
+	      // scrolling
+	      TweenLite.to(window, 0.5, {
+	        scrollTo: {
+	          y: 0,
+	          autoKill: false
+	        },
+	        // easing
+	        ease: easing.Power4.easeInOut,
+	        onStart: function onStart() {
+	          _this2.dispatch({ type: TopButton.START });
+	        },
+	        onComplete: function onComplete() {
+	          _this2.can = true;
+	          _this2.dispatch({ type: TopButton.COMPLETE });
+	        }
+	      });
+	    }
+	  }]);
+	  return TopButton;
+	}(_EventDispatcher2.EventDispatcher);
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _Dom = __webpack_require__(3);
+
+	var _Dom2 = _interopRequireDefault(_Dom);
+
+	var _ViewFlushModal = __webpack_require__(107);
+
+	var _ViewFlushModal2 = _interopRequireDefault(_ViewFlushModal);
+
+	var _SPViewAppBanner = __webpack_require__(151);
+
+	var _SPViewAppBanner2 = _interopRequireDefault(_SPViewAppBanner);
+
+	var _SPViewHeaderSearch = __webpack_require__(152);
+
+	var _SPViewHeaderSearch2 = _interopRequireDefault(_SPViewHeaderSearch);
+
+	var _SPViewHeaderUser = __webpack_require__(154);
+
+	var _SPViewHeaderUser2 = _interopRequireDefault(_SPViewHeaderUser);
+
+	var _SPPageTop = __webpack_require__(165);
+
+	var _SPPageTop2 = _interopRequireDefault(_SPPageTop);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// vk mobile 実行ファイル
+	/**
+	 * header
+	 */
+	/**
+	 * Copyright (c) 2011-2018 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2018/04/19 - 12:49
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	var header = function header() {
+	  var element = _Dom2.default.profile();
+	  if (element) {
+	    var view = new _SPViewHeaderUser2.default(element, {}, true);
+	    view.start();
+	  }
+	};
+
+	/**
+	 * 検索フォーム
+	 */
+	var search = function search() {
+	  var element = _Dom2.default.search();
+	  var opener = _Dom2.default.searchOpener();
+	  if (element && opener) {
+	    var view = new _SPViewHeaderSearch2.default(element, opener, {}, true);
+	    view.start();
+	  }
+	};
+
+	/**
+	 * アプリケーションバナー
+	 */
+	var appBanner = function appBanner() {
+	  var element = _Dom2.default.appBanner();
+	  if (element) {
+	    _SPViewAppBanner2.default.init(element, true, true);
+	  }
+	};
+
+	/**
+	 * 実行後の flush modal
+	 */
+	var modalFlush = function modalFlush() {
+	  var element = _Dom2.default.flushModal();
+	  if (element) {
+	    var view = new _ViewFlushModal2.default(element, {}, true);
+	    view.start();
+	  }
+	};
+
+	/**
+	 * page top 戻るアニメーション
+	 */
+	var pageTop = function pageTop() {
+	  // responsive 残骸で pageTop が 2 Element 存在することがある
+	  // #js-page_top を sp は優先にする
+	  // @since 2017-10-23
+	  var element = _Dom2.default.jsPageTop() || _Dom2.default.pageTop();
+	  if (element) {
+	    var ui = new _SPPageTop2.default(element);
+	    ui.start();
+	  }
+	};
+
+	/**
+	 * SP - vk 実行
+	 */
+	var mobile = function mobile() {
+	  // page top
+	  pageTop();
+	  // modal 準備
+	  modalFlush();
+	  // app banner
+	  appBanner();
+	  // header
+	  header();
+	  // 検索フォーム
+	  search();
+	};
+
+	exports.default = mobile();
+
+/***/ }),
+/* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.AppBanner = undefined;
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Cookie = __webpack_require__(114);
+
+	var _Scroll = __webpack_require__(110);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// Sagen
+	/**
+	 * ref: global object - Sagen
+	 * @type {Sagen}
+	 * @private
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/09/08 - 18:10
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// net
+	var Sagen = self.Sagen;
+
+	/**
+	 * `.header-sticky` element
+	 * @type {null}
+	 */
+
+
+	// util
+	var headerSticky = null;
+	/**
+	 * timer id
+	 * @type {number}
+	 */
+	var timer = 0;
+
+	/**
+	 * アプリダウンロードの動線を改善 #1009
+	 *
+	 * グノシーみたいなアプリバナーを SP の時のみに
+	 *
+	 * 仕様変更により大幅に書換える - node を react から template に移動<br>
+	 * `/app/templates/mobile/_header.php` - line 194
+	 * ```
+	 * <div id="js-header-appbnr-container">
+	 *  <div class="header-appbnr">
+	 *    <div class="header-appbnr-btn-close"><span>閉じる</span></div>
+	 *      <div class="header-appbnr-link">
+	 *      <!-- /531683568/sp_header_app -->
+	 *      <script>
+	 *        googletag.cmd.push(function() {
+	 *          googletag.defineSlot('/531683568/sp_header_app', [270, 70], 'div-gpt-ad-1494939700357-0').addService(googletag.pubads());
+	 *          googletag.pubads().enableSingleRequest();
+	 *          googletag.enableServices();
+	 *        });
+	 *      </script>
+	 *      <div id='div-gpt-ad-1494939700357-0' style='height:70px; width:270px;'>
+	 *        <script>
+	 *          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939700357-0'); });
+	 *        </script>
+	 *      </div>
+	 *    <!-- // /531683568/sp_header_app -->
+	 *    </div><!-- /.header-appbnr-link -->
+	 *  </div><!-- /.header-appbnr -->
+	 * </div>
+	 * ```
+	 * @see https://github.com/undotsushin/undotsushin/issues/1009
+	 * @since 2017-05-17
+	 */
+
+	var AppBanner = exports.AppBanner = function () {
+	  (0, _createClass3.default)(AppBanner, null, [{
+	    key: 'onScroll',
+
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * Scroll.SCROLL event handler
+	     * @param {Object} events Scroll.SCROLL event Object
+	     * @see https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-332087234
+	     * @since 2-16-09-30 static へ変更
+	     * @since 2017-09-26 banner - height: 85 -> 70 変更
+	     */
+	    value: function onScroll(events) {
+	      // if (events.y >= 85) {
+	      // @since 2017-09-26
+	      //
+	      if (events.y >= 70) {
+	        AppBanner.visible(false);
+	      } else {
+	        AppBanner.visible(true);
+	      }
+	    }
+	    /**
+	     * iOS safari rendering bug 対応させるために強制再描画します
+	     */
+
+	  }, {
+	    key: 'refresh',
+	    value: function refresh() {
+	      if (!headerSticky) {
+	        return;
+	      }
+	      clearTimeout(timer);
+	      headerSticky.style.cssText = 'top: 71px;';
+	      timer = setTimeout(function () {
+	        headerSticky.style.cssText = '';
+	      }, 16);
+	    }
+	    /**
+	     * document.body に `.appbnr-invisible` を追加・削除します
+	     * @param {boolean} view true の時に `.appbnr-invisible` を削除します
+	     */
+
+	  }, {
+	    key: 'visible',
+	    value: function visible() {
+	      var view = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      if (view) {
+	        if (Sagen.Dom.hasClass(document.body, 'appbnr-invisible')) {
+	          Sagen.Dom.removeClass(document.body, 'appbnr-invisible');
+	          AppBanner.refresh();
+	        }
+	      } else {
+	        Sagen.Dom.addClass(document.body, 'appbnr-invisible');
+	      }
+	    }
+	    /**
+	     * document.body へ `.appbnr-enable` を追加します
+	     */
+
+	  }, {
+	    key: 'enable',
+	    value: function enable() {
+	      Sagen.Dom.addClass(document.body, 'appbnr-enable');
+	    }
+	    /**
+	     * document.body から `.appbnr-enable` を削除します
+	     */
+
+	  }, {
+	    key: 'free',
+	    value: function free() {
+	      Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+	    /**
+	     * app バナー表示コントロール
+	     * @param {Element} element target element
+	     * @param {boolean} show visible flag
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	     * @since 2018-04-19 vk header - flag 追加
+	     */
+
+	  }]);
+
+	  function AppBanner(element, show) {
+	    var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+	    (0, _classCallCheck3.default)(this, AppBanner);
+
+	    /**
+	     * target element
+	     * @type {Element}
+	     */
+	    this.element = element;
+	    /**
+	     * bind onClose
+	     * @type {any}
+	     */
+	    this.onClose = this.onClose.bind(this);
+	    /**
+	     * default property
+	     * @type {{show: boolean}}
+	     */
+	    this.state = { show: show };
+	    /**
+	     * Scroll instance
+	     * @type {Scroll}
+	     */
+	    this.scroll = _Scroll.Scroll.factory();
+	    /**
+	     * VK（バーチャル甲子園）flag
+	     * @type {boolean}
+	     */
+	    this.vk = vk;
+	    var headers = document.getElementsByClassName('header-sticky');
+	    // console.log('AppBanner headers', headers);
+	    if (headers && headers.length) {
+	      headerSticky = headers[0];
+	    }
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+
+
+	  (0, _createClass3.default)(AppBanner, [{
+	    key: 'init',
+	    value: function init() {
+	      // scroll 監視開始
+	      this.activate();
+	      // this.element.addEventListener('click', this.onClose, false);
+	    }
+	    /**
+	     * div.header-appbnr-btn-close click event handler
+	     * @param {Event} event div.header-appbnr-btn-close click event
+	     */
+
+	  }, {
+	    key: 'onClose',
+	    value: function onClose(event) {
+	      event.preventDefault();
+	      this.updateShow(false);
+	      this.dispose();
+	    }
+	    /**
+	     * state.show を変更します
+	     * @param {boolean} show show state value
+	     */
+
+	  }, {
+	    key: 'updateShow',
+	    value: function updateShow(show) {
+	      // state が同じだったら処理しない
+	      if (this.state.show === show) {
+	        return;
+	      }
+
+	      if (!show) {
+	        // 1 week cookie save
+	        // ***開発時コメントにします**
+	        _Cookie.Cookie.save('1', _Cookie.Cookie.APP_BANNER, new Date(Date.now() + 1000 * 60 * 60 * 24 * 7));
+	        // console.log('Cookie', Cookie.APP_BANNER, Cookie.get(Cookie.APP_BANNER));
+	        AppBanner.free();
+	      } else {
+	        // 表示されたらスクロール監視を始める
+	        this.activate();
+	      }
+	      // state update
+	      this.state.show = show;
+	    }
+	    /**
+	     * Scroll.SCROLL 監視を開始します
+	     */
+
+	  }, {
+	    key: 'activate',
+	    value: function activate() {
+	      this.dispose();
+
+	      var scroll = this.scroll;
+	      scroll.on(_Scroll.Scroll.SCROLL, AppBanner.onScroll);
+	      scroll.start();
+	    }
+	    /**
+	     * Scroll.SCROLL 監視を止めます
+	     */
+
+	  }, {
+	    key: 'dispose',
+	    value: function dispose() {
+	      this.scroll.off(_Scroll.Scroll.SCROLL, AppBanner.onScroll);
+	      this.element.removeEventListener('click', this.onClose);
+	    }
+	  }]);
+	  return AppBanner;
+	}();
+
+	/**
+	 * アプリダウンロードの動線を改善 #1009,
+	 * グノシーみたいなアプリバナーを SP の時のみに
+	 *
+	 * 仕様変更により実装を inner class {@link AppBanner} へ移行しました
+	 *
+	 * 実行互換のために {@link SPViewAppBanner.init} のみ残し他は削除しました
+	 * @since 2017-05-17
+	 */
+
+
+	var SPViewAppBanner = function () {
+	  function SPViewAppBanner() {
+	    (0, _classCallCheck3.default)(this, SPViewAppBanner);
+	  }
+
+	  (0, _createClass3.default)(SPViewAppBanner, null, [{
+	    key: 'init',
+
+	    /**
+	     * {@link Cookie}.APP_BANNER が無い時 SPViewAppBanner を render しマウントします
+	     * @param {Element} element div#js-header-appbnr-container
+	     * @param {boolean} [visible=false] render root Element
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	     * @return {boolean} mount すると true を返します
+	     * @since 2018-04-19 vk header - flag 追加
+	     */
+	    value: function init(element) {
+	      var visible = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+	      var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+	      // cookie check 止める
+	      // @since 2017-09-25
+	      var has = false; // Cookie.has(Cookie.APP_BANNER);
+	      if (!has && visible) {
+	        AppBanner.enable();
+	        var banner = new AppBanner(element, visible, vk);
+	        banner.init();
+	        return true;
+	      }
+	      // cookie あり または visible: false
+	      AppBanner.free();
+	      return false;
+	    }
+	  }]);
+	  return SPViewAppBanner;
+	}();
+
+	exports.default = SPViewAppBanner;
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -13819,40 +15331,58 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _get2 = __webpack_require__(147);
-
-	var _get3 = _interopRequireDefault(_get2);
-
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Result = __webpack_require__(119);
+	var _ViewHeaderSearch2 = __webpack_require__(84);
 
-	var _Action2 = __webpack_require__(118);
+	var _ViewHeaderSearch3 = _interopRequireDefault(_ViewHeaderSearch2);
 
-	var _Length = __webpack_require__(151);
+	var _SPComponentHeaderSearchOpener = __webpack_require__(153);
 
-	var _Safety = __webpack_require__(24);
+	var _SPComponentHeaderSearchOpener2 = _interopRequireDefault(_SPComponentHeaderSearchOpener);
+
+	var _ComponentHeaderSearchForm = __webpack_require__(102);
+
+	var _ComponentHeaderSearchForm2 = _interopRequireDefault(_ComponentHeaderSearchForm);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// // Sagen
+	// let Sagen = self.Sagen;
+
+	// React
+	/* eslint-disable no-unused-vars */
 	/**
-	 * Ajax 処理を行います
-	 * - offset, length がクエリに必要な場合に使用します
-	 * - Template Pattern として使用し各 Class で extends して下さい
-	 * - token（認証）が必要な場合は {@link OffsetAuth} を使用します
+	 * [library] - React
 	 */
 
-	// import {Types} from '../net/Types';
+
+	// // app
+	// import {Message} from '../../../app/const/Message';
+	//
+	// // event
+	// import {SearchStatus} from '../../../event/SearchStatus';
+
+	// // node
+	// import {HeaderSearchNode} from '../../../node/header/HeaderSearchNode';
+
+	// util
+	// import {Scroll} from '../../../util/Scroll';
+	var React = self.React;
+	/* eslint-enable no-unused-vars */
+	/**
+	 * [library] - ReactDOM
+	 */
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/13 - 16:03
+	 * @date 2016/03/13 - 22:57
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -13860,341 +15390,1001 @@
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
 	 */
-	/* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
-	var Offset = exports.Offset = function (_Action) {
-	  (0, _inherits3.default)(Offset, _Action);
+	// parent
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * SP 検索フォーム
+	 */
+
+	var SPViewHeaderSearch = function (_ViewHeaderSearch) {
+	  (0, _inherits3.default)(SPViewHeaderSearch, _ViewHeaderSearch);
 
 	  /**
-	   * Ajax 処理, queryあり<br>
-	   * **Next 読込** がある時に使用します
-	   * @param {Type} types Types instance, Ajax request に使用します
-	   * @param {Function} [resolve=null] Ajax 成功時の callback
-	   * @param {Function} [reject=null] Ajax 失敗時の callback
-	   * @param {number} [offset=0] query offset 値
-	   * @param {number} [length=16] query length 値
-	   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
+	   * 検索フォーム + ロケーション遷移
+	   * @param {Element} element insert parent element
+	   * @param {Element} buttonElement opener button
+	   * @param {Object} [option={}] optional event handler
+	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	   * @since 2-18-04-19 vk header - flag 追加
 	   */
-	  function Offset(types) {
-	    var resolve = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	    var reject = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-	    var offset = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-	    var length = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _Length.Length.archive;
-	    var ResultClass = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _Result.Result;
-	    (0, _classCallCheck3.default)(this, Offset);
+	  function SPViewHeaderSearch(element, buttonElement) {
+	    var option = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+	    var vk = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+	    (0, _classCallCheck3.default)(this, SPViewHeaderSearch);
 
 	    /**
-	     * query offset 値 - リクエスト開始値
-	     * @type {number}
-	     * @protected
+	     * opener button
+	     * @type {Element}
+	     * @private
 	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Offset.__proto__ || (0, _getPrototypeOf2.default)(Offset)).call(this, types, resolve, reject));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (SPViewHeaderSearch.__proto__ || (0, _getPrototypeOf2.default)(SPViewHeaderSearch)).call(this, element, option, vk));
 
-	    _this._offset = offset;
-	    /**
-	     * query length 値 - リクエスト取得件数
-	     * @type {number}
-	     * @protected
-	     */
-	    _this._length = length;
-	    /**
-	     * リクエスト全総件数
-	     * - 負の値(デフォルト値: -1)の時は未設定です
-	     * @type {number}
-	     * @protected
-	     * @default -1
-	     */
-	    _this._total = -1;
-	    /**
-	     * Ajax 成功時に処理する Class を保持します
-	     * @type {*|Result}
-	     * @protected
-	     */
-	    _this._resultClass = ResultClass;
-	    /**
-	     * 再読み込み中かどうかを表す真偽値
-	     * - true: 再読み込み中
-	     * @type {boolean}
-	     * @protected
-	     */
-	    _this._reloadFlag = false;
-	    //
-	    // /**
-	    //  * JSON.request, 記事詳細, next が request を持っていないので保持する
-	    //  * @type {{offset: number, length: number}}
-	    //  * @since 2016-09-28
-	    //  */
-	    // this.request = {
-	    //   offset,
-	    //   length
-	    // };
+	    _this.button = buttonElement;
 	    return _this;
 	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
 	  /**
-	   * 総件数
-	   * @return {number} 総件数(total)件数を返します
+	   * header 検索フォームを生成します
+	   * - {@link ComponentHeaderSearchForm}
+	   * - {@link SPComponentHeaderSearchOpener}
 	   */
 
 
-	  (0, _createClass3.default)(Offset, [{
-	    key: 'start',
-
-	    // ---------------------------------------------------
-	    //  METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * リクエストに offset が必要な API の取得開始は start を使わず **next** を使用します
-	     * @deprecated instead use next
-	     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
-	     */
-	    value: function start() {
-	      var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.method;
-
-	      // リクエストに offset が必要な API の取得開始は意図的に start を使わず next を使用します
-	      console.warn('Offset.start - instead use next, ' + this.url + ', ' + method);
-	    }
-	    /**
-	     * 次の読込を開始します
-	     * - start の代わりに使用します
-	     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
-	     */
-
-	  }, {
-	    key: 'next',
-	    value: function next() {
-	      var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.method;
-
-	      // next data があるかないかを調べます
-	      // next がある時は Ajax を実行します
-	      if (this.hasNext()) {
-	        method = _Safety.Safety.string(method, this.method);
-	        this.ajax.start(this.url, method, this.boundSuccess, this.boundFail, this.resultClass);
-	        //
-	        // // @since 2016-09-28
-	        // this.request = {
-	        //   offset: this.offset,
-	        //   length: this.length
-	        // };
-	      }
-	    }
-	    /**
-	     * offset 値を加算します
-	     * @param {number} [count] default 値は `this._length` になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
-	     */
-
-	  }, {
-	    key: 'update',
-	    value: function update() {
-	      var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.length;
-
-	      this.offset += count;
-	    }
-	    /**
-	     * 残り数, total から 次の offset を」引いた数
-	     * @return {number} total から 次の offset を」引いた数を返します
-	     */
-
-	  }, {
-	    key: 'rest',
-	    value: function rest() {
-	      return this.total - this.offset;
-	    }
-	    /**
-	     * 次があるかを調べます
-	     * @return {boolean} 次があるかの真偽値を返します
-	     */
-
-	  }, {
-	    key: 'hasNext',
-	    value: function hasNext() {
-	      // console.log('hasNext', this.total, this.offset, this.url);
-	      // _total === -1 の時は常に true
-	      // total が offset（次の読み込み開始位置）より小さい時に true
-	      return this.total < 0 ? true : this.offset < this.total;
-	    }
-	    /**
-	     * Ajax success callback, update()を実行し offset 値をカウントアップし callback method があれば実行します
-	     * @param {Result} result Ajax成功結果
-	     */
-
-	  }, {
-	    key: 'success',
-	    value: function success(result) {
-	      // reload フラッグがオフの時は次のリクエストのための offset 値を更新します
-	      if (!this.reloadFlag) {
-	        this.update(this.length);
-	      } else {
-	        this.reloadFlag = false;
-	      }
-
-	      // 合計数をupdate
-	      this.total = result.total;
-	      // success
-	      (0, _get3.default)(Offset.prototype.__proto__ || (0, _getPrototypeOf2.default)(Offset.prototype), 'success', this).call(this, result);
-	    }
-	  }, {
-	    key: 'total',
-	    get: function get() {
-	      return this._total;
-	    }
-	    /**
-	     * 総件数(total)件数を設定します
-	     * @param {number} total total件数
-	     */
-	    ,
-	    set: function set(total) {
-	      this._total = total;
-	    }
-	    /**
-	     * 取得件数
-	     * @return {number} lengths 取得件数を返します
-	     */
-
-	  }, {
-	    key: 'length',
-	    get: function get() {
-	      return this._length;
-	    }
-	    /**
-	     * length件数を設定します
-	     * @param {number} length length 取得件数
-	     */
-	    ,
-	    set: function set(length) {
-	      this._length = length;
-	    }
-	    /**
-	     * 取得開始位置
-	     * @return {number} offset 取得開始位置を返します
-	     */
-
-	  }, {
-	    key: 'offset',
-	    get: function get() {
-	      return this._offset;
-	    }
-	    /**
-	     * 取得開始位置を設定します
-	     * @param {number} offset offset 取得開始位置
-	     */
-	    ,
-	    set: function set(offset) {
-	      this._offset = offset;
-	    }
-	    /**
-	     * url を作成します
-	     * - offset, length クエリが追加になるので override します
-	     * @override
-	     * @return {string} 作成した url を返します
-	     */
-
-	  }, {
-	    key: 'url',
-	    get: function get() {
-	      return this.path + '?offset=' + this.offset + '&length=' + this.length;
-	    }
-	    /**
-	     * 再読み込み中かどうかを表す真偽値
-	     * @return {boolean} 再読み込み中かどうかを表す真偽値を返します
-	     */
-
-	  }, {
-	    key: 'reloadFlag',
-	    get: function get() {
-	      return this._reloadFlag;
-	    }
-	    /**
-	     * 再読み込み中フラッグを設定します
-	     * @param {boolean} reload 再読み込み中フラッグ
-	     */
-	    ,
-	    set: function set(reload) {
-	      this._reloadFlag = reload;
+	  (0, _createClass3.default)(SPViewHeaderSearch, [{
+	    key: 'render',
+	    value: function render() {
+	      // search form
+	      ReactDOM.render(React.createElement(_ComponentHeaderSearchForm2.default, {
+	        listen: true,
+	        show: false,
+	        vk: this.vk
+	      }), this.element);
+	      // search form opener button
+	      ReactDOM.render(React.createElement(_SPComponentHeaderSearchOpener2.default, {
+	        vk: this.vk
+	      }), this.button);
 	    }
 	  }]);
-	  return Offset;
-	}(_Action2.Action);
+	  return SPViewHeaderSearch;
+	}(_ViewHeaderSearch3.default);
+
+	exports.default = SPViewHeaderSearch;
 
 /***/ }),
-/* 147 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _getOwnPropertyDescriptor = __webpack_require__(148);
+	var _classCallCheck2 = __webpack_require__(4);
 
-	var _getOwnPropertyDescriptor2 = _interopRequireDefault(_getOwnPropertyDescriptor);
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _SearchStatus = __webpack_require__(104);
+
+	var _Scroll = __webpack_require__(110);
+
+	var _Message = __webpack_require__(106);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function get(object, property, receiver) {
-	  if (object === null) object = Function.prototype;
-	  var desc = (0, _getOwnPropertyDescriptor2.default)(object, property);
+	/**
+	 * [library] - Sagen
+	 */
+	var Sagen = self.Sagen;
 
-	  if (desc === undefined) {
-	    var parent = (0, _getPrototypeOf2.default)(object);
+	// React
+	/**
+	 * [library] - React
+	 */
+	/**
+	 * Copyright (c) 2011-2017 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2017/12/12 - 15:09
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	var React = self.React;
 
-	    if (parent === null) {
-	      return undefined;
-	    } else {
-	      return get(parent, property, receiver);
+	/**
+	 * SP: header - 検索フォーム open / close button
+	 */
+
+	var SPComponentHeaderSearchOpener = function (_React$Component) {
+	  (0, _inherits3.default)(SPComponentHeaderSearchOpener, _React$Component);
+	  (0, _createClass3.default)(SPComponentHeaderSearchOpener, null, [{
+	    key: 'restore',
+
+	    /**
+	     * 検索フォームを閉じる時に scroll 値を復元します
+	     * @param {number} y target scroll top px value
+	     */
+	    value: function restore(y) {
+	      // scrollY が 0 でない時は 復元 しない
+	      // ユーザーが scroll している可能性がある
+	      if (_Scroll.Scroll.y !== 0) {
+	        return;
+	      }
+	      _Scroll.Scroll.motion(y, 0.1, 0.025);
 	    }
-	  } else if ("value" in desc) {
-	    return desc.value;
-	  } else {
-	    var getter = desc.get;
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+	    /**
+	     * SP: header - 検索フォーム open / close button 準備します
+	     * @param {*} props React.props
+	     */
 
-	    if (getter === undefined) {
-	      return undefined;
+	  }, {
+	    key: 'propTypes',
+
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * React.propTypes
+	     * - vk: since 2018-04-19 - vk header
+	     * @returns {{vk: boolean}} React.propTypes
+	     */
+	    get: function get() {
+	      return {
+	        vk: React.PropTypes.bool.isRequired
+	      };
 	    }
+	  }]);
 
-	    return getter.call(receiver);
+	  function SPComponentHeaderSearchOpener(props) {
+	    (0, _classCallCheck3.default)(this, SPComponentHeaderSearchOpener);
+
+	    // -----
+	    /**
+	     * document.body - Sagen.Dom instance
+	     * @type {*}
+	     */
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (SPComponentHeaderSearchOpener.__proto__ || (0, _getPrototypeOf2.default)(SPComponentHeaderSearchOpener)).call(this, props));
+
+	    _this.body = new Sagen.Dom(document.body);
+	    /**
+	     * 開いているか真偽値
+	     * @private
+	     * @type {Boolean}
+	     */
+	    _this.open = false;
+	    /**
+	     * SearchStatus instance
+	     * @private
+	     * @type {SearchStatus}
+	     */
+	    _this.status = _SearchStatus.SearchStatus.factory();
+	    /**
+	     * scroll top
+	     * @default 0
+	     * @private
+	     * @type {number}
+	     */
+	    _this.y = 0;
+	    /**
+	     * bind onClick
+	     * @type {function}
+	     */
+	    _this.onClick = _this.onClick.bind(_this);
+	    return _this;
 	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * a.onclick event handler - search container open / close します
+	   * @param {Event} event click event
+	   */
+
+
+	  (0, _createClass3.default)(SPComponentHeaderSearchOpener, [{
+	    key: 'onClick',
+	    value: function onClick(event) {
+	      event.preventDefault();
+	      // iOS
+	      // fixed 内の input に focus すると
+	      // fixed -> absolute に変わる
+	      // どうも仕様な様子
+	      // そのため blur 後の scroll 位置が 0 になるのを元に戻すために
+	      // open 時の scroll 位置を保存し復元する
+	      // console.log('SPComponentHeaderSearchOpener.onClick', this.open);
+	      if (this.open) {
+	        // open -> close
+	        this.open = false;
+	        this.body.removeClass('search-form-open');
+	        this.status.close();
+	        // scroll 位置を復元する
+	        // Scroll.motion( this.y, 0.1, 0.025 );
+	        SPComponentHeaderSearchOpener.restore(this.y);
+	      } else {
+	        // close -> open
+	        this.open = true;
+	        // scroll 位置を保存する
+	        this.y = _Scroll.Scroll.y;
+	        this.body.addClass('search-form-open');
+	        this.status.open();
+	      }
+	    }
+
+	    /**
+	     * `a.head-search-opener` 検索フォーム open = close button
+	     * @returns {XML} `a.head-search-opener`
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'a',
+	        { className: 'head-search-opener', href: '#', onClick: this.onClick },
+	        _Message.Message.OPENER_SEARCH
+	      );
+	    }
+	  }]);
+	  return SPComponentHeaderSearchOpener;
+	}(React.Component);
+
+	exports.default = SPComponentHeaderSearchOpener;
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SPHeaderNormalUserComponent = undefined;
+
+	var _getPrototypeOf = __webpack_require__(85);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(95);
+
+	var _View3 = _interopRequireDefault(_View2);
+
+	var _SPViewHeaderMember = __webpack_require__(155);
+
+	var _SPViewHeaderMember2 = _interopRequireDefault(_SPViewHeaderMember);
+
+	var _User = __webpack_require__(113);
+
+	var _Url = __webpack_require__(105);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	/* eslint-disable no-unused-vars */
+	/**
+	 * [library] - React
+	 */
+
+
+	// app
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/03/11 - 19:32
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// view
+	var React = self.React;
+	/* eslint-enable no-unused-vars */
+	/**
+	 * [library] - ReactDOM
+	 */
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * SP - 非ログインユーザー header area Element
+	 * - login / ユーザー登録リンクを出力します
+	 * @returns {XML} `div.user`
+	 * @constructor
+	 */
+	var SPHeaderNormalUserComponent = exports.SPHeaderNormalUserComponent = function SPHeaderNormalUserComponent() {
+	  return React.createElement(
+	    'div',
+	    { className: 'user' },
+	    React.createElement(
+	      'div',
+	      { className: 'preference' },
+	      React.createElement(
+	        'a',
+	        { href: _Url.Url.signupLogin(), className: 'preference-opener' },
+	        React.createElement(
+	          'span',
+	          { className: 'preference-avatar' },
+	          '\xA0'
+	        )
+	      )
+	    )
+	  );
 	};
 
+	/**
+	 * SP header user 関連メニュー
+	 */
+
+	var SPViewHeaderUser = function (_View) {
+	  (0, _inherits3.default)(SPViewHeaderUser, _View);
+
+	  /**
+	   * SP header user 関連メニュー
+	   * - ログイン / 非ログイン でメニューを変更
+	   * @param {Element} element insert root element
+	   * @param {Object} [option={}] optional event handler
+	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	   * @since 2-18-04-19 vk header - flag 追加
+	   */
+	  function SPViewHeaderUser(element) {
+	    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	    var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+	    (0, _classCallCheck3.default)(this, SPViewHeaderUser);
+
+	    /**
+	     * bind 済み this.memberCallback
+	     * @type {Function}
+	     * @private
+	     */
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (SPViewHeaderUser.__proto__ || (0, _getPrototypeOf2.default)(SPViewHeaderUser)).call(this, element, option, vk));
+
+	    _this._boundCallback = _this.memberCallback.bind(_this);
+	    /**
+	     * login user view instance(SPViewHeaderMember)
+	     * @type {null|Object|SPViewHeaderMember}
+	     * @private
+	     */
+	    _this._member = null;
+	    return _this;
+	  }
+	  /**
+	   * rendering 開始
+	   */
+
+
+	  (0, _createClass3.default)(SPViewHeaderUser, [{
+	    key: 'start',
+	    value: function start() {
+	      this.render();
+	    }
+	    /**
+	     * rendering
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (_User.User.sign) {
+	        this.member();
+	      } else {
+	        this.user();
+	      }
+	    }
+	    /**
+	     * ログインユーザー
+	     */
+
+	  }, {
+	    key: 'member',
+	    value: function member() {
+	      var headerMember = new _SPViewHeaderMember2.default(this.element, {}, this.vk);
+	      this._member = headerMember;
+
+	      var boundCallback = this._boundCallback;
+	      headerMember.on(_View3.default.BEFORE_RENDER, boundCallback);
+	      headerMember.on(_View3.default.WILL_MOUNT, boundCallback);
+	      headerMember.on(_View3.default.DID_MOUNT, boundCallback);
+	      headerMember.on(_View3.default.ERROR_MOUNT, boundCallback);
+	      headerMember.on(_View3.default.UNDEFINED_ERROR, boundCallback);
+	      headerMember.on(_View3.default.EMPTY_ERROR, boundCallback);
+	      headerMember.on(_View3.default.RESPONSE_ERROR, boundCallback);
+	      headerMember.start();
+	    }
+	    /**
+	     * 非ログインユーザー
+	     */
+
+	  }, {
+	    key: 'user',
+	    value: function user() {
+	      // 非ログインユーザー
+	      ReactDOM.render(React.createElement(SPHeaderNormalUserComponent, {
+	        vk: this.vk
+	      }), this.element);
+	    }
+	    /**
+	     * ViewHeaderMember callback 中継
+	     * @param {Object} event event object
+	     */
+
+	  }, {
+	    key: 'memberCallback',
+	    value: function memberCallback(event) {
+	      var member = this._member;
+	      var callback = this._boundCallback;
+	      if (member !== null) {
+	        member.off(event.type, callback);
+	      }
+	      this.dispatch(event);
+
+	      if (event.type === _View3.default.RESPONSE_ERROR || event.type === _View3.default.UNDEFINED_ERROR || event.type === _View3.default.EMPTY_ERROR) {
+	        // token はあるけどユーザー情報が取得できなかった
+	        // 処理を止めて一般ユーザー扱いにする
+	        this.dispose();
+	        // this.render();
+	        this.user();
+	      }
+	    }
+	    /**
+	     * member event handler dispose
+	     */
+
+	  }, {
+	    key: 'dispose',
+	    value: function dispose() {
+	      var member = this._member;
+	      if (member !== null) {
+	        var boundCallback = this._boundCallback;
+	        member.off(_View3.default.BEFORE_RENDER, boundCallback);
+	        member.off(_View3.default.WILL_MOUNT, boundCallback);
+	        member.off(_View3.default.DID_MOUNT, boundCallback);
+	        member.off(_View3.default.ERROR_MOUNT, boundCallback);
+	        member.off(_View3.default.UNDEFINED_ERROR, boundCallback);
+	        member.off(_View3.default.EMPTY_ERROR, boundCallback);
+	        member.off(_View3.default.RESPONSE_ERROR, boundCallback);
+	        this._member = null;
+	      }
+	    }
+	  }]);
+	  return SPViewHeaderUser;
+	}(_View3.default);
+
+	exports.default = SPViewHeaderUser;
+
 /***/ }),
-/* 148 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(149), __esModule: true };
+	'use strict';
 
-/***/ }),
-/* 149 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	__webpack_require__(150);
-	var $Object = __webpack_require__(11).Object;
-	module.exports = function getOwnPropertyDescriptor(it, key) {
-	  return $Object.getOwnPropertyDescriptor(it, key);
-	};
-
-
-/***/ }),
-/* 150 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
-	var toIObject = __webpack_require__(37);
-	var $getOwnPropertyDescriptor = __webpack_require__(80).f;
-
-	__webpack_require__(90)('getOwnPropertyDescriptor', function () {
-	  return function getOwnPropertyDescriptor(it, key) {
-	    return $getOwnPropertyDescriptor(toIObject(it), key);
-	  };
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
 
+	var _getPrototypeOf = __webpack_require__(85);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View = __webpack_require__(95);
+
+	var _View2 = _interopRequireDefault(_View);
+
+	var _ViewHeaderMember2 = __webpack_require__(112);
+
+	var _ViewHeaderMember3 = _interopRequireDefault(_ViewHeaderMember2);
+
+	var _SPComponentHeaderMemberSetting = __webpack_require__(156);
+
+	var _SPComponentHeaderMemberSetting2 = _interopRequireDefault(_SPComponentHeaderMemberSetting);
+
+	var _Empty = __webpack_require__(144);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	/* eslint-disable no-unused-vars */
+	/**
+	 * [library] - React
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/03/11 - 20:11
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	// view
+	var React = self.React;
+	/* eslint-enable no-unused-vars */
+	/**
+	 * [library] - ReactDOM
+	 */
+	var ReactDOM = self.ReactDOM;
+
+	// Sagen
+	// let Gasane = self.Gasane;
+
+	/**
+	 * SP header ログイン・メンバー 関連メニュー
+	 * @since 2018-04-19 vk header - flag 追加
+	 */
+
+	var SPViewHeaderMember = function (_ViewHeaderMember) {
+	  (0, _inherits3.default)(SPViewHeaderMember, _ViewHeaderMember);
+
+	  /**
+	   * SP header ログイン・メンバー 関連メニュー
+	   * - アイコン+drop down menu 表示
+	   *
+	   * @param {Element} element insert root element
+	   * @param {Object} [option={}] optional event handler
+	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	   * @since 2018-04-19 vk header - flag 追加
+	   */
+	  function SPViewHeaderMember(element) {
+	    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	    var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+	    (0, _classCallCheck3.default)(this, SPViewHeaderMember);
+
+	    /**
+	     * bind 済み executeSafely
+	     * @type {function}
+	     */
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (SPViewHeaderMember.__proto__ || (0, _getPrototypeOf2.default)(SPViewHeaderMember)).call(this, element, option, vk));
+
+	    _this.boundSafely = _this.executeSafely.bind(_this);
+	    /**
+	     * bound didMount
+	     * @type {function}
+	     */
+	    _this.boundMount = _this.didMount.bind(_this);
+	    return _this;
+	  }
+	  /**
+	   * Dom を生成します
+	   * @param {UserDae} response JSON UserDae instance
+	   */
+
+
+	  (0, _createClass3.default)(SPViewHeaderMember, [{
+	    key: 'render',
+	    value: function render(response) {
+	      // --------------------------------------------------
+	      this.executeSafely(_View2.default.BEFORE_RENDER, response);
+	      // --------------------------------------------------
+	      // when reload
+	      if (this.reloadFlag) {
+	        this.reloadFlag = false;
+	        clearTimeout(this._timer);
+	        this.timer = setTimeout(this.boundReload, 1000);
+	      }
+	      // component
+	      ReactDOM.render(React.createElement(_SPComponentHeaderMemberSetting2.default, {
+	        icon: response.profilePicture,
+	        userName: response.userName,
+	        safely: this.boundSafely,
+	        did: this.boundMount,
+	        vk: this.vk
+	      }), this.element);
+	    }
+	    /**
+	     * VK 専用・ログインユーザーheader 表示
+	     * @since 2018-04-19 VK（バーチャル甲子園）flag
+	     */
+
+	  }, {
+	    key: 'vkRender',
+	    value: function vkRender() {
+	      ReactDOM.render(React.createElement(_SPComponentHeaderMemberSetting2.default, {
+	        icon: _Empty.Empty.USER_EMPTY,
+	        userName: '',
+	        safely: this.boundSafely,
+	        did: this.boundMount,
+	        vk: this.vk
+	      }), this.element);
+	    }
+	  }]);
+	  return SPViewHeaderMember;
+	}(_ViewHeaderMember3.default);
+
+	exports.default = SPViewHeaderMember;
 
 /***/ }),
-/* 151 */
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _isInteger = __webpack_require__(25);
+
+	var _isInteger2 = _interopRequireDefault(_isInteger);
+
+	var _getPrototypeOf = __webpack_require__(85);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Length = __webpack_require__(157);
+
+	var _Polling = __webpack_require__(158);
+
+	var _Polling2 = _interopRequireDefault(_Polling);
+
+	var _Model = __webpack_require__(160);
+
+	var _ModelNoticeCount = __webpack_require__(161);
+
+	var _NoticeStatus = __webpack_require__(164);
+
+	var _View = __webpack_require__(95);
+
+	var _View2 = _interopRequireDefault(_View);
+
+	var _Safety = __webpack_require__(24);
+
+	var _Empty = __webpack_require__(144);
+
+	var _Url = __webpack_require__(105);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * [library] - React
+	 */
+	var React = self.React;
+
+	/**
+	 * SP: header - member setting menu
+	 */
+	/**
+	 * Copyright (c) 2011-2017 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2017/12/12 - 21:44
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	var SPComponentHeaderMemberSetting = function (_React$Component) {
+	  (0, _inherits3.default)(SPComponentHeaderMemberSetting, _React$Component);
+	  (0, _createClass3.default)(SPComponentHeaderMemberSetting, null, [{
+	    key: 'propTypes',
+
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * React.propTypes
+	     * @returns {{userName: string, icon: string, safely: function, did: function}}
+	     * React.propTypes
+	     */
+	    get: function get() {
+	      return {
+	        userName: React.PropTypes.string.isRequired,
+	        icon: React.PropTypes.string.isRequired,
+	        safely: React.PropTypes.func.isRequired,
+	        did: React.PropTypes.func.isRequired,
+	        vk: React.PropTypes.bool.isRequired
+	      };
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+	    /**
+	     * SP: header - member setting menu 出力準備をします
+	     * @param {*} props React.props
+	     */
+
+	  }]);
+
+	  function SPComponentHeaderMemberSetting(props) {
+	    (0, _classCallCheck3.default)(this, SPComponentHeaderMemberSetting);
+
+	    // ---
+	    /**
+	     * React.state
+	     * @type {{total: number, userName: string, icon: string}}
+	     */
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (SPComponentHeaderMemberSetting.__proto__ || (0, _getPrototypeOf2.default)(SPComponentHeaderMemberSetting)).call(this, props));
+
+	    _this.state = {
+	      total: 0,
+	      userName: props.userName,
+	      icon: props.icon
+	    };
+	    var onDone = _this.onDone.bind(_this);
+	    var onFail = _this.onFail.bind(_this);
+	    var callbacks = {};
+	    callbacks[_Model.Model.COMPLETE] = onDone;
+	    callbacks[_Model.Model.UNDEFINED_ERROR] = onFail;
+	    callbacks[_Model.Model.RESPONSE_ERROR] = onFail;
+	    /**
+	     * callback list
+	     * @type {*}
+	     * */
+	    _this.callbacks = callbacks;
+	    /**
+	     * bind onUpdate
+	     * @type {function}
+	     * */
+	    _this.onUpdate = _this.onUpdate.bind(_this);
+	    /**
+	     * bind onDone
+	     * @type {function}
+	     * */
+	    _this.onDone = onDone;
+	    /**
+	     * bind onFail
+	     * @type {function}
+	     * */
+	    _this.onFail = onFail;
+	    /**
+	     * Polling instance - 定期的に {@link ModelNoticeCount} を実行します
+	     * @type {Polling}
+	     * */
+	    _this.polling = new _Polling2.default(_Length.Length.interval);
+	    /**
+	     * notice count を取得しバッジ表示します
+	     * @type {ModelNoticeCount}
+	     * */
+	    _this.model = new _ModelNoticeCount.ModelNoticeCount(callbacks);
+	    /**
+	     * お知らせ更新を通知する管理マネージャー
+	     * @type {NoticeStatus}
+	     * */
+	    _this.status = _NoticeStatus.NoticeStatus.factory();
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * {@link Polling}.UPDATE event handler
+	   * */
+
+
+	  (0, _createClass3.default)(SPComponentHeaderMemberSetting, [{
+	    key: 'onUpdate',
+	    value: function onUpdate() {
+	      this.polling.off(_Polling2.default.UPDATE, this.onUpdate);
+	      this.model.start();
+	    }
+	    /**
+	     * {@link ModelNoticeCount} success callback
+	     * @param {Result} result Ajax JSON
+	     * */
+
+	  }, {
+	    key: 'onDone',
+	    value: function onDone(result) {
+	      var total = result.count;
+	      if ((0, _isInteger2.default)(total) && total !== this.state.total) {
+	        this.updateTotal(total);
+	      }
+	      this.restart();
+	    }
+	    /**
+	     * {@link ModelNoticeCount} fail callback
+	     * */
+
+	  }, {
+	    key: 'onFail',
+	    value: function onFail() {
+	      this.restart();
+	    }
+	    /**
+	     * お知らせ件数を update します
+	     * @param {number} total notice 件数
+	     * */
+
+	  }, {
+	    key: 'updateTotal',
+	    value: function updateTotal(total) {
+	      this.setState({ total: total });
+	      this.status.update(total);
+	    }
+	    /**
+	     * event を unbind します
+	     * */
+
+	  }, {
+	    key: 'destroy',
+	    value: function destroy() {
+	      var polling = this.polling;
+	      polling.off(_Polling2.default.UPDATE, this.onUpdate);
+	    }
+	    /**
+	     * {@link Polling} を restart します
+	     * */
+
+	  }, {
+	    key: 'restart',
+	    value: function restart() {
+	      var polling = this.polling;
+	      polling.off(_Polling2.default.UPDATE, this.onUpdate);
+	      polling.on(_Polling2.default.UPDATE, this.onUpdate);
+	      polling.setPolling(_Length.Length.interval);
+	    }
+	    /**
+	     * delegate - after mount
+	     * - props callback function を実行します
+	     * - {@link Polling} を  開始します
+	     * */
+
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _props = this.props,
+	          safely = _props.safely,
+	          did = _props.did;
+
+	      safely(_View2.default.DID_MOUNT);
+	      did();
+	      // ----
+	      this.model.start();
+	      // -----
+	      var polling = this.polling;
+	      polling.off(_Polling2.default.UPDATE, this.onUpdate);
+	      polling.on(_Polling2.default.UPDATE, this.onUpdate);
+	      polling.start();
+	    }
+	    /**
+	     * delegate - will mount - `destroy` 実行します
+	     * */
+
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.destroy();
+	    }
+	    /**
+	     * delegate - 更新 props を state と比較し更新するかを決定します
+	     * @param {{icon: string, userName: string}} nextProps 更新 props
+	     * */
+
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      var icon = nextProps.icon,
+	          userName = nextProps.userName;
+
+	      if (icon !== this.state.icon || userName !== this.state.userName) {
+	        this.setState({ icon: icon, userName: userName });
+	      }
+	    }
+	    /**
+	     * SP: member setting menu を出力します
+	     * @returns {XML} `div.user`
+	     * */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _state = this.state,
+	          total = _state.total,
+	          icon = _state.icon,
+	          userName = _state.userName;
+
+	      var noticeStyle = total === 0 ? { display: 'none' } : { display: 'block' };
+	      // const iconImg = Safety.image(icon, Empty.USER_EMPTY);
+	      // const loggedIn = Safety.same(iconImg, Empty.USER_EMPTY);
+	      // vk 絶対パス - 2018-04-19
+	      var iconImg = '' + _Url.Url.host + _Safety.Safety.image(icon, _Empty.Empty.USER_EMPTY);
+	      var loggedIn = _Safety.Safety.same(iconImg, '' + _Url.Url.host + _Empty.Empty.USER_EMPTY);
+	      return React.createElement(
+	        'div',
+	        { className: 'user' },
+	        React.createElement(
+	          'div',
+	          { className: 'preference' },
+	          React.createElement(
+	            'a',
+	            { href: _Url.Url.settings(), className: 'preference-opener' },
+	            React.createElement(
+	              'span',
+	              { className: 'preference-avatar ' + loggedIn },
+	              React.createElement('img', { src: _Empty.Empty.refresh(icon), alt: userName })
+	            )
+	          ),
+	          React.createElement(
+	            'span',
+	            { className: 'preference-num', style: noticeStyle },
+	            total
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	  return SPComponentHeaderMemberSetting;
+	}(React.Component);
+
+	exports.default = SPComponentHeaderMemberSetting;
+
+/***/ }),
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -14515,941 +16705,6 @@
 	}();
 
 /***/ }),
-/* 152 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NotificationsDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(24);
-
-	var _NoticeDae = __webpack_require__(153);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * お知らせ JSON response
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/09 - 20:11
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var NotificationsDae = exports.NotificationsDae = function () {
-	  /**
-	   * お知らせ JSON response
-	   * @param {Object} [response={}] JSON response
-	   */
-	  function NotificationsDae() {
-	    var response = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	    (0, _classCallCheck3.default)(this, NotificationsDae);
-
-	    var altResponse = _Safety.Safety.object(response);
-	    // let notifications = altResponse.notifications;
-	    var notifications = _Safety.Safety.array(altResponse.notifications);
-	    // let list = [];
-	    // notifications.forEach( function( notice ) {
-	    //
-	    //   list.push( new NoticeDae( notice ) );
-	    //
-	    // } );
-	    // @since 2016-09-20
-	    var list = notifications.map(function (notice) {
-	      return new _NoticeDae.NoticeDae(notice);
-	    });
-	    /**
-	     * JSON response
-	     * @type {Object}
-	     * @protected
-	     */
-	    this._response = altResponse;
-	    /**
-	     * response.notifications を 1件づつ NoticeDae instance とし格納します
-	     * @type {Array<NoticeDae>}
-	     * @protected
-	     */
-	    this._notifications = list;
-	  }
-	  /**
-	   * JSON response
-	   * @return {Object} JSON response を返します
-	   */
-
-
-	  (0, _createClass3.default)(NotificationsDae, [{
-	    key: 'response',
-	    get: function get() {
-	      return this._response;
-	    }
-	    /**
-	     * response.notifications
-	     * @return {Array.<NoticeDae>} JSON response.notifications を返します
-	     */
-
-	  }, {
-	    key: 'notifications',
-	    get: function get() {
-	      return this._notifications;
-	    }
-	    /**
-	     * response.count
-	     * @return {number} count を返します
-	     */
-
-	  }, {
-	    key: 'total',
-	    get: function get() {
-	      return this.response.count;
-	    }
-	    /**
-	     * alias total
-	     * response.count
-	     * @return {number} count を返します
-	     */
-
-	  }, {
-	    key: 'count',
-	    get: function get() {
-	      return this.total;
-	    }
-	  }]);
-	  return NotificationsDae;
-	}();
-
-/***/ }),
-/* 153 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(24);
-
-	var _UserDae = __webpack_require__(133);
-
-	var _NoticeArticleDae = __webpack_require__(154);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * 通知単独データ
-	 */
-
-	// import {Format} from '../../util/Format';
-	var NoticeDae = exports.NoticeDae = function () {
-	  /**
-	   * 通知
-	   * @param {Object} [notice={}] JSON response.notifications 配列単独データ
-	   */
-	  function NoticeDae() {
-	    var notice = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	    (0, _classCallCheck3.default)(this, NoticeDae);
-
-	    var altNotice = _Safety.Safety.object(notice);
-	    // // date check
-	    // if (Safety.check(altNotice, 'date')) {
-	    //   /**
-	    //    * notice.date
-	    //    * @deprecated instead use notice.display_date
-	    //    * @type {string}
-	    //    * @protected
-	    //    */
-	    //   this._formatDate = Format.date( altNotice.date );
-	    // }
-	    /**
-	     * response.notifications.notice.user
-	     * @type {Object}
-	     * @protected
-	     */
-	    this._notice = altNotice;
-	    /**
-	     * response.notifications.notice.user
-	     * @type {UserDae}
-	     * @protected
-	     */
-	    this._user = new _UserDae.UserDae(altNotice.user);
-	    /**
-	     * response.notifications.notice.article
-	     * @type {NoticeArticleDae}
-	     * @protected
-	     */
-	    this._article = new _NoticeArticleDae.NoticeArticleDae(altNotice.article);
-	    /**
-	     * 添え字
-	     * @type {number}
-	     * @default 0
-	     * @since 2017-12-14
-	     */
-	    this.index = 0;
-	  }
-	  /**
-	   * response.notifications
-	   * @return {Object} JSON response.notifications 配列単独データ を返します
-	   */
-
-
-	  (0, _createClass3.default)(NoticeDae, [{
-	    key: 'notice',
-	    get: function get() {
-	      return this._notice;
-	    }
-	    /**
-	     * notifications.id
-	     * @return {number} notifications id を返します
-	     */
-
-	  }, {
-	    key: 'id',
-	    get: function get() {
-	      return this.notice.id;
-	    }
-	    /**
-	     * notifications.date
-	     * @return {string} ISO8601 日付を返します
-	     */
-
-	  }, {
-	    key: 'date',
-	    get: function get() {
-	      return this.notice.date;
-	    }
-	    // /**
-	    //  * <p>notifications.date フォーマット</p>
-	    //  * **使用しません** <br>
-	    //  * displayDate を代わりに使用します
-	    //  * @deprecated instead use displayDate
-	    //  * @return {string} ISO8601 を日本語形式日付にし返します
-	    //  */
-	    // get formatDate() {
-	    //   return this._formatDate;
-	    // }
-	    /**
-	     * 表示日付
-	     * @return {string} 相対日付返します
-	     */
-
-	  }, {
-	    key: 'displayDate',
-	    get: function get() {
-	      return this.notice.display_date;
-	    }
-	    /**
-	     * アクティビティの種類
-	     * - reply : 返信された
-	     * - good : goodされた
-	     * - bad : badされた
-	     * - notice : ニュース的通知
-	     *
-	     * @return {string} アクティビティの種類を返します
-	     */
-
-	  }, {
-	    key: 'action',
-	    get: function get() {
-	      return this.notice.action;
-	    }
-	    /**
-	     * notifications.user
-	     * @return {UserDae} 誰からの通知かユーザー情報を返します
-	     */
-
-	  }, {
-	    key: 'user',
-	    get: function get() {
-	      return this._user;
-	    }
-	    /**
-	     * notifications.article
-	     * @return {NoticeArticleDae} 対象記事情報を返します
-	     */
-
-	  }, {
-	    key: 'article',
-	    get: function get() {
-	      return this._article;
-	    }
-	    /**
-	     * 運動通信編集部からのお知らせ
-	     * @return {string} 運動通信編集部からのお知らせ
-	     */
-
-	  }, {
-	    key: 'body',
-	    get: function get() {
-	      return this.notice.body;
-	    }
-
-	    /**
-	     * 運動通信編集部からのお知らせ url
-	     * @return {string} 運動通信編集部からのお知らせ url
-	     */
-
-	  }, {
-	    key: 'url',
-	    get: function get() {
-	      return this.notice.url;
-	    }
-	  }]);
-	  return NoticeDae;
-	}(); /**
-	      * Copyright (c) 2011-2016 inazumatv.com, inc.
-	      * @author (at)taikiken / http://inazumatv.com
-	      * @date 2016/02/09 - 20:10
-	      *
-	      * Distributed under the terms of the MIT license.
-	      * http://www.opensource.org/licenses/mit-license.html
-	      *
-	      * This notice shall be included in all copies or substantial portions of the Software.
-	      *
-	      */
-
-/***/ }),
-/* 154 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeArticleDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(24);
-
-	var _PopularDae = __webpack_require__(155);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * お知らせ 記事情報
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/09 - 20:44
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var NoticeArticleDae = exports.NoticeArticleDae = function () {
-	  /**
-	   * お知らせ 記事情報 JSON response.notifications.article
-	   * @param {Object} [article={}] お知らせ 記事情報
-	   */
-	  function NoticeArticleDae() {
-	    var article = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	    (0, _classCallCheck3.default)(this, NoticeArticleDae);
-
-	    var altArticle = _Safety.Safety.object(article);
-	    /**
-	     * response.notifications.article
-	     * @type {Object}
-	     * @protected
-	     */
-	    this._article = altArticle;
-	    /**
-	     * response.notifications.article.comment
-	     * @type {PopularDae}
-	     * @protected
-	     */
-	    this._comment = new _PopularDae.PopularDae(altArticle.comment);
-	    /**
-	     * response.notifications.article.comments
-	     * @type {PopularDae}
-	     * @protected
-	     */
-	    this._comments = new _PopularDae.PopularDae(altArticle.comments);
-	    /**
-	     * response.notifications.article.reply
-	     * @type {PopularDae}
-	     * @protected
-	     */
-	    this._reply = new _PopularDae.PopularDae(altArticle.reply);
-	  }
-	  /**
-	   * response.notifications.article
-	   * @return {Object} お知らせ 記事情報 を返します
-	   */
-
-
-	  (0, _createClass3.default)(NoticeArticleDae, [{
-	    key: 'article',
-	    get: function get() {
-	      return this._article;
-	    }
-	    /**
-	     * article.title
-	     * @return {string} 記事タイトル を返します
-	     */
-
-	  }, {
-	    key: 'title',
-	    get: function get() {
-	      return this.article.title;
-	    }
-	    /**
-	     * article.url
-	     * @return {string} 記事 url を返します
-	     */
-
-	  }, {
-	    key: 'url',
-	    get: function get() {
-	      return this.article.url;
-	    }
-	    /**
-	     * article.comment
-	     * @return {PopularDae} article.comment を返します
-	     */
-
-	  }, {
-	    key: 'comment',
-	    get: function get() {
-	      return this._comment;
-	    }
-	    /**
-	     * article.comment
-	     * @return {PopularDae} article.comment を返します
-	     */
-
-	  }, {
-	    key: 'comments',
-	    get: function get() {
-	      return this._comments;
-	    }
-	    /**
-	     * article.reply
-	     * @return {PopularDae} article.reply を返します
-	     */
-
-	  }, {
-	    key: 'reply',
-	    get: function get() {
-	      return this._reply;
-	    }
-	  }]);
-	  return NoticeArticleDae;
-	}();
-
-/***/ }),
-/* 155 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.PopularDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(24);
-
-	var _Format = __webpack_require__(156);
-
-	var _UserDae = __webpack_require__(133);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * article.comments_popular 配列内 1 data
-	 */
-
-	// util
-	var PopularDae = exports.PopularDae = function () {
-	  /**
-	   * article.comments_popular:[]
-	   * @param {Object} [comment={}] response.comment Object
-	   */
-	  function PopularDae() {
-	    var comment = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	    (0, _classCallCheck3.default)(this, PopularDae);
-
-	    var altComment = _Safety.Safety.object(comment);
-	    // if (Safety.check(altComment, 'date')) {
-	    //   /**
-	    //    * comment.date
-	    //    * @deprecated instead use article.display_date
-	    //    * @type {string}
-	    //    * @protected
-	    //    */
-	    //   this._formatDate = Format.date(altComment.date);
-	    //
-	    // }
-	    /**
-	     * comment.date
-	     * @deprecated instead use article.display_date
-	     * @type {string}
-	     */
-	    this.formatDate = _Safety.Safety.check(altComment, 'date') ? _Format.Format.date(altComment.date) : '';
-	    /**
-	     * comments_popular.user
-	     * @type {UserDae}
-	     * @protected
-	     */
-	    this._user = new _UserDae.UserDae(altComment.user);
-	    /**
-	     * response.comment
-	     * @type {Object}
-	     * @protected
-	     */
-	    this._comment = altComment;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * response.comment
-	   * @return {Object} comment Object を返します
-	   */
-
-
-	  (0, _createClass3.default)(PopularDae, [{
-	    key: 'comment',
-	    get: function get() {
-	      return this._comment;
-	    }
-	    /**
-	     * @return {number} comment.id を返します
-	     */
-
-	  }, {
-	    key: 'id',
-	    get: function get() {
-	      return this.comment.id;
-	    }
-	    /**
-	     * comment.date
-	     * @return {string} ISO8601 日付を返します
-	     */
-
-	  }, {
-	    key: 'date',
-	    get: function get() {
-	      return this.comment.date;
-	    }
-	    // /**
-	    //  * comment.date をフォーマット **使用しない** <br>
-	    //  * displayDate を使用します
-	    //  * @deprecated instead use displayDate
-	    //  * @return {string} ISO8601 を日本語形式日付にし返します
-	    //  */
-	    // get formatDate():string {
-	    //   return this._formatDate;
-	    // }
-	    /**
-	     * 表示日付
-	     * @return {string} 相対日付返します
-	     */
-
-	  }, {
-	    key: 'displayDate',
-	    get: function get() {
-	      return this.comment.display_date;
-	    }
-	    /**
-	     * comment.body
-	     * @return {string} コメント本文を返します
-	     */
-
-	  }, {
-	    key: 'body',
-	    get: function get() {
-	      return this.comment.body;
-	    }
-	    /**
-	     * comment.body_escape
-	     * なんか増えてた...
-	     * タグがない様子
-	     * @return {string} エスケープされたコメント本文を返します
-	     */
-
-	  }, {
-	    key: 'bodyEscape',
-	    get: function get() {
-	      return this.comment.body_escape;
-	    }
-	    /**
-	     * alias isLike
-	     * @return {boolean} 自分がGood済みかどうか を返します
-	     */
-
-	  }, {
-	    key: 'isGood',
-	    get: function get() {
-	      return this.isLike;
-	    }
-	    /**
-	     * comment.is_like
-	     * @return {boolean} 自分がGood済みかどうか を返します
-	     */
-
-	  }, {
-	    key: 'isLike',
-	    get: function get() {
-	      return this.comment.is_like;
-	    }
-	    /**
-	     * comment.is_bad
-	     * @return {boolean} 自分がBad済みかどうか を返します
-	     */
-
-	  }, {
-	    key: 'isBad',
-	    get: function get() {
-	      return this.comment.is_bad;
-	    }
-	    /**
-	     * @return {number} Good数 を返します
-	     */
-
-	  }, {
-	    key: 'good',
-	    get: function get() {
-	      return this.comment.like;
-	    }
-	    /**
-	     * this.good alias
-	     * @return {number} Good数 を返します
-	     */
-
-	  }, {
-	    key: 'like',
-	    get: function get() {
-	      return this.good;
-	    }
-	    /**
-	     * comment.bad
-	     * @return {number|number} Bad数 を返します
-	     */
-
-	  }, {
-	    key: 'bad',
-	    get: function get() {
-	      return this.comment.bad;
-	    }
-	    /**
-	     * comment.url
-	     * @return {string} コメント詳細のURLを返します
-	     */
-
-	  }, {
-	    key: 'url',
-	    get: function get() {
-	      return this.comment.url;
-	    }
-	    /**
-	     * comment.user
-	     * @return {UserDae} comment した user 情報を返します
-	     */
-
-	  }, {
-	    key: 'user',
-	    get: function get() {
-	      return this._user;
-	    }
-	  }]);
-	  return PopularDae;
-	}(); // class
-
-	// dae
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/25 - 22:15
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	// data
-
-/***/ }),
-/* 156 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Format = undefined;
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/13 - 23:24
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	// 日付フォーマットなど...
-	//
-	// let _symbol = Symbol();
-
-	/**
-	 * 文字フォーマットに関するUtilityです ** 文字を定型に変換します **
-	 * - 全て static
-	 */
-	var Format = exports.Format = function () {
-	  function Format() {
-	    (0, _classCallCheck3.default)(this, Format);
-	  }
-
-	  (0, _createClass3.default)(Format, null, [{
-	    key: "date",
-
-	    // /**
-	    //  * static class です、instance を作成できません
-	    //  * @param {Symbol} target Singleton を実現するための private symbol
-	    //  */
-	    // constructor( target ) {
-	    //
-	    //   if ( _symbol !== target ) {
-	    //
-	    //     throw new Error( 'Format is static Class. not use new Format().' );
-	    //
-	    //   }
-	    //
-	    // }
-	    /**
-	     * ISO8601 日付を 日本語形式に変換します
-	     * @param {string} iso ISO8601 日付 "2016-01-14T18:25:45+09:00"
-	     * @return {string} 2016年1月14日8時25分45秒 日本語へ変換し返します
-	     */
-	    value: function date(iso) {
-	      // ["2016-01-14T18:25:45", "2016", "01", "14", "18", "25", "45"] 分解
-	      var nums = iso.match(/(\d+)\-(\d+)\-(\d+)T(\d+):(\d+):(\d+)?/);
-	      // 先頭"2016-01-14T18:25:45"除去
-	      nums.shift();
-	      // 数値へ変換し 頭 0 除去, 01 -> 1
-	      // const numbers = nums.map( function( num ) {
-	      //   return parseInt( num, 10 );
-	      // } );
-	      var numbers = nums.map(function (num) {
-	        return parseInt(num, 10);
-	      });
-	      return numbers[0] + "\u5E74" + numbers[1] + "\u6708" + numbers[2] + "\u65E5" + numbers[3] + "\u6642" + numbers[4] + "\u5206" + numbers[5] + "\u79D2";
-	    }
-	  }]);
-	  return Format;
-	}();
-
-/***/ }),
-/* 157 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeStatus = undefined;
-
-	var _getPrototypeOf = __webpack_require__(87);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(91);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _symbol = __webpack_require__(69);
-
-	var _symbol2 = _interopRequireDefault(_symbol);
-
-	var _EventDispatcher2 = __webpack_require__(97);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * {@link NoticeStatus} singleton instance を保証するための inner Symbol
-	 * @type {symbol}
-	 * @private
-	 */
-	var noticeStatusSymbol = (0, _symbol2.default)('NoticeStatus singleton instance');
-	/**
-	 * {@link NoticeStatus} singleton instance
-	 * @type {?NoticeStatus}
-	 * @private
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/03/03 - 17:06
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	/* eslint constructor-super: 0 */
-
-	var singletonInstance = null;
-
-	/**
-	 * お知らせ更新を通知するための custom Event
-	 * @example
-	 * var status = NoticeStatus.factory();
-	 * */
-
-	var NoticeStatus = exports.NoticeStatus = function (_EventDispatcher) {
-	  (0, _inherits3.default)(NoticeStatus, _EventDispatcher);
-	  (0, _createClass3.default)(NoticeStatus, null, [{
-	    key: 'factory',
-
-	    // ---------------------------------------------------
-	    //  STATIC METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * instance を生成します
-	     * @return {NoticeStatus} NoticeStatus instance を返します
-	     */
-	    value: function factory() {
-	      if (singletonInstance === null) {
-	        singletonInstance = new NoticeStatus(noticeStatusSymbol);
-	      }
-	      return singletonInstance;
-	    }
-	    // ---------------------------------------------------
-	    //  EVENT
-	    // ---------------------------------------------------
-	    /**
-	     * UPDATE_COUNT, お知らせが更新された Event
-	     * @return {string} noticeUpdateCount を返します
-	     */
-
-	  }, {
-	    key: 'UPDATE_COUNT',
-	    get: function get() {
-	      return 'noticeUpdateCount';
-	    }
-	    // ---------------------------------------------------
-	    //  CONSTRUCTOR
-	    // ---------------------------------------------------
-	    /**
-	     * お知らせ更新 を通知する SingleTon
-	     *
-	     * @param {Symbol} target Singleton を実現するための private symbol
-	     * @return {UserStatus} UserStatus インスタンスを返します
-	     */
-
-	  }]);
-
-	  function NoticeStatus(target) {
-	    var _ret;
-
-	    (0, _classCallCheck3.default)(this, NoticeStatus);
-
-	    if (noticeStatusSymbol !== target) {
-	      throw new Error('NoticeStatus is static Class. not use new NoticeStatus().');
-	    }
-	    if (singletonInstance === null) {
-	      var _this = (0, _possibleConstructorReturn3.default)(this, (NoticeStatus.__proto__ || (0, _getPrototypeOf2.default)(NoticeStatus)).call(this));
-
-	      singletonInstance = _this;
-	    }
-	    return _ret = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret);
-	  }
-	  // ---------------------------------------------------
-	  //  METHOD
-	  // ---------------------------------------------------
-	  /**
-	   * お知らせが更新 Event を発火させます
-	   * @param {Number} count お知らせ件数
-	   */
-
-
-	  (0, _createClass3.default)(NoticeStatus, [{
-	    key: 'update',
-	    value: function update(count) {
-	      this.dispatch({ type: NoticeStatus.UPDATE_COUNT, count: count });
-	    }
-	  }]);
-	  return NoticeStatus;
-	}(_EventDispatcher2.EventDispatcher);
-
-/***/ }),
 /* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15459,7 +16714,7 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -15467,7 +16722,7 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -15475,1438 +16730,13 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _NotificationsDae = __webpack_require__(152);
+	var _EventDispatcher2 = __webpack_require__(96);
 
-	var _View = __webpack_require__(104);
-
-	var _View2 = _interopRequireDefault(_View);
-
-	var _Safety = __webpack_require__(24);
-
-	var _ComponentHeaderNoticeMenu = __webpack_require__(159);
-
-	var _ComponentHeaderNoticeMenu2 = _interopRequireDefault(_ComponentHeaderNoticeMenu);
-
-	var _ComponentHeaderNoticeTotal = __webpack_require__(162);
-
-	var _ComponentHeaderNoticeTotal2 = _interopRequireDefault(_ComponentHeaderNoticeTotal);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * [library] - React
-	 */
-	var React = self.React;
-
-	/**
-	 * お知らせ「バッジ」「一覧」を出力します
-	 * {@link ComponentHeaderMemberSetting} > {@link ViewHeaderMemberNotice}
-	 * - {@link ComponentHeaderNoticeTotal}
-	 * - {@link ComponentHeaderNoticeMenu}
-	 */
-	/**
-	 * Copyright (c) 2011-2017 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2017/12/13 - 16:24
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var ComponentHeaderNotice = function (_React$Component) {
-	  (0, _inherits3.default)(ComponentHeaderNotice, _React$Component);
-	  (0, _createClass3.default)(ComponentHeaderNotice, null, [{
-	    key: 'propTypes',
-
-	    // ---------------------------------------------------
-	    //  METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * React.propTypes
-	     * @returns {{
-	     *   response: NotificationsDae,
-	     *   safely: function,
-	     *   mount: function,
-	     *   dispose: function,
-	     *   vk: boolean
-	     * }} React.propTypes
-	     */
-	    get: function get() {
-	      return {
-	        response: React.PropTypes.instanceOf(_NotificationsDae.NotificationsDae).isRequired,
-	        safely: React.PropTypes.func.isRequired,
-	        mount: React.PropTypes.func.isRequired,
-	        dispose: React.PropTypes.func.isRequired,
-	        vk: React.PropTypes.bool.isRequired
-	      };
-	    }
-	    // ---------------------------------------------------
-	    //  CONSTRUCTOR
-	    // ---------------------------------------------------
-	    /**
-	     * お知らせ「バッジ」「一覧」出力準備をします
-	     * @param {*} props React.props
-	     */
-
-	  }]);
-
-	  function ComponentHeaderNotice(props) {
-	    (0, _classCallCheck3.default)(this, ComponentHeaderNotice);
-
-	    // ---
-	    /**
-	     * React.props
-	     * - open {string} - drop down menu state - default: `close`
-	     * - response {@link NotificationsDae} Ajax JSON
-	     * @type {{open: string, response: NotificationsDae}}
-	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (ComponentHeaderNotice.__proto__ || (0, _getPrototypeOf2.default)(ComponentHeaderNotice)).call(this, props));
-
-	    _this.state = {
-	      open: 'close',
-	      response: props.response
-	    };
-	    /**
-	     * timeout id, drop menu open 後に body へ click event handler を遅延して設定するのに使用
-	     * @private
-	     * @type {number}
-	     */
-	    _this.timer = 0;
-	    /**
-	     * bind onClick - a.onclick event handler
-	     * @type {function}
-	     */
-	    _this.onClick = _this.onClick.bind(_this);
-	    /**
-	     * bind onClick - document.body.onclick event handler
-	     * @type {any}
-	     */
-	    _this.onBodyClick = _this.onBodyClick.bind(_this);
-	    return _this;
-	  }
-	  // ---------------------------------------------------
-	  //  METHOD
-	  // ---------------------------------------------------
-	  /**
-	   * a.onclick event handler
-	   * - drop down menu open / close します `toggle`
-	   * @param {Event} event click event
-	   */
-
-
-	  (0, _createClass3.default)(ComponentHeaderNotice, [{
-	    key: 'onClick',
-	    value: function onClick(event) {
-	      event.preventDefault();
-	      this.toggle();
-	    }
-	    /**
-	     * document.body.onclick event handler
-	     * - drop down menu close します 100ms delay し `toggle` 実行します
-	     */
-
-	  }, {
-	    key: 'onBodyClick',
-	    value: function onBodyClick() {
-	      var _this2 = this;
-
-	      clearTimeout(this.timer);
-	      if (this.state.open === 'open') {
-	        // document.body が a より先に反応する
-	        // native event bind と React 経由の違いかも
-	        // body click 後の処理を遅延させる, 多分気づかない程度
-	        this.timer = setTimeout(function () {
-	          _this2.toggle();
-	        }, 100);
-	      }
-	    }
-	    /**
-	     * `state.open` check し
-	     * drop down menu open / close します
-	     */
-
-	  }, {
-	    key: 'toggle',
-	    value: function toggle() {
-	      this.destroy();
-	      if (this.state.open === 'close') {
-	        // close -> open
-	        // document.body へ click event handler bind
-	        this.setState({ open: 'open' });
-	        this.activate();
-	      } else {
-	        // open -> close
-	        this.setState({ open: 'close' });
-	      }
-	    }
-	    /**
-	     * document.body.onclick event bind します
-	     */
-
-	  }, {
-	    key: 'activate',
-	    value: function activate() {
-	      document.body.addEventListener('click', this.onBodyClick, false);
-	    }
-	    /**
-	     * document.body.onclick event unbind します
-	     */
-
-	  }, {
-	    key: 'destroy',
-	    value: function destroy() {
-	      clearTimeout(this.timer);
-	      document.body.removeEventListener('click', this.onBodyClick);
-	    }
-
-	    /**
-	     * delegate after mount
-	     * - props callback 実行します `safely`, `mount`
-	     */
-
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _props = this.props,
-	          safely = _props.safely,
-	          mount = _props.mount;
-
-	      safely(_View2.default.DID_MOUNT);
-	      mount();
-	    }
-	    /**
-	     * delegate before unmount
-	     * - props callback `dispose` 実行します
-	     * - `destroy` 実行します
-	     */
-
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.destroy();
-	      this.props.dispose();
-	    }
-
-	    /**
-	     * delegate - before props update
-	     * - `response` が update されたら更新します
-	     * @param {{response: NotificationsDae}} nextProps React.props
-	     */
-
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      var response = nextProps.response;
-
-	      if (response !== this.state.response) {
-	        this.setState({ response: response });
-	      }
-	    }
-	    /**
-	     * お知らせコンテナを出力します
-	     * @returns {XML} `div.notice`
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _state = this.state,
-	          response = _state.response,
-	          open = _state.open;
-
-	      var notifications = _Safety.Safety.array(response.notifications);
-	      // console.log('ComponentHeaderNotice.render open', open);
-	      return React.createElement(
-	        'div',
-	        { className: 'notice ' + open },
-	        React.createElement(
-	          'a',
-	          {
-	            href: '#',
-	            className: 'notice-opener',
-	            onClick: this.onClick
-	          },
-	          React.createElement(
-	            'i',
-	            { className: 'notice-icon' },
-	            '\xA0'
-	          ),
-	          React.createElement(_ComponentHeaderNoticeTotal2.default, {
-	            vk: this.props.vk
-	          })
-	        ),
-	        React.createElement(_ComponentHeaderNoticeMenu2.default, {
-	          notifications: notifications
-	        })
-	      );
-	    }
-	  }]);
-	  return ComponentHeaderNotice;
-	}(React.Component);
-
-	exports.default = ComponentHeaderNotice;
-
-/***/ }),
-/* 159 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ComponentHeaderNoticeMenuItem = exports.ComponentHeaderNoticeMenuItemMessage = undefined;
-
-	var _Empty = __webpack_require__(160);
-
-	var _Safety = __webpack_require__(24);
-
-	var _NoticeAction = __webpack_require__(161);
-
-	var _Url = __webpack_require__(108);
-
-	var _NoticeDae = __webpack_require__(153);
-
-	/**
-	 * [library] - React
-	 */
-	var React = self.React;
-
-	/**
-	 * お知らせ一覧リスト「メッセージ」を出力します
-	 * @param {NoticeDae} notice お知らせ一覧 1 data
-	 * @returns {?XML} `p.info-content`
-	 * @constructor
-	 */
-	/**
-	 * Copyright (c) 2011-2017 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2017/12/13 - 16:43
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var ComponentHeaderNoticeMenuItemMessage = exports.ComponentHeaderNoticeMenuItemMessage = function ComponentHeaderNoticeMenuItemMessage(_ref) {
-	  var notice = _ref.notice;
-
-	  var action = notice.action;
-	  if (!action) {
-	    return null;
-	  }
-	  var message = _NoticeAction.NoticeAction.message(action);
-	  var user = notice.user;
-	  var article = notice.article;
-	  return React.createElement(
-	    'p',
-	    { className: 'info-content' },
-	    user.userName + '\u3055\u3093\u304C\u3042\u306A\u305F\u306E\u300C' + article.title + '\u300D\u3078\u306E\u30B3\u30E1\u30F3\u30C8\u306B',
-	    React.createElement(
-	      'strong',
-	      null,
-	      message
-	    ),
-	    '\u3057\u307E\u3057\u305F\u3002'
-	  );
-	};
-
-	/**
-	 * React.propType
-	 * @type {{notice: NoticeDae}}
-	 */
-	ComponentHeaderNoticeMenuItemMessage.propType = {
-	  notice: React.PropTypes.instanceOf(_NoticeDae.NoticeDae).isRequired
-	};
-
-	/**
-	 * お知らせ一覧リストを `notice.action` type で出力を切り替えます
-	 * @param {NoticeDae} notice お知らせ一覧 1 data
-	 * @returns {?XML} `li.info-item` or `a.info-link`
-	 * @constructor
-	 */
-	var ComponentHeaderNoticeMenuItem = exports.ComponentHeaderNoticeMenuItem = function ComponentHeaderNoticeMenuItem(_ref2) {
-	  var notice = _ref2.notice;
-
-	  var icon = _Safety.Safety.image(notice.user.profilePicture, _Empty.Empty.USER_EMPTY);
-	  var loggedIn = _Safety.Safety.same(icon, _Empty.Empty.USER_EMPTY);
-	  // switch - output
-	  switch (notice.action) {
-	    case 'comment':
-	    case 'reply':
-	      {
-	        return React.createElement(
-	          'li',
-	          { className: 'info-item info-item-' + notice.id },
-	          React.createElement(
-	            'a',
-	            {
-	              href: notice.article.reply.url,
-	              className: 'info-link info-link-' + notice.id
-	            },
-	            React.createElement(
-	              'figure',
-	              { className: 'info-user-thumb ' + loggedIn },
-	              React.createElement('img', { src: _Empty.Empty.refresh(icon), alt: '' })
-	            ),
-	            React.createElement(ComponentHeaderNoticeMenuItemMessage, { notice: notice }),
-	            React.createElement(
-	              'p',
-	              { className: 'info-date' },
-	              notice.displayDate
-	            )
-	          )
-	        );
-	      }
-	    case 'bad':
-	    case 'good':
-	      {
-	        return React.createElement(
-	          'li',
-	          { className: 'info-item info-item-' + notice.id },
-	          React.createElement(
-	            'a',
-	            {
-	              href: notice.article.comments.url,
-	              className: 'info-link info-link-' + notice.id
-	            },
-	            React.createElement(
-	              'figure',
-	              { className: 'info-user-thumb ' + loggedIn },
-	              React.createElement('img', { src: icon, alt: '' })
-	            ),
-	            React.createElement(ComponentHeaderNoticeMenuItemMessage, { notice: notice }),
-	            React.createElement(
-	              'p',
-	              { className: 'info-date' },
-	              notice.displayDate
-	            )
-	          )
-	        );
-	      }
-	    case 'notice':
-	      {
-	        return React.createElement(
-	          'a',
-	          { href: notice.url, className: 'info-link' },
-	          React.createElement(
-	            'div',
-	            { className: 'activity-content' },
-	            notice.body
-	          ),
-	          React.createElement(
-	            'p',
-	            { className: 'act-date' },
-	            notice.displayDate
-	          )
-	        );
-	      }
-	    default:
-	      {
-	        return null;
-	      }
-	  }
-	};
-
-	/**
-	 * React.propType
-	 * @type {{notice: NoticeDae}}
-	 */
-	ComponentHeaderNoticeMenuItem.propType = {
-	  notice: React.PropTypes.instanceOf(_NoticeDae.NoticeDae).isRequired
-	};
-
-	/**
-	 * お知らせ一覧 - drop down を open / close するコンテナを出力します
-	 * @param {Array.<NoticeDae>} notifications JSON お知らせリスト
-	 * @returns {XML} `nav.notice-menu`
-	 * @constructor
-	 */
-	var ComponentHeaderNoticeMenu = function ComponentHeaderNoticeMenu(_ref3) {
-	  var notifications = _ref3.notifications;
-	  return React.createElement(
-	    'nav',
-	    { className: 'notice-menu' },
-	    React.createElement(
-	      'div',
-	      { className: 'dropMenu' },
-	      React.createElement(
-	        'div',
-	        { className: 'info' },
-	        React.createElement(
-	          'h2',
-	          { className: 'info-heading' },
-	          '\u304A\u77E5\u3089\u305B'
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'info-btn-readAll' },
-	          '\xA0'
-	        ),
-	        React.createElement(
-	          'ul',
-	          { className: 'info-list' },
-	          notifications.map(function (notice) {
-	            return React.createElement(ComponentHeaderNoticeMenuItem, {
-	              key: 'notice-' + notice.id,
-	              notice: notice
-	            });
-	          }),
-	          React.createElement(
-	            'li',
-	            { className: 'btn-viewmore' },
-	            React.createElement(
-	              'a',
-	              { className: 'btn-viewmore-link', href: _Url.Url.notifications() },
-	              React.createElement(
-	                'span',
-	                null,
-	                '\u3059\u3079\u3066\u898B\u308B'
-	              )
-	            )
-	          )
-	        )
-	      )
-	    )
-	  );
-	};
-
-	/**
-	 * React.propTypes
-	 * @type {{notifications: Array.<NoticeDae>}}
-	 */
-	ComponentHeaderNoticeMenu.propTypes = {
-	  notifications: React.PropTypes.arrayOf(React.PropTypes.instanceOf(_NoticeDae.NoticeDae).isRequired).isRequired
-	};
-
-	exports.default = ComponentHeaderNoticeMenu;
-
-/***/ }),
-/* 160 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Empty = undefined;
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/23 - 15:53
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	//
-	//
-	// let _symbol = Symbol();
-
-	/**
-	 * 代替画像パスを取得します
-	 * - 記事画像、ユーザーアイコンなど未設定時の代替画像パス
-	 * - 全て static です
-	 */
-	var Empty = exports.Empty = function () {
-	  function Empty() {
-	    (0, _classCallCheck3.default)(this, Empty);
-	  }
-
-	  (0, _createClass3.default)(Empty, null, [{
-	    key: 'refresh',
-
-	    /**
-	     * キャッシュさせないパスを生成します
-	     * @param {string} path 元のパス
-	     * @returns {string} パスに?Date.now()をつけて返します
-	     */
-	    value: function refresh(path) {
-	      return path + '?' + Date.now();
-	    }
-	  }, {
-	    key: 'THUMB_EMPTY',
-
-	    // /**
-	    //  * 代替画像パス
-	    //  * static class です, instance を作成しません
-	    //  * @param {Symbol} target Singleton を実現するための private symbol
-	    //  */
-	    // constructor( target ) {
-	    //
-	    //   if ( _symbol !== target ) {
-	    //
-	    //     throw new Error( 'Empty is static Class. not use new Empty().' );
-	    //
-	    //   }
-	    //
-	    // }
-	    // ---------------------------------------------------
-	    //  CONST 代わり
-	    // ---------------------------------------------------
-	    // --------------
-	    // image
-	    /**
-	     * img thumbnail 代替画像パス 100x100
-	     * - [Ex.] sidebar ranking
-	     * @return {string} 代替画像パス【sidebar ranking】
-	     */
-	    get: function get() {
-	      return '/assets/images/common/thumb-empty-100x100.png';
-	    }
-	    /**
-	     * img thumbnail 代替画像パス 70x70
-	     * - [Ex.] headline, sidebar image...
-	     * @return {string} 代替画像パス【小】
-	     */
-
-	  }, {
-	    key: 'IMG_SMALL',
-	    get: function get() {
-	      return '/assets/images/common/thumb-noimage-70x70.png';
-	    }
-	    /**
-	     * img middle 代替画像パス - 記事一覧用 - 横長 - 16:9
-	     * - [Ex.] 記事一覧
-	     * @return {string} 代替画像パス【記事一覧】
-	     */
-
-	  }, {
-	    key: 'IMG_MIDDLE',
-	    get: function get() {
-	      // return '/assets/images/common/thumb-noimage-340x150.png';
-	      // @since 2016-09-01
-	      // https://github.com/undotsushin/undotsushin/issues/1053
-	      return '/assets/images/common/thumb-noimage-16x9-s.png';
-	    }
-	    /**
-	     * img large 代替画像パス
-	     * - [Ex.] スライドショー
-	     * @deprecated 2017-12-18 instead use {@link Empty.IMG_CAROUSEL}
-	     * @return {string} 代替画像パス【スライドショー】
-	     */
-
-	  }, {
-	    key: 'IMG_LARGE',
-	    get: function get() {
-	      return '/assets/images/common/thumb-pickup-empty.png';
-	    }
-	    /**
-	     * img large 代替画像パス - 750x320
-	     * - [Ex.] スライドショー
-	     * @return {string} 代替画像パス【スライドショー】
-	     * @since 2017-12-18
-	     */
-
-	  }, {
-	    key: 'IMG_CAROUSEL',
-	    get: function get() {
-	      // 正規画像に差し替える - 2017-12-22
-	      return '/assets/images/common/thumb-750x320.png';
-	    }
-	    // --------------
-	    // video
-	    /**
-	     * video thumbnail 代替画像パス【16 x 9】
-	     * - [Ex.] sidebar video...
-	     * @return {string} 代替画像パス【16 x 9】
-	     */
-
-	  }, {
-	    key: 'VIDEO_THUMBNAIL',
-	    get: function get() {
-	      return '/assets/images/common/thumb-16x9.png';
-	    }
-	    /**
-	     * video play button overlay【16 x 9】
-	     * - [Ex.] sidebar video...
-	     * @return {string} Video Play画像パス【16 x 9】
-	     */
-
-	  }, {
-	    key: 'VIDEO_PLAY',
-	    get: function get() {
-	      return '/assets/images/common/thumb-16x9-play.png';
-	    }
-	    /**
-	     * video play button overlay sidebar small【16 x 9】
-	     * - [Ex.] sidebar video...
-	     * @return {string} Video Play画像パス【小】【16 x 9】
-	     */
-
-	  }, {
-	    key: 'VIDEO_PLAY_SMALL',
-	    get: function get() {
-	      return '/assets/images/common/thumb-16x9-play-s.png';
-	    }
-	    /**
-	     * SP: video play button overlay【16 x 9】 - `/assets/sp/images/common/thumb-16x9-play.png`
-	     * @return {string} Video Play画像パス【16 x 9】 for SP
-	     * @since 2017-12-28
-	     */
-
-	  }, {
-	    key: 'VIDEO_PLAY_SP',
-	    get: function get() {
-	      return '/assets/sp/images/common/thumb-16x9-play.png';
-	    }
-	    /**
-	     * SP: video play button overlay【16 x 9】 small - `/assets/sp/images/common/thumb-16x9-play-s.png`
-	     * @return {string} Video Play画像パス【16 x 9】 for SP
-	     * @since 2017-12-28
-	     */
-
-	  }, {
-	    key: 'VIDEO_PLAY_SP_SMALL',
-	    get: function get() {
-	      return '/assets/sp/images/common/thumb-16x9-play-s.png';
-	    }
-	    /**
-	     * video play button overlay【640 x 400】
-	     * - [Ex.] pickup video...
-	     * @return {string} Video Play画像パス【Pickup】【640 x 400】
-	     */
-
-	  }, {
-	    key: 'VIDEO_PICKUP_PLAY',
-	    get: function get() {
-	      // 正規画像に差し替える - update 2017-12-22
-	      // return '/assets/images/common/thumb-640x400-play.png';
-	      return '/assets/images/common/thumb-750x320-play.png';
-	    }
-	    /**
-	     * video play button overlay sidebar small【1 x 1】
-	     * - [Ex.] headline video...
-	     * @return {string} Video Play画像パス【小】【1x1】
-	     */
-
-	  }, {
-	    key: 'VIDEO_PLAY_SMALL_1X1',
-	    get: function get() {
-	      return '/assets/images/common/thumb-1x1-play-s.png';
-	    }
-	    // --------------
-	    // user
-	    /**
-	     * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)
-	     * - [Ex.] コメントとか
-	     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
-	     */
-
-	  }, {
-	    key: 'USER_PICTURE',
-	    get: function get() {
-	      return '/assets/images/common/thumb-user.png';
-	    }
-	    /**
-	     * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)
-	     * - [Ex.] コメントとか
-	     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
-	     */
-
-	  }, {
-	    key: 'USER_PICTURE_FEATURE',
-	    get: function get() {
-	      return '/assets/images/common/thumb-user-feature.png';
-	    }
-	    /**
-	     * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)透明
-	     * - [Ex.] コメントとか
-	     * @return {string} 代替透明画像パス ユーザー・プロファイル・アイコン
-	     */
-
-	  }, {
-	    key: 'USER_EMPTY',
-	    get: function get() {
-	      return '/assets/images/common/thumb-user-empty.png';
-	    }
-	    /**
-	     * ユーザー登録 sample avatar
-	     * @return {string} sample avatar image path
-	     */
-
-	  }, {
-	    key: 'SETTING_AVATAR',
-	    get: function get() {
-	      return '/assets/images/setting/thumb-avatar.png';
-	    }
-	    /**
-	     * hero-slider カバーグラデーション画像
-	     * @return {string} hero-slider カバーグラデーション画像パスを返します
-	     */
-
-	  }, {
-	    key: 'KV_OVERLAY',
-	    get: function get() {
-	      return '/assets/images/index/kv-overlay.png';
-	    }
-	  }]);
-	  return Empty;
-	}();
-
-/***/ }),
-/* 161 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeAction = undefined;
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/09 - 23:12
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	// let _symbol = Symbol();
-	/**
-	 * お知らせ定型文
-	 * @type {{comment: string, reply: string, good: string, bad: string, notice: string}}
-	 */
-	var messages = {
-	  comment: '返信',
-	  reply: '返信',
-	  good: 'Good',
-	  bad: 'Bad',
-	  notice: '通知'
-	};
-	/**
-	 * お知らせ定型文
-	 * - static class です
-	 */
-
-	var NoticeAction = exports.NoticeAction = function () {
-	  function NoticeAction() {
-	    (0, _classCallCheck3.default)(this, NoticeAction);
-	  }
-
-	  (0, _createClass3.default)(NoticeAction, null, [{
-	    key: 'message',
-
-	    // /**
-	    //  * お知らせ定型文<br>
-	    //  * static class です, instance を作成しません
-	    //  * @param {Symbol} target Singleton を実現するための private symbol
-	    //  */
-	    // constructor( target ) {
-	    //
-	    //   if ( _symbol !== target ) {
-	    //
-	    //     throw new Error( 'NoticeAction is static Class. not use new NoticeAction().' );
-	    //
-	    //   }
-	    //
-	    // }
-	    // ---------------------------------------------------
-	    //  GETTER / SETTER
-	    // ---------------------------------------------------
-	    /**
-	     * action に対応するメッセージ<br>
-	     *
-	     * - reply : 返信された
-	     * - good : goodされた
-	     * - bad : badされた
-	     * - notice : ニュース的通知
-	     *
-	     * @param {string} action アクティビティの種類
-	     * @return {string} action に対応するメッセージ を返します
-	     */
-	    value: function message(action) {
-	      return messages[action];
-	    }
-	  }]);
-	  return NoticeAction;
-	}();
-
-/***/ }),
-/* 162 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _isInteger = __webpack_require__(25);
-
-	var _isInteger2 = _interopRequireDefault(_isInteger);
-
-	var _getPrototypeOf = __webpack_require__(87);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(91);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _Model = __webpack_require__(163);
-
-	var _Length = __webpack_require__(151);
-
-	var _Polling = __webpack_require__(164);
-
-	var _Polling2 = _interopRequireDefault(_Polling);
-
-	var _ModelNoticeCount = __webpack_require__(166);
-
-	var _NoticeStatus = __webpack_require__(157);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * [library] - React
-	 */
-	var React = self.React;
-
-	/**
-	 * header - お知らせ「バッジ」出力します
-	 * - vk flag true - polling しない
-	 * - 定期的に更新するために (@link Polling} - {@link Length}.interval 間隔で行います
-	 * - {@link ModelNoticeCount} Ajax 取得します
-	 * - {@link NoticeStatus} 件数を通知します
-	 */
-	/**
-	 * Copyright (c) 2011-2017 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2017/12/13 - 17:06
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var ComponentHeaderNoticeTotal = function (_React$Component) {
-	  (0, _inherits3.default)(ComponentHeaderNoticeTotal, _React$Component);
-	  (0, _createClass3.default)(ComponentHeaderNoticeTotal, null, [{
-	    key: 'propTypes',
-	    get: function get() {
-	      return {
-	        vk: React.PropTypes.bool.isRequired
-	      };
-	    }
-	    // ---------------------------------------------------
-	    //  CONSTRUCTOR
-	    // ---------------------------------------------------
-	    /**
-	     * お知らせ「バッジ」出力準備します
-	     * @param {*} props React.props
-	     */
-
-	  }]);
-
-	  function ComponentHeaderNoticeTotal(props) {
-	    (0, _classCallCheck3.default)(this, ComponentHeaderNoticeTotal);
-
-	    // ---
-	    /**
-	     * バッジ件数 - default `0`
-	     * @type {{total: number}}
-	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (ComponentHeaderNoticeTotal.__proto__ || (0, _getPrototypeOf2.default)(ComponentHeaderNoticeTotal)).call(this, props));
-
-	    _this.state = {
-	      // total: props.total,
-	      total: 0
-	    };
-	    // ----
-	    var onDone = _this.onDone.bind(_this);
-	    var onFail = _this.onFail.bind(_this);
-	    var callback = {};
-	    callback[_Model.Model.COMPLETE] = onDone;
-	    callback[_Model.Model.UNDEFINED_ERROR] = onFail;
-	    callback[_Model.Model.RESPONSE_ERROR] = onFail;
-	    /**
-	     * bind onDone - {@link ModelNoticeCount} success event handler
-	     * @type {function}
-	     */
-	    _this.onDone = onDone;
-	    /**
-	     * bind onDone - {@link ModelNoticeCount} error event handler
-	     * @type {function}
-	     */
-	    _this.onFail = onFail;
-	    /**
-	     * bind onUpdate - {@link Polling}.UPDATE event handler
-	     * @type {function}
-	     */
-	    _this.onUpdate = _this.onUpdate.bind(_this);
-	    /**
-	     * ModelNoticeCount callback をセット
-	     * @private
-	     * @type {Object}
-	     */
-	    _this.callback = callback;
-	    /**
-	     * Polling instance
-	     * @private
-	     * @type {Polling}
-	     */
-	    _this.polling = new _Polling2.default(_Length.Length.interval);
-	    /**
-	     * ModelNoticeCount instance
-	     * @private
-	     * @type {ModelNoticeCount}
-	     */
-	    _this.model = new _ModelNoticeCount.ModelNoticeCount(callback);
-	    /**
-	     * NoticeStatus instance
-	     * @private
-	     * @type {NoticeStatus}
-	     */
-	    _this.status = _NoticeStatus.NoticeStatus.factory();
-	    return _this;
-	  }
-	  // ---------------------------------------------------
-	  //  METHOD
-	  // ---------------------------------------------------
-	  /**
-	   * {@link ModelNoticeCount} success event handler
-	   * - バッジを更新します
-	   * - restart します
-	   * @param {Result} result Ajax JSON data
-	   */
-
-
-	  (0, _createClass3.default)(ComponentHeaderNoticeTotal, [{
-	    key: 'onDone',
-	    value: function onDone(result) {
-	      var total = result.count;
-	      if ((0, _isInteger2.default)(total) && total !== this.state.total) {
-	        this.updateTotal(total);
-	      }
-	      this.restart();
-	    }
-
-	    /**
-	     * {@link ModelNoticeCount} error event handler
-	     * - restart します
-	     */
-
-	  }, {
-	    key: 'onFail',
-	    value: function onFail() {
-	      this.restart();
-	    }
-	    /**
-	     * {@link Polling}.UPDATE event handler
-	     * - {@link Polling}.UPDATE unbind します
-	     * - {@link ModelNoticeCount} request 開始します
-	     */
-
-	  }, {
-	    key: 'onUpdate',
-	    value: function onUpdate() {
-	      this.polling.off(_Polling2.default.UPDATE, this.onUpdate);
-	      this.model.start();
-	    }
-	    /**
-	     * {@link Polling}.UPDATE unbind します
-	     */
-
-	  }, {
-	    key: 'dispose',
-	    value: function dispose() {
-	      this.polling.off(_Polling2.default.UPDATE, this.onUpdate);
-	    }
-	    /**
-	     * {@link Polling}.setPolling します
-	     */
-
-	  }, {
-	    key: 'restart',
-	    value: function restart() {
-	      var polling = this.polling;
-	      // 念のため一旦 unbind し bind する
-	      polling.off(_Polling2.default.UPDATE, this.onUpdate);
-	      polling.on(_Polling2.default.UPDATE, this.onUpdate);
-	      polling.setPolling(_Length.Length.interval);
-	    }
-	    /**
-	     * バッジ更新します
-	     * @param {number} total バッジ件数
-	     */
-
-	  }, {
-	    key: 'updateTotal',
-	    value: function updateTotal(total) {
-	      this.setState({ total: total });
-	      this.status.update(total);
-	    }
-
-	    /**
-	     * delegate - after mount
-	     * - {@link Polling}.UPDATE bind します
-	     * - {@link ModelNoticeCount} request 開始します
-	     */
-
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      if (!this.props.vk) {
-	        var polling = this.polling;
-	        polling.on(_Polling2.default.UPDATE, this.onUpdate);
-	        polling.start();
-	        // ---
-	        this.model.start();
-	      }
-	    }
-	    /**
-	     * delegate - before unmount
-	     * - `dispose` します
-	     */
-
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.dispose();
-	    }
-	    // componentWillReceiveProps(nextProps) {
-	    //   const { total } = nextProps;
-	    //   if (total !== this.state.total) {
-	    //     this.setState({ total });
-	    //   }
-	    // }
-	    /**
-	     * お知らせバッジを出力します
-	     * @returns {?XML} `span.notice-num`
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      // vk flag 追加 - 2018-04-19
-	      if (this.props.vk) {
-	        return null;
-	      }
-	      // ---
-	      var total = this.state.total;
-	      // console.log('ComponentHeaderNoticeTotal.render', total);
-
-	      if (!total) {
-	        return null;
-	      }
-	      return React.createElement(
-	        'span',
-	        { className: 'notice-num' },
-	        total
-	      );
-	    }
-	  }]);
-	  return ComponentHeaderNoticeTotal;
-	}(React.Component);
-
-	exports.default = ComponentHeaderNoticeTotal;
-
-/***/ }),
-/* 163 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Model = undefined;
-
-	var _getPrototypeOf = __webpack_require__(87);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(91);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _EventDispatcher2 = __webpack_require__(97);
-
-	var _Safety = __webpack_require__(24);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * <p>View がない Api request<p>
-	 * <p>action Class を実行し option に設定された callback を実行します</p>
-	 *
-	 * @example
-	 * let option = {
-	 *  Model.UNDEFINED_ERROR: () => {},
-	 *  Model.EMPTY_ERROR: () => {},
-	 *  Model.RESPONSE_ERROR: () => {},
-	 *  Model.COMPLETE: () => {}
-	 * };
-	 *
-	 * let model = new Model( option );
-	 * model.start();
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/03 - 17:02
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var Model = exports.Model = function (_EventDispatcher) {
-	  (0, _inherits3.default)(Model, _EventDispatcher);
-
-	  /**
-	   * View がない Api request, 親クラス
-	   * @param {?Object} [option={}] optional event handler
-	   */
-	  function Model() {
-	    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	    (0, _classCallCheck3.default)(this, Model);
-
-	    var safetyOption = _Safety.Safety.object(option);
-
-	    /**
-	     * callback をセットした Object
-	     *
-	     * @example
-	     * const option = {
-	     *  Model.UNDEFINED_ERROR: () => {},
-	     *  Model.EMPTY_ERROR: () => {},
-	     *  Model.RESPONSE_ERROR: () => {},
-	     *  Model.COMPLETE: () => {}
-	     * };
-	     *
-	     * @type {Object}
-	     * @protected
-	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Model.__proto__ || (0, _getPrototypeOf2.default)(Model)).call(this));
-
-	    _this._option = safetyOption;
-	    /**
-	     * action Class が設定されます
-	     * @type {*}
-	     * @protected
-	     * @default null
-	     */
-	    _this._action = null;
-	    return _this;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * callback handler がセットされたObject
-	   * @return {Object} callback handler がセットされたObjectを返します
-	   */
-
-
-	  (0, _createClass3.default)(Model, [{
-	    key: 'executeSafely',
-
-	    // ---------------------------------------------------
-	    //  METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * option Object に kyeName が存在し型が function かを調べ関数を実行する
-	     * @param {string} keyName 存在チェックを行う関数キー名
-	     * @param {*} [args=] 実行関数への引数
-	     */
-	    value: function executeSafely(keyName) {
-	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-	        args[_key - 1] = arguments[_key];
-	      }
-
-	      var option = this.option;
-	      // console.log( 'executeSafely ', keyName, option.hasOwnProperty( keyName ), option, args );
-	      if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
-	        // callback 側で通常の引数として取り出せるように apply します
-	        option[keyName].apply(this, args);
-	      }
-	      this.dispatch({ type: keyName, args: args });
-	    }
-	    // ---------------------------------------------------
-	    //  CONST
-	    // ---------------------------------------------------
-	    /**
-	     * event UNDEFINED_ERROR<br>
-	     * Ajax は成功, 存在すべき key が無い or 値が null
-	     * @return {string} modelUndefinedError を返します
-	     */
-
-	  }, {
-	    key: 'option',
-	    get: function get() {
-	      return this._option;
-	    }
-
-	    /**
-	     * callback handler をセットします
-	     * @param {Object} option callback handler がセットされた Object
-	     */
-	    ,
-	    set: function set(option) {
-	      this._option = option;
-	    }
-	    /**
-	     * Action instance
-	     * @return {*} Action instance を返します
-	     */
-
-	  }, {
-	    key: 'action',
-	    get: function get() {
-	      return this._action;
-	    }
-	    /**
-	     * Action instance を設定します
-	     * @param {*} action Action instance
-	     */
-	    ,
-	    set: function set(action) {
-	      this._action = action;
-	    }
-	  }], [{
-	    key: 'UNDEFINED_ERROR',
-	    get: function get() {
-	      return 'modelUndefinedError';
-	    }
-	    /**
-	     * event EMPTY_ERROR<br>
-	     * Ajax は成功, 存在すべき値は配列で存在するが length 0
-	     * @return {string} modelEmptyError を返します
-	     */
-
-	  }, {
-	    key: 'EMPTY_ERROR',
-	    get: function get() {
-	      return 'modelEmptyError';
-	    }
-	    /**
-	     * event RESPONSE_ERROR<br>
-	     * Ajax 失敗
-	     * @return {string} modelResponseError を返します
-	     */
-
-	  }, {
-	    key: 'RESPONSE_ERROR',
-	    get: function get() {
-	      return 'modelResponseError';
-	    }
-	    /**
-	     * event COMPLETE<br>
-	     * Ajax 成功
-	     * action 終了後 success 時に使用します
-	     * @return {string} modelComplete を返します
-	     */
-
-	  }, {
-	    key: 'COMPLETE',
-	    get: function get() {
-	      return 'modelComplete';
-	    }
-	  }]);
-	  return Model;
-	}(_EventDispatcher2.EventDispatcher);
-
-/***/ }),
-/* 164 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _getPrototypeOf = __webpack_require__(87);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(91);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _EventDispatcher2 = __webpack_require__(97);
-
-	var _Cycle = __webpack_require__(165);
+	var _Cycle = __webpack_require__(159);
 
 	var _Cycle2 = _interopRequireDefault(_Cycle);
 
@@ -17297,7 +17127,7 @@
 	exports.default = Polling;
 
 /***/ }),
-/* 165 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17306,7 +17136,7 @@
 	  value: true
 	});
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -17314,7 +17144,7 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -17322,7 +17152,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -17330,7 +17160,7 @@
 
 	var _symbol2 = _interopRequireDefault(_symbol);
 
-	var _EventDispatcher2 = __webpack_require__(97);
+	var _EventDispatcher2 = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17601,7 +17431,7 @@
 	exports.default = Cycle;
 
 /***/ }),
-/* 166 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17609,9 +17439,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ModelNoticeCount = undefined;
+	exports.Model = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -17623,21 +17453,241 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Model2 = __webpack_require__(163);
+	var _EventDispatcher2 = __webpack_require__(96);
+
+	var _Safety = __webpack_require__(24);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * <p>View がない Api request<p>
+	 * <p>action Class を実行し option に設定された callback を実行します</p>
+	 *
+	 * @example
+	 * let option = {
+	 *  Model.UNDEFINED_ERROR: () => {},
+	 *  Model.EMPTY_ERROR: () => {},
+	 *  Model.RESPONSE_ERROR: () => {},
+	 *  Model.COMPLETE: () => {}
+	 * };
+	 *
+	 * let model = new Model( option );
+	 * model.start();
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/03 - 17:02
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	var Model = exports.Model = function (_EventDispatcher) {
+	  (0, _inherits3.default)(Model, _EventDispatcher);
+
+	  /**
+	   * View がない Api request, 親クラス
+	   * @param {?Object} [option={}] optional event handler
+	   */
+	  function Model() {
+	    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	    (0, _classCallCheck3.default)(this, Model);
+
+	    var safetyOption = _Safety.Safety.object(option);
+
+	    /**
+	     * callback をセットした Object
+	     *
+	     * @example
+	     * const option = {
+	     *  Model.UNDEFINED_ERROR: () => {},
+	     *  Model.EMPTY_ERROR: () => {},
+	     *  Model.RESPONSE_ERROR: () => {},
+	     *  Model.COMPLETE: () => {}
+	     * };
+	     *
+	     * @type {Object}
+	     * @protected
+	     */
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (Model.__proto__ || (0, _getPrototypeOf2.default)(Model)).call(this));
+
+	    _this._option = safetyOption;
+	    /**
+	     * action Class が設定されます
+	     * @type {*}
+	     * @protected
+	     * @default null
+	     */
+	    _this._action = null;
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * callback handler がセットされたObject
+	   * @return {Object} callback handler がセットされたObjectを返します
+	   */
+
+
+	  (0, _createClass3.default)(Model, [{
+	    key: 'executeSafely',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * option Object に kyeName が存在し型が function かを調べ関数を実行する
+	     * @param {string} keyName 存在チェックを行う関数キー名
+	     * @param {*} [args=] 実行関数への引数
+	     */
+	    value: function executeSafely(keyName) {
+	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        args[_key - 1] = arguments[_key];
+	      }
+
+	      var option = this.option;
+	      // console.log( 'executeSafely ', keyName, option.hasOwnProperty( keyName ), option, args );
+	      if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
+	        // callback 側で通常の引数として取り出せるように apply します
+	        option[keyName].apply(this, args);
+	      }
+	      this.dispatch({ type: keyName, args: args });
+	    }
+	    // ---------------------------------------------------
+	    //  CONST
+	    // ---------------------------------------------------
+	    /**
+	     * event UNDEFINED_ERROR<br>
+	     * Ajax は成功, 存在すべき key が無い or 値が null
+	     * @return {string} modelUndefinedError を返します
+	     */
+
+	  }, {
+	    key: 'option',
+	    get: function get() {
+	      return this._option;
+	    }
+
+	    /**
+	     * callback handler をセットします
+	     * @param {Object} option callback handler がセットされた Object
+	     */
+	    ,
+	    set: function set(option) {
+	      this._option = option;
+	    }
+	    /**
+	     * Action instance
+	     * @return {*} Action instance を返します
+	     */
+
+	  }, {
+	    key: 'action',
+	    get: function get() {
+	      return this._action;
+	    }
+	    /**
+	     * Action instance を設定します
+	     * @param {*} action Action instance
+	     */
+	    ,
+	    set: function set(action) {
+	      this._action = action;
+	    }
+	  }], [{
+	    key: 'UNDEFINED_ERROR',
+	    get: function get() {
+	      return 'modelUndefinedError';
+	    }
+	    /**
+	     * event EMPTY_ERROR<br>
+	     * Ajax は成功, 存在すべき値は配列で存在するが length 0
+	     * @return {string} modelEmptyError を返します
+	     */
+
+	  }, {
+	    key: 'EMPTY_ERROR',
+	    get: function get() {
+	      return 'modelEmptyError';
+	    }
+	    /**
+	     * event RESPONSE_ERROR<br>
+	     * Ajax 失敗
+	     * @return {string} modelResponseError を返します
+	     */
+
+	  }, {
+	    key: 'RESPONSE_ERROR',
+	    get: function get() {
+	      return 'modelResponseError';
+	    }
+	    /**
+	     * event COMPLETE<br>
+	     * Ajax 成功
+	     * action 終了後 success 時に使用します
+	     * @return {string} modelComplete を返します
+	     */
+
+	  }, {
+	    key: 'COMPLETE',
+	    get: function get() {
+	      return 'modelComplete';
+	    }
+	  }]);
+	  return Model;
+	}(_EventDispatcher2.EventDispatcher);
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ModelNoticeCount = undefined;
+
+	var _getPrototypeOf = __webpack_require__(85);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Model2 = __webpack_require__(160);
 
 	var _Result = __webpack_require__(119);
 
-	var _NoticeCount = __webpack_require__(167);
+	var _NoticeCount = __webpack_require__(162);
 
-	var _NoticeCountDae = __webpack_require__(168);
+	var _NoticeCountDae = __webpack_require__(163);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17727,7 +17777,7 @@
 	}(_Model2.Model);
 
 /***/ }),
-/* 167 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17737,7 +17787,7 @@
 	});
 	exports.NoticeCount = undefined;
 
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -17745,11 +17795,11 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
+	var _possibleConstructorReturn2 = __webpack_require__(89);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -17757,7 +17807,7 @@
 
 	var _Api = __webpack_require__(125);
 
-	var _User = __webpack_require__(84);
+	var _User = __webpack_require__(113);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17793,7 +17843,7 @@
 	                             */
 
 /***/ }),
-/* 168 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17907,7 +17957,7 @@
 	}();
 
 /***/ }),
-/* 169 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17915,320 +17965,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Loc = undefined;
+	exports.NoticeStatus = undefined;
 
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Url = __webpack_require__(108);
-
-	var _Safety = __webpack_require__(24);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * location に関する utility
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/13 - 21:40
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var Loc = exports.Loc = function () {
-	  (0, _createClass3.default)(Loc, null, [{
-	    key: 'hashClean',
-
-	    /**
-	     * hash を消去します
-	     */
-	    value: function hashClean() {
-	      Loc.hash = '';
-	      var path = Loc.path;
-	      var hashIndex = path.lastIndexOf('#');
-	      if (hashIndex !== -1) {
-	        Loc.path = path.substring(0, hashIndex - 1);
-	      }
-	    }
-	    /**
-	     * url の query 文字列
-	     * @return {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
-	     */
-
-	  }, {
-	    key: 'hashStrip',
-
-	    // ---------------------------------------------------
-	    //  STATIC METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * hash(#example)から`#`をとります
-	     * @param {string} hash hash文字列
-	     * @return {string} hash文字列から#を削除した文字列を返します
-	     */
-	    value: function hashStrip() {
-	      var hash = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Loc.hash;
-
-	      hash = _Safety.Safety.string(hash, Loc.hash);
-	      return hash.replace(/^[#\/]|\s+$/g, '');
-	    }
-	    /**
-	     * pathnameを/で分解します
-	     * @param {string} [pathname=Loc.pathname] location.pathname, host なしの path
-	     * @return {Array.<string>} pathname を `/` で分解し配列にし返します
-	     */
-
-	  }, {
-	    key: 'resolve',
-	    value: function resolve() {
-	      var pathname = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Loc.path;
-
-	      pathname = _Safety.Safety.string(pathname, Loc.path);
-	      return pathname.split('/');
-	    }
-	    /**
-	     * location.search を key: value へ分解します
-	     * @param {string} search location.search型文字列
-	     * @return {*} search を key: value へ分解し Object で返します
-	     */
-
-	  }, {
-	    key: 'parse',
-	    value: function parse() {
-	      var search = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Loc.search;
-
-	      search = _Safety.Safety.string(search, Loc.search);
-	      // 引数が文字でない時は処理しない
-	      if (typeof search !== 'string' || search.length === 0) {
-	        return null;
-	      }
-
-	      search = search.replace('&amp;', '&');
-	      var vars = search.split('&');
-	      var results = {};
-
-	      // for ( let val of vars ) {
-	      //
-	      //   let pair = val.split( '=' );
-	      //   if ( Array.isArray( pair ) && pair.length === 2 ) {
-	      //
-	      //     results[ pair[ 0 ] ] = pair[ 1 ];
-	      //
-	      //   }
-	      //
-	      // }
-	      vars.map(function (val) {
-	        var pair = val.split('=');
-	        if (Array.isArray(pair) && pair.length === 2) {
-	          results[pair[0]] = pair[1];
-	        }
-	      });
-	      return results;
-	    }
-	    /**
-	     * host が local かを調べます
-	     * @return {boolean} host が local の時に true を返します
-	     */
-
-	  }, {
-	    key: 'isLocal',
-	    value: function isLocal() {
-	      var host = Loc.host;
-	      return host.indexOf('192.168') === 0 || host.indexOf('0.0.0.0') === 0 || host.indexOf('localhost') === 0 || host.indexOf('127.0.0.1') === 0;
-	    }
-	    /**
-	     * index(home) へ遷移します
-	     */
-
-	  }, {
-	    key: 'index',
-	    value: function index() {
-	      Loc.current = _Url.Url.index();
-	    }
-	    // ---------------------------------------------------
-	    //  CONSTRUCTOR
-	    // ---------------------------------------------------
-	    /**
-	     * search を調べたい時に instance を作成します
-	     */
-
-	  }, {
-	    key: 'current',
-
-	    // ---------------------------------------------------
-	    //  GETTER / SETTER
-	    // ---------------------------------------------------
-	    /**
-	     * location.href
-	     * @return {string} location.href を返します
-	     */
-	    get: function get() {
-	      return self.location.href;
-	    }
-	    /**
-	     * location.href へ href をセット遷移させます
-	     * @param {string} href 遷移先パス
-	     */
-	    ,
-	    set: function set(href) {
-	      self.location.href = href;
-	    }
-	    /**
-	     * @return {string} location.pathname(urlからprotocol+hostを除く)を返します
-	     */
-
-	  }, {
-	    key: 'path',
-	    get: function get() {
-	      return self.location.pathname;
-	    }
-	    /**
-	     * location.pathname をセットします
-	     * @param {string} path 設定する pathname
-	     */
-	    ,
-	    set: function set(path) {
-	      self.location.pathname = path;
-	    }
-	    /**
-	     * location.hash
-	     * @return {string} location.hashを返します
-	     */
-
-	  }, {
-	    key: 'hash',
-	    get: function get() {
-	      return self.location.hash;
-	    }
-	    /**
-	     * location.hashを設定します
-	     * @param {string} hash 設定する hash
-	     */
-	    ,
-	    set: function set(hash) {
-	      self.location.hash = hash;
-	    }
-	  }, {
-	    key: 'search',
-	    get: function get() {
-	      return self.location.search.substring(1);
-	    }
-	    /**
-	     * location.host
-	     * @return {string} host name + port number を返します
-	     */
-
-	  }, {
-	    key: 'host',
-	    get: function get() {
-	      // host + port number
-	      return self.location.host;
-	    }
-	    /**
-	     * location.hostname
-	     * @return {string} host name だけを返します
-	     */
-
-	  }, {
-	    key: 'hostname',
-	    get: function get() {
-	      // host only
-	      return self.location.hostname;
-	    }
-	    /**
-	     * location.port
-	     * @return {string} port number を返します
-	     */
-
-	  }, {
-	    key: 'port',
-	    get: function get() {
-	      // port number
-	      return self.location.port;
-	    }
-	    /**
-	     * location.protocol
-	     * @return {string} ocation.protocol を返します
-	     */
-
-	  }, {
-	    key: 'protocol',
-	    get: function get() {
-	      return location.protocol;
-	    }
-	  }]);
-
-	  function Loc() {
-	    (0, _classCallCheck3.default)(this, Loc);
-
-	    /**
-	     * url の query 文字列
-	     * @type {null|string}
-	     */
-	    this.search = null;
-	  }
-	  // ---------------------------------------------------
-	  //  METHOD
-	  // ---------------------------------------------------
-	  /**
-	   * 文字列を query 型として parse します
-	   * @param {string} [search=''] key: value にしたい search型 文字列
-	   * @return {Loc} instance を返します
-	   */
-
-
-	  (0, _createClass3.default)(Loc, [{
-	    key: 'parse',
-	    value: function parse() {
-	      var search = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-
-	      search = _Safety.Safety.string(search, '');
-	      this.search = Loc.parse(search);
-	      return this;
-	    }
-	    /**
-	     * search value を keyから探します
-	     * @param {string} key search name
-	     * @return {?string} string|undefined|null で結果を返します
-	     */
-
-	  }, {
-	    key: 'find',
-	    value: function find(key) {
-	      var search = this.search;
-	      // if (search === null) {
-	      //   return null;
-	      // }
-	      //
-	      // return search[key];
-	      return search ? search[key] : null;
-	    }
-	  }]);
-	  return Loc;
-	}();
-
-/***/ }),
-/* 170 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _getPrototypeOf = __webpack_require__(87);
+	var _getPrototypeOf = __webpack_require__(85);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -18236,46 +17975,41 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
 	var _createClass2 = __webpack_require__(5);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(91);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(92);
+	var _inherits2 = __webpack_require__(90);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(104);
+	var _symbol = __webpack_require__(69);
 
-	var _View3 = _interopRequireDefault(_View2);
+	var _symbol2 = _interopRequireDefault(_symbol);
 
-	var _LogoutNode = __webpack_require__(171);
-
-	var _LogoutStatus = __webpack_require__(141);
+	var _EventDispatcher2 = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// React
-	/* eslint-disable no-unused-vars */
 	/**
-	 * [library] - React
+	 * {@link NoticeStatus} singleton instance を保証するための inner Symbol
+	 * @type {symbol}
+	 * @private
 	 */
-
-	// node
-	var React = self.React;
-	/* eslint-enable no-unused-vars */
+	var noticeStatusSymbol = (0, _symbol2.default)('NoticeStatus singleton instance');
 	/**
-	 * [library] - ReactDOM
+	 * {@link NoticeStatus} singleton instance
+	 * @type {?NoticeStatus}
+	 * @private
 	 */
-
-	// event
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/03/08 - 19:25
+	 * @date 2016/03/03 - 17:06
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -18283,146 +18017,94 @@
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
 	 */
-	var ReactDOM = self.ReactDOM;
+	/* eslint constructor-super: 0 */
+
+	var singletonInstance = null;
 
 	/**
-	 * logout modal control
-	 */
+	 * お知らせ更新を通知するための custom Event
+	 * @example
+	 * var status = NoticeStatus.factory();
+	 * */
 
-	var ViewLogoutModal = function (_View) {
-	  (0, _inherits3.default)(ViewLogoutModal, _View);
+	var NoticeStatus = exports.NoticeStatus = function (_EventDispatcher) {
+	  (0, _inherits3.default)(NoticeStatus, _EventDispatcher);
+	  (0, _createClass3.default)(NoticeStatus, null, [{
+	    key: 'factory',
 
-	  // ---------------------------------------------------
-	  //  CONSTRUCTOR
-	  // ---------------------------------------------------
-	  /**
-	   * logout modal 表示
-	   * @param {Element} element 親 Element
-	   * @param {?Function} [yesCallback=null] yes / ok click callback
-	   * @param {?Function} [noCallback=null] no / cancel click callback
-	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
-	   * @since 2-18-04-19 vk header - flag 追加
-	   */
-	  function ViewLogoutModal(element) {
-	    var yesCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	    var noCallback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-	    var vk = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-	    (0, _classCallCheck3.default)(this, ViewLogoutModal);
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * instance を生成します
+	     * @return {NoticeStatus} NoticeStatus instance を返します
+	     */
+	    value: function factory() {
+	      if (singletonInstance === null) {
+	        singletonInstance = new NoticeStatus(noticeStatusSymbol);
+	      }
+	      return singletonInstance;
+	    }
+	    // ---------------------------------------------------
+	    //  EVENT
+	    // ---------------------------------------------------
+	    /**
+	     * UPDATE_COUNT, お知らせが更新された Event
+	     * @return {string} noticeUpdateCount を返します
+	     */
 
+	  }, {
+	    key: 'UPDATE_COUNT',
+	    get: function get() {
+	      return 'noticeUpdateCount';
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
 	    /**
-	     * modal instance
-	     * @type {null|Object}
-	     * @private
+	     * お知らせ更新 を通知する SingleTon
+	     *
+	     * @param {Symbol} target Singleton を実現するための private symbol
+	     * @return {UserStatus} UserStatus インスタンスを返します
 	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (ViewLogoutModal.__proto__ || (0, _getPrototypeOf2.default)(ViewLogoutModal)).call(this, element, {}, vk));
 
-	    _this._render = null;
-	    /**
-	     * yes / ok click callback
-	     * @type {Function}
-	     * @private
-	     */
-	    _this._yes = yesCallback;
-	    /**
-	     * no / cancel click callback
-	     * @type {Function}
-	     * @private
-	     */
-	    _this._no = noCallback;
-	    /**
-	     * LogoutStatus instance
-	     * @type {LogoutStatus}
-	     * @private
-	     */
-	    _this._status = _LogoutStatus.LogoutStatus.factory();
-	    /**
-	     * bind onOpen
-	     * @type {function}
-	     */
-	    _this.onOpen = _this.onOpen.bind(_this);
-	    return _this;
+	  }]);
+
+	  function NoticeStatus(target) {
+	    var _ret;
+
+	    (0, _classCallCheck3.default)(this, NoticeStatus);
+
+	    if (noticeStatusSymbol !== target) {
+	      throw new Error('NoticeStatus is static Class. not use new NoticeStatus().');
+	    }
+	    if (singletonInstance === null) {
+	      var _this = (0, _possibleConstructorReturn3.default)(this, (NoticeStatus.__proto__ || (0, _getPrototypeOf2.default)(NoticeStatus)).call(this));
+
+	      singletonInstance = _this;
+	    }
+	    return _ret = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret);
 	  }
 	  // ---------------------------------------------------
-	  //  GETTER / SETTER
+	  //  METHOD
 	  // ---------------------------------------------------
 	  /**
-	   * @param {Function} callback ok / yes callback
+	   * お知らせが更新 Event を発火させます
+	   * @param {Number} count お知らせ件数
 	   */
 
 
-	  (0, _createClass3.default)(ViewLogoutModal, [{
-	    key: 'start',
-
-	    // ---------------------------------------------------
-	    //  Method
-	    // ---------------------------------------------------
-	    /**
-	     * rendering 開始
-	     */
-	    value: function start() {
-	      this.render();
-	    }
-	    /**
-	     * rendering - {@link LogoutNode}
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (this._render === null) {
-	        this._render = ReactDOM.render(React.createElement(_LogoutNode.LogoutNode, {
-	          ok: this._yes,
-	          cancel: this._no
-	        }), this.element);
-	      }
-	      var status = this._status;
-	      status.off(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
-	      status.on(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
-	    }
-	    /**
-	     * modal 開く
-	     */
-
-	  }, {
-	    key: 'open',
-	    value: function open() {
-	      if (this._render !== null) {
-	        this._render.updateShow(true);
-	      }
-	    }
-	    /**
-	     * LogoutStatus.OPEN event handler
-	     * event が発生したら this.open を実行します
-	     */
-
-	  }, {
-	    key: 'onOpen',
-	    value: function onOpen() {
-	      // console.log( 'logout open event handler will open logout modal........' );
-	      this.open();
-	    }
-	  }, {
-	    key: 'yes',
-	    set: function set(callback) {
-	      this._yes = callback;
-	    }
-	    /**
-	     * @param {Function} callback cancel / no callback
-	     */
-
-	  }, {
-	    key: 'no',
-	    set: function set(callback) {
-	      this._no = callback;
+	  (0, _createClass3.default)(NoticeStatus, [{
+	    key: 'update',
+	    value: function update(count) {
+	      this.dispatch({ type: NoticeStatus.UPDATE_COUNT, count: count });
 	    }
 	  }]);
-	  return ViewLogoutModal;
-	}(_View3.default);
-
-	exports.default = ViewLogoutModal;
+	  return NoticeStatus;
+	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 171 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18430,24 +18112,21 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.LogoutNode = undefined;
 
-	var _Message = __webpack_require__(109);
+	var _classCallCheck2 = __webpack_require__(4);
 
-	var _User = __webpack_require__(84);
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _Loc = __webpack_require__(169);
+	var _createClass2 = __webpack_require__(5);
 
-	var _LogoutStatus = __webpack_require__(141);
+	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	// React
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-
-	// util
 	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * Copyright (c) 2011-2018 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/03/08 - 19:06
+	 * @date 2018/04/19 - 18:20
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -18456,204 +18135,128 @@
 	 *
 	 */
 
-	// app
-	var React = self.React;
-
-	// tween
-
-
-	// event
-	var greensock = self.com.greensock;
-	var TweenLite = greensock.TweenLite;
-	var easing = greensock.easing;
+	// TweenMax
+	/**
+	 * [library] - gsap.TweenLite
+	 */
+	var TweenLite = self.TweenLite;
+	/**
+	 * [library] - gsap.easing
+	 */
+	var easing = self.com.greensock.easing;
 
 	/**
-	 * Logout modal
-	 * @type {ReactClass}
+	 * SP page top に戻るボタンの実装 - 移植 `exe-sp` から
+	 * @since 2018-04-19 vk header
 	 */
-	var LogoutNode = exports.LogoutNode = React.createClass({
-	  displayName: 'LogoutNode',
 
-	  propTypes: {
-	    // ok click callback
-	    ok: React.PropTypes.func,
-	    // cancel click callback
-	    cancel: React.PropTypes.func,
-	    // LogoutStatus event handler を bind する
-	    listen: React.PropTypes.bool
-	  },
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      ok: null,
-	      cancel: null,
-	      type: 'logout',
-	      // PC: 不要(false), SP: 要(true)
-	      // 設計が悪く PC, SP で実装方法が変わってしまった
-	      // PC true にすると二重にマウントされる...かも
-	      listen: false
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    this.status = null;
-	    this.ok = null;
-	    this.cancel = null;
+	var SPPageTop = function () {
+	  /**
+	   * SP page top に戻るボタン
+	   * @param {Element} element click target
+	   */
+	  function SPPageTop(element) {
+	    (0, _classCallCheck3.default)(this, SPPageTop);
 
-	    return {
-	      show: false,
-	      css: { opacity: 0 }
-	    };
-	  },
-	  render: function render() {
-
-	    if (this.state.show) {
-	      return React.createElement(
-	        'div',
-	        { className: 'modal-dialogue modal-dialogue_delete', ref: 'modalContainer', style: this.state.css },
-	        React.createElement('div', { className: 'modal-bg', onClick: this.cancelClick }),
-	        React.createElement(
-	          'div',
-	          { className: 'modal-dialogue-contents ' + this.props.type },
-	          React.createElement(
-	            'a',
-	            { href: '#', className: 'modal-dialogue-close', onClick: this.cancelClick },
-	            _Message.Message.BUTTON_CLOSE
-	          ),
-	          React.createElement(
-	            'p',
-	            { className: 'lead' },
-	            _Message.Message.LOGOUT
-	          ),
-	          React.createElement(
-	            'ul',
-	            { className: 'btn-block' },
-	            React.createElement(
-	              'li',
-	              { className: 'btn-item' },
-	              React.createElement(
-	                'a',
-	                { href: '#', className: 'btn-link btn-link_cancel', onClick: this.cancelClick },
-	                _Message.Message.BUTTON_NO
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              { className: 'btn-item' },
-	              React.createElement(
-	                'a',
-	                { href: '#', className: 'btn-link btn-link_submit', onClick: this.okClick },
-	                _Message.Message.BUTTON_YES
-	              )
-	            )
-	          )
-	        )
-	      );
-	    } else {
-	      // not show
-	      return null;
-	    }
-	  },
-	  componentDidMount: function componentDidMount() {
-	    if (this.props.listen) {
-	      var status = _LogoutStatus.LogoutStatus.factory();
-	      this.status = status;
-	      status.on(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
-	      status.on(_LogoutStatus.LogoutStatus.CLOSE, this.onClose);
-	    }
-	  },
-	  componentWillUnMount: function componentWillUnMount() {
-	    var status = this.status;
-	    if (status !== null) {
-	      status.off(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
-	      status.off(_LogoutStatus.LogoutStatus.CLOSE, this.onClose);
-	      this.status = null;
-	    }
-	  },
-	  cancelClick: function cancelClick(event) {
-	    event.preventDefault();
-	    if (typeof this.cancel === 'function') {
-	      this.cancel();
-	    } else if (typeof this.props.cancel === 'function') {
-	      this.props.cancel();
-	    }
-	    this.closeModal();
-	  },
-	  okClick: function okClick(event) {
-	    event.preventDefault();
-	    if (typeof this.ok === 'function') {
-	      this.ok();
-	    } else if (typeof this.props.ok === 'function') {
-	      this.props.ok();
-	    } else {
-	      // this.ok, this.props.ok どちらも function でなかったら
-	      // logout 処理を行う
-	      _User.User.logout();
-	      _Loc.Loc.index();
-	    }
-	    this.closeModal(0.5);
-	  },
-	  openModal: function openModal() {
-	    var object = { opacity: 0 };
-	    var _this = this;
-
-	    TweenLite.to(object, 0.5, {
-	      opacity: 1,
-	      easing: easing.Linear.easeNone,
-	      onUpdate: function onUpdate() {
-	        _this.setState({ css: { opacity: object.opacity } });
-	      },
-	      onComplete: function onComplete() {
-	        _this.setState({ css: { opacity: 1 } });
-	      }
-	    });
-	  },
-	  closeModal: function closeModal() {
-	    var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
-	    var object = { opacity: 1 };
-	    var _this = this;
-
-	    TweenLite.to(object, 0.5, {
-	      delay: delay,
-	      opacity: 0,
-	      easing: easing.Linear.easeNone,
-	      onUpdate: function onUpdate() {
-	        _this.setState({ css: { opacity: object.opacity } });
-	      },
-	      onComplete: function onComplete() {
-	        _this.setState({ css: { opacity: 0 }, show: false });
-	      }
-	    });
-	  },
-	  updateShow: function updateShow(show) {
-	    this.setState({ show: show });
-	    if (show) {
-	      this.openModal();
-	    }
-	  },
-	  onOpen: function onOpen(event) {
-	    this.ok = event.ok;
-	    this.cancel = event.cancel;
-	    this.updateShow(true);
-	  },
-	  onClose: function onClose() {
-	    this.ok = null;
-	    this.cancel = null;
+	    /**
+	     * click target
+	     * @type {Element}
+	     */
+	    this.element = element;
+	    // this.onComplete = this.onComplete.bind(this);
+	    /**
+	     * bind onClick
+	     * @type {any}
+	     */
+	    this.onClick = this.onClick.bind(this);
+	    /**
+	     * motion 可能 flag
+	     * @type {boolean}
+	     */
+	    this.can = true;
 	  }
-	});
+
+	  /**
+	   * click event handler - page top 戻るアニメーション開始
+	   * @param {Event} event click Event
+	   */
+
+
+	  (0, _createClass3.default)(SPPageTop, [{
+	    key: 'onClick',
+	    value: function onClick(event) {
+	      event.preventDefault();
+	      this.move();
+	    }
+	    // onComplete() {
+	    //   this.can = true;
+	    // }
+	    /**
+	     * page top 戻るアニメーション開始
+	     * - `can` flag チェックし可能なら開始します
+	     */
+
+	  }, {
+	    key: 'move',
+	    value: function move() {
+	      var _this = this;
+
+	      if (!this.can) {
+	        return;
+	      }
+	      this.can = false;
+	      // scrolling
+	      TweenLite.to(window, 0.5, {
+	        scrollTo: {
+	          y: 0,
+	          autoKill: false
+	        },
+	        // easing
+	        ease: easing.Power4.easeInOut,
+	        onComplete: function onComplete() {
+	          _this.can = true;
+	        }
+	      });
+	    }
+	    /**
+	     * click event を監視します
+	     */
+
+	  }, {
+	    key: 'start',
+	    value: function start() {
+	      this.element.addEventListener('click', this.onClick, false);
+	    }
+	  }]);
+	  return SPPageTop;
+	}();
+
+	exports.default = SPPageTop;
 
 /***/ }),
-/* 172 */
-/***/ (function(module, exports) {
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	/**
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2018/04/19 - 12:49
+	 * @date 2018/04/19 - 19:20
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -18662,13 +18265,30 @@
 	 *
 	 */
 
-	// vk mobile 実行ファイル
+	var prefix = '';
 
-	var mobile = function mobile() {
-	  console.log('mobile');
-	};
+	/**
+	 * VK - 設定ファイル
+	 */
 
-	exports.default = mobile();
+	var VK = function () {
+	  function VK() {
+	    (0, _classCallCheck3.default)(this, VK);
+	  }
+
+	  (0, _createClass3.default)(VK, null, [{
+	    key: 'prefix',
+	    get: function get() {
+	      return prefix;
+	    },
+	    set: function set(dataPrefix) {
+	      prefix = dataPrefix;
+	    }
+	  }]);
+	  return VK;
+	}();
+
+	exports.default = VK;
 
 /***/ })
 /******/ ]);

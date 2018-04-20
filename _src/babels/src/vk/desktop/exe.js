@@ -12,9 +12,9 @@
 import Dom from '../../app/Dom';
 import ViewHeaderSearch from '../../view/header/ViewHeaderSearch';
 // import ViewDeleteModal from '../../view/modal/ViewDeleteModal';
-import ViewFlushModal from '../../view/modal/ViewFlushModal';
+// import ViewFlushModal from '../../view/modal/ViewFlushModal';
 import ViewHeaderUser from '../../view/header/ViewHeaderUser';
-import ViewLogoutModal from '../../view/modal/ViewLogoutModal';
+// import ViewLogoutModal from '../../view/modal/ViewLogoutModal';
 import PageTop from '../../ui/PageTop';
 
 
@@ -32,16 +32,17 @@ const search = () => {
   }
 };
 
-/**
- * ログインユーザーのログアウトモーダル
- */
-const modalLogout = () => {
-  const element = Dom.logoutModal();
-  if (element) {
-    const view = new ViewLogoutModal(element, null, null, true);
-    view.start();
-  }
-};
+// ログインユーザー表示無しなので何もしない
+// /**
+//  * ログインユーザーのログアウトモーダル
+//  */
+// const modalLogout = () => {
+//   const element = Dom.logoutModal();
+//   if (element) {
+//     const view = new ViewLogoutModal(element, null, null, true);
+//     view.start();
+//   }
+// };
 
 /**
  * ユーザーインフォメーション
@@ -52,7 +53,7 @@ const header = () => {
     const view = new ViewHeaderUser(element, {}, true);
     view.start();
     // modal
-    modalLogout();
+    // modalLogout();
   }
 };
 
@@ -68,16 +69,17 @@ const header = () => {
 //   }
 // };
 
-/**
- * 実行後の flush modal
- */
-const modalFlush = () => {
-  const element = Dom.flushModal();
-  if (element) {
-    const view = new ViewFlushModal(element, {}, true);
-    view.start();
-  }
-};
+// API 叩かないので flush modal いらない
+// /**
+//  * 実行後の flush modal
+//  */
+// const modalFlush = () => {
+//   const element = Dom.flushModal();
+//   if (element) {
+//     const view = new ViewFlushModal(element, {}, true);
+//     view.start();
+//   }
+// };
 
 /**
  * vk - desktop 実行します
@@ -88,7 +90,7 @@ const desktop = () => {
   pageTop.init();
   // modal 準備
   // modalDelete();
-  modalFlush();
+  // modalFlush();
   // header - user
   header();
   // 検索フォーム
