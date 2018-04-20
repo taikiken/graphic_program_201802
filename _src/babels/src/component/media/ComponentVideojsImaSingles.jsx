@@ -181,6 +181,9 @@ export default class ComponentVideojsImaSingles extends React.Component {
     };
     player.ima(option);
 
+    // videojsが生成する動画に `playsinline` つける
+    document.getElementById(videoId + '_html5_api').setAttribute('playsinline', 'playsinline');
+
     // player.ima.initializeAdDisplayContainer();
     // player.ima.requestAds();
 
@@ -214,6 +217,7 @@ export default class ComponentVideojsImaSingles extends React.Component {
       // 記事詳細マルチプレイヤー・動画再生時に広告リクエスト
       player.ima.initializeAdDisplayContainer();
       player.ima.requestAds();
+      adContainer.querySelector('div').style.display = 'block';
       // ---
       player.play();
     });
@@ -337,6 +341,8 @@ export default class ComponentVideojsImaSingles extends React.Component {
             width={`${width}px`}
             height={`${height}px`}
             controls="controls"
+            playsInline="playsInline"
+            ref={(node) => (node.setAttribute('webkit-playsinline', 'webkit-playsinline'))}
           >
               <source
                 src={url}

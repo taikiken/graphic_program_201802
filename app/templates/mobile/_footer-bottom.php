@@ -81,8 +81,10 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
   window.addEventListener('resize', function () {
     if ( videojs ) {
       var player = videojs.getPlayers().content_video;
-      player.width(window.innerWidth);
-      player.height(Math.ceil( window.innerWidth / 16 * 9 ));
+      if ( player ) {
+        player.width(window.innerWidth);
+        player.height(Math.ceil( window.innerWidth / 16 * 9 ));
+      }
     }
   });
 </script>
@@ -109,4 +111,20 @@ s.parentNode.insertBefore(bs, s);
 })();
 -->
 </script>
+<?php endif; ?>
+
+
+<?php // UNDO_SPBL-512 - 野球カテゴリ詳細ではappbnrださない ?>
+<?php if ($page['category']['slug'] === 'baseball' && $page['template'] === 'p' ) : ?>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("js-header-appbnr-container").remove();
+  Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+});
+</script>
+<style>
+.header-sticky + .body-sec {
+  margin-top: 75px;
+}
+</style>
 <?php endif; ?>
