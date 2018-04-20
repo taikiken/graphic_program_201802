@@ -69,10 +69,15 @@ export class Url {
   // ---------------------------------------------------
   /**
    * URL index
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {string} index url を返します
    */
-  static index() {
-    return '/';
+  static index(vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    return `${Url.host}/`;
   }
   /**
    * category url
@@ -207,11 +212,16 @@ export class Url {
   }
   /**
    * SP 専用
-   * https://github.com/undotsushin/undotsushin/commit/6a99fb16401dd80f5ac1a5c9174b9b93a13408af
+   * - @see https://github.com/undotsushin/undotsushin/commit/6a99fb16401dd80f5ac1a5c9174b9b93a13408af
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {string} signup_login url を返します
    */
-  static signupLogin() {
-    return '/signup_login/';
+  static signupLogin(vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    return `${Url.host}/signup_login/`;
   }
   /**
    * reset_password url
@@ -236,10 +246,15 @@ export class Url {
   /**
    * mypage url
    * @param {string} [path=''] path option
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {*} mypage url を返します
    */
-  static mypage(path = '') {
-    const base = '/mypage/';
+  static mypage(path = '', vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    const base = `${Url.host}/mypage/`;
 
     switch (path) {
       case 'activities':
@@ -295,10 +310,15 @@ export class Url {
   /**
    * about url
    * @param {string} [path=''] path option
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {*} about url を返します
    */
-  static about(path = '') {
-    const base = '/about/';
+  static about(path = '', vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    const base = `${Url.host}/about/`;
     switch (path) {
       case 'company':
         return `${base}company`;

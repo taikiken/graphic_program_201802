@@ -15,15 +15,18 @@ import SPViewAppBanner from '../../sp/view/SPViewAppBanner';
 import SPViewHeaderSearch from '../../sp/view/header/SPViewHeaderSearch';
 import SPViewHeaderUser from '../../sp/view/header/SPViewHeaderUser';
 import SPPageTop from '../../sp/ui/SPPageTop';
+import SPViewSyn from '../../sp/view/SPViewSyn';
 
 // vk mobile 実行ファイル
 /**
- * header
+ * syn.menu
  */
-const header = () => {
-  const element = Dom.profile(true);
-  if (element) {
-    const view = new SPViewHeaderUser(element, {}, true);
+const syn = () => {
+  const element = Dom.service(true);
+  const button = Dom.serviceOpener(true);
+  const menu = Dom.serviceMenu(true);
+  if (element && button && menu) {
+    const view = new SPViewSyn(element, button, menu, null, true);
     view.start();
   }
 };
@@ -39,6 +42,18 @@ const search = () => {
     view.start();
   }
 };
+
+/**
+ * header
+ */
+const header = () => {
+  const element = Dom.profile(true);
+  if (element) {
+    const view = new SPViewHeaderUser(element, {}, true);
+    view.start();
+  }
+};
+
 
 /**
  * アプリケーションバナー
@@ -79,6 +94,8 @@ const top = () => {
  * SP - vk 実行
  */
 const mobile = () => {
+  // syn.menu
+  syn();
   // page top
   top();
   // // modal 準備

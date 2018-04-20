@@ -205,7 +205,7 @@ export default class SPComponentHeaderMemberSetting extends React.Component {
     const loggedIn = Safety.same(iconImg, `${Url.host}${Empty.USER_EMPTY}`);
     return (
       <div className="user">
-        <div className="preference">  
+        <div className="preference">
           {/*
           UNDO_SPBL-403 【Web】記事ブックマーク / コメント機能の廃止にともなう対応
           ログイン後のユーザーアイコンのリンク先を /settings/ に

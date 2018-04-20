@@ -128,24 +128,30 @@ export default class Dom {
   // synapse
   /**
    * synapse 切り替えメニュー
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} side-menu-service element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static service() {
-    return Dom.get('side-menu-service');
+  static service(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}side-menu-service`);
   }
   /**
    * side メニュー
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} side-menu-container element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static serviceMenu() {
-    return Dom.get('side-menu-container');
+  static serviceMenu(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}side-menu-container`);
   }
   /**
    * side メニュー open / close button
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} menu-opener element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static serviceOpener() {
-    return Dom.get('menu-opener');
+  static serviceOpener(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}menu-opener`);
   }
 
   // --------------------------------------
