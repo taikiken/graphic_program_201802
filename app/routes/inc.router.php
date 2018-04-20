@@ -137,12 +137,16 @@ $app->group('/inc', function () use ($app) {
     // ------------------------------
     switch ($args['device']) :
       case 'responsive':
+        $ua = 'desktop';
         break;
       case 'desktop':
+        $ua = 'desktop';
         break;
       case 'mobile':
+        $ua = 'mobile';
         break;
       default:
+        $ua = 'desktop';
     endswitch;
 
 
@@ -152,12 +156,13 @@ $app->group('/inc', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'template'    => 'inc',
+      'html_prefix' => 'SPBL_',
+      'ua'          => $ua,
       'category'    => $category,
       'conditional' => $conditional,
       'directory'   => $args['cateogry'],
       'query'       => $query,
       'path'        => $args,
-      'html_prefix' => 'SPBL_',
     ));
 
     return $this->renderer->render($response, 'inc.php', $args);
