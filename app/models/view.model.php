@@ -95,7 +95,37 @@ class ViewModel {
     'args'               => '',
 
     // version - #789 静的ファイルのバージョン
-    'version'            => ''
+    'version'            => '',
+
+    'conditional'        => array(
+      'html_start'       => true, // <!DOCTYPE〜
+      'head'             => true, // <head>
+      'head_title'       => true, // <title>
+      'head_sagen'       => true, // sagen.js
+      'head_assets'      => true, // css & js
+      'head_viewport'    => true, // viewport
+      'head_seo'         => true, // keyword & description
+      'head_ogp'         => true, // fb:ogp, twitter:card
+      'head_canonical'   => true, // canonical
+      'head_syn'         => true, // synextbot
+      'head_icon'        => true, // apple-touch-icon
+      'head_bottom'      => true,
+      'head_video'       => true, // streampack video code
+      'body_start'       => true, // </head><body>
+      'whole'            => true, // <div class="whole">
+      'header'           => true, // <header>
+      'header_appbnr'    => true, // sp用冒頭のアプリバナー
+      'gnav'             => true, // <nav>
+      'announce'         => true, // <announce>
+      'sidemenu'         => true, // sp - sidemenu
+      'footer'           => true, // <footer>
+      'footer_copyright' => false, // small footer
+      'footer_modal'     => true, // modal dom
+      'footer_script'    => true, // js
+      'html_end'         => true, // </html>
+    ),
+
+    'html_prefix' => '', // HTMLのid/classの接頭, テンプレ書き換え後に`SPBL_`になる予定
 
   );
 
