@@ -44,11 +44,11 @@ endif;
 ?>
 
 <?php if ( $page['conditional']['sidemenu'] ) : ?>
-<div id="side-menu-container" class="SPBL_common">
-  <div id="side-menu-bg"></div>
-  <div id='side-menu'>
-    <ul id="side-menu-list">
-      <li id="side-menu-service">
+<div id="<?php echo $page['html_prefix']; ?>side-menu-container" class="SPBL_common">
+  <div id="<?php echo $page['html_prefix']; ?>side-menu-bg"></div>
+  <div id='<?php echo $page['html_prefix']; ?>side-menu'>
+    <ul id="<?php echo $page['html_prefix']; ?>side-menu-list">
+      <li id="<?php echo $page['html_prefix']; ?>side-menu-service">
         <ul>
           <!-- Service Specific Menu -->
           <li class="<?php echo $page['html_prefix']; ?>side-menu-ut-nav"><a class="<?php echo $page['html_prefix']; ?>side-menu-ut-nav-link <?php echo $page['html_prefix']; ?>side-menu-ut-nav-home" href="#"><i></i>スポーツブルトップへ</a></li>
@@ -97,14 +97,14 @@ endif;
 
       <li>
         <!-- Syn. Service List -->
-        <div id='synapse-service-list-outer-box' style='display: none'>
-          <ul id='synapse-service-list'>
-            <li id="synapse-service-list-title">おすすめサービス</li>
+        <div id='<?php echo $page['html_prefix']; ?>synapse-service-list-outer-box' style='display: none'>
+          <ul id='<?php echo $page['html_prefix']; ?>synapse-service-list'>
+            <li id="<?php echo $page['html_prefix']; ?>synapse-service-list-title">おすすめサービス</li>
           </ul>
         </div>
 
         <!-- Syn. Logo -->
-        <div id="synapse-logo-box" class="synapse_logo" style='display: none'></div>
+        <div id="<?php echo $page['html_prefix']; ?>synapse-logo-box" class="<?php echo $page['html_prefix']; ?>synapse_logo" style='display: none'></div>
       </li>
 
     </ul>

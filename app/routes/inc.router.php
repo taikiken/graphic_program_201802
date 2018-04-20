@@ -31,8 +31,9 @@ $app->group('/inc', function () use ($app) {
           'head_ogp'         => false,
           'head_canonical'   => false,
           'head_syn'         => false,
-          'head_icon'        => true,
-          'head_bottom'      => true,
+          'head_icon'        => false,
+          'head_env'         => false,
+          'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
           'whole'            => false,
@@ -61,6 +62,7 @@ $app->group('/inc', function () use ($app) {
           'head_canonical'   => false,
           'head_syn'         => false,
           'head_icon'        => false,
+          'head_env'         => false,
           'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
@@ -91,6 +93,7 @@ $app->group('/inc', function () use ($app) {
           'head_canonical'   => false,
           'head_syn'         => false,
           'head_icon'        => false,
+          'head_env'         => false,
           'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
@@ -101,16 +104,19 @@ $app->group('/inc', function () use ($app) {
           'sidemenu'         => true,
           'footer'           => true,
           'footer_copyright' => false,
-          'footer_modal'     => true,
-          'footer_script'    => true,
+          'footer_modal'     => false,
+          'footer_script'    => false,
           'html_end'         => false,
         );
         break;
+
       default:
       $conditional = array(
-        'whole'    => false,
-        'announce' => false,
+        'header_appbnr' => false,
+        'whole'         => false,
+        'announce'      => false,
       );
+
     endswitch;
 
     // category
@@ -132,12 +138,16 @@ $app->group('/inc', function () use ($app) {
     // ------------------------------
     switch ($args['device']) :
       case 'responsive':
+        $ua = 'desktop';
         break;
       case 'desktop':
+        $ua = 'desktop';
         break;
       case 'mobile':
+        $ua = 'mobile';
         break;
       default:
+        $ua = 'desktop';
     endswitch;
 
 
@@ -147,12 +157,13 @@ $app->group('/inc', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'template'    => 'inc',
+      'html_prefix' => 'SPBL_',
+      'ua'          => $ua,
       'category'    => $category,
       'conditional' => $conditional,
       'directory'   => $args['cateogry'],
       'query'       => $query,
       'path'        => $args,
-      'html_prefix' => 'SPBL_',
     ));
 
     return $this->renderer->render($response, 'inc.php', $args);
@@ -173,7 +184,8 @@ $app->group('/inc', function () use ($app) {
 
       if ( $file ) :
         $replace_pairs = array(
-          'url(/'        => 'url(https://sportsbull.jp/',
+          'url(/'        => 'url('.$app->model->property('site_url_uts').'/',
+          'url("/'       => 'url("'.$app->model->property('site_url_uts').'/',
           '#head'        => '#SPBL_head',
           '#side'        => '#SPBL_side',
           '#skiplinkSec' => '#SPBL_skiplinkSec',

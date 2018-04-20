@@ -9,6 +9,7 @@ class ViewModel {
     'site_name'          => 'スポーツブル (スポブル)',
     'site_tagline'       => '完全無料のスポーツアプリ',
     'site_url'           => '', // サイトURL - サーバから取得
+    'site_url_uts'       => '', // サイトURLから末のスラッシュを除去したもの
     'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
 
     'site_categories'    => '', // ナビ用サイトカテゴリー DBから取得
@@ -109,7 +110,8 @@ class ViewModel {
       'head_canonical'   => true, // canonical
       'head_syn'         => true, // synextbot
       'head_icon'        => true, // apple-touch-icon
-      'head_bottom'      => true,
+      'head_env'         => true, // SPBL_ENV
+      'head_bottom'      => true, // ga/dfp系タグ
       'head_video'       => true, // streampack video code
       'body_start'       => true, // </head><body>
       'whole'            => true, // <div class="whole">
@@ -139,6 +141,7 @@ class ViewModel {
 
     // site
     $this->default['site_url']        = $this->get_site_url();
+    $this->default['site_url_uts']    = rtrim($this->default['site_url'], '/');
 
     if ( UT_ENV === 'LOCAL') :
       # 2016-04-27
@@ -228,10 +231,10 @@ class ViewModel {
   public function get_site_url($addSlash = true) {
 
     // PRODUCTIONで `$_SERVER["HTTPS"]` が取得できてないようなので強制的にhttps
-    if ( !empty($_SERVER["HTTPS"]) || UT_ENV == 'PRODUCTION' ) :
-      $protocol = "https://";
-    else :
+    if ( UT_ENV === 'LOCAL' ) :
       $protocol = "http://";
+    else :
+      $protocol = "https://";
     endif;
 
     $host = $_SERVER['HTTP_HOST'];
