@@ -1,4 +1,11 @@
 (function() {
+	
+	if ( location.hostname.match(/dev./)) {
+		jsondevurl = "dev-";
+	} else {
+		jsondevurl = "";
+	}
+	
 	var year,teamId,playerId;
 	var setting = function(){
 		getData(year,teamId,playerId);
@@ -31,7 +38,7 @@
 				}
 			}
 		}
-		req.open('GET', "https://jlive.sportsbull.jp/json/v1/year.json");
+		req.open('GET', "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/year.json");
 		req.send(null);
 	}();
 
@@ -45,7 +52,7 @@
 		return wday;
 	}
 	var getData = function(year,teamId,playerId){
-		var url = "https://jlive.sportsbull.jp/json/v1/"+year+"/jleague/team/"+teamId+"/"+playerId+".json";
+		var url = "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/"+year+"/jleague/team/"+teamId+"/"+playerId+".json";
 		var req = new XMLHttpRequest(),data = {};
 		req.onreadystatechange = function(){
 			if( this.readyState == 4 && this.status == 200 ){

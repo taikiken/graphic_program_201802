@@ -1,4 +1,11 @@
 (function() {
+	
+	if ( location.hostname.match(/dev./)) {
+		jsondevurl = "dev-";
+	} else {
+		jsondevurl = "";
+	}
+	
 	var situationId = false,gameId,year;
 	window.onload = function() {
 		getData(year,gameId,situationId);
@@ -40,7 +47,7 @@
 				}
 			}
 		}
-		req.open('GET', "https://jlive.sportsbull.jp/json/v1/"+y+"/jleague/schedule/"+m+"-"+d+".json");
+		req.open('GET', "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/"+y+"/jleague/schedule/"+m+"-"+d+".json");
 		req.send(null);
 	};
 	var createOtherGame = function(data,m,d){
@@ -80,7 +87,7 @@
 		}
 	}
 	var getData = function(y,id,situationId){
-		var url = "https://jlive.sportsbull.jp/json/v1/"+y+"/jleague/"+id+".json",req = new XMLHttpRequest(),data = {};
+		var url = "https://"+jsondevurl+"jlive.sportsbull.jp/json/v1/"+y+"/jleague/"+id+".json",req = new XMLHttpRequest(),data = {};
 		req.onreadystatechange = function(){
 			if (this.readyState == 4) {
 				// data = JSON.parse(req.response);
