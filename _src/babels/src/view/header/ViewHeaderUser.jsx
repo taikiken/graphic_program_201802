@@ -22,6 +22,7 @@ import {User} from '../../app/User';
 
 // event
 import {UserStatus} from '../../event/UserStatus';
+import VK from '../../vk/VK';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -43,11 +44,11 @@ const ReactDOM = self.ReactDOM;
  * @constructor
  * @since 2017-12-08 - update element
  */
-const HeaderUserComponent = ({ signup, login }) => (
-  <div className="user">
-    <div className="user-signup-btn">
-      <a href={login} className="user-signup-btn--login">ログイン</a>
-      <a href={signup} className="user-signup-btn--signup">無料会員登録</a>
+const HeaderUserComponent = ({ signup, login, prefix }) => (
+  <div className={`${prefix}user`}>
+    <div className={`${prefix}user-signup-btn`}>
+      <a href={login} className={`${prefix}user-signup-btn--login`}>ログイン</a>
+      <a href={signup} className={`${prefix}user-signup-btn--signup`}>無料会員登録</a>
     </div>
   </div>
 );
@@ -59,6 +60,15 @@ const HeaderUserComponent = ({ signup, login }) => (
 HeaderUserComponent.propTypes = {
   signup: React.PropTypes.string.isRequired,
   login: React.PropTypes.string.isRequired,
+  prefix: React.PropTypes.string,
+};
+
+/**
+ * React.defaultProps
+ * @type {{prefix: string}}
+ */
+HeaderUserComponent.defaultProps = {
+  prefix: '',
 };
 
 /**
@@ -153,7 +163,7 @@ export default class ViewHeaderUser extends View {
       <HeaderUserComponent
         signup={Url.signup('', this.vk)}
         login={Url.login(this.vk)}
-        vk={this.vk}
+        prefix={VK.prefix(this.vk)}
       />,
       this.element,
     );

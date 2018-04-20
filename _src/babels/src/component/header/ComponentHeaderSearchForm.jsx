@@ -13,6 +13,7 @@ import { ErrorMessage } from '../../data/ErrorMessage';
 import { SearchStatus } from '../../event/SearchStatus';
 import { Url } from '../../app/const/Url';
 import { Message } from '../../app/const/Message';
+import VK from '../../vk/VK';
 // React
 /**
  * [library] - React
@@ -196,13 +197,14 @@ export default class ComponentHeaderSearchForm extends React.Component {
     if (!show) {
       return null;
     }
-
-    const { listen } = this.props;
-    const errorClass = this.errors.keyword.error ? 'error' : '';
+    const { listen, vk } = this.props;
+    const prefix = VK.prefix(vk);
+    const errorClass = this.errors.keyword.error ? `${prefix}error` : '';
+    const enableClass = enable ? `${prefix}${enable}` : '';
 
     return (
       <div
-        className={`head-search form-parts ${errorClass} ${enable}`}
+        className={`${prefix}head-search ${prefix}form-parts ${errorClass} ${enableClass}`}
       >
         <form onSubmit={this.onSubmit}>
           <input

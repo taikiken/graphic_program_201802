@@ -40,9 +40,11 @@ const Sagen = self.Sagen;
 export default class PageTop {
   /**
    * PageTop instance を作成し init 関数をコールします
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static start() {
-    const pageTop = new PageTop();
+  static start(vk = false) {
+    const pageTop = new PageTop(vk);
     pageTop.init();
   }
   // ---------------------------------------------------
@@ -50,8 +52,10 @@ export default class PageTop {
   // ---------------------------------------------------
   /**
    * page top に戻る motion
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2018-04-19 vk header - flag 追加
    */
-  constructor() {
+  constructor(vk = false) {
     /**
      * bind 済み this.onScroll
      * @type {Function}
@@ -108,6 +112,12 @@ export default class PageTop {
      * @since 2016-10-28
      */
     this.topButton = TopButton.factory();
+    /**
+     * VK（バーチャル甲子園）flag
+     * @type {boolean}
+     * @since 2018-04-19 vk header - flag 追加
+     */
+    this.vk = vk;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -116,7 +126,7 @@ export default class PageTop {
    * click event を bind します
    */
   init() {
-    const element = Dom.pageTop();
+    const element = Dom.pageTop(this.vk);
     if (element === null) {
       return;
     }

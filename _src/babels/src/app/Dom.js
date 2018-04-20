@@ -11,7 +11,8 @@
  */
 
 
-import {Safety} from '../data/Safety';
+import { Safety } from '../data/Safety';
+import VK from '../vk/VK';
 
 // const _symbol = Symbol('Dom');
 
@@ -21,18 +22,6 @@ import {Safety} from '../data/Safety';
  * - 全て static です
  */
 export default class Dom {
-  // /**
-  //  * <p>PC / SP 共通です<br>
-  //  * static class です, instance を作成しません</p>
-  //  * @param {Symbol} target Singleton を実現するための private symbol
-  //  */
-  // constructor( target ) {
-  //   if ( _symbol !== target ) {
-  //
-  //     throw new Error( 'Dom is static Class. not use new Dom().' );
-  //
-  //   }
-  // }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -70,21 +59,25 @@ export default class Dom {
   }
   /**
    * div#js-page_top - for sp
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @returns {?Element} div#js-page_top - for sp
    * @since 2017-10-23
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static jsPageTop() {
-    return Dom.get('js-page_top');
+  static jsPageTop(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}js-page_top`);
   }
   /**
    * pageTop container
    * - 2017-08-24 - `#js-page_top` を使用しているページに対応するため取得 ID を増やす
    * - `pageTop`
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} pageTop element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static pageTop() {
+  static pageTop(vk = false) {
     // return Dom.get('pageTop') || Dom.get('js-page_top');
-    return Dom.get('pageTop') || Dom.jsPageTop();
+    return Dom.get(`${VK.prefix(vk)}pageTop`) || Dom.jsPageTop(vk);
   }
   // --------------------------------------
   // header
@@ -97,17 +90,21 @@ export default class Dom {
   }
   /**
    * header user profile
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} 'user-profile-container' element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static profile() {
-    return Dom.get('user-profile-container');
+  static profile(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}user-profile-container`);
   }
   /**
    * header search from
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} head-search-container element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static search() {
-    return Dom.get('head-search-container');
+  static search(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}head-search-container`);
   }
   /**
    * header search from opener

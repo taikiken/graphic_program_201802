@@ -10,7 +10,7 @@
  *
  */
 import Dom from '../../app/Dom';
-import ViewFlushModal from '../../view/modal/ViewFlushModal';
+// import ViewFlushModal from '../../view/modal/ViewFlushModal';
 import SPViewAppBanner from '../../sp/view/SPViewAppBanner';
 import SPViewHeaderSearch from '../../sp/view/header/SPViewHeaderSearch';
 import SPViewHeaderUser from '../../sp/view/header/SPViewHeaderUser';
@@ -50,16 +50,16 @@ const appBanner = () => {
   }
 };
 
-/**
- * 実行後の flush modal
- */
-const modalFlush = () => {
-  const element = Dom.flushModal();
-  if (element) {
-    const view = new ViewFlushModal(element, {}, true);
-    view.start();
-  }
-};
+// /**
+//  * 実行後の flush modal
+//  */
+// const modalFlush = () => {
+//   const element = Dom.flushModal();
+//   if (element) {
+//     const view = new ViewFlushModal(element, {}, true);
+//     view.start();
+//   }
+// };
 
 /**
  * page top 戻るアニメーション
@@ -81,8 +81,8 @@ const pageTop = () => {
 const mobile = () => {
   // page top
   pageTop();
-  // modal 準備
-  modalFlush();
+  // // modal 準備
+  // modalFlush();
   // app banner
   appBanner();
   // header

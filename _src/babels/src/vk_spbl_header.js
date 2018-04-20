@@ -50,7 +50,7 @@ const init = (selector) => {
   const domain = script.dataset.domain || '';
   const prefix = script.dataset.prefix || '';
   Url.host = domain;
-  VK.prefix = prefix;
+  VK.PREFIX = prefix;
   return true;
 };
 

@@ -21,10 +21,10 @@ import PageTop from '../../ui/PageTop';
 // VK desktop 実行ファイル
 
 /**
- * 検索フォーム
+ * 検索フォーム - vk flag true 実行します
  */
 const search = () => {
-  const element = Dom.search();
+  const element = Dom.search(true);
   if (element) {
     // vk flag: true でリクエストする
     const view = new ViewHeaderSearch(element, {}, true);
@@ -45,10 +45,10 @@ const search = () => {
 // };
 
 /**
- * ユーザーインフォメーション
+ * ユーザーインフォメーション - vk flag true 実行します
  */
 const header = () => {
-  const element = Dom.profile();
+  const element = Dom.profile(true);
   if (element) {
     const view = new ViewHeaderUser(element, {}, true);
     view.start();
@@ -82,12 +82,19 @@ const header = () => {
 // };
 
 /**
+ * page top button - desktop - vk flag true 実行します
+ */
+const top = () => {
+  // page top
+  const pageTop = new PageTop(true);
+  pageTop.init();
+};
+
+/**
  * vk - desktop 実行します
  */
 const desktop = () => {
-  // page top
-  const pageTop = new PageTop();
-  pageTop.init();
+  top();
   // modal 準備
   // modalDelete();
   // modalFlush();

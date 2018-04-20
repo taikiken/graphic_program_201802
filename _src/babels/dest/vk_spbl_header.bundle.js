@@ -48,7 +48,7 @@
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2018/04/19 - 12:41
-	 * buildTime: 2018-4-20 15:41:08
+	 * buildTime: 2018-4-20 16:19:15
 	 * @license MIT
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -63,13 +63,13 @@
 
 	var _vk2 = _interopRequireDefault(_vk);
 
-	var _VK = __webpack_require__(166);
+	var _VK = __webpack_require__(164);
 
 	var _VK2 = _interopRequireDefault(_VK);
 
 	var _Url = __webpack_require__(105);
 
-	var _User = __webpack_require__(113);
+	var _User = __webpack_require__(109);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -130,8 +130,12 @@
 
 	main();
 
+	/**
+	 * global 出力セット
+	 * @type {{build: string, main: main}}
+	 */
 	var SPBL_VK = {
-	  build: '2018-4-20 15:41:08',
+	  build: '2018-4-20 16:19:15',
 	  main: main
 	};
 
@@ -151,7 +155,7 @@
 
 	var _exe2 = _interopRequireDefault(_exe);
 
-	var _exe3 = __webpack_require__(150);
+	var _exe3 = __webpack_require__(145);
 
 	var _exe4 = _interopRequireDefault(_exe3);
 
@@ -194,19 +198,11 @@
 
 	var _ViewHeaderSearch2 = _interopRequireDefault(_ViewHeaderSearch);
 
-	var _ViewFlushModal = __webpack_require__(107);
-
-	var _ViewFlushModal2 = _interopRequireDefault(_ViewFlushModal);
-
-	var _ViewHeaderUser = __webpack_require__(111);
+	var _ViewHeaderUser = __webpack_require__(107);
 
 	var _ViewHeaderUser2 = _interopRequireDefault(_ViewHeaderUser);
 
-	var _ViewLogoutModal = __webpack_require__(145);
-
-	var _ViewLogoutModal2 = _interopRequireDefault(_ViewLogoutModal);
-
-	var _PageTop = __webpack_require__(147);
+	var _PageTop = __webpack_require__(141);
 
 	var _PageTop2 = _interopRequireDefault(_PageTop);
 
@@ -219,6 +215,7 @@
 	 */
 
 	// import ViewDeleteModal from '../../view/modal/ViewDeleteModal';
+	// import ViewFlushModal from '../../view/modal/ViewFlushModal';
 	/**
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
@@ -239,27 +236,30 @@
 	  }
 	};
 
-	/**
-	 * ログインユーザーのログアウトモーダル
-	 */
-	var modalLogout = function modalLogout() {
-	  var element = _Dom2.default.logoutModal();
-	  if (element) {
-	    var view = new _ViewLogoutModal2.default(element, null, null, true);
-	    view.start();
-	  }
-	};
+	// ログインユーザー表示無しなので何もしない
+	// /**
+	//  * ログインユーザーのログアウトモーダル
+	//  */
+	// const modalLogout = () => {
+	//   const element = Dom.logoutModal();
+	//   if (element) {
+	//     const view = new ViewLogoutModal(element, null, null, true);
+	//     view.start();
+	//   }
+	// };
 
 	/**
 	 * ユーザーインフォメーション
 	 */
+
+	// import ViewLogoutModal from '../../view/modal/ViewLogoutModal';
 	var header = function header() {
 	  var element = _Dom2.default.profile();
 	  if (element) {
 	    var view = new _ViewHeaderUser2.default(element, {}, true);
 	    view.start();
 	    // modal
-	    modalLogout();
+	    // modalLogout();
 	  }
 	};
 
@@ -275,16 +275,17 @@
 	//   }
 	// };
 
-	/**
-	 * 実行後の flush modal
-	 */
-	var modalFlush = function modalFlush() {
-	  var element = _Dom2.default.flushModal();
-	  if (element) {
-	    var view = new _ViewFlushModal2.default(element, {}, true);
-	    view.start();
-	  }
-	};
+	// API 叩かないので flush modal いらない
+	// /**
+	//  * 実行後の flush modal
+	//  */
+	// const modalFlush = () => {
+	//   const element = Dom.flushModal();
+	//   if (element) {
+	//     const view = new ViewFlushModal(element, {}, true);
+	//     view.start();
+	//   }
+	// };
 
 	/**
 	 * vk - desktop 実行します
@@ -295,7 +296,7 @@
 	  pageTop.init();
 	  // modal 準備
 	  // modalDelete();
-	  modalFlush();
+	  // modalFlush();
 	  // header - user
 	  header();
 	  // 検索フォーム
@@ -4108,7 +4109,7 @@
 	        this.errors.keyword.message = '***';
 	        this.setState({ error: true });
 	      } else {
-	        location.href = _Url.Url.search(this.state.keyword);
+	        location.href = _Url.Url.search(this.state.keyword, this.props.vk);
 	      }
 	    }
 	    /**
@@ -4590,13 +4591,21 @@
 	    /**
 	     * 検索ページ url
 	     * @param {string} keyword 検索ワード
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
 	     * @return {*|string} 検索ページ url を返します
 	     */
 
 	  }, {
 	    key: 'search',
 	    value: function search(keyword) {
-	      return '/search/' + keyword;
+	      var vk = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+	      // vk - 絶対パスを返す
+	      if (!vk) {
+	        Url.host = '';
+	      }
+	      return Url.host + '/search/' + keyword;
+	      // return `/search/${keyword}`;
 	    }
 	    /**
 	     * signup url
@@ -4911,6 +4920,7 @@
 	    /**
 	     * desktop/p.php line.288 ~ 299, JS で出力のために外部JS file へ
 	     * - React に script を埋め込むのが困難なため外部スクリプト化しインサートします
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
 	     * @return {string} `/assets/js/pc_popin-recommend.js` を返します
 	     * @since 2016-09-30
 	     */
@@ -4918,7 +4928,14 @@
 	  }, {
 	    key: 'popin',
 	    value: function popin() {
-	      return '/assets/js/pc_popin-recommend.js';
+	      var vk = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      // vk - 絶対パスを返す
+	      if (!vk) {
+	        Url.host = '';
+	      }
+	      return Url.host + '/assets/js/pc_popin-recommend.js';
+	      // return '/assets/js/pc_popin-recommend.js';
 	    }
 	  }, {
 	    key: 'CATEGORY_SLUG',
@@ -5752,1117 +5769,15 @@
 
 	var _View3 = _interopRequireDefault(_View2);
 
-	var _MessageStatus = __webpack_require__(108);
-
-	var _FlushNode = __webpack_require__(109);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// React
-	/* eslint-disable no-unused-vars */
-	/**
-	 * [library] - React
-	 */
-	var React = self.React;
-	/* eslint-enable no-unused-vars */
-	/**
-	 * [library] - ReactDOM
-	 */
-
-
-	// node
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/03/26 - 13:17
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var ReactDOM = self.ReactDOM;
-
-	/**
-	 * フラッシュ・メッセージ・モーダル
-	 */
-
-	var ViewFlushModal = function (_View) {
-	  (0, _inherits3.default)(ViewFlushModal, _View);
-
-	  /**
-	   * フラッシュ・メッセージ・モーダル
-	   * @param {Element} element target HTMLElement
-	   * @param {Object} [option={}] optional event handler
-	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
-	   * @since 2-18-04-19 vk header - flag 追加
-	   */
-	  function ViewFlushModal(element) {
-	    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-	    var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-	    (0, _classCallCheck3.default)(this, ViewFlushModal);
-
-	    /**
-	     * modal instance
-	     * @type {null|Object}
-	     * @private
-	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (ViewFlushModal.__proto__ || (0, _getPrototypeOf2.default)(ViewFlushModal)).call(this, element, option, vk));
-
-	    _this._render = null;
-	    /**
-	     * bind onModal
-	     * @type {function}
-	     */
-	    _this.onModal = _this.onModal.bind(_this);
-	    /**
-	     * 完了・注意など一時表示メッセージイベント instance
-	     * @type {MessageStatus}
-	     */
-	    _this.status = _MessageStatus.MessageStatus.factory();
-	    return _this;
-	  }
-	  /**
-	   * 初期化
-	   */
-
-
-	  (0, _createClass3.default)(ViewFlushModal, [{
-	    key: 'start',
-	    value: function start() {
-	      this.render();
-
-	      var status = this.status;
-	      status.off(_MessageStatus.MessageStatus.FLUSH, this.onModal);
-	      status.on(_MessageStatus.MessageStatus.FLUSH, this.onModal);
-	    }
-	    /**
-	     * component 作成
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      this._render = ReactDOM.render(React.createElement(_FlushNode.FlushNode, {
-	        vk: this.vk
-	      }), this.element);
-	    }
-	    /**
-	     * MessageStatus.FLUSH event handler,
-	     * modal window を open します
-	     * @param {Object} event MessageStatus.FLUSH event instance
-	     */
-
-	  }, {
-	    key: 'onModal',
-	    value: function onModal(event) {
-	      // console.log( 'flush modal event ', event );
-	      this._render.updateShow(true, event.message, event.kind, event.sp);
-	    }
-	  }]);
-	  return ViewFlushModal;
-	}(_View3.default);
-
-	exports.default = ViewFlushModal;
-
-/***/ }),
-/* 108 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.MessageStatus = undefined;
-
-	var _getPrototypeOf = __webpack_require__(85);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(89);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _inherits2 = __webpack_require__(90);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _symbol = __webpack_require__(69);
-
-	var _symbol2 = _interopRequireDefault(_symbol);
-
-	var _EventDispatcher2 = __webpack_require__(96);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * {@link MessageStatus} inner symbol
-	 * @type {symbol}
-	 */
-	var messageStatusSymbol = (0, _symbol2.default)('MessageStatus symbol');
-	/**
-	 * {@link MessageStatus} singleton instance
-	 * @type {?MessageStatus}
-	 * @private
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/24 - 14:31
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	/* eslint constructor-super: 0 */
-
-	var singletonInstance = null;
-
-	// React
-	/* eslint-disable no-unused-vars */
-	/**
-	 * [library] - React
-	 */
-	var React = self.React;
-	/* eslint-enable no-unused-vars */
-
-	/**
-	 * flush message
-	 * - 完了・注意など一時表示メッセージイベント
-	 */
-
-	var MessageStatus = exports.MessageStatus = function (_EventDispatcher) {
-	  (0, _inherits3.default)(MessageStatus, _EventDispatcher);
-	  (0, _createClass3.default)(MessageStatus, null, [{
-	    key: 'message',
-
-	    /**
-	     * Flush modal に表示するメッセージを作成します
-	     * @param {string} txt 表示テキスト
-	     * @return {XML} JSX を返します
-	     */
-	    value: function message() {
-	      var txt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-
-	      return React.createElement(
-	        'div',
-	        { className: 'messageText' },
-	        txt
-	      );
-	    }
-	    // ---------------------------------------------------
-	    //  static method
-	    // ---------------------------------------------------
-	    /**
-	     * instance を生成します
-	     * @return {MessageStatus} MessageStatus instance を返します
-	     */
-
-	  }, {
-	    key: 'factory',
-	    value: function factory() {
-	      if (singletonInstance === null) {
-	        singletonInstance = new MessageStatus(messageStatusSymbol);
-	      }
-	      return singletonInstance;
-	    }
-	    /**
-	     * flush message
-	     * @param {Symbol} target Singleton を実現するための private symbol
-	     * @return {MessageStatus} MessageStatus instance を返します
-	     */
-
-	  }, {
-	    key: 'FLUSH',
-
-	    // ---------------------------------------------------
-	    //  EVENT
-	    // ---------------------------------------------------
-	    /**
-	     * FLUSH message のみ
-	     * @return {string} messageFlush を返します
-	     */
-	    get: function get() {
-	      return 'messageFlush';
-	    }
-	    /**
-	     * CONFIRM confirm window
-	     * @return {string} messageConfirm を返します
-	     */
-
-	  }, {
-	    key: 'CONFIRM',
-	    get: function get() {
-	      return 'messageConfirm';
-	    }
-	    /**
-	     * ALERT alert window
-	     * @return {string} messageAlert を返します
-	     */
-
-	  }, {
-	    key: 'ALERT',
-	    get: function get() {
-	      return 'messageAlert';
-	    }
-	    /**
-	     * comment delete confirm
-	     * @return {string} messageDelete を返します
-	     */
-
-	  }, {
-	    key: 'DELETE',
-	    get: function get() {
-	      return 'messageDelete';
-	    }
-	    /**
-	     * OK_CLICK
-	     * @return {string} messageOkClick
-	     */
-
-	  }, {
-	    key: 'OK_CLICK',
-	    get: function get() {
-	      return 'messageOkClick';
-	    }
-	    /**
-	     * CANCEL_CLICK
-	     * @return {string} messageCancelClick
-	     */
-
-	  }, {
-	    key: 'CANCEL_CLICK',
-	    get: function get() {
-	      return 'messageCancelClick';
-	    }
-	    // ---------------------------------------------------
-	    //  CONST
-	    // ---------------------------------------------------
-	    /**
-	     * メッセージ種類 INFO
-	     * @return {string} info
-	     */
-
-	  }, {
-	    key: 'INFO',
-	    get: function get() {
-	      return 'info';
-	    }
-	    /**
-	     * メッセージ種類 ERROR
-	     * @return {string} error
-	     */
-
-	  }, {
-	    key: 'ERROR',
-	    get: function get() {
-	      return 'error';
-	    }
-	    /**
-	     * メッセージ種類 SUCCESS
-	     * @return {string} success
-	     */
-
-	  }, {
-	    key: 'SUCCESS',
-	    get: function get() {
-	      return 'success';
-	    }
-	  }]);
-
-	  function MessageStatus(target) {
-	    var _ret;
-
-	    (0, _classCallCheck3.default)(this, MessageStatus);
-
-	    if (messageStatusSymbol !== target) {
-	      throw new Error('MessageStatus is static Class. not use new MessageStatus(). instead MessageStatus.factory()');
-	    }
-	    if (singletonInstance === null) {
-	      var _this = (0, _possibleConstructorReturn3.default)(this, (MessageStatus.__proto__ || (0, _getPrototypeOf2.default)(MessageStatus)).call(this));
-
-	      singletonInstance = _this;
-	    }
-	    return _ret = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret);
-	  }
-	  // ---------------------------------------------------
-	  //  METHOD
-	  // ---------------------------------------------------
-	  /**
-	   * flush message event を発火します
-	   * @param {XML} message 表示 Element
-	   * @param {string} [type=info] flush message 種類 - {@link MessageStatus}.FLUSH
-	   * @param {boolean} [sp=false] sp or PC | Tablet
-	   */
-
-
-	  (0, _createClass3.default)(MessageStatus, [{
-	    key: 'flush',
-	    value: function flush(message) {
-	      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : MessageStatus.INFO;
-	      var sp = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-	      this.dispatch({ type: MessageStatus.FLUSH, message: message, kind: type, sp: sp });
-	    }
-	    /**
-	     * confirm window event を発火します
-	     * @param {string} message 表示文字列
-	     * @param {Function} ok ok click callback
-	     * @param {Function} cancel cancel click callback
-	     * @param {string} [type=info] flush message 種類 - {@link MessageStatus}.INFO
-	     */
-
-	  }, {
-	    key: 'alert',
-	    value: function alert(message, ok, cancel) {
-	      var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : MessageStatus.INFO;
-
-	      this.dispatch({ type: MessageStatus.ALERT, message: message, ok: ok, cancel: cancel, kind: type });
-	    }
-	    /**
-	     * alert window event を発火します
-	     * @param {string} message 表示文字列
-	     * @param {Function} ok ok click callback
-	     * @param {Function} cancel cancel click callback
-	     * @param {string} [type=info] flush message 種類 - {@link MessageStatus}.INFO
-	     */
-
-	  }, {
-	    key: 'confirm',
-	    value: function confirm(message, ok, cancel) {
-	      var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : MessageStatus.INFO;
-
-	      this.dispatch({ type: MessageStatus.CONFIRM, message: message, ok: ok, cancel: cancel, kind: type });
-	    }
-	    /**
-	     * 削除モーダル
-	     * @param {string} id unique id
-	     * @param {Function} [ok] ok callback
-	     * @param {Function} [cancel] cancel callback
-	     * @param {string} [type=MessageStatus.INFO] message type MessageStatus.INFO | MessageStatus.ERROR | MessageStatus.SUCCESS
-	     */
-
-	  }, {
-	    key: 'remove',
-	    value: function remove(id, ok, cancel) {
-	      var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : MessageStatus.INFO;
-
-	      if (!ok) {
-	        ok = function ok() {};
-	      }
-	      if (!cancel) {
-	        cancel = function cancel() {};
-	      }
-	      this.dispatch({ type: MessageStatus.DELETE, id: id, ok: ok, cancel: cancel, kind: type });
-	    }
-	  }]);
-	  return MessageStatus;
-	}(_EventDispatcher2.EventDispatcher);
-
-/***/ }),
-/* 109 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.FlushNode = undefined;
-
-	var _MessageStatus = __webpack_require__(108);
-
-	var _Scroll = __webpack_require__(110);
-
-	//
-	// // Sagen
-	// let Sagen = self.Sagen;
-
-	// React
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/03/26 - 13:24
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var React = self.React;
-
-	// tween
-
-	// import {Message} from '../../app/const/Message';
-
-	// util
-	var greensock = self.com.greensock;
-	var TweenLite = greensock.TweenLite;
-	var easing = greensock.easing;
-
-	/**
-	 * Flush modal を表示します
-	 * @type {*|Function|ReactClass}
-	 */
-	var FlushNode = exports.FlushNode = React.createClass({
-	  displayName: 'FlushNode',
-
-	  propTypes: {
-	    show: React.PropTypes.bool,
-	    type: React.PropTypes.string,
-	    message: React.PropTypes.element
-	  },
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      show: false,
-	      // info | error | success の 3種類
-	      type: 'info',
-
-	      message: React.createElement(
-	        'p',
-	        null,
-	        '\xA0'
-	      )
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    // this.status = null;
-	    // this.sp = Sagen.Browser.Mobile.phone();
-	    this.top = 0;
-
-	    return {
-	      show: this.props.show,
-	      type: this.props.type,
-	      message: this.props.message,
-	      css: { opacity: 0 }
-	    };
-	  },
-	  openModal: function openModal() {
-	    var object = { opacity: 0 };
-	    var _this = this;
-
-	    TweenLite.to(object, 0.1, {
-	      opacity: 1,
-	      easing: easing.Linear.easeNone,
-	      onUpdate: function onUpdate() {
-	        _this.setState({ css: { opacity: object.opacity } });
-	      },
-	      onComplete: function onComplete() {
-	        _this.setState({ css: { opacity: 1 } });
-	        _this.closeModal(0.25 * 3);
-	      }
-	    });
-	  },
-	  closeModal: function closeModal() {
-	    var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
-	    var object = { opacity: 1 };
-	    var _this = this;
-
-	    TweenLite.to(object, 0.5, {
-	      delay: delay,
-	      opacity: 0,
-	      easing: easing.Linear.easeNone,
-	      onUpdate: function onUpdate() {
-	        _this.setState({ css: { opacity: object.opacity } });
-	      },
-	      onComplete: function onComplete() {
-	        _this.setState({ css: { opacity: 0 }, show: false });
-	        _this.top = 0;
-	      }
-	    });
-	  },
-	  updateShow: function updateShow(show, message) {
-	    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _MessageStatus.MessageStatus.INFO;
-	    var sp = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-
-	    // console.log( 'updateShow ', show, message, type, sp );
-	    if (sp) {
-	      this.top = _Scroll.Scroll.y;
-	    } else {
-	      this.top = 0;
-	    }
-	    this.setState({ show: show, message: message, type: type });
-	    if (show) {
-	      this.openModal();
-	    }
-	  },
-	  render: function render() {
-	    var _this2 = this;
-
-	    var position = function position() {
-	      if (_this2.top !== 0) {
-	        return { top: _this2.top + 'px' };
-	      } else {
-	        return { opacity: 1 };
-	      }
-	    };
-	    // console.log( 'render ', this.state.show, position() );
-	    if (!this.state.show) {
-	      return null;
-	    } else {
-	      return React.createElement(
-	        'div',
-	        { className: 'modal-dialogue modal-dialogue_delete', style: this.state.css },
-	        React.createElement('div', { className: 'flush-modal-bg modal-bg' }),
-	        React.createElement(
-	          'div',
-	          { className: 'flush-dialogue dialogue-notice ' + this.state.type, style: position() },
-	          React.createElement(
-	            'div',
-	            { className: 'dialogue-notice-inner' },
-	            React.createElement(
-	              'div',
-	              { className: 'dialogue-notice-info' },
-	              this.state.message
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }
-	});
-
-/***/ }),
-/* 110 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Scroll = undefined;
-
-	var _getPrototypeOf = __webpack_require__(85);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(89);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _inherits2 = __webpack_require__(90);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _symbol = __webpack_require__(69);
-
-	var _symbol2 = _interopRequireDefault(_symbol);
-
-	var _EventDispatcher2 = __webpack_require__(96);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// tween
-	/**
-	 * [library] - gsap.greensock
-	 */
-	var greensock = self.com.greensock;
-	/**
-	 * [library] - gsap.greensock.TweenLite
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/03 - 14:01
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	/* eslint constructor-super: 0 */
-
-	var TweenLite = greensock.TweenLite;
-	/**
-	 * [library] - gsap.greensock.easing
-	 */
-	var easing = greensock.easing;
-
-	/**
-	 * {@link Scroll} Singleton を保証するために constructor 引数にする Symbol
-	 * @type {Symbol}
-	 * @private
-	 */
-	var scrollSymbol = (0, _symbol2.default)('singleton Scroll instance');
-
-	/**
-	 * {@link Scroll} instance
-	 * @type {?Scroll}
-	 * @static
-	 * @private
-	 */
-	var singletonInstance = null;
-	/**
-	 * {@link Scroll} - window.onscroll 監視を始めたかの真偽値
-	 * @type {boolean}
-	 * @static
-	 * @private
-	 */
-	var watched = false;
-
-	/**
-	 * scroll に関する処理
-	 */
-
-	var Scroll = exports.Scroll = function (_EventDispatcher) {
-	  (0, _inherits3.default)(Scroll, _EventDispatcher);
-	  (0, _createClass3.default)(Scroll, null, [{
-	    key: 'motion',
-
-	    // ---------------------------------------------------
-	    //  STATIC METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * scroll animation を行います
-	     * @param {number} top 目標位置
-	     * @param {number} [duration=0.5] motion 時間 sec.
-	     * @param {number} [delay=0] delay 時間 sec.
-	     * @param {Function} [easingFunc=Power3.easeOut] easing function
-	     * @param {Function} [complete=null] complete callback function
-	     * @param {boolean} [autoKill=false] autoKill flag
-	     */
-	    value: function motion(top) {
-	      var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.5;
-	      var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-	      var easingFunc = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : easing.Power3.easeOut;
-	      var complete = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-	      var autoKill = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
-
-	      if (easingFunc === null || typeof easingFunc !== 'function') {
-	        easingFunc = easing.Power3.easeOut;
-	      }
-
-	      TweenLite.to(window, duration, {
-	        scrollTo: {
-	          y: top,
-	          autoKill: autoKill
-	        },
-	        delay: delay,
-	        easing: easingFunc,
-	        onComplete: function onComplete() {
-	          if (typeof complete === 'function') {
-	            complete.call(this);
-	          }
-	        }
-	      });
-	    }
-	    /**
-	     * y 0 にし、ユーザースクロールアクションで動作をキャンセルします
-	     * @param {number} [duration=0.5] motion 時間 sec.
-	     * @param {number} [delay=0] delay 時間 sec.
-	     * @param {Function} [start=null] onStart callback function
-	     * @param {Function} [complete=null] onComplete callback function
-	     * @param {boolean} [autoKill=true] autoKill flag
-	     * @return {TweenLite} TweenLite instance を返します
-	     */
-
-	  }, {
-	    key: 'sticky',
-	    value: function sticky() {
-	      var duration = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.5;
-	      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-	      var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-	      var complete = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-	      var autoKill = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-
-	      return TweenLite.to(window, duration, {
-	        scrollTo: {
-	          y: 0,
-	          autoKill: autoKill,
-	          onAutoKill: function onAutoKill() {
-	            // console.log( 'onAutoKill', complete );
-	            if (typeof complete === 'function') {
-	              complete.call(this);
-	            }
-	          }
-	        },
-	        delay: delay,
-	        easing: easing.Power3.easeOut,
-	        onStart: function onStart() {
-	          if (typeof start === 'function') {
-	            start.call(this);
-	          }
-	        },
-	        onComplete: function onComplete() {
-	          if (typeof complete === 'function') {
-	            complete.call(this);
-	          }
-	        }
-	      });
-	    }
-	    /**
-	     * singleton instance を生成します
-	     * @return {Scroll} Scroll instance を返します
-	     */
-
-	  }, {
-	    key: 'factory',
-	    value: function factory() {
-	      if (singletonInstance === null) {
-	        singletonInstance = new Scroll(scrollSymbol);
-	      }
-	      return singletonInstance;
-	    }
-	    // ---------------------------------------------------
-	    //  enable / disable scroll
-	    /**
-	     * scroll を一時的に無効化します
-	     * @see http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
-	     * @since 2016-10-28
-	     */
-
-	  }, {
-	    key: 'disable',
-	    value: function disable() {
-	      window.addEventListener('wheel', Scroll.disableScroll, false);
-	      window.addEventListener('mousewheel', Scroll.disableScroll, false);
-	      document.addEventListener('mousewheel', Scroll.disableScroll, false);
-	      window.addEventListener('touchmove', Scroll.disableScroll, false);
-	      document.addEventListener('keydown', Scroll.keyDown, false);
-	    }
-
-	    /**
-	     * scroll を遅延させて回復します
-	     * @param {number} [delay=500] 遅延時間(ms)
-	     * @since 2016-10-28
-	     */
-
-	  }, {
-	    key: 'enable',
-	    value: function enable() {
-	      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 500;
-
-	      setTimeout(Scroll.activate, delay);
-	      singletonInstance.fire();
-	    }
-	    /**
-	     * scroll 関連イベントハンドラ, 全て止めます
-	     * @param {Event} event scroll 関連イベント
-	     * @since 2016-10-28
-	     */
-
-	  }, {
-	    key: 'disableScroll',
-	    value: function disableScroll(event) {
-	      event.preventDefault();
-	      event.stopPropagation();
-	    }
-	    /**
-	     * key down event handler<br>
-	     * 37, 38, 39, 40 を無効にします
-	     *
-	     * - 32 - spacebar
-	     * - 33 - pageup
-	     * - 34 - pagedown
-	     * - 35 - end
-	     * - 36 - home
-	     * - 37 - left
-	     * - 38 - up
-	     * - 39 - right
-	     * - 49 - down
-	     * @param {Event} event key dwon event
-	     * @since 2016-10-28
-	     */
-
-	  }, {
-	    key: 'keyDown',
-	    value: function keyDown(event) {
-	      var code = event.keyCode;
-	      if ([37, 38, 39, 40].indexOf(code) !== -1) {
-	        event.preventDefault();
-	        event.stopPropagation();
-	      }
-	    }
-	    /**
-	     * scroll を回復します
-	     * @since 2016-10-28
-	     */
-
-	  }, {
-	    key: 'activate',
-	    value: function activate() {
-	      window.removeEventListener('wheel', Scroll.disableScroll);
-	      window.removeEventListener('mousewheel', Scroll.disableScroll);
-	      document.removeEventListener('mousewheel', Scroll.disableScroll);
-	      window.removeEventListener('touchmove', Scroll.disableScroll);
-	      document.removeEventListener('keydown', Scroll.keyDown);
-	      // 初期化します
-	      singletonInstance.distance = 0;
-	    }
-	    // ---------------------------------------------------
-	    //  CONSTRUCTOR
-	    // ---------------------------------------------------
-	    /**
-	     * scroll に関する singleton class
-	     * @param {Symbol} target Singleton を実現するための private symbol
-	     * @returns {Scroll} Scroll instance を返します
-	     */
-
-	  }, {
-	    key: 'SCROLL',
-
-	    // ---------------------------------------------------
-	    //  EVENT
-	    // ---------------------------------------------------
-	    /**
-	     * SCROLL event
-	     * @return {string} scrollScroll
-	     */
-	    get: function get() {
-	      return 'scrollScroll';
-	    }
-	    // ---------------------------------------------------
-	    //  STATIC GETTER / SETTER
-	    // ---------------------------------------------------
-	    /**
-	     * scroll top 位置
-	     * @return {number} scroll top 位置を返します
-	     */
-
-	  }, {
-	    key: 'y',
-	    get: function get() {
-	      // https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
-	      // https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-	      return typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-	    }
-	    /**
-	     * scroll top 位置 を設定します
-	     * @param {number} top スクロール位置(px)
-	     */
-	    ,
-	    set: function set(top) {
-	      // time out 内でないと有効にならない
-	      // @since 2017-01-17 timeout でラップする
-	      setTimeout(function () {
-	        window.scrollTo(0, top);
-	      }, 0);
-	    }
-	  }]);
-
-	  function Scroll(target) {
-	    var _ret2;
-
-	    (0, _classCallCheck3.default)(this, Scroll);
-
-	    if (scrollSymbol !== target) {
-	      throw new Error('Scroll is singleton Class. not use new Scroll(). instead Scroll.factory()');
-	    }
-
-	    if (singletonInstance !== null) {
-	      var _ret;
-
-	      return _ret = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret);
-	    }
-	    // -----
-
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Scroll.__proto__ || (0, _getPrototypeOf2.default)(Scroll)).call(this));
-
-	    singletonInstance = _this;
-	    /**
-	     * onScroll 関数 を bind しpublic 変数にします
-	     * @type {Function}
-	     */
-	    _this.boundScroll = _this.onScroll.bind(_this);
-
-	    /**
-	     * 前回{y}値
-	     * @type {number}
-	     * @default -1
-	     */
-	    _this.previous = -1;
-	    /**
-	     * 移動 px
-	     * @type {number}
-	     */
-	    _this.distance = 0;
-	    /**
-	     * 移動方向, scroll 方向が変わったら distance を 0 にする
-	     * @type {number}
-	     */
-	    _this.direction = -1;
-
-	    return _ret2 = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
-	  }
-	  // ---------------------------------------------------
-	  //  METHOD
-	  // ---------------------------------------------------
-	  /**
-	   * window scroll 監視を開始します
-	   */
-
-
-	  (0, _createClass3.default)(Scroll, [{
-	    key: 'start',
-	    value: function start() {
-	      if (!watched) {
-	        watched = true;
-	        window.addEventListener('scroll', this.boundScroll, false);
-	      }
-	    }
-	    /**
-	     * window scroll 監視を止めます
-	     */
-
-	  }, {
-	    key: 'stop',
-	    value: function stop() {
-	      // 2016-09-16
-	      // listener がいなかったら止める
-	      watched = false;
-	      window.removeEventListener('scroll', this.boundScroll);
-	    }
-	    /**
-	     * window.onscroll event handler<br>
-	     * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します<br>
-	     * {{type: string, originalEvent: Event, y: number, height: number, moving: number, changed: boolean}} event object
-	     * @param {Event} originalEvent window scroll event
-	     */
-
-	  }, {
-	    key: 'onScroll',
-	    value: function onScroll(originalEvent) {
-	      // this.dispatch( { type: Scroll.SCROLL, originalEvent: event, y: Scroll.y } );
-	      // @since 2016-09-30, 戻り値に window.innerHeight, moving, changed 追加
-	      var previous = this.previous;
-	      var type = Scroll.SCROLL;
-	      var y = Scroll.y;
-	      var height = window.innerHeight;
-	      var bottom = y + height;
-	      // @type {number} - 正の時: scroll down
-	      var moving = previous - y;
-	      var changed = moving !== 0;
-	      var direction = Math.sqrt(moving * moving) / moving;
-	      // scroll 方向が変わったら distance を 0 にする
-	      if (direction !== this.direction) {
-	        this.distance = 0;
-	        this.direction = direction;
-	      }
-	      var distance = this.distance + moving;
-	      this.distance = distance;
-	      this.previous = y;
-	      this.dispatch({
-	        type: type,
-	        originalEvent: originalEvent,
-	        y: y,
-	        height: height,
-	        bottom: bottom,
-	        moving: moving,
-	        distance: distance,
-	        changed: changed
-	      });
-	    }
-	    /**
-	     * 強制的に scroll event を発生させます
-	     */
-
-	  }, {
-	    key: 'fire',
-	    value: function fire() {
-	      // this.dispatch( { type: Scroll.SCROLL, originalEvent: null, y: Scroll.y } );
-	      // @since 2016-09-30, 戻り値に window.innerHeight, moving, changed 追加
-	      var previous = this.previous;
-	      var type = Scroll.SCROLL;
-	      var y = Scroll.y;
-	      var height = window.innerHeight;
-	      var bottom = y + height;
-	      // @type {number} - 正の時: scroll down
-	      // on 2016-10-28, 下記式だと 負の時: scroll down, かなり長いこと使ってるのでこのままにします
-	      var moving = previous - y;
-	      // const direction = Math.sqrt(moving * moving) / moving;
-	      // // scroll 方向が変わったら distance を 0 にする
-	      // if (direction !== this.direction) {
-	      //   this.distance = 0;
-	      //   this.direction = direction;
-	      // }
-	      var distance = this.distance + moving;
-	      this.distance = distance;
-
-	      // this.previous = y;
-	      this.dispatch({
-	        type: type,
-	        y: y,
-	        height: height,
-	        bottom: bottom,
-	        moving: moving,
-	        distance: distance,
-	        originalEvent: null,
-	        changed: true
-	      });
-	    }
-	  }]);
-	  return Scroll;
-	}(_EventDispatcher2.EventDispatcher);
-
-/***/ }),
-/* 111 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _getPrototypeOf = __webpack_require__(85);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(89);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(90);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _View2 = __webpack_require__(95);
-
-	var _View3 = _interopRequireDefault(_View2);
-
-	var _ViewHeaderMember = __webpack_require__(112);
+	var _ViewHeaderMember = __webpack_require__(108);
 
 	var _ViewHeaderMember2 = _interopRequireDefault(_ViewHeaderMember);
 
 	var _Url = __webpack_require__(105);
 
-	var _User = __webpack_require__(113);
+	var _User = __webpack_require__(109);
 
-	var _UserStatus = __webpack_require__(115);
+	var _UserStatus = __webpack_require__(111);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7012,21 +5927,25 @@
 	        if (member !== null) {
 	          this.dispose();
 	        }
-	        var boundCallback = this._boundCallback;
-	        // @since 2018-04-19 vk flag 追加
-	        member = new _ViewHeaderMember2.default(this.element, {}, this.vk);
-	        // member = new ViewHeaderMember(this.element);
-	        this._member = member;
-	        member.on(_View3.default.BEFORE_RENDER, boundCallback);
-	        member.on(_View3.default.WILL_MOUNT, boundCallback);
-	        member.on(_View3.default.DID_MOUNT, boundCallback);
-	        member.on(_View3.default.ERROR_MOUNT, boundCallback);
-	        member.on(_View3.default.UNDEFINED_ERROR, boundCallback);
-	        member.on(_View3.default.EMPTY_ERROR, boundCallback);
-	        member.on(_View3.default.RESPONSE_ERROR, boundCallback);
-	        member.start();
+	        // since 2018-04-20
+	        // VK - login user メニュー無し
+	        if (!this.vk) {
+	          var boundCallback = this._boundCallback;
+	          // @since 2018-04-19 vk flag 追加
+	          member = new _ViewHeaderMember2.default(this.element, {}, this.vk);
+	          // member = new ViewHeaderMember(this.element);
+	          this._member = member;
+	          member.on(_View3.default.BEFORE_RENDER, boundCallback);
+	          member.on(_View3.default.WILL_MOUNT, boundCallback);
+	          member.on(_View3.default.DID_MOUNT, boundCallback);
+	          member.on(_View3.default.ERROR_MOUNT, boundCallback);
+	          member.on(_View3.default.UNDEFINED_ERROR, boundCallback);
+	          member.on(_View3.default.EMPTY_ERROR, boundCallback);
+	          member.on(_View3.default.RESPONSE_ERROR, boundCallback);
+	          member.start();
+	        }
 	      } else {
-	        // user menu
+	        // not member - user menu
 	        this.render();
 	        this.dispose();
 	      }
@@ -7116,7 +6035,7 @@
 	exports.default = ViewHeaderUser;
 
 /***/ }),
-/* 112 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7149,21 +6068,21 @@
 
 	var _View3 = _interopRequireDefault(_View2);
 
-	var _User = __webpack_require__(113);
+	var _User = __webpack_require__(109);
 
 	var _Message = __webpack_require__(106);
 
-	var _UsersSelf = __webpack_require__(116);
+	var _UsersSelf = __webpack_require__(112);
 
-	var _UserDae = __webpack_require__(133);
+	var _UserDae = __webpack_require__(129);
 
-	var _SettingsStatus = __webpack_require__(139);
+	var _SettingsStatus = __webpack_require__(135);
 
-	var _ComponentHeaderMemberSetting = __webpack_require__(140);
+	var _ComponentHeaderMemberSetting = __webpack_require__(136);
 
 	var _ComponentHeaderMemberSetting2 = _interopRequireDefault(_ComponentHeaderMemberSetting);
 
-	var _Empty = __webpack_require__(144);
+	var _Empty = __webpack_require__(140);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7479,7 +6398,7 @@
 	exports.default = ViewHeaderMember;
 
 /***/ }),
-/* 113 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7497,9 +6416,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Cookie = __webpack_require__(114);
+	var _Cookie = __webpack_require__(110);
 
-	var _UserStatus = __webpack_require__(115);
+	var _UserStatus = __webpack_require__(111);
 
 	var _Safety = __webpack_require__(24);
 
@@ -7687,7 +6606,7 @@
 	}();
 
 /***/ }),
-/* 114 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7876,7 +6795,7 @@
 	      */
 
 /***/ }),
-/* 115 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8052,7 +6971,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 116 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8078,11 +6997,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _ActionAuth2 = __webpack_require__(117);
+	var _ActionAuth2 = __webpack_require__(113);
 
-	var _Api = __webpack_require__(125);
+	var _Api = __webpack_require__(121);
 
-	var _User = __webpack_require__(113);
+	var _User = __webpack_require__(109);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8121,7 +7040,7 @@
 	                             */
 
 /***/ }),
-/* 117 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8151,17 +7070,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(118);
+	var _Action2 = __webpack_require__(114);
 
-	var _User = __webpack_require__(113);
+	var _User = __webpack_require__(109);
 
-	var _Token = __webpack_require__(123);
+	var _Token = __webpack_require__(119);
 
 	var _Safety = __webpack_require__(24);
 
-	var _Result = __webpack_require__(119);
+	var _Result = __webpack_require__(115);
 
-	var _Types = __webpack_require__(124);
+	var _Types = __webpack_require__(120);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8254,7 +7173,7 @@
 	}(_Action2.Action);
 
 /***/ }),
-/* 118 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8272,11 +7191,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Result = __webpack_require__(119);
+	var _Result = __webpack_require__(115);
 
 	var _Safety = __webpack_require__(24);
 
-	var _Ajax = __webpack_require__(120);
+	var _Ajax = __webpack_require__(116);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8565,7 +7484,7 @@
 	// data
 
 /***/ }),
-/* 119 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -8737,7 +7656,7 @@
 	;
 
 /***/ }),
-/* 120 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8755,13 +7674,13 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Codes = __webpack_require__(121);
+	var _Codes = __webpack_require__(117);
 
 	var _Codes2 = _interopRequireDefault(_Codes);
 
-	var _Result = __webpack_require__(119);
+	var _Result = __webpack_require__(115);
 
-	var _StatusDae = __webpack_require__(122);
+	var _StatusDae = __webpack_require__(118);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8949,7 +7868,7 @@
 	// import {Env} from '../app/Env';
 
 /***/ }),
-/* 121 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9175,7 +8094,7 @@
 	exports.default = Codes;
 
 /***/ }),
-/* 122 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9273,7 +8192,7 @@
 	      */
 
 /***/ }),
-/* 123 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9365,7 +8284,7 @@
 	exports.Token = Token;
 
 /***/ }),
-/* 124 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -9500,7 +8419,7 @@
 	}();
 
 /***/ }),
-/* 125 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9518,11 +8437,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Types = __webpack_require__(124);
+	var _Types = __webpack_require__(120);
 
-	var _User = __webpack_require__(113);
+	var _User = __webpack_require__(109);
 
-	var _ApiDae = __webpack_require__(126);
+	var _ApiDae = __webpack_require__(122);
 
 	var _ApiDae2 = _interopRequireDefault(_ApiDae);
 
@@ -10052,7 +8971,7 @@
 	      */
 
 /***/ }),
-/* 126 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10070,21 +8989,21 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Env = __webpack_require__(127);
+	var _Env = __webpack_require__(123);
 
 	var _Env2 = _interopRequireDefault(_Env);
 
-	var _Path = __webpack_require__(128);
+	var _Path = __webpack_require__(124);
 
-	var _Types = __webpack_require__(124);
+	var _Types = __webpack_require__(120);
 
-	var _Type = __webpack_require__(129);
+	var _Type = __webpack_require__(125);
 
-	var _Permalink = __webpack_require__(130);
+	var _Permalink = __webpack_require__(126);
 
-	var _Queries = __webpack_require__(131);
+	var _Queries = __webpack_require__(127);
 
-	var _Query = __webpack_require__(132);
+	var _Query = __webpack_require__(128);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10506,7 +9425,7 @@
 	exports.default = ApiDae;
 
 /***/ }),
-/* 127 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10722,7 +9641,7 @@
 	exports.default = Env;
 
 /***/ }),
-/* 128 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10931,7 +9850,7 @@
 	}();
 
 /***/ }),
-/* 129 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11051,7 +9970,7 @@
 	      */
 
 /***/ }),
-/* 130 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11168,7 +10087,7 @@
 	}();
 
 /***/ }),
-/* 131 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -11273,7 +10192,7 @@
 	}();
 
 /***/ }),
-/* 132 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -11390,7 +10309,7 @@
 	}();
 
 /***/ }),
-/* 133 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11408,13 +10327,13 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _TypeDae = __webpack_require__(134);
+	var _TypeDae = __webpack_require__(130);
 
-	var _InterestDae = __webpack_require__(135);
+	var _InterestDae = __webpack_require__(131);
 
-	var _LogoDae = __webpack_require__(136);
+	var _LogoDae = __webpack_require__(132);
 
-	var _BannersDae = __webpack_require__(137);
+	var _BannersDae = __webpack_require__(133);
 
 	var _Safety = __webpack_require__(24);
 
@@ -11634,7 +10553,7 @@
 	      */
 
 /***/ }),
-/* 134 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11738,7 +10657,7 @@
 	      */
 
 /***/ }),
-/* 135 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11823,7 +10742,7 @@
 	      */
 
 /***/ }),
-/* 136 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11916,7 +10835,7 @@
 	      */
 
 /***/ }),
-/* 137 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11934,7 +10853,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _BannerDae = __webpack_require__(138);
+	var _BannerDae = __webpack_require__(134);
 
 	var _Safety = __webpack_require__(24);
 
@@ -12034,7 +10953,7 @@
 	}();
 
 /***/ }),
-/* 138 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -12098,7 +11017,7 @@
 	};
 
 /***/ }),
-/* 139 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12264,7 +11183,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 140 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12293,25 +11212,25 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _LogoutStatus = __webpack_require__(141);
+	var _LogoutStatus = __webpack_require__(137);
 
-	var _CommentStatus = __webpack_require__(142);
+	var _CommentStatus = __webpack_require__(138);
 
 	var _View = __webpack_require__(95);
 
 	var _View2 = _interopRequireDefault(_View);
 
-	var _User = __webpack_require__(113);
+	var _User = __webpack_require__(109);
 
-	var _Loc = __webpack_require__(143);
+	var _Loc = __webpack_require__(139);
 
-	var _Env = __webpack_require__(127);
+	var _Env = __webpack_require__(123);
 
 	var _Env2 = _interopRequireDefault(_Env);
 
 	var _Safety = __webpack_require__(24);
 
-	var _Empty = __webpack_require__(144);
+	var _Empty = __webpack_require__(140);
 
 	var _Url = __webpack_require__(105);
 
@@ -12722,7 +11641,7 @@
 	exports.default = ComponentHeaderMemberSetting;
 
 /***/ }),
-/* 141 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12887,7 +11806,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 142 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13141,7 +12060,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 143 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13453,7 +12372,7 @@
 	}();
 
 /***/ }),
-/* 144 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13730,430 +12649,7 @@
 	}();
 
 /***/ }),
-/* 145 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _getPrototypeOf = __webpack_require__(85);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(89);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(90);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _View2 = __webpack_require__(95);
-
-	var _View3 = _interopRequireDefault(_View2);
-
-	var _LogoutNode = __webpack_require__(146);
-
-	var _LogoutStatus = __webpack_require__(141);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// React
-	/* eslint-disable no-unused-vars */
-	/**
-	 * [library] - React
-	 */
-
-	// node
-	var React = self.React;
-	/* eslint-enable no-unused-vars */
-	/**
-	 * [library] - ReactDOM
-	 */
-
-	// event
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/03/08 - 19:25
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	var ReactDOM = self.ReactDOM;
-
-	/**
-	 * logout modal control
-	 */
-
-	var ViewLogoutModal = function (_View) {
-	  (0, _inherits3.default)(ViewLogoutModal, _View);
-
-	  // ---------------------------------------------------
-	  //  CONSTRUCTOR
-	  // ---------------------------------------------------
-	  /**
-	   * logout modal 表示
-	   * @param {Element} element 親 Element
-	   * @param {?Function} [yesCallback=null] yes / ok click callback
-	   * @param {?Function} [noCallback=null] no / cancel click callback
-	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
-	   * @since 2-18-04-19 vk header - flag 追加
-	   */
-	  function ViewLogoutModal(element) {
-	    var yesCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	    var noCallback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-	    var vk = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-	    (0, _classCallCheck3.default)(this, ViewLogoutModal);
-
-	    /**
-	     * modal instance
-	     * @type {null|Object}
-	     * @private
-	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (ViewLogoutModal.__proto__ || (0, _getPrototypeOf2.default)(ViewLogoutModal)).call(this, element, {}, vk));
-
-	    _this._render = null;
-	    /**
-	     * yes / ok click callback
-	     * @type {Function}
-	     * @private
-	     */
-	    _this._yes = yesCallback;
-	    /**
-	     * no / cancel click callback
-	     * @type {Function}
-	     * @private
-	     */
-	    _this._no = noCallback;
-	    /**
-	     * LogoutStatus instance
-	     * @type {LogoutStatus}
-	     * @private
-	     */
-	    _this._status = _LogoutStatus.LogoutStatus.factory();
-	    /**
-	     * bind onOpen
-	     * @type {function}
-	     */
-	    _this.onOpen = _this.onOpen.bind(_this);
-	    return _this;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * @param {Function} callback ok / yes callback
-	   */
-
-
-	  (0, _createClass3.default)(ViewLogoutModal, [{
-	    key: 'start',
-
-	    // ---------------------------------------------------
-	    //  Method
-	    // ---------------------------------------------------
-	    /**
-	     * rendering 開始
-	     */
-	    value: function start() {
-	      this.render();
-	    }
-	    /**
-	     * rendering - {@link LogoutNode}
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (this._render === null) {
-	        this._render = ReactDOM.render(React.createElement(_LogoutNode.LogoutNode, {
-	          ok: this._yes,
-	          cancel: this._no
-	        }), this.element);
-	      }
-	      var status = this._status;
-	      status.off(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
-	      status.on(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
-	    }
-	    /**
-	     * modal 開く
-	     */
-
-	  }, {
-	    key: 'open',
-	    value: function open() {
-	      if (this._render !== null) {
-	        this._render.updateShow(true);
-	      }
-	    }
-	    /**
-	     * LogoutStatus.OPEN event handler
-	     * event が発生したら this.open を実行します
-	     */
-
-	  }, {
-	    key: 'onOpen',
-	    value: function onOpen() {
-	      // console.log( 'logout open event handler will open logout modal........' );
-	      this.open();
-	    }
-	  }, {
-	    key: 'yes',
-	    set: function set(callback) {
-	      this._yes = callback;
-	    }
-	    /**
-	     * @param {Function} callback cancel / no callback
-	     */
-
-	  }, {
-	    key: 'no',
-	    set: function set(callback) {
-	      this._no = callback;
-	    }
-	  }]);
-	  return ViewLogoutModal;
-	}(_View3.default);
-
-	exports.default = ViewLogoutModal;
-
-/***/ }),
-/* 146 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.LogoutNode = undefined;
-
-	var _Message = __webpack_require__(106);
-
-	var _User = __webpack_require__(113);
-
-	var _Loc = __webpack_require__(143);
-
-	var _LogoutStatus = __webpack_require__(141);
-
-	// React
-
-
-	// util
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/03/08 - 19:06
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	// app
-	var React = self.React;
-
-	// tween
-
-
-	// event
-	var greensock = self.com.greensock;
-	var TweenLite = greensock.TweenLite;
-	var easing = greensock.easing;
-
-	/**
-	 * Logout modal
-	 * @type {ReactClass}
-	 */
-	var LogoutNode = exports.LogoutNode = React.createClass({
-	  displayName: 'LogoutNode',
-
-	  propTypes: {
-	    // ok click callback
-	    ok: React.PropTypes.func,
-	    // cancel click callback
-	    cancel: React.PropTypes.func,
-	    // LogoutStatus event handler を bind する
-	    listen: React.PropTypes.bool
-	  },
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      ok: null,
-	      cancel: null,
-	      type: 'logout',
-	      // PC: 不要(false), SP: 要(true)
-	      // 設計が悪く PC, SP で実装方法が変わってしまった
-	      // PC true にすると二重にマウントされる...かも
-	      listen: false
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    this.status = null;
-	    this.ok = null;
-	    this.cancel = null;
-
-	    return {
-	      show: false,
-	      css: { opacity: 0 }
-	    };
-	  },
-	  render: function render() {
-
-	    if (this.state.show) {
-	      return React.createElement(
-	        'div',
-	        { className: 'modal-dialogue modal-dialogue_delete', ref: 'modalContainer', style: this.state.css },
-	        React.createElement('div', { className: 'modal-bg', onClick: this.cancelClick }),
-	        React.createElement(
-	          'div',
-	          { className: 'modal-dialogue-contents ' + this.props.type },
-	          React.createElement(
-	            'a',
-	            { href: '#', className: 'modal-dialogue-close', onClick: this.cancelClick },
-	            _Message.Message.BUTTON_CLOSE
-	          ),
-	          React.createElement(
-	            'p',
-	            { className: 'lead' },
-	            _Message.Message.LOGOUT
-	          ),
-	          React.createElement(
-	            'ul',
-	            { className: 'btn-block' },
-	            React.createElement(
-	              'li',
-	              { className: 'btn-item' },
-	              React.createElement(
-	                'a',
-	                { href: '#', className: 'btn-link btn-link_cancel', onClick: this.cancelClick },
-	                _Message.Message.BUTTON_NO
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              { className: 'btn-item' },
-	              React.createElement(
-	                'a',
-	                { href: '#', className: 'btn-link btn-link_submit', onClick: this.okClick },
-	                _Message.Message.BUTTON_YES
-	              )
-	            )
-	          )
-	        )
-	      );
-	    } else {
-	      // not show
-	      return null;
-	    }
-	  },
-	  componentDidMount: function componentDidMount() {
-	    if (this.props.listen) {
-	      var status = _LogoutStatus.LogoutStatus.factory();
-	      this.status = status;
-	      status.on(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
-	      status.on(_LogoutStatus.LogoutStatus.CLOSE, this.onClose);
-	    }
-	  },
-	  componentWillUnMount: function componentWillUnMount() {
-	    var status = this.status;
-	    if (status !== null) {
-	      status.off(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
-	      status.off(_LogoutStatus.LogoutStatus.CLOSE, this.onClose);
-	      this.status = null;
-	    }
-	  },
-	  cancelClick: function cancelClick(event) {
-	    event.preventDefault();
-	    if (typeof this.cancel === 'function') {
-	      this.cancel();
-	    } else if (typeof this.props.cancel === 'function') {
-	      this.props.cancel();
-	    }
-	    this.closeModal();
-	  },
-	  okClick: function okClick(event) {
-	    event.preventDefault();
-	    if (typeof this.ok === 'function') {
-	      this.ok();
-	    } else if (typeof this.props.ok === 'function') {
-	      this.props.ok();
-	    } else {
-	      // this.ok, this.props.ok どちらも function でなかったら
-	      // logout 処理を行う
-	      _User.User.logout();
-	      _Loc.Loc.index();
-	    }
-	    this.closeModal(0.5);
-	  },
-	  openModal: function openModal() {
-	    var object = { opacity: 0 };
-	    var _this = this;
-
-	    TweenLite.to(object, 0.5, {
-	      opacity: 1,
-	      easing: easing.Linear.easeNone,
-	      onUpdate: function onUpdate() {
-	        _this.setState({ css: { opacity: object.opacity } });
-	      },
-	      onComplete: function onComplete() {
-	        _this.setState({ css: { opacity: 1 } });
-	      }
-	    });
-	  },
-	  closeModal: function closeModal() {
-	    var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
-	    var object = { opacity: 1 };
-	    var _this = this;
-
-	    TweenLite.to(object, 0.5, {
-	      delay: delay,
-	      opacity: 0,
-	      easing: easing.Linear.easeNone,
-	      onUpdate: function onUpdate() {
-	        _this.setState({ css: { opacity: object.opacity } });
-	      },
-	      onComplete: function onComplete() {
-	        _this.setState({ css: { opacity: 0 }, show: false });
-	      }
-	    });
-	  },
-	  updateShow: function updateShow(show) {
-	    this.setState({ show: show });
-	    if (show) {
-	      this.openModal();
-	    }
-	  },
-	  onOpen: function onOpen(event) {
-	    this.ok = event.ok;
-	    this.cancel = event.cancel;
-	    this.updateShow(true);
-	  },
-	  onClose: function onClose() {
-	    this.ok = null;
-	    this.cancel = null;
-	  }
-	});
-
-/***/ }),
-/* 147 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14174,11 +12670,11 @@
 
 	var _Dom2 = _interopRequireDefault(_Dom);
 
-	var _Scroll = __webpack_require__(110);
+	var _Scroll = __webpack_require__(142);
 
-	var _Offset = __webpack_require__(148);
+	var _Offset = __webpack_require__(143);
 
-	var _TopButton = __webpack_require__(149);
+	var _TopButton = __webpack_require__(144);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14509,7 +13005,489 @@
 	exports.default = PageTop;
 
 /***/ }),
-/* 148 */
+/* 142 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Scroll = undefined;
+
+	var _getPrototypeOf = __webpack_require__(85);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _symbol = __webpack_require__(69);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	var _EventDispatcher2 = __webpack_require__(96);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// tween
+	/**
+	 * [library] - gsap.greensock
+	 */
+	var greensock = self.com.greensock;
+	/**
+	 * [library] - gsap.greensock.TweenLite
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/03 - 14:01
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	/* eslint constructor-super: 0 */
+
+	var TweenLite = greensock.TweenLite;
+	/**
+	 * [library] - gsap.greensock.easing
+	 */
+	var easing = greensock.easing;
+
+	/**
+	 * {@link Scroll} Singleton を保証するために constructor 引数にする Symbol
+	 * @type {Symbol}
+	 * @private
+	 */
+	var scrollSymbol = (0, _symbol2.default)('singleton Scroll instance');
+
+	/**
+	 * {@link Scroll} instance
+	 * @type {?Scroll}
+	 * @static
+	 * @private
+	 */
+	var singletonInstance = null;
+	/**
+	 * {@link Scroll} - window.onscroll 監視を始めたかの真偽値
+	 * @type {boolean}
+	 * @static
+	 * @private
+	 */
+	var watched = false;
+
+	/**
+	 * scroll に関する処理
+	 */
+
+	var Scroll = exports.Scroll = function (_EventDispatcher) {
+	  (0, _inherits3.default)(Scroll, _EventDispatcher);
+	  (0, _createClass3.default)(Scroll, null, [{
+	    key: 'motion',
+
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * scroll animation を行います
+	     * @param {number} top 目標位置
+	     * @param {number} [duration=0.5] motion 時間 sec.
+	     * @param {number} [delay=0] delay 時間 sec.
+	     * @param {Function} [easingFunc=Power3.easeOut] easing function
+	     * @param {Function} [complete=null] complete callback function
+	     * @param {boolean} [autoKill=false] autoKill flag
+	     */
+	    value: function motion(top) {
+	      var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.5;
+	      var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+	      var easingFunc = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : easing.Power3.easeOut;
+	      var complete = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+	      var autoKill = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+
+	      if (easingFunc === null || typeof easingFunc !== 'function') {
+	        easingFunc = easing.Power3.easeOut;
+	      }
+
+	      TweenLite.to(window, duration, {
+	        scrollTo: {
+	          y: top,
+	          autoKill: autoKill
+	        },
+	        delay: delay,
+	        easing: easingFunc,
+	        onComplete: function onComplete() {
+	          if (typeof complete === 'function') {
+	            complete.call(this);
+	          }
+	        }
+	      });
+	    }
+	    /**
+	     * y 0 にし、ユーザースクロールアクションで動作をキャンセルします
+	     * @param {number} [duration=0.5] motion 時間 sec.
+	     * @param {number} [delay=0] delay 時間 sec.
+	     * @param {Function} [start=null] onStart callback function
+	     * @param {Function} [complete=null] onComplete callback function
+	     * @param {boolean} [autoKill=true] autoKill flag
+	     * @return {TweenLite} TweenLite instance を返します
+	     */
+
+	  }, {
+	    key: 'sticky',
+	    value: function sticky() {
+	      var duration = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.5;
+	      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+	      var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	      var complete = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+	      var autoKill = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+
+	      return TweenLite.to(window, duration, {
+	        scrollTo: {
+	          y: 0,
+	          autoKill: autoKill,
+	          onAutoKill: function onAutoKill() {
+	            // console.log( 'onAutoKill', complete );
+	            if (typeof complete === 'function') {
+	              complete.call(this);
+	            }
+	          }
+	        },
+	        delay: delay,
+	        easing: easing.Power3.easeOut,
+	        onStart: function onStart() {
+	          if (typeof start === 'function') {
+	            start.call(this);
+	          }
+	        },
+	        onComplete: function onComplete() {
+	          if (typeof complete === 'function') {
+	            complete.call(this);
+	          }
+	        }
+	      });
+	    }
+	    /**
+	     * singleton instance を生成します
+	     * @return {Scroll} Scroll instance を返します
+	     */
+
+	  }, {
+	    key: 'factory',
+	    value: function factory() {
+	      if (singletonInstance === null) {
+	        singletonInstance = new Scroll(scrollSymbol);
+	      }
+	      return singletonInstance;
+	    }
+	    // ---------------------------------------------------
+	    //  enable / disable scroll
+	    /**
+	     * scroll を一時的に無効化します
+	     * @see http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+	     * @since 2016-10-28
+	     */
+
+	  }, {
+	    key: 'disable',
+	    value: function disable() {
+	      window.addEventListener('wheel', Scroll.disableScroll, false);
+	      window.addEventListener('mousewheel', Scroll.disableScroll, false);
+	      document.addEventListener('mousewheel', Scroll.disableScroll, false);
+	      window.addEventListener('touchmove', Scroll.disableScroll, false);
+	      document.addEventListener('keydown', Scroll.keyDown, false);
+	    }
+
+	    /**
+	     * scroll を遅延させて回復します
+	     * @param {number} [delay=500] 遅延時間(ms)
+	     * @since 2016-10-28
+	     */
+
+	  }, {
+	    key: 'enable',
+	    value: function enable() {
+	      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 500;
+
+	      setTimeout(Scroll.activate, delay);
+	      singletonInstance.fire();
+	    }
+	    /**
+	     * scroll 関連イベントハンドラ, 全て止めます
+	     * @param {Event} event scroll 関連イベント
+	     * @since 2016-10-28
+	     */
+
+	  }, {
+	    key: 'disableScroll',
+	    value: function disableScroll(event) {
+	      event.preventDefault();
+	      event.stopPropagation();
+	    }
+	    /**
+	     * key down event handler<br>
+	     * 37, 38, 39, 40 を無効にします
+	     *
+	     * - 32 - spacebar
+	     * - 33 - pageup
+	     * - 34 - pagedown
+	     * - 35 - end
+	     * - 36 - home
+	     * - 37 - left
+	     * - 38 - up
+	     * - 39 - right
+	     * - 49 - down
+	     * @param {Event} event key dwon event
+	     * @since 2016-10-28
+	     */
+
+	  }, {
+	    key: 'keyDown',
+	    value: function keyDown(event) {
+	      var code = event.keyCode;
+	      if ([37, 38, 39, 40].indexOf(code) !== -1) {
+	        event.preventDefault();
+	        event.stopPropagation();
+	      }
+	    }
+	    /**
+	     * scroll を回復します
+	     * @since 2016-10-28
+	     */
+
+	  }, {
+	    key: 'activate',
+	    value: function activate() {
+	      window.removeEventListener('wheel', Scroll.disableScroll);
+	      window.removeEventListener('mousewheel', Scroll.disableScroll);
+	      document.removeEventListener('mousewheel', Scroll.disableScroll);
+	      window.removeEventListener('touchmove', Scroll.disableScroll);
+	      document.removeEventListener('keydown', Scroll.keyDown);
+	      // 初期化します
+	      singletonInstance.distance = 0;
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+	    /**
+	     * scroll に関する singleton class
+	     * @param {Symbol} target Singleton を実現するための private symbol
+	     * @returns {Scroll} Scroll instance を返します
+	     */
+
+	  }, {
+	    key: 'SCROLL',
+
+	    // ---------------------------------------------------
+	    //  EVENT
+	    // ---------------------------------------------------
+	    /**
+	     * SCROLL event
+	     * @return {string} scrollScroll
+	     */
+	    get: function get() {
+	      return 'scrollScroll';
+	    }
+	    // ---------------------------------------------------
+	    //  STATIC GETTER / SETTER
+	    // ---------------------------------------------------
+	    /**
+	     * scroll top 位置
+	     * @return {number} scroll top 位置を返します
+	     */
+
+	  }, {
+	    key: 'y',
+	    get: function get() {
+	      // https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+	      // https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+	      return typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+	    }
+	    /**
+	     * scroll top 位置 を設定します
+	     * @param {number} top スクロール位置(px)
+	     */
+	    ,
+	    set: function set(top) {
+	      // time out 内でないと有効にならない
+	      // @since 2017-01-17 timeout でラップする
+	      setTimeout(function () {
+	        window.scrollTo(0, top);
+	      }, 0);
+	    }
+	  }]);
+
+	  function Scroll(target) {
+	    var _ret2;
+
+	    (0, _classCallCheck3.default)(this, Scroll);
+
+	    if (scrollSymbol !== target) {
+	      throw new Error('Scroll is singleton Class. not use new Scroll(). instead Scroll.factory()');
+	    }
+
+	    if (singletonInstance !== null) {
+	      var _ret;
+
+	      return _ret = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	    }
+	    // -----
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (Scroll.__proto__ || (0, _getPrototypeOf2.default)(Scroll)).call(this));
+
+	    singletonInstance = _this;
+	    /**
+	     * onScroll 関数 を bind しpublic 変数にします
+	     * @type {Function}
+	     */
+	    _this.boundScroll = _this.onScroll.bind(_this);
+
+	    /**
+	     * 前回{y}値
+	     * @type {number}
+	     * @default -1
+	     */
+	    _this.previous = -1;
+	    /**
+	     * 移動 px
+	     * @type {number}
+	     */
+	    _this.distance = 0;
+	    /**
+	     * 移動方向, scroll 方向が変わったら distance を 0 にする
+	     * @type {number}
+	     */
+	    _this.direction = -1;
+
+	    return _ret2 = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret2);
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * window scroll 監視を開始します
+	   */
+
+
+	  (0, _createClass3.default)(Scroll, [{
+	    key: 'start',
+	    value: function start() {
+	      if (!watched) {
+	        watched = true;
+	        window.addEventListener('scroll', this.boundScroll, false);
+	      }
+	    }
+	    /**
+	     * window scroll 監視を止めます
+	     */
+
+	  }, {
+	    key: 'stop',
+	    value: function stop() {
+	      // 2016-09-16
+	      // listener がいなかったら止める
+	      watched = false;
+	      window.removeEventListener('scroll', this.boundScroll);
+	    }
+	    /**
+	     * window.onscroll event handler<br>
+	     * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します<br>
+	     * {{type: string, originalEvent: Event, y: number, height: number, moving: number, changed: boolean}} event object
+	     * @param {Event} originalEvent window scroll event
+	     */
+
+	  }, {
+	    key: 'onScroll',
+	    value: function onScroll(originalEvent) {
+	      // this.dispatch( { type: Scroll.SCROLL, originalEvent: event, y: Scroll.y } );
+	      // @since 2016-09-30, 戻り値に window.innerHeight, moving, changed 追加
+	      var previous = this.previous;
+	      var type = Scroll.SCROLL;
+	      var y = Scroll.y;
+	      var height = window.innerHeight;
+	      var bottom = y + height;
+	      // @type {number} - 正の時: scroll down
+	      var moving = previous - y;
+	      var changed = moving !== 0;
+	      var direction = Math.sqrt(moving * moving) / moving;
+	      // scroll 方向が変わったら distance を 0 にする
+	      if (direction !== this.direction) {
+	        this.distance = 0;
+	        this.direction = direction;
+	      }
+	      var distance = this.distance + moving;
+	      this.distance = distance;
+	      this.previous = y;
+	      this.dispatch({
+	        type: type,
+	        originalEvent: originalEvent,
+	        y: y,
+	        height: height,
+	        bottom: bottom,
+	        moving: moving,
+	        distance: distance,
+	        changed: changed
+	      });
+	    }
+	    /**
+	     * 強制的に scroll event を発生させます
+	     */
+
+	  }, {
+	    key: 'fire',
+	    value: function fire() {
+	      // this.dispatch( { type: Scroll.SCROLL, originalEvent: null, y: Scroll.y } );
+	      // @since 2016-09-30, 戻り値に window.innerHeight, moving, changed 追加
+	      var previous = this.previous;
+	      var type = Scroll.SCROLL;
+	      var y = Scroll.y;
+	      var height = window.innerHeight;
+	      var bottom = y + height;
+	      // @type {number} - 正の時: scroll down
+	      // on 2016-10-28, 下記式だと 負の時: scroll down, かなり長いこと使ってるのでこのままにします
+	      var moving = previous - y;
+	      // const direction = Math.sqrt(moving * moving) / moving;
+	      // // scroll 方向が変わったら distance を 0 にする
+	      // if (direction !== this.direction) {
+	      //   this.distance = 0;
+	      //   this.direction = direction;
+	      // }
+	      var distance = this.distance + moving;
+	      this.distance = distance;
+
+	      // this.previous = y;
+	      this.dispatch({
+	        type: type,
+	        y: y,
+	        height: height,
+	        bottom: bottom,
+	        moving: moving,
+	        distance: distance,
+	        originalEvent: null,
+	        changed: true
+	      });
+	    }
+	  }]);
+	  return Scroll;
+	}(_EventDispatcher2.EventDispatcher);
+
+/***/ }),
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -14601,7 +13579,7 @@
 	}();
 
 /***/ }),
-/* 149 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14840,7 +13818,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 150 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14853,23 +13831,23 @@
 
 	var _Dom2 = _interopRequireDefault(_Dom);
 
-	var _ViewFlushModal = __webpack_require__(107);
+	var _ViewFlushModal = __webpack_require__(146);
 
 	var _ViewFlushModal2 = _interopRequireDefault(_ViewFlushModal);
 
-	var _SPViewAppBanner = __webpack_require__(151);
+	var _SPViewAppBanner = __webpack_require__(149);
 
 	var _SPViewAppBanner2 = _interopRequireDefault(_SPViewAppBanner);
 
-	var _SPViewHeaderSearch = __webpack_require__(152);
+	var _SPViewHeaderSearch = __webpack_require__(150);
 
 	var _SPViewHeaderSearch2 = _interopRequireDefault(_SPViewHeaderSearch);
 
-	var _SPViewHeaderUser = __webpack_require__(154);
+	var _SPViewHeaderUser = __webpack_require__(152);
 
 	var _SPViewHeaderUser2 = _interopRequireDefault(_SPViewHeaderUser);
 
-	var _SPPageTop = __webpack_require__(165);
+	var _SPPageTop = __webpack_require__(163);
 
 	var _SPPageTop2 = _interopRequireDefault(_SPPageTop);
 
@@ -14964,7 +13942,628 @@
 	exports.default = mobile();
 
 /***/ }),
-/* 151 */
+/* 146 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(85);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(95);
+
+	var _View3 = _interopRequireDefault(_View2);
+
+	var _MessageStatus = __webpack_require__(147);
+
+	var _FlushNode = __webpack_require__(148);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	/* eslint-disable no-unused-vars */
+	/**
+	 * [library] - React
+	 */
+	var React = self.React;
+	/* eslint-enable no-unused-vars */
+	/**
+	 * [library] - ReactDOM
+	 */
+
+
+	// node
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/03/26 - 13:17
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * フラッシュ・メッセージ・モーダル
+	 */
+
+	var ViewFlushModal = function (_View) {
+	  (0, _inherits3.default)(ViewFlushModal, _View);
+
+	  /**
+	   * フラッシュ・メッセージ・モーダル
+	   * @param {Element} element target HTMLElement
+	   * @param {Object} [option={}] optional event handler
+	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	   * @since 2-18-04-19 vk header - flag 追加
+	   */
+	  function ViewFlushModal(element) {
+	    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	    var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+	    (0, _classCallCheck3.default)(this, ViewFlushModal);
+
+	    /**
+	     * modal instance
+	     * @type {null|Object}
+	     * @private
+	     */
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (ViewFlushModal.__proto__ || (0, _getPrototypeOf2.default)(ViewFlushModal)).call(this, element, option, vk));
+
+	    _this._render = null;
+	    /**
+	     * bind onModal
+	     * @type {function}
+	     */
+	    _this.onModal = _this.onModal.bind(_this);
+	    /**
+	     * 完了・注意など一時表示メッセージイベント instance
+	     * @type {MessageStatus}
+	     */
+	    _this.status = _MessageStatus.MessageStatus.factory();
+	    return _this;
+	  }
+	  /**
+	   * 初期化
+	   */
+
+
+	  (0, _createClass3.default)(ViewFlushModal, [{
+	    key: 'start',
+	    value: function start() {
+	      this.render();
+
+	      var status = this.status;
+	      status.off(_MessageStatus.MessageStatus.FLUSH, this.onModal);
+	      status.on(_MessageStatus.MessageStatus.FLUSH, this.onModal);
+	    }
+	    /**
+	     * component 作成
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      this._render = ReactDOM.render(React.createElement(_FlushNode.FlushNode, {
+	        vk: this.vk
+	      }), this.element);
+	    }
+	    /**
+	     * MessageStatus.FLUSH event handler,
+	     * modal window を open します
+	     * @param {Object} event MessageStatus.FLUSH event instance
+	     */
+
+	  }, {
+	    key: 'onModal',
+	    value: function onModal(event) {
+	      // console.log( 'flush modal event ', event );
+	      this._render.updateShow(true, event.message, event.kind, event.sp);
+	    }
+	  }]);
+	  return ViewFlushModal;
+	}(_View3.default);
+
+	exports.default = ViewFlushModal;
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.MessageStatus = undefined;
+
+	var _getPrototypeOf = __webpack_require__(85);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(89);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _inherits2 = __webpack_require__(90);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _symbol = __webpack_require__(69);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	var _EventDispatcher2 = __webpack_require__(96);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * {@link MessageStatus} inner symbol
+	 * @type {symbol}
+	 */
+	var messageStatusSymbol = (0, _symbol2.default)('MessageStatus symbol');
+	/**
+	 * {@link MessageStatus} singleton instance
+	 * @type {?MessageStatus}
+	 * @private
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/24 - 14:31
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	/* eslint constructor-super: 0 */
+
+	var singletonInstance = null;
+
+	// React
+	/* eslint-disable no-unused-vars */
+	/**
+	 * [library] - React
+	 */
+	var React = self.React;
+	/* eslint-enable no-unused-vars */
+
+	/**
+	 * flush message
+	 * - 完了・注意など一時表示メッセージイベント
+	 */
+
+	var MessageStatus = exports.MessageStatus = function (_EventDispatcher) {
+	  (0, _inherits3.default)(MessageStatus, _EventDispatcher);
+	  (0, _createClass3.default)(MessageStatus, null, [{
+	    key: 'message',
+
+	    /**
+	     * Flush modal に表示するメッセージを作成します
+	     * @param {string} txt 表示テキスト
+	     * @return {XML} JSX を返します
+	     */
+	    value: function message() {
+	      var txt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+	      return React.createElement(
+	        'div',
+	        { className: 'messageText' },
+	        txt
+	      );
+	    }
+	    // ---------------------------------------------------
+	    //  static method
+	    // ---------------------------------------------------
+	    /**
+	     * instance を生成します
+	     * @return {MessageStatus} MessageStatus instance を返します
+	     */
+
+	  }, {
+	    key: 'factory',
+	    value: function factory() {
+	      if (singletonInstance === null) {
+	        singletonInstance = new MessageStatus(messageStatusSymbol);
+	      }
+	      return singletonInstance;
+	    }
+	    /**
+	     * flush message
+	     * @param {Symbol} target Singleton を実現するための private symbol
+	     * @return {MessageStatus} MessageStatus instance を返します
+	     */
+
+	  }, {
+	    key: 'FLUSH',
+
+	    // ---------------------------------------------------
+	    //  EVENT
+	    // ---------------------------------------------------
+	    /**
+	     * FLUSH message のみ
+	     * @return {string} messageFlush を返します
+	     */
+	    get: function get() {
+	      return 'messageFlush';
+	    }
+	    /**
+	     * CONFIRM confirm window
+	     * @return {string} messageConfirm を返します
+	     */
+
+	  }, {
+	    key: 'CONFIRM',
+	    get: function get() {
+	      return 'messageConfirm';
+	    }
+	    /**
+	     * ALERT alert window
+	     * @return {string} messageAlert を返します
+	     */
+
+	  }, {
+	    key: 'ALERT',
+	    get: function get() {
+	      return 'messageAlert';
+	    }
+	    /**
+	     * comment delete confirm
+	     * @return {string} messageDelete を返します
+	     */
+
+	  }, {
+	    key: 'DELETE',
+	    get: function get() {
+	      return 'messageDelete';
+	    }
+	    /**
+	     * OK_CLICK
+	     * @return {string} messageOkClick
+	     */
+
+	  }, {
+	    key: 'OK_CLICK',
+	    get: function get() {
+	      return 'messageOkClick';
+	    }
+	    /**
+	     * CANCEL_CLICK
+	     * @return {string} messageCancelClick
+	     */
+
+	  }, {
+	    key: 'CANCEL_CLICK',
+	    get: function get() {
+	      return 'messageCancelClick';
+	    }
+	    // ---------------------------------------------------
+	    //  CONST
+	    // ---------------------------------------------------
+	    /**
+	     * メッセージ種類 INFO
+	     * @return {string} info
+	     */
+
+	  }, {
+	    key: 'INFO',
+	    get: function get() {
+	      return 'info';
+	    }
+	    /**
+	     * メッセージ種類 ERROR
+	     * @return {string} error
+	     */
+
+	  }, {
+	    key: 'ERROR',
+	    get: function get() {
+	      return 'error';
+	    }
+	    /**
+	     * メッセージ種類 SUCCESS
+	     * @return {string} success
+	     */
+
+	  }, {
+	    key: 'SUCCESS',
+	    get: function get() {
+	      return 'success';
+	    }
+	  }]);
+
+	  function MessageStatus(target) {
+	    var _ret;
+
+	    (0, _classCallCheck3.default)(this, MessageStatus);
+
+	    if (messageStatusSymbol !== target) {
+	      throw new Error('MessageStatus is static Class. not use new MessageStatus(). instead MessageStatus.factory()');
+	    }
+	    if (singletonInstance === null) {
+	      var _this = (0, _possibleConstructorReturn3.default)(this, (MessageStatus.__proto__ || (0, _getPrototypeOf2.default)(MessageStatus)).call(this));
+
+	      singletonInstance = _this;
+	    }
+	    return _ret = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * flush message event を発火します
+	   * @param {XML} message 表示 Element
+	   * @param {string} [type=info] flush message 種類 - {@link MessageStatus}.FLUSH
+	   * @param {boolean} [sp=false] sp or PC | Tablet
+	   */
+
+
+	  (0, _createClass3.default)(MessageStatus, [{
+	    key: 'flush',
+	    value: function flush(message) {
+	      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : MessageStatus.INFO;
+	      var sp = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+	      this.dispatch({ type: MessageStatus.FLUSH, message: message, kind: type, sp: sp });
+	    }
+	    /**
+	     * confirm window event を発火します
+	     * @param {string} message 表示文字列
+	     * @param {Function} ok ok click callback
+	     * @param {Function} cancel cancel click callback
+	     * @param {string} [type=info] flush message 種類 - {@link MessageStatus}.INFO
+	     */
+
+	  }, {
+	    key: 'alert',
+	    value: function alert(message, ok, cancel) {
+	      var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : MessageStatus.INFO;
+
+	      this.dispatch({ type: MessageStatus.ALERT, message: message, ok: ok, cancel: cancel, kind: type });
+	    }
+	    /**
+	     * alert window event を発火します
+	     * @param {string} message 表示文字列
+	     * @param {Function} ok ok click callback
+	     * @param {Function} cancel cancel click callback
+	     * @param {string} [type=info] flush message 種類 - {@link MessageStatus}.INFO
+	     */
+
+	  }, {
+	    key: 'confirm',
+	    value: function confirm(message, ok, cancel) {
+	      var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : MessageStatus.INFO;
+
+	      this.dispatch({ type: MessageStatus.CONFIRM, message: message, ok: ok, cancel: cancel, kind: type });
+	    }
+	    /**
+	     * 削除モーダル
+	     * @param {string} id unique id
+	     * @param {Function} [ok] ok callback
+	     * @param {Function} [cancel] cancel callback
+	     * @param {string} [type=MessageStatus.INFO] message type MessageStatus.INFO | MessageStatus.ERROR | MessageStatus.SUCCESS
+	     */
+
+	  }, {
+	    key: 'remove',
+	    value: function remove(id, ok, cancel) {
+	      var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : MessageStatus.INFO;
+
+	      if (!ok) {
+	        ok = function ok() {};
+	      }
+	      if (!cancel) {
+	        cancel = function cancel() {};
+	      }
+	      this.dispatch({ type: MessageStatus.DELETE, id: id, ok: ok, cancel: cancel, kind: type });
+	    }
+	  }]);
+	  return MessageStatus;
+	}(_EventDispatcher2.EventDispatcher);
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.FlushNode = undefined;
+
+	var _MessageStatus = __webpack_require__(147);
+
+	var _Scroll = __webpack_require__(142);
+
+	//
+	// // Sagen
+	// let Sagen = self.Sagen;
+
+	// React
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/03/26 - 13:24
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	var React = self.React;
+
+	// tween
+
+	// import {Message} from '../../app/const/Message';
+
+	// util
+	var greensock = self.com.greensock;
+	var TweenLite = greensock.TweenLite;
+	var easing = greensock.easing;
+
+	/**
+	 * Flush modal を表示します
+	 * @type {*|Function|ReactClass}
+	 */
+	var FlushNode = exports.FlushNode = React.createClass({
+	  displayName: 'FlushNode',
+
+	  propTypes: {
+	    show: React.PropTypes.bool,
+	    type: React.PropTypes.string,
+	    message: React.PropTypes.element,
+	    vk: React.PropTypes.bool
+	  },
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      show: false,
+	      // info | error | success の 3種類
+	      type: 'info',
+	      message: React.createElement(
+	        'p',
+	        null,
+	        '\xA0'
+	      ),
+	      vk: false
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    // this.status = null;
+	    // this.sp = Sagen.Browser.Mobile.phone();
+	    this.top = 0;
+
+	    return {
+	      show: this.props.show,
+	      type: this.props.type,
+	      message: this.props.message,
+	      css: { opacity: 0 }
+	    };
+	  },
+	  openModal: function openModal() {
+	    var object = { opacity: 0 };
+	    var _this = this;
+
+	    TweenLite.to(object, 0.1, {
+	      opacity: 1,
+	      easing: easing.Linear.easeNone,
+	      onUpdate: function onUpdate() {
+	        _this.setState({ css: { opacity: object.opacity } });
+	      },
+	      onComplete: function onComplete() {
+	        _this.setState({ css: { opacity: 1 } });
+	        _this.closeModal(0.25 * 3);
+	      }
+	    });
+	  },
+	  closeModal: function closeModal() {
+	    var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+	    var object = { opacity: 1 };
+	    var _this = this;
+
+	    TweenLite.to(object, 0.5, {
+	      delay: delay,
+	      opacity: 0,
+	      easing: easing.Linear.easeNone,
+	      onUpdate: function onUpdate() {
+	        _this.setState({ css: { opacity: object.opacity } });
+	      },
+	      onComplete: function onComplete() {
+	        _this.setState({ css: { opacity: 0 }, show: false });
+	        _this.top = 0;
+	      }
+	    });
+	  },
+	  updateShow: function updateShow(show, message) {
+	    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _MessageStatus.MessageStatus.INFO;
+	    var sp = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+	    // console.log( 'updateShow ', show, message, type, sp );
+	    if (sp) {
+	      this.top = _Scroll.Scroll.y;
+	    } else {
+	      this.top = 0;
+	    }
+	    this.setState({ show: show, message: message, type: type });
+	    if (show) {
+	      this.openModal();
+	    }
+	  },
+	  render: function render() {
+	    var _this2 = this;
+
+	    var position = function position() {
+	      if (_this2.top !== 0) {
+	        return { top: _this2.top + 'px' };
+	      } else {
+	        return { opacity: 1 };
+	      }
+	    };
+	    // console.log( 'render ', this.state.show, position() );
+	    if (!this.state.show) {
+	      return null;
+	    } else {
+	      return React.createElement(
+	        'div',
+	        { className: 'modal-dialogue modal-dialogue_delete', style: this.state.css },
+	        React.createElement('div', { className: 'flush-modal-bg modal-bg' }),
+	        React.createElement(
+	          'div',
+	          { className: 'flush-dialogue dialogue-notice ' + this.state.type, style: position() },
+	          React.createElement(
+	            'div',
+	            { className: 'dialogue-notice-inner' },
+	            React.createElement(
+	              'div',
+	              { className: 'dialogue-notice-info' },
+	              this.state.message
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }
+	});
+
+/***/ }),
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14982,9 +14581,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Cookie = __webpack_require__(114);
+	var _Cookie = __webpack_require__(110);
 
-	var _Scroll = __webpack_require__(110);
+	var _Scroll = __webpack_require__(142);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15310,7 +14909,7 @@
 	exports.default = SPViewAppBanner;
 
 /***/ }),
-/* 152 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15343,7 +14942,7 @@
 
 	var _ViewHeaderSearch3 = _interopRequireDefault(_ViewHeaderSearch2);
 
-	var _SPComponentHeaderSearchOpener = __webpack_require__(153);
+	var _SPComponentHeaderSearchOpener = __webpack_require__(151);
 
 	var _SPComponentHeaderSearchOpener2 = _interopRequireDefault(_SPComponentHeaderSearchOpener);
 
@@ -15452,7 +15051,7 @@
 	exports.default = SPViewHeaderSearch;
 
 /***/ }),
-/* 153 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15483,7 +15082,7 @@
 
 	var _SearchStatus = __webpack_require__(104);
 
-	var _Scroll = __webpack_require__(110);
+	var _Scroll = __webpack_require__(142);
 
 	var _Message = __webpack_require__(106);
 
@@ -15654,7 +15253,7 @@
 	exports.default = SPComponentHeaderSearchOpener;
 
 /***/ }),
-/* 154 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15688,11 +15287,11 @@
 
 	var _View3 = _interopRequireDefault(_View2);
 
-	var _SPViewHeaderMember = __webpack_require__(155);
+	var _SPViewHeaderMember = __webpack_require__(153);
 
 	var _SPViewHeaderMember2 = _interopRequireDefault(_SPViewHeaderMember);
 
-	var _User = __webpack_require__(113);
+	var _User = __webpack_require__(109);
 
 	var _Url = __webpack_require__(105);
 
@@ -15893,7 +15492,7 @@
 	exports.default = SPViewHeaderUser;
 
 /***/ }),
-/* 155 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15926,15 +15525,15 @@
 
 	var _View2 = _interopRequireDefault(_View);
 
-	var _ViewHeaderMember2 = __webpack_require__(112);
+	var _ViewHeaderMember2 = __webpack_require__(108);
 
 	var _ViewHeaderMember3 = _interopRequireDefault(_ViewHeaderMember2);
 
-	var _SPComponentHeaderMemberSetting = __webpack_require__(156);
+	var _SPComponentHeaderMemberSetting = __webpack_require__(154);
 
 	var _SPComponentHeaderMemberSetting2 = _interopRequireDefault(_SPComponentHeaderMemberSetting);
 
-	var _Empty = __webpack_require__(144);
+	var _Empty = __webpack_require__(140);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16051,7 +15650,7 @@
 	exports.default = SPViewHeaderMember;
 
 /***/ }),
-/* 156 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16084,17 +15683,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Length = __webpack_require__(157);
+	var _Length = __webpack_require__(155);
 
-	var _Polling = __webpack_require__(158);
+	var _Polling = __webpack_require__(156);
 
 	var _Polling2 = _interopRequireDefault(_Polling);
 
-	var _Model = __webpack_require__(160);
+	var _Model = __webpack_require__(158);
 
-	var _ModelNoticeCount = __webpack_require__(161);
+	var _ModelNoticeCount = __webpack_require__(159);
 
-	var _NoticeStatus = __webpack_require__(164);
+	var _NoticeStatus = __webpack_require__(162);
 
 	var _View = __webpack_require__(95);
 
@@ -16102,7 +15701,7 @@
 
 	var _Safety = __webpack_require__(24);
 
-	var _Empty = __webpack_require__(144);
+	var _Empty = __webpack_require__(140);
 
 	var _Url = __webpack_require__(105);
 
@@ -16384,7 +15983,7 @@
 	exports.default = SPComponentHeaderMemberSetting;
 
 /***/ }),
-/* 157 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16705,7 +16304,7 @@
 	}();
 
 /***/ }),
-/* 158 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16736,7 +16335,7 @@
 
 	var _EventDispatcher2 = __webpack_require__(96);
 
-	var _Cycle = __webpack_require__(159);
+	var _Cycle = __webpack_require__(157);
 
 	var _Cycle2 = _interopRequireDefault(_Cycle);
 
@@ -17127,7 +16726,7 @@
 	exports.default = Polling;
 
 /***/ }),
-/* 159 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17431,7 +17030,7 @@
 	exports.default = Cycle;
 
 /***/ }),
-/* 160 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17651,7 +17250,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 161 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17681,13 +17280,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Model2 = __webpack_require__(160);
+	var _Model2 = __webpack_require__(158);
 
-	var _Result = __webpack_require__(119);
+	var _Result = __webpack_require__(115);
 
-	var _NoticeCount = __webpack_require__(162);
+	var _NoticeCount = __webpack_require__(160);
 
-	var _NoticeCountDae = __webpack_require__(163);
+	var _NoticeCountDae = __webpack_require__(161);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17777,7 +17376,7 @@
 	}(_Model2.Model);
 
 /***/ }),
-/* 162 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17803,11 +17402,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _ActionAuth2 = __webpack_require__(117);
+	var _ActionAuth2 = __webpack_require__(113);
 
-	var _Api = __webpack_require__(125);
+	var _Api = __webpack_require__(121);
 
-	var _User = __webpack_require__(113);
+	var _User = __webpack_require__(109);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17843,7 +17442,7 @@
 	                             */
 
 /***/ }),
-/* 163 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17861,9 +17460,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _StatusDae = __webpack_require__(122);
+	var _StatusDae = __webpack_require__(118);
 
-	var _Result = __webpack_require__(119);
+	var _Result = __webpack_require__(115);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17957,7 +17556,7 @@
 	}();
 
 /***/ }),
-/* 164 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18104,7 +17703,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ }),
-/* 165 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18234,7 +17833,7 @@
 	exports.default = SPPageTop;
 
 /***/ }),
-/* 166 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

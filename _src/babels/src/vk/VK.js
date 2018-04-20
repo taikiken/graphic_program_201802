@@ -16,10 +16,13 @@ let prefix = '';
  * VK - 設定ファイル
  */
 export default class VK {
-  static get prefix() {
+  static get PREFIX() {
     return prefix;
   }
-  static set prefix(dataPrefix) {
+  static set PREFIX(dataPrefix) {
     prefix = dataPrefix;
+  }
+  static prefix(vk = false) {
+    return vk ? VK.PREFIX : '';
   }
 }

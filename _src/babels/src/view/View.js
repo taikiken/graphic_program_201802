@@ -16,6 +16,7 @@
 
 import { EventDispatcher } from '../event/EventDispatcher';
 import { Safety } from '../data/Safety';
+import VK from '../vk/VK';
 
 /**
  * 表示を行います
@@ -131,6 +132,11 @@ export default class View extends EventDispatcher {
      * @since 2018-04-19 - VK header
      */
     this.vk = vk;
+    /**
+     * selector(className) prefix
+     * @type {string}
+     */
+    this.prefix = VK.prefix(vk);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
