@@ -230,10 +230,10 @@ class ViewModel {
   public function get_site_url($addSlash = true) {
 
     // PRODUCTIONで `$_SERVER["HTTPS"]` が取得できてないようなので強制的にhttps
-    if ( !empty($_SERVER["HTTPS"]) || UT_ENV == 'PRODUCTION' ) :
-      $protocol = "https://";
-    else :
+    if ( UT_ENV === 'LOCAL' ) :
       $protocol = "http://";
+    else :
+      $protocol = "https://";
     endif;
 
     $host = $_SERVER['HTTP_HOST'];
