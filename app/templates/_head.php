@@ -101,4 +101,8 @@
 <?php endif; ?>
 
 
-<?php include_once __DIR__.'/_env.php'; ?>
+<?php
+if ( $page['conditional']['head_env'] ) :
+  include_once __DIR__.'/_env.php';
+endif;
+?>

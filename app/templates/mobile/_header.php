@@ -86,7 +86,12 @@ endif;
 
 <?php endif; ?>
 
-<?php include_once __DIR__.'/../_head_bottom.php'; ?>
+
+<?php
+if ( $page['conditional']['head_bottom'] ) :
+  include_once __DIR__."/../_head_bottom.php";
+endif;
+?>
 
 
 <?php if ( $page['conditional']['head_video'] ) :

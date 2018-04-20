@@ -32,6 +32,7 @@ $app->group('/inc', function () use ($app) {
           'head_canonical'   => false,
           'head_syn'         => false,
           'head_icon'        => false,
+          'head_env'         => false,
           'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
@@ -61,6 +62,7 @@ $app->group('/inc', function () use ($app) {
           'head_canonical'   => false,
           'head_syn'         => false,
           'head_icon'        => false,
+          'head_env'         => false,
           'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
@@ -91,6 +93,7 @@ $app->group('/inc', function () use ($app) {
           'head_canonical'   => false,
           'head_syn'         => false,
           'head_icon'        => false,
+          'head_env'         => false,
           'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
@@ -109,8 +112,6 @@ $app->group('/inc', function () use ($app) {
 
       default:
       $conditional = array(
-        'head_icon'     => false,
-        'head_bottom'   => false,
         'header_appbnr' => false,
         'whole'         => false,
         'announce'      => false,

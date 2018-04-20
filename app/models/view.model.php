@@ -110,7 +110,8 @@ class ViewModel {
       'head_canonical'   => true, // canonical
       'head_syn'         => true, // synextbot
       'head_icon'        => true, // apple-touch-icon
-      'head_bottom'      => true,
+      'head_env'         => true, // SPBL_ENV
+      'head_bottom'      => true, // ga/dfp系タグ
       'head_video'       => true, // streampack video code
       'body_start'       => true, // </head><body>
       'whole'            => true, // <div class="whole">
