@@ -11,7 +11,7 @@
  */
 
 
-import { Types } from './Types';
+// import { Types } from './Types';
 import { User } from './../app/User';
 import ApiDae from './../app/ApiDae';
 
