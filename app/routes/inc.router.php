@@ -109,10 +109,11 @@ $app->group('/inc', function () use ($app) {
 
       default:
       $conditional = array(
-        'head_icon'    => false,
-        'head_bottom'  => false,
-        'whole'        => false,
-        'announce'     => false,
+        'head_icon'     => false,
+        'head_bottom'   => false,
+        'header_appbnr' => false,
+        'whole'         => false,
+        'announce'      => false,
       );
 
     endswitch;
