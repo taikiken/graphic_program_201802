@@ -9,6 +9,7 @@ class ViewModel {
     'site_name'          => 'スポーツブル (スポブル)',
     'site_tagline'       => '完全無料のスポーツアプリ',
     'site_url'           => '', // サイトURL - サーバから取得
+    'site_url_uts'       => '', // サイトURLから末のスラッシュを除去したもの
     'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
 
     'site_categories'    => '', // ナビ用サイトカテゴリー DBから取得
@@ -139,6 +140,7 @@ class ViewModel {
 
     // site
     $this->default['site_url']        = $this->get_site_url();
+    $this->default['site_url_uts']    = rtrim($this->default['site_url'], '/');
 
     if ( UT_ENV === 'LOCAL') :
       # 2016-04-27
