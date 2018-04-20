@@ -11,31 +11,15 @@
  */
 
 
-import {Types} from './Types';
-import {User} from './../app/User';
+import { Types } from './Types';
+import { User } from './../app/User';
 import ApiDae from './../app/ApiDae';
-
-// const _symbol = Symbol('');
 
 /**
  * サーバーリクエストAPIを管理します
  * - 全て static
  */
 export class Api {
-  // /**
-  //  * サーバーリクエストAPI
-  //  * static class です、instance を作成できません
-  //  * @param {Symbol} target Singleton を実現するための private symbol
-  //  */
-  // constructor( target ) {
-  //
-  //   if ( _symbol !== target ) {
-  //
-  //     throw new Error( 'Api is static Class. not use new Api().');
-  //
-  //   }
-  //
-  // }
   /**
    * `/api/` 前 domain を再生成します
    * - test, develop 切り替えに使用します
@@ -82,7 +66,7 @@ export class Api {
    * 退会
    * @return {Types} 退会 API をTypes instanceで返します
    */
-  static leave():Types {
+  static leave() {
     return ApiDae.api('users:delete');
   }
   /**
@@ -313,7 +297,7 @@ export class Api {
    * @return {Types} comment API をTypes instanceで返します
    */
   static replay(action = '') {
-    switch ( action ) {
+    switch (action) {
       case 'delete':
         return Api.comment('reply:delete');
 
@@ -367,6 +351,7 @@ export class Api {
 
       case 'notifications:count':
       case 'notice:count':
+        console.warn('users:self:notifications:count deprecated');
         return ApiDae.api('users:self:notifications:count');
 
       default:
@@ -379,7 +364,7 @@ export class Api {
    * @return {Types} お知らせ系 users API を Types instance で返します
    */
   static notice(action = '') {
-    switch ( action ) {
+    switch (action) {
       case 'read':
         return Api.users(`notice:${action}`);
 
