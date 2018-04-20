@@ -53,24 +53,24 @@ endif;
   <?php endif;?>
 
   <?php if ( $page['template'] === 'inc' ) : ?>
-    <link rel="stylesheet" href="/inc/assets/<?php echo $page['directory']; ?>/mobile/inc.css/?v=<?php echo $page['version']; ?>">
+    <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/inc/assets/<?php echo $page['directory']; ?>/mobile/inc.css/?v=<?php echo $page['version']; ?>">
   <?php else : ?>
-    <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+    <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
   <?php endif; ?>
 
   <?php if ($page['conditional']['header']) : ?>
     <?php # Syn. require module ?>
-    <script src="/assets/sp/js/libs/synapse/synapse.js?v=<?php echo $page['version']; ?>"></script>
-    <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
-    <script src="/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/synapse.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
   <?php endif; // end of Syn. ?>
 
   <?php
   // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
   // @since 2017-08-21
   ?>
-  <script src="/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
-  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
 
   <?php
   /*
@@ -82,7 +82,7 @@ endif;
     テストの時はつけてください
    */
   ?>
-  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php endif; ?>
 
@@ -177,14 +177,14 @@ endif;
   <nav id="global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
     <div id="gnav-sec-inner" class="<?php echo $page['html_prefix']; ?>gnav-sec-inner">
       <ul id="gnav-sec-list">
-        <li id="home" class="<?php echo $page['html_prefix']; ?>gnav-home"><a href="/">TOP</a></li>
+        <li id="home" class="<?php echo $page['html_prefix']; ?>gnav-home"><a href="<?php echo $page['site_url_uts']; ?>/">TOP</a></li>
 
         <?php foreach( $page['site_tabs'] as $tab ) {
           // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
           // タブの表示順はAPI通りにする
           ?>
           <li id="<?php echo $tab['slug']; ?>" class="<?php echo $page['html_prefix']; ?>gnav-<?php echo $tab['slug']; ?>">
-            <a href="/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
+            <a href="<?php echo $page['site_url_uts']; ?>/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
           </li>
         <?php }//foreach ?>
       </ul>
