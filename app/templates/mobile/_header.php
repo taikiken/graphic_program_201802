@@ -158,26 +158,26 @@ endif;
     <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
       <h1><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a></h1>
 
-      <div id="menu-opener" class="<?php echo $page['html_prefix']; ?>menu-opener">
-        <a id="side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
+      <div id="<?php echo $page['html_prefix']; ?>menu-opener" class="<?php echo $page['html_prefix']; ?>menu-opener">
+        <a id="<?php echo $page['html_prefix']; ?>side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
       </div>
 
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-inner-right">
-        <span id="search-container-opener"></span>
+        <span id="<?php echo $page['html_prefix']; ?>search-container-opener"></span>
 
-        <div id="user-profile-container"></div><!--/.user-profile-container-->
+        <div id="<?php echo $page['html_prefix']; ?>user-profile-container"></div><!--/.user-profile-container-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
 
 
-  <div id="head-search-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-search-container"></div>
+  <div id="<?php echo $page['html_prefix']; ?>head-search-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-search-container"></div>
 
 
-  <nav id="global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
-    <div id="gnav-sec-inner" class="<?php echo $page['html_prefix']; ?>gnav-sec-inner">
-      <ul id="gnav-sec-list">
-        <li id="home" class="<?php echo $page['html_prefix']; ?>gnav-home"><a href="<?php echo $page['site_url_uts']; ?>/">TOP</a></li>
+  <nav id="<?php echo $page['html_prefix']; ?>global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
+    <div id="<?php echo $page['html_prefix']; ?>gnav-sec-inner" class="<?php echo $page['html_prefix']; ?>gnav-sec-inner">
+      <ul id="<?php echo $page['html_prefix']; ?>gnav-sec-list">
+        <li id="<?php echo $page['html_prefix']; ?>home" class="<?php echo $page['html_prefix']; ?>gnav-home"><a href="<?php echo $page['site_url_uts']; ?>/">TOP</a></li>
 
         <?php foreach( $page['site_tabs'] as $tab ) {
           // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
