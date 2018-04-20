@@ -118,17 +118,20 @@ if($q->get_dir()===0){
 
         include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/ex.php";
 
-        $sql=sprintf("select sort_no from %s where id=%s",$TABLE,$g->f("id"));
+        $sql=sprintf("select id, sort_no from %s where id=%s",$TABLE,$g->f("id"));
         $o->query($sql);
         $n=$o->fetch_array();
-
-        $sql=sprintf("update %s set sort_no=sort_no-1 where sort_no>=%s",$TABLE,$n["sort_no"]);
+        $sql= "select count(DISTINCT bottom_tab_id) as c from bottom_tab_nodes where parent_tab_id = ".$n['id']." and type=1 and bottom_tab_id in (select id from bottom_tab_categories) ";
         $o->query($sql);
-
-        $o=new dbutl($TABLE);
-        $e=$o->remove($g->f("id"));
-        $o=new dbutl($TABLE2);
-        $e=$o->remove($g->f("id"));
+        $count=$o->fetch_array();
+        if ($count['c'] == 0){
+            $sql=sprintf("update %s set sort_no=sort_no-1 where sort_no>%s and id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS NULL AND type=1 )",$TABLE,$n["sort_no"]);
+            $o->query($sql);
+            $o=new dbutl($TABLE);
+            $e=$o->remove($g->f("id"));
+            $o=new dbutl($TABLE2);
+            $e=$o->remove($g->f("id"));
+        }
     }
 }elseif($q->get_dir()===3){
     $FIELD="*";

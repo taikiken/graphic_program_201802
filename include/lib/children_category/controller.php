@@ -148,7 +148,7 @@ if($q->get_dir()===0){
         $o->query($sql);
         $n=$o->fetch_array();
 
-        $sql=sprintf("update %s set sort_no=sort_no-1 where sort_no>=%s",$TABLE,$n["sort_no"]);
+        $sql=sprintf("update %s set sort_no=sort_no-1 where sort_no>=%s and id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS not NULL AND type=1 )",$TABLE,$n["sort_no"]);
         $o->query($sql);
 
         $o=new dbutl($TABLE);
