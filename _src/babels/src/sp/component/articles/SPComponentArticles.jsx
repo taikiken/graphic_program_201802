@@ -207,7 +207,7 @@ export default class SPComponentArticles extends React.Component {
                recommend: false 固定にし対応します
                */
               return (
-                <div key={`latest-${dae.id}`} className="latest-line">
+                <div key={`latest-${dae.id}`} className={`latest-line latest-line-${i}`}>
                   <div key={`latest-${dae.id}`} className="board-item">
                     <a href={dae.url} className="post">
                       <ComponentArticleThumbnail
