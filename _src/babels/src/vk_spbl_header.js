@@ -43,12 +43,14 @@ const sagen = (Sagen, selector) => {
 
 const init = (selector) => {
   const script = document.getElementById(selector);
+  console.log('init', selector, script);
   if (!script) {
     return false;
   }
   // ---
   const domain = script.dataset.domain || '';
   const prefix = script.dataset.prefix || '';
+  console.log('init', domain, prefix);
   Url.host = domain;
   VK.PREFIX = prefix;
   return true;
@@ -61,7 +63,7 @@ const init = (selector) => {
  * - script[data-prefix] - option, default: '', css className prefix
  * @param {string} [selector=SPBL_header] script tag ID
  */
-const main = (selector = 'SPBL_header') => {
+const main = (selector = 'SPBL_vk-header_script') => {
   if (!init(selector)) {
     return;
   }

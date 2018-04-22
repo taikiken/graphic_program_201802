@@ -110,7 +110,7 @@ export class User {
    */
   static init() {
     const token = User.token;
-    // console.log( `user init token [${token !== ''}]` );
+    console.log(`user init token [${token !== ''}]`);
     if (token === null || typeof token === 'undefined' || token === '') {
       User.sign = false;
     } else {

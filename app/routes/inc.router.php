@@ -10,7 +10,7 @@ $app->group('/inc', function () use ($app) {
 
   // head
   // ==============================
-  $this->get('/{parts:all|head|header|footer}/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}[/]',  function ($request, $response, $args) use ($app) {
+  $this->get('/{parts:all|head|header|footer|vk}/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}[/]',  function ($request, $response, $args) use ($app) {
 
     // ref. app/models/view.model.php
     $conditional = $app->model->property('conditional');
@@ -104,6 +104,36 @@ $app->group('/inc', function () use ($app) {
           'footer_modal'     => true,
           'footer_script'    => true,
           'html_end'         => false,
+        );
+        break;
+      // vk head / footer test set
+      case 'vk':
+        $conditional = array(
+          'html_start'       => true,
+          'head'             => true,
+          'head_title'       => true,
+          'head_sagen'       => false,
+          'head_assets'      => false,
+          'head_viewport'    => true,
+          'head_seo'         => false,
+          'head_ogp'         => false,
+          'head_canonical'   => false,
+          'head_syn'         => true,
+          'head_icon'        => false,
+          'head_bottom'      => false,
+          'head_video'       => false,
+          'body_start'       => true,
+          'whole'            => true,
+          'header'           => true,
+          'gnav'             => true,
+          'announce'         => false,
+          'sidemenu'         => false,
+          'footer'           => true,
+          'footer_copyright' => false,
+          'footer_modal'     => true,
+          'footer_script'    => false,
+          'html_end'         => true,
+          'vk_script'        => true,
         );
         break;
       default:

@@ -49,6 +49,7 @@ const search = () => {
  */
 const header = () => {
   const element = Dom.profile(true);
+  console.log('header', element);
   if (element) {
     const view = new ViewHeaderUser(element, {}, true);
     view.start();
@@ -95,6 +96,7 @@ const top = () => {
  * vk - desktop 実行します
  */
 const desktop = () => {
+  console.log('desktop');
   // page top
   top();
   // modal 準備

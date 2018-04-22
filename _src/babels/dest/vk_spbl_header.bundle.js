@@ -48,7 +48,7 @@
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2018/04/19 - 12:41
-	 * buildTime: 2018-4-20 17:32:24
+	 * buildTime: 2018-4-22 22:30:32
 	 * @license MIT
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -98,12 +98,14 @@
 
 	var init = function init(selector) {
 	  var script = document.getElementById(selector);
+	  console.log('init', selector, script);
 	  if (!script) {
 	    return false;
 	  }
 	  // ---
 	  var domain = script.dataset.domain || '';
 	  var prefix = script.dataset.prefix || '';
+	  console.log('init', domain, prefix);
 	  _Url.Url.host = domain;
 	  _VK2.default.PREFIX = prefix;
 	  return true;
@@ -117,7 +119,7 @@
 	 * @param {string} [selector=SPBL_header] script tag ID
 	 */
 	var main = function main() {
-	  var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'SPBL_header';
+	  var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'SPBL_vk-header_script';
 
 	  if (!init(selector)) {
 	    return;
@@ -135,7 +137,7 @@
 	 * @type {{build: string, main: main}}
 	 */
 	var SPBL_VK = {
-	  build: '2018-4-20 17:32:24',
+	  build: '2018-4-22 22:30:32',
 	  main: main
 	};
 
@@ -255,6 +257,7 @@
 	// import ViewLogoutModal from '../../view/modal/ViewLogoutModal';
 	var header = function header() {
 	  var element = _Dom2.default.profile(true);
+	  console.log('header', element);
 	  if (element) {
 	    var view = new _ViewHeaderUser2.default(element, {}, true);
 	    view.start();
@@ -301,6 +304,7 @@
 	 * vk - desktop 実行します
 	 */
 	var desktop = function desktop() {
+	  console.log('desktop');
 	  // page top
 	  top();
 	  // modal 準備
@@ -510,33 +514,45 @@
 	    // synapse
 	    /**
 	     * synapse 切り替えメニュー
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
 	     * @return {?Element} side-menu-service element を返します
+	     * @since 2018-04-19 vk header - flag 追加
 	     */
 
 	  }, {
 	    key: 'service',
 	    value: function service() {
-	      return Dom.get('side-menu-service');
+	      var vk = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      return Dom.get(_VK2.default.prefix(vk) + 'side-menu-service');
 	    }
 	    /**
 	     * side メニュー
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
 	     * @return {?Element} side-menu-container element を返します
+	     * @since 2018-04-19 vk header - flag 追加
 	     */
 
 	  }, {
 	    key: 'serviceMenu',
 	    value: function serviceMenu() {
-	      return Dom.get('side-menu-container');
+	      var vk = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      return Dom.get(_VK2.default.prefix(vk) + 'side-menu-container');
 	    }
 	    /**
 	     * side メニュー open / close button
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
 	     * @return {?Element} menu-opener element を返します
+	     * @since 2018-04-19 vk header - flag 追加
 	     */
 
 	  }, {
 	    key: 'serviceOpener',
 	    value: function serviceOpener() {
-	      return Dom.get('menu-opener');
+	      var vk = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      return Dom.get(_VK2.default.prefix(vk) + 'menu-opener');
 	    }
 
 	    // --------------------------------------
@@ -4650,10 +4666,17 @@
 	    // ---------------------------------------------------
 	    /**
 	     * URL index
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
 	     * @return {string} index url を返します
 	     */
 	    value: function index() {
-	      return '/';
+	      var vk = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      // vk - 絶対パスを返す
+	      if (!vk) {
+	        Url.host = '';
+	      }
+	      return Url.host + '/';
 	    }
 	    /**
 	     * category url
@@ -4832,14 +4855,21 @@
 	    }
 	    /**
 	     * SP 専用
-	     * https://github.com/undotsushin/undotsushin/commit/6a99fb16401dd80f5ac1a5c9174b9b93a13408af
+	     * - @see https://github.com/undotsushin/undotsushin/commit/6a99fb16401dd80f5ac1a5c9174b9b93a13408af
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
 	     * @return {string} signup_login url を返します
 	     */
 
 	  }, {
 	    key: 'signupLogin',
 	    value: function signupLogin() {
-	      return '/signup_login/';
+	      var vk = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      // vk - 絶対パスを返す
+	      if (!vk) {
+	        Url.host = '';
+	      }
+	      return Url.host + '/signup_login/';
 	    }
 	    /**
 	     * reset_password url
@@ -4869,6 +4899,7 @@
 	    /**
 	     * mypage url
 	     * @param {string} [path=''] path option
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
 	     * @return {*} mypage url を返します
 	     */
 
@@ -4876,8 +4907,13 @@
 	    key: 'mypage',
 	    value: function mypage() {
 	      var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+	      var vk = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-	      var base = '/mypage/';
+	      // vk - 絶対パスを返す
+	      if (!vk) {
+	        Url.host = '';
+	      }
+	      var base = Url.host + '/mypage/';
 
 	      switch (path) {
 	        case 'activities':
@@ -4942,6 +4978,7 @@
 	    /**
 	     * about url
 	     * @param {string} [path=''] path option
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
 	     * @return {*} about url を返します
 	     */
 
@@ -4949,8 +4986,13 @@
 	    key: 'about',
 	    value: function about() {
 	      var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+	      var vk = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-	      var base = '/about/';
+	      // vk - 絶対パスを返す
+	      if (!vk) {
+	        Url.host = '';
+	      }
+	      var base = Url.host + '/about/';
 	      switch (path) {
 	        case 'company':
 	          return base + 'company';
@@ -6633,7 +6675,7 @@
 	    key: 'init',
 	    value: function init() {
 	      var token = User.token;
-	      // console.log( `user init token [${token !== ''}]` );
+	      console.log('user init token [' + (token !== '') + ']');
 	      if (token === null || typeof token === 'undefined' || token === '') {
 	        User.sign = false;
 	      } else {
@@ -8550,8 +8592,6 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Types = __webpack_require__(121);
-
 	var _User = __webpack_require__(110);
 
 	var _ApiDae = __webpack_require__(123);
@@ -8560,12 +8600,23 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// const _symbol = Symbol('');
-
 	/**
 	 * サーバーリクエストAPIを管理します
 	 * - 全て static
 	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/09 - 16:19
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// import { Types } from './Types';
 	var Api = exports.Api = function () {
 	  function Api() {
 	    (0, _classCallCheck3.default)(this, Api);
@@ -8574,20 +8625,6 @@
 	  (0, _createClass3.default)(Api, null, [{
 	    key: 'rebuild',
 
-	    // /**
-	    //  * サーバーリクエストAPI
-	    //  * static class です、instance を作成できません
-	    //  * @param {Symbol} target Singleton を実現するための private symbol
-	    //  */
-	    // constructor( target ) {
-	    //
-	    //   if ( _symbol !== target ) {
-	    //
-	    //     throw new Error( 'Api is static Class. not use new Api().');
-	    //
-	    //   }
-	    //
-	    // }
 	    /**
 	     * `/api/` 前 domain を再生成します
 	     * - test, develop 切り替えに使用します
@@ -8991,6 +9028,7 @@
 
 	        case 'notifications:count':
 	        case 'notice:count':
+	          console.warn('users:self:notifications:count deprecated');
 	          return _ApiDae2.default.api('users:self:notifications:count');
 
 	        default:
@@ -9071,17 +9109,7 @@
 	    }
 	  }]);
 	  return Api;
-	}(); /**
-	      * Copyright (c) 2011-2016 inazumatv.com, inc.
-	      * @author (at)taikiken / http://inazumatv.com
-	      * @date 2016/01/09 - 16:19
-	      *
-	      * Distributed under the terms of the MIT license.
-	      * http://www.opensource.org/licenses/mit-license.html
-	      *
-	      * This notice shall be included in all copies or substantial portions of the Software.
-	      *
-	      */
+	}();
 
 /***/ }),
 /* 123 */
@@ -13969,28 +13997,19 @@
 
 	var _SPViewHeaderUser2 = _interopRequireDefault(_SPViewHeaderUser);
 
-	var _SPPageTop = __webpack_require__(161);
+	var _SPPageTop = __webpack_require__(153);
 
 	var _SPPageTop2 = _interopRequireDefault(_SPPageTop);
+
+	var _SPViewSyn = __webpack_require__(154);
+
+	var _SPViewSyn2 = _interopRequireDefault(_SPViewSyn);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// vk mobile 実行ファイル
 	/**
-	 * header
-	 */
-
-	// import ViewFlushModal from '../../view/modal/ViewFlushModal';
-	var header = function header() {
-	  var element = _Dom2.default.profile(true);
-	  if (element) {
-	    var view = new _SPViewHeaderUser2.default(element, {}, true);
-	    view.start();
-	  }
-	};
-
-	/**
-	 * 検索フォーム
+	 * syn.menu
 	 */
 	/**
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
@@ -14003,11 +14022,37 @@
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
 	 */
+	var syn = function syn() {
+	  var element = _Dom2.default.service(true);
+	  var button = _Dom2.default.serviceOpener(true);
+	  var menu = _Dom2.default.serviceMenu(true);
+	  if (element && button && menu) {
+	    var view = new _SPViewSyn2.default(element, button, menu, null, true);
+	    view.start();
+	  }
+	};
+
+	/**
+	 * 検索フォーム
+	 */
+
+	// import ViewFlushModal from '../../view/modal/ViewFlushModal';
 	var search = function search() {
 	  var element = _Dom2.default.search(true);
 	  var opener = _Dom2.default.searchOpener(true);
 	  if (element && opener) {
 	    var view = new _SPViewHeaderSearch2.default(element, opener, {}, true);
+	    view.start();
+	  }
+	};
+
+	/**
+	 * header
+	 */
+	var header = function header() {
+	  var element = _Dom2.default.profile(true);
+	  if (element) {
+	    var view = new _SPViewHeaderUser2.default(element, {}, true);
 	    view.start();
 	  }
 	};
@@ -14051,6 +14096,8 @@
 	 * SP - vk 実行
 	 */
 	var mobile = function mobile() {
+	  // syn.menu
+	  syn();
 	  // page top
 	  top();
 	  // // modal 準備
@@ -15207,10 +15254,6 @@
 	  value: true
 	});
 
-	var _isInteger = __webpack_require__(25);
-
-	var _isInteger2 = _interopRequireDefault(_isInteger);
-
 	var _getPrototypeOf = __webpack_require__(86);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -15231,18 +15274,6 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Length = __webpack_require__(153);
-
-	var _Polling = __webpack_require__(154);
-
-	var _Polling2 = _interopRequireDefault(_Polling);
-
-	var _Model = __webpack_require__(156);
-
-	var _ModelNoticeCount = __webpack_require__(157);
-
-	var _NoticeStatus = __webpack_require__(160);
-
 	var _View = __webpack_require__(96);
 
 	var _View2 = _interopRequireDefault(_View);
@@ -15258,11 +15289,6 @@
 	/**
 	 * [library] - React
 	 */
-	var React = self.React;
-
-	/**
-	 * SP: header - member setting menu
-	 */
 	/**
 	 * Copyright (c) 2011-2017 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
@@ -15273,6 +15299,16 @@
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
+	 */
+	// import { Length } from '../../../app/const/Length';
+	// import Polling from '../../../tick/Polling';
+	// import { Model } from '../../../model/Model';
+	// import { ModelNoticeCount } from '../../../model/notice/ModelNoticeCount';
+	// import { NoticeStatus } from '../../../event/NoticeStatus';
+	var React = self.React;
+
+	/**
+	 * SP: header - member setting menu
 	 */
 
 	var SPComponentHeaderMemberSetting = function (_React$Component) {
@@ -15322,126 +15358,108 @@
 	      userName: props.userName,
 	      icon: props.icon
 	    };
-	    var onDone = _this.onDone.bind(_this);
-	    var onFail = _this.onFail.bind(_this);
-	    var callbacks = {};
-	    callbacks[_Model.Model.COMPLETE] = onDone;
-	    callbacks[_Model.Model.UNDEFINED_ERROR] = onFail;
-	    callbacks[_Model.Model.RESPONSE_ERROR] = onFail;
-	    /**
-	     * callback list
-	     * @type {*}
-	     * */
-	    _this.callbacks = callbacks;
-	    /**
-	     * bind onUpdate
-	     * @type {function}
-	     * */
-	    _this.onUpdate = _this.onUpdate.bind(_this);
-	    /**
-	     * bind onDone
-	     * @type {function}
-	     * */
-	    _this.onDone = onDone;
-	    /**
-	     * bind onFail
-	     * @type {function}
-	     * */
-	    _this.onFail = onFail;
-	    /**
-	     * Polling instance - 定期的に {@link ModelNoticeCount} を実行します
-	     * @type {Polling}
-	     * */
-	    _this.polling = new _Polling2.default(_Length.Length.interval);
-	    /**
-	     * notice count を取得しバッジ表示します
-	     * @type {ModelNoticeCount}
-	     * */
-	    _this.model = new _ModelNoticeCount.ModelNoticeCount(callbacks);
-	    /**
-	     * お知らせ更新を通知する管理マネージャー
-	     * @type {NoticeStatus}
-	     * */
-	    _this.status = _NoticeStatus.NoticeStatus.factory();
+	    // const onDone = this.onDone.bind(this);
+	    // const onFail = this.onFail.bind(this);
+	    // const callbacks = {};
+	    // callbacks[Model.COMPLETE] = onDone;
+	    // callbacks[Model.UNDEFINED_ERROR] = onFail;
+	    // callbacks[Model.RESPONSE_ERROR] = onFail;
+	    // /**
+	    //  * callback list
+	    //  * @type {*}
+	    //  * */
+	    // this.callbacks = callbacks;
+	    // /**
+	    //  * bind onUpdate
+	    //  * @type {function}
+	    //  * */
+	    // this.onUpdate = this.onUpdate.bind(this);
+	    // /**
+	    //  * bind onDone
+	    //  * @type {function}
+	    //  * */
+	    // this.onDone = onDone;
+	    // /**
+	    //  * bind onFail
+	    //  * @type {function}
+	    //  * */
+	    // this.onFail = onFail;
+	    // /**
+	    //  * Polling instance - 定期的に {@link ModelNoticeCount} を実行します
+	    //  * @type {Polling}
+	    //  * */
+	    // this.polling = new Polling(Length.interval);
+	    // /**
+	    //  * notice count を取得しバッジ表示します
+	    //  * @type {ModelNoticeCount}
+	    //  * */
+	    // this.model = new ModelNoticeCount(callbacks);
+	    // /**
+	    //  * お知らせ更新を通知する管理マネージャー
+	    //  * @type {NoticeStatus}
+	    //  * */
+	    // this.status = NoticeStatus.factory();
 	    return _this;
 	  }
 	  // ---------------------------------------------------
 	  //  METHOD
 	  // ---------------------------------------------------
+	  // /**
+	  //  * {@link Polling}.UPDATE event handler
+	  //  * */
+	  // onUpdate() {
+	  //   this.polling.off(Polling.UPDATE, this.onUpdate);
+	  //   this.model.start();
+	  // }
+	  // /**
+	  //  * {@link ModelNoticeCount} success callback
+	  //  * @param {Result} result Ajax JSON
+	  //  * */
+	  // onDone(result) {
+	  //   const total = result.count;
+	  //   if (Number.isInteger(total) && total !== this.state.total) {
+	  //     this.updateTotal(total);
+	  //   }
+	  //   this.restart();
+	  // }
+	  // /**
+	  //  * {@link ModelNoticeCount} fail callback
+	  //  * */
+	  // onFail() {
+	  //   this.restart();
+	  // }
+	  // /**
+	  //  * お知らせ件数を update します
+	  //  * @param {number} total notice 件数
+	  //  * */
+	  // updateTotal(total) {
+	  //   this.setState({ total });
+	  //   this.status.update(total);
+	  // }
+	  // /**
+	  //  * event を unbind します
+	  //  * */
+	  // destroy() {
+	  //   const polling = this.polling;
+	  //   polling.off(Polling.UPDATE, this.onUpdate);
+	  // }
+	  // /**
+	  //  * {@link Polling} を restart します
+	  //  * */
+	  // restart() {
+	  //   const polling = this.polling;
+	  //   polling.off(Polling.UPDATE, this.onUpdate);
+	  //   polling.on(Polling.UPDATE, this.onUpdate);
+	  //   polling.setPolling(Length.interval);
+	  // }
 	  /**
-	   * {@link Polling}.UPDATE event handler
+	   * delegate - after mount
+	   * - props callback function を実行します
+	   * - {@link Polling} を  開始します
 	   * */
 
 
 	  (0, _createClass3.default)(SPComponentHeaderMemberSetting, [{
-	    key: 'onUpdate',
-	    value: function onUpdate() {
-	      this.polling.off(_Polling2.default.UPDATE, this.onUpdate);
-	      this.model.start();
-	    }
-	    /**
-	     * {@link ModelNoticeCount} success callback
-	     * @param {Result} result Ajax JSON
-	     * */
-
-	  }, {
-	    key: 'onDone',
-	    value: function onDone(result) {
-	      var total = result.count;
-	      if ((0, _isInteger2.default)(total) && total !== this.state.total) {
-	        this.updateTotal(total);
-	      }
-	      this.restart();
-	    }
-	    /**
-	     * {@link ModelNoticeCount} fail callback
-	     * */
-
-	  }, {
-	    key: 'onFail',
-	    value: function onFail() {
-	      this.restart();
-	    }
-	    /**
-	     * お知らせ件数を update します
-	     * @param {number} total notice 件数
-	     * */
-
-	  }, {
-	    key: 'updateTotal',
-	    value: function updateTotal(total) {
-	      this.setState({ total: total });
-	      this.status.update(total);
-	    }
-	    /**
-	     * event を unbind します
-	     * */
-
-	  }, {
-	    key: 'destroy',
-	    value: function destroy() {
-	      var polling = this.polling;
-	      polling.off(_Polling2.default.UPDATE, this.onUpdate);
-	    }
-	    /**
-	     * {@link Polling} を restart します
-	     * */
-
-	  }, {
-	    key: 'restart',
-	    value: function restart() {
-	      var polling = this.polling;
-	      polling.off(_Polling2.default.UPDATE, this.onUpdate);
-	      polling.on(_Polling2.default.UPDATE, this.onUpdate);
-	      polling.setPolling(_Length.Length.interval);
-	    }
-	    /**
-	     * delegate - after mount
-	     * - props callback function を実行します
-	     * - {@link Polling} を  開始します
-	     * */
-
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var _props = this.props,
@@ -15450,23 +15468,21 @@
 
 	      safely(_View2.default.DID_MOUNT);
 	      did();
-	      // ----
-	      this.model.start();
-	      // -----
-	      var polling = this.polling;
-	      polling.off(_Polling2.default.UPDATE, this.onUpdate);
-	      polling.on(_Polling2.default.UPDATE, this.onUpdate);
-	      polling.start();
+	      // 2018-04-20 トルツメ
+	      // // ----
+	      // this.model.start();
+	      // // -----
+	      // const polling = this.polling;
+	      // polling.off(Polling.UPDATE, this.onUpdate);
+	      // polling.on(Polling.UPDATE, this.onUpdate);
+	      // polling.start();
 	    }
-	    /**
-	     * delegate - will mount - `destroy` 実行します
-	     * */
-
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.destroy();
-	    }
+	    // /**
+	    //  * delegate - will mount - `destroy` 実行します
+	    //  * */
+	    // componentWillUnmount() {
+	    //   this.destroy();
+	    // }
 	    /**
 	     * delegate - 更新 props を state と比較し更新するかを決定します
 	     * @param {{icon: string, userName: string}} nextProps 更新 props
@@ -15509,7 +15525,7 @@
 	          { className: 'preference' },
 	          React.createElement(
 	            'a',
-	            { href: _Url.Url.settings(), className: 'preference-opener' },
+	            { href: _Url.Url.settings('', this.props.vk), className: 'preference-opener' },
 	            React.createElement(
 	              'span',
 	              { className: 'preference-avatar ' + loggedIn },
@@ -15532,1726 +15548,6 @@
 
 /***/ }),
 /* 153 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Length = undefined;
-
-	var _isInteger = __webpack_require__(25);
-
-	var _isInteger2 = _interopRequireDefault(_isInteger);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/29 - 16:05
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	// let _symbol = Symbol();
-	// let _pickup = 5;
-	/**
-	 * PICKUP - Carousel articles, 記事数無制限変更になったのでリクエスト数を変更する
-	 * @type {number}
-	 * @private
-	 * @default 9999
-	 * @since 2017-04-10
-	 */
-	var valuePickup = 9999;
-	// 最終データ(last 1)を CM にするために 6件 -> 5件 にする
-	/**
-	 * headline 件数
-	 * @type {number}
-	 * @private
-	 * @default 5
-	 */
-	var valueHeadline = 5;
-	/**
-	 * sidebar ranking 件数
-	 * @type {number}
-	 * @private
-	 * @default 5
-	 */
-	var valueRanking = 5;
-	/**
-	 * sidebar recommend video 件数
-	 * @type {number}
-	 * @private
-	 * @default 5
-	 */
-	var valueVideo = 5;
-	/**
-	 * 一覧出力件数
-	 * @type {number}
-	 * @private
-	 * @default 16
-	 */
-	var valueArchive = 16;
-	// データが少ない時用
-	// let _archive = 2;
-	/**
-	 * mypage 一覧件数
-	 * @type {number}
-	 * @private
-	 * @default 10
-	 */
-	var valueList = 10;
-	/**
-	 * 最大値
-	 * @type {number}
-	 * @private
-	 * @default 999
-	 */
-	var valueMax = 999;
-
-	/**
-	 * polling 間隔
-	 * @type {number}
-	 * @private
-	 * @default 1000 * 60 (1m.)
-	 */
-	var valueInterval = 1000 * 60;
-
-	/**
-	 * offset length default value
-	 * - Ajax request 時の query, length の default value です
-	 * - 全て static です
-	 */
-
-	var Length = exports.Length = function () {
-	  function Length() {
-	    (0, _classCallCheck3.default)(this, Length);
-	  }
-
-	  (0, _createClass3.default)(Length, null, [{
-	    key: "pickup",
-
-	    // /**
-	    //  * static class です, instance を作成しません
-	    //  * @param {Symbol} target Singleton を実現するための private symbol
-	    //  */
-	    // constructor( target ) {
-	    //   if (_symbol !== target) {
-	    //     throw new Error( 'Length is static Class. not use new Length().' );
-	    //   }
-	    // }
-	    // ---------------------------------------------------
-	    //  GETTER / SETTER
-	    // ---------------------------------------------------
-	    // --- pickup
-	    /**
-	     * home pickup
-	     * @default 5
-	     * @return {number} pickup default 取得数を返します
-	     */
-	    get: function get() {
-	      return valuePickup;
-	    }
-	    /**
-	     * home pickup, length を設定します
-	     * @param {number} value pickup default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        valuePickup = value;
-	      } else {
-	        throw new Error("pickup: integer required. " + value);
-	      }
-	    }
-	    // --- headline
-	    /**
-	     * home headline
-	     * @default 5
-	     * @return {number} headline default 取得数を返します
-	     */
-
-	  }, {
-	    key: "headline",
-	    get: function get() {
-	      return valueHeadline;
-	    }
-	    /**
-	     * home headline, length を設定します
-	     * @param {number} value headline default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        valueHeadline = value;
-	      } else {
-	        throw new Error("headline: integer required. " + value);
-	      }
-	    }
-	    // --- ranking
-	    /**
-	     * sidebar ranking
-	     * @default 5
-	     * @return {number} ranking default 取得数を返します
-	     */
-
-	  }, {
-	    key: "ranking",
-	    get: function get() {
-	      return valueRanking;
-	    }
-	    /**
-	     * sidebar ranking, length を設定します
-	     * @param {number} value ranking default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        valueRanking = value;
-	      } else {
-	        throw new Error("ranking: integer required. " + value);
-	      }
-	    }
-
-	    // sp single ranking
-	    /**
-	     * SP, 記事詳細「人気記事」表示件数<br>
-	     * default: 10
-	     * @since 2016-06-16
-	     * @return {number} SP, 記事詳細「人気記事」表示件数を返します
-	     */
-
-	  }, {
-	    key: "spRanking",
-	    get: function get() {
-	      return 10;
-	    }
-	    // --- video
-	    /**
-	     * sidebar video
-	     * @default 5
-	     * @return {number} video default 取得数を返します
-	     */
-
-	  }, {
-	    key: "video",
-	    get: function get() {
-	      return valueVideo;
-	    }
-	    /**
-	     * sidebar video, length を設定します
-	     * @param {number} value video default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        valueVideo = value;
-	      } else {
-	        throw new Error("video: integer required. " + value);
-	      }
-	    }
-	    // --- archive
-	    /**
-	     * 記事一覧
-	     * @default 16
-	     * @return {number} archive default 取得数を返します
-	     */
-
-	  }, {
-	    key: "archive",
-	    get: function get() {
-	      return valueArchive;
-	    }
-	    /**
-	     * 記事一覧, length を設定します
-	     * @param {number} value archive default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        valueArchive = value;
-	      } else {
-	        throw new Error("archive: integer required. " + value);
-	      }
-	    }
-	    // --- list
-	    /**
-	     * mypage 一覧
-	     * @default 10
-	     * @return {number} archive default 取得数を返します
-	     */
-
-	  }, {
-	    key: "list",
-	    get: function get() {
-	      return valueList;
-	    }
-	    /**
-	     * mypage 一覧, length を設定します
-	     * @param {number} value archive default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        valueList = value;
-	      } else {
-	        throw new Error("archive: integer required. " + value);
-	      }
-	    }
-	    // --- max
-	    /**
-	     * 最大値
-	     * @return {number} length 最大値を返します
-	     */
-
-	  }, {
-	    key: "max",
-	    get: function get() {
-	      return valueMax;
-	    }
-	    // --- interval
-	    /**
-	     * polling 間隔(ms)
-	     * @default 1000 * 60
-	     * @return {number} interval(ms) を返します
-	     */
-
-	  }, {
-	    key: "interval",
-	    get: function get() {
-	      return valueInterval;
-	    }
-	    /**
-	     * polling 間隔(ms) を設定します
-	     * @param {number} value interval ms
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        valueInterval = value;
-	      } else {
-	        throw new Error("interval: integer required. " + value);
-	      }
-	    }
-	  }]);
-	  return Length;
-	}();
-
-/***/ }),
-/* 154 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _getPrototypeOf = __webpack_require__(86);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(90);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _inherits2 = __webpack_require__(91);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _EventDispatcher2 = __webpack_require__(97);
-
-	var _Cycle = __webpack_require__(155);
-
-	var _Cycle2 = _interopRequireDefault(_Cycle);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// /**
-	//  * private property key, this.update.bind(this) を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const updateSymbol = Symbol('Polling singleton symbol');
-	// /**
-	//  * private property key, Cycle.UPDATE 監視を開始したかを表す真偽値を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const startSymbol = Symbol('Cycle.UPDATE has watched flag');
-	// /**
-	//  * private property key, Fps.start 時間を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const beginSymbol = Symbol('already called Fps.start flag');
-	// /**
-	//  * private property key, polling を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const pollingSymbol = Symbol('keep polling instance');
-	// /**
-	//  * Polling.UPDATE event を発火する時の Events instance を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const eventsSymbol = Symbol('Polling.UPDATE Events instance');
-
-	/**
-	 * 一定間隔毎に UPDATE イベントを発生させます
-	 * @since 2016-11-16
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/07/04 - 16:46
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	// event
-	var Polling = function (_EventDispatcher) {
-	  (0, _inherits3.default)(Polling, _EventDispatcher);
-	  (0, _createClass3.default)(Polling, null, [{
-	    key: 'UPDATE',
-
-	    // ----------------------------------------
-	    // EVENT
-	    // ----------------------------------------
-	    /**
-	     * 一定間隔(milliseconds)毎に発生するイベント type を取得します
-	     * @return {string} event, pollingUpdate を返します
-	     */
-	    get: function get() {
-	      return 'pollingUpdate';
-	    }
-	    // ----------------------------------------
-	    // CONSTRUCTOR
-	    // ----------------------------------------
-	    /**
-	     * 引数の polling に合わせ UPDATE イベントを発生させます
-	     * @param {number} [polling=1000] polling milliseconds
-	     */
-
-	  }]);
-
-	  function Polling() {
-	    var polling = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
-	    (0, _classCallCheck3.default)(this, Polling);
-
-	    // @type {Cycle} - Cycle instance
-	    // const cycle = Cycle.factory();
-	    // public property
-	    // /**
-	    //  * @property {Cycle} this.cycle - Cycle instance
-	    //  */
-	    // Object.assign(this, { cycle });
-	    //
-	    // // private property
-	    // // @type {number} - polling rate(milliseconds), default: 1000(1 sec.)
-	    // this[pollingSymbol] = polling;
-	    // // @type {function} - Cycle.UPDATE event handler
-	    // this[updateSymbol] = this.update.bind(this);
-	    // // @type {boolean} - started flag
-	    // this[startSymbol] = false;
-	    // // @type {number} - 開始時間
-	    // this[beginSymbol] = 0;
-	    // let begin = 0;
-	    // this.begin = () => begin;
-	    // this.setBegin = (time) => {
-	    //   begin = time;
-	    // };
-	    // @type {Events} - Events
-	    // this[eventsSymbol] = new Events(Polling.UPDATE, this, this);
-	    // this[eventsSymbol] = {
-	    //   type: Polling.UPDATE,
-	    //   target: this,
-	    //   currentTarget: this
-	    // };
-
-	    /**
-	     * {@link Cycle} instance
-	     * @type {Cycle}
-	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Polling.__proto__ || (0, _getPrototypeOf2.default)(Polling)).call(this));
-
-	    _this.cycle = _Cycle2.default.factory();
-	    /**
-	     * polling milliseconds
-	     * @type {number}
-	     */
-	    _this.polling = polling;
-	    /**
-	     * bind update - {@link Cycle}.UPDATE - event handler
-	     * @type {function}
-	     */
-	    _this.boundUpdate = _this.update.bind(_this);
-	    /**
-	     * start flag
-	     * @type {boolean}
-	     * @default false
-	     */
-	    _this.started = false;
-	    /**
-	     * 開始時間
-	     * @type {number}
-	     * @default 0
-	     */
-	    _this.begin = 0;
-	    /**
-	     * Polling.UPDATE - events
-	     * @type {{type: string, target: Polling, currentTarget: Polling}}
-	     */
-	    _this.events = {
-	      type: Polling.UPDATE,
-	      target: _this,
-	      currentTarget: _this
-	    };
-	    return _this;
-	  }
-	  // ----------------------------------------
-	  // GETTER / SETTER
-	  // ----------------------------------------
-	  // fps
-	  // /**
-	  //  * polling(milliseconds) を取得します
-	  //  * @return {number} polling(milliseconds) を返します
-	  //  */
-	  // get polling() {
-	  //   return this[pollingSymbol];
-	  // }
-	  // /**
-	  //  * polling(milliseconds) を設定します
-	  //  * @param {number} rate polling(milliseconds)
-	  //  */
-	  // set polling(rate) {
-	  //   this[pollingSymbol] = rate;
-	  // }
-	  // begin
-	  // /**
-	  //  * 開始時間を取得します
-	  //  * @return {number} 開始時間を返します
-	  //  */
-	  // get begin() {
-	  //   return this[beginSymbol];
-	  // }
-	  // /**
-	  //  * 開始時間を設定します
-	  //  * @param {number} time 開始時間
-	  //  */
-	  // set begin(time) {
-	  //   this[beginSymbol] = time;
-	  // }
-	  // events
-	  // /**
-	  //  * Events instance を取得します
-	  //  * @return {Events} Events instance を返します
-	  //  */
-	  // get events() {
-	  //   return this[eventsSymbol];
-	  // }
-	  // /**
-	  //  * Events instance を設定します
-	  //  * @param {Events} events Events instance
-	  //  */
-	  // set events(events) {
-	  //   this[eventsSymbol] = events;
-	  // }
-	  // // flag
-	  // /**
-	  //  * started flag 状態を取得します
-	  //  * @readonly
-	  //  * @return {boolean} 現在の started flag 状態を返します
-	  //  */
-	  // get started() {
-	  //   return this[startSymbol];
-	  // }
-	  // ----------------------------------------
-	  // METHOD
-	  // ----------------------------------------
-	  /**
-	   * started flag を反転させ現在の started flag 状態を取得します
-	   * @return {boolean} 現在の started flag 状態を返します
-	   */
-
-
-	  (0, _createClass3.default)(Polling, [{
-	    key: 'turnOver',
-	    value: function turnOver() {
-	      // this[startSymbol] = !this[startSymbol];
-	      this.started = !this.started;
-	      return this.started;
-	    }
-	    /**
-	     * events object を発火前に作成します
-	     * @param {number} begin 開始時間: 前回の発火時間
-	     * @param {number} present 現在時間
-	     * @return {Events} アップデートした Events を返します
-	     */
-
-	  }, {
-	    key: 'updateEvents',
-	    value: function updateEvents(begin, present) {
-	      // this.begin = begin;
-	      // @type {Events} - start event
-	      var events = this.events;
-	      events.begin = begin;
-	      events.present = present;
-	      events.polling = this.polling;
-	      return events;
-	    }
-	    /**
-	     * cycle ループを開始します<br>
-	     * watch Cycle.UPDATE event
-	     * @return {Cycle} cycle ループを開始しインスタンスを返します
-	     */
-
-	  }, {
-	    key: 'initCycle',
-	    value: function initCycle() {
-	      // cycle
-	      var cycle = this.cycle;
-	      // bind Cycle.UPDATE
-	      // cycle.on(Cycle.UPDATE, this[updateSymbol]);
-	      cycle.on(_Cycle2.default.UPDATE, this.boundUpdate);
-	      // cycle 開始
-	      cycle.start();
-	      return cycle;
-	    }
-	    /**
-	     * polling を開始します
-	     * @return {boolean} start に成功すると true を返します
-	     */
-
-	  }, {
-	    key: 'start',
-	    value: function start() {
-	      if (this.started) {
-	        // already start
-	        return false;
-	      }
-	      // begin
-	      // @since 2017-03-28 - 基準値を start 時に更新する
-	      this.begin = Date.now();
-	      // flag -> true
-	      // this[startSymbol] = true;
-	      this.turnOver();
-	      // cycle
-	      this.initCycle();
-	      // // @type {number} - 開始時間
-	      // const present = Date.now();
-	      // 強制的に1回目を実行
-	      // this.fire(this.updateEvents(present, present));
-
-	      return true;
-	    }
-	    /**
-	     * polling を止めます
-	     * @return {boolean} stop に成功すると true を返します
-	     */
-
-	  }, {
-	    key: 'stop',
-	    value: function stop() {
-	      if (!this.started) {
-	        // not start
-	        return false;
-	      }
-	      // this.cycle.off(Cycle.UPDATE, this[updateSymbol]);
-	      this.cycle.off(_Cycle2.default.UPDATE, this.boundUpdate);
-	      // this[startSymbol] = false;
-	      this.turnOver();
-	      return true;
-	    }
-	    /**
-	     * Cycle.UPDATE event handler, polling を計測しイベントを発火するかを判断します
-	     *
-	     * @listens {Cycle.UPDATE} Cycle.UPDATE が発生すると実行されます
-	     * @return {boolean} Polling.UPDATE event が発生すると true を返します
-	     */
-	    // onUpdate() {
-
-	  }, {
-	    key: 'update',
-	    value: function update() {
-	      // 現在時間
-	      // @type {number}
-	      var present = Date.now();
-	      // @type {number} - polling 間隔
-	      var polling = this.polling;
-	      // @type {number} - 開始時間
-	      var begin = this.begin;
-	      // 現在時間 が interval より大きくなったか
-	      if (present - begin >= polling) {
-	        // event 発火
-	        this.fire(this.updateEvents(begin, present));
-	        // 開始時間を update
-	        this.begin = present;
-	        // event 発生
-	        return true;
-	      }
-	      return false;
-	    }
-	    /**
-	     * Polling.UPDATE event を発生します
-	     * @param {Events} events Polling.UPDATE event object
-	     * @return {undefined} no-return
-	     */
-
-	  }, {
-	    key: 'fire',
-	    value: function fire(events) {
-	      this.dispatch(events);
-	    }
-	    /**
-	     * 開始時間をリセットします
-	     */
-
-	  }, {
-	    key: 'reset',
-	    value: function reset() {
-	      this.begin = Date.now();
-	    }
-	    /**
-	     * polling を再設定し現在時間をスタートに置き換えます
-	     * @param {number} polling 時間間隔(ms)
-	     * @return {Polling} chainable instance
-	     */
-
-	  }, {
-	    key: 'setPolling',
-	    value: function setPolling(polling) {
-	      this.begin = Date.now();
-	      this.polling = polling;
-	      return this;
-	    }
-	    /**
-	     * alias setPolling
-	     * @param {number} polling 時間間隔(ms)
-	     * @return {Polling} chainable instance
-	     */
-
-	  }, {
-	    key: 'changePolling',
-	    value: function changePolling(polling) {
-	      return this.setPolling(polling);
-	    }
-	  }]);
-	  return Polling;
-	}(_EventDispatcher2.EventDispatcher);
-	// import { default as Events } from '../event/Events';
-
-	// tick
-
-
-	exports.default = Polling;
-
-/***/ }),
-/* 155 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _getPrototypeOf = __webpack_require__(86);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(90);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _inherits2 = __webpack_require__(91);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _symbol = __webpack_require__(69);
-
-	var _symbol2 = _interopRequireDefault(_symbol);
-
-	var _EventDispatcher2 = __webpack_require__(97);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// import { Events } from '../event/Events';
-
-	/**
-	 * new を許可しないための Symbol
-	 * @type {Symbol}
-	 * @private
-	 */
-	var singletonSymbol = (0, _symbol2.default)('Cycle singleton SYmbol');
-	/**
-	 * singleton instance, nullable
-	 * @type {?Cycle}
-	 * @private
-	 */
-	/**
-	 * @license inazumatv.com
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/07/03
-	 *
-	 * Copyright (c) 2011-2015 inazumatv.com, inc.
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 */
-
-	// event
-	var instance = null;
-
-	// /**
-	//  * private property key, requestAnimationFrame ID を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const requestSymbol = Symbol('requestAnimationFrame ID');
-	// /**
-	//  * private property key, this.update.bind(this) を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const updateSymbol = Symbol('bound update');
-	// /**
-	//  * private property key, requestAnimationFrame を開始したかを表す真偽値を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const startSymbol = Symbol('has started requestAnimationFrame flag');
-	// /**
-	//  * Cycle.UPDATE event を発火する時の Events instance を保存するための Symbol
-	//  * @type {Symbol}
-	//  * @private
-	//  */
-	// const eventsSymbol = Symbol('Cycle.UPDATE Events instance');
-
-	/**
-	 * requestAnimationFrame でループイベントを発生させます
-	 * - singleton なので new ではなく factory を使用し instance を作成します
-	 * - requestAnimationFrame は browser tab が active(focus) な時のみ発生します
-	 *
-	 * ```
-	 * const loop = Cycle.factory();
-	 * ```
-	 *
-	 * @since 2016-11-16
-	 */
-
-	var Cycle = function (_EventDispatcher) {
-	  (0, _inherits3.default)(Cycle, _EventDispatcher);
-	  (0, _createClass3.default)(Cycle, null, [{
-	    key: 'factory',
-
-	    // ----------------------------------------
-	    // STATIC METHOD
-	    // ----------------------------------------
-	    /**
-	     * Cycle instance を singleton を保証し作成します
-	     * @return {Cycle} Cycle instance を返します
-	     */
-	    value: function factory() {
-	      if (!instance) {
-	        instance = new Cycle(singletonSymbol);
-	      }
-	      return instance;
-	      // return new Cycle(singletonSymbol);
-	    }
-	    // ----------------------------------------
-	    // CONSTRUCTOR
-	    // ----------------------------------------
-	    /**
-	     * singleton です
-	     * @param {Symbol} checkSymbol singleton を保証するための private instance
-	     * @return {Cycle} singleton instance を返します
-	     */
-
-	  }, {
-	    key: 'UPDATE',
-
-	    // ----------------------------------------
-	    // EVENT
-	    // ----------------------------------------
-	    /**
-	     * requestAnimationFrame 毎に発生するイベントを取得します
-	     * @event UPDATE
-	     * @return {string} event, cycleUpdate を返します
-	     * @default cycleUpdate
-	     */
-	    get: function get() {
-	      return 'cycleUpdate';
-	    }
-	  }]);
-
-	  function Cycle(checkSymbol) {
-	    var _ret2;
-
-	    (0, _classCallCheck3.default)(this, Cycle);
-
-	    // checkSymbol と singleton が等価かをチェックします
-	    if (checkSymbol !== singletonSymbol) {
-	      throw new Error('don\'t use new, instead use static factory method.');
-	    }
-	    // instance 作成済みかをチェックし instance が null の時 this を設定します
-	    if (instance !== null) {
-	      var _ret;
-
-	      return _ret = instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
-	    }
-	    // ----
-
-	    // onetime setting
-	    // instance = this;
-	    // // @type {Events} - Events
-	    // // this[eventsSymbol] = new Events(Cycle.UPDATE, this, this);
-	    // this[eventsSymbol] = {
-	    //   type: Cycle.UPDATE,
-	    //   target: this,
-	    //   currentTarget: this
-	    // };
-	    //
-	    // // @type {number} - requestAnimationFrame return id
-	    // this[requestSymbol] = 0;
-	    // // @type {function} - update bind function
-	    // this[updateSymbol] = this.update.bind(this);
-	    // // @type {boolean} - started flag
-	    // this[startSymbol] = false;
-	    /**
-	     * Cycle.UPDATE event を発火する時の Event object - {@link Cycle}.UPDATE
-	     * @type {{type: string, target: Cycle, currentTarget: Cycle}}
-	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Cycle.__proto__ || (0, _getPrototypeOf2.default)(Cycle)).call(this));
-
-	    _this.events = {
-	      type: Cycle.UPDATE,
-	      target: _this,
-	      currentTarget: _this
-	    };
-	    /**
-	     * requestAnimationFrame ID
-	     * @type {number}
-	     * @default 0
-	     */
-	    _this.animationId = 0;
-	    /**
-	     * requestAnimationFrame を開始したかを表す真偽値
-	     * @type {boolean}
-	     * @default false;
-	     */
-	    _this.started = false;
-	    /**
-	     * bind onUpdate - `requestAnimationFrame` 実行します
-	     * @type {function}
-	     */
-	    _this.onUpdate = _this.onUpdate.bind(_this);
-
-	    // 設定済み instance を返します
-	    return _ret2 = _this, (0, _possibleConstructorReturn3.default)(_this, _ret2);
-	  }
-	  // // ----------------------------------------
-	  // // GETTER / SETTER
-	  // // ----------------------------------------
-	  // /**
-	  //  * Events instance を取得します
-	  //  * @return {Object} Events instance
-	  //  */
-	  // get events() {
-	  //   return this[eventsSymbol];
-	  // }
-	  // ----------------------------------------
-	  // METHOD
-	  // ----------------------------------------
-	  /**
-	   * loop(requestAnimationFrame) を開始します
-	   * @return {boolean} start に成功すると true を返します
-	   */
-
-
-	  (0, _createClass3.default)(Cycle, [{
-	    key: 'start',
-	    value: function start() {
-	      // if (this[startSymbol]) {
-	      if (this.started) {
-	        // already start
-	        // console.warn('Cycle.start already start', this[startSymbol]);
-	        return false;
-	      }
-	      // this[startSymbol] = true;
-	      this.started = true;
-	      // this.update();
-	      this.onUpdate();
-
-	      // @return
-	      return true;
-	    }
-	    /**
-	     * loop を止めます `cancelAnimationFrame` を実行します - 全ての `loop` を止めます
-	     * @param {number} [id=this.animationId] requestAnimationFrame id を使い cancelAnimationFrame をします
-	     * @return {boolean} stop に成功すると true を返します
-	     */
-
-	  }, {
-	    key: 'stop',
-	    value: function stop() {
-	      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.animationId;
-
-	      // stop(id = this[requestSymbol]) {
-	      if (!this.started) {
-	        // if (!this[startSymbol]) {
-	        // not start
-	        return false;
-	      }
-
-	      cancelAnimationFrame(id);
-	      // this[startSymbol] = false;
-	      this.started = false;
-
-	      // @return
-	      return true;
-	    }
-	    // ----------------------------------------
-	    // PRIVATE METHOD
-	    // ----------------------------------------
-	    /**
-	     * loop(requestAnimationFrame)コールバック関数<br>Cycle.UPDATE event を発火します
-	       */
-
-	  }, {
-	    key: 'onUpdate',
-	    value: function onUpdate() {
-	      // update() {
-	      // @type {number} - requestAnimationFrame id
-	      var id = requestAnimationFrame(this.onUpdate);
-	      // const id = requestAnimationFrame(this[updateSymbol]);
-	      this.animationId = id;
-	      // this[requestSymbol] = id;
-
-	      // @type {Object} - events
-	      var events = this.events;
-	      events.id = id;
-	      // event fire
-	      this.dispatch(events);
-	    }
-	  }]);
-	  return Cycle;
-	}(_EventDispatcher2.EventDispatcher);
-
-	exports.default = Cycle;
-
-/***/ }),
-/* 156 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Model = undefined;
-
-	var _getPrototypeOf = __webpack_require__(86);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(90);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(91);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _EventDispatcher2 = __webpack_require__(97);
-
-	var _Safety = __webpack_require__(24);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * <p>View がない Api request<p>
-	 * <p>action Class を実行し option に設定された callback を実行します</p>
-	 *
-	 * @example
-	 * let option = {
-	 *  Model.UNDEFINED_ERROR: () => {},
-	 *  Model.EMPTY_ERROR: () => {},
-	 *  Model.RESPONSE_ERROR: () => {},
-	 *  Model.COMPLETE: () => {}
-	 * };
-	 *
-	 * let model = new Model( option );
-	 * model.start();
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/03 - 17:02
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var Model = exports.Model = function (_EventDispatcher) {
-	  (0, _inherits3.default)(Model, _EventDispatcher);
-
-	  /**
-	   * View がない Api request, 親クラス
-	   * @param {?Object} [option={}] optional event handler
-	   */
-	  function Model() {
-	    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	    (0, _classCallCheck3.default)(this, Model);
-
-	    var safetyOption = _Safety.Safety.object(option);
-
-	    /**
-	     * callback をセットした Object
-	     *
-	     * @example
-	     * const option = {
-	     *  Model.UNDEFINED_ERROR: () => {},
-	     *  Model.EMPTY_ERROR: () => {},
-	     *  Model.RESPONSE_ERROR: () => {},
-	     *  Model.COMPLETE: () => {}
-	     * };
-	     *
-	     * @type {Object}
-	     * @protected
-	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (Model.__proto__ || (0, _getPrototypeOf2.default)(Model)).call(this));
-
-	    _this._option = safetyOption;
-	    /**
-	     * action Class が設定されます
-	     * @type {*}
-	     * @protected
-	     * @default null
-	     */
-	    _this._action = null;
-	    return _this;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * callback handler がセットされたObject
-	   * @return {Object} callback handler がセットされたObjectを返します
-	   */
-
-
-	  (0, _createClass3.default)(Model, [{
-	    key: 'executeSafely',
-
-	    // ---------------------------------------------------
-	    //  METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * option Object に kyeName が存在し型が function かを調べ関数を実行する
-	     * @param {string} keyName 存在チェックを行う関数キー名
-	     * @param {*} [args=] 実行関数への引数
-	     */
-	    value: function executeSafely(keyName) {
-	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-	        args[_key - 1] = arguments[_key];
-	      }
-
-	      var option = this.option;
-	      // console.log( 'executeSafely ', keyName, option.hasOwnProperty( keyName ), option, args );
-	      if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
-	        // callback 側で通常の引数として取り出せるように apply します
-	        option[keyName].apply(this, args);
-	      }
-	      this.dispatch({ type: keyName, args: args });
-	    }
-	    // ---------------------------------------------------
-	    //  CONST
-	    // ---------------------------------------------------
-	    /**
-	     * event UNDEFINED_ERROR<br>
-	     * Ajax は成功, 存在すべき key が無い or 値が null
-	     * @return {string} modelUndefinedError を返します
-	     */
-
-	  }, {
-	    key: 'option',
-	    get: function get() {
-	      return this._option;
-	    }
-
-	    /**
-	     * callback handler をセットします
-	     * @param {Object} option callback handler がセットされた Object
-	     */
-	    ,
-	    set: function set(option) {
-	      this._option = option;
-	    }
-	    /**
-	     * Action instance
-	     * @return {*} Action instance を返します
-	     */
-
-	  }, {
-	    key: 'action',
-	    get: function get() {
-	      return this._action;
-	    }
-	    /**
-	     * Action instance を設定します
-	     * @param {*} action Action instance
-	     */
-	    ,
-	    set: function set(action) {
-	      this._action = action;
-	    }
-	  }], [{
-	    key: 'UNDEFINED_ERROR',
-	    get: function get() {
-	      return 'modelUndefinedError';
-	    }
-	    /**
-	     * event EMPTY_ERROR<br>
-	     * Ajax は成功, 存在すべき値は配列で存在するが length 0
-	     * @return {string} modelEmptyError を返します
-	     */
-
-	  }, {
-	    key: 'EMPTY_ERROR',
-	    get: function get() {
-	      return 'modelEmptyError';
-	    }
-	    /**
-	     * event RESPONSE_ERROR<br>
-	     * Ajax 失敗
-	     * @return {string} modelResponseError を返します
-	     */
-
-	  }, {
-	    key: 'RESPONSE_ERROR',
-	    get: function get() {
-	      return 'modelResponseError';
-	    }
-	    /**
-	     * event COMPLETE<br>
-	     * Ajax 成功
-	     * action 終了後 success 時に使用します
-	     * @return {string} modelComplete を返します
-	     */
-
-	  }, {
-	    key: 'COMPLETE',
-	    get: function get() {
-	      return 'modelComplete';
-	    }
-	  }]);
-	  return Model;
-	}(_EventDispatcher2.EventDispatcher);
-
-/***/ }),
-/* 157 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ModelNoticeCount = undefined;
-
-	var _getPrototypeOf = __webpack_require__(86);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(90);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(91);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _Model2 = __webpack_require__(156);
-
-	var _Result = __webpack_require__(116);
-
-	var _NoticeCount = __webpack_require__(158);
-
-	var _NoticeCountDae = __webpack_require__(159);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * お知らせ未読数を取得します
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/03/03 - 15:18
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	var ModelNoticeCount = exports.ModelNoticeCount = function (_Model) {
-	  (0, _inherits3.default)(ModelNoticeCount, _Model);
-
-	  /**
-	   * お知らせ未読数を取得します
-	   * @param {Object} [option={}] optional event handler
-	   */
-	  function ModelNoticeCount() {
-	    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	    (0, _classCallCheck3.default)(this, ModelNoticeCount);
-
-	    /**
-	     * Action instance を設定します
-	     * @override
-	     * @type {NoticeCount}
-	     */
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (ModelNoticeCount.__proto__ || (0, _getPrototypeOf2.default)(ModelNoticeCount)).call(this, option));
-
-	    _this.action = new _NoticeCount.NoticeCount(_this.done.bind(_this), _this.fail.bind(_this));
-	    return _this;
-	  }
-	  /**
-	   * Ajax request を開始します
-	   */
-
-
-	  (0, _createClass3.default)(ModelNoticeCount, [{
-	    key: 'start',
-	    value: function start() {
-
-	      this.action.start();
-	    }
-	    /**
-	     * Ajax response success
-	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
-	     */
-
-	  }, {
-	    key: 'done',
-	    value: function done(result) {
-
-	      var response = result.response;
-
-	      if (typeof response === 'undefined') {
-
-	        // articles undefined
-	        // JSON に問題がある
-	        var error = new Error('[MODEL_NOTICE_COUNT:UNDEFINED]サーバーレスポンスに問題が発生しました。');
-	        this.executeSafely(_Model2.Model.UNDEFINED_ERROR, error);
-	      } else {
-
-	        // 成功 callback
-	        this.executeSafely(_Model2.Model.COMPLETE, new _NoticeCountDae.NoticeCountDae(result));
-	      }
-	    }
-	    /**
-	     * Ajax response error
-	     * @param {Error} error Error instance
-	     */
-
-	  }, {
-	    key: 'fail',
-	    value: function fail(error) {
-
-	      this.executeSafely(_Model2.Model.RESPONSE_ERROR, error);
-	    }
-	  }]);
-	  return ModelNoticeCount;
-	}(_Model2.Model);
-
-/***/ }),
-/* 158 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeCount = undefined;
-
-	var _getPrototypeOf = __webpack_require__(86);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(90);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(91);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _ActionAuth2 = __webpack_require__(114);
-
-	var _Api = __webpack_require__(122);
-
-	var _User = __webpack_require__(110);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * お知らせ未読数を取得します
-	 */
-	var NoticeCount = exports.NoticeCount = function (_ActionAuth) {
-	  (0, _inherits3.default)(NoticeCount, _ActionAuth);
-
-	  /**
-	   * お知らせ未読数を取得します
-	   * @param {Function} [resolve=null] Ajax 成功時の callback
-	   * @param {Function} [reject=null] Ajax 失敗時の callback
-	   */
-	  function NoticeCount() {
-	    var resolve = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-	    var reject = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	    (0, _classCallCheck3.default)(this, NoticeCount);
-	    return (0, _possibleConstructorReturn3.default)(this, (NoticeCount.__proto__ || (0, _getPrototypeOf2.default)(NoticeCount)).call(this, _User.User.token, _Api.Api.notice('count'), resolve, reject));
-	  }
-
-	  return NoticeCount;
-	}(_ActionAuth2.ActionAuth); /**
-	                             * Copyright (c) 2011-2016 inazumatv.com, inc.
-	                             * @author (at)taikiken / http://inazumatv.com
-	                             * @date 2016/03/03 - 14:59
-	                             *
-	                             * Distributed under the terms of the MIT license.
-	                             * http://www.opensource.org/licenses/mit-license.html
-	                             *
-	                             * This notice shall be included in all copies or substantial portions of the Software.
-	                             *
-	                             */
-
-/***/ }),
-/* 159 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeCountDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _StatusDae = __webpack_require__(119);
-
-	var _Result = __webpack_require__(116);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * 他人からの通知数を取得する
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/03/03 - 15:27
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	// import {Safety} from '../../data/Safety';
-	var NoticeCountDae = exports.NoticeCountDae = function () {
-	  /**
-	   * 他人からの通知数を取得する
-	   * @param {Object} [result={}] JSON result
-	   */
-	  function NoticeCountDae(result) {
-	    (0, _classCallCheck3.default)(this, NoticeCountDae);
-
-	    /**
-	     * JSON result
-	     * @type {Result}
-	     * @private
-	     */
-	    this._result = result;
-	    /**
-	     * result.response
-	     * @type {Object}
-	     * @private
-	     */
-	    this._response = result.response;
-	    /**
-	     * result.status
-	     * @type {StatusDae}
-	     * @private
-	     */
-	    this._status = new _StatusDae.StatusDae(result.status);
-	  }
-	  /**
-	   * JSON.response
-	   * @return {Object|*} JSON response を返します
-	   */
-
-
-	  (0, _createClass3.default)(NoticeCountDae, [{
-	    key: 'response',
-	    get: function get() {
-	      return this._response;
-	    }
-	    /**
-	     * JSON.status
-	     * @return {StatusDae|*} JSON status を返します
-	     */
-
-	  }, {
-	    key: 'status',
-	    get: function get() {
-	      return this._status;
-	    }
-	    /**
-	     * response.count
-	     * @return {Number} response.count を返します
-	     */
-
-	  }, {
-	    key: 'count',
-	    get: function get() {
-	      return this.response.count;
-	    }
-	    /**
-	     * alias count
-	     * response.count
-	     * @return {Number} response.count を返します
-	     */
-
-	  }, {
-	    key: 'total',
-	    get: function get() {
-	      return this.count;
-	    }
-	  }]);
-	  return NoticeCountDae;
-	}();
-
-/***/ }),
-/* 160 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeStatus = undefined;
-
-	var _getPrototypeOf = __webpack_require__(86);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(90);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _inherits2 = __webpack_require__(91);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _symbol = __webpack_require__(69);
-
-	var _symbol2 = _interopRequireDefault(_symbol);
-
-	var _EventDispatcher2 = __webpack_require__(97);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * {@link NoticeStatus} singleton instance を保証するための inner Symbol
-	 * @type {symbol}
-	 * @private
-	 */
-	var noticeStatusSymbol = (0, _symbol2.default)('NoticeStatus singleton instance');
-	/**
-	 * {@link NoticeStatus} singleton instance
-	 * @type {?NoticeStatus}
-	 * @private
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/03/03 - 17:06
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	/* eslint constructor-super: 0 */
-
-	var singletonInstance = null;
-
-	/**
-	 * お知らせ更新を通知するための custom Event
-	 * @example
-	 * var status = NoticeStatus.factory();
-	 * */
-
-	var NoticeStatus = exports.NoticeStatus = function (_EventDispatcher) {
-	  (0, _inherits3.default)(NoticeStatus, _EventDispatcher);
-	  (0, _createClass3.default)(NoticeStatus, null, [{
-	    key: 'factory',
-
-	    // ---------------------------------------------------
-	    //  STATIC METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * instance を生成します
-	     * @return {NoticeStatus} NoticeStatus instance を返します
-	     */
-	    value: function factory() {
-	      if (singletonInstance === null) {
-	        singletonInstance = new NoticeStatus(noticeStatusSymbol);
-	      }
-	      return singletonInstance;
-	    }
-	    // ---------------------------------------------------
-	    //  EVENT
-	    // ---------------------------------------------------
-	    /**
-	     * UPDATE_COUNT, お知らせが更新された Event
-	     * @return {string} noticeUpdateCount を返します
-	     */
-
-	  }, {
-	    key: 'UPDATE_COUNT',
-	    get: function get() {
-	      return 'noticeUpdateCount';
-	    }
-	    // ---------------------------------------------------
-	    //  CONSTRUCTOR
-	    // ---------------------------------------------------
-	    /**
-	     * お知らせ更新 を通知する SingleTon
-	     *
-	     * @param {Symbol} target Singleton を実現するための private symbol
-	     * @return {UserStatus} UserStatus インスタンスを返します
-	     */
-
-	  }]);
-
-	  function NoticeStatus(target) {
-	    var _ret;
-
-	    (0, _classCallCheck3.default)(this, NoticeStatus);
-
-	    if (noticeStatusSymbol !== target) {
-	      throw new Error('NoticeStatus is static Class. not use new NoticeStatus().');
-	    }
-	    if (singletonInstance === null) {
-	      var _this = (0, _possibleConstructorReturn3.default)(this, (NoticeStatus.__proto__ || (0, _getPrototypeOf2.default)(NoticeStatus)).call(this));
-
-	      singletonInstance = _this;
-	    }
-	    return _ret = singletonInstance, (0, _possibleConstructorReturn3.default)(_this, _ret);
-	  }
-	  // ---------------------------------------------------
-	  //  METHOD
-	  // ---------------------------------------------------
-	  /**
-	   * お知らせが更新 Event を発火させます
-	   * @param {Number} count お知らせ件数
-	   */
-
-
-	  (0, _createClass3.default)(NoticeStatus, [{
-	    key: 'update',
-	    value: function update(count) {
-	      this.dispatch({ type: NoticeStatus.UPDATE_COUNT, count: count });
-	    }
-	  }]);
-	  return NoticeStatus;
-	}(_EventDispatcher2.EventDispatcher);
-
-/***/ }),
-/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17379,6 +15675,2128 @@
 	}();
 
 	exports.default = SPPageTop;
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(86);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(90);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(91);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(96);
+
+	var _View3 = _interopRequireDefault(_View2);
+
+	var _Syn = __webpack_require__(155);
+
+	var _Syn2 = _interopRequireDefault(_Syn);
+
+	var _User = __webpack_require__(110);
+
+	var _LogoutNode = __webpack_require__(159);
+
+	var _SPComponentSynItem = __webpack_require__(160);
+
+	var _SPComponentSynItem2 = _interopRequireDefault(_SPComponentSynItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	/* eslint-disable no-unused-vars */
+	/**
+	 * [library] - React
+	 */
+
+
+	// node
+	// import {SPSynItemNode} from '../node/SPSynItemNode';
+	var React = self.React;
+	/* eslint-enable no-unused-vars */
+	/**
+	 * [library] - ReactDOM
+	 */
+
+
+	// app
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/03/11 - 14:29
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// view
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * Syn. menu
+	 * ```
+	 * https://github.com/undotsushin/undotsushin/tree/feature/195-syn_menu_sp
+	 * https://github.com/undotsushin/undotsushin/issues/195
+	 * https://github.com/bitcellar/synapse-sdk/tree/master/javascript
+	 * http://www.undotsushin.com/syn-demo/
+	 * ```
+	 * @since 2018-04-19 vk header - flag 追加
+	 */
+
+	var SPViewSyn = function (_View) {
+	  (0, _inherits3.default)(SPViewSyn, _View);
+
+	  /**
+	   * Syn. menu と slide in 機能を実装します
+	   * @param {Element} element login の有無で切り替える menu の基点
+	   * @param {Element} button menu opener element, menu-opener
+	   * @param {Element} menu slide in する menu element, side-menu-container
+	   * @param {?Element} [modal=null] modal 基点 Element, logout modal 表示に使用します
+	   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	   * @since 2018-04-19 vk header - flag 追加
+	   */
+	  function SPViewSyn(element, button, menu) {
+	    var modal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+	    var vk = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+	    (0, _classCallCheck3.default)(this, SPViewSyn);
+
+	    /**
+	     * button menu opener element, menu-opener
+	     * @type {Element}
+	     * @private
+	     */
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (SPViewSyn.__proto__ || (0, _getPrototypeOf2.default)(SPViewSyn)).call(this, element, {}, vk));
+
+	    _this._button = button;
+	    /**
+	     *  menu slide in する menu element, side-menu-container
+	     * @type {Element}
+	     * @private
+	     */
+	    _this._menu = menu;
+	    /**
+	     * modal modal 基点 Element, logout modal 表示に使用します
+	     * @type {?Element}
+	     * @private
+	     */
+	    _this._modal = modal;
+	    /**
+	     * bound synapse
+	     * @type {any}
+	     */
+	    _this.synapse = _this.synapse.bind(_this);
+	    return _this;
+	  }
+	  /**
+	   * rendering 開始
+	   */
+
+
+	  (0, _createClass3.default)(SPViewSyn, [{
+	    key: 'start',
+	    value: function start() {
+	      this.render();
+	    }
+	    /**
+	     * rendering
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var modal = this._modal;
+	      // since 2018-04-20 - vk: modal nullable なので判定追加する
+	      if (modal) {
+	        ReactDOM.render(React.createElement(_LogoutNode.LogoutNode, {
+	          listen: true
+	        }), modal);
+	      }
+	      // ReactDOM.render(
+	      //   <SPSynItemNode
+	      //     sign={User.sign}
+	      //     callback={this.synapse}
+	      //   />,
+	      //   this.element
+	      // );
+	      // since 2018-04-20
+	      ReactDOM.render(React.createElement(_SPComponentSynItem2.default, {
+	        sign: _User.User.sign,
+	        callback: this.synapse,
+	        vk: this.vk
+	      }), this.element);
+	    }
+	    /**
+	     * SPSynItemNode.didMount callback 関数です
+	     * - HTML の準備を待って Syn. menu の準備を始めるために didMount まで待ちます
+	     * - Syn. menu setup を行います
+	     */
+
+	  }, {
+	    key: 'synapse',
+	    value: function synapse() {
+	      var syn = new _Syn2.default(this._button, this._menu);
+	      syn.init();
+	    }
+	  }]);
+	  return SPViewSyn;
+	}(_View3.default);
+
+	exports.default = SPViewSyn;
+
+/***/ }),
+/* 155 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getIterator2 = __webpack_require__(98);
+
+	var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Scroll = __webpack_require__(143);
+
+	var _Loc = __webpack_require__(140);
+
+	var _Time = __webpack_require__(156);
+
+	var _Cookie = __webpack_require__(111);
+
+	var _Ga = __webpack_require__(157);
+
+	var _GaData = __webpack_require__(158);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// jQuery
+	/**
+	 * [library] - jQuery
+	 */
+
+
+	// Ga
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/05/14 - 13:00
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// util
+	var $ = self.jQuery;
+
+	// Synapse
+	/**
+	 * [library] - Synapse
+	 */
+
+
+	// net
+	var Synapse = self.Synapse;
+
+	// Sagen
+	/**
+	 * [library] - Sagen
+	 */
+	var Sagen = self.Sagen;
+
+	// Gasane
+	/**
+	 * [library] - Gasane
+	 */
+	var Gasane = self.Gasane;
+
+	/**
+	 * class names
+	 * @type {{page: string, service: string, box: string, logo: string, sideMenu: string, bg: string, list: string, toggle: string, modal: string}}
+	 */
+	var parts = {
+	  page: 'page',
+	  service: 'synapse-service-list',
+	  box: 'synapse-service-list-outer-box',
+	  logo: 'synapse-logo-box',
+	  sideMenu: 'side-menu',
+	  bg: 'side-menu-bg',
+	  list: 'side-menu-list',
+	  // button
+	  toggle: 'side-menu-toggle',
+	  // modal
+	  modal: 'modal-container'
+	};
+
+	// inner class
+	/**
+	 * Syn.menu
+	 */
+
+	var Syn = function () {
+	  /**
+	   * Syn. menu を作成し open / close animation を実装します
+	   * @param {Element} button #menu-opener element
+	   * @param {Element} side #side-menu-container element
+	   */
+	  function Syn(button, side) {
+	    (0, _classCallCheck3.default)(this, Syn);
+
+	    /**
+	     * element#menu-opener, menu を開くボタン
+	     * @type {Element}
+	     * @private
+	     */
+	    this._button = button;
+	    /**
+	     * #side-menu-container element, サイドバーメニュー
+	     * @type {Element}
+	     * @private
+	     */
+	    this._side = side;
+	    /**
+	     * side element を jQuery object へ
+	     * @type {HTMLElement|jQuery}
+	     * @private
+	     */
+	    this._$side = $(side);
+	    /**
+	     * #side-menu-container element を Sagen.Dom instance へ
+	     * addClass とか getStyle とかできるから
+	     * @type {Sagen.Dom}
+	     * @private
+	     */
+	    this._sideDom = new Sagen.Dom(side);
+	    /**
+	     * Synapse.Menu instance, Syn. menu のコントローラー（多分）
+	     * @type {null|Synapse.Menu}
+	     * @private
+	     */
+	    this._menu = null;
+	    /**
+	     * open / close の animation 中フラッグ
+	     * @type {boolean}
+	     * @private
+	     */
+	    this._motion = false;
+	    /**
+	     * スクロール位置
+	     * open 時にその前の scroll 位置を保存し close で復元するために使用します
+	     * @type {number}
+	     * @private
+	     */
+	    this._y = 0;
+	    /**
+	     * Syn. のイベント: service_list_load が発火しメニュー関連の準備ができた時に true にセットされます
+	     * @type {boolean}
+	     * @private
+	     */
+	    this._ready = false;
+
+	    // fps
+	    // whole(#page) style が消える???対策
+	    /**
+	     * update event handler を bind this し this 参照をキープします
+	     * @type {Function}
+	     * @private
+	     */
+	    this._boundUpdate = this.update.bind(this);
+	    /**
+	     * 連続実行(update)するための Fps instance
+	     * fps 1 で実行されます
+	     * @type {Gasane.Fps}
+	     * @private
+	     */
+	    this._fps = new Gasane.Fps(1);
+	    /**
+	     * $adg.ads.trackShowEvent を 1回だけ行うためのフラッグ
+	     * @type {boolean}
+	     * @private
+	     */
+	    this._firstAd = false;
+	    /**
+	     * $adg.listener.loaded 完了用の flag
+	     * @type {boolean}
+	     * @private
+	     */
+	    this._$adgComing = false;
+	    /**
+	     * $adg.listener event handler
+	     * @type {{loaded: *, fail: *}}
+	     * @private
+	     */
+	    this._adg = {
+	      loaded: this.adgLoaded.bind(this),
+	      failed: this.adgFailed.bind(this)
+	    };
+	    /**
+	     * element#side-menu-list を Sagen.dom instance にします
+	     * @type {null|Sagen.Dom}
+	     * @private
+	     */
+	    this._listDom = null;
+	    /**
+	     * element#side-menu-toggle を Sagen.dom instance にします
+	     * @type {null|Sagen.Dom}
+	     * @private
+	     */
+	    this._toggleDom = null;
+	    /**
+	     * element#page を Sagen.dom instance にします
+	     * @type {null|Sagen.Dom}
+	     * @private
+	     */
+	    this._page = null;
+	    /**
+	     * element#side-menu-bg を Sagen.dom instance にします
+	     * @type {null|Sagen.Dom}
+	     * @private
+	     */
+	    this._bg = null;
+	    /**
+	     * bind onLoad
+	     * @type {function}
+	     */
+	    this.onLoad = this.onLoad.bind(this);
+	    /**
+	     * bind onNotice
+	     * @type {function}
+	     */
+	    this.onNotice = this.onNotice.bind(this);
+	    /**
+	     * bind buttonClick
+	     * @type {function}
+	     */
+	    this.buttonClick = this.buttonClick.bind(this);
+	    /**
+	     * bind bgClick
+	     * @type {function}
+	     */
+	    this.bgClick = this.bgClick.bind(this);
+	    /**
+	     * timer id - motion
+	     * @type {number}
+	     */
+	    this.motionTimer = 0;
+	    /**
+	     * timer id - scroll
+	     * @type {number}
+	     */
+	    this.scrollTImer = 0;
+	  }
+	  /**
+	   * 初期処理, after DOMReady で実行のこと
+	   */
+
+
+	  (0, _createClass3.default)(Syn, [{
+	    key: 'init',
+	    value: function init() {
+	      // $adg.listener event handler set
+	      this.initAd();
+	      // -------------------------------------------------------------------------
+	      // 以下通常処理
+	      this._listDom = new Sagen.Dom(document.getElementById(parts.list));
+	      this._toggleDom = new Sagen.Dom(document.getElementById(parts.toggle));
+	      this._page = document.getElementById(parts.page);
+	      this._bg = document.getElementById(parts.bg);
+
+	      if (Syn.test()) {
+	        // ログレベルの指定。出荷時は指定しない
+	        Synapse.Logger.logLevel = Synapse.Logger.DEBUG;
+	        // エンドポイントの指定。出荷時は指定しない
+	        Synapse.endpoint = 'https://synapse-api.stg.bitcellar.net';
+	      }
+
+	      // メニューインスタンスの作成
+	      // name: undotsushin_side_menu で作成
+	      var menu = new Synapse.Menu('undotsushin_side_menu');
+	      this._menu = menu;
+	      menu.addListener('service_list_load', this.onLoad);
+	      menu.addListener('service_notification_load', this.onNotice);
+	      menu.init();
+	      // open / close
+	      // button
+	      this._button.addEventListener('click', this.buttonClick, false);
+	      // bg
+	      this._bg.addEventListener('click', this.bgClick, false);
+	    }
+	    // ---------------------------------------------------------------------------------
+	    /**
+	     * $adg.listener event handler を設定する
+	     * https://github.com/bitcellar/synapse-sdk/blob/master/ad/Browser/Readme.md#%E5%AE%9F%E8%A3%85%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB
+	     */
+
+	  }, {
+	    key: 'initAd',
+	    value: function initAd() {
+	      var _this2 = this;
+
+	      var $adg = self.$adg;
+
+	      // $adg 存在チェック
+	      if (!$adg || !$adg.listener) {
+	        setTimeout(function () {
+	          _this2.initAd();
+	        }, 25);
+	        return;
+	      }
+	      var adg = this._adg;
+	      window.addEventListener($adg.listener.loaded, adg.loaded, false);
+	      window.addEventListener($adg.listener.failed, adg.failed, false);
+	    }
+
+	    /**
+	     * $adg.listener.loaded event handler
+	     */
+
+	  }, {
+	    key: 'adgLoaded',
+	    value: function adgLoaded() {
+	      var _this3 = this;
+
+	      this.adgDispose();
+	      // flag ON
+	      this._$adgComing = true;
+
+	      // https://github.com/undotsushin/undotsushin/issues/704#issuecomment-221199981
+	      // inview event を追加する
+	      this._$side.on('inview', function (event, isInView) {
+	        if (isInView) {
+	          _this3.adTrack();
+	        }
+	      });
+	    }
+	    /**
+	     * $adg.listener.failed event handler
+	     */
+
+	  }, {
+	    key: 'adgFailed',
+	    value: function adgFailed() {
+	      this.adgDispose();
+	    }
+	    /**
+	     * $adg.listener event handler を removeEventListener する
+	     */
+
+	  }, {
+	    key: 'adgDispose',
+	    value: function adgDispose() {
+	      var $adg = self.$adg;
+	      var adg = this._adg;
+	      window.removeEventListener($adg.listener.loaded, adg.loaded);
+	      window.removeEventListener($adg.listener.failed, adg.failed);
+	    }
+	    // ---------------------------------------------------------------------------------
+	    /**
+	     * service_list_load event listener
+	     */
+
+	  }, {
+	    key: 'onLoad',
+	    value: function onLoad() {
+	      var menu = this._menu;
+	      var serviceList = document.getElementById(parts.service);
+	      this._ready = true;
+
+	      // console.log( 'service_list_load ', menu.serviceList.serviceListItems.length );
+
+	      menu.serviceList.serviceListItems.forEach(function (item) {
+	        var listElement = document.createElement('li');
+	        var itemElement = item.toHTMLElement();
+
+	        // inview は、オブジェクトの各辺が描画領域に入ると報告されるが、そのうち最初の1回だけ
+	        // 受け取れるようにフラグを立てて管理する。
+	        var firstInView = false;
+
+	        // メニューの各アイテムがビューに入ったことをトラッキングする
+	        $(itemElement).on('inview', function (event, isInView) {
+	          if (isInView) {
+	            if (!firstInView) {
+	              item.trackShowEvent();
+	            }
+	            firstInView = true;
+	          } else {
+	            firstInView = false;
+	          }
+	        });
+
+	        listElement.appendChild(itemElement);
+	        serviceList.appendChild(listElement);
+	      });
+
+	      // メニューがあるときだけメニューエリアとロゴを表示させる
+	      var listItems = menu.serviceList.serviceListItems;
+	      if (listItems !== null && typeof listItems !== 'undefined' && listItems.length > 0) {
+	        var box = document.getElementById(parts.box);
+	        if (box) {
+	          box.style.cssText = 'display: block;';
+	        }
+	        var logo = document.getElementById(parts.logo);
+	        if (logo) {
+	          logo.style.cssText = 'display: block;';
+	        }
+	        // document.getElementById(parts.box).style.cssText = 'display: block;';
+	        // document.getElementById(parts.logo).style.cssText = 'display: block;';
+	      }
+	      // @since 2016-11-10
+	      // https://github.com/undotsushin/undotsushin/issues/1290
+	      // Syn.menu の自動オープンやめる（Web） #1290
+	      // とのことなのでチェックをやめる
+	      // ---
+	      // 訪問経験があるかを調べる
+	      // this.visitCheck();
+	    }
+	    /**
+	     * 訪問経験があるかを調べ, cookie がなかったら menu を開く
+	     */
+
+	  }, {
+	    key: 'visitCheck',
+	    value: function visitCheck() {
+	      if (!Syn.visited()) {
+	        // cookie が無いので menu を open する
+	        this.open(this._side, this._sideDom);
+	      }
+	    }
+	    /**
+	     * service_notification_load event listener
+	     */
+
+	  }, {
+	    key: 'onNotice',
+	    value: function onNotice() {
+	      // 通知が存在する場合としない場合で、通知ボタンのクラスを変える
+	      if (this._menu.serviceNotification.serviceNotificationItems.length > 0) {
+	        this._toggleDom.addClass('has-notification');
+	      } else {
+	        this._toggleDom.removeClass('has-notification');
+	      }
+	    }
+	    /**
+	     * button click event handler
+	     * @param {Event} event click event
+	     */
+
+	  }, {
+	    key: 'buttonClick',
+	    value: function buttonClick(event) {
+	      event.preventDefault();
+	      if (this._motion) {
+	        // animation 中 -> 何もしない
+	        return;
+	      }
+	      var side = this._side;
+	      var sideDom = this._sideDom;
+
+	      if (sideDom.hasClass('open')) {
+	        // open -> close
+	        this.close(side, sideDom);
+	        // ga
+	        Syn.gaSend('close');
+	      } else {
+	        // close -> open
+	        this.open(side, sideDom);
+	        // ga
+	        Syn.gaSend('open');
+	      }
+	    }
+	    /**
+	     * bg click event handler
+	     * @param {Event} event bg click event
+	     */
+
+	  }, {
+	    key: 'bgClick',
+	    value: function bgClick(event) {
+	      event.preventDefault();
+	      // open -> close
+	      this.close(this._side, this._sideDom);
+	      // ga
+	      Syn.gaSend('close');
+	    }
+	    /**
+	     * side menu を開く
+	     * @param {Element} side side-menu-container element
+	     * @param {Sagen.Dom} sideDom side-menu-container Dom instance
+	     */
+
+	  }, {
+	    key: 'open',
+	    value: function open(side, sideDom) {
+	      var _this4 = this;
+
+	      this._motion = true;
+	      // let _this = this;
+
+	      // cookie set
+	      // menu を開くと cookie expire を延長
+	      // @since 2016-11-10
+	      // https://github.com/undotsushin/undotsushin/issues/1290
+	      // Syn.menu の自動オープンやめる（Web） #1290
+	      // とのことなので cookie set をやめる
+	      // Syn.visit();
+
+	      // 500ms 後に motion flag を false にします
+	      // setTimeout( function() {
+	      //   _this._motion = false;
+	      // }, 500 );
+	      clearTimeout(this.motionTimer);
+	      this.motionTimer = setTimeout(function () {
+	        _this4._motion = false;
+	      }, 500);
+
+	      // open 時の scroll y position 保存
+	      this._y = _Scroll.Scroll.y;
+
+	      // scroll 0 位置に移動
+	      // menu top を表示するため
+	      _Scroll.Scroll.motion(0, 0.4);
+
+	      // メニューを開いたことをトラッキングする
+	      this._menu.trackShowEvent();
+
+	      // open
+	      sideDom.addClass('open');
+	      // 外側のコンテナをでっかくする
+	      side.style.cssText = 'height: 9999px';
+	      // height 設定
+	      this.setHeight(side);
+
+	      // $adg.ads.trackShowEvent を 1回だけ実行
+	      this.adTrack();
+
+	      // fps start
+	      this._fps.on(Gasane.Fps.ENTER_FRAME, this._boundUpdate);
+	      this._fps.start();
+	    }
+	    /**
+	     * $adg.ads.trackShowEvent を 1回だけ実行
+	     * https://github.com/bitcellar/synapse-sdk/blob/master/ad/Browser/Readme.md
+	     * https://github.com/undotsushin/undotsushin/issues/704#issuecomment-219010900
+	     */
+
+	  }, {
+	    key: 'adTrack',
+	    value: function adTrack() {
+	      // $adg.listener.loaded を待つ
+	      if (!this._$adgComing) {
+	        return;
+	      }
+	      // 1回だけ
+	      if (this._firstAd) {
+	        return;
+	      }
+	      var $adg = self.$adg;
+	      if (!$adg || !$adg.ads || typeof $adg.ads.trackShowEvent !== 'function') {
+	        return;
+	      }
+	      // https://github.com/bitcellar/synapse-sdk/blob/master/ad/Browser/Readme.md
+	      // https://github.com/undotsushin/undotsushin/issues/704#issuecomment-219010900
+	      this._firstAd = true;
+	      $adg.ads.trackShowEvent();
+	      // track 送ったので inview event を unbind します
+	      this._$side.off('inview');
+	    }
+	    /**
+	     * menu open 時に高さをセットします
+	     * @param {Element} side side menu
+	     */
+
+	  }, {
+	    key: 'setHeight',
+	    value: function setHeight(side) {
+	      // wrapper ul の高さ px 付き
+	      var heightPx = this._listDom.style('height');
+	      var height = parseInt(heightPx, 10);
+	      var windowHeight = parseInt(window.innerHeight, 10);
+
+	      if (height < windowHeight || !this._ready) {
+	        // Syn.menu が読み込まれない or menu 高さが window 高さ以下の時は
+	        // window 高さ + 100px にする
+	        height = windowHeight + 100;
+	        heightPx = height + 'px';
+	      }
+
+	      // 高さをセット
+	      side.style.cssText = 'height: ' + heightPx;
+	      // 本体の高さを同じにする
+	      this._page.style.cssText = 'overflow: hidden; width: 100%; height: ' + heightPx;
+	    }
+	    /**
+	     * side menu を閉じる
+	     * @param {Element} side side-menu-container element
+	     * @param {Sagen.Dom} sideDom side-menu-container Dom instance
+	     */
+
+	  }, {
+	    key: 'close',
+	    value: function close(side, sideDom) {
+	      var _this5 = this;
+
+	      this._motion = true;
+	      var _this = this;
+
+	      sideDom.addClass('closing');
+
+	      _Scroll.Scroll.motion(_this._y, 0.2, 0.2);
+
+	      // setTimeout( function() {
+	      //   _this._motion = false;
+	      //   sideDom.removeClass( 'closing' );
+	      //   sideDom.removeClass( 'open' );
+	      //   side.style.cssText = '';
+	      //   _this._page.style.cssText = '';
+	      // }, 400 );
+	      clearTimeout(this.scrollTImer);
+	      this.scrollTImer = setTimeout(function () {
+	        _this5._motion = false;
+	        sideDom.removeClass('closing');
+	        sideDom.removeClass('open');
+	        side.style.cssText = '';
+	        _this5._page.style.cssText = '';
+	      }, 400);
+
+	      this._fps.off(Gasane.Fps.ENTER_FRAME, this._boundUpdate);
+	    }
+
+	    /**
+	     * Fps.ENTER_FRAME handler
+	     * 高さを計算します
+	     */
+
+	  }, {
+	    key: 'update',
+	    value: function update() {
+	      this.setHeight(this._side);
+	    }
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * 自身の script tag src query syn を探し '1' か否かを調べ真偽値を返します
+	     * @return {boolean} syn=1 かの真偽値を返します
+	     */
+
+	  }], [{
+	    key: 'test',
+	    value: function test() {
+	      var scripts = document.getElementsByTagName('head')[0].getElementsByTagName('script');
+	      var search = void 0;
+
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+
+	      try {
+	        for (var _iterator = (0, _getIterator3.default)(scripts), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var script = _step.value;
+
+	          if (!script.src || script.src.indexOf('main.bundle.js') === -1) {
+	            continue;
+	          }
+
+	          var src = script.src;
+	          search = src.split('?').pop();
+	        }
+	        // console.log( 'test search ', search );
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
+	        }
+	      }
+
+	      if (typeof search === 'undefined' || search === '') {
+	        return false;
+	      }
+
+	      var queries = _Loc.Loc.parse(search);
+	      // console.log( 'test queries ', queries );
+	      if (!queries.hasOwnProperty('syn')) {
+	        return false;
+	      } else {
+	        return queries.syn === '1';
+	      }
+	    }
+	    /**
+	     * 訪問経験があるかを cookie から調べます
+	     * @return {boolean} 訪問経験があるかの真偽値を返します
+	     */
+
+	  }, {
+	    key: 'visited',
+	    value: function visited() {
+	      return parseInt(_Cookie.Cookie.get(_Cookie.Cookie.SYN), 10) === 1;
+	    }
+	    /**
+	     * 訪問 cookie をセットします
+	     * @return {boolean} セット成功可否を返します
+	     */
+
+	  }, {
+	    key: 'visit',
+	    value: function visit() {
+	      // 2 weeks set
+	      return _Cookie.Cookie.save('1', _Cookie.Cookie.SYN, _Time.Time.later(14));
+	    }
+	    /**
+	     * GA 計測タグ を送信します
+	     * @param {string} mode open | close どちらk
+	     */
+
+	  }, {
+	    key: 'gaSend',
+	    value: function gaSend(mode) {
+	      // ----------------------------------------------
+	      // GA 計測タグ
+	      // Syn.menu表示 / Syn.menuクローズ
+	      _Ga.Ga.add(new _GaData.GaData('Syn.gaSend', 'sidemenu', mode, '', 0, true));
+	      // ----------------------------------------------
+	    }
+	  }]);
+	  return Syn;
+	}();
+
+	exports.default = Syn;
+
+/***/ }),
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Time = undefined;
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/03/21 - 19:33
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// let _symbol = Symbol();
+
+	/**
+	 * 経過時間に利用する関数群を用意しました
+	 */
+	var Time = exports.Time = function () {
+	  function Time() {
+	    (0, _classCallCheck3.default)(this, Time);
+	  }
+
+	  (0, _createClass3.default)(Time, null, [{
+	    key: "later",
+
+	    // /**
+	    //  * 経過時間に利用する関数
+	    //  * static class です, instance を作成しません
+	    //  * @param {Symbol} target Singleton を実現するための private symbol
+	    //  */
+	    // constructor( target ) {
+	    //   if ( _symbol !== target ) {
+	    //
+	    //     throw new Error( 'Time is static Class. not use new Time().' );
+	    //
+	    //   }
+	    // }
+	    /**
+	     * 現在からの経過時間を Date instance で作成します
+	     * @param {number} days 計算元にする経過日数
+	     * @return {Date} 引数 days を元に現在からの経過時間を Date instance で返します
+	     */
+	    value: function later(days) {
+	      return new Date(Time.current() + Time.day() * days);
+	    }
+	    /**
+	     * 現在時間
+	     * @return {number} 現在時間 Date.now を返します
+	     */
+
+	  }, {
+	    key: "current",
+	    value: function current() {
+	      return Date.now();
+	    }
+	    /**
+	     * 1 week ms
+	     * @return {number} 1 week ms を返します
+	     */
+
+	  }, {
+	    key: "week",
+	    value: function week() {
+	      return Time.day() * 7;
+	    }
+	    /**
+	     * 1 day ms
+	     * @return {number} 1 day ms を返します
+	     */
+
+	  }, {
+	    key: "day",
+	    value: function day() {
+	      return 1000 * 60 * 60 * 24;
+	    }
+	  }]);
+	  return Time;
+	}();
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Ga = undefined;
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Env = __webpack_require__(124);
+
+	var _Env2 = _interopRequireDefault(_Env);
+
+	var _GaData = __webpack_require__(158);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 送信データをストックします<br>
+	 * `ga` 存在が確認できたら順に送信を開始します
+	 * @type {Array.<GaData>}
+	 * @private
+	 */
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/04/13 - 12:22
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	var gaRequests = [];
+
+	/**
+	 * ga: イベント トラッキング
+	 *
+	 * @see https://docs.google.com/spreadsheets/d/19TcKHx0FFE7iN2JQ9R7a5GVK9HxCTfhPP2ij_NywZ7w/edit#gid=1062313071
+	 * @see https://developers.google.com/analytics/devguides/collection/analyticsjs/events?hl=ja#implementation
+	 */
+
+	var Ga = function () {
+	  function Ga() {
+	    (0, _classCallCheck3.default)(this, Ga);
+	  }
+
+	  (0, _createClass3.default)(Ga, null, [{
+	    key: 'click',
+
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * 外部からトラッキングコード送信ができるようにします
+	     * - ref: GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
+	     * @param {string} method 発生場所（関数名）
+	     * @param {string} category 必須 通常は接点に使用されたオブジェクト（例: Video）
+	     * @param {string} action 必須 接点の種類（例: play）
+	     * @param {string} label イベントの分類に便利です（例: Fall Campaign）
+	     * @param {boolean} [eventInteraction=false] オプション イベントをインタラクション以外のイベントとして送信できます。その場合、nonInteraction フィールドを true に指定します（send コマンドの fieldsObject を使用）
+	     * @since 2016-06-22
+	     */
+	    value: function click(method, category, action, label) {
+	      var eventInteraction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+
+	      // ----------------------------------------------
+	      // GA 計測タグ
+	      Ga.add(new _GaData.GaData(method, category, action, label, 0, eventInteraction));
+	      // ----------------------------------------------
+	    }
+	    /**
+	     * 送信予約
+	     * @param {GaData} data 送信するデータ
+	     */
+
+	  }, {
+	    key: 'add',
+	    value: function add(data) {
+	      gaRequests.push(data);
+	      Ga.send();
+	    }
+
+	    /**
+	     * 記事詳細・次の記事一覧・インビュー 送信予約
+	     * @param {number} id 記事 ID
+	     * @param {string} method 発生場所(関数)
+	     * @param {string} [title=''] 記事タイトル
+	     * @since 2016-11-15 title added
+	     */
+
+	  }, {
+	    key: 'addPage',
+	    value: function addPage(id, method) {
+	      var title = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+	      var data = new _GaData.GaData(method);
+	      data.hitType = Ga.PAGEVIEW;
+	      data.setPage(id, title);
+	      Ga.add(data);
+	    }
+	    /**
+	     * 送信実行
+	     * global object `ga` 存在をチェックし送信する
+	     */
+
+	  }, {
+	    key: 'send',
+	    value: function send() {
+	      // ga 存在チェック
+	      var ga = self.ga;
+	      if (typeof ga === 'undefined') {
+	        // ga undefined
+	        setTimeout(Ga.send, 25);
+	        return;
+	      }
+
+	      // log を出力するかを選択する
+	      // if (Env.mode === Env.PRODUCTION) {
+	      //   Ga.production(ga);出力します
+	      // } else {
+	      //   Ga.develop(ga);
+	      // }
+	      // mode flag
+	      var production = _Env2.default.mode === _Env2.default.PRODUCTION;
+	      // _requests 配列の値を全て
+	      while (gaRequests.length > 0) {
+	        // @type {GaData}
+	        var data = gaRequests.shift();
+	        // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+	        Ga.tracking(ga, data);
+	        if (!production) {
+	          // Env.PRODUCTION 以外は開発ログを出力します
+	          console.warn(data.method + ': ga, send, ', data);
+	        }
+	      }
+	    }
+	    // /**
+	    //  * 本番（ログなし）
+	    //  * @param {Function} ga ga関数
+	    //  */
+	    // static production( ga:Function ):void {
+	    //   // _requests 内のデータがなくなるまで実行する
+	    //   while( _requests.length > 0 ) {
+	    //     let data:GaData = _requests.shift();
+	    //     // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+	    //     Ga.tracking( ga, data );
+	    //   }
+	    // }
+	    // /**
+	    //  * 開発（ログあり）
+	    //  * @param {Function} ga ga関数
+	    //  */
+	    // static develop( ga:Function ):void {
+	    //   // _requests 内のデータがなくなるまで実行する
+	    //   while( _requests.length > 0 ) {
+	    //     let data:GaData = _requests.shift();
+	    //     // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+	    //     Ga.tracking( ga, data );
+	    //     console.log( `${data.method}: ga, send, `, data);
+	    //   }
+	    // }
+	    /**
+	     * ga 関数を実行し tracking を行います
+	     * @since 2016-07-04
+	     * @param {Function} ga Google.ga
+	     * @param {GaData} data 送信する GaData Object
+	     * @return {*} ga 戻り値を返します
+	     */
+
+	  }, {
+	    key: 'tracking',
+	    value: function tracking(ga, data) {
+	      if (data.page !== null) {
+	        return Ga.page(ga, data);
+	      }
+	      if (data.eventInteraction) {
+	        return ga('send', data.hitType, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue, _GaData.GaData.nonInteraction());
+	      }
+
+	      return ga('send', data.hitType, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue);
+	    }
+	    /**
+	     * Web版記事詳細無限スクロールに `hitType: 'pageview'` 追加送信
+	     *
+	     * @see https://github.com/undotsushin/undotsushin/issues/1151
+	     * @param {Function} ga Google.ga
+	     * @param {GaData} data 送信する GaData Object
+	     * @return {*} ga 戻り値を返します
+	     * @since 2016-10-05
+	     */
+
+	  }, {
+	    key: 'page',
+	    value: function page(ga, data) {
+	      var sending = { hitType: data.hitType, page: data.page };
+	      if (data.title !== '') {
+	        sending.title = data.title;
+	      }
+	      return ga('send', sending);
+	    }
+	    /**
+	     * 記事詳細での提供元&カテゴリートラッキング
+	     * @see https://github.com/undotsushin/undotsushin/issues/744
+	     *
+	     * ```
+	     * 対象スクリーン：/p/ [ 記事ID ]
+	     * イベントカテゴリ : provider
+	     * イベントアクション：view
+	     * イベントラベル：[response.user.name]
+	     *  APIの response.user.name ex. 運動通信編集部 を設定
+	     * ```
+	     *
+	     * ```
+	     * 対象スクリーン：/p/ [ 記事ID ]
+	     * イベントカテゴリ : category
+	     * イベントアクション：view
+	     * イベントラベル：[response.categories.label] ex. 海外サッカー
+	     * ```
+	     *
+	     * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
+	     * @param {string} method 発生場所関数名
+	     * @since 2016-10-05 ViewSingle から移動
+	     */
+
+	  }, {
+	    key: 'single',
+	    value: function single(_single) {
+	      var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Ga.single';
+
+	      var category = 'provider';
+	      var action = 'view';
+	      var label = _single.user.userName;
+	      // const method = 'Ga.single';
+
+	      // ----------------------------------------------
+	      // GA 計測タグ
+	      // 記事詳細の提供元のアクセス数を測定する
+	      Ga.add(new _GaData.GaData(method, category, action, label, 0, true));
+	      // ----------------------------------------------
+
+	      // category label 送信
+	      // @type {CategoriesDae}
+	      var categories = _single.categories;
+
+	      category = 'category';
+	      categories.all.map(function (value) {
+	        // @type {SlugDae} - value
+	        // ----------------------------------------------
+	        // GA 計測タグ
+	        // 記事カテゴリーのアクセス数を測定する
+	        Ga.add(new _GaData.GaData(method, category, action, value.label, 0, true));
+	        // ----------------------------------------------
+	      });
+	    }
+	  }, {
+	    key: 'PAGEVIEW',
+
+	    // /**
+	    //  * ga: イベント トラッキング
+	    //  * static class です, instance を作成しません
+	    //  * @param {Symbol} target Singleton を実現するための private symbol
+	    //  */
+	    // constructor( target:Symbol ) {
+	    //   if ( _symbol !== target ) {
+	    //     throw new Error( 'Ga is static Class. not use new Ga().' );
+	    //   }
+	    // }
+	    // ---------------------------------------------------
+	    //  STATIC GETTER / SETTER
+	    // ---------------------------------------------------
+	    /**
+	     * 記事詳細・次の記事一覧 インビューイベント hitType
+	     * @const PAGEVIEW
+	     * @return {string} 'pageview' を返します
+	     */
+	    get: function get() {
+	      return 'pageview';
+	    }
+	  }]);
+	  return Ga;
+	}();
+
+	exports.Ga = Ga;
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.GaData = undefined;
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/04/13 - 12:26
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	/**
+	 * ga 送信データ
+	 */
+	var GaData = exports.GaData = function () {
+	  /**
+	   * ga 送信データ
+	   * @see https://developers.google.com/analytics/devguides/collection/analyticsjs/events?hl=ja#implementation
+	   * @param {string} method 発生場所（関数名）
+	   * @param {string} [eventCategory=''] 必須 通常は接点に使用されたオブジェクト（例: Video）
+	   * @param {string} [eventAction=''] 必須 接点の種類（例: play）
+	   * @param {string} [eventLabel=''] オプション イベントの分類に便利です（例: Fall Campaign）
+	   * @param {number} [eventValue=0] オプション イベントに関連する数値（例: 42）
+	   * @param {boolean} [eventInteraction=false] オプション イベントをインタラクション以外のイベントとして送信できます。その場合、nonInteraction フィールドを true に指定します（send コマンドの fieldsObject を使用）
+	   * @param {string} [hitType=event] 必須 hitType value
+	   * @param {?string} [page=null] オプション 記事詳細無限スクロール時に in view 記事の ID 送信に使用します
+	   */
+	  function GaData(method) {
+	    var eventCategory = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+	    var eventAction = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+	    var eventLabel = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+	    var eventValue = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+	    var eventInteraction = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+	    var hitType = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'event';
+	    var page = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+	    (0, _classCallCheck3.default)(this, GaData);
+
+	    // Object.assign( this, {method, eventCategory, eventAction, eventLabel, eventValue, eventInteraction} );
+	    /**
+	     * 発生場所（関数名）
+	     * @type {string}
+	     */
+	    this.method = method;
+	    /**
+	     * 必須 通常は接点に使用されたオブジェクト（例: Video）
+	     * @type {string}
+	     */
+	    this.eventCategory = eventCategory;
+	    /**
+	     * 必須 接点の種類（例: play）
+	     * @type {string}
+	     */
+	    this.eventAction = eventAction;
+	    /**
+	     * オプション イベントの分類に便利です（例: Fall Campaign）
+	     * @type {string}
+	     */
+	    this.eventLabel = eventLabel;
+	    /**
+	     * オプション イベントの分類に便利です（例: Fall Campaign）
+	     * @type {number}
+	     */
+	    this.eventValue = eventValue;
+	    /**
+	     * オプション イベントをインタラクション以外のイベントとして送信できます。その場合、nonInteraction フィールドを true に指定します（send コマンドの fieldsObject を使用）
+	     * @type {boolean}
+	     */
+	    this.eventInteraction = eventInteraction;
+	    /**
+	     * 必須 hitType value
+	     * @type {string}
+	     * @default 'event'
+	     * @since 2016-10-05
+	     */
+	    this.hitType = hitType;
+	    /**
+	     * オプション 記事詳細無限スクロール時に in view 記事の ID 送信に使用します
+	     * - `/p/6789/`
+	     *
+	     * @type {?string}
+	     * @since 2016-10-05
+	     */
+	    this.page = page;
+	    /**
+	     * 記事タイトル
+	     * @type {string}
+	     * @since 2016-11-15
+	     * @see https://github.com/undotsushin/undotsushin/issues/1334#issuecomment-260300279
+	     */
+	    this.title = '';
+	  }
+	  /**
+	   * 記事 ID を `/p/__ARTICLE_ID__/` な形式に変換し `page` プロパティに保存します
+	   * @param {number} id 記事 ID
+	   * @param {string} title 記事タイトル
+	   * @return {string} `/p/__ARTICLE_ID__/` 変換後文字列を返します
+	   */
+
+
+	  (0, _createClass3.default)(GaData, [{
+	    key: 'setPage',
+	    value: function setPage(id, title) {
+	      var page = '/p/' + id + '/';
+	      this.page = page;
+	      this.title = title;
+	      return page;
+	    }
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * nonInteraction フィールドを true に指定した Object を取得します
+	     * @return {{nonInteraction: boolean}} nonInteraction フィールドを true に指定した Object を返します
+	     */
+
+	  }], [{
+	    key: 'nonInteraction',
+	    value: function nonInteraction() {
+	      return { nonInteraction: true };
+	    }
+	  }]);
+	  return GaData;
+	}();
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.LogoutNode = undefined;
+
+	var _Message = __webpack_require__(107);
+
+	var _User = __webpack_require__(110);
+
+	var _Loc = __webpack_require__(140);
+
+	var _LogoutStatus = __webpack_require__(138);
+
+	// React
+
+
+	// util
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/03/08 - 19:06
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	// app
+	var React = self.React;
+
+	// tween
+
+
+	// event
+	var greensock = self.com.greensock;
+	var TweenLite = greensock.TweenLite;
+	var easing = greensock.easing;
+
+	/**
+	 * Logout modal
+	 * @type {ReactClass}
+	 */
+	var LogoutNode = exports.LogoutNode = React.createClass({
+	  displayName: 'LogoutNode',
+
+	  propTypes: {
+	    // ok click callback
+	    ok: React.PropTypes.func,
+	    // cancel click callback
+	    cancel: React.PropTypes.func,
+	    // LogoutStatus event handler を bind する
+	    listen: React.PropTypes.bool
+	  },
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      ok: null,
+	      cancel: null,
+	      type: 'logout',
+	      // PC: 不要(false), SP: 要(true)
+	      // 設計が悪く PC, SP で実装方法が変わってしまった
+	      // PC true にすると二重にマウントされる...かも
+	      listen: false
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    this.status = null;
+	    this.ok = null;
+	    this.cancel = null;
+
+	    return {
+	      show: false,
+	      css: { opacity: 0 }
+	    };
+	  },
+	  render: function render() {
+
+	    if (this.state.show) {
+	      return React.createElement(
+	        'div',
+	        { className: 'modal-dialogue modal-dialogue_delete', ref: 'modalContainer', style: this.state.css },
+	        React.createElement('div', { className: 'modal-bg', onClick: this.cancelClick }),
+	        React.createElement(
+	          'div',
+	          { className: 'modal-dialogue-contents ' + this.props.type },
+	          React.createElement(
+	            'a',
+	            { href: '#', className: 'modal-dialogue-close', onClick: this.cancelClick },
+	            _Message.Message.BUTTON_CLOSE
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'lead' },
+	            _Message.Message.LOGOUT
+	          ),
+	          React.createElement(
+	            'ul',
+	            { className: 'btn-block' },
+	            React.createElement(
+	              'li',
+	              { className: 'btn-item' },
+	              React.createElement(
+	                'a',
+	                { href: '#', className: 'btn-link btn-link_cancel', onClick: this.cancelClick },
+	                _Message.Message.BUTTON_NO
+	              )
+	            ),
+	            React.createElement(
+	              'li',
+	              { className: 'btn-item' },
+	              React.createElement(
+	                'a',
+	                { href: '#', className: 'btn-link btn-link_submit', onClick: this.okClick },
+	                _Message.Message.BUTTON_YES
+	              )
+	            )
+	          )
+	        )
+	      );
+	    } else {
+	      // not show
+	      return null;
+	    }
+	  },
+	  componentDidMount: function componentDidMount() {
+	    if (this.props.listen) {
+	      var status = _LogoutStatus.LogoutStatus.factory();
+	      this.status = status;
+	      status.on(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
+	      status.on(_LogoutStatus.LogoutStatus.CLOSE, this.onClose);
+	    }
+	  },
+	  componentWillUnMount: function componentWillUnMount() {
+	    var status = this.status;
+	    if (status !== null) {
+	      status.off(_LogoutStatus.LogoutStatus.OPEN, this.onOpen);
+	      status.off(_LogoutStatus.LogoutStatus.CLOSE, this.onClose);
+	      this.status = null;
+	    }
+	  },
+	  cancelClick: function cancelClick(event) {
+	    event.preventDefault();
+	    if (typeof this.cancel === 'function') {
+	      this.cancel();
+	    } else if (typeof this.props.cancel === 'function') {
+	      this.props.cancel();
+	    }
+	    this.closeModal();
+	  },
+	  okClick: function okClick(event) {
+	    event.preventDefault();
+	    if (typeof this.ok === 'function') {
+	      this.ok();
+	    } else if (typeof this.props.ok === 'function') {
+	      this.props.ok();
+	    } else {
+	      // this.ok, this.props.ok どちらも function でなかったら
+	      // logout 処理を行う
+	      _User.User.logout();
+	      _Loc.Loc.index();
+	    }
+	    this.closeModal(0.5);
+	  },
+	  openModal: function openModal() {
+	    var object = { opacity: 0 };
+	    var _this = this;
+
+	    TweenLite.to(object, 0.5, {
+	      opacity: 1,
+	      easing: easing.Linear.easeNone,
+	      onUpdate: function onUpdate() {
+	        _this.setState({ css: { opacity: object.opacity } });
+	      },
+	      onComplete: function onComplete() {
+	        _this.setState({ css: { opacity: 1 } });
+	      }
+	    });
+	  },
+	  closeModal: function closeModal() {
+	    var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+	    var object = { opacity: 1 };
+	    var _this = this;
+
+	    TweenLite.to(object, 0.5, {
+	      delay: delay,
+	      opacity: 0,
+	      easing: easing.Linear.easeNone,
+	      onUpdate: function onUpdate() {
+	        _this.setState({ css: { opacity: object.opacity } });
+	      },
+	      onComplete: function onComplete() {
+	        _this.setState({ css: { opacity: 0 }, show: false });
+	      }
+	    });
+	  },
+	  updateShow: function updateShow(show) {
+	    this.setState({ show: show });
+	    if (show) {
+	      this.openModal();
+	    }
+	  },
+	  onOpen: function onOpen(event) {
+	    this.ok = event.ok;
+	    this.cancel = event.cancel;
+	    this.updateShow(true);
+	  },
+	  onClose: function onClose() {
+	    this.ok = null;
+	    this.cancel = null;
+	  }
+	});
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(86);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(90);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _inherits2 = __webpack_require__(91);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _LogoutStatus = __webpack_require__(138);
+
+	var _VK = __webpack_require__(84);
+
+	var _VK2 = _interopRequireDefault(_VK);
+
+	var _Url = __webpack_require__(106);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	/* eslint-disable no-unused-vars */
+
+	/**
+	 * [library] - React
+	 */
+	var React = self.React;
+	/**
+	 * [library] - ReactDOM
+	 */
+	/**
+	 * Copyright (c) 2011-2018 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2018/04/20 - 18:24
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	var ReactDOM = self.ReactDOM;
+	/* eslint-enable no-unused-vars */
+
+	/**
+	 * side menu login / logout 切り替えメニュー
+	 * @since 2018-04-20
+	 */
+
+	var SPComponentSynItem = function (_React$Component) {
+	  (0, _inherits3.default)(SPComponentSynItem, _React$Component);
+	  (0, _createClass3.default)(SPComponentSynItem, null, [{
+	    key: 'propTypes',
+
+	    // ---------------------------------------------------
+	    //  STATIC METHOD
+	    // ---------------------------------------------------
+	    get: function get() {
+	      return {
+	        // sign in ずみ真偽値 true sign in
+	        sign: React.PropTypes.bool.isRequired,
+	        // did mount を通知する callback method
+	        callback: React.PropTypes.func.isRequired,
+	        // vk flag
+	        vk: React.PropTypes.bool.isRequired
+	      };
+	    }
+	    // ---------------------------------------------------
+	    //  CONSTRUCTOR
+	    // ---------------------------------------------------
+
+	  }]);
+
+	  function SPComponentSynItem(props) {
+	    (0, _classCallCheck3.default)(this, SPComponentSynItem);
+
+	    /**
+	     * logout 通知
+	     * @type {?LogoutStatus}
+	     */
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (SPComponentSynItem.__proto__ || (0, _getPrototypeOf2.default)(SPComponentSynItem)).call(this, props));
+
+	    _this.logoutStatus = !props.vk ? _LogoutStatus.LogoutStatus.factory() : null;
+	    /**
+	     * bind onClickLogout
+	     * @type {*}
+	     */
+	    _this.onClickLogout = _this.onClickLogout.bind(_this);
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * logout click event handlert
+	   * @param {Event} event click Event
+	   */
+
+
+	  (0, _createClass3.default)(SPComponentSynItem, [{
+	    key: 'onClickLogout',
+	    value: function onClickLogout(event) {
+	      event.preventDefault();
+	      if (this.logoutStatus) {
+	        this.logoutStatus.open();
+	      }
+	    }
+	    /**
+	     * delegate - componentDidMount
+	     * - props.callback 実行します
+	     */
+
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var func = this.props.callback;
+	      if (func) {
+	        func();
+	      }
+	    }
+
+	    /**
+	     * 通常ログインユーザーメニュー
+	     * @returns {*} `ul` ログインユーザーメニュー
+	     */
+
+	  }, {
+	    key: 'member',
+	    value: function member() {
+	      // login
+	      var vk = this.props.vk;
+
+	      var prefix = _VK2.default.prefix(vk);
+	      var sideNav = prefix + 'side-menu-ut-nav';
+	      var navLink = prefix + 'side-menu-ut-nav-link';
+	      return React.createElement(
+	        'ul',
+	        null,
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-home',
+	              href: _Url.Url.index(vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u30B9\u30DD\u30FC\u30C4\u30D6\u30EB\u30C8\u30C3\u30D7\u3078'
+	          )
+	        ),
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-mypage',
+	              href: _Url.Url.mypage('', vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u30DE\u30A4\u30DA\u30FC\u30B8'
+	          )
+	        ),
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-config',
+	              href: _Url.Url.settings('', vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u8A2D\u5B9A'
+	          )
+	        ),
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-logout',
+	              href: '#',
+	              onClick: this.onClickLogout
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u30ED\u30B0\u30A2\u30A6\u30C8'
+	          )
+	        ),
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-about',
+	              href: _Url.Url.about('', vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u30B9\u30DD\u30FC\u30C4\u30D6\u30EB\u3068\u306F'
+	          )
+	        )
+	      );
+	    }
+
+	    /**
+	     * VK ログインユーザーメニュー
+	     * @returns {*} `ul` VK ログインユーザーメニュー
+	     */
+
+	  }, {
+	    key: 'vkMember',
+	    value: function vkMember() {
+	      // login - vk
+	      var vk = this.props.vk;
+
+	      var prefix = _VK2.default.prefix(vk);
+	      var sideNav = prefix + 'side-menu-ut-nav';
+	      var navLink = prefix + 'side-menu-ut-nav-link';
+	      return React.createElement(
+	        'ul',
+	        null,
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-home',
+	              href: _Url.Url.index(vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u30B9\u30DD\u30FC\u30C4\u30D6\u30EB\u30C8\u30C3\u30D7\u3078'
+	          )
+	        ),
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-mypage',
+	              href: _Url.Url.mypage('', vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u30DE\u30A4\u30DA\u30FC\u30B8'
+	          )
+	        ),
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-config',
+	              href: _Url.Url.settings('', vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u8A2D\u5B9A'
+	          )
+	        ),
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-about',
+	              href: _Url.Url.about('', vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u30B9\u30DD\u30FC\u30C4\u30D6\u30EB\u3068\u306F'
+	          )
+	        )
+	      );
+	    }
+	    /**
+	     * 通常ユーザーメニュー
+	     * @returns {*} `ul` 通常ユーザーメニュー
+	     */
+
+	  }, {
+	    key: 'user',
+	    value: function user() {
+	      // not login
+	      var vk = this.props.vk;
+
+	      var prefix = _VK2.default.prefix(vk);
+	      var sideNav = prefix + 'side-menu-ut-nav';
+	      var navLink = prefix + 'side-menu-ut-nav-link';
+	      return React.createElement(
+	        'ul',
+	        null,
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-home',
+	              href: _Url.Url.index(vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u30B9\u30DD\u30FC\u30C4\u30D6\u30EB\u30C8\u30C3\u30D7\u3078'
+	          )
+	        ),
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-login',
+	              href: _Url.Url.signupLogin(vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u7121\u6599\u767B\u9332\u30FB\u30ED\u30B0\u30A4\u30F3'
+	          )
+	        ),
+	        React.createElement(
+	          'li',
+	          { className: '' + sideNav },
+	          React.createElement(
+	            'a',
+	            {
+	              className: navLink + ' ' + prefix + 'side-menu-ut-nav-about',
+	              href: _Url.Url.about('', vk)
+	            },
+	            React.createElement(
+	              'i',
+	              null,
+	              '\xA0'
+	            ),
+	            '\u30B9\u30DD\u30FC\u30C4\u30D6\u30EB\u3068\u306F'
+	          )
+	        )
+	      );
+	    }
+	    /**
+	     * ユーザー種類毎にメニューを出力します
+	     * @returns {*} `ul`
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          vk = _props.vk,
+	          sign = _props.sign;
+
+	      if (!sign) {
+	        return this.user();
+	      } else if (vk) {
+	        return this.vkMember();
+	      }
+	      return this.member();
+	    }
+	  }]);
+	  return SPComponentSynItem;
+	}(React.Component);
+
+	exports.default = SPComponentSynItem;
 
 /***/ })
 /******/ ]);
