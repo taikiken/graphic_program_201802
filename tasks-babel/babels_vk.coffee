@@ -124,6 +124,8 @@ gulp.task 'vk:pack:build', ( cb ) ->
 dependencies = []
 dependencies.push dir.src + '/bower_exports/sagen/sagen.min.js'
 dependencies.push dir.src + '/babels_carousel/dependencies/gsap/src/minified/TweenMax.min.js'
+dependencies.push dir.src + '/babels_carousel/dependencies/gsap/src/minified/TweenMax.min.js'
+dependencies.push dir.src + '/babels_carousel/dependencies/gsap/src/minified/plugins/ScrollToPlugin.min.js'
 
 
 gulp.task 'vk:concat:dev', ->
