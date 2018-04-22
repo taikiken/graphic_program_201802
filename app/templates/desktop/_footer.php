@@ -68,9 +68,6 @@ endif;
    include_once __DIR__.'/_footer_script.php';
 endif; ?>
 
-<?php
-var_dump($page['conditional']['vk_script']);
-?>
 <?php if ( $page['conditional']['vk_script'] ) :
    include_once __DIR__.'./../_footer_vk_script.php';
 endif; ?>

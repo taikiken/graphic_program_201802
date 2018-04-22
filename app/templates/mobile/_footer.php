@@ -44,7 +44,7 @@ endif;
 ?>
 
 <?php if ( $page['conditional']['sidemenu'] ) : ?>
-<div id="side-menu-container" class="SPBL_common">
+<div id="<?php echo $page['html_prefix']; ?>side-menu-container" class="SPBL_common">
   <div id="side-menu-bg"></div>
   <div id='side-menu'>
     <ul id="side-menu-list">
@@ -142,6 +142,9 @@ endif;
   include __DIR__.'/_footer-bottom.php';
 endif; ?>
 
+<?php if ( $page['conditional']['vk_script'] ) :
+  include_once __DIR__.'./../_footer_vk_script.php';
+endif; ?>
 
 <?php if ( $page['conditional']['html_end'] ) : ?>
 </body>
