@@ -21,7 +21,7 @@
     </div><!-- /.foot-pr-inner -->
   </div><!-- /.foot-pr -->
 
-  <div id="pageTop" class="<?php echo $page['html_prefix']; ?>pagetop fixed blind"><a href="#"><span>このページの先頭へ<img src="/assets/images/sprite/sprite-footer.png" role="presentation"></span></a></div>
+  <div id="<?php echo $page['html_prefix']; ?>pageTop" class="<?php echo $page['html_prefix']; ?>pagetop fixed blind"><a href="#"><span>このページの先頭へ<img src="/assets/images/sprite/sprite-footer.png" role="presentation"></span></a></div>
 
   <div class="<?php echo $page['html_prefix']; ?>fnav-block">
     <nav class="<?php echo $page['html_prefix']; ?>fnav">

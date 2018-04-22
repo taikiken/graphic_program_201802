@@ -40,7 +40,7 @@ endif;
 ?>
 
 <?php if ( $page['conditional']['footer'] ) : ?>
-  <footer id="footer-container" class="SPBL_common <?php echo $page['html_prefix']; ?>foot-sec">
+  <footer id="<?php echo $page['html_prefix']; ?>footer-container" class="SPBL_common <?php echo $page['html_prefix']; ?>foot-sec">
     <?php include_once __DIR__.'/_footer-sec-inner.php'; ?>
   </footer><!-- /.foot-sec -->
 <?php endif; ?>
@@ -66,6 +66,13 @@ endif;
 
 <?php if ( $page['conditional']['footer_script'] ) :
    include_once __DIR__.'/_footer_script.php';
+endif; ?>
+
+<?php
+var_dump($page['conditional']['vk_script']);
+?>
+<?php if ( $page['conditional']['vk_script'] ) :
+   include_once __DIR__.'./../_footer_vk_script.php';
 endif; ?>
 
 

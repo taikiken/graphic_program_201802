@@ -81,16 +81,16 @@ endif;
 ?>
 
 <?php if ( $page['conditional']['header'] ) : ?>
-  <header id="header-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-sec">
+  <header id="<?php echo $page['html_prefix']; ?>header-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-sec">
     <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-left">
-        <div id="head-search-container"></div><!-- /.head-search -->
+        <div id="<?php echo $page['html_prefix']; ?>head-search-container"></div><!-- /.head-search -->
       </aside>
 
       <h1><a href="/">スポーツブル（スポブル）</a></h1>
 
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-right">
-        <div id="user-profile-container"></div><!--/.user-profile-container-->
+        <div id="<?php echo $page['html_prefix']; ?>user-profile-container"></div><!--/.user-profile-container-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
@@ -98,7 +98,7 @@ endif;
 
 
 <?php if ( $page['conditional']['gnav'] ) : ?>
-  <nav id="global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
+  <nav id="<?php echo $page['html_prefix']; ?>global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
     <ul>
       <li id="home"><a href="/">TOP</a></li>
 
