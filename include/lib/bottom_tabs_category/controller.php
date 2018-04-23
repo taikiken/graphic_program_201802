@@ -82,7 +82,12 @@ if($q->get_dir()===0){
 
         data_sql();
 
-        $sv[$sn[]="updated_at"]="now()";
+        $sv[$sn[] = "updated_at"] = "now()";
+        if ($sv['is_public'] == "'1'") {
+            $sv['is_public'] = "true";
+        } else {
+            $sv['is_public'] = "false";
+        }
         foreach ($sv as $bottm_tab => $value) {
             if ($bottm_tab === "category_id") {
 
@@ -93,12 +98,7 @@ if($q->get_dir()===0){
             }
         }
         foreach ($sn as $bottm_tab_category => $value) {
-            if($value == "updated_at") {
-                $bottm_tab_categories[$bottm_tab_category -1] = $value;
-            }
-            elseif ($value <> "category_id") {
                 $bottm_tab_categories[$bottm_tab_category] = $value;
-            }
         }
         $o = new dbutl($TABLE, $bottm_tab_categories, $bottm_tabs);
         $e=$o->update($g->f("id"));

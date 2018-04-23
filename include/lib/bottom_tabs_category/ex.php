@@ -8,7 +8,9 @@ $a[] = array("textfield", "アイコン(iOS)", "icon_ios", "120");
 $a[] = array("textfield", "アイコン(Android)", "icon_android", "120");
 
 include $INCLUDEPATH . "print_write.php";
+include $INCLUDEPATH."_newfield3.php";
 
 include $INCLUDEPATH."_pageaddition.php";
+
 
 ?>
