@@ -161,7 +161,7 @@ $banner-height: 70px;
 
 
 // .head-sec
-%head-sec {
+%#{$prefix}head-sec {
   .#{$prefix}head-sec-inner {
     @include clearfix;
     position: relative;
@@ -253,7 +253,7 @@ $banner-height: 70px;
   ##{$prefix}user-profile-container {
     float: left;
 
-    .user {
+    .#{$prefix}user {
       float: left;
       margin: (18/2)+px (26/2)+px 0 0;
 

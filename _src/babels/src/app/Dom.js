@@ -42,10 +42,11 @@ export default class Dom {
    * **PC**
    * - body > .whole を取得します
    * - body > div#whole Element
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} whole element を返します
    */
-  static whole() {
-    return Dom.get('whole');
+  static whole(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}whole`);
   }
   /**
    * body > .whole を取得します

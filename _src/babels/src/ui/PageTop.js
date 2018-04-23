@@ -155,7 +155,9 @@ export default class PageTop {
     // @type {Offset} - footer offset
     this.footerOffset = new Offset(this.footer);
     // @type {Offset} - whole offset
-    this.wholeOffset = new Offset(Dom.whole());
+    const whole = Dom.whole(this.vk);
+    // vk - whole ないかも
+    this.wholeOffset = whole ? new Offset(whole) : new Offset(document.body);
 
     // scroll event 監視開始
     const scroll = this.scroll;
