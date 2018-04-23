@@ -105,14 +105,17 @@ export default class SPComponentSynItem extends React.Component {
             <i>&nbsp;</i>スポーツブルトップへ
           </a>
         </li>
-        <li className={`${sideNav}`}>
-          <a
-            className={`${navLink} ${prefix}side-menu-ut-nav-mypage`}
-            href={Url.mypage('', vk)}
-          >
-            <i>&nbsp;</i>マイページ
-          </a>
-        </li>
+        {/*
+        display: none なので 省略する
+        */}
+        {/*<li className={`${sideNav}`}>*/}
+          {/*<a*/}
+            {/*className={`${navLink} ${prefix}side-menu-ut-nav-mypage`}*/}
+            {/*href={Url.mypage('', vk)}*/}
+          {/*>*/}
+            {/*<i>&nbsp;</i>マイページ*/}
+          {/*</a>*/}
+        {/*</li>*/}
         <li className={`${sideNav}`}>
           <a
             className={`${navLink} ${prefix}side-menu-ut-nav-config`}
@@ -160,22 +163,6 @@ export default class SPComponentSynItem extends React.Component {
             href={Url.index(vk)}
           >
             <i>&nbsp;</i>スポーツブルトップへ
-          </a>
-        </li>
-        <li className={`${sideNav}`}>
-          <a
-            className={`${navLink} ${prefix}side-menu-ut-nav-mypage`}
-            href={Url.mypage('', vk)}
-          >
-            <i>&nbsp;</i>マイページ
-          </a>
-        </li>
-        <li className={`${sideNav}`}>
-          <a
-            className={`${navLink} ${prefix}side-menu-ut-nav-config`}
-            href={Url.settings('', vk)}
-          >
-            <i>&nbsp;</i>設定
           </a>
         </li>
         <li className={`${sideNav}`}>

@@ -394,8 +394,7 @@ export default class Syn {
     this.listDom = new Sagen.Dom(document.getElementById(SynParts.list(this.vk)));
     this.toggleDom = new Sagen.Dom(document.getElementById(SynParts.toggle(this.vk)));
     this.page = document.getElementById(SynParts.page(this.vk));
-    this.bg = document.getElementById(SynParts.page(this.bg));
-
+    this.bg = document.getElementById(SynParts.bg(this.vk));
     if (Syn.test()) {
       // ログレベルの指定。出荷時は指定しない
       Synapse.Logger.logLevel = Synapse.Logger.DEBUG;
