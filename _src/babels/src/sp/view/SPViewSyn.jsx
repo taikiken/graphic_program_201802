@@ -38,7 +38,7 @@ const ReactDOM = self.ReactDOM;
 /**
  * Syn. menu
  * ```
- * https://github.com/undotsushin/undotsushin/tree/feature/195-syn_menu_sp
+ * https://github.com/undotsushin/undotsushin/tree/feature/195-synmenu_sp
  * https://github.com/undotsushin/undotsushin/issues/195
  * https://github.com/bitcellar/synapse-sdk/tree/master/javascript
  * http://www.undotsushin.com/syn-demo/
@@ -62,19 +62,19 @@ export default class SPViewSyn extends View {
      * @type {Element}
      * @private
      */
-    this._button = button;
+    this.button = button;
     /**
      *  menu slide in する menu element, side-menu-container
      * @type {Element}
      * @private
      */
-    this._menu = menu;
+    this.menu = menu;
     /**
      * modal modal 基点 Element, logout modal 表示に使用します
      * @type {?Element}
      * @private
      */
-    this._modal = modal;
+    this.modal = modal;
     /**
      * bound synapse
      * @type {any}
@@ -91,7 +91,7 @@ export default class SPViewSyn extends View {
    * rendering
    */
   render() {
-    const modal = this._modal;
+    const modal = this.modal;
     // since 2018-04-20 - vk: modal nullable なので判定追加する
     if (modal) {
       ReactDOM.render(
@@ -124,12 +124,7 @@ export default class SPViewSyn extends View {
    * - Syn. menu setup を行います
    */
   synapse() {
-    // vk 無しにする
-    if (!this.vk) {
-      const syn = new Syn(this._button, this._menu);
-      syn.init();
-    }
-    // const syn = new Syn(this._button, this._menu);
-    // syn.init();
+    const syn = new Syn(this.button, this.menu, this.vk);
+    syn.init();
   }
 }
