@@ -22,7 +22,7 @@ if ( $page['apiRoot'] != '' ) :
 }() );
 </script>
 <?php endif; ?>
-<script src="/assets/sp/js/bundle/sp-exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/bundle/sp-exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php
 // 一面タブからの導線を増やす #2080
@@ -32,8 +32,8 @@ if ( $page['apiRoot'] != '' ) :
 // WebView 記事詳細の時は不要
 ?>
 <?php if ( !$page['ua_app'] && $page['template'] !== 'p' ) : ?>
-  <script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
-  <script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <?php endif; ?>
 
 
@@ -65,15 +65,14 @@ if ( $page['apiRoot'] != '' ) :
 </script>
  */
 ?>
-<?php
-if( $page['ua_app'] ) {
-  if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'facebook' ) {
-    echo '<script src="/assets/js/fb-video.js?v='.$page['version'].'"></script>';
-  }
-} else {
-  echo '<script src="/assets/js/fb-video.js?v='.$page['version'].'"></script>';
-}
-?>
+<?php if ( $page['ua_app'] ) : ?>
+  <?php if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'facebook' ) : ?>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/fb-video.js?v=<?php echo $page['version']; ?>"></script>';
+  <?php endif; ?>
+<?php else : ?>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/fb-video.js?v=<?php echo $page['version']; ?>"></script>
+<?php endif; ?>
+
 <?php
 if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
 ?>
@@ -93,8 +92,8 @@ endif;
 ?>
 
 
-<!-- #2737 対応 -->
 <?php if ($template_name == 'index') : ?>
+<!-- #2737 対応 -->
 <script type="text/javascript" class="microad_blade_track">
 <!--
 var microad_blade_jp = microad_blade_jp || { 'params' : new Array(), 'complete_map' : new Object() };
@@ -111,4 +110,20 @@ s.parentNode.insertBefore(bs, s);
 })();
 -->
 </script>
+<?php endif; ?>
+
+
+<?php // UNDO_SPBL-512 - 野球カテゴリ詳細ではappbnrださない ?>
+<?php if ($page['category']['slug'] === 'baseball' && $page['template'] === 'p' ) : ?>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("js-header-appbnr-container").remove();
+  Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+});
+</script>
+<style>
+.header-sticky + .body-sec {
+  margin-top: 75px;
+}
+</style>
 <?php endif; ?>

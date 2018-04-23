@@ -6,8 +6,6 @@ $app->group('/{slug:id-sports-2017}',  function () use($app) {
 
   $page = array(
     'title'              => '第1回知的障がい者スポーツ交流プログラム',
-    'site_name'          => $app->model->property('title'),
-    'og_type'            => 'article',
     'og_title'           => '第1回知的障がい者スポーツ交流プログラム | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'id-sports-2017/',
     'og_image'           => $app->model->property('site_url').'assets/images/id-sports-2017/og_image.png',
@@ -16,15 +14,14 @@ $app->group('/{slug:id-sports-2017}',  function () use($app) {
     'template'           => 'index',
     'template_classname' => 'id-sports-2017',
     'dir_name'           => 'id-sports-2017',
-    'ua'                 => $app->model->property('ua'),
   );
 
   // index
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
 
-    $args['path'] = $args;
-    $args['page'] = $page;
+    $app->model->property('path', $args);
+    $args['page'] = $app->model->set($page);
 
     if ( $app->model->property('ua') === 'desktop' ) :
       return $this->renderer->render($response, 'id-sports-2017/desktop/index.php', $args);
