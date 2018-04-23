@@ -127,6 +127,14 @@ $app->group('/inc', function () use ($app) {
       case 'inhigh':
         break;
       case 'vk':
+        $conditional['head_sagen']    = false;
+        $conditional['head_icon']     = false;
+        $conditional['head_seo']      = false;
+        $conditional['head_ogp']      = false;
+        $conditional['head_env']      = false;
+        $conditional['head_bottom']   = false;
+        $conditional['footer_script'] = false;
+        $conditional['footer_modal']  = false;
         break;
       default:
     endswitch;

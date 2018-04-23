@@ -141,11 +141,14 @@ endif;
 <?php
 if ( $page['conditional']['footer_script'] ) :
   include_once __DIR__.'/_footer_script.php';
+endif;
+?>
 
-  if ( $page['template'] === 'inc' && $page['directory'] === 'vk' ) :
-    include_once __DIR__.'./../_footer_vk_script.php';
-  endif;
 
+<?php
+// VK用script
+if ( $page['template'] === 'inc' && $page['directory'] === 'vk' ) :
+  include_once __DIR__.'./../_footer_vk_script.php';
 endif;
 ?>
 
