@@ -444,17 +444,19 @@ export default class Dom {
   }
   /**
    * SP nav inner
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} gnav-sec-inner
    */
-  static navInner() {
-    return Dom.get('gnav-sec-inner');
+  static navInner(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}gnav-sec-inner`);
   }
   /**
    * SP nav > ul#gnav-sec-list
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} gnav-sec-list
    */
-  static navList() {
-    return Dom.get('gnav-sec-list');
+  static navList(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}gnav-sec-list`);
   }
   // --------------------------------------
   // settings

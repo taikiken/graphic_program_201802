@@ -16,9 +16,18 @@ import ViewHeaderSearch from '../../view/header/ViewHeaderSearch';
 import ViewHeaderUser from '../../view/header/ViewHeaderUser';
 // import ViewLogoutModal from '../../view/modal/ViewLogoutModal';
 import PageTop from '../../ui/PageTop';
+import NavCurrent from '../../ui/NavCurrent';
 
 
 // VK desktop 実行ファイル
+/**
+ * current 表示する
+ *
+ */
+const nav = () => {
+  NavCurrent.init('vk', false, true);
+};
+
 
 /**
  * 検索フォーム - vk flag true 実行します
@@ -107,6 +116,8 @@ const desktop = () => {
   header();
   // 検索フォーム
   search();
+  // current
+  nav();
 };
 
 export default desktop;

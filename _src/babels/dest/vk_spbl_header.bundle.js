@@ -48,7 +48,7 @@
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2018/04/19 - 12:41
-	 * buildTime: 2018-4-23 16:42:36
+	 * buildTime: 2018-4-23 17:02:38
 	 * @license MIT
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -154,7 +154,7 @@
 	 * @type {{build: string, main: main}}
 	 */
 	var SPBL_VK = {
-	  build: '2018-4-23 16:42:36',
+	  build: '2018-4-23 17:02:38',
 	  main: main
 	};
 
@@ -174,7 +174,7 @@
 
 	var _exe2 = _interopRequireDefault(_exe);
 
-	var _exe3 = __webpack_require__(146);
+	var _exe3 = __webpack_require__(147);
 
 	var _exe4 = _interopRequireDefault(_exe3);
 
@@ -225,9 +225,22 @@
 
 	var _PageTop2 = _interopRequireDefault(_PageTop);
 
+	var _NavCurrent = __webpack_require__(146);
+
+	var _NavCurrent2 = _interopRequireDefault(_NavCurrent);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// VK desktop 実行ファイル
+	/**
+	 * current 表示する
+	 *
+	 */
+
+	// import ViewLogoutModal from '../../view/modal/ViewLogoutModal';
+	var nav = function nav() {
+	  _NavCurrent2.default.init('vk', false, true);
+	};
 
 	/**
 	 * 検索フォーム - vk flag true 実行します
@@ -270,8 +283,6 @@
 	/**
 	 * ユーザーインフォメーション - vk flag true 実行します
 	 */
-
-	// import ViewLogoutModal from '../../view/modal/ViewLogoutModal';
 	var header = function header() {
 	  var element = _Dom2.default.profile(true);
 	  console.log('header', element);
@@ -332,6 +343,8 @@
 	  header();
 	  // 検索フォーム
 	  search();
+	  // current
+	  nav();
 	};
 
 	exports.default = desktop;
@@ -979,23 +992,29 @@
 	    }
 	    /**
 	     * SP nav inner
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
 	     * @return {?Element} gnav-sec-inner
 	     */
 
 	  }, {
 	    key: 'navInner',
 	    value: function navInner() {
-	      return Dom.get('gnav-sec-inner');
+	      var vk = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      return Dom.get(_VK2.default.prefix(vk) + 'gnav-sec-inner');
 	    }
 	    /**
 	     * SP nav > ul#gnav-sec-list
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
 	     * @return {?Element} gnav-sec-list
 	     */
 
 	  }, {
 	    key: 'navList',
 	    value: function navList() {
-	      return Dom.get('gnav-sec-list');
+	      var vk = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      return Dom.get(_VK2.default.prefix(vk) + 'gnav-sec-list');
 	    }
 	    // --------------------------------------
 	    // settings
@@ -14005,48 +14024,211 @@
 	  value: true
 	});
 
+	var _classCallCheck2 = __webpack_require__(4);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(5);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
 	var _Dom = __webpack_require__(3);
 
 	var _Dom2 = _interopRequireDefault(_Dom);
 
-	var _SPViewHeaderSearch = __webpack_require__(147);
+	var _Offset = __webpack_require__(144);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * [library] - Sagen
+	 */
+	/**
+	 * Copyright (c) 2011-2018 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2018/01/10 - 21:06
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	var Sagen = self.Sagen;
+
+	/**
+	 * global object - 環境設定
+	 * ```
+	 * var SPBL_ENV = {
+	 *  'env'      : 'development',
+	 *  'platform' : 'web_desktop',
+	 *  'page'     : 'category',
+	 *  'category' : 'pyeongchang2018',
+	 *  'p'        : '',
+	 *  'provider' : ''
+	 * };
+	 * ```
+	 * @type {{}}
+	 */
+	var SPBL_ENV = self.SPBL_ENV || {};
+
+	/**
+	 * navigation をいい感じに current させます
+	 * @since 2018-01-10 - `exe` 系から移植
+	 */
+
+	var NavCurrent = function () {
+	  function NavCurrent() {
+	    (0, _classCallCheck3.default)(this, NavCurrent);
+	  }
+
+	  (0, _createClass3.default)(NavCurrent, null, [{
+	    key: 'init',
+
+	    /**
+	     * navigation をいい感じに current させるを開始します
+	     * @param {string} argSlug category slug
+	     * @param {boolean} [sp=false] sp flag
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	     */
+	    value: function init(argSlug) {
+	      var sp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+	      var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+	      var slug = argSlug ? argSlug : SPBL_ENV.category;
+	      NavCurrent.current(slug, sp, vk);
+	    }
+	    /**
+	     * `.current` を付与します
+	     * @param {slug} [slug=all] category slug
+	     * @param {boolean} [sp=false] sp flag
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	     */
+
+	  }, {
+	    key: 'current',
+	    value: function current() {
+	      var slug = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'all';
+	      var sp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+	      var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+	      var target = _Dom2.default.get(slug);
+	      console.log('NavCurrent.current', slug, sp, target);
+	      if (!target) {
+	        return;
+	      }
+	      Sagen.Dom.addClass(target, 'current');
+	      if (sp) {
+	        NavCurrent.setPosition(target, vk);
+	      }
+	    }
+	    /**
+	     * SP - current 位置をいい感じにする
+	     * ```
+	     * div#gnav-sec-inner
+	     *   ul#gnav-sec-list
+	     *     li#slug
+	     *     li#slug
+	     *     li#slug
+	     *     li#slug
+	     *     li#slug
+	     *     li#slug
+	     *     li#slug
+	     * ```
+	     * @param {Element} target `li` element
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+	     */
+
+	  }, {
+	    key: 'setPosition',
+	    value: function setPosition(target) {
+	      var vk = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+	      // gnav-sec-inner
+	      var inner = _Dom2.default.navInner(vk);
+	      // ul#gnav-sec-list
+	      var ul = _Dom2.default.navList(vk);
+	      if (!inner || !ul) {
+	        // 不正値なので処理しない
+	        return;
+	      }
+	      // ul -> display: table
+	      // 正確なwidthを取得するため
+	      ul.style.cssText = 'display: table;';
+	      // offset 取得
+	      var ulOffset = _Offset.Offset.offset(ul);
+	      // ul 元に戻す
+	      ul.style.cssText = '';
+	      // ul width
+	      var ulWidth = ulOffset.width;
+	      // li offset
+	      var targetOffset = _Offset.Offset.offset(target);
+	      // window width
+	      var windowWidth = window.innerWidth;
+	      // 移動させる距離
+	      var left = targetOffset.left;
+	      var rightEnd = targetOffset.right;
+	      // li全体がwindow 内なら何もしない
+	      if (rightEnd < windowWidth) {
+	        // window 内なので何もしない
+	        return;
+	      }
+	      // 左端につかないように調整する
+	      var altLeft = left - 10;
+	      var right = ulWidth - altLeft - windowWidth;
+	      // window 右端から離れ無いように調整する
+	      if (right < 0) {
+	        altLeft = altLeft + right;
+	      }
+	      // ul scroll 量で移動させる
+	      ul.scrollLeft = altLeft;
+	    }
+	  }]);
+	  return NavCurrent;
+	}();
+
+	exports.default = NavCurrent;
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _Dom = __webpack_require__(3);
+
+	var _Dom2 = _interopRequireDefault(_Dom);
+
+	var _SPViewHeaderSearch = __webpack_require__(148);
 
 	var _SPViewHeaderSearch2 = _interopRequireDefault(_SPViewHeaderSearch);
 
-	var _SPViewHeaderUser = __webpack_require__(149);
+	var _SPViewHeaderUser = __webpack_require__(150);
 
 	var _SPViewHeaderUser2 = _interopRequireDefault(_SPViewHeaderUser);
 
-	var _SPPageTop = __webpack_require__(152);
+	var _SPPageTop = __webpack_require__(153);
 
 	var _SPPageTop2 = _interopRequireDefault(_SPPageTop);
 
-	var _SPViewSyn = __webpack_require__(153);
+	var _SPViewSyn = __webpack_require__(154);
 
 	var _SPViewSyn2 = _interopRequireDefault(_SPViewSyn);
+
+	var _NavCurrent = __webpack_require__(146);
+
+	var _NavCurrent2 = _interopRequireDefault(_NavCurrent);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// vk mobile 実行ファイル
 	/**
-	 * syn.menu
-	 */
-
-	// import ViewFlushModal from '../../view/modal/ViewFlushModal';
-	// import SPViewAppBanner from '../../sp/view/SPViewAppBanner';
-	var syn = function syn() {
-	  var element = _Dom2.default.service(true);
-	  var button = _Dom2.default.serviceOpener(true);
-	  var menu = _Dom2.default.serviceMenu(true);
-	  console.log('mobile.exe.syn', element, button, menu);
-	  if (element && button && menu) {
-	    var view = new _SPViewSyn2.default(element, button, menu, null, true);
-	    view.start();
-	  }
-	};
-
-	/**
-	 * 検索フォーム
+	 * current 表示する
+	 *
 	 */
 	/**
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
@@ -14059,10 +14241,35 @@
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
 	 */
+	var nav = function nav() {
+	  console.log('nav');
+	  _NavCurrent2.default.init('vk', true, true);
+	};
+
+	/**
+	 * syn.menu
+	 */
+
+	// import ViewFlushModal from '../../view/modal/ViewFlushModal';
+	// import SPViewAppBanner from '../../sp/view/SPViewAppBanner';
+	var syn = function syn() {
+	  var element = _Dom2.default.service(true);
+	  var button = _Dom2.default.serviceOpener(true);
+	  var menu = _Dom2.default.serviceMenu(true);
+	  // console.log('mobile.exe.syn', element, button, menu);
+	  if (element && button && menu) {
+	    var view = new _SPViewSyn2.default(element, button, menu, null, true);
+	    view.start();
+	  }
+	};
+
+	/**
+	 * 検索フォーム
+	 */
 	var search = function search() {
 	  var element = _Dom2.default.search(true);
 	  var opener = _Dom2.default.searchOpener(true);
-	  console.log('mobile.exe.search', element, opener);
+	  // console.log('mobile.exe.search', element, opener);
 	  if (element && opener) {
 	    var view = new _SPViewHeaderSearch2.default(element, opener, {}, true);
 	    view.start();
@@ -14074,7 +14281,7 @@
 	 */
 	var header = function header() {
 	  var element = _Dom2.default.profile(true);
-	  console.log('mobile.exe.header', element);
+	  // console.log('mobile.exe.header', element);
 	  if (element) {
 	    var view = new _SPViewHeaderUser2.default(element, {}, true);
 	    view.start();
@@ -14110,7 +14317,7 @@
 	  // #js-page_top を sp は優先にする
 	  // @since 2017-10-23
 	  var element = _Dom2.default.jsPageTop(true) || _Dom2.default.pageTop(true);
-	  console.log('mobile.exe.top', element);
+	  // console.log('mobile.exe.top', element);
 	  if (element) {
 	    var ui = new _SPPageTop2.default(element);
 	    ui.start();
@@ -14133,12 +14340,14 @@
 	  header();
 	  // 検索フォーム
 	  search();
+	  // nav
+	  nav();
 	};
 
 	exports.default = mobile;
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14171,7 +14380,7 @@
 
 	var _ViewHeaderSearch3 = _interopRequireDefault(_ViewHeaderSearch2);
 
-	var _SPComponentHeaderSearchOpener = __webpack_require__(148);
+	var _SPComponentHeaderSearchOpener = __webpack_require__(149);
 
 	var _SPComponentHeaderSearchOpener2 = _interopRequireDefault(_SPComponentHeaderSearchOpener);
 
@@ -14280,7 +14489,7 @@
 	exports.default = SPViewHeaderSearch;
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14490,7 +14699,7 @@
 	exports.default = SPComponentHeaderSearchOpener;
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14524,7 +14733,7 @@
 
 	var _View3 = _interopRequireDefault(_View2);
 
-	var _SPViewHeaderMember = __webpack_require__(150);
+	var _SPViewHeaderMember = __webpack_require__(151);
 
 	var _SPViewHeaderMember2 = _interopRequireDefault(_SPViewHeaderMember);
 
@@ -14749,7 +14958,7 @@
 	exports.default = SPViewHeaderUser;
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14786,7 +14995,7 @@
 
 	var _ViewHeaderMember3 = _interopRequireDefault(_ViewHeaderMember2);
 
-	var _SPComponentHeaderMemberSetting = __webpack_require__(151);
+	var _SPComponentHeaderMemberSetting = __webpack_require__(152);
 
 	var _SPComponentHeaderMemberSetting2 = _interopRequireDefault(_SPComponentHeaderMemberSetting);
 
@@ -14907,7 +15116,7 @@
 	exports.default = SPViewHeaderMember;
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15209,7 +15418,7 @@
 	exports.default = SPComponentHeaderMemberSetting;
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15339,7 +15548,7 @@
 	exports.default = SPPageTop;
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15372,15 +15581,15 @@
 
 	var _View3 = _interopRequireDefault(_View2);
 
-	var _Syn = __webpack_require__(154);
+	var _Syn = __webpack_require__(155);
 
 	var _Syn2 = _interopRequireDefault(_Syn);
 
 	var _User = __webpack_require__(110);
 
-	var _LogoutNode = __webpack_require__(157);
+	var _LogoutNode = __webpack_require__(158);
 
-	var _SPComponentSynItem = __webpack_require__(158);
+	var _SPComponentSynItem = __webpack_require__(159);
 
 	var _SPComponentSynItem2 = _interopRequireDefault(_SPComponentSynItem);
 
@@ -15530,7 +15739,7 @@
 	exports.default = SPViewSyn;
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15556,9 +15765,9 @@
 
 	var _Loc = __webpack_require__(140);
 
-	var _Ga = __webpack_require__(155);
+	var _Ga = __webpack_require__(156);
 
-	var _GaData = __webpack_require__(156);
+	var _GaData = __webpack_require__(157);
 
 	var _VK = __webpack_require__(84);
 
@@ -16429,7 +16638,7 @@
 	exports.default = Syn;
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16451,7 +16660,7 @@
 
 	var _Env2 = _interopRequireDefault(_Env);
 
-	var _GaData = __webpack_require__(156);
+	var _GaData = __webpack_require__(157);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16726,7 +16935,7 @@
 	exports.Ga = Ga;
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16872,7 +17081,7 @@
 	}();
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17092,7 +17301,7 @@
 	});
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

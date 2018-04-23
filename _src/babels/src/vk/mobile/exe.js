@@ -16,8 +16,18 @@ import SPViewHeaderSearch from '../../sp/view/header/SPViewHeaderSearch';
 import SPViewHeaderUser from '../../sp/view/header/SPViewHeaderUser';
 import SPPageTop from '../../sp/ui/SPPageTop';
 import SPViewSyn from '../../sp/view/SPViewSyn';
+import NavCurrent from '../../ui/NavCurrent';
 
 // vk mobile 実行ファイル
+/**
+ * current 表示する
+ *
+ */
+const nav = () => {
+  console.log('nav');
+  NavCurrent.init('vk', true, true);
+};
+
 /**
  * syn.menu
  */
@@ -25,7 +35,7 @@ const syn = () => {
   const element = Dom.service(true);
   const button = Dom.serviceOpener(true);
   const menu = Dom.serviceMenu(true);
-  console.log('mobile.exe.syn', element, button, menu);
+  // console.log('mobile.exe.syn', element, button, menu);
   if (element && button && menu) {
     const view = new SPViewSyn(element, button, menu, null, true);
     view.start();
@@ -38,7 +48,7 @@ const syn = () => {
 const search = () => {
   const element = Dom.search(true);
   const opener = Dom.searchOpener(true);
-  console.log('mobile.exe.search', element, opener);
+  // console.log('mobile.exe.search', element, opener);
   if (element && opener) {
     const view = new SPViewHeaderSearch(element, opener, {}, true);
     view.start();
@@ -50,7 +60,7 @@ const search = () => {
  */
 const header = () => {
   const element = Dom.profile(true);
-  console.log('mobile.exe.header', element);
+  // console.log('mobile.exe.header', element);
   if (element) {
     const view = new SPViewHeaderUser(element, {}, true);
     view.start();
@@ -87,7 +97,7 @@ const top = () => {
   // #js-page_top を sp は優先にする
   // @since 2017-10-23
   const element = Dom.jsPageTop(true) || Dom.pageTop(true);
-  console.log('mobile.exe.top', element);
+  // console.log('mobile.exe.top', element);
   if (element) {
     const ui = new SPPageTop(element);
     ui.start();
@@ -110,6 +120,8 @@ const mobile = () => {
   header();
   // 検索フォーム
   search();
+  // nav
+  nav();
 };
 
 export default mobile;

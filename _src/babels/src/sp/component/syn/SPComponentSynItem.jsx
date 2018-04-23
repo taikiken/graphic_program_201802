@@ -108,14 +108,14 @@ export default class SPComponentSynItem extends React.Component {
         {/*
         display: none なので 省略する
         */}
-        {/*<li className={`${sideNav}`}>*/}
-          {/*<a*/}
-            {/*className={`${navLink} ${prefix}side-menu-ut-nav-mypage`}*/}
-            {/*href={Url.mypage('', vk)}*/}
-          {/*>*/}
-            {/*<i>&nbsp;</i>マイページ*/}
-          {/*</a>*/}
-        {/*</li>*/}
+        {/* <li className={`${sideNav}`}>* /}
+          {/* <a */}
+            {/* className={`${navLink} ${prefix}side-menu-ut-nav-mypage`} */}
+            {/* href={Url.mypage('', vk)} */}
+          {/* > */}
+            {/* <i>&nbsp;</i>マイページ */}
+          {/* </a> */}
+        {/* </li> */}
         <li className={`${sideNav}`}>
           <a
             className={`${navLink} ${prefix}side-menu-ut-nav-config`}
