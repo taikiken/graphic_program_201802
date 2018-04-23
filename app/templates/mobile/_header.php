@@ -57,16 +57,17 @@ endif;
   <?php else : ?>
     <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
   <?php endif; ?>
-<?php endif; ?>
-
-
-<?php if ( $page['conditional']['head_bottom'] ) : ?>
 
   <?php # Syn. require module ?>
   <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/synapse.js?v=<?php echo $page['version']; ?>"></script>
   <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
   <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
   <?php // end of Syn. ?>
+
+<?php endif; ?>
+
+
+<?php if ( $page['conditional']['head_bottom'] ) : ?>
 
   <?php
   // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
