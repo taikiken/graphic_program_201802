@@ -33,6 +33,7 @@ SELECT
     parent.id AS parent_id,
     parent.name AS parent_name,
     parent.sort_no AS parent_sort_no,
+    parent.is_public AS parent_is_public,
     child.id,
     child.name,
     child.link,
@@ -40,13 +41,16 @@ SELECT
     child.icon_sp,
     child.icon_ios,
     child.icon_android,
-    child.sort_no
+    child.sort_no,
+    child.is_public
 FROM bottom_tab_nodes node
 INNER JOIN bottom_tab_livescores child
     ON node.bottom_tab_id = child.id
 INNER JOIN bottom_tab_livescores parent
     ON node.parent_tab_id = parent.id
 WHERE type = 2
+AND parent.is_public = true
+AND child.is_public = true
 ORDER BY parent.sort_no ASC, child.sort_no ASC
 SQL;
 
