@@ -88,8 +88,9 @@ const header = () => {
  */
 const top = () => {
   // page top
-  const ui = new PageTop(true);
-  ui.init();
+  // const ui = new PageTop(true);
+  // ui.init();
+  PageTop.start(true);
 };
 
 /**

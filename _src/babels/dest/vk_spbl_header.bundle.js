@@ -48,7 +48,7 @@
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2018/04/19 - 12:41
-	 * buildTime: 2018-4-22 22:30:32
+	 * buildTime: 2018-4-23 13:24:22
 	 * @license MIT
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -76,7 +76,10 @@
 	// -----------------------------------------------
 	// VK 用の header 機能を提供します
 	// -----------------------------------------------
-
+	/**
+	 * `Sagen.Browser.Mobile` で判定を行い端末毎に処理を分岐します
+	 * @param {*} Sagen `Sagen` object
+	 */
 	var device = function device(Sagen) {
 	  // execute
 	  if (Sagen.Browser.Mobile.is()) {
@@ -86,16 +89,29 @@
 	  }
 	};
 
+	/**
+	 * login check します
+	 */
 	var user = function user() {
 	  // login check
 	  _User.User.init();
 	};
 
+	/**
+	 * `Sagen` を外部関数経由でキックします
+	 * @param {*} Sagen `Sagen` object
+	 * @param {string} selector script ID
+	 */
 	var sagen = function sagen(Sagen, selector) {
 	  Sagen.start(selector);
 	  Sagen.Device.init();
 	};
 
+	/**
+	 * 引数 `selector` ID を取得し存在する場合は処理を続行します
+	 * @param {string} selector script tag ID - 取得可能な場合に処理を続行します
+	 * @returns {boolean} true: 処理続行 flag on
+	 */
 	var init = function init(selector) {
 	  var script = document.getElementById(selector);
 	  console.log('init', selector, script);
@@ -137,7 +153,7 @@
 	 * @type {{build: string, main: main}}
 	 */
 	var SPBL_VK = {
-	  build: '2018-4-22 22:30:32',
+	  build: '2018-4-23 13:24:22',
 	  main: main
 	};
 
@@ -296,8 +312,9 @@
 	 */
 	var top = function top() {
 	  // page top
-	  var ui = new _PageTop2.default(true);
-	  ui.init();
+	  // const ui = new PageTop(true);
+	  // ui.init();
+	  _PageTop2.default.start(true);
 	};
 
 	/**
@@ -502,13 +519,17 @@
 	    // footer
 	    /**
 	     * hooter
+	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
 	     * @return {?Element} footer-container element を返します
+	     * @since 2018-04-19 vk header - flag 追加
 	     */
 
 	  }, {
 	    key: 'footer',
 	    value: function footer() {
-	      return Dom.get('footer-container');
+	      var vk = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	      return Dom.get(_VK2.default.prefix(vk) + 'footer-container');
 	    }
 	    // --------------------------------------
 	    // synapse
@@ -12961,6 +12982,7 @@
 	    key: 'init',
 	    value: function init() {
 	      var element = _Dom2.default.pageTop(this.vk);
+	      console.log('PageTop.init element', element);
 	      if (element === null) {
 	        return;
 	      }
@@ -12968,7 +12990,8 @@
 	      this.element = element;
 	      this.topButton.init(element);
 
-	      var footer = _Dom2.default.footer();
+	      var footer = _Dom2.default.footer(this.vk);
+	      console.log('PageTop.init footer', footer);
 	      if (footer === null) {
 	        return;
 	      }

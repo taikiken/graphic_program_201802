@@ -119,10 +119,12 @@ export default class Dom {
   // footer
   /**
    * hooter
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} footer-container element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static footer() {
-    return Dom.get('footer-container');
+  static footer(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}footer-container`);
   }
   // --------------------------------------
   // synapse

@@ -61,7 +61,7 @@ export default class PageTop {
      * @type {Function}
      * @since 2016-09-01
      */
-    this.boundScroll = this.onScroll.bind( this );
+    this.boundScroll = this.onScroll.bind(this);
     /**
      * div#pageTop Element
      * @type {?Element}
@@ -127,6 +127,7 @@ export default class PageTop {
    */
   init() {
     const element = Dom.pageTop(this.vk);
+    console.log('PageTop.init element', element);
     if (element === null) {
       return;
     }
@@ -134,7 +135,8 @@ export default class PageTop {
     this.element = element;
     this.topButton.init(element);
 
-    const footer = Dom.footer();
+    const footer = Dom.footer(this.vk);
+    console.log('PageTop.init footer', footer);
     if (footer === null) {
       return;
     }

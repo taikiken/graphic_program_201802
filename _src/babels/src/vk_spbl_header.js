@@ -21,7 +21,10 @@ import { User } from './app/User';
 // -----------------------------------------------
 // VK 用の header 機能を提供します
 // -----------------------------------------------
-
+/**
+ * `Sagen.Browser.Mobile` で判定を行い端末毎に処理を分岐します
+ * @param {*} Sagen `Sagen` object
+ */
 const device = (Sagen) => {
   // execute
   if (Sagen.Browser.Mobile.is()) {
@@ -31,16 +34,29 @@ const device = (Sagen) => {
   }
 };
 
+/**
+ * login check します
+ */
 const user = () => {
   // login check
   User.init();
 };
 
+/**
+ * `Sagen` を外部関数経由でキックします
+ * @param {*} Sagen `Sagen` object
+ * @param {string} selector script ID
+ */
 const sagen = (Sagen, selector) => {
   Sagen.start(selector);
   Sagen.Device.init();
 };
 
+/**
+ * 引数 `selector` ID を取得し存在する場合は処理を続行します
+ * @param {string} selector script tag ID - 取得可能な場合に処理を続行します
+ * @returns {boolean} true: 処理続行 flag on
+ */
 const init = (selector) => {
   const script = document.getElementById(selector);
   console.log('init', selector, script);
