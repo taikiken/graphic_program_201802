@@ -18,8 +18,8 @@ $app->group('/inc', function () use ($app) {
     // parts
     // ------------------------------
     switch ($args['parts']) :
-      case 'head':
 
+      case 'head':
         $conditional = array(
           'html_start'       => false,
           'head'             => true,
@@ -31,8 +31,9 @@ $app->group('/inc', function () use ($app) {
           'head_ogp'         => false,
           'head_canonical'   => false,
           'head_syn'         => false,
-          'head_icon'        => true,
-          'head_bottom'      => true,
+          'head_icon'        => false,
+          'head_env'         => false,
+          'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
           'whole'            => false,
@@ -46,8 +47,8 @@ $app->group('/inc', function () use ($app) {
           'footer_script'    => false,
           'html_end'         => false,
         );
-
         break;
+
       case 'header':
         $conditional = array(
           'html_start'       => false,
@@ -61,6 +62,7 @@ $app->group('/inc', function () use ($app) {
           'head_canonical'   => false,
           'head_syn'         => false,
           'head_icon'        => false,
+          'head_env'         => false,
           'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
@@ -76,8 +78,8 @@ $app->group('/inc', function () use ($app) {
           'footer_script'    => false,
           'html_end'         => false,
         );
-
         break;
+
       case 'footer':
         $conditional = array(
           'html_start'       => false,
@@ -91,6 +93,7 @@ $app->group('/inc', function () use ($app) {
           'head_canonical'   => false,
           'head_syn'         => false,
           'head_icon'        => false,
+          'head_env'         => false,
           'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
@@ -101,46 +104,19 @@ $app->group('/inc', function () use ($app) {
           'sidemenu'         => true,
           'footer'           => true,
           'footer_copyright' => false,
-          'footer_modal'     => true,
-          'footer_script'    => true,
+          'footer_modal'     => false,
+          'footer_script'    => false,
           'html_end'         => false,
         );
         break;
-      // vk head / footer test set
-      case 'vk':
-        $conditional = array(
-          'html_start'       => true,
-          'head'             => true,
-          'head_title'       => true,
-          'head_sagen'       => false,
-          'head_assets'      => false,
-          'head_viewport'    => true,
-          'head_seo'         => false,
-          'head_ogp'         => false,
-          'head_canonical'   => false,
-          'head_syn'         => true,
-          'head_icon'        => false,
-          'head_bottom'      => false,
-          'head_video'       => false,
-          'body_start'       => true,
-          'whole'            => true,
-          'header'           => true,
-          'gnav'             => true,
-          'announce'         => false,
-          'sidemenu'         => false,
-          'footer'           => true,
-          'footer_copyright' => false,
-          'footer_modal'     => true,
-          'footer_script'    => false,
-          'html_end'         => true,
-          'vk_script'        => true,
-        );
-        break;
+
       default:
-      $conditional = array(
-        'whole'    => false,
-        'announce' => false,
-      );
+        $conditional = array(
+          'header_appbnr' => false,
+          'whole'         => false,
+          'announce'      => false,
+        );
+
     endswitch;
 
     // category
@@ -162,12 +138,16 @@ $app->group('/inc', function () use ($app) {
     // ------------------------------
     switch ($args['device']) :
       case 'responsive':
+        $ua = 'desktop';
         break;
       case 'desktop':
+        $ua = 'desktop';
         break;
       case 'mobile':
+        $ua = 'mobile';
         break;
       default:
+        $ua = 'desktop';
     endswitch;
 
 
@@ -177,12 +157,13 @@ $app->group('/inc', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'template'    => 'inc',
+      'html_prefix' => 'SPBL_',
+      'ua'          => $ua,
       'category'    => $category,
       'conditional' => $conditional,
       'directory'   => $args['cateogry'],
       'query'       => $query,
       'path'        => $args,
-      'html_prefix' => 'SPBL_',
     ));
 
     return $this->renderer->render($response, 'inc.php', $args);
@@ -203,7 +184,8 @@ $app->group('/inc', function () use ($app) {
 
       if ( $file ) :
         $replace_pairs = array(
-          'url(/'        => 'url(https://sportsbull.jp/',
+          'url(/'        => 'url('.$app->model->property('site_url_uts').'/',
+          'url("/'       => 'url("'.$app->model->property('site_url_uts').'/',
           '#head'        => '#SPBL_head',
           '#side'        => '#SPBL_side',
           '#skiplinkSec' => '#SPBL_skiplinkSec',

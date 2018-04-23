@@ -1,5 +1,5 @@
-<script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
-<script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+<script src="<?php echo $page['site_url_uts']; ?>/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <?php
 /*
  * $page['apiRoot'] を元に API request 先を決定します
@@ -24,7 +24,7 @@ if ( $page['apiRoot'] != '' ) :
 }() );
 </script>
 <?php endif; ?>
-<script id="js-exe"<?php echo !empty($page['category']['label']) ? ' data-label="' . $page['category']['label'] . '" ' : ''; ?>src="/assets/js/bundle/exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script id="js-exe"<?php echo !empty($page['category']['label']) ? ' data-label="' . $page['category']['label'] . '" ' : ''; ?>src="<?php echo $page['site_url_uts']; ?>/assets/js/bundle/exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 
 <?php
@@ -32,11 +32,11 @@ if ( $page['apiRoot'] != '' ) :
 // @see https://github.com/undotsushin/undotsushin/issues/2080
 // @since 2017-06-26
 ?>
-<script src="/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="<?php echo $page['site_url_uts']; ?>/assets/js/bundle/banners_with_json.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
-<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="<?php echo $page['site_url_uts']; ?>/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
-<script src="/assets/facebook/init.js?v=<?php echo $page['version']; ?>"></script>
+<script src="<?php echo $page['site_url_uts']; ?>/assets/facebook/init.js?v=<?php echo $page['version']; ?>"></script>
 <script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
 
 

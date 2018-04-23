@@ -15,13 +15,13 @@ endif;
 
 <?php if ( $page['conditional']['head_assets'] ) : ?>
   <?php if(count($page['photo']) > 0):?>
-    <link rel="stylesheet" href="/assets/css/style_pc.css?v=<?php echo $page['version']; ?>">
-    <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
+    <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/assets/css/style_pc.css?v=<?php echo $page['version']; ?>">
+    <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
   <?php endif;?>
   <?php if ( $page['template'] === 'inc' ) : ?>
-    <link rel="stylesheet" href="/inc/assets/<?php echo $page['directory']; ?>/desktop/inc.css/?v=<?php echo $page['version']; ?>">
+    <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/inc/assets/<?php echo $page['directory']; ?>/desktop/inc.css/?v=<?php echo $page['version']; ?>">
   <?php else : ?>
-    <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
+    <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/assets/css/ui.css?v=<?php echo $page['version']; ?>">
   <?php endif; ?>
 <?php endif; ?>
 
@@ -87,7 +87,7 @@ endif;
         <div id="<?php echo $page['html_prefix']; ?>head-search-container"></div><!-- /.head-search -->
       </aside>
 
-      <h1><a href="/">スポーツブル（スポブル）</a></h1>
+      <h1><a href="<?php echo $page['site_url_uts']; ?>/">スポーツブル（スポブル）</a></h1>
 
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-right">
         <div id="<?php echo $page['html_prefix']; ?>user-profile-container"></div><!--/.user-profile-container-->
@@ -100,14 +100,14 @@ endif;
 <?php if ( $page['conditional']['gnav'] ) : ?>
   <nav id="<?php echo $page['html_prefix']; ?>global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
     <ul>
-      <li id="home"><a href="/">TOP</a></li>
+      <li id="<?php echo $page['html_prefix']; ?>home"><a href="<?php echo $page['site_url_uts']; ?>/">TOP</a></li>
 
       <?php foreach( $page['site_tabs'] as $tab ) {
         // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
         // タブの表示順はAPI通りにする
         ?>
         <li id="<?php echo $tab['slug']; ?>">
-          <a href="/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
+          <a href="<?php echo $page['site_url_uts']; ?>/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
         </li>
       <?php }//foreach ?>
     </ul>

@@ -7,13 +7,13 @@
 
   <div class="<?php echo $page['html_prefix']; ?>foot-pr">
     <div class="<?php echo $page['html_prefix']; ?>foot-pr-inner">
-      <figure class="<?php echo $page['html_prefix']; ?>foot-pr-figure"><img src="/assets/sp/images/common/footer-overview-figure.png" alt="無料スポーツニュース&amp;動画アプリの決定版！"></figure>
+      <figure class="<?php echo $page['html_prefix']; ?>foot-pr-figure"><img src="<?php echo $page['site_url_uts']; ?>/assets/sp/images/common/footer-overview-figure.png" alt="無料スポーツニュース&amp;動画アプリの決定版！"></figure>
 
       <div class="<?php echo $page['html_prefix']; ?>text-block">
-        <h3 class="<?php echo $page['html_prefix']; ?>foot-pr-text"><img src="/assets/sp/images/common/footer-overview-text.png" alt=""></h3>
+        <h3 class="<?php echo $page['html_prefix']; ?>foot-pr-text"><img src="<?php echo $page['site_url_uts']; ?>/assets/sp/images/common/footer-overview-text.png" alt=""></h3>
         <ul class="<?php echo $page['html_prefix']; ?>foot-pr-list">
-          <li class="<?php echo $page['html_prefix']; ?>foot-pr-item"><a class="foot-pr-link" href="https://app.adjust.com/5je1ts?deep_link=sportsbull%3A%2F%2F" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
-          <li class="<?php echo $page['html_prefix']; ?>foot-pr-item"><a class="foot-pr-link" href="https://app.adjust.com/5je1ts?deep_link=sportsbull%3A%2F%2F" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
+          <li class="<?php echo $page['html_prefix']; ?>foot-pr-item"><a class="foot-pr-link" href="https://app.adjust.com/5je1ts?deep_link=sportsbull%3A%2F%2F" target="_blank"><img src="<?php echo $page['site_url_uts']; ?>/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
+          <li class="<?php echo $page['html_prefix']; ?>foot-pr-item"><a class="foot-pr-link" href="https://app.adjust.com/5je1ts?deep_link=sportsbull%3A%2F%2F" target="_blank"><img src="<?php echo $page['site_url_uts']; ?>/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
         </ul>
       </div>
     </div><!-- /.foot-pr-inner -->
