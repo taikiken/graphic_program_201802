@@ -1,173 +1,104 @@
+<?php
+
+$conditional_header = array(
+  'index',
+  '404',
+  'category',
+  'p',
+  'search',
+  'signup_login',
+  'settings',
+  'settings.social',
+  'settings.account',
+  'settings.interest',
+  'settings.deactivate',
+  'mypage',
+  'mypage.activities',
+  'notifications',
+  'logout',
+  'crazy',
+  'inc'
+);
+
+if ( !in_array($page['template'], $conditional_header, true) ) :
+  $page['conditional']['header'] = false;
+  $page['conditional']['gnav']   = false;
+endif;
+
+// アプリ判定
+if ( $page['ua_app'] ) :
+  $page['conditional']['header'] = false;
+endif;
+
+
+?>
+<?php if ( $page['conditional']['html_start'] ) : ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
+<?php endif; ?>
 
 
-<?php include_once __DIR__."/../_head.php"; ?>
+<?php
+if ( $page['conditional']['head'] ) :
+  include_once __DIR__."/../_head.php";
+endif;
+?>
 
+<?php if ( $page['conditional']['head_assets'] ) : ?>
   <?php if(count($page['photo']) > 0):?>
     <link rel="stylesheet" href="/assets/css/style_sp.css?v=<?php echo $page['version']; ?>">
     <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
   <?php endif;?>
 
-  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+  <?php if ( $page['template'] === 'inc' ) : ?>
+    <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/inc/assets/<?php echo $page['directory']; ?>/mobile/inc.css/?v=<?php echo $page['version']; ?>">
+  <?php else : ?>
+    <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+  <?php endif; ?>
+
+  <?php if ($page['conditional']['header']) : ?>
+    <?php # Syn. require module ?>
+    <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/synapse.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
+  <?php endif; // end of Syn. ?>
+
   <?php
-  // header 表示条件 設定
-  $template_name = $page['template'];
-
-  $page_has_header = false;
-
-  if (
-  $template_name == 'index' ||
-  $template_name == '404' ||
-  $template_name == 'category' ||
-  $template_name == 'p' ||
-  $template_name == 'search' ||
-  $template_name == 'signup_login' ||
-  $template_name == 'settings' ||
-  $template_name == 'settings.social' ||
-  $template_name == 'settings.account' ||
-  $template_name == 'settings.interest' ||
-  $template_name == 'settings.deactivate' ||
-  $template_name == 'mypage' ||
-  $template_name == 'mypage.activities' ||
-  $template_name == 'notifications' ||
-  $template_name == 'logout' ||
-  $template_name == 'crazy'
-  ) {
-    $page_has_header = true;
-  }
-
-  // アプリ判定
-  if ( $page['ua_app'] ) {
-    $page_has_header = false;
-  }
-
+  // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
+  // @since 2017-08-21
   ?>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+
+  <?php
+  /*
+   Syn. menu end point 本番環境では
+    ```
+    /assets/js/bundle/main.bundle.js?syn=1
+    ```
+    ?syn=1 を削除してください
+    テストの時はつけてください
+   */
+  ?>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
+<?php endif; ?>
+
+
 <?php
-if ($page_has_header) :
-# ---------------------------------------------------------------------------
-# Syn. require module
-?>
-<script src="/assets/sp/js/libs/synapse/synapse.js?v=<?php echo $page['version']; ?>"></script>
-<script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
-<script src="/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
-<?php
-# end of Syn. require module
-# ---------------------------------------------------------------------------
+if ( $page['conditional']['head_bottom'] ) :
+  include_once __DIR__."/../_head_bottom.php";
 endif;
 ?>
 
-<?php
-// app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
-// @since 2017-08-21
-?>
-<script src="/assets/js/app_ua_detector.bundle.js?v=<?php echo $page['version']; ?>"></script>
-<script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
-<?php
-/*
- Syn. menu end point 本番環境では
-  ```
-  /assets/js/bundle/main.bundle.js?syn=1
-  ```
-  ?syn=1 を削除してください
-  テストの時はつけてください
- */
-?>
-<script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
-<?php include_once __DIR__.'/../_head_bottom.php'; ?>
-
-<?php
-// ---------------------------------------------------------------------------
-// brightcove
-
-// @since 2016-11-13
-// 記事詳細・次の記事一覧のメインビジュアルを動画に変更
-// 常に videojs 関連を読込む
-//if ( $page['template'] == 'p' ) :
-
-// @since 2016-01-13
-// hotfix @see https://github.com/undotsushin/undotsushin/issues/1468
-//if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
-if ( $page['template'] == 'p'
-  && $page['post']['media']['video']['player'] == 'brightcove'
-  && $page['post']['media_vk_refid'] == ''
-) :
-  // brightcove code をここに
-  // JS で非同期で読み込むと付随コードの読み込みが行われない様子
-  ?>
-  <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
-  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
-  <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
-
-  <script src="//vjs.zencdn.net/5.3/video.min.js"></script>
-  <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-
-  <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
-  <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
-  <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
-
-  <?php
-elseif($page['category']['slug'] == 'crazy'):
-    ?>
-<link rel="stylesheet" href="/assets/css/crazy.css">
-<?php
-elseif($page['template'] == 'crazy'):
-?>
-<link rel="stylesheet" href="/assets/css/player.css">
-    <?php
+<?php if ( $page['conditional']['head_video'] ) :
+  include_once __DIR__."/_head_video.php";
 endif;
-// eof brightcove
-// ---------------------------------------------------------------------------
-
-// .whole へ追加する CSS class を設定します
-$whole_classes = array();
-
-// $page['template_classname'] に設定されている CSS class を追加します
-if ( !empty( $page['template_classname'] ) ) {
-  $whole_classes[] = $page['template_classname'];
-}
-// 記事詳細
-if ( $page['template'] == 'p' ) {
-  // 記事詳細へ識別 CSS class 追加
-  $whole_classes[] = 'post-single';
-
-  // theme 設定 class を追加
-  // JSON レスポンスの theme.base を CSS class へ追加します
-  if ( $page['theme' ]['base'] ) {
-    $whole_classes[] = ['theme']['base'];
-  }
-}
-
-// in category
-if ( $template_name == 'category' ) {
-  // @since 2016-09-01
-  // https://github.com/undotsushin/undotsushin/issues/1053
-  $whole_classes[] = 'layout-list';
-  // ---[end 2016-09-01]---
-
-  // template_classname があれば
-  if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
-    $whole_classes[] = $page['template_classname'];
-  }
-
-  // @see https://github.com/undotsushin/undotsushin/issues/1891#issuecomment-298291706
-  // @since 2017-05-08 - category slug を追加する
-  $whole_classes[] = $page['category']['slug'];
-} elseif ( $template_name == 'index' ) {
-  // @since 2016-09-01
-  // https://github.com/undotsushin/undotsushin/issues/1053
-  $whole_classes[] = 'home';
-  // ---[end 2016-09-01]---
-} elseif ( $template_name == 'p' ) {
-  // @see https://github.com/undotsushin/undotsushin/issues/1891#issuecomment-298291706
-  // @since 2017-05-08 - category slug を追加する
-  $whole_classes[] = $page['category']['slug'];
-}
 ?>
+
 
 
 <?php // #1860 記事詳細アンカー広告
@@ -187,25 +118,22 @@ endif;
 ?>
 
 
-</head>
-<body>
-<div id="page" class="whole <?php echo join( ' ', $whole_classes);?>">
-<?php
-// header 表示条件 start
-if ( $page_has_header ) :
+<?php if ( $page['conditional']['body_start'] ) : ?>
+  </head>
+  <body>
+<?php endif; ?>
+
+
+<?php if ( $page['conditional']['whole'] ) :
+  include_once __DIR__."/_whole.php";
+endif;
 ?>
-<div id="js-header-appbnr-container">
+
+
+<?php if ( $page['conditional']['header'] ) : ?>
+<?php if ( $page['conditional']['header_appbnr'] ) : ?>
+<div id="js-header-appbnr-container" class="SPBL_common header-appbnr-container">
   <div class="header-appbnr">
-    <?php
-    if (0) :
-      // close トル - https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-331796551
-      // since 2017-05-25
-    ?>
-    <div class="header-appbnr-btn-close"><span>閉じる</span></div>
-    <?php
-    endif;
-    // eof: close トル
-    ?>
     <div class="header-appbnr-link">
       <?php
       // banner 差替え
@@ -228,54 +156,45 @@ if ( $page_has_header ) :
     </div><!-- /.header-appbnr-link -->
   </div><!-- /.header-appbnr -->
 </div>
-<div class="header-sticky">
-  <header class="head-sec">
-    <div class="head-sec-inner">
+<?php endif; ?>
+
+<div class="SPBL_common <?php echo $page['html_prefix']; ?>header-sticky">
+  <header class="<?php echo $page['html_prefix']; ?>head-sec">
+    <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
       <h1><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a></h1>
 
-      <div id="menu-opener" class="menu-opener">
-        <a id="side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
+      <div id="<?php echo $page['html_prefix']; ?>menu-opener" class="<?php echo $page['html_prefix']; ?>menu-opener">
+        <a id="<?php echo $page['html_prefix']; ?>side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
       </div>
 
-      <aside class="f-right clearfix">
-        <span id="search-container-opener"></span>
+      <aside class="<?php echo $page['html_prefix']; ?>head-sec-inner-right">
+        <span id="<?php echo $page['html_prefix']; ?>search-container-opener"></span>
 
-        <div id="user-profile-container"></div><!--/.user-profile-container-->
+        <div id="<?php echo $page['html_prefix']; ?>user-profile-container"></div><!--/.user-profile-container-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
-  <div id="head-search-container"></div>
-  <nav id="global-nav-container" class="gnav-sec">
-    <div id="gnav-sec-inner" class="gnav-sec-inner">
-      <ul id="gnav-sec-list">
-        <li id="home" class="gnav-home"><a href="/">TOP</a></li>
+
+
+  <div id="<?php echo $page['html_prefix']; ?>head-search-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-search-container"></div>
+
+
+  <nav id="<?php echo $page['html_prefix']; ?>global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
+    <div id="<?php echo $page['html_prefix']; ?>gnav-sec-inner" class="<?php echo $page['html_prefix']; ?>gnav-sec-inner">
+      <ul id="<?php echo $page['html_prefix']; ?>gnav-sec-list">
+        <li id="<?php echo $page['html_prefix']; ?>home" class="<?php echo $page['html_prefix']; ?>gnav-home"><a href="<?php echo $page['site_url_uts']; ?>/">TOP</a></li>
 
         <?php foreach( $page['site_tabs'] as $tab ) {
           // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
           // タブの表示順はAPI通りにする
           ?>
-          <li id="<?php echo $tab['slug']; ?>" class="gnav-<?php echo $tab['slug']; ?>">
-            <a href="/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
+          <li id="<?php echo $tab['slug']; ?>" class="<?php echo $page['html_prefix']; ?>gnav-<?php echo $tab['slug']; ?>">
+            <a href="<?php echo $page['site_url_uts']; ?>/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
           </li>
         <?php }//foreach ?>
       </ul>
     </div><!-- /.gnav-sec-inner -->
   </nav><!-- /.gnav-sec -->
-<?php /*
 
-  #205 - backend フラッシュメッセージ対応完までview側の表示コメントアウト
-
-  <div class="dialogue-notice error">
-    <div class="dialogue-notice-inner">
-      <div class="dialogue-notice-info">
-        <p>パスワードが違います</p>
-      </div>
-      <div class="dialogue-notice-btn-close"><a href="#">CLOSE</a></div>
-    </div>
-  </div><!-- /.dialogue-notice -->
-*/?>
 </div><!--/.header-sticky-->
-<?php
-endif;
-// header 表示条件 end
-?>
+<?php endif; ?>

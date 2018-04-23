@@ -1,0 +1,439 @@
+// アプリダウンロードバナー
+// 外部向けheaderでは appbnrださないことにします
+%header-appbnr {
+  // default 非表示
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1000px;
+  // background: $highlight-color url(/assets/sp/images/common/header-app-bnr-bg.png) center (200/2)+px no-repeat;
+  background: $highlight-color url(/assets/sp/images/common/header-app-bnr-bg.png) center (200/2)+px no-repeat;
+  background-size: (112/2)+px;
+  text-align: center;
+
+  // .header-appbnr-link
+  .header-appbnr-link {
+    width: 100%;
+    // height: (170/2)+px;
+    height: 70px;
+    padding-top: ((170-140)/2/2)+px;
+    background-color: #ddd;
+
+    > div {
+      margin: 0 auto;
+    }
+  }
+
+  // .header-appbnr-btn-close
+  .header-appbnr-btn-close {
+    position: absolute;
+    top: (60/2)+px;
+    right: 0;
+
+    @extend .sp-sprite-common;
+    @include sprite( $common-btn-notice-close-app-bnr );
+    @include hide-text;
+  }
+} // %header-appbnr
+
+// #ref - https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-332087234
+// @since 2017-09-25 - 高さが変更になった
+$banner-height: 70px;
+
+// アプリダウンロードバナー 表示
+// bodyに .appbnr-enable
+%appbnr-enable {
+  // body.appbnr-enable > .header-appbnr で表示
+  .header-appbnr {
+    display: block;
+  }
+
+  // ------------------------------------
+  // [fixed -> relative / static]
+  // バナー高さ分表示の間は relative
+  .header-sticky {
+    position: relative;
+    //top: (170/2)+px;
+    //left: auto;
+    // @since 2017-09-26 - banner height 85px -> 70px 変更
+    top: $banner-height;
+  }
+  // -----------[/end]-------------------------
+
+  .body-sec {
+    //margin-top: (170/2)+px !important;
+    margin-top: $banner-height !important;
+
+    &.category {
+      //margin-top: 85px + 40px !important;
+      margin-top: $banner-height + 40px !important;
+    }
+  }
+
+  // ------------------------------------
+  // banner は表示されているけれど下に隠れている状態
+  &.appbnr-invisible {
+    .header-sticky {
+      position: fixed;
+      top: 0;
+    }
+
+    .body-sec {
+      //margin-top: 100px + 85px  !important;
+      margin-top: 75px + $banner-height  !important;
+    }
+    .body-sec.category {
+      //margin-top: 100px + 85px + 40px !important;
+      margin-top: 75px + $banner-height + 40px !important;
+    }
+  }
+} // %appbnr-enable
+
+
+
+// 検索ボックスが表示された状態
+// bodyに .search-form-open
+%search-form-open {
+  // input:text focus でピョコンとなるバグ対策
+  // scroll できなくなるので不採用
+  //position: fixed;
+  //width: 100%;
+
+  .body-sec {
+    margin-top: 160px;
+
+    &.category {
+      margin-top: 200px;
+    }
+  }
+
+  .lnav.fixed-top {
+    top: 160px;
+  }
+
+  // ------------------------------------
+  // banner 表示
+  &.appbnr-enable {
+    .body-sec {
+      //margin-top: 160px - 75px;
+      margin-top: $banner-height;
+
+      &.category {
+        //margin-top: 200px - 75px;
+        margin-top: 200px - 75px - (85px - $banner-height);
+      }
+    }
+  }
+
+  // -------------------------------------
+  // banner 非表示
+  &.appbnr-invisible {
+    .body-sec {
+      //margin-top: 160px + 85px;
+      margin-top: 160px + $banner-height;
+
+      &.category {
+        //margin-top: 200px + 85px;
+        margin-top: 200px + $banner-height;
+      }
+    }
+  }
+} // %search-form-open
+
+
+
+// header を fixed にする
+%header-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #fff;
+
+  + .body-sec {
+    margin-top: 100px;
+  }
+}
+
+
+
+// .head-sec
+%head-sec {
+  .#{$prefix}head-sec-inner {
+    @include clearfix;
+    position: relative;
+    height: (80/2)+px;
+    background-color: #0f3580;
+
+    h1 {
+      position: absolute;
+      top: (30/2)+px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      a {
+        @extend .sp-sprite-header;
+        @include sprite( $header-logo );
+        @include hide-text;
+      }
+    }
+  }
+
+
+  .#{$prefix}head-sec-inner-right {
+    float: right;
+    @include clearfix;
+  }
+
+  // react 生成なのでjsとあわせて修正
+  .head-search-opener {
+    float: left;
+    line-height: 0;
+    margin: (24/2)+px (30/2)+px 0 0;
+    @extend .sp-sprite-header;
+    @include sprite( $header-icon-search, inline-block );
+    @include hide-text;
+  }
+
+
+
+  .#{$prefix}menu-opener {
+    position: absolute;
+    width: (88/2)+px;
+    height: (80/2)+px;
+
+    #side-menu-toggle {
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      span {
+        position: absolute;
+        left: (24/2)+px;
+        display: block;
+        width: (40/2)+px;
+        height: (4/2)+px;
+        line-height: 0;
+        background-color: #fff;
+        font-size: 0;
+
+        &:nth-child(1) {
+          top: (28/2)+px;
+        }
+
+        &:nth-child(2) {
+          top: (42/2)+px;
+        }
+
+        &:nth-child(3) {
+          top: (56/2)+px;
+        }
+      }
+
+      &.has-notification {
+        &:after {
+          content: '';
+          position: absolute;
+          top: (14/2)+px;
+          left: (52/2)+px;
+          width: (22/2)+px;
+          height: (22/2)+px;
+          border: 2px solid #0f3580;
+          border-radius: 100%;
+          background-color: $highlight-secondary-color;
+        }
+      }
+    }
+  }
+
+
+  #user-profile-container {
+    float: left;
+
+    .user {
+      float: left;
+      margin: (18/2)+px (26/2)+px 0 0;
+
+      // notice
+      .notice-container {
+        float: left;
+      }
+
+      // notice
+      .notice-menu {
+        display: block;
+      }
+      // 非表示
+      .close {
+        .notice-menu {
+          overflow: hidden;
+          height: 0;
+          width: 0;
+        }
+      }
+      // 表示
+      .open {
+        .notice-menu {
+          overflow: visible;
+          width: 360px;
+          height: auto;
+        }
+      }
+
+      // setting
+      .preference-menu {
+        display: block;
+      }
+      .dropMenu {
+        opacity: 0;
+
+        transition-property: opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: linear;
+      }
+
+      // 非表示
+      .close {
+        .preference-menu {
+          overflow: hidden;
+          height: 0;
+          width: 0;
+
+          transition-property: width, height;
+          transition-duration: 0.001s;
+          transition-delay: 0.05s;
+        }
+      }
+
+      // 表示
+      .open {
+        .preference-menu {
+          overflow: visible;
+          width: 160px;
+          height: 162px;
+        }
+      }
+
+      // ----------------------------------------------
+      // motion
+      .close {
+        .dropMenu {
+          opacity: 0;
+          transition-duration: 0.05s;
+        }
+      }
+      .open {
+        .dropMenu {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+
+
+  .preference {
+    position: relative;
+    // float: left;
+    // margin-left: 15px;
+
+    &-opener {
+      position: relative;
+      display: block;
+      width: (50/2)+px;
+      height: (50/2)+px;
+      overflow: hidden;
+      border-radius: 100%;
+      background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
+      background-size: (50/2)+px;
+    }
+
+    &-avatar {
+      display: block;
+
+      img {
+        width: (50/2)+px;
+        height: (50/2)+px;
+        border-radius: 100%;
+      }
+
+      &.user-logged-in {
+        background-color: #fff;
+      }
+    }
+
+    &-num {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      display: block;
+      width: (40/2)+px;
+      height: (40/2)+px;
+      padding-top: 6px;
+      line-height: 1;
+      background-color: $highlight-secondary-color;
+      border-radius: 100%;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(20/2);
+      text-align: center;
+    }
+  } //.user
+} //.head-sec
+
+
+
+// .head-search
+%head-search {
+  display: none;
+  position: relative;
+  height: (120/2)+px;
+  padding: (30/2)+px perCalc(20);
+  background-color: #000;
+
+  &.enable {
+    display: block;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -(10/2)+px;
+    right: (120/2)+px;
+    @extend .sp-sprite-header;
+    @include sprite( $header-icon-search-arrow );
+    @include hide-text;
+  }
+
+  input {
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+
+  input[type="text"] {
+    float: left;
+    width: perCalc(460, 600);
+    height: (60/2)+px;
+    line-height: (60/2)+px;
+    padding: 0 (16/2)+px;
+    background-color: #fff;
+    border-radius: 4px;
+  }
+
+  input[type="submit"] {
+    float: right;
+    width: perCalc(120, 600);
+    height: (60/2)+px;
+    line-height: (60/2)+px;
+    background-color: $highlight-color;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+    font-size: fz(20/2);
+    text-align: center;
+  }
+}

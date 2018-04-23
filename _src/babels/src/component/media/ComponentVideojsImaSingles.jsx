@@ -181,6 +181,9 @@ export default class ComponentVideojsImaSingles extends React.Component {
     };
     player.ima(option);
 
+    // videojsが生成する動画に `playsinline` つける
+    document.getElementById(videoId + '_html5_api').setAttribute('playsinline', 'playsinline');
+
     // player.ima.initializeAdDisplayContainer();
     // player.ima.requestAds();
 

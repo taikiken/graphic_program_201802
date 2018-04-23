@@ -1,0 +1,166 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../scss_sp/asset";
+
+/*
+
+# inc
+
+- header & footer 共通パーツ用
+
+*/
+// sprite 不要の時はコメントに
+/*
+  sprite
+* *********************************** */
+
+$prefix : 'SPBL_';
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+@import "sprite";
+
+.SPBL_common {
+  @import "module/utility";
+  // @import "module/global";
+  // @import "module/general";
+  // @import "module/theme_dark";
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -moz-font-feature-settings: "liga", "kern";
+
+  * {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    list-style: none;
+    box-sizing: border-box;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    outline: none;
+  }
+
+  fieldset {
+    input,
+    textarea {
+      color: #333;
+    }
+  }
+
+  input::-webkit-input-placeholder {
+    font-size: fz(24/2);
+  }
+
+  // .whole {
+  //   overflow-x: hidden;
+  // }
+
+  img {
+    @include fluid-img(100%);
+
+    &.responsive {
+      display: none;
+    }
+  }
+
+  input {
+    font-size: 16px;
+  }
+
+  a {
+    @include link-decoration($highlight-color, $highlight-color, none, none);
+  }
+
+  img {
+    touch-callout: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select:none;
+    -moz-touch-callout: none;
+    -moz-user-select:none;
+  }
+
+}
+
+
+// Basic
+//
+// ヘッダー・フッター・サイドナビ基本セット
+
+//  1. head section
+//  2. gnav section
+//  3. foot section
+
+
+// 1. head section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+@import "module/global_header";
+
+// アプリダウンロードバナー
+.SPBL_header-appbnr {
+  @extend %header-appbnr;
+}
+
+// アプリダウンロードバナー 表示
+// bodyに .appbnr-enable
+.SPBL_appbnr-enable {
+  @extend %appbnr-enable;
+}
+
+// 検索ボックスが表示された状態
+// bodyに .search-form-open
+.SPBL_search-form-open {
+  @extend %search-form-open;
+}
+
+// header を fixed にする
+.SPBL_header-sticky {
+  @extend %header-sticky;
+}
+
+// .head-sec
+.SPBL_head-sec {
+  @extend %head-sec;
+}
+
+// .head-search
+.SPBL_head-search {
+  @extend %head-search;
+}
+
+
+
+
+
+// 2. gnav section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+@import "module/global_gnav";
+.SPBL_gnav-sec {
+  @extend %gnav-sec;
+}
+
+
+
+
+
+// 3. foot section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+@import "module/global_footer";
+.SPBL_foot-sec {
+  @extend %foot-sec;
+}
+
+
+// 3. foot section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+@import "sidemenu";
