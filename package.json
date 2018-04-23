@@ -91,7 +91,7 @@
     "gulp": "gulp",
     "update_version": "git rev-parse --short HEAD > app/.version",
     "build": "npm run update_version && npm run deploy",
-    "build:v2": "npm run update_version && npm run deploy",
+    "build:v2": "npm run update_version && npm run deploy && npm run vk:build",
     "build:shell": "npm run update_version && gulp build:shell",
     "babels:dev": "gulp babels:dev && gulp exe:dev && gulp sp:exe:dev",
     "babels:build": "NODE_ENV=production gulp babels:build && gulp exe:build && gulp sp:exe:build",
@@ -104,7 +104,7 @@
     "esdoc:pc": "cd ./_src/babels_exe && esdoc -c esdoc.json",
     "esdoc:sp": "cd ./_src/babels_exe_sp && esdoc -c esdoc.json",
     "vk:-------": "---------------------------------------------",
-    "vk:build": "NODE_ENV=production gulp vk:build",
+    "vk:build": "npm run update_version && NODE_ENV=production gulp vk:build",
     "vk:*******": "---------------------------------------------"
   }
 }
