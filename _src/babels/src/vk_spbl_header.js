@@ -26,7 +26,7 @@ import { User } from './app/User';
  * @param {*} Sagen `Sagen` object
  */
 const device = (Sagen) => {
-  console.log('device vk', vk);
+  // console.log('device vk', vk);
   // execute
   if (Sagen.Browser.Mobile.is()) {
     vk.mobile();
@@ -60,14 +60,14 @@ const sagen = (Sagen, selector) => {
  */
 const init = (selector) => {
   const script = document.getElementById(selector);
-  console.log('init', selector, script);
+  // console.log('init', selector, script);
   if (!script) {
     return false;
   }
   // ---
   const domain = script.dataset.domain || '';
   const prefix = script.dataset.prefix || '';
-  console.log('init', domain, prefix);
+  // console.log('init', domain, prefix);
   Url.host = domain;
   VK.PREFIX = prefix;
   return true;

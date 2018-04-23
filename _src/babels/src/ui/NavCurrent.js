@@ -56,7 +56,7 @@ export default class NavCurrent {
    */
   static current(slug = 'all', sp = false, vk = false) {
     const target = Dom.get(slug);
-    console.log('NavCurrent.current', slug, sp, target);
+    // console.log('NavCurrent.current', slug, sp, target);
     if (!target) {
       return;
     }

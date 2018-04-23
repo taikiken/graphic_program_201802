@@ -21,10 +21,9 @@ import NavCurrent from '../../ui/NavCurrent';
 // vk mobile 実行ファイル
 /**
  * current 表示する
- *
  */
 const nav = () => {
-  console.log('nav');
+  // console.log('nav');
   NavCurrent.init('vk', true, true);
 };
 

@@ -79,18 +79,18 @@
   }
 
   .#{$prefix}js-user-profile-container,
-  #user-profile-container {
+  ##{$prefix}user-profile-container {
     float: left;
   }
 
   // react
-  .user {
+  .#{$prefix}user {
     @include clearfix;
     float: left;
     margin-top: 12px;
 
     //.user-signup-btn
-    .user-signup-btn {
+    .#{$prefix}user-signup-btn {
       display: table;
 
       a {
@@ -107,12 +107,12 @@
     }
 
     //.user-signup-btn--login
-    .user-signup-btn--login {
+    .#{$prefix}user-signup-btn--login {
       padding-right: 20px;
     }
 
     //.user-signup-btn--signup
-    .user-signup-btn--signup {
+    .#{$prefix}user-signup-btn--signup {
       display: inline-block;
       line-height: 30px;
       padding: 0 16px;

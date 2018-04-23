@@ -127,7 +127,7 @@ export default class PageTop {
    */
   init() {
     const element = Dom.pageTop(this.vk);
-    console.log('PageTop.init element', element);
+    // console.log('PageTop.init element', element);
     if (element === null) {
       return;
     }
@@ -136,7 +136,7 @@ export default class PageTop {
     this.topButton.init(element);
 
     const footer = Dom.footer(this.vk);
-    console.log('PageTop.init footer', footer);
+    // console.log('PageTop.init footer', footer);
     if (footer === null) {
       return;
     }
