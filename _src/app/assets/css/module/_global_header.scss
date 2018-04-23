@@ -27,12 +27,12 @@
     @include clearfix;
   }
 
-  #head-search-container {
+  ##{$prefix}head-search-container {
     float: left;
     width: 220px;
   }
 
-  .head-search {
+  .#{$prefix}head-search {
     @include clearfix;
     margin-top: 12px;
     padding: 0 14px;
@@ -67,7 +67,7 @@
       margin-top: 8px;
     }
 
-    &.error {
+    &.#{$prefix}error {
       border: #e14343 1px solid;
     }
   }
