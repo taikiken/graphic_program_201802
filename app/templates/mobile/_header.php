@@ -161,7 +161,7 @@ endif;
       <h1><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a></h1>
 
       <div id="<?php echo $page['html_prefix']; ?>menu-opener" class="<?php echo $page['html_prefix']; ?>menu-opener">
-        <a id="<?php echo $page['html_prefix']; ?>side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
+        <a id="<?php echo $page['html_prefix']; ?>side-menu-toggle" href="#<?php echo $page['html_prefix']; ?>side-menu-container"><span></span><span></span><span></span></a>
       </div>
 
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-inner-right">

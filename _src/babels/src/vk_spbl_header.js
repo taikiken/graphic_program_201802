@@ -26,6 +26,7 @@ import { User } from './app/User';
  * @param {*} Sagen `Sagen` object
  */
 const device = (Sagen) => {
+  console.log('device vk', vk);
   // execute
   if (Sagen.Browser.Mobile.is()) {
     vk.mobile();

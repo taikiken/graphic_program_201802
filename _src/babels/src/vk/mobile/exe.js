@@ -11,7 +11,7 @@
  */
 import Dom from '../../app/Dom';
 // import ViewFlushModal from '../../view/modal/ViewFlushModal';
-import SPViewAppBanner from '../../sp/view/SPViewAppBanner';
+// import SPViewAppBanner from '../../sp/view/SPViewAppBanner';
 import SPViewHeaderSearch from '../../sp/view/header/SPViewHeaderSearch';
 import SPViewHeaderUser from '../../sp/view/header/SPViewHeaderUser';
 import SPPageTop from '../../sp/ui/SPPageTop';
@@ -25,6 +25,7 @@ const syn = () => {
   const element = Dom.service(true);
   const button = Dom.serviceOpener(true);
   const menu = Dom.serviceMenu(true);
+  console.log('mobile.exe.syn', element, button, menu);
   if (element && button && menu) {
     const view = new SPViewSyn(element, button, menu, null, true);
     view.start();
@@ -37,6 +38,7 @@ const syn = () => {
 const search = () => {
   const element = Dom.search(true);
   const opener = Dom.searchOpener(true);
+  console.log('mobile.exe.search', element, opener);
   if (element && opener) {
     const view = new SPViewHeaderSearch(element, opener, {}, true);
     view.start();
@@ -48,6 +50,7 @@ const search = () => {
  */
 const header = () => {
   const element = Dom.profile(true);
+  console.log('mobile.exe.header', element);
   if (element) {
     const view = new SPViewHeaderUser(element, {}, true);
     view.start();
@@ -55,15 +58,15 @@ const header = () => {
 };
 
 
-/**
- * アプリケーションバナー
- */
-const appBanner = () => {
-  const element = Dom.appBanner(true);
-  if (element) {
-    SPViewAppBanner.init(element, true, true);
-  }
-};
+// /**
+//  * アプリケーションバナー
+//  */
+// const appBanner = () => {
+//   const element = Dom.appBanner(true);
+//   if (element) {
+//     SPViewAppBanner.init(element, true, true);
+//   }
+// };
 
 // /**
 //  * 実行後の flush modal
@@ -84,6 +87,7 @@ const top = () => {
   // #js-page_top を sp は優先にする
   // @since 2017-10-23
   const element = Dom.jsPageTop(true) || Dom.pageTop(true);
+  console.log('mobile.exe.top', element);
   if (element) {
     const ui = new SPPageTop(element);
     ui.start();
@@ -101,11 +105,11 @@ const mobile = () => {
   // // modal 準備
   // modalFlush();
   // app banner
-  appBanner();
+  // appBanner();
   // header
   header();
   // 検索フォーム
   search();
 };
 
-export default mobile();
+export default mobile;

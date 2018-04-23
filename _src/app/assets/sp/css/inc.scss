@@ -120,7 +120,7 @@ html, body {
 // 検索ボックスが表示された状態
 // bodyに .search-form-open
 .SPBL_search-form-open {
-  @extend %search-form-open;
+  @extend %SPBL_search-form-open;
 }
 
 // header を fixed にする
@@ -135,7 +135,7 @@ html, body {
 
 // .head-search
 .SPBL_head-search {
-  @extend %head-search;
+  @extend %SPBL_head-search;
 }
 
 

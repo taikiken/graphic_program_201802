@@ -124,7 +124,12 @@ export default class SPViewSyn extends View {
    * - Syn. menu setup を行います
    */
   synapse() {
-    const syn = new Syn(this._button, this._menu);
-    syn.init();
+    // vk 無しにする
+    if (!this.vk) {
+      const syn = new Syn(this._button, this._menu);
+      syn.init();
+    }
+    // const syn = new Syn(this._button, this._menu);
+    // syn.init();
   }
 }

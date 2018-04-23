@@ -48,7 +48,7 @@
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2018/04/19 - 12:41
-	 * buildTime: 2018-4-23 13:24:22
+	 * buildTime: 2018-4-23 14:56:56
 	 * @license MIT
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -81,6 +81,7 @@
 	 * @param {*} Sagen `Sagen` object
 	 */
 	var device = function device(Sagen) {
+	  console.log('device vk', _vk2.default);
 	  // execute
 	  if (Sagen.Browser.Mobile.is()) {
 	    _vk2.default.mobile();
@@ -153,7 +154,7 @@
 	 * @type {{build: string, main: main}}
 	 */
 	var SPBL_VK = {
-	  build: '2018-4-23 13:24:22',
+	  build: '2018-4-23 14:56:56',
 	  main: main
 	};
 
@@ -14008,23 +14009,19 @@
 
 	var _Dom2 = _interopRequireDefault(_Dom);
 
-	var _SPViewAppBanner = __webpack_require__(147);
-
-	var _SPViewAppBanner2 = _interopRequireDefault(_SPViewAppBanner);
-
-	var _SPViewHeaderSearch = __webpack_require__(148);
+	var _SPViewHeaderSearch = __webpack_require__(147);
 
 	var _SPViewHeaderSearch2 = _interopRequireDefault(_SPViewHeaderSearch);
 
-	var _SPViewHeaderUser = __webpack_require__(150);
+	var _SPViewHeaderUser = __webpack_require__(149);
 
 	var _SPViewHeaderUser2 = _interopRequireDefault(_SPViewHeaderUser);
 
-	var _SPPageTop = __webpack_require__(153);
+	var _SPPageTop = __webpack_require__(152);
 
 	var _SPPageTop2 = _interopRequireDefault(_SPPageTop);
 
-	var _SPViewSyn = __webpack_require__(154);
+	var _SPViewSyn = __webpack_require__(153);
 
 	var _SPViewSyn2 = _interopRequireDefault(_SPViewSyn);
 
@@ -14033,6 +14030,23 @@
 	// vk mobile 実行ファイル
 	/**
 	 * syn.menu
+	 */
+
+	// import ViewFlushModal from '../../view/modal/ViewFlushModal';
+	// import SPViewAppBanner from '../../sp/view/SPViewAppBanner';
+	var syn = function syn() {
+	  var element = _Dom2.default.service(true);
+	  var button = _Dom2.default.serviceOpener(true);
+	  var menu = _Dom2.default.serviceMenu(true);
+	  console.log('mobile.exe.syn', element, button, menu);
+	  if (element && button && menu) {
+	    var view = new _SPViewSyn2.default(element, button, menu, null, true);
+	    view.start();
+	  }
+	};
+
+	/**
+	 * 検索フォーム
 	 */
 	/**
 	 * Copyright (c) 2011-2018 inazumatv.com, inc.
@@ -14045,24 +14059,10 @@
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
 	 */
-	var syn = function syn() {
-	  var element = _Dom2.default.service(true);
-	  var button = _Dom2.default.serviceOpener(true);
-	  var menu = _Dom2.default.serviceMenu(true);
-	  if (element && button && menu) {
-	    var view = new _SPViewSyn2.default(element, button, menu, null, true);
-	    view.start();
-	  }
-	};
-
-	/**
-	 * 検索フォーム
-	 */
-
-	// import ViewFlushModal from '../../view/modal/ViewFlushModal';
 	var search = function search() {
 	  var element = _Dom2.default.search(true);
 	  var opener = _Dom2.default.searchOpener(true);
+	  console.log('mobile.exe.search', element, opener);
 	  if (element && opener) {
 	    var view = new _SPViewHeaderSearch2.default(element, opener, {}, true);
 	    view.start();
@@ -14074,21 +14074,22 @@
 	 */
 	var header = function header() {
 	  var element = _Dom2.default.profile(true);
+	  console.log('mobile.exe.header', element);
 	  if (element) {
 	    var view = new _SPViewHeaderUser2.default(element, {}, true);
 	    view.start();
 	  }
 	};
 
-	/**
-	 * アプリケーションバナー
-	 */
-	var appBanner = function appBanner() {
-	  var element = _Dom2.default.appBanner(true);
-	  if (element) {
-	    _SPViewAppBanner2.default.init(element, true, true);
-	  }
-	};
+	// /**
+	//  * アプリケーションバナー
+	//  */
+	// const appBanner = () => {
+	//   const element = Dom.appBanner(true);
+	//   if (element) {
+	//     SPViewAppBanner.init(element, true, true);
+	//   }
+	// };
 
 	// /**
 	//  * 実行後の flush modal
@@ -14109,6 +14110,7 @@
 	  // #js-page_top を sp は優先にする
 	  // @since 2017-10-23
 	  var element = _Dom2.default.jsPageTop(true) || _Dom2.default.pageTop(true);
+	  console.log('mobile.exe.top', element);
 	  if (element) {
 	    var ui = new _SPPageTop2.default(element);
 	    ui.start();
@@ -14126,380 +14128,17 @@
 	  // // modal 準備
 	  // modalFlush();
 	  // app banner
-	  appBanner();
+	  // appBanner();
 	  // header
 	  header();
 	  // 検索フォーム
 	  search();
 	};
 
-	exports.default = mobile();
+	exports.default = mobile;
 
 /***/ }),
 /* 147 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.AppBanner = undefined;
-
-	var _classCallCheck2 = __webpack_require__(4);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(5);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Cookie = __webpack_require__(111);
-
-	var _Scroll = __webpack_require__(143);
-
-	var _VK = __webpack_require__(84);
-
-	var _VK2 = _interopRequireDefault(_VK);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// Sagen
-	/**
-	 * ref: global object - Sagen
-	 * @type {Sagen}
-	 * @private
-	 */
-
-
-	// util
-	var Sagen = self.Sagen;
-
-	/**
-	 * `.header-sticky` element
-	 * @type {null}
-	 */
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/09/08 - 18:10
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-
-	// net
-	var headerSticky = null;
-	/**
-	 * timer id
-	 * @type {number}
-	 */
-	var timer = 0;
-
-	/**
-	 * selector(className) prefix
-	 * @type {string}
-	 * @since 2018-04-19 - VK header
-	 */
-	var prefix = '';
-	/**
-	 * アプリダウンロードの動線を改善 #1009
-	 *
-	 * グノシーみたいなアプリバナーを SP の時のみに
-	 *
-	 * 仕様変更により大幅に書換える - node を react から template に移動<br>
-	 * `/app/templates/mobile/_header.php` - line 194
-	 * ```
-	 * <div id="js-header-appbnr-container">
-	 *  <div class="header-appbnr">
-	 *    <div class="header-appbnr-btn-close"><span>閉じる</span></div>
-	 *      <div class="header-appbnr-link">
-	 *      <!-- /531683568/sp_header_app -->
-	 *      <script>
-	 *        googletag.cmd.push(function() {
-	 *          googletag.defineSlot('/531683568/sp_header_app', [270, 70], 'div-gpt-ad-1494939700357-0').addService(googletag.pubads());
-	 *          googletag.pubads().enableSingleRequest();
-	 *          googletag.enableServices();
-	 *        });
-	 *      </script>
-	 *      <div id='div-gpt-ad-1494939700357-0' style='height:70px; width:270px;'>
-	 *        <script>
-	 *          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939700357-0'); });
-	 *        </script>
-	 *      </div>
-	 *    <!-- // /531683568/sp_header_app -->
-	 *    </div><!-- /.header-appbnr-link -->
-	 *  </div><!-- /.header-appbnr -->
-	 * </div>
-	 * ```
-	 * @see https://github.com/undotsushin/undotsushin/issues/1009
-	 * @since 2017-05-17
-	 */
-
-	var AppBanner = exports.AppBanner = function () {
-	  (0, _createClass3.default)(AppBanner, null, [{
-	    key: 'onScroll',
-
-	    // ---------------------------------------------------
-	    //  STATIC METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * Scroll.SCROLL event handler
-	     * @param {Object} events Scroll.SCROLL event Object
-	     * @see https://github.com/undotsushin/undotsushin/issues/2404#issuecomment-332087234
-	     * @since 2-16-09-30 static へ変更
-	     * @since 2017-09-26 banner - height: 85 -> 70 変更
-	     */
-	    value: function onScroll(events) {
-	      // if (events.y >= 85) {
-	      // @since 2017-09-26
-	      //
-	      if (events.y >= 70) {
-	        AppBanner.visible(false);
-	      } else {
-	        AppBanner.visible(true);
-	      }
-	    }
-	    /**
-	     * iOS safari rendering bug 対応させるために強制再描画します
-	     */
-
-	  }, {
-	    key: 'refresh',
-	    value: function refresh() {
-	      if (!headerSticky) {
-	        return;
-	      }
-	      clearTimeout(timer);
-	      headerSticky.style.cssText = 'top: 71px;';
-	      timer = setTimeout(function () {
-	        headerSticky.style.cssText = '';
-	      }, 16);
-	    }
-	    /**
-	     * document.body に `.appbnr-invisible` を追加・削除します
-	     * @param {boolean} view true の時に `.appbnr-invisible` を削除します
-	     */
-
-	  }, {
-	    key: 'visible',
-	    value: function visible() {
-	      var view = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-	      if (view) {
-	        if (Sagen.Dom.hasClass(document.body, prefix + 'appbnr-invisible')) {
-	          Sagen.Dom.removeClass(document.body, prefix + 'appbnr-invisible');
-	          AppBanner.refresh();
-	        }
-	      } else {
-	        Sagen.Dom.addClass(document.body, prefix + 'appbnr-invisible');
-	      }
-	    }
-	    /**
-	     * document.body へ `.appbnr-enable` を追加します
-	     */
-
-	  }, {
-	    key: 'enable',
-	    value: function enable() {
-	      Sagen.Dom.addClass(document.body, prefix + 'appbnr-enable');
-	    }
-	    /**
-	     * document.body から `.appbnr-enable` を削除します
-	     */
-
-	  }, {
-	    key: 'free',
-	    value: function free() {
-	      Sagen.Dom.removeClass(document.body, prefix + 'appbnr-enable');
-	    }
-	    // ---------------------------------------------------
-	    //  CONSTRUCTOR
-	    // ---------------------------------------------------
-	    /**
-	     * app バナー表示コントロール
-	     * @param {Element} element target element
-	     * @param {boolean} show visible flag
-	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
-	     * @since 2018-04-19 vk header - flag 追加
-	     */
-
-	  }]);
-
-	  function AppBanner(element, show) {
-	    var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-	    (0, _classCallCheck3.default)(this, AppBanner);
-
-	    /**
-	     * target element
-	     * @type {Element}
-	     */
-	    this.element = element;
-	    /**
-	     * bind onClose
-	     * @type {any}
-	     */
-	    this.onClose = this.onClose.bind(this);
-	    /**
-	     * default property
-	     * @type {{show: boolean}}
-	     */
-	    this.state = { show: show };
-	    /**
-	     * Scroll instance
-	     * @type {Scroll}
-	     */
-	    this.scroll = _Scroll.Scroll.factory();
-	    /**
-	     * VK（バーチャル甲子園）flag
-	     * @type {boolean}
-	     */
-	    this.vk = vk;
-	    prefix = _VK2.default.prefix(vk);
-	    // /**
-	    //  * selector(className) prefix
-	    //  * @type {string}
-	    //  * @since 2018-04-19 - VK header
-	    //  */
-	    // this.prefix = prefix;
-	    var headers = document.getElementsByClassName(prefix + 'header-sticky');
-	    // console.log('AppBanner headers', headers);
-	    if (headers && headers.length) {
-	      headerSticky = headers[0];
-	    }
-	  }
-	  // ---------------------------------------------------
-	  //  METHOD
-	  // ---------------------------------------------------
-
-
-	  (0, _createClass3.default)(AppBanner, [{
-	    key: 'init',
-	    value: function init() {
-	      // scroll 監視開始
-	      this.activate();
-	      // this.element.addEventListener('click', this.onClose, false);
-	    }
-	    /**
-	     * div.header-appbnr-btn-close click event handler
-	     * @param {Event} event div.header-appbnr-btn-close click event
-	     */
-
-	  }, {
-	    key: 'onClose',
-	    value: function onClose(event) {
-	      event.preventDefault();
-	      this.updateShow(false);
-	      this.dispose();
-	    }
-	    /**
-	     * state.show を変更します
-	     * @param {boolean} show show state value
-	     */
-
-	  }, {
-	    key: 'updateShow',
-	    value: function updateShow(show) {
-	      // state が同じだったら処理しない
-	      if (this.state.show === show) {
-	        return;
-	      }
-
-	      if (!show) {
-	        // 1 week cookie save
-	        // ***開発時コメントにします**
-	        _Cookie.Cookie.save('1', _Cookie.Cookie.APP_BANNER, new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), '/', _Cookie.Cookie.COOKIE_DOMAIN);
-	        // console.log('Cookie', Cookie.APP_BANNER, Cookie.get(Cookie.APP_BANNER));
-	        AppBanner.free();
-	      } else {
-	        // 表示されたらスクロール監視を始める
-	        this.activate();
-	      }
-	      // state update
-	      this.state.show = show;
-	    }
-	    /**
-	     * Scroll.SCROLL 監視を開始します
-	     */
-
-	  }, {
-	    key: 'activate',
-	    value: function activate() {
-	      this.dispose();
-
-	      var scroll = this.scroll;
-	      scroll.on(_Scroll.Scroll.SCROLL, AppBanner.onScroll);
-	      scroll.start();
-	    }
-	    /**
-	     * Scroll.SCROLL 監視を止めます
-	     */
-
-	  }, {
-	    key: 'dispose',
-	    value: function dispose() {
-	      this.scroll.off(_Scroll.Scroll.SCROLL, AppBanner.onScroll);
-	      this.element.removeEventListener('click', this.onClose);
-	    }
-	  }]);
-	  return AppBanner;
-	}();
-
-	/**
-	 * アプリダウンロードの動線を改善 #1009,
-	 * グノシーみたいなアプリバナーを SP の時のみに
-	 *
-	 * 仕様変更により実装を inner class {@link AppBanner} へ移行しました
-	 *
-	 * 実行互換のために {@link SPViewAppBanner.init} のみ残し他は削除しました
-	 * @since 2017-05-17
-	 */
-
-
-	var SPViewAppBanner = function () {
-	  function SPViewAppBanner() {
-	    (0, _classCallCheck3.default)(this, SPViewAppBanner);
-	  }
-
-	  (0, _createClass3.default)(SPViewAppBanner, null, [{
-	    key: 'init',
-
-	    /**
-	     * {@link Cookie}.APP_BANNER が無い時 SPViewAppBanner を render しマウントします
-	     * @param {Element} element div#js-header-appbnr-container
-	     * @param {boolean} [visible=false] render root Element
-	     * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
-	     * @return {boolean} mount すると true を返します
-	     * @since 2018-04-19 vk header - flag 追加
-	     */
-	    value: function init(element) {
-	      var visible = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-	      var vk = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-	      // cookie check 止める
-	      // @since 2017-09-25
-	      var has = false; // Cookie.has(Cookie.APP_BANNER);
-	      if (!has && visible) {
-	        AppBanner.enable();
-	        var banner = new AppBanner(element, visible, vk);
-	        banner.init();
-	        return true;
-	      }
-	      // cookie あり または visible: false
-	      AppBanner.free();
-	      return false;
-	    }
-	  }]);
-	  return SPViewAppBanner;
-	}();
-
-	exports.default = SPViewAppBanner;
-
-/***/ }),
-/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14532,7 +14171,7 @@
 
 	var _ViewHeaderSearch3 = _interopRequireDefault(_ViewHeaderSearch2);
 
-	var _SPComponentHeaderSearchOpener = __webpack_require__(149);
+	var _SPComponentHeaderSearchOpener = __webpack_require__(148);
 
 	var _SPComponentHeaderSearchOpener2 = _interopRequireDefault(_SPComponentHeaderSearchOpener);
 
@@ -14641,7 +14280,7 @@
 	exports.default = SPViewHeaderSearch;
 
 /***/ }),
-/* 149 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14851,7 +14490,7 @@
 	exports.default = SPComponentHeaderSearchOpener;
 
 /***/ }),
-/* 150 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14885,7 +14524,7 @@
 
 	var _View3 = _interopRequireDefault(_View2);
 
-	var _SPViewHeaderMember = __webpack_require__(151);
+	var _SPViewHeaderMember = __webpack_require__(150);
 
 	var _SPViewHeaderMember2 = _interopRequireDefault(_SPViewHeaderMember);
 
@@ -15110,7 +14749,7 @@
 	exports.default = SPViewHeaderUser;
 
 /***/ }),
-/* 151 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15147,7 +14786,7 @@
 
 	var _ViewHeaderMember3 = _interopRequireDefault(_ViewHeaderMember2);
 
-	var _SPComponentHeaderMemberSetting = __webpack_require__(152);
+	var _SPComponentHeaderMemberSetting = __webpack_require__(151);
 
 	var _SPComponentHeaderMemberSetting2 = _interopRequireDefault(_SPComponentHeaderMemberSetting);
 
@@ -15268,7 +14907,7 @@
 	exports.default = SPViewHeaderMember;
 
 /***/ }),
-/* 152 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15570,7 +15209,7 @@
 	exports.default = SPComponentHeaderMemberSetting;
 
 /***/ }),
-/* 153 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15700,7 +15339,7 @@
 	exports.default = SPPageTop;
 
 /***/ }),
-/* 154 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15733,15 +15372,15 @@
 
 	var _View3 = _interopRequireDefault(_View2);
 
-	var _Syn = __webpack_require__(155);
+	var _Syn = __webpack_require__(154);
 
 	var _Syn2 = _interopRequireDefault(_Syn);
 
 	var _User = __webpack_require__(110);
 
-	var _LogoutNode = __webpack_require__(159);
+	var _LogoutNode = __webpack_require__(158);
 
-	var _SPComponentSynItem = __webpack_require__(160);
+	var _SPComponentSynItem = __webpack_require__(159);
 
 	var _SPComponentSynItem2 = _interopRequireDefault(_SPComponentSynItem);
 
@@ -15881,8 +15520,13 @@
 	  }, {
 	    key: 'synapse',
 	    value: function synapse() {
-	      var syn = new _Syn2.default(this._button, this._menu);
-	      syn.init();
+	      // vk 無しにする
+	      if (!this.vk) {
+	        var syn = new _Syn2.default(this._button, this._menu);
+	        syn.init();
+	      }
+	      // const syn = new Syn(this._button, this._menu);
+	      // syn.init();
 	    }
 	  }]);
 	  return SPViewSyn;
@@ -15891,7 +15535,7 @@
 	exports.default = SPViewSyn;
 
 /***/ }),
-/* 155 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15916,13 +15560,13 @@
 
 	var _Loc = __webpack_require__(140);
 
-	var _Time = __webpack_require__(156);
+	var _Time = __webpack_require__(155);
 
 	var _Cookie = __webpack_require__(111);
 
-	var _Ga = __webpack_require__(157);
+	var _Ga = __webpack_require__(156);
 
-	var _GaData = __webpack_require__(158);
+	var _GaData = __webpack_require__(157);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16629,7 +16273,7 @@
 	exports.default = Syn;
 
 /***/ }),
-/* 156 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16729,7 +16373,7 @@
 	}();
 
 /***/ }),
-/* 157 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16751,7 +16395,7 @@
 
 	var _Env2 = _interopRequireDefault(_Env);
 
-	var _GaData = __webpack_require__(158);
+	var _GaData = __webpack_require__(157);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17026,7 +16670,7 @@
 	exports.Ga = Ga;
 
 /***/ }),
-/* 158 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17172,7 +16816,7 @@
 	}();
 
 /***/ }),
-/* 159 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17392,7 +17036,7 @@
 	});
 
 /***/ }),
-/* 160 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
