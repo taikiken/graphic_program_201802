@@ -255,7 +255,12 @@ if ( $page_has_header ) :
           // タブの表示順はAPI通りにする
           ?>
           <li id="<?php echo $tab['slug']; ?>" class="gnav-<?php echo $tab['slug']; ?>">
-            <a href="/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
+            <?php if($tab['slug'] !== "vk"){ ?>
+                <a href="<?php echo $page['site_url_uts']; ?>/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
+            <?php }
+            else{?>
+                <a href="<?php echo "http://vk.sportsbull.jp/koshien/"; ?>/"><?php echo $tab['label']; ?></a>
+            <?php } ?>
           </li>
         <?php }//foreach ?>
       </ul>
