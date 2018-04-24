@@ -6,7 +6,7 @@
 <?php if($NUMBERINGOFF!=1){ ?>
 <th scope="col" width="45" class="t_numbering<?php if(getSorC("order")!=1){ ?>_disabled<?php } ?>">順番</th>
 <?php } ?>
-  <?php if ($CURRENTDIRECTORY != "company_news" && $CURRENTDIRECTORY != "notice" && $CURRENTDIRECTORY != "pickup_athlete_big4" && $CURRENTDIRECTORY != "bottom_tabs_category" && $CURRENTDIRECTORY != "children_category" && $CURRENTDIRECTORY != "bottom_tabs_livescore" && $CURRENTDIRECTORY != "children_livescore") { ?>
+  <?php if ($CURRENTDIRECTORY != "company_news" && $CURRENTDIRECTORY != "notice" && $CURRENTDIRECTORY != "pickup_athlete_big4" ) { ?>
     <th scope="col" width="35" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">公開</th>
   <?php } ?>
   <?php if($TABLE == "u_media"){ ?>
@@ -40,14 +40,19 @@
 <img src="/shared/cms/img/cmd_ups_disabled.gif" width="13" height="13" alt="一つ上へ入れ替える" ><img src="/shared/cms/img/cmd_downs_disabled.gif" width="13" height="13" alt="一つ下へ入れ替える" >
 -->
 </td>
-      <?php if ($CURRENTDIRECTORY != "company_news" && $CURRENTDIRECTORY != "notice" && $CURRENTDIRECTORY != "pickup_athlete_big4" && $CURRENTDIRECTORY != "bottom_tabs_category" && $CURRENTDIRECTORY != "children_category" && $CURRENTDIRECTORY != "bottom_tabs_livescore" && $CURRENTDIRECTORY != "children_livescore") { ?>
+      <?php if ($CURRENTDIRECTORY != "company_news" && $CURRENTDIRECTORY != "notice" && $CURRENTDIRECTORY != "pickup_athlete_big4" ) { ?>
 
         <td class="display"><?php
           if($CURRENTDIRECTORY == "photo"){
             echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
           } else {
             if(getSorC("draft")==1){
-                echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
+                if($TABLE == "bottom_tab_categories" or $TABLE== "bottom_tab_livescores"){
+                    echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"publicswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["is_public".$LANG[$EI]]!="t"?"dis":"",$LANG[$EI],$p[$i]["id"]);
+                }
+                else{
+                    echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
+                }
             }else{
                 echo "<div class=\"dp2\"><img src=\"/shared/cms/img/cmd_active_disabled.gif\" width=\"13\" height=\"13\"></div>";
             }
