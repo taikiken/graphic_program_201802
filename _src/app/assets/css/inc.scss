@@ -1,0 +1,103 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../scss/asset";
+
+/*
+
+# inc
+
+- header & footer 共通パーツ用
+
+*/
+// sprite 不要の時はコメントに
+/*
+  sprite
+* *********************************** */
+
+
+// Basic
+//
+// ヘッダー・フッター・サイドナビ基本セット
+
+//  1. head section
+//  2. gnav section
+//  3. foot section
+//  4. side section
+
+// 1. head section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+$prefix : 'SPBL_';
+
+@mixin hover-opacity($opacity:.75) {
+  opacity: $opacity;
+  transition: opacity ease-out .4s;
+  @content;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+@import "sprite";
+
+
+.SPBL_common {
+  @import "../../../bower_exports/modularized/normalize";
+  @import "../../../scss/style/reset";
+  @import "../../../scss/dependencies/style";
+  @import "module/utility";
+  // @import "module/general";
+
+  // body
+  color: #333;
+  font-family: "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", Arial, verdana, sans-serif;
+  line-height: 1.5;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -moz-font-feature-settings: "liga", "kern";
+
+  a {
+    @include link-decoration($highlight-color, $highlight-color, none, underline);
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    outline: none;
+  }
+
+  input,
+  textarea {
+    color: #333;
+  }
+
+  img {
+    &.responsive {
+      display: none;
+    }
+  }
+
+}
+
+
+@import "module/global_header";
+.SPBL_head-sec {
+  @extend %head-sec;
+}
+
+@import "module/global_gnav";
+.SPBL_gnav-sec {
+  @extend %gnav-sec;
+}
+
+@import "module/global_footer";
+.SPBL_foot-sec {
+  @extend %foot-sec;
+}

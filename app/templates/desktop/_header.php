@@ -1,216 +1,106 @@
+<?php if ( $page['conditional']['html_start'] ) : ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
+<?php endif; ?>
 
-
-<?php include_once __DIR__."/../_head.php"; ?>
-
-<?php if(count($page['photo']) > 0):?>
-  <link rel="stylesheet" href="/assets/css/style_pc.css?v=<?php echo $page['version']; ?>">
-  <script src="/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
-<?php endif;?>
-  <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
-  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
-  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
-
-<?php include_once __DIR__.'/../_head_bottom.php'; ?>
 
 <?php
-// ---------------------------------------------------------------------------
-// @since 2016-11-13
-// 記事詳細・次の記事一覧のメインビジュアルを動画に変更
-// 常に videojs 関連を読込む
-//if ( $page['template'] == 'p' ) :
-
-// @since 2016-01-13
-// hotfix @see https://github.com/undotsushin/undotsushin/issues/1468
-//if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
-if ( $page['template'] == 'p'
-  && $page['post']['media']['video']['player'] == 'brightcove'
-  && $page['post']['media_vk_refid'] == ''
-) :
-  // brightcove code をここに
-  // JS で非同期で読み込むと付随コードの読み込みが行われない様子
+if ( $page['conditional']['head'] ) :
+  include_once __DIR__."/../_head.php";
+endif;
 ?>
-  <style>
-    body.vjs-full-window {
-      padding: 0;
-      margin: 0;
-      height: 100%;
-    }
-    .video-js.vjs-fullscreen {
-      position: fixed;
-      overflow: hidden;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      width: 100% !important;
-      height: 100% !important;
-    }
-    .video-js:-webkit-full-screen {
-      width: 100% !important;
-      height: 100% !important;
-    }
-    .video-js.vjs-fullscreen.vjs-user-inactive {
-      cursor: none;
-    }
-  </style>
 
-  <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
-  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
-  <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
 
-  <script src="//vjs.zencdn.net/5.3/video.min.js"></script>
-  <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<?php if ( $page['conditional']['head_assets'] ) : ?>
+  <?php if(count($page['photo']) > 0):?>
+    <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/assets/css/style_pc.css?v=<?php echo $page['version']; ?>">
+    <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs.js?v=<?php echo $page['version']; ?>"></script>
+  <?php endif;?>
+  <?php if ( $page['template'] === 'inc' ) : ?>
+    <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/inc/assets/<?php echo $page['directory']; ?>/desktop/inc.css/?v=<?php echo $page['version']; ?>">
+  <?php else : ?>
+    <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/assets/css/ui.css?v=<?php echo $page['version']; ?>">
+  <?php endif; ?>
+<?php endif; ?>
 
-  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
-  <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
-  <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
-  <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
 
-  <style type="text/css">
-    #mainContainer{
-      border: 1px #fff solid;
-      box-sizing: border-box;
-      overflow: hidden;
-      padding: 0;
-      margin: 0;
-      padding-top: 30px;
-      position: relative;
-      width:100%;
-    }
-    #single-visual-container{
-      box-sizing: border-box;
-    }
-    .vjs-poster{
-      display: none !important;
-    }
-    .video-js{
-      background-color: #fff !important;
-    }
-    .vjs-big-play-button{
-      z-index: 9999;
-    }
-  </style>
 <?php
- endif;
-// eof brightcove
-// ---------------------------------------------------------------------------
-
-// header 表示条件 & template_classname に使用する template 名称を $template_name へ
-$template_name = $page['template'];
-
-// .whole へ追加する CSS class を設定します
-$whole_classes = array();
-
-// $page['template_classname'] に設定されている CSS class を追加します
-if ( !empty( $page['template_classname'] ) ) {
-  $whole_classes[] = $page['template_classname'];
-}
-// 記事詳細
-if ( $template_name == 'p' ) {
-
-  // 記事詳細へ識別 CSS class 追加
-  $whole_classes[] = 'post-single';
-
-  // theme 設定 class を追加
-  // JSON レスポンスの theme.base を CSS class へ追加します
-  if ( $page['theme']['base'] ) {
-    $whole_classes[] = $page['theme']['base'];
-  }
-}
-
-// in category
-if ( $template_name == 'category' ) {
-
-    //crazy athletes除外
-    if($page['category']['slug'] != 'crazy') {
-      // @since 2016-09-01
-      // https://github.com/undotsushin/undotsushin/issues/1053
-      $whole_classes[] = 'layout-list';
-      // ---[end 2016-09-01]---
-
-      // template_classname があれば
-      if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
-        $whole_classes[] = $page['template_classname'];
-      }
-
-  // @see https://github.com/undotsushin/undotsushin/issues/1891#issuecomment-298291706
-  // @since 2017-05-08 - category slug を追加する
-        $whole_classes[] = $page['category']['slug'];
-    }
-} elseif ( $template_name == 'search' ) {
-  // @since 2016-09-01
-  // https://github.com/undotsushin/undotsushin/issues/1053
-  $whole_classes[] = 'layout-list';
-  // ---[end 2016-09-01]---
-} elseif ( $template_name == 'index' ) {
-  // @since 2016-09-01
-  // https://github.com/undotsushin/undotsushin/issues/1053
-  $whole_classes[] = 'home';
-  // ---[end 2016-09-01]---
-} elseif ( $template_name == 'p' ) {
-  // @since 2016-09-30
-  $whole_classes[] = 'layout-detail';
-  // 記事詳細 `big6tv` の時に `theme_big6` を whole へ追加する
-  // @since 2017-03-24
-  $page_category = $page['category'];
-  if (isset($page_category) && $page_category['slug'] == 'big6tv' && !in_array('theme_big6', $whole_classes)) {
-    $whole_classes[] = 'theme_big6';
-  }
-
-  // @see https://github.com/undotsushin/undotsushin/issues/1891#issuecomment-298291706
-  // @since 2017-05-08 - category slug を追加する
-    if($page_category['slug'] != 'crazy')
-    {
-        $whole_classes[] = $page_category['slug'];
-    }
-}
+if ( $page['conditional']['head_bottom'] ) :
+  include_once __DIR__."/../_head_bottom.php";
+endif;
 ?>
-</head>
-<body>
-<div id="whole" class="whole <?php echo join( ' ', $whole_classes);?>">
+
+
+<?php if ( $page['conditional']['head_video'] ) :
+  include_once __DIR__."/_head_video.php";
+endif;
+?>
+
+
+<?php if ( $page['conditional']['body_start'] ) : ?>
+  </head>
+  <body>
+<?php endif; ?>
+
+
+<?php if ( $page['conditional']['whole'] ) :
+  include_once __DIR__."/_whole.php";
+endif;
+?>
+
+
 <?php
-// header 表示条件
-if (
-  $template_name == 'index' ||
-  $template_name == '404' ||
-  $template_name == 'category' ||
-  $template_name == 'p' ||
-  $template_name == 'search' ||
-  $template_name == 'settings' ||
-  $template_name == 'settings.social' ||
-  $template_name == 'settings.account' ||
-  $template_name == 'settings.interest' ||
-  $template_name == 'settings.deactivate' ||
-  $template_name == 'mypage' ||
-  $template_name == 'mypage.activities' ||
-  $template_name == 'notifications' ||
-  $template_name == 'logout' ||
-  $template_name == 'crazy'
-) :
+// header & gnav 表示条件
+// TODO - model側でやりたい
+$conditional_header = array(
+  'index',
+  '404',
+  'category',
+  'p',
+  'search',
+  'settings',
+  'settings.social',
+  'settings.account',
+  'settings.interest',
+  'settings.deactivate',
+  'mypage',
+  'mypage.activities',
+  'notifications',
+  'logout',
+  'crazy',
+  'inc'
+);
+
+if ( !in_array($page['template'], $conditional_header, true) ) :
+  $page['conditional']['header'] = false;
+  $page['conditional']['gnav']   = false;
+endif;
+
 ?>
-  <header id="header-container" class="head-sec">
-    <div class="head-sec-inner">
-      <aside class="f-left clearfix">
-        <div id="head-search-container"></div><!-- /.head-search -->
+
+<?php if ( $page['conditional']['header'] ) : ?>
+  <header id="<?php echo $page['html_prefix']; ?>header-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-sec">
+    <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
+      <aside class="<?php echo $page['html_prefix']; ?>head-sec-left">
+        <div id="<?php echo $page['html_prefix']; ?>head-search-container"></div><!-- /.head-search -->
       </aside>
 
-      <h1><a href="/">スポーツブル（スポブル）</a></h1>
+      <h1><a href="<?php echo $page['site_url_uts']; ?>/">スポーツブル（スポブル）</a></h1>
 
-      <aside class="f-right clearfix">
-        <div id="user-profile-container"></div><!--/.user-profile-container-->
+      <aside class="<?php echo $page['html_prefix']; ?>head-sec-right">
+        <div id="<?php echo $page['html_prefix']; ?>user-profile-container"></div><!--/.user-profile-container-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
+<?php endif; ?>
 
-  <nav id="global-nav-container" class="gnav-sec">
+
+<?php if ( $page['conditional']['gnav'] ) : ?>
+  <nav id="<?php echo $page['html_prefix']; ?>global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
     <ul>
-      <li id="home" class="gnav-home"><a href="/">TOP</a></li>
+      <li id="<?php echo $page['html_prefix']; ?>home"><a href="<?php echo $page['site_url_uts']; ?>/">TOP</a></li>
 
       <?php foreach( $page['site_tabs'] as $tab ) {
         // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
@@ -227,28 +117,30 @@ if (
       <?php }//foreach ?>
     </ul>
   </nav><!-- /.gnav-sec -->
+<?php endif; ?>
 
-  <?php /*
 
-  #205 - backend フラッシュメッセージ対応完までview側の表示コメントアウト
-
-  <div id="dialogue-notice" class="dialogue-notice">
-    <div class="dialogue-notice-inner">
-      <div id="dialogue-notice-info" class="dialogue-notice-info">
-        <p>パスワードが違います</p>
-      </div>
-      <div id="dialogue-notice-btn-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice">CLOSE</a></div>
-    </div>
-  </div><!-- /.dialogue-notice -->
-
-  */?>
+<?php if ( $page['conditional']['announce'] ) :?>
   <?php
   // since 2017-12-18
   // お知らせ表示
   // ref: UNDO_SPBL-150 【課題管理】一面リニューアル / ユーザーへのお知らせ表示
   ?>
   <div id="js-announce-container"></div>
-<?php
-endif;
-// header 表示条件 end
-?>
+<?php endif; ?>
+
+
+<?php /*
+
+#205 - backend フラッシュメッセージ対応完までview側の表示コメントアウト
+
+<div id="dialogue-notice" class="dialogue-notice">
+  <div class="dialogue-notice-inner">
+    <div id="dialogue-notice-info" class="dialogue-notice-info">
+      <p>パスワードが違います</p>
+    </div>
+    <div id="dialogue-notice-btn-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice">CLOSE</a></div>
+  </div>
+</div><!-- /.dialogue-notice -->
+
+*/?>
