@@ -654,11 +654,8 @@ $app->group('/stats', function () use($app) {
       ];
       $s3key = implode('/', $arr);
 
-      if ( UT_ENV !== 'PRODUCTION' ) :
-        $json = 'https://dev-ublive.sportsbull.jp/' . $s3key;
-      else:
-        $json = 'https://ublive.sportsbull.jp/static/big6/' . $s3key;
-      endif;
+      global $bucket;
+      $json = sprintf("https://%s/%s",$bucket,$s3key);
 
       // jsonからタイトルつくる
       // フロントはいつでも本番のバケットのjson取得してる
