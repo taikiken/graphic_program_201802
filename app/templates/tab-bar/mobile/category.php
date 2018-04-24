@@ -131,13 +131,13 @@
 <div id="page" class="whole <?php echo join( ' ', $whole_classes);?> menu-category">
   <header class="head-sec">
     <div class="head-sec-inner">
-      <h1>速報・データ</h1>
+      <h1>競技・種目</h1>
     </div><!-- /.head-sec-inner -->
   </header>
 
 <?php
 // -----------------------------------------------------------------
-// 速報・データ
+// 競技・種目
 // response['category']['parent']
 // -----------------------------------------------------------------
 include_once __DIR__."/../module/functions.php";
