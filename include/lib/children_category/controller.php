@@ -86,6 +86,11 @@ if($q->get_dir()===0){
         data_sql();
 
         $sv[$sn[]="updated_at"]="now()";
+        if ($sv['is_public'] == "'1'") {
+            $sv['is_public'] = "true";
+        } else {
+            $sv['is_public'] = "false";
+        }
         foreach ($sv as $bottm_tab => $value) {
             if ($bottm_tab === "parent_id") {
             } else {
