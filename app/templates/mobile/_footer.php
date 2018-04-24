@@ -140,7 +140,7 @@ endif;
 
 <?php
 if ( $page['conditional']['footer_script'] ) :
-  include_once __DIR__.'/_footer_script.php';
+  include_once __DIR__.'/_footer-script.php';
 endif;
 ?>
 
