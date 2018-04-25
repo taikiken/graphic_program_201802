@@ -75,7 +75,7 @@ if (isset($tab_response)) :
         ?>
           <li class="menu-item">
             <a href="<?php echo $child['link']; ?>" class="menu-link">
-              <span class="menu-link-icon"><img src="<?php echo $child['icon']; ?>" alt=""></span>
+              <span class="menu-link-icon"><img class="replace-svg red-svg" src="<?php echo $child['icon']; ?>" alt=""></span>
               <span class="menu-link-label"><?php echo $child['dispName']; ?></span>
             </a>
           </li>
@@ -114,7 +114,7 @@ if (isset($tab_response)) :
             ?>
               <li class="menu-item">
                 <a href="<?php echo $child['link']; ?>" class="menu-link">
-                  <span class="menu-link-icon"><img src="<?php echo $child['icon']; ?>" alt=""></span>
+                  <span class="menu-link-icon"><img class="replace-svg red-svg" src="<?php echo $child['icon']; ?>" alt=""></span>
                   <span class="menu-link-label"><?php echo $child['dispName']; ?></span>
                 </a>
               </li>
@@ -144,3 +144,27 @@ endif;
 // 出力条件 - all [/A]
 
 ?>
+
+<?php if (in_array('dark', $whole_classes)) : ?>
+    <style type="text/css">
+    .replace-svg{
+        width: 16px;
+        margin-right: 4px;
+        vertical-align: middle;
+    }
+    .red-svg path{ fill:#cc141d; }
+    .white-svg path{ fill:white; }
+    
+    .dark .menu-item:hover .menu-link .menu-link-label{
+        color: #cc141d!important;
+    }
+    .dark .menu-item:hover .menu-link{
+        text-decoration: none;
+    }
+    </style>
+    <script src="/common/js/desvg.js"></script>
+    <script>
+        //imgタグをインラインSVGに展開する
+        deSVG('.replace-svg', true);
+    </script>
+<?php endif; ?>
