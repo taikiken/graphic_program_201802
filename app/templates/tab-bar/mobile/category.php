@@ -205,7 +205,7 @@ endif;
   $BREADCRUMB = array(
     array(
       'label' => '競技',
-      'path'  => '/tab-bar/category/'
+      'path'  => ''
     ),
   );
 // 汎用 footer

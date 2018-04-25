@@ -206,7 +206,7 @@ endif;
   $BREADCRUMB = array(
     array(
       'label' => '速報',
-      'path'  => '/tab-bar/livescore/'
+      'path'  => ''
     ),
   );
 // 汎用 footer
