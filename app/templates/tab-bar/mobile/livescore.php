@@ -201,6 +201,14 @@ endif;
 // `isset($tab_response) && is_array($tab_response['parent']) && count($tab_response['parent'])`
 ?>
 <?php
+// # パンくずリスト
+// ==============================
+  $BREADCRUMB = array(
+    array(
+      'label' => '速報',
+      'path'  => '/tab-bar/livescore/'
+    ),
+  );
 // 汎用 footer
 include_once __DIR__."/../../mobile/_footer.php";
 ?>

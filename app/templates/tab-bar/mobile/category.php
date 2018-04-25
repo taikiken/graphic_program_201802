@@ -200,6 +200,14 @@ endif;
 // `isset($tab_response) && is_array($tab_response['parent']) && count($tab_response['parent'])`
 ?>
 <?php
+// # パンくずリスト
+// ==============================
+  $BREADCRUMB = array(
+    array(
+      'label' => '競技',
+      'path'  => '/tab-bar/category/'
+    ),
+  );
 // 汎用 footer
 include_once __DIR__."/../../mobile/_footer.php";
 ?>
