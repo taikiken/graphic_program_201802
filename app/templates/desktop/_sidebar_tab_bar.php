@@ -75,7 +75,7 @@ if (isset($tab_response)) :
         ?>
           <li class="menu-item">
             <a href="<?php echo $child['link']; ?>" class="menu-link">
-              <span class="menu-link-icon"><img class="replace-svg red-svg" src="<?php echo $child['icon']; ?>" alt=""></span>
+              <span class="menu-link-icon"><img class="replace-svg white-svg" src="<?php echo $child['icon']; ?>" alt=""></span>
               <span class="menu-link-label"><?php echo $child['dispName']; ?></span>
             </a>
           </li>
@@ -114,7 +114,7 @@ if (isset($tab_response)) :
             ?>
               <li class="menu-item">
                 <a href="<?php echo $child['link']; ?>" class="menu-link">
-                  <span class="menu-link-icon"><img class="replace-svg red-svg" src="<?php echo $child['icon']; ?>" alt=""></span>
+                  <span class="menu-link-icon"><img class="replace-svg white-svg" src="<?php echo $child['icon']; ?>" alt=""></span>
                   <span class="menu-link-label"><?php echo $child['dispName']; ?></span>
                 </a>
               </li>
@@ -145,14 +145,13 @@ endif;
 
 ?>
 
-<?php if (in_array('dark', $whole_classes)) : ?>
+<?php if (in_array('dark', $whole_classes) || in_array('big6tv', $whole_classes)) : ?>
     <style type="text/css">
     .replace-svg{
         width: 16px;
         margin-right: 4px;
         vertical-align: middle;
     }
-    .red-svg path{ fill:#cc141d; }
     .white-svg path{ fill:white; }
     
     .dark .menu-item:hover .menu-link .menu-link-label{
