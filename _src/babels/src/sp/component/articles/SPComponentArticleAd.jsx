@@ -74,6 +74,7 @@ export default class SPComponentArticleAd extends React.Component {
      * @type {?Element}
      */
     this.newsAd = null;
+    // console.log('SPComponentArticleAd', props);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -84,7 +85,7 @@ export default class SPComponentArticleAd extends React.Component {
    */
   ad() {
     // 広告タグ親コンテナを作成し `script` tag を insert させる
-    this.ok = true;
+    // this.ok = true;
     return (
       <div
         className={`board-item news-ad news-ad-${this.props.index}`}
@@ -100,18 +101,75 @@ export default class SPComponentArticleAd extends React.Component {
     // 2017-12-18 - this.ok: 出力は1回だけ 条件とる - sequence で広告が消える問題対応
     if (this.newsAd) {
       // console.log('SPComponentArticleAd.componentDidMount', this.props.adSp);
-      this.newsAd.appendChild(Ad.makeStream(this.props.uniqueId, this.props.adSp));
+      // this.newsAd.appendChild(Ad.makeStream(this.props.uniqueId, this.props.adSp));
+      const {
+        uniqueId,
+        adSp,
+        index,
+      } = this.props;
+      this.newsAd.appendChild(Ad.makeStreamEach(uniqueId, adSp, index));
     }
   }
+  // /**
+  //  * 1. 3番目（添字 2）で「広告タグ」が設定されている時に出力します
+  //  * 1. コンテンツが（添字 2）に届かない時は記事の最後に出力します
+  //  * @return {?XML} 広告 tag を返します
+  //  */
+  // render() {
+  //   // ストリーム広告
+  //   // ID 設定がなかったら出力しない
+  //   if (!this.props.adSp) {
+  //     return null;
+  //   }
+  //   // 六大学 / 広告表示 調整（Web） #1546
+  //   // > アドネットワーク関連の広告（ネイティブアド？）を消したい
+  //   // @see https://github.com/undotsushin/undotsushin/issues/1546
+  //   // category.slug 'big6tv' search
+  //   // @since 2017-03-15
+  //   const big6tv = this.props.categories.bySlug('big6tv');
+  //   // console.log('SPComponentArticleAd.render', big6tv, this.props);
+  //   if (big6tv) {
+  //     return null;
+  //   }
+  //   // // 出力は1回だけ
+  //   // if (this.ok) {
+  //   //   return null;
+  //   // }
+  //   // index が 2
+  //   if (this.state.third) {
+  //     return this.ad();
+  //   }
+  //
+  //   // index が 2に到達しない, コンテンツ量が少ない時にも広告を表示させる
+  //   // index 2 未満 + 総数 と index が同じ
+  //   // index は 0始まりなので +1 下駄を履かせて比較する
+  //   if (this.props.index < 2 && this.props.index + 1 === this.props.length) {
+  //     return this.ad();
+  //   }
+  //
+  //   // 条件外
+  //   return null;
+  // }
   /**
-   * 1. 3番目（添字 2）で「広告タグ」が設定されている時に出力します
-   * 1. コンテンツが（添字 2）に届かない時は記事の最後に出力します
-   * @return {?XML} 広告 tag を返します
+   * 5 件毎に広告タグを挿入します
+   * - 記事が 4 件未満の時は最後に強制的に出力させます
+   * - ストリーム広告 ID 無い時は出力しません
+   * - 六大学 / 広告表示 しません - 注意！
+   * - #ref - UNDO_SPBL-509 【課題管理】スマホ版の記事一覧の無限スクロール広告表示対応
+   * @returns {?XML} 広告 tag を返します
+   * @see https://aws-plus.backlog.jp/view/UNDO_SPBL-509
+   * @since 2018-04-10
    */
   render() {
+    const {
+      adSp,
+      categories,
+      index,
+      length,
+    } = this.props;
     // ストリーム広告
     // ID 設定がなかったら出力しない
-    if (!this.props.adSp) {
+    if (!adSp) {
       return null;
     }
     // 六大学 / 広告表示 調整（Web） #1546
@@ -119,27 +177,17 @@ export default class SPComponentArticleAd extends React.Component {
     // @see https://github.com/undotsushin/undotsushin/issues/1546
     // category.slug 'big6tv' search
     // @since 2017-03-15
-    const big6tv = this.props.categories.bySlug('big6tv');
+    const big6tv = categories.bySlug('big6tv');
     // console.log('SPComponentArticleAd.render', big6tv, this.props);
     if (big6tv) {
       return null;
     }
-    // // 出力は1回だけ
-    // if (this.ok) {
-    //   return null;
-    // }
-    // index が 2
-    if (this.state.third) {
+    // index - 0 ~ - 5件目毎に広告挿入
+    const flag = (index + 1) % 4 === 0;
+    // 総件数が 4 未満
+    if ((length < 4 && index === (length - 1)) || flag) {
       return this.ad();
     }
-
-    // index が 2に到達しない, コンテンツ量が少ない時にも広告を表示させる
-    // index 2 未満 + 総数 と index が同じ
-    // index は 0始まりなので +1 下駄を履かせて比較する
-    if (this.props.index < 2 && this.props.index + 1 === this.props.length) {
-      return this.ad();
-    }
-
     // 条件外
     return null;
   }
