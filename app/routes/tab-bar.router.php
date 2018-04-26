@@ -32,6 +32,10 @@ $app->group('/nav', function () use($app) {
     {
       return $this->renderer->render($response, 'tab-bar/mobile/livescore.php', $args);
     }
+    else{
+        header('Location: /');
+        exit;
+    }
   });
 
   // 競技・種目 ページ - `category`
@@ -60,6 +64,10 @@ $app->group('/nav', function () use($app) {
     if($app->model->property('ua') === 'mobile')
     {
       return $this->renderer->render($response, 'tab-bar/mobile/category.php', $args);
+    }
+    else{
+        header('Location: /');
+        exit;
     }
     // desktop 無い
   });
