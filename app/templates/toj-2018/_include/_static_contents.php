@@ -34,8 +34,8 @@
           <div class="stage">
               <p class="number">Stage.01</p>
               <p class="name">SAKAI</p>
-              <p class="text">- Daisen Park Circuit Course -<br>
-              2.6km Indivisual Time Trial</p>
+              <p class="text">Daisen Park Circuit Course<br>
+              <em>2.6</em>km <small>(Individual Time Trial)</small></p>
           </div>
           <div class="credit">
             <figure>
@@ -62,8 +62,11 @@
           <div class="stage">
               <p class="number">Stage.02</p>
               <p class="name">KYOTO</p>
-              <p class="text">- Daisen Park Circuit Course -<br>
-              2.6km Indivisual Time Trial</p>
+              <p class="text">Fugenji Fureaino Eki - <br>
+              Doshisha University -<br>
+              Fugenji Elementary school -<br>
+              Keihanna Circuit Course<br>
+              <em>105.0</em>km</p>
           </div>
           <div class="credit">
             <figure>
@@ -90,8 +93,10 @@
           <div class="stage">
               <p class="number">Stage.03</p>
               <p class="name">INABE</p>
-              <p class="text">- Daisen Park Circuit Course -<br>
-              2.6km Indivisual Time Trial</p>
+              <p class="text">geki Station - <br>
+              Shimokawajiri Junction - <br>
+              Inabe Bairin Park Circuit Course<br>
+              <em>127.0</em>km</p>
           </div>
           <div class="credit">
             <figure>
@@ -118,8 +123,11 @@
           <div class="stage">
               <p class="number">Stage.04</p>
               <p class="name">MINO</p>
-              <p class="text">- Daisen Park Circuit Course -<br>
-              2.6km Indivisual Time Trial</p>
+              <p class="text">Kyu Imaike Jutaku - <br>
+              Yokogoshi - <br>
+              Mino Washi Paper Museum <br>
+              Circuit Course<br>
+              <em>139.4</em>km</p>
           </div>
           <div class="credit">
             <figure>
@@ -146,8 +154,10 @@
           <div class="stage">
               <p class="number">Stage.05</p>
               <p class="name">MINAMI<br>SHINSHU</p>
-              <p class="text">- Daisen Park Circuit Course -<br>
-              2.6km Indivisual Time Trial</p>
+              <p class="text">Iida Station - <br>
+              Shimohisakata Circuit Course - <br>
+              Matuo Stadium<br>
+              <em>123.6</em>km</p>
           </div>
           <div class="credit">
             <figure>
@@ -173,9 +183,11 @@
         <div class="schedule__info">
           <div class="stage">
               <p class="number">Stage.06</p>
-              <p class="name">FUJISAN</p>
-              <p class="text">- Daisen Park Circuit Course -<br>
-              2.6km Indivisual Time Trial</p>
+              <p class="name">Mt.Fuji</p>
+              <p class="text">TBA<br>
+              Fuji-azami Line Subashiri IC - <br>
+              Mt.Fuji Subashiri<br>
+              <em>33.2 </em>km <small>(Hill-Climb / TBA)</small></p>
           </div>
           <div class="credit">
             <figure>
@@ -202,8 +214,13 @@
           <div class="stage">
               <p class="number">Stage.07</p>
               <p class="name">IZU</p>
-              <p class="text">- Daisen Park Circuit Course -<br>
-              2.6km Indivisual Time Trial</p>
+              <p class="text">Shuzenji Station - <br>
+              Izu Sogo High School - <br>
+              Intersection of Japan<br>
+              Keirin School Entrance - <br>
+              Japan Cycle Sports Center<br>
+              Circuit Course<br>
+              <em>120.8</em>km</p>
           </div>
           <div class="credit">
             <figure>
@@ -230,8 +247,9 @@
           <div class="stage">
               <p class="number">Stage.08</p>
               <p class="name">TOKYO</p>
-              <p class="text">- Daisen Park Circuit Course -<br>
-              2.6km Indivisual Time Trial</p>
+              <p class="text">Hibiya City Bild - <br>
+              Oi Wharf Circuit Course<br>
+              <em>112.7</em>km</p>
           </div>
           <div class="credit">
             <figure>

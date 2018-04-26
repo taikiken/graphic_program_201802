@@ -167,7 +167,41 @@
 
 <script src="/assets/js/red-bull-crashed-ice-2018.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
-
+<script>
+  var schedule = $('.js-scheduleToggle');
+  var scheduleUnit = schedule.find('.schedule__unit');
+  var scheduleToggle = scheduleUnit.find('.schedule__header');
+  var scheduleBtnHighlight = scheduleUnit.find('.button__highlight');
+  var setDetailHeight = function(target) {
+    var mh = target.find('.schedule__detail').find('.schedule__map').outerHeight(true);
+    var ih = target.find('.schedule__detail').find('.schedule__info').outerHeight(true);
+    if(target.attr('class').match(/is-open/)) {
+      target.find('.schedule__detail').height(mh + ih);
+    } else {
+      target.find('.schedule__detail').height(0);
+    }
+  }
+  var setOpenHeight = function() {
+    for(var i = 0; i < scheduleUnit.length; i++) {
+      var className = scheduleUnit.eq(i).attr('class');
+      if(className.match(/is-open/)) {
+        setDetailHeight(scheduleUnit.eq(i));
+      }
+    }
+  }
+  scheduleToggle.on('click', function(e) {
+    var index = scheduleToggle.index(this);
+    scheduleUnit.eq(index).toggleClass('is-open');
+    setDetailHeight(scheduleUnit.eq(index));
+  });
+  scheduleBtnHighlight.on('click', function(e) {
+    e.stopPropagation();
+  });
+  $(window).on('resize', function(){
+    setOpenHeight();
+  });
+  setOpenHeight();
+</script>
 </body>
 </html>
 

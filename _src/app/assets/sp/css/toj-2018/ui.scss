@@ -107,7 +107,7 @@ $c-txt__strong: $c-main;
     height: 100px;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    background: url(/assets/images/toj-2018/related-icon_play.png) 0 0 no-repeat;
+    background: url(/assets/images/toj-2018/icon_play-main.png) 0 0 no-repeat;
     background-size: contain;
     overflow: hidden;
     font-size: 0;
@@ -672,6 +672,11 @@ $c-txt__strong: $c-main;
   &:nth-child(odd) {
     background-color: #e5f3f7;
   }
+  &:nth-child(even) {
+    .schedule__map {
+      background-color: #e5f3f7;
+    }
+  }
   &.is-open {
     // .schedule__detail {
     //   // height: auto;
@@ -779,4 +784,9 @@ $c-txt__strong: $c-main;
   padding: 4px;
   background-color: #ffffff;
   margin: 0 10px 12px;
+}
+
+.liveStreaming .video-js .vjs-big-play-button {
+  width: 10vw;
+  height: 10vw;
 }

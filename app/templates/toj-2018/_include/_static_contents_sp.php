@@ -39,12 +39,12 @@
                 </div>
               </header>
               <div class="schedule__detail">
-                <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_01.png" alt="第1ステージ堺のコース"></figure>
+                <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_01.png" alt="第1ステージ堺のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
                     <figure>
                       <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
                     </figure>
                   </div>
                 </div>
@@ -66,12 +66,12 @@
                 </div>
               </header>
               <div class="schedule__detail">
-                <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_02.png" alt="第2ステージ京都のコース"></figure>
+                <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_02.png" alt="第2ステージ京都のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
                     <figure>
                       <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
                     </figure>
                   </div>
                 </div>
@@ -93,12 +93,12 @@
                 </div>
               </header>
               <div class="schedule__detail">
-                <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_03.png" alt="第3ステージいなべのコース"></figure>
+                <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_03.png" alt="第3ステージいなべのコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
                     <figure>
                       <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
                     </figure>
                   </div>
                 </div>
@@ -120,12 +120,12 @@
                 </div>
               </header>
               <div class="schedule__detail">
-                <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_04.png" alt="第4ステージ美濃のコース"></figure>
+                <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_04.png" alt="第4ステージ美濃のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
                     <figure>
                       <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
                     </figure>
                   </div>
                 </div>
@@ -147,12 +147,12 @@
                 </div>
               </header>
               <div class="schedule__detail">
-                <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_05.png" alt="第5ステージ南信州のコース"></figure>
+                <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_05.png" alt="第5ステージ南信州のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
                     <figure>
                       <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
                     </figure>
                   </div>
                 </div>
@@ -174,12 +174,12 @@
                 </div>
               </header>
               <div class="schedule__detail">
-                <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_06.png" alt="第6ステージ富士山のコース"></figure>
+                <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_06.png" alt="第6ステージ富士山のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
                     <figure>
                       <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
                     </figure>
                   </div>
                 </div>
@@ -201,12 +201,12 @@
                 </div>
               </header>
               <div class="schedule__detail">
-                <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_07.png" alt="第7ステージ伊豆のコース"></figure>
+                <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_07.png" alt="第7ステージ伊豆のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
                     <figure>
                       <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
                     </figure>
                   </div>
                 </div>
@@ -228,12 +228,12 @@
                 </div>
               </header>
               <div class="schedule__detail">
-                <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_08.png" alt="第8ステージ東京のコース"></figure>
+                <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_08.png" alt="第8ステージ東京のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
                     <figure>
                       <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
                     </figure>
                   </div>
                 </div>
@@ -278,49 +278,49 @@
 
             <ul class="about__featured__list">
               <li class="about__featured__item">
-                <figure><img src="/assets/images/toj-2018/about-featured-thumb1.jpg" alt=""></figure>
+                <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb1.jpg" alt=""></figure>
                 <h4>キャメロン・ナーズ</h4>
                 <p class="ruby">Cameron Naasz</p>
                 <p class="country">USA</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
-                <figure><img src="/assets/images/toj-2018/about-featured-thumb2.jpg" alt=""></figure>
+                <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb2.jpg" alt=""></figure>
                 <h4>スコット・クロクソール</h4>
                 <p class="ruby">Scott Croxall</p>
                 <p class="country">Canada</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
-                <figure><img src="/assets/images/toj-2018/about-featured-thumb3.jpg" alt=""></figure>
+                <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb3.jpg" alt=""></figure>
                 <h4>カイル・クロクソール</h4>
                 <p class="ruby">Kyle Croxall</p>
                 <p class="country">Canada</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
-                <figure><img src="/assets/images/toj-2018/about-featured-thumb4.jpg" alt=""></figure>
+                <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb4.jpg" alt=""></figure>
                 <h4>マルコ・ダラーゴ</h4>
                 <p class="ruby">Marco Dallago</p>
                 <p class="country">Austria</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
-                <figure><img src="/assets/images/toj-2018/about-featured-thumb5.jpg" alt=""></figure>
+                <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb5.jpg" alt=""></figure>
                 <h4>ルカ・ダラーゴ</h4>
                 <p class="ruby">Luca Dallago</p>
                 <p class="country">Austria</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
-                <figure><img src="/assets/images/toj-2018/about-featured-thumb6.jpg" alt=""></figure>
+                <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb6.jpg" alt=""></figure>
                 <h4>ジャクリーン・レジェール</h4>
                 <p class="ruby">Jacqueline Legere</p>
                 <p class="country">Canada</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
-                <figure><img src="/assets/images/toj-2018/about-featured-thumb7.jpg" alt=""></figure>
+                <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb7.jpg" alt=""></figure>
                 <h4>アマンダ・トルンゾ</h4>
                 <p class="ruby">Amanda Trunzo</p>
                 <p class="country">USA</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
-                <figure><img src="/assets/images/toj-2018/about-featured-thumb8.jpg" alt=""></figure>
+                <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb8.jpg" alt=""></figure>
                 <h4>山本 純子</h4>
                 <p class="ruby">Junko Yamamoto</p>
                 <p class="country">Japan</p>
@@ -382,7 +382,7 @@
 
           <div class="related__post">
             <a href="hoge" class="movie">
-              <figure class="related__post__thumb"><span><img src="/assets/images/toj-2018/related-thumb1.jpg" alt=""></span></figure>
+              <figure class="related__post__thumb"><span><img src="/assets/sp/images/toj-2018/related-thumb1.jpg" alt=""></span></figure>
               <div class="related__post__text">
                 <h3 class="related__post__heading">Red Bull Crashed Ice, Marseille</h3>
                 <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
@@ -393,7 +393,7 @@
 
           <div class="related__post">
             <a href="hoge" class="movie">
-              <figure class="related__post__thumb"><span><img src="/assets/images/toj-2018/related-thumb2.jpg" alt=""></span></figure>
+              <figure class="related__post__thumb"><span><img src="/assets/sp/images/toj-2018/related-thumb2.jpg" alt=""></span></figure>
               <div class="related__post__text">
                 <h3 class="related__post__heading">Red Bull Crashed Ice, Jyväskylä</h3>
                 <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
@@ -404,7 +404,7 @@
 
           <div class="related__post">
             <a href="hoge" class="movie">
-              <figure class="related__post__thumb"><span><img src="/assets/images/toj-2018/related-thumb3.jpg" alt=""></span></figure>
+              <figure class="related__post__thumb"><span><img src="/assets/sp/images/toj-2018/related-thumb3.jpg" alt=""></span></figure>
               <div class="related__post__text">
                 <h3 class="related__post__heading">Red Bull Crashed Ice, Saint Paul</h3>
                 <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
@@ -415,7 +415,7 @@
 
           <div class="related__post">
             <a href="hoge" class="movie">
-              <figure class="related__post__thumb"><span><img src="/assets/images/toj-2018/related-thumb4.jpg" alt=""></span></figure>
+              <figure class="related__post__thumb"><span><img src="/assets/sp/images/toj-2018/related-thumb4.jpg" alt=""></span></figure>
               <div class="related__post__text">
                 <h3 class="related__post__heading">Red Bull Crashed Ice, Saint Paul</h3>
                 <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
