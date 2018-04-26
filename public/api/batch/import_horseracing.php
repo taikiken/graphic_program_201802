@@ -10,38 +10,29 @@ include $INCLUDEPATH.'public/import.php';
 | RSSをパースしSQLに変換しDBに流し込む
 |
 */
-if(UT_ENV == 'LOCAL' || UT_ENV == 'DEVELOP')
-{
-  $MEDIAID = 84;
-}
-else
-{
-  $MEDIAID = 75;
-
-}
-const MEDIA_NAME = '競馬のお話';
+$MEDIAID = 84;
+const MEDIA_NAME = '競馬のおはなし';
 $MEDIANAME = MEDIA_NAME;
-const SPECIAL_CHAR = 'https://keibana.com/';
+const SPECIAL_CHAR = 'www.youtube.com/embed';
 # RSSファイル
 #
 #
-//const RSS_FILE = 'http://dev.cocokara-next.com/feed/';
-const RSS_FILE = 'http://www.tv-tokyo.co.jp/tabletennis/sportsbull_rss.xml';
+const RSS_FILE = 'https://keibana.com/bull_rss.xml?.time()';
 
 $o = new db;
 $o->connect();
-
-// $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
-// $o->query($sql);
-// $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
-// $o->query($sql);
-// $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
-// $o->query($sql);
-// $sql = "delete from repo_e where nid in (select id from repo_n where d2={$MEDIAID});";
-// $o->query($sql);
-// $sql = "delete from repo_n where d2={$MEDIAID};";
-// $o->query($sql);
-
+/*
+ $sql = "delete from repo_body where pid in (select id from repo_n where d2={$MEDIAID});";
+ $o->query($sql);
+ $sql = "delete from u_link where pid in (select id from repo_n where d2={$MEDIAID});";
+ $o->query($sql);
+ $sql = "delete from u_area where pageid in (select id from repo_n where d2={$MEDIAID});";
+ $o->query($sql);
+ $sql = "delete from repo_e where nid in (select id from repo_n where d2={$MEDIAID});";
+ $o->query($sql);
+ $sql = "delete from repo_n where d2={$MEDIAID};";
+ $o->query($sql);
+*/
  //exit;
 
 $sql = sprintf("SELECT id,name,name_e,yobi FROM u_categories WHERE flag=1 AND id NOT IN(%s) ORDER BY id DESC",implode(",", $excategory));
@@ -55,7 +46,7 @@ while($f = $o->fetch_array()) {
 }
 /*
 |--------------------------------------------------------------------------
-| テレビ東京卓球ニュースRSS取込処理
+| 競馬RSS取込処理
 |--------------------------------------------------------------------------
 |
 | 要は、RSSのitem（記事）単位でSQL作ってあげればOK。Xpathでitemを抜き出してゴニョゴニョ
@@ -77,7 +68,6 @@ foreach($items as $item)
     $title = (string)$item->title;
     $region = (string)$item->area;
     $pref   = (string)$item->pref;
-    $pref_explode = explode(",",$pref);
     $body = (string)$item->description;
     $modbody = modifytag_New(
         str_replace('<p>&nbsp;</p>', '',
@@ -245,7 +235,7 @@ foreach($items as $item)
             }
         }
         if(! empty($region)) {
-            $sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref_explode[0]}');";
+            $sqla[] = "insert into u_area(pageid, region, pref) values(currval('repo_n_id_seq'), '{$region}', '{$pref}');";
         }
     }
     if($sqla){
