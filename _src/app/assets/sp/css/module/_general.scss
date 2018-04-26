@@ -919,6 +919,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: (100/2)+px;
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #fff;
@@ -979,8 +980,8 @@
     i {
       display: flex;
       align-items: center;
-      width: (60/2)+px;
-      height: (60/2)+px;
+      width: (44/2)+px;
+      height: (44/2)+px;
       margin-right: auto;
       margin-left: auto;
 
@@ -1034,6 +1035,11 @@
   //   }
   // }
 
+  // hide webview
+  .undotsushin-ios &,
+  .undotsushin-ios & {
+    display: none;
+  }
 }  //.nadir_tab
 
 
