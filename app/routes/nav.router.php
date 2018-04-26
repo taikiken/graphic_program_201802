@@ -23,14 +23,14 @@ $app->group('/nav', function () use($app) {
       'keywords'       => $app->model->property('keywords'),
       'og_description' => $app->model->property('og_description'),
       'og_title'       => '速報・データ | '.$app->model->property('title_short'),
-      'og_url'         => $app->model->property('site_url').'tab-bar/livescore/',
+      'og_url'         => $app->model->property('site_url').'nav/stats/',
       'og_image'       => $app->model->property('og_image'),
       'tab_response'   => $tab_response,
     ));
 
     if($app->model->property('ua') === 'mobile')
     {
-      return $this->renderer->render($response, 'tab-bar/mobile/livescore.php', $args);
+      return $this->renderer->render($response, 'nav/mobile/stats.php', $args);
     }
     else{
         header('Location: /');
@@ -56,14 +56,14 @@ $app->group('/nav', function () use($app) {
       'keywords'       => $app->model->property('keywords'),
       'og_description' => $app->model->property('og_description'),
       'og_title'       => '競技・種目 | '.$app->model->property('title_short'),
-      'og_url'         => $app->model->property('site_url').'tab-bar/category/',
+      'og_url'         => $app->model->property('site_url').'nav/category/',
       'og_image'       => $app->model->property('og_image'),
       'tab_response'   => $tab_response,
     ));
 
     if($app->model->property('ua') === 'mobile')
     {
-      return $this->renderer->render($response, 'tab-bar/mobile/category.php', $args);
+      return $this->renderer->render($response, 'nav/mobile/category.php', $args);
     }
     else{
         header('Location: /');

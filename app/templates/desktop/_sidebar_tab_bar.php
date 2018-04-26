@@ -7,7 +7,7 @@
  */
 ?>
 <?php
-include_once __DIR__."/../tab-bar/module/functions.php";
+include_once __DIR__ . "/../nav/module/functions.php";
 
 // helper
 // ==============================
