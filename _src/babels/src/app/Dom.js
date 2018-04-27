@@ -11,7 +11,8 @@
  */
 
 
-import {Safety} from '../data/Safety';
+import { Safety } from '../data/Safety';
+import VK from '../vk/VK';
 
 // const _symbol = Symbol('Dom');
 
@@ -21,18 +22,6 @@ import {Safety} from '../data/Safety';
  * - 全て static です
  */
 export default class Dom {
-  // /**
-  //  * <p>PC / SP 共通です<br>
-  //  * static class です, instance を作成しません</p>
-  //  * @param {Symbol} target Singleton を実現するための private symbol
-  //  */
-  // constructor( target ) {
-  //   if ( _symbol !== target ) {
-  //
-  //     throw new Error( 'Dom is static Class. not use new Dom().' );
-  //
-  //   }
-  // }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -53,10 +42,11 @@ export default class Dom {
    * **PC**
    * - body > .whole を取得します
    * - body > div#whole Element
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} whole element を返します
    */
-  static whole() {
-    return Dom.get('whole');
+  static whole(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}whole`);
   }
   /**
    * body > .whole を取得します
@@ -70,21 +60,25 @@ export default class Dom {
   }
   /**
    * div#js-page_top - for sp
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @returns {?Element} div#js-page_top - for sp
    * @since 2017-10-23
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static jsPageTop() {
-    return Dom.get('js-page_top');
+  static jsPageTop(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}js-page_top`);
   }
   /**
    * pageTop container
    * - 2017-08-24 - `#js-page_top` を使用しているページに対応するため取得 ID を増やす
    * - `pageTop`
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} pageTop element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static pageTop() {
+  static pageTop(vk = false) {
     // return Dom.get('pageTop') || Dom.get('js-page_top');
-    return Dom.get('pageTop') || Dom.jsPageTop();
+    return Dom.get(`${VK.prefix(vk)}pageTop`) || Dom.jsPageTop(vk);
   }
   // --------------------------------------
   // header
@@ -97,56 +91,70 @@ export default class Dom {
   }
   /**
    * header user profile
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} 'user-profile-container' element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static profile() {
-    return Dom.get('user-profile-container');
+  static profile(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}user-profile-container`);
   }
   /**
    * header search from
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} head-search-container element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static search() {
-    return Dom.get('head-search-container');
+  static search(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}head-search-container`);
   }
   /**
    * header search from opener
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} search-container-opener element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static searchOpener() {
-    return Dom.get('search-container-opener');
+  static searchOpener(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}search-container-opener`);
   }
   // --------------------------------------
   // footer
   /**
    * hooter
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} footer-container element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static footer() {
-    return Dom.get('footer-container');
+  static footer(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}footer-container`);
   }
   // --------------------------------------
   // synapse
   /**
    * synapse 切り替えメニュー
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} side-menu-service element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static service() {
-    return Dom.get('side-menu-service');
+  static service(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}side-menu-service`);
   }
   /**
    * side メニュー
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} side-menu-container element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static serviceMenu() {
-    return Dom.get('side-menu-container');
+  static serviceMenu(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}side-menu-container`);
   }
   /**
    * side メニュー open / close button
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} menu-opener element を返します
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static serviceOpener() {
-    return Dom.get('menu-opener');
+  static serviceOpener(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}menu-opener`);
   }
 
   // --------------------------------------
@@ -437,17 +445,19 @@ export default class Dom {
   }
   /**
    * SP nav inner
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} gnav-sec-inner
    */
-  static navInner() {
-    return Dom.get('gnav-sec-inner');
+  static navInner(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}gnav-sec-inner`);
   }
   /**
    * SP nav > ul#gnav-sec-list
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} gnav-sec-list
    */
-  static navList() {
-    return Dom.get('gnav-sec-list');
+  static navList(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}gnav-sec-list`);
   }
   // --------------------------------------
   // settings
@@ -504,8 +514,8 @@ export default class Dom {
   // SP category
   // tab 表示・非表示で class（category）を与えるために...
   /**
-   * div.body-sec<br>
-   * SP: tab 表示・非表示で class（category）を与えるために...
+   * div.body-sec
+   * - SP: tab 表示・非表示で class（category）を与えるために...
    * @return {?Element} div.body-sec
    */
   static bodySection() {
@@ -514,8 +524,8 @@ export default class Dom {
   // --------------------------------------
   // 記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738
   /**
-   * <p>記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738</p>
-   * で ga するために a#readMore-external へのクリックで送信します
+   * 記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738
+   * - ga するために a#readMore-external へのクリックで送信します
    * @return {?Element} a#readMore-external
    */
   static moreExternal() {
@@ -547,10 +557,12 @@ export default class Dom {
   // アプリバナー
   /**
    * アプリバナー格納 Element を取得します
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    * @return {?Element} div#js-header-appbnr-container
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static appBanner() {
-    return Dom.get('js-header-appbnr-container');
+  static appBanner(vk = false) {
+    return Dom.get(`${VK.prefix(vk)}js-header-appbnr-container`);
   }
   // --------------------------------------
   // announce - 2017-12-18

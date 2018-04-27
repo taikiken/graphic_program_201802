@@ -120,7 +120,7 @@ html, body {
 // 検索ボックスが表示された状態
 // bodyに .search-form-open
 .SPBL_search-form-open {
-  @extend %search-form-open;
+  @extend %SPBL_search-form-open;
 }
 
 // header を fixed にする
@@ -130,12 +130,12 @@ html, body {
 
 // .head-sec
 .SPBL_head-sec {
-  @extend %head-sec;
+  @extend %SPBL_head-sec;
 }
 
 // .head-search
 .SPBL_head-search {
-  @extend %head-search;
+  @extend %SPBL_head-search;
 }
 
 
@@ -158,6 +158,8 @@ html, body {
 @import "module/global_footer";
 .SPBL_foot-sec {
   @extend %foot-sec;
+
+  border-top: 0;
 }
 
 

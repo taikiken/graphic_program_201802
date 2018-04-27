@@ -13,7 +13,14 @@
 
 const Browser = self.Sagen.Browser;
 
-// let _symbol = Symbol();
+/**
+ * request host(protocol + host)
+ * - 実行ファイルから全ての処理に先んじて設定します
+ * @private
+ * @type {string}
+ * @since 2018-04-19 - vk header
+ */
+let host = '';
 
 /**
  * Page 遷移 URL
@@ -22,19 +29,6 @@ const Browser = self.Sagen.Browser;
  * - [参照](https://docs.google.com/spreadsheets/d/1raMO0x5aeG-bk45PK528ib9HUU-Q4DbHq56oxDQ1h7c/)
  * */
 export class Url {
-  // /**
-  //  * <h4>Page 遷移 URL</h4>
-  //  * @param {Symbol} target Singleton を実現するための private symbol
-  //  */
-  // constructor( target:Symbol ) {
-  //
-  //   if ( _symbol !== target ) {
-  //
-  //     throw new Error( 'Url is static Class. not use new Url().' );
-  //
-  //   }
-  //
-  // }
   // ---------------------------------------------------
   //  CONST 代わり
   // ---------------------------------------------------
@@ -53,14 +47,37 @@ export class Url {
     return `/category/${Url.CATEGORY_SLUG}/`;
   }
   // ---------------------------------------------------
+  /**
+   * request host(protocol + host) 取得します
+   * @returns {string} protocol + host
+   * @since 2018-04-19 - vk header
+   */
+  static get host() {
+    return host;
+  }
+  /**
+   * request host(protocol + host) を設定します
+   * - 実行ファイルから全ての処理に先んじて設定します
+   * @param {string} hostname request host(protocol + host)
+   * @since 2018-04-19 - vk header
+   */
+  static set host(hostname) {
+    host = hostname;
+  }
+  // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * URL index
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {string} index url を返します
    */
-  static index() {
-    return '/';
+  static index(vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    return `${Url.host}/`;
   }
   /**
    * category url
@@ -89,18 +106,29 @@ export class Url {
   /**
    * 検索ページ url
    * @param {string} keyword 検索ワード
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {*|string} 検索ページ url を返します
    */
-  static search(keyword) {
-    return `/search/${keyword}`;
+  static search(keyword, vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    return `${Url.host}/search/${keyword}`;
+    // return `/search/${keyword}`;
   }
   /**
    * signup url
    * @param {string} [path=''] path option
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {string} signup url を返します
    */
-  static signup(path = '') {
-    const base = '/signup/';
+  static signup(path = '', vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    const base = `${Url.host}/signup/`;
     switch ( path ) {
       case 'account':
         return `${base}account`;
@@ -164,10 +192,15 @@ export class Url {
   }
   /**
    * login url
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {string} login url を返します
    */
-  static login() {
-    return '/login/';
+  static login(vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    return `${Url.host}/login/`;
   }
 
   /**
@@ -179,11 +212,16 @@ export class Url {
   }
   /**
    * SP 専用
-   * https://github.com/undotsushin/undotsushin/commit/6a99fb16401dd80f5ac1a5c9174b9b93a13408af
+   * - @see https://github.com/undotsushin/undotsushin/commit/6a99fb16401dd80f5ac1a5c9174b9b93a13408af
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {string} signup_login url を返します
    */
-  static signupLogin() {
-    return '/signup_login/';
+  static signupLogin(vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    return `${Url.host}/signup_login/`;
   }
   /**
    * reset_password url
@@ -208,10 +246,15 @@ export class Url {
   /**
    * mypage url
    * @param {string} [path=''] path option
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {*} mypage url を返します
    */
-  static mypage(path = '') {
-    const base = '/mypage/';
+  static mypage(path = '', vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    const base = `${Url.host}/mypage/`;
 
     switch (path) {
       case 'activities':
@@ -235,10 +278,16 @@ export class Url {
   /**
    * settings url
    * @param {string} [path=''] path option
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {*} settings url を返します
    */
-  static settings(path = '') {
-    const base = '/settings/';
+  static settings(path = '', vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    const base = `${Url.host}/settings/`;
+    // const base = '/settings/';
 
     switch (path) {
       case 'interest':
@@ -261,10 +310,15 @@ export class Url {
   /**
    * about url
    * @param {string} [path=''] path option
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {*} about url を返します
    */
-  static about(path = '') {
-    const base = '/about/';
+  static about(path = '', vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    const base = `${Url.host}/about/`;
     switch (path) {
       case 'company':
         return `${base}company`;
@@ -331,10 +385,16 @@ export class Url {
   /**
    * desktop/p.php line.288 ~ 299, JS で出力のために外部JS file へ
    * - React に script を埋め込むのが困難なため外部スクリプト化しインサートします
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag - since 2018-04-19
    * @return {string} `/assets/js/pc_popin-recommend.js` を返します
    * @since 2016-09-30
    */
-  static popin() {
-    return '/assets/js/pc_popin-recommend.js';
+  static popin(vk = false) {
+    // vk - 絶対パスを返す
+    if (!vk) {
+      Url.host = '';
+    }
+    return `${Url.host}/assets/js/pc_popin-recommend.js`;
+    // return '/assets/js/pc_popin-recommend.js';
   }
 }
