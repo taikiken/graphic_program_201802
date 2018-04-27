@@ -111,7 +111,7 @@ endif;
                 <a href="<?php echo $page['site_url_uts']; ?>/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
             <?php }
             else{?>
-                <a href="<?php echo "http://vk.sportsbull.jp/koshien/"; ?>/"><?php echo $tab['label']; ?></a>
+                <a href="<?php echo "http://vk.sportsbull.jp/koshien"; ?>/"><?php echo $tab['label']; ?></a>
             <?php } ?>
         </li>
       <?php }//foreach ?>
