@@ -12,7 +12,7 @@ if (pageUrl.match(/sportsbull.s3/) || pageUrl.match(/localhost/) || pageUrl.matc
 }
 var result = document.querySelector('#placeHolder');
 var accountId = '5704890303001';
-var playerId = 'r1Zn0fWf4f';
+var playerId = 'HJytfVm3f';
 var playerHTML = void 0;
 var flg = true;
 var initLoad = false;
