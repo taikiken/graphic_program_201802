@@ -14,8 +14,14 @@
 
 が結合された単体で機能するファイル
 
+/inc/assets/[dir]/responsive/inc.js/
+↓
+/assets/js/vk_spbl_header.bundle.js
+がロードされる
+※ 後加工しやすいようphp通して出力する
+
 */
 ?>
-<script id="SPBL_vk-header_script" src="/assets/js/vk_spbl_header.bundle.js?v=<?php echo $page['version']; ?>" data-browser="true" data-prefix="SPBL_" data-domain="https://dev.sportsbull.jp"></script>
+<script id="<?php echo $page['html_prefix']; ?>vk-header_script" src="<?php echo $page['site_url_uts']; ?>/inc/assets/<?php echo $page['directory']; ?>/responsive/inc.js?v=<?php echo $page['version']; ?>" data-browser="true" data-prefix="<?php echo $page['html_prefix']; ?>" data-domain="<?php echo $page['site_url_uts']; ?>"></script>
 
 <script src="<?php echo $page['site_url_uts']; ?>/assets/js/fb-video.js?v=<?php echo $page['version']; ?>"></script>

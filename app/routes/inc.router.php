@@ -180,13 +180,14 @@ $app->group('/inc', function () use ($app) {
 
   // file
   // ==============================
-  $this->get('/assets/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}/{file:inc.css}[/]',  function ($request, $response, $args) use ($app) {
+  $this->get('/assets/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}/{file:inc.css|inc.js}[/]',  function ($request, $response, $args) use ($app) {
 
     $path = '';
     if ( $args['device'] === 'mobile' ) :
       $path = 'sp/';
     endif;
 
+    // css
     if ( $args['file'] === 'inc.css' ) :
       $file = @file_get_contents($app->model->property('site_url').'assets/'.$path.'css/inc.css');
 
@@ -209,6 +210,19 @@ $app->group('/inc', function () use ($app) {
 
         return $response->withStatus(200)
                 ->withHeader('Content-Type', 'text/css')
+                ->write($file);
+      endif;
+
+    endif;
+
+
+    // js
+    if ( $args['file'] === 'inc.js' ) :
+      $file = @file_get_contents($app->model->property('site_url').'assets/js/vk_spbl_header.bundle.js');
+
+      if ( $file ) :
+        return $response->withStatus(200)
+                ->withHeader('Content-Type', 'application/javascript')
                 ->write($file);
       endif;
 
