@@ -158,6 +158,8 @@ html, body {
 @import "module/global_footer";
 .SPBL_foot-sec {
   @extend %foot-sec;
+
+  border-top: 0;
 }
 
 
