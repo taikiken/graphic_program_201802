@@ -1037,8 +1037,8 @@
 
   // hide webview
   .undotsushin-ios &,
-  .undotsushin-ios & {
-    display: none;
+  .undotsushin-android & {
+    display: none !important;
   }
 }  //.nadir_tab
 
