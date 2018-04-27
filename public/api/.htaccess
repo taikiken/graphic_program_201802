@@ -115,7 +115,5 @@ RewriteRule ^v1/auth/twitter /api/ver1/auth/twitter.php [L]
 RewriteRule ^download/([0-9]+)/([rawx0-9]+) /api/tool/img_download.php?id=$1&size=$2 [L]
 
 #下タブ
-RewriteRule ^v1/bottomtab/nowdo /api/ver1/read/nowdo_url.php
-#BUTTOM_TAB
+RewriteRule ^v1/bottomtab/nowdo /api/ver1/read/nowdo_url.php [L]
 RewriteRule ^v1/bottomtab /api/ver1/read/bottomtab.php [L]
-
