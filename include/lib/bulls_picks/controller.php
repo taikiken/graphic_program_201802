@@ -1,14 +1,11 @@
 <?php
 
-if ($q->tstr[3] == 'au')
-{
+if ($q->tstr[3] == 'au') {
   $picks_filename = $AU_PICKS_FILENAME;
   $s3_key = $AU_PICKS_FILENAME;
   $tmp_filename = $TMP_AU_PICKS;
   $archive_filename = $AU_ARCHIVE_PICKS;
-}
-else
-{
+} else {
   $picks_filename = $PICKS_FILENAME;
   $s3_key = $PICKS_FILENAME;
   $tmp_filename = $TMP_PICKS;
@@ -16,46 +13,42 @@ else
 }
 
 if ($q->get_dir() === 1) { // 編集
-
   if ($q->get_file() === 0) {
 
     // spbのxmlはauも共通して必要
     $S3Module = new S3Module;
     $url = $S3Module->getUrl($PICKS_FILENAME);
-    if ($bucket=="img-sportsbull-jp")
-    {
+    if ($bucket == "img-sportsbull-jp") {
       $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
     }
     $picks_xml = simplexml_load_file($url);
     $picks_xml = $picks_xml->xpath('/date')[0];
 
-    $date = (string)$picks_xml->articles->attributes()->date;
+    $date = (string) $picks_xml->articles->attributes()->date;
     $ids = [];
     $comments = [];
 
     $article_count = 0; // コメント配列管理用
     foreach ($picks_xml->articles->article as $article) {
-      $ids[] = (string)$article->id;
+      $ids[] = (string) $article->id;
 
       foreach ($article->comments as $value) {
         foreach ($value as $comment) {
-          $comments[$article_count][] = (string)$comment;
+          $comments[$article_count][] = (string) $comment;
         }
       }
       $article_count ++;
     }
 
 
-    if ($q->tstr[3] == 'au')
-    {
+    if ($q->tstr[3] == 'au') {
       $spb_ids = $ids;
       $spb_comments = $comments;
 
       // spb本番とau本番の日付を比較する
       $S3Module = new S3Module;
       $url = $S3Module->getUrl($picks_filename);
-      if ($bucket=="img-sportsbull-jp")
-      {
+      if ($bucket == "img-sportsbull-jp") {
         $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
       }
       $au_picks_xml = simplexml_load_file($url);
@@ -64,20 +57,20 @@ if ($q->get_dir() === 1) { // 編集
       $dates = [];
       $ids = [];
       $comments = [];
-      $blstarticle_id = (string)$au_picks_xml->articles->blstarticle->id;
+      $blstarticle_id = (string) $au_picks_xml->articles->blstarticle->id;
 
 
       $date_count = 0; // 配列管理用
       foreach ($au_picks_xml->articles as $articles) {
-        $dates[] = (string)$articles->attributes()->date;
+        $dates[] = (string) $articles->attributes()->date;
 
         $article_count = 0; // コメント配列管理用  日付変更でリセット
         foreach ($articles->article as $article) {
-          $ids[$date_count][] = (string)$article->id;
+          $ids[$date_count][] = (string) $article->id;
 
           foreach ($article->comments as $value) {
             foreach ($value as $comment) {
-              $comments[$date_count][$article_count][] = (string)$comment;
+              $comments[$date_count][$article_count][] = (string) $comment;
             }
           }
           $article_count++;
@@ -88,11 +81,10 @@ if ($q->get_dir() === 1) { // 編集
 
       // 1日ずらす
       // ブル本番とau本番のdate違うとき
-      $diff_spb_date =  mb_ereg_replace('[^0-9]', '', $date);
-      $diff_au_date =  mb_ereg_replace('[^0-9]', '', $dates[0]);
+      $diff_spb_date = mb_ereg_replace('[^0-9]', '', $date);
+      $diff_au_date = mb_ereg_replace('[^0-9]', '', $dates[0]);
 
-      if ($diff_spb_date != $diff_au_date)
-      {
+      if ($diff_spb_date > $diff_au_date) {
         // 最終日から作っていく
         for ($date_itr = 2; $date_itr > 0; $date_itr--) {
           $dates[$date_itr] = $dates[$date_itr - 1];
@@ -118,15 +110,23 @@ if ($q->get_dir() === 1) { // 編集
             $comments[0][$articles_itr][$comment_itr] = $spb_comments[$articles_itr][$comment_itr];
           }
         }
+      } elseif ($diff_spb_date == $diff_au_date) {
+        $japanese_date = explode('/', $date);
+        $japanese_date = $japanese_date[0] . '月' . $japanese_date[1] . '日';
+        $dates[0] = $japanese_date;
+        for ($articles_itr = 0; $articles_itr < 5; $articles_itr++) {
+          $ids[0][$articles_itr] = $spb_ids[$articles_itr];
+          for ($comment_itr = 0; $comment_itr < 3; $comment_itr++) {
+            $comments[0][$articles_itr][$comment_itr] = $spb_comments[$articles_itr][$comment_itr];
+          }
+
+        }
       }
-
     }
-
-
   } elseif ($q->get_file() === 1) { // 確認
     data_conf();
-
-  } elseif ($q->get_file() === 2) { // 保存
+  } elseif ($q->get_file() === 2) {
+    // 保存
 
     $S3Module = new S3Module;
 
@@ -137,8 +137,7 @@ if ($q->get_dir() === 1) { // 編集
     $dom = new DomDocument('1.0', 'UTF-8');
     $date = $dom->appendChild($dom->createElement('date'));
 
-    if ($q->tstr[3] == 'au')
-    {
+    if ($q->tstr[3] == 'au') {
       for ($date_itr = 0; $date_itr < 3; $date_itr++) {
         $articles = $date->appendChild($dom->createElement('articles'));
         $articles_date = $dom->createAttribute('date');
@@ -158,13 +157,13 @@ if ($q->get_dir() === 1) { // 編集
             $blstarticle = $articles->appendChild($dom->createElement('blstarticle'));
             $blstarticle_id = $blstarticle->appendChild($dom->createElement('id'));
             $blstarticle_id->appendChild(
-              $dom->createTextNode($post_blstarticle_id)
+                    $dom->createTextNode($post_blstarticle_id)
             );
           }
           $article = $articles->appendChild($dom->createElement('article'));
           $id = $article->appendChild($dom->createElement('id'));
           $id->appendChild(
-            $dom->createTextNode($post_id)
+                  $dom->createTextNode($post_id)
           );
 
           $comments = $article->appendChild($dom->createElement('comments'));
@@ -173,15 +172,12 @@ if ($q->get_dir() === 1) { // 編集
 
             $comment = $comments->appendChild($dom->createElement('comment'));
             $comment->appendChild(
-              $dom->createTextNode($post_comment)
+                    $dom->createTextNode($post_comment)
             );
           }
         }
       }
-
-    }
-    else // spb
-    {
+    } else { // spb
       $articles = $date->appendChild($dom->createElement('articles'));
       $articles_date = $dom->createAttribute('date');
       $articles_date->value = !empty($_POST['p_date0']) ? $_POST['p_date0'] : '-';
@@ -193,7 +189,7 @@ if ($q->get_dir() === 1) { // 編集
         $article = $articles->appendChild($dom->createElement('article'));
         $id = $article->appendChild($dom->createElement('id'));
         $id->appendChild(
-          $dom->createTextNode($post_id)
+                $dom->createTextNode($post_id)
         );
 
         $comments = $article->appendChild($dom->createElement('comments'));
@@ -202,9 +198,8 @@ if ($q->get_dir() === 1) { // 編集
 
           $comment = $comments->appendChild($dom->createElement('comment'));
           $comment->appendChild(
-            $dom->createTextNode($post_comment)
+                  $dom->createTextNode($post_comment)
           );
-
         }
       }
     }
@@ -216,9 +211,8 @@ if ($q->get_dir() === 1) { // 編集
     $archive_filename = str_replace('{date}', $_POST['p_date0'], $archive_filename);
 
     // xml/archives/1031picks.xml みたいな名前で保存する
-    $e =s3upload($tmp_filename, $archive_filename);
+    $e = s3upload($tmp_filename, $archive_filename);
     unlink($archive_filename);
-
   }
 }
 
