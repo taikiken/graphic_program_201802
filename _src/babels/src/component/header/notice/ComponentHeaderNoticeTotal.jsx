@@ -22,16 +22,17 @@ const React = self.React;
 
 /**
  * header - お知らせ「バッジ」出力します
+ * - vk flag true - polling しない
  * - 定期的に更新するために (@link Polling} - {@link Length}.interval 間隔で行います
  * - {@link ModelNoticeCount} Ajax 取得します
  * - {@link NoticeStatus} 件数を通知します
  */
 export default class ComponentHeaderNoticeTotal extends React.Component {
-  // static get propTypes() {
-  //   return {
-  //     total: React.PropTypes.number.isRequired,
-  //   };
-  // }
+  static get propTypes() {
+    return {
+      vk: React.PropTypes.bool.isRequired,
+    };
+  }
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
@@ -161,11 +162,13 @@ export default class ComponentHeaderNoticeTotal extends React.Component {
    * - {@link ModelNoticeCount} request 開始します
    */
   componentDidMount() {
-    const polling = this.polling;
-    polling.on(Polling.UPDATE, this.onUpdate);
-    polling.start();
-    // ---
-    this.model.start();
+    if (!this.props.vk) {
+      const polling = this.polling;
+      polling.on(Polling.UPDATE, this.onUpdate);
+      polling.start();
+      // ---
+      this.model.start();
+    }
   }
   /**
    * delegate - before unmount
@@ -185,6 +188,11 @@ export default class ComponentHeaderNoticeTotal extends React.Component {
    * @returns {?XML} `span.notice-num`
    */
   render() {
+    // vk flag 追加 - 2018-04-19
+    if (this.props.vk) {
+      return null;
+    }
+    // ---
     const { total } = this.state;
     // console.log('ComponentHeaderNoticeTotal.render', total);
     if (!total) {

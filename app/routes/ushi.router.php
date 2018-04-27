@@ -6,8 +6,6 @@ $app->group('/{slug:ushi}',  function () use($app) {
 
   $page = array(
     'title'              => '最大5,000円分の高級ブランド牛がもらえる！牛キャンペーン',
-    'site_name'          => 'スポーツブル (スポブル)',
-    'og_type'            => 'article',
     'og_title'           => '最大5,000円分の高級ブランド牛がもらえる！牛キャンペーン | '.$app->model->property('title'),
     'og_url'             => $app->model->property('site_url').'ushi/',
     'og_image'           => $app->model->property('site_url').'assets/images/ushi/ogp.png',
@@ -16,15 +14,14 @@ $app->group('/{slug:ushi}',  function () use($app) {
     'template'           => 'index',
     'template_classname' => 'ushi',
     'dir_name'           => 'ushi',
-    'ua'                 => $app->model->property('ua'),
   );
 
   // index
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app, $page) {
 
-    $args['path'] = $args;
-    $args['page'] = $page;
+    $app->model->property('path', $args);
+    $args['page'] = $app->model->set($page);
 
     if ( $app->model->property('ua') === 'desktop' ) :
       return $this->renderer->render($response, 'ushi/desktop/index.php', $args);

@@ -12,6 +12,7 @@
 import { SearchStatus } from '../../../event/SearchStatus';
 import { Scroll } from '../../../util/Scroll';
 import { Message } from '../../../app/const/Message';
+import VK from '../../../vk/VK';
 
 /**
  * [library] - Sagen
@@ -31,6 +32,16 @@ export default class SPComponentHeaderSearchOpener extends React.Component {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
+  /**
+   * React.propTypes
+   * - vk: since 2018-04-19 - vk header
+   * @returns {{vk: boolean}} React.propTypes
+   */
+  static get propTypes() {
+    return {
+      vk: React.PropTypes.bool.isRequired,
+    };
+  }
   /**
    * 検索フォームを閉じる時に scroll 値を復元します
    * @param {number} y target scroll top px value
@@ -102,7 +113,7 @@ export default class SPComponentHeaderSearchOpener extends React.Component {
     if (this.open) {
       // open -> close
       this.open = false;
-      this.body.removeClass( 'search-form-open' );
+      this.body.removeClass(`${VK.prefix(this.props.vk)}search-form-open`);
       this.status.close();
       // scroll 位置を復元する
       // Scroll.motion( this.y, 0.1, 0.025 );
@@ -112,7 +123,7 @@ export default class SPComponentHeaderSearchOpener extends React.Component {
       this.open = true;
       // scroll 位置を保存する
       this.y = Scroll.y;
-      this.body.addClass('search-form-open');
+      this.body.addClass(`${VK.prefix(this.props.vk)}search-form-open`);
       this.status.open();
     }
   }
@@ -123,7 +134,11 @@ export default class SPComponentHeaderSearchOpener extends React.Component {
    */
   render() {
     return (
-      <a className="head-search-opener" href="#" onClick={this.onClick}>
+      <a
+        className={`${VK.prefix(this.props.vk)}head-search-opener`}
+        href="#"
+        onClick={this.onClick}
+      >
         {Message.OPENER_SEARCH}
       </a>
     );

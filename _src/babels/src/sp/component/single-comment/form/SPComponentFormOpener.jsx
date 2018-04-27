@@ -103,7 +103,7 @@ export default class SPComponentFormOpener extends React.Component {
   }
   /**
    * 記事への「コメント」投稿用フォームを開くリンク / 投稿フォームを表示します
-   * @returns {XML} {@link SPCommentFormNode} / `div.comment-form-opener`
+   * @returns {XML} {@link SPComponentCommentForm} / `div.comment-form-opener`
    */
   render() {
     const { open } = this.state;

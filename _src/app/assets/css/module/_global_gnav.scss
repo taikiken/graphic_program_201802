@@ -1,0 +1,52 @@
+// global navigation
+%#{$prefix}gnav-sec {
+  // background: #111 url(/assets/images/common/gnav-bg.png) 0 0 repeat-x;
+  background-color: #0d1320;
+
+  ul {
+    width: $global-inner-width;
+    margin: 0 auto;
+    padding: 6px 0 8px;
+    letter-spacing: ls( inline-block );
+  }
+
+  li {
+    display: inline-block;
+    padding: 0 8px 0 6px;
+    background: url(/assets/images/common/gnav-bg.png) right center no-repeat;
+    text-align: center;
+    vertical-align: middle;
+    letter-spacing: normal;
+
+    &:last-child {
+      padding-right: 0;
+      background: none;
+    }
+  }
+
+  a {
+    display: block;
+    // max-height: 40px;
+    // line-height: 40px;
+    padding: 6px 0 6px;
+    // padding: 10px 8px 12px;
+    @include link-decoration(#fff, $highlight-secondary-color, none, none);
+    font-weight: bold;
+    font-size: fz(12);
+    white-space: nowrap;
+
+    &:hover {
+      padding-bottom: 4px;
+      border-bottom: 2px solid $highlight-secondary-color;
+      color: $highlight-secondary-color;
+    }
+  }
+
+  .current {
+    a {
+      padding-bottom: 4px;
+      border-bottom: 2px solid $highlight-secondary-color;
+      color: $highlight-secondary-color;
+    }
+  }
+}

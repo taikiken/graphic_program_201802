@@ -33,7 +33,7 @@ const React = self.React;
  *     - {@link ReactionNode}
  *     - {@link CommentFormNode}
  *   - {@link SPComponentCommentsChildReply}
- *     - {@link SPCommentNode}
+ *     - {@link SPComponentCommentsChildList}
  * - {@link ComponentCommentMoreView}
  * @since 2017-12-05
  */

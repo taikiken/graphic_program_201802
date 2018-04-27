@@ -22,6 +22,7 @@ import {User} from '../../app/User';
 
 // event
 import {UserStatus} from '../../event/UserStatus';
+import VK from '../../vk/VK';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -43,23 +44,15 @@ const ReactDOM = self.ReactDOM;
  * @constructor
  * @since 2017-12-08 - update element
  */
-const HeaderUserComponent = ({ signup, login }) => (
-  <div className="user">
-    <div className="user-signup-btn">
-      <a href={login} className="user-signup-btn--login">ログイン</a>
-      <a href={signup} className="user-signup-btn--signup">無料会員登録</a>
+const HeaderUserComponent = ({ signup, login, prefix }) => (
+  <div className={`${prefix}user`}>
+    <div className={`${prefix}user-signup-btn`}>
+      <a href={login} className={`${prefix}user-signup-btn--login`}>ログイン</a>
+      <a href={signup} className={`${prefix}user-signup-btn--signup`}>無料会員登録</a>
     </div>
   </div>
 );
 
-/*
-// old
-<div className="user">
-  <div className="btn-signup">
-    <a href={signup}>無料登録</a>&nbsp;/&nbsp;<a href={login}>ログイン</a>
-  </div>
-</div>
-*/
 /**
  * React.propTypes
  * @type {{signup: string, login: string}}
@@ -67,6 +60,15 @@ const HeaderUserComponent = ({ signup, login }) => (
 HeaderUserComponent.propTypes = {
   signup: React.PropTypes.string.isRequired,
   login: React.PropTypes.string.isRequired,
+  prefix: React.PropTypes.string,
+};
+
+/**
+ * React.defaultProps
+ * @type {{prefix: string}}
+ */
+HeaderUserComponent.defaultProps = {
+  prefix: '',
 };
 
 /**
@@ -78,9 +80,11 @@ export default class ViewHeaderUser extends View {
    * ログイン / 非ログイン でメニューを変更
    * @param {Element} element insert root element
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2-18-04-19 vk header - flag 追加
    */
-  constructor(element, option = {}) {
-    super(element, option);
+  constructor(element, option = {}, vk = false) {
+    super(element, option, vk);
     /**
      * bind 済み this.memberCallback
      * @type {Function}
@@ -128,19 +132,25 @@ export default class ViewHeaderUser extends View {
       if (member !== null) {
         this.dispose();
       }
-      const boundCallback = this._boundCallback;
-      member = new ViewHeaderMember(this.element);
-      this._member = member;
-      member.on(View.BEFORE_RENDER, boundCallback);
-      member.on(View.WILL_MOUNT, boundCallback);
-      member.on(View.DID_MOUNT, boundCallback);
-      member.on(View.ERROR_MOUNT, boundCallback);
-      member.on(View.UNDEFINED_ERROR, boundCallback);
-      member.on(View.EMPTY_ERROR, boundCallback);
-      member.on(View.RESPONSE_ERROR, boundCallback);
-      member.start();
+      // since 2018-04-20
+      // VK - login user メニュー無し
+      if (!this.vk) {
+        const boundCallback = this._boundCallback;
+        // @since 2018-04-19 vk flag 追加
+        member = new ViewHeaderMember(this.element, {}, this.vk);
+        // member = new ViewHeaderMember(this.element);
+        this._member = member;
+        member.on(View.BEFORE_RENDER, boundCallback);
+        member.on(View.WILL_MOUNT, boundCallback);
+        member.on(View.DID_MOUNT, boundCallback);
+        member.on(View.ERROR_MOUNT, boundCallback);
+        member.on(View.UNDEFINED_ERROR, boundCallback);
+        member.on(View.EMPTY_ERROR, boundCallback);
+        member.on(View.RESPONSE_ERROR, boundCallback);
+        member.start();
+      }
     } else {
-      // user menu
+      // not member - user menu
       this.render();
       this.dispose();
     }
@@ -149,36 +159,11 @@ export default class ViewHeaderUser extends View {
    * 非メンバー Dom を生成します
    */
   render() {
-    //
-    // let _this = this;
-    //
-    // let UserDom = React.createClass( {
-    //   render: function() {
-    //
-    //     return (
-    //       <div className="user">
-    //         <div className="btn-signup">
-    //           <a href={Url.signup()}>無料登録</a>&nbsp;/&nbsp;<a href={Url.login()}>ログイン</a>
-    //         </div>
-    //       </div>
-    //     );
-    //   },
-    //   componentDidMount: function() {
-    //
-    //     _this.executeSafely( View.DID_MOUNT );
-    //
-    //   }
-    // } );
-    //
-    // ReactDOM.render(
-    //   <UserDom />,
-    //   this.element
-    // );
-    // console.log('ViewHeaderUser.render -------------------');
     ReactDOM.render(
       <HeaderUserComponent
-        signup={Url.signup()}
-        login={Url.login()}
+        signup={Url.signup('', this.vk)}
+        login={Url.login(this.vk)}
+        prefix={VK.prefix(this.vk)}
       />,
       this.element,
     );

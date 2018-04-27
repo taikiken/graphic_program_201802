@@ -39,9 +39,11 @@ export default class ViewLogoutModal extends View {
    * @param {Element} element 親 Element
    * @param {?Function} [yesCallback=null] yes / ok click callback
    * @param {?Function} [noCallback=null] no / cancel click callback
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2-18-04-19 vk header - flag 追加
    */
-  constructor(element, yesCallback = null, noCallback = null) {
-    super( element );
+  constructor(element, yesCallback = null, noCallback = null, vk = false) {
+    super(element, {}, vk);
     /**
      * modal instance
      * @type {null|Object}

@@ -17,8 +17,9 @@ import View from '../../../view/View';
 import SPViewHeaderMember from './SPViewHeaderMember';
 
 // app
-import {User} from '../../../app/User';
-import {Url} from '../../../app/const/Url';
+import { User } from '../../../app/User';
+import { Url } from '../../../app/const/Url';
+import VK from '../../../vk/VK';
 
 // React
 /* eslint-disable no-unused-vars */
@@ -35,31 +36,45 @@ const ReactDOM = self.ReactDOM;
 /**
  * SP - 非ログインユーザー header area Element
  * - login / ユーザー登録リンクを出力します
+ * @param {string} prefix - selector prefix - vk 必要
  * @returns {XML} `div.user`
  * @constructor
  */
-export const SPHeaderNormalUserComponent = () => (
-  <div className="user">
-    <div className="preference">
-      <a href={Url.signupLogin()} className="preference-opener">
-        <span className="preference-avatar">&nbsp;</span>
+export const SPHeaderNormalUserComponent = ({ prefix }) => (
+  <div className={`${prefix}user`}>
+    <div className={`${prefix}preference`}>
+      <a
+        href={Url.signupLogin()}
+        className={`${prefix}preference-opener`}
+      >
+        <span className={`${prefix}preference-avatar`}>&nbsp;</span>
       </a>
     </div>
   </div>
 );
 
 /**
+ * React.propTypes
+ * @type {{prefix: string}}
+ */
+SPHeaderNormalUserComponent.propTypes = {
+  prefix: React.PropTypes.string.isRequired,
+};
+
+/**
  * SP header user 関連メニュー
  */
 export default class SPViewHeaderUser extends View {
   /**
-   * <p>SP header user 関連メニュー<br>
-   * ログイン / 非ログイン でメニューを変更</p>
+   * SP header user 関連メニュー
+   * - ログイン / 非ログイン でメニューを変更
    * @param {Element} element insert root element
    * @param {Object} [option={}] optional event handler
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2-18-04-19 vk header - flag 追加
    */
-  constructor(element, option = {}) {
-    super(element, option);
+  constructor(element, option = {}, vk = false) {
+    super(element, option, vk);
     /**
      * bind 済み this.memberCallback
      * @type {Function}
@@ -93,42 +108,31 @@ export default class SPViewHeaderUser extends View {
    * ログインユーザー
    */
   member() {
-    const headerMember = new SPViewHeaderMember(this.element);
-    this._member = headerMember;
+    // VK 表示しない
+    if (!this.vk) {
+      const headerMember = new SPViewHeaderMember(this.element, {}, this.vk);
+      this._member = headerMember;
 
-    const boundCallback = this._boundCallback;
-    headerMember.on(View.BEFORE_RENDER, boundCallback);
-    headerMember.on(View.WILL_MOUNT, boundCallback);
-    headerMember.on(View.DID_MOUNT, boundCallback);
-    headerMember.on(View.ERROR_MOUNT, boundCallback);
-    headerMember.on(View.UNDEFINED_ERROR, boundCallback);
-    headerMember.on(View.EMPTY_ERROR, boundCallback);
-    headerMember.on(View.RESPONSE_ERROR, boundCallback);
-    headerMember.start();
+      const boundCallback = this._boundCallback;
+      headerMember.on(View.BEFORE_RENDER, boundCallback);
+      headerMember.on(View.WILL_MOUNT, boundCallback);
+      headerMember.on(View.DID_MOUNT, boundCallback);
+      headerMember.on(View.ERROR_MOUNT, boundCallback);
+      headerMember.on(View.UNDEFINED_ERROR, boundCallback);
+      headerMember.on(View.EMPTY_ERROR, boundCallback);
+      headerMember.on(View.RESPONSE_ERROR, boundCallback);
+      headerMember.start();
+    }
   }
   /**
    * 非ログインユーザー
    */
   user() {
-    // // 非ログインユーザー
-    // let UserDom = React.createClass( {
-    //   render: function() {
-    //     return (
-    //       <div className="user">
-    //         <div className="preference">
-    //           <a href={Url.signupLogin()} className="preference-opener"><span className="preference-avatar">&nbsp;</span></a>
-    //         </div>
-    //       </div>
-    //     );
-    //   }
-    // } );
-    //
-    // ReactDOM.render(
-    //   <UserDom/>,
-    //   this.element
-    // );
+    // 非ログインユーザー
     ReactDOM.render(
-      <SPHeaderNormalUserComponent />,
+      <SPHeaderNormalUserComponent
+        prefix={VK.prefix(this.vk)}
+      />,
       this.element
     );
   }
@@ -148,7 +152,8 @@ export default class SPViewHeaderUser extends View {
       // token はあるけどユーザー情報が取得できなかった
       // 処理を止めて一般ユーザー扱いにする
       this.dispose();
-      this.render();
+      // this.render();
+      this.user();
     }
   }
   /**

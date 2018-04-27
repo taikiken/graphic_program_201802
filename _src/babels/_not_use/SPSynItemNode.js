@@ -22,6 +22,8 @@ let React = self.React;
 
 /**
  * side menu login / logout 切り替えメニュー
+ * @deprecated instead use {@link SPComponentSynItem}
+ * TODO - remove
  * @type {ReactClass}
  */
 export let SPSynItemNode = React.createClass( {
