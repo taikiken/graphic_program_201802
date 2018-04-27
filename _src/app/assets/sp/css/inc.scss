@@ -158,6 +158,9 @@ html, body {
 @import "module/global_footer";
 .SPBL_foot-sec {
   @extend %foot-sec;
+
+  // overwrite
+  padding-top: 0;
 }
 
 
