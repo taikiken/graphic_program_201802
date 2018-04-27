@@ -41,6 +41,7 @@
         <li><a href="/editdm/tabs">メニュータブ設定</a></li>
         <li><a href="/editdm/bottom_tabs_category">競技タブ設定</a></li>
         <li><a href="/editdm/bottom_tabs_livescore">速報タブ設定</a></li>
+        <li><a href="/editdm/sidemenu/edit">サイドメニュー設定</a></li>
   <?php } ?>
 <?php }else{ ?>
     <li><a href="/editdm/photo/">フォトアルバム</a></li>

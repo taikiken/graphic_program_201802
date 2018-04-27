@@ -652,6 +652,16 @@ class ViewModel {
     $res = $this->db->get_partners();
     return $res;
   }
+
+
+    /**
+     * 下タブに表示する内容を取得する
+     **/
+  public function get_bottomtabs() {
+    $res = file_get_contents($this->default['file_get_url'].'/api/v1/bottomtab');
+    $res = json_decode($res,true);
+    return $res['response'];
+  }
 }
 
 ?>

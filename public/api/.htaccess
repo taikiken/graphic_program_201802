@@ -116,3 +116,6 @@ RewriteRule ^download/([0-9]+)/([rawx0-9]+) /api/tool/img_download.php?id=$1&siz
 
 #下タブ
 RewriteRule ^v1/bottomtab/nowdo /api/ver1/read/nowdo_url.php
+#BUTTOM_TAB
+RewriteRule ^v1/bottomtab /api/ver1/read/bottomtab.php [L]
+
