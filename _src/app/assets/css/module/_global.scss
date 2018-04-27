@@ -821,16 +821,26 @@ textarea {
     } //.menu-container
   } //.side-menu
 
-  .side-menu + .widget-ranking {
+  .side-menu + .widget-ranking,
+  .side-menu + #widget-ranking-container {
     margin-top: 0;
+
+    .widget-ranking {
+      margin-top: 0;
+    }
 
     .widget-ranking-heading {
       border-top: none;
     }
   }
 
-  .side-menu + .widget-recommend {
+  .side-menu + .widget-recommend,
+  .side-menu + #widget-recommend-container {
     margin-top: 0;
+
+    .widget-recommend {
+      margin-top: 0;
+    }
 
     .widget-ranking-recommend {
       border-top: none;
