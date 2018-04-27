@@ -171,3 +171,4 @@ ut_devnew-201801152129.dump
 /tasks/_vendor.coffee
 /tasks/_sprite.coffee
 /tasks-sp/_sp-webpack.coffee
+/_src/babels/dest/vk_spbl_header.bundle.js
