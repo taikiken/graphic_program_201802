@@ -180,7 +180,7 @@ $app->group('/inc', function () use ($app) {
 
   // file
   // ==============================
-  $this->get('/assets/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}/{file:inc.css}[/]',  function ($request, $response, $args) use ($app) {
+  $this->get('/assets/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}/{file:inc.css|inc.js}[/]',  function ($request, $response, $args) use ($app) {
 
     $path = '';
     if ( $args['device'] === 'mobile' ) :
