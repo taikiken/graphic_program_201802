@@ -42,7 +42,7 @@ var getJson = function getJson() {
 	.get(api)
 	.end(function (err, res) {
 		if(!res || err) {
-			var loadErrorImg = '<img src="' + data.live.error.large + '">';
+			var loadErrorImg = `<img src="${data.live.error.large}">`;
 			result.innerHTML = loadErrorImg;
 		} else {
 			var json = res.body;
@@ -64,7 +64,7 @@ var getJson = function getJson() {
 					videoLoaded = true;
 				}
 			} else {
-				var liveBeforeImg = '<img src="' + data.live.alt.large + '">';
+				var liveBeforeImg = `<img src="${data.live.alt.large}">`;
 				flg = data.live.isPlaying;
 				result.innerHTML = liveBeforeImg;
 				if (!flg) {
@@ -82,10 +82,10 @@ var getJson = function getJson() {
 };
 
 var mountVideoDom = function mountVideoDom() {
-	var playerHTML = '<video id="myPlayerID" class="video-js" data-video-id="' + data.live.video.id + '" data-account="' + accountId + '" data-player="' + playerId + '" data-embed="default" data-application-id controls >';
+	var playerHTML = `<video id="myPlayerID" class="video-js" poster="${data.live.alt.large}" data-video-id="${data.live.video.id}" data-account="${accountId}" data-player="${playerId}" data-embed="default" data-application-id controls >`;
 	result.innerHTML = playerHTML;
 	var scriptTag = document.createElement('script');
-	scriptTag.src = '//players.brightcove.net/' + accountId + '/' + playerId + '_default/index.min.js';
+	scriptTag.src = `//players.brightcove.net/${accountId}/${playerId}_default/index.min.js`;
 	scriptTag.id = 'videoScript';
 	document.body.appendChild(scriptTag);
 	scriptTag.onload = function () {
@@ -93,7 +93,7 @@ var mountVideoDom = function mountVideoDom() {
 		videojs('myPlayerID').ready(function () {
 			var myPlayer = this;
 			myPlayer.on('error', function () {
-				var errorHTML = '<img src="' + data.live.error.large + '">';
+				var errorHTML = `<img src="${data.live.error.large}">`;
 				result.innerHTML = errorHTML;
 				videoLoaded = false;
 			});

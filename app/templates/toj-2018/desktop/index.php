@@ -214,15 +214,19 @@ include_once __DIR__ . '/../../_env.php';
 // ==============================
   $BREADCRUMB = array(
     array(
-      'label' => 'RED BULL CRASHED ICE EDMONTON ライブ配信',
+      'label' => $page['title'],
       'path'  => '/toj-2018/'
     ),
   );
 ?>
 
+
+<footer id="footer-container" class="foot-sec">
+    <?php include_once __DIR__.'/../../desktop/_footer-sec-inner.php'; ?>
+  </footer><!-- /.foot-sec -->
 <?php
 
-include_once __DIR__."/../../desktop/_footer.php";
+
 include_once __DIR__."/../../_debug.php";
 
 ?>

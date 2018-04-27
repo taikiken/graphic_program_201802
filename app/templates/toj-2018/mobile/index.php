@@ -133,7 +133,7 @@
   // ==============================
     $BREADCRUMB = array(
       array(
-        'label' => 'RED BULL BOX CART RACE 2017 ライブ配信',
+        'label' => $page['title'],
         'path'  => '/red-bull-box-cart-2017/'
       ),
     );
@@ -165,7 +165,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script src="/assets/js/red-bull-crashed-ice-2018.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/toj-2018.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script>
   var schedule = $('.js-scheduleToggle');
