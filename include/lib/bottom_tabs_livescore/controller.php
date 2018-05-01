@@ -26,14 +26,14 @@ if($q->get_dir()===0){
 
         //Rowが無い
         if($p["count"]==0){
-            $sv[$sn[]="n"]=1;
+            $sv[$sn[]="sort_no"]=1;
 
         //一覧の最初に追加
-        } elseif ($_POST["POSITION"]!=1) {
+        } elseif ($_POST["POSITION"]==0) {
             $sql="update ".$TABLE." set sort_no=(sort_no+1) ".$WHERE;
             $o->query($sql);
             $sv[$sn[]="sort_no"]=1;
-
+        //一覧の最後に追加
         } else {
             $sv[$sn[]="sort_no"]=sprintf("(select max(sort_no)+1 as n from %s %s)",$TABLE,$WHERE);
         }
