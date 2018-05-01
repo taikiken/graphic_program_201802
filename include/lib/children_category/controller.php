@@ -21,7 +21,13 @@ if($q->get_dir()===0){
 
         data_sql();
 
-        $sql = "select count(*) from ".$TABLE.";";
+      $sql = <<<CLD
+SELECT count({$TABLE}.id)
+FROM {$TABLE}
+  INNER JOIN {$TABLE2} ON {$TABLE}.id = parent_tab_id
+WHERE type = {$type}
+CLD;
+
         $o->query($sql);
         $p=$o->fetch_array();
 
