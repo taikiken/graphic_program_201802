@@ -25,17 +25,17 @@ function put_json($file,$data){
 $d=get_contents($url);
 $d=unserialize($d);
 
-$y["response"]["lastupdate"]=$d["lastupdate"];
-$y["response"]["live"]["isPlaying"]=$d["isPlaying"]==="0"?false:true;
-$y["response"]["live"]["interval"]=(int)mb_convert_kana($d["interval"],"a");
+$y["lastupdate"]=$d["lastupdate"];
+$y["live"]["isPlaying"]=$d["isPlaying"]==="0"?false:true;
+$y["live"]["interval"]=(int)mb_convert_kana($d["interval"],"a");
 
-$y["response"]["live"]["video"]["id"]=$d["video-id"];
+$y["live"]["video"]["id"]=$d["video-id"];
 
-$y["response"]["live"]["alt"]["large"]=$d["alt-large"];
-$y["response"]["live"]["alt"]["medium"]=$d["alt-medium"];
+$y["live"]["alt"]["large"]=$d["alt-large"];
+$y["live"]["alt"]["medium"]=$d["alt-medium"];
 
-$y["response"]["live"]["error"]["large"]=$d["error-large"];
-$y["response"]["live"]["error"]["medium"]=$d["error-medium"];
+$y["live"]["error"]["large"]=$d["error-large"];
+$y["live"]["error"]["medium"]=$d["error-medium"];
 
 put_json(sprintf("%slive.json",$bucket),$y);
 
