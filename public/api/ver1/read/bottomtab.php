@@ -66,10 +66,10 @@ SQL;
                 $tmp_relationList[$f['parent_id']]['child'][] =[
                         'dispName'  => $f['name'],
                         'unread'    => false,
-                        'icon'      => isset($f['icon']) ? $icon_server_path.$f['icon'] : '',
-                        'icon_sp'      => isset($f['icon_sp']) ? $icon_server_path.$f['icon_sp'] : '',
-                        'icon_ios'      => isset($f['icon_ios']) ? $icon_server_path.$f['icon_ios'] : '',
-                        'icon_android'      => isset($f['icon_android']) ? $icon_server_path.$f['icon_android'] : '',
+                        'icon'      => !empty($f['icon']) ? $icon_server_path.$f['icon'] : '',
+                        'icon_sp'      => !empty($f['icon_sp']) ? $icon_server_path.$f['icon_sp'] : '',
+                        'icon_ios'      => !empty($f['icon_ios']) ? $icon_server_path.$f['icon_ios'] : '',
+                        'icon_android'      => !empty($f['icon_android']) ? $icon_server_path.$f['icon_android'] : '',
                         'link'      => $f['link']
                     ];
             }
@@ -127,10 +127,10 @@ SQL;
                 $tmp_relationList[$f['parent_id']]['child'][] =[
                         'dispName'  => $f['name'],
                         'unread'    => false,
-                        'icon'      => isset($f['icon']) ? $icon_server_path.$f['icon'] : '',
-                        'icon_sp'      => isset($f['icon_sp']) ? $icon_server_path.$f['icon_sp'] : '',
-                        'icon_ios'      => isset($f['icon_ios']) ? $icon_server_path.$f['icon_ios'] : '',
-                        'icon_android'      => isset($f['icon_android']) ? $icon_server_path.$f['icon_android'] : '',
+                        'icon'      => !empty($f['icon']) ? $icon_server_path.$f['icon'] : '',
+                        'icon_sp'      => !empty($f['icon_sp']) ? $icon_server_path.$f['icon_sp'] : '',
+                        'icon_ios'      => !empty($f['icon_ios']) ? $icon_server_path.$f['icon_ios'] : '',
+                        'icon_android'      => !empty($f['icon_android']) ? $icon_server_path.$f['icon_android'] : '',
                         'link'      => $f['link']
                     ];
             }
