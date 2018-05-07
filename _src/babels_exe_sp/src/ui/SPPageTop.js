@@ -51,7 +51,7 @@ export default class SPPageTop {
    */
   init() {
     const element = Dom.pageTop();
-    // resposive 残骸で pageTop が 2 Element 存在することがある
+    // responsive 残骸で pageTop が 2 Element 存在することがある
     // #js-page_top を sp は優先にする
     // @since 2017-10-23
     const pagetop = Dom.jsPageTop();

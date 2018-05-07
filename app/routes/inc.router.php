@@ -10,7 +10,7 @@ $app->group('/inc', function () use ($app) {
 
   // head
   // ==============================
-  $this->get('/{parts:all|head|header|footer}/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}[/]',  function ($request, $response, $args) use ($app) {
+  $this->get('/{parts:all|head|header|footer|vk}/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}[/]',  function ($request, $response, $args) use ($app) {
 
     // ref. app/models/view.model.php
     $conditional = $app->model->property('conditional');
@@ -18,8 +18,8 @@ $app->group('/inc', function () use ($app) {
     // parts
     // ------------------------------
     switch ($args['parts']) :
-      case 'head':
 
+      case 'head':
         $conditional = array(
           'html_start'       => false,
           'head'             => true,
@@ -47,8 +47,8 @@ $app->group('/inc', function () use ($app) {
           'footer_script'    => false,
           'html_end'         => false,
         );
-
         break;
+
       case 'header':
         $conditional = array(
           'html_start'       => false,
@@ -78,8 +78,8 @@ $app->group('/inc', function () use ($app) {
           'footer_script'    => false,
           'html_end'         => false,
         );
-
         break;
+
       case 'footer':
         $conditional = array(
           'html_start'       => false,
@@ -111,11 +111,11 @@ $app->group('/inc', function () use ($app) {
         break;
 
       default:
-      $conditional = array(
-        'header_appbnr' => false,
-        'whole'         => false,
-        'announce'      => false,
-      );
+        $conditional = array(
+          'header_appbnr' => false,
+          'whole'         => false,
+          'announce'      => false,
+        );
 
     endswitch;
 
@@ -127,6 +127,14 @@ $app->group('/inc', function () use ($app) {
       case 'inhigh':
         break;
       case 'vk':
+        $conditional['head_sagen']    = false;
+        $conditional['head_icon']     = false;
+        $conditional['head_seo']      = false;
+        $conditional['head_ogp']      = false;
+        $conditional['head_env']      = false;
+        $conditional['head_bottom']   = false;
+        $conditional['footer_script'] = false;
+        $conditional['footer_modal']  = false;
         break;
       default:
     endswitch;
@@ -172,13 +180,14 @@ $app->group('/inc', function () use ($app) {
 
   // file
   // ==============================
-  $this->get('/assets/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}/{file:inc.css}[/]',  function ($request, $response, $args) use ($app) {
+  $this->get('/assets/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}/{file:inc.css|inc.js}[/]',  function ($request, $response, $args) use ($app) {
 
     $path = '';
     if ( $args['device'] === 'mobile' ) :
       $path = 'sp/';
     endif;
 
+    // css
     if ( $args['file'] === 'inc.css' ) :
       $file = @file_get_contents($app->model->property('site_url').'assets/'.$path.'css/inc.css');
 
@@ -201,6 +210,19 @@ $app->group('/inc', function () use ($app) {
 
         return $response->withStatus(200)
                 ->withHeader('Content-Type', 'text/css')
+                ->write($file);
+      endif;
+
+    endif;
+
+
+    // js
+    if ( $args['file'] === 'inc.js' ) :
+      $file = @file_get_contents($app->model->property('site_url').'assets/js/vk_spbl_header.bundle.js');
+
+      if ( $file ) :
+        return $response->withStatus(200)
+                ->withHeader('Content-Type', 'application/javascript')
                 ->write($file);
       endif;
 
