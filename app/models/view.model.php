@@ -68,6 +68,7 @@ class ViewModel {
 
     // post
     'category'           => array(),
+    'directory'          => '', // 最初の階層
     'post'               => array(),
 
     // layout

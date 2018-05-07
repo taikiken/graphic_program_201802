@@ -138,9 +138,19 @@ endif;
 <?php endif; ?>
 
 
-<?php if ( $page['conditional']['footer_script'] ) :
-  include __DIR__.'/_footer-bottom.php';
-endif; ?>
+<?php
+if ( $page['conditional']['footer_script'] ) :
+  include_once __DIR__.'/_footer-script.php';
+endif;
+?>
+
+
+<?php
+// VK用script
+if ( $page['template'] === 'inc' && $page['directory'] === 'vk' ) :
+  include_once __DIR__.'./../_footer_vk_script.php';
+endif;
+?>
 
 
 <?php if ( $page['conditional']['html_end'] ) : ?>

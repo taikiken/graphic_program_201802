@@ -13,6 +13,7 @@ import { ErrorMessage } from '../../data/ErrorMessage';
 import { SearchStatus } from '../../event/SearchStatus';
 import { Url } from '../../app/const/Url';
 import { Message } from '../../app/const/Message';
+import VK from '../../vk/VK';
 // React
 /**
  * [library] - React
@@ -28,22 +29,26 @@ export default class ComponentHeaderSearchForm extends React.Component {
   // ---------------------------------------------------
   /**
    * React.propTypes
-   * @returns {{listen: boolean, show: boolean}} React.propTypes
+   * - vk: since 2018-04-19 - vk header
+   * @returns {{listen: boolean, show: boolean, vk: boolean}} React.propTypes
    */
   static get propTypes() {
     return {
       listen: React.PropTypes.bool,
       show: React.PropTypes.bool,
+      vk: React.PropTypes.bool,
     };
   }
   /**
    * React.defaultProps
-   * @returns {{listen: boolean, show: boolean}} listen: false, show: true
+   * - vk: since 2018-04-19 - vk header
+   * @returns {{listen: boolean, show: boolean, vk: boolean}} listen: false, show: true
    */
   static get defaultProps() {
     return {
       listen: false,
       show: true,
+      vk: false,
     };
   }
   // ---------------------------------------------------
@@ -133,7 +138,7 @@ export default class ComponentHeaderSearchForm extends React.Component {
       this.errors.keyword.message = '***';
       this.setState({ error: true });
     } else {
-      location.href = Url.search(this.state.keyword);
+      location.href = Url.search(this.state.keyword, this.props.vk);
     }
   }
   /**
@@ -192,13 +197,14 @@ export default class ComponentHeaderSearchForm extends React.Component {
     if (!show) {
       return null;
     }
-
-    const { listen } = this.props;
-    const errorClass = this.errors.keyword.error ? 'error' : '';
+    const { listen, vk } = this.props;
+    const prefix = VK.prefix(vk);
+    const errorClass = this.errors.keyword.error ? `${prefix}error` : '';
+    const enableClass = enable ? `${prefix}${enable}` : '';
 
     return (
       <div
-        className={`head-search form-parts ${errorClass} ${enable}`}
+        className={`${prefix}head-search ${prefix}form-parts ${errorClass} ${enableClass}`}
       >
         <form onSubmit={this.onSubmit}>
           <input

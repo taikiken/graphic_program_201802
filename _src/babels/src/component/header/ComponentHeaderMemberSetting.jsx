@@ -12,7 +12,7 @@
 import { LogoutStatus } from '../../event/LogoutStatus';
 import { CommentStatus } from '../../event/CommentStatus';
 import View from '../../view/View';
-import ViewHeaderMemberNotice from '../../view/header/ViewHeaderMemberNotice';
+// import ViewHeaderMemberNotice from '../../view/header/ViewHeaderMemberNotice';
 import { User } from '../../app/User';
 import { Loc } from '../../util/Loc';
 import Env from '../../app/Env';
@@ -35,7 +35,13 @@ export default class ComponentHeaderMemberSetting extends React.Component {
   // ---------------------------------------------------
   /**
    * React.propTypes
-   * @returns {{userName: string, icon: string, safely: function, did: function}}
+   * @returns {{
+   *    userName: string,
+   *    icon: string,
+   *    safely: function,
+   *    did: function,
+   *    vk: boolean
+   * }}
    * React.propTypes
    */
   static get propTypes() {
@@ -44,6 +50,7 @@ export default class ComponentHeaderMemberSetting extends React.Component {
       icon: React.PropTypes.string.isRequired,
       safely: React.PropTypes.func.isRequired,
       did: React.PropTypes.func.isRequired,
+      vk: React.PropTypes.bool.isRequired,
     };
   }
   // ---------------------------------------------------
@@ -94,11 +101,35 @@ export default class ComponentHeaderMemberSetting extends React.Component {
      * @type {function}
      * */
     this.onClick = this.onClick.bind(this);
+    /**
+     * bound onBodyClick
+     * @type {any}
+     */
     this.onBodyClick = this.onBodyClick.bind(this);
+    /**
+     * bound onLogoutClick
+     * @type {any}
+     */
     this.onLogoutClick = this.onLogoutClick.bind(this);
+    /**
+     * bound onOk
+     * @type {any}
+     */
     this.onOk = this.onOk.bind(this);
+    /**
+     * bound onCancel
+     * @type {any}
+     */
     this.onCancel = this.onCancel.bind(this);
+    /**
+     * bound onOtherModalOpen
+     * @type {any}
+     */
     this.onOtherModalOpen = this.onOtherModalOpen.bind(this);
+    /**
+     * `div.notice-container`
+     * @type {?Element}
+     */
     this.noticeElement = null;
   }
   // ---------------------------------------------------
@@ -205,13 +236,19 @@ export default class ComponentHeaderMemberSetting extends React.Component {
   componentDidMount() {
     const { safely, did } = this.props;
     safely(View.DID_MOUNT);
-    did();
-    // ---
-    const noticeElement = this.noticeElement;
-    if (noticeElement) {
-      const notice = new ViewHeaderMemberNotice(noticeElement);
-      notice.start();
+    // 判定追加する - 2018-04-19
+    if (did) {
+      did();
     }
+    // ---
+    // 2018-04-18 トルツメ - display: none になってる
+    // const noticeElement = this.noticeElement;
+    // if (noticeElement) {
+    //   const notice = new ViewHeaderMemberNotice(noticeElement, {}, this.props.vk);
+    //   // const notice = new ViewHeaderMemberNotice(noticeElement);
+    //   notice.start();
+    // }
+    // ---
     const commentStatus = this.commentStatus;
     commentStatus.off(CommentStatus.COMMENT_DELETE_MODAL_OPEN, this.onOtherModalOpen);
     commentStatus.on(CommentStatus.COMMENT_DELETE_MODAL_OPEN, this.onOtherModalOpen);
@@ -238,8 +275,9 @@ export default class ComponentHeaderMemberSetting extends React.Component {
    * */
   render() {
     const { userName, icon, open } = this.state;
-    const iconImg = Safety.image(icon, Empty.USER_EMPTY);
-    const loggedIn = Safety.same(iconImg, Empty.USER_EMPTY);
+    // vk 絶対パス - 2018-04-19
+    const iconImg = `${Url.host}${Safety.image(icon, Empty.USER_EMPTY)}`;
+    const loggedIn = Safety.same(iconImg, `${Url.host}${Empty.USER_EMPTY}`);
     // console.log('ComponentHeaderMemberSetting.render', userName, icon, open);
     return (
       <div className="user">
@@ -260,8 +298,14 @@ export default class ComponentHeaderMemberSetting extends React.Component {
           </a>
           <nav className="preference-menu">
             <ul className="dropMenu">
+              {/*
+              2018-04-19 トルツメ - display: none になってた
+              first-child 設定だったので表示させる
               <li className="dropMenu-item"><a className="dropMenu-link" href={Url.mypage()}>ブックマーク<br />アクティビティ</a></li>
-              <li className="dropMenu-item"><a className="dropMenu-link" href={Url.settings()}>設定</a></li>
+              url だけ `#` に変えておく
+              */}
+              <li className="dropMenu-item"><a className="dropMenu-link" href="#">ブックマーク<br />アクティビティ</a></li>
+              <li className="dropMenu-item"><a className="dropMenu-link" href={Url.settings('', this.props.vk)}>設定</a></li>
               <li className="dropMenu-item"><a className="dropMenu-link" href="#" onClick={this.onLogoutClick}>ログアウト</a></li>
             </ul>
           </nav>

@@ -94,7 +94,7 @@ html, body {
 
 @import "module/global_gnav";
 .SPBL_gnav-sec {
-  @extend %gnav-sec;
+  @extend %SPBL_gnav-sec;
 }
 
 @import "module/global_footer";

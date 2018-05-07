@@ -58,12 +58,16 @@ endif;
     <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
   <?php endif; ?>
 
-  <?php if ($page['conditional']['header']) : ?>
-    <?php # Syn. require module ?>
-    <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/synapse.js?v=<?php echo $page['version']; ?>"></script>
-    <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
-    <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
-  <?php endif; // end of Syn. ?>
+  <?php # Syn. require module ?>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/synapse.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
+  <?php // end of Syn. ?>
+
+<?php endif; ?>
+
+
+<?php if ( $page['conditional']['head_bottom'] ) : ?>
 
   <?php
   // app webview を UA 判定する JS を追加します - `app_ua_detector.bundle.js`
@@ -84,14 +88,8 @@ endif;
   ?>
   <script src="<?php echo $page['site_url_uts']; ?>/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
+  <?php include_once __DIR__."/../_head_bottom.php"; ?>
 <?php endif; ?>
-
-
-<?php
-if ( $page['conditional']['head_bottom'] ) :
-  include_once __DIR__."/../_head_bottom.php";
-endif;
-?>
 
 
 <?php if ( $page['conditional']['head_video'] ) :
@@ -132,7 +130,7 @@ endif;
 
 <?php if ( $page['conditional']['header'] ) : ?>
 <?php if ( $page['conditional']['header_appbnr'] ) : ?>
-<div id="js-header-appbnr-container" class="SPBL_common header-appbnr-container">
+<div id="<?php echo $page['html_prefix']; ?>js-header-appbnr-container" class="SPBL_common header-appbnr-container">
   <div class="header-appbnr">
     <div class="header-appbnr-link">
       <?php
@@ -164,7 +162,7 @@ endif;
       <h1><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a></h1>
 
       <div id="<?php echo $page['html_prefix']; ?>menu-opener" class="<?php echo $page['html_prefix']; ?>menu-opener">
-        <a id="<?php echo $page['html_prefix']; ?>side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
+        <a id="<?php echo $page['html_prefix']; ?>side-menu-toggle" href="#<?php echo $page['html_prefix']; ?>side-menu-container"><span></span><span></span><span></span></a>
       </div>
 
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-inner-right">

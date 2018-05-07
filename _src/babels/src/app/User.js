@@ -11,24 +11,21 @@
  */
 
 // net
-import {Cookie} from '../net/Cookie';
+import { Cookie } from '../net/Cookie';
 
 // event
 // import {Env} from './Env';
-import {UserStatus} from '../event/UserStatus';
+import { UserStatus } from '../event/UserStatus';
 
 // data
-import {Safety} from '../data/Safety';
-
-//
-// let _symbol = Symbol();
-// // let _sign = false;
+import { Safety } from '../data/Safety';
 
 /**
  * ログインユーザー情報 - {@link User}
  * @type {?UserDae}
  * @private
  * @since 2016-11-05
+ * @since 2018-04-19 val header - sub domain 取得可能な cookie set
  */
 let information = null;
 
@@ -37,19 +34,6 @@ let information = null;
  * - 全てstaticです
  */
 export class User {
-  // /**
-  //  * static class です, instance を作成しません
-  //  * @param {Symbol} target Singleton を実現するための private symbol
-  //  */
-  // constructor( target ) {
-  //
-  //   if ( _symbol !== target ) {
-  //
-  //     throw new Error( 'User is static Class. not use new User().' );
-  //
-  //   }
-  //
-  // }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
@@ -90,8 +74,10 @@ export class User {
   // ---------------------------------------------------
   /**
    * ログイン設定をします
+   * - since 2018-04-19 subdomain 取得可能なように domain 指定する
    * @param {string} token 開発中の引数はオプション扱いです
    * @return {boolean} login が成功したかを返します
+   * @since 2018-04-19 vk header - domain 指定 `.sportsbull.jp`
    */
   static login(token) {
     // token = Safety.string(token, '');
@@ -104,7 +90,8 @@ export class User {
       return false;
     }
     // save
-    const result = Cookie.save(token);
+    // @since 2018-04-19 subdomain 取得可能なように domain 指定する
+    const result = Cookie.save(token, Cookie.TARGET, new Date(Date.now() + (1000 * 60 * 60 * 24 * 90)), '/', Cookie.COOKIE_DOMAIN);
     // console.log('User.login ', result, token);
     User.sign = result;
     return result;
@@ -114,7 +101,10 @@ export class User {
    * - token を cookie から削除します
    */
   static logout() {
+    // ドメイン指定なしcookieを削除
     Cookie.remove(Cookie.TARGET);
+    // ドメイン指定ありcookieを削除
+    Cookie.remove(Cookie.TARGET, '/', Cookie.COOKIE_DOMAIN);
     User.sign = false;
   }
   /**
@@ -123,7 +113,7 @@ export class User {
    */
   static init() {
     const token = User.token;
-    // console.log( `user init token [${token !== ''}]` );
+    // console.log(`user init token [${token !== ''}]`);
     if (token === null || typeof token === 'undefined' || token === '') {
       User.sign = false;
     } else {
