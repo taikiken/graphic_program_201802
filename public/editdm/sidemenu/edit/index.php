@@ -20,13 +20,8 @@ if (isset($_POST['sidemenu']) === false) {
         $bottomtab = file_get_contents('http://' . $servername . '/api/v1/bottomtab');
         $tmp_json = json_decode($bottomtab, true);
 
-        //下タブの
+        //下タブの子を取得
         $childs = [];
-        $type = 0;
-        foreach ($childs as $key => $value) {
-
-        }
-
         foreach ($tmp_json['response'] as $k => $v) {
             //response
             if(isset($v['parent'])){
