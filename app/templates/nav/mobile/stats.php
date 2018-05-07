@@ -195,6 +195,9 @@ if (isset($tab_response) && isset($tab_response['livescore']) && is_array($tab_r
     </section><!-- /.main-sec -->
   </div>
 </div><!-- /.body-sec -->
+
+<div id='div-gpt-ad-1514446255569-0'></div>
+
 <?php
 endif;
 // eof - 出力条件 [A]

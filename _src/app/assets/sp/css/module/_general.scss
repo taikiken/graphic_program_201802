@@ -919,6 +919,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: (100/2)+px;
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #fff;
@@ -979,8 +980,8 @@
     i {
       display: flex;
       align-items: center;
-      width: (60/2)+px;
-      height: (60/2)+px;
+      width: (44/2)+px;
+      height: (44/2)+px;
       margin-right: auto;
       margin-left: auto;
 
@@ -1034,7 +1035,20 @@
   //   }
   // }
 
+  // hide webview
+  .undotsushin-ios &,
+  .undotsushin-android & {
+    display: none !important;
+  }
 }  //.nadir_tab
+
+// 下タブがある時、copyrightが隠れないよう .nadir_tab-active を追加してページ最下部に余白を確保
+// cf. https://aws-plus.backlog.jp/view/UNDO_SPBL-432#comment-1196443752
+// cf git. https://github.com/undotsushin/undotsushin/commit/7bf04cd1058569f13b509b9ca6de66c54288c1d4
+
+.nadir_tab-active.whole {
+  padding-bottom: 50px;
+}
 
 
 

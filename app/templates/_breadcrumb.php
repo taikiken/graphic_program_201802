@@ -12,7 +12,7 @@ if ( !isset($BREADCRUMB) ) :
     $BREADCRUMB = array(
       array(
         'label' => $page['category']['label'],
-        'path'  => '/category/'.$page['category']['slug'].'/',
+        'path'  => $page['site_url_uts'].'/category/'.$page['category']['slug'].'/',
       ),
     );
 
@@ -20,7 +20,7 @@ if ( !isset($BREADCRUMB) ) :
     $BREADCRUMB = array(
       array(
         'label' => $page['post']['categories'][0]['label'],
-        'path'  => '/category/'.$page['post']['categories'][0]['slug'].'/',
+        'path'  => $page['site_url_uts'].'/category/'.$page['post']['categories'][0]['slug'].'/',
       ),
       array(
         'label' => $page['post']['title'],
@@ -32,11 +32,11 @@ if ( !isset($BREADCRUMB) ) :
     $BREADCRUMB = array(
       array(
         'label' => $page['motorsports']['label'],
-        'path'  => '/category/motorsports/',
+        'path'  => $page['site_url_uts'].'/category/motorsports/',
       ),
       array(
         'label' => strtoupper($page['motorsports']['url']),
-        'path'  => '/motorsports/'.$page['motorsports']['url'],
+        'path'  => $page['site_url_uts'].'/motorsports/'.$page['motorsports']['url'],
       ),
     );
 
@@ -44,9 +44,9 @@ if ( !isset($BREADCRUMB) ) :
 
 endif;
 ?>
-<nav class="foot-breadCrumb">
+<nav class="<?php echo $page['html_prefix']; ?>foot-breadCrumb">
   <ol itemscope itemtype="http://schema.org/breadCrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
+    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo $page['site_url_uts']; ?>/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
     <?php
     if ( isset($BREADCRUMB) ) :
       foreach( $BREADCRUMB as $key => $value ) :

@@ -40,9 +40,11 @@ const Sagen = self.Sagen;
 export default class PageTop {
   /**
    * PageTop instance を作成し init 関数をコールします
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2018-04-19 vk header - flag 追加
    */
-  static start() {
-    const pageTop = new PageTop();
+  static start(vk = false) {
+    const pageTop = new PageTop(vk);
     pageTop.init();
   }
   // ---------------------------------------------------
@@ -50,14 +52,16 @@ export default class PageTop {
   // ---------------------------------------------------
   /**
    * page top に戻る motion
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
+   * @since 2018-04-19 vk header - flag 追加
    */
-  constructor() {
+  constructor(vk = false) {
     /**
      * bind 済み this.onScroll
      * @type {Function}
      * @since 2016-09-01
      */
-    this.boundScroll = this.onScroll.bind( this );
+    this.boundScroll = this.onScroll.bind(this);
     /**
      * div#pageTop Element
      * @type {?Element}
@@ -108,6 +112,12 @@ export default class PageTop {
      * @since 2016-10-28
      */
     this.topButton = TopButton.factory();
+    /**
+     * VK（バーチャル甲子園）flag
+     * @type {boolean}
+     * @since 2018-04-19 vk header - flag 追加
+     */
+    this.vk = vk;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -116,7 +126,8 @@ export default class PageTop {
    * click event を bind します
    */
   init() {
-    const element = Dom.pageTop();
+    const element = Dom.pageTop(this.vk);
+    // console.log('PageTop.init element', element);
     if (element === null) {
       return;
     }
@@ -124,7 +135,8 @@ export default class PageTop {
     this.element = element;
     this.topButton.init(element);
 
-    const footer = Dom.footer();
+    const footer = Dom.footer(this.vk);
+    // console.log('PageTop.init footer', footer);
     if (footer === null) {
       return;
     }
@@ -143,7 +155,9 @@ export default class PageTop {
     // @type {Offset} - footer offset
     this.footerOffset = new Offset(this.footer);
     // @type {Offset} - whole offset
-    this.wholeOffset = new Offset(Dom.whole());
+    const whole = Dom.whole(this.vk);
+    // vk - whole ないかも
+    this.wholeOffset = whole ? new Offset(whole) : new Offset(document.body);
 
     // scroll event 監視開始
     const scroll = this.scroll;

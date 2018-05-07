@@ -69,7 +69,9 @@ files = [
 # 圧縮済みファイルは除く
 # .jshintrc 使用
 gulp.task 'js:hint', ->
-  return gulp.src files
+  copy = files.slice 0
+  copy.push '!' + app + '/**/player/js/**/*.js'
+  return gulp.src copy
 #  .pipe $.debug 'file'
   .pipe $.jshint()
   .pipe $.jshint.reporter 'jshint-stylish'
@@ -77,9 +79,12 @@ gulp.task 'js:hint', ->
 
 # uglify
 gulp.task 'js:min', ->
-  return gulp.src files
+  copy = files.slice 0
+  copy.push '!' + app + '/**/player/js/**/*.js'
+  return gulp.src copy
   .pipe $.replaceTask patterns: patterns
   .pipe $.stripDebug()
+  .pipe $.debug({ title: "JS:MIN" })
   .pipe $.uglify preserveComments: 'license'
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** js:min ***'
@@ -88,6 +93,7 @@ gulp.task 'js:min', ->
 gulp.task 'js:copy', ->
   return gulp.src files
   .pipe gulp.dest htdocs
+  .pipe $.debug({ title: "JS:COPY" })
   .pipe $.size title: '*** js:copy ***'
 
 # --------------------------------------------

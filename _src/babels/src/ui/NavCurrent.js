@@ -42,24 +42,27 @@ export default class NavCurrent {
    * navigation をいい感じに current させるを開始します
    * @param {string} argSlug category slug
    * @param {boolean} [sp=false] sp flag
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    */
-  static init(argSlug, sp = false) {
+  static init(argSlug, sp = false, vk = false) {
     const slug = argSlug ? argSlug : SPBL_ENV.category;
-    NavCurrent.current(slug, sp);
+    NavCurrent.current(slug, sp, vk);
   }
   /**
    * `.current` を付与します
    * @param {slug} [slug=all] category slug
-   * @param {boolean} sp sp flag
+   * @param {boolean} [sp=false] sp flag
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    */
-  static current(slug = 'all', sp) {
+  static current(slug = 'all', sp = false, vk = false) {
     const target = Dom.get(slug);
+    // console.log('NavCurrent.current', slug, sp, target);
     if (!target) {
       return;
     }
     Sagen.Dom.addClass(target, 'current');
     if (sp) {
-      NavCurrent.setPosition(target);
+      NavCurrent.setPosition(target, vk);
     }
   }
   /**
@@ -76,12 +79,13 @@ export default class NavCurrent {
    *     li#slug
    * ```
    * @param {Element} target `li` element
+   * @param {boolean} [vk=false] VK（バーチャル甲子園）flag
    */
-  static setPosition(target) {
+  static setPosition(target, vk = false) {
     // gnav-sec-inner
-    const inner = Dom.navInner();
+    const inner = Dom.navInner(vk);
     // ul#gnav-sec-list
-    const ul = Dom.navList();
+    const ul = Dom.navList(vk);
     if (!inner || !ul) {
       // 不正値なので処理しない
       return;
