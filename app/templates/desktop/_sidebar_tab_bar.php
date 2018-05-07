@@ -67,7 +67,7 @@ if (isset($tab_response)) :
           }
     ?>
       <div class="menu-container category-<?php echo $category_slug; ?>">
-        <h2 class="menu-heading"><?php echo $category['dispName']; ?></h2>
+        <h2 class="menu-heading white-big6"><?php echo $category['dispName']; ?></h2>
         <ul class="menu-list">
         <?php
         // category loop
@@ -76,7 +76,7 @@ if (isset($tab_response)) :
           <li class="menu-item">
             <a href="<?php echo $child['link']; ?>" class="menu-link">
               <span class="menu-link-icon"><img class="replace-svg white-svg" src="<?php echo $child['icon']; ?>" alt=""></span>
-              <span class="menu-link-label"><?php echo $child['dispName']; ?></span>
+              <span class="menu-link-label white-big6 red-hover"><?php echo $child['dispName']; ?></span>
             </a>
           </li>
         <?php
@@ -106,7 +106,7 @@ if (isset($tab_response)) :
         if (is_array($live_children) && count($live_children)) :
     ?>
           <div class="menu-container category-<?php echo tab_live_slug_by_label($live['dispName']); ?>">
-            <h2 class="menu-heading"><?php echo $live['dispName']; ?>　速報・データ</h2>
+            <h2 class="menu-heading white-big6"><?php echo $live['dispName']; ?>　速報・データ</h2>
             <ul class="menu-list">
             <?php
             // loop - live - child
@@ -115,7 +115,7 @@ if (isset($tab_response)) :
               <li class="menu-item">
                 <a href="<?php echo $child['link']; ?>" class="menu-link">
                   <span class="menu-link-icon"><img class="replace-svg white-svg" src="<?php echo $child['icon']; ?>" alt=""></span>
-                  <span class="menu-link-label"><?php echo $child['dispName']; ?></span>
+                  <span class="menu-link-label white-big6 red-hover"><?php echo $child['dispName']; ?></span>
                 </a>
               </li>
             <?php
@@ -153,7 +153,13 @@ endif;
         vertical-align: middle;
     }
     .white-svg path{ fill:white; }
-    
+    .white-big6 {
+      color: #fff;
+    }
+    .red-hover:hover
+    {
+      color: #cc141d
+    }
     .dark .menu-item:hover .menu-link .menu-link-label{
         color: #cc141d!important;
     }
