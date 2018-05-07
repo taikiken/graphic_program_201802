@@ -101,7 +101,10 @@ export class User {
    * - token を cookie から削除します
    */
   static logout() {
+    // ドメイン指定なしcookieを削除
     Cookie.remove(Cookie.TARGET);
+    // ドメイン指定ありcookieを削除
+    Cookie.remove(Cookie.TARGET, '/', Cookie.COOKIE_DOMAIN);
     User.sign = false;
   }
   /**
