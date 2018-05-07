@@ -1042,6 +1042,14 @@
   }
 }  //.nadir_tab
 
+// 下タブがある時、copyrightが隠れないよう .nadir_tab-active を追加してページ最下部に余白を確保
+// cf. https://aws-plus.backlog.jp/view/UNDO_SPBL-432#comment-1196443752
+// cf git. https://github.com/undotsushin/undotsushin/commit/7bf04cd1058569f13b509b9ca6de66c54288c1d4
+
+.nadir_tab-active.whole {
+  margin-bottom: 50px;
+}
+
 
 
 
