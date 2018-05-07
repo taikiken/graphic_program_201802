@@ -7,6 +7,18 @@
 // `.body-sec` ~ `.foot-sec` 間に配置する
 // ----------------------------------------------
 ?>
+<script>
+  (function(window) {
+    'use strict';
+    var document = window.document;
+    var elements = document.getElementsByClassName('whole');
+    if (!elements.length) {
+      return;
+    }
+    var whole = elements[0];
+    whole.className += ' nadir_tab-active';
+  }(window));
+</script>
 <nav class="nadir_tab">
   <ul class="nadir_tab-list">
     <li class="nadir_tab-item nadir_tab-item__home">
