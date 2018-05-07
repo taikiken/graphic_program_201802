@@ -2,11 +2,9 @@
 include $INCLUDEPATH . "local.php";
 
 if (isset($_POST['sidemenu']) === false) {
-    $s3FileName = "json/sidemenu.json";
-    $s3 = new S3Module();
 
     //sidemenu.jsonの取得
-    $jsonfile = $s3->getUrl($s3FileName);
+    $jsonfile = $ImgPath."/json/sidemenu.json";
     $sidemenu_text = get_contents($jsonfile);
 
     if (empty($sidemenu_text)) {
