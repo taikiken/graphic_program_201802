@@ -17,27 +17,39 @@ if (isset($_POST['sidemenu']) === false) {
         $d = json_decode($d,true);
 
         //下タブの子の表示名を取得
-$sql = <<<SQL
-SELECT children.name, children.type FROM (
-    SELECT * FROM bottom_tab_nodes n1
-    INNER JOIN bottom_tab_categories c ON n1.bottom_tab_id = c.id AND n1.type = 2
-    UNION ALL
-    SELECT * FROM bottom_tab_nodes n2
-    INNER JOIN bottom_tab_livescores l ON n2.bottom_tab_id = l.id AND n2.type = 1
-) children
-WHERE children.parent_tab_id IS NOT null
-SQL;
-        $o->query($sql);
+        $bottomtab = file_get_contents('http://' . $servername . '/api/v1/bottomtab');
+        $tmp_json = json_decode($bottomtab, true);
 
-        //重複の確認
-        while($f=$o->fetch_array()){
-            foreach ($d as $v) {
-                foreach ($v['items'] as $value) {
-                    if($value['title'] == $f['name']){
-                        if($f['type'] === '1'){
-                            $duplication_livescore .= $f['name'].'  ';
-                        }else{
-                            $duplication_category .= $f['name'].'  ';
+        //下タブの子を取得
+        $childs = [];
+        foreach ($tmp_json['response'] as $k => $v) {
+            //response
+            if(isset($v['parent'])){
+                $type = $k;
+                foreach ($v['parent'] as $parent) {
+                    //parent
+                    foreach ($parent['child'] as $value) {
+                        $childs[$type][] = $value['dispName'];
+                    }
+                }
+            }
+        }
+
+        //横タブのループ
+        foreach ($d as $v) {
+            foreach ($v['items'] as $d_val) {
+
+                //下タブのループ
+                foreach ($childs as $key => $value) {
+                    foreach ($value as $c_val) {
+
+                        //重複の判定
+                        if($d_val['title'] === $c_val){
+                            if($key === 'livescore'){
+                                $duplication_livescore .= $c_val.'  ';
+                            }else{
+                                $duplication_category .= $c_val.'  ';
+                            }
                         }
                     }
                 }
