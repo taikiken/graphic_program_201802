@@ -32,7 +32,7 @@ if (preg_match("/cms/",$servername) ||
 
       $S3Module = new S3Module;
       $date = mb_ereg_replace('[^0-9]', '', $_GET['date']);
-      $url = $cf_bucket . $archive_filename;
+      $url = $cf_bucket . str_replace('{date}', $date, $archive_filename);
 
       if (simplexml_load_file($url))
       {
