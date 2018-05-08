@@ -17,10 +17,7 @@ if ($q->get_dir() === 1) { // 編集
 
     // spbのxmlはauも共通して必要
     $S3Module = new S3Module;
-    $url = $S3Module->getUrl($PICKS_FILENAME);
-    if ($bucket == "img-sportsbull-jp") {
-      $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
-    }
+    $url = $cf_bucket . $PICKS_FILENAME;
     $picks_xml = simplexml_load_file($url);
     $picks_xml = $picks_xml->xpath('/date')[0];
 
@@ -47,10 +44,7 @@ if ($q->get_dir() === 1) { // 編集
 
       // spb本番とau本番の日付を比較する
       $S3Module = new S3Module;
-      $url = $S3Module->getUrl($picks_filename);
-      if ($bucket == "img-sportsbull-jp") {
-        $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
-      }
+      $url = $cf_bucket . $picks_filename;
       $au_picks_xml = simplexml_load_file($url);
       $au_picks_xml = $au_picks_xml->xpath('/date')[0];
 
