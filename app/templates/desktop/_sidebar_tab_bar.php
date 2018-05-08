@@ -46,8 +46,10 @@ if (isset($tab_response)) :
   $ctagory_list =  $tab_response['category'];
   // 出力条件 - data exist [B]
   if (
-    isset($livescore_list) && is_array($livescore_list['parent']) && count($livescore_list['parent']) &&
-    isset($ctagory_list) && is_array($ctagory_list['parent']) && count($ctagory_list['parent'])
+    // liver
+    (isset($livescore_list) && is_array($livescore_list['parent']) && count($livescore_list['parent'])) ||
+    // category
+    (isset($ctagory_list) && is_array($ctagory_list['parent']) && count($ctagory_list['parent']))
   ) :
 ?>
     <div class="side-menu">
