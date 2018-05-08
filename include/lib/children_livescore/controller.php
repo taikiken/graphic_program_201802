@@ -115,14 +115,14 @@ CLD;
         }
         foreach ($sn as $bottm_tab_category => $value) {
             if($value == "updated_at") {
-                $bottm_tab_categories[$bottm_tab_category-1] = $value;
+                $bottm_tab_categories[$bottm_tab_category] = $value;
             }
             elseif ($value <> "parent_id") {
                 if ($sv['parent_id'] === "null"){
                     $bottm_tab_categories[$bottm_tab_category] = $value;
                 }
                 else{
-                    $bottm_tab_categories[$bottm_tab_category-1] = $value;
+                    $bottm_tab_categories[$bottm_tab_category] = $value;
                 }
             }
         }
@@ -131,7 +131,7 @@ CLD;
         $e=$o->update($g->f("id"));
         foreach ($nodes_column as $nodes_column_update =>$value){
             if ($value === "parent_tab_id"){
-                $nodes_column_updates[$nodes_column_update-1] = $value;
+                $nodes_column_updates[$nodes_column_update] = $value;
             }
         }
         foreach ($sv as $nodes_value =>$value){
@@ -171,7 +171,7 @@ CLD;
         $o->query($sql);
         $n=$o->fetch_array();
 
-        $sql=sprintf("update %s set sort_no=sort_no-1 where sort_no>=%s and id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS not NULL AND type=2 )",$TABLE,$n["sort_no"]);
+        $sql=sprintf("update %s set sort_no=sort_no where sort_no>=%s and id IN (SELECT bottom_tab_id FROM bottom_tab_nodes WHERE parent_tab_id IS not NULL AND type=2 )",$TABLE,$n["sort_no"]);
         $o->query($sql);
 
         $o=new dbutl($TABLE);
