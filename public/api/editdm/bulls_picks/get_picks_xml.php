@@ -32,7 +32,7 @@ if (preg_match("/cms/",$servername) ||
 
       $S3Module = new S3Module;
       $date = mb_ereg_replace('[^0-9]', '', $_GET['date']);
-      $url = $cg_bucket . $archive_filename;
+      $url = $cf_bucket . $archive_filename;
 
       if (simplexml_load_file($url))
       {
@@ -45,7 +45,7 @@ if (preg_match("/cms/",$servername) ||
       $picks = isset($_GET['au']) ? $AU_PICKS_FILENAME : $PICKS_FILENAME;
 
       $S3Module = new S3Module;
-      $url = $cg_bucket . $picks;
+      $url = $cf_bucket . $picks;
 
       if (simplexml_load_file($url))
       {
