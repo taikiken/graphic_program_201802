@@ -172,6 +172,7 @@
   var scheduleUnit = schedule.find('.schedule__unit');
   var scheduleToggle = scheduleUnit.find('.schedule__header');
   var scheduleBtnHighlight = scheduleUnit.find('.button__highlight');
+  var scheduleBtnFulltIme = scheduleUnit.find('.button__fulltime');
   var setDetailHeight = function(target) {
     var mh = target.find('.schedule__detail').find('.schedule__map').outerHeight(true);
     var ih = target.find('.schedule__detail').find('.schedule__info').outerHeight(true);
@@ -197,6 +198,9 @@
   scheduleBtnHighlight.on('click', function(e) {
     e.stopPropagation();
   });
+  scheduleBtnFulltIme.on('click', function(e) {
+    e.stopPropagation();
+  })
   $(window).on('resize', function(){
     setOpenHeight();
   });

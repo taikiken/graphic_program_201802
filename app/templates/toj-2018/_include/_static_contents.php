@@ -8,7 +8,7 @@
     </a>
   </div>
   <div class="intro__banner">
-    <a href="https://app.adjust.com/paf496?deep_link=sportsbull%3A%2F%2F" target="_blank">
+    <a href="https://app.adjust.com/jnx2hga" target="_blank">
       <img  src="/assets/images/toj-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信ん開始の通知を受け取れる！">
     </a>
   </div>
@@ -173,7 +173,7 @@
     <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0525.png" alt="05/25[Fri]"></p>
-        <h3 class="title">第6ステージ<em>京都</em></h3>
+        <h3 class="title">第6ステージ<em>富士山</em></h3>
         <div class="buttonBlock">
           <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
           <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -263,7 +263,7 @@
     </section>
   </div>
   <div class="schedule__widjet_twitter">
-    <a class="twitter-timeline"  href="https://twitter.com/hashtag/%E3%83%AC%E3%83%83%E3%83%89%E3%83%96%E3%83%AB%E3%82%AF%E3%83%A9%E3%83%83%E3%82%B7%E3%83%A5%E3%83%89%E3%82%A2%E3%82%A4%E3%82%B9" data-widget-id="970345530147524608">#ツアー・オブ・ジャパン2018</a>
+    <a class="twitter-timeline"  href="https://twitter.com/hashtag/TOJ2018" data-widget-id="991559130744733697">#TOJ2018 のツイート</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </div><!-- /.widjet_twitter -->
 </section>
@@ -284,7 +284,7 @@
   </div><!-- /.about__text -->
 
   <div class="about__movie">
-    <iframe src="https://www.redbullcontentpool.com/embed/video/5a93d33e204d940094cc8497?_=1520301608727&lang=en" frameborder="0" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/O8TF6j5hRvg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div><!-- /.about__movie -->
 
   <div class="about__featured">
