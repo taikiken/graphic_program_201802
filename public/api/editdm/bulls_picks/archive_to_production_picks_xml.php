@@ -9,7 +9,8 @@ include_once __DIR__ . "/../../../../include/aws.php";
 
 $servername=$_SERVER["SERVER_NAME"];
 if (preg_match("/cms/",$servername) ||
-  preg_match("/dev/",$servername))
+  preg_match("/stg/",$servername) ||
+  preg_match("/dev/",$servername) )
 {
   $res = ['result' => 'NG'];
   $is_exist_xml = false;
