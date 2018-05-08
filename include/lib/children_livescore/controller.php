@@ -139,11 +139,7 @@ CLD;
                 $nodes_values['parent_tab_id'] = $value;
             }
         }
-        $sql = "select id from ".$TABLE2." where type = 2 AND bottom_tab_id=".$g->f("id").";";
-        $o->query($sql);
-        $p=$o->fetch_array();
-        $o = new dbutl($TABLE2, $nodes_column_updates, $nodes_values);
-        $e=$o->update($p['id']);
+
     }
 }elseif($q->get_dir()===2){
     $sql = "select * from ".$TABLE2." where type = 2 AND bottom_tab_id=".$g->f("id").";";
