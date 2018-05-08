@@ -198,6 +198,17 @@ textarea {
     }
   }
 
+  .side-menu + #widget-recommend-list-container {
+    .widget-ranking {
+      margin-top: 0;
+    }
+
+    .widget-recommend-heading {
+      border-top: none;
+    }
+  }
+
+
   .widget-ranking,
   .widget-recommend {
     margin-top: 20px;
