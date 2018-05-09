@@ -294,9 +294,6 @@ SQL;
     );
   endif;
 
-  //bottomtab
-  $categoriesinfo['webviews'][] = '/bottomtab/webview';
-
 // 1件でもあったら
 $sql = <<<SQL_EOL
   SELECT
