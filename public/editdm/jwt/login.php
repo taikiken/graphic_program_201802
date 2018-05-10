@@ -47,7 +47,7 @@ if (isset($_GET["jwt"])) {
     $domainMap = [
         'undotsushin.local' => 'vagrant.for.mac.localhost',
         'dev.sportsbull.jp' => 'dev-cms2.sportsbull.jp',
-        'stg.sportsbull.jp' => null,
+        'stg.sportsbull.jp' => 'dev-cms2.sportsbull.jp',
         'sportsbull.jp'     => 'cms2.sportsbull.jp',
     ];
 
