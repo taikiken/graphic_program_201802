@@ -48,7 +48,7 @@ if (isset($_GET["jwt"])) {
         'undotsushin.local' => 'vagrant.for.mac.localhost',
         'dev.sportsbull.jp' => 'dev-cms2.sportsbull.jp',
         'stg.sportsbull.jp' => null,
-        'sportsbull.jp' => null,
+        'sportsbull.jp'     => 'cms2.sportsbull.jp',
     ];
 
     $host = null;
