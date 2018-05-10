@@ -2,22 +2,20 @@
   <div id="sidebar-moving-container">
 
     <div class="sponsor-link">
-
-      <!-- /531683568/fwt-ad/fwt-sidebar-rectangle -->
+      <!-- /531683568/redbull_ad/red-bull-live-sidebar-rectangle -->
       <script>
         googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/fwt-ad/fwt-sidebar-rectangle', [300, 250], 'div-gpt-ad-1515647154550-0').addService(googletag.pubads());
+          googletag.defineSlot('/531683568/redbull_ad/red-bull-live-sidebar-rectangle', [300, 250], 'div-gpt-ad-1525913901518-0').addService(googletag.pubads());
           googletag.pubads().enableSingleRequest();
           googletag.enableServices();
         });
       </script>
-      <div id='div-gpt-ad-1515647154550-0' style='height:250px; width:300px;'>
+      <div id='div-gpt-ad-1525913901518-0' style='height:250px; width:300px;'>
       <script>
-      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515647154550-0'); });
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525913901518-0'); });
       </script>
       </div>
-      <!-- // /531683568/fwt-ad/fwt-sidebar-rectangle -->
-
+      <!-- // /531683568/redbull_ad/red-bull-live-sidebar-rectangle -->
     </div>
 
     <div class="app-bnr">
@@ -52,21 +50,21 @@
       <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
     </div>
 
-    <div class="fwt--sidebar__skyscraper">
-      <!-- /531683568/fwt-ad/fwt-pc-sidebar-600-300 -->
+    <div class="rb--sidebar__skyscraper">
+      <!-- /531683568/redbull_ad/red-bull-live-pc-sidebar-600-300 -->
       <script>
         googletag.cmd.push(function() {
-          googletag.defineSlot('/531683568/fwt-ad/fwt-pc-sidebar-600-300', [300, 600], 'div-gpt-ad-1515646969328-0').addService(googletag.pubads());
+          googletag.defineSlot('/531683568/redbull_ad/red-bull-live-pc-sidebar-600-300', [300, 600], 'div-gpt-ad-1525916071510-0').addService(googletag.pubads());
           googletag.pubads().enableSingleRequest();
           googletag.enableServices();
         });
       </script>
-      <div id='div-gpt-ad-1515646969328-0' style='height:600px; width:300px;'>
+      <div id='div-gpt-ad-1525916071510-0' style='height:600px; width:300px;'>
       <script>
-      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515646969328-0'); });
+      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525916071510-0'); });
       </script>
       </div>
-      <!-- // /531683568/fwt-ad/fwt-pc-sidebar-600-300 -->
+      <!-- // /531683568/redbull_ad/red-bull-live-pc-sidebar-600-300 -->
     </div>
 
   </div><!--/#sidebar-moving-->

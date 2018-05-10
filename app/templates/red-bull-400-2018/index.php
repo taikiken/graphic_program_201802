@@ -125,25 +125,34 @@
             </div>
             <div class="rb-appli">
 
-                <a href="https://www.redbull.com/jp-ja/events/red-bull-400/red-bull-400-campaign" target="_blank">
-                  <img src="/assets/images/red-bull-400-2018/bnr_red_bull.png" alt="" class="rb-hide-pc">
-                  <img src="/assets/images/red-bull-400-2018/bnr_red_bull_pc.png" alt="" class="rb-hide-sp">
+
+
+
+
+              <?php
+              // app in webview 時に .head-sec を非表示にする
+                if (!$from_webview) :
+              ?>
+
+                <a href="http://400.redbull.com/" target="_blank">
+                  <img src="/assets/images/red-bull-400-2018/bnr_red_bull.gif" alt="" class="rb-hide-pc">
+                  <img src="/assets/images/red-bull-400-2018/bnr_red_bull_pc.gif" alt="" class="rb-hide-sp">
                 </a>
 
-                <?php
-                // app in webview 時に .head-sec を非表示にする
-                  if (!$from_webview) :
-                ?>
 
-                <a href="https://app.adjust.com/paf496?deep_link=sportsbull%3A%2F%2F" target="_blank">
+                <a href="https://app.adjust.com/tv698b4" target="_blank">
                   <img src="/assets/images/red-bull-400-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-pc">
                   <img src="/assets/images/red-bull-400-2018/bnr_spbl_app_pc.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-sp">
                 </a>
 
-                <?php
-                  endif;
-                // -----------------------------------------
-                ?>
+              <?php else:?>
+
+                  <img src="/assets/images/red-bull-400-2018/bnr_red_bull_app.jpg" alt="" class="rb-hide-pc">
+
+              <?php
+                endif;
+              // -----------------------------------------
+              ?>
 
             </div>
 
@@ -157,11 +166,43 @@
                   </tr>
                   <tr>
                     <th>11:00</th>
-                    <td>競技開始</td>
+                    <td>男子シングル予選</td>
+                  </tr>
+                  <tr>
+                    <th>12:15</th>
+                    <td>女子シングル予選</td>
+                  </tr>
+                  <tr>
+                    <th>13:45</th>
+                    <td>自衛隊対抗リレー決勝</td>
+                  </tr>
+                  <tr>
+                    <th>14:00</th>
+                    <td>学生対抗リレー決勝</td>
+                  </tr>
+                  <tr>
+                    <th>14:15</th>
+                    <td>男子 4×100リレー決勝</td>
+                  </tr>
+                  <tr>
+                    <th>14:30</th>
+                    <td>オープン 4×100リレー決勝スタート</td>
+                  </tr>
+                  <tr>
+                    <th>14:45</th>
+                    <td>女子シングル 決勝</td>
+                  </tr>
+                  <tr>
+                    <th>15:00</th>
+                    <td>男子シングル 決勝</td>
+                  </tr>
+                  <tr>
+                    <th>15:45</th>
+                    <td>表彰式</td>
                   </tr>
                   <tr>
                     <th>16:00</th>
-                    <td>競技終了</td>
+                    <td>イベント終了</td>
                   </tr>
                 </tbody>
               </table>
@@ -169,21 +210,38 @@
             </section>
 
             <?php if ($page['ua'] !== 'desktop') : ?>
-              <div class="rb--sp-banner">
-                <!-- /531683568/fwt-ad/fwt-sp-bigbanner2 -->
+              <div class="rb--banner">
+                <!-- /531683568/redbull_ad/red-bull-live-sp-big-banner -->
                 <script>
                   googletag.cmd.push(function() {
-                  googletag.defineSlot('/531683568/fwt-ad/fwt-sp-bigbanner2', [320, 50], 'div-gpt-ad-1515139762773-0').addService(googletag.pubads());
-                  googletag.pubads().enableSingleRequest();
-                  googletag.enableServices();
+                    googletag.defineSlot('/531683568/redbull_ad/red-bull-live-sp-big-banner', [320, 50], 'div-gpt-ad-1525913603821-0').addService(googletag.pubads());
+                    googletag.pubads().enableSingleRequest();
+                    googletag.enableServices();
                   });
                 </script>
-                <div id='div-gpt-ad-1515139762773-0' style='height:50px; width:320px;'>
-                  <script>
-                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515139762773-0'); });
-                  </script>
+                <div id='div-gpt-ad-1525913603821-0' style='height:50px; width:320px;'>
+                <script>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525913603821-0'); });
+                </script>
                 </div>
-                <!-- // /531683568/fwt-ad/fwt-sp-bigbanner2 -->
+                <!-- // /531683568/redbull_ad/red-bull-live-sp-big-banner -->
+              </div>
+            <?php else:?>
+              <div class="rb--banner">
+                <!-- /531683568/redbull_ad/red-bull-live-pc-bigbanner -->
+                <script>
+                  googletag.cmd.push(function() {
+                    googletag.defineSlot('/531683568/redbull_ad/red-bull-live-pc-bigbanner', [728, 90], 'div-gpt-ad-1525914354723-0').addService(googletag.pubads());
+                    googletag.pubads().enableSingleRequest();
+                    googletag.enableServices();
+                  });
+                </script>
+                <div id='div-gpt-ad-1525914354723-0' style='height:90px; width:728px;'>
+                <script>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525914354723-0'); });
+                </script>
+                </div>
+                <!-- // /531683568/redbull_ad/red-bull-live-pc-bigbanner -->
               </div>
             <?php endif; ?>
 
@@ -191,27 +249,14 @@
               <h2><img src="/assets/images/red-bull-400-2018/ttl_related.png" alt="">関連記事</h2>
               <ul>
                 <li>
-                  <a href="/p/250564/">
+                  <a href="/p/312214/" class="movie">
                     <div class="rb--related__image-wrap">
-                      <img src="https://img.sportsbull.jp/thumbnail1/img2018011123260774225000.png" alt="">
+                      <img src="https://img.sportsbull.jp/thumbnail1/img2018050922124162470800.png" alt="">
                     </div>
                     <div class="rb--related__text-wrap">
-                      <h3>【100秒動画】初心者でもわかるFWT【100秒動画】初心者でもわかるFWT</h3>
+                      <h3>世界で最も過酷な400M走に「ブルくん」が挑むよ！</h3>
                       <?php if ($page['ua'] === 'desktop') : ?>
-                        <p class="rb-hide-sp">年々進化し続ける「FWT（Freeride World 年々進化し続ける「FWT（Freeride World Tour）」が2018年1月、長野県白馬村※で開催される。運命の大一番を前に「FWT」解説動画が公開。FWT初心者にも入門編として解りやすい100秒動画となっている。年々進化し続ける「FWT（Freeride World 年々進化し続ける「FWT（Freeride World Tour）」が2018年1月、長野県白馬村※で開催される。運命の大一番を前に「FWT」解説動画が公開。FWT初心者にも入門編として解りやすい100秒動画となっている。</p>
-                      <?php endif; ?>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="/p/250564/">
-                    <div class="rb--related__image-wrap">
-                      <img src="https://img.sportsbull.jp/thumbnail1/img2018011123260774225000.png" alt="">
-                    </div>
-                    <div class="rb--related__text-wrap">
-                      <h3>【100秒動画】初心者でもわかるFWT【100秒動画】初心者でもわかるFWT</h3>
-                      <?php if ($page['ua'] === 'desktop') : ?>
-                        <p class="rb-hide-sp">年々進化し続ける「FWT（Freeride World 年々進化し続ける「FWT（Freeride World Tour）」が2018年1月、長野県白馬村※で開催される。運命の大一番を前に「FWT」解説動画が公開。FWT初心者にも入門編として解りやすい100秒動画となっている。年々進化し続ける「FWT（Freeride World 年々進化し続ける「FWT（Freeride World Tour）」が2018年1月、長野県白馬村※で開催される。運命の大一番を前に「FWT」解説動画が公開。FWT初心者にも入門編として解りやすい100秒動画となっている。</p>
+                        <p class="rb-hide-sp">久しぶりにあいつが帰ってくる。昨年はボックスカートレースに挑み爪あとを残したブルくん。正直立ってるだけでもしんどいのに、今回は世界で最も過酷な４００M走っちゃうよ！応援してね！</p>
                       <?php endif; ?>
                     </div>
                   </a>
@@ -221,40 +266,37 @@
 
             <ul class="footer-rectangle">
               <li class="rb-hide-sp">
-
-                <!-- /531683568/fwt-ad/fwt-pc-footer-rectangle1 -->
+                <!-- /531683568/redbull_ad/red-bull-live-pc-footer-rectangle1 -->
                 <script>
                   googletag.cmd.push(function() {
-                  googletag.defineSlot('/531683568/fwt-ad/fwt-pc-footer-rectangle1', [300, 250], 'div-gpt-ad-1515647523981-0').addService(googletag.pubads());
-                  googletag.pubads().enableSingleRequest();
-                  googletag.enableServices();
+                    googletag.defineSlot('/531683568/redbull_ad/red-bull-live-pc-footer-rectangle1', [300, 250], 'div-gpt-ad-1525913731348-0').addService(googletag.pubads());
+                    googletag.pubads().enableSingleRequest();
+                    googletag.enableServices();
                   });
                 </script>
-                <div id='div-gpt-ad-1515647523981-0' style='height:250px; width:300px;'>
-                  <script>
-                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515647523981-0'); });
-                  </script>
-                </div>
-                <!-- // /531683568/fwt-ad/fwt-pc-footer-rectangle1 -->
 
+                <div id='div-gpt-ad-1525913731348-0' style='height:250px; width:300px;'>
+                <script>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525913731348-0'); });
+                </script>
+                </div>
+                <!-- // /531683568/redbull_ad/red-bull-live-pc-footer-rectangle1 -->
               </li>
               <li>
-
-                <!-- /531683568/fwt-ad/fwt-pc-footer-rectangle2 -->
+                <!-- /531683568/redbull_ad/red-bull-live-pc-footer-rectangle2 -->
                 <script>
                   googletag.cmd.push(function() {
-                  googletag.defineSlot('/531683568/fwt-ad/fwt-pc-footer-rectangle2', [300, 250], 'div-gpt-ad-1515647582515-0').addService(googletag.pubads());
-                  googletag.pubads().enableSingleRequest();
-                  googletag.enableServices();
+                    googletag.defineSlot('/531683568/redbull_ad/red-bull-live-pc-footer-rectangle2', [300, 250], 'div-gpt-ad-1525913782071-0').addService(googletag.pubads());
+                    googletag.pubads().enableSingleRequest();
+                    googletag.enableServices();
                   });
                 </script>
-                <div id='div-gpt-ad-1515647582515-0' style='height:250px; width:300px;'>
-                  <script>
-                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515647582515-0'); });
-                  </script>
+                <div id='div-gpt-ad-1525913782071-0' style='height:250px; width:300px;'>
+                <script>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525913782071-0'); });
+                </script>
                 </div>
-                <!-- // /531683568/fwt-ad/fwt-pc-footer-rectangle2 -->
-
+                <!-- // /531683568/redbull_ad/red-bull-live-pc-footer-rectangle2 -->
               </li>
             </ul>
 

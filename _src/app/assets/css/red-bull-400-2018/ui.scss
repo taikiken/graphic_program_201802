@@ -220,18 +220,19 @@ $gray: #f8fafc;
             }
             th {
               width: 1px;
-              line-height: 2;
               white-space: nowrap;
               font-weight: bold;
-              padding-right: 20px;
+              padding-right: 10px;
               font-size: 16px;
               @include mq-l {
-                font-size: 24px;
+                font-size: 20px;
+                padding-right: 20px;
               }
             }
             td {
+              //font-size: 12px;
               @include mq-l {
-                font-size: 18px;
+                font-size: 16px;
               }
             }
           }
@@ -242,7 +243,7 @@ $gray: #f8fafc;
         margin-top: 10px;
       }
     }
-    .rb--sp-banner {
+    .rb--banner {
       @include mb;
       div {
         margin: auto;
@@ -267,7 +268,31 @@ $gray: #f8fafc;
             display: flex;
             justify-content: space-between;
             padding-bottom: 10px;
+            &.movie {
+              .rb--related__image-wrap:before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 30px;
+                height: 30px;
+                transform: translate(-50%,-50%);
+                background: url(/assets/images/red-bull-400-2018/related-icon_play.png) 0 0 no-repeat;
+                overflow: hidden;
+                font-size: 0;
+                text-indent: 100%;
+                white-space: nowrap;
+                outline: none;
+                background-size: 30px;
+                @include mq-l {
+                  width: 60px;
+                  height: 60px;
+                  background-size: 60px;
+                }
+              }
+            }
             .rb--related__image-wrap {
+              position: relative;
               width: calc(40% - 5px);
               img {
                 width: 100%;
@@ -303,6 +328,9 @@ $gray: #f8fafc;
       li:first-child {
         margin-right: 40px
       }
+    }
+    .rb--sidebar__skyscraper {
+      margin-top: 20px;
     }
   }
   @include mq-s {
