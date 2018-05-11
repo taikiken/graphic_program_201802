@@ -47,8 +47,10 @@
                 </p>
                 <h3 class="title">第1ステージ<em>堺</em></h3>
                 <div class="buttonBlock">
-                  <p class="button__fulltime"><a href="#hoge">フルタイム動画</a></p>
-                  <p class="button__highlight"><a href="#hoge">ハイライト動画</a></p>
+                  <!-- <p class="button__fulltime"><a href="#hoge">フルタイム動画</a></p>
+                  <p class="button__highlight"><a href="#hoge">ハイライト動画</a></p> -->
+                  <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
+                  <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
                 </div>
               </header>
               <div class="schedule__detail">

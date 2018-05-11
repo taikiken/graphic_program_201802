@@ -468,6 +468,7 @@ $c-txt__strong: $c-main;
     background-color: $c-main;
     top: 0;
     left: 0;
+    cursor: pointer;
     &:active {
       top: 3px;
       left: 3px;
@@ -476,6 +477,7 @@ $c-txt__strong: $c-main;
   &.is-inactive {
     .button__linkNone {
       background-color: #cccccc;
+      cursor: default;
     }
   }
 }

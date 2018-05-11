@@ -95,7 +95,7 @@ if (isset($_GET['app'])) {
           <p class="summary__copy--second">
             <picture>
               <source srcset="/assets/sp/images/toj-2018/summary-copy2.png 2x">
-              <img src="/assets/sp/images/toj-2018/summary-copy2.png" alt="2018.5.20 [Sun] 12:00–">
+              <img src="/assets/sp/images/toj-2018/summary-copy2.png" alt="2018.05.20 –05.27">
             </picture>
           </p>
         </div><!-- /.summary-inner -->

@@ -75,7 +75,7 @@ include_once __DIR__ . '/../../_env.php';
           <img src="/assets/images/toj-2018/summary-logo.png" alt="NTN presents Tour of Japan 2018">
         </h1>
         <p class="summary__copy--first"><img src="/assets/images/toj-2018/summary-copy1.png" alt="国内最大規模の自転車ロードレース!全8日間にわたる熱戦を、スポーツブルで無料ライブ配信。"></p>
-        <p class="summary__copy--second"><img src="/assets/images/toj-2018/summary-copy2.png" alt="2018.5.20 [Sun] 12:00–"></p>
+        <p class="summary__copy--second"><img src="/assets/images/toj-2018/summary-copy2.png" alt="2018.05.20 –05.27"></p>
       </div><!-- /.summary-inner -->
     </section><!-- /.summary -->
 
