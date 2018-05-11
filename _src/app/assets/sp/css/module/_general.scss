@@ -920,7 +920,7 @@
   bottom: 0;
   width: 100%;
   height: (100/2)+px;
-  padding-top: 10px;
+  padding-top: 10px - 5;
   padding-bottom: 10px;
   background-color: #fff;
   border-top: 1px solid #ddd;
@@ -973,6 +973,7 @@
   &-link {
     @include link-decoration(#929291, #929291, null, null);
     display: inline-block;
+    padding: 4px 10px;
     font-weight: bold;
     font-size: (20/2)+px;
     text-align: center;
@@ -983,6 +984,7 @@
       width: (44/2)+px;
       height: (44/2)+px;
       margin-right: auto;
+      margin-bottom: 1px;
       margin-left: auto;
 
       svg {
@@ -1048,6 +1050,16 @@
 
 .nadir_tab-active.whole {
   padding-bottom: 50px;
+}
+
+// webviewの時は背景をグレーに
+.undotsushin-ios .whole.menu-livescore,
+.undotsushin-android .whole.menu-livescore,
+.undotsushin-ios .whole.menu-category,
+.undotsushin-android .whole.menu-category {
+  padding-bottom: 0;
+  height: 100%;
+  background-color: #eee;
 }
 
 
