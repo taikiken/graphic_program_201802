@@ -134,7 +134,7 @@
                 if (!$from_webview) :
               ?>
 
-                <a href="http://400.redbull.com/" target="_blank">
+                <a href="http://400.redbull.com/" target="_blank" id="serviceTop_hide">
                   <img src="/assets/images/red-bull-400-2018/bnr_red_bull.gif" alt="" class="rb-hide-pc">
                   <img src="/assets/images/red-bull-400-2018/bnr_red_bull_pc.gif" alt="" class="rb-hide-sp">
                 </a>
@@ -257,6 +257,19 @@
                       <h3>世界で最も過酷な400M走に「ブルくん」が挑むよ！</h3>
                       <?php if ($page['ua'] === 'desktop') : ?>
                         <p class="rb-hide-sp">久しぶりにあいつが帰ってくる。昨年はボックスカートレースに挑み爪あとを残したブルくん。正直立ってるだけでもしんどいのに、今回は世界で最も過酷な４００M走っちゃうよ！応援してね！</p>
+                      <?php endif; ?>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="/p/312207/" class="movie">
+                    <div class="rb--related__image-wrap">
+                      <img src="https://img.sportsbull.jp/thumbnail1/img2018050922045562791400.png" alt="">
+                    </div>
+                    <div class="rb--related__text-wrap">
+                      <h3>【ハイライト動画】Red Bull 400 札幌大会2017</h3>
+                      <?php if ($page['ua'] === 'desktop') : ?>
+                        <p class="rb-hide-sp">Red Bull 400とは、スキージャンプ競技場のラージヒルを利用して行う、最高斜度３７度のヒルクライムレースである。世界で最も過酷な400M走だ。スポーツブルでライブ配信される今大会をより楽しむため、前大会の様子をチェックだ！</p>
                       <?php endif; ?>
                     </div>
                   </a>
@@ -416,6 +429,18 @@
       });
     });
     </script>
+
+    <!-- サービスTOP対応 -->
+
+
+
+    <script>
+
+      if (navigator.userAgent.match(/spass-app/i)) {
+        document.getElementById("serviceTop_hide").style.display ="none";
+      }
+    </script>
+
   </div>
 </body>
 </html>
