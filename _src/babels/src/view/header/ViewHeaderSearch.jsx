@@ -59,7 +59,9 @@ export default class ViewHeaderSearch extends View {
     //   this.element
     // );
     ReactDOM.render(
-      <ComponentHeaderSearchForm />,
+      <ComponentHeaderSearchForm
+        vk={this.vk}
+      />,
       this.element,
     );
   }

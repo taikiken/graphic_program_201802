@@ -36,7 +36,8 @@ export default class ComponentHeaderNotice extends React.Component {
    *   response: NotificationsDae,
    *   safely: function,
    *   mount: function,
-   *   dispose: function
+   *   dispose: function,
+   *   vk: boolean
    * }} React.propTypes
    */
   static get propTypes() {
@@ -45,6 +46,7 @@ export default class ComponentHeaderNotice extends React.Component {
       safely: React.PropTypes.func.isRequired,
       mount: React.PropTypes.func.isRequired,
       dispose: React.PropTypes.func.isRequired,
+      vk: React.PropTypes.bool.isRequired,
     };
   }
   // ---------------------------------------------------
@@ -187,7 +189,9 @@ export default class ComponentHeaderNotice extends React.Component {
           onClick={this.onClick}
         >
           <i className="notice-icon">&nbsp;</i>
-          <ComponentHeaderNoticeTotal />
+          <ComponentHeaderNoticeTotal
+            vk={this.props.vk}
+          />
         </a>
         <ComponentHeaderNoticeMenu
           notifications={notifications}

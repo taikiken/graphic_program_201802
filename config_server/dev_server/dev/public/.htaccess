@@ -1,15 +1,15 @@
 # auth1. 特定のIPを許可
 
+SetEnvIf Remote_Addr "52\.68\.177\.134" allowed_ip_addresses
+SetEnvIf Remote_Addr "52\.69\.203\.137" allowed_ip_addresses
+
 # limret
-SetEnvIf Remote_Addr "153\.156\.72\.223" allowed_ip_addresses
+SetEnvIf Remote_Addr "122\.216\.201\.18" allowed_ip_addresses
 
 # parachute
 SetEnvIf Remote_Addr "183\.76\.75\.12" allowed_ip_addresses
 SetEnvIf Remote_Addr "124\.155\.123\.66" allowed_ip_addresses
 SetEnvIf Remote_Addr "153\.124\.179\.59" allowed_ip_addresses
-
-# axesor
-SetEnvIf Remote_Addr "124\.219\.166\.154" allowed_ip_addresses
 
 # grandbase
 SetEnvIf Remote_Addr "202\.248\.219\.58" allowed_ip_addresses
@@ -27,6 +27,7 @@ SetEnvIf Remote_Addr "175\.41\.247\.44" allowed_ip_addresses
 SetEnvIf Remote_Addr "210\.227\.234\.114" allowed_ip_addresses
 SetEnvIf Remote_Addr "54\.64\.137\.251" allowed_ip_addresses
 SetEnvIf Remote_Addr "153\.156\.83\.31" allowed_ip_addresses
+SetEnvIf Remote_Addr "153\.142\.226\.76" allowed_ip_addresses
 
 # CCI
 SetEnvIf Remote_Addr "210\.254\.134\.36" allowed_ip_addresses
@@ -76,7 +77,7 @@ php_value mbstring.language Japanese
 php_value mbstring.internal_encoding UTF-8
 php_value mbstring.http_output UTF-8
 php_value error_reporting 6133
-
+php_value post_max_size '100M'
 
 # for Slim - /app/Slim
 # ==============================

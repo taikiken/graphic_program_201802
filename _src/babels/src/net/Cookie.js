@@ -11,7 +11,7 @@
  */
 
 
-import {Safety} from '../data/Safety';
+import { Safety } from '../data/Safety';
 
 // let _symbol = Symbol();
 
@@ -68,6 +68,13 @@ export class Cookie {
    */
   static get APP_BANNER() {
     return 'app_banner';
+  }
+  /**
+   * const COOKIE_DOMAIN
+   * @returns {string} '.sportsbull.jp' - cookie domain, subdomain で取得可能にする
+   */
+  static get COOKIE_DOMAIN() {
+    return '.sportsbull.jp';
   }
   // ---------------------------------------------------
   //  METHOD
