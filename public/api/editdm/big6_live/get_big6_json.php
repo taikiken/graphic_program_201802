@@ -17,11 +17,7 @@ if (preg_match("/cms/",$servername) ||
       $big6 = $BIG6_FILENAME;
 
       $S3Module = new S3Module;
-      $url = $S3Module->getUrl($big6);
-      if ($bucket=="img-sportsbull-jp")
-      {
-        $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
-      }
+      $url = $cf_bucket. $big6;
 
       $file = file_get_contents($url);
       $res = json_decode($file);
