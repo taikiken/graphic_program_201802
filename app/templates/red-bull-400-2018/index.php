@@ -134,7 +134,7 @@
                 if (!$from_webview) :
               ?>
 
-                <a href="http://400.redbull.com/" target="_blank">
+                <a href="http://400.redbull.com/" target="_blank" id="serviceTop_hide">
                   <img src="/assets/images/red-bull-400-2018/bnr_red_bull.gif" alt="" class="rb-hide-pc">
                   <img src="/assets/images/red-bull-400-2018/bnr_red_bull_pc.gif" alt="" class="rb-hide-sp">
                 </a>
@@ -416,6 +416,18 @@
       });
     });
     </script>
+
+    <!-- サービスTOP対応 -->
+
+
+
+    <script>
+
+      if (navigator.userAgent.match(/spass-app/i)) {
+        document.getElementById("serviceTop_hide").style.display ="none";
+      }
+    </script>
+
   </div>
 </body>
 </html>
