@@ -35,7 +35,7 @@ if($q->get_dir()!=2){
           <tr>
             <td>
               <?php for($I=0;$I<count($ARRAY);$I++){ ?>
-                <input type="radio" class="box" name="p_<?=$FIELD?>" value="<?=$ARRAY[$I]?>" id="<?=$FIELD?><?=$I?>"<?php if($ARRAY[$I]==$p[$FIELD])echo " checked"; ?> /><label for="<?=$FIELD?><?=$I?>"><img src="<?="https://dev.sportsbull.jp/assets/images/common/".$ARRAY[$I]?>"  width="19px" height="21px" /></label>
+                <input type="radio" class="box" name="p_<?=$FIELD?>" value="<?=$ARRAY[$I]?>" id="<?=$FIELD?><?=$I?>"<?php if($ARRAY[$I]==$p[$FIELD])echo " checked"; ?> /><label for="<?=$FIELD?><?=$I?>"><img src="<?=$domain."/assets/images/common/".$ARRAY[$I]?>"  width="19px" height="21px" /></label>
                   <?php if($I != 0 && ($I + 1)  % 8 == 0){echo"<br>";} ?>
               <?php } ?>
             </td>
