@@ -6,9 +6,9 @@ if (pageUrl.match(/sportsbull.s3/) || pageUrl.match(/localhost/) || pageUrl.matc
 } else if (pageUrl.match(/dev.sportsbull.jp/)) {
 	api = '//dev.sportsbull.jp/api/v1/toj/live/';
 } else if (pageUrl.match(/stg.sportsbull.jp/)) {
-	api = '//stg.sportsbull.jp/api/big6tv/live/2018s';
+	api = '//stg.sportsbull.jp/api/v1/toj/live/';
 } else {
-	api = '//sportsbull.jp/api/big6tv/live/2018s';
+	api = '//sportsbull.jp/api/v1/toj/live/';
 }
 var result = document.querySelector('#placeHolder');
 var accountId = '5704890303001';
