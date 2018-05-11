@@ -31,6 +31,7 @@ RALLYPLUS.NET	 https://cms.sportsbull.jp/api/batch/import_rallyplus.php
 テレビ東京卓球ニュース	https://cms.sportsbull.jp/api/batch/import_tabletennis.php
 KPI	https://cms.sportsbull.jp/api/batch/import_kmagazine.php
 CLIMBERS	https://cms.sportsbull.jp/api/batch/import_climbers.php
+競馬のおはなし	https://cms.sportsbull.jp/api/batch/import_horseracing.php
 ";
 
 /*
