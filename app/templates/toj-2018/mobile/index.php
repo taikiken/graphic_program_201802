@@ -1,3 +1,13 @@
+<?php
+// app webview かを `?app=(ios|android)` から判定します
+// ==============================
+$from_webview = false;
+if (isset($_GET['app'])) {
+  if ($_GET['app'] == 'ios' || $_GET['app'] == 'android') {
+    $from_webview = true;
+  }
+}
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">

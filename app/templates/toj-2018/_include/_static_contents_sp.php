@@ -6,11 +6,24 @@
               <img src="/assets/sp/images/toj-2018/banner-toj-2018.jpg" alt="Tour of Japan 2018 VISIT SITE">
             </a>
           </div>
+
           <div class="intro__banner">
-            <a href="https://app.adjust.com/jnx2hga" target="_blank">
-              <img  src="/assets/sp/images/toj-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信ん開始の通知を受け取れる！">
+            <a href="https://sportsbull.jp/p/312445/">
+              <img  src="/assets/sp/images/toj-2018/bnr_present.png" alt="MERIDA ロードバイクプレゼント！">
             </a>
           </div>
+
+          <?php
+            // app in webview 時に非表示にする
+            if (!$from_webview) :
+          ?>
+            <div class="intro__banner">
+              <a href="https://app.adjust.com/jnx2hga" target="_blank">
+                <img  src="/assets/sp/images/toj-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信ん開始の通知を受け取れる！">
+              </a>
+            </div>
+          <?php endif; ?>
+
         </section><!-- /.intro -->
 
         <!-- schedule -->
@@ -279,57 +292,49 @@
             <ul class="about__featured__list">
               <li class="about__featured__item">
                 <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb1.jpg" alt=""></figure>
-                <h4>キャメロン・ナーズ</h4>
-                <p class="ruby">Cameron Naasz</p>
-                <p class="country">USA</p>
+                <h4>ベンジャミ・プラデス・レヴェルテル</h4>
+                <p class="country">Spain</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
                 <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb2.jpg" alt=""></figure>
-                <h4>スコット・クロクソール</h4>
-                <p class="ruby">Scott Croxall</p>
-                <p class="country">Canada</p>
+                <h4>畑中勇介</h4>
+                <p class="country">Japan</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
                 <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb3.jpg" alt=""></figure>
-                <h4>カイル・クロクソール</h4>
-                <p class="ruby">Kyle Croxall</p>
-                <p class="country">Canada</p>
+                <h4>グレガ・ボレ</h4>
+                <p class="country">Slovenia</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
                 <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb4.jpg" alt=""></figure>
-                <h4>マルコ・ダラーゴ</h4>
-                <p class="ruby">Marco Dallago</p>
-                <p class="country">Austria</p>
+                <h4>新城幸也</h4>
+                <p class="country">Japan</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
                 <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb5.jpg" alt=""></figure>
-                <h4>ルカ・ダラーゴ</h4>
-                <p class="ruby">Luca Dallago</p>
-                <p class="country">Austria</p>
+                <h4>マルコ・カノラ</h4>
+                <p class="country">Italy</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
                 <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb6.jpg" alt=""></figure>
-                <h4>ジャクリーン・レジェール</h4>
-                <p class="ruby">Jacqueline Legere</p>
-                <p class="country">Canada</p>
+                <h4>初山翔</h4>
+                <p class="country">Japan</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
                 <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb7.jpg" alt=""></figure>
-                <h4>アマンダ・トルンゾ</h4>
-                <p class="ruby">Amanda Trunzo</p>
-                <p class="country">USA</p>
+                <h4>マルコス・ガルシア・フェルナンデス</h4>
+                <p class="country">Spain</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
                 <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb8.jpg" alt=""></figure>
-                <h4>山本 純子</h4>
-                <p class="ruby">Junko Yamamoto</p>
-                <p class="country">Japan</p>
+                <h4>サム・クローム</h4>
+                <p class="country">Australia</p>
               </li><!-- /.about__featured__item -->
-              <li class="about__featured__item--more">
-                <picture>
-                  <source srcset="/assets/sp/images/toj-2018/about-featured-andmore.png 2x">
-                  <img src="/assets/sp/images/toj-2018/about-featured-andmore.png" alt="and MORE.">
-                </picture>
+              <li class="about__featured__item">
+                <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb9.jpg" alt=""></figure>
+                <h4>雨澤毅明</h4>
+
+                <p class="country">Japan</p>
               </li><!-- /.about__featured__item -->
             </ul><!-- /.about__featured__list -->
           </div><!-- /.about__featured -->
@@ -372,7 +377,7 @@
           </table><!-- /.overview__data -->
         </section><!-- /.overview -->
 
-        <section class="related">
+        <!-- <section class="related">
           <h2 class="related__heading">
             <picture>
               <source srcset="/assets/sp/images/toj-2018/ttl_h2-related.png 2x">
@@ -387,9 +392,9 @@
                 <h3 class="related__post__heading">Red Bull Crashed Ice, Marseille</h3>
                 <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
                 <p class="related__post__date">3月3日（木） 22:04</p>
-              </div><!-- /.related__post__text -->
+              </div>
             </a>
-          </div><!-- /.related__post -->
+          </div>
 
           <div class="related__post">
             <a href="hoge" class="movie">
@@ -398,9 +403,9 @@
                 <h3 class="related__post__heading">Red Bull Crashed Ice, Jyväskylä</h3>
                 <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
                 <p class="related__post__date">3月3日（木） 22:04</p>
-              </div><!-- /.related__post__text -->
+              </div>
             </a>
-          </div><!-- /.related__post -->
+          </div>
 
           <div class="related__post">
             <a href="hoge" class="movie">
@@ -409,9 +414,9 @@
                 <h3 class="related__post__heading">Red Bull Crashed Ice, Saint Paul</h3>
                 <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
                 <p class="related__post__date">3月3日（木） 22:04</p>
-              </div><!-- /.related__post__text -->
+              </div>
             </a>
-          </div><!-- /.related__post -->
+          </div>
 
           <div class="related__post">
             <a href="hoge" class="movie">
@@ -420,7 +425,7 @@
                 <h3 class="related__post__heading">Red Bull Crashed Ice, Saint Paul</h3>
                 <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
                 <p class="related__post__date">3月3日（木） 22:04</p>
-              </div><!-- /.related__post__text -->
+              </div>
             </a>
-          </div><!-- /.related__post -->
-        </section><!-- /.related -->
+          </div>
+        </section> -->

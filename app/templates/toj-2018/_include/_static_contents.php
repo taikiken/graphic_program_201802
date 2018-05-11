@@ -8,6 +8,11 @@
     </a>
   </div>
   <div class="intro__banner">
+    <a href="https://sportsbull.jp/p/312445/">
+      <img  src="/assets/images/toj-2018/bnr_present.png" alt="ツアーオブジャパン×スポーツブル　ライブ配信特別企画　MERIDAのロードバイクプレゼント！">
+    </a>
+  </div>
+  <div class="intro__banner">
     <a href="https://app.adjust.com/jnx2hga" target="_blank">
       <img  src="/assets/images/toj-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信ん開始の通知を受け取れる！">
     </a>
@@ -292,55 +297,55 @@
     <ul class="about__featured__list">
       <li class="about__featured__item">
         <figure><img src="/assets/images/toj-2018/about-featured-thumb1.jpg" alt=""></figure>
-        <h4>キャメロン・ナーズ</h4>
-        <p class="ruby">Cameron Naasz</p>
-        <p class="country">USA</p>
+        <h4>ベンジャミ・プラデス・レヴェルテル</h4>
+        <p class="country">Spain</p>
       </li><!-- /.about__featured__item -->
       <li class="about__featured__item">
         <figure><img src="/assets/images/toj-2018/about-featured-thumb2.jpg" alt=""></figure>
-        <h4>スコット・クロクソール</h4>
-        <p class="ruby">Scott Croxall</p>
-        <p class="country">Canada</p>
+        <h4>畑中勇介</h4>
+        <p class="country">Japan</p>
       </li><!-- /.about__featured__item -->
       <li class="about__featured__item">
         <figure><img src="/assets/images/toj-2018/about-featured-thumb3.jpg" alt=""></figure>
-        <h4>カイル・クロクソール</h4>
-        <p class="ruby">Kyle Croxall</p>
-        <p class="country">Canada</p>
+        <h4>グレガ・ボレ</h4>
+        <p class="country">Slovenia</p>
       </li><!-- /.about__featured__item -->
       <li class="about__featured__item">
         <figure><img src="/assets/images/toj-2018/about-featured-thumb4.jpg" alt=""></figure>
-        <h4>マルコ・ダラーゴ</h4>
-        <p class="ruby">Marco Dallago</p>
-        <p class="country">Austria</p>
+        <h4>新城幸也</h4>
+        <p class="country">Japan</p>
       </li><!-- /.about__featured__item -->
       <li class="about__featured__item">
         <figure><img src="/assets/images/toj-2018/about-featured-thumb5.jpg" alt=""></figure>
-        <h4>ルカ・ダラーゴ</h4>
-        <p class="ruby">Luca Dallago</p>
-        <p class="country">Austria</p>
+        <h4>マルコ・カノラ</h4>
+        <p class="country">Italy</p>
       </li><!-- /.about__featured__item -->
       <li class="about__featured__item">
         <figure><img src="/assets/images/toj-2018/about-featured-thumb6.jpg" alt=""></figure>
-        <h4>ジャクリーン・レジェール</h4>
-        <p class="ruby">Jacqueline Legere</p>
-        <p class="country">Canada</p>
+        <h4>初山翔</h4>
+        <p class="country">Japan</p>
       </li><!-- /.about__featured__item -->
       <li class="about__featured__item">
         <figure><img src="/assets/images/toj-2018/about-featured-thumb7.jpg" alt=""></figure>
-        <h4>アマンダ・トルンゾ</h4>
-        <p class="ruby">Amanda Trunzo</p>
-        <p class="country">USA</p>
+        <h4>マルコス・ガルシア・フェルナンデス</h4>
+        <p class="country">Spain</p>
       </li><!-- /.about__featured__item -->
       <li class="about__featured__item">
         <figure><img src="/assets/images/toj-2018/about-featured-thumb8.jpg" alt=""></figure>
-        <h4>山本 純子</h4>
-        <p class="ruby">Junko Yamamoto</p>
+        <h4>アンソニー・ジャコッポ</h4>
+        <p class="country">Australia</p>
+      </li><!-- /.about__featured__item -->
+      <li class="about__featured__item">
+        <figure><img src="/assets/images/toj-2018/about-featured-thumb9.jpg" alt=""></figure>
+        <h4>サム・クローム</h4>
+        <p class="country">Australia</p>
+      </li><!-- /.about__featured__item -->
+      <li class="about__featured__item">
+        <figure><img src="/assets/images/toj-2018/about-featured-thumb10.jpg" alt=""></figure>
+        <h4>雨澤毅明</h4>
         <p class="country">Japan</p>
       </li><!-- /.about__featured__item -->
-      <li class="about__featured__item--more">
-        <figure><img src="/assets/images/toj-2018/about-featured-andmore.png" alt="and MORE."></figure>
-      </li><!-- /.about__featured__item -->
+
     </ul><!-- /.about__featured__list -->
   </div><!-- /.about__featured -->
 </section>
@@ -381,7 +386,7 @@
 <!-- / overview -->
 
 <!-- related -->
-<section class="related">
+<!-- <section class="related">
   <h2 class="related__heading"><img src="/assets/images/toj-2018/ttl_h2-related.png" alt="RELATED 関連記事"></h2>
   <ul class="related__list">
     <li class="related__post">
@@ -425,5 +430,5 @@
       </a>
     </li>
   </ul>
-</section>
+</section> -->
 <!-- / related -->
