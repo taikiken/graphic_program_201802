@@ -1,17 +1,15 @@
 # auth1. 特定のIPを許可
+
 SetEnvIf Remote_Addr "52\.68\.177\.134" allowed_ip_addresses
 SetEnvIf Remote_Addr "52\.69\.203\.137" allowed_ip_addresses
 
 # limret
-SetEnvIf Remote_Addr "153\.156\.72\.223" allowed_ip_addresses
+SetEnvIf Remote_Addr "122\.216\.201\.18" allowed_ip_addresses
 
 # parachute
 SetEnvIf Remote_Addr "183\.76\.75\.12" allowed_ip_addresses
 SetEnvIf Remote_Addr "124\.155\.123\.66" allowed_ip_addresses
 SetEnvIf Remote_Addr "153\.124\.179\.59" allowed_ip_addresses
-
-# axesor
-SetEnvIf Remote_Addr "124\.219\.166\.154" allowed_ip_addresses
 
 # grandbase
 SetEnvIf Remote_Addr "202\.248\.219\.58" allowed_ip_addresses
