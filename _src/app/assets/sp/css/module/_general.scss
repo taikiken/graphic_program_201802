@@ -1062,6 +1062,18 @@
   background-color: #eee;
 }
 
+// 下タブ Now Do をカレント表示
+.whole.nowdo_all_wrap {
+  .nadir_tab-item__nowdo {
+    .nadir_tab-link {
+      color: #0f3580;
+
+      i svg {
+        fill: #0f3580;
+      }
+    }
+  }
+}
 
 
 
