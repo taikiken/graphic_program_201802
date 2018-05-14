@@ -474,7 +474,18 @@ class ViewModel {
   */
   public function get_side_menu() {
 
-    $side_menu_url = (UT_ENV == 'PRODUCTION') ? "https://img.sportsbull.jp/json/sidemenu.json" : "https://dev-img.sportsbull.jp/json/sidemenu.json";
+    if (UT_ENV == 'PRODUCTION')
+    {
+      $side_menu_url = "https://img.sportsbull.jp/json/sidemenu.json";
+    }
+    elseif (UT_ENV == 'STAGING')
+    {
+      $side_menu_url = "https://stg-img.sportsbull.jp/json/sidemenu.json";
+    }
+    else
+    {
+      $side_menu_url = "https://dev-img.sportsbull.jp/json/sidemenu.json";
+    }
     $side_menu_list = file_get_contents($side_menu_url);
     if ( $side_menu_list ) :
       $side_menu_list = json_decode($side_menu_list, true);
@@ -652,6 +663,16 @@ class ViewModel {
 
     $res = $this->db->get_partners();
     return $res;
+  }
+
+
+    /**
+     * 下タブに表示する内容を取得する
+     **/
+  public function get_bottomtabs() {
+    $res = file_get_contents($this->default['file_get_url'].'/api/v1/bottomtab');
+    $res = json_decode($res,true);
+    return $res['response'];
   }
 }
 

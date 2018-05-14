@@ -145,10 +145,18 @@ class dbutl extends db{
 	}
 
 	function remove($t){
-		$this->sql="delete from ".$this->table." where id=".$t;
-		@$this->db->query($this->sql);
-		$e=$this->db->affected_rows2();
-		return $e; 
+        if ($this->table == "bottom_tab_nodes"){
+            $this->sql="delete from ".$this->table." where bottom_tab_id=".$t;
+            @$this->db->query($this->sql);
+            $e=$this->db->affected_rows2();
+            return $e;
+        }
+        else{
+            $this->sql="delete from ".$this->table." where id=".$t;
+            @$this->db->query($this->sql);
+            $e=$this->db->affected_rows2();
+            return $e;
+        }
 	}
 
 }

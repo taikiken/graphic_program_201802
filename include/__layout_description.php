@@ -38,8 +38,13 @@ if($CURRENTDIRECTORY=="repo_n"){
 	$TITLEFIELDNAME="title";
 }elseif($CURRENTDIRECTORY=="notice"){
 	$TITLEFIELDNAME="body";
+}elseif($CURRENTDIRECTORY=="bottom_tabs_category"){
+	$TITLEFIELDNAME="name";
+}elseif($CURRENTDIRECTORY=="bottom_tabs_nodes"){
+	$TITLEFIELDNAME="body";
+}elseif($CURRENTDIRECTORY=="bottom_tabs_livescore"){
+	$TITLEFIELDNAME="name";
 }
-
 ?>
 <?php if($q->get_dir()==3){ ?>
 <p><?=$PARENT?>に<?=$N?>件の<?=$THIS?>が登録されております。</p>
