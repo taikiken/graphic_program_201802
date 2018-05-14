@@ -8,11 +8,7 @@ if ($q->get_dir() === 1) { // 編集
   if ($q->get_file() === 0) {
 
     $S3Module = new S3Module;
-    $url = $S3Module->getUrl($TOJ_FILENAME);
-    if ($bucket=="img-sportsbull-jp")
-    {
-      $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
-    }
+    $url = $cf_bucket. $s3_key;
     $file = file_get_contents($url);
 
     $toj_json = json_decode($file,true);
