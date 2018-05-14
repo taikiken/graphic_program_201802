@@ -9,7 +9,7 @@ include "local.php";
 include_once __DIR__."/../../../app/helpers/env.helper.php";
 
 
-  $json = $cf_bucket . 'bottomtab/nowdo.json';
+  $json = $cf_bucket . 'static/bottomtab/nowdo.json';
 
 if ( !empty(file_get_contents($json, false, null, 0, 1)) ) :
 
