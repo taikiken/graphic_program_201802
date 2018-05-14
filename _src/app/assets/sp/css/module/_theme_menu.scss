@@ -1,0 +1,175 @@
+@import "../../../../../scss_sp/asset";
+@import "../sprite";
+
+// Theme menu pages style
+//
+// design module menu theme
+//
+// Styleguide 2.20.0
+
+.whole.menu {
+  .head-sec-inner {
+    h1 {
+      top: auto;
+      line-height: (80/2)+px;
+      color: #fff;
+      font-weight: bold;
+      font-size: (28/2)+px;
+    }
+  } //.head-sec-inner
+
+  .body-sec-inner {
+    padding-top: (12/2)+px;
+    background-color: #eee;
+  } //.body-sec-inner
+
+
+
+
+  //.menu-container
+  .menu-container {
+    position: relative;
+    border-bottom: (10/2)+px solid #eee;
+    background-color: #fff;
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #ddd;
+    }
+
+    .menu-heading {
+      height: (60/2)+px;
+      line-height: (60/2)+px;
+      padding-left: 2.666666667vw;
+      background-color: #0f3580;
+      background-position: calc(100% - 6px) 50%;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+      color: #fff;
+      font-weight: bold;
+      font-size: (24/2)+px;
+    } //.menu-heading
+
+    // ex. .category-baseball の時の .menu-heading のアイコンは menu-heading-chara_baseball.png
+    $heading-array: baseball, soccer, basketball, motorsports, other, pickup, category;
+    @include prc-each( baseball, soccer, basketball, motorsports, other, pickup, category ) {
+      &.category-#{nth($heading-array, $arg_i)} {
+        .menu-heading {
+          background-image: url(/assets/sp/images/common/menu-heading-chara_#{nth($heading-array, $arg_i)}.png);
+        }
+      }
+    }
+
+    &.category-category {
+      .menu-heading {
+        background-position: calc(100% - 2px) 50%;
+      }
+    }
+
+    .menu-list {
+      display: flex;
+      flex-wrap: wrap;
+    } //.menu-list
+
+    .menu-item {
+      width: 50vw;
+      border-bottom: 1px solid #ddd;
+      padding-right: 2.666666667vw;
+      padding-left: 2.666666667vw;
+
+      &:nth-child(2n+1) {
+        border-right: 1px solid #ddd;
+      }
+    } //.menu-item
+
+    .menu-link {
+      @include link-decoration(#000, #000, null, null);
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      // padding-left: 25px;
+      font-weight: bold;
+      font-size: (24/2)+px;
+      // white-space: nowrap;
+
+      // &:before {
+      //   content: "";
+      //   position: absolute;
+      //   top: 15px;
+      //   left: 0;
+      //   width: 20px;
+      //   height: 20px;
+      //   margin-right: 10px;
+      //   background-position: 0 center;
+      //   background-repeat: no-repeat;
+      //   background-size: contain;
+      //   @include hide-text;
+      // }
+
+      img {
+        width: 20px;
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+
+      &.ping:after {
+        content: "";
+        position: absolute;
+        top: 14px;
+        left: 13px;
+        width: 7px;
+        height: 7px;
+        background-color: #d32d26;
+        border-radius: 100%;
+        @include hide-text;
+      }
+    } //.menu-link
+
+    .menu-link-label {
+    } //.menu-link-label
+
+    // @include prc-each( baseball, soccer, basketball, motorsports ) {
+    //   &.category-#{$arg} {
+    //     .menu-link:before {
+    //       background-image: url(/assets/images/common/icon-#{$arg}.svg);
+    //     }
+    //   }
+    // }
+
+    // @include prc-each( tennis, golf, football, rugby, rugby, sumo ) {
+    //   &.category-other {
+    //     .menu-item:nth-child(#{$arg_i}) {
+    //       .menu-link:before {
+    //         background-image: url(/assets/images/common/icon-#{$arg}.svg);
+    //       }
+    //     }
+    //   }
+    // }
+
+    // @include prc-each( logo, play, picks, baseball, cup, baseball ) {
+    //   &.category-pickup {
+    //     .menu-item:nth-child(#{$arg_i}) {
+    //       .menu-link:before {
+    //         background-image: url(/assets/images/common/icon-#{$arg}.svg);
+    //       }
+    //     }
+    //   }
+    // }
+
+    // @include prc-each( baseball, baseball, baseball, baseball, soccer, soccer, soccer, soccer, volleyball, basketball, basketball, basketball, tennis, golf, motorsports, sumo, fitness, cup, time, pingpong, rugby, football, skateboard, winter, figure, dance, medal, cup, logo, logo, logo, map ) {
+    //   &.category-category {
+    //     .menu-item:nth-child(#{$arg_i}) {
+    //       .menu-link:before {
+    //         background-image: url(/assets/images/common/icon-#{$arg}.svg);
+    //       }
+    //     }
+    //   }
+    // }
+  }
+} //.whole.menu

@@ -25,6 +25,19 @@ $key-color: #cc141d;
     }
   }
 
+  // サイドバー 速報・データ/競技・種目 メニュー
+  // ------------------------------
+  .side-sec {
+    .side-menu {
+      .menu-heading {
+        color: #fff;
+      }
+
+      .menu-link {
+        @include link-decoration(#fff, #fff, null, null);
+      }
+    }
+  }
 
   // サイドバーウィジェット系
   // ------------------------------
