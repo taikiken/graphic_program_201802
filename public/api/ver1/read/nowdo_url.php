@@ -9,14 +9,7 @@ include "local.php";
 include_once __DIR__."/../../../app/helpers/env.helper.php";
 
 
-  if ( UT_ENV == 'LOCAL' or 'DEVELOP' ) :
-    $json = 'https://dev-img.sportsbull.jp/static/bottomtab/nowdo.json';
-  elseif( UT_ENV == 'STAGING') :
-    $json = 'https://stg-img.sportsbull.jp/static/bottomtab/nowdo.json';
-  elseif (UT_ENV == 'PRODUCTION') :
-    $json = 'https://img.sportsbull.jp/static/bottomtab/nowdo.json';
-  endif;
-
+  $json = $cf_bucket . 'bottomtab/nowdo.json';
 
 if ( !empty(file_get_contents($json, false, null, 0, 1)) ) :
 
