@@ -2,11 +2,7 @@
 include "local.php";
 include_once __DIR__ . "/../../../../app/helpers/env.helper.php";
 
-if (UT_ENV !== 'PRODUCTION') {
-  $json = 'https://dev-img.sportsbull.jp/static/toj/live.json';
-} else {
-  $json = 'https://img.sportsbull.jp/static/toj/live.json';
-}
+$json = $cf_bucket . 'static/toj/live.json';
 
 
 $result["status"]["code"] = 200;
