@@ -47,7 +47,7 @@ const ranking = () => {
   }
   const option = {};
   option[View.DID_MOUNT] = didRanking;
-  const viewRanking = new ViewRanking(rankingElement, option, 'actionsports');
+  const viewRanking = new ViewRanking(rankingElement, option, 'extremesports');
   viewRanking.start();
 };
 
@@ -59,7 +59,7 @@ const video = () => {
   }
   const option = {};
   option[View.DID_MOUNT] = didVideo;
-  const viewVideos = new ViewVideos(videoElement, option, 'actionsports');
+  const viewVideos = new ViewVideos(videoElement, option, 'extremesports');
   viewVideos.start();
 };
 
@@ -69,7 +69,7 @@ const recommend = () => {
   if (!recommendElement) {
     return;
   }
-  const viewRecommend = new ViewRecommend(recommendElement, {}, 'actionsports');
+  const viewRecommend = new ViewRecommend(recommendElement, {}, 'extremesports');
   viewRecommend.start();
 };
 

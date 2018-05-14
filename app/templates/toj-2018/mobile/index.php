@@ -175,6 +175,7 @@ if (isset($_GET['app'])) {
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
+<script src="/assets/js/bundle/exe.bundle.js"></script>
 <script src="/assets/js/toj-2018.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script>

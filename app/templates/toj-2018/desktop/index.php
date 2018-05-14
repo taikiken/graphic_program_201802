@@ -187,6 +187,7 @@ include_once __DIR__ . '/../../_env.php';
     </div>
   </div><!-- /.body-sec -->
 
+<script src="/assets/js/bundle/exe.bundle.js"></script>
 <script src="/assets/js/toj-2018.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 

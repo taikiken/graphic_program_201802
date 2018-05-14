@@ -4,7 +4,7 @@
 // ==============================
 $app->group('/toj-2018',  function () use($app) {
 
-  $category = $app->model->get_category_by_slug('actionsports');
+  $category = $app->model->get_category_by_slug('extremesports');
   $page = array(
     'title'              => 'Tour of Japan 2018 ライブ配信',
     'site_name'          => 'スポーツブル (スポブル)',
