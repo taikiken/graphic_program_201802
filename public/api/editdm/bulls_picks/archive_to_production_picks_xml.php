@@ -9,7 +9,8 @@ include_once __DIR__ . "/../../../../include/aws.php";
 
 $servername=$_SERVER["SERVER_NAME"];
 if (preg_match("/cms/",$servername) ||
-  preg_match("/dev/",$servername))
+  preg_match("/stg/",$servername) ||
+  preg_match("/dev/",$servername) )
 {
   $res = ['result' => 'NG'];
   $is_exist_xml = false;
@@ -26,11 +27,8 @@ if (preg_match("/cms/",$servername) ||
 
     $S3Module = new S3Module;
     $date = mb_ereg_replace('[^0-9]', '', $_GET['date']);
-    $url = $S3Module->getUrl(str_replace('{date}', $date, $archive_filename));
-    if ($bucket=="img-sportsbull-jp")
-    {
-      $url = str_replace('https://s3-ap-northeast-1.amazonaws.com/img-sportsbull-jp', 'https://img.sportsbull.jp', $url);
-    }
+    $url = $cf_bucket . $archive_filename;
+
     if (simplexml_load_file($url))
     {
       $is_exist_xml = true;

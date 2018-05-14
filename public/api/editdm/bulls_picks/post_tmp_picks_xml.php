@@ -10,7 +10,8 @@ $servername=$_SERVER["SERVER_NAME"];
 
 $servername=$_SERVER["SERVER_NAME"];
 if (preg_match("/cms/",$servername) ||
-  preg_match("/dev/",$servername))
+  preg_match("/stg/",$servername) ||
+  preg_match("/dev/",$servername) )
 {
 // run
 // ==============================
