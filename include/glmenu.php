@@ -22,8 +22,8 @@
         <li><a href="/editdm/repo_s/?rid=7">TOP以外ピックアップ</a></li>
     <?php } ?>
     <li><a href="/editdm/repo_n/?cid=1">記事</a></li>
+    <li><a href="/editdm/photo/">フォトアルバム</a></li>
     <?php if(getSorC("is_external")!=1){ ?>
-        <li><a href="/editdm/photo/">フォトアルバム</a></li>
         <li><a href="/editdm/repo_n/?cid=10">カテゴリー</a></li>
     <?php } ?>
     <?php if(getSorC("is_external")!=1){ ?>
