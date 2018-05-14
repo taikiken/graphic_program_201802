@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   */
   googletag.cmd.push(function() {
     googletag.pubads().enableSingleRequest();
-    googletag.pubads().collapseEmptyDivs();
+    googletag.pubads().collapseEmptyDivs(true);
     googletag.enableServices();
   });
 
