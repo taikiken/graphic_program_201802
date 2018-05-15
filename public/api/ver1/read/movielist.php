@@ -7,10 +7,10 @@ $categories=array(
 	"station"=>"ブルステオフショットムービー",
 	"cfr_interview"=>"CFRインタビュー",
 	"cfr_report"=>"CFR体験レポート",
-	"samurai_blue"=>"サッカー日本代表ハイライト",
-	"futsal_women"=>"サッカー女子フットサル代表ハイライト",
-	"soccer_under"=>"サッカーアンダーハイライト",
-	"soccer_movie"=>"サッカー動画"
+	"samurai_blue"=>"サッカー男子日本代表",
+	"futsal_women"=>"サッカー女子日本代表・フットサル日本代表",
+	"soccer_under"=>"サッカーアンダー日本代表",
+	"soccer_movie"=>"サッカースペシャル動画"
 );
 
 include "local.php";
