@@ -116,13 +116,13 @@
                     <section class="side-sec show-for-large">
                             <div class="sponsor-link">
                                 <script type='text/javascript'>
-                                                                    googletag.cmd.push(function() {
-                                                                    googletag.defineSlot('/531683568/big6-pc-rectangle', [300, 250], 'div-gpt-ad-pc_sidebar_top').addService(googletag.pubads());
-                                                                    googletag.pubads().enableSingleRequest();
-                                                                    googletag.pubads().collapseEmptyDivs();
-                                                                    googletag.enableServices();
-                                                                    });
-                                                                </script>
+                                    googletag.cmd.push(function() {
+                                        googletag.defineSlot('/531683568/big6-pc-rectangle', [300, 250], 'div-gpt-ad-pc_sidebar_top').addService(googletag.pubads());
+                                        googletag.pubads().enableSingleRequest();
+                                        googletag.pubads().collapseEmptyDivs();
+                                        googletag.enableServices();
+                                    });
+                                </script>
                                 <div id='div-gpt-ad-pc_sidebar_top' style='height:250px; width:300px;'>
                                     <script type='text/javascript'>
                                                                 googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_sidebar_top'); });
@@ -134,27 +134,28 @@
                             <div class="app-bnr">
                                 <!-- /531683568/pc_sidebar_top_2nd -->
                                 <script>
-                                                                    googletag.cmd.push(function() {
-                                                                    googletag.defineSlot('/531683568/pc_sidebar_top_2nd', [300, 120], 'div-gpt-ad-1494939250039-0').addService(googletag.pubads());
-                                                                    googletag.pubads().enableSingleRequest();
-                                                                    googletag.pubads().collapseEmptyDivs();
-                                                                    googletag.enableServices();
-                                                                    });
-                                                                </script>
+                                    googletag.cmd.push(function() {
+                                        googletag.defineSlot('/531683568/pc_sidebar_top_2nd', [300, 120], 'div-gpt-ad-1494939250039-0').addService(googletag.pubads());
+                                        googletag.pubads().enableSingleRequest();
+                                        googletag.pubads().collapseEmptyDivs();
+                                        googletag.enableServices();
+                                    });
+                                </script>
                                 <div id='div-gpt-ad-1494939250039-0' style='height:120px; width:300px;'>
                                     <script>
-                                                                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939250039-0'); });
-                                                                </script>
+                                         googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494939250039-0'); });
+                                    </script>
                                 </div>
                                 <!-- // /531683568/pc_sidebar_top_2nd -->
                             </div>
-                            <!-- /.app-bnr -->
-
                             <div class="side-bnr_big6">
                                 <ul class="side-bnr_big6-list">
-                                    <li class="side-bnr_big6-item"> <a href="https://teams.one/?utm_source=big6tv&utm_campaign=teamstop&utm_medium=banner" target="_blank"><img src="/assets/images/big6/bnr-side-teams.png" alt="teams「野球チーム、集合。」全国3,000チーム以上が利用する野球チーム専用マネジメントツール"></a> </li>
-                                    <li class="side-bnr_big6-item"> <a href="http://big6.gr.jp" target="_blank"><img src="/assets/images/big6/bnr-side-big6.png" alt="一般財団法人 東京六大学野球連盟"></a> </li>
-                                    <li class="side-bnr_big6-item"> <a href="http://bit.ly/2nLew2c" target="_blank"><img src="/assets/images/big6/bnr-side-ec.png" alt="ここでしか買えないスマホグッズ販売中。"></a> </li>
+                                    <li class="side-bnr_big6-item" style="margin-top: 20px;">
+                                        <a href="http://www.xebiodreamcup.com/" target="_blank"><img src="/assets/images/big6/bnr-side-mlb-dream.jpg" alt="MLB DREAMCUP – 軟式野球チームの頂点へ"></a>
+                                    </li>
+                                    <li class="side-bnr_big6-item" style="margin-top: 20px;">
+                                        <a href="http://big6.gr.jp" target="_blank"><img src="/assets/images/big6/bnr-side-big6.png" alt="一般財団法人 東京六大学野球連盟"></a>
+                                    </li>
                                 </ul>
                             </div>
                             <div id="widget-recommend-list-container"></div>
