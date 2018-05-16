@@ -34,21 +34,15 @@ if ( googletag.pubads ) {
   if ( SPBL_ENV.provider ) {
     googletag.pubads().setTargeting("provider", SPBL_ENV.provider);
   }
+
+  googletag.pubads().enableSingleRequest();
+  googletag.pubads().collapseEmptyDivs(true);
+  googletag.enableServices();
+
 }
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
-
-  /**
-  *
-  * config
-  *
-  */
-  googletag.cmd.push(function() {
-    googletag.pubads().enableSingleRequest();
-    googletag.pubads().collapseEmptyDivs(true);
-    googletag.enableServices();
-  });
 
   /**
   * DFPDefileSlot
@@ -62,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if ( document.getElementById( target ) !== null ) {
 
       googletag.cmd.push(function() {
-        googletag.defineSlot( slot, size, target ).addService(googletag.pubads());
+        googletag.defineSlot( slot, size, target ).addService(googletag.pubads()).setCollapseEmptyDiv(true);
       });
 
       googletag.cmd.push(function() {
