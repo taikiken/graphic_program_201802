@@ -294,7 +294,6 @@ SQL;
     );
   endif;
 
-
 // 1件でもあったら
 $sql = <<<SQL_EOL
   SELECT

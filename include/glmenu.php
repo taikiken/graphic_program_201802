@@ -22,8 +22,8 @@
         <li><a href="/editdm/repo_s/?rid=7">TOP以外ピックアップ</a></li>
     <?php } ?>
     <li><a href="/editdm/repo_n/?cid=1">記事</a></li>
+    <li><a href="/editdm/photo/">フォトアルバム</a></li>
     <?php if(getSorC("is_external")!=1){ ?>
-        <li><a href="/editdm/photo/">フォトアルバム</a></li>
         <li><a href="/editdm/repo_n/?cid=10">カテゴリー</a></li>
     <?php } ?>
     <?php if(getSorC("is_external")!=1){ ?>
@@ -39,6 +39,12 @@
         <li><a href="/editdm/user/status">会員ステータス</a></li>
         <li><a href="/editdm/notice/">お知らせ設定</a></li>
         <li><a href="/editdm/tabs">メニュータブ設定</a></li>
+        <li><a href="/editdm/bottom_tabs_category">競技タブ設定</a></li>
+        <li><a href="/editdm/bottom_tabs_livescore">速報タブ設定</a></li>
+        <li><a href="/editdm/stats_pickup">サッカー代表戦バナー設定</a></li>
+        <li><a href="/editdm/sidemenu/edit">サイドメニュー設定</a></li>
+        <li><a href="/editdm/tour_of_japan/">TOUR OF JAPAN</a></li>
+         <li><a href="/editdm/big6_live/">BIG6 LIVE</a></li>
   <?php } ?>
 <?php }else{ ?>
     <li><a href="/editdm/photo/">フォトアルバム</a></li>

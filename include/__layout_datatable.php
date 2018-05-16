@@ -6,12 +6,15 @@
 <?php if($NUMBERINGOFF!=1){ ?>
 <th scope="col" width="45" class="t_numbering<?php if(getSorC("order")!=1){ ?>_disabled<?php } ?>">順番</th>
 <?php } ?>
-  <?php if ($CURRENTDIRECTORY != "company_news" && $CURRENTDIRECTORY != "notice" && $CURRENTDIRECTORY != "pickup_athlete_big4") { ?>
+  <?php if ($CURRENTDIRECTORY != "company_news" && $CURRENTDIRECTORY != "notice" && $CURRENTDIRECTORY != "pickup_athlete_big4" ) { ?>
     <th scope="col" width="35" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">公開</th>
   <?php } ?>
   <?php if($TABLE == "u_media"){ ?>
     <th scope="col" width="35" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">NG</th>
   <?php } ?>
+      <?php if($TABLE == "bottom_tab_categories" or $TABLE== "bottom_tab_livescores"){ ?>
+    <th scope="col" width="50" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">表示順</th>
+  <?php }?>
 
   <th scope="col" class="t_title"><?php if($TABLE!="tabs") echo $THIS; ?>タイトル</th>
         <?php if($CURRENTDIRECTORY == "photo"){?>
@@ -37,20 +40,31 @@
 <img src="/shared/cms/img/cmd_ups_disabled.gif" width="13" height="13" alt="一つ上へ入れ替える" ><img src="/shared/cms/img/cmd_downs_disabled.gif" width="13" height="13" alt="一つ下へ入れ替える" >
 -->
 </td>
-      <?php if ($CURRENTDIRECTORY != "company_news" && $CURRENTDIRECTORY != "notice" && $CURRENTDIRECTORY != "pickup_athlete_big4") { ?>
+      <?php if ($CURRENTDIRECTORY != "company_news" && $CURRENTDIRECTORY != "notice" && $CURRENTDIRECTORY != "pickup_athlete_big4" ) { ?>
 
         <td class="display"><?php
           if($CURRENTDIRECTORY == "photo"){
             echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
           } else {
             if(getSorC("draft")==1){
-                echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
+                if($TABLE == "bottom_tab_categories" or $TABLE== "bottom_tab_livescores"){
+                    echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"publicswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["is_public".$LANG[$EI]]!="t"?"dis":"",$LANG[$EI],$p[$i]["id"]);
+                }
+                else{
+                    echo sprintf("<div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div>",$p[$i]["flag".$LANG[$EI]]!=1?"dis":"",$LANG[$EI],$p[$i]["id"]);
+                }
             }else{
                 echo "<div class=\"dp2\"><img src=\"/shared/cms/img/cmd_active_disabled.gif\" width=\"13\" height=\"13\"></div>";
             }
         }
         ?></td>
       <?php } ?>
+        
+      <?php if($TABLE == "bottom_tab_categories" or $TABLE== "bottom_tab_livescores"){ ?>
+    <td scope="col" width="50" style="text-align: center;" class="t_display<?php if(getSorC("draft")!=1){ ?>_disabled<?php } ?>">
+        <button type="button" data-this-id="<?php echo $p[$i]['id']; ?>" data-this-table="<?php echo $type; ?>" class="js-sort-swap" style="width: 90%; margin: auto;">↑</button>
+    </td>
+  <?php }?>
 
   <?php if($TABLE == "u_media"){ ?>
   <td class="display">
@@ -113,3 +127,57 @@
 <?php } ?>
 
 <?php } ?>
+<?php if($TABLE == "bottom_tab_categories" or $TABLE== "bottom_tab_livescores"){ ?>
+<script type="text/javascript">
+var swap_lock = false;
+$('.js-sort-swap:first').prop('disabled', true);
+$('.js-sort-swap').on('click', function(){
+    if(swap_lock === true){
+        return;
+    }
+    swap_lock = true;
+    buttonLock(true);
+    
+    var tr = $(this).closest('tr');
+    var id = $(this).data('thisId');
+    var beforeId = tr.prev().find('.js-sort-swap').data('thisId');
+    var table = $(this).data('thisTable'); 
+//    console.log(id, beforeId);
+//    return;
+    $.ajax({
+        url: "/api/editdm/user/sort_no.php",
+        data: {
+            'id[]': [id,beforeId],
+            'type': table
+        },
+        dataType: "json",
+        type    : "POST",
+    }).done(function(data){
+        tableRowSwap(tr, tr.prev());
+    }).fail(function(data){
+        if(data.responseJSON !== undefined){
+            alert(data.responseJSON.user_message);
+        } else {
+            alert('予期せぬエラーが発生しました');
+        }
+    }).complete(function(){
+        swap_lock = false;
+        buttonLock(false);
+    });
+})
+function buttonLock(isLock){
+    if(isLock){
+        $('.js-sort-swap').prop('disabled', true);
+    } else {
+        $('.js-sort-swap:not(:first)').prop('disabled', false);
+    }
+}
+function tableRowSwap(tr, before){
+    var tr_style = tr.attr('style');
+    var before_style = before.attr('style');
+    tr.attr('style', before_style);
+    before.attr('style', tr_style);
+    before.before(tr);
+}
+</script>
+<?php }?>

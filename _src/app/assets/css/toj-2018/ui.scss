@@ -1,0 +1,622 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../scss/asset";
+
+// normalize / reset / åŸºæœ¬ class, tag è¨­å®š
+@import "../../../../bower_exports/modularized/normalize";
+@import "../../../../scss/style/reset";
+@import "../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// ä»¥ä¸‹ã€import ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç·¨é›†
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+
+$c-bg1: #e5ecf4;
+$c-bg2: #fae7e7;
+$c-main: #004796;
+$c-accent: #cc1414;
+$c-txt__strong: $c-main;
+
+// common override
+.body-sec,
+.body-sec-inner,
+.foot-sec {
+  background-color: #fff !important;
+}
+.body-sec {
+  background: url(/assets/images/toj-2018/summary-bg.jpg) center 0 no-repeat;
+  &:after {
+    content: '';
+    display: block;
+    width: 110%;
+    height: 510px;
+    background-color: #fff;
+    position: absolute;
+    top: 510px;
+    right: 0;
+    transform-origin: right top;
+    transform: rotate(4.3deg);
+  }
+}
+.body-sec-inner {
+  background-image: none;
+}
+.side-sec {
+  position: relative;
+  background: none;
+  z-index: 2;
+}
+
+// sponsor-link
+.sponsor-link.column2 {
+  margin-top: 30px + 24;
+}
+
+
+
+//.summary
+.summary {
+  position: relative;
+  z-index: 2;
+  // margin: 0 -500em;
+  // padding: 0 500em;
+}
+.summary__inner {
+  position: relative;
+  width: 1090px;
+  height: 180px;
+  margin: 0 auto;
+}
+.summary__heading {
+  position: absolute;
+  top: 40px;
+  left: 0;
+}
+.summary__copy {
+  position: absolute;
+}
+.summary__copy--first {
+  @extend .summary__copy;
+  top: 44px;
+  left: 268px;
+}
+.summary__copy--second {
+  @extend .summary__copy;
+  top: 24px;
+  left: 1239px;
+}
+
+
+
+
+
+//.live-streaming
+.liveStreaming {
+  width: 1090px;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+  z-index: 2;
+  .video-js {
+    width: 100%;
+    height: auto;
+    &:before {
+        content: "";
+        display: block;
+        padding-top: 56.25%; /* 高さと幅の比を16:9に固定。9/16*100=56.25 */
+    }
+    video {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  // .video-js .vjs-big-play-button {
+  //   content: "";
+  //   position: absolute;
+  //   top: 50%;
+  //   left: 50%;
+  //   width: 110px;
+  //   height: 110px;
+  //   -webkit-transform: translate(-50%, -50%);
+  //   transform: translate(-50%, -50%);
+  //   background: url(/assets/images/toj-2018/icon_play-main.png) 0 0 no-repeat;
+  //   background-size: contain;
+  //   overflow: hidden;
+  //   font-size: 0;
+  //   text-indent: 100%;
+  //   white-space: nowrap;
+  //   outline: none;
+  // }
+  // .bc-iframe .vjs-playlist-sidebar .vjs-playlist-show-hide button:hover, .bc-player-r1Zn0fWf4f_default .vjs-big-play-button:active, .bc-player-r1Zn0fWf4f_default .vjs-big-play-button:focus, .bc-player-r1Zn0fWf4f_default .vjs-menu-button-popup .vjs-menu .vjs-menu-item.vjs-selected, .bc-player-r1Zn0fWf4f_default .vjs-play-progress, .bc-player-r1Zn0fWf4f_default .vjs-volume-level, .bc-player-r1Zn0fWf4f_default:active .vjs-big-play-button, .bc-player-r1Zn0fWf4f_default:hover .vjs-big-play-button {
+  //   background-color: transparent;
+  // }
+  // .vjs-playing {
+  //   .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder:before, .vjs-icon-play:before {
+  //     display: none;
+  //   }
+  // }
+  // .bc-player-HJytfVm3f_default .vjs-big-play-button, .bc-player-HJytfVm3f_default .vjs-control-bar {
+  //   background-color: #12377e;
+  // }
+  .video-js:hover .vjs-big-play-button, .video-js .vjs-big-play-button:focus, .video-js .vjs-big-play-button:active {
+      background-color: rgba(36,131,213,0.9);
+  }
+}
+.liveStreaming__inner {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+//container setting
+.container {
+  position: relative;
+  z-index: 2;
+  margin-right: -556px;
+  margin-left: -195px;
+  padding-right: 556px;
+  padding-left: 195px;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+.container__heading {
+  margin-bottom: 30px;
+}
+
+//.intro
+.intro {
+  @extend .container;
+  padding-top: 30px;
+  padding-bottom: 0;
+  .intro__catch {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+  // .intro__link__app {
+  //   margin-top: 20px;
+  //   a {
+  //     @include link-decoration(#001a72, #001a72, underline, none);
+  //     display: inline-block;
+  //     line-height: 40px;
+  //     padding-left: 48px;
+  //     background: url(/assets/images/toj-2018/intro-app_icon.png) 0 0 no-repeat;
+  //     background-size: 40px;
+  //     font-weight: bold;
+  //     font-size: 18px;
+  //   }
+  // }
+  .intro__banner {
+    &:not(:nth-last-of-type(1)) {
+      margin-bottom: 16px;
+    }
+    img {
+      border: 1px solid #eee;
+    }
+    a:hover {
+      @include opacity(0.8);
+    }
+  }
+} //.intro
+
+
+// .schedule
+.schedule {
+  @extend .container;
+  padding-top: 40px;
+  .schedule__widjet_twitter {
+    margin-top: 40px;
+    iframe {
+      width: 100% !important;
+      height: 400px !important;
+    }
+  }
+}
+.schedule__heading {
+  @extend .container__heading;
+}
+//.schedule
+
+
+
+
+//.about
+.about {
+  @extend .container;
+  background-color: $c-bg1;
+  .about__heading {
+    @extend .container__heading;
+  }
+  .about__text {
+    p + p {
+      margin-top: 1em;
+    }
+  }
+  .about__movie {
+    position: relative;
+    margin-top: 30px;
+    &:before {
+      content: "";
+      display: block;
+      padding-top: (728/1280*100%);
+    }
+    iframe {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    a {
+      position: relative;
+      display: block;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 90px;
+        height: 90px;
+        transform: translate(-50%, -50%);
+        background: url(/assets/images/toj-2018/about-movie-icon_play.png) 0 0 no-repeat;
+        @include hide-text;
+      }
+      &:hover {
+        @include opacity(0.8);
+      }
+    }
+  }
+  
+}
+//.about
+
+//.about__featured
+.about__featured {
+  margin-top: 32px;
+  //.about__featured__heading
+  &__heading {
+    margin-bottom: 4px;
+  }
+  //.about__featured__list
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  //.about__featured__item
+  &__item {
+    width: 132px;
+    margin-top: 20px;
+    margin-right: 17px;
+    &--more {
+      margin-top: 20px;
+      figure {
+        width: 132px;
+        height: 132px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
+    }
+    &:nth-child(5n) {
+      margin-right: 0;
+    }
+    figure {
+      img {
+        width: 132px;
+      }
+    }
+    h4 {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    p {
+      margin-top: 4px;
+      font-size: 10px;
+      &.country {
+        margin-top: 6px;
+        color: #e50b43;
+      }
+    }
+  }
+} //.about__featured
+
+
+//.overview
+.overview {
+  @extend .container;
+  .overview__heading {
+    @extend .container__heading;
+  }
+
+  .overview__data {
+    th, td {
+      padding-bottom: 0.5em;
+      vertical-align: top;
+    }
+
+    th {
+      padding-right: 20px;
+      border-right: 1px solid $c-accent;
+      font-weight: bold;
+      color: $c-txt__strong;
+      width: calc(4em + 20px);
+    }
+
+    td {
+      padding-left: 24px;
+
+      a {
+        @include link-decoration($c-txt__strong, $c-txt__strong, none, underline);
+      }
+    }
+  }
+} //.overview
+
+
+//.related
+.related {
+  @extend .container;
+  background-color: $c-bg2;
+}
+.related__heading {
+  @extend .container__heading;
+}
+.related__post {
+  position: relative;
+  &:nth-of-type(1) {
+    .related__link {
+      padding-top: 0;
+    }
+  }
+  &:nth-of-type(n + 2) {
+    border-top: 1px solid #fff;
+  }
+  &:nth-last-of-type(1) {
+    .related__link {
+      padding-bottom: 0;
+    }
+  }
+}
+.related__link {
+  display: flex;
+  @include link-decoration(null, null, none, none);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  &:hover {
+    @include opacity(0.8);
+  }
+}
+.related__thumb {
+  position: relative;
+  width: 280px;
+  margin-right: 20px;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    transform: translate(-50%, -50%);
+    background: url(/assets/images/toj-2018/related-icon_play.png) 0 0 no-repeat;
+    @include hide-text;
+  }
+}
+.related__text {
+  position: relative;
+  width: calc(100% - 300px);
+  padding-bottom: 40px;
+  .heading {
+    color: $c-txt__strong;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  .text {
+    margin-top: 0.75em;
+    color: #000;
+  }
+  .date {
+    // margin-top: 2em;
+    color: #999;
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+
+.button__videoLink {
+  position: relative;
+  width: 160px;
+  height: 32px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, .1);
+  a, .button__linkNone {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;  
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    &:after {
+      content: '';
+      display: inline-block;
+      background-image: url(/assets/images/toj-2018/icon_btn-play.png);
+      background-repeat: no-repeat;
+      width: 20px;
+      height: 20px;
+      margin-left: 5px;
+    }
+  }
+  a {
+    transition-duration: .1s;
+    background-color: $c-main;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    &:active {
+      top: 3px;
+      left: 3px;
+    }
+  }
+  &.is-inactive {
+    .button__linkNone {
+      background-color: #cccccc;
+      cursor: default;
+    }
+  }
+}
+.button__fulltime {
+  @extend .button__videoLink;
+}
+.button__highlight {
+  @extend .button__videoLink;
+}
+
+
+.schedule {
+  position: relative;
+}
+.schedule__unit {
+  &:nth-child(odd) {
+    background-color: #e5f3f7;
+  }
+  &:nth-child(even) {
+    .schedule__map {
+      background-color: #e5f3f7;
+    }
+  }
+  &.is-open {
+    .schedule__detail {
+      height: 454px;
+    }
+    .schedule__header {
+      &:after {
+        transform: rotate(0deg);
+      }
+    }
+  }
+}
+.schedule__header {
+  width: 100%;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  .date {
+    width: 208px;
+    height: 64px;
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+  }
+  .title {
+    display: flex;
+    align-items: center;
+    width: 290px;
+    height: 64px;
+    border-left: 1px solid $c-accent;
+    padding-left: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    em {
+      font-weight: bold;
+      margin-left: 25px;
+      font-size: 24px;
+    }
+  }
+  .buttonBlock {
+    height: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &:after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 70px;
+    background-image: url(/assets/images/toj-2018/arw_schedule_toggle.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition-duration: 0.5s;
+    transform-origin: center center;
+    transform: rotate(180deg);
+  }
+}
+.schedule__detail {
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  height: 0;
+  overflow: hidden;
+  transition-duration: 0.5s;
+}
+.schedule__info {
+  position: relative;
+  width: 208px;
+  height: 454px;
+  padding: 16px;
+  .stage {
+    color: #000000;
+  }
+  .number {
+    margin-bottom: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  .name {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  .text {
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    transform-origin: left center;
+    transform: scale(0.86);
+    em {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    small {
+      font-size: 10px;
+    }
+  }
+  .credit {
+    position: absolute;
+    bottom: 16px;
+    width: 176px;
+    figcaption {
+      font-size: 10px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      text-align: right;
+    }
+    p {
+      text-align: right;
+    }
+  }
+}
+.schedule__map {
+  padding: 4px;
+  background-color: #ffffff;
+}

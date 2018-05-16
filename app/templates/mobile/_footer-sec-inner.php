@@ -1,3 +1,8 @@
+<?php
+// 下タブ ref. https://aws-plus.backlog.jp/view/UNDO_SPBL-432
+include __DIR__ . '/_footer_sticky_tab_menu.php';
+?>
+
 <div class="<?php echo $page['html_prefix']; ?>foot-sec-inner">
 
   <?php

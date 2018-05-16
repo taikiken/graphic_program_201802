@@ -104,9 +104,114 @@ textarea {
     margin-top: 0;
   }
 
+  .side-menu {
+    .menu-container {
+      position: relative;
+      margin-top: 12px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #ddd;
+      }
+
+      .menu-heading {
+        height: 38px;
+        line-height: 38px;
+        border-bottom: 1px solid #ddd;
+        background-position: right bottom;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        font-weight: bold;
+
+        // span {
+        //   margin-left: 1em;
+        // }
+      } //.menu-heading {
+
+      // ex. .category-baseball の時の .menu-heading のアイコンは menu-heading-chara_baseball.png
+      $heading-array: pickup, baseball, soccer, basketball, motorsports, other;
+      @include prc-each( pickup, baseball, soccer, basketball, motorsports, other ) {
+        &.category-#{nth($heading-array, $arg_i)} {
+          .menu-heading {
+            background-image: url(/assets/images/common/menu-heading-chara_#{nth($heading-array, $arg_i)}.png);
+          }
+        }
+      }
+
+      .menu-list {
+        display: flex;
+        flex-wrap: wrap;
+      } //.menu-list
+
+      .menu-item {
+        width: 50%;
+        border-bottom: 1px solid #ddd;
+        padding-right: 4px;
+      } //.menu-item
+
+      .menu-link {
+        @include link-decoration(#000, #000, null, null);
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        font-size: 12px;
+        // white-space: nowrap;
+
+        img {
+          width: 16px;
+          margin-right: 4px;
+          vertical-align: middle;
+        }
+      } //.menu-link
+    } //.menu-container
+  } //.side-menu
+
+  .side-menu + .widget-ranking,
+  .side-menu + #widget-ranking-container {
+    margin-top: 0;
+
+    .widget-ranking {
+      margin-top: 0;
+    }
+
+    .widget-ranking-heading {
+      border-top: none;
+    }
+  }
+
+  .side-menu + .widget-recommend,
+  .side-menu + #widget-recommend-container {
+    margin-top: 0;
+
+    .widget-recommend {
+      margin-top: 0;
+    }
+
+    .widget-ranking-recommend {
+      border-top: none;
+    }
+  }
+
+  .side-menu + #widget-recommend-list-container {
+    .widget-ranking {
+      margin-top: 0;
+    }
+
+    .widget-recommend-heading {
+      border-top: none;
+    }
+  }
+
+
   .widget-ranking,
   .widget-recommend {
-    margin-top: 30px;
+    margin-top: 20px;
 
     &.board-small {
       border-top: none;

@@ -145,6 +145,12 @@ endif;
 // --------------------------------
 ?>
 
+<?php
+// @since 2018-04-10
+// tab bar
+include_once __DIR__ . '/_sidebar_tab_bar.php';
+?>
+
           <?php
           // ------------------------------------
           // sidebar recommend, オススメ記事
@@ -157,6 +163,7 @@ endif;
           ) : ?>
             <div id="widget-recommend-list-container"></div><!--/recommend-->
           <?php endif; ?>
+
           <div id="widget-ranking-container"></div><!--/ranking-->
 
           <?php if ( $page['category']['slug'] !== 'crazy' ) : ?>

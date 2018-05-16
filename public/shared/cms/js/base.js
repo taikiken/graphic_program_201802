@@ -375,6 +375,24 @@ $(function(){
 		});
 
 	});
+	$(".publicswitch").click(function(){
+		var slang=$(this).attr("class").match(/ lang_([^"]*)/)[1];
+		var sid=$(this).attr("id").replace("e","");
+		var sflag=$(this).attr("src").match(/dis/)?1:0;
+		var stable=cd.replace("repo_s","repo");
+		var r=$(this);
+
+		$.ajax({
+			type: "POST",
+			url: "/editdm/module/publicswitch.php",
+			data: "lang="+slang+"&id="+sid+"&flag="+sflag+"&table="+stable,
+			success: function(m){
+				if(m==1){
+					r.attr("src",sflag==1?"/shared/cms/img/cmd_active.gif":"/shared/cms/img/cmd_disactive.gif");
+				}
+			}
+		});
+	});
 
     $(".ngflagswitch").click(function(){
         var slang=$(this).attr("class").match(/ lang_([^"]*)/)[1];

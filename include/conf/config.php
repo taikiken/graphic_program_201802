@@ -96,6 +96,21 @@ $GET_AU_TMP_PICKS_API = '/api/editdm/bulls-picks/au/tmp';
 $POST_AU_TMP_PICKS_API = '/api/editdm/bulls-picks/au/tmp/update';
 $AU_ARCHIVE_PICKS_TO_PRODUCTION_API = '/api/editdm/bulls-picks/au/2prd';
 
+// tour_of_json のファイル名
+$TOJ_FILENAME = 'static/toj/live.json';
+$TMP_TOJ = '/tmp/toj_live.json';
+$GET_TOJ_API = '/api/editdm/tour-of-japan';
+$GET_TMP_TOJ_API = '/api/editdm/tour-of-japan/tmp';
+$POST_TMP_TOJ_API = '/api/editdm/tour-of-japan/tmp/update';
+
+// big6live json のファイル名
+$BIG6_FILENAME = 'static/big6/2018s/live.json';
+$TMP_BIG6 = '/tmp/big6_live.json';
+$GET_BIG6_API = '/api/editdm/big6-live';
+$GET_TMP_BIG6_API = '/api/editdm/big6-live/tmp';
+$POST_TMP_BIG6_API = '/api/editdm/big6-live/tmp/update';
+
+
 //六大学のシーズンを記載
 $BIG6TV_SEASON = '2018s';
 
