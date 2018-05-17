@@ -81,6 +81,7 @@ const init = (selector) => {
  * @param {string} [selector=SPBL_header] script tag ID
  */
 const main = (selector = 'SPBL_vk-header_script') => {
+  document.removeEventListener('DOMContentLoaded', main);
   if (!init(selector)) {
     return;
   }
@@ -90,7 +91,9 @@ const main = (selector = 'SPBL_vk-header_script') => {
   device(Sagen);
 };
 
-main();
+// dom ready 待つ - 2018-05-17
+// main();
+document.addEventListener('DOMContentLoaded', main, false);
 
 /**
  * global 出力セット
