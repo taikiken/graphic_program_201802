@@ -179,9 +179,13 @@ $seo_h1 = ( $page['template'] !== 'inc' ) ? 'h1' : 'p';
       </div>
 
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-inner-right">
+        <?php if ( $page['conditional']['header_search'] ) : ?>
         <span id="<?php echo $page['html_prefix']; ?>search-container-opener"></span>
+        <?php endif; ?>
 
+        <?php if ( $page['conditional']['header_user'] ) : ?>
         <div id="<?php echo $page['html_prefix']; ?>user-profile-container"></div><!--/.user-profile-container-->
+        <?php endif; ?>
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
