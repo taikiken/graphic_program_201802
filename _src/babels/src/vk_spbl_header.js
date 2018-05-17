@@ -105,6 +105,7 @@ const main = (selector = 'SPBL_vk-header_script') => {
   // ---
   const platform = script.dataset.platform || '';
   VK.current = script.dataset.current || '';
+  // console.log('vk-main', platform, VK.current, script);
   // device(Sagen);
   device(platform);
 };
