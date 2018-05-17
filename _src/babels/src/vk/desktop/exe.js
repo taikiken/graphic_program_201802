@@ -27,7 +27,9 @@ import VK from '../VK';
  */
 const nav = () => {
   // NavCurrent.init('vk', false, true);
-  NavCurrent.init(VK.current, false, true);
+  if (VK.current) {
+    NavCurrent.init(VK.current, false, true);
+  }
 };
 
 
