@@ -66,7 +66,7 @@ endif;
 
   <?php
   // VK出力用script
-  if ( $page['template'] === 'inc' && $page['directory'] === 'vk' ) :
+  if ( $page['template'] === 'inc' ) :
     include_once __DIR__.'./../_inc_vk_script.php';
   endif;
   ?>
