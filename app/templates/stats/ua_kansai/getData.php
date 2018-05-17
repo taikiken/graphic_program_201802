@@ -69,9 +69,12 @@ EOM;
 EOM;
 			}
 			$result[$gameArray[$value["leaguetype"]]]["schedule"] = $tmp;
-			if ($value["leaguetype"] == "公式戦") {
-				$result[$gameArray[$value["leaguetype"]]]["standing"] = self::getStanding();
-			}
+            
+// 2018春シーズン年次更新用に一旦トルツメ
+//			if ($value["leaguetype"] == "公式戦") {
+//				$result[$gameArray[$value["leaguetype"]]]["standing"] = self::getStanding();
+//			}
+            
 		}
 		foreach ($result as $key => $value) {
 			if (empty($value)) {
