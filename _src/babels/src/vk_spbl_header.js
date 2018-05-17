@@ -28,7 +28,7 @@ import { User } from './app/User';
 const device = (Sagen) => {
   // console.log('device vk', vk);
   // execute
-  if (Sagen.Browser.Mobile.is()) {
+  if (Sagen.Browser.Mobile.phone()) {
     vk.mobile();
   } else {
     vk.desktop();
@@ -90,10 +90,22 @@ const main = (selector = 'SPBL_vk-header_script') => {
   device(Sagen);
 };
 
-main();
+/**
+ * DOMContentLoaded event handler
+ * - `main` 実行します
+ */
+const ready = () => {
+  document.removeEventListener('DOMContentLoaded', ready);
+  main();
+};
+
+// dom ready 待つ - 2018-05-17
+// main(); -- remove
+document.addEventListener('DOMContentLoaded', ready, false);
 
 /**
  * global 出力セット
+ * - main - SPBL_VK.main(SCRIPT_ID_NAME) で実行可能
  * @type {{build: string, main: main}}
  */
 const SPBL_VK = {
