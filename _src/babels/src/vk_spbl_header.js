@@ -81,7 +81,6 @@ const init = (selector) => {
  * @param {string} [selector=SPBL_header] script tag ID
  */
 const main = (selector = 'SPBL_vk-header_script') => {
-  document.removeEventListener('DOMContentLoaded', main);
   if (!init(selector)) {
     return;
   }
@@ -91,12 +90,22 @@ const main = (selector = 'SPBL_vk-header_script') => {
   device(Sagen);
 };
 
+/**
+ * DOMContentLoaded event handler
+ * - `main` 実行します
+ */
+const ready = () => {
+  document.removeEventListener('DOMContentLoaded', ready);
+  main();
+};
+
 // dom ready 待つ - 2018-05-17
 // main(); -- remove
-document.addEventListener('DOMContentLoaded', main('SPBL_vk-header_script'), false);
+document.addEventListener('DOMContentLoaded', ready, false);
 
 /**
  * global 出力セット
+ * - main - SPBL_VK.main(SCRIPT_ID_NAME) で実行可能
  * @type {{build: string, main: main}}
  */
 const SPBL_VK = {
