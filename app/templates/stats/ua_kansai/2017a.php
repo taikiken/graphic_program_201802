@@ -1,7 +1,3 @@
-<?php
-include __DIR__."/getData.php";
-$dataArray = getData::getSchedule();
-?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
@@ -11,7 +7,7 @@ $dataArray = getData::getSchedule();
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <script src="/assets/js/app_divide.bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title>test 日程・結果 - 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | スポーツブル (スポブル)</title>
+  <title>日程・結果 - 関西学生アメリカンフットボールリーグ | 速報 &amp; データ | スポーツブル (スポブル)</title>
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
 
@@ -34,9 +30,6 @@ $dataArray = getData::getSchedule();
   <meta name="twitter:image" content="https://sportsbull.jp/assets/stats/ua_kansai/images/ogp.jpg">
   <meta name="twitter:url" content="https://sportsbull.jp/stats/ua_kansai/">
   <meta name="twitter:description" content="関西学生アメリカンフットボールリーグ 試合速報&データ見るならスポーツブル(スポブル)で。スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。">
-
-  <?php include_once __DIR__.'/_head.php'; ?>
-
 </head>
 <body>
 
@@ -131,32 +124,401 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
       <div class="game-category1">
         <div class="af-schedule">
             <h2 class="calendar">日程・結果 / Division1</h2>
-            <div class="lastupdate">最終更新日：<?=$dataArray["lastupdate"]?></div>
-            <?=$dataArray["game-category1"]["schedule"]?>
-        </div><!-- af-schedule -->
+            <div class="lastupdate">最終更新日：2018年5月17日 14:27:18</div>
+            					<div class="list">
+						<p>8月25日(金)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170825_1">
+								<span class="team-6">京都大学</span>
+								13 - 10
+								<span class="team-3">関西大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170825_1'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>8月26日(土)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170826_1">
+								<span class="team-5">甲南大学</span>
+								10 - 14
+								<span class="team-4">龍谷大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170826_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170826_2">
+								<span class="team-7">桃山学院大学</span>
+								7 - 38
+								<span class="team-2">立命館大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170826_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>8月27日(日)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170827_1">
+								<span class="team-1">関西学院大学</span>
+								28 - 0
+								<span class="team-8">同志社大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170827_1'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>9月9日(土)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170909_1">
+								<span class="team-1">関西学院大学</span>
+								65 - 0
+								<span class="team-7">桃山学院大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170909_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170909_2">
+								<span class="team-4">龍谷大学</span>
+								3 - 41
+								<span class="team-6">京都大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170909_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>9月10日(日)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170910_1">
+								<span class="team-3">関西大学</span>
+								20 - 12
+								<span class="team-5">甲南大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170910_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170910_2">
+								<span class="team-8">同志社大学</span>
+								3 - 45
+								<span class="team-2">立命館大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170910_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>9月22日(金)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170922_1">
+								<span class="team-6">京都大学</span>
+								10 - 31
+								<span class="team-1">関西学院大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170922_1'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>9月23日(土)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170923_1">
+								<span class="team-4">龍谷大学</span>
+								16 - 7
+								<span class="team-7">桃山学院大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170923_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170923_2">
+								<span class="team-8">同志社大学</span>
+								7 - 35
+								<span class="team-3">関西大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170923_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>9月24日(日)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20170924_1">
+								<span class="team-5">甲南大学</span>
+								0 - 49
+								<span class="team-2">立命館大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20170924_1'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>10月7日(土)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171007_1">
+								<span class="team-4">龍谷大学</span>
+								7 - 9
+								<span class="team-8">同志社大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171007_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171007_2">
+								<span class="team-2">立命館大学</span>
+								66 - 17
+								<span class="team-6">京都大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171007_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>10月8日(日)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171008_1">
+								<span class="team-1">関西学院大学</span>
+								42 - 7
+								<span class="team-5">甲南大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171008_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171008_2">
+								<span class="team-3">関西大学</span>
+								26 - 10
+								<span class="team-7">桃山学院大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171008_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>10月21日(土)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171021_1">
+								<span class="team-8">同志社大学</span>
+								6 - 47
+								<span class="team-6">京都大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171021_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171021_2">
+								<span class="team-2">立命館大学</span>
+								15 - 7
+								<span class="team-3">関西大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171021_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>10月22日(日)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171022_1">
+								<span class="team-5">甲南大学</span>
+								51 - 6
+								<span class="team-7">桃山学院大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171022_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171022_2">
+								<span class="team-1">関西学院大学</span>
+								28 - 0
+								<span class="team-4">龍谷大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171022_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>11月4日(土)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171104_1">
+								<span class="team-5">甲南大学</span>
+								17 - 7
+								<span class="team-8">同志社大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171104_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171104_2">
+								<span class="team-6">京都大学</span>
+								38 - 10
+								<span class="team-7">桃山学院大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171104_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>11月5日(日)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171105_1">
+								<span class="team-4">龍谷大学</span>
+								16 - 38
+								<span class="team-2">立命館大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171105_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171105_2">
+								<span class="team-3">関西大学</span>
+								28 - 42
+								<span class="team-1">関西学院大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171105_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>11月18日(土)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171118_1">
+								<span class="team-7">桃山学院大学</span>
+								7 - 0
+								<span class="team-8">同志社大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171118_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171118_2">
+								<span class="team-6">京都大学</span>
+								49 - 3
+								<span class="team-5">甲南大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171118_2'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171118_3">
+								<span class="team-3">関西大学</span>
+								34 - 0
+								<span class="team-4">龍谷大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171118_3'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>					<div class="list">
+						<p>11月19日(日)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171119_1">
+								<span class="team-2">立命館大学</span>
+								21 - 7
+								<span class="team-1">関西学院大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171119_1'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>        </div><!-- af-schedule -->
 
         <div class="af-match">
-          <?=$dataArray["game-category1"]["standing"]?>
-        </div><!-- af-schedule -->
+          <h2 class='star'><span class='sp-none'>星取表</span><span class='pc-none'>順位表</span> / Division1</h2><div class='lastupdate'>最終更新日：2018年5月12日 16:19:21</div>		<table>
+			<thead>
+				<tr>
+					<th width="10%">順位</th>
+					<th>大学名<br class="sp-none">（勝-敗-分）</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead><tbody></tbody></table>        </div><!-- af-schedule -->
       </div><!-- game-category -->
       <div class="game-category2">
         <div class="af-schedule">
             <h2 class="calendar">日程・結果 / 入替戦</h2>
-            <?=$dataArray["game-category2"]["schedule"]?>
-        </div>
+            					<div class="list">
+						<p>12月10日(日)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171210_1">
+								<span class="team-7">桃山学院大学</span>
+								0 - 21
+								<span class="team-9">近畿大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171210_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171210_2">
+								<span class="team-8">同志社大学</span>
+								0 - 33
+								<span class="team-10">神戸大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171210_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>        </div>
       </div><!-- game-category2 -->
       <div class="game-category3">
         <div class="af-schedule">
             <h2 class="calendar">日程・結果 / 全日本</h2>
-            <?=$dataArray["game-category3"]["schedule"]?>
-        </div>
+            					<div class="list">
+						<p>12月3日(日)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171203_1">
+								<span class="team-2">立命館大学</span>
+								3 - 34
+								<span class="team-1">関西学院大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171203_1'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>        </div>
       </div><!-- game-category3 -->
       <div class="game-category4">
         <div class="af-schedule">
             <h2 class="calendar">日程・結果 / 甲子園ボウル</h2>
-            <?=$dataArray["game-category4"]["schedule"]?>
-        </div>
+            					<div class="list">
+						<p>12月17日(日)</p>
+						<ul>
+													<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171217_1">
+								<span class="team-">啓明学院中</span>
+								7 - 0
+								<span class="team-">立命館宇治中</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171217_1'>ダイジェスト動画</a>
+							
+						</li>						<li>
+														<a class="match active" href="/stats/ua_kansai/match/?gameId=20171217_2">
+								<span class="team-1">関西学院大学</span>
+								17 - 23
+								<span class="team-11">日本大学</span>
+							</a>
+							<a class='digest active' href='/stats/ua_kansai/match/?gameId=20171217_2'>ダイジェスト動画</a>
+							
+						</li>
+						</ul>
+					</div>        </div>
       </div><!-- game-category4 -->
+
 
 
       </section><!-- /.main-sec -->
@@ -220,25 +582,10 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
     </div>
   </div><!-- /.body-sec -->
 
-<?php
-// # footer
-// ==============================
-
-  $BREADCRUMB = array(
-    array(
-      'label' => '関西アメフト 日程・結果',
-      'path'  => '/stats/ua_kansai/'
-    ),
-  );
-
-  // footer dom
-  include_once __DIR__.'/../../_footer-responsive.php';
-?>
-
 </div><!-- /.whole -->
 
 <!-- for facebook -->
-<script src="/assets/facebook/init.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/facebook/init.js?v=e1daf86db"></script>
 <!-- // for facebook -->
 
 <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
@@ -246,6 +593,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 <script src="/assets/js/global.bundle.js"></script>
 <script src="/assets/stats/ua_kansai/js/amefoot.bundle.js"></script>
 <script src="/assets/stats/ua_kansai/js/index.js"></script>
-<script src="/assets/popup/js/banner_popup_app.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/popup/js/banner_popup_app.bundle.js?v=e1daf86db"></script>
 </body>
 </html>
