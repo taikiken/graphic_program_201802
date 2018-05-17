@@ -39,10 +39,8 @@ $app->group('/inc', function () use ($app) {
           'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
-          'whole'            => false,
           'header'           => false,
           'gnav'             => false,
-          'announce'         => false,
           'sidemenu'         => true,
           'footer'           => false,
           'footer_copyright' => false,
@@ -69,11 +67,8 @@ $app->group('/inc', function () use ($app) {
           'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
-          'whole'            => false,
           'header'           => true,
-          'header_appbnr'    => false,
           'gnav'             => true,
-          'announce'         => false,
           'sidemenu'         => false,
           'footer'           => false,
           'footer_copyright' => false,
@@ -100,10 +95,8 @@ $app->group('/inc', function () use ($app) {
           'head_bottom'      => false,
           'head_video'       => false,
           'body_start'       => false,
-          'whole'            => false,
           'header'           => false,
           'gnav'             => false,
-          'announce'         => false,
           'sidemenu'         => true,
           'footer'           => true,
           'footer_copyright' => false,
@@ -114,13 +107,14 @@ $app->group('/inc', function () use ($app) {
         break;
 
       default:
-        $conditional = array(
-          'header_appbnr' => false,
-          'whole'         => false,
-          'announce'      => false,
-        );
-
     endswitch;
+
+
+    // conditional - common
+    $conditional['header_appbnr'] = false;
+    $conditional['whole']         = false;
+    $conditional['announce']      = false;
+
 
     // category
     // ------------------------------
