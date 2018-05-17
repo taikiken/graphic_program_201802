@@ -28,7 +28,7 @@ import { User } from './app/User';
 const device = (Sagen) => {
   // console.log('device vk', vk);
   // execute
-  if (Sagen.Browser.Mobile.is()) {
+  if (Sagen.Browser.Mobile.phone()) {
     vk.mobile();
   } else {
     vk.desktop();
