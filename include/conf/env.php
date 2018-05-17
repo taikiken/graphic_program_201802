@@ -5,6 +5,7 @@ $requesturi=$_SERVER['REQUEST_URI'];
 $staticfileimport=0;
 $filename=$_SERVER['SCRIPT_FILENAME'].$_SERVER['REQUEST_URI'];
 
+
 //DB設定
 include "conf/db_setting.php";
 
@@ -22,7 +23,6 @@ if(preg_match("/undotsushin/",$servername)){
 		$LSCMS="legendsstadium2";
 
 		$bucket="dev-img-sportsbull-jp";
-		$cf_bucket="https://dev-img.sportsbull.jp/";
 
 	}elseif(preg_match("/stg/",$servername)){
 
@@ -36,9 +36,8 @@ if(preg_match("/undotsushin/",$servername)){
 		$LSCMS="legendsstadium";
 
 		$bucket="img-sportsbull-jp";
-    $cf_bucket="https://img.sportsbull.jp/";
 
-  }else{
+	}else{
 
 		$staticfileimport=1;
 
@@ -50,9 +49,7 @@ if(preg_match("/undotsushin/",$servername)){
 		$UserImgPath="https://www.undotsushin.com";
 
 		$bucket="img-sportsbull-jp";
-    $cf_bucket="https://img.sportsbull.jp/";
-
-  }
+	}
 
 	$SQLLOG="/var/www/data/log/ut_sqllog.txt";
 	$CMSLOG="/var/www/data/log/ut_cmslog.txt";
@@ -67,7 +64,10 @@ if(preg_match("/undotsushin/",$servername)){
 
 }elseif(preg_match("/sportsbull/",$servername)){
 
-	if(preg_match("/dev/",$servername)){
+  $VK_FTP_ADDRESS = 'ftp55.asahi.com';
+  $VK_FTP_PASS = 'jA8fDkea#';
+
+  if(preg_match("/dev/",$servername)){
 
 		$SERVERPATH="/var/www/sportsbull.jp/dev/public";
 		$USERS="/var/www/sportsbull.jp/dev/public/users";
@@ -84,15 +84,10 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_kansaibig6/",$requesturi) ||
       preg_match("/ub_tohto/",$requesturi)) {
       $bucket="dev-ublive.sportsbull.jp";
-      $cf_bucket="https://dev-ublive.sportsbull.jp/";
-
     }elseif (preg_match("/worldsoccer/",$requesturi)) {
 			$bucket="dev-stats.sportsbull.jp";
-      $cf_bucket="https://dev-stats.sportsbull.jp/";
-
-    }else{
+		}else{
       $bucket="dev-img-sportsbull-jp";
-      $cf_bucket="https://dev-img.sportsbull.jp/";
     }
 
 	}elseif(preg_match("/stg/",$servername)){
@@ -112,16 +107,10 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_kansaibig6/",$requesturi) ||
       preg_match("/ub_tohto/",$requesturi)) {
       $bucket="stg-ublive.sportsbull.jp";
-      $cf_bucket="https://stg-ublive.sportsbull.jp/";
-
     }elseif (preg_match("/worldsoccer/",$requesturi)) {
       $bucket="stg-stats.sportsbull.jp";
-      $cf_bucket="https://stg-stats.sportsbull.jp/";
-
     }else{
       $bucket="stg-img-sportsbull-jp";
-      $cf_bucket="https://stg-img.sportsbull.jp/";
-
     }
 
 	}elseif(preg_match("/cms/",$servername)){
@@ -138,7 +127,9 @@ if(preg_match("/undotsushin/",$servername)){
 		$UserImgPath="https://img.sportsbull.jp";
 
 		$bucket="img-sportsbull-jp";
-    $cf_bucket="https://img.sportsbull.jp/";
+
+    $VK_FTP_ADDRESS = 'ftp99.asahi.com';
+
 
   }else{
 
@@ -158,16 +149,10 @@ if(preg_match("/undotsushin/",$servername)){
       preg_match("/ub_kansaibig6/",$requesturi) ||
       preg_match("/ub_tohto/",$requesturi)) {
       $bucket="ublive.sportsbull.jp";
-      $cf_bucket="https://ublive.sportsbull.jp/";
-
     }elseif (preg_match("/worldsoccer/",$requesturi)) {
       $bucket="stats.sportsbull.jp";
-      $cf_bucket="https://stats.sportsbull.jp/";
-
     }else{
       $bucket="img-sportsbull-jp";
-      $cf_bucket="https://img.sportsbull.jp/";
-
     }
 	}
 
@@ -246,16 +231,10 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
     preg_match("/ub_kansaibig6/",$requesturi) ||
     preg_match("/ub_tohto/",$requesturi)) {
     $bucket="dev-ublive.sportsbull.jp";
-    $cf_bucket="https://dev-ublive.sportsbull.jp/";
-
   }elseif (preg_match("/worldsoccer/",$requesturi)) {
 		$bucket="dev-stats.sportsbull.jp";
-    $cf_bucket="https://dev-stats.sportsbull.jp/";
-
-  }else{
+	}else{
     $bucket="dev-img-sportsbull-jp";
-    $cf_bucket="https://dev-img.sportsbull.jp/";
-
   }
 endif;
 
