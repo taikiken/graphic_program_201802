@@ -21,17 +21,31 @@ import { User } from './app/User';
 // -----------------------------------------------
 // VK 用の header 機能を提供します
 // -----------------------------------------------
+// /**
+//  * `Sagen.Browser.Mobile` で判定を行い端末毎に処理を分岐します
+//  * @param {*} Sagen `Sagen` object
+//  */
+// const device = (Sagen) => {
+//   // console.log('device vk', vk);
+//   // execute
+//   if (Sagen.Browser.Mobile.phone()) {
+//     vk.mobile();
+//   } else {
+//     vk.desktop();
+//   }
+// };
+
 /**
- * `Sagen.Browser.Mobile` で判定を行い端末毎に処理を分岐します
- * @param {*} Sagen `Sagen` object
+ * `data-platform` 属性値で処理分岐します
+ * @param {string} platform `data-platform` 属性値 `desktop | mobile`
  */
-const device = (Sagen) => {
-  // console.log('device vk', vk);
-  // execute
-  if (Sagen.Browser.Mobile.phone()) {
+const device = (platform) => {
+  if (platform === 'desktop') {
+    vk.desktop();
+  } else if (platform === 'mobile') {
     vk.mobile();
   } else {
-    vk.desktop();
+    console.warn('vk.device - platform illegal', platform);
   }
 };
 
@@ -56,13 +70,13 @@ const sagen = (Sagen, selector) => {
 /**
  * 引数 `selector` ID を取得し存在する場合は処理を続行します
  * @param {string} selector script tag ID - 取得可能な場合に処理を続行します
- * @returns {boolean} true: 処理続行 flag on
+ * @returns {?Element} not null - true: 処理続行 flag on
  */
 const init = (selector) => {
   const script = document.getElementById(selector);
   // console.log('init', selector, script);
   if (!script) {
-    return false;
+    return null;
   }
   // ---
   const domain = script.dataset.domain || '';
@@ -70,7 +84,7 @@ const init = (selector) => {
   // console.log('init', domain, prefix);
   Url.host = domain;
   VK.PREFIX = prefix;
-  return true;
+  return script;
 };
 
 /**
@@ -81,13 +95,18 @@ const init = (selector) => {
  * @param {string} [selector=SPBL_header] script tag ID
  */
 const main = (selector = 'SPBL_vk-header_script') => {
-  if (!init(selector)) {
+  const script = init(selector);
+  if (!script) {
     return;
   }
-  const Sagen = self.Sagen;
+  const Sagen = window.Sagen;
   sagen(Sagen, selector);
   user();
-  device(Sagen);
+  // ---
+  const platform = script.dataset.platform || '';
+  VK.current = script.dataset.current || '';
+  // device(Sagen);
+  device(platform);
 };
 
 /**

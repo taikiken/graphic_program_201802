@@ -17,6 +17,7 @@ import ViewHeaderUser from '../../view/header/ViewHeaderUser';
 // import ViewLogoutModal from '../../view/modal/ViewLogoutModal';
 import PageTop from '../../ui/PageTop';
 import NavCurrent from '../../ui/NavCurrent';
+import VK from '../VK';
 
 
 // VK desktop 実行ファイル
@@ -25,7 +26,8 @@ import NavCurrent from '../../ui/NavCurrent';
  *
  */
 const nav = () => {
-  NavCurrent.init('vk', false, true);
+  // NavCurrent.init('vk', false, true);
+  NavCurrent.init(VK.current, false, true);
 };
 
 

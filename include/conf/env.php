@@ -217,11 +217,18 @@ if(preg_match("/undotsushin/",$servername)){
 // - :8888 - vagrant local network port
 if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'undotsushin.local' || $_SERVER['SERVER_PORT'] == '8080' || $_SERVER['SERVER_PORT'] == '8888' ) :
   $staticfileimport=0;
+//  $DBNAME="ut_devnew";
+//  $DBUSR="ut";
+//  $DBPWD="ut";
+//  $DBHOST="undo-dev.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
+//  $DBPORT=5432;
+  # ###############################
   $DBNAME="ut_devnew";
   $DBUSR="ut";
   $DBPWD="ut";
-  $DBHOST="undo-dev.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
-  $DBPORT=5432;
+  $DBHOST="localhost";
+  $DBPORT=5433;
+  # ###############################
   $SERVERPATH="/vagrant/public";
   $USERS="/vagrant/public/users";
   if ( $_SERVER['SERVER_PORT'] !== '80' ) :

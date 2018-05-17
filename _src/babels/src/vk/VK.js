@@ -10,19 +10,60 @@
  *
  */
 
+/**
+ * data-prefix 属性値 を保持します
+ * @static
+ * @private
+ * @type {string}
+ */
 let prefix = '';
+
+/**
+ * data-current 属性値 を保持します
+ * @static
+ * @private
+ * @type {string}
+ */
+let current = 'vk';
 
 /**
  * VK - 設定ファイル
  */
 export default class VK {
+  /**
+   * data-prefix 属性値
+   * @returns {string} data-prefix 属性値
+   */
   static get PREFIX() {
     return prefix;
   }
+  /**
+   * data-prefix 属性値 を設定します
+   * @param {string} dataPrefix data-prefix 属性値
+   */
   static set PREFIX(dataPrefix) {
     prefix = dataPrefix;
   }
+  /**
+   * data-prefix 属性値 を取得します
+   * @param {boolean} vk 取得 flag
+   * @returns {string} true 時に {@link VK}.PREFIX 返します
+   */
   static prefix(vk = false) {
     return vk ? VK.PREFIX : '';
+  }
+  /**
+   * data-current 属性値 を取得します
+   * @returns {string} data-current 属性値 を返します
+   */
+  static get current() {
+    return current;
+  }
+  /**
+   * data-current 属性値 を設定します
+   * @param {string} value 属性値
+   */
+  static set current(value) {
+    current = value;
   }
 }
