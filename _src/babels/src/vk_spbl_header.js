@@ -93,7 +93,7 @@ const main = (selector = 'SPBL_vk-header_script') => {
 
 // dom ready 待つ - 2018-05-17
 // main(); -- remove
-document.addEventListener('DOMContentLoaded', main, false);
+document.addEventListener('DOMContentLoaded', main('SPBL_vk-header_script'), false);
 
 /**
  * global 出力セット
