@@ -172,6 +172,7 @@ $app->group('/inc', function () use ($app) {
       'directory'   => $args['cateogry'],
       'query'       => $query,
       'path'        => $args,
+      'parts'       => $args['parts'],
     ));
 
     return $this->renderer->render($response, 'inc.php', $args);
