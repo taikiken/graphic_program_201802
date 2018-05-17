@@ -22,5 +22,11 @@
 
 */
 ?>
-<script id="<?php echo $page['html_prefix']; ?>vk-header_script" src="<?php echo $page['site_url_uts']; ?>/inc/assets/<?php echo $page['directory']; ?>/responsive/inc.js/?v=<?php echo $page['version']; ?>" data-browser="true" data-prefix="<?php echo $page['html_prefix']; ?>" data-domain="<?php echo $page['site_url_uts']; ?>"></script>
+<script id="<?php echo $page['html_prefix']; ?>vk-header_script"
+  src="<?php echo $page['site_url_uts']; ?>/inc/assets/<?php echo $page['directory']; ?>/responsive/inc.js/?v=<?php echo $page['version']; ?>"
+  data-browser="true"
+  data-prefix="<?php echo $page['html_prefix']; ?>"
+  data-domain="<?php echo $page['site_url_uts']; ?>"
+  data-platform="<?php echo $page['ua']; ?>"
+  data-current="<?php echo $page['directory']; ?>"></script>
 <script src="<?php echo $page['site_url_uts']; ?>/assets/js/fb-video.js?v=<?php echo $page['version']; ?>"></script>
