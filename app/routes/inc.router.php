@@ -15,6 +15,9 @@ $app->group('/inc', function () use ($app) {
     // ref. app/models/view.model.php
     $conditional = $app->model->property('conditional');
 
+    // ぱんくず用
+    $breadcrumb  = array();
+
     // parts
     // ------------------------------
     switch ($args['parts']) :
@@ -135,6 +138,12 @@ $app->group('/inc', function () use ($app) {
         $conditional['head_bottom']   = false;
         $conditional['footer_script'] = false;
         $conditional['footer_modal']  = false;
+
+        $breadcrumb[] = array(
+          'label' => 'バーチャル高校野球',
+          'path'  => '/', // サブドメ ( vk.sportsbull.jp ) とのことなので `/` にしときます
+        );
+
         break;
       default:
     endswitch;
@@ -172,6 +181,8 @@ $app->group('/inc', function () use ($app) {
       'directory'   => $args['cateogry'],
       'query'       => $query,
       'path'        => $args,
+      'parts'       => $args['parts'],
+      'breadcrumb'  => $breadcrumb,
     ));
 
     return $this->renderer->render($response, 'inc.php', $args);

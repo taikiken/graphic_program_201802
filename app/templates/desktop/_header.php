@@ -23,6 +23,14 @@ endif;
   <?php else : ?>
     <link rel="stylesheet" href="<?php echo $page['site_url_uts']; ?>/assets/css/ui.css?v=<?php echo $page['version']; ?>">
   <?php endif; ?>
+
+  <?php
+  // VK出力用script
+  if ( $page['template'] === 'inc' && $page['directory'] === 'vk' ) :
+    include_once __DIR__.'./../_inc_vk_script.php';
+  endif;
+  ?>
+
 <?php endif; ?>
 
 
@@ -80,14 +88,19 @@ endif;
 
 ?>
 
-<?php if ( $page['conditional']['header'] ) : ?>
+<?php if ( $page['conditional']['header'] ) :
+
+  # SEO対策 - 外部向けテンプレの時 h1 (ロゴ) は pタグに
+  $seo_h1 = ( $page['template'] !== 'inc' ) ? 'h1' : 'p';
+
+?>
   <header id="<?php echo $page['html_prefix']; ?>header-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-sec">
     <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-left">
         <div id="<?php echo $page['html_prefix']; ?>head-search-container"></div><!-- /.head-search -->
       </aside>
 
-      <h1><a href="<?php echo $page['site_url_uts']; ?>/">スポーツブル（スポブル）</a></h1>
+      <?php echo '<'.$seo_h1.'>'; ?><a href="<?php echo $page['site_url_uts']; ?>/">スポーツブル（スポブル）</a><?php echo '</'.$seo_h1.'>'; ?>
 
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-right">
         <div id="<?php echo $page['html_prefix']; ?>user-profile-container"></div><!--/.user-profile-container-->

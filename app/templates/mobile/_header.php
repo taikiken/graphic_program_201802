@@ -64,6 +64,13 @@ endif;
   <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
   <?php // end of Syn. ?>
 
+  <?php
+  // VK出力用script
+  if ( $page['template'] === 'inc' && $page['directory'] === 'vk' ) :
+    include_once __DIR__.'./../_inc_vk_script.php';
+  endif;
+  ?>
+
 <?php endif; ?>
 
 
@@ -156,10 +163,16 @@ endif;
 </div>
 <?php endif; ?>
 
+<?php
+
+# SEO対策 - 外部向けテンプレの時 h1 (ロゴ) は pタグに
+$seo_h1 = ( $page['template'] !== 'inc' ) ? 'h1' : 'p';
+
+?>
 <div class="SPBL_common <?php echo $page['html_prefix']; ?>header-sticky">
   <header class="<?php echo $page['html_prefix']; ?>head-sec">
     <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
-      <h1><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a></h1>
+      <?php echo '<'.$seo_h1.'>'; ?><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a><?php echo '</'.$seo_h1.'>'; ?>
 
       <div id="<?php echo $page['html_prefix']; ?>menu-opener" class="<?php echo $page['html_prefix']; ?>menu-opener">
         <a id="<?php echo $page['html_prefix']; ?>side-menu-toggle" href="#<?php echo $page['html_prefix']; ?>side-menu-container"><span></span><span></span><span></span></a>
