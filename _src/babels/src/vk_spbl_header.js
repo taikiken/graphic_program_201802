@@ -92,7 +92,7 @@ const main = (selector = 'SPBL_vk-header_script') => {
 };
 
 // dom ready 待つ - 2018-05-17
-// main();
+// main(); --
 document.addEventListener('DOMContentLoaded', main, false);
 
 /**
