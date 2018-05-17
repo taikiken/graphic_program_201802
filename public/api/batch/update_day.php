@@ -11,6 +11,8 @@ $sql[]="delete from u_reminder where regitime<now()-interval '1 day';";
 $sql[]="update repo_n set flag=0,u_time=now() where d2=1 and m_time<now()-interval '1 year';";
 //日刊スポーツの期限切れ記事を非公開に変更する
 $sql[]="update repo_n set flag=0,u_time=now() where d2=2 and m_time<now()-interval '40 day';";
+//nordot,47newsの期限切れ記事を非公開に変更する
+$sql[]="update repo_n set flag=0,u_time=now() where d2=61 and  flag=1 and  m_time < current_date - interval '30 day';";
 //非公開になった記事のブックマークを削除する
 $sql[]="update u_bookmark set flag=0 where flag=1 and (select flag from repo_n where id=pageid)=0;";
 
