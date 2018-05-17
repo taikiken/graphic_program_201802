@@ -64,6 +64,13 @@ endif;
   <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
   <?php // end of Syn. ?>
 
+  <?php
+  // VK出力用script
+  if ( $page['template'] === 'inc' && $page['directory'] === 'vk' ) :
+    include_once __DIR__.'./../_inc_vk_script.php';
+  endif;
+  ?>
+
 <?php endif; ?>
 
 
