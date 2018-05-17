@@ -168,7 +168,9 @@ $banner-height: 70px;
     height: (80/2)+px;
     background-color: #0f3580;
 
-    h1 {
+    // SEO対策 - 外部向けはpタグで
+    h1,
+    > p  {
       position: absolute;
       top: (30/2)+px;
       left: 50%;
