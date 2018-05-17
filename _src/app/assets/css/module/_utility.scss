@@ -80,11 +80,15 @@
     position: absolute;
     top: -5px;
     right: 13px;
-    @extend .sprite-common;
-    @include sprite( $common-icon-user-menu );
-    // width: 9px;
-    // height: 5px;
-    // background: url(/assets/images/common/icon-user-menu.png) 0 0 no-repeat;
+    // @extend .sprite-common;
+    // @include sprite( $common-icon-user-menu );
+    display: block;
+    width: 9px;
+    height: 5px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-image: url(/assets/images/common/icon-user-menu.png);
+    @include hide-text;
   }
 }
 

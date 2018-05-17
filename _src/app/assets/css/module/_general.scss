@@ -75,23 +75,34 @@
       display: inline-block;
       margin-right: 4px;
       vertical-align: middle;
-      @extend .sprite-common;
+      // @extend .sprite-common;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
       @include hide-text;
     }
 
     //.post-label_recommend
     &-label_recommend {
-      @include sprite( $common-icon-recommend );
+      // @include sprite( $common-icon-recommend );
+      width: 50px;
+      height: 18px;
+      background-image: url(/assets/images/common/icon-recommend.svg);
     }
 
     //.post-label_movie
     &-label_movie {
-      @include sprite( $common-icon-movie );
+      // @include sprite( $common-icon-movie );
+      width: 34px;
+      height: 18px;
+      background-image: url(/assets/images/common/icon-movie.svg);
     }
 
     //.post-label_new
     &-label_new {
-      @include sprite( $common-icon-new );
+      // @include sprite( $common-icon-new );
+      width: 40px;
+      height: 18px;
+      background-image: url(/assets/images/common/icon-new.svg);
     }
   }
 }
@@ -614,8 +625,12 @@
       top: 2px;
       margin-right: 5px;
       content: '';
-      @extend .sprite-common;
-      @include sprite( $common-icon-bookmark_o, inline-block);
+      // @extend .sprite-common;
+      // @include sprite( $common-icon-bookmark_o, inline-block);
+      display: inline-block;
+      width: 8px;
+      height: 12px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 13.4"><defs><style>.cls-1{fill:#0f3580;fill-rule:evenodd;}</style></defs><title>icon-bookmark</title><g id="icon-bookmark" data-name="icon-bookmark"><g id="common"><g id="icon-bookmark"><path class="cls-1" d="M.5.5h8v12L4.5,10l-4,2.5Z"/></g></g></g></svg>') 0 0 no-repeat;
       @include hide-text;
     }
   }
@@ -626,7 +641,8 @@
     color: #fff;
 
     span:before {
-      @include sprite( $common-icon-bookmark, inline-block);
+      // @include sprite( $common-icon-bookmark, inline-block);
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 13.4"><defs><style>.cls-1{fill:#fff;fill-rule:evenodd;}</style></defs><title>icon-bookmark</title><g id="icon-bookmark" data-name="icon-bookmark"><g id="common"><g id="icon-bookmark"><path class="cls-1" d="M.5.5h8v12L4.5,10l-4,2.5Z"/></g></g></g></svg>');
       @include hide-text;
     }
   }

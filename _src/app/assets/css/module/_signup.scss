@@ -148,8 +148,13 @@
         // position: relative;
         // top: 1px;
         margin-left: 4px;
-        @extend .sprite-common;
-        @include sprite( $common-icon-arrow2, inline-block );
+        // @extend .sprite-common;
+        // @include sprite( $common-icon-arrow2, inline-block );
+        display: inline-block;
+        width: 6px;
+        height: 10px;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.23 11.04"><defs><style>.cls-1{fill:none;stroke:#0f3580;stroke-miterlimit:10;}</style></defs><title>icon-arrow</title><g id="icon-arrow" data-name="icon-arrow"><g id="common"><g id="icon-arrow"><polyline class="cls-1" points="0.35 0.35 5.52 5.54 0.35 10.69"/></g></g></g></svg>') 50% 50% no-repeat;
+        background-size: 6px;
         @include hide-text;
       }
     }

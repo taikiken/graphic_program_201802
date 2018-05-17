@@ -17,8 +17,12 @@
     content: '';
     position: relative;
     top: -1px;
-    @extend .sprite-common;
-    @include sprite( $common-icon-search-heading, inline-block );
+    // @extend .sprite-common;
+    // @include sprite( $common-icon-search-heading, inline-block );
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: url(/assets/images/common/icon-search-heading.svg) 50% 50% no-repeat;
     @include hide-text;
     margin-right: 5px;
     vertical-align: middle;
