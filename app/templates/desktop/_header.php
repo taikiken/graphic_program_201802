@@ -26,7 +26,7 @@ endif;
 
   <?php
   // VK出力用script
-  if ( $page['template'] === 'inc' && $page['directory'] === 'vk' ) :
+  if ( $page['template'] === 'inc' ) :
     include_once __DIR__.'./../_inc_vk_script.php';
   endif;
   ?>
@@ -96,15 +96,20 @@ endif;
 ?>
   <header id="<?php echo $page['html_prefix']; ?>header-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-sec">
     <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
+      <?php if ( $page['conditional']['header_search'] ) : ?>
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-left">
         <div id="<?php echo $page['html_prefix']; ?>head-search-container"></div><!-- /.head-search -->
       </aside>
+      <?php endif; ?>
 
       <?php echo '<'.$seo_h1.'>'; ?><a href="<?php echo $page['site_url_uts']; ?>/">スポーツブル（スポブル）</a><?php echo '</'.$seo_h1.'>'; ?>
 
+      <?php if ( $page['conditional']['header_user'] ) : ?>
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-right">
         <div id="<?php echo $page['html_prefix']; ?>user-profile-container"></div><!--/.user-profile-container-->
       </aside>
+      <?php endif; ?>
+
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
 <?php endif; ?>
