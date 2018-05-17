@@ -747,8 +747,13 @@
       margin-top: -15px;
 
       a {
-        @extend .sprite-common;
-        @include sprite( $common-btn-notice-close );
+        // @extend .sprite-common;
+        // @include sprite( $common-btn-notice-close );
+        display: block;
+        width: 30px;
+        height: 30px;
+        background: url(/assets/images/common/btn-notice-close.svg) 50% 50% no-repeat;
+        background-size: 13px;
         @include hide-text;
       }
     }
@@ -771,50 +776,6 @@
   .modal-bg {
     &.flush-modal-bg {
       opacity: 0;
-    }
-  }
-}
-
-
-
-
-
-// modal-intro
-// 初回起動時のサービス紹介
-.modal-intro {
-  @extend %modal-dialogue;
-  display: none;
-
-  .modal-bg {
-    background-color: rgba(0, 0, 0, .7);
-  }
-
-  //.modal-intro-contents
-  &-contents {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-  }
-
-  //.modal-intro-close
-  &-close {
-    z-index: 999;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  //.modal-intro-close-btn
-  &-close-btn {
-    display: block;
-    width: 28px;
-    height: 28px;
-    background: url(/assets/images/intro/btn-close.png) 0 0 no-repeat;
-    @include hide-text;
-
-    &:hover {
-      @include over-opacity;
     }
   }
 }

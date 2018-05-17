@@ -126,8 +126,13 @@
     top: 5px;
     right: 4px;
 
-    @extend .sprite-common;
-    @include sprite( $common-btn-dialogue-close );
+    // @extend .sprite-common;
+    // @include sprite( $common-btn-dialogue-close );
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url(/assets/images/common/btn-dialogue-close.svg) 50% 50% no-repeat;
+    background-size: 10px;
     @include hide-text;
   }
 }

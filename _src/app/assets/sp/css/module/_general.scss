@@ -776,8 +776,13 @@
     margin-top: -5px;
 
     a {
-      @extend .sp-sprite-common;
-      @include sprite( $common-btn-notice-close1 );
+      // @extend .sp-sprite-common;
+      // @include sprite( $common-btn-notice-close1 );
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: url(/assets/images/common/btn-notice-close.svg) 50% 50% no-repeat;
+      background-size: 10px;
       @include hide-text;
     }
   }
@@ -804,55 +809,6 @@
     &.flush-modal-bg {
       opacity: 0;
     }
-  }
-}
-
-
-
-
-// modal-intro
-// 初回起動時のサービス紹介
-.modal-intro {
-  @extend %modal-dialogue;
-  display: none;
-
-  .modal-bg {
-    background-color: rgba(0, 0, 0, .8);
-  }
-
-  //.modal-intro-contents
-  &-contents {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    // width: perCalc(600, 750);
-    width: (600/2)+px;
-  }
-
-  //.modal-intro-link
-  &-link {
-    img {
-      max-width: 100%;
-    }
-  }
-
-  //.modal-intro-close
-  &-close {
-    z-index: 999;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  //.modal-intro-close-btn
-  &-close-btn {
-    display: block;
-    width: (60/2)+px;
-    height: (60/2)+px;
-    background: url(/assets/sp/images/intro/btn-close.png) 0 0 no-repeat;
-    background-size: (60/2)+px;
-    @include hide-text;
   }
 }
 
