@@ -220,8 +220,8 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
   $DBNAME="ut_devnew";
   $DBUSR="ut";
   $DBPWD="ut";
-  $DBHOST="localhost";
-  $DBPORT=5433;
+  $DBHOST="undo-dev.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
+  $DBPORT=5432;
   $SERVERPATH="/vagrant/public";
   $USERS="/vagrant/public/users";
   if ( $_SERVER['SERVER_PORT'] !== '80' ) :
