@@ -513,6 +513,7 @@ $c-txt__strong: $c-main;
         color: $c-txt__strong;
         font-weight: bold;
         font-size: (24/2)+px;
+        font-feature-settings: 'palt';
       }
 
       .related__post__text {

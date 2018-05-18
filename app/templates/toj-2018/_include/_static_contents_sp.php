@@ -280,7 +280,7 @@
           </div><!-- /.about__text -->
 
           <div class="about__movie">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/O8TF6j5hRvg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/F8Aa6SORFUI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div><!-- /.about__movie -->
 
           <div class="about__featured">
@@ -329,7 +329,7 @@
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
                 <figure><img src="/assets/sp/images/toj-2018/about-featured-thumb8.jpg" alt=""></figure>
-                <h4>サム・クローム</h4>
+                <h4>アンソニー・ジャコッポ</h4>
                 <p class="country">Australia</p>
               </li><!-- /.about__featured__item -->
               <li class="about__featured__item">
@@ -379,7 +379,7 @@
           </table><!-- /.overview__data -->
         </section><!-- /.overview -->
 
-        <!-- <section class="related">
+        <section class="related">
           <h2 class="related__heading">
             <picture>
               <source srcset="/assets/sp/images/toj-2018/ttl_h2-related.png 2x">
@@ -388,46 +388,80 @@
           </h2>
 
           <div class="related__post">
-            <a href="hoge" class="movie">
-              <figure class="related__post__thumb"><span><img src="/assets/sp/images/toj-2018/related-thumb1.jpg" alt=""></span></figure>
+            <a href="https://sportsbull.jp/p/316678/" class="movie">
+              <figure class="related__post__thumb"><span><img src="https://img.sportsbull.jp/thumbnail1/img2018051801163856885800.jpg" alt=""></span></figure>
               <div class="related__post__text">
-                <h3 class="related__post__heading">Red Bull Crashed Ice, Marseille</h3>
-                <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-                <p class="related__post__date">3月3日（木） 22:04</p>
+                <h3 class="related__post__heading">【ハイライト動画】Tour of Japan 2017 第1ステージ：堺</h3>
+                <p class="related__post__text"></p>
+                <p class="related__post__date"></p>
               </div>
             </a>
           </div>
 
           <div class="related__post">
-            <a href="hoge" class="movie">
-              <figure class="related__post__thumb"><span><img src="/assets/sp/images/toj-2018/related-thumb2.jpg" alt=""></span></figure>
+            <a href="https://sportsbull.jp/p/316679/" class="movie">
+              <figure class="related__post__thumb"><span><img src="https://img.sportsbull.jp/thumbnail1/img2018051801162154695000.jpg" alt=""></span></figure>
               <div class="related__post__text">
-                <h3 class="related__post__heading">Red Bull Crashed Ice, Jyväskylä</h3>
-                <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-                <p class="related__post__date">3月3日（木） 22:04</p>
+                <h3 class="related__post__heading">【ハイライト動画】Tour of Japan 2017 第2ステージ：京都</h3>
+                <p class="related__post__text"></p>
+                <p class="related__post__date"></p>
               </div>
             </a>
           </div>
 
           <div class="related__post">
-            <a href="hoge" class="movie">
-              <figure class="related__post__thumb"><span><img src="/assets/sp/images/toj-2018/related-thumb3.jpg" alt=""></span></figure>
+            <a href="https://sportsbull.jp/p/316680/" class="movie">
+              <figure class="related__post__thumb"><span><img src="https://img.sportsbull.jp/thumbnail1/img2018051801175563948600.jpg" alt=""></span></figure>
               <div class="related__post__text">
-                <h3 class="related__post__heading">Red Bull Crashed Ice, Saint Paul</h3>
-                <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-                <p class="related__post__date">3月3日（木） 22:04</p>
+                <h3 class="related__post__heading">【ハイライト動画】Tour of Japan 2017 第3ステージ：いなべ</h3>
+                <p class="related__post__text"></p>
+                <p class="related__post__date"></p>
               </div>
             </a>
           </div>
 
           <div class="related__post">
-            <a href="hoge" class="movie">
-              <figure class="related__post__thumb"><span><img src="/assets/sp/images/toj-2018/related-thumb4.jpg" alt=""></span></figure>
+            <a href="https://sportsbull.jp/p/316681/" class="movie">
+              <figure class="related__post__thumb"><span><img src="https://img.sportsbull.jp/thumbnail1/img2018051801191844971700.jpg" alt=""></span></figure>
               <div class="related__post__text">
-                <h3 class="related__post__heading">Red Bull Crashed Ice, Saint Paul</h3>
-                <p class="related__post__text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-                <p class="related__post__date">3月3日（木） 22:04</p>
+                <h3 class="related__post__heading">【ハイライト動画】Tour of Japan 2017 第4ステージ：美濃</h3>
+                <p class="related__post__text"></p>
+                <p class="related__post__date"></p>
               </div>
             </a>
           </div>
-        </section> -->
+
+          <div class="related__post">
+            <a href="https://sportsbull.jp/p/316682/" class="movie">
+              <figure class="related__post__thumb"><span><img src="https://img.sportsbull.jp/thumbnail1/img2018051801225088668100.jpg" alt=""></span></figure>
+              <div class="related__post__text">
+                <h3 class="related__post__heading">【ハイライト動画】Tour of Japan 2017 第5ステージ：南信州</h3>
+                <p class="related__post__text"></p>
+                <p class="related__post__date"></p>
+              </div>
+            </a>
+          </div>
+
+          <div class="related__post">
+            <a href="https://sportsbull.jp/p/316683/" class="movie">
+              <figure class="related__post__thumb"><span><img src="https://img.sportsbull.jp/thumbnail1/img2018051801243781619200.jpg" alt=""></span></figure>
+              <div class="related__post__text">
+                <h3 class="related__post__heading">【ハイライト動画】Tour of Japan 2017 第6ステージ：富士山</h3>
+                <p class="related__post__text"></p>
+                <p class="related__post__date"></p>
+              </div>
+            </a>
+          </div>
+
+          <div class="related__post">
+            <a href="https://sportsbull.jp/p/316684/" class="movie">
+              <figure class="related__post__thumb"><span><img src="https://img.sportsbull.jp/thumbnail1/img2018051801255208321800.jpg" alt=""></span></figure>
+              <div class="related__post__text">
+                <h3 class="related__post__heading">【ハイライト動画】Tour of Japan 2017 第7ステージ：伊豆</h3>
+                <p class="related__post__text"></p>
+                <p class="related__post__date"></p>
+              </div>
+            </a>
+          </div>
+
+        </section>
