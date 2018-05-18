@@ -411,6 +411,10 @@ $c-txt__strong: $c-main;
     background: url(/assets/images/toj-2018/related-icon_play.png) 0 0 no-repeat;
     @include hide-text;
   }
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
 .related__text {
   position: relative;
@@ -421,6 +425,7 @@ $c-txt__strong: $c-main;
     font-weight: bold;
     font-size: 20px;
     line-height: 1.2;
+    font-feature-settings: 'palt';
   }
   .text {
     margin-top: 0.75em;
