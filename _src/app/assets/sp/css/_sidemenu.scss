@@ -118,6 +118,7 @@ div.synapse_logo {
     height: (60/2)+px;
     background-position: 0 0;
     background-repeat: no-repeat;
+    background-size: cover;
     @include hide-text;
     vertical-align: middle;
   }
