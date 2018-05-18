@@ -81,8 +81,15 @@
     position: absolute;
     top: 2px;
     right: 13px;
-    @extend .sp-sprite-common;
-    @include sprite( $common-icon-user-menu );
+    // @extend .sp-sprite-common;
+    // @include sprite( $common-icon-user-menu );
+    display: block;
+    width: (28/2)+px;
+    height: (16/2)+px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-image: url(/assets/sp/images/common/icon-user-menu.png);
+    background-size: 100%;
   }
 }
 

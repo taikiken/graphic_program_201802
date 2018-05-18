@@ -343,23 +343,34 @@
       display: inline-block;
       margin-right: 2px;
       vertical-align: middle;
-      @extend .sp-sprite-common;
+      // @extend .sp-sprite-common;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
       @include hide-text;
     }
 
     // .post-label_recommend
     &-label_recommend {
-      @include sprite( $common-icon-recommend );
+      // @include sprite( $common-icon-recommend );
+      width: 36px;
+      height: 13px;
+      background-image: url(/assets/images/common/icon-recommend.svg);
     }
 
     // .post-label_movie
     &-label_movie {
-      @include sprite( $common-icon-movie );
+      // @include sprite( $common-icon-movie );
+      width: 24px;
+      height: 13px;
+      background-image: url(/assets/images/common/icon-movie.svg);
     }
 
     // .post-label_new
     &-label_new {
-      @include sprite( $common-icon-new );
+      // @include sprite( $common-icon-new );
+      width: 29px;
+      height: 13px;
+      background-image: url(/assets/images/common/icon-new.svg);
     }
 
     //.post-category
@@ -648,29 +659,28 @@
       top: 3px;
       margin-right: 5px;
       content: '';
-      @extend .sp-sprite-common;
-      @include sprite( $common-icon-bookmark_o, inline-block);
+      // @extend .sp-sprite-common;
+      // @include sprite( $common-icon-bookmark_o, inline-block);
+      display: inline-block;
+      width: 8px;
+      height: 12px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 13.4"><defs><style>.cls-1{fill:#0f3580;fill-rule:evenodd;}</style></defs><title>icon-bookmark</title><g id="icon-bookmark" data-name="icon-bookmark"><g id="common"><g id="icon-bookmark"><path class="cls-1" d="M.5.5h8v12L4.5,10l-4,2.5Z"/></g></g></g></svg>');
+      background-size: 8px;
       @include hide-text;
     }
   }
 
   a.enable {
-    // border-color: $highlight-color;
-    // background-color: $highlight-color;
-    // color: #fff;
-
-    // span:before {
-    //   @include sprite( $common-icon-bookmark, inline-block);
-    //   @include hide-text;
-    // }
-
     border-color: #ddd;
     background-color: #ddd;
     color: #999;
 
     span:before {
-      @extend .sp-sprite-setting;
-      @include sprite( $setting-icon-bookmark, inline-block);
+      // @extend .sp-sprite-setting;
+      // @include sprite( $setting-icon-bookmark, inline-block);
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 13.4"><defs><style>.cls-1{fill:none;stroke:#555;stroke-miterlimit:10;fill-rule:evenodd;}</style></defs><title>icon-bookmark</title><g id="icon-bookmark" data-name="icon-bookmark"><g id="common"><g id="icon-bookmark"><path class="cls-1" d="M.5.5h8v12L4.5,10l-4,2.5Z"/></g></g></g></svg>');
     }
   }
 } //.btn-bookmark
@@ -776,8 +786,13 @@
     margin-top: -5px;
 
     a {
-      @extend .sp-sprite-common;
-      @include sprite( $common-btn-notice-close1 );
+      // @extend .sp-sprite-common;
+      // @include sprite( $common-btn-notice-close1 );
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: url(/assets/images/common/btn-notice-close.svg) 50% 50% no-repeat;
+      background-size: 10px;
       @include hide-text;
     }
   }
@@ -804,55 +819,6 @@
     &.flush-modal-bg {
       opacity: 0;
     }
-  }
-}
-
-
-
-
-// modal-intro
-// 初回起動時のサービス紹介
-.modal-intro {
-  @extend %modal-dialogue;
-  display: none;
-
-  .modal-bg {
-    background-color: rgba(0, 0, 0, .8);
-  }
-
-  //.modal-intro-contents
-  &-contents {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    // width: perCalc(600, 750);
-    width: (600/2)+px;
-  }
-
-  //.modal-intro-link
-  &-link {
-    img {
-      max-width: 100%;
-    }
-  }
-
-  //.modal-intro-close
-  &-close {
-    z-index: 999;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  //.modal-intro-close-btn
-  &-close-btn {
-    display: block;
-    width: (60/2)+px;
-    height: (60/2)+px;
-    background: url(/assets/sp/images/intro/btn-close.png) 0 0 no-repeat;
-    background-size: (60/2)+px;
-    @include hide-text;
   }
 }
 

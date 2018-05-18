@@ -17,8 +17,12 @@
       transform: translateX(-50%);
 
       a {
-        @extend .sprite-header;
-        @include sprite( $header-logo );
+        // @extend .sprite-header;
+        // @include sprite( $header-logo );
+        display: block;
+        width: 170px;
+        height: 18px;
+        background: url(/assets/images/common/header-logo.svg) 0 0 no-repeat;
         @include hide-text;
       }
     }
@@ -63,8 +67,12 @@
 
     input[type="submit"] {
       float: right;
-      @extend .sprite-header;
-      @include sprite( $header-icon-search, inline-block );
+      // @extend .sprite-header;
+      // @include sprite( $header-icon-search, inline-block );
+      display: inline-block;
+      width: 16px;
+      height: 15px;
+      background: url(/assets/images/common/header-icon-search.svg) 0 0 no-repeat;
       @include hide-text;
       margin-top: 8px;
     }
@@ -128,126 +136,129 @@
   .notice-container {
     float: left;
     margin-top: 6px;
+    // お知らせは廃止されました
     // UNDO_SPBL-403-abolish-comment
     display: none;
   }
 
-  .notice {
-    position: relative;
-    float: left;
+  // お知らせは廃止されました
+  // ref. https://aws-plus.backlog.jp/view/UNDO_SPBL-403
+  // .notice {
+  //   position: relative;
+  //   float: left;
 
-    //.notice-opener
-    &-opener {
-      @include link-decoration(null, null, none, none);
-    }
+  //   //.notice-opener
+  //   &-opener {
+  //     @include link-decoration(null, null, none, none);
+  //   }
 
-    //.notice-icon
-    &-icon {
-      @extend .sprite-header;
-      @include sprite( $header-icon-notice );
-    }
+  //   //.notice-icon
+  //   &-icon {
+  //     @extend .sprite-header;
+  //     @include sprite( $header-icon-notice );
+  //   }
 
-    //.notice-num
-    &-num {
-      position: absolute;
-      top: -8px;
-      right: -10px;
-      display: block;
-      width: 20px;
-      height: 20px;
-      padding-top: 4px;
-      line-height: 1;
-      background-color: $highlight-secondary-color;
-      border-radius: 100%;
-      color: #fff;
-      font-weight: bold;
-      font-size: fz(10);
-      text-align: center;
-    }
+  //   //.notice-num
+  //   &-num {
+  //     position: absolute;
+  //     top: -8px;
+  //     right: -10px;
+  //     display: block;
+  //     width: 20px;
+  //     height: 20px;
+  //     padding-top: 4px;
+  //     line-height: 1;
+  //     background-color: $highlight-secondary-color;
+  //     border-radius: 100%;
+  //     color: #fff;
+  //     font-weight: bold;
+  //     font-size: fz(10);
+  //     text-align: center;
+  //   }
 
-    //.notice-menu
-    &-menu {
-      z-index: 9999;
-      display: block;
-      position: absolute;
-      top: 51px;
-      left: -331px;
+  //   //.notice-menu
+  //   &-menu {
+  //     z-index: 9999;
+  //     display: block;
+  //     position: absolute;
+  //     top: 51px;
+  //     left: -331px;
 
-      .dropMenu {
-        width: 360px;
-        @extend %dropMenu;
+  //     .dropMenu {
+  //       width: 360px;
+  //       @extend %dropMenu;
 
-        opacity: 0;
-        transition-property: opacity;
-        transition-duration: 0.3s;
-        transition-timing-function: linear;
-      }
-    }
+  //       opacity: 0;
+  //       transition-property: opacity;
+  //       transition-duration: 0.3s;
+  //       transition-timing-function: linear;
+  //     }
+  //   }
 
-    .info {
-      margin-top: 0;
+  //   .info {
+  //     margin-top: 0;
 
-      @at-root {
-        &-heading {
-          float: left;
-          padding: 10px 15px;
-          font-weight: bold;
-          font-size: fz(12);
-        }
+  //     @at-root {
+  //       &-heading {
+  //         float: left;
+  //         padding: 10px 15px;
+  //         font-weight: bold;
+  //         font-size: fz(12);
+  //       }
 
-        &-btn-readAll {
-          margin-bottom: 0;
-          padding: 10px 15px;
-          font-size: fz(12);
-        }
+  //       &-btn-readAll {
+  //         margin-bottom: 0;
+  //         padding: 10px 15px;
+  //         font-size: fz(12);
+  //       }
 
-        &-link {
-          padding-top: 12px;
-          padding-bottom: 12px;
-          padding-left: 60px;
-        }
+  //       &-link {
+  //         padding-top: 12px;
+  //         padding-bottom: 12px;
+  //         padding-left: 60px;
+  //       }
 
-        &-user-thumb {
-          left: 15px;
-          width: 35px;
-          height: 35px;
-          border-radius: 100%;
-          background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
-          background-size: 35px;
+  //       &-user-thumb {
+  //         left: 15px;
+  //         width: 35px;
+  //         height: 35px;
+  //         border-radius: 100%;
+  //         background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
+  //         background-size: 35px;
 
-          img {
-            width: 35px;
-          }
+  //         img {
+  //           width: 35px;
+  //         }
 
-          &.user-logged-in {
-            background: none;
-          }
-        }
+  //         &.user-logged-in {
+  //           background: none;
+  //         }
+  //       }
 
-        &-content {
-          font-size: fz(12);
-        }
+  //       &-content {
+  //         font-size: fz(12);
+  //       }
 
-        &-date {
-          font-size: fz(10);
-        }
-      }
+  //       &-date {
+  //         font-size: fz(10);
+  //       }
+  //     }
 
-      .btn-viewmore {
-        @at-root {
-          &-link {
-            display: block;
-            padding: 12px 0;
-            background-color: $bg-primary-color;
-            border-radius: 0 0 3px 3px;
-            font-weight: bold;
-            text-align: center;
-          }
-        }
-      }
-    }
+  //     .btn-viewmore {
+  //       @at-root {
+  //         &-link {
+  //           display: block;
+  //           padding: 12px 0;
+  //           background-color: $bg-primary-color;
+  //           border-radius: 0 0 3px 3px;
+  //           font-weight: bold;
+  //           text-align: center;
+  //         }
+  //       }
+  //     }
+  //   }
 
-  } //.notice
+  // } //.notice
 
 
 
