@@ -107,7 +107,7 @@ $app->group('/inc', function () use ($app) {
         $conditional['header_search'] = false;
         $conditional['header_user']   = false;
         $conditional['gnav']          = false;
-
+        $conditional['sidemenu']      = false;
         $breadcrumb[] = array(
           'label' => 'インハイ.tv',
           'path'  => '/', // サブドメとのことなので `/` にしときます
