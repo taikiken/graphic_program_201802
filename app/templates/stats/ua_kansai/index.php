@@ -120,14 +120,16 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
         </div>
       </div><!-- /.stats__banner -->
 
-      <nav id="game-category" class="active-0">
-        <ul>
-          <li>公式戦</li>
-          <li>入替戦</li>
-          <li>全日本</li>
-          <li>甲子園ボウル</li>
-        </ul>
-      </nav>
+<?php // 2018春年次更新用に一旦ナビをトルツメ処理
+//      <nav id="game-category" class="active-0">
+//        <ul>
+//          <li>公式戦</li>
+//          <li>入替戦</li>
+//          <li>全日本</li>
+//          <li>甲子園ボウル</li>
+//        </ul>
+//      </nav>
+?>
       <div class="game-category1">
         <div class="af-schedule">
             <h2 class="calendar">日程・結果 / Division1</h2>
