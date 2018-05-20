@@ -116,6 +116,14 @@ $statsItem = array(
 
 ?>
 
+<style>
+  .focus-bnr img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+
 <?php if ($page['ua'] === 'desktop') : ?>
 <div class="focus-bnr">
   <a href="https://sportsbull.jp/toj-2018/">
