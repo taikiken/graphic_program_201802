@@ -631,7 +631,7 @@ $c-txt__strong: $c-main;
     align-items: center;
     width: 100%;
     height: 100%;
-    font-size: 12px;  
+    font-size: 12px;
     font-weight: bold;
     color: #ffffff;
     text-decoration: none;
@@ -711,12 +711,14 @@ $c-txt__strong: $c-main;
       width: auto;
     }
   }
+  .title_wrap {
+    border-left: 1px solid $c-accent;
+  }
   .title {
     display: flex;
     align-items: center;
-    width: calc(100% - 95px);
-    height: 32px;
-    border-left: 1px solid $c-accent;
+    //width: calc(100% - 95px);
+    //height: 32px;
     padding-left: 12px;
     font-size: 12px;
     font-weight: bold;
@@ -725,6 +727,10 @@ $c-txt__strong: $c-main;
       margin-left: 15px;
       font-size: 16px;
     }
+  }
+  .time {
+    padding-left: 12px;
+    font-size: 10px;
   }
   .buttonBlock {
     width: 100%;

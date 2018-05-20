@@ -68,7 +68,7 @@ include_once __DIR__ . '/../../_env.php';
   </header><!-- /.head-sec -->
 
   <div class="body-sec">
-    
+
     <section class="summary">
       <div class="summary__inner">
         <h1 class="summary__heading">
@@ -208,6 +208,8 @@ include_once __DIR__ . '/../../_env.php';
     e.stopPropagation();
   })
 </script>
+
+
 
 
 <?php
