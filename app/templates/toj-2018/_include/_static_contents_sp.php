@@ -36,7 +36,7 @@
           </h2>
           <div class="schedule__content js-scheduleToggle">
             <!-- 第１ステージ　堺 -->
-            <section class="schedule__unit is-open">
+            <section class="schedule__unit">
               <header class="schedule__header">
 
                 <p class="date">
@@ -45,12 +45,15 @@
                     <img src="/assets/sp/images/toj-2018/date_schedule-0520.png" alt="05/20[Sun]">
                   </picture>
                 </p>
-                <h3 class="title">第1ステージ<em>堺</em></h3>
+                <div class="title_wrap">
+                  <h3 class="title">第1ステージ<em>堺</em></h3>
+                  <div class="time"><strong>13:30</strong> 配信開始</div>
+                </div>
                 <div class="buttonBlock">
-                  <!-- <p class="button__fulltime"><a href="#hoge">フルタイム動画</a></p>
-                  <p class="button__highlight"><a href="#hoge">ハイライト動画</a></p> -->
-                  <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-                  <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+                  <p class="button__fulltime"><a href="https://sportsbull.jp/p/318413/">フルタイム動画</a></p>
+                  <p class="button__highlight"><a href="https://sportsbull.jp/p/318381/">ハイライト動画</a></p>
+                  <!-- <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
+                  <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p> -->
                 </div>
               </header>
               <div class="schedule__detail">
@@ -66,7 +69,7 @@
               </div>
             </section>
             <!-- 第２ステージ　京都 -->
-            <section class="schedule__unit">
+            <section class="schedule__unit is-open">
               <header class="schedule__header">
                 <p class="date">
                   <picture>
@@ -74,7 +77,10 @@
                     <img src="/assets/sp/images/toj-2018/date_schedule-0521.png" alt="05/21[Mon]">
                   </picture>
                 </p>
-                <h3 class="title">第2ステージ<em>京都</em></h3>
+                <div class="title_wrap">
+                  <h3 class="title">第2ステージ<em>京都</em></h3>
+                  <div class="time"><strong>9:20</strong> 配信開始</div>
+                </div>
                 <div class="buttonBlock">
                   <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
                   <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -101,7 +107,10 @@
                     <img src="/assets/sp/images/toj-2018/date_schedule-0522.png" alt="05/22[Tue]">
                   </picture>
                 </p>
-                <h3 class="title">第3ステージ<em>いなべ</em></h3>
+                <div class="title_wrap">
+                  <h3 class="title">第3ステージ<em>いなべ</em></h3>
+                  <div class="time"><strong>9:15</strong> 配信開始</div>
+                </div>
                 <div class="buttonBlock">
                   <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
                   <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -128,7 +137,10 @@
                     <img src="/assets/sp/images/toj-2018/date_schedule-0523.png" alt="05/23[Wed]">
                   </picture>
                 </p>
-                <h3 class="title">第4ステージ<em>美濃</em></h3>
+                <div class="title_wrap">
+                  <h3 class="title">第4ステージ<em>美濃</em></h3>
+                  <div class="time"><strong>9:10</strong> 配信開始</div>
+                </div>
                 <div class="buttonBlock">
                   <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
                   <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -155,7 +167,10 @@
                     <img src="/assets/sp/images/toj-2018/date_schedule-0524.png" alt="05/24[Thu]">
                   </picture>
                 </p>
-                <h3 class="title">第5ステージ<em>南信州</em></h3>
+                <div class="title_wrap">
+                  <h3 class="title">第5ステージ<em>南信州</em></h3>
+                  <div class="time"><strong>9:10</strong> 配信開始</div>
+                </div>
                 <div class="buttonBlock">
                   <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
                   <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -182,7 +197,10 @@
                     <img src="/assets/sp/images/toj-2018/date_schedule-0525.png" alt="05/25[Fri]">
                   </picture>
                 </p>
-                <h3 class="title">第6ステージ<em>富士山</em></h3>
+                <div class="title_wrap">
+                  <h3 class="title">第6ステージ<em>富士山</em></h3>
+                  <div class="time"><strong>10:55</strong> 配信開始</div>
+                </div>
                 <div class="buttonBlock">
                   <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
                   <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -209,7 +227,10 @@
                     <img src="/assets/sp/images/toj-2018/date_schedule-0526.png" alt="05/26[Sat]">
                   </picture>
                 </p>
-                <h3 class="title">第7ステージ<em>伊豆</em></h3>
+                <div class="title_wrap">
+                  <h3 class="title">第7ステージ<em>伊豆</em></h3>
+                  <div class="time"><strong>8:55</strong> 配信開始</div>
+                </div>
                 <div class="buttonBlock">
                   <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
                   <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -236,7 +257,10 @@
                     <img src="/assets/sp/images/toj-2018/date_schedule-0527.png" alt="05/27[Sun]">
                   </picture>
                 </p>
-                <h3 class="title">第8ステージ<em>東京</em></h3>
+                <div class="title_wrap">
+                  <h3 class="title">第8ステージ<em>東京</em></h3>
+                  <div class="time"><strong>10:45</strong> 配信開始</div>
+                </div>
                 <div class="buttonBlock">
                   <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
                   <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>

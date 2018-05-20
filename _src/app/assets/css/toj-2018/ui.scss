@@ -276,7 +276,7 @@ $c-txt__strong: $c-main;
       }
     }
   }
-  
+
 }
 //.about
 
@@ -454,7 +454,7 @@ $c-txt__strong: $c-main;
     align-items: center;
     width: 100%;
     height: 100%;
-    font-size: 16px;  
+    font-size: 16px;
     font-weight: bold;
     color: #ffffff;
     text-decoration: none;
@@ -534,7 +534,7 @@ $c-txt__strong: $c-main;
     display: flex;
     align-items: center;
     width: 290px;
-    height: 64px;
+    // height: 64px;
     border-left: 1px solid $c-accent;
     padding-left: 25px;
     font-size: 20px;
@@ -544,6 +544,9 @@ $c-txt__strong: $c-main;
       margin-left: 25px;
       font-size: 24px;
     }
+  }
+  .time {
+    padding-left: 25px;
   }
   .buttonBlock {
     height: 72px;
