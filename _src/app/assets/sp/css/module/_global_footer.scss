@@ -38,8 +38,12 @@
           content: '';
           position: relative;
           top: -1px;
-          @extend .sp-sprite-common;
-          @include sprite( $common-breadcrumb-arrow, inline-block );
+          // @extend .sp-sprite-common;
+          // @include sprite( $common-breadcrumb-arrow, inline-block );
+          display: inline-block;
+          width: (12/2)+px;
+          height: (20/2)+px;
+          background: url(/assets/images/common/breadcrumb-arrow.svg) 0 0 no-repeat;
           @include hide-text;
           margin-right: (20/2)+px;
           margin-left: (20/2)+px;
@@ -159,20 +163,28 @@
       }
 
       a {
-        @extend .sp-sprite-footer;
+        // @extend .sp-sprite-footer;
+        display: block;
+        width: (100/2)+px;
+        height: (100/2)+px;
+        background-position: 0 0;
+        background-repeat: no-repeat;
         @include hide-text;
       }
 
       .#{$prefix}sns-tw a {
-        @include sprite( $footer-icon-sns-tw );
+        // @include sprite( $footer-icon-sns-tw );
+        background-image: url(/assets/images/common/footer-icon-sns-tw.svg);
       }
 
       .#{$prefix}sns-fb a {
-        @include sprite( $footer-icon-sns-fb );
+        // @include sprite( $footer-icon-sns-fb );
+        background-image: url(/assets/images/common/footer-icon-sns-fb.svg);
       }
 
       .#{$prefix}sns-yt a {
-        @include sprite( $footer-icon-sns-yt );
+        // @include sprite( $footer-icon-sns-yt );
+        background-image: url(/assets/images/common/footer-icon-sns-yt.svg);
       }
 
     }

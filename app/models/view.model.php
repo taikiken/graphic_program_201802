@@ -118,6 +118,8 @@ class ViewModel {
       'whole'            => true, // <div class="whole">
       'header'           => true, // <header>
       'header_appbnr'    => true, // sp用冒頭のアプリバナー
+      'header_search'    => true, // headerの検索窓
+      'header_user'      => true, // headerのユーザー部分
       'gnav'             => true, // <nav>
       'announce'         => true, // <announce>
       'sidemenu'         => true, // sp - sidemenu
