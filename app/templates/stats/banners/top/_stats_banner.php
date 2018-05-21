@@ -117,7 +117,7 @@ $statsItem = array(
 
 // 一覧リンク
 $stats_link = '/stats/';
-if ( $page['ua'] === 'mobile' ) :
+if ( $page['ua'] !== 'desktop' ) :
   $stats_link = '/nav/stats/';
 endif;
 
