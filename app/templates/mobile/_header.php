@@ -211,7 +211,12 @@ $seo_h1 = ( $page['template'] !== 'inc' ) ? 'h1' : 'p';
           // タブの表示順はAPI通りにする
           ?>
           <li id="<?php echo $tab['slug']; ?>" class="<?php echo $page['html_prefix']; ?>gnav-<?php echo $tab['slug']; ?>">
-            <a href="<?php echo $page['site_url_uts']; ?>/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
+            <?php if($tab['slug'] !== "vk"){ ?>
+                <a href="<?php echo $page['site_url_uts']; ?>/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
+            <?php }
+            else{?>
+                <a href="<?php echo "http://vk.sportsbull.jp/koshien/"; ?>/"><?php echo $tab['label']; ?></a>
+            <?php } ?>
           </li>
         <?php }//foreach ?>
       </ul>
