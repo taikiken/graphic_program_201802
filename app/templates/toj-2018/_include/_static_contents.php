@@ -58,7 +58,7 @@ intro -->
       </div>
     </section>
     <!-- 第２ステージ　京都 -->
-    <section class="schedule__unit is-open">
+    <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0521.png" alt="05/21[Mon]"></p>
         <div class="title_wrap">
@@ -66,8 +66,8 @@ intro -->
           <div class="time"><strong>9:20</strong> 配信開始</div>
         </div>
         <div class="buttonBlock">
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime"><a href="https://sportsbull.jp/p/319235/">フルタイム動画</a></p>
+          <p class="button__highlight"><a href="https://sportsbull.jp/p/319027/">ハイライト動画</a></p>
         </div>
       </header>
       <div class="schedule__detail">
@@ -92,7 +92,7 @@ intro -->
       </div>
     </section>
     <!-- 第３ステージ　いなべ -->
-    <section class="schedule__unit">
+    <section class="schedule__unit is-open">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0522.png" alt="05/22[Tue]"></p>
         <div class="title_wrap">
