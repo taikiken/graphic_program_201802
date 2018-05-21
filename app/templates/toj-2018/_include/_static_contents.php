@@ -1,4 +1,4 @@
-<!-- intro -->
+intro -->
 <section class="intro">
   <p class="intro__catch">1982年から14回に渡り開催された「国際サイクルロードレース」を継承し、1996年にUCI公認の国際レースへとランクアップしたことを機に「ツアー・オブ・ジャパン（TOJ）」へと名称を変え、世界トップレベルの強豪選手が参戦するまでに成長した本大会。<br>
     2018シーズン、アジア最高クラスの熱狂を見逃すな！</p>
@@ -25,15 +25,18 @@
   <h2 class="schedule__heading"><img src="/assets/images/toj-2018/ttl_h2-schedule.png" alt="schedule 日程"></h2>
   <div class="schedule__content js-scheduleToggle">
     <!-- 第１ステージ　堺 -->
-    <section class="schedule__unit is-open">
+    <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0520.png" alt="05/20[Sun]"></p>
-        <h3 class="title">第1ステージ<em>堺</em></h3>
+        <div class="title_wrap">
+          <h3 class="title">第1ステージ<em>堺</em></h3>
+          <div class="time"><strong>13:30</strong> 配信開始</div>
+        </div>
         <div class="buttonBlock">
-          <!-- <p class="button__fulltime"><a href="#hoge">フルタイム動画</a></p>
-          <p class="button__highlight"><a href="#hoge">ハイライト動画</a></p> -->
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime"><a href="https://sportsbull.jp/p/318413/">フルタイム動画</a></p>
+          <p class="button__highlight"><a href="https://sportsbull.jp/p/318381/">ハイライト動画</a></p>
+          <!-- <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
+          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p> -->
         </div>
       </header>
       <div class="schedule__detail">
@@ -55,10 +58,13 @@
       </div>
     </section>
     <!-- 第２ステージ　京都 -->
-    <section class="schedule__unit">
+    <section class="schedule__unit is-open">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0521.png" alt="05/21[Mon]"></p>
-        <h3 class="title">第2ステージ<em>京都</em></h3>
+        <div class="title_wrap">
+          <h3 class="title">第2ステージ<em>京都</em></h3>
+          <div class="time"><strong>9:20</strong> 配信開始</div>
+        </div>
         <div class="buttonBlock">
           <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
           <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -89,7 +95,10 @@
     <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0522.png" alt="05/22[Tue]"></p>
-        <h3 class="title">第3ステージ<em>いなべ</em></h3>
+        <div class="title_wrap">
+          <h3 class="title">第3ステージ<em>いなべ</em></h3>
+          <div class="time"><strong>9:15</strong> 配信開始</div>
+        </div>
         <div class="buttonBlock">
           <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
           <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -119,7 +128,10 @@
     <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0523.png" alt="05/23[Wed]"></p>
-        <h3 class="title">第4ステージ<em>美濃</em></h3>
+        <div class="title_wrap">
+          <h3 class="title">第4ステージ<em>美濃</em></h3>
+          <div class="time"><strong>9:10</strong> 配信開始</div>
+        </div>
         <div class="buttonBlock">
           <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
           <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -150,7 +162,10 @@
     <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0524.png" alt="05/24[Thu]"></p>
-        <h3 class="title">第5ステージ<em>南信州</em></h3>
+        <div class="title_wrap">
+          <h3 class="title">第5ステージ<em>南信州</em></h3>
+          <div class="time"><strong>9:10</strong> 配信開始</div>
+        </div>
         <div class="buttonBlock">
           <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
           <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -180,7 +195,10 @@
     <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0525.png" alt="05/25[Fri]"></p>
-        <h3 class="title">第6ステージ<em>富士山</em></h3>
+        <div class="title_wrap">
+          <h3 class="title">第6ステージ<em>富士山</em></h3>
+          <div class="time"><strong>10:55</strong> 配信開始</div>
+        </div>
         <div class="buttonBlock">
           <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
           <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -210,7 +228,10 @@
     <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0526.png" alt="05/26[Sat]"></p>
-        <h3 class="title">第7ステージ<em>伊豆</em></h3>
+        <div class="title_wrap">
+          <h3 class="title">第7ステージ<em>伊豆</em></h3>
+          <div class="time"><strong>8:55</strong> 配信開始</div>
+        </div>
         <div class="buttonBlock">
           <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
           <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -243,7 +264,10 @@
     <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0527.png" alt="05/27[Sun]"></p>
-        <h3 class="title">第8ステージ<em>東京</em></h3>
+        <div class="title_wrap">
+          <h3 class="title">第8ステージ<em>東京</em></h3>
+          <div class="time"><strong>10:45</strong> 配信開始</div>
+        </div>
         <div class="buttonBlock">
           <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
           <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
@@ -278,9 +302,9 @@
 
 <!-- About -->
 <section class="about">
-  
+
   <h2 class="about__heading"><img src="/assets/images/toj-2018/ttl_h2-about.png" alt="ABOUT Tour of Japanとは"></h2>
-  
+
   <div class="about__text">
     <p>ツアー・オブ・ジャパンは、1982年から1995年まで14回に渡り開催されていた「国際サイクルロードレース」を継承する国内最大規模の自転車ロードレースです。<br>
         1996年、UCI（国際自転車競技連合）にステージレースとして公認されたことを機に、その名称をツアー・オブ・ジャパンに変更し、第1回大会が開催されました。<br>
@@ -291,7 +315,7 @@
   </div><!-- /.about__text -->
 
   <div class="about__movie">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/O8TF6j5hRvg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/F8Aa6SORFUI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div><!-- /.about__movie -->
 
   <div class="about__featured">
@@ -388,49 +412,79 @@
 <!-- / overview -->
 
 <!-- related -->
-<!-- <section class="related">
+<section class="related">
   <h2 class="related__heading"><img src="/assets/images/toj-2018/ttl_h2-related.png" alt="RELATED 関連記事"></h2>
   <ul class="related__list">
     <li class="related__post">
-      <a href="hoge" class="related__link">
-        <figure class="related__thumb"><img src="/assets/images/toj-2018/related-thumb1.jpg" alt=""></figure>
+      <a href="https://sportsbull.jp/p/316678/" class="related__link">
+        <figure class="related__thumb"><img src="https://img.sportsbull.jp/thumbnail1/img2018051801163856885800.jpg" alt=""></figure>
         <div class="related__text">
-          <h3 class="heading">Tour of Japan 2017, SAKAI</h3>
-          <p class="text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-          <p class="date">3月3日（木） 22:04</p>
+          <h3 class="heading">【ハイライト動画】<br>Tour of Japan 2017 第1ステージ：堺</h3>
+          <!-- <p class="text"></p>
+          <p class="date"></p> -->
         </div>
       </a>
     </li>
     <li class="related__post">
-      <a href="hoge" class="related__link">
-        <figure class="related__thumb"><img src="/assets/images/toj-2018/related-thumb1.jpg" alt=""></figure>
+      <a href="https://sportsbull.jp/p/316679/" class="related__link">
+        <figure class="related__thumb"><img src="https://img.sportsbull.jp/thumbnail1/img2018051801162154695000.jpg" alt=""></figure>
         <div class="related__text">
-          <h3 class="heading">Tour of Japan 2017, SAKAI</h3>
-          <p class="text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-          <p class="date">3月3日（木） 22:04</p>
+          <h3 class="heading">【ハイライト動画】<br>Tour of Japan 2017 第2ステージ：京都</h3>
+          <!-- <p class="text"></p>
+          <p class="date"></p> -->
         </div>
       </a>
     </li>
     <li class="related__post">
-      <a href="hoge" class="related__link">
-        <figure class="related__thumb"><img src="/assets/images/toj-2018/related-thumb1.jpg" alt=""></figure>
+      <a href="https://sportsbull.jp/p/316680/" class="related__link">
+        <figure class="related__thumb"><img src="https://img.sportsbull.jp/thumbnail1/img2018051801175563948600.jpg" alt=""></figure>
         <div class="related__text">
-          <h3 class="heading">Tour of Japan 2017, SAKAI</h3>
-          <p class="text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice!</p>
-          <p class="date">3月3日（木） 22:04</p>
+          <h3 class="heading">【ハイライト動画】<br>Tour of Japan 2017 第3ステージ：いなべ</h3>
+          <!-- <p class="text"></p>
+          <p class="date"></p> -->
         </div>
       </a>
     </li>
     <li class="related__post">
-      <a href="hoge" class="related__link">
-        <figure class="related__thumb"><img src="/assets/images/toj-2018/related-thumb1.jpg" alt=""></figure>
+      <a href="https://sportsbull.jp/p/316681/" class="related__link">
+        <figure class="related__thumb"><img src="https://img.sportsbull.jp/thumbnail1/img2018051801191844971700.jpg" alt=""></figure>
         <div class="related__text">
-          <h3 class="heading">Tour of Japan 2017, SAKAI</h3>
-          <p class="text">アイスクロス・ダウンヒルの先駆けとして、2001年の初開催以来、世界トップレベルのスリルを誇るウィンタースポーツイベントへと成長を重ねてきたRed Bull Crashed Ice! 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！ 2017－18シーズンの締めくくり、カナダ・アルバータでの熱狂を見逃すな！</p>
-          <p class="date">3月3日（木） 22:04</p>
+          <h3 class="heading">【ハイライト動画】<br>Tour of Japan 2017 第4ステージ：美濃</h3>
+          <!-- <p class="text"></p>
+          <p class="date"></p> -->
+        </div>
+      </a>
+    </li>
+    <li class="related__post">
+      <a href="https://sportsbull.jp/p/316682/" class="related__link">
+        <figure class="related__thumb"><img src="https://img.sportsbull.jp/thumbnail1/img2018051801225088668100.jpg" alt=""></figure>
+        <div class="related__text">
+          <h3 class="heading">【ハイライト動画】<br>Tour of Japan 2017 第5ステージ：南信州</h3>
+          <!-- <p class="text"></p>
+          <p class="date"></p> -->
+        </div>
+      </a>
+    </li>
+    <li class="related__post">
+      <a href="https://sportsbull.jp/p/316683/" class="related__link">
+        <figure class="related__thumb"><img src="https://img.sportsbull.jp/thumbnail1/img2018051801243781619200.jpg" alt=""></figure>
+        <div class="related__text">
+          <h3 class="heading">【ハイライト動画】<br>Tour of Japan 2017 第6ステージ：富士山</h3>
+          <!-- <p class="text"></p>
+          <p class="date"></p> -->
+        </div>
+      </a>
+    </li>
+    <li class="related__post">
+      <a href="https://sportsbull.jp/p/316684/" class="related__link">
+        <figure class="related__thumb"><img src="https://img.sportsbull.jp/thumbnail1/img2018051801255208321800.jpg" alt=""></figure>
+        <div class="related__text">
+          <h3 class="heading">【ハイライト動画】<br>Tour of Japan 2017 第7ステージ：伊豆</h3>
+          <!-- <p class="text"></p>
+          <p class="date"></p> -->
         </div>
       </a>
     </li>
   </ul>
-</section> -->
+</section>
 <!-- / related -->
