@@ -6,9 +6,9 @@ class getData {
 	// public static $standingUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/standing.json";
 	// public static $gameUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/%s.json";
     
-    public static $scheduleUrl = "https://img.sportsbull.jp/static/americanfootball/%s/%s/schedule.json";
-    public static $standingUrl = "https://img.sportsbull.jp/static/americanfootball/%s/%s/standing.json";
-    public static $gameUrl = "https://img.sportsbull.jp/static/americanfootball/%s/%s/%s.json";
+    public static $scheduleUrl = "https://%simg.sportsbull.jp/static/americanfootball/%s/%s/schedule.json";
+    public static $standingUrl = "https://%simg.sportsbull.jp/static/americanfootball/%s/%s/standing.json";
+    public static $gameUrl = "https://%simg.sportsbull.jp/static/americanfootball/%s/%s/%s.json";
 
 	public static function setJudgment($target) {
 		if (isset($target) && !empty($target)) {
@@ -23,7 +23,7 @@ class getData {
             $year   = $defYear;
             $season = $defSeason;
         }
-        $url = sprintf(self::$scheduleUrl, $year, $season);
+        $url = sprintf(self::$scheduleUrl, $jsonDevUrl, $year, $season);
 		$json = file_get_contents($url);
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
@@ -96,7 +96,8 @@ EOM;
 	}
 
 	public static function getStanding($year, $season) {
-        $url = sprintf(self::$standingUrl, $year, $season);
+        include __DIR__."/define.php";
+        $url = sprintf(self::$standingUrl, $jsonDevUrl, $year, $season);
 		$json = file_get_contents($url);
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
@@ -147,7 +148,8 @@ EOM;
 	}
 
 	public static function getMatch($year, $season, $gameId) {
-		$url = sprintf(self::$gameUrl, $year, $season, $gameId);
+        include __DIR__."/define.php";
+		$url = sprintf(self::$gameUrl, $jsonDevUrl, $year, $season, $gameId);
 		$json = file_get_contents($url);
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
@@ -490,7 +492,7 @@ EOM;
             $year   = $defYear;
             $season = $defSeason;
         }
-        $url = sprintf(self::$scheduleUrl, $year, $season);
+        $url = sprintf(self::$scheduleUrl, $jsonDevUrl, $year, $season);
 		$json = file_get_contents($url);
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
