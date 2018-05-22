@@ -75,23 +75,34 @@
       display: inline-block;
       margin-right: 4px;
       vertical-align: middle;
-      @extend .sprite-common;
+      // @extend .sprite-common;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
       @include hide-text;
     }
 
     //.post-label_recommend
     &-label_recommend {
-      @include sprite( $common-icon-recommend );
+      // @include sprite( $common-icon-recommend );
+      width: 50px;
+      height: 18px;
+      background-image: url(/assets/images/common/icon-recommend.svg);
     }
 
     //.post-label_movie
     &-label_movie {
-      @include sprite( $common-icon-movie );
+      // @include sprite( $common-icon-movie );
+      width: 34px;
+      height: 18px;
+      background-image: url(/assets/images/common/icon-movie.svg);
     }
 
     //.post-label_new
     &-label_new {
-      @include sprite( $common-icon-new );
+      // @include sprite( $common-icon-new );
+      width: 40px;
+      height: 18px;
+      background-image: url(/assets/images/common/icon-new.svg);
     }
   }
 }
@@ -614,8 +625,12 @@
       top: 2px;
       margin-right: 5px;
       content: '';
-      @extend .sprite-common;
-      @include sprite( $common-icon-bookmark_o, inline-block);
+      // @extend .sprite-common;
+      // @include sprite( $common-icon-bookmark_o, inline-block);
+      display: inline-block;
+      width: 8px;
+      height: 12px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 13.4"><defs><style>.cls-1{fill:#0f3580;fill-rule:evenodd;}</style></defs><title>icon-bookmark</title><g id="icon-bookmark" data-name="icon-bookmark"><g id="common"><g id="icon-bookmark"><path class="cls-1" d="M.5.5h8v12L4.5,10l-4,2.5Z"/></g></g></g></svg>') 0 0 no-repeat;
       @include hide-text;
     }
   }
@@ -626,7 +641,8 @@
     color: #fff;
 
     span:before {
-      @include sprite( $common-icon-bookmark, inline-block);
+      // @include sprite( $common-icon-bookmark, inline-block);
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 13.4"><defs><style>.cls-1{fill:#fff;fill-rule:evenodd;}</style></defs><title>icon-bookmark</title><g id="icon-bookmark" data-name="icon-bookmark"><g id="common"><g id="icon-bookmark"><path class="cls-1" d="M.5.5h8v12L4.5,10l-4,2.5Z"/></g></g></g></svg>');
       @include hide-text;
     }
   }
@@ -747,8 +763,13 @@
       margin-top: -15px;
 
       a {
-        @extend .sprite-common;
-        @include sprite( $common-btn-notice-close );
+        // @extend .sprite-common;
+        // @include sprite( $common-btn-notice-close );
+        display: block;
+        width: 30px;
+        height: 30px;
+        background: url(/assets/images/common/btn-notice-close.svg) 50% 50% no-repeat;
+        background-size: 13px;
         @include hide-text;
       }
     }
@@ -771,50 +792,6 @@
   .modal-bg {
     &.flush-modal-bg {
       opacity: 0;
-    }
-  }
-}
-
-
-
-
-
-// modal-intro
-// 初回起動時のサービス紹介
-.modal-intro {
-  @extend %modal-dialogue;
-  display: none;
-
-  .modal-bg {
-    background-color: rgba(0, 0, 0, .7);
-  }
-
-  //.modal-intro-contents
-  &-contents {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-  }
-
-  //.modal-intro-close
-  &-close {
-    z-index: 999;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  //.modal-intro-close-btn
-  &-close-btn {
-    display: block;
-    width: 28px;
-    height: 28px;
-    background: url(/assets/images/intro/btn-close.png) 0 0 no-repeat;
-    @include hide-text;
-
-    &:hover {
-      @include over-opacity;
     }
   }
 }

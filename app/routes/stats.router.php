@@ -639,7 +639,7 @@ $app->group('/stats', function () use($app) {
   // ヒットする文字列だけ
   $this->group('/{league:ub_kansai|ub_kansaibig6|ub_tohto}', function ($request, $response, $args) use ($app) {
 
-    $this->get('/2017a/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
+    $this->get('/{season:20[0-9]{2}[as]}/game/{gameid:[A-Z][A-Z][0-9][0-9]}[/]', function ($request, $response, $args) use ($app) {
 
       $request_uri = $_SERVER['REQUEST_URI'];
       $url = explode('/', $request_uri);
@@ -654,8 +654,8 @@ $app->group('/stats', function () use($app) {
       ];
       $s3key = implode('/', $arr);
 
-      $S3Module = new S3Module;
-      $json = $S3Module->getUrl($s3key);
+      global $bucket;
+      $json = sprintf("https://%s/%s",$bucket,$s3key);
 
       // jsonからタイトルつくる
       // フロントはいつでも本番のバケットのjson取得してる
@@ -678,6 +678,26 @@ $app->group('/stats', function () use($app) {
         $dateM = $json->gameinfo->dateM;
         $dateD = $json->gameinfo->dateD;
         $weekday = $json->gameinfo->weekday;
+      } else {
+        // 404
+        // ------------------------------
+        $args['page'] = $app->model->set([
+            'title'    => '404 Not Found',
+            'og_title' => '404 Not Found',
+            'template' => 404,
+        ]);
+
+        $args['request']  = $request;
+        $args['response'] = $response;
+
+        if($app->model->property('ua') === 'desktop')
+        {
+            return $this->renderer->render($response, 'desktop/404.php', $args)->withStatus(404);
+        }
+        else
+        {
+            return $this->renderer->render($response, 'mobile/404.php', $args)->withStatus(404);
+        }
       }
       // シーズン日本語化
       $season_array = str_split($season, 4);

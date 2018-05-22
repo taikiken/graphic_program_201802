@@ -115,6 +115,29 @@ $statsItem = array(
 );
 
 ?>
+
+<style>
+  .focus-bnr img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+
+<?php if ($page['ua'] === 'desktop') : ?>
+<div class="focus-bnr">
+  <a href="https://sportsbull.jp/toj-2018/">
+    <img src="https://sportsbull.jp/_/toj/banner/ToJ2018-pc.png" alt="">
+  </a>
+</div>
+<?php else : ?>
+<div class="focus-bnr">
+  <a href="https://sportsbull.jp/toj-2018/">
+    <img src="https://sportsbull.jp/_/toj/banner/ToJ2018-sp.png" alt="">
+  </a>
+</div>
+<?php endif; ?>
+
 <aside class="stats_banner">
   <div class="stats_banner__heading">
     <h2 class="stats_banner__heading__title">

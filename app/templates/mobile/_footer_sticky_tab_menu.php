@@ -19,6 +19,13 @@
     whole.className += ' nadir_tab-active';
   }(window));
 </script>
+
+<style>
+  .adsbygoogle.adsbygoogle-noablate {
+    bottom: 50px !important;
+  }
+</style>
+
 <nav class="nadir_tab">
   <ul class="nadir_tab-list">
     <li class="nadir_tab-item nadir_tab-item__home">
@@ -66,4 +73,3 @@
     </li>
   </ul><!-- /.nadir_tab-list -->
 </nav><!-- /.nadir_tab -->
-

@@ -1,0 +1,805 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss_sp/asset";
+
+// normalize / reset / 基本 class, tag 設定
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss_sp/style/reset";
+@import "../../../../../scss_sp/dependencies/style";
+
+// --------------------------------------------
+// 以下、import ファイルを編集
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+$c-bg1: #e5ecf4;
+$c-bg2: #fae7e7;
+$c-main: #004796;
+$c-accent: #cc1414;
+$c-txt__strong: $c-main;
+
+// common override
+.toj-2018 {
+  .body-sec,
+  .body-sec-inner {
+    background-color: #fff !important;
+  }
+  .main-sec {
+    padding-bottom: (40/2)+px;
+  }
+  .side-sec {
+    padding-bottom: (80/2)+px;
+    .sponsor-link {
+      > div {
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+      }
+      iframe {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+  }
+  .foot-sec {
+    border-top: none;
+  }
+}
+
+
+
+
+
+//.summary
+.summary {
+  position: relative;
+  height: (232/2)+px;
+  background: url(/assets/sp/images/toj-2018/summary-bg.jpg) center 0 no-repeat;
+  background-size: cover;
+}
+.summary__heading {
+  position: absolute;
+  top: 0;
+  left: 3.125vw;
+}
+.summary__copy {
+  position: absolute;
+}
+.summary__copy--first {
+  @extend .summary__copy;
+  top: (164/2)+px;
+  left: 3.125vw;
+}
+.summary__copy--second {
+  @extend .summary__copy;
+  top: (16/2)+px;
+  right: 2.5vw;
+}
+// /.summary
+
+
+.liveStreaming {
+  width: 100%;
+  .video-js {
+    width: 100%;
+    height: auto;
+    &:before {
+        content: "";
+        display: block;
+        padding-top: 56.25%; /* 高さと幅の比を16:9に固定。9/16*100=56.25 */
+    }
+    video {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  // .video-js .vjs-big-play-button {
+  //   content: "";
+  //   position: absolute;
+  //   top: 50%;
+  //   left: 50%;
+  //   width: 110px;
+  //   height: 100px;
+  //   -webkit-transform: translate(-50%, -50%);
+  //   transform: translate(-50%, -50%);
+  //   background: url(/assets/images/toj-2018/icon_play-main.png) 0 0 no-repeat;
+  //   background-size: contain;
+  //   overflow: hidden;
+  //   font-size: 0;
+  //   text-indent: 100%;
+  //   white-space: nowrap;
+  //   outline: none;
+  // }
+  // .bc-iframe .vjs-playlist-sidebar .vjs-playlist-show-hide button:hover, .bc-player-r1Zn0fWf4f_default .vjs-big-play-button:active, .bc-player-r1Zn0fWf4f_default .vjs-big-play-button:focus, .bc-player-r1Zn0fWf4f_default .vjs-menu-button-popup .vjs-menu .vjs-menu-item.vjs-selected, .bc-player-r1Zn0fWf4f_default .vjs-play-progress, .bc-player-r1Zn0fWf4f_default .vjs-volume-level, .bc-player-r1Zn0fWf4f_default:active .vjs-big-play-button, .bc-player-r1Zn0fWf4f_default:hover .vjs-big-play-button {
+  //   background-color: transparent;
+  // }
+  // .vjs-playing {
+  //   .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder:before, .vjs-icon-play:before {
+  //     display: none;
+  //   }
+  // }
+}
+// /.liveStreaming
+
+
+
+//container setting
+.container {
+  position: relative;
+  padding-top: (40/2)+px;
+  padding-bottom: (40/2)+px;
+}
+
+
+//.intro
+.intro {
+  @extend .container;
+  padding-top: (30/2)+px;
+  padding-bottom: 0;
+  .intro__catch {
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+    font-weight: bold;
+    font-size: (24/2)+px;
+  }
+
+  .intro__link__app {
+    margin-top: (32/2)+px;
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+    text-align: center;
+
+    .undotsushin-ios &,
+    .undotsushin-android & {
+      display: none;
+    }
+
+    a {
+      @include link-decoration(#001a72, #001a72, underline, underline);
+      display: inline-block;
+      line-height: (80/2)+px;
+      padding-left: (100/2)+px;
+      background: url(/assets/sp/images/toj-2018/intro-app_icon.png) 0 0 no-repeat;
+      background-size: (80/2)+px;
+      font-weight: bold;
+      font-size: (28/2)+px;
+    }
+
+    @include screen('small') {
+      a {
+        font-size: (24/2)+px;
+      }
+    }
+  }
+
+  .intro__timetable {
+    margin-top: (32/2)+px;
+
+    table {
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: (10/2)+px 3.125vw;
+      font-weight: bold;
+      font-size: (24/2)+px;
+      vertical-align: top;
+    }
+
+    th {
+      width: 23.125vw;
+      color: #0a1a72;
+      white-space: nowrap;
+    }
+
+    td {
+      padding-left: 0;
+
+      span {
+        font-size: 10px;
+      }
+    }
+
+    tr:nth-child(odd) {
+      th, td {
+        background-color: #e9f3fb;
+      }
+    }
+
+    //.intro__timetable__note
+    &__note {
+      margin: (12/2)+px 3.125vw 0;
+      font-size: 10px;
+    }
+  }
+
+  .intro__banner {
+    margin-top: (32/2)+px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .intro__widjet_twitter {
+    height: 200px;
+    margin-top: (40/2)+px;
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+    overflow: hidden;
+  }
+} //.intro
+
+
+
+
+.heading {
+  margin-bottom: 20px;
+  padding-left: 3.125vw;;
+  line-height: 1;
+  img {
+    width: auto;
+  }
+}
+
+// .schedule
+.schedule {
+  @extend .container;
+  padding-top: 28px;
+  padding-bottom: 0;
+  margin-bottom: -6px;
+  .schedule__widjet_twitter {
+    margin-top: 0;
+    iframe {
+      width: 100% !important;
+      height: 250px !important;
+    }
+  }
+}
+.schedule__heading {
+  @extend .heading;
+}
+//.schedule
+
+//.about
+.about {
+  @extend .container;
+  // margin-top: (16/2)+px;
+  // margin-bottom: (16/2)+px;
+  background-color: $c-bg1;
+
+  .about__heading {
+    @extend .heading;
+  }
+
+  .about__text {
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+
+    p {
+      color: #515769;
+      font-size: (24/2)+px;
+    }
+
+    p + p {
+      margin-top: 1em;
+    }
+  }
+
+  .about__movie {
+    position: relative;
+    margin-top: (32/2)+px;
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+
+    &:before {
+      content: "";
+      display: block;
+      padding-top: (728/1280*100%);
+    }
+
+    iframe {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    a {
+      position: relative;
+      display: block;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: (90/2)+px;
+        height: (90/2)+px;
+        transform: translate(-50%, -50%);
+        background: url(/assets/sp/images/toj-2018/about-movie-icon_play.png) 0 0 no-repeat;
+        background-size: (90/2)+px;
+        @include hide-text;
+      }
+    }
+  }
+
+  //.about__featured
+  .about__featured {
+    margin-top: (40/2)+px;
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+
+    //.about__featured__heading
+    &__heading {
+      @extend .heading;
+      padding-left: 0;
+      margin-bottom: -5px;
+    }
+
+    //.about__featured__list
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    //.about__featured__item
+    &__item {
+      width: 29.375vw;
+      margin-top: 20px;
+      margin-right: 2.65625vw;
+      &--more {
+        width: 29.375vw;
+        height:  29.375vw;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        img {
+          width: auto;
+        }
+      }
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+
+      figure {
+        img {
+          width: 132px;
+        }
+      }
+
+      h4 {
+        margin-top: 12px;
+        font-weight: bold;
+        font-size: (24/2)+px;
+      }
+
+      p {
+        margin-top: 4px;
+        font-size: (20/2)+px;
+
+        &.country {
+          margin-top: 6px;
+          color: #e50b43;
+        }
+      }
+    }
+  } //.about__featured
+
+} //.about
+
+
+
+
+
+//.overview
+.overview {
+  @extend .container;
+  .overview__heading {
+    @extend .heading;
+  }
+
+  .overview__data {
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+
+    th,
+    td {
+      padding-bottom: 0.5em;
+      vertical-align: top;
+      font-size: (24/2)+px;
+    }
+
+    th {
+      padding-right: (16/2)+px;
+      border-right: 1px solid $c-accent;
+      font-weight: bold;
+      white-space: nowrap;
+      color: $c-txt__strong;
+    }
+
+    td {
+      padding-left: (24/2)+px;
+      a {
+        color: $c-txt__strong;
+      }
+    }
+
+  }
+} //.overview
+
+
+
+
+
+//.related
+.related {
+  @extend .container;
+  margin-top: (16/2)+px;
+  margin-bottom: (16/2)+px;
+  background-color: $c-bg2;
+  .related__heading {
+    @extend .heading;
+  }
+
+  .related__post {
+    margin-right: 3.125vw;
+    margin-left: 3.125vw;
+    + .related__post {
+      border-top: 1px solid #fff;
+    }
+    a {
+      @include link-decoration(null, null, none, none);
+      display: table;
+      padding-top: (20/2)+px;
+      padding-bottom: (20/2)+px;
+    }
+    &:nth-of-type(1) {
+      a {
+        padding-top: 0;
+      }
+    }
+    &:nth-last-of-type(1) {
+      a {
+        padding-bottom: 0;
+      }
+    }
+
+    //.related__post__thumb
+    //.related__post__text
+    &__thumb,
+    &__text {
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    //.related__post__thumb
+    &__thumb {
+      width: perCalc(280, 600);
+      padding-right: perCalc(20, 600);
+    }
+
+    a.movie {
+      .related__post__thumb span {
+        position: relative;
+        display: inline-block;
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: (60/2)+px;
+          height: (60/2)+px;
+          transform: translate(-50%, -50%);
+          background: url(/assets/sp/images/toj-2018/related-icon_play.png) 0 0 no-repeat;
+          background-size: (60/2)+px;
+          @include hide-text;
+        }
+      }
+    }
+
+    //.related__post__text
+    &__text {
+      .related__post__heading {
+        color: $c-txt__strong;
+        font-weight: bold;
+        font-size: (24/2)+px;
+        font-feature-settings: 'palt';
+      }
+
+      .related__post__text {
+        display: none;
+      }
+
+      .related__post__category {
+        margin-top: 0.75em;
+        color: #001a72;
+        font-weight: bold;
+        font-size: (20/2)+px;
+      }
+
+      .related__post__date {
+        margin-top: 2em;
+        color: #999;
+        font-size: (20/2)+px;
+      }
+    } //.related__post__text
+
+  } //.related__post
+
+  //.related__topics
+  .related__topics {
+    margin-top: (20/2)+px;
+
+    //.related__topics__heading
+    &__heading {
+      line-height: 1;
+      padding-bottom: 8px;
+      margin-left: 3.125vw;
+
+      img {
+        width: (242/2)+px;
+      }
+    }
+
+    //.related__topics__post
+    &__post {
+      margin-left: 3.125vw;
+
+      a {
+        @include link-decoration(null, null, none, none);
+        display: table;
+        width: 100%;
+        margin-top: 12px;
+        background: url(/assets/sp/images/toj-2018/related-topics-bg.png) 0 0 no-repeat;
+        // transition: background-color 0.2s;
+
+        &:hover {
+          @include opacity(0.8);
+          // background-color: #10151e;
+        }
+      }
+
+      //.related__topics__post__thumb
+      //.related__topics__post__text
+      &__thumb,
+      &__text {
+        display: table-cell;
+      }
+
+      //.related__topics__post__thumb
+      &__thumb {
+        position: relative;
+        width: (96/2)+px !important;
+        height: (96/2)+px;
+        overflow: hidden;
+        vertical-align: top;
+
+        img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: auto;
+          max-width: initial;
+          height: 100%;
+        }
+      }
+
+      //.related__topics__post__text
+      &__text {
+        padding: 2px (12/2)+px;
+        vertical-align: middle;
+        h5 {
+          width: 240px;
+          color: #0a1a72;
+          font-weight: bold;
+          font-size: (24/2)+px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          span {
+            font-size: (10/2)+px;
+          }
+        }
+      }
+    } //.related__topics__post
+  } //.related__topics
+} //.related
+
+
+
+
+.button__videoLink {
+  position: relative;
+  width: 146px;
+  height: 32px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, .1);
+  a, .button__linkNone {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    &:after {
+      content: '';
+      display: inline-block;
+      background-image: url(/assets/sp/images/toj-2018/icon_btn-play.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 16px;
+      height: 16px;
+      margin-left: 5px;
+    }
+  }
+  a {
+    transition-duration: .1s;
+    background-color: $c-main;
+    top: 0;
+    left: 0;
+    &:active {
+      top: 3px;
+      left: 3px;
+    }
+  }
+  &.is-inactive {
+    .button__linkNone {
+      background-color: #cccccc;
+    }
+  }
+}
+.button__fulltime {
+  @extend .button__videoLink;
+}
+.button__highlight {
+  @extend .button__videoLink;
+}
+
+
+
+
+.schedule {
+  position: relative;
+}
+.schedule__unit {
+  &:nth-child(odd) {
+    background-color: #e5f3f7;
+  }
+  &:nth-child(even) {
+    .schedule__map {
+      background-color: #e5f3f7;
+    }
+  }
+  &.is-open {
+    // .schedule__detail {
+    //   // height: auto;
+    // }
+    .schedule__header {
+      &:after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+.schedule__header {
+  width: 100%;
+  // height: 96px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 8px 10px 20px;
+  position: relative;
+  cursor: pointer;
+  .date {
+    width: 95px;
+    height: 32px;
+    img {
+      width: auto;
+    }
+  }
+  .title_wrap {
+    border-left: 1px solid $c-accent;
+  }
+  .title {
+    display: flex;
+    align-items: center;
+    //width: calc(100% - 95px);
+    //height: 32px;
+    padding-left: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    em {
+      font-weight: bold;
+      margin-left: 15px;
+      font-size: 16px;
+    }
+  }
+  .time {
+    padding-left: 12px;
+    font-size: 10px;
+  }
+  .buttonBlock {
+    width: 100%;
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    p {
+      &:nth-of-type(n+2) {
+        margin-left: 8px;
+      }
+    }
+  }
+  &:after {
+    content: '';
+    display: block;
+    width: 19px;
+    height: 10px;
+    background-image: url(/assets/sp/images/toj-2018/arw_schedule_toggle.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    transition-duration: 0.5s;
+    transform-origin: center center;
+    position: absolute;
+    right: 10px;
+    top: 19px;
+  }
+}
+.schedule__detail {
+  // display: flex;
+  // align-items: flex-start;
+  box-sizing: border-box;
+  height: 0;
+  overflow: hidden;
+  transition-duration: 0.5s;
+  margin-top: -6px;
+  // padding: 10px;
+}
+.schedule__info {
+  position: relative;
+  // width: 208px;
+  // height: 454px;
+  // padding: 16px;
+  padding: 0 10px 10px;
+  .credit {
+    // position: absolute;
+    // bottom: 16px;
+    // width: 176px;
+    figure {
+      display: flex;
+    }
+    figcaption {
+      font-size: 10px;
+      line-height: 1.5;
+      width: calc(100% - 105px);
+    }
+    p {
+      width: 100px;
+      margin-left: 5px;
+    }
+  }
+}
+.schedule__map {
+  padding: 4px;
+  background-color: #ffffff;
+  margin: 0 10px 12px;
+}
+
+// .liveStreaming .video-js .vjs-big-play-button {
+//   width: 10vw;
+//   height: 10vw;
+// }
