@@ -1,22 +1,7 @@
 <?php
 include __DIR__."/getData.php";
-include __DIR__."/define.php";
-//$gameId = $_GET["gameId"];
-if(isset($_GET["gameId"])) {
-    $gameId = htmlspecialchars($_GET["gameId"], ENT_QUOTES, 'UTF-8');
-}
-if(isset($_GET["year"])) {
-    $year = htmlspecialchars($_GET["year"], ENT_QUOTES, 'UTF-8');
-} else {
-    $year = $defYear; //define.phpより設定年度を代入
-}
-if(isset($_GET["season"])) {
-    $season = htmlspecialchars($_GET["season"], ENT_QUOTES, 'UTF-8');
-} else {
-    $season = $defSeason; //define.phpより設定季節を代入
-}
-//$dataArray = getData::getMatch($gameId);
-$dataArray = getData::getMatch($year, $season, $gameId);
+$gameId = $_GET["gameId"];
+$dataArray = getData::getMatch($gameId);
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">

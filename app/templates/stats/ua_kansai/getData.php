@@ -1,14 +1,9 @@
 <?php
 class getData {
 	// public static $subdomain = preg_match("/dev/",$_SERVER["SERVER_NAME"])?"dev-img":"img";
-    
-	// public static $scheduleUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/schedule.json";
-	// public static $standingUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/standing.json";
-	// public static $gameUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/%s.json";
-    
-    public static $scheduleUrl = "https://%simg.sportsbull.jp/static/americanfootball/%s/%s/schedule.json";
-    public static $standingUrl = "https://%simg.sportsbull.jp/static/americanfootball/%s/%s/standing.json";
-    public static $gameUrl = "https://%simg.sportsbull.jp/static/americanfootball/%s/%s/%s.json";
+	public static $scheduleUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/schedule.json";
+	public static $standingUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/standing.json";
+	public static $gameUrl = "https://img.sportsbull.jp/static/americanfootball/2017/autumn/%s.json";
 
 	public static function setJudgment($target) {
 		if (isset($target) && !empty($target)) {
@@ -17,14 +12,8 @@ class getData {
 			return false;
 		}
 	}
-	public static function getSchedule($year = NULL, $season = NULL) {
-        include __DIR__."/define.php";
-        if (!isset($year) || !isset($season)) {
-            $year   = $defYear;
-            $season = $defSeason;
-        }
-        $url = sprintf(self::$scheduleUrl, $jsonDevUrl, $year, $season);
-		$json = file_get_contents($url);
+	public static function getSchedule() {
+		$json = file_get_contents(self::$scheduleUrl);
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
 		$gameArray = array("公式戦"=>"game-category1","入替戦"=>"game-category2","全日本"=>"game-category3","甲子園ボウル"=>"game-category4");
@@ -83,22 +72,20 @@ EOM;
             
 // 2018春シーズン年次更新用に一旦トルツメ
 //			if ($value["leaguetype"] == "公式戦") {
-//				$result[$gameArray[$value["leaguetype"]]]["standing"] = self::getStanding($year, $season);
+//				$result[$gameArray[$value["leaguetype"]]]["standing"] = self::getStanding();
 //			}
             
 		}
 		foreach ($result as $key => $value) {
 			if (empty($value)) {
-				$result[$key]["schedule"] = "<div class='non-data'>対象の日程はございません</div><div>". $url ."</div>";
+				$result[$key]["schedule"] = "<div class='non-data'>対象の日程はございません</div>";
 			}
 		}
 		return $result;
 	}
 
-	public static function getStanding($year, $season) {
-        include __DIR__."/define.php";
-        $url = sprintf(self::$standingUrl, $jsonDevUrl, $year, $season);
-		$json = file_get_contents($url);
+	public static function getStanding() {
+		$json = file_get_contents(self::$standingUrl);
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
 		$ranking = $json["response"]["team"];
@@ -147,9 +134,8 @@ EOM;
 		return $html;
 	}
 
-	public static function getMatch($year, $season, $gameId) {
-        include __DIR__."/define.php";
-		$url = sprintf(self::$gameUrl, $jsonDevUrl, $year, $season, $gameId);
+	public static function getMatch($gameId) {
+		$url = sprintf(self::$gameUrl,$gameId);
 		$json = file_get_contents($url);
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
@@ -486,14 +472,8 @@ EOM;
 		return $result;
 	}
 	//直近日程取得
-	public static function getScheduleRecent($year = NULL, $season = NULL) {
-        include __DIR__."/define.php";
-        if (!isset($year) || !isset($season)) {
-            $year   = $defYear;
-            $season = $defSeason;
-        }
-        $url = sprintf(self::$scheduleUrl, $jsonDevUrl, $year, $season);
-		$json = file_get_contents($url);
+	public static function getScheduleRecent() {
+		$json = file_get_contents(self::$scheduleUrl);
 		$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 		$json = json_decode($json,true);
 		$endArray = array();
