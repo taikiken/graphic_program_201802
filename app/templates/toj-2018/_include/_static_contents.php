@@ -1,4 +1,3 @@
-intro -->
 <section class="intro">
   <p class="intro__catch">1982年から14回に渡り開催された「国際サイクルロードレース」を継承し、1996年にUCI公認の国際レースへとランクアップしたことを機に「ツアー・オブ・ジャパン（TOJ）」へと名称を変え、世界トップレベルの強豪選手が参戦するまでに成長した本大会。<br>
     2018シーズン、アジア最高クラスの熱狂を見逃すな！</p>
@@ -92,7 +91,7 @@ intro -->
       </div>
     </section>
     <!-- 第３ステージ　いなべ -->
-    <section class="schedule__unit is-open">
+    <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0522.png" alt="05/22[Tue]"></p>
         <div class="title_wrap">
@@ -100,8 +99,8 @@ intro -->
           <div class="time"><strong>9:15</strong> 配信開始</div>
         </div>
         <div class="buttonBlock">
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime"><a href="https://sportsbull.jp/p/319461/">フルタイム動画</a></p>
+          <p class="button__highlight"><a href="https://sportsbull.jp/p/319462/">ハイライト動画</a></p>
         </div>
       </header>
       <div class="schedule__detail">
@@ -125,7 +124,7 @@ intro -->
       </div>
     </section>
     <!-- 第4ステージ　美濃 -->
-    <section class="schedule__unit">
+    <section class="schedule__unit is-open">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0523.png" alt="05/23[Wed]"></p>
         <div class="title_wrap">
