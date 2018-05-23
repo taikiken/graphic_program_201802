@@ -124,7 +124,7 @@
       </div>
     </section>
     <!-- 第4ステージ　美濃 -->
-    <section class="schedule__unit is-open">
+    <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0523.png" alt="05/23[Wed]"></p>
         <div class="title_wrap">
@@ -132,8 +132,8 @@
           <div class="time"><strong>9:10</strong> 配信開始</div>
         </div>
         <div class="buttonBlock">
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime"><a href="https://sportsbull.jp/p/320307/">フルタイム動画</a></p>
+          <p class="button__highlight"><a href="https://sportsbull.jp/p/320124/">ハイライト動画</a></p>
         </div>
       </header>
       <div class="schedule__detail">
@@ -158,7 +158,7 @@
       </div>
     </section>
     <!-- 第5ステージ 南信州 -->
-    <section class="schedule__unit">
+    <section class="schedule__unit is-open">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0524.png" alt="05/24[Thu]"></p>
         <div class="title_wrap">
