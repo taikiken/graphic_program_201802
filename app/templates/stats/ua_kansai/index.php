@@ -120,21 +120,22 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
         </div>
       </div><!-- /.stats__banner -->
 
-      <nav id="game-category" class="active-0">
-        <ul>
-          <li>公式戦</li>
-          <li>入替戦</li>
-          <li>全日本</li>
-          <li>甲子園ボウル</li>
-        </ul>
-      </nav>
+<?php // 2018春年次更新用に一旦ナビをトルツメ処理
+//      <nav id="game-category" class="active-0">
+//        <ul>
+//          <li>公式戦</li>
+//          <li>入替戦</li>
+//          <li>全日本</li>
+//          <li>甲子園ボウル</li>
+//        </ul>
+//      </nav>
+?>
       <div class="game-category1">
         <div class="af-schedule">
             <h2 class="calendar">日程・結果 / Division1</h2>
             <div class="lastupdate">最終更新日：<?=$dataArray["lastupdate"]?></div>
             <?=$dataArray["game-category1"]["schedule"]?>
         </div><!-- af-schedule -->
-
         <div class="af-match">
           <?=$dataArray["game-category1"]["standing"]?>
         </div><!-- af-schedule -->
@@ -158,6 +159,9 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
         </div>
       </div><!-- game-category4 -->
 
+      <ul class="module-header-seasons">
+        <li class="active"><a href="/stats/ua_kansai/2017a/">2017秋季</a></li>
+      </ul>
 
       </section><!-- /.main-sec -->
 

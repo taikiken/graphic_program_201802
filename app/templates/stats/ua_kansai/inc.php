@@ -29,5 +29,4 @@ while($f=$db->fetch_array()){
 	);
 	$photo.=sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><p class="txt">%s</p></a></li>',$v["url"],$v["img"],$v["title"],$v["date"]);
 }
-
 ?>
