@@ -49,7 +49,7 @@ $app->group('/inc', function () use ($app) {
           'body_start'       => false,
           'header'           => true,
           'gnav'             => true,
-          'sidemenu'         => false,
+          'sidemenu'         => true,
           'footer'           => false,
           'footer_copyright' => false,
           'footer_modal'     => false,
