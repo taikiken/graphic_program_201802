@@ -37,7 +37,7 @@ const ReactDOM = self.ReactDOM;
  * SP - 非ログインユーザー header area Element
  * - login / ユーザー登録リンクを出力します
  * @param {string} prefix - selector prefix - vk 必要
- * @param {boolean} vk vk flag
+ * @param {boolean} [vk=false] vk flag
  * @returns {XML} `div.user`
  * @constructor
  */
@@ -60,7 +60,15 @@ export const SPHeaderNormalUserComponent = ({ prefix, vk }) => (
  */
 SPHeaderNormalUserComponent.propTypes = {
   prefix: React.PropTypes.string.isRequired,
-  vk: React.PropTypes.bool.isRequired,
+  vk: React.PropTypes.bool,
+};
+
+/**
+ * React.defaultProps
+ * @type {{vk: boolean}}
+ */
+SPHeaderNormalUserComponent.defaultProps = {
+  vk: false,
 };
 
 /**
