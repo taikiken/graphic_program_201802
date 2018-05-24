@@ -11,10 +11,12 @@ http://www.kansai-football.jp/sportsbull/schedule_2018s.csv
 
 $csv =sprintf("http://www.kansai-football.jp/sportsbull/schedule_%s.csv",$season);
 
+/*
 if($path=="dev-img"){
 	//$csv =sprintf("http://ut/api/ver1/static/americanfootball/2018/spring/csv/schedule_%s.csv",$season);
 	$csv =sprintf("%s/csv/schedule_%s.csv",$bucket,$season);	
 }
+*/
 
 $json=sprintf("%s/schedule.json",$bucket);
 $moviefile=sprintf("https://%s.sportsbull.jp/static/%s/highlight.json",$path,$dir);
