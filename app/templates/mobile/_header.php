@@ -59,7 +59,7 @@ endif;
   <?php endif; ?>
 
   <?php # Syn. require module ?>
-  <?php if ( $page['conditional']['sidemenu'] ) : ?>
+  <?php if ( $page['conditional']['head_sidemenu'] ) : ?>
   <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/synapse.js?v=<?php echo $page['version']; ?>"></script>
   <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
   <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
@@ -176,7 +176,7 @@ $seo_h1 = ( $page['template'] !== 'inc' ) ? 'h1' : 'p';
     <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
       <?php echo '<'.$seo_h1.'>'; ?><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a><?php echo '</'.$seo_h1.'>'; ?>
 
-      <?php if ( $page['conditional']['sidemenu'] ) : ?>
+      <?php if ( $page['conditional']['header_sidemenu'] ) : ?>
       <div id="<?php echo $page['html_prefix']; ?>menu-opener" class="<?php echo $page['html_prefix']; ?>menu-opener">
         <a id="<?php echo $page['html_prefix']; ?>side-menu-toggle" href="#<?php echo $page['html_prefix']; ?>side-menu-container"><span></span><span></span><span></span></a>
       </div>
