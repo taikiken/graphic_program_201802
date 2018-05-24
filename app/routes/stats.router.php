@@ -232,6 +232,23 @@ $app->group('/stats', function () use($app) {
 
     });
 
+    // 2017a
+    // ==============================
+    $this->get('/2017a[/]', function ($request, $response, $args) use ($app) {
+
+      $args['page'] = $app->model->set(array(
+        'title'              => '2017年秋シーズン 関西学生アメリカンフットボールリーグ',
+        'og_title'           => '2017年秋シーズン 関西学生アメリカンフットボールリーグ | '.$app->model->property('title'),
+        'og_url'             => $app->model->property('site_url').'ua_kansai/2017a/',
+        'path'               => $args,
+        'template'           => '',
+        'template_classname' => 'category',
+      ));
+
+      return $this->renderer->render($response, 'stats/ua_kansai/2017a.php', $args);
+
+    });
+
   });
 
   // 海外サッカー #2275

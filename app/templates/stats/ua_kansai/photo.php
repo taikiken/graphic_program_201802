@@ -158,14 +158,12 @@ while($f=$db->fetch_array()){
 <?php
 // # footer
 // ==============================
-
   $BREADCRUMB = array(
     array(
       'label' => '関西アメフト フォトギャラリー',
       'path'  => './'
     ),
   );
-
   // footer dom
   include_once __DIR__.'/../../_footer-responsive.php';
 ?>

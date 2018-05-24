@@ -63,7 +63,5 @@ $recentArray = getData::getScheduleRecent();
 
   <p class="section_btn"><a href="/stats/ua_kansai/photo/"><i></i>すべてのフォトギャラリーを見る</a></p>
 </section>
-
-
 </body>
 </html>
