@@ -233,7 +233,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
                 <thead>
                   <tr>
                     <th>プレイヤー</th>
-                    <th>REC</th>
+                    <th>ATT</th>
                     <th>YDS</th>
                     <th>TD</th>
                     <th>LG</th>
@@ -287,7 +287,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
                 <thead>
                   <tr>
                     <th>プレイヤー</th>
-                    <th>REC</th>
+                    <th>ATT</th>
                     <th>YDS</th>
                     <th>TD</th>
                     <th>LG</th>
