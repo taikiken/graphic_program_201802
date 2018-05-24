@@ -22,7 +22,7 @@ $page['category']['slug'] = 'ua_kansai';
 <link rel="stylesheet" href="/assets/sp/css/basic.css" media="only screen and (max-width: 768px)">
 
 <link rel="stylesheet" href="/assets/stats/ua_kansai/css/ui.css">
-<link rel="stylesheet" href="/assets/stats/ua_kansai/css/style.css">
+<link rel="stylesheet" href="/assets/stats/ua_kansai/css/style.css?20180524">
 
 <?php include_once __DIR__.'/../../_head_bottom.php'; ?>
 
