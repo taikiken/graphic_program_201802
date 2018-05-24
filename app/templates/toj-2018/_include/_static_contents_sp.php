@@ -159,7 +159,7 @@
               </div>
             </section>
             <!-- 第5ステージ 南信州 -->
-            <section class="schedule__unit is-open">
+            <section class="schedule__unit">
               <header class="schedule__header">
                 <p class="date">
                   <picture>
@@ -172,8 +172,8 @@
                   <div class="time"><strong>9:10</strong> 配信開始</div>
                 </div>
                 <div class="buttonBlock">
-                  <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-                  <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+                  <p class="button__fulltime  is-inactive"><a href="https://sportsbull.jp/p/320819/">フルタイム動画</a></p>
+                  <p class="button__highlight is-inactive"><a href="https://sportsbull.jp/p/320816/">ハイライト動画</a></p>
                 </div>
               </header>
               <div class="schedule__detail">
@@ -189,7 +189,7 @@
               </div>
             </section>
             <!-- 第6ステージ 富士山 -->
-            <section class="schedule__unit">
+            <section class="schedule__unit is-open">
               <header class="schedule__header">
                 <p class="date">
                   <picture>
