@@ -132,7 +132,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
 ?>
       <div class="game-category1">
         <div class="af-schedule">
-            <h2 class="calendar">日程・結果 / Division1</h2>
+            <h2 class="calendar">日程・結果</h2>
             <div class="lastupdate">最終更新日：<?=$dataArray["lastupdate"]?></div>
             <?=$dataArray["game-category1"]["schedule"]?>
         </div><!-- af-schedule -->
