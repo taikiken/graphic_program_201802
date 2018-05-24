@@ -10,6 +10,12 @@ http://www.kansai-football.jp/sportsbull/schedule_2018s.csv
 */
 
 $csv =sprintf("http://www.kansai-football.jp/sportsbull/schedule_%s.csv",$season);
+
+if($path=="dev-img"){
+	//$csv =sprintf("http://ut/api/ver1/static/americanfootball/2018/spring/csv/schedule_%s.csv",$season);
+	$csv =sprintf("%s/csv/schedule_%s.csv",$bucket,$season);	
+}
+
 $json=sprintf("%s/schedule.json",$bucket);
 $moviefile=sprintf("https://%s.sportsbull.jp/static/%s/highlight.json",$path,$dir);
 
@@ -25,7 +31,7 @@ if(!file_exists($json)||$lastupdate>filemtime($json)){
 	$data=get_contents($csv);	
 	$data=mb_convert_encoding($data,"UTF-8","SJIS");
 	$data=preg_replace("/\r\n|\r|\n/","\n",$data);
-	$tmpfile=sprintf("%s/tmp/schedule.csv",$bucket);
+	$tmpfile=sprintf("%s/tmp/schedule_%s.csv",$bucket,$season);
 	file_put_contents($tmpfile,$data);
 	
 	$fp=fopen($tmpfile,"r");
