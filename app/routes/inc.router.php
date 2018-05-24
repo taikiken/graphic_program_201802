@@ -25,17 +25,12 @@ $app->group('/inc', function () use ($app) {
       case 'head':
         $conditional = array(
           'html_start'       => false,
-          'head'             => true,
-          'head_assets'      => true,
-          'head_viewport'    => true,
           'body_start'       => false,
           'header'           => false,
           'gnav'             => false,
-          'sidemenu'         => true,
+          'sidemenu'         => false,
           'footer'           => false,
           'footer_copyright' => false,
-          'footer_modal'     => false,
-          'footer_script'    => false,
           'html_end'         => false,
         );
         break;
@@ -47,13 +42,9 @@ $app->group('/inc', function () use ($app) {
           'head_assets'      => false,
           'head_viewport'    => false,
           'body_start'       => false,
-          'header'           => true,
-          'gnav'             => true,
-          'sidemenu'         => true,
+          'sidemenu'         => false,
           'footer'           => false,
           'footer_copyright' => false,
-          'footer_modal'     => false,
-          'footer_script'    => false,
           'html_end'         => false,
         );
         break;
@@ -67,11 +58,7 @@ $app->group('/inc', function () use ($app) {
           'body_start'       => false,
           'header'           => false,
           'gnav'             => false,
-          'sidemenu'         => true,
-          'footer'           => true,
           'footer_copyright' => false,
-          'footer_modal'     => false,
-          'footer_script'    => false,
           'html_end'         => false,
         );
         break;
@@ -104,20 +91,22 @@ $app->group('/inc', function () use ($app) {
       case 'top':
         break;
       case 'inhightv':
-        $conditional['header_search'] = false;
-        $conditional['header_user']   = false;
-        $conditional['gnav']          = false;
-        $conditional['sidemenu']      = false;
+        $conditional['head_sidemenu']   = false;
+        $conditional['header_search']   = false;
+        $conditional['header_user']     = false;
+        $conditional['header_sidemenu'] = false;
+        $conditional['gnav']            = false;
+        $conditional['sidemenu']        = false;
         $breadcrumb[] = array(
           'label' => 'インハイ.tv',
-          'path'  => '/', // サブドメとのことなので `/` にしときます
+          'path'  => '/', // subdomain
         );
 
         break;
       case 'vk':
         $breadcrumb[] = array(
           'label' => 'バーチャル高校野球',
-          'path'  => '/', // サブドメ ( vk.sportsbull.jp ) とのことなので `/` にしときます
+          'path'  => '/', // subdomain
         );
 
         break;
