@@ -60,10 +60,6 @@
                 <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_01.png" alt="第1ステージ堺のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
-                    <figure>
-                      <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
-                    </figure>
                   </div>
                 </div>
               </div>
@@ -90,10 +86,6 @@
                 <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_02.png" alt="第2ステージ京都のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
-                    <figure>
-                      <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
-                    </figure>
                   </div>
                 </div>
               </div>
@@ -120,10 +112,6 @@
                 <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_03.png" alt="第3ステージいなべのコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
-                    <figure>
-                      <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
-                    </figure>
                   </div>
                 </div>
               </div>
@@ -150,10 +138,6 @@
                 <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_04.png" alt="第4ステージ美濃のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
-                    <figure>
-                      <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
-                    </figure>
                   </div>
                 </div>
               </div>
@@ -180,10 +164,6 @@
                 <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_05.png" alt="第5ステージ南信州のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
-                    <figure>
-                      <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
-                    </figure>
                   </div>
                 </div>
               </div>
@@ -210,10 +190,6 @@
                 <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_06.png" alt="第6ステージ富士山のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
-                    <figure>
-                      <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
-                    </figure>
                   </div>
                 </div>
               </div>
@@ -240,10 +216,6 @@
                 <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_07.png" alt="第7ステージ伊豆のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
-                    <figure>
-                      <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
-                    </figure>
                   </div>
                 </div>
               </div>
@@ -270,10 +242,6 @@
                 <figure class="schedule__map"><img src="/assets/sp/images/toj-2018/map_stage_08.png" alt="第8ステージ東京のコース"></figure>
                 <div class="schedule__info">
                   <div class="credit">
-                    <figure>
-                      <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
-                      <p><img src="/assets/sp/images/toj-2018/bnr_zenrin.png" alt=""></p>
-                    </figure>
                   </div>
                 </div>
               </div>
