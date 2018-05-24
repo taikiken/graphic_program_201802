@@ -10,11 +10,11 @@ function hms($sec){
 	return $hh>0?sprintf("%d:%02d:%02d",$hh,$mm,$ss):sprintf("%02d:%02d",$mm,$ss);
 }
 
-$moviefile="https://img.sportsbull.jp/static/americanfootball/2017/autumn/highlight.json";
+$moviefile=sprintf("%s/highlight.json",$bucket);
 $movie=get_contents($moviefile);
 $movie=json_decode($movie,TRUE);
 
-$schedulefile="https://img.sportsbull.jp/static/americanfootball/2017/autumn/schedule.json";
+$schedulefile=sprintf("%s/schedule.json",$bucket);
 $schedule=get_contents($schedulefile);
 $schedule=json_decode($schedule,TRUE);
 
