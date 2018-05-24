@@ -46,6 +46,11 @@
               <p class="text">Daisen Park Circuit Course<br>
               <em>2.6</em>km <small>(Individual Time Trial)</small></p>
           </div>
+          <div class="credit">
+            <figure>
+              <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+            </figure>
+          </div>
         </div>
         <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_01.png" alt="第1ステージ堺のコース"></figure>
       </div>
@@ -74,6 +79,11 @@
               Keihanna Circuit Course<br>
               <em>105.0</em>km</p>
           </div>
+          <div class="credit">
+            <figure>
+              <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+            </figure>
+          </div>
         </div>
         <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_02.png" alt="第2ステージ京都のコース"></figure>
       </div>
@@ -100,6 +110,11 @@
               Shimokawajiri Junction - <br>
               Inabe Bairin Park Circuit Course<br>
               <em>127.0</em>km</p>
+          </div>
+          <div class="credit">
+            <figure>
+              <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+            </figure>
           </div>
         </div>
         <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_03.png" alt="第3ステージいなべのコース"></figure>
@@ -129,6 +144,11 @@
               Circuit Course<br>
               <em>139.4</em>km</p>
           </div>
+          <div class="credit">
+            <figure>
+              <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+            </figure>
+          </div>
         </div>
         <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_04.png" alt="第4ステージ美濃のコース"></figure>
       </div>
@@ -156,6 +176,11 @@
               Matuo Stadium<br>
               <em>123.6</em>km</p>
           </div>
+          <div class="credit">
+            <figure>
+              <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+            </figure>
+          </div>
         </div>
         <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_05.png" alt="第5ステージ南信州のコース"></figure>
       </div>
@@ -182,6 +207,11 @@
               Fuji-azami Line Subashiri IC - <br>
               Mt.Fuji Subashiri<br>
               <em>33.2 </em>km <small>(Hill-Climb / TBA)</small></p>
+          </div>
+          <div class="credit">
+            <figure>
+              <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+            </figure>
           </div>
         </div>
         <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_06.png" alt="第6ステージ富士山のコース"></figure>
@@ -213,6 +243,11 @@
               Circuit Course<br>
               <em>120.8</em>km</p>
           </div>
+          <div class="credit">
+            <figure>
+              <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+            </figure>
+          </div>
         </div>
         <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_07.png" alt="第7ステージ伊豆のコース"></figure>
       </div>
@@ -238,6 +273,11 @@
               <p class="text">Hibiya City Bild - <br>
               Oi Wharf Circuit Course<br>
               <em>112.7</em>km</p>
+          </div>
+          <div class="credit">
+            <figure>
+              <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
+            </figure>
           </div>
         </div>
         <figure class="schedule__map"><img src="/assets/images/toj-2018/map_stage_08.png" alt="第8ステージ東京のコース"></figure>
