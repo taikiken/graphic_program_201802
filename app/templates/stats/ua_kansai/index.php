@@ -163,6 +163,44 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1501126889988-0');
         <li class="active"><a href="/stats/ua_kansai/2017a/">2017秋季</a></li>
       </ul>
 
+      <!-- /531683568/kansai-amefoot-ad/ua-pc-footer-rectangle1 -->
+      <div class="sp-bnr">
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-pc-footer-rectangle1', [300, 250], 'div-gpt-ad-1527213095887-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1527213095887-0' class='sp-bnr-first' style='height:250px; width:300px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1527213095887-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/kansai-amefoot-ad/ua-pc-footer-rectangle1 -->
+
+        <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+        <script>
+          var googletag = googletag || {};
+          googletag.cmd = googletag.cmd || [];
+        </script>
+
+        <!-- /531683568/kansai-amefoot-ad/ua-pc-footer-rectangle2 -->
+        <script>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/kansai-amefoot-ad/ua-pc-footer-rectangle2', [300, 250], 'div-gpt-ad-1527213142260-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+        <div id='div-gpt-ad-1527213142260-0' class='sp-bnr-second' style='height:250px; width:300px;'>
+        <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1527213142260-0'); });
+        </script>
+        </div>
+        <!-- // /531683568/kansai-amefoot-ad/ua-pc-footer-rectangle2 -->
+      </div><!-- .sp-bnr -->
+
       </section><!-- /.main-sec -->
 
       <section class="side-sec show-for-large">
