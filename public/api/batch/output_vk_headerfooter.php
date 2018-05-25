@@ -72,7 +72,7 @@ if (!$ftpResult) {
 
 // PC用CSS
 $filename = "inc.css(pc)";
-$key = "/data/inc.css";
+$key = "/data/spbl_inc_d.css";
 $tmp = "/tmp/inc_d.css";
 
 $file = file_get_contents($pc_css);
@@ -142,7 +142,7 @@ if (!$ftpResult) {
 
 // SP用CSS
 $filename = "inc.css(sp)";
-$key = "/data/sp/inc.css";
+$key = "/data/sp/spbl_inc_m.css";
 $tmp = "/tmp/inc_m.css";
 
 $file = file_get_contents($sp_css);
