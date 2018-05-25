@@ -37,14 +37,15 @@ const ReactDOM = self.ReactDOM;
  * SP - 非ログインユーザー header area Element
  * - login / ユーザー登録リンクを出力します
  * @param {string} prefix - selector prefix - vk 必要
+ * @param {boolean} [vk=false] vk flag
  * @returns {XML} `div.user`
  * @constructor
  */
-export const SPHeaderNormalUserComponent = ({ prefix }) => (
+export const SPHeaderNormalUserComponent = ({ prefix, vk }) => (
   <div className={`${prefix}user`}>
     <div className={`${prefix}preference`}>
       <a
-        href={Url.signupLogin()}
+        href={Url.signupLogin(vk)}
         className={`${prefix}preference-opener`}
       >
         <span className={`${prefix}preference-avatar`}>&nbsp;</span>
@@ -55,10 +56,19 @@ export const SPHeaderNormalUserComponent = ({ prefix }) => (
 
 /**
  * React.propTypes
- * @type {{prefix: string}}
+ * @type {{prefix: string, vk: boolean}}
  */
 SPHeaderNormalUserComponent.propTypes = {
   prefix: React.PropTypes.string.isRequired,
+  vk: React.PropTypes.bool,
+};
+
+/**
+ * React.defaultProps
+ * @type {{vk: boolean}}
+ */
+SPHeaderNormalUserComponent.defaultProps = {
+  vk: false,
 };
 
 /**
@@ -132,6 +142,7 @@ export default class SPViewHeaderUser extends View {
     ReactDOM.render(
       <SPHeaderNormalUserComponent
         prefix={VK.prefix(this.vk)}
+        vk={this.vk}
       />,
       this.element
     );
