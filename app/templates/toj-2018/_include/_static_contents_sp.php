@@ -197,8 +197,8 @@
                   <div class="time"><strong>10:55</strong> 配信開始</div>
                 </div>
                 <div class="buttonBlock">
-                  <p class="button__fulltime  is-inactive"><a href="https://sportsbull.jp/p/320819/">フルタイム動画</a></p>
-                  <p class="button__highlight is-inactive"><a href="https://sportsbull.jp/p/320816/">ハイライト動画</a></p>
+                  <p class="button__fulltime  is-inactive"><a href="https://sportsbull.jp/p/321606/">フルタイム動画</a></p>
+                  <p class="button__highlight is-inactive"><a href="https://sportsbull.jp/p/321609/">ハイライト動画</a></p>
                 </div>
               </header>
               <div class="schedule__detail">
