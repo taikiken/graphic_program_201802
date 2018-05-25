@@ -188,7 +188,7 @@
     <!-- 第6ステージ 富士山 -->
     <section class="schedule__unit">
       <header class="schedule__header">
-        <p class="date"><img src="/assets/images/toj-2018/date_schedule-0525-01.png" alt="05/25[Fri]"></p>
+        <p class="date"><img src="/assets/images/toj-2018/date_schedule-0525.png" alt="05/25[Fri]"></p>
         <div class="title_wrap">
           <h3 class="title">第6ステージ<em>富士山</em></h3>
           <div class="time"><strong>10:55</strong> 配信開始</div>

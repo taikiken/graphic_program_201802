@@ -188,7 +188,7 @@
               <header class="schedule__header">
                 <p class="date">
                   <picture>
-                    <source srcset="/assets/sp/images/toj-2018/date_schedule-0525.png 2x">
+                    <source srcset="/assets/sp/images/toj-2018/date_schedule-0525-01.png 2x">
                     <img src="/assets/sp/images/toj-2018/date_schedule-0525.png" alt="05/25[Fri]">
                   </picture>
                 </p>
