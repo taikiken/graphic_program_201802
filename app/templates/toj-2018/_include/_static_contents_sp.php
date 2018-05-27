@@ -242,7 +242,7 @@
               </div>
             </section>
             <!-- 第8ステージ 東京 -->
-            <section class="schedule__unit is-open">
+            <section class="schedule__unit">
               <header class="schedule__header">
                 <p class="date">
                   <picture>
@@ -255,8 +255,8 @@
                   <div class="time"><strong>10:45</strong> 配信開始</div>
                 </div>
                 <div class="buttonBlock">
-                  <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-                  <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+                  <p class="button__fulltime"><a href="https://sportsbull.jp/p/322832/">フルタイム動画</a></p>
+                  <p class="button__highlight"><a href="https://sportsbull.jp/p/322833/">ハイライト動画</a></p>
                 </div>
               </header>
               <div class="schedule__detail">
