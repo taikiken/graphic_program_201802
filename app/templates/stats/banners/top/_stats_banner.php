@@ -116,6 +116,10 @@ $statsItem = array(
 
 ?>
 
+
+<?php
+/* バナーを複数追加
+
 <style>
   .focus-bnr img {
     width: 100%;
@@ -137,7 +141,8 @@ $statsItem = array(
   </a>
 </div>
 <?php endif; ?>
-
+*/
+?>
 <aside class="stats_banner">
   <div class="stats_banner__heading">
     <h2 class="stats_banner__heading__title">
