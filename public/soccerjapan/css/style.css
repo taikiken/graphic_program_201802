@@ -1,0 +1,830 @@
+@charset "UTF-8";
+
+/* 汎用クラス */
+@import url("../../assets/css/ui.css") all and (min-width: 769px);
+@import url("../../assets/sp/css/ui.css") all and (max-width: 768px);
+
+body {
+	background-color: #000;
+	color: #fff;
+	font-family: "Hiragino Kaku Gothic ProN","ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, sans-serif;
+}
+	
+.is-show-pc {
+  display: block; }
+
+.is-show-sp {
+  display: none;
+  padding-bottom: 75px; }
+
+.foot-sec {
+  background-color: #000 !important;
+  padding-top: 30px; }
+
+@media only screen and (min-width: 769px) {
+
+.pageTitle {
+	background-color: #fff;
+	line-height: 0;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-align: center;
+	position: relative;
+	z-index: 10000;
+}
+
+.pageTitle .logo img {
+	height: auto;
+	width: 190px;
+}
+
+#soccerjapan_mainvisual{
+	height: 660px;
+	background: url("../img/sportsbull_mainback.jpg") no-repeat center center;
+	background-size: cover;
+	text-align: center;
+	position: relative;
+	padding: 50px 0 0 ;
+}
+
+#soccerjapan_mainvisual h1{
+	font-size: 60px;
+	font-weight: bold;
+	color: #ffffff;
+	letter-spacing: 2px;
+	text-shadow: #333 1px 1px 40px, #333 -1px 1px 40px,#333 1px -1px 40px, #333 -1px -1px 40px;
+}
+
+#soccerjapan_mainvisual .soccerjapan_mainvisual_img{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+
+#soccerjapan_ttl{
+	background: #0a2b54;
+	color: #ffffff;
+	padding: 10px;
+	text-align: center;
+}
+
+#soccerjapan_ttl h2{
+	color: #ffffff;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+#soccerjapan_contents{
+	margin: 0 auto;
+    height: auto;
+    width: 1090px;
+	padding: 30px 0;
+}
+
+.soccerjapan_vsbnr{
+	background: url("../img/soccerjapan_vsbnr.jpg") no-repeat;
+	background-size: cover;
+	border: 1px solid #ffffff;
+	position: relative;
+	padding: 40px 0;
+}
+
+.soccerjapan_vsbnr a{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-indent: -9999px;
+}
+
+.soccerjapan_vsbnr_left_flag{
+	width: 15%;
+	float: left;
+}
+
+.soccerjapan_vsbnr_left_num,
+.soccerjapan_vsbnr_right_num{
+	width: 10%;
+	float: left;
+	font-size: 70px;
+	font-weight: bold;
+	line-height: 1;
+	padding-top: 5px;
+}
+
+.soccerjapan_vsbnr_right_flag{
+	width: 15%;
+	float: left;
+}
+
+.soccerjapan_vsbnr_conatiner{
+	text-align:center;
+}
+
+.soccerjapan_vsbnr_conatiner:after{
+	visibility: hidden;
+	display: block;
+	font-size:0;
+	content: " "; 
+	clear: both; 
+	height: 0; 
+}
+
+.soccerjapan_vsbnr_left{
+	width: 20%;
+	float: left;
+	text-align: right;
+	font-size: 30px;
+	font-weight: bold;
+	padding: 15px 0 0 ;
+}
+
+.soccerjapan_vsbnr_vs{
+	width: 10%;
+	float: left;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	padding: 20px 0 0;
+}
+
+.soccerjapan_vsbnr_right{
+	width: 20%;
+	float: right;
+	text-align: left;
+	font-size: 30px;
+	font-weight: bold;
+	padding: 15px 0 0 ;
+}
+
+.soccerjapan_vsbnr_text{
+	clear: both;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 10px 0 0;
+}
+
+.soccerjapan_vsbnr_link{
+	text-align: center;
+	margin: 30px 0;
+}
+
+.soccerjapan_vsbnr_link a{
+	background: #b09a5b;
+	color: #ffffff;
+	display: inline-block;
+	padding: 10px 80px;
+	font-size: 18px;
+	font-weight: bold;	
+}
+
+.soccerjapan_result_container{
+	margin-bottom: 50px;
+}
+
+.soccerjapan_result_title{
+	background: #9b1e2a;
+	color: #ffffff;
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.soccerjapan_result_title h3{
+	font-size: 18px;
+	font-weight: bold;
+	padding: 15px 20px;
+}
+
+.soccerjapan_result_all{
+	background: url("../img/soccerjapan_result_all.png") no-repeat top left;
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	overflow: hidden;
+	padding: 0 30px;
+}
+
+.soccerjapan_result_all a{
+	display: block;
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 18px 15px 17px 0;
+	background: url("../img/soccerjapan_result_all_arrow.png") no-repeat right center;
+	background-size: 6px 9px;
+}
+	
+.soccerjapan_result_all_sp{
+	display: none;
+}
+
+.soccerjapan_texthighlight_container{
+	
+}
+
+.soccerjapan_result_movies:after{
+	visibility: hidden;
+	display: block;
+	font-size:0;
+	content: " "; 
+	clear: both; 
+	height: 0; 
+}
+
+.soccerjapan_result_movies .soccerjapan_movie_thumb{
+	width: 18.4%;
+	float: left;
+	margin: 0 2% 0 0;
+	position: relative;
+}
+
+.soccerjapan_result_movies .soccerjapan_movie_thumb a:hover img{
+	opacity: 0.8;
+}
+
+.soccerjapan_result_movies .soccerjapan_movie_thumb_icon{
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	background: url("../img/movie_icon.png") no-repeat;
+	background-size: 40px 40px;
+	top: 50%;
+	left: 50%;
+	margin: -20px 0 0 -20px;
+}
+
+.soccerjapan_result_movies .soccerjapan_movie_thumb img{
+	width: 100%;
+	height: auto;
+}
+
+.soccerjapan_result_movies .soccerjapan_movie_thumb:last-child{
+	margin-right: 0;
+}
+
+.soccerjapan_texthighlight_container h3{
+	background: #0a2b54;
+	color: #ffffff;
+	padding: 12px 10px;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.soccerjapan_texthighlight_table{
+	background: #ffffff;
+	padding: 30px 50px;
+	color: #333333;
+}
+
+.soccerjapan_texthighlight_box{
+	padding: 5px;
+}
+
+.soccerjapan_texthighlight_box:nth-child(even){
+	background: #f3f6f9;
+}
+
+.soccerjapan_texthighlight_box:after,
+.soccerjapan_texthighlight_result:after{
+	visibility: hidden;
+	display: block;
+	font-size:0;
+	content: " "; 
+	clear: both; 
+	height: 0; 
+}
+
+.soccerjapan_texthighlight_date{
+	width: 150px;
+	float: left;
+}
+
+.soccerjapan_texthighlight_result{
+	width: 270px;
+	float: left;
+}
+
+.soccerjapan_texthighlight_detail{
+	float: left;
+}
+
+.soccerjapan_texthighlight_detail a{
+	background: #b09a5b;
+	color: #ffffff;
+	display: inline-block;
+	padding: 1px 15px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.soccerjapan_texthighlight_result p{
+	float: left;
+	margin: 0 5px;
+}
+
+.soccerjapan_texthighlight_num{
+	background: #333333;
+	color: #ffffff;
+	border-radius: 30px;
+	padding: 1px 6px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.soccerjapan_texthighlight_result_left,
+.soccerjapan_texthighlight_result_right{
+	float: left;
+}
+
+.soccerjapan_texthighlight_result_left:after,
+.soccerjapan_texthighlight_result_right:after{
+	visibility: hidden;
+	display: block;
+	font-size:0;
+	content: " "; 
+	clear: both; 
+	height: 0; 
+}
+
+.soccerjapan_texthighlight_vs{
+	color: #666666;
+	font-size: 12px;
+}
+
+.soccerjapan_texthighlight_winner{
+	font-weight: bold;
+	color: #9b1e2a;
+}
+
+.soccerjapan_texthighlight_num.soccerjapan_texthighlight_winner{
+	background: #9b1e2a;
+	color: #ffffff;
+}
+
+.ad_container{
+	margin: 50px 0 50px;
+	text-align: center;
+}
+
+.ad_container:after{
+	visibility: hidden;
+	display: block;
+	font-size:0;
+	content: " "; 
+	clear: both; 
+	height: 0; 
+}
+
+.ad_box{
+	display: inline-block;
+	margin: 0 20px;
+}
+
+.ad_box_sp{
+	display: none;
+}
+
+}
+
+@media only screen and (max-width: 768px) {
+
+  .foot-sec {
+    padding-top: 0px; }
+  .is-show-pc {
+    display: none; }
+  .is-show-sp {
+    display: block; }
+  .fb-page .fb_iframe_widget span {
+    width: 100% !important; }
+  .fb-page .fb_iframe_widget span iframe {
+    width: 100% !important; } 
+
+.pageTitle {
+	background-color: #fff;
+	line-height: 0;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-align: center;
+	position: relative;
+	z-index: 10000;
+}
+
+.pageTitle .logo img {
+	height: auto;
+	width: 190px;
+}
+
+#soccerjapan_mainvisual{
+	height: 300px;
+	background: url("../img/sportsbull_mainback.jpg") no-repeat center center;
+	background-size: cover;
+	text-align: center;
+	position: relative;
+	padding: 30px 0 0 ;
+}
+
+#soccerjapan_mainvisual h1{
+	font-size: 28px;
+	font-weight: bold;
+	color: #ffffff;
+	letter-spacing: 2px;
+	text-shadow: #333 1px 1px 40px, #333 -1px 1px 40px,#333 1px -1px 40px, #333 -1px -1px 40px;
+}
+
+#soccerjapan_mainvisual .soccerjapan_mainvisual_img{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+
+#soccerjapan_mainvisual .soccerjapan_mainvisual_img img{
+	width: 95%;
+	height: auto;
+}
+
+#soccerjapan_ttl{
+	background: #0a2b54;
+	color: #ffffff;
+	padding: 10px;
+	text-align: center;
+}
+
+#soccerjapan_ttl h2{
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#soccerjapan_contents{
+	margin: 0 auto;
+    height: auto;
+    width: auto;
+	padding: 30px 20px;
+}
+
+.soccerjapan_vsbnr{
+	background: url("../img/soccerjapan_vsbnr.jpg") no-repeat;
+	background-size: cover;
+	border: 1px solid #ffffff;
+	position: relative;
+	padding: 20px 0;
+}
+
+.soccerjapan_vsbnr a{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-indent: -9999px;
+}
+
+.soccerjapan_vsbnr_left_flag{
+	width: 10%;
+	float: left;
+}
+
+.soccerjapan_vsbnr_left_flag img,
+.soccerjapan_vsbnr_right_flag img{
+	width: 100%;
+	height: auto;
+}
+
+.soccerjapan_vsbnr_left_num,
+.soccerjapan_vsbnr_right_num{
+	width: 7%;
+	float: left;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 1;
+	padding-top: 2px;
+	text-align: center;
+}
+
+.soccerjapan_vsbnr_right_flag{
+	width: 10%;
+	float: left;
+}
+
+.soccerjapan_vsbnr_conatiner:after{
+	visibility: hidden;
+	display: block;
+	font-size:0;
+	content: " "; 
+	clear: both; 
+	height: 0; 
+}
+
+.soccerjapan_vsbnr_left{
+	width: 28%;
+	float: left;
+	text-align: right;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0 10px;
+}
+
+.soccerjapan_vsbnr_vs{
+	width: 10%;
+	float: left;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px 0 0;
+}
+
+.soccerjapan_vsbnr_right{
+	width: 28%;
+	float: right;
+	text-align: left;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0 10px;
+}
+
+.soccerjapan_vsbnr_text{
+	clear: both;
+	text-align: center;
+	font-size: 10px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+.soccerjapan_vsbnr_link{
+	text-align: center;
+	margin: 20px 0;
+}
+
+.soccerjapan_vsbnr_link a{
+	background: #b09a5b;
+	color: #ffffff;
+	display: inline-block;
+	padding: 10px 30px;
+	font-size: 14px;
+	font-weight: bold;	
+}
+
+.soccerjapan_result_container{
+	margin-bottom: 30px;
+}
+
+.soccerjapan_result_title{
+	background: #9b1e2a;
+	color: #ffffff;
+	margin-bottom: 20px;
+}
+
+.soccerjapan_result_title h3{
+	font-size: 16px;
+	font-weight: bold;
+	padding: 10px 20px;
+}
+
+.soccerjapan_result_all{
+	display: none;
+}
+
+.soccerjapan_result_all_sp{
+	display: block;
+	text-align: center;
+	margin: 20px 0;
+}
+
+
+.soccerjapan_texthighlight_container{
+	
+}
+
+.soccerjapan_result_movies .soccerjapan_movie_thumb{
+	width: 48%;
+	float: left;
+	margin: 0 2% 20px 0;
+	position: relative;
+}
+
+.soccerjapan_result_movies .soccerjapan_movie_thumb a:hover img{
+	opacity: 0.8;
+}
+
+.soccerjapan_result_movies .soccerjapan_movie_thumb_icon{
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	background: url("../img/movie_icon.png") no-repeat;
+	background-size: 30px 30px;
+	top: 50%;
+	left: 50%;
+	margin: -15px 0 0 -15px;
+}
+
+.soccerjapan_result_movies .soccerjapan_movie_thumb img{
+	width: 100%;
+	height: auto;
+}
+
+.soccerjapan_result_movies .soccerjapan_movie_thumb:last-child{
+	margin-right: 0;
+}
+
+.soccerjapan_result_all_sp a{
+	background: #b09a5b;
+	color: #ffffff;
+	display: inline-block;
+	padding: 10px 30px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.soccerjapan_texthighlight_container{
+	
+}
+
+.soccerjapan_texthighlight_container h3{
+	background: #0a2b54;
+	color: #ffffff;
+	padding: 12px 10px;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.soccerjapan_texthighlight_table{
+	background: #ffffff;
+	padding: 0px 10px;
+	color: #333333;
+}
+
+.soccerjapan_texthighlight_box{
+	padding: 10px 5px;
+}
+
+.soccerjapan_texthighlight_box:nth-child(even){
+	background: #f3f6f9;
+}
+
+.soccerjapan_texthighlight_box:after,
+.soccerjapan_texthighlight_result:after{
+	visibility: hidden;
+	display: block;
+	font-size:0;
+	content: " "; 
+	clear: both; 
+	height: 0; 
+}
+
+.soccerjapan_texthighlight_date{
+	text-align: center;
+	font-size: 12px;
+}
+
+.soccerjapan_texthighlight_result{
+	text-align: center;
+	font-size: 12px;
+	margin: 5px 0;
+}
+
+.soccerjapan_texthighlight_detail{
+	text-align: center;
+}
+
+.soccerjapan_texthighlight_detail a{
+	background: #b09a5b;
+	color: #ffffff;
+	display: inline-block;
+	padding: 1px 15px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.soccerjapan_texthighlight_result p{
+	display: inline-block;
+}
+
+.soccerjapan_texthighlight_vs{
+	color: #666666;
+	font-size: 12px;
+	width: 10%;
+	float: left;
+	text-align: center;
+}
+
+.soccerjapan_texthighlight_result_left{
+	width: 45%;
+	float: left;
+	text-align: right;
+}
+
+.soccerjapan_texthighlight_result_left p{
+	margin-left: 5px;
+}
+
+.soccerjapan_texthighlight_result_right{
+	width: 45%;
+	float: left;
+	text-align: left;
+}
+
+.soccerjapan_texthighlight_result_left p{
+	margin-right: 5px;
+}
+
+.soccerjapan_texthighlight_num{
+	background: #333333;
+	color: #ffffff;
+	border-radius: 30px;
+	padding: 1px 6px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.soccerjapan_texthighlight_vs{
+	color: #666666;
+	font-size: 12px;
+}
+
+.soccerjapan_texthighlight_winner{
+	font-weight: bold;
+	color: #9b1e2a;
+}
+
+.soccerjapan_texthighlight_num.soccerjapan_texthighlight_winner{
+	background: #9b1e2a;
+	color: #ffffff;
+}
+
+
+
+.ad_container{
+	margin: 30px 0;
+	text-align: center;
+}
+
+.ad_container:after{
+	visibility: hidden;
+	display: block;
+	font-size:0;
+	content: " "; 
+	clear: both; 
+	height: 0; 
+}
+
+.ad_box{
+	display: none;
+}
+
+.ad_box_sp{
+	display: inline-block;
+}
+
+
+}
+
+
+
+@media only screen and (max-width: 321px) {
+
+.soccerjapan_texthighlight_table{
+	padding: 0;
+}
+
+.soccerjapan_vsbnr_left_num,
+.soccerjapan_vsbnr_right_num{
+	font-size: 15px;
+	font-weight: bold;
+	width: 5%;
+	padding-top: 5px;
+}
+
+.soccerjapan_vsbnr_right_flag{
+	width: 10%;
+	float: left;
+}
+
+.soccerjapan_vsbnr_left{
+	width: 30%;
+	float: left;
+	text-align: right;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 3px 5px 0;
+}
+.soccerjapan_vsbnr_right{
+	width: 30%;
+	float: right;
+	text-align: left;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 3px 5px 0;
+}
+
+
+
+}
