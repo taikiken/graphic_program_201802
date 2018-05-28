@@ -113,12 +113,17 @@ s.parentNode.insertBefore(bs, s);
 <?php endif; ?>
 
 
-<?php // UNDO_SPBL-512 - 野球カテゴリ詳細ではappbnrださない ?>
-<?php if ($page['category']['slug'] === 'baseball' && $page['template'] === 'p' ) : ?>
+<?php
+// アプリ & スポンサードカテゴリの場合はappbnr非表示
+if ( $page['template'] === 'p' && $page['ua_app'] ) :
+  if ( $page['post']['is_sponserd'] === true ) :
+?>
 <script>
 document.addEventListener("DOMContentLoaded", function(event) {
-  document.getElementById("js-header-appbnr-container").remove();
-  Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+  if ( document.getElementById("js-header-appbnr-container") != null ) {
+    document.getElementById("js-header-appbnr-container").remove();
+    Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+  }
 });
 </script>
 <style>
@@ -126,4 +131,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   margin-top: 75px;
 }
 </style>
-<?php endif; ?>
+<?php
+  endif;
+endif;
+?>
