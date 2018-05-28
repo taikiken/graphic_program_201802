@@ -115,8 +115,10 @@ s.parentNode.insertBefore(bs, s);
 
 <?php
 // アプリ & スポンサードカテゴリの場合はappbnr非表示
-if ( $page['template'] === 'p' && $page['ua_app'] ) :
-  if ( $page['post']['is_sponserd'] === true ) :
+if (
+    $page['template'] === 'p' &&
+    $page['post']['is_sponserd'] === false
+  ) :
 ?>
 <script>
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -131,7 +133,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
   margin-top: 75px;
 }
 </style>
-<?php
-  endif;
-endif;
-?>
+<?php endif; ?>
