@@ -12,7 +12,7 @@ class PostHelper{
 
   /**
   * スポンサードカテゴリーに属する記事かの判定
-  *
+  * - 純広のみ / アドネットワーク広告NG
   * @param  $post  $object  投稿データ
   * @return bool
   */
@@ -35,6 +35,31 @@ class PostHelper{
 
   }
 
+
+  /**
+  * サブスポンサードカテゴリーに属する記事かの判定
+  * - 指定枠は純広のみ (その他はアドネットワークOK)
+  * @param  $post  $object  投稿データ
+  * @return bool
+  */
+  public function is_subsponserd($post) {
+
+    $sponserdCategoryArray = [
+      'motorsports',
+      'climbing',
+    ];
+
+    if ( isset($post['categories']) && is_array($post['categories'])) :
+      foreach( $post['categories'] as $key => $value ) :
+        if ( in_array($value['slug'], $sponserdCategoryArray) ) :
+          return true;
+        endif;
+      endforeach;
+    endif;
+
+    return false;
+
+  }
 
 
   /**
