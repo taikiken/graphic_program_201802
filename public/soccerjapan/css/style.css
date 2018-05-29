@@ -9,7 +9,7 @@ body {
 	color: #fff;
 	font-family: "Hiragino Kaku Gothic ProN","ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, sans-serif;
 }
-	
+
 .is-show-pc {
   display: block; }
 
@@ -128,9 +128,9 @@ body {
 	visibility: hidden;
 	display: block;
 	font-size:0;
-	content: " "; 
-	clear: both; 
-	height: 0; 
+	content: " ";
+	clear: both;
+	height: 0;
 }
 
 .soccerjapan_vsbnr_left{
@@ -179,7 +179,7 @@ body {
 	display: inline-block;
 	padding: 10px 80px;
 	font-size: 18px;
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 .soccerjapan_result_container{
@@ -218,22 +218,22 @@ body {
 	background: url("../img/soccerjapan_result_all_arrow.png") no-repeat right center;
 	background-size: 6px 9px;
 }
-	
+
 .soccerjapan_result_all_sp{
 	display: none;
 }
 
 .soccerjapan_texthighlight_container{
-	
+
 }
 
 .soccerjapan_result_movies:after{
 	visibility: hidden;
 	display: block;
 	font-size:0;
-	content: " "; 
-	clear: both; 
-	height: 0; 
+	content: " ";
+	clear: both;
+	height: 0;
 }
 
 .soccerjapan_result_movies .soccerjapan_movie_thumb{
@@ -295,9 +295,9 @@ body {
 	visibility: hidden;
 	display: block;
 	font-size:0;
-	content: " "; 
-	clear: both; 
-	height: 0; 
+	content: " ";
+	clear: both;
+	height: 0;
 }
 
 .soccerjapan_texthighlight_date{
@@ -347,9 +347,9 @@ body {
 	visibility: hidden;
 	display: block;
 	font-size:0;
-	content: " "; 
-	clear: both; 
-	height: 0; 
+	content: " ";
+	clear: both;
+	height: 0;
 }
 
 .soccerjapan_texthighlight_vs{
@@ -376,9 +376,9 @@ body {
 	visibility: hidden;
 	display: block;
 	font-size:0;
-	content: " "; 
-	clear: both; 
-	height: 0; 
+	content: " ";
+	clear: both;
+	height: 0;
 }
 
 .ad_box{
@@ -403,7 +403,7 @@ body {
   .fb-page .fb_iframe_widget span {
     width: 100% !important; }
   .fb-page .fb_iframe_widget span iframe {
-    width: 100% !important; } 
+    width: 100% !important; }
 
 .pageTitle {
 	background-color: #fff;
@@ -518,9 +518,9 @@ body {
 	visibility: hidden;
 	display: block;
 	font-size:0;
-	content: " "; 
-	clear: both; 
-	height: 0; 
+	content: " ";
+	clear: both;
+	height: 0;
 }
 
 .soccerjapan_vsbnr_left{
@@ -569,7 +569,7 @@ body {
 	display: inline-block;
 	padding: 10px 30px;
 	font-size: 14px;
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 .soccerjapan_result_container{
@@ -600,7 +600,7 @@ body {
 
 
 .soccerjapan_texthighlight_container{
-	
+
 }
 
 .soccerjapan_result_movies .soccerjapan_movie_thumb{
@@ -644,7 +644,7 @@ body {
 }
 
 .soccerjapan_texthighlight_container{
-	
+
 }
 
 .soccerjapan_texthighlight_container h3{
@@ -675,9 +675,9 @@ body {
 	visibility: hidden;
 	display: block;
 	font-size:0;
-	content: " "; 
-	clear: both; 
-	height: 0; 
+	content: " ";
+	clear: both;
+	height: 0;
 }
 
 .soccerjapan_texthighlight_date{
@@ -771,9 +771,9 @@ body {
 	visibility: hidden;
 	display: block;
 	font-size:0;
-	content: " "; 
-	clear: both; 
-	height: 0; 
+	content: " ";
+	clear: both;
+	height: 0;
 }
 
 .ad_box{
