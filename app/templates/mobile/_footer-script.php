@@ -117,7 +117,7 @@ s.parentNode.insertBefore(bs, s);
 // アプリ & スポンサードカテゴリの場合はappbnr非表示
 if (
     $page['template'] === 'p' &&
-    $page['post']['is_sponserd'] === false
+     ( $page['post']['is_sponserd'] === false || $page['post']['is_subsponserd'] === false )
   ) :
 ?>
 <script>
