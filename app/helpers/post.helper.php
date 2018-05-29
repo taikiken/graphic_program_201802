@@ -47,6 +47,7 @@ class PostHelper{
     $sponserdCategoryArray = [
       'motorsports',
       'climbing',
+      'inhigh',
     ];
 
     if ( isset($post['categories']) && is_array($post['categories'])) :
