@@ -114,10 +114,10 @@ s.parentNode.insertBefore(bs, s);
 
 
 <?php
-// アプリ & スポンサードカテゴリの場合はappbnr非表示
+// スポンサード&サブスポンサードカテゴリ以外ではappbnr非表示(CMerを表示するため)
 if (
     $page['template'] === 'p' &&
-     ( $page['post']['is_sponserd'] === false || $page['post']['is_subsponserd'] === false )
+     ( $page['post']['is_sponserd'] === false && $page['post']['is_subsponserd'] === false )
   ) :
 ?>
 <script>
