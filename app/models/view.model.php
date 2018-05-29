@@ -426,9 +426,10 @@ class ViewModel {
     if ( $post ) :
 
       $helper = new PostHelper();
-      $post['is_sponserd'] = $helper->is_sponserd($post);
-      $post['is_readmore'] = $helper->is_readmore($post);
-      $post['canonical']   = $helper->get_canonical($post);
+      $post['is_sponserd']    = $helper->is_sponserd($post);
+      $post['is_subsponserd'] = $helper->is_subsponserd($post);
+      $post['is_readmore']    = $helper->is_readmore($post);
+      $post['canonical']      = $helper->get_canonical($post);
 
       return $post;
 
