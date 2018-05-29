@@ -7,11 +7,6 @@
     </a>
   </div>
   <div class="intro__banner">
-    <a href="https://sportsbull.jp/p/312445/">
-      <img  src="/assets/images/toj-2018/bnr_present.png" alt="ツアーオブジャパン×スポーツブル　ライブ配信特別企画　MERIDAのロードバイクプレゼント！">
-    </a>
-  </div>
-  <div class="intro__banner">
     <a href="https://app.adjust.com/jnx2hga" target="_blank">
       <img  src="/assets/images/toj-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信ん開始の通知を受け取れる！">
     </a>
