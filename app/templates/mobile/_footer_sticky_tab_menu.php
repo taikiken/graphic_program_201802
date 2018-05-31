@@ -17,6 +17,20 @@
     }
     var whole = elements[0];
     whole.className += ' nadir_tab-active';
+    // ----
+    // since 2018-05-31
+    // WebView hide loading
+    function webViewCallback() {
+      var JsInterface = window.JsInterface || {};
+      if (JsInterface.onDocumentReady) {
+        try {
+          window.JsInterface.onDocumentReady();
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+    }
+    webViewCallback()
   }(window));
 </script>
 
