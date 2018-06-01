@@ -114,6 +114,14 @@ $statsItem = array(
 
 );
 
+
+// 一覧リンク
+$stats_link = '/stats/';
+if ( $page['ua'] !== 'desktop' ) :
+  $stats_link = '/nav/stats/';
+endif;
+
+
 ?>
 
 
@@ -166,7 +174,7 @@ $statsItem = array(
   </ul><!-- /.stats_banner__list -->
 
   <div class="stats_banner__btn">
-    <a class="stats_banner__btn__link" href="/stats/"><span>すべて</span></a>
+    <a class="stats_banner__btn__link" href="<?php echo $stats_link; ?>"><span>すべて</span></a>
   </div><!-- /.stats_banner__btn -->
 
   <?php include_once __DIR__.'/../../../_svg.php'; ?>

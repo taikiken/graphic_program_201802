@@ -100,7 +100,10 @@
 </head>
 <body>
 
-<?php include_once __DIR__.'/_stats_banner.php'; ?>
+<?php
+$page['ua'] = 'mobile';
+include_once __DIR__.'/_stats_banner.php';
+?>
 
 </body>
 </html>
