@@ -132,6 +132,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // # mobile
   // ==============================
 
+  // ## common
+  // ------------------------------
+  DFPDefileSlot(
+    '/531683568/mobile/mobile_anchor',
+    [320, 50],
+    'ad-gpt-mobile-anchor'
+  );
+
+
   // ## index & list
   // ------------------------------
   // list- bottom
