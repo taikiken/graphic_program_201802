@@ -2,10 +2,15 @@
 
 //#2820 Crazy for Racing動画記事API作成
 //slug=>tag で指定
+//UNDO_SPBL-565 サッカー日本代表用のタグ追加
 $categories=array(
 	"station"=>"ブルステオフショットムービー",
 	"cfr_interview"=>"CFRインタビュー",
-	"cfr_report"=>"CFR体験レポート"
+	"cfr_report"=>"CFR体験レポート",
+	"samurai_blue"=>"LSサッカー男子日本代表",
+	"futsal_women"=>"サッカー女子日本代表・フットサル日本代表",
+	"soccer_under"=>"サッカーアンダー日本代表",
+	"soccer_movie"=>"サッカースペシャル動画"
 );
 
 include "local.php";
@@ -58,7 +63,7 @@ if($y["status"]["code"]===200){
 	
 	$tag=$categories[$category];
 	
-	$nsql=sprintf("select count(*) as n from repo_n where flag=1 and t10='%s'",$tag);
+	$nsql=sprintf("select count(*) as n from repo_n where flag=1 and (t10='%s' or t11='%s' or t12='%s' or t13='%s' or t14='%s' or t15='%s')",$tag,$tag,$tag,$tag,$tag,$tag);
 	$o->query($nsql);
 	$f=$o->fetch_array();
 	$count=$f["n"];

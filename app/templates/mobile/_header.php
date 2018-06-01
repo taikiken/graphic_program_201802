@@ -59,10 +59,19 @@ endif;
   <?php endif; ?>
 
   <?php # Syn. require module ?>
+  <?php if ( $page['conditional']['head_sidemenu'] ) : ?>
   <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/synapse.js?v=<?php echo $page['version']; ?>"></script>
   <script src="<?php echo $page['site_url_uts']; ?>/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
   <script src="<?php echo $page['site_url_uts']; ?>/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=<?php echo $page['version']; ?>"></script>
+  <?php endif; ?>
   <?php // end of Syn. ?>
+
+  <?php
+  // VK出力用script
+  if ( $page['template'] === 'inc' ) :
+    include_once __DIR__.'./../_inc_vk_script.php';
+  endif;
+  ?>
 
 <?php endif; ?>
 
@@ -156,27 +165,42 @@ endif;
 </div>
 <?php endif; ?>
 
+<?php
+
+# SEO対策 - 外部向けテンプレの時 h1 (ロゴ) は pタグに
+$seo_h1 = ( $page['template'] !== 'inc' ) ? 'h1' : 'p';
+
+?>
 <div class="SPBL_common <?php echo $page['html_prefix']; ?>header-sticky">
   <header class="<?php echo $page['html_prefix']; ?>head-sec">
     <div class="<?php echo $page['html_prefix']; ?>head-sec-inner">
-      <h1><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a></h1>
+      <?php echo '<'.$seo_h1.'>'; ?><a href="https://app.adjust.com/y06cg3?deep_link=sportsbull://action?url=https%3A%2F%2Fsportsbull.jp%2F">スポーツブル（スポブル）</a><?php echo '</'.$seo_h1.'>'; ?>
 
+      <?php if ( $page['conditional']['header_sidemenu'] ) : ?>
       <div id="<?php echo $page['html_prefix']; ?>menu-opener" class="<?php echo $page['html_prefix']; ?>menu-opener">
         <a id="<?php echo $page['html_prefix']; ?>side-menu-toggle" href="#<?php echo $page['html_prefix']; ?>side-menu-container"><span></span><span></span><span></span></a>
       </div>
+      <?php endif; ?>
 
       <aside class="<?php echo $page['html_prefix']; ?>head-sec-inner-right">
+        <?php if ( $page['conditional']['header_search'] ) : ?>
         <span id="<?php echo $page['html_prefix']; ?>search-container-opener"></span>
+        <?php endif; ?>
 
+        <?php if ( $page['conditional']['header_user'] ) : ?>
         <div id="<?php echo $page['html_prefix']; ?>user-profile-container"></div><!--/.user-profile-container-->
+        <?php endif; ?>
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
 
 
+  <?php if ( $page['conditional']['header_search'] ) : ?>
   <div id="<?php echo $page['html_prefix']; ?>head-search-container" class="SPBL_common <?php echo $page['html_prefix']; ?>head-search-container"></div>
+  <?php endif; ?>
 
 
+  <?php if ( $page['conditional']['gnav'] ) : ?>
   <nav id="<?php echo $page['html_prefix']; ?>global-nav-container" class="SPBL_common <?php echo $page['html_prefix']; ?>gnav-sec">
     <div id="<?php echo $page['html_prefix']; ?>gnav-sec-inner" class="<?php echo $page['html_prefix']; ?>gnav-sec-inner">
       <ul id="<?php echo $page['html_prefix']; ?>gnav-sec-list">
@@ -187,12 +211,19 @@ endif;
           // タブの表示順はAPI通りにする
           ?>
           <li id="<?php echo $tab['slug']; ?>" class="<?php echo $page['html_prefix']; ?>gnav-<?php echo $tab['slug']; ?>">
-            <a href="<?php echo $page['site_url_uts']; ?>/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
+            <?php if($tab['slug'] !== "vk"){ ?>
+                <a href="<?php echo $page['site_url_uts']; ?>/category/<?php echo $tab['slug']; ?>/"><?php echo $tab['label']; ?></a>
+            <?php }
+            else{?>
+                <a href="<?php echo "http://vk.sportsbull.jp/koshien/"; ?>/"><?php echo $tab['label']; ?></a>
+            <?php } ?>
           </li>
         <?php }//foreach ?>
       </ul>
     </div><!-- /.gnav-sec-inner -->
   </nav><!-- /.gnav-sec -->
+  <?php endif; ?>
+
 
 </div><!--/.header-sticky-->
 <?php endif; ?>

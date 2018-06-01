@@ -5,7 +5,11 @@
  * SEO対策 / パンくずリストを設置する #776
  */
 
-// TODO : controller or model で定義する
+// TODO : controller or model $pageに定義する
+if ( isset($page['breadcrumb']) ) :
+  $BREADCRUMB = $page['breadcrumb'];
+endif;
+
 if ( !isset($BREADCRUMB) ) :
 
   if ($page['template'] == 'category') :

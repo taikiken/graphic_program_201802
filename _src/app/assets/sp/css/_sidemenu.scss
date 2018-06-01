@@ -109,11 +109,17 @@ div.synapse_logo {
   // vertical-align: top;
 
   i {
-    @extend .sp-sprite-common;
-    @include hide-text;
     position: relative;
     top: -2px;
     margin-right: (10/2)+px;
+    // @extend .sp-sprite-common;
+    display: inline-block;
+    width: (60/2)+px;
+    height: (60/2)+px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @include hide-text;
     vertical-align: middle;
   }
 
@@ -123,12 +129,12 @@ div.synapse_logo {
   }
 }
 
-.#{$prefix}side-menu-ut-nav-home i { @include sprite( $common-icon-side-home, inline-block ); }
+.#{$prefix}side-menu-ut-nav-home i { background-image: url(/assets/sp/images/common/icon-side-home.png); }
 .#{$prefix}side-menu-ut-nav-login i,
-.#{$prefix}side-menu-ut-nav-mypage i { @include sprite( $common-icon-side-mypage, inline-block ); }
-.#{$prefix}side-menu-ut-nav-config i { @include sprite( $common-icon-side-config, inline-block ); }
-.#{$prefix}side-menu-ut-nav-logout i { @include sprite( $common-icon-side-logout, inline-block ); }
-.#{$prefix}side-menu-ut-nav-about i { @include sprite( $common-icon-side-about, inline-block ); }
+.#{$prefix}side-menu-ut-nav-mypage i { background-image: url(/assets/sp/images/common/icon-side-mypage.png); }
+.#{$prefix}side-menu-ut-nav-config i { background-image: url(/assets/sp/images/common/icon-side-config.png); }
+.#{$prefix}side-menu-ut-nav-logout i { background-image: url(/assets/sp/images/common/icon-side-logout.png); }
+.#{$prefix}side-menu-ut-nav-about i { background-image: url(/assets/sp/images/common/icon-side-about.png); }
 
 // UNDO_SPBL-403-abolish-comment
 .#{$prefix}side-menu-ut-nav-mypage {

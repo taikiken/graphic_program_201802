@@ -1,15 +1,9 @@
-intro -->
 <section class="intro">
   <p class="intro__catch">1982年から14回に渡り開催された「国際サイクルロードレース」を継承し、1996年にUCI公認の国際レースへとランクアップしたことを機に「ツアー・オブ・ジャパン（TOJ）」へと名称を変え、世界トップレベルの強豪選手が参戦するまでに成長した本大会。<br>
     2018シーズン、アジア最高クラスの熱狂を見逃すな！</p>
   <div class="intro__banner">
     <a href="http://www.toj.co.jp/2018/" target="_blank">
       <img src="/assets/images/toj-2018/bnr_toj_2018.jpg" alt="Tour of Japan 2018 VISIT SITE">
-    </a>
-  </div>
-  <div class="intro__banner">
-    <a href="https://sportsbull.jp/p/312445/">
-      <img  src="/assets/images/toj-2018/bnr_present.png" alt="ツアーオブジャパン×スポーツブル　ライブ配信特別企画　MERIDAのロードバイクプレゼント！">
     </a>
   </div>
   <div class="intro__banner">
@@ -49,7 +43,6 @@ intro -->
           </div>
           <div class="credit">
             <figure>
-              <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
               <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
             </figure>
           </div>
@@ -58,7 +51,7 @@ intro -->
       </div>
     </section>
     <!-- 第２ステージ　京都 -->
-    <section class="schedule__unit is-open">
+    <section class="schedule__unit">
       <header class="schedule__header">
         <p class="date"><img src="/assets/images/toj-2018/date_schedule-0521.png" alt="05/21[Mon]"></p>
         <div class="title_wrap">
@@ -66,8 +59,8 @@ intro -->
           <div class="time"><strong>9:20</strong> 配信開始</div>
         </div>
         <div class="buttonBlock">
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime"><a href="https://sportsbull.jp/p/319235/">フルタイム動画</a></p>
+          <p class="button__highlight"><a href="https://sportsbull.jp/p/319027/">ハイライト動画</a></p>
         </div>
       </header>
       <div class="schedule__detail">
@@ -83,7 +76,6 @@ intro -->
           </div>
           <div class="credit">
             <figure>
-              <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
               <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
             </figure>
           </div>
@@ -100,8 +92,8 @@ intro -->
           <div class="time"><strong>9:15</strong> 配信開始</div>
         </div>
         <div class="buttonBlock">
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime"><a href="https://sportsbull.jp/p/319461/">フルタイム動画</a></p>
+          <p class="button__highlight"><a href="https://sportsbull.jp/p/319462/">ハイライト動画</a></p>
         </div>
       </header>
       <div class="schedule__detail">
@@ -116,7 +108,6 @@ intro -->
           </div>
           <div class="credit">
             <figure>
-              <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
               <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
             </figure>
           </div>
@@ -133,8 +124,8 @@ intro -->
           <div class="time"><strong>9:10</strong> 配信開始</div>
         </div>
         <div class="buttonBlock">
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime"><a href="https://sportsbull.jp/p/320307/">フルタイム動画</a></p>
+          <p class="button__highlight"><a href="https://sportsbull.jp/p/320124/">ハイライト動画</a></p>
         </div>
       </header>
       <div class="schedule__detail">
@@ -150,7 +141,6 @@ intro -->
           </div>
           <div class="credit">
             <figure>
-              <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
               <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
             </figure>
           </div>
@@ -167,8 +157,8 @@ intro -->
           <div class="time"><strong>9:10</strong> 配信開始</div>
         </div>
         <div class="buttonBlock">
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime  is-inactive"><a href="https://sportsbull.jp/p/320819/">フルタイム動画</a></p>
+          <p class="button__highlight is-inactive"><a href="https://sportsbull.jp/p/320816/">ハイライト動画</a></p>
         </div>
       </header>
       <div class="schedule__detail">
@@ -183,7 +173,6 @@ intro -->
           </div>
           <div class="credit">
             <figure>
-              <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
               <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
             </figure>
           </div>
@@ -200,8 +189,8 @@ intro -->
           <div class="time"><strong>10:55</strong> 配信開始</div>
         </div>
         <div class="buttonBlock">
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime  is-inactive"><a href="https://sportsbull.jp/p/321606/">フルタイム動画</a></p>
+          <p class="button__highlight is-inactive"><a href="https://sportsbull.jp/p/321609/">ハイライト動画</a></p>
         </div>
       </header>
       <div class="schedule__detail">
@@ -216,7 +205,6 @@ intro -->
           </div>
           <div class="credit">
             <figure>
-              <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
               <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
             </figure>
           </div>
@@ -233,8 +221,8 @@ intro -->
           <div class="time"><strong>8:55</strong> 配信開始</div>
         </div>
         <div class="buttonBlock">
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime"><a href="https://sportsbull.jp/p/322092/">フルタイム動画</a></p>
+          <p class="button__highlight"><a href="https://sportsbull.jp/p/322091/">ハイライト動画</a></p>
         </div>
       </header>
       <div class="schedule__detail">
@@ -252,7 +240,6 @@ intro -->
           </div>
           <div class="credit">
             <figure>
-              <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
               <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
             </figure>
           </div>
@@ -269,8 +256,8 @@ intro -->
           <div class="time"><strong>10:45</strong> 配信開始</div>
         </div>
         <div class="buttonBlock">
-          <p class="button__fulltime  is-inactive"><span class="button__linkNone">フルタイム動画</span></p>
-          <p class="button__highlight is-inactive"><span class="button__linkNone">ハイライト動画</span></p>
+          <p class="button__fulltime"><a href="https://sportsbull.jp/p/322832/">フルタイム動画</a></p>
+          <p class="button__highlight"><a href="https://sportsbull.jp/p/322833/">ハイライト動画</a></p>
         </div>
       </header>
       <div class="schedule__detail">
@@ -284,7 +271,6 @@ intro -->
           </div>
           <div class="credit">
             <figure>
-              <figcaption>この地図は、大阪府の承認を得て、大阪地形図DMデータ（2500レベル）を使用して制作したものである。<br>（承認番号　平28計推第2460号）</figcaption>
               <p><img src="/assets/images/toj-2018/bnr_zenrin.png" alt=""></p>
             </figure>
           </div>

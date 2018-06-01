@@ -10,10 +10,13 @@ $app->group('/inc', function () use ($app) {
 
   // head
   // ==============================
-  $this->get('/{parts:all|head|header|footer|vk}/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}[/]',  function ($request, $response, $args) use ($app) {
+  $this->get('/{parts:all|head|header|footer|vk}/{cateogry:top|inhightv|vk}/{device:responsive|desktop|mobile}[/]',  function ($request, $response, $args) use ($app) {
 
     // ref. app/models/view.model.php
     $conditional = $app->model->property('conditional');
+
+    // ぱんくず用
+    $breadcrumb  = array();
 
     // parts
     // ------------------------------
@@ -22,29 +25,12 @@ $app->group('/inc', function () use ($app) {
       case 'head':
         $conditional = array(
           'html_start'       => false,
-          'head'             => true,
-          'head_title'       => false,
-          'head_sagen'       => false,
-          'head_assets'      => true,
-          'head_viewport'    => true,
-          'head_seo'         => false,
-          'head_ogp'         => false,
-          'head_canonical'   => false,
-          'head_syn'         => false,
-          'head_icon'        => false,
-          'head_env'         => false,
-          'head_bottom'      => false,
-          'head_video'       => false,
           'body_start'       => false,
-          'whole'            => false,
           'header'           => false,
           'gnav'             => false,
-          'announce'         => false,
-          'sidemenu'         => true,
+          'sidemenu'         => false,
           'footer'           => false,
           'footer_copyright' => false,
-          'footer_modal'     => false,
-          'footer_script'    => false,
           'html_end'         => false,
         );
         break;
@@ -53,29 +39,12 @@ $app->group('/inc', function () use ($app) {
         $conditional = array(
           'html_start'       => false,
           'head'             => false,
-          'head_title'       => false,
-          'head_sagen'       => false,
           'head_assets'      => false,
           'head_viewport'    => false,
-          'head_seo'         => false,
-          'head_ogp'         => false,
-          'head_canonical'   => false,
-          'head_syn'         => false,
-          'head_icon'        => false,
-          'head_env'         => false,
-          'head_bottom'      => false,
-          'head_video'       => false,
           'body_start'       => false,
-          'whole'            => false,
-          'header'           => true,
-          'header_appbnr'    => false,
-          'gnav'             => true,
-          'announce'         => false,
           'sidemenu'         => false,
           'footer'           => false,
           'footer_copyright' => false,
-          'footer_modal'     => false,
-          'footer_script'    => false,
           'html_end'         => false,
         );
         break;
@@ -84,57 +53,62 @@ $app->group('/inc', function () use ($app) {
         $conditional = array(
           'html_start'       => false,
           'head'             => false,
-          'head_title'       => false,
-          'head_sagen'       => false,
           'head_assets'      => false,
           'head_viewport'    => false,
-          'head_seo'         => false,
-          'head_ogp'         => false,
-          'head_canonical'   => false,
-          'head_syn'         => false,
-          'head_icon'        => false,
-          'head_env'         => false,
-          'head_bottom'      => false,
-          'head_video'       => false,
           'body_start'       => false,
-          'whole'            => false,
           'header'           => false,
           'gnav'             => false,
-          'announce'         => false,
-          'sidemenu'         => true,
-          'footer'           => true,
           'footer_copyright' => false,
-          'footer_modal'     => false,
-          'footer_script'    => false,
           'html_end'         => false,
         );
         break;
 
       default:
-        $conditional = array(
-          'header_appbnr' => false,
-          'whole'         => false,
-          'announce'      => false,
-        );
-
     endswitch;
+
+
+    // conditional - common
+    $conditional['head_title']     = false;
+    $conditional['head_sagen']     = false;
+    $conditional['head_icon']      = false;
+    $conditional['head_seo']       = false;
+    $conditional['head_ogp']       = false;
+    $conditional['head_env']       = false;
+    $conditional['head_canonical'] = false;
+    $conditional['head_syn']       = false;
+    $conditional['head_video']     = false;
+    $conditional['head_bottom']    = false;
+    $conditional['header_appbnr']  = false;
+    $conditional['whole']          = false;
+    $conditional['announce']       = false;
+    $conditional['footer_modal']   = false;
+    $conditional['footer_script']  = false;
+
 
     // category
     // ------------------------------
     switch ($args['cateogry']) :
       case 'top':
         break;
-      case 'inhigh':
+      case 'inhightv':
+        $conditional['head_sidemenu']   = false;
+        $conditional['header_search']   = false;
+        $conditional['header_user']     = false;
+        $conditional['header_sidemenu'] = false;
+        $conditional['gnav']            = false;
+        $conditional['sidemenu']        = false;
+        $breadcrumb[] = array(
+          'label' => 'インハイ.tv',
+          'path'  => '/', // subdomain
+        );
+
         break;
       case 'vk':
-        $conditional['head_sagen']    = false;
-        $conditional['head_icon']     = false;
-        $conditional['head_seo']      = false;
-        $conditional['head_ogp']      = false;
-        $conditional['head_env']      = false;
-        $conditional['head_bottom']   = false;
-        $conditional['footer_script'] = false;
-        $conditional['footer_modal']  = false;
+        $breadcrumb[] = array(
+          'label' => 'バーチャル高校野球',
+          'path'  => '/', // subdomain
+        );
+
         break;
       default:
     endswitch;
@@ -148,14 +122,18 @@ $app->group('/inc', function () use ($app) {
       case 'responsive':
         $ua = 'desktop';
         break;
+
       case 'desktop':
         $ua = 'desktop';
         break;
+
       case 'mobile':
         $ua = 'mobile';
         break;
+
       default:
         $ua = 'desktop';
+
     endswitch;
 
 
@@ -172,6 +150,8 @@ $app->group('/inc', function () use ($app) {
       'directory'   => $args['cateogry'],
       'query'       => $query,
       'path'        => $args,
+      'parts'       => $args['parts'],
+      'breadcrumb'  => $breadcrumb,
     ));
 
     return $this->renderer->render($response, 'inc.php', $args);
@@ -180,7 +160,7 @@ $app->group('/inc', function () use ($app) {
 
   // file
   // ==============================
-  $this->get('/assets/{cateogry:top|inhigh|vk}/{device:responsive|desktop|mobile}/{file:inc.css|inc.js}[/]',  function ($request, $response, $args) use ($app) {
+  $this->get('/assets/{cateogry:top|inhightv|vk}/{device:responsive|desktop|mobile}/{file:inc.css|inc.js}[/]',  function ($request, $response, $args) use ($app) {
 
     $path = '';
     if ( $args['device'] === 'mobile' ) :
@@ -204,6 +184,7 @@ $app->group('/inc', function () use ($app) {
           '#user'        => '#SPBL_user',
           '#adg'         => '#SPBL_adg',
           '#synapse'     => '#SPBL_synapse',
+          'div.synapse_logo' => 'div.SPBL_synapse_logo'
         );
 
         $file = strtr($file, $replace_pairs);

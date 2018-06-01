@@ -3,11 +3,11 @@
 include "local.php";
 include "../inc.php";
 
-$csv =sprintf("%s/csv/schedule.csv",$bucket);
+$csv =sprintf("%s/csv/schedule_%s.csv",$bucket,$season);
 $data=get_contents($csv);
 $data=mb_convert_encoding($data,"UTF-8","SJIS");
 $data=preg_replace("/\r\n|\r|\n/","\n",$data);
-$tmpfile=sprintf("%s/tmp/schedule.csv",$bucket);
+$tmpfile=sprintf("%s/tmp/schedule_%s.csv",$bucket,$season);
 file_put_contents($tmpfile,$data);
 
 $fp=fopen($tmpfile,"r");

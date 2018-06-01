@@ -3,8 +3,14 @@
 //関西アメリカンフットボールJSONパス
 $ka_path="http://stats_pr:KansaiL@www.kansai.football-statistics.jp/div1/sportsbull";
 
-$dir="americanfootball/2017/autumn";
-$path=preg_match("/cms/",$servername)?"img":"dev-img";
+$dir="americanfootball/2018/spring";
+
+//春はs,秋はa
+$season="2018s";
+
+if(preg_match("/cms/",$servername))$path="img";
+elseif(preg_match("/dev/",$servername))$path="dev-img";
+else $path="stg-img";
 
 if(!$bucket){
 	$bucket=sprintf("%s/api/ver1/static/%s",$SERVERPATH,$dir);
@@ -35,6 +41,8 @@ $univ["関西学生Div.3選抜"]=array("id"=>13,"name"=>"関西学生Div.3選抜
 $univ["関東学生2部選抜"]=array("id"=>14,"name"=>"関東学生2部選抜");
 $univ["関西学生Div.2選抜"]=array("id"=>15,"name"=>"関西学生Div.2選抜");
 
+$univ["大阪大"]=array("id"=>16,"name"=>"大阪大学");
+$univ["神院大"]=array("id"=>17,"name"=>"神戸学院大学");
 
 $urev["関西学院大学"]=array("id"=>1,"name"=>"関学大");
 $urev["立命館大学"]=array("id"=>2,"name"=>"立命館");
@@ -53,6 +61,9 @@ $univ["関東学生3部選抜"]=array("id"=>12,"name"=>"関東学生3部選抜")
 $univ["関西学生Div.3選抜"]=array("id"=>13,"name"=>"関西学生Div.3選抜");
 $univ["関東学生2部選抜"]=array("id"=>14,"name"=>"関東学生2部選抜");
 $univ["関西学生Div.2選抜"]=array("id"=>15,"name"=>"関西学生Div.2選抜");
+
+$univ["大阪大学"]=array("id"=>16,"name"=>"大阪大");
+$univ["神戸学院大学"]=array("id"=>17,"name"=>"神院大");
 
 $map["#リーグ"]="league";
 $map["#日付け"]="date";

@@ -126,8 +126,12 @@
           position: relative;
           top: -2px;
           margin-right: 4px;
-          @extend .sp-sprite-common;
-          @include sprite( $common-icon-comment, inline-block );
+          // @extend .sp-sprite-common;
+          // @include sprite( $common-icon-comment, inline-block );
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          background: url(/assets/images/common/icon-comment.svg) 50% 50% no-repeat;
           @include hide-text;
           vertical-align: middle;
         }
@@ -160,8 +164,12 @@
       position: relative;
       top: -2px;
       margin-right: 4px;
-      @extend .sp-sprite-common;
-      @include sprite( $common-icon-comment, inline-block );
+      // @extend .sp-sprite-common;
+      // @include sprite( $common-icon-comment, inline-block );
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background: url(/assets/images/common/icon-comment.svg) 50% 50% no-repeat;
       @include hide-text;
       vertical-align: middle;
     }
@@ -233,7 +241,10 @@
     &:before {
       top: -8px;
       right: 6px;
-      @include sprite( $common-icon-user-menu_shadow );
+      // @include sprite( $common-icon-user-menu_shadow );
+      width: (28/2)+px;
+      height: (16/2)+px;
+      background-image: url(/assets/sp/images/common/icon-user-menu_shadow.png);
     }
 
     &-item {

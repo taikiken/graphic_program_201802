@@ -17,6 +17,7 @@ import SPViewHeaderUser from '../../sp/view/header/SPViewHeaderUser';
 import SPPageTop from '../../sp/ui/SPPageTop';
 import SPViewSyn from '../../sp/view/SPViewSyn';
 import NavCurrent from '../../ui/NavCurrent';
+import VK from '../VK';
 
 // vk mobile 実行ファイル
 /**
@@ -24,7 +25,10 @@ import NavCurrent from '../../ui/NavCurrent';
  */
 const nav = () => {
   // console.log('nav');
-  NavCurrent.init('vk', true, true);
+  // NavCurrent.init('vk', true, true);
+  if (VK.current) {
+    NavCurrent.init(VK.current, true, true);
+  }
 };
 
 /**

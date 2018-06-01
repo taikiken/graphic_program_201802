@@ -143,7 +143,14 @@ if($q->get_dir()==3){
                   </a>
                 </div>
               <?php } ?>
-            <?php } ?>
+                <?php if ($CURRENTDIRECTORY == "tabs") { ?>
+                  <div class = "newEntry<?php if(getSorC("new")!=1){ ?>_disabled<?php } ?>">
+                    <a href="/api/batch/output_vk_headerfooter.php">
+                      <span>vkパーツ出力</span>
+                    </a>
+                  </div>
+                <?php } ?>
+              <?php } ?>
             <?php include $INCLUDEPATH."__layout_localmenu.php"; ?>
           </div><!-- End pageController -->
         <?php } ?>

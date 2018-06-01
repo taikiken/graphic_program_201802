@@ -105,6 +105,7 @@ class ViewModel {
       'head_title'       => true, // <title>
       'head_sagen'       => true, // sagen.js
       'head_assets'      => true, // css & js
+      'head_sidemenu'    => true, // sp - sidemenu css & js
       'head_viewport'    => true, // viewport
       'head_seo'         => true, // keyword & description
       'head_ogp'         => true, // fb:ogp, twitter:card
@@ -118,6 +119,9 @@ class ViewModel {
       'whole'            => true, // <div class="whole">
       'header'           => true, // <header>
       'header_appbnr'    => true, // sp用冒頭のアプリバナー
+      'header_search'    => true, // headerの検索窓
+      'header_user'      => true, // headerのユーザー部分
+      'header_sidemenu'  => true, // sp - sidemenu - toggle
       'gnav'             => true, // <nav>
       'announce'         => true, // <announce>
       'sidemenu'         => true, // sp - sidemenu
@@ -422,9 +426,10 @@ class ViewModel {
     if ( $post ) :
 
       $helper = new PostHelper();
-      $post['is_sponserd'] = $helper->is_sponserd($post);
-      $post['is_readmore'] = $helper->is_readmore($post);
-      $post['canonical']   = $helper->get_canonical($post);
+      $post['is_sponserd']    = $helper->is_sponserd($post);
+      $post['is_subsponserd'] = $helper->is_subsponserd($post);
+      $post['is_readmore']    = $helper->is_readmore($post);
+      $post['canonical']      = $helper->get_canonical($post);
 
       return $post;
 

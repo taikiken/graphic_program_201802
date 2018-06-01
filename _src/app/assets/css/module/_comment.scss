@@ -117,8 +117,12 @@
           content: '';
           position: relative;
           top: -2px;
-          @extend .sprite-common;
-          @include sprite( $common-icon-comment, inline-block );
+          // @extend .sprite-common;
+          // @include sprite( $common-icon-comment, inline-block );
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          background: url(/assets/images/common/icon-comment.svg) 50% 50% no-repeat;
           @include hide-text;
           margin-right: 5px;
           vertical-align: middle;
@@ -197,7 +201,10 @@
     &:before {
       top: -8px;
       right: 11px;
-      @include sprite( $common-icon-user-menu_shadow );
+      // @include sprite( $common-icon-user-menu_shadow );
+      width: 10px;
+      height: 8px;
+      background-image: url(/assets/images/common/icon-user-menu_shadow.png);
     }
 
     @at-root {
