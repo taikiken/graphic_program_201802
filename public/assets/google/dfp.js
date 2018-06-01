@@ -1,3 +1,6 @@
+// # var
+var SPBL_ENV = SPBL_ENV || {};
+
 // # DFP
 var googletag = googletag || {};
 googletag.cmd = googletag.cmd || [];
