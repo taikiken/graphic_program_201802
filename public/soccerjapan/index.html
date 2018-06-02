@@ -29,33 +29,37 @@
 			$.getJSON("../api/v1/articles/video/samurai_blue?offset=0&length=5" , function(data) {
 			var
 				ulObj1 = $("#soccerjapan_movie1"),
-				len = data.request['length'];
+				len = data.response['articles'].length;
 				for(var i = 0; i < len; i++) {
 				ulObj1.append('<div class="soccerjapan_movie_thumb"><a href="'+data.response['articles'][i].url+'" title="'+data.response['articles'][i].title+'"><img src="'+data.response['articles'][i].img+'" alt="'+data.response['articles'][i].title+'"><span class="soccerjapan_movie_thumb_icon"></span></a></div>');
+
 				}
 			});
 			$.getJSON("../api/v1/articles/video/futsal_women?offset=0&length=5" , function(data) {
 			var
 				ulObj2 = $("#soccerjapan_movie2"),
-				len = data.request['length'];
+				len = data.response['articles'].length;
 				for(var i = 0; i < len; i++) {
 				ulObj2.append('<div class="soccerjapan_movie_thumb"><a href="'+data.response['articles'][i].url+'" title="'+data.response['articles'][i].title+'"><img src="'+data.response['articles'][i].img+'" alt="'+data.response['articles'][i].title+'"><span class="soccerjapan_movie_thumb_icon"></span></a></div>');
+
 				}
 			});
 			$.getJSON("../api/v1/articles/video/soccer_under?offset=0&length=5" , function(data) {
 			var
 				ulObj3 = $("#soccerjapan_movie3"),
-				len = data.request['length'];
+				len = data.response['articles'].length;
 				for(var i = 0; i < len; i++) {
 				ulObj3.append('<div class="soccerjapan_movie_thumb"><a href="'+data.response['articles'][i].url+'" title="'+data.response['articles'][i].title+'"><img src="'+data.response['articles'][i].img+'" alt="'+data.response['articles'][i].title+'"><span class="soccerjapan_movie_thumb_icon"></span></a></div>');
+
 				}
 			});
 			$.getJSON("../api/v1/articles/video/soccer_movie?offset=0&length=5" , function(data) {
 			var
 				ulObj4 = $("#soccerjapan_movie4"),
-				len = data.request['length'];
+				len = data.response['articles'].length;
 				for(var i = 0; i < len; i++) {
 				ulObj4.append('<div class="soccerjapan_movie_thumb"><a href="'+data.response['articles'][i].url+'" title="'+data.response['articles'][i].title+'"><img src="'+data.response['articles'][i].img+'" alt="'+data.response['articles'][i].title+'"><span class="soccerjapan_movie_thumb_icon"></span></a></div>');
+
 				}
 			});
 		});
@@ -116,14 +120,14 @@
 				<div class="soccerjapan_vsbnr_conatiner">
 					<div class="soccerjapan_vsbnr_left">日本</div>
 					<div class="soccerjapan_vsbnr_left_flag"><img src="img/flag_japan.png" width="120" height="80" alt=""></div>
-					<div class="soccerjapan_vsbnr_left_num">1</div>
+					<div class="soccerjapan_vsbnr_left_num">0</div>
 					<div class="soccerjapan_vsbnr_vs">VS</div>
 					<div class="soccerjapan_vsbnr_right_num">2</div>
-					<div class="soccerjapan_vsbnr_right_flag"><img src="img/flag_ukraine.png" width="120" height="80" alt=""></div>
-					<div class="soccerjapan_vsbnr_right">ウクライナ</div>
+					<div class="soccerjapan_vsbnr_right_flag"><img src="img/flag_ghana.png" width="120" height="80" alt=""></div>
+					<div class="soccerjapan_vsbnr_right">ガーナ</div>
 				</div>
-				<div class="soccerjapan_vsbnr_text">スタッドモーリスデュフラン</div>
-				<a href="https://sportsbull.jp/sokuhou/soccer/180327/" target="_blank">サッカー日本代表リアルタイム速報</a>
+				<div class="soccerjapan_vsbnr_text">日産スタジアム</div>
+				<a href="https://sportsbull.jp/sokuhou/soccer/180530/" target="_blank">サッカー日本代表リアルタイム速報</a>
 			</div>
 
 			<div class="soccerjapan_vsbnr_link"><a href="#texthighlight">他の試合を見る</a></div>
@@ -188,10 +192,10 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525669264426-0');
 			<div class="soccerjapan_result_container">
 				<div class="soccerjapan_result_title">
 					<h3>男子日本代表</h3>
-					<div class="soccerjapan_result_all"><a href="https://sportsbull.jp/search/%e3%82%b5%e3%83%83%e3%82%ab%e3%83%bc%e7%94%b7%e5%ad%90%e6%97%a5%e6%9c%ac%e4%bb%a3%e8%a1%a8">すべての動画を見る</a></div>
+					<div class="soccerjapan_result_all"><a href="https://sportsbull.jp/search/LS%E3%82%B5%E3%83%83%E3%82%AB%E3%83%BC%E7%94%B7%E5%AD%90%E6%97%A5%E6%9C%AC%E4%BB%A3%E8%A1%A8">すべての動画を見る</a></div>
 				</div>
 				<div class="soccerjapan_result_movies" id="soccerjapan_movie1"></div>
-				<div class="soccerjapan_result_all_sp"><a href="https://sportsbull.jp/search/%e3%82%b5%e3%83%83%e3%82%ab%e3%83%bc%e7%94%b7%e5%ad%90%e6%97%a5%e6%9c%ac%e4%bb%a3%e8%a1%a8">すべての動画を見る</a></div>
+				<div class="soccerjapan_result_all_sp"><a href="https://sportsbull.jp/search/LS%E3%82%B5%E3%83%83%E3%82%AB%E3%83%BC%E7%94%B7%E5%AD%90%E6%97%A5%E6%9C%AC%E4%BB%A3%E8%A1%A8">すべての動画を見る</a></div>
 			</div>
 
 			<div class="soccerjapan_result_container">
@@ -280,6 +284,23 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525673596457-0');
 			<div class="soccerjapan_texthighlight_container" id="texthighlight">
 				<h3>テキスト速報＆ハイライト動画</h3>
 				<div class="soccerjapan_texthighlight_table">
+					<div class="soccerjapan_texthighlight_box">
+						<div class="soccerjapan_texthighlight_date">2018年5月30日</div>
+						<div class="soccerjapan_texthighlight_result">
+							<div class="soccerjapan_texthighlight_result_left">
+								<p class="soccerjapan_texthighlight_country">日本</p>
+								<p class="soccerjapan_texthighlight_num">0</p>
+							</div>
+							<p class="soccerjapan_texthighlight_vs">VS</p>
+							<div class="soccerjapan_texthighlight_result_right">
+								<p class="soccerjapan_texthighlight_num soccerjapan_texthighlight_winner">2</p>
+								<p class="soccerjapan_texthighlight_country soccerjapan_texthighlight_winner">ガーナ</p>
+							</div>
+						</div>
+						<div class="soccerjapan_texthighlight_detail">
+							<a href="https://sportsbull.jp/sokuhou/soccer/180530/">詳細を見る</a>
+						</div>
+					</div>
 					<div class="soccerjapan_texthighlight_box">
 						<div class="soccerjapan_texthighlight_date">2018年3月27日</div>
 						<div class="soccerjapan_texthighlight_result">
