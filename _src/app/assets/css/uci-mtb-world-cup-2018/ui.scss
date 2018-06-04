@@ -1,0 +1,357 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../scss/asset";
+
+// normalize / reset / åŸºæœ¬ class, tag è¨­å®š
+@import "../../../../bower_exports/modularized/normalize";
+@import "../../../../scss/style/reset";
+@import "../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// ä»¥ä¸‹ã€import ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç·¨é›†
+// --------------------------------------------
+
+// page layout
+@import "../module/import";
+@import "../layout";
+
+
+$color01: #cc0007;
+$color02: #f8fafc;
+
+@mixin mq-s {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mq-l {
+  @media (min-width: 769px) {
+    @content;
+  }
+}
+
+@mixin mb {
+  margin-bottom: 40px;
+  @include mq-l {
+    margin-bottom: 80px;
+  }
+}
+
+@mixin mlr {
+  @include mq-s {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@mixin title($width, $width_pc) {
+  font-weight: bold;
+  font-size: 12px;
+  padding-bottom: 20px;
+  @include mq-l {
+    font-size: 14px;
+  }
+  img {
+    width: $width;
+    margin-right: 10px;
+    @include mq-l {
+       width: $width_pc;
+    }
+  }
+}
+
+@mixin bg {
+  background: #222;
+}
+
+@mixin bb {
+  border-bottom: 1px solid rgba(#fff, 0.3);
+}
+
+@mixin notice {
+  font-size: 12px;
+  color: #ccc;
+  a {
+    color: $color01;
+  }
+}
+
+.rb-hide-sp {
+  @include mq-s {
+    display: none!important;
+  }
+}
+.rb-hide-pc {
+  @include mq-l {
+    display: none!important;
+  }
+}
+
+#whole.uci-mtb-world-cup-2018 {
+  @include bg;
+  color: #fff;
+  @include mq-s {
+    min-width: auto;
+  }
+  .body-sec {
+    @include bg;
+  }
+  .bg-container {
+    background: url('../../images/uci-mtb-world-cup-2018/bg_rb.png') center top no-repeat;
+    @include mq-s {
+      background-size: contain;
+    }
+    @include mq-l {
+      background: url('../../images/uci-mtb-world-cup-2018/bg_rb_pc.png') center top no-repeat;
+    }
+  }
+
+  .rb--head {
+    padding: 20px 5px;
+    @include mq-l {
+      width: 1090px;
+      margin: 0 auto;
+      padding: 30px 0px;
+    }
+    img {
+      @include mq-s {
+        width: 100%;
+        display: block;
+      }
+    }
+  }
+  .rb--movie {
+    @include mb;
+    @include mq-l {
+      width: 1090px;
+      margin: 0 auto;
+    }
+    #VideoPlayer {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      #placeHolder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    img {
+      width: 100%;
+    }
+    p {
+      @include notice;
+    }
+  }
+  .body-sec-inner {
+    background-color: transparent;
+    @include mq-s {
+      width: auto;
+    }
+    .main-sec {
+      @include mq-s {
+        width: auto;
+        float: none;
+      }
+      @include mq-l {
+        padding-top: 30px;
+      }
+      a {
+        transition: all 0.3s;
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+    .rb--intro {
+      margin-bottom: 40px;
+      @include mlr;
+      p {
+        padding-left: 10px;
+        font-weight: bold;
+        border-left: 2px solid $color01;
+        line-height: 2;
+        @include mq-l {
+          font-size: 20px;
+        }
+      }
+    }
+    .rb-appli {
+      @include mb;
+      @include mlr;
+      a {
+        display: block;
+        &:first-child {
+          margin-bottom: 20px;
+        }
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .rb--timetable {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title(186px, 310px);
+      }
+      table {
+        width: 100%;
+        tbody {
+          tr {
+            @include bb;
+            &:not(:first-child) {
+              th,td {
+                padding-top: 10px;
+              }
+            }
+            th {
+              width: 1px;
+              white-space: nowrap;
+              font-weight: bold;
+              padding-right: 10px;
+              font-size: 16px;
+              @include mq-l {
+                font-size: 20px;
+                padding-right: 20px;
+              }
+            }
+            td {
+              //font-size: 12px;
+              @include mq-l {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+      .notice {
+        @include notice;
+        margin-top: 10px;
+      }
+    }
+    .rb--banner {
+      @include mb;
+      div {
+        margin: auto;
+      }
+    }
+    .rb--related {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title(150px, 250px);
+      }
+      ul {
+        li {
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          &:not(:last-child) {
+            @include bb;
+          }
+          a {
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            &.movie {
+              .rb--related__image-wrap:before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 30px;
+                height: 30px;
+                transform: translate(-50%,-50%);
+                background: url(/assets/images/uci-mtb-world-cup-2018/related-icon_play.png) 0 0 no-repeat;
+                overflow: hidden;
+                font-size: 0;
+                text-indent: 100%;
+                white-space: nowrap;
+                outline: none;
+                background-size: 30px;
+                @include mq-l {
+                  width: 60px;
+                  height: 60px;
+                  background-size: 60px;
+                }
+              }
+            }
+            .rb--related__image-wrap {
+              position: relative;
+              width: calc(40% - 5px);
+              img {
+                width: 100%;
+              }
+            }
+            .rb--related__text-wrap {
+              width: calc(60% - 5px);
+              @include mq-l {
+                padding-left: 20px;
+              }
+              h3 {
+                color: $color01;
+                font-weight: bold;
+                font-size: 16px;
+                margin-bottom: 10px;
+                @include mq-l {
+                  font-size: 20px;
+                }
+              }
+              p {
+                @include mq-l {
+                  margin-bottom: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .footer-rectangle {
+      display: flex;
+      justify-content: center;
+      li:first-child {
+        margin-right: 40px
+      }
+    }
+    .rb--sidebar__skyscraper {
+      margin-top: 20px;
+    }
+  }
+  @include mq-s {
+    .head-sec .head-sec-inner {
+      width: auto;
+    }
+    .foot-sec .foot-pr {
+      border-bottom: none;
+    }
+    .foot-sec .foot-pr-inner {
+      width: auto;
+      padding-bottom: 0;
+    }
+    .foot-sec .foot-pr figure {
+      float: none;
+    }
+    .foot-sec .foot-pr-text {
+      margin-top: 0;
+    }
+    .foot-sec .foot-pr .text-block {
+      float: none;
+      width: 280px;
+      margin: 6px auto 0;
+    }
+    .foot-sec .fb-page-plugin {
+      float: none;
+      width: auto;
+    }
+    .foot-sec .copyright {
+      margin: 0;
+    }
+  }
+}
