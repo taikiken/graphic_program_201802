@@ -1,20 +1,20 @@
 @charset "UTF-8";
 /*! build: @@buildTime */
 // import mixin / function
-@import "../../../../scss/asset";
+@import "../../../../../scss/asset";
 
 // normalize / reset / åŸºæœ¬ class, tag è¨­å®š
-@import "../../../../bower_exports/modularized/normalize";
-@import "../../../../scss/style/reset";
-@import "../../../../scss/dependencies/style";
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss/style/reset";
+@import "../../../../../scss/dependencies/style";
 
 // --------------------------------------------
 // ä»¥ä¸‹ã€import ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç·¨é›†
 // --------------------------------------------
 
 // page layout
-@import "../module/import";
-@import "../layout";
+@import "../../module/import";
+@import "../../layout";
 
 
 $color01: #fedb06;
@@ -99,12 +99,12 @@ $color02: #f8fafc;
     @include bg;
   }
   .bg-container {
-    background: url('../../images/red-bull-neymar-jrs-five-2018/bg_rb.png') center top no-repeat;
+    background: url('../../../images/live/red-bull-neymar-jrs-five-2018/bg_rb.png') center top no-repeat;
     @include mq-s {
       background-size: contain;
     }
     @include mq-l {
-      background: url('../../images/red-bull-neymar-jrs-five-2018/bg_rb_pc.png') center top no-repeat;
+      background: url('../../../images/live/red-bull-neymar-jrs-five-2018/bg_rb_pc.png') center top no-repeat;
     }
   }
 
@@ -174,9 +174,9 @@ $color02: #f8fafc;
         padding-left: 10px;
         font-weight: bold;
         border-left: 2px solid $color01;
-        line-height: 2;
         @include mq-l {
           font-size: 20px;
+          line-height: 2;
         }
       }
     }
@@ -190,6 +190,54 @@ $color02: #f8fafc;
         }
         img {
           width: 100%;
+        }
+      }
+    }
+    .rb--rule {
+      @include mb;
+      @include mlr;
+      h2 {
+        font-weight: bold;
+        font-size: 18px;
+        padding-bottom: 10px;
+        color: $color01;
+        @include mq-l {
+          font-size: 24px;
+        }
+      }
+      &__movie {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        margin-bottom: 40px;
+        iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      ul {
+        li {
+          position: relative;
+          padding-left: 18px;
+          font-weight: bold;
+          margin-bottom: 6px;
+          font-size: 12px;
+          @include mq-l {
+            font-size: 16px;
+          }
+          &:before {
+            position: absolute;
+            content: '';
+            width: 10px;
+            height: 3px;
+            top: 50%;
+            left: 0;
+            margin-top: -2px;
+            background: $color01;
+          }
         }
       }
     }
@@ -268,7 +316,7 @@ $color02: #f8fafc;
                 width: 30px;
                 height: 30px;
                 transform: translate(-50%,-50%);
-                background: url(/assets/images/red-bull-neymar-jrs-five-2018/related-icon_play.png) 0 0 no-repeat;
+                background: url(/assets/images/live/red-bull-neymar-jrs-five-2018/related-icon_play.png) 0 0 no-repeat;
                 overflow: hidden;
                 font-size: 0;
                 text-indent: 100%;

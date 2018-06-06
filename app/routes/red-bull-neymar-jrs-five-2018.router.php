@@ -2,7 +2,7 @@
 
 // red-bull-400-2018
 // ==============================
-$app->group('/red-bull-neymar-jrs-five-2018',  function () use($app) {
+$app->group('/live/red-bull-neymar-jrs-five-2018',  function () use($app) {
 
   $category = $app->model->get_category_by_slug('extremesports');
   $page = array(
@@ -16,13 +16,14 @@ $app->group('/red-bull-neymar-jrs-five-2018',  function () use($app) {
     'template'           => 'category',
     'template_classname' => 'red-bull-neymar-jrs-five-2018',
     'dir_name'           => 'red-bull-neymar-jrs-five-2018',
+    'path'               => $args
   );
 
 
   // /red-bull-neymar-jrs-five-2018/ -> /red-bull-neymar-jrs-five-2018/
   // ==============================
   $this->get('/live[/]', function ($request, $response, $args) use ($app, $page) {
-    return $response->withRedirect('/red-bull-neymar-jrs-five-2018/', 301);
+    return $response->withRedirect('/live/red-bull-neymar-jrs-five-2018/', 301);
   });
 
   // live
@@ -33,7 +34,7 @@ $app->group('/red-bull-neymar-jrs-five-2018',  function () use($app) {
     $app->model->property('path', $args);
     $args['page'] = $app->model->set($page);
 
-    return $this->renderer->render($response, 'red-bull-neymar-jrs-five-2018/index.php', $args);
+    return $this->renderer->render($response, 'live/red-bull-neymar-jrs-five-2018/index.php', $args);
 
   });
 

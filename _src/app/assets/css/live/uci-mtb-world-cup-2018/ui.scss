@@ -1,20 +1,20 @@
 @charset "UTF-8";
 /*! build: @@buildTime */
 // import mixin / function
-@import "../../../../scss/asset";
+@import "../../../../../scss/asset";
 
 // normalize / reset / åŸºæœ¬ class, tag è¨­å®š
-@import "../../../../bower_exports/modularized/normalize";
-@import "../../../../scss/style/reset";
-@import "../../../../scss/dependencies/style";
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss/style/reset";
+@import "../../../../../scss/dependencies/style";
 
 // --------------------------------------------
 // ä»¥ä¸‹ã€import ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç·¨é›†
 // --------------------------------------------
 
 // page layout
-@import "../module/import";
-@import "../layout";
+@import "../../module/import";
+@import "../../layout";
 
 
 $color01: #cc0007;
@@ -99,12 +99,12 @@ $color02: #f8fafc;
     @include bg;
   }
   .bg-container {
-    background: url('../../images/uci-mtb-world-cup-2018/bg_rb.png') center top no-repeat;
+    background: url('../../../images/live/uci-mtb-world-cup-2018/bg_rb.png') center top no-repeat;
     @include mq-s {
       background-size: contain;
     }
     @include mq-l {
-      background: url('../../images/uci-mtb-world-cup-2018/bg_rb_pc.png') center top no-repeat;
+      background: url('../../../images/live/uci-mtb-world-cup-2018/bg_rb_pc.png') center top no-repeat;
     }
   }
 
@@ -268,7 +268,7 @@ $color02: #f8fafc;
                 width: 30px;
                 height: 30px;
                 transform: translate(-50%,-50%);
-                background: url(/assets/images/uci-mtb-world-cup-2018/related-icon_play.png) 0 0 no-repeat;
+                background: url(/assets/images/live/uci-mtb-world-cup-2018/related-icon_play.png) 0 0 no-repeat;
                 overflow: hidden;
                 font-size: 0;
                 text-indent: 100%;

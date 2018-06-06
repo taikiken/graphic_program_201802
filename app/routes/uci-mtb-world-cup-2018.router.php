@@ -2,7 +2,7 @@
 
 // uci-mtb-world-cup-2018
 // ==============================
-$app->group('/uci-mtb-world-cup-2018',  function () use($app) {
+$app->group('/live/uci-mtb-world-cup-2018',  function () use($app) {
 
   $category = $app->model->get_category_by_slug('extremesports');
   $page = array(
@@ -22,7 +22,7 @@ $app->group('/uci-mtb-world-cup-2018',  function () use($app) {
   // /uci-mtb-world-cup-2018/live/ -> /uci-mtb-world-cup-2018/
   // ==============================
   $this->get('/live[/]', function ($request, $response, $args) use ($app, $page) {
-    return $response->withRedirect('/uci-mtb-world-cup-2018/', 301);
+    return $response->withRedirect('/live/uci-mtb-world-cup-2018/', 301);
   });
 
   // live
@@ -33,7 +33,7 @@ $app->group('/uci-mtb-world-cup-2018',  function () use($app) {
     $app->model->property('path', $args);
     $args['page'] = $app->model->set($page);
 
-    return $this->renderer->render($response, 'uci-mtb-world-cup-2018/index.php', $args);
+    return $this->renderer->render($response, 'live/uci-mtb-world-cup-2018/index.php', $args);
 
   });
 

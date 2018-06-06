@@ -14,7 +14,7 @@
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
 
-  <?php include_once __DIR__."/../_head.php"; ?>
+  <?php include_once __DIR__."/../../_head.php"; ?>
 
 
 
@@ -23,9 +23,9 @@
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
   <!-- <script src="/assets/js/libs/jquery2/jquery.min.js?v="></script> -->
 
-  <script src="/assets/js/<?php echo $page['template_classname']; ?>/libs.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/live/libs.js?v=<?php echo $page['version']; ?>"></script>
 
-  <link rel="stylesheet" href="/assets/css/<?php echo $page['template_classname']; ?>/ui.css?v=<?php echo $page['version']; ?>">
+  <link rel="stylesheet" href="/assets/css/live/<?php echo $page['template_classname']; ?>/ui.css?v=<?php echo $page['version']; ?>">
 
   <link rel="stylesheet" href="/assets/css/basic.css?v=<?php echo $page['version']; ?>" media="only screen and (min-width: 769px)">
   <link rel="stylesheet" href="/assets/sp/css/basic.css?v=<?php echo $page['version']; ?>" media="only screen and (max-width: 768px)">
@@ -79,7 +79,7 @@
     })();
   </script>
 
-  <?php include_once __DIR__ . '/../_env.php'; ?>
+  <?php include_once __DIR__ . '/../../_env.php'; ?>
 </head>
 
 <body>
@@ -101,23 +101,21 @@
     <div class="body-sec">
       <div class="bg-container">
         <div class="rb--head">
-            <img src="/assets/images/uci-mtb-world-cup-2018/ttl_rb.png" alt="" class="rb-hide-pc">
-            <img src="/assets/images/uci-mtb-world-cup-2018/ttl_rb_pc.png" alt="" class="rb-hide-sp">
+            <img src="/assets/images/live/red-bull-neymar-jrs-five-2018/ttl_rb.png" alt="" class="rb-hide-pc">
+            <img src="/assets/images/live/red-bull-neymar-jrs-five-2018/ttl_rb_pc.png" alt="" class="rb-hide-sp">
         </div>
         <div class="rb--movie">
-          <!--
           <div id="VideoPlayer">
             <div id="placeHolder"></div>
           </div>
-          -->
-          <img src="/assets/images/uci-mtb-world-cup-2018/rb_announce.png" alt="">
+          <!-- <img src="/assets/images/live/red-bull-neymar-jrs-five-2018/rb_announce.png" alt=""> -->
         </div>
 
         <div class="body-sec-inner">
           <div class="main-sec">
             <div class="rb--intro">
 
-              <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+              <p>世界一に輝いたチームはネイマールと対戦！Neymar Jr’s Fiveはネイマールが考案したストリートサッカー世界杯。世界60カ国以上から10万人以上の選手が参加し、世界一を目指す。ブラジル行きの切符を手に入れ、ネイマールへの挑戦権獲得を目指すのはどのチームか。今年は初の女子部門も開催決定！</p>
 
             </div>
             <div class="rb-appli">
@@ -128,8 +126,8 @@
               ?>
 
                 <a href="https://app.adjust.com/tv698b4" target="_blank">
-                  <img src="/assets/images/uci-mtb-world-cup-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-pc">
-                  <img src="/assets/images/uci-mtb-world-cup-2018/bnr_spbl_app_pc.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-sp">
+                  <img src="/assets/images/live/red-bull-neymar-jrs-five-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-pc">
+                  <img src="/assets/images/live/red-bull-neymar-jrs-five-2018/bnr_spbl_app_pc.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-sp">
                 </a>
 
               <?php
@@ -139,8 +137,24 @@
 
             </div>
 
+            <section class="rb--rule">
+              <h2>普通のサッカーとはここが違う！</h2>
+              <div class="rb--rule__movie">
+                <iframe src="https://www.redbullcontentpool.com/embed/video/5b152a04b60f6e00808749f9?_=1528113669114" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <ul>
+                <li>30m x 18mのコートで行う</li>
+                <li>人数は5人でキーパーはいない</li>
+                <li>ゴール前のボックス内に入ってはダメ</li>
+                <li>1点追加するごとに相手チームは1人退場</li>
+                <li>試合時間は10分間</li>
+                <li>同点の場合は、1 on 1で対決</li>
+                <li>5点先取するか、試合終了までに多くの点を取ったチームが勝ち！</li>
+              </ul>
+            </section>
+
             <section class="rb--timetable">
-              <h2><img src="/assets/images/uci-mtb-world-cup-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
+              <h2><img src="/assets/images/live/red-bull-neymar-jrs-five-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
               <table>
                 <tbody>
                   <tr>
@@ -217,7 +231,7 @@
             <?php endif; ?>
 
             <section class="rb--related">
-              <h2><img src="/assets/images/uci-mtb-world-cup-2018/ttl_related.png" alt="">関連記事</h2>
+              <h2><img src="/assets/images/live/red-bull-neymar-jrs-five-2018/ttl_related.png" alt="">関連記事</h2>
               <ul>
                 <li>
                   <a href="/p/312214/" class="movie">
@@ -289,7 +303,7 @@
           <?php
           // static_contents
           // ===========================================
-            include_once dirname(__DIR__) . '/uci-mtb-world-cup-2018/_include/_static_sidebar.php';
+            include_once dirname(__DIR__) . '/red-bull-neymar-jrs-five-2018/_include/_static_sidebar.php';
           // ===========================================
           ?>
 
@@ -307,8 +321,8 @@
       // ==============================
       $BREADCRUMB = array(
         array(
-          'label' => 'UCI MOUNTAIN BIKE WORLD CUP 2018 ライブ配信',
-          'path'  => '/uci-mtb-world-cup-2018/'
+          'label' => 'NEYMAR JR&apos;S FIVE ジャパンファイナル ライブ配信',
+          'path'  => '/red-bull-neymar-jrs-five-2018/'
         ),
       );
     ?>
@@ -317,13 +331,13 @@
     // app in webview 時に非表示にする
       if (!$from_webview) :
     ?>
-      <?php include_once __DIR__."/../_footer-responsive.php"; ?>
+      <?php include_once __DIR__."/../../_footer-responsive.php"; ?>
     <?php
       endif;
       // -----------------------------------------
     ?>
 
-    <?php include_once __DIR__."/../_debug.php"; ?>
+    <?php include_once __DIR__."/../../_debug.php"; ?>
 
     <script>
       var ua = window.navigator.userAgent.toLowerCase();
@@ -337,7 +351,7 @@
     <script src="https://code.jquery.com/jquery-git.min.js"></script>
 
 
-    <script src="/assets/js/<?php echo $page['template_classname']; ?>/videoPlayer.js?v=<?php echo $page['version']; ?>"></script>
+    <script src="/assets/js/live/<?php echo $page['template_classname']; ?>/videoPlayer.js?v=<?php echo $page['version']; ?>"></script>
     <script>
       $(function() {
         if ($(window).width() <= 768) {
