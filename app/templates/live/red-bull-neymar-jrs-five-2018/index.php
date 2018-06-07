@@ -135,6 +135,11 @@
               // -----------------------------------------
               ?>
 
+              <a href="https://www.redbull.com/jp-ja/events/neymar-jrs-five" target="_blank">
+                <img src="/assets/images/live/red-bull-neymar-jrs-five-2018/bnr_rb.png" alt="NEYMAR JR'S FIVE についてもっと知る" class="rb-hide-pc">
+                <img src="/assets/images/live/red-bull-neymar-jrs-five-2018/bnr_rb_pc.png" alt="NEYMAR JR'S FIVE についてもっと知る" class="rb-hide-sp">
+              </a>
+
             </div>
 
             <section class="rb--rule">
@@ -186,7 +191,7 @@
                     <td>表彰式</td>
                   </tr>
                   <tr>
-                    <th>15:●●</th>
+                    <th>15:25</th>
                     <td>配信終了</td>
                   </tr>
                 </tbody>
@@ -230,6 +235,7 @@
               </div>
             <?php endif; ?>
 
+            <?php /*
             <section class="rb--related">
               <h2><img src="/assets/images/live/red-bull-neymar-jrs-five-2018/ttl_related.png" alt="">関連記事</h2>
               <ul>
@@ -261,6 +267,7 @@
                 </li>
               </ul>
             </section>
+            */ ?>
 
             <ul class="footer-rectangle">
               <li class="rb-hide-sp">

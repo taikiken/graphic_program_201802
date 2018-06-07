@@ -115,7 +115,7 @@
           <div class="main-sec">
             <div class="rb--intro">
 
-              <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+              <p>大自然の急斜面を下っていく、世界最高峰のマウンテンバイクシリーズ！世界中からエリートクラスの男女ライダーが集結し、頂点を競い合う。誰よりも速く丘を走り下りたライダーが優勝する、シンプルながらも過酷なレース。岩や巨木の障害物を乗り越え、時には大ジャンプしながら疾走するMTBの迫力の映像をお楽しみください。</p>
 
             </div>
             <div class="rb-appli">
@@ -135,10 +135,17 @@
               // -----------------------------------------
               ?>
 
+              <a href="https://www.redbull.com/jp-ja/events/uci-mtb-world-cup-2018" target="_blank">
+                <img src="/assets/images/live/uci-mtb-world-cup-2018/bnr_rb.png" alt="UCI MOUNTAIN BIKE WORLD CUP 2018 についてもっと知る" class="rb-hide-pc">
+                <img src="/assets/images/live/uci-mtb-world-cup-2018/bnr_rb_pc.png" alt="UCI MOUNTAIN BIKE WORLD CUP 2018 についてもっと知る" class="rb-hide-sp">
+              </a>
+
             </div>
 
             <section class="rb--timetable">
               <h2><img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
+              <p class="commingsoon">COMMING SOON...</p>
+              <!--
               <table>
                 <tbody>
                   <tr>
@@ -176,6 +183,7 @@
                 </tbody>
               </table>
               <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
+              -->
             </section>
 
             <?php if ($page['ua'] !== 'desktop') : ?>
@@ -214,6 +222,8 @@
               </div>
             <?php endif; ?>
 
+
+            <?php /*
             <section class="rb--related">
               <h2><img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_related.png" alt="">関連記事</h2>
               <ul>
@@ -245,6 +255,7 @@
                 </li>
               </ul>
             </section>
+            */ ?>
 
             <ul class="footer-rectangle">
               <li class="rb-hide-sp">

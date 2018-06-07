@@ -174,9 +174,9 @@ $color02: #f8fafc;
         padding-left: 10px;
         font-weight: bold;
         border-left: 2px solid $color01;
-        line-height: 2;
         @include mq-l {
           font-size: 20px;
+          line-height: 2;
         }
       }
     }
@@ -198,6 +198,13 @@ $color02: #f8fafc;
       @include mlr;
       h2 {
         @include title(186px, 310px);
+      }
+      p.commingsoon {
+        font-weight: bold;
+        font-size: 16px;
+        @include mq-l {
+          font-size: 20px;
+        }
       }
       table {
         width: 100%;
