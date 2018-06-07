@@ -144,7 +144,7 @@
 
             <section class="rb--rule">
               <h2>普通のサッカーとはここが違う！</h2>
-              <div class="rb--rule__movie">
+              <div class="rb--rule__movie rb-hide-sp">
                 <iframe src="https://www.redbullcontentpool.com/embed/video/5b152a04b60f6e00808749f9?_=1528113669114" frameborder="0" allowfullscreen></iframe>
               </div>
               <ul>
