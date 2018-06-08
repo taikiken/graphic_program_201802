@@ -23,6 +23,14 @@ if(!$bucket){
 	$bucket=sprintf("s3://%s/static/%s",$bucket,$dir);
 }
 
+/*
+	日程ファイルと試合詳細ファイルでチーム名の表記が異なる
+	日程：略称、試合詳細：フルネーム
+	
+	シーズンごとにリストに無い大学を追加する
+*/
+
+//試合日程のチームIDマッピング
 $univ["関学大"]=array("id"=>1,"name"=>"関西学院大学");
 $univ["立命館"]=array("id"=>2,"name"=>"立命館大学");
 $univ["関西大"]=array("id"=>3,"name"=>"関西大学");
@@ -31,19 +39,17 @@ $univ["甲南大"]=array("id"=>5,"name"=>"甲南大学");
 $univ["京都大"]=array("id"=>6,"name"=>"京都大学");
 $univ["桃山大"]=array("id"=>7,"name"=>"桃山学院大学");
 $univ["同志社"]=array("id"=>8,"name"=>"同志社大学");
-
 $univ["近畿大"]=array("id"=>9,"name"=>"近畿大学");
 $univ["神戸大"]=array("id"=>10,"name"=>"神戸大学");
 $univ["日本大"]=array("id"=>11,"name"=>"日本大学");
-
 $univ["関東学生3部選抜"]=array("id"=>12,"name"=>"関東学生3部選抜");
 $univ["関西学生Div.3選抜"]=array("id"=>13,"name"=>"関西学生Div.3選抜");
 $univ["関東学生2部選抜"]=array("id"=>14,"name"=>"関東学生2部選抜");
 $univ["関西学生Div.2選抜"]=array("id"=>15,"name"=>"関西学生Div.2選抜");
-
 $univ["大阪大"]=array("id"=>16,"name"=>"大阪大学");
 $univ["神院大"]=array("id"=>17,"name"=>"神戸学院大学");
 
+//試合詳細のチームIDマッピング
 $urev["関西学院大学"]=array("id"=>1,"name"=>"関学大");
 $urev["立命館大学"]=array("id"=>2,"name"=>"立命館");
 $urev["関西大学"]=array("id"=>3,"name"=>"関西大");
@@ -52,18 +58,15 @@ $urev["甲南大学"]=array("id"=>5,"name"=>"甲南大");
 $urev["京都大学"]=array("id"=>6,"name"=>"京都大");
 $urev["桃山学院大学"]=array("id"=>7,"name"=>"桃山大");
 $urev["同志社大学"]=array("id"=>8,"name"=>"同志社");
-
 $urev["近畿大学"]=array("id"=>9,"name"=>"近畿大");
 $urev["神戸大学"]=array("id"=>10,"name"=>"神戸大");
 $urev["日本大学"]=array("id"=>11,"name"=>"日本大");
-
-$univ["関東学生3部選抜"]=array("id"=>12,"name"=>"関東学生3部選抜");
-$univ["関西学生Div.3選抜"]=array("id"=>13,"name"=>"関西学生Div.3選抜");
-$univ["関東学生2部選抜"]=array("id"=>14,"name"=>"関東学生2部選抜");
-$univ["関西学生Div.2選抜"]=array("id"=>15,"name"=>"関西学生Div.2選抜");
-
-$univ["大阪大学"]=array("id"=>16,"name"=>"大阪大");
-$univ["神戸学院大学"]=array("id"=>17,"name"=>"神院大");
+$urev["関東学生3部選抜"]=array("id"=>12,"name"=>"関東学生3部選抜");
+$urev["関西学生Div.3選抜"]=array("id"=>13,"name"=>"関西学生Div.3選抜");
+$urev["関東学生2部選抜"]=array("id"=>14,"name"=>"関東学生2部選抜");
+$urev["関西学生Div.2選抜"]=array("id"=>15,"name"=>"関西学生Div.2選抜");
+$urev["大阪大学"]=array("id"=>16,"name"=>"大阪大");
+$urev["神戸学院大学"]=array("id"=>17,"name"=>"神院大");
 
 $map["#リーグ"]="league";
 $map["#日付け"]="date";
