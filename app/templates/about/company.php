@@ -37,7 +37,7 @@
   </script>
 </head>
 <body>
-<div class="whole">
+<div class="whole about">
   <section class="header">
     <div class="header__inner">
       <h1 class="header__heading"><a href="/"><img src="/assets/images/about/common/header-logo.png" alt="SPORTS BULL"></a></h1>
@@ -75,17 +75,17 @@
       </div><!-- /.company__vision -->
 
       <div class="company__mission">
-        <h2 class="company__vision__heading">MISSION</h2>
+        <h2 class="company__mission__heading">MISSION</h2>
         <ul>
           <li>スポーツの魅力を最大化し、豊かな社会、多様な文化を創る。</li>
           <li>アマチュア・ローカル・マイナースポーツの持つ力を掘り起こす。</li>
-          <li>スポーツの「見る」「する」「ささえる」の体験価値を高め、繋ぐ。</li>
+          <li>スポーツの「みる」「する」「ささえる」の体験価値を高め、繋ぐ。</li>
         </ul>
       </div><!-- /.company__vision -->
 
       <div class="company__identity">
-        <h2 class="company__vision__heading">IDENTITY</h2>
-        <p>もしスポーツに神様がいるのなら、<span>「ありがとう」と言ってもらえる会社、事業でありたい。</span></p>
+        <h2 class="company__identity__heading">IDENTITY</h2>
+        <p>もしスポーツに神様がいるのなら、<span>「ありがとう」と言ってもらえる</span>会社、事業でありたい。</p>
       </div><!-- /.company__vision -->
 
       <div class="company__overview">

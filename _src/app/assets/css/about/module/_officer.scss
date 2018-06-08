@@ -51,7 +51,7 @@
           h3 {
             font-size: 16px;
             font-weight: 800;
-            color: $highlight-color; 
+            color: $highlight-color;
             margin-top: 5px;
           }
 
@@ -104,12 +104,11 @@
                 background: $highlight-color;
               }
             }
-          } 
+          }
         }
 
         &.officer__pull__left {
           max-width: 900px;
-          float: left;
           margin-top: 120px;
 
           .officer__body__parts__img {
@@ -165,7 +164,7 @@
           width: 100%;
           overflow: hidden;
           text-align: center;
-          
+
           img {
             width: 150px;
           }
@@ -192,7 +191,7 @@
             font-size: 14px;
             font-weight: 800;
             text-align: center;
-            color: $highlight-color; 
+            color: $highlight-color;
             margin-top: 5px;
           }
 
@@ -241,6 +240,48 @@
 
       }
     }
+  &__outside {
+    background: rgba(#000, 0.05);
+    margin-left: -500%;
+    margin-right: -500%;
+    padding-left: 500%;
+    padding-right: 500%;
+    &__wrap {
+      display: flex;
+      flex-wrap: wrap;
+      &__parts {
+        display: flex;
+        justify-content: space-between;
+        width: 510px;
+        margin-bottom: 120px;
+        &:nth-child(odd) {
+          margin-right: 60px;
+        }
+        &__img {
+          width: 200px;
+          img {
+            width: 100%;
+          }
+        }
+        &__text {
+          width: 280px;
+          h2 {
+            color: $highlight-color;
+            font-weight: bold;
+            font-size: 18px;
+          }
+          h3 {
+            color: $highlight-color;
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 30px;
+          }
+        }
+      }
+    }
+
+  }
+
   }
 }
 

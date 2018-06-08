@@ -4,6 +4,19 @@
 //
 // design module index
 
+.whole.about {
+  @include screen('small') {
+    background: linear-gradient( to right, rgba(#fff,0.4),  rgba(#fff,0.4) ), url('/assets/images/about/common/bg_bullkun.svg');
+    background-repeat: repeat, no-repeat;
+    background-size: contain, 700px;
+    background-position: top, calc(50% + 230px) 150px;
+  }
+  @include screen('large') {
+    background: url('/assets/images/about/common/bg_bullkun.svg') no-repeat;
+    background-position: calc(50% + 880px) 90px;
+  }
+}
+
 .index {
 
   // .index__mainvisual

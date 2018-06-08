@@ -5,105 +5,185 @@
 // design module company
 
 @mixin company_section {
-  margin-bottom: 40px;
+  @include screen('small') {
+    width: 96%;
+    max-width: 550px;
+    margin: 0 auto 60px;
+  }
+  @include screen('large') {
+    margin-bottom: 200px;
+  }
+}
+
+@mixin company_serif {
+  font-family: "游明朝体", "Yu Mincho", YuMincho, "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+}
+
+@mixin company_padding {
+  padding: 0 10px;
 }
 
 @mixin company_title {
   line-height: lh(50, 40);
   color: $highlight-color;
-  color: red;
   font-family: helvetica;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 16px;
   position: relative;
   text-align: center;
+  margin-bottom: 30px;
+
+  @include screen('large') {
+    font-size: 32px;
+    margin-bottom: 70px;
+  }
+
   &:after {
     position: absolute;
     display: block;
     content: '';
-    width: 20px;
-    height: 2px;
+    width: 30px;
+    height: 3px;
     background: $highlight-color;
+    right: 50%;
+    bottom: -10px;
+    margin-right: -15px;
+    @include screen('large') {
+      width: 60px;
+      margin-right: -30px;
+      bottom: -20px;
+    }
   }
 }
+
+
 
 .company {
   // .company__vision
   &__vision {
     @include company_section;
+    padding-top: 70px;
     @include screen('large') {
       @extend %centerring_contents;
       margin-top: 76px;
-      &__heading {
-        @include company_title;
-      }
-      img {
-        margin: 0 auto;
-        display: block;
-      }
+
     }
-
-    @include screen('small') {
-      margin-top: (76/2)+px;
-      text-align: center;
-
-      &__heading {
-        line-height: lh(60, 50);
-        color: $highlight-color;
-        font-family: helvetica;
-        font-weight: bold;
-        font-size: (50/2)+px;
-      }
-
-      p {
-        margin-top: (56/2)+px;
-        line-height: lh(46, 28);
-        color: #272727;
-        font-weight: bold;
-        font-size: (28/2)+px;
-      }
+    &__heading {
+      @include company_title;
     }
-  }
-
-
-
-
-
-  // .company__key_visual
-  &__key_visual {
     img {
-      @include fluid-img(100%);
-    }
-
-    @include screen('large') {
-      margin-top: 100px;
-    }
-
-    @include screen('small') {
-      margin-top: (76/2)+px;
+      margin: 0 auto;
+      display: block;
+      @include screen('small') {
+        width: 100%;
+        max-width: 300px;
+        @include company_padding;
+      }
     }
   }
 
 
+  &__mission {
+    @include company_section;
+    &__heading {
+      @include company_title;
+    }
+    ul {
+      @include company_padding;
+      li {
+        color: $highlight-color;
+        font-weight: bold;
+        font-size: 16px;
+        position: relative;
+        padding-left: 10px;
+        @include screen('small') {
+          margin-bottom: 10px;
+        }
+        @include screen('large') {
+          font-size: 32px;
+          padding-left: 20px;
+          line-height: 1.8;
+        }
+        @include company_serif;
+        @include screen('large') {
+          &:nth-child(2) {
+            margin-left: 20px;
+          }
+          &:nth-child(3) {
+            margin-left: 40px;
+          }
+        }
 
+        &:before {
+          display: inline-block;
 
+        }
+        &:after {
+          position: absolute;
+          content: '';
+          display: block;
+          width: 6px;
+          height: 6px;
+          top: 0.9em;
+          left: 0;
+          margin-top: -4px;
+          background: $highlight-secondary-color;
+          @include screen('large') {
+            top: 50%;
+            width: 8px;
+            height: 8px;
+          }
+        }
+      }
+    }
+    @include screen('large') {
+      @extend %centerring_contents;
+    }
+  }
+
+  &__identity {
+    @include company_section;
+    &__heading {
+      @include company_title;
+    }
+    p {
+      @include company_serif;
+      text-align: center;
+      font-size: 18px;
+      color : $highlight-color;
+      font-weight: bold;
+      span:before {
+        content: "\A";
+        white-space: pre;
+      }
+      @include screen('small') {
+        span:after {
+          content: "\A";
+          white-space: pre;
+        }
+      }
+      @include screen('large') {
+        font-size: 40px;
+      }
+    }
+    @include screen('large') {
+      @extend %centerring_contents;
+    }
+  }
 
   // .company__overview
   &__overview {
+    &__heading {
+      @include company_title;
+
+      span:before {
+        content: ' ';
+      }
+    }
     @include screen('large') {
       @extend %centerring_contents;
       margin-top: 100px;
       overflow: hidden;
-
-      &__heading {
-        float: left;
-        line-height: lh(50, 40);
-        color: $highlight-color;
-        font-family: helvetica;
-        font-weight: bold;
-        font-size: 40px;
-      }
-
       &__data {
         float: right;
         width: 720px;
@@ -122,9 +202,11 @@
           dt {
             display: inline-block;
             float: left;
+            line-height: 1.8;
           }
           dd {
             margin-left: 120px;
+            line-height: 1.8;
           }
         }
       }
@@ -132,15 +214,6 @@
 
     @include screen('small') {
       margin-top: (76/2)+px;
-
-      &__heading {
-        line-height: lh(60, 50);
-        color: $highlight-color;
-        font-family: helvetica;
-        font-weight: bold;
-        font-size: (50/2)+px;
-        text-align: center;
-      }
 
       &__data {
         width: perCalc(560, 640);
