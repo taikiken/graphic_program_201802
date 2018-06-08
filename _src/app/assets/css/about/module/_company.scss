@@ -4,30 +4,42 @@
 //
 // design module company
 
+@mixin company_section {
+  margin-bottom: 40px;
+}
+
+@mixin company_title {
+  line-height: lh(50, 40);
+  color: $highlight-color;
+  color: red;
+  font-family: helvetica;
+  font-weight: bold;
+  font-size: 40px;
+  position: relative;
+  text-align: center;
+  &:after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 20px;
+    height: 2px;
+    background: $highlight-color;
+  }
+}
+
 .company {
   // .company__vision
   &__vision {
+    @include company_section;
     @include screen('large') {
       @extend %centerring_contents;
       margin-top: 76px;
-      overflow: hidden;
-
       &__heading {
-        float: left;
-        line-height: lh(50, 40);
-        color: $highlight-color;
-        font-family: helvetica;
-        font-weight: bold;
-        font-size: 40px;
+        @include company_title;
       }
-
-      p {
-        float: right;
-        width: 720px;
-        line-height: lh(46, 24);
-        color: #272727;
-        font-weight: bold;
-        font-size: 24px;
+      img {
+        margin: 0 auto;
+        display: block;
       }
     }
 

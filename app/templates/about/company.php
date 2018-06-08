@@ -70,22 +70,26 @@
       <h1 class="common__heading"><span>会社概要</span></h1>
 
       <div class="company__vision">
-        <h2 class="company__vision__heading">CORPORATE<br />
-        VISION</h2>
-
-        <p>スポーツインターネットメディアが <br class="show-for-small" />
-        できることを最大化し、<br />
-        日本のスポーツ文化を底上げし、<br />
-        よりスポーツを楽しめる環境をつくります。</p>
+        <h2 class="company__vision__heading">VISION</h2>
+        <img src="/assets/images/about/company/vision.svg" alt="日本を世界が憧れるスポーツ大国にする。">
       </div><!-- /.company__vision -->
 
-      <div class="company__key_visual">
-        <img src="/assets/images/about/company/kv.jpg" alt="">
-      </div><!-- /.company__key_visual -->
+      <div class="company__mission">
+        <h2 class="company__vision__heading">MISSION</h2>
+        <ul>
+          <li>スポーツの魅力を最大化し、豊かな社会、多様な文化を創る。</li>
+          <li>アマチュア・ローカル・マイナースポーツの持つ力を掘り起こす。</li>
+          <li>スポーツの「見る」「する」「ささえる」の体験価値を高め、繋ぐ。</li>
+        </ul>
+      </div><!-- /.company__vision -->
+
+      <div class="company__identity">
+        <h2 class="company__vision__heading">IDENTITY</h2>
+        <p>もしスポーツに神様がいるのなら、<span>「ありがとう」と言ってもらえる会社、事業でありたい。</span></p>
+      </div><!-- /.company__vision -->
 
       <div class="company__overview">
-        <h2 class="company__overview__heading">COMPANY<br />
-        OVERVIEW</h2>
+        <h2 class="company__overview__heading">COMPANY OVERVIEW</h2>
 
         <div class="company__overview__data">
           <table>
