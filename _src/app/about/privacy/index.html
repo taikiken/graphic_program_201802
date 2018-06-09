@@ -267,5 +267,23 @@
   </section><!-- /.footer -->
 </div><!-- /.whole -->
 <script src="/assets/js/about.bundle.js"></script>
+
+<!-- ハンバーガーメニュー -->
+<script>
+$(function() {
+    $('#js-header__btn--toggle').click(function() {
+        $(this).toggleClass('active');
+        if ($(this).hasClass('active')) {
+            $('#js-header__nav').addClass('active');
+        } else {
+            $('#js-header__nav').removeClass('active');
+        }
+    });
+    $('#js-header__btn--close').click(function() {
+        $('#js-header__btn--toggle,#js-header__nav').removeClass('active');
+    });
+});
+</script>
+
 </body>
 </html>

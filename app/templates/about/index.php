@@ -66,16 +66,19 @@
 
     <section class="body">
         <div class="body__inner">
-            <div class="index__main_visual"><img src="/assets/images/about/index/mv.jpg" alt=""></div>
+            <div class="index__main_visual"><img src="/assets/images/about/index/mv02.jpg" alt=""></div>
 
             <div class="index__overview">
                 <figure class="index__overview__figure"><img src="/assets/images/about/index/overview-logo.png" alt="SPORTS BULL"></figure>
                 <div class="index__overview__text">
                     <h2>スポーツブルは、<br />
                         インターネットスポーツメディアです。</h2>
-                    <p>数十社の良質なスポーツ媒体と連携し、<br class="hide-for-small" />話題のスポーツニュース記事、動画をいち早くお届けします。<br />
-                        また、ここでしか見ることの出来ないオリジナル記事や番組を配信しています。<br />
-                        スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。</p>
+                    <p>
+                        60社を超える良質なスポーツ媒体と連携し、<br class="hide-for-small" />話題のスポーツニュース記事、動画をいち早くお届けします。<br />
+                        40種類以上の幅広い競技、プロだけでなくアマチュアスポーツの情報も豊富です。<br />
+                        また、ここでしか見ることの出来ないライブ中継やオリジナル番組も配信しています。<br />
+                        スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。
+                    </p>
                 </div><!-- /.index__overview__text -->
             </div><!-- /.index__overview -->
 
@@ -170,5 +173,23 @@
     </section><!-- /.footer -->
 </div><!-- /.whole -->
 <script src="/assets/js/about.bundle.js"></script>
+
+<!-- ハンバーガーメニュー -->
+<script>
+$(function() {
+    $('#js-header__btn--toggle').click(function() {
+        $(this).toggleClass('active');
+        if ($(this).hasClass('active')) {
+            $('#js-header__nav').addClass('active');
+        } else {
+            $('#js-header__nav').removeClass('active');
+        }
+    });
+    $('#js-header__btn--close').click(function() {
+        $('#js-header__btn--toggle,#js-header__nav').removeClass('active');
+    });
+});
+</script>
+
 </body>
 </html>

@@ -208,6 +208,15 @@
             margin-left: 120px;
             line-height: 1.8;
           }
+          a {
+            color: $highlight-color;
+            display: inline-block;
+          }
+        }
+        &__member {
+          a {
+            margin-top: 5px;
+          }
         }
       }
     }
@@ -241,10 +250,17 @@
             margin-left: 120px;
             text-align: left;
           }
+          a {
+            color: $highlight-color;
+            display: inline-block;
+          }
         }
         &__member {
           display: table!important;
-          margin: auto;
+          margin: 0 auto 5px;
+          a {
+            margin-top: 5px;
+          }
         }
       }
     }

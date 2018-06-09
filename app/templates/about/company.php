@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=2" />
+  <meta name="format-detection" content="telephone=no">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <!--<script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="9" data-firefox="44" data-ie="11" data-edge="13"></script>-->
   <title>会社概要 | スポーツブル / SPORTS BULL</title>
@@ -108,7 +109,7 @@
               </tr>
               <tr>
                 <th>電話番号</th>
-                <td>03-3403-6651</td>
+                <td><a href="tel:0334036651">03-3403-6651</a></td>
               </tr>
               <tr>
                 <th>役員</th>
@@ -121,6 +122,7 @@
                   <dt>社外取締役</dt><dd>中村 大輔</dd>
                   <dt>執行役員</dt><dd>高石 雄大</dd>
                   <dt>監査役</dt><dd>熊倉 次郎</dd>
+                  <a href="/about/officer/">役員紹介はこちら</a>
                 </td>
               </tr>
               <tr>
@@ -167,5 +169,23 @@
   </section><!-- /.footer -->
 </div><!-- /.whole -->
 <script src="/assets/js/about.bundle.js"></script>
+
+<!-- ハンバーガーメニュー -->
+<script>
+$(function() {
+    $('#js-header__btn--toggle').click(function() {
+        $(this).toggleClass('active');
+        if ($(this).hasClass('active')) {
+            $('#js-header__nav').addClass('active');
+        } else {
+            $('#js-header__nav').removeClass('active');
+        }
+    });
+    $('#js-header__btn--close').click(function() {
+        $('#js-header__btn--toggle,#js-header__nav').removeClass('active');
+    });
+});
+</script>
+
 </body>
 </html>

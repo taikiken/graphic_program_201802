@@ -46,7 +46,15 @@
             font-size: 24px;
             font-weight: 800;
             color: $highlight-color;
+            line-height: 1;
+            .reading {
+              font-size: 10px;
+              color: #999;
+              font-weight: bold;
+              padding-left: 10px;
+            }
           }
+
 
           h3 {
             font-size: 16px;
@@ -85,6 +93,11 @@
 
             h2 {
               margin-top: 5px;
+              .reading {
+                font-size: 10px;
+                color: #999;
+                font-weight: bold;
+              }
             }
 
             &__btn {
@@ -166,7 +179,7 @@
           text-align: center;
 
           img {
-            width: 150px;
+            width: 200px;
           }
         }
 
@@ -174,7 +187,6 @@
           width: 100%;
           text-align: left;
           padding: 10px 6.25% 15px 6.25%;
-          background: #fff;
 
           &__sp {
             display: none;
@@ -185,6 +197,13 @@
             font-weight: 800;
             text-align: center;
             color: $highlight-color;
+            line-height: 1;
+            .reading {
+              font-size: 10px;
+              color: #999;
+              font-weight: bold;
+              display: block;
+            }
           }
 
           h3 {
@@ -240,48 +259,72 @@
 
       }
     }
+  }
   &__outside {
     background: rgba(#000, 0.05);
-    margin-left: -500%;
-    margin-right: -500%;
-    padding-left: 500%;
-    padding-right: 500%;
+    margin-top: 80px;
+    @include screen('large') {
+      margin-top: 120px;
+    }
     &__wrap {
-      display: flex;
-      flex-wrap: wrap;
-      &__parts {
+      padding-top: 80px;
+      @include screen('large') {
         display: flex;
-        justify-content: space-between;
-        width: 510px;
-        margin-bottom: 120px;
-        &:nth-child(odd) {
-          margin-right: 60px;
+        flex-wrap: wrap;
+        width: 1080px;
+        margin: 0 auto;
+        padding-top: 120px;
+      }
+      &__parts {
+          padding-bottom: 80px;
+        @include screen('large') {
+          display: flex;
+          justify-content: space-between;
+          width: 510px;
+          padding-bottom: 120px;
+          &:nth-child(odd) {
+            margin-right: 60px;
+          }
         }
         &__img {
-          width: 200px;
+          width: 150px;
+          @include screen('small') {
+            margin: 0 auto;
+          }
+          @include screen('large') {
+            width: 200px;
+          }
           img {
             width: 100%;
           }
         }
         &__text {
-          width: 280px;
+          @include screen('small') {
+            padding: 10px 6.25% 15px 6.25%;
+          }
+          @include screen('large') {
+            width: 280px;
+          }
           h2 {
             color: $highlight-color;
             font-weight: bold;
             font-size: 18px;
+            @include screen('small') {
+              text-align: center;
+            }
           }
           h3 {
             color: $highlight-color;
             font-weight: bold;
             font-size: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
+            @include screen('small') {
+              text-align: center;
+            }
           }
         }
       }
     }
-
-  }
-
   }
 }
 

@@ -10,6 +10,9 @@
     background-repeat: repeat, no-repeat;
     background-size: contain, 700px;
     background-position: top, calc(50% + 230px) 150px;
+    &.ushi_bottom {
+      background-position: top, calc(50% + 230px) 350px;
+    }
   }
   @include screen('large') {
     background: url('/assets/images/about/common/bg_bullkun.svg') no-repeat;
@@ -56,7 +59,7 @@
 
       &__text {
         float: right;
-        width: 600px;
+        width: 640px;
 
         h2 {
           line-height: lh(42, 34);
