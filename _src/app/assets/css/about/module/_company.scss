@@ -76,7 +76,7 @@
       display: block;
       @include screen('small') {
         width: 100%;
-        max-width: 300px;
+        max-width: 260px;
         @include company_padding;
       }
     }
