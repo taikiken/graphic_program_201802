@@ -105,10 +105,12 @@
             <img src="/assets/images/live/crankworx-world-tour-2018/ttl_rb_pc.png" alt="" class="rb-hide-sp">
         </div>
         <div class="rb--movie">
+          <!--
           <div id="VideoPlayer">
             <div id="placeHolder"></div>
           </div>
-          <!-- <img src="/assets/images/live/crankworx-world-tour-2018/rb_announce.png" alt=""> -->
+          -->
+          <img src="/assets/images/live/crankworx-world-tour-2018/rb_announce.png" alt="">
         </div>
 
         <div class="body-sec-inner">
