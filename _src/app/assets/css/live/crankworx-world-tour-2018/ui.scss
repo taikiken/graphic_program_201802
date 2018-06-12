@@ -108,6 +108,25 @@ $color02: #f8fafc;
     }
   }
 
+  .embed--movie {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    margin-bottom: 40px;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    small {
+      display: block;
+      text-align: right;
+      opacity: 0.5;
+    }
+  }
+
   .rb--head {
     padding: 20px 5px;
     @include mq-l {
@@ -203,24 +222,6 @@ $color02: #f8fafc;
         color: $color01;
         @include mq-l {
           font-size: 24px;
-        }
-      }
-      &__movie {
-        position: relative;
-        width: 100%;
-        padding-top: 56.25%;
-        margin-bottom: 40px;
-        iframe {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        }
-        small {
-          display: block;
-          text-align: right;
-          opacity: 0.5;
         }
       }
       ul {

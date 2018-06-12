@@ -4,7 +4,7 @@
 // ==============================
 $app->group('/live/crankworx-world-tour-2018',  function () use($app) {
 
-  $category = $app->model->get_category_by_slug('soccer');
+  $category = $app->model->get_category_by_slug('extremesports');
   $page = array(
     'title'              => 'CRANKWORX SLOPESTYLE 2018 ライブ配信',
     'og_title'           => 'CRANKWORX SLOPESTYLE 2018 ライブ配信 | '.$app->model->property('title'),
