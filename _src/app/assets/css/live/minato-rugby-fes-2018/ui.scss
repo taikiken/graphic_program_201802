@@ -17,7 +17,7 @@
 @import "../../layout";
 
 
-$color01: #cc0007;
+$color01: #172a88;
 $color02: #f8fafc;
 
 @mixin mq-s {
@@ -50,6 +50,7 @@ $color02: #f8fafc;
   font-weight: bold;
   font-size: 12px;
   padding-bottom: 20px;
+  color: $color01;
   @include mq-l {
     font-size: 14px;
   }
@@ -63,7 +64,7 @@ $color02: #f8fafc;
 }
 
 @mixin bg {
-  background: #222;
+  background: #fff;
 }
 
 @mixin bb {
@@ -78,12 +79,12 @@ $color02: #f8fafc;
   }
 }
 
-.rb-hide-sp {
+.live-hide-sp {
   @include mq-s {
     display: none!important;
   }
 }
-.rb-hide-pc {
+.live-hide-pc {
   @include mq-l {
     display: none!important;
   }
@@ -91,7 +92,7 @@ $color02: #f8fafc;
 
 #whole.minato-rugby-fes-2018 {
   @include bg;
-  color: #fff;
+  color: #515769;
   @include mq-s {
     min-width: auto;
   }
@@ -108,7 +109,7 @@ $color02: #f8fafc;
     }
   }
 
-  .rb--head {
+  .live--head {
     padding: 20px 5px;
     @include mq-l {
       width: 1090px;
@@ -122,7 +123,7 @@ $color02: #f8fafc;
       }
     }
   }
-  .rb--movie {
+  .live--movie {
     @include mb;
     @include mq-l {
       width: 1090px;
@@ -167,20 +168,16 @@ $color02: #f8fafc;
         }
       }
     }
-    .rb--intro {
+    .live--about {
+      h2 {
+        @include title(100px, 100px);
+      }
       margin-bottom: 40px;
       @include mlr;
       p {
-        padding-left: 10px;
-        font-weight: bold;
-        border-left: 2px solid $color01;
-        @include mq-l {
-          font-size: 20px;
-          line-height: 2;
-        }
       }
     }
-    .rb-appli {
+    .live-appli {
       @include mb;
       @include mlr;
       a {
@@ -193,7 +190,7 @@ $color02: #f8fafc;
         }
       }
     }
-    .rb--timetable {
+    .live--timetable {
       @include mb;
       @include mlr;
       h2 {
@@ -210,7 +207,9 @@ $color02: #f8fafc;
         width: 100%;
         tbody {
           tr {
-            @include bb;
+            background:linear-gradient(90deg, #fff, #88aad4);
+            margin-bottom: 5px;
+            display: block;
             &:not(:first-child) {
               th,td {
                 padding-top: 10px;
@@ -222,13 +221,15 @@ $color02: #f8fafc;
               font-weight: bold;
               padding-right: 10px;
               font-size: 16px;
+              color: #172a88;
               @include mq-l {
-                font-size: 20px;
+                font-size: 40px;
                 padding-right: 20px;
               }
             }
             td {
               //font-size: 12px;
+              font-weight: bold;
               @include mq-l {
                 font-size: 16px;
               }
@@ -241,13 +242,31 @@ $color02: #f8fafc;
         margin-top: 10px;
       }
     }
-    .rb--banner {
+    .live--team {
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+          width: 50%;
+          img {
+            display: block;
+          }
+          h3 {
+            font-weight: bold;
+            font-size: 24px;
+          }
+
+        }
+      }
+    }
+    .live--banner {
       @include mb;
       div {
         margin: auto;
       }
     }
-    .rb--related {
+    .live--related {
       @include mb;
       @include mlr;
       h2 {
@@ -267,7 +286,7 @@ $color02: #f8fafc;
             justify-content: space-between;
             padding-bottom: 10px;
             &.movie {
-              .rb--related__image-wrap:before {
+              .live--related__image-wrap:before {
                 content: "";
                 position: absolute;
                 top: 50%;
