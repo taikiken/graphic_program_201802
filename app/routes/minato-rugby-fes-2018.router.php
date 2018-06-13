@@ -4,7 +4,7 @@
 // ==============================
 $app->group('/live/minato-rugby-fes-2018',  function () use($app) {
 
-  $category = $app->model->get_category_by_slug('soccer');
+  $category = $app->model->get_category_by_slug('rugby');
   $page = array(
     'title'              => '秩父宮みなとラグビーまつり2018 ライブ配信',
     'og_title'           => '秩父宮みなとラグビーまつり2018 ライブ配信 | '.$app->model->property('title'),

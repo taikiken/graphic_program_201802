@@ -101,8 +101,8 @@
     <div class="body-sec">
       <div class="bg-container">
         <div class="live--head">
-            <img src="/assets/images/live/minato-rugby-fes-2018/ttl_rb.png" alt="" class="live-hide-pc">
-            <img src="/assets/images/live/minato-rugby-fes-2018/ttl_rb_pc.png" alt="" class="live-hide-sp">
+            <img src="/assets/images/live/minato-rugby-fes-2018/ttl_live.png" alt="" class="live-hide-pc">
+            <img src="/assets/images/live/minato-rugby-fes-2018/ttl_live_pc.png" alt="" class="live-hide-sp">
         </div>
         <div class="live--movie">
           <!--
@@ -115,183 +115,6 @@
 
         <div class="body-sec-inner">
           <div class="main-sec">
-            <div class="live--about">
-              <h2>イベント概要</h2>
-              <p>
-                オーストラリアと日本のトップチームが対決！NECグリーンロケッツvsワラターズ、サントリーサンゴリアスvsブランビーズのワールドクラス２試合を日本初の同日開催！<br />
-                ラグビーの聖地、秩父宮ラグビー場で行われる大迫力のフレンドリーマッチをお楽しみください。
-              </p>
-
-              <div class="embed--movie rb-hide-sp">
-                <iframe src="https://www.youtube.com/embed/mEBU60B7Bwg?modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-
-            </div>
-            <div class="live-appli">
-
-              <?php
-              // app in webview 時に .head-sec を非表示にする
-                if (!$from_webview) :
-              ?>
-
-                <a href="https://app.adjust.com/tv698b4" target="_blank">
-                  <img src="/assets/images/live/minato-rugby-fes-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-pc">
-                  <img src="/assets/images/live/minato-rugby-fes-2018/bnr_spbl_app_pc.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-sp">
-                </a>
-
-              <?php
-                endif;
-              // -----------------------------------------
-              ?>
-
-              <a href="https://www.redbull.com/jp-ja/events/neymar-jrs-five" target="_blank">
-                <img src="/assets/images/live/minato-rugby-fes-2018/bnr_rb.png" alt="秩父宮みなとラグビーまつり2018 についてもっと知る" class="rb-hide-pc">
-                <img src="/assets/images/live/minato-rugby-fes-2018/bnr_rb_pc.png" alt="秩父宮みなとラグビーまつり2018 についてもっと知る" class="rb-hide-sp">
-              </a>
-
-            </div>
-
-            <!--
-            <section class="live--rule">
-              <h2>普通のサッカーとはここが違う！</h2>
-              <div class="live--rule__movie rb-hide-sp">
-                <iframe src="https://www.redbullcontentpool.com/embed/video/5b152a04b60f6e00808749f9?_=1528113669114" frameborder="0" allowfullscreen></iframe>
-                <small>©Red Bull Media House</small>
-              </div>
-              <ul>
-                <li>30m x 18mのコートで行う</li>
-                <li>人数は5人でキーパーはいない</li>
-                <li>ゴール前のボックス内に入ってはダメ</li>
-                <li>1点追加するごとに相手チームは1人退場</li>
-                <li>試合時間は10分間</li>
-                <li>同点の場合は、1 on 1で対決</li>
-                <li>5点先取するか、試合終了までに多くの点を取ったチームが勝ち！</li>
-              </ul>
-            </section>
-          -->
-
-            <section class="live--timetable">
-              <h2><img src="/assets/images/live/minato-rugby-fes-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
-              <table>
-                <tbody>
-                  <tr>
-                    <th>10:00</th>
-                    <td>配信開始</td>
-                  </tr>
-                  <tr>
-                    <th>11:00</th>
-                    <td>NECグリーンロケッツvsワラターズ</td>
-                  </tr>
-                  <tr>
-                    <th>14:00</th>
-                    <td>サントリーサンゴラスvsNECグリーンロケッツ</td>
-                  </tr>
-                  <tr>
-                    <th>17:00</th>
-                    <td>配信終了</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
-            </section>
-
-            <section class="live--team">
-              <h2><img src="/assets/images/live/minato-rugby-fes-2018/ttl_timetable.png" alt="">チーム紹介</h2>
-              <ul>
-                <li>
-                  <img src="" alt="">
-                  <h3>NECグリーンロケッツ</h3>
-                  <p>
-                    ジャパンラグビートップリーグに所属する、日本電気株式会社のラグビーフットボールチームで、創設は1985年。本拠地を千葉県我孫子市に構える。英語表記は「NEC Green Rockets」。獲得したタイトルは計5回。2003-04年シーズンのマイクロソフトカップではトップリーグ1位の神戸製鋼コベルコスティーラーズを破り、初代カップチャンピオンに輝いた。<br />
-                    2004-05年度は、日本選手権でトヨタ自動車ヴェルブリッツとの大接戦を制し2年ぶりに日本一のタイトルを奪還。2005-06年度の日本選手権でも東芝府中ブレイブルーパスと優勝を分け合い、連覇を達成した。ディフェンスとセットプレーに定評がある。チーム名のグリーンは、鮮やかな緑の芝を疾走する戦う男達を表し、ロケッツは、21世紀をリードするNECのイメージの象徴。パワー、スピードを兼ね備え、未来へと力強く推進し上昇していく様を表現している。
-                  </p>
-                </li>
-
-                <li>
-                  <img src="" alt="">
-                  <h3>ワラターズ</h3>
-                  <p>
-                    正式名称はThe New South Wales Waratahs。日本語では「ワラターズ」と呼ばれる。<br />
-                    スーパーラグビーに参加するオーストラリアのラグビーユニオンチームで、創立は1996年。本拠地はシドニー。州内ラグビーユニオンクラブ所属の選手と契約選手から選抜された選手によって構成されており、2014年には初のスーパーラグビー優勝を果たした。クラブ名は、アボリニジニの言葉で赤い花を表す「ワラタ」という言葉からとられた。<br />
-                    2017年6月「秩父宮みなとラグビーまつり2017」では、サントリーサンゴリアスとの激戦を制した。選手たちはとても親日的かつプロフェッショナルとしての意識が高く、2017年来日時は、試合以外に、港区等の小学校におけるラグビー講座や、大臣への表敬訪問、八芳園での歓迎レセプション等へ積極的に参加し、限られた時間の中で、子どもから大人まで親睦を深めた。
-                  </p>
-                </li>
-
-                <li>
-                  <img src="" alt="">
-                  <h3>サントリーサンゴリアス</h3>
-                  <p>
-                    ジャパンラグビートップリーグに所属する、サントリーホールディングス株式会社のラグビーフットボールチームで、創設は1980年。本拠地を東京都府中市に構える。英語表記は「SUNTORY SUNGOLIATH」。『AGGRESSIVEATTACKING RUGBY』をチームスタイルとし、「日本No.1の攻撃型ラグビー」かつ「日本No.1のファイティングスピリッツ」を特徴に掲げている。獲得したタイトルは計13回を誇り、 2017-2018年度トップリーグ、第55回　日本ラグビーフットボール選手権大会において優勝。2年連続の２冠獲得を達成した。チーム名のサンゴリアスは、サントリーの“サン”、太陽の“SUN”と巨人「ゴリアス(GOLIATH)」が由来。「ゴリアス」は、巨人・ゴリアテを意味し、ゴリラは、「タフネス」「テンダー」「スピリチュアル」を象徴している。
-                  </p>
-                </li>
-
-
-                <li>
-                  <img src="" alt="">
-                  <h3>NEC グリーンロケッツ</h3>
-                  <p>
-                    ジャパンラグビートップリーグに所属する、日本電気株式会社のラグビーフットボールチームで、創設は1985年。本拠地を千葉県我孫子市に構える。英語表記は「NEC Green Rockets」。獲得したタイトルは計5回。2003-04年シーズンのマイクロソフトカップではトップリーグ1位の神戸製鋼コベルコスティーラーズを破り、初代カップチャンピオンに輝いた。<br />
-                    2004-05年度は、日本選手権でトヨタ自動車ヴェルブリッツとの大接戦を制し2年ぶりに日本一のタイトルを奪還。2005-06年度の日本選手権でも東芝府中ブレイブルーパスと優勝を分け合い、連覇を達成した。ディフェンスとセットプレーに定評がある。チーム名のグリーンは、鮮やかな緑の芝を疾走する戦う男達を表し、ロケッツは、21世紀をリードするNECのイメージの象徴。パワー、スピードを兼ね備え、未来へと力強く推進し上昇していく様を表現している。
-                  </p>
-                </li>
-              </ul>
-            </section>
-
-
-            <section class="live--overview">
-              <h2><img src="/assets/images/live/minato-rugby-fes-2018/ttl_timetable.png" alt="">イベント概要</h2>
-              <table>
-                <tbody>
-                  <tr>
-                    <th>大会名</th>
-                    <td>秩父宮みなとラグビーまつり2018 Supported by SUNTORY</td>
-                  </tr>
-                  <tr>
-                    <th>開催日</th>
-                    <td>2018年　6月17日（日）</td>
-                  </tr>
-                  <tr>
-                    <th>開催場所</th>
-                    <td>秩父宮ラグビー場（東京都港区北青山2－8－35）</td>
-                  </tr>
-                  <tr>
-                    <th>主 催</th>
-                    <td>公益財団法人日本ラグビーフットボール協会</td>
-                  </tr>
-                  <tr>
-                    <th>主 管</th>
-                    <td>関東ラグビーフットボール協会</td>
-                  </tr>
-                  <tr>
-                    <th>主 管</th>
-                    <td>関東ラグビーフットボール協会</td>
-                  </tr>
-
-
-                  <tr>
-                    <th>後 援</th>
-                    <td>秩父宮みなとラグビーまつり2018実行委員会</td>
-                  </tr>
-
-                  <tr>
-                    <th>内容</th>
-                    <td>
-                      <ul>
-                        <li>フレンドシップマッチ　２試合開催</li>
-                        <Li>ウェルカムレセプションパーティー</Li>
-                        <Li>聖地体験プログラム</Li>
-                        <li>スタジアム通り＆絵画館前通りイベント</li>
-                      </ul>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th>WEB</th>
-                    <td><a href="http://chichibunomiya-minato-rugby-fes.jp/" target="_blank">秩父宮みなとラグビーまつり2018 公式サイト</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
 
             <?php if ($page['ua'] !== 'desktop') : ?>
               <div class="live--banner">
@@ -329,6 +152,172 @@
               </div>
             <?php endif; ?>
 
+            <div class="live--about">
+              <h2><img src="/assets/images/live/minato-rugby-fes-2018/ttl_about.png" alt="ABOUT">イベント概要</h2>
+              <p>
+                オーストラリアと日本のトップチームが対決！NECグリーンロケッツvsワラターズ、サントリーサンゴリアスvsブランビーズのワールドクラス２試合を日本初の同日開催！<br />
+                ラグビーの聖地、秩父宮ラグビー場で行われる大迫力のフレンドリーマッチをお楽しみください。
+              </p>
+              <div class="embed--movie live-hide-sp">
+                <iframe src="https://www.youtube.com/embed/mEBU60B7Bwg?modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+
+            </div>
+            <div class="live-appli">
+
+              <?php
+              // app in webview 時に .head-sec を非表示にする
+                if (!$from_webview) :
+              ?>
+
+                <a href="https://app.adjust.com/tv698b4" target="_blank">
+                  <img src="/assets/images/live/minato-rugby-fes-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="live-hide-pc">
+                  <img src="/assets/images/live/minato-rugby-fes-2018/bnr_spbl_app_pc.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="live-hide-sp">
+                </a>
+
+              <?php
+                endif;
+              // -----------------------------------------
+              ?>
+
+            </div>
+
+            <!--
+            <section class="live--rule">
+              <h2>普通のサッカーとはここが違う！</h2>
+              <div class="live--rule__movie live-hide-sp">
+                <iframe src="https://www.redbullcontentpool.com/embed/video/5b152a04b60f6e00808749f9?_=1528113669114" frameborder="0" allowfullscreen></iframe>
+                <small>©Red Bull Media House</small>
+              </div>
+              <ul>
+                <li>30m x 18mのコートで行う</li>
+                <li>人数は5人でキーパーはいない</li>
+                <li>ゴール前のボックス内に入ってはダメ</li>
+                <li>1点追加するごとに相手チームは1人退場</li>
+                <li>試合時間は10分間</li>
+                <li>同点の場合は、1 on 1で対決</li>
+                <li>5点先取するか、試合終了までに多くの点を取ったチームが勝ち！</li>
+              </ul>
+            </section>
+          -->
+
+            <section class="live--timetable">
+              <h2><img src="/assets/images/live/minato-rugby-fes-2018/ttl_timetable.png" alt="TIMETABLE">タイムテーブル</h2>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>10:00</th>
+                    <td>配信開始</td>
+                  </tr>
+                  <tr>
+                    <th>11:00</th>
+                    <td>NECグリーンロケッツ vs ワラターズ</td>
+                  </tr>
+                  <tr>
+                    <th>14:00</th>
+                    <td>サントリーサンゴリアス vs ブランビーズ</td>
+                  </tr>
+                  <tr>
+                    <th>17:00</th>
+                    <td>配信終了</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
+            </section>
+
+            <section class="live--team">
+              <h2><img src="/assets/images/live/minato-rugby-fes-2018/ttl_team.png" alt="TEAM">チーム紹介</h2>
+              <ul id="accordion">
+                <li>
+                  <img src="/assets/images/live/minato-rugby-fes-2018/img_greenrockets.png" alt="NECグリーンロケッツ">
+                  <h3>NECグリーンロケッツ</h3>
+                  <div class="detail">
+                    <div class="detail__button live-hide-pc">チーム詳細を見る</div>
+                    <p>
+                      ジャパンラグビートップリーグに所属する、日本電気株式会社のラグビーフットボールチームで、創設は1985年。本拠地を千葉県我孫子市に構える。英語表記は「NEC Green Rockets」。獲得したタイトルは計5回。2003-04年シーズンのマイクロソフトカップではトップリーグ1位の神戸製鋼コベルコスティーラーズを破り、初代カップチャンピオンに輝いた。<br />
+                      2004-05年度は、日本選手権でトヨタ自動車ヴェルブリッツとの大接戦を制し2年ぶりに日本一のタイトルを奪還。2005-06年度の日本選手権でも東芝府中ブレイブルーパスと優勝を分け合い、連覇を達成した。ディフェンスとセットプレーに定評がある。チーム名のグリーンは、鮮やかな緑の芝を疾走する戦う男達を表し、ロケッツは、21世紀をリードするNECのイメージの象徴。パワー、スピードを兼ね備え、未来へと力強く推進し上昇していく様を表現している。
+                    </p>
+                  </div>
+
+                </li>
+
+                <li>
+                  <img src="/assets/images/live/minato-rugby-fes-2018/img_waratahs.png" alt="ワラターズ">
+                  <h3>ワラターズ</h3>
+                  <div class="detail">
+                    <div class="detail__button live-hide-pc">チーム詳細を見る</div>
+                    <p>
+                      正式名称はThe New South Wales Waratahs。日本語では「ワラターズ」と呼ばれる。<br />
+                      スーパーラグビーに参加するオーストラリアのラグビーユニオンチームで、創立は1996年。本拠地はシドニー。州内ラグビーユニオンクラブ所属の選手と契約選手から選抜された選手によって構成されており、2014年には初のスーパーラグビー優勝を果たした。クラブ名は、アボリニジニの言葉で赤い花を表す「ワラタ」という言葉からとられた。<br />
+                      2017年6月「秩父宮みなとラグビーまつり2017」では、サントリーサンゴリアスとの激戦を制した。選手たちはとても親日的かつプロフェッショナルとしての意識が高く、2017年来日時は、試合以外に、港区等の小学校におけるラグビー講座や、大臣への表敬訪問、八芳園での歓迎レセプション等へ積極的に参加し、限られた時間の中で、子どもから大人まで親睦を深めた。
+                    </p>
+                  </div>
+                </li>
+
+                <li>
+                  <img src="/assets/images/live/minato-rugby-fes-2018/img_sungoliath.png" alt="サントリーサンゴリアス">
+                  <h3>サントリーサンゴリアス</h3>
+                  <div class="detail">
+                    <div class="detail__button live-hide-pc">チーム詳細を見る</div>
+                    <p>
+                      ジャパンラグビートップリーグに所属する、サントリーホールディングス株式会社のラグビーフットボールチームで、創設は1980年。本拠地を東京都府中市に構える。英語表記は「SUNTORY SUNGOLIATH」。『AGGRESSIVEATTACKING RUGBY』をチームスタイルとし、「日本No.1の攻撃型ラグビー」かつ「日本No.1のファイティングスピリッツ」を特徴に掲げている。獲得したタイトルは計13回を誇り、 2017-2018年度トップリーグ、第55回　日本ラグビーフットボール選手権大会において優勝。2年連続の２冠獲得を達成した。チーム名のサンゴリアスは、サントリーの“サン”、太陽の“SUN”と巨人「ゴリアス(GOLIATH)」が由来。「ゴリアス」は、巨人・ゴリアテを意味し、ゴリラは、「タフネス」「テンダー」「スピリチュアル」を象徴している。
+                    </p>
+                </div>
+                </li>
+
+
+                <li>
+                  <img src="/assets/images/live/minato-rugby-fes-2018/img_brumbies.png" alt="ブランビーズ">
+                  <h3>ブランビーズ</h3>
+                  <div class="detail">
+                    <div class="detail__button live-hide-pc">チーム詳細を見る</div>
+                    <p>
+                      正式名称は「The ACT Brumbies」。日本語では「ブランビーズ」と呼ばれる。スーパーラグビーに参加するオーストラリアのラグビーユニオンチームで、創立は1899年。本拠地はキャンベラ。ラグビー人気が高いオセアニア地域において約120年の歴史を持つクラブで、かつては、2015年ラグビーワールドカップ日本代表を率いたエディー・ジョーンズ氏が監督を務めたこともある。2001年にはオーストラリア勢として初のスーパーラグビー優勝をもたらし、2013年にはスーパーラグビー準優勝に輝いた。<br />
+                      ホームスタジアムは、約25,000人を収容する巨大な競技場「キャンベラ・スタジアム」。クラブ名は、オーストラリアの荒馬を表す「ブランビー」からとられた。スーパーラグビー2017年シーズン、オーストラリアカンファレンスにおいて首位を獲得している。
+                    </p>
+                </div>
+                </li>
+              </ul>
+            </section>
+
+
+            <section class="live--overview">
+              <h2><img src="/assets/images/live/minato-rugby-fes-2018/ttl_overview.png" alt="">イベント概要</h2>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>大会名</th>
+                    <td>秩父宮みなとラグビーまつり2018 Supported by SUNTORY</td>
+                  </tr>
+                  <tr>
+                    <th>開催日</th>
+                    <td>2018年　6月17日（日）</td>
+                  </tr>
+                  <tr>
+                    <th>開催場所</th>
+                    <td>秩父宮ラグビー場（東京都港区北青山2－8－35）</td>
+                  </tr>
+                  <tr>
+                    <th>主 催</th>
+                    <td>公益財団法人日本ラグビーフットボール協会</td>
+                  </tr>
+                  <tr>
+                    <th>主 管</th>
+                    <td>関東ラグビーフットボール協会</td>
+                  </tr>
+                  <tr>
+                    <th>後 援</th>
+                    <td>秩父宮みなとラグビーまつり2018実行委員会</td>
+                  </tr>
+                  <tr>
+                    <th>WEB</th>
+                    <td><a href="http://chichibunomiya-minato-rugby-fes.jp/" target="_blank">秩父宮みなとラグビーまつり2018 公式サイト</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
             <?php /*
             <section class="live--related">
               <h2><img src="/assets/images/live/minato-rugby-fes-2018/ttl_related.png" alt="">関連記事</h2>
@@ -341,7 +330,7 @@
                     <div class="live--related__text-wrap">
                       <h3>世界で最も過酷な400M走に「ブルくん」が挑むよ！</h3>
                       <?php if ($page['ua'] === 'desktop') : ?>
-                        <p class="rb-hide-sp">久しぶりにあいつが帰ってくる。昨年はボックスカートレースに挑み爪あとを残したブルくん。正直立ってるだけでもしんどいのに、今回は世界で最も過酷な４００M走っちゃうよ！応援してね！</p>
+                        <p class="live-hide-sp">久しぶりにあいつが帰ってくる。昨年はボックスカートレースに挑み爪あとを残したブルくん。正直立ってるだけでもしんどいのに、今回は世界で最も過酷な４００M走っちゃうよ！応援してね！</p>
                       <?php endif; ?>
                     </div>
                   </a>
@@ -354,7 +343,7 @@
                     <div class="live--related__text-wrap">
                       <h3>【ハイライト動画】Red Bull 400 札幌大会2017</h3>
                       <?php if ($page['ua'] === 'desktop') : ?>
-                        <p class="rb-hide-sp">Red Bull 400とは、スキージャンプ競技場のラージヒルを利用して行う、最高斜度３７度のヒルクライムレースである。世界で最も過酷な400M走だ。スポーツブルでライブ配信される今大会をより楽しむため、前大会の様子をチェックだ！</p>
+                        <p class="live-hide-sp">Red Bull 400とは、スキージャンプ競技場のラージヒルを利用して行う、最高斜度３７度のヒルクライムレースである。世界で最も過酷な400M走だ。スポーツブルでライブ配信される今大会をより楽しむため、前大会の様子をチェックだ！</p>
                       <?php endif; ?>
                     </div>
                   </a>
@@ -364,7 +353,7 @@
             */ ?>
 
             <ul class="footer-rectangle">
-              <li class="rb-hide-sp">
+              <li class="live-hide-sp">
                 <!-- /531683568/redbull_ad/red-bull-live-pc-footer-rectangle1 -->
                 <script>
                   googletag.cmd.push(function() {
@@ -526,6 +515,18 @@
         document.getElementById("serviceTop_hide").style.display ="none";
       }
     </script>
+
+<!-- アコーディオン -->
+<script>
+$(function(){
+  $("#accordion .detail__button").on("click", function() {
+    $(this).next().slideToggle(200,"swing");
+    $(this).toggleClass("active");
+  });
+});
+</script>
+
+
 
   </div>
 </body>

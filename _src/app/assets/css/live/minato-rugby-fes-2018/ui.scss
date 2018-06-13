@@ -52,15 +52,20 @@ $color02: #f8fafc;
   padding-bottom: 20px;
   color: $color01;
   @include mq-l {
-    font-size: 14px;
+    font-size: 16px;
   }
   img {
     width: $width;
-    margin-right: 10px;
+    margin-right: 5px;
     @include mq-l {
        width: $width_pc;
+       margin-right: 10px;
     }
   }
+}
+
+@mixin gradation {
+  background:linear-gradient(90deg, #fff 20%, #9db5d4);
 }
 
 @mixin bg {
@@ -68,12 +73,12 @@ $color02: #f8fafc;
 }
 
 @mixin bb {
-  border-bottom: 1px solid rgba(#fff, 0.3);
+  border-bottom: 1px solid rgba(#000, 0.1);
 }
 
 @mixin notice {
   font-size: 12px;
-  color: #ccc;
+  color: #808080;
   a {
     color: $color01;
   }
@@ -100,12 +105,10 @@ $color02: #f8fafc;
     @include bg;
   }
   .bg-container {
-    background: url('../../../images/live/minato-rugby-fes-2018/bg_rb.png') center top no-repeat;
-    @include mq-s {
-      background-size: contain;
-    }
+    background: url('../../../images/live/minato-rugby-fes-2018/bg_live.png') center top no-repeat;
+    background-size: contain;
     @include mq-l {
-      background: url('../../../images/live/minato-rugby-fes-2018/bg_rb_pc.png') center top no-repeat;
+      background: url('../../../images/live/minato-rugby-fes-2018/bg_live_pc.png') center top no-repeat;
     }
   }
 
@@ -133,7 +136,7 @@ $color02: #f8fafc;
     @include mq-l {
       width: 1090px;
       margin: 0 auto;
-      padding: 30px 0px;
+      padding: 40px 0px;
     }
     img {
       @include mq-s {
@@ -189,7 +192,7 @@ $color02: #f8fafc;
     }
     .live--about {
       h2 {
-        @include title(100px, 100px);
+        @include title(129px, 172px);
       }
       margin-bottom: 40px;
       @include mlr;
@@ -218,7 +221,7 @@ $color02: #f8fafc;
       @include mb;
       @include mlr;
       h2 {
-        @include title(186px, 310px);
+        @include title(189px, 252px);
       }
       p.commingsoon {
         font-weight: bold;
@@ -231,9 +234,10 @@ $color02: #f8fafc;
         width: 100%;
         tbody {
           tr {
-            background:linear-gradient(90deg, #fff, #88aad4);
+            @include gradation;
             margin-bottom: 5px;
             display: block;
+            padding: 15px 0px;
             &:not(:first-child) {
               th,td {
                 padding-top: 10px;
@@ -247,7 +251,7 @@ $color02: #f8fafc;
               font-size: 16px;
               color: #172a88;
               @include mq-l {
-                font-size: 40px;
+                font-size: 24px;
                 padding-right: 20px;
               }
             }
@@ -255,7 +259,7 @@ $color02: #f8fafc;
               //font-size: 12px;
               font-weight: bold;
               @include mq-l {
-                font-size: 16px;
+                font-size: 20px;
               }
             }
           }
@@ -267,25 +271,112 @@ $color02: #f8fafc;
       }
     }
     .live--team {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title(98px, 133px);
+      }
       ul {
-        display: flex;
-        flex-wrap: wrap;
-
+        @include mq-l {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
         li {
-          width: 50%;
+          @include mq-l {
+            width: calc((100% - 30px) / 2);
+          }
           img {
             display: block;
+            @include mq-s {
+              width: 200px;
+              margin: auto;
+            }
+
           }
           h3 {
             font-weight: bold;
-            font-size: 24px;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            @include mq-l {
+              font-size: 24px;
+            }
           }
-
+          .detail {
+            @include mq-s {
+              @include gradation;
+              border: 1px solid #172a88;
+              &__button {
+                font-weight: bold;
+                text-align: center;
+                padding: 8px 0;
+                position: relative;
+                cursor: ponter;
+                &:after {
+                  content: '';
+                  position: absolute;
+                  display: block;
+                  width: 8px;
+                  height: 8px;
+                  border-right: 2px solid;
+                  border-top:  2px solid;
+                  transform: rotate(135deg);
+                  top: 50%;
+                  right: 10px;
+                  margin-top: -8px;
+                }
+                &.active:after {
+                  transform: rotate(315deg);
+                  margin-top: -3px;
+                }
+              }
+              p {
+                display: none;
+                padding: 0 10px 10px;
+              }
+            }
+          }
         }
       }
     }
-    .live--banner {
+
+
+    .live--overview {
       @include mb;
+      @include mlr;
+      h2 {
+        @include title(195px, 260px);
+      }
+      table {
+        tbody {
+          tr {
+            th {
+              border-right: 1px solid $color01;
+              padding: 5px 20px 5px 0;
+              font-weight: bold;
+              width: 1px;
+              white-space: nowrap;
+              @include mq-s {
+                padding-right: 10px;
+              }
+            }
+            td {
+              padding-left: 10px;
+              @include mq-l {
+                padding-left: 20px;
+              }
+              a {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+
+    }
+    .live--banner {
+      margin-bottom: 40px;
       div {
         margin: auto;
       }
@@ -294,7 +385,7 @@ $color02: #f8fafc;
       @include mb;
       @include mlr;
       h2 {
-        @include title(150px, 250px);
+        @include title(150px, 200px);
       }
       ul {
         li {
@@ -332,14 +423,14 @@ $color02: #f8fafc;
                 }
               }
             }
-            .rb--related__image-wrap {
+            .live--related__image-wrap {
               position: relative;
               width: calc(40% - 5px);
               img {
                 width: 100%;
               }
             }
-            .rb--related__text-wrap {
+            .live--related__text-wrap {
               width: calc(60% - 5px);
               @include mq-l {
                 padding-left: 20px;
@@ -370,7 +461,7 @@ $color02: #f8fafc;
         margin-right: 40px
       }
     }
-    .rb--sidebar__skyscraper {
+    .live--sidebar__skyscraper {
       margin-top: 20px;
     }
   }

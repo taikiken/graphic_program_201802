@@ -1,4 +1,4 @@
-<section class="side-sec rb-hide-sp">
+<section class="side-sec live-hide-sp">
   <div id="sidebar-moving-container">
 
     <div class="sponsor-link">
@@ -50,7 +50,7 @@
       <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
     </div>
 
-    <div class="rb--sidebar__skyscraper">
+    <div class="live--sidebar__skyscraper">
       <!-- /531683568/redbull_ad/red-bull-live-pc-sidebar-600-300 -->
       <script>
         googletag.cmd.push(function() {
