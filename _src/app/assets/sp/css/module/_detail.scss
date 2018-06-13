@@ -11,8 +11,8 @@
   font-size: 10px;
   color: #888;
   font-weight: normal;
-  transform: scale(1);
-  line-height: 1;
+  // transform: scale(1);
+  // line-height: 1;
 }
 
 
@@ -789,7 +789,7 @@
           .post-heading {
             font-size: 16px;
             line-height: 1.4;
-            height: 2.8em;
+            // height: 2.8em;
             overflow: hidden;
             margin-top: 0;
           }
@@ -1303,7 +1303,15 @@ body {
     .sponsor-link {
       .adsTitle {
         white-space: normal;
-        margin-bottom: 5px;
+        margin-bottom: 2px;
+        margin-top: 6px;
+        line-height: 1.2 !important;
+        // height: 1em !important;
+      }
+      .adsSponsored {
+        height: 1em !important;
+        overflow: visible !important;
+        font-weight: normal !important;
       }
     }
   }
