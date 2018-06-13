@@ -122,7 +122,9 @@
                 ラグビーの聖地、秩父宮ラグビー場で行われる大迫力のフレンドリーマッチをお楽しみください。
               </p>
 
-              <iframe src="https://www.youtube.com/embed/mEBU60B7Bwg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              <div class="embed--movie rb-hide-sp">
+                <iframe src="https://www.youtube.com/embed/mEBU60B7Bwg?modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
 
             </div>
             <div class="live-appli">
