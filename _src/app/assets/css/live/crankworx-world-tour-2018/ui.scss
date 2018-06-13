@@ -112,7 +112,7 @@ $color02: #f8fafc;
     position: relative;
     width: 100%;
     padding-top: 56.25%;
-    margin-bottom: 40px;
+    margin-top: 20px;
     iframe {
       position: absolute;
       top: 0;
@@ -252,6 +252,13 @@ $color02: #f8fafc;
       @include mlr;
       h2 {
         @include title(186px, 310px);
+      }
+      p.commingsoon {
+        font-weight: bold;
+        font-size: 16px;
+        @include mq-l {
+          font-size: 20px;
+        }
       }
       table {
         width: 100%;

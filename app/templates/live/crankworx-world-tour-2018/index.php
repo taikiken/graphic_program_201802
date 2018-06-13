@@ -118,7 +118,7 @@
             <div class="rb--intro">
               <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
 
-              <div class="embed--movie rb-hide-sp">
+              <div class="embed--movie">
                 <iframe src="https://www.redbullcontentpool.com/embed/video/5b1f5568d0c734009ec0d116?_=1528780139075" frameborder="0" allowfullscreen></iframe>
                 <small>©Red Bull Media House</small>
               </div>
@@ -141,13 +141,17 @@
               // -----------------------------------------
               ?>
 
+              <!--
               <a href="https://www.redbull.com/jp-ja/events/neymar-jrs-five" target="_blank">
                 <img src="/assets/images/live/crankworx-world-tour-2018/bnr_rb.png" alt="CRANKWORX SLOPESTYLE 2018 についてもっと知る" class="rb-hide-pc">
                 <img src="/assets/images/live/crankworx-world-tour-2018/bnr_rb_pc.png" alt="CRANKWORX SLOPESTYLE 2018 についてもっと知る" class="rb-hide-sp">
               </a>
+              -->
 
             </div>
 
+
+            <!--
             <section class="rb--rule">
               <h2>普通のサッカーとはここが違う！</h2>
               <ul>
@@ -160,9 +164,12 @@
                 <li>5点先取するか、試合終了までに多くの点を取ったチームが勝ち！</li>
               </ul>
             </section>
+            -->
 
             <section class="rb--timetable">
               <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
+              <p class="commingsoon">COMMING SOON...</p>
+              <!--
               <table>
                 <tbody>
                   <tr>
@@ -200,6 +207,7 @@
                 </tbody>
               </table>
               <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
+              -->
             </section>
 
             <?php if ($page['ua'] !== 'desktop') : ?>
