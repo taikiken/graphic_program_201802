@@ -112,25 +112,3 @@ s.parentNode.insertBefore(bs, s);
 </script>
 <?php endif; ?>
 
-
-<?php
-// スポンサード&サブスポンサードカテゴリ以外ではappbnr非表示(CMerを表示するため)
-if (
-    $page['template'] === 'p' &&
-     ( $page['post']['is_sponserd'] === false && $page['post']['is_subsponserd'] === false )
-  ) :
-?>
-<script>
-document.addEventListener("DOMContentLoaded", function(event) {
-  if ( document.getElementById("js-header-appbnr-container") != null ) {
-    document.getElementById("js-header-appbnr-container").remove();
-    Sagen.Dom.removeClass(document.body, 'appbnr-enable');
-  }
-});
-</script>
-<style>
-.header-sticky + .body-sec {
-  margin-top: 75px;
-}
-</style>
-<?php endif; ?>
