@@ -139,6 +139,17 @@
           <h2 class="company__news__heading">NEWS</h2>
 
           <div class="company__news__list">
+            <dl class="company__news__item">
+              <dt>2018年06月14日</dt>
+              <dd><a href="https://sportsbull.jp/p/332681/" target="_blank">第22回全国高等学校女子硬式野球選手権大会をライブ中継。総合スポーツメディア「SPORTS BULL (スポーツブル)」内、高校野球総合情報サービス「バーチャル高校野球」にて実施</a></dd>
+            </dl>
+
+            <dl class="company__news__item">
+              <dt>2018年06月11日</dt>
+              <dd><a href="https://sportsbull.jp/p/331135/" target="_blank">第１００回全国高校野球選手権記念大会をネット中継。高校野球総合情報サービス「バーチャル高校野球」が配信試合数を大幅に拡充し、総合スポーツメディア「SPORTS BULL（スポーツブル）」にて展開</a></dd>
+            </dl>
+
+
             <?php foreach($news as $item): ?>
               <dl class="company__news__item">
                 <dt><?php echo $item['date'] ?></dt>
