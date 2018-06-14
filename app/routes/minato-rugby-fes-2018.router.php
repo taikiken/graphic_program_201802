@@ -11,7 +11,7 @@ $app->group('/live/minato-rugby-fes-2018',  function () use($app) {
     'og_url'             => $app->model->property('site_url').'minato-rugby-fes-2018/',
     'og_image'           => $app->model->property('site_url').'assets/images/live/minato-rugby-fes-2018/ogp.png',
     'og_description'     => '秩父宮みなとラグビーまつり2018 ライブ配信をスポーツブルで無料ライブ配信。スポーツブル(スポブル)は、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
-    'keywords'           => 'Red Bull,レッドブル,サッカー,ネイマール,スポブル,ライブ配信,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
+    'keywords'           => 'ラグビー,秩父宮,NEC グリーンロケッツ,ワラターズ,サントリーサンゴリアス,ブランビーズ,スポブル,ライブ配信,スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
     'category'           => $category,
     'template'           => 'category',
     'template_classname' => 'minato-rugby-fes-2018',
