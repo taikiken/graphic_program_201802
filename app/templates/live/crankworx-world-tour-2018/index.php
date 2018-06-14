@@ -105,12 +105,10 @@
             <img src="/assets/images/live/crankworx-world-tour-2018/ttl_rb_pc.png" alt="" class="rb-hide-sp">
         </div>
         <div class="rb--movie">
-          <!--
           <div id="VideoPlayer">
             <div id="placeHolder"></div>
           </div>
-          -->
-          <img src="/assets/images/live/crankworx-world-tour-2018/rb_announce.png" alt="">
+          <!-- <img src="/assets/images/live/crankworx-world-tour-2018/rb_announce.png" alt=""> -->
         </div>
 
         <div class="body-sec-inner">
@@ -153,9 +151,10 @@
             <?php endif; ?>
 
             <div class="rb--intro">
-              <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+              <p>マウンテンバイクがスロープ（傾斜）を乗り越え空中を舞う、スリリングなエクストリームスポーツ！！<br />
+              ワダポリスによるオリジナル実況と栗瀬選手による解説で、今まで競技に触れたことがない方でも楽しむことができます。</p>
 
-              <div class="embed--movie">
+              <div class="embed--movie rb-hide-sp">
                 <iframe src="https://www.redbullcontentpool.com/embed/video/5b1f5568d0c734009ec0d116?_=1528780139075" frameborder="0" allowfullscreen></iframe>
                 <small>©Red Bull Media House</small>
               </div>
@@ -163,11 +162,11 @@
                 <ul>
                   <li>
                     <img src="/assets/images/live/crankworx-world-tour-2018/img_mc01.jpg" alt="">
-                    <p>実況:ワダポリス(アクションスポーツMC/Team REAL)</p>
+                    <p>実況:ワダポリス<br />(アクションスポーツMC/Team REAL)</p>
                   </li>
                   <li>
                     <img src="/assets/images/live/crankworx-world-tour-2018/img_mc02.jpg" alt="">
-                    <p>解説:栗瀬 裕太(BMX MTB プロライダー)</p>
+                    <p>解説:栗瀬 裕太<br />(BMX MTB プロライダー)</p>
                   </li>
                 </ul>
               </div>

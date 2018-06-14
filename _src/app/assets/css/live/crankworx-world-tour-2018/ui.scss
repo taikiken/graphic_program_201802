@@ -200,12 +200,28 @@ $color02: #f8fafc;
       }
       &__mc {
         ul {
+          padding-top: 20px;
+          @include mq-l {
+            display: flex;
+          }
           li {
             display: flex;
-                align-items: start;
+            align-items: start;
+            @include mq-s {
+              &:not(:last-child) {
+                margin-bottom: 10px;
+              }
+            }
+            @include mq-l {
+              width: calc((100% - 20px) / 2);
+            }
             img {
               display: block;
-              width: 200px;
+              width: 80px;
+              margin-right: 10px;
+              @include mq-l {
+                width: 120px;
+              }
             }
             p {
               font-weight: bold;
