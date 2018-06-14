@@ -19,6 +19,9 @@ $container=sprintf("<?xml version=\"1.0\" encoding=\"utf-8\"?>
 </channel>
 </rss>",date(DATE_RFC822,strtotime(date("Y-m-d H:i:s"))),"%s");
 
+//サニタイズとデフォライズ
+$offset = (int)$_GET["offset"];
+
 $sql="
 select
 	id,
@@ -42,8 +45,7 @@ select
 	u_time,
 	flag
 from repo_n
-	where
-flag=1 and m1=150 and d2=33 and swf like '%wbc2017_2017%' and flag=1 order by u_time desc
+	where flag=1 order by u_time desc limit 100 offset {$offset}
 ";
 //最初は全件出力後で1日に変更 and u_time > now() - interval '1 day'
 
@@ -63,10 +65,10 @@ while($f=$o->fetch_array()){
 <pubDate>%s</pubDate>
 <lastUpdate>%s</lastUpdate>
 </item>',
-		mod_HTML($f["title"]),
+		htmlspecialchars($f["title"]),
 		$f["id"],
 		$f["id"],
-		"<category id=\"150\" title=\"WBC\" />",
+		"<category id=\"{$f["m1"]}\" title=\"{$f["category1"]}\" />",
 		$f["d2"],$f["media"],
 		preg_replace("(\r|\n)","",$f["body"]),
 		maketag(array($f["t10"],$f["t11"],$f["t12"],$f["t13"],$f["t14"],$f["t15"])),
@@ -86,8 +88,10 @@ function maketag($s){
 	return implode(",",$a);
 }
 
+header("Content-Type:text/xml;");
 
-file_put_contents(sprintf("%s/feed/wbc/pickup.xml",$SERVERPATH),sprintf($container,implode("\n",$item)));
+echo sprintf($container,implode("\n",$item));
+exit;
 
 
 ?>
