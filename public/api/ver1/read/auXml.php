@@ -9,7 +9,7 @@ $container=sprintf("<?xml version=\"1.0\" encoding=\"utf-8\"?>
 <rss version=\"2.0\">
 <channel>
 <title>SPORTS BULL</title>
-<link>https://sportsbull.jp/</link>
+<link>%s/</link>
 <description>話題のスポーツコンテンツが満載！ 国内外のスポーツに特化したニュースや動画をお届けします。</description>
 <ttl>15</ttl>
 <language>ja</language>
@@ -17,7 +17,7 @@ $container=sprintf("<?xml version=\"1.0\" encoding=\"utf-8\"?>
 <lastBuildDate>%s</lastBuildDate>
 %s
 </channel>
-</rss>",date(DATE_RFC822,strtotime(date("Y-m-d H:i:s"))),"%s");
+</rss>",$domain,date(DATE_RFC822,strtotime(date("Y-m-d H:i:s"))),"%s");
 
 //サニタイズとデフォライズ
 $offset = (int)$_GET["offset"];
@@ -55,7 +55,7 @@ while($f=$o->fetch_array()){
 
 	$item[]=sprintf('<item>
 <title>%s</title>
-<link>https://sportsbull.jp/p/%s/</link>
+<link>%s/p/%s/</link>
 <guid>%s</guid>
 %s
 <media id="%s" title="%s" />
@@ -66,6 +66,7 @@ while($f=$o->fetch_array()){
 <lastUpdate>%s</lastUpdate>
 </item>',
 		htmlspecialchars($f["title"]),
+		$domain,
 		$f["id"],
 		$f["id"],
 		"<category id=\"{$f["m1"]}\" title=\"{$f["category1"]}\" />",
