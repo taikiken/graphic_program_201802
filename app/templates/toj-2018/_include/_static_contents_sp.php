@@ -7,12 +7,6 @@
             </a>
           </div>
 
-          <div class="intro__banner">
-            <a href="https://sportsbull.jp/p/312445/">
-              <img  src="/assets/sp/images/toj-2018/bnr_present.png" alt="MERIDA ロードバイクプレゼント！">
-            </a>
-          </div>
-
           <?php
             // app in webview 時に非表示にする
             if (!$from_webview) :

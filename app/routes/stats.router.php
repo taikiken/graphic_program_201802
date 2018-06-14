@@ -18,7 +18,11 @@ $app->group('/stats', function () use($app) {
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, 'stats/banners/stats.php', $args);
+    if ( $app->model->property('ua') === 'desktop' ) :
+      return $this->renderer->render($response, 'stats/banners/stats.php', $args);
+    else :
+      return $response->withRedirect('/nav/stats/', 302);
+    endif;
 
   });
 

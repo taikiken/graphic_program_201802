@@ -114,11 +114,19 @@ $statsItem = array(
 
 );
 
+
+// 一覧リンク
+$stats_link = '/stats/';
+if ( $page['ua'] !== 'desktop' ) :
+  $stats_link = '/nav/stats/';
+endif;
+
+
 ?>
 
 
-<?php
-/* バナーを複数追加
+
+<?php //UNDO_SPBL-813 【WEB】TOPにVKのバナーを固定で表示する ?>
 
 <style>
   .focus-bnr img {
@@ -129,20 +137,20 @@ $statsItem = array(
 </style>
 
 <?php if ($page['ua'] === 'desktop') : ?>
-<div class="focus-bnr">
-  <a href="https://sportsbull.jp/toj-2018/">
-    <img src="https://sportsbull.jp/_/toj/banner/ToJ2018-pc.png" alt="">
+<div class="focus-bnr" style="margin-top: 15px">
+  <a href="https://vk.sportsbull.jp/koshien/">
+    <img src="https://sportsbull.jp/_/vk/banner/728_90.png" alt="第100回全国高校野球選手権記念大会 バーチャル高校野球 全地方大会決勝から全校大会全試合 無料ライブ配信 - SPORTS BULL">
   </a>
 </div>
 <?php else : ?>
 <div class="focus-bnr">
-  <a href="https://sportsbull.jp/toj-2018/">
-    <img src="https://sportsbull.jp/_/toj/banner/ToJ2018-sp.png" alt="">
+  <a href="https://sportsbull.jp/category/vk/">
+    <img src="https://sportsbull.jp/_/vk/banner/640_100.png" alt="第100回全国高校野球選手権記念大会 バーチャル高校野球 全地方大会決勝から全校大会全試合 無料ライブ配信 - SPORTS BULL">
   </a>
 </div>
 <?php endif; ?>
-*/
-?>
+
+
 <aside class="stats_banner">
   <div class="stats_banner__heading">
     <h2 class="stats_banner__heading__title">
@@ -166,7 +174,7 @@ $statsItem = array(
   </ul><!-- /.stats_banner__list -->
 
   <div class="stats_banner__btn">
-    <a class="stats_banner__btn__link" href="/stats/"><span>すべて</span></a>
+    <a class="stats_banner__btn__link" href="<?php echo $stats_link; ?>"><span>すべて</span></a>
   </div><!-- /.stats_banner__btn -->
 
   <?php include_once __DIR__.'/../../../_svg.php'; ?>

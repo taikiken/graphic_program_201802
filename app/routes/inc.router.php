@@ -184,6 +184,7 @@ $app->group('/inc', function () use ($app) {
           '#user'        => '#SPBL_user',
           '#adg'         => '#SPBL_adg',
           '#synapse'     => '#SPBL_synapse',
+          'div.synapse_logo' => 'div.SPBL_synapse_logo'
         );
 
         $file = strtr($file, $replace_pairs);

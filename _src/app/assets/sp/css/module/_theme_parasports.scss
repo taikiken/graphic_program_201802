@@ -735,12 +735,21 @@
 
   //.paraboard__detail__overview
   .paraboard__detail__overview {
-    padding-top: (50/2)+px;
     background-color: #e83851;
+
+    &:before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: (10/2)+px;
+      background-color: #eee;
+      // border-top: 1px solid #ddd;
+    }
 
     //.paraboard__detail__overview__heading
     &__heading {
       line-height: 1;
+      padding-top: (50/2)+px;
       color: #fff;
       font-weight: bold;
       font-size: fz(32/2);

@@ -34,37 +34,6 @@ if (!$bucket)
 $dbo = new db;
 $dbo->connect();
 
-
-/*
- * 選手一覧をJSON形式のファイルに出力
- */
-// 選手一覧データ取得・作成
-$sql = "";
-$sql .= "SELECT id, name, '' as name_kana, competition, description, img1 ";
-$sql .= "FROM tbl_player ";
-$sql .= "WHERE flag = 1 ";
-$sql .= "ORDER BY n";
-$dbo->query($sql);
-
-$value = array();
-$data = array();
-$jdata = array();
-while ($fdata = $dbo->fetch_array())
-{
-	$value["no"] = $fdata["id"];
-	$value["name"] = $fdata["name"];
-	$value["name_kana"] = $fdata["name_kana"];
-	$value["competition"] = $fdata["competition"];
-	$value["description"] = $fdata["description"];
-	$value["img"] = $fdata["img1"];
-    $data['body'] = $value;
-	$jdata[] = $data;
-}
-
-// 選手一覧JSONファイル出力
-put_json(sprintf("%s/ca_list.json", $bucket), $jdata);
-
-
 /*
  * 選手の関連記事一覧をJSON形式のファイルに出力
  */
@@ -112,38 +81,6 @@ if (count($value) > 0)
 // 選手一覧JSONファイル出力
 put_json(sprintf("%s/ca_article_ids.json", $bucket), $jdata);
 
-
-/*
- * 注目の選手一覧をJSON形式のファイルに出力
- * 　抽出件数はソート順に４件
- */
-// 注目の選手一覧データ取得・作成
-$sql = "";
-$sql .= "SELECT tp.id, tp.name, '' as name_kana, tp.competition, tp.description, tp.img1 ";
-$sql .= "FROM tbl_player AS tp INNER JOIN u_headline AS hl ";
-$sql .= "    ON tp.id = hl.d2 AND hl.cid = 96 AND hl.qid = 95 ";
-$sql .= "WHERE tp.flag = 1 AND hl.flag = 1 ";
-$sql .= "ORDER BY hl.n ";
-$sql .= "LIMIT 4";
-$dbo->query($sql);
-
-$value = array();
-$data = array();
-$jdata = array();
-while ($fdata = $dbo->fetch_array())
-{
-	$value["no"] = $fdata["id"];
-	$value["name"] = $fdata["name"];
-	$value["name_kana"] = $fdata["name_kana"];
-	$value["competition"] = $fdata["competition"];
-	$value["description"] = $fdata["description"];
-	$value["img"] = $fdata["img1"];
-    $data['body'] = $value;
-	$jdata[] = $data;
-}
-
-// 選手一覧JSONファイル出力
-put_json(sprintf("%s/ca_picup_list.json", $bucket), $jdata);
 
 // DBオブジェクトの解放
 unset($odb);

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=2" />
+  <meta name="format-detection" content="telephone=no">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <!--<script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="9" data-firefox="44" data-ie="11" data-edge="13"></script>-->
   <title>会社概要 | スポーツブル / SPORTS BULL</title>
@@ -37,7 +38,7 @@
   </script>
 </head>
 <body>
-<div class="whole">
+<div class="whole about">
   <section class="header">
     <div class="header__inner">
       <h1 class="header__heading"><a href="/"><img src="/assets/images/about/common/header-logo.png" alt="SPORTS BULL"></a></h1>
@@ -70,22 +71,26 @@
       <h1 class="common__heading"><span>会社概要</span></h1>
 
       <div class="company__vision">
-        <h2 class="company__vision__heading">CORPORATE<br />
-        VISION</h2>
-
-        <p>スポーツインターネットメディアが <br class="show-for-small" />
-        できることを最大化し、<br />
-        日本のスポーツ文化を底上げし、<br />
-        よりスポーツを楽しめる環境をつくります。</p>
+        <h2 class="company__vision__heading">VISION</h2>
+        <img src="/assets/images/about/company/vision.svg" alt="日本を世界が憧れるスポーツ大国にする。">
       </div><!-- /.company__vision -->
 
-      <div class="company__key_visual">
-        <img src="/assets/images/about/company/kv.jpg" alt="">
-      </div><!-- /.company__key_visual -->
+      <div class="company__mission">
+        <h2 class="company__mission__heading">MISSION</h2>
+        <ul>
+          <li>スポーツの魅力を最大化し、豊かな社会、多様な文化を創る。</li>
+          <li>アマチュア・ローカル・マイナースポーツの持つ力を掘り起こす。</li>
+          <li>スポーツの「みる」「する」「ささえる」の体験価値を高め、繋ぐ。</li>
+        </ul>
+      </div><!-- /.company__vision -->
+
+      <div class="company__identity">
+        <h2 class="company__identity__heading">IDENTITY</h2>
+        <p>もしスポーツに神様がいるのなら、<span>「ありがとう」と言ってもらえる</span>会社、事業でありたい。</p>
+      </div><!-- /.company__vision -->
 
       <div class="company__overview">
-        <h2 class="company__overview__heading">COMPANY<br />
-        OVERVIEW</h2>
+        <h2 class="company__overview__heading">COMPANY OVERVIEW</h2>
 
         <div class="company__overview__data">
           <table>
@@ -104,7 +109,7 @@
               </tr>
               <tr>
                 <th>電話番号</th>
-                <td>03-3403-6651</td>
+                <td><a href="tel:0334036651">03-3403-6651</a></td>
               </tr>
               <tr>
                 <th>役員</th>
@@ -117,6 +122,7 @@
                   <dt>社外取締役</dt><dd>中村 大輔</dd>
                   <dt>執行役員</dt><dd>高石 雄大</dd>
                   <dt>監査役</dt><dd>熊倉 次郎</dd>
+                  <a href="/about/officer/">役員紹介はこちら</a>
                 </td>
               </tr>
               <tr>
@@ -163,5 +169,23 @@
   </section><!-- /.footer -->
 </div><!-- /.whole -->
 <script src="/assets/js/about.bundle.js"></script>
+
+<!-- ハンバーガーメニュー -->
+<script>
+$(function() {
+    $('#js-header__btn--toggle').click(function() {
+        $(this).toggleClass('active');
+        if ($(this).hasClass('active')) {
+            $('#js-header__nav').addClass('active');
+        } else {
+            $('#js-header__nav').removeClass('active');
+        }
+    });
+    $('#js-header__btn--close').click(function() {
+        $('#js-header__btn--toggle,#js-header__nav').removeClass('active');
+    });
+});
+</script>
+
 </body>
 </html>
