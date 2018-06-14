@@ -72,7 +72,7 @@ while($f=$o->fetch_array()){
 		$f["d2"],$f["media"],
 		preg_replace("(\r|\n)","",$f["body"]),
 		maketag(array($f["t10"],$f["t11"],$f["t12"],$f["t13"],$f["t14"],$f["t15"])),
-		strlen($f["img1"])?sprintf("\n<enclosure url=\"%s/raw/%s\" type=\"image/jpeg\" caption=\"%s\" />",$ImgPath,$f["img1"],mod_HTML($f["t1"])):sprintf("\n<enclosure url=\"https://img.sportsbull.jp/raw/%s\" type=\"image/jpeg\" caption=\"SPORTS BULL\" />",sprintf("0%s.jpg",$f["id"]%7+1)),
+		strlen($f["img1"])?sprintf("\n<enclosure url=\"%s/raw/%s\" type=\"image/jpeg\" caption=\"%s\" />",$ImgPath,$f["img1"],mod_HTML($f["t1"])):"",
 		$f["flag"],
 		date(DATE_RFC822,strtotime($f["m_time"])),
 		date(DATE_RFC822,strtotime($f["u_time"]))
