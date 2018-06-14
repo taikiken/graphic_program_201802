@@ -76,7 +76,7 @@
       ?>
 
       <?php
-      # ref. #2321 
+      # ref. #2321
       if ( $page['category']['slug'] === 'americanfootball' ) :
         include_once __DIR__.'/../stats/ua_kansai/mobile/index.php';
       endif;
@@ -100,9 +100,9 @@
       <div id="js-headline"></div>
       <?php
       // para board check - `parasports`
-      if ( $page['category']['slug'] === 'parasports' ) :
-        include_once __DIR__.'/_category_para_board_calendar.php';
-      endif;
+      // if ( $page['category']['slug'] === 'parasports' ) :
+      //   include_once __DIR__.'/_category_para_board_calendar.php';
+      // endif;
       ?>
       <div id="category-container"></div>
       <div id="board-container-more"></div>
