@@ -189,13 +189,28 @@ $color02: #f8fafc;
     .rb--intro {
       margin-bottom: 40px;
       @include mlr;
-      p {
+      > p {
         padding-left: 10px;
         font-weight: bold;
         border-left: 2px solid $color01;
         @include mq-l {
           font-size: 20px;
           line-height: 2;
+        }
+      }
+      &__mc {
+        ul {
+          li {
+            display: flex;
+                align-items: start;
+            img {
+              display: block;
+              width: 200px;
+            }
+            p {
+              font-weight: bold;
+            }
+          }
         }
       }
     }
@@ -296,7 +311,7 @@ $color02: #f8fafc;
       }
     }
     .rb--banner {
-      @include mb;
+      margin-bottom: 20px;
       div {
         margin: auto;
       }

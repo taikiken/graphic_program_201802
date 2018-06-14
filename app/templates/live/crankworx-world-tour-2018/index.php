@@ -115,6 +115,43 @@
 
         <div class="body-sec-inner">
           <div class="main-sec">
+
+            <?php if ($page['ua'] !== 'desktop') : ?>
+              <div class="rb--banner">
+                <!-- /531683568/redbull_ad/red-bull-live-sp-big-banner -->
+                <script>
+                  googletag.cmd.push(function() {
+                    googletag.defineSlot('/531683568/redbull_ad/red-bull-live-sp-big-banner', [320, 50], 'div-gpt-ad-1525913603821-0').addService(googletag.pubads());
+                    googletag.pubads().enableSingleRequest();
+                    googletag.enableServices();
+                  });
+                </script>
+                <div id='div-gpt-ad-1525913603821-0' style='height:50px; width:320px;'>
+                <script>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525913603821-0'); });
+                </script>
+                </div>
+                <!-- // /531683568/redbull_ad/red-bull-live-sp-big-banner -->
+              </div>
+            <?php else:?>
+              <div class="rb--banner">
+                <!-- /531683568/redbull_ad/red-bull-live-pc-bigbanner -->
+                <script>
+                  googletag.cmd.push(function() {
+                    googletag.defineSlot('/531683568/redbull_ad/red-bull-live-pc-bigbanner', [728, 90], 'div-gpt-ad-1525914354723-0').addService(googletag.pubads());
+                    googletag.pubads().enableSingleRequest();
+                    googletag.enableServices();
+                  });
+                </script>
+                <div id='div-gpt-ad-1525914354723-0' style='height:90px; width:728px;'>
+                <script>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525914354723-0'); });
+                </script>
+                </div>
+                <!-- // /531683568/redbull_ad/red-bull-live-pc-bigbanner -->
+              </div>
+            <?php endif; ?>
+
             <div class="rb--intro">
               <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
 
@@ -122,7 +159,18 @@
                 <iframe src="https://www.redbullcontentpool.com/embed/video/5b1f5568d0c734009ec0d116?_=1528780139075" frameborder="0" allowfullscreen></iframe>
                 <small>©Red Bull Media House</small>
               </div>
-
+              <div class="rb--intro__mc">
+                <ul>
+                  <li>
+                    <img src="/assets/images/live/crankworx-world-tour-2018/img_mc01.jpg" alt="">
+                    <p>実況:ワダポリス(アクションスポーツMC/Team REAL)</p>
+                  </li>
+                  <li>
+                    <img src="/assets/images/live/crankworx-world-tour-2018/img_mc02.jpg" alt="">
+                    <p>解説:栗瀬 裕太(BMX MTB プロライダー)</p>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="rb-appli">
 
@@ -209,42 +257,6 @@
               <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
               -->
             </section>
-
-            <?php if ($page['ua'] !== 'desktop') : ?>
-              <div class="rb--banner">
-                <!-- /531683568/redbull_ad/red-bull-live-sp-big-banner -->
-                <script>
-                  googletag.cmd.push(function() {
-                    googletag.defineSlot('/531683568/redbull_ad/red-bull-live-sp-big-banner', [320, 50], 'div-gpt-ad-1525913603821-0').addService(googletag.pubads());
-                    googletag.pubads().enableSingleRequest();
-                    googletag.enableServices();
-                  });
-                </script>
-                <div id='div-gpt-ad-1525913603821-0' style='height:50px; width:320px;'>
-                <script>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525913603821-0'); });
-                </script>
-                </div>
-                <!-- // /531683568/redbull_ad/red-bull-live-sp-big-banner -->
-              </div>
-            <?php else:?>
-              <div class="rb--banner">
-                <!-- /531683568/redbull_ad/red-bull-live-pc-bigbanner -->
-                <script>
-                  googletag.cmd.push(function() {
-                    googletag.defineSlot('/531683568/redbull_ad/red-bull-live-pc-bigbanner', [728, 90], 'div-gpt-ad-1525914354723-0').addService(googletag.pubads());
-                    googletag.pubads().enableSingleRequest();
-                    googletag.enableServices();
-                  });
-                </script>
-                <div id='div-gpt-ad-1525914354723-0' style='height:90px; width:728px;'>
-                <script>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1525914354723-0'); });
-                </script>
-                </div>
-                <!-- // /531683568/redbull_ad/red-bull-live-pc-bigbanner -->
-              </div>
-            <?php endif; ?>
 
             <?php /*
             <section class="rb--related">
