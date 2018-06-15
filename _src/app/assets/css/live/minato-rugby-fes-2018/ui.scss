@@ -1,0 +1,498 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss/asset";
+
+// normalize / reset / åŸºæœ¬ class, tag è¨­å®š
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss/style/reset";
+@import "../../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// ä»¥ä¸‹ã€import ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç·¨é›†
+// --------------------------------------------
+
+// page layout
+@import "../../module/import";
+@import "../../layout";
+
+
+$color01: #172a88;
+$color02: #f8fafc;
+
+@mixin mq-s {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mq-l {
+  @media (min-width: 769px) {
+    @content;
+  }
+}
+
+@mixin mb {
+  margin-bottom: 40px;
+  @include mq-l {
+    margin-bottom: 80px;
+  }
+}
+
+@mixin mlr {
+  @include mq-s {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@mixin title($width, $width_pc) {
+  font-weight: bold;
+  font-size: 12px;
+  padding-bottom: 20px;
+  color: $color01;
+  @include mq-l {
+    font-size: 16px;
+  }
+  img {
+    width: $width;
+    margin-right: 5px;
+    @include mq-l {
+       width: $width_pc;
+       margin-right: 10px;
+    }
+  }
+}
+
+@mixin gradation {
+  background:linear-gradient(90deg, #fff 20%, #9db5d4);
+}
+
+@mixin bg {
+  background: #fff;
+}
+
+@mixin bb {
+  border-bottom: 1px solid rgba(#000, 0.1);
+}
+
+@mixin notice {
+  font-size: 12px;
+  color: #808080;
+  a {
+    color: $color01;
+  }
+}
+
+.live-hide-sp {
+  @include mq-s {
+    display: none!important;
+  }
+}
+.live-hide-pc {
+  @include mq-l {
+    display: none!important;
+  }
+}
+
+#whole.minato-rugby-fes-2018 {
+  @include bg;
+  color: #515769;
+  @include mq-s {
+    min-width: auto;
+  }
+  .body-sec {
+    @include bg;
+  }
+  .bg-container {
+    background: url('../../../images/live/minato-rugby-fes-2018/bg_live.png') center top no-repeat;
+    background-size: contain;
+    @include mq-l {
+      background: url('../../../images/live/minato-rugby-fes-2018/bg_live_pc.png') center top no-repeat;
+    }
+  }
+
+  .embed--movie {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    margin-top: 40px;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    small {
+      display: block;
+      text-align: right;
+      opacity: 0.5;
+    }
+  }
+
+  .live--head {
+    padding: 20px 5px;
+    @include mq-l {
+      width: 1090px;
+      margin: 0 auto;
+      padding: 40px 0px;
+    }
+    img {
+      @include mq-s {
+        width: 100%;
+        display: block;
+      }
+    }
+  }
+  .live--movie {
+    @include mb;
+    @include mq-l {
+      width: 1090px;
+      margin: 0 auto;
+    }
+    #VideoPlayer {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      #placeHolder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    img {
+      width: 100%;
+    }
+    p {
+      @include notice;
+    }
+  }
+  .body-sec-inner {
+    background-color: transparent;
+    @include mq-s {
+      width: auto;
+    }
+    .main-sec {
+      @include mq-s {
+        width: auto;
+        float: none;
+      }
+      @include mq-l {
+        padding-top: 30px;
+      }
+      a {
+        transition: all 0.3s;
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+    .live--about {
+      h2 {
+        @include title(129px, 172px);
+      }
+      margin-bottom: 40px;
+      @include mlr;
+      p {
+        font-weight: bold;
+        @include mq-l {
+          font-size: 20px;
+        }
+
+      }
+    }
+    .live-appli {
+      @include mb;
+      @include mlr;
+      a {
+        display: block;
+        &:first-child {
+          margin-bottom: 20px;
+        }
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .live--timetable {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title(189px, 252px);
+      }
+      p.commingsoon {
+        font-weight: bold;
+        font-size: 16px;
+        @include mq-l {
+          font-size: 20px;
+        }
+      }
+      table {
+        width: 100%;
+        tbody {
+          tr {
+            @include gradation;
+            margin-bottom: 5px;
+            display: block;
+            padding: 15px 0px;
+            &:not(:first-child) {
+              th,td {
+                padding-top: 10px;
+              }
+            }
+            th {
+              width: 1px;
+              white-space: nowrap;
+              font-weight: bold;
+              padding-right: 10px;
+              font-size: 16px;
+              color: #172a88;
+              @include mq-l {
+                font-size: 24px;
+                padding-right: 20px;
+              }
+            }
+            td {
+              //font-size: 12px;
+              font-weight: bold;
+              @include mq-l {
+                font-size: 20px;
+              }
+            }
+          }
+        }
+      }
+      .notice {
+        @include notice;
+        margin-top: 10px;
+      }
+    }
+    .live--team {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title(98px, 133px);
+      }
+      ul {
+        @include mq-l {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+        li {
+          @include mq-l {
+            width: calc((100% - 30px) / 2);
+          }
+          img {
+            display: block;
+            @include mq-s {
+              width: 200px;
+              margin: auto;
+            }
+
+          }
+          h3 {
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            @include mq-l {
+              font-size: 24px;
+            }
+          }
+          .detail {
+            @include mq-s {
+              @include gradation;
+              border: 1px solid #172a88;
+              &__button {
+                font-weight: bold;
+                text-align: center;
+                padding: 8px 0;
+                position: relative;
+                cursor: ponter;
+                &:after {
+                  content: '';
+                  position: absolute;
+                  display: block;
+                  width: 8px;
+                  height: 8px;
+                  border-right: 2px solid;
+                  border-top:  2px solid;
+                  transform: rotate(135deg);
+                  top: 50%;
+                  right: 10px;
+                  margin-top: -8px;
+                }
+                &.active:after {
+                  transform: rotate(315deg);
+                  margin-top: -3px;
+                }
+              }
+              p {
+                display: none;
+                padding: 0 10px 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+    .live--overview {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title(195px, 260px);
+      }
+      table {
+        tbody {
+          tr {
+            th {
+              border-right: 1px solid $color01;
+              padding: 5px 20px 5px 0;
+              font-weight: bold;
+              width: 1px;
+              white-space: nowrap;
+              @include mq-s {
+                padding-right: 10px;
+              }
+            }
+            td {
+              padding-left: 10px;
+              @include mq-l {
+                padding-left: 20px;
+              }
+              a {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+
+    }
+    .live--banner {
+      margin-bottom: 40px;
+      div {
+        margin: auto;
+      }
+    }
+    .live--related {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title(150px, 200px);
+      }
+      ul {
+        li {
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          &:not(:last-child) {
+            @include bb;
+          }
+          a {
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            &.movie {
+              .live--related__image-wrap:before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 30px;
+                height: 30px;
+                transform: translate(-50%,-50%);
+                background: url(/assets/images/live/minato-rugby-fes-2018/related-icon_play.png) 0 0 no-repeat;
+                overflow: hidden;
+                font-size: 0;
+                text-indent: 100%;
+                white-space: nowrap;
+                outline: none;
+                background-size: 30px;
+                @include mq-l {
+                  width: 60px;
+                  height: 60px;
+                  background-size: 60px;
+                }
+              }
+            }
+            .live--related__image-wrap {
+              position: relative;
+              width: calc(40% - 5px);
+              img {
+                width: 100%;
+              }
+            }
+            .live--related__text-wrap {
+              width: calc(60% - 5px);
+              @include mq-l {
+                padding-left: 20px;
+              }
+              h3 {
+                color: $color01;
+                font-weight: bold;
+                font-size: 16px;
+                margin-bottom: 10px;
+                @include mq-l {
+                  font-size: 20px;
+                }
+              }
+              p {
+                @include mq-l {
+                  margin-bottom: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .footer-rectangle {
+      display: flex;
+      justify-content: center;
+      li:first-child {
+        margin-right: 40px
+      }
+    }
+    .live--sidebar__skyscraper {
+      margin-top: 20px;
+    }
+  }
+  @include mq-s {
+    .head-sec .head-sec-inner {
+      width: auto;
+    }
+    .foot-sec .foot-pr {
+      border-bottom: none;
+    }
+    .foot-sec .foot-pr-inner {
+      width: auto;
+      padding-bottom: 0;
+    }
+    .foot-sec .foot-pr figure {
+      float: none;
+    }
+    .foot-sec .foot-pr-text {
+      margin-top: 0;
+    }
+    .foot-sec .foot-pr .text-block {
+      float: none;
+      width: 280px;
+      margin: 6px auto 0;
+    }
+    .foot-sec .fb-page-plugin {
+      float: none;
+      width: auto;
+    }
+    .foot-sec .copyright {
+      margin: 0;
+    }
+  }
+}
