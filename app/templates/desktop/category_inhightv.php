@@ -9,12 +9,19 @@ if ( in_array(UT_ENV, $is_develop) ) :
   $endpoint = 'https://inhightv-dev.sportsbull.jp';
 endif;
 
+$get_options = [
+  'http' => [
+      'method'  => 'GET',
+      'timeout' => 2,
+  ]
+];
+
 $includes             = array();
-$includes['part-01']  = @file_get_contents($endpoint.'/part/desktop/part-01');
-$includes['adslider'] = @file_get_contents($endpoint.'/part/desktop/adslider');
-$includes['part-02']  = @file_get_contents($endpoint.'/part/desktop/part-02');
-$includes['part-03']  = @file_get_contents($endpoint.'/part/desktop/part-03');
-$includes['part-04']  = @file_get_contents($endpoint.'/part/desktop/part-04');
+$includes['part-01']  = @file_get_contents($endpoint.'/part/desktop/part-01', false, stream_context_create($get_options));
+$includes['adslider'] = @file_get_contents($endpoint.'/part/desktop/adslider', false, stream_context_create($get_options));
+$includes['part-02']  = @file_get_contents($endpoint.'/part/desktop/part-02', false, stream_context_create($get_options));
+$includes['part-03']  = @file_get_contents($endpoint.'/part/desktop/part-03', false, stream_context_create($get_options));
+$includes['part-04']  = @file_get_contents($endpoint.'/part/desktop/part-04', false, stream_context_create($get_options));
 
 $replace_pairs = array(
   'src="/'  => 'src="'.$endpoint.'/',
