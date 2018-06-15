@@ -154,7 +154,7 @@
               <h2><img src="/assets/images/live/minato-rugby-fes-2018/ttl_about.png" alt="ABOUT">イベント概要</h2>
               <p>
                 オーストラリアと日本のトップチームが対決！NECグリーンロケッツvsワラターズ、サントリーサンゴリアスvsブランビーズのワールドクラス２試合を日本初の同日開催！<br />
-                ラグビーの聖地、秩父宮ラグビー場で行われる大迫力のフレンドリーシップマッチをお楽しみください。
+                ラグビーの聖地、秩父宮ラグビー場で行われる大迫力のフレンドシップマッチをお楽しみください。
               </p>
               <div class="embed--movie live-hide-sp">
                 <iframe src="https://www.youtube.com/embed/mEBU60B7Bwg?modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
