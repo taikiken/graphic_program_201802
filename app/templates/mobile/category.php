@@ -8,18 +8,28 @@
  * @see https://github.com/undotsushin/undotsushin/issues/1914
  * @see https://github.com/undotsushin/undotsushin/issues/1915
  */
-if ($page['category']['slug'] == 'motorsports') {
-    // motorsports
-    include_once __DIR__ . '/category_motorsports.php';
-} else if ($page['category']['slug'] == 'area') {
-    // area - since 2017-09-08
-    include_once __DIR__ . '/category_area.php';
-} elseif($page['category']['slug'] == 'crazy') {
-    // CRAZY ATHLETES
-    include_once __DIR__.'/category_crazy.php';
-}  elseif($page['category']['slug'] == 'pyeongchang2018') {
-  // pyeongchang2018
+
+// motorsports
+if ( $page['category']['slug'] == 'motorsports' ) :
+  include_once __DIR__ . '/category_motorsports.php';
+
+// area - since 2017-09-08
+elseif ( $page['category']['slug'] == 'area' ) :
+  include_once __DIR__ . '/category_area.php';
+
+// CRAZY ATHLETES
+elseif ( $page['category']['slug'] == 'crazy') :
+  include_once __DIR__.'/category_crazy.php';
+
+// pyeongchang2018
+elseif ( $page['category']['slug'] == 'pyeongchang2018' ) :
   include_once __DIR__.'/category_pyeongchang2018.php';
-}  else {
-    include_once __DIR__.'/category_content.php';
-}
+
+// inhightv
+elseif ( $page['category']['slug'] == 'inhightv' ) :
+  include_once __DIR__.'/category_inhightv.php';
+
+else :
+  include_once __DIR__.'/category_content.php';
+
+endif;
