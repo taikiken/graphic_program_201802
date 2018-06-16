@@ -215,46 +215,20 @@
 
             <section class="rb--timetable">
               <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
-              <p class="commingsoon">COMMING SOON...</p>
-              <!--
+              <!-- <p class="commingsoon">COMMING SOON...</p> -->
               <table>
                 <tbody>
                   <tr>
-                    <th>10:00</th>
-                    <td>オープニング</td>
+                    <th>22:30</th>
+                    <td>配信開始</td>
                   </tr>
                   <tr>
-                    <th>10:20</th>
-                    <td>グループステージ</td>
-                  </tr>
-                  <tr>
-                    <th>13:45</th>
-                    <td>TOKURAパフォーマンス</td>
-                  </tr>
-                  <tr>
-                    <th>14:05</th>
-                    <td>男子 準決勝</td>
-                  </tr>
-                  <tr>
-                    <th>14:35</th>
-                    <td>女子 決勝</td>
-                  </tr>
-                  <tr>
-                    <th>14:50</th>
-                    <td>男子 決勝</td>
-                  </tr>
-                  <tr>
-                    <th>15:05</th>
-                    <td>表彰式</td>
-                  </tr>
-                  <tr>
-                    <th>15:25</th>
+                    <th>26:00</th>
                     <td>配信終了</td>
                   </tr>
                 </tbody>
               </table>
               <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
-              -->
             </section>
 
             <?php /*
