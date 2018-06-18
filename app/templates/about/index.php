@@ -29,6 +29,7 @@
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
         ga('create', 'UA-74679267-1', 'auto');
+        ga('require', 'GTM-KJ33JM9');
         ga('require', 'linkid');
         ga('require', 'displayfeatures');
         ga('send', 'pageview');
