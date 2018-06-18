@@ -82,7 +82,7 @@ endforeach;
 
 </head>
 
-<body style="height: auto;">
+<body style="height: auto;" class="inhightv__webview">
 
   <!-- part-01 -->
   <div class="inhightv__index__part-01">
