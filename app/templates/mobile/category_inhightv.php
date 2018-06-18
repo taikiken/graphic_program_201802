@@ -47,7 +47,8 @@ endforeach;
 
 */
 ?>
-<link rel="stylesheet" href="<?php echo $endpoint; ?>/sp/renew_css/part-spbl.css" media="all" />
+<link rel="stylesheet" href="/assets/css/inhigh/parts_sp.css" />
+<link rel="stylesheet" href="<?php echo $endpoint; ?>/sp/renew_css/part-spbl.css" />
 <script>window.jQuery || document.write('<script src="<?php echo $endpoint; ?>/renew_js/jquery.min.js"><\/script>');</script>
 <script src="<?php echo $endpoint; ?>/sp/renew_js/slick.min.js"></script>
 <script src="<?php echo $endpoint; ?>/sp/renew_js/slickSetting.js"></script>
