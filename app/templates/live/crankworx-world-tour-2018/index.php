@@ -151,8 +151,10 @@
             <?php endif; ?>
 
             <div class="rb--intro">
-              <p>マウンテンバイクがスロープ（傾斜）を乗り越え空中を舞う、スリリングなエクストリームスポーツ！！<br />
-              ワダポリスによるオリジナル実況と栗瀬選手による解説で、今まで競技に触れたことがない方でも楽しむことができます。</p>
+              <p>
+                マウンテンバイクで宙を舞い、様々なトリックを繰り出すスリリングなエクストリームスポーツ！！今までに見たこと無い興奮度MAXの迫力映像！<br />
+                ワダポリスによるオリジナル実況と栗瀬選手による解説で、競技に触れたことがない方でも楽しむことができます。
+              </p>
 
               <div class="embed--movie rb-hide-sp">
                 <iframe src="https://www.redbullcontentpool.com/embed/video/5b1f5568d0c734009ec0d116?_=1528780139075" frameborder="0" allowfullscreen></iframe>
@@ -215,8 +217,8 @@
 
             <section class="rb--timetable">
               <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
-              <!-- <p class="commingsoon">COMMING SOON...</p> -->
-              <table>
+              <p class="commingsoon">COMMING SOON...</p>
+              <!--<table>
                 <tbody>
                   <tr>
                     <th>22:30</th>
@@ -228,7 +230,7 @@
                   </tr>
                 </tbody>
               </table>
-              <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
+              <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>-->
             </section>
 
             <?php /*
