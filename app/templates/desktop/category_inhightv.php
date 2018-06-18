@@ -2,7 +2,7 @@
 
 // endpoint
 // ------------------------------
-$is_develop = array('LOCAL', 'LOCAL_DB', 'DEVELOP');
+$is_develop = array('LOCAL', 'LOCAL_DB', 'DEVELOP', 'STAGING');
 
 $endpoint = 'https://inhightv.sportsbull.jp';
 if ( in_array(UT_ENV, $is_develop) ) :
