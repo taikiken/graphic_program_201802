@@ -49,60 +49,71 @@ endforeach;
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja" style="height: auto;">
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-        <meta charset="UTF-8">
-        <meta http-equiv="pragma" content="no-cache">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>インターハイ WebView | SPORTS BULL</title>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="UTF-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <title>インターハイ WebView | SPORTS BULL</title>
 
-        <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
-        <link rel="stylesheet" href="/assets/css/inhigh/parts_sp.css" />
-        <link rel="stylesheet" href="<?php echo $endpoint; ?>/sp/renew_css/part-spbl.css" />
-        <script>window.jQuery || document.write('<script src="<?php echo $endpoint; ?>/renew_js/jquery.min.js"><\/script>');</script>
-        <script src="<?php echo $endpoint; ?>/sp/renew_js/slick.min.js"></script>
-        <script src="<?php echo $endpoint; ?>/sp/renew_js/slickSetting.js"></script>
-        <!-- Ad / DFP - GTM -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-N7WLDK9');</script>
-        <!-- // Ad / DFP - GTM -->
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+  <link rel="stylesheet" href="/assets/css/inhigh/parts_sp.css" />
+  <link rel="stylesheet" href="<?php echo $endpoint; ?>/sp/renew_css/part-spbl.css" />
+  <script>window.jQuery || document.write('<script src="<?php echo $endpoint; ?>/renew_js/jquery.min.js"><\/script>');</script>
+  <script src="<?php echo $endpoint; ?>/sp/renew_js/slick.min.js"></script>
+  <script src="<?php echo $endpoint; ?>/sp/renew_js/slickSetting.js"></script>
 
-    </head>
-    <body style="height: auto;">
+  <!-- Ad / DFP -->
+  <script src='//www.googletagservices.com/tag/js/gpt.js'></script>
+  <!-- Ad / DFP - GTM -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N7WLDK9');</script>
+  <!-- // Ad / DFP - GTM -->
+  <!-- // Ad / DFP -->
 
-    <!-- part-01 -->
-    <div class="inhightv__index__part-01">
-      <?php echo $includes['part-01']; ?>
-    </div>
-    <!-- //part-01 -->
+  <style>
+  .inhightv__index__part-01 .SPBL_HeadingVisual {
+    display: none;
+  }
+  </style>
 
-    <!-- adslider -->
-    <div class="inhightv__index__adslider">
-      <?php echo $includes['adslider']; ?>
-    </div>
-    <!-- //adslider -->
+</head>
 
-    <!-- part-02 -->
-    <div class="inhightv__index__part-02">
-      <?php echo $includes['part-02']; ?>
-    </div>
-    <!-- //part-02 -->
+<body style="height: auto;">
 
-    <!-- part-03 -->
-    <div class="inhightv__index__part-03">
-      <?php echo $includes['part-03']; ?>
-    </div>
-    <!-- //part-03 -->
+  <!-- part-01 -->
+  <div class="inhightv__index__part-01">
+    <?php echo $includes['part-01']; ?>
+  </div>
+  <!-- //part-01 -->
 
-    <!-- part-04 -->
-    <div class="inhightv__index__part-04">
-      <?php echo $includes['part-04']; ?>
-    </div>
-    <!-- //part-04 -->
+  <!-- adslider -->
+  <div class="inhightv__index__adslider">
+    <?php echo $includes['adslider']; ?>
+  </div>
+  <!-- //adslider -->
+
+  <!-- part-02 -->
+  <div class="inhightv__index__part-02">
+    <?php echo $includes['part-02']; ?>
+  </div>
+  <!-- //part-02 -->
+
+  <!-- part-03 -->
+  <div class="inhightv__index__part-03">
+    <?php echo $includes['part-03']; ?>
+  </div>
+  <!-- //part-03 -->
+
+  <!-- part-04 -->
+  <div class="inhightv__index__part-04">
+    <?php echo $includes['part-04']; ?>
+  </div>
+  <!-- //part-04 -->
 
 
-    </body>
+</body>
 </html>
