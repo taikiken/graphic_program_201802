@@ -233,6 +233,25 @@
               <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>-->
             </section>
 
+            <section class="rb--archived">
+              <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_archived.png" alt="ARCHIVED">過去の大会</h2>
+              <ul>
+                <li>
+                  <a href="https://stg.sportsbull.jp/p/267621/" class="movie">
+                    <div class="rb--archived__image-wrap">
+                      <img src="https://stg-img.sportsbull.jp/thumbnail1/img2018061910161110206700.png" alt="">
+                    </div>
+                    <div class="rb--archived__text-wrap">
+                      <h3>【フルタイム動画】6/16 Crankworx Slopestyle：インスブルック</h3>
+                      <?php if ($page['ua'] === 'desktop') : ?>
+                        <p class="rb-hide-sp">実況:ワダポリス(アクションスポーツMC/Team REAL)<br />解説:栗瀬 裕太(BMX MTB プロライダー)</p>
+                      <?php endif; ?>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </section>
+
             <?php /*
             <section class="rb--related">
               <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_related.png" alt="">関連記事</h2>
