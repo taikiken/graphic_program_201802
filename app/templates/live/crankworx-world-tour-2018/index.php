@@ -151,7 +151,7 @@
             <?php endif; ?>
 
             <div class="rb--intro">
-              <p>
+              <p class="rb--intro__text">
                 マウンテンバイクで宙を舞い、様々なトリックを繰り出すスリリングなエクストリームスポーツ！！今までに見たこと無い興奮度MAXの迫力映像！<br />
                 ワダポリスによるオリジナル実況と栗瀬選手による解説で、競技に触れたことがない方でも楽しむことができます。
               </p>
@@ -160,6 +160,8 @@
                 <iframe src="https://www.redbullcontentpool.com/embed/video/5b1f5568d0c734009ec0d116?_=1528780139075" frameborder="0" allowfullscreen></iframe>
                 <small>©Red Bull Media House</small>
               </div>
+
+
               <div class="rb--intro__mc">
                 <ul>
                   <li>
@@ -172,6 +174,9 @@
                   </li>
                 </ul>
               </div>
+
+
+
             </div>
             <div class="rb-appli">
 
@@ -199,21 +204,16 @@
 
             </div>
 
-
-            <!--
             <section class="rb--rule">
-              <h2>普通のサッカーとはここが違う！</h2>
+              <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_rule.png" alt="RULE">ルール</h2>
               <ul>
-                <li>30m x 18mのコートで行う</li>
-                <li>人数は5人でキーパーはいない</li>
-                <li>ゴール前のボックス内に入ってはダメ</li>
-                <li>1点追加するごとに相手チームは1人退場</li>
-                <li>試合時間は10分間</li>
-                <li>同点の場合は、1 on 1で対決</li>
-                <li>5点先取するか、試合終了までに多くの点を取ったチームが勝ち！</li>
+                <li>出場者数は14名（招待制）</li>
+                <li>２ランの内の、ベストスコアをカウント</li>
+                <li>ラン１の出走順は、FMBAランキングの逆（トップは最後に出走）</li>
+                <li>ラン２の出走順は、ラン１の結果の逆（ラン１のトップは最後に出走）</li>
               </ul>
+              <p class="notice">※FMBA ... フリーライドマウンテンバイク協会</p>
             </section>
-            -->
 
             <section class="rb--timetable">
               <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
@@ -237,12 +237,12 @@
               <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_archived.png" alt="ARCHIVED">過去の大会</h2>
               <ul>
                 <li>
-                  <a href="https://stg.sportsbull.jp/p/267621/" class="movie">
+                  <a href="https://sportsbull.jp/p/335825/" class="movie">
                     <div class="rb--archived__image-wrap">
                       <img src="https://stg-img.sportsbull.jp/thumbnail1/img2018061910161110206700.png" alt="">
                     </div>
                     <div class="rb--archived__text-wrap">
-                      <h3>【フルタイム動画】6/16 Crankworx Slopestyle：インスブルック</h3>
+                      <h3>【フルタイム動画】6/16 Crankworx Slopestyle インスブルック大会</h3>
                       <?php if ($page['ua'] === 'desktop') : ?>
                         <p class="rb-hide-sp">実況:ワダポリス(アクションスポーツMC/Team REAL)<br />解説:栗瀬 裕太(BMX MTB プロライダー)</p>
                       <?php endif; ?>

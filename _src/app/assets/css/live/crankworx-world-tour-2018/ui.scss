@@ -189,7 +189,7 @@ $color02: #f8fafc;
     .rb--intro {
       margin-bottom: 40px;
       @include mlr;
-      > p {
+      &__text {
         padding-left: 10px;
         font-weight: bold;
         border-left: 2px solid $color01;
@@ -229,33 +229,7 @@ $color02: #f8fafc;
           }
         }
       }
-    }
-    .rb-appli {
-      @include mb;
-      @include mlr;
-      a {
-        display: block;
-        &:first-child {
-          margin-bottom: 20px;
-        }
-        img {
-          width: 100%;
-        }
-      }
-    }
-    .rb--rule {
-      @include mb;
-      @include mlr;
-      h2 {
-        font-weight: bold;
-        font-size: 18px;
-        padding-bottom: 10px;
-        color: $color01;
-        @include mq-l {
-          font-size: 24px;
-        }
-      }
-      ul {
+      &__list {
         li {
           position: relative;
           padding-left: 18px;
@@ -276,6 +250,61 @@ $color02: #f8fafc;
             background: $color01;
           }
         }
+      }
+    }
+    .rb-appli {
+      @include mb;
+      @include mlr;
+      a {
+        display: block;
+        &:first-child {
+          margin-bottom: 20px;
+        }
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .rb--rule {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title(80px, 134px);
+      }
+      // h2 {
+      //   font-weight: bold;
+      //   font-size: 18px;
+      //   padding-bottom: 10px;
+      //   color: $color01;
+      //   @include mq-l {
+      //     font-size: 24px;
+      //   }
+      // }
+      ul {
+        li {
+          position: relative;
+          padding-left: 18px;
+          font-weight: bold;
+          margin-bottom: 6px;
+          font-size: 12px;
+          @include mq-l {
+            font-size: 16px;
+          }
+          &:before {
+            position: absolute;
+            content: '';
+            width: 10px;
+            height: 3px;
+            top: 0.75em;
+            left: 0;
+            margin-top: -2px;
+            background: $color01;
+          }
+        }
+      }
+      .notice {
+        @include notice;
+        margin-top: 10px;
       }
     }
     .rb--timetable {
