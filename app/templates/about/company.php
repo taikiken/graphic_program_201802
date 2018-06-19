@@ -86,7 +86,7 @@
 
       <div class="company__identity">
         <h2 class="company__identity__heading">IDENTITY</h2>
-        <p><img src="/assets/images/about/company/txt_crazy03.svg" alt="CRAZY FOR SPORTS">もしスポーツに神様がいるのなら、<span>「ありがとう」と言ってもらえる</span>会社、事業でありたい。</p>
+        <p><img src="/assets/images/about/company/txt_crazy.svg" alt="CRAZY FOR SPORTS">もしスポーツに神様がいるのなら、<span>「ありがとう」と言ってもらえる</span>会社、事業でありたい。</p>
       </div><!-- /.company__vision -->
 
       <div class="company__overview">
