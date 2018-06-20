@@ -69,11 +69,11 @@ while($f=$o->fetch_array()){
 		$domain,
 		$f["id"],
 		$f["id"],
-		"<category id=\"{$f["m1"]}\" title=\"{$f["category1"]}\" />",
-		$f["d2"],$f["media"],
+		sprintf("<category id=\"%s\" title=\"%s\" />",$f["m1"],htmlspecialchars($f["category1"])),
+		$f["d2"],htmlspecialchars($f["media"]),
 		preg_replace("(\r|\n)","",$f["body"]),
 		maketag(array($f["t10"],$f["t11"],$f["t12"],$f["t13"],$f["t14"],$f["t15"])),
-		strlen($f["img1"])?sprintf("\n<enclosure url=\"%s/raw/%s\" type=\"image/jpeg\" caption=\"%s\" />",$ImgPath,$f["img1"],mod_HTML($f["t1"])):"",
+		strlen($f["img1"])?sprintf("\n<enclosure url=\"%s/raw/%s\" type=\"image/jpeg\" caption=\"%s\" />",$ImgPath,$f["img1"],htmlspecialchars($f["t1"])):"",
 		$f["flag"],
 		date(DATE_RFC822,strtotime($f["m_time"])),
 		date(DATE_RFC822,strtotime($f["u_time"]))
@@ -84,7 +84,7 @@ while($f=$o->fetch_array()){
 function maketag($s){
 	$a=array();
 	for($i=0;$i<count($s);$i++){
-		if(strlen($s[$i])>0)$a[]=$s[$i];
+		if(strlen($s[$i])>0)$a[]=htmlspecialchars($s[$i]);
 	}
 	return implode(",",$a);
 }
