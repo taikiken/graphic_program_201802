@@ -156,11 +156,16 @@
                 ワダポリスによるオリジナル実況と栗瀬選手による解説で、競技に触れたことがない方でも楽しむことができます。
               </p>
 
+              <p class="rb--intro__hashtag">
+                ハッシュタグを付けてtwitterで感想や質問をつぶやこう！<br />
+                実況で取り上げてくれるかも…？
+                <a href="https://twitter.com/intent/tweet?hashtags=クランクワークス&url=https://sportsbull.jp/live/crankworx-world-tour-2018/" target="_blank">「#クランクワークス」</a>
+              </p>
+
               <div class="embed--movie rb-hide-sp">
                 <iframe src="https://www.redbullcontentpool.com/embed/video/5b1f5568d0c734009ec0d116?_=1528780139075" frameborder="0" allowfullscreen></iframe>
                 <small>©Red Bull Media House</small>
               </div>
-
 
               <div class="rb--intro__mc">
                 <ul>
@@ -174,8 +179,6 @@
                   </li>
                 </ul>
               </div>
-
-
 
             </div>
             <div class="rb-appli">

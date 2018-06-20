@@ -112,7 +112,7 @@ $color02: #f8fafc;
     position: relative;
     width: 100%;
     padding-top: 56.25%;
-    margin-top: 20px;
+    margin-top: 40px;
     iframe {
       position: absolute;
       top: 0;
@@ -196,6 +196,25 @@ $color02: #f8fafc;
         @include mq-l {
           font-size: 20px;
           line-height: 2;
+        }
+      }
+      &__hashtag {
+        border: 1px solid rgba(#fff, 0.5);
+        padding: 10px;
+        font-weight: bold;
+        margin-top: 40px;
+        @include mq-l {
+          font-size: 16px;
+        }
+        a {
+          display: block;
+          font-size: 16px;
+          text-align: center;
+          text-decoration: underline;
+          color: #fff;
+          @include mq-l {
+            font-size: 24px;
+          }
         }
       }
       &__mc {
