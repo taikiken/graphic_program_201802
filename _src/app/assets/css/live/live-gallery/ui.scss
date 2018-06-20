@@ -1,0 +1,45 @@
+  .mainimg {
+    height: 400px;
+    background-image: url(/assets/images/live/live-gallery/bg_live_gallery.png);
+    background-size: cover;
+    text-align: center;
+  }  
+  img.mainimg-img {
+    max-width: 550px;
+    height: auto;
+    margin-top: 40px;
+    display: inline-block;
+  }
+  li {
+    margin-bottom: 15px;
+    list-style: none;
+  }
+  #js-live-lists {
+    margin-top: 30px;
+  }
+  #js-live-lists li a p {
+    color: #ccc;
+    font-size: 12px;
+  }
+  
+  @media screen and (max-width:768px) {
+    .mainimg {
+      height: 240px;
+    }
+    img.mainimg-img {
+      max-width: 300px;
+      width: 100%;
+      margin-top: 30px;
+      height: auto;
+      display: inline-block;
+    }
+    #js-live-lists {
+      padding: 0 10px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    .dark, .body-sec, .body-sec-inner {
+      background: #000;
+    }
+  }
