@@ -60,8 +60,8 @@ endforeach;
   <link rel="stylesheet" href="/assets/css/inhigh/parts_sp.css" />
   <link rel="stylesheet" href="<?php echo $endpoint; ?>/sp/renew_css/part-spbl.css" />
   <script>window.jQuery || document.write('<script src="<?php echo $endpoint; ?>/renew_js/jquery.min.js"><\/script>');</script>
-  <script src="<?php echo $endpoint; ?>/sp/renew_js/slick.min.js"></script>
-  <script src="<?php echo $endpoint; ?>/sp/renew_js/slickSetting.js"></script>
+  <script src="<?php echo $endpoint; ?>/renew_js/sp/swiper.min.js"></script>
+  <script src="<?php echo $endpoint; ?>/renew_js/sp/swiperSetting.js"></script>
 
   <!-- Ad / DFP -->
   <script src='//www.googletagservices.com/tag/js/gpt.js'></script>
