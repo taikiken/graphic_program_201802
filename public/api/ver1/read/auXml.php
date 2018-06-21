@@ -9,7 +9,7 @@ $container=sprintf("<?xml version=\"1.0\" encoding=\"utf-8\"?>
 <rss version=\"2.0\">
 <channel>
 <title>SPORTS BULL</title>
-<link>https://sportsbull.jp/</link>
+<link>%s/</link>
 <description>話題のスポーツコンテンツが満載！ 国内外のスポーツに特化したニュースや動画をお届けします。</description>
 <ttl>15</ttl>
 <language>ja</language>
@@ -17,7 +17,10 @@ $container=sprintf("<?xml version=\"1.0\" encoding=\"utf-8\"?>
 <lastBuildDate>%s</lastBuildDate>
 %s
 </channel>
-</rss>",date(DATE_RFC822,strtotime(date("Y-m-d H:i:s"))),"%s");
+</rss>",$domain,date(DATE_RFC822,strtotime(date("Y-m-d H:i:s"))),"%s");
+
+//サニタイズとデフォライズ
+$offset = (int)$_GET["offset"];
 
 $sql="
 select
@@ -42,8 +45,7 @@ select
 	u_time,
 	flag
 from repo_n
-	where
-flag=1 and m1=150 and d2=33 and swf like '%wbc2017_2017%' and flag=1 order by u_time desc
+	where flag=1 order by u_time desc limit 100 offset {$offset}
 ";
 //最初は全件出力後で1日に変更 and u_time > now() - interval '1 day'
 
@@ -53,7 +55,7 @@ while($f=$o->fetch_array()){
 
 	$item[]=sprintf('<item>
 <title>%s</title>
-<link>https://sportsbull.jp/p/%s/</link>
+<link>%s/p/%s/</link>
 <guid>%s</guid>
 %s
 <media id="%s" title="%s" />
@@ -63,14 +65,15 @@ while($f=$o->fetch_array()){
 <pubDate>%s</pubDate>
 <lastUpdate>%s</lastUpdate>
 </item>',
-		mod_HTML($f["title"]),
+		htmlspecialchars($f["title"]),
+		$domain,
 		$f["id"],
 		$f["id"],
-		"<category id=\"150\" title=\"WBC\" />",
-		$f["d2"],$f["media"],
+		sprintf("<category id=\"%s\" title=\"%s\" />",$f["m1"],htmlspecialchars($f["category1"])),
+		$f["d2"],htmlspecialchars($f["media"]),
 		preg_replace("(\r|\n)","",$f["body"]),
 		maketag(array($f["t10"],$f["t11"],$f["t12"],$f["t13"],$f["t14"],$f["t15"])),
-		strlen($f["img1"])?sprintf("\n<enclosure url=\"%s/raw/%s\" type=\"image/jpeg\" caption=\"%s\" />",$ImgPath,$f["img1"],mod_HTML($f["t1"])):sprintf("\n<enclosure url=\"https://img.sportsbull.jp/raw/%s\" type=\"image/jpeg\" caption=\"SPORTS BULL\" />",sprintf("0%s.jpg",$f["id"]%7+1)),
+		strlen($f["img1"])?sprintf("\n<enclosure url=\"%s/raw/%s\" type=\"image/jpeg\" caption=\"%s\" />",$ImgPath,$f["img1"],htmlspecialchars($f["t1"])):"",
 		$f["flag"],
 		date(DATE_RFC822,strtotime($f["m_time"])),
 		date(DATE_RFC822,strtotime($f["u_time"]))
@@ -81,13 +84,15 @@ while($f=$o->fetch_array()){
 function maketag($s){
 	$a=array();
 	for($i=0;$i<count($s);$i++){
-		if(strlen($s[$i])>0)$a[]=$s[$i];
+		if(strlen($s[$i])>0)$a[]=htmlspecialchars($s[$i]);
 	}
 	return implode(",",$a);
 }
 
+header("Content-Type:text/xml;");
 
-file_put_contents(sprintf("%s/feed/wbc/pickup.xml",$SERVERPATH),sprintf($container,implode("\n",$item)));
+echo sprintf($container,implode("\n",$item));
+exit;
 
 
 ?>
