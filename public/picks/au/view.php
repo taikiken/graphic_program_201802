@@ -76,7 +76,7 @@
   <nav class="category-nav">
     <ul class="category-nav--main">
       <li class="category-nav__item"><a class="category-nav__link category-nav__link--baseball" href="https://sportsbull.jp/category/baseball/"><span>野球</span></a></li>
-      <li class="category-nav__item"><a class="category-nav__link category-nav__link--koshien" href="https://sportsbull.jp/category/highschoolbaseball/"><span>高校野球</span></a></li>
+      <li class="category-nav__item"><a class="category-nav__link category-nav__link--koshien" href="https://vk.sportsbull.jp/koshien/"><span>高校野球</span></a></li>
       <li class="category-nav__item"><a class="category-nav__link category-nav__link--soccer" href="https://sportsbull.jp/category/soccer/"><span>サッカー</span></a></li>
       <li class="category-nav__item"><a class="category-nav__link category-nav__link--basketball" href="https://sportsbull.jp/category/basketball/"><span>バスケ</span></a></li>
       <li class="category-nav__item"><a class="category-nav__link category-nav__link--golf" href="https://sportsbull.jp/category/golf/"><span>ゴルフ</span></a></li>
