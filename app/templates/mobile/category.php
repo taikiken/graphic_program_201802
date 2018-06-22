@@ -27,7 +27,12 @@ elseif ( $page['category']['slug'] == 'pyeongchang2018' ) :
 
 // inhightv
 elseif ( $page['category']['slug'] == 'inhightv' ) :
-  include_once __DIR__.'/category_inhightv.php';
+
+  if ( UT_ENV === 'STAGING' ) :
+    include_once __DIR__.'/category_inhightv.php';
+  else :
+    include_once __DIR__.'/category_inhightv_preopen.php';
+  endif;
 
 else :
   include_once __DIR__.'/category_content.php';
