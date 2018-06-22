@@ -32,8 +32,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div id="body-section" class="body-sec">
   <div class="body-sec-inner">
 
-    pre open
-
     <div id="js-announce-container"></div>
 
     <?php if ( $page['theme']['images']['sp'] ) : ?>
