@@ -1,42 +1,3 @@
-<?php
-
-// endpoint
-// ------------------------------
-$is_develop = array('LOCAL', 'LOCAL_DB', 'DEVELOP', 'STAGING');
-
-$endpoint = 'https://inhightv.sportsbull.jp';
-if ( in_array(UT_ENV, $is_develop) ) :
-  $endpoint = 'https://inhightv-dev.sportsbull.jp';
-endif;
-
-$get_options = [
-  'http' => [
-      'method'  => 'GET',
-      'timeout' => 2,
-  ]
-];
-
-$includes             = array();
-$includes['part-01']  = @file_get_contents($endpoint.'/part/desktop/part-01', false, stream_context_create($get_options));
-$includes['adslider'] = @file_get_contents($endpoint.'/part/desktop/adslider', false, stream_context_create($get_options));
-$includes['part-02']  = @file_get_contents($endpoint.'/part/desktop/part-02', false, stream_context_create($get_options));
-$includes['part-03']  = @file_get_contents($endpoint.'/part/desktop/part-03', false, stream_context_create($get_options));
-$includes['part-04']  = @file_get_contents($endpoint.'/part/desktop/part-04', false, stream_context_create($get_options));
-
-$replace_pairs = array(
-  'src="/'  => 'src="'.$endpoint.'/',
-  'href="/' => 'href="'.$endpoint.'/',
-);
-
-foreach( $includes as $key => $value ) :
-  if ( $value ) :
-    $includes[$key] = strtr($value, $replace_pairs);
-  endif;
-endforeach;
-
-
-?>
-
 <!-- assets -->
 <?php
 /*
@@ -47,10 +8,10 @@ endforeach;
 
 */
 ?>
-<link rel="stylesheet" href="<?php echo $endpoint; ?>/renew_css/part-spbl.css" media="all" />
-<script>window.jQuery || document.write('<script src="<?php echo $endpoint; ?>/renew_js/jquery.min.js"><\/script>');</script>
-<script src="<?php echo $endpoint; ?>/renew_js/slick.min.js"></script>
-<script src="<?php echo $endpoint; ?>/renew_js/slickSetting.js"></script>
+<link rel="stylesheet" href="<?php echo $page['parts']['endpoint']; ?>/renew_css/part-spbl.css" media="all" />
+<script>window.jQuery || document.write('<script src="<?php echo $page['parts']['endpoint']; ?>/renew_js/jquery.min.js"><\/script>');</script>
+<script src="<?php echo $page['parts']['endpoint']; ?>/renew_js/slick.min.js"></script>
+<script src="<?php echo $page['parts']['endpoint']; ?>/renew_js/slickSetting.js"></script>
 <!-- Ad / DFP - GTM -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -74,19 +35,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <!-- part-01 -->
   <div class="inhightv__index__part-01">
-    <?php echo $includes['part-01']; ?>
+    <?php echo $page['parts']['part-01']; ?>
   </div>
   <!-- //part-01 -->
 
   <!-- adslider -->
   <div class="inhightv__index__adslider">
-    <?php echo $includes['adslider']; ?>
+    <?php echo $page['parts']['adslider']; ?>
   </div>
   <!-- //adslider -->
 
   <!-- part-02 -->
   <div class="inhightv__index__part-02">
-    <?php echo $includes['part-02']; ?>
+    <?php echo $page['parts']['part-02']; ?>
   </div>
   <!-- //part-02 -->
 
@@ -97,7 +58,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <!-- part-03 -->
       <div class="inhightv__index__part-03">
-        <?php echo $includes['part-03']; ?>
+        <?php echo $page['parts']['part-03']; ?>
       </div>
       <!-- //part-03 -->
 
@@ -122,7 +83,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <!-- part-04 -->
       <div class="inhightv__index__part-04">
-        <?php echo $includes['part-04']; ?>
+        <?php echo $page['parts']['part-04']; ?>
       </div>
       <!-- //part-04 -->
 
