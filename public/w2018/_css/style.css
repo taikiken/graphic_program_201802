@@ -1,0 +1,1603 @@
+@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+v2.0 | 20110126
+License: none (public domain)
+*/
+@import url(https://fonts.googleapis.com/earlyaccess/notosansjp.css);
+.sp-bnr {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin-bottom: 30px; }
+
+@keyframes timetable_1 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 1 - 6%); } }
+@keyframes timetable_2 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 2 - 6%); } }
+@keyframes timetable_3 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 3 - 6%); } }
+@keyframes timetable_4 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 4 - 6%); } }
+@keyframes timetable_5 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 5 - 6%); } }
+@keyframes timetable_6 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 6 - 6%); } }
+@keyframes timetable_7 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 7 - 6%); } }
+@keyframes timetable_8 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 8 - 6%); } }
+@keyframes timetable_9 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 9 - 6%); } }
+@keyframes timetable_10 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 10 - 6%); } }
+@keyframes timetable_11 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 11 - 6%); } }
+@keyframes timetable_12 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 12 - 6%); } }
+@keyframes timetable_13 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 13 - 6%); } }
+@keyframes timetable_14 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 14 - 6%); } }
+@keyframes timetable_15 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 15 - 6%); } }
+@keyframes timetable_16 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 16 - 6%); } }
+@keyframes timetable_17 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 17 - 6%); } }
+@keyframes timetable_18 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 18 - 6%); } }
+@keyframes timetable_19 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 19 - 6%); } }
+@keyframes timetable_20 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 20 - 6%); } }
+@keyframes timetable_21 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 21 - 6%); } }
+@keyframes timetable_22 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 22 - 6%); } }
+@keyframes timetable_23 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 23 - 6%); } }
+@keyframes timetable_24 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 24 - 6%); } }
+@keyframes timetable_25 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 25 - 6%); } }
+@keyframes timetable_26 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 26 - 6%); } }
+@keyframes timetable_27 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 27 - 6%); } }
+@keyframes timetable_28 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 28 - 6%); } }
+@keyframes timetable_29 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 29 - 6%); } }
+@keyframes timetable_30 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 30 - 6%); } }
+@keyframes timetable_31 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 31 - 6%); } }
+@keyframes timetable_32 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 32 - 6%); } }
+@keyframes timetable_33 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 33 - 6%); } }
+@keyframes timetable_34 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 34 - 6%); } }
+@keyframes timetable_35 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 35 - 6%); } }
+@keyframes timetable_36 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 36 - 6%); } }
+@keyframes timetable_37 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 37 - 6%); } }
+@keyframes timetable_38 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 38 - 6%); } }
+@keyframes timetable_39 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 39 - 6%); } }
+@keyframes timetable_40 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 40 - 6%); } }
+@keyframes timetable_41 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 41 - 6%); } }
+@keyframes timetable_42 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 42 - 6%); } }
+@keyframes timetable_43 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 43 - 6%); } }
+@keyframes timetable_44 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 44 - 6%); } }
+@keyframes timetable_45 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 45 - 6%); } }
+@keyframes timetable_46 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 46 - 6%); } }
+@keyframes timetable_47 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 47 - 6%); } }
+@keyframes timetable_48 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 48 - 6%); } }
+@keyframes timetable_49 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 49 - 6%); } }
+@keyframes timetable_50 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 50 - 6%); } }
+@keyframes timetable_51 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 51 - 6%); } }
+@keyframes timetable_52 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 52 - 6%); } }
+@keyframes timetable_53 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 53 - 6%); } }
+@keyframes timetable_54 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 54 - 6%); } }
+@keyframes timetable_55 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 55 - 6%); } }
+@keyframes timetable_56 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 56 - 6%); } }
+@keyframes timetable_57 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 57 - 6%); } }
+@keyframes timetable_58 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 58 - 6%); } }
+@keyframes timetable_59 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 59 - 6%); } }
+@keyframes timetable_60 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 60 - 6%); } }
+@keyframes timetable_61 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 61 - 6%); } }
+@keyframes timetable_62 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 62 - 6%); } }
+@keyframes timetable_63 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 63 - 6%); } }
+@keyframes timetable_64 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 64 - 6%); } }
+@keyframes timetable_65 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 65 - 6%); } }
+@keyframes timetable_66 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 66 - 6%); } }
+@keyframes timetable_67 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 67 - 6%); } }
+@keyframes timetable_68 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 68 - 6%); } }
+@keyframes timetable_69 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 69 - 6%); } }
+@keyframes timetable_70 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 70 - 6%); } }
+@keyframes timetable_71 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 71 - 6%); } }
+@keyframes timetable_72 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 72 - 6%); } }
+@keyframes timetable_73 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 73 - 6%); } }
+@keyframes timetable_74 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 74 - 6%); } }
+@keyframes timetable_75 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 75 - 6%); } }
+@keyframes timetable_76 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 76 - 6%); } }
+@keyframes timetable_77 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 77 - 6%); } }
+@keyframes timetable_78 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 78 - 6%); } }
+@keyframes timetable_79 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 79 - 6%); } }
+@keyframes timetable_80 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 80 - 6%); } }
+@keyframes timetable_81 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 81 - 6%); } }
+@keyframes timetable_82 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 82 - 6%); } }
+@keyframes timetable_83 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 83 - 6%); } }
+@keyframes timetable_84 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 84 - 6%); } }
+@keyframes timetable_85 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 85 - 6%); } }
+@keyframes timetable_86 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 86 - 6%); } }
+@keyframes timetable_87 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 87 - 6%); } }
+@keyframes timetable_88 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 88 - 6%); } }
+@keyframes timetable_89 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 89 - 6%); } }
+@keyframes timetable_90 {
+  0% {
+    width: 0; }
+  100% {
+    width: calc(13.5% * 90 - 6%); } }
+@keyframes fade-in {
+  0% {
+    display: none;
+    opacity: 0; }
+  1% {
+    display: block;
+    opacity: 0; }
+  100% {
+    display: block;
+    opacity: 1; } }
+@keyframes fade-out {
+  0% {
+    display: block;
+    opacity: 1; }
+  100% {
+    display: block;
+    opacity: 0; } }
+/*スマホ上部バナー用*/
+.guno-in-2a {
+  position: relative;
+  display: table;
+  box-sizing: inherit;
+  word-wrap: break-word;
+  border: 1px solid #E6E6E6;
+  width: 320px;
+  height: 48px;
+  overflow: hidden;
+  background: #fff;
+  margin: 0 auto; }
+
+.guno-in-2a a {
+  color: #3c3c3c;
+  text-decoration: none;
+  display: block; }
+
+.guno-in-2a .list_thumb {
+  display: table-cell;
+  width: 40px;
+  height: 40px;
+  padding: 3px 0 3px 5px; }
+
+.guno-in-2a .list_text {
+  display: table-cell;
+  vertical-align: top;
+  width: 90%;
+  padding: 2px 5px 3px 12px; }
+
+.guno-in-2a .list_title {
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 1.3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; }
+
+.guno-in-2a .list_testdesc {
+  margin-top: 2px;
+  overflow: hidden; }
+
+.guno-in-2a .gunosy-btn {
+  float: left;
+  line-height: 10px;
+  padding: 2px 2px;
+  color: #fff;
+  background-color: #5BC236;
+  font-size: 10px;
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px #d3d3d3; }
+
+.guno-in-2a .gunosy-pr {
+  float: right;
+  color: #A0A0A0;
+  font-size: 10px;
+  line-height: 1.3; }
+
+/*spバナー下部*/
+.guno-rec3-1a {
+  width: 300px;
+  height: 250px;
+  margin: 0 auto; }
+
+.guno-rec3-1a a {
+  text-align: left;
+  text-decoration: none;
+  color: #444;
+  font-family: 'ヒラギノ角ゴ Pro W3', Helvetica, Verdana, sans-serif; }
+
+.guno-rec3-1a .gunosy-wrap {
+  width: 300px;
+  height: 250px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 rgba(197, 186, 174, 0.7);
+  overflow: hidden; }
+
+.guno-rec3-1a .gunosy-img {
+  margin: 10px; }
+
+.guno-rec3-1a .gunosy-img img {
+  width: 100%;
+  height: auto; }
+
+.guno-rec3-1a .gunosy-title {
+  float: left;
+  width: 220px;
+  padding-left: 10px;
+  font-size: 13px;
+  line-height: 20px;
+  overflow: hidden;
+  box-sizing: border-box; }
+
+.guno-rec3-1a .gunosy-btn {
+  float: right;
+  margin-right: 10px;
+  line-height: 32px;
+  padding: 4px 2px;
+  color: #fff;
+  background-color: #5BC236;
+  font-size: 10px;
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px #d3d3d3; }
+
+.main-sec {
+  padding-top: 60px; }
+
+h2 {
+  padding: 10px;
+  background-color: #CC141D;
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFFFFF; }
+
+h3 {
+  color: #0e357f;
+  font-weight: bold;
+  border-bottom: solid 3px #0e357f;
+  margin-bottom: 20px;
+  font-size: 1rem; }
+  h3.sokuhou {
+    color: #FFFFFF;
+    border-bottom: none;
+    text-align: center;
+    font-size: 0.8rem;
+    margin: 0 auto 20px;
+    padding-top: 20px; }
+    h3.sokuhou span {
+      margin-top: 5px;
+      padding: 5px 10px;
+      border-top: 2px solid #FFFFFF;
+      border-bottom: 2px solid #FFFFFF;
+      display: inline-block;
+      font-size: 1rem; }
+
+.active {
+  display: block; }
+
+.hide {
+  display: none; }
+
+.global-nav {
+  border: 2px solid #0F3580;
+  border-radius: 5px;
+  margin-bottom: 30px; }
+  .global-nav ul {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap; }
+    .global-nav ul a {
+      flex-grow: 1;
+      width: 32.5%;
+      box-sizing: border-box;
+      font-weight: bold;
+      text-decoration: none;
+      color: #0e357f;
+      text-align: center;
+      padding: 10px 0;
+      border-right: 2px solid #0F3580;
+      border-bottom: 2px solid #0F3580; }
+      .global-nav ul a:first-child {
+        width: 34%; }
+      .global-nav ul a:nth-of-type(3), .global-nav ul a:nth-of-type(5) {
+        border-right: none; }
+      .global-nav ul a:nth-of-type(4), .global-nav ul a:nth-of-type(5) {
+        border-bottom: none; }
+      .global-nav ul a.now {
+        color: #fff;
+        background-color: #0F3580; }
+
+/*日程・結果ウィジェットCSSここから*/
+.schedule {
+  background: #E6E6E6;
+  overflow-y: hidden;
+  border-bottom: #0F3580 3px solid;
+  border-top: #95989A 1px solid;
+  margin-bottom: 30px;
+  position: relative; }
+  .schedule .prev {
+    position: absolute;
+    background: #E6E6E6;
+    padding: 10px;
+    border-right: #fff 1px solid; }
+  .schedule .next {
+    position: absolute;
+    right: 0;
+    background: #E6E6E6;
+    padding: 10px;
+    border-left: #fff 1px solid; }
+  .schedule ul {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden; }
+    .schedule ul li {
+      display: table-cell;
+      padding: 10px 10px;
+      border-left: #95989A 1px solid;
+      font-weight: bold;
+      cursor: pointer; }
+      .schedule ul li:first-child {
+        border-left: none;
+        padding-left: 45px; }
+      .schedule ul li:last-child {
+        padding-right: 45px; }
+      .schedule ul li.active {
+        background: #0F3580;
+        color: #FFFFFF; }
+
+.matches {
+  margin: 0 auto 30px;
+  width: 95%; }
+  .matches .match a {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    border-bottom: #E6E6E6 1px solid;
+    padding-bottom: 20px;
+    margin-bottom: 20px; }
+    .matches .match a .home_team, .matches .match a .away_team {
+      width: 26%;
+      color: #0F3580;
+      font-size: 0.9rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column; }
+      .matches .match a .home_team img, .matches .match a .away_team img {
+        margin-top: auto;
+        margin-left: auto;
+        margin-right: auto;
+        display: inline-block;
+        width: 85%;
+        border: 1px solid #ccc; }
+    .matches .match a .data {
+      width: 22%;
+      font-size: 12px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: column nowrap; }
+      .matches .match a .data .status {
+        background: #CC141D;
+        color: #FFFFFF;
+        padding: 5px 0;
+        width: 75px;
+        margin-bottom: 5px; }
+      .matches .match a .data .stadium {
+        font-weight: normal;
+        font-size: 0.5rem; }
+      .matches .match a .data .end {
+        background: #95989A; }
+    .matches .match a .home_score, .matches .match a .away_score {
+      width: 13%;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+
+/*グループ・順位ウィジェットCSSここから*/
+.groups {
+  margin: 20px auto;
+  width: 95%; }
+  .groups .group {
+    margin-bottom: 30px; }
+    .groups .group table {
+      width: 100%; }
+      .groups .group table tr {
+        border-bottom: #E6E6E6 1px solid; }
+      .groups .group table th {
+        background: #E6E6E6;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        border-right: #FFFFFF 1px solid;
+        padding: 10px 0; }
+      .groups .group table td {
+        padding: 10px 0;
+        text-align: center;
+        vertical-align: middle; }
+        .groups .group table td:first-child {
+          text-align: left;
+          font-weight: bold;
+          color: #0F3580;
+          font-size: 0.8rem;
+          text-decoration: underline; }
+          .groups .group table td:first-child img, .groups .group table td:first-child span {
+            display: inline-block;
+            vertical-align: middle;
+            border: 1px solid #ccc;
+            width: 25%; }
+
+/*トーナメントウィジェットCSSここから*/
+.tournament {
+  margin: 20px auto;
+  width: 95%; }
+  .tournament .last_update {
+    font-size: 0.8rem;
+    color: #95989A;
+    text-align: right; }
+
+/*メンバーリストウィジェットCSSここから*/
+.team_list {
+  width: 95%;
+  margin: 20px auto 0;
+  padding-bottom: 20px; }
+  .team_list table {
+    width: 100%;
+    margin-bottom: 20px; }
+    .team_list table tr {
+      border-bottom: #E6E6E6 1px solid; }
+    .team_list table th {
+      background: #E6E6E6;
+      font-weight: bold;
+      text-align: center;
+      vertical-align: middle;
+      border-right: #FFFFFF 1px solid;
+      padding: 10px 3px; }
+    .team_list table td {
+      padding: 10px 0;
+      text-align: center;
+      vertical-align: middle; }
+      .team_list table td:first-child {
+        text-align: left;
+        font-weight: bold;
+        color: #0F3580;
+        font-size: 0.8rem;
+        text-decoration: underline; }
+        .team_list table td:first-child img, .team_list table td:first-child span {
+          display: inline-block;
+          vertical-align: middle;
+          border: 1px solid #ccc;
+          width: 25%; }
+
+.member_list {
+  width: 95%;
+  margin: 20px auto 0;
+  padding-bottom: 20px; }
+  .member_list table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-top: #E6E6E6 1px solid;
+    border-left: #E6E6E6 1px solid; }
+    .member_list table th {
+      background: #E6E6E6;
+      font-weight: bold;
+      text-align: center;
+      vertical-align: middle;
+      border-right: #FFFFFF 1px solid;
+      padding: 10px 5px; }
+    .member_list table td {
+      padding: 10px 0;
+      text-align: center;
+      vertical-align: middle;
+      border-right: #E6E6E6 1px solid;
+      border-bottom: #E6E6E6 1px solid; }
+      .member_list table td:nth-of-type(3) {
+        font-weight: bold;
+        color: #0F3580;
+        text-decoration: underline;
+        cursor: pointer; }
+        .member_list table td:nth-of-type(3) img, .member_list table td:nth-of-type(3) span {
+          display: inline-block;
+          vertical-align: middle; }
+      .member_list table td a {
+        color: #0F3580; }
+
+.player {
+  width: 95%;
+  margin: 20px auto 0;
+  padding-bottom: 20px; }
+  .player table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-top: #E6E6E6 1px solid;
+    border-left: #E6E6E6 1px solid; }
+    .player table th {
+      background: #E6E6E6;
+      font-weight: bold;
+      vertical-align: middle;
+      border-bottom: #FFFFFF 1px solid;
+      border-right: #FFFFFF 1px solid;
+      padding: 10px 10px;
+      width: 30%; }
+    .player table td {
+      padding: 10px 10px;
+      vertical-align: middle;
+      border-bottom: #E6E6E6 1px solid;
+      border-right: #E6E6E6 1px solid; }
+      .player table td:first-child {
+        text-align: left;
+        font-weight: bold;
+        color: #0F3580;
+        font-size: 0.8rem; }
+        .player table td:first-child img, .player table td:first-child span {
+          display: inline-block;
+          vertical-align: middle;
+          border: 1px solid #ccc;
+          width: 25%; }
+
+#sokuhou_area {
+  background-color: #000;
+  color: #fff;
+  width: 100%; }
+  #sokuhou_area h2 {
+    position: relative; }
+    #sokuhou_area h2 .back {
+      background-color: #9d1b26;
+      padding: 5px;
+      border-radius: 5px;
+      position: absolute;
+      right: 10px;
+      font-size: 13px; }
+  #sokuhou_area .bg {
+    background-image: url(/w2018/_img/bg_mv.jpg);
+    background-repeat: no-repeat;
+    background-size: auto  100%;
+    background-position: center 0px; }
+    #sokuhou_area .bg .info_area {
+      margin-bottom: 20px; }
+      #sokuhou_area .bg .info_area .info {
+        display: flex;
+        justify-content: center; }
+        #sokuhou_area .bg .info_area .info .home_team, #sokuhou_area .bg .info_area .info .away_team {
+          width: 35%;
+          font-size: 0.6rem;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column; }
+          #sokuhou_area .bg .info_area .info .home_team img, #sokuhou_area .bg .info_area .info .away_team img {
+            margin-left: auto;
+            margin-right: auto;
+            width: 65%; }
+        #sokuhou_area .bg .info_area .info .data {
+          font-size: 12px;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          width: 30%; }
+          #sokuhou_area .bg .info_area .info .data .score {
+            flex-grow: 1;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%; }
+            #sokuhou_area .bg .info_area .info .data .score .home_score, #sokuhou_area .bg .info_area .info .data .score .away_score {
+              width: 45%;
+              font-weight: bold;
+              font-size: 50px;
+              display: flex;
+              align-items: center;
+              justify-content: center; }
+            #sokuhou_area .bg .info_area .info .data .score .vs {
+              font-size: 1rem;
+              padding-top: 10px; }
+          #sokuhou_area .bg .info_area .info .data .stadium {
+            font-size: 0.5rem;
+            flex-grow: 1;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            margin-bottom: 20px; }
+      #sokuhou_area .bg .info_area .group {
+        color: #FFFFFF;
+        padding: 2px 10px;
+        margin: 0 auto 5px;
+        font-size: 0.8rem;
+        text-align: center; }
+      #sokuhou_area .bg .info_area .status {
+        color: #FFFFFF;
+        padding: 2px 10px;
+        border: 2px solid #fff;
+        width: 20%;
+        text-align: center;
+        margin: 0 auto 5px;
+        font-size: 0.8rem; }
+  #sokuhou_area .menu {
+    background-color: #9d1b26;
+    line-height: 0;
+    text-align: center;
+    padding: 19px;
+    position: relative; }
+    #sokuhou_area .menu:before {
+      content: url(/w2018/_img/ico-collapsible.png);
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: all .05s linear; }
+    #sokuhou_area .menu.open:before {
+      transform: rotate(180deg); }
+  #sokuhou_area .report {
+    width: 95%;
+    margin: 0 auto 20px;
+    position: relative;
+    overflow: hidden; }
+    #sokuhou_area .report .menu span {
+      font-size: 10px;
+      font-weight: lighter;
+      position: absolute;
+      top: 40px;
+      right: 5px; }
+    #sokuhou_area .report:before {
+      content: '';
+      display: block;
+      height: 20000px;
+      width: 2px;
+      background-color: #cc141d;
+      margin: auto;
+      position: absolute;
+      top: 20px;
+      right: 0;
+      left: 0; }
+    #sokuhou_area .report .event {
+      font-size: 12px;
+      /*font-weight: lighter;*/
+      background-color: #082956; }
+      #sokuhou_area .report .event div {
+        position: relative;
+        /*ホーム側にtext*/
+        /*アウェイ側にtext*/
+        /*センターにtext*/
+        /*試合進行上の通常イベント*/
+        /*前後半キックオフ*/
+        /*アディショナルタイム*/
+        /*ハーフタイム*/
+        /*試合終了*/
+        /*ゴール*/
+        /*選手交代*/
+        /*イエローカード1枚目*/
+        /*イエローカード2枚目*/
+        /*レッドカード=退場*/
+        /*総括,summary*/ }
+        #sokuhou_area .report .event div.line_0 {
+          padding: 20px 0;
+          display: flex;
+          flex-direction: row-reverse; }
+          #sokuhou_area .report .event div.line_0 .time {
+            width: 50%;
+            margin-left: 20px;
+            margin-right: 10px; }
+          #sokuhou_area .report .event div.line_0 .text {
+            width: 50%;
+            margin-left: 10px;
+            margin-right: 20px; }
+        #sokuhou_area .report .event div.line_1 {
+          padding: 20px 0;
+          display: flex; }
+          #sokuhou_area .report .event div.line_1 .time {
+            width: 50%;
+            text-align: right;
+            margin-left: 10px;
+            margin-right: 20px; }
+          #sokuhou_area .report .event div.line_1 .text {
+            width: 50%;
+            margin-left: 20px;
+            margin-right: 10px; }
+        #sokuhou_area .report .event div.line_2 {
+          padding: 20px 0; }
+          #sokuhou_area .report .event div.line_2 .text {
+            padding: 25px 10px 10px 10px;
+            text-align: center;
+            background-color: #082956; }
+          #sokuhou_area .report .event div.line_2.event_type0 .time {
+            text-align: center;
+            padding-top: 35px;
+            background-color: #082956; }
+          #sokuhou_area .report .event div.line_2.event_type0 .text {
+            text-align: left;
+            padding: 5px 10px 10px 10px; }
+        #sokuhou_area .report .event div.event_type0:before {
+          content: "";
+          background-image: url(/w2018/_img/icon_shoes.png);
+          background-size: 20px 15px;
+          background-position: center center;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          margin: auto;
+          height: 50px;
+          width: 20px;
+          margin-top: 5px;
+          background-color: #082956;
+          background-repeat: no-repeat; }
+        #sokuhou_area .report .event div.event_type1 {
+          background-color: #071f41;
+          padding: 10px 0;
+          /*margin-bottom: 20px;*/ }
+          #sokuhou_area .report .event div.event_type1:before {
+            content: "";
+            background-image: url(/w2018/_img/icon_whistle.png);
+            background-size: 20px 15px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            height: 15px;
+            width: 20px; }
+          #sokuhou_area .report .event div.event_type1 .time {
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: 60px 15px;
+            background-image: url(/w2018/_img/txt_kickoff.png); }
+        #sokuhou_area .report .event div.event_type2:before {
+          content: "";
+          background-image: url(/w2018/_img/icon_timer.png);
+          background-size: 19px 23px;
+          background-position: center center;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          margin: auto;
+          height: 40px;
+          width: 20px;
+          margin-top: 5px;
+          background-color: #082956;
+          background-repeat: no-repeat; }
+        #sokuhou_area .report .event div.event_type3_1 {
+          background-color: #071f41;
+          padding: 10px 0; }
+          #sokuhou_area .report .event div.event_type3_1:before {
+            content: "";
+            background-image: url(/w2018/_img/icon_whistle.png);
+            background-size: 20px 15px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            height: 15px;
+            width: 20px; }
+          #sokuhou_area .report .event div.event_type3_1 .time {
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: 60px 15px;
+            background-image: url(/w2018/_img/txt_halftime.png); }
+        #sokuhou_area .report .event div.event_type3_2 {
+          background-color: #071f41;
+          padding: 10px 0;
+          /*margin-top: 20px;*/ }
+          #sokuhou_area .report .event div.event_type3_2:before {
+            content: "";
+            background-image: url(/w2018/_img/icon_whistle.png);
+            background-size: 20px 15px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            height: 15px;
+            width: 20px; }
+          #sokuhou_area .report .event div.event_type3_2 .time {
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: 60px 15px;
+            background-image: url(/w2018/_img/txt_fulltime.png); }
+        #sokuhou_area .report .event div.event_type4:before {
+          content: "";
+          background-image: url(/w2018/_img/icon_ball.png);
+          background-size: 20px 20px;
+          background-position: center center;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          margin: auto;
+          height: 50px;
+          width: 20px;
+          margin-top: 5px;
+          background-color: #082956;
+          background-repeat: no-repeat; }
+        #sokuhou_area .report .event div.event_type4 .text:before {
+          content: "GOAL!!";
+          font-family: Helvetica, "Helvetica Neue";
+          font-size: 25px;
+          font-weight: bold;
+          line-height: 1;
+          display: block; }
+        #sokuhou_area .report .event div.event_type5:before {
+          content: "";
+          background-image: url(/w2018/_img/icon_change.png);
+          background-size: 22px 20px;
+          background-position: center center;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          margin: auto;
+          height: 50px;
+          width: 20px;
+          margin-top: 5px;
+          background-color: #082956;
+          background-repeat: no-repeat; }
+        #sokuhou_area .report .event div.event_type6:before {
+          content: "";
+          background-image: url(/w2018/_img/icon_card_y.png);
+          background-size: 16px 20px;
+          background-position: center center;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          margin: auto;
+          height: 50px;
+          width: 20px;
+          margin-top: 5px;
+          background-color: #082956;
+          background-repeat: no-repeat; }
+        #sokuhou_area .report .event div.event_type7:before {
+          content: "";
+          background-image: url(/w2018/_img/icon_card_y2.png);
+          background-size: 19px 20px;
+          background-position: center center;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          margin: auto;
+          height: 50px;
+          width: 20px;
+          margin-top: 5px;
+          background-color: #082956;
+          background-repeat: no-repeat; }
+        #sokuhou_area .report .event div.event_type8:before {
+          content: "";
+          background-image: url(/w2018/_img/icon_card_r.png);
+          background-size: 16px 20px;
+          background-position: center center;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          margin: auto;
+          height: 50px;
+          width: 20px;
+          margin-top: 5px;
+          background-color: #082956;
+          background-repeat: no-repeat; }
+        #sokuhou_area .report .event div.event_type9 {
+          padding: 0; }
+          #sokuhou_area .report .event div.event_type9 .text {
+            padding: 25px 10px;
+            background-color: #061b38;
+            text-align: left; }
+  #sokuhou_area .data_timeline {
+    width: 95%;
+    margin: 0 auto 20px;
+    position: relative; }
+    #sokuhou_area .data_timeline .timetable .head {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      font-weight: bold;
+      background-color: #071f41; }
+      #sokuhou_area .data_timeline .timetable .head .home, #sokuhou_area .data_timeline .timetable .head .away {
+        width: 15%;
+        text-align: center; }
+        #sokuhou_area .data_timeline .timetable .head .home img, #sokuhou_area .data_timeline .timetable .head .away img {
+          width: 100%; }
+    #sokuhou_area .data_timeline .timetable .expansion {
+      display: flex;
+      background-color: #071f41;
+      /*.away{
+      	width: 52%;
+      	ol{
+      		display: flex;
+      		justify-content: space-between;
+      		background-color: #071f41;
+      		padding: 3px 0;
+      		li{
+      			color: #2d7fcb;
+      			font-size: 10px;
+      			width: 10%;
+      			text-align: right;
+      			&:last-child{
+      				width: 22%;
+      				text-align: center;
+      			}
+      		}
+      	}
+      	ul{
+      		background: url(/w2018/_img/bg_expansion.png);
+      		height: 270px;
+      		&:after{
+      			clear: both;
+      			content: "";
+      			display: table;
+      			background-color: #071f41;
+      		}
+      		li{
+      			height: 3px;
+      			font-size: 0;
+      			background-color: #9d1b26;
+      			width: 0;
+      			&.event_1{
+      				@include timeline-anime;
+      				animation-name: timetable_1;
+      			}
+      			&.event_2{
+      				@include timeline-anime;
+      				animation-name: timetable_2;
+      			}
+      			&.event_3{
+      				@include timeline-anime;
+      				animation-name: timetable_3;
+      			}
+      			&.event_4{
+      				@include timeline-anime;
+      				animation-name: timetable_4;
+      			}
+      			&.event_5{
+      				@include timeline-anime;
+      				animation-name: timetable_5;
+      			}
+      			&.event_6{
+      				@include timeline-anime;
+      				animation-name: timetable_6;
+      			}
+      			&.event_7{
+      				@include timeline-anime;
+      				animation-name: timetable_7;
+      			}
+      		}
+      	}
+      }*/ }
+      #sokuhou_area .data_timeline .timetable .expansion .home, #sokuhou_area .data_timeline .timetable .expansion .away {
+        width: 52%; }
+        #sokuhou_area .data_timeline .timetable .expansion .home ol, #sokuhou_area .data_timeline .timetable .expansion .away ol {
+          display: flex;
+          justify-content: space-between;
+          padding: 3px 0;
+          list-style: none; }
+          #sokuhou_area .data_timeline .timetable .expansion .home ol li, #sokuhou_area .data_timeline .timetable .expansion .away ol li {
+            color: #2d7fcb;
+            font-size: 10px;
+            width: 10%; }
+            #sokuhou_area .data_timeline .timetable .expansion .home ol li:first-child, #sokuhou_area .data_timeline .timetable .expansion .away ol li:first-child {
+              width: 22%;
+              text-align: center; }
+        #sokuhou_area .data_timeline .timetable .expansion .home ul, #sokuhou_area .data_timeline .timetable .expansion .away ul {
+          background: url(/w2018/_img/bg_expansion.png);
+          height: 270px;
+          /*&:after{
+          	clear: both;
+          	content: "";
+          	display: table;
+          }*/ }
+          #sokuhou_area .data_timeline .timetable .expansion .home ul.long, #sokuhou_area .data_timeline .timetable .expansion .away ul.long {
+            height: 360px; }
+          #sokuhou_area .data_timeline .timetable .expansion .home ul li, #sokuhou_area .data_timeline .timetable .expansion .away ul li {
+            float: right;
+            clear: right;
+            height: 3px;
+            font-size: 0;
+            background-color: #9d1b26; }
+            #sokuhou_area .data_timeline .timetable .expansion .home ul li.event_1, #sokuhou_area .data_timeline .timetable .expansion .away ul li.event_1 {
+              animation-timing-function: ease;
+              animation-fill-mode: forwards;
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-name: timetable_1; }
+            #sokuhou_area .data_timeline .timetable .expansion .home ul li.event_2, #sokuhou_area .data_timeline .timetable .expansion .away ul li.event_2 {
+              animation-timing-function: ease;
+              animation-fill-mode: forwards;
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-name: timetable_2; }
+            #sokuhou_area .data_timeline .timetable .expansion .home ul li.event_3, #sokuhou_area .data_timeline .timetable .expansion .away ul li.event_3 {
+              animation-timing-function: ease;
+              animation-fill-mode: forwards;
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-name: timetable_3; }
+            #sokuhou_area .data_timeline .timetable .expansion .home ul li.event_4, #sokuhou_area .data_timeline .timetable .expansion .away ul li.event_4 {
+              animation-timing-function: ease;
+              animation-fill-mode: forwards;
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-name: timetable_4; }
+            #sokuhou_area .data_timeline .timetable .expansion .home ul li.event_5, #sokuhou_area .data_timeline .timetable .expansion .away ul li.event_5 {
+              animation-timing-function: ease;
+              animation-fill-mode: forwards;
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-name: timetable_5; }
+            #sokuhou_area .data_timeline .timetable .expansion .home ul li.event_6, #sokuhou_area .data_timeline .timetable .expansion .away ul li.event_6 {
+              animation-timing-function: ease;
+              animation-fill-mode: forwards;
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-name: timetable_6; }
+            #sokuhou_area .data_timeline .timetable .expansion .home ul li.event_7, #sokuhou_area .data_timeline .timetable .expansion .away ul li.event_7 {
+              animation-timing-function: ease;
+              animation-fill-mode: forwards;
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-name: timetable_7; }
+      #sokuhou_area .data_timeline .timetable .expansion .timeline {
+        width: 6%;
+        padding-top: 28px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #111; }
+        #sokuhou_area .data_timeline .timetable .expansion .timeline p {
+          font-size: 10px;
+          text-align: center;
+          color: #fff;
+          font-weight: bold;
+          border-bottom: 3px solid #aaa;
+          /*#292929*/ }
+      #sokuhou_area .data_timeline .timetable .expansion .away ol li {
+        text-align: right; }
+        #sokuhou_area .data_timeline .timetable .expansion .away ol li:first-child {
+          width: 10%;
+          text-align: right; }
+        #sokuhou_area .data_timeline .timetable .expansion .away ol li:last-child {
+          width: 22%;
+          text-align: center; }
+      #sokuhou_area .data_timeline .timetable .expansion .away ul li {
+        float: none;
+        width: 0; }
+    #sokuhou_area .data_timeline .timetable .notice {
+      background-color: #071f41;
+      padding: 10px; }
+      #sokuhou_area .data_timeline .timetable .notice ul {
+        display: flex;
+        flex-wrap: wrap; }
+        #sokuhou_area .data_timeline .timetable .notice ul li {
+          width: 50%;
+          font-size: 10px;
+          color: #2d7fcb;
+          padding: 5px 0; }
+      #sokuhou_area .data_timeline .timetable .notice p {
+        font-size: 10px;
+        margin-top: 7px;
+        color: rgba(255, 255, 255, 0.3); }
+    #sokuhou_area .data_timeline .timetable table {
+      background-color: #071f41;
+      color: #fff; }
+      #sokuhou_area .data_timeline .timetable table th {
+        padding: 10px 5px;
+        background-color: #061b38;
+        vertical-align: middle; }
+        #sokuhou_area .data_timeline .timetable table th.home, #sokuhou_area .data_timeline .timetable table th.away {
+          text-align: center; }
+        #sokuhou_area .data_timeline .timetable table th img {
+          width: 55%; }
+      #sokuhou_area .data_timeline .timetable table td {
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+        background-color: #082956;
+        font-size: 14px; }
+        #sokuhou_area .data_timeline .timetable table td:first-child {
+          text-align: left;
+          font-weight: bold; }
+        #sokuhou_area .data_timeline .timetable table td span {
+          font-size: 10px;
+          font-weight: normal;
+          color: rgba(255, 255, 255, 0.5);
+          display: inline-block; }
+  #sokuhou_area .member {
+    width: 95%;
+    margin: 0 auto 20px;
+    position: relative;
+    background-color: #082956; }
+    #sokuhou_area .member .open + .member_area {
+      padding-bottom: 5px; }
+    #sokuhou_area .member .head {
+      font-weight: bold;
+      background-color: #061b38;
+      text-align: center;
+      padding: 10px 0;
+      margin-bottom: 20px; }
+    #sokuhou_area .member .starting_member, #sokuhou_area .member .bench_member {
+      display: flex;
+      position: relative;
+      margin-bottom: 20px; }
+      #sokuhou_area .member .starting_member:before, #sokuhou_area .member .bench_member:before {
+        content: '';
+        display: block;
+        width: 2px;
+        background-color: #cc141d;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0; }
+      #sokuhou_area .member .starting_member ul, #sokuhou_area .member .bench_member ul {
+        width: 50%; }
+        #sokuhou_area .member .starting_member ul li, #sokuhou_area .member .bench_member ul li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 12px;
+          padding: 7px 7px; }
+          #sokuhou_area .member .starting_member ul li .name, #sokuhou_area .member .bench_member ul li .name {
+            width: 100%; }
+          #sokuhou_area .member .starting_member ul li .out, #sokuhou_area .member .bench_member ul li .out {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px 3px; }
+            #sokuhou_area .member .starting_member ul li .out:after, #sokuhou_area .member .bench_member ul li .out:after {
+              content: '';
+              display: block;
+              width: 0;
+              height: 0;
+              border-style: solid;
+              border-width: 4px 4px 0 4px;
+              border-color: #fff transparent transparent transparent; }
+          #sokuhou_area .member .starting_member ul li .in, #sokuhou_area .member .bench_member ul li .in {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px 3px; }
+            #sokuhou_area .member .starting_member ul li .in:after, #sokuhou_area .member .bench_member ul li .in:after {
+              content: '';
+              display: block;
+              width: 0;
+              height: 0;
+              border-style: solid;
+              border-width: 0 4px 4px 4px;
+              border-color: transparent transparent #fff transparent; }
+    #sokuhou_area .member .director {
+      position: relative;
+      margin-bottom: 20px; }
+      #sokuhou_area .member .director:before {
+        content: '';
+        display: block;
+        width: 2px;
+        background-color: #cc141d;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0; }
+      #sokuhou_area .member .director ul {
+        display: flex; }
+        #sokuhou_area .member .director ul li {
+          width: 50%;
+          font-size: 12px;
+          padding: 7px 7px; }
+  #sokuhou_area .stadium_area {
+    width: 95%;
+    margin: 0 auto 20px;
+    padding-bottom: 20px;
+    position: relative; }
+    #sokuhou_area .stadium_area table {
+      width: 100%;
+      color: #fff; }
+      #sokuhou_area .stadium_area table tr td {
+        font-size: 14px; }
+        #sokuhou_area .stadium_area table tr td:first-child {
+          background-color: #061b38;
+          padding: 15px 10px;
+          width: 40%; }
+        #sokuhou_area .stadium_area table tr td:last-child {
+          background-color: #082956;
+          padding: 15px 10px; }
+
+@media screen and (max-width: 768px) {
+  .main-sec {
+    padding-top: 20px; }
+
+  .global-nav {
+    width: 95%;
+    margin: 20px auto;
+    font-size: 0.8rem; }
+
+  #sokuhou_area .menu img {
+    width: auto; }
+
+  .sp-bnr div.sp-bnr-first {
+    display: none; }
+
+  .sp-bnr div.sp-bnr-second {
+    display: none; }
+
+  #sokuhou_area .bg .info_area .status {
+    width: 40%; }
+
+  #sokuhou_area .data_timeline .timetable table td.small {
+    font-size: 12px;
+    text-align: left; }
+
+  .team_list table th:nth-of-type(2) {
+    font-size: 10px; }
+
+  .player table th {
+    width: 38%;
+    font-size: 12px; }
+
+  #sokuhou_area .bg .info_area .info .home_team, #sokuhou_area .bg .info_area .info .away_team {
+    width: 34%; }
+
+  #sokuhou_area .bg .info_area .info .data {
+    width: 32%; }
+
+  #sokuhou_area .bg .info_area .info .data .score .home_score {
+    justify-content: flex-start; }
+
+  #sokuhou_area .bg .info_area .info .data .score .away_score {
+    justify-content: flex-end; } }
+
+/*# sourceMappingURL=style.css.map */
