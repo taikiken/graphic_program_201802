@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="/w2018/_css/style.css?var=20170607">
   <script src="/w2018/_js/common.js"></script>
 <script src="/w2018/_js/makeContent.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
 	var para = getUrlVars();
 	if (isset(para.teamid) && isset(para.playerid)) {
@@ -79,7 +80,7 @@
 </head>
 <body class="appbnr-disable">
 <div id="whole" class="whole theme_newdark">
-  <header class="head-sec">
+  <header class="head-sec hide-app">
 	<div class="head-sec-inner">
 	  <h1><a href="/">SPORTS BULL</a></h1>
 	</div><!-- /.head-sec-inner -->
@@ -89,7 +90,23 @@
 	<div class="body-sec-inner">
 
 	  <section class="main-sec">
-      <img src="/w2018/_img/main.png" alt="2018ワールドカップロシア大会" style="display: block; width: 100%; margin-bottom: 20px;">
+
+      <div class="main_wrap"  style="position: relative; margin-bottom: 20px">
+
+        <!-- SP -->
+        <div class="hide-app">
+        <a href="https://app.adjust.com/u43r5cd" target="_blank" class="show-for-small"><img src="/w2018/_img/main_sp.png" alt="2018ワールドカップロシア大会" style="display: block; width: 100%;"></a>
+        </div>
+
+        <!-- アプリ -->
+        <div style="display: none;" class="show-app">
+          <img src="/w2018/_img/main_app.png" alt="アプリで速報の通知を受け取る" style="display: block; width: 100%;" class="show-for-small app-show">
+        </div>
+
+        <!-- PC -->
+        <img src="/w2018/_img/main_pc.png" alt="2018ワールドカップロシア大会" style="display: block; width: 100%;" class="show-for-large">
+      </div>
+
 	  	<div class="gunosyads-sdk-container guno-in-2a" style="display:none;" gunosyads-sdk-frame-id="42697">
           <a href="${ url }" target="_top">
             <div class="list_thumb">
@@ -311,7 +328,7 @@
   </div>
   <!-- //[PC] footer -->
 
-
+  <div class="hide-app">
   <footer class="foot-sec show-for-small">
 	<div class="foot-sec-inner">
 	  <nav class="foot-breadCrumb">
@@ -363,6 +380,7 @@
 	  <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
 	</div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
+  </div>
 
 
 
