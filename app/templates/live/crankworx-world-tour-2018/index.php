@@ -220,20 +220,21 @@
 
             <section class="rb--timetable">
               <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
-              <p class="commingsoon">COMMING SOON...</p>
-              <!--<table>
+              <!-- <p class="commingsoon">COMMING SOON...</p> -->
+              <table>
                 <tbody>
                   <tr>
-                    <th>22:30</th>
+                    <th>19:00</th>
                     <td>配信開始</td>
                   </tr>
                   <tr>
-                    <th>26:00</th>
+                    <th>21:00</th>
                     <td>配信終了</td>
                   </tr>
                 </tbody>
               </table>
-              <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>-->
+              <p class="notice">※ 配信開始時間が22:30→19:00に変更となりました。</p>
+              <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
             </section>
 
             <section class="rb--archived">
