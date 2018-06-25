@@ -130,7 +130,7 @@ $digest    = inhightvGetDigest(4);
 
       <!-- plan -->
       <section class="section_interhigh_highlight inhightv__index__plan">
-        <div class="ttl-wrapper">
+        <div class="inhightv__title">
           <div class="inhightv__headline">
             <h2>
               <i>

@@ -27,7 +27,7 @@ include_once __DIR__.'/_assets.php';
   </div>
 
 
-  <div class="body-sec inhightv inhightv--single">
+  <div class="body-sec inhightv inhightv--highlight">
     <div class="body-sec-inner">
 
       <section class="main-sec">

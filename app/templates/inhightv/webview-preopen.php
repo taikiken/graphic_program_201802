@@ -10,22 +10,29 @@ $digest    = inhightvGetDigest(2);
 
 
 ?>
-<link rel="stylesheet" href="/assets/css/inhigh/parts_sp.css" />
+<!DOCTYPE html>
+<html dir="ltr" lang="ja" style="height: auto;">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="UTF-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <title>インターハイ WebView | SPORTS BULL</title>
 
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+  <link rel="stylesheet" href="/assets/css/inhigh/parts_sp.css?v=<?php echo $page['version']; ?>" />
 
-<!-- assets -->
-<?php include_once __DIR__.'/../inhightv/_assets.php'; ?>
-<?php include_once __DIR__.'/../inhightv/mobile/_assets.php'; ?>
-<!-- //assets -->
+  <script src='//www.googletagservices.com/tag/js/gpt.js'></script>
+  <!-- assets -->
+  <?php include_once __DIR__.'/../inhightv/_assets.php'; ?>
+  <?php include_once __DIR__.'/../inhightv/mobile/_assets.php'; ?>
+  <!-- //assets -->
 
-<div id="body-section" class="body-sec inhightv">
+</head>
+
+<body style="height: auto;" class="inhightv__webview">
+<div id="body-section" class="body-sec inhightv inhightv--webview">
   <div class="body-sec-inner">
-
-    <?php if ( $page['theme']['images']['sp'] ) : ?>
-    <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['category']['theme']['background_color'] : ''; ?>">
-      <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
-    </div>
-    <?php endif; ?>
 
 
     <figure class="inhightv__figure">
@@ -159,25 +166,6 @@ $digest    = inhightvGetDigest(2);
       </div>
       <!-- //plan -->
 
-
-
-      <aside class="sns-pr">
-        <div class="sns-pr-outer">
-          <dl class="sns-pr-inner">
-            <dt><span>いいねして最新ニュースをチェック！</span></dt>
-            <dd>
-              <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-            </dd>
-          </dl><!-- /.sns-pr-inner -->
-        </div><!-- /.sns-pr-outer -->
-      </aside><!-- /.sns-pr -->
-
-      <div id="pickup-container"></div>
-      <div id="js-headline"></div>
-      <div id="category-container"></div>
-      <div id="board-container-more"></div>
-
-
       <!-- part-04 -->
       <div class="inhightv__index__part-04">
         <ul>
@@ -211,5 +199,5 @@ $digest    = inhightvGetDigest(2);
     </section>
 
   </div>
-</div>
-
+</body>
+</html>

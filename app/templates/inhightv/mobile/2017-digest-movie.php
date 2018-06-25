@@ -3,7 +3,7 @@
 
 # インハイ2017_ハイライト
 include_once(__DIR__.'/../_include.php');
-$highlight = inhightvGetHighlight(100);
+$digest = inhightvGetDigest(1000);
 
 // header
 include_once __DIR__."/../../mobile/_header.php";
@@ -27,56 +27,37 @@ include_once __DIR__.'/_assets.php';
   </div>
 
 
-  <div class="body-sec inhightv inhightv--single">
+  <div class="body-sec inhightv inhightv--digest">
     <div class="body-sec-inner">
 
       <section class="main-sec">
 
+      <!-- digest -->
+      <?php if ( $digest ) : ?>
+        <div class="ttl-wrapper">
+          <h2 class="ttl highlight"><i></i>動画特集</h2>
+          <p class="ttl_date"><?php echo $digest['start']; ?> - <?php echo $digest['end']; ?></p>
+        </div>
 
-      <!-- highlight -->
-      <?php if ( $highlight ) : ?>
-      <section class="section_interhigh_highlight">
-        <div class="inhightv__title">
-          <div class="inhightv__headline">
-            <h2>
-              <i>
-                <svg class="icon icon-h-icon-play"><use xlink:href="#icon-h-icon-play"></use></svg>
-              </i>
-              <span>
-                2017 ハイライト動画
-              </span>
-            </h2>
+        <?php foreach($digest['movie'] as $k=>$v) { ?>
+          <div class="article_list">
+            <article class="highlight_article">
+              <h3 class="date"><i></i><?=$k?></h3>
+                <ul class="thumb_area">
+                  <?php
+                  for($i=0;$i<count($v);$i++){
+                      echo sprintf('<li><a href="%s"><div class="img"><img src="%s" alt="%s"></div><div class="txt_area"><p>%s %s</p></div></a></li>',$v[$i]["url"],$v[$i]["img"],$v[$i]["title"],$v[$i]["date"],$v[$i]["title"]);
+                  }
+                  ?>
+              </ul>
+            </article>
           </div>
-        </div>
+        <?php } ?>
 
-        <div class="article_list">
-          <article class="highlight_article">
-            <ul class="thumb_area">
-              <?php foreach( $highlight as $key => $value ) : ?>
-              <li>
-                <a href="<?php echo $value['url']; ?>">
-                  <div class="img">
-                    <?php if ( $value['img'] ) : ?>
-                      <img src="<?php echo $value['img']; ?>" alt="" />
-                    <?php endif; ?>
-                  </div>
-                  <div class="txt_area">
-                    <p>
-                      <?php echo $value['title']; ?>
-                    </p>
-                  </div>
-                </a>
-              </li>
-              <?php endforeach; ?>
-            </ul>
-          </article>
-        </div>
-      </section>
       <?php endif; ?>
-      <!-- //highlight -->
-
-
+      <!-- //digest -->
       </section>
+
 
     </div>
 

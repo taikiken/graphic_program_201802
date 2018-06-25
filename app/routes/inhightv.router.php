@@ -106,6 +106,7 @@ $app->group('/{slug:inhightv}',  function () use($app) {
 
   });
 
+
   // webview
   // ==============================
   $this->get('/webview[/]', function ($request, $response, $args) use ($app, $common) {
@@ -114,11 +115,17 @@ $app->group('/{slug:inhightv}',  function () use($app) {
       'title'              => $common['title'],
       'og_title'           => $common['title'].' | '.$app->model->property('title'),
       'path'               => $args,
+      'category'           => $common['category'],
       'template'           => 'webview',
       'template_classname' => '',
     ));
 
-    return $this->renderer->render($response, 'inhightv/webview.php', $args);
+
+    if ( UT_ENV === 'STAGING' ) :
+      return $this->renderer->render($response, 'inhightv/webview.php', $args);
+    else :
+      return $this->renderer->render($response, 'inhightv/webview-preopen.php', $args);
+    endif;
 
   });
 
