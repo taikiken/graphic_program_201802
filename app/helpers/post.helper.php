@@ -21,6 +21,7 @@ class PostHelper{
     $sponserdCategoryArray = [
       'crazy',
       'big6tv',
+      'inhightv',
     ];
 
     if ( isset($post['categories']) && is_array($post['categories'])) :
@@ -47,7 +48,6 @@ class PostHelper{
     $sponserdCategoryArray = [
       'motorsports',
       'climbing',
-      'inhigh',
     ];
 
     if ( isset($post['categories']) && is_array($post['categories'])) :
