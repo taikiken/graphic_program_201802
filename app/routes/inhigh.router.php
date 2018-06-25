@@ -14,13 +14,13 @@ $app->group('/{slug:inhigh}',  function () use($app) {
   // photo
   // ==============================
   $this->get('/photo[/]', function ($request, $response, $args) use ($app) {
-    return $response->withRedirect('/inhightv/photo/', 301);
+    return $response->withRedirect('/category/inhightv/', 301);
   });
 
   // highlight
   // ==============================
   $this->get('/highlight[/]', function ($request, $response, $args) use ($app) {
-    return $response->withRedirect('/inhightv/highlight/', 301);
+    return $response->withRedirect('/inhightv/2017-highlight-movie/', 301);
   });
 
   // webview
