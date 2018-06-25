@@ -43,14 +43,14 @@ function inhightvGetDigest( $count = 4 ) {
   $db->query($sql);
 
   while( $f = $db->fetch_array() ) {
-    $movie[sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"])][] = array(
+    $movie['movie'][sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"])][] = array(
       "title" => htmlspecialchars($f["title"]),
       "date"  => sprintf("%s/%s",(int)$f["a2"],(int)$f["a3"]),
       "img"   => sprintf("https://%s.sportsbull.jp/thumbnail1/%s",$subdomain,$f["img1"]),
       "url"   => sprintf("/p/%s/",$f["id"])
     );
-    if($i==0)$end=sprintf("%s.%s",$f["a2"],$f["a3"]);
-    $start=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
+    if($i==0)$movie['end']=sprintf("%s.%s",$f["a2"],$f["a3"]);
+    $movie['start']=sprintf("%s.%s.%s",$f["a1"],$f["a2"],$f["a3"]);
     $i++;
   }
 
