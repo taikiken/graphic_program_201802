@@ -1,7 +1,9 @@
 <?php
 
 
-function inhightvGetHighlight( $count = 4 ) {
+function inhightvGetHighlight( $count = 4, $host ) {
+
+  global $page;
 
   $highlight = array();
 
@@ -12,7 +14,6 @@ function inhightvGetHighlight( $count = 4 ) {
     ]
   ];
 
-  $host = $page['site_url_uts'];
   if ( in_array(UT_ENV, array('LOCAL', 'LOCAL_DB')) ) :
     $host = 'https://dev.sportsbull.jp';
   endif;

@@ -3,7 +3,7 @@
 include_once __DIR__.'/../inhightv/_include.php';
 
 # インハイ2017_ハイライト
-$highlight = inhightvGetHighlight(2);
+$highlight = inhightvGetHighlight(2, $page['site_url_uts']);
 
 # インハイ2017_ダイジェスト
 $digest    = inhightvGetDigest(2);

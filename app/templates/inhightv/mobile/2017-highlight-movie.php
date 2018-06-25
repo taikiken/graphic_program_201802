@@ -3,7 +3,7 @@
 
 # インハイ2017_ハイライト
 include_once(__DIR__.'/../_include.php');
-$highlight = inhightvGetHighlight(100);
+$highlight = inhightvGetHighlight(100, $page['site_url_uts']);
 
 // header
 include_once __DIR__."/../../mobile/_header.php";
