@@ -1,0 +1,1 @@
+  <script src="/assets/js/inhightv.bundle.js?v=<?php echo $page['version']; ?>"></script>

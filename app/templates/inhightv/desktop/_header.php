@@ -3,4 +3,3 @@
 
   <link rel="stylesheet" href="/assets/css/inhigh/interhigh.css?v=<?php echo $page['version']; ?>">
   <script src="/assets/facebook/init.js?v=<?php echo $page['version']; ?>"></script>
-  <script src="/assets/js/inhigh.bundle.js?v=<?php echo $page['version']; ?>"></script>

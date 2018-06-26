@@ -84,5 +84,5 @@ include_once __DIR__.'/_assets.php';
 
   </div>
 
-
+<?php include_once __DIR__.'/_footer.php'; ?>
 <?php include_once __DIR__.'/../../desktop/_footer.php'; ?>
