@@ -191,10 +191,14 @@
   background: transparent;
   display: block;
   text-align: left;
-  overflow: hidden;
-  text-overflow: ellipsis;
   height: auto;
   margin-bottom: 0;
+}
+
+.article_list .highlight_article .thumb_area li .txt_area p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 </style>
