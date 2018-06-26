@@ -204,6 +204,24 @@
               </div>
             <?php endif; ?>
 
+            <section class="rb--archived">
+              <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_archived.png" alt="ARCHIVED">過去の大会</h2>
+              <ul>
+                <li>
+                  <a href="https://sportsbull.jp/p/339769/" class="movie">
+                    <div class="rb--archived__image-wrap">
+                      <img src="https://img.sportsbull.jp/thumbnail1/img2018062612583135807900.jpg" alt="">
+                    </div>
+                    <div class="rb--archived__text-wrap">
+                      <h3>【フルタイム動画】6/10 UCI MOUNTAIN BIKE WORLD CUP ダウンヒル レオガング大会</h3>
+                      <?php if ($page['ua'] === 'desktop') : ?>
+                        <p class="rb-hide-sp">実況:アリー(アクションスポーツMC/Team REAL)<br />解説:九島勇気(MTB BMX プロライダー)</p>
+                      <?php endif; ?>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </section>
 
             <?php /*
             <section class="rb--related">
