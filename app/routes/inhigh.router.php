@@ -20,7 +20,7 @@ $app->group('/{slug:inhigh}',  function () use($app) {
   // highlight
   // ==============================
   $this->get('/highlight[/]', function ($request, $response, $args) use ($app) {
-    return $response->withRedirect('/inhightv/2017-highlight-movie/', 301);
+    return $response->withRedirect('/inhightv/2017-digest-movie/', 301);
   });
 
   // webview
