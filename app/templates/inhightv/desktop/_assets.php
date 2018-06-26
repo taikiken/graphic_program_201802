@@ -158,8 +158,12 @@
   background: #f5f5f5;
   display: block;
   text-align: left;
+}
+
+.article_list .highlight_article .thumb_area li .txt_area p {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 </style>
