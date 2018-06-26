@@ -1,7 +1,7 @@
-Header set Access-Control-Allow-Origin *
-Header set Access-Control-Allow-Credentials true
-Header set Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD, OPTIONS"
-Header set Access-Control-Allow-Headers "Authorization, authorization, Origin, X-Requested-With, Content-Type, Accept"
+#Header set Access-Control-Allow-Origin *
+#Header set Access-Control-Allow-Credentials true
+#Header set Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD, OPTIONS"
+#Header set Access-Control-Allow-Headers "Authorization, authorization, Origin, X-Requested-With, Content-Type, Accept"
 
 Satisfy any
 order allow,deny
@@ -61,6 +61,10 @@ RewriteRule ^v1/articles/fast/ /api/ver1/read/articleFast.php?api=category [L,QS
 
 #AU検索
 RewriteRule ^v1/articles/fast/ /api/ver1/read/articleFast.php?api=category [L,QSA]
+
+#キャッシュするために
+RewriteRule ^v2/articles/(.*)$ api/v1/articles/$1 [L,R=302]
+
 
 #USER
 RewriteRule ^v1/users/self/settings/account /api/ver1/write/useraccount.php [L]
