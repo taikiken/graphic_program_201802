@@ -35,7 +35,7 @@ include_once __DIR__.'/_assets.php';
       <!-- digest -->
       <?php if ( $digest ) : ?>
         <div class="ttl-wrapper">
-          <h2 class="ttl highlight"><i></i>動画特集</h2>
+          <h2 class="ttl highlight"><i></i>ダイジェスト動画一覧</h2>
           <p class="ttl_date"><?php echo $digest['start']; ?> - <?php echo $digest['end']; ?></p>
         </div>
 
