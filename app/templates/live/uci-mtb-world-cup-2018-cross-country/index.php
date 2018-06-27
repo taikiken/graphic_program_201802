@@ -101,14 +101,14 @@
     <div class="body-sec">
       <div class="bg-container">
         <div class="rb--head">
-            <img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_rb.png" alt="" class="rb-hide-pc">
-            <img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_rb_pc.png" alt="" class="rb-hide-sp">
+            <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_rb.png" alt="" class="rb-hide-pc">
+            <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_rb_pc.png" alt="" class="rb-hide-sp">
         </div>
         <div class="rb--movie">
           <div id="VideoPlayer">
             <div id="placeHolder"></div>
           </div>
-          <!-- <img src="/assets/images/live/uci-mtb-world-cup-2018/rb_announce.png" alt=""> -->
+          <!-- <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/rb_announce.png" alt=""> -->
         </div>
 
         <div class="body-sec-inner">
@@ -126,8 +126,8 @@
               ?>
 
                 <a href="https://app.adjust.com/tv698b4" target="_blank">
-                  <img src="/assets/images/live/uci-mtb-world-cup-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-pc">
-                  <img src="/assets/images/live/uci-mtb-world-cup-2018/bnr_spbl_app_pc.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-sp">
+                  <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/bnr_spbl_app.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-pc">
+                  <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/bnr_spbl_app_pc.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-sp">
                 </a>
 
               <?php
@@ -136,14 +136,14 @@
               ?>
 
               <a href="https://www.redbull.com/jp-ja/events/uci-mtb-world-cup-2018" target="_blank">
-                <img src="/assets/images/live/uci-mtb-world-cup-2018/bnr_rb.png" alt="UCI MOUNTAIN BIKE WORLD CUP 2018 についてもっと知る" class="rb-hide-pc">
-                <img src="/assets/images/live/uci-mtb-world-cup-2018/bnr_rb_pc.png" alt="UCI MOUNTAIN BIKE WORLD CUP 2018 についてもっと知る" class="rb-hide-sp">
+                <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/bnr_rb.png" alt="UCI MOUNTAIN BIKE WORLD CUP 2018 についてもっと知る" class="rb-hide-pc">
+                <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/bnr_rb_pc.png" alt="UCI MOUNTAIN BIKE WORLD CUP 2018 についてもっと知る" class="rb-hide-sp">
               </a>
 
             </div>
 
             <section class="rb--timetable">
-              <h2><img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
+              <h2><img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_timetable.png" alt="">タイムテーブル</h2>
               <p class="commingsoon">COMMING SOON...</p>
               <!--
               <table>
@@ -227,7 +227,7 @@
 
             <?php /*
             <section class="rb--related">
-              <h2><img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_related.png" alt="">関連記事</h2>
+              <h2><img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_related.png" alt="">関連記事</h2>
               <ul>
                 <li>
                   <a href="/p/312214/" class="movie">
@@ -300,7 +300,7 @@
           <?php
           // static_contents
           // ===========================================
-            include_once dirname(__DIR__) . '/uci-mtb-world-cup-2018/_include/_static_sidebar.php';
+            include_once dirname(__DIR__) . '/uci-mtb-world-cup-2018-cross-country/_include/_static_sidebar.php';
           // ===========================================
           ?>
 
@@ -319,7 +319,7 @@
       $BREADCRUMB = array(
         array(
           'label' => 'UCI MOUNTAIN BIKE WORLD CUP 2018（ダウンヒル） ライブ配信',
-          'path'  => '/uci-mtb-world-cup-2018/'
+          'path'  => '/uci-mtb-world-cup-2018-cross-country/'
         ),
       );
     ?>

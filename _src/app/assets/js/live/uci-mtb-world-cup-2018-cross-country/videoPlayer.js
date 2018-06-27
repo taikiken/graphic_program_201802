@@ -3,13 +3,13 @@
 var api = void 0;
 var pageUrl = location.href;
 if (pageUrl.match(/sportsbull.s3/) || pageUrl.match(/localhost/)) {
-	api = 'https://img.sportsbull.jp/static/redbull/redbull08live.json';
+	api = 'https://img.sportsbull.jp/static/redbull/redbull07live.json';
 } else if (pageUrl.match(/dev.sportsbull.jp/)) {
-	api = 'https://dev-img.sportsbull.jp/static/redbull/redbull08live.json';
+	api = 'https://dev-img.sportsbull.jp/static/redbull/redbull07live.json';
 } else if (pageUrl.match(/stg.sportsbull.jp/)) {
-	api = 'https://dev-img.sportsbull.jp/static/redbull/redbull08live.json';
+	api = 'https://dev-img.sportsbull.jp/static/redbull/redbull07live.json';
 } else {
-	api = 'https://img.sportsbull.jp/static/redbull/redbull08live.json';
+	api = 'https://img.sportsbull.jp/static/redbull/redbull07live.json';
 }
 var result = document.querySelector('#placeHolder');
 var accountId = '5704890303001';
