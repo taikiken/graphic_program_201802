@@ -55,6 +55,19 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
         $id .= $k . '=' . $v . '&';
     endforeach;
 
+      // 外部リンク作成
+      $search = ['<p>関連リンク<br>', '<p>外部リンク<br>', '<p>', '</p>'];
+      $relatedpost = str_replace($search, '', $post['relatedpost']);
+      $relatedpost = explode('<br>', $relatedpost);
+      $related_links = [];
+      foreach ($relatedpost as $row)
+      {
+        if (!empty($row))
+        {
+          $related_links[] = $row;
+        }
+      }
+
       $args['page'] = $app->model->set(array(
         'title'          => $post['title'],
         'og_title'       => $post['title'].' | '.$app->model->property('title_short'),
@@ -76,7 +89,8 @@ $app->group('/a/{article_id:[0-9]+}', function () use ($app) {
 
         'category'       => $category,
         'post'           => $post,
-        'photo'          => $photo
+        'photo'          => $photo,
+        'related_links'  => $related_links
       ));
 
 
