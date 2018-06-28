@@ -13,6 +13,11 @@ if (preg_match("/dev/", $servername)) {
   $DBHOST = "undo-dev.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
   $DBNAME = "ut_stgnew";
 
+} elseif (preg_match("/cms/", $servername)) {
+  //マスターDB
+  $DBHOST = "undo-prod.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
+  $DBNAME = "ut0";
+
 } else {
   $DBNAME = "ut0";
   if (preg_match("/editdm|write|batch|password|image/", $filename)) {
