@@ -83,14 +83,6 @@
       ?>
 
       <?php
-      # ref. #2559
-      if ( $page['category']['slug'] === 'basketball' ) :
-        $bleague_parts = file_get_contents('https://sportsbull.jp/stats/bleague/webview/sp/');
-        echo $bleague_parts;
-      endif;
-      ?>
-
-      <?php
       # ref. #2264
       if ( $page['category']['slug'] === 'americanfootball' ) :
         include_once __DIR__.'/../stats/ua_kansai/mobile/index.php';
