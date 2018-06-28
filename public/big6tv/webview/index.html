@@ -13,6 +13,28 @@
             <div class="body-sec">
                 <div class="body-sec-inner">
                     <section class="main-sec">
+                        <style>
+                            .big6-caution {
+                                background-size: 15px 15px;
+                                background-position: 10px center;
+                                background-repeat: no-repeat;
+                                background-color: rgb(255, 204, 204);
+                                background-image: url("/information/icon/3x/information__icon__warning.png");
+                            }
+                            .big6-caution a {
+                                display: inline-block;
+                                font-size: 10px;
+                                color: rgb(51, 51, 51);
+                                padding: 5px 10px 5px 35px;
+                            }
+                        </style>
+                        <div class="big6-caution" id="js-big6-caution"></div>
+                        <script>
+                            if (/undotsushin-android/.test(window.navigator.userAgent)) {
+                                caution = document.getElementById("js-big6-caution");
+                                caution.innerHTML = "<a href='market://details?id=com.undotsushin&hl=ja'>ライブ配信をご覧になるにはアプリの最新バージョンへのアップデートが必要です。</a>";
+                            };
+                        </script>
                         <div class="sponsor-wrap"></div>
                         <ul class="module-header">
                             <li class="active">
