@@ -93,14 +93,11 @@
         <div id="js-live-lists"></div>
 
 <script>
-  <?php if ($page['env'] == 'production') : ?>
+  if (SPBL_ENV.env == 'production') {
     var jsonUrl = "https://img.sportsbull.jp/json/live-gallery.json?v=<?php echo $page['version']; ?>";
-  <?php else : ?>
+  } else {
     var jsonUrl = "https://dev-img.sportsbull.jp/json/live-gallery.json?v=<?php echo $page['version']; ?>";
-  <?php endif ; ?>
-</script>
-
-<script>
+  }
   $(document).ready(function () {
     $.getJSON(jsonUrl, function(data){
       for(var i in data.bannerLists){
