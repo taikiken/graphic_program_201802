@@ -79,27 +79,27 @@ $statsItem = array(
   //   )
   // ),
 
-  array(
-    'title' => 'テニス',
-    'label' => 'テニス',
-    'path'  => '/stats/tennis/',
-    'icon'  => array(
-      'slug'    => 'tennis',
-      'is_fill' => false,
-      'style'   => '',
-    )
-  ),
-
   // array(
-  //   'title' => 'Bリーグ',
-  //   'label' => 'Bリーグ',
-  //   'path'  => '/stats/bleague/',
+  //   'title' => 'テニス全豪OP',
+  //   'label' => 'テニス<br />全豪OP',
+  //   'path'  => '/stats/tennis/',
   //   'icon'  => array(
-  //     'slug'    => 'basketball',
+  //     'slug'    => 'tennis',
   //     'is_fill' => false,
   //     'style'   => '',
   //   )
   // ),
+
+  array(
+    'title' => 'Bリーグ',
+    'label' => 'Bリーグ',
+    'path'  => '/stats/bleague/',
+    'icon'  => array(
+      'slug'    => 'basketball',
+      'is_fill' => false,
+      'style'   => '',
+    )
+  ),
 
   // array(
   //   'title' => '大相撲',
