@@ -28,11 +28,6 @@ $digest    = inhightvGetDigest(2);
     <?php endif; ?>
 
 
-    <figure class="inhightv__figure">
-      <img src="/assets/images/inhightv/inhightv-pre-mobile-header-bottom.jpg" alt="" />
-    </figure>
-
-
     <section class="main-sec">
 
 

@@ -35,11 +35,6 @@ $digest    = inhightvGetDigest(2);
   <div class="body-sec-inner">
 
 
-    <figure class="inhightv__figure">
-      <img src="/assets/images/inhightv/inhightv-pre-mobile-header-bottom.jpg" alt="" />
-    </figure>
-
-
     <section class="main-sec">
 
 

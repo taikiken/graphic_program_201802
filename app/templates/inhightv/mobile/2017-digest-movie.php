@@ -2,7 +2,7 @@
 
 
 # インハイ2017_ハイライト
-include_once(__DIR__.'/../_include.php');
+include_once __DIR__.'/../_include.php';
 $digest = inhightvGetDigest(1000);
 
 // header
@@ -69,3 +69,4 @@ include_once __DIR__.'/_assets.php';
 
 
 <?php include_once __DIR__.'/../../mobile/_footer.php'; ?>
+<?php include_once __DIR__."/../../_debug.php"; ?>

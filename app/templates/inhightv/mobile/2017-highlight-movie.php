@@ -88,3 +88,4 @@ include_once __DIR__.'/_assets.php';
 
 
 <?php include_once __DIR__.'/../../mobile/_footer.php'; ?>
+<?php include_once __DIR__."/../../_debug.php"; ?>

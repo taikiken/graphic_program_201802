@@ -145,7 +145,7 @@ $digest    = inhightvGetDigest(4);
 
         <figure class="inhightv__index__plan">
           <img src="/assets/images/inhightv/inhightv-pre-desktop-lineup.png" srcset="/assets/images/inhightv/inhightv-pre-desktop-lineup.png 1x,
-             /assets/images/inhightv/inhightv-pre-desktop-lineup.png 2x" alt="2018 配信予定の競技" />
+             /assets/images/inhightv/inhightv-pre-desktop-lineup@2x.png 2x" alt="2018 配信予定の競技" />
         </figure>
 
       </section>

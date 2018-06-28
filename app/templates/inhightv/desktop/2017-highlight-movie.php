@@ -18,7 +18,13 @@ include_once __DIR__.'/_assets.php';
 
   <div class="special-summary">
     <a href="/category/inhightv/">
-      <h1 class="special-summary-heading"><img src="/assets/images/inhightv/inhightv-pre-desktop-header-2nd.png" alt="全国高体連公式 インターハイ応援サイト インハイ.tv"></h1>
+      <h1 class="special-summary-heading">
+        <img
+          src="/assets/images/inhightv/inhightv-pre-desktop-header-2nd.png"
+          srcset="/assets/images/inhightv/inhightv-pre-desktop-header-2nd.png 1x, /assets/images/inhightv/inhightv-pre-desktop-header-2nd@2x.png 2x"
+          alt="全国高体連公式 インターハイ応援サイト インハイ.tv"
+        >
+      </h1>
     </a>
   </div>
 
@@ -86,3 +92,4 @@ include_once __DIR__.'/_assets.php';
 
 <?php include_once __DIR__.'/_footer.php'; ?>
 <?php include_once __DIR__.'/../../desktop/_footer.php'; ?>
+<?php include_once __DIR__."/../../_debug.php"; ?>
