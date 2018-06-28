@@ -206,6 +206,7 @@
               </div>
             <?php endif; ?>
 
+            <!--
             <section class="rb--archived">
               <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_archived.png" alt="ARCHIVED">過去の大会</h2>
               <ul>
@@ -224,6 +225,7 @@
                 </li>
               </ul>
             </section>
+            -->
 
             <?php /*
             <section class="rb--related">
