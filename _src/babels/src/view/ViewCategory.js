@@ -80,11 +80,9 @@ export default class ViewCategory extends ViewArchiveMasonryInfinite {
 
     // 初回無限スクロールにしないパターン, クリック後に開始します
     // する : `<div id="board-container-more" data-afterclick="true"></div>`
-    // しない : `<div id="board-container-more data-afterclick="false"></div>`
+    // しない : `<div id="board-container-more" data-afterclick="false"></div>`
     // しない : `<div id="board-container-more"></div>`
-    if ( moreElement.dataset.afterclick === "true" ) {
-      this.afterClick = true;
-    }
+    this.afterClick = moreElement && moreElement.dataset && moreElement.dataset.afterclick === 'true';
 
     // @since 2016-09-20
     // 記事一覧に pickup, headline を表示させる
