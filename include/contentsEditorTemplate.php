@@ -25,7 +25,7 @@ if($_GET["cid"]==1){
 	$contentsEditorPatterns[4][]=array("textfield","表タイトル","media","70","","",$MULTILANG);
 	$contentsEditorPatterns[4][]=array("inputmenu","表データ","title","2","","",$MULTILANG);
 
-	$contentsEditorPatterns[5][]=array("textarea","script, iframe等","title","20",81,"",$MULTILANG);
+	$contentsEditorPatterns[5][]=array("textarea","script, iframe等","title","5",81,"",$MULTILANG);
 	
 	//$contentsEditorPatterns[6][]=array("textfield","Brightcove RefID","media","40","","",0);
 }

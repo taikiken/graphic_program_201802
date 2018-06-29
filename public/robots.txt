@@ -1,0 +1,3 @@
+User-Agent: *
+Disallow:
+Sitemap: https://sportsbull.jp/sitemap.xml
