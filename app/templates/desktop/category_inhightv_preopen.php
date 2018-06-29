@@ -164,7 +164,7 @@ $digest    = inhightvGetDigest(4);
 
       <div class="board-large">
         <div id="board-container"></div><!--/archive-->
-        <div id="board-container-more"></div><!--/archive-more-->
+        <div id="board-container-more" data-afterclick="true"></div><!--/archive-more-->
       </div><!-- /.board-large -->
 
 
