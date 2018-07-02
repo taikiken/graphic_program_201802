@@ -326,7 +326,7 @@ function get_imgs($img){
 	$ch=curl_init();
 	curl_setopt($ch,CURLOPT_URL,$img);
   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-  curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+  curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
   curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 	if(preg_match("/https/",$img)){
 		curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
