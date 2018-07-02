@@ -16,8 +16,9 @@ if($q->get_dir()===0){ // 新規
 
     $sv[$sn[]="created_at"]="now()";
     $o=new dbutl($TABLE,$sn,$sv);
-    $e=$o->insert();
-
+        if($sv["title"] != "null" && $sv["url"] != "null" && $sv["published_at"] != "null"){
+            $e = $o->insert();
+        }
 	}
 }elseif($q->get_dir()===1){ // 編集
 	if($q->get_file()===0){

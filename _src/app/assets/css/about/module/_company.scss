@@ -165,6 +165,15 @@
       @include screen('large') {
         font-size: 40px;
       }
+      img {
+        display: block;
+        margin: 0 auto 10px;
+        width: 260px;
+        @include screen('large') {
+          margin: 0 auto 20px;
+          width: 580px;
+        }
+      }
     }
     @include screen('large') {
       @extend %centerring_contents;

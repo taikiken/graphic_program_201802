@@ -1026,6 +1026,8 @@
   padding-bottom: 0;
   height: 100%;
   background-color: #eee;
+  // UNDO_SPBL-745 【テスト/QA】項目外_【iOS】速報・データ画面及び競技・種目画面のスクロールがスムーズではない
+  -webkit-overflow-scrolling : touch;
 }
 
 // 下タブ Now Do をカレント表示

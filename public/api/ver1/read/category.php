@@ -273,13 +273,6 @@ SQL;
     );
   endif;
 
-  # ref. #2559
-  if ( $category === 'basketball' ) :
-    $categoriesinfo['webviews']     = array(
-      '/stats/bleague/webview/app/',
-    );
-  endif;
-
   // https://aws-plus.backlog.jp/view/UNDO_SPBL-484#comment-1190761405
   // if ( $category === 'pyeongchang2018' ) :
   //   $categoriesinfo['webviews']     = array(

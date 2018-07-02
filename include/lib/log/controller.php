@@ -32,7 +32,7 @@ if($q->get_dir()===1){
 
 }elseif($q->get_dir()===3){
 
-	if(strlen($_SERVER["HTTP_REFERER"])>0&&gettype(strpos($_SERVER["HTTP_REFERER"],"log"))=="boolean")setcookie("refback",$_SERVER["HTTP_REFERER"]);
+	if(strlen($_SERVER["HTTP_REFERER"])>0&&gettype(strpos($_SERVER["HTTP_REFERER"],"log"))=="boolean")setcookie("refback",$_SERVER["HTTP_REFERER"],time()+3600,"/editdm/");
 
 	$TABLE="rireki";
 	$FIELD=sprintf("usr,message,%s as m_time,error,flag,sql",dbtm("m_time",0));
