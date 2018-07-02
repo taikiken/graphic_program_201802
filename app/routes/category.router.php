@@ -36,7 +36,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
     // inhightv
     // ------------------------------
-    if ( $args['category_slug'] === 'inhightv' ) :
+    if ( $args['category_slug'] === 'inhightv'  && UT_ENV !== 'PRODUCTION' ) :
 
       // # サブドメからパーツを読み込む
       $parts = array();
