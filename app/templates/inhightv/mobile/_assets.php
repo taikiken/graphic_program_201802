@@ -119,7 +119,7 @@
 
 
 .inhightv__index__part-04 {
-  padding: 10px 1% 5px;
+  padding: 10px 2vw 5px;
   background: #eee;
   line-height: 1;
 }
@@ -140,19 +140,16 @@
 .inhightv__index__part-04 ul {
   display: flex;
   flex-wrap: wrap;
+  margin-left: -2vw;
 }
 
 .inhightv__index__part-04 li {
-  width: 33.3333%;
-  padding: 0 1%;
+  padding-left: 2vw;
 }
 
 .inhightv__index__part-04 li:first-child {
-  margin-bottom: 2%;
   width: 100%;
-}
-
-.inhightv__index__part-04 li:last-child {
+  margin-bottom: 2vw;
 }
 
 

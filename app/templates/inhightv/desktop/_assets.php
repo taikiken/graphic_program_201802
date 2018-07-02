@@ -107,18 +107,21 @@
 .inhightv__index__part-04 ul {
   display: flex;
   flex-wrap: wrap;
+  margin-left: -7px;
 }
 
 .inhightv__index__part-04 li {
-  margin-right: 7px;
+  padding-left: 7px;
 }
 
 .inhightv__index__part-04 li:first-child {
   margin-bottom: 7px;
+  width: 100%;
 }
 
-.inhightv__index__part-04 li:last-child {
-  margin-right: 0;
+.inhightv__index__part-04 li img {
+  width: 100%;
+  height: auto;
 }
 
 /*  overwrite -  parts_pc.css */
