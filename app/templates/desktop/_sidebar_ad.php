@@ -1,5 +1,37 @@
 <?php
-// `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
+
+// 六大学 / 広告表示 調整（Web） #1546
+// > アドネットワーク関連の広告（ネイティブアド？）を消したい
+// @see https://github.com/undotsushin/undotsushin/issues/1546
+// category.slug 'big6tv' search
+// @since 2017-03-15
+global $template_big6tb;
+$template_name = $page['template'];
+//$in_big6tv = false;
+$in_big6tv = $template_big6tb;
+$single_big6tv = false;
+
+
+if ($template_name == 'category' || $template_name == 'p') :
+  $page_category = $page['category'];
+
+  if ( isset($page_category) ) :
+    if ( $page_category['slug'] == 'big6tv' ) :
+      $in_big6tv = true;
+    endif;
+
+    if (
+      $page_category['slug'] == 'crazy' ||
+      $page_category['slug'] == 'big6tv' ||
+      $page_category['slug'] == 'inhightv'
+    ) :
+      $page['post']['is_sponserd'] = true;
+    endif;
+
+  endif;
+
+endif;
+
 ?>
 <?php
 //2017/7/14追加
@@ -30,48 +62,13 @@ endif;
 // $page['template'] == 'motorsports' 以外の時に広告を表示する
 // --------------------------------
 ?>
-
-<?php
-// 六大学 / 広告表示 調整（Web） #1546
-// > アドネットワーク関連の広告（ネイティブアド？）を消したい
-// @see https://github.com/undotsushin/undotsushin/issues/1546
-// category.slug 'big6tv' search
-// @since 2017-03-15
-global $template_big6tb;
-$template_name = $page['template'];
-//$in_big6tv = false;
-$in_big6tv = $template_big6tb;
-$single_big6tv = false;
-// 記事詳細 + big6tv でも広告非表示
-/*
-今回でいうと、一覧、詳細ともに
-
-$page['category']['slug'] == 'big6tv'
-
-プライマリカテゴリーが big6tv = big6tvテーマが適応される一覧&詳細
-で広告非表示としていただいてよいかと思いますー
-@see https://github.com/undotsushin/undotsushin/pull/1731#pullrequestreview-28563047
-*/
-if ($template_name == 'category' || $template_name == 'p') {
-  $page_category = $page['category'];
-  if (isset($page_category) && $page_category['slug'] == 'big6tv') {
-    $in_big6tv = true;
-  }
-}
-//// 記事詳細 + カテゴリ big6tv
-//if ($in_big6tv && $template_name == 'p') {
-//  $single_big6tv = true;
-//}
-?>
-
 <?php
 // `/big6tv`
 // 記事詳細 + big6tv - 広告トル
 // `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
 if (
     !$single_big6tv &&
-    $page['template'] != 'motorsports' &&
-    !$on_pyeongchang2018
+    $page['template'] != 'motorsports'
   ) :
 ?>
           <?php
@@ -166,58 +163,37 @@ include_once __DIR__ . '/_sidebar_tab_bar.php';
 
           <div id="widget-ranking-container"></div><!--/ranking-->
 
-          <?php if ( $page['category']['slug'] !== 'crazy' ) : ?>
-            <?php
-            // not big6tv の時のみ広告を表示する
-            // @since 2017-03-15
-            // `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
-            if (!$in_big6tv && !$on_pyeongchang2018) :
-            ?>
-              <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
-                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-              </div>
-            <?php
-            endif;
-            // not big6tv の時のみ広告を表示する
-            // --------------------------------
-            ?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
+            <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+            </div>
           <?php endif; ?>
+
+
 
           <?php
           // ------------------------------------
           // sidebar videos, オススメ動画
           // crazy 表示しない
           // https://github.com/undotsushin/undotsushin/issues/862#issuecomment-229568814
-          if ( $page['category']['slug'] !== 'crazy' ) :
           ?>
-          <div id="widget-recommend-container"></div><!--/videos-->
-            <?php
-            // not big6tv の時のみ広告を表示する
-            // @since 2017-03-15
-            // `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
-            if (!$in_big6tv && !$on_pyeongchang2018) :
-            ?>
-              <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
-                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-              </div>
-            <?php
-            endif;
-            // not big6tv の時のみ広告を表示する
-            // --------------------------------
-            ?>
+          <?php if ( $page['category']['slug'] !== 'crazy' ) : ?>
+            <div id="widget-recommend-container"></div><!--/videos-->
           <?php endif; ?>
 
-<?php
-// not big6tv の時のみ広告を表示する
-// @since 2017-03-15
-// `/category/pyeongchang2018/` - 広告表示しない - 2017-12-22
-if (!$in_big6tv && !$on_pyeongchang2018) :
-?>
+          <?php if ( !$page['post']['is_sponserd'] ) : ?>
+            <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+            </div>
+          <?php endif; ?>
+
+
+
           <?php
           // ------------------------------------
           // sidebar bottom
           ?>
-          <?php if ( $page['ad']['pc']['sidebar_bottom'] ) :?>
+          <?php if ( !$page['post']['is_sponserd'] && $page['ad']['pc']['sidebar_bottom'] ) : ?>
           <div class="sponsor-link nadir">
 
             <script type='text/javascript'>
@@ -236,9 +212,3 @@ if (!$in_big6tv && !$on_pyeongchang2018) :
 
           </div>
           <?php endif; ?>
-
-<?php
-endif;
-// not big6tv の時のみ広告を表示する
-// --------------------------------
-?>
