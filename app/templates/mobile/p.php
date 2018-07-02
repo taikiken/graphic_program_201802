@@ -389,9 +389,10 @@ if ( !$page['post']['is_sponserd'] ) : ?>
         <?php
         /*
 
-        # popin
+        # popin - mobile用
         - 収益計算用にSPとWebViewでタグ異なる
         - 同一カテゴリのみ表示するため、`<div id="_popIn_category"></div>` でカテゴリー情報を付与する
+        - category : inhightv では表示しない
 
         */
         ?>
@@ -399,6 +400,7 @@ if ( !$page['post']['is_sponserd'] ) : ?>
           <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
         <?php endif; ?>
 
+        <?php if ( $page['category']['slug'] !== 'inhightv' ) : ?>
         <div class="widget-recommend">
           <div class="widget-postList widget-postList_popular">
             <div class="mod-headingA01">
@@ -428,6 +430,7 @@ if ( !$page['post']['is_sponserd'] ) : ?>
             <?php endif; ?>
           </div>
         </div>
+        <?php endif; ?>
 
       <?php endif; ?>
 
