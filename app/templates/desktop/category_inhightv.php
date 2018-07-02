@@ -77,7 +77,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <div class="board-large">
         <div id="board-container"></div><!--/archive-->
-        <div id="board-container-more"></div><!--/archive-more-->
+        <div id="board-container-more" data-afterclick="true"></div><!--/archive-more-->
       </div><!-- /.board-large -->
 
 
