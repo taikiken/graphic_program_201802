@@ -115,7 +115,26 @@
           <div class="main-sec">
             <div class="rb--intro">
 
-              <p>世界最高峰のMTBクロスカントリーレース！世界中からエリートクラスの男女ライダーが集結し、頂点を競い合う。爆発力と持久力が求められるレースには、MTBの魅力が盛りだくさん！オフロードの周回コース、一番最初にゴールにたどり着くのは誰だ。実況を務めるのは○○、解説は○○。</p>
+              <p class="rb--intro__text">世界最高峰のMTBクロスカントリーレース！世界中からエリートクラスの男女ライダーが集結し、頂点を競い合う。爆発力と持久力が求められるレースには、MTBの魅力が盛りだくさん！オフロードの周回コース、一番最初にゴールにたどり着くのは誰だ。実況は藤原カズヒロ、解説はシドニーオリンピック日本代表の鈴木雷太。</p>
+
+              <p class="rb--intro__hashtag">
+                ハッシュタグを付けてtwitterで感想や質問をつぶやこう！<br />
+                実況で取り上げてくれるかも…？
+                <a href="https://twitter.com/intent/tweet?hashtags=UCIクロカン&url=https://sportsbull.jp/live/uci-mtb-world-cup-2018-cross-country/" target="_blank">「#UCIクロカン」</a>
+              </p>
+
+              <div class="rb--intro__mc">
+                <ul>
+                  <li>
+                    <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/img_mc01.jpg" alt="">
+                    <p>実況:藤原カズヒロ<br />(Sports MC / Team REAL)</p>
+                  </li>
+                  <li>
+                    <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/img_mc02.jpg" alt="">
+                    <p>解説:鈴木雷太<br />(JCF MTB 監督 / シドニーオリンピック日本代表)</p>
+                  </li>
+                </ul>
+              </div>
 
             </div>
             <div class="rb-appli">

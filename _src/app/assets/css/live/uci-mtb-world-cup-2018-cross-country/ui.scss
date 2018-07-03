@@ -170,13 +170,63 @@ $color02: #f8fafc;
     .rb--intro {
       margin-bottom: 40px;
       @include mlr;
-      p {
+      &__text {
         padding-left: 10px;
         font-weight: bold;
         border-left: 2px solid $color01;
         @include mq-l {
           font-size: 20px;
           line-height: 2;
+        }
+      }
+      &__hashtag {
+        border: 1px solid rgba(#fff, 0.5);
+        padding: 10px;
+        font-weight: bold;
+        margin-top: 40px;
+        @include mq-l {
+          font-size: 16px;
+        }
+        a {
+          display: block;
+          font-size: 16px;
+          text-align: center;
+          text-decoration: underline;
+          color: #fff;
+          @include mq-l {
+            font-size: 24px;
+          }
+        }
+      }
+      &__mc {
+        ul {
+          padding-top: 40px;
+          @include mq-l {
+            display: flex;
+          }
+          li {
+            display: flex;
+            align-items: start;
+            @include mq-s {
+              &:not(:last-child) {
+                margin-bottom: 10px;
+              }
+            }
+            @include mq-l {
+              width: calc((100% - 20px) / 2);
+            }
+            img {
+              display: block;
+              width: 80px;
+              margin-right: 10px;
+              @include mq-l {
+                width: 120px;
+              }
+            }
+            p {
+              font-weight: bold;
+            }
+          }
         }
       }
     }

@@ -115,7 +115,26 @@
           <div class="main-sec">
             <div class="rb--intro">
 
-              <p>大自然の急斜面を下っていく、世界最高峰のマウンテンバイクシリーズ！世界中からエリートクラスの男女ライダーが集結し、頂点を競い合う。誰よりも速く丘を走り下りたライダーが優勝する、シンプルながらも過酷なレース。岩や巨木の障害物を乗り越え、時には大ジャンプしながら疾走するMTBの迫力の映像をお楽しみください。実況はアリー、解説は2017年アジアチャンピオンの九島勇気選手。</p>
+              <p class="rb--intro__text">大自然の急斜面を下っていく、世界最高峰のマウンテンバイクシリーズ！世界中からエリートクラスの男女ライダーが集結し、頂点を競い合う。誰よりも速く丘を走り下りたライダーが優勝する、シンプルながらも過酷なレース。岩や巨木の障害物を乗り越え、時には大ジャンプしながら疾走するMTBの迫力の映像をお楽しみください。実況は藤原カズヒロ、解説はMTBプロライダーの井手川直樹。</p>
+
+              <p class="rb--intro__hashtag">
+                ハッシュタグを付けてtwitterで感想や質問をつぶやこう！<br />
+                実況で取り上げてくれるかも…？
+                <a href="https://twitter.com/intent/tweet?hashtags=UCIダウンヒル&url=https://sportsbull.jp/live/uci-mtb-world-cup-2018/" target="_blank">「#UCIダウンヒル」</a>
+              </p>
+
+              <div class="rb--intro__mc">
+                <ul>
+                  <li>
+                    <img src="/assets/images/live/uci-mtb-world-cup-2018/img_mc01.jpg" alt="">
+                    <p>実況:藤原カズヒロ<br />(Sports MC / Team REAL)</p>
+                  </li>
+                  <li>
+                    <img src="/assets/images/live/uci-mtb-world-cup-2018/img_mc02.jpg" alt="">
+                    <p>解説:井手川直樹<br />(MTBプロライダー)</p>
+                  </li>
+                </ul>
+              </div>
 
             </div>
             <div class="rb-appli">
