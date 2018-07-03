@@ -101,37 +101,37 @@
     <div class="body-sec">
       <div class="bg-container">
         <div class="rb--head">
-            <img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_rb.png" alt="" class="rb-hide-pc">
-            <img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_rb_pc.png" alt="" class="rb-hide-sp">
+            <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_rb.png" alt="" class="rb-hide-pc">
+            <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_rb_pc.png" alt="" class="rb-hide-sp">
         </div>
         <div class="rb--movie">
           <div id="VideoPlayer">
             <div id="placeHolder"></div>
           </div>
-          <!-- <img src="/assets/images/live/uci-mtb-world-cup-2018/rb_announce.png" alt=""> -->
+          <!-- <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/rb_announce.png" alt=""> -->
         </div>
 
         <div class="body-sec-inner">
           <div class="main-sec">
             <div class="rb--intro">
 
-              <p class="rb--intro__text">大自然の急斜面を下っていく、世界最高峰のマウンテンバイクシリーズ！世界中からエリートクラスの男女ライダーが集結し、頂点を競い合う。誰よりも速く丘を走り下りたライダーが優勝する、シンプルながらも過酷なレース。岩や巨木の障害物を乗り越え、時には大ジャンプしながら疾走するMTBの迫力の映像をお楽しみください。実況は藤原カズヒロ、解説はMTBプロライダーの井手川直樹。</p>
+              <p class="rb--intro__text">世界最高峰のMTBクロスカントリーレース！世界中からエリートクラスの男女ライダーが集結し、頂点を競い合う。爆発力と持久力が求められるレースには、MTBの魅力が盛りだくさん！オフロードの周回コース、一番最初にゴールにたどり着くのは誰だ。実況は藤原カズヒロ、解説はシドニーオリンピック日本代表の鈴木雷太。</p>
 
               <p class="rb--intro__hashtag">
                 ハッシュタグを付けてtwitterで感想や質問をつぶやこう！<br />
                 実況で取り上げてくれるかも…？
-                <a href="https://twitter.com/intent/tweet?hashtags=UCIダウンヒル&url=https://sportsbull.jp/live/uci-mtb-world-cup-2018/" target="_blank">「#UCIダウンヒル」</a>
+                <a href="https://twitter.com/intent/tweet?hashtags=UCIクロカン&url=https://sportsbull.jp/live/uci-mtb-world-cup-2018-cross-country/" target="_blank">「#UCIクロカン」</a>
               </p>
 
               <div class="rb--intro__mc">
                 <ul>
                   <li>
-                    <img src="/assets/images/live/uci-mtb-world-cup-2018/img_mc01.jpg" alt="">
+                    <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/img_mc01.jpg" alt="">
                     <p>実況:藤原カズヒロ<br />(Sports MC / Team REAL)</p>
                   </li>
                   <li>
-                    <img src="/assets/images/live/uci-mtb-world-cup-2018/img_mc02.jpg" alt="">
-                    <p>解説:井手川直樹<br />(MTBプロライダー)</p>
+                    <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/img_mc02.jpg" alt="">
+                    <p>解説:鈴木雷太<br />(JCF MTB 監督 / シドニーオリンピック日本代表)</p>
                   </li>
                 </ul>
               </div>
@@ -145,8 +145,8 @@
               ?>
 
                 <a href="https://app.adjust.com/tv698b4" target="_blank">
-                  <img src="/assets/images/live/uci-mtb-world-cup-2018/bnr_spbl_app.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-pc">
-                  <img src="/assets/images/live/uci-mtb-world-cup-2018/bnr_spbl_app_pc.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-sp">
+                  <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/bnr_spbl_app.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-pc">
+                  <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/bnr_spbl_app_pc.png" alt="アプリなら無料ライブ配信開始の通知を受け取れる！" class="rb-hide-sp">
                 </a>
 
               <?php
@@ -155,14 +155,14 @@
               ?>
 
               <a href="https://www.redbull.com/jp-ja/events/uci-mtb-world-cup-2018" target="_blank">
-                <img src="/assets/images/live/uci-mtb-world-cup-2018/bnr_rb.png" alt="UCI MOUNTAIN BIKE WORLD CUP 2018 についてもっと知る" class="rb-hide-pc">
-                <img src="/assets/images/live/uci-mtb-world-cup-2018/bnr_rb_pc.png" alt="UCI MOUNTAIN BIKE WORLD CUP 2018 についてもっと知る" class="rb-hide-sp">
+                <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/bnr_rb.png" alt="UCI MOUNTAIN BIKE WORLD CUP 2018 についてもっと知る" class="rb-hide-pc">
+                <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/bnr_rb_pc.png" alt="UCI MOUNTAIN BIKE WORLD CUP 2018 についてもっと知る" class="rb-hide-sp">
               </a>
 
             </div>
 
             <section class="rb--timetable">
-              <h2><img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
+              <h2><img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_timetable.png" alt="">タイムテーブル</h2>
               <p class="commingsoon">COMMING SOON...</p>
               <!--
               <table>
@@ -225,6 +225,7 @@
               </div>
             <?php endif; ?>
 
+            <!--
             <section class="rb--archived">
               <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_archived.png" alt="ARCHIVED">過去の大会</h2>
               <ul>
@@ -243,10 +244,11 @@
                 </li>
               </ul>
             </section>
+            -->
 
             <?php /*
             <section class="rb--related">
-              <h2><img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_related.png" alt="">関連記事</h2>
+              <h2><img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_related.png" alt="">関連記事</h2>
               <ul>
                 <li>
                   <a href="/p/312214/" class="movie">
@@ -319,7 +321,7 @@
           <?php
           // static_contents
           // ===========================================
-            include_once dirname(__DIR__) . '/uci-mtb-world-cup-2018/_include/_static_sidebar.php';
+            include_once dirname(__DIR__) . '/uci-mtb-world-cup-2018-cross-country/_include/_static_sidebar.php';
           // ===========================================
           ?>
 
@@ -337,8 +339,8 @@
       // ==============================
       $BREADCRUMB = array(
         array(
-          'label' => 'UCI MOUNTAIN BIKE WORLD CUP 2018（ダウンヒル） ライブ配信',
-          'path'  => '/uci-mtb-world-cup-2018/'
+          'label' => 'UCI MOUNTAIN BIKE WORLD CUP 2018（クロスカントリー） ライブ配信',
+          'path'  => '/uci-mtb-world-cup-2018-cross-country/'
         ),
       );
     ?>

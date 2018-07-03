@@ -17,7 +17,7 @@
 @import "../../layout";
 
 
-$color01: #a98526;
+$color01: #008d56;
 $color02: #f8fafc;
 
 @mixin mq-s {
@@ -89,7 +89,7 @@ $color02: #f8fafc;
   }
 }
 
-#whole.uci-mtb-world-cup-2018 {
+#whole.uci-mtb-world-cup-2018-cross-country {
   @include bg;
   color: #fff;
   @include mq-s {
@@ -99,12 +99,12 @@ $color02: #f8fafc;
     @include bg;
   }
   .bg-container {
-    background: url('../../../images/live/uci-mtb-world-cup-2018/bg_rb.png') center top no-repeat;
+    background: url('../../../images/live/uci-mtb-world-cup-2018-cross-country/bg_rb.png') center top no-repeat;
     @include mq-s {
       background-size: contain;
     }
     @include mq-l {
-      background: url('../../../images/live/uci-mtb-world-cup-2018/bg_rb_pc.png') center top no-repeat;
+      background: url('../../../images/live/uci-mtb-world-cup-2018-cross-country/bg_rb_pc.png') center top no-repeat;
     }
   }
 
@@ -399,7 +399,7 @@ $color02: #f8fafc;
                 width: 30px;
                 height: 30px;
                 transform: translate(-50%,-50%);
-                background: url(/assets/images/live/uci-mtb-world-cup-2018/related-icon_play.png) 0 0 no-repeat;
+                background: url(/assets/images/live/uci-mtb-world-cup-2018-cross-country/related-icon_play.png) 0 0 no-repeat;
                 overflow: hidden;
                 font-size: 0;
                 text-indent: 100%;
