@@ -55,6 +55,10 @@ $sql[]="update u_view set video=0 where pageid in (select id from repo_n where v
 //朝日新聞 keywordに リオパラ を含む記事をリオ五輪に紐づけ
 //$sql[]="update repo_n set m1=141,m2=128 where id in(select id from repo_n where keyword like '%リオパラ%' and m1!=141 and d2=1 and m2 is null);";
 
+//インハイ.tv以外のアカウントはインハイタブに表示させない https://aws-plus.backlog.jp/view/UNDO_SPBL-858
+$sql[]="update repo_n set m2=null where m2=158 and d2 not in(10,51,54,86);";
+$sql[]="update repo_n set m1=129 where m1=158 and d2 not in(10,51,54,86);";
+
 //六大学野球
 $sql[]="update repo_n set m1=151,m2=null where id in (select id from u_index where substr(txt,0,100) like '%東京六大学野球%') and m1=113 and m_time > now()-interval '1 day';";
 
