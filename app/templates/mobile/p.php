@@ -479,9 +479,12 @@ if ( !$page['post']['is_sponserd'] ) : ?>
       /*
       DFP - mobile / 記事詳細新着記事下レクタングル
       - スポンサーカテゴリでも表示として常にスポンサーレクタングル広告を表示する
+      - インハイtvは例外で非表示
       */
       ?>
+      <?php if ( $page['category']['slug'] !== 'inhightv' ) : ?>
       <div id='ad-gpt-article-detail-footer' class="bnr-dfp"></div>
+      <?php endif; ?>
 
 
     </section><!-- /.main-sec -->
