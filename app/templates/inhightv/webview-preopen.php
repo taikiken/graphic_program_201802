@@ -165,28 +165,31 @@ $digest    = inhightvGetDigest(2);
       <div class="inhightv__index__part-04">
         <ul>
           <li>
-            <a href="https://inhightv.sportsbull.jp/img/home/suibun_A4_01.pdf" onclick="ga('send', 'event', 'inhightv-water_pdf', 'click');" target="_blank">
-              <img src="/assets/images/inhightv/banner/bnr04.jpg" width="728" height="71" alt="Otsuka 大塚製薬 アスリートにかかせない水分補給 パフォーマンスの維持にイオン飲料">
+            <a href="https://img.sportsbull.jp/files/inhightv_2018suibun.pdf" onclick="ga('send', 'event', 'inhightv-2018suibun_pdf', 'click');" target="_blank">
+              <img src="/assets/images/inhightv/banner/bnr04-sp.png" width="728" height="71" alt="Otsuka 大塚製薬 アスリートにかかせない水分補給 パフォーマンスの維持にイオン飲料">
             </a>
           </li>
 
-          <li>
-            <a href="http://2017soutai.jp/" onclick="ga('send', 'event', 'inhightv-2017soutai', 'click');" target="_blank">
+          <li style="width: 50%;">
+            <a href="https://www.koukousoutai.com/2018soutai/" onclick="ga('send', 'event', 'inhightv-2018soutai', 'click');" target="_blank">
               <img src="/assets/images/inhightv/banner/bnr03.jpg" alt="はばたけ世界へ　南東北総体2017">
             </a>
           </li>
 
-          <li>
-            <a href="http://pocarisweat.jp/action/yell/" onclick="ga('send', 'event', 'inhightv-yell', 'click');" target="_blank">
+          <li style="width: 50%;">
+            <a href="https://pocarisweat.jp/action/yell/" onclick="ga('send', 'event', 'inhightv-yell', 'click');" target="_blank">
               <img src="/assets/images/inhightv/banner/bnr02.jpg" alt="エールと、ともに">
             </a>
           </li>
 
+          <!--
           <li>
             <a href="http://www.yomiuri.co.jp/sports/interhigh/" onclick="ga('send', 'event', 'inhightv-yomiuri', 'click');" target="_blank">
               <img src="/assets/images/inhightv/banner/bnr01.jpg" alt="YOMIURI ONLINE">
             </a>
           </li>
+          -->
+
         </ul>
       </div>
       <!-- //part-04 -->
