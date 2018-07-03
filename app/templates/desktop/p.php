@@ -220,12 +220,15 @@
           /*
 
           # popin - desktop用
+          - category : inhightv では表示しない
 
           */
           ?>
           <?php if ( $page['category']['label'] ) : ?>
           <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
           <?php endif; ?>
+
+          <?php if ( $page['category']['slug'] !== 'inhightv' ) : ?>
           <div class="board-large">
             <div id="_popIn_recommend_2"></div>
             <script type="text/javascript">
@@ -236,6 +239,7 @@
                 })();
             </script>
           </div><!-- /.board-large -->
+          <?php endif; ?>
 
         </div><!-- /.post-detail -->
       </div><!-- /.current-post-->

@@ -26,9 +26,59 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     $category           = $app->model->get_category_by_slug($args['category_slug'], "", false);
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
 
+
+    // 例外処理
+    // ------------------------------
+    // big6tv
     if ( $args['category_slug'] === 'big6tv' ) :
       $template_classname = $template_classname . ' theme_big6';
     endif;
+
+    // inhightv
+    // ------------------------------
+    if ( $args['category_slug'] === 'inhightv'  && UT_ENV !== 'PRODUCTION' ) :
+
+      // # サブドメからパーツを読み込む
+      $parts = array();
+
+      // ## endpoint
+      $parts['endpoint'] = 'https://inhightv.sportsbull.jp';
+      if ( in_array(UT_ENV, array('LOCAL', 'LOCAL_DB', 'DEVELOP', 'STAGING')) ) :
+        $parts['endpoint'] = 'https://inhightv-dev.sportsbull.jp';
+      endif;
+
+
+      // ## config
+      $platform = $app->model->property('ua');
+      $get_options = [
+        'http' => [
+            'method'  => 'GET',
+            'timeout' => 2,
+        ]
+      ];
+
+      // ## include
+      foreach( ['part-01', 'adslider', 'part-02', 'part-03', 'part-04'] as $key => $value ) {
+        $parts[$value]  = @file_get_contents($parts['endpoint'].'/part/'.$platform.'/'.$value, false, stream_context_create($get_options));
+      }
+
+      // ## replace
+      $replace_pairs = array(
+        'src="/'  => 'src="'.$parts['endpoint'].'/',
+        'href="/' => 'href="'.$parts['endpoint'].'/',
+      );
+
+      foreach( $parts as $key => $value ) :
+        if ( $value ) :
+          $parts[$key] = strtr($value, $replace_pairs);
+        endif;
+      endforeach;
+
+      // ## set
+      $app->model->property('parts', $parts);
+
+    endif;
+
 
     /**
      * /category/crazy/ で表示する4件固定対応

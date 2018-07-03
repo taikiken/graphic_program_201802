@@ -252,10 +252,10 @@ SQL;
     );
   endif;
 
-  # ref. #2185
-  if ( $category === 'inhigh' ) :
+  # ref. #3554
+  if ( $category === 'inhightv' ) :
     $categoriesinfo['webviews']     = array(
-      '/inhigh/webview/',
+      '/inhightv/webview/',
     );
   endif;
 
