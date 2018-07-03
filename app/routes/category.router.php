@@ -11,7 +11,7 @@ if ( $categories ) :
 
 endif;
 
-$app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app, $ImgPath) {
+$app->group('/category/{category_slug:all|inhigh|'.join('|',$category_slug).'}', function () use($app, $ImgPath) {
 
 
   // 各カテゴリートップ - /category/:category_slug/
@@ -22,6 +22,12 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     if ( $args['category_slug'] === 'vk' && !$app->model->property('ua_app') ) :
       return $response->withRedirect('https://vk.sportsbull.jp/koshien/', 301);
     endif;
+
+    // /catergory/inhigh/ を /catergory/inhightv/ にリダイレクト
+    if ( $args['category_slug'] === 'inhigh' ) :
+      return $response->withRedirect('/category/inhightv/', 301);
+    endif;
+
 
     $category           = $app->model->get_category_by_slug($args['category_slug'], "", false);
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
