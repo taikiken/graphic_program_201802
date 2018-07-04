@@ -138,14 +138,14 @@ endif;
 
 <?php if ($page['ua'] === 'desktop') : ?>
 <div class="focus-bnr" style="margin-top: 15px">
-  <a href="https://vk.sportsbull.jp/koshien/">
-    <img src="https://sportsbull.jp/_/vk/banner/728_90.png" alt="第100回全国高校野球選手権記念大会 バーチャル高校野球 全地方大会決勝から全校大会全試合 無料ライブ配信 - SPORTS BULL">
+  <a href="https://sportsbull.jp/w2018/">
+    <img src="https://sportsbull.jp/_/worldcup_2018/banner/pc.png" alt="">
   </a>
 </div>
 <?php else : ?>
 <div class="focus-bnr">
-  <a href="https://sportsbull.jp/category/vk/">
-    <img src="https://sportsbull.jp/_/vk/banner/640_100.png" alt="第100回全国高校野球選手権記念大会 バーチャル高校野球 全地方大会決勝から全校大会全試合 無料ライブ配信 - SPORTS BULL">
+  <a href="https://sportsbull.jp/w2018/">
+    <img src="https://sportsbull.jp/_/worldcup_2018/banner/sp.png" alt="">
   </a>
 </div>
 <?php endif; ?>
