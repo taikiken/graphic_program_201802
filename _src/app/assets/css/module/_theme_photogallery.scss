@@ -22,4 +22,9 @@
   .sponsor-link + .nav-photoalbum {
     margin-top: 20px;
   }
+
+  // 一覧ページでメインの画像がある場合の余白を削除
+  #single-visual-container > .post-kv:first-child {
+    margin-top: 0;
+  }
 } //.whole.photo-gallery
