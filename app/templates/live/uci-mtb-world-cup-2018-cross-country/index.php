@@ -354,7 +354,7 @@
       $BREADCRUMB = array(
         array(
           'label' => 'UCI MOUNTAIN BIKE WORLD CUP 2018（クロスカントリー） ライブ配信',
-          'path'  => '/uci-mtb-world-cup-2018-cross-country/'
+          'path'  => '/live/uci-mtb-world-cup-2018-cross-country/'
         ),
       );
     ?>

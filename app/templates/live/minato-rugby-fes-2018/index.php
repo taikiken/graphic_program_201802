@@ -410,7 +410,7 @@
       $BREADCRUMB = array(
         array(
           'label' => '秩父宮みなとラグビーまつり2018 ライブ配信',
-          'path'  => '/minato-rugby-fes-2018/'
+          'path'  => '/live/minato-rugby-fes-2018/'
         ),
       );
     ?>
