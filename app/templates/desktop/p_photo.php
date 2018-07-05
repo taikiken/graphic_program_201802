@@ -56,6 +56,14 @@
         <p class="page">
             <span><?php echo $_GET['id']?>/<?php echo count($page['photo'])?></span>
         </p>
+
+      <?php
+      // photo gallery ad
+      ?>
+        <div class="sponsor-link w728">
+          <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' class="bnr-dfp" style='height:90px; width:728px;'></div>
+        </div>
+
         <nav class="nav-photoalbum">
             <p class="prev">
                 <?php if($_GET['id'] == 1):?>

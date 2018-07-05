@@ -52,6 +52,27 @@ if(!isset($_GET['id'])): ?>
     <p class="page">
       <span><?php echo $_GET['id']?>/<?php echo count($page['photo'])?></span>
     </p>
+    <?php
+    // #ref UNDO_SPBL-890 【web】フォトギャラリー改修
+    // 広告追加 since 2018-07-05
+    ?>
+    <!-- /531683568/article-detail/article-deital-mobile-bigbanner-A -->
+    <script>
+      googletag.cmd.push(function() {
+        googletag.defineSlot('/531683568/article-detail/article-deital-mobile-bigbanner-A', [320, 50], 'div-gpt-ad-1530770705721-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+      });
+    </script>
+    <div id='div-gpt-ad-1530770705721-0' style='height:50px; width:320px;'>
+      <script>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1530770705721-0'); });
+      </script>
+    </div>
+    <!-- // /531683568/article-detail/article-deital-mobile-bigbanner-A -->
+    <?php
+    // ----------------------------------------------
+    ?>
     <nav class="nav-photoalbum">
       <p class="prev">
         <?php if($_GET['id'] == 1):?>

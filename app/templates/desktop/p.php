@@ -53,10 +53,16 @@
           DFP - desktop / タイトル下
           */
           ?>
-          <?php if ( !$page['post']['is_sponserd'] ) : ?>
-          <div class="sponsor-link w728">
-            <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' class="bnr-dfp" style='height:90px; width:728px;'></div>
-          </div>
+          <?php if (count($page['photo']) == 0) :
+            // photo gallery 位置移動する
+            // #ref UNDO_SPBL-890 【web】フォトギャラリー改修
+            // since 2017-07-05
+            ?>
+            <?php if ( !$page['post']['is_sponserd'] ) : ?>
+            <div class="sponsor-link w728">
+              <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' class="bnr-dfp" style='height:90px; width:728px;'></div>
+            </div>
+            <?php endif; ?>
           <?php endif; ?>
 
           <?php
