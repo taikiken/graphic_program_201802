@@ -45,6 +45,7 @@ if ( $page['template'] == 'category' ) {
 }
 
 // photo gallery
+// since 2018-07-05
 if(count($page['photo']) > 0) {
   $whole_classes[] = 'photo-gallery';
 }
