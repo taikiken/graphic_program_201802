@@ -297,6 +297,54 @@ $color02: #f8fafc;
         margin: auto;
       }
     }
+    .rb--featured {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title(172px, 285px);
+      }
+      &__player {
+        display: flex;
+        align-items: start;
+        &__image {
+          width: 100px;
+          margin-right: 10px;
+          @include mq-l {
+            width: 200px;
+            margin-right: 20px;
+          }
+          img {
+            max-width: none;
+            width: 100px;
+            @include mq-l {
+              width: 200px;
+            }
+          }
+        }
+        &__text {
+          h3 {
+            font-weight: bold;
+            font-size: 18px;
+            @include mq-l {
+              font-size: 22px;
+            }
+          }
+          h4 {
+            font-weight: bold;
+            border-bottom: 1px solid rgba(#fff, 0.5);
+            margin-bottom: 5px;
+            @include mq-l {
+              font-size: 16px;
+            }
+          }
+          p {
+            @include mq-s {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
     .rb--archived {
       @include mb;
       @include mlr;
