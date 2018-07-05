@@ -43,6 +43,11 @@ if ( $page['template'] == 'category' ) {
   // @since 2017-05-08 - category slug を追加する
   $whole_classes[] = $page['category']['slug'];
 }
+
+// photo gallery
+if(count($page['photo']) > 0) {
+  $whole_classes[] = 'photo-gallery';
+}
 ?>
 
 <div id="page" class="whole <?php echo join( ' ', $whole_classes);?>">

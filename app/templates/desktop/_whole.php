@@ -68,6 +68,11 @@ if ( $template_name == 'category' ) {
         $whole_classes[] = $page_category['slug'];
     }
 }
+
+// photo gallery
+if(count($page['photo']) > 0) {
+  $whole_classes[] = 'photo-gallery';
+}
 ?>
 
 <div id="whole" class="whole <?php echo join( ' ', $whole_classes);?>">
