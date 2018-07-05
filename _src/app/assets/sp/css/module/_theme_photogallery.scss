@@ -1,0 +1,26 @@
+@import "../../../../../scss_sp/asset";
+@import "../sprite";
+
+// Theme photogallery
+//
+// design module photogallery theme
+//
+// Styleguide 2.22.0
+
+.whole.photo-gallery {
+  // タイトルを非表示
+  .sp-single-header {
+    display: none;
+  }
+
+  // ページ上部のsnsブロック非表示
+  .sp-single-header + .post-sns {
+    display: none;
+  }
+
+  // 写真下のビッグバナーに余白設定
+  #div-gpt-ad-1530770705721-0 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+} //.whole.photo-gallery

@@ -64,7 +64,7 @@ if(!isset($_GET['id'])): ?>
         googletag.enableServices();
       });
     </script>
-    <div id='div-gpt-ad-1530770705721-0' style='height:50px; width:320px;'>
+    <div id='div-gpt-ad-1530770705721-0'>
       <script>
         googletag.cmd.push(function() { googletag.display('div-gpt-ad-1530770705721-0'); });
       </script>

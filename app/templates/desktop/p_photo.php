@@ -60,7 +60,7 @@
       <?php
       // photo gallery ad
       ?>
-        <div class="sponsor-link w728">
+        <div class="sponsor-link w728 mt20">
           <div id='div-gpt-ad-article-deital-desktop-bigbanner-A' class="bnr-dfp" style='height:90px; width:728px;'></div>
         </div>
 

@@ -1,0 +1,25 @@
+@import "../../../../scss/asset";
+@import "../sprite";
+
+// Theme photogallery
+//
+// design module photogallery theme
+//
+// Styleguide 2.21.0
+
+.whole.photo-gallery {
+  // タイトルを非表示
+  #single-header-container {
+    display: none;
+  }
+
+  // ページ上部のsnsブロック非表示
+  #single-header-container + .post-sns {
+    display: none;
+  }
+
+  // 写真ページャーにマージン追加
+  .nav-photoalbum {
+    margin-top: 20px;
+  }
+} //.whole.photo-gallery
