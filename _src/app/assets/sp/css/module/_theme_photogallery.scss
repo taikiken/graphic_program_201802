@@ -18,6 +18,11 @@
     display: none;
   }
 
+  // 上部写真ページャーにマージン追加
+  #detail-photoalbum .nav-photoalbum:first-child {
+    padding-top: 20px;
+  }
+
   // 写真下のビッグバナーに余白設定
   #div-gpt-ad-1530770705721-0 {
     margin-bottom: 20px;

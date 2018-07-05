@@ -18,8 +18,8 @@
     display: none;
   }
 
-  // 写真ページャーにマージン追加
-  .nav-photoalbum {
+  // 下部写真ページャーにマージン追加
+  .sponsor-link + .nav-photoalbum {
     margin-top: 20px;
   }
 } //.whole.photo-gallery

@@ -21,7 +21,7 @@ if(!isset($_GET['id'])): ?>
   </div>
 <?php else:?>
   <div id="detail-photoalbum">
-    <nav class="nav-photoalbum" style="margin-top: 20px;">
+    <nav class="nav-photoalbum">
       <p class="prev">
         <?php if($_GET['id'] == 1):?>
         <a href="<?php echo $page['og_url']?>?id=<?php echo count($page['photo'])?>">
