@@ -189,6 +189,20 @@
               -->
             </section>
 
+            <section class="rb--featured">
+              <h2><img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_featured.png" alt="">注目選手</h2>
+              <div class="rb--featured__player">
+                <div class="rb--featured__player__image">
+                  <img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/img_yamamoto.jpg" alt="山本 幸平">
+                </div>
+                <div class="rb--featured__player__text">
+                  <h3>山本 幸平</h3>
+                  <h4>Profile</h4>
+                  <p>プロのマウンテンバイクライダーとして北京オリンピック・ロンドンオリンピック大会に出場。アジア選手権大会、６連覇達成中。 2018年からDream Seeker Racing Teamのマウンテンバイクチームの発足者として、2020年東京オリンピックでの金メダル獲得へ向けて活動を行っている。</p>
+                </div>
+              </div>
+            </section>
+
             <?php if ($page['ua'] !== 'desktop') : ?>
               <div class="rb--banner">
                 <!-- /531683568/redbull_ad/red-bull-live-sp-big-banner -->
