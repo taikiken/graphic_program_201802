@@ -29,15 +29,15 @@ function get_index()
 	];
 	$dailyVal = [
 
-		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_bas.rss",
-		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_tig.rss",
-		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_car.rss",
-		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_mlb.rss",
-		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_soc.rss",
-		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_gen.rss",
-		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_gol.rss",
-		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_rin.rss",
-		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_rac.rss",
+		"http://www7.kobe-np.co.jp/sportsbull/for_sportsbull_bas.rss",
+		"http://www7.kobe-np.co.jp/sportsbull/for_sportsbull_tig.rss",
+		"http://www7.kobe-np.co.jp/sportsbull/for_sportsbull_car.rss",
+		"http://www7.kobe-np.co.jp/sportsbull/for_sportsbull_mlb.rss",
+		"http://www7.kobe-np.co.jp/sportsbull/for_sportsbull_soc.rss",
+		"http://www7.kobe-np.co.jp/sportsbull/for_sportsbull_gen.rss",
+		"http://www7.kobe-np.co.jp/sportsbull/for_sportsbull_gol.rss",
+		"http://www7.kobe-np.co.jp/sportsbull/for_sportsbull_rin.rss",
+		"http://www7.kobe-np.co.jp/sportsbull/for_sportsbull_rac.rss",
 
 		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_oly.rss"
 	];
