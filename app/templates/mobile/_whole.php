@@ -48,6 +48,12 @@ if ( $page['template'] == 'category' ) {
 // since 2018-07-05
 if(count($page['photo']) > 0) {
   $whole_classes[] = 'photo-gallery';
+
+  if(isset($_GET['id'])) {
+    $whole_classes[] = 'photo-gallery-detail';
+  } else {
+    $whole_classes[] = 'photo-gallery-index';
+  }
 }
 ?>
 
