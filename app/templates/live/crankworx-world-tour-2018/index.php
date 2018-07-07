@@ -363,7 +363,7 @@
       $BREADCRUMB = array(
         array(
           'label' => 'CRANKWORX SLOPESTYLE 2018 ライブ配信',
-          'path'  => '/crankworx-world-tour-2018/'
+          'path'  => '/live/crankworx-world-tour-2018/'
         ),
       );
     ?>

@@ -198,7 +198,7 @@
                 <div class="rb--featured__player__text">
                   <h3>山本 幸平</h3>
                   <h4>Profile</h4>
-                  <p>プロのマウンテンバイクライダーとして北京オリンピック・ロンドンオリンピック大会に出場。アジア選手権大会、６連覇達成中。 2018年からDream Seeker Racing Teamのマウンテンバイクチームの発足者として、2020年東京オリンピックでの金メダル獲得へ向けて活動を行っている。</p>
+                  <p>プロのマウンテンバイクライダーとして北京、ロンドン、リオデジャネイロオリンピック大会に出場。アジア選手権大会、６連覇達成中。 2018年からDream Seeker Racing Teamのマウンテンバイクチームの発足者として、2020年東京オリンピックでの金メダル獲得へ向けて活動を行っている。</p>
                 </div>
               </div>
             </section>
@@ -354,7 +354,7 @@
       $BREADCRUMB = array(
         array(
           'label' => 'UCI MOUNTAIN BIKE WORLD CUP 2018（クロスカントリー） ライブ配信',
-          'path'  => '/uci-mtb-world-cup-2018-cross-country/'
+          'path'  => '/live/uci-mtb-world-cup-2018-cross-country/'
         ),
       );
     ?>

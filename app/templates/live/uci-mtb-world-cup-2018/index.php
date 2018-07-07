@@ -338,7 +338,7 @@
       $BREADCRUMB = array(
         array(
           'label' => 'UCI MOUNTAIN BIKE WORLD CUP 2018（ダウンヒル） ライブ配信',
-          'path'  => '/uci-mtb-world-cup-2018/'
+          'path'  => '/live/uci-mtb-world-cup-2018/'
         ),
       );
     ?>

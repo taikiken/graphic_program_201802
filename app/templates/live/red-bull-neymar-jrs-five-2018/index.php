@@ -330,7 +330,7 @@
       $BREADCRUMB = array(
         array(
           'label' => 'NEYMAR JR&apos;S FIVE ジャパンファイナル ライブ配信',
-          'path'  => '/red-bull-neymar-jrs-five-2018/'
+          'path'  => '/live/red-bull-neymar-jrs-five-2018/'
         ),
       );
     ?>
