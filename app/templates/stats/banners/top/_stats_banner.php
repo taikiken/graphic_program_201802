@@ -151,6 +151,8 @@ endif;
 <?php endif; ?>
 
 
+<?php if( $page['ua'] === 'desktop' ): //UNDO_SPBL-898 desktopのみスタッツ導線を表示 ?>
+
 <aside class="stats_banner">
   <div class="stats_banner__heading">
     <h2 class="stats_banner__heading__title">
@@ -180,6 +182,8 @@ endif;
   <?php include_once __DIR__.'/../../../_svg.php'; ?>
 
 </aside><!-- /.stats_banner -->
+<?php endif; //UNDO_SPBL-898 desktopのみスタッツ導線を表示 ?>
+
 <?php
 // ------------------------------------------------------------
 ?>

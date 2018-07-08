@@ -280,6 +280,13 @@ SQL;
   //   );
   // endif;
 
+  // #2080
+  if ( $category === 'top' ) :
+    $categoriesinfo['webviews'] = array(
+      '/stats/webview/',
+    );
+  endif;
+
 // 1件でもあったら
 $sql = <<<SQL_EOL
   SELECT
