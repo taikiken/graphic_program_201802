@@ -25,13 +25,7 @@
 // @since 2016-11-02
 include_once __DIR__ . '/_cms_banner.php';
 ?>
-<?php
-// 一面タブからの導線を増やす #2080
-// @see https://github.com/undotsushin/undotsushin/issues/2080
-// @since 2017-06-26
-include_once __DIR__ . '/../stats/banners/top/_stats_banner.php';
-// ------------------------------------------------------------
-?>
+
       <div id="headline-container"></div>
 
       <aside class="sns-pr">
