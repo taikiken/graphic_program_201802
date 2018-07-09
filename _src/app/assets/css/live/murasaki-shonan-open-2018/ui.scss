@@ -1,0 +1,530 @@
+@charset "UTF-8";
+/*! build: @@buildTime */
+// import mixin / function
+@import "../../../../../scss/asset";
+
+// normalize / reset / åŸºæœ¬ class, tag è¨­å®š
+@import "../../../../../bower_exports/modularized/normalize";
+@import "../../../../../scss/style/reset";
+@import "../../../../../scss/dependencies/style";
+
+// --------------------------------------------
+// ä»¥ä¸‹ã€import ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç·¨é›†
+// --------------------------------------------
+
+// page layout
+@import "../../module/import";
+@import "../../layout";
+
+
+$color01: #4e2581;
+$color02: #fff100;
+$color03: #3d474c;
+
+@mixin mq-s {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mq-l {
+  @media (min-width: 769px) {
+    @content;
+  }
+}
+
+@mixin mb {
+  margin-bottom: 40px;
+  @include mq-l {
+    margin-bottom: 80px;
+  }
+}
+
+@mixin mlr {
+  @include mq-s {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@mixin title {
+  font-weight: bold;
+  font-size: 12px;
+  padding-bottom: 20px;
+  color: $color01;
+  @include mq-l {
+    font-size: 16px;
+  }
+  img {
+    height: 25px;
+    width: auto;
+    @include mq-l {
+       height: 40px;
+    }
+  }
+}
+
+@mixin notice {
+  font-size: 12px;
+  color: #808080;
+  a {
+    color: $color01;
+  }
+}
+
+.live-hide-sp {
+  @include mq-s {
+    display: none!important;
+  }
+}
+.live-hide-pc {
+  @include mq-l {
+    display: none!important;
+  }
+}
+
+#whole.murasaki-shonan-open-2018 {
+  color: $color03;
+  @include mq-s {
+    min-width: auto;
+  }
+  .body-sec {
+  }
+  .bg-container {
+    background: url('../../../images/live/murasaki-shonan-open-2018/bg_live.png') center top no-repeat;
+    background-size: contain;
+    @include mq-l {
+      background: url('../../../images/live/murasaki-shonan-open-2018/bg_live_pc.png') center top no-repeat;
+    }
+  }
+
+  .embed--movie {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    small {
+      display: block;
+      text-align: right;
+      opacity: 0.5;
+    }
+  }
+
+  .live--head {
+    padding: 20px 5px;
+    @include mq-l {
+      width: 1090px;
+      margin: 0 auto;
+      padding: 40px 0px;
+    }
+    img {
+      @include mq-s {
+        width: 92%;
+        display: block;
+        margin-left: auto;
+      }
+    }
+  }
+  .live--movie {
+    @include mb;
+    @include mq-l {
+      width: 1090px;
+      margin: 0 auto;
+    }
+    ul {
+      display: flex;
+      justify-content: space-between;
+      &.live--movie__park {
+        border-bottom: 10px solid $color01;
+      }
+      &.live--movie__beach {
+        border-bottom: 10px solid $color02;
+      }
+      li {
+        width: calc(50% - 5px);
+        height: 40px;
+        background: $color01;
+        border-radius: 10px 10px 0 0;
+        @include mq-l {
+          height: 50px;
+          width: 540px;
+        }
+        &:first-child {
+          margin-left: 5px;
+          @include mq-l {
+            margin-left: 10px;
+          }
+        }
+        &:last-child {
+          background: $color02;
+          margin-right: 5px;
+          @include mq-l {
+            margin-right: 10px;
+          }
+        }
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          img {
+            width: auto;
+            @include mq-s {
+              height: 14px;
+            }
+          }
+        }
+      }
+    }
+    #VideoPlayer {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      #placeHolder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    img {
+      width: 100%;
+    }
+    p {
+      @include notice;
+    }
+  }
+  .body-sec-inner {
+    background-color: transparent;
+    @include mq-s {
+      width: auto;
+    }
+    .main-sec {
+      @include mq-s {
+        width: auto;
+        float: none;
+      }
+      @include mq-l {
+        padding-top: 30px;
+      }
+      a {
+        transition: all 0.3s;
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+    .live--about {
+      @include mb;
+      display: flex;
+      align-items: center;
+      @include mq-s {
+        padding: 10px;
+        background: url('../../../images/live/murasaki-shonan-open-2018/bg_about.jpg') right top no-repeat;
+        background-size: cover;
+      }
+      @include mq-l {
+        height: 300px;
+        background: url('../../../images/live/murasaki-shonan-open-2018/bg_about_pc.jpg') center top no-repeat;
+      }
+      h2 {
+        @include title;
+      }
+      p {
+        font-weight: bold;
+        @include mq-l {
+          font-size: 17px;
+          padding-right: 280px;
+          line-height: 1.8;
+        }
+      }
+    }
+    .live-appli {
+      @include mb;
+      @include mlr;
+      a {
+        display: block;
+        &:first-child {
+          margin-bottom: 20px;
+        }
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .live--timetable {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title;
+      }
+    }
+    .live--banner {
+      margin-bottom: 40px;
+      div {
+        margin: auto;
+      }
+    }
+    .live--highlight {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title;
+      }
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        li {
+          width: calc(50% - 10px);
+          margin-bottom: 20px;
+          @include mq-l {
+            width: 230px;
+            &:not(:nth-child(3n)) {
+              margin-right: 19px;
+            }
+          }
+          a {
+            display: block;
+            &:hover {
+              text-decoration: none;
+            }
+            .live--highlight__image {
+              margin-bottom: 5px;
+              img {
+                width: 100%;
+              }
+            }
+            h3 {
+              font-weight: bold;
+              color: $color01;
+            }
+          }
+        }
+      }
+    }
+    .live--topics {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title;
+      }
+      &__contents {
+        background: rgba($color03, 0.05);
+        padding: 19px;
+        &__description {
+          display: flex;
+          align-items: flex-end;
+          margin-bottom: 20px;
+          @include mq-s {
+            flex-direction: column;
+            align-items: center;
+          }
+          &__image {
+            width: 60px;
+            @include mq-l {
+              width: 120px;
+              margin-right: 20px;
+            }
+          }
+          &__text {
+            h3 {
+              font-weight: bold;
+              color: $color01;
+              font-size: 16px;
+              margin-bottom: 5px;
+              @include mq-l {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+        h4 {
+          font-weight: bold;
+          color: $color01;
+          margin-bottom: 5px;
+          @include mq-l {
+            font-size: 16px;
+          }
+        }
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          @include mq-s {
+            justify-content: space-between;
+          }
+          li {
+            width: calc(50% - 10px);
+            @include mq-s {
+              margin-bottom: 10px;
+            }
+            @include mq-l {
+              width: 165px;
+            }
+            &:not(:last-child) {
+              @include mq-l {
+                margin-right: 10px;
+              }
+            }
+            img {
+              width: 100%;
+            }
+            p {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+    .live--support {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title;
+        text-align: center;
+        img {
+          height: 20px;
+          @include mq-l {
+            height: 22px;
+          }
+        }
+      }
+      ul {
+        display: flex;
+        li {
+          &:not(:last-child) {
+            @include mq-l {
+              margin-right: 64px;
+            }
+          }
+          a {
+            display: block;
+            img {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .live--related {
+      @include mb;
+      @include mlr;
+      h2 {
+        @include title;
+      }
+      ul {
+        li {
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          &:not(:last-child) {
+          }
+          a {
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            &.movie {
+              .live--related__image-wrap:before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 30px;
+                height: 30px;
+                transform: translate(-50%,-50%);
+                background: url(/assets/images/live/murasaki-shonan-open-2018/related-icon_play.png) 0 0 no-repeat;
+                overflow: hidden;
+                font-size: 0;
+                text-indent: 100%;
+                white-space: nowrap;
+                outline: none;
+                background-size: 30px;
+                @include mq-l {
+                  width: 60px;
+                  height: 60px;
+                  background-size: 60px;
+                }
+              }
+            }
+            .live--related__image-wrap {
+              position: relative;
+              width: calc(40% - 5px);
+              img {
+                width: 100%;
+              }
+            }
+            .live--related__text-wrap {
+              width: calc(60% - 5px);
+              @include mq-l {
+                padding-left: 20px;
+              }
+              h3 {
+                color: $color01;
+                font-weight: bold;
+                font-size: 16px;
+                margin-bottom: 10px;
+                @include mq-l {
+                  font-size: 20px;
+                }
+              }
+              p {
+                @include mq-l {
+                  margin-bottom: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .footer-rectangle {
+      display: flex;
+      justify-content: center;
+      li:first-child {
+        margin-right: 40px
+      }
+    }
+    .live--sidebar__skyscraper {
+      margin-top: 20px;
+    }
+  }
+  @include mq-s {
+    .head-sec .head-sec-inner {
+      width: auto;
+    }
+    .foot-sec .foot-pr {
+      border-bottom: none;
+    }
+    .foot-sec .foot-pr-inner {
+      width: auto;
+      padding-bottom: 0;
+    }
+    .foot-sec .foot-pr figure {
+      float: none;
+    }
+    .foot-sec .foot-pr-text {
+      margin-top: 0;
+    }
+    .foot-sec .foot-pr .text-block {
+      float: none;
+      width: 280px;
+      margin: 6px auto 0;
+    }
+    .foot-sec .fb-page-plugin {
+      float: none;
+      width: auto;
+    }
+    .foot-sec .copyright {
+      margin: 0;
+    }
+  }
+}
