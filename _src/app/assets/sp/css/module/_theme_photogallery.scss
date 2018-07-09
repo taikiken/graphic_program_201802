@@ -8,11 +8,6 @@
 // Styleguide 2.22.0
 
 .whole.photo-gallery {
-  // タイトルを非表示
-  .sp-single-header {
-    display: none;
-  }
-
   // ページ上部のsnsブロック非表示
   .sp-single-header + .post-sns {
     display: none;
@@ -35,3 +30,11 @@
     padding-top: 25px;
   }
 } //.whole.photo-gallery
+
+//詳細
+.whole.photo-gallery-detail {
+  // タイトルを非表示
+  .sp-single-header {
+    display: none;
+  }
+}

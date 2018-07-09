@@ -8,11 +8,6 @@
 // Styleguide 2.21.0
 
 .whole.photo-gallery {
-  // タイトルを非表示
-  #single-header-container {
-    display: none;
-  }
-
   // ページ上部のsnsブロック非表示
   #single-header-container + .post-sns {
     display: none;
@@ -28,3 +23,11 @@
     margin-top: 0;
   }
 } //.whole.photo-gallery
+
+//詳細
+.whole.photo-gallery-detail {
+  // タイトルを非表示
+  #single-header-container {
+    display: none;
+  }
+}
