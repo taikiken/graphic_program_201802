@@ -5,7 +5,7 @@ include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=25;
 $MEDIANAME="バスケットカウント";
-$rssfile="http://basket-count.com/feed";
+$rssfile="https://basket-count.com/wp-content/app/feed";
 
 function modifyhtml($s){
 	
