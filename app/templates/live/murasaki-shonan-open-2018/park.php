@@ -23,13 +23,9 @@
   // ===========================================
   ?>
 
+
+        <?php /* パークをデフォルトにする
         <div class="live--movie">
-          <!--
-          <div id="VideoPlayer">
-            <div id="placeHolder"></div>
-          </div>
-          -->
-          <!-- <img src="/assets/images/live/murasaki-shonan-open-2018/live_announce.png" alt=""> -->
           <ul class="live--movie__park">
             <li>
               <a href="/live/murasaki-shonan-open-2018/">
@@ -46,7 +42,28 @@
             <iframe src="https://www.youtube.com/embed/mEBU60B7Bwg?modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
+        */ ?>
 
+        <div class="live--movie">
+          <ul class="live--movie__park">
+            <li>
+              <a href="/live/murasaki-shonan-open-2018/park">
+                <img src="/assets/images/live/murasaki-shonan-open-2018/txt_park_event.png" alt="PARK EVENT">
+              </a>
+            </li>
+            <li>
+              <a href="/live/murasaki-shonan-open-2018/">
+                <img src="/assets/images/live/murasaki-shonan-open-2018/txt_beach_event.png" alt="BEACH EVENT">
+              </a>
+            </li>
+          </ul>
+          <img src="/assets/images/live/murasaki-shonan-open-2018/img_announce.png" alt="">
+          <!--
+          <div class="embed--movie">
+            <iframe src="https://www.youtube.com/embed/mEBU60B7Bwg?modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+          -->
+        </div>
 
   <?php
   // static_contents

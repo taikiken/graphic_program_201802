@@ -265,6 +265,97 @@ $color03: #3d474c;
       h2 {
         @include title;
       }
+      &__tab {
+        display: flex;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 20px;
+        li {
+          background: #ccc;
+          cursor: pointer;
+          padding: 10px;
+          font-size: 16px;
+          transition: all 0.3s;
+          border-bottom: 4px solid #ccc;
+          @include mq-s {
+            width: calc(50% - 5px);
+            text-align: center;
+          }
+          @include mq-l {
+            font-size: 18px;
+            padding: 10px 50px;
+          }
+          &:hover {
+            border-color: $color02;
+          }
+          &.active {
+            background: $color01;
+            border-bottom: 4px solid $color02;
+          }
+          &:first-child {
+            margin-right: 10px;
+          }
+        }
+      }
+      &__content {
+        li {
+          .live--timetable__title {
+            padding: 6px 20px;
+            margin-bottom: 20px;
+            display: inline-block;
+            @include mq-l {
+              padding: 8px 30px;
+            }
+            img {
+              height: 16px;
+              width: auto;
+              vertical-align: middle;
+              @include mq-l {
+                height: 18px;
+              }
+            }
+            &.park {
+              background: $color01;
+            }
+            &.beach {
+              background: $color02;
+            }
+          }
+          table {
+            width: 100%;
+            margin-bottom: 20px;
+            tbody {
+              tr {
+                border-bottom: 1px solid rgba($color01, 0.7);
+                vertical-align: top;
+                @include mq-s {
+                  font-size: 12px;
+                }
+                th,td {
+                  padding: 8px 0;
+                  line-height: 1;
+                }
+                th {
+                  width: 1px;
+                  white-space: nowrap;
+                  font-weight: bold;
+                  padding-right: 10px;
+                  color: $color01;
+                  @include mq-l {
+                    padding-right: 20px;
+                  }
+                }
+                td {
+                  opacity: 0.8;
+                }
+              }
+            }
+          }
+          a {
+            text-decoration: underline;
+          }
+        }
+      }
     }
     .live--banner {
       margin-bottom: 40px;
@@ -281,10 +372,14 @@ $color03: #3d474c;
       ul {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
         li {
-          width: calc(50% - 10px);
           margin-bottom: 20px;
+          @include mq-s {
+            width: calc(50% - 10px);
+            &:not(:nth-child(2n)) {
+              margin-right: 20px;
+            }
+          }
           @include mq-l {
             width: 230px;
             &:not(:nth-child(3n)) {

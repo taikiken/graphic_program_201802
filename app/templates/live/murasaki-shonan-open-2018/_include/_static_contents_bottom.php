@@ -45,45 +45,195 @@
 
             <section class="live--timetable">
               <h2><img src="/assets/images/live/murasaki-shonan-open-2018/ttl_timetable.png" alt="TIMETABLE"></h2>
-              <p class="notice">※ タイムテーブルは、当日の進行により変更になる可能性があります。</p>
+              <ul class="live--timetable__tab">
+                <li class="active">07/15[Sun.]</li>
+                <li >07/16[Mon.]</li>
+              </ul>
+              <ul class="live--timetable__content">
+                <li>
+                  <h3 class="live--timetable__title park"><img src="/assets/images/live/murasaki-shonan-open-2018/txt_park_event.png" alt="PARK EVENT"></h3>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>10:15-10:30</th>
+                        <td>OPENING CEREMONY</td>
+                      </tr>
+                      <tr>
+                        <th>10:30-10:45</th>
+                        <td>
+                          南流石プロデュース キュンとするまち。藤沢 公式ダンス<br />
+                          湘南工科大学附属高等学校ダンス部
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>11:00-</th>
+                        <td>OPENING CALL</td>
+                      </tr>
+                      <tr>
+                        <th>11:05-11:35</th>
+                        <td>
+                          SHONAN SHOWCASE<br />
+                          FETIA Polynesians☆
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>12:30-13:40</th>
+                        <td>
+                          BMX STREET & PARK CONTEST<br />
+                          MAKE ON THE SPOT in MURASAKI SHONAN OPEN powered by ARK LEAGUE<br />
+                          QUALIFYING
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>14:00-14:10</th>
+                        <td>
+                          MURASAKI SPORTS SHOWCASE<br />
+                          BAD QUEEN
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>14:10-14:40</th>
+                        <td>PUMA Team Faster Training Session by IBUKI</td>
+                      </tr>
+                      <tr>
+                        <th>14:50-16:15</th>
+                        <td>
+                          SKATEBOARD STREET CONTEST<br />
+                          SUMMER JUMBO SESH in MURASAKI SHONAN OPEN powered by SKATE ARK<br />
+                          QUALIFYING
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>16:15-16:25</th>
+                        <td>
+                          MURASAKI SPORTS SHOWCASE<br />
+                          FOUNDNATION
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>16:55-17:40</th>
+                        <td>
+                          MUSIC LIVE<br />
+                          DJ KEIN<br />
+                          TEE
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>17:40-</th>
+                        <td>CLOSING CALL</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <h3 class="live--timetable__title beach"><img src="/assets/images/live/murasaki-shonan-open-2018/txt_beach_event.png" alt="BEACH EVENT"></h3>
+                  <p>波のコンディションでスタート時間が変動する為、<a href="http://www.worldsurfleague.jp/2018/shonan/" target="_blank">WSLオフィシャルサイト</a>をご確認ください。</p>
+                </li>
+                <li style="display: none;">
+                  <h3 class="live--timetable__title park"><img src="/assets/images/live/murasaki-shonan-open-2018/txt_park_event.png" alt="PARK EVENT"></h3>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>10:25-</th>
+                        <td>OPENING CALL</td>
+                      </tr>
+                      <tr>
+                        <th>10:30-11:00</th>
+                        <td>
+                          SHONAN SHOWCASE<br />
+                          Hālau Ka Pio O Ka Pua Lehua
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>11:00-11:50</th>
+                        <td>
+                          BMX STREET & PARK CONTEST<br />
+                          MAKE ON THE SPOT in MURASAKI SHONAN OPEN powered by ARK LEAGUE<br />
+                          SEMI FINAL
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>11:50-12:50</th>
+                        <td>
+                          SKATEBOARD STREET CONTEST<br />
+                          SUMMER JUMBO SESH in MURASAKI SHONAN OPEN powered by SKATE ARK<br />
+                          SEMI FINAL
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>13:40-14:20</th>
+                        <td>
+                          BMX STREET & PARK CONTEST<br />
+                          MAKE ON THE SPOT in MURASAKI SHONAN OPEN powered by ARK LEAGUE<br />
+                          FINAL
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>14:20-15:20</th>
+                        <td>
+                          MURASAKI SHONAN OPEN PHYSIQUE TRIAL powered by NPCJ
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>15:35-16:05</th>
+                        <td>
+                          MUSIC LIVE<br />
+                          Sunrise In My Attache Cas
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>16:05-16:15</th>
+                        <td>
+                          MURASAKI SPORTS SHOWCASE<br />
+                          BMX FLATLAND SHOW<br />
+                          内野 洋平 / 北山 努
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>16:15-17:30</th>
+                        <td>
+                          SKATEBOARD STREET CONTEST<br />
+                          SUMMER JUMBO SESH in MURASAKI SHONAN OPEN powered by SKATE ARK<br />
+                          FINAL
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>17:30-17:45</th>
+                        <td>
+                          AWARDS CEREMONY
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>17:45-</th>
+                        <td>CLOSING CALL</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <h3 class="live--timetable__title beach"><img src="/assets/images/live/murasaki-shonan-open-2018/txt_beach_event.png" alt="BEACH EVENT"></h3>
+                  <p>波のコンディションでスタート時間が変動する為、<a href="http://www.worldsurfleague.jp/2018/shonan/" target="_blank">WSLオフィシャルサイト</a>をご確認ください。</p>
+                </li>
+              </ul>
             </section>
 
             <section class="live--highlight">
               <h2><img src="/assets/images/live/murasaki-shonan-open-2018/ttl_highlight.png" alt="HIGHLIGHT MOVIE"></h2>
-              <ul>
-                <li>
-                  <a href="#">
-                    <div class="live--highlight__image">
-                      <img src="/assets/images/live/murasaki-shonan-open-2018/img_highlight.jpg" alt="">
-                    </div>
-                    <h3>テキストテキストテキストテキストテキストテキスト</h3>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="live--highlight__image">
-                      <img src="/assets/images/live/murasaki-shonan-open-2018/img_highlight.jpg" alt="">
-                    </div>
-                    <h3>テキストテキストテキストテキストテキストテキスト</h3>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="live--highlight__image">
-                      <img src="/assets/images/live/murasaki-shonan-open-2018/img_highlight.jpg" alt="">
-                    </div>
-                    <h3>テキストテキストテキストテキストテキストテキスト</h3>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="live--highlight__image">
-                      <img src="/assets/images/live/murasaki-shonan-open-2018/img_highlight.jpg" alt="">
-                    </div>
-                    <h3>テキストテキストテキストテキストテキストテキスト</h3>
-                  </a>
-                </li>
-              </ul>
+              <ul id="js-article-lists"></ul>
+
+              <script>
+                if (SPBL_ENV.env == 'production') {
+                  var jsonUrl = "https://img.sportsbull.jp/json/murasaki-shonan-open-2018-highlight.json?v=<?php echo $page['version']; ?>";
+                } else {
+                  var jsonUrl = "https://dev-img.sportsbull.jp/json/murasaki-shonan-open-2018-highlight.json?v=<?php echo $page['version']; ?>";
+                }
+                $(document).ready(function () {
+                  $.getJSON(jsonUrl, function(data){
+                    for(var i in data.articleLists){
+                      for(var j in data.articleLists[i].articles){
+                          $("#js-article-lists").append('<li><a href="'+data.articleLists[i].articles[j].url+'"><div class="live--highlight__image"><img src="'+data.articleLists[i].articles[j].image+'"></div><h3>'+data.articleLists[i].articles[j].title+'</h3></a></li>');
+                      }
+                    }
+                  });
+                });
+              </script>
+
             </section>
 
             <section class="live--topics">
@@ -108,11 +258,11 @@
                     <p>Eyevol サングラス</p>
                   </li>
                   <li>
-                    <img src="/assets/images/live/murasaki-shonan-open-2018/img_present01.jpg" alt="">
+                    <img src="/assets/images/live/murasaki-shonan-open-2018/img_present02.jpg" alt="">
                     <p>ELEMENT キャップ</p>
                   </li>
                   <li>
-                    <img src="/assets/images/live/murasaki-shonan-open-2018/img_present01.jpg" alt="">
+                    <img src="/assets/images/live/murasaki-shonan-open-2018/img_present03.jpg" alt="">
                     <p>スポブルオリジナルクージー</p>
                   </li>
                 </ul>
@@ -234,7 +384,7 @@
       // ==============================
       $BREADCRUMB = array(
         array(
-          'label' => 'MURASAKI SHONAN OPEN 2018  ライブ配信',
+          'label' => 'MURASAKI SHONAN OPEN 2018 ライブ配信',
           'path'  => '/live/murasaki-shonan-open-2018/'
         ),
       );
@@ -262,9 +412,6 @@
 
     <script src="/assets/js/global.bundle.js"></script>
     <script src="https://code.jquery.com/jquery-git.min.js"></script>
-
-
-    <script src="/assets/js/live/<?php echo $page['template_classname']; ?>/videoPlayer.js?v=<?php echo $page['version']; ?>"></script>
     <script>
       $(function() {
         if ($(window).width() <= 768) {
@@ -327,8 +474,21 @@
       });
     });
     </script>
-
     <!-- サービスTOP対応 -->
+
+    <!-- タブ -->
+    <script>
+      $(function() {
+        $('.live--timetable__tab li').click(function() {
+          var index = $('.live--timetable__tab li').index(this);
+          $('.live--timetable__content li').css('display','none');
+          $('.live--timetable__content li').eq(index).css('display','block');
+          $('.live--timetable__tab li').removeClass('active');
+          $(this).addClass('active')
+        });
+      });
+    </script>
+
 
 
 
