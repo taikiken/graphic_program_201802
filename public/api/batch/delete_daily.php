@@ -13,7 +13,7 @@ call_user_func(function(){
 	$d = 0;
 
 	$dailyVal = [
-		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_del.rss"
+		"http://www7.kobe-np.co.jp/sportsbull/for_sportsbull_del.rss"
 	];
 	foreach ($dailyVal as $i => $xml)
 	{
