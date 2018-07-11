@@ -115,7 +115,7 @@
           <div class="main-sec">
             <div class="rb--intro">
 
-              <p class="rb--intro__text">ピレネーの高度に位置するコースを制するのはどのライダーか。クロスカントリーライダーにとっては空気の薄さが障害となり、急な斜面に挑むダウンヒルライダーのアドレナリンは、最高潮に達すること間違いない。実況は藤原カズヒロ、解説はMTBプロライダーの井手川直樹。</p>
+              <p class="rb--intro__text">大自然の急斜面を下っていく、世界最高峰のマウンテンバイクシリーズ！世界中からエリートクラスの男女ライダーが集結し、頂点を競い合う。誰よりも速く丘を走り下りたライダーが優勝する、シンプルながらも過酷なレース。岩や巨木の障害物を乗り越え、時には大ジャンプしながら疾走するMTBの迫力の映像をお楽しみください。実況は藤原カズヒロ、解説はMTBプロライダーの井手川直樹。</p>
 
               <p class="rb--intro__hashtag">
                 ハッシュタグを付けてtwitterで感想や質問をつぶやこう！<br />
@@ -160,7 +160,7 @@
               </a>
 
             </div>
-
+            <!--
             <section class="rb--timetable">
               <h2><img src="/assets/images/live/uci-mtb-world-cup-2018/ttl_timetable.png" alt="">タイムテーブル</h2>
               <p class="commingsoon">COMMING SOON...</p>

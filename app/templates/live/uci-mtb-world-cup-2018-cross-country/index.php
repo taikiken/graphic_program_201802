@@ -115,7 +115,7 @@
           <div class="main-sec">
             <div class="rb--intro">
 
-              <p class="rb--intro__text">ピレネーの高度に位置するコースを制するのはどのライダーか。クロスカントリーライダーにとっては空気の薄さが障害となり、急な斜面に挑むダウンヒルライダーのアドレナリンは、最高潮に達すること間違いない。実況は藤原カズヒロ、解説はシドニーオリンピック日本代表の鈴木雷太。</p>
+              <p class="rb--intro__text">世界最高峰のMTBクロスカントリーレース！世界中からエリートクラスの男女ライダーが集結し、頂点を競い合う。爆発力と持久力が求められるレースには、MTBの魅力が盛りだくさん！オフロードの周回コース、一番最初にゴールにたどり着くのは誰だ。実況は藤原カズヒロ、解説はシドニーオリンピック日本代表の鈴木雷太。</p>
 
               <p class="rb--intro__hashtag">
                 ハッシュタグを付けてtwitterで感想や質問をつぶやこう！<br />
@@ -160,7 +160,7 @@
               </a>
 
             </div>
-
+<!--
             <section class="rb--timetable">
               <h2><img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_timetable.png" alt="">タイムテーブル</h2>
               <p class="commingsoon">COMMING SOON...</p>
