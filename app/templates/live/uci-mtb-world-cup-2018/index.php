@@ -115,7 +115,7 @@
           <div class="main-sec">
             <div class="rb--intro">
 
-              <p class="rb--intro__text">ピレネーの高度に位置するコースを制するのはどのライダーか。クロスカントリーライダーにとっては空気の薄さが障害となり、急な斜面に挑むダウンヒルライダーのアドレナリンは、最高潮に達すること間違いない。実況は○○○○、解説はMTBプロライダーの○○○○。</p>
+              <p class="rb--intro__text">ピレネーの高度に位置するコースを制するのはどのライダーか。クロスカントリーライダーにとっては空気の薄さが障害となり、急な斜面に挑むダウンヒルライダーのアドレナリンは、最高潮に達すること間違いない。実況は藤原カズヒロ、解説はMTBプロライダーの鈴木雷太。</p>
 
               <p class="rb--intro__hashtag">
                 ハッシュタグを付けてtwitterで感想や質問をつぶやこう！<br />
@@ -127,11 +127,11 @@
                 <ul>
                   <li>
                     <img src="/assets/images/live/uci-mtb-world-cup-2018/img_mc01.jpg" alt="">
-                    <p>実況:○○○○<br />(Sports MC / Team REAL)</p>
+                    <p>実況:藤原カズヒロ<br />(Sports MC / Team REAL)</p>
                   </li>
                   <li>
                     <img src="/assets/images/live/uci-mtb-world-cup-2018/img_mc02.jpg" alt="">
-                    <p>解説:○○○○<br />(MTBプロライダー)</p>
+                    <p>解説:井手川直樹<br />(MTBプロライダー)</p>
                   </li>
                 </ul>
               </div>
@@ -242,14 +242,14 @@
                   </a>
                 </li>
 　　　　　　　　　 <li>
-                  <a href="https://sportsbull.jp/p/339769/" class="movie">
+                  <a href="https://sportsbull.jp/p/347018/" class="movie">
                     <div class="rb--archived__image-wrap">
-                      <img src="https://img.sportsbull.jp/thumbnail1/img2018062612583135807900.jpg" alt="">
+                      <img src="https://img.sportsbull.jp/thumbnail1/img2018070914433659097100.png" alt="">
                     </div>
                     <div class="rb--archived__text-wrap">
-                      <h3>【フルタイム動画】6/10 UCI MOUNTAIN BIKE WORLD CUP ダウンヒル レオガング大会</h3>
+                      <h3>【フルタイム動画】7/7 UCI MOUNTAIN BIKE WORLD CUP ダウンヒル ヴァル・ディ・ソーレ大会</h3>
                       <?php if ($page['ua'] === 'desktop') : ?>
-                        <p class="rb-hide-sp">実況:アリー(アクションスポーツMC/Team REAL)<br />解説:九島勇気(MTB BMX プロライダー)</p>
+                        <p class="rb-hide-sp">実況:藤原カズヒロ(Sports MC/Team REAL)<br />解説:井手川直樹(MTBプロライダー)</p>
                       <?php endif; ?>
                     </div>
                   </a>
