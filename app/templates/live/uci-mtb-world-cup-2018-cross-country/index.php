@@ -160,7 +160,7 @@
               </a>
 
             </div>
-
+<!--
             <section class="rb--timetable">
               <h2><img src="/assets/images/live/uci-mtb-world-cup-2018-cross-country/ttl_timetable.png" alt="">タイムテーブル</h2>
               <p class="commingsoon">COMMING SOON...</p>
@@ -239,26 +239,24 @@
               </div>
             <?php endif; ?>
 
-            <!--
             <section class="rb--archived">
               <h2><img src="/assets/images/live/crankworx-world-tour-2018/ttl_archived.png" alt="ARCHIVED">過去の大会</h2>
               <ul>
                 <li>
-                  <a href="https://sportsbull.jp/p/339769/" class="movie">
+                  <a href="https://sportsbull.jp/p/347492/" class="movie">
                     <div class="rb--archived__image-wrap">
-                      <img src="https://img.sportsbull.jp/thumbnail1/img2018062612583135807900.jpg" alt="">
+                      <img src="https://img.sportsbull.jp/thumbnail1/img2018071013583370672100.png" alt="">
                     </div>
                     <div class="rb--archived__text-wrap">
-                      <h3>【フルタイム動画】6/10 UCI MOUNTAIN BIKE WORLD CUP ダウンヒル レオガング大会</h3>
+                      <h3>【フルタイム動画】7/8 UCI MOUNTAIN BIKE WORLD CUP クロスカントリー ヴァル・ディ・ソーレ大会</h3>
                       <?php if ($page['ua'] === 'desktop') : ?>
-                        <p class="rb-hide-sp">実況:アリー(アクションスポーツMC/Team REAL)<br />解説:九島勇気(MTB BMX プロライダー)</p>
+                        <p class="rb-hide-sp">実況:藤原カズヒロ(Sports MC/Team REAL)<br />解説:鈴木雷太(JCF MTB 監督 / シドニーオリンピック日本代表)</p>
                       <?php endif; ?>
                     </div>
                   </a>
                 </li>
               </ul>
             </section>
-            -->
 
             <?php /*
             <section class="rb--related">
