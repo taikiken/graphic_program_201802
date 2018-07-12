@@ -1,5 +1,7 @@
 <?php
 
+exit();
+
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
