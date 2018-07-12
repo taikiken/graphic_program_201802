@@ -194,7 +194,24 @@ if (isset($tab_response) && isset($tab_response['category']) && is_array($tab_re
     </section><!-- /.main-sec -->
   </div>
 </div><!-- /.body-sec -->
-
+<script>
+(function(window) {
+  // ----
+  // since 2018-05-31
+  // WebView hide loading
+  function webViewCallback() {
+    var JsInterface = window.JsInterface || {};
+    if (JsInterface.onDocumentReady) {
+      try {
+        window.JsInterface.onDocumentReady();
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+  }
+  webViewCallback()
+}(window))
+</script>
 <div id='div-gpt-ad-1514446255569-0'></div>
 
 <?php
