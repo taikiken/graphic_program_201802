@@ -51,19 +51,19 @@ htdocs = dir.htdocs
 try
   require( 'require-dir' )( 'tasks' )
 catch error
-  console.error error
+  console.error '[require-dir][tasks]' + error
 
 # babel 関連task読み込み
 try
   require( 'require-dir' )( 'tasks-babel' )
 catch error
-  console.error error
+  console.error '[require-dir][tasks-babel]' + error
 
 # sp 専用 task
 try
   require( 'require-dir' )( 'tasks-sp' )
 catch error
-  console.error error
+  console.error '[require-dir][tasks-sp]' + error
 
 
 # --------------------------------------------

@@ -166,9 +166,20 @@ _src/bower_exports/react-14.0.7
 # ==============================
 ut_devnew-201801152129.dump
 /ut.dump
+
+# json
+# ==============================
 /package.json.original
+
+# tsaks
+# ==============================
 /tasks-sp/_sp-webpack.coffee
 /tasks/_vendor.coffee
 /tasks/_sprite.coffee
 /tasks-sp/_sp-webpack.coffee
+/tasks-babel/sprite.coffee
+/tasks-babel/vendor.coffee
+
+# builded babel
+# ==============================
 /_src/babels/dest/vk_spbl_header.bundle.js
