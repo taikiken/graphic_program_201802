@@ -215,8 +215,42 @@
 
             <section class="live--highlight">
               <h2><img src="/assets/images/live/murasaki-shonan-open-2018/ttl_highlight.png" alt="HIGHLIGHT MOVIE"></h2>
-              <ul id="js-article-lists"></ul>
+              <ul id="js-article-lists">
+                <li>
+                  <a href="https://sportsbull.jp/p/347707/">
+                    <div class="live--highlight__image">
+                      <img src="https://img.sportsbull.jp/thumbnail1/img2018071021360722169400.png">
+                    </div>
+                    <h3>【ハイライト動画】湘南オープン DAY1</h3>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://sportsbull.jp/p/348007/">
+                    <div class="live--highlight__image">
+                      <img src="https://img.sportsbull.jp/thumbnail1/img2018071113430938707500.png">
+                    </div>
+                    <h3>【ハイライト動画】湘南オープン DAY2</h3>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://sportsbull.jp/p/350012/">
+                    <div class="live--highlight__image">
+                      <img src="https://img.sportsbull.jp/thumbnail1/img2018071317364613338400.png">
+                    </div>
+                    <h3>【ハイライト動画】湘南オープン DAY3</h3>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://sportsbull.jp/p/349279/">
+                    <div class="live--highlight__image">
+                      <img src="https://img.sportsbull.jp/thumbnail1/img2018071215503406031000.png">
+                    </div>
+                    <h3>【ハイライト動画】湘南オープン 大会総括</h3>
+                  </a>
+                </li>
+              </ul>
 
+              <?php /*
               <script>
                 if (SPBL_ENV.env == 'production') {
                   var jsonUrl = "https://img.sportsbull.jp/json/murasaki-shonan-open-2018-highlight.json?v=<?php echo $page['version']; ?>";
@@ -233,6 +267,7 @@
                   });
                 });
               </script>
+              */?>
 
             </section>
 
