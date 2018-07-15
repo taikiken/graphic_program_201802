@@ -34,16 +34,16 @@ $app->group('/live/murasaki-shonan-open-2018',  function () use($app) {
     $app->model->property('path', $args);
     $args['page'] = $app->model->set($page);
 
-    return $this->renderer->render($response, 'live/murasaki-shonan-open-2018/beach.php', $args);
+    return $this->renderer->render($response, 'live/murasaki-shonan-open-2018/park.php', $args);
 
   });
 
-  $this->get('/park[/]', function ($request, $response, $args) use ($app, $page) {
+  $this->get('/beach[/]', function ($request, $response, $args) use ($app, $page) {
 
     $app->model->property('path', $args);
     $args['page'] = $app->model->set($page);
 
-    return $this->renderer->render($response, 'live/murasaki-shonan-open-2018/park.php', $args);
+    return $this->renderer->render($response, 'live/murasaki-shonan-open-2018/beach.php', $args);
 
   });
 
