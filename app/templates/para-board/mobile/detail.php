@@ -357,7 +357,8 @@ function competition_summary_tr($provider_name, $title, $option_name = null) {
       echo competition_summary_tr($competition_response['period'],'開催日');
       echo competition_summary_tr($competition_response['organizer'],'主催者');
       echo competition_summary_tr($competition_response['collaborator'],'協力者');
-      echo competition_summary_tr($competition_response['sponsor'],'後援', $competition_response['cosponsor']);
+      echo competition_summary_tr($competition_response['sponsor'],'後援');
+      echo competition_summary_tr($competition_response['cosponsor'],'協賛');
       echo competition_summary_tr($competition_response['venue'],'会場名');
       echo competition_summary_tr($competition_response['qualification'],'参加資格');
       echo competition_summary_tr($competition_response['regulation'],'規定');
